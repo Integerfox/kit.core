@@ -29,7 +29,7 @@ Have a bug to report or feature to request? Follow these steps:
 For directly contributing code, you will need to be added to the Integer Fox organization.  Use the email - johnt.t.taylor@gmail - to request to being added to the organization.  Please include a description of why you are requesting access.
 
 ### Contributor License Agreement (CLA)
-Contributors will be asked to sign a CLA. This is done as part of the PR process using [CLA Assistance](https://github.com/cla-assistant/cla-assistant) 
+Contributors will be asked to sign a [CLA](https://github.com/Integerfox/kit/blob/main/.github/CLA.md). Signing the CLA is integrated into the PR process. 
 
 ### Pull Requests
 All source changes are required to go through the Pull Request process before
