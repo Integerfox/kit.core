@@ -30,11 +30,11 @@ For directly contributing code, you will need to be added to the Integer Fox org
 
 ### Pull Requests
 All source changes are required to go through the Pull Request process before
-being merged to the `main` branch. All PRs must adhere the project's [Software Development Plan]()
+being merged to the `main` branch. All PRs must adhere the project's [Software Development Plan](https://github.com/integerfox/kit/wiki/Softare-Development-Plan)
 
 
 ## Coding style
-Please ensure that your code complies to the KIT's [coding standard](https://www.FreeRTOS.org/FreeRTOS-Coding-Standard-and-Style-Guide.html).
+Please ensure that your code complies to the KIT's [coding standard](https://github.com/integerfox/kit/wiki/Coding-Standards).
 
 
 ## Licensing
