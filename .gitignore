@@ -1,21 +1,16 @@
-# Prerequisites
-*.d
+.vscode/
 
 # Compiled Object files
 *.slo
 *.lo
 *.o
 *.obj
+*.pyc
+*.d
 
 # Precompiled Headers
 *.gch
 *.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
 
 # Compiled Dynamic libraries
 *.so
@@ -24,7 +19,6 @@
 
 # Fortran module files
 *.mod
-*.smod
 
 # Compiled Static libraries
 *.lai
@@ -36,6 +30,29 @@
 *.exe
 *.out
 *.app
+*.x
+*.elf
+*.hex
+*.zip
+.gdbinit
 
-# debug information files
-*.dwo
+# e2studio junk
+.metadata
+
+myMediaFile
+_compiler_.txt
+
+# ignore Visual Studio stuffs
+compile_flags.txt
+.vscode/
+.vscode-gdb-wrapper.*
+compile_commands.json
+.cmake
+.vs
+Debug
+x64
+Release
+*.vcxproj.user
+.vs/
+.cache
+_artifacts/
