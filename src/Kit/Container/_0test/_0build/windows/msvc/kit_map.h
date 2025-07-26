@@ -1,16 +1,20 @@
-#ifndef COLONY_MAP_H_
-#define COLONY_MAP_H_
+/*-----------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file Project/build specific 'Mappings'  
 
-// Cpl::System mappings
-#ifdef BUILD_VARIANT_WIN32
-#include "Cpl/System/Win32/mappings_.h"
-#endif
-#ifdef BUILD_VARIANT_CPP11
-#include "Cpl/System/Cpp11/_win32/mappings_.h"
-#endif
+          Note: Intentionally there is NO Header latch (see LHeader Pattern)
+                for why.
+*/
+
+
+// OSAL mappings
+#include "Kit/System/Win32/mappings_.h"
 
 // strapi mapping
-#include "Cpl/Text/_mappings/_vc12/strapi.h"
-
-
-#endif
+#include "Kit/Text/_mappings/_msvc/strapi.h"
