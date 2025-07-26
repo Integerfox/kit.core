@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "name": "NQBP2: /home/bob/_workspaces/colony.core/tests/Cpl/TShell/_0test/test1/linux/gcc/_posix64/b.out",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/home/bob/_workspaces/colony.core/tests/Cpl/TShell/_0test/test1/linux/gcc/_posix64/b.out",
+      "args": [],
+      "environment": [],
+      "stopAtEntry": false,
+      "cwd": "/home/bob/_workspaces/colony.core/tests/Cpl/TShell/_0test/test1/linux/gcc",
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "NQBP2: Attach /home/bob/_workspaces/colony.core/tests/Cpl/TShell/_0test/test1/linux/gcc/_posix64/b.out",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "/home/bob/_workspaces/colony.core/tests/Cpl/TShell/_0test/test1/linux/gcc/_posix64/b.out",
+      "cwd": "/home/bob/_workspaces/colony.core/tests/Cpl/TShell/_0test/test1/linux/gcc",
+      "MIMode": "gdb",
+      "miDebuggerServerAddress": "localhost:1234"
+    }
+  ]
+}
