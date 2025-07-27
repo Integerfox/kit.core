@@ -607,6 +607,13 @@ def set_verbose_mode( newstate ):
     global verbose_mode
     verbose_mode = newstate
 
+#
+def lowercase_the_drive_letter( path ):
+    if ( path[1] == ':' ):
+        # Ensure lower case for the Windows drive letter
+        # (e.g. C:\path\to\build_dir -> c:\path\to\build_dir)
+        path = path[0].lower() + path[1:]
+    return path
 
 #-----------------------------------------------------------------------------
 def config_catch2( prjdir, build_dir_variant, libextension, user_config_inc_root='src/Kit/_testingsupport', preprocess_script_name = "build_catch2.py" ):
@@ -630,15 +637,15 @@ def extract_unit_test_src_dir( build_dir ):
     """ Extracts the unit test source directory from the project directory.
         ASSUMES that the build directory IS under the unit test's source directory
     """
-    repo_root = NQBP_PKG_ROOT()
-    if ( build_dir[1] == ':' ):
-        # Ensure lower case for the Windows drive letter
-        # (e.g. C:\path\to\build_dir -> c:\path\to\build_dir)
-        build_dir = build_dir[0].lower() + build_dir[1:]
+
+    # Ensure lower case for the Windows drive letter
+    repo_root = lowercase_the_drive_letter(NQBP_PKG_ROOT())
+    build_dir = lowercase_the_drive_letter(build_dir)
         
     # Remove the leading absolute path
     build_dir = standardize_dir_sep(build_dir)
     repo_root = standardize_dir_sep(repo_root)
+    print("Path: build_dir={}, repo_root={}".format(build_dir, repo_root))
     if ( not build_dir.startswith(repo_root) ):
         print( "ERROR: The build directory must be under the project root directory" )
         sys.exit(1)

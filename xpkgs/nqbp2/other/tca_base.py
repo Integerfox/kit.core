@@ -102,7 +102,7 @@ def run(argv):
     
     # get the package root
     pkg = os.environ.get('NQBP_PKG_ROOT')
-    gcovr_root = f'-r {os.path.join(pkg, "src")}'
+    gcovr_root = f'-r {pkg}/src'
     if args['--ci']:
         gcovr_root = f'--filter .*src/.* -r {pkg}'
 
@@ -110,23 +110,14 @@ def run(argv):
     arcopt = ' --exclude-unreachable-branches --decisions ' # Setup 'arc' excludes for C++ code (see https://gcovr.com/en/stable/faq.html) 
     if ( args['--all'] ):
         arcopt = ''
-
-    # Default/legacy excludes
     excludes = '--exclude=.*_0test.* --exclude=.*/xsrc/.* --exclude=.*src/Catch.* --exclude=.*src/Cpl/Json/Arduino.h --exclude=.*src/Cpl/Json/ArduinoHelpers.cpp --exclude=.*src/Cpl/Type/enum.h --exclude-unreachable-branches --exclude-lines-by-pattern .*CPL_SYSTEM_TRACE.* --exclude-lines-by-pattern .*CPL_SYSTEM_ASSERT.*'
-   
-    # If the user has a custom excludes script, then use it
-    exclude_script = os.path.join(pkg, "top", "gcov_options.py")
-    if (os.path.isfile(exclude_script)):
-        (r,excludes) = run_shell(f'python {exclude_script}' )
-
-    # Build the final set of gcovr arguments
-    gcovr_args = f'--gcov-ignore-parse-errors=negative_hits.warn -j 8 {arcopt} {gcovr_root} --object-directory . {excludes.strip()}'
-    gcovr_args = gcovr_args.replace("\\", "/")  # Ensure the path separators are correct for the current platform  
+    gcovr_args = f'{excludes} --gcov-ignore-parse-errors=negative_hits.warn -j 8 {arcopt} {gcovr_root} --object-directory . '
+    
 
     # Generate summary
     if (args['rpt']):
         python = 'python'
-        cmd  = f"{python} -m gcovr {gcovr_args} {' '.join(args['<args>']) if args['<args>'] else ''}"
+        cmd  = f"{python} -m gcovr {gcovr_args} {' '.join(args['<args>']) if args['<args>'] else ''} ."
         if (args['<args>']):
             first = args['<args>'][0]
             if (first == '-h' or first == '--help'):

@@ -34,6 +34,7 @@
 *.elf
 *.hex
 *.zip
+.gdbinit
 
 # e2studio junk
 .metadata
@@ -44,6 +45,7 @@ _compiler_.txt
 # ignore Visual Studio stuffs
 compile_flags.txt
 .vscode/
+.vscode-gdb-wrapper.*
 compile_commands.json
 .cmake
 .vs

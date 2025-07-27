@@ -1,53 +1,50 @@
 #!/usr/bin/env bash
-# This script sets up the PIM environment to use NQBP and the GCC compiler
-# 
-# This script MUST BE 'sourced' since it sets environment variables
+# This script is used to set the compiler environment for a Linux host.
 #
-# usage: env.sh [<gcc-bin-path>|default]
+# NOTE: The scripts in the top/compilers directory MUST be customized for PC.
+#       (only the compilers that you use need to be customized)
 #
-# <gcc-bin-path>   Optional explicit path to the GCC bin/ directory. The 
-#                  default behavior is to use the GCC toolchain in the command
-#                  path.  If 'default' is specified than the environment
-#                  reverts to the native GCC toolchain
-#
+# Usage: env [<compiler>]
+#set -x
 
-
-
-# Get the root directory
 HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# Set optional GCC path
-if [ -n "${1}" ]; then
-    if [ ${1} = "default" ]; then
-        unset NQBP_GCC_BIN
-    else
-        export NQBP_GCC_BIN=${1}
-    fi
+# ensure the CWD is in the path
+export PATH=$PATH:.
+
+# Set the NQBP_BIN path
+export NQBP_PKG_ROOT="$HERE"
+export NQBP_WORK_ROOT="$HERE"/..
+export NQBP_XPKGS_ROOT="$HERE"/xpkgs
+export NQBP_BIN="$NQBP_XPKGS_ROOT/nqbp2"
+export NQBP_SHELL_SCRIPT_EXTENSION=".sh"
+
+# Add Ninja to the command path, but only once
+if [ -z "$NQBP2_DONOT_ADD_NINJA_TO_PATH" ]; then
+    export PATH=$PATH:$NQBP_BIN/ninja
+    export NQBP2_DONOT_ADD_NINJA_TO_PATH=true
 fi
 
-# Put the current directory into the command path (simplifies invoking the nqbp.py scripts)
-export PATH=$PATH:./
-
-# Configure NQBP
-export NQBP_PKG_ROOT=$HERE
-export NQBP_WORK_ROOT=$HERE/..
-export NQBP_XPKGS_ROOT=$HERE/xpkgs
-export NQBP_BIN=$NQBP_XPKGS_ROOT/nqbp2
-
-# Add ninja to the command path
-export PATH=$PATH:$NQBP_BIN/ninja
-
+# Set helper macros
 alias t="cd $HERE"
 alias bob="$NQBP_BIN/other/bob.py"
 alias chuck="$NQBP_BIN/other/chuck.py"
 alias ratt="$NQBP_XPKGS_ROOT/ratt/bin/ratt.py"
+alias fixx="$NQBP_BIN/other/fixx.py"
+alias whatcc="echo $NQBP_CC_SELECTED"
+alias map="$NQBP_PKG_ROOT/scripts/kit.core/map.py" 
 
-# Display which compiler is being used
-if [ -z "${NQBP_GCC_BIN}" ]; then
-    echo "Environment set (using native GCC compiler)"
-    gcc --version
+
+# No compiler option selected
+if [ -z "$1" ]; then
+	pushd $HERE/top >/dev/null 2>&1
+	echo "Current toolchain: $NQBP_CC_SELECTED"
+	./compiler-list.sh
+	popd >/dev/null 2>&1
 else
-    echo "Environment set (using GCC compiler @ ${NQBP_GCC_BIN})"
-    ${NQBP_GCC_BIN}/gcc --version
+    pushd $HERE/top >/dev/null 2>&1
+	source ./compiler-list.sh $1
+	EVARS=$(printenv | grep NQBP)
+	IFS=$'\n'; for e in $EVARS; do export $e; done;
+	popd >/dev/null 2>&1
 fi
-
