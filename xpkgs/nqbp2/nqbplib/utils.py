@@ -607,3 +607,14 @@ def set_verbose_mode( newstate ):
     global verbose_mode
     verbose_mode = newstate
 
+
+#-----------------------------------------------------------------------------
+def catch2_inc( user_config_inc_root = 'src/kit/_testingsupport' ):
+    """ Returns the include paths for Catch2 """
+    inc = standardize_dir_sep(user_config_inc_root)
+    return f'-I{os.path.join( NQBP_XPKGS_ROOT(), "catch2", "src" )} -I{os.path.join( NQBP_PKG_ROOT(), inc )}'
+
+def catch2_lib( build_dir_variant  ):
+    """ Returns the library path (without the .lib|.a extension) for Catch2 """
+    bdir = standardize_dir_sep(build_dir_variant)
+    return f'{os.path.join( NQBP_PKG_ROOT(), "projects", NQBP_WRKPKGS_DIRNAME(), "catch2", "lib", bdir, "_BUILD_VARIANT_DIR_", "catch2" )}'
