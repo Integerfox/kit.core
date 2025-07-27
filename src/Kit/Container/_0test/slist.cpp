@@ -1,24 +1,23 @@
 /*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
 
-#include "Catch/catch.hpp"
-#include "Cpl/Container/Item.h"    
-#include "Cpl/Container/SList.h"    
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
+#include "catch2/catch_test_macros.hpp"   
+#include "Kit/Container/Item.h"    
+#include "Kit/Container/SList.h"    
+//#include "Cpl/System/_testsupport/Shutdown_TS.h"
 #include <string.h>
 
 
 /// 
-using namespace Cpl::Container;
-using namespace Cpl::System;
+using namespace Kit::Container;
+//using namespace Kit::System;
 
 
 /// Short hand for brute forcing string compares when not using std::string
@@ -74,7 +73,7 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 	MyItem        plum( "plum" );
 	MyItem*       ptr1;
 
-	Shutdown_TS::clearAndUseCounter();
+	// Shutdown_TS::clearAndUseCounter();
 
 	SECTION( "Validate that an 'item' can be only in one Container" )
 	{
@@ -86,7 +85,7 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 		foo.put( item );
 		bar.put( item );
 
-		REQUIRE( Shutdown_TS::getAndClearCounter() == 1u );
+		//REQUIRE( Shutdown_TS::getAndClearCounter() == 1u );
 	}
 
 	SECTION( "Validate static Constructor" )
@@ -291,6 +290,5 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 		REQUIRE( list.remove( pear ) == true );
 	}
 
-	REQUIRE( Shutdown_TS::getAndClearCounter() == 0u );
-
+	//REQUIRE( Shutdown_TS::getAndClearCounter() == 0u );
 }

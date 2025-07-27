@@ -1,0 +1,40 @@
+# Format Style Options - Created with Clang Power Tools
+---
+BasedOnStyle: Microsoft
+AccessModifierOffset: -4
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: true
+AlignConsecutiveDeclarations: Consecutive
+AlignConsecutiveMacros: AcrossEmptyLines
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortFunctionsOnASingleLine: InlineOnly
+AlwaysBreakBeforeMultilineStrings: true
+BinPackArguments: false
+BinPackParameters: false
+BraceWrapping: 
+  AfterControlStatement: true
+  AfterNamespace: false
+  AfterUnion: true
+  BeforeWhile: true
+BreakConstructorInitializersBeforeComma: true
+BreakStringLiterals: false
+ColumnLimit: 0
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+Cpp11BracedListStyle: false
+EmptyLineBeforeAccessModifier: Leave
+FixNamespaceComments: false
+IncludeBlocks: Regroup
+LineEnding: DeriveLF 
+MaxEmptyLinesToKeep: 2
+DerivePointerAlignment: false
+PointerAlignment: Left
+SortIncludes: false
+SpacesBeforeTrailingComments: 2
+SpacesInConditionalStatement: true
+SpacesInParentheses: true
+...
+
