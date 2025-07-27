@@ -23,6 +23,7 @@
 # get definition of the Options structure
 from nqbplib.base import BuildValues
 from nqbplib.my_globals import *
+from nqbplib.utils import catch2_inc, catch2_lib
 import os, copy
 
 #===================================================
@@ -36,11 +37,12 @@ FINAL_OUTPUT_NAME = 'a.exe'
 unit_test_objects = '_BUILT_DIR_.src/Kit/Container/_0test'
 
 # Use Catch2 as a static library
-catch2_inc  = f'-I{os.path.join( NQBP_XPKGS_ROOT(), "catch2", "src" )} -I{os.path.join( NQBP_PKG_ROOT(), "src", "kit", "_testingsupport" )}'
-catch2_lib  = f'{os.path.join( NQBP_PKG_ROOT(), "projects", NQBP_WRKPKGS_DIRNAME(), "catch2", "lib", "windows", "msvc", "_BUILD_VARIANT_DIR_", "catch2.lib" )}'
+my_build_dir = r'windows\msvc'
+catch2_inc   = catch2_inc()
+catch2_lib   = catch2_lib( my_build_dir ) + '.lib'
+NQBP_PRE_PROCESS_SCRIPT( 'build_catch2.py' )
+NQBP_PRE_PROCESS_SCRIPT_ARGS( my_build_dir )
 
-NQBP_PRE_PROCESS_SCRIPT( 'preprocess.py' )
-NQBP_PRE_PROCESS_SCRIPT_ARGS( r'windows\msvc' )
 
 #
 # For build config/variant: "win32" 
@@ -59,17 +61,8 @@ optimized_win32.cflags   = '/O2'
 
 # Set project specific 'debug' options
 debug_win32          = BuildValues()       # Do NOT comment out this line
-debug_win32.cflags   = '/D "_MY_APP_DEBUG_SWITCH_"'
+debug_win32.cflags   = '/D "KIT_DEBUG"'
 
-
-#
-# For build config/variant: "cpp11" 
-#
-
-# same options as win32 (but uses different libdirs entries)
-base_cpp11     = copy.deepcopy(base_win32)
-optimzed_cpp11 = copy.deepcopy(optimized_win32)
-debug_cpp11    = copy.deepcopy(debug_win32)
 
 #-------------------------------------------------
 # ONLY edit this section if you are ADDING options
@@ -78,34 +71,25 @@ debug_cpp11    = copy.deepcopy(debug_win32)
 #-------------------------------------------------
 
 win32_build_opts = { 'user_base':base_win32, 
-                       'user_optimized':optimized_win32, 
-                       'user_debug':debug_win32
-                     }
-cpp11_build_opts = { 'user_base':base_cpp11,
-                     'user_optimized':optimzed_cpp11,
-                     'user_debug':debug_cpp11
-                   }               
+                     'user_optimized':optimized_win32, 
+                     'user_debug':debug_win32
+                   }
                
 # Add new variant option dictionary to # dictionary of 
 # build variants
 build_variants = { 'win32':win32_build_opts,
-                   'cpp11':cpp11_build_opts
                  }    
 
 #---------------------------------------------------
 # END EDITS/CUSTOMIZATIONS
 #===================================================
 
-
-
 # Capture project/build directory
 import os
 prjdir = os.path.dirname(os.path.abspath(__file__))
 
-
 # Select Module that contains the desired toolchain
 from nqbplib.toolchains.windows.vc12.console_exe import ToolChain
-
 
 # Function that instantiates an instance of the toolchain
 def create():
