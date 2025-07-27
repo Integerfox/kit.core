@@ -26,7 +26,7 @@
 # get definition of the Options structure
 from nqbplib.base import BuildValues
 from nqbplib.my_globals import *
-from nqbplib.utils import catch2_inc
+from nqbplib.utils import config_catch2
 import os, copy
 
 # Capture project/build directory
@@ -38,10 +38,10 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'catch2'
+FINAL_OUTPUT_NAME = 'a.out'
 
-# Set the include path for Catch2
-catch2_inc  = catch2_inc()
+# Using Catch2
+(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'linux/gcc-host', 'a' )
 
 
 # 
@@ -49,13 +49,16 @@ catch2_inc  = catch2_inc()
 #
 
 # Construct option structs
-base_posix64     = BuildValues()
+base_posix64      = BuildValues()
 optimized_posix64 = BuildValues()
-debug_posix64    = BuildValues()
+debug_posix64     = BuildValues()
 
 # Set project specific 'base' (i.e always used) options
-base_posix64.cflags    = '-m64 -std=c++17 -Wall -Werror -x c++'
+base_posix64.cflags    = '-m64 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage'
 base_posix64.inc       = catch2_inc
+base_posix64.firstobjs = unit_test_objects
+base_posix64.linkflags = '-m64 -fprofile-arcs'
+base_posix64.linklibs  = f'-lgcov {catch2_lib}'
 
 # Set project specific 'optimized' options
 optimized_posix64.cflags    = '-O3'
@@ -69,8 +72,11 @@ optimized_posix64.cflags    = '-O3'
 
 # Set project specific 'base' (i.e always used) options
 base_posix32           = BuildValues()        # Do NOT comment out this line
-base_posix32.cflags    = '-m32 -std=c++17 -Wall -Werror -x c++'
+base_posix32.cflags    = '-m32 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage'
 base_posix32.inc       = catch2_inc
+base_posix32.firstobjs = unit_test_objects
+base_posix32.linkflags = '-m32 -fprofile-arcs'
+base_posix32.linklibs  = f'-lgcov {catch2_lib}'
 
 
 # Set project specific 'optimized' options
@@ -110,8 +116,7 @@ build_variants = { 'posix':posix32_opts,
 #===================================================
 
 # Select Module that contains the desired toolchain
-from nqbplib.toolchains.linux.gcc.static_lib import ToolChain
-
+from nqbplib.toolchains.linux.gcc.console_exe import ToolChain
 
 # Function that instantiates an instance of the toolchain
 def create():
