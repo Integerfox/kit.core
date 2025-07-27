@@ -1,19 +1,19 @@
 #ifndef KIT_CONTAINER_ITEM_H_
 #define KIT_CONTAINER_ITEM_H_
 /*-----------------------------------------------------------------------------
-* Copyright Integer Fox Authors
-*
-* Distributed under the BSD 3 Clause License. See the license agreement at:
-* https://github.com/Integerfox/kit.core/blob/main/LICENSE
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
 /** @file */
 
 
-/// 
+///
 namespace Kit {
-/// 
+///
 namespace Container {
 
 
@@ -28,18 +28,10 @@ namespace Container {
  */
 class Item
 {
-public:
-    /// The link field.
-    void*  m_nextPtr_;
-
-    /** Debug field.  This member is used to trap when there is an attempt
-        to insert a item into a container when it is already in a container
-     */
-    void*  m_inListPtr_;
-
 protected:
     /// Constructor
-    Item():m_nextPtr_( nullptr ), m_inListPtr_( nullptr ) {}
+    Item()
+        : m_nextPtr_( nullptr ), m_inListPtr_( nullptr ) {}
 
     /** Constructor used ONLY with the child class MapItem: -->special
         constructor to allow a Map to be statically allocated.  Only the Map
@@ -61,16 +53,45 @@ public:
      */
     bool insert_( void* newContainerPtr );
 
-    /** Returns 'true' if the instance is in the specified container.
+    /// Returns 'true' if the instance is in the specified container.
+    inline bool isInContainer_( const void* containerPtr ) const noexcept
+    {
+        if ( m_inListPtr_ != containerPtr )
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /** Verifies that the item is in the list for use when the next() method is 
+        called.  If the item is not in the list, a fatal error is generated.
+
+        Notes:
+            o The method returns false when there is error - which is ONLY
+              usefully during unittesting when the invoking a FatalError
+              does NOT terminate the application.
      */
-    bool isInContainer_( const void* containerPtr ) const noexcept;
+    bool validateNextOkay_( const void* containerPtr ) const noexcept;
 
-
-    /** Helper method to do the proper 'clean-up' for the
-        multiple-containers-error-trap when removing an item from a container.
+    /** Helper method to do the proper 'clean-up' for the multiple-containers-error-trap 
+        when removing an item from a container.
      */
-    static void remove_( Item* itemPtr ) noexcept;
+    inline static void remove_( Item* itemPtr ) noexcept
+    {
+        if ( itemPtr )
+        {
+            itemPtr->m_inListPtr_ = nullptr;
+        }
+    }
 
+public:
+    /// The link field.
+    void* m_nextPtr_;
+
+    /** Debug field.  This member is used to trap when there is an attempt
+        to insert a item into a container when it is already in a container
+     */
+    void* m_inListPtr_;
 };
 
 /** This class is used by the Container classes
@@ -88,19 +109,20 @@ class ExtendedItem : public Item
 {
 public:
     /// The previous link field.
-    void*   m_prevPtr_;
+    void* m_prevPtr_;
 
 protected:
     /// Constructor
-    ExtendedItem():m_prevPtr_( nullptr ) {}
+    ExtendedItem()
+        : m_prevPtr_( nullptr ) {}
 
     /** Constructor used ONLY with the child class MapItem: -->special
         constructor to allow a Map to be statically allocated.  Only the Map
         itself should ever use this constructor -->not intended for Items in a
         Map
      */
-    ExtendedItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ):Item( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}
-
+    ExtendedItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor )
+        : Item( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}
 };
 
 
@@ -117,20 +139,21 @@ class ReferenceItem : public ITEMTYPE
 {
 public:
     /// Reference to the item that is being 'containerized'
-    REFITEM & m_reference;
+    REFITEM& m_reference;
 
     /// Constructor
-    ReferenceItem( REFITEM& item ): ITEMTYPE(), m_reference( item ) {}
+    ReferenceItem( REFITEM& item )
+        : ITEMTYPE(), m_reference( item ) {}
 
     /** Constructor used ONLY with the child class MapItem: -->special
         constructor to allow a Map to be statically allocated.  Only the Map
         itself should ever use this constructor -->not intended for Items in a
         Map
      */
-    ReferenceItem( REFITEM& item, const char* ignoreThisParameter_usedToCreateAUniqueConstructor ): ITEMTYPE( ignoreThisParameter_usedToCreateAUniqueConstructor ), m_reference( item ) {}
+    ReferenceItem( REFITEM& item, const char* ignoreThisParameter_usedToCreateAUniqueConstructor )
+        : ITEMTYPE( ignoreThisParameter_usedToCreateAUniqueConstructor ), m_reference( item ) {}
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch
-
