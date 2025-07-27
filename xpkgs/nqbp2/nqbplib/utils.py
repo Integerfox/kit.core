@@ -645,7 +645,6 @@ def extract_unit_test_src_dir( build_dir ):
     # Remove the leading absolute path
     build_dir = standardize_dir_sep(build_dir)
     repo_root = standardize_dir_sep(repo_root)
-    print("Path: build_dir={}, repo_root={}".format(build_dir, repo_root))
     if ( not build_dir.startswith(repo_root) ):
         print( "ERROR: The build directory must be under the project root directory" )
         sys.exit(1)
