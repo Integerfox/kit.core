@@ -1,5 +1,3 @@
-#ifndef KIT_CONFIG_H_
-#define KIT_CONFIG_H_
 /*-----------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -8,6 +6,15 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file Project/build specific 'Options' (see LConfig Pattern) */
+/** @file Project/build specific 'Mappings'  
 
+          Note: Intentionally there is NO Header latch (see LHeader Pattern)
+                for why.
+*/
+
+// OSAL mappings
+#include "Kit/System/Posix/mappings_.h"
+
+// strapi mapping
+#include "Kit/Text/_mappings/_posix/strapi.h"
 #endif

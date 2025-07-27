@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - my_coverage.info - src/Kit/Container/SList.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">src/Kit/Container</a> - SList.h<span style="font-size: 80%;"> (source / <a href="SList.h.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">my_coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">23</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-07-27 13:36:06</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">25</td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #ifndef KIT_CONTAINER_SLIST_H_</span>
+<span id="L2"><span class="lineNum">       2</span>              : #define KIT_CONTAINER_SLIST_H_</span>
+<span id="L3"><span class="lineNum">       3</span>              : /*-----------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>              :  * This file is part of the Colony.Core Project.  The Colony.Core Project is an</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * open source project with a BSD type of licensing agreement.  See the license</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * agreement (license.txt) in the top/ directory or on the Internet at</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * http://integerfox.com/colony.core/license.txt</span>
+<span id="L8"><span class="lineNum">       8</span>              :  *</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * Copyright (c) 2014-2025  John T. Taylor</span>
+<span id="L10"><span class="lineNum">      10</span>              :  *</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L12"><span class="lineNum">      12</span>              :  *----------------------------------------------------------------------------*/</span>
+<span id="L13"><span class="lineNum">      13</span>              : /** @file */</span>
+<span id="L14"><span class="lineNum">      14</span>              : </span>
+<span id="L15"><span class="lineNum">      15</span>              : #include &quot;Kit/Container/SListBase_.h&quot;</span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span>              : ///</span>
+<span id="L18"><span class="lineNum">      18</span>              : namespace Kit {</span>
+<span id="L19"><span class="lineNum">      19</span>              : ///</span>
+<span id="L20"><span class="lineNum">      20</span>              : namespace Container {</span>
+<span id="L21"><span class="lineNum">      21</span>              : </span>
+<span id="L22"><span class="lineNum">      22</span>              : /** This template class implements a singly linked list which maintains the</span>
+<span id="L23"><span class="lineNum">      23</span>              :     ordering imposed on it by the application. It is type-safe wrapper around</span>
+<span id="L24"><span class="lineNum">      24</span>              :     the SListBase_ class.</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              :     NOTE: ITEM must be a subclass of Item.</span>
+<span id="L27"><span class="lineNum">      27</span>              :  */</span>
+<span id="L28"><span class="lineNum">      28</span>              : template &lt;class ITEM&gt;</span>
+<span id="L29"><span class="lineNum">      29</span>              : class SList : public SListBase_</span>
+<span id="L30"><span class="lineNum">      30</span>              : {</span>
+<span id="L31"><span class="lineNum">      31</span>              : public:</span>
+<span id="L32"><span class="lineNum">      32</span>              :     /// Public constructor initializes head and tail pointers.</span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">          20 :     SList() noexcept</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">          20 :         : SListBase_() {}</span></span>
+<span id="L35"><span class="lineNum">      35</span>              : </span>
+<span id="L36"><span class="lineNum">      36</span>              :     /** This is a special constructor for when the list is statically declared</span>
+<span id="L37"><span class="lineNum">      37</span>              :         (i.e. it is initialized as part of C++ startup BEFORE main() is</span>
+<span id="L38"><span class="lineNum">      38</span>              :         executed.  See Kit::Container::SListBase_ for details.</span>
+<span id="L39"><span class="lineNum">      39</span>              :      */</span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           4 :     SList( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           4 :         : SListBase_( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}</span></span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              : public:</span>
+<span id="L44"><span class="lineNum">      44</span>              :     /// Moves the content of the this queue to the specified queue.</span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           2 :     void move( SList&lt;ITEM&gt;&amp; dst ) noexcept { SListBase_::move( dst ); }</span></span>
+<span id="L46"><span class="lineNum">      46</span>              : </span>
+<span id="L47"><span class="lineNum">      47</span>              :     /// Empties the list.  All references to the item(s) in the list are lost.</span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           2 :     void clearTheList() noexcept { SListBase_::clearTheList(); }</span></span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span>              : public:</span>
+<span id="L51"><span class="lineNum">      51</span>              :     /// Removes the first item in the list.  Returns nullptr if the list is empty.</span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">          12 :     ITEM* get( void ) noexcept { return (ITEM*)SListBase_::getFirst(); }</span></span>
+<span id="L53"><span class="lineNum">      53</span>              : </span>
+<span id="L54"><span class="lineNum">      54</span>              :     /// Adds the item as the last item in the list</span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">          18 :     void put( ITEM&amp; item ) noexcept { SListBase_::putLast( item ); }</span></span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              :     /** Return a pointer to the first item in the list. The returned item</span>
+<span id="L58"><span class="lineNum">      58</span>              :         remains in the list.  Returns nullptr if the list is empty.</span>
+<span id="L59"><span class="lineNum">      59</span>              :      */</span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">          50 :     ITEM* head( void ) const noexcept { return (ITEM*)SListBase_::first(); }</span></span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              :     /** Return a pointer to the last item in the list. The returned item</span>
+<span id="L63"><span class="lineNum">      63</span>              :         remains in the list.  Returns nullptr if the list is empty.</span>
+<span id="L64"><span class="lineNum">      64</span>              :      */</span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          62 :     ITEM* tail( void ) const noexcept { return (ITEM*)SListBase_::last(); }</span></span>
+<span id="L66"><span class="lineNum">      66</span>              : </span>
+<span id="L67"><span class="lineNum">      67</span>              : public:</span>
+<span id="L68"><span class="lineNum">      68</span>              :     /** Removes the top element from stack and return a pointer to it as a</span>
+<span id="L69"><span class="lineNum">      69</span>              :         result. Returns nullptr, if the stack is empty</span>
+<span id="L70"><span class="lineNum">      70</span>              :      */</span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">          16 :     ITEM* pop( void ) noexcept { return (ITEM*)SListBase_::getFirst(); }</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              :     /// Adds the ITEM item to top of the stack.</span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">          12 :     void push( ITEM&amp; item ) noexcept { SListBase_::putFirst( item ); }</span></span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              :     /** Return a pointer to the top ITEM item in the stack. The returned item</span>
+<span id="L77"><span class="lineNum">      77</span>              :         remains in the queue.  Returns nullptr if the stack is empty.</span>
+<span id="L78"><span class="lineNum">      78</span>              :      */</span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">           8 :     ITEM* top( void ) const noexcept { return (ITEM*)SListBase_::first(); }</span></span>
+<span id="L80"><span class="lineNum">      80</span>              : </span>
+<span id="L81"><span class="lineNum">      81</span>              : public:</span>
+<span id="L82"><span class="lineNum">      82</span>              :     /** Removes the first item in the list.  Returns nullptr if the list</span>
+<span id="L83"><span class="lineNum">      83</span>              :         is empty.</span>
+<span id="L84"><span class="lineNum">      84</span>              :      */</span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           2 :     ITEM* getFirst( void ) noexcept { return (ITEM*)SListBase_::getFirst(); }</span></span>
+<span id="L86"><span class="lineNum">      86</span>              : </span>
+<span id="L87"><span class="lineNum">      87</span>              :     /** Removes the last item in the list.  Returns nullptr if the list</span>
+<span id="L88"><span class="lineNum">      88</span>              :         is empty.</span>
+<span id="L89"><span class="lineNum">      89</span>              :      */</span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">           2 :     ITEM* getLast( void ) noexcept { return (ITEM*)SListBase_::getLast(); }</span></span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span>              :     /// Adds the item as the first item in the list.</span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">           4 :     void putFirst( ITEM&amp; item ) noexcept { SListBase_::putFirst( item ); }</span></span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span>              :     /// Adds the item as the last item in the list.</span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">           4 :     void putLast( ITEM&amp; item ) noexcept { SListBase_::putLast( item ); }</span></span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span>              :     /** Remove specified ITEM element from the list. Returns true if the</span>
+<span id="L99"><span class="lineNum">      99</span>              :         specified element was found and removed from the list, else false.</span>
+<span id="L100"><span class="lineNum">     100</span>              :      */</span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">          14 :     bool remove( ITEM&amp; item ) noexcept { return SListBase_::remove( item ); }</span></span>
+<span id="L102"><span class="lineNum">     102</span>              : </span>
+<span id="L103"><span class="lineNum">     103</span>              :     /** Insert the &quot;item&quot; ITEM into the list behind the &quot;after&quot; ITEM element.</span>
+<span id="L104"><span class="lineNum">     104</span>              :         If 'after' is nullptr, then 'item' is added to the head of the list.</span>
+<span id="L105"><span class="lineNum">     105</span>              :      */</span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">           4 :     void insertAfter( ITEM&amp; after, ITEM&amp; item ) noexcept { SListBase_::insertAfter( after, item ); }</span></span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span>              :     /** Insert the &quot;item&quot; ITEM into the list ahead of the &quot;before&quot; ITEM element.</span>
+<span id="L109"><span class="lineNum">     109</span>              :         If 'before' is nullptr, then 'item' is added to the tail of the list.</span>
+<span id="L110"><span class="lineNum">     110</span>              : </span>
+<span id="L111"><span class="lineNum">     111</span>              :         Note: This insert operation is more expensive than insertAfter() because</span>
+<span id="L112"><span class="lineNum">     112</span>              :         a traversal of the list is required to find the 'before' item</span>
+<span id="L113"><span class="lineNum">     113</span>              :      */</span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">           4 :     void insertBefore( ITEM&amp; before, ITEM&amp; item ) noexcept { SListBase_::insertBefore( before, item ); }</span></span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span>              :     /// Returns true if the specified item is already in the list, else false.</span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">          10 :     bool find( const ITEM&amp; item ) const noexcept { return SListBase_::find( item ); }</span></span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span>              :     /** Return a pointer to the first item in the list. The returned item</span>
+<span id="L120"><span class="lineNum">     120</span>              :         remains in the list.  Returns nullptr if the list is empty.</span>
+<span id="L121"><span class="lineNum">     121</span>              :      */</span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          10 :     ITEM* first( void ) const noexcept { return (ITEM*)SListBase_::first(); }</span></span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              :     /** Return a pointer to the last item in the list. The returned item remains</span>
+<span id="L125"><span class="lineNum">     125</span>              :         in the list.  Returns nullptr if the list is empty.</span>
+<span id="L126"><span class="lineNum">     126</span>              :      */</span>
+<span id="L127"><span class="lineNum">     127</span>              :     ITEM* last( void ) const noexcept { return (ITEM*)SListBase_::last(); }</span>
+<span id="L128"><span class="lineNum">     128</span>              : </span>
+<span id="L129"><span class="lineNum">     129</span>              :     /** Return a pointer to the item after the item &quot;item&quot;. Both items remain in</span>
+<span id="L130"><span class="lineNum">     130</span>              :         the list.  Returns nullptr when the end-of-list is reached.</span>
+<span id="L131"><span class="lineNum">     131</span>              :      */</span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">          18 :     ITEM* next( const ITEM&amp; item ) const noexcept { return (ITEM*)SListBase_::next( item ); }</span></span>
+<span id="L133"><span class="lineNum">     133</span>              : </span>
+<span id="L134"><span class="lineNum">     134</span>              : protected:</span>
+<span id="L135"><span class="lineNum">     135</span>              :     /// Prevent access to the copy constructor --&gt;Containers can not be copied!</span>
+<span id="L136"><span class="lineNum">     136</span>              :     SList&lt;ITEM&gt;( const SList&lt;ITEM&gt;&amp; m ) = delete;</span>
+<span id="L137"><span class="lineNum">     137</span>              : </span>
+<span id="L138"><span class="lineNum">     138</span>              :     /// Prevent access to the assignment operator --&gt;Containers can not be</span>
+<span id="L139"><span class="lineNum">     139</span>              :     /// copied!</span>
+<span id="L140"><span class="lineNum">     140</span>              :     SList&lt;ITEM&gt;&amp; operator=( const SList&lt;ITEM&gt;&amp; m ) = delete;</span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span>              :     /// Prevent access to the move constructor --&gt;Containers can not be moved!</span>
+<span id="L143"><span class="lineNum">     143</span>              :     SList&lt;ITEM&gt;( SList&lt;ITEM&gt;&amp;&amp; m ) = delete;</span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              :     /// Prevent access to the move assignment operator --&gt;Containers can not be</span>
+<span id="L146"><span class="lineNum">     146</span>              :     /// moved!</span>
+<span id="L147"><span class="lineNum">     147</span>              :     SList&lt;ITEM&gt;&amp; operator=( SList&lt;ITEM&gt;&amp;&amp; m ) = delete;</span>
+<span id="L148"><span class="lineNum">     148</span>              : };</span>
+<span id="L149"><span class="lineNum">     149</span>              : </span>
+<span id="L150"><span class="lineNum">     150</span>              : </span>
+<span id="L151"><span class="lineNum">     151</span>              : };  // namespace Container</span>
+<span id="L152"><span class="lineNum">     152</span>              : };  // namespace Kit</span>
+<span id="L153"><span class="lineNum">     153</span>              : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

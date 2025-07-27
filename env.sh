@@ -31,7 +31,7 @@ export PATH=$PATH:./
 # Configure NQBP
 export NQBP_PKG_ROOT=$HERE
 export NQBP_WORK_ROOT=$HERE/..
-export NQBP_XPKGS_ROOT=$HERE/xsrc
+export NQBP_XPKGS_ROOT=$HERE/xpkgs
 export NQBP_BIN=$NQBP_XPKGS_ROOT/nqbp2
 
 # Add ninja to the command path
