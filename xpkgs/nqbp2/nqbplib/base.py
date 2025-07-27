@@ -696,7 +696,6 @@ class ToolChain:
         entry["cwd"] = NQBP_PRJ_DIR()
         entry["externalConsole"] = False
         entry["MIMode"] ="gdb"
-        entry["miDebuggerPath"] ="gdb"
         entry["miDebuggerPath"] = "${workspaceFolder}" + os.sep + ".vscode-gdb-wrapper" + shell_ext
         cmd = {}
         cmd["description"]    = "Enable pretty-printing for gdb"
@@ -709,6 +708,7 @@ class ToolChain:
         return jsondict
     
     def _populate_attach_entry( self, jsondict, name ):
+        shell_ext = os.environ.get('NQBP_SHELL_SCRIPT_EXTENSION', )
         entry = {}
         entry["name"] = f"NQBP2: Attach {name}"
         entry["type"] = "cppdbg"
@@ -716,6 +716,7 @@ class ToolChain:
         entry["program"] = name
         entry["cwd"] = NQBP_PRJ_DIR()
         entry["MIMode"] = "gdb"
+        entry["miDebuggerPath"] = "${workspaceFolder}" + os.sep + ".vscode-gdb-wrapper" + shell_ext
         entry["miDebuggerServerAddress"] = "localhost:1234"
 
         jsondict["configurations"].append(entry)
