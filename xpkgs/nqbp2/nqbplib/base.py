@@ -49,12 +49,11 @@ from . import utils
 # Globals
 from .my_globals import NQBP_WORK_ROOT
 from .my_globals import NQBP_PKG_ROOT
-from .my_globals import NQBP_TEMP_EXT
 from .my_globals import NQBP_VERSION
 from .my_globals import NQBP_PRJ_DIR
-from .my_globals import NQBP_WRKPKGS_DIRNAME
-from .my_globals import NQBP_XPKGS_SRC_ROOT
+from .my_globals import NQBP_XPKGS_ROOT
 from .my_globals import NQBP_NAME_LIBDIRS
+from .my_globals import NQBP_WRKPKGS_DIRNAME
 
 
 # Structure for holding build-variant specific options
@@ -189,7 +188,7 @@ class ToolChain:
         #       - Legacy 'xsrc' Third party source tree
         #
         self._base_release                = BuildValues()
-        self._base_release.inc            = '-I. -I{}{}src  -I{} -I{}'.format(NQBP_PKG_ROOT(),os.sep, prjdir, NQBP_XPKGS_SRC_ROOT()  )
+        self._base_release.inc            = f'-I. -I{NQBP_PKG_ROOT()}{os.sep}src -I{prjdir} -I{NQBP_XPKGS_ROOT()}'
         self._base_release.asminc         = self._base_release.inc
         self._base_release.cflags         = '-c '
         self._base_release.asmflags       = self._base_release.cflags
@@ -645,7 +644,8 @@ class ToolChain:
         
         name     = os.path.join( NQBP_PRJ_DIR(), '_' + self.get_build_variant(), self.get_final_output_name() )
         jsondict = self._populate_launch_entry( jsondict, name )
-        
+        jsondict = self._populate_attach_entry( jsondict, name )
+
         try:
             with open(launchf,'w') as fd:
                 json.dump(jsondict,fd, indent=2)
@@ -684,8 +684,9 @@ class ToolChain:
             sys.exit(1)
             
     def _populate_launch_entry( self, jsondict, name ):
+        shell_ext = os.environ.get('NQBP_SHELL_SCRIPT_EXTENSION', )
         entry = {}
-        entry["name"] = f"NQBP2: {name}"
+        entry["name"] = f"NQBP2: Launch {name}"
         entry["type"] = "cppdbg"
         entry["request"] = "launch"
         entry["program"] = name
@@ -695,6 +696,7 @@ class ToolChain:
         entry["cwd"] = NQBP_PRJ_DIR()
         entry["externalConsole"] = False
         entry["MIMode"] ="gdb"
+        entry["miDebuggerPath"] = "${workspaceFolder}" + os.sep + ".vscode-gdb-wrapper" + shell_ext
         cmd = {}
         cmd["description"]    = "Enable pretty-printing for gdb"
         cmd["text"]           = "-enable-pretty-printing"
@@ -705,6 +707,21 @@ class ToolChain:
         jsondict["configurations"].append(entry)
         return jsondict
     
+    def _populate_attach_entry( self, jsondict, name ):
+        shell_ext = os.environ.get('NQBP_SHELL_SCRIPT_EXTENSION', )
+        entry = {}
+        entry["name"] = f"NQBP2: Attach {name}"
+        entry["type"] = "cppdbg"
+        entry["request"] = "launch"
+        entry["program"] = name
+        entry["cwd"] = NQBP_PRJ_DIR()
+        entry["MIMode"] = "gdb"
+        entry["miDebuggerPath"] = "${workspaceFolder}" + os.sep + ".vscode-gdb-wrapper" + shell_ext
+        entry["miDebuggerServerAddress"] = "localhost:1234"
+
+        jsondict["configurations"].append(entry)
+        return jsondict
+
     #--------------------------------------------------------------------------
     def _start_ninja_file( self, bld_variant, arguments ):
         self._ninja_writer.comment( "Project Build" )
