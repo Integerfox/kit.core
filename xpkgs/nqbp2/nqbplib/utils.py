@@ -14,16 +14,12 @@ import re
 # Globals
 from .my_globals import NQBP_WORK_ROOT
 from .my_globals import NQBP_PKG_ROOT
-from .my_globals import NQBP_TEMP_EXT
-from .my_globals import NQBP_VERSION
 from .my_globals import NQBP_PRJ_DIR
 from .my_globals import NQBP_NAME_LIBDIRS
-from .my_globals import NQBP_PRJ_DIR_MARKER1
-from .my_globals import NQBP_PRJ_DIR_MARKER2
-from .my_globals import NQBP_PKG_TOP
-from .my_globals import NQBP_WRKPKGS_DIRNAME
+from .my_globals import NQBP_XPKGS_ROOT
 from .my_globals import NQBP_PRE_PROCESS_SCRIPT
 from .my_globals import NQBP_PRE_PROCESS_SCRIPT_ARGS
+from .my_globals import NQBP_WRKPKGS_DIRNAME
 from .my_globals import OUT
 
 # Module globals
@@ -376,53 +372,18 @@ def create_subdirectory_from_file( printer, pardir, fname ):
     
         
 #-----------------------------------------------------------------------------
-def set_pkg_and_wrkspace_roots( from_fname):
-    from_fname = os.path.abspath(from_fname)
-    root = _get_marker_dir( standardize_dir_sep(from_fname), NQBP_PRJ_DIR_MARKER1() )
-    if ( root != None ):
-        pass
-    
-    else:
-        root = _get_marker_dir( standardize_dir_sep(from_fname), NQBP_PRJ_DIR_MARKER2() )
-        if ( root != None ):
-            pass
-            
-        else:
-            print( "ERROR: Cannot find the 'Package Root'" )
-            sys.exit(1)
-                
-    NQBP_WORK_ROOT( os.path.dirname(root) )     
-    NQBP_PKG_ROOT( root )
-    
-   
-def _get_marker_dir( from_fname, marker ):
-    path   = from_fname.split(os.sep)
-    result = ''  
-    idx    = 0  
-    path.reverse()
+def set_pkg_and_wrkspace_roots( from_fname ):
+    workspace_root = os.environ.get('NQBP_WORK_ROOT')
+    package_root   = os.environ.get('NQBP_PKG_ROOT')
+    xpackage_root  = os.environ.get('NQBP_XPKGS_ROOT')
+    if ( workspace_root == None or package_root == None or xpackage_root == None ):
+        print( "ERROR: The environment variables NQBP_WORK_ROOT, NQBP_PKG_ROOT and NQBP_XPKGS_ROOT must be set!" )
+        sys.exit(1)
 
-    try:
-        idx = path.index(marker)
-        idx = len(path) - idx -1
-        path.reverse()
+    NQBP_WORK_ROOT( standardize_dir_sep(workspace_root) )     
+    NQBP_PKG_ROOT( standardize_dir_sep(package_root) )
+    NQBP_XPKGS_ROOT( standardize_dir_sep(xpackage_root) )
 
-        for d in path[1:idx]:
-            result += os.sep + d
-        
-    except:
-        result = None
-
-    # sanity check the result, i.e. the top/ directory is required to be in the root dir
-    return _test_for_top( result, marker )
-    
-
-def _test_for_top( dir, marker ):
-    if ( dir != None ):
-        if ( not os.path.isdir(dir + os.sep + NQBP_PKG_TOP()) ) :
-            dir = _get_marker_dir( dir, marker )
-    
-    return dir
-    
     
 def _matches_variant( filter, my_variant ):
     tokens = filter.split('|')

@@ -49,12 +49,11 @@ from . import utils
 # Globals
 from .my_globals import NQBP_WORK_ROOT
 from .my_globals import NQBP_PKG_ROOT
-from .my_globals import NQBP_TEMP_EXT
 from .my_globals import NQBP_VERSION
 from .my_globals import NQBP_PRJ_DIR
-from .my_globals import NQBP_WRKPKGS_DIRNAME
-from .my_globals import NQBP_XPKGS_SRC_ROOT
+from .my_globals import NQBP_XPKGS_ROOT
 from .my_globals import NQBP_NAME_LIBDIRS
+from .my_globals import NQBP_WRKPKGS_DIRNAME
 
 
 # Structure for holding build-variant specific options
@@ -189,7 +188,7 @@ class ToolChain:
         #       - Legacy 'xsrc' Third party source tree
         #
         self._base_release                = BuildValues()
-        self._base_release.inc            = '-I. -I{}{}src  -I{} -I{}'.format(NQBP_PKG_ROOT(),os.sep, prjdir, NQBP_XPKGS_SRC_ROOT()  )
+        self._base_release.inc            = f'-I. -I{NQBP_PKG_ROOT()}{os.sep}src -I{prjdir} -I{NQBP_XPKGS_ROOT()}'
         self._base_release.asminc         = self._base_release.inc
         self._base_release.cflags         = '-c '
         self._base_release.asmflags       = self._base_release.cflags
