@@ -609,6 +609,13 @@ def set_verbose_mode( newstate ):
 
 
 #-----------------------------------------------------------------------------
+def config_catch2( prjdir, build_dir_variant, libextension, user_config_inc_root='src/kit/_testingsupport', preprocess_script_name = "build_catch2.py" ):
+    inc   = catch2_inc( user_config_inc_root )
+    lib   = catch2_lib( build_dir_variant )
+    NQBP_PRE_PROCESS_SCRIPT( preprocess_script_name )
+    NQBP_PRE_PROCESS_SCRIPT_ARGS( build_dir_variant )
+    return (inc, lib + '.' + libextension, extract_unit_test_src_dir(prjdir))
+
 def catch2_inc( user_config_inc_root = 'src/kit/_testingsupport' ):
     """ Returns the include paths for Catch2 """
     inc = standardize_dir_sep(user_config_inc_root)
@@ -618,3 +625,32 @@ def catch2_lib( build_dir_variant  ):
     """ Returns the library path (without the .lib|.a extension) for Catch2 """
     bdir = standardize_dir_sep(build_dir_variant)
     return f'{os.path.join( NQBP_PKG_ROOT(), "projects", NQBP_WRKPKGS_DIRNAME(), "catch2", "lib", bdir, "_BUILD_VARIANT_DIR_", "catch2" )}'
+
+def extract_unit_test_src_dir( build_dir ): 
+    """ Extracts the unit test source directory from the project directory.
+        ASSUMES that the build directory IS under the unit test's source directory
+    """
+    repo_root = NQBP_PKG_ROOT()
+    if ( build_dir[1] == ':' ):
+        # Ensure lower case for the Windows drive letter
+        # (e.g. C:\path\to\build_dir -> c:\path\to\build_dir)
+        build_dir = build_dir[0].lower() + build_dir[1:]
+        
+    # Remove the leading absolute path
+    build_dir = standardize_dir_sep(build_dir)
+    repo_root = standardize_dir_sep(repo_root)
+    if ( not build_dir.startswith(repo_root) ):
+        print( "ERROR: The build directory must be under the project root directory" )
+        sys.exit(1)
+    build_dir = build_dir[len(repo_root):]
+    if ( build_dir.startswith(os.sep) ):
+        build_dir = build_dir[1:]
+
+    # Remove all directories after the _0test directory in the build directory
+    test_dir_idx = build_dir.find('_0test')
+    if ( test_dir_idx != -1 ):
+        build_dir = build_dir[:test_dir_idx]
+    build_dir = os.path.join( build_dir, "_0test" )
+    
+    # Return the unit test source directory (in a format suitable for a 'first/last-object' usage)
+    return '_BUILT_DIR_.' + build_dir
