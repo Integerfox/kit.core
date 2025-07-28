@@ -37,24 +37,24 @@ protected:
 protected:
     /// Constructor initializes head and tail pointers.
     SListBase_() noexcept
-        : m_headPtr( 0 ), m_tailPtr( 0 )
+        : m_headPtr( 0 ), m_tailPtr( 0 ) {}
 
-        /** This is a special constructor for when the list is
-            statically declared (i.e. it is initialized as part of
-            C++ startup BEFORE main() is executed.  C/C++ guarantees
-            that all statically declared data will be initialized
-            to zero by default (see r.8.4 in C++ Programming Language,
-            Second Edition).  Since the head & tail pointers are
-            initialized to zero - then the C/C++ default is OK.  Why
-            do I care about all this?  Because if you attempt to build
-            static list(s), then the order of when the list is
-            constructed vs. when the static elements are added to the
-            list is a problem!  To avoid this problem, a alternate
-            constructor that does NOT initialize the head & tail pointers
-            is provided.  It assumes that the pointers are already set
-            zero because the list is "static". Whew!
-         */
-        SListBase_( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
+    /** This is a special constructor for when the list is
+        statically declared (i.e. it is initialized as part of
+        C++ startup BEFORE main() is executed.  C/C++ guarantees
+        that all statically declared data will be initialized
+        to zero by default (see r.8.4 in C++ Programming Language,
+        Second Edition).  Since the head & tail pointers are
+        initialized to zero - then the C/C++ default is OK.  Why
+        do I care about all this?  Because if you attempt to build
+        static list(s), then the order of when the list is
+        constructed vs. when the static elements are added to the
+        list is a problem!  To avoid this problem, a alternate
+        constructor that does NOT initialize the head & tail pointers
+        is provided.  It assumes that the pointers are already set
+        zero because the list is "static". Whew!
+     */
+    SListBase_( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
     {
         // intentially DO NOTHING
     }
@@ -68,9 +68,9 @@ protected:
 
         // Copy each item (so the debug info is correct)
         Item* nextPtr;
-        while ( ( nextPtr = get() ) )
+        while ( ( nextPtr = getFirst() ) )
         {
-            dst.put( *nextPtr );
+            dst.putLast( *nextPtr );
         }
     }
 
@@ -78,7 +78,7 @@ protected:
     void clearTheList() noexcept
     {
         // Drain list so the debug traps work correctly
-        while ( get() )
+        while ( getFirst() )
         {
             ;
         }
@@ -266,13 +266,14 @@ protected:
         return item.isInContainer_( this );
     }
 
-    /** Return a pointer to the item after the item "item".
-        Both items remain in the list.  Returns nullptr when the
-        end-of-list is reached OR if 'item' is not in the list.
+    /** Return a pointer to the item after the item "item". Both items remain
+        in the list.  Returns nullptr when the end-of-list is reached.
+
+        NOTE: If 'item' is not in the list, then a fatal error is generated.
      */
     Item* next( const Item& item ) const noexcept
     {
-        if ( isInContainer_( item ) )
+        if ( item.validateNextOkay_( this ) )
         {
             return (Item*)( item.m_nextPtr_ );
         }
@@ -296,6 +297,6 @@ protected:
 };
 
 
-}       // end namespaces
-}       
+}  // end namespaces
+}
 #endif  // end header latch
