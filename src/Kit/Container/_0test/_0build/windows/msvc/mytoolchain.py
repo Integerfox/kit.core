@@ -6,26 +6,30 @@
 #    - ONLY edit/add statements in the sections marked by BEGIN/END EDITS
 #      markers.
 #    - Maintain indentation level and use spaces (it's a python thing) 
-#    - rvalues must be enclosed in quotes (single ' ' or double " ")
 #    - The structure/class 'BuildValues' contains (at a minimum the
 #      following data members.  Any member not specifically set defaults
 #      to null/empty string
-#            .inc 
-#            .asminc
-#            .cflags
-#            .cppflags
-#            .asmflags
-#            .linkflags
-#            .linklibs
+#            .inc             # C/C++ search path include directories 
+#            .asminc          # Assembly search path include directories
+#            .c_only_flags    # C only compiler flags
+#            .cflags          # C and C++ compiler flags
+#            .cppflags        # C++ only compiler flags
+#            .asmflags        # Assembly compiler flags
+#            .linkflags       # Linker flags
+#            .linklibs        # Linker libraries
+#            .firstobjs       # Object files to be unconditionally linked first
+#            .lastobjs        # Object files to be unconditionally linked last
 #           
 #---------------------------------------------------------------------------
 
 # get definition of the Options structure
 from nqbplib.base import BuildValues
-from nqbplib.my_globals import NQBP_PKG_ROOT
-from nqbplib.my_globals import NQBP_PRE_PROCESS_SCRIPT
-from nqbplib.my_globals import NQBP_PRE_PROCESS_SCRIPT_ARGS
-import os, copy
+from nqbplib.my_globals import *
+from nqbplib.utils import config_catch2
+import os, copy 
+
+# Capture project/build directory
+prjdir = os.path.dirname(os.path.abspath(__file__))
 
 #===================================================
 # BEGIN EDITS/CUSTOMIZATIONS
@@ -34,15 +38,9 @@ import os, copy
 # Set the name for the final output item
 FINAL_OUTPUT_NAME = 'a.exe'
 
-# Link unittest directory by object module so that Catch's self-registration mechanism 'works'
-unit_test_objects = '_BUILT_DIR_.src/Cpl/Container/_0test'
+# Using Catch2 
+(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, r'windows\msvc', 'lib' )
 
-# Use Catch2 as a static library
-catch2_inc  = f'-I{os.path.join( NQBP_PKG_ROOT(), "xsrc", "catch2", "src" )}'
-catch2_lib  = f'{os.path.join( NQBP_PKG_ROOT(), "projects", "xsrc", "catch2", "lib", "windows", "vc12", "_BUILD_VARIANT_DIR_", "catch2.lib" )}'
-
-NQBP_PRE_PROCESS_SCRIPT( 'preprocess.py' )
-NQBP_PRE_PROCESS_SCRIPT_ARGS( r'windows\vc12' )
 
 #
 # For build config/variant: "win32" 
@@ -61,37 +59,22 @@ optimized_win32.cflags   = '/O2'
 
 # Set project specific 'debug' options
 debug_win32          = BuildValues()       # Do NOT comment out this line
-debug_win32.cflags   = '/D "_MY_APP_DEBUG_SWITCH_"'
+debug_win32.cflags   = '/D "KIT_DEBUG"'
 
-
-#
-# For build config/variant: "cpp11" 
-#
-
-# same options as win32 (but uses different libdirs entries)
-base_cpp11     = copy.deepcopy(base_win32)
-optimzed_cpp11 = copy.deepcopy(optimized_win32)
-debug_cpp11    = copy.deepcopy(debug_win32)
 
 #-------------------------------------------------
-# ONLY edit this section if you are ADDING options
-# for build configurations/variants OTHER than the
-# 'release' build
+# ONLY edit this section if you are have more than
+# ONE build configuration/variant 
 #-------------------------------------------------
 
 win32_build_opts = { 'user_base':base_win32, 
-                       'user_optimized':optimized_win32, 
-                       'user_debug':debug_win32
-                     }
-cpp11_build_opts = { 'user_base':base_cpp11,
-                     'user_optimized':optimzed_cpp11,
-                     'user_debug':debug_cpp11
-                   }               
+                     'user_optimized':optimized_win32, 
+                     'user_debug':debug_win32
+                   }
                
 # Add new variant option dictionary to # dictionary of 
 # build variants
 build_variants = { 'win32':win32_build_opts,
-                   'cpp11':cpp11_build_opts
                  }    
 
 #---------------------------------------------------
@@ -99,15 +82,8 @@ build_variants = { 'win32':win32_build_opts,
 #===================================================
 
 
-
-# Capture project/build directory
-import os
-prjdir = os.path.dirname(os.path.abspath(__file__))
-
-
 # Select Module that contains the desired toolchain
 from nqbplib.toolchains.windows.vc12.console_exe import ToolChain
-
 
 # Function that instantiates an instance of the toolchain
 def create():

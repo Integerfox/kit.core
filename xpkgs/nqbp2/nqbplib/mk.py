@@ -32,14 +32,13 @@ import multiprocessing
 # Globals
 from .my_globals import NQBP_WORK_ROOT
 from .my_globals import NQBP_PKG_ROOT
-from .my_globals import NQBP_TEMP_EXT
 from .my_globals import NQBP_VERSION
 from .my_globals import NQBP_PRJ_DIR
-from .my_globals import NQBP_WRKPKGS_DIRNAME
 from .my_globals import NQBP_NAME_SOURCES
 from .my_globals import NQBP_PRE_PROCESS_SCRIPT
 from .my_globals import NQBP_PRE_PROCESS_SCRIPT_ARGS
 from .my_globals import NQBP_NAME_LIBDIRS
+from .my_globals import NQBP_WRKPKGS_DIRNAME
 
 
 

@@ -41,7 +41,8 @@ except:
     pass
 
 # Build directory
-blddir = os.path.join( PKG_ROOT, "projects", "xsrc", "catch2", "lib", BUILDTYPE )
+xpackage_root  = os.environ.get('NQBP_XPKGS_ROOT')
+blddir = os.path.join( PKG_ROOT, "projects", xpackage_root.split(os.sep)[-1], "catch2", "lib", BUILDTYPE )
 if not os.path.exists( blddir ):
     sys.exit( "Unsupported/invalid Catch2 Library build project: {blddir}" )
 
