@@ -1,12 +1,14 @@
 :: This script is used by the CI/Build machine to build using the GCC  
 :: ARM Cortex M/R compiler on a Windows host
 ::
-:: usage: gha_windows_gcc-arm-mcu.bat <buildNumber>
+:: usage: gha_windows_gcc-arm-mcu.bat <buildNumber> 
 ::
 set _TOPDIR=%~dp0
 set _ROOT=%_TOPDIR%..
-echo:%_ROOT%
-echo:%_TOPDIR%
+set BUILD_NUMBER=%1
+echo:Root          %_ROOT%
+echo:Top           %_TOPDIR%
+echo:Build Number  %BUILD_NUMBER%
 
 ::
 :: Build ATSAMD51 Arduino projects (if any)
