@@ -30,7 +30,7 @@ jobs:
           python-version: '3.12' 
 
       # Ninja setup
-      - uses: seanmiddleditch/gha-setup-ninja@main
+      - uses: seanmiddleditch/gha-setup-ninja@master
         with:
           version: '1.11.1'
 
