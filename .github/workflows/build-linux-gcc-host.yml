@@ -29,7 +29,7 @@ jobs:
         uses: PavanMudigonda/lines-of-code-reporter@v1.6
         with:
           directory: "./src" 
-          exclude_dir: "_0test,Bsp,Catch,.github"
+          exclude_dir: "_0test,_0build, .github"
           exclude_ext: "xml,md,py,txt"                  
 
       # Publish Lines of Code Summary  
