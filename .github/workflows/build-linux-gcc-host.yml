@@ -56,8 +56,11 @@ jobs:
       - name: Run Doxygen
         run: |
           echo "Running Doxygen..."
+          rm -rf ./docs/html
+          mkdir -p ./docs/html
           cd ./top
           ./run_doxygen.py ${{ github.ref_name }} ${{ github.run_number }} nochm
+          ls ../docs/html
         
       # Build PRs
       - name: Run build script - for PRs
@@ -80,10 +83,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/html
-
-      # Setup .NET Core Required to execute ReportGenerator
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.x
-          dotnet-quality: 'ga'
