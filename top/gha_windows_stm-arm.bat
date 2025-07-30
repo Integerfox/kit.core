@@ -5,8 +5,10 @@
 ::
 set _TOPDIR=%~dp0
 set _ROOT=%_TOPDIR%..
-echo:%_ROOT%
-echo:%_TOPDIR%
+set BUILD_NUMBER=%1
+echo:Root          %_ROOT%
+echo:Top           %_TOPDIR%
+echo:Build Number  %BUILD_NUMBER%
 
 ::
 :: Build STM projects
