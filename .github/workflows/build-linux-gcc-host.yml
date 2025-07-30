@@ -24,25 +24,6 @@ jobs:
           git config --global core.safecrlf false
       - uses: actions/checkout@v2
 
-      - name: Calculate Lines of Code
-        id: loc
-        uses: PavanMudigonda/lines-of-code-reporter@v1.6
-        with:
-          directory: "./src" 
-          exclude_dir: "_0test,_0build, .github"
-          exclude_ext: "xml,md,py,txt"                  
-
-      # Publish Lines of Code Summary  
-      - name: Add Lines of Code Summary
-        run: echo "${{ steps.loc.outputs.lines-of-code-summary }}" >> $GITHUB_STEP_SUMMARY
-
-      # Publish Lines - Details
-      - name: print output
-        shell: pwsh
-        run: | 
-          Write-Host 'Total Lines of Code...:  ${{ steps.loc.outputs.total_lines }}'
-          Write-Host 'Lines of Code Markdown Report Path...:  ${{ steps.loc.outputs.loc_report }}'
-
       # Python setup (with gcovr)
       - uses: actions/setup-python@v5
         with:
