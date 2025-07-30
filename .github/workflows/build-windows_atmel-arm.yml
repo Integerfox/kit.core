@@ -1,0 +1,53 @@
+name: Build Windows Atmel ARM
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  atmel_arm_windows_build:
+    name: Atmel ARM Cortex M/R Compiler Windows Build
+    runs-on: windows-latest
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.safecrlf false
+      - uses: actions/checkout@v2
+
+      # Python setup
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' 
+
+      # Ninja setup
+      - uses: seanmiddleditch/gha-setup-ninja@master
+        with:
+          version: '1.11.1'
+
+      # This step is commented out, but can be used for debugging purposes.
+      #- name: Setup tmate session 
+      # uses: mxschmitt/action-tmate@v3
+
+      # Build PRs
+      - name: Run build script - for PRs
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Running build script for PRs..."
+          .\top\gha_windows_atmel-arm.bat ${{ github.run_number }} 
+
+      # Build Stable branches
+      - name: Run build script - for stable branches
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "Running build script for stable branches..."
+          .\top\gha_windows_atmel-arm.bat ${{ github.run_number }} ${{ github.ref_name }}

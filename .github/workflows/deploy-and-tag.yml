@@ -1,0 +1,92 @@
+name: Deploy and Tag
+on:
+  workflow_run:
+    workflows: 
+      - "Build Windows MSVC"
+      - "Build Windows MinGW" 
+      - "Build Linux GCC"
+      - "Build Windows STM ARM"
+      - "Build Windows Atmel ARM"
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Only run if ALL workflows completed successfully
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event != 'pull_request'
+    
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check all workflows completed successfully
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const workflows = [
+              "Build Windows MSVC",
+              "Build Windows MinGW", 
+              "Build Linux GCC",
+              "Build Windows STM ARM",
+              "Build Windows Atmel ARM"
+            ];
+            
+            const runs = await github.rest.actions.listWorkflowRunsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head_sha: context.payload.workflow_run.head_sha
+            });
+            
+            const relevantRuns = runs.data.workflow_runs.filter(run => 
+              workflows.includes(run.name) && 
+              run.head_sha === context.payload.workflow_run.head_sha
+            );
+            
+            console.log(`Found ${relevantRuns.length} relevant workflow runs`);
+            
+            const allSuccessful = relevantRuns.every(run => run.conclusion === 'success');
+            const allCompleted = relevantRuns.length === workflows.length;
+            
+            if (!allCompleted) {
+              core.setFailed(`Not all workflows completed. Found ${relevantRuns.length} out of ${workflows.length}`);
+              return;
+            }
+            
+            if (!allSuccessful) {
+              core.setFailed('Not all workflows were successful');
+              return;
+            }
+            
+            console.log('All workflows completed successfully!');
+
+      - name: Create Tag
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "<>"
+          
+          BRANCH_NAME=$(git branch --show-current)
+          BRANCH_NAME=$(echo "$BRANCH_NAME" | tr -d '[:punct:]')
+          TAG_NAME=$BRANCH_NAME-bld-${{ github.event.workflow_run.run_number }}
+          echo "Creating tag: $TAG_NAME"
+          
+          git tag "$TAG_NAME" 
+          git push origin "$TAG_NAME"
+
+      - name: Deploy artifacts
+        run: |
+          echo "All builds successful - deploying artifacts..."
+          # Add your deployment logic here
+          # This could include:
+          # - Downloading artifacts from the build workflows
+          # - Publishing to package registries
+          # - Deploying to servers
+          # - Creating releases
+          echo "Deployment completed successfully!"

@@ -684,7 +684,7 @@ class ToolChain:
             sys.exit(1)
             
     def _populate_launch_entry( self, jsondict, name ):
-        shell_ext = os.environ.get('NQBP_SHELL_SCRIPT_EXTENSION', )
+        shell_ext = os.environ.get('NQBP_SHELL_SCRIPT_EXTENSION', '')
         entry = {}
         entry["name"] = f"NQBP2: Launch {name}"
         entry["type"] = "cppdbg"
@@ -708,7 +708,7 @@ class ToolChain:
         return jsondict
     
     def _populate_attach_entry( self, jsondict, name ):
-        shell_ext = os.environ.get('NQBP_SHELL_SCRIPT_EXTENSION', )
+        shell_ext = os.environ.get('NQBP_SHELL_SCRIPT_EXTENSION', '')
         entry = {}
         entry["name"] = f"NQBP2: Attach {name}"
         entry["type"] = "cppdbg"
