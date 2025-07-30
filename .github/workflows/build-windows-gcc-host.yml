@@ -36,7 +36,7 @@ jobs:
 
       # MinGW setup
       - name: MinGW compiler
-        uses: rlalik/setup-cpp-compiler@main
+        uses: rlalik/setup-cpp-compiler@master
         with:
           compiler: gcc-10.3.0
 
