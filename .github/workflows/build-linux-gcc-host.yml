@@ -50,7 +50,7 @@ jobs:
       - run: pip install -r top/gha-requirements.txt
 
       # Ninja setup
-      - uses: seanmiddleditch/gha-setup-ninja@main
+      - uses: seanmiddleditch/gha-setup-ninja@master
         with:
           version: '1.11.1'
 

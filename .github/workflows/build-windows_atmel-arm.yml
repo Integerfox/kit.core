@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  arm_gcc_windows_build:
+  atmel_arm_windows_build:
     name: Atmel ARM Cortex M/R Compiler Windows Build
     runs-on: windows-latest
 
@@ -30,7 +30,7 @@ jobs:
           python-version: '3.12' 
 
       # Ninja setup
-      - uses: seanmiddleditch/gha-setup-ninja@main
+      - uses: seanmiddleditch/gha-setup-ninja@master
         with:
           version: '1.11.1'
 
