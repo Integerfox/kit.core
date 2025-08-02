@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Invokes NQBP's tca_base.py script.  To run 'TCA' copy this file to your build directory and the execute it."""
+"""Invokes NQBP's tca2_base.py script.  To run 'TCA2' copy this file to your build directory and the execute it."""
 
 from __future__ import absolute_import
 import os
@@ -16,8 +16,9 @@ if __name__ == '__main__':
     # Find the Package & Workspace root
     from nqbplib import utils
     utils.set_pkg_and_wrkspace_roots(__file__)
+    here = os.path.dirname(os.path.abspath(__file__))
 
     # Find the Package & Workspace root
-    from other import tca_base
-    tca_base.run( sys.argv )
+    from other import tca2_base
+    tca2_base.run( here, sys.argv )
 
