@@ -39,7 +39,7 @@ Options:
          
 
 NOTES:
-    o TCA2 assumes you used the gcc compiler to create you executable.
+    o TCA2 assumes you used the gcc compiler to create your executable.
     o When compiling you must use the following options:
         '-fprofile-arcs -ftest-coverage'
     o When linking you must use the following options:
