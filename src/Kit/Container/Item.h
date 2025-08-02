@@ -86,7 +86,7 @@ public:
 
 public:
     /// The link field.
-    void* m_nextPtr_;
+    Item* m_nextPtr_;
 
     /** Debug field.  This member is used to trap when there is an attempt
         to insert a item into a container when it is already in a container
@@ -109,7 +109,7 @@ class ExtendedItem : public Item
 {
 public:
     /// The previous link field.
-    void* m_prevPtr_;
+    ExtendedItem* m_prevPtr_;
 
 protected:
     /// Constructor
