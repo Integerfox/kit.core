@@ -120,7 +120,14 @@ def remove_metrics( srcfile, outfile, filter_pattern ):
         sys.exit(text)
 
 def generate_html_report( srcfile, html_dir, args ):
-    limits = f'--rc genhtml_line_hi_limit={args["--line-hi"]} --rc genhtml_line_med_limit={args["--line-med"]} --rc genhtml_branch_hi_limit={args["--br-hi"]} --rc genhtml_branch_med_limit={args["--br-med"]} --rc genhtml_hi_limit={args["--line-hi"]} --rc genhtml_med_limit={args["--line-med"]}'
+    limits = " ".join([
+        f'--rc genhtml_line_hi_limit={args["--line-hi"]}',
+        f'--rc genhtml_line_med_limit={args["--line-med"]}',
+        f'--rc genhtml_branch_hi_limit={args["--br-hi"]}',
+        f'--rc genhtml_branch_med_limit={args["--br-med"]}',
+        f'--rc genhtml_hi_limit={args["--line-hi"]}',
+        f'--rc genhtml_med_limit={args["--line-med"]}',
+    ])
     cmd = f'genhtml {srcfile} -o {html_dir} {GENHTML_OPTS} {limits}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
