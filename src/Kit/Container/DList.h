@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Container/DListBase_.h"
+#include "Kit/Container/DListBase.h"
 
 ///
 namespace Kit {

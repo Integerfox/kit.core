@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Container/SListBase_.h"
+#include "Kit/Container/SListBase.h"
 
 ///
 namespace Kit {
