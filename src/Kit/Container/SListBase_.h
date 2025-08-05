@@ -78,7 +78,7 @@ protected:
 
 protected:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    Item* getFirst( void ) noexcept
+    Item* getFirst() noexcept
     {
         Item* nextPtr;
         if ( ( nextPtr = m_headPtr ) )
@@ -94,7 +94,7 @@ protected:
     }
 
     /// Removes the last item in the list.  Returns nullptr if the list is empty.
-    Item* getLast( void ) noexcept
+    Item* getLast() noexcept
     {
         Item* lastPtr = m_tailPtr;
         if ( lastPtr )
@@ -145,7 +145,7 @@ protected:
         The returned item remains in the list.  Returns nullptr
         if the list is empty.
      */
-    Item* first( void ) const noexcept
+    Item* first() const noexcept
     {
         return m_headPtr;
     }
@@ -154,7 +154,7 @@ protected:
         The returned item remains in the list.  Returns nullptr
         if the list is empty.
      */
-    Item* last( void ) const noexcept
+    Item* last() const noexcept
     {
         return m_tailPtr;
     }

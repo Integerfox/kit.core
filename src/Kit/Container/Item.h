@@ -30,7 +30,7 @@ class Item
 {
 protected:
     /// Constructor
-    Item()
+    Item() noexcept
         : m_nextPtr_( nullptr ), m_inListPtr_( nullptr ) {}
 
     /** Constructor used ONLY with the child class MapItem: -->special
@@ -38,7 +38,7 @@ protected:
         itself should ever use this constructor -->not intended for Items in a
         Map
      */
-    Item( const char* /* ignoreThisParameter_usedToCreateAUniqueConstructor */ ) {}
+    Item( const char* /* ignoreThisParameter_usedToCreateAUniqueConstructor */ ) noexcept {}
 
 
 public:
@@ -51,7 +51,7 @@ public:
               usefully during unittesting when the invoking a FatalError
               does NOT terminate the application.
      */
-    bool insert_( void* newContainerPtr );
+    bool insert_( void* newContainerPtr ) noexcept;
 
     /// Returns 'true' if the instance is in the specified container.
     inline bool isInContainer_( const void* containerPtr ) const noexcept
@@ -63,7 +63,7 @@ public:
         return true;
     }
 
-    /** Verifies that the item is in the list for use when the next() method is 
+    /** Verifies that the item is in the list for use when the next() method is
         called.  If the item is not in the list, a fatal error is generated.
 
         Notes:
@@ -73,7 +73,7 @@ public:
      */
     bool validateNextOkay_( const void* containerPtr ) const noexcept;
 
-    /** Helper method to do the proper 'clean-up' for the multiple-containers-error-trap 
+    /** Helper method to do the proper 'clean-up' for the multiple-containers-error-trap
         when removing an item from a container.
      */
     inline static void remove_( Item* itemPtr ) noexcept
@@ -107,22 +107,23 @@ public:
 
 class ExtendedItem : public Item
 {
-public:
-    /// The previous link field.
-    ExtendedItem* m_prevPtr_;
-
 protected:
     /// Constructor
-    ExtendedItem()
-        : m_prevPtr_( nullptr ) {}
+    ExtendedItem() noexcept
+        : Item()
+        , m_prevPtr_( nullptr ) {}
 
     /** Constructor used ONLY with the child class MapItem: -->special
         constructor to allow a Map to be statically allocated.  Only the Map
         itself should ever use this constructor -->not intended for Items in a
         Map
      */
-    ExtendedItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor )
+    ExtendedItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
         : Item( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}
+
+public:
+    /// The previous link field.
+    ExtendedItem* m_prevPtr_;
 };
 
 
@@ -142,7 +143,7 @@ public:
     REFITEM& m_reference;
 
     /// Constructor
-    ReferenceItem( REFITEM& item )
+    ReferenceItem( REFITEM& item ) noexcept
         : ITEMTYPE(), m_reference( item ) {}
 
     /** Constructor used ONLY with the child class MapItem: -->special
@@ -150,7 +151,7 @@ public:
         itself should ever use this constructor -->not intended for Items in a
         Map
      */
-    ReferenceItem( REFITEM& item, const char* ignoreThisParameter_usedToCreateAUniqueConstructor )
+    ReferenceItem( REFITEM& item, const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
         : ITEMTYPE( ignoreThisParameter_usedToCreateAUniqueConstructor ), m_reference( item ) {}
 };
 

@@ -1,12 +1,10 @@
 #ifndef KIT_CONTAINER_DLIST_H_
 #define KIT_CONTAINER_DLIST_H_
 /*-----------------------------------------------------------------------------
- * This file is part of the Colony.Core Project.  The Colony.Core Project is an
- * open source project with a BSD type of licensing agreement.  See the license
- * agreement (license.txt) in the top/ directory or on the Internet at
- * http://integerfox.com/colony.core/license.txt
+ * Copyright Integer Fox Authors
  *
- * Copyright (c) 2014-2025  John T. Taylor
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
@@ -23,7 +21,7 @@ namespace Container {
     ordering imposed on it by the application. It is type-safe wrapper around
     the DListBase_ class.
 
-    NOTE: ITEM must be a subclass of Item.
+    NOTE: ITEM must be a subclass of Kit::Container::ExtendedItem.
  */
 template <class ITEM>
 class DList : public DListBase_
@@ -49,7 +47,7 @@ public:
 
 public:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    ITEM* get( void ) noexcept { return (ITEM*)DListBase_::getFirst(); }
+    ITEM* get() noexcept { return (ITEM*)DListBase_::getFirst(); }
 
     /// Adds the item as the last item in the list
     void put( ITEM& item ) noexcept { DListBase_::putLast( item ); }
@@ -57,18 +55,18 @@ public:
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* head( void ) const noexcept { return (ITEM*)DListBase_::first(); }
+    ITEM* head() const noexcept { return (ITEM*)DListBase_::first(); }
 
     /** Return a pointer to the last item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* tail( void ) const noexcept { return (ITEM*)DListBase_::last(); }
+    ITEM* tail() const noexcept { return (ITEM*)DListBase_::last(); }
 
 public:
     /** Removes the top element from stack and return a pointer to it as a
         result. Returns nullptr, if the stack is empty
      */
-    ITEM* pop( void ) noexcept { return (ITEM*)DListBase_::getFirst(); }
+    ITEM* pop() noexcept { return (ITEM*)DListBase_::getFirst(); }
 
     /// Adds the ITEM item to top of the stack.
     void push( ITEM& item ) noexcept { DListBase_::putFirst( item ); }
@@ -76,18 +74,18 @@ public:
     /** Return a pointer to the top ITEM item in the stack. The returned item
         remains in the queue.  Returns nullptr if the stack is empty.
      */
-    ITEM* top( void ) const noexcept { return (ITEM*)DListBase_::first(); }
+    ITEM* top() const noexcept { return (ITEM*)DListBase_::first(); }
 
 public:
     /** Removes the first item in the list.  Returns nullptr if the list
         is empty.
      */
-    ITEM* getFirst( void ) noexcept { return (ITEM*)DListBase_::getFirst(); }
+    ITEM* getFirst() noexcept { return (ITEM*)DListBase_::getFirst(); }
 
     /** Removes the last item in the list.  Returns nullptr if the list
         is empty.
      */
-    ITEM* getLast( void ) noexcept { return (ITEM*)DListBase_::getLast(); }
+    ITEM* getLast() noexcept { return (ITEM*)DListBase_::getLast(); }
 
     /// Adds the item as the first item in the list.
     void putFirst( ITEM& item ) noexcept { DListBase_::putFirst( item ); }
@@ -119,12 +117,12 @@ public:
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* first( void ) const noexcept { return (ITEM*)DListBase_::first(); }
+    ITEM* first() const noexcept { return (ITEM*)DListBase_::first(); }
 
     /** Return a pointer to the last item in the list. The returned item remains
         in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* last( void ) const noexcept { return (ITEM*)DListBase_::last(); }
+    ITEM* last() const noexcept { return (ITEM*)DListBase_::last(); }
 
     /** Return a pointer to the item after the "item". Both items remain in
         the list.  Returns nullptr when the end-of-list is reached.

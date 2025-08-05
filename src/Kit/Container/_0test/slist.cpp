@@ -11,13 +11,13 @@
 #include "catch2/catch_test_macros.hpp"   
 #include "Kit/Container/Item.h"    
 #include "Kit/Container/SList.h"    
-//#include "Cpl/System/_testsupport/Shutdown_TS.h"
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include <string.h>
 
 
 /// 
 using namespace Kit::Container;
-//using namespace Kit::System;
+using namespace Kit::System;
 
 
 /// Short hand for brute forcing string compares when not using std::string
@@ -73,7 +73,7 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 	MyItem        plum( "plum" );
 	MyItem*       ptr1;
 
-	// Shutdown_TS::clearAndUseCounter();
+	ShutdownUnitTesting::clearAndUseCounter();
 
 	SECTION( "Validate that an 'item' can be only in one Container" )
 	{
@@ -85,13 +85,13 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 		foo.put( item );
 		bar.put( item );
 
-		//REQUIRE( Shutdown_TS::getAndClearCounter() == 1u );
+		REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 1u );
 	}
 
 	SECTION( "Validate static Constructor" )
 	{
-		REQUIRE( emptylist_.head() == 0 );
-		REQUIRE( emptylist_.tail() == 0 );
+		REQUIRE( emptylist_.head() == nullptr );
+		REQUIRE( emptylist_.tail() == nullptr );
 
 		REQUIRE( staticlist_.head() != 0 );
 		REQUIRE( staticlist_.tail() != 0 );
@@ -111,25 +111,27 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 		foo.put( uncle );
 		REQUIRE( STRING_EQ( foo.head()->m_name, "bob" ) );
 		REQUIRE( STRING_EQ( foo.tail()->m_name, "uncle" ) );
-		REQUIRE( bar.head() == 0 );
-		REQUIRE( bar.tail() == 0 );
+		REQUIRE( bar.head() == nullptr );
+		REQUIRE( bar.tail() == nullptr );
 
 		foo.move( bar );
 		REQUIRE( STRING_EQ( bar.head()->m_name, "bob" ) );
 		REQUIRE( STRING_EQ( bar.tail()->m_name, "uncle" ) );
-		REQUIRE( foo.head() == 0 );
-		REQUIRE( foo.tail() == 0 );
+		REQUIRE( foo.head() == nullptr );
+		REQUIRE( foo.tail() == nullptr );
 
 		bar.clearTheList();
-		REQUIRE( bar.head() == 0 );
-		REQUIRE( bar.tail() == 0 );
+		REQUIRE( bar.head() == nullptr );
+		REQUIRE( bar.tail() == nullptr );
+		REQUIRE( foo.next( bob) == nullptr );
+		REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 1u );
 	}
 
 	SECTION( "FIFO" )
 	{
-		REQUIRE( list.get() == 0 );
-		REQUIRE( list.head() == 0 );
-		REQUIRE( list.tail() == 0 );
+		REQUIRE( list.get() == nullptr );
+		REQUIRE( list.head() == nullptr );
+		REQUIRE( list.tail() == nullptr );
 
 		list.put( apple );
 
@@ -171,12 +173,12 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 		ptr1 = list.get();
 		REQUIRE( ptr1 != 0 );
 		REQUIRE( STRING_EQ( ptr1->m_name, "cherry" ) );
-		REQUIRE( list.head() == 0 );
-		REQUIRE( list.tail() == 0 );
+		REQUIRE( list.head() == nullptr );
+		REQUIRE( list.tail() == nullptr );
 
-		REQUIRE( list.get() == 0 );
-		REQUIRE( list.head() == 0 );
-		REQUIRE( list.tail() == 0 );
+		REQUIRE( list.get() == nullptr );
+		REQUIRE( list.head() == nullptr );
+		REQUIRE( list.tail() == nullptr );
 	}
 
 	SECTION( "STACK" )
@@ -191,9 +193,9 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 		ptr1 = list.pop();
 		REQUIRE( ptr1 != 0 );
 		REQUIRE( STRING_EQ( ptr1->m_name, "apple" ) );
-		REQUIRE( list.top() == 0 );
-		REQUIRE( list.tail() == 0 );
-		REQUIRE( list.pop() == 0 );
+		REQUIRE( list.top() == nullptr );
+		REQUIRE( list.tail() == nullptr );
+		REQUIRE( list.pop() == nullptr );
 
 		list.push( apple );
 		list.push( orange );
@@ -210,9 +212,9 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 		REQUIRE( STRING_EQ( list.pop()->m_name, "plum" ) );
 		REQUIRE( STRING_EQ( list.pop()->m_name, "orange" ) );
 		REQUIRE( STRING_EQ( list.pop()->m_name, "apple" ) );
-		REQUIRE( list.top() == 0 );
-		REQUIRE( list.tail() == 0 );
-		REQUIRE( list.pop() == 0 );
+		REQUIRE( list.top() == nullptr );
+		REQUIRE( list.tail() == nullptr );
+		REQUIRE( list.pop() == nullptr );
 	}
 
 	SECTION( "Ordered List" )
@@ -290,5 +292,5 @@ TEST_CASE( "SLIST: Validate member functions", "[slist]" )
 		REQUIRE( list.remove( pear ) == true );
 	}
 
-	//REQUIRE( Shutdown_TS::getAndClearCounter() == 0u );
+	REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
