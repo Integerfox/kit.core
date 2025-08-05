@@ -1,8 +1,9 @@
-/** @namespace Kit
+/** @namespace Kit::System::Posix
 
-The 'Kit' namespace is the root name space for the KIT C++ class library that is 
-specifically target for embedded developed.
+Concrete implementation of the platform specific classes/features of the 
+Kit::System namespace interfaces using POSIX threading functions
 
-*/ 
+*/  
+
 
   
