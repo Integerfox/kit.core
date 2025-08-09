@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Item.h"
-#include "Kit/System/fatalError.h"
+#include "Kit/System/FatalError.h"
 
 
 //------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ bool Item::insert_( void* newContainerPtr ) noexcept
 {
     if ( m_inListPtr_ )
     {
-        Kit::System::fatalError( "Container Error: Double Insert. <item, prev container, new container>", (size_t)this, (size_t)m_inListPtr_, (size_t)newContainerPtr );
+        Kit::System::FatalError::logf( "Container Error: Double Insert. item=%p, prev container=%p, new container=%p", this, m_inListPtr_, newContainerPtr );
         return false;
     }
     else
@@ -34,7 +34,7 @@ bool Item::validateNextOkay_( const void* containerPtr ) const noexcept
 {
     if ( m_inListPtr_ != containerPtr )
     {
-        Kit::System::fatalError( "Container Error: Invalid next() call. <item, container>", (size_t)this, (size_t)containerPtr );
+        Kit::System::FatalError::logf( "Container Error: Invalid next() call. item=%p, container=%p", this, containerPtr );
         return false;
     }
     return true;

@@ -136,10 +136,10 @@ protected:
     /// Prevent access to the assignment operator -->Containers can not be copied!
     SList<ITEM>& operator=( const SList<ITEM>& m ) = delete;
 
-    /// Prevent access to the move constructor -->Containers can not be moved!
+    /// Prevent access to the move constructor -->Containers can not be implicitly moved!
     SList<ITEM>( SList<ITEM>&& m ) = delete;
 
-    /// Prevent access to the move assignment operator -->Containers can not be moved!
+    /// Prevent access to the move assignment operator -->Containers can not be implicitly moved!
     SList<ITEM>& operator=( SList<ITEM>&& m ) = delete;
 };
 

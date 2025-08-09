@@ -99,10 +99,10 @@ public:
     containers.
 
     Note: Client code, i.e. application code that needs to define a
-          'containerized' class only needs to inherit from this
-          interface.  The Client code SHOULD/SHALL NOT access any of its
-          members or methods!  These members/methods are intended to ONLY be
-          accessible by the container classes.
+          'containerized' class only needs to inherit from this interface.  The 
+          Client code SHOULD/SHALL NOT access any of its members or methods!  
+          These members/methods are intended to ONLY be accessible by the 
+          container classes.
  */
 
 class ExtendedItem : public Item
@@ -128,8 +128,8 @@ public:
 
 
 /** This template class defines wrapper class - that is makes a reference
-    'listable'. This class is useful when the Application needs to put a
-    single entity into multiple containers.
+    'listable'. This class is useful when the Application needs to put a single
+    entity into multiple containers.
 
     Template Arguments:
         REFITEM    - The type of the Reference being wrapped.
