@@ -20,7 +20,7 @@ Arguments:
 
 Options:
   --in-dir DIR     The 'input' directory to use for the code coverage
-                   analysis. [Default: ./]
+                   analysis. [Default: .]
   --html-dir DIR   The name of directory to output HTML reports. 
                    [Default: .html-report]
                    is a work-around for Jenkins-Cobertura plugin
@@ -98,14 +98,14 @@ def generate_unit_test_report( pkg, prj_dir, args ):
     generate_html_report( LCOV_OFILE, args['--html-dir'], args )
 
 def capture_metrics( srcdir, outfile ):
-    cmd = f'lcov -c -d {srcdir} {LCOV_OPTS} -o {outfile}'
+    cmd = f'{lcov()} -c -d {srcdir} {LCOV_OPTS} -o {outfile}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
     if r != 0:
         sys.exit(text)
 
 def extract_metrics( srcfile, outfile, filter_pattern ):
-    cmd = f'lcov -e {srcfile} {filter_pattern} {LCOV_OPTS} -o {outfile}'
+    cmd = f'{lcov()} -e {srcfile} {filter_pattern} {LCOV_OPTS} -o {outfile}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
     if r != 0:
@@ -113,7 +113,7 @@ def extract_metrics( srcfile, outfile, filter_pattern ):
 
 
 def remove_metrics( srcfile, outfile, filter_pattern ):
-    cmd = f'lcov -r {srcfile} {filter_pattern} {LCOV_OPTS} -o {outfile}'
+    cmd = f'{lcov()} -r {srcfile} {filter_pattern} {LCOV_OPTS} -o {outfile}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
     if r != 0:
@@ -135,12 +135,18 @@ def generate_html_report( srcfile, html_dir, args ):
         sys.exit(text)
 
 def print_summary( srcfile ):
-    cmd = f'lcov --summary {srcfile} {LCOV_OPTS}'
+    cmd = f'{lcov()} --summary {srcfile} {LCOV_OPTS}'
     print_output( cmd, VERBOSE_ONLY )
     (r, out) = utils2.run_shell( cmd )
     if r != 0:
         sys.exit(out)
     print_output( out )
+
+def lcov():
+    # Windoze is special
+    if platform.system().lower() == 'windows':
+        return 'lcov.pl'
+    return 'lcov'
 
 #------------------------------------------------------------------------------
 def open_html_in_browser( html_file_path ):
@@ -163,6 +169,10 @@ def open_html_in_browser( html_file_path ):
 
 #------------------------------------------------------------------------------
 def derive_unit_test_dir( pkg_root, prj_dir, test_dir ):
+    pkg_root = utils2.standardize_whole_path( pkg_root, '/' )
+    prj_dir = utils2.standardize_whole_path( prj_dir, '/' )
+    test_dir = utils2.standardize_whole_path( test_dir, '/' )
+    
     dir_under_test = prj_dir
     if not test_dir.endswith(os.sep):
         test_dir += os.sep
