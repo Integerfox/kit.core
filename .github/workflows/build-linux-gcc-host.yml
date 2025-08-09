@@ -67,7 +67,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
-          ./top/gha_linux_gcc-host.sh ${{ github.run_number }} 
+          ./top/gha_linux_gcc-host.sh 0 
 
       # Build Stable branches
       - name: Run build script - for stable branches

@@ -43,7 +43,7 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
-          .\top\gha_windows_stm-arm.bat ${{ github.run_number }} 
+          .\top\gha_windows_stm-arm.bat 0 
 
       # Build Stable branches
       - name: Run build script - for stable branches
