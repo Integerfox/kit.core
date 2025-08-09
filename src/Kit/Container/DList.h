@@ -1,6 +1,6 @@
 #ifndef KIT_CONTAINER_DLIST_H_
 #define KIT_CONTAINER_DLIST_H_
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:

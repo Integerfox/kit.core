@@ -1,4 +1,4 @@
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -6,7 +6,8 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/*
+/** @file 
+
     Implementation of the System::FatalError interface using the standard
     C library.
 

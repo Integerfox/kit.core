@@ -1,6 +1,6 @@
 #ifndef KIT_SYSTEM_API_H_
 #define KIT_SYSTEM_API_H_
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -8,7 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file
+/** @file 
 
     This file defines methods for initializing the KIT C++ class library
     and other startup/init actions.

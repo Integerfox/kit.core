@@ -1,6 +1,6 @@
 #ifndef KIT_CONTAINER_SLIST_H_
 #define KIT_CONTAINER_SLIST_H_
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -21,7 +21,7 @@ namespace Container {
     ordering imposed on it by the application. It is type-safe wrapper around
     the SListBase_ class.
 
-    NOTE: ITEM must be a subclass of Kit::Container::Item.
+    NOTE: ITEM must be a subclass of Kit::Container::ListItem.
  */
 template <class ITEM>
 class SList : public SListBase_

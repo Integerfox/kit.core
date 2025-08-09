@@ -1,6 +1,6 @@
 #ifndef KIT_CONTAINER_ITEM_H_
 #define KIT_CONTAINER_ITEM_H_
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -17,10 +17,19 @@ namespace Kit {
 namespace Container {
 
 
-/** This class is used by the Container classes to implement a various types
-    of singly linked containers.
+/** This class is used by the Intrusive Container classes to enforce the 
+    semantic and item/element can be in at most ONE container at any given
+    time.  Intrusive containers are 'limitless' containers in that can
+    hold any number of elements because each element contains the 'container-
+    linkage' fields, i.e. no dynamic memory required to added an element to
+    the container.
 
-    Note: Client code, i.e. application code that needs to define a
+    NOTE: Enforcing the above semantics adds RAM overhead to a Item class.  
+          However, debugging a logic error where a single item is inserted into
+          multiple containers at the same time IS EXTREMELY DIFFICULT to debug, 
+          i.e. the extra overhead is worth it.
+
+    NOTE: Client code, i.e. application code that needs to define a
           'containerized' class only needs to inherit from this
           interface.  The Client code SHOULD/SHALL NOT access any of its
           members or methods!  These members/methods are intended to ONLY be
@@ -31,7 +40,7 @@ class Item
 protected:
     /// Constructor
     Item() noexcept
-        : m_nextPtr_( nullptr ), m_inListPtr_( nullptr ) {}
+        : m_inListPtr_( nullptr ) {}
 
     /** Constructor used ONLY with the child class MapItem: -->special
         constructor to allow a Map to be statically allocated.  Only the Map
@@ -85,74 +94,10 @@ public:
     }
 
 public:
-    /// The link field.
-    Item* m_nextPtr_;
-
     /** Debug field.  This member is used to trap when there is an attempt
         to insert a item into a container when it is already in a container
      */
     void* m_inListPtr_;
-};
-
-/** This class is used by the Container classes
-    to implement a various types of DOUBLY linked
-    containers.
-
-    Note: Client code, i.e. application code that needs to define a
-          'containerized' class only needs to inherit from this interface.  The 
-          Client code SHOULD/SHALL NOT access any of its members or methods!  
-          These members/methods are intended to ONLY be accessible by the 
-          container classes.
- */
-
-class ExtendedItem : public Item
-{
-protected:
-    /// Constructor
-    ExtendedItem() noexcept
-        : Item()
-        , m_prevPtr_( nullptr ) {}
-
-    /** Constructor used ONLY with the child class MapItem: -->special
-        constructor to allow a Map to be statically allocated.  Only the Map
-        itself should ever use this constructor -->not intended for Items in a
-        Map
-     */
-    ExtendedItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
-        : Item( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}
-
-public:
-    /// The previous link field.
-    ExtendedItem* m_prevPtr_;
-};
-
-
-/** This template class defines wrapper class - that is makes a reference
-    'listable'. This class is useful when the Application needs to put a single
-    entity into multiple containers.
-
-    Template Arguments:
-        REFITEM    - The type of the Reference being wrapped.
-        ITEMTYPE   - The Item/Container type, e.g. Item, ExtendedItem, MapItem, etc.
- */
-template <class REFITEM, class ITEMTYPE>
-class ReferenceItem : public ITEMTYPE
-{
-public:
-    /// Reference to the item that is being 'containerized'
-    REFITEM& m_reference;
-
-    /// Constructor
-    ReferenceItem( REFITEM& item ) noexcept
-        : ITEMTYPE(), m_reference( item ) {}
-
-    /** Constructor used ONLY with the child class MapItem: -->special
-        constructor to allow a Map to be statically allocated.  Only the Map
-        itself should ever use this constructor -->not intended for Items in a
-        Map
-     */
-    ReferenceItem( REFITEM& item, const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
-        : ITEMTYPE( ignoreThisParameter_usedToCreateAUniqueConstructor ), m_reference( item ) {}
 };
 
 }  // end namespaces

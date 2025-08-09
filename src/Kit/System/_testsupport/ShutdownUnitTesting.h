@@ -1,6 +1,6 @@
 #ifndef Cpl_System_x_testsupport_Shutdown_TS_h_
 #define Cpl_System_x_testsupport_Shutdown_TS_h_
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:

@@ -10,14 +10,14 @@
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/Container/Item.h"
+#include "Kit/Container/ListItem.h"
 #include "Kit/Container/DList.h"
 #include <string.h>
 
 
 ///
 using namespace Kit::Container;
-// using namespace Kit::System;
+using namespace Kit::System;
 
 
 /// Short hand for brute forcing string compares when not using std::string
@@ -29,7 +29,7 @@ using namespace Kit::Container;
 /// Use un-named namespace to make my class local-to-the-file in scope
 namespace {
 
-class MyItem : public ExtendedItem
+class MyItem : public ExtendedListItem
 {
 public:
     ///
@@ -39,7 +39,7 @@ public:
     const char* m_name;
 };
 
-class ItemAutoAdd : public ExtendedItem
+class ItemAutoAdd : public ExtendedListItem
 {
 public:
     ///
@@ -84,7 +84,7 @@ TEST_CASE( "DLIST: Validate member functions", "[dlist]" )
         foo.put( item );
         bar.put( item );
 
-        REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 1u );
+        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 1u );
     }
 
     SECTION( "Validate static Constructor" )
@@ -124,7 +124,7 @@ TEST_CASE( "DLIST: Validate member functions", "[dlist]" )
         REQUIRE( bar.tail() == nullptr );
 
         REQUIRE( foo.next( bob ) == nullptr );
-        REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 1u );
+        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 1u );
     }
 
     SECTION( "FIFO" )
@@ -350,5 +350,5 @@ TEST_CASE( "DLIST: Validate member functions", "[dlist]" )
     }
 
 
-    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

@@ -1,6 +1,6 @@
 #ifndef KIT_SYSTEM_FATAL_ERROR_H_
 #define KIT_SYSTEM_FATAL_ERROR_H_
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -8,12 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file
-
-This file defines methods for handling fatal errors encountered by an
-application.  The implementation of the methods is platform dependent.
-
-*/
+/** @file */
 
 
 #include "kit_config.h"

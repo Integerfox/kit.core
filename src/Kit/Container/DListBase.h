@@ -1,6 +1,6 @@
 #ifndef KIT_CONTAINER_DLIST_BASE_H_
 #define KIT_CONTAINER_DLIST_BASE_H_
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -58,7 +58,7 @@ protected:
         dst.clearTheList();
 
         // Copy each item (so the debug info is correct)
-        ExtendedItem* nextPtr;
+        ExtendedListItem* nextPtr;
         while ( ( nextPtr = getFirst() ) )
         {
             dst.putLast( *nextPtr );
@@ -78,9 +78,9 @@ protected:
 
 protected:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    ExtendedItem* getFirst() noexcept
+    ExtendedListItem* getFirst() noexcept
     {
-        ExtendedItem* firstPtr = m_headPtr;
+        ExtendedListItem* firstPtr = m_headPtr;
         if ( firstPtr )
         {
             remove( *firstPtr );
@@ -89,9 +89,9 @@ protected:
     }
 
     /// Removes the last item in the list.  Returns nullptr if the list is empty.
-    ExtendedItem* getLast() noexcept
+    ExtendedListItem* getLast() noexcept
     {
-        ExtendedItem* lastPtr = m_tailPtr;
+        ExtendedListItem* lastPtr = m_tailPtr;
         if ( lastPtr )
         {
             remove( *lastPtr );
@@ -100,7 +100,7 @@ protected:
     }
 
     /// Adds the 'item' as the last item in the list
-    void putFirst( ExtendedItem& item ) noexcept
+    void putFirst( ExtendedListItem& item ) noexcept
     {
         if ( item.insert_( this ) )
         {
@@ -120,7 +120,7 @@ protected:
     }
 
     /// Adds the 'item' as the last item in the list
-    void putLast( ExtendedItem& item ) noexcept
+    void putLast( ExtendedListItem& item ) noexcept
     {
         if ( item.insert_( this ) )
         {
@@ -143,7 +143,7 @@ protected:
     /** Return a pointer to the first item in the list. The returned item 
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ExtendedItem* first() const noexcept
+    ExtendedListItem* first() const noexcept
     {
         return m_headPtr;
     }
@@ -151,7 +151,7 @@ protected:
     /** Return a pointer to the last item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ExtendedItem* last() const noexcept
+    ExtendedListItem* last() const noexcept
     {
         return m_tailPtr;
     }
@@ -160,12 +160,12 @@ protected:
     /** Remove the specified 'item' element from the list. Returns true if the 
         specified element was found and removed from the list, else false.
      */
-    bool remove( ExtendedItem& item ) noexcept
+    bool remove( ExtendedListItem& item ) noexcept
     {
         if ( item.isInContainer_( this ) )
         {
-            ExtendedItem* prvPtr = item.m_prevPtr_;
-            ExtendedItem* nxtPtr = (ExtendedItem*)item.m_nextPtr_;
+            ExtendedListItem* prvPtr = item.m_prevPtr_;
+            ExtendedListItem* nxtPtr = (ExtendedListItem*)item.m_nextPtr_;
             if ( prvPtr )
             {
                 if ( !( prvPtr->m_nextPtr_ = nxtPtr ) )
@@ -199,11 +199,11 @@ protected:
     /** Insert the "item" into the list behind the "after" element.  If 'after'
         is nullptr, then 'item' is added to the head of the list.
      */
-    void insertAfter( ExtendedItem& after, ExtendedItem& item ) noexcept
+    void insertAfter( ExtendedListItem& after, ExtendedListItem& item ) noexcept
     {
         if ( item.insert_( this ) )
         {
-            ExtendedItem* nxtPtr = (ExtendedItem*)( item.m_nextPtr_ = after.m_nextPtr_ );
+            ExtendedListItem* nxtPtr = (ExtendedListItem*)( item.m_nextPtr_ = after.m_nextPtr_ );
             item.m_prevPtr_      = &after;
             after.m_nextPtr_     = &item;
             if ( !nxtPtr )
@@ -220,11 +220,11 @@ protected:
     /** Insert the "item" into the list ahead of the "before" element. If
         'before' is nullptr, then 'item' is added to the tail of the list.
      */
-    void insertBefore( ExtendedItem& before, ExtendedItem& item ) noexcept
+    void insertBefore( ExtendedListItem& before, ExtendedListItem& item ) noexcept
     {
         if ( item.insert_( this ) )
         {
-            ExtendedItem* prvPtr = (ExtendedItem*)( item.m_prevPtr_ = before.m_prevPtr_ );
+            ExtendedListItem* prvPtr = (ExtendedListItem*)( item.m_prevPtr_ = before.m_prevPtr_ );
             item.m_nextPtr_      = &before;
             before.m_prevPtr_    = &item;
             if ( !prvPtr )
@@ -239,7 +239,7 @@ protected:
     }
 
     /// Returns true if the specified item is already in the list, else false.
-    bool find( const ExtendedItem& item ) const noexcept
+    bool find( const ExtendedListItem& item ) const noexcept
     {
         return item.isInContainer_( this );
     }
@@ -249,11 +249,11 @@ protected:
 
         NOTE: If 'item' is not in the list, then a fatal error is generated.
      */
-    ExtendedItem* next( const ExtendedItem& item ) const noexcept
+    ExtendedListItem* next( const ExtendedListItem& item ) const noexcept
     {
         if ( item.validateNextOkay_( this ) )
         {
-            return (ExtendedItem*)item.m_nextPtr_;
+            return (ExtendedListItem*)item.m_nextPtr_;
         }
         return nullptr;
     }
@@ -261,17 +261,17 @@ protected:
     /** Return a pointer to the item before the item "current". Both items 
         remain in the list.  Returns nullptr when the front-of-list is reached.
      */
-    ExtendedItem* previous( const ExtendedItem& current ) const noexcept
+    ExtendedListItem* previous( const ExtendedListItem& current ) const noexcept
     {
         return current.m_prevPtr_;
     }
 
 protected:
     /// Points to the first item in the list.
-    ExtendedItem* m_headPtr;
+    ExtendedListItem* m_headPtr;
 
     /// Points to the last item in the list.
-    ExtendedItem* m_tailPtr;
+    ExtendedListItem* m_tailPtr;
 
 protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!

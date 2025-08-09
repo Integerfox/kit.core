@@ -1,6 +1,6 @@
 #ifndef Cpl_System_Shutdown_h_
 #define Cpl_System_Shutdown_h_
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -12,7 +12,7 @@
 
 
 #include "kit_config.h"
-#include "Kit/Container/Item.h"
+#include "Kit/Container/ListItem.h"
 
 
 /** Specifies the default value used for the application exit code when
@@ -56,7 +56,7 @@ public:
     /** This call defines the callback interface that is used when the
         application is shutdown
      */
-    class Handler : public Kit::Container::Item
+    class Handler : public Kit::Container::ListItem
     {
     public:
         /** This method is called when the application is shutting down. The
