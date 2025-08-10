@@ -13,7 +13,7 @@
 #include "kit_config.h"
 #include "kit_map.h"
 
-#ifdef USE_KIT_SYSTEM_ASSERT_MACROS
+#ifdef USE_KIT_SYSTEM_ASSERT_MACRO
 
 /** This macro is platform/compiler independent replacement for 'assert()'
     function/macro.  If the passed boolean expression is false (i.e. zero)

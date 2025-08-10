@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Key.h"
-
+#include "Kit/System/Assert.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -19,6 +19,7 @@ KeyStringBuffer::KeyStringBuffer( const char* startOfString, size_t lenOfStringI
     : m_stringKeyPtr( startOfString )
     , m_len( lenOfStringInBytes )
 {
+    KIT_SYSTEM_ASSERT( m_stringKeyPtr != nullptr );
 }
 
 int KeyStringBuffer::compareKey( const Key& key ) const noexcept
@@ -41,6 +42,9 @@ const void* KeyStringBuffer::getRawKey( unsigned* returnRawKeyLenPtr ) const noe
 
 int KeyStringBuffer::compare( const char* myString, unsigned myLen, const char* otherString, unsigned otherLen ) noexcept
 {
+    KIT_SYSTEM_ASSERT( myString != nullptr );
+    KIT_SYSTEM_ASSERT( otherString != nullptr );
+    
     if ( otherString )
     {
         if ( myString )

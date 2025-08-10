@@ -95,7 +95,7 @@ static ItemAutoAdd      static1Item_C( staticmap_, "staticItemV (-3)", -3 );
 
 
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "MAP: Validate member functions", "[map]" )
+TEST_CASE( "Map" )
 {
     Map<MyItemMap> map;
     MyItemMap      apple( "apple" );
@@ -122,21 +122,21 @@ TEST_CASE( "MAP: Validate member functions", "[map]" )
 
     SECTION( "Validate static Constructor" )
     {
-        REQUIRE( emptymap_.first() == 0 );
-        REQUIRE( emptymap_.last() == 0 );
+        REQUIRE( emptymap_.first() == nullptr );
+        REQUIRE( emptymap_.last() == nullptr );
 
         ItemAutoAdd* ptr2 = staticmap_.find( static1Item_A );
-        REQUIRE( ptr2 != 0 );
+        REQUIRE( ptr2 != nullptr );
         REQUIRE( ptr2->getKeyValue() == -2 );
 
         ptr2 = staticmap_.first();
-        REQUIRE( ptr2 != 0 );
+        REQUIRE( ptr2 != nullptr );
         REQUIRE( ptr2->getKeyValue() == -3 );
         ptr2 = staticmap_.next( *ptr2 );
-        REQUIRE( ptr2 != 0 );
+        REQUIRE( ptr2 != nullptr );
         REQUIRE( ptr2->getKeyValue() == -2 );
         ptr2 = staticmap_.next( *ptr2 );
-        REQUIRE( ptr2 != 0 );
+        REQUIRE( ptr2 != nullptr );
         REQUIRE( ptr2->getKeyValue() == 6 );
         ptr2 = staticmap_.next( *ptr2 );
         REQUIRE( ptr2 == 0 );
@@ -147,12 +147,12 @@ TEST_CASE( "MAP: Validate member functions", "[map]" )
         KeyInteger16_T key_2 = -2;
 
         ptr2 = staticmap_.find( key6 );
-        REQUIRE( ptr2 != 0 );
+        REQUIRE( ptr2 != nullptr );
         REQUIRE( ptr2->getKeyValue() == 6 );
         ptr2 = staticmap_.find( key0 );
         REQUIRE( ptr2 == 0 );
         ptr2 = staticmap_.find( key_2 );
-        REQUIRE( ptr2 != 0 );
+        REQUIRE( ptr2 != nullptr );
         REQUIRE( ptr2->getKeyValue() == -2 );
 
 
@@ -163,57 +163,57 @@ TEST_CASE( "MAP: Validate member functions", "[map]" )
 
     SECTION( "Basic" )
     {
-        REQUIRE( map.getFirst() == 0 );
-        REQUIRE( map.first() == 0 );
-        REQUIRE( map.last() == 0 );
+        REQUIRE( map.getFirst() == nullptr );
+        REQUIRE( map.first() == nullptr );
+        REQUIRE( map.last() == nullptr );
 
         map.insert( apple );
 
-        REQUIRE( map.first() != 0 );
+        REQUIRE( map.first() != nullptr );
         REQUIRE( STRING_EQ( map.first()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( map.last() != 0 );
+        REQUIRE( map.last() != nullptr );
         REQUIRE( STRING_EQ( map.last()->m_stringKeyPtr, "apple" ) );
 
         map.insert( orange );
 
-        REQUIRE( map.first() != 0 );
+        REQUIRE( map.first() != nullptr );
         REQUIRE( STRING_EQ( map.first()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( map.last() != 0 );
+        REQUIRE( map.last() != nullptr );
         REQUIRE( STRING_EQ( map.last()->m_stringKeyPtr, "orange" ) );
 
         map.insert( cherry );
 
-        REQUIRE( map.first() != 0 );
+        REQUIRE( map.first() != nullptr );
         REQUIRE( STRING_EQ( map.first()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( map.last() != 0 );
+        REQUIRE( map.last() != nullptr );
         REQUIRE( STRING_EQ( map.last()->m_stringKeyPtr, "orange" ) );
 
         ptr1 = map.getLast();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "orange" ) );
-        REQUIRE( map.first() != 0 );
+        REQUIRE( map.first() != nullptr );
         REQUIRE( STRING_EQ( map.first()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( map.last() != 0 );
+        REQUIRE( map.last() != nullptr );
         REQUIRE( STRING_EQ( map.last()->m_stringKeyPtr, "cherry" ) );
 
         ptr1 = map.getFirst();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "apple" ) );
-        REQUIRE( map.first() != 0 );
+        REQUIRE( map.first() != nullptr );
         REQUIRE( STRING_EQ( map.first()->m_stringKeyPtr, "cherry" ) );
-        REQUIRE( map.last() != 0 );
+        REQUIRE( map.last() != nullptr );
         REQUIRE( STRING_EQ( map.last()->m_stringKeyPtr, "cherry" ) );
 
         ptr1 = map.getFirst();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "cherry" ) );
-        REQUIRE( map.first() == 0 );
-        REQUIRE( map.last() == 0 );
+        REQUIRE( map.first() == nullptr );
+        REQUIRE( map.last() == nullptr );
 
-        REQUIRE( map.first() == 0 );
-        REQUIRE( map.last() == 0 );
-        REQUIRE( map.getFirst() == 0 );
-        REQUIRE( map.getLast() == 0 );
+        REQUIRE( map.first() == nullptr );
+        REQUIRE( map.last() == nullptr );
+        REQUIRE( map.getFirst() == nullptr );
+        REQUIRE( map.getLast() == nullptr );
     }
 
     SECTION( "More Basic ops" )
@@ -231,64 +231,64 @@ TEST_CASE( "MAP: Validate member functions", "[map]" )
 
         KeyLiteralString key1( "Hello" );
         MyItemMap* ptr1 = map.find( key1 );
-        REQUIRE( ptr1 == 0 );
+        REQUIRE( ptr1 == nullptr );
 
         KeyLiteralString key2( "orange" );
         ptr1 = map.find( key2 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "orange" ) );
 
         ptr1 = map.last();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "pear1" ) );
         ptr1 = map.previous( *ptr1 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "pear" ) );
         ptr1 = map.previous( *ptr1 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "orange" ) );
         ptr1 = map.previous( *ptr1 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "cherry" ) );
         ptr1 = map.previous( *ptr1 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "apple" ) );
-        REQUIRE( map.previous( *ptr1 ) == 0 );
+        REQUIRE( map.previous( *ptr1 ) == nullptr );
 
         ptr1 = map.next( *ptr1 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "cherry" ) );
         ptr1 = map.next( *ptr1 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "orange" ) );
         ptr1 = map.next( *ptr1 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "pear" ) );
         ptr1 = map.next( *ptr1 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "pear1" ) );
-        REQUIRE( map.next( *ptr1 ) == 0 );
+        REQUIRE( map.next( *ptr1 ) == nullptr );
 
         bool result = map.removeItem( orange );
         REQUIRE( result == true );
         REQUIRE( map.removeItem( orange ) == false );
-        REQUIRE( map.remove( key2 ) == 0 );
+        REQUIRE( map.remove( key2 ) == nullptr );
         map.insert( orange );
         ptr1 = map.remove( key2 );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "orange" ) );
 
         Map<MyItemMap> dst;
-        REQUIRE( dst.first() == 0 );
-        REQUIRE( map.first() != 0 );
+        REQUIRE( dst.first() == nullptr );
+        REQUIRE( map.first() != nullptr );
         map.move( dst );
-        REQUIRE( dst.first() != 0 );
-        REQUIRE( map.first() == 0 );
+        REQUIRE( dst.first() != nullptr );
+        REQUIRE( map.first() == nullptr );
         ptr1 = dst.last();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "pear1" ) );
         dst.clearTheMap();
-        REQUIRE( dst.first() == 0 );
+        REQUIRE( dst.first() == nullptr );
     }
 
 
@@ -300,56 +300,56 @@ TEST_CASE( "MAP: Validate member functions", "[map]" )
     {
         DList<MyItemMap> dlist;
 
-        REQUIRE( dlist.get() == 0 );
-        REQUIRE( dlist.head() == 0 );
-        REQUIRE( dlist.tail() == 0 );
+        REQUIRE( dlist.get() == nullptr );
+        REQUIRE( dlist.head() == nullptr );
+        REQUIRE( dlist.tail() == nullptr );
 
         dlist.put( apple );
 
-        REQUIRE( dlist.head() != 0 );
+        REQUIRE( dlist.head() != nullptr );
         REQUIRE( STRING_EQ( dlist.head()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( dlist.tail() != 0 );
+        REQUIRE( dlist.tail() != nullptr );
         REQUIRE( STRING_EQ( dlist.tail()->m_stringKeyPtr, "apple" ) );
 
         dlist.put( orange );
 
-        REQUIRE( dlist.head() != 0 );
+        REQUIRE( dlist.head() != nullptr );
         REQUIRE( STRING_EQ( dlist.head()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( dlist.tail() != 0 );
+        REQUIRE( dlist.tail() != nullptr );
         REQUIRE( STRING_EQ( dlist.tail()->m_stringKeyPtr, "orange" ) );
 
         dlist.put( cherry );
 
-        REQUIRE( dlist.head() != 0 );
+        REQUIRE( dlist.head() != nullptr );
         REQUIRE( STRING_EQ( dlist.head()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( dlist.tail() != 0 );
+        REQUIRE( dlist.tail() != nullptr );
         REQUIRE( STRING_EQ( dlist.tail()->m_stringKeyPtr, "cherry" ) );
 
         ptr1 = dlist.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "apple" ) );
-        REQUIRE( dlist.head() != 0 );
+        REQUIRE( dlist.head() != nullptr );
         REQUIRE( STRING_EQ( dlist.head()->m_stringKeyPtr, "orange" ) );
-        REQUIRE( dlist.tail() != 0 );
+        REQUIRE( dlist.tail() != nullptr );
         REQUIRE( STRING_EQ( dlist.tail()->m_stringKeyPtr, "cherry" ) );
 
         ptr1 = dlist.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "orange" ) );
-        REQUIRE( dlist.head() != 0 );
+        REQUIRE( dlist.head() != nullptr );
         REQUIRE( STRING_EQ( dlist.head()->m_stringKeyPtr, "cherry" ) );
-        REQUIRE( dlist.tail() != 0 );
+        REQUIRE( dlist.tail() != nullptr );
         REQUIRE( STRING_EQ( dlist.tail()->m_stringKeyPtr, "cherry" ) );
 
         ptr1 = dlist.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "cherry" ) );
-        REQUIRE( dlist.head() == 0 );
-        REQUIRE( dlist.tail() == 0 );
+        REQUIRE( dlist.head() == nullptr );
+        REQUIRE( dlist.tail() == nullptr );
 
-        REQUIRE( dlist.get() == 0 );
-        REQUIRE( dlist.head() == 0 );
-        REQUIRE( dlist.tail() == 0 );
+        REQUIRE( dlist.get() == nullptr );
+        REQUIRE( dlist.head() == nullptr );
+        REQUIRE( dlist.tail() == nullptr );
     }
 
     // 
@@ -359,56 +359,56 @@ TEST_CASE( "MAP: Validate member functions", "[map]" )
     {
         SList<MyItemMap> slist;
 
-        REQUIRE( slist.get() == 0 );
-        REQUIRE( slist.head() == 0 );
-        REQUIRE( slist.tail() == 0 );
+        REQUIRE( slist.get() == nullptr );
+        REQUIRE( slist.head() == nullptr );
+        REQUIRE( slist.tail() == nullptr );
 
         slist.put( apple );
 
-        REQUIRE( slist.head() != 0 );
+        REQUIRE( slist.head() != nullptr );
         REQUIRE( STRING_EQ( slist.head()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( slist.tail() != 0 );
+        REQUIRE( slist.tail() != nullptr );
         REQUIRE( STRING_EQ( slist.tail()->m_stringKeyPtr, "apple" ) );
 
         slist.put( orange );
 
-        REQUIRE( slist.head() != 0 );
+        REQUIRE( slist.head() != nullptr );
         REQUIRE( STRING_EQ( slist.head()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( slist.tail() != 0 );
+        REQUIRE( slist.tail() != nullptr );
         REQUIRE( STRING_EQ( slist.tail()->m_stringKeyPtr, "orange" ) );
 
         slist.put( cherry );
 
-        REQUIRE( slist.head() != 0 );
+        REQUIRE( slist.head() != nullptr );
         REQUIRE( STRING_EQ( slist.head()->m_stringKeyPtr, "apple" ) );
-        REQUIRE( slist.tail() != 0 );
+        REQUIRE( slist.tail() != nullptr );
         REQUIRE( STRING_EQ( slist.tail()->m_stringKeyPtr, "cherry" ) );
 
         ptr1 = slist.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "apple" ) );
-        REQUIRE( slist.head() != 0 );
+        REQUIRE( slist.head() != nullptr );
         REQUIRE( STRING_EQ( slist.head()->m_stringKeyPtr, "orange" ) );
-        REQUIRE( slist.tail() != 0 );
+        REQUIRE( slist.tail() != nullptr );
         REQUIRE( STRING_EQ( slist.tail()->m_stringKeyPtr, "cherry" ) );
 
         ptr1 = slist.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "orange" ) );
-        REQUIRE( slist.head() != 0 );
+        REQUIRE( slist.head() != nullptr );
         REQUIRE( STRING_EQ( slist.head()->m_stringKeyPtr, "cherry" ) );
-        REQUIRE( slist.tail() != 0 );
+        REQUIRE( slist.tail() != nullptr );
         REQUIRE( STRING_EQ( slist.tail()->m_stringKeyPtr, "cherry" ) );
 
         ptr1 = slist.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "cherry" ) );
-        REQUIRE( slist.head() == 0 );
-        REQUIRE( slist.tail() == 0 );
+        REQUIRE( slist.head() == nullptr );
+        REQUIRE( slist.tail() == nullptr );
 
-        REQUIRE( slist.get() == 0 );
-        REQUIRE( slist.head() == 0 );
-        REQUIRE( slist.tail() == 0 );
+        REQUIRE( slist.get() == nullptr );
+        REQUIRE( slist.head() == nullptr );
+        REQUIRE( slist.tail() == nullptr );
     }
 
 

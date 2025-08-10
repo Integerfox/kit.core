@@ -67,11 +67,15 @@ def run( prj_dir, argv):
     global verbose_enabled
     verbose_enabled = args['--verbose']
 
+    # Default line/statement filter
+    line_regex_filters = ['.*KIT_SYSTEM_ASSERT.*', ".*KIT_SYSTEM_TRACE.*"]
+    # TODO: If <filter-file> specific -->update 'line_filters'
+
     # get the package root
     pkg = os.environ.get('NQBP_PKG_ROOT')
 
     # Capture code coverage metrics
-    capture_metrics( args['--in-dir'], LCOV_OFILE )
+    capture_metrics( args['--in-dir'], LCOV_OFILE, line_regex_filters )
 
     # Generate report
     if args['sum']:
@@ -94,11 +98,13 @@ def run( prj_dir, argv):
 def generate_unit_test_report( pkg, prj_dir, args ):
     dir_under_test = derive_unit_test_dir(pkg, prj_dir, args['--test-dir'])
     extract_metrics( LCOV_OFILE, LCOV_OFILE, dir_under_test )
-    remove_metrics( LCOV_OFILE, LCOV_OFILE, args['--test-dir'] )
-    generate_html_report( LCOV_OFILE, args['--html-dir'], args )
+    remove_metrics( LCOV_OFILE, LCOV_OFILE, [args['--test-dir']] )
 
-def capture_metrics( srcdir, outfile ):
-    cmd = f'{lcov()} -c -d {srcdir} {LCOV_OPTS} -o {outfile}'
+def capture_metrics( srcdir, outfile, filter_lines=None  ):
+    xlines = ""
+    if filter_lines:
+        xlines = f" --omit-lines '{'|'.join(filter_lines)}'"
+    cmd = f'{lcov()} --ignore-errors unused {xlines} -c -d {srcdir} {LCOV_OPTS} -o {outfile}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
     if r != 0:
@@ -112,12 +118,19 @@ def extract_metrics( srcfile, outfile, filter_pattern ):
         sys.exit(text)
 
 
-def remove_metrics( srcfile, outfile, filter_pattern ):
-    cmd = f'{lcov()} -r {srcfile} {filter_pattern} {LCOV_OPTS} -o {outfile}'
+def remove_metrics( srcfile, outfile, filter_files):
+    cmd = f'{lcov()} --ignore-errors unused -r {srcfile} {" ".join(filter_files)} {LCOV_OPTS} -o {outfile}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
     if r != 0:
         sys.exit(text)
+
+# def omit_lines( srcfile, outfile, filter_pattern ):
+#     cmd = f'{lcov()} {LCOV_OPTS} --ignore-errors unused --omit-lines {filter_pattern} -l {srcfile} -o {outfile}'
+#     print_output( cmd, VERBOSE_ONLY )
+#     (r, text) = utils2.run_shell( cmd )
+#     if r != 0:
+#         sys.exit(text)
 
 def generate_html_report( srcfile, html_dir, args ):
     limits = " ".join([

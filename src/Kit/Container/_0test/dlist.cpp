@@ -62,7 +62,7 @@ static ItemAutoAdd        staticItem_( "staticItem", staticlist_ );
 
 
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "DLIST: Validate member functions", "[dlist]" )
+TEST_CASE( "DList" )
 {
     DList<MyItem> list;
     MyItem        apple( "apple" );

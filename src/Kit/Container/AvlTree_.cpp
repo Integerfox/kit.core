@@ -53,7 +53,7 @@ MapItem* AvlTree_::find( const Key& key ) const
             nodePtr = nodePtr->getRight();
         }
     }
-    return 0;
+    return nullptr;
 }
 
 bool AvlTree_::insert( MapItem& newNode )

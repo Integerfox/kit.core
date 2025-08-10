@@ -63,7 +63,7 @@ static ItemAutoAdd        staticItem_( "staticItem", staticlist_ );
 
 
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "SLIST: Validate member functions", "[slist]" )
+TEST_CASE( "SList" )
 {
     SList<MyItem> list;
     MyItem        apple( "apple" );
