@@ -42,21 +42,27 @@ protected:
 
 public:
     /// This method returns true if the Ring Buffer is empty
-    bool isEmpty( void ) const noexcept
+    bool isEmpty() const noexcept
     {
         return m_readIdx == m_writeIdx;
     }
 
     /// This method returns true if the Ring Buffer is full
-    bool isFull( void ) const noexcept
+    bool isFull() const noexcept
     {
         return ( ( m_writeIdx + 1 ) % m_elements ) == m_readIdx;
     }
 
     /// This method returns the maximum number of items that can be stored in the Ring buffer.
-    unsigned getMaxItems( void ) const noexcept
+    unsigned getMaxItems() const noexcept
     {
         return m_elements - 1;
+    }
+
+    /// This method returns the CURRENT number of elements in the Ring Buffer
+    unsigned getNumItems() const noexcept
+    {
+        return ( m_writeIdx - m_readIdx + m_elements ) % m_elements;
     }
 
 public:
@@ -189,6 +195,111 @@ protected:
         memcpy( elemPtr, srcPtr, elemSize );
 
         return true;
+    }
+
+protected:
+    /** This method returns a pointer to the next item to be removed. In addition
+        it returns the number of elements that can be removed as linear/flat
+        buffer (i.e. without wrapping around raw buffer memory).
+
+        The returned pointer and element count are only valid till the next
+        read/remove operation.
+
+        If the Ring buffer is empty, a null pointer is returned
+     */
+    void* peekNextRemoveItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
+    {
+        KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
+
+        if ( isEmpty() )
+        {
+            dstNumFlatElements = 0;
+            return nullptr;
+        }
+
+        // Snapshot of ring buffer's indexes
+        unsigned readIdx  = m_readIdx;
+        unsigned writeIdx = m_writeIdx;
+
+        // Number of elements that can be removed without wrapping around the memory buffer
+        unsigned currentElems = ( writeIdx - readIdx + m_elements ) % m_elements;
+        dstNumFlatElements    = m_elements - readIdx;
+        if ( dstNumFlatElements > currentElems )
+        {
+            dstNumFlatElements = currentElems;
+        }
+
+        uint8_t* srcPtr = ( (uint8_t*)srcRingBufMemory ) + ( readIdx * elemSize );
+        return srcPtr;
+    }
+
+    /** This method 'removes' N elements - that were removed using the
+        pointer returned from peekNextRemoveItems - from the ring buffer.
+        Basically it updates the head pointer to reflect items removed using
+        direct memory access.
+
+        'numElementsToRemove' be less than or equal to the 'dstNumFlatElements'
+        returned from peekNextRemoveItems().
+
+        CAUTION: IF YOU DON'T UNDERSTAND THE USE CASE FOR THIS METHOD - THEN
+                 DON'T USE IT.  If this method is used improperly, it WILL
+                 CORRUPT the Ring Buffer!
+     */
+    void removeElements( unsigned numElementsToRemove ) noexcept
+    {
+        // By definition/design - I simply have to update the read index
+        m_readIdx = ( m_readIdx + numElementsToRemove ) % m_elements;
+    }
+
+protected:
+    /** This method returns a pointer to the next item to be added. In addition
+        it returns the number of elements that can be added as linear/flat
+        buffer (i.e. without wrapping around raw buffer memory)
+
+        If the Ring buffer is full, a null pointer is returned
+     */
+    void* peekNextAddItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
+    {
+        if ( isFull() )
+        {
+            dstNumFlatElements = 0;
+            return nullptr;
+        }
+
+        // Snapshot of ring buffer's indexes
+        unsigned readIdx  = m_readIdx;
+        unsigned writeIdx = m_writeIdx;
+
+        // Number of elements that can be added without wrapping around the memory buffer
+        unsigned currentElems    = ( writeIdx - readIdx + m_elements ) % m_elements;
+        unsigned totalAvailElems = m_elements - 1 - currentElems;
+        dstNumFlatElements       = m_elements - writeIdx;
+        if ( dstNumFlatElements > totalAvailElems )
+        {
+            dstNumFlatElements = totalAvailElems;
+        }
+        
+        // Get a pointer to next 'available' address to add an element
+        uint8_t* srcPtr = ( (uint8_t*)srcRingBufMemory ) + ( writeIdx * elemSize );
+        return srcPtr;
+    }
+
+    /** This method 'adds' N elements - that were populated using the
+        pointer returned from peekNextAddItems - to the ring buffer.  Basically
+        its updates the tail pointer to reflect items added using direct
+        memory access.
+
+        'numElementsAdded' be less than or equal to the 'dstNumFlatElements'
+        returned from peekNextAddItems().
+
+        CAUTION: IF YOU DON'T UNDERSTAND THE USE CASE FOR THIS METHOD - THEN
+                 DON'T USE IT. If this method is used improperly, it WILL
+                 CORRUPT the Ring Buffer!
+     */
+    void addElements( unsigned numElementsAdded ) noexcept
+    {
+        // By definition/design - I simply have to update the write index
+        m_writeIdx = ( m_writeIdx + numElementsAdded ) % m_elements;
     }
 
 protected:

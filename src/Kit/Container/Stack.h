@@ -122,25 +122,25 @@ public:
 
 public:
     /// This method returns true if the Stack is empty
-    bool isEmpty( void ) const noexcept
+    bool isEmpty() const noexcept
     {
         return m_count == 0;
     }
 
     /// This method returns true if the Stack is full
-    bool isFull( void ) const noexcept
+    bool isFull() const noexcept
     {
         return m_count == m_maxItems;
     }
 
     /// This method returns the current number of items in the Stack
-    unsigned getNumItems( void ) const noexcept
+    unsigned getNumItems() const noexcept
     {
         return m_count;
     }
 
     /// This method returns the maximum number of items that can be stored in the Stack.
-    unsigned getMaxItems( void ) const noexcept
+    unsigned getMaxItems() const noexcept
     {
         return m_maxItems;
     }

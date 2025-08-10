@@ -74,7 +74,7 @@ public:
     }
 
     /// Returns the Key's content value
-    DATATYPE getKeyValue( void ) const noexcept
+    DATATYPE getKeyValue() const noexcept
     {
         return m_keyData;
     }
@@ -218,7 +218,7 @@ public:
 
 public:
     /// Returns the Key's content value
-    inline const char* getKeyValue( void ) const noexcept { return m_stringKeyPtr; }
+    inline const char* getKeyValue() const noexcept { return m_stringKeyPtr; }
 
     /// Cast to read-only character string pointer.
     inline operator const char*() const { return m_stringKeyPtr; }
