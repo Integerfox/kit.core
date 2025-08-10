@@ -575,13 +575,18 @@ class ToolChain:
 
         inclist = inc.strip().split(' ')
         inclist = list(set(inclist))  # remove duplicates
-        exclude = ['', '-I.', '/I.']
+        exclude = ['', '-I.', '/I.', '-isystem', '-I', '/I']
         for e in exclude:
             try:
                 inclist.remove(e)
             except:
                 pass
-            
+
+        # Add leading '-I' to include paths that had spaces after the -I or used 'different' -I syntax
+        for i in range(len(inclist)):
+            if not inclist[i].startswith('-I'):
+                inclist[i] = '-I' + inclist[i]
+
         return inclist
 
     def _tokenize_copts( self, opts ):

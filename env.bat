@@ -15,6 +15,7 @@ set NQBP_XPKGS_ROOT=%_HERE%xpkgs
 set NQBP_BIN=%NQBP_XPKGS_ROOT%\nqbp2
 set NQBP_SHELL_SCRIPT_EXTENSION=.bat
 
+
 :: Make sure the Outcast environment is setup.  Assumes that the Outcast batch file is in command path
 ::call outcast.bat
 
@@ -30,6 +31,8 @@ doskey fixx=%NQBP_BIN%\other\fixx.py $*
 doskey setexe=git update-index --chmod=+x $*
 doskey ports=reg query HKLM\HARDWARE\DEVICEMAP\SERIALCOMM
 doskey map=%NQBP_PKG_ROOT%scripts\colony.core\map.py $*
+::doskey lcov=perl %LCOV_BIN_PATH%\lcov
+::doskey genhtml=perl %LCOV_BIN_PATH%\genhtml
 
 :: Add Ninja to the command path, but only once
 IF "/%NQBP2_DONOT_ADD_NINJA_TO_PATH%" == "/" set PATH=%NQBP_XPKGS_ROOT%\nqbp2\ninja;%PATH% & set NQBP2_DONOT_ADD_NINJA_TO_PATH=true

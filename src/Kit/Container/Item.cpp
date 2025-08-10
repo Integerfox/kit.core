@@ -1,4 +1,4 @@
-/*-----------------------------------------------------------------------------
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -7,20 +7,20 @@
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
 /** @file */
+
 #include "Item.h"
-// #include "Kit/System/FatalError.h"
+#include "Kit/System/FatalError.h"
 
 
-///
-using namespace Kit::Container;
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Container {
 
-
-////////////////////////////////////////////////////////////////////////////////
-bool Item::insert_( void* newContainerPtr )
+bool Item::insert_( void* newContainerPtr ) noexcept
 {
     if ( m_inListPtr_ )
     {
-        //      FatalError::logf( "Container Error: Double Insert. item=%p, prev container=%p, new container=%p", this, m_inListPtr_, newContainerPtr );
+        Kit::System::FatalError::logf( "Container Error: Double Insert. item=%p, prev container=%p, new container=%p", this, m_inListPtr_, newContainerPtr );
         return false;
     }
     else
@@ -34,8 +34,12 @@ bool Item::validateNextOkay_( const void* containerPtr ) const noexcept
 {
     if ( m_inListPtr_ != containerPtr )
     {
-        // FatalError::logf( "Container Error: Invalid next() call. item=%p, container=%p", this, containerPtr );
+        Kit::System::FatalError::logf( "Container Error: Invalid next() call. item=%p, container=%p", this, containerPtr );
         return false;
     }
     return true;
 }
+
+} // end namespaces
+}
+//------------------------------------------------------------------------------
