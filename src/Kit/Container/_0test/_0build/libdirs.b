@@ -1,19 +1,20 @@
 src/Kit/Container
 src/Kit/Container/_0test
 
-#src/Cpl/Io/Stdio/_ansi
-#src/Cpl/Text
-#src/Cpl/Text/Tokenizer
-#src/Cpl/Memory
-#src/Cpl/Itc
-#src/Cpl/Dm
-#src/Cpl/Dm/Mp
-#src/Cpl/Type
+#src/Kit/Io/Stdio/_ansi
+#src/Kit/Text
+#src/Kit/Text/Tokenizer
+#src/Kit/Memory
+#src/Kit/Itc
+#src/Kit/Dm
+#src/Kit/Dm/Mp
+#src/Kit/Type
 
 
-#src/Cpl/System/_ansi
-#src/Cpl/System/_testsupport
-#src/Cpl/Io
-#src/Cpl/Io/Stdio
-#src/Cpl/System/_trace
-#src/Cpl/System/_trace/_stdout
+src/Kit/System
+#src/Kit/System/_ansi
+src/Kit/System/_testsupport
+#src/Kit/Io
+#src/Kit/Io/Stdio
+#src/Kit/System/_trace
+#src/Kit/System/_trace/_stdout

@@ -1,6 +1,6 @@
-#ifndef CPL_SLIST_BASE_H_
-#define CPL_SLIST_BASE_H_
-/*-----------------------------------------------------------------------------
+#ifndef KIT_CONTAINER_SLIST_BASE_H_
+#define KIT_CONTAINER_SLIST_BASE_H_
+/*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Container/Item.h"
+#include "Kit/Container/ListItem.h"
 
 ///
 namespace Kit {
@@ -26,18 +26,9 @@ namespace Container {
 class SListBase_
 {
 protected:
-    /** Points to the first item in the list.
-     */
-    Item* m_headPtr;
-
-    /** Points to the last item in the list.
-     */
-    Item* m_tailPtr;
-
-protected:
     /// Constructor initializes head and tail pointers.
     SListBase_() noexcept
-        : m_headPtr( 0 ), m_tailPtr( 0 ) {}
+        : m_headPtr( nullptr ), m_tailPtr( nullptr ) {}
 
     /** This is a special constructor for when the list is
         statically declared (i.e. it is initialized as part of
@@ -67,7 +58,7 @@ protected:
         dst.clearTheList();
 
         // Copy each item (so the debug info is correct)
-        Item* nextPtr;
+        ListItem* nextPtr;
         while ( ( nextPtr = getFirst() ) )
         {
             dst.putLast( *nextPtr );
@@ -87,25 +78,25 @@ protected:
 
 protected:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    Item* getFirst( void ) noexcept
+    ListItem* getFirst() noexcept
     {
-        Item* nextPtr;
+        ListItem* nextPtr;
         if ( ( nextPtr = m_headPtr ) )
         {
-            if ( !( m_headPtr = (Item*)( nextPtr->m_nextPtr_ ) ) )
+            if ( !( m_headPtr = nextPtr->m_nextPtr_ ) )
             {
                 m_tailPtr = nullptr;
             }
         }
 
-        Item::remove_( nextPtr );
+        ListItem::remove_( nextPtr );
         return nextPtr;
     }
 
     /// Removes the last item in the list.  Returns nullptr if the list is empty.
-    Item* getLast( void ) noexcept
+    ListItem* getLast() noexcept
     {
-        Item* lastPtr = m_tailPtr;
+        ListItem* lastPtr = m_tailPtr;
         if ( lastPtr )
         {
             remove( *m_tailPtr );
@@ -114,7 +105,7 @@ protected:
     }
 
     /// Adds the item as the last item in the list
-    void putFirst( Item& item ) noexcept
+    void putFirst( ListItem& item ) noexcept
     {
         if ( item.insert_( this ) )
         {
@@ -132,7 +123,7 @@ protected:
     }
 
     /// Adds the item as the last item in the list
-    void putLast( Item& item ) noexcept
+    void putLast( ListItem& item ) noexcept
     {
         if ( item.insert_( this ) )
         {
@@ -154,7 +145,7 @@ protected:
         The returned item remains in the list.  Returns nullptr
         if the list is empty.
      */
-    Item* first( void ) const noexcept
+    ListItem* first() const noexcept
     {
         return m_headPtr;
     }
@@ -163,22 +154,22 @@ protected:
         The returned item remains in the list.  Returns nullptr
         if the list is empty.
      */
-    Item* last( void ) const noexcept
+    ListItem* last() const noexcept
     {
         return m_tailPtr;
     }
 
 protected:
-    /** Remove specified Item element from the list.
+    /** Remove specified ListItem element from the list.
         Returns true if the specified element was found and
         removed from the list, else false.
      */
-    bool remove( Item& item ) noexcept
+    bool remove( ListItem& item ) noexcept
     {
         if ( item.isInContainer_( this ) )
         {
-            Item* nxtPtr;
-            Item* prvPtr;
+            ListItem* nxtPtr;
+            ListItem* prvPtr;
             for ( nxtPtr = first(), prvPtr = nullptr; nxtPtr;
                   prvPtr = nxtPtr, nxtPtr = next( *nxtPtr ) )
             {
@@ -193,12 +184,12 @@ protected:
                     }
                     else
                     {
-                        if ( !( m_headPtr = (Item*)nxtPtr->m_nextPtr_ ) )
+                        if ( !( m_headPtr = nxtPtr->m_nextPtr_ ) )
                         {
                             m_tailPtr = nullptr;
                         }
                     }
-                    Item::remove_( &item );
+                    ListItem::remove_( &item );
                     return true;
                 }
             }
@@ -208,11 +199,10 @@ protected:
         return false;
     }
 
-    /** Insert the "item" Item into the list behind the
-        "after" Item element.  If 'after' is nullptr, then 'item'
-        is added to the head of the list.
+    /** Insert the "item" ListItem into the list behind the "after" ListItem element.  
+        If 'after' is nullptr, then 'item' is added to the head of the list.
      */
-    void insertAfter( Item& after, Item& item ) noexcept
+    void insertAfter( ListItem& after, ListItem& item ) noexcept
     {
         if ( item.insert_( this ) )
         {
@@ -225,19 +215,17 @@ protected:
         }
     }
 
-    /** Insert the "item" Item into the list ahead of the
-        "before" Item element. If 'before' is nullptr, then 'item'
-        is added to the tail of the list.  Note: This insert
-        operation is more expensive than insertAfter() because
-        a traversal of the list is required to find the
-        'before' item
+    /** Insert the "item" ListItem into the list ahead of the "before" ListItem element. 
+        If 'before' is nullptr, then 'item' is added to the tail of the list.  
+        Note: This insert operation is more expensive than insertAfter() because
+        a traversal of the list is required to find the 'before' item
      */
-    void insertBefore( Item& before, Item& item ) noexcept
+    void insertBefore( ListItem& before, ListItem& item ) noexcept
     {
         if ( item.insert_( this ) )
         {
-            Item* nxtPtr;
-            Item* prvPtr;
+            ListItem* nxtPtr;
+            ListItem* prvPtr;
             for ( nxtPtr = first(), prvPtr = nullptr; nxtPtr;
                   prvPtr = nxtPtr, nxtPtr = next( *nxtPtr ) )
             {
@@ -261,7 +249,7 @@ protected:
     /** Returns true if the specified item is already in the
         list, else false.
      */
-    bool find( const Item& item ) const noexcept
+    bool find( const ListItem& item ) const noexcept
     {
         return item.isInContainer_( this );
     }
@@ -271,14 +259,21 @@ protected:
 
         NOTE: If 'item' is not in the list, then a fatal error is generated.
      */
-    Item* next( const Item& item ) const noexcept
+    ListItem* next( const ListItem& item ) const noexcept
     {
         if ( item.validateNextOkay_( this ) )
         {
-            return (Item*)( item.m_nextPtr_ );
+            return item.m_nextPtr_;
         }
         return nullptr;
     }
+
+protected:
+    /// Points to the first item in the list.
+    ListItem* m_headPtr;
+
+    /// Points to the last item in the list.
+    ListItem* m_tailPtr;
 
 protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
@@ -288,11 +283,10 @@ protected:
     /// copied!
     SListBase_& operator=( const SListBase_& m ) = delete;
 
-    /// Prevent access to the move constructor -->Containers can not be moved!
+    /// Prevent access to the move constructor -->Containers can not be implicitly moved!
     SListBase_( SListBase_&& m ) = delete;
 
-    /// Prevent access to the move assignment operator -->Containers can not be
-    /// moved!
+    /// Prevent access to the move assignment operator -->Containers can not be implicitly moved!
     SListBase_& operator=( SListBase_&& m ) = delete;
 };
 

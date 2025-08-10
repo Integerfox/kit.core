@@ -20,7 +20,7 @@ Arguments:
 
 Options:
   --in-dir DIR     The 'input' directory to use for the code coverage
-                   analysis. [Default: ./]
+                   analysis. [Default: .]
   --html-dir DIR   The name of directory to output HTML reports. 
                    [Default: .html-report]
                    is a work-around for Jenkins-Cobertura plugin
@@ -67,11 +67,15 @@ def run( prj_dir, argv):
     global verbose_enabled
     verbose_enabled = args['--verbose']
 
+    # Default line/statement filter
+    line_regex_filters = ['.*KIT_SYSTEM_ASSERT.*', ".*KIT_SYSTEM_TRACE.*"]
+    # TODO: If <filter-file> specific -->update 'line_filters'
+
     # get the package root
     pkg = os.environ.get('NQBP_PKG_ROOT')
 
     # Capture code coverage metrics
-    capture_metrics( args['--in-dir'], LCOV_OFILE )
+    capture_metrics( args['--in-dir'], LCOV_OFILE, line_regex_filters )
 
     # Generate report
     if args['sum']:
@@ -94,30 +98,39 @@ def run( prj_dir, argv):
 def generate_unit_test_report( pkg, prj_dir, args ):
     dir_under_test = derive_unit_test_dir(pkg, prj_dir, args['--test-dir'])
     extract_metrics( LCOV_OFILE, LCOV_OFILE, dir_under_test )
-    remove_metrics( LCOV_OFILE, LCOV_OFILE, args['--test-dir'] )
-    generate_html_report( LCOV_OFILE, args['--html-dir'], args )
+    remove_metrics( LCOV_OFILE, LCOV_OFILE, [args['--test-dir']] )
 
-def capture_metrics( srcdir, outfile ):
-    cmd = f'lcov -c -d {srcdir} {LCOV_OPTS} -o {outfile}'
+def capture_metrics( srcdir, outfile, filter_lines=None  ):
+    xlines = ""
+    if filter_lines:
+        xlines = f" --omit-lines '{'|'.join(filter_lines)}'"
+    cmd = f'{lcov()} --ignore-errors unused {xlines} -c -d {srcdir} {LCOV_OPTS} -o {outfile}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
     if r != 0:
         sys.exit(text)
 
 def extract_metrics( srcfile, outfile, filter_pattern ):
-    cmd = f'lcov -e {srcfile} {filter_pattern} {LCOV_OPTS} -o {outfile}'
+    cmd = f'{lcov()} -e {srcfile} {filter_pattern} {LCOV_OPTS} -o {outfile}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
     if r != 0:
         sys.exit(text)
 
 
-def remove_metrics( srcfile, outfile, filter_pattern ):
-    cmd = f'lcov -r {srcfile} {filter_pattern} {LCOV_OPTS} -o {outfile}'
+def remove_metrics( srcfile, outfile, filter_files):
+    cmd = f'{lcov()} --ignore-errors unused -r {srcfile} {" ".join(filter_files)} {LCOV_OPTS} -o {outfile}'
     print_output( cmd, VERBOSE_ONLY )
     (r, text) = utils2.run_shell( cmd )
     if r != 0:
         sys.exit(text)
+
+# def omit_lines( srcfile, outfile, filter_pattern ):
+#     cmd = f'{lcov()} {LCOV_OPTS} --ignore-errors unused --omit-lines {filter_pattern} -l {srcfile} -o {outfile}'
+#     print_output( cmd, VERBOSE_ONLY )
+#     (r, text) = utils2.run_shell( cmd )
+#     if r != 0:
+#         sys.exit(text)
 
 def generate_html_report( srcfile, html_dir, args ):
     limits = " ".join([
@@ -135,12 +148,18 @@ def generate_html_report( srcfile, html_dir, args ):
         sys.exit(text)
 
 def print_summary( srcfile ):
-    cmd = f'lcov --summary {srcfile} {LCOV_OPTS}'
+    cmd = f'{lcov()} --summary {srcfile} {LCOV_OPTS}'
     print_output( cmd, VERBOSE_ONLY )
     (r, out) = utils2.run_shell( cmd )
     if r != 0:
         sys.exit(out)
     print_output( out )
+
+def lcov():
+    # Windoze is special
+    if platform.system().lower() == 'windows':
+        return 'lcov.pl'
+    return 'lcov'
 
 #------------------------------------------------------------------------------
 def open_html_in_browser( html_file_path ):
@@ -163,6 +182,10 @@ def open_html_in_browser( html_file_path ):
 
 #------------------------------------------------------------------------------
 def derive_unit_test_dir( pkg_root, prj_dir, test_dir ):
+    pkg_root = utils2.standardize_whole_path( pkg_root, '/' )
+    prj_dir = utils2.standardize_whole_path( prj_dir, '/' )
+    test_dir = utils2.standardize_whole_path( test_dir, '/' )
+    
     dir_under_test = prj_dir
     if not test_dir.endswith(os.sep):
         test_dir += os.sep
