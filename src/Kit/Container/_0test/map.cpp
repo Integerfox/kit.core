@@ -8,6 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Container/ListItem.h"
 #include "catch2/catch_test_macros.hpp"   
 #include "Kit/Container/MapItem.h"    
 #include "Kit/Container/SList.h"    
@@ -104,7 +105,7 @@ TEST_CASE( "Map" )
     MyItemMap      pear( "pear" );
     MyItemMap      plum( "plum" );
     MyItemMap*     ptr1;
-
+        
     ShutdownUnitTesting::clearAndUseCounter();
 
     SECTION( "Validate that an 'item' can be only in one Container" )

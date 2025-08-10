@@ -30,11 +30,11 @@ class MapItem : public KeyedItem
 {
 protected:
     /// Magic values for balance status
-    enum Balance_T
+    enum Balance_T : int8_t
     {
-        eLEFT_  = -1,
-        eEVEN_  = 0,
-        eRIGHT_ = 1
+        eLEFT_  = -1,  //!< Left child is deeper than right child
+        eEVEN_  = 0,   //!< Left and right children are the same depth
+        eRIGHT_ = 1    //!< Right child is deeper than left child
     };
 
 protected:

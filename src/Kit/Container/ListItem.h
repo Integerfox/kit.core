@@ -33,7 +33,8 @@ protected:
         itself should ever use this constructor -->not intended for Items in a
         Map
      */
-    ListItem( const char* /* ignoreThisParameter_usedToCreateAUniqueConstructor */ ) noexcept {}
+    ListItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
+        : Item( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}
 
 public:
     /// The link field.
@@ -56,7 +57,8 @@ protected:
         itself should ever use this constructor -->not intended for Items in a
         Map
      */
-    ExtendedListItem( const char* /* ignoreThisParameter_usedToCreateAUniqueConstructor */ ) noexcept {}
+    ExtendedListItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
+        : ListItem( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}
 
 public:
     /// The previous link field.

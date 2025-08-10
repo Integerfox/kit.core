@@ -196,13 +196,13 @@ public:  ///@name Operations on the Map itself
 protected:  ///@name Prevent the container from being copied
     ///@{
     /// Prevent access to the copy constructor -->Containers can not be copied!
-    Map<ITEM>( const Map<ITEM>& m ) = delete;
+    Map( const Map<ITEM>& m ) = delete;
 
     /// Prevent access to the assignment operator -->Containers can not be copied!
     Map<ITEM>& operator=( const Map<ITEM>& m ) = delete;
 
     /// Prevent access to the move constructor -->Containers can not be implicitly moved!
-    Map<ITEM>( Map<ITEM>&& m ) = delete;
+    Map( Map<ITEM>&& m ) = delete;
 
     /// Prevent access to the move assignment operator -->Containers can not be implicitly moved!
     Map<ITEM>& operator=( Map<ITEM>&& m ) = delete;

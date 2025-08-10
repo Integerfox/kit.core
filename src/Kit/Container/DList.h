@@ -136,13 +136,13 @@ public:
 
 protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
-    DList<ITEM>( const DList<ITEM>& m ) = delete;
+    DList( const DList<ITEM>& m ) = delete;
 
     /// Prevent access to the assignment operator -->Containers can not be copied!
     DList<ITEM>& operator=( const DList<ITEM>& m ) = delete;
 
     /// Prevent access to the move constructor -->Containers can not be implicitly moved!
-    DList<ITEM>( DList<ITEM>&& m ) = delete;
+    DList( DList<ITEM>&& m ) = delete;
 
     /// Prevent access to the move assignment operator -->Containers can not be implicitly moved!
     DList<ITEM>& operator=( DList<ITEM>&& m ) = delete;

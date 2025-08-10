@@ -26,7 +26,7 @@ namespace Container {
 
     NOTE: Keyed Items CAN be used with SList or DList containers
  */
-class KeyedItem: public ExtendedListItem
+class KeyedItem : public ExtendedListItem
 {
 protected:
     /// Constructor
@@ -37,14 +37,15 @@ protected:
         itself should ever use this constructor -->not intended for Items in a
         Map
      */
-    KeyedItem( const char* /* ignoreThisParameter_usedToCreateAUniqueConstructor */ ) noexcept {}
+    KeyedItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
+        : ExtendedListItem( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}
 
 
 public:
-    /// This method returns a reference to the Item's Key instance. 
+    /// This method returns a reference to the Item's Key instance.
     virtual const Key& getKey() const noexcept = 0;
 };
 
-}       // end namespaces
-} 
+}  // end namespaces
+}
 #endif  // end header latch
