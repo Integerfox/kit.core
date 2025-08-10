@@ -21,14 +21,14 @@ namespace Container {
 
 /** This template class implements a Ring Buffer.
 
-    A Ring Buffer instance IS ISR/Thread safe when using a SINGLE Producer and
+    A Ring Buffer instance IS ISR/Thread safe WHEN using a SINGLE Producer and
     SINGLE consumer of the buffer.  See the RingBufferBase class for additional
     details.
 
-    There is a set of methods that allow the application direct memory access,
-    for a subset of the data, to the Ring Buffer data AS A LINEAR BUFFER. At any
-    given time the size of the linear buffer is restricted to the amount of data
-    that can be accessed without 'wrapping' the ring buffer memory space.  The
+    There is a set of methods that allow the application direct memory access -
+    AS A LINEAR BUFFER - to a subset of the ring buffer's data. At any given
+    time the size of the linear buffer is restricted to the amount of data that
+    can be accessed without 'wrapping' the ring buffer memory space.  The
     intended use case for these methods is for bulk copy operations (e.g populating
     a FIFO or a DMA buffer).
         peekNextRemoveItems()
@@ -154,11 +154,17 @@ protected:
     ITEM m_ringBufferMemory[N];
 
 protected:
-    /// Prevent access to the copy constructor -->Ring Buffer can not be copied!
-    RingBuffer( const RingBuffer<ITEM, N>& m );
+    /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
+    RingBuffer( const RingBuffer<ITEM, N>& m ) = delete;
 
-    /// Prevent access to the assignment operator -->Ring Buffer can not be copied!
-    const RingBuffer<ITEM, N>& operator=( const RingBuffer<ITEM, N>& m );
+    /// Prevent access to the assignment operator -->Ring Buffers can not be copied!
+    RingBuffer<ITEM, N>& operator=( const RingBuffer<ITEM, N>& m ) = delete;
+
+    /// Prevent access to the move constructor -->Ring Buffers can not be implicitly moved!
+    RingBuffer( RingBuffer<ITEM, N>&& m ) = delete;
+
+    /// Prevent access to the move assignment operator -->Ring Buffers can not be implicitly moved!
+    RingBuffer<ITEM, N>& operator=( RingBuffer<ITEM, N>&& m ) = delete;
 };
 
 }  // end namespaces

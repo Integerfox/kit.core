@@ -21,6 +21,10 @@ namespace Container {
 /** This template class implements an Map using an AVL Binary tree
     (i.e. a sorted list with fast searches, inserts, and deletes).
 
+    NOTE: The MAP does not allow entries with duplicate key value (i.e. the
+          insert() method will fail when attempting to add an item with a
+          duplicate key value as existing item in the MAP).
+
     Template ARGS:
         ITEM    - Data type of the object stored in the Map.  'ITEM' must
                   be a sub-class of the Cpl::Container::MapItem base

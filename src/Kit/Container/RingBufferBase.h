@@ -211,15 +211,16 @@ protected:
     {
         KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
 
-        if ( isEmpty() )
+        // Snapshot of ring buffer's indexes
+        unsigned readIdx  = m_readIdx;
+        unsigned writeIdx = m_writeIdx;
+
+        // Check for empty
+        if ( readIdx == writeIdx )
         {
             dstNumFlatElements = 0;
             return nullptr;
         }
-
-        // Snapshot of ring buffer's indexes
-        unsigned readIdx  = m_readIdx;
-        unsigned writeIdx = m_writeIdx;
 
         // Number of elements that can be removed without wrapping around the memory buffer
         unsigned currentElems = ( writeIdx - readIdx + m_elements ) % m_elements;
@@ -260,15 +261,16 @@ protected:
      */
     void* peekNextAddItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
     {
-        if ( isFull() )
+        // Snapshot of ring buffer's indexes
+        unsigned readIdx  = m_readIdx;
+        unsigned writeIdx = m_writeIdx;
+
+        // Check for full
+        if ( ( ( writeIdx + 1 ) % m_elements ) == readIdx )
         {
             dstNumFlatElements = 0;
             return nullptr;
         }
-
-        // Snapshot of ring buffer's indexes
-        unsigned readIdx  = m_readIdx;
-        unsigned writeIdx = m_writeIdx;
 
         // Number of elements that can be added without wrapping around the memory buffer
         unsigned currentElems    = ( writeIdx - readIdx + m_elements ) % m_elements;
@@ -278,7 +280,7 @@ protected:
         {
             dstNumFlatElements = totalAvailElems;
         }
-        
+
         // Get a pointer to next 'available' address to add an element
         uint8_t* srcPtr = ( (uint8_t*)srcRingBufMemory ) + ( writeIdx * elemSize );
         return srcPtr;
@@ -317,6 +319,19 @@ protected:
 
     /// Maximum number of element in the 'ring memory
     const unsigned m_elements;
+
+protected:
+    /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
+    RingBufferBase( const RingBufferBase& m ) = delete;
+
+    /// Prevent access to the assignment operator -->Ring Buffers can not be copied!
+    RingBufferBase& operator=( const RingBufferBase& m ) = delete;
+
+    /// Prevent access to the move constructor -->Ring Buffers can not be implicitly moved!
+    RingBufferBase( RingBufferBase&& m ) = delete;
+
+    /// Prevent access to the move assignment operator -->Ring Buffers can not be implicitly moved!
+    RingBufferBase& operator=( RingBufferBase&& m ) = delete;
 };
 
 
