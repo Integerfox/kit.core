@@ -17,4 +17,4 @@
 #include "Kit/System/Win32/mappings_.h"
 
 // strapi mapping
-#include "Kit/Text/_mappings/_msvc/strapi.h"
+//#include "Kit/Text/_mappings/_msvc/strapi.h"
