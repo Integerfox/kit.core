@@ -63,8 +63,7 @@ public:
         // intentially DO NOTHING
     }
 
-public:  ///@name Operations to manage items in the Map
-    ///@{
+public: 
     /** Inserts an item into the tree.  If the node is successfully inserted,
         then the method return true.  If the tree already contains a node
         with the same key, then the method returns false.
@@ -166,11 +165,9 @@ public:  ///@name Operations to manage items in the Map
         }
         return nullptr;
     }
-    ///@}
 
 
-public:  ///@name Operations on the Map itself
-    ///@{
+public: 
     /// Moves the content of the this Map to the specified Map.
     void move( Map<ITEM>& dst )
     {
@@ -194,11 +191,9 @@ public:  ///@name Operations on the Map itself
             ;
         }
     }
-    ///@}
 
 
-protected:  ///@name Prevent the container from being copied
-    ///@{
+protected: 
     /// Prevent access to the copy constructor -->Containers can not be copied!
     Map( const Map<ITEM>& m ) = delete;
 
@@ -210,7 +205,6 @@ protected:  ///@name Prevent the container from being copied
 
     /// Prevent access to the move assignment operator -->Containers can not be implicitly moved!
     Map<ITEM>& operator=( Map<ITEM>&& m ) = delete;
-    ///@}
 };
 
 
