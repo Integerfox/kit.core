@@ -20,7 +20,7 @@ def standardize_dir_sep( pathinfo, os_sep=os.sep  ):
     return pathinfo.replace( '/', os_sep).replace( '\\', os_sep )
 
 def standardize_whole_path( pathinfo, os_sep=os.sep ):
-    # when the path includes a drive latter, force the driver letter to upper case
+    # when the path includes a drive letter, force the drive letter to upper case
     if pathinfo[1] == ':':
         pathinfo = pathinfo[:2].upper() + pathinfo[2:]
     return standardize_dir_sep( pathinfo, os_sep )
