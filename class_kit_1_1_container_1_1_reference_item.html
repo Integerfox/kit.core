@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 15-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 20-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -56,12 +56,12 @@ $(function() {
 <p>This template class defines wrapper class - that is makes a reference 'listable'.  
  <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</a> ITEMTYPE&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;class REFITEM, class ITEMTYPE&gt;<br />
 class Kit::Container::ReferenceItem&lt; REFITEM, ITEMTYPE &gt;</div><p>This template class defines wrapper class - that is makes a reference 'listable'. </p>
 <p>This class is useful when the Application needs to put a single entity into multiple containers.</p>
-<p>Template Arguments: REFITEM - The type of the Reference being wrapped. ITEMTYPE - The Item/Container type, e.g. <a class="el" href="class_kit_1_1_container_1_1_item.html" title="This class is used by the Container classes to implement a various types of singly linked containers.">Item</a>, <a class="el" href="class_kit_1_1_container_1_1_extended_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers.">ExtendedItem</a>, MapItem, etc. </p>
+<p>Template Arguments: REFITEM - The type of the Reference being wrapped. ITEMTYPE - The Item/Container type, e.g. <a class="el" href="class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers.">ListItem</a>, <a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers.">ExtendedListItem</a>, <a class="el" href="class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ...">MapItem</a>, etc. </p>
 </div>
-<p><code>#include &lt;<a class="el" href="_item_8h_source.html">Item.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_list_item_8h_source.html">ListItem.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Container::ReferenceItem&lt; REFITEM, ITEMTYPE &gt;:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -79,41 +79,41 @@ class Kit::Container::ReferenceItem&lt; REFITEM, ITEMTYPE &gt;</div><p>This temp
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a99c776244cd051adf987621abfa93012" id="r_a99c776244cd051adf987621abfa93012"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99c776244cd051adf987621abfa93012">ReferenceItem</a> (<a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a> &amp;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">item</a>)</td></tr>
-<tr class="memdesc:a99c776244cd051adf987621abfa93012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:a99c776244cd051adf987621abfa93012"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae493ed740cc3d77d09f385beb33ce395" id="r_ae493ed740cc3d77d09f385beb33ce395"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae493ed740cc3d77d09f385beb33ce395">ReferenceItem</a> (<a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a> &amp;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">item</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">char</a> *<a class="el" href="class_kit_1_1_container_1_1_s_list.html">ignoreThisParameter_usedToCreateAUniqueConstructor</a>)</td></tr>
-<tr class="memdesc:ae493ed740cc3d77d09f385beb33ce395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor used ONLY with the child class MapItem: --&gt;special constructor to allow a Map to be statically allocated.  <br /></td></tr>
-<tr class="separator:ae493ed740cc3d77d09f385beb33ce395"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a574616e62ae6f8c14566895e7b7942d8" id="r_a574616e62ae6f8c14566895e7b7942d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a574616e62ae6f8c14566895e7b7942d8">ReferenceItem</a> (REFITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a574616e62ae6f8c14566895e7b7942d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a574616e62ae6f8c14566895e7b7942d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d621e27c90f4c76022cf727d046102" id="r_ae9d621e27c90f4c76022cf727d046102"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9d621e27c90f4c76022cf727d046102">ReferenceItem</a> (REFITEM &amp;item, const char *ignoreThisParameter_usedToCreateAUniqueConstructor) noexcept</td></tr>
+<tr class="memdesc:ae9d621e27c90f4c76022cf727d046102"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor used ONLY with the child class <a class="el" href="class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ...">MapItem</a>: --&gt;special constructor to allow a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> to be statically allocated.  <br /></td></tr>
+<tr class="separator:ae9d621e27c90f4c76022cf727d046102"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:af81855dfc75cfca0a822c27a534b917c" id="r_af81855dfc75cfca0a822c27a534b917c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af81855dfc75cfca0a822c27a534b917c">m_reference</a></td></tr>
+<tr class="memitem:af81855dfc75cfca0a822c27a534b917c" id="r_af81855dfc75cfca0a822c27a534b917c"><td class="memItemLeft" align="right" valign="top">REFITEM &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af81855dfc75cfca0a822c27a534b917c">m_reference</a></td></tr>
 <tr class="memdesc:af81855dfc75cfca0a822c27a534b917c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the item that is being 'containerized'.  <br /></td></tr>
 <tr class="separator:af81855dfc75cfca0a822c27a534b917c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a99c776244cd051adf987621abfa93012" name="a99c776244cd051adf987621abfa93012"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99c776244cd051adf987621abfa93012">&#9670;&#160;</a></span>ReferenceItem() <span class="overload">[1/2]</span></h2>
+<a id="a574616e62ae6f8c14566895e7b7942d8" name="a574616e62ae6f8c14566895e7b7942d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a574616e62ae6f8c14566895e7b7942d8">&#9670;&#160;</a></span>ReferenceItem() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a> , <a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</a> ITEMTYPE &gt; </div>
+template&lt;class REFITEM , class ITEMTYPE &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_reference_item.html">Kit::Container::ReferenceItem</a>&lt; <a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a>, ITEMTYPE &gt;::ReferenceItem </td>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_reference_item.html">Kit::Container::ReferenceItem</a>&lt; REFITEM, ITEMTYPE &gt;::ReferenceItem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">REFITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -122,37 +122,37 @@ template&lt;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</
 
 </div>
 </div>
-<a id="ae493ed740cc3d77d09f385beb33ce395" name="ae493ed740cc3d77d09f385beb33ce395"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae493ed740cc3d77d09f385beb33ce395">&#9670;&#160;</a></span>ReferenceItem() <span class="overload">[2/2]</span></h2>
+<a id="ae9d621e27c90f4c76022cf727d046102" name="ae9d621e27c90f4c76022cf727d046102"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9d621e27c90f4c76022cf727d046102">&#9670;&#160;</a></span>ReferenceItem() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a> , <a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</a> ITEMTYPE &gt; </div>
+template&lt;class REFITEM , class ITEMTYPE &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_reference_item.html">Kit::Container::ReferenceItem</a>&lt; <a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a>, ITEMTYPE &gt;::ReferenceItem </td>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_reference_item.html">Kit::Container::ReferenceItem</a>&lt; REFITEM, ITEMTYPE &gt;::ReferenceItem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em>, </span></td>
+          <td class="paramtype">REFITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">char</a> *</td>          <td class="paramname"><span class="paramname"><em>ignoreThisParameter_usedToCreateAUniqueConstructor</em></span>&#160;)</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>ignoreThisParameter_usedToCreateAUniqueConstructor</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor used ONLY with the child class MapItem: --&gt;special constructor to allow a Map to be statically allocated. </p>
-<p>Only the Map itself should ever use this constructor --&gt;not intended for Items in a Map </p>
+<p>Constructor used ONLY with the child class <a class="el" href="class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ...">MapItem</a>: --&gt;special constructor to allow a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> to be statically allocated. </p>
+<p>Only the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> itself should ever use this constructor --&gt;not intended for Items in a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> </p>
 
 </div>
 </div>
@@ -163,10 +163,10 @@ template&lt;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a> , <a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</a> ITEMTYPE &gt; </div>
+template&lt;class REFITEM , class ITEMTYPE &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a>&amp; <a class="el" href="class_kit_1_1_container_1_1_reference_item.html">Kit::Container::ReferenceItem</a>&lt; <a class="el" href="class_kit_1_1_container_1_1_s_list.html">REFITEM</a>, ITEMTYPE &gt;::m_reference</td>
+          <td class="memname">REFITEM&amp; <a class="el" href="class_kit_1_1_container_1_1_reference_item.html">Kit::Container::ReferenceItem</a>&lt; REFITEM, ITEMTYPE &gt;::m_reference</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -176,12 +176,12 @@ template&lt;<a class="el" href="class_kit_1_1_container_1_1_s_list.html">class</
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Kit/Container/<a class="el" href="_item_8h_source.html">Item.h</a></li>
+<li>Kit/Container/<a class="el" href="_list_item_8h_source.html">ListItem.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 2 2025 19:25:58 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Aug 10 2025 21:19:25 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

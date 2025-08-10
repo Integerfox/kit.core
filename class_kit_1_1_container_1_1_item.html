@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 15-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 20-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -55,11 +55,14 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This class is used by the <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> classes to implement a various types of singly linked containers.  
+<p>This class is used by the Intrusive <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> classes to enforce the semantic and item/element can be in at most ONE container at any given time.  
  <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class is used by the <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> classes to implement a various types of singly linked containers. </p>
-<p>Note: Client code, i.e. application code that needs to define a 'containerized' class only needs to inherit from this interface. The Client code SHOULD/SHALL NOT access any of its members or methods! These members/methods are intended to ONLY be accessible by the container classes. </p>
+<div class="textblock"><p>This class is used by the Intrusive <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> classes to enforce the semantic and item/element can be in at most ONE container at any given time. </p>
+<p>Intrusive containers are 'limitless' containers in that can hold any number of elements because each element contains the 'container- linkage' fields, i.e. no dynamic memory required to added an element to the container.</p>
+<p>NOTE: Enforcing the above semantics adds RAM overhead to a <a class="el" href="class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be...">Item</a> class. <br  />
+ However, debugging a logic error where a single item is inserted into multiple containers at the same time IS EXTREMELY DIFFICULT to debug, i.e. the extra overhead is worth it.</p>
+<p>NOTE: Client code, i.e. application code that needs to define a 'containerized' class only needs to inherit from this interface. The Client code SHOULD/SHALL NOT access any of its members or methods! These members/methods are intended to ONLY be accessible by the container classes. </p>
 </div>
 <p><code>#include &lt;<a class="el" href="_item_8h_source.html">Item.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
@@ -67,48 +70,45 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_item__inherit__graph.svg" width="222" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_item__inherit__graph.svg" width="390" height="344"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae02660611819d7879e6229b35f7417c3" id="r_ae02660611819d7879e6229b35f7417c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae02660611819d7879e6229b35f7417c3">insert_</a> (<a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> *<a class="el" href="class_kit_1_1_container_1_1_s_list.html">newContainerPtr</a>)</td></tr>
-<tr class="memdesc:ae02660611819d7879e6229b35f7417c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to trap when inserting an item in multiple containers.  <br /></td></tr>
-<tr class="separator:ae02660611819d7879e6229b35f7417c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f41d2effb8b5b6b47b38d25d37280b3" id="r_a1f41d2effb8b5b6b47b38d25d37280b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f41d2effb8b5b6b47b38d25d37280b3">isInContainer_</a> (<a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> *<a class="el" href="class_kit_1_1_container_1_1_s_list.html">containerPtr</a>) <a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">noexcept</a></td></tr>
+<tr class="memitem:a629af4bb1ce1c34f7d72437e55eb69df" id="r_a629af4bb1ce1c34f7d72437e55eb69df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a629af4bb1ce1c34f7d72437e55eb69df">insert_</a> (void *newContainerPtr) noexcept</td></tr>
+<tr class="memdesc:a629af4bb1ce1c34f7d72437e55eb69df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to trap when inserting an item in multiple containers.  <br /></td></tr>
+<tr class="separator:a629af4bb1ce1c34f7d72437e55eb69df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f41d2effb8b5b6b47b38d25d37280b3" id="r_a1f41d2effb8b5b6b47b38d25d37280b3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f41d2effb8b5b6b47b38d25d37280b3">isInContainer_</a> (const void *containerPtr) const noexcept</td></tr>
 <tr class="memdesc:a1f41d2effb8b5b6b47b38d25d37280b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns 'true' if the instance is in the specified container.  <br /></td></tr>
 <tr class="separator:a1f41d2effb8b5b6b47b38d25d37280b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af98051b725c1c0dc9008eacda88a9368" id="r_af98051b725c1c0dc9008eacda88a9368"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af98051b725c1c0dc9008eacda88a9368">validateNextOkay_</a> (<a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> *<a class="el" href="class_kit_1_1_container_1_1_s_list.html">containerPtr</a>) <a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">noexcept</a></td></tr>
+<tr class="memitem:af98051b725c1c0dc9008eacda88a9368" id="r_af98051b725c1c0dc9008eacda88a9368"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af98051b725c1c0dc9008eacda88a9368">validateNextOkay_</a> (const void *containerPtr) const noexcept</td></tr>
 <tr class="memdesc:af98051b725c1c0dc9008eacda88a9368"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the item is in the list for use when the next() method is called.  <br /></td></tr>
 <tr class="separator:af98051b725c1c0dc9008eacda88a9368"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae4e75698e6e4d9ee6ecd2c53be52815b" id="r_ae4e75698e6e4d9ee6ecd2c53be52815b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">static</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4e75698e6e4d9ee6ecd2c53be52815b">remove_</a> (<a class="el" href="class_kit_1_1_container_1_1_item.html">Item</a> *<a class="el" href="class_kit_1_1_container_1_1_s_list.html">itemPtr</a>) <a class="el" href="class_kit_1_1_container_1_1_s_list.html">noexcept</a></td></tr>
+<tr class="memitem:ae4e75698e6e4d9ee6ecd2c53be52815b" id="r_ae4e75698e6e4d9ee6ecd2c53be52815b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4e75698e6e4d9ee6ecd2c53be52815b">remove_</a> (<a class="el" href="class_kit_1_1_container_1_1_item.html">Item</a> *itemPtr) noexcept</td></tr>
 <tr class="memdesc:ae4e75698e6e4d9ee6ecd2c53be52815b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to do the proper 'clean-up' for the multiple-containers-error-trap when removing an item from a container.  <br /></td></tr>
 <tr class="separator:ae4e75698e6e4d9ee6ecd2c53be52815b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a5d9688cfa2ae733338ac1147f0ff2ca0" id="r_a5d9688cfa2ae733338ac1147f0ff2ca0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d9688cfa2ae733338ac1147f0ff2ca0">m_nextPtr_</a></td></tr>
-<tr class="memdesc:a5d9688cfa2ae733338ac1147f0ff2ca0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The link field.  <br /></td></tr>
-<tr class="separator:a5d9688cfa2ae733338ac1147f0ff2ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47813c3c6e3e515d21236c39f0345ab1" id="r_a47813c3c6e3e515d21236c39f0345ab1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47813c3c6e3e515d21236c39f0345ab1">m_inListPtr_</a></td></tr>
+<tr class="memitem:a47813c3c6e3e515d21236c39f0345ab1" id="r_a47813c3c6e3e515d21236c39f0345ab1"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47813c3c6e3e515d21236c39f0345ab1">m_inListPtr_</a></td></tr>
 <tr class="memdesc:a47813c3c6e3e515d21236c39f0345ab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug field.  <br /></td></tr>
 <tr class="separator:a47813c3c6e3e515d21236c39f0345ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:aea29f85bf68102fa0857304d0e2f6c12" id="r_aea29f85bf68102fa0857304d0e2f6c12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea29f85bf68102fa0857304d0e2f6c12">Item</a> ()</td></tr>
-<tr class="memdesc:aea29f85bf68102fa0857304d0e2f6c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:aea29f85bf68102fa0857304d0e2f6c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2032873d623b9dfb23c695c151d0999" id="r_ab2032873d623b9dfb23c695c151d0999"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2032873d623b9dfb23c695c151d0999">Item</a> (<a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">char</a> *)</td></tr>
-<tr class="memdesc:ab2032873d623b9dfb23c695c151d0999"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor used ONLY with the child class MapItem: --&gt;special constructor to allow a Map to be statically allocated.  <br /></td></tr>
-<tr class="separator:ab2032873d623b9dfb23c695c151d0999"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0651eeca42c71226d1aae9df521bc260" id="r_a0651eeca42c71226d1aae9df521bc260"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0651eeca42c71226d1aae9df521bc260">Item</a> () noexcept</td></tr>
+<tr class="memdesc:a0651eeca42c71226d1aae9df521bc260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a0651eeca42c71226d1aae9df521bc260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbdb631d3373ecd8d950a37c1f60204d" id="r_acbdb631d3373ecd8d950a37c1f60204d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbdb631d3373ecd8d950a37c1f60204d">Item</a> (const char *) noexcept</td></tr>
+<tr class="memdesc:acbdb631d3373ecd8d950a37c1f60204d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor used ONLY with the child class <a class="el" href="class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ...">MapItem</a>: --&gt;special constructor to allow a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> to be statically allocated.  <br /></td></tr>
+<tr class="separator:acbdb631d3373ecd8d950a37c1f60204d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aea29f85bf68102fa0857304d0e2f6c12" name="aea29f85bf68102fa0857304d0e2f6c12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea29f85bf68102fa0857304d0e2f6c12">&#9670;&#160;</a></span>Item() <span class="overload">[1/2]</span></h2>
+<a id="a0651eeca42c71226d1aae9df521bc260" name="a0651eeca42c71226d1aae9df521bc260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0651eeca42c71226d1aae9df521bc260">&#9670;&#160;</a></span>Item() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,7 +125,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -134,8 +134,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab2032873d623b9dfb23c695c151d0999" name="ab2032873d623b9dfb23c695c151d0999"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2032873d623b9dfb23c695c151d0999">&#9670;&#160;</a></span>Item() <span class="overload">[2/2]</span></h2>
+<a id="acbdb631d3373ecd8d950a37c1f60204d" name="acbdb631d3373ecd8d950a37c1f60204d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbdb631d3373ecd8d950a37c1f60204d">&#9670;&#160;</a></span>Item() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -146,40 +146,48 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Kit::Container::Item::Item </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">char</a> *</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor used ONLY with the child class MapItem: --&gt;special constructor to allow a Map to be statically allocated. </p>
-<p>Only the Map itself should ever use this constructor --&gt;not intended for Items in a Map </p>
+<p>Constructor used ONLY with the child class <a class="el" href="class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ...">MapItem</a>: --&gt;special constructor to allow a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> to be statically allocated. </p>
+<p>Only the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> itself should ever use this constructor --&gt;not intended for Items in a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae02660611819d7879e6229b35f7417c3" name="ae02660611819d7879e6229b35f7417c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae02660611819d7879e6229b35f7417c3">&#9670;&#160;</a></span>insert_()</h2>
+<a id="a629af4bb1ce1c34f7d72437e55eb69df" name="a629af4bb1ce1c34f7d72437e55eb69df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a629af4bb1ce1c34f7d72437e55eb69df">&#9670;&#160;</a></span>insert_()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">bool</a> Kit::Container::Item::insert_ </td>
+          <td class="memname">bool Kit::Container::Item::insert_ </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> *</td>          <td class="paramname"><span class="paramname"><em>newContainerPtr</em></span></td><td>)</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>newContainerPtr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Helper method to trap when inserting an item in multiple containers. </p>
-<p>A fatal error will be generated if '<a class="el" href="class_kit_1_1_container_1_1_item.html" title="This class is used by the Container classes to implement a various types of singly linked containers.">Item</a>' is attempted to be put into more than on container.</p>
+<p>A fatal error will be generated if '<a class="el" href="class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be...">Item</a>' is attempted to be put into more than on container.</p>
 <p>Notes: o The method returns false when there is error - which is ONLY usefully during unittesting when the invoking a FatalError does NOT terminate the application. </p>
 
 </div>
@@ -194,9 +202,9 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">bool</a> Kit::Container::Item::isInContainer_ </td>
+          <td class="memname">bool Kit::Container::Item::isInContainer_ </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> *</td>          <td class="paramname"><span class="paramname"><em>containerPtr</em></span></td><td>)</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>containerPtr</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -221,7 +229,7 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">static</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> Kit::Container::Item::remove_ </td>
+          <td class="memname">static void Kit::Container::Item::remove_ </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_item.html">Item</a> *</td>          <td class="paramname"><span class="paramname"><em>itemPtr</em></span></td><td>)</td>
           <td></td>
@@ -248,9 +256,9 @@ Protected Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">bool</a> Kit::Container::Item::validateNextOkay_ </td>
+          <td class="memname">bool Kit::Container::Item::validateNextOkay_ </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">const</a> <a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a> *</td>          <td class="paramname"><span class="paramname"><em>containerPtr</em></span></td><td>)</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>containerPtr</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -275,7 +283,7 @@ Protected Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a>* Kit::Container::Item::m_inListPtr_</td>
+          <td class="memname">void* Kit::Container::Item::m_inListPtr_</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -285,29 +293,13 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d9688cfa2ae733338ac1147f0ff2ca0" name="a5d9688cfa2ae733338ac1147f0ff2ca0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d9688cfa2ae733338ac1147f0ff2ca0">&#9670;&#160;</a></span>m_nextPtr_</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">void</a>* Kit::Container::Item::m_nextPtr_</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The link field. </p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Kit/Container/<a class="el" href="_item_8h_source.html">Item.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 2 2025 19:25:58 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Aug 10 2025 21:19:25 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
