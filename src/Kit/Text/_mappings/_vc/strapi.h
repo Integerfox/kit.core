@@ -8,12 +8,11 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file */
 /** @file
 
-    This file provides the mapping of the 'strapi' to Microsoft's VC12 C/C++ compiler.
+    This file provides the mapping of the 'strapi' to Microsoft's VC C/C++ compiler.
 
-    The VC12 compiler provides all of the strapi - just with the 'wrong names'
+    The VC compiler provides all of the strapi - just with the 'wrong names'
 
  */
 
