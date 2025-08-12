@@ -27,7 +27,7 @@ TEST_CASE( "Strip" )
 
     ShutdownUnitTesting::clearAndUseCounter();
 
-    SECTION( "Strip::space" )
+    SECTION( "space" )
     {
         const char* input = "  hello  world, \t bobs your uncle ";
         const char* ptr;
@@ -44,9 +44,13 @@ TEST_CASE( "Strip" )
         REQUIRE( strcmp( ptr, "uncle " ) == 0 );
         ptr = Strip::space( Strip::notSpace( ptr ) );
         REQUIRE( strcmp( ptr, "" ) == 0 );
+
+        REQUIRE( Strip::space( nullptr ) == nullptr );
+        REQUIRE( Strip::space( Strip::notSpace( nullptr ) ) == nullptr );
+
     }
 
-    SECTION( "Strip::chars" )
+    SECTION( "chars" )
     {
         const char* input = "::hello,world,\t bobs your . uncle, ";
         const char* ptr;
@@ -63,6 +67,14 @@ TEST_CASE( "Strip" )
         REQUIRE( strcmp( ptr, " " ) == 0 );
         ptr = Strip::chars( Strip::notChars( ptr, ":.," ), ":.," );
         REQUIRE( strcmp( ptr, "" ) == 0 );
+
+        REQUIRE( Strip::chars( nullptr, ":.," ) == nullptr );
+        ptr = Strip::chars( input, nullptr );
+        REQUIRE( strcmp( ptr, input ) == 0 );
+        REQUIRE( Strip::notChars( nullptr, ":.," ) == nullptr );
+        ptr = Strip::notChars( input, nullptr );
+        REQUIRE( strcmp( ptr, input ) == 0 );
+
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

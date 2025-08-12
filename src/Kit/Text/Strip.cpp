@@ -21,7 +21,7 @@ namespace Text {
 ////////////////
 const char* Strip::space( const char *s )
 {
-    if ( !s )
+    if ( s == nullptr )
     {
         return nullptr;
     }
@@ -36,7 +36,7 @@ const char* Strip::space( const char *s )
 
 const char* Strip::notSpace( const char *s )
 {
-    if ( !s )
+    if ( s == nullptr )
     {
         return nullptr;
     }
@@ -51,7 +51,7 @@ const char* Strip::notSpace( const char *s )
 
 const char* Strip::trailingSpace( const char *s )
 {
-    if ( !s )
+    if ( s == nullptr )
     {
         return nullptr;
     }
@@ -75,7 +75,7 @@ const char* Strip::trailingSpace( const char *s )
 
 void Strip::removeTrailingSpace( char* s )
 {
-    if ( !s )
+    if ( s == nullptr )
     {
         return;
     }
@@ -95,12 +95,12 @@ void Strip::removeTrailingSpace( char* s )
 //////////////////////	
 const char* Strip::chars( const char *s, const char* charsSet )
 {
-    if ( !s )
+    if ( s == nullptr )
     {
         return nullptr;
     }
 
-    if ( !charsSet )
+    if ( charsSet == nullptr )
     {
         return s;
     }
@@ -115,12 +115,12 @@ const char* Strip::chars( const char *s, const char* charsSet )
 
 const char* Strip::notChars( const char* s, const char* charsSet )
 {
-    if ( !s )
+    if ( s == nullptr )
     {
         return nullptr;
     }
 
-    if ( !charsSet )
+    if ( charsSet == nullptr )
     {
         return s;
     }
@@ -135,12 +135,12 @@ const char* Strip::notChars( const char* s, const char* charsSet )
 
 const char* Strip::trailingChars( const char *s, const char* charsSet )
 {
-    if ( !s )
+    if ( s == nullptr )
     {
         return nullptr;
     }
 
-    if ( !charsSet )
+    if ( charsSet == nullptr )
     {
         return s;
     }
@@ -164,7 +164,7 @@ const char* Strip::trailingChars( const char *s, const char* charsSet )
 
 void Strip::removeTrailingChars( char* s, const char* charsSet )
 {
-    if ( !s || !charsSet )
+    if ( s == nullptr || charsSet == nullptr )
     {
         return;
     }
