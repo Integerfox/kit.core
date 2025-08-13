@@ -14,11 +14,9 @@
 #include <string.h>
 
 
-/// 
+///
 using namespace Kit::Text;
 using namespace Kit::System;
-
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +45,6 @@ TEST_CASE( "Strip" )
 
         REQUIRE( Strip::space( nullptr ) == nullptr );
         REQUIRE( Strip::space( Strip::notSpace( nullptr ) ) == nullptr );
-
     }
 
     SECTION( "chars" )
@@ -74,7 +71,62 @@ TEST_CASE( "Strip" )
         REQUIRE( Strip::notChars( nullptr, ":.," ) == nullptr );
         ptr = Strip::notChars( input, nullptr );
         REQUIRE( strcmp( ptr, input ) == 0 );
+    }
 
+    SECTION( "trailing-space" )
+    {
+        char        input[] = " hello  world   x\t";
+        const char* ptr;
+        ptr = Strip::trailingSpace( input );
+        REQUIRE( *ptr == 'x' );
+        Strip::removeTrailingSpace( input );
+        REQUIRE( strcmp( input, " hello  world   x" ) == 0 );
+
+        input[strlen( input ) - 1] = '\0';  // Remove the last character
+        ptr                        = Strip::trailingSpace( input );
+        REQUIRE( *ptr == 'd' );
+        Strip::removeTrailingSpace( input );
+        REQUIRE( strcmp( input, " hello  world" ) == 0 );
+
+        REQUIRE( Strip::trailingSpace( nullptr ) == nullptr );
+        Strip::removeTrailingSpace( nullptr );
+        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
+
+        const char* input2 = "    ";
+        ptr = Strip::trailingSpace( input2 );
+        REQUIRE( ptr == input2 );
+        input2 = "";
+        ptr = Strip::trailingSpace( "" );
+        REQUIRE( ptr == input2 );
+    }
+
+    SECTION( "trailing-char" )
+    {
+        char        input[] = " hello  world ;.\t.";
+        const char* ptr;
+        ptr = Strip::trailingChars( input, ";." );
+        REQUIRE( *ptr == '\t' );
+        Strip::removeTrailingChars( input, ";." );
+        REQUIRE( strcmp( input, " hello  world ;.\t" ) == 0 );
+
+        input[strlen( input ) - 1] = '\0';  // Remove the last character
+        ptr                        = Strip::trailingChars( input, ";." );
+        REQUIRE( *ptr == ' ' );
+        Strip::removeTrailingChars( input, ";." );
+        REQUIRE( strcmp( input, " hello  world " ) == 0 );
+
+        REQUIRE( Strip::trailingChars( nullptr, ";." ) == nullptr );
+        REQUIRE( Strip::trailingChars( input, nullptr ) == nullptr );
+        Strip::removeTrailingChars( nullptr, ";." );
+        Strip::removeTrailingChars( input, nullptr );
+        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
+
+        const char* input2 = "xyz";
+        ptr = Strip::trailingChars( input2, input2 );
+        REQUIRE( ptr == input2 );
+        const char* input3 = "";
+        ptr = Strip::trailingChars( input3, input2 );
+        REQUIRE( ptr == input3 );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
