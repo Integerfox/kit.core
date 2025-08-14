@@ -91,12 +91,17 @@ TEST_CASE( "Strip" )
         REQUIRE( Strip::trailingSpace( nullptr ) == nullptr );
         Strip::removeTrailingSpace( nullptr );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
+        memcpy( input, "   ", 3 );
+        input[3] = '\0';  // Make it a null-terminated string
+        REQUIRE( *input == ' ' );
+        Strip::removeTrailingSpace( input );
+        REQUIRE( *input == '\0' );
 
         const char* input2 = "    ";
-        ptr = Strip::trailingSpace( input2 );
+        ptr                = Strip::trailingSpace( input2 );
         REQUIRE( ptr == input2 );
         input2 = "";
-        ptr = Strip::trailingSpace( "" );
+        ptr    = Strip::trailingSpace( "" );
         REQUIRE( ptr == input2 );
     }
 
@@ -116,17 +121,23 @@ TEST_CASE( "Strip" )
         REQUIRE( strcmp( input, " hello  world " ) == 0 );
 
         REQUIRE( Strip::trailingChars( nullptr, ";." ) == nullptr );
-        REQUIRE( Strip::trailingChars( input, nullptr ) == nullptr );
+        REQUIRE( Strip::trailingChars( input, nullptr ) == input );
         Strip::removeTrailingChars( nullptr, ";." );
         Strip::removeTrailingChars( input, nullptr );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 
         const char* input2 = "xyz";
-        ptr = Strip::trailingChars( input2, input2 );
+        ptr                = Strip::trailingChars( input2, input2 );
         REQUIRE( ptr == input2 );
         const char* input3 = "";
-        ptr = Strip::trailingChars( input3, input2 );
+        ptr                = Strip::trailingChars( input3, input2 );
         REQUIRE( ptr == input3 );
+
+        memcpy( input, "xyz", 3 );
+        input[3] = '\0';  // Make it a null-terminated string
+        REQUIRE( *input == 'x' );
+        Strip::removeTrailingChars( input, "zxy" );
+        REQUIRE( *input == '\0' );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

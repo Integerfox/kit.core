@@ -59,7 +59,6 @@ public:
         the specified null-terminated string.
 
         NOTES:
-
             o This method does NOT modify the original string in any way!
             o If 's' is null, then null is returned.
             o If the entire string is whitespace, a pointer to the start of
