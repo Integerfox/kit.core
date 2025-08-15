@@ -320,7 +320,7 @@ protected:
     /// Maximum number of element in the 'ring memory
     const unsigned m_elements;
 
-protected:
+private:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBufferBase( const RingBufferBase& m ) = delete;
 

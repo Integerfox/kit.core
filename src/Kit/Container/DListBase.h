@@ -21,13 +21,13 @@ namespace Container {
     which maintains the ordering imposed on it by the application.  It is
     intended to be the base class for a type-safe template class. Having
     a non-templatized base class reduces the memory footprint when an
-    application has more than one type specific DListBase_ class
+    application has more than one type specific DListBase class
  */
-class DListBase_
+class DListBase
 {
 protected:
     /// Constructor initializes head and tail pointers.
-    DListBase_() noexcept
+    DListBase() noexcept
         : m_headPtr( nullptr ), m_tailPtr( nullptr ) {}
 
     /** This is a special constructor for when the list is
@@ -45,14 +45,14 @@ protected:
         is provided.  It assumes that the pointers are already set
         zero because the list is "static". Whew!
      */
-    DListBase_( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
+    DListBase( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
     {
         // intentially DO NOTHING
     }
 
 protected:
     /// Moves the content of the this queue to the specified queue.
-    void move( DListBase_& dst ) noexcept
+    void move( DListBase& dst ) noexcept
     {
         // clear the destination list
         dst.clearTheList();
@@ -273,19 +273,19 @@ protected:
     /// Points to the last item in the list.
     ExtendedListItem* m_tailPtr;
 
-protected:
+private:
     /// Prevent access to the copy constructor -->Containers can not be copied!
-    DListBase_( const DListBase_& m ) = delete;
+    DListBase( const DListBase& m ) = delete;
 
     /// Prevent access to the assignment operator -->Containers can not be
     /// copied!
-    DListBase_& operator=( const DListBase_& m ) = delete;
+    DListBase& operator=( const DListBase& m ) = delete;
 
     /// Prevent access to the move constructor -->Containers can not be implicitly moved!
-    DListBase_( DListBase_&& m ) = delete;
+    DListBase( DListBase&& m ) = delete;
 
     /// Prevent access to the move assignment operator -->Containers can not be implicitly moved!
-    DListBase_& operator=( DListBase_&& m ) = delete;
+    DListBase& operator=( DListBase&& m ) = delete;
 };
 
 

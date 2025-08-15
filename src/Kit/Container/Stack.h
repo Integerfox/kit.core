@@ -164,7 +164,7 @@ protected:
     unsigned m_maxItems;
 
 
-protected:
+private:
     /// Prevent access to the copy constructor -->Containers can not be copied!
     Stack( const Stack& m ) = delete;
 

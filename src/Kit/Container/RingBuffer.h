@@ -153,7 +153,7 @@ protected:
     /// Memory for the Ring buffer
     ITEM m_ringBufferMemory[N];
 
-protected:
+private:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBuffer( const RingBuffer<ITEM, N>& m ) = delete;
 

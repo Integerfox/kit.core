@@ -9,17 +9,24 @@
 /** @file */
 
 #include "Kit/System/api.h"
+#include "Kit/System/Private.h"
+#include "Kit/System/PrivateStartup.h"
 #include <time.h>
 
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace System {
 
+static Mutex systemMutex_;
+static Mutex tracingMutex_;
+static Mutex tracingOutputMutex_;
+static Mutex sysList_;
 
 ////////////////////
 void initialize() noexcept
 {
-    // TODO: IMPLEMENT ME - this is a placeholder for the actual implementation
+    // Init the KIT Library sub-systems
+    StartupHook::notifyStartupClients();
 }
 
 void enableScheduling() noexcept
@@ -54,6 +61,29 @@ void suspendScheduling() noexcept
 void resumeScheduling() noexcept
 {
     // DO NOT Nothing.  See above
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+Mutex& PrivateLocks::system( void )
+{
+    return systemMutex_;
+}
+
+
+Mutex& PrivateLocks::tracing( void )
+{
+    return tracingMutex_;
+}
+
+Mutex& PrivateLocks::sysLists( void )
+{
+    return sysList_;
+}
+
+Mutex& PrivateLocks::tracingOutput( void )
+{
+    return tracingOutputMutex_;
 }
 
 }

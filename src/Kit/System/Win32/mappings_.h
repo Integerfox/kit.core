@@ -21,6 +21,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "Kit/System/FatalError.h"
+
 /// PRETTY_FUNCTION macro is non-standard
 #if defined(__GNUC__)
 /// Take advantage of GCC's pretty function symbol
@@ -43,7 +44,7 @@
 #define Kit_System_Thread_NativeHdl_T_MAP       HANDLE  
 
 /// Win32 Mapping
-#define Kit_System_Mutex_T_MAP                  CRITICAL_SECTION
+#define KitSystemMutex_T_MAP                    CRITICAL_SECTION
 
 /// Win32 Mapping
 #define Kit_System_Sema_T_MAP                   HANDLE
@@ -53,7 +54,10 @@
 
 
 /// Win32 Mapping
-#define KitSystemElapsedTime_getTimeInMilliseconds_MAP  clock
+inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
+{
+    return (uint32_t) clock();  
+}
 
 /// Win32 Mapping
 #define KIT_SYSTEM_SHELL_NULL_DEVICE_x_MAP      "NUL"
