@@ -1,5 +1,5 @@
-#ifndef Cpl_Text_btoa_h_
-#define Cpl_Text_btoa_h_
+#ifndef KIT_TEXT_TO_STRING_H_
+#define KIT_TEXT_TO_STRING_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,8 +10,17 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include <stdlib.h>
 #include <stdint.h>
+
+/** Data type of largest unsigned integer type supported by the platform.  This
+    type is 'base' used for conversions to strings.
+    Default: 32bit platform
+ */
+#ifndef KitTextToStringMaxUnsigned_T
+#define KitTextToStringMaxUnsigned_T uint32_t
+#endif
 
 ///
 namespace Kit {
@@ -21,6 +30,9 @@ namespace Text {
 /** This static class is used to convert integer values to a null terminated
     string WITHOUT using snprintf() function calls. This is for platforms/situations
     where it is not possible or undesirable (i.e. stack usage) to call snprintf.
+
+    Note: When using the template methods - do NOT use a data type larger than 
+          KitTextToStringMaxUnsigned_T.
 */
 class ToString
 {
@@ -40,7 +52,7 @@ public:
     template <typename T>
     static const char* signedInt( T num, char* dstString, size_t maxChars, char padChar = ' ' ) noexcept
     {
-        return convert_( (uint64_t)num, dstString, maxChars, 10, padChar, num < 0 );
+        return convert_( (KitTextToStringMaxUnsigned_T)num, dstString, maxChars, 10, padChar, num < 0 );
     }
 
 public:
@@ -65,7 +77,7 @@ public:
 
 protected:
     /// Helper method
-    static const char* convert_( uint64_t num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept;
+    static const char* convert_( KitTextToStringMaxUnsigned_T num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept;
 };
 
 }  // end namespaces

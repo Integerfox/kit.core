@@ -7,16 +7,18 @@
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
 /** @file */
-#include "atob.h"
-#include "strip.h"
+
+#include "StringTo.h"
+#include "String.h"
 #include "misc.h"
 #include <stdint.h>
 #include <string.h>
 #include "Cpl/System/Assert.h"
 
 
-//
-using namespace Cpl::Text;
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Text {
 
 ///////////////////
 static bool conversionOk( const char* originalString, char* endPtr, const char* validStopChars )
@@ -48,6 +50,11 @@ static bool conversionOk( const char* originalString, char* endPtr, const char* 
 
 
 ///////////////////
+    bool int8( int8_t& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept
+    {
+        
+    }
+
 bool Cpl::Text::a2i( int& convertedValue, const char* string, int base, const char* validStopChars, const char** end )
 {
     int   value  = 0;
@@ -378,3 +385,7 @@ bool Cpl::Text::parsePrecisionTimeStamp( const char* timeStampToParse, Cpl::Syst
     // If I get here, then the parse failed
     return false;
 }
+
+}  // end namespaces
+}
+//------------------------------------------------------------------------------

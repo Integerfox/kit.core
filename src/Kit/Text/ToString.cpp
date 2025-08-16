@@ -20,13 +20,25 @@
 #include "ToString.h"
 #include <string.h>
 
+#define MIN_INT_VALUE ( (KitTextToStringMaxUnsigned_T)1 << ( sizeof( KitTextToStringMaxUnsigned_T ) * 8 - 1 ) )
 
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace Text {
 
+// Compile time derived string value for MIN_INT_VALUE
+constexpr const char* GetMinValueString()
+{
+    return sizeof( KitTextToStringMaxUnsigned_T ) == 8 ? "9223372036854775808" :  // 64-bit
+               sizeof( KitTextToStringMaxUnsigned_T ) == 4 ? "2147483648"
+                                                             :  // 32-bit
+               sizeof( KitTextToStringMaxUnsigned_T ) == 2 ? "32768"
+                                                             :  // 16-bit
+               "128";                                           // 8-bit
+}
 
-const char* ToString::convert_( uint64_t num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept
+
+const char* ToString::convert_( KitTextToStringMaxUnsigned_T num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept
 {
     // Error check the base argument and null destination string
     if ( base < 2 || base > 36 || dstString == nullptr )
@@ -51,13 +63,13 @@ const char* ToString::convert_( uint64_t num, char* dstString, size_t maxChars, 
         dstString[--maxChars] = '0';
     }
 
-    // Handle special case: original number is INT64_MIN
-    if ( isNegative && num == (uint64_t)INT64_MIN )
+    // Handle special case: original number is MIN_INT_VALUE
+    if ( isNegative && num == (KitTextToStringMaxUnsigned_T)MIN_INT_VALUE )
     {
         // Note: The negative sign is added later
-        static const char* minStr = "9223372036854775808";
-        size_t             len    = strlen( minStr );
-        if ( len > (maxChars + sign) )
+        static constexpr const char* minStr = GetMinValueString();
+        size_t                       len    = strlen( minStr );
+        if ( len > ( maxChars + sign ) )
         {
             return nullptr;
         }
