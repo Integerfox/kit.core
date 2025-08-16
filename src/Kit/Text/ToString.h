@@ -41,19 +41,20 @@ namespace Text {
     value. For a right justified result, use the original pointer passed as
     'dstString'.
 
+    When attempting to convert the INT64_MIN value, the conversion will fail 
+    (i.e. return nullptr)
+
 
     THE CONVERSION SEMANTICS FOR ALL PUBLIC METHODS:
     --------------------------------------------------------------
-    - If the number of converted digits exceeds the size of 'dstString',
-      then the MOST significant digit(s) are discarded.
+    If the number of converted digits exceeds the size of 'dstString',
+    then the MOST significant digit(s) are discarded.
 
-    - When the 'number' is negative there will always be a leading minus
-      sign ('-') even if it means discarding a MOST significant digit.
+    When the 'number' is negative there will always be a leading minus
+    sign ('-') regardless of 'base' selection AND if it means discarding a 
+    MOST significant digit.
 
-    - There is no feedback if/when digits are discarded.
-
-    - When attempting to convert a int64_t and the value is equal to INT64_MIN, 
-      the conversion will fail (i.e. return nullptr)
+    There is no feedback if/when digits are discarded.
 */
 class ToString
 {
@@ -85,7 +86,7 @@ protected:
         if ( signedNum < 0 )
         {
             // For two complement math there is no positive equivalent for the 
-            // INT64_MIN value.  So we fail the conversation when 'num' == INT64_MIN
+            // INT64_MIN value.  So we fail the conversation when 'signedNum' == INT64_MIN
             if ( signedNum == INT64_MIN )
             {
                 return 0;
