@@ -53,7 +53,10 @@ public:
         The template argument 'T' must be a signed integer type.
      */
     template <typename T>
-    static const char* signedInt( T num, char* dstString, size_t maxChars, char padChar = ' ' ) noexcept
+    static const char* signedInt( T      num,
+                                  char*  dstString,
+                                  size_t maxChars,
+                                  char   padChar = ' ' ) noexcept
     {
         // Static assertion to enforce that T is an signed integer type
         static_assert( std::is_signed<T>::value, "T must be an signed integer type" );
@@ -78,7 +81,11 @@ public:
         The template argument 'T' must be a unsigned integer type.
      */
     template <typename T>
-    static const char* unsignedInt( T num, char* dstString, size_t maxChars, unsigned base = 10, char padChar = ' ' ) noexcept
+    static const char* unsignedInt( T        num,
+                                    char*    dstString,
+                                    size_t   maxChars,
+                                    unsigned base    = 10,
+                                    char     padChar = ' ' ) noexcept
     {
         // Static assertion to enforce that T is an unsigned integer type
         static_assert( std::is_unsigned<T>::value, "T must be an unsigned integer type" );

@@ -9,6 +9,7 @@
 /** @file */
 
 #include "StringTo.h"
+#include "Strip.h"
 
 
 //------------------------------------------------------------------------------
@@ -72,7 +73,13 @@ bool StringTo::a2ull( unsigned long long& convertedValue, const char* string, in
     char*              endPtr = 0;
     if ( string )
     {
-        value = strtoull( string, &endPtr, base );
+        const char* strPtr = Strip::space( string );
+        if ( *strPtr == '-' )
+        {
+            // Negative numbers are not allowed for unsigned types
+            return false;
+        }   
+        value = strtoull( strPtr, &endPtr, base );
     }
     if ( end )
     {
@@ -88,9 +95,8 @@ bool StringTo::a2ull( unsigned long long& convertedValue, const char* string, in
 
     return false;
 }
-#if 0
-///////////////////
-bool Cpl::Text::a2d( double& convertedValue, const char* string, const char* validStopChars, const char** end )
+
+bool StringTo::a2d( double& convertedValue, const char* string, const char* validStopChars, const char** end ) noexcept
 {
     double value  = 0;
     char*  endPtr = 0;
@@ -112,9 +118,8 @@ bool Cpl::Text::a2d( double& convertedValue, const char* string, const char* val
 
     return false;
 }
-
 ///////////////////
-bool Cpl::Text::a2b( bool& convertedValue, const char* string, const char* trueToken, const char* falseToken, const char** end )
+bool StringTo::boolean( bool& convertedValue, const char* string, const char* trueToken, const char* falseToken, const char** end ) noexcept
 {
     size_t tokenSize = 0;
     bool   result    = false;
@@ -145,6 +150,7 @@ bool Cpl::Text::a2b( bool& convertedValue, const char* string, const char* trueT
     return result;
 }
 
+#if 0
 ///////////////////
 long Cpl::Text::asciiHexToBuffer( void* dstBinary, const char* srcP, size_t dstMaxLen )
 {

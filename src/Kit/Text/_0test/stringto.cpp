@@ -29,139 +29,90 @@ TEST_CASE( "StringTo" )
     {
         const char* strPtr = "12.3";
         const char* endPtr = 0;
-        int16_t value = -1;
+        int16_t     value  = -1;
 
         bool result = StringTo::signedInt<int16_t>( value, "123" );
+        REQUIRE( result == true );
         REQUIRE( value == 123 );
-        REQUIRE( result == true );
         result = StringTo::signedInt<int16_t>( value, "444 " );
-        REQUIRE( value == 123 );	// Conversion failed -->value should not be changed
         REQUIRE( result == false );
+        REQUIRE( value == 123 );  // Conversion failed -->value should not be changed
         result = StringTo::signedInt<int16_t>( value, " -1234(" );
-        REQUIRE( value == 123 );	// Conversion failed -->value should not be changed
         REQUIRE( result == false );
-        result = StringTo::signedInt<int16_t>( value, "12.3", 10, ":,." );
-        REQUIRE( value == 12 );
+        REQUIRE( value == 123 );  // Conversion failed -->value should not be changed
+        result = StringTo::signedInt<int16_t>( value, "12.3", ":,." );
         REQUIRE( result == true );
-        result = StringTo::signedInt<int16_t>( value, strPtr, 10, ".,", &endPtr );
         REQUIRE( value == 12 );
+        result = StringTo::signedInt<int16_t>( value, strPtr, ".,", &endPtr );
         REQUIRE( result == true );
+        REQUIRE( value == 12 );
         REQUIRE( endPtr == strPtr + 2 );
         result = StringTo::signedInt<int16_t>( value, "1.23" );
-        REQUIRE( value == 12 );	// Conversion failed -->value should not be changed
         REQUIRE( result == false );
+        REQUIRE( value == 12 );  // Conversion failed -->value should not be changed
 
         result = StringTo::signedInt<int16_t>( value, "0xF" );
-        REQUIRE( value == 12 );	// Conversion failed -->value should not be changed
         REQUIRE( result == false );
-        result = StringTo::signedInt<int16_t>( value, "0xF", 0 );
-        REQUIRE( value == 0xF );
-        REQUIRE( result == true );
-
-        result = StringTo::signedInt<int16_t>( value, 0 );
+        REQUIRE( value == 12 );  // Conversion failed -->value should not be changed
+        result = StringTo::signedInt<int16_t>( value, "0xF" );
+        REQUIRE( result == false );
+        REQUIRE( value == 12 );
+        result = StringTo::signedInt<int16_t>( value, "FFFF" );
+        REQUIRE( result == false );
+        REQUIRE( value == 12 );
+        result = StringTo::signedInt<int16_t>( value, nullptr );
         REQUIRE( result == false );
     }
 
     SECTION( "unsigned..." )
     {
-        const char* strPtr = "-123";
+        const char* strPtr = "-13";
         const char* endPtr = 0;
-        uint8_t value = 0;
+        uint8_t     value  = 0;
 
         bool result = StringTo::unsignedInt<uint8_t>( value, "123" );
         REQUIRE( value == 123 );
         REQUIRE( result == true );
         result = StringTo::unsignedInt<uint8_t>( value, strPtr, 10, 0, &endPtr );
-        REQUIRE( value == ( uint8_t) -123 );
-        REQUIRE( result == true );
-        REQUIRE( endPtr == strPtr + 4 );
-        result = StringTo::unsignedInt<uint8_t>( value, 0 );
         REQUIRE( result == false );
-    }
-#if 0
-
-    SECTION( "long..." )
-    {
-        const char* strPtr = "123";
-        const char* endPtr = 0;
-        long value;
-
-        bool result = a2l( value, "123" );
-        REQUIRE( value == 123 );
+        REQUIRE( value == (uint8_t)123 );
+        result = StringTo::unsignedInt<uint8_t>( value, "44 " );
+        REQUIRE( result == false );
+        strPtr = "32.0";
+        result = StringTo::unsignedInt<uint8_t>( value, strPtr, 10, ".,", &endPtr );
         REQUIRE( result == true );
-        result = a2l( value, strPtr, 10, 0, &endPtr );
-        REQUIRE( value == 123 );
-        REQUIRE( result == true );
-        REQUIRE( endPtr == strPtr + 3 );
-        result = a2l( value, 0 );
+        REQUIRE( value == 32 );
+        REQUIRE( endPtr == strPtr + 2 );
+
+        result = StringTo::unsignedInt<uint8_t>( value, nullptr );
         REQUIRE( result == false );
     }
 
-    SECTION( "unsigned long..." )
-    {
-        const char* strPtr = "-123";
-        const char* endPtr = 0;
-        unsigned long value;
-
-        bool result = a2ul( value, "123" );
-        REQUIRE( value == 123 );
-        REQUIRE( result == true );
-        result = a2ul( value, strPtr, 10, 0, &endPtr );
-        REQUIRE( value == ( unsigned long) -123 );
-        REQUIRE( result == true );
-        REQUIRE( endPtr == strPtr + 4 );
-        result = a2ul( value, 0 );
-        REQUIRE( result == false );
-    }
-
-    SECTION( "long long..." )
-    {
-        const char* strPtr = "123";
-        const char* endPtr = 0;
-        long long value;
-
-        bool result = a2ll( value, "123" );
-        REQUIRE( value == 123 );
-        REQUIRE( result == true );
-        result = a2ll( value, strPtr, 10, 0, &endPtr );
-        REQUIRE( value == 123 );
-        REQUIRE( result == true );
-        REQUIRE( endPtr == strPtr + 3 );
-        result = a2ll( value, 0 );
-        REQUIRE( result == false );
-    }
-
-    SECTION( "unsigned long long..." )
-    {
-        const char* strPtr = "-123";
-        const char* endPtr = 0;
-        unsigned long long value;
-
-        bool result = a2ull( value, "123" );
-        REQUIRE( value == 123u );
-        REQUIRE( result == true );
-        result = a2ull( value, strPtr, 10, 0, &endPtr );
-        REQUIRE( value == ( unsigned long long ) - 123 );
-        REQUIRE( result == true );
-        REQUIRE( endPtr == strPtr + 4 );
-        result = a2ull( value, 0 );
-        REQUIRE( result == false );
-    }
-
-    SECTION( "double..." )
+    SECTION( "floating" )
     {
         const char* strPtr = "-123.32";
         const char* endPtr = 0;
-        double value;
+        float value;
 
-        bool result = a2d( value, "123.32" );
-        REQUIRE( value == 123.32 );
+        bool result = StringTo::floating<float>( value, "123.32" );
         REQUIRE( result == true );
-        result = a2d( value, strPtr, 0, &endPtr );
-        REQUIRE( value == -123.32 );
+        REQUIRE( value == 123.32f );
+        result = StringTo::floating<float>( value, strPtr, nullptr, &endPtr );
         REQUIRE( result == true );
+        REQUIRE( value == -123.32f );
         REQUIRE( endPtr == strPtr + 7 );
-        result = a2d( value, 0 );
+        result = StringTo::floating<float>( value, "3.40e38" );
+        REQUIRE( result == true );
+        REQUIRE( value >= 3.40e38f );
+        result = StringTo::floating<float>( value, "1.7976931348623157E+308" );
+        REQUIRE( result == true );
+        REQUIRE( value == std::numeric_limits<float>::infinity() );
+        double v2;
+        result = StringTo::floating<double>( v2, "1.7976931348623157E+308" );
+        REQUIRE( result == true );
+        REQUIRE( v2 >= 1.7976931348623157E+308 );
+
+        result = StringTo::floating<float>( value, nullptr );
         REQUIRE( result == false );
     }
 
@@ -171,17 +122,18 @@ TEST_CASE( "StringTo" )
         const char* endPtr = 0;
         bool value;
 
-        bool result = a2b( value, "T" );
+        bool result = StringTo::boolean( value, "T" );
         REQUIRE( value == true );
         REQUIRE( result == true );
-        result = a2b( value, strPtr, "true", "false", &endPtr );
+        result = StringTo::boolean( value, strPtr, "true", "false", &endPtr );
         REQUIRE( value == false );
         REQUIRE( result == true );
         REQUIRE( endPtr == strPtr + 5 );
-        result = a2b( value, 0 );
+        result = StringTo::boolean( value, 0 );
         REQUIRE( result == false );
     }
 
+#if 0
     SECTION( "hextobuffer" )
     {
         const char* text = "AA0055BBFC";
