@@ -50,8 +50,8 @@ bool bufferToString( const void* buffer, int len, Cpl::Text::String& destString,
     Note: The default operation is to use uppercase text and to clear
           the destString before the conversion.
  */
-bool bufferToAsciiHex( const void*		  binaryData, 
-                       int			      len, 
+bool bufferToAsciiHex( const void*        binaryData, 
+                       int                len, 
                        Cpl::Text::String& destString, 
                        bool               upperCase=true, 
                        bool               appendToString=false, 

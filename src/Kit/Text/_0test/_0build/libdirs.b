@@ -1,4 +1,4 @@
-src/Kit/Text < Strip.cpp
+src/Kit/Text < Strip.cpp ToString.cpp
 src/Kit/Text/_0test
 
 src/Kit/Container

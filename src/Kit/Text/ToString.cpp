@@ -17,22 +17,22 @@
 *----------------------------------------------------------------------------*/
 
 
-#include "btoa.h"
+#include "ToString.h"
 #include <string.h>
 
 
-#include "Cpl/System/Trace.h"
-
-#define SECT_   "_0test"
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Text {
 
 
 ////////////////////////////////////////////
-static const char* convert_( size_t num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative )
+const char* ToString::convert_( uint64_t num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept
 {
     // Error check the base argument
     if ( base < 2 || base > 36 )
     {
-        return 0;
+        return nullptr;
     }
 
     // When convert a negative value, I need to leave room for the minus sign
@@ -79,33 +79,10 @@ static const char* convert_( size_t num, char* dstString, size_t maxChars, unsig
         memset( dstString, padChar, maxChars );
     }
 
-
     // Return the 'left justified' string
     return dstString + maxChars;
 }
 
-
-//////////////////////////////////////////////////
-const char* Cpl::Text::longToStr( long num, char* dstString, size_t maxChars, unsigned base, char padChar )
-{
-    bool negFlag = false;
-    if ( num < 0 )
-    {
-        negFlag = true;
-        num     = -num;
-    }
-
-    return convert_( num, dstString, maxChars, base, padChar, negFlag );
+} // end namespaces
 }
-
-const char* Cpl::Text::ulongToStr( unsigned long num, char* dstString, size_t maxChars, unsigned base, char padChar )
-{
-    return convert_( num, dstString, maxChars, base, padChar, false );
-}
-
-
-const char* Cpl::Text::sizetToStr( size_t num, char* dstString, size_t maxChars, unsigned base, char padChar )
-{
-    return convert_( num, dstString, maxChars, base, padChar, false );
-}
-
+//------------------------------------------------------------------------------

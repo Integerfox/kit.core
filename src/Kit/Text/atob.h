@@ -17,17 +17,18 @@
 */
 
 #include <stdlib.h>
-#include "colony_map.h"
-#include "Cpl/System/ElapsedTime.h"
+#include "kit_map.h"
+#include "Kit/System/ElapsedTime.h"
 
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Text {
 
-
-
+// Alpha::toInt8(...)
+class Alpha
+{
 /** This method converts the specified string to an integer.  The method returns
     true if the conversion was successful. When false is returned, the
     'convertedValue' argument is NOT updated. By default the conversion assumes
