@@ -1,5 +1,5 @@
-#ifndef Cpl_Text_strip_h_
-#define Cpl_Text_strip_h_
+#ifndef KIT_TEXT_STRIP_H_
+#define KIT_TEXT_STRIP_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

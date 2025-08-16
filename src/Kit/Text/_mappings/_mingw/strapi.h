@@ -1,5 +1,5 @@
-#ifndef Cpl_Text_x_mappings_mingw_strapi_h_
-#define Cpl_Text_x_mappings_mingw_strapi_h_
+#ifndef KIT_TEXT_MAPPINGS_MINGW_STRAPI_H_
+#define KIT_TEXT_MAPPINGS_MINGW_STRAPI_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -24,16 +24,16 @@
 
 #include <string.h>
 
-#define HAVE_CPL_TEXT_STRCASECMP
-#define HAVE_CPL_TEXT_STRNCASECMP
-#define HAVE_CPL_TEXT_STRUPR
-#define HAVE_CPL_TEXT_STRLWR
-#define HAVE_CPL_TEXT_STRSET
-#define HAVE_CPL_TEXT_STRNSET
-#define HAVE_CPL_TEXT_STRREV
-#define HAVE_CPL_TEXT_STRTOK_R
-#define HAVE_CPL_TEXT_SNPRINTF
-#define HAVE_CPL_TEXT_VSNPRINTF      
+#define HAVE_KIT_TEXT_STRCASECMP
+#define HAVE_KIT_TEXT_STRNCASECMP
+#define HAVE_KIT_TEXT_STRUPR
+#define HAVE_KIT_TEXT_STRLWR
+#define HAVE_KIT_TEXT_STRSET
+#define HAVE_KIT_TEXT_STRNSET
+#define HAVE_KIT_TEXT_STRREV
+#define HAVE_KIT_TEXT_STRTOK_R
+#define HAVE_KIT_TEXT_SNPRINTF
+#define HAVE_KIT_TEXT_VSNPRINTF      
 
 
 

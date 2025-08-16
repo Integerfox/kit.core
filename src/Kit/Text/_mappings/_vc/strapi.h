@@ -1,5 +1,5 @@
-#ifndef Cpl_Text_x_mappings_vc12_strapi_h_
-#define Cpl_Text_x_mappings_vc12_strapi_h_
+#ifndef KIT_TEXT_MAPPPINGS_VC_STRAPI_H_
+#define KIT_TEXT_MAPPPINGS_VC_STRAPI_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

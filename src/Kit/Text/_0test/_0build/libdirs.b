@@ -1,4 +1,4 @@
-src/Kit/Text < Strip.cpp ToString.cpp StringTo.cpp Parse.cpp
+src/Kit/Text < Strip.cpp ToString.cpp StringTo.cpp Parse.cpp StringBase.cpp FStringBase.cpp iostream.cpp DString.cpp
 src/Kit/Text/_0test
 
 src/Kit/Container
@@ -14,6 +14,7 @@ src/Kit/Container
 src/Kit/System
 #src/Kit/System/_ansi
 src/Kit/System/_testsupport
+src/Kit/Memory/_testsupport
 #src/Kit/Io
 #src/Kit/Io/Stdio
 #src/Kit/System/_trace

@@ -1,5 +1,5 @@
-#ifndef Cpl_Container_MapItem_h_
-#define Cpl_Container_MapItem_h_
+#ifndef KIT_CONTAINER_MAP_ITEM_H_
+#define KIT_CONTAINER_MAP_ITEM_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

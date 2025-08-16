@@ -1,5 +1,5 @@
-#ifndef Cpl_System_Shutdown_h_
-#define Cpl_System_Shutdown_h_
+#ifndef KIT_SYSTEM_SHUTDOWN_H_
+#define KIT_SYSTEM_SHUTDOWN_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

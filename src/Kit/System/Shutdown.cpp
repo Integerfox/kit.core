@@ -24,7 +24,7 @@ static Kit::Container::SList<Shutdown::Handler> callbacks_( "invoke_special_stat
 
 
 ///////////////////////
-void registerHandler( Shutdown::Handler& instanceToRegister ) noexcept
+void Shutdown::registerHandler( Shutdown::Handler& instanceToRegister ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::system() );
     callbacks_.push( instanceToRegister );
