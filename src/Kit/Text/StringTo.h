@@ -1,5 +1,5 @@
-#ifndef Cpl_Text_atob_h_
-#define Cpl_Text_atob_h_
+#ifndef KIT_TEXT_TO_STRING_H_
+#define KIT_TEXT_TO_STRING_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
