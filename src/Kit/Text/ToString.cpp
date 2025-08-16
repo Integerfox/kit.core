@@ -8,13 +8,13 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 /*-----------------------------------------------------------------------------
-* FULL DISCLOSURE: This code is based the LTOSTR.C implementation by Jerry
-* Coffin which is in the public domain.  The original code snippet can be
-* found at:
-*
-*   https://github.com/vonj/snippets/blob/master/ltostr.c
-*
-*----------------------------------------------------------------------------*/
+ * FULL DISCLOSURE: This code is based the LTOSTR.C implementation by Jerry
+ * Coffin which is in the public domain.  The original code snippet can be
+ * found at:
+ *
+ *   https://github.com/vonj/snippets/blob/master/ltostr.c
+ *
+ *----------------------------------------------------------------------------*/
 
 
 #include "ToString.h"
@@ -26,17 +26,21 @@ namespace Kit {
 namespace Text {
 
 
-////////////////////////////////////////////
 const char* ToString::convert_( uint64_t num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept
 {
-    // Error check the base argument
-    if ( base < 2 || base > 36 )
+    // Error check the base argument and null destination string
+    if ( base < 2 || base > 36 || dstString == nullptr )
     {
         return nullptr;
     }
 
     // When convert a negative value, I need to leave room for the minus sign
-    size_t sign = isNegative ? 1 : 0;
+    size_t sign = 0;
+    if ( isNegative )
+    {
+        num  = ~num + 1;  // Convert to positive
+        sign = 1;
+    }
 
     // Null terminate the string
     dstString[--maxChars] = '\0';
@@ -47,13 +51,30 @@ const char* ToString::convert_( uint64_t num, char* dstString, size_t maxChars, 
         dstString[--maxChars] = '0';
     }
 
-    // Convert the number 
+    // Handle special case: original number is INT64_MIN
+    if ( isNegative && num == (uint64_t)INT64_MIN )
+    {
+        // Note: The negative sign is added later
+        static const char* minStr = "9223372036854775808";
+        size_t             len    = strlen( minStr );
+        if ( len > (maxChars + sign) )
+        {
+            return nullptr;
+        }
+
+        // Copy the string so it is right justified within the destination buffer
+        size_t offset = maxChars + sign - len;
+        memcpy( dstString + offset, minStr, len );
+        maxChars = offset;
+    }
+
+    // Convert the number
     else
     {
         // Conversion is done LSB first
         while ( num != 0 && maxChars > sign )
         {
-            char remainder = (char) ( num % base );
+            char remainder = (char)( num % base );
             if ( remainder <= 9 )
             {
                 dstString[--maxChars] = remainder + '0';
@@ -65,6 +86,12 @@ const char* ToString::convert_( uint64_t num, char* dstString, size_t maxChars, 
 
             num /= base;
         }
+
+        // Not enough space in the destination string
+        if ( num != 0 )
+        {
+            return nullptr;
+        }
     }
 
     // Add the minus when needed
@@ -73,7 +100,7 @@ const char* ToString::convert_( uint64_t num, char* dstString, size_t maxChars, 
         dstString[--maxChars] = '-';
     }
 
-    // Add pad character(s) 
+    // Add pad character(s)
     if ( maxChars > 0 )
     {
         memset( dstString, padChar, maxChars );
@@ -83,6 +110,6 @@ const char* ToString::convert_( uint64_t num, char* dstString, size_t maxChars, 
     return dstString + maxChars;
 }
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------
