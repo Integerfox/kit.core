@@ -41,7 +41,7 @@ bool isSchedulingEnabled() noexcept
 
 void sleepInRealTime( uint32_t milliseconds ) noexcept
 {
-    Sleep( (DWORD) milliseconds );
+    Sleep( static_cast<DWORD>(milliseconds) );
 }
 
 

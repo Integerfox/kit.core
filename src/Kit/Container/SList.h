@@ -47,7 +47,7 @@ public:
 
 public:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    ITEM* get() noexcept { return (ITEM*)SListBase::getFirst(); }
+    ITEM* get() noexcept { return static_cast<ITEM*>( SListBase::getFirst() ); }
 
     /// Adds the item as the last item in the list
     void put( ITEM& item ) noexcept { SListBase::putLast( item ); }
@@ -55,18 +55,18 @@ public:
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* head() const noexcept { return (ITEM*)SListBase::first(); }
+    ITEM* head() const noexcept { return static_cast<ITEM*>( SListBase::first() ); }
 
     /** Return a pointer to the last item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* tail() const noexcept { return (ITEM*)SListBase::last(); }
+    ITEM* tail() const noexcept { return static_cast<ITEM*>( SListBase::last() ); }
 
 public:
     /** Removes the top element from stack and return a pointer to it as a
         result. Returns nullptr, if the stack is empty
      */
-    ITEM* pop() noexcept { return (ITEM*)SListBase::getFirst(); }
+    ITEM* pop() noexcept { return static_cast<ITEM*>( SListBase::getFirst() ); }
 
     /// Adds the ITEM item to top of the stack.
     void push( ITEM& item ) noexcept { SListBase::putFirst( item ); }
@@ -74,18 +74,18 @@ public:
     /** Return a pointer to the top ITEM item in the stack. The returned item
         remains in the queue.  Returns nullptr if the stack is empty.
      */
-    ITEM* top() const noexcept { return (ITEM*)SListBase::first(); }
+    ITEM* top() const noexcept { return static_cast<ITEM*>( SListBase::first() ); }
 
 public:
     /** Removes the first item in the list.  Returns nullptr if the list
         is empty.
      */
-    ITEM* getFirst() noexcept { return (ITEM*)SListBase::getFirst(); }
+    ITEM* getFirst() noexcept { return static_cast<ITEM*>( SListBase::getFirst() ); }
 
     /** Removes the last item in the list.  Returns nullptr if the list
         is empty.
      */
-    ITEM* getLast() noexcept { return (ITEM*)SListBase::getLast(); }
+    ITEM* getLast() noexcept { return static_cast<ITEM*>( SListBase::getLast() ); }
 
     /// Adds the item as the first item in the list.
     void putFirst( ITEM& item ) noexcept { SListBase::putFirst( item ); }
@@ -117,17 +117,17 @@ public:
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* first() const noexcept { return (ITEM*)SListBase::first(); }
+    ITEM* first() const noexcept { return static_cast<ITEM*>( SListBase::first() ); }
 
     /** Return a pointer to the last item in the list. The returned item remains
         in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* last() const noexcept { return (ITEM*)SListBase::last(); }
+    ITEM* last() const noexcept { return static_cast<ITEM*>( SListBase::last() ); }
 
     /** Return a pointer to the item after the item "item". Both items remain in
         the list.  Returns nullptr when the end-of-list is reached.
      */
-    ITEM* next( const ITEM& item ) const noexcept { return (ITEM*)SListBase::next( item ); }
+    ITEM* next( const ITEM& item ) const noexcept { return static_cast<ITEM*>( SListBase::next( item ) ); }
 
 private:
     /// Prevent access to the copy constructor -->Containers can not be copied!

@@ -9,16 +9,10 @@
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
 /** @file */
-/** @file
-
-    This file contains a collection of methods that wrap the standard C
-    library functions for converting text/string to binary values.
-
-*/
 
 #include <stdlib.h>
-#include "kit_map.h"
-#include "Kit/System/ElapsedTime.h"
+#include <type_traits>  // For type traits
+#include <limits>       // For numeric_limits
 
 
 ///
@@ -31,52 +25,69 @@ namespace Text {
 */
 class StringTo
 {
-    /** This method converts the specified string to an integer. The method 
-        returns true if the conversion was successful. When false is returned, 
-        the 'convertedValue' argument is NOT updated.
-        
+public:
+    /** This template method converts the specified string to an signed integer.
+        The method returns true if the conversion was successful. When false is
+        returned, the 'convertedValue' argument is NOT updated.
+
         By default the conversion assumes a base 10 number and that the 'end-of-number'
         is end-of-string.
-        
+
         If endptr is specified and the conversation was successful, a pointer
         to the first character 'after' the number is returned.
+
+        The template argument 'T' must be a signed integer type.
     */
-    bool int8( int8_t& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept;
+    template <typename T>
+    static bool signedInt( T& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept
+    {
+        // Static assertion to enforce that T is a signed integer type
+        static_assert( std::is_signed<T>::value, "T must be a signed integer type" );
 
-    /// Same as int8(), except convert int16_t
-    bool int16( int16_t& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept;
+        long long dstVal;
+        bool      result = a2ll( dstVal, string, base, validStopChars, endptr );
 
-    /// Same as int8(), except convert int32_t
-    bool int32( int32_t& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept;
+        // Check if the value is within the range of type T
+        if ( result && ( dstVal >= std::numeric_limits<T>::min() && dstVal <= std::numeric_limits<T>::max() ) )
+        {
+            convertedValue = static_cast<T>( dstVal );
+            return true;
+        }
+        return false;
+    }
 
-    /// Same as int8(), except convert int64_t
-    bool int64( int64_t& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept;
+public:
+    /** This template method converts the specified string to an unsigned integer.
+        The method returns true if the conversion was successful. When false is
+        returned, the 'convertedValue' argument is NOT updated.
 
-    /** This method is the same as a2i() except that it converts unsigned integer.
-     */
-    bool a2ui( unsigned& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr );
+        By default the conversion assumes a base 10 number and that the 'end-of-number'
+        is end-of-string.
 
-    /** This method is the same as a2i() except that it converts long integer.
-     */
-    bool a2l( long& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr );
+        If endptr is specified and the conversation was successful, a pointer
+        to the first character 'after' the number is returned.
 
-    /** This method is the same as a2i() except that it converts unsigned long
-        integer.
-     */
-    bool a2ul( unsigned long& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr );
+        The template argument 'T' must be a unsigned integer type.
+    */
+    template <typename T>
+    static bool unsignedInt( T& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept
+    {
+        // Static assertion to enforce that T is an unsigned integer type
+        static_assert( std::is_unsigned<T>::value, "T must be an unsigned integer type" );
 
+        unsigned long long dstVal;
+        bool               result = a2ull( dstVal, string, base, validStopChars, endptr );
 
-    /** This method is the same as a2i() except that it converts long long
-        integer.
-     */
-    bool a2ll( long long& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr );
+        // Check if the value is within the range of type T
+        if ( result && dstVal <= std::numeric_limits<T>::max() )
+        {
+            convertedValue = static_cast<T>( dstVal );
+            return true;
+        }
+        return false;
+    }
 
-    /** This method is the same as a2i() except that it converts unsigned long long
-        integer.
-     */
-    bool a2ull( unsigned long long& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr );
-
-
+#if 0
     /** This method converts the specified string to an double. The method returns
         true if the conversion was successful. When false is returned, the
         'convertedValue' argument is NOT updated. By default the conversion assumes
@@ -126,8 +137,16 @@ class StringTo
         The method returns true if the parse was successful.
      */
     bool parsePrecisionTimeStamp( const char* timeStampToParse, Cpl::System::ElapsedTime::Precision_T& convertedValue );
+#endif
 
+protected:
+    /// Helper method
+    static bool a2ll( long long& convertedValue, const char* string, int base, const char* validStopChars, const char** end ) noexcept;
 
-};  // end namespaces
+    /// Helper method
+    static bool a2ull( unsigned long long& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept;
 };
+
+}  // end namespaces
+}
 #endif  // end header latch

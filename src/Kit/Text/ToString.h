@@ -13,9 +13,10 @@
 #include "kit_config.h"
 #include <stdlib.h>
 #include <stdint.h>
+#include <type_traits>  // Add this header for type traits
 
 /** Data type of largest unsigned integer type supported by the platform.  This
-    type is 'base' used for conversions to strings.
+    type is the underlying 'base type' used for all conversions to strings.
     Default: 32bit platform
  */
 #ifndef KitTextToStringMaxUnsigned_T
@@ -31,8 +32,8 @@ namespace Text {
     string WITHOUT using snprintf() function calls. This is for platforms/situations
     where it is not possible or undesirable (i.e. stack usage) to call snprintf.
 
-    Note: When using the template methods - do NOT use a data type larger than 
-          KitTextToStringMaxUnsigned_T.
+    Note: When using the template methods - you CAN NOT use a data type larger
+          than KitTextToStringMaxUnsigned_T.
 */
 class ToString
 {
@@ -48,10 +49,15 @@ public:
                  does not have sufficient space). The returned pointer is essentially
                  a left justified string of the converted value. For a right
                  justified result, use the original pointer passed as 'dstString'.
+
+        The template argument 'T' must be a signed integer type.
      */
     template <typename T>
     static const char* signedInt( T num, char* dstString, size_t maxChars, char padChar = ' ' ) noexcept
     {
+        // Static assertion to enforce that T is an signed integer type
+        static_assert( std::is_signed<T>::value, "T must be an signed integer type" );
+
         return convert_( (KitTextToStringMaxUnsigned_T)num, dstString, maxChars, 10, padChar, num < 0 );
     }
 
@@ -68,10 +74,15 @@ public:
                  does not have sufficient space). The returned pointer is essentially
                  a left justified string of the converted value. For a right
                  justified result, use the original pointer passed as 'dstString'.
+
+        The template argument 'T' must be a unsigned integer type.
      */
     template <typename T>
     static const char* unsignedInt( T num, char* dstString, size_t maxChars, unsigned base = 10, char padChar = ' ' ) noexcept
     {
+        // Static assertion to enforce that T is an unsigned integer type
+        static_assert( std::is_unsigned<T>::value, "T must be an unsigned integer type" );
+
         return convert_( num, dstString, maxChars, base, padChar, false );
     }
 

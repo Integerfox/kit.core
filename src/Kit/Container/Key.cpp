@@ -25,7 +25,7 @@ KeyStringBuffer::KeyStringBuffer( const char* startOfString, size_t lenOfStringI
 int KeyStringBuffer::compareKey( const Key& key ) const noexcept
 {
     unsigned    otherLen = 0;
-    const char* otherPtr = (const char*)key.getRawKey( &otherLen );
+    const char* otherPtr = static_cast<const char*>(key.getRawKey( &otherLen ));
     return compare( m_stringKeyPtr, m_len, otherPtr, otherLen );
 }
 
@@ -54,7 +54,7 @@ int KeyStringBuffer::compare( const char* myString, unsigned myLen, const char* 
 
             if ( comparision == 0 && myLen != otherLen )
             {
-                return myLen - (int)otherLen;
+                return myLen - static_cast<int>(otherLen);
             }
 
             return comparision;

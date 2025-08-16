@@ -165,7 +165,7 @@ protected:
         if ( item.isInContainer_( this ) )
         {
             ExtendedListItem* prvPtr = item.m_prevPtr_;
-            ExtendedListItem* nxtPtr = (ExtendedListItem*)item.m_nextPtr_;
+            ExtendedListItem* nxtPtr = static_cast<ExtendedListItem*>(item.m_nextPtr_);
             if ( prvPtr )
             {
                 if ( !( prvPtr->m_nextPtr_ = nxtPtr ) )
@@ -203,7 +203,7 @@ protected:
     {
         if ( item.insert_( this ) )
         {
-            ExtendedListItem* nxtPtr = (ExtendedListItem*)( item.m_nextPtr_ = after.m_nextPtr_ );
+            ExtendedListItem* nxtPtr = static_cast<ExtendedListItem*>(item.m_nextPtr_ = after.m_nextPtr_);
             item.m_prevPtr_      = &after;
             after.m_nextPtr_     = &item;
             if ( !nxtPtr )
@@ -224,7 +224,7 @@ protected:
     {
         if ( item.insert_( this ) )
         {
-            ExtendedListItem* prvPtr = (ExtendedListItem*)( item.m_prevPtr_ = before.m_prevPtr_ );
+            ExtendedListItem* prvPtr = static_cast<ExtendedListItem*>(item.m_prevPtr_ = before.m_prevPtr_);
             item.m_nextPtr_      = &before;
             before.m_prevPtr_    = &item;
             if ( !prvPtr )
@@ -253,7 +253,7 @@ protected:
     {
         if ( item.validateNextOkay_( this ) )
         {
-            return (ExtendedListItem*)item.m_nextPtr_;
+            return static_cast<ExtendedListItem*>(item.m_nextPtr_);
         }
         return nullptr;
     }

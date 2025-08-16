@@ -9,11 +9,6 @@
 /** @file */
 
 #include "StringTo.h"
-#include "String.h"
-#include "misc.h"
-#include <stdint.h>
-#include <string.h>
-#include "Cpl/System/Assert.h"
 
 
 //------------------------------------------------------------------------------
@@ -48,106 +43,7 @@ static bool conversionOk( const char* originalString, char* endPtr, const char* 
     return false;
 }
 
-
-///////////////////
-    bool int8( int8_t& convertedValue, const char* string, int base = 10, const char* validStopChars = nullptr, const char** endptr = nullptr ) noexcept
-    {
-        
-    }
-
-bool Cpl::Text::a2i( int& convertedValue, const char* string, int base, const char* validStopChars, const char** end )
-{
-    int   value  = 0;
-    char* endPtr = 0;
-    if ( string )
-    {
-        value = ( int) strtol( string, &endPtr, base );
-    }
-    if ( end )
-    {
-        *end = endPtr;
-    }
-
-    // Only update the client's variable if the conversion was successful
-    if ( conversionOk( string, endPtr, validStopChars ) )
-    {
-        convertedValue = value;
-        return true;
-    }
-
-    return false;
-}
-bool Cpl::Text::a2ui( unsigned& convertedValue, const char* string, int base, const char* validStopChars, const char** end )
-{
-    unsigned value  = 0;
-    char*    endPtr = 0;
-    if ( string )
-    {
-        value = ( unsigned) strtoul( string, &endPtr, base );
-    }
-    if ( end )
-    {
-        *end = endPtr;
-    }
-
-    // Only update the client's variable if the conversion was successful
-    if ( conversionOk( string, endPtr, validStopChars ) )
-    {
-        convertedValue = value;
-        return true;
-    }
-
-    return false;
-}
-
-
-bool Cpl::Text::a2l( long& convertedValue, const char* string, int base, const char* validStopChars, const char** end )
-{
-    long  value  = 0;
-    char* endPtr = 0;
-    if ( string )
-    {
-        value = strtol( string, &endPtr, base );
-    }
-    if ( end )
-    {
-        *end = endPtr;
-    }
-
-    // Only update the client's variable if the conversion was successful
-    if ( conversionOk( string, endPtr, validStopChars ) )
-    {
-        convertedValue = value;
-        return true;
-    }
-
-    return false;
-}
-
-bool Cpl::Text::a2ul( unsigned long& convertedValue, const char* string, int base, const char* validStopChars, const char** end )
-{
-    unsigned long value  = 0;
-    char*         endPtr = 0;
-    if ( string )
-    {
-        value = strtoul( string, &endPtr, base );
-    }
-    if ( end )
-    {
-        *end = endPtr;
-    }
-
-    // Only update the client's variable if the conversion was successful
-    if ( conversionOk( string, endPtr, validStopChars ) )
-    {
-        convertedValue = value;
-        return true;
-    }
-
-    return false;
-}
-
-bool Cpl::Text::a2ll( long long& convertedValue, const char* string, int base, const char* validStopChars, const char** end )
+bool StringTo::a2ll( long long& convertedValue, const char* string, int base, const char* validStopChars, const char** end ) noexcept
 {
     long long value  = 0;
     char*     endPtr = 0;
@@ -170,7 +66,7 @@ bool Cpl::Text::a2ll( long long& convertedValue, const char* string, int base, c
     return false;
 }
 
-bool Cpl::Text::a2ull( unsigned long long& convertedValue, const char* string, int base, const char* validStopChars, const char** end )
+bool StringTo::a2ull( unsigned long long& convertedValue, const char* string, int base, const char* validStopChars, const char** end ) noexcept
 {
     unsigned long long value  = 0;
     char*              endPtr = 0;
@@ -192,7 +88,7 @@ bool Cpl::Text::a2ull( unsigned long long& convertedValue, const char* string, i
 
     return false;
 }
-
+#if 0
 ///////////////////
 bool Cpl::Text::a2d( double& convertedValue, const char* string, const char* validStopChars, const char** end )
 {
@@ -257,16 +153,16 @@ long Cpl::Text::asciiHexToBuffer( void* dstBinary, const char* srcP, size_t dstM
         return -1;
     }
 
-    uint8_t* dstP = (uint8_t*) dstBinary;
+    uint8_t* dstP = (uint8_t*)dstBinary;
     size_t   len  = strlen( srcP );
 
     // Length must be even
-    if ( (len & 1) == 1 )
+    if ( ( len & 1 ) == 1 )
     {
         return -1;
     }
 
-    // Do NOT exceed the destination buffer 
+    // Do NOT exceed the destination buffer
     if ( len / 2 > dstMaxLen )
     {
         return -1;
@@ -293,7 +189,7 @@ long Cpl::Text::asciiBinaryToBuffer( void* dstBinary, const char* srcP, size_t d
     size_t inputCharLen = strlen( srcP );
     size_t inputBinLen  = ( inputCharLen + 7 ) / 8;
     dstMaxLen           = inputBinLen > dstMaxLen ? dstMaxLen : inputBinLen;
-    uint8_t* ptr        = reverse ? ( (uint8_t*) dstBinary ) + dstMaxLen - 1 :(uint8_t*) dstBinary ;
+    uint8_t* ptr        = reverse ? ( (uint8_t*)dstBinary ) + dstMaxLen - 1 : (uint8_t*)dstBinary;
     int      direction  = reverse ? -1 : 1;
 
     // Loop through the string.  Note: for each 'byte' in the string - MSb ordering is assumed
@@ -302,7 +198,7 @@ long Cpl::Text::asciiBinaryToBuffer( void* dstBinary, const char* srcP, size_t d
     {
         uint8_t mask = 0x80;
         uint8_t data = 0;
-        for ( int i=0; i < 8 && *srcP != '\0'; i++, mask >>= 1, srcP++, convertedBits++ )
+        for ( int i = 0; i < 8 && *srcP != '\0'; i++, mask >>= 1, srcP++, convertedBits++ )
         {
             if ( *srcP == '1' )
             {
@@ -314,8 +210,8 @@ long Cpl::Text::asciiBinaryToBuffer( void* dstBinary, const char* srcP, size_t d
             }
         }
 
-        *ptr = data;
-        ptr += direction;
+        *ptr  = data;
+        ptr  += direction;
         dstMaxLen--;
     }
 
@@ -340,7 +236,8 @@ static bool parseTime( const char* time, Cpl::System::ElapsedTime::Precision_T& 
                 {
                     if ( msecs < 1000 )
                     {
-                        msecs                        = strlen( endPtr + 1 ) == 1 ? msecs * 100 : strlen( endPtr + 1 ) == 2 ? msecs * 10 : msecs;
+                        msecs                        = strlen( endPtr + 1 ) == 1 ? msecs * 100 : strlen( endPtr + 1 ) == 2 ? msecs * 10
+                                                                                                                           : msecs;
                         convertedValue.m_thousandths = msecs;
                         convertedValue.m_seconds     = ss + ( mm * 60 ) + ( hh * 60 * 60 );
                         return true;
@@ -385,6 +282,7 @@ bool Cpl::Text::parsePrecisionTimeStamp( const char* timeStampToParse, Cpl::Syst
     // If I get here, then the parse failed
     return false;
 }
+#endif
 
 }  // end namespaces
 }
