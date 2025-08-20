@@ -26,7 +26,7 @@
 #define HAVE_KIT_TEXT_STRNCASECMP
 #define HAVE_KIT_TEXT_STRTOK_R
 #define HAVE_KIT_TEXT_SNPRINTF
-#define HAVE_KIT_TEXT_VSNPRINTF      
+#define HAVE_KIT_TEXT_VSNPRINTF
 
 #define strset_MAP(s,f)		strnset_MAP(s,f,strlen(s))
 

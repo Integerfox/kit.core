@@ -75,7 +75,7 @@ const char* ToString::convert_( KitTextToStringMaxUnsigned_T num, char* dstStrin
         }
 
         // Copy the string so it is right justified within the destination buffer
-        size_t offset = maxChars + sign - len;
+        size_t offset = (maxChars + sign) - len - 1;
         memcpy( dstString + offset, minStr, len );
         maxChars = offset;
     }

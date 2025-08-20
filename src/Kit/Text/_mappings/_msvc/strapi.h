@@ -1,5 +1,5 @@
-#ifndef KIT_TEXT_MAPPPINGS_VC_STRAPI_H_
-#define KIT_TEXT_MAPPPINGS_VC_STRAPI_H_
+#ifndef KIT_TEXT_MAPPPINGS_MSVC_STRAPI_H_
+#define KIT_TEXT_MAPPPINGS_MSVC_STRAPI_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -34,11 +34,9 @@
 #define strlwr_MAP              _strlwr
 ///
 #define strtok_r_MAP(s,d,p)     strtok(s,d)     // NOTE: strtok() under windows IS Thread safe (but not "interleave" safe inside a single thread)
-///
-#define snprintf_MAP(b,c,f,...) _snprintf_s(b,c,c,f,##__VA_ARGS__) 
-///
-#define vsnprintf_MAP           _vsnprintf
 
+#define HAVE_KIT_TEXT_SNPRINTF      // As of Visual Studio 2015 and Windows 10
+#define HAVE_KIT_TEXT_VSNPRINTF
 
 
 

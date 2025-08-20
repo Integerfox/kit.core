@@ -10,7 +10,6 @@
 
 #include "DString.h"
 #include "FString.h"
-#include <stdlib.h>
 #include <algorithm>
 #include <new>
 

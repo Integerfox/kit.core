@@ -11,5 +11,6 @@
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
 #define USE_KIT_SYSTEM_ASSERT_MACRO
+#define KitTextToStringMaxUnsigned_T uint64_t
 
 #endif

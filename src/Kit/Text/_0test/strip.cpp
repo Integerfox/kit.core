@@ -102,7 +102,7 @@ TEST_CASE( "Strip" )
         ptr                = Strip::trailingSpace( input2 );
         REQUIRE( ptr == input2 );
         input2 = "";
-        ptr    = Strip::trailingSpace( "" );
+        ptr    = Strip::trailingSpace( input2 );
         REQUIRE( ptr == input2 );
     }
 

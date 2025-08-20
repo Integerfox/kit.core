@@ -98,7 +98,7 @@ TEST_CASE( "ToString" )
         REQUIRE( strcmp( result, "2123" ) == 0 );
         REQUIRE( strcmp( buffer, "    2123" ) == 0 );
 
-        int32_t i32 = -2147483648;
+        int32_t i32 = INT32_MIN;
         result      = ToString::signedInt<int32_t>( i32, buffer, 13 + 1 );
         REQUIRE( result != nullptr );
         REQUIRE( strcmp( result, "-2147483648" ) == 0 );
@@ -110,7 +110,7 @@ TEST_CASE( "ToString" )
         REQUIRE( strcmp( buffer, "  2147483647" ) == 0 );
 
         int64_t i64 = INT64_MIN;
-        result      = ToString::signedInt<int64_t>( i64, buffer, 20 + 1 );
+        result      = ToString::signedInt<int64_t>( i64, buffer, 21 + 1 );
         REQUIRE( strcmp( result, "-9223372036854775808" ) == 0 );
         REQUIRE( strcmp( buffer, " -9223372036854775808" ) == 0 );
 
