@@ -33,12 +33,6 @@
 ///
 #define strlwr_MAP              _strlwr
 ///
-#define strset_MAP              _strset
-///
-#define strnset_MAP             _strnset
-///
-#define strrev_MAP              _strrev
-///
 #define strtok_r_MAP(s,d,p)     strtok(s,d)     // NOTE: strtok() under windows IS Thread safe (but not "interleave" safe inside a single thread)
 ///
 #define snprintf_MAP(b,c,f,...) _snprintf_s(b,c,c,f,##__VA_ARGS__) 

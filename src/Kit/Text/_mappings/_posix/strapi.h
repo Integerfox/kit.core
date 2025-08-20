@@ -32,8 +32,6 @@
 
 extern char* strupr_MAP( char* s1 );
 extern char* strlwr_MAP( char* s1 );
-extern char* strnset_MAP( char* s1, int fill, size_t len );
-extern char* strrev_MAP( char* s1 );
 
 
 #endif  // end header latch

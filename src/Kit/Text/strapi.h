@@ -68,37 +68,6 @@
 #define strlwr strlwr_MAP
 #endif
 
-/** Fill a string with a given character. Returns the
-    converted string (i.e. same pointer that is/was passed in)
-
-    \b Prototype:
-        char* strset( char* s1, int fill );
- */
-#ifndef HAVE_KIT_TEXT_STRSET
-#define strset strset_MAP
-#endif
-
-/** Fill a string with a given character, to a given length. Returns the
-    converted string (i.e. same pointer that is/was passed in)
-
-    \b Prototype:
-        char* strnset( char* s1, int fill, size_t len );
- */
-#ifndef HAVE_KIT_TEXT_STRNSET
-#define strnset strnset_MAP
-#endif
-
-
-/** Reverse the specified string. Returns the reversed string (i.e. same
-    pointer that is/was passed in)
-
-    \b Prototype:
-        char* strrev( char* s1 );
- */
-#ifndef HAVE_KIT_TEXT_STRREV
-#define strrev strrev_MAP
-#endif
-
 /** Break a string into tokens, i.e. same as strtok(), but strtok_r is a
     reentrant implementation. 'lasts' is the address of a pointer to a
     character, which the function can use to store information necessary
