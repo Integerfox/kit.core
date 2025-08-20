@@ -39,7 +39,7 @@ public:
         numbered init level are called last.  Within a init level there is
         no guaranteed order to the callbacks.
      */
-    enum eInitLevel
+    enum InitLevel_e
     {
         TEST_INFRA=0,    /// Initialized first
         SYSTEM,
@@ -53,14 +53,14 @@ public:
         process. The 'initLevel' informs the client what initialize
         level context the notifyInit() method is being called.
      */
-    virtual void notify( eInitLevel initLevel ) = 0;
+    virtual void notify( InitLevel_e initLevel ) = 0;
 
 
 protected:
     /** Base Class constructor -->performs the callback/init-level
         registration
      */
-    StartupHook( eInitLevel myInitLevel );
+    StartupHook( InitLevel_e myInitLevel );
 
 public:
     /// Ensure the destructor is virtual
@@ -75,7 +75,7 @@ public:
         NOTE: This is the ONE KIT Library method that can be called BEFORE
               Kit::System::Api::initialize() is called.
      */
-    static void registerHook( StartupHook& callbackInstance, eInitLevel initOrder );
+    static void registerHook( StartupHook& callbackInstance, InitLevel_e initOrder );
 
     /** This method is intended to be USED ONLY by the Kit::System::Api::init()
         method to trigger all of the registered init callbacks.

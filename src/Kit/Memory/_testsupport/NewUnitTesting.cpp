@@ -79,7 +79,7 @@ public:
 
 protected:
     ///
-    void notify( eInitLevel init_level ) noexcept
+    void notify( InitLevel_e init_level ) noexcept
     {
         Kit::System::Shutdown::registerHandler( m_shutdown );
     }

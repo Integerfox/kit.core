@@ -41,7 +41,7 @@ public:
 
 protected:
     ///
-    void notify( eInitLevel init_level )
+    void notify( InitLevel_e init_level )
     {
         elapsedMsec_ = 0;
         lastMsec_    = KitSystemElapsedTime_getTimeInMilliseconds();

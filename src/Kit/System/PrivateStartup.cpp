@@ -25,13 +25,13 @@ static Kit::Container::SList<StartupHook> levelApplication_( "invoke_special_sta
 
 
 ////////////////////////////////////////////////////////////////////////////////
-StartupHook::StartupHook( eInitLevel myInitLevel )
+StartupHook::StartupHook( InitLevel_e myInitLevel )
 {
     registerHook( *this, myInitLevel );
 }
 
 
-void StartupHook::registerHook( StartupHook& callbackInstance, eInitLevel initOrder )
+void StartupHook::registerHook( StartupHook& callbackInstance, InitLevel_e initOrder )
 {
     // NOTE: The assumption is that sub-system register at the time of when
     //       constructor for static object execute - which is before main()
