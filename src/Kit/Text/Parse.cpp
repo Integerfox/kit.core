@@ -24,7 +24,7 @@ size_t Parse::asciiHex( void* dstBinary, const char* srcP, size_t dstMaxLen ) no
         return SIZE_MAX;
     }
 
-    uint8_t* dstP = (uint8_t*)dstBinary;
+    uint8_t* dstP = static_cast<uint8_t*>(dstBinary);
     size_t   len  = strlen( srcP );
 
     // Length must be even

@@ -99,31 +99,27 @@ public:
     }
 
 public:
-    /** This template method converts the specified string to an floating point
-        number. The method returns true if the conversion was successful. When
-        false is returned, the 'convertedValue' argument is NOT updated. By
+    /** This method converts the specified string to an single precisions floating
+        point number. The method returns true if the conversion was successful.
+        When false is returned, the 'convertedValue' argument is NOT updated. By
         default the conversion assumes that the 'end-of-number' is end-of-string.
         If endptr is specified and the method returns true, a pointer to the
         first character 'after' the number is returned.
      */
-    template <typename T>
-    static bool floating( T&           convertedValue,
+    static bool floating( float&       convertedValue,
                           const char*  string,
                           const char*  validStopChars = nullptr,
-                          const char** endptr         = nullptr ) noexcept
-    {
-        // Static assertion to enforce that T is an floating point type
-        static_assert( std::is_floating_point<T>::value, "T must be a floating point type" );
+                          const char** endptr         = nullptr ) noexcept;
 
-        double dstVal;
-        bool   result = a2d( dstVal, string, validStopChars, endptr );
-        if ( result )
-        {
-            convertedValue = static_cast<T>( dstVal );
-            return true;
-        }
-        return false;
-    }
+                          
+    /** This method is the same as floating() above, except that it converts
+        the string to double precision floating point.
+     */
+    static bool floating( double&      convertedValue,
+                          const char*  string,
+                          const char*  validStopChars = nullptr,
+                          const char** endptr         = nullptr ) noexcept;
+
 
 public:
     /** This method convert the specified string to an boolean.  The method returns
@@ -140,37 +136,6 @@ public:
                          const char*  falseToken = "F",
                          const char** endptr     = nullptr ) noexcept;
 
-
-#if 0
-    /** This method will convert an 'ASCII HEX' string to an equivalent binary
-        buffer, i.e. the reverse of bufferToAsciiHex() in format.h.  If the entire
-        string was not able to be converted then -1 is returned, else the number
-        of converted bytes are returned.
-     */
-    long asciiHexToBuffer( void* dstBinary, const char* srcString, size_t dstMaxLen );
-
-    /** This method will convert an 'ASCII BINARY' string to an equivalent binary
-        buffer, i.e. the reverse of bufferToAsciiBinary() in format.h.  The
-        'reverse' argument when set to true will store the binary data starting
-        with the last byte of 'dstBinary'.
-
-        If the number of '1' and '0' in 'srcString' is not a multiple of eight - the
-        'missing' bits will be set to zero in the binary output.
-
-        If the entire string was not able to be converted then -1 is returned OR if
-        there are non '1'/'0' characters in the srcString; else the number of
-        converted bits are returned.
-
-        Note: 'srcString' MUST be a null terminated string
-     */
-    long asciiBinaryToBuffer( void* dstBinary, const char* srcString, size_t dstMaxLen, bool reverse = false );
-
-
-    /** This method parses a 'timestamp' with the following format: [DD ]HH:MM:SS[.sss]
-        The method returns true if the parse was successful.
-     */
-    bool parsePrecisionTimeStamp( const char* timeStampToParse, Cpl::System::ElapsedTime::Precision_T& convertedValue );
-#endif
 
 protected:
     /// Helper method

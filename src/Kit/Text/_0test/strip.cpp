@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "Kit/Text/strapi.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/Text/Strip.h"
 #include <string.h>

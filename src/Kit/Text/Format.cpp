@@ -8,18 +8,21 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "format.h"
+#include "Format.h"
 
-//
-using namespace Cpl::Text;
-
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Text {
 
 ////////////////////////////
-bool Cpl::Text::bufferToString( const void* buffer, int len, String& destString, bool appendToString )
+bool Format::string( const void* buffer,
+                     int         len,
+                     IString&    destString,
+                     bool        appendToString ) noexcept
 {
     if ( !buffer || len <= 0 )
     {
-        return false; // Do nothing!
+        return false;  // Do nothing!
     }
 
     // Clear Destination
@@ -29,29 +32,34 @@ bool Cpl::Text::bufferToString( const void* buffer, int len, String& destString,
     }
 
     // Convert the data
-    char* ptr = (char*) buffer;
-    char  c;
-    int   i;
-    for ( i=0; i < len; i++, ptr++ )
+    const char* ptr = static_cast<const char*>( buffer );
+    char        c;
+    int         i;
+    for ( i = 0; i < len; i++, ptr++ )
     {
-        c = *ptr < ' ' || *ptr > '~' ? '.' : *ptr;
+        c           = *ptr < ' ' || *ptr > '~' ? '.' : *ptr;
         destString += c;
     }
 
     return !destString.truncated();
 }
 
-bool Cpl::Text::bufferToAsciiHex( const void* binaryData, int len, String& destString, bool upperCase, bool appendToString, char separator )
+bool Format::asciiHex( const void* binaryData,
+                       int         len,
+                       IString&    destString,
+                       bool        upperCase,
+                       bool        appendToString,
+                       char        separator ) noexcept
 {
     if ( !binaryData || len <= 0 )
     {
-        return false; // Do nothing!
+        return false;  // Do nothing!
     }
 
     // Select look-up table based on a requested 'case'
-    static const char lowerCaseTable[] = { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
-    static const char upperCaseTable[] = { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
-    const char* tableP                 = upperCase ? upperCaseTable : lowerCaseTable;
+    static const char lowerCaseTable[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+    static const char upperCaseTable[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+    const char*       tableP           = upperCase ? upperCaseTable : lowerCaseTable;
 
     // Clear Destination
     if ( !appendToString )
@@ -60,15 +68,15 @@ bool Cpl::Text::bufferToAsciiHex( const void* binaryData, int len, String& destS
     }
 
     // Convert the data
-    char* ptr = (char*) binaryData;
-    char  c;
-    int   i;
-    for ( i=0; i < len; i++, ptr++ )
+    const char* ptr = static_cast<const char*>( binaryData );
+    char        c;
+    int         i;
+    for ( i = 0; i < len; i++, ptr++ )
     {
-        c = *ptr;
+        c           = *ptr;
         destString += tableP[( c >> 4 ) & 0x0F];
         destString += tableP[c & 0x0F];
-        if ( separator != '\0' && (i + 1) < len )
+        if ( separator != '\0' && ( i + 1 ) < len )
         {
             destString += separator;
         }
@@ -77,14 +85,17 @@ bool Cpl::Text::bufferToAsciiHex( const void* binaryData, int len, String& destS
     return !destString.truncated();
 }
 
-bool Cpl::Text::bufferToAsciiBinary( const void* binaryData, int len, Cpl::Text::String& destString, bool appendToString, bool reverse )
+bool Format::asciiBinary( const void* binaryData,
+                          int         len,
+                          IString&    destString,
+                          bool        appendToString,
+                          bool        reverse ) noexcept
 {
-    static const char *bitRep[16] = { "0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111",
-                                      "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111" };
+    static const char* bitRep[16] = { "0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111" };
 
     if ( !binaryData || len <= 0 )
     {
-        return false; // Do nothing!
+        return false;  // Do nothing!
     }
 
     // Clear Destination
@@ -92,28 +103,34 @@ bool Cpl::Text::bufferToAsciiBinary( const void* binaryData, int len, Cpl::Text:
     {
         destString.clear();
     }
-    
-    uint8_t* ptr  = reverse ? ((uint8_t*)binaryData) + len - 1: ((uint8_t*)binaryData);
-    int direction = reverse ? -1: 1;
+    const uint8_t* binPtr    = static_cast<const uint8_t*>( binaryData );
+    const uint8_t* ptr       = reverse ? binPtr + len - 1 : binPtr;
+    int            direction = reverse ? -1 : 1;
     while ( len-- )
     {
         destString += bitRep[*ptr >> 4];
         destString += bitRep[*ptr & 0x0F];
-        ptr += direction;
+        ptr        += direction;
     }
 
     return !destString.truncated();
 }
 
-bool Cpl::Text::bufferToViewer( const void* binaryData, int len, Cpl::Text::String& destString, int bytesPerLine, const char* separator, bool upperCase, bool appendToString )
+bool Format::viewer( const void* binaryData,
+                     int         len,
+                     IString&    destString,
+                     int         bytesPerLine,
+                     const char* separator,
+                     bool        upperCase,
+                     bool        appendToString ) noexcept
 {
-    if ( !bufferToAsciiHex( binaryData, len, destString, upperCase, appendToString ) )
+    if ( !Format::asciiHex( binaryData, len, destString, upperCase, appendToString ) )
     {
         return false;
     }
 
     // Fill in 'missing' bytes
-    for ( int i=len; i < bytesPerLine; i++ )
+    for ( int i = len; i < bytesPerLine; i++ )
     {
         destString += "  ";
     }
@@ -125,16 +142,25 @@ bool Cpl::Text::bufferToViewer( const void* binaryData, int len, Cpl::Text::Stri
         return false;
     }
 
-    return bufferToString( binaryData, len, destString, true );
+    return Format::string( binaryData, len, destString, true );
 }
 
-static bool formatMsec( Cpl::Text::String& buffer, unsigned msec, unsigned long long elaspedSecs, bool encodeDay, bool appendToString )
+bool Format::formatMsec( IString&  buffer,
+                         long long elapsedMsec,
+                         bool      encodeMsec,
+                         bool      encodeDay,
+                         bool      appendToString ) noexcept
 {
-    unsigned long long t, dd, hh, mm, ss;
-    lldiv_t            result;
+    long long t, dd, hh, mm, ss;
+    lldiv_t   result;
+
+    // Separate seconds and milliseconds
+    result                = lldiv( elapsedMsec, 1000LL );
+    long long msec        = result.rem;
+    long long elapsedSecs = result.quot;
 
     // Get hours
-    result = lldiv( elaspedSecs, 60L * 60LL );
+    result = lldiv( elapsedSecs, 60L * 60LL );
     hh     = result.quot;
     t      = result.rem;
 
@@ -150,24 +176,44 @@ static bool formatMsec( Cpl::Text::String& buffer, unsigned msec, unsigned long 
         dd     = result.quot;
         hh     = result.rem;
 
-        if ( !appendToString )
+        if ( encodeMsec )
         {
-            buffer.format( "%02u %02u:%02u:%02u.%03u", (unsigned) dd, (unsigned) hh, (unsigned) mm, (unsigned) ss, msec );
+            buffer.formatOpt( appendToString,
+                              "%02u %02u:%02u:%02u.%03u",
+                              static_cast<unsigned>( dd ),
+                              static_cast<unsigned>( hh ),
+                              static_cast<unsigned>( mm ),
+                              static_cast<unsigned>( ss ),
+                              static_cast<unsigned>( msec ) );
         }
         else
         {
-            buffer.formatAppend( "%02u %02u:%02u:%02u.%03u", (unsigned) dd, (unsigned) hh, (unsigned) mm, (unsigned) ss, msec );
+            buffer.formatOpt( appendToString,
+                              "%02u %02u:%02u:%02u",
+                              static_cast<unsigned>( dd ),
+                              static_cast<unsigned>( hh ),
+                              static_cast<unsigned>( mm ),
+                              static_cast<unsigned>( ss ) );
         }
     }
     else
     {
-        if ( !appendToString )
+        if ( encodeMsec )
         {
-            buffer.format( "%02u:%02u:%02u.%03u", (unsigned) hh, (unsigned) mm, (unsigned) ss, (unsigned) msec );
+            buffer.formatOpt( appendToString,
+                              "%02u:%02u:%02u.%03u",
+                              static_cast<unsigned>( hh ),
+                              static_cast<unsigned>( mm ),
+                              static_cast<unsigned>( ss ),
+                              static_cast<unsigned>( msec ) );
         }
         else
         {
-            buffer.formatAppend( "%02u:%02u:%02u.%03u", (unsigned) hh, (unsigned) mm, (unsigned) ss, (unsigned) msec );
+            buffer.formatOpt( appendToString,
+                              "%02u:%02u:%02u",
+                              static_cast<unsigned>( hh ),
+                              static_cast<unsigned>( mm ),
+                              static_cast<unsigned>( ss ) );
         }
     }
 
@@ -175,66 +221,6 @@ static bool formatMsec( Cpl::Text::String& buffer, unsigned msec, unsigned long 
 }
 
 
-bool Cpl::Text::formatPrecisionTimeStamp( Cpl::Text::String& buffer, Cpl::System::ElapsedTime::Precision_T timeStamp, bool encodeDay, bool appendToString )
-{
-    return formatMsec( buffer, timeStamp.m_thousandths, timeStamp.m_seconds, encodeDay, appendToString );
+}  // end namespaces
 }
-
-
-bool Cpl::Text::formatMsecTimeStamp( Cpl::Text::String& buffer, unsigned long long timeStampInMsecs, bool encodeDay, bool appendToString )
-{
-    lldiv_t result;
-
-    // Separate milliseconds and elapsed seconds
-    result = lldiv( timeStampInMsecs, 1000LL );
-    return formatMsec( buffer, (unsigned) result.rem, result.quot, encodeDay, appendToString );
-}
-
-
-bool Cpl::Text::formatSecTimeStamp( Cpl::Text::String& buffer, unsigned long long timeStampInSecs, bool encodeDay, bool appendToString )
-{
-    unsigned long long t, dd, hh, mm, ss;
-    lldiv_t            result;
-
-    // Get hours
-    result = lldiv( timeStampInSecs, 60L * 60LL );
-    hh     = result.quot;
-    t      = result.rem;
-
-    // Get Minutes & Seconds
-    result = lldiv( t, 60LL );
-    mm     = result.quot;
-    ss     = result.rem;
-
-    // Format string
-    if ( encodeDay )
-    {
-        result = lldiv( hh, 24LL );
-        dd     = result.quot;
-        hh     = result.rem;
-
-        if ( !appendToString )
-        {
-            buffer.format( "%02llu %02u:%02u:%02u", dd, (unsigned) hh, (unsigned) mm, (unsigned) ss );
-        }
-        else
-        {
-            buffer.formatAppend( "%02llu %02u:%02u:%02u", dd, (unsigned) hh, (unsigned) mm, (unsigned) ss );
-        }
-    }
-    else
-    {
-        if ( !appendToString )
-        {
-            buffer.format( "%02llu:%02u:%02u", hh, (unsigned) mm, (unsigned) ss );
-        }
-        else
-        {
-            buffer.formatAppend( "%02llu:%02u:%02u", hh, (unsigned) mm, (unsigned) ss );
-        }
-    }
-
-    return !buffer.truncated();
-}
-
-
+//------------------------------------------------------------------------------

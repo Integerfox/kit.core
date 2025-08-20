@@ -94,25 +94,25 @@ TEST_CASE( "StringTo" )
         const char* endPtr = 0;
         float value;
 
-        bool result = StringTo::floating<float>( value, "123.32" );
+        bool result = StringTo::floating( value, "123.32" );
         REQUIRE( result == true );
         REQUIRE( value == 123.32f );
-        result = StringTo::floating<float>( value, strPtr, nullptr, &endPtr );
+        result = StringTo::floating( value, strPtr, nullptr, &endPtr );
         REQUIRE( result == true );
         REQUIRE( value == -123.32f );
         REQUIRE( endPtr == strPtr + 7 );
-        result = StringTo::floating<float>( value, "3.40e38" );
+        result = StringTo::floating( value, "3.40e38" );
         REQUIRE( result == true );
         REQUIRE( value >= 3.40e38f );
-        result = StringTo::floating<float>( value, "1.7976931348623157E+308" );
+        result = StringTo::floating( value, "1.7976931348623157E+308" );
         REQUIRE( result == true );
         REQUIRE( value == std::numeric_limits<float>::infinity() );
         double v2;
-        result = StringTo::floating<double>( v2, "1.7976931348623157E+308" );
+        result = StringTo::floating( v2, "1.7976931348623157E+308" );
         REQUIRE( result == true );
         REQUIRE( v2 >= 1.7976931348623157E+308 );
 
-        result = StringTo::floating<float>( value, nullptr );
+        result = StringTo::floating( value, nullptr );
         REQUIRE( result == false );
     }
 
@@ -133,141 +133,5 @@ TEST_CASE( "StringTo" )
         REQUIRE( result == false );
     }
 
-#if 0
-    SECTION( "hextobuffer" )
-    {
-        const char* text = "AA0055BBFC";
-        uint8_t buffer[5];
-
-        long result = asciiHexToBuffer( buffer, text, sizeof( buffer ) );
-        REQUIRE( result == 5 );
-        REQUIRE( buffer[0] == 0xAA );
-        REQUIRE( buffer[1] == 0x00 );
-        REQUIRE( buffer[2] == 0x55 );
-        REQUIRE( buffer[3] == 0xBB );
-        REQUIRE( buffer[4] == 0xFC );
-
-        result = asciiHexToBuffer( buffer, 0, sizeof( buffer ) );
-        REQUIRE( result == -1 );
-        result = asciiHexToBuffer( 0, text, sizeof( buffer ) );
-        REQUIRE( result == -1 );
-        result = asciiHexToBuffer( buffer, text, 0 );
-        REQUIRE( result == -1 );
-
-        result = asciiHexToBuffer( buffer, "AA3", sizeof( buffer ) );
-        REQUIRE( result == -1 );
-
-        result = asciiHexToBuffer( buffer, text, 3 );
-        REQUIRE( result == -1 );
-    }
-
-    SECTION( "parse Precision time" )
-    {
-        const char* text = "12:13:14.5";
-        Cpl::System::ElapsedTime::Precision_T time;
-        bool result = parsePrecisionTimeStamp( text, time );
-        REQUIRE( result == true );
-        REQUIRE( time.m_thousandths == 500 );
-        REQUIRE( time.m_seconds == 14 + ( 13 * 60 ) + ( 12 * 60 * 60 ) );
-
-        text   = "02 12:13:14.05";
-        result = parsePrecisionTimeStamp( text, time );
-        REQUIRE( result == true );
-        REQUIRE( time.m_thousandths == 50 );
-        REQUIRE( time.m_seconds == 14 + ( 13 * 60 ) + ( 12 * 60 * 60 ) + ( 2 * 60 * 60 * 24 ) );
-
-        text   = "2 12:3:14.005";
-        result = parsePrecisionTimeStamp( text, time );
-        REQUIRE( result == true );
-        REQUIRE( time.m_thousandths == 5 );
-        REQUIRE( time.m_seconds == 14 + ( 3 * 60 ) + ( 12 * 60 * 60 ) + ( 2 * 60 * 60 * 24 ) );
-
-        text   = "02 12:13:14";
-        result = parsePrecisionTimeStamp( text, time );
-        REQUIRE( result == true );
-
-        text   = "12:13:14";
-        result = parsePrecisionTimeStamp( text, time );
-        REQUIRE( result == true );
-
-        text   = "02-12:13:14";
-        result = parsePrecisionTimeStamp( text, time );
-        REQUIRE( result == false );
-        
-        text   = "02-12:13:14.1234";
-        result = parsePrecisionTimeStamp( text, time );
-        REQUIRE( result == false );
-
-    }
-
-    SECTION( "bintobuffer" )
-    {
-        const char* text = "00101100101001011111000100011111"; // 0x2CA5F11F
-        uint8_t buffer[4];
-
-        long result = asciiBinaryToBuffer( buffer, text, sizeof( buffer ), true );
-        REQUIRE( result == 4*8 );
-        REQUIRE( buffer[0] == 0x1F );
-        REQUIRE( buffer[1] == 0xF1 );
-        REQUIRE( buffer[2] == 0xA5 );
-        REQUIRE( buffer[3] == 0x2C );
-        
-        result = asciiBinaryToBuffer( buffer, text, sizeof( buffer ) );
-        REQUIRE( result == 4*8 );
-        REQUIRE( buffer[0] == 0x2C );
-        REQUIRE( buffer[1] == 0xA5 );
-        REQUIRE( buffer[2] == 0xF1 );
-        REQUIRE( buffer[3] == 0x1F );
-
-        result = asciiBinaryToBuffer( buffer, 0, sizeof( buffer ) );
-        REQUIRE( result == -1 );
-        result = asciiBinaryToBuffer( 0, text, sizeof( buffer ) );
-        REQUIRE( result == -1 );
-        result = asciiBinaryToBuffer( buffer, text, 0 );
-        REQUIRE( result == -1 );
-
-        result = asciiBinaryToBuffer( buffer, text, 1 );
-        REQUIRE( result == 8 );
-        REQUIRE( buffer[0] == 0x2C );
-
-        uint8_t buffer2[5];
-        result = asciiBinaryToBuffer( buffer2, text, sizeof( buffer2 ), true );
-        REQUIRE( result == 4*8 );
-        REQUIRE( buffer2[0] == 0x1F );
-        REQUIRE( buffer2[1] == 0xF1 );
-        REQUIRE( buffer2[2] == 0xA5 );
-        REQUIRE( buffer2[3] == 0x2C );
-
-        result = asciiBinaryToBuffer( buffer2, text, sizeof( buffer2 ) );
-        REQUIRE( result == 4*8 );
-        REQUIRE( buffer2[0] == 0x2C );
-        REQUIRE( buffer2[1] == 0xA5 );
-        REQUIRE( buffer2[2] == 0xF1 );
-        REQUIRE( buffer2[3] == 0x1F );
-
-        text = "10101"; // 0xA8
-        result = asciiBinaryToBuffer( buffer, text, sizeof( buffer ) );
-        REQUIRE( result == 5 );
-        REQUIRE( buffer[0] == 0xA8 );
-
-        result = asciiBinaryToBuffer( buffer, text, sizeof( buffer ), true );
-        REQUIRE( result == 5 );
-        REQUIRE( buffer[0] == 0xA8 );
-
-        text = "100 1"; // error
-        result = asciiBinaryToBuffer( buffer, text, sizeof( buffer ) );
-        REQUIRE( result == -1 );
-
-        result = asciiBinaryToBuffer( buffer, text, sizeof( buffer ), true );
-        REQUIRE( result == -1 );
-
-        text = " 1001"; // error
-        result = asciiBinaryToBuffer( buffer, text, sizeof( buffer ) );
-        REQUIRE( result == -1 );
-
-        result = asciiBinaryToBuffer( buffer, text, sizeof( buffer ), true );
-        REQUIRE( result == -1 );
-    }
-#endif
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

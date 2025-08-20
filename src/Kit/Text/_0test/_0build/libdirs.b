@@ -1,4 +1,4 @@
-src/Kit/Text < Strip.cpp ToString.cpp StringTo.cpp Parse.cpp StringBase.cpp FStringBase.cpp iostream.cpp DString.cpp
+src/Kit/Text
 src/Kit/Text/_0test
 
 src/Kit/Container

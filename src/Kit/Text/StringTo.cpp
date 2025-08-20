@@ -78,7 +78,7 @@ bool StringTo::a2ull( unsigned long long& convertedValue, const char* string, in
         {
             // Negative numbers are not allowed for unsigned types
             return false;
-        }   
+        }
         value = strtoull( strPtr, &endPtr, base );
     }
     if ( end )
@@ -96,10 +96,40 @@ bool StringTo::a2ull( unsigned long long& convertedValue, const char* string, in
     return false;
 }
 
-bool StringTo::a2d( double& convertedValue, const char* string, const char* validStopChars, const char** end ) noexcept
+bool StringTo::floating( float&       convertedValue,
+                         const char*  string,
+                         const char*  validStopChars,
+                         const char** end ) noexcept
+
 {
-    double value  = 0;
-    char*  endPtr = 0;
+    float value;
+    char* endPtr = nullptr;
+    if ( string )
+    {
+        value = strtof( string, &endPtr );
+    }
+    if ( end )
+    {
+        *end = endPtr;
+    }
+
+    // Only update the client's variable if the conversion was successful
+    if ( conversionOk( string, endPtr, validStopChars ) )
+    {
+        convertedValue = value;
+        return true;
+    }
+    return false;
+}
+
+bool StringTo::floating( double&      convertedValue,
+                         const char*  string,
+                         const char*  validStopChars,
+                         const char** end ) noexcept
+
+{
+    double value;
+    char*  endPtr = nullptr;
     if ( string )
     {
         value = strtod( string, &endPtr );
@@ -115,9 +145,10 @@ bool StringTo::a2d( double& convertedValue, const char* string, const char* vali
         convertedValue = value;
         return true;
     }
-
     return false;
 }
+
+
 ///////////////////
 bool StringTo::boolean( bool& convertedValue, const char* string, const char* trueToken, const char* falseToken, const char** end ) noexcept
 {
@@ -150,145 +181,6 @@ bool StringTo::boolean( bool& convertedValue, const char* string, const char* tr
     return result;
 }
 
-#if 0
-///////////////////
-long Cpl::Text::asciiHexToBuffer( void* dstBinary, const char* srcP, size_t dstMaxLen )
-{
-    if ( !dstBinary || !srcP || dstMaxLen == 0 )
-    {
-        return -1;
-    }
-
-    uint8_t* dstP = (uint8_t*)dstBinary;
-    size_t   len  = strlen( srcP );
-
-    // Length must be even
-    if ( ( len & 1 ) == 1 )
-    {
-        return -1;
-    }
-
-    // Do NOT exceed the destination buffer
-    if ( len / 2 > dstMaxLen )
-    {
-        return -1;
-    }
-
-    // Convert the string
-    if ( !unhex( srcP, len, dstP ) )
-    {
-        // Error -->end conversion
-        return -1;
-    }
-
-    return len / 2;
-}
-
-long Cpl::Text::asciiBinaryToBuffer( void* dstBinary, const char* srcP, size_t dstMaxLen, bool reverse )
-{
-    if ( !dstBinary || !srcP || dstMaxLen == 0 )
-    {
-        return -1;
-    }
-
-    // Calculate the 'start' and 'end' of the data
-    size_t inputCharLen = strlen( srcP );
-    size_t inputBinLen  = ( inputCharLen + 7 ) / 8;
-    dstMaxLen           = inputBinLen > dstMaxLen ? dstMaxLen : inputBinLen;
-    uint8_t* ptr        = reverse ? ( (uint8_t*)dstBinary ) + dstMaxLen - 1 : (uint8_t*)dstBinary;
-    int      direction  = reverse ? -1 : 1;
-
-    // Loop through the string.  Note: for each 'byte' in the string - MSb ordering is assumed
-    long convertedBits = 0;
-    while ( *srcP != '\0' && dstMaxLen )
-    {
-        uint8_t mask = 0x80;
-        uint8_t data = 0;
-        for ( int i = 0; i < 8 && *srcP != '\0'; i++, mask >>= 1, srcP++, convertedBits++ )
-        {
-            if ( *srcP == '1' )
-            {
-                data |= mask;
-            }
-            else if ( *srcP != '0' )
-            {
-                return -1;
-            }
-        }
-
-        *ptr  = data;
-        ptr  += direction;
-        dstMaxLen--;
-    }
-
-    return convertedBits;
-}
-
-////////////////////////////////////////////
-static bool parseTime( const char* time, Cpl::System::ElapsedTime::Precision_T& convertedValue )
-{
-    unsigned long hh;
-    const char*   endPtr;
-    if ( a2ul( hh, time, 10, ":", &endPtr ) && *endPtr != '\0' )
-    {
-        unsigned long mm;
-        if ( a2ul( mm, endPtr + 1, 10, ":", &endPtr ) && *endPtr != '\0' )
-        {
-            unsigned long ss;
-            if ( a2ul( ss, endPtr + 1, 10, ".", &endPtr ) )
-            {
-                unsigned int msecs = 0;
-                if ( *endPtr == '\0' || a2ui( msecs, endPtr + 1 ) )
-                {
-                    if ( msecs < 1000 )
-                    {
-                        msecs                        = strlen( endPtr + 1 ) == 1 ? msecs * 100 : strlen( endPtr + 1 ) == 2 ? msecs * 10
-                                                                                                                           : msecs;
-                        convertedValue.m_thousandths = msecs;
-                        convertedValue.m_seconds     = ss + ( mm * 60 ) + ( hh * 60 * 60 );
-                        return true;
-                    }
-                }
-            }
-        }
-    }
-
-    // If I get here - the parse failed
-    return false;
-}
-
-// format: [DD ]HH:MM:SS.sss
-bool Cpl::Text::parsePrecisionTimeStamp( const char* timeStampToParse, Cpl::System::ElapsedTime::Precision_T& convertedValue )
-{
-    CPL_SYSTEM_ASSERT( timeStampToParse );
-
-    const char* firstArg  = stripSpace( timeStampToParse );
-    const char* secondArg = stripSpace( stripNotSpace( firstArg ) );
-
-    // No day field
-    if ( !secondArg || *secondArg == '\0' )
-    {
-        return parseTime( firstArg, convertedValue );
-    }
-
-    // Have day field
-    else
-    {
-        unsigned long day;
-        if ( a2ul( day, firstArg, 10, " " ) )
-        {
-            if ( parseTime( secondArg, convertedValue ) )
-            {
-                convertedValue.m_seconds += day * 60 * 60 * 24;
-                return true;
-            }
-        }
-    }
-
-    // If I get here, then the parse failed
-    return false;
-}
-#endif
 
 }  // end namespaces
 }
