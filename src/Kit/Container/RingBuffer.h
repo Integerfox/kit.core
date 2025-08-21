@@ -100,7 +100,7 @@ public:
      */
     ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
     {
-        return (ITEM*)RingBufferBase::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_ringBufferMemory );
+        return static_cast<ITEM*>(RingBufferBase::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_ringBufferMemory ));
     }
 
     /** This method 'removes' N elements - that were removed using the
@@ -129,7 +129,7 @@ public:
      */
     ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
     {
-        return (ITEM*)RingBufferBase::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_ringBufferMemory );
+        return static_cast<ITEM*>(RingBufferBase::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_ringBufferMemory ));
     }
 
     /** This method 'adds' N elements - that were populated using the
@@ -153,7 +153,7 @@ protected:
     /// Memory for the Ring buffer
     ITEM m_ringBufferMemory[N];
 
-protected:
+private:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBuffer( const RingBuffer<ITEM, N>& m ) = delete;
 

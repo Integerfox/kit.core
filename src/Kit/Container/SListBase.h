@@ -21,13 +21,13 @@ namespace Container {
     which maintains the ordering imposed on it by the application.  It is
     intended to be the base class for a type-safe template class. Having
     a non-templatized base class reduces the memory footprint when an
-    application has more than one type specific SListBase_ class
+    application has more than one type specific SListBase class
  */
-class SListBase_
+class SListBase
 {
 protected:
     /// Constructor initializes head and tail pointers.
-    SListBase_() noexcept
+    SListBase() noexcept
         : m_headPtr( nullptr ), m_tailPtr( nullptr ) {}
 
     /** This is a special constructor for when the list is
@@ -45,14 +45,14 @@ protected:
         is provided.  It assumes that the pointers are already set
         zero because the list is "static". Whew!
      */
-    SListBase_( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
+    SListBase( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
     {
         // intentially DO NOTHING
     }
 
 protected:
     /// Moves the content of the this queue to the specified queue.
-    void move( SListBase_& dst ) noexcept
+    void move( SListBase& dst ) noexcept
     {
         // clear the destination list
         dst.clearTheList();
@@ -275,19 +275,19 @@ protected:
     /// Points to the last item in the list.
     ListItem* m_tailPtr;
 
-protected:
+private:
     /// Prevent access to the copy constructor -->Containers can not be copied!
-    SListBase_( const SListBase_& m ) = delete;
+    SListBase( const SListBase& m ) = delete;
 
     /// Prevent access to the assignment operator -->Containers can not be
     /// copied!
-    SListBase_& operator=( const SListBase_& m ) = delete;
+    SListBase& operator=( const SListBase& m ) = delete;
 
     /// Prevent access to the move constructor -->Containers can not be implicitly moved!
-    SListBase_( SListBase_&& m ) = delete;
+    SListBase( SListBase&& m ) = delete;
 
     /// Prevent access to the move assignment operator -->Containers can not be implicitly moved!
-    SListBase_& operator=( SListBase_&& m ) = delete;
+    SListBase& operator=( SListBase&& m ) = delete;
 };
 
 

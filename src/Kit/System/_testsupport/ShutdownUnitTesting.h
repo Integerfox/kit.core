@@ -1,5 +1,5 @@
-#ifndef Cpl_System_x_testsupport_Shutdown_TS_h_
-#define Cpl_System_x_testsupport_Shutdown_TS_h_
+#ifndef KIT_SYSTEM_TEST_SUPPORT_SHUTDOWN_UNIT_TESTING_H_
+#define KIT_SYSTEM_TEST_SUPPORT_SHUTDOWN_UNIT_TESTING_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
