@@ -186,7 +186,6 @@ TEST_CASE( "FString" )
 
         FString<8> s7( "****" );
         s7 += (unsigned)42;
-        ;
         REQUIRE( s7 == "****42" );
 
         FString<8> s8( "****" );

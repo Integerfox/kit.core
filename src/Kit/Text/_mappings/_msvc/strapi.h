@@ -1,5 +1,5 @@
-#ifndef KIT_TEXT_MAPPPINGS_MSVC_STRAPI_H_
-#define KIT_TEXT_MAPPPINGS_MSVC_STRAPI_H_
+#ifndef KIT_TEXT_MAPPINGS_MSVC_STRAPI_H_
+#define KIT_TEXT_MAPPINGS_MSVC_STRAPI_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

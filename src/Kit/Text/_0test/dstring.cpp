@@ -128,7 +128,7 @@ TEST_CASE( "DString" )
         REQUIRE( s6 == "-32" );
 
         DString s7( "****" );
-        s7 = (unsigned) 42;;
+        s7 = (unsigned) 42;
         REQUIRE( s7 == "42" );
 
         DString s8( "****" );
@@ -181,7 +181,7 @@ TEST_CASE( "DString" )
         REQUIRE( s6 == "****-32" );
 
         DString s7( "****" );
-        s7 += (unsigned) 42;;
+        s7 += (unsigned) 42;
         REQUIRE( s7 == "****42" );
 
         DString s8( "****" );
