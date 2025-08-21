@@ -193,7 +193,7 @@ public:
     }
 
 
-protected: 
+private: 
     /// Prevent access to the copy constructor -->Containers can not be copied!
     Map( const Map<ITEM>& m ) = delete;
 

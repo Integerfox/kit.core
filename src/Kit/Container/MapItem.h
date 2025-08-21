@@ -1,5 +1,5 @@
-#ifndef Cpl_Container_MapItem_h_
-#define Cpl_Container_MapItem_h_
+#ifndef KIT_CONTAINER_MAP_ITEM_H_
+#define KIT_CONTAINER_MAP_ITEM_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -62,19 +62,19 @@ protected:
 
 protected:  // Helper methods
     /// Get tree connection/pointer
-    inline MapItem* getParent() const { return (MapItem*)m_parentPtr_; }
+    inline MapItem* getParent() const { return static_cast<MapItem*>(m_parentPtr_); }
 
     /// Set tree connection/pointer
     inline void setParent( MapItem* n ) { m_parentPtr_ = n; }
 
     /// Get tree connection/pointer
-    inline MapItem* getLeft() const { return (MapItem*)m_prevPtr_; };
+    inline MapItem* getLeft() const { return static_cast<MapItem*>(m_prevPtr_); };
 
     /// Set tree connection/pointer
     inline void setLeft( MapItem* n ) { m_prevPtr_ = n; }
 
     /// Get tree connection/pointer
-    inline MapItem* getRight() const { return (MapItem*)m_nextPtr_; };
+    inline MapItem* getRight() const { return static_cast<MapItem*>(m_nextPtr_); };
 
     /// Set tree connection/pointer
     inline void setRight( MapItem* n ) { m_nextPtr_ = n; }

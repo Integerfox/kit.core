@@ -99,7 +99,7 @@ protected:
         }
 
         // Copy the element data from the ring buffer to the provided pointer
-        uint8_t* srcPtr = ( (uint8_t*)srcRingBufMemory ) + ( readIdx * elemSize );
+        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (readIdx * elemSize);
         memcpy( elemPtr, srcPtr, elemSize );
 
         // Update the read index
@@ -129,7 +129,7 @@ protected:
         }
 
         // Copy the element data to the provided pointer to the ring buffer
-        uint8_t* dstPtr = ( (uint8_t*)dstRingBufMemory ) + ( writeIdx * elemSize );
+        uint8_t* dstPtr = static_cast<uint8_t*>(dstRingBufMemory) + (writeIdx * elemSize);
         memcpy( dstPtr, elemPtr, elemSize );
 
         // Update the write index
@@ -160,7 +160,7 @@ protected:
         }
 
         // Copy the element data from the ring buffer to the provided pointer
-        uint8_t* srcPtr = ( (uint8_t*)srcRingBufMemory ) + ( readIdx * elemSize );
+        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (readIdx * elemSize);
         memcpy( elemPtr, srcPtr, elemSize );
 
         return true;
@@ -191,7 +191,7 @@ protected:
         unsigned prevTailIdx = writeIdx == 0 ? ( m_elements - 1 ) : ( writeIdx - 1 );
 
         // Copy the element data from the ring buffer to the provided pointer
-        uint8_t* srcPtr = ( (uint8_t*)srcRingBufMemory ) + ( prevTailIdx * elemSize );
+        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (prevTailIdx * elemSize);
         memcpy( elemPtr, srcPtr, elemSize );
 
         return true;
@@ -230,7 +230,7 @@ protected:
             dstNumFlatElements = currentElems;
         }
 
-        uint8_t* srcPtr = ( (uint8_t*)srcRingBufMemory ) + ( readIdx * elemSize );
+        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (readIdx * elemSize);
         return srcPtr;
     }
 
@@ -282,7 +282,7 @@ protected:
         }
 
         // Get a pointer to next 'available' address to add an element
-        uint8_t* srcPtr = ( (uint8_t*)srcRingBufMemory ) + ( writeIdx * elemSize );
+        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (writeIdx * elemSize);
         return srcPtr;
     }
 
@@ -320,7 +320,7 @@ protected:
     /// Maximum number of element in the 'ring memory
     const unsigned m_elements;
 
-protected:
+private:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBufferBase( const RingBufferBase& m ) = delete;
 

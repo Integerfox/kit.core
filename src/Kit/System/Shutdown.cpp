@@ -11,7 +11,8 @@
 
 #include "Shutdown.h"
 #include "Kit/Container/SList.h"
-
+#include "Kit/System/Mutex.h"
+#include "Private.h"
 
 
 //------------------------------------------------------------------------------
@@ -23,36 +24,32 @@ static Kit::Container::SList<Shutdown::Handler> callbacks_( "invoke_special_stat
 
 
 ///////////////////////
-void registerHandler( Shutdown::Handler& instanceToRegister ) noexcept
+void Shutdown::registerHandler( Shutdown::Handler& instanceToRegister ) noexcept
 {
-    // TODO: FIX ME
-    // Locks_::system().lock();
+    Mutex::ScopeLock lock( PrivateLocks::system() );
     callbacks_.push( instanceToRegister );
-    // Locks_::system().unlock();
 }
 
 
 //////////////////////
 int Shutdown::notifyShutdownHandlers( int exitCode ) noexcept
 {
-    // TODO: FIX ME
-    // Locks_::system().lock();
+    PrivateLocks::system().lock();
     Shutdown::Handler* ptr = callbacks_.get();
-    // Locks_::system().unlock();
+    PrivateLocks::system().unlock();
 
     while ( ptr )
     {
         exitCode = ptr->notify( exitCode );
 
-        // TODO: FIX ME
-        // Locks_::system().lock();
+        PrivateLocks::system().lock();
         ptr = callbacks_.pop();
-        // Locks_::system().unlock();
+        PrivateLocks::system().unlock();
     }
 
     return exitCode;
 }
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

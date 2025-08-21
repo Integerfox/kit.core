@@ -20,6 +20,7 @@
 #include <semaphore.h>
 #include <time.h>
 #include <limits.h>
+#include <stdint.h>
 #include "Kit/System/FatalError.h"
 
 /// PRETTY_FUNCTION macro is non-standard
@@ -45,7 +46,7 @@
 #define Kit_System_Thread_NativeHdl_T_MAP       pthread_t
 
 /// Mapping
-#define Kit_System_Mutex_T_MAP                  pthread_mutex_t
+#define KitSystemMutex_T_MAP                    pthread_mutex_t
 
 /// Mapping
 #define Kit_System_Sema_T_MAP                   sem_t
@@ -70,11 +71,11 @@
 
 
 /// Mapping
-inline unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()
+inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
     struct timespec tm;
     clock_gettime( CLOCK_MONOTONIC, &tm );
-    return tm.tv_sec * 1000 + tm.tv_nsec / 1000000;
+    return (uint32_t)(tm.tv_sec * 1000 + tm.tv_nsec / 1000000);
 }
 
 //

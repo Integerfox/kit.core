@@ -84,7 +84,7 @@ public:
     int compareKey( const Key& key ) const noexcept
     {
         unsigned  len = 0;
-        DATATYPE* ptr = (DATATYPE*)key.getRawKey( &len );
+        DATATYPE* ptr = static_cast<DATATYPE*>(const_cast<void*>(key.getRawKey( &len )));
         KIT_SYSTEM_ASSERT( len == sizeof( DATATYPE ) );
 
         if ( m_keyData < *ptr )
