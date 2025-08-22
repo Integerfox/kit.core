@@ -11,10 +11,9 @@
 /** @file */
 
 // #include "kit_map.h"
-#include "Kit/System/Assert.h"
 #include <stdint.h>
 #include <string.h>
-
+#include <limits.h>
 
 ///
 namespace Kit {
@@ -33,6 +32,10 @@ public:
         The actual type of the 'key' is up to the client sub-class
         that implements this interface.  It is the responsibility of
         the sub-class to correctly define/interpret the data type of the key.
+
+        CAUTION: If the key being compared is NOT a compatible type or is not
+                 a valid key, then INT_MIN is returned. The caller of the method
+                 is responsible for checking for INT_MIN
 
      */
     virtual int compareKey( const Key& key ) const noexcept = 0;
@@ -85,7 +88,10 @@ public:
     {
         unsigned  len = 0;
         DATATYPE* ptr = static_cast<DATATYPE*>(const_cast<void*>(key.getRawKey( &len )));
-        KIT_SYSTEM_ASSERT( len == sizeof( DATATYPE ) );
+        if ( len != sizeof( DATATYPE ) )
+        {
+            return INT_MIN;  // Not a valid key
+        }
 
         if ( m_keyData < *ptr )
         {

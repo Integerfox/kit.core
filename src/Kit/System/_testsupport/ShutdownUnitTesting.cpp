@@ -9,8 +9,9 @@
 /** @file */
 
 #include "ShutdownUnitTesting.h"
+#include "Kit/System/Mutex.h"
 #include "Kit/System/Shutdown.h"
-
+#include "Kit/System/Private.h"
 
 
 ///
@@ -26,51 +27,41 @@ namespace System {
 ////////////////////////////////////////////////////////////////////////////////
 void ShutdownUnitTesting::clearAndUseCounter() noexcept
 {
-    // TODO: FIX ME
-    //Locks_::system().lock();
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
     counter_  = 0;
     counting_ = true;
     testing_  = true;
-    //Locks_::system().unlock();
 }
 
 size_t ShutdownUnitTesting::getAndClearCounter() noexcept
 {
-    // TODO: FIX ME
-    //Locks_::system().lock();
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
     size_t temp = counter_;
     counter_    = 0;
-    //Locks_::system().unlock();
-
     return temp;
 }
 
 
 void ShutdownUnitTesting::setExitCode( int newExitCode ) noexcept
 {
-    // TODO: FIX ME
-    //Locks_::system().lock();
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
     exitCode_ = newExitCode;
     counting_ = false;
     testing_  = true;
-    //Locks_::system().unlock();
 }
 
 
 void ShutdownUnitTesting::restore() noexcept
 {
-    // TODO: FIX ME
-    //Locks_::system().lock();
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
     testing_ = false;
-    //Locks_::system().unlock();
 }
 
 
 ////////////////////////////////////////////////////////////////////////////////
 static int preprocess_shutdown_( int exitCode, bool& trueExit ) noexcept
 {
-    // TODO: FIX ME
-    //Locks_::system().lock();
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
 
     if ( !testing_ )
     {
@@ -90,14 +81,13 @@ static int preprocess_shutdown_( int exitCode, bool& trueExit ) noexcept
         }
     }
 
-    //Locks_::system().unlock();
     return exitCode;
 }
 
 int Shutdown::success() noexcept
 {
     bool trueExit = true;
-    int  exitCode = preprocess_shutdown_( OPTION_KIT_SYSTEM_SHUTDOWN_SUCCESS_ERROR_CODE, trueExit );
+    int  exitCode = preprocess_shutdown_( eSUCCESS, trueExit );
     if ( trueExit )
     {
         exitCode = notifyShutdownHandlers( exitCode );

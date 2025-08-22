@@ -43,7 +43,7 @@ protected:
         }
         else if ( delta != newDeleteDelta_ )
         {
-            exitCode = OPTION_KIT_SYSTEM_SHUTDOWN_FAILURE_ERROR_CODE;
+            exitCode = Kit::System::Shutdown::eMEMORY;
             msg      = "ERROR: new/delete call delta does NOT match expected value.";
         }
 

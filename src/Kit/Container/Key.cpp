@@ -42,9 +42,6 @@ const void* KeyStringBuffer::getRawKey( unsigned* returnRawKeyLenPtr ) const noe
 
 int KeyStringBuffer::compare( const char* myString, unsigned myLen, const char* otherString, unsigned otherLen ) noexcept
 {
-    KIT_SYSTEM_ASSERT( myString != nullptr );
-    KIT_SYSTEM_ASSERT( otherString != nullptr );
-    
     if ( otherString )
     {
         if ( myString )
@@ -61,7 +58,8 @@ int KeyStringBuffer::compare( const char* myString, unsigned myLen, const char* 
         }
     }
 
-    return -1;
+    // Not a valid key
+    return INT_MIN; 
 }
 
 }   // end namespaces

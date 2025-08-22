@@ -158,8 +158,7 @@ TEST_CASE( "Map" )
 
 
         // Sneak in test for bogus keys
-        ptr2 = staticmap_.find( cherry );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() >= 1u ); // Note: Since the behavior is undefined when FatalError::logf() returns -->I will hit more than one fatal error, how many more is somewhat 'random'
+        REQUIRE( staticmap_.find( cherry ) == nullptr );
     }
 
     SECTION( "Basic" )

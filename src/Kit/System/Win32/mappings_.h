@@ -45,7 +45,7 @@
     do                                                                                                                                               \
     {                                                                                                                                                \
         if ( !( e ) )                                                                                                                                \
-            Kit::System::FatalError::logf( "ASSERT Failed at: file=%s, line=%d, func=%s\n", __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME ); \
+            Kit::System::FatalError::logf( Kit::System::Shutdown::eASSERT, "ASSERT Failed at: file=%s, line=%d, func=%s\n", __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME ); \
     }                                                                                                                                                \
     while ( 0 )
 

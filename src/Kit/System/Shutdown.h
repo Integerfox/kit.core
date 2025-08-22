@@ -15,23 +15,20 @@
 #include "Kit/Container/ListItem.h"
 
 
-/** Specifies the default value used for the application exit code when
-    terminating 'successfully'
+/** Starting value for KIT Library's exit codes.  It is strongly recommended that
+    applications do NOT override this value.
  */
-#ifndef OPTION_KIT_SYSTEM_SHUTDOWN_SUCCESS_ERROR_CODE
-#define OPTION_KIT_SYSTEM_SHUTDOWN_SUCCESS_ERROR_CODE 0
+#ifndef OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES
+#define OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES 0
 #endif
 
-
-/** Specifies the default value used for the application exit code when
-    terminating 'on a failure'
- */
-#ifndef OPTION_KIT_SYSTEM_SHUTDOWN_FAILURE_ERROR_CODE
-#define OPTION_KIT_SYSTEM_SHUTDOWN_FAILURE_ERROR_CODE 1
-#endif
+/** Total number of reserved exit codes for the KIT Library.  The application
+    can define its own exit codes starting at:
+    OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES + KIT_SYSTEM_SHUTDOWN_NUM_RESERVED_EXIT_CODES
+*/
+constexpr int KIT_SYSTEM_SHUTDOWN_NUM_RESERVED_EXIT_CODES = 100;
 
 
-///
 namespace Kit {
 ///
 namespace System {
@@ -52,6 +49,24 @@ namespace System {
  */
 class Shutdown
 {
+public:
+    /** Reserved exit codes for the KIT Library */
+    enum : int
+    {
+        eSUCCESS = OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES,  //!< Application terminated successfully
+        eFAILURE,                                                //!< Application terminated due to a failure.  This is a generic failure
+        eFATAL_ERROR,                                            //!< Application detected a fatal error and self terminated.  This is a generic failure
+        eASSERT,                                                 //!< Application terminated due to an assertion failure
+        eOSAL,                                                   //!< Application terminated due to an OSAL failure (e.g. error detected by a module in the Kit::System namespace)
+        eDATA_MODEL,                                             //!< Application terminated due to a Data Model failure
+        eCONTAINER,                                              //!< Application terminated due to a Container failure (e.g. crossed linked intrusive containers)
+        eSTREAMIO,                                               //!< Application terminated due to a stream I/O failure.  This includes errors in File IO, Sockets, Serial ports, etc.
+        eMEMORY,                                                 //!< Application terminated due to a memory failure (e.g. failed memory allocation)
+        eDRIVER,                                                 //!< Application terminated due to a driver failure.  This is a generic failure
+        eFSM_EVENT_OVERFLOW,                                     //!< Application terminated due to a finite state machine event overflow condition (i.e. a FSM event was-dropped/not-processed)
+        eWATCHDOG                                                //!< Application terminated due to a watchdog timeout (e.g. watchdog configuration errors, intentional WDOG trips)
+    };
+
 public:
     /** This call defines the callback interface that is used when the
         application is shutdown
@@ -91,14 +106,14 @@ public:
         exit code.  The caller can optional specify an exit code. What 'forced'
         means is dependent on the actual platform.  All registered callback
         methods will be called before exiting the application. The returned
-        value - assuming the method actually returns - will be the exit code 
+        value - assuming the method actually returns - will be the exit code
         returned by the last shutdown handler.
 
         Note: The recommended approach for exiting the application due to an
               error is to use the Cpl::System::FatalError interface so that
               the 'why' of the failure has the potential for being captured.
      */
-    static int failure( int exitCode = OPTION_KIT_SYSTEM_SHUTDOWN_FAILURE_ERROR_CODE ) noexcept;
+    static int failure( int exitCode = eFAILURE ) noexcept;
 
 
 public:
