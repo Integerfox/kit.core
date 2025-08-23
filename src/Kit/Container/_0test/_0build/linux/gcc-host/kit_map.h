@@ -16,4 +16,4 @@
 #include "Kit/System/Posix/mappings_.h"
 
 // strapi mapping
-//#include "Kit/Text/_mappings/_posix/strapi.h"
+#include "Kit/Text/_mappings/_posix/strapi.h"

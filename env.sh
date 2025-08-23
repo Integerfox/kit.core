@@ -25,6 +25,9 @@ if [ -z "$NQBP2_DONOT_ADD_NINJA_TO_PATH" ]; then
     export NQBP2_DONOT_ADD_NINJA_TO_PATH=true
 fi
 
+# Support for the SINELABORE code generator
+export SINELABORE_PATH=~/sinelabore/bin
+
 # Set helper macros
 alias t="cd $HERE"
 alias bob="$NQBP_BIN/other/bob.py"

@@ -20,8 +20,8 @@
     Note: The fatal error count is reset everytime getAndClearCounter()
           is called.
  */
-#ifndef OPTION_KIT_SYSTEM_SHUTDOWN_TS_MAX_FATAL_ERRORS
-#define OPTION_KIT_SYSTEM_SHUTDOWN_TS_MAX_FATAL_ERRORS 10
+#ifndef OPTION_KIT_SYSTEM_SHUTDOWN_UNI_TESTING_MAX_FATAL_ERRORS
+#define OPTION_KIT_SYSTEM_SHUTDOWN_UNI_TESTING_MAX_FATAL_ERRORS 10
 #endif
 
 

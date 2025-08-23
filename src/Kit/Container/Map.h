@@ -112,32 +112,30 @@ public:
     }
 
 
-    /// Returns the first item in the tree. Returns 0 if tree is empty
+    /// Returns the first item in the tree. The item remains in the tree. Returns 0 if tree is empty
     ITEM* first() const noexcept
     {
         return (ITEM*)m_tree.first();
     }
 
-
-    /// Returns the last item in the tree. Returns 0 if tree is empty
+    /// Returns the last item in the tree. The item remains in the tree. Returns 0 if tree is empty
     ITEM* last() const noexcept
     {
         return (ITEM*)m_tree.last();
     }
 
-
-    /// Returns the next item in the tree.  Returns 0 if at the end-of-tree
+    /// Returns the next item in the tree.  The item remains in the tree. Returns 0 if at the end-of-tree
     ITEM* next( ITEM& current ) const noexcept
     {
         return (ITEM*)m_tree.next( current );
     }
 
-
-    /// Returns the previous item in the tree.  Returns 0 if at the start-of-tree
+    /// Returns the previous item in the tree. The item remains in the tree. Returns 0 if at the start-of-tree
     ITEM* previous( ITEM& current ) const noexcept
     {
         return (ITEM*)m_tree.previous( current );
     }
+
 
     /** Removes the first item in the list.  Returns 0 if the list
         is empty.
@@ -151,7 +149,6 @@ public:
         }
         return nullptr;
     }
-
 
     /** Removes the last item in the list.  Returns 0 if the list
         is empty.

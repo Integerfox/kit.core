@@ -2,7 +2,7 @@ src/Kit/Container
 src/Kit/Container/_0test
 
 #src/Kit/Io/Stdio/_ansi
-#src/Kit/Text
+src/Kit/Text
 #src/Kit/Text/Tokenizer
 #src/Kit/Memory
 #src/Kit/Itc
@@ -12,6 +12,7 @@ src/Kit/Container/_0test
 
 
 src/Kit/System
+src/Kit/System/_trace
 #src/Kit/System/_ansi
 src/Kit/System/_testsupport
 #src/Kit/Io

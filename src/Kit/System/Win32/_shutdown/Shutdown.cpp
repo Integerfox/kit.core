@@ -25,7 +25,7 @@ static int shutdownApplication_( int exitCode ) noexcept
 
 int Shutdown::success() noexcept
 {
-    return shutdownApplication_( notifyShutdownHandlers( OPTION_KIT_SYSTEM_SHUTDOWN_SUCCESS_ERROR_CODE ) );
+    return shutdownApplication_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }
 
 int Shutdown::failure( int exitCode ) noexcept

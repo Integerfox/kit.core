@@ -10,6 +10,7 @@
 
 #include "Item.h"
 #include "Kit/System/FatalError.h"
+#include "Kit/System/Shutdown.h"
 
 
 //------------------------------------------------------------------------------
@@ -20,7 +21,11 @@ bool Item::insert_( void* newContainerPtr ) noexcept
 {
     if ( m_inListPtr_ )
     {
-        Kit::System::FatalError::logf( "Container Error: Double Insert. item=%p, prev container=%p, new container=%p", this, m_inListPtr_, newContainerPtr );
+        Kit::System::FatalError::logf( Kit::System::Shutdown::eCONTAINER,
+                                       "Container Error: Double Insert. item=%p, prev container=%p, new container=%p",
+                                       this,
+                                       m_inListPtr_,
+                                       newContainerPtr );
         return false;
     }
     else
@@ -34,12 +39,15 @@ bool Item::validateNextOkay_( const void* containerPtr ) const noexcept
 {
     if ( m_inListPtr_ != containerPtr )
     {
-        Kit::System::FatalError::logf( "Container Error: Invalid next() call. item=%p, container=%p", this, containerPtr );
+        Kit::System::FatalError::logf( Kit::System::Shutdown::eCONTAINER,
+                                       "Container Error: Invalid next() call. item=%p, container=%p",
+                                       this,
+                                       containerPtr );
         return false;
     }
     return true;
 }
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

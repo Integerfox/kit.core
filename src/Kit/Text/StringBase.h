@@ -88,12 +88,15 @@ public:
     bool endsWith( const char* string ) const noexcept;
 
     /// See Kit::Text::IString
+    KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )
     void format( const char* format, ... ) noexcept;
 
     /// See Kit::Text::IString
+    KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )
     void formatAppend( const char* format, ... ) noexcept;
 
     /// See Kit::Text::IString
+    KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
     void formatOpt( bool appendFlag, const char* format, ... ) noexcept;
 
     /// See Kit::Text::IString
