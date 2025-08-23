@@ -20,6 +20,7 @@
 import sys   
 import os
 import subprocess
+from tracemalloc import Trace
 #
 from nqbplib.docopt.docopt import docopt
 from nqbplib import utils
@@ -29,6 +30,7 @@ usage = """
 genfsm - Generates source code from Cadifra FSM Diagrams (.cdd files)
 ===============================================================================
 Usage: genfsm [options] <basename> <namespaces> [<sinelabore>...]
+       genfsm [options] osal
 
 Arguments:
   <basename>       Base name for the FSM.  The Cadifra diagram must have this
@@ -41,11 +43,13 @@ Arguments:
                    
   <sinelabore>     Optional arguments passed directly to the Sinelabore code
                    generator
+  osal             Lists the support OSAL targets
 
 Options:
   -d NEVENTS       When NEVENTS is greater then 0 code for an event queue is 
                    generated where NEVENTS is the size of the event queue. 
                    [Default: 0]
+  -t OSAL          Specify which supported OSAL to use [Default: CPL]
   -h, --help       Display command help.
         
          
@@ -58,38 +62,90 @@ NOTES:
       http://www.graphviz.org
       
 """
-
-copyright_header = """* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2020  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice."""
-
 #
 import subprocess
 import re
 import sys
 
+
+#-------------------------------------------------------------------------------
+supported_osals = [ "CPL", "KIT" ]
+osal            = None
+
+copyright_header = None
+cpl_copyright_header = """* This file is part of the Colony.Core Project.  The Colony.Core Project is an
+* open source project with a BSD type of licensing agreement.  See the license
+* agreement (license.txt) in the top/ directory or on the Internet at
+* http://integerfox.com/colony.core/license.txt
+*
+* Copyright (c) 2014-2025  John T. Taylor
+*
+* Redistributions of the source code must retain the above copyright notice."""
+
+kit_copyright_header = """ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+"""
+copyright_headers = {
+    "CPL": cpl_copyright_header,
+    "KIT": kit_copyright_header
+}
+trace_include = {
+    "CPL": "Cpl/System/Trace.h",
+    "KIT": "Kit/System/Trace.h"
+}
+fatalerror_include = {
+    "CPL": "Cpl/System/FatalError.h",
+    "KIT": "Kit/System/FatalError.h"
+}
+
+ringbuffer_include = {
+    "CPL": "Cpl/Container/RingBuffer.h",
+    "KIT": "Kit/Container/RingBuffer.h"
+}
+ringbuffer_class = {
+    "CPL": "Cpl::Container::RingBuffer",
+    "KIT": "Kit::Container::RingBuffer"
+}
+fatalerror_logf = {
+    "CPL": "Cpl::System::FatalError::logf(",
+    "KIT": "Kit::System::FatalError::logf( Kit::System::Shutdown::eFSM_EVENT_OVERFLOW,"
+}
+
 #------------------------------------------------------------------------------
 # Parse command line
 def run( argv, copyright=None ):
-    global copyright_header
+    global copyright_header, osal
 
     # Process command line args...
     args  = docopt(usage, version="0.0.1", options_first=True )
     sargs = ' '.join( args['<sinelabore>'] )
 
-    # Check the environment variables 
-    sinpath = os.environ.get( "SINELABORE_PATH" )
+    # Validate target OSAL
+    osal = args['-t'].strip()
+    if osal not in supported_osals:
+        exit(f"ERROR: Unsupported OSAL ({osal}) specified. Use 'genfsm osal' to see supported OSALs.")
+
+    # List supported OSALs
+    if args['osal']:
+        print("Supported OSALs:")
+        for osal in supported_osals:
+            print(f"{osal}")
+        exit(0)
+
+    # Check the environment variables
+    sinpath = os.environ.get("SINELABORE_PATH")
     if ( sinpath == None ):
         exit( "ERROR: The SINELABORE_PATH environment variable is not set." )
-    
-    # Set copyright header (if specified)
+
+    # Set copyright header (either explicit or based on OSAL)
     if ( copyright != None ):
         copyright_header = copyright
+    else:
+        copyright_header = copyright_headers[osal]
 
     # Convert namespace arg to list
     names = args['<namespaces>'].split('::')
@@ -118,10 +174,13 @@ def run( argv, copyright=None ):
     utils.delete_file( evque + ".cpp" )
     
     # Create the config file for Sinelabore
-    geneatedCodegenConfig( cfg, base, names )
+    generatedCodegenConfig( cfg, base, names )
         
     # Build Sinelabore command
-    cmd = 'java -cp {}\*; codegen.Main {} -p CADIFRA -doxygen -o {} -l cppx -Trace {}'.format( sinpath, sargs, fsm, fsmdiag )
+    if os.name == 'nt':
+        cmd = f'java -cp "{sinpath}/*; codegen.Main {sargs} -p CADIFRA -doxygen -o {fsm} -l cppx -Trace {fsmdiag}"'
+    else:
+        cmd = f'java -cp {sinpath}/*.jar codegen.Main {sargs} -p CADIFRA -doxygen -o {fsm} -l cppx -Trace {fsmdiag}'
     cmd = utils.standardize_dir_sep( cmd )
   
     # Invoke Sinelabore command
@@ -282,8 +341,8 @@ def cleanup_for_doxygen( headerfile, classname='<not-used>' ):
                 if ( line.find( 'Here is the graph that shows the state machine' ) == -1 ):
                     outf.write( line )
                 else:
-                    outf.write( "/** \class {}\n\nHere is the graph that shows the state machine this class implements\n\n\dot\n".format( classname ) )
-    
+                    outf.write( f"/** \\class {classname}\n\nHere is the graph that shows the state machine this class implements\n\n\\dot\n" )
+
     os.remove( headerfile )
     os.rename( tmpfile, headerfile )
  
@@ -299,7 +358,7 @@ def cleanup_global_define( headerfile, fsm_name, namespaces ):
                     outf.write( line )
                 else:
                     tokens = line.split()
-                    outf.write( '#define {}{}_InnermostStates {};\n'.format(flatten_namespaces(namespaces), fsm_name, tokens[2]))
+                    outf.write( f'#define {flatten_namespaces(namespaces)}{fsm_name}_InnermostStates {tokens[2]};\n')
     
     os.remove( headerfile )
     os.rename( tmpfile, headerfile )
@@ -313,12 +372,12 @@ def cleanup_includes( headerfile, namespaces, oldfsm, newfsm, oldevt, newevt, ba
     with open( headerfile ) as inf:
         with open( tmpfile, "w") as outf:  
             for line in inf:
-                if ( line.find( '#include "{}"'.format(oldfsm) ) != -1):
-                    outf.write( '#include "{}{}"\n'.format(path, newfsm) )
-                elif ( line.find( '#include "{}"'.format(oldevt) ) != -1) :
-                    outf.write( '#include "{}{}"\n'.format(path, newevt) )
-                elif ( line.find( '#include "{}"'.format(base) ) != -1) :
-                    outf.write( '#include "{}{}"\n'.format(path, base) )
+                if ( line.find( f'#include "{oldfsm}"' ) != -1):
+                    outf.write( f'#include "{path}{newfsm}"\n' )
+                elif ( line.find( f'#include "{oldevt}"' ) != -1) :
+                    outf.write( f'#include "{path}{newevt}"\n' )
+                elif ( line.find( f'#include "{base}"' ) != -1) :
+                    outf.write( f'#include "{path}{base}"\n' )
                 else:
                     outf.write( line )
     
@@ -375,9 +434,9 @@ def cleanup_trace( cppfile, namespaces, base, oldfsm, old_trace_headerfile, new_
                 # Keep the current line...
                 else:
                     outf.write( line )
-                    if ( line.find( '#include "{}"'.format(oldfsm) ) != -1):
-                        outf.write( '#include "{}{}"\n'.format(path, new_trace_headerfile) )
-                        
+                    if ( line.find( f'#include "{oldfsm}"' ) != -1):
+                        outf.write( f'#include "{path}{new_trace_headerfile}"\n' )
+
 
                     # Add trace for transitioned TO state (but skip the initialize() method because trace + statically created instance DON'T mix)    
                     elif ( line.find( newstate ) != -1 ):
@@ -412,15 +471,15 @@ def cleanup_trace( cppfile, namespaces, base, oldfsm, old_trace_headerfile, new_
                 if ( line.find( '#define' ) != -1 and added_include == False ):
                     added_include = True
                     outf.write( line )
-                    outf.write( '\n' )
-                    outf.write( '#include "Cpl/System/Trace.h"\n' )
-                    outf.write( '\n' )
-                    outf.write( '/// Trace Section\n' )
-                    outf.write( '#define SECT_ "{}::{}"\n'.format( "::".join(namespaces), base ) )
-                    outf.write( '\n' )
+                    outf.write( f'\n' )
+                    outf.write( f'#include "{trace_include[osal]}"\n' )
+                    outf.write( f'\n' )
+                    outf.write( f'/// Trace Section\n' )
+                    outf.write( f'#define SECT_ "{"::".join(namespaces)}::{base}"\n' )
+                    outf.write( f'\n' )
                 elif ( line.find( trace_fn ) != -1 ):
-                    outf.write( '#define {}TraceEvent(a) CPL_SYSTEM_TRACE_MSG( SECT_, ( "  Old State=%s, Event=%s", getNameByState(getInnermostActiveState()), {}TraceEvents[a] ));\n'.format( base, base) )
-                    outf.write('\n')        
+                    outf.write( f'#define {base}TraceEvent(a) CPL_SYSTEM_TRACE_MSG( SECT_, ( "  Old State=%s, Event=%s", getNameByState(getInnermostActiveState()), {base}TraceEvents[a] ));\n' )
+                    outf.write( f'\n')        
                     outf.write( events )
                 else:
                     outf.write( line )
@@ -464,14 +523,14 @@ def flatten_namespaces( namespaces ):
 def nested_namespaces( namespaces ):
     nest = ""
     for n in namespaces:
-        nest += "namespace {} {} ".format(n,'{')
+        nest += f"namespace {n} {{"
 
     return nest
     
 def end_nested_namespaces( namespaces ):
     nest = ""
     for n in namespaces:
-        nest += "};"
+        nest += "}"
     nest += "  // end namespace(s)"
     return nest
 
@@ -481,7 +540,7 @@ def cfg_namespaces( namespaces ):
         if ( nest == "*" ):
             nest = n + " " 
         else:
-            nest += "{} namespace {} ".format('{',n)
+            nest += f"{{ namespace {n}"
 
     return nest
     
@@ -499,37 +558,37 @@ def generatedContextClass( class_name, namespaces,  header, actions, guards ):
     fname = class_name + '.h'
     flat  = flatten_namespaces(namespaces)
     with open(fname,"w") as f:
-        f.write( "#ifndef {}{}x_h_\n".format( flat, class_name ) )
-        f.write( "#define {}{}x_h_\n".format( flat, class_name ) )
+        f.write( f"#ifndef {flat}{class_name}x_h_\n" )
+        f.write( f"#define {flat}{class_name}x_h_\n" )
         f.write( header )
-        f.write( "\n\n/* This file is auto-generated DO NOT MANUALLY EDIT this file! */\n\n" )
-        f.write( "\n" )
-        f.write( "///\n" )
-        f.write( "{}\n".format( nested_namespaces(namespaces) ) )
-        f.write( "\n\n" )
-        f.write( "/// Context (aka actions/guards) for my Finite State Machine\n" )
-        f.write( "class {}\n".format( class_name ) )
-        f.write( "{\n" )
-        f.write( "public:\n" )
+        f.write( f"\n\n/* This file is auto-generated DO NOT MANUALLY EDIT this file! */\n\n" )
+        f.write( f"\n" )
+        f.write( f"///\n" )
+        f.write( f"{nested_namespaces(namespaces)}\n" )
+        f.write( f"\n\n" )
+        f.write( f"/// Context (aka actions/guards) for my Finite State Machine\n" )
+        f.write( f"class {class_name}\n" )
+        f.write( f"{{\n" )
+        f.write( f"public:\n" )
         for a in actions:
-            f.write( "    /// Action\n" )
-            f.write( "    virtual void {} noexcept = 0;\n".format( a ) )
-            f.write( "\n" )
-        f.write( "\n" )
-        f.write( "public:\n" )
+            f.write( f"    /// Action\n" )
+            f.write( f"    virtual void {a} noexcept = 0;\n" )
+            f.write( f"\n" )
+        f.write( f"\n" )
+        f.write( f"public:\n" )
         for g in guards:
-            f.write( "    /// Guard\n" )
-            f.write( "    virtual bool {} noexcept = 0;\n".format( g ) )
-            f.write( "\n" )
-        f.write( "\n" )
-        f.write( "public:\n" )
-        f.write( "    /// Virtual Destructor\n" )
-        f.write( "    virtual ~{}(){}{}\n".format( class_name, "{","}" ) )
-        f.write( "\n" )
-        f.write( "};\n" )
-        f.write( "\n" )
-        f.write( "{}\n".format( end_nested_namespaces(namespaces) ) )
-        f.write( "#endif /// end header latch\n" )
+            f.write( f"    /// Guard\n" )
+            f.write( f"    virtual bool {g} noexcept = 0;\n" )
+            f.write( f"\n" )
+        f.write( f"\n" )
+        f.write( f"public:\n" )
+        f.write( f"    /// Virtual Destructor\n" )
+        f.write( f"    virtual ~{class_name}(){{}}\n" )
+        f.write( f"\n" )
+        f.write( f"}};\n" )
+        f.write( f"\n" )
+        f.write( f"{end_nested_namespaces(namespaces)}\n" )
+        f.write( f"#endif /// end header latch\n" )
          
     
 def generateEventClass( class_name, namespaces,  parent_class, parent_header, depth ):
@@ -539,75 +598,75 @@ def generateEventClass( class_name, namespaces,  parent_class, parent_header, de
     macroname = parent_class.upper()
     
     with open(fname,"w") as f:
-        f.write( "#ifndef {}{}x_h_\n".format( flat, class_name ) )
-        f.write( "#define {}{}x_h_\n".format( flat, class_name ) )
+        f.write( f"#ifndef {flat}{class_name}x_h_\n" )
+        f.write( f"#define {flat}{class_name}x_h_\n" )
         f.write( getHeader() )
         f.write( "\n\n/* This file is auto-generated DO NOT MANUALLY EDIT this file! */\n\n" )
         f.write( "\n" )
-        f.write( '#include "{}{}"\n'.format(path, parent_header) )
-        f.write( '#include "Cpl/Container/RingBuffer.h"\n' )
+        f.write( f'#include "{path}{parent_header}"\n' )
+        f.write( f'#include "{ringbuffer_include[osal]}"\n' )
         f.write( "\n\n" )
         f.write( "///\n" )
-        f.write( "{}\n".format( nested_namespaces(namespaces) ) )
+        f.write( f"{nested_namespaces(namespaces)}\n" )
         f.write( "\n\n" )
         f.write( "/// Event Queue for FSM events.\n" )
-        f.write( "class {}: public {}, public Cpl::Container::RingBuffer<{}_EVENT_T>\n".format( class_name, parent_class, macroname ) )
+        f.write( f"class {class_name}: public {parent_class}, public {ringbuffer_class[osal]}<{macroname}_EVENT_T>\n" )
         f.write( "{\n" )
-        f.write( "public:\n" );
+        f.write( "public:\n" )
         f.write( "    /// Define callback function that is called when an event has completed\n" )
-        f.write( "    typedef void ( *EventCompletedCbFunc_T )( {}_EVENT_T proceessedMsg );\n".format( macroname ) )
+        f.write( f"    typedef void ( *EventCompletedCbFunc_T )( {macroname}_EVENT_T proceessedMsg );\n" )
         f.write( "\n" )
         f.write( "protected:\n" )
         f.write( "    /// Optional Callback function for event-completed (typically used for unit testing purposes)\n" )
         f.write( "    EventCompletedCbFunc_T  m_eventCompletedCallback;\n" )
         f.write( "\n" )
         f.write( "    /// Memory for Event queue\n" )
-        f.write( "    {}_EVENT_T m_eventQueMemory[{}];\n".format( macroname, depth) )
+        f.write( f"    {macroname}_EVENT_T m_eventQueMemory[{depth}];\n" )
         f.write( "\n")
         f.write( "    /// Flag for tracking re-entrant events\n" )
         f.write( "    bool        m_processingFsmEvent;\n" )
         f.write( "\n")
         f.write( "public:\n" )
         f.write( "    /// Constructor\n" )
-        f.write( "    {}( EventCompletedCbFunc_T eventCompletedCallback = nullptr );\n".format( class_name) )
+        f.write( f"    {class_name}( EventCompletedCbFunc_T eventCompletedCallback = nullptr );\n" )
         f.write( "\n")
         f.write( "public:\n" )
         f.write( "    /// This method properly queues and process event messages\n" )
-        f.write( "    virtual void generateEvent( {}_EVENT_T msg );\n".format( macroname ) )
+        f.write( f"    virtual void generateEvent( {macroname}_EVENT_T msg );\n" )
         f.write( "};\n" )
         f.write( "\n" )
-        f.write( "{}\n".format( end_nested_namespaces(namespaces) ) )
+        f.write( f"{end_nested_namespaces(namespaces)}\n" )
         f.write( "#endif /// end header latch\n" )
 
     fname = class_name + '.cpp'
     flat  = flatten_namespaces(namespaces)
     with open(fname,"w") as f:
         f.write( getHeader() )
-        f.write( "\n\n/* This file is auto-generated DO NOT MANUALLY EDIT this file! */\n\n" )
-        f.write( "\n" )
-        f.write( '#include "{}.h"\n'.format( class_name ) )
-        f.write( '#include "Cpl/System/FatalError.h"\n' )
-        f.write( '#include "Cpl/System/Trace.h"\n' )
-        f.write( "\n" )
-        f.write( '#define SECT_ "{}::{}"\n'.format( "::".join(namespaces), parent_class ) )
-        f.write( "\n" )
-        f.write( "///\n" )
-        f.write( "{}\n".format( nested_namespaces(namespaces) ) )
-        f.write( "\n\n" )
-        f.write( "{}::{}( EventCompletedCbFunc_T eventCompletedCallback )\n".format( class_name, class_name ) )
-        f.write( ": Cpl::Container::RingBuffer<{}_EVENT_T>( {}, m_eventQueMemory )\n".format( macroname, depth ) )
-        f.write( ", m_eventCompletedCallback( eventCompletedCallback )\n" )
-        f.write( ", m_processingFsmEvent(false)\n" )
-        f.write( "    {\n" ) 
-        f.write( "    }\n" ) 
-        f.write( "\n\n" )
-        f.write( "void {}::generateEvent( {}_EVENT_T msg )\n".format( class_name, macroname ) )
-        f.write( "    {\n" ) 
-        f.write( "    // Queue my event\n" )
-        f.write( "    if ( !add( msg ) )\n" )
-        f.write( "        {\n" )
-        f.write( '        Cpl::System::FatalError::logf( "{}::{}: - Buffer Overflow!" );\n'.format( "::".join(namespaces), class_name ) )
-        f.write( "        }\n" )
+        f.write( f"\n\n/* This file is auto-generated DO NOT MANUALLY EDIT this file! */\n\n" )
+        f.write( f"\n" )
+        f.write( f'#include "{class_name}.h"\n' )
+        f.write( f'#include "{fatalerror_include[osal]}"\n' )
+        f.write( f'#include "{trace_include[osal]}"\n' )
+        f.write( f"\n" )
+        f.write( f'#define SECT_ "{'::'.join(namespaces)}::{parent_class}"\n' )
+        f.write( f"\n" )
+        f.write( f"///\n" )
+        f.write( f"{nested_namespaces(namespaces)}\n" )
+        f.write( f"\n\n" )
+        f.write( f"{class_name}::{class_name}( EventCompletedCbFunc_T eventCompletedCallback )\n" )
+        f.write( f": {ringbuffer_class[osal]}<{macroname}_EVENT_T>( {depth}, m_eventQueMemory )\n" )
+        f.write( f", m_eventCompletedCallback( eventCompletedCallback )\n" )
+        f.write( f", m_processingFsmEvent(false)\n" )
+        f.write( f"    {{\n" )
+        f.write( f"    }}\n" )
+        f.write( f"\n\n" )
+        f.write( f"void {class_name}::generateEvent( {macroname}_EVENT_T msg )\n" )
+        f.write( f"    {{\n" )
+        f.write( f"    // Queue my event\n" )
+        f.write( f"    if ( !add( msg ) )\n" )
+        f.write( f"        {{\n" )
+        f.write( f'        {fatalerror_logf[osal]}" {'::'.join(namespaces)}::{class_name}: - Buffer Overflow!" );\n' )
+        f.write( f"        }}\n" )
         f.write( "\n" )
         f.write( "    // Protect against in-thread 'feedback loops' that can potentially generate events\n" )
         f.write( "    if ( !m_processingFsmEvent )\n" )
@@ -633,12 +692,11 @@ def generateEventClass( class_name, namespaces,  parent_class, parent_header, de
         f.write( "        }\n" )
         f.write( "    }\n" ) 
         f.write( "\n" )
-        f.write( "{}\n".format( end_nested_namespaces(namespaces) ) )
+        f.write( f"{end_nested_namespaces(namespaces)}\n" )
 
-
-
-#------------------------------------------------------------------------------
-def geneatedCodegenConfig( fname, base, names ):
+#-------------------------------------------------------------------------------        
+#
+def generatedCodegenConfig( fname, base, names ):
     cfg = '''# Output configuration options for the given language. Pipe them into a file for further use!
 #
 #Allows to define naming conventions for events

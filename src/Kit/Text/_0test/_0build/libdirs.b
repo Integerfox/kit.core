@@ -17,5 +17,5 @@ src/Kit/System/_testsupport
 src/Kit/Memory/_testsupport
 #src/Kit/Io
 #src/Kit/Io/Stdio
-#src/Kit/System/_trace
+src/Kit/System/_trace
 #src/Kit/System/_trace/_stdout

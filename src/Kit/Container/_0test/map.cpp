@@ -8,15 +8,17 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Container/ListItem.h"
 #include "catch2/catch_test_macros.hpp"   
 #include "Kit/Container/MapItem.h"    
 #include "Kit/Container/SList.h"    
 #include "Kit/Container/DList.h"    
 #include "Kit/Container/Map.h"    
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "Kit/System/Trace.h"
 #include <string.h>
 #include <stdio.h>
+
+#define SECT_ "_0test"
 
 /// 
 using namespace Kit::Container;
@@ -51,14 +53,13 @@ public:
 
 void printMap( Map<MyItemMap>& map )
 {
-    printf( "Map (%p)\n", &map );
+    KIT_SYSTEM_TRACE_MSG( SECT_,  "Map (%p)", &map );
     MyItemMap* ptr = map.first();
     while ( ptr )
     {
-        printf( "[%s]\n", ptr->getKeyValue() );
+        KIT_SYSTEM_TRACE_MSG( SECT_,  "  [%s]", ptr->getKeyValue() );
         ptr = map.next( *ptr );
     }
-
 }
 
 class ItemAutoAdd : public MapItem,
