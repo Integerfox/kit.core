@@ -59,7 +59,7 @@ int KeyStringBuffer::compare( const char* myString, unsigned myLen, const char* 
     }
 
     // Not a valid key
-    return INT_MIN; 
+    return INT_MIN;
 }
 
 }   // end namespaces

@@ -21,7 +21,7 @@
      positions of the format string and its corresponding arguments.
      \code
 
-    'formatNum' - The 1-based position of the format string parameter. In the 
+    'formatNum' - The 1-based position of the format string parameter. In the
                   function below 'formatNum' is parameter 2:
 
                     void log(int level, const char* format, ...);
@@ -29,17 +29,17 @@
                   NOTE: For class methods, count the implicit 'this' pointer as parameter 1
 
     'vargsNum' -  The 1-based position of the first variadic argument. This is 
-                  typically formatNum + 1. In the function below 'vargsNum' is 
+                  typically formatNum + 1. In the function below 'vargsNum' is
                   parameter 3:
 
-                    void log(int level, const char* format, ...), 
+                    void log(int level, const char* format, ...); 
     
     Usage example:
         KIT_SYSTEM_PRINTF_CHECKER(2, 3);  
-        void log(int level, const char* format, ...) 
+        void log(int level, const char* format, ...)
       
         KIT_SYSTEM_PRINTF_CHECKER(3, 4); // The implicit 'this' argument is param 1
-        void MyClass::log(int level, const char* format, ...) 
+        void MyClass::log(int level, const char* format, ...)
 
     \endcode
  */
