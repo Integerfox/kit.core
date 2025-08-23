@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 23-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 30-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -48,7 +48,8 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Shutdown.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -60,6 +61,13 @@ $(function() {
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" frameborder="0" src="_shutdown_8h__incl.svg" width="310" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="_shutdown_8h__dep__incl.svg" width="184" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_shutdown_8h_source.html">Go to the source code of this file.</a></p>
@@ -84,50 +92,64 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aa6886f137624ea88e4f07367a04e3138" id="r_aa6886f137624ea88e4f07367a04e3138"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6886f137624ea88e4f07367a04e3138">OPTION_KIT_SYSTEM_SHUTDOWN_SUCCESS_ERROR_CODE</a>&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:aa6886f137624ea88e4f07367a04e3138"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies the default value used for the application exit code when terminating 'successfully'.  <br /></td></tr>
-<tr class="separator:aa6886f137624ea88e4f07367a04e3138"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a240b87b13b6b113d2aefb54b950fc0b1" id="r_a240b87b13b6b113d2aefb54b950fc0b1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a240b87b13b6b113d2aefb54b950fc0b1">OPTION_KIT_SYSTEM_SHUTDOWN_FAILURE_ERROR_CODE</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:a240b87b13b6b113d2aefb54b950fc0b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies the default value used for the application exit code when terminating 'on a failure'.  <br /></td></tr>
-<tr class="separator:a240b87b13b6b113d2aefb54b950fc0b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad99d3899f75456591269f55725bab29e" id="r_ad99d3899f75456591269f55725bab29e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad99d3899f75456591269f55725bab29e">OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES</a>&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:ad99d3899f75456591269f55725bab29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starting value for KIT Library's exit codes.  <br /></td></tr>
+<tr class="separator:ad99d3899f75456591269f55725bab29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ad9df21fc2ff4406030307791897f4cad" id="r_ad9df21fc2ff4406030307791897f4cad"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9df21fc2ff4406030307791897f4cad">KIT_SYSTEM_SHUTDOWN_NUM_RESERVED_EXIT_CODES</a> = 100</td></tr>
+<tr class="memdesc:ad9df21fc2ff4406030307791897f4cad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total number of reserved exit codes for the KIT Library.  <br /></td></tr>
+<tr class="separator:ad9df21fc2ff4406030307791897f4cad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a240b87b13b6b113d2aefb54b950fc0b1" name="a240b87b13b6b113d2aefb54b950fc0b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a240b87b13b6b113d2aefb54b950fc0b1">&#9670;&#160;</a></span>OPTION_KIT_SYSTEM_SHUTDOWN_FAILURE_ERROR_CODE</h2>
+<a id="ad99d3899f75456591269f55725bab29e" name="ad99d3899f75456591269f55725bab29e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad99d3899f75456591269f55725bab29e">&#9670;&#160;</a></span>OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define OPTION_KIT_SYSTEM_SHUTDOWN_FAILURE_ERROR_CODE&#160;&#160;&#160;1</td>
+          <td class="memname">#define OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES&#160;&#160;&#160;0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Specifies the default value used for the application exit code when terminating 'on a failure'. </p>
+<p>Starting value for KIT Library's exit codes. </p>
+<p>It is strongly recommended that applications do NOT override this value. </p>
 
 </div>
 </div>
-<a id="aa6886f137624ea88e4f07367a04e3138" name="aa6886f137624ea88e4f07367a04e3138"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6886f137624ea88e4f07367a04e3138">&#9670;&#160;</a></span>OPTION_KIT_SYSTEM_SHUTDOWN_SUCCESS_ERROR_CODE</h2>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ad9df21fc2ff4406030307791897f4cad" name="ad9df21fc2ff4406030307791897f4cad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9df21fc2ff4406030307791897f4cad">&#9670;&#160;</a></span>KIT_SYSTEM_SHUTDOWN_NUM_RESERVED_EXIT_CODES</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">#define OPTION_KIT_SYSTEM_SHUTDOWN_SUCCESS_ERROR_CODE&#160;&#160;&#160;0</td>
+          <td class="memname">constexpr int KIT_SYSTEM_SHUTDOWN_NUM_RESERVED_EXIT_CODES = 100</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Specifies the default value used for the application exit code when terminating 'successfully'. </p>
+<p>Total number of reserved exit codes for the KIT Library. </p>
+<p>The application can define its own exit codes starting at: OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES + KIT_SYSTEM_SHUTDOWN_NUM_RESERVED_EXIT_CODES </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 21 2025 23:24:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Aug 23 2025 21:39:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

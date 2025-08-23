@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 23-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 30-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -87,16 +87,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a91a01651eedcb49eee1970700ea81b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified item is in the map; else false is returned.  <br /></td></tr>
 <tr class="separator:a91a01651eedcb49eee1970700ea81b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12927d7316c3a111b5a7d4719a1e09bb" id="r_a12927d7316c3a111b5a7d4719a1e09bb"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12927d7316c3a111b5a7d4719a1e09bb">first</a> () const noexcept</td></tr>
-<tr class="memdesc:a12927d7316c3a111b5a7d4719a1e09bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the first item in the tree. Returns 0 if tree is empty.  <br /></td></tr>
+<tr class="memdesc:a12927d7316c3a111b5a7d4719a1e09bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the first item in the tree. The item remains in the tree. Returns 0 if tree is empty.  <br /></td></tr>
 <tr class="separator:a12927d7316c3a111b5a7d4719a1e09bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b0c9077626500dd5ed6076341492dfa" id="r_a7b0c9077626500dd5ed6076341492dfa"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b0c9077626500dd5ed6076341492dfa">last</a> () const noexcept</td></tr>
-<tr class="memdesc:a7b0c9077626500dd5ed6076341492dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last item in the tree. Returns 0 if tree is empty.  <br /></td></tr>
+<tr class="memdesc:a7b0c9077626500dd5ed6076341492dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last item in the tree. The item remains in the tree. Returns 0 if tree is empty.  <br /></td></tr>
 <tr class="separator:a7b0c9077626500dd5ed6076341492dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa76c8052a7a5bb2aae06e44ff4db9b36" id="r_aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa76c8052a7a5bb2aae06e44ff4db9b36">next</a> (ITEM &amp;current) const noexcept</td></tr>
-<tr class="memdesc:aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next item in the tree. Returns 0 if at the end-of-tree.  <br /></td></tr>
+<tr class="memdesc:aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next item in the tree. The item remains in the tree. Returns 0 if at the end-of-tree.  <br /></td></tr>
 <tr class="separator:aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c6277831a0e1fb424e08ec6787f052c" id="r_a0c6277831a0e1fb424e08ec6787f052c"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c6277831a0e1fb424e08ec6787f052c">previous</a> (ITEM &amp;current) const noexcept</td></tr>
-<tr class="memdesc:a0c6277831a0e1fb424e08ec6787f052c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the previous item in the tree. Returns 0 if at the start-of-tree.  <br /></td></tr>
+<tr class="memdesc:a0c6277831a0e1fb424e08ec6787f052c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the previous item in the tree. The item remains in the tree. Returns 0 if at the start-of-tree.  <br /></td></tr>
 <tr class="separator:a0c6277831a0e1fb424e08ec6787f052c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8d3a257ce47fa7dde3ede74c855f91a" id="r_ac8d3a257ce47fa7dde3ede74c855f91a"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8d3a257ce47fa7dde3ede74c855f91a">getFirst</a> () noexcept</td></tr>
 <tr class="memdesc:ac8d3a257ce47fa7dde3ede74c855f91a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the list.  <br /></td></tr>
@@ -256,7 +256,7 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the first item in the tree. Returns 0 if tree is empty. </p>
+<p>Returns the first item in the tree. The item remains in the tree. Returns 0 if tree is empty. </p>
 
 </div>
 </div>
@@ -404,7 +404,7 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the last item in the tree. Returns 0 if tree is empty. </p>
+<p>Returns the last item in the tree. The item remains in the tree. Returns 0 if tree is empty. </p>
 
 </div>
 </div>
@@ -462,7 +462,7 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the next item in the tree. Returns 0 if at the end-of-tree. </p>
+<p>Returns the next item in the tree. The item remains in the tree. Returns 0 if at the end-of-tree. </p>
 
 </div>
 </div>
@@ -491,7 +491,7 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the previous item in the tree. Returns 0 if at the start-of-tree. </p>
+<p>Returns the previous item in the tree. The item remains in the tree. Returns 0 if at the start-of-tree. </p>
 
 </div>
 </div>
@@ -561,7 +561,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 21 2025 23:24:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Aug 23 2025 21:39:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

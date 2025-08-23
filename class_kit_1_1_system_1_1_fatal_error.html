@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 23-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 30-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -56,32 +56,33 @@ $(function() {
  <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class defines methods for handling fatal errors encountered by an application. </p>
-<p>The implementation of the methods is platform dependent. </p>
+<p>The implementation of the methods is platform dependent.</p>
+<p>All of the <a class="el" href="#a7fe89e0fd8dbb3b7515892f5249b5e09" title="This function is used to process/log a FATAL error.">log()</a> methods take an 'exitCode' argument. The exitCode is passed to the <a class="el" href="class_kit_1_1_system_1_1_shutdown.html#a65effd19cf91b936b344c22477cee5c7" title="This function will force a shutdown of the application with a &#39;failure&#39; exit code.">Shutdown::failure()</a> method. See the <a class="el" href="_shutdown_8h.html">Shutdown.h</a> header file for list of KIT exit codes. Note: The application can define it own exit codes. </p>
 </div>
 <p><code>#include &lt;<a class="el" href="_fatal_error_8h_source.html">FatalError.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a740b2f9ee959b9f158f53e1415cf8380" id="r_a740b2f9ee959b9f158f53e1415cf8380"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a740b2f9ee959b9f158f53e1415cf8380">log</a> (const char *message)</td></tr>
-<tr class="memdesc:a740b2f9ee959b9f158f53e1415cf8380"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to process/log a FATAL error.  <br /></td></tr>
-<tr class="separator:a740b2f9ee959b9f158f53e1415cf8380"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac953505a0c18fdca97b0d7232f80d1a0" id="r_ac953505a0c18fdca97b0d7232f80d1a0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac953505a0c18fdca97b0d7232f80d1a0">log</a> (const char *message, size_t value)</td></tr>
-<tr class="memdesc:ac953505a0c18fdca97b0d7232f80d1a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as above, but "value" is also logged.  <br /></td></tr>
-<tr class="separator:ac953505a0c18fdca97b0d7232f80d1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace1ea886a1c65c934c8883ca617d9f7d" id="r_ace1ea886a1c65c934c8883ca617d9f7d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace1ea886a1c65c934c8883ca617d9f7d">logf</a> (const char *format,...)</td></tr>
-<tr class="memdesc:ace1ea886a1c65c934c8883ca617d9f7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Printf style formatted message.  <br /></td></tr>
-<tr class="separator:ace1ea886a1c65c934c8883ca617d9f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae79b6d364d015b400746cba82431c2e1" id="r_ae79b6d364d015b400746cba82431c2e1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae79b6d364d015b400746cba82431c2e1">logRaw</a> (const char *message)</td></tr>
-<tr class="memdesc:ae79b6d364d015b400746cba82431c2e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as log(..) method, except NO "...other useful info
+<tr class="memitem:a7fe89e0fd8dbb3b7515892f5249b5e09" id="r_a7fe89e0fd8dbb3b7515892f5249b5e09"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7fe89e0fd8dbb3b7515892f5249b5e09">log</a> (int exitCode, const char *message)</td></tr>
+<tr class="memdesc:a7fe89e0fd8dbb3b7515892f5249b5e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to process/log a FATAL error.  <br /></td></tr>
+<tr class="separator:a7fe89e0fd8dbb3b7515892f5249b5e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad829bc66d9a9bf636b7687fa0591590c" id="r_ad829bc66d9a9bf636b7687fa0591590c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad829bc66d9a9bf636b7687fa0591590c">log</a> (int exitCode, const char *message, size_t value)</td></tr>
+<tr class="memdesc:ad829bc66d9a9bf636b7687fa0591590c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as above, but "value" is also logged.  <br /></td></tr>
+<tr class="separator:ad829bc66d9a9bf636b7687fa0591590c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f1908ead8006b6c37a89dcae1e4ab3" id="r_a30f1908ead8006b6c37a89dcae1e4ab3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a30f1908ead8006b6c37a89dcae1e4ab3">logf</a> (int exitCode, const char *format,...)</td></tr>
+<tr class="memdesc:a30f1908ead8006b6c37a89dcae1e4ab3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Printf style formatted message.  <br /></td></tr>
+<tr class="separator:a30f1908ead8006b6c37a89dcae1e4ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ddd19b6677fdf5f37e835cbaf67a426" id="r_a9ddd19b6677fdf5f37e835cbaf67a426"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ddd19b6677fdf5f37e835cbaf67a426">logRaw</a> (int exitCode, const char *message)</td></tr>
+<tr class="memdesc:a9ddd19b6677fdf5f37e835cbaf67a426"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as log(..) method, except NO "...other useful info
 such as current task,..." is logged, AND the "storage media" is restricted to 'media' that is ALWAYS available.  <br /></td></tr>
-<tr class="separator:ae79b6d364d015b400746cba82431c2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee320f9b566360af5d1ee50be40fb86e" id="r_aee320f9b566360af5d1ee50be40fb86e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee320f9b566360af5d1ee50be40fb86e">logRaw</a> (const char *message, size_t value)</td></tr>
-<tr class="memdesc:aee320f9b566360af5d1ee50be40fb86e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as log(..) method, except NO 'extra info' and restricted media.  <br /></td></tr>
-<tr class="separator:aee320f9b566360af5d1ee50be40fb86e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a9ddd19b6677fdf5f37e835cbaf67a426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abade3de1ab2274303f8ffc48a416d1b4" id="r_abade3de1ab2274303f8ffc48a416d1b4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abade3de1ab2274303f8ffc48a416d1b4">logRaw</a> (int exitCode, const char *message, size_t value)</td></tr>
+<tr class="memdesc:abade3de1ab2274303f8ffc48a416d1b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as log(..) method, except NO 'extra info' and restricted media.  <br /></td></tr>
+<tr class="separator:abade3de1ab2274303f8ffc48a416d1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a740b2f9ee959b9f158f53e1415cf8380" name="a740b2f9ee959b9f158f53e1415cf8380"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a740b2f9ee959b9f158f53e1415cf8380">&#9670;&#160;</a></span>log() <span class="overload">[1/2]</span></h2>
+<a id="a7fe89e0fd8dbb3b7515892f5249b5e09" name="a7fe89e0fd8dbb3b7515892f5249b5e09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fe89e0fd8dbb3b7515892f5249b5e09">&#9670;&#160;</a></span>log() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -92,8 +93,12 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
         <tr>
           <td class="memname">static void Kit::System::FatalError::log </td>
           <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>exitCode</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -105,12 +110,12 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
 
 <p>This function is used to process/log a FATAL error. </p>
 <p>The supplied error message will be logged to a "storage media" along with other useful info such as the current task, stack dump, etc. In addition, THE APPLICATION AND/OR SYSTEM WILL BE "STOPPED". Stopped can mean the application/system is exited, restarted, paused forever, etc. The type of "storage media", additional info, stopped behavior, etc. is defined by the selected/linked implementation.</p>
-<p>NOTE: Applications, in general should NOT call this method - the application should be DESIGNED to handle and recover from errors that it encounters/detects. </p>
+<p>NOTE: Components in general should NOT call this method. Instead the component should be DESIGNED to handle and recover from errors that it encounters/detects. Components that can generate fatal errors are limited in their reusability because one application's fatal error is another application's recoverable error. </p>
 
 </div>
 </div>
-<a id="ac953505a0c18fdca97b0d7232f80d1a0" name="ac953505a0c18fdca97b0d7232f80d1a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac953505a0c18fdca97b0d7232f80d1a0">&#9670;&#160;</a></span>log() <span class="overload">[2/2]</span></h2>
+<a id="ad829bc66d9a9bf636b7687fa0591590c" name="ad829bc66d9a9bf636b7687fa0591590c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad829bc66d9a9bf636b7687fa0591590c">&#9670;&#160;</a></span>log() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,6 +126,11 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
         <tr>
           <td class="memname">static void Kit::System::FatalError::log </td>
           <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>exitCode</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em>, </span></td>
         </tr>
         <tr>
@@ -141,8 +151,8 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
 
 </div>
 </div>
-<a id="ace1ea886a1c65c934c8883ca617d9f7d" name="ace1ea886a1c65c934c8883ca617d9f7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace1ea886a1c65c934c8883ca617d9f7d">&#9670;&#160;</a></span>logf()</h2>
+<a id="a30f1908ead8006b6c37a89dcae1e4ab3" name="a30f1908ead8006b6c37a89dcae1e4ab3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f1908ead8006b6c37a89dcae1e4ab3">&#9670;&#160;</a></span>logf()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,6 +163,11 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
         <tr>
           <td class="memname">static void Kit::System::FatalError::logf </td>
           <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>exitCode</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>format</em>, </span></td>
         </tr>
         <tr>
@@ -172,8 +187,8 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
 
 </div>
 </div>
-<a id="ae79b6d364d015b400746cba82431c2e1" name="ae79b6d364d015b400746cba82431c2e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae79b6d364d015b400746cba82431c2e1">&#9670;&#160;</a></span>logRaw() <span class="overload">[1/2]</span></h2>
+<a id="a9ddd19b6677fdf5f37e835cbaf67a426" name="a9ddd19b6677fdf5f37e835cbaf67a426"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ddd19b6677fdf5f37e835cbaf67a426">&#9670;&#160;</a></span>logRaw() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,8 +199,12 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
         <tr>
           <td class="memname">static void Kit::System::FatalError::logRaw </td>
           <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span></td><td>)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>exitCode</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -201,8 +220,8 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
 
 </div>
 </div>
-<a id="aee320f9b566360af5d1ee50be40fb86e" name="aee320f9b566360af5d1ee50be40fb86e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee320f9b566360af5d1ee50be40fb86e">&#9670;&#160;</a></span>logRaw() <span class="overload">[2/2]</span></h2>
+<a id="abade3de1ab2274303f8ffc48a416d1b4" name="abade3de1ab2274303f8ffc48a416d1b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abade3de1ab2274303f8ffc48a416d1b4">&#9670;&#160;</a></span>logRaw() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,6 +232,11 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
         <tr>
           <td class="memname">static void Kit::System::FatalError::logRaw </td>
           <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>exitCode</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>message</em>, </span></td>
         </tr>
         <tr>
@@ -238,7 +262,7 @@ such as current task,..." is logged, AND the "storage media" is restricted to 'm
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 21 2025 23:24:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Aug 23 2025 21:39:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

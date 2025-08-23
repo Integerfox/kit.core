@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 23-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 30-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -131,7 +131,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p><a class="el" href="class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k...">Key</a> Compare function. </p>
-<p>Returns &lt;0, 0, &gt;0 if this key is less than, equal, or greater than respectively to the specified key! The actual type of the 'key' is up to the client sub-class that implements this interface. It is the responsibility of the sub-class to correctly define/interpret the data type of the key. </p>
+<p>Returns &lt;0, 0, &gt;0 if this key is less than, equal, or greater than respectively to the specified key! The actual type of the 'key' is up to the client sub-class that implements this interface. It is the responsibility of the sub-class to correctly define/interpret the data type of the key.</p>
+<p>CAUTION: If the key being compared is NOT a compatible type or is not a valid key, then INT_MIN is returned. The caller of the method is responsible for checking for INT_MIN </p>
 
 <p>Implemented in <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html#a61d11af944f914628d0d895ca8b98f3b">Kit::Container::KeyPlainType&lt; DATATYPE &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_key_string_buffer.html#a012c178d3017bc91b5a58d63926c3186">Kit::Container::KeyStringBuffer</a>.</p>
 
@@ -173,7 +174,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Aug 21 2025 23:24:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Aug 23 2025 21:39:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
