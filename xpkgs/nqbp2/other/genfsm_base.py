@@ -114,6 +114,14 @@ fatalerror_logf = {
     "CPL": "Cpl::System::FatalError::logf(",
     "KIT": "Kit::System::FatalError::logf( Kit::System::Shutdown::eFSM_EVENT_OVERFLOW,"
 }
+trace_msg = {
+    "CPL": "CPL_SYSTEM_TRACE_MSG( SECT_, (",
+    "KIT": "KIT_SYSTEM_TRACE_MSG( SECT_,"
+}
+trace_msg_suffix = {
+    "CPL": ")",
+    "KIT": ""
+}
 
 #------------------------------------------------------------------------------
 # Parse command line
@@ -178,7 +186,7 @@ def run( argv, copyright=None ):
         
     # Build Sinelabore command
     if os.name == 'nt':
-        cmd = f'java -cp "{sinpath}/*; codegen.Main {sargs} -p CADIFRA -doxygen -o {fsm} -l cppx -Trace {fsmdiag}"'
+        cmd = f'java -cp {sinpath}/*; codegen.Main {sargs} -p CADIFRA -doxygen -o {fsm} -l cppx -Trace {fsmdiag}'
     else:
         cmd = f'java -cp {sinpath}/*.jar codegen.Main {sargs} -p CADIFRA -doxygen -o {fsm} -l cppx -Trace {fsmdiag}'
     cmd = utils.standardize_dir_sep( cmd )
@@ -210,7 +218,7 @@ def run( argv, copyright=None ):
         generateEventClass( evque, names, fsm, newfsm, depth )
         
     # Post process the generated file(s) to work better with Doxygen
-    cleanup_for_doxygen( fsm + ".h", args['<namespaces>'] + "::" + fsm )
+    cleanup_fsm_for_doxygen( fsm + ".h", args['<namespaces>'] + "::" + fsm )
     cleanup_for_doxygen( oldtrace )
     cleanup_for_doxygen( oldevt )
       
@@ -318,10 +326,9 @@ def fix_indexes( line, prefix ):
         
     newline  = "        " + ','.join(newoffsets) + '};\n'
     return newline
-        
-    
+
 #
-def cleanup_for_doxygen( headerfile, classname='<not-used>' ):
+def cleanup_for_doxygen( headerfile ):
     tmpfile = headerfile + ".tmp"
     skip_state = 0
     with open( headerfile ) as inf:
@@ -337,7 +344,44 @@ def cleanup_for_doxygen( headerfile, classname='<not-used>' ):
                     outf.write( line );
                     skip_state += 1
                     continue
+                outf.write( line )
 
+    os.remove( headerfile )
+    os.rename( tmpfile, headerfile )
+ 
+#
+def cleanup_fsm_for_doxygen( headerfile, classname):
+    tmpfile = headerfile + ".tmp"
+    skip_state = 0
+    brace_state = 0
+    with open( headerfile ) as inf:
+        with open( tmpfile, "w") as outf:  
+            for line in inf:
+                # count curly braces (after the namespace)
+                if skip_state > 0:
+                    if '{' in line:
+                        brace_state += 1
+                    if '}' in line:
+                        brace_state -= 1
+                if ( line.startswith( "namespace") and skip_state == 0 ):
+                    outf.write( line );
+                    outf.write( "    /// Finite State Machine class\n");
+                    skip_state += 1
+                    continue
+                if ( line.strip().startswith( "class") and skip_state == 1):
+                    outf.write( line );
+                    skip_state += 1
+                    continue
+                if ( line.strip().startswith( "{") and skip_state == 2):
+                    outf.write( line );
+                    outf.write( "    /// @cond \n");
+                    skip_state += 1
+                    continue
+
+                if skip_state > 0 and brace_state == 0 and line.endswith("};\n"):
+                    outf.write( "    /// @endcond \n");
+                    outf.write( line );
+                    continue
                 if ( line.find( 'Here is the graph that shows the state machine' ) == -1 ):
                     outf.write( line )
                 else:
@@ -345,7 +389,7 @@ def cleanup_for_doxygen( headerfile, classname='<not-used>' ):
 
     os.remove( headerfile )
     os.rename( tmpfile, headerfile )
- 
+
 #
 def cleanup_global_define( headerfile, fsm_name, namespaces ):
     tmpfile = headerfile + ".tmp"
@@ -442,7 +486,7 @@ def cleanup_trace( cppfile, namespaces, base, oldfsm, old_trace_headerfile, new_
                     elif ( line.find( newstate ) != -1 ):
                         newcount += 1
                         if ( newcount > 1 ):
-                            outf.write( '    CPL_SYSTEM_TRACE_MSG( SECT_, ( "  New State=%s", getNameByState(getInnermostActiveState()) ));\n' )
+                            outf.write( f'    {trace_msg[osal]} "New State=%s", getNameByState(getInnermostActiveState()) {trace_msg_suffix[osal]});\n' )
                 prev_line = line
                 
     os.remove( cppfile )
@@ -478,7 +522,7 @@ def cleanup_trace( cppfile, namespaces, base, oldfsm, old_trace_headerfile, new_
                     outf.write( f'#define SECT_ "{"::".join(namespaces)}::{base}"\n' )
                     outf.write( f'\n' )
                 elif ( line.find( trace_fn ) != -1 ):
-                    outf.write( f'#define {base}TraceEvent(a) CPL_SYSTEM_TRACE_MSG( SECT_, ( "  Old State=%s, Event=%s", getNameByState(getInnermostActiveState()), {base}TraceEvents[a] ));\n' )
+                    outf.write( f'#define {base}TraceEvent(a) {trace_msg[osal]} "  Old State=%s, Event=%s", getNameByState(getInnermostActiveState()), {base}TraceEvents[a] {trace_msg_suffix[osal]});\n' )
                     outf.write( f'\n')        
                     outf.write( events )
                 else:
@@ -523,7 +567,7 @@ def flatten_namespaces( namespaces ):
 def nested_namespaces( namespaces ):
     nest = ""
     for n in namespaces:
-        nest += f"namespace {n} {{"
+        nest += f"namespace {n} {{ "
 
     return nest
     
@@ -540,7 +584,7 @@ def cfg_namespaces( namespaces ):
         if ( nest == "*" ):
             nest = n + " " 
         else:
-            nest += f"{{ namespace {n}"
+            nest += f"{{ namespace {n} "
 
     return nest
     
@@ -605,38 +649,42 @@ def generateEventClass( class_name, namespaces,  parent_class, parent_header, de
         f.write( "\n" )
         f.write( f'#include "{path}{parent_header}"\n' )
         f.write( f'#include "{ringbuffer_include[osal]}"\n' )
-        f.write( "\n\n" )
-        f.write( "///\n" )
+        f.write( f"\n\n" )
+        f.write( f"///\n" )
         f.write( f"{nested_namespaces(namespaces)}\n" )
-        f.write( "\n\n" )
-        f.write( "/// Event Queue for FSM events.\n" )
-        f.write( f"class {class_name}: public {parent_class}, public {ringbuffer_class[osal]}<{macroname}_EVENT_T>\n" )
-        f.write( "{\n" )
-        f.write( "public:\n" )
-        f.write( "    /// Define callback function that is called when an event has completed\n" )
+        f.write( f"\n\n" )
+        f.write( f"/// Event Queue for FSM events.\n" )
+        if ( osal == "CPL" ):
+            f.write( f"class {class_name}: public {parent_class}, public {ringbuffer_class[osal]}<{macroname}_EVENT_T>\n" )
+        else:
+            f.write( f"class {class_name}: public {parent_class}, public {ringbuffer_class[osal]}<{macroname}_EVENT_T,{depth}>\n" )
+        f.write( f"{{\n" )
+        f.write( f"public:\n" )
+        f.write( f"    /// Define callback function that is called when an event has completed\n" )
         f.write( f"    typedef void ( *EventCompletedCbFunc_T )( {macroname}_EVENT_T proceessedMsg );\n" )
-        f.write( "\n" )
-        f.write( "protected:\n" )
-        f.write( "    /// Optional Callback function for event-completed (typically used for unit testing purposes)\n" )
-        f.write( "    EventCompletedCbFunc_T  m_eventCompletedCallback;\n" )
-        f.write( "\n" )
-        f.write( "    /// Memory for Event queue\n" )
-        f.write( f"    {macroname}_EVENT_T m_eventQueMemory[{depth}];\n" )
-        f.write( "\n")
-        f.write( "    /// Flag for tracking re-entrant events\n" )
-        f.write( "    bool        m_processingFsmEvent;\n" )
-        f.write( "\n")
-        f.write( "public:\n" )
-        f.write( "    /// Constructor\n" )
+        f.write( f"\n" )
+        f.write( f"protected:\n" )
+        f.write( f"    /// Optional Callback function for event-completed (typically used for unit testing purposes)\n" )
+        f.write( f"    EventCompletedCbFunc_T  m_eventCompletedCallback;\n" )
+        f.write( f"\n" )
+        if ( osal == "CPL" ):
+            f.write( f"    /// Memory for Event queue\n" )
+            f.write( f"    {macroname}_EVENT_T m_eventQueMemory[{depth}];\n" )
+            f.write( f"\n")
+        f.write( f"    /// Flag for tracking re-entrant events\n" )
+        f.write( f"    bool m_processingFsmEvent;\n" )
+        f.write( f"\n")
+        f.write( f"public:\n" )
+        f.write( f"    /// Constructor\n" )
         f.write( f"    {class_name}( EventCompletedCbFunc_T eventCompletedCallback = nullptr );\n" )
-        f.write( "\n")
-        f.write( "public:\n" )
-        f.write( "    /// This method properly queues and process event messages\n" )
+        f.write( f"\n")
+        f.write( f"public:\n" )
+        f.write( f"    /// This method properly queues and process event messages\n" )
         f.write( f"    virtual void generateEvent( {macroname}_EVENT_T msg );\n" )
-        f.write( "};\n" )
-        f.write( "\n" )
+        f.write( f"}};\n" )
+        f.write( f"\n" )
         f.write( f"{end_nested_namespaces(namespaces)}\n" )
-        f.write( "#endif /// end header latch\n" )
+        f.write( f"#endif /// end header latch\n" )
 
     fname = class_name + '.cpp'
     flat  = flatten_namespaces(namespaces)
@@ -654,8 +702,11 @@ def generateEventClass( class_name, namespaces,  parent_class, parent_header, de
         f.write( f"{nested_namespaces(namespaces)}\n" )
         f.write( f"\n\n" )
         f.write( f"{class_name}::{class_name}( EventCompletedCbFunc_T eventCompletedCallback )\n" )
-        f.write( f": {ringbuffer_class[osal]}<{macroname}_EVENT_T>( {depth}, m_eventQueMemory )\n" )
-        f.write( f", m_eventCompletedCallback( eventCompletedCallback )\n" )
+        if ( osal == "CPL" ):
+            f.write( f": {ringbuffer_class[osal]}<{macroname}_EVENT_T>( {depth}, m_eventQueMemory )\n" )
+            f.write( f", m_eventCompletedCallback( eventCompletedCallback )\n" )
+        else:
+            f.write( f": m_eventCompletedCallback( eventCompletedCallback )\n" )
         f.write( f", m_processingFsmEvent(false)\n" )
         f.write( f"    {{\n" )
         f.write( f"    }}\n" )
@@ -665,33 +716,36 @@ def generateEventClass( class_name, namespaces,  parent_class, parent_header, de
         f.write( f"    // Queue my event\n" )
         f.write( f"    if ( !add( msg ) )\n" )
         f.write( f"        {{\n" )
-        f.write( f'        {fatalerror_logf[osal]}" {'::'.join(namespaces)}::{class_name}: - Buffer Overflow!" );\n' )
+        f.write( f'        {fatalerror_logf[osal]} "{'::'.join(namespaces)}::{class_name}: - Buffer Overflow!" );\n' )
         f.write( f"        }}\n" )
-        f.write( "\n" )
-        f.write( "    // Protect against in-thread 'feedback loops' that can potentially generate events\n" )
-        f.write( "    if ( !m_processingFsmEvent )\n" )
-        f.write( "        {\n" )
-        f.write( "        m_processingFsmEvent = true;\n" )
-        f.write( "        while( remove( msg ) )\n" )
-        f.write( "            {\n" )
-        f.write( '            CPL_SYSTEM_TRACE_MSG( SECT_, ("Processing event:= %s, current state=%s ...", getNameByEvent(msg), getNameByState(getInnermostActiveState())) );\n' )
-        f.write( "            if ( processEvent(msg) == 0 )\n" )
-        f.write( "                {\n" )
-        f.write( '                CPL_SYSTEM_TRACE_MSG( SECT_, ("  Event IGNORED:= %s", getNameByEvent(msg)) );\n' )
-        f.write( "                }\n" )
-        f.write( '            CPL_SYSTEM_TRACE_MSG( SECT_, ("  Event Completed:=  %s, end state=%s", getNameByEvent(msg), getNameByState(getInnermostActiveState())) );\n' )
-        f.write( "\n" )
-        f.write( "            // Provide 'hook' for event-processing-completed\n" )
-        f.write( '            if ( m_eventCompletedCallback )\n' )
-        f.write( '                {\n' )
-        f.write( '                (m_eventCompletedCallback) ( msg );\n' )
-        f.write( '                }\n' )
-        f.write( "            }\n" )
-        f.write( "\n" )
-        f.write( "        m_processingFsmEvent = false;\n" )
-        f.write( "        }\n" )
-        f.write( "    }\n" ) 
-        f.write( "\n" )
+        f.write( f"\n" )
+        f.write( f"    // Protect against in-thread 'feedback loops' that can potentially generate events\n" )
+        f.write( f"    if ( !m_processingFsmEvent )\n" )
+        f.write( f"        {{\n" )
+        f.write( f"        m_processingFsmEvent = true;\n" )
+        f.write( f"        while( remove( msg ) )\n" )
+        f.write( f"            {{\n" )
+        f.write( f'            {trace_msg[osal]}"EVENT:= %s, current state=%s ...", getNameByEvent(msg), getNameByState(getInnermostActiveState()){trace_msg_suffix[osal]} );\n' )
+        f.write( f"            if ( processEvent(msg) == 0 )\n" )
+        f.write( f"                {{\n" )
+        f.write( f'                {trace_msg[osal]}"  IGNORED: end state=%s", getNameByState(getInnermostActiveState()){trace_msg_suffix[osal]} );\n' )
+        f.write( f"                }}\n" )
+        f.write( f"            else\n" )
+        f.write( f"                {{\n" )
+        f.write( f'                {trace_msg[osal]}"  Completed: end state=%s", getNameByState(getInnermostActiveState()){trace_msg_suffix[osal]} );\n' )
+        f.write( f"                }}\n" )
+        f.write( f"\n" )
+        f.write( f"            // Provide 'hook' for event-processing-completed\n" )
+        f.write( f'            if ( m_eventCompletedCallback )\n' )
+        f.write( f'                {{\n' )
+        f.write( f'                (m_eventCompletedCallback) ( msg );\n' )
+        f.write( f'                }}\n' )
+        f.write( f"            }}\n" )
+        f.write( f"\n" )
+        f.write( f"        m_processingFsmEvent = false;\n" )
+        f.write( f"        }}\n" )
+        f.write( f"    }}\n" )
+        f.write( f"\n" )
         f.write( f"{end_nested_namespaces(namespaces)}\n" )
 
 #-------------------------------------------------------------------------------        

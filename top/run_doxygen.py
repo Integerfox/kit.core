@@ -35,6 +35,10 @@ def filter_warnings( output ):
             continue
         
         # Filter
+        if ( re.search( r"^.*Warning: node.*graph 'G' size too small for label", line ) ):
+            continue
+
+        # Filter
         #if ( re.search( r"src/Kit/Text/Frame/LineDecoder.h:.*warning: Found unknown command.*\\r", line ) ):
         #    continue
  
