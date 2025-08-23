@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/Container/Key.h"
+#include "Kit/System/printfchecker.h"
 #include <stdarg.h>
 #include <iostream>
 
@@ -312,14 +313,17 @@ public:
 
         NOTE: if 'format' is null, then nothing is done
      */
+    KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )
     virtual void format( const char* format, ... ) noexcept = 0;
 
     /// Same as format() - but appends "formatting" to the end of the string
+    KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )
     virtual void formatAppend( const char* format, ... ) noexcept = 0;
 
     /** This method is the same as format(), except when 'appendFlag' is true
         then it behaves as formatAppend().
      */
+    KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
     virtual void formatOpt( bool appendFlag, const char* format, ... ) noexcept = 0;
 
 

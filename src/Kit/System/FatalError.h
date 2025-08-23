@@ -12,14 +12,9 @@
 
 
 #include "kit_config.h"
+#include "Kit/System/Shutdown.h"
+#include "Kit/System/printfchecker.h"
 #include <stdlib.h>
-
-/** Specifies the default value used for the application exit code when
-    terminating due to a fatal error.
- */
-#ifndef OPTION_KIT_SYSTEM_FATAL_ERROR_EXIT_CODE
-#define OPTION_KIT_SYSTEM_FATAL_ERROR_EXIT_CODE 2
-#endif
 
 
 ///
@@ -30,6 +25,11 @@ namespace System {
 /** This class defines methods for handling fatal errors encountered by
     an application.  The implementation of the methods is platform
     dependent.
+
+    All of the log() methods take an 'exitCode' argument.  The exitCode is
+    passed to the Shutdown::failure() method.  See the Shutdown.h header file
+    for list of KIT exit codes.  Note: The application can define it own exit
+    codes.
  */
 class FatalError
 {
@@ -42,20 +42,23 @@ public:
         type of "storage media", additional info, stopped behavior, etc.
         is defined by the selected/linked implementation.
 
-        NOTE: Applications, in general should NOT call this method - the
-        application should be DESIGNED to handle and recover from errors that it
-        encounters/detects.
+        NOTE: Components in general should NOT call this method. Instead the
+              component should be DESIGNED to handle and recover from errors
+              that it encounters/detects.  Components that can generate fatal
+              errors are limited in their reusability because one application's
+              fatal error is another application's recoverable error.
      */
-    static void log( const char* message );
+    static void log( int exitCode, const char* message );
 
     /** Same as above, but "value" is also logged.  This method allows additional
         information to be logged without resulting to a string formating call
         (which may not work since something really bad just happen).
      */
-    static void log( const char* message, size_t value );
+    static void log( int exitCode, const char* message, size_t value );
 
     /// Printf style formatted message
-    static void logf( const char* format, ... );
+    KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )
+    static void logf( int exitCode, const char* format, ... );
 
 
 public:
@@ -67,10 +70,10 @@ public:
         write to media to be able to log fatal errors WITHOUT creating a
         recursive death loop.
      */
-    static void logRaw( const char* message );
+    static void logRaw( int exitCode, const char* message );
 
     /// Same as log(..) method, except NO 'extra info' and restricted media
-    static void logRaw( const char* message, size_t value );
+    static void logRaw( int exitCode, const char* message, size_t value );
 };
 
 

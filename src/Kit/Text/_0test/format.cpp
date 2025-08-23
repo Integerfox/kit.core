@@ -10,8 +10,11 @@
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
+#include "Kit/System/Trace.h"
 #include "Kit/Text/Format.h"
 #include "Kit/Text/FString.h"
+
+#define SECT_ "_0test"
 
 ///
 using namespace Kit::Text;
@@ -122,7 +125,7 @@ TEST_CASE( "Format" )
         REQUIRE( s1 == "buffer=00AA55F031 -- ..U.1" );
 
         result = Format::viewer( buffer, 4, s1, 5 );
-        printf( "%s\n00AA55F0      ..U.\n", s1.getString() );
+        KIT_SYSTEM_TRACE_MSG( SECT_,  "act=[%s], exp=[A55F0      ..U.]", s1.getString() );
         REQUIRE( s1 == "00AA55F0      ..U." );
         REQUIRE( result == true );
 

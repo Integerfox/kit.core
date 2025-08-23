@@ -9,7 +9,7 @@
 /** @file */
 
 #include "AvlTree_.h"
-
+#include <limits.h>
 
 // Debugging
 // #include        <stdlib.h>
@@ -39,7 +39,12 @@ MapItem* AvlTree_::find( const Key& key ) const
     MapItem* nodePtr = m_root.getLeft();
     while ( nodePtr != nullptr )
     {
-        int8_t comparison = nodePtr->getKey().compareKey( key );
+        int comparison = nodePtr->getKey().compareKey( key );
+        if ( comparison == INT_MIN )
+        {
+            // Key is not compatible with the node's key type
+            return nullptr;
+        }
         if ( comparison > 0 )
         {
             nodePtr = nodePtr->getLeft();
@@ -79,9 +84,13 @@ bool AvlTree_::insert( MapItem& newNode )
     do
     {
         //      tpd_assert( depth < _maxTreeDepth );
-        int result           = curPtr->getKey().compareKey( newNode.getKey() );
-        comparison           = result < 0 ? -1 : result > 0 ? 1
-                                                            : 0;
+        int result = curPtr->getKey().compareKey( newNode.getKey() );
+        if ( result == INT_MIN )
+        {
+            // Key is not compatible with the node's key type
+            return false;
+        }
+        comparison = result < 0 ? -1 : result > 0 ? 1 : 0;
         comparisons[depth++] = comparison;
 
         if ( comparison > 0 )

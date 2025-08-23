@@ -289,11 +289,11 @@ TEST_CASE( "IString" )
         bar.formatAppend( "overflow the originally allocated block(s)" );
         REQUIRE( bar == "Bob=FFFFFFFF, was here. 12overf" );
 
-        bar.format( nullPtr );
+        bar.format( nullPtr, 2 );   // the second arg is to get past the KIT_SYSTEM_PRINTF_CHECKER()
         REQUIRE( bar == "Bob=FFFFFFFF, was here. 12overf" );
         bar.format( "bob" );
         REQUIRE( bar == "bob" );
-        bar.formatAppend( nullPtr );
+        bar.formatAppend( nullPtr, 1 );
         REQUIRE( bar == "bob" );
     }
 
