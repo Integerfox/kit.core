@@ -19,8 +19,6 @@ set NQBP_SHELL_SCRIPT_EXTENSION=.bat
 set OUTCAST2_PATH=%NQBP_XPKGS_ROOT%\outcast
 set PATH=%PATH%;%OUTCAST2_PATH%\bin
 
-::call outcast.bat
-
 :: Set helper macros
 doskey top=cd %_HERE%
 doskey t=cd %_HERE%
