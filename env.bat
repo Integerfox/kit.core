@@ -15,8 +15,10 @@ set NQBP_XPKGS_ROOT=%_HERE%xpkgs
 set NQBP_BIN=%NQBP_XPKGS_ROOT%\nqbp2
 set NQBP_SHELL_SCRIPT_EXTENSION=.bat
 
+:: Outcast setup
+set OUTCAST2_PATH=%NQBP_XPKGS_ROOT%\outcast
+set PATH=%PATH%;%OUTCAST2_PATH%\bin
 
-:: Make sure the Outcast environment is setup.  Assumes that the Outcast batch file is in command path
 ::call outcast.bat
 
 :: Set helper macros
