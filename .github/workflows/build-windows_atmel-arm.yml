@@ -1,4 +1,7 @@
 name: Build Windows Atmel ARM
+permissions:
+  contents: read
+  pull-requests: write
 on:
   pull_request:
     branches:

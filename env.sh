@@ -25,6 +25,10 @@ if [ -z "$NQBP2_DONOT_ADD_NINJA_TO_PATH" ]; then
     export NQBP2_DONOT_ADD_NINJA_TO_PATH=true
 fi
 
+# Outcast setup
+export OUTCAST2_PATH="$NQBP_XPKGS_ROOT/outcast"
+export PATH="$PATH:$OUTCAST2_PATH/bin"
+
 # Support for the SINELABORE code generator
 export SINELABORE_PATH=~/sinelabore/bin
 

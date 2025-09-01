@@ -1,4 +1,7 @@
 name: Build Windows MSVC
+permissions:
+  contents: read
+  pull-requests: write
 on:
   workflow_call:
   pull_request:
