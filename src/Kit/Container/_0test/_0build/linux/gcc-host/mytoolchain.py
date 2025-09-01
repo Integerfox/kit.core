@@ -53,7 +53,7 @@ base_posix64      = BuildValues()
 optimized_posix64 = BuildValues()
 debug_posix64     = BuildValues()
 
-# Set project specific 'base' (i.e always used) options
+# Set project specific 'base' (i.e always used) options. Note: Catch2 requires C++17 or newer. Note: Catch2 requires C++17 or newer
 base_posix64.cflags    = '-m64 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage'
 base_posix64.inc       = catch2_inc
 base_posix64.firstobjs = unit_test_objects
@@ -70,7 +70,7 @@ optimized_posix64.cflags    = '-O3'
 # For build config/variant: "posix32"
 #
 
-# Set project specific 'base' (i.e always used) options
+# Set project specific 'base' (i.e always used) options. Note: Catch2 requires C++17 or newer
 base_posix32           = BuildValues()        # Do NOT comment out this line
 base_posix32.cflags    = '-m32 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage'
 base_posix32.inc       = catch2_inc

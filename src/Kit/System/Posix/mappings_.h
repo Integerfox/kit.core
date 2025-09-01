@@ -43,16 +43,13 @@
 
 
 /// Mapping
-#define Kit_System_Thread_NativeHdl_T_MAP       pthread_t
+#define KitSystemThreadID_T_MAP                 pthread_t
 
 /// Mapping
 #define KitSystemMutex_T_MAP                    pthread_mutex_t
 
 /// Mapping
-#define Kit_System_Sema_T_MAP                   sem_t
-
-/// Mapping
-#define Kit_System_TlsKey_T_MAP                 pthread_key_t
+#define KitSystemSema_T_MAP                     sem_t
 
 /// Mapping 
 #define KIT_SYSTEM_SHELL_NULL_DEVICE_x_MAP      "/dev/null"

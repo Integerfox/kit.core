@@ -106,10 +106,10 @@
 
 
 /// Macro Wrapper
-#define KIT_SYSTEM_TRACE_FUNC( sect ) Kit::System::Trace kitSystemTraceInstance_ : ( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME )
+#define KIT_SYSTEM_TRACE_FUNC( sect ) Kit::System::Trace kitSystemTraceInstance_ ( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME )
 
 /// Macro Wrapper
-#define KIT_SYSTEM_TRACE_SCOPE( sect, label ) Kit::System::Trace kitSystemTraceInstance_ : ( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, label )
+#define KIT_SYSTEM_TRACE_SCOPE( sect, label ) Kit::System::Trace kitSystemTraceInstance_ ( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, label )
 
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_MSG( sect, ... )                                                                     \

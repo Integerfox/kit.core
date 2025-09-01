@@ -33,7 +33,7 @@ class ExitHandler : public Kit::System::Shutdown::Handler
 {
 protected:
     ///
-    int notify( int exitCode ) noexcept
+    int notify( int exitCode ) noexcept override
     {
         const char* msg   = "new/delete call delta MATCHES expected value.";
         long        delta = (long)( metrics_.m_numNewCalls - metrics_.m_numDeleteCalls );
@@ -79,7 +79,7 @@ public:
 
 protected:
     ///
-    void notify( InitLevel_e init_level ) noexcept
+    void notify( InitLevel_e init_level ) noexcept override
     {
         Kit::System::Shutdown::registerHandler( m_shutdown );
     }

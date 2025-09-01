@@ -13,8 +13,9 @@
 #include "Kit/Text/FString.h"
 
 
-///
-using namespace Kit::System;
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
 #define NUM_THREAD_FILTERS_ 4
 
@@ -340,3 +341,7 @@ bool Trace::passedThreadFilter_()
     return result;
 #endif
 }
+
+}  // end namespaces
+}
+//------------------------------------------------------------------------------

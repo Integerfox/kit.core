@@ -84,7 +84,7 @@ public:
 
 public:
     /// See Kit::Container::Key
-    int compareKey( const Key& key ) const noexcept
+    int compareKey( const Key& key ) const noexcept override
     {
         unsigned  len = 0;
         DATATYPE* ptr = static_cast<DATATYPE*>(const_cast<void*>(key.getRawKey( &len )));
@@ -106,7 +106,7 @@ public:
     }
 
     /// See Kit::Container::Key
-    const void* getRawKey( unsigned* returnRawKeyLenPtr = 0 ) const noexcept
+    const void* getRawKey( unsigned* returnRawKeyLenPtr = 0 ) const noexcept override
     {
         if ( returnRawKeyLenPtr != 0 )
         {
@@ -196,11 +196,11 @@ public:
 
 public: 
     ///  See Kit::Container::key
-    int compareKey( const Key& key ) const noexcept;
-    
+    int compareKey( const Key& key ) const noexcept override;
+
     ///  See Kit::Container::key
-    const void* getRawKey( unsigned* returnRawKeyLenPtr = 0 ) const noexcept;
-    
+    const void* getRawKey( unsigned* returnRawKeyLenPtr = 0 ) const noexcept override;
+
 public:
     /// Pointer to the key's storage. Note: Making the member variable public because it makes things simpler (and yes it technically a hack)
     const char* m_stringKeyPtr;

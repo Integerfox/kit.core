@@ -8,10 +8,9 @@
  *----------------------------------------------------------------------------*/
 /** @file 
 
-    This file provides the implementation for the "realTime" elapsed time
-    interface.  Typically only "simulator platforms" (e.g. Linux) implement
-    these methods, i.e. it does not make sense to implement simulated time on
-    microcontroller platforms.
+    This file provides the implementation for the "extended/64bit" elapsed
+    time interface.  It use the 32bit interface/counter to derive the 64 bit 
+    counter
 */
 
 #include "PrivateElapsedTime.h"
@@ -25,8 +24,8 @@
 namespace Kit {
 namespace System {
 
-static uint32_t elapsedMsec_;
-static uint32_t lastMsec_;
+static uint64_t elapsedMsec_;
+static uint64_t lastMsec_;
 
 // an anonymous namespace for internal linkage
 namespace {
@@ -42,12 +41,13 @@ public:
 
 protected:
     ///
-    void notify( InitLevel_e init_level )
+    void notify( InitLevel_e init_level ) override
     {
         elapsedMsec_ = 0;
         lastMsec_    = KitSystemElapsedTime_getTimeInMilliseconds();
     }
 };
+
 }  // end anonymous namespace
 
 ///
@@ -55,16 +55,17 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 
 ///////////////////////////////////////////////////////////////
-uint32_t ElapsedTime::millisecondsInRealTime( void ) noexcept
+uint64_t ElapsedTime::millisecondsEx( void ) noexcept
 {
     Kit::System::Mutex::ScopeLock lock( Kit::System::PrivateLocks::system() );
 
-    uint32_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();
-    uint32_t delta    = newTime - lastMsec_;
+    uint64_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();
+    uint64_t delta    = newTime - lastMsec_;
     lastMsec_         = newTime;
     elapsedMsec_     += delta;
     return elapsedMsec_;
 }
+
 
 } // end namespaces
 }

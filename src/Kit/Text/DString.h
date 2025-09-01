@@ -102,22 +102,22 @@ public:
     IString& operator=( const DString& string ) noexcept;
 
     /// Assignment
-    IString& operator=( int num ) noexcept;
+    IString& operator=( int num ) noexcept override;
 
     /// Assignment
-    IString& operator=( unsigned int num ) noexcept;
+    IString& operator=( unsigned int num ) noexcept override;
 
     /// Assignment
-    IString& operator=( long num ) noexcept;
+    IString& operator=( long num ) noexcept override;
 
     /// Assignment
-    IString& operator=( long long num ) noexcept;
+    IString& operator=( long long num ) noexcept override;
 
     /// Assignment
-    IString& operator=( unsigned long num ) noexcept;
+    IString& operator=( unsigned long num ) noexcept override;
 
     /// Assignment
-    IString& operator=( unsigned long long num ) noexcept;
+    IString& operator=( unsigned long long num ) noexcept override;
 
 public:
     /// Make parent method visible
@@ -127,36 +127,36 @@ public:
     IString& operator+=( const DString& string ) noexcept;
 
     /// Append
-    IString& operator+=( int num ) noexcept;
+    IString& operator+=( int num ) noexcept override;
 
     /// Append
-    IString& operator+=( unsigned int num ) noexcept;
+    IString& operator+=( unsigned int num ) noexcept override;
 
     /// Append
-    IString& operator+=( long num ) noexcept;
+    IString& operator+=( long num ) noexcept override;
 
     /// Append
-    IString& operator+=( long long num ) noexcept;
+    IString& operator+=( long long num ) noexcept override;
 
     /// Append
-    IString& operator+=( unsigned long num ) noexcept;
+    IString& operator+=( unsigned long num ) noexcept override;
 
     /// Append
-    IString& operator+=( unsigned long long num ) noexcept;
+    IString& operator+=( unsigned long long num ) noexcept override;
 
 
 public:
     /// Override base class
-    void copyIn( const char* string, int n ) noexcept;
+    void copyIn( const char* string, int n ) noexcept override;
 
     /// Override base class
-    void appendTo( const char* string, int n ) noexcept;
+    void appendTo( const char* string, int n ) noexcept override;
 
     /// Override base class
-    void insertAt( int insertOffset, const char* stringToInsert ) noexcept;
+    void insertAt( int insertOffset, const char* stringToInsert ) noexcept override;
 
     /// Override base class
-    int maxLength() const noexcept;
+    int maxLength() const noexcept override;
 
 
 protected:  // Helper methods
