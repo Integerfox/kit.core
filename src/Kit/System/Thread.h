@@ -50,12 +50,19 @@ namespace Kit {
 namespace System {
 
 
-/** This abstract class defines the operations that can be performed on a thread.
+/** This mostly abstract class defines the operations that can be performed on
+    a thread.
 
     NOTE: The thread contains a built in counting semaphore that is usable by
           the developer/application.  This semaphore can be used to assist in
           implementing inter-thread-communications and/or ISR-to-thread
           communications.
+
+    NOTE: There are default implementations provided for several member and class
+          methods. They are contained in the Thread.cpp file in this directory.
+          If your Operating System port requires a different implementation, then
+          omit compiling the Thread.cpp file (in this directory) and provided
+          your own implementation.
  */
 class Thread : public Signable, public Kit::Container::Item
 {
@@ -69,23 +76,31 @@ public:
         NOTE: The returned value can NOT be used a handle/reference/pointer
               to a Thread object instance.
      */
-    virtual KitSystemThreadID_T getId() const noexcept = 0;
+    virtual KitSystemThreadID_T getId() const noexcept;
 
     /** This method returns the 'running' state of the thread.  If the method
-        returns false, the underlying thread has terminated (i.e. the run()
-        method has completed) and then the Thread object/instance can be safely
-        deleted using the destroy() method below.
-     */
-    virtual bool isRunning( void ) const noexcept = 0;
+        returns false, the underlying thread has terminated (i.e. the Runnable
+        object's entry() method has completed) and then the Thread object/instance
+        can be safely deleted using the destroy() method below.
 
-    /// This method returns a reference to the thread's Runnable object
-    virtual Runnable& getRunnable( void ) const noexcept = 0;
+        NOTE: Default implementation is provided in the Thread.cpp file.
+     */
+    virtual bool isRunning( void ) const noexcept;
+
+    /** This method returns a reference to the thread's Runnable object
+
+        NOTE: Default implementation is provided in the Thread.cpp file.
+     */
+    virtual Runnable& getRunnable( void ) const noexcept;
 
     /// Virtual destructor.
     virtual ~Thread() noexcept = default;
 
 public:
-    /// This method returns a reference to the currently executing thread.
+    /** This method returns a reference to the currently executing thread.
+
+        NOTE: Default implementation is provided in the Thread.cpp file.
+     */
     static Thread& getCurrent() noexcept;
 
     /** Special version of getCurrent().  getCurrent() will trigger a FATAL error
@@ -171,6 +186,8 @@ public:
               of threads has to be mutex protected.  By using an
               custom-iterator-with-a-callback approach - the Thread class can
               enforce proper mutex/critical-section handling.
+
+        NOTE: Default implementation is provided in the Thread.cpp file.
      */
     static void traverse( Thread::Traverser& client ) noexcept;
 
@@ -241,12 +258,21 @@ protected:
     /// Allow access to the TLS array
     friend class Tls;
 
-    /// Include support for KIT provided TLS
+    /** Include support for KIT provided TLS
+
+        NOTE: Default implementation is provided in the Thread.cpp file.
+     */
     static void** getTlsArray() noexcept;
 
 protected:
     /// List of active threads
     static Kit::Container::SList<Thread> g_threadList;
+
+    /// Reference to the thread's runnable object
+    Runnable& m_runnable;
+
+    /// Native file handle for the thread instance
+    KitSystemThreadID_T m_threadHandle;
 };
 
 }  // end namespaces
