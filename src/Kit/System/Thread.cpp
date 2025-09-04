@@ -18,21 +18,27 @@
 #include "Kit/System/Shutdown.h"
 #include "Tls.h"
 #include "FatalError.h"
+#include "Private.h"
+#include "Kit/Container/SList.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace System {
 
+static Kit::Container::SList<Thread> threadList_( "StaticConstructor" );
+
+
 //////////////////////////
 KitSystemThreadID_T Thread::getId() const noexcept
 {
-    return m_threadHandle;
+    return m_nativeThreadHdl;
 }
 
-bool Thread::isRunning( void ) const noexcept
+bool Thread::isActive( void ) const noexcept
 {
-    return false;
+    return threadList_.find( *this );
 }
+
 Runnable& Thread::getRunnable( void ) const noexcept
 {
     return m_runnable;
@@ -52,14 +58,68 @@ Thread& Thread::getCurrent() noexcept
 }
 
 //////////////////////////
+bool Thread::isActiveThread( Thread* threadPtr ) noexcept
+{
+    // NOTE: I have to walk the list of active threads because 'threadPtr' may or may not be valid Thread pointer
+    Mutex::ScopeLock lock( PrivateLocks::sysLists() );
+    Thread* ptr = threadList_.first();
+    while ( ptr )
+    {
+        if ( ptr == threadPtr )
+        {
+            return true;
+        }
+        ptr = threadList_.next( *ptr );
+    }
+    return false;
+}
+
 void** Thread::getTlsArray() noexcept
 {
     static void* tlsArray[OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES];
     return tlsArray;
 }
 
-static void traverse( Thread::Traverser& client ) noexcept;
+ void addThreadToActiveList( Thread& thread )
+{
+    Mutex::ScopeLock lock( PrivateLocks::sysLists() );
+    threadList_.put( thread );
+}
 
+ void removeThreadFromActiveList( Thread& thread )
+{
+    Mutex::ScopeLock lock( PrivateLocks::sysLists() );
+    threadList_.remove( thread );
+}
+
+void Thread::launchRunnable( Thread& threadHdl ) noexcept
+{
+    // Add to the list of active threads
+    addThreadToActiveList( threadHdl );
+
+    // Launch the Runnable object
+    threadHdl.m_runnable.setThread( &threadHdl );
+    // KIT_SYSTEM_SIM_TICK_THREAD_INIT_( threadHdl.m_allowSimTicks );    // TODO: Add SimTime support
+    threadHdl.m_runnable.entry();
+    // KIT_SYSTEM_SIM_TICK_ON_THREAD_EXIT_();
+
+    // Remove the thread from the list of active threads
+    removeThreadFromActiveList( threadHdl );
+}
+
+void traverse( Thread::Traverser& client ) noexcept
+{
+    Mutex::ScopeLock lock( PrivateLocks::sysLists() );
+    Thread*          t = threadList_.first();
+    while ( t )
+    {
+        if ( client.item( *t ) == Kit::Type::Traverser::eABORT )
+        {
+            break;
+        }
+        t = threadList_.next( *t );
+    }
+}
 
 }  // end namespaces
 }

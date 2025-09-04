@@ -27,12 +27,10 @@ class Runnable
 {
 public:
     /** This method is called when the Thread is started.  If this function 
-        returns, the Thread will be terminated. This method is implemented by 
-        the this class. Once the housekeeping chores are completed for starting
-        up a new thread, the run() method is called.  The application and/or
-        child class is responsible for implementing the 'run()' method.
+        returns, the Thread will be terminated. A child class is responsible for
+        implementing the entry() method. 
      */
-    virtual void entry() noexcept;
+    virtual void entry() noexcept = 0;
 
     /** This method is a request to have the runnable object terminate itself.
         This is only a request, it is not a requirement of a runnable object to
@@ -44,20 +42,14 @@ public:
 
             1) This a low-level terminate request in that it does not understand
                the "semantics" of what the thread is currently doing.  It simply
-               attempts to exit the run() method.  The system must first shutdown
+               attempts to exit the entry() method.  The system must first shutdown
                the "application usage" of the thread BEFORE calling this method.
-            2) This method is an attempted work-around for terminating threads
+            2) This method is an attempted work-around for terminating threads,
                by having the thread run itself to completion. Not all OSes
                support a polite way (i.e. reclaiming resource, memory, etc.) of
                killing threads.
      */
     virtual void pleaseStop() noexcept {}
-
-    /** This method returns true only when the instance's entry() method
-        is being executed; if false is returned, i.e. the entry() method has
-        completed.
-     */
-    virtual bool isRunning() const noexcept;
 
     /// Virtual destructor
     virtual ~Runnable() noexcept = default;
@@ -66,15 +58,8 @@ protected:
     /// Constructor
     Runnable() noexcept
         : m_threadPtr( nullptr )
-        , m_running( false )
     {
     }
-
-    /** This method is called from the entry() method.  It is intended to to be
-        the entry point for application specific code that is executed for the
-        associated thread.
-     */
-    virtual void run() noexcept = 0;
 
 protected:
     /// Allow the Thread access to the Runnable object
@@ -93,9 +78,6 @@ protected:
 protected:
     /// A back-reference to the thread that the runnable object is executing in
     Thread* m_threadPtr;
-
-    /// Tracks the run state of the instance
-    bool m_running;
 };
 
 }       // end namespaces

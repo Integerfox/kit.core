@@ -10,10 +10,20 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "Kit/System/Thread.h"
 #include "Kit/System/Semaphore.h"
 #include "Kit/Text/FString.h"
 #include <pthread.h>
+
+
+/** The time (in milliseconds) to wait when the Thread instance is being destroyed
+    and the associated Runnable object is still running - BEFORE forcibly terminating
+    the thread.
+ */
+#ifndef KIT_SYSTEM_THREAD_DESTROY_WAIT_MS
+#define KIT_SYSTEM_THREAD_DESTROY_WAIT_MS 100
+#endif
 
 ///
 namespace Kit {
@@ -48,13 +58,12 @@ public:
 
         o Does NOT support the application supplying the stack memory.
      */
-    Thread( Runnable&      runnable,
-            const char*    name,
-            int            priority      = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
-            unsigned       stackSize     = 0,
-            int            schedType     = SCHED_OTHER,
-            bool           allowSimTicks = true
-    );
+    Thread( Runnable&   runnable,
+            const char* name,
+            int         priority      = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
+            unsigned    stackSize     = 0,
+            int         schedType     = SCHED_OTHER,
+            bool        allowSimTicks = true );
 
     /// Destructor
     ~Thread();
@@ -62,15 +71,6 @@ public:
 public:
     /// See Kit::System::Thread
     const char* getName() const noexcept override;
-
-    /// See Kit::System::Thread
-    KitSystemThreadID_T getId() const noexcept override;
-
-    /// See Kit::System::Thread
-    bool isRunning( void ) const noexcept override;
-
-    /// See Kit::System::Thread
-    Runnable& getRunnable( void ) const noexcept override;
 
 public:
     /// See Kit::System::Signable
@@ -92,24 +92,22 @@ public:
     Thread( Kit::System::Runnable& dummyRunnable );
 
 protected:
-    /// Reference to the runnable object for the thread
-    Kit::System::Runnable&  m_runnable;
-
     /// ASCII name of the task
-    Kit::Text::FString<64>  m_name;
-
-    /// internal handle
-    pthread_t               m_threadHandle;
+    Kit::Text::FString<64> m_name;
 
     /// The thread synchronized message semaphore.
-    Kit::System::Semaphore  m_syncSema;
+    Kit::System::Semaphore m_syncSema;
 
     /// Option to allow simulated ticks
-    bool                    m_allowSimTicks;
+    bool m_allowSimTicks;
+
+public:
+    /// Housekeeping
+    friend class Kit::System::Thread;
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

@@ -11,10 +11,11 @@
 /** @file */
 
 #include "kit_map.h"
+#include "kit_config.h"
 #include "Kit/System/Runnable.h"
 #include "Kit/System/Signable.h"
 #include "Kit/Type/Traverser.h"
-#include "Kit/Container/SList.h"
+#include "Kit/Container/ListItem.h"
 #include <stdlib.h>
 
 
@@ -64,7 +65,7 @@ namespace System {
           omit compiling the Thread.cpp file (in this directory) and provided
           your own implementation.
  */
-class Thread : public Signable, public Kit::Container::Item
+class Thread : public Signable, public Kit::Container::ListItem
 {
 public:
     /// This method returns the name (null terminated string) of the current thread.
@@ -78,17 +79,16 @@ public:
      */
     virtual KitSystemThreadID_T getId() const noexcept;
 
-    /** This method returns the 'running' state of the thread.  If the method
+    /** This method returns the 'executing' state of the thread.  If the method
         returns false, the underlying thread has terminated (i.e. the Runnable
         object's entry() method has completed) and then the Thread object/instance
         can be safely deleted using the destroy() method below.
 
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
-    virtual bool isRunning( void ) const noexcept;
+    virtual bool isActive( void ) const noexcept;
 
     /** This method returns a reference to the thread's Runnable object
-
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
     virtual Runnable& getRunnable( void ) const noexcept;
@@ -98,7 +98,6 @@ public:
 
 public:
     /** This method returns a reference to the currently executing thread.
-
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
     static Thread& getCurrent() noexcept;
@@ -128,6 +127,14 @@ public:
         expired.
      */
     static bool timedWait( unsigned long timeoutInMsec ) noexcept;
+
+    /** This method is the similar to the isActive() method, but it operates
+        on the specified thread pointer.  If the 'threadPtr' is nullptr or
+        invalid (i.e. not a 'real' Thread*), then the method will return false.
+
+        NOTE: Default implementation is provided in the Thread.cpp file.
+     */
+     static bool isActiveThread( Thread* threadPtr ) noexcept;
 
 public:
     /// Returns the name for the current thread
@@ -229,7 +236,7 @@ public:
                            int         priority      = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
                            int         stackSize     = 0,
                            void*       stackPtr      = 0,
-                           bool        allowSimTicks = true );
+                           bool        allowSimTicks = true ) noexcept;
 
 
     /** This method is used to destroy a thread that was created by the Thread
@@ -237,6 +244,11 @@ public:
         Thread Factory, you MUST use the Factory's destroy method to delete it
         to properly insure that the memory used to create the task is released
         correctly.
+
+        When the 'delayTimeMsToWaitIfNotStopped' argument is NOT zero, AND the
+        thread is still active. This method will call pleaseStop() on the Runnable
+        object associated with the thread.  After the delay time (in milliseconds)
+        has expired - will attempt to unconditionally terminate the thread.
 
         NOTES:
 
@@ -252,27 +264,50 @@ public:
             o This method only deletes/destroys the Thread instance -- it does
               NOT delete/destroy the associated Runnable instance.
      */
-    static void destroy( Thread& threadToDestroy );
+    static void destroy( Thread& threadToDestroy, uint32_t delayTimeMsToWaitIfActive = 0 ) noexcept;
 
 protected:
-    /// Allow access to the TLS array
-    friend class Tls;
+    /// Constructor
+    Thread( Runnable& runnable ) noexcept
+        : m_runnable( runnable )
+    {
+    }
+
+    /** Helper method that should be called from the native's entry function.
+        This method is responsible for various action such as maintaining
+        the list of active threads, launching the Runnable object, and supporting
+        simulated time for thread (but only when SIM-TIME is enabled).
+
+        The method returns when the Runnable object's entry() method
+        has completed.
+        NOTE: Default implementation is provided in the Thread.cpp file.
+     */
+    static void launchRunnable( Thread& threadHdl ) noexcept;
+
+    /**  Helper method to safe add to the active thread list
+         NOTE: Default implementation is provided in the Thread.cpp file.
+     */
+    static void addThreadToActiveList( Thread& thread ) noexcept;
+
+    /** Helper method to safely remove from the active thread list
+        NOTE: Default implementation is provided in the Thread.cpp file.
+     */
+    static void removeThreadFromActiveList( Thread& thread ) noexcept;
 
     /** Include support for KIT provided TLS
-
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
     static void** getTlsArray() noexcept;
 
-protected:
-    /// List of active threads
-    static Kit::Container::SList<Thread> g_threadList;
+    /// Allow access to the TLS array
+    friend class Tls;
 
+protected:
     /// Reference to the thread's runnable object
     Runnable& m_runnable;
 
     /// Native file handle for the thread instance
-    KitSystemThreadID_T m_threadHandle;
+    KitSystemThreadID_T m_nativeThreadHdl;
 };
 
 }  // end namespaces

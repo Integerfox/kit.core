@@ -58,7 +58,7 @@ public:
 
 public:
     ///
-    void run() noexcept override
+    void entry() noexcept override
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, Thread::myName() );
 
