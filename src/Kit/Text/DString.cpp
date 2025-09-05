@@ -11,6 +11,7 @@
 #include "DString.h"
 #include "FString.h"
 #include <algorithm>
+#include <cstdint>
 #include <new>
 
 //------------------------------------------------------------------------------
@@ -305,42 +306,42 @@ IString& DString::operator=( const DString& string ) noexcept
     return *this;
 }
 
-IString& DString::operator=( int num ) noexcept
+IString& DString::operator=( int16_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     copyIn( string, string.length() );
     return *this;
 }
 
-IString& DString::operator=( unsigned int num ) noexcept
+IString& DString::operator=( uint16_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     copyIn( string, string.length() );
     return *this;
 }
 
-IString& DString::operator=( long num ) noexcept
+IString& DString::operator=( int32_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     copyIn( string, string.length() );
     return *this;
 }
 
-IString& DString::operator=( long long num ) noexcept
+IString& DString::operator=( uint32_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     copyIn( string, string.length() );
     return *this;
 }
 
-IString& DString::operator=( unsigned long num ) noexcept
+IString& DString::operator=( uint64_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     copyIn( string, string.length() );
     return *this;
 }
 
-IString& DString::operator=( unsigned long long num ) noexcept
+IString& DString::operator=( int64_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     copyIn( string, string.length() );
@@ -355,42 +356,42 @@ IString& DString::operator+=( const DString& string ) noexcept
 }
 
 
-IString& DString::operator+=( int num ) noexcept
+IString& DString::operator+=( int16_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     appendTo( string, string.length() );
     return *this;
 }
 
-IString& DString::operator+=( unsigned int num ) noexcept
+IString& DString::operator+=( uint16_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     appendTo( string, string.length() );
     return *this;
 }
 
-IString& DString::operator+=( long num ) noexcept
+IString& DString::operator+=( int32_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     appendTo( string, string.length() );
     return *this;
 }
 
-IString& DString::operator+=( long long num ) noexcept
+IString& DString::operator+=( uint32_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     appendTo( string, string.length() );
     return *this;
 }
 
-IString& DString::operator+=( unsigned long num ) noexcept
+IString& DString::operator+=( uint64_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     appendTo( string, string.length() );
     return *this;
 }
 
-IString& DString::operator+=( unsigned long long num ) noexcept
+IString& DString::operator+=( int64_t num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     appendTo( string, string.length() );

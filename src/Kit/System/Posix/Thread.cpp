@@ -44,7 +44,7 @@ class RegisterInitHandler_ : public Kit::System::StartupHook,
 {
 protected:
     // Empty entry function -- it is never called!
-    void entry( void ) noexcept {}
+    void entry( void ) noexcept override {}
 
 public:
     ///
@@ -54,10 +54,10 @@ public:
 
 protected:
     ///
-    void notify( InitLevel_e initLevel )
+    void notify( InitLevel_e initLevel ) noexcept override
     {
         // Create a thread object for the native thread
-        new Thread( *this );
+        m_parentThreadPtr_ = new Thread( *this );
     }
 };
 }  // end namespace
@@ -169,7 +169,7 @@ Thread::~Thread()
     {
         // Ask the runnable object nicely to stop
         m_runnable.pleaseStop();
-        Kit::System::sleep( KIT_SYSTEM_THREAD_DESTROY_WAIT_MS );  // Yield execution and allow time for the thread to actually exit.
+        Kit::System::sleep( KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS );  // Yield execution and allow time for the thread to actually exit.
 
         // Just to make sure: Brute the force the thread to end - IF it is still running
         // NOTE: This will NOT free any resources associated with the thread including the stack!

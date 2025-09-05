@@ -50,16 +50,13 @@
     while ( 0 )
 
 /// Win32 Mapping
-#define Kit_System_Thread_NativeHdl_T_MAP HANDLE
+#define KitSystemThreadID_T_MAP HANDLE
 
 /// Win32 Mapping
 #define KitSystemMutex_T_MAP CRITICAL_SECTION
 
 /// Win32 Mapping
-#define Kit_System_Sema_T_MAP HANDLE
-
-/// Win32 Mapping
-#define Kit_System_TlsKey_T_MAP DWORD
+#define KitSystemSema_T_MAP HANDLE
 
 
 /// Win32 Mapping

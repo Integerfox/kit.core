@@ -102,22 +102,22 @@ public:
     IString& operator=( const DString& string ) noexcept;
 
     /// Assignment
-    IString& operator=( int num ) noexcept override;
+    IString& operator=( int16_t num ) noexcept override;
 
     /// Assignment
-    IString& operator=( unsigned int num ) noexcept override;
+    IString& operator=( uint16_t num ) noexcept override;
 
     /// Assignment
-    IString& operator=( long num ) noexcept override;
+    IString& operator=( int32_t num ) noexcept override;
 
     /// Assignment
-    IString& operator=( long long num ) noexcept override;
+    IString& operator=( uint32_t num ) noexcept override;
 
     /// Assignment
-    IString& operator=( unsigned long num ) noexcept override;
+    IString& operator=( int64_t num ) noexcept override;
 
     /// Assignment
-    IString& operator=( unsigned long long num ) noexcept override;
+    IString& operator=( uint64_t num ) noexcept override;
 
 public:
     /// Make parent method visible
@@ -127,22 +127,22 @@ public:
     IString& operator+=( const DString& string ) noexcept;
 
     /// Append
-    IString& operator+=( int num ) noexcept override;
+    IString& operator+=( int16_t num ) noexcept override;
 
     /// Append
-    IString& operator+=( unsigned int num ) noexcept override;
+    IString& operator+=( uint16_t num ) noexcept override;
 
     /// Append
-    IString& operator+=( long num ) noexcept override;
+    IString& operator+=( int32_t num ) noexcept override;
 
     /// Append
-    IString& operator+=( long long num ) noexcept override;
+    IString& operator+=( uint32_t num ) noexcept override;
 
     /// Append
-    IString& operator+=( unsigned long num ) noexcept override;
+    IString& operator+=( uint64_t num ) noexcept override;
 
     /// Append
-    IString& operator+=( unsigned long long num ) noexcept override;
+    IString& operator+=( int64_t num ) noexcept override;
 
 
 public:

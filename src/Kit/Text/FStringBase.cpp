@@ -10,9 +10,11 @@
  *----------------------------------------------------------------------------*/
 
 #include "FStringBase.h"
+#include <cstdint>
 #include <string.h>
 #include <stdio.h>
 #include <algorithm>  // Added for std::min
+#include <inttypes.h>
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -178,77 +180,76 @@ int FStringBase::maxLength() const noexcept
     return m_internalMaxlen;
 }
 
-
 ////////////////////////////
-IString& FStringBase::operator=( int num ) noexcept
+IString& FStringBase::operator=( int16_t num ) noexcept
 {
-    format( "%d", num );
+    format( "%" PRId16, num );
     return *this;
 }
 
-IString& FStringBase::operator=( unsigned int num ) noexcept
+IString& FStringBase::operator=( uint16_t num ) noexcept
 {
-    format( "%u", num );
+    format( "%" PRIu16, num );
     return *this;
 }
 
-IString& FStringBase::operator=( long num ) noexcept
+IString& FStringBase::operator=( int32_t num ) noexcept
 {
-    format( "%ld", num );
+    format( "%" PRId32, num );
     return *this;
 }
 
-IString& FStringBase::operator=( long long num ) noexcept
+IString& FStringBase::operator=( uint32_t num ) noexcept
 {
-    format( "%lld", num );
+    format( "%" PRIu32, num );
     return *this;
 }
 
-IString& FStringBase::operator=( unsigned long num ) noexcept
+IString& FStringBase::operator=( int64_t num ) noexcept
 {
-    format( "%lu", num );
+    format( "%" PRId64, num );
     return *this;
 }
 
-IString& FStringBase::operator=( unsigned long long num ) noexcept
+IString& FStringBase::operator=( uint64_t num ) noexcept
 {
-    format( "%llu", num );
+    format( "%" PRIu64, num );
     return *this;
 }
 
-IString& FStringBase::operator+=( int num ) noexcept
+IString& FStringBase::operator+=( int16_t num ) noexcept
 {
-    formatAppend( "%d", num );
+    formatAppend( "%" PRId16, num );
     return *this;
 }
 
-IString& FStringBase::operator+=( unsigned int num ) noexcept
+IString& FStringBase::operator+=( uint16_t num ) noexcept
 {
-    formatAppend( "%u", num );
+    formatAppend( "%" PRIu16, num );
     return *this;
 }
 
-IString& FStringBase::operator+=( long num ) noexcept
+IString& FStringBase::operator+=( int32_t num ) noexcept
 {
-    formatAppend( "%ld", num );
+    formatAppend( "%" PRId32, num );
     return *this;
 }
 
-IString& FStringBase::operator+=( long long num ) noexcept
+IString& FStringBase::operator+=( uint32_t num ) noexcept
 {
-    formatAppend( "%lld", num );
+    formatAppend( "%" PRIu32, num );
     return *this;
 }
 
-IString& FStringBase::operator+=( unsigned long num ) noexcept
+IString& FStringBase::operator+=( uint64_t num ) noexcept
 {
-    formatAppend( "%lu", num );
+    formatAppend( "%" PRIu64, num );
     return *this;
 }
 
-IString& FStringBase::operator+=( unsigned long long num ) noexcept
+IString& FStringBase::operator+=( int64_t num ) noexcept
 {
-    formatAppend( "%llu", num );
+    formatAppend( "%" PRId64, num );
     return *this;
 }
 

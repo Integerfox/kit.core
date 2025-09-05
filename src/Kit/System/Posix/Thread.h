@@ -21,8 +21,8 @@
     and the associated Runnable object is still running - BEFORE forcibly terminating
     the thread.
  */
-#ifndef KIT_SYSTEM_THREAD_DESTROY_WAIT_MS
-#define KIT_SYSTEM_THREAD_DESTROY_WAIT_MS 100
+#ifndef KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS
+#define KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS 100
 #endif
 
 ///
