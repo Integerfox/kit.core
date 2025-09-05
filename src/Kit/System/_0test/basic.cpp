@@ -41,8 +41,6 @@ public:
     ///
     int m_maxLoops;
     ///
-    Thread* m_myThreadPtr;
-    ///
     Tls& m_tls;
     ///
     const char* m_expectedTlsValue;
@@ -52,7 +50,7 @@ public:
 public:
     ///
     MyRunnable( Thread& masterThread, Thread* nextThreadPtr, int maxLoops, Tls& tlsVariable, const char* expectedTlsValue )
-        : m_masterThread( masterThread ), m_nextThreadPtr( nextThreadPtr ), m_loops( 0 ), m_maxLoops( maxLoops ), m_myThreadPtr( 0 ), m_tls( tlsVariable ), m_expectedTlsValue( expectedTlsValue ), m_tlsCompareResult( -1 )
+        : m_masterThread( masterThread ), m_nextThreadPtr( nextThreadPtr ), m_loops( 0 ), m_maxLoops( maxLoops ), m_tls( tlsVariable ), m_expectedTlsValue( expectedTlsValue ), m_tlsCompareResult( -1 )
     {
     }
 
@@ -65,36 +63,40 @@ public:
         m_tlsCompareResult = strcmp( (const char*)m_tls.get(), m_expectedTlsValue );
         KIT_SYSTEM_TRACE_MSG( SECT_, "TLS Compare: '%s' =? '%s', result=%d", (const char*)m_tls.get(), m_expectedTlsValue, m_tlsCompareResult );
 
-        while ( isRunning() && m_loops < m_maxLoops )
+        while ( m_loops < m_maxLoops )
         {
             m_loops++;
             KIT_SYSTEM_TRACE_MSG( SECT_, "Waiting.... (loops=%d)", m_loops );
             Thread::wait();
             KIT_SYSTEM_TRACE_MSG( SECT_, "Signaled.  (loops=%d)", m_loops );
-            if ( isRunning() && m_nextThreadPtr )
+            if ( m_nextThreadPtr )
             {
                 KIT_SYSTEM_TRACE_MSG( SECT_, "Signaling: %s", m_nextThreadPtr->getName() );
                 m_nextThreadPtr->signal();
             }
 
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Signaling Master: %s", m_masterThread.getName() );
             m_masterThread.signal();
         }
     }
 
 
-    /// Cache my thread pointer
+    /// Store the thread's name in TLS
     void setThread( Kit::System::Thread* myThreadPtr ) noexcept override
     {
-        Kit::System::Runnable::setThread( myThreadPtr );
-        m_tls.set( (void*)m_myThreadPtr->getName() );
+        if ( myThreadPtr )
+        {
+            Runnable::setThread( myThreadPtr );
+            m_tls.set( (void*)myThreadPtr->getName() );
+        }
     }
 
     /// Override default implementation
     void pleaseStop( void ) noexcept override
     {
-        if ( isRunning() && m_myThreadPtr )
+        if ( m_parentThreadPtr_ != nullptr )
         {
-            m_myThreadPtr->signal();
+            m_parentThreadPtr_->signal();
         }
     }
 };
@@ -106,8 +108,6 @@ public:
     Thread& m_masterThread;
     ///
     Semaphore& m_sema;
-    ///
-    Thread* m_myThreadPtr;
     ///
     Tls& m_tls;
     ///
@@ -130,13 +130,13 @@ public:
 public:
     ///
     MyRunnable2( Thread& masterThread, Semaphore& semaphore, Tls& tlsVariable, const char* expectedTlsValue )
-        : m_masterThread( masterThread ), m_sema( semaphore ), m_myThreadPtr( 0 ), m_tls( tlsVariable ), m_expectedTlsValue( expectedTlsValue ), m_tlsCompareResult( -1 )
+        : m_masterThread( masterThread ), m_sema( semaphore ), m_tls( tlsVariable ), m_expectedTlsValue( expectedTlsValue ), m_tlsCompareResult( -1 )
     {
     }
 
 public:
     ///
-    void run() noexcept override
+    void entry() noexcept override
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, Thread::getCurrent().getName() );
 
@@ -182,11 +182,14 @@ public:
     }
 
 
-    /// Cache my thread pointer
-    void setThreadOfExecution_( Kit::System::Thread* myThreadPtr )
+    /// Store the thread's name in TLS
+    void setThread( Kit::System::Thread* myThreadPtr ) noexcept override
     {
-        m_myThreadPtr = myThreadPtr;
-        m_tls.set( (void*)m_myThreadPtr->getName() );
+           if ( myThreadPtr )
+        {
+            Runnable::setThread( myThreadPtr );
+            m_tls.set( (void*)myThreadPtr->getName() );
+        }
     }
 };
 
@@ -273,12 +276,18 @@ TEST_CASE( "basic" )
 
         MyRunnable appleRun( Thread::getCurrent(), 0, 3, runnableName, "Apple" );
         Thread*    appleThreadPtr = Thread::create( appleRun, "Apple" );
+        REQUIRE( appleThreadPtr != nullptr );
+        REQUIRE( &(appleThreadPtr->getRunnable()) == &appleRun );
 
         MyRunnable orangeRun( Thread::getCurrent(), appleThreadPtr, 4, runnableName, "Orange" );
         Thread*    orangeThreadPtr = Thread::create( orangeRun, "Orange" );
+        REQUIRE( orangeThreadPtr != nullptr );
+        REQUIRE( &(orangeThreadPtr->getRunnable()) == &orangeRun );
 
         MyRunnable pearRun( Thread::getCurrent(), orangeThreadPtr, 3, runnableName, "Pear" );
         Thread*    pearThreadPtr = Thread::create( pearRun, "Pear" );
+        REQUIRE( pearThreadPtr != nullptr );
+        REQUIRE( &(pearThreadPtr->getRunnable()) == &pearRun );
 
 
         Lister myThreadList;
@@ -300,8 +309,8 @@ TEST_CASE( "basic" )
         }
 
         Thread::destroy( *pearThreadPtr );
-        REQUIRE( orangeThreadPtr->isRunning() );
-        Thread::destroy( *orangeThreadPtr );  // Note: this is still an active thread at this point
+        REQUIRE( orangeThreadPtr->isActive() );
+        Thread::destroy( *orangeThreadPtr, 100 );  // Note: this is still an active thread at this point
         Thread::destroy( *appleThreadPtr );
 
         REQUIRE( appleRun.m_tlsCompareResult == 0 );
@@ -311,7 +320,6 @@ TEST_CASE( "basic" )
         REQUIRE( appleRun.m_loops == 3 );
         REQUIRE( orangeRun.m_loops == 4 );
         REQUIRE( pearRun.m_loops == 3 );
-        Thread::wait();
         REQUIRE( Thread::tryWait() == false );
 
         Semaphore   sema;
@@ -332,7 +340,7 @@ TEST_CASE( "basic" )
         REQUIRE( cherryRun.m_delta3 >= 333 - 2 );
         REQUIRE( cherryRun.m_delta4 < 50 );
 
-        Kit::System::sleep( 50 );  // Allow time for the Cherry thread to self terminate
+        Thread::destroy( *cherryThreadPtr, 100 ); // Allow time for the Cherry thread to self terminate
     }
 
     SECTION( "Semaphores" )

@@ -438,12 +438,11 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    // TODO: Implement thread awareness for tracing
-    // static void setThreadFilter_( const char* threadName1,
-    //                               const char* threadName2 =0,
-    //                               const char* threadName3 =0,
-    //                               const char* threadName4 =0
-    //                             );
+    static void setThreadFilter_( const char* threadName1,
+                                  const char* threadName2 =0,
+                                  const char* threadName3 =0,
+                                  const char* threadName4 =0
+                                );
 
     /** This method returns the number of enabled 'thread filters' and returns
         the actual thread name(s) via the IString 'dst'.  It is the caller
@@ -454,8 +453,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    // TODO: Implement thread awareness for tracing
-    // static unsigned getThreadFilters_( Kit::Text::IString& dst );
+    static unsigned getThreadFilters_( Kit::Text::IString& dst );
 
     /** This method removes  that thread filter (if there is one present).  If
         no filter has been applied when this method is called, then this
@@ -464,8 +462,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    // TODO: Implement thread awareness for tracing
-    // static void clearThreadFilter_( void );
+    static void clearThreadFilter_( void );
 
     /** This method returns true if the thread filter has been set and the
         current thread's name 'passes' the thread filter check, i.e. the specified
@@ -474,7 +471,6 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    // TODO: Implement thread awareness for tracing
     static bool passedThreadFilter_();
 
 

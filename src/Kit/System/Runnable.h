@@ -51,13 +51,24 @@ public:
      */
     virtual void pleaseStop() noexcept {}
 
+    /** This method returns a pointer to the Thread object that is executing 
+        the Runnable instance.  The pointer will be nullptr if the thread has
+        not started execution (i.e. before entry() is called) AND after the 
+        thread has terminated (i.e. after entry() returns)
+     */
+    virtual Thread* getThread() noexcept
+    {
+        return m_parentThreadPtr_;
+    }
+
+public:
     /// Virtual destructor
     virtual ~Runnable() noexcept = default;
 
 protected:
     /// Constructor
     Runnable() noexcept
-        : m_threadPtr( nullptr )
+        : m_parentThreadPtr_( nullptr )
     {
     }
 
@@ -72,12 +83,12 @@ protected:
     */
     virtual void setThread( Thread* thread ) noexcept
     {
-        m_threadPtr = thread;
+        m_parentThreadPtr_ = thread;
     }
 
 protected:
     /// A back-reference to the thread that the runnable object is executing in
-    Thread* m_threadPtr;
+    Thread* m_parentThreadPtr_;
 };
 
 }       // end namespaces

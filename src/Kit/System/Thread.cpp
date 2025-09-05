@@ -80,13 +80,13 @@ void** Thread::getTlsArray() noexcept
     return tlsArray;
 }
 
- void addThreadToActiveList( Thread& thread )
+ void Thread::addThreadToActiveList( Thread& thread ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     threadList_.put( thread );
 }
 
- void removeThreadFromActiveList( Thread& thread )
+ void Thread::removeThreadFromActiveList( Thread& thread ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     threadList_.remove( thread );
@@ -101,13 +101,14 @@ void Thread::launchRunnable( Thread& threadHdl ) noexcept
     threadHdl.m_runnable.setThread( &threadHdl );
     // KIT_SYSTEM_SIM_TICK_THREAD_INIT_( threadHdl.m_allowSimTicks );    // TODO: Add SimTime support
     threadHdl.m_runnable.entry();
+    threadHdl.m_runnable.setThread( nullptr );
     // KIT_SYSTEM_SIM_TICK_ON_THREAD_EXIT_();
 
     // Remove the thread from the list of active threads
     removeThreadFromActiveList( threadHdl );
 }
 
-void traverse( Thread::Traverser& client ) noexcept
+void Thread::traverse( Thread::Traverser& client ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     Thread*          t = threadList_.first();
