@@ -13,6 +13,7 @@
 #include "Kit/System/Mutex.h"
 #include "Kit/System/Private.h"
 #include "Kit/System/Shutdown.h"
+#include "Kit/System/api.h"
 #include "Thread.h"
 
 
@@ -23,14 +24,15 @@ namespace System {
 
 static KitSystemTlsIndex_T nextTlsIndex_;  // This guarantied to be initialized to zero (per the C++ standard) because it is in the BSS segment
 
-#define FAILURE     static_cast<KitSystemTlsIndex_T>(-1)
+#define FAILURE static_cast<KitSystemTlsIndex_T>( -1 )
 
 /////////////////////////////////////////////////////////
 Tls::Tls( void )
     : m_keyIdx( FAILURE )  // Assume failure
 {
-    // Check if there are any TLS indexes/variables left
     Kit::System::PrivateLocks::system().lock();
+
+    // Check if there are any TLS indexes/variables left
     if ( nextTlsIndex_ < OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES )
     {
         m_keyIdx = nextTlsIndex_++;
@@ -57,19 +59,21 @@ Tls::~Tls()
 /////////////////////////////////////////////////////////
 void* Tls::get( void ) const noexcept
 {
-    // Get access to my FreeRTOS thread object.
-    void** myArray = Thread::getTlsArray();
+    // Get access to thread object TLS array
+    Thread& myThread = Thread::getCurrent();
+    void**  myArray  = myThread.m_tlsArray;
     return myArray[m_keyIdx];
 }
 
 void Tls::set( void* newValue ) noexcept
 {
-    // Get access to my FreeRTOS thread object.
-    void** myArray = Thread::getTlsArray();
+    // Get access to thread object TLS array
+    Thread& myThread  = Thread::getCurrent();
+    void**  myArray   = myThread.m_tlsArray;
     myArray[m_keyIdx] = newValue;
 }
 
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

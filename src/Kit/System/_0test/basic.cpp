@@ -49,8 +49,18 @@ public:
 
 public:
     ///
-    MyRunnable( Thread& masterThread, Thread* nextThreadPtr, int maxLoops, Tls& tlsVariable, const char* expectedTlsValue )
-        : m_masterThread( masterThread ), m_nextThreadPtr( nextThreadPtr ), m_loops( 0 ), m_maxLoops( maxLoops ), m_tls( tlsVariable ), m_expectedTlsValue( expectedTlsValue ), m_tlsCompareResult( -1 )
+    MyRunnable( Thread&     masterThread,
+                Thread*     nextThreadPtr,
+                int         maxLoops,
+                Tls&        tlsVariable,
+                const char* expectedTlsValue )
+        : m_masterThread( masterThread )
+        , m_nextThreadPtr( nextThreadPtr )
+        , m_loops( 0 )
+        , m_maxLoops( maxLoops )
+        , m_tls( tlsVariable )
+        , m_expectedTlsValue( expectedTlsValue )
+        , m_tlsCompareResult( -1 )
     {
     }
 
@@ -140,6 +150,7 @@ public:
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, Thread::getCurrent().getName() );
 
+
         m_tlsCompareResult = strcmp( (const char*)m_tls.get(), m_expectedTlsValue );
         KIT_SYSTEM_TRACE_MSG( SECT_, "TLS Compare: '%s' =? '%s', result=%d", (const char*)m_tls.get(), m_expectedTlsValue, m_tlsCompareResult );
 
@@ -185,7 +196,7 @@ public:
     /// Store the thread's name in TLS
     void setThread( Kit::System::Thread* myThreadPtr ) noexcept override
     {
-           if ( myThreadPtr )
+        if ( myThreadPtr )
         {
             Runnable::setThread( myThreadPtr );
             m_tls.set( (void*)myThreadPtr->getName() );
@@ -211,7 +222,7 @@ public:
 public:
     Kit::Type::Traverser::Status_T item( Thread& nextThread ) noexcept override
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "<%-10s %5lu>", nextThread.getName(), nextThread.getId() );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "<%-10s %p>", nextThread.getName(), nextThread.getId() );
 
         if ( strcmp( nextThread.getName(), "Apple" ) == 0 )
         {
@@ -268,26 +279,25 @@ TEST_CASE( "basic" )
 {
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     ShutdownUnitTesting::clearAndUseCounter();
+    Tls runnableName;
 
 
     SECTION( "main test" )
     {
-        Tls runnableName;
-
         MyRunnable appleRun( Thread::getCurrent(), 0, 3, runnableName, "Apple" );
         Thread*    appleThreadPtr = Thread::create( appleRun, "Apple" );
         REQUIRE( appleThreadPtr != nullptr );
-        REQUIRE( &(appleThreadPtr->getRunnable()) == &appleRun );
+        REQUIRE( &( appleThreadPtr->getRunnable() ) == &appleRun );
 
         MyRunnable orangeRun( Thread::getCurrent(), appleThreadPtr, 4, runnableName, "Orange" );
         Thread*    orangeThreadPtr = Thread::create( orangeRun, "Orange" );
         REQUIRE( orangeThreadPtr != nullptr );
-        REQUIRE( &(orangeThreadPtr->getRunnable()) == &orangeRun );
+        REQUIRE( &( orangeThreadPtr->getRunnable() ) == &orangeRun );
 
         MyRunnable pearRun( Thread::getCurrent(), orangeThreadPtr, 3, runnableName, "Pear" );
         Thread*    pearThreadPtr = Thread::create( pearRun, "Pear" );
         REQUIRE( pearThreadPtr != nullptr );
-        REQUIRE( &(pearThreadPtr->getRunnable()) == &pearRun );
+        REQUIRE( &( pearThreadPtr->getRunnable() ) == &pearRun );
 
 
         Lister myThreadList;
@@ -340,7 +350,7 @@ TEST_CASE( "basic" )
         REQUIRE( cherryRun.m_delta3 >= 333 - 2 );
         REQUIRE( cherryRun.m_delta4 < 50 );
 
-        Thread::destroy( *cherryThreadPtr, 100 ); // Allow time for the Cherry thread to self terminate
+        Thread::destroy( *cherryThreadPtr, 100 );  // Allow time for the Cherry thread to self terminate
     }
 
     SECTION( "Semaphores" )

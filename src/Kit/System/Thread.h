@@ -14,6 +14,7 @@
 #include "kit_config.h"
 #include "Kit/System/Runnable.h"
 #include "Kit/System/Signable.h"
+#include "Kit/System/Tls.h"
 #include "Kit/Type/Traverser.h"
 #include "Kit/Container/ListItem.h"
 #include <stdlib.h>
@@ -134,7 +135,7 @@ public:
 
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
-     static bool isActiveThread( Thread* threadPtr ) noexcept;
+    static bool isActiveThread( Thread* threadPtr ) noexcept;
 
 public:
     /// Returns the name for the current thread
@@ -271,7 +272,9 @@ protected:
     Thread( Runnable& runnable ) noexcept
         : m_runnable( runnable )
     {
+        memset( m_tlsArray, 0, sizeof( m_tlsArray ) );
     }
+    
 
     /** Helper method that should be called from the native's entry function.
         This method is responsible for various action such as maintaining
@@ -294,20 +297,18 @@ protected:
      */
     static void removeThreadFromActiveList( Thread& thread ) noexcept;
 
-    /** Include support for KIT provided TLS
-        NOTE: Default implementation is provided in the Thread.cpp file.
-     */
-    static void** getTlsArray() noexcept;
-
-    /// Allow access to the TLS array
-    friend class Tls;
-
 protected:
     /// Reference to the thread's runnable object
     Runnable& m_runnable;
 
     /// Native file handle for the thread instance
     KitSystemThreadID_T m_nativeThreadHdl;
+
+    /// Thread Local storage
+    void* m_tlsArray[OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES];
+
+    /// Allow access to the TLS array
+    friend class Tls;
 };
 
 }  // end namespaces

@@ -74,12 +74,6 @@ bool Thread::isActiveThread( Thread* threadPtr ) noexcept
     return false;
 }
 
-void** Thread::getTlsArray() noexcept
-{
-    static void* tlsArray[OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES];
-    return tlsArray;
-}
-
  void Thread::addThreadToActiveList( Thread& thread ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::sysLists() );
