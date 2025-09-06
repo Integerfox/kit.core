@@ -83,44 +83,33 @@ public:
     using IString::operator=;
 
     /// Assignment
-    IString& operator=( int16_t num ) noexcept override;
+    IString& operator=( int num ) noexcept override;
 
     /// Assignment
-    IString& operator=( uint16_t num ) noexcept override;
+    IString& operator=( unsigned num ) noexcept override;
 
     /// Assignment
-    IString& operator=( int32_t num ) noexcept override;
+    IString& operator=( long num ) noexcept override;
 
     /// Assignment
-    IString& operator=( uint32_t num ) noexcept override;
+    IString& operator=( unsigned long num ) noexcept override;
 
-    /// Assignment
-    IString& operator=( int64_t num ) noexcept override;
-
-    /// Assignment
-    IString& operator=( uint64_t num ) noexcept override;
 
 public:
     /// Make parent method visible
     using IString::operator+=;
 
     /// Append
-    IString& operator +=( int16_t num ) noexcept override;
+    IString& operator +=( int num ) noexcept override;
 
     /// Append
-    IString& operator +=( uint16_t num ) noexcept override;
+    IString& operator +=( unsigned num ) noexcept override;
 
     /// Append
-    IString& operator +=( int32_t num ) noexcept override;
+    IString& operator +=( long num ) noexcept override;
 
     /// Append
-    IString& operator +=( uint32_t num ) noexcept override;
-
-    /// Append
-    IString& operator +=( int64_t num ) noexcept override;
-
-    /// Append
-    IString& operator +=( uint64_t num ) noexcept override;
+    IString& operator +=( unsigned long num ) noexcept override;
 };
 
 

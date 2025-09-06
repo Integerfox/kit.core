@@ -138,14 +138,6 @@ TEST_CASE( "DString" )
         DString s9( "****" );
         s9 = (unsigned long) 81000000;
         REQUIRE( s9 == "81000000" );
-
-        DString s10( "****" );
-        s10 = (long long) -200000000000;
-        REQUIRE( s10 == "-200000000000" );
-
-        DString s11( "****" );
-        s11 = ( unsigned long long ) 9100000000000;
-        REQUIRE( s11 == "9100000000000" );
     }
 
     SECTION( "Append" )
@@ -191,14 +183,6 @@ TEST_CASE( "DString" )
         DString s9( "****" );
         s9 += (unsigned long) 81000000;
         REQUIRE( s9 == "****81000000" );
-
-        DString s10( "****" );
-        s10 += (long long) -200000000000;
-        REQUIRE( s10 == "****-200000000000" );
-
-        DString s11( "****" );
-        s11 += ( unsigned long long ) 9100000000000;
-        REQUIRE( s11 == "****9100000000000" );
     }
 
     SECTION( "Memory..." )

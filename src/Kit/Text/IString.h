@@ -55,33 +55,24 @@ public:
     /** Converts the 'number' to a string and stores its in
         the internal storage of the object.
      */
-    virtual IString& operator=( int16_t num ) noexcept = 0;
+    virtual IString& operator=( int num ) noexcept = 0;
 
     /** Converts the 'number' to a string and stores its in
         the internal storage of the object.
      */
-    virtual IString& operator=( uint16_t num ) noexcept = 0;
+    virtual IString& operator=( unsigned num ) noexcept = 0;
 
     /** Converts the 'number' to a string and stores its in
         the internal storage of the object.
      */
-    virtual IString& operator=( int32_t num ) noexcept = 0;
+    virtual IString& operator=( long num ) noexcept = 0;
 
     /** Converts the 'number' to a string and stores its in
         the internal storage of the object.
      */
-    virtual IString& operator=( uint32_t num ) noexcept = 0;
+    virtual IString& operator=( unsigned long num ) noexcept = 0;
 
-    /** Converts the 'number' to a string and stores its in
-        the internal storage of the object.
-     */
-    virtual IString& operator=( int64_t num ) noexcept = 0;
-
-    /** Converts the 'number' to a string and stores its in
-        the internal storage of the object.
-     */
-    virtual IString& operator=( uint64_t num ) noexcept = 0;
-
+public:
     /** This method copies the content of the source string,
         up to 'n' characters, into internal storage of the object.
         NOTE: The internal storage is always guaranteed to be NULL
@@ -123,32 +114,22 @@ public:
     /** Converts the 'number' to a string and appends its to the
         end of the string.
      */
-    virtual IString& operator+=( int16_t num ) noexcept = 0;
+    virtual IString& operator+=( int num ) noexcept = 0;
 
     /** Converts the 'number' to a string and appends its to the
         end of the string.
      */
-    virtual IString& operator+=( uint16_t num ) noexcept = 0;
+    virtual IString& operator+=( unsigned num ) noexcept = 0;
 
     /** Converts the 'number' to a string and appends its to the
         end of the string.
      */
-    virtual IString& operator+=( int32_t num ) noexcept = 0;
+    virtual IString& operator+=( long num ) noexcept = 0;
 
     /** Converts the 'number' to a string and appends its to the
         end of the string.
      */
-    virtual IString& operator+=( uint32_t num ) noexcept = 0;
-
-    /** Converts the 'number' to a string and appends its to the
-        end of the string.
-     */
-    virtual IString& operator+=( int64_t num ) noexcept = 0;
-
-    /** Converts the 'number' to a string and appends its to the
-        end of the string.
-     */
-    virtual IString& operator+=( uint64_t num ) noexcept = 0;
+    virtual IString& operator+=( unsigned long num ) noexcept = 0;
 
     /** This method appends the content of the source string,
         up to 'n' characters, into internal storage of the object.

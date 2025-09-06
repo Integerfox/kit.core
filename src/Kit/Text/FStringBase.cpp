@@ -181,75 +181,51 @@ int FStringBase::maxLength() const noexcept
 }
 
 ////////////////////////////
-IString& FStringBase::operator=( int16_t num ) noexcept
+IString& FStringBase::operator=( int num ) noexcept
 {
-    format( "%" PRId16, num );
+    format( "%d" , num );
     return *this;
 }
 
-IString& FStringBase::operator=( uint16_t num ) noexcept
+IString& FStringBase::operator=( unsigned num ) noexcept
 {
-    format( "%" PRIu16, num );
+    format( "%u" , num );
     return *this;
 }
 
-IString& FStringBase::operator=( int32_t num ) noexcept
+IString& FStringBase::operator=( long num ) noexcept
 {
-    format( "%" PRId32, num );
+    format( "%ld", num );
     return *this;
 }
 
-IString& FStringBase::operator=( uint32_t num ) noexcept
+IString& FStringBase::operator=( unsigned long num ) noexcept
 {
-    format( "%" PRIu32, num );
+    format( "%lu", num );
     return *this;
 }
 
-IString& FStringBase::operator=( int64_t num ) noexcept
+IString& FStringBase::operator+=( int num ) noexcept
 {
-    format( "%" PRId64, num );
+    formatAppend( "%d", num );
     return *this;
 }
 
-IString& FStringBase::operator=( uint64_t num ) noexcept
+IString& FStringBase::operator+=( unsigned num ) noexcept
 {
-    format( "%" PRIu64, num );
+    formatAppend( "%u", num );
     return *this;
 }
 
-IString& FStringBase::operator+=( int16_t num ) noexcept
+IString& FStringBase::operator+=( long num ) noexcept
 {
-    formatAppend( "%" PRId16, num );
+    formatAppend( "%ld", num );
     return *this;
 }
 
-IString& FStringBase::operator+=( uint16_t num ) noexcept
+IString& FStringBase::operator+=( unsigned long num ) noexcept
 {
-    formatAppend( "%" PRIu16, num );
-    return *this;
-}
-
-IString& FStringBase::operator+=( int32_t num ) noexcept
-{
-    formatAppend( "%" PRId32, num );
-    return *this;
-}
-
-IString& FStringBase::operator+=( uint32_t num ) noexcept
-{
-    formatAppend( "%" PRIu32, num );
-    return *this;
-}
-
-IString& FStringBase::operator+=( uint64_t num ) noexcept
-{
-    formatAppend( "%" PRIu64, num );
-    return *this;
-}
-
-IString& FStringBase::operator+=( int64_t num ) noexcept
-{
-    formatAppend( "%" PRId64, num );
+    formatAppend( "%lu", num );
     return *this;
 }
 
