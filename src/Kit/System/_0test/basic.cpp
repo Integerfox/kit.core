@@ -222,7 +222,7 @@ public:
 public:
     Kit::Type::Traverser::Status_T item( Thread& nextThread ) noexcept override
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "<%-10s %p>", nextThread.getName(), static_cast<void*>(nextThread.getId()) ); // Note: Not all platforms use a pointer for the thread ID
+        KIT_SYSTEM_TRACE_MSG( SECT_, "<%-10s %p>", nextThread.getName(), reinterpret_cast<void*>(nextThread.getId()) ); // Note: Not all platforms use a pointer for the thread ID
 
         if ( strcmp( nextThread.getName(), "Apple" ) == 0 )
         {

@@ -51,12 +51,6 @@
 /// Mapping
 #define KitSystemSema_T_MAP                     sem_t
 
-/// Mapping 
-#define KIT_SYSTEM_SHELL_NULL_DEVICE_x_MAP      "/dev/null"
-
-/// Mapping 
-#define KIT_SYSTEM_SHELL_SUPPORTED_x_MAP        1
-
 /// Mapping
 #define KIT_IO_NEW_LINE_NATIVE_MAP              "\n"
 

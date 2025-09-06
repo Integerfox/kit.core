@@ -47,7 +47,7 @@ void Semaphore::waitInRealTime( void ) noexcept
     WaitForSingleObject( m_sema, INFINITE );
 }
 
-bool Semaphore::timedWaitInRealTime( unsigned long timeout ) noexcept
+bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
 {
     DWORD result = WaitForSingleObject( m_sema, (DWORD) timeout );
     return result == WAIT_OBJECT_0 ? true : false;

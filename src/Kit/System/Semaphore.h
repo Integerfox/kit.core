@@ -56,7 +56,7 @@ public:
         (i.e. count > 0); else false is returned if the timeout period
         expired.
      */
-    bool timedWait( unsigned long timeout ) noexcept;
+    bool timedWait( uint32_t timeoutMs ) noexcept;
 
     /** This method is the same as wait(), except that if the semaphore
         count is zero, the method returns immediately and has a return code
@@ -85,7 +85,7 @@ protected:
     void waitInRealTime( void ) noexcept;
 
     /// Helper method for supporting SimTicks and 'real' tick in the same build
-    bool timedWaitInRealTime( unsigned long timeout ) noexcept;
+    bool timedWaitInRealTime( uint32_t timeoutMs ) noexcept;
 
 private:
     /// Prevent access to the copy constructor -->semaphores can not be copied!

@@ -16,7 +16,7 @@ namespace System {
 
 
 //////////////////////////////////////////////////
-bool Semaphore::timedWait( unsigned long timeout ) noexcept
+bool Semaphore::timedWait( uint32_t timeout ) noexcept
 {
     DWORD result = WaitForSingleObject( m_sema, (DWORD) timeout );
     return result == WAIT_OBJECT_0 ? true : false;

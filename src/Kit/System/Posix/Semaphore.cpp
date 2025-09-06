@@ -53,7 +53,7 @@ void Semaphore::waitInRealTime( void ) noexcept
 }
 
 
-bool Semaphore::timedWaitInRealTime( unsigned long timeout ) noexcept
+bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
 {
     // Convert milliseconds to the nanosleep time spec
     static const long nsec2msec = 1000000;

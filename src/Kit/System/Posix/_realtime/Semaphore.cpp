@@ -23,7 +23,7 @@ void Semaphore::wait( void ) noexcept
 }
 
 
-bool Semaphore::timedWait( unsigned long timeout ) noexcept
+bool Semaphore::timedWait( uint32_t timeout ) noexcept
 {
     return timedWaitInRealTime( timeout );
 }

@@ -200,7 +200,7 @@ bool Kit::System::Thread::tryWait() noexcept
     return ( static_cast<Kit::System::Win32::Thread*>( &getCurrent() ) )->m_syncSema.tryWait();
 }
 
-bool Kit::System::Thread::timedWait( unsigned long timeout ) noexcept
+bool Kit::System::Thread::timedWait( uint32_t timeout ) noexcept
 {
     return ( static_cast<Kit::System::Win32::Thread*>( &getCurrent() ) )->m_syncSema.timedWait( timeout );
 }

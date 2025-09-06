@@ -16,7 +16,6 @@
 
 #include "Thread.h"
 #include "Kit/System/Shutdown.h"
-#include "Tls.h"
 #include "FatalError.h"
 #include "Private.h"
 #include "Kit/Container/SList.h"

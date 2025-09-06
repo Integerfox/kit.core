@@ -270,7 +270,7 @@ bool Kit::System::Thread::tryWait() noexcept
     return ( static_cast<Kit::System::Posix::Thread*>( &getCurrent() ) )->m_syncSema.tryWait();
 }
 
-bool Kit::System::Thread::timedWait( unsigned long msecs ) noexcept
+bool Kit::System::Thread::timedWait( uint32_t msecs ) noexcept
 {
     return ( static_cast<Kit::System::Posix::Thread*>( &getCurrent() ) )->m_syncSema.timedWait( msecs );
 }

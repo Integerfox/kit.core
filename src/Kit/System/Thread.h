@@ -10,14 +10,15 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "kit_map.h"
 #include "kit_config.h"
+#include "kit_map.h"
 #include "Kit/System/Runnable.h"
 #include "Kit/System/Signable.h"
 #include "Kit/System/Tls.h"
 #include "Kit/Type/Traverser.h"
 #include "Kit/Container/ListItem.h"
 #include <stdlib.h>
+#include <string.h>
 
 
 /// Defer the definition of a thread ID (aka the native thread handle) to the application's 'platform'
@@ -127,7 +128,7 @@ public:
         the Thread was signaled; else false is returned if the timeout period
         expired.
      */
-    static bool timedWait( unsigned long timeoutInMsec ) noexcept;
+    static bool timedWait( uint32_t timeoutInMsec ) noexcept;
 
     /** This method is the similar to the isActive() method, but it operates
         on the specified thread pointer.  If the 'threadPtr' is nullptr or

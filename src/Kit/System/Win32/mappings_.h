@@ -65,12 +65,6 @@ inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
     return (uint32_t)clock();
 }
 
-/// Win32 Mapping
-#define KIT_SYSTEM_SHELL_NULL_DEVICE_x_MAP "NUL"
-
-/// Win32 Mapping
-#define KIT_SYSTEM_SHELL_SUPPORTED_x_MAP 1
-
 
 /// Win32 Mapping
 #define KIT_IO_NEW_LINE_NATIVE_MAP "\015\012"
