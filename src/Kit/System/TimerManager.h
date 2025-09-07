@@ -82,17 +82,11 @@ protected:
     virtual void tickComplete( void ) noexcept;
 
 protected:
-    /// Allocate first list (the list pointers are swapped to avoid moving nodes)
-    Kit::Container::DList<ICounter> m_listA;
-
-    /// Allocate second list (the list pointers are swapped to avoid moving nodes)
-    Kit::Container::DList<ICounter> m_listB;
-
     /// List of active counters. Points to a physical list.
-    Kit::Container::DList<ICounter>* m_counters;
+    Kit::Container::DList<ICounter> m_counters;
 
     /// List of Pending-to-attach counters (this happens when timers attach from the timer-expired-callbacks). Points to a physical list.
-    Kit::Container::DList<ICounter>* m_pendingAttach;
+    Kit::Container::DList<ICounter> m_pendingAttach;
 
     /// Elapsed time of the previous processing cycle
     uint32_t m_timeMark;

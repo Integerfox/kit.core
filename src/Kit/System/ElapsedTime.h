@@ -190,7 +190,7 @@ public:
         application NOT CALL this method because then that code can NOT be
         simulated using the SimTick interface.
      */
-    static uint64_t secondsInRealTimeEx() noexcept
+    inline static uint64_t secondsInRealTimeEx() noexcept
     {
         return millisecondsInRealTimeEx() / 1000L;
     }

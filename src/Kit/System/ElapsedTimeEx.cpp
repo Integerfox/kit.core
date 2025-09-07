@@ -55,7 +55,7 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 
 ///////////////////////////////////////////////////////////////
-uint64_t ElapsedTime::millisecondsEx( void ) noexcept
+uint64_t ElapsedTime::millisecondsInRealTimeEx( void ) noexcept
 {
     Kit::System::Mutex::ScopeLock lock( Kit::System::PrivateLocks::system() );
 

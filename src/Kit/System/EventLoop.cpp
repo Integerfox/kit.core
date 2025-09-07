@@ -100,7 +100,7 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
     // Process Event Flags
     if ( events && m_eventList )
     {
-        // Walk my list of event flag handlers and notify the ones that are interested in event(s)
+        // Walk my list of event flag handlers and notify the ones that are interested in the active event(s)
         IEventFlag* eventPtr = m_eventList->first();
         while ( eventPtr )
         {

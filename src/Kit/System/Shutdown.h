@@ -63,6 +63,7 @@ public:
         eSTREAMIO,                                               //!< Application terminated due to a stream I/O failure.  This includes errors in File IO, Sockets, Serial ports, etc.
         eMEMORY,                                                 //!< Application terminated due to a memory failure (e.g. failed memory allocation)
         eDRIVER,                                                 //!< Application terminated due to a driver failure.  This is a generic failure
+        eITC,                                                    //!< Application terminated due to an inter-thread communication failure.  This is a generic failure
         eFSM_EVENT_OVERFLOW,                                     //!< Application terminated due to a finite state machine event overflow condition (i.e. a FSM event was-dropped/not-processed)
         eWATCHDOG                                                //!< Application terminated due to a watchdog timeout (e.g. watchdog configuration errors, intentional WDOG trips)
     };

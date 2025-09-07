@@ -98,9 +98,6 @@ protected:
     /// The thread synchronized message semaphore.
     Kit::System::Semaphore m_syncSema;
 
-    /// Option to allow simulated ticks
-    bool m_allowSimTicks;
-
 public:
     /// Housekeeping
     friend class Kit::System::Thread;

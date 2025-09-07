@@ -18,6 +18,7 @@
 #include "Kit/System/Shutdown.h"
 #include "FatalError.h"
 #include "Private.h"
+#include "SimTick.h"
 #include "Kit/Container/SList.h"
 
 //------------------------------------------------------------------------------
@@ -92,10 +93,10 @@ void Thread::launchRunnable( Thread& threadHdl ) noexcept
 
     // Launch the IRunnable object
     threadHdl.m_runnable.setThread( &threadHdl );
-    // KIT_SYSTEM_SIM_TICK_THREAD_INIT_( threadHdl.m_allowSimTicks );    // TODO: Add SimTime support
+    KIT_SYSTEM_SIM_TICK_THREAD_INIT_( threadHdl.m_allowSimTicks );
     threadHdl.m_runnable.entry();
     threadHdl.m_runnable.setThread( nullptr );
-    // KIT_SYSTEM_SIM_TICK_ON_THREAD_EXIT_();
+    KIT_SYSTEM_SIM_TICK_ON_THREAD_EXIT_();
 
     // Remove the thread from the list of active threads
     removeThreadFromActiveList( threadHdl );

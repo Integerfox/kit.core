@@ -85,17 +85,14 @@ public:
     friend class Kit::System::Thread;
 
 protected:
+    /// The thread synchronized message semaphore.
+    Kit::System::Semaphore  m_syncSema;
+
     /// ASCII name of the task
     Kit::Text::FString<64>  m_name;
 
     /// Priority
     int                     m_priority;
-
-    /// Option to allow simulate ticks
-    bool                    m_allowSimTicks;
-
-    /// The thread synchronized message semaphore.
-    Kit::System::Semaphore  m_syncSema;
 };
 
 

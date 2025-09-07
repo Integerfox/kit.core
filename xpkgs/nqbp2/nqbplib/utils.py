@@ -652,11 +652,10 @@ def extract_unit_test_src_dir( build_dir ):
     if ( build_dir.startswith(os.sep) ):
         build_dir = build_dir[1:]
 
-    # Remove all directories after the _0test directory in the build directory
-    test_dir_idx = build_dir.find('_0test')
+    # Remove all directories including and after the '_0build/' directory in the build directory
+    test_dir_idx = build_dir.find('/_0build/')
     if ( test_dir_idx != -1 ):
         build_dir = build_dir[:test_dir_idx]
-    build_dir = os.path.join( build_dir, "_0test" )
     
     # Return the unit test source directory (in a format suitable for a 'first/last-object' usage)
     return '_BUILT_DIR_.' + build_dir

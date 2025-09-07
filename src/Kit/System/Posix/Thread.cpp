@@ -15,7 +15,7 @@
 #include "Kit/System/Thread.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/FatalError.h"
-// #include "Kit/System/SimTick.h"
+#include "Kit/System/SimTick.h"
 #include <limits.h>
 #include <sched.h>
 #include <unistd.h>
@@ -70,7 +70,6 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 Thread::Thread( Kit::System::IRunnable& dummyRunnable )
     : Kit::System::Thread( dummyRunnable )
     , m_name( "PosixMain" )
-    , m_allowSimTicks( false )
 {
     // Create TSD key that holds a pointer to "me" (only do this once)
     // NOTE: By definition/design this constructor will be CALLED before
@@ -90,20 +89,22 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
     addThreadToActiveList( *this );
 
     // Mark the NATIVE/Main thread as 'real time' thread for the SimTick engine
-    // CPL_SYSTEM_SIM_TICK_THREAD_INIT_( false ); // TODO: Add SIM-TIME support
+    KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( false );
+    KIT_SYSTEM_SIM_TICK_THREAD_INIT_( false );  
 }
 
 
 Thread::Thread( Kit::System::IRunnable& runnable,
-                const char*            name,
-                int                    priority,
-                unsigned               stackSize,
-                int                    schedType,
-                bool                   allowSimTicks )
+                const char*             name,
+                int                     priority,
+                unsigned                stackSize,
+                int                     schedType,
+                bool                    allowSimTicks )
     : Kit::System::Thread( runnable )
     , m_name( name )
-    , m_allowSimTicks( allowSimTicks )
 {
+    KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( allowSimTicks );
+    
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     KIT_SYSTEM_TRACE_MSG( SECT_, "Name=%s, pri=%d, schedType=%d", name, priority, schedType );
 
@@ -223,7 +224,7 @@ void* Thread::entryPoint( void* data )
 }
 //------------------------------------------------------------------------------
 //////////////////////////////
-Kit::System::Thread* Kit::System::Thread::create( IRunnable&   runnable,
+Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
                                                   const char* name,
                                                   int         priority,
                                                   int         stackSize,

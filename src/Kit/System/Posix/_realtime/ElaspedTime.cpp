@@ -22,6 +22,10 @@ uint32_t ElapsedTime::milliseconds( void ) noexcept
     return millisecondsInRealTime();
 }
 
+uint64_t ElapsedTime::millisecondsEx( void ) noexcept
+{
+    return millisecondsInRealTimeEx();
+}
 
 } // end namespace
 }

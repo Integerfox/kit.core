@@ -46,6 +46,16 @@
  */
 #define KIT_SYSTEM_THREAD_PRIORITY_LOWER KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP
 
+/** WORK-AROUND for zero overhead when the target's Thread DOES NOT supporting
+    Simulated Time
+ */
+#ifndef USE_KIT_SYSTEM_SIM_TICK
+#define KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG()
+#define KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG(v)
+#else
+#define KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG() bool m_allowSimTicks
+#define KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG(v) m_allowSimTicks = (v)
+#endif
 
 ///
 namespace Kit {
@@ -307,6 +317,9 @@ protected:
 
     /// Thread Local storage
     void* m_tlsArray[OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES];
+
+    /// Optional: Flag to allow simulated ticks for this thread
+    KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG();
 
     /// Allow access to the TLS array
     friend class Tls;

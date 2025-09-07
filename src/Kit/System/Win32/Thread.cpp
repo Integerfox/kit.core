@@ -87,8 +87,7 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
     addThreadToActiveList( *this );
 
     // Mark the NATIVE/Main thread as 'real time' thread for the SimTick engine
-    // TODO: SIMTICK
-    // CPL_SYSTEM_SIM_TICK_THREAD_INIT_( false );
+    KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( false );
 
     // Get a 'Real Handle' to this thread
     DuplicateHandle( GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &m_nativeThreadHdl, 0, FALSE, DUPLICATE_SAME_ACCESS );
@@ -96,15 +95,16 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
 
 
 Thread::Thread( Kit::System::IRunnable& runnable,
-                const char*            name,
-                int                    priority,
-                unsigned               stackSize,
-                bool                   allowSimTicks )
+                const char*             name,
+                int                     priority,
+                unsigned                stackSize,
+                bool                    allowSimTicks )
     : Kit::System::Thread( runnable )
     , m_name( name )
     , m_priority( priority )
-    , m_allowSimTicks( allowSimTicks )
 {
+    KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( allowSimTicks );
+
     // Create a thread using _beginthreadex for HANDLE compatibility
     // Per the MSVC Documentation is okay to cast the returned uintptr_t to a HANDLE
     unsigned threadID;
@@ -207,7 +207,7 @@ bool Kit::System::Thread::timedWait( uint32_t timeout ) noexcept
 
 
 //////////////////////////////
-Kit::System::Thread* Kit::System::Thread::create( IRunnable&   runnable,
+Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
                                                   const char* name,
                                                   int         priority,
                                                   int         stackSize,
