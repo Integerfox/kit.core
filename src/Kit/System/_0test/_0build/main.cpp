@@ -1,6 +1,8 @@
 #include "Kit/System/api.h"
 #include "Kit/System/Trace.h"
 #include "catch2/catch_session.hpp"
+#include <chrono>
+#include <cstdint>
 
 extern uint32_t getNativeTimestamp( void );
 
@@ -22,9 +24,7 @@ int main( int argc, char* argv[] )
 // Must support a duration of at least 10s, with at least 1ms resolution
 uint32_t getNativeTimestamp( void )
 {
-    struct timespec ts;
-    timespec_get(&ts, TIME_UTC);
-    
-    // Return milliseconds since epoch (at least 1ms resolution, supports >10s)
-    return static_cast<uint32_t>(ts.tv_sec * 1000 + ts.tv_nsec / 1000000);
+    auto now = std::chrono::system_clock::now();
+    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+    return static_cast<uint32_t>(ms);
 }

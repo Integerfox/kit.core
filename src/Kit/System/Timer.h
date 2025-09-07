@@ -98,7 +98,7 @@ public:
     /** Definition of the call-back method that notifies the
         context/client when the timer expires.
      */
-    typedef void ( CONTEXT::*TimerExpiredFunction_T )() noexcept;
+    typedef void ( CONTEXT::*TimerExpiredFunction_T )();
 
 public:
     /// Constructor
