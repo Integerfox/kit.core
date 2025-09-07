@@ -653,7 +653,7 @@ def extract_unit_test_src_dir( build_dir ):
         build_dir = build_dir[1:]
 
     # Remove all directories including and after the '_0build/' directory in the build directory
-    test_dir_idx = build_dir.find('/_0build/')
+    test_dir_idx = build_dir.find( os.sep + '_0build' + os.sep )
     if ( test_dir_idx != -1 ):
         build_dir = build_dir[:test_dir_idx]
     
