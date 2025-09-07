@@ -1,4 +1,3 @@
-#if 0
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -9,103 +8,122 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/System/IEventFlag.h"
 #include "kit_config.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
+#include "Kit/System/ElapsedTime.h"
 #include "Kit/System/Timer.h"
 #include "Kit/System/EventLoop.h"
 #include "Kit/System/Trace.h"
+#include "Kit/System/Thread.h"
+#include "Kit/System/api.h"
 #include <inttypes.h>
 
-#define SECT_                       "_0test"
+#define SECT_ "_0test"
 
-#ifndef NUM_SEQ_ 
-#define NUM_SEQ_                    3
+#ifndef NUM_SEQ_
+#define NUM_SEQ_ 3
 #endif
-#define TOLERANCE_                  2
-#define DELAY_                      2000
+#define TOLERANCE_                2
+#define DELAY_                    2000
 
-#define START_EVENT                 0
+#define START_EVENT_NUM           0
+#define START_EVENT_MASK          ( 1 << START_EVENT_NUM )
 
-#define FAST_TICKSRC_MS_PER_TICK    1
-#define SLOW_TICKSRC_MS_PER_TICK    10
+#define FAST_TICKSRC_MS_PER_TICK  1
+#define SLOW_TICKSRC_MS_PER_TICK  10
 
-#define ROSE_T1                     10      // Tick Hz 1000 (1ms)  
-#define ROSE_T2                     23      // Tick Hz 1000 (1ms)  
-#define DAISY_T1                    11      // Tick Hz 1000 (1ms)  
-#define DAISY_T2                    47      // Tick Hz 1000 (1ms)  
-#define OAK_T1                      60      // Tick Hz 1000 (1ms)  
-#define OAK_T2                      125     // Tick Hz 1000 (1ms)  
-#define PINE_T1                     50      // Tick Hz 1000 (1ms)
-#define PINE_T2                     300     // Tick Hz 1000 (1ms)
-#define APPLE_T1                    50      // Tick Hz 20   (50ms)
-#define APPLE_T2                    300     // Tick Hz 20   (50ms)
-#define ORANGE_T1                   60      // Tick Hz 20   (50ms)
-#define ORANGE_T2                   125     // Tick Hz 20   (50ms)
-
-
-
-#define MAX_COUNT_(ttime, tdur )          (ttime/tdur)
+#define ROSE_T1                   10   // Tick Hz 1000 (1ms)
+#define ROSE_T2                   23   // Tick Hz 1000 (1ms)
+#define DAISY_T1                  11   // Tick Hz 1000 (1ms)
+#define DAISY_T2                  47   // Tick Hz 1000 (1ms)
+#define OAK_T1                    60   // Tick Hz 1000 (1ms)
+#define OAK_T2                    125  // Tick Hz 1000 (1ms)
+#define PINE_T1                   50   // Tick Hz 1000 (1ms)
+#define PINE_T2                   300  // Tick Hz 1000 (1ms)
+#define APPLE_T1                  50   // Tick Hz 20   (50ms)
+#define APPLE_T2                  300  // Tick Hz 20   (50ms)
+#define ORANGE_T1                 60   // Tick Hz 20   (50ms)
+#define ORANGE_T2                 125  // Tick Hz 20   (50ms)
 
 
+#define MAX_COUNT_( ttime, tdur ) ( ttime / tdur )
 
+
+using namespace Kit::System;
 
 ////////////////////////////////////////////////////////////////////////////////
-namespace { // being anonymous namespace
+namespace {  // being anonymous namespace
 
 class AppObject
 {
 public:
     ///
-    const char*                             m_name;
+    const char* m_name;
 
     ///
-    unsigned long                           m_timer1Duration;
+    uint32_t m_timer1Duration;
     ///
-    Cpl::System::TimerComposer<AppObject>   m_timer1;
+    TimerComposer<AppObject> m_timer1;
     ///
-    unsigned long                           m_count1;
+    uint32_t m_count1;
     ///
-    unsigned long                           m_startTime1;
+    uint32_t m_startTime1;
     ///
-    unsigned long                           m_minTime1;
+    uint32_t m_minTime1;
     ///
-    unsigned long                           m_maxTime1;
+    uint32_t m_maxTime1;
     ///
-    unsigned long                           m_sumTime1;
+    uint32_t m_sumTime1;
 
     ///
-    unsigned long                           m_timer2Duration;
+    uint32_t m_timer2Duration;
     ///
-    Cpl::System::TimerComposer<AppObject>   m_timer2;
+    TimerComposer<AppObject> m_timer2;
     ///
-    unsigned long                           m_count2;
+    uint32_t m_count2;
 
     ///
-    unsigned long                           m_timeMark1;
+    uint32_t m_timeMark1;
     ///
-    unsigned long                           m_timeMark2;
+    uint32_t m_timeMark2;
     ///
-    unsigned long                           m_deltaTime1;
+    uint32_t m_deltaTime1;
     ///
-    unsigned long                           m_deltaTime2;
+    uint32_t m_deltaTime2;
     ///
-    unsigned long                           m_startTime2;
+    uint32_t m_startTime2;
     ///
-    unsigned long                           m_minTime2;
+    uint32_t m_minTime2;
     ///
-    unsigned long                           m_maxTime2;
+    uint32_t m_maxTime2;
     ///
-    unsigned long                           m_sumTime2;
+    uint32_t m_sumTime2;
 
 
     /// Constructor
-    AppObject( const char* name, Cpl::System::TimerManager& timingSource, unsigned long timer1Duration, unsigned long timer2Duration )
-        :m_name( name ),
-        m_timer1Duration( timer1Duration ),
-        m_timer1( timingSource, *this, &AppObject::timer1Expired ),
-        m_timer2Duration( timer2Duration ),
-        m_timer2( timingSource, *this, &AppObject::timer2Expired )
+    AppObject( const char*   name,
+               TimerManager& timingSource,
+               uint32_t      timer1Duration,
+               uint32_t      timer2Duration )
+        : m_name( name )
+        , m_timer1Duration( timer1Duration )
+        , m_timer1( *this, &AppObject::timer1Expired, timingSource )
+        , m_timer2Duration( timer2Duration )
+        , m_timer2( *this, &AppObject::timer2Expired, timingSource )
+    {
+    }
+
+    /// Constructor
+    AppObject( const char* name,
+               uint32_t    timer1Duration,
+               uint32_t    timer2Duration )
+        : m_name( name )
+        , m_timer1Duration( timer1Duration )
+        , m_timer1( *this, &AppObject::timer1Expired, nullptr )
+        , m_timer2Duration( timer2Duration )
+        , m_timer2( *this, &AppObject::timer2Expired, nullptr )
     {
     }
 
@@ -113,39 +131,43 @@ public:
     ///
     void start()
     {
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("Starting timers (%lu, %lu) for: %s", m_timer1Duration, m_timer2Duration, m_name) );
+        KIT_SYSTEM_TRACE_MSG( SECT_,
+                              "Starting timers (%" PRIu32 ", %" PRIu32 ") for: %s",
+                              m_timer1Duration,
+                              m_timer2Duration,
+                              m_name );
         m_count1   = 0;
-        m_minTime1 = (unsigned long) (-1);
+        m_minTime1 = (uint32_t)( -1 );
         m_maxTime1 = 0;
         m_sumTime1 = 0;
         m_count2   = 0;
-        m_minTime2 = (unsigned long) (-1);
+        m_minTime2 = (uint32_t)( -1 );
         m_maxTime2 = 0;
         m_sumTime2 = 0;
 
-        m_timeMark1 = m_startTime1 = Cpl::System::ElapsedTime::milliseconds();
+        m_timeMark1 = m_startTime1 = ElapsedTime::milliseconds();
         m_timer1.start( m_timer1Duration );
-        m_timeMark2 = m_startTime2 = Cpl::System::ElapsedTime::milliseconds();
+        m_timeMark2 = m_startTime2 = ElapsedTime::milliseconds();
         m_timer2.start( m_timer2Duration );
     }
 
     ///
     void stop()
     {
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("Stopping AppObject: %s....", m_name) );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Stopping AppObject: %s....", m_name );
 
         m_timer1.stop();
-        m_deltaTime1 = Cpl::System::ElapsedTime::deltaMilliseconds( m_timeMark1 );
+        m_deltaTime1 = ElapsedTime::deltaMilliseconds( m_timeMark1 );
         m_timer2.stop();
-        m_deltaTime2 = Cpl::System::ElapsedTime::deltaMilliseconds( m_timeMark1 );
+        m_deltaTime2 = ElapsedTime::deltaMilliseconds( m_timeMark1 );
     }
 
 public:
     ///
-    void timer1Expired( void )
+    void timer1Expired( void ) noexcept
     {
         // Capture stats
-        unsigned elasped = Cpl::System::ElapsedTime::deltaMilliseconds( m_startTime1 );
+        uint32_t elasped = ElapsedTime::deltaMilliseconds( m_startTime1 );
         if ( elasped < m_minTime1 )
         {
             m_minTime1 = elasped;
@@ -157,15 +179,19 @@ public:
         m_sumTime1 += elasped;
 
         m_count1++;
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("(%s)::Timer 1::Expired.  Total count=%lu (%lu)", m_name, m_count1, m_timer1Duration) );
-        m_startTime1 = Cpl::System::ElapsedTime::milliseconds();
+        KIT_SYSTEM_TRACE_MSG( SECT_,
+                              "(%s)::Timer 1::Expired.  Total count=%" PRIu32 " (%" PRIu32 ")",
+                              m_name,
+                              m_count1,
+                              m_timer1Duration );
+        m_startTime1 = ElapsedTime::milliseconds();
         m_timer1.start( m_timer1Duration );
     }
 
-    void timer2Expired( void )
+    void timer2Expired( void ) noexcept
     {
         // Capture stats
-        unsigned elasped = Cpl::System::ElapsedTime::deltaMilliseconds( m_startTime2 );
+        uint32_t elasped = ElapsedTime::deltaMilliseconds( m_startTime2 );
         if ( elasped < m_minTime2 )
         {
             m_minTime2 = elasped;
@@ -177,56 +203,104 @@ public:
         m_sumTime2 += elasped;
 
         m_count2++;
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("(%s)::Timer 2 ::Expired.  Total count=%lu (%lu)", m_name, m_count2, m_timer2Duration) );
-        m_startTime2 = Cpl::System::ElapsedTime::milliseconds();
+        KIT_SYSTEM_TRACE_MSG( SECT_,
+                              "(%s)::Timer 2 ::Expired.  Total count=%" PRIu32 " (%" PRIu32 ")",
+                              m_name,
+                              m_count2,
+                              m_timer2Duration );
+        m_startTime2 = ElapsedTime::milliseconds();
         m_timer2.start( m_timer2Duration );
     }
 
 public:
-    void displayTimer1( unsigned long maxCount )
+    void displayTimer1( uint32_t maxCount )
     {
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("%s#1: delta=%lu, dur=%lu --> cnt (%lu) <=? %lu. min=%lu, max=%lu, avg=%.2f", m_name, m_deltaTime1, m_timer1Duration, m_count1, maxCount, m_minTime1, m_maxTime1, m_sumTime1 / (double) m_count1) );
+        KIT_SYSTEM_TRACE_MSG( SECT_,
+                              "%s#1: delta=%" PRIu32 ", dur=%" PRIu32 " --> cnt (%" PRIu32 ") <=? %" PRIu32 ". min=%" PRIu32 ", max=%" PRIu32 ", avg=%.2f",
+                              m_name,
+                              m_deltaTime1,
+                              m_timer1Duration,
+                              m_count1,
+                              maxCount,
+                              m_minTime1,
+                              m_maxTime1,
+                              m_sumTime1 / (double)m_count1 );
     }
 
-    void displayTimer2( unsigned long maxCount )
+    void displayTimer2( uint32_t maxCount )
     {
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("%s#2: delta=%lu, dur=%lu --> cnt (%lu) <=? %lu. min=%lu, max=%lu, avg=%.2f", m_name, m_deltaTime2, m_timer2Duration, m_count2, maxCount, m_minTime2, m_maxTime2, m_sumTime2 / (double) m_count2) );
+        KIT_SYSTEM_TRACE_MSG( SECT_,
+                              "%s#2: delta=%" PRIu32 ", dur=%" PRIu32 " --> cnt (%" PRIu32 ") <=? %" PRIu32 ". min=%" PRIu32 ", max=%" PRIu32 ", avg=%.2f",
+                              m_name,
+                              m_deltaTime2,
+                              m_timer2Duration,
+                              m_count2,
+                              maxCount,
+                              m_minTime2,
+                              m_maxTime2,
+                              m_sumTime2 / (double)m_count2 );
     }
-
 };
 
 
 ////////////////////////////////////////////////////////////////////////////////
-class MasterT : public Cpl::System::EventLoop, public Cpl::System::Timer
+class MasterT : public EventLoop, public Timer, public EventFlagBase
 {
 public:
     ///
-    unsigned long           m_delayMsecs;
+    uint32_t m_delayMsecs;
     ///
-    AppObject               m_appObj1;
+    AppObject m_appObj1;
     ///
-    AppObject               m_appObj2;
+    AppObject m_appObj2;
     ///
-    Cpl::System::Signable&  m_waiter;
+    ISignable& m_waiter;
 
 public:
     ///
-    MasterT( unsigned long timerResolution, unsigned long delayMsecs,
-            const char* nameObj1, unsigned long timer1DurationObj1, unsigned long timer2DurationObj1,
-            const char* nameObj2, unsigned long timer1DurationObj2, unsigned long timer2DurationObj2,
-            Cpl::System::Signable& waiter )
-        :Cpl::System::EventLoop( timerResolution ),
-        Cpl::System::Timer( * ((Cpl::System::TimerManager*)this) ),
-        m_delayMsecs( delayMsecs ),
-        m_appObj1( nameObj1, *this, timer1DurationObj1, timer2DurationObj1 ),
-        m_appObj2( nameObj2, *this, timer1DurationObj2, timer2DurationObj2 ),
-        m_waiter( waiter )
+    MasterT( uint32_t                           timerResolution,
+             uint32_t                           delayMsecs,
+             const char*                        nameObj1,
+             uint32_t                           timer1DurationObj1,
+             uint32_t                           timer2DurationObj1,
+             const char*                        nameObj2,
+             uint32_t                           timer1DurationObj2,
+             uint32_t                           timer2DurationObj2,
+             ISignable&                         waiter,
+             Kit::Container::SList<IEventFlag>& eventList )
+        : EventLoop( timerResolution, &eventList )
+        , Timer( *( (TimerManager*)this ) )
+        , EventFlagBase( eventList, START_EVENT_MASK )
+        , m_delayMsecs( delayMsecs )
+        , m_appObj1( nameObj1, *this, timer1DurationObj1, timer2DurationObj1 )
+        , m_appObj2( nameObj2, *this, timer1DurationObj2, timer2DurationObj2 )
+        , m_waiter( waiter )
     {
     }
 
+    MasterT( uint32_t                           timerResolution,
+             uint32_t                           delayMsecs,
+             const char*                        nameObj1,
+             uint32_t                           timer1DurationObj1,
+             uint32_t                           timer2DurationObj1,
+             const char*                        nameObj2,
+             uint32_t                           timer1DurationObj2,
+             uint32_t                           timer2DurationObj2,
+             ISignable&                         waiter,
+             Kit::Container::SList<IEventFlag>& eventList,
+             const char*                        ignoredAlternateConstructorSelection )
+        : EventLoop( timerResolution, &eventList )
+        , Timer( *( (TimerManager*)this ) )
+        , EventFlagBase( eventList, START_EVENT_MASK )
+        , m_delayMsecs( delayMsecs )
+        , m_appObj1( nameObj1, timer1DurationObj1, timer2DurationObj1 )
+        , m_appObj2( nameObj2, timer1DurationObj2, timer2DurationObj2 )
+        , m_waiter( waiter )
+    {
+    }
     void expired( void ) noexcept
     {
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("----- Stopping Timer Sequence....") );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "----- Stopping Timer Sequence...." );
         m_appObj1.stop();
         m_appObj2.stop();
         m_waiter.signal();
@@ -235,50 +309,255 @@ public:
 
 public:
     ///
-    void processEventFlag( uint8_t eventNumber ) noexcept
+    uint32_t getEventFlagsMask( void ) const noexcept
     {
-        switch ( eventNumber )
+        return START_EVENT_MASK;
+    }
+    ///
+    void notified( uint32_t eventMask ) noexcept
+    {
+        if ( eventMask & START_EVENT_MASK )
         {
-            case START_EVENT:
-                CPL_SYSTEM_TRACE_MSG( SECT_, ("----- Starting Timer Sequence....") );
-                start( m_delayMsecs );
-                m_appObj1.start();
-                m_appObj2.start();
-                break;
-
-            default:
-                CPL_SYSTEM_TRACE_MSG( SECT_, ("----- UNSUPPORTED EVENT FLAG WAS SET: %u", eventNumber) );
-                break;
+            KIT_SYSTEM_TRACE_MSG( SECT_, "----- Starting Timer Sequence...." );
+            start( m_delayMsecs );
+            m_appObj1.start();
+            m_appObj2.start();
         }
-
-    };
+        else
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "----- UNSUPPORTED EVENT FLAG WAS SET: %" PRIx32, eventMask );
+        }
+    }
 };
 
-} // end anonymous namespace
+}  // end anonymous namespace
 
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "shell" )
+TEST_CASE( "timer" )
 {
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     ShutdownUnitTesting::clearAndUseCounter();
 
-    if ( Shell::isAvailable() )
+    SECTION( "nominal" )
     {
-        REQUIRE( Shell::execute( MY_DIR_COMMAND ) == ANSWER_EXECUTE_CMD );
-        REQUIRE( Shell::execute( MY_DIR_COMMAND, false ) == ANSWER_EXECUTE_CMD );
-        REQUIRE( Shell::execute( MY_DIR_COMMAND, false, false ) == ANSWER_EXECUTE_CMD );
-        REQUIRE( Shell::execute( MY_DIR_COMMAND, true, false ) == ANSWER_EXECUTE_CMD );
+        // Create my test sequencers
+        Kit::Container::SList<IEventFlag> eventListFruits;
+        Kit::Container::SList<IEventFlag> eventListFlowers;
+        Kit::Container::SList<IEventFlag> eventListTrees;
+        MasterT                           fruits( SLOW_TICKSRC_MS_PER_TICK, DELAY_, "apple", APPLE_T1, APPLE_T2, "orange", ORANGE_T1, ORANGE_T2, Thread::getCurrent(), eventListFruits );
+        MasterT                           flowers( FAST_TICKSRC_MS_PER_TICK, DELAY_, "rose", ROSE_T1, ROSE_T2, "daisy", DAISY_T1, DAISY_T2, Thread::getCurrent(), eventListFlowers );
+        MasterT                           trees( FAST_TICKSRC_MS_PER_TICK, DELAY_, "oak", OAK_T1, OAK_T2, "pine", PINE_T1, PINE_T2, Thread::getCurrent(), eventListTrees );
 
-        REQUIRE( Shell::execute( MY_BAD_COMMAND ) != ANSWER_EXECUTE_NOT_BAD_CMD );
-        REQUIRE( Shell::execute( MY_BAD_COMMAND, false ) != ANSWER_EXECUTE_NOT_BAD_CMD );
-        REQUIRE( Shell::execute( MY_BAD_COMMAND, false, false ) != ANSWER_EXECUTE_NOT_BAD_CMD );
-        REQUIRE( Shell::execute( MY_BAD_COMMAND, true, false ) != ANSWER_EXECUTE_NOT_BAD_CMD );
+        // Create all of the threads
+        Thread* t1 = Thread::create( fruits, "FRUITS" );
+        Thread* t2 = Thread::create( trees, "TREES" );
+        Thread* t3 = Thread::create( flowers, "FLOWERS" );
+
+        // Give time for all of threads to be created before starting the test sequence
+        sleep( 100 );
+
+
+        // Validate result of each sequence
+        for ( int i = 0; i < NUM_SEQ_; i++ )
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "***** STARTING TEST SEQUENCE %d *****", i + 1 );
+            // Start a test sequence
+            fruits.signalEvent( START_EVENT_NUM );
+            flowers.signalEvent( START_EVENT_NUM );
+            trees.signalEvent( START_EVENT_NUM );
+
+            // Wait for all event loops to complete a sequence
+            Thread::wait();
+            Thread::wait();
+            Thread::wait();
+            sleep( 50 );
+
+            uint32_t maxCount = MAX_COUNT_( fruits.m_appObj1.m_deltaTime1, APPLE_T1 );
+            fruits.m_appObj1.displayTimer1( maxCount );
+            REQUIRE( fruits.m_appObj1.m_count1 <= maxCount );
+            REQUIRE( fruits.m_appObj1.m_minTime1 >= fruits.m_appObj1.m_timer1Duration );
+            maxCount = MAX_COUNT_( fruits.m_appObj1.m_deltaTime2, APPLE_T2 );
+            fruits.m_appObj1.displayTimer2( maxCount );
+            REQUIRE( fruits.m_appObj1.m_count2 <= maxCount );
+            REQUIRE( fruits.m_appObj1.m_minTime2 >= fruits.m_appObj1.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( fruits.m_appObj2.m_deltaTime1, ORANGE_T1 );
+            fruits.m_appObj2.displayTimer1( maxCount );
+            REQUIRE( fruits.m_appObj2.m_count1 <= maxCount );
+            REQUIRE( fruits.m_appObj2.m_minTime1 >= fruits.m_appObj2.m_timer1Duration );
+            maxCount = MAX_COUNT_( fruits.m_appObj2.m_deltaTime2, ORANGE_T2 );
+            fruits.m_appObj2.displayTimer2( maxCount );
+            REQUIRE( fruits.m_appObj2.m_count2 <= maxCount );
+            REQUIRE( fruits.m_appObj2.m_minTime2 >= fruits.m_appObj2.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( trees.m_appObj1.m_deltaTime1, OAK_T1 );
+            trees.m_appObj1.displayTimer1( maxCount );
+            REQUIRE( trees.m_appObj1.m_count1 <= maxCount );
+            REQUIRE( trees.m_appObj1.m_minTime1 >= trees.m_appObj1.m_timer1Duration );
+            maxCount = MAX_COUNT_( trees.m_appObj1.m_deltaTime2, OAK_T2 );
+            trees.m_appObj1.displayTimer2( maxCount );
+            REQUIRE( trees.m_appObj1.m_count2 <= maxCount );
+            REQUIRE( trees.m_appObj1.m_minTime2 >= trees.m_appObj1.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( trees.m_appObj2.m_deltaTime1, PINE_T1 );
+            trees.m_appObj2.displayTimer1( maxCount );
+            REQUIRE( trees.m_appObj2.m_count1 <= maxCount );
+            REQUIRE( trees.m_appObj2.m_minTime1 >= trees.m_appObj2.m_timer1Duration );
+            maxCount = MAX_COUNT_( trees.m_appObj2.m_deltaTime2, PINE_T2 );
+            trees.m_appObj2.displayTimer2( maxCount );
+            REQUIRE( trees.m_appObj2.m_count2 <= maxCount );
+            REQUIRE( trees.m_appObj2.m_minTime2 >= trees.m_appObj2.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( flowers.m_appObj1.m_deltaTime1, ROSE_T1 );
+            flowers.m_appObj1.displayTimer1( maxCount );
+            REQUIRE( flowers.m_appObj1.m_count1 <= maxCount );
+            REQUIRE( flowers.m_appObj1.m_minTime1 >= flowers.m_appObj1.m_timer1Duration );
+            maxCount = MAX_COUNT_( flowers.m_appObj1.m_deltaTime2, ROSE_T2 );
+            flowers.m_appObj1.displayTimer2( maxCount );
+            REQUIRE( flowers.m_appObj1.m_count2 <= maxCount );
+            REQUIRE( flowers.m_appObj1.m_minTime2 >= flowers.m_appObj1.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( flowers.m_appObj2.m_deltaTime1, DAISY_T1 );
+            flowers.m_appObj2.displayTimer1( maxCount );
+            REQUIRE( flowers.m_appObj2.m_count1 <= maxCount );
+            REQUIRE( flowers.m_appObj2.m_minTime1 >= flowers.m_appObj2.m_timer1Duration );
+            maxCount = MAX_COUNT_( flowers.m_appObj2.m_deltaTime2, DAISY_T2 );
+            flowers.m_appObj2.displayTimer2( maxCount );
+            REQUIRE( flowers.m_appObj2.m_count2 <= maxCount );
+            REQUIRE( flowers.m_appObj2.m_minTime2 >= flowers.m_appObj2.m_timer2Duration );
+        }
+
+
+        // Shutdown threads
+        fruits.pleaseStop();
+        trees.pleaseStop();
+        flowers.pleaseStop();
+
+        sleep( 300 );  // allow time for threads to stop
+        REQUIRE( t1->isActive() == false );
+        REQUIRE( t2->isActive() == false );
+        REQUIRE( t3->isActive() == false );
+
+        Thread::destroy( *t1 );
+        Thread::destroy( *t2 );
+        Thread::destroy( *t3 );
     }
-    else
+
+    SECTION( "late-timing-source" )
     {
-        REQUIRE( Shell::execute( MY_DIR_COMMAND ) == NOT_SUPPORTED_ANSWER_EXECUTE_CMD );
+        // Create my test sequencers
+        Kit::Container::SList<IEventFlag> eventListFruits;
+        Kit::Container::SList<IEventFlag> eventListFlowers;
+        Kit::Container::SList<IEventFlag> eventListTrees;
+        MasterT                           fruits( SLOW_TICKSRC_MS_PER_TICK, DELAY_, "apple", APPLE_T1, APPLE_T2, "orange", ORANGE_T1, ORANGE_T2, Thread::getCurrent(), eventListFruits, "late-timing-source" );
+        MasterT                           flowers( FAST_TICKSRC_MS_PER_TICK, DELAY_, "rose", ROSE_T1, ROSE_T2, "daisy", DAISY_T1, DAISY_T2, Thread::getCurrent(), eventListFlowers, "late-timing-source" );
+        MasterT                           trees( FAST_TICKSRC_MS_PER_TICK, DELAY_, "oak", OAK_T1, OAK_T2, "pine", PINE_T1, PINE_T2, Thread::getCurrent(), eventListTrees, "late-timing-source" );
+
+        // Create all of the threads
+        Thread* t1 = Thread::create( fruits, "FRUITS" );
+        Thread* t2 = Thread::create( trees, "TREES" );
+        Thread* t3 = Thread::create( flowers, "FLOWERS" );
+
+        // Give time for all of threads to be created before starting the test sequence
+        sleep( 200 );
+        fruits.m_appObj1.m_timer1.setTimingSource( fruits );
+        fruits.m_appObj1.m_timer2.setTimingSource( fruits );
+        fruits.m_appObj2.m_timer1.setTimingSource( fruits );
+        fruits.m_appObj2.m_timer2.setTimingSource( fruits );
+        trees.m_appObj1.m_timer1.setTimingSource( trees );
+        trees.m_appObj1.m_timer2.setTimingSource( trees );
+        trees.m_appObj2.m_timer1.setTimingSource( trees );
+        trees.m_appObj2.m_timer2.setTimingSource( trees );
+        flowers.m_appObj1.m_timer1.setTimingSource( flowers );
+        flowers.m_appObj1.m_timer2.setTimingSource( flowers );
+        flowers.m_appObj2.m_timer1.setTimingSource( flowers );
+        flowers.m_appObj2.m_timer2.setTimingSource( flowers );
+
+        // Validate result of each sequence (only need to run ONCE)
+        for ( int i = 0; i < 1; i++ )
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "***** STARTING TEST SEQUENCE %d *****", i + 1 );
+            // Start a test sequence
+            fruits.signalEvent( START_EVENT_NUM );
+            flowers.signalEvent( START_EVENT_NUM );
+            trees.signalEvent( START_EVENT_NUM );
+
+            // Wait for all event loops to complete a sequence
+            Thread::wait();
+            Thread::wait();
+            Thread::wait();
+            sleep( 50 );
+
+            uint32_t maxCount = MAX_COUNT_( fruits.m_appObj1.m_deltaTime1, APPLE_T1 );
+            fruits.m_appObj1.displayTimer1( maxCount );
+            REQUIRE( fruits.m_appObj1.m_count1 <= maxCount );
+            REQUIRE( fruits.m_appObj1.m_minTime1 >= fruits.m_appObj1.m_timer1Duration );
+            maxCount = MAX_COUNT_( fruits.m_appObj1.m_deltaTime2, APPLE_T2 );
+            fruits.m_appObj1.displayTimer2( maxCount );
+            REQUIRE( fruits.m_appObj1.m_count2 <= maxCount );
+            REQUIRE( fruits.m_appObj1.m_minTime2 >= fruits.m_appObj1.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( fruits.m_appObj2.m_deltaTime1, ORANGE_T1 );
+            fruits.m_appObj2.displayTimer1( maxCount );
+            REQUIRE( fruits.m_appObj2.m_count1 <= maxCount );
+            REQUIRE( fruits.m_appObj2.m_minTime1 >= fruits.m_appObj2.m_timer1Duration );
+            maxCount = MAX_COUNT_( fruits.m_appObj2.m_deltaTime2, ORANGE_T2 );
+            fruits.m_appObj2.displayTimer2( maxCount );
+            REQUIRE( fruits.m_appObj2.m_count2 <= maxCount );
+            REQUIRE( fruits.m_appObj2.m_minTime2 >= fruits.m_appObj2.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( trees.m_appObj1.m_deltaTime1, OAK_T1 );
+            trees.m_appObj1.displayTimer1( maxCount );
+            REQUIRE( trees.m_appObj1.m_count1 <= maxCount );
+            REQUIRE( trees.m_appObj1.m_minTime1 >= trees.m_appObj1.m_timer1Duration );
+            maxCount = MAX_COUNT_( trees.m_appObj1.m_deltaTime2, OAK_T2 );
+            trees.m_appObj1.displayTimer2( maxCount );
+            REQUIRE( trees.m_appObj1.m_count2 <= maxCount );
+            REQUIRE( trees.m_appObj1.m_minTime2 >= trees.m_appObj1.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( trees.m_appObj2.m_deltaTime1, PINE_T1 );
+            trees.m_appObj2.displayTimer1( maxCount );
+            REQUIRE( trees.m_appObj2.m_count1 <= maxCount );
+            REQUIRE( trees.m_appObj2.m_minTime1 >= trees.m_appObj2.m_timer1Duration );
+            maxCount = MAX_COUNT_( trees.m_appObj2.m_deltaTime2, PINE_T2 );
+            trees.m_appObj2.displayTimer2( maxCount );
+            REQUIRE( trees.m_appObj2.m_count2 <= maxCount );
+            REQUIRE( trees.m_appObj2.m_minTime2 >= trees.m_appObj2.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( flowers.m_appObj1.m_deltaTime1, ROSE_T1 );
+            flowers.m_appObj1.displayTimer1( maxCount );
+            REQUIRE( flowers.m_appObj1.m_count1 <= maxCount );
+            REQUIRE( flowers.m_appObj1.m_minTime1 >= flowers.m_appObj1.m_timer1Duration );
+            maxCount = MAX_COUNT_( flowers.m_appObj1.m_deltaTime2, ROSE_T2 );
+            flowers.m_appObj1.displayTimer2( maxCount );
+            REQUIRE( flowers.m_appObj1.m_count2 <= maxCount );
+            REQUIRE( flowers.m_appObj1.m_minTime2 >= flowers.m_appObj1.m_timer2Duration );
+
+            maxCount = MAX_COUNT_( flowers.m_appObj2.m_deltaTime1, DAISY_T1 );
+            flowers.m_appObj2.displayTimer1( maxCount );
+            REQUIRE( flowers.m_appObj2.m_count1 <= maxCount );
+            REQUIRE( flowers.m_appObj2.m_minTime1 >= flowers.m_appObj2.m_timer1Duration );
+            maxCount = MAX_COUNT_( flowers.m_appObj2.m_deltaTime2, DAISY_T2 );
+            flowers.m_appObj2.displayTimer2( maxCount );
+            REQUIRE( flowers.m_appObj2.m_count2 <= maxCount );
+            REQUIRE( flowers.m_appObj2.m_minTime2 >= flowers.m_appObj2.m_timer2Duration );
+        }
+
+
+        // Shutdown threads
+        fruits.pleaseStop();
+        trees.pleaseStop();
+        flowers.pleaseStop();
+
+        sleep( 300 );  // allow time for threads to stop
+        REQUIRE( t1->isActive() == false );
+        REQUIRE( t2->isActive() == false );
+        REQUIRE( t3->isActive() == false );
+
+        Thread::destroy( *t1 );
+        Thread::destroy( *t2 );
+        Thread::destroy( *t3 );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
-#endif

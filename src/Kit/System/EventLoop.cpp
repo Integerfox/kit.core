@@ -24,7 +24,7 @@ namespace System {
 ///////////////////////
 EventLoop::EventLoop( uint32_t                           timeOutPeriodInMsec,
                       Kit::Container::SList<IEventFlag>* eventFlagsList ) noexcept
-    : Runnable()
+    : IRunnable()
     , m_eventList( eventFlagsList )
     , m_timeout( timeOutPeriodInMsec )
     , m_timeStartOfLoop( 0 )
@@ -49,7 +49,7 @@ void EventLoop::startEventLoop() noexcept
 {
     // Initialize/start the timer manager
     startManager();
-    m_run = true
+    m_run = true;
 }
 
 void EventLoop::stopEventLoop() noexcept
@@ -100,24 +100,16 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
     // Process Event Flags
     if ( events && m_eventList )
     {
-        // Process each event flag that was set - LSbit first
-        uint32_t eventMask   = 1;
-        uint8_t  eventNumber = 0;
-        for ( ; eventMask; eventMask <<= 1, eventNumber++ )
+        // Walk my list of event flag handlers and notify the ones that are interested in event(s)
+        IEventFlag* eventPtr = m_eventList->first();
+        while ( eventPtr )
         {
-            if ( ( events & eventMask ) )
+            uint32_t activeEvents = events & eventPtr->getEventFlagsMask();
+            if ( activeEvents )
             {
-                // Walk my list of event flag handlers and notify the ones that are interested in this event
-                IEventFlag* eventPtr = m_eventList->first();
-                while ( eventPtr )
-                {
-                    if ( eventMask & eventPtr->getEventFlagsMask() )
-                    {
-                        eventPtr->notified( eventNumber );
-                    }
-                    eventPtr = m_eventList->next( *eventPtr );
-                }
+                eventPtr->notified( activeEvents );
             }
+            eventPtr = m_eventList->next( *eventPtr );
         }
     }
 

@@ -38,7 +38,7 @@ bool Thread::isActive( void ) const noexcept
     return threadList_.find( *this );
 }
 
-Runnable& Thread::getRunnable( void ) const noexcept
+IRunnable& Thread::getRunnable( void ) const noexcept
 {
     return m_runnable;
 }
@@ -90,7 +90,7 @@ void Thread::launchRunnable( Thread& threadHdl ) noexcept
     // Add to the list of active threads
     addThreadToActiveList( threadHdl );
 
-    // Launch the Runnable object
+    // Launch the IRunnable object
     threadHdl.m_runnable.setThread( &threadHdl );
     // KIT_SYSTEM_SIM_TICK_THREAD_INIT_( threadHdl.m_allowSimTicks );    // TODO: Add SimTime support
     threadHdl.m_runnable.entry();
@@ -101,13 +101,13 @@ void Thread::launchRunnable( Thread& threadHdl ) noexcept
     removeThreadFromActiveList( threadHdl );
 }
 
-void Thread::traverse( Thread::Traverser& client ) noexcept
+void Thread::traverse( Thread::ITraverser& client ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     Thread*          t = threadList_.first();
     while ( t )
     {
-        if ( client.item( *t ) == Kit::Type::Traverser::eABORT )
+        if ( client.item( *t ) == Kit::Type::TraverserStatus::eABORT )
         {
             break;
         }

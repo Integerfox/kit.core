@@ -25,14 +25,14 @@ bool  keyCreated_ = false;
 namespace {  // anonymous namespace
 
 /// This class is used to turn the entry/native/main thread into a Kit::System::Thread (i.e. add the thread semaphore)
-class RegisterInitHandler_ : public Kit::System::StartupHook,
-                             public Kit::System::Runnable
+class RegisterInitHandler_ : public Kit::System::IStartupHook,
+                             public Kit::System::IRunnable
 {
 protected:
     // Empty run function
     // Note: Leave my 'running state' set to false -->this is so I don't
     // terminate the native thread prematurely when/if the Thread instance
-    // is deleted.  In theory this can't happen since the Thread and Runnable
+    // is deleted.  In theory this can't happen since the Thread and IRunnable
     // instance pointers for the native thread are never exposed to the
     // application and/or explicitly deleted.
     void entry() noexcept override {}
@@ -40,12 +40,12 @@ protected:
 public:
     ///
     RegisterInitHandler_()
-        : StartupHook( SYSTEM ) {}
+        : IStartupHook( SYSTEM ) {}
 
 
 protected:
     ///
-    void notify( InitLevel_e initLevel ) noexcept override
+    void notify( InitLevel initLevel ) noexcept override
     {
         // Create a thread object for the native thread
         m_parentThreadPtr_ = new Kit::System::Win32::Thread( *this );
@@ -63,7 +63,7 @@ namespace Win32 {
 
 
 ////////////////////////////////////
-Thread::Thread( Kit::System::Runnable& dummyRunnable )
+Thread::Thread( Kit::System::IRunnable& dummyRunnable )
     : Kit::System::Thread( dummyRunnable )
     , m_name( "Win32Main" )
     , m_priority( GetThreadPriority( GetCurrentThread() ) )
@@ -95,7 +95,7 @@ Thread::Thread( Kit::System::Runnable& dummyRunnable )
 }
 
 
-Thread::Thread( Kit::System::Runnable& runnable,
+Thread::Thread( Kit::System::IRunnable& runnable,
                 const char*            name,
                 int                    priority,
                 unsigned               stackSize,
@@ -121,7 +121,7 @@ Thread::~Thread()
 {
     // NOTE: In general it is not a good thing to "kill" threads - but to
     //       let the thread "run-to-completion", i.e. have the run() method
-    //       of the associated Runnable object complete.  If you do
+    //       of the associated IRunnable object complete.  If you do
     //       need to kill a thread - be dang sure that it is state such
     //       that it is ok to die - i.e. it has released all of its acquired
     //       resources: mutexes, semaphores, file handles, etc.
@@ -165,7 +165,7 @@ void __cdecl Thread::entryPoint( void* data )
     // Initialize the TLS Value for this thread.
     TlsSetValue( dwTlsIndex_, data );
 
-    // Go Execute the "Runnable" object
+    // Go Execute the "IRunnable" object
     Thread* myThreadPtr = (Thread*)data;
     SetThreadPriority( GetCurrentThread(), myThreadPtr->m_priority );
 
@@ -207,7 +207,7 @@ bool Kit::System::Thread::timedWait( uint32_t timeout ) noexcept
 
 
 //////////////////////////////
-Kit::System::Thread* Kit::System::Thread::create( Runnable&   runnable,
+Kit::System::Thread* Kit::System::Thread::create( IRunnable&   runnable,
                                                   const char* name,
                                                   int         priority,
                                                   int         stackSize,

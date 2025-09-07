@@ -12,10 +12,10 @@
 
 #include "kit_config.h"
 #include "kit_map.h"
-#include "Kit/System/Runnable.h"
-#include "Kit/System/Signable.h"
+#include "Kit/System/IRunnable.h"
+#include "Kit/System/ISignable.h"
 #include "Kit/System/Tls.h"
-#include "Kit/Type/Traverser.h"
+#include "Kit/Type/TraverserStatus.h"
 #include "Kit/Container/ListItem.h"
 #include <stdlib.h>
 #include <string.h>
@@ -67,7 +67,7 @@ namespace System {
           omit compiling the Thread.cpp file (in this directory) and provided
           your own implementation.
  */
-class Thread : public Signable, public Kit::Container::ListItem
+class Thread : public ISignable, public Kit::Container::ListItem
 {
 public:
     /// This method returns the name (null terminated string) of the current thread.
@@ -82,7 +82,7 @@ public:
     virtual KitSystemThreadID_T getId() const noexcept;
 
     /** This method returns the 'executing' state of the thread.  If the method
-        returns false, the underlying thread has terminated (i.e. the Runnable
+        returns false, the underlying thread has terminated (i.e. the IRunnable
         object's entry() method has completed) and then the Thread object/instance
         can be safely deleted using the destroy() method below.
 
@@ -90,10 +90,10 @@ public:
      */
     virtual bool isActive( void ) const noexcept;
 
-    /** This method returns a reference to the thread's Runnable object
+    /** This method returns a reference to the thread's IRunnable object
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
-    virtual Runnable& getRunnable( void ) const noexcept;
+    virtual IRunnable& getRunnable( void ) const noexcept;
 
     /// Virtual destructor.
     virtual ~Thread() noexcept = default;
@@ -152,7 +152,7 @@ public:
     }
 
     /// This method returns a reference to the current thread' runnable instance.
-    static inline Runnable& myRunnable() noexcept
+    static inline IRunnable& myRunnable() noexcept
     {
         return getCurrent().getRunnable();
     }
@@ -163,18 +163,18 @@ public:
         threads, i.e. defines the callback method for when walking/traversing
         the list of active threads.
      */
-    class Traverser
+    class ITraverser
     {
     public:
         /// Virtual Destructor
-        virtual ~Traverser() {}
+        virtual ~ITraverser() {}
 
     public:
         /** This method is called once for ever item in the "traversee's" list.
             The return code from the method is used by the traverser to continue
             the traversal (eCONTINUE), or abort the traversal (eABORT).
          */
-        virtual Kit::Type::Traverser::Status_T item( Thread& nextThread ) noexcept = 0;
+        virtual Kit::Type::TraverserStatus item( Thread& nextThread ) noexcept = 0;
     };
 
     /** Internal Iterator that allows the Client to traverse the list
@@ -198,7 +198,7 @@ public:
 
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
-    static void traverse( Thread::Traverser& client ) noexcept;
+    static void traverse( Thread::ITraverser& client ) noexcept;
 
 
 public:
@@ -233,7 +233,7 @@ public:
                               thread.  See Cpl::System::SimTicks for more details about
                               simulated time.
      */
-    static Thread* create( Runnable&   runnable,
+    static Thread* create( IRunnable&   runnable,
                            const char* name,
                            int         priority      = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
                            int         stackSize     = 0,
@@ -248,14 +248,14 @@ public:
         correctly.
 
         When the 'delayTimeMsToWaitIfNotStopped' argument is NOT zero, AND the
-        thread is still active. This method will call pleaseStop() on the Runnable
+        thread is still active. This method will call pleaseStop() on the IRunnable
         object associated with the thread.  After the delay time (in milliseconds)
         has expired - will attempt to unconditionally terminate the thread.
 
         NOTES:
 
             o The application should only delete/destroy a thread AFTER the
-              thread's Runnable object.run() method has ended/terminated.  If
+              thread's IRunnable object.run() method has ended/terminated.  If
               the thread is destroy/delete before run() has completed, there is
               NO GUARANTEE with respect to whether or not the thread has
               released all acquired resources!
@@ -264,13 +264,13 @@ public:
               a thread.  Once again -->it is a HIGHLY DISCOURAGED to design
               your application where you need to forcibly terminate threads.
             o This method only deletes/destroys the Thread instance -- it does
-              NOT delete/destroy the associated Runnable instance.
+              NOT delete/destroy the associated IRunnable instance.
      */
     static void destroy( Thread& threadToDestroy, uint32_t delayTimeMsToWaitIfActive = 0 ) noexcept;
 
 protected:
     /// Constructor
-    Thread( Runnable& runnable ) noexcept
+    Thread( IRunnable& runnable ) noexcept
         : m_runnable( runnable )
     {
         memset( m_tlsArray, 0, sizeof( m_tlsArray ) );
@@ -279,10 +279,10 @@ protected:
 
     /** Helper method that should be called from the native's entry function.
         This method is responsible for various action such as maintaining
-        the list of active threads, launching the Runnable object, and supporting
+        the list of active threads, launching the IRunnable object, and supporting
         simulated time for thread (but only when SIM-TIME is enabled).
 
-        The method returns when the Runnable object's entry() method
+        The method returns when the IRunnable object's entry() method
         has completed.
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
@@ -300,7 +300,7 @@ protected:
 
 protected:
     /// Reference to the thread's runnable object
-    Runnable& m_runnable;
+    IRunnable& m_runnable;
 
     /// Native file handle for the thread instance
     KitSystemThreadID_T m_nativeThreadHdl;

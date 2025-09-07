@@ -18,7 +18,7 @@
 
 
 /** The time (in milliseconds) to wait when the Thread instance is being destroyed
-    and the associated Runnable object is still running - BEFORE forcibly terminating
+    and the associated IRunnable object is still running - BEFORE forcibly terminating
     the thread.
  */
 #ifndef KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS
@@ -58,7 +58,7 @@ public:
 
         o Does NOT support the application supplying the stack memory.
      */
-    Thread( Runnable&   runnable,
+    Thread( IRunnable&   runnable,
             const char* name,
             int         priority      = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
             unsigned    stackSize     = 0,
@@ -73,10 +73,10 @@ public:
     const char* getName() const noexcept override;
 
 public:
-    /// See Kit::System::Signable
+    /// See Kit::System::ISignable
     int signal( void ) noexcept override;
 
-    /// See Kit::System::Signable
+    /// See Kit::System::ISignable
     int su_signal( void ) noexcept override;
 
 
@@ -89,7 +89,7 @@ public:
     /** Private constructor to convert the native Posix thread to a Kit Thread.
         THIS CONSTRUCTOR SHOULD NEVER BE USED BY THE APPLICATION!
      */
-    Thread( Kit::System::Runnable& dummyRunnable );
+    Thread( Kit::System::IRunnable& dummyRunnable );
 
 protected:
     /// ASCII name of the task

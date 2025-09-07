@@ -11,8 +11,8 @@
 /** @file */
 
 #include "Kit/System/IEventFlag.h"
-#include "Kit/System/Runnable.h"
-#include "Kit/System/Signable.h"
+#include "Kit/System/IRunnable.h"
+#include "Kit/System/ISignable.h"
 #include "Kit/System/IEventManager.h"
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/TimerManager.h"
@@ -28,7 +28,7 @@ namespace Kit {
 ///
 namespace System {
 
-/** This concrete class is a Runnable object that provides a event driven
+/** This concrete class is a IRunnable object that provides a event driven
     execution model for a thread.  The thread will remaining blocked until
     an "event" occurs.  The following "events" are supported:
 
@@ -36,15 +36,15 @@ namespace System {
     2) A Event Flag was signaled
     3) A Software Timer expiring
 
-    To receive a callbacks when Event Flags are signaled, the application must 
+    To receive a callbacks when Event Flags are signaled, the application must
     provide a list of Event Flag instances to the Event Loop constructor.
 
-    Child classes can extend the 'event processing' to include other types of 
-    events, e.g. Inter-Thread-Communication messaging.
+    Child classes can be used to extend the 'event processing' to include other
+    types of events, e.g. Inter-Thread-Communication messaging.
 
     NOTE: The EventLoop does NOT use/consume the Thread Semaphore.
  */
-class EventLoop : public Runnable, public IEventManager, public Signable, public TimerManager
+class EventLoop : public IRunnable, public IEventManager, public ISignable, public TimerManager
 {
 public:
     /** Constructor. The 'timeOutPeriodInMsec' parameter specifies how
@@ -59,7 +59,7 @@ public:
         When the 'eventFlagsList' parameter is null then the EventLoop will not
         monitor any event flags.
 
-        WARNING: The application CANNOT modify the eventFlagsList after the 
+        WARNING: The application CANNOT modify the eventFlagsList after the
                  EventLoop instance is created.
      */
     EventLoop( uint32_t                           timeOutPeriodInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
@@ -133,20 +133,20 @@ protected:
     virtual void stopEventLoop() noexcept;
 
 public:
-    /// See Cpl::System::Signable
+    /// See Cpl::System::ISignable
     int signal( void ) noexcept override;
 
-    /// See Cpl::System::Signable
+    /// See Cpl::System::ISignable
     int su_signal( void ) noexcept override;
 
 
 public:
-    /// See Cpl::System::Runnable
+    /// See Cpl::System::IRunnable
     void pleaseStop() noexcept override;
 
 
 protected:
-    /// See Cpl::System::Runnable
+    /// See Cpl::System::IRunnable
     void entry() noexcept override;
 
 public:
@@ -179,7 +179,7 @@ protected:
     uint32_t m_events;
 
     /// Flag used to help with the pleaseStop() request
-    bool m_run;
+    volatile bool m_run;
 };
 
 }  // end namespaces

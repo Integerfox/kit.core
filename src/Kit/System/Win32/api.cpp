@@ -26,7 +26,7 @@ static Mutex sysList_;
 void initialize() noexcept
 {
     // Init the KIT Library sub-systems
-    StartupHook::notifyStartupClients();
+    IStartupHook::notifyStartupClients();
 }
 
 void enableScheduling() noexcept

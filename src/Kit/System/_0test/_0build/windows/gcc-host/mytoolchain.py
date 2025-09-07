@@ -49,7 +49,7 @@ FINAL_OUTPUT_NAME = 'a.exe'
 
 # Set project specific 'base' (i.e always used) options. Note: Catch2 requires C++17 or newer
 base_win32           = BuildValues()        # Do NOT comment out this line
-base_win32.cflags    = '-m32 -std=c++17 -Wall -Werror -x c++  -fprofile-arcs -ftest-coverage'
+base_win32.cflags    = '-m32 -std=c++17 -Wall -Werror -x c++  -fprofile-arcs -ftest-coverage -fprofile-update=atomic'
 base_win32.inc       = catch2_inc
 base_win32.linkflags = '-m32 -fprofile-arcs'
 base_win32.linklibs  = f'-lgcov {catch2_lib}'
@@ -73,7 +73,7 @@ optimized_win64 = BuildValues()
 debug_win64     = BuildValues()
 
 # Set 'base' options
-base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage'
+base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage -fprofile-update=atomic'
 base_win64.inc        = catch2_inc
 base_win64.linkflags  = '-m64'
 base_win64.firstobjs  = unit_test_objects

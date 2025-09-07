@@ -1,5 +1,5 @@
-#ifndef KIT_SYSTEM_SIGNABLE_H_
-#define KIT_SYSTEM_SIGNABLE_H_
+#ifndef KIT_SYSTEM_ISIGNABLE_H_
+#define KIT_SYSTEM_ISIGNABLE_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -20,7 +20,7 @@ namespace System {
     can cause an object that is waiting-on-a-signal to become
     unblocked.
  */
-class Signable
+class ISignable
 {
 public:
     /** This method is called by client to cause the server to become
@@ -37,7 +37,7 @@ public:
 
 public:
     /// Virtual destructor
-    virtual ~Signable() = default;
+    virtual ~ISignable() = default;
 };
 
 

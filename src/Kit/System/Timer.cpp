@@ -22,8 +22,8 @@ Timer::Timer( TimerManager& timingSource ) noexcept
 {
 }
 
-Timer::Timer() noexcept
-    : m_timingSource( nullptr )
+Timer::Timer( TimerManager* timingSourcePtr ) noexcept
+    : m_timingSource( timingSourcePtr )
     , m_count( 0 )
 {
 }
@@ -48,7 +48,6 @@ void Timer::stop() noexcept
     {
         m_timingSource->detach( *this );
     }
-    m_timingSource = nullptr;
 }
 
 void Timer::decrement( uint32_t milliseconds ) noexcept

@@ -71,7 +71,7 @@ public:
     /** This call defines the callback interface that is used when the
         application is shutdown
      */
-    class Handler : public Kit::Container::ListItem
+    class IHandler : public Kit::Container::ListItem
     {
     public:
         /** This method is called when the application is shutting down. The
@@ -90,7 +90,7 @@ public:
 
     public:
         /// Ensure the destructor is virtual
-        virtual ~Handler() {}
+        virtual ~IHandler() {}
     };
 
 
@@ -126,7 +126,7 @@ public:
         During shutdown, the 'notify()' method of 'instanceToRegister'
         is called.
      */
-    static void registerHandler( Shutdown::Handler& instanceToRegister ) noexcept;
+    static void registerHandler( Shutdown::IHandler& instanceToRegister ) noexcept;
 
 
 public:

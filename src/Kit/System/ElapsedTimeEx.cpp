@@ -31,17 +31,17 @@ static uint64_t lastMsec_;
 namespace {
 
 /// This class is to 'zero' the elapsed to the start of the application
-class RegisterInitHandler_ : public Kit::System::StartupHook
+class RegisterInitHandler_ : public Kit::System::IStartupHook
 {
 public:
     ///
-    RegisterInitHandler_()
-        : StartupHook( StartupHook::SYSTEM ) {}
+    RegisterInitHandler_() noexcept
+        : IStartupHook( IStartupHook::SYSTEM ) {}
 
 
 protected:
     ///
-    void notify( InitLevel_e init_level ) override
+    void notify( InitLevel init_level ) override
     {
         elapsedMsec_ = 0;
         lastMsec_    = KitSystemElapsedTime_getTimeInMilliseconds();

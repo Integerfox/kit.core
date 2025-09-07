@@ -44,8 +44,8 @@ public:
     /// Constructor
     Timer( TimerManager& timingSource ) noexcept;
 
-    /// Constructor. Alternate constructor - that defers the assignment of the timing source
-    Timer() noexcept;
+    /// Constructor. Alternate constructor - that optionally defers the assignment of the timing source
+    Timer( TimerManager* timingSource = nullptr ) noexcept;
 
 public:
     /** Starts the timer with an initial count down count duration of
@@ -65,7 +65,7 @@ public:
      */
     virtual void setTimingSource( TimerManager& timingSource ) noexcept;
 
-protected:  
+protected:
     /// See Cpl::System::ICounter
     void decrement( uint32_t milliseconds = 1 ) noexcept override;
 
@@ -102,9 +102,9 @@ public:
 
 public:
     /// Constructor
-    TimerComposer( TimerManager&          timingSource,
-                   CONTEXT&               timerContextInstance,
-                   TimerExpiredFunction_T expiredCallbackFunc ) noexcept
+    TimerComposer( CONTEXT&               timerContextInstance,
+                   TimerExpiredFunction_T expiredCallbackFunc,
+                   TimerManager&          timingSource ) noexcept
         : Timer( timingSource )
         , m_context( timerContextInstance )
         , m_expiredFuncPtr( expiredCallbackFunc )
@@ -117,8 +117,9 @@ public:
         is used.
      */
     TimerComposer( CONTEXT&               timerContextInstance,
-                   TimerExpiredFunction_T expiredCallbackFunc ) noexcept
-        : Timer()
+                   TimerExpiredFunction_T expiredCallbackFunc,
+                   TimerManager*          timingSourcePtr = nullptr ) noexcept
+        : Timer( timingSourcePtr )
         , m_context( timerContextInstance )
         , m_expiredFuncPtr( expiredCallbackFunc )
     {

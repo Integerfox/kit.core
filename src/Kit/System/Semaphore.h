@@ -11,7 +11,7 @@
 /** @file */
 
 #include "kit_map.h"
-#include "Kit/System/Signable.h"
+#include "Kit/System/ISignable.h"
 
 
 /// Defer the definition of the a raw semaphore type to the application's 'platform'
@@ -28,10 +28,10 @@ namespace System {
     NOTES:
 
         o The 'max-count' for a Semaphore is platform specific.
-        o The class inherits from 'Signable' which contains/defines the
+        o The class inherits from 'ISignable' which contains/defines the
           "signal()" methods.
  */
-class Semaphore : public Signable
+class Semaphore : public ISignable
 {
 public:
     /** Constructor.  The semaphore is created with the specified 'initialCount'.
@@ -68,10 +68,10 @@ public:
 
 
 public:
-    /// Signable API
+    /// ISignable API
     int signal( void ) noexcept override;
 
-    /// Signable API
+    /// ISignable API
     int su_signal( void ) noexcept override;
 
 

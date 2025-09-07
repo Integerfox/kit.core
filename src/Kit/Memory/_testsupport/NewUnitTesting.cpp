@@ -29,7 +29,7 @@ static void                  clear_metrics( NewUnitTesting::Stats& stats ) noexc
 //////////////////////////////////////////////////////////////////////////
 namespace {  // anonymous namespace
 
-class ExitHandler : public Kit::System::Shutdown::Handler
+class ExitHandler : public Kit::System::Shutdown::IHandler
 {
 protected:
     ///
@@ -64,7 +64,7 @@ protected:
 };
 
 
-class RegisterInitHandler : public Kit::System::StartupHook
+class RegisterInitHandler : public Kit::System::IStartupHook
 {
 public:
     ///
@@ -73,13 +73,13 @@ public:
 
 public:
     ///
-    RegisterInitHandler()
-        : StartupHook( TEST_INFRA ) {}
+    RegisterInitHandler() noexcept
+        : IStartupHook( TEST_INFRA ) {}
 
 
 protected:
     ///
-    void notify( InitLevel_e init_level ) noexcept override
+    void notify( InitLevel init_level ) noexcept override
     {
         Kit::System::Shutdown::registerHandler( m_shutdown );
     }

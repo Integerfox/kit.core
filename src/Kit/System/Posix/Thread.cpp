@@ -39,8 +39,8 @@ namespace Posix {
 namespace {  // Anonymous namespace
 
 /// This class is used to turn the entry/native/main thread into a Kit::System::Thread (i.e. add the thread semaphore)
-class RegisterInitHandler_ : public Kit::System::StartupHook,
-                             public Kit::System::Runnable
+class RegisterInitHandler_ : public Kit::System::IStartupHook,
+                             public Kit::System::IRunnable
 {
 protected:
     // Empty entry function -- it is never called!
@@ -49,12 +49,12 @@ protected:
 public:
     ///
     RegisterInitHandler_()
-        : StartupHook( SYSTEM ) {}
+        : IStartupHook( SYSTEM ) {}
 
 
 protected:
     ///
-    void notify( InitLevel_e initLevel ) noexcept override
+    void notify( InitLevel initLevel ) noexcept override
     {
         // Create a thread object for the native thread
         m_parentThreadPtr_ = new Thread( *this );
@@ -67,7 +67,7 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 
 ////////////////////////////////////
-Thread::Thread( Kit::System::Runnable& dummyRunnable )
+Thread::Thread( Kit::System::IRunnable& dummyRunnable )
     : Kit::System::Thread( dummyRunnable )
     , m_name( "PosixMain" )
     , m_allowSimTicks( false )
@@ -94,7 +94,7 @@ Thread::Thread( Kit::System::Runnable& dummyRunnable )
 }
 
 
-Thread::Thread( Kit::System::Runnable& runnable,
+Thread::Thread( Kit::System::IRunnable& runnable,
                 const char*            name,
                 int                    priority,
                 unsigned               stackSize,
@@ -161,7 +161,7 @@ Thread::~Thread()
 {
     // NOTE: In general it is not a good thing to "kill" threads - but to
     //       let the thread "run-to-completion", i.e. have the run() method
-    //       of the associated Runnable object complete.  If you do
+    //       of the associated IRunnable object complete.  If you do
     //       need to kill a thread - be dang sure that it is state such
     //       that it is ok to die - i.e. it has released all of its acquired
     //       resources: mutexes, semaphores, file handles, etc.
@@ -212,7 +212,7 @@ void* Thread::entryPoint( void* data )
     int oldCancelType;
     pthread_setcanceltype( PTHREAD_CANCEL_ASYNCHRONOUS, &oldCancelType );
 
-    // Go Execute the "Runnable" object
+    // Go Execute the "IRunnable" object
     launchRunnable( *myThreadPtr );
     return 0;
 }
@@ -223,7 +223,7 @@ void* Thread::entryPoint( void* data )
 }
 //------------------------------------------------------------------------------
 //////////////////////////////
-Kit::System::Thread* Kit::System::Thread::create( Runnable&   runnable,
+Kit::System::Thread* Kit::System::Thread::create( IRunnable&   runnable,
                                                   const char* name,
                                                   int         priority,
                                                   int         stackSize,
