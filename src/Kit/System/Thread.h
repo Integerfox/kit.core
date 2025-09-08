@@ -50,7 +50,6 @@
     Simulated Time
  */
 #ifndef USE_KIT_SYSTEM_SIM_TICK
-#ifndef USE_KIT_SYSTEM_SIM_TICK
 /// Allocate a member variable to hold the 'allow simulated tick' flag
 #define KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG()
 

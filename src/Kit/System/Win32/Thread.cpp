@@ -11,6 +11,7 @@
 
 #include "Thread.h"
 #include "Kit/System/api.h"
+#include "Kit/System/SimTick.h"
 #include "Kit/System/FatalError.h"
 #include "Kit/System/PrivateStartup.h"
 #include <process.h>
@@ -87,6 +88,7 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
 
     // Mark the NATIVE/Main thread as 'real time' thread for the SimTick engine
     KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( false );
+    KIT_SYSTEM_SIM_TICK_THREAD_INIT_( false );  
 
     // Get a 'Real Handle' to this thread
     DuplicateHandle( GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &m_nativeThreadHdl, 0, FALSE, DUPLICATE_SAME_ACCESS );
