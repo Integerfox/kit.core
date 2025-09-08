@@ -28,7 +28,7 @@ bool Semaphore::timedWait( uint32_t milliseconds ) noexcept
     }
 
     // Wait, 1 simulated tick at time, for the semaphore to be signaled
-    uint32_t start = SimTick::current();
+    uint32_t start = static_cast<uint32_t>( SimTick::current() );
     while ( milliseconds )
     {
         // Exit when the semaphore has been signaled
@@ -41,7 +41,7 @@ bool Semaphore::timedWait( uint32_t milliseconds ) noexcept
         sleep( 1 );
 
         // Update my count down timer
-        uint32_t current = SimTick::current();
+        uint32_t current = static_cast<uint32_t>( SimTick::current() );
         uint32_t delta   = ElapsedTime::deltaMilliseconds( start, current );
         start            = current;
         milliseconds     = milliseconds > delta ? milliseconds - delta : 0;

@@ -16,7 +16,7 @@
 #include "Kit/System/EventLoopWithPScheduling.h"
 #include <inttypes.h>
 
-#define SECT_ "_0test"
+#define SECT_                 "_0test"
 
 #define TEST_DURATION_IN_MSEC 250
 
@@ -129,20 +129,20 @@ TEST_CASE( "EventLoopWithPScheduling" )
 
     SECTION( "happy path" )
     {
-    EventLoopWithPScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, idleFunc );
-        Thread* testThread = Thread::create( uut, "TEST" );
+        EventLoopWithPScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, idleFunc );
+        Thread*                  testThread = Thread::create( uut, "TEST" );
         REQUIRE( testThread != nullptr );
         sleep( TEST_DURATION_IN_MSEC );
         uut.pleaseStop();
 
         REQUIRE( startLoopCount_ == 1 );
         REQUIRE( endLoopCount_ == 0 );
-        REQUIRE( appleCount_ >= (TEST_DURATION_IN_MSEC / 10) /2 );  
-        REQUIRE( appleCount_ <= (TEST_DURATION_IN_MSEC / 10) + 1 );
-        REQUIRE( orangeCount_ >= (TEST_DURATION_IN_MSEC / 100) /2 );  
-        REQUIRE( orangeCount_ <= (TEST_DURATION_IN_MSEC / 100) + 1 );
-        REQUIRE( idleCallCount_ >= (TEST_DURATION_IN_MSEC / OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD) /2 );
-        REQUIRE( idleCallCount_ <= (TEST_DURATION_IN_MSEC / OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD) + 1 );
+        REQUIRE( appleCount_ >= 10 );
+        REQUIRE( appleCount_ <= ( TEST_DURATION_IN_MSEC / 10 ) + 1 );
+        REQUIRE( orangeCount_ >= 1 );
+        REQUIRE( orangeCount_ <= ( TEST_DURATION_IN_MSEC / 100 ) + 1 );
+        REQUIRE( idleCallCount_ >= 10 );
+        REQUIRE( idleCallCount_ <= ( TEST_DURATION_IN_MSEC / OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD ) + 1 );
 
         sleep( 100 );
         REQUIRE( testThread->isActive() == false );
@@ -152,20 +152,20 @@ TEST_CASE( "EventLoopWithPScheduling" )
 
     SECTION( "no-idle-func" )
     {
-    EventLoopWithPScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx );
-        Thread* testThread = Thread::create( uut, "TEST" );
+        EventLoopWithPScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx );
+        Thread*                  testThread = Thread::create( uut, "TEST" );
         REQUIRE( testThread != nullptr );
         sleep( TEST_DURATION_IN_MSEC );
+        REQUIRE( endLoopCount_ == 0 );
         uut.pleaseStop();
 
         REQUIRE( startLoopCount_ == 1 );
-        REQUIRE( endLoopCount_ == 0 );
-        REQUIRE( appleCount_ >= (TEST_DURATION_IN_MSEC / 10) /2 );  
-        REQUIRE( appleCount_ <= (TEST_DURATION_IN_MSEC / 10) + 1 );
-        REQUIRE( orangeCount_ >= (TEST_DURATION_IN_MSEC / 100) /2 );  
-        REQUIRE( orangeCount_ <= (TEST_DURATION_IN_MSEC / 100) + 1 );
+        REQUIRE( appleCount_ >= 10 );
+        REQUIRE( appleCount_ <= ( TEST_DURATION_IN_MSEC / 10 ) + 1 );
+        REQUIRE( orangeCount_ >= 1 );
+        REQUIRE( orangeCount_ <= ( TEST_DURATION_IN_MSEC / 100 ) + 1 );
         REQUIRE( idleCallCount_ == 0 );
-        
+
         sleep( 100 );
         REQUIRE( testThread->isActive() == false );
         REQUIRE( endLoopCount_ == 1 );

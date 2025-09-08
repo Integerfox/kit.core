@@ -16,7 +16,9 @@
 #include "Kit/System/Tls.h"
 #include "Kit/System/Thread.h"
 #include "Kit/System/FatalError.h"
+#include "Kit/System/Assert.h"
 #include "Kit/Container/SList.h"
+#include <cstdint>
 #include <new>
 
 //------------------------------------------------------------------------------
@@ -26,7 +28,6 @@ namespace System {
 static Tls*                           simTlsPtr_      = 0;
 static uint64_t                       milliseconds_   = 0;
 static uint64_t                       remainingTicks_ = 0;
-static uint32_t                       seconds_        = 0;
 static Semaphore                      tickSource_;
 static Mutex                          myLock_;
 static Kit::Container::SList<SimTick> waiters_;
@@ -78,7 +79,6 @@ bool SimTick::advance( uint64_t numTicks ) noexcept
 
         // Increment my system time
         milliseconds_ += OPTION_KIT_SYSTEM_SIM_TICK_MIN_TICKS_FOR_ADVANCE;
-        seconds_       = milliseconds_ / 1000;
 
         // Wake-up all of threads waiting on a simulate tick
         unsigned waiters = wakeUpWaiters();
@@ -192,6 +192,12 @@ bool SimTick::isWaitingOnNextTick( KitSystemThreadID_T threadID ) noexcept
 
 bool SimTick::usingSimTicks() noexcept
 {
+    // If I have not yet created the TLS key/index -->then NO threads are using simulated time
+    if ( !simTlsPtr_ )
+    {
+        return false;
+    }
+
     // If my thread's SimInfo is NULL -->then I am NOT using simulated time
     return simTlsPtr_->get() != nullptr;
 }
@@ -210,6 +216,7 @@ void SimTick::threadInit_( bool useSimTicks ) noexcept
     if ( !simTlsPtr_ )
     {
         simTlsPtr_ = new ( std::nothrow ) Tls();
+        KIT_SYSTEM_ASSERT( simTlsPtr_ != nullptr );
     }
 
     // Set my TLS SimInfo block to NULL since the thread has be requested to NOT USE simulated ticks
@@ -236,33 +243,45 @@ void SimTick::threadInit_( bool useSimTicks ) noexcept
 
 void SimTick::onThreadExit_( void ) noexcept
 {
-    // Get my thread's SimInfo
-    auto* simInfoPtr = static_cast<SimTick*>( simTlsPtr_->get() );
-
-
-    // NOTHING needed if a non-simulated-tick thread
-    if ( !simInfoPtr )
+    // If I have not yet created the TLS key/index -->then NO threads are using simulated time
+    if ( simTlsPtr_ )
     {
-        return;
+
+        // Get my thread's SimInfo
+        auto* simInfoPtr = static_cast<SimTick*>( simTlsPtr_->get() );
+
+
+        // NOTHING needed if a non-simulated-tick thread
+        if ( !simInfoPtr )
+        {
+            return;
+        }
+
+
+        // Check if I was 'processing' a tick
+        if ( simInfoPtr->m_ackPending )
+        {
+            // Acknowledge that the thread has completed it's processing for the current tick
+            simInfoPtr->m_ackPending = false;
+            tickSource_.signal();
+        }
+
+        // Free the SimTick object
+        delete simInfoPtr;
     }
-
-
-    // Check if I was 'processing' a tick
-    if ( simInfoPtr->m_ackPending )
-    {
-        // Acknowledge that the thread has completed it's processing for the current tick
-        simInfoPtr->m_ackPending = false;
-        tickSource_.signal();
-    }
-
-    // Free the SimTick object
-    delete simInfoPtr;
 }
 
 
 /////////////////////////////////////////////
 void sleep( uint32_t milliseconds ) noexcept
 {
+    // If I have not yet created the TLS key/index -->then NO threads are using simulated time
+    if ( simTlsPtr_ == nullptr )
+    {
+        sleepInRealTime( milliseconds );
+        return;
+    }
+    
     // Get my thread's SimInfo
     auto* simInfoPtr = static_cast<SimTick*>( simTlsPtr_->get() );
 
@@ -291,7 +310,7 @@ void sleep( uint32_t milliseconds ) noexcept
             myLock_.unlock();
 
             // Subtract the elapsed time from my count down timer
-            uint64_t delta = ElapsedTime::deltaMilliseconds( start, current );
+            uint64_t delta = ElapsedTime::deltaMilliseconds( static_cast<uint32_t>( start ), static_cast<uint32_t>( current ) );
             msecEx         = msecEx > delta ? msecEx - delta : 0;
         }
     }
@@ -306,6 +325,12 @@ uint32_t ElapsedTime::milliseconds( void ) noexcept
 
 uint64_t ElapsedTime::millisecondsEx( void ) noexcept
 {
+    // If I have not yet created the TLS key/index -->then NO threads are using simulated time
+    if ( simTlsPtr_ == nullptr )
+    {
+        return ElapsedTime::millisecondsInRealTimeEx();;
+    }
+
     // Get my thread's SimInfo
     auto* simInfoPtr = static_cast<SimTick*>( simTlsPtr_->get() );
 
