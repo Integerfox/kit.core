@@ -15,7 +15,6 @@
 #include "Kit/System/Thread.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/FatalError.h"
-#include "Kit/System/SimTick.h"
 #include <limits.h>
 #include <sched.h>
 #include <unistd.h>

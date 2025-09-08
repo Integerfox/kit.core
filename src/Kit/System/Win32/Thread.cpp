@@ -12,7 +12,6 @@
 #include "Thread.h"
 #include "Kit/System/api.h"
 #include "Kit/System/FatalError.h"
-// #include "Kit/System/SimTick.h"
 #include "Kit/System/PrivateStartup.h"
 #include <process.h>
 
