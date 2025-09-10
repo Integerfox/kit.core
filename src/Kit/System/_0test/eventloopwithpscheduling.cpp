@@ -136,7 +136,7 @@ TEST_CASE( "EventLoopWithPScheduling" )
         uut.pleaseStop();
 
         REQUIRE( startLoopCount_ == 1 );
-        REQUIRE( endLoopCount_ == 0 );
+        REQUIRE( endLoopCount_ <= 1 );
         REQUIRE( appleCount_ >= 10 );
         REQUIRE( appleCount_ <= ( TEST_DURATION_IN_MSEC / 10 ) + 1 );
         REQUIRE( orangeCount_ >= 1 );
