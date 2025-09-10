@@ -82,7 +82,6 @@
 #include "kit_config.h"
 #include "Kit/Text/IString.h"
 #include "Kit/System/printfchecker.h"
-// #include "Kit/System/Thread.h"
 // #include "Kit/Io/Output.h"
 
 
