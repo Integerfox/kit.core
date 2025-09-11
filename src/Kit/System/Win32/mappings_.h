@@ -66,16 +66,6 @@ inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 }
 
 
-/// Win32 Mapping
-#define KIT_IO_NEW_LINE_NATIVE_MAP "\015\012"
-
-/// Win32 Mapping
-#define KIT_IO_FILE_NATIVE_DIR_SEP_MAP '\\'
-
-/// Win32 Mapping
-#define KIT_IO_FILE_MAX_NAME_MAP _MAX_PATH
-
-
 /// Thread Priorities
 #define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP 15
 
