@@ -246,9 +246,7 @@ protected:
         }
     }
 
-    /** Returns true if the specified item is already in the
-        list, else false.
-     */
+    /// Returns true if the specified item is already in the list, else false.
     bool find( const ListItem& item ) const noexcept
     {
         return item.isInContainer_( this );

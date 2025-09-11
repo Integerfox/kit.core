@@ -78,7 +78,7 @@ public:
     // Add this using declaration to make base class operators visible
     using FStringBase::operator=;
 
-private:
+protected:
     /// Storage for the string
     char m_strMem[S + 1];
 };

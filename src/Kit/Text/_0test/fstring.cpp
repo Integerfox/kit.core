@@ -142,14 +142,6 @@ TEST_CASE( "FString" )
         FString<3> s9( "****" );
         s9 = (unsigned long)81000000;
         REQUIRE( s9 == "810" );
-
-        FString<3> s10( "****" );
-        s10 = (long long)-200000000000;
-        REQUIRE( s10 == "-20" );
-
-        FString<3> s11( "****" );
-        s11 = (unsigned long long)9100000000000;
-        REQUIRE( s11 == "910" );
     }
 
     SECTION( "Append" )
@@ -195,14 +187,6 @@ TEST_CASE( "FString" )
         FString<8> s9( "****" );
         s9 += (unsigned long)81000000;
         REQUIRE( s9 == "****8100" );
-
-        FString<8> s10( "****" );
-        s10 += (long long)-200000000000;
-        REQUIRE( s10 == "****-200" );
-
-        FString<8> s11( "****" );
-        s11 += (unsigned long long)9100000000000;
-        REQUIRE( s11 == "****9100" );
     }
     
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

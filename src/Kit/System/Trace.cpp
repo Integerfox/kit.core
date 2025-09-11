@@ -10,23 +10,23 @@
 
 #include "Trace.h"
 #include "Private.h"
+#include "Thread.h"
 #include "Kit/Text/FString.h"
 
 
-///
-using namespace Kit::System;
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
 #define NUM_THREAD_FILTERS_ 4
 
 typedef Kit::Text::FString<OPTION_KIT_SYSTEM_TRACE_MAX_SECTION_NAME_LEN> Section_T;
 
-// TODO: Implement thread awareness
-// static bool               threadFilterEnabled_ = false;
-static bool               enabled_   = OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE;
-static Trace::InfoLevel_T infoLevel_ = OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL;
+static bool               threadFilterEnabled_ = false;
+static bool               enabled_             = OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE;
+static Trace::InfoLevel_T infoLevel_           = OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL;
 static Section_T          activeSections_[OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS];
-// TODO: Implement thread awareness
-// static const char*        threadFilters_[NUM_THREAD_FILTERS_];
+static const char*        threadFilters_[NUM_THREAD_FILTERS_];
 
 static Kit::Text::FString<OPTION_KIT_SYSTEM_TRACE_MAX_BUFFER> buffer_;
 
@@ -117,7 +117,7 @@ void Trace::disable_( void )
 bool Trace::isEnabled_( void )
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
-    bool result = enabled_;
+    bool             result = enabled_;
     return result;
 }
 
@@ -125,15 +125,15 @@ bool Trace::isEnabled_( void )
 Trace::InfoLevel_T Trace::setInfoLevel_( Trace::InfoLevel_T newLevel )
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
-    InfoLevel_T previous = infoLevel_;
-    infoLevel_           = newLevel;
+    InfoLevel_T      previous = infoLevel_;
+    infoLevel_                = newLevel;
     return previous;
 }
 
 Trace::InfoLevel_T Trace::getInfoLevel_( void ) noexcept
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
-    InfoLevel_T current = infoLevel_;
+    InfoLevel_T      current = infoLevel_;
     return current;
 }
 
@@ -230,7 +230,7 @@ unsigned Trace::getSections_( Kit::Text::IString& dst )
     dst.clear();
 
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
-    int i;
+    int              i;
     for ( i = 0; i < OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS; i++ )
     {
         if ( activeSections_[i].isEmpty() == false )
@@ -249,8 +249,6 @@ unsigned Trace::getSections_( Kit::Text::IString& dst )
     return count;
 }
 
-// TODO: Implement thread awareness
-#if 0
 void Trace::setThreadFilter_( const char* threadName1,
                               const char* threadName2,
                               const char* threadName3,
@@ -288,7 +286,7 @@ unsigned Trace::getThreadFilters_( Kit::Text::IString& dst )
     dst.clear();
 
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
-    int i;
+    int              i;
     for ( i = 0; i < NUM_THREAD_FILTERS_; i++ )
     {
         if ( threadFilters_[i] != 0 )
@@ -307,13 +305,8 @@ unsigned Trace::getThreadFilters_( Kit::Text::IString& dst )
     return count;
 }
 
-#endif
-
 bool Trace::passedThreadFilter_()
 {
-    return true;
-    // TODO: Implement thread awareness
-#if 0    
     // Safely get the current's thread name (i.e. works with non-KIT threads)
     const char* threadNameToTest = nullptr;
     Thread*     curThread        = Thread::tryGetCurrent();
@@ -322,7 +315,7 @@ bool Trace::passedThreadFilter_()
         threadNameToTest = curThread->getName();
     }
 
-    bool result = true;
+    bool             result = true;
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     if ( threadFilterEnabled_ && threadNameToTest )
     {
@@ -338,5 +331,8 @@ bool Trace::passedThreadFilter_()
     }
 
     return result;
-#endif
 }
+
+}  // end namespaces
+}
+//------------------------------------------------------------------------------

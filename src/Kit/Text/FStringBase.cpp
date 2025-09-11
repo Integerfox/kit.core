@@ -10,9 +10,11 @@
  *----------------------------------------------------------------------------*/
 
 #include "FStringBase.h"
+#include <cstdint>
 #include <string.h>
 #include <stdio.h>
 #include <algorithm>  // Added for std::min
+#include <inttypes.h>
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -178,17 +180,16 @@ int FStringBase::maxLength() const noexcept
     return m_internalMaxlen;
 }
 
-
 ////////////////////////////
 IString& FStringBase::operator=( int num ) noexcept
 {
-    format( "%d", num );
+    format( "%d" , num );
     return *this;
 }
 
-IString& FStringBase::operator=( unsigned int num ) noexcept
+IString& FStringBase::operator=( unsigned num ) noexcept
 {
-    format( "%u", num );
+    format( "%u" , num );
     return *this;
 }
 
@@ -198,21 +199,9 @@ IString& FStringBase::operator=( long num ) noexcept
     return *this;
 }
 
-IString& FStringBase::operator=( long long num ) noexcept
-{
-    format( "%lld", num );
-    return *this;
-}
-
 IString& FStringBase::operator=( unsigned long num ) noexcept
 {
     format( "%lu", num );
-    return *this;
-}
-
-IString& FStringBase::operator=( unsigned long long num ) noexcept
-{
-    format( "%llu", num );
     return *this;
 }
 
@@ -222,7 +211,7 @@ IString& FStringBase::operator+=( int num ) noexcept
     return *this;
 }
 
-IString& FStringBase::operator+=( unsigned int num ) noexcept
+IString& FStringBase::operator+=( unsigned num ) noexcept
 {
     formatAppend( "%u", num );
     return *this;
@@ -234,21 +223,9 @@ IString& FStringBase::operator+=( long num ) noexcept
     return *this;
 }
 
-IString& FStringBase::operator+=( long long num ) noexcept
-{
-    formatAppend( "%lld", num );
-    return *this;
-}
-
 IString& FStringBase::operator+=( unsigned long num ) noexcept
 {
     formatAppend( "%lu", num );
-    return *this;
-}
-
-IString& FStringBase::operator+=( unsigned long long num ) noexcept
-{
-    formatAppend( "%llu", num );
     return *this;
 }
 

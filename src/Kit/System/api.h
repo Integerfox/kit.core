@@ -51,10 +51,9 @@ void initialize() noexcept;
 void enableScheduling() noexcept;
 
 /** This function returns true if scheduling has enabled using the
-    enableScheduling() functions.  When this function returns true, the
-    application is guaranteed that current execution context is a KIT thread
-    (assuming the application did not create any threads outside of the KIT 
-    Threading interface).
+    enableScheduling() functions.  When this function returns true one or
+    more threads are actively running, i.e. the application CANNOT assume
+    a single threaded model.
  */
 bool isSchedulingEnabled() noexcept;
 

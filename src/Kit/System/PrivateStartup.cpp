@@ -18,33 +18,33 @@ namespace Kit {
 namespace System {
 
 ///
-static Kit::Container::SList<StartupHook> levelTest_( "invoke_special_static_constructor" );
-static Kit::Container::SList<StartupHook> levelSystem_( "invoke_special_static_constructor" );
-static Kit::Container::SList<StartupHook> levelMiddleWare_( "invoke_special_static_constructor" );
-static Kit::Container::SList<StartupHook> levelApplication_( "invoke_special_static_constructor" );
+static Kit::Container::SList<IStartupHook> levelTest_( "invoke_special_static_constructor" );
+static Kit::Container::SList<IStartupHook> levelSystem_( "invoke_special_static_constructor" );
+static Kit::Container::SList<IStartupHook> levelMiddleWare_( "invoke_special_static_constructor" );
+static Kit::Container::SList<IStartupHook> levelApplication_( "invoke_special_static_constructor" );
 
 
 ////////////////////////////////////////////////////////////////////////////////
-StartupHook::StartupHook( InitLevel_e myInitLevel )
+IStartupHook::IStartupHook( InitLevel myInitLevel ) noexcept
 {
     registerHook( *this, myInitLevel );
 }
 
 
-void StartupHook::registerHook( StartupHook& callbackInstance, InitLevel_e initOrder )
+void IStartupHook::registerHook( IStartupHook& callbackInstance, InitLevel initOrder ) noexcept
 {
     // NOTE: The assumption is that sub-system register at the time of when
     //       constructor for static object execute - which is before main()
     //       is enter so there should be only one thread.
-    if ( initOrder == StartupHook::TEST_INFRA )
+    if ( initOrder == IStartupHook::TEST_INFRA )
     {
         levelTest_.put( callbackInstance );
     }
-    else if ( initOrder == StartupHook::SYSTEM )
+    else if ( initOrder == IStartupHook::SYSTEM )
     {
         levelSystem_.put( callbackInstance );
     }
-    else if ( initOrder == StartupHook::MIDDLE_WARE )
+    else if ( initOrder == IStartupHook::MIDDLE_WARE )
     {
         levelMiddleWare_.put( callbackInstance );
     }
@@ -54,13 +54,13 @@ void StartupHook::registerHook( StartupHook& callbackInstance, InitLevel_e initO
     }
 }
 
-void StartupHook::notifyStartupClients( void )
+void IStartupHook::notifyStartupClients( void ) noexcept
 {
     // NOTE: The assumption is that no thread protection is required since
     //       there should only be one caller to the initialize() method.
 
     // Do TEST_INFRA level first
-    StartupHook* ptr = levelTest_.get();
+    IStartupHook* ptr = levelTest_.get();
     while ( ptr != 0 )
     {
         ptr->notify( TEST_INFRA );
