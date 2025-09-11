@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 35-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 44-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -120,8 +120,17 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad07946412886e40ea88f04a2b59f45b1" id="r_ad07946412886e40ea88f04a2b59f45b1"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad07946412886e40ea88f04a2b59f45b1">getSections_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
 <tr class="memdesc:ad07946412886e40ea88f04a2b59f45b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'sections' and returns the actual section name(s) via the IString 'dst'.  <br /></td></tr>
 <tr class="separator:ad07946412886e40ea88f04a2b59f45b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fefa7ce5b473a3e4e1a503f0f0cf7c9" id="r_a3fefa7ce5b473a3e4e1a503f0f0cf7c9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fefa7ce5b473a3e4e1a503f0f0cf7c9">setThreadFilter_</a> (const char *threadName1, const char *threadName2=0, const char *threadName3=0, const char *threadName4=0)</td></tr>
+<tr class="memdesc:a3fefa7ce5b473a3e4e1a503f0f0cf7c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method applies a filter by thread name when generating output, i.e.  <br /></td></tr>
+<tr class="separator:a3fefa7ce5b473a3e4e1a503f0f0cf7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a137e6b9104ffceda2e0cb4b8f177b794" id="r_a137e6b9104ffceda2e0cb4b8f177b794"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a137e6b9104ffceda2e0cb4b8f177b794">getThreadFilters_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
+<tr class="memdesc:a137e6b9104ffceda2e0cb4b8f177b794"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'thread filters' and returns the actual thread name(s) via the IString 'dst'.  <br /></td></tr>
+<tr class="separator:a137e6b9104ffceda2e0cb4b8f177b794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee835205536fff9ceaed3b356df16bff" id="r_aee835205536fff9ceaed3b356df16bff"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee835205536fff9ceaed3b356df16bff">clearThreadFilter_</a> (void)</td></tr>
+<tr class="memdesc:aee835205536fff9ceaed3b356df16bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method removes that thread filter (if there is one present).  <br /></td></tr>
+<tr class="separator:aee835205536fff9ceaed3b356df16bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac48c673261fdac8addf8c3067530d5e8" id="r_ac48c673261fdac8addf8c3067530d5e8"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac48c673261fdac8addf8c3067530d5e8">passedThreadFilter_</a> ()</td></tr>
-<tr class="memdesc:ac48c673261fdac8addf8c3067530d5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method applies a filter by thread name when generating output, i.e.  <br /></td></tr>
+<tr class="memdesc:ac48c673261fdac8addf8c3067530d5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the thread filter has been set and the current thread's name 'passes' the thread filter check, i.e.  <br /></td></tr>
 <tr class="separator:ac48c673261fdac8addf8c3067530d5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -231,6 +240,35 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aee835205536fff9ceaed3b356df16bff" name="aee835205536fff9ceaed3b356df16bff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee835205536fff9ceaed3b356df16bff">&#9670;&#160;</a></span>clearThreadFilter_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Kit::System::Trace::clearThreadFilter_ </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method removes that thread filter (if there is one present). </p>
+<p>If no filter has been applied when this method is called, then this method does nothing.</p>
+<p>NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx() macros. </p>
+
+</div>
+</div>
 <a id="a3af7ce98a7f63adaad883db830f7b96c" name="a3af7ce98a7f63adaad883db830f7b96c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3af7ce98a7f63adaad883db830f7b96c">&#9670;&#160;</a></span>disable_()</h2>
 
@@ -404,6 +442,35 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a137e6b9104ffceda2e0cb4b8f177b794" name="a137e6b9104ffceda2e0cb4b8f177b794"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a137e6b9104ffceda2e0cb4b8f177b794">&#9670;&#160;</a></span>getThreadFilters_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static unsigned Kit::System::Trace::getThreadFilters_ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>dst</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method returns the number of enabled 'thread filters' and returns the actual thread name(s) via the IString 'dst'. </p>
+<p>It is the caller responsibility to ensure that 'dst' is large enough to hold all of the enable thread filters. If 'dst' is to short, the results will be truncated.</p>
+<p>NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx() macros. </p>
+
+</div>
+</div>
 <a id="a11db167a5f803ad07dd890a33e595460" name="a11db167a5f803ad07dd890a33e595460"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a11db167a5f803ad07dd890a33e595460">&#9670;&#160;</a></span>isEnabled_()</h2>
 
@@ -484,11 +551,8 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This method applies a filter by thread name when generating output, i.e. </p>
-<p>for a message to be output, trace must be enabled, the message's section enabled, and must be running in the one of the threads specified by the thread filter.</p>
-<p>NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx() macros. This method returns the number of enabled 'thread filters' and returns the actual thread name(s) via the IString 'dst'. It is the caller responsibility to ensure that 'dst' is large enough to hold all of the enable thread filters. If 'dst' is to short, the results will be truncated.</p>
-<p>NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx() macros. This method removes that thread filter (if there is one present). If no filter has been applied when this method is called, then this method does nothing.</p>
-<p>NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx() macros. This method returns true if the thread filter has been set and the current thread's name 'passes' the thread filter check, i.e. the specified name match one of the names in the filter list.</p>
+<p>This method returns true if the thread filter has been set and the current thread's name 'passes' the thread filter check, i.e. </p>
+<p>the specified name match one of the names in the filter list.</p>
 <p>NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx() macros. </p>
 
 </div>
@@ -518,6 +582,49 @@ Protected Attributes</h2></td></tr>
 
 <p>This method sets the information level for the trace messages. </p>
 <p>The method returns the previous level setting.</p>
+<p>NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx() macros. </p>
+
+</div>
+</div>
+<a id="a3fefa7ce5b473a3e4e1a503f0f0cf7c9" name="a3fefa7ce5b473a3e4e1a503f0f0cf7c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fefa7ce5b473a3e4e1a503f0f0cf7c9">&#9670;&#160;</a></span>setThreadFilter_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Kit::System::Trace::setThreadFilter_ </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName1</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName2</em><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName3</em><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName4</em><span class="paramdefsep"> = </span><span class="paramdefval">0</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method applies a filter by thread name when generating output, i.e. </p>
+<p>for a message to be output, trace must be enabled, the message's section enabled, and must be running in the one of the threads specified by the thread filter.</p>
 <p>NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx() macros. </p>
 
 </div>
@@ -727,7 +834,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 1 2025 17:54:14 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Sep 11 2025 00:37:08 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
