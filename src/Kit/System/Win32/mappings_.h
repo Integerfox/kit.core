@@ -50,16 +50,13 @@
     while ( 0 )
 
 /// Win32 Mapping
-#define Kit_System_Thread_NativeHdl_T_MAP HANDLE
+#define KitSystemThreadID_T_MAP HANDLE
 
 /// Win32 Mapping
 #define KitSystemMutex_T_MAP CRITICAL_SECTION
 
 /// Win32 Mapping
-#define Kit_System_Sema_T_MAP HANDLE
-
-/// Win32 Mapping
-#define Kit_System_TlsKey_T_MAP DWORD
+#define KitSystemSema_T_MAP HANDLE
 
 
 /// Win32 Mapping
@@ -67,12 +64,6 @@ inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
     return (uint32_t)clock();
 }
-
-/// Win32 Mapping
-#define KIT_SYSTEM_SHELL_NULL_DEVICE_x_MAP "NUL"
-
-/// Win32 Mapping
-#define KIT_SYSTEM_SHELL_SUPPORTED_x_MAP 1
 
 
 /// Win32 Mapping

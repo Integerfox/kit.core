@@ -30,171 +30,171 @@ protected:
     StringBase( char* internalStringPtr ) noexcept;
 
     /// Delete move constructor to prevent moving
-    StringBase( IString&& ) = delete;
+    StringBase( IString&& ) noexcept = delete;
 
 public:
     /// See Kit::Text::IString
-    void clear() noexcept;
+    void clear() noexcept override;
 
     /// See Kit::Text::IString
-    operator char() const noexcept;
+    operator char() const noexcept override;
 
     /// See Kit::Text::IString
-    int length() const noexcept;
+    int length() const noexcept override;
 
     /// See Kit::Text::IString
-    bool isEmpty() const noexcept;
+    bool isEmpty() const noexcept override;
 
     /// See Kit::Text::IString
-    bool truncated() const noexcept;
+    bool truncated() const noexcept override;
 
     /// See Kit::Text::IString
-    bool operator==( const char* string ) const noexcept;
+    bool operator==( const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool operator==( const IString& string ) const noexcept;
+    bool operator==( const IString& string ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool operator!=( const char* string ) const noexcept;
+    bool operator!=( const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool operator!=( const IString& string ) const noexcept;
+    bool operator!=( const IString& string ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool isEqualIgnoreCase( const char* string ) const noexcept;
+    bool isEqualIgnoreCase( const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
-    int compare( const char* string ) const noexcept;
+    int compare( const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
-    int compareIgnoreCase( const char* string ) const noexcept;
+    int compareIgnoreCase( const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool operator==( char c ) const noexcept;
+    bool operator==( char c ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool isEqualSubstring( int startpos, int endpos, const char* string ) const noexcept;
+    bool isEqualSubstring( int startpos, int endpos, const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool isEqualSubstringIgnoreCase( int startpos, int endpos, const char* string ) const noexcept;
+    bool isEqualSubstringIgnoreCase( int startpos, int endpos, const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool startsWith( const char* string ) const noexcept;
+    bool startsWith( const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool startsWith( const char* string, int startOffset ) const noexcept;
+    bool startsWith( const char* string, int startOffset ) const noexcept override;
 
     /// See Kit::Text::IString
-    bool endsWith( const char* string ) const noexcept;
-
-    /// See Kit::Text::IString
-    KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )
-    void format( const char* format, ... ) noexcept;
+    bool endsWith( const char* string ) const noexcept override;
 
     /// See Kit::Text::IString
     KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )
-    void formatAppend( const char* format, ... ) noexcept;
+    void format( const char* format, ... ) noexcept override;
+
+    /// See Kit::Text::IString
+    KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )
+    void formatAppend( const char* format, ... ) noexcept override;
 
     /// See Kit::Text::IString
     KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
-    void formatOpt( bool appendFlag, const char* format, ... ) noexcept;
+    void formatOpt( bool appendFlag, const char* format, ... ) noexcept override;
 
     /// See Kit::Text::IString
-    void vformat( const char* format, va_list ap ) noexcept;
+    void vformat( const char* format, va_list ap ) noexcept override;
 
     /// See Kit::Text::IString
-    void vformatAppend( const char* format, va_list ap ) noexcept;
+    void vformatAppend( const char* format, va_list ap ) noexcept override;
 
     /// See Kit::Text::IString
-    void vformatOpt( bool appendFlag, const char* format, va_list ap ) noexcept;
+    void vformatOpt( bool appendFlag, const char* format, va_list ap ) noexcept override;
 
     /// See Kit::Text::IString
-    int indexOf( char c ) const noexcept;
+    int indexOf( char c ) const noexcept override;
 
     /// See Kit::Text::IString
-    int indexOf( char c, int startpos ) const noexcept;
+    int indexOf( char c, int startpos ) const noexcept override;
 
     /// See Kit::Text::IString
-    int indexOf( const char* str ) const noexcept;
+    int indexOf( const char* str ) const noexcept override;
 
     /// See Kit::Text::IString
-    int indexOf( const char* str, int startpos ) const noexcept;
+    int indexOf( const char* str, int startpos ) const noexcept override;
 
     /// See Kit::Text::IString
-    int lastIndexOf( char c ) const noexcept;
+    int lastIndexOf( char c ) const noexcept override;
 
     /// See Kit::Text::IString
-    int count( char c ) const noexcept;
+    int count( char c ) const noexcept override;
 
     /// See Kit::Text::IString
-    const char* toUpper() noexcept;
+    const char* toUpper() noexcept override;
 
     /// See Kit::Text::IString
-    const char* toLower() noexcept;
+    const char* toLower() noexcept override;
 
     /// See Kit::Text::IString
-    void removeLeadingSpaces() noexcept;
+    void removeLeadingSpaces() noexcept override;
 
     /// See Kit::Text::IString
-    void removeTrailingSpaces() noexcept;
+    void removeTrailingSpaces() noexcept override;
 
     /// See Kit::Text::IString
-    void removeLeadingChars( const char* charsSet ) noexcept;
+    void removeLeadingChars( const char* charsSet ) noexcept override;
 
     /// See Kit::Text::IString
-    void removeTrailingChars( const char* charsSet ) noexcept;
+    void removeTrailingChars( const char* charsSet ) noexcept override;
 
     /// See Kit::Text::IString
-    void cut( int startpos, int endpos ) noexcept;
+    void cut( int startpos, int endpos ) noexcept override;
 
     /// See Kit::Text::IString
-    void trimRight( int n ) noexcept;
+    void trimRight( int n ) noexcept override;
 
     /// See Kit::Text::IString
-    void setChar( int atPosition, char newchar ) noexcept;
+    void setChar( int atPosition, char newchar ) noexcept override;
 
     /// See Kit::Text::IString
-    int replace( char targetChar, char newChar ) noexcept;
+    int replace( char targetChar, char newChar ) noexcept override;
 
     /// See Kit::Text::IString
-    const char* getString() const noexcept;
+    const char* getString() const noexcept override;
 
     /// See Kit::Text::IString
-    char* getBuffer( int& maxAllowedLength ) noexcept;
+    char* getBuffer( int& maxAllowedLength ) noexcept override;
 
     /// Make parent method visible
     using IString::operator=;
 
     /// Assignment
-    IString& operator=( const IString& string ) noexcept;
+    IString& operator=( const IString& string ) noexcept override;
 
     /// Assignment
     IString& operator=( const StringBase& string ) noexcept;
 
     /// Assignment
-    IString& operator=( const char* string ) noexcept;
+    IString& operator=( const char* string ) noexcept override;
 
     /// Assignment
-    IString& operator=( char c ) noexcept;
+    IString& operator=( char c ) noexcept override;
 
     /// Make parent method visible
     using IString::operator+=;
 
     /// Append
-    IString& operator+=( const IString& string ) noexcept;
+    IString& operator+=( const IString& string ) noexcept override;
 
     /// Append
-    IString& operator+=( const char* string ) noexcept;
+    IString& operator+=( const char* string ) noexcept override;
 
     /// Append
-    IString& operator+=( char c ) noexcept;
+    IString& operator+=( char c ) noexcept override;
 
 public:
     /// See Cpl::Container::Key
-    int compareKey( const Key& key ) const noexcept;
+    int compareKey( const Key& key ) const noexcept override;
 
     /// See Cpl::Container::Key
-    const void* getRawKey( unsigned* returnRawKeyLenPtr = 0 ) const noexcept;
+    const void* getRawKey( unsigned* returnRawKeyLenPtr = 0 ) const noexcept override;
 
 protected:  // Helpers
     /// Sets the truncated flag if needed and insures string is null terminated

@@ -7,10 +7,10 @@
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
 
-// #include "Kit/System/Thread.h"
+#include "Kit/System/Thread.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/api.h"
-// #include "Kit/System/SimTick.h"
+#include "Kit/System/SimTick.h"
 #include "Kit/System/Private.h"
 #include "Kit/Text/Format.h"
 #include <cstdint>
@@ -63,22 +63,22 @@ void PrivateTracePlatform::output( Kit::Text::IString& src )
 */
 void PrivateTracePlatform::appendInfo( Kit::Text::IString& dst, Trace::InfoLevel_T info, const char* section, const char* filename, int linenum, const char* funcname )
 {
-    // TODO: Implement thread awareness
     const char* threadName = "n/a";
-    // if ( Kit::System::Thread::tryGetCurrent() != nullptr )
-    // {
-    //     threadName = Kit::System::Thread::myName();
-    // }
+    if ( Kit::System::Thread::tryGetCurrent() != nullptr )
+    {
+        threadName = Kit::System::Thread::myName();
+    }
 
     // Level: eBRIEF
     if ( info > Trace::eNONE )
     {
-        // TODO: Implement simulated time aware
+        dst.clear();
+
         // Indent "simulated time" time stamps
-        // if ( CPL_SYSTEM_SIM_TICK_USING_SIM_TICKS() )
-        // {
-        //     dst += "  ";
-        // }
+        if ( KIT_SYSTEM_SIM_TICK_USING_SIM_TICKS() )
+        {
+            dst += "  ";
+        }
 
         // Add time stamp (Note: Elapsed time may not be valid/working when
         // the scheduler has not been started - so use 'zero' instead)
@@ -87,7 +87,7 @@ void PrivateTracePlatform::appendInfo( Kit::Text::IString& dst, Trace::InfoLevel
         {
             now = ElapsedTime::millisecondsEx();
         }
-        Kit::Text::Format::timestamp( dst, now, true, true );
+        Kit::Text::Format::timestamp( dst, now, true, true, true );
         dst += ' ';
 
         // LEVEL: eINFO

@@ -11,6 +11,7 @@
 #include "DString.h"
 #include "FString.h"
 #include <algorithm>
+#include <cstdint>
 #include <new>
 
 //------------------------------------------------------------------------------
@@ -312,7 +313,7 @@ IString& DString::operator=( int num ) noexcept
     return *this;
 }
 
-IString& DString::operator=( unsigned int num ) noexcept
+IString& DString::operator=( unsigned num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     copyIn( string, string.length() );
@@ -326,21 +327,7 @@ IString& DString::operator=( long num ) noexcept
     return *this;
 }
 
-IString& DString::operator=( long long num ) noexcept
-{
-    FString<maxIntegerChars_> string( num );
-    copyIn( string, string.length() );
-    return *this;
-}
-
 IString& DString::operator=( unsigned long num ) noexcept
-{
-    FString<maxIntegerChars_> string( num );
-    copyIn( string, string.length() );
-    return *this;
-}
-
-IString& DString::operator=( unsigned long long num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     copyIn( string, string.length() );
@@ -362,7 +349,7 @@ IString& DString::operator+=( int num ) noexcept
     return *this;
 }
 
-IString& DString::operator+=( unsigned int num ) noexcept
+IString& DString::operator+=( unsigned num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
     appendTo( string, string.length() );
@@ -376,13 +363,6 @@ IString& DString::operator+=( long num ) noexcept
     return *this;
 }
 
-IString& DString::operator+=( long long num ) noexcept
-{
-    FString<maxIntegerChars_> string( num );
-    appendTo( string, string.length() );
-    return *this;
-}
-
 IString& DString::operator+=( unsigned long num ) noexcept
 {
     FString<maxIntegerChars_> string( num );
@@ -390,12 +370,6 @@ IString& DString::operator+=( unsigned long num ) noexcept
     return *this;
 }
 
-IString& DString::operator+=( unsigned long long num ) noexcept
-{
-    FString<maxIntegerChars_> string( num );
-    appendTo( string, string.length() );
-    return *this;
-}
 
 int DString::maxLength() const noexcept
 {

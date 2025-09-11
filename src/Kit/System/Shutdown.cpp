@@ -20,11 +20,11 @@ namespace Kit {
 namespace System {
 
 ///
-static Kit::Container::SList<Shutdown::Handler> callbacks_( "invoke_special_static_constructor" );
+static Kit::Container::SList<Shutdown::IHandler> callbacks_( "invoke_special_static_constructor" );
 
 
 ///////////////////////
-void Shutdown::registerHandler( Shutdown::Handler& instanceToRegister ) noexcept
+void Shutdown::registerHandler( Shutdown::IHandler& instanceToRegister ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::system() );
     callbacks_.push( instanceToRegister );
@@ -35,7 +35,7 @@ void Shutdown::registerHandler( Shutdown::Handler& instanceToRegister ) noexcept
 int Shutdown::notifyShutdownHandlers( int exitCode ) noexcept
 {
     PrivateLocks::system().lock();
-    Shutdown::Handler* ptr = callbacks_.get();
+    Shutdown::IHandler* ptr = callbacks_.get();
     PrivateLocks::system().unlock();
 
     while ( ptr )

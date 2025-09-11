@@ -10,11 +10,11 @@
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/Container/MapItem.h"
 #include "Kit/Container/SList.h"
 #include "Kit/Container/DList.h"
 #include "Kit/Container/Map.h"
 #include "Kit/Text/FStringItem.h"
+#include "Kit/Text/DStringItem.h"
 
 
 ///
@@ -261,7 +261,6 @@ TEST_CASE( "StringItem" )
     }
 
 
-#if 0
     SECTION( "MAP: DString" )
     {
         DStringItem pear1( "pear1" );
@@ -339,7 +338,6 @@ TEST_CASE( "StringItem" )
         dst.clearTheMap();
         REQUIRE( dst.first() == 0 );
     }
-#endif
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

@@ -68,7 +68,7 @@ public:
     /// Return Kit::Container::Key (A IString is-a Key)
     const Kit::Container::Key& getKey() const noexcept { return m_myString; }
 
-
+ 
 protected:
     /// Reference to the actual IString/storage
     IString & m_myString;

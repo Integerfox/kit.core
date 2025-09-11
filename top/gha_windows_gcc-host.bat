@@ -14,7 +14,8 @@ echo:Build Number  %BUILD_NUMBER%
 set NQBP_CI_BUILD=1
 
 :: Set the NQBP_BIN path (and other magic variables - but no compiler selected)
-call ./env.bat
+:: The MinGW compiler already exists on the build machine and is the command path
+call .\env.bat
 
 ::
 :: Build Mingw projects

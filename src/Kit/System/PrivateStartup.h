@@ -30,7 +30,7 @@ namespace System {
     NOTE: This class/interface SHOULD ONLY be used by KIT Library interfaces,
           the application should NEVER register a startup hook!
  */
-class StartupHook : public Kit::Container::ListItem
+class IStartupHook : public Kit::Container::ListItem
 {
 public:
     /** This enum defines 'init_levels'.  The init levels are processed
@@ -39,7 +39,7 @@ public:
         numbered init level are called last.  Within a init level there is
         no guaranteed order to the callbacks.
      */
-    enum InitLevel_e
+    enum InitLevel
     {
         TEST_INFRA=0,    /// Initialized first
         SYSTEM,
@@ -53,18 +53,18 @@ public:
         process. The 'initLevel' informs the client what initialize
         level context the notifyInit() method is being called.
      */
-    virtual void notify( InitLevel_e initLevel ) = 0;
+    virtual void notify( InitLevel initLevel ) = 0;
 
 
 protected:
     /** Base Class constructor -->performs the callback/init-level
         registration
      */
-    StartupHook( InitLevel_e myInitLevel );
+    IStartupHook( InitLevel myInitLevel ) noexcept;
 
 public:
     /// Ensure the destructor is virtual
-    virtual ~StartupHook() {}
+    virtual ~IStartupHook() {}
 
 
 public:
@@ -75,12 +75,12 @@ public:
         NOTE: This is the ONE KIT Library method that can be called BEFORE
               Kit::System::Api::initialize() is called.
      */
-    static void registerHook( StartupHook& callbackInstance, InitLevel_e initOrder );
+    static void registerHook( IStartupHook& callbackInstance, InitLevel initOrder ) noexcept;
 
     /** This method is intended to be USED ONLY by the Kit::System::Api::init()
         method to trigger all of the registered init callbacks.
      */
-    static void notifyStartupClients( void );
+    static void notifyStartupClients( void )  noexcept;
 };
 
 
