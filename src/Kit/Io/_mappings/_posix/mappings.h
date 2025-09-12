@@ -14,6 +14,7 @@
     Kit::Io namespace
 
  */
+#include <limits.h>    // For PATH_MAX
 
 #define KitIoStdioHandle_T_MAP         int       //!< Mapping
 #define KitIoSocketHandle_T_MAP        int       //!< Mapping

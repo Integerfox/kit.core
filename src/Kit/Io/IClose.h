@@ -11,7 +11,6 @@
 /** @file */
 
 
-
 ///
 namespace Kit {
 ///
@@ -25,7 +24,7 @@ namespace Io {
     class - we can use the 'virtual mechanism' in C++ to ensure that for
     InputOutput classes there is one and only one close() method.
  */
-class IClose 
+class IClose
 {
 public:
     /** This method will close the stream.  The result of closing the stream is

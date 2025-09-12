@@ -6,9 +6,6 @@ without incurring any platform specific dependencies.  However, It is the
 Application's responsibility to build & link the appropriate platform specific
 implementation of these classes. 
 
-Note: The "_ansi/' implementation of the Stdio classes uses the C library's 
-      'FILE*' methods (fwrite, fread, etc.).
-
  */  
 
 

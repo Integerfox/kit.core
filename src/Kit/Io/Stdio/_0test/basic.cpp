@@ -1,76 +1,72 @@
 /*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+ * This file is part of the Colony.Core Project.  The Colony.Core Project is an
+ * open source project with a BSD type of licensing agreement.  See the license
+ * agreement (license.txt) in the top/ directory or on the Internet at
+ * http://integerfox.com/colony.core/license.txt
+ *
+ * Copyright (c) 2014-2025  John T. Taylor
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
 
-#include "colony_config.h"
-#include "Catch/catch.hpp"
-#include "Cpl/Io/Stdio/StdIn.h"
-#include "Cpl/Io/Stdio/StdOut.h"
-#include "Cpl/Io/LineWriter.h"
-#include "Cpl/Io/LineReader.h"
-#include "Cpl/Io/TeeOutput.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/System/Mutex.h"
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
-#include "Cpl/Text/FString.h"
-
-
-#define SECT_     "_0test"
-
-/// 
-using namespace Cpl::Io::Stdio;
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/System/Trace.h"
+#include "Kit/Io/Stdio/StdIn.h"
+#include "Kit/Io/Stdio/StdOut.h"
+#include "Kit/Io/LineWriter.h"
+#include "Kit/Io/LineReader.h"
+#include "Kit/Text/FString.h"
+#include "Kit/Io/TeeOutput.h"
+#include <string.h>
+#include <inttypes.h>
 
 
+#define SECT_ "_0test"
 
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "basic", "[basic]" )
+///
+using namespace Kit::Io::Stdio;
+
+
+/////////////////////////////////////////////////
+TEST_CASE( "basic" )
 {
-    CPL_SYSTEM_TRACE_FUNC( SECT_ );
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    KIT_SYSTEM_TRACE_FUNC( SECT_ );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("Reading Lines...") );
-    StdIn in2fd;
-    Cpl::Io::LineReader reader( in2fd );
-    Cpl::Text::FString<6> line;
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Reading Lines..." );
+    StdIn                 in2fd;
+    Kit::Io::LineReader   reader( in2fd );
+    Kit::Text::FString<6> line;
     REQUIRE( reader.available() == true );
     reader.readln( line );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("line=[%s]", line.getString()) );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "line=[%s]", line.getString() );
     REQUIRE( line == "line 1" );
     REQUIRE( reader.readln( line ) );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("line=[%s]", line.getString()) );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "line=[%s]", line.getString() );
     REQUIRE( line == "line 2" );
     REQUIRE( reader.readln( line ) );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("line=[%s]", line.getString()) );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "line=[%s]", line.getString() );
     line.removeTrailingSpaces();
     REQUIRE( line.isEmpty() );
     REQUIRE( reader.readln( line ) );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("line=[%s]", line.getString()) );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "line=[%s]", line.getString() );
     REQUIRE( line == "line 4" );
     REQUIRE( reader.readln( line ) );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("line=[%s]", line.getString()) );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "line=[%s]", line.getString() );
     REQUIRE( line == "line 5" );
     reader.close();
     REQUIRE( reader.readln( line ) == false );
     REQUIRE( in2fd.read( line ) == false );
 
-    //     
+    //
     StdIn infd;
-    char dummyChar = 29;
-
-    REQUIRE( infd.isOpened() == true );
+    char  dummyChar = 29;
 
     REQUIRE( infd.read( dummyChar ) == true );
     REQUIRE( dummyChar == 'A' );
 
-    Cpl::Text::FString<10> buffer( "bob" );
+    Kit::Text::FString<10> buffer( "bob" );
     REQUIRE( infd.read( buffer ) == true );
     REQUIRE( buffer == "Hello Worl" );
 
@@ -84,22 +80,16 @@ TEST_CASE( "basic", "[basic]" )
     REQUIRE( myBuffer[0] == 'd' );
     REQUIRE( myBuffer[1] == '.' );
     bool result = infd.read( myBuffer, sizeof( myBuffer ), bytesRead );
-	CPL_SYSTEM_TRACE_MSG( SECT_, ( "result=%d, bytesRead=%d, myBuffer=[%.*s]", result, bytesRead, bytesRead, myBuffer ) );
-	REQUIRE( result == false );
-
-#ifndef SKIP_AVAILABLE_TEST // Work-around for the Stdio::Ansi implementation not implementing the available() method
-    REQUIRE( infd.available() == false );
-#endif
+    KIT_SYSTEM_TRACE_MSG( SECT_, "result=%d, bytesRead=%d, myBuffer=[%.*s]", result, bytesRead, bytesRead, myBuffer );
+    REQUIRE( result == false );
 
     infd.close();
-    REQUIRE( infd.isOpened() == false );
     REQUIRE( infd.read( dummyChar ) == false );
 
 
     //
     StdOut outfd;
     int    bytesWritten;
-    REQUIRE( outfd.isOpened() == true );
     REQUIRE( outfd.write( myBuffer, 0, bytesWritten ) == true );
     REQUIRE( bytesWritten == 0 );
     REQUIRE( outfd.write( 'a' ) );
@@ -109,19 +99,17 @@ TEST_CASE( "basic", "[basic]" )
     REQUIRE( buffer == "Hello Worl" );
     REQUIRE( outfd.write( myBuffer, sizeof( myBuffer ) ) );
     REQUIRE( outfd.write( myBuffer, sizeof( myBuffer ), bytesWritten ) );
-    REQUIRE( (size_t) bytesWritten == sizeof( myBuffer ) );
+    REQUIRE( (size_t)bytesWritten == sizeof( myBuffer ) );
 
     outfd.flush();
     outfd.close();
-    REQUIRE( outfd.isOpened() == false );
-    REQUIRE( outfd.write( 'a' ) == false );
+    REQUIRE( outfd.write( 'a' ) == false); 
 
     //
     StdOut out2fd;
-    REQUIRE( out2fd.isOpened() == true );
     REQUIRE( out2fd.write( myBuffer, 0, bytesWritten ) == true );
     REQUIRE( bytesWritten == 0 );
-    Cpl::Io::LineWriter writer( out2fd );
+    Kit::Io::LineWriter writer( out2fd );
     REQUIRE( writer.println() );
     REQUIRE( writer.println( "Hello World" ) );
     REQUIRE( writer.print( "Hello" ) );
@@ -130,15 +118,14 @@ TEST_CASE( "basic", "[basic]" )
     REQUIRE( writer.println() );
     writer.flush();
     writer.close();
-    REQUIRE( out2fd.isOpened() == false );
     REQUIRE( writer.println() == false );
     REQUIRE( out2fd.write( 'a' ) == false );
 
     //
-    StdOut out3fd;
-    StdOut out4fd;
-    StdOut out5fd;
-    Cpl::Io::TeeOutput  outputs( out3fd );
+    StdOut             out3fd;
+    StdOut             out4fd;
+    StdOut             out5fd;
+    Kit::Io::TeeOutput outputs( out3fd );
 
     REQUIRE( outputs.write( "[Hello World (fd3)]\n" ) );
     outputs.add( out4fd );
@@ -159,16 +146,17 @@ TEST_CASE( "basic", "[basic]" )
     REQUIRE( out4fd.write( "should fail because closed\n" ) == false );
     REQUIRE( out3fd.write( "should fail because closed\n" ) == false );
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
-TEST_CASE( "close", "[close]" )
+TEST_CASE( "close" )
 {
-    CPL_SYSTEM_TRACE_FUNC( SECT_ );
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    KIT_SYSTEM_TRACE_FUNC( SECT_ );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     StdIn fd;
-    char dummyChar = 29;
+    char  dummyChar = 29;
 
     fd.close();
     REQUIRE( fd.read( dummyChar ) == false );
@@ -182,38 +170,5 @@ TEST_CASE( "close", "[close]" )
     fd3.close();
     REQUIRE( fd3.write( 'a' ) == false );
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
-}
-
-TEST_CASE( "open/activate", "[open/activate]" )
-{
-    CPL_SYSTEM_TRACE_FUNC( SECT_ );
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
-
-    StdIn fd;
-    Cpl::Io::Descriptor rawFd = { 0, };
-    fd.activate( (int) 1 );
-    fd.activate( (void*) 1 );
-    fd.activate( rawFd );
-    fd.close();
-    fd.activate( rawFd );
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 3u );
-
-    fd.close();
-    fd.activate( (int) 1 );
-    fd.activate( (void*) 1 );
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 1u );
-
-    StdOut fd2;
-    fd2.activate( (int) 1 );
-    fd2.activate( (void*) 1 );
-    fd2.activate( rawFd );
-    fd2.close();
-    fd2.activate( rawFd );
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 3u );
-
-    fd2.close();
-    fd2.activate( (int) 1 );
-    fd2.activate( (void*) 1 );
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 1u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

@@ -14,31 +14,34 @@
 #include "kit_map.h"
 #include <stdint.h>
 
+
 ///
 namespace Kit {
 ///
 namespace Io {
 
 /*----------------------------------------------------------------------------*/
-/** Defer the "file descriptor" for STDIO file handle' type to the host platform.
+/** The KIT standard newline is "\n", but allow the application to override/change it.
+ */
+#ifndef OPTION_KIT_IO_NEW_LINE_STANDARD
+static constexpr const char* const newline = "\n";
+#else
+static constexpr const char* const newline = OPTION_KIT_IO_NEW_LINE_STANDARD;
+#endif
+
+/// The application must provide/map the native newline character
+#define KIT_IO_NEW_LINE_NATIVE KIT_IO_NEW_LINE_NATIVE_MAP
+
+/// Provide an alias for the native newline character(s)
+static constexpr const char* const nativeNewline = KIT_IO_NEW_LINE_NATIVE;
+
+
+/*----------------------------------------------------------------------------*/
+/** Defers the "file descriptor" for STDIO file handle type to the target platform.
     This type is used when defining concrete STDIO file classes.
  */
 #define KitIoStdioHandle_T KitIoStdioHandle_T_MAP
 
-/// Provide a alias (that is less verbose)
-using StdioHdl_T = KitIoStdioHandle_T;
-
-#if 0 // Move to the File/ namespace once we get there
-/** Let the Platform set the type/class for an 'Input Worker' that is used by 
-    concrete File classes to perform the actual Input operations.  The default
-    implementation is to the STDIO 'worker' class
- */
-#ifndef OPTION_KIT_IO_FILE_INPUT_WORKER_TYPE
-using InputWorker_T = class NativeInput;
-#else
-using InputWorker_T = OPTION_KIT_IO_FILE_INPUT_WORKER_TYPE;
-#endif
-#endif 
 
 /*----------------------------------------------------------------------------*/
 /** Signed data type for arguments, variables, etc. with respect to how many

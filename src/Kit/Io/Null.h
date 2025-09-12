@@ -69,7 +69,7 @@ public:
 
 public:
     /// See Kit::Io::IEos
-    bool isEos() noexcept override
+    bool isEos() const noexcept override
     {
         return !m_opened;
     }

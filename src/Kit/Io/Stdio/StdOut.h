@@ -1,21 +1,19 @@
-#ifndef Cpl_Io_Stdio_StdOut_h_
-#define Cpl_Io_Stdio_StdOut_h_
-/*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+#ifndef KIT_IO_STDIO_STDOUT_H_
+#define KIT_IO_STDIO_STDOUT_H_
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Cpl/Io/Stdio/Output_.h"
+#include "Kit/Io/Stdio/OutputDelegate.h"
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Io {
 ///
@@ -28,21 +26,14 @@ namespace Stdio {
           though there is only ONE stdout.  This is OK because
           all instance reference the systems/platform 'stdout'
  */
-class StdOut : public Output_
+class StdOut : public OutputDelegate
 {
 public:
     /// Constructor
     StdOut();
-
-
-public:
-    /** Overriding inherited behavior so as to NOT close the actual native
-        stream. In general closing stdin/stdout/stderr is bad thing.
-     */
-    void close();
 };
 
-};      // end namespaces
-};
-};
+}  // end namespaces
+}
+}
 #endif  // end header latch

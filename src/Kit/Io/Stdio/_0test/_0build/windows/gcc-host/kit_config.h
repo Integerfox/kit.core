@@ -1,4 +1,6 @@
-/*------------------------------------------------------------------------------
+#ifndef KIT_CONFIG_H_
+#define KIT_CONFIG_H_
+/*-----------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
  * Distributed under the BSD 3 Clause License. See the license agreement at:
@@ -6,15 +8,10 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file */
+/** @file Project/build specific 'Options' (see LConfig Pattern) */
 
-#include "Kit/Io/Stdio/StdOut.h"
-#include <unistd.h>
+#define USE_KIT_SYSTEM_TRACE
+#define USE_KIT_SYSTEM_ASSERT_MACRO
+#define KitTextToStringMaxUnsigned_T uint64_t
 
-//
-using namespace Kit::Io::Stdio;
-
-StdOut::StdOut()
-    :OutputDelegate( STDOUT_FILENO )
-{
-}
+#endif
