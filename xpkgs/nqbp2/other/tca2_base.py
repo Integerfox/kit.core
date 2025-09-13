@@ -6,9 +6,10 @@
 usage = """ 
 (T)est (C)overage (A)nalyzer 2
 ===============================================================================
-Usage: tca2 [options] sum  [<filter-file>]
-       tca2 [options] view [<filter-file>]
-       tca2 [options] ci   [<filter-file>]
+Usage: tca2 [options] sum    [<filter-file>]
+       tca2 [options] view   [<filter-file>]
+       tca2 [options] ci     [<filter-file>]
+       tca2 [options] ciview [<filter-file>]
 
 Arguments:
   sum              Generates a summary report of the code coverage.  A detailed 
@@ -17,6 +18,8 @@ Arguments:
                    instead of displaying a summary.
   ci               Generates a detailed HTML coverage report to be published
                    as part of a CI/CD pipeline.
+  ciview           Same as the 'ci' command but also 'launches' the HTML report
+
   <filter-file>    Specifies a JSON file that contains list of LCOV 'extract'
                    and 'remove' patterns.  The default is filter for current
                    build directory.
@@ -98,11 +101,15 @@ def run( prj_dir, argv):
         open_html_in_browser( html_index_path )
 
     # Generate for CI
-    elif args['ci'] :
+    elif args['ci'] or args['ciview']:
         # Generate HTML report
         generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir'], "xpkgs/"] )
         generate_html_report( LCOV_OFILE, args['--html-dir'], args )
 
+        if args['ciview']:
+            # View HTML report
+            html_index_path = f'{args["--html-dir"]}/index.html'
+            open_html_in_browser( html_index_path )
 
 #------------------------------------------------------------------------------
 def generate_unit_test_report( pkg, prj_dir, args, remove_list ):
