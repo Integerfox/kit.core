@@ -32,19 +32,7 @@ $NQBP_BIN/other/chuck.py -vt --match a.py  --d2 linux --dir gcc-host
 $NQBP_BIN/other/chuck.py -v --match aa.py  --d2 linux --dir gcc-host
 popd
 
-# Generate code coverage metrics 
-#RANDOM_UNIT_TEST_DIR="$NQBP_PKG_ROOT/tests/Cpl/Checksum/_0test/linux/gcc"
-#COMBINED_CODE_COVERAGE_FILE="$NQBP_PKG_ROOT/cobertura.json"
-#COMBINED_CODE_COVERAGE_XML="$NQBP_PKG_ROOT/cobertura.xml"
-#if [ -f "$COMBINED_CODE_COVERAGE_FILE" ]; then
-#    rm -f "$COMBINED_CODE_COVERAGE_FILE"
-#fi
-#pushd src
-#$NQBP_BIN/other/chuck.py -v --d2 linux --dir gcc-host --match tca.py args --ci rpt --json cobertura.json
-#$NQBP_BIN/other/chuck.py -v --d2 linux --dir gcc-host --match tca.py args --ci merge cobertura.json $COMBINED_CODE_COVERAGE_FILE
-#popd
-
-# Convert the JSON data file to XML format (need to use the tca.py script to get the correct gcov args)
-#pushd $RANDOM_UNIT_TEST_DIR
-#python tca.py --ci rpt -a $COMBINED_CODE_COVERAGE_FILE --xml $COMBINED_CODE_COVERAGE_XML
-#popd
+# Generate code coverage metrics for the entire src/ tree
+pushd src
+$NQBP_PKG_ROOT/top/tca2.py --html-dir $NQBP_PKG_ROOT/docs/publish/code-coverage ci
+popd

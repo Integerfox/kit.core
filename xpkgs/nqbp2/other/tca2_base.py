@@ -8,12 +8,15 @@ usage = """
 ===============================================================================
 Usage: tca2 [options] sum  [<filter-file>]
        tca2 [options] view [<filter-file>]
+       tca2 [options] ci   [<filter-file>]
 
 Arguments:
   sum              Generates a summary report of the code coverage.  A detailed 
                    HTML report is generated in the current working directory.
   view             Same as the 'sum' command but 'launches' the HTML report 
                    instead of displaying a summary.
+  ci               Generates a detailed HTML coverage report to be published
+                   as part of a CI/CD pipeline.
   <filter-file>    Specifies a JSON file that contains list of LCOV 'extract'
                    and 'remove' patterns.  The default is filter for current
                    build directory.
@@ -55,7 +58,7 @@ from . import utils2
 
 VERBOSE_ONLY    = True
 verbose_enabled = False
-LCOV_OPTS       = '--rc branch_coverage=1 --rc geninfo_unexecuted_blocks=1'
+LCOV_OPTS       = '--rc branch_coverage=1 --rc geninfo_unexecuted_blocks=1  --ignore-errors mismatch'
 LCOV_OFILE      = '.coverage.info'
 GENHTML_OPTS    = '--branch-coverage --no-function-coverage'
 
@@ -87,18 +90,25 @@ def run( prj_dir, argv):
     # Generate and view HTML
     elif args['view'] :
         # Generate HTML report
-        generate_unit_test_report( pkg, prj_dir, args )
+        generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir']] )
         generate_html_report( LCOV_OFILE, args['--html-dir'], args )
 
         # View HTML report
         html_index_path = f'{args["--html-dir"]}/index.html'
         open_html_in_browser( html_index_path )
 
+    # Generate for CI
+    elif args['ci'] :
+        # Generate HTML report
+        generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir'], "xpkgs/"] )
+        generate_html_report( LCOV_OFILE, args['--html-dir'], args )
+
+
 #------------------------------------------------------------------------------
-def generate_unit_test_report( pkg, prj_dir, args ):
+def generate_unit_test_report( pkg, prj_dir, args, remove_list ):
     dir_under_test = derive_unit_test_dir(pkg, prj_dir, args['--test-dir'])
     extract_metrics( LCOV_OFILE, LCOV_OFILE, dir_under_test )
-    remove_metrics( LCOV_OFILE, LCOV_OFILE, [args['--test-dir']] )
+    remove_metrics( LCOV_OFILE, LCOV_OFILE, remove_list )
 
 def capture_metrics( srcdir, outfile, filter_lines=None  ):
     xlines = ""
