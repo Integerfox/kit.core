@@ -39,6 +39,7 @@ alias chuck="$NQBP_BIN/other/chuck.py"
 alias ratt="$NQBP_XPKGS_ROOT/ratt/bin/ratt.py"
 alias fixx="$NQBP_BIN/other/fixx.py"
 alias whatcc="echo $NQBP_CC_SELECTED"
+alias tcar="$NQBP_PKG_ROOT/top/tca2.py"
 alias map="$NQBP_PKG_ROOT/scripts/kit.core/map.py" 
 
 

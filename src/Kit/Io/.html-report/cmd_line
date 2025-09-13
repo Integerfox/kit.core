@@ -1,0 +1,1 @@
+genhtml .coverage.info -o .html-report --branch-coverage --no-function-coverage --rc genhtml_line_hi_limit=80 --rc genhtml_line_med_limit=75 --rc genhtml_branch_hi_limit=60 --rc genhtml_branch_med_limit=50 --rc genhtml_hi_limit=80 --rc genhtml_med_limit=75

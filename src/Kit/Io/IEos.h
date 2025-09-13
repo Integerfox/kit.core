@@ -29,7 +29,7 @@ class IEos
 public:
     /** This method returns true if End-of-Stream was encountered on the stream.
      */
-    virtual bool isEos() const = 0;
+    virtual bool isEos()  = 0;
 
 
 public:

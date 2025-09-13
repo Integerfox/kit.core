@@ -35,7 +35,7 @@ void OutputDelegate::flush() noexcept
     PosixIO::flush( m_outFd );
 }
 
-bool OutputDelegate::isEos() const noexcept
+bool OutputDelegate::isEos()  noexcept
 {
     return m_outEos;
 }

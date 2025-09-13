@@ -21,7 +21,7 @@ namespace Io {
 
 
 /** This concrete class implements a IOutput stream that outputs
-    the data to MANY (or none) output streams. The write() methods will
+    the data to multiple (up to 4) output streams . The write() methods will
     return false when at least of the IOutput stream(s) had an error.  There
     are methods provided (firstFailed(), nextFailed()) which returns a list of
     all currently failed IOutput streams.  Once a stream has been marked as failed
@@ -37,6 +37,10 @@ namespace Io {
 class TeeOutput : public IOutput
 {
 public:
+    /// Maximum number of output streams supported
+    static constexpr int MAX_STREAMS = 4;
+
+public:
     /// Constructor. Starts off with NO output streams
     TeeOutput() noexcept;
 
@@ -48,8 +52,10 @@ public:
 
 
 public:
-    /** Adds a stream */
-    void add( IOutput& stream ) noexcept;
+    /** Adds a stream.  Return true when successful; else false is returned
+        if no more streams can be added
+     */
+    inline bool add( IOutput& stream ) noexcept { return add( m_streams, stream ); }
 
     /** Removes a stream.  Returns true if the stream was actually
         removed (i.e. that it was in the list to start with).
@@ -61,49 +67,51 @@ public:
 
 
 public:
-    /** Returns the first failed stream.  If no failed streams exist 0 will
-        be returned.
+    /** Returns the first failed stream.  If no failed streams exist nullptr
+        will be returned.
       */
-    IOutput* firstFailed() noexcept;
+    inline IOutput* firstFailed() noexcept { return first( m_failed ); }
 
     /** Returns the next failed stream in the list.  If there are no more
-        failed streams 0 will be returned.
+        failed streams nullptr will be returned.
      */
-    IOutput* nextFailed( IOutput& currentFailedStream ) noexcept;
-
-    /** Removes the specified failed stream AND returns the next failed stream
-        in the list.  If there are no more failed streams (or the specified stream
-        is not 'failed') 0 will be returned.  This method allows the user to remove
-        the failed streams as he/she walks the failed list. NOTE: Do NOT call remove()
-        while walking the failed list, remove() can invalidate the link pointers of the
-        current failed stream object!!!
-     */
-    IOutput* removeAndGetNextFailed( IOutput& currentFailedStream ) noexcept;
-
+    inline IOutput* nextFailed( IOutput& currentFailedStream ) noexcept { return next( m_failed, currentFailedStream ); }
 
 public:
     /// Pull in overloaded methods from base class
     using Kit::Io::IOutput::write;
 
-
     /// See Kit::Io::IOutput
-    bool write( const void* buffer, int maxBytes, int& bytesWritten ) noexcept override;
+    bool write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept override;
 
     /// See Kit::Io::IOutput
     void flush() noexcept override;
 
     /// See Kit::Io::IEos
-    bool isEos() const noexcept override;
+    bool isEos() noexcept override;
 
     /// See Kit::Io::IClose
     void close() noexcept override;
 
 protected:
+    /// Helper method
+    IOutput* first( IOutput** streamList ) const noexcept;
+
+    /// Helper method
+    IOutput* next( IOutput** streamList, IOutput& currentStream ) const noexcept;
+
+    /// Helper method
+    bool remove( IOutput** streamList, IOutput& stream ) noexcept;
+
+    /// Helper method
+    bool add( IOutput** streamList, IOutput& stream ) noexcept;
+
+protected:
     /// List of active writers
-    mutable Kit::Container::SList<IOutput> m_streams;
+    mutable IOutput* m_streams[MAX_STREAMS];
 
     /// List of failed writers
-    mutable Kit::Container::SList<IOutput> m_failed;
+    mutable IOutput* m_failed[MAX_STREAMS];
 
     /// my open/close state
     bool m_opened;

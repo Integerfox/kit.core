@@ -36,7 +36,7 @@ bool InputDelegate::available() noexcept
     return PosixIO::available( m_inFd );
 }
 
-bool InputDelegate::isEos( void ) const noexcept
+bool InputDelegate::isEos() noexcept
 {
     return m_inEos;
 }

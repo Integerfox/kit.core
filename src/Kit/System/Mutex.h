@@ -42,12 +42,12 @@ public:
         thread currently "owns" the mutex, the current thread will "wait" until
         it can obtain ownership before proceeding.
      */
-    void lock( void );
+    void lock();
 
     /** This method is invoke at the end of a critical section.  This call will
         release the ownership of the mutex.
      */
-    void unlock( void );
+    void unlock();
 
 
 protected:

@@ -48,7 +48,7 @@ public:
         semaphore is signaled/set.  NOTE: Can only be called from a Thread
         context!
      */
-    void wait( void ) noexcept;
+    void wait() noexcept;
 
     /** This method is the same as wait(), except that 'timeout' specifies the
         maximum amount of time, in milliseconds, will block if the semaphore
@@ -64,15 +64,15 @@ public:
         is decrement and the method returns immediately and has a return code
         of true.
      */
-    bool tryWait( void ) noexcept;
+    bool tryWait() noexcept;
 
 
 public:
     /// ISignable API
-    int signal( void ) noexcept override;
+    int signal() noexcept override;
 
     /// ISignable API
-    int su_signal( void ) noexcept override;
+    int su_signal() noexcept override;
 
 
 protected:
@@ -82,7 +82,7 @@ protected:
 
 protected:
     /// Helper method for supporting SimTicks and 'real' tick in the same build
-    void waitInRealTime( void ) noexcept;
+    void waitInRealTime() noexcept;
 
     /// Helper method for supporting SimTicks and 'real' tick in the same build
     bool timedWaitInRealTime( uint32_t timeoutMs ) noexcept;

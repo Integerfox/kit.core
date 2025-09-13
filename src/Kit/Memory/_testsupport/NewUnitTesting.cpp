@@ -128,13 +128,13 @@ static void my_delete( void* ptr ) noexcept
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void NewUnitTesting::disable( void ) noexcept
+void NewUnitTesting::disable() noexcept
 {
     disabled_ = true;
 }
 
 
-void NewUnitTesting::enable( void ) noexcept
+void NewUnitTesting::enable() noexcept
 {
     disabled_ = false;
 }

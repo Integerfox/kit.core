@@ -4,7 +4,7 @@
 #include <chrono>
 #include <cstdint>
 
-extern uint32_t getNativeTimestamp( void );
+extern uint32_t getNativeTimestamp();
 
 int main( int argc, char* argv[] )
 {

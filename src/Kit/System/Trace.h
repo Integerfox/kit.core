@@ -360,7 +360,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static void enable_( void );
+    static void enable_();
 
     /** This method disables the output/logging of trace message at run-time.
         The default is start with tracing enabled.
@@ -368,14 +368,14 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static void disable_( void );
+    static void disable_();
 
     /** Returns true if tracing is enabled, i.e. enable_() has been called.,
 
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static bool isEnabled_( void );
+    static bool isEnabled_();
 
     /** This method sets the information level for the trace messages. The method
         returns the previous level setting.
@@ -390,7 +390,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static InfoLevel_T getInfoLevel_( void ) noexcept;
+    static InfoLevel_T getInfoLevel_() noexcept;
 
     /** This method enables the output/logging of trace message at run-time for
         the specified 'section'.  A 'section' name can NOT contain any white
@@ -461,7 +461,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static void clearThreadFilter_( void );
+    static void clearThreadFilter_();
 
     /** This method returns true if the thread filter has been set and the
         current thread's name 'passes' the thread filter check, i.e. the specified
@@ -493,7 +493,7 @@ public:
               macros.
      */
     // TODO: Implement Kit::IO::Stream for trace output
-    // static void revert_( void );
+    // static void revert_();
 
 public:
     /** This COMPONENT Scoped method provides the Output stream to the Trace
@@ -505,7 +505,7 @@ public:
         NOTE: The Application is RESPONSIBLE for implementing this method!
      */
     // TODO: Implement Kit::IO::Stream for trace output
-    // static Kit::Io::Output* getDefaultOutputStream_( void ) noexcept;
+    // static Kit::Io::Output* getDefaultOutputStream_() noexcept;
 
 
 protected:

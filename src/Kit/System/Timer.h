@@ -28,7 +28,7 @@ namespace System {
 
     NOTES:
         o The timer context must implement the following method:
-                virtual void expired( void ) noexcept;
+                virtual void expired() noexcept;
 
         o Because the timing source of an individual thread may NOT be a clean
           divider of the timer duration, the timer duration is taken as the

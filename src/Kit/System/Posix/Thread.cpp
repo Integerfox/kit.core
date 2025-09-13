@@ -44,7 +44,7 @@ class RegisterInitHandler_ : public Kit::System::IStartupHook,
 {
 protected:
     // Empty entry function -- it is never called!
-    void entry( void ) noexcept override {}
+    void entry() noexcept override {}
 
 public:
     ///

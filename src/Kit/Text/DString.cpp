@@ -160,7 +160,7 @@ void DString::validateAndCopy( const char* string, int len ) noexcept
 }
 
 
-void DString::freeCurrentString( void ) noexcept
+void DString::freeCurrentString() noexcept
 {
     if ( m_strPtr && m_strPtr != noMemory_ )
     {

@@ -46,7 +46,7 @@ public:
     bool available() noexcept override;
 
     /// See Kit::Io::IEos
-    bool isEos() const noexcept override;
+    bool isEos()  noexcept override;
 
     /// See Kit::Io::IClose
     void close() noexcept override;

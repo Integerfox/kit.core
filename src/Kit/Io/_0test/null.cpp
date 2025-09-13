@@ -9,23 +9,23 @@
 * Redistributions of the source code must retain the above copyright notice.
 *----------------------------------------------------------------------------*/
 
-#include "Catch/catch.hpp"
-#include "Cpl/Io/Null.h"
-#include "Cpl/Io/LineWriter.h"
-#include "Cpl/Io/LineReader.h"
-#include "Cpl/Io/AtomicOutput.h"
-#include "Cpl/Io/TeeOutput.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
-#include "Cpl/Text/FString.h"
-#include "Cpl/Container/SList.h"
 
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/System/Trace.h"
+#include "Kit/Io/LineWriter.h"
+#include "Kit/Io/LineReader.h"
+#include "Kit/Text/FString.h"
+#include "Kit/Io/TeeOutput.h"
+#include "Kit/Io/Null.h"
+#include <string.h>
+#include <inttypes.h>
 
 
 #define SECT_     "_0test"
 
 /// 
-using namespace Cpl::Io;
+using namespace Kit::Io;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ public:
     MyContext():m_count( 0 ) {}
 
 public:
-    bool testOutputs( Output& fd )
+    bool testOutputs( IOutput& fd )
     {
         m_count++;
         return fd.write( "Hello" );
@@ -51,10 +51,10 @@ public:
 }; // end namespace
 
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "null", "[null]" )
+TEST_CASE( "null" )
 {
-    CPL_SYSTEM_TRACE_FUNC( SECT_ );
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    KIT_SYSTEM_TRACE_FUNC( SECT_ );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     //     
     Null fd;
@@ -63,7 +63,7 @@ TEST_CASE( "null", "[null]" )
     REQUIRE( fd.read( dummyChar ) == false );
     REQUIRE( dummyChar == 29 );
 
-    Cpl::Text::FString<10> buffer( "bob" );
+    Kit::Text::FString<10> buffer( "bob" );
     REQUIRE( fd.read( buffer ) == false );
     REQUIRE( buffer == "" );
 
@@ -93,46 +93,9 @@ TEST_CASE( "null", "[null]" )
     Null orange;
     Null cherry;
 
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("apple=%p,  inPtr=%p, outPtr=%p, inOutPtr=%p", &apple, (Input*) &apple, (Output*) &apple, (InputOutput*) &apple) );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("orange=%p, inPtr=%p, outPtr=%p, inOutPtr=%p", &orange, (Input*) &orange, (Output*) &orange, (InputOutput*) &orange) );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("cherry=%p, inPtr=%p, outPtr=%p, inOutPtr=%p", &cherry, (Input*) &cherry, (Output*) &cherry, (InputOutput*) &cherry) );
-
-    Cpl::Container::SList<Input>        inlist;
-    Cpl::Container::SList<Output>       outlist;
-    Cpl::Container::SList<InputOutput>  iolist;
-
-    inlist.put( apple );
-    outlist.put( orange );
-    iolist.put( cherry );
-
-    // Should generate fatal errors
-    inlist.put( cherry );
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 1u );
-    outlist.put( apple );
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 1u );
-    iolist.put( orange );
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 1u );
-
-    // Empty the list
-    REQUIRE( inlist.get() != 0 );
-    REQUIRE( inlist.get() == 0 );
-    REQUIRE( outlist.get() != 0 );
-    REQUIRE( outlist.get() == 0 );
-    REQUIRE( iolist.get() != 0 );
-    REQUIRE( iolist.get() == 0 );
-
-    // Try different lists
-    iolist.put( apple );
-    inlist.put( orange );
-    outlist.put( cherry );
-
-    // Empty the list
-    REQUIRE( inlist.get() != 0 );
-    REQUIRE( inlist.get() == 0 );
-    REQUIRE( outlist.get() != 0 );
-    REQUIRE( outlist.get() == 0 );
-    REQUIRE( iolist.get() != 0 );
-    REQUIRE( iolist.get() == 0 );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "apple=%p,  inPtr=%p, outPtr=%p, inOutPtr=%p", &apple, (IInput*) &apple, (IOutput*) &apple, (IInputOutput*) &apple) ;
+    KIT_SYSTEM_TRACE_MSG( SECT_, "orange=%p, inPtr=%p, outPtr=%p, inOutPtr=%p", &orange, (IInput*) &orange, (IOutput*) &orange, (IInputOutput*) &orange) ;
+    KIT_SYSTEM_TRACE_MSG( SECT_, "cherry=%p, inPtr=%p, outPtr=%p, inOutPtr=%p", &cherry, (IInput*) &cherry, (IOutput*) &cherry, (IInputOutput*) &cherry) ;
 
 
     // I don't have a useful concrete streams to test the following -->but I can at least make sure they compile & link
@@ -141,16 +104,6 @@ TEST_CASE( "null", "[null]" )
     REQUIRE( writer.println( "Hello World" ) );
     LineReader reader( fd2 );
     REQUIRE( reader.readln( buffer ) == false );
-
-    // I don't have a useful concrete streams to test the following -->but I can at least make sure they compile & link
-    Cpl::System::Mutex      mylock;
-    MyContext               testContext;
-    AtomicOutput<MyContext> atomicfd( fd2, mylock );
-    REQUIRE( atomicfd.write( "hello world" ) );
-    REQUIRE( atomicfd.requestOutputs( testContext, &MyContext::testOutputs ) );
-    REQUIRE( testContext.m_count == 1 );
-    REQUIRE( atomicfd.requestOutputs( testContext, &MyContext::testOutputs ) );
-    REQUIRE( testContext.m_count == 2 );
 
     // I don't have a useful concrete streams to test the following -->but I can at least make sure they compile & link
     TeeOutput many( apple, cherry );
@@ -168,13 +121,13 @@ TEST_CASE( "null", "[null]" )
     REQUIRE( many.write( "[Should fail!]" ) == false );
 
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
-TEST_CASE( "close", "[close]" )
+TEST_CASE( "close" )
 {
-    CPL_SYSTEM_TRACE_FUNC( SECT_ );
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    KIT_SYSTEM_TRACE_FUNC( SECT_ );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     //     
     Null fd;
@@ -193,26 +146,17 @@ TEST_CASE( "close", "[close]" )
     LineWriter writer( fd2 );
     REQUIRE( writer.println( "Hello World" ) == false );
     LineReader reader( fd2 );
-    Cpl::Text::FString<10> buffer( "bob" );
+    Kit::Text::FString<10> buffer( "bob" );
     REQUIRE( reader.readln( buffer ) == false );
 
-    // I don't have a useful concrete streams to test the following -->but I can at least make sure they compile & link
-    Cpl::System::Mutex      mylock;
-    MyContext               testContext;
-    AtomicOutput<MyContext> atomicfd( fd2, mylock );
-    REQUIRE( atomicfd.write( "hello world" ) == false );
-    REQUIRE( atomicfd.requestOutputs( testContext, &MyContext::testOutputs ) == false );
-    REQUIRE( testContext.m_count == 1 );
-    REQUIRE( atomicfd.requestOutputs( testContext, &MyContext::testOutputs ) == false );
-    REQUIRE( testContext.m_count == 2 );
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
-TEST_CASE( "TeeOutput", "[TeeOutput]" )
+TEST_CASE( "TeeOutput" )
 {
-    CPL_SYSTEM_TRACE_FUNC( SECT_ );
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    KIT_SYSTEM_TRACE_FUNC( SECT_ );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     SECTION( "basic" )
     {
@@ -248,11 +192,9 @@ TEST_CASE( "TeeOutput", "[TeeOutput]" )
         many.add( orange );
         REQUIRE( many.write( "[World! (apple, cherry, orange)]" ) == false );
         many.flush();
-        REQUIRE( many.removeAndGetNextFailed(apple) == &cherry );
-        REQUIRE( many.write( "[Goodbye! (cherry, orange)]" ) == true );
         many.close();
         REQUIRE( many.write( "[Should fail!]" ) == false );
     }
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

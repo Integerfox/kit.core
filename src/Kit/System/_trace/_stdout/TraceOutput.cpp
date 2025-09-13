@@ -22,7 +22,7 @@ static Kit::Io::Stdio::StdOut fd_;
 
 
 ////////////////////////////////////////////////////////////////////////////////
-Kit::Io::Output* Trace::getDefaultOutputStream_( void ) noexcept
+Kit::Io::Output* Trace::getDefaultOutputStream_() noexcept
 {
     return &fd_;
 }

@@ -49,7 +49,7 @@ public:
     void flush() noexcept override;
 
     /// See Cpl::Io::IEos
-    bool isEos() const noexcept override;
+    bool isEos()  noexcept override;
 
     /// See Cpl::Io::IClose
     void close() noexcept override;

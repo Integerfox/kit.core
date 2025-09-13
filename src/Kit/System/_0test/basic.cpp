@@ -105,7 +105,7 @@ public:
     }
 
     /// Override default implementation
-    void pleaseStop( void ) noexcept override
+    void pleaseStop() noexcept override
     {
         if ( m_parentThreadPtr_ != nullptr )
         {

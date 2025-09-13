@@ -32,10 +32,10 @@ class PrivateLocks
 {
 public:
     /// Global mutex for use for interfaces/class in the Kit::System namespace
-    static Mutex& system( void );
+    static Mutex& system();
 
     /// Same as 'system', except usage is for 'long' critical sections (i.e. walking lists, printing, etc.)
-    static Mutex& sysLists( void );
+    static Mutex& sysLists();
 
     /** Global mutex for use for tracing sub-system.  This mutex is to protect 
         the Trace engine's internal/meta data.  This mutex is NOT used to guard
@@ -44,10 +44,10 @@ public:
         not cause high priority threads to block on the trace output when their
         trace statements are not enabled at run time.
      */
-    static Mutex& tracing( void );
+    static Mutex& tracing();
 
     /// Global mutex for use for the tracing sub-system OUTPUT (see above for more details)
-    static Mutex& tracingOutput( void );
+    static Mutex& tracingOutput();
 };
 
 /** This class defines the interface to the platform specific implementation of the

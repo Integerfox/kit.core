@@ -33,7 +33,7 @@ void Trace::redirect_( Kit::Io::Output& newMedia )
 }
 
 
-void Trace::revert_( void )
+void Trace::revert_()
 {
     Locks_::tracing().lock();
     activePtr_ = getDefaultOutputStream_();

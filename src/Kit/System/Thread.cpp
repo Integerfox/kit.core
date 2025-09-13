@@ -34,12 +34,12 @@ KitSystemThreadID_T Thread::getId() const noexcept
     return m_nativeThreadHdl;
 }
 
-bool Thread::isActive( void ) const noexcept
+bool Thread::isActive() const noexcept
 {
     return threadList_.find( *this );
 }
 
-IRunnable& Thread::getRunnable( void ) const noexcept
+IRunnable& Thread::getRunnable() const noexcept
 {
     return m_runnable;
 }

@@ -27,13 +27,13 @@ Kit::System::Mutex::~Mutex()
     pthread_mutex_destroy( &m_mutex );
 }
 
-void Kit::System::Mutex::lock( void )
+void Kit::System::Mutex::lock()
 {
     pthread_mutex_lock( &m_mutex );
 }
 
 
-void Kit::System::Mutex::unlock( void )
+void Kit::System::Mutex::unlock()
 {
     pthread_mutex_unlock( &m_mutex );
 }

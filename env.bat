@@ -31,6 +31,8 @@ doskey fixx=%NQBP_BIN%\other\fixx.py $*
 doskey setexe=git update-index --chmod=+x $*
 doskey ports=reg query HKLM\HARDWARE\DEVICEMAP\SERIALCOMM
 doskey map=%NQBP_PKG_ROOT%scripts\colony.core\map.py $*
+doskey tcar=%NQBP_PKG_ROOT%\top\tca2.py $*
+
 ::doskey lcov=perl %LCOV_BIN_PATH%\lcov
 ::doskey genhtml=perl %LCOV_BIN_PATH%\genhtml
 

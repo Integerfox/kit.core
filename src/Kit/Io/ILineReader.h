@@ -11,7 +11,6 @@
 /** @file */
 
 #include "Kit/Text/IString.h"
-#include "Kit/Container/ListItem.h"
 
 
 ///
@@ -26,7 +25,7 @@ namespace Io {
     newline. The actual newline character(s) are handled by the interface
     and the client is not aware of the actual newline implementation.
  */
-class ILineReader : public Kit::Container::ListItem
+class ILineReader 
 {
 public:
     /** Reads a single line from the stream.  If the line is greater than the

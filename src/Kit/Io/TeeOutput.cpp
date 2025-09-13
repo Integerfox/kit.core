@@ -9,7 +9,6 @@
 /** @file */
 
 #include "TeeOutput.h"
-#include "Kit/Io/IOutput.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -19,66 +18,105 @@ namespace Io {
 TeeOutput::TeeOutput() noexcept
     : m_opened( true )
 {
+    memset( m_streams, 0, sizeof( m_streams ) );
+    memset( m_failed, 0, sizeof( m_failed ) );
 }
 
 TeeOutput::TeeOutput( IOutput& streamA ) noexcept
-    : m_opened( true )
+    : TeeOutput()
 {
-    m_streams.put( streamA );
+    m_streams[0] = &streamA;
 }
 
 TeeOutput::TeeOutput( IOutput& streamA, IOutput& streamB ) noexcept
-    : m_opened( true )
+    : TeeOutput()
 {
-    m_streams.put( streamA );
-    m_streams.put( streamB );
+    m_streams[0] = &streamA;
+    m_streams[1] = &streamB;
 }
 
 ///////////////////////////////
-void TeeOutput::add( IOutput& stream ) noexcept
-{
-    m_streams.put( stream );
-}
-
 bool TeeOutput::remove( IOutput& stream ) noexcept
 {
-    if ( !m_streams.remove( stream ) )
+    if ( !remove( m_streams, stream ) )
     {
-        return m_failed.remove( stream );
+        return remove( m_failed, stream );
     }
-
     return true;
 }
 
-///////////////////////////////
-IOutput* TeeOutput::firstFailed() noexcept
+bool TeeOutput::add( IOutput** streamList, IOutput& stream ) noexcept
 {
-    return m_failed.first();
-}
-
-IOutput* TeeOutput::nextFailed( IOutput& currentFailedStream ) noexcept
-{
-    return m_failed.next( currentFailedStream );
-}
-
-
-IOutput* TeeOutput::removeAndGetNextFailed( IOutput& currentFailedStream ) noexcept
-{
-    IOutput* next = m_failed.next( currentFailedStream );
-    if ( !m_failed.remove( currentFailedStream ) )
+    // Find an empty slot
+    for ( unsigned i = 0; i < MAX_STREAMS; ++i )
     {
-        return nullptr;
+        if ( streamList[i] == nullptr )
+        {
+            streamList[i] = &stream;
+            return true;
+        }
     }
 
-    return next;
+    // No empty slot found
+    return false;
 }
 
+bool TeeOutput::remove( IOutput** streamList, IOutput& stream ) noexcept
+{
+    for ( unsigned i = 0; i < MAX_STREAMS; ++i )
+    {
+        if ( streamList[i] == &stream )
+        {
+            streamList[i] = nullptr;
+            return true;
+        }
+    }
+
+    return false;
+}
 
 ///////////////////////////////
-bool TeeOutput::write( const void* buffer, int maxBytes, int& bytesWritten ) noexcept
+IOutput* TeeOutput::first( IOutput** streamList ) const noexcept
+{
+    for ( unsigned i = 0; i < MAX_STREAMS; ++i )
+    {
+        if ( streamList[i] != nullptr )
+        {
+            return streamList[i];
+        }
+    }
+
+    return nullptr;
+}
+
+IOutput* TeeOutput::next( IOutput** streamList, IOutput& currentStream ) const noexcept
+{
+    bool startIdxFound = false;
+    for ( unsigned i = 0; i < MAX_STREAMS; ++i )
+    {
+        if ( !startIdxFound )
+        {
+            if ( streamList[i] == &currentStream )
+            {
+                startIdxFound = true;
+            }
+            continue;
+        }
+
+        if ( m_failed[i] != nullptr )
+        {
+            return m_failed[i];
+        }
+    }
+
+    return nullptr;
+}
+
+///////////////////////////////
+bool TeeOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
 {
     bool     rc     = true;
-    IOutput* stream = m_streams.first();
+    IOutput* stream = first( m_streams );
 
     // Handle the special case of NO output streams
     if ( stream == nullptr )
@@ -92,18 +130,21 @@ bool TeeOutput::write( const void* buffer, int maxBytes, int& bytesWritten ) noe
     bytesWritten = 0;
 
     // Loop through all active streams
-    while ( stream )
+    for( unsigned i=0; i<MAX_STREAMS; ++i )
     {
-        // Cache the next stream in the 'active list'
-        IOutput* next = m_streams.next( *stream );
+        IOutput* stream = m_streams[i];
+        if ( stream == nullptr )
+        {
+            continue;
+        }
 
         // IOutput to stream -->and trap any error
-        int tempWritten;
+        ByteCount_T tempWritten;
         if ( !stream->write( buffer, maxBytes, tempWritten ) )
         {
             // move the stream with an error to the failed list
-            m_streams.remove( *stream );
-            m_failed.put( *stream );
+            remove( m_streams, *stream );
+            add( m_failed, *stream );
             rc = false;
         }
 
@@ -115,9 +156,6 @@ bool TeeOutput::write( const void* buffer, int maxBytes, int& bytesWritten ) noe
                 bytesWritten = tempWritten;
             }
         }
-
-        // Continue with the next stream in the active list
-        stream = next;
     }
 
     return rc;
@@ -126,29 +164,28 @@ bool TeeOutput::write( const void* buffer, int maxBytes, int& bytesWritten ) noe
 
 void TeeOutput::flush() noexcept
 {
-    IOutput* stream = m_streams.first();
-    while ( stream )
+    for ( unsigned i = 0; i < MAX_STREAMS; ++i )
     {
-        stream->flush();
-        stream = m_streams.next( *stream );
+        if ( m_streams[i] )
+        {
+            m_streams[i]->flush();
+        }
     }
 }
 
-bool TeeOutput::isEos() const noexcept
+bool TeeOutput::isEos()  noexcept
 {
-    bool     rc     = false;
-    IOutput* stream = m_streams.first();
-    while ( stream )
+    bool rc = false;
+    for ( unsigned i = 0; i < MAX_STREAMS; ++i )
     {
-        IOutput* next = m_streams.next( *stream );
-        if ( stream->isEos() )
+        auto* stream = m_streams[i];
+        if ( stream && !stream->isEos() )
         {
             // move the stream with an error to the failed list
-            m_streams.remove( *stream );
-            m_failed.put( *stream );
+            remove( m_streams, *stream );
+            add( m_failed, *stream );
             rc = true;
         }
-        stream = next;
     }
 
     return rc;
@@ -161,20 +198,17 @@ void TeeOutput::close() noexcept
         // Remember that I am closed
         m_opened = false;
 
-        // Close my active streams
-        IOutput* stream = m_streams.first();
-        while ( stream )
+        // Close all the streams (both good and failed)
+        for(unsigned i=0; i<MAX_STREAMS; ++i)
         {
-            stream->close();
-            stream = m_streams.next( *stream );
-        }
-
-        // Close any failed streams
-        stream = m_failed.first();
-        while ( stream )
-        {
-            stream->close();
-            stream = m_failed.next( *stream );
+            if ( m_streams[i] != nullptr )
+            {
+                m_streams[i]->close();
+            }
+            if ( m_failed[i] != nullptr )
+            {
+                m_failed[i]->close();
+            }
         }
     }
 }

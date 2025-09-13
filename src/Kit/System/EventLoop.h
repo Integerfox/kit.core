@@ -102,7 +102,7 @@ protected:
         Example appRun() for a child class extending the Event Loop:
         @code
 
-        void ChildEventLoop::entry( void )
+        void ChildEventLoop::entry()
         {
             startEventLoop();
             <child specific initialization>
@@ -134,10 +134,10 @@ protected:
 
 public:
     /// See Cpl::System::ISignable
-    int signal( void ) noexcept override;
+    int signal() noexcept override;
 
     /// See Cpl::System::ISignable
-    int su_signal( void ) noexcept override;
+    int su_signal() noexcept override;
 
 
 public:

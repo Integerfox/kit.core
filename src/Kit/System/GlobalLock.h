@@ -41,12 +41,12 @@ public:
         thread currently "owns" the lock, the current thread will "wait" until it
         can obtain ownership before proceeding.
      */
-    void static begin( void );
+    void static begin();
 
     /** This method is invoke at the end of a critical section.  This call will
         release the ownership of the lock.
      */
-    void static end( void );
+    void static end();
 
 };
 

@@ -27,13 +27,13 @@ public:
         unblock and ready to run.  This method can ONLY be called from
         a thread context. The method returns zero on success.
      */
-    virtual int signal( void ) noexcept = 0;
+    virtual int signal() noexcept = 0;
 
     /** Same as signal(), EXCEPT this method can ONLY be called from
         supervisor mode and/or ISR contexts.  The method returns zero on
         success.
      */
-    virtual int su_signal( void ) noexcept = 0;
+    virtual int su_signal() noexcept = 0;
 
 public:
     /// Virtual destructor
