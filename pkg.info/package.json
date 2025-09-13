@@ -3,23 +3,6 @@
     "strong": [],
     "weak": [
       {
-        "pkgname": "catch2",
-        "pkgtype": "readonly",
-        "virtualAdoption": false,
-        "adoptedDate": "Sat Jul 26 21:49:01 2025",
-        "parentDir": "xpkgs",
-        "version": {
-          "semanticVersion": null,
-          "branch": null,
-          "tag": "v3.7.1"
-        },
-        "repo": {
-          "name": "catch2",
-          "type": "git",
-          "origin": "https://github.com/catchorg"
-        }
-      },
-      {
         "pkgname": "nqbp2",
         "pkgtype": "readonly",
         "virtualAdoption": false,
@@ -51,6 +34,23 @@
           "name": "outcast",
           "type": "git",
           "origin": "https://github.com/johnttaylor"
+        }
+      },
+      {
+        "pkgname": "catch2",
+        "pkgtype": "readonly",
+        "virtualAdoption": false,
+        "adoptedDate": "Thu Sep 11 00:23:58 2025",
+        "parentDir": "xpkgs",
+        "version": {
+          "semanticVersion": null,
+          "branch": null,
+          "tag": "v3.10.0"
+        },
+        "repo": {
+          "name": "catch2",
+          "type": "git",
+          "origin": "https://github.com/catchorg"
         }
       }
     ]

@@ -123,7 +123,7 @@ specs. You can:
     This allows test cases that are tagged with **either** "[some-tag]" **or**
     "[other-tag]". A test case with both will obviously also pass the filter.
 
-    Note that commas take precendence over simple concatenation. This means
+    Note that commas take precedence over simple concatenation. This means
     that `[a][b],[c]` accepts tests that are tagged with either both "[a]" and
     "[b]", or tests that are tagged with just "[c]".
 
@@ -398,18 +398,24 @@ use test specs to filter this list down to what you want first.
 Test cases are ordered one of three ways:
 
 ### decl
-Declaration order (this is the default order if no --order argument is provided).
+Declaration order.
+
 Tests in the same translation unit are sorted using their declaration orders,
 different TUs are sorted in an implementation (linking) dependent order.
 
 
 ### lex
-Lexicographic order. Tests are sorted by their name, their tags are ignored.
+Lexicographic order.
+
+Tests are sorted by their name, their tags are ignored.
 
 
 ### rand
+Randomized order. The default order.
 
-Randomly ordered. The order is dependent on Catch2's random seed (see
+> Randomized order has been made default in Catch2 3.9.0
+
+The order is dependent on Catch2's random seed (see
 [`--rng-seed`](#rng-seed)), and is subset invariant. What this means
 is that as long as the random seed is fixed, running only some tests
 (e.g. via tag) does not change their relative order.

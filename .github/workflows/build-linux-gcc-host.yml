@@ -56,11 +56,10 @@ jobs:
       - name: Run Doxygen
         run: |
           echo "Running Doxygen..."
-          rm -rf ./docs/html
-          mkdir -p ./docs/html
+          rm -rf ./docs/publish/doxygen
+          mkdir -p ./docs/publish/doxygen
           cd ./top
           ./run_doxygen.py ${{ github.ref_name }} ${{ github.run_number }} nochm
-          ls ../docs/html
         
       # Build PRs
       - name: Run build script - for PRs
@@ -82,4 +81,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/html
+          publish_dir: ./docs/publish
