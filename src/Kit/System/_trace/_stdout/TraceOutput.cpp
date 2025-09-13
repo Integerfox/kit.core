@@ -7,9 +7,6 @@
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
 
-// TODO: Implement tracing via Kit::Io::Output streams
-
- #if 0
 #include "Kit/System/Trace.h"
 #include "Kit/Io/Stdio/StdOut.h"
 
@@ -22,8 +19,7 @@ static Kit::Io::Stdio::StdOut fd_;
 
 
 ////////////////////////////////////////////////////////////////////////////////
-Kit::Io::Output* Trace::getDefaultOutputStream_() noexcept
+Kit::Io::IOutput* Trace::getDefaultOutputStream_() noexcept
 {
     return &fd_;
 }
-#endif

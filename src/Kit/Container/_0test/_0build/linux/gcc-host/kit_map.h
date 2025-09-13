@@ -17,3 +17,6 @@
 
 // strapi mapping
 #include "Kit/Text/_mappings/_posix/strapi.h"
+
+// IO mapping
+#include "Kit/Io/_mappings/_posix/mappings.h"

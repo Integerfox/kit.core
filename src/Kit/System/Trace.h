@@ -82,7 +82,7 @@
 #include "kit_config.h"
 #include "Kit/Text/IString.h"
 #include "Kit/System/printfchecker.h"
-// #include "Kit/Io/Output.h"
+#include "Kit/Io/IOutput.h"
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -481,8 +481,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    // TODO: Implement Kit::IO::Stream for trace output
-    // static void redirect_( Kit::Io::Output& newMedia );
+    static void redirect_( Kit::Io::IOutput& newMedia );
 
     /** This method is used to revert the trace output to its default output
         destination/stream/media. There is no guaranty on what happens to trace
@@ -492,8 +491,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    // TODO: Implement Kit::IO::Stream for trace output
-    // static void revert_();
+    static void revert_();
 
 public:
     /** This COMPONENT Scoped method provides the Output stream to the Trace
@@ -504,8 +502,7 @@ public:
 
         NOTE: The Application is RESPONSIBLE for implementing this method!
      */
-    // TODO: Implement Kit::IO::Stream for trace output
-    // static Kit::Io::Output* getDefaultOutputStream_() noexcept;
+    static Kit::Io::IOutput* getDefaultOutputStream_() noexcept;
 
 
 protected:
