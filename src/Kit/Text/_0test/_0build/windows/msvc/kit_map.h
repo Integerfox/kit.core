@@ -18,3 +18,6 @@
 
 // strapi mapping
 #include "Kit/Text/_mappings/_msvc/strapi.h"
+
+// IO mapping
+#include "Kit/Io/_mappings/_win32/mappings.h"

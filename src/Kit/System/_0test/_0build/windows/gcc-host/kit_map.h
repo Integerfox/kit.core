@@ -18,3 +18,5 @@
 // strapi mapping
 #include "Kit/Text/_mappings/_mingw/strapi.h"
 
+// IO mapping
+#include "Kit/Io/_mappings/_win32/mappings.h"
