@@ -14,7 +14,7 @@ def run_test( subdir ):
     utils.push_dir( subdir )
     src = os.path.join( my_globals.NQBP_WORK_ROOT(), my_globals.NQBP_PKG_ROOT(), 'src', 'Kit', 'Io', 'Stdio', '_0test', 'testinput.txt' )
     print( f"Running unit test dir: {subdir} ..." )
-    p = subprocess.Popen( f'cat {src}| b.out', shell=True )
+    p = subprocess.Popen( f'cat {src}| b.exe', shell=True )
     p.communicate()
     if ( p.returncode != 0 ):
         exit( "FAILED test" )

@@ -13,7 +13,7 @@
 */
 
 // OSAL mappings
-#include "Kit/System/Posix/mappings_.h"
+#include "Kit/System/Posix/mappings.h"
 
 // strapi mapping
 #include "Kit/Text/_mappings/_posix/strapi.h"

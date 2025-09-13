@@ -8,13 +8,12 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Io/Stdio/StdIn.h"
-#include <unistd.h>
+#include "Kit/Io/Stdio/StdOut.h"
 
 //
 using namespace Kit::Io::Stdio;
 
-StdIn::StdIn()
-    :InputDelegate( STDIN_FILENO )
+StdOut::StdOut()
+    :OutputDelegate( GetStdHandle( STD_OUTPUT_HANDLE ) )
 {
 }

@@ -8,13 +8,12 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Io/Stdio/StdIn.h"
-#include <unistd.h>
+#include "Kit/Io/Stdio/StdErr.h"
 
 //
 using namespace Kit::Io::Stdio;
 
-StdIn::StdIn()
-    :InputDelegate( STDIN_FILENO )
+StdErr::StdErr()
+    :OutputDelegate( GetStdHandle( STD_ERROR_HANDLE ) )
 {
 }

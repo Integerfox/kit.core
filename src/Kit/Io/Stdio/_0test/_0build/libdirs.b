@@ -1,5 +1,5 @@
 src/Kit/Io
-src/Kit/Io/Stdio
+#src/Kit/Io/Stdio # no actual .cpp files
 src/Kit/Io/Stdio/_0test
 
 src/Kit/System

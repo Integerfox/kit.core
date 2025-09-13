@@ -68,7 +68,7 @@ public:
     }
 
     /// Flushes the file descriptor 'fd'
-    static void flush( int fd )
+    static void flush( int fd ) noexcept
     {
         // Ignore if the stream has been CLOSED!
         if ( fd != INVALID_FD )
@@ -79,7 +79,7 @@ public:
 
     /** Returns true if the file descriptor is in the open state
      */
-    static bool isOpened( int fd )
+    static bool isOpened( int fd )noexcept
     {
         return fd != INVALID_FD;
     }
@@ -87,7 +87,7 @@ public:
     /** Closes the file descriptor 'fd'. If 'fd' is already closed (i.e. INVALID_FD),
         the method is a NOP.  Upon a successful close, 'fd' is set to INVALID_FD.
      */
-    static void close( int& fd )
+    static void close( int& fd ) noexcept
     {
         if ( fd != INVALID_FD )
         {
@@ -132,7 +132,7 @@ public:
 
     /** Returns true if there is data available to be read from the file descriptor
      */
-    static bool available( int fd )
+    static bool available( int fd ) noexcept
     {
         // Trap that the stream has been CLOSED!
         if ( fd == INVALID_FD )
