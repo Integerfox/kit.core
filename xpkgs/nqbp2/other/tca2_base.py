@@ -103,7 +103,7 @@ def run( prj_dir, argv):
     # Generate for CI
     elif args['ci'] or args['ciview']:
         # Generate HTML report
-        generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir'], "xpkgs/"] )
+        generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir'], "xpkgs/", "_testsupport/"] )
         generate_html_report( LCOV_OFILE, args['--html-dir'], args )
 
         if args['ciview']:

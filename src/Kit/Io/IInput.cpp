@@ -58,6 +58,7 @@ bool IInput::read( Kit::Text::IString& destString, ByteCount_T numBytesToRead ) 
     {
         buffer[maxlen] = '\0';  // Ensure the string is terminated if there was an error
     }
+
     return result;
 }
 

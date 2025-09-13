@@ -34,14 +34,21 @@ TEST_CASE( "basic" )
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Reading Lines..." );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Reading raw ..." );
     StdIn                 in2fd;
-    Kit::Io::LineReader   reader( in2fd );
+    Kit::Text::FString<3> partialLine;
     Kit::Text::FString<6> line;
+    REQUIRE( in2fd.read( partialLine, 6 ) );
+    REQUIRE( partialLine == "lin" );
+    REQUIRE( in2fd.read( line, 2) );
+    REQUIRE( line == "e " );
+
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Reading Lines..." );
+    Kit::Io::LineReader   reader( in2fd );
     REQUIRE( reader.available() == true );
     reader.readln( line );
     KIT_SYSTEM_TRACE_MSG( SECT_, "line=[%s]", line.getString() );
-    REQUIRE( line == "line 1" );
+    REQUIRE( line == "1" );
     REQUIRE( reader.readln( line ) );
     KIT_SYSTEM_TRACE_MSG( SECT_, "line=[%s]", line.getString() );
     REQUIRE( line == "line 2" );
@@ -103,19 +110,22 @@ TEST_CASE( "basic" )
 
     outfd.flush();
     outfd.close();
-    REQUIRE( outfd.write( 'a' ) == false); 
+    REQUIRE( outfd.write( 'a' ) == false );
 
     //
+    Kit::Text::FString<20> myBuffer2;
     StdOut out2fd;
     REQUIRE( out2fd.write( myBuffer, 0, bytesWritten ) == true );
     REQUIRE( bytesWritten == 0 );
     Kit::Io::LineWriter writer( out2fd );
     REQUIRE( writer.println() );
     REQUIRE( writer.println( "Hello World" ) );
-    REQUIRE( writer.print( "Hello" ) );
-    REQUIRE( writer.print( "World" ) );
-    REQUIRE( writer.print( " again!" ) );
-    REQUIRE( writer.println() );
+    REQUIRE( writer.print( "Hello", 3 ) );
+    REQUIRE( writer.print( "lo ", 3 ) );
+    REQUIRE( writer.print( myBuffer2, "%s %s", "World", "again" ) );
+    REQUIRE( writer.println( myBuffer2, "%s","!" ) );
+    REQUIRE( writer.println( "Hello World", 5 ) );
+
     writer.flush();
     writer.close();
     REQUIRE( writer.println() == false );
