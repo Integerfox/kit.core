@@ -4,7 +4,7 @@
 #include <chrono>
 #include <cstdint>
 
-extern uint32_t getNativeTimestamp( void );
+extern uint32_t getNativeTimestamp();
 
 int main( int argc, char* argv[] )
 {
@@ -22,7 +22,7 @@ int main( int argc, char* argv[] )
 
 // Native timestamp - since KIT's elapsed time uses the IStartupHook interface.  
 // Must support a duration of at least 10s, with at least 1ms resolution
-uint32_t getNativeTimestamp( void )
+uint32_t getNativeTimestamp()
 {
     auto now = std::chrono::system_clock::now();
     auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();

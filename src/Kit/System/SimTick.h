@@ -235,7 +235,7 @@ public:
         macro KIT_SYSTEM_SIM_TICK_TOP_LEVEL_WAIT().  This allows the simulate
         tick code to be compiled out of production versions of the application.
      */
-    static void topLevelWait( void ) noexcept;
+    static void topLevelWait() noexcept;
 
     /** This method returns true if the current thread is using 'simulated time'
 
@@ -243,7 +243,7 @@ public:
         macro KIT_SYSTEM_SIM_TICK_USING_SIM_TICKS().  This allows the simulate tick
         code to be compiled out of production versions of the application.
      */
-    static bool usingSimTicks( void ) noexcept;
+    static bool usingSimTicks() noexcept;
 
     /** This method is used to support blocking calls (such as wait on semaphore,
         sleep(), etc.) within an individual iteration of thread's top level
@@ -254,11 +254,11 @@ public:
         macro KIT_SYSTEM_SIM_TICK_APPLICATION_WAIT().  This allows the simulate
         tick code to be compiled out of production versions of the application.
      */
-    static void applicationWait( void ) noexcept;
+    static void applicationWait() noexcept;
 
     /** This method returns the current simulated tick count
      */
-    static uint64_t current( void ) noexcept;
+    static uint64_t current() noexcept;
 
 
 public:
@@ -296,7 +296,7 @@ public:
         necessary hooks (per thread) for the simulate tick engine. This
         method SHOULD NEVER be called by the application.
      */
-    static void onThreadExit_( void ) noexcept;
+    static void onThreadExit_() noexcept;
 
 
 protected:
@@ -321,10 +321,10 @@ protected:
     static bool testAndQueue( SimTick* simInfoPtr ) noexcept;
 
     /// Helper method.
-    static unsigned wakeUpWaiters( void ) noexcept;
+    static unsigned wakeUpWaiters() noexcept;
 
     /// Helper method.
-    static unsigned getCurrentWaitersCount( void ) noexcept;
+    static unsigned getCurrentWaitersCount() noexcept;
 
     /// Friend(s)
     friend class ElapsedTime;

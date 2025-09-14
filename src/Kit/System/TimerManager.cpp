@@ -29,12 +29,12 @@ TimerManager::TimerManager()
 }
 
 /////////////////////////////
-void TimerManager::startManager( void ) noexcept
+void TimerManager::startManager() noexcept
 {
     m_timeNow = m_timeMark = ElapsedTime::milliseconds();
 }
 
-void TimerManager::processTimers( void ) noexcept
+void TimerManager::processTimers() noexcept
 {
     // Calculate the elapsed time in milliseconds since we last checked the timers
     m_timeNow          = ElapsedTime::milliseconds();
@@ -91,7 +91,7 @@ void TimerManager::tick( uint32_t msec ) noexcept
     }
 }
 
-void TimerManager::tickComplete( void ) noexcept
+void TimerManager::tickComplete() noexcept
 {
     // Append the pending attach list to the active list
     ICounter* pendingClientPtr = m_pendingAttach.get();
@@ -143,7 +143,7 @@ void TimerManager::addToActiveList( ICounter& clientToCallback ) noexcept
 }
 
 /////////////////////////////////////
-bool TimerManager::areActiveTimers( void ) const noexcept
+bool TimerManager::areActiveTimers() const noexcept
 {
     return m_counters.first() != nullptr;
 }

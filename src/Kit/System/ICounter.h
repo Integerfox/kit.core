@@ -29,7 +29,7 @@ class ICounter : public Kit::Container::ExtendedListItem
 {
 public:
     /// Notification of the count reaching zero
-    virtual void expired( void ) noexcept = 0;
+    virtual void expired() noexcept = 0;
 
     /// Decrements the counter
     virtual void decrement( uint32_t milliseconds=1 ) noexcept = 0;

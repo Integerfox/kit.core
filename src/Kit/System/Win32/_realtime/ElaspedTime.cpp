@@ -17,12 +17,12 @@ namespace System {
 
 
 /////////////////////////////////////////////////////////////////
-uint32_t ElapsedTime::milliseconds( void ) noexcept
+uint32_t ElapsedTime::milliseconds() noexcept
 {
     return millisecondsInRealTime();
 }
 
-uint64_t ElapsedTime::millisecondsEx( void ) noexcept
+uint64_t ElapsedTime::millisecondsEx() noexcept
 {
     return millisecondsInRealTimeEx();
 }

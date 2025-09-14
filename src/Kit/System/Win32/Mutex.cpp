@@ -22,13 +22,13 @@ Kit::System::Mutex::~Mutex()
     DeleteCriticalSection( &m_mutex );
 }
 
-void Kit::System::Mutex::lock( void )
+void Kit::System::Mutex::lock()
 {
     EnterCriticalSection( &m_mutex );
 }
 
 
-void Kit::System::Mutex::unlock( void )
+void Kit::System::Mutex::unlock()
 {
     LeaveCriticalSection( &m_mutex );
 }

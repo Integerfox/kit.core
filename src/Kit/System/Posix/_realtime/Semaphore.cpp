@@ -17,7 +17,7 @@ namespace System {
 
 
 //////////////////////////////////////////////////
-void Semaphore::wait( void ) noexcept
+void Semaphore::wait() noexcept
 {
     sem_wait( &m_sema );
 }

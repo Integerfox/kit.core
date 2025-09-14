@@ -15,8 +15,9 @@
 
  */
 
+/// Prevents min/max macros from windows.h
 #ifndef NOMINMAX
-#define NOMINMAX  // Prevents min/max macros from windows.h
+#define NOMINMAX
 #endif
 
 #include <windows.h>
@@ -64,16 +65,6 @@ inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
     return (uint32_t)clock();
 }
-
-
-/// Win32 Mapping
-#define KIT_IO_NEW_LINE_NATIVE_MAP "\015\012"
-
-/// Win32 Mapping
-#define KIT_IO_FILE_NATIVE_DIR_SEP_MAP '\\'
-
-/// Win32 Mapping
-#define KIT_IO_FILE_MAX_NAME_MAP _MAX_PATH
 
 
 /// Thread Priorities

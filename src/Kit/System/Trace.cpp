@@ -100,21 +100,21 @@ void Trace::traceUserMsg_( const char* format, ... )
 
 
 ////////////////////////////////////////////////////////////////////////
-void Trace::enable_( void )
+void Trace::enable_()
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     enabled_ = true;
 }
 
 
-void Trace::disable_( void )
+void Trace::disable_()
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     enabled_ = false;
 }
 
 
-bool Trace::isEnabled_( void )
+bool Trace::isEnabled_()
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     bool             result = enabled_;
@@ -130,7 +130,7 @@ Trace::InfoLevel_T Trace::setInfoLevel_( Trace::InfoLevel_T newLevel )
     return previous;
 }
 
-Trace::InfoLevel_T Trace::getInfoLevel_( void ) noexcept
+Trace::InfoLevel_T Trace::getInfoLevel_() noexcept
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     InfoLevel_T      current = infoLevel_;
@@ -266,7 +266,7 @@ void Trace::setThreadFilter_( const char* threadName1,
     threadFilters_[3] = threadName4;
 }
 
-void Trace::clearThreadFilter_( void )
+void Trace::clearThreadFilter_()
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     threadFilterEnabled_ = false;

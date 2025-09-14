@@ -61,10 +61,10 @@ public:
 
 public:
     /// See Kit::System::ISignable
-    int signal( void ) noexcept override;
+    int signal() noexcept override;
 
     /// See Kit::System::ISignable
-    int su_signal( void ) noexcept override;
+    int su_signal() noexcept override;
 
 
 

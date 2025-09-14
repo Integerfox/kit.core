@@ -21,7 +21,7 @@
 using namespace Kit::System;
 
 // Native timestamp - since KIT's elapsed time uses the IStartupHook interface.  Must support a duration of at least 10s, with at least 1ms resolution
-extern uint32_t getNativeTimestamp( void );
+extern uint32_t getNativeTimestamp();
 
 //////////////////////////////////////////////
 namespace {  // anonymous namespace

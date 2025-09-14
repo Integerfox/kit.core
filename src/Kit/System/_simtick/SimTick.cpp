@@ -34,7 +34,7 @@ static Kit::Container::SList<SimTick> waiters_;
 
 
 /////////////////////////////////////////
-unsigned SimTick::wakeUpWaiters( void ) noexcept
+unsigned SimTick::wakeUpWaiters() noexcept
 {
     unsigned waiters    = 0;
     SimTick* simInfoPtr = waiters_.get();
@@ -48,7 +48,7 @@ unsigned SimTick::wakeUpWaiters( void ) noexcept
     return waiters;
 }
 
-unsigned SimTick::getCurrentWaitersCount( void ) noexcept
+unsigned SimTick::getCurrentWaitersCount() noexcept
 {
     unsigned waiters    = 0;
     SimTick* simInfoPtr = waiters_.first();
@@ -98,7 +98,7 @@ bool SimTick::advance( uint64_t numTicks ) noexcept
 }
 
 
-void SimTick::applicationWait( void ) noexcept
+void SimTick::applicationWait() noexcept
 {
     // Get my thread's SimInfo
     auto* simInfoPtr = static_cast<SimTick*>( simTlsPtr_->get() );
@@ -118,7 +118,7 @@ void SimTick::applicationWait( void ) noexcept
 }
 
 
-void SimTick::topLevelWait( void ) noexcept
+void SimTick::topLevelWait() noexcept
 {
     // Get my thread's SimInfo
     auto* simInfoPtr = static_cast<SimTick*>( simTlsPtr_->get() );
@@ -203,7 +203,7 @@ bool SimTick::usingSimTicks() noexcept
 }
 
 
-uint64_t SimTick::current( void ) noexcept
+uint64_t SimTick::current() noexcept
 {
     Mutex::ScopeLock criticalSection( myLock_ );
     return milliseconds_;
@@ -241,7 +241,7 @@ void SimTick::threadInit_( bool useSimTicks ) noexcept
 }
 
 
-void SimTick::onThreadExit_( void ) noexcept
+void SimTick::onThreadExit_() noexcept
 {
     // If I have not yet created the TLS key/index -->then NO threads are using simulated time
     if ( simTlsPtr_ )
@@ -318,12 +318,12 @@ void sleep( uint32_t milliseconds ) noexcept
 
 
 ///////////////////////////////////////////////////////////////
-uint32_t ElapsedTime::milliseconds( void ) noexcept
+uint32_t ElapsedTime::milliseconds() noexcept
 {
     return static_cast<uint32_t>( millisecondsEx() );
 }
 
-uint64_t ElapsedTime::millisecondsEx( void ) noexcept
+uint64_t ElapsedTime::millisecondsEx() noexcept
 {
     // If I have not yet created the TLS key/index -->then NO threads are using simulated time
     if ( simTlsPtr_ == nullptr )
