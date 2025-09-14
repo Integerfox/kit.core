@@ -164,7 +164,7 @@ public:
 
 public:
     ///
-    void timer1Expired( void ) noexcept
+    void timer1Expired() noexcept
     {
         // Capture stats
         uint32_t elasped = ElapsedTime::deltaMilliseconds( m_startTime1 );
@@ -188,7 +188,7 @@ public:
         m_timer1.start( m_timer1Duration );
     }
 
-    void timer2Expired( void ) noexcept
+    void timer2Expired() noexcept
     {
         // Capture stats
         uint32_t elasped = ElapsedTime::deltaMilliseconds( m_startTime2 );
@@ -298,7 +298,7 @@ public:
         , m_waiter( waiter )
     {
     }
-    void expired( void ) noexcept
+    void expired() noexcept
     {
         KIT_SYSTEM_TRACE_MSG( SECT_, "----- Stopping Timer Sequence...." );
         m_appObj1.stop();
@@ -309,7 +309,7 @@ public:
 
 public:
     ///
-    uint32_t getEventFlagsMask( void ) const noexcept
+    uint32_t getEventFlagsMask() const noexcept
     {
         return START_EVENT_MASK;
     }

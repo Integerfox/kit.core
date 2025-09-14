@@ -33,6 +33,10 @@ jobs:
           python-version: '3.12' 
       - run: pip install -r top/gha-requirements.txt
 
+      # Setup lcov for code coverage
+      - name: Setup LCOV
+        uses: hrishikesh-kadam/setup-lcov@v1
+        
       # Ninja setup
       - uses: seanmiddleditch/gha-setup-ninja@master
         with:

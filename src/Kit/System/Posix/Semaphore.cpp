@@ -30,24 +30,24 @@ Semaphore::~Semaphore()
     sem_destroy( &m_sema );
 }
 
-int Semaphore::signal( void ) noexcept
+int Semaphore::signal() noexcept
 {
     return sem_post( &m_sema );
 }
 
-int Semaphore::su_signal( void ) noexcept
+int Semaphore::su_signal() noexcept
 {
     // TODO: Add log unexpected error/event since this isn't really supported
     return sem_post( &m_sema );
 }
 
-bool Semaphore::tryWait( void ) noexcept
+bool Semaphore::tryWait() noexcept
 {
     int result = sem_trywait( &m_sema );
     return result == -1 && errno == EAGAIN ? false : true;
 }
 
-void Semaphore::waitInRealTime( void ) noexcept
+void Semaphore::waitInRealTime() noexcept
 {
     sem_wait( &m_sema );
 }

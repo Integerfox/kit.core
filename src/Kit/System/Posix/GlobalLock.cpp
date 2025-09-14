@@ -17,13 +17,13 @@ namespace System {
 static Mutex global_;
 
 //////////////////////////////////////////////////////////////////////////////
-void GlobalLock::begin( void )
+void GlobalLock::begin()
 {
     global_.lock();
 }
 
 
-void GlobalLock::end( void )
+void GlobalLock::end()
 {
     global_.unlock();
 }

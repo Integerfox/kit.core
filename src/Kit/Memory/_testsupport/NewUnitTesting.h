@@ -38,13 +38,13 @@ public:
     /** This method will cause the next call(s) to 'new' to return a
         null pointer.
      */
-    static void disable( void ) noexcept;
+    static void disable() noexcept;
 
     /** This method 'undos' the disable() call, i.e. the next call(s) to
         new will succeed (assuming there is actual heap memory available).
         This is the default/startup state of the Test heap.
      */
-    static void enable( void ) noexcept;
+    static void enable() noexcept;
 
     /** This method is used to set the 'expected' delta between the number
         of calls to new and delete.  The default is a delta of zero, i.e.

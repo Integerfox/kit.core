@@ -51,15 +51,6 @@
 /// Mapping
 #define KitSystemSema_T_MAP                     sem_t
 
-/// Mapping
-#define KIT_IO_NEW_LINE_NATIVE_MAP              "\n"
-
-/// Mapping
-#define KIT_IO_FILE_NATIVE_DIR_SEP_MAP          '/'
-
-/// Mapping
-#define KIT_IO_FILE_MAX_NAME_MAP                PATH_MAX
-
 
 /// Mapping
 inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()

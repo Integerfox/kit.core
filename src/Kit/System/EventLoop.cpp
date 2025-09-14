@@ -119,12 +119,12 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
 }
 
 //////////////////////////////////////
-int EventLoop::signal( void ) noexcept
+int EventLoop::signal() noexcept
 {
     return m_sema.signal();
 }
 
-int EventLoop::su_signal( void ) noexcept
+int EventLoop::su_signal() noexcept
 {
     return m_sema.su_signal();
 }

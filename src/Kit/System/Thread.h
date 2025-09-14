@@ -101,12 +101,12 @@ public:
 
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
-    virtual bool isActive( void ) const noexcept;
+    virtual bool isActive() const noexcept;
 
     /** This method returns a reference to the thread's IRunnable object
         NOTE: Default implementation is provided in the Thread.cpp file.
      */
-    virtual IRunnable& getRunnable( void ) const noexcept;
+    virtual IRunnable& getRunnable() const noexcept;
 
     /// Virtual destructor.
     virtual ~Thread() noexcept = default;

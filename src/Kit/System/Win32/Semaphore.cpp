@@ -26,23 +26,23 @@ Semaphore::~Semaphore()
     CloseHandle( m_sema );
 }
 
-int Semaphore::signal( void ) noexcept
+int Semaphore::signal() noexcept
 {
     return ReleaseSemaphore( m_sema, 1, 0 ) ? 0 : -1;
 }
 
-int Semaphore::su_signal( void ) noexcept
+int Semaphore::su_signal() noexcept
 {
     return ReleaseSemaphore( m_sema, 1, 0 ) ? 0 : -1;
 }
 
-bool Semaphore::tryWait( void ) noexcept
+bool Semaphore::tryWait() noexcept
 {
     DWORD result = WaitForSingleObject( m_sema, 0L );
     return result == WAIT_OBJECT_0 ? true : false;
 }
 
-void Semaphore::waitInRealTime( void ) noexcept
+void Semaphore::waitInRealTime() noexcept
 {
     WaitForSingleObject( m_sema, INFINITE );
 }

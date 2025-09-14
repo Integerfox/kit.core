@@ -22,7 +22,7 @@ bool Semaphore::timedWait( uint32_t timeout ) noexcept
     return result == WAIT_OBJECT_0 ? true : false;
 }
 
-void Semaphore::wait( void ) noexcept
+void Semaphore::wait() noexcept
 {
     WaitForSingleObject( m_sema, INFINITE );
 }

@@ -154,10 +154,10 @@ protected:  // Helper methods
     inline int calcMemSize( int len ) noexcept { return ( ( len + m_blockSize ) / m_blockSize ) * m_blockSize; }
 
     /// Frees the current string memory - IF it was previously allocated
-    void freeCurrentString( void ) noexcept;
+    void freeCurrentString() noexcept;
 
     /// Returns the max length of internal WITHOUT the '\0' string terminator
-    inline int maxStrLen( void ) const noexcept { return m_storageLen - 1; }
+    inline int maxStrLen() const noexcept { return m_storageLen - 1; }
 
     /// Validates the just created string is 'valid'
     void validateAndCopy( const char* string, int len ) noexcept;

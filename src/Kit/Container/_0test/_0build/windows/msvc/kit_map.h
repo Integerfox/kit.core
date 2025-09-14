@@ -14,7 +14,10 @@
 
 
 // OSAL mappings
-#include "Kit/System/Win32/mappings_.h"
+#include "Kit/System/Win32/mappings.h"
 
 // strapi mapping
 #include "Kit/Text/_mappings/_msvc/strapi.h"
+
+// IO mapping
+#include "Kit/Io/_mappings/_win32/mappings.h"

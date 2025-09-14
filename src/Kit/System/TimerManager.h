@@ -42,15 +42,15 @@ public:
         This method must be called from the same thread that the Timer Manager
         executes in.
      */
-    virtual void startManager( void ) noexcept;
+    virtual void startManager() noexcept;
 
     /** This method processes the current active timer lists.  For each timer
         that has expired, the timer's context callback method is called.
      */
-    virtual void processTimers( void ) noexcept;
+    virtual void processTimers() noexcept;
 
     /// Returns true if there is at least one active timer
-    virtual bool areActiveTimers( void ) const noexcept;
+    virtual bool areActiveTimers() const noexcept;
 
 
 public:
@@ -79,7 +79,7 @@ protected:
     /** This method is used by the Tick source to information the Timer Manager
         that there are no more ticks for the timing source's current tick cycle
      */
-    virtual void tickComplete( void ) noexcept;
+    virtual void tickComplete() noexcept;
 
 protected:
     /// List of active counters. Points to a physical list.

@@ -133,10 +133,10 @@ TEST_CASE( "EventLoopWithPScheduling" )
         Thread*                  testThread = Thread::create( uut, "TEST" );
         REQUIRE( testThread != nullptr );
         sleep( TEST_DURATION_IN_MSEC );
+        REQUIRE( endLoopCount_ == 0 );
         uut.pleaseStop();
 
         REQUIRE( startLoopCount_ == 1 );
-        REQUIRE( endLoopCount_ <= 1 );
         REQUIRE( appleCount_ >= 10 );
         REQUIRE( appleCount_ <= ( TEST_DURATION_IN_MSEC / 10 ) + 1 );
         REQUIRE( orangeCount_ >= 1 );

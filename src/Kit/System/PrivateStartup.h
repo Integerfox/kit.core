@@ -80,7 +80,7 @@ public:
     /** This method is intended to be USED ONLY by the Kit::System::Api::init()
         method to trigger all of the registered init callbacks.
      */
-    static void notifyStartupClients( void )  noexcept;
+    static void notifyStartupClients()  noexcept;
 };
 
 

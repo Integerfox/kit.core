@@ -54,7 +54,7 @@ void IStartupHook::registerHook( IStartupHook& callbackInstance, InitLevel initO
     }
 }
 
-void IStartupHook::notifyStartupClients( void ) noexcept
+void IStartupHook::notifyStartupClients() noexcept
 {
     // NOTE: The assumption is that no thread protection is required since
     //       there should only be one caller to the initialize() method.

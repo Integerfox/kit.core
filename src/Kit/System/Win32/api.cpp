@@ -56,23 +56,23 @@ void resumeScheduling() noexcept
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Mutex& PrivateLocks::system( void )
+Mutex& PrivateLocks::system()
 {
     return systemMutex_;
 }
 
 
-Mutex& PrivateLocks::tracing( void )
+Mutex& PrivateLocks::tracing()
 {
     return tracingMutex_;
 }
 
-Mutex& PrivateLocks::sysLists( void )
+Mutex& PrivateLocks::sysLists()
 {
     return sysList_;
 }
 
-Mutex& PrivateLocks::tracingOutput( void )
+Mutex& PrivateLocks::tracingOutput()
 {
     return tracingOutputMutex_;
 }

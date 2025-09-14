@@ -36,6 +36,14 @@
 *.zip
 .gdbinit
 
+# Other build relates stuffs
+.ninja_*
+build.ninja
+*.gcno
+*.gcda
+.coverage.info
+.html-report/
+
 # e2studio junk
 .metadata
 

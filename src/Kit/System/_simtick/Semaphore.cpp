@@ -50,7 +50,7 @@ bool Semaphore::timedWait( uint32_t milliseconds ) noexcept
 }
 
 
-void Semaphore::wait( void ) noexcept
+void Semaphore::wait() noexcept
 {
     // If not a simulated-tick thread -->do a 'regular Semaphore wait
     if ( !SimTick::usingSimTicks() )

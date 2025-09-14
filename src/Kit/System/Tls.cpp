@@ -27,7 +27,7 @@ static KitSystemTlsIndex_T nextTlsIndex_;  // This guarantied to be initialized 
 #define FAILURE static_cast<KitSystemTlsIndex_T>( -1 )
 
 /////////////////////////////////////////////////////////
-Tls::Tls( void )
+Tls::Tls()
     : m_keyIdx( FAILURE )  // Assume failure
 {
     Kit::System::PrivateLocks::system().lock();
@@ -57,7 +57,7 @@ Tls::~Tls()
 
 
 /////////////////////////////////////////////////////////
-void* Tls::get( void ) const noexcept
+void* Tls::get() const noexcept
 {
     // Get access to thread object TLS array
     Thread& myThread = Thread::getCurrent();

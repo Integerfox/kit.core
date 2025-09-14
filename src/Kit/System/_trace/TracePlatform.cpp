@@ -7,6 +7,7 @@
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
 
+#include "Kit/System/Mutex.h"
 #include "Kit/System/Thread.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/api.h"
@@ -22,33 +23,26 @@ namespace System {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// TODO: Implement tracing via Kit::Io::Output streams
-#if 0
-//static Kit::Io::Output* activePtr_ = Trace::getDefaultOutputStream_();
-void Trace::redirect_( Kit::Io::Output& newMedia )
+static Kit::Io::IOutput* activePtr_ = Trace::getDefaultOutputStream_();
+
+void Trace::redirect_( Kit::Io::IOutput& newMedia )
 {
-    Locks_::tracing().lock();
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     activePtr_ = &newMedia;
-    Locks_::tracing().unlock();
 }
 
 
-void Trace::revert_( void )
+void Trace::revert_()
 {
-    Locks_::tracing().lock();
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     activePtr_ = getDefaultOutputStream_();
-    Locks_::tracing().unlock();
 }
-#endif
 
 
 ////////////////////////////////////////////////////////////////////////////////
 void PrivateTracePlatform::output( Kit::Text::IString& src )
 {
-    printf( "%s", src.getString() );
-
-    // TODO: Implement tracing via Kit::Io::Output streams
-    // activePtr_->write( src.getString() );
+    activePtr_->write( src.getString() );
 }
 
 

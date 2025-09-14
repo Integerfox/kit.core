@@ -71,7 +71,7 @@ public:
 
 public:
     /// See Kit::System::ITls
-    void* get( void ) const noexcept;
+    void* get() const noexcept;
 
     /// See Kit::System::ITls
     void set( void* newValue ) noexcept;
