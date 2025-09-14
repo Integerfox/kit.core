@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - System/IRunnable.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">System</a> - IRunnable.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">71.4&nbsp;%</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">5</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-09-14 16:20:12</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">3</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : #ifndef KIT_SYSTEM_RUNNABLE_H_</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : #define KIT_SYSTEM_RUNNABLE_H_</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  *</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : </span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : ///</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : namespace Kit {</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             : ///</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : namespace System {</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : </span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : </span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : /// Forward class reference to avoid a circular dependency.</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : class Thread;</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : </span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : </span>
+<span id="L23"><span class="lineNum">      23</span>                 :             : /** This mostly an abstract class defines the interface for an object that is </span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :     &quot;executed&quot; when a Thread object is created.</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :  */</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             : class IRunnable</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : {</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             : public:</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             :     /** This method is called when the Thread is started.  If this function </span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :         returns, the Thread will be terminated. A child class is responsible for</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             :         implementing the entry() method. </span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :      */</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :     virtual void entry() noexcept = 0;</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             : </span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :     /** This method is a request to have the runnable object terminate itself.</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :         This is only a request, it is not a requirement of a runnable object to</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :         oblige the request.  Some runnable objects are just not 'built' to</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :         handle a such a request.  On the other hand, a runnable object such as a</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :         EventServer is, and should make every attempt to comply with the request.</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             : </span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :         NOTES:</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             : </span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :             1) This a low-level terminate request in that it does not understand</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :                the &quot;semantics&quot; of what the thread is currently doing.  It simply</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             :                attempts to exit the entry() method.  The system must first shutdown</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :                the &quot;application usage&quot; of the thread BEFORE calling this method.</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :             2) This method is an attempted work-around for terminating threads,</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :                by having the thread run itself to completion. Not all OSes</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :                support a polite way (i.e. reclaiming resource, memory, etc.) of</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :                killing threads.</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :      */</span>
+<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     virtual void pleaseStop() noexcept {}</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : </span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :     /** This method returns a pointer to the Thread object that is executing </span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :         the IRunnable instance.  The pointer will be nullptr if the thread has</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :         not started execution (i.e. before entry() is called) AND after the </span>
+<span id="L57"><span class="lineNum">      57</span>                 :             :         thread has terminated (i.e. after entry() returns)</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :      */</span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaUNC">           0 :     virtual Thread* getThread() noexcept</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :     {</span>
+<span id="L61"><span class="lineNum">      61</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">           3 :         return m_parentThreadPtr_;</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
+<span id="L62"><span class="lineNum">      62</span>                 :             :     }</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             : </span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : public:</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :     /// Virtual destructor</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             :     virtual ~IRunnable() noexcept = default;</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             : </span>
+<span id="L68"><span class="lineNum">      68</span>                 :             : protected:</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             :     /// Constructor</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :     IRunnable() noexcept</span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          19 :         : m_parentThreadPtr_( nullptr )</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :     {</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             :     }</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             : </span>
+<span id="L75"><span class="lineNum">      75</span>                 :             : protected:</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :     /// Allow the Thread access to the IRunnable object</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :     friend class Thread;</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             : </span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :     /** This method allows the Thread class to provide the IRunnable object a</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :         reference to the thread it is executing in.</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :         </span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :         NOTE: This method is intended for internal use by the Thread class ONLY.</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             :     */</span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">          40 :     virtual void setThread( Thread* thread ) noexcept</span></span>
+<span id="L85"><span class="lineNum">      85</span>                 :             :     {</span>
+<span id="L86"><span class="lineNum">      86</span>                 :<span class="tlaGNC">          44 :         m_parentThreadPtr_ = thread;</span></span>
+<span id="L87"><span class="lineNum">      87</span>                 :<span class="tlaGNC">          40 :     }</span></span>
+<span id="L88"><span class="lineNum">      88</span>                 :             : </span>
+<span id="L89"><span class="lineNum">      89</span>                 :             : protected:</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             :     /// A back-reference to the thread that the runnable object is executing in</span>
+<span id="L91"><span class="lineNum">      91</span>                 :             :     Thread* m_parentThreadPtr_;</span>
+<span id="L92"><span class="lineNum">      92</span>                 :             : };</span>
+<span id="L93"><span class="lineNum">      93</span>                 :             : </span>
+<span id="L94"><span class="lineNum">      94</span>                 :             : }       // end namespaces</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             : }</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

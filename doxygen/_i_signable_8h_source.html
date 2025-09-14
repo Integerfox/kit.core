@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 50-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 54-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -77,17 +77,17 @@ $(function() {
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">        unblock and ready to run.  This method can ONLY be called from</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">        a thread context. The method returns zero on success.</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_signable.html#a0d1289918c497a8a78af393887ac0ea9">   30</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_signable.html#a0d1289918c497a8a78af393887ac0ea9">signal</a>( <span class="keywordtype">void</span> ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_signable.html#a72c130b85d33277148381e554908ffb6">   30</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_signable.html#a72c130b85d33277148381e554908ffb6">signal</a>() noexcept = 0;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">    /** Same as signal(), EXCEPT this method can ONLY be called from</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">        supervisor mode and/or ISR contexts.  The method returns zero on</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">        success.</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_signable.html#a7519f895f74e05eb851ee6636dcd2bde">   36</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_signable.html#a7519f895f74e05eb851ee6636dcd2bde">su_signal</a>( <span class="keywordtype">void</span> ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_signable.html#af4e2c4865999347547d60b525b2b9d1a">   36</a></span>    virtual <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_signable.html#af4e2c4865999347547d60b525b2b9d1a">su_signal</a>() noexcept = 0;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>public:<span class="comment"></span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">    /// Virtual destructor</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_signable.html#a2bc4d6efa5aa693c6e560bb0effc252a">   40</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_signable.html#a2bc4d6efa5aa693c6e560bb0effc252a">~ISignable</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_signable.html#a2bc4d6efa5aa693c6e560bb0effc252a">   40</a></span><span class="comment"></span>    virtual ~<a class="code hl_class" href="class_kit_1_1_system_1_1_i_signable.html">ISignable</a>() = default;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>};</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
@@ -95,14 +95,13 @@ $(function() {
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a></div><div class="ttdoc">This abstract class defines the interface by which a client can cause an object that is waiting-on-a-...</div><div class="ttdef"><b>Definition</b> ISignable.h:24</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html_a0d1289918c497a8a78af393887ac0ea9"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html#a0d1289918c497a8a78af393887ac0ea9">Kit::System::ISignable::signal</a></div><div class="ttdeci">virtual int signal(void) noexcept=0</div><div class="ttdoc">This method is called by client to cause the server to become unblock and ready to run.</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html_a2bc4d6efa5aa693c6e560bb0effc252a"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html#a2bc4d6efa5aa693c6e560bb0effc252a">Kit::System::ISignable::~ISignable</a></div><div class="ttdeci">virtual ~ISignable()=default</div><div class="ttdoc">Virtual destructor.</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html_a7519f895f74e05eb851ee6636dcd2bde"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html#a7519f895f74e05eb851ee6636dcd2bde">Kit::System::ISignable::su_signal</a></div><div class="ttdeci">virtual int su_signal(void) noexcept=0</div><div class="ttdoc">Same as signal(), EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html_a72c130b85d33277148381e554908ffb6"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html#a72c130b85d33277148381e554908ffb6">Kit::System::ISignable::signal</a></div><div class="ttdeci">virtual int signal() noexcept=0</div><div class="ttdoc">This method is called by client to cause the server to become unblock and ready to run.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html_af4e2c4865999347547d60b525b2b9d1a"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html#af4e2c4865999347547d60b525b2b9d1a">Kit::System::ISignable::su_signal</a></div><div class="ttdeci">virtual int su_signal() noexcept=0</div><div class="ttdoc">Same as signal(), EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">The 'Kit' namespace is the root name space for the KIT C++ class library that is specifically target ...</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 13 2025 17:27:21 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 14 2025 16:18:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

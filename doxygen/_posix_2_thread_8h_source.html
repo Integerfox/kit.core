@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 50-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 54-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -124,10 +124,10 @@ $(function() {
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>public:<span class="comment"></span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">    /// See Kit::System::ISignable</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a479907e219ce44db4867bf4ffc350153">   77</a></span><span class="comment"></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a479907e219ce44db4867bf4ffc350153">signal</a>( <span class="keywordtype">void</span> ) noexcept override;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7444b24fcb5e2601403d80b9cb6323b7">   77</a></span><span class="comment"></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7444b24fcb5e2601403d80b9cb6323b7">signal</a>() noexcept override;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"></span> </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">    /// See Kit::System::ISignable</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a021d84579ca1abd3233820e053a82d8c">   80</a></span><span class="comment"></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a021d84579ca1abd3233820e053a82d8c">su_signal</a>( <span class="keywordtype">void</span> ) noexcept override;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#aa26531e94531d70dc51e41e045c7ef76">   80</a></span><span class="comment"></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#aa26531e94531d70dc51e41e045c7ef76">su_signal</a>() noexcept override;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>protected:<span class="comment"></span></div>
@@ -164,11 +164,11 @@ $(function() {
 <div class="ttc" id="a_thread_8h_html_ac880fe51a701f3ea6b1c2085ee78cdb6"><div class="ttname"><a href="_thread_8h.html#ac880fe51a701f3ea6b1c2085ee78cdb6">KIT_SYSTEM_THREAD_PRIORITY_NORMAL</a></div><div class="ttdeci">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL</div><div class="ttdoc">The recommended/default priority for a thread.</div><div class="ttdef"><b>Definition</b> Thread.h:32</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_runnable_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_runnable.html">Kit::System::IRunnable</a></div><div class="ttdoc">This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob...</div><div class="ttdef"><b>Definition</b> IRunnable.h:27</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html">Kit::System::Posix::Thread</a></div><div class="ttdoc">This concrete class implements a Thread object using Posix threads.</div><div class="ttdef"><b>Definition</b> Thread.h:38</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a021d84579ca1abd3233820e053a82d8c"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a021d84579ca1abd3233820e053a82d8c">Kit::System::Posix::Thread::su_signal</a></div><div class="ttdeci">int su_signal(void) noexcept override</div><div class="ttdoc">See Kit::System::ISignable.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a45834b19337055c042dcbe31d717d590"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a45834b19337055c042dcbe31d717d590">Kit::System::Posix::Thread::m_syncSema</a></div><div class="ttdeci">Kit::System::Semaphore m_syncSema</div><div class="ttdoc">The thread synchronized message semaphore.</div><div class="ttdef"><b>Definition</b> Thread.h:99</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a479907e219ce44db4867bf4ffc350153"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a479907e219ce44db4867bf4ffc350153">Kit::System::Posix::Thread::signal</a></div><div class="ttdeci">int signal(void) noexcept override</div><div class="ttdoc">See Kit::System::ISignable.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a7444b24fcb5e2601403d80b9cb6323b7"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7444b24fcb5e2601403d80b9cb6323b7">Kit::System::Posix::Thread::signal</a></div><div class="ttdeci">int signal() noexcept override</div><div class="ttdoc">See Kit::System::ISignable.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a7867ea4fa8071cf4be58b8b912014a9d"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">Kit::System::Posix::Thread::m_name</a></div><div class="ttdeci">Kit::Text::FString&lt; 64 &gt; m_name</div><div class="ttdoc">ASCII name of the task.</div><div class="ttdef"><b>Definition</b> Thread.h:96</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a81a9528d927f3601cdd1539830148b9a"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a81a9528d927f3601cdd1539830148b9a">Kit::System::Posix::Thread::Thread</a></div><div class="ttdeci">Thread(IRunnable &amp;runnable, const char *name, int priority=KIT_SYSTEM_THREAD_PRIORITY_NORMAL, unsigned stackSize=0, int schedType=SCHED_OTHER, bool allowSimTicks=true)</div><div class="ttdoc">Constructor.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_aa26531e94531d70dc51e41e045c7ef76"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#aa26531e94531d70dc51e41e045c7ef76">Kit::System::Posix::Thread::su_signal</a></div><div class="ttdeci">int su_signal() noexcept override</div><div class="ttdoc">See Kit::System::ISignable.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_ab2ee85562d557e9320c2927b42165493"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#ab2ee85562d557e9320c2927b42165493">Kit::System::Posix::Thread::entryPoint</a></div><div class="ttdeci">static void * entryPoint(void *data)</div><div class="ttdoc">Entry point for all newly created threads.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_ac2712e01d6c57a1545d41a978d4526ff"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#ac2712e01d6c57a1545d41a978d4526ff">Kit::System::Posix::Thread::getName</a></div><div class="ttdeci">const char * getName() const noexcept override</div><div class="ttdoc">See Kit::System::Thread.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_af73953d82d73ab904dedc6c67329d187"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#af73953d82d73ab904dedc6c67329d187">Kit::System::Posix::Thread::~Thread</a></div><div class="ttdeci">~Thread()</div><div class="ttdoc">Destructor.</div></div>
@@ -178,7 +178,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 13 2025 17:27:21 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 14 2025 16:18:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

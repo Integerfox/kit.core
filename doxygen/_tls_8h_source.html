@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 50-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 54-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -121,28 +121,28 @@ $(function() {
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">    /// See Kit::System::ITls</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_tls.html#a45e456f58d28ae44a96f7f5a5970c6ae">   74</a></span><span class="comment"></span>    <span class="keywordtype">void</span>* <a class="code hl_function" href="class_kit_1_1_system_1_1_tls.html#a45e456f58d28ae44a96f7f5a5970c6ae">get</a>( <span class="keywordtype">void</span> ) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_tls.html#afc1b4b3123fbddf1e7258d31d0f664d0">   74</a></span><span class="comment"></span>    <span class="keywordtype">void</span>* <a class="code hl_function" href="class_kit_1_1_system_1_1_tls.html#afc1b4b3123fbddf1e7258d31d0f664d0">get</a>() const noexcept;</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">    /// See Kit::System::ITls</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_tls.html#a63408a1d81a1649a86151a9dda61a836">   77</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_tls.html#a63408a1d81a1649a86151a9dda61a836">set</a>( <span class="keywordtype">void</span>* newValue ) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_tls.html#a63408a1d81a1649a86151a9dda61a836">   77</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_tls.html#a63408a1d81a1649a86151a9dda61a836">set</a>( <span class="keywordtype">void</span>* newValue ) noexcept;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">protected</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>protected:<span class="comment"></span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">    /// Raw TLS key/handle/index</span></div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_tls.html#a28c93edb52a9a96d63ceed497cdd9d8d">   82</a></span><span class="comment"></span>    <a class="code hl_define" href="_tls_8h.html#ae18093342f97665135b57505dc0b8f1a">KitSystemTlsIndex_T</a> <a class="code hl_variable" href="class_kit_1_1_system_1_1_tls.html#a28c93edb52a9a96d63ceed497cdd9d8d">m_keyIdx</a>;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>private:<span class="comment"></span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">    /// Prevent access to the copy constructor --&gt;TLS instances can not be copied!</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_system_1_1_tls.html#ae6837a10d11213e5a9ba76a0fa859782">Tls</a>( <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp; m ) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>( const <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp; m ) = delete;</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"></span> </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">    /// Prevent access to the assignment operator --&gt;TLS instances can not be copied!</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"></span>    <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp; operator=( <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp; m ) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"></span>    const <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp; operator=( const <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp; m ) = delete;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">    /// Prevent access to the move constructor --&gt;TLS instances can not be implicitly moved!</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_system_1_1_tls.html#ae6837a10d11213e5a9ba76a0fa859782">Tls</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp;&amp; m ) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp;&amp; m ) = delete;</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"></span> </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">    /// Prevent access to the move assignment operator --&gt;TLS instances can not be implicitly moved!</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp; operator=( <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp;&amp; m ) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp; operator=( <a class="code hl_class" href="class_kit_1_1_system_1_1_tls.html">Tls</a>&amp;&amp; m ) = delete;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>};</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
@@ -153,15 +153,15 @@ $(function() {
 <div class="ttc" id="a_tls_8h_html_ae18093342f97665135b57505dc0b8f1a"><div class="ttname"><a href="_tls_8h.html#ae18093342f97665135b57505dc0b8f1a">KitSystemTlsIndex_T</a></div><div class="ttdeci">#define KitSystemTlsIndex_T</div><div class="ttdoc">Default type of for TLS index.</div><div class="ttdef"><b>Definition</b> Tls.h:21</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_tls_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_tls.html">Kit::System::Tls</a></div><div class="ttdoc">This concrete interface defines a interface for Thread Local Storage (TLS).</div><div class="ttdef"><b>Definition</b> Tls.h:64</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_tls_html_a28c93edb52a9a96d63ceed497cdd9d8d"><div class="ttname"><a href="class_kit_1_1_system_1_1_tls.html#a28c93edb52a9a96d63ceed497cdd9d8d">Kit::System::Tls::m_keyIdx</a></div><div class="ttdeci">KitSystemTlsIndex_T m_keyIdx</div><div class="ttdoc">Raw TLS key/handle/index.</div><div class="ttdef"><b>Definition</b> Tls.h:82</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_tls_html_a45e456f58d28ae44a96f7f5a5970c6ae"><div class="ttname"><a href="class_kit_1_1_system_1_1_tls.html#a45e456f58d28ae44a96f7f5a5970c6ae">Kit::System::Tls::get</a></div><div class="ttdeci">void * get(void) const noexcept</div><div class="ttdoc">See Kit::System::ITls.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_tls_html_a5e92bb5fc2c5b968cf8f6a853eb094de"><div class="ttname"><a href="class_kit_1_1_system_1_1_tls.html#a5e92bb5fc2c5b968cf8f6a853eb094de">Kit::System::Tls::~Tls</a></div><div class="ttdeci">~Tls()</div><div class="ttdoc">Destructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_tls_html_a63408a1d81a1649a86151a9dda61a836"><div class="ttname"><a href="class_kit_1_1_system_1_1_tls.html#a63408a1d81a1649a86151a9dda61a836">Kit::System::Tls::set</a></div><div class="ttdeci">void set(void *newValue) noexcept</div><div class="ttdoc">See Kit::System::ITls.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_tls_html_ae6837a10d11213e5a9ba76a0fa859782"><div class="ttname"><a href="class_kit_1_1_system_1_1_tls.html#ae6837a10d11213e5a9ba76a0fa859782">Kit::System::Tls::Tls</a></div><div class="ttdeci">Tls()</div><div class="ttdoc">Constructor.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_tls_html_afc1b4b3123fbddf1e7258d31d0f664d0"><div class="ttname"><a href="class_kit_1_1_system_1_1_tls.html#afc1b4b3123fbddf1e7258d31d0f664d0">Kit::System::Tls::get</a></div><div class="ttdeci">void * get() const noexcept</div><div class="ttdoc">See Kit::System::ITls.</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">The 'Kit' namespace is the root name space for the KIT C++ class library that is specifically target ...</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 13 2025 17:27:21 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 14 2025 16:18:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

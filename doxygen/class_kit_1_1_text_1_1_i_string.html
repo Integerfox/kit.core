@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 50-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 54-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -790,7 +790,9 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns a "writable" pointer to the string's internal storage. </p>
-<p>The caller is RESPONSIBLE for insuring that the string is left in a valid state - that is the string is NULL terminated and has NOT exceeded the 'maxAllowedLength'. Also The pointer and length have a VERY LIMITED life span - the values become invalid when any of the another string methods are called! NOTE: This method always clears the 'truncated' flags/status. </p><pre class="fragment">THIS METHOD SHOULD BE USED WITH EXTREME CAUTION AND AVOIDED WHENEVER POSSIBLE! ***
+<p>The caller is RESPONSIBLE for insuring that the string is left in a valid state - that is the string is NULL terminated and has NOT exceeded the 'maxAllowedLength'. The 'maxAllowedLength' value is same value that is returned by the <a class="el" href="#a26d60d45f4d0ffc684acfdd778ae10d9" title="Returns the max allowed size of the string.">maxLength()</a> method.</p>
+<p>The pointer and length have a VERY LIMITED life span - the values become invalid when any of the another string methods are called!</p>
+<p>NOTE: This method always clears the 'truncated' flags/status. </p><pre class="fragment">THIS METHOD SHOULD BE USED WITH EXTREME CAUTION AND AVOIDED WHENEVER POSSIBLE! ***
 </pre> 
 <p>Implemented in <a class="el" href="class_kit_1_1_text_1_1_string_base.html#a155ec4ccd43a6efcbc98974f41fd2377">Kit::Text::StringBase</a>.</p>
 
@@ -2413,7 +2415,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 13 2025 17:27:22 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 14 2025 16:18:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

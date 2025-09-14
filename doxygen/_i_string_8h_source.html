@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 50-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 54-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -442,50 +442,53 @@ $(function() {
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span><span class="comment">    /** Returns a &quot;writable&quot; pointer to the string&#39;s internal storage.</span></div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span><span class="comment">        The caller is RESPONSIBLE for insuring that the string is</span></div>
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="comment">        left in a valid state - that is the string is NULL terminated</span></div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="comment">        and has NOT exceeded the &#39;maxAllowedLength&#39;.  Also The pointer</span></div>
-<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="comment">        and length have a VERY LIMITED life span - the values become</span></div>
-<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="comment">        invalid when any of the another string methods are called!</span></div>
-<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="comment">        NOTE: This method always clears the &#39;truncated&#39; flags/status.</span></div>
-<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="comment"></span> </div>
-<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="comment">        *** THIS METHOD SHOULD BE USED WITH EXTREME CAUTION AND AVOIDED WHENEVER POSSIBLE! ***</span></div>
-<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00402" name="l00402"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#a2c0098daf5cbac29b47e298a5a429acb">  402</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="class_kit_1_1_text_1_1_i_string.html#a2c0098daf5cbac29b47e298a5a429acb">getBuffer</a>( <span class="keywordtype">int</span>&amp; maxAllowedLength ) <span class="keyword">noexcept</span> = 0;</div>
-<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
-<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span><span class="comment">    /// Virtual destructor!</span></div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#ae21ffb679c21a04eff6cc2de22b6051e">  406</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_kit_1_1_text_1_1_i_string.html#ae21ffb679c21a04eff6cc2de22b6051e">~IString</a>() noexcept {}</div>
-<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span> </div>
-<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span><span class="comment">    /// Default constructor</span></div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#adaf4515b8b6df2d60d27fba61846c223">  410</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_text_1_1_i_string.html#adaf4515b8b6df2d60d27fba61846c223">IString</a>() noexcept = default;</div>
-<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    <span class="comment"></span></div>
-<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="comment">    /// Delete move constructor to prevent moving</span></div>
-<div class="line"><a id="l00413" name="l00413"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#a0dff328ed8288962ea0cdb7727f1c099">  413</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>(<a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;&amp;) = delete;</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="comment">        and has NOT exceeded the &#39;maxAllowedLength&#39;. The &#39;maxAllowedLength&#39; </span></div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="comment">        value is same value that is returned by the maxLength() method.</span></div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="comment"></span> </div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="comment">        The pointer and length have a VERY LIMITED life span - the values become</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="comment">        invalid when any of the another string methods are called!</span></div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="comment"></span> </div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="comment">        NOTE: This method always clears the &#39;truncated&#39; flags/status.</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="comment"></span> </div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="comment">        *** THIS METHOD SHOULD BE USED WITH EXTREME CAUTION AND AVOIDED WHENEVER POSSIBLE! ***</span></div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#a2c0098daf5cbac29b47e298a5a429acb">  405</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="class_kit_1_1_text_1_1_i_string.html#a2c0098daf5cbac29b47e298a5a429acb">getBuffer</a>( <span class="keywordtype">int</span>&amp; maxAllowedLength ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span> </div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span><span class="comment">    /// Virtual destructor!</span></div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#ae21ffb679c21a04eff6cc2de22b6051e">  409</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_kit_1_1_text_1_1_i_string.html#ae21ffb679c21a04eff6cc2de22b6051e">~IString</a>() noexcept {}</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="comment">    /// Default constructor</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#adaf4515b8b6df2d60d27fba61846c223">  413</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_text_1_1_i_string.html#adaf4515b8b6df2d60d27fba61846c223">IString</a>() noexcept = default;</div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="comment"></span></div>
-<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span><span class="comment">    /// Delete move assignment operator</span></div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#ae62782fb77a3f2ab87e20c9f5e05a40f">  416</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp; operator=(<a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;&amp;) = delete;</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>};</div>
-<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span> </div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>}</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span><span class="comment">    /// Delete move constructor to prevent moving</span></div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#a0dff328ed8288962ea0cdb7727f1c099">  416</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>(<a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;&amp;) = delete;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    <span class="comment"></span></div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span><span class="comment">    /// Delete move assignment operator</span></div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#ae62782fb77a3f2ab87e20c9f5e05a40f">  419</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp; operator=(<a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;&amp;) = delete;</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>};</div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span> </div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span><span class="comment">/* Note: I could only make the stream operators work if there were NOT declared</span></div>
-<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span><span class="comment">         within the Kit::Text namespace.  Fortunately, I don&#39;t actually have to</span></div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span><span class="comment">         make the stream operators &#39;friends&#39; for the necessary implementation.</span></div>
-<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span><span class="comment"></span> </div>
-<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span><span class="comment">         If someone could explain/show me how to make it work using the</span></div>
-<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><span class="comment">         &#39;friend&#39; approach - please contact me.</span></div>
-<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span><span class="comment">*/</span></div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>namespace std {</div>
-<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span><span class="comment"></span> </div>
-<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span><span class="comment">/// Support stream output operator directly</span></div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno"><a class="line" href="_i_string_8h.html#ae4e54abab6c663a5bd422a2011f529ff">  432</a></span><span class="comment"></span>ostream&amp; <a class="code hl_function" href="_i_string_8h.html#ae4e54abab6c663a5bd422a2011f529ff">operator&lt;&lt;</a>( ostream&amp; out, <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; outstring );</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>}</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span> </div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span><span class="comment">/* Note: I could only make the stream operators work if there were NOT declared</span></div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span><span class="comment">         within the Kit::Text namespace.  Fortunately, I don&#39;t actually have to</span></div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><span class="comment">         make the stream operators &#39;friends&#39; for the necessary implementation.</span></div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span><span class="comment"></span> </div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span><span class="comment">         If someone could explain/show me how to make it work using the</span></div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span><span class="comment">         &#39;friend&#39; approach - please contact me.</span></div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>namespace std {</div>
 <div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span><span class="comment"></span> </div>
-<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span><span class="comment">/// Support stream input operator directly</span></div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno"><a class="line" href="_i_string_8h.html#ab397ab76c98e44643fd92d5a9e5ec612">  435</a></span><span class="comment"></span>istream&amp; <a class="code hl_function" href="_i_string_8h.html#ab397ab76c98e44643fd92d5a9e5ec612">operator&gt;&gt;</a>( istream&amp; in, <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; instring );</div>
-<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span> </div>
-<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>}  <span class="comment">// end std namespace</span></div>
-<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span><span class="comment">/// Support stream output operator directly</span></div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno"><a class="line" href="_i_string_8h.html#ae4e54abab6c663a5bd422a2011f529ff">  435</a></span><span class="comment"></span>ostream&amp; <a class="code hl_function" href="_i_string_8h.html#ae4e54abab6c663a5bd422a2011f529ff">operator&lt;&lt;</a>( ostream&amp; out, <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; outstring );</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span><span class="comment"></span> </div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span><span class="comment">/// Support stream input operator directly</span></div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno"><a class="line" href="_i_string_8h.html#ab397ab76c98e44643fd92d5a9e5ec612">  438</a></span><span class="comment"></span>istream&amp; <a class="code hl_function" href="_i_string_8h.html#ab397ab76c98e44643fd92d5a9e5ec612">operator&gt;&gt;</a>( istream&amp; in, <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; instring );</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span> </div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>}  <span class="comment">// end std namespace</span></div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_string_8h_html_ab397ab76c98e44643fd92d5a9e5ec612"><div class="ttname"><a href="_i_string_8h.html#ab397ab76c98e44643fd92d5a9e5ec612">std::operator&gt;&gt;</a></div><div class="ttdeci">istream &amp; operator&gt;&gt;(istream &amp;in, Kit::Text::IString &amp;instring)</div><div class="ttdoc">Support stream input operator directly.</div></div>
 <div class="ttc" id="a_i_string_8h_html_ae4e54abab6c663a5bd422a2011f529ff"><div class="ttname"><a href="_i_string_8h.html#ae4e54abab6c663a5bd422a2011f529ff">std::operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;out, const Kit::Text::IString &amp;outstring)</div><div class="ttdoc">Support stream output operator directly.</div></div>
 <div class="ttc" id="a_key_8h_html"><div class="ttname"><a href="_key_8h.html">Key.h</a></div></div>
@@ -534,7 +537,7 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html_ac92499aea8e19fa26e825f023cd9c418"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html#ac92499aea8e19fa26e825f023cd9c418">Kit::Text::IString::format</a></div><div class="ttdeci">virtual void format(const char *format,...) noexcept=0</div><div class="ttdoc">Allows &quot;printf&quot; formatting of the string.</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html_adaf4515b8b6df2d60d27fba61846c223"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html#adaf4515b8b6df2d60d27fba61846c223">Kit::Text::IString::IString</a></div><div class="ttdeci">IString() noexcept=default</div><div class="ttdoc">Default constructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html_ae1ca1e5064bbe02be2c723cb19c6934d"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html#ae1ca1e5064bbe02be2c723cb19c6934d">Kit::Text::IString::isEqualSubstringIgnoreCase</a></div><div class="ttdeci">virtual bool isEqualSubstringIgnoreCase(int startOffset, int endOffset, const char *string) const noexcept=0</div><div class="ttdoc">Same as above, except case insensitive comparison.</div></div>
-<div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html_ae21ffb679c21a04eff6cc2de22b6051e"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html#ae21ffb679c21a04eff6cc2de22b6051e">Kit::Text::IString::~IString</a></div><div class="ttdeci">virtual ~IString() noexcept</div><div class="ttdoc">Virtual destructor!</div><div class="ttdef"><b>Definition</b> IString.h:406</div></div>
+<div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html_ae21ffb679c21a04eff6cc2de22b6051e"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html#ae21ffb679c21a04eff6cc2de22b6051e">Kit::Text::IString::~IString</a></div><div class="ttdeci">virtual ~IString() noexcept</div><div class="ttdoc">Virtual destructor!</div><div class="ttdef"><b>Definition</b> IString.h:409</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html_ae25ed746323cae77690329197ac39455"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html#ae25ed746323cae77690329197ac39455">Kit::Text::IString::startsWith</a></div><div class="ttdeci">virtual bool startsWith(const char *string) const noexcept=0</div><div class="ttdoc">Returns true if the string starts with the specified sub-string.</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html_ae3c4d04a7a48ea78f3a8efbbce5c2b00"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html#ae3c4d04a7a48ea78f3a8efbbce5c2b00">Kit::Text::IString::copyIn</a></div><div class="ttdeci">virtual void copyIn(const char *string, int n) noexcept=0</div><div class="ttdoc">This method copies the content of the source string, up to 'n' characters, into internal storage of t...</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html_aef5e17c072feb7c73515af022717d89e"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html#aef5e17c072feb7c73515af022717d89e">Kit::Text::IString::operator=</a></div><div class="ttdeci">virtual IString &amp; operator=(long num) noexcept=0</div><div class="ttdoc">Converts the 'number' to a string and stores its in the internal storage of the object.</div></div>
@@ -546,7 +549,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 13 2025 17:27:21 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 14 2025 16:18:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

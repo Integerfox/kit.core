@@ -1,0 +1,519 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Text/IString.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Text</a> - IString.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-09-14 16:20:12</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">8</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : #ifndef KIT_TEXT_ISTRING_H_</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : #define KIT_TEXT_ISTRING_H_</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  *</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : </span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : #include &quot;Kit/Container/Key.h&quot;</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : #include &quot;Kit/System/printfchecker.h&quot;</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             : #include &lt;stdarg.h&gt;</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : #include &lt;iostream&gt;</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : </span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : ///</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : namespace Kit {</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : ///</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : namespace Text {</span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : </span>
+<span id="L23"><span class="lineNum">      23</span>                 :             : /** This abstract class defines the operations that can be before on</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :     a NULL terminated string. The intent is to provide a simple mechanism</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     for manipulating and &quot;passing-around&quot; strings rather than using error</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :     prone explicit string operations.</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :     NOTES:</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             : </span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :         o The memory management for the string data is determined by</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             :           the concrete sub-class!</span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :         o The 'IString' class IS A Kit::Container::Key, but it is NOT a</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :           Kit::Container::xxxItem instance.  Use the 'StringItem' class</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :           for storing a string directly in a container.</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :  */</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             : </span>
+<span id="L37"><span class="lineNum">      37</span>                 :             : class IString : public Kit::Container::Key</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             : {</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             : public:</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :     /** Assignment of a string. The argument string is copied</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :         to the internal storage of the object.</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :      */</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :     virtual IString&amp; operator=( const IString&amp; string ) noexcept = 0;</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             : </span>
+<span id="L45"><span class="lineNum">      45</span>                 :             :     /** Assignment of a string. The argument string is copied</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :         to the internal storage of the object.</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :      */</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :     virtual IString&amp; operator=( const char* string ) noexcept = 0;</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             : </span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     /** Assigns the character to first position in string and then</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :         NULL terminates the string.</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :      */</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             :     virtual IString&amp; operator=( char c ) noexcept = 0;</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             : </span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :     /** Converts the 'number' to a string and stores its in</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :         the internal storage of the object.</span>
+<span id="L57"><span class="lineNum">      57</span>                 :             :      */</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :     virtual IString&amp; operator=( int num ) noexcept = 0;</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             : </span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :     /** Converts the 'number' to a string and stores its in</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :         the internal storage of the object.</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :      */</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :     virtual IString&amp; operator=( unsigned num ) noexcept = 0;</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : </span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :     /** Converts the 'number' to a string and stores its in</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             :         the internal storage of the object.</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :      */</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             :     virtual IString&amp; operator=( long num ) noexcept = 0;</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             : </span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :     /** Converts the 'number' to a string and stores its in</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :         the internal storage of the object.</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :      */</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             :     virtual IString&amp; operator=( unsigned long num ) noexcept = 0;</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             : </span>
+<span id="L75"><span class="lineNum">      75</span>                 :             : public:</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :     /** This method copies the content of the source string,</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :         up to 'n' characters, into internal storage of the object.</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :         NOTE: The internal storage is always guaranteed to be NULL</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :         terminated.</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :      */</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :     virtual void copyIn( const char* string, int n ) noexcept = 0;</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             : </span>
+<span id="L83"><span class="lineNum">      83</span>                 :             :     /** This method inserts the specified string starting at</span>
+<span id="L84"><span class="lineNum">      84</span>                 :             :         the specified offset.  The original contents of the string</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             :         beginning with 'insertOffset' is &quot;shifted to the right&quot; to</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :         make room for the string being inserted. If an attempt is</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             :         made to insert the string past the current end-of-string, then</span>
+<span id="L88"><span class="lineNum">      88</span>                 :             :         the stringToInsert is simply appended.  If an attempt is made</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             :         to insert the string at a negative offset, then the stringToInsert</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             :         is prepended to the string.</span>
+<span id="L91"><span class="lineNum">      91</span>                 :             :      */</span>
+<span id="L92"><span class="lineNum">      92</span>                 :             :     virtual void insertAt( int insertOffset, const char* stringToInsert ) noexcept = 0;</span>
+<span id="L93"><span class="lineNum">      93</span>                 :             : </span>
+<span id="L94"><span class="lineNum">      94</span>                 :             :     /** Clears the internal string (i.e. string[0] = '\0').</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             :      */</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             :     virtual void clear() noexcept = 0;</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             : </span>
+<span id="L98"><span class="lineNum">      98</span>                 :             : </span>
+<span id="L99"><span class="lineNum">      99</span>                 :             : public:</span>
+<span id="L100"><span class="lineNum">     100</span>                 :             :     /** Append a string. The argument string is concatenated</span>
+<span id="L101"><span class="lineNum">     101</span>                 :             :         to the end of the string object.</span>
+<span id="L102"><span class="lineNum">     102</span>                 :             :      */</span>
+<span id="L103"><span class="lineNum">     103</span>                 :             :     virtual IString&amp; operator+=( const IString&amp; string ) noexcept = 0;</span>
+<span id="L104"><span class="lineNum">     104</span>                 :             : </span>
+<span id="L105"><span class="lineNum">     105</span>                 :             :     /** Append a string. The argument string is concatenated</span>
+<span id="L106"><span class="lineNum">     106</span>                 :             :         to the end of the string object.</span>
+<span id="L107"><span class="lineNum">     107</span>                 :             :      */</span>
+<span id="L108"><span class="lineNum">     108</span>                 :             :     virtual IString&amp; operator+=( const char* string ) noexcept = 0;</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             : </span>
+<span id="L110"><span class="lineNum">     110</span>                 :             :     /** Appends the character to the end of the string.</span>
+<span id="L111"><span class="lineNum">     111</span>                 :             :      */</span>
+<span id="L112"><span class="lineNum">     112</span>                 :             :     virtual IString&amp; operator+=( char c ) noexcept = 0;</span>
+<span id="L113"><span class="lineNum">     113</span>                 :             : </span>
+<span id="L114"><span class="lineNum">     114</span>                 :             :     /** Converts the 'number' to a string and appends its to the</span>
+<span id="L115"><span class="lineNum">     115</span>                 :             :         end of the string.</span>
+<span id="L116"><span class="lineNum">     116</span>                 :             :      */</span>
+<span id="L117"><span class="lineNum">     117</span>                 :             :     virtual IString&amp; operator+=( int num ) noexcept = 0;</span>
+<span id="L118"><span class="lineNum">     118</span>                 :             : </span>
+<span id="L119"><span class="lineNum">     119</span>                 :             :     /** Converts the 'number' to a string and appends its to the</span>
+<span id="L120"><span class="lineNum">     120</span>                 :             :         end of the string.</span>
+<span id="L121"><span class="lineNum">     121</span>                 :             :      */</span>
+<span id="L122"><span class="lineNum">     122</span>                 :             :     virtual IString&amp; operator+=( unsigned num ) noexcept = 0;</span>
+<span id="L123"><span class="lineNum">     123</span>                 :             : </span>
+<span id="L124"><span class="lineNum">     124</span>                 :             :     /** Converts the 'number' to a string and appends its to the</span>
+<span id="L125"><span class="lineNum">     125</span>                 :             :         end of the string.</span>
+<span id="L126"><span class="lineNum">     126</span>                 :             :      */</span>
+<span id="L127"><span class="lineNum">     127</span>                 :             :     virtual IString&amp; operator+=( long num ) noexcept = 0;</span>
+<span id="L128"><span class="lineNum">     128</span>                 :             : </span>
+<span id="L129"><span class="lineNum">     129</span>                 :             :     /** Converts the 'number' to a string and appends its to the</span>
+<span id="L130"><span class="lineNum">     130</span>                 :             :         end of the string.</span>
+<span id="L131"><span class="lineNum">     131</span>                 :             :      */</span>
+<span id="L132"><span class="lineNum">     132</span>                 :             :     virtual IString&amp; operator+=( unsigned long num ) noexcept = 0;</span>
+<span id="L133"><span class="lineNum">     133</span>                 :             : </span>
+<span id="L134"><span class="lineNum">     134</span>                 :             :     /** This method appends the content of the source string,</span>
+<span id="L135"><span class="lineNum">     135</span>                 :             :         up to 'n' characters, into internal storage of the object.</span>
+<span id="L136"><span class="lineNum">     136</span>                 :             :         NOTE: The internal storage is always guaranteed to be NULL</span>
+<span id="L137"><span class="lineNum">     137</span>                 :             :         terminated.</span>
+<span id="L138"><span class="lineNum">     138</span>                 :             :      */</span>
+<span id="L139"><span class="lineNum">     139</span>                 :             :     virtual void appendTo( const char* string, int n ) noexcept = 0;</span>
+<span id="L140"><span class="lineNum">     140</span>                 :             : </span>
+<span id="L141"><span class="lineNum">     141</span>                 :             : public:</span>
+<span id="L142"><span class="lineNum">     142</span>                 :             :     /// Cast to character --&gt;i.e returns the first character in the string.</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             :     virtual operator char() const noexcept = 0;</span>
+<span id="L144"><span class="lineNum">     144</span>                 :             : </span>
+<span id="L145"><span class="lineNum">     145</span>                 :             :     /// Read-only Access to the &quot;raw&quot; string.</span>
+<span id="L146"><span class="lineNum">     146</span>                 :             :     virtual const char* getString() const noexcept = 0;</span>
+<span id="L147"><span class="lineNum">     147</span>                 :             : </span>
+<span id="L148"><span class="lineNum">     148</span>                 :             :     /// Cast to read-only character string pointer.</span>
+<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC tlaBgGNC">       10335 :     inline operator const char*() const noexcept { return getString(); }</span></span>
+<span id="L150"><span class="lineNum">     150</span>                 :             : </span>
+<span id="L151"><span class="lineNum">     151</span>                 :             :     /// Returns a Read-only pointer to the &quot;raw&quot; (short-hand for getString())</span>
+<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">          16 :     inline const char* operator()() const noexcept { return getString(); }</span></span>
+<span id="L153"><span class="lineNum">     153</span>                 :             : </span>
+<span id="L154"><span class="lineNum">     154</span>                 :             :     /// Returns the specified character. If n is out-bounds, then '\0' is returned</span>
+<span id="L155"><span class="lineNum">     155</span>   [<span class="tlaGBC" title="Branch 0 was taken 809043 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 809043 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">      809048 :     inline char operator[]( int i ) const noexcept { return i &lt; 0 || i &gt; length() ? '\0' : getString()[i]; }</span></span>
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
+<span class="lineNum">        </span>       <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaUNC" title="Branch 10 was not taken"> - </span><span class="tlaGBC" title="Branch 11 was taken 1 time"> + </span>]
+<span id="L156"><span class="lineNum">     156</span>                 :             : </span>
+<span id="L157"><span class="lineNum">     157</span>                 :             : </span>
+<span id="L158"><span class="lineNum">     158</span>                 :             : public:</span>
+<span id="L159"><span class="lineNum">     159</span>                 :             :     /** Returns the length, in bytes, of the string.  The size returned does</span>
+<span id="L160"><span class="lineNum">     160</span>                 :             :         NOT include NULL terminator (i.e. if the returned size is 15, my</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             :         internal storage must be at least 15+1)</span>
+<span id="L162"><span class="lineNum">     162</span>                 :             :      */</span>
+<span id="L163"><span class="lineNum">     163</span>                 :             :     virtual int length() const noexcept = 0;</span>
+<span id="L164"><span class="lineNum">     164</span>                 :             : </span>
+<span id="L165"><span class="lineNum">     165</span>                 :             :     /** Returns the max allowed size of the string. The size returned does</span>
+<span id="L166"><span class="lineNum">     166</span>                 :             :         NOT include NULL terminator (i.e. if the returned size is 15, my</span>
+<span id="L167"><span class="lineNum">     167</span>                 :             :         internal storage must be at least 15+1)</span>
+<span id="L168"><span class="lineNum">     168</span>                 :             :      */</span>
+<span id="L169"><span class="lineNum">     169</span>                 :             :     virtual int maxLength() const noexcept = 0;</span>
+<span id="L170"><span class="lineNum">     170</span>                 :             : </span>
+<span id="L171"><span class="lineNum">     171</span>                 :             :     /** Returns the available space left in the internal buffer. The size</span>
+<span id="L172"><span class="lineNum">     172</span>                 :             :         returned does NOT include NULL terminator (i.e. if the returned size</span>
+<span id="L173"><span class="lineNum">     173</span>                 :             :         is 15, my internal storage must be at least 15+1).</span>
+<span id="L174"><span class="lineNum">     174</span>                 :             :      */</span>
+<span id="L175"><span class="lineNum">     175</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           2 :     inline int availLength() noexcept { return maxLength() - length(); }</span></span>
+<span id="L176"><span class="lineNum">     176</span>                 :             : </span>
+<span id="L177"><span class="lineNum">     177</span>                 :             :     /// Returns true if the string is empty (i.e. string[0] == '\0')</span>
+<span id="L178"><span class="lineNum">     178</span>                 :             :     virtual bool isEmpty() const noexcept = 0;</span>
+<span id="L179"><span class="lineNum">     179</span>                 :             : </span>
+<span id="L180"><span class="lineNum">     180</span>                 :             :     /** Returns true if the last IString &quot;write&quot; operation caused the</span>
+<span id="L181"><span class="lineNum">     181</span>                 :             :         IString contents to be truncated.  This flag is reset after every</span>
+<span id="L182"><span class="lineNum">     182</span>                 :             :         string &quot;write&quot; operation.</span>
+<span id="L183"><span class="lineNum">     183</span>                 :             :      */</span>
+<span id="L184"><span class="lineNum">     184</span>                 :             :     virtual bool truncated() const noexcept = 0;</span>
+<span id="L185"><span class="lineNum">     185</span>                 :             : </span>
+<span id="L186"><span class="lineNum">     186</span>                 :             : </span>
+<span id="L187"><span class="lineNum">     187</span>                 :             : public:</span>
+<span id="L188"><span class="lineNum">     188</span>                 :             :     /** Compares two Strings and returns true if they are equal</span>
+<span id="L189"><span class="lineNum">     189</span>                 :             :         NOTE: if 'string' is a null pointer, then false is returned.</span>
+<span id="L190"><span class="lineNum">     190</span>                 :             :      */</span>
+<span id="L191"><span class="lineNum">     191</span>                 :             :     virtual bool operator==( const char* string ) const noexcept = 0;</span>
+<span id="L192"><span class="lineNum">     192</span>                 :             : </span>
+<span id="L193"><span class="lineNum">     193</span>                 :             :     /// Compares two Strings and returns true if they are equal</span>
+<span id="L194"><span class="lineNum">     194</span>                 :             :     virtual bool operator==( const IString&amp; string ) const noexcept = 0;</span>
+<span id="L195"><span class="lineNum">     195</span>                 :             : </span>
+<span id="L196"><span class="lineNum">     196</span>                 :             :     /** Compares two Strings and returns true if they are NOT equal</span>
+<span id="L197"><span class="lineNum">     197</span>                 :             :         NOTE: if 'string' is a null pointer, then true is returned.</span>
+<span id="L198"><span class="lineNum">     198</span>                 :             :      */</span>
+<span id="L199"><span class="lineNum">     199</span>                 :             :     virtual bool operator!=( const char* string ) const noexcept = 0;</span>
+<span id="L200"><span class="lineNum">     200</span>                 :             : </span>
+<span id="L201"><span class="lineNum">     201</span>                 :             :     /// Compares two Strings and returns true if they are NOT equal</span>
+<span id="L202"><span class="lineNum">     202</span>                 :             :     virtual bool operator!=( const IString&amp; string ) const noexcept = 0;</span>
+<span id="L203"><span class="lineNum">     203</span>                 :             : </span>
+<span id="L204"><span class="lineNum">     204</span>                 :             :     /** Compares two strings independently of case and return true if equal</span>
+<span id="L205"><span class="lineNum">     205</span>                 :             :         NOTE: if 'string' is a null pointer, then false is returned.</span>
+<span id="L206"><span class="lineNum">     206</span>                 :             :      */</span>
+<span id="L207"><span class="lineNum">     207</span>                 :             :     virtual bool isEqualIgnoreCase( const char* string ) const noexcept = 0;</span>
+<span id="L208"><span class="lineNum">     208</span>                 :             : </span>
+<span id="L209"><span class="lineNum">     209</span>                 :             :     /// Compares the specified character to the first character in the string</span>
+<span id="L210"><span class="lineNum">     210</span>                 :             :     virtual bool operator==( char c ) const noexcept = 0;</span>
+<span id="L211"><span class="lineNum">     211</span>                 :             : </span>
+<span id="L212"><span class="lineNum">     212</span>                 :             :     /** Compares two strings and returns &lt;0, 0, &gt;0 if this string is less than,</span>
+<span id="L213"><span class="lineNum">     213</span>                 :             :         equal, or greater than respectively to the specified string.</span>
+<span id="L214"><span class="lineNum">     214</span>                 :             :         NOTE: if 'string' is a null pointer, then -1 is returned.</span>
+<span id="L215"><span class="lineNum">     215</span>                 :             :      */</span>
+<span id="L216"><span class="lineNum">     216</span>                 :             :     virtual int compare( const char* string ) const noexcept = 0;</span>
+<span id="L217"><span class="lineNum">     217</span>                 :             : </span>
+<span id="L218"><span class="lineNum">     218</span>                 :             :     /// Same as compare(), but case insensitive.</span>
+<span id="L219"><span class="lineNum">     219</span>                 :             :     virtual int compareIgnoreCase( const char* string ) const noexcept = 0;</span>
+<span id="L220"><span class="lineNum">     220</span>                 :             : </span>
+<span id="L221"><span class="lineNum">     221</span>                 :             :     /** Compares the specified substring with the specified string.  Substring</span>
+<span id="L222"><span class="lineNum">     222</span>                 :             :         is inclusive of the endpoints.  If the endpoints are out-of-range, they</span>
+<span id="L223"><span class="lineNum">     223</span>                 :             :         are clamped by the actual bounds of the string.  Position parameters are</span>
+<span id="L224"><span class="lineNum">     224</span>                 :             :         zero-based indexes into this IString object.</span>
+<span id="L225"><span class="lineNum">     225</span>                 :             :         NOTE: if 'string' is a null pointer, then false is returned.</span>
+<span id="L226"><span class="lineNum">     226</span>                 :             :      */</span>
+<span id="L227"><span class="lineNum">     227</span>                 :             :     virtual bool isEqualSubstring( int startOffset, int endOffset, const char* string ) const noexcept = 0;</span>
+<span id="L228"><span class="lineNum">     228</span>                 :             : </span>
+<span id="L229"><span class="lineNum">     229</span>                 :             :     /// Same as above, except case insensitive comparison.</span>
+<span id="L230"><span class="lineNum">     230</span>                 :             :     virtual bool isEqualSubstringIgnoreCase( int startOffset, int endOffset, const char* string ) const noexcept = 0;</span>
+<span id="L231"><span class="lineNum">     231</span>                 :             : </span>
+<span id="L232"><span class="lineNum">     232</span>                 :             :     /** Returns true if the string starts with the specified sub-string.</span>
+<span id="L233"><span class="lineNum">     233</span>                 :             :         Note: if 'string' is a null pointer, then false is returned</span>
+<span id="L234"><span class="lineNum">     234</span>                 :             :      */</span>
+<span id="L235"><span class="lineNum">     235</span>                 :             :     virtual bool startsWith( const char* string ) const noexcept = 0;</span>
+<span id="L236"><span class="lineNum">     236</span>                 :             : </span>
+<span id="L237"><span class="lineNum">     237</span>                 :             :     /** Sames as starsWith(), but begins the search at index 'startOffset'.</span>
+<span id="L238"><span class="lineNum">     238</span>                 :             :         Note: If 'string' is a null pointer or 'startOffset' is out-of-bound,</span>
+<span id="L239"><span class="lineNum">     239</span>                 :             :         then false is returned.</span>
+<span id="L240"><span class="lineNum">     240</span>                 :             :      */</span>
+<span id="L241"><span class="lineNum">     241</span>                 :             :     virtual bool startsWith( const char* string, int startOffset ) const noexcept = 0;</span>
+<span id="L242"><span class="lineNum">     242</span>                 :             : </span>
+<span id="L243"><span class="lineNum">     243</span>                 :             :     /** Returns true if the string ends with the specified sub-string.</span>
+<span id="L244"><span class="lineNum">     244</span>                 :             :         Note: if 'string' is a null pointer, then false is returned</span>
+<span id="L245"><span class="lineNum">     245</span>                 :             :      */</span>
+<span id="L246"><span class="lineNum">     246</span>                 :             :     virtual bool endsWith( const char* string ) const noexcept = 0;</span>
+<span id="L247"><span class="lineNum">     247</span>                 :             : </span>
+<span id="L248"><span class="lineNum">     248</span>                 :             : public:</span>
+<span id="L249"><span class="lineNum">     249</span>                 :             :     /** Returns the index of the first match for the specified character.  If</span>
+<span id="L250"><span class="lineNum">     250</span>                 :             :         no match is found, -1 is returned.</span>
+<span id="L251"><span class="lineNum">     251</span>                 :             :      */</span>
+<span id="L252"><span class="lineNum">     252</span>                 :             :     virtual int indexOf( char c ) const noexcept = 0;</span>
+<span id="L253"><span class="lineNum">     253</span>                 :             : </span>
+<span id="L254"><span class="lineNum">     254</span>                 :             :     /** Same as indexOf(char), but starts at 'startOffset' instead of the beginning</span>
+<span id="L255"><span class="lineNum">     255</span>                 :             :         of the string.</span>
+<span id="L256"><span class="lineNum">     256</span>                 :             : </span>
+<span id="L257"><span class="lineNum">     257</span>                 :             :         Note: If 'startOffset' is out-of-bounds than -1 is returned.</span>
+<span id="L258"><span class="lineNum">     258</span>                 :             :      */</span>
+<span id="L259"><span class="lineNum">     259</span>                 :             :     virtual int indexOf( char c, int startOffset ) const noexcept = 0;</span>
+<span id="L260"><span class="lineNum">     260</span>                 :             : </span>
+<span id="L261"><span class="lineNum">     261</span>                 :             :     /** Returns the index (of the starting character) of the first match</span>
+<span id="L262"><span class="lineNum">     262</span>                 :             :         for the specified sub-string.  If no match is found, -1 is returned.</span>
+<span id="L263"><span class="lineNum">     263</span>                 :             : </span>
+<span id="L264"><span class="lineNum">     264</span>                 :             :         Note: If 'string' is null, then -1 is returned</span>
+<span id="L265"><span class="lineNum">     265</span>                 :             :      */</span>
+<span id="L266"><span class="lineNum">     266</span>                 :             :     virtual int indexOf( const char* string ) const noexcept = 0;</span>
+<span id="L267"><span class="lineNum">     267</span>                 :             : </span>
+<span id="L268"><span class="lineNum">     268</span>                 :             :     /** Same as indexOf(const char*), but starts at 'startOffset' instead of the</span>
+<span id="L269"><span class="lineNum">     269</span>                 :             :         beginning of the string.</span>
+<span id="L270"><span class="lineNum">     270</span>                 :             : </span>
+<span id="L271"><span class="lineNum">     271</span>                 :             :         Note: If 'string' is null or 'startOffset' is out-of-bounds than -1</span>
+<span id="L272"><span class="lineNum">     272</span>                 :             :               is returned.</span>
+<span id="L273"><span class="lineNum">     273</span>                 :             :      */</span>
+<span id="L274"><span class="lineNum">     274</span>                 :             :     virtual int indexOf( const char* string, int startOffset ) const noexcept = 0;</span>
+<span id="L275"><span class="lineNum">     275</span>                 :             : </span>
+<span id="L276"><span class="lineNum">     276</span>                 :             :     /** Returns the index of the last match for the specified character.  If</span>
+<span id="L277"><span class="lineNum">     277</span>                 :             :         no match is found, -1 is returned.</span>
+<span id="L278"><span class="lineNum">     278</span>                 :             :      */</span>
+<span id="L279"><span class="lineNum">     279</span>                 :             :     virtual int lastIndexOf( char c ) const noexcept = 0;</span>
+<span id="L280"><span class="lineNum">     280</span>                 :             : </span>
+<span id="L281"><span class="lineNum">     281</span>                 :             :     /** Returns the number of times the specified character appears in</span>
+<span id="L282"><span class="lineNum">     282</span>                 :             :         the string.</span>
+<span id="L283"><span class="lineNum">     283</span>                 :             :      */</span>
+<span id="L284"><span class="lineNum">     284</span>                 :             :     virtual int count( char c ) const noexcept = 0;</span>
+<span id="L285"><span class="lineNum">     285</span>                 :             : </span>
+<span id="L286"><span class="lineNum">     286</span>                 :             : </span>
+<span id="L287"><span class="lineNum">     287</span>                 :             : public:</span>
+<span id="L288"><span class="lineNum">     288</span>                 :             :     /** Allows &quot;printf&quot; formatting of the string. NOTE: Since the</span>
+<span id="L289"><span class="lineNum">     289</span>                 :             :         amount of information being written to the string is variable,</span>
+<span id="L290"><span class="lineNum">     290</span>                 :             :         this method does NOT guarantee how much, if any, of the</span>
+<span id="L291"><span class="lineNum">     291</span>                 :             :         information is actually written to the string.  The method</span>
+<span id="L292"><span class="lineNum">     292</span>                 :             :         does guarantee that the string's internal storage will NOT</span>
+<span id="L293"><span class="lineNum">     293</span>                 :             :         be exceeded.</span>
+<span id="L294"><span class="lineNum">     294</span>                 :             : </span>
+<span id="L295"><span class="lineNum">     295</span>                 :             :         NOTE: if 'format' is null, then nothing is done</span>
+<span id="L296"><span class="lineNum">     296</span>                 :             :      */</span>
+<span id="L297"><span class="lineNum">     297</span>                 :             :     KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )</span>
+<span id="L298"><span class="lineNum">     298</span>                 :             :     virtual void format( const char* format, ... ) noexcept = 0;</span>
+<span id="L299"><span class="lineNum">     299</span>                 :             : </span>
+<span id="L300"><span class="lineNum">     300</span>                 :             :     /// Same as format() - but appends &quot;formatting&quot; to the end of the string</span>
+<span id="L301"><span class="lineNum">     301</span>                 :             :     KIT_SYSTEM_PRINTF_CHECKER( 2, 3 )</span>
+<span id="L302"><span class="lineNum">     302</span>                 :             :     virtual void formatAppend( const char* format, ... ) noexcept = 0;</span>
+<span id="L303"><span class="lineNum">     303</span>                 :             : </span>
+<span id="L304"><span class="lineNum">     304</span>                 :             :     /** This method is the same as format(), except when 'appendFlag' is true</span>
+<span id="L305"><span class="lineNum">     305</span>                 :             :         then it behaves as formatAppend().</span>
+<span id="L306"><span class="lineNum">     306</span>                 :             :      */</span>
+<span id="L307"><span class="lineNum">     307</span>                 :             :     KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )</span>
+<span id="L308"><span class="lineNum">     308</span>                 :             :     virtual void formatOpt( bool appendFlag, const char* format, ... ) noexcept = 0;</span>
+<span id="L309"><span class="lineNum">     309</span>                 :             : </span>
+<span id="L310"><span class="lineNum">     310</span>                 :             : </span>
+<span id="L311"><span class="lineNum">     311</span>                 :             :     /** Same as format(), except that it is called with a va_list</span>
+<span id="L312"><span class="lineNum">     312</span>                 :             :         instead of a variable number of arguments.</span>
+<span id="L313"><span class="lineNum">     313</span>                 :             :      */</span>
+<span id="L314"><span class="lineNum">     314</span>                 :             :     virtual void vformat( const char* format, va_list ap ) noexcept = 0;</span>
+<span id="L315"><span class="lineNum">     315</span>                 :             : </span>
+<span id="L316"><span class="lineNum">     316</span>                 :             :     /** Same as formatAppend(), except that it is called with a va_list</span>
+<span id="L317"><span class="lineNum">     317</span>                 :             :         instead of a variable number of arguments.</span>
+<span id="L318"><span class="lineNum">     318</span>                 :             :      */</span>
+<span id="L319"><span class="lineNum">     319</span>                 :             :     virtual void vformatAppend( const char* format, va_list ap ) noexcept = 0;</span>
+<span id="L320"><span class="lineNum">     320</span>                 :             : </span>
+<span id="L321"><span class="lineNum">     321</span>                 :             :     /** This method is the same as vformat(), except when 'appendFlag' is true</span>
+<span id="L322"><span class="lineNum">     322</span>                 :             :         then it behaves as vformatAppend().</span>
+<span id="L323"><span class="lineNum">     323</span>                 :             :      */</span>
+<span id="L324"><span class="lineNum">     324</span>                 :             :     virtual void vformatOpt( bool appendFlag, const char* format, va_list ap ) noexcept = 0;</span>
+<span id="L325"><span class="lineNum">     325</span>                 :             : </span>
+<span id="L326"><span class="lineNum">     326</span>                 :             : </span>
+<span id="L327"><span class="lineNum">     327</span>                 :             : public:</span>
+<span id="L328"><span class="lineNum">     328</span>                 :             :     /** Forces the entire string to upper case characters.  Also returns</span>
+<span id="L329"><span class="lineNum">     329</span>                 :             :         the newly modified string contents.</span>
+<span id="L330"><span class="lineNum">     330</span>                 :             :      */</span>
+<span id="L331"><span class="lineNum">     331</span>                 :             :     virtual const char* toUpper() noexcept = 0;</span>
+<span id="L332"><span class="lineNum">     332</span>                 :             : </span>
+<span id="L333"><span class="lineNum">     333</span>                 :             :     /** Forces the entire string to lower case characters.  Also returns</span>
+<span id="L334"><span class="lineNum">     334</span>                 :             :         the newly modified string contents.</span>
+<span id="L335"><span class="lineNum">     335</span>                 :             :      */</span>
+<span id="L336"><span class="lineNum">     336</span>                 :             :     virtual const char* toLower() noexcept = 0;</span>
+<span id="L337"><span class="lineNum">     337</span>                 :             : </span>
+<span id="L338"><span class="lineNum">     338</span>                 :             :     /** Removes any leading white-space from the string (white-space</span>
+<span id="L339"><span class="lineNum">     339</span>                 :             :         is defined by the standard isspace() function).</span>
+<span id="L340"><span class="lineNum">     340</span>                 :             :      */</span>
+<span id="L341"><span class="lineNum">     341</span>                 :             :     virtual void removeLeadingSpaces() noexcept = 0;</span>
+<span id="L342"><span class="lineNum">     342</span>                 :             : </span>
+<span id="L343"><span class="lineNum">     343</span>                 :             :     /** Removes any trailing white-space from the string (white-space</span>
+<span id="L344"><span class="lineNum">     344</span>                 :             :         is defined by the standard isspace() function).</span>
+<span id="L345"><span class="lineNum">     345</span>                 :             :      */</span>
+<span id="L346"><span class="lineNum">     346</span>                 :             :     virtual void removeTrailingSpaces() noexcept = 0;</span>
+<span id="L347"><span class="lineNum">     347</span>                 :             : </span>
+<span id="L348"><span class="lineNum">     348</span>                 :             :     /** Removes the specified leading characters from the string.</span>
+<span id="L349"><span class="lineNum">     349</span>                 :             : </span>
+<span id="L350"><span class="lineNum">     350</span>                 :             :         NOTE: if 'charsSet' is null, nothing is done.</span>
+<span id="L351"><span class="lineNum">     351</span>                 :             :      */</span>
+<span id="L352"><span class="lineNum">     352</span>                 :             :     virtual void removeLeadingChars( const char* charsSet ) noexcept = 0;</span>
+<span id="L353"><span class="lineNum">     353</span>                 :             : </span>
+<span id="L354"><span class="lineNum">     354</span>                 :             :     /** Removes the specified trailing characters from the string.</span>
+<span id="L355"><span class="lineNum">     355</span>                 :             : </span>
+<span id="L356"><span class="lineNum">     356</span>                 :             :         NOTE: if 'charsSet' is null, nothing is done.</span>
+<span id="L357"><span class="lineNum">     357</span>                 :             :      */</span>
+<span id="L358"><span class="lineNum">     358</span>                 :             :     virtual void removeTrailingChars( const char* charsSet ) noexcept = 0;</span>
+<span id="L359"><span class="lineNum">     359</span>                 :             : </span>
+<span id="L360"><span class="lineNum">     360</span>                 :             :     /** Removes the characters beginning with 'startOffset' and ending with</span>
+<span id="L361"><span class="lineNum">     361</span>                 :             :         'endOffset'.  The characters after 'endOffset' are shifted left</span>
+<span id="L362"><span class="lineNum">     362</span>                 :             :         to form a continuous string. If the position fields are invalid</span>
+<span id="L363"><span class="lineNum">     363</span>                 :             :         or out-of-bounds, nothing is done.</span>
+<span id="L364"><span class="lineNum">     364</span>                 :             :      */</span>
+<span id="L365"><span class="lineNum">     365</span>                 :             :     virtual void cut( int startOffset, int endOffset ) noexcept = 0;</span>
+<span id="L366"><span class="lineNum">     366</span>                 :             : </span>
+<span id="L367"><span class="lineNum">     367</span>                 :             :     /** Removes 'n' characters from the start-of-string. If 'n' is greater</span>
+<span id="L368"><span class="lineNum">     368</span>                 :             :         than the length of the string or less than zero, nothing is done.</span>
+<span id="L369"><span class="lineNum">     369</span>                 :             :      */</span>
+<span id="L370"><span class="lineNum">     370</span>                 :<span class="tlaGNC">           4 :     inline void trimLeft( int n ) noexcept { cut( 0, n - 1 ); }</span></span>
+<span id="L371"><span class="lineNum">     371</span>                 :             : </span>
+<span id="L372"><span class="lineNum">     372</span>                 :             :     /** Removes 'n' characters from the end-of-string. If 'n' is greater</span>
+<span id="L373"><span class="lineNum">     373</span>                 :             :         than the length of the string or less than zero, nothing is done.</span>
+<span id="L374"><span class="lineNum">     374</span>                 :             :      */</span>
+<span id="L375"><span class="lineNum">     375</span>                 :             :     virtual void trimRight( int n ) noexcept = 0;</span>
+<span id="L376"><span class="lineNum">     376</span>                 :             : </span>
+<span id="L377"><span class="lineNum">     377</span>                 :             :     /** Replaces the character at index 'atOffset' with 'newchar'.</span>
+<span id="L378"><span class="lineNum">     378</span>                 :             :         If 'atOffset' is out-of-bounds or greater than the length of the</span>
+<span id="L379"><span class="lineNum">     379</span>                 :             :         actual string, then nothing is done.</span>
+<span id="L380"><span class="lineNum">     380</span>                 :             :      */</span>
+<span id="L381"><span class="lineNum">     381</span>                 :             :     virtual void setChar( int atOffset, char newchar ) noexcept = 0;</span>
+<span id="L382"><span class="lineNum">     382</span>                 :             : </span>
+<span id="L383"><span class="lineNum">     383</span>                 :             :     /** Replaces all instances of targetChar in the string with</span>
+<span id="L384"><span class="lineNum">     384</span>                 :             :         newChar.  Returns the number characters (if any) replaced.</span>
+<span id="L385"><span class="lineNum">     385</span>                 :             :         NOTE: If targetChar == newChar, nothing is done and zero</span>
+<span id="L386"><span class="lineNum">     386</span>                 :             :               is returned.</span>
+<span id="L387"><span class="lineNum">     387</span>                 :             :      */</span>
+<span id="L388"><span class="lineNum">     388</span>                 :             :     virtual int replace( char targetChar, char newChar ) noexcept = 0;</span>
+<span id="L389"><span class="lineNum">     389</span>                 :             : </span>
+<span id="L390"><span class="lineNum">     390</span>                 :             : </span>
+<span id="L391"><span class="lineNum">     391</span>                 :             : public:</span>
+<span id="L392"><span class="lineNum">     392</span>                 :             :     /** Returns a &quot;writable&quot; pointer to the string's internal storage.</span>
+<span id="L393"><span class="lineNum">     393</span>                 :             :         The caller is RESPONSIBLE for insuring that the string is</span>
+<span id="L394"><span class="lineNum">     394</span>                 :             :         left in a valid state - that is the string is NULL terminated</span>
+<span id="L395"><span class="lineNum">     395</span>                 :             :         and has NOT exceeded the 'maxAllowedLength'. The 'maxAllowedLength' </span>
+<span id="L396"><span class="lineNum">     396</span>                 :             :         value is same value that is returned by the maxLength() method.</span>
+<span id="L397"><span class="lineNum">     397</span>                 :             : </span>
+<span id="L398"><span class="lineNum">     398</span>                 :             :         The pointer and length have a VERY LIMITED life span - the values become</span>
+<span id="L399"><span class="lineNum">     399</span>                 :             :         invalid when any of the another string methods are called!</span>
+<span id="L400"><span class="lineNum">     400</span>                 :             : </span>
+<span id="L401"><span class="lineNum">     401</span>                 :             :         NOTE: This method always clears the 'truncated' flags/status.</span>
+<span id="L402"><span class="lineNum">     402</span>                 :             : </span>
+<span id="L403"><span class="lineNum">     403</span>                 :             :         *** THIS METHOD SHOULD BE USED WITH EXTREME CAUTION AND AVOIDED WHENEVER POSSIBLE! ***</span>
+<span id="L404"><span class="lineNum">     404</span>                 :             :      */</span>
+<span id="L405"><span class="lineNum">     405</span>                 :             :     virtual char* getBuffer( int&amp; maxAllowedLength ) noexcept = 0;</span>
+<span id="L406"><span class="lineNum">     406</span>                 :             : </span>
+<span id="L407"><span class="lineNum">     407</span>                 :             : public:</span>
+<span id="L408"><span class="lineNum">     408</span>                 :             :     /// Virtual destructor!</span>
+<span id="L409"><span class="lineNum">     409</span>                 :             :     virtual ~IString() noexcept {}</span>
+<span id="L410"><span class="lineNum">     410</span>                 :             : </span>
+<span id="L411"><span class="lineNum">     411</span>                 :             : public:</span>
+<span id="L412"><span class="lineNum">     412</span>                 :             :     /// Default constructor</span>
+<span id="L413"><span class="lineNum">     413</span>                 :             :     IString() noexcept = default;</span>
+<span id="L414"><span class="lineNum">     414</span>                 :             :     </span>
+<span id="L415"><span class="lineNum">     415</span>                 :             :     /// Delete move constructor to prevent moving</span>
+<span id="L416"><span class="lineNum">     416</span>                 :             :     IString(IString&amp;&amp;) = delete;</span>
+<span id="L417"><span class="lineNum">     417</span>                 :             :     </span>
+<span id="L418"><span class="lineNum">     418</span>                 :             :     /// Delete move assignment operator</span>
+<span id="L419"><span class="lineNum">     419</span>                 :             :     IString&amp; operator=(IString&amp;&amp;) = delete;</span>
+<span id="L420"><span class="lineNum">     420</span>                 :             : };</span>
+<span id="L421"><span class="lineNum">     421</span>                 :             : </span>
+<span id="L422"><span class="lineNum">     422</span>                 :             : }  // end namespaces</span>
+<span id="L423"><span class="lineNum">     423</span>                 :             : }</span>
+<span id="L424"><span class="lineNum">     424</span>                 :             : </span>
+<span id="L425"><span class="lineNum">     425</span>                 :             : /* Note: I could only make the stream operators work if there were NOT declared</span>
+<span id="L426"><span class="lineNum">     426</span>                 :             :          within the Kit::Text namespace.  Fortunately, I don't actually have to</span>
+<span id="L427"><span class="lineNum">     427</span>                 :             :          make the stream operators 'friends' for the necessary implementation.</span>
+<span id="L428"><span class="lineNum">     428</span>                 :             : </span>
+<span id="L429"><span class="lineNum">     429</span>                 :             :          If someone could explain/show me how to make it work using the</span>
+<span id="L430"><span class="lineNum">     430</span>                 :             :          'friend' approach - please contact me.</span>
+<span id="L431"><span class="lineNum">     431</span>                 :             : */</span>
+<span id="L432"><span class="lineNum">     432</span>                 :             : namespace std {</span>
+<span id="L433"><span class="lineNum">     433</span>                 :             : </span>
+<span id="L434"><span class="lineNum">     434</span>                 :             : /// Support stream output operator directly</span>
+<span id="L435"><span class="lineNum">     435</span>                 :             : ostream&amp; operator&lt;&lt;( ostream&amp; out, const Kit::Text::IString&amp; outstring );</span>
+<span id="L436"><span class="lineNum">     436</span>                 :             : </span>
+<span id="L437"><span class="lineNum">     437</span>                 :             : /// Support stream input operator directly</span>
+<span id="L438"><span class="lineNum">     438</span>                 :             : istream&amp; operator&gt;&gt;( istream&amp; in, Kit::Text::IString&amp; instring );</span>
+<span id="L439"><span class="lineNum">     439</span>                 :             : </span>
+<span id="L440"><span class="lineNum">     440</span>                 :             : }  // end std namespace</span>
+<span id="L441"><span class="lineNum">     441</span>                 :             : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

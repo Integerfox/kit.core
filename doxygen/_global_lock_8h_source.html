@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 50-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 54-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -91,12 +91,12 @@ $(function() {
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">        thread currently &quot;owns&quot; the lock, the current thread will &quot;wait&quot; until it</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">        can obtain ownership before proceeding.</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_global_lock.html#af018fa7541e5f1aaccc0525843db511d">   44</a></span>    <span class="keywordtype">void</span> <span class="keyword">static</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_global_lock.html#af018fa7541e5f1aaccc0525843db511d">begin</a>( <span class="keywordtype">void</span> );</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_global_lock.html#a887a675459c8b53518fab415d796768c">   44</a></span>    <span class="keywordtype">void</span> <span class="keyword">static</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_global_lock.html#a887a675459c8b53518fab415d796768c">begin</a>();</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    /** This method is invoke at the end of a critical section.  This call will</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        release the ownership of the lock.</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_global_lock.html#a60316078b764953075d8cd97c6b39b58">   49</a></span>    <span class="keywordtype">void</span> <span class="keyword">static</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_global_lock.html#a60316078b764953075d8cd97c6b39b58">end</a>( <span class="keywordtype">void</span> );</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_global_lock.html#a03ef871ef8a38193302adeb9b3303192">   49</a></span>    <span class="keywordtype">void</span> <span class="keyword">static</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_global_lock.html#a03ef871ef8a38193302adeb9b3303192">end</a>();</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
@@ -105,13 +105,13 @@ $(function() {
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_global_lock_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_global_lock.html">Kit::System::GlobalLock</a></div><div class="ttdoc">This class defines an interface for a &quot;Global Lock&quot;.</div><div class="ttdef"><b>Definition</b> GlobalLock.h:37</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_global_lock_html_a60316078b764953075d8cd97c6b39b58"><div class="ttname"><a href="class_kit_1_1_system_1_1_global_lock.html#a60316078b764953075d8cd97c6b39b58">Kit::System::GlobalLock::end</a></div><div class="ttdeci">static void end(void)</div><div class="ttdoc">This method is invoke at the end of a critical section.</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_global_lock_html_af018fa7541e5f1aaccc0525843db511d"><div class="ttname"><a href="class_kit_1_1_system_1_1_global_lock.html#af018fa7541e5f1aaccc0525843db511d">Kit::System::GlobalLock::begin</a></div><div class="ttdeci">static void begin(void)</div><div class="ttdoc">This method is invoked prior to entering a critical section.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_global_lock_html_a03ef871ef8a38193302adeb9b3303192"><div class="ttname"><a href="class_kit_1_1_system_1_1_global_lock.html#a03ef871ef8a38193302adeb9b3303192">Kit::System::GlobalLock::end</a></div><div class="ttdeci">static void end()</div><div class="ttdoc">This method is invoke at the end of a critical section.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_global_lock_html_a887a675459c8b53518fab415d796768c"><div class="ttname"><a href="class_kit_1_1_system_1_1_global_lock.html#a887a675459c8b53518fab415d796768c">Kit::System::GlobalLock::begin</a></div><div class="ttdeci">static void begin()</div><div class="ttdoc">This method is invoked prior to entering a critical section.</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">The 'Kit' namespace is the root name space for the KIT C++ class library that is specifically target ...</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 13 2025 17:27:21 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 14 2025 16:18:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

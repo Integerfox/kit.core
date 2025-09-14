@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 50-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 54-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -439,12 +439,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aeb0af4ed971bc5db8fd1f08b2de3d5c5" id="r_aeb0af4ed971bc5db8fd1f08b2de3d5c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb0af4ed971bc5db8fd1f08b2de3d5c5">calcMemSize</a> (int len) noexcept</td></tr>
 <tr class="memdesc:aeb0af4ed971bc5db8fd1f08b2de3d5c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the need memory size in "block units".  <br /></td></tr>
 <tr class="separator:aeb0af4ed971bc5db8fd1f08b2de3d5c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe7e61dc2c8d109508def6c62a39d778" id="r_afe7e61dc2c8d109508def6c62a39d778"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe7e61dc2c8d109508def6c62a39d778">freeCurrentString</a> (void) noexcept</td></tr>
-<tr class="memdesc:afe7e61dc2c8d109508def6c62a39d778"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the current string memory - IF it was previously allocated.  <br /></td></tr>
-<tr class="separator:afe7e61dc2c8d109508def6c62a39d778"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7194c9469e3105bbda88d469ca1d0c7" id="r_ae7194c9469e3105bbda88d469ca1d0c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7194c9469e3105bbda88d469ca1d0c7">maxStrLen</a> (void) const noexcept</td></tr>
-<tr class="memdesc:ae7194c9469e3105bbda88d469ca1d0c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the max length of internal WITHOUT the '\0' string terminator.  <br /></td></tr>
-<tr class="separator:ae7194c9469e3105bbda88d469ca1d0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef1f41eeb8149112d0366adc435279c7" id="r_aef1f41eeb8149112d0366adc435279c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef1f41eeb8149112d0366adc435279c7">freeCurrentString</a> () noexcept</td></tr>
+<tr class="memdesc:aef1f41eeb8149112d0366adc435279c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the current string memory - IF it was previously allocated.  <br /></td></tr>
+<tr class="separator:aef1f41eeb8149112d0366adc435279c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae84a6de6b91185f06fdc1c5827d9356a" id="r_ae84a6de6b91185f06fdc1c5827d9356a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae84a6de6b91185f06fdc1c5827d9356a">maxStrLen</a> () const noexcept</td></tr>
+<tr class="memdesc:ae84a6de6b91185f06fdc1c5827d9356a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the max length of internal WITHOUT the '\0' string terminator.  <br /></td></tr>
+<tr class="separator:ae84a6de6b91185f06fdc1c5827d9356a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3f0dd592c533ce5baf66964956d251c" id="r_ab3f0dd592c533ce5baf66964956d251c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3f0dd592c533ce5baf66964956d251c">validateAndCopy</a> (const char *string, int len) noexcept</td></tr>
 <tr class="memdesc:ab3f0dd592c533ce5baf66964956d251c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Validates the just created string is 'valid'.  <br /></td></tr>
 <tr class="separator:ab3f0dd592c533ce5baf66964956d251c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -962,8 +962,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afe7e61dc2c8d109508def6c62a39d778" name="afe7e61dc2c8d109508def6c62a39d778"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe7e61dc2c8d109508def6c62a39d778">&#9670;&#160;</a></span>freeCurrentString()</h2>
+<a id="aef1f41eeb8149112d0366adc435279c7" name="aef1f41eeb8149112d0366adc435279c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef1f41eeb8149112d0366adc435279c7">&#9670;&#160;</a></span>freeCurrentString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -974,7 +974,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Kit::Text::DString::freeCurrentString </td>
           <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1051,8 +1051,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae7194c9469e3105bbda88d469ca1d0c7" name="ae7194c9469e3105bbda88d469ca1d0c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7194c9469e3105bbda88d469ca1d0c7">&#9670;&#160;</a></span>maxStrLen()</h2>
+<a id="ae84a6de6b91185f06fdc1c5827d9356a" name="ae84a6de6b91185f06fdc1c5827d9356a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae84a6de6b91185f06fdc1c5827d9356a">&#9670;&#160;</a></span>maxStrLen()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1063,7 +1063,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">int Kit::Text::DString::maxStrLen </td>
           <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -1883,7 +1883,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 13 2025 17:27:22 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 14 2025 16:18:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
