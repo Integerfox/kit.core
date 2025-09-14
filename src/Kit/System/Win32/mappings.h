@@ -15,8 +15,9 @@
 
  */
 
+/// Prevents min/max macros from windows.h
 #ifndef NOMINMAX
-#define NOMINMAX  // Prevents min/max macros from windows.h
+#define NOMINMAX
 #endif
 
 #include <windows.h>

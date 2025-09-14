@@ -16,10 +16,11 @@ namespace Io {
 
 ///////////////////////////////
 TeeOutput::TeeOutput() noexcept
-    : m_opened( true )
+    : m_streams()
+    , m_failed()
+    , m_opened( true )
 {
-    memset( m_streams, 0, sizeof( m_streams ) );
-    memset( m_failed, 0, sizeof( m_failed ) );
+    // Note: m_streams[] and m_failed[] are initialized to all nullptrs by the member initializer list
 }
 
 TeeOutput::TeeOutput( IOutput& streamA ) noexcept

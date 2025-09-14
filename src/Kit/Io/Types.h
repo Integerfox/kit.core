@@ -55,6 +55,8 @@ static constexpr const char* const nativeNewline = KIT_IO_NEW_LINE_NATIVE;
  */
 #ifndef OPTION_KIT_IO_LENGTH_TYPE
 using ByteCount_T = int32_t;
+
+/// Alias for Offset type (used for seek operations)
 using Offset_T    = int32_t;
 #else
 using ByteCount_T = OPTION_KIT_IO_LENGTH_TYPE;

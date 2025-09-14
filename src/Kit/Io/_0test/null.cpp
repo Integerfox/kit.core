@@ -45,7 +45,6 @@ public:
     {
         m_count++;
         return fd.write( "Hello" );
-        return fd.write( " World" );
     }
 };
 }; // end namespace

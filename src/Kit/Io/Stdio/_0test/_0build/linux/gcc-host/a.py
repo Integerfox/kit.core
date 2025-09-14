@@ -40,8 +40,8 @@ utils.set_pkg_and_wrkspace_roots(__file__)
 
 if ( os.path.isdir( '_posix' ) ):
     run_test( '_posix' )
-    print
+    print()
 
 if ( os.path.isdir( '_posix64' ) ):
     run_test( '_posix64' )
-    print
+    print()

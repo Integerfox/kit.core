@@ -40,8 +40,8 @@ utils.set_pkg_and_wrkspace_roots(__file__)
 
 if ( os.path.isdir( '_win32' ) ):
     run_test( '_win32' )
-    print
+    print()
 
 if ( os.path.isdir( '_win64' ) ):
     run_test( '_win64' )
-    print
+    print()
