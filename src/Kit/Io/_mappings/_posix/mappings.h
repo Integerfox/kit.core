@@ -14,14 +14,14 @@
     Kit::Io namespace
 
  */
-#include <limits.h>    // For PATH_MAX
+#include <limits.h>  // For PATH_MAX
 
-#define KitIoStdioHandle_T_MAP         int       //!< Mapping
-#define KitIoSocketHandle_T_MAP        int       //!< Mapping
-#define KitIoFileHandle_T_MAP          int       //!< Mapping
-#define KIT_IO_NEW_LINE_NATIVE_MAP     "\n"      //!< Mapping
-#define KIT_IO_FILE_NATIVE_DIR_SEP_MAP '/'       //!< Mapping
-#define KIT_IO_FILE_MAX_NAME_MAP       PATH_MAX  //!< Mapping
+#define KitIoStdioHandle_T_MAP                int       //!< Mapping
+#define KitIoSocketHandle_T_MAP               int       //!< Mapping
+#define KitIoFileHandle_T_MAP                 int       //!< Mapping
+#define KIT_IO_NEW_LINE_NATIVE_MAP            "\n"      //!< Mapping
+#define KIT_IO_DIRECTORY_SEPARATOR_NATIVE_MAP '/'       //!< Mapping
+#define KIT_IO_FILE_MAX_NAME_MAP              PATH_MAX  //!< Mapping
 
 
 ///////////////////////////////////////////////////////////////////////////////
