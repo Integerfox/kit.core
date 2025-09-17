@@ -10,7 +10,11 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Io/File/System.h"
+#include "kit_map.h"
+
+
+/** Defer the HAL type to the platform */
+#define KitIoFileDirListHal_T KitIoFileDirListHal_T_MAP
 
 ///
 namespace Kit {
@@ -21,17 +25,15 @@ namespace File {
 
 
 //////////////////////
-/** This template class defines a platform independent interface for enumerating the
-    files and directory contained within a parent directory.  The template
-    argument 'DIRLIST_HDL' is the same type that is used with the DirList class.
+/** This static class defines a platform independent interface for enumerating the
+    files and directory contained within a parent directory.
 
-    DIRLIST_HDL is platform specific and contains all of the necessary platform
-    specific types and data needed to enumerate a directory.
+    KitIoFileDirListHal_T is platform specific and contains all of the necessary
+    platform specific types and data needed to enumerate a directory.
 
     NOTE: This interface/class is NOT thread safe - i.e. do NOT list a directory
           from multiple threads at the same time.
  */
-template <typename DIRLIST_HDL>
 class DirListHal
 {
 public:
@@ -45,13 +47,13 @@ public:
         entry in the directory.  If the directory is empty then 'firstEntryName'
         is set to an empty string
 
-        The 'maxNameLen' argument specifies the size - which needs to include
-        space for the null terminator, in bytes, of the 'firstEntryName' buffer.
+        The 'maxNameLen' argument specifies the byte size - which needs to include
+        space for the null terminator - of the 'firstEntryName' buffer.
      */
-    static bool getFirstEntry( DIRLIST_HDL& hdl,
-                               const char*  dirNameToList,
-                               char*        firstEntryName,
-                               unsigned     maxNameLen ) noexcept;
+    static bool getFirstEntry( KitIoFileDirListHal_T& hdl,
+                               const char*            dirNameToList,
+                               char*                  firstEntryName,
+                               unsigned               maxNameLen ) noexcept;
 
     /** Returns the next entry in the directory.  If a file system error was
         encountered false is returned; else true is returned.
@@ -66,15 +68,12 @@ public:
         The 'maxNameLen' argument specifies the size - which needs to include
         space for the null terminator, in bytes, of the 'nextEntryName' buffer.
      */
-    static bool getNextEntry( DIRLIST_HDL& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept;
-
-    /** Populates the System::Info_T struct based on the current directory entry */
-    static void setInfo( DIRLIST_HDL& hdl, System::Info_T& info ) noexcept;
+    static bool getNextEntry( KitIoFileDirListHal_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept;
 
     /** Closes the directory handle. This method MUST always be called after a
         successful call to getFirstEntry().
      */
-    static void close( DIRLIST_HDL& hdl ) noexcept;
+    static void close( KitIoFileDirListHal_T& hdl ) noexcept;
 };
 
 }  // end namespaces

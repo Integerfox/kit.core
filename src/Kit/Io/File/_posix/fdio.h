@@ -13,10 +13,13 @@
 
 #include "Kit/Io/Stdio/_posix/fdio.h"
 #include "Kit/System/Assert.h"
+#include <cerrno>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
+#include "Kit/System/Trace.h"
+#include <errno.h>
 ///
 namespace Kit {
 ///
@@ -57,7 +60,12 @@ public:
 
 
         // Open the file
+        errno = 0;
         KitIoFileHandle_T fd( ::open( fileEntryName, flags, mode ) );
+        if ( fd == INVALID_FD )
+        {
+            KIT_SYSTEM_TRACE_MSG( "_0test", "open('%s') failed, errno=%d", fileEntryName, errno );
+        }
         return fd;
     }
 

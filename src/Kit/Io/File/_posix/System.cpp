@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Kit/Io/File/System.h"
-#include "DirList.h"
+#include "Kit/Io/File/_directory/DirList.h"
 #include "fdio.h"
 
 /// Helper method that does all of the work for populating the Info struct
@@ -91,7 +91,8 @@ bool System::walkDirectory( const char*      dirToList,
                             bool             filesOnly,
                             bool             dirsOnly )
 {
-    DirList lister( dirToList, depth, filesOnly, dirsOnly );
+    static DirList lister;
+    lister.reset( dirToList, depth, filesOnly, dirsOnly );
     return lister.traverse( callback );
 }
 

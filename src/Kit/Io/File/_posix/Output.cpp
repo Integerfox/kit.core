@@ -88,7 +88,7 @@ bool Output::isEof() noexcept
 
 bool Output::length( ByteCount_T& len ) noexcept
 {
-    return PosixFileIO::length( m_inFd, len );
+    return PosixFileIO::length( m_outFd, len );
 }
 
 
