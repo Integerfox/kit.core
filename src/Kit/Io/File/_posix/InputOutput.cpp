@@ -18,8 +18,8 @@ namespace Kit {
 namespace Io {
 namespace File {
 
-InputOutput::InputOutput( const char* fileName, bool forceCreate, bool forceEmptyFile, bool readOnly ) noexcept
-    : m_fd( PosixFileIO::open( System::getNative(fileName) ) )
+InputOutput::InputOutput( const char* fileName, bool forceCreate, bool forceEmptyFile ) noexcept
+    : m_fd( PosixFileIO::open( System::getNative(fileName), false, forceCreate, forceEmptyFile ) )
 {
 }
 

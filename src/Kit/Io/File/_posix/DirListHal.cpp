@@ -23,22 +23,22 @@ bool DirListHal::getFirstEntry( KitIoFileDirListHal_T& hdl,
                                 char*                  firstEntryName,
                                 unsigned               maxNameLen ) noexcept
 {
-    DIR* hdlPtr = opendir( dirNameToList );
-    if ( hdlPtr != nullptr )
+    hdl = opendir( dirNameToList );
+    if ( hdl != nullptr )
     {
         // Get the first entry
-        if ( getNextEntry( hdlPtr, firstEntryName, maxNameLen ) )
+        if ( getNextEntry( hdl, firstEntryName, maxNameLen ) )
         {
             // Check for the Directory being empty -->need to make sure the directory FD gets closed
             if ( firstEntryName[0] == '\0' )
             {
-                closedir( hdlPtr );
+                closedir( hdl );
             }
             return true;
         }
 
         // Error reading the directory -->need to make sure the directory FD gets closed
-        closedir( hdlPtr );
+        closedir( hdl );
     }
 
     // Error opening the directory
@@ -56,7 +56,7 @@ bool DirListHal::getNextEntry( KitIoFileDirListHal_T& hdl, char* nextEntryName, 
     }
 
     // No more entries
-    else if ( errno != 0 )
+    else if ( errno == 0 )
     {
         nextEntryName[0] = '\0';
     }

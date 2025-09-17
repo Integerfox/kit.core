@@ -130,7 +130,7 @@ public:
         {
             return false;
         }
-        
+
         // Ensure my current root ends with a trailing dir separator
         ensureTrailingDirSep( m_curDir.name );
 
@@ -170,74 +170,74 @@ public:
                         DirListHal::close( hdl );
                         return false;
                     }
+
+                    // The current entry is a directory
+                    if ( cbInfo.m_isDir )
+                    {
+                        // Callback the client
+                        if ( ( !m_filesOnly && !m_dirsOnly ) || m_dirsOnly )
+                        {
+                            if ( callback.item( m_curDir.name, m_curFsEntry, cbInfo ) == Kit::Type::TraverserStatus::eABORT )
+                            {
+                                DirListHal::close( hdl );
+                                return false;
+                            }
+                        }
+
+                        // Track my depth
+                        KIT_SYSTEM_TRACE_MSG( MYSECT_,
+                                              "\nISDIR: name=%s, newDirLevel=%s, curDepth=%d, max depth=%d",
+                                              m_wrkEntryName(),
+                                              newDirLevel ? "YES" : "no",
+                                              curDepth,
+                                              m_depth );
+                        if ( !newDirLevel )
+                        {
+                            curDepth++;
+                        }
+
+                        // Limit the depth of the traversal
+                        if ( curDepth <= m_depth )
+                        {
+                            newDirLevel = true;
+
+                            // Push the found directory name onto the stack
+                            // Note: We cheat here and create a place holder item on the stack,
+                            //       then once on the stack - we update the item to reflect the
+                            //       directory found
+                            m_stack.push( m_curDir );                         // Push a place holder item on to the stack
+                            DirDepth_T& pushedItem = *( m_stack.peekTop() );  // Get reference to the new item on the stack
+                            ensureTrailingDirSep( m_wrkEntryName );           // Make sure the new directory has a trailing '/'
+                            pushedItem.name     = m_wrkEntryName;             // Update the item on the stack with the new dir found
+                            pushedItem.curDepth = curDepth;
+                            KIT_SYSTEM_TRACE_MSG( MYSECT_,
+                                                  "\nPUSHED dir=%s (parent=%s), curDepth=%d",
+                                                  pushedItem.name.getString(),
+                                                  m_curDir.name.getString(),
+                                                  curDepth );
+                        }
+                    }
+
+                    // The current entry is a file
                     else
                     {
-                        // The current entry is a directory
-                        if ( cbInfo.m_isDir )
+                        if ( ( !m_filesOnly && !m_dirsOnly ) || m_filesOnly )
                         {
-                            // Callback the client
-                            if ( ( !m_filesOnly && !m_dirsOnly ) || m_dirsOnly )
+                            if ( callback.item( m_curDir.name, m_curFsEntry, cbInfo ) == Kit::Type::TraverserStatus::eABORT )
                             {
-                                if ( callback.item( m_curDir.name, m_curFsEntry, cbInfo ) == Kit::Type::TraverserStatus::eABORT )
-                                {
-                                    DirListHal::close( hdl );
-                                    return false;
-                                }
-                            }
-
-                            // Track my depth
-                            KIT_SYSTEM_TRACE_MSG( MYSECT_,
-                                                  "\nISDIR: m_name=%s, fs=%s, newDirLevel=%d, curDepth=%d, m_depth=%d",
-                                                  m_curDir.name.getString(),
-                                                  m_curFsEntry,
-                                                  newDirLevel,
-                                                  curDepth,
-                                                  m_depth );
-                            if ( !newDirLevel )
-                            {
-                                curDepth++;
-                            }
-
-                            // Limit the depth of the traversal
-                            if ( curDepth <= m_depth )
-                            {
-                                newDirLevel = true;
-
-                                // Push the found directory name onto the stack
-                                m_stack.push( m_curDir );
-                                DirDepth_T& pushedItem = *( m_stack.peekTop() );  // Cheat here and use the memory on the stack instead of allocating a local variable
-                                ensureTrailingDirSep( pushedItem.name );
-                                pushedItem.name     += m_curFsEntry;
-                                pushedItem.curDepth  = curDepth;
-                                KIT_SYSTEM_TRACE_MSG( MYSECT_,
-                                                      "\nPUSHED dir=%s (parent=%s), curDepth=%d",
-                                                      pushedItem.name.getString(),
-                                                      m_curDir.name.getString(),
-                                                      curDepth );
-                            }
-                        }
-
-                        // The current entry is a file
-                        else
-                        {
-                            if ( ( !m_filesOnly && !m_dirsOnly ) || m_filesOnly )
-                            {
-                                if ( callback.item( m_curDir.name, m_curFsEntry, cbInfo ) == Kit::Type::TraverserStatus::eABORT )
-                                {
-                                    DirListHal::close( hdl );
-                                    return false;
-                                }
+                                DirListHal::close( hdl );
+                                return false;
                             }
                         }
                     }
+                }
 
-                    // Get the next entry in the directory
-                    if ( DirListHal::getNextEntry( hdl, m_curFsEntry, sizeof( m_curFsEntry ) ) == false )
-                    {
-                        // Error reading the directory
-                        DirListHal::close( hdl );
-                        return false;
-                    }
+                // Get the next entry in the directory
+                if ( DirListHal::getNextEntry( hdl, m_curFsEntry, sizeof( m_curFsEntry ) ) == false )
+                {
+                    // Error reading the directory
+                    DirListHal::close( hdl );
+                    return false;
                 }
             }
 

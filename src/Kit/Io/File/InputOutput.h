@@ -32,8 +32,8 @@ namespace File {
 class InputOutput : public IInputOutput
 {
 public:
-    /// Constructor -->Opens the file (note: readOnly takes precedence over the other flags)
-    InputOutput( const char* fileName, bool forceCreate = true, bool forceEmptyFile = false, bool readOnly = false ) noexcept;
+    /// Constructor
+    InputOutput( const char* fileName, bool forceCreate = true, bool forceEmptyFile = false ) noexcept;
 
     /// Destructor -->Will insure the file gets closed
     ~InputOutput() noexcept;

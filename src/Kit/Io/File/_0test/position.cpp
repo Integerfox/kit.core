@@ -17,16 +17,16 @@
 #include "Kit/Text/FString.h"
 
 
-#define SECT_     "_0test"
+#define SECT_       "_0test"
 
-#define FILE_NAME       "output1.txt.tmp"
-#define OUTPUT_TXT      "Hello world!"
-#define OUTPUT_TXT2     "gd-by"
-#define OUTPUT_TXT3     "gd-by world!"
-#define OUTPUT_TXT4     " world!"
+#define FILE_NAME   "output1.txt.tmp"
+#define OUTPUT_TXT  "Hello world!"
+#define OUTPUT_TXT2 "gd-by"
+#define OUTPUT_TXT3 "gd-by world!"
+#define OUTPUT_TXT4 " world!"
 
 
-/// 
+///
 using namespace Kit::Io::File;
 
 TEST_CASE( "iposition output" )
@@ -35,11 +35,11 @@ TEST_CASE( "iposition output" )
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     //
-    Kit::Text::FString<20>  buffer( "bob" );
-    Output fd( FILE_NAME, true, true );
+    Kit::Text::FString<20> buffer( "bob" );
+    Output                 fd( FILE_NAME, true, true );
     REQUIRE( fd.isOpened() );
 
-    SECTION( "absolute" )
+    SECTION( "output: absolute" )
     {
         Kit::Io::ByteCount_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
@@ -73,7 +73,7 @@ TEST_CASE( "iposition output" )
         infd.close();
     }
 
-    SECTION( "relative" )
+    SECTION( "output: relative" )
     {
         Kit::Io::ByteCount_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
@@ -94,29 +94,14 @@ TEST_CASE( "iposition output" )
         REQUIRE( infd.length( len ) == true );
         REQUIRE( len == strlen( OUTPUT_TXT ) );
         REQUIRE( infd.read( buffer ) == true );
-        REQUIRE( infd.isEof() == false);
+        REQUIRE( infd.isEof() == false );
         REQUIRE( buffer == OUTPUT_TXT3 );
         REQUIRE( infd.read( buffer ) == false );
         REQUIRE( infd.isEof() == true );
         infd.close();
     }
 
-
-    fd.close();
-    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
-}
-
-TEST_CASE( "iposition in/out")
-{
-    KIT_SYSTEM_TRACE_FUNC( SECT_ );
-    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-
-    //
-    Kit::Text::FString<20>  buffer( "bob" );
-    InputOutput fd( FILE_NAME, true, true );
-    REQUIRE( fd.isOpened() );
-
-    SECTION( "absolute" )
+    SECTION( "in/out: absolute" )
     {
         Kit::Io::ByteCount_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
@@ -150,7 +135,7 @@ TEST_CASE( "iposition in/out")
         infd.close();
     }
 
-    SECTION( "relative" )
+    SECTION( "in/out: relative" )
     {
         Kit::Io::ByteCount_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
@@ -178,22 +163,7 @@ TEST_CASE( "iposition in/out")
         infd.close();
     }
 
-
-    fd.close();
-    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
-}
-
-TEST_CASE( "iposition in" )
-{
-    KIT_SYSTEM_TRACE_FUNC( SECT_ );
-    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-
-    //
-    Kit::Text::FString<20>  buffer( "bob" );
-    InputOutput fd( FILE_NAME, true, true );
-    REQUIRE( fd.isOpened() );
-
-    SECTION( "absolute" )
+    SECTION( "in: absolute" )
     {
         Kit::Io::ByteCount_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
@@ -216,7 +186,7 @@ TEST_CASE( "iposition in" )
         infd.close();
     }
 
-    SECTION( "relative" )
+    SECTION( "in: relative" )
     {
         Kit::Io::ByteCount_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
@@ -228,7 +198,7 @@ TEST_CASE( "iposition in" )
 
         Input infd( FILE_NAME );
         REQUIRE( infd.setToEof() == true );
-        REQUIRE( infd.setRelativePos( (long) (strlen( OUTPUT_TXT2 )) - (long) (strlen( OUTPUT_TXT )) ) == true );
+        REQUIRE( infd.setRelativePos( (long)( strlen( OUTPUT_TXT2 ) ) - (long)( strlen( OUTPUT_TXT ) ) ) == true );
         Kit::Io::ByteCount_T curpos;
         REQUIRE( infd.currentPos( curpos ) == true );
         REQUIRE( curpos == strlen( OUTPUT_TXT2 ) );
