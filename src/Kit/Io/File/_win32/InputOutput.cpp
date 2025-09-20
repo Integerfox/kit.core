@@ -19,20 +19,20 @@ namespace Io {
 namespace File {
 
 InputOutput::InputOutput( const char* fileName, bool forceCreate, bool forceEmptyFile ) noexcept
-    : m_fd( PosixFileIO::open( System::getNative(fileName), false, forceCreate, forceEmptyFile ) )
+    : m_fd( Win32FileIO::open( System::getNative(fileName), false, forceCreate, forceEmptyFile ) )
 {
 }
 
 
 InputOutput::~InputOutput() noexcept
 {
-    Stdio::PosixIO::close( m_fd );
+    Stdio::Win32IO::close( m_fd );
 }
 
 
 bool InputOutput::isOpened() noexcept
 {
-    return m_fd != Stdio::PosixIO::INVALID_FD;
+    return m_fd != INVALID_HANDLE_VALUE;
 }
 
 
@@ -40,12 +40,12 @@ bool InputOutput::isOpened() noexcept
 bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
 {
     m_eos = false;
-    return Kit::Io::Stdio::PosixIO::read( m_fd, m_eos, buffer, numBytes, bytesRead );
+    return Kit::Io::Stdio::Win32IO::read( m_fd, m_eos, buffer, numBytes, bytesRead );
 }
 
 bool InputOutput::available() noexcept
 {
-    return Kit::Io::Stdio::PosixIO::available( m_fd );
+    return Kit::Io::Stdio::Win32IO::available( m_fd );
 }
 
 bool InputOutput::isEos() noexcept
@@ -55,7 +55,7 @@ bool InputOutput::isEos() noexcept
 
 void InputOutput::close() noexcept
 {
-    Kit::Io::Stdio::PosixIO::close( m_fd );
+    Kit::Io::Stdio::Win32IO::close( m_fd );
 }
 
 
@@ -63,34 +63,34 @@ void InputOutput::close() noexcept
 bool InputOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
 {
     m_eos = false;
-    return Kit::Io::Stdio::PosixIO::write( m_fd, m_eos, buffer, maxBytes, bytesWritten );
+    return Kit::Io::Stdio::Win32IO::write( m_fd, m_eos, buffer, maxBytes, bytesWritten );
 }
 
 void InputOutput::flush() noexcept
 {
-    Kit::Io::Stdio::PosixIO::flush( m_fd );
+    Kit::Io::Stdio::Win32IO::flush( m_fd );
 }
 
 
 //////////////////////////
 bool InputOutput::currentPos( ByteCount_T& curPos ) noexcept
 {
-    return PosixFileIO::currentPos( m_fd, curPos );
+    return Win32FileIO::currentPos( m_fd, curPos );
 }
 
 bool InputOutput::setRelativePos( ByteCount_T deltaOffset ) noexcept
 {
-    return PosixFileIO::setRelativePos( m_fd, deltaOffset );
+    return Win32FileIO::setRelativePos( m_fd, deltaOffset );
 }
 
 bool InputOutput::setToEof() noexcept
 {
-    return PosixFileIO::setToEof( m_fd );
+    return Win32FileIO::setToEof( m_fd );
 }
 
 bool InputOutput::setAbsolutePos( ByteCount_T newoffset ) noexcept
 {
-    return PosixFileIO::setAbsolutePos( m_fd, newoffset );
+    return Win32FileIO::setAbsolutePos( m_fd, newoffset );
 }
 
 bool InputOutput::isEof() noexcept
@@ -100,7 +100,7 @@ bool InputOutput::isEof() noexcept
 
 bool InputOutput::length( ByteCount_T& len ) noexcept
 {
-    return PosixFileIO::length( m_fd, len );
+    return Win32FileIO::length( m_fd, len );
 }
 
 }  // end namespace

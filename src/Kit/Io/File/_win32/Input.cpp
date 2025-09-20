@@ -20,20 +20,20 @@ namespace File {
 
 //////////////////////////
 Input::Input( const char* fileName ) noexcept
-    : m_inFd( PosixFileIO::open( System::getNative(fileName) ) )
+    : m_inFd( Win32FileIO::open( System::getNative(fileName) ) )
 {
 }
 
 
 Input::~Input() noexcept
 {
-    Stdio::PosixIO::close( m_inFd );
+    Stdio::Win32IO::close( m_inFd );
 }
 
 
 bool Input::isOpened() noexcept
 {
-    return m_inFd != Stdio::PosixIO::INVALID_FD;
+    return m_inFd != INVALID_HANDLE_VALUE;
 }
 
 
@@ -41,12 +41,12 @@ bool Input::isOpened() noexcept
 bool Input::read( void* buffer, int numBytes, int& bytesRead ) noexcept
 {
     m_inEos = false;
-    return Kit::Io::Stdio::PosixIO::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );
+    return Kit::Io::Stdio::Win32IO::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );
 }
 
 bool Input::available() noexcept
 {
-    return Kit::Io::Stdio::PosixIO::available( m_inFd );
+    return Kit::Io::Stdio::Win32IO::available( m_inFd );
 }
 
 bool Input::isEos() noexcept
@@ -56,29 +56,29 @@ bool Input::isEos() noexcept
 
 void Input::close() noexcept
 {
-    Kit::Io::Stdio::PosixIO::close( m_inFd );
+    Kit::Io::Stdio::Win32IO::close( m_inFd );
 }
 
 
 //////////////////////////
 bool Input::currentPos( ByteCount_T& curPos ) noexcept
 {
-    return PosixFileIO::currentPos( m_inFd, curPos );
+    return Win32FileIO::currentPos( m_inFd, curPos );
 }
 
 bool Input::setRelativePos( ByteCount_T deltaOffset ) noexcept
 {
-    return PosixFileIO::setRelativePos( m_inFd, deltaOffset );
+    return Win32FileIO::setRelativePos( m_inFd, deltaOffset );
 }
 
 bool Input::setToEof() noexcept
 {
-    return PosixFileIO::setToEof( m_inFd );
+    return Win32FileIO::setToEof( m_inFd );
 }
 
 bool Input::setAbsolutePos( ByteCount_T newoffset ) noexcept
 {
-    return PosixFileIO::setAbsolutePos( m_inFd, newoffset );
+    return Win32FileIO::setAbsolutePos( m_inFd, newoffset );
 }
 
 bool Input::isEof() noexcept
@@ -88,7 +88,7 @@ bool Input::isEof() noexcept
 
 bool Input::length( ByteCount_T& len ) noexcept
 {
-    return PosixFileIO::length( m_inFd, len );
+    return Win32FileIO::length( m_inFd, len );
 }
 
 

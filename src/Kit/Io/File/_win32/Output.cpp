@@ -21,19 +21,19 @@ namespace File {
 
 //////////////////////////
 Output::Output( const char* fileName, bool forceCreate, bool forceEmptyFile )
-    : m_outFd( PosixFileIO::open( System::getNative(fileName), false, forceCreate, forceEmptyFile ) )
+    : m_outFd( Win32FileIO::open( System::getNative(fileName), false, forceCreate, forceEmptyFile ) )
 {
 }
 
 Output::~Output()
 {
-    Kit::Io::Stdio::PosixIO::close( m_outFd );
+    Kit::Io::Stdio::Win32IO::close( m_outFd );
 }
 
 
 bool Output::isOpened()
 {
-    return m_outFd != Stdio::PosixIO::INVALID_FD;
+    return m_outFd != INVALID_HANDLE_VALUE;
 }
 
 
@@ -41,12 +41,12 @@ bool Output::isOpened()
 bool Output::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
 {
     m_outEos = false;
-    return Kit::Io::Stdio::PosixIO::write( m_outFd, m_outEos, buffer, maxBytes, bytesWritten );
+    return Kit::Io::Stdio::Win32IO::write( m_outFd, m_outEos, buffer, maxBytes, bytesWritten );
 }
 
 void Output::flush() noexcept
 {
-    Kit::Io::Stdio::PosixIO::flush( m_outFd );
+    Kit::Io::Stdio::Win32IO::flush( m_outFd );
 }
 
 bool Output::isEos() noexcept
@@ -56,29 +56,29 @@ bool Output::isEos() noexcept
 
 void Output::close() noexcept
 {
-    Kit::Io::Stdio::PosixIO::close( m_outFd );
+    Kit::Io::Stdio::Win32IO::close( m_outFd );
 }
 
 
 //////////////////////////
 bool Output::currentPos( ByteCount_T& curPos ) noexcept
 {
-    return PosixFileIO::currentPos( m_outFd, curPos );
+    return Win32FileIO::currentPos( m_outFd, curPos );
 }
 
 bool Output::setRelativePos( ByteCount_T deltaOffset ) noexcept
 {
-    return PosixFileIO::setRelativePos( m_outFd, deltaOffset );
+    return Win32FileIO::setRelativePos( m_outFd, deltaOffset );
 }
 
 bool Output::setToEof() noexcept
 {
-    return PosixFileIO::setToEof( m_outFd );
+    return Win32FileIO::setToEof( m_outFd );
 }
 
 bool Output::setAbsolutePos( ByteCount_T newoffset ) noexcept
 {
-    return PosixFileIO::setAbsolutePos( m_outFd, newoffset );
+    return Win32FileIO::setAbsolutePos( m_outFd, newoffset );
 }
 
 bool Output::isEof() noexcept
@@ -88,7 +88,7 @@ bool Output::isEof() noexcept
 
 bool Output::length( ByteCount_T& len ) noexcept
 {
-    return PosixFileIO::length( m_outFd, len );
+    return Win32FileIO::length( m_outFd, len );
 }
 
 

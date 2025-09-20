@@ -12,8 +12,17 @@
 
 
 #include "Kit/Io/Stdio/_win32/fdio.h"
+#include "Kit/Io/File/System.h"
+#include "Kit/Io/Types.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/Trace.h"
+#include <corecrt_io.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <io.h>
+#include <stdio.h>
+#include <direct.h>
 
 ///
 namespace Kit {
@@ -25,7 +34,7 @@ namespace File {
 
 //////////////////////
 /** This static class provides a collection of functions for operating on Windows
-    file handlers.
+    file handles.
 
     NOTE: All file name/paths MUST be in native format (i.e. use '\' as the
           directory separator)
@@ -43,24 +52,28 @@ public:
         KIT_SYSTEM_ASSERT( fileEntryName != nullptr );
 
         // Set open flags as requested
-        int flags = readOnly ? O_RDONLY : O_RDWR;
-        int mode  = 0666;
+        DWORD createOpt = OPEN_EXISTING;
+        DWORD accessOpt = readOnly ? GENERIC_READ : GENERIC_READ | GENERIC_WRITE;
         if ( forceCreate )
         {
-            flags |= O_CREAT;
+            createOpt = OPEN_ALWAYS;
         }
         if ( forceEmptyFile )
         {
-            flags |= O_TRUNC;
+            createOpt = CREATE_ALWAYS;
         }
 
-
         // Open the file
-        errno = 0;
-        KitIoFileHandle_T fd( ::open( fileEntryName, flags, mode ) );
-        if ( fd == INVALID_FD )
+        KitIoFileHandle_T fd( CreateFile( fileEntryName,
+                                          accessOpt,
+                                          FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                          0,
+                                          createOpt,
+                                          FILE_ATTRIBUTE_NORMAL,
+                                          0 ) );
+        if ( fd == INVALID_HANDLE_VALUE )
         {
-            KIT_SYSTEM_TRACE_MSG( "_0test", "open('%s') failed, errno=%d", fileEntryName, errno );
+            KIT_SYSTEM_TRACE_MSG( "_0test", "open('%s') failed, GetLastError=%lu", fileEntryName, GetLastError() );
         }
         return fd;
     }
@@ -74,16 +87,14 @@ public:
      */
     static bool length( KitIoFileHandle_T fd, ByteCount_T& length ) noexcept
     {
-        if ( fd == INVALID_FD )
+        if ( fd == INVALID_HANDLE_VALUE )
         {
             return false;
         }
 
-        off_t cur     = lseek( fd, 0, SEEK_CUR );
-        off_t eof     = lseek( fd, 0, SEEK_END );
-        off_t restore = lseek( fd, cur, SEEK_SET );
-        length        = (ByteCount_T)eof;
-        return ( cur != (off_t)-1 ) && ( eof != (off_t)-1 ) && ( restore != (off_t)-1 );
+        DWORD len = GetFileSize( fd, 0 );
+        length    = (unsigned long)len;
+        return len != INVALID_FILE_SIZE;
     }
 
 public:
@@ -92,14 +103,14 @@ public:
      */
     inline static bool currentPos( KitIoFileHandle_T fd, ByteCount_T& currentPos ) noexcept
     {
-        if ( fd == INVALID_FD )
+        if ( fd == INVALID_HANDLE_VALUE )
         {
             return false;
         }
 
-        off_t pos  = lseek( fd, 0, SEEK_CUR );
-        currentPos = (ByteCount_T)pos;
-        return pos != (off_t)-1;
+        DWORD pos  = SetFilePointer( fd, 0, 0, FILE_CURRENT );
+        currentPos = (unsigned long)pos;
+        return pos != INVALID_SET_FILE_POINTER;
     }
 
     /** Adjusts the current pointer offset by the specified delta (in bytes).
@@ -108,13 +119,12 @@ public:
      */
     inline static bool setRelativePos( KitIoFileHandle_T fd, ByteCount_T deltaOffset ) noexcept
     {
-        if ( fd == INVALID_FD )
+        if ( fd == INVALID_HANDLE_VALUE )
         {
             return false;
         }
 
-        off_t pos = lseek( fd, (off_t)deltaOffset, SEEK_CUR );
-        return pos != (off_t)-1;
+        return SetFilePointer( fd, deltaOffset, 0, FILE_CURRENT ) != INVALID_SET_FILE_POINTER;
     }
 
     /** Sets the file pointer to the absolute specified offset (in bytes).
@@ -123,13 +133,12 @@ public:
      */
     inline static bool setAbsolutePos( KitIoFileHandle_T fd, ByteCount_T newoffset ) noexcept
     {
-        if ( fd == INVALID_FD )
+        if ( fd == INVALID_HANDLE_VALUE )
         {
             return false;
         }
 
-        off_t pos = lseek( fd, (off_t)newoffset, SEEK_SET );
-        return pos != (off_t)-1;
+        return SetFilePointer( fd, newoffset, 0, FILE_BEGIN ) != INVALID_SET_FILE_POINTER;
     }
 
     /** Sets the file pointer to End-Of-File.  Returns true  if successful, else
@@ -137,22 +146,22 @@ public:
      */
     inline static bool setToEof( KitIoFileHandle_T fd ) noexcept
     {
-        if ( fd == INVALID_FD )
+        if ( fd == INVALID_HANDLE_VALUE )
         {
             return false;
         }
 
-        return lseek( fd, 0, SEEK_END ) != (off_t)-1;
+        return SetFilePointer( fd, 0, 0, FILE_END ) != INVALID_SET_FILE_POINTER;
     }
 
 public:
     /** Returns information about the file system entry.  If there is any
         error, the function returns false; else true is returned.
      */
-    inline static bool getInfo( const char* fsEntryName, struct stat& statOut ) noexcept
+    inline static bool getInfo( const char* fsEntryName, struct _stat& statOut ) noexcept
     {
         KIT_SYSTEM_ASSERT( fsEntryName != nullptr );
-        return stat( fsEntryName, &statOut ) == 0;
+        return _stat( fsEntryName, &statOut ) == 0;
     }
 
     /** Creates a new, empty file.  If the file already exists, the call
@@ -162,15 +171,16 @@ public:
     {
         KIT_SYSTEM_ASSERT( fileName != nullptr );
 
-        bool result = false;
-        int  fd     = ::open( fileName, O_RDWR | O_CREAT | O_EXCL, 0666 );
+        int     fd     = 0;
+        errno_t result = _sopen_s( &fd, fileName, _O_RDWR | _O_CREAT | _O_EXCL, _SH_DENYNO, _S_IREAD | _S_IWRITE );
         if ( fd != -1 )
         {
             result = true;
-            ::close( fd );
+            _close( fd );
+            return true;
         }
 
-        return result;
+        return false;
     }
 
     /** Creates a new directory.  If the directory already exists, the call fails.
@@ -179,11 +189,14 @@ public:
     static bool createDirectory( const char* dirName ) noexcept
     {
         KIT_SYSTEM_ASSERT( dirName != nullptr );
-        return mkdir( dirName, 0755 ) == 0;
+        return _mkdir( dirName ) == 0;
     }
 
 public:
     /** Renames and/or moves a file.  Returns true if successful.
+        Note: On Windoze, the rename() command does NOT move directories,
+              but it will move files. The rename() command will fail with 'EACCES'
+              when attempting to move a directory.
      */
     static bool move( const char* oldName, const char* newName ) noexcept
     {
@@ -198,7 +211,88 @@ public:
     static bool remove( const char* fsEntryName )
     {
         KIT_SYSTEM_ASSERT( fsEntryName != nullptr );
-        return ::remove( fsEntryName ) == 0;
+        if ( ::remove( fsEntryName ) != 0 )  // NOTE: remove() on Windoze does NOT delete directories!
+        {
+            return _rmdir( fsEntryName ) == 0;
+        }
+        return true;
+    }
+
+public:
+    /** Returns the first entry in the directory.  Each successful 'find-first'
+        call must be followed (at some point) by a call to closeDirectory().
+
+        The entry name is copied into 'dstEntryName'.  The 'maxEntryNameSize'
+        argument specifies the size - which needs to include space for the null
+        terminator - of the 'dstEntryName' buffer.  If there are no entries in
+        the directory, then 'dstEntryName' is set to an empty string.
+
+        Returns true if successful; else false if a file system error was
+        encountered.
+     */
+    static bool findFirstDirEntry( KitIoFileDirectory_T& hdl,
+                                   const char*           dirName,
+                                   NameString&           dstEntryName ) noexcept
+    {
+        KIT_SYSTEM_ASSERT( dirName != nullptr );
+        
+        WIN32_FIND_DATA fdata;
+        hdl = FindFirstFile( dirName, &( fdata ) );
+        if ( hdl != INVALID_HANDLE_VALUE )
+        {
+            dstEntryName = fdata.cFileName;
+            return true;
+        }
+
+        // Check if the error is 'no files found'
+        if ( GetLastError() == ERROR_FILE_NOT_FOUND )
+        {
+            dstEntryName.clear();
+            return true;
+        }
+
+        // File system error
+        return false;
+    }
+
+    /** Closes a directory.  Can only be called after a successful call to
+        findFirstDirEntry()
+     */
+    static void closeDirectory( KitIoFileDirectory_T& hdl ) noexcept
+    {
+        FindClose( hdl );
+    }
+
+    /** Reads 'next' entry in the directory.  The entry name is copied into
+        'dstEntryName'.  If there are no more entries in the directory, then
+        'dstEntryName' is set to an empty string.  The 'maxEntryNameSize'
+        argument specifies the size - which needs to include space for the null
+        terminator - of the 'dstEntryName' buffer.
+
+        This method can only be called after a successful call to
+        findFirstDirEntry().
+
+        Returns true if successful; else false if a file system error was
+        encountered.
+     */
+    static bool findNextDirEntry( KitIoFileDirectory_T& hdl, NameString& dstEntryName ) noexcept
+    {
+        WIN32_FIND_DATA fdata;
+        if ( FindNextFile( hdl, &fdata ) )
+        {
+            dstEntryName = fdata.cFileName;
+            return true;
+        }
+
+        // Check if the error is 'no files found'
+        if ( GetLastError() == ERROR_NO_MORE_FILES )
+        {
+            dstEntryName.clear();
+            return true;
+        }
+
+        // File system error
+        return false;
     }
 };
 

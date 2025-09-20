@@ -12,31 +12,14 @@
 #include "fdio.h"
 
 /// Helper method that does all of the work for populating the Info struct
-static void populate_( Kit::Io::File::System::Info_T& infoOut, struct stat& filestats )
+static void populate_( Kit::Io::File::System::Info_T& infoOut, struct _stat& filestats )
 {
-    infoOut.m_isDir     = ( filestats.st_mode & S_IFDIR ) == S_IFDIR;
-    infoOut.m_isFile    = ( filestats.st_mode & S_IFREG ) == S_IFREG;
+    infoOut.m_isDir     = ( filestats.st_mode & _S_IFDIR ) == _S_IFDIR;
+    infoOut.m_isFile    = ( filestats.st_mode & _S_IFREG ) == _S_IFREG;
     infoOut.m_size      = filestats.st_size;
     infoOut.m_mtime     = filestats.st_mtime;
-    infoOut.m_readable  = ( filestats.st_mode & S_IROTH ) == S_IROTH;
-    infoOut.m_writeable = ( filestats.st_mode & S_IWOTH ) == S_IWOTH;
-
-    if ( getuid() == filestats.st_uid )
-    {
-        infoOut.m_readable  |= ( filestats.st_mode & S_IRUSR ) == S_IRUSR;
-        infoOut.m_writeable |= ( filestats.st_mode & S_IWUSR ) == S_IWUSR;
-    }
-    if ( getgid() == filestats.st_gid )
-    {
-        infoOut.m_readable  |= ( filestats.st_mode & S_IRGRP ) == S_IRGRP;
-        infoOut.m_writeable |= ( filestats.st_mode & S_IWGRP ) == S_IWGRP;
-    }
-
-    // Make 'size' of directory behave per the Kit::Io::File::Api semantics
-    if ( infoOut.m_isDir )
-    {
-        infoOut.m_size = 0;
-    }
+    infoOut.m_readable  = ( filestats.st_mode & _S_IREAD ) == _S_IREAD;
+    infoOut.m_writeable = ( filestats.st_mode & _S_IWRITE ) == _S_IWRITE;
 }
 
 
@@ -47,8 +30,8 @@ namespace File {
 
 bool System::getInfo( const char* fsEntryName, Info_T& infoOut ) noexcept
 {
-    struct stat filestats;
-    if ( PosixFileIO::getInfo( getNative( fsEntryName ), filestats ) == false )
+    struct _stat filestats;
+    if ( Win32FileIO::getInfo( getNative( fsEntryName ), filestats ) == false )
     {
         return false;
     }
@@ -59,88 +42,51 @@ bool System::getInfo( const char* fsEntryName, Info_T& infoOut ) noexcept
 
 bool System::createDirectory( const char* dirName ) noexcept
 {
-    return PosixFileIO::createDirectory( getNative( dirName ) );
+    return Win32FileIO::createDirectory( getNative( dirName ) );
 }
 
 bool System::createFile( const char* fileName ) noexcept
 {
-    return PosixFileIO::createFile( getNative( fileName ) );
+    return Win32FileIO::createFile( getNative( fileName ) );
 }
 
 bool System::renameInPlace( const char* oldName, const char* newName ) noexcept
 {
     NameString nativeNewName = getNative( newName );
-    return PosixFileIO::move( getNative( oldName ), nativeNewName );
+    return Win32FileIO::move( getNative( oldName ), nativeNewName );
 }
 
 bool System::moveFile( const char* oldFileName, const char* newFileName ) noexcept
 {
-    // Note: Under posix, the implementation of renameInPlace will/can move files
+    // Note: On Windoze, the underlying ::rename() function will NOT move directories
     return renameInPlace( oldFileName, newFileName );
 }
 
 bool System::remove( const char* fsEntryName ) noexcept
 {
-    return PosixFileIO::remove( getNative( fsEntryName ) );
+    return Win32FileIO::remove( getNative( fsEntryName ) );
 }
 
 /////////////////////////////
 bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
-                            const char*            dirNameToList,
-                            char*                  firstEntryName,
-                            unsigned               maxNameLen ) noexcept
+                               NameString&           dirNameToList,
+                               NameString&           firstEntryName ) noexcept
 {
-    hdl = opendir( dirNameToList );
-    if ( hdl != nullptr )
-    {
-        // Get the first entry
-        if ( getNextDirEntry( hdl, firstEntryName, maxNameLen ) )
-        {
-            // Check for the Directory being empty -->need to make sure the directory FD gets closed
-            if ( firstEntryName[0] == '\0' )
-            {
-                closedir( hdl );
-            }
-            return true;
-        }
-
-        // Error reading the directory -->need to make sure the directory FD gets closed
-        closedir( hdl );
-    }
-
-    // Error opening the directory
-    return false;
+    // Append the wildcard to the directory name
+    dirNameToList += '*';
+    bool result = Win32FileIO::findFirstDirEntry( hdl, getNative( dirNameToList() ), firstEntryName );
+    dirNameToList.trimRight( 1 );
+    return result;
 }
 
-bool System::getNextDirEntry( KitIoFileDirectory_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept
+bool System::getNextDirEntry( KitIoFileDirectory_T& hdl, NameString& nextEntryName ) noexcept
 {
-    errno                   = 0;
-    struct dirent* entryPtr = readdir( hdl );
-    if ( entryPtr != nullptr )
-    {
-        strncpy( nextEntryName, entryPtr->d_name, maxNameLen );
-        nextEntryName[maxNameLen - 1] = '\0';  // Ensure null termination
-    }
-
-    // No more entries
-    else if ( errno == 0 )
-    {
-        nextEntryName[0] = '\0';
-    }
-
-    // File system error
-    else
-    {
-        return false;
-    }
-
-    // If I get here - then success or end-of-directory
-    return true;
+    return Win32FileIO::findNextDirEntry( hdl, nextEntryName );
 }
 
 void System::closeDirectory( KitIoFileDirectory_T& hdl ) noexcept
 {
-    closedir( hdl );
+    Win32FileIO::closeDirectory( hdl );
 }
 
 // end namespace

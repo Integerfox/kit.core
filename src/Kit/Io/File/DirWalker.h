@@ -117,7 +117,7 @@ protected:
     NameString m_wrkEntryName;
 
     /// Memory for the current file/dir entry (include space for the null terminator)
-    char m_curFsEntry[Kit::Io::File::maxName + 1];
+    NameString m_curFsEntry;
 };
 
 }  // end namespaces

@@ -57,13 +57,13 @@ bool DirWalker::traverse( const char*    dirToList,
 
         // Open the current directory
         KitIoFileDirectory_T hdl;
-        if ( System::getFirstDirEntry( hdl, m_curDir.name(), m_curFsEntry, sizeof( m_curFsEntry ) ) == false )
+        if ( System::getFirstDirEntry( hdl, m_curDir.name, m_curFsEntry ) == false )
         {
             return false;
         }
 
         // Read the content's of the directory
-        while ( m_curFsEntry[0] != '\0' )
+        while ( !m_curFsEntry.isEmpty() )
         {
             // Ignore "." and ".." entries
             const char* ptr = Kit::Text::Strip::chars( m_curFsEntry, "." );
@@ -145,7 +145,7 @@ bool DirWalker::traverse( const char*    dirToList,
             }
 
             // Get the next entry in the directory
-            if ( System::getNextDirEntry( hdl, m_curFsEntry, sizeof( m_curFsEntry ) ) == false )
+            if ( System::getNextDirEntry( hdl, m_curFsEntry ) == false )
             {
                 // Error reading the directory
                 System::closeDirectory( hdl );

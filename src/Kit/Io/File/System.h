@@ -288,9 +288,8 @@ public:
         space for the null terminator - of the 'firstEntryName' buffer.
      */
     static bool getFirstDirEntry( KitIoFileDirectory_T& hdl,
-                                  const char*            dirNameToList,
-                                  char*                  firstEntryName,
-                                  unsigned               maxNameLen ) noexcept;
+                                  NameString&           dirNameToList,
+                                  NameString&           dstFirstEntryName ) noexcept;
 
     /** Returns the next entry in the directory.  If a file system error was
         encountered false is returned; else true is returned.
@@ -305,7 +304,7 @@ public:
         The 'maxNameLen' argument specifies the size - which needs to include
         space for the null terminator, in bytes, of the 'nextEntryName' buffer.
      */
-    static bool getNextDirEntry( KitIoFileDirectory_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept;
+    static bool getNextDirEntry( KitIoFileDirectory_T& hdl, NameString& dstNextEntryName ) noexcept;
 
     /** Closes the directory handle. This method MUST always be called after a
         successful call to getFirstEntry().
