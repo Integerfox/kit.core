@@ -21,6 +21,7 @@ namespace File {
 //////////////////////////
 Input::Input( const char* fileName ) noexcept
     : m_inFd( Win32FileIO::open( System::getNative(fileName) ) )
+    , m_inEos( false )
 {
 }
 

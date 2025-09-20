@@ -37,12 +37,6 @@ bool DirWalker::traverse( const char*    dirToList,
         depth = OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH;
     }
 
-    // Sanity check (e.g. the default constructor was used, but reset() was not called)
-    if ( m_curDir.name.isEmpty() )
-    {
-        return false;
-    }
-
     // Ensure my current root ends with a trailing dir separator
     ensureTrailingDirSep( m_curDir.name );
 

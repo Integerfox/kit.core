@@ -21,6 +21,7 @@ namespace File {
 //////////////////////////
 Input::Input( const char* fileName ) noexcept
     : m_inFd( PosixFileIO::open( System::getNative(fileName) ) )
+    , m_inEos( false )
 {
 }
 

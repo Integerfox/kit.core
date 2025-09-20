@@ -16,7 +16,6 @@
 #include "Kit/Io/Types.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/Trace.h"
-#include <corecrt_io.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -71,10 +70,6 @@ public:
                                           createOpt,
                                           FILE_ATTRIBUTE_NORMAL,
                                           0 ) );
-        if ( fd == INVALID_HANDLE_VALUE )
-        {
-            KIT_SYSTEM_TRACE_MSG( "_0test", "open('%s') failed, GetLastError=%lu", fileEntryName, GetLastError() );
-        }
         return fd;
     }
 
@@ -171,16 +166,21 @@ public:
     {
         KIT_SYSTEM_ASSERT( fileName != nullptr );
 
-        int     fd     = 0;
-        errno_t result = _sopen_s( &fd, fileName, _O_RDWR | _O_CREAT | _O_EXCL, _SH_DENYNO, _S_IREAD | _S_IWRITE );
-        if ( fd != -1 )
-        {
-            result = true;
-            _close( fd );
-            return true;
-        }
+        // Set open flags to only open+create if the file does not already exist
+        DWORD createOpt = CREATE_NEW;
+        DWORD accessOpt = GENERIC_READ | GENERIC_WRITE;
 
-        return false;
+        // Open the file to create it 
+        KitIoFileHandle_T fd( CreateFile( fileName,
+                                          accessOpt,
+                                          FILE_SHARE_READ | FILE_SHARE_WRITE,
+                                          0,
+                                          createOpt,
+                                          FILE_ATTRIBUTE_NORMAL,
+                                          0 ) );
+        bool              result = ( fd != INVALID_HANDLE_VALUE );
+        Kit::Io::Stdio::Win32IO::close( fd );
+        return result;
     }
 
     /** Creates a new directory.  If the directory already exists, the call fails.
@@ -235,7 +235,7 @@ public:
                                    NameString&           dstEntryName ) noexcept
     {
         KIT_SYSTEM_ASSERT( dirName != nullptr );
-        
+
         WIN32_FIND_DATA fdata;
         hdl = FindFirstFile( dirName, &( fdata ) );
         if ( hdl != INVALID_HANDLE_VALUE )

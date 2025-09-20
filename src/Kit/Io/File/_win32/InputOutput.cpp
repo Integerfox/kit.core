@@ -20,6 +20,7 @@ namespace File {
 
 InputOutput::InputOutput( const char* fileName, bool forceCreate, bool forceEmptyFile ) noexcept
     : m_fd( Win32FileIO::open( System::getNative(fileName), false, forceCreate, forceEmptyFile ) )
+    , m_eos( false )
 {
 }
 

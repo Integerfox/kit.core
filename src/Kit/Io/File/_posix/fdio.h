@@ -64,10 +64,6 @@ public:
         // Open the file
         errno = 0;
         KitIoFileHandle_T fd( ::open( fileEntryName, flags, mode ) );
-        if ( fd == INVALID_FD )
-        {
-            KIT_SYSTEM_TRACE_MSG( "_0test", "open('%s') failed, errno=%d", fileEntryName, errno );
-        }
         return fd;
     }
 

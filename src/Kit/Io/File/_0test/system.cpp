@@ -277,6 +277,8 @@ TEST_CASE( "system" )
 
     ///
     KIT_SYSTEM_TRACE_MSG( SECT_, ( "Copy, Appended..." ) );
+    System::remove( "copy.txt" );
+    System::remove( "copy2.txt" );
     REQUIRE( System::exists( "copy.txt" ) == false );
     REQUIRE( System::exists( "copy2.txt" ) == false );
     REQUIRE( System::copyFile( "testinput.txt", "copy.txt" ) );
