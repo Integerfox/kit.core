@@ -18,7 +18,7 @@
 #define KitIoStdioHandle_T_MAP         HANDLE  //!< Mapping
 #define KitIoSocketHandle_T_MAP        HANDLE  //!< Mapping
 #define KitIoFileHandle_T_MAP          HANDLE  //!< Mapping
-#define KitIoFileDirectoryHal_T_MAP      HANDLE  //!< Mapping
+#define KitIoFileDirectory_T_MAP      HANDLE  //!< Mapping
 
 
 #define KIT_IO_NEW_LINE_NATIVE_MAP     "\015\012"  //!< Mapping

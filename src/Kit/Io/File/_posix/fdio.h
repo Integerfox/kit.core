@@ -12,6 +12,8 @@
 
 
 #include "Kit/Io/Stdio/_posix/fdio.h"
+#include "Kit/Io/File/System.h"
+#include "Kit/Io/Types.h"
 #include "Kit/System/Assert.h"
 #include <cerrno>
 #include <sys/types.h>
@@ -203,6 +205,58 @@ public:
     {
         KIT_SYSTEM_ASSERT( fsEntryName != nullptr );
         return ::remove( fsEntryName ) == 0;
+    }
+
+public:
+    /** Opens a directory - for 'walking' its contents. Each successful 'open'
+        call must be followed (at some point) by a call to closeDirectory()
+     */
+    static bool openDirectory( KitIoFileDirectory_T& hdl, const char* dirName ) noexcept
+    {
+        KIT_SYSTEM_ASSERT( dirName != nullptr );
+        hdl = opendir( dirName );
+        return hdl != nullptr;
+    }
+
+    /** Closes a directory.  Can only be called after a successful call to
+        openDirectory()
+     */
+    static void closeDirectory( KitIoFileDirectory_T& hdl ) noexcept
+    {
+        closedir( hdl );
+    }
+
+    /** Reads 'next' entry in the directory.  The entry name is copied into
+        'dstEntryName'.  If there are no more entries in the directory, then
+        'dstEntryName' is set to an empty string.  The 'maxEntryNameSize'
+        argument specifies the size - which needs to include space for the null
+        terminator - of the 'dstEntryName' buffer.
+
+        Returns true if successful; else false if a file system error was
+        encountered.
+     */
+    static bool readDirectory( KitIoFileDirectory_T& hdl, char* dstEntryName, ByteCount_T maxEntryNameSize ) noexcept
+    {
+        errno                   = 0;
+        struct dirent* entryPtr = readdir( hdl );
+        if ( entryPtr != nullptr )
+        {
+            strncpy( dstEntryName, entryPtr->d_name, maxEntryNameSize );
+            dstEntryName[maxEntryNameSize - 1] = '\0';  // Ensure null termination
+            return true;
+        }
+        else
+        {
+            // No more entries
+            if ( errno == 0 )
+            {
+                dstEntryName[0] = '\0';
+                return true;
+            }
+        }
+
+        // File system error
+        return false;
     }
 };
 

@@ -85,7 +85,7 @@ bool System::remove( const char* fsEntryName ) noexcept
 }
 
 /////////////////////////////
-bool System::getFirstDirEntry( KitIoFileDirectoryHal_T& hdl,
+bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
                             const char*            dirNameToList,
                             char*                  firstEntryName,
                             unsigned               maxNameLen ) noexcept
@@ -112,7 +112,7 @@ bool System::getFirstDirEntry( KitIoFileDirectoryHal_T& hdl,
     return false;
 }
 
-bool System::getNextDirEntry( KitIoFileDirectoryHal_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept
+bool System::getNextDirEntry( KitIoFileDirectory_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept
 {
     errno                   = 0;
     struct dirent* entryPtr = readdir( hdl );
@@ -138,7 +138,7 @@ bool System::getNextDirEntry( KitIoFileDirectoryHal_T& hdl, char* nextEntryName,
     return true;
 }
 
-void System::closeDirectory( KitIoFileDirectoryHal_T& hdl ) noexcept
+void System::closeDirectory( KitIoFileDirectory_T& hdl ) noexcept
 {
     closedir( hdl );
 }

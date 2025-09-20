@@ -8,7 +8,6 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Io/File/System.h"
 #include "fdio.h"
 
 /// Helper method that does all of the work for populating the Info struct
@@ -85,62 +84,32 @@ bool System::remove( const char* fsEntryName ) noexcept
 }
 
 /////////////////////////////
-bool System::getFirstDirEntry( KitIoFileDirectoryHal_T& hdl,
-                            const char*            dirNameToList,
-                            char*                  firstEntryName,
-                            unsigned               maxNameLen ) noexcept
+bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
+                               const char*           dirNameToList,
+                               char*                 firstEntryName,
+                               unsigned              maxNameLen ) noexcept
 {
-    hdl = opendir( dirNameToList );
-    if ( hdl != nullptr )
+    if ( PosixFileIO::openDirectory( hdl, dirNameToList ) )
     {
-        // Get the first entry
-        if ( getNextDirEntry( hdl, firstEntryName, maxNameLen ) )
+        if ( PosixFileIO::readDirectory( hdl, firstEntryName, maxNameLen ) )
         {
-            // Check for the Directory being empty -->need to make sure the directory FD gets closed
-            if ( firstEntryName[0] == '\0' )
-            {
-                closedir( hdl );
-            }
             return true;
         }
 
-        // Error reading the directory -->need to make sure the directory FD gets closed
-        closedir( hdl );
+        // Error reading the first entry - close the directory (per semantics of the getFirstDirEntry() method)
+        PosixFileIO::closeDirectory( hdl );
     }
-
-    // Error opening the directory
     return false;
 }
 
-bool System::getNextDirEntry( KitIoFileDirectoryHal_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept
+bool System::getNextDirEntry( KitIoFileDirectory_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept
 {
-    errno                   = 0;
-    struct dirent* entryPtr = readdir( hdl );
-    if ( entryPtr != nullptr )
-    {
-        strncpy( nextEntryName, entryPtr->d_name, maxNameLen );
-        nextEntryName[maxNameLen - 1] = '\0';  // Ensure null termination
-    }
-
-    // No more entries
-    else if ( errno == 0 )
-    {
-        nextEntryName[0] = '\0';
-    }
-
-    // File system error
-    else
-    {
-        return false;
-    }
-
-    // If I get here - then success or end-of-directory
-    return true;
+    return PosixFileIO::readDirectory( hdl, nextEntryName, maxNameLen );
 }
 
-void System::closeDirectory( KitIoFileDirectoryHal_T& hdl ) noexcept
+void System::closeDirectory( KitIoFileDirectory_T& hdl ) noexcept
 {
-    closedir( hdl );
+    PosixFileIO::closeDirectory( hdl );
 }
 
 // end namespace

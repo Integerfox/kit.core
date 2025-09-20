@@ -56,7 +56,7 @@ bool DirWalker::traverse( const char*    dirToList,
         KIT_SYSTEM_TRACE_MSG( SECT_, "curDir=%s, curDepth=%d", m_curDir.name.getString(), curDepth );
 
         // Open the current directory
-        KitIoFileDirectoryHal_T hdl;
+        KitIoFileDirectory_T hdl;
         if ( System::getFirstDirEntry( hdl, m_curDir.name(), m_curFsEntry, sizeof( m_curFsEntry ) ) == false )
         {
             return false;

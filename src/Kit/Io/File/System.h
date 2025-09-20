@@ -20,7 +20,7 @@
 #include <time.h>
 
 /** Defer the HAL type to the platform */
-#define KitIoFileDirectoryHal_T KitIoFileDirectoryHal_T_MAP
+#define KitIoFileDirectory_T KitIoFileDirectory_T_MAP
 
 
 /** Size, in bytes, of internal work buffer.  WARNING: The internal buffer is
@@ -287,7 +287,7 @@ public:
         The 'maxNameLen' argument specifies the byte size - which needs to include
         space for the null terminator - of the 'firstEntryName' buffer.
      */
-    static bool getFirstDirEntry( KitIoFileDirectoryHal_T& hdl,
+    static bool getFirstDirEntry( KitIoFileDirectory_T& hdl,
                                   const char*            dirNameToList,
                                   char*                  firstEntryName,
                                   unsigned               maxNameLen ) noexcept;
@@ -305,12 +305,12 @@ public:
         The 'maxNameLen' argument specifies the size - which needs to include
         space for the null terminator, in bytes, of the 'nextEntryName' buffer.
      */
-    static bool getNextDirEntry( KitIoFileDirectoryHal_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept;
+    static bool getNextDirEntry( KitIoFileDirectory_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept;
 
     /** Closes the directory handle. This method MUST always be called after a
         successful call to getFirstEntry().
      */
-    static void closeDirectory( KitIoFileDirectoryHal_T& hdl ) noexcept;
+    static void closeDirectory( KitIoFileDirectory_T& hdl ) noexcept;
 
 
 
