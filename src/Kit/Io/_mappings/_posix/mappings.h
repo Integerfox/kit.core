@@ -20,7 +20,7 @@
 #define KitIoStdioHandle_T_MAP                int       //!< Mapping
 #define KitIoSocketHandle_T_MAP               int       //!< Mapping
 #define KitIoFileHandle_T_MAP                 int       //!< Mapping
-#define KitIoFileDirListHal_T_MAP             DIR*      //!< Mapping
+#define KitIoFileDirectoryHal_T_MAP             DIR*      //!< Mapping
 #define KIT_IO_NEW_LINE_NATIVE_MAP            "\n"      //!< Mapping
 #define KIT_IO_DIRECTORY_SEPARATOR_NATIVE_MAP '/'       //!< Mapping
 #define KIT_IO_FILE_MAX_NAME_MAP              PATH_MAX  //!< Mapping
