@@ -39,7 +39,7 @@ alias chuck="$NQBP_BIN/other/chuck.py"
 alias ratt="$NQBP_XPKGS_ROOT/ratt/bin/ratt.py"
 alias fixx="$NQBP_BIN/other/fixx.py"
 alias whatcc="echo $NQBP_CC_SELECTED"
-alias tcar="$NQBP_PKG_ROOT/top/tca2.py --html-dir $NQBP_PKG_ROOT/docs/publish/code-coverage"
+alias vcc="$NQBP_PKG_ROOT/top/tca2.py --html-dir $NQBP_PKG_ROOT/docs/publish/code-coverage view"
 alias map="$NQBP_PKG_ROOT/scripts/kit.core/map.py" 
 
 

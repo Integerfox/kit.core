@@ -42,6 +42,10 @@ static constexpr const char* const nativeNewline = KIT_IO_NEW_LINE_NATIVE;
  */
 #define KitIoStdioHandle_T KitIoStdioHandle_T_MAP
 
+/** Defers the "file descriptor" for a file handle type to the target platform.
+    This type is used when defining concrete file classes.
+ */
+#define KitIoFileHandle_T KitIoFileHandle_T_MAP
 
 /*----------------------------------------------------------------------------*/
 /** Signed data type for arguments, variables, etc. with respect to how many

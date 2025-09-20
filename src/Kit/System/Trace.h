@@ -132,7 +132,7 @@
 #define KIT_SYSTEM_TRACE_IS_ENABLED() Kit::System::Trace::isEnabled_()
 
 /// Macro Wrapper
-#define KIT_SYSTEM_TRACE_IS_SECTION_ENABLED( sect ) Kit::System::Trace::isSectionEnabled( sect )
+#define KIT_SYSTEM_TRACE_IS_SECTION_ENABLED( sect ) Kit::System::Trace::isSectionEnabled_( sect )
 
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_SET_INFO_LEVEL( l ) Kit::System::Trace::setInfoLevel_( l )

@@ -10,6 +10,7 @@
 
 #include "IInput.h"
 #include "Kit/Io/Types.h"
+#include "Kit/System/Assert.h"
 #include <cstdint>
 
 
@@ -64,6 +65,8 @@ bool IInput::read( Kit::Text::IString& destString, ByteCount_T numBytesToRead ) 
 
 bool IInput::read( void* buffer, ByteCount_T numBytesToRead ) noexcept
 {
+    KIT_SYSTEM_ASSERT( buffer != nullptr );
+
     // Reading zero bytes is a nop
     if ( numBytesToRead > 0 )
     {

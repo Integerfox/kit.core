@@ -10,6 +10,7 @@
 
 #include "LineReader.h"
 #include "Kit/Text/FString.h"
+#include "Kit/System/Assert.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -23,6 +24,7 @@ LineReader::LineReader( IInput& stream, const char* newline )
     : m_stream( stream )
     , m_newline( newline )
 {
+    KIT_SYSTEM_ASSERT( newline != nullptr );
 }
 
 ///////////////////////////////
