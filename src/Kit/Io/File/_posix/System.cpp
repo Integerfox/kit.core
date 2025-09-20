@@ -88,7 +88,7 @@ bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
                                NameString&           dirNameToList,
                                NameString&           dstFirstEntryName ) noexcept
 {
-    if ( PosixFileIO::openDirectory( hdl, dirNameToList ) )
+    if ( PosixFileIO::openDirectory( hdl, getNative( dirNameToList ) ) )
     {
         if ( PosixFileIO::readDirectory( hdl, dstFirstEntryName ) )
         {

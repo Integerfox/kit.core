@@ -233,7 +233,6 @@ public:
      */
     static bool readDirectory( KitIoFileDirectory_T& hdl, NameString& dstEntryName ) noexcept
     {
-        KIT_SYSTEM_ASSERT( dstEntryName != nullptr );
         
         errno                   = 0;
         struct dirent* entryPtr = readdir( hdl );
