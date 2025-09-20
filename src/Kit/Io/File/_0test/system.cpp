@@ -8,12 +8,13 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Io/File/DirWalker.h"
+#include "Kit/Io/File/IDirTraverser.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "Kit/Type/TraverserStatus.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/Trace.h"
 #include "Kit/Io/File/System.h"
-#include "Kit/Io/File/_directory/DirList.h"
 
 
 #define SECT_ "_0test"
@@ -56,7 +57,7 @@ using namespace Kit::Io::File;
 ////////////////////////////////////////////////////////////////////////////////
 namespace {
 
-class Walker : public System::DirectoryWalker
+class Walker : public IDirTraverser
 {
 public:
     int        m_depth;
@@ -153,6 +154,7 @@ TEST_CASE( "system" )
 
     ///
     KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk directories..." );
+    DirWalker uutDirWalker;
     System::remove( "output1.txt" );  // Clean up any previous test
     System::remove( "output2.txt" );
     System::remove( "output3.txt" );
@@ -181,58 +183,58 @@ TEST_CASE( "system" )
 
     {
         Walker iterator( 3 );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH );
-        REQUIRE( System::walkDirectory( "d1", iterator, OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH ) );
+        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 3, true, false );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH );
-        REQUIRE( System::walkDirectory( "d1", iterator, OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH, true, false ) );
+        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH, true, false ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 3, false, true );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH );
-        REQUIRE( System::walkDirectory( "d1", iterator, OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH, false, true ) );
+        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH, false, true ) );
         REQUIRE( iterator.m_contentCheck );
     }
 
     {
         Walker iterator( 2 );
         KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 2" );
-        REQUIRE( System::walkDirectory( "d1", iterator, 2 ) );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, 2 ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 2, true, false );
         KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 2" );
-        REQUIRE( System::walkDirectory( "d1", iterator, 2, true, false ) );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, 2, true, false ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 2, false, true );
         KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 2" );
-        REQUIRE( System::walkDirectory( "d1", iterator, 2, false, true ) );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, 2, false, true ) );
         REQUIRE( iterator.m_contentCheck );
     }
 
     {
         Walker iterator( 1 );
         KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 1" );
-        REQUIRE( System::walkDirectory( "d1", iterator, 1 ) );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, 1 ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 1, true, false );
         KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 1" );
-        REQUIRE( System::walkDirectory( "d1", iterator, 1, true, false ) );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, 1, true, false ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 1, false, true );
         KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 1" );
-        REQUIRE( System::walkDirectory( "d1", iterator, 1, false, true ) );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, 1, false, true ) );
         REQUIRE( iterator.m_contentCheck );
     }
 
@@ -240,14 +242,14 @@ TEST_CASE( "system" )
     REQUIRE( System::createFile( "d1/d2/d3/d3a.txt" ) );
     {
         Walker iterator( 3, true, false );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH );
-        REQUIRE( System::walkDirectory( "d1", iterator, OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH, true, false ) );
+        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH, true, false ) );
         REQUIRE( iterator.m_contentCheck == false );
     }
     {
         Walker iterator( 3, false, true );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH );
-        REQUIRE( System::walkDirectory( "d1", iterator, OPTION_KIT_IO_FILE_DIRLIST_MAX_DEPTH, false, true ) );
+        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH, false, true ) );
         REQUIRE( iterator.m_contentCheck == false );
     }
     REQUIRE( System::createFile( "d1/d2/d3/d4/d4a.txt" ) );
@@ -256,7 +258,7 @@ TEST_CASE( "system" )
     {
         Walker iterator( 4 );
         KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", 4 );
-        REQUIRE( System::walkDirectory( "d1", iterator, 4 ) );
+        REQUIRE( uutDirWalker.traverse( "d1", iterator, 4 ) );
     }
 
     REQUIRE( System::remove( "d1/d2/d3/d4/d5/d5a.txt" ) );

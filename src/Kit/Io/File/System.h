@@ -11,12 +11,17 @@
 /** @file */
 
 
+#include "kit_map.h"
 #include "kit_config.h"
 #include "Kit/Io/Types.h"
 #include "Kit/Text/FString.h"
 #include "Kit/Type/TraverserStatus.h"
 
 #include <time.h>
+
+/** Defer the HAL type to the platform */
+#define KitIoFileDirListHal_T KitIoFileDirListHal_T_MAP
+
 
 /** Size, in bytes, of internal work buffer.  WARNING: The internal buffer is
     allocated on the STACK - so do NOT make this too large
@@ -267,59 +272,46 @@ public:
      */
     static const char* getStandard( const char* fsEntryName ) noexcept;
 
+
 public:
-    /** This abstract class defines the client interface for walking
-        the contents of a directory, i.e. defines the callback method for
-        when walking/traversing the entries in a directory
+    /** Returns the first entry in the directory.  If the directory cannot be
+        opened false is returned; else true is returned.
+
+        The 'hdl' argument is populated with the platform specific directory
+        handle information needed for subsequent calls to getNextEntry().
+
+        The 'firstEntryName' argument is populated with the name of the first
+        entry in the directory.  If the directory is empty then 'firstEntryName'
+        is set to an empty string
+
+        The 'maxNameLen' argument specifies the byte size - which needs to include
+        space for the null terminator - of the 'firstEntryName' buffer.
      */
-    class DirectoryWalker
-    {
-    public:
-        /// Virtual Destructor
-        virtual ~DirectoryWalker() {}
+    static bool getFirstDirEntry( KitIoFileDirListHal_T& hdl,
+                                  const char*            dirNameToList,
+                                  char*                  firstEntryName,
+                                  unsigned               maxNameLen ) noexcept;
 
-    public:
-        /** This method is called once for ever item in the "traversee's"
-            list.  The return code from the method is used by the traverser
-            to continue the traversal (eCONTINUE), or abort the traversal
-            (eABORT).
-         */
-        virtual Kit::Type::TraverserStatus item( const char* currentParent,
-                                                 const char* fsEntryName,
-                                                 Info_T&     entryInfo ) = 0;
-    };
+    /** Returns the next entry in the directory.  If a file system error was
+        encountered false is returned; else true is returned.
 
+        The 'hdl' argument must be the instance that was populated by
+        getFirstEntry() or a previous call to getNextEntry().
 
-    /** This method allows the caller to walk the contents of the 'dirToList'
-        directory (assuming the entry is a directory).  The default behavior is
-        to list only the current directory.  The Caller can override the depth
-        of the traversal.  Also, by default only the file name without its path
-        is returned.  The caller can optionally have the traverse call only
-        return the name of files (omitting any directory names found) OR names
-        of directories (omitting any file names found).  Returns true when
-        successfully and the entire traversal complete; else false is return if
-        their is an error (e.g. 'dirToList' is a file or does not exist) or the
-        'walker' aborted the traversal.
+        The 'nextEntryName' argument is populated with the name of the next
+        entry in the directory.  If there are no more entries then
+        'nextEntryName' is set to an empty string
 
-        NOTE: The is no guaranteed order to the traversal, only that all items
-              per the specified depth will be traversed.
-
-        WARNING: On most platforms, the underlying OS calls dynamically
-                 allocate memory. The OS clean-up after itself but there still
-                 is the risk of failure do to lack of memory.  Memory failures
-                 are handled silently - but will not crash traversal.
-
-        WARNING: Be careful when recursing into subdirectories.  There are
-                 typically OS limits on how many directories may be 'opened'.
-                 Extremely deep directory trees run the risk of exceeding these
-                 limits.
-
+        The 'maxNameLen' argument specifies the size - which needs to include
+        space for the null terminator, in bytes, of the 'nextEntryName' buffer.
      */
-    static bool walkDirectory( const char*      dirToList,
-                               DirectoryWalker& callback,
-                               int              depth     = 1,
-                               bool             filesOnly = false,
-                               bool             dirsOnly  = false );
+    static bool getNextDirEntry( KitIoFileDirListHal_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept;
+
+    /** Closes the directory handle. This method MUST always be called after a
+        successful call to getFirstEntry().
+     */
+    static void closeDirectory( KitIoFileDirListHal_T& hdl ) noexcept;
+
 
 
 public:

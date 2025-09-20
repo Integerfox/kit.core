@@ -8,6 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Io/Types.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/Trace.h"
@@ -79,23 +80,40 @@ TEST_CASE( "readwrite" )
     REQUIRE( writer.print( " again!" ) );
     REQUIRE( writer.println() );
 
-    Kit::Text::FString<256> buffer2;
     REQUIRE( fd2.isOpened() );
     REQUIRE( fd2.setAbsolutePos( 0 ) );
     Kit::Io::LineReader reader( fd2 );
-    REQUIRE( reader.readln( buffer2 ) );
-    REQUIRE( buffer2.isEmpty() );
-    REQUIRE( reader.readln( buffer2 ) );
-    REQUIRE( buffer2 == "Hello World" );
-    REQUIRE( reader.readln( buffer2 ) );
-    REQUIRE( buffer2 == "HelloWorld again!" );
-    REQUIRE( reader.readln( buffer2 ) == false );
+    REQUIRE( reader.readln( inbuffer ) );
+    REQUIRE( inbuffer.isEmpty() );
+    REQUIRE( reader.readln( inbuffer ) );
+    REQUIRE( inbuffer == "Hello World" );
+    REQUIRE( reader.readln( inbuffer ) );
+    REQUIRE( inbuffer == "HelloWorld again!" );
+    REQUIRE( reader.readln( inbuffer ) == false );
     REQUIRE( fd2.isEof() );
     reader.close();
     REQUIRE( fd2.isOpened() == false );
     writer.close();
     REQUIRE( writer.println() == false );
     REQUIRE( fd2.write( 'a' ) == false );
+
+    //
+    InputOutput fd3( "output3.txt", false, false );
+    inbuffer.clear();
+    REQUIRE( fd3.isOpened() );
+    REQUIRE( fd3.setAbsolutePos( 15 ) );
+    Kit::Io::ByteCount_T pos;
+    REQUIRE( fd3.currentPos(pos));
+    REQUIRE( pos == 15 );
+    REQUIRE( fd3.setRelativePos( -14 ) );
+    REQUIRE( fd3.currentPos(pos));
+    REQUIRE( pos == 1 );
+    REQUIRE( fd3.read( inbuffer, 3) );
+    REQUIRE( inbuffer == "bob" );
+    Kit::Io::ByteCount_T len;
+    REQUIRE( fd3.length(len) );
+    REQUIRE( len == sum.length());
+    fd3.close();
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

@@ -22,7 +22,7 @@ def run_test( subdir ):
     src = os.path.join( my_globals.NQBP_WORK_ROOT(), my_globals.NQBP_PKG_ROOT(), 'src', 'Kit', 'Io', 'File', '_0test', 'testinput.txt' )
     shutil.copy( src, '.' ); 
     print( f"Running unit test dir: {subdir} ..." )
-    p = subprocess.Popen( f'b.out system', shell=True )
+    p = subprocess.Popen( f'b.out', shell=True )
     p.communicate()
     if ( p.returncode != 0 ):
         exit( "FAILED test" )

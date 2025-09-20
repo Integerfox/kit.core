@@ -9,7 +9,6 @@
 /** @file */
 
 #include "Kit/Io/File/System.h"
-#include "Kit/Io/File/_directory/DirList.h"
 #include "fdio.h"
 
 /// Helper method that does all of the work for populating the Info struct
@@ -85,17 +84,64 @@ bool System::remove( const char* fsEntryName ) noexcept
     return PosixFileIO::remove( getNative( fsEntryName ) );
 }
 
-bool System::walkDirectory( const char*      dirToList,
-                            DirectoryWalker& callback,
-                            int              depth,
-                            bool             filesOnly,
-                            bool             dirsOnly )
+/////////////////////////////
+bool System::getFirstDirEntry( KitIoFileDirListHal_T& hdl,
+                            const char*            dirNameToList,
+                            char*                  firstEntryName,
+                            unsigned               maxNameLen ) noexcept
 {
-    static DirList lister;
-    lister.reset( dirToList, depth, filesOnly, dirsOnly );
-    return lister.traverse( callback );
+    hdl = opendir( dirNameToList );
+    if ( hdl != nullptr )
+    {
+        // Get the first entry
+        if ( getNextDirEntry( hdl, firstEntryName, maxNameLen ) )
+        {
+            // Check for the Directory being empty -->need to make sure the directory FD gets closed
+            if ( firstEntryName[0] == '\0' )
+            {
+                closedir( hdl );
+            }
+            return true;
+        }
+
+        // Error reading the directory -->need to make sure the directory FD gets closed
+        closedir( hdl );
+    }
+
+    // Error opening the directory
+    return false;
 }
 
+bool System::getNextDirEntry( KitIoFileDirListHal_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept
+{
+    errno                   = 0;
+    struct dirent* entryPtr = readdir( hdl );
+    if ( entryPtr != nullptr )
+    {
+        strncpy( nextEntryName, entryPtr->d_name, maxNameLen );
+        nextEntryName[maxNameLen - 1] = '\0';  // Ensure null termination
+    }
+
+    // No more entries
+    else if ( errno == 0 )
+    {
+        nextEntryName[0] = '\0';
+    }
+
+    // File system error
+    else
+    {
+        return false;
+    }
+
+    // If I get here - then success or end-of-directory
+    return true;
+}
+
+void System::closeDirectory( KitIoFileDirListHal_T& hdl ) noexcept
+{
+    closedir( hdl );
+}
 
 // end namespace
 }
