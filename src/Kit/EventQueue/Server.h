@@ -11,7 +11,7 @@
 /** @file */
 
 #include "Kit/System/EventLoop.h"
-#include "Kit/EventQueue/IQueue.h"
+#include "Kit/Itc/Mailbox.h"
 
 
 ///
@@ -21,26 +21,28 @@ namespace EventQueue {
 
 /** This concrete class extends the Kit::System::EventLoop interface to include
     processing events from Event Queue.  Depending on the compile time configuration,
-    the Event Queue includes events such as:
+    the Event Queue adds events such as:
        1. ITC Messages
        2. Data Model change notifications
  */
-class Server : public EventQueue::IQueue,
+class Server : public Kit::Itc::Mailbox,
                public Kit::System::EventLoop
 {
 public:
-    /** Constructor.  The argument 'timingTickInMsec' specifies the timing
-        resolution that will be used for Kit::Timer::Local Timers.
+    /** Constructor.  See the Kit::System::EventLoop constructor for description
+        of the method's arguments.
      */
     Server( uint32_t                                        timeOutPeriodInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
             Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList      = nullptr ) noexcept
-        : EventLoop( timeOutPeriodInMsec, eventFlagsList )
+        : Kit::Itc::Mailbox( *(static_cast<Kit::System::ISignable*>(this)) )
+        , EventLoop( timeOutPeriodInMsec, eventFlagsList )
     {
     }
 
 protected:
     /// See Kit::System::IRunnable
     void entry() noexcept override;
+
 };
 
 }  // end namespaces

@@ -26,8 +26,8 @@ void Mailbox::post( IMessage& msg ) noexcept
     put( msg );
     Kit::System::GlobalLock::end();
 
-    // Wake up my event queue to process the message
-    m_eventQueue.signal();
+    // Wake up my event thread to process the message
+    m_eventThread.signal();
 }
 
 void Mailbox::postSync( IMessage& msg ) noexcept

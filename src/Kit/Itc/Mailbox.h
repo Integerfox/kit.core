@@ -10,9 +10,10 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-//#include "Kit/Itc/IMessage.h"
+#include "Kit/Itc/IMessage.h"
 #include "Kit/EventQueue/IQueue.h"
 #include "Kit/Container/SList.h"
+#include "Kit/System/ISignable.h"
 #include <type_traits>
 
 /// Compile time check for the EventQueue being configured 'correctly'
@@ -29,8 +30,8 @@ namespace Itc {
     the queue at any given time since the FIFO queue and the messages uses the
     intrusive container mechanisms from the Kit::Container namespace.
  */
-    
-class Mailbox : public Kit::EventQueue::IMsgNotification,
+
+class Mailbox : public Kit::EventQueue::IQueue,
                 public Kit::Container::SList<IMessage>
 {
 public:
@@ -38,10 +39,10 @@ public:
         (aka thread) where the messages posted to the Mailbox are RETRIEVED and
         their process() method is called to execute them.
      */
-    Mailbox( Kit::EventQueue::IQueue& myEventQueue ) noexcept
-        : m_eventQueue( myEventQueue )
+    Mailbox( Kit::System::ISignable& myEventThread ) noexcept
+        : m_eventThread( myEventThread )
     {
-    };
+    }
 
 
 public:
@@ -66,10 +67,10 @@ protected:
 
 protected:
     /// The Event Queue that I wait-on/dispatch-msgs-from
-    Kit::EventQueue::IQueue& m_eventQueue;
+    Kit::System::ISignable& m_eventThread;
 };
 
 
-};  // end namespaces
-};
+}  // end namespaces
+}
 #endif  // end header latch

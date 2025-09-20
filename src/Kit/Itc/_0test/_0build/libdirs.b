@@ -1,5 +1,6 @@
 src/Kit/Itc
 src/Kit/Itc/_0test
+src/Kit/EventQueue
 
 src/Kit/Container
 src/Kit/System

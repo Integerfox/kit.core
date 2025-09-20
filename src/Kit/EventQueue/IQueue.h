@@ -10,6 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "Kit/EventQueue/IMsgNotification.h"
 
 /** Default to supporting BOTH ITC message and Data Model change notifications

@@ -9,14 +9,6 @@
 /** @file */
 
 #include "Kit/EventQueue/Server.h"
-#include "Kit/System/Thread.h"
-#include "Kit/System/FatalError.h"
-#include "Kit/System/ElapsedTime.h"
-#include "Kit/System/SimTick.h"
-#include "Kit/System/Trace.h"
-
-
-#define SECT_ "Kit::Itc"
 
 
 //------------------------------------------------------------------------------
