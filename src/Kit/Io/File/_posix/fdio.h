@@ -235,7 +235,7 @@ public:
         Returns true if successful; else false if a file system error was
         encountered.
      */
-    static bool readDirectory( KitIoFileDirectory_T& hdl, char* dstEntryName, ByteCount_T maxEntryNameSize ) noexcept
+    static bool readDirectory( KitIoFileDirectory_T& hdl, NameString& dstEntryName ) noexcept
     {
         KIT_SYSTEM_ASSERT( dstEntryName != nullptr );
         
@@ -243,16 +243,15 @@ public:
         struct dirent* entryPtr = readdir( hdl );
         if ( entryPtr != nullptr )
         {
-            strncpy( dstEntryName, entryPtr->d_name, maxEntryNameSize );
-            dstEntryName[maxEntryNameSize - 1] = '\0';  // Ensure null termination
-            return true;
+           dstEntryName = entryPtr->d_name;
+              return true;
         }
         else
         {
             // No more entries
             if ( errno == 0 )
             {
-                dstEntryName[0] = '\0';
+                dstEntryName.clear();
                 return true;
             }
         }

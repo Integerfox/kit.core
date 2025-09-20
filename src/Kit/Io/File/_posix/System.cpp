@@ -8,6 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Io/File/System.h"
 #include "fdio.h"
 
 /// Helper method that does all of the work for populating the Info struct
@@ -82,16 +83,14 @@ bool System::remove( const char* fsEntryName ) noexcept
 {
     return PosixFileIO::remove( getNative( fsEntryName ) );
 }
-
 /////////////////////////////
 bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
-                               const char*           dirNameToList,
-                               char*                 firstEntryName,
-                               unsigned              maxNameLen ) noexcept
+                               NameString&           dirNameToList,
+                               NameString&           dstFirstEntryName ) noexcept
 {
     if ( PosixFileIO::openDirectory( hdl, dirNameToList ) )
     {
-        if ( PosixFileIO::readDirectory( hdl, firstEntryName, maxNameLen ) )
+        if ( PosixFileIO::readDirectory( hdl, dstFirstEntryName ) )
         {
             return true;
         }
@@ -102,9 +101,9 @@ bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
     return false;
 }
 
-bool System::getNextDirEntry( KitIoFileDirectory_T& hdl, char* nextEntryName, unsigned maxNameLen ) noexcept
+bool System::getNextDirEntry( KitIoFileDirectory_T& hdl, NameString& dstNextEntryName ) noexcept
 {
-    return PosixFileIO::readDirectory( hdl, nextEntryName, maxNameLen );
+    return PosixFileIO::readDirectory( hdl, dstNextEntryName );
 }
 
 void System::closeDirectory( KitIoFileDirectory_T& hdl ) noexcept
