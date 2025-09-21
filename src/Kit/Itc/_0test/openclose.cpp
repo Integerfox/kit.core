@@ -9,14 +9,15 @@
 /** @file */
 
 
+#include "Kit/Itc/OpenCloseSync.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/Itc/OpenSync.h"
 #include "Kit/EventQueue/Server.h"
 #include "Kit/System/Thread.h"
 
-    ///
-    using namespace Kit::Itc;
+///
+using namespace Kit::Itc;
 using namespace Kit::System;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -24,16 +25,17 @@ using namespace Kit::System;
 namespace {
 
 // Dummy service to test the OpenSync class
-class MockService : public OpenSync
+class MockService : public OpenCloseSync
 {
 public:
-    bool     isOpened      = false;
-    bool     resultOpenMsg = true;
-    unsigned countOpenMsg  = 0;
-    void*    argsOpenMsg   = nullptr;
+    bool     isOpened       = false;
+    bool     resultOpenMsg  = true;
+    void*    argsOpenMsg    = nullptr;
+    bool     resultCloseMsg = true;
+    void*    argsCloseMsg   = nullptr;
 
     MockService( Kit::EventQueue::Server& myEventLoop ) noexcept
-        : OpenSync( myEventLoop )
+        : OpenCloseSync( myEventLoop )
         , isOpened( false )
     {
     }
@@ -42,10 +44,18 @@ public:
     /// See Kit::Itc::IOpenRequest
     void request( OpenMsg& msg ) noexcept override
     {
-        countOpenMsg++;
         msg.getPayload().success = resultOpenMsg;
         argsOpenMsg              = msg.getPayload().args;
         isOpened                 = true;
+        msg.returnToSender();
+    }
+
+    /// See Kit::Itc::IOpenRequest
+    void request( CloseMsg& msg ) noexcept override
+    {
+        msg.getPayload().success = resultCloseMsg;
+        argsCloseMsg             = msg.getPayload().args;
+        isOpened                 = false;
         msg.returnToSender();
     }
 };
@@ -71,8 +81,36 @@ TEST_CASE( "OpenClose" )
         bool result = uut.open();
         REQUIRE( result == true );
         REQUIRE( uut.isOpened == true );
-        REQUIRE( uut.countOpenMsg == 1u );
         REQUIRE( uut.argsOpenMsg == nullptr );
+
+        result = uut.close();
+        REQUIRE( result == true );
+        REQUIRE( uut.isOpened == false );
+        REQUIRE( uut.argsCloseMsg == nullptr );
+    }
+
+    SECTION( "failed-open/close" )
+    {
+        uut.resultOpenMsg  = false;
+        uut.resultCloseMsg = false;
+        bool result = uut.open();
+        REQUIRE( result == false );
+
+        result = uut.close();
+        REQUIRE( result == false );
+    }
+
+    SECTION( "args" )
+    {
+        bool result = uut.open( (void*)1234 );
+        REQUIRE( result == true );
+        REQUIRE( uut.isOpened == true );
+        REQUIRE( uut.argsOpenMsg == (void*)1234 );
+
+        result = uut.close( (void*)12 );
+        REQUIRE( result == true );
+        REQUIRE( uut.isOpened == false );
+        REQUIRE( uut.argsCloseMsg == (void*)12 );
     }
 
     // Shutdown threads

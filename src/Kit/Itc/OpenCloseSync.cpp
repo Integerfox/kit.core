@@ -8,7 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "OpenSync.h"
+#include "OpenCloseSync.h"
 #include "SyncReturnHandler.h"
 
 //------------------------------------------------------------------------------
@@ -16,17 +16,17 @@ namespace Kit {
 namespace Itc {
 
 ///////////////////
-OpenSync::OpenSync( Kit::EventQueue::Server& myEventLoop ) noexcept
-    : m_eventLoop( myEventLoop )
+OpenCloseSync::OpenCloseSync( Kit::EventQueue::Server& myEventLoop ) noexcept
+    : OpenSync( myEventLoop )
 {
 }
 
 ///////////////////
-bool OpenSync::open( void* args ) noexcept
+bool OpenCloseSync::close( void* args ) noexcept
 {
-    OpenPayload_T     payload( args );
-    SyncReturnHandler srh;
-    OpenMsg           msg( *this, payload, srh );
+    ClosePayload_T          payload( args );
+    SyncReturnHandler       srh;
+    ICloseRequest::CloseMsg msg( *this, payload, srh );
     m_eventLoop.postSync( msg );
     return payload.success;
 }

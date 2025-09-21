@@ -11,8 +11,8 @@
 /** @file */
 
 #include "Kit/Itc/IOpenRequest.h"
-#include "Kit/EventQueue/Server.h"
 #include "Kit/Itc/IOpen.h"
+#include "Kit/EventQueue/Server.h"
 #include <type_traits>
 
 

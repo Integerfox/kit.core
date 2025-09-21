@@ -1,5 +1,5 @@
-#ifndef KIT_ITC_IOPEN_REQUEST_h_
-#define KIT_ITC_IOPEN_REQUEST_h_
+#ifndef KIT_ITC_ICLOSE_REQUEST_h_
+#define KIT_ITC_ICLOSE_REQUEST_h_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -12,7 +12,14 @@
 
 #include "Kit/Itc/RequestMessage.h"
 // #include "Kit/Itc/ResponseMessage.h"
-#include "Kit/Itc/SAP.h"
+#include "Kit/EventQueue/Server.h"
+#include <type_traits>
+
+
+/// Compile time check for the EventQueue being configured 'correctly'
+static_assert( std::is_base_of<Kit::EventQueue::IMsgNotification, Kit::EventQueue::IQueue>::value,
+               "IQueue must inherit from IMsgNotification" );
+
 
 ///
 namespace Kit {
@@ -22,27 +29,24 @@ namespace Itc {
 /** This abstract class define message types and payloads for a set of ITC
     services. The request() method(s) are to be implemented by a 'server'
  */
-class IOpenRequest
+class ICloseRequest
 {
 public:
     /// SAP for this API
-    typedef Kit::Itc::SAP<IOpenRequest> SAP;
+    typedef Kit::Itc::SAP<ICloseRequest> SAP;
 
 public:
-    /** Payload for Message.
-        IN --> data passed to the service
-        OUT--> data returned from the service
-     */
-    struct OpenPayload_T
+    /// Close Payload
+    struct ClosePayload_T
     {
         /// IN: Optional arguments
         void* args;
 
-        /// OUT: Pass/Fail result of the open request
+        /// OUT: Pass/Fail result of the close request
         bool success;
-    
+
         /// Constructor
-        OpenPayload_T( void* args = nullptr )
+        ClosePayload_T( void* args = nullptr )
             : args( args )
             , success( true )
         {
@@ -50,16 +54,16 @@ public:
     };
 
 
-    /// Message Type: Open
-    typedef RequestMessage<IOpenRequest, OpenPayload_T> OpenMsg;
+    /// Message Type: Close
+    typedef RequestMessage<ICloseRequest, ClosePayload_T> CloseMsg;
 
 public:
-    /// ITC Request: Open
-    virtual void request( OpenMsg& msg ) noexcept = 0;
+    /// ITC Request: Close
+    virtual void request( CloseMsg& msg ) noexcept = 0;
 
 public:
     ///
-    virtual ~IOpenRequest() = default;
+    virtual ~ICloseRequest() = default;
 };
 
 #if 0
@@ -76,14 +80,14 @@ class OpenResponse
 public:
     /// Response Message Type: Open
     typedef ResponseMessage<OpenResponse,
-                            IOpenRequest,
-                            IOpenRequest::OpenPayload>
-        OpenMsg;
+                            ICloseRequest,
+                            ICloseRequest::OpenPayload>
+        CloseMsg;
 
 
 public:
-    /// Response: OpenMsg
-    virtual void response( OpenMsg& msg ) = 0;
+    /// Response: CloseMsg
+    virtual void response( CloseMsg& msg ) = 0;
 
 
 public:
