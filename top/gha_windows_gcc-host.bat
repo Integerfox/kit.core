@@ -26,12 +26,14 @@ call .\env.bat
 
 :: Build the Catch2 static library
 cd %_ROOT%\projects
-python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows gcc-host -c --try win64
+::python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows gcc-host -c --try win64
+python %NQBP_BIN%\other\bob.py -v --script-prefix python --p2 windows gcc-host -c --try win64
 
 
 :: Build the unit tests
 cd %_ROOT%\src
-python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows gcc-host -c --bldtime --try win64 --bldnum %BUILD_NUMBER%
+::python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows gcc-host -c --bldtime --try win64 --bldnum %BUILD_NUMBER%
+python %NQBP_BIN%\other\bob.py -v --script-prefix python --p2 windows gcc-host -c --bldtime --try win64 --bldnum %BUILD_NUMBER%
 IF ERRORLEVEL 1 EXIT /b 1
 
 :: Run unit tests

@@ -9,6 +9,7 @@
 /** @file */
 
 #include "LineWriter.h"
+#include "Kit/System/Assert.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -19,6 +20,7 @@ LineWriter::LineWriter( IOutput& stream, const char* newline )
     : m_stream( stream )
     , m_newline( newline )
 {
+    KIT_SYSTEM_ASSERT( newline != nullptr );
 }
 
 
@@ -56,6 +58,8 @@ bool LineWriter::println( const char* srcstring, int numbytes ) noexcept
 
 bool LineWriter::print( Kit::Text::IString& formatBuffer, const char* format, ... ) noexcept
 {
+    KIT_SYSTEM_ASSERT( format != nullptr );
+
     va_list ap;
     va_start( ap, format );
     bool io = m_stream.vwrite( formatBuffer, format, ap );
@@ -66,6 +70,8 @@ bool LineWriter::print( Kit::Text::IString& formatBuffer, const char* format, ..
 
 bool LineWriter::println( Kit::Text::IString& formatBuffer, const char* format, ... ) noexcept
 {
+    KIT_SYSTEM_ASSERT( format != nullptr );
+
     va_list ap;
     va_start( ap, format );
     bool io = m_stream.vwrite( formatBuffer, format, ap );
