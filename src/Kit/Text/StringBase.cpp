@@ -29,7 +29,7 @@ StringBase::StringBase( char* internalString ) noexcept
 ///////////////////////////////
 void StringBase::clear() noexcept
 {
-    m_strPtr[0] = '\0';
+    memset( m_strPtr, 0, maxLength() );
     m_truncated = false;
 }
 
