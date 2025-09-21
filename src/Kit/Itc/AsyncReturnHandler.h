@@ -1,5 +1,5 @@
-#ifndef Cpl_Itc_AsyncReturnHandler_h_
-#define Cpl_Itc_AsyncReturnHandler_h_
+#ifndef KIT_ITC_ASYNC_RETURN_HANDLER_H_
+#define KIT_ITC_ASYNC_RETURN_HANDLER_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,11 +10,18 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Cpl/Itc/ReturnHandler.h"
-#include "Cpl/Itc/PostApi.h"
+#include "Kit/EventQueue/IQueue.h"
+#include "Kit/Itc/IReturnHandler.h"
+#include <type_traits>
+
+
+/// Compile time check for the EventQueue being configured 'correctly'
+static_assert( std::is_base_of<Kit::EventQueue::IMsgNotification, Kit::EventQueue::IQueue>::value,
+               "IQueue must inherit from IMsgNotification" );
+
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Itc {
 
@@ -22,33 +29,38 @@ namespace Itc {
 /** This class implements an asynchronous ReturnHandler. When the rts() method
     of the message associated with this class is invoked, the message referenced
     as a member variable of this class is posted to the mailbox referenced as
-    a member variable of this class. It is expected that the referenced mailbox
-    belongs to the client (i.e. the sender of the original message), and that
+    a member variable of this class. It is expected that the referenced event
+    loop belongs to the client (i.e. the sender of the original message), and that
     the message contains a reference to the original message, such that the
     original message can be released by the client.
  */
-class AsyncReturnHandler : public ReturnHandler
+class AsyncReturnHandler : public IReturnHandler
 {
-protected:
-    /** Refers to the mailbox to which the response message will be posted.
-     */
-    PostApi & m_mbox;
-
-    /** Refers to the response message to be posted to the response mailbox.
-     */
-    Message&    m_msg;
-
 public:
     /** The constructor initializes the response mailbox and message references.
      */
-    AsyncReturnHandler( PostApi& mbox, Message& msg );
+    AsyncReturnHandler( Kit::EventQueue::IQueue& clientEventQueue, IMessage& msg ) noexcept
+        : m_clientEventQueue( clientEventQueue )
+        , m_responseMsg( msg )
+    {
+    }
 
 
 public:
-    /// See ReturnHandler
-    void    rts() noexcept;
+    /// See Kit::Itc::IReturnHandler
+    void rts() noexcept override
+    {
+        m_clientEventQueue.post( m_responseMsg );
+    }
+
+protected:
+    /// Refers to the eventLoop/thread to which the response message will be posted.
+    EventQueue::IQueue& m_clientEventQueue;
+
+    /// Refers to the response message to be posted to the response mailbox.
+    IMessage& m_responseMsg;
 };
 
-};      // end namespaces
-};
+}  // end namespaces
+}
 #endif  // end header latch

@@ -11,23 +11,16 @@
 /** @file */
 
 #include "Kit/Itc/RequestMessage.h"
-// #include "Kit/Itc/ResponseMessage.h"
-#include "Kit/EventQueue/Server.h"
-#include <type_traits>
-
-
-/// Compile time check for the EventQueue being configured 'correctly'
-static_assert( std::is_base_of<Kit::EventQueue::IMsgNotification, Kit::EventQueue::IQueue>::value,
-               "IQueue must inherit from IMsgNotification" );
-
+#include "Kit/Itc/ResponseMessage.h"
+#include "Kit/Itc/SAP.h"
 
 ///
 namespace Kit {
 ///
 namespace Itc {
 
-/** This abstract class define message types and payloads for a set of ITC
-    services. The request() method(s) are to be implemented by a 'server'
+/** This abstract class defines message types and payloads for a set of ITC
+    services. The request() method(s) are to be implemented by a 'service'
  */
 class ICloseRequest
 {
@@ -48,7 +41,7 @@ public:
         /// Constructor
         ClosePayload_T( void* args = nullptr )
             : args( args )
-            , success( true )
+            , success( false )
         {
         }
     };
@@ -66,35 +59,33 @@ public:
     virtual ~ICloseRequest() = default;
 };
 
-#if 0
 ///////////////////////////////////////////////////////////////////////////////
 /** This abstract class define response message types for a set of ITC services.
     The response() method(s) are to be implemented by the 'client'
 
-    NOTE: Typically the 'Open Request' is done synchronously.  This interface
-          is provided for completeness for the edge case of doing the Open
+    NOTE: Typically the 'Close Request' is done synchronously.  This interface
+          is provided for completeness for the edge case of doing the Close
           Request asynchronously.
  */
-class OpenResponse
+class ICloseResponse
 {
 public:
-    /// Response Message Type: Open
-    typedef ResponseMessage<OpenResponse,
+    /// Response Message Type: Close
+    typedef ResponseMessage<ICloseResponse,
                             ICloseRequest,
-                            ICloseRequest::OpenPayload>
+                            ICloseRequest::ClosePayload_T>
         CloseMsg;
 
 
 public:
     /// Response: CloseMsg
-    virtual void response( CloseMsg& msg ) = 0;
+    virtual void response( CloseMsg& msg ) noexcept = 0;
 
 
 public:
     /// Virtual destructor
-    virtual ~OpenResponse() {}
+    virtual ~ICloseResponse() = default;
 };
-#endif
 
 }  // end namespaces
 }

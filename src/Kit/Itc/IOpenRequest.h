@@ -11,7 +11,7 @@
 /** @file */
 
 #include "Kit/Itc/RequestMessage.h"
-// #include "Kit/Itc/ResponseMessage.h"
+#include "Kit/Itc/ResponseMessage.h"
 #include "Kit/Itc/SAP.h"
 
 ///
@@ -20,7 +20,7 @@ namespace Kit {
 namespace Itc {
 
 /** This abstract class define message types and payloads for a set of ITC
-    services. The request() method(s) are to be implemented by a 'server'
+    services. The request() method(s) are to be implemented by a 'service'
  */
 class IOpenRequest
 {
@@ -40,11 +40,11 @@ public:
 
         /// OUT: Pass/Fail result of the open request
         bool success;
-    
+
         /// Constructor
         OpenPayload_T( void* args = nullptr )
             : args( args )
-            , success( true )
+            , success( false )
         {
         }
     };
@@ -62,7 +62,6 @@ public:
     virtual ~IOpenRequest() = default;
 };
 
-#if 0
 ///////////////////////////////////////////////////////////////////////////////
 /** This abstract class define response message types for a set of ITC services.
     The response() method(s) are to be implemented by the 'client'
@@ -71,26 +70,26 @@ public:
           is provided for completeness for the edge case of doing the Open
           Request asynchronously.
  */
-class OpenResponse
+class IOpenResponse
 {
 public:
     /// Response Message Type: Open
-    typedef ResponseMessage<OpenResponse,
+    typedef ResponseMessage<IOpenResponse,
                             IOpenRequest,
-                            IOpenRequest::OpenPayload>
+                            IOpenRequest::OpenPayload_T>
         OpenMsg;
 
 
 public:
     /// Response: OpenMsg
-    virtual void response( OpenMsg& msg ) = 0;
+    virtual void response( OpenMsg& msg ) noexcept = 0;
 
 
 public:
     /// Virtual destructor
-    virtual ~OpenResponse() {}
+    virtual ~IOpenResponse() = default;
 };
-#endif
+
 
 }  // end namespaces
 }
