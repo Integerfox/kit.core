@@ -13,4 +13,6 @@
 #define USE_KIT_SYSTEM_ASSERT_MACRO
 #define KitTextToStringMaxUnsigned_T uint64_t
 
+#define USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
+
 #endif
