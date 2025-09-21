@@ -9,11 +9,9 @@
 /** @file */
 
 
-#include "Kit/EventQueue/IQueue.h"
 #include "Kit/Itc/OpenCloseSync.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/Itc/OpenSync.h"
 #include "Kit/EventQueue/Server.h"
 #include "Kit/System/Thread.h"
 
