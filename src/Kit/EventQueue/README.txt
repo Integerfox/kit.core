@@ -4,7 +4,7 @@ The 'EventQueue' namespace is used to provide a 'common' Event Queue type when t
 are multiple orthogonal sources of events. For example, the KIT library supports
 ITC message and Data Model change notification events.  Neither ITC or the DM
 have direct dependencies on each other - and while MOST applications will use
-both types of events, there is no requirement to always include both in a
+both types of events, there is no requirement to always include both in an
 application.
 
 The driving reason to have a 'common' Event Queue type is that to 'send|post'
