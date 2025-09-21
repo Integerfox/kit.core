@@ -31,7 +31,7 @@ characteristics:
 
     o NO dynamic memory is used.  Clients are responsible for providing all
       of the memory required for the individual message(s).
-      - This translate to no hard limits to the number of messages a server
+      - This translates to no hard limits to the number of messages a server
         can receive.  It also means that the application does NOT have to
         worry about 'overflowing' message queues and/or mailboxes.
       - Another side effect of the memory paradigm is that there is NO 
