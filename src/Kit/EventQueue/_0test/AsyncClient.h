@@ -1,7 +1,7 @@
 #ifndef TEST_ITC_ASYNCCLIENT_H_
 #define TEST_ITC_ASYNCCLIENT_H_
 /*-----------------------------------------------------------------------------
-@copyright Copyright (C) 2024 Advanced Micro Devices, Inc. All rights reserved.
+@copyright Copyright Integer Fox Authors
 *----------------------------------------------------------------------------*/
 /** @file */
 
