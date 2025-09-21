@@ -26,13 +26,15 @@ call ./env.bat
 :: Build the Catch2 static library
 cd %_ROOT%\projects
 echo:Build Catch2 static library...
-python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows msvc -c --bld-all
+::python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows msvc -c --bld-all
+python %NQBP_BIN%\other\bob.py -v --script-prefix python --p2 windows msvc -c --bld-all
 IF ERRORLEVEL 1 EXIT /b 1
 
 :: Build the unit tests
 cd %_ROOT%\src
 echo:Building unit tests...
-python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows msvc -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
+::python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows msvc -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
+python %NQBP_BIN%\other\bob.py -v --script-prefix python --p2 windows msvc -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
 IF ERRORLEVEL 1 EXIT /b 1
 
 :: Run unit tests
