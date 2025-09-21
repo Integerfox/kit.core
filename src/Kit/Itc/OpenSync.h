@@ -12,7 +12,7 @@
 
 #include "Kit/Itc/IOpenRequest.h"
 #include "Kit/Itc/IOpen.h"
-#include "Kit/EventQueue/Server.h"
+#include "Kit/EventQueue/IQueue.h"
 #include <type_traits>
 
 
@@ -37,7 +37,7 @@ public:
     /** Constructor.  The 'myEventLoop' is the ITC server object's event loop
         reference of where the service executes uses to receive request messages.
      */
-    OpenSync( Kit::EventQueue::Server& myEventLoop ) noexcept;
+    OpenSync( Kit::EventQueue::IQueue& myEventQueue ) noexcept;
 
 
 public:
@@ -46,7 +46,7 @@ public:
 
 protected:
     /// Mailbox (of the server implementing the ITC request() method
-    Kit::EventQueue::Server& m_eventLoop;
+    Kit::EventQueue::IQueue& m_eventQueue;
 };
 
 

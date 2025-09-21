@@ -35,12 +35,12 @@ class Mailbox : public Kit::EventQueue::IQueue,
                 public Kit::Container::SList<IMessage>
 {
 public:
-    /** Constructor.  The 'myEventQueue' is the event queue for Runnable object
-        (aka thread) where the messages posted to the Mailbox are RETRIEVED and
-        their process() method is called to execute them.
+    /** Constructor.  The 'myEventLoop' is the event loop for Runnable object
+        (aka the Event Loop) where the messages posted to the Mailbox are
+        RETRIEVED and their process() methods execute in.
      */
-    Mailbox( Kit::System::ISignable& myEventThread ) noexcept
-        : m_eventThread( myEventThread )
+    Mailbox( Kit::System::ISignable& myEventLoop ) noexcept
+        : m_eventLoop( myEventLoop )
     {
     }
 
@@ -66,8 +66,8 @@ protected:
     bool isPendingMessage() noexcept;
 
 protected:
-    /// The Event Queue that I wait-on/dispatch-msgs-from
-    Kit::System::ISignable& m_eventThread;
+    /// The Event Loop/thread that I wait-on/dispatch-msgs-from
+    Kit::System::ISignable& m_eventLoop;
 };
 
 

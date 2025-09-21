@@ -47,7 +47,7 @@ public:
     }
 
 public:
-    /// See Kit::Itc::Message
+    /// See Kit::Itc::Message.  This call executes in the Service's thread context.
     void process() noexcept override
     {
         m_srv.request( *this );

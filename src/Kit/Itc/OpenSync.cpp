@@ -9,6 +9,7 @@
 /** @file */
 
 #include "OpenSync.h"
+#include "Kit/EventQueue/IQueue.h"
 #include "SyncReturnHandler.h"
 
 //------------------------------------------------------------------------------
@@ -16,8 +17,8 @@ namespace Kit {
 namespace Itc {
 
 ///////////////////
-OpenSync::OpenSync( Kit::EventQueue::Server& myEventLoop ) noexcept
-    : m_eventLoop( myEventLoop )
+OpenSync::OpenSync( Kit::EventQueue::IQueue& myEventQueue ) noexcept
+    : m_eventQueue( myEventQueue )
 {
 }
 
@@ -27,7 +28,7 @@ bool OpenSync::open( void* args ) noexcept
     OpenPayload_T     payload( args );
     SyncReturnHandler srh;
     OpenMsg           msg( *this, payload, srh );
-    m_eventLoop.postSync( msg );
+    m_eventQueue.postSync( msg );
     return payload.success;
 }
 

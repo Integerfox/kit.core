@@ -27,12 +27,16 @@ namespace System {
 
     The order of processing is:
 
-       1. The Event Loop signal, Event Flags, and Software Timers are processed.
-       2. The Periodic scheduler's executeScheduler() method is called
-       3. The optional 'Idle' function is called.
+       1. The Event Loop is unblocked.  Any of the following will trigger the
+          Event Loop to 'wake-up'
+          a. A Event Flag was signaled
+          b. The EventLoop tick-timing expired
+       2. All Event Flags are processed.
+       3. The timers and their callbacks (if any timers have expired) are
+          processed.
        4. The loop is repeated until there are no expired timers, and no event
-          flags - at which point the thread blocks and wait for any of the above
-          asynchronous actions to wake up the thread.
+          flags - at which point the thread blocks and waits till the next
+          wake-up-action.
  */
 class EventLoopWithPScheduling : public EventLoop, public PeriodicScheduler
 {

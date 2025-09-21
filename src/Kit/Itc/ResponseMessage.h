@@ -39,21 +39,47 @@ class ResponseMessage : public IMessage
 public:
     /// Constructor
     ResponseMessage( CLIENT& client, EventQueue::IQueue& clientsEventQueue, SERVICE& server, PAYLOAD& payload )
-        : m_client( client ), m_rh( clientsEventQueue, *this ), m_request( server, payload, m_rh )
+        : m_client( &client ), m_rh( clientsEventQueue, *this ), m_request( server, payload, m_rh )
     {
     }
 
     /// Constructor
     ResponseMessage( CLIENT& client, EventQueue::IQueue& clientsEventQueue, SAP<SERVICE>& serverSap, PAYLOAD& payload )
-        : m_client( client ), m_rh( clientsEventQueue, *this ), m_request( serverSap, payload, m_rh )
+        : m_client( &client ), m_rh( clientsEventQueue, *this ), m_request( serverSap, payload, m_rh )
     {
     }
 
 public:
-    /// See Message
+    /** This method is use to ABANDON the response message. In this context 'abandoned'
+        means the client's 'response(msg)' method will NEVER be called.  It does
+        NOT mean that request processing is aborted.
+
+        This method should only be used when the client is 'going out of scope'
+        (i.e. called in its destructor). If there is outstanding request/response
+        transaction when the client's destructor is called, failing to call the
+        abandon() method will result in a callback to a non-existing object.
+
+        NOTE: In a perfect world, the client would always wait for all outstanding
+        transactions to complete before its destructor is called. However, in the
+        real world, this is not always possible. Therefore, this method provides
+        a way for the client to 'opt out' of receiving the response callback.
+    
+        This method CAN ONLY be called from the CLIENT thread context.
+     */
+    void abandon() noexcept
+    {
+        m_client = nullptr;
+    }
+
+
+    public:
+    /// See Kit::Itc::Message.  This call executes in the Client's thread context.
     void process() noexcept override
     {
-        m_client.response( *this );
+        if ( m_client )
+        {
+            m_client->response( *this );
+        }
     }
 
 
@@ -72,7 +98,7 @@ public:
 
 protected:
     /// Reference to the client interface whose "response" method will be called
-    CLIENT& m_client;
+    CLIENT* m_client;
 
     /// Return handler used to deliver the response
     AsyncReturnHandler m_rh;

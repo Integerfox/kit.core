@@ -9,7 +9,6 @@
 /** @file */
 
 #include "EventLoopWithPScheduling.h"
-#include "Kit/System/EventLoop.h"
 
 
 //------------------------------------------------------------------------------

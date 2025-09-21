@@ -5,7 +5,6 @@
 *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/EventQueue/IQueue.h"
 #include "Kit/Itc/_0test/ITestRequest.h"
 #include "Kit/Itc/OpenCloseSync.h"
 #include "Kit/System/ISignable.h"

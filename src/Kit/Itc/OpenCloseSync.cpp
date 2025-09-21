@@ -9,6 +9,7 @@
 /** @file */
 
 #include "OpenCloseSync.h"
+#include "Kit/EventQueue/IQueue.h"
 #include "SyncReturnHandler.h"
 
 //------------------------------------------------------------------------------
@@ -16,8 +17,8 @@ namespace Kit {
 namespace Itc {
 
 ///////////////////
-OpenCloseSync::OpenCloseSync( Kit::EventQueue::Server& myEventLoop ) noexcept
-    : OpenSync( myEventLoop )
+OpenCloseSync::OpenCloseSync( Kit::EventQueue::IQueue& myEventQueue ) noexcept
+    : OpenSync( myEventQueue )
 {
 }
 
@@ -27,7 +28,7 @@ bool OpenCloseSync::close( void* args ) noexcept
     ClosePayload_T          payload( args );
     SyncReturnHandler       srh;
     ICloseRequest::CloseMsg msg( *this, payload, srh );
-    m_eventLoop.postSync( msg );
+    m_eventQueue.postSync( msg );
     return payload.success;
 }
 

@@ -32,7 +32,7 @@ public:
     /** Constructor.  The 'myEventLoop' is the ITC server object's event loop
         reference of where the service executes uses to receive request messages.
      */
-    OpenCloseSync( Kit::EventQueue::Server& myEventLoop ) noexcept;
+    OpenCloseSync( Kit::EventQueue::IQueue& myEventQueue ) noexcept;
 
 
 public:
