@@ -8,13 +8,11 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file
-
-
-*/
+/** @file */
 
 
 #include "Kit/Io/Types.h"
+#include "Kit/System/Assert.h"
 #include <unistd.h>
 #include <sys/ioctl.h>
 
@@ -48,6 +46,8 @@ public:
      */
     static bool write( int fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
     {
+        KIT_SYSTEM_ASSERT( buffer != nullptr );
+
         // Trap that the stream has been CLOSED!
         if ( fd == INVALID_FD )
         {
@@ -79,7 +79,7 @@ public:
 
     /** Returns true if the file descriptor is in the open state
      */
-    static bool isOpened( int fd )noexcept
+    static bool isOpened( int fd ) noexcept
     {
         return fd != INVALID_FD;
     }
@@ -110,6 +110,8 @@ public:
      */
     static bool read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
     {
+        KIT_SYSTEM_ASSERT( buffer != nullptr );
+        
         // Trap that the stream has been CLOSED!
         if ( fd == INVALID_FD )
         {

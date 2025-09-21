@@ -15,13 +15,15 @@
 
  */
 #include <Windows.h>
-#define KitIoStdioHandle_T_MAP         HANDLE  //!< Mapping
-#define KitIoSocketHandle_T_MAP        HANDLE  //!< Mapping
-#define KitIoFileHandle_T_MAP          HANDLE  //!< Mapping
+#define KitIoStdioHandle_T_MAP                HANDLE  //!< Mapping
+#define KitIoSocketHandle_T_MAP               HANDLE  //!< Mapping
+#define KitIoFileHandle_T_MAP                 HANDLE  //!< Mapping
+#define KitIoFileDirectory_T_MAP              HANDLE  //!< Mapping
 
-#define KIT_IO_NEW_LINE_NATIVE_MAP     "\015\012"  //!< Mapping
-#define KIT_IO_FILE_NATIVE_DIR_SEP_MAP '\\'        //!< Mapping
-#define KIT_IO_FILE_MAX_NAME_MAP       _MAX_PATH   //!< Mapping
+
+#define KIT_IO_NEW_LINE_NATIVE_MAP            "\015\012"  //!< Mapping
+#define KIT_IO_DIRECTORY_SEPARATOR_NATIVE_MAP '\\'        //!< Mapping
+#define KIT_IO_FILE_MAX_NAME_MAP              _MAX_PATH   //!< Mapping
 
 
 ///////////////////////////////////////////////////////////////////////////////
