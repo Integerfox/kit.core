@@ -1,5 +1,5 @@
-#ifndef KIT_ITC_SYNC_RETURN_HANDLER_h_
-#define KIT_ITC_SYNC_RETURN_HANDLER_h_
+#ifndef KIT_ITC_SYNC_RETURN_HANDLER_H_
+#define KIT_ITC_SYNC_RETURN_HANDLER_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

@@ -99,7 +99,7 @@ TEST_CASE( "Async" )
         ITestRequest::SAP serverSAP( uutServer, serverEventLoop );
         AsyncClient       uutClient( clientEventLoop, serverSAP, Thread::getCurrent() );
 
-        // Open both client and server. Server MUST be opened first due to hold the test is constructed
+        // Open both client and server. Server MUST be opened first due to how the test is constructed
         bool result = uutServer.open();
         REQUIRE( result == true );
         REQUIRE( uutServer.isOpened == true );
