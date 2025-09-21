@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 54-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 72-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -91,39 +91,43 @@ $(function() {
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">    This type is used when defining concrete STDIO file classes.</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="_types_8h.html#ae3d2758b8319cd87cb605a95b088704c">   43</a></span><span class="preprocessor">#define KitIoStdioHandle_T KitIoStdioHandle_T_MAP</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">/*----------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">/** Signed data type for arguments, variables, etc. with respect to how many</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">    bytes can be read/written from/to streams, files, etc.  The default is</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">    for a signed 32 bit integer.  A platform can override the default to make</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">    larger or smaller as needed.</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">    Note: This is my work-around for the fact that C++ does not have a</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">          standard &#39;ssize_t&#39; type. ssize_t is defined in POSIX and is used when</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">          read/write operations using file descriptors.</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#ifndef OPTION_KIT_IO_LENGTH_TYPE</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">   57</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> = int32_t;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"></span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">/// Alias for Offset type (used for seek operations)</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_io.html#a00283c182d84dee9a942d1ef5198032f">   60</a></span><span class="comment"></span><span class="keyword">using </span><a class="code hl_typedef" href="namespace_kit_1_1_io.html#a00283c182d84dee9a942d1ef5198032f">Offset_T</a>    = int32_t;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#else</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">using </span><a class="code hl_typedef" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> = OPTION_KIT_IO_LENGTH_TYPE;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="keyword">using </span><a class="code hl_typedef" href="namespace_kit_1_1_io.html#a00283c182d84dee9a942d1ef5198032f">Offset_T</a>    = OPTION_KIT_IO_LENGTH_TYPE;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"></span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">/** Defers the &quot;file descriptor&quot; for a file handle type to the target platform.</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    This type is used when defining concrete file classes.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="_types_8h.html#a4df3975d3f764dfbc18fad393159671b">   48</a></span><span class="preprocessor">#define KitIoFileHandle_T KitIoFileHandle_T_MAP</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">/*----------------------------------------------------------------------------*/</span><span class="comment"></span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">/** Signed data type for arguments, variables, etc. with respect to how many</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">    bytes can be read/written from/to streams, files, etc.  The default is</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">    for a signed 32 bit integer.  A platform can override the default to make</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">    larger or smaller as needed.</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"></span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">    Note: This is my work-around for the fact that C++ does not have a</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">          standard &#39;ssize_t&#39; type. ssize_t is defined in POSIX and is used when</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">          read/write operations using file descriptors.</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="preprocessor">#ifndef OPTION_KIT_IO_LENGTH_TYPE</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">   61</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> = int32_t;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"></span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">/// Alias for Offset type (used for seek operations)</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_io.html#a00283c182d84dee9a942d1ef5198032f">   64</a></span><span class="comment"></span><span class="keyword">using </span><a class="code hl_typedef" href="namespace_kit_1_1_io.html#a00283c182d84dee9a942d1ef5198032f">Offset_T</a>    = int32_t;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">using </span><a class="code hl_typedef" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> = OPTION_KIT_IO_LENGTH_TYPE;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">using </span><a class="code hl_typedef" href="namespace_kit_1_1_io.html#a00283c182d84dee9a942d1ef5198032f">Offset_T</a>    = OPTION_KIT_IO_LENGTH_TYPE;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_types_8h_html_aeb77c5e94701beaff5696871828d9bf1"><div class="ttname"><a href="_types_8h.html#aeb77c5e94701beaff5696871828d9bf1">KIT_IO_NEW_LINE_NATIVE</a></div><div class="ttdeci">#define KIT_IO_NEW_LINE_NATIVE</div><div class="ttdoc">The application must provide/map the native newline character.</div><div class="ttdef"><b>Definition</b> Types.h:33</div></div>
-<div class="ttc" id="anamespace_kit_1_1_io_html_a00283c182d84dee9a942d1ef5198032f"><div class="ttname"><a href="namespace_kit_1_1_io.html#a00283c182d84dee9a942d1ef5198032f">Kit::Io::Offset_T</a></div><div class="ttdeci">int32_t Offset_T</div><div class="ttdoc">Alias for Offset type (used for seek operations)</div><div class="ttdef"><b>Definition</b> Types.h:60</div></div>
-<div class="ttc" id="anamespace_kit_1_1_io_html_a6ef29048f8025506fcff4cb1e763277e"><div class="ttname"><a href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">Kit::Io::ByteCount_T</a></div><div class="ttdeci">int32_t ByteCount_T</div><div class="ttdoc">Signed data type for arguments, variables, etc.</div><div class="ttdef"><b>Definition</b> Types.h:57</div></div>
+<div class="ttc" id="anamespace_kit_1_1_io_html_a00283c182d84dee9a942d1ef5198032f"><div class="ttname"><a href="namespace_kit_1_1_io.html#a00283c182d84dee9a942d1ef5198032f">Kit::Io::Offset_T</a></div><div class="ttdeci">int32_t Offset_T</div><div class="ttdoc">Alias for Offset type (used for seek operations)</div><div class="ttdef"><b>Definition</b> Types.h:64</div></div>
+<div class="ttc" id="anamespace_kit_1_1_io_html_a6ef29048f8025506fcff4cb1e763277e"><div class="ttname"><a href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">Kit::Io::ByteCount_T</a></div><div class="ttdeci">int32_t ByteCount_T</div><div class="ttdoc">Signed data type for arguments, variables, etc.</div><div class="ttdef"><b>Definition</b> Types.h:61</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">The 'Kit' namespace is the root name space for the KIT C++ class library that is specifically target ...</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 14 2025 16:18:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 21 2025 18:37:51 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

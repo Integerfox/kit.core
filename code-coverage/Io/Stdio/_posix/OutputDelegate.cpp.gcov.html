@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-14 16:20:12</td>
+            <td class="headerValue">2025-09-21 18:39:50</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">1</td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -80,16 +80,16 @@
 <span id="L18"><span class="lineNum">      18</span>                 :             : namespace Stdio {</span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : </span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : //////////////////////</span>
-<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC tlaBgGNC">          13 : OutputDelegate::OutputDelegate( KitIoStdioHandle_T fd ) noexcept</span></span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          13 :     : m_outFd( fd )</span></span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          13 :     , m_outEos( false )</span></span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC tlaBgGNC">          14 : OutputDelegate::OutputDelegate( KitIoStdioHandle_T fd ) noexcept</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          14 :     : m_outFd( fd )</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          14 :     , m_outEos( false )</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : {</span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">          13 : }</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">          14 : }</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : //////////////////////</span>
-<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">        5142 : bool OutputDelegate::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T&amp; bytesWritten ) noexcept</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">        5246 : bool OutputDelegate::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T&amp; bytesWritten ) noexcept</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
-<span id="L30"><span class="lineNum">      30</span>         [<span class="tlaGBC" title="Branch 0 was taken 5132 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">        5142 :     return PosixIO::write( m_outFd, m_outEos, buffer, maxBytes, bytesWritten );</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">        5246 :     return PosixIO::write( m_outFd, m_outEos, buffer, maxBytes, bytesWritten );</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : }</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : </span>
 <span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">           2 : void OutputDelegate::flush() noexcept</span></span>

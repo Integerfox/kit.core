@@ -1,21 +1,35 @@
 <map id="Kit/Io/IOutput.h" name="Kit/Io/IOutput.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="393,5,513,31"/>
-<area shape="rect" id="Node000002" href="$_i_input_output_8h.html" title=" " alt="" coords="5,79,159,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="380,36,143,81,142,76,379,31"/>
-<area shape="rect" id="Node000004" href="$_line_writer_8h.html" title=" " alt="" coords="183,79,322,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="408,38,286,81,284,76,407,33"/>
-<area shape="rect" id="Node000005" href="$_output_delegate_8h.html" title=" " alt="" coords="347,79,559,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="455,44,455,79,450,79,450,44"/>
-<area shape="rect" id="Node000008" href="$_tee_output_8h.html" title=" " alt="" coords="583,79,722,104"/>
-<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="499,33,621,76,619,81,497,38"/>
-<area shape="rect" id="Node000009" href="$_trace_8h.html" title="This file provides an interface for a &#39;printf&#39; tracing mechanism." alt="" coords="747,79,889,104"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="525,31,759,76,758,81,524,36"/>
-<area shape="rect" id="Node000003" href="$_null_8h.html" title=" " alt="" coords="33,152,131,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="85,118,85,152,79,152,79,118"/>
-<area shape="rect" id="Node000006" href="$_std_err_8h.html" title=" " alt="" coords="291,152,438,177"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="430,115,381,154,377,150,426,110"/>
-<area shape="rect" id="Node000007" href="$_std_out_8h.html" title=" " alt="" coords="463,152,616,177"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="479,110,527,150,523,154,475,115"/>
-<area shape="rect" id="Node000010" href="$_private_8h.html" title="This file contains a collection of classes, interfaces, etc." alt="" coords="741,152,895,177"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="821,118,821,152,815,152,815,118"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="736,5,856,31"/>
+<area shape="rect" id="Node000002" href="$_file_2_i_output_8h.html" title=" " alt="" coords="277,79,424,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="723,34,423,81,422,76,722,28"/>
+<area shape="rect" id="Node000007" href="$_i_input_output_8h.html" title=" " alt="" coords="449,79,602,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="740,37,570,81,568,76,739,32"/>
+<area shape="rect" id="Node000009" href="$_line_writer_8h.html" title=" " alt="" coords="627,79,765,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="770,41,714,81,711,76,767,36"/>
+<area shape="rect" id="Node000010" href="$_output_delegate_8h.html" title=" " alt="" coords="790,79,1002,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="825,36,881,76,878,81,822,41"/>
+<area shape="rect" id="Node000013" href="$_tee_output_8h.html" title=" " alt="" coords="1027,79,1165,104"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="858,31,1048,76,1047,81,857,36"/>
+<area shape="rect" id="Node000014" href="$_trace_8h.html" title="This file provides an interface for a &#39;printf&#39; tracing mechanism." alt="" coords="1190,79,1333,104"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="870,28,1190,76,1189,82,870,33"/>
+<area shape="rect" id="Node000003" href="$_file_2_i_input_output_8h.html" title=" " alt="" coords="90,159,270,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="315,112,206,162,204,157,312,107"/>
+<area shape="rect" id="Node000006" href="$_output_8h.html" title=" " alt="" coords="294,159,437,185"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="358,117,366,159,361,160,353,118"/>
+<area shape="rect" id="Node000004" href="$_input_output_8h.html" title=" " alt="" coords="5,240,181,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="159,196,108,242,104,238,155,192"/>
+<area shape="rect" id="Node000005" href="$_file_2_null_8h.html" title=" " alt="" coords="205,240,331,265"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="205,192,257,238,253,242,201,196"/>
+<area shape="rect" id="Node000008" href="$_null_8h.html" title=" " alt="" coords="476,159,575,185"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="528,118,528,159,523,159,523,118"/>
+<area shape="rect" id="Node000011" href="$_std_err_8h.html" title=" " alt="" coords="671,159,817,185"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="863,113,768,161,765,157,860,108"/>
+<area shape="rect" id="Node000012" href="$_std_out_8h.html" title=" " alt="" coords="842,159,995,185"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="906,117,918,158,913,160,901,118"/>
+<area shape="rect" id="Node000015" href="$_file_2__posix_2fdio_8h.html" title=" " alt="" coords="1041,152,1170,192"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="1228,112,1144,154,1142,149,1225,108"/>
+<area shape="rect" id="Node000016" href="$_file_2__win32_2fdio_8h.html" title=" " alt="" coords="1195,152,1328,192"/>
+<area shape="poly" id="edge15_Node000014_Node000016" title=" " alt="" coords="1264,118,1264,152,1259,152,1259,118"/>
+<area shape="rect" id="Node000017" href="$_private_8h.html" title="This file contains a collection of classes, interfaces, etc." alt="" coords="1352,159,1507,185"/>
+<area shape="poly" id="edge16_Node000014_Node000017" title=" " alt="" coords="1299,107,1406,157,1404,162,1297,112"/>
 </map>

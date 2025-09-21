@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">18</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-14 16:20:12</td>
+            <td class="headerValue">2025-09-21 18:39:50</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
-            <td class="headerCovTableEntry">64</td>
-            <td class="headerCovTableEntry">32</td>
+            <td class="headerCovTableEntryMed">51.4&nbsp;%</td>
+            <td class="headerCovTableEntry">72</td>
+            <td class="headerCovTableEntry">37</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -96,10 +96,10 @@
 <span id="L34"><span class="lineNum">      34</span>                 :             :         will fit in the memory allocated by 'memoryForElements' - it is NOT</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :         the number of bytes of 'memoryForElements'.</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :      */</span>
-<span id="L37"><span class="lineNum">      37</span>                 :             :     Stack( unsigned maxElements, ITEM memoryForElements[] ) noexcept</span>
-<span id="L38"><span class="lineNum">      38</span>                 :             :         : m_elements( memoryForElements )</span>
-<span id="L39"><span class="lineNum">      39</span>                 :             :         , m_count( 0 )</span>
-<span id="L40"><span class="lineNum">      40</span>                 :             :         , m_maxItems( maxElements )</span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC tlaBgGNC">           1 :     Stack( unsigned maxElements, ITEM memoryForElements[] ) noexcept</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">           1 :         : m_elements( memoryForElements )</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">           1 :         , m_count( 0 )</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">           1 :         , m_maxItems( maxElements )</span></span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     {</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     }</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
@@ -110,36 +110,36 @@
 <span id="L48"><span class="lineNum">      48</span>                 :             : </span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :         NOTE: A copy of the item is what is pushed on the stack</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :      */</span>
-<span id="L51"><span class="lineNum">      51</span>                 :             :     bool push( const ITEM&amp; src ) noexcept</span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">          39 :     bool push( const ITEM&amp; src ) noexcept</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     {</span>
-<span id="L53"><span class="lineNum">      53</span>                 :             :         if ( isFull() )</span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">          39 :         if ( isFull() )</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :         {</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :             return false;</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :         }</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : </span>
-<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">           9 :         m_elements[m_count++] = src;</span></span>
+<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          48 :         m_elements[m_count++] = src;</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 14 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaGBC" title="Branch 16 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span>]
-<span id="L59"><span class="lineNum">      59</span>                 :             :         return true;</span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC">          39 :         return true;</span></span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :     }</span>
 <span id="L61"><span class="lineNum">      61</span>                 :             : </span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :     /** Removes the top item of the stack.  If the stack is empty then the </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :         method returns false and no value is returned.</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :      */</span>
-<span id="L66"><span class="lineNum">      66</span>                 :             :     bool pop( ITEM&amp; dst ) noexcept</span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">          39 :     bool pop( ITEM&amp; dst ) noexcept</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :     {</span>
-<span id="L68"><span class="lineNum">      68</span>                 :             :         if ( isEmpty() )</span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">          39 :         if ( isEmpty() )</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :         {</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :             return false;</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :         }</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             : </span>
-<span id="L73"><span class="lineNum">      73</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">           7 :         dst = m_elements[--m_count];</span></span>
+<span id="L73"><span class="lineNum">      73</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          46 :         dst = m_elements[--m_count];</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
 <span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span> 
 <span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 13 was not taken"> - </span>]
-<span id="L74"><span class="lineNum">      74</span>                 :             :         return true;</span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">          39 :         return true;</span></span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     }</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : </span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :     /** Removes AND discards the top item of the stack.  If the stack is empty</span>
@@ -186,25 +186,26 @@
 <span id="L112"><span class="lineNum">     112</span>                 :             :      */</span>
 <span id="L113"><span class="lineNum">     113</span>                 :             :     ITEM* peekTop() noexcept</span>
 <span id="L114"><span class="lineNum">     114</span>                 :             :     {</span>
-<span id="L115"><span class="lineNum">     115</span>                 :             :     if ( isEmpty() )</span>
+<span id="L115"><span class="lineNum">     115</span>                 :<span class="tlaGNC">          27 :     if ( isEmpty() )</span></span>
 <span id="L116"><span class="lineNum">     116</span>                 :             :     {</span>
 <span id="L117"><span class="lineNum">     117</span>                 :             :         return nullptr;</span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :     }</span>
 <span id="L119"><span class="lineNum">     119</span>                 :             : </span>
-<span id="L120"><span class="lineNum">     120</span>                 :             :     return &amp;( m_elements[m_count - 1] );</span>
+<span id="L120"><span class="lineNum">     120</span>                 :<span class="tlaGNC">          27 :     return &amp;( m_elements[m_count - 1] );</span></span>
 <span id="L121"><span class="lineNum">     121</span>                 :             : }</span>
 <span id="L122"><span class="lineNum">     122</span>                 :             : </span>
 <span id="L123"><span class="lineNum">     123</span>                 :             : public:</span>
 <span id="L124"><span class="lineNum">     124</span>                 :             :     /// This method returns true if the Stack is empty</span>
 <span id="L125"><span class="lineNum">     125</span>                 :             :     bool isEmpty() const noexcept</span>
 <span id="L126"><span class="lineNum">     126</span>                 :             :     {</span>
-<span id="L127"><span class="lineNum">     127</span>                 :             :         return m_count == 0;</span>
+<span id="L127"><span class="lineNum">     127</span>   [<span class="tlaGBC" title="Branch 0 was taken 39 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 27 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         117 :         return m_count == 0;</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 39 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 12 times"> + </span>]
 <span id="L128"><span class="lineNum">     128</span>                 :             :     }</span>
 <span id="L129"><span class="lineNum">     129</span>                 :             : </span>
 <span id="L130"><span class="lineNum">     130</span>                 :             :     /// This method returns true if the Stack is full</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :     bool isFull() const noexcept</span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :     {</span>
-<span id="L133"><span class="lineNum">     133</span>                 :             :         return m_count == m_maxItems;</span>
+<span id="L133"><span class="lineNum">     133</span>         [<span class="tlaGBC" title="Branch 0 was taken 39 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          39 :         return m_count == m_maxItems;</span></span>
 <span id="L134"><span class="lineNum">     134</span>                 :             :     }</span>
 <span id="L135"><span class="lineNum">     135</span>                 :             : </span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :     /// This method returns the current number of items in the Stack</span>
@@ -223,7 +224,7 @@
 <span id="L149"><span class="lineNum">     149</span>                 :             :     /// Empties the Stack.  All references to the item(s) in the stack are lost.</span>
 <span id="L150"><span class="lineNum">     150</span>                 :             :     void clearTheStack() noexcept</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :     {</span>
-<span id="L152"><span class="lineNum">     152</span>                 :             :         m_count = 0;</span>
+<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">          12 :         m_count = 0;</span></span>
 <span id="L153"><span class="lineNum">     153</span>                 :             :     }</span>
 <span id="L154"><span class="lineNum">     154</span>                 :             : </span>
 <span id="L155"><span class="lineNum">     155</span>                 :             : </span>
