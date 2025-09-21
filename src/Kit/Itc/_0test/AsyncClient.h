@@ -15,7 +15,6 @@
 #include "Kit/Itc/OpenCloseSync.h"
 #include "Kit/System/ISignable.h"
 #include "Kit/System/Trace.h"
-#include "Kit/System/Semaphore.h"
 
 /// Example of Asynchronous ITC client
 class AsyncClient : public Kit::Itc::OpenCloseSync, public ITestResponse
