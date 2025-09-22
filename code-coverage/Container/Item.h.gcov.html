@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-21 18:39:50</td>
+            <td class="headerValue">2025-09-22 12:08:30</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">67.9&nbsp;%</td>
@@ -102,7 +102,7 @@
 <span id="L40"><span class="lineNum">      40</span>                 :             : protected:</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     /// Constructor</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     Item() noexcept</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC tlaBgGNC">         133 :         : m_inListPtr_( nullptr ) {}</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC tlaBgGNC">         193 :         : m_inListPtr_( nullptr ) {}</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : </span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     /** Constructor used ONLY with the child class MapItem: --&gt;special</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :         constructor to allow a Map to be statically allocated.  Only the Map</span>
@@ -127,14 +127,14 @@
 <span id="L65"><span class="lineNum">      65</span>                 :             :     /// Returns 'true' if the instance is in the specified container.</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     inline bool isInContainer_( const void* containerPtr ) const noexcept</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :     {</span>
-<span id="L68"><span class="lineNum">      68</span>   [<span class="tlaGBC" title="Branch 0 was taken 4822 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 852 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 103 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4649 times"> + </span> :<span class="tlaGNC tlaBgGNC">       14924 :         if ( m_inListPtr_ != containerPtr )</span></span>
-<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 79 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 6 was taken 9101 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 8 was taken 2 times"> + </span> 
+<span id="L68"><span class="lineNum">      68</span>   [<span class="tlaGBC" title="Branch 0 was taken 4829 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 832 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 119 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4648 times"> + </span> :<span class="tlaGNC tlaBgGNC">       14925 :         if ( m_inListPtr_ != containerPtr )</span></span>
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 79 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 6 was taken 9099 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 8 was taken 2 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 7 times"> + </span><span class="tlaGBC" title="Branch 11 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 12 was not taken"> - </span><span class="tlaGBC" title="Branch 13 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 14 was not taken"> - </span><span class="tlaGBC" title="Branch 15 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 16 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaGBC" title="Branch 18 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 19 was not taken"> - </span><span class="tlaGBC" title="Branch 20 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 21 was not taken"> - </span><span class="tlaGBC" title="Branch 22 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 23 was not taken"> - </span> 
 <span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 24 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 25 was not taken"> - </span><span class="tlaGBC" title="Branch 26 was taken 23 times"> + </span><span class="tlaUNC" title="Branch 27 was not taken"> - </span>]
 <span id="L69"><span class="lineNum">      69</span>                 :             :         {</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          55 :             return false;</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          63 :             return false;</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :         }</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :         return true;</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     }</span>
@@ -156,7 +156,7 @@
 <span id="L89"><span class="lineNum">      89</span>                 :             :     {</span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :         if ( itemPtr )</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :         {</span>
-<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">        6506 :             itemPtr-&gt;m_inListPtr_ = nullptr;</span></span>
+<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">        6567 :             itemPtr-&gt;m_inListPtr_ = nullptr;</span></span>
 <span id="L93"><span class="lineNum">      93</span>                 :             :         }</span>
 <span id="L94"><span class="lineNum">      94</span>                 :             :     }</span>
 <span id="L95"><span class="lineNum">      95</span>                 :             : </span>
