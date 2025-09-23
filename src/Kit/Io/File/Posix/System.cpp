@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Kit/Io/File/System.h"
-#include "fdio.h"
+#include "Fdio.h"
 
 /// Helper method that does all of the work for populating the Info struct
 static void populate_( Kit::Io::File::System::Info_T& infoOut, struct stat& filestats )
@@ -48,7 +48,7 @@ namespace File {
 bool System::getInfo( const char* fsEntryName, Info_T& infoOut ) noexcept
 {
     struct stat filestats;
-    if ( PosixFileIO::getInfo( getNative( fsEntryName ), filestats ) == false )
+    if ( Posix::Fdio::getInfo( getNative( fsEntryName ), filestats ) == false )
     {
         return false;
     }
@@ -59,18 +59,18 @@ bool System::getInfo( const char* fsEntryName, Info_T& infoOut ) noexcept
 
 bool System::createDirectory( const char* dirName ) noexcept
 {
-    return PosixFileIO::createDirectory( getNative( dirName ) );
+    return Posix::Fdio::createDirectory( getNative( dirName ) );
 }
 
 bool System::createFile( const char* fileName ) noexcept
 {
-    return PosixFileIO::createFile( getNative( fileName ) );
+    return Posix::Fdio::createFile( getNative( fileName ) );
 }
 
 bool System::renameInPlace( const char* oldName, const char* newName ) noexcept
 {
     NameString nativeNewName = getNative( newName );
-    return PosixFileIO::move( getNative( oldName ), nativeNewName );
+    return Posix::Fdio::move( getNative( oldName ), nativeNewName );
 }
 
 bool System::moveFile( const char* oldFileName, const char* newFileName ) noexcept
@@ -81,34 +81,34 @@ bool System::moveFile( const char* oldFileName, const char* newFileName ) noexce
 
 bool System::remove( const char* fsEntryName ) noexcept
 {
-    return PosixFileIO::remove( getNative( fsEntryName ) );
+    return Posix::Fdio::remove( getNative( fsEntryName ) );
 }
 /////////////////////////////
 bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
                                NameString&           dirNameToList,
                                NameString&           dstFirstEntryName ) noexcept
 {
-    if ( PosixFileIO::openDirectory( hdl, getNative( dirNameToList ) ) )
+    if ( Posix::Fdio::openDirectory( hdl, getNative( dirNameToList ) ) )
     {
-        if ( PosixFileIO::readDirectory( hdl, dstFirstEntryName ) )
+        if ( Posix::Fdio::readDirectory( hdl, dstFirstEntryName ) )
         {
             return true;
         }
 
         // Error reading the first entry - close the directory (per semantics of the getFirstDirEntry() method)
-        PosixFileIO::closeDirectory( hdl );
+        Posix::Fdio::closeDirectory( hdl );
     }
     return false;
 }
 
 bool System::getNextDirEntry( KitIoFileDirectory_T& hdl, NameString& dstNextEntryName ) noexcept
 {
-    return PosixFileIO::readDirectory( hdl, dstNextEntryName );
+    return Posix::Fdio::readDirectory( hdl, dstNextEntryName );
 }
 
 void System::closeDirectory( KitIoFileDirectory_T& hdl ) noexcept
 {
-    PosixFileIO::closeDirectory( hdl );
+    Posix::Fdio::closeDirectory( hdl );
 }
 
 // end namespace

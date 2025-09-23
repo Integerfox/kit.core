@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Kit/Io/Stdio/OutputDelegate.h"
-#include "fdio.h"
+#include "Fdio.h"
 
 
 //------------------------------------------------------------------------------
@@ -27,12 +27,12 @@ OutputDelegate::OutputDelegate( KitIoStdioHandle_T fd ) noexcept
 //////////////////////
 bool OutputDelegate::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
 {
-    return Win32IO::write( m_outFd, m_outEos, buffer, maxBytes, bytesWritten );
+    return Posix::Fdio::write( m_outFd, m_outEos, buffer, maxBytes, bytesWritten );
 }
 
 void OutputDelegate::flush() noexcept
 {
-    Win32IO::flush( m_outFd );
+    Posix::Fdio::flush( m_outFd );
 }
 
 bool OutputDelegate::isEos()  noexcept
@@ -43,7 +43,7 @@ bool OutputDelegate::isEos()  noexcept
 void OutputDelegate::close() noexcept
 {
     // Mark the stream as closed - but DON'T close the underlying STDIO file descriptor
-    m_outFd = INVALID_HANDLE_VALUE;
+    m_outFd = Posix::Fdio::INVALID_FD;
 }
 
 } // end namespace

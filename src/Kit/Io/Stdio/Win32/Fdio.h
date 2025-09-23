@@ -23,6 +23,8 @@ namespace Kit {
 namespace Io {
 ///
 namespace Stdio {
+///
+namespace Win32 {
 
 /** Enable/disables the work-around for STDIN (see comments on availableStdin()
     method).  
@@ -30,7 +32,7 @@ namespace Stdio {
           STDIN (and there are several) uses STDIN as a piped stream not as
           a live console.
  */
-#ifdef USE_KIT_O_STDIO_WIN32_STDIN_CONSOLE_HACK
+#ifdef USE_KIT_IO_STDIO_WIN32_STDIN_CONSOLE_HACK
 #define ISAVAILBLE( fd ) return _kbhit()
 #else
 #define ISAVAILBLE( fd )                           \
@@ -41,7 +43,7 @@ namespace Stdio {
 //////////////////////
 /** This static class provides a collection of functions for operating on Win32 handles.
  */
-class Win32IO
+class Fdio
 {
 public:
     /** Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor
@@ -186,6 +188,7 @@ public:
 };
 
 }  // end namespaces
+}
 }
 }
 #endif  // end header latch

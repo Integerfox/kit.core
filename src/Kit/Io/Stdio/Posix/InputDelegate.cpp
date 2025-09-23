@@ -9,7 +9,8 @@
 /** @file */
 
 #include "Kit/Io/Stdio/InputDelegate.h"
-#include "fdio.h"
+#include "Fdio.h"
+#include "Kit/Io/Stdio/Posix/Fdio.h"
 
 
 //------------------------------------------------------------------------------
@@ -27,13 +28,13 @@ InputDelegate::InputDelegate( KitIoStdioHandle_T fd )
 //////////////////////
 bool InputDelegate::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
 {
-    return Win32IO::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );
+    return Posix::Fdio::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );
 }
 
 
 bool InputDelegate::available() noexcept
 {
-    return Win32IO::availableStdin( m_inFd );
+    return Posix::Fdio::available( m_inFd );
 }
 
 bool InputDelegate::isEos() noexcept
@@ -44,7 +45,7 @@ bool InputDelegate::isEos() noexcept
 void InputDelegate::close() noexcept
 {
     // Mark the stream as closed - but DON'T close the underlying STDIO file descriptor
-    m_inFd = INVALID_HANDLE_VALUE;
+    m_inFd = Posix::Fdio::INVALID_FD;
 }
 
 } // end namespace

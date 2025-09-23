@@ -10,7 +10,7 @@
 
 #include "Kit/Io/File/Input.h"
 #include "Kit/Io/File/System.h"
-#include "fdio.h"
+#include "Fdio.h"
 
 
 //------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ namespace File {
 
 //////////////////////////
 Input::Input( const char* fileName ) noexcept
-    : m_inFd( PosixFileIO::open( System::getNative(fileName) ) )
+    : m_inFd( Posix::Fdio::open( System::getNative(fileName) ) )
     , m_inEos( false )
 {
 }
@@ -28,13 +28,13 @@ Input::Input( const char* fileName ) noexcept
 
 Input::~Input() noexcept
 {
-    Stdio::PosixIO::close( m_inFd );
+    Posix::Fdio::close( m_inFd );
 }
 
 
 bool Input::isOpened() noexcept
 {
-    return m_inFd != Stdio::PosixIO::INVALID_FD;
+    return m_inFd != Posix::Fdio::INVALID_FD;
 }
 
 
@@ -42,12 +42,12 @@ bool Input::isOpened() noexcept
 bool Input::read( void* buffer, int numBytes, int& bytesRead ) noexcept
 {
     m_inEos = false;
-    return Kit::Io::Stdio::PosixIO::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );
+    return Posix::Fdio::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );
 }
 
 bool Input::available() noexcept
 {
-    return Kit::Io::Stdio::PosixIO::available( m_inFd );
+    return Posix::Fdio::available( m_inFd );
 }
 
 bool Input::isEos() noexcept
@@ -57,29 +57,29 @@ bool Input::isEos() noexcept
 
 void Input::close() noexcept
 {
-    Kit::Io::Stdio::PosixIO::close( m_inFd );
+    Posix::Fdio::close( m_inFd );
 }
 
 
 //////////////////////////
 bool Input::currentPos( ByteCount_T& curPos ) noexcept
 {
-    return PosixFileIO::currentPos( m_inFd, curPos );
+    return Posix::Fdio::currentPos( m_inFd, curPos );
 }
 
 bool Input::setRelativePos( ByteCount_T deltaOffset ) noexcept
 {
-    return PosixFileIO::setRelativePos( m_inFd, deltaOffset );
+    return Posix::Fdio::setRelativePos( m_inFd, deltaOffset );
 }
 
 bool Input::setToEof() noexcept
 {
-    return PosixFileIO::setToEof( m_inFd );
+    return Posix::Fdio::setToEof( m_inFd );
 }
 
 bool Input::setAbsolutePos( ByteCount_T newoffset ) noexcept
 {
-    return PosixFileIO::setAbsolutePos( m_inFd, newoffset );
+    return Posix::Fdio::setAbsolutePos( m_inFd, newoffset );
 }
 
 bool Input::isEof() noexcept
@@ -89,7 +89,7 @@ bool Input::isEof() noexcept
 
 bool Input::length( ByteCount_T& len ) noexcept
 {
-    return PosixFileIO::length( m_inFd, len );
+    return Posix::Fdio::length( m_inFd, len );
 }
 
 

@@ -22,12 +22,14 @@ namespace Kit {
 namespace Io {
 ///
 namespace Stdio {
+///
+namespace Posix {
 
 
 //////////////////////
 /** This static class provides a collection of functions for operating on POSIX file descriptors.
  */
-class PosixIO
+class Fdio
 {
 public:
     /// Used to indicate an invalid file descriptor
@@ -149,6 +151,7 @@ public:
 };
 
 }  // end namespaces
+}
 }
 }
 #endif  // end header latch
