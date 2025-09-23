@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Kit/Io/File/System.h"
-#include "fdio.h"
+#include "Fdio.h"
 
 /// Helper method that does all of the work for populating the Info struct
 static void populate_( Kit::Io::File::System::Info_T& infoOut, struct _stat& filestats )
@@ -31,7 +31,7 @@ namespace File {
 bool System::getInfo( const char* fsEntryName, Info_T& infoOut ) noexcept
 {
     struct _stat filestats;
-    if ( Win32FileIO::getInfo( getNative( fsEntryName ), filestats ) == false )
+    if ( Win32::Fdio::getInfo( getNative( fsEntryName ), filestats ) == false )
     {
         return false;
     }
@@ -42,18 +42,18 @@ bool System::getInfo( const char* fsEntryName, Info_T& infoOut ) noexcept
 
 bool System::createDirectory( const char* dirName ) noexcept
 {
-    return Win32FileIO::createDirectory( getNative( dirName ) );
+    return Win32::Fdio::createDirectory( getNative( dirName ) );
 }
 
 bool System::createFile( const char* fileName ) noexcept
 {
-    return Win32FileIO::createFile( getNative( fileName ) );
+    return Win32::Fdio::createFile( getNative( fileName ) );
 }
 
 bool System::renameInPlace( const char* oldName, const char* newName ) noexcept
 {
     NameString nativeNewName = getNative( newName );
-    return Win32FileIO::move( getNative( oldName ), nativeNewName );
+    return Win32::Fdio::move( getNative( oldName ), nativeNewName );
 }
 
 bool System::moveFile( const char* oldFileName, const char* newFileName ) noexcept
@@ -64,7 +64,7 @@ bool System::moveFile( const char* oldFileName, const char* newFileName ) noexce
 
 bool System::remove( const char* fsEntryName ) noexcept
 {
-    return Win32FileIO::remove( getNative( fsEntryName ) );
+    return Win32::Fdio::remove( getNative( fsEntryName ) );
 }
 
 /////////////////////////////
@@ -74,19 +74,19 @@ bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
 {
     // Append the wildcard to the directory name
     dirNameToList += '*';
-    bool result = Win32FileIO::findFirstDirEntry( hdl, getNative( dirNameToList() ), firstEntryName );
+    bool result = Win32::Fdio::findFirstDirEntry( hdl, getNative( dirNameToList() ), firstEntryName );
     dirNameToList.trimRight( 1 );
     return result;
 }
 
 bool System::getNextDirEntry( KitIoFileDirectory_T& hdl, NameString& nextEntryName ) noexcept
 {
-    return Win32FileIO::findNextDirEntry( hdl, nextEntryName );
+    return Win32::Fdio::findNextDirEntry( hdl, nextEntryName );
 }
 
 void System::closeDirectory( KitIoFileDirectory_T& hdl ) noexcept
 {
-    Win32FileIO::closeDirectory( hdl );
+    Win32::Fdio::closeDirectory( hdl );
 }
 
 // end namespace
