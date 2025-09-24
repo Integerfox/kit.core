@@ -13,9 +13,14 @@
 
 #include "Kit/Io/Types.h"
 #include "Kit/System/Assert.h"
+#include "Kit/System/api.h"
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
+#include <errno.h>
+#include <arpa/inet.h>
+#include <string.h>
+
 
 ///
 namespace Kit {
@@ -112,7 +117,7 @@ public:
     static bool read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
     {
         KIT_SYSTEM_ASSERT( buffer != nullptr );
-   
+
         // Throw an error if the socket had already been closed
         if ( fd == INVALID_FD )
         {
@@ -146,6 +151,72 @@ public:
         int nbytes;
         ioctl( fd, FIONREAD, &nbytes );
         return nbytes > 0;
+    }
+
+public:
+    /** Creates the "listening" socket.  It will attempt N times to binding the
+        listening port before giving up.  Upon success a valid file descriptor
+        is returned (>=0).  On error a negative value is returned
+     */
+    static int createListeningSocket( int      port,
+                                      unsigned numRetries,
+                                      uint32_t delayBetweenRetriesMs ) noexcept
+    {
+        struct sockaddr_in local;
+        int                one = 1;
+        int                result;
+
+        // Create the Socket to listen with
+        int fd = socket( AF_INET, SOCK_STREAM, 0 );
+        if ( fd < 0 )
+        {
+            return fd;
+        }
+
+        // Set Options on the socket
+        setsockopt( fd, SOL_SOCKET, SO_REUSEADDR, &one, sizeof( one ) );
+
+        // Set the "address" of the socket
+        unsigned retry = numRetries;
+        while ( retry )
+        {
+            memset( &local, 0, sizeof( local ) );
+            local.sin_family      = AF_INET;
+            local.sin_addr.s_addr = htonl( INADDR_ANY );
+            local.sin_port        = htons( port );
+            if ( ( result = bind( fd, (struct sockaddr*)&local, sizeof( local ) ) ) >= 0 )
+            {
+                break;
+            }
+
+            // Delay between retry attempts
+            Kit::System::sleep( delayBetweenRetriesMs );
+            if ( --retry == 0 )
+            {
+                return result;
+            }
+        }
+
+        // Create a queue to hold connection requests
+        if ( ( result = ::listen( fd, SOMAXCONN ) ) < 0 )
+        {
+            return result;
+        }
+
+        // Success!
+        return fd;
+    }
+
+    /** This method is to accept an incoming connection request.  Returns
+        a valid file descriptor for the accepted connection, or < 0 if an error
+        occurred.  When successful, the 'client_addr' structure is populated
+        with information about the remote Host.
+     */
+    static int acceptConnection( int listeningFd, struct sockaddr_in& client_addr ) noexcept
+    {
+        // Wait on the 'accept'
+        socklen_t client_len = sizeof( client_addr );
+        return accept( listeningFd, (struct sockaddr*)&client_addr, &client_len );
     }
 };
 

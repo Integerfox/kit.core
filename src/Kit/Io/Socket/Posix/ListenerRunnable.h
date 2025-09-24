@@ -27,20 +27,6 @@ namespace Socket {
 namespace Posix {
 
 
-/** This value is number of retries that is performed when attempting
-	to bind to the listening port.
- */
-#ifndef USE_CPL_IO_SOCKET_POSIX_BIND_RETRIES
-#define USE_CPL_IO_SOCKET_POSIX_BIND_RETRIES        5
-#endif
-
- /** This value is time, in milliseconds between retries during the binding
-	 process.
-  */
-#ifndef USE_CPL_IO_SOCKET_POSIX_BIND_RETRY_WAIT
-#define USE_CPL_IO_SOCKET_POSIX_BIND_RETRY_WAIT     (10*1000)
-#endif
-
 
 
   /** This concrete class implements the Cpl::Io::Socket::Listener interface
