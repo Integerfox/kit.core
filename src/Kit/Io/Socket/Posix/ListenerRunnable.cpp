@@ -10,6 +10,8 @@
 
 #include "Fdio.h"
 #include "Kit/Io/Socket/ListenerRunnable.h"
+#include "Kit/System/Trace.h"
+#include <cerrno>
 
 #define SECT_ "Cpl::Io::Socket::Posix"
 
@@ -32,7 +34,12 @@ void ListenerRunnable::listen() noexcept
     m_listeningSocket = Posix::Fdio::createListeningSocket( m_port, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRIES, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS );
     if ( m_listeningSocket == Posix::Fdio::INVALID_FD )
     {
-        // TODO: Add logging/tracing
+        KIT_SYSTEM_TRACE_MSG( SECT_,
+                              "listen(): Failed to creating listening socket. Port=%d, result=%d, errno=(%d) %s.",
+                              m_port,
+                              m_listeningSocket,
+                              errno,
+                              strerror( errno ) );
         return;
     }
 
@@ -45,25 +52,35 @@ void ListenerRunnable::listen() noexcept
         int newfd;
         if ( ( newfd = Posix::Fdio::acceptConnection( m_listeningSocket, client_addr ) ) < 0 )
         {
-            // TODO: Add logging/tracing
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "listen(): acceptConnection() failed. Port=%d, result=%d, errno=(%d) %s.",
+                                  m_port,
+                                  newfd,
+                                  errno,
+                                  strerror( errno ) );
+            // Abort listening
             break;
         }
 
-        // Enable SO_KEEPALIVE so we know when the client terminated the TCP session
-        int bOptVal = 1;
-        int bOptLen = sizeof( int );
-        if ( setsockopt( newfd, SOL_SOCKET, SO_KEEPALIVE, (char*)&bOptVal, bOptLen ) < 0 )
+        int result;
+        if ( ( result = Posix::Fdio::enableKeepAlive( newfd ) ) < 0 )
         {
-            // CPL_SYSTEM_TRACE_ALLOCATE( int, sockerr, errno );
-            // CPL_SYSTEM_TRACE_MSG( SECT_, ( "Cpl::Io::Socket::Posix::Listener:: start() - Failed enable SO_KEEPALIVE. errCode=(%X) %s.", sockerr, strerror( sockerr ) ) );
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "listen(): failed to enable keepAlive. Port=%d, result=%d, errno=(%d) %s.",
+                                  m_port,
+                                  result,
+                                  errno,
+                                  strerror( errno ) );
         }
 
-        // Create a Descriptor for the accepted connection and pass it to the client
-        Cpl::Io::Descriptor streamFd( newfd );
-        if ( !m_clientPtr->newConnection( streamFd, inet_ntoa( client_addr.sin_addr ) ) )
+        // Call the client back to see if it wants to accept the connection
+        if ( !m_clientPtr->newConnection( newfd, inet_ntoa( client_addr.sin_addr ) ) )
         {
-            ::shutdown( newfd, 2 );  // 2==SHUT_RDWR
-            ::close( newfd );
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "listen(): client declined connection request. Port=%d, remote=%s.",
+                                  m_port,
+                                  inet_ntoa( client_addr.sin_addr ) );
+            Posix::Fdio::close( newfd );
             continue;
         }
     }

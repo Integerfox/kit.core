@@ -14,12 +14,13 @@
 #include "Kit/Io/Types.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/api.h"
+#include "Kit/Text/FString.h"
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
-#include <errno.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <netdb.h>
 
 
 ///
@@ -45,7 +46,7 @@ public:
     /** Closes the file descriptor 'fd'. If 'fd' is already closed (i.e. INVALID_FD),
         the method is a NOP.  Upon a successful close, 'fd' is set to INVALID_FD.
      */
-    static void close( int& fd ) noexcept
+    inline static void close( int& fd ) noexcept
     {
         if ( fd != INVALID_FD )
         {
@@ -90,14 +91,14 @@ public:
     }
 
     /// Flushes the file descriptor 'fd'
-    static void flush( int fd ) noexcept
+    inline static void flush( int fd ) noexcept
     {
         // Do not know how to implement using only Posix  (jtt 2-14-2015)
     }
 
     /** Returns true if the file descriptor is in the open state
      */
-    static bool isOpened( int fd ) noexcept
+    inline static bool isOpened( int fd ) noexcept
     {
         return fd != INVALID_FD;
     }
@@ -140,7 +141,7 @@ public:
 
     /** Returns true if there is data available to be read from the file descriptor
      */
-    static bool available( int fd ) noexcept
+    inline static bool available( int fd ) noexcept
     {
         // Trap that the stream has been CLOSED!
         if ( fd == INVALID_FD )
@@ -212,11 +213,55 @@ public:
         occurred.  When successful, the 'client_addr' structure is populated
         with information about the remote Host.
      */
-    static int acceptConnection( int listeningFd, struct sockaddr_in& client_addr ) noexcept
+    inline static int acceptConnection( int listeningFd, struct sockaddr_in& client_addr ) noexcept
     {
         // Wait on the 'accept'
         socklen_t client_len = sizeof( client_addr );
         return accept( listeningFd, (struct sockaddr*)&client_addr, &client_len );
+    }
+
+    /** This method enables the SO_KEEPALIVE option on the specified socket.
+        Returns >=0 if successful, else on error < 0 is returned
+     */
+    inline static int enableKeepAlive( int fd ) noexcept
+    {
+        int bOptVal = 1;
+        int bOptLen = sizeof( int );
+        return setsockopt( fd, SOL_SOCKET, SO_KEEPALIVE, (char*)&bOptVal, bOptLen );
+    }
+
+public:
+    /** This resolved the specific network address string and port number (IPv4
+        or IPv6) to a socket address info structure. The method returns true if
+        successful, else false is returned.
+
+        When successful, the method returns one or MORE address info structure
+        candidates via the 'results' argument. In addition on success, the caller
+        is required to freeAddresses() method to free the memory associated
+        with the 'results' argument.
+     */
+    inline static bool resolveAddress( const char* remoteHostName, int portNumToConnectTo, struct addrinfo*& results ) noexcept
+    {
+        Kit::Text::FString<5> port( portNumToConnectTo );
+        struct addrinfo       hints;
+        memset( &hints, 0, sizeof( hints ) );
+        hints.ai_family   = AF_UNSPEC;
+        hints.ai_socktype = SOCK_STREAM;
+        hints.ai_protocol = IPPROTO_TCP;
+        return getaddrinfo( remoteHostName, port, &hints, &results ) == 0;
+    }
+
+    inline static void freeAddresses( struct addrinfo* results ) noexcept
+    {
+        freeaddrinfo( results );
+    }
+
+    /** Create a file descriptor for the specified socket address info.
+        Returns a valid file descriptor if successful, else < 0 is returned.
+     */
+    inline static int createSocket( struct addrinfo* addr ) noexcept
+    {
+        return socket( addr->ai_family, addr->ai_socktype, addr->ai_protocol );
     }
 };
 

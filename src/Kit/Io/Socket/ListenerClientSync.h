@@ -49,7 +49,7 @@ public:
 
 
 
-};      // end namespaces
-};
-};
+}      // end namespaces
+}
+}
 #endif  // end header latch

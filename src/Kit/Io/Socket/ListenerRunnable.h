@@ -47,9 +47,9 @@ namespace Io {
 namespace Socket {
 
 
-/** This concrete class provides an implementation of a simple listener.  The
-    listener requires a dedicated thread to run in (because it blocks waiting for
-    incoming connection requests).
+/** This concrete class provides an implementation of a simple listener using
+    IPv4 addressing.  The listener requires a dedicated thread to run in (because
+    it blocks waiting for incoming connection requests).
 
     The threading semantics of the client is defined/implemented by client
     instances passed to the startListening() method.  See the IListenerClient
@@ -103,7 +103,7 @@ protected:
 
     /// Listening socket handle
     KitIoSocketHandle_T m_listeningSocket;
-    
+
     /// Port Number to listen on
     int m_port;
 
@@ -112,7 +112,7 @@ protected:
 };
 
 
-};  // end namespaces
-};
-};
+}  // end namespaces
+}
+}
 #endif  // end header latch

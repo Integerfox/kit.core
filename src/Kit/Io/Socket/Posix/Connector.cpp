@@ -1,95 +1,73 @@
-/*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
+
+#include "Fdio.h"
+#include "Kit/Io/Socket/Connector.h"
 
 
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <stdlib.h>
-#include <string.h>
-#include "Connector.h"
-#include "Cpl/Text/FString.h"
-#include "Cpl/System/FatalError.h"
-
-
-///
-using namespace Cpl::Io::Socket::Posix;
-
-
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Io {
+namespace Socket {
 
 ///////////////////////////////
-Connector::Connector()
+Connector::Result_T Connector::establish( const char* remoteHostName, int portNumToConnectTo, KitIoSocketHandle_T& fdOut ) noexcept
 {
+    // Get a list of address candidates for the remote Host
+    struct addrinfo* adapters = nullptr;
+    if ( !Posix::Fdio::resolveAddress( remoteHostName, portNumToConnectTo, adapters ) )
+    {
+        return eERROR;
+    }
+
+    // Walk the list of addresses until a connection succeeds
+    struct addrinfo* ptr;
+    bool             failedCreateSocket = true;
+    fdOut                               = Posix::Fdio::INVALID_FD;
+    for ( ptr = adapters; ptr != nullptr; ptr = ptr->ai_next )
+    {
+        // Create a SOCKET for connecting to server
+        fdOut = Posix::Fdio::createSocket( ptr );
+        if ( fdOut < 0 )
+        {
+            continue;  // Try the next address
+        }
+
+        // If got here and still exited the loop with invalid file descriptor, it mostly likely means that the connect request was refused
+        failedCreateSocket = false;
+
+        // Attempt to connect to the remote host
+        if ( connect( fdOut, ptr->ai_addr, ptr->ai_addrlen ) < 0 )
+        {
+            Posix::Fdio::close( fdOut );
+            continue;  // Try the next address
+        }
+
+        // If I get here, I successfully connected to the remote Host
+        break;
+    }
+
+    // Housekeeping
+    Posix::Fdio::freeAddresses( adapters );
+
+    // Check if a connection was made
+    if ( fdOut == Posix::Fdio::INVALID_FD )
+    {
+        return failedCreateSocket ? eERROR : eREFUSED;
+    }
+
+    // If I get here, I have successful connection to the remote Host
+    return eSUCCESS;
 }
 
-Connector::~Connector()
-{
+}  // end namespace
 }
-
-
-///////////////////////////////
-Connector::Result_T Connector::establish( const char* remoteHostName, int portNumToConnectTo, Cpl::Io::Descriptor& fdOut )
-{
-	int                sockfd    = -1;
-	struct addrinfo*   resultPtr = NULL;
-	struct addrinfo*   ptr       = NULL;
-	struct addrinfo    hints;
-
-	// Default the returned Stream Descriptor to "INVALID"
-	fdOut.m_fd = -1;
-
-	// Resolve the server address and port
-	Cpl::Text::FString<5> port( portNumToConnectTo );
-	memset( &hints, 0, sizeof( hints ) );
-	hints.ai_family   = AF_UNSPEC;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
-	if ( getaddrinfo( remoteHostName, port, &hints, &resultPtr ) != 0 )
-	{
-		return eERROR;
-	}
-
-	// Attempt to connect to address until one succeeds
-	for ( ptr=resultPtr; ptr != NULL; ptr=ptr->ai_next )
-	{
-		// Create a SOCKET for connecting to server
-		sockfd = socket( ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol );
-		if ( sockfd == -1 )
-		{
-			return eERROR;
-		}
-
-		// Connect to server.
-		if ( connect( sockfd, ptr->ai_addr, ptr->ai_addrlen ) == -1 )
-		{
-			close( sockfd );
-			sockfd = -1;
-			continue;   // Try the next address
-		}
-
-		// If I get here, I successfully connected to the server
-		break;
-	}
-
-	// Housekeeping
-	freeaddrinfo( resultPtr );
-
-	// Check if a connect was made
-	if ( sockfd == -1 )
-	{
-		return eREFUSED;
-	}
-
-	// If I get here, I have successful connection to the remote Host
-	fdOut.m_fd = sockfd;
-	return eSUCCESS;
 }
+//------------------------------------------------------------------------------

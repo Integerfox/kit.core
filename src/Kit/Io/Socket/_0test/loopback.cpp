@@ -10,22 +10,20 @@
 *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "loopback.h"
-#include "Catch/catch.hpp"
-#include "Catch/helpers.h"
-#include "Cpl/System/Api.h"
-#include "Cpl/System/Thread.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/Text/FString.h"
-#include "Cpl/Itc/MailboxServer.h"
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
-#include "Cpl/Io/Socket/ListenerClientSync.h"
-#include "Cpl/Io/Socket/InputOutput.h"
-#include "Cpl/Io/Socket/Connector.h"
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/System/api.h"
+#include "Kit/System/Thread.h"
+#include "Kit/System/Trace.h"
+#include "Kit/Text/FString.h"
+#include "Kit/Itc/MailboxServer.h"
+#include "Kit/Io/Socket/ListenerClientSync.h"
+#include "Kit/Io/Socket/InputOutput.h"
+#include "Kit/Io/Socket/Connector.h"
 
 
 ///
-using namespace Cpl::Io::Socket;
+using namespace Kit::Io::Socket;
 
 static Listener*  listenerPtr_;
 static Connector* connectorPtr_;
@@ -36,7 +34,7 @@ static Connector* connectorPtr_;
 
 
 ///////////////////
-void initialize_loopback( Cpl::Io::Socket::Listener& listener, Cpl::Io::Socket::Connector& connector )
+void initialize_loopback( Kit::Io::Socket::Listener& listener, Kit::Io::Socket::Connector& connector )
 {
     listenerPtr_  = &listener;
     connectorPtr_ = &connector;
@@ -48,7 +46,7 @@ namespace
 {
 
 /// Note: The interaction between a Reader and the LoopBackClient is not truly thread-safe - but it is good enough for the unittest.
-class Reader : public Cpl::System::Runnable
+class Reader : public Kit::System::Runnable
 {
 public:
     ///
@@ -58,7 +56,7 @@ public:
     ///
     InputOutput m_stream;
     ///
-    Cpl::System::Thread* m_myThreadPtr;
+    Kit::System::Thread* m_myThreadPtr;
 
 public:
     ///
@@ -84,18 +82,18 @@ public:
 
 public:
     ///
-    void setThreadOfExecution_( Cpl::System::Thread* myThreadPtr ) { m_myThreadPtr = myThreadPtr; }
+    void setThreadOfExecution_( Kit::System::Thread* myThreadPtr ) { m_myThreadPtr = myThreadPtr; }
 
     ///
     void appRun()
     {
         while ( m_run )
         {
-            Cpl::System::Thread::wait();
+            Kit::System::Thread::wait();
 
             for ( ;;)
             {
-                Cpl::Text::FString<256> buffer;
+                Kit::Text::FString<256> buffer;
                 if ( !m_stream.read( buffer ) )
                 {
                     CPL_SYSTEM_TRACE_MSG( SECT_, ("READER: Read failed") );
@@ -139,7 +137,7 @@ public:
 
 public:
     ///
-    LoopBackClient( Cpl::Itc::PostApi& myMbox, Reader& reader1, Reader& reader2 )
+    LoopBackClient( Kit::Itc::PostApi& myMbox, Reader& reader1, Reader& reader2 )
         :ListenerClientSync( myMbox ),
         m_loop1Free( true ),
         m_reader1( reader1 ),
@@ -187,42 +185,42 @@ public:
 TEST_CASE( "loopback", "[loopback]" )
 {
     CPL_SYSTEM_TRACE_FUNC( SECT_ );
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::Shutdown_TS::clearAndUseCounter();
 
     Reader reader1;
     Reader reader2;
 
-    Cpl::Itc::MailboxServer testApplication;
+    Kit::Itc::MailboxServer testApplication;
     LoopBackClient          myClient( testApplication, reader1, reader2 );
 
-    Cpl::System::Thread* t1 = Cpl::System::Thread::create( *listenerPtr_, "Listener" );
-    Cpl::System::Thread* t2 = Cpl::System::Thread::create( reader1, "Reader1" );
-    Cpl::System::Thread* t3 = Cpl::System::Thread::create( reader2, "Reader2" );
-    Cpl::System::Thread* t4 = Cpl::System::Thread::create( testApplication, "TestApp" );
-    Cpl::System::Api::sleep( 250 ); // Wait to ensure all threads have started
+    Kit::System::Thread* t1 = Kit::System::Thread::create( *listenerPtr_, "Listener" );
+    Kit::System::Thread* t2 = Kit::System::Thread::create( reader1, "Reader1" );
+    Kit::System::Thread* t3 = Kit::System::Thread::create( reader2, "Reader2" );
+    Kit::System::Thread* t4 = Kit::System::Thread::create( testApplication, "TestApp" );
+    Kit::System::Api::sleep( 250 ); // Wait to ensure all threads have started
 
     // Start listener
     listenerPtr_->startListening( myClient, PORT_NUM_ );
     CPL_SYSTEM_TRACE_MSG( SECT_, ("Listening on port %d 2min....", PORT_NUM_) );
-    Cpl::System::Api::sleep( 50 );
+    Kit::System::Api::sleep( 50 );
 
     // Connect
-    Cpl::Io::Descriptor clientFd;
+    Kit::Io::Descriptor clientFd;
     REQUIRE( connectorPtr_->establish( "localhost", PORT_NUM_ + 1, clientFd ) != Connector::eSUCCESS );
     REQUIRE( connectorPtr_->establish( "localhost", PORT_NUM_, clientFd ) == Connector::eSUCCESS );
     InputOutput clientStream( clientFd );
-    Cpl::Io::Descriptor client2Fd;
+    Kit::Io::Descriptor client2Fd;
     REQUIRE( connectorPtr_->establish( "localhost", PORT_NUM_, client2Fd ) == Connector::eSUCCESS );
     InputOutput client2Stream( client2Fd );
 
     // Loop back
-    Cpl::Text::FString<512> buffer1;
+    Kit::Text::FString<512> buffer1;
     REQUIRE( clientStream.write( TEXT1 ) );
     minWaitOnStreamData( clientStream, 10, 1000 );
     REQUIRE( clientStream.read( buffer1 ) );
     REQUIRE( buffer1 == TEXT1 );
 
-    Cpl::Text::FString<512> buffer2;
+    Kit::Text::FString<512> buffer2;
     REQUIRE( client2Stream.write( TEXT2 ) );
     minWaitOnStreamData( client2Stream, 10, 1000 );
     REQUIRE( client2Stream.read( buffer2 ) );
@@ -250,7 +248,7 @@ TEST_CASE( "loopback", "[loopback]" )
 
     clientStream.close();
 
-    Cpl::Io::Descriptor client3Fd;
+    Kit::Io::Descriptor client3Fd;
     REQUIRE( connectorPtr_->establish( "localhost", PORT_NUM_, client3Fd ) == Connector::eSUCCESS );
     InputOutput client3Stream( client3Fd );
 
@@ -276,16 +274,16 @@ TEST_CASE( "loopback", "[loopback]" )
     testApplication.pleaseStop();
 
     // Allow time for threads to stop
-    Cpl::System::Api::sleep( 250 );
+    Kit::System::Api::sleep( 250 );
     REQUIRE( t1->isRunning() == false );
     REQUIRE( t2->isRunning() == false );
     REQUIRE( t3->isRunning() == false );
     REQUIRE( t4->isRunning() == false );
 
-    Cpl::System::Thread::destroy( *t1 );
-    Cpl::System::Thread::destroy( *t2 );
-    Cpl::System::Thread::destroy( *t3 );
-    Cpl::System::Thread::destroy( *t4 );
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    Kit::System::Thread::destroy( *t1 );
+    Kit::System::Thread::destroy( *t2 );
+    Kit::System::Thread::destroy( *t3 );
+    Kit::System::Thread::destroy( *t4 );
+    REQUIRE( Kit::System::Shutdown_TS::getAndClearCounter() == 0u );
 }
 

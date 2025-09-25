@@ -14,18 +14,20 @@
 
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Io {
 ///
 namespace Socket {
 
 
-/** This abstract class defines the interface for establishing/requesting
-    a SIMPLE socket connection, i.e. make a "client connection".  A single
-    instance can be used to create many connections.
+/** This static class defines a platform independent interface for 
+    establishing/requesting a SIMPLE socket connection, i.e. makes a "client
+    connection" to a remote Host.
+
+    Supports IPv4 and IPv6 connections.
  */
-class IConnector
+class Connector
 {
 public:
     /// Possible return codes when attempting to establish a connection
@@ -41,12 +43,7 @@ public:
         success an opened 'socket handle' is returned (via 'fdOut') for the
         connection.
      */
-    virtual Result_T establish( const char* remoteHostName, int portNumToConnectTo, KitIoSocketHandle_T& fdOut ) noexcept = 0;
-
-
-public:
-    /// Virtual destructor
-    virtual ~IConnector() = default;
+    static Result_T establish( const char* remoteHostName, int portNumToConnectTo, KitIoSocketHandle_T& fdOut ) noexcept;
 };
 
 
