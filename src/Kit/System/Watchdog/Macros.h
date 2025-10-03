@@ -62,8 +62,21 @@
 #else
 
 // When watchdog is disabled, macros expand to nothing
+
+/** Disabled macro - expands to empty when USE_KIT_SYSTEM_WATCHDOG is not defined.
+    @param watcher Unused parameter when disabled
+    @param eventLoop Unused parameter when disabled
+ */
 #define KIT_WDOG_START_EVENTLOOP(watcher, eventLoop)    do { } while(0)
+
+/** Disabled macro - expands to empty when USE_KIT_SYSTEM_WATCHDOG is not defined.
+    @param watcher Unused parameter when disabled
+ */
 #define KIT_WDOG_STOP_EVENTLOOP(watcher)                do { } while(0)
+
+/** Disabled macro - expands to empty when USE_KIT_SYSTEM_WATCHDOG is not defined.
+    @param watcher Unused parameter when disabled
+ */
 #define KIT_WDOG_EVENTLOOP_MONITOR(watcher)             do { } while(0)
 
 #endif  // USE_KIT_SYSTEM_WATCHDOG
