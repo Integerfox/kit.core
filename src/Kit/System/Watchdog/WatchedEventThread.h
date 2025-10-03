@@ -78,9 +78,6 @@ protected:
 
     /** Timer expired callback - called by the TimerComposer when the health check timer expires.
         This method performs the health check and restarts the timer.
-
-        @param currentTick The current system tick when the timer expired
-        @param currentTime The current elapsed time when the timer expired
      */
     void expired() noexcept;
 
