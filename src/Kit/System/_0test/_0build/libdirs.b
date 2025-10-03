@@ -1,5 +1,6 @@
 src/Kit/System/_0test
 src/Kit/System
+src/Kit/System/Watchdog
 
 src/Kit/Container
 src/Kit/Text
