@@ -17,6 +17,11 @@
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/TimerManager.h"
 
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+#include "Kit/System/Watchdog/Macros.h"
+#include "Kit/System/Watchdog/WatchedEventLoopApi.h"
+#endif
+
 /** Specifies the default timeout period for waiting on a event.
  */
 #ifndef OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD
@@ -59,11 +64,20 @@ public:
         When the 'eventFlagsList' parameter is null then the EventLoop will not
         monitor any event flags.
 
+        The 'watchdog' parameter is optional and can be used to provide
+        watchdog monitoring for this event loop.
+
         WARNING: The application CANNOT modify the eventFlagsList after the
                  EventLoop instance is created.
      */
     EventLoop( uint32_t                           timeOutPeriodInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
-               Kit::Container::SList<IEventFlag>* eventFlagsList      = nullptr ) noexcept;
+               Kit::Container::SList<IEventFlag>* eventFlagsList      = nullptr,
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+               Kit::System::Watchdog::WatchedEventLoopApi* watchdog = nullptr
+#else
+               void* watchdog = nullptr  // Placeholder when watchdog is disabled
+#endif
+               ) noexcept;
 
     /// Virtual destructor
     virtual ~EventLoop() = default;
@@ -180,6 +194,11 @@ protected:
 
     /// Flag used to help with the pleaseStop() request
     volatile bool m_run;
+
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+    /// Optional watchdog monitor for this event loop
+    Kit::System::Watchdog::WatchedEventLoopApi* m_watchdog;
+#endif
 };
 
 }  // end namespaces
