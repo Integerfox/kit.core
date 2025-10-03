@@ -24,8 +24,14 @@ EventLoopWithPScheduling::EventLoopWithPScheduling( Interval_T                  
                                                     NowFunc_T                          nowFunc,
                                                     IdleFunc_T                         idleFunc,
                                                     uint32_t                           timeOutPeriodInMsec,
-                                                    Kit::Container::SList<IEventFlag>* eventFlagsList ) noexcept
-    : EventLoop( timeOutPeriodInMsec, eventFlagsList )
+                                                    Kit::Container::SList<IEventFlag>* eventFlagsList,
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+                                                    Kit::System::Watchdog::WatchedEventLoopApi* watchdog
+#else
+                                                    void* watchdog
+#endif
+                                                    ) noexcept
+    : EventLoop( timeOutPeriodInMsec, eventFlagsList, watchdog )
     , PeriodicScheduler( intervals, beginThreadProcessing, endThreadProcessing, slippageFunc, nowFunc )
     , m_idleFunc( idleFunc )
 {

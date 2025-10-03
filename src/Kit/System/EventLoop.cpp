@@ -15,6 +15,10 @@
 #include "Trace.h"
 #include "GlobalLock.h"
 
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+#include "Kit/System/Watchdog/Macros.h"
+#endif
+
 #define SECT_ "EventLoop"
 
 //------------------------------------------------------------------------------
@@ -23,15 +27,25 @@ namespace System {
 
 ///////////////////////
 EventLoop::EventLoop( uint32_t                           timeOutPeriodInMsec,
-                      Kit::Container::SList<IEventFlag>* eventFlagsList ) noexcept
+                      Kit::Container::SList<IEventFlag>* eventFlagsList,
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+                      Kit::System::Watchdog::WatchedEventLoopApi* watchdog
+#else
+                      void* watchdog
+#endif
+                      ) noexcept
     : IRunnable()
     , m_eventList( eventFlagsList )
     , m_timeout( timeOutPeriodInMsec )
     , m_timeStartOfLoop( 0 )
     , m_events( 0 )
     , m_run( true )
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+    , m_watchdog( watchdog )
+#endif
 {
     KIT_SYSTEM_ASSERT( timeOutPeriodInMsec > 0 );
+    (void) watchdog; // Suppress unused parameter warning when watchdog is disabled
 }
 
 void EventLoop::entry() noexcept
@@ -50,11 +64,25 @@ void EventLoop::startEventLoop() noexcept
     // Initialize/start the timer manager
     startManager();
     m_run = true;
+
+    // Start watchdog monitoring if enabled
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+    if ( m_watchdog )
+    {
+        KIT_WDOG_START_EVENTLOOP( *m_watchdog, *this );
+    }
+#endif
 }
 
 void EventLoop::stopEventLoop() noexcept
 {
-    // Nothing currently needed
+    // Stop watchdog monitoring if enabled
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+    if ( m_watchdog )
+    {
+        KIT_WDOG_STOP_EVENTLOOP( *m_watchdog );
+    }
+#endif
 }
 
 bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
@@ -115,6 +143,15 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
 
     // Timer Check
     processTimers();
+
+    // Watchdog monitoring (if enabled)
+#ifdef USE_KIT_SYSTEM_WATCHDOG
+    if ( m_watchdog )
+    {
+        KIT_WDOG_EVENTLOOP_MONITOR( *m_watchdog );
+    }
+#endif
+
     return true;
 }
 
