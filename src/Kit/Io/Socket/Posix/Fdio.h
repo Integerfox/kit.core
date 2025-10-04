@@ -251,6 +251,9 @@ public:
         return getaddrinfo( remoteHostName, port, &hints, &results ) == 0;
     }
 
+    /** This method frees the memory associated with the 'results' argument
+        that was populated by a previous call to the resolveAddress() method.
+     */
     inline static void freeAddresses( struct addrinfo* results ) noexcept
     {
         freeaddrinfo( results );
