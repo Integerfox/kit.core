@@ -48,7 +48,7 @@ public:
         the client rejects the socket, it needs to return false, else
         returns true.
      */
-    virtual bool newConnection( KitIoSocketHandle_T , const char* rawConnectionInfo ) noexcept = 0;
+    virtual bool newConnection( KitIoSocketHandle_T newFd, const char* rawConnectionInfo ) noexcept = 0;
 
 
 public:

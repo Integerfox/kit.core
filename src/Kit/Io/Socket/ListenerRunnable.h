@@ -70,9 +70,6 @@ protected:
     /// Constructor
     ListenerRunnable() noexcept;
 
-    /// Destructor
-    ~ListenerRunnable() noexcept;
-
 public:
     /// See Kit::Io::Socket::IListener
     void startListening( IListenerClient& client, int portNumToListenOn ) noexcept override;

@@ -25,25 +25,25 @@ namespace Socket {
 
 
 /** This partially concrete class implements the synchronous ITC open
-	call for the OpenApi.  The subclass is still required to implement the ITC
-	request() method.
+    call for the OpenApi.  The subclass is still required to implement the ITC
+    request() method.
  */
 class ListenerClientSync : public Listener::Client,
-	public ListenerClientRequest
+    public ListenerClientRequest
 {
 protected:
-	/// Mailbox (of the server implementing the ITC request() method
-	Cpl::Itc::PostApi& m_mbox;
+    /// Mailbox (of the server implementing the ITC request() method
+    Cpl::Itc::PostApi& m_mbox;
 
 
 public:
-	/// Constructor
-	ListenerClientSync( Cpl::Itc::PostApi& myMbox );
+    /// Constructor
+    ListenerClientSync( Cpl::Itc::PostApi& myMbox );
 
 
 public:
-	/// See Cpl::Io::Socket::Listener::Client
-	bool newConnection( Cpl::Io::Descriptor newFd, const char* rawConnectionInfo );
+    /// See Cpl::Io::Socket::Listener::Client
+    bool newConnection( Cpl::Io::Descriptor newFd, const char* rawConnectionInfo );
 
 };
 
