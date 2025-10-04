@@ -1,123 +1,215 @@
-/*------------------------------------------------------------------------------
- * Copyright Integer Fox Authors
- *
- * Distributed under the BSD 3 Clause License. See the license agreement at:
- * https://github.com/Integerfox/kit.core/blob/main/LICENSE
- *
- * Redistributions of the source code must retain the above copyright notice.
- *----------------------------------------------------------------------------*/
+#if 0 
+/*-----------------------------------------------------------------------------
+* This file is part of the Colony.Core Project.  The Colony.Core Project is an
+* open source project with a BSD type of licensing agreement.  See the license
+* agreement (license.txt) in the top/ directory or on the Internet at
+* http://integerfox.com/colony.core/license.txt
+*
+* Copyright (c) 2014-2025  John T. Taylor
+*
+* Redistributions of the source code must retain the above copyright notice.
+*----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Io/File/Input.h"
-#include "Kit/Io/Socket/IListenerClient.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 #include "Kit/System/Thread.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Text/FString.h"
+#include "Kit/Itc/MailboxServer.h"
+#include "Kit/Io/Socket/ListenerClientSync.h"
 #include "Kit/Io/Socket/InputOutput.h"
-#include "Kit/Io/Socket/ListenerRunnable.h"
 #include "Kit/Io/Socket/Connector.h"
-#include "Kit/EventQueue/Server.h"
+
 
 ///
 using namespace Kit::Io::Socket;
 
-#define SECT_     "_0test"
+static Listener*  listenerPtr_;
+static Connector* connectorPtr_;
 
-#define PORT_NUM_ 5002
+#define SECT_       "_0test"
+
+#define PORT_NUM_   5002
 
 
 ///////////////////
-namespace {
+void initialize_loopback( Kit::Io::Socket::Listener& listener, Kit::Io::Socket::Connector& connector )
+{
+    listenerPtr_  = &listener;
+    connectorPtr_ = &connector;
+}
 
 
-class ListenerClientUut : public IListenerClient
+///////////////////
+namespace
+{
+
+/// Note: The interaction between a Reader and the LoopBackClient is not truly thread-safe - but it is good enough for the unittest.
+class Reader : public Kit::System::Runnable
 {
 public:
+    ///
+    bool        m_run;
+    ///
+    bool*       m_doneFlagPtr;
+    ///
     InputOutput m_stream;
-    const char* m_exitString;
+    ///
+    Kit::System::Thread* m_myThreadPtr;
+
 public:
     ///
-    ListenerClientUut( const char* exitString )
-        : m_exitString( exitString )
+    Reader() :m_run( true ), m_doneFlagPtr( 0 ), m_myThreadPtr( 0 ) {}
+
+
+public:
+    ///
+    void startReading( bool& doneFlag )
     {
+        doneFlag      = false;
+        m_doneFlagPtr = &doneFlag;
+        m_myThreadPtr->signal();
+    }
+
+    ///
+    void terminate()
+    {
+        m_run = false;
+        m_stream.close();
+        m_myThreadPtr->signal();
     }
 
 public:
-    bool newConnection( KitIoSocketHandle_T newFd, const char* rawConnectionInfo ) noexcept override
+    ///
+    void setThreadOfExecution_( Kit::System::Thread* myThreadPtr ) { m_myThreadPtr = myThreadPtr; }
+
+    ///
+    void appRun()
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Incoming connection from: %s (fd=%p)", rawConnectionInfo, (void*)( (size_t)newFd ) );
-        m_stream.activate( newFd );
-
-        for ( ;; )
+        while ( m_run )
         {
-            Kit::Text::FString<256> buffer;
-            if ( !m_stream.read( buffer ) )
-            {
-                KIT_SYSTEM_TRACE_MSG( SECT_, "READER: Read failed" );
-                m_stream.close();
-                return false;
-            }
-            KIT_SYSTEM_TRACE_MSG( SECT_, "READER: input [%s]", buffer.getString() );
+            Kit::System::Thread::wait();
 
-            if ( !m_stream.write( buffer ) )
+            for ( ;;)
             {
-                KIT_SYSTEM_TRACE_MSG( SECT_, "READER: Write failed" );
-                m_stream.close();
-                return false;
-            }
-            m_stream.flush();
-            KIT_SYSTEM_TRACE_MSG( SECT_, "READER: echoed [%s]", buffer.getString() );
+                Kit::Text::FString<256> buffer;
+                if ( !m_stream.read( buffer ) )
+                {
+                    CPL_SYSTEM_TRACE_MSG( SECT_, ("READER: Read failed") );
+                    break;
+                }
+                CPL_SYSTEM_TRACE_MSG( SECT_, ("READER: input [%s]", buffer.getString() ) );
 
-            if ( buffer == m_exitString )
+                if ( !m_stream.write( buffer ) )
+                {
+                    CPL_SYSTEM_TRACE_MSG( SECT_, ("READER: Write failed") );
+                    break;
+                }
+                m_stream.flush();
+                CPL_SYSTEM_TRACE_MSG( SECT_, ("READER: echoed [%s]", buffer.getString()) );
+            }
+
+            CPL_SYSTEM_TRACE_MSG( SECT_, ("READER: Exited Loopback loop -->wait for next 'startReader' (m_run=%d)", m_run) );
+            m_stream.close();
+            if ( m_doneFlagPtr )
             {
-                KIT_SYSTEM_TRACE_MSG( SECT_, "READER: Exit string received.  Closing connection." );
-                m_stream.close();
-                return false;
+                *m_doneFlagPtr = true;
             }
         }
     }
+
+
 };
 
-};  // end anonymous namespace
+class LoopBackClient : public ListenerClientSync
+{
+public:
+    ///
+    bool    m_loop1Free;
+    ///
+    Reader& m_reader1;
+    ///
+    bool    m_loop2Free;
+    ///
+    Reader& m_reader2;
 
 
-#define TEXT1 "Hello World"
-#define TEXT2 "hello world"
-#define TEXT3 "Really Long string.................................................................................................................okay maybe not so long"
+public:
+    ///
+    LoopBackClient( Kit::Itc::PostApi& myMbox, Reader& reader1, Reader& reader2 )
+        :ListenerClientSync( myMbox ),
+        m_loop1Free( true ),
+        m_reader1( reader1 ),
+        m_loop2Free( true ),
+        m_reader2( reader2 )
+    {
+    }
+
+public:
+    /// Request: NewConnection
+    void request( NewConnectionMsg& msg )
+    {
+        CPL_SYSTEM_TRACE_MSG( SECT_, ("Incoming connection from: %s (fd=%p)", msg.getPayload().m_rawConnectionInfo, msg.getPayload().m_acceptedFd) );
+        if ( m_loop1Free )
+        {
+            msg.getPayload().m_accepted = true;
+            m_reader1.m_stream.activate( msg.getPayload().m_acceptedFd );
+            m_reader1.startReading( m_loop1Free );
+        }
+        else if ( m_loop2Free )
+        {
+            msg.getPayload().m_accepted = true;
+            m_reader2.m_stream.activate( msg.getPayload().m_acceptedFd );
+            m_reader2.startReading( m_loop2Free );
+        }
+        else
+        {
+            // Note: The default for msg payload is 'm_accpeted:=false'
+            CPL_SYSTEM_TRACE_MSG( SECT_, ("Connection rejected") );
+        }
+
+        msg.returnToSender();
+    }
+};
+
+}; // end anonymous namespace
+
+
+#define TEXT1   "Hello World"
+#define TEXT2   "hello world"
+#define TEXT3   "Really Long string.................................................................................................................okay maybe not so long"
 
 
 ///////////////////
-TEST_CASE( "loopback-inthread-client" )
+TEST_CASE( "loopback", "[loopback]" )
 {
-    KIT_SYSTEM_TRACE_FUNC( SECT_ );
-    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-
+    CPL_SYSTEM_TRACE_FUNC( SECT_ );
+    Kit::System::Shutdown_TS::clearAndUseCounter();
 
     Reader reader1;
     Reader reader2;
 
     Kit::Itc::MailboxServer testApplication;
-    ListenerClientUut       myClient( testApplication, reader1, reader2 );
+    LoopBackClient          myClient( testApplication, reader1, reader2 );
 
     Kit::System::Thread* t1 = Kit::System::Thread::create( *listenerPtr_, "Listener" );
     Kit::System::Thread* t2 = Kit::System::Thread::create( reader1, "Reader1" );
     Kit::System::Thread* t3 = Kit::System::Thread::create( reader2, "Reader2" );
     Kit::System::Thread* t4 = Kit::System::Thread::create( testApplication, "TestApp" );
-    Kit::System::Api::sleep( 250 );  // Wait to ensure all threads have started
+    Kit::System::Api::sleep( 250 ); // Wait to ensure all threads have started
 
     // Start listener
     listenerPtr_->startListening( myClient, PORT_NUM_ );
-    KIT_SYSTEM_TRACE_MSG( SECT_, ( "Listening on port %d 2min....", PORT_NUM_ ) );
+    CPL_SYSTEM_TRACE_MSG( SECT_, ("Listening on port %d 2min....", PORT_NUM_) );
     Kit::System::Api::sleep( 50 );
 
     // Connect
     Kit::Io::Descriptor clientFd;
     REQUIRE( connectorPtr_->establish( "localhost", PORT_NUM_ + 1, clientFd ) != Connector::eSUCCESS );
     REQUIRE( connectorPtr_->establish( "localhost", PORT_NUM_, clientFd ) == Connector::eSUCCESS );
-    InputOutput         clientStream( clientFd );
+    InputOutput clientStream( clientFd );
     Kit::Io::Descriptor client2Fd;
     REQUIRE( connectorPtr_->establish( "localhost", PORT_NUM_, client2Fd ) == Connector::eSUCCESS );
     InputOutput client2Stream( client2Fd );
@@ -176,7 +268,7 @@ TEST_CASE( "loopback-inthread-client" )
 
 
     // Clean-up
-    KIT_SYSTEM_TRACE_MSG( SECT_, ( "Test done.  Cleaning up..." ) );
+    CPL_SYSTEM_TRACE_MSG( SECT_, ("Test done.  Cleaning up...") );
     listenerPtr_->terminate();
     reader1.terminate();
     reader2.terminate();
@@ -193,6 +285,7 @@ TEST_CASE( "loopback-inthread-client" )
     Kit::System::Thread::destroy( *t2 );
     Kit::System::Thread::destroy( *t3 );
     Kit::System::Thread::destroy( *t4 );
-
-    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::Shutdown_TS::getAndClearCounter() == 0u );
 }
+
+#endif

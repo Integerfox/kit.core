@@ -10,7 +10,7 @@
 
 #include "ListenerRunnable.h"
 #include "Kit/System/Thread.h"  // Needed for the signal method because IRunnable class only has forward reference to the Thread class
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -24,20 +24,12 @@ ListenerRunnable::ListenerRunnable() noexcept
 {
 }
 
-ListenerRunnable::~ListenerRunnable() noexcept
-{
-    // Make sure that the listener is stopped
-    terminate();
-
-    // Give the listener's thread time to exit
-    Kit::System::sleep( USE_KIT_IO_SOCKET_LISTENER_TERMINATE_WAIT_MS );
-}
 
 ///////////////////////////////
 void ListenerRunnable::startListening( IListenerClient& client, int portNumToListenOn ) noexcept
 {
     // Critical section because the caller can be in a different thread
-    // NOTE: Purposefully existing the critical section before signaling the thread
+    // NOTE: Purposefully exiting the critical section before signaling the thread
     //       to avoid a potential deadlock
     m_lock.lock();
 

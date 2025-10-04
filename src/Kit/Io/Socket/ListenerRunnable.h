@@ -66,7 +66,7 @@ namespace Socket {
  */
 class ListenerRunnable : public IListener, public Kit::System::IRunnable
 {
-protected:
+public:
     /// Constructor
     ListenerRunnable() noexcept;
 

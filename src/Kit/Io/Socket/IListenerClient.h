@@ -29,9 +29,7 @@ namespace Socket {
     In-thread Client:
         It is okay for the client to be running in the same thread as the
         listener.  However, the client should NOT return from the newConnection()
-        method until the client is 'done' with the socket.  In addition, for this
-        use case it is recommended that the client return 'false' from the
-        newConnection() method to ensure that the socket gets closed.
+        method until the client is 'done' with the socket.  
 
     Out-of-thread Client:
         For this use case, the client should NOT inherit/implement this class
@@ -48,7 +46,7 @@ public:
         the client rejects the socket, it needs to return false, else
         returns true.
      */
-    virtual bool newConnection( KitIoSocketHandle_T newFd, const char* rawConnectionInfo ) noexcept = 0;
+    virtual bool newConnection( KitIoSocketHandle_T& newFd, const char* rawConnectionInfo ) noexcept = 0;
 
 
 public:
