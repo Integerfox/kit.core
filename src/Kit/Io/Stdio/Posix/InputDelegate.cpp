@@ -10,7 +10,6 @@
 
 #include "Kit/Io/Stdio/InputDelegate.h"
 #include "Fdio.h"
-#include "Kit/Io/Stdio/Posix/Fdio.h"
 
 
 //------------------------------------------------------------------------------
