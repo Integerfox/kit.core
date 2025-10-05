@@ -64,20 +64,9 @@ public:
         }
 
         // perform the write
-        ByteCount_T result = ::write( fd, buffer, maxBytes );
-        
-        // Check for errors
-        if ( result < 0 )
-        {
-            bytesWritten = 0;
-            eosFlag      = false;
-            return false;
-        }
-        
-        // Write succeeded - check for EOS condition
-        bytesWritten = static_cast<ByteCount_T>( result );
+        bytesWritten = ::write( fd, buffer, maxBytes );
         eosFlag      = bytesWritten == 0 ? true : false;
-        return !eosFlag;
+        return bytesWritten > 0;
     }
 
     /// Flushes the file descriptor 'fd'
@@ -124,7 +113,7 @@ public:
     static bool read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
     {
         KIT_SYSTEM_ASSERT( buffer != nullptr );
-        
+
         // Trap that the stream has been CLOSED!
         if ( fd == INVALID_FD )
         {
@@ -139,20 +128,9 @@ public:
         }
 
         // perform the read
-        ByteCount_T result = ::read( fd, buffer, numBytes );
-        
-        // Check for errors
-        if ( result < 0 )
-        {
-            bytesRead = 0;
-            eosFlag   = false;
-            return false;
-        }
-        
-        // Read succeeded - check for EOS condition
-        bytesRead = static_cast<ByteCount_T>( result );
+        bytesRead = (int)::read( fd, buffer, numBytes );
         eosFlag   = bytesRead == 0 ? true : false;
-        return !eosFlag;
+        return bytesRead > 0;
     }
 
 
@@ -168,13 +146,13 @@ public:
 
         int nbytes;
         int result = ioctl( fd, FIONREAD, &nbytes );
-        
+
         // Check for errors
         if ( result < 0 )
         {
             return false;
         }
-        
+
         return nbytes > 0;
     }
 };

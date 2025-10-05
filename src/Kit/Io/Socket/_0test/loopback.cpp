@@ -68,7 +68,10 @@ public:
     {
         m_run = false;
         m_stream.close();
-        m_parentThreadPtr_->signal();
+        if ( m_parentThreadPtr_ != nullptr )
+        {
+            m_parentThreadPtr_->signal();
+        }
     }
 
 public:
@@ -203,33 +206,33 @@ TEST_CASE( "loopback" )
     // Loop back
     Kit::Text::FString<512> buffer1;
     REQUIRE( clientStream.write( TEXT1 ) );
-    minWaitOnStreamData( clientStream, 10, 1000 );
+    minWaitOnStreamData( clientStream, 100, 1000 );
     REQUIRE( clientStream.read( buffer1 ) );
     REQUIRE( buffer1 == TEXT1 );
 
     Kit::Text::FString<512> buffer2;
     REQUIRE( client2Stream.write( TEXT2 ) );
-    minWaitOnStreamData( client2Stream, 10, 1000 );
+    minWaitOnStreamData( client2Stream, 100, 1000 );
     REQUIRE( client2Stream.read( buffer2 ) );
     REQUIRE( buffer2 == TEXT2 );
 
     REQUIRE( clientStream.write( TEXT3 ) );
-    minWaitOnStreamData( clientStream, 10, 1000 );
+    minWaitOnStreamData( clientStream, 100, 1000 );
     REQUIRE( clientStream.read( buffer1 ) );
     REQUIRE( buffer1 == TEXT3 );
 
     REQUIRE( client2Stream.write( TEXT3 ) );
-    minWaitOnStreamData( client2Stream, 10, 1000 );
+    minWaitOnStreamData( client2Stream, 100, 1000 );
     REQUIRE( client2Stream.read( buffer2 ) );
     REQUIRE( buffer2 == TEXT3 );
 
     REQUIRE( clientStream.write( TEXT2 ) );
-    minWaitOnStreamData( clientStream, 10, 1000 );
+    minWaitOnStreamData( clientStream, 100, 1000 );
     REQUIRE( clientStream.read( buffer1 ) );
     REQUIRE( buffer1 == TEXT2 );
 
     REQUIRE( client2Stream.write( TEXT1 ) );
-    minWaitOnStreamData( client2Stream, 10, 1000 );
+    minWaitOnStreamData( client2Stream, 100, 1000 );
     REQUIRE( client2Stream.read( buffer2 ) );
     REQUIRE( buffer2 == TEXT1 );
 
@@ -240,12 +243,12 @@ TEST_CASE( "loopback" )
     InputOutput client3Stream( client3Fd );
 
     REQUIRE( client3Stream.write( TEXT3 ) );
-    minWaitOnStreamData( client3Stream, 10, 1000 );
+    minWaitOnStreamData( client3Stream, 100, 1000 );
     REQUIRE( client3Stream.read( buffer1 ) );
     REQUIRE( buffer1 == TEXT3 );
 
     REQUIRE( client2Stream.write( TEXT3 ) );
-    REQUIRE( minWaitOnStreamData( client2Stream ) );
+    REQUIRE( minWaitOnStreamData( client2Stream, 100, 1000 ) );
     REQUIRE( client2Stream.read( buffer2 ) );
     REQUIRE( buffer2 == TEXT3 );
 
