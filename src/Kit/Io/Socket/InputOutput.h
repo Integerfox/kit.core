@@ -30,8 +30,11 @@ public:
     /// Constructor
     InputOutput() noexcept;
 
+    /// Constructor
+    InputOutput( KitIoSocketHandle_T fd ) noexcept;
+
     /// Destructor
-    ~InputOutput( void ) noexcept;
+    ~InputOutput() noexcept;
 
 
 public:

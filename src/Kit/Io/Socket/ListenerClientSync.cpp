@@ -1,38 +1,42 @@
-#if 0
-/*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
 
 #include "ListenerClientSync.h"
-#include "Cpl/Itc/SyncReturnHandler.h"
+#include "Kit/Io/Socket/IListenerClientRequest.h"
+#include "Kit/Io/Types.h"
+#include "Kit/Itc/SyncReturnHandler.h"
 
 
-///
-using namespace Cpl::Io::Socket;
-
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Io {
+namespace Socket {
 
 ///////////////////////
-ListenerClientSync::ListenerClientSync( Cpl::Itc::PostApi& myMbox )
-	:m_mbox( myMbox )
+ListenerClientSync::ListenerClientSync( Kit::EventQueue::IQueue& myEventQueue ) noexcept
+    : m_eventQueue( myEventQueue )
 {
 }
 
 
 ///////////////////////
-bool ListenerClientSync::newConnection( Cpl::Io::Descriptor newFd, const char* rawConnectionInfo )
+bool ListenerClientSync::newConnection( KitIoSocketHandle_T newFd, const char* rawConnectionInfo ) noexcept
 {
-	NewConnectionPayload        payload( newFd, rawConnectionInfo );
-	Cpl::Itc::SyncReturnHandler srh;
-	NewConnectionMsg            msg( *this, payload, srh );
-	m_mbox.postSync( msg );
-
-	return payload.m_accepted;
+    IListenerClientRequest::Payload_T payload( newFd, rawConnectionInfo );
+    Kit::Itc::SyncReturnHandler       srh;
+    NewConnectionMsg                  msg( *this, payload, srh );
+    m_eventQueue.postSync( msg );
+    return payload.m_accepted;
 }
-#endif
+
+}  // end namespace
+}
+}
+//------------------------------------------------------------------------------

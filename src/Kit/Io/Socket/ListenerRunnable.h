@@ -77,7 +77,7 @@ public:
     /// See Kit::Io::Socket::IListener
     void terminate() noexcept override;
 
-protected:
+public:
     /// See Kit::System::Runnable
     void entry() noexcept override;
 

@@ -45,8 +45,13 @@ public:
         determine if the application will accept or reject the socket.  If
         the client rejects the socket, it needs to return false, else
         returns true.
+
+        NOTE: The client is responsible for closing the socket when this
+              callback method return true. Conversely, the client should NOT
+              close the socket if this method returns false (the listener will
+              close the socket).
      */
-    virtual bool newConnection( KitIoSocketHandle_T& newFd, const char* rawConnectionInfo ) noexcept = 0;
+    virtual bool newConnection( KitIoSocketHandle_T newFd, const char* rawConnectionInfo ) noexcept = 0;
 
 
 public:

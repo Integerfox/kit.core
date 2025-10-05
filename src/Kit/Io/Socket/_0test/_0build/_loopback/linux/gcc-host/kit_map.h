@@ -1,5 +1,3 @@
-#ifndef KIT_CONFIG_H_
-#define KIT_CONFIG_H_
 /*-----------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -8,12 +6,17 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file Project/build specific 'Options' (see LConfig Pattern) */
+/** @file Project/build specific 'Mappings'  
 
-#define USE_KIT_SYSTEM_TRACE
-#define USE_KIT_SYSTEM_ASSERT_MACRO
-#define KitTextToStringMaxUnsigned_T uint64_t
+          Note: Intentionally there is NO Header latch (see LHeader Pattern)
+                for why.
+*/
 
-#define USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
+// IO mappings
+#include "Kit/Io/_mappings/_posix/mappings.h"
 
-#endif
+// OSAL mappings
+#include "Kit/System/Posix/mappings.h"
+
+// strapi mapping
+#include "Kit/Text/_mappings/_posix/strapi.h"

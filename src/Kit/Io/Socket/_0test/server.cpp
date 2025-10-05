@@ -42,7 +42,8 @@ public:
     }
 
 public:
-    bool newConnection( KitIoSocketHandle_T& newFd, const char* rawConnectionInfo ) noexcept override
+    // NOTE: Always return 'true' because this client class 'uses' the socket AND the class calls close() on the socket
+    bool newConnection( KitIoSocketHandle_T newFd, const char* rawConnectionInfo ) noexcept override
     {
         KIT_SYSTEM_TRACE_MSG( SECT_, "Incoming connection from: %s (fd=%p)", rawConnectionInfo, (void*)( (size_t)newFd ) );
         m_stream.activate( newFd );
@@ -55,7 +56,7 @@ public:
             {
                 KIT_SYSTEM_TRACE_MSG( SECT_, "READER: Read failed" );
                 m_stream.close();
-                return false;
+                return true;
             }
             m_byteCount += buffer.length();
             KIT_SYSTEM_TRACE_MSG( SECT_, "READER: input (%d : %lu) [%s]", buffer.length(), m_byteCount, buffer.getString() );
@@ -64,7 +65,7 @@ public:
             {
                 KIT_SYSTEM_TRACE_MSG( SECT_, "READER: Write failed" );
                 m_stream.close();
-                return false;
+                return true;
             }
             m_stream.flush();
 
@@ -72,13 +73,13 @@ public:
             {
                 KIT_SYSTEM_TRACE_MSG( SECT_, "READER: Exit string received.  Closing connection." );
                 m_stream.close();
-                return false;
+                return true;
             }
         }
     }
 };
 
-};  // end anonymous namespace
+}   // end anonymous namespace
 
 
 ///////////////////

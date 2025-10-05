@@ -81,7 +81,6 @@ void ListenerRunnable::listen() noexcept
                                   m_port,
                                   inet_ntoa( client_addr.sin_addr ) );
             Posix::Fdio::close( newfd );
-            continue;
         }
     }
 
