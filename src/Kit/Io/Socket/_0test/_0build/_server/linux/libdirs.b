@@ -6,3 +6,4 @@ src/Kit/Text/_mappings/_posix
 src/Kit/System/Posix/_realtime
 
 src/Kit/Io/Stdio/Posix
+src/Kit/Io/Socket/Posix

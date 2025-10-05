@@ -10,7 +10,7 @@
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/_testingsupport/helpers.h"
+#include "Kit/_testsupport/helpers.h"
 #include "Kit/EventQueue/IQueue.h"
 #include "Kit/Io/Socket/ListenerRunnable.h"
 #include "Kit/Io/Types.h"
