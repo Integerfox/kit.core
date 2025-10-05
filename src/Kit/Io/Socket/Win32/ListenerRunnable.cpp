@@ -13,7 +13,7 @@
 #include "Kit/System/Trace.h"
 #include <winsock.h>
 
-#define SECT_ "Cpl::Io::Socket::Posix"
+#define SECT_ "Kit::Io::Socket::Win32"
 
 //------------------------------------------------------------------------------
 namespace Kit {
