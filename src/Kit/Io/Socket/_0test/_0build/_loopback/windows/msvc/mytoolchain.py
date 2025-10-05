@@ -39,7 +39,7 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 FINAL_OUTPUT_NAME = 'aa.exe'
 
 # Using Catch2 
-(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, r'windows\msvc', 'lib' )
+(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'windows/msvc', 'lib' )
 
 
 #
