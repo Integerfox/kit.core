@@ -16,7 +16,7 @@
  */
 #include <Windows.h>
 #define KitIoStdioHandle_T_MAP                HANDLE  //!< Mapping
-#define KitIoSocketHandle_T_MAP               HANDLE  //!< Mapping
+#define KitIoSocketHandle_T_MAP               SOCKET  //!< Mapping
 #define KitIoFileHandle_T_MAP                 HANDLE  //!< Mapping
 #define KitIoFileDirectory_T_MAP              HANDLE  //!< Mapping
 

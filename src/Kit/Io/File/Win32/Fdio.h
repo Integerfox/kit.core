@@ -89,8 +89,19 @@ public:
         }
 
         DWORD len = GetFileSize( fd, 0 );
-        length    = (unsigned long)len;
-        return len != INVALID_FILE_SIZE;
+
+        // GetFileSize returns INVALID_FILE_SIZE on error, but this is also a valid
+        // file size (4GB - 1). Must check GetLastError() to distinguish.
+        if ( len == INVALID_FILE_SIZE )
+        {
+            if ( GetLastError() != NO_ERROR )
+            {
+                return false;
+            }
+        }
+
+        length = static_cast<ByteCount_T>( len );
+        return true;
     }
 
 public:
@@ -104,9 +115,20 @@ public:
             return false;
         }
 
-        DWORD pos  = SetFilePointer( fd, 0, 0, FILE_CURRENT );
-        currentPos = (unsigned long)pos;
-        return pos != INVALID_SET_FILE_POINTER;
+        DWORD pos = SetFilePointer( fd, 0, 0, FILE_CURRENT );
+
+        // SetFilePointer returns INVALID_SET_FILE_POINTER on error, but this is also
+        // a valid position. Must check GetLastError() to distinguish.
+        if ( pos == INVALID_SET_FILE_POINTER )
+        {
+            if ( GetLastError() != NO_ERROR )
+            {
+                return false;
+            }
+        }
+
+        currentPos = static_cast<ByteCount_T>( pos );
+        return true;
     }
 
     /** Adjusts the current pointer offset by the specified delta (in bytes).
@@ -120,7 +142,15 @@ public:
             return false;
         }
 
-        return SetFilePointer( fd, deltaOffset, 0, FILE_CURRENT ) != INVALID_SET_FILE_POINTER;
+        DWORD result = SetFilePointer( fd, deltaOffset, 0, FILE_CURRENT );
+
+        // SetFilePointer returns INVALID_SET_FILE_POINTER on error, but this is also
+        // a valid position. Must check GetLastError() to distinguish.
+        if ( result == INVALID_SET_FILE_POINTER )
+        {
+            return GetLastError() == NO_ERROR;
+        }
+        return true;
     }
 
     /** Sets the file pointer to the absolute specified offset (in bytes).
@@ -134,7 +164,15 @@ public:
             return false;
         }
 
-        return SetFilePointer( fd, newoffset, 0, FILE_BEGIN ) != INVALID_SET_FILE_POINTER;
+        DWORD result = SetFilePointer( fd, newoffset, 0, FILE_BEGIN );
+
+        // SetFilePointer returns INVALID_SET_FILE_POINTER on error, but this is also
+        // a valid position. Must check GetLastError() to distinguish.
+        if ( result == INVALID_SET_FILE_POINTER )
+        {
+            return GetLastError() == NO_ERROR;
+        }
+        return true;
     }
 
     /** Sets the file pointer to End-Of-File.  Returns true  if successful, else
@@ -147,7 +185,15 @@ public:
             return false;
         }
 
-        return SetFilePointer( fd, 0, 0, FILE_END ) != INVALID_SET_FILE_POINTER;
+        DWORD result = SetFilePointer( fd, 0, 0, FILE_END );
+        
+        // SetFilePointer returns INVALID_SET_FILE_POINTER on error, but this is also
+        // a valid position. Must check GetLastError() to distinguish.
+        if ( result == INVALID_SET_FILE_POINTER )
+        {
+            return GetLastError() == NO_ERROR;
+        }
+        return true;
     }
 
 public:
@@ -171,7 +217,7 @@ public:
         DWORD createOpt = CREATE_NEW;
         DWORD accessOpt = GENERIC_READ | GENERIC_WRITE;
 
-        // Open the file to create it 
+        // Open the file to create it
         KitIoFileHandle_T fd( CreateFile( fileName,
                                           accessOpt,
                                           FILE_SHARE_READ | FILE_SHARE_WRITE,

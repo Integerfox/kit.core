@@ -22,7 +22,7 @@ Connector::Result_T Connector::establish( const char* remoteHostName, int portNu
 {
     // Get a list of address candidates for the remote Host
     struct addrinfo* adapters = nullptr;
-    if ( !Posix::Fdio::resolveAddress( remoteHostName, portNumToConnectTo, adapters ) )
+    if ( !Win32::Fdio::resolveAddress( remoteHostName, portNumToConnectTo, adapters ) )
     {
         return eERROR;
     }
@@ -30,11 +30,11 @@ Connector::Result_T Connector::establish( const char* remoteHostName, int portNu
     // Walk the list of addresses until a connection succeeds
     struct addrinfo* ptr;
     bool             failedCreateSocket = true;
-    fdOut                               = Posix::Fdio::INVALID_FD;
+    fdOut                               = INVALID_SOCKET;
     for ( ptr = adapters; ptr != nullptr; ptr = ptr->ai_next )
     {
         // Create a SOCKET for connecting to server
-        fdOut = Posix::Fdio::createSocket( ptr );
+        fdOut = Win32::Fdio::createSocket( ptr );
         if ( fdOut < 0 )
         {
             continue;  // Try the next address
@@ -46,7 +46,7 @@ Connector::Result_T Connector::establish( const char* remoteHostName, int portNu
         // Attempt to connect to the remote host
         if ( connect( fdOut, ptr->ai_addr, ptr->ai_addrlen ) < 0 )
         {
-            Posix::Fdio::close( fdOut );
+            Win32::Fdio::close( fdOut );
             continue;  // Try the next address
         }
 
@@ -55,10 +55,10 @@ Connector::Result_T Connector::establish( const char* remoteHostName, int portNu
     }
 
     // Housekeeping
-    Posix::Fdio::freeAddresses( adapters );
+    Win32::Fdio::freeAddresses( adapters );
 
     // Check if a connection was made
-    if ( fdOut == Posix::Fdio::INVALID_FD )
+    if ( fdOut == INVALID_SOCKET )
     {
         return failedCreateSocket ? eERROR : eREFUSED;
     }

@@ -85,9 +85,22 @@ public:
         }
 
         // perform the write
-        bytesWritten = send( fd, (char*)buffer, maxBytes, MSG_NOSIGNAL );
-        eosFlag      = bytesWritten <= 0;
-        return !eosFlag;
+        ByteCount_T result = send( fd, (char*)buffer, maxBytes, MSG_NOSIGNAL );
+        if ( result < 0 )
+        {
+            bytesWritten = 0;
+            eosFlag      = true;
+            return false;
+        }
+        if ( result == 0 )
+        {
+            bytesWritten = 0;
+            eosFlag      = true;
+            return false;
+        }
+        bytesWritten = result;
+        eosFlag      = false;
+        return true;
     }
 
     /// Flushes the file descriptor 'fd'
@@ -133,9 +146,26 @@ public:
         }
 
         // perform the read
-        bytesRead = recv( fd, (char*)buffer, numBytes, 0 );
-        eosFlag   = bytesRead <= 0;
-        return !eosFlag;
+        ByteCount_T result = recv( fd, (char*)buffer, numBytes, 0 );
+        if ( result < 0 )
+        {
+            bytesRead = 0;
+            eosFlag   = true;
+            return false;
+        }
+
+        // Connection closed gracefully
+        if ( result == 0 )
+        {
+            bytesRead = 0;
+            eosFlag   = true;
+            return false;
+        }
+
+        // Success!
+        bytesRead = result;
+        eosFlag   = false;
+        return true;
     }
 
 
@@ -201,6 +231,7 @@ public:
         // Create a queue to hold connection requests
         if ( ( result = ::listen( fd, SOMAXCONN ) ) < 0 )
         {
+            close( fd );
             return result;
         }
 

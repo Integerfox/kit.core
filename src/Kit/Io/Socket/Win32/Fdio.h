@@ -1,5 +1,5 @@
-#ifndef KIT_IO_SOCKET_POSIX_FDIO_H_
-#define KIT_IO_SOCKET_POSIX_FDIO_H_
+#ifndef KIT_IO_SOCKET_WIN32_FDIO_H_
+#define KIT_IO_SOCKET_WIN32_FDIO_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,18 +10,15 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+/// Disable able 'deprecated warnings' for use of inet_ntoa() function
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
 
-#include "Kit/Io/Types.h"
+#include <winsock2.h>  // Must be included before windows.h, i.e. always the #include statement
+#include <ws2tcpip.h>
 #include "Kit/System/Assert.h"
 #include "Kit/System/Api.h"
+#include "Kit/Io/Types.h"
 #include "Kit/Text/FString.h"
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <string.h>
-#include <netdb.h>
-
 
 ///
 namespace Kit {
@@ -30,31 +27,20 @@ namespace Io {
 ///
 namespace Socket {
 ///
-namespace Posix {
+namespace Win32 {
 
 
 //////////////////////
-/** This static class provides a collection of functions for operating on POSIX
+/** This static class provides a collection of functions for operating on Win32
     file descriptors for BSD sockets.
  */
 class Fdio
 {
 public:
-    /// Used to indicate an invalid file descriptor
-    static constexpr int INVALID_FD = -1;
-
-    /** Closes the file descriptor 'fd'. If 'fd' is already closed (i.e. INVALID_FD),
-        the method is a NOP.  Upon a successful close, 'fd' is set to INVALID_FD.
+    /** Closes the file descriptor 'fd'. If 'fd' is already closed (i.e. INVALID_SOCKET),
+        the method is a NOP.  Upon a successful close, 'fd' is set to INVALID_SOCKET.
      */
-    inline static void close( int& fd ) noexcept
-    {
-        if ( fd != INVALID_FD )
-        {
-            ::shutdown( fd, SHUT_RDWR );
-            ::close( fd );
-            fd = INVALID_FD;
-        }
-    }
+    static void close( SOCKET& fd ) noexcept;
 
 public:
     /** Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor
@@ -67,12 +53,12 @@ public:
 
         Returns true if successful; else false on error.
      */
-    static bool write( int fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+    static bool write( SOCKET fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
     {
         KIT_SYSTEM_ASSERT( buffer != nullptr );
 
         // Throw an error if the socket had already been closed
-        if ( fd == INVALID_FD )
+        if ( fd == INVALID_SOCKET )
         {
             return false;
         }
@@ -85,22 +71,32 @@ public:
         }
 
         // perform the write
-        bytesWritten = send( fd, (char*)buffer, maxBytes, MSG_NOSIGNAL );
-        eosFlag      = bytesWritten <= 0;
-        return !eosFlag;
+        int result = send( fd, (char*)buffer, maxBytes, 0 );
+        if ( result == SOCKET_ERROR )
+        {
+            bytesWritten = 0;
+            eosFlag      = true;
+            return false;
+        }
+        bytesWritten = result;
+        eosFlag      = false;
+        return true;
     }
 
     /// Flushes the file descriptor 'fd'
-    inline static void flush( int fd ) noexcept
+    inline static void flush( SOCKET fd ) noexcept
     {
-        // Do not know how to implement using only Posix  (jtt 2-14-2015)
+        // I could use WSAIoctl() here with SIO_FLUSH - but according
+        // to the Microsoft documentation - WSAIoctrl w/SIO_FLUSH could
+        // block (unless using overlapped IO) - which is not the designed
+        // behavior for this call -->so we will skip it for now (jtt 2-14-2015)
     }
 
     /** Returns true if the file descriptor is in the open state
      */
-    inline static bool isOpened( int fd ) noexcept
+    inline static bool isOpened( SOCKET fd ) noexcept
     {
-        return fd != INVALID_FD;
+        return fd != INVALID_SOCKET;
     }
 
 public:
@@ -115,12 +111,12 @@ public:
         Returns true if successful; else false on error.
      */
 
-    static bool read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+    static bool read( SOCKET fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
     {
         KIT_SYSTEM_ASSERT( buffer != nullptr );
 
         // Throw an error if the socket had already been closed
-        if ( fd == INVALID_FD )
+        if ( fd == INVALID_SOCKET )
         {
             return false;
         }
@@ -133,49 +129,60 @@ public:
         }
 
         // perform the read
-        bytesRead = recv( fd, (char*)buffer, numBytes, 0 );
-        eosFlag   = bytesRead <= 0;
-        return !eosFlag;
+        int result = recv( fd, (char*)buffer, numBytes, 0 );
+        if ( result == SOCKET_ERROR )
+        {
+            bytesRead = 0;
+            eosFlag   = true;
+            return false;
+        }
+
+        // Connection closed gracefully
+        if ( result == 0 )
+        {
+            bytesRead = 0;
+            eosFlag   = true;
+            return false;
+        }
+
+        // Success!
+        bytesRead = result;
+        eosFlag   = false;
+        return true;
     }
 
 
     /** Returns true if there is data available to be read from the file descriptor
      */
-    inline static bool available( int fd ) noexcept
+    inline static bool available( SOCKET fd ) noexcept
     {
-        // Trap that the stream has been CLOSED!
-        if ( fd == INVALID_FD )
-        {
-            return false;
-        }
-
-        int nbytes;
-        ioctl( fd, FIONREAD, &nbytes );
-        return nbytes > 0;
+        unsigned long nbytes = 1;  // NOTE: If there is error -->then I will return true
+        ioctlsocket( fd, FIONREAD, &nbytes );
+        return nbytes > 0 ? true : false;
     }
 
 public:
     /** Creates the "listening" socket.  It will attempt N times to binding the
-        listening port before giving up.  Upon success a valid file descriptor
-        is returned (>=0).  On error a negative value is returned
+        listening port before giving up.  Upon success a valid socket descriptor
+        is returned.  On error INVALID_SOCKET is returned
      */
-    static int createListeningSocket( int      port,
-                                      unsigned numRetries,
-                                      uint32_t delayBetweenRetriesMs ) noexcept
+    static SOCKET createListeningSocket( int      port,
+                                         unsigned numRetries,
+                                         uint32_t delayBetweenRetriesMs ) noexcept
     {
         struct sockaddr_in local;
         int                one = 1;
         int                result;
 
         // Create the Socket to listen with
-        int fd = socket( AF_INET, SOCK_STREAM, 0 );
-        if ( fd < 0 )
+        SOCKET fd = socket( AF_INET, SOCK_STREAM, 0 );
+        if ( fd == INVALID_SOCKET )
         {
-            return fd;
+            return INVALID_SOCKET;
         }
 
         // Set Options on the socket
-        setsockopt( fd, SOL_SOCKET, SO_REUSEADDR, &one, sizeof( one ) );
+        setsockopt( fd, SOL_SOCKET, SO_REUSEADDR, (char*)&one, sizeof( one ) );
 
         // Set the "address" of the socket
         unsigned retry = numRetries;
@@ -185,7 +192,7 @@ public:
             local.sin_family      = AF_INET;
             local.sin_addr.s_addr = htonl( INADDR_ANY );
             local.sin_port        = htons( port );
-            if ( ( result = bind( fd, (struct sockaddr*)&local, sizeof( local ) ) ) >= 0 )
+            if ( bind( fd, (struct sockaddr*)&local, sizeof( local ) ) != SOCKET_ERROR )
             {
                 break;
             }
@@ -194,14 +201,14 @@ public:
             Kit::System::sleep( delayBetweenRetriesMs );
             if ( --retry == 0 )
             {
-                return result;
+                return INVALID_SOCKET;
             }
         }
 
         // Create a queue to hold connection requests
-        if ( ( result = ::listen( fd, SOMAXCONN ) ) < 0 )
+        if ( ::listen( fd, SOMAXCONN ) == SOCKET_ERROR )
         {
-            return result;
+            return INVALID_SOCKET;
         }
 
         // Success!
@@ -209,11 +216,11 @@ public:
     }
 
     /** This method is to accept an incoming connection request.  Returns
-        a valid file descriptor for the accepted connection, or < 0 if an error
-        occurred.  When successful, the 'client_addr' structure is populated
-        with information about the remote Host.
+        a valid socket descriptor for the accepted connection, or INVALID_SOCKET
+        if an error occurred.  When successful, the 'client_addr' structure is
+        populated with information about the remote Host.
      */
-    inline static int acceptConnection( int listeningFd, struct sockaddr_in& client_addr ) noexcept
+    inline static SOCKET acceptConnection( SOCKET listeningFd, struct sockaddr_in& client_addr ) noexcept
     {
         // Wait on the 'accept'
         socklen_t client_len = sizeof( client_addr );
@@ -221,9 +228,9 @@ public:
     }
 
     /** This method enables the SO_KEEPALIVE option on the specified socket.
-        Returns >=0 if successful, else on error < 0 is returned
+        Returns 0 if successful, else on error SOCKET_ERROR is returned
      */
-    inline static int enableKeepAlive( int fd ) noexcept
+    inline static int enableKeepAlive( SOCKET fd ) noexcept
     {
         int bOptVal = 1;
         int bOptLen = sizeof( int );
@@ -260,9 +267,9 @@ public:
     }
 
     /** Create a file descriptor for the specified socket address info.
-        Returns a valid file descriptor if successful, else < 0 is returned.
+        Returns a valid socket descriptor if successful, else INVALID_SOCKET is returned.
      */
-    inline static int createSocket( struct addrinfo* addr ) noexcept
+    inline static SOCKET createSocket( struct addrinfo* addr ) noexcept
     {
         return socket( addr->ai_family, addr->ai_socktype, addr->ai_protocol );
     }

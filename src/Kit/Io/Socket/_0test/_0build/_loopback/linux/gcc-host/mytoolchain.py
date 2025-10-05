@@ -38,7 +38,7 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'a.out'
+FINAL_OUTPUT_NAME = 'aa.out'
 
 # Using Catch2
 (catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'linux/gcc-host', 'a' )

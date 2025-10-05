@@ -19,12 +19,12 @@ namespace Socket {
 
 /////////////////////
 InputOutput::InputOutput() noexcept
-    : m_fd( Posix::Fdio::INVALID_FD )
+    : m_fd( INVALID_SOCKET )
     , m_eos( false )
 {
 }
 
-InputOutput::InputOutput( KitIoSocketHandle_T fd) noexcept
+InputOutput::InputOutput( KitIoSocketHandle_T fd ) noexcept
     : m_fd( fd )
     , m_eos( false )
 {
@@ -41,10 +41,10 @@ InputOutput::~InputOutput() noexcept
 void InputOutput::activate( KitIoSocketHandle_T fd ) noexcept
 {
     // Only activate if a valid socket handle is provided
-    if ( fd != Posix::Fdio::INVALID_FD )
+    if ( fd != INVALID_SOCKET )
     {
         // Make sure that the current socket is closed first
-        Posix::Fdio::close( m_fd );
+        Win32::Fdio::close( m_fd );
         m_fd  = fd;
         m_eos = false;
     }
@@ -53,19 +53,19 @@ void InputOutput::activate( KitIoSocketHandle_T fd ) noexcept
 ///////////////////
 bool InputOutput::read( void* buffer, int numBytes, int& bytesRead ) noexcept
 {
-    return Posix::Fdio::read( m_fd, m_eos, buffer, numBytes, bytesRead );
+    return Win32::Fdio::read( m_fd, m_eos, buffer, numBytes, bytesRead );
 }
 
 bool InputOutput::available() noexcept
 {
-    return Posix::Fdio::available( m_fd );
+    return Win32::Fdio::available( m_fd );
 }
 
 
 //////////////////////
 bool InputOutput::write( const void* buffer, int maxBytes, int& bytesWritten ) noexcept
 {
-    return Posix::Fdio::write( m_fd, m_eos, buffer, maxBytes, bytesWritten );
+    return Win32::Fdio::write( m_fd, m_eos, buffer, maxBytes, bytesWritten );
 }
 
 void InputOutput::flush() noexcept
@@ -80,7 +80,7 @@ bool InputOutput::isEos() noexcept
 
 void InputOutput::close() noexcept
 {
-    Posix::Fdio::close( m_fd );
+    Win32::Fdio::close( m_fd );
 }
 
 

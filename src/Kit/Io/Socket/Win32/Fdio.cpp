@@ -70,3 +70,31 @@ protected:
 
 ///
 static RegisterInitHandler autoRegister_systemInit_hook;
+
+
+//------------------------------------------------------------------------------
+/* NOTE: The close() method is purposely not inlined because there needs to be
+         at least one "visibly" method in the Fdio.cpp file in order for the
+         linking of 'autoRegister_systemInit_hook' to 'work' since NQBP links
+         against libraries and not object files.
+*/
+namespace Kit {
+namespace Io {
+namespace Socket {
+namespace Win32 {
+
+
+void close( SOCKET& fd ) noexcept
+{
+    if ( fd != INVALID_SOCKET )
+    {
+        closesocket( fd );
+        fd = INVALID_SOCKET;
+    }
+}
+
+}  // end namespace
+}
+}
+}
+//------------------------------------------------------------------------------

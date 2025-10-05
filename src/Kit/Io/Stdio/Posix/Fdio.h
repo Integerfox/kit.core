@@ -64,9 +64,20 @@ public:
         }
 
         // perform the write
-        bytesWritten = ::write( fd, buffer, maxBytes );
+        ByteCount_T result = ::write( fd, buffer, maxBytes );
+        
+        // Check for errors
+        if ( result < 0 )
+        {
+            bytesWritten = 0;
+            eosFlag      = false;
+            return false;
+        }
+        
+        // Write succeeded - check for EOS condition
+        bytesWritten = static_cast<ByteCount_T>( result );
         eosFlag      = bytesWritten == 0 ? true : false;
-        return bytesWritten > 0;
+        return !eosFlag;
     }
 
     /// Flushes the file descriptor 'fd'
@@ -128,9 +139,20 @@ public:
         }
 
         // perform the read
-        bytesRead = (int)::read( fd, buffer, numBytes );
+        ByteCount_T result = ::read( fd, buffer, numBytes );
+        
+        // Check for errors
+        if ( result < 0 )
+        {
+            bytesRead = 0;
+            eosFlag   = false;
+            return false;
+        }
+        
+        // Read succeeded - check for EOS condition
+        bytesRead = static_cast<ByteCount_T>( result );
         eosFlag   = bytesRead == 0 ? true : false;
-        return bytesRead > 0;
+        return !eosFlag;
     }
 
 
@@ -145,7 +167,14 @@ public:
         }
 
         int nbytes;
-        ioctl( fd, FIONREAD, &nbytes );
+        int result = ioctl( fd, FIONREAD, &nbytes );
+        
+        // Check for errors
+        if ( result < 0 )
+        {
+            return false;
+        }
+        
         return nbytes > 0;
     }
 };
