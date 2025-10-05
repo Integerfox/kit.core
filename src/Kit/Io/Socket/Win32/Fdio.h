@@ -13,8 +13,6 @@
 /// Disable able 'deprecated warnings' for use of inet_ntoa() function
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
-#include <winsock2.h>  // Must be included before windows.h, i.e. always the #include statement
-#include <ws2tcpip.h>
 #include "Kit/System/Assert.h"
 #include "Kit/System/Api.h"
 #include "Kit/Io/Types.h"
@@ -72,13 +70,15 @@ public:
 
         // perform the write
         int result = send( fd, (char*)buffer, maxBytes, 0 );
-        if ( result == SOCKET_ERROR )
+        if ( result == SOCKET_ERROR || result == 0 )  // Error or connection closed gracefully
         {
             bytesWritten = 0;
             eosFlag      = true;
             return false;
         }
-        bytesWritten = result;
+        
+        // Success!
+        bytesWritten = static_cast<ByteCount_T>(result);
         eosFlag      = false;
         return true;
     }
@@ -130,15 +130,7 @@ public:
 
         // perform the read
         int result = recv( fd, (char*)buffer, numBytes, 0 );
-        if ( result == SOCKET_ERROR )
-        {
-            bytesRead = 0;
-            eosFlag   = true;
-            return false;
-        }
-
-        // Connection closed gracefully
-        if ( result == 0 )
+        if ( result == SOCKET_ERROR || result == 0 )  // Error or connection closed gracefully
         {
             bytesRead = 0;
             eosFlag   = true;
@@ -146,7 +138,7 @@ public:
         }
 
         // Success!
-        bytesRead = result;
+        bytesRead = static_cast<ByteCount_T>(result);
         eosFlag   = false;
         return true;
     }
@@ -172,7 +164,6 @@ public:
     {
         struct sockaddr_in local;
         int                one = 1;
-        int                result;
 
         // Create the Socket to listen with
         SOCKET fd = socket( AF_INET, SOCK_STREAM, 0 );

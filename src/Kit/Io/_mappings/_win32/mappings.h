@@ -14,7 +14,10 @@
     Kit::Io namespace
 
  */
+#include <winsock2.h>   // Must be included before windows.h
+#include <ws2tcpip.h>
 #include <Windows.h>
+
 #define KitIoStdioHandle_T_MAP                HANDLE  //!< Mapping
 #define KitIoSocketHandle_T_MAP               SOCKET  //!< Mapping
 #define KitIoFileHandle_T_MAP                 HANDLE  //!< Mapping

@@ -11,7 +11,7 @@
 #include "Fdio.h"
 #include "Kit/Io/Socket/ListenerRunnable.h"
 #include "Kit/System/Trace.h"
-#include <cerrno>
+#include <winsock.h>
 
 #define SECT_ "Cpl::Io::Socket::Posix"
 
@@ -24,22 +24,21 @@ namespace Socket {
 ///////////////////////////////
 void ListenerRunnable::stopListener() noexcept
 {
-    Posix::Fdio::close( m_listeningSocket );
+    Win32::Fdio::close( m_listeningSocket );
 }
 
 
 void ListenerRunnable::listen() noexcept
 {
     // Create the listening socket
-    m_listeningSocket = Posix::Fdio::createListeningSocket( m_port, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRIES, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS );
-    if ( m_listeningSocket == Posix::Fdio::INVALID_FD )
+    m_listeningSocket = Win32::Fdio::createListeningSocket( m_port, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRIES, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS );
+    if ( m_listeningSocket == INVALID_SOCKET )
     {
         KIT_SYSTEM_TRACE_MSG( SECT_,
-                              "listen(): Failed to creating listening socket. Port=%d, result=%d, errno=(%d) %s.",
+                              "listen(): Failed to creating listening socket. Port=%d, result=%p, errno=%d.",
                               m_port,
-                              m_listeningSocket,
-                              errno,
-                              strerror( errno ) );
+                              (void*)( (size_t)m_listeningSocket ),
+                              WSAGetLastError() );
         return;
     }
 
@@ -49,28 +48,26 @@ void ListenerRunnable::listen() noexcept
         struct sockaddr_in client_addr;
 
         // Wait on the 'accept'
-        int newfd;
-        if ( ( newfd = Posix::Fdio::acceptConnection( m_listeningSocket, client_addr ) ) < 0 )
+        SOCKET newfd;
+        if ( ( newfd = Win32::Fdio::acceptConnection( m_listeningSocket, client_addr ) ) == INVALID_SOCKET )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                                  "listen(): acceptConnection() failed. Port=%d, result=%d, errno=(%d) %s.",
+                                  "listen(): acceptConnection() failed. Port=%d, result=%p, errno=%d.",
                                   m_port,
-                                  newfd,
-                                  errno,
-                                  strerror( errno ) );
+                                  (void*)( (size_t)newfd ),
+                                  WSAGetLastError() );
             // Abort listening
             break;
         }
 
         int result;
-        if ( ( result = Posix::Fdio::enableKeepAlive( newfd ) ) < 0 )
+        if ( ( result = Win32::Fdio::enableKeepAlive( newfd ) ) < 0 )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                                  "listen(): failed to enable keepAlive. Port=%d, result=%d, errno=(%d) %s.",
+                                  "listen(): failed to enable keepAlive. Port=%d, result=%d, errno=%d.",
                                   m_port,
                                   result,
-                                  errno,
-                                  strerror( errno ) );
+                                  WSAGetLastError() );
         }
 
         // Call the client back to see if it wants to accept the connection
@@ -80,7 +77,7 @@ void ListenerRunnable::listen() noexcept
                                   "listen(): client declined connection request. Port=%d, remote=%s.",
                                   m_port,
                                   inet_ntoa( client_addr.sin_addr ) );
-            Posix::Fdio::close( newfd );
+            Win32::Fdio::close( newfd );
         }
     }
 

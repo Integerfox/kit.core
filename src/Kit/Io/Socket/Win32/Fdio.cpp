@@ -8,7 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include <winsock2.h>
+#include "Fdio.h"
 #include "Kit/System/PrivateStartup.h"
 #include "Kit/System/Shutdown.h"
 #include "Kit/System/FatalError.h"
@@ -84,7 +84,7 @@ namespace Socket {
 namespace Win32 {
 
 
-void close( SOCKET& fd ) noexcept
+void Fdio::close( SOCKET& fd ) noexcept
 {
     if ( fd != INVALID_SOCKET )
     {
