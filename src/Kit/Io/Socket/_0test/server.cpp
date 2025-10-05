@@ -15,7 +15,7 @@
 #include "Kit/Text/FString.h"
 #include "Kit/Io/Socket/InputOutput.h"
 #include "Kit/Io/Socket/ListenerRunnable.h"
-#include "Kit/EventQueue/Server.h"
+
 
 ///
 using namespace Kit::Io::Socket;
@@ -59,7 +59,7 @@ public:
                 return true;
             }
             m_byteCount += buffer.length();
-            KIT_SYSTEM_TRACE_MSG( SECT_, "READER: input (%d : %lu) [%s]", buffer.length(), m_byteCount, buffer.getString() );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "READER: input (%d : %p) [%s]", buffer.length(), (void*)( (size_t)m_byteCount ), buffer.getString() );
 
             if ( !m_stream.write( buffer ) )
             {

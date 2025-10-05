@@ -36,7 +36,7 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'a.exe'
+FINAL_OUTPUT_NAME = 'aa.exe'
 
 # Using Catch2 
 (catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, r'windows\gcc-host', 'a' )
@@ -52,7 +52,7 @@ base_win32           = BuildValues()        # Do NOT comment out this line
 base_win32.cflags    = '-m32 -std=c++17 -Wall -Werror -x c++  -fprofile-arcs -ftest-coverage -fprofile-update=atomic'
 base_win32.inc       = catch2_inc
 base_win32.linkflags = '-m32 -fprofile-arcs'
-base_win32.linklibs  = f'-lgcov {catch2_lib}'
+base_win32.linklibs  = f'-lgcov {catch2_lib} -lws2_32'
 base_win32.firstobjs = unit_test_objects
 
 # Set project specific 'optimized' options
@@ -77,7 +77,7 @@ base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ft
 base_win64.inc        = catch2_inc
 base_win64.linkflags  = '-m64'
 base_win64.firstobjs  = unit_test_objects
-base_win64.linklibs   = f'-lgcov {catch2_lib}'
+base_win64.linklibs   = f'-lgcov {catch2_lib} -lws2_32'
 
 # Set 'Optimized' options
 optimized_win64.cflags    = '-O3'
