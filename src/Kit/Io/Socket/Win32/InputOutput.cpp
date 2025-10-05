@@ -70,7 +70,10 @@ bool InputOutput::write( const void* buffer, int maxBytes, int& bytesWritten ) n
 
 void InputOutput::flush() noexcept
 {
-    // Do not know how to implement using only Posix  (jtt 2-14-2015)
+    // I could use WSAIoctl() here with SIO_FLUSH - but according
+    // to the Microsoft documentation - WSAIoctrl w/SIO_FLUSH could
+    // block (unless using overlapped IO) - which is not the designed
+    // behavior for this call -->so we will skip it for now (jtt 2-14-2015)
 }
 
 bool InputOutput::isEos() noexcept
