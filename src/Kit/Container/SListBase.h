@@ -52,93 +52,24 @@ protected:
 
 protected:
     /// Moves the content of the this queue to the specified queue.
-    void move( SListBase& dst ) noexcept
-    {
-        // clear the destination list
-        dst.clearTheList();
-
-        // Copy each item (so the debug info is correct)
-        ListItem* nextPtr;
-        while ( ( nextPtr = getFirst() ) )
-        {
-            dst.putLast( *nextPtr );
-        }
-    }
+    void move( SListBase& dst ) noexcept;
 
     /// Empties the list.  All references to the item(s) in the list are lost.
-    void clearTheList() noexcept
-    {
-        // Drain list so the debug traps work correctly
-        while ( getFirst() )
-        {
-            ;
-        }
-    }
+    void clearTheList() noexcept;
 
 
 protected:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    ListItem* getFirst() noexcept
-    {
-        ListItem* nextPtr;
-        if ( ( nextPtr = m_headPtr ) )
-        {
-            if ( !( m_headPtr = nextPtr->m_nextPtr_ ) )
-            {
-                m_tailPtr = nullptr;
-            }
-        }
-
-        ListItem::remove_( nextPtr );
-        return nextPtr;
-    }
+    ListItem* getFirst() noexcept;
 
     /// Removes the last item in the list.  Returns nullptr if the list is empty.
-    ListItem* getLast() noexcept
-    {
-        ListItem* lastPtr = m_tailPtr;
-        if ( lastPtr )
-        {
-            remove( *m_tailPtr );
-        }
-        return lastPtr;
-    }
+    ListItem* getLast() noexcept;
 
     /// Adds the item as the last item in the list
-    void putFirst( ListItem& item ) noexcept
-    {
-        if ( item.insert_( this ) )
-        {
-            if ( m_headPtr )
-            {
-                item.m_nextPtr_ = m_headPtr;
-                m_headPtr       = &item;
-            }
-            else
-            {
-                m_headPtr = m_tailPtr = &item;
-                item.m_nextPtr_       = nullptr;
-            }
-        }
-    }
-
+    void putFirst( ListItem& item ) noexcept;
+    
     /// Adds the item as the last item in the list
-    void putLast( ListItem& item ) noexcept
-    {
-        if ( item.insert_( this ) )
-        {
-            if ( m_headPtr )
-            {
-                m_tailPtr->m_nextPtr_ = &item;
-            }
-            else
-            {
-                m_headPtr = &item;
-            }
-            item.m_nextPtr_ = nullptr;
-            m_tailPtr       = &item;
-        }
-    }
+    void putLast( ListItem& item ) noexcept;
 
 protected:
     /** Return a pointer to the first item in the list.
@@ -164,87 +95,19 @@ protected:
         Returns true if the specified element was found and
         removed from the list, else false.
      */
-    bool remove( ListItem& item ) noexcept
-    {
-        if ( item.isInContainer_( this ) )
-        {
-            ListItem* nxtPtr;
-            ListItem* prvPtr;
-            for ( nxtPtr = first(), prvPtr = nullptr; nxtPtr;
-                  prvPtr = nxtPtr, nxtPtr = next( *nxtPtr ) )
-            {
-                if ( nxtPtr == &item )
-                {
-                    if ( prvPtr )
-                    {
-                        if ( !( prvPtr->m_nextPtr_ = nxtPtr->m_nextPtr_ ) )
-                        {
-                            m_tailPtr = prvPtr;
-                        }
-                    }
-                    else
-                    {
-                        if ( !( m_headPtr = nxtPtr->m_nextPtr_ ) )
-                        {
-                            m_tailPtr = nullptr;
-                        }
-                    }
-                    ListItem::remove_( &item );
-                    return true;
-                }
-            }
-            // Note: I should never get here (i have already checked that I am in list
-            // at the top of the method)
-        }
-        return false;
-    }
+    bool remove( ListItem& item ) noexcept;
 
     /** Insert the "item" ListItem into the list behind the "after" ListItem element.  
         If 'after' is nullptr, then 'item' is added to the head of the list.
      */
-    void insertAfter( ListItem& after, ListItem& item ) noexcept
-    {
-        if ( item.insert_( this ) )
-        {
-            item.m_nextPtr_ = after.m_nextPtr_;
-            if ( !item.m_nextPtr_ )
-            {
-                m_tailPtr = &item;
-            }
-            after.m_nextPtr_ = &item;
-        }
-    }
+    void insertAfter( ListItem& after, ListItem& item ) noexcept;
 
     /** Insert the "item" ListItem into the list ahead of the "before" ListItem element. 
         If 'before' is nullptr, then 'item' is added to the tail of the list.  
         Note: This insert operation is more expensive than insertAfter() because
         a traversal of the list is required to find the 'before' item
      */
-    void insertBefore( ListItem& before, ListItem& item ) noexcept
-    {
-        if ( item.insert_( this ) )
-        {
-            ListItem* nxtPtr;
-            ListItem* prvPtr;
-            for ( nxtPtr = first(), prvPtr = nullptr; nxtPtr;
-                  prvPtr = nxtPtr, nxtPtr = next( *nxtPtr ) )
-            {
-                if ( nxtPtr == &before )
-                {
-                    item.m_nextPtr_ = nxtPtr;
-                    if ( prvPtr )
-                    {
-                        prvPtr->m_nextPtr_ = &item;
-                    }
-                    else
-                    {
-                        m_headPtr = &item;
-                    }
-                    break;
-                }
-            }
-        }
-    }
+    void insertBefore( ListItem& before, ListItem& item ) noexcept;
 
     /// Returns true if the specified item is already in the list, else false.
     bool find( const ListItem& item ) const noexcept
@@ -257,14 +120,7 @@ protected:
 
         NOTE: If 'item' is not in the list, then a fatal error is generated.
      */
-    ListItem* next( const ListItem& item ) const noexcept
-    {
-        if ( item.validateNextOkay_( this ) )
-        {
-            return item.m_nextPtr_;
-        }
-        return nullptr;
-    }
+    ListItem* next( const ListItem& item ) const noexcept;
 
 protected:
     /// Points to the first item in the list.

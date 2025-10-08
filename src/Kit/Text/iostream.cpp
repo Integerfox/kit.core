@@ -9,8 +9,7 @@
 /** @file */
 
 #include "IString.h"
-#include <stdio.h>
-
+#include <string.h>
 
 
 ////////////////////////////////////

@@ -39,8 +39,7 @@ class Item
 {
 protected:
     /// Constructor
-    Item() noexcept
-        : m_inListPtr_( nullptr ) {}
+    Item() noexcept;
 
     /** Constructor used ONLY with the child class MapItem: -->special
         constructor to allow a Map to be statically allocated.  Only the Map
@@ -63,14 +62,7 @@ public:
     bool insert_( void* newContainerPtr ) noexcept;
 
     /// Returns 'true' if the instance is in the specified container.
-    inline bool isInContainer_( const void* containerPtr ) const noexcept
-    {
-        if ( m_inListPtr_ != containerPtr )
-        {
-            return false;
-        }
-        return true;
-    }
+    bool isInContainer_( const void* containerPtr ) const noexcept;
 
     /** Verifies that the item is in the list for use when the next() method is
         called.  If the item is not in the list, a fatal error is generated.
@@ -85,13 +77,7 @@ public:
     /** Helper method to do the proper 'clean-up' for the multiple-containers-error-trap
         when removing an item from a container.
      */
-    inline static void remove_( Item* itemPtr ) noexcept
-    {
-        if ( itemPtr )
-        {
-            itemPtr->m_inListPtr_ = nullptr;
-        }
-    }
+    static void remove_( Item* itemPtr ) noexcept;
 
 public:
     /** Debug field.  This member is used to trap when there is an attempt
