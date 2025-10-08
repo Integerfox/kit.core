@@ -17,6 +17,20 @@
 namespace Kit {
 namespace Container {
 
+Item::Item() noexcept
+    : m_inListPtr_( nullptr )
+{
+}
+
+bool Item::isInContainer_( const void* containerPtr ) const noexcept
+{
+    if ( m_inListPtr_ != containerPtr )
+    {
+        return false;
+    }
+    return true;
+}
+
 bool Item::insert_( void* newContainerPtr ) noexcept
 {
     if ( m_inListPtr_ )
@@ -35,6 +49,13 @@ bool Item::insert_( void* newContainerPtr ) noexcept
     }
 }
 
+void Item::remove_( Item* itemPtr ) noexcept
+{
+    if ( itemPtr )
+    {
+        itemPtr->m_inListPtr_ = nullptr;
+    }
+}
 bool Item::validateNextOkay_( const void* containerPtr ) const noexcept
 {
     if ( m_inListPtr_ != containerPtr )
