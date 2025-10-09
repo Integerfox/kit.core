@@ -10,7 +10,7 @@
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/Trace.h"
 #include <inttypes.h>

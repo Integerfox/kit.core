@@ -14,7 +14,7 @@
 #include "Kit/System/Trace.h"
 #include "Kit/System/PrivateStartup.h"
 #include "Kit/System/ElapsedTime.h"
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 
 #define SECT_ "_0test"
 ///

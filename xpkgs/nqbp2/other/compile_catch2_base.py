@@ -20,6 +20,13 @@
 #
 import os, sys, shutil
 
+# Get access to the other NQBP scripts
+NQBP_BIN = os.environ.get('NQBP_BIN')
+if ( NQBP_BIN == None ):
+    sys.exit( "ERROR: The environment variable NQBP_BIN is not set!" )
+sys.path.append( NQBP_BIN )
+from nqbplib import utils
+
 # Skip when doing a CI build (i.e. relying on the 'build-all' script to build the Catch2 library)
 NQBP_CI_BUILD = os.environ.get('NQBP_CI_BUILD')
 if ( NQBP_CI_BUILD != None ):
@@ -30,7 +37,7 @@ VERBOSE   = sys.argv[2]
 CLEAN     = sys.argv[1]
 PKG_ROOT  = sys.argv[4]
 VARIANT   = sys.argv[7]
-BUILDTYPE = sys.argv[9]
+BUILDTYPE = utils.standardize_dir_sep(sys.argv[9] )
 DBG       = '-g' if sys.argv[8] == "debug" else ""
 if VERBOSE == 'verbose':
     print("Arguments:", sys.argv)

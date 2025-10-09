@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Thread.h"
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 #include "Kit/System/PrivateStartup.h"
 #include "Kit/System/Shutdown.h"
 #include "Kit/System/Thread.h"

@@ -17,7 +17,7 @@
 #include "Kit/System/EventLoop.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/Thread.h"
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 #include <inttypes.h>
 
 #define SECT_ "_0test"
