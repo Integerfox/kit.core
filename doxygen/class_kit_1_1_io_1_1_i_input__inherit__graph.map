@@ -1,25 +1,29 @@
 <map id="Kit::Io::IInput" name="Kit::Io::IInput">
-<area shape="rect" id="Node000001" title="This partially abstract class defines a interface for operating on an input stream (example of a stre..." alt="" coords="161,128,267,153"/>
+<area shape="rect" id="Node000001" title="This partially abstract class defines a interface for operating on an input stream (example of a stre..." alt="" coords="161,140,267,165"/>
 <area shape="rect" id="Node000004" href="$class_kit_1_1_io_1_1_file_1_1_i_input.html" title="This abstract class defines the interface for a Random Access Input File." alt="" coords="347,79,483,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="279,122,362,101,363,107,280,127"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_io_1_1_i_input_output.html" title="This abstract class defines a interface for operating on an input&#45;output stream." alt="" coords="341,128,490,153"/>
-<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="281,138,341,138,341,143,281,143"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_io_1_1_stdio_1_1_input_delegate.html" title="This concrete class implements a Input stream using the underlying platform&#39;s native OS interface for..." alt="" coords="315,177,516,203"/>
-<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="278,154,315,163,362,175,360,180,314,169,277,159"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_io_1_1_i_close.html" title="This abstract class defines a close operation that is intended to be used Input and Output streams/fi..." alt="" coords="5,103,113,128"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,124,161,129,161,135,126,129"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_io_1_1_i_eos.html" title="This abstract class defines a isEos() operation that is intended to be used Input and Output streams." alt="" coords="12,152,107,177"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="119,153,161,146,161,151,120,158"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_io_1_1_file_1_1_i_input_output.html" title="This abstract class defines the interface for a Random Access Input Output File." alt="" coords="564,29,744,55"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="490,73,591,52,592,57,491,78"/>
-<area shape="rect" id="Node000008" href="$class_kit_1_1_io_1_1_file_1_1_input.html" title="This concrete class provides a platform independent implementation of a Kit::Io::File::Input object." alt="" coords="588,79,720,104"/>
-<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="497,89,588,89,588,94,497,94"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_io_1_1_file_1_1_input_output.html" title="This concrete class provides a platform independent implementation of an Kit::Io::File::IInputOutput ..." alt="" coords="792,5,968,31"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="757,28,792,25,792,30,758,34"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_io_1_1_file_1_1_null.html" title="This concrete class implements a NULL IInputOutput File that all of its input operations return &#39;End&#45;..." alt="" coords="817,55,943,80"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="758,51,817,58,817,63,757,56"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_io_1_1_null.html" title="This concrete class implements a NULL InputOutput stream &#45; that all of its input operations return &#39;E..." alt="" coords="607,128,701,153"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="504,138,606,138,606,143,504,143"/>
-<area shape="rect" id="Node000012" href="$class_kit_1_1_io_1_1_stdio_1_1_std_in.html" title="This concrete class represents the C&#45;library &#39;stdin&#39; stream." alt="" coords="583,177,725,203"/>
-<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="530,187,582,187,582,193,530,193"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="269,133,372,101,374,107,270,139"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_io_1_1_i_input_output.html" title="This abstract class defines a interface for operating on an input&#45;output stream." alt="" coords="341,140,490,165"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="281,150,341,150,341,155,281,155"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_io_1_1_stdio_1_1_input_delegate.html" title="This concrete class implements a Input stream using the underlying platform&#39;s native OS interface for..." alt="" coords="315,203,516,228"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="269,167,374,200,373,205,268,172"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_io_1_1_i_close.html" title="This abstract class defines a close operation that is intended to be used Input and Output streams/fi..." alt="" coords="5,115,113,140"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,136,161,141,161,147,126,141"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_io_1_1_i_eos.html" title="This abstract class defines a isEos() operation that is intended to be used Input and Output streams." alt="" coords="12,164,107,189"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="119,165,161,158,161,163,120,170"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_io_1_1_file_1_1_i_input_output.html" title="This abstract class defines the interface for a Random Access Input Output File." alt="" coords="574,29,754,55"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="493,73,599,52,600,57,494,79"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_io_1_1_file_1_1_input.html" title="This concrete class provides a platform independent implementation of a Kit::Io::File::Input object." alt="" coords="598,79,730,104"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="498,89,598,89,598,94,498,94"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_io_1_1_file_1_1_input_output.html" title="This concrete class provides a platform independent implementation of an Kit::Io::File::IInputOutput ..." alt="" coords="822,5,998,31"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="768,29,821,24,822,29,768,35"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_io_1_1_file_1_1_null.html" title="This concrete class implements a NULL IInputOutput File that all of its input operations return &#39;End&#45;..." alt="" coords="847,55,973,80"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="768,50,847,58,847,64,767,55"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_io_1_1_null.html" title="This concrete class implements a NULL InputOutput stream &#45; that all of its input operations return &#39;E..." alt="" coords="617,128,711,153"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="504,146,616,140,617,146,504,151"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_io_1_1_socket_1_1_i_input_output.html" title="This abstract class defines the interface for a BSD socket." alt="" coords="564,177,764,203"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="504,163,579,175,579,180,503,169"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_io_1_1_socket_1_1_input_output.html" title="This concrete class provides a platform independent &#39;standard&#39; implementation of an InputOutput strea..." alt="" coords="812,177,1008,203"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="778,187,812,187,812,193,778,193"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_io_1_1_stdio_1_1_std_in.html" title="This concrete class represents the C&#45;library &#39;stdin&#39; stream." alt="" coords="593,227,735,252"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="530,224,593,230,592,235,529,229"/>
 </map>

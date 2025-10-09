@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-22 12:08:30</td>
+            <td class="headerValue">2025-10-09 01:15:14</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">60.2&nbsp;%</td>
@@ -90,7 +90,7 @@
 <span id="L28"><span class="lineNum">      28</span>                 :             : protected:</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     /// Constructor initializes head and tail pointers.</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             :     SListBase() noexcept</span>
-<span id="L31"><span class="lineNum">      31</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">          25 :         : m_headPtr( nullptr ), m_tailPtr( nullptr ) {}</span></span>
+<span id="L31"><span class="lineNum">      31</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">          26 :         : m_headPtr( nullptr ), m_tailPtr( nullptr ) {}</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : </span>
 <span id="L33"><span class="lineNum">      33</span>                 :             :     /** This is a special constructor for when the list is</span>
 <span id="L34"><span class="lineNum">      34</span>                 :             :         statically declared (i.e. it is initialized as part of</span>
@@ -143,17 +143,17 @@
 <span id="L81"><span class="lineNum">      81</span>                 :             :     ListItem* getFirst() noexcept</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :     {</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :         ListItem* nextPtr;</span>
-<span id="L84"><span class="lineNum">      84</span>   [<span class="tlaGBC" title="Branch 0 was taken 3096 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 254 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1888 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 984 times"> + </span> :<span class="tlaGNC">        6305 :         if ( ( nextPtr = m_headPtr ) )</span></span>
-<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 11 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 6 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 19 times"> + </span><span class="tlaGBC" title="Branch 8 was taken 3 times"> + </span> 
-<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 9 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 10 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 13 was taken 9 times"> + </span> 
+<span id="L84"><span class="lineNum">      84</span>   [<span class="tlaGBC" title="Branch 0 was taken 4335 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 258 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1888 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 986 times"> + </span> :<span class="tlaGNC">        7556 :         if ( ( nextPtr = m_headPtr ) )</span></span>
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 6 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 21 times"> + </span><span class="tlaGBC" title="Branch 8 was taken 3 times"> + </span> 
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 9 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 10 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 13 was taken 10 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaUNC" title="Branch 16 was not taken"> - </span><span class="tlaGBC" title="Branch 17 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 18 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 19 was not taken"> - </span><span class="tlaGBC" title="Branch 20 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 21 was not taken"> - </span><span class="tlaGBC" title="Branch 22 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 23 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 24 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 25 was not taken"> - </span><span class="tlaGBC" title="Branch 26 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 27 was not taken"> - </span><span class="tlaUNC" title="Branch 28 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 29 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 30 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 31 was not taken"> - </span><span class="tlaUNC" title="Branch 32 was not taken"> - </span><span class="tlaGBC" title="Branch 33 was taken 1 time"> + </span> 
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 34 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 35 was taken 3 times"> + </span>]
 <span id="L85"><span class="lineNum">      85</span>                 :             :         {</span>
-<span id="L86"><span class="lineNum">      86</span>   [<span class="tlaGBC" title="Branch 0 was taken 56 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 979 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 980 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 905 times"> + </span> :<span class="tlaGNC">        2968 :             if ( !( m_headPtr = nextPtr-&gt;m_nextPtr_ ) )</span></span>
-<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaGBC" title="Branch 5 was taken 11 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 11 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 11 times"> + </span><span class="tlaGBC" title="Branch 8 was taken 2 times"> + </span> 
+<span id="L86"><span class="lineNum">      86</span>   [<span class="tlaGBC" title="Branch 0 was taken 61 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 979 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 980 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 905 times"> + </span> :<span class="tlaGNC">        2976 :             if ( !( m_headPtr = nextPtr-&gt;m_nextPtr_ ) )</span></span>
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaGBC" title="Branch 5 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 8 was taken 2 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 9 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaUNC" title="Branch 16 was not taken"> - </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaUNC" title="Branch 18 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 19 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 20 was not taken"> - </span><span class="tlaGBC" title="Branch 21 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 22 was not taken"> - </span><span class="tlaGBC" title="Branch 23 was taken 1 time"> + </span> 
@@ -161,7 +161,7 @@
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 29 was not taken"> - </span><span class="tlaUNC" title="Branch 30 was not taken"> - </span><span class="tlaGBC" title="Branch 31 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 32 was not taken"> - </span><span class="tlaUNC" title="Branch 33 was not taken"> - </span> 
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 34 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 35 was taken 2 times"> + </span>]
 <span id="L87"><span class="lineNum">      87</span>                 :             :             {</span>
-<span id="L88"><span class="lineNum">      88</span>                 :<span class="tlaGNC">        1030 :                 m_tailPtr = nullptr;</span></span>
+<span id="L88"><span class="lineNum">      88</span>                 :<span class="tlaGNC">        1035 :                 m_tailPtr = nullptr;</span></span>
 <span id="L89"><span class="lineNum">      89</span>                 :             :             }</span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :         }</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             : </span>
@@ -199,22 +199,22 @@
 <span id="L123"><span class="lineNum">     123</span>                 :<span class="tlaGNC">          12 :     }</span></span>
 <span id="L124"><span class="lineNum">     124</span>                 :             : </span>
 <span id="L125"><span class="lineNum">     125</span>                 :             :     /// Adds the item as the last item in the list</span>
-<span id="L126"><span class="lineNum">     126</span>                 :<span class="tlaGNC">        3027 :     void putLast( ListItem&amp; item ) noexcept</span></span>
+<span id="L126"><span class="lineNum">     126</span>                 :<span class="tlaGNC">        3040 :     void putLast( ListItem&amp; item ) noexcept</span></span>
 <span id="L127"><span class="lineNum">     127</span>                 :             :     {</span>
-<span id="L128"><span class="lineNum">     128</span>         [<span class="tlaGBC" title="Branch 0 was taken 3026 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">        3027 :         if ( item.insert_( this ) )</span></span>
+<span id="L128"><span class="lineNum">     128</span>         [<span class="tlaGBC" title="Branch 0 was taken 3039 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">        3040 :         if ( item.insert_( this ) )</span></span>
 <span id="L129"><span class="lineNum">     129</span>                 :             :         {</span>
-<span id="L130"><span class="lineNum">     130</span>         [<span class="tlaGBC" title="Branch 0 was taken 1951 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1075 times"> + </span>]:<span class="tlaGNC">        3026 :             if ( m_headPtr )</span></span>
+<span id="L130"><span class="lineNum">     130</span>         [<span class="tlaGBC" title="Branch 0 was taken 1957 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1082 times"> + </span>]:<span class="tlaGNC">        3039 :             if ( m_headPtr )</span></span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :             {</span>
-<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">        1951 :                 m_tailPtr-&gt;m_nextPtr_ = &amp;item;</span></span>
+<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">        1957 :                 m_tailPtr-&gt;m_nextPtr_ = &amp;item;</span></span>
 <span id="L133"><span class="lineNum">     133</span>                 :             :             }</span>
 <span id="L134"><span class="lineNum">     134</span>                 :             :             else</span>
 <span id="L135"><span class="lineNum">     135</span>                 :             :             {</span>
-<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">        1075 :                 m_headPtr = &amp;item;</span></span>
+<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">        1082 :                 m_headPtr = &amp;item;</span></span>
 <span id="L137"><span class="lineNum">     137</span>                 :             :             }</span>
-<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">        3026 :             item.m_nextPtr_ = nullptr;</span></span>
-<span id="L139"><span class="lineNum">     139</span>                 :<span class="tlaGNC">        3026 :             m_tailPtr       = &amp;item;</span></span>
+<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">        3039 :             item.m_nextPtr_ = nullptr;</span></span>
+<span id="L139"><span class="lineNum">     139</span>                 :<span class="tlaGNC">        3039 :             m_tailPtr       = &amp;item;</span></span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :         }</span>
-<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">        3027 :     }</span></span>
+<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">        3040 :     }</span></span>
 <span id="L142"><span class="lineNum">     142</span>                 :             : </span>
 <span id="L143"><span class="lineNum">     143</span>                 :             : protected:</span>
 <span id="L144"><span class="lineNum">     144</span>                 :             :     /** Return a pointer to the first item in the list.</span>
@@ -223,7 +223,7 @@
 <span id="L147"><span class="lineNum">     147</span>                 :             :      */</span>
 <span id="L148"><span class="lineNum">     148</span>                 :             :     ListItem* first() const noexcept</span>
 <span id="L149"><span class="lineNum">     149</span>                 :             :     {</span>
-<span id="L150"><span class="lineNum">     150</span>   [<span class="tlaGBC" title="Branch 0 was taken 94 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2168 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 48887 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">       51203 :         return m_headPtr;</span></span>
+<span id="L150"><span class="lineNum">     150</span>   [<span class="tlaGBC" title="Branch 0 was taken 97 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3406 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 48992 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">       52549 :         return m_headPtr;</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 3 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaGBC" title="Branch 16 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaGBC" title="Branch 18 was taken 3 times"> + </span> 
@@ -265,22 +265,22 @@
 <span id="L164"><span class="lineNum">     164</span>                 :             :         Returns true if the specified element was found and</span>
 <span id="L165"><span class="lineNum">     165</span>                 :             :         removed from the list, else false.</span>
 <span id="L166"><span class="lineNum">     166</span>                 :             :      */</span>
-<span id="L167"><span class="lineNum">     167</span>         [<span class="tlaGBC" title="Branch 0 was taken 47 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          48 :     bool remove( ListItem&amp; item ) noexcept</span></span>
+<span id="L167"><span class="lineNum">     167</span>         [<span class="tlaGBC" title="Branch 0 was taken 51 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          52 :     bool remove( ListItem&amp; item ) noexcept</span></span>
 <span id="L168"><span class="lineNum">     168</span>                 :             :     {</span>
 <span id="L169"><span class="lineNum">     169</span>                 :             :         if ( item.isInContainer_( this ) )</span>
 <span id="L170"><span class="lineNum">     170</span>                 :             :         {</span>
 <span id="L171"><span class="lineNum">     171</span>                 :             :             ListItem* nxtPtr;</span>
 <span id="L172"><span class="lineNum">     172</span>                 :             :             ListItem* prvPtr;</span>
-<span id="L173"><span class="lineNum">     173</span>         [<span class="tlaGBC" title="Branch 0 was taken 113 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         113 :             for ( nxtPtr = first(), prvPtr = nullptr; nxtPtr;</span></span>
+<span id="L173"><span class="lineNum">     173</span>         [<span class="tlaGBC" title="Branch 0 was taken 116 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         116 :             for ( nxtPtr = first(), prvPtr = nullptr; nxtPtr;</span></span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :                   prvPtr = nxtPtr, nxtPtr = next( *nxtPtr ) )</span>
 <span id="L175"><span class="lineNum">     175</span>                 :             :             {</span>
-<span id="L176"><span class="lineNum">     176</span>         [<span class="tlaGBC" title="Branch 0 was taken 47 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 66 times"> + </span>]:<span class="tlaGNC">         113 :                 if ( nxtPtr == &amp;item )</span></span>
+<span id="L176"><span class="lineNum">     176</span>         [<span class="tlaGBC" title="Branch 0 was taken 51 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 65 times"> + </span>]:<span class="tlaGNC">         116 :                 if ( nxtPtr == &amp;item )</span></span>
 <span id="L177"><span class="lineNum">     177</span>                 :             :                 {</span>
-<span id="L178"><span class="lineNum">     178</span>         [<span class="tlaGBC" title="Branch 0 was taken 43 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">          47 :                     if ( prvPtr )</span></span>
+<span id="L178"><span class="lineNum">     178</span>         [<span class="tlaGBC" title="Branch 0 was taken 47 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">          51 :                     if ( prvPtr )</span></span>
 <span id="L179"><span class="lineNum">     179</span>                 :             :                     {</span>
-<span id="L180"><span class="lineNum">     180</span>         [<span class="tlaGBC" title="Branch 0 was taken 32 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          43 :                         if ( !( prvPtr-&gt;m_nextPtr_ = nxtPtr-&gt;m_nextPtr_ ) )</span></span>
+<span id="L180"><span class="lineNum">     180</span>         [<span class="tlaGBC" title="Branch 0 was taken 29 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 18 times"> + </span>]:<span class="tlaGNC">          47 :                         if ( !( prvPtr-&gt;m_nextPtr_ = nxtPtr-&gt;m_nextPtr_ ) )</span></span>
 <span id="L181"><span class="lineNum">     181</span>                 :             :                         {</span>
-<span id="L182"><span class="lineNum">     182</span>                 :<span class="tlaGNC">          32 :                             m_tailPtr = prvPtr;</span></span>
+<span id="L182"><span class="lineNum">     182</span>                 :<span class="tlaGNC">          29 :                             m_tailPtr = prvPtr;</span></span>
 <span id="L183"><span class="lineNum">     183</span>                 :             :                         }</span>
 <span id="L184"><span class="lineNum">     184</span>                 :             :                     }</span>
 <span id="L185"><span class="lineNum">     185</span>                 :             :                     else</span>
@@ -291,7 +291,7 @@
 <span id="L190"><span class="lineNum">     190</span>                 :             :                         }</span>
 <span id="L191"><span class="lineNum">     191</span>                 :             :                     }</span>
 <span id="L192"><span class="lineNum">     192</span>                 :             :                     ListItem::remove_( &amp;item );</span>
-<span id="L193"><span class="lineNum">     193</span>                 :<span class="tlaGNC">          47 :                     return true;</span></span>
+<span id="L193"><span class="lineNum">     193</span>                 :<span class="tlaGNC">          51 :                     return true;</span></span>
 <span id="L194"><span class="lineNum">     194</span>                 :             :                 }</span>
 <span id="L195"><span class="lineNum">     195</span>                 :             :             }</span>
 <span id="L196"><span class="lineNum">     196</span>                 :             :             // Note: I should never get here (i have already checked that I am in list</span>
@@ -360,14 +360,14 @@
 <span id="L259"><span class="lineNum">     259</span>                 :             :      */</span>
 <span id="L260"><span class="lineNum">     260</span>                 :             :     ListItem* next( const ListItem&amp; item ) const noexcept</span>
 <span id="L261"><span class="lineNum">     261</span>                 :             :     {</span>
-<span id="L262"><span class="lineNum">     262</span>   [<span class="tlaGBC" title="Branch 0 was taken 116 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 103224 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">      103418 :         if ( item.validateNextOkay_( this ) )</span></span>
-<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 60 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
+<span id="L262"><span class="lineNum">     262</span>   [<span class="tlaGBC" title="Branch 0 was taken 116 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 96045 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">       96238 :         if ( item.validateNextOkay_( this ) )</span></span>
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 59 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaGBC" title="Branch 16 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaGBC" title="Branch 18 was taken 1 time"> + </span> 
 <span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 19 was not taken"> - </span><span class="tlaGBC" title="Branch 20 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 21 was not taken"> - </span><span class="tlaGBC" title="Branch 22 was taken 7 times"> + </span> 
 <span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 23 was not taken"> - </span>]
 <span id="L263"><span class="lineNum">     263</span>                 :             :         {</span>
-<span id="L264"><span class="lineNum">     264</span>   [<span class="tlaGBC" title="Branch 0 was taken 30 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 86 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 103223 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">      103398 :             return item.m_nextPtr_;</span></span>
+<span id="L264"><span class="lineNum">     264</span>   [<span class="tlaGBC" title="Branch 0 was taken 30 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 86 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 96044 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">       96218 :             return item.m_nextPtr_;</span></span>
 <span id="L265"><span class="lineNum">     265</span>                 :             :         }</span>
 <span id="L266"><span class="lineNum">     266</span>                 :             :         return nullptr;</span>
 <span id="L267"><span class="lineNum">     267</span>                 :             :     }</span>

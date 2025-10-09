@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-22 12:08:30</td>
+            <td class="headerValue">2025-10-09 01:15:14</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -101,11 +101,11 @@
 <span id="L39"><span class="lineNum">      39</span>                 :             :     bool run = true;</span>
 <span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">           2 :     while ( run )</span></span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     {</span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         503 :         run = waitAndProcessEvents();</span></span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         503 :         if ( run )</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         502 :         run = waitAndProcessEvents();</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         502 :         if ( run )</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :         {</span>
-<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">         501 :             bool atLeastOne = executeScheduler();</span></span>
-<span id="L46"><span class="lineNum">      46</span>         [<span class="tlaGBC" title="Branch 0 was taken 251 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 250 times"> + </span>]:<span class="tlaGNC">         501 :             if ( m_idleFunc )</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">         500 :             bool atLeastOne = executeScheduler();</span></span>
+<span id="L46"><span class="lineNum">      46</span>         [<span class="tlaGBC" title="Branch 0 was taken 250 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 250 times"> + </span>]:<span class="tlaGNC">         500 :             if ( m_idleFunc )</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :             {</span>
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         250 :                 ( m_idleFunc )( (m_nowFunc)(), atLeastOne );</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :             }</span>

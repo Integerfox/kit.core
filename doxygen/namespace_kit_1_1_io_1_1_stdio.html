@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 75-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 85-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,6 +46,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io::Stdio Namespace Reference</div></div>
 </div><!--header-->
@@ -57,6 +58,15 @@ $(function() {
 <div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_io_1_1_stdio.html" title="The Stdio namespace provides concrete classes for the C Library&#39;s &#39;stdin&#39;, &#39;stdout&#39;,...">Stdio</a> namespace provides concrete classes for the C Library's 'stdin', 'stdout', and 'stderr' input/output streams. </p>
 <p>The class definitions (i.e the header files) are platform independent so the Application can use them directly without incurring any platform specific dependencies. However, It is the Application's responsibility to build &amp; link the appropriate platform specific implementation of these classes. </p>
 </div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_kit_1_1_io_1_1_stdio_1_1_posix" id="r_namespace_kit_1_1_io_1_1_stdio_1_1_posix"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_posix.html">Posix</a></td></tr>
+<tr class="memdesc:namespace_kit_1_1_io_1_1_stdio_1_1_posix"><td class="mdescLeft">&#160;</td><td class="mdescRight">The '<a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_posix.html" title="The &#39;Posix&#39; namespace provides the Posix specific implementation for its parent namespace.">Posix</a>' namespace provides the <a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_posix.html" title="The &#39;Posix&#39; namespace provides the Posix specific implementation for its parent namespace.">Posix</a> specific implementation for its parent namespace. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_kit_1_1_io_1_1_stdio_1_1_win32" id="r_namespace_kit_1_1_io_1_1_stdio_1_1_win32"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_win32.html">Win32</a></td></tr>
+<tr class="memdesc:namespace_kit_1_1_io_1_1_stdio_1_1_win32"><td class="mdescLeft">&#160;</td><td class="mdescRight">The '<a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_win32.html" title="The &#39;Win32&#39; namespace provides the Windows specific implementation for its parent namespace.">Win32</a>' namespace provides the Windows specific implementation for its parent namespace. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_input_delegate.html">InputDelegate</a></td></tr>
@@ -64,9 +74,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_output_delegate.html">OutputDelegate</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class implements a Output stream using the underlying platform's native OS interface' sfor the C library's stdout and stderr streams.  <a href="class_kit_1_1_io_1_1_stdio_1_1_output_delegate.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_posix_i_o.html">PosixIO</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static class provides a collection of functions for operating on POSIX file descriptors.  <a href="class_kit_1_1_io_1_1_stdio_1_1_posix_i_o.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_std_err.html">StdErr</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class represents the C-library 'stderr' stream.  <a href="class_kit_1_1_io_1_1_stdio_1_1_std_err.html#details">More...</a><br /></td></tr>
@@ -77,14 +84,11 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_std_out.html">StdOut</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class represents the C-library 'stdout' stream.  <a href="class_kit_1_1_io_1_1_stdio_1_1_std_out.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_win32_i_o.html">Win32IO</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This static class provides a collection of functions for operating on Win32 handles.  <a href="class_kit_1_1_io_1_1_stdio_1_1_win32_i_o.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 22 2025 12:06:21 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Oct 9 2025 01:12:55 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
