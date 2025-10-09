@@ -10,7 +10,7 @@
 #include "Kit/System/Mutex.h"
 #include "Kit/System/Thread.h"
 #include "Kit/System/ElapsedTime.h"
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 #include "Kit/System/SimTick.h"
 #include "Kit/System/Private.h"
 #include "Kit/Text/Format.h"

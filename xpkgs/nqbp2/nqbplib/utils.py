@@ -616,14 +616,14 @@ def lowercase_the_drive_letter( path ):
     return path
 
 #-----------------------------------------------------------------------------
-def config_catch2( prjdir, build_dir_variant, libextension, user_config_inc_root='src/Kit/_testingsupport', preprocess_script_name = "build_catch2.py" ):
+def config_catch2( prjdir, build_dir_variant, libextension, user_config_inc_root='src/Kit/_testsupport', preprocess_script_name = "build_catch2.py" ):
     inc   = catch2_inc( user_config_inc_root )
     lib   = catch2_lib( build_dir_variant )
     NQBP_PRE_PROCESS_SCRIPT( preprocess_script_name )
     NQBP_PRE_PROCESS_SCRIPT_ARGS( build_dir_variant )
     return (inc, lib + '.' + libextension, extract_unit_test_src_dir(prjdir))
 
-def catch2_inc( user_config_inc_root = 'src/Kit/_testingsupport' ):
+def catch2_inc( user_config_inc_root = 'src/Kit/_testsupport' ):
     """ Returns the include paths for Catch2 """
     inc = standardize_dir_sep(user_config_inc_root)
     return f'-I{os.path.join( NQBP_XPKGS_ROOT(), "catch2", "src" )} -I{os.path.join( NQBP_PKG_ROOT(), inc )}'

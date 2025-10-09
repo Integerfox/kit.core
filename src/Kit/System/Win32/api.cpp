@@ -8,7 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 #include "Kit/System/Private.h"
 #include "Kit/System/PrivateStartup.h"
 #include "Windows.h"
