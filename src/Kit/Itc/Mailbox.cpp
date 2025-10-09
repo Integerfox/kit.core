@@ -13,11 +13,21 @@
 #include "Kit/System/GlobalLock.h"
 #include "Kit/System/SimTick.h"
 
+#include <type_traits>
+
+/// Compile time check for the EventQueue being configured 'correctly'
+static_assert( std::is_base_of<Kit::EventQueue::IMsgNotification, Kit::EventQueue::IQueue>::value,
+               "IQueue must inherit from IMsgNotification" );
+
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace Itc {
 
 ////////////////////////////////////////////////////////////////////////////////
+Mailbox::Mailbox( Kit::System::ISignable& myEventLoop ) noexcept
+    : m_eventLoop( myEventLoop )
+{
+}
 
 void Mailbox::post( IMessage& msg ) noexcept
 {
@@ -37,7 +47,6 @@ void Mailbox::postSync( IMessage& msg ) noexcept
     Kit::System::Thread::wait();
 }
 
-
 void Mailbox::processMessages() noexcept
 {
     // Get the next message
@@ -52,7 +61,6 @@ void Mailbox::processMessages() noexcept
     }
 }
 
-
 bool Mailbox::isPendingMessage() noexcept
 {
     // Get the next message
@@ -62,6 +70,6 @@ bool Mailbox::isPendingMessage() noexcept
     return msgPtr != nullptr;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

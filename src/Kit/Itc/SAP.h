@@ -11,13 +11,6 @@
 /** @file */
 
 #include "Kit/EventQueue/IQueue.h"
-#include <type_traits>
-
-
-/// Compile time check for the EventQueue being configured 'correctly'
-static_assert( std::is_base_of<Kit::EventQueue::IMsgNotification, Kit::EventQueue::IQueue>::value,
-               "IQueue must inherit from IMsgNotification" );
-
 
 ///
 namespace Kit {

@@ -12,12 +12,6 @@
 
 #include "Kit/EventQueue/IQueue.h"
 #include "Kit/Itc/IReturnHandler.h"
-#include <type_traits>
-
-
-/// Compile time check for the EventQueue being configured 'correctly'
-static_assert( std::is_base_of<Kit::EventQueue::IMsgNotification, Kit::EventQueue::IQueue>::value,
-               "IQueue must inherit from IMsgNotification" );
 
 
 ///
@@ -39,19 +33,11 @@ class AsyncReturnHandler : public IReturnHandler
 public:
     /** The constructor initializes the response mailbox and message references.
      */
-    AsyncReturnHandler( Kit::EventQueue::IQueue& clientEventQueue, IMessage& msg ) noexcept
-        : m_clientEventQueue( clientEventQueue )
-        , m_responseMsg( msg )
-    {
-    }
-
+    AsyncReturnHandler( Kit::EventQueue::IQueue& clientEventQueue, IMessage& msg ) noexcept;
 
 public:
     /// See Kit::Itc::IReturnHandler
-    void rts() noexcept override
-    {
-        m_clientEventQueue.post( m_responseMsg );
-    }
+    void rts() noexcept override;
 
 protected:
     /// Refers to the eventLoop/thread to which the response message will be posted.
