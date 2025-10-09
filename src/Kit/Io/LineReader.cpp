@@ -11,6 +11,7 @@
 #include "LineReader.h"
 #include "Kit/Text/FString.h"
 #include "Kit/System/Assert.h"
+#include <string.h>
 
 //------------------------------------------------------------------------------
 namespace Kit {

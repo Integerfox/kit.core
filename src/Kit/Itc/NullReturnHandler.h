@@ -24,15 +24,11 @@ class NullReturnHandler : public IReturnHandler
 {
 public:
     /// Constructor
-    NullReturnHandler() noexcept
-    {
-    }
+    NullReturnHandler() noexcept = default;
 
 public:
     /// See Kit::Itc::IReturnHandler
-    void rts() noexcept override
-    {
-    }
+    void rts() noexcept override;
 };
 
 
