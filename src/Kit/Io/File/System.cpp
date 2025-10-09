@@ -80,6 +80,84 @@ static bool copyHelper_( IInput& src, IOutput& dst )
 
 
 /////////////////////////////////////////////////////////////////////////////
+bool System::exists( const char* fsEntryName ) noexcept
+{
+    System::Info_T entryInfo;
+    if ( System::getInfo( fsEntryName, entryInfo ) )
+    {
+        return entryInfo.m_isFile || entryInfo.m_isDir;
+    }
+
+    return false;
+}
+
+ bool System::isFile( const char* fsEntryName ) noexcept
+{
+    System::Info_T entryInfo;
+    if ( System::getInfo( fsEntryName, entryInfo ) )
+    {
+        return entryInfo.m_isFile;
+    }
+
+    return false;
+}
+
+bool System::isDirectory( const char* fsEntryName ) noexcept
+{
+    System::Info_T entryInfo;
+    if ( System::getInfo( fsEntryName, entryInfo ) )
+    {
+        return entryInfo.m_isDir;
+    }
+
+    return false;
+}
+
+bool System::isReadable( const char* fsEntryName ) noexcept
+{
+    System::Info_T entryInfo;
+    if ( System::getInfo( fsEntryName, entryInfo ) )
+    {
+        return entryInfo.m_readable;
+    }
+
+    return false;
+}
+
+bool System::isWriteable( const char* fsEntryName ) noexcept
+{
+    System::Info_T entryInfo;
+    if ( System::getInfo( fsEntryName, entryInfo ) )
+    {
+        return entryInfo.m_writeable;
+    }
+
+    return false;
+}
+
+ByteCount_T System::size( const char* fsEntryName ) noexcept
+{
+    System::Info_T entryInfo;
+    if ( System::getInfo( fsEntryName, entryInfo ) )
+    {
+        return entryInfo.m_size;
+    }
+
+    return 0;
+}
+
+time_t System::timeModified( const char* fsEntryName ) noexcept
+{
+    System::Info_T entryInfo;
+    if ( System::getInfo( fsEntryName, entryInfo ) )
+    {
+        return entryInfo.m_mtime;
+    }
+
+    return -1;
+}
+
+/////////////////////////////////////////////////////////////////////////////
 const char* System::getNative( const char* fsEntryName ) noexcept
 {
     // Convert any/all directory separators -->Use Brute force to ensure I ALWAYS ended up with ALL native separators (i.e. handle mixed-separator cases)

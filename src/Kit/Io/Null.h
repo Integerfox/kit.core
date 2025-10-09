@@ -11,7 +11,6 @@
 /** @file */
 
 #include "Kit/Io/IInputOutput.h"
-#include "Kit/System/Assert.h"
 
 ///
 namespace Kit {
@@ -28,29 +27,17 @@ class Null : public IInputOutput
 {
 public:
     /// Constructor
-    Null()
-        : m_opened( true )
-    {
-    }
+    Null() noexcept;
 
 public:
     /// Pull in overloaded methods from base class
     using Kit::Io::IInputOutput::read;
 
     /// See Kit::Io::IInput
-    bool read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept override
-    {
-        KIT_SYSTEM_ASSERT( buffer != nullptr );
-
-        bytesRead = 0;
-        return false;
-    }
+    bool read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept override;
 
     /// See Kit::Io::IInput
-    bool available() noexcept override
-    {
-        return false;
-    }
+    bool available() noexcept override;
 
 
 public:
@@ -58,31 +45,17 @@ public:
     using Kit::Io::IInputOutput::write;
 
     /// See Kit::Io::IOutput
-    bool write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept override
-    {
-        KIT_SYSTEM_ASSERT( buffer != nullptr );
-
-        bytesWritten = maxBytes;
-        return m_opened;
-    }
+    bool write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept override;
 
     /// See Kit::Io::IOutput
-    void flush() noexcept override
-    {
-    }
+    void flush() noexcept override;
 
 public:
     /// See Kit::Io::IEos
-    bool isEos()  noexcept override
-    {
-        return !m_opened;
-    }
+    bool isEos()  noexcept override;
 
     /// See Kit::Io::IClose
-    void close() noexcept override
-    {
-        m_opened = false;
-    }
+    void close() noexcept override;
 
 protected:
     /// Track my opened/closed state
