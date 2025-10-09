@@ -14,6 +14,14 @@
 namespace Kit {
 namespace Container {
 
+////////////
+SListBase::SListBase() noexcept
+    : m_headPtr( nullptr )
+    , m_tailPtr( nullptr )
+{
+}
+
+////////////
 void SListBase::move( SListBase& dst ) noexcept
 {
     // clear the destination list
@@ -35,7 +43,6 @@ void SListBase::clearTheList() noexcept
         ;
     }
 }
-
 
 ListItem* SListBase::getFirst() noexcept
 {
@@ -179,6 +186,6 @@ ListItem* SListBase::next( const ListItem& item ) const noexcept
     return nullptr;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

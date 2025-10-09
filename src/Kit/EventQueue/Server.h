@@ -33,16 +33,11 @@ public:
         of the method's arguments.
      */
     Server( uint32_t                                        timeOutPeriodInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
-            Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList      = nullptr ) noexcept
-        : Kit::Itc::Mailbox( *(static_cast<Kit::System::ISignable*>(this)) )
-        , EventLoop( timeOutPeriodInMsec, eventFlagsList )
-    {
-    }
+            Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList      = nullptr ) noexcept;
 
 protected:
     /// See Kit::System::IRunnable
     void entry() noexcept override;
-
 };
 
 }  // end namespaces

@@ -39,7 +39,7 @@ protected:
 
 protected:
     /// Constructor
-    MapItem() noexcept { initialize( nullptr ); }
+    MapItem() noexcept;
 
     /** Constructor -->special constructor to allow a Map to be
         statically allocated.  Only the Sorted List itself should ever

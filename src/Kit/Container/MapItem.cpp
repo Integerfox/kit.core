@@ -14,6 +14,10 @@
 namespace Kit {
 namespace Container {
 
+MapItem::MapItem() noexcept
+{
+    initialize( nullptr );
+}
 
 void MapItem::initialize( MapItem* parent ) noexcept
 {

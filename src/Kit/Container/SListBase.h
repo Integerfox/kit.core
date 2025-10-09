@@ -27,8 +27,7 @@ class SListBase
 {
 protected:
     /// Constructor initializes head and tail pointers.
-    SListBase() noexcept
-        : m_headPtr( nullptr ), m_tailPtr( nullptr ) {}
+    SListBase() noexcept;
 
     /** This is a special constructor for when the list is
         statically declared (i.e. it is initialized as part of
