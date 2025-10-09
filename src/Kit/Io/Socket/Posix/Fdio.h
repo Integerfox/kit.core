@@ -12,16 +12,9 @@
 
 
 #include "Kit/Io/Types.h"
-#include "Kit/System/Assert.h"
-#include "Kit/System/Api.h"
-#include "Kit/Text/FString.h"
 #include <unistd.h>
-#include <sys/ioctl.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
-#include <string.h>
+#include <netinet/in.h>
 #include <netdb.h>
-
 
 ///
 namespace Kit {
@@ -46,15 +39,7 @@ public:
     /** Closes the file descriptor 'fd'. If 'fd' is already closed (i.e. INVALID_FD),
         the method is a NOP.  Upon a successful close, 'fd' is set to INVALID_FD.
      */
-    inline static void close( int& fd ) noexcept
-    {
-        if ( fd != INVALID_FD )
-        {
-            ::shutdown( fd, SHUT_RDWR );
-            ::close( fd );
-            fd = INVALID_FD;
-        }
-    }
+    static void close( int& fd ) noexcept;
 
 public:
     /** Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor
@@ -67,54 +52,13 @@ public:
 
         Returns true if successful; else false on error.
      */
-    static bool write( int fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
-    {
-        KIT_SYSTEM_ASSERT( buffer != nullptr );
-
-        // Throw an error if the socket had already been closed
-        if ( fd == INVALID_FD )
-        {
-            return false;
-        }
-
-        // Ignore write requests of ZERO bytes
-        if ( maxBytes == 0 )
-        {
-            bytesWritten = 0;
-            return true;
-        }
-
-        // perform the write
-        ByteCount_T result = send( fd, (char*)buffer, maxBytes, MSG_NOSIGNAL );
-        if ( result < 0 )
-        {
-            bytesWritten = 0;
-            eosFlag      = true;
-            return false;
-        }
-        if ( result == 0 )
-        {
-            bytesWritten = 0;
-            eosFlag      = true;
-            return false;
-        }
-        bytesWritten = result;
-        eosFlag      = false;
-        return true;
-    }
+    static bool write( int fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept;
 
     /// Flushes the file descriptor 'fd'
-    inline static void flush( int fd ) noexcept
-    {
-        // Do not know how to implement using only Posix  (jtt 2-14-2015)
-    }
+    static void flush( int fd ) noexcept;
 
-    /** Returns true if the file descriptor is in the open state
-     */
-    inline static bool isOpened( int fd ) noexcept
-    {
-        return fd != INVALID_FD;
-    }
+    /// Returns true if the file descriptor is in the open state
+    static bool isOpened( int fd ) noexcept;
 
 public:
     /** The method attempts to read up to 'numBytes' from the file descriptor.  The
@@ -127,62 +71,11 @@ public:
 
         Returns true if successful; else false on error.
      */
-
-    static bool read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
-    {
-        KIT_SYSTEM_ASSERT( buffer != nullptr );
-
-        // Throw an error if the socket had already been closed
-        if ( fd == INVALID_FD )
-        {
-            return false;
-        }
-
-        // Ignore read requests of ZERO bytes
-        if ( numBytes == 0 )
-        {
-            bytesRead = 0;
-            return true;
-        }
-
-        // perform the read
-        ByteCount_T result = recv( fd, (char*)buffer, numBytes, 0 );
-        if ( result < 0 )
-        {
-            bytesRead = 0;
-            eosFlag   = true;
-            return false;
-        }
-
-        // Connection closed gracefully
-        if ( result == 0 )
-        {
-            bytesRead = 0;
-            eosFlag   = true;
-            return false;
-        }
-
-        // Success!
-        bytesRead = result;
-        eosFlag   = false;
-        return true;
-    }
+    static bool read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept;
 
 
-    /** Returns true if there is data available to be read from the file descriptor
-     */
-    inline static bool available( int fd ) noexcept
-    {
-        // Trap that the stream has been CLOSED!
-        if ( fd == INVALID_FD )
-        {
-            return false;
-        }
-
-        int nbytes;
-        ioctl( fd, FIONREAD, &nbytes );
-        return nbytes > 0;
-    }
+    /// Returns true if there is data available to be read from the file descriptor
+    static bool available( int fd ) noexcept;
 
 public:
     /** Creates the "listening" socket.  It will attempt N times to binding the
@@ -191,75 +84,19 @@ public:
      */
     static int createListeningSocket( int      port,
                                       unsigned numRetries,
-                                      uint32_t delayBetweenRetriesMs ) noexcept
-    {
-        struct sockaddr_in local;
-        int                one = 1;
-        int                result;
-
-        // Create the Socket to listen with
-        int fd = socket( AF_INET, SOCK_STREAM, 0 );
-        if ( fd < 0 )
-        {
-            return fd;
-        }
-
-        // Set Options on the socket
-        setsockopt( fd, SOL_SOCKET, SO_REUSEADDR, &one, sizeof( one ) );
-
-        // Set the "address" of the socket
-        unsigned retry = numRetries;
-        while ( retry )
-        {
-            memset( &local, 0, sizeof( local ) );
-            local.sin_family      = AF_INET;
-            local.sin_addr.s_addr = htonl( INADDR_ANY );
-            local.sin_port        = htons( port );
-            if ( ( result = bind( fd, (struct sockaddr*)&local, sizeof( local ) ) ) >= 0 )
-            {
-                break;
-            }
-
-            // Delay between retry attempts
-            Kit::System::sleep( delayBetweenRetriesMs );
-            if ( --retry == 0 )
-            {
-                return result;
-            }
-        }
-
-        // Create a queue to hold connection requests
-        if ( ( result = ::listen( fd, SOMAXCONN ) ) < 0 )
-        {
-            close( fd );
-            return result;
-        }
-
-        // Success!
-        return fd;
-    }
+                                      uint32_t delayBetweenRetriesMs ) noexcept;
 
     /** This method is to accept an incoming connection request.  Returns
         a valid file descriptor for the accepted connection, or < 0 if an error
         occurred.  When successful, the 'client_addr' structure is populated
         with information about the remote Host.
      */
-    inline static int acceptConnection( int listeningFd, struct sockaddr_in& client_addr ) noexcept
-    {
-        // Wait on the 'accept'
-        socklen_t client_len = sizeof( client_addr );
-        return accept( listeningFd, (struct sockaddr*)&client_addr, &client_len );
-    }
+    static int acceptConnection( int listeningFd, struct sockaddr_in& client_addr ) noexcept;
 
     /** This method enables the SO_KEEPALIVE option on the specified socket.
         Returns >=0 if successful, else on error < 0 is returned
      */
-    inline static int enableKeepAlive( int fd ) noexcept
-    {
-        int bOptVal = 1;
-        int bOptLen = sizeof( int );
-        return setsockopt( fd, SOL_SOCKET, SO_KEEPALIVE, (char*)&bOptVal, bOptLen );
-    }
+    static int enableKeepAlive( int fd ) noexcept;
 
 public:
     /** This resolved the specific network address string and port number (IPv4
@@ -271,32 +108,17 @@ public:
         is required to freeAddresses() method to free the memory associated
         with the 'results' argument.
      */
-    inline static bool resolveAddress( const char* remoteHostName, int portNumToConnectTo, struct addrinfo*& results ) noexcept
-    {
-        Kit::Text::FString<5> port( portNumToConnectTo );
-        struct addrinfo       hints;
-        memset( &hints, 0, sizeof( hints ) );
-        hints.ai_family   = AF_UNSPEC;
-        hints.ai_socktype = SOCK_STREAM;
-        hints.ai_protocol = IPPROTO_TCP;
-        return getaddrinfo( remoteHostName, port, &hints, &results ) == 0;
-    }
+    static bool resolveAddress( const char* remoteHostName, int portNumToConnectTo, struct addrinfo*& results ) noexcept;
 
     /** This method frees the memory associated with the 'results' argument
         that was populated by a previous call to the resolveAddress() method.
      */
-    inline static void freeAddresses( struct addrinfo* results ) noexcept
-    {
-        freeaddrinfo( results );
-    }
+    static void freeAddresses( struct addrinfo* results ) noexcept;
 
     /** Create a file descriptor for the specified socket address info.
         Returns a valid file descriptor if successful, else < 0 is returned.
      */
-    inline static int createSocket( struct addrinfo* addr ) noexcept
-    {
-        return socket( addr->ai_family, addr->ai_socktype, addr->ai_protocol );
-    }
+    static int createSocket( struct addrinfo* addr ) noexcept;
 };
 
 }  // end namespaces

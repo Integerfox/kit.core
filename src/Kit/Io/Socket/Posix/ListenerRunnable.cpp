@@ -12,6 +12,9 @@
 #include "Kit/Io/Socket/ListenerRunnable.h"
 #include "Kit/System/Trace.h"
 #include <cerrno>
+#include <cstring>
+#include <arpa/inet.h>
+
 
 #define SECT_ "Cpl::Io::Socket::Posix"
 
