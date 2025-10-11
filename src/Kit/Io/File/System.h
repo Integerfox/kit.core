@@ -15,8 +15,6 @@
 #include "kit_config.h"
 #include "Kit/Io/Types.h"
 #include "Kit/Text/FString.h"
-#include "Kit/Type/TraverserStatus.h"
-
 #include <time.h>
 
 /** Defer the HAL type to the platform */
@@ -80,93 +78,29 @@ public:
     /** Returns true if the FS Entry exists physically exists in the OS's file
         system.
      */
-    inline static bool exists( const char* fsEntryName ) noexcept
-    {
-        System::Info_T entryInfo;
-        if ( System::getInfo( fsEntryName, entryInfo ) )
-        {
-            return entryInfo.m_isFile || entryInfo.m_isDir;
-        }
-
-        return false;
-    }
+    static bool exists( const char* fsEntryName ) noexcept;
 
     /// Returns true if the FS Entry is a file.
-    inline static bool isFile( const char* fsEntryName ) noexcept
-    {
-        System::Info_T entryInfo;
-        if ( System::getInfo( fsEntryName, entryInfo ) )
-        {
-            return entryInfo.m_isFile;
-        }
-
-        return false;
-    }
+    static bool isFile( const char* fsEntryName ) noexcept;
 
     /// Returns true if the FS Entry is a directory
-    static bool isDirectory( const char* fsEntryName ) noexcept
-    {
-        System::Info_T entryInfo;
-        if ( System::getInfo( fsEntryName, entryInfo ) )
-        {
-            return entryInfo.m_isDir;
-        }
-
-        return false;
-    }
+    static bool isDirectory( const char* fsEntryName ) noexcept;
 
     /// Return true if the user has read permission for the file system entry
-    static bool isReadable( const char* fsEntryName ) noexcept
-    {
-        System::Info_T entryInfo;
-        if ( System::getInfo( fsEntryName, entryInfo ) )
-        {
-            return entryInfo.m_readable;
-        }
-
-        return false;
-    }
+    static bool isReadable( const char* fsEntryName ) noexcept;
 
     /// Return true if the user has write permission for the file system entry
-    static bool isWriteable( const char* fsEntryName ) noexcept
-    {
-        System::Info_T entryInfo;
-        if ( System::getInfo( fsEntryName, entryInfo ) )
-        {
-            return entryInfo.m_writeable;
-        }
-
-        return false;
-    }
+    static bool isWriteable( const char* fsEntryName ) noexcept;
 
     /** Returns the size, in bytes, of the file.  If the File Entry is not
         a file or an error occurs, then 0 is returned.
      */
-    static ByteCount_T size( const char* fsEntryName ) noexcept
-    {
-        System::Info_T entryInfo;
-        if ( System::getInfo( fsEntryName, entryInfo ) )
-        {
-            return entryInfo.m_size;
-        }
-
-        return 0;
-    }
+    static ByteCount_T size( const char* fsEntryName ) noexcept;
 
     /** Returns the time/date the file entry was last modified. If an error
         occurred, then  ((time_t)-1) is returned.
      */
-    static time_t timeModified( const char* fsEntryName ) noexcept
-    {
-        System::Info_T entryInfo;
-        if ( System::getInfo( fsEntryName, entryInfo ) )
-        {
-            return entryInfo.m_mtime;
-        }
-
-        return -1;
-    }
-
+    static time_t timeModified( const char* fsEntryName ) noexcept;
 
 public:
     /// This data structure defines status attributes for a file system entry
@@ -317,74 +251,74 @@ public:
     /** Extracts the drive letter from the complete name. The drive letter
         will NOT contain the drive separator character.
      */
-    static inline void splitDrive( const char*         fsEntryName,
-                                   Kit::Text::IString& drive,
-                                   char                driveSeparator = ':' ) noexcept
+    static void splitDrive( const char*         fsEntryName,
+                            Kit::Text::IString& drive,
+                            char                driveSeparator = ':' ) noexcept
     {
         split( fsEntryName, nullptr, &drive, nullptr, nullptr, nullptr, nullptr, dirSep, '.', driveSeparator );
     }
 
 
     /// Extracts the full path (drive+path) from the complete name.
-    static inline void splitFullpath( const char*         fsEntryName,
-                                      Kit::Text::IString& fullpath,
-                                      char                dirSeparator       = dirSep,
-                                      char                extensionSeparator = '.',
-                                      char                driveSeparator     = ':' ) noexcept
+    static void splitFullpath( const char*         fsEntryName,
+                               Kit::Text::IString& fullpath,
+                               char                dirSeparator       = dirSep,
+                               char                extensionSeparator = '.',
+                               char                driveSeparator     = ':' ) noexcept
     {
         split( fsEntryName, &fullpath, nullptr, nullptr, nullptr, nullptr, nullptr, dirSeparator, extensionSeparator, driveSeparator );
     }
 
     /// Extracts the path (no drive) from the complete name.
-    static inline void splitPath( const char*         fsEntryName,
-                                  Kit::Text::IString& path,
-                                  char                dirSeparator       = dirSep,
-                                  char                extensionSeparator = '.',
-                                  char                driveSeparator     = ':' ) noexcept
+    static void splitPath( const char*         fsEntryName,
+                           Kit::Text::IString& path,
+                           char                dirSeparator       = dirSep,
+                           char                extensionSeparator = '.',
+                           char                driveSeparator     = ':' ) noexcept
     {
         split( fsEntryName, nullptr, nullptr, &path, nullptr, nullptr, nullptr, dirSeparator, extensionSeparator, driveSeparator );
     }
 
 
     /// Extracts the full file name (name+extension) from the complete name.
-    static inline void splitFullname( const char*         fsEntryName,
-                                      Kit::Text::IString& fullname,
-                                      char                dirSeparator       = dirSep,
-                                      char                extensionSeparator = '.',
-                                      char                driveSeparator     = ':' ) noexcept
+    static void splitFullname( const char*         fsEntryName,
+                               Kit::Text::IString& fullname,
+                               char                dirSeparator       = dirSep,
+                               char                extensionSeparator = '.',
+                               char                driveSeparator     = ':' ) noexcept
     {
         split( fsEntryName, nullptr, nullptr, nullptr, &fullname, nullptr, nullptr, dirSeparator, extensionSeparator, driveSeparator );
     }
 
     /// Extracts the file name from the complete name.
-    static inline void splitName( const char*         fsEntryName,
-                                  Kit::Text::IString& name,
-                                  char                dirSeparator       = dirSep,
-                                  char                extensionSeparator = '.',
-                                  char                driveSeparator     = ':' ) noexcept
+    static void splitName( const char*         fsEntryName,
+                           Kit::Text::IString& name,
+                           char                dirSeparator       = dirSep,
+                           char                extensionSeparator = '.',
+                           char                driveSeparator     = ':' ) noexcept
     {
         split( fsEntryName, nullptr, nullptr, nullptr, nullptr, &name, 0, dirSeparator, extensionSeparator, driveSeparator );
     }
 
 
     /// Extracts the file extension from the complete name.
-    static inline void splitExtension( const char*         fsEntryName,
-                                       Kit::Text::IString& extension,
-                                       char                dirSeparator       = dirSep,
-                                       char                extensionSeparator = '.',
-                                       char                driveSeparator     = ':' ) noexcept
+    static void splitExtension( const char*         fsEntryName,
+                                Kit::Text::IString& extension,
+                                char                dirSeparator       = dirSep,
+                                char                extensionSeparator = '.',
+                                char                driveSeparator     = ':' ) noexcept
     {
         split( fsEntryName, nullptr, nullptr, nullptr, nullptr, nullptr, &extension, dirSeparator, extensionSeparator, driveSeparator );
     }
 
 
     /// Extracts the full path and name from the complete name.
-    static inline void splitFullpathFullName( const char*         fsEntryName,
-                                              Kit::Text::IString& fullpath,
-                                              Kit::Text::IString& fullname,
-                                              char                dirSeparator       = dirSep,
-                                              char                extensionSeparator = '.',
-                                              char                driveSeparator     = ':' ) noexcept
+    static void splitFullpathFullName( const char*         fsEntryName,
+                                       Kit::Text::IString& fullpath,
+                                       Kit::Text::IString& fullname,
+                                       char                dirSeparator       = dirSep,
+                                       char                extensionSeparator = '.',
+                                       char                driveSeparator     = ':' ) noexcept
     {
         split( fsEntryName, &fullpath, nullptr, nullptr, &fullname, nullptr, nullptr, dirSeparator, extensionSeparator, driveSeparator );
     }

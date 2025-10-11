@@ -8,15 +8,10 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file
+/** @file */
 
 
-*/
-
-
-#include <conio.h>
 #include "Kit/Io/Types.h"
-#include "Kit/System/Assert.h"
 
 ///
 namespace Kit {
@@ -27,21 +22,7 @@ namespace Stdio {
 ///
 namespace Win32 {
 
-/** Enable/disables the work-around for STDIN (see comments on availableStdin()
-    method).
-    NOTE: The hack is defaulted OFF.  This is because any unit tests that use
-          STDIN (and there are several) uses STDIN as a piped stream not as
-          a live console.
- */
-#ifdef USE_KIT_IO_STDIO_WIN32_STDIN_CONSOLE_HACK
-#define ISAVAILBLE( fd ) return _kbhit()
-#else
-#define ISAVAILBLE( fd )                           \
-    DWORD signaled = WaitForSingleObject( fd, 0 ); \
-    return signaled == WAIT_OBJECT_0
-#endif
 
-//////////////////////
 /** This static class provides a collection of functions for operating on Win32 handles.
  */
 class Fdio
@@ -57,63 +38,19 @@ public:
 
         Returns true if successful; else false on error. Note: .
      */
-    static bool write( HANDLE fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
-    {
-        KIT_SYSTEM_ASSERT( buffer != nullptr );
-
-        // Trap that the stream has been CLOSED!
-        if ( fd == INVALID_HANDLE_VALUE )
-        {
-            return false;
-        }
-
-        // Ignore write requests of ZERO bytes
-        if ( maxBytes == 0 )
-        {
-            bytesWritten = 0;
-            return true;
-        }
-
-        // perform the write
-        unsigned long work;
-        BOOL          result = WriteFile( fd, buffer, maxBytes, &work, 0 );
-        bytesWritten         = static_cast<ByteCount_T>( work );
-        DWORD lastError      = GetLastError();
-        eosFlag              = ( result != 0 || bytesWritten > 0 )                                                    ? false
-                               : lastError == ERROR_HANDLE_EOF || lastError == ERROR_BROKEN_PIPE || bytesWritten == 0 ? true
-                                                                                                                      : false;
-        return result != 0 && bytesWritten > 0;
-    }
+    static bool write( HANDLE fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept;
 
     /// Flushes the file descriptor 'fd'
-    static void flush( HANDLE fd ) noexcept
-    {
-        // Ignore if the stream has been CLOSED!
-        if ( fd != INVALID_HANDLE_VALUE )
-        {
-            FlushFileBuffers( fd );
-        }
-    }
+    static void flush( HANDLE fd ) noexcept;
 
     /** Returns true if the file descriptor is in the open state
      */
-    static bool isOpened( HANDLE fd ) noexcept
-    {
-        return fd != INVALID_HANDLE_VALUE;
-    }
+    static bool isOpened( HANDLE fd ) noexcept;
 
     /** Closes the file descriptor 'fd'. If 'fd' is already closed (i.e. INVALID_HANDLE_VALUE),
         the method is a NOP.  Upon a successful close, 'fd' is set to INVALID_HANDLE_VALUE.
      */
-    static void close( HANDLE& fd ) noexcept
-    {
-        if ( fd != INVALID_HANDLE_VALUE )
-        {
-            CloseHandle( fd );
-            fd = INVALID_HANDLE_VALUE;
-        }
-    }
-
+    static void close( HANDLE& fd ) noexcept;
 
 public:
     /** The method attempts to read up to 'numBytes' from the file descriptor.  The
@@ -126,34 +63,7 @@ public:
 
         Returns true if successful; else false on error.
      */
-    static bool read( HANDLE fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
-    {
-        KIT_SYSTEM_ASSERT( buffer != nullptr );
-
-        // Trap that the stream has been CLOSED!
-        if ( fd == INVALID_HANDLE_VALUE )
-        {
-            return false;
-        }
-
-        // Ignore read requests of ZERO bytes
-        if ( numBytes == 0 )
-        {
-            bytesRead = 0;
-            return true;
-        }
-
-        // perform the read
-        unsigned long work;
-        BOOL          result = ReadFile( fd, buffer, numBytes, &work, 0 );
-        bytesRead            = static_cast<ByteCount_T>( work );
-        DWORD lastError      = GetLastError();
-        eosFlag              = ( result != 0 && bytesRead > 0 )                                                    ? false
-                               : lastError == ERROR_HANDLE_EOF || lastError == ERROR_BROKEN_PIPE || bytesRead == 0 ? true
-                                                                                                                   : false;
-        return result != 0 && bytesRead > 0;
-    }
-
+    static bool read( HANDLE fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept;
 
     /** Returns true if there is data available to be read from STDIN
 
@@ -164,33 +74,18 @@ public:
         can/will return false positive (that data is available) when in fact the
         ReadFile() call will block.
 
-        AND to make matters worse - the console hack ONLY WORKS where is a 'live'
-        terminal window, i.e. when the terminal's stdin is piped from a file the
-        hack DOES NOT WORK! Not a very good solution :(, but it solved my
-        immediate needs.
+        I have a partial work-around/hack for this problem. However, the hack
+        ONLY WORKS where is a 'live' terminal window, i.e. when the terminal's
+        stdin is piped from a file the hack DOES NOT WORK! Not a very good
+        solution :(, but it solved my immediate needs.
+
+        To enable the work-around define the following in kit_config.h: 
+        USE_KIT_IO_STDIO_WIN32_STDIN_CONSOLE_HACK
      */
-    static bool availableStdin( HANDLE fd ) noexcept
-    {
-        // Trap that the stream has been CLOSED!
-        if ( fd == INVALID_HANDLE_VALUE )
-        {
-            return false;
-        }
-        ISAVAILBLE( fd );
-    }
+    static bool availableStdin( HANDLE fd ) noexcept;
 
     /// Returns true if there is data available to be read from the file descriptor
-    static bool available( HANDLE fd ) noexcept
-    {
-        // Trap that the stream has been CLOSED!
-        if ( fd == INVALID_HANDLE_VALUE )
-        {
-            return false;
-        }
-
-        DWORD signaled = WaitForSingleObject( fd, 0 );
-        return signaled == WAIT_OBJECT_0;
-    }
+    static bool available( HANDLE fd ) noexcept;
 };
 
 }  // end namespaces

@@ -17,6 +17,14 @@ namespace EventQueue {
 
 
 /////////////////////
+Server::Server( uint32_t                                        timeOutPeriodInMsec,
+                Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList ) noexcept
+    : Kit::Itc::Mailbox( *( static_cast<Kit::System::ISignable*>( this ) ) )
+    , EventLoop( timeOutPeriodInMsec, eventFlagsList )
+{
+}
+
+/////////////////////
 void Server::entry() noexcept
 {
     startEventLoop();

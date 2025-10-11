@@ -36,18 +36,11 @@ public:
     /** The constructor initializes the handler with a reference to the
         thread semaphore of the current thread.
      */
-    SyncReturnHandler( Kit::System::ISignable& clientSemaphore = Kit::System::Thread::getCurrent() ) noexcept
-        : m_waiter( clientSemaphore)
-    {
-    }
-
+    SyncReturnHandler( Kit::System::ISignable& clientSemaphore = Kit::System::Thread::getCurrent() ) noexcept;
 
 public:
     /// See ReturnHandler
-    void rts() noexcept override
-    {
-        m_waiter.signal();
-    }
+    void rts() noexcept override;
 
 protected:
     /** Reference to the client thread's thread semaphore which is used

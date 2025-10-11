@@ -11,7 +11,6 @@
 /** @file */
 
 #include "Kit/Text/FStringBase.h"
-#include <string.h>
 
 ///
 namespace Kit {

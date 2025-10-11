@@ -79,7 +79,6 @@ public:
     /// See Kit::Io::File::IPosition
     bool setToEof() noexcept override;
 
-
 protected:
     /// Track my opened/closed state
     bool m_opened;

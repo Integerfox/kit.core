@@ -36,7 +36,7 @@ public:
         relinquishes the ownership of the message from the server (which invokes
         the operation) to the client.
      */
-    inline void returnToSender() noexcept
+    void returnToSender() noexcept
     {
         m_rh.rts();
     }

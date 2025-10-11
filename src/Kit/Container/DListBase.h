@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Container/Item.h"
+#include "Kit/Container/ListItem.h"
 
 ///
 namespace Kit {
@@ -27,8 +27,7 @@ class DListBase
 {
 protected:
     /// Constructor initializes head and tail pointers.
-    DListBase() noexcept
-        : m_headPtr( nullptr ), m_tailPtr( nullptr ) {}
+    DListBase() noexcept;
 
     /** This is a special constructor for when the list is
         statically declared (i.e. it is initialized as part of
@@ -52,92 +51,23 @@ protected:
 
 protected:
     /// Moves the content of the this queue to the specified queue.
-    void move( DListBase& dst ) noexcept
-    {
-        // clear the destination list
-        dst.clearTheList();
-
-        // Copy each item (so the debug info is correct)
-        ExtendedListItem* nextPtr;
-        while ( ( nextPtr = getFirst() ) )
-        {
-            dst.putLast( *nextPtr );
-        }
-    }
+    void move( DListBase& dst ) noexcept;
 
     /// Empties the list.  All references to the item(s) in the list are lost.
-    void clearTheList() noexcept
-    {
-        // Drain list so the debug traps work correctly
-        while ( getFirst() )
-        {
-            ;
-        }
-    }
-
+    void clearTheList() noexcept;
 
 protected:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    ExtendedListItem* getFirst() noexcept
-    {
-        ExtendedListItem* firstPtr = m_headPtr;
-        if ( firstPtr )
-        {
-            remove( *firstPtr );
-        }
-        return firstPtr;
-    }
+    ExtendedListItem* getFirst() noexcept;
 
     /// Removes the last item in the list.  Returns nullptr if the list is empty.
-    ExtendedListItem* getLast() noexcept
-    {
-        ExtendedListItem* lastPtr = m_tailPtr;
-        if ( lastPtr )
-        {
-            remove( *lastPtr );
-        }
-        return lastPtr;
-    }
+    ExtendedListItem* getLast() noexcept;
+    
+    /// Adds the 'item' as the last item in the list
+    void putFirst( ExtendedListItem& item ) noexcept;
 
     /// Adds the 'item' as the last item in the list
-    void putFirst( ExtendedListItem& item ) noexcept
-    {
-        if ( item.insert_( this ) )
-        {
-            if ( m_headPtr )
-            {
-                item.m_nextPtr_       = m_headPtr;
-                m_headPtr->m_prevPtr_ = &item;
-                m_headPtr             = &item;
-            }
-            else
-            {
-                m_headPtr = m_tailPtr = &item;
-                item.m_nextPtr_       = 0;
-            }
-            item.m_prevPtr_ = 0;
-        }
-    }
-
-    /// Adds the 'item' as the last item in the list
-    void putLast( ExtendedListItem& item ) noexcept
-    {
-        if ( item.insert_( this ) )
-        {
-            if ( m_headPtr )
-            {
-                m_tailPtr->m_nextPtr_ = &item;
-                item.m_prevPtr_       = m_tailPtr;
-            }
-            else
-            {
-                m_headPtr       = &item;
-                item.m_prevPtr_ = 0;
-            }
-            item.m_nextPtr_ = 0;
-            m_tailPtr       = &item;
-        }
-    }
+    void putLast( ExtendedListItem& item ) noexcept;
 
 protected:
     /** Return a pointer to the first item in the list. The returned item 
@@ -160,83 +90,17 @@ protected:
     /** Remove the specified 'item' element from the list. Returns true if the 
         specified element was found and removed from the list, else false.
      */
-    bool remove( ExtendedListItem& item ) noexcept
-    {
-        if ( item.isInContainer_( this ) )
-        {
-            ExtendedListItem* prvPtr = item.m_prevPtr_;
-            ExtendedListItem* nxtPtr = static_cast<ExtendedListItem*>(item.m_nextPtr_);
-            if ( prvPtr )
-            {
-                if ( !( prvPtr->m_nextPtr_ = nxtPtr ) )
-                {
-                    m_tailPtr = prvPtr;  // Case: Remove tail object
-                }
-                else
-                {
-                    nxtPtr->m_prevPtr_ = prvPtr;  // Case: Remove intermediate object
-                }
-            }
-            else
-            {
-                if ( !( m_headPtr = nxtPtr ) )
-                {
-                    m_tailPtr = 0;  // Case: Remove last object
-                }
-                else
-                {
-                    nxtPtr->m_prevPtr_ = 0;  // Case: Remove Head object
-                }
-            }
-
-            Item::remove_( &item );
-            return true;
-        }
-
-        return false;
-    }
+    bool remove( ExtendedListItem& item ) noexcept;
 
     /** Insert the "item" into the list behind the "after" element.  If 'after'
         is nullptr, then 'item' is added to the head of the list.
      */
-    void insertAfter( ExtendedListItem& after, ExtendedListItem& item ) noexcept
-    {
-        if ( item.insert_( this ) )
-        {
-            ExtendedListItem* nxtPtr = static_cast<ExtendedListItem*>(item.m_nextPtr_ = after.m_nextPtr_);
-            item.m_prevPtr_      = &after;
-            after.m_nextPtr_     = &item;
-            if ( !nxtPtr )
-            {
-                m_tailPtr = &item;
-            }
-            else
-            {
-                nxtPtr->m_prevPtr_ = &item;
-            }
-        }
-    }
+    void insertAfter( ExtendedListItem& after, ExtendedListItem& item ) noexcept;
 
     /** Insert the "item" into the list ahead of the "before" element. If
         'before' is nullptr, then 'item' is added to the tail of the list.
      */
-    void insertBefore( ExtendedListItem& before, ExtendedListItem& item ) noexcept
-    {
-        if ( item.insert_( this ) )
-        {
-            ExtendedListItem* prvPtr = static_cast<ExtendedListItem*>(item.m_prevPtr_ = before.m_prevPtr_);
-            item.m_nextPtr_      = &before;
-            before.m_prevPtr_    = &item;
-            if ( !prvPtr )
-            {
-                m_headPtr = &item;
-            }
-            else
-            {
-                prvPtr->m_nextPtr_ = &item;
-            }
-        }
-    }
+    void insertBefore( ExtendedListItem& before, ExtendedListItem& item ) noexcept;
 
     /// Returns true if the specified item is already in the list, else false.
     bool find( const ExtendedListItem& item ) const noexcept
@@ -249,14 +113,7 @@ protected:
 
         NOTE: If 'item' is not in the list, then a fatal error is generated.
      */
-    ExtendedListItem* next( const ExtendedListItem& item ) const noexcept
-    {
-        if ( item.validateNextOkay_( this ) )
-        {
-            return static_cast<ExtendedListItem*>(item.m_nextPtr_);
-        }
-        return nullptr;
-    }
+    ExtendedListItem* next( const ExtendedListItem& item ) const noexcept;
 
     /** Return a pointer to the item before the item "current". Both items 
         remain in the list.  Returns nullptr when the front-of-list is reached.

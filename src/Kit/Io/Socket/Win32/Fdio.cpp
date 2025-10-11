@@ -12,6 +12,8 @@
 #include "Kit/System/PrivateStartup.h"
 #include "Kit/System/Shutdown.h"
 #include "Kit/System/FatalError.h"
+#include "Kit/System/Api.h"
+#include "Kit/Text/FString.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // Use the KIT startup and shutdown hooks to initialize the Winsock library

@@ -151,7 +151,7 @@ protected:  // Helper methods
     /** Returns the need memory size in "block units".  Note: The size calculation
         includes the memory for the trailing '\0' string terminator.
      */
-    inline int calcMemSize( int len ) noexcept { return ( ( len + m_blockSize ) / m_blockSize ) * m_blockSize; }
+    int calcMemSize( int len ) noexcept { return ( ( len + m_blockSize ) / m_blockSize ) * m_blockSize; }
 
     /// Frees the current string memory - IF it was previously allocated
     void freeCurrentString() noexcept;

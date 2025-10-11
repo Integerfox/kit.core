@@ -14,11 +14,6 @@
 #include "Kit/EventQueue/IQueue.h"
 #include "Kit/Container/SList.h"
 #include "Kit/System/ISignable.h"
-#include <type_traits>
-
-/// Compile time check for the EventQueue being configured 'correctly'
-static_assert( std::is_base_of<Kit::EventQueue::IMsgNotification, Kit::EventQueue::IQueue>::value,
-               "IQueue must inherit from IMsgNotification" );
 
 ///
 namespace Kit {
@@ -39,11 +34,7 @@ public:
         (aka the Event Loop) where the messages posted to the Mailbox are
         RETRIEVED and their process() methods execute in.
      */
-    Mailbox( Kit::System::ISignable& myEventLoop ) noexcept
-        : m_eventLoop( myEventLoop )
-    {
-    }
-
+    Mailbox( Kit::System::ISignable& myEventLoop ) noexcept;
 
 public:
     /// See Kit::EventQueue::IMsgNotification
