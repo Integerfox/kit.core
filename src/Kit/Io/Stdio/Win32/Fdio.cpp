@@ -141,4 +141,3 @@ bool Fdio::available( HANDLE fd ) noexcept
 }
 }
 }
-#endif  // end header latch
