@@ -12,6 +12,3 @@ src/Kit/Memory/_testsupport
 
 # System dependencies needed by watchdog
 src/Kit/System
-
-# 3rd Party libraries
-xpkgs/catch2/src
