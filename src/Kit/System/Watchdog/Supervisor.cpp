@@ -28,7 +28,7 @@ void Supervisor::beginWatching( WatchedThread& threadToMonitor ) noexcept
     Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
 
     // Reset the thread's countdown timer
-    threadToMonitor.currentCountMs = threadToMonitor.wdogTimeoutMs;
+    threadToMonitor.m_currentCountMs = threadToMonitor.m_wdogTimeoutMs;
 
     // Add to the list
     m_watchedThreads.put( threadToMonitor );
@@ -59,15 +59,15 @@ void Supervisor::monitorThreads() noexcept
         while ( thread )
         {
             // Check for an expired thread timer
-            if ( thread->currentCountMs <= delta )
+            if ( thread->m_currentCountMs <= delta )
             {
                 tripWdog();  // EXPIRED
                 return;      // Never executes because the tripWatchdog() method never returns, but it simplifies testing
             }
 
             // Decrement the thread's timer and get the next thread in the list
-            thread->currentCountMs -= delta;
-            thread                  = m_watchedThreads.next( *thread );
+            thread->m_currentCountMs -= delta;
+            thread                    = m_watchedThreads.next( *thread );
         }
 
         // If I get here - all monitored threads are 'healthy'
@@ -81,5 +81,5 @@ void Supervisor::reloadThread( WatchedThread& thread ) noexcept
     Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
 
     // Reset the thread's countdown timer
-    thread.currentCountMs = thread.wdogTimeoutMs;
+    thread.m_currentCountMs = thread.m_wdogTimeoutMs;
 }

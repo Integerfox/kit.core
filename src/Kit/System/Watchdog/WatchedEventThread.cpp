@@ -9,54 +9,35 @@
 /** @file */
 
 #include "Kit/System/Watchdog/WatchedEventThread.h"
-#include "Kit/System/FatalError.h"
+#include "Kit/System/EventLoop.h"
+#include "Kit/System/Assert.h"
 
 using namespace Kit::System;
 
 /////////////////////////
-WatchedEventThread::WatchedEventThread( unsigned long wdogTimeoutMs, bool isSupervisor, unsigned long healthCheckIntervalMs ) noexcept
+WatchedEventThread::WatchedEventThread( uint32_t wdogTimeoutMs, uint32_t healthCheckIntervalMs, bool isSupervisor ) noexcept
     : WatchedThread( wdogTimeoutMs )
-    , TimerComposer<WatchedEventThread>( *this, &WatchedEventThread::expired )
-    , m_isSupervisor( isSupervisor )
+    , m_timer( *this, &WatchedEventThread::healthTimerExpired )
     , m_healthCheckIntervalMs( healthCheckIntervalMs )
-    , m_timerManager( nullptr )
+    , m_isSupervisor( isSupervisor )
     , m_isActive( false )
 {
-    // Set default health check interval to half of watchdog timeout if not specified
-    if ( m_healthCheckIntervalMs == 0 )
-    {
-        m_healthCheckIntervalMs = wdogTimeoutMs / 2;
-    }
-
-    // Ensure health check interval is less than watchdog timeout
-    if ( m_healthCheckIntervalMs >= wdogTimeoutMs )
-    {
-        m_healthCheckIntervalMs = wdogTimeoutMs / 2;
-        Kit::System::FatalError::logf( 0, "WatchedEventThread: Health check interval must be less than watchdog timeout. Adjusted to %lu ms", m_healthCheckIntervalMs );
-    }
+    KIT_SYSTEM_ASSERT( wdogTimeoutMs > healthCheckIntervalMs );
 }
 
-WatchedEventThread::~WatchedEventThread()
-{
-    stopWatcher();
-}
-
-void WatchedEventThread::startWatcher( Kit::System::TimerManager& eventLoop ) noexcept
+void WatchedEventThread::startWatcher( Kit::System::EventLoop& eventLoop ) noexcept
 {
     if ( m_isActive )
     {
         return;  // Already started
     }
-
-    m_timerManager = &eventLoop;
+    // Set the timing source for the notify timer
+    m_timer.setTimingSource( eventLoop );
 
     // Register this thread with the supervisor
     Supervisor::beginWatching( *this );
-
     // Start the health check timer
-    setTimingSource( *m_timerManager );
-    start( m_healthCheckIntervalMs );
-
+    m_timer.start( m_healthCheckIntervalMs );
     m_isActive = true;
 }
 
@@ -66,15 +47,11 @@ void WatchedEventThread::stopWatcher() noexcept
     {
         return;  // Not started
     }
-
     // Stop the health check timer
-    stop();
-
+    m_timer.stop();
     // Unregister from the supervisor
     Supervisor::endWatching( *this );
-
-    m_isActive     = false;
-    m_timerManager = nullptr;
+    m_isActive = false;
 }
 
 void WatchedEventThread::monitorWdog() noexcept
@@ -83,15 +60,7 @@ void WatchedEventThread::monitorWdog() noexcept
     {
         return;
     }
-
-    // If this is the supervisor thread, monitor all threads
-    if ( m_isSupervisor )
-    {
-        Supervisor::monitorThreads();
-    }
-
-    // Reload this thread's watchdog timer
-    Supervisor::reloadThread( *this );
+    Supervisor::monitorThreads();
 }
 
 bool WatchedEventThread::isSupervisorThread() const noexcept
@@ -106,7 +75,7 @@ bool WatchedEventThread::performHealthCheck() noexcept
     return true;
 }
 
-void WatchedEventThread::expired() noexcept
+void WatchedEventThread::healthTimerExpired() noexcept
 {
     // Perform the health check
     if ( !performHealthCheck() )
@@ -115,10 +84,8 @@ void WatchedEventThread::expired() noexcept
         Supervisor::tripWdog();
         return;
     }
-
-    // Health check passed - restart the timer for next check
-    if ( m_isActive )
-    {
-        start( m_healthCheckIntervalMs );
-    }
+    // Health check passed - reload this thread's watchdog timer
+    Supervisor::reloadThread( *this );
+    // Restart the timer for next check
+    m_timer.start( m_healthCheckIntervalMs );
 }

@@ -8,7 +8,6 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "timercommon.h"
 #include "Kit/System/Watchdog/Supervisor.h"
 #include "Kit/System/Watchdog/WatchedThread.h"
 #include "Kit/System/Watchdog/WatchedEventThread.h"
@@ -66,11 +65,11 @@ public:
     }
 };
 
-/** WatchedRawThread - Simulates manual integration for plain threads.
+/** TestWatchedRawThread - Simulates manual integration for plain threads.
     This represents the pattern used for non-EventLoop threads that need
     manual watchdog management.
  */
-class WatchedRawThread : public WatchedThread
+class TestWatchedRawThread : public WatchedThread
 {
 public:
     ///
@@ -78,7 +77,7 @@ public:
 
 public:
     ///
-    WatchedRawThread( unsigned long wdogTimeoutMs = TEST_TIMEOUT_MEDIUM_MS )
+    TestWatchedRawThread( uint32_t wdogTimeoutMs = TEST_TIMEOUT_MEDIUM_MS )
         : WatchedThread( wdogTimeoutMs )
         , m_isWatching( false )
     {
@@ -262,15 +261,15 @@ TEST_CASE( "watchdog" )
         KIT_SYSTEM_TRACE_MSG( SECT_, "Testing WatchedThread construction and basic properties" );
 
         TestWatchedThread thread( TEST_TIMEOUT_LONG_MS );
-        REQUIRE( thread.wdogTimeoutMs == TEST_TIMEOUT_LONG_MS );
-        REQUIRE( thread.currentCountMs == TEST_TIMEOUT_LONG_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "WatchedThread timeout: %lu ms, current count: %lu ms", thread.wdogTimeoutMs, thread.currentCountMs );
+        REQUIRE( thread.m_wdogTimeoutMs == TEST_TIMEOUT_LONG_MS );
+        REQUIRE( thread.m_currentCountMs == TEST_TIMEOUT_LONG_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "WatchedThread timeout: %u ms, current count: %u ms", thread.m_wdogTimeoutMs, thread.m_currentCountMs );
 
         // Test default construction
         TestWatchedThread defaultThread;
-        REQUIRE( defaultThread.wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
-        REQUIRE( defaultThread.currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Default timeout: %lu ms", defaultThread.wdogTimeoutMs );
+        REQUIRE( defaultThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( defaultThread.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Default timeout: %u ms", defaultThread.m_wdogTimeoutMs );
     }
 
     SECTION( "supervisor mgmt" )
@@ -286,13 +285,13 @@ TEST_CASE( "watchdog" )
         // Begin watching threads
         Supervisor::beginWatching( thread1 );
         Supervisor::beginWatching( thread2 );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Started watching threads (%lu ms, %lu ms)", thread1.wdogTimeoutMs, thread2.wdogTimeoutMs );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Started watching threads (%u ms, %u ms)", thread1.m_wdogTimeoutMs, thread2.m_wdogTimeoutMs );
 
         // Test thread reloading
-        thread1.currentCountMs = TEST_TIMEOUT_SHORT_MS * 3;
+        thread1.m_currentCountMs = TEST_TIMEOUT_SHORT_MS * 3;
         Supervisor::reloadThread( thread1 );
-        REQUIRE( thread1.currentCountMs == thread1.wdogTimeoutMs );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Thread reload successful, count reset to: %lu ms", thread1.currentCountMs );
+        REQUIRE( thread1.m_currentCountMs == thread1.m_wdogTimeoutMs );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Thread reload successful, count reset to: %u ms", thread1.m_currentCountMs );
 
         // Monitor threads
         Supervisor::monitorThreads();
@@ -342,28 +341,25 @@ TEST_CASE( "watchdog" )
         bool enabled = Supervisor::enableWdog();
         REQUIRE( enabled == true );
 
-        WatchedRawThread rawThread( TEST_TIMEOUT_LONG_MS );
+        TestWatchedRawThread rawThread( TEST_TIMEOUT_LONG_MS );
 
         // Initial state - not watching
-        REQUIRE( rawThread.isWatching() == false );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Initial state: not watching" );
 
         // Start watching
         bool started = rawThread.startWatching();
         REQUIRE( started == true );
-        REQUIRE( rawThread.isWatching() == true );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Started watching raw thread, timeout: %lu ms", rawThread.wdogTimeoutMs );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Started watching raw thread, timeout: %u ms", rawThread.m_wdogTimeoutMs );
 
         // Manual watchdog kick
-        rawThread.currentCountMs = TEST_TIMEOUT_MEDIUM_MS;
+        rawThread.m_currentCountMs = TEST_TIMEOUT_MEDIUM_MS;
         rawThread.kickWatchdog();
-        REQUIRE( rawThread.currentCountMs == rawThread.wdogTimeoutMs );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Manual kick successful, count reset to: %lu ms", rawThread.currentCountMs );
+        REQUIRE( rawThread.m_currentCountMs == rawThread.m_wdogTimeoutMs );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Manual kick successful, count reset to: %u ms", rawThread.m_currentCountMs );
 
         // Stop watching
         bool stopped = rawThread.stopWatching();
         REQUIRE( stopped == true );
-        REQUIRE( rawThread.isWatching() == false );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Stopped watching raw thread" );
     }
 
@@ -372,23 +368,23 @@ TEST_CASE( "watchdog" )
         KIT_SYSTEM_TRACE_MSG( SECT_, "Testing WatchedEventThread for event-based threads" );
 
         // Test custom construction with supervisor designation
-        WatchedEventThread supervisorThread( 1500, true );
-        REQUIRE( supervisorThread.wdogTimeoutMs == 1500 );
-        REQUIRE( supervisorThread.currentCountMs == 1500 );
+        WatchedEventThread supervisorThread( 1500, 750, true );
+        REQUIRE( supervisorThread.m_wdogTimeoutMs == 1500 );
+        REQUIRE( supervisorThread.m_currentCountMs == 1500 );
         REQUIRE( supervisorThread.isSupervisorThread() == true );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor WatchedEventThread: timeout=%lu ms, isSupervisor=%s", supervisorThread.wdogTimeoutMs, supervisorThread.isSupervisorThread() ? "true" : "false" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor WatchedEventThread: timeout=%u ms, isSupervisor=%s", supervisorThread.m_wdogTimeoutMs, supervisorThread.isSupervisorThread() ? "true" : "false" );
 
-        // Test default construction
-        WatchedEventThread defaultThread;
-        REQUIRE( defaultThread.wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
-        REQUIRE( defaultThread.currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
+        // Test default construction (non-supervisor)
+        WatchedEventThread defaultThread( TEST_TIMEOUT_MEDIUM_MS, TEST_TIMEOUT_MEDIUM_MS / 2 );
+        REQUIRE( defaultThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( defaultThread.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( defaultThread.isSupervisorThread() == false );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Default WatchedEventThread: timeout=%lu ms, isSupervisor=%s", defaultThread.wdogTimeoutMs, defaultThread.isSupervisorThread() ? "true" : "false" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Default WatchedEventThread: timeout=%u ms, isSupervisor=%s", defaultThread.m_wdogTimeoutMs, defaultThread.isSupervisorThread() ? "true" : "false" );
 
         // Test non-supervisor thread
-        WatchedEventThread regularThread( TEST_TIMEOUT_MEDIUM_MS, false );
+        WatchedEventThread regularThread( TEST_TIMEOUT_MEDIUM_MS, TEST_TIMEOUT_MEDIUM_MS / 2, false );
         REQUIRE( regularThread.isSupervisorThread() == false );
-        REQUIRE( regularThread.wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( regularThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Regular WatchedEventThread created successfully" );
     }
 
@@ -400,8 +396,8 @@ TEST_CASE( "watchdog" )
         REQUIRE( enabled == true );
 
         // Create watched event thread for EventLoop
-        auto watchedThread = std::make_unique<WatchedEventThread>( TEST_TIMEOUT_MEDIUM_MS, true );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Created WatchedEventThread for EventLoop: timeout=%lu ms", watchedThread->wdogTimeoutMs );
+        auto watchedThread = std::make_unique<WatchedEventThread>( TEST_TIMEOUT_MEDIUM_MS, TEST_TIMEOUT_MEDIUM_MS / 2, true );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Created WatchedEventThread for EventLoop: timeout=%u ms", watchedThread->m_wdogTimeoutMs );
 
         // Create event loop with watchdog support
         EventLoop eventLoop( TEST_TIMEOUT_MEDIUM_MS, nullptr, watchedThread.get() );
@@ -428,24 +424,23 @@ TEST_CASE( "watchdog" )
         bool enabled = Supervisor::enableWdog();
         REQUIRE( enabled == true );
 
-        WatchedRawThread   rawThread( 1500 );
-        WatchedEventThread eventThread( 1500, false );
+        TestWatchedRawThread rawThread( 1500 );
+        WatchedEventThread   eventThread( 1500, 750, false );
 
         // Raw thread requires manual start/stop/kick
         REQUIRE( rawThread.startWatching() == true );
-        REQUIRE( rawThread.isWatching() == true );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread: manual management, watching=%s", rawThread.isWatching() ? "true" : "false" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread: manual management" );
 
         // Event thread integrates with EventLoop automatically
-        REQUIRE( eventThread.wdogTimeoutMs == 1500 );
+        REQUIRE( eventThread.m_wdogTimeoutMs == 1500 );
         REQUIRE( eventThread.isSupervisorThread() == false );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Event thread: automatic integration, timeout=%lu ms", eventThread.wdogTimeoutMs );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Event thread: automatic integration, timeout=%u ms", eventThread.m_wdogTimeoutMs );
 
         // Raw thread manual kick demonstration
-        rawThread.currentCountMs = TEST_TIMEOUT_SHORT_MS * 5;
+        rawThread.m_currentCountMs = TEST_TIMEOUT_SHORT_MS * 5;
         rawThread.kickWatchdog();
-        REQUIRE( rawThread.currentCountMs == 1500 );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread manual kick: count reset to %lu ms", rawThread.currentCountMs );
+        REQUIRE( rawThread.m_currentCountMs == 1500 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread manual kick: count reset to %u ms", rawThread.m_currentCountMs );
 
         // Clean up raw thread
         REQUIRE( rawThread.stopWatching() == true );

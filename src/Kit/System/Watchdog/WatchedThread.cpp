@@ -14,14 +14,14 @@
 using namespace Kit::System;
 
 /////////////////////////
-WatchedThread::WatchedThread( unsigned long wdogTimeoutMs ) noexcept
-    : currentCountMs( wdogTimeoutMs )
-    , wdogTimeoutMs( wdogTimeoutMs )
+WatchedThread::WatchedThread( uint32_t wdogTimeoutMs ) noexcept
+    : m_currentCountMs( wdogTimeoutMs )
+    , m_wdogTimeoutMs( wdogTimeoutMs )
 {
 }
 
 /////////////////////////
-WatchedRawThread::WatchedRawThread( unsigned long wdogTimeoutMs ) noexcept
+WatchedRawThread::WatchedRawThread( uint32_t wdogTimeoutMs ) noexcept
     : WatchedThread( wdogTimeoutMs )
 {
 }

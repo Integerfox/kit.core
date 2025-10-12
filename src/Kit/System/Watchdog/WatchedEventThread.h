@@ -15,6 +15,7 @@
 #include "Kit/System/Watchdog/Supervisor.h"
 #include "Kit/System/Timer.h"
 #include "Kit/System/ElapsedTime.h"
+#include <cstdint>
 
 ///
 namespace Kit {
@@ -34,22 +35,19 @@ namespace System {
     interval must be less than the thread's watchdog timeout interval. The health
     check is customizable on a per-thread basis via the performHealthCheck() virtual method.
  */
-class WatchedEventThread : public IWatchedEventLoop, public WatchedThread, public TimerComposer<WatchedEventThread>
+class WatchedEventThread : public IWatchedEventLoop, public WatchedThread
 {
 public:
     /** Constructor
         @param wdogTimeoutMs The watchdog timeout period for this thread in milliseconds
+        @param healthCheckIntervalMs The health check interval in milliseconds (must be < wdogTimeoutMs)
         @param isSupervisor Set to true if this thread should act as the supervisor thread
-        @param healthCheckIntervalMs The health check interval in milliseconds (default: wdogTimeoutMs/2, must be < wdogTimeoutMs)
      */
-    WatchedEventThread( unsigned long wdogTimeoutMs = 1000, bool isSupervisor = false, unsigned long healthCheckIntervalMs = 0 ) noexcept;
-
-    /// Virtual destructor
-    virtual ~WatchedEventThread();
+    WatchedEventThread( uint32_t wdogTimeoutMs, uint32_t healthCheckIntervalMs, bool isSupervisor = false ) noexcept;
 
 public:
     /// See IWatchedEventLoop
-    void startWatcher( Kit::System::TimerManager& eventLoop ) noexcept override;
+    void startWatcher( Kit::System::EventLoop& eventLoop ) noexcept override;
 
     /// See IWatchedEventLoop
     void stopWatcher() noexcept override;
@@ -75,22 +73,22 @@ protected:
     /** Timer expired callback - called by the TimerComposer when the health check timer expires.
         This method performs the health check and restarts the timer.
      */
-    void expired() noexcept;
+    void healthTimerExpired() noexcept;
 
-private:
-    /// Flag indicating if this is the supervisor thread
-    bool m_isSupervisor;
+protected:
+    /// Timer composer for health check timer
+    Kit::System::TimerComposer<WatchedEventThread> m_timer;
 
     /// Health check interval in milliseconds
-    unsigned long m_healthCheckIntervalMs;
+    uint32_t m_healthCheckIntervalMs;
 
-    /// Pointer to the timer manager (EventLoop) for this thread
-    Kit::System::TimerManager* m_timerManager;
+    /// Flag indicating if this is the supervisor thread
+    bool m_isSupervisor;
 
     /// Flag indicating if the watcher is currently active
     bool m_isActive;
 };
 
-};  // end namespace System
-};  // end namespace Kit
+}  // end namespace System
+}  // end namespace Kit
 #endif  // end header latch

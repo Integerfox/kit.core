@@ -53,12 +53,7 @@ public:
                               IdleFunc_T                         idleFunc              = nullptr,
                               uint32_t                           timeOutPeriodInMsec   = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
                               Kit::Container::SList<IEventFlag>* eventFlagsList        = nullptr,
-#ifdef USE_KIT_SYSTEM_WATCHDOG
-                              IWatchedEventLoop* watchdog = nullptr
-#else
-                              void* watchdog = nullptr  // Placeholder when watchdog is disabled
-#endif
-                              ) noexcept;
+                              IWatchedEventLoop*                 watchdog              = nullptr ) noexcept;
 
 
 public:

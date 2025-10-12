@@ -15,10 +15,7 @@
 #include "Kit/System/IEventFlag.h"
 #include "Trace.h"
 #include "GlobalLock.h"
-
-#ifdef USE_KIT_SYSTEM_WATCHDOG
 #include "Kit/System/Watchdog/IWatchedEventLoop.h"
-#endif
 
 #define SECT_ "EventLoop"
 
@@ -29,24 +26,16 @@ namespace System {
 ///////////////////////
 EventLoop::EventLoop( uint32_t                           timeOutPeriodInMsec,
                       Kit::Container::SList<IEventFlag>* eventFlagsList,
-#ifdef USE_KIT_SYSTEM_WATCHDOG
-                      IWatchedEventLoop* watchdog
-#else
-                      void* watchdog
-#endif
-                      ) noexcept
+                      IWatchedEventLoop*                 watchdog ) noexcept
     : IRunnable()
     , m_eventList( eventFlagsList )
     , m_timeout( timeOutPeriodInMsec )
     , m_timeStartOfLoop( 0 )
     , m_events( 0 )
     , m_run( true )
-#ifdef USE_KIT_SYSTEM_WATCHDOG
     , m_watchdog( watchdog )
-#endif
 {
     KIT_SYSTEM_ASSERT( timeOutPeriodInMsec > 0 );
-    (void)watchdog;  // Suppress unused parameter warning when watchdog is disabled
 }
 
 void EventLoop::entry() noexcept
@@ -67,23 +56,13 @@ void EventLoop::startEventLoop() noexcept
     m_run = true;
 
     // Start watchdog monitoring if enabled
-#ifdef USE_KIT_SYSTEM_WATCHDOG
-    if ( m_watchdog )
-    {
-        KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( *m_watchdog, *this );
-    }
-#endif
+    KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( m_watchdog, *this );
 }
 
 void EventLoop::stopEventLoop() noexcept
 {
     // Stop watchdog monitoring if enabled
-#ifdef USE_KIT_SYSTEM_WATCHDOG
-    if ( m_watchdog )
-    {
-        KIT_SYSTEM_WATCHDOG_STOP_EVENTLOOP( *m_watchdog );
-    }
-#endif
+    KIT_SYSTEM_WATCHDOG_STOP_EVENTLOOP( m_watchdog );
 }
 
 bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
@@ -146,12 +125,7 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
     processTimers();
 
     // Watchdog monitoring (if enabled)
-#ifdef USE_KIT_SYSTEM_WATCHDOG
-    if ( m_watchdog )
-    {
-        KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( *m_watchdog );
-    }
-#endif
+    KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( m_watchdog );
 
     return true;
 }

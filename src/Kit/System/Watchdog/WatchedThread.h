@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/Container/ListItem.h"
+#include <cstdint>
 
 ///
 namespace Kit {
@@ -28,22 +29,19 @@ public:
     /** Constructor
         @param wdogTimeoutMs The watchdog timeout period for this thread in milliseconds
      */
-    WatchedThread( unsigned long wdogTimeoutMs = 1000 ) noexcept;
-
-    /// Virtual destructor
-    virtual ~WatchedThread() = default;
+    WatchedThread( uint32_t wdogTimeoutMs = 1000 ) noexcept;
 
 public:
     /** Current countdown timer in milliseconds. This value is decremented by the
         Supervisor during each monitoring cycle. When it reaches zero, the thread
         is considered to have failed. Only accessed by the Supervisor.
      */
-    unsigned long currentCountMs;
+    uint32_t m_currentCountMs;
 
     /** Watchdog timeout period in milliseconds. This is the initial value that
-        currentCountMs is reset to when the thread checks in. Only accessed by the Supervisor.
+        m_currentCountMs is reset to when the thread checks in. Only accessed by the Supervisor.
      */
-    unsigned long wdogTimeoutMs;
+    uint32_t m_wdogTimeoutMs;
 };
 
 /** WatchedRawThread - A concrete implementation for raw threads that provides
@@ -55,7 +53,7 @@ public:
     /** Constructor
         @param wdogTimeoutMs The watchdog timeout period for this thread in milliseconds
      */
-    WatchedRawThread( unsigned long wdogTimeoutMs = 1000 ) noexcept;
+    WatchedRawThread( uint32_t wdogTimeoutMs = 1000 ) noexcept;
 
     /** Starts watchdog monitoring for this thread by registering it with the Supervisor.
         @return true if successfully started monitoring, false otherwise
