@@ -12,7 +12,7 @@
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/Trace.h"
 #include "Kit/System/Thread.h"
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 #include "Kit/System/EventLoopWithPScheduling.h"
 #include <inttypes.h>
 
