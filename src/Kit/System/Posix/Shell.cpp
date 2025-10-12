@@ -12,6 +12,7 @@
 #include "Kit/System/Trace.h"
 #include "Kit/Text/DString.h"
 #include <stdlib.h> 
+#include <string.h>
 
 #define MY_STDOUT_NULL_ " 1> /dev/null"
 #define MY_STDERR_NULL_ " 2> /dev/null"

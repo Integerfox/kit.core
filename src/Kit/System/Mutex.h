@@ -83,10 +83,10 @@ public:
 
     public:
         /// Constructor.  This will block until the mutex lock is acquired.
-        inline ScopeLock( Mutex& mutex ) noexcept:m_mutex( mutex ) { m_mutex.lock(); }
+         ScopeLock( Mutex& mutex ) noexcept:m_mutex( mutex ) { m_mutex.lock(); }
 
         /// Destructor.  This method releases ownership of the mutex
-        inline ~ScopeLock() { m_mutex.unlock(); }
+         ~ScopeLock() { m_mutex.unlock(); }
 
 
     private:

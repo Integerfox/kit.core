@@ -10,10 +10,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/System/Assert.h"
 #include <stdint.h>
 #include <stdlib.h>
-#include <string.h>
 
 ///
 namespace Kit {
@@ -33,12 +31,7 @@ class RingBufferBase
 {
 protected:
     /// Constructor
-    RingBufferBase( unsigned numMaxElements )
-        : m_readIdx( 0 )
-        , m_writeIdx( 0 )
-        , m_elements( numMaxElements )
-    {
-    }
+    RingBufferBase( unsigned numMaxElements ) noexcept;
 
 public:
     /// This method returns true if the Ring Buffer is empty
@@ -82,60 +75,14 @@ protected:
         returns true if the operation was successful; else false is
         returned, i.e. the Ring buffer is/was empty.
      */
-    bool remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
-    {
-        KIT_SYSTEM_ASSERT( elemPtr != nullptr );
-        KIT_SYSTEM_ASSERT( elemSize > 0 );
-        KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
-
-        // Snapshot of ring buffer's indexes
-        unsigned readIdx  = m_readIdx;
-        unsigned writeIdx = m_writeIdx;
-
-        // Trap - the Ring buffer is empty
-        if ( readIdx == writeIdx )
-        {
-            return false;
-        }
-
-        // Copy the element data from the ring buffer to the provided pointer
-        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (readIdx * elemSize);
-        memcpy( elemPtr, srcPtr, elemSize );
-
-        // Update the read index
-        m_readIdx = ( readIdx + 1 ) % m_elements;
-        return true;
-    }
+    bool remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept;
 
     /** Add a new item to the Ring Buffer as the last item in the buffer. The
         contents of the source item (aka 'elemPtr') will be copied into the
         Ring Buffer. Returns true if the operation was successful; else false
         is returned, i.e. the Buffer was full prior to the attempted add().
      */
-    bool add( const void* elemPtr, size_t elemSize, void* dstRingBufMemory ) noexcept
-    {
-        KIT_SYSTEM_ASSERT( elemPtr != nullptr );
-        KIT_SYSTEM_ASSERT( elemSize > 0 );
-        KIT_SYSTEM_ASSERT( dstRingBufMemory != nullptr );
-
-        // Snapshot of ring buffer's indexes
-        unsigned readIdx  = m_readIdx;
-        unsigned writeIdx = m_writeIdx;
-
-        // Trap - the Ring buffer is full
-        if ( ( writeIdx + 1 ) % m_elements == readIdx )
-        {
-            return false;
-        }
-
-        // Copy the element data to the provided pointer to the ring buffer
-        uint8_t* dstPtr = static_cast<uint8_t*>(dstRingBufMemory) + (writeIdx * elemSize);
-        memcpy( dstPtr, elemPtr, elemSize );
-
-        // Update the write index
-        m_writeIdx = ( writeIdx + 1 ) % m_elements;
-        return true;
-    }
+    bool add( const void* elemPtr, size_t elemSize, void* dstRingBufMemory ) noexcept;
 
 protected:
     /** This method inspects the head element of the Ring buffer without removing it.
@@ -143,59 +90,14 @@ protected:
         The method returns true if the operation was successful; else false is
         returned, i.e. the Ring buffer is empty.
      */
-    bool peekHead( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
-    {
-        KIT_SYSTEM_ASSERT( elemPtr != nullptr );
-        KIT_SYSTEM_ASSERT( elemSize > 0 );
-        KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
-
-        // Snapshot of ring buffer's indexes
-        unsigned readIdx  = m_readIdx;
-        unsigned writeIdx = m_writeIdx;
-
-        // Trap - the Ring buffer is empty
-        if ( readIdx == writeIdx )
-        {
-            return false;
-        }
-
-        // Copy the element data from the ring buffer to the provided pointer
-        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (readIdx * elemSize);
-        memcpy( elemPtr, srcPtr, elemSize );
-
-        return true;
-    }
+    bool peekHead( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept;
 
     /** This method inspects the tail element of the Ring buffer without removing it.
         The contents of the tail element will be copied into the 'elemPtr' argument.
         The method returns true if the operation was successful; else false is
         returned, i.e. the Ring buffer is empty.
      */
-    bool peekTail( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
-    {
-        KIT_SYSTEM_ASSERT( elemPtr != nullptr );
-        KIT_SYSTEM_ASSERT( elemSize > 0 );
-        KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
-
-        // Snapshot of ring buffer's indexes
-        unsigned readIdx  = m_readIdx;
-        unsigned writeIdx = m_writeIdx;
-
-        // Trap - the Ring buffer is empty
-        if ( readIdx == writeIdx )
-        {
-            return false;
-        }
-
-        // Get previous tail index
-        unsigned prevTailIdx = writeIdx == 0 ? ( m_elements - 1 ) : ( writeIdx - 1 );
-
-        // Copy the element data from the ring buffer to the provided pointer
-        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (prevTailIdx * elemSize);
-        memcpy( elemPtr, srcPtr, elemSize );
-
-        return true;
-    }
+    bool peekTail( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept;
 
 protected:
     /** This method returns a pointer to the next item to be removed. In addition
@@ -207,32 +109,7 @@ protected:
 
         If the Ring buffer is empty, a null pointer is returned
      */
-    void* peekNextRemoveItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
-    {
-        KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
-
-        // Snapshot of ring buffer's indexes
-        unsigned readIdx  = m_readIdx;
-        unsigned writeIdx = m_writeIdx;
-
-        // Check for empty
-        if ( readIdx == writeIdx )
-        {
-            dstNumFlatElements = 0;
-            return nullptr;
-        }
-
-        // Number of elements that can be removed without wrapping around the memory buffer
-        unsigned currentElems = ( writeIdx - readIdx + m_elements ) % m_elements;
-        dstNumFlatElements    = m_elements - readIdx;
-        if ( dstNumFlatElements > currentElems )
-        {
-            dstNumFlatElements = currentElems;
-        }
-
-        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (readIdx * elemSize);
-        return srcPtr;
-    }
+    void* peekNextRemoveItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept;
 
     /** This method 'removes' N elements - that were removed using the
         pointer returned from peekNextRemoveItems - from the ring buffer.
@@ -259,32 +136,7 @@ protected:
 
         If the Ring buffer is full, a null pointer is returned
      */
-    void* peekNextAddItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
-    {
-        // Snapshot of ring buffer's indexes
-        unsigned readIdx  = m_readIdx;
-        unsigned writeIdx = m_writeIdx;
-
-        // Check for full
-        if ( ( ( writeIdx + 1 ) % m_elements ) == readIdx )
-        {
-            dstNumFlatElements = 0;
-            return nullptr;
-        }
-
-        // Number of elements that can be added without wrapping around the memory buffer
-        unsigned currentElems    = ( writeIdx - readIdx + m_elements ) % m_elements;
-        unsigned totalAvailElems = m_elements - 1 - currentElems;
-        dstNumFlatElements       = m_elements - writeIdx;
-        if ( dstNumFlatElements > totalAvailElems )
-        {
-            dstNumFlatElements = totalAvailElems;
-        }
-
-        // Get a pointer to next 'available' address to add an element
-        uint8_t* srcPtr = static_cast<uint8_t*>(const_cast<void*>(srcRingBufMemory)) + (writeIdx * elemSize);
-        return srcPtr;
-    }
+    void* peekNextAddItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept;
 
     /** This method 'adds' N elements - that were populated using the
         pointer returned from peekNextAddItems - to the ring buffer.  Basically

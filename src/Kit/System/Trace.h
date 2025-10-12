@@ -105,10 +105,10 @@
 
 
 /// Macro Wrapper
-#define KIT_SYSTEM_TRACE_FUNC( sect ) Kit::System::Trace kitSystemTraceInstance_ ( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME )
+#define KIT_SYSTEM_TRACE_FUNC( sect ) Kit::System::Trace kitSystemTraceInstance_( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME )
 
 /// Macro Wrapper
-#define KIT_SYSTEM_TRACE_SCOPE( sect, label ) Kit::System::Trace kitSystemTraceInstance_ ( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, label )
+#define KIT_SYSTEM_TRACE_SCOPE( sect, label ) Kit::System::Trace kitSystemTraceInstance_( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, label )
 
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_MSG( sect, ... )                                                                     \
@@ -438,10 +438,9 @@ public:
               macros.
      */
     static void setThreadFilter_( const char* threadName1,
-                                  const char* threadName2 =0,
-                                  const char* threadName3 =0,
-                                  const char* threadName4 =0
-                                );
+                                  const char* threadName2 = nullptr,
+                                  const char* threadName3 = nullptr,
+                                  const char* threadName4 = nullptr );
 
     /** This method returns the number of enabled 'thread filters' and returns
         the actual thread name(s) via the IString 'dst'.  It is the caller

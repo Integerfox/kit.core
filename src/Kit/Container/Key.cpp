@@ -10,6 +10,8 @@
 
 #include "Key.h"
 #include "Kit/System/Assert.h"
+#include <string.h>
+
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -25,7 +27,7 @@ KeyStringBuffer::KeyStringBuffer( const char* startOfString, size_t lenOfStringI
 int KeyStringBuffer::compareKey( const Key& key ) const noexcept
 {
     unsigned    otherLen = 0;
-    const char* otherPtr = static_cast<const char*>(key.getRawKey( &otherLen ));
+    const char* otherPtr = static_cast<const char*>( key.getRawKey( &otherLen ) );
     return compare( m_stringKeyPtr, m_len, otherPtr, otherLen );
 }
 
@@ -51,7 +53,7 @@ int KeyStringBuffer::compare( const char* myString, unsigned myLen, const char* 
 
             if ( comparision == 0 && myLen != otherLen )
             {
-                return myLen - static_cast<int>(otherLen);
+                return myLen - static_cast<int>( otherLen );
             }
 
             return comparision;
@@ -62,6 +64,12 @@ int KeyStringBuffer::compare( const char* myString, unsigned myLen, const char* 
     return INT_MIN;
 }
 
-}   // end namespaces
-}  
+//////////////////
+KeyLiteralString::KeyLiteralString( const char* string ) noexcept
+    : KeyStringBuffer( string, string ? strlen( string ) : 0 )
+{
+}
+
+}  // end namespaces
+}
 //------------------------------------------------------------------------------

@@ -39,45 +39,36 @@ protected:
 
 protected:
     /// Constructor
-    MapItem() { initialize( nullptr ); }
+    MapItem() noexcept;
 
     /** Constructor -->special constructor to allow a Map to be
         statically allocated.  Only the Sorted List itself should ever
         use this constructor -->not intended for Items in the list
      */
-    MapItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor )
+    MapItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
         : KeyedItem( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}
 
-
     /// Initialize the node when being inserted in the tree
-    inline void initialize( MapItem* parent )
-    {
-        m_parentPtr_   = parent;
-        m_is_NOT_root_ = true;
-        m_balance_     = eEVEN_;
-        m_nextPtr_     = nullptr;
-        m_prevPtr_     = nullptr;
-    }
-
+    void initialize( MapItem* parent ) noexcept;
 
 protected:  // Helper methods
     /// Get tree connection/pointer
-    inline MapItem* getParent() const { return static_cast<MapItem*>(m_parentPtr_); }
+    MapItem* getParent() const { return static_cast<MapItem*>( m_parentPtr_ ); }
 
     /// Set tree connection/pointer
-    inline void setParent( MapItem* n ) { m_parentPtr_ = n; }
+    void setParent( MapItem* n ) { m_parentPtr_ = n; }
 
     /// Get tree connection/pointer
-    inline MapItem* getLeft() const { return static_cast<MapItem*>(m_prevPtr_); };
+    MapItem* getLeft() const { return static_cast<MapItem*>( m_prevPtr_ ); };
 
     /// Set tree connection/pointer
-    inline void setLeft( MapItem* n ) { m_prevPtr_ = n; }
+    void setLeft( MapItem* n ) { m_prevPtr_ = n; }
 
     /// Get tree connection/pointer
-    inline MapItem* getRight() const { return static_cast<MapItem*>(m_nextPtr_); };
+    MapItem* getRight() const { return static_cast<MapItem*>( m_nextPtr_ ); };
 
     /// Set tree connection/pointer
-    inline void setRight( MapItem* n ) { m_nextPtr_ = n; }
+    void setRight( MapItem* n ) { m_nextPtr_ = n; }
 
 
 protected:
