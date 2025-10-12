@@ -38,7 +38,7 @@ jobs:
         with:
           version: '1.11.1'
 
-      # Clang setup -->The clang compiler is part of the base Windows image
+      # Clang setup -->The clang-msvc compiler is part of the base Windows image.
       #- name: Clang compiler
       #  uses: rlalik/setup-cpp-compiler@master
       #  with:

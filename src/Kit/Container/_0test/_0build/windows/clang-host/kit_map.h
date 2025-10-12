@@ -19,4 +19,4 @@
 #include "Kit/System/Win32/mappings.h"
 
 // strapi mapping
-#include "Kit/Text/_mappings/_clang-mingw/strapi.h"
+#include "Kit/Text/_mappings/_clang-msvc/strapi.h"

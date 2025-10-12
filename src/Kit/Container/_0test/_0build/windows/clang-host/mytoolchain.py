@@ -90,7 +90,7 @@ build_variants = { 'win64':win64_opts,
 #===================================================
 
 # Select Module that contains the desired toolchain
-from nqbplib.toolchains.windows.clang.console_exe import ToolChain
+from nqbplib.toolchains.windows.clang_msvc.console_exe import ToolChain
 
 
 # Function that instantiates an instance of the toolchain

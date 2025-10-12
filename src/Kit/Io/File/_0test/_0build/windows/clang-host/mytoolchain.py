@@ -52,7 +52,7 @@ optimized_win64 = BuildValues()
 debug_win64     = BuildValues()
 
 # Set 'base' options
-base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++'
+base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
 base_win64.inc        = catch2_inc
 base_win64.linkflags  = '-m64'
 base_win64.firstobjs  = unit_test_objects
@@ -87,7 +87,7 @@ build_variants = { 'win64':win64_opts,
 #===================================================
 
 # Select Module that contains the desired toolchain
-from nqbplib.toolchains.windows.clang.console_exe import ToolChain
+from nqbplib.toolchains.windows.clang_msvc.console_exe import ToolChain
 
 
 # Function that instantiates an instance of the toolchain

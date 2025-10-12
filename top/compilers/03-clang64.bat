@@ -1,6 +1,6 @@
 @echo off
-:: Updated PATH for LLVM-MinGW (but only once)
-set _CLANG_CC_=\compilers\llvm-mingw-ucrt-x86_64\bin
+:: Updated PATH for Clang (MSVC)
+set _CLANG_CC_=\compilers\clang-msvc-x86_64\bin
 IF "/%NQBP2_DONOT_ADD_CLANG_TO_PATH%" == "/" set PATH=%_CLANG_CC_%;%PATH% & set NQBP2_DONOT_ADD_CLANG_TO_PATH=true
 
 :: Get the version from the compiler itself
