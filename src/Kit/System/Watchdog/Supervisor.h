@@ -1,0 +1,167 @@
+#ifndef KIT_SYSTEM_WATCHDOG_SUPERVISOR_H_
+#define KIT_SYSTEM_WATCHDOG_SUPERVISOR_H_
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
+
+#include "Kit/System/Watchdog/WatchedThread.h"
+#include "Kit/Container/SList.h"
+#include "Kit/System/Mutex.h"
+#include <stdbool.h>
+#include <cstdint>
+
+/** Tick divider to reduce monitoring frequency. In this context a 'tick' means
+    that the 'Supervisor' thread's executes a single iteration if its event loop.
+    This is not the same thing as the platform system tick or any fixed interval
+    of time.  See the Kit::System::EventLoop for more details on how an Event
+    Loop executes
+ */
+#ifndef OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER
+#define OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER 10
+#endif
+
+// Hardware Abstraction Layer (HAL) for watchdog functionality
+extern "C"
+{
+    /** Enables the watchdog hardware.
+        @return true if watchdog was successfully enabled, false otherwise
+     */
+    bool Kit_System_Watchdog_hal_enable_wdog( void );
+
+    /** Kicks (resets/feeds) the watchdog to prevent it from timing out.
+        This should be called periodically when all monitored threads are healthy.
+     */
+    void Kit_System_Watchdog_hal_kick_wdog( void );
+
+    /** Trips the watchdog to force a system reset. This is called
+        when a monitored thread has failed.
+     */
+    void Kit_System_Watchdog_hal_trip_wdog( void );
+}
+
+///
+namespace Kit {
+///
+namespace System {
+
+/** C++ wrapper functions for the HAL interface.
+    These provide type-safe access to the HAL functions.
+ */
+
+/** Enables the watchdog hardware.
+    @return true if watchdog was successfully enabled, false otherwise
+ */
+inline bool enableWdog() noexcept
+{
+    return Kit_System_Watchdog_hal_enable_wdog();
+}
+
+/** Kicks (resets/feeds) the watchdog to prevent it from timing out.
+    This should be called periodically when all monitored threads are healthy.
+ */
+inline void kickWdog() noexcept
+{
+    Kit_System_Watchdog_hal_kick_wdog();
+}
+
+/** Trips the watchdog to force a system reset. This is called
+    when a monitored thread has failed.
+ */
+inline void tripWdog() noexcept
+{
+    Kit_System_Watchdog_hal_trip_wdog();
+}
+
+/** This class provides a centralized supervisor for monitoring all watched threads
+    in the system. It maintains a list of threads being monitored and provides
+    thread-safe methods for managing the watchdog system.
+
+    All methods are static and thread-safe to allow access from multiple threads.
+    The class uses a composition relationship with SList<WatchedThread> to manage
+    the collection of monitored threads.
+ */
+class Supervisor
+{
+public:
+    /** Enables the watchdog system. Must be called before any threads
+        can be monitored.
+
+        @return true if watchdog was successfully enabled, false otherwise
+     */
+    static bool enableWdog() noexcept
+    {
+        return Kit_System_Watchdog_hal_enable_wdog();
+    }
+
+    /** Triggers the watchdog to reset the system. This is called when
+        a monitored thread has failed to check in within its timeout period.
+     */
+    static void tripWdog() noexcept
+    {
+        Kit_System_Watchdog_hal_trip_wdog();
+    }
+
+    /** Begins monitoring a thread. The thread will be added to the list
+        of monitored threads. Once a thread has been added to the Supervisor,
+        this method can NOT be called again until after endWatching() has
+        been called on the same thread.
+        @param threadToMonitor Reference to the WatchedThread to begin monitoring
+     */
+    static void beginWatching( WatchedThread& threadToMonitor ) noexcept;
+
+    /** Stops monitoring a thread. The thread will be removed from the list
+        of monitored threads.
+        @param threadBeingMonitored Reference to the WatchedThread to stop monitoring
+     */
+    static void endWatching( WatchedThread& threadBeingMonitored ) noexcept;
+
+    /** Monitors all registered threads. This method should be called periodically
+        (typically every tick/event cycle) by the supervisor thread. It includes
+        a tick divider to reduce the performance impact of being called frequently.
+
+        This method checks each monitored thread's currentCountMs against its
+        wdogTimeoutMs and triggers the watchdog if any thread has timed out.
+     */
+    static void monitorThreads() noexcept;
+
+    /** Reloads/resets the watchdog counter for a specific thread. This is
+        called by the thread to indicate it is still alive and processing.
+
+        @param thread Reference to the WatchedThread to reload
+     */
+    static void reloadThread( WatchedThread& thread ) noexcept;
+
+    /** Kicks the hardware watchdog. Should be called periodically when all
+        monitored threads are healthy. Typically called by the supervisor thread.
+     */
+    static void kickWdog() noexcept
+    {
+        Kit_System_Watchdog_hal_kick_wdog();
+    }
+
+protected:
+    /// List of threads being monitored
+    static Kit::Container::SList<WatchedThread> m_watchedThreads;
+
+    /// Mutex for thread-safe access to the watched threads list
+    static Mutex m_mutex;
+
+    /// Current tick count for the divider
+    static uint32_t m_currentTick;
+
+    /// Flag indicating if watchdog system is enabled
+    static bool m_isEnabled;
+
+    /// Time marker for elapsed time calculations
+    static uint32_t m_timeMarker;
+};
+
+};  // end namespace System
+};  // end namespace Kit
+#endif  // end header latch
