@@ -1,5 +1,5 @@
 @echo off
-:: Updated PAHT for LLVM-MinGW (but only once)
+:: Updated PATH for LLVM-MinGW (but only once)
 set _CLANG_CC_=\compilers\llvm-mingw-ucrt-x86_64\bin
 IF "/%NQBP2_DONOT_ADD_CLANG_TO_PATH%" == "/" set PATH=%_CLANG_CC_%;%PATH% & set NQBP2_DONOT_ADD_CLANG_TO_PATH=true
 
