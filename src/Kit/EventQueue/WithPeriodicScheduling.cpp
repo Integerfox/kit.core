@@ -18,13 +18,13 @@ namespace EventQueue {
 
 ///////////////////////
 WithPeriodicScheduling::WithPeriodicScheduling( Interval_T                                      intervals[],
-                                      Hook_T                                          beginThreadProcessing,
-                                      Hook_T                                          endThreadProcessing,
-                                      ReportSlippageFunc_T                            slippageFunc,
-                                      NowFunc_T                                       nowFunc,
-                                      IdleFunc_T                                      idleFunc,
-                                      uint32_t                                        timeOutPeriodInMsec,
-                                      Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList ) noexcept
+                                                Hook_T                                          beginThreadProcessing,
+                                                Hook_T                                          endThreadProcessing,
+                                                ReportSlippageFunc_T                            slippageFunc,
+                                                NowFunc_T                                       nowFunc,
+                                                IdleFunc_T                                      idleFunc,
+                                                uint32_t                                        timeOutPeriodInMsec,
+                                                Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList ) noexcept
     : Server( timeOutPeriodInMsec, eventFlagsList )
     , Kit::System::PeriodicScheduler( intervals, beginThreadProcessing, endThreadProcessing, slippageFunc, nowFunc )
     , m_idleFunc( idleFunc )

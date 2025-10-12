@@ -47,6 +47,12 @@ static constexpr const char* const nativeNewline = KIT_IO_NEW_LINE_NATIVE;
  */
 #define KitIoFileHandle_T KitIoFileHandle_T_MAP
 
+
+/** Defers the "file descriptor" for a socket handle type to the target platform.
+    This type is used when defining concrete socket classes.
+ */
+#define KitIoSocketHandle_T KitIoSocketHandle_T_MAP
+
 /*----------------------------------------------------------------------------*/
 /** Signed data type for arguments, variables, etc. with respect to how many
     bytes can be read/written from/to streams, files, etc.  The default is

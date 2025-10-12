@@ -72,7 +72,7 @@ TEST_CASE( "DList" )
     MyItem        plum( "plum" );
     MyItem*       ptr1;
 
-    // Shutdown_TS::clearAndUseCounter();
+    ShutdownUnitTesting::clearAndUseCounter();
 
     SECTION( "Validate that an 'item' can be only in one Container" )
     {

@@ -40,7 +40,7 @@ private:
 
 public:
     /// Constructor.
-    Map() noexcept {}
+    Map() noexcept = default;
 
     /** This is a special constructor for when the Map is
         statically declared (i.e. it is initialized as part of

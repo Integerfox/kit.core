@@ -10,8 +10,8 @@
 
 #include "DString.h"
 #include "FString.h"
+#include <string.h>
 #include <algorithm>
-#include <cstdint>
 #include <new>
 
 //------------------------------------------------------------------------------

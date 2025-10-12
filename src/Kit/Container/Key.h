@@ -10,9 +10,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-// #include "kit_map.h"
 #include <stdint.h>
-#include <string.h>
+#include <stdlib.h>
 #include <limits.h>
 
 ///
@@ -86,8 +85,8 @@ public:
     /// See Kit::Container::Key
     int compareKey( const Key& key ) const noexcept override
     {
-        unsigned  len = 0;
-        DATATYPE* ptr = static_cast<DATATYPE*>(const_cast<void*>(key.getRawKey( &len )));
+        unsigned        len = 0;
+        const DATATYPE* ptr = static_cast<const DATATYPE*>( key.getRawKey( &len ) );
         if ( len != sizeof( DATATYPE ) )
         {
             return INT_MIN;  // Not a valid key
@@ -183,7 +182,7 @@ public:
     /** Returns the Key's content value. Note: The returned values is NOT
         a null terminated string!
      */
-    inline const char* getKeyValue( size_t& lenOfStringInBytes ) const noexcept
+    const char* getKeyValue( size_t& lenOfStringInBytes ) const noexcept
     {
         lenOfStringInBytes = m_len;
         return m_stringKeyPtr;
@@ -194,7 +193,7 @@ public:
     static int compare( const char* myString, unsigned myLen, const char* otherString, unsigned otherLen ) noexcept;
 
 
-public: 
+public:
     ///  See Kit::Container::key
     int compareKey( const Key& key ) const noexcept override;
 
@@ -218,16 +217,14 @@ class KeyLiteralString : public KeyStringBuffer
 {
 public:
     /// Constructor
-    KeyLiteralString( const char* string )
-        : KeyStringBuffer( string, string ? strlen( string ) : 0 ) {}
-
+    KeyLiteralString( const char* string ) noexcept;
 
 public:
     /// Returns the Key's content value
-    inline const char* getKeyValue() const noexcept { return m_stringKeyPtr; }
+    const char* getKeyValue() const noexcept { return m_stringKeyPtr; }
 
     /// Cast to read-only character string pointer.
-    inline operator const char*() const { return m_stringKeyPtr; }
+    operator const char*() const { return m_stringKeyPtr; }
 
     /// Returns a Read-only pointer to the "raw" (short-hand for getKeyValue())
     inline const char* operator()() const { return m_stringKeyPtr; }

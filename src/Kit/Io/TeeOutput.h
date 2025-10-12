@@ -55,7 +55,7 @@ public:
     /** Adds a stream.  Return true when successful; else false is returned
         if no more streams can be added
      */
-    inline bool add( IOutput& stream ) noexcept { return add( m_streams, stream ); }
+    bool add( IOutput& stream ) noexcept { return add( m_streams, stream ); }
 
     /** Removes a stream.  Returns true if the stream was actually
         removed (i.e. that it was in the list to start with).
@@ -70,12 +70,12 @@ public:
     /** Returns the first failed stream.  If no failed streams exist nullptr
         will be returned.
       */
-    inline IOutput* firstFailed() noexcept { return first( m_failed ); }
+    IOutput* firstFailed() noexcept { return first( m_failed ); }
 
     /** Returns the next failed stream in the list.  If there are no more
         failed streams nullptr will be returned.
      */
-    inline IOutput* nextFailed( IOutput& currentFailedStream ) noexcept { return next( m_failed, currentFailedStream ); }
+    IOutput* nextFailed( IOutput& currentFailedStream ) noexcept { return next( m_failed, currentFailedStream ); }
 
 public:
     /// Pull in overloaded methods from base class

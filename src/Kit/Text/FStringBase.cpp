@@ -10,7 +10,6 @@
  *----------------------------------------------------------------------------*/
 
 #include "FStringBase.h"
-#include <cstdint>
 #include <string.h>
 #include <stdio.h>
 #include <algorithm>  // Added for std::min

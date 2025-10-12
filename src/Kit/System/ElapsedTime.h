@@ -46,7 +46,7 @@ public:
         (i.e. a call to milliseconds(). The calculation properly handles the
         scenario of when the has been 'roll over' between the two times.
      */
-    inline static uint32_t deltaMilliseconds( uint32_t startTime, uint32_t endTime = milliseconds() ) noexcept
+    static uint32_t deltaMilliseconds( uint32_t startTime, uint32_t endTime = milliseconds() ) noexcept
     {
         return endTime - startTime;
     }
@@ -55,7 +55,7 @@ public:
         since the 'timeMarker'.  The calculation properly handles the scenario
         of when the has been 'roll over' between the 'timeMarker' and NOW.
      */
-    inline static bool expiredMilliseconds( uint32_t timeMarker,
+    static bool expiredMilliseconds( uint32_t timeMarker,
                                             uint32_t duration,
                                             uint32_t currentTime = milliseconds() ) noexcept
     {
@@ -67,7 +67,7 @@ public:
         was powered on and/or reset.  The maximum value is 49.7 days before
         the internal counter rolls over.
      */
-    static inline uint32_t seconds() noexcept
+    static uint32_t seconds() noexcept
     {
         return milliseconds() / 1000L;
     }
@@ -77,7 +77,7 @@ public:
         a call to seconds(). The calculation properly handles the scenario of
         when the has been 'roll over' between the two times.
      */
-    inline static uint32_t deltaSeconds( uint32_t startTime, uint32_t endTime = seconds() ) noexcept
+    static uint32_t deltaSeconds( uint32_t startTime, uint32_t endTime = seconds() ) noexcept
     {
         return endTime - startTime;
     }
@@ -86,7 +86,7 @@ public:
         since the 'timeMarker'.  The calculation properly handles the scenario
         of when the has been 'roll over' between the 'timeMarker' and NOW.
      */
-    inline static bool expiredSeconds( uint32_t timeMarker,
+     static bool expiredSeconds( uint32_t timeMarker,
                                        uint32_t duration,
                                        uint32_t currentTime = seconds() ) noexcept
     {
@@ -127,7 +127,7 @@ public:
         (i.e. a call to milliseconds(). The calculation properly handles the
         scenario of when the has been 'roll over' between the two times.
      */
-    inline static uint64_t deltaMillisecondsEx( uint64_t startTime, uint64_t endTime = millisecondsEx() ) noexcept
+     static uint64_t deltaMillisecondsEx( uint64_t startTime, uint64_t endTime = millisecondsEx() ) noexcept
     {
         return endTime - startTime;
     }
@@ -136,7 +136,7 @@ public:
         since the 'timeMarker'.  The calculation properly handles the scenario
         of when the has been 'roll over' between the 'timeMarker' and NOW.
      */
-    inline static bool expiredMillisecondsEx( uint64_t timeMarker,
+     static bool expiredMillisecondsEx( uint64_t timeMarker,
                                               uint64_t duration,
                                               uint64_t currentTime = millisecondsEx() ) noexcept
     {
@@ -158,7 +158,7 @@ public:
         a call to seconds(). The calculation properly handles the scenario of
         when the has been 'roll over' between the two times.
      */
-    inline static uint64_t deltaSecondsEx( uint64_t startTime, uint64_t endTime = secondsEx() ) noexcept
+     static uint64_t deltaSecondsEx( uint64_t startTime, uint64_t endTime = secondsEx() ) noexcept
     {
         return endTime - startTime;
     }
@@ -167,7 +167,7 @@ public:
         since the 'timeMarker'.  The calculation properly handles the scenario
         of when the has been 'roll over' between the 'timeMarker' and NOW.
      */
-    inline static bool expiredSecondsEx( uint64_t timeMarker,
+     static bool expiredSecondsEx( uint64_t timeMarker,
                                          uint64_t duration,
                                          uint64_t currentTime = secondsEx() ) noexcept
     {
@@ -190,7 +190,7 @@ public:
         application NOT CALL this method because then that code can NOT be
         simulated using the SimTick interface.
      */
-    inline static uint64_t secondsInRealTimeEx() noexcept
+    static uint64_t secondsInRealTimeEx() noexcept
     {
         return millisecondsInRealTimeEx() / 1000L;
     }
