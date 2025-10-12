@@ -1,4 +1,4 @@
-name: Build Windows MinGW
+name: Build Windows Clang
 permissions:
   contents: read
   pull-requests: write
@@ -42,7 +42,7 @@ jobs:
       - name: Clang compiler
         uses: rlalik/setup-cpp-compiler@master
         with:
-          compiler: clang-12.0.0
+          compiler: clang-21.1.0
 
       # This step is commented out, but can be used for debugging purposes.
       #- name: Setup tmate session 

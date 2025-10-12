@@ -39,7 +39,7 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 FINAL_OUTPUT_NAME = 'a.exe'
 
 # Using Catch2 
-(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'windows/gcc-host', 'a' )
+(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'windows/clang-host', 'a' )
 
 
 
@@ -53,11 +53,11 @@ optimized_win64 = BuildValues()
 debug_win64     = BuildValues()
 
 # Set 'base' options
-base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage -fprofile-update=atomic'
+base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++'
 base_win64.inc        = catch2_inc
 base_win64.linkflags  = '-m64'
 base_win64.firstobjs  = unit_test_objects
-base_win64.linklibs   = f'-lgcov {catch2_lib}'
+base_win64.linklibs   = f'{catch2_lib}'
 
 # Set 'Optimized' options
 optimized_win64.cflags    = '-O3'
@@ -89,7 +89,7 @@ build_variants = { 'win64':win64_opts,
 #===================================================
 
 # Select Module that contains the desired toolchain
-from nqbplib.toolchains.windows.mingw_w64.console_exe import ToolChain
+from nqbplib.toolchains.windows.clang.console_exe import ToolChain
 
 
 # Function that instantiates an instance of the toolchain
