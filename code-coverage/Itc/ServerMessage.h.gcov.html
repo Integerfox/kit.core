@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 13:45:17</td>
+            <td class="headerValue">2025-10-12 14:33:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -89,7 +89,7 @@
 <span id="L27"><span class="lineNum">      27</span>                 :             : public:</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :     /// Constructor</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     ServerMessage( IReturnHandler&amp; rh ) noexcept</span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC tlaBgGNC">          36 :         : m_rh( rh )</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC tlaBgGNC">          39 :         : m_rh( rh )</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     {</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             :     }</span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
@@ -100,7 +100,7 @@
 <span id="L38"><span class="lineNum">      38</span>                 :             :      */</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     inline void returnToSender() noexcept</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :     {</span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          40 :         m_rh.rts();</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          43 :         m_rh.rts();</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     }</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : protected:</span>
