@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 89-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 91-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -120,9 +120,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad07946412886e40ea88f04a2b59f45b1" id="r_ad07946412886e40ea88f04a2b59f45b1"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad07946412886e40ea88f04a2b59f45b1">getSections_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
 <tr class="memdesc:ad07946412886e40ea88f04a2b59f45b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'sections' and returns the actual section name(s) via the IString 'dst'.  <br /></td></tr>
 <tr class="separator:ad07946412886e40ea88f04a2b59f45b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fefa7ce5b473a3e4e1a503f0f0cf7c9" id="r_a3fefa7ce5b473a3e4e1a503f0f0cf7c9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fefa7ce5b473a3e4e1a503f0f0cf7c9">setThreadFilter_</a> (const char *threadName1, const char *threadName2=0, const char *threadName3=0, const char *threadName4=0)</td></tr>
-<tr class="memdesc:a3fefa7ce5b473a3e4e1a503f0f0cf7c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method applies a filter by thread name when generating output, i.e.  <br /></td></tr>
-<tr class="separator:a3fefa7ce5b473a3e4e1a503f0f0cf7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d930b9a0b012797c0cf9d621edf54b" id="r_a54d930b9a0b012797c0cf9d621edf54b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54d930b9a0b012797c0cf9d621edf54b">setThreadFilter_</a> (const char *threadName1, const char *threadName2=nullptr, const char *threadName3=nullptr, const char *threadName4=nullptr)</td></tr>
+<tr class="memdesc:a54d930b9a0b012797c0cf9d621edf54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method applies a filter by thread name when generating output, i.e.  <br /></td></tr>
+<tr class="separator:a54d930b9a0b012797c0cf9d621edf54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a137e6b9104ffceda2e0cb4b8f177b794" id="r_a137e6b9104ffceda2e0cb4b8f177b794"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a137e6b9104ffceda2e0cb4b8f177b794">getThreadFilters_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
 <tr class="memdesc:a137e6b9104ffceda2e0cb4b8f177b794"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'thread filters' and returns the actual thread name(s) via the IString 'dst'.  <br /></td></tr>
 <tr class="separator:a137e6b9104ffceda2e0cb4b8f177b794"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -682,8 +682,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3fefa7ce5b473a3e4e1a503f0f0cf7c9" name="a3fefa7ce5b473a3e4e1a503f0f0cf7c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fefa7ce5b473a3e4e1a503f0f0cf7c9">&#9670;&#160;</a></span>setThreadFilter_()</h2>
+<a id="a54d930b9a0b012797c0cf9d621edf54b" name="a54d930b9a0b012797c0cf9d621edf54b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54d930b9a0b012797c0cf9d621edf54b">&#9670;&#160;</a></span>setThreadFilter_()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -699,17 +699,17 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName2</em><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </span></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName2</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName3</em><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </span></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName3</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName4</em><span class="paramdefsep"> = </span><span class="paramdefval">0</span></span>&#160;)</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>threadName4</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -926,7 +926,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 12 2025 14:31:03 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Oct 12 2025 14:53:41 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

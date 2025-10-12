@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">87.5&nbsp;%</td>
@@ -213,7 +213,7 @@
 <span id="L151"><span class="lineNum">     151</span>                 :             :     /** Returns the need memory size in &quot;block units&quot;.  Note: The size calculation</span>
 <span id="L152"><span class="lineNum">     152</span>                 :             :         includes the memory for the trailing '\0' string terminator.</span>
 <span id="L153"><span class="lineNum">     153</span>                 :             :      */</span>
-<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC tlaBgGNC">          69 :     inline int calcMemSize( int len ) noexcept { return ( ( len + m_blockSize ) / m_blockSize ) * m_blockSize; }</span></span>
+<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC tlaBgGNC">          69 :     int calcMemSize( int len ) noexcept { return ( ( len + m_blockSize ) / m_blockSize ) * m_blockSize; }</span></span>
 <span id="L155"><span class="lineNum">     155</span>                 :             : </span>
 <span id="L156"><span class="lineNum">     156</span>                 :             :     /// Frees the current string memory - IF it was previously allocated</span>
 <span id="L157"><span class="lineNum">     157</span>                 :             :     void freeCurrentString() noexcept;</span>

@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">85.7&nbsp;%</td>
-            <td class="headerCovTableEntry">14</td>
-            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryLo">71.4&nbsp;%</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryLo">47.7&nbsp;%</td>
@@ -101,37 +101,28 @@
 <span id="L39"><span class="lineNum">      39</span>                 :             : </span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : protected:</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     /// Constructor</span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC tlaBgGNC">          16 :     MapItem() { initialize( nullptr ); }</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :     MapItem() noexcept;</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     /** Constructor --&gt;special constructor to allow a Map to be</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :         statically allocated.  Only the Sorted List itself should ever</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :         use this constructor --&gt;not intended for Items in the list</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :      */</span>
-<span id="L48"><span class="lineNum">      48</span>                 :             :     MapItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor )</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :     MapItem( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept</span>
 <span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         : KeyedItem( ignoreThisParameter_usedToCreateAUniqueConstructor ) {}</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>                 :             : </span>
-<span id="L52"><span class="lineNum">      52</span>                 :             :     /// Initialize the node when being inserted in the tree</span>
-<span id="L53"><span class="lineNum">      53</span>                 :             :     inline void initialize( MapItem* parent )</span>
-<span id="L54"><span class="lineNum">      54</span>                 :             :     {</span>
-<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC tlaBgGNC">          68 :         m_parentPtr_   = parent;</span></span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          68 :         m_is_NOT_root_ = true;</span></span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          68 :         m_balance_     = eEVEN_;</span></span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">          68 :         m_nextPtr_     = nullptr;</span></span>
-<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC">          16 :         m_prevPtr_     = nullptr;</span></span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">          28 :     }</span></span>
-<span id="L61"><span class="lineNum">      61</span>                 :             : </span>
-<span id="L62"><span class="lineNum">      62</span>                 :             : </span>
-<span id="L63"><span class="lineNum">      63</span>                 :             : protected:  // Helper methods</span>
-<span id="L64"><span class="lineNum">      64</span>                 :             :     /// Get tree connection/pointer</span>
-<span id="L65"><span class="lineNum">      65</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span> :<span class="tlaGNC">          53 :     inline MapItem* getParent() const { return static_cast&lt;MapItem*&gt;(m_parentPtr_); }</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :     /// Initialize the node when being inserted in the tree</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :     void initialize( MapItem* parent ) noexcept;</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : </span>
+<span id="L54"><span class="lineNum">      54</span>                 :             : protected:  // Helper methods</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :     /// Get tree connection/pointer</span>
+<span id="L56"><span class="lineNum">      56</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span> :<span class="tlaGNC tlaBgGNC">          53 :     MapItem* getParent() const { return static_cast&lt;MapItem*&gt;( m_parentPtr_ ); }</span></span>
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 17 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 27 times"> + </span>]
-<span id="L66"><span class="lineNum">      66</span>                 :             : </span>
-<span id="L67"><span class="lineNum">      67</span>                 :             :     /// Set tree connection/pointer</span>
-<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     inline void setParent( MapItem* n ) { m_parentPtr_ = n; }</span></span>
-<span id="L69"><span class="lineNum">      69</span>                 :             : </span>
-<span id="L70"><span class="lineNum">      70</span>                 :             :     /// Get tree connection/pointer</span>
-<span id="L71"><span class="lineNum">      71</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">         402 :     inline MapItem* getLeft() const { return static_cast&lt;MapItem*&gt;(m_prevPtr_); };</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :             : </span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :     /// Set tree connection/pointer</span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     void setParent( MapItem* n ) { m_parentPtr_ = n; }</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :             : </span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :     /// Get tree connection/pointer</span>
+<span id="L62"><span class="lineNum">      62</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">         402 :     MapItem* getLeft() const { return static_cast&lt;MapItem*&gt;( m_prevPtr_ ); };</span></span>
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaUNC" title="Branch 6 was not taken"> - </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaUNC" title="Branch 8 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 7 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaUNC" title="Branch 16 was not taken"> - </span><span class="tlaGBC" title="Branch 17 was taken 7 times"> + </span><span class="tlaUNC" title="Branch 18 was not taken"> - </span> 
@@ -143,13 +134,13 @@
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 44 was not taken"> - </span><span class="tlaGBC" title="Branch 45 was taken 33 times"> + </span><span class="tlaGBC" title="Branch 46 was taken 33 times"> + </span><span class="tlaUNC" title="Branch 47 was not taken"> - </span><span class="tlaGBC" title="Branch 48 was taken 23 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 49 was not taken"> - </span><span class="tlaGBC" title="Branch 50 was taken 30 times"> + </span><span class="tlaGBC" title="Branch 51 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 52 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 53 was taken 11 times"> + </span> 
 <span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 54 was taken 17 times"> + </span><span class="tlaUNC" title="Branch 55 was not taken"> - </span><span class="tlaGBC" title="Branch 56 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 57 was taken 15 times"> + </span>]
-<span id="L72"><span class="lineNum">      72</span>                 :             : </span>
-<span id="L73"><span class="lineNum">      73</span>                 :             :     /// Set tree connection/pointer</span>
-<span id="L74"><span class="lineNum">      74</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          62 :     inline void setLeft( MapItem* n ) { m_prevPtr_ = n; }</span></span>
+<span id="L63"><span class="lineNum">      63</span>                 :             : </span>
+<span id="L64"><span class="lineNum">      64</span>                 :             :     /// Set tree connection/pointer</span>
+<span id="L65"><span class="lineNum">      65</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          62 :     void setLeft( MapItem* n ) { m_prevPtr_ = n; }</span></span>
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 20 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 6 times"> + </span>]
-<span id="L75"><span class="lineNum">      75</span>                 :             : </span>
-<span id="L76"><span class="lineNum">      76</span>                 :             :     /// Get tree connection/pointer</span>
-<span id="L77"><span class="lineNum">      77</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         207 :     inline MapItem* getRight() const { return static_cast&lt;MapItem*&gt;(m_nextPtr_); };</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :             : </span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :     /// Get tree connection/pointer</span>
+<span id="L68"><span class="lineNum">      68</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         207 :     MapItem* getRight() const { return static_cast&lt;MapItem*&gt;( m_nextPtr_ ); };</span></span>
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaUNC" title="Branch 6 was not taken"> - </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 7 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaUNC" title="Branch 10 was not taken"> - </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaUNC" title="Branch 12 was not taken"> - </span><span class="tlaGBC" title="Branch 13 was taken 7 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaUNC" title="Branch 16 was not taken"> - </span><span class="tlaGBC" title="Branch 17 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 18 was taken 3 times"> + </span> 
@@ -159,32 +150,32 @@
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 34 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 35 was taken 17 times"> + </span><span class="tlaUNC" title="Branch 36 was not taken"> - </span><span class="tlaUNC" title="Branch 37 was not taken"> - </span><span class="tlaGBC" title="Branch 38 was taken 6 times"> + </span> 
 <span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 39 was taken 27 times"> + </span><span class="tlaGBC" title="Branch 40 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 41 was taken 17 times"> + </span><span class="tlaGBC" title="Branch 42 was taken 3 times"> + </span> 
 <span class="lineNum">        </span>             <span class="tlaGBC" title="Branch 43 was taken 8 times"> + </span>]
-<span id="L78"><span class="lineNum">      78</span>                 :             : </span>
-<span id="L79"><span class="lineNum">      79</span>                 :             :     /// Set tree connection/pointer</span>
-<span id="L80"><span class="lineNum">      80</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          49 :     inline void setRight( MapItem* n ) { m_nextPtr_ = n; }</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :             : </span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :     /// Set tree connection/pointer</span>
+<span id="L71"><span class="lineNum">      71</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          49 :     void setRight( MapItem* n ) { m_nextPtr_ = n; }</span></span>
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 7 times"> + </span> 
 <span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 7 times"> + </span> 
 <span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 13 was not taken"> - </span>]
-<span id="L81"><span class="lineNum">      81</span>                 :             : </span>
-<span id="L82"><span class="lineNum">      82</span>                 :             : </span>
-<span id="L83"><span class="lineNum">      83</span>                 :             : protected:</span>
-<span id="L84"><span class="lineNum">      84</span>                 :             :     /// Link field to the parent node.</span>
-<span id="L85"><span class="lineNum">      85</span>                 :             :     void* m_parentPtr_;</span>
-<span id="L86"><span class="lineNum">      86</span>                 :             : </span>
-<span id="L87"><span class="lineNum">      87</span>                 :             :     /// Balance status</span>
-<span id="L88"><span class="lineNum">      88</span>                 :             :     Balance_T m_balance_;</span>
-<span id="L89"><span class="lineNum">      89</span>                 :             : </span>
-<span id="L90"><span class="lineNum">      90</span>                 :             :     /// I am the root node</span>
-<span id="L91"><span class="lineNum">      91</span>                 :             :     bool m_is_NOT_root_;</span>
-<span id="L92"><span class="lineNum">      92</span>                 :             : </span>
-<span id="L93"><span class="lineNum">      93</span>                 :             : </span>
-<span id="L94"><span class="lineNum">      94</span>                 :             :     // Allow the AVL Tree class access to my data members</span>
-<span id="L95"><span class="lineNum">      95</span>                 :             :     friend class AvlTree_;</span>
-<span id="L96"><span class="lineNum">      96</span>                 :             : };</span>
-<span id="L97"><span class="lineNum">      97</span>                 :             : </span>
-<span id="L98"><span class="lineNum">      98</span>                 :             : }  // end namespaces</span>
-<span id="L99"><span class="lineNum">      99</span>                 :             : }</span>
-<span id="L100"><span class="lineNum">     100</span>                 :             : #endif  // end header latch</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             : </span>
+<span id="L73"><span class="lineNum">      73</span>                 :             : </span>
+<span id="L74"><span class="lineNum">      74</span>                 :             : protected:</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :     /// Link field to the parent node.</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :     void* m_parentPtr_;</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             : </span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :     /// Balance status</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :     Balance_T m_balance_;</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             : </span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :     /// I am the root node</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :     bool m_is_NOT_root_;</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             : </span>
+<span id="L84"><span class="lineNum">      84</span>                 :             : </span>
+<span id="L85"><span class="lineNum">      85</span>                 :             :     // Allow the AVL Tree class access to my data members</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :     friend class AvlTree_;</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             : };</span>
+<span id="L88"><span class="lineNum">      88</span>                 :             : </span>
+<span id="L89"><span class="lineNum">      89</span>                 :             : }  // end namespaces</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             : }</span>
+<span id="L91"><span class="lineNum">      91</span>                 :             : #endif  // end header latch</span>
         </pre>
               </td>
             </tr>

@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">5</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -98,31 +98,24 @@
 <span id="L36"><span class="lineNum">      36</span>                 :             :     /** The constructor initializes the handler with a reference to the</span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :         thread semaphore of the current thread.</span>
 <span id="L38"><span class="lineNum">      38</span>                 :             :      */</span>
-<span id="L39"><span class="lineNum">      39</span>                 :             :     SyncReturnHandler( Kit::System::ISignable&amp; clientSemaphore = Kit::System::Thread::getCurrent() ) noexcept</span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          35 :         : m_waiter( clientSemaphore)</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :             :     {</span>
-<span id="L42"><span class="lineNum">      42</span>                 :             :     }</span>
-<span id="L43"><span class="lineNum">      43</span>                 :             : </span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :     SyncReturnHandler( Kit::System::ISignable&amp; clientSemaphore = Kit::System::Thread::getCurrent() ) noexcept;</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             : </span>
+<span id="L41"><span class="lineNum">      41</span>                 :             : public:</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :     /// See ReturnHandler</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :     void rts() noexcept override;</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : </span>
-<span id="L45"><span class="lineNum">      45</span>                 :             : public:</span>
-<span id="L46"><span class="lineNum">      46</span>                 :             :     /// See ReturnHandler</span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">          35 :     void rts() noexcept override</span></span>
-<span id="L48"><span class="lineNum">      48</span>                 :             :     {</span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          35 :         m_waiter.signal();</span></span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">          35 :     }</span></span>
-<span id="L51"><span class="lineNum">      51</span>                 :             : </span>
-<span id="L52"><span class="lineNum">      52</span>                 :             : protected:</span>
-<span id="L53"><span class="lineNum">      53</span>                 :             :     /** Reference to the client thread's thread semaphore which is used</span>
-<span id="L54"><span class="lineNum">      54</span>                 :             :         to notify the client that the server has completed processing</span>
-<span id="L55"><span class="lineNum">      55</span>                 :             :         the message.</span>
-<span id="L56"><span class="lineNum">      56</span>                 :             :      */</span>
-<span id="L57"><span class="lineNum">      57</span>                 :             :     Kit::System::ISignable&amp; m_waiter;</span>
-<span id="L58"><span class="lineNum">      58</span>                 :             : };</span>
-<span id="L59"><span class="lineNum">      59</span>                 :             : </span>
-<span id="L60"><span class="lineNum">      60</span>                 :             : </span>
-<span id="L61"><span class="lineNum">      61</span>                 :             : }  // end namespaces</span>
-<span id="L62"><span class="lineNum">      62</span>                 :             : }</span>
-<span id="L63"><span class="lineNum">      63</span>                 :             : #endif  // end header latch</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             : protected:</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :     /** Reference to the client thread's thread semaphore which is used</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :         to notify the client that the server has completed processing</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :         the message.</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :      */</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     Kit::System::ISignable&amp; m_waiter;</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             : };</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             : </span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : </span>
+<span id="L54"><span class="lineNum">      54</span>                 :             : }  // end namespaces</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             : }</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : #endif  // end header latch</span>
         </pre>
               </td>
             </tr>

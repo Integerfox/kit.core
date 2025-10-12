@@ -31,18 +31,18 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">92.3&nbsp;%</td>
-            <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">19</td>
+            <td class="headerCovTableEntry">19</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryMed">53.3&nbsp;%</td>
-            <td class="headerCovTableEntry">60</td>
-            <td class="headerCovTableEntry">32</td>
+            <td class="headerCovTableEntryMed">57.7&nbsp;%</td>
+            <td class="headerCovTableEntry">78</td>
+            <td class="headerCovTableEntry">45</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -90,8 +90,8 @@
 <span id="L28"><span class="lineNum">      28</span>                 :             : {</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : public:</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             :     /// Public constructor initializes head and tail pointers.</span>
-<span id="L31"><span class="lineNum">      31</span>                 :             :     SList() noexcept</span>
-<span id="L32"><span class="lineNum">      32</span>                 :             :         : SListBase() {}</span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC tlaBgGNC">          38 :     SList() noexcept</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          30 :         : SListBase() {}</span></span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
 <span id="L34"><span class="lineNum">      34</span>                 :             :     /** This is a special constructor for when the list is statically declared</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :         (i.e. it is initialized as part of C++ startup BEFORE main() is</span>
@@ -102,17 +102,20 @@
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : public:</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     /// Moves the content of the this queue to the specified queue.</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC tlaBgGNC">           1 :     void move( SList&lt;ITEM&gt;&amp; dst ) noexcept { SListBase::move( dst ); }</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">           1 :     void move( SList&lt;ITEM&gt;&amp; dst ) noexcept { SListBase::move( dst ); }</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : </span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     /// Empties the list.  All references to the item(s) in the list are lost.</span>
-<span id="L46"><span class="lineNum">      46</span>                 :             :     void clearTheList() noexcept { SListBase::clearTheList(); }</span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">           1 :     void clearTheList() noexcept { SListBase::clearTheList(); }</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : public:</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     /// Removes the first item in the list.  Returns nullptr if the list is empty.</span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">          51 :     ITEM* get() noexcept { return static_cast&lt;ITEM*&gt;( SListBase::getFirst() ); }</span></span>
+<span id="L50"><span class="lineNum">      50</span>   [<span class="tlaGBC" title="Branch 0 was taken 3352 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 59 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span> :<span class="tlaGNC">        7541 :     ITEM* get() noexcept { return static_cast&lt;ITEM*&gt;( SListBase::getFirst() ); }</span></span>
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 12 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 23 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 8 was taken 2 times"> + </span> 
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 9 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 10 was not taken"> - </span><span class="tlaGBC" title="Branch 11 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 13 was taken 9 times"> + </span> 
+<span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 14 was not taken"> - </span><span class="tlaGBC" title="Branch 15 was taken 1 time"> + </span>]
 <span id="L51"><span class="lineNum">      51</span>                 :             : </span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     /// Adds the item as the last item in the list</span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">        3025 :     void put( ITEM&amp; item ) noexcept { SListBase::putLast( item ); }</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">        2995 :     void put( ITEM&amp; item ) noexcept { SListBase::putLast( item ); }</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : </span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     /** Return a pointer to the first item in the list. The returned item</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :         remains in the list.  Returns nullptr if the list is empty.</span>
@@ -138,10 +141,10 @@
 <span id="L66"><span class="lineNum">      66</span>                 :             :     /** Removes the top element from stack and return a pointer to it as a</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :         result. Returns nullptr, if the stack is empty</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :      */</span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     ITEM* pop() noexcept { return static_cast&lt;ITEM*&gt;( SListBase::getFirst() ); }</span></span>
+<span id="L69"><span class="lineNum">      69</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaGNC">           8 :     ITEM* pop() noexcept { return static_cast&lt;ITEM*&gt;( SListBase::getFirst() ); }</span></span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : </span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     /// Adds the ITEM item to top of the stack.</span>
-<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC tlaBgGNC">           7 :     void push( ITEM&amp; item ) noexcept { SListBase::putFirst( item ); }</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">           7 :     void push( ITEM&amp; item ) noexcept { SListBase::putFirst( item ); }</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             : </span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :     /** Return a pointer to the top ITEM item in the stack. The returned item</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :         remains in the queue.  Returns nullptr if the stack is empty.</span>
@@ -152,12 +155,12 @@
 <span id="L80"><span class="lineNum">      80</span>                 :             :     /** Removes the first item in the list.  Returns nullptr if the list</span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :         is empty.</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :      */</span>
-<span id="L83"><span class="lineNum">      83</span>                 :             :     ITEM* getFirst() noexcept { return static_cast&lt;ITEM*&gt;( SListBase::getFirst() ); }</span>
+<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">           1 :     ITEM* getFirst() noexcept { return static_cast&lt;ITEM*&gt;( SListBase::getFirst() ); }</span></span>
 <span id="L84"><span class="lineNum">      84</span>                 :             : </span>
 <span id="L85"><span class="lineNum">      85</span>                 :             :     /** Removes the last item in the list.  Returns nullptr if the list</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             :         is empty.</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :      */</span>
-<span id="L88"><span class="lineNum">      88</span>                 :             :     ITEM* getLast() noexcept { return static_cast&lt;ITEM*&gt;( SListBase::getLast() ); }</span>
+<span id="L88"><span class="lineNum">      88</span>                 :<span class="tlaGNC">           1 :     ITEM* getLast() noexcept { return static_cast&lt;ITEM*&gt;( SListBase::getLast() ); }</span></span>
 <span id="L89"><span class="lineNum">      89</span>                 :             : </span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     /// Adds the item as the first item in the list.</span>
 <span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">           2 :     void putFirst( ITEM&amp; item ) noexcept { SListBase::putFirst( item ); }</span></span>
@@ -173,7 +176,7 @@
 <span id="L101"><span class="lineNum">     101</span>                 :             :     /** Insert the &quot;item&quot; ITEM into the list behind the &quot;after&quot; ITEM element.</span>
 <span id="L102"><span class="lineNum">     102</span>                 :             :         If 'after' is nullptr, then 'item' is added to the head of the list.</span>
 <span id="L103"><span class="lineNum">     103</span>                 :             :      */</span>
-<span id="L104"><span class="lineNum">     104</span>                 :             :     void insertAfter( ITEM&amp; after, ITEM&amp; item ) noexcept { SListBase::insertAfter( after, item ); }</span>
+<span id="L104"><span class="lineNum">     104</span>                 :<span class="tlaGNC">           2 :     void insertAfter( ITEM&amp; after, ITEM&amp; item ) noexcept { SListBase::insertAfter( after, item ); }</span></span>
 <span id="L105"><span class="lineNum">     105</span>                 :             : </span>
 <span id="L106"><span class="lineNum">     106</span>                 :             :     /** Insert the &quot;item&quot; ITEM into the list ahead of the &quot;before&quot; ITEM element.</span>
 <span id="L107"><span class="lineNum">     107</span>                 :             :         If 'before' is nullptr, then 'item' is added to the tail of the list.</span>
@@ -189,7 +192,7 @@
 <span id="L117"><span class="lineNum">     117</span>                 :             :     /** Return a pointer to the first item in the list. The returned item</span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :         remains in the list.  Returns nullptr if the list is empty.</span>
 <span id="L119"><span class="lineNum">     119</span>                 :             :      */</span>
-<span id="L120"><span class="lineNum">     120</span>   [<span class="tlaGBC" title="Branch 0 was taken 93 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3405 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 49114 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">       52612 :     ITEM* first() const noexcept { return static_cast&lt;ITEM*&gt;( SListBase::first() ); }</span></span>
+<span id="L120"><span class="lineNum">     120</span>   [<span class="tlaGBC" title="Branch 0 was taken 96 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3406 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 49004 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">       52506 :     ITEM* first() const noexcept { return static_cast&lt;ITEM*&gt;( SListBase::first() ); }</span></span>
 <span id="L121"><span class="lineNum">     121</span>                 :             : </span>
 <span id="L122"><span class="lineNum">     122</span>                 :             :     /** Return a pointer to the last item in the list. The returned item remains</span>
 <span id="L123"><span class="lineNum">     123</span>                 :             :         in the list.  Returns nullptr if the list is empty.</span>
@@ -199,7 +202,7 @@
 <span id="L127"><span class="lineNum">     127</span>                 :             :     /** Return a pointer to the item after the item &quot;item&quot;. Both items remain in</span>
 <span id="L128"><span class="lineNum">     128</span>                 :             :         the list.  Returns nullptr when the end-of-list is reached.</span>
 <span id="L129"><span class="lineNum">     129</span>                 :             :      */</span>
-<span id="L130"><span class="lineNum">     130</span>   [<span class="tlaGBC" title="Branch 0 was taken 30 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 86 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 103845 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">      104066 :     ITEM* next( const ITEM&amp; item ) const noexcept { return static_cast&lt;ITEM*&gt;( SListBase::next( item ) ); }</span></span>
+<span id="L130"><span class="lineNum">     130</span>   [<span class="tlaGBC" title="Branch 0 was taken 30 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 86 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 103539 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">      103665 :     ITEM* next( const ITEM&amp; item ) const noexcept { return static_cast&lt;ITEM*&gt;( SListBase::next( item ) ); }</span></span>
 <span id="L131"><span class="lineNum">     131</span>                 :             : </span>
 <span id="L132"><span class="lineNum">     132</span>                 :             : private:</span>
 <span id="L133"><span class="lineNum">     133</span>                 :             :     /// Prevent access to the copy constructor --&gt;Containers can not be copied!</span>

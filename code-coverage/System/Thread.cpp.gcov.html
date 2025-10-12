@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryHi">70.0&nbsp;%</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">7</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -96,9 +96,9 @@
 <span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          20 :     return m_nativeThreadHdl;</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : }</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             : </span>
-<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 91 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1133 times"> + </span>]:<span class="tlaGNC">        1224 : bool Thread::isActive() const noexcept</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">         974 : bool Thread::isActive() const noexcept</span></span>
 <span id="L38"><span class="lineNum">      38</span>                 :             : {</span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">        1224 :     return threadList_.find( *this );</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         974 :     return threadList_.find( *this );</span></span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : }</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : </span>
 <span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">           3 : IRunnable&amp; Thread::getRunnable() const noexcept</span></span>
@@ -106,28 +106,28 @@
 <span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">           3 :     return m_runnable;</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : }</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             : </span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">       38552 : Thread&amp; Thread::getCurrent() noexcept</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">       38436 : Thread&amp; Thread::getCurrent() noexcept</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : {</span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">       38552 :     Thread* curThread = tryGetCurrent();</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">       38436 :     Thread* curThread = tryGetCurrent();</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
 <span id="L51"><span class="lineNum">      51</span>                 :             :     // Trap potential error</span>
-<span id="L52"><span class="lineNum">      52</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 38552 times"> + </span>]:<span class="tlaGNC">       38552 :     if ( !curThread )</span></span>
+<span id="L52"><span class="lineNum">      52</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 38436 times"> + </span>]:<span class="tlaGNC">       38436 :     if ( !curThread )</span></span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :     {</span>
 <span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         FatalError::logRaw( Shutdown::eOSAL, &quot;Thread::getCurrent().  Current thread is NOT a Kit::System::Thread.&quot; );</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     }</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC tlaBgGNC">       38552 :     return *curThread;</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC tlaBgGNC">       38436 :     return *curThread;</span></span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : }</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : </span>
 <span id="L60"><span class="lineNum">      60</span>                 :             : //////////////////////////</span>
-<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">       49114 : bool Thread::isActiveThread( Thread* threadPtr ) noexcept</span></span>
+<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">       49004 : bool Thread::isActiveThread( Thread* threadPtr ) noexcept</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : {</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :     // NOTE: I have to walk the list of active threads because 'threadPtr' may or may not be valid Thread pointer</span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">       49114 :     Mutex::ScopeLock lock( PrivateLocks::sysLists() );</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">       49004 :     Mutex::ScopeLock lock( PrivateLocks::sysLists() );</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :     Thread* ptr = threadList_.first();</span>
-<span id="L66"><span class="lineNum">      66</span>         [<span class="tlaGBC" title="Branch 0 was taken 152959 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">      152959 :     while ( ptr )</span></span>
+<span id="L66"><span class="lineNum">      66</span>         [<span class="tlaGBC" title="Branch 0 was taken 152543 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">      152543 :     while ( ptr )</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :     {</span>
-<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 103845 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 49114 times"> + </span>]:<span class="tlaGNC">      152959 :         if ( ptr == threadPtr )</span></span>
+<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 103539 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 49004 times"> + </span>]:<span class="tlaGNC">      152543 :         if ( ptr == threadPtr )</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :         {</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :             return true;</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :         }</span>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 89-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 91-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -89,83 +89,68 @@ $(function() {
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>{</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">protected</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">    /// Constructor</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#a0651eeca42c71226d1aae9df521bc260">   42</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#a0651eeca42c71226d1aae9df521bc260">Item</a>() noexcept</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        : <a class="code hl_variable" href="class_kit_1_1_container_1_1_item.html#a47813c3c6e3e515d21236c39f0345ab1">m_inListPtr_</a>( <span class="keywordtype">nullptr</span> ) {}</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"></span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">    /** Constructor used ONLY with the child class MapItem: --&gt;special</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">        constructor to allow a Map to be statically allocated.  Only the Map</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        itself should ever use this constructor --&gt;not intended for Items in a</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">        Map</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#acbdb631d3373ecd8d950a37c1f60204d">   50</a></span>    <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#acbdb631d3373ecd8d950a37c1f60204d">Item</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="comment">/* ignoreThisParameter_usedToCreateAUniqueConstructor */</span> ) <span class="keyword">noexcept</span> {}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#a0651eeca42c71226d1aae9df521bc260">   42</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#a0651eeca42c71226d1aae9df521bc260">Item</a>() noexcept;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">    /** Constructor used ONLY with the child class MapItem: --&gt;special</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">        constructor to allow a Map to be statically allocated.  Only the Map</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">        itself should ever use this constructor --&gt;not intended for Items in a</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        Map</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#acbdb631d3373ecd8d950a37c1f60204d">   49</a></span>    <a class="code hl_class" href="class_kit_1_1_container_1_1_item.html">Item</a>( const <span class="keywordtype">char</span>* <span class="comment">/* ignoreThisParameter_usedToCreateAUniqueConstructor */</span> ) noexcept {}</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">    /** Helper method to trap when inserting an item in multiple containers.</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">        A fatal error will be generated if &#39;Item&#39; is attempted to be put into</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">        more than on container.</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment"></span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">        Notes:</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">            o The method returns false when there is error - which is ONLY</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">              usefully during unittesting when the invoking a FatalError</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">              does NOT terminate the application.</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">   63</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">insert_</a>( <span class="keywordtype">void</span>* newContainerPtr ) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">    /// Returns &#39;true&#39; if the instance is in the specified container.</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#a1f41d2effb8b5b6b47b38d25d37280b3">   66</a></span><span class="comment"></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#a1f41d2effb8b5b6b47b38d25d37280b3">isInContainer_</a>( <span class="keyword">const</span> <span class="keywordtype">void</span>* containerPtr ) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    {</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">if</span> ( <a class="code hl_variable" href="class_kit_1_1_container_1_1_item.html#a47813c3c6e3e515d21236c39f0345ab1">m_inListPtr_</a> != containerPtr )</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    }</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">    /** Verifies that the item is in the list for use when the next() method is</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">        called.  If the item is not in the list, a fatal error is generated.</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"></span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">        Notes:</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">            o The method returns false when there is error - which is ONLY</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">              usefully during unittesting when the invoking a FatalError</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">              does NOT terminate the application.</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#af98051b725c1c0dc9008eacda88a9368">   83</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#af98051b725c1c0dc9008eacda88a9368">validateNextOkay_</a>( <span class="keyword">const</span> <span class="keywordtype">void</span>* containerPtr ) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">    /** Helper method to do the proper &#39;clean-up&#39; for the multiple-containers-error-trap</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        when removing an item from a container.</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#ae4e75698e6e4d9ee6ecd2c53be52815b">   88</a></span>    <span class="keyword">inline</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#ae4e75698e6e4d9ee6ecd2c53be52815b">remove_</a>( <a class="code hl_class" href="class_kit_1_1_container_1_1_item.html">Item</a>* itemPtr ) <span class="keyword">noexcept</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">if</span> ( itemPtr )</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        {</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            itemPtr-&gt;m_inListPtr_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    }</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">    /** Debug field.  This member is used to trap when there is an attempt</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">        to insert a item into a container when it is already in a container</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#a47813c3c6e3e515d21236c39f0345ab1">  100</a></span>    <span class="keywordtype">void</span>* <a class="code hl_variable" href="class_kit_1_1_container_1_1_item.html#a47813c3c6e3e515d21236c39f0345ab1">m_inListPtr_</a>;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>};</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">    /** Helper method to trap when inserting an item in multiple containers.</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">        A fatal error will be generated if &#39;Item&#39; is attempted to be put into</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">        more than on container.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment"></span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">        Notes:</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">            o The method returns false when there is error - which is ONLY</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">              usefully during unittesting when the invoking a FatalError</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">              does NOT terminate the application.</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">   62</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">insert_</a>( <span class="keywordtype">void</span>* newContainerPtr ) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">    /// Returns &#39;true&#39; if the instance is in the specified container.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#a1f41d2effb8b5b6b47b38d25d37280b3">   65</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#a1f41d2effb8b5b6b47b38d25d37280b3">isInContainer_</a>( <span class="keyword">const</span> <span class="keywordtype">void</span>* containerPtr ) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">    /** Verifies that the item is in the list for use when the next() method is</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">        called.  If the item is not in the list, a fatal error is generated.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">        Notes:</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">            o The method returns false when there is error - which is ONLY</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">              usefully during unittesting when the invoking a FatalError</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">              does NOT terminate the application.</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#af98051b725c1c0dc9008eacda88a9368">   75</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#af98051b725c1c0dc9008eacda88a9368">validateNextOkay_</a>( <span class="keyword">const</span> <span class="keywordtype">void</span>* containerPtr ) <span class="keyword">const</span> <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">    /** Helper method to do the proper &#39;clean-up&#39; for the multiple-containers-error-trap</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">        when removing an item from a container.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#ae4e75698e6e4d9ee6ecd2c53be52815b">   80</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_container_1_1_item.html#ae4e75698e6e4d9ee6ecd2c53be52815b">remove_</a>( <a class="code hl_class" href="class_kit_1_1_container_1_1_item.html">Item</a>* itemPtr ) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">    /** Debug field.  This member is used to trap when there is an attempt</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">        to insert a item into a container when it is already in a container</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="class_kit_1_1_container_1_1_item.html#a47813c3c6e3e515d21236c39f0345ab1">   86</a></span>    <span class="keywordtype">void</span>* <a class="code hl_variable" href="class_kit_1_1_container_1_1_item.html#a47813c3c6e3e515d21236c39f0345ab1">m_inListPtr_</a>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>};</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_item_html"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html">Kit::Container::Item</a></div><div class="ttdoc">This class is used by the Intrusive Container classes to enforce the semantic and item/element can be...</div><div class="ttdef"><b>Definition</b> Item.h:39</div></div>
-<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_a0651eeca42c71226d1aae9df521bc260"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#a0651eeca42c71226d1aae9df521bc260">Kit::Container::Item::Item</a></div><div class="ttdeci">Item() noexcept</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> Item.h:42</div></div>
-<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_a1f41d2effb8b5b6b47b38d25d37280b3"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#a1f41d2effb8b5b6b47b38d25d37280b3">Kit::Container::Item::isInContainer_</a></div><div class="ttdeci">bool isInContainer_(const void *containerPtr) const noexcept</div><div class="ttdoc">Returns 'true' if the instance is in the specified container.</div><div class="ttdef"><b>Definition</b> Item.h:66</div></div>
-<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_a47813c3c6e3e515d21236c39f0345ab1"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#a47813c3c6e3e515d21236c39f0345ab1">Kit::Container::Item::m_inListPtr_</a></div><div class="ttdeci">void * m_inListPtr_</div><div class="ttdoc">Debug field.</div><div class="ttdef"><b>Definition</b> Item.h:100</div></div>
+<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_a0651eeca42c71226d1aae9df521bc260"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#a0651eeca42c71226d1aae9df521bc260">Kit::Container::Item::Item</a></div><div class="ttdeci">Item() noexcept</div><div class="ttdoc">Constructor.</div></div>
+<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_a1f41d2effb8b5b6b47b38d25d37280b3"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#a1f41d2effb8b5b6b47b38d25d37280b3">Kit::Container::Item::isInContainer_</a></div><div class="ttdeci">bool isInContainer_(const void *containerPtr) const noexcept</div><div class="ttdoc">Returns 'true' if the instance is in the specified container.</div></div>
+<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_a47813c3c6e3e515d21236c39f0345ab1"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#a47813c3c6e3e515d21236c39f0345ab1">Kit::Container::Item::m_inListPtr_</a></div><div class="ttdeci">void * m_inListPtr_</div><div class="ttdoc">Debug field.</div><div class="ttdef"><b>Definition</b> Item.h:86</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_a629af4bb1ce1c34f7d72437e55eb69df"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">Kit::Container::Item::insert_</a></div><div class="ttdeci">bool insert_(void *newContainerPtr) noexcept</div><div class="ttdoc">Helper method to trap when inserting an item in multiple containers.</div></div>
-<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_acbdb631d3373ecd8d950a37c1f60204d"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#acbdb631d3373ecd8d950a37c1f60204d">Kit::Container::Item::Item</a></div><div class="ttdeci">Item(const char *) noexcept</div><div class="ttdoc">Constructor used ONLY with the child class MapItem: --&gt;special constructor to allow a Map to be stati...</div><div class="ttdef"><b>Definition</b> Item.h:50</div></div>
-<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_ae4e75698e6e4d9ee6ecd2c53be52815b"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#ae4e75698e6e4d9ee6ecd2c53be52815b">Kit::Container::Item::remove_</a></div><div class="ttdeci">static void remove_(Item *itemPtr) noexcept</div><div class="ttdoc">Helper method to do the proper 'clean-up' for the multiple-containers-error-trap when removing an ite...</div><div class="ttdef"><b>Definition</b> Item.h:88</div></div>
+<div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_ae4e75698e6e4d9ee6ecd2c53be52815b"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#ae4e75698e6e4d9ee6ecd2c53be52815b">Kit::Container::Item::remove_</a></div><div class="ttdeci">static void remove_(Item *itemPtr) noexcept</div><div class="ttdoc">Helper method to do the proper 'clean-up' for the multiple-containers-error-trap when removing an ite...</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_item_html_af98051b725c1c0dc9008eacda88a9368"><div class="ttname"><a href="class_kit_1_1_container_1_1_item.html#af98051b725c1c0dc9008eacda88a9368">Kit::Container::Item::validateNextOkay_</a></div><div class="ttdeci">bool validateNextOkay_(const void *containerPtr) const noexcept</div><div class="ttdoc">Verifies that the item is in the list for use when the next() method is called.</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 12 2025 14:31:03 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Oct 12 2025 14:53:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

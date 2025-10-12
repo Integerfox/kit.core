@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">64.3&nbsp;%</td>
@@ -108,16 +108,16 @@
 <span id="L46"><span class="lineNum">      46</span>                 :             :         (i.e. a call to milliseconds(). The calculation properly handles the</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :         scenario of when the has been 'roll over' between the two times.</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :      */</span>
-<span id="L49"><span class="lineNum">      49</span>                 :             :     inline static uint32_t deltaMilliseconds( uint32_t startTime, uint32_t endTime = milliseconds() ) noexcept</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :     static uint32_t deltaMilliseconds( uint32_t startTime, uint32_t endTime = milliseconds() ) noexcept</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     {</span>
-<span id="L51"><span class="lineNum">      51</span>   [<span class="tlaGBC" title="Branch 0 was taken 6565 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 36134 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 47 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3372 times"> + </span>]:<span class="tlaGNC tlaBgGNC">       80419 :         return endTime - startTime;</span></span>
+<span id="L51"><span class="lineNum">      51</span>   [<span class="tlaGBC" title="Branch 0 was taken 6523 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 36115 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 43 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3377 times"> + </span>]:<span class="tlaGNC tlaBgGNC">       80357 :         return endTime - startTime;</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     }</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : </span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     /** This method returns true if the specified amount of time has elapsed</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :         since the 'timeMarker'.  The calculation properly handles the scenario</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :         of when the has been 'roll over' between the 'timeMarker' and NOW.</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :      */</span>
-<span id="L58"><span class="lineNum">      58</span>                 :             :     inline static bool expiredMilliseconds( uint32_t timeMarker,</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :     static bool expiredMilliseconds( uint32_t timeMarker,</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :                                             uint32_t duration,</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :                                             uint32_t currentTime = milliseconds() ) noexcept</span>
 <span id="L61"><span class="lineNum">      61</span>                 :             :     {</span>
@@ -130,7 +130,7 @@
 <span id="L67"><span class="lineNum">      67</span>                 :             :         was powered on and/or reset.  The maximum value is 49.7 days before</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :         the internal counter rolls over.</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :      */</span>
-<span id="L70"><span class="lineNum">      70</span>                 :             :     static inline uint32_t seconds() noexcept</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :     static uint32_t seconds() noexcept</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     {</span>
 <span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 50 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          56 :         return milliseconds() / 1000L;</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     }</span>
@@ -140,7 +140,7 @@
 <span id="L77"><span class="lineNum">      77</span>                 :             :         a call to seconds(). The calculation properly handles the scenario of</span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :         when the has been 'roll over' between the two times.</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :      */</span>
-<span id="L80"><span class="lineNum">      80</span>                 :             :     inline static uint32_t deltaSeconds( uint32_t startTime, uint32_t endTime = seconds() ) noexcept</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :     static uint32_t deltaSeconds( uint32_t startTime, uint32_t endTime = seconds() ) noexcept</span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :     {</span>
 <span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">           1 :         return endTime - startTime;</span></span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :     }</span>
@@ -149,7 +149,7 @@
 <span id="L86"><span class="lineNum">      86</span>                 :             :         since the 'timeMarker'.  The calculation properly handles the scenario</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :         of when the has been 'roll over' between the 'timeMarker' and NOW.</span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :      */</span>
-<span id="L89"><span class="lineNum">      89</span>                 :             :     inline static bool expiredSeconds( uint32_t timeMarker,</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             :      static bool expiredSeconds( uint32_t timeMarker,</span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :                                        uint32_t duration,</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :                                        uint32_t currentTime = seconds() ) noexcept</span>
 <span id="L92"><span class="lineNum">      92</span>                 :             :     {</span>
@@ -191,16 +191,16 @@
 <span id="L127"><span class="lineNum">     127</span>                 :             :         (i.e. a call to milliseconds(). The calculation properly handles the</span>
 <span id="L128"><span class="lineNum">     128</span>                 :             :         scenario of when the has been 'roll over' between the two times.</span>
 <span id="L129"><span class="lineNum">     129</span>                 :             :      */</span>
-<span id="L130"><span class="lineNum">     130</span>                 :             :     inline static uint64_t deltaMillisecondsEx( uint64_t startTime, uint64_t endTime = millisecondsEx() ) noexcept</span>
+<span id="L130"><span class="lineNum">     130</span>                 :             :      static uint64_t deltaMillisecondsEx( uint64_t startTime, uint64_t endTime = millisecondsEx() ) noexcept</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :     {</span>
-<span id="L132"><span class="lineNum">     132</span>   [<span class="tlaGBC" title="Branch 0 was taken 130 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1907 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 126 times"> + </span>]:<span class="tlaGNC">        2170 :         return endTime - startTime;</span></span>
+<span id="L132"><span class="lineNum">     132</span>   [<span class="tlaGBC" title="Branch 0 was taken 130 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1905 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 126 times"> + </span>]:<span class="tlaGNC">        2168 :         return endTime - startTime;</span></span>
 <span id="L133"><span class="lineNum">     133</span>                 :             :     }</span>
 <span id="L134"><span class="lineNum">     134</span>                 :             : </span>
 <span id="L135"><span class="lineNum">     135</span>                 :             :     /** This method returns true if the specified amount of time has elapsed</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :         since the 'timeMarker'.  The calculation properly handles the scenario</span>
 <span id="L137"><span class="lineNum">     137</span>                 :             :         of when the has been 'roll over' between the 'timeMarker' and NOW.</span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :      */</span>
-<span id="L139"><span class="lineNum">     139</span>                 :             :     inline static bool expiredMillisecondsEx( uint64_t timeMarker,</span>
+<span id="L139"><span class="lineNum">     139</span>                 :             :      static bool expiredMillisecondsEx( uint64_t timeMarker,</span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :                                               uint64_t duration,</span>
 <span id="L141"><span class="lineNum">     141</span>                 :             :                                               uint64_t currentTime = millisecondsEx() ) noexcept</span>
 <span id="L142"><span class="lineNum">     142</span>                 :             :     {</span>
@@ -223,7 +223,7 @@
 <span id="L158"><span class="lineNum">     158</span>                 :             :         a call to seconds(). The calculation properly handles the scenario of</span>
 <span id="L159"><span class="lineNum">     159</span>                 :             :         when the has been 'roll over' between the two times.</span>
 <span id="L160"><span class="lineNum">     160</span>                 :             :      */</span>
-<span id="L161"><span class="lineNum">     161</span>                 :             :     inline static uint64_t deltaSecondsEx( uint64_t startTime, uint64_t endTime = secondsEx() ) noexcept</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             :      static uint64_t deltaSecondsEx( uint64_t startTime, uint64_t endTime = secondsEx() ) noexcept</span>
 <span id="L162"><span class="lineNum">     162</span>                 :             :     {</span>
 <span id="L163"><span class="lineNum">     163</span>                 :             :         return endTime - startTime;</span>
 <span id="L164"><span class="lineNum">     164</span>                 :             :     }</span>
@@ -232,7 +232,7 @@
 <span id="L167"><span class="lineNum">     167</span>                 :             :         since the 'timeMarker'.  The calculation properly handles the scenario</span>
 <span id="L168"><span class="lineNum">     168</span>                 :             :         of when the has been 'roll over' between the 'timeMarker' and NOW.</span>
 <span id="L169"><span class="lineNum">     169</span>                 :             :      */</span>
-<span id="L170"><span class="lineNum">     170</span>                 :             :     inline static bool expiredSecondsEx( uint64_t timeMarker,</span>
+<span id="L170"><span class="lineNum">     170</span>                 :             :      static bool expiredSecondsEx( uint64_t timeMarker,</span>
 <span id="L171"><span class="lineNum">     171</span>                 :             :                                          uint64_t duration,</span>
 <span id="L172"><span class="lineNum">     172</span>                 :             :                                          uint64_t currentTime = secondsEx() ) noexcept</span>
 <span id="L173"><span class="lineNum">     173</span>                 :             :     {</span>
@@ -255,7 +255,7 @@
 <span id="L190"><span class="lineNum">     190</span>                 :             :         application NOT CALL this method because then that code can NOT be</span>
 <span id="L191"><span class="lineNum">     191</span>                 :             :         simulated using the SimTick interface.</span>
 <span id="L192"><span class="lineNum">     192</span>                 :             :      */</span>
-<span id="L193"><span class="lineNum">     193</span>                 :             :     inline static uint64_t secondsInRealTimeEx() noexcept</span>
+<span id="L193"><span class="lineNum">     193</span>                 :             :     static uint64_t secondsInRealTimeEx() noexcept</span>
 <span id="L194"><span class="lineNum">     194</span>                 :             :     {</span>
 <span id="L195"><span class="lineNum">     195</span>                 :             :         return millisecondsInRealTimeEx() / 1000L;</span>
 <span id="L196"><span class="lineNum">     196</span>                 :             :     }</span>

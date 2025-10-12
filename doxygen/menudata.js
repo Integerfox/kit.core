@@ -100,7 +100,6 @@ var menudata={children:[
 {text:"File Members",url:"globals.html",children:[
 {text:"All",url:"globals.html",children:[
 {text:"_",url:"globals.html#index__5F"},
-{text:"i",url:"globals.html#index_i"},
 {text:"k",url:"globals.html#index_k"},
 {text:"m",url:"globals.html#index_m"},
 {text:"n",url:"globals.html#index_n"},
@@ -112,7 +111,6 @@ var menudata={children:[
 {text:"Variables",url:"globals_vars.html"},
 {text:"Macros",url:"globals_defs.html",children:[
 {text:"_",url:"globals_defs.html#index__5F"},
-{text:"i",url:"globals_defs.html#index_i"},
 {text:"k",url:"globals_defs.html#index_k"},
 {text:"n",url:"globals_defs.html#index_n"},
 {text:"o",url:"globals_defs.html#index_o"},

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">57.7&nbsp;%</td>
@@ -255,9 +255,9 @@
 <span id="L193"><span class="lineNum">     193</span>                 :<span class="tlaUNC">           0 :     return m_syncSema.su_signal();</span></span>
 <span id="L194"><span class="lineNum">     194</span>                 :             : }</span>
 <span id="L195"><span class="lineNum">     195</span>                 :             : </span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC tlaBgGNC">       10644 : const char* Thread::getName() const noexcept</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC tlaBgGNC">       10650 : const char* Thread::getName() const noexcept</span></span>
 <span id="L197"><span class="lineNum">     197</span>                 :             : {</span>
-<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC">       10644 :     return m_name;</span></span>
+<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC">       10650 :     return m_name;</span></span>
 <span id="L199"><span class="lineNum">     199</span>                 :             : }</span>
 <span id="L200"><span class="lineNum">     200</span>                 :             : </span>
 <span id="L201"><span class="lineNum">     201</span>                 :             : </span>
@@ -310,23 +310,23 @@
 <span id="L248"><span class="lineNum">     248</span>                 :<span class="tlaGNC">          44 : }</span></span>
 <span id="L249"><span class="lineNum">     249</span>                 :             : </span>
 <span id="L250"><span class="lineNum">     250</span>                 :             : //////////////////////////////</span>
-<span id="L251"><span class="lineNum">     251</span>                 :<span class="tlaGNC">       49114 : Kit::System::Thread* Kit::System::Thread::tryGetCurrent() noexcept</span></span>
+<span id="L251"><span class="lineNum">     251</span>                 :<span class="tlaGNC">       49004 : Kit::System::Thread* Kit::System::Thread::tryGetCurrent() noexcept</span></span>
 <span id="L252"><span class="lineNum">     252</span>                 :             : {</span>
 <span id="L253"><span class="lineNum">     253</span>                 :             :     // Trap potential error</span>
-<span id="L254"><span class="lineNum">     254</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 49114 times"> + </span>]:<span class="tlaGNC">       49114 :     if ( !keyCreated_ )</span></span>
+<span id="L254"><span class="lineNum">     254</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 49004 times"> + </span>]:<span class="tlaGNC">       49004 :     if ( !keyCreated_ )</span></span>
 <span id="L255"><span class="lineNum">     255</span>                 :             :     {</span>
 <span id="L256"><span class="lineNum">     256</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::FatalError::logRaw( Shutdown::eOSAL, &quot;Thread::tryGetCurrent().  Have not yet created 'Tls Index'.&quot; );</span></span>
 <span id="L257"><span class="lineNum">     257</span>                 :             :     }</span>
 <span id="L258"><span class="lineNum">     258</span>                 :             : </span>
-<span id="L259"><span class="lineNum">     259</span>                 :<span class="tlaGNC tlaBgGNC">       49114 :     auto* ptr = static_cast&lt;Kit::System::Posix::Thread*&gt;( pthread_getspecific( tsdKey_ ) );</span></span>
-<span id="L260"><span class="lineNum">     260</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 49114 times"> + </span>]:<span class="tlaGNC">       49114 :     return isActiveThread( ptr ) ? ptr : nullptr;</span></span>
+<span id="L259"><span class="lineNum">     259</span>                 :<span class="tlaGNC tlaBgGNC">       49004 :     auto* ptr = static_cast&lt;Kit::System::Posix::Thread*&gt;( pthread_getspecific( tsdKey_ ) );</span></span>
+<span id="L260"><span class="lineNum">     260</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 49004 times"> + </span>]:<span class="tlaGNC">       49004 :     return isActiveThread( ptr ) ? ptr : nullptr;</span></span>
 <span id="L261"><span class="lineNum">     261</span>                 :             : }</span>
 <span id="L262"><span class="lineNum">     262</span>                 :             : </span>
 <span id="L263"><span class="lineNum">     263</span>                 :             : </span>
-<span id="L264"><span class="lineNum">     264</span>                 :<span class="tlaGNC">         118 : void Kit::System::Thread::wait() noexcept</span></span>
+<span id="L264"><span class="lineNum">     264</span>                 :<span class="tlaGNC">         119 : void Kit::System::Thread::wait() noexcept</span></span>
 <span id="L265"><span class="lineNum">     265</span>                 :             : {</span>
-<span id="L266"><span class="lineNum">     266</span>                 :<span class="tlaGNC">         118 :     ( static_cast&lt;Kit::System::Posix::Thread*&gt;( &amp;getCurrent() ) )-&gt;m_syncSema.wait();</span></span>
-<span id="L267"><span class="lineNum">     267</span>                 :<span class="tlaGNC">         118 : }</span></span>
+<span id="L266"><span class="lineNum">     266</span>                 :<span class="tlaGNC">         119 :     ( static_cast&lt;Kit::System::Posix::Thread*&gt;( &amp;getCurrent() ) )-&gt;m_syncSema.wait();</span></span>
+<span id="L267"><span class="lineNum">     267</span>                 :<span class="tlaGNC">         119 : }</span></span>
 <span id="L268"><span class="lineNum">     268</span>                 :             : </span>
 <span id="L269"><span class="lineNum">     269</span>                 :<span class="tlaGNC">           3 : bool Kit::System::Thread::tryWait() noexcept</span></span>
 <span id="L270"><span class="lineNum">     270</span>                 :             : {</span>

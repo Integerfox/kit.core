@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">29</td>
-            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntry">31</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">92.9&nbsp;%</td>
-            <td class="headerCovTableEntry">14</td>
-            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -88,9 +88,9 @@
 <span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">          14 : }</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : </span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : </span>
-<span id="L29"><span class="lineNum">      29</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          14 : Input::~Input() noexcept</span></span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          14 : Input::~Input() noexcept</span></span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : {</span>
-<span id="L31"><span class="lineNum">      31</span>                 :             :     Posix::Fdio::close( m_inFd );</span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          14 :     Posix::Fdio::close( m_inFd );</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          14 : }</span></span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : </span>
@@ -117,31 +117,31 @@
 <span id="L55"><span class="lineNum">      55</span>         [<span class="tlaGBC" title="Branch 0 was taken 75 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          76 :     return isOpened() == false || m_inEos;</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : }</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : </span>
-<span id="L58"><span class="lineNum">      58</span>         [<span class="tlaGBC" title="Branch 0 was taken 11 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          11 : void Input::close() noexcept</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">          11 : void Input::close() noexcept</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : {</span>
-<span id="L60"><span class="lineNum">      60</span>                 :             :     Posix::Fdio::close( m_inFd );</span>
+<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">          11 :     Posix::Fdio::close( m_inFd );</span></span>
 <span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">          11 : }</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : //////////////////////////</span>
 <span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">           3 : bool Input::currentPos( ByteCount_T&amp; curPos ) noexcept</span></span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : {</span>
-<span id="L67"><span class="lineNum">      67</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           3 :     return Posix::Fdio::currentPos( m_inFd, curPos );</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">           3 :     return Posix::Fdio::currentPos( m_inFd, curPos );</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : }</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : </span>
 <span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">           2 : bool Input::setRelativePos( ByteCount_T deltaOffset ) noexcept</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : {</span>
-<span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :     return Posix::Fdio::setRelativePos( m_inFd, deltaOffset );</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">           2 :     return Posix::Fdio::setRelativePos( m_inFd, deltaOffset );</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             : }</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : </span>
 <span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">           2 : bool Input::setToEof() noexcept</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : {</span>
-<span id="L77"><span class="lineNum">      77</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :     return Posix::Fdio::setToEof( m_inFd );</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">           2 :     return Posix::Fdio::setToEof( m_inFd );</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : }</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
 <span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">           3 : bool Input::setAbsolutePos( ByteCount_T newoffset ) noexcept</span></span>
 <span id="L81"><span class="lineNum">      81</span>                 :             : {</span>
-<span id="L82"><span class="lineNum">      82</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           3 :     return Posix::Fdio::setAbsolutePos( m_inFd, newoffset );</span></span>
+<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">           3 :     return Posix::Fdio::setAbsolutePos( m_inFd, newoffset );</span></span>
 <span id="L83"><span class="lineNum">      83</span>                 :             : }</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             : </span>
 <span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">          24 : bool Input::isEof() noexcept</span></span>

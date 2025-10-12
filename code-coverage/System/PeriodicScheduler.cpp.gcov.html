@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">72.7&nbsp;%</td>
@@ -111,25 +111,25 @@
 <span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">           6 : }</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : /////////////////////</span>
-<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">        1013 : bool PeriodicScheduler::executeScheduler() noexcept</span></span>
+<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">        1012 : bool PeriodicScheduler::executeScheduler() noexcept</span></span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : {</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     bool        atLeastOne = false;</span>
-<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">        1013 :     Interval_T* interval   = m_intervals;</span></span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">        1012 :     Interval_T* interval   = m_intervals;</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     // Scan all intervals</span>
-<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 3050 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 2037 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1013 times"> + </span>]:<span class="tlaGNC">        3050 :     while ( interval &amp;&amp; interval-&gt;callbackFunc != 0 )</span></span>
+<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 3047 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 2035 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1012 times"> + </span>]:<span class="tlaGNC">        3047 :     while ( interval &amp;&amp; interval-&gt;callbackFunc != 0 )</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     {</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :         // Get the current time</span>
-<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">        2037 :         uint64_t currentTick = (m_nowFunc)();</span></span>
+<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">        2035 :         uint64_t currentTick = (m_nowFunc)();</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :         // Initialize the interval (but only once)</span>
-<span id="L64"><span class="lineNum">      64</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2023 times"> + </span>]:<span class="tlaGNC">        2037 :         if ( m_firstExecution )</span></span>
+<span id="L64"><span class="lineNum">      64</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2021 times"> + </span>]:<span class="tlaGNC">        2035 :         if ( m_firstExecution )</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :         {</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :             setTimeMarker( *interval, currentTick );</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :         }</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : </span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :         // Has the interval expired?</span>
-<span id="L70"><span class="lineNum">      70</span>         [<span class="tlaGBC" title="Branch 0 was taken 130 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1907 times"> + </span>]:<span class="tlaGNC">        2037 :         if ( ElapsedTime::expiredMillisecondsEx( interval-&gt;timeMarker, interval-&gt;duration, currentTick ) )</span></span>
+<span id="L70"><span class="lineNum">      70</span>         [<span class="tlaGBC" title="Branch 0 was taken 130 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1905 times"> + </span>]:<span class="tlaGNC">        2035 :         if ( ElapsedTime::expiredMillisecondsEx( interval-&gt;timeMarker, interval-&gt;duration, currentTick ) )</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :         {</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :             atLeastOne            = true;</span>
 <span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         130 :             interval-&gt;timeMarker += interval-&gt;duration;</span></span>
@@ -151,14 +151,14 @@
 <span id="L89"><span class="lineNum">      89</span>                 :             :         }</span>
 <span id="L90"><span class="lineNum">      90</span>                 :             : </span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :         // Get the next interval</span>
-<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">        2037 :         interval++;</span></span>
+<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">        2035 :         interval++;</span></span>
 <span id="L93"><span class="lineNum">      93</span>                 :             :     }</span>
 <span id="L94"><span class="lineNum">      94</span>                 :             : </span>
 <span id="L95"><span class="lineNum">      95</span>                 :             :     // Clear flag now that we have properly initialized each interval</span>
-<span id="L96"><span class="lineNum">      96</span>                 :<span class="tlaGNC">        1013 :     m_firstExecution = false;</span></span>
+<span id="L96"><span class="lineNum">      96</span>                 :<span class="tlaGNC">        1012 :     m_firstExecution = false;</span></span>
 <span id="L97"><span class="lineNum">      97</span>                 :             : </span>
 <span id="L98"><span class="lineNum">      98</span>                 :             :     // Return result;</span>
-<span id="L99"><span class="lineNum">      99</span>                 :<span class="tlaGNC">        1013 :     return atLeastOne;</span></span>
+<span id="L99"><span class="lineNum">      99</span>                 :<span class="tlaGNC">        1012 :     return atLeastOne;</span></span>
 <span id="L100"><span class="lineNum">     100</span>                 :             : }</span>
 <span id="L101"><span class="lineNum">     101</span>                 :             : </span>
 <span id="L102"><span class="lineNum">     102</span>                 :             : </span>

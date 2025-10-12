@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">54.4&nbsp;%</td>
-            <td class="headerCovTableEntry">228</td>
-            <td class="headerCovTableEntry">124</td>
+            <td class="headerCovTableEntryLo">55.2&nbsp;%</td>
+            <td class="headerCovTableEntry">232</td>
+            <td class="headerCovTableEntry">128</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:33:24</td>
+            <td class="headerValue">2025-10-12 14:55:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">56.3&nbsp;%</td>
@@ -188,7 +188,7 @@
 <span id="L126"><span class="lineNum">     126</span>                 :             : </span>
 <span id="L127"><span class="lineNum">     127</span>                 :             : </span>
 <span id="L128"><span class="lineNum">     128</span>                 :             :     // Insert new node and check the resulting balance</span>
-<span id="L129"><span class="lineNum">     129</span>                 :             :     newNode.initialize( curPtr );</span>
+<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">          28 :     newNode.initialize( curPtr );</span></span>
 <span id="L130"><span class="lineNum">     130</span>                 :             :     do</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :     {</span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :         //      tpd_assert( curPtr-&gt;m_is_NOT_root_ );</span>
@@ -250,10 +250,10 @@
 <span id="L188"><span class="lineNum">     188</span>                 :<span class="tlaGNC">          28 :     return true;</span></span>
 <span id="L189"><span class="lineNum">     189</span>                 :             : }</span>
 <span id="L190"><span class="lineNum">     190</span>                 :             : </span>
-<span id="L191"><span class="lineNum">     191</span>         [<span class="tlaGBC" title="Branch 0 was taken 33 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          36 : MapItem* AvlTree_::removeItem( MapItem&amp; node )</span></span>
+<span id="L191"><span class="lineNum">     191</span>                 :<span class="tlaGNC">          36 : MapItem* AvlTree_::removeItem( MapItem&amp; node )</span></span>
 <span id="L192"><span class="lineNum">     192</span>                 :             : {</span>
 <span id="L193"><span class="lineNum">     193</span>                 :             :     // Trap: Node is not in this tree</span>
-<span id="L194"><span class="lineNum">     194</span>                 :             :     if ( node.isInContainer_( this ) == false )</span>
+<span id="L194"><span class="lineNum">     194</span>         [<span class="tlaGBC" title="Branch 0 was taken 33 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          36 :     if ( node.isInContainer_( this ) == false )</span></span>
 <span id="L195"><span class="lineNum">     195</span>                 :             :     {</span>
 <span id="L196"><span class="lineNum">     196</span>                 :             :         return nullptr;</span>
 <span id="L197"><span class="lineNum">     197</span>                 :             :     }</span>
@@ -352,9 +352,9 @@
 <span id="L290"><span class="lineNum">     290</span>                 :             : </span>
 <span id="L291"><span class="lineNum">     291</span>                 :             : </span>
 <span id="L292"><span class="lineNum">     292</span>                 :             :     // Remove all references in the deleted node to the tree</span>
-<span id="L293"><span class="lineNum">     293</span>                 :             :     node.initialize( nullptr );</span>
-<span id="L294"><span class="lineNum">     294</span>                 :             :     Item::remove_( &amp;node );</span>
-<span id="L295"><span class="lineNum">     295</span>                 :<span class="tlaGNC tlaBgGNC">          33 :     return &amp;node;</span></span>
+<span id="L293"><span class="lineNum">     293</span>                 :<span class="tlaGNC tlaBgGNC">          33 :     node.initialize( nullptr );</span></span>
+<span id="L294"><span class="lineNum">     294</span>                 :<span class="tlaGNC">          33 :     Item::remove_( &amp;node );</span></span>
+<span id="L295"><span class="lineNum">     295</span>                 :<span class="tlaGNC">          33 :     return &amp;node;</span></span>
 <span id="L296"><span class="lineNum">     296</span>                 :             : }</span>
 <span id="L297"><span class="lineNum">     297</span>                 :             : </span>
 <span id="L298"><span class="lineNum">     298</span>         [<span class="tlaGBC" title="Branch 0 was taken 44 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 24 times"> + </span>]:<span class="tlaGNC">          68 : MapItem* AvlTree_::first() const</span></span>

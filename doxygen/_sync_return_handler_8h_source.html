@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 89-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 91-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -86,47 +86,39 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">    /** The constructor initializes the handler with a reference to the</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">        thread semaphore of the current thread.</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a418737286494e0ce61c4666ea86ce5c0">   39</a></span>    <a class="code hl_function" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a418737286494e0ce61c4666ea86ce5c0">SyncReturnHandler</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a>&amp; clientSemaphore = <a class="code hl_function" href="class_kit_1_1_system_1_1_thread.html#a53d9bfee3825dc5a228ecd17a2922da1">Kit::System::Thread::getCurrent</a>() ) noexcept</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        : <a class="code hl_variable" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">m_waiter</a>( clientSemaphore)</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a418737286494e0ce61c4666ea86ce5c0">   39</a></span>    <a class="code hl_function" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a418737286494e0ce61c4666ea86ce5c0">SyncReturnHandler</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a>&amp; clientSemaphore = <a class="code hl_function" href="class_kit_1_1_system_1_1_thread.html#a53d9bfee3825dc5a228ecd17a2922da1">Kit::System::Thread::getCurrent</a>() ) noexcept;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">    /// See ReturnHandler</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a116be610d056e0452b2e7c5793796420">   43</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a116be610d056e0452b2e7c5793796420">rts</a>() noexcept override;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    /// See ReturnHandler</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a116be610d056e0452b2e7c5793796420">   47</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a116be610d056e0452b2e7c5793796420">rts</a>() noexcept<span class="keyword"> override</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <a class="code hl_variable" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">m_waiter</a>.<a class="code hl_function" href="class_kit_1_1_system_1_1_i_signable.html#a72c130b85d33277148381e554908ffb6">signal</a>();</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">protected</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">    /** Reference to the client thread&#39;s thread semaphore which is used</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">        to notify the client that the server has completed processing</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">        the message.</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">   57</a></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a>&amp; <a class="code hl_variable" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">m_waiter</a>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>};</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>protected:<span class="comment"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    /** Reference to the client thread&#39;s thread semaphore which is used</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        to notify the client that the server has completed processing</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">        the message.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">   50</a></span>    <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::System::ISignable&amp; <a class="code hl_variable" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">m_waiter</a>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_return_handler_8h_html"><div class="ttname"><a href="_i_return_handler_8h.html">IReturnHandler.h</a></div></div>
 <div class="ttc" id="a_i_signable_8h_html"><div class="ttname"><a href="_i_signable_8h.html">ISignable.h</a></div></div>
 <div class="ttc" id="a_thread_8h_html"><div class="ttname"><a href="_thread_8h.html">Thread.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_i_return_handler_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_i_return_handler.html">Kit::Itc::IReturnHandler</a></div><div class="ttdoc">This abstract class represents the action that is executed by ITC framework in response to a Service ...</div><div class="ttdef"><b>Definition</b> IReturnHandler.h:26</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_sync_return_handler_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_sync_return_handler.html">Kit::Itc::SyncReturnHandler</a></div><div class="ttdoc">This class implements a synchronous ReturnHandler.</div><div class="ttdef"><b>Definition</b> SyncReturnHandler.h:34</div></div>
-<div class="ttc" id="aclass_kit_1_1_itc_1_1_sync_return_handler_html_a116be610d056e0452b2e7c5793796420"><div class="ttname"><a href="class_kit_1_1_itc_1_1_sync_return_handler.html#a116be610d056e0452b2e7c5793796420">Kit::Itc::SyncReturnHandler::rts</a></div><div class="ttdeci">void rts() noexcept override</div><div class="ttdoc">See ReturnHandler.</div><div class="ttdef"><b>Definition</b> SyncReturnHandler.h:47</div></div>
-<div class="ttc" id="aclass_kit_1_1_itc_1_1_sync_return_handler_html_a418737286494e0ce61c4666ea86ce5c0"><div class="ttname"><a href="class_kit_1_1_itc_1_1_sync_return_handler.html#a418737286494e0ce61c4666ea86ce5c0">Kit::Itc::SyncReturnHandler::SyncReturnHandler</a></div><div class="ttdeci">SyncReturnHandler(Kit::System::ISignable &amp;clientSemaphore=Kit::System::Thread::getCurrent()) noexcept</div><div class="ttdoc">The constructor initializes the handler with a reference to the thread semaphore of the current threa...</div><div class="ttdef"><b>Definition</b> SyncReturnHandler.h:39</div></div>
-<div class="ttc" id="aclass_kit_1_1_itc_1_1_sync_return_handler_html_a9763681f5f6278b0d17f451e5a9d9314"><div class="ttname"><a href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">Kit::Itc::SyncReturnHandler::m_waiter</a></div><div class="ttdeci">Kit::System::ISignable &amp; m_waiter</div><div class="ttdoc">Reference to the client thread's thread semaphore which is used to notify the client that the server ...</div><div class="ttdef"><b>Definition</b> SyncReturnHandler.h:57</div></div>
+<div class="ttc" id="aclass_kit_1_1_itc_1_1_sync_return_handler_html_a116be610d056e0452b2e7c5793796420"><div class="ttname"><a href="class_kit_1_1_itc_1_1_sync_return_handler.html#a116be610d056e0452b2e7c5793796420">Kit::Itc::SyncReturnHandler::rts</a></div><div class="ttdeci">void rts() noexcept override</div><div class="ttdoc">See ReturnHandler.</div></div>
+<div class="ttc" id="aclass_kit_1_1_itc_1_1_sync_return_handler_html_a418737286494e0ce61c4666ea86ce5c0"><div class="ttname"><a href="class_kit_1_1_itc_1_1_sync_return_handler.html#a418737286494e0ce61c4666ea86ce5c0">Kit::Itc::SyncReturnHandler::SyncReturnHandler</a></div><div class="ttdeci">SyncReturnHandler(Kit::System::ISignable &amp;clientSemaphore=Kit::System::Thread::getCurrent()) noexcept</div><div class="ttdoc">The constructor initializes the handler with a reference to the thread semaphore of the current threa...</div></div>
+<div class="ttc" id="aclass_kit_1_1_itc_1_1_sync_return_handler_html_a9763681f5f6278b0d17f451e5a9d9314"><div class="ttname"><a href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">Kit::Itc::SyncReturnHandler::m_waiter</a></div><div class="ttdeci">Kit::System::ISignable &amp; m_waiter</div><div class="ttdoc">Reference to the client thread's thread semaphore which is used to notify the client that the server ...</div><div class="ttdef"><b>Definition</b> SyncReturnHandler.h:50</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a></div><div class="ttdoc">This abstract class defines the interface by which a client can cause an object that is waiting-on-a-...</div><div class="ttdef"><b>Definition</b> ISignable.h:24</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html_a72c130b85d33277148381e554908ffb6"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html#a72c130b85d33277148381e554908ffb6">Kit::System::ISignable::signal</a></div><div class="ttdeci">virtual int signal() noexcept=0</div><div class="ttdoc">This method is called by client to cause the server to become unblock and ready to run.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_thread_html_a53d9bfee3825dc5a228ecd17a2922da1"><div class="ttname"><a href="class_kit_1_1_system_1_1_thread.html#a53d9bfee3825dc5a228ecd17a2922da1">Kit::System::Thread::getCurrent</a></div><div class="ttdeci">static Thread &amp; getCurrent() noexcept</div><div class="ttdoc">This method returns a reference to the currently executing thread.</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 12 2025 14:31:03 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Oct 12 2025 14:53:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
