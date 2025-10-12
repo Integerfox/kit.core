@@ -86,8 +86,8 @@ import os
 prjdir = os.path.dirname(os.path.abspath(__file__))
 
 
-# Select Module that contains the desired toolcahin
-from nqbplib.toolchains.linux.gcc-arm.console_exe import ToolChain
+# Select Module that contains the desired toolchain
+from nqbplib.toolchains.linux.gcc_arm.console_exe import ToolChain
 
 
 # Function that instantiates an instance of the toolchain
