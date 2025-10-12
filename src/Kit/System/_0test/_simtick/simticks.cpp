@@ -217,19 +217,19 @@ public:
 
 
         KIT_SYSTEM_TRACE_MSG( SECT_,
-                              "Results: wait1=%d =? 0, delta1=%u >=? 333, wait2=%u =? 1, delta2=%u <? 50, delta4=%u >=? 333, delta5=%u <? 50.",
+                              "Results: wait1=%d =? 0, delta1=%" PRIu32 " >=? 333, wait2=%u =? 1, delta2=%" PRIu32 " <? 50, delta4=%" PRIu32 " >=? 333, delta5=%" PRIu32 " <? 50.",
                               m_waitResult1,
-                              (unsigned)m_delta1,
+                              m_delta1,
                               m_waitResult2,
-                              (unsigned)m_delta2,
-                              (unsigned)m_delta4,
-                              (unsigned)m_delta5 );
+                              m_delta2,
+                              m_delta4,
+                              m_delta5 );
 
         KIT_SYSTEM_TRACE_MSG( SECT_, "Sleeping (40)..." );
         start = ElapsedTime::milliseconds();
         sleep( 40 );
         m_delta3 = ElapsedTime::deltaMilliseconds( start );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "DONE Sleeping (delta=%u)", (unsigned)m_delta3 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "DONE Sleeping (delta=%" PRIu32 ")", m_delta3 );
     }
 };
 
@@ -349,7 +349,7 @@ TEST_CASE( "simtimer" )
         while ( ticks )
         {
             uint64_t numTicks = ticks > DELAY_ / 8 ? DELAY_ / 8 : ticks;
-            KIT_SYSTEM_TRACE_MSG( SECT_,  "Timer: advancing %" PRIu32 " ticks", (uint32_t) numTicks );
+            KIT_SYSTEM_TRACE_MSG( SECT_,  "Timer: advancing %" PRIu64 " ticks", numTicks );
             SimTick::advance( numTicks );
             sleepInRealTime( 100 );
             ticks -= numTicks;
@@ -497,7 +497,7 @@ TEST_CASE( "simbasic" )
     }
 
 
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Cleaning up Pear, Apple, and Orange... [SimTime=%" PRIu32"]", (uint32_t)SimTick::current() );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Cleaning up Pear, Apple, and Orange... [SimTime=%" PRIu64 "]", SimTick::current() );
     Thread::destroy( *orangeThreadPtr );
     Thread::destroy( *pearThreadPtr );
     Thread::destroy( *appleThreadPtr );
@@ -527,7 +527,7 @@ TEST_CASE( "simbasic" )
     }
 
     // Clean-up
-    KIT_SYSTEM_TRACE_MSG( SECT_, "ALL simulated ticks completed.  [SimTime=%" PRIu32 "]", (uint32_t)SimTick::current() );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "ALL simulated ticks completed.  [SimTime=%" PRIu64 "]", SimTick::current() );
     Thread::destroy( *cherryThreadPtr );
     Thread::destroy( *masterThreadPtr );
     Thread::destroy( *timerThreadPtr );

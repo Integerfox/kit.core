@@ -72,7 +72,7 @@ TEST_CASE( "elapsedtime" )
     REQUIRE( ElapsedTime::expiredMilliseconds( msecs, 3700 ) == true );
     REQUIRE( ElapsedTime::expiredMillisecondsEx( msecEx, 3700 ) == true );
     KIT_SYSTEM_TRACE_MSG( SECT_, "Post verify: sleep = 3.7" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "msec=%" PRIu32 ", msecEx=%" PRIu32 ", secs=%" PRIu32, msecs, static_cast<uint32_t>(msecEx), secs ); // Note: The cast is work-around for compilers that do not support PRIu64
+    KIT_SYSTEM_TRACE_MSG( SECT_, "msec=%" PRIu32 ", msecEx=%" PRIu64 ", secs=%" PRIu32, msecs, msecEx, secs ); 
 
     int i;
     for ( i = 0; i < 50; i++ )
