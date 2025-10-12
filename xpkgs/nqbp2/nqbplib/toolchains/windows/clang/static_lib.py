@@ -2,7 +2,7 @@
 # TOOLCHAIN
 #
 #   Host:       Windows
-#   Compiler:   Mingw_w64
+#   Compiler:   Clang (LLVM-MinGW)
 #   Target:     Windows
 #   Output:     Static Library
 #------------------------------------------------------------------------------
