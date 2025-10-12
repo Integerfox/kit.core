@@ -53,11 +53,11 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
-          .\top\gha_windows_gcc-host.bat 0 
+          .\top\gha_windows_clang-host.bat 0 
 
       # Build Stable branches
       - name: Run build script - for stable branches
         if: github.event_name != 'pull_request'
         run: |
           echo "Running build script for stable branches..."
-          .\top\gha_windows_gcc-host.bat ${{ github.run_number }} ${{ github.ref_name }}
+          .\top\gha_windows_clang-host.bat ${{ github.run_number }} ${{ github.ref_name }}
