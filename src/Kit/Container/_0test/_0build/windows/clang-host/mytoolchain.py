@@ -54,7 +54,7 @@ optimized_win64 = BuildValues()
 debug_win64     = BuildValues()
 
 # Set 'base' options
-base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
+base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_DEPRECATE'
 base_win64.inc        = catch2_inc
 base_win64.linkflags  = '-m64'
 base_win64.firstobjs  = unit_test_objects
