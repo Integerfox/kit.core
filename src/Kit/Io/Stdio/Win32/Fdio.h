@@ -22,7 +22,6 @@ namespace Stdio {
 ///
 namespace Win32 {
 
-
 /** This static class provides a collection of functions for operating on Win32 handles.
  */
 class Fdio

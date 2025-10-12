@@ -10,8 +10,6 @@
 
 #include "Kit/Io/File/System.h"
 #include "Fdio.h"
-#include <sys/stat.h>
-#include <unistd.h>
 
 /// Helper method that does all of the work for populating the Info struct
 static void populate_( Kit::Io::File::System::Info_T& infoOut, struct stat& filestats )
