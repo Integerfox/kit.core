@@ -1,20 +1,18 @@
-#ifndef Kit_System_Watchdog_WatchedEventThread_h_
-#define Kit_System_Watchdog_WatchedEventThread_h_
-/*-----------------------------------------------------------------------------
-* This file is part of the KIT C++ Class Library.  The KIT C++ Class Library
-* is an open source project with a BSD type of licensing agreement.  See the 
-* license agreement (license.txt) in the top/ directory or on the Internet at
-* https://integerfox.com/kit/license.txt
-*
-* Copyright (c) 2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+#ifndef KIT_SYSTEM_WATCHDOG_WATCHEDEVENTTHREAD_H_
+#define KIT_SYSTEM_WATCHDOG_WATCHEDEVENTTHREAD_H_
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "WatchedEventLoopApi.h"
-#include "WatchedThread.h"
-#include "Supervisor.h"
+#include "Kit/System/Watchdog/IWatchedEventLoop.h"
+#include "Kit/System/Watchdog/WatchedThread.h"
+#include "Kit/System/Watchdog/Supervisor.h"
 #include "Kit/System/Timer.h"
 #include "Kit/System/ElapsedTime.h"
 
@@ -22,10 +20,8 @@
 namespace Kit {
 ///
 namespace System {
-///
-namespace Watchdog {
 
-/** This class implements the WatchedEventLoopApi interface and provides
+/** This class implements the IWatchedEventLoop interface and provides
     watchdog monitoring capabilities for event loops. It inherits from
     WatchedThread to maintain watchdog state and has a dependency relationship
     with the Supervisor class.
@@ -38,7 +34,7 @@ namespace Watchdog {
     interval must be less than the thread's watchdog timeout interval. The health
     check is customizable on a per-thread basis via the performHealthCheck() virtual method.
  */
-class WatchedEventThread : public WatchedEventLoopApi, public WatchedThread, public TimerComposer<WatchedEventThread>
+class WatchedEventThread : public IWatchedEventLoop, public WatchedThread, public TimerComposer<WatchedEventThread>
 {
 public:
     /** Constructor
@@ -46,22 +42,22 @@ public:
         @param isSupervisor Set to true if this thread should act as the supervisor thread
         @param healthCheckIntervalMs The health check interval in milliseconds (default: wdogTimeoutMs/2, must be < wdogTimeoutMs)
      */
-    WatchedEventThread(unsigned long wdogTimeoutMs = 1000, bool isSupervisor = false, unsigned long healthCheckIntervalMs = 0) noexcept;
+    WatchedEventThread( unsigned long wdogTimeoutMs = 1000, bool isSupervisor = false, unsigned long healthCheckIntervalMs = 0 ) noexcept;
 
     /// Virtual destructor
     virtual ~WatchedEventThread();
 
 public:
-    /// See WatchedEventLoopApi
-    void startWatcher(Kit::System::TimerManager& eventLoop) noexcept override;
+    /// See IWatchedEventLoop
+    void startWatcher( Kit::System::TimerManager& eventLoop ) noexcept override;
 
-    /// See WatchedEventLoopApi
+    /// See IWatchedEventLoop
     void stopWatcher() noexcept override;
 
-    /// See WatchedEventLoopApi
+    /// See IWatchedEventLoop
     void monitorWdog() noexcept override;
 
-    /// See WatchedEventLoopApi
+    /// See IWatchedEventLoop
     bool isSupervisorThread() const noexcept override;
 
 protected:
@@ -95,7 +91,6 @@ private:
     bool m_isActive;
 };
 
-};      // end namespace Watchdog
-};      // end namespace System
-};      // end namespace Kit
+};  // end namespace System
+};  // end namespace Kit
 #endif  // end header latch

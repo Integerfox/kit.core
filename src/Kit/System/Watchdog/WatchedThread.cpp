@@ -1,23 +1,44 @@
-/*-----------------------------------------------------------------------------
-* This file is part of the KIT C++ Class Library.  The KIT C++ Class Library
-* is an open source project with a BSD type of licensing agreement.  See the 
-* license agreement (license.txt) in the top/ directory or on the Internet at
-* https://integerfox.com/kit/license.txt
-*
-* Copyright (c) 2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "WatchedThread.h"
+#include "Kit/System/Watchdog/WatchedThread.h"
+#include "Kit/System/Watchdog/Supervisor.h"
 
-using namespace Kit::System::Watchdog;
+using namespace Kit::System;
 
 /////////////////////////
-WatchedThread::WatchedThread(unsigned long wdogTimeoutMs) noexcept
-    : currentCountMs(wdogTimeoutMs)
-    , wdogTimeoutMs(wdogTimeoutMs)
-    , isBeingWatched(false)
+WatchedThread::WatchedThread( unsigned long wdogTimeoutMs ) noexcept
+    : currentCountMs( wdogTimeoutMs )
+    , wdogTimeoutMs( wdogTimeoutMs )
 {
+}
+
+/////////////////////////
+WatchedRawThread::WatchedRawThread( unsigned long wdogTimeoutMs ) noexcept
+    : WatchedThread( wdogTimeoutMs )
+{
+}
+
+bool WatchedRawThread::startWatching() noexcept
+{
+    Supervisor::beginWatching( *this );
+    return true;  // Method no longer fails, but maintain return type for compatibility
+}
+
+bool WatchedRawThread::stopWatching() noexcept
+{
+    Supervisor::endWatching( *this );
+    return true;  // Method no longer fails, but maintain return type for compatibility
+}
+
+void WatchedRawThread::kickWatchdog() noexcept
+{
+    Supervisor::reloadThread( *this );
 }

@@ -10,6 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "Kit/System/IEventFlag.h"
 #include "Kit/System/IRunnable.h"
 #include "Kit/System/ISignable.h"
@@ -18,8 +19,7 @@
 #include "Kit/System/TimerManager.h"
 
 #ifdef USE_KIT_SYSTEM_WATCHDOG
-#include "Kit/System/Watchdog/Macros.h"
-#include "Kit/System/Watchdog/WatchedEventLoopApi.h"
+#include "Kit/System/Watchdog/IWatchedEventLoop.h"
 #endif
 
 /** Specifies the default timeout period for waiting on a event.
@@ -73,7 +73,7 @@ public:
     EventLoop( uint32_t                           timeOutPeriodInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
                Kit::Container::SList<IEventFlag>* eventFlagsList      = nullptr,
 #ifdef USE_KIT_SYSTEM_WATCHDOG
-               Kit::System::Watchdog::WatchedEventLoopApi* watchdog = nullptr
+               IWatchedEventLoop* watchdog = nullptr
 #else
                void* watchdog = nullptr  // Placeholder when watchdog is disabled
 #endif
@@ -197,7 +197,7 @@ protected:
 
 #ifdef USE_KIT_SYSTEM_WATCHDOG
     /// Optional watchdog monitor for this event loop
-    Kit::System::Watchdog::WatchedEventLoopApi* m_watchdog;
+    IWatchedEventLoop* m_watchdog;
 #endif
 };
 

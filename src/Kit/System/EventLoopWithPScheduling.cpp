@@ -8,6 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "EventLoopWithPScheduling.h"
 #include "Kit/System/EventLoop.h"
 
@@ -16,7 +17,7 @@
 namespace Kit {
 namespace System {
 
-///////////////////////    
+///////////////////////
 EventLoopWithPScheduling::EventLoopWithPScheduling( Interval_T                         intervals[],
                                                     Hook_T                             beginThreadProcessing,
                                                     Hook_T                             endThreadProcessing,
@@ -26,7 +27,7 @@ EventLoopWithPScheduling::EventLoopWithPScheduling( Interval_T                  
                                                     uint32_t                           timeOutPeriodInMsec,
                                                     Kit::Container::SList<IEventFlag>* eventFlagsList,
 #ifdef USE_KIT_SYSTEM_WATCHDOG
-                                                    Kit::System::Watchdog::WatchedEventLoopApi* watchdog
+                                                    IWatchedEventLoop* watchdog
 #else
                                                     void* watchdog
 #endif

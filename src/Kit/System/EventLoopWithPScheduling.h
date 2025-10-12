@@ -10,6 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "Kit/System/EventLoop.h"
 #include "Kit/System/PeriodicScheduler.h"
 
@@ -53,7 +54,7 @@ public:
                               uint32_t                           timeOutPeriodInMsec   = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
                               Kit::Container::SList<IEventFlag>* eventFlagsList        = nullptr,
 #ifdef USE_KIT_SYSTEM_WATCHDOG
-                              Kit::System::Watchdog::WatchedEventLoopApi* watchdog = nullptr
+                              IWatchedEventLoop* watchdog = nullptr
 #else
                               void* watchdog = nullptr  // Placeholder when watchdog is disabled
 #endif

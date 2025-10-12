@@ -8,6 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "EventLoop.h"
 #include "Assert.h"
 #include "ElapsedTime.h"
@@ -16,7 +17,7 @@
 #include "GlobalLock.h"
 
 #ifdef USE_KIT_SYSTEM_WATCHDOG
-#include "Kit/System/Watchdog/Macros.h"
+#include "Kit/System/Watchdog/IWatchedEventLoop.h"
 #endif
 
 #define SECT_ "EventLoop"
@@ -29,7 +30,7 @@ namespace System {
 EventLoop::EventLoop( uint32_t                           timeOutPeriodInMsec,
                       Kit::Container::SList<IEventFlag>* eventFlagsList,
 #ifdef USE_KIT_SYSTEM_WATCHDOG
-                      Kit::System::Watchdog::WatchedEventLoopApi* watchdog
+                      IWatchedEventLoop* watchdog
 #else
                       void* watchdog
 #endif
@@ -45,7 +46,7 @@ EventLoop::EventLoop( uint32_t                           timeOutPeriodInMsec,
 #endif
 {
     KIT_SYSTEM_ASSERT( timeOutPeriodInMsec > 0 );
-    (void) watchdog; // Suppress unused parameter warning when watchdog is disabled
+    (void)watchdog;  // Suppress unused parameter warning when watchdog is disabled
 }
 
 void EventLoop::entry() noexcept
@@ -69,7 +70,7 @@ void EventLoop::startEventLoop() noexcept
 #ifdef USE_KIT_SYSTEM_WATCHDOG
     if ( m_watchdog )
     {
-        KIT_WDOG_START_EVENTLOOP( *m_watchdog, *this );
+        KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( *m_watchdog, *this );
     }
 #endif
 }
@@ -80,7 +81,7 @@ void EventLoop::stopEventLoop() noexcept
 #ifdef USE_KIT_SYSTEM_WATCHDOG
     if ( m_watchdog )
     {
-        KIT_WDOG_STOP_EVENTLOOP( *m_watchdog );
+        KIT_SYSTEM_WATCHDOG_STOP_EVENTLOOP( *m_watchdog );
     }
 #endif
 }
@@ -148,7 +149,7 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
 #ifdef USE_KIT_SYSTEM_WATCHDOG
     if ( m_watchdog )
     {
-        KIT_WDOG_EVENTLOOP_MONITOR( *m_watchdog );
+        KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( *m_watchdog );
     }
 #endif
 
