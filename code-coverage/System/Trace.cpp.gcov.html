@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-09 01:15:14</td>
+            <td class="headerValue">2025-10-12 13:45:17</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryLo">31.2&nbsp;%</td>
@@ -94,79 +94,79 @@
 <span id="L32"><span class="lineNum">      32</span>                 :             : </span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : ////////////////////////////////////////////////////////////////////////</span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC tlaBgGNC">         143 : Trace::Trace( const char* filename,</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC tlaBgGNC">         137 : Trace::Trace( const char* filename,</span></span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :               int         linenum,</span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :               const char* funcname,</span>
 <span id="L38"><span class="lineNum">      38</span>                 :             :               const char* section,</span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         143 :               const char* scope )</span></span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">         143 :     : m_filename( filename )</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">         143 :     , m_linenum( linenum )</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         143 :     , m_funcname( funcname )</span></span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         143 :     , m_section( section )</span></span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">         143 :     , m_scope( scope )</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         137 :               const char* scope )</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">         137 :     : m_filename( filename )</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">         137 :     , m_linenum( linenum )</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         137 :     , m_funcname( funcname )</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         137 :     , m_section( section )</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">         137 :     , m_scope( scope )</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : {</span>
-<span id="L46"><span class="lineNum">      46</span>   [<span class="tlaGBC" title="Branch 0 was taken 58 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 85 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 58 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">         143 :     if ( isSectionEnabled_( section ) &amp;&amp; passedThreadFilter_() )</span></span>
+<span id="L46"><span class="lineNum">      46</span>   [<span class="tlaGBC" title="Branch 0 was taken 57 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 80 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 57 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">         137 :     if ( isSectionEnabled_( section ) &amp;&amp; passedThreadFilter_() )</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     {</span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          58 :         traceLocation_( section, filename, linenum, funcname );</span></span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          58 :         traceUserMsg_( &quot;-&gt;ENTER: %s&quot;, scope );</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          57 :         traceLocation_( section, filename, linenum, funcname );</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          57 :         traceUserMsg_( &quot;-&gt;ENTER: %s&quot;, scope );</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     }</span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">         143 : }</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">         137 : }</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : </span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">         143 : Trace::~Trace()</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">         137 : Trace::~Trace()</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : {</span>
-<span id="L55"><span class="lineNum">      55</span>   [<span class="tlaGBC" title="Branch 0 was taken 58 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 85 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 58 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">         143 :     if ( isSectionEnabled_( m_section ) &amp;&amp; passedThreadFilter_() )</span></span>
+<span id="L55"><span class="lineNum">      55</span>   [<span class="tlaGBC" title="Branch 0 was taken 57 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 80 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 57 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">         137 :     if ( isSectionEnabled_( m_section ) &amp;&amp; passedThreadFilter_() )</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :     {</span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          58 :         traceLocation_( m_section, m_filename, m_linenum, m_funcname );</span></span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">          58 :         traceUserMsg_( &quot;-&gt;EXIT:  %s&quot;, m_scope );</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          57 :         traceLocation_( m_section, m_filename, m_linenum, m_funcname );</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">          57 :         traceUserMsg_( &quot;-&gt;EXIT:  %s&quot;, m_scope );</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     }</span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">         143 : }</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">         137 : }</span></span>
 <span id="L61"><span class="lineNum">      61</span>                 :             : </span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : ////////////////////////////////////////////////////////////////////////</span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : // NOTE The following two methods MUST be called in order AND always</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : //      as pair!</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : //</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">        5280 : void Trace::traceLocation_( const char* section, const char* filename, int linenum, const char* funcname )</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">        5253 : void Trace::traceLocation_( const char* section, const char* filename, int linenum, const char* funcname )</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     // Get the current tracing level parameter</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">        5280 :     PrivateLocks::tracing().lock();</span></span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">        5280 :     Trace::InfoLevel_T infoLevel = infoLevel_;</span></span>
-<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">        5280 :     PrivateLocks::tracing().unlock();</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">        5253 :     PrivateLocks::tracing().lock();</span></span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">        5253 :     Trace::InfoLevel_T infoLevel = infoLevel_;</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">        5253 :     PrivateLocks::tracing().unlock();</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             : </span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :     // Serialize the output</span>
-<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">        5280 :     PrivateLocks::tracingOutput().lock();</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">        5253 :     PrivateLocks::tracingOutput().lock();</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :     buffer_ = OPTION_KIT_SYSTEM_TRACE_PREFIX_STRING;</span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">        5280 :     PrivateTracePlatform::appendInfo( buffer_, infoLevel, section, filename, linenum, funcname );</span></span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">        5280 : }</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">        5253 :     PrivateTracePlatform::appendInfo( buffer_, infoLevel, section, filename, linenum, funcname );</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">        5253 : }</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : </span>
-<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">        5280 : void Trace::traceUserMsg_( const char* format, ... )</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">        5253 : void Trace::traceUserMsg_( const char* format, ... )</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             : {</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :     va_list ap;</span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">        5280 :     va_start( ap, format );</span></span>
-<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">        5280 :     buffer_.vformatAppend( format, ap );</span></span>
-<span id="L86"><span class="lineNum">      86</span>                 :<span class="tlaGNC">        5280 :     va_end( ap );</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">        5253 :     va_start( ap, format );</span></span>
+<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">        5253 :     buffer_.vformatAppend( format, ap );</span></span>
+<span id="L86"><span class="lineNum">      86</span>                 :<span class="tlaGNC">        5253 :     va_end( ap );</span></span>
 <span id="L87"><span class="lineNum">      87</span>                 :             : </span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :     buffer_ += OPTION_KIT_SYSTEM_TRACE_SUFFIX_STRING;</span>
 <span id="L89"><span class="lineNum">      89</span>                 :             : </span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     // Ensure that the suffix is ALWAYS valid when appended (at the expense of truncating the user msg)</span>
-<span id="L91"><span class="lineNum">      91</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 5280 times"> + </span>]:<span class="tlaGNC">        5280 :     if ( buffer_.truncated() )</span></span>
+<span id="L91"><span class="lineNum">      91</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 5253 times"> + </span>]:<span class="tlaGNC">        5253 :     if ( buffer_.truncated() )</span></span>
 <span id="L92"><span class="lineNum">      92</span>                 :             :     {</span>
 <span id="L93"><span class="lineNum">      93</span>                 :             :         buffer_.trimRight( strlen( OPTION_KIT_SYSTEM_TRACE_SUFFIX_STRING ) );</span>
 <span id="L94"><span class="lineNum">      94</span>                 :             :         buffer_ += OPTION_KIT_SYSTEM_TRACE_SUFFIX_STRING;</span>
 <span id="L95"><span class="lineNum">      95</span>                 :             :     }</span>
 <span id="L96"><span class="lineNum">      96</span>                 :             : </span>
-<span id="L97"><span class="lineNum">      97</span>                 :<span class="tlaGNC">        5280 :     PrivateTracePlatform::output( buffer_ );</span></span>
-<span id="L98"><span class="lineNum">      98</span>                 :<span class="tlaGNC">        5280 :     PrivateLocks::tracingOutput().unlock();</span></span>
-<span id="L99"><span class="lineNum">      99</span>                 :<span class="tlaGNC">        5280 : }</span></span>
+<span id="L97"><span class="lineNum">      97</span>                 :<span class="tlaGNC">        5253 :     PrivateTracePlatform::output( buffer_ );</span></span>
+<span id="L98"><span class="lineNum">      98</span>                 :<span class="tlaGNC">        5253 :     PrivateLocks::tracingOutput().unlock();</span></span>
+<span id="L99"><span class="lineNum">      99</span>                 :<span class="tlaGNC">        5253 : }</span></span>
 <span id="L100"><span class="lineNum">     100</span>                 :             : </span>
 <span id="L101"><span class="lineNum">     101</span>                 :             : </span>
 <span id="L102"><span class="lineNum">     102</span>                 :             : ////////////////////////////////////////////////////////////////////////</span>
-<span id="L103"><span class="lineNum">     103</span>                 :<span class="tlaGNC">          10 : void Trace::enable_()</span></span>
+<span id="L103"><span class="lineNum">     103</span>                 :<span class="tlaGNC">           9 : void Trace::enable_()</span></span>
 <span id="L104"><span class="lineNum">     104</span>                 :             : {</span>
-<span id="L105"><span class="lineNum">     105</span>                 :<span class="tlaGNC">          10 :     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
-<span id="L106"><span class="lineNum">     106</span>                 :<span class="tlaGNC">          10 :     enabled_ = true;</span></span>
-<span id="L107"><span class="lineNum">     107</span>                 :<span class="tlaGNC">          10 : }</span></span>
+<span id="L105"><span class="lineNum">     105</span>                 :<span class="tlaGNC">           9 :     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
+<span id="L106"><span class="lineNum">     106</span>                 :<span class="tlaGNC">           9 :     enabled_ = true;</span></span>
+<span id="L107"><span class="lineNum">     107</span>                 :<span class="tlaGNC">           9 : }</span></span>
 <span id="L108"><span class="lineNum">     108</span>                 :             : </span>
 <span id="L109"><span class="lineNum">     109</span>                 :             : </span>
 <span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaUNC tlaBgUNC">           0 : void Trace::disable_()</span></span>
@@ -184,12 +184,12 @@
 <span id="L122"><span class="lineNum">     122</span>                 :             : }</span>
 <span id="L123"><span class="lineNum">     123</span>                 :             : </span>
 <span id="L124"><span class="lineNum">     124</span>                 :             : </span>
-<span id="L125"><span class="lineNum">     125</span>                 :<span class="tlaGNC tlaBgGNC">          10 : Trace::InfoLevel_T Trace::setInfoLevel_( Trace::InfoLevel_T newLevel )</span></span>
+<span id="L125"><span class="lineNum">     125</span>                 :<span class="tlaGNC tlaBgGNC">           9 : Trace::InfoLevel_T Trace::setInfoLevel_( Trace::InfoLevel_T newLevel )</span></span>
 <span id="L126"><span class="lineNum">     126</span>                 :             : {</span>
-<span id="L127"><span class="lineNum">     127</span>                 :<span class="tlaGNC">          10 :     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
-<span id="L128"><span class="lineNum">     128</span>                 :<span class="tlaGNC">          10 :     InfoLevel_T      previous = infoLevel_;</span></span>
-<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">          10 :     infoLevel_                = newLevel;</span></span>
-<span id="L130"><span class="lineNum">     130</span>                 :<span class="tlaGNC">          10 :     return previous;</span></span>
+<span id="L127"><span class="lineNum">     127</span>                 :<span class="tlaGNC">           9 :     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
+<span id="L128"><span class="lineNum">     128</span>                 :<span class="tlaGNC">           9 :     InfoLevel_T      previous = infoLevel_;</span></span>
+<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">           9 :     infoLevel_                = newLevel;</span></span>
+<span id="L130"><span class="lineNum">     130</span>                 :<span class="tlaGNC">           9 :     return previous;</span></span>
 <span id="L131"><span class="lineNum">     131</span>                 :             : }</span>
 <span id="L132"><span class="lineNum">     132</span>                 :             : </span>
 <span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaUNC tlaBgUNC">           0 : Trace::InfoLevel_T Trace::getInfoLevel_() noexcept</span></span>
@@ -200,26 +200,26 @@
 <span id="L138"><span class="lineNum">     138</span>                 :             : }</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             : </span>
 <span id="L140"><span class="lineNum">     140</span>                 :             : </span>
-<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC tlaBgGNC">          10 : bool Trace::enableSection_( const char* sectionToEnable )</span></span>
+<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC tlaBgGNC">           9 : bool Trace::enableSection_( const char* sectionToEnable )</span></span>
 <span id="L142"><span class="lineNum">     142</span>                 :             : {</span>
 <span id="L143"><span class="lineNum">     143</span>                 :             :     bool result = false;</span>
-<span id="L144"><span class="lineNum">     144</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          10 :     if ( sectionToEnable )</span></span>
+<span id="L144"><span class="lineNum">     144</span>         [<span class="tlaGBC" title="Branch 0 was taken 9 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           9 :     if ( sectionToEnable )</span></span>
 <span id="L145"><span class="lineNum">     145</span>                 :             :     {</span>
-<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">          10 :         Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
+<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">           9 :         Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : </span>
 <span id="L148"><span class="lineNum">     148</span>                 :             :         int i;</span>
 <span id="L149"><span class="lineNum">     149</span>                 :             :         for ( i = 0; i &lt; OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS; i++ )</span>
 <span id="L150"><span class="lineNum">     150</span>                 :             :         {</span>
-<span id="L151"><span class="lineNum">     151</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          10 :             if ( activeSections_[i].isEmpty() )</span></span>
+<span id="L151"><span class="lineNum">     151</span>         [<span class="tlaGBC" title="Branch 0 was taken 9 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           9 :             if ( activeSections_[i].isEmpty() )</span></span>
 <span id="L152"><span class="lineNum">     152</span>                 :             :             {</span>
-<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">          10 :                 activeSections_[i] = sectionToEnable;</span></span>
+<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">           9 :                 activeSections_[i] = sectionToEnable;</span></span>
 <span id="L154"><span class="lineNum">     154</span>                 :             :                 result             = true;</span>
-<span id="L155"><span class="lineNum">     155</span>                 :<span class="tlaGNC">          10 :                 break;</span></span>
+<span id="L155"><span class="lineNum">     155</span>                 :<span class="tlaGNC">           9 :                 break;</span></span>
 <span id="L156"><span class="lineNum">     156</span>                 :             :             }</span>
 <span id="L157"><span class="lineNum">     157</span>                 :             :         }</span>
 <span id="L158"><span class="lineNum">     158</span>                 :             :     }</span>
 <span id="L159"><span class="lineNum">     159</span>                 :             : </span>
-<span id="L160"><span class="lineNum">     160</span>                 :<span class="tlaGNC">          10 :     return result;</span></span>
+<span id="L160"><span class="lineNum">     160</span>                 :<span class="tlaGNC">           9 :     return result;</span></span>
 <span id="L161"><span class="lineNum">     161</span>                 :             : }</span>
 <span id="L162"><span class="lineNum">     162</span>                 :             : </span>
 <span id="L163"><span class="lineNum">     163</span>                 :             : </span>
@@ -253,19 +253,19 @@
 <span id="L191"><span class="lineNum">     191</span>                 :<span class="tlaUNC">           0 : }</span></span>
 <span id="L192"><span class="lineNum">     192</span>                 :             : </span>
 <span id="L193"><span class="lineNum">     193</span>                 :             : </span>
-<span id="L194"><span class="lineNum">     194</span>                 :<span class="tlaGNC tlaBgGNC">      115955 : bool Trace::isSectionEnabled_( const char* section )</span></span>
+<span id="L194"><span class="lineNum">     194</span>                 :<span class="tlaGNC tlaBgGNC">      112254 : bool Trace::isSectionEnabled_( const char* section )</span></span>
 <span id="L195"><span class="lineNum">     195</span>                 :             : {</span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">      115955 :     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">      112254 :     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
 <span id="L197"><span class="lineNum">     197</span>                 :             : </span>
 <span id="L198"><span class="lineNum">     198</span>                 :             :     bool result = false;</span>
-<span id="L199"><span class="lineNum">     199</span>         [<span class="tlaGBC" title="Branch 0 was taken 115955 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">      115955 :     if ( enabled_ )</span></span>
+<span id="L199"><span class="lineNum">     199</span>         [<span class="tlaGBC" title="Branch 0 was taken 112254 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">      112254 :     if ( enabled_ )</span></span>
 <span id="L200"><span class="lineNum">     200</span>                 :             :     {</span>
 <span id="L201"><span class="lineNum">     201</span>                 :             :         int i;</span>
 <span id="L202"><span class="lineNum">     202</span>                 :             :         for ( i = 0; i &lt; OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS; i++ )</span>
 <span id="L203"><span class="lineNum">     203</span>                 :             :         {</span>
-<span id="L204"><span class="lineNum">     204</span>         [<span class="tlaGBC" title="Branch 0 was taken 890680 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">     1781360 :             if ( activeSections_[i][0] != '*' )</span></span>
+<span id="L204"><span class="lineNum">     204</span>         [<span class="tlaGBC" title="Branch 0 was taken 861261 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">     1722522 :             if ( activeSections_[i][0] != '*' )</span></span>
 <span id="L205"><span class="lineNum">     205</span>                 :             :             {</span>
-<span id="L206"><span class="lineNum">     206</span>         [<span class="tlaGBC" title="Branch 0 was taken 885400 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5280 times"> + </span>]:<span class="tlaGNC">      890680 :                 if ( activeSections_[i] == section )</span></span>
+<span id="L206"><span class="lineNum">     206</span>         [<span class="tlaGBC" title="Branch 0 was taken 856008 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5253 times"> + </span>]:<span class="tlaGNC">      861261 :                 if ( activeSections_[i] == section )</span></span>
 <span id="L207"><span class="lineNum">     207</span>                 :             :                 {</span>
 <span id="L208"><span class="lineNum">     208</span>                 :             :                     result = true;</span>
 <span id="L209"><span class="lineNum">     209</span>                 :             :                     break;</span>
@@ -282,7 +282,7 @@
 <span id="L220"><span class="lineNum">     220</span>                 :             :         }</span>
 <span id="L221"><span class="lineNum">     221</span>                 :             :     }</span>
 <span id="L222"><span class="lineNum">     222</span>                 :             : </span>
-<span id="L223"><span class="lineNum">     223</span>                 :<span class="tlaGNC tlaBgGNC">      115955 :     return result;</span></span>
+<span id="L223"><span class="lineNum">     223</span>                 :<span class="tlaGNC tlaBgGNC">      112254 :     return result;</span></span>
 <span id="L224"><span class="lineNum">     224</span>                 :             : }</span>
 <span id="L225"><span class="lineNum">     225</span>                 :             : </span>
 <span id="L226"><span class="lineNum">     226</span>                 :<span class="tlaUNC tlaBgUNC">           0 : unsigned Trace::getSections_( Kit::Text::IString&amp; dst )</span></span>
@@ -367,19 +367,19 @@
 <span id="L305"><span class="lineNum">     305</span>                 :<span class="tlaUNC">           0 :     return count;</span></span>
 <span id="L306"><span class="lineNum">     306</span>                 :             : }</span>
 <span id="L307"><span class="lineNum">     307</span>                 :             : </span>
-<span id="L308"><span class="lineNum">     308</span>                 :<span class="tlaGNC tlaBgGNC">        5280 : bool Trace::passedThreadFilter_()</span></span>
+<span id="L308"><span class="lineNum">     308</span>                 :<span class="tlaGNC tlaBgGNC">        5253 : bool Trace::passedThreadFilter_()</span></span>
 <span id="L309"><span class="lineNum">     309</span>                 :             : {</span>
 <span id="L310"><span class="lineNum">     310</span>                 :             :     // Safely get the current's thread name (i.e. works with non-KIT threads)</span>
 <span id="L311"><span class="lineNum">     311</span>                 :             :     const char* threadNameToTest = nullptr;</span>
-<span id="L312"><span class="lineNum">     312</span>                 :<span class="tlaGNC">        5280 :     Thread*     curThread        = Thread::tryGetCurrent();</span></span>
-<span id="L313"><span class="lineNum">     313</span>         [<span class="tlaGBC" title="Branch 0 was taken 5280 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5280 :     if ( curThread != nullptr )</span></span>
+<span id="L312"><span class="lineNum">     312</span>                 :<span class="tlaGNC">        5253 :     Thread*     curThread        = Thread::tryGetCurrent();</span></span>
+<span id="L313"><span class="lineNum">     313</span>         [<span class="tlaGBC" title="Branch 0 was taken 5253 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5253 :     if ( curThread != nullptr )</span></span>
 <span id="L314"><span class="lineNum">     314</span>                 :             :     {</span>
-<span id="L315"><span class="lineNum">     315</span>                 :<span class="tlaGNC">        5280 :         threadNameToTest = curThread-&gt;getName();</span></span>
+<span id="L315"><span class="lineNum">     315</span>                 :<span class="tlaGNC">        5253 :         threadNameToTest = curThread-&gt;getName();</span></span>
 <span id="L316"><span class="lineNum">     316</span>                 :             :     }</span>
 <span id="L317"><span class="lineNum">     317</span>                 :             : </span>
 <span id="L318"><span class="lineNum">     318</span>                 :             :     bool             result = true;</span>
-<span id="L319"><span class="lineNum">     319</span>                 :<span class="tlaGNC">        5280 :     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
-<span id="L320"><span class="lineNum">     320</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 5280 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        5280 :     if ( threadFilterEnabled_ &amp;&amp; threadNameToTest )</span></span>
+<span id="L319"><span class="lineNum">     319</span>                 :<span class="tlaGNC">        5253 :     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );</span></span>
+<span id="L320"><span class="lineNum">     320</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 5253 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        5253 :     if ( threadFilterEnabled_ &amp;&amp; threadNameToTest )</span></span>
 <span id="L321"><span class="lineNum">     321</span>                 :             :     {</span>
 <span id="L322"><span class="lineNum">     322</span>                 :             :         int i;</span>
 <span id="L323"><span class="lineNum">     323</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC tlaBgUNC">           0 :         for ( i = 0, result = false; i &lt; NUM_THREAD_FILTERS_; i++ )</span></span>
@@ -392,7 +392,7 @@
 <span id="L330"><span class="lineNum">     330</span>                 :             :         }</span>
 <span id="L331"><span class="lineNum">     331</span>                 :             :     }</span>
 <span id="L332"><span class="lineNum">     332</span>                 :             : </span>
-<span id="L333"><span class="lineNum">     333</span>                 :<span class="tlaGNC tlaBgGNC">        5280 :     return result;</span></span>
+<span id="L333"><span class="lineNum">     333</span>                 :<span class="tlaGNC tlaBgGNC">        5253 :     return result;</span></span>
 <span id="L334"><span class="lineNum">     334</span>                 :             : }</span>
 <span id="L335"><span class="lineNum">     335</span>                 :             : </span>
 <span id="L336"><span class="lineNum">     336</span>                 :             : }  // end namespaces</span>
