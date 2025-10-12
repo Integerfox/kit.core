@@ -16,12 +16,16 @@ class ToolChain( base.ToolChain ):
     def __init__( self, exename, prjdir, build_variants, default_variant='release' ):
         base.ToolChain.__init__( self, exename, prjdir, build_variants, default_variant )
         self._ccname = 'Clang (LLVM-MinGW)'
+        self._cc     = 'clang'
+        self._ld     = 'clang'
+        self._ar     = 'llvm-ar'
         
         # more stuff to clean
         self._clean_list.extend( ['xml'] )
 
         # Different library name for the standard C++ library
-        self._base_release.linklibs = '-Wl,-lc++ -Wl,-lm'
+        # For LLVM-MinGW, use libc++ and libm
+        self._base_release.linklibs = '-lc++ -lm'
         
         # Turn off ALL optimization on the debug build
         self._debug_release.cflags   = self._debug_release.cflags + ' -O0'
