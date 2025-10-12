@@ -39,10 +39,10 @@ jobs:
           version: '1.11.1'
 
       # Clang setup
-      - name: Clang compiler
-        uses: rlalik/setup-cpp-compiler@master
-        with:
-          compiler: clang
+      #- name: Clang compiler
+      #  uses: rlalik/setup-cpp-compiler@master
+      #  with:
+      #    compiler: clang
 
       # This step is commented out, but can be used for debugging purposes.
       #- name: Setup tmate session 
