@@ -14,7 +14,7 @@
 # <a6>: <current-dir>
 # <a7>: <build-variant>
 # <a8>: <debug-type> // debug|release|clean
-# <prj1>: <build-type> // e.g. windows\vc12, windows\mingw_w64, linux/gcc, etc.
+# <prj1>: <build-type> // e.g. windows/vc12, windows/clang-host, linux/gcc, etc.
 #-----------------------------------------------------------------------------
 
 #

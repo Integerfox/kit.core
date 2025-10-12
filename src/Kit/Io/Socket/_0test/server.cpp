@@ -59,7 +59,7 @@ public:
                 return true;
             }
             m_byteCount += buffer.length();
-            KIT_SYSTEM_TRACE_MSG( SECT_, "READER: input (%d : %p) [%s]", buffer.length(), (void*)( (size_t)m_byteCount ), buffer.getString() );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "READER: input (%d : %zu) [%s]", buffer.length(), (size_t)m_byteCount, buffer.getString() );
 
             if ( !m_stream.write( buffer ) )
             {

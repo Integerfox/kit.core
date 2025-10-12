@@ -1,0 +1,63 @@
+name: Build Windows Clang
+permissions:
+  contents: read
+  pull-requests: write
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  clang_64_windows_build:
+    name: Clang Compiler Windows 64bit Build
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.safecrlf false
+      - uses: actions/checkout@v2
+
+      # Python setup
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' 
+
+      # Ninja setup
+      - uses: seanmiddleditch/gha-setup-ninja@master
+        with:
+          version: '1.11.1'
+
+      # Clang setup -->The clang-msvc compiler is part of the base Windows image.
+      #- name: Clang compiler
+      #  uses: rlalik/setup-cpp-compiler@master
+      #  with:
+      #    compiler: clang
+
+      # This step is commented out, but can be used for debugging purposes.
+      #- name: Setup tmate session 
+      # uses: mxschmitt/action-tmate@v3
+
+      # Build PRs
+      - name: Run build script - for PRs
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Running build script for PRs..."
+          .\top\gha_windows_clang-host.bat 0 
+
+      # Build Stable branches
+      - name: Run build script - for stable branches
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "Running build script for stable branches..."
+          .\top\gha_windows_clang-host.bat ${{ github.run_number }} ${{ github.ref_name }}

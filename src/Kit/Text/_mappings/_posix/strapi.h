@@ -28,8 +28,6 @@
 #define HAVE_KIT_TEXT_SNPRINTF
 #define HAVE_KIT_TEXT_VSNPRINTF
 
-#define strset_MAP(s,f)		strnset_MAP(s,f,strlen(s))
-
 extern char* strupr_MAP( char* s1 );
 extern char* strlwr_MAP( char* s1 );
 
