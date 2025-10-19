@@ -32,8 +32,8 @@ class ToolChain( base.ToolChain ):
         self._base_release.linklibs = ''
         
         # Turn off ALL optimization on the debug build
-        self._debug_release.cflags   = self._debug_release.cflags + ' -O0'
-        
+        self._debug_release.cflags    = self._debug_release.cflags + ' -O0 -gcodeview'
+        self._debug_release.linkflags = self._debug_release.linkflags + ' ' + self._debug_release.cflags
  
     #--------------------------------------------------------------------------
     def validate_cc( self ):

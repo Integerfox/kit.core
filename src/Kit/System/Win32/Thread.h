@@ -70,7 +70,7 @@ public:
 
 private:
     /// Entry point for all newly created threads
-    static void __cdecl entryPoint( void* data );
+    static void __stdcall entryPoint( void* data );
 
 
 public:

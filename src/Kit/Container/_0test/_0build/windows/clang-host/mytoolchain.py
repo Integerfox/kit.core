@@ -45,26 +45,25 @@ FINAL_OUTPUT_NAME = 'a.exe'
 
 
 #
-# For build config/variant: "win64"
+# For build config/variant: "win32"
 #
 
 # Construct option structs
-base_win64      = BuildValues()
-optimized_win64 = BuildValues()
-debug_win64     = BuildValues()
+base_win32      = BuildValues()
+optimized_win32 = BuildValues()
+debug_win32     = BuildValues()
 
 # Set 'base' options
-base_win64.cflags     = '-m64 -std=c++17 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
-base_win64.inc        = catch2_inc
-base_win64.linkflags  = '-m64'
-base_win64.firstobjs  = unit_test_objects
-base_win64.linklibs   = f'{catch2_lib}'
+base_win32.cflags     = '-m32 -std=c++17 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
+base_win32.inc        = catch2_inc
+base_win32.linkflags  = '-m32'
+base_win32.firstobjs  = unit_test_objects
+base_win32.linklibs   = f'{catch2_lib}'
 
 # Set 'Optimized' options
-optimized_win64.cflags    = '-O3'
+optimized_win32.cflags    = '-O3'
 
 # Set 'debug' options
-
 
 
 #-------------------------------------------------
@@ -73,15 +72,15 @@ optimized_win64.cflags    = '-O3'
 #-------------------------------------------------
 
 # Add new dictionary of for new build configuration options
-win64_opts = { 'user_base':base_win64,
-               'user_optimized':optimized_win64,
-               'user_debug':debug_win64
+win32_opts = { 'user_base':base_win32,
+               'user_optimized':optimized_win32,
+               'user_debug':debug_win32
              }
                
         
 # Add new variant option dictionary to # dictionary of 
 # build variants
-build_variants = { 'win64':win64_opts,
+build_variants = { 'win32':win32_opts,
                  }    
 
 
@@ -95,5 +94,5 @@ from nqbplib.toolchains.windows.clang_msvc.console_exe import ToolChain
 
 # Function that instantiates an instance of the toolchain
 def create():
-    tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, "win64" )
+    tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, "win32" )
     return tc 
