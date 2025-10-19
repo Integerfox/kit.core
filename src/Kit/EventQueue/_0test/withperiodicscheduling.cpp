@@ -30,7 +30,7 @@ using namespace Kit::System;
 
 static inline void displayInfo( const char* label, unsigned count, uint64_t currentTick, uint64_t intervalTick, void* context )
 {
-    KIT_SYSTEM_TRACE_MSG( SECT_, "%-7s: %d, tick=%" PRIu32 ", interval=%" PRIu32 ", context=%p", label, count, (uint32_t)currentTick, (uint32_t)intervalTick, context );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "%-7s: %d, tick=%" PRIu64 ", interval=%" PRIu64 ", context=%p", label, count, currentTick, intervalTick, context );
 }
 
 

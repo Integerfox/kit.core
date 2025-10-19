@@ -24,7 +24,7 @@ using namespace Kit::System;
 
 static inline void displayInfo( const char* label, unsigned count, uint64_t currentTick, uint64_t intervalTick, void* context )
 {
-    KIT_SYSTEM_TRACE_MSG( SECT_, "%-7s: %d, tick=%" PRIu32 ", interval=%" PRIu32 ", context=%p", label, count, (uint32_t)currentTick, (uint32_t)intervalTick, context );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "%-7s: %d, tick=%" PRIu64 ", interval=%" PRIu64 ", context=%p", label, count, currentTick, intervalTick, context );
 }
 
 
@@ -145,7 +145,7 @@ TEST_CASE( "PeriodicScheduler" )
         uint64_t          intervalTime;
 
         currentTick_ = 5;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.beginLoop();
         uut.executeScheduler();
         REQUIRE( appleCount_ == 0 );
@@ -155,7 +155,7 @@ TEST_CASE( "PeriodicScheduler" )
         REQUIRE( startLoopCountLastCurrentTick_ == currentTick_ );
         REQUIRE( endLoopCount_ == 0 );
         currentTick_ += 5;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
 
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
@@ -172,7 +172,7 @@ TEST_CASE( "PeriodicScheduler" )
         REQUIRE( cherryLastCurrentInterval_ == intervalTime );
 
         currentTick_ += 5;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
 
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
@@ -186,7 +186,7 @@ TEST_CASE( "PeriodicScheduler" )
         REQUIRE( cherryLastCurrentInterval_ == intervalTime );
 
         currentTick_ += 5;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
 
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
@@ -203,7 +203,7 @@ TEST_CASE( "PeriodicScheduler" )
         REQUIRE( cherryCount_ == 2 );
 
         currentTick_ += 1;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
         displayInfo( "ORANGE", orangeCount_, orangeLastCurrentTick_, orangeLastCurrentInterval_, orangeLastContext_ );
@@ -227,7 +227,7 @@ TEST_CASE( "PeriodicScheduler" )
         uint64_t          intervalTime;
 
         currentTick_ = 5;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.beginLoop();
         uut.executeScheduler();
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
@@ -241,7 +241,7 @@ TEST_CASE( "PeriodicScheduler" )
         REQUIRE( endLoopCount_ == 0 );
 
         currentTick_ += 5;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
         displayInfo( "ORANGE", orangeCount_, orangeLastCurrentTick_, orangeLastCurrentInterval_, orangeLastContext_ );
@@ -253,7 +253,7 @@ TEST_CASE( "PeriodicScheduler" )
 
         // Slip a single interval
         currentTick_ += 20;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
         displayInfo( "ORANGE", orangeCount_, orangeLastCurrentTick_, orangeLastCurrentInterval_, orangeLastContext_ );
@@ -271,7 +271,7 @@ TEST_CASE( "PeriodicScheduler" )
         REQUIRE( slippageLastContext_ == (void*)0xFEED );
 
         currentTick_ += 10;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
         displayInfo( "ORANGE", orangeCount_, orangeLastCurrentTick_, orangeLastCurrentInterval_, orangeLastContext_ );
@@ -289,7 +289,7 @@ TEST_CASE( "PeriodicScheduler" )
 
         // Slip multiple intervals
         currentTick_ += 30;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
         displayInfo( "ORANGE", orangeCount_, orangeLastCurrentTick_, orangeLastCurrentInterval_, orangeLastContext_ );
@@ -305,7 +305,7 @@ TEST_CASE( "PeriodicScheduler" )
 
         // Verify interval boundaries after 'big' slippage
         currentTick_ += 10;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu32, (uint32_t)currentTick_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "== TICK: %" PRIu64, currentTick_ );
         uut.executeScheduler();
         displayInfo( "APPLE", appleCount_, appleLastCurrentTick_, appleLastCurrentInterval_, appleLastContext_ );
         displayInfo( "ORANGE", orangeCount_, orangeLastCurrentTick_, orangeLastCurrentInterval_, orangeLastContext_ );

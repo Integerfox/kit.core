@@ -90,7 +90,7 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
 
     // Mark the NATIVE/Main thread as 'real time' thread for the SimTick engine
     KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( false );
-    KIT_SYSTEM_SIM_TICK_THREAD_INIT_( false );  
+    KIT_SYSTEM_SIM_TICK_THREAD_INIT_( false );
 }
 
 
@@ -104,7 +104,7 @@ Thread::Thread( Kit::System::IRunnable& runnable,
     , m_name( name )
 {
     KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( allowSimTicks );
-    
+
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     KIT_SYSTEM_TRACE_MSG( SECT_, "Name=%s, pri=%d, schedType=%d", name, priority, schedType );
 
@@ -149,7 +149,14 @@ Thread::Thread( Kit::System::IRunnable& runnable,
                           std::max( PTHREAD_STACK_MIN, static_cast<long>( stackSize ) ) );
     if ( rc_init || rc_setdetach || rc_setstack || rc_schedpolicy || rc_schedparam )
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Kit::System::Posix::Thread. unexpected error when creating thread %s. Returns codes (all should be zero): attr_init=%d, setdetach=%d, setstack=%d, schedpolicy=%d, schedparam=%d", name, rc_init, rc_setdetach, rc_setstack, rc_schedpolicy, rc_schedparam );
+        KIT_SYSTEM_TRACE_MSG( SECT_,
+                              "Kit::System::Posix::Thread. unexpected error when creating thread %s. Returns codes (all should be zero): attr_init=%d, setdetach=%d, setstack=%d, schedpolicy=%d, schedparam=%d",
+                              name,
+                              rc_init,
+                              rc_setdetach,
+                              rc_setstack,
+                              rc_schedpolicy,
+                              rc_schedparam );
     }
 
 
