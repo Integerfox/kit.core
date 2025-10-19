@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-12 14:55:57</td>
+            <td class="headerValue">2025-10-19 21:20:40</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">57.7&nbsp;%</td>
@@ -152,7 +152,7 @@
 <span id="L90"><span class="lineNum">      90</span>                 :             : </span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :     // Mark the NATIVE/Main thread as 'real time' thread for the SimTick engine</span>
 <span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">           1 :     KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( false );</span></span>
-<span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">           1 :     KIT_SYSTEM_SIM_TICK_THREAD_INIT_( false );  </span></span>
+<span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">           1 :     KIT_SYSTEM_SIM_TICK_THREAD_INIT_( false );</span></span>
 <span id="L94"><span class="lineNum">      94</span>                 :<span class="tlaGNC">          10 : }</span></span>
 <span id="L95"><span class="lineNum">      95</span>                 :             : </span>
 <span id="L96"><span class="lineNum">      96</span>                 :             : </span>
@@ -166,7 +166,7 @@
 <span id="L104"><span class="lineNum">     104</span>                 :<span class="tlaGNC">          44 :     , m_name( name )</span></span>
 <span id="L105"><span class="lineNum">     105</span>                 :             : {</span>
 <span id="L106"><span class="lineNum">     106</span>                 :<span class="tlaGNC">           9 :     KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( allowSimTicks );</span></span>
-<span id="L107"><span class="lineNum">     107</span>                 :             :     </span>
+<span id="L107"><span class="lineNum">     107</span>                 :             : </span>
 <span id="L108"><span class="lineNum">     108</span>                 :             :     KIT_SYSTEM_TRACE_FUNC( SECT_ );</span>
 <span id="L109"><span class="lineNum">     109</span>                 :             :     KIT_SYSTEM_TRACE_MSG( SECT_, &quot;Name=%s, pri=%d, schedType=%d&quot;, name, priority, schedType );</span>
 <span id="L110"><span class="lineNum">     110</span>                 :             : </span>
@@ -211,132 +211,139 @@
 <span id="L149"><span class="lineNum">     149</span>                 :             :                           std::max( PTHREAD_STACK_MIN, static_cast&lt;long&gt;( stackSize ) ) );</span>
 <span id="L150"><span class="lineNum">     150</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 44 times"> + </span>]:<span class="tlaGNC">          44 :     if ( rc_init || rc_setdetach || rc_setstack || rc_schedpolicy || rc_schedparam )</span></span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :     {</span>
-<span id="L152"><span class="lineNum">     152</span>                 :             :         KIT_SYSTEM_TRACE_MSG( SECT_, &quot;Kit::System::Posix::Thread. unexpected error when creating thread %s. Returns codes (all should be zero): attr_init=%d, setdetach=%d, setstack=%d, schedpolicy=%d, schedparam=%d&quot;, name, rc_init, rc_setdetach, rc_setstack, rc_schedpolicy, rc_schedparam );</span>
-<span id="L153"><span class="lineNum">     153</span>                 :             :     }</span>
-<span id="L154"><span class="lineNum">     154</span>                 :             : </span>
-<span id="L155"><span class="lineNum">     155</span>                 :             : </span>
-<span id="L156"><span class="lineNum">     156</span>                 :             :     // Create the thread</span>
-<span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">          44 :     pthread_create( &amp;m_nativeThreadHdl, &amp;thread_attr, &amp;entryPoint, this );</span></span>
-<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC">          44 :     pthread_attr_destroy( &amp;thread_attr );</span></span>
-<span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">          44 : }</span></span>
-<span id="L160"><span class="lineNum">     160</span>                 :             : </span>
-<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">          88 : Thread::~Thread()</span></span>
-<span id="L162"><span class="lineNum">     162</span>                 :             : {</span>
-<span id="L163"><span class="lineNum">     163</span>                 :             :     // NOTE: In general it is not a good thing to &quot;kill&quot; threads - but to</span>
-<span id="L164"><span class="lineNum">     164</span>                 :             :     //       let the thread &quot;run-to-completion&quot;, i.e. have the run() method</span>
-<span id="L165"><span class="lineNum">     165</span>                 :             :     //       of the associated IRunnable object complete.  If you do</span>
-<span id="L166"><span class="lineNum">     166</span>                 :             :     //       need to kill a thread - be dang sure that it is state such</span>
-<span id="L167"><span class="lineNum">     167</span>                 :             :     //       that it is ok to die - i.e. it has released all of its acquired</span>
-<span id="L168"><span class="lineNum">     168</span>                 :             :     //       resources: mutexes, semaphores, file handles, etc.</span>
-<span id="L169"><span class="lineNum">     169</span>         [<span class="tlaGBC" title="Branch 0 was taken 11 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 33 times"> + </span>]:<span class="tlaGNC">          44 :     if ( isActive() )</span></span>
-<span id="L170"><span class="lineNum">     170</span>                 :             :     {</span>
-<span id="L171"><span class="lineNum">     171</span>                 :             :         // Ask the runnable object nicely to stop</span>
-<span id="L172"><span class="lineNum">     172</span>                 :<span class="tlaGNC">          11 :         m_runnable.pleaseStop();</span></span>
-<span id="L173"><span class="lineNum">     173</span>                 :<span class="tlaGNC">          11 :         Kit::System::sleep( KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS );  // Yield execution and allow time for the thread to actually exit.</span></span>
-<span id="L174"><span class="lineNum">     174</span>                 :             : </span>
-<span id="L175"><span class="lineNum">     175</span>                 :             :         // Just to make sure: Brute the force the thread to end - IF it is still running</span>
-<span id="L176"><span class="lineNum">     176</span>                 :             :         // NOTE: This will NOT free any resources associated with the thread including the stack!</span>
-<span id="L177"><span class="lineNum">     177</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          11 :         if ( isActive() )</span></span>
-<span id="L178"><span class="lineNum">     178</span>                 :             :         {</span>
-<span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaUNC tlaBgUNC">           0 :             pthread_cancel( m_nativeThreadHdl );</span></span>
-<span id="L180"><span class="lineNum">     180</span>                 :             :         }</span>
-<span id="L181"><span class="lineNum">     181</span>                 :             :     }</span>
-<span id="L182"><span class="lineNum">     182</span>                 :<span class="tlaGNC tlaBgGNC">          88 : }</span></span>
-<span id="L183"><span class="lineNum">     183</span>                 :             : </span>
-<span id="L184"><span class="lineNum">     184</span>                 :             : </span>
-<span id="L185"><span class="lineNum">     185</span>                 :             : //////////////////////////////</span>
-<span id="L186"><span class="lineNum">     186</span>                 :<span class="tlaGNC">         128 : int Thread::signal() noexcept</span></span>
-<span id="L187"><span class="lineNum">     187</span>                 :             : {</span>
-<span id="L188"><span class="lineNum">     188</span>                 :<span class="tlaGNC">         128 :     return m_syncSema.signal();</span></span>
-<span id="L189"><span class="lineNum">     189</span>                 :             : }</span>
+<span id="L152"><span class="lineNum">     152</span>                 :             :         KIT_SYSTEM_TRACE_MSG( SECT_,</span>
+<span id="L153"><span class="lineNum">     153</span>                 :             :                               &quot;Kit::System::Posix::Thread. unexpected error when creating thread %s. Returns codes (all should be zero): attr_init=%d, setdetach=%d, setstack=%d, schedpolicy=%d, schedparam=%d&quot;,</span>
+<span id="L154"><span class="lineNum">     154</span>                 :             :                               name,</span>
+<span id="L155"><span class="lineNum">     155</span>                 :             :                               rc_init,</span>
+<span id="L156"><span class="lineNum">     156</span>                 :             :                               rc_setdetach,</span>
+<span id="L157"><span class="lineNum">     157</span>                 :             :                               rc_setstack,</span>
+<span id="L158"><span class="lineNum">     158</span>                 :             :                               rc_schedpolicy,</span>
+<span id="L159"><span class="lineNum">     159</span>                 :             :                               rc_schedparam );</span>
+<span id="L160"><span class="lineNum">     160</span>                 :             :     }</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             : </span>
+<span id="L162"><span class="lineNum">     162</span>                 :             : </span>
+<span id="L163"><span class="lineNum">     163</span>                 :             :     // Create the thread</span>
+<span id="L164"><span class="lineNum">     164</span>                 :<span class="tlaGNC">          44 :     pthread_create( &amp;m_nativeThreadHdl, &amp;thread_attr, &amp;entryPoint, this );</span></span>
+<span id="L165"><span class="lineNum">     165</span>                 :<span class="tlaGNC">          44 :     pthread_attr_destroy( &amp;thread_attr );</span></span>
+<span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">          44 : }</span></span>
+<span id="L167"><span class="lineNum">     167</span>                 :             : </span>
+<span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">          88 : Thread::~Thread()</span></span>
+<span id="L169"><span class="lineNum">     169</span>                 :             : {</span>
+<span id="L170"><span class="lineNum">     170</span>                 :             :     // NOTE: In general it is not a good thing to &quot;kill&quot; threads - but to</span>
+<span id="L171"><span class="lineNum">     171</span>                 :             :     //       let the thread &quot;run-to-completion&quot;, i.e. have the run() method</span>
+<span id="L172"><span class="lineNum">     172</span>                 :             :     //       of the associated IRunnable object complete.  If you do</span>
+<span id="L173"><span class="lineNum">     173</span>                 :             :     //       need to kill a thread - be dang sure that it is state such</span>
+<span id="L174"><span class="lineNum">     174</span>                 :             :     //       that it is ok to die - i.e. it has released all of its acquired</span>
+<span id="L175"><span class="lineNum">     175</span>                 :             :     //       resources: mutexes, semaphores, file handles, etc.</span>
+<span id="L176"><span class="lineNum">     176</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 34 times"> + </span>]:<span class="tlaGNC">          44 :     if ( isActive() )</span></span>
+<span id="L177"><span class="lineNum">     177</span>                 :             :     {</span>
+<span id="L178"><span class="lineNum">     178</span>                 :             :         // Ask the runnable object nicely to stop</span>
+<span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaGNC">          10 :         m_runnable.pleaseStop();</span></span>
+<span id="L180"><span class="lineNum">     180</span>                 :<span class="tlaGNC">          10 :         Kit::System::sleep( KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS );  // Yield execution and allow time for the thread to actually exit.</span></span>
+<span id="L181"><span class="lineNum">     181</span>                 :             : </span>
+<span id="L182"><span class="lineNum">     182</span>                 :             :         // Just to make sure: Brute the force the thread to end - IF it is still running</span>
+<span id="L183"><span class="lineNum">     183</span>                 :             :         // NOTE: This will NOT free any resources associated with the thread including the stack!</span>
+<span id="L184"><span class="lineNum">     184</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">          10 :         if ( isActive() )</span></span>
+<span id="L185"><span class="lineNum">     185</span>                 :             :         {</span>
+<span id="L186"><span class="lineNum">     186</span>                 :<span class="tlaUNC tlaBgUNC">           0 :             pthread_cancel( m_nativeThreadHdl );</span></span>
+<span id="L187"><span class="lineNum">     187</span>                 :             :         }</span>
+<span id="L188"><span class="lineNum">     188</span>                 :             :     }</span>
+<span id="L189"><span class="lineNum">     189</span>                 :<span class="tlaGNC tlaBgGNC">          88 : }</span></span>
 <span id="L190"><span class="lineNum">     190</span>                 :             : </span>
-<span id="L191"><span class="lineNum">     191</span>                 :<span class="tlaUNC tlaBgUNC">           0 : int Thread::su_signal() noexcept</span></span>
-<span id="L192"><span class="lineNum">     192</span>                 :             : {</span>
-<span id="L193"><span class="lineNum">     193</span>                 :<span class="tlaUNC">           0 :     return m_syncSema.su_signal();</span></span>
-<span id="L194"><span class="lineNum">     194</span>                 :             : }</span>
-<span id="L195"><span class="lineNum">     195</span>                 :             : </span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC tlaBgGNC">       10650 : const char* Thread::getName() const noexcept</span></span>
-<span id="L197"><span class="lineNum">     197</span>                 :             : {</span>
-<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC">       10650 :     return m_name;</span></span>
-<span id="L199"><span class="lineNum">     199</span>                 :             : }</span>
-<span id="L200"><span class="lineNum">     200</span>                 :             : </span>
-<span id="L201"><span class="lineNum">     201</span>                 :             : </span>
-<span id="L202"><span class="lineNum">     202</span>                 :             : //////////////////////////////</span>
-<span id="L203"><span class="lineNum">     203</span>                 :<span class="tlaGNC">          44 : void* Thread::entryPoint( void* data )</span></span>
+<span id="L191"><span class="lineNum">     191</span>                 :             : </span>
+<span id="L192"><span class="lineNum">     192</span>                 :             : //////////////////////////////</span>
+<span id="L193"><span class="lineNum">     193</span>                 :<span class="tlaGNC">         128 : int Thread::signal() noexcept</span></span>
+<span id="L194"><span class="lineNum">     194</span>                 :             : {</span>
+<span id="L195"><span class="lineNum">     195</span>                 :<span class="tlaGNC">         128 :     return m_syncSema.signal();</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :             : }</span>
+<span id="L197"><span class="lineNum">     197</span>                 :             : </span>
+<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaUNC tlaBgUNC">           0 : int Thread::su_signal() noexcept</span></span>
+<span id="L199"><span class="lineNum">     199</span>                 :             : {</span>
+<span id="L200"><span class="lineNum">     200</span>                 :<span class="tlaUNC">           0 :     return m_syncSema.su_signal();</span></span>
+<span id="L201"><span class="lineNum">     201</span>                 :             : }</span>
+<span id="L202"><span class="lineNum">     202</span>                 :             : </span>
+<span id="L203"><span class="lineNum">     203</span>                 :<span class="tlaGNC tlaBgGNC">       10644 : const char* Thread::getName() const noexcept</span></span>
 <span id="L204"><span class="lineNum">     204</span>                 :             : {</span>
-<span id="L205"><span class="lineNum">     205</span>                 :             :     // Convert data arg to a pointer to a Thread Object</span>
-<span id="L206"><span class="lineNum">     206</span>                 :             :     auto* myThreadPtr = static_cast&lt;Thread*&gt;( data );</span>
+<span id="L205"><span class="lineNum">     205</span>                 :<span class="tlaGNC">       10644 :     return m_name;</span></span>
+<span id="L206"><span class="lineNum">     206</span>                 :             : }</span>
 <span id="L207"><span class="lineNum">     207</span>                 :             : </span>
-<span id="L208"><span class="lineNum">     208</span>                 :             :     // Set the my TSD key for this thread to point to &quot;my thread&quot;</span>
-<span id="L209"><span class="lineNum">     209</span>                 :<span class="tlaGNC">          44 :     pthread_setspecific( tsdKey_, myThreadPtr );</span></span>
-<span id="L210"><span class="lineNum">     210</span>                 :             : </span>
-<span id="L211"><span class="lineNum">     211</span>                 :             :     // Set my &quot;cancel&quot; type so that thread can always be killed (i.e. the thread</span>
-<span id="L212"><span class="lineNum">     212</span>                 :             :     // is terminated immediately without waiting to reach a &quot;cancellation point&quot;)</span>
-<span id="L213"><span class="lineNum">     213</span>                 :             :     int oldCancelType;</span>
-<span id="L214"><span class="lineNum">     214</span>                 :<span class="tlaGNC">          44 :     pthread_setcanceltype( PTHREAD_CANCEL_ASYNCHRONOUS, &amp;oldCancelType );</span></span>
-<span id="L215"><span class="lineNum">     215</span>                 :             : </span>
-<span id="L216"><span class="lineNum">     216</span>                 :             :     // Go Execute the &quot;IRunnable&quot; object</span>
-<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">          44 :     launchRunnable( *myThreadPtr );</span></span>
-<span id="L218"><span class="lineNum">     218</span>                 :<span class="tlaGNC">          44 :     return 0;</span></span>
-<span id="L219"><span class="lineNum">     219</span>                 :             : }</span>
-<span id="L220"><span class="lineNum">     220</span>                 :             : </span>
-<span id="L221"><span class="lineNum">     221</span>                 :             : </span>
-<span id="L222"><span class="lineNum">     222</span>                 :             : }  // end namespace</span>
-<span id="L223"><span class="lineNum">     223</span>                 :             : }</span>
-<span id="L224"><span class="lineNum">     224</span>                 :             : }</span>
-<span id="L225"><span class="lineNum">     225</span>                 :             : //------------------------------------------------------------------------------</span>
-<span id="L226"><span class="lineNum">     226</span>                 :             : //////////////////////////////</span>
-<span id="L227"><span class="lineNum">     227</span>                 :<span class="tlaGNC">          44 : Kit::System::Thread* Kit::System::Thread::create( IRunnable&amp;  runnable,</span></span>
-<span id="L228"><span class="lineNum">     228</span>                 :             :                                                   const char* name,</span>
-<span id="L229"><span class="lineNum">     229</span>                 :             :                                                   int         priority,</span>
-<span id="L230"><span class="lineNum">     230</span>                 :             :                                                   int         stackSize,</span>
-<span id="L231"><span class="lineNum">     231</span>                 :             :                                                   void*       stackPtr,</span>
-<span id="L232"><span class="lineNum">     232</span>                 :             :                                                   bool        allowSimTicks ) noexcept</span>
-<span id="L233"><span class="lineNum">     233</span>                 :             : {</span>
-<span id="L234"><span class="lineNum">     234</span>                 :<span class="tlaGNC">          44 :     return new Kit::System::Posix::Thread( runnable, name, priority, stackSize, SCHED_OTHER, allowSimTicks );</span></span>
-<span id="L235"><span class="lineNum">     235</span>                 :             : }</span>
-<span id="L236"><span class="lineNum">     236</span>                 :             : </span>
-<span id="L237"><span class="lineNum">     237</span>                 :             : </span>
-<span id="L238"><span class="lineNum">     238</span>                 :<span class="tlaGNC">          44 : void Kit::System::Thread::destroy( Thread&amp; threadToDestroy, uint32_t delayTimeMsToWaitIfActive ) noexcept</span></span>
-<span id="L239"><span class="lineNum">     239</span>                 :             : {</span>
-<span id="L240"><span class="lineNum">     240</span>                 :             :     // Wait for the thread to stop (if it is still running)</span>
-<span id="L241"><span class="lineNum">     241</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 42 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">          44 :     if ( delayTimeMsToWaitIfActive &gt; 0 &amp;&amp; threadToDestroy.isActive() )</span></span>
-<span id="L242"><span class="lineNum">     242</span>                 :             :     {</span>
-<span id="L243"><span class="lineNum">     243</span>                 :<span class="tlaGNC">           1 :         threadToDestroy.m_runnable.pleaseStop();</span></span>
-<span id="L244"><span class="lineNum">     244</span>                 :             :         threadToDestroy.timedWait( delayTimeMsToWaitIfActive );</span>
-<span id="L245"><span class="lineNum">     245</span>                 :             :     }</span>
-<span id="L246"><span class="lineNum">     246</span>                 :             : </span>
-<span id="L247"><span class="lineNum">     247</span>                 :<span class="tlaGNC">          44 :     delete &amp;threadToDestroy;</span></span>
-<span id="L248"><span class="lineNum">     248</span>                 :<span class="tlaGNC">          44 : }</span></span>
-<span id="L249"><span class="lineNum">     249</span>                 :             : </span>
-<span id="L250"><span class="lineNum">     250</span>                 :             : //////////////////////////////</span>
-<span id="L251"><span class="lineNum">     251</span>                 :<span class="tlaGNC">       49004 : Kit::System::Thread* Kit::System::Thread::tryGetCurrent() noexcept</span></span>
-<span id="L252"><span class="lineNum">     252</span>                 :             : {</span>
-<span id="L253"><span class="lineNum">     253</span>                 :             :     // Trap potential error</span>
-<span id="L254"><span class="lineNum">     254</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 49004 times"> + </span>]:<span class="tlaGNC">       49004 :     if ( !keyCreated_ )</span></span>
-<span id="L255"><span class="lineNum">     255</span>                 :             :     {</span>
-<span id="L256"><span class="lineNum">     256</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::FatalError::logRaw( Shutdown::eOSAL, &quot;Thread::tryGetCurrent().  Have not yet created 'Tls Index'.&quot; );</span></span>
-<span id="L257"><span class="lineNum">     257</span>                 :             :     }</span>
-<span id="L258"><span class="lineNum">     258</span>                 :             : </span>
-<span id="L259"><span class="lineNum">     259</span>                 :<span class="tlaGNC tlaBgGNC">       49004 :     auto* ptr = static_cast&lt;Kit::System::Posix::Thread*&gt;( pthread_getspecific( tsdKey_ ) );</span></span>
-<span id="L260"><span class="lineNum">     260</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 49004 times"> + </span>]:<span class="tlaGNC">       49004 :     return isActiveThread( ptr ) ? ptr : nullptr;</span></span>
-<span id="L261"><span class="lineNum">     261</span>                 :             : }</span>
-<span id="L262"><span class="lineNum">     262</span>                 :             : </span>
-<span id="L263"><span class="lineNum">     263</span>                 :             : </span>
-<span id="L264"><span class="lineNum">     264</span>                 :<span class="tlaGNC">         119 : void Kit::System::Thread::wait() noexcept</span></span>
-<span id="L265"><span class="lineNum">     265</span>                 :             : {</span>
-<span id="L266"><span class="lineNum">     266</span>                 :<span class="tlaGNC">         119 :     ( static_cast&lt;Kit::System::Posix::Thread*&gt;( &amp;getCurrent() ) )-&gt;m_syncSema.wait();</span></span>
-<span id="L267"><span class="lineNum">     267</span>                 :<span class="tlaGNC">         119 : }</span></span>
-<span id="L268"><span class="lineNum">     268</span>                 :             : </span>
-<span id="L269"><span class="lineNum">     269</span>                 :<span class="tlaGNC">           3 : bool Kit::System::Thread::tryWait() noexcept</span></span>
-<span id="L270"><span class="lineNum">     270</span>                 :             : {</span>
-<span id="L271"><span class="lineNum">     271</span>                 :<span class="tlaGNC">           3 :     return ( static_cast&lt;Kit::System::Posix::Thread*&gt;( &amp;getCurrent() ) )-&gt;m_syncSema.tryWait();</span></span>
-<span id="L272"><span class="lineNum">     272</span>                 :             : }</span>
-<span id="L273"><span class="lineNum">     273</span>                 :             : </span>
-<span id="L274"><span class="lineNum">     274</span>                 :<span class="tlaGNC">           6 : bool Kit::System::Thread::timedWait( uint32_t msecs ) noexcept</span></span>
-<span id="L275"><span class="lineNum">     275</span>                 :             : {</span>
-<span id="L276"><span class="lineNum">     276</span>                 :<span class="tlaGNC">           5 :     return ( static_cast&lt;Kit::System::Posix::Thread*&gt;( &amp;getCurrent() ) )-&gt;m_syncSema.timedWait( msecs );</span></span>
-<span id="L277"><span class="lineNum">     277</span>                 :             : }</span>
+<span id="L208"><span class="lineNum">     208</span>                 :             : </span>
+<span id="L209"><span class="lineNum">     209</span>                 :             : //////////////////////////////</span>
+<span id="L210"><span class="lineNum">     210</span>                 :<span class="tlaGNC">          44 : void* Thread::entryPoint( void* data )</span></span>
+<span id="L211"><span class="lineNum">     211</span>                 :             : {</span>
+<span id="L212"><span class="lineNum">     212</span>                 :             :     // Convert data arg to a pointer to a Thread Object</span>
+<span id="L213"><span class="lineNum">     213</span>                 :             :     auto* myThreadPtr = static_cast&lt;Thread*&gt;( data );</span>
+<span id="L214"><span class="lineNum">     214</span>                 :             : </span>
+<span id="L215"><span class="lineNum">     215</span>                 :             :     // Set the my TSD key for this thread to point to &quot;my thread&quot;</span>
+<span id="L216"><span class="lineNum">     216</span>                 :<span class="tlaGNC">          44 :     pthread_setspecific( tsdKey_, myThreadPtr );</span></span>
+<span id="L217"><span class="lineNum">     217</span>                 :             : </span>
+<span id="L218"><span class="lineNum">     218</span>                 :             :     // Set my &quot;cancel&quot; type so that thread can always be killed (i.e. the thread</span>
+<span id="L219"><span class="lineNum">     219</span>                 :             :     // is terminated immediately without waiting to reach a &quot;cancellation point&quot;)</span>
+<span id="L220"><span class="lineNum">     220</span>                 :             :     int oldCancelType;</span>
+<span id="L221"><span class="lineNum">     221</span>                 :<span class="tlaGNC">          44 :     pthread_setcanceltype( PTHREAD_CANCEL_ASYNCHRONOUS, &amp;oldCancelType );</span></span>
+<span id="L222"><span class="lineNum">     222</span>                 :             : </span>
+<span id="L223"><span class="lineNum">     223</span>                 :             :     // Go Execute the &quot;IRunnable&quot; object</span>
+<span id="L224"><span class="lineNum">     224</span>                 :<span class="tlaGNC">          44 :     launchRunnable( *myThreadPtr );</span></span>
+<span id="L225"><span class="lineNum">     225</span>                 :<span class="tlaGNC">          44 :     return 0;</span></span>
+<span id="L226"><span class="lineNum">     226</span>                 :             : }</span>
+<span id="L227"><span class="lineNum">     227</span>                 :             : </span>
+<span id="L228"><span class="lineNum">     228</span>                 :             : </span>
+<span id="L229"><span class="lineNum">     229</span>                 :             : }  // end namespace</span>
+<span id="L230"><span class="lineNum">     230</span>                 :             : }</span>
+<span id="L231"><span class="lineNum">     231</span>                 :             : }</span>
+<span id="L232"><span class="lineNum">     232</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L233"><span class="lineNum">     233</span>                 :             : //////////////////////////////</span>
+<span id="L234"><span class="lineNum">     234</span>                 :<span class="tlaGNC">          44 : Kit::System::Thread* Kit::System::Thread::create( IRunnable&amp;  runnable,</span></span>
+<span id="L235"><span class="lineNum">     235</span>                 :             :                                                   const char* name,</span>
+<span id="L236"><span class="lineNum">     236</span>                 :             :                                                   int         priority,</span>
+<span id="L237"><span class="lineNum">     237</span>                 :             :                                                   int         stackSize,</span>
+<span id="L238"><span class="lineNum">     238</span>                 :             :                                                   void*       stackPtr,</span>
+<span id="L239"><span class="lineNum">     239</span>                 :             :                                                   bool        allowSimTicks ) noexcept</span>
+<span id="L240"><span class="lineNum">     240</span>                 :             : {</span>
+<span id="L241"><span class="lineNum">     241</span>                 :<span class="tlaGNC">          44 :     return new Kit::System::Posix::Thread( runnable, name, priority, stackSize, SCHED_OTHER, allowSimTicks );</span></span>
+<span id="L242"><span class="lineNum">     242</span>                 :             : }</span>
+<span id="L243"><span class="lineNum">     243</span>                 :             : </span>
+<span id="L244"><span class="lineNum">     244</span>                 :             : </span>
+<span id="L245"><span class="lineNum">     245</span>                 :<span class="tlaGNC">          44 : void Kit::System::Thread::destroy( Thread&amp; threadToDestroy, uint32_t delayTimeMsToWaitIfActive ) noexcept</span></span>
+<span id="L246"><span class="lineNum">     246</span>                 :             : {</span>
+<span id="L247"><span class="lineNum">     247</span>                 :             :     // Wait for the thread to stop (if it is still running)</span>
+<span id="L248"><span class="lineNum">     248</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 42 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">          44 :     if ( delayTimeMsToWaitIfActive &gt; 0 &amp;&amp; threadToDestroy.isActive() )</span></span>
+<span id="L249"><span class="lineNum">     249</span>                 :             :     {</span>
+<span id="L250"><span class="lineNum">     250</span>                 :<span class="tlaGNC">           1 :         threadToDestroy.m_runnable.pleaseStop();</span></span>
+<span id="L251"><span class="lineNum">     251</span>                 :             :         threadToDestroy.timedWait( delayTimeMsToWaitIfActive );</span>
+<span id="L252"><span class="lineNum">     252</span>                 :             :     }</span>
+<span id="L253"><span class="lineNum">     253</span>                 :             : </span>
+<span id="L254"><span class="lineNum">     254</span>                 :<span class="tlaGNC">          44 :     delete &amp;threadToDestroy;</span></span>
+<span id="L255"><span class="lineNum">     255</span>                 :<span class="tlaGNC">          44 : }</span></span>
+<span id="L256"><span class="lineNum">     256</span>                 :             : </span>
+<span id="L257"><span class="lineNum">     257</span>                 :             : //////////////////////////////</span>
+<span id="L258"><span class="lineNum">     258</span>                 :<span class="tlaGNC">       48991 : Kit::System::Thread* Kit::System::Thread::tryGetCurrent() noexcept</span></span>
+<span id="L259"><span class="lineNum">     259</span>                 :             : {</span>
+<span id="L260"><span class="lineNum">     260</span>                 :             :     // Trap potential error</span>
+<span id="L261"><span class="lineNum">     261</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 48991 times"> + </span>]:<span class="tlaGNC">       48991 :     if ( !keyCreated_ )</span></span>
+<span id="L262"><span class="lineNum">     262</span>                 :             :     {</span>
+<span id="L263"><span class="lineNum">     263</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::FatalError::logRaw( Shutdown::eOSAL, &quot;Thread::tryGetCurrent().  Have not yet created 'Tls Index'.&quot; );</span></span>
+<span id="L264"><span class="lineNum">     264</span>                 :             :     }</span>
+<span id="L265"><span class="lineNum">     265</span>                 :             : </span>
+<span id="L266"><span class="lineNum">     266</span>                 :<span class="tlaGNC tlaBgGNC">       48991 :     auto* ptr = static_cast&lt;Kit::System::Posix::Thread*&gt;( pthread_getspecific( tsdKey_ ) );</span></span>
+<span id="L267"><span class="lineNum">     267</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 48991 times"> + </span>]:<span class="tlaGNC">       48991 :     return isActiveThread( ptr ) ? ptr : nullptr;</span></span>
+<span id="L268"><span class="lineNum">     268</span>                 :             : }</span>
+<span id="L269"><span class="lineNum">     269</span>                 :             : </span>
+<span id="L270"><span class="lineNum">     270</span>                 :             : </span>
+<span id="L271"><span class="lineNum">     271</span>                 :<span class="tlaGNC">         119 : void Kit::System::Thread::wait() noexcept</span></span>
+<span id="L272"><span class="lineNum">     272</span>                 :             : {</span>
+<span id="L273"><span class="lineNum">     273</span>                 :<span class="tlaGNC">         119 :     ( static_cast&lt;Kit::System::Posix::Thread*&gt;( &amp;getCurrent() ) )-&gt;m_syncSema.wait();</span></span>
+<span id="L274"><span class="lineNum">     274</span>                 :<span class="tlaGNC">         119 : }</span></span>
+<span id="L275"><span class="lineNum">     275</span>                 :             : </span>
+<span id="L276"><span class="lineNum">     276</span>                 :<span class="tlaGNC">           3 : bool Kit::System::Thread::tryWait() noexcept</span></span>
+<span id="L277"><span class="lineNum">     277</span>                 :             : {</span>
+<span id="L278"><span class="lineNum">     278</span>                 :<span class="tlaGNC">           3 :     return ( static_cast&lt;Kit::System::Posix::Thread*&gt;( &amp;getCurrent() ) )-&gt;m_syncSema.tryWait();</span></span>
+<span id="L279"><span class="lineNum">     279</span>                 :             : }</span>
+<span id="L280"><span class="lineNum">     280</span>                 :             : </span>
+<span id="L281"><span class="lineNum">     281</span>                 :<span class="tlaGNC">           6 : bool Kit::System::Thread::timedWait( uint32_t msecs ) noexcept</span></span>
+<span id="L282"><span class="lineNum">     282</span>                 :             : {</span>
+<span id="L283"><span class="lineNum">     283</span>                 :<span class="tlaGNC">           5 :     return ( static_cast&lt;Kit::System::Posix::Thread*&gt;( &amp;getCurrent() ) )-&gt;m_syncSema.timedWait( msecs );</span></span>
+<span id="L284"><span class="lineNum">     284</span>                 :             : }</span>
         </pre>
               </td>
             </tr>
