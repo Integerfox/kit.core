@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-19 21:20:40</td>
+            <td class="headerValue">2025-10-20 12:09:20</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">57.7&nbsp;%</td>
@@ -235,15 +235,15 @@
 <span id="L173"><span class="lineNum">     173</span>                 :             :     //       need to kill a thread - be dang sure that it is state such</span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :     //       that it is ok to die - i.e. it has released all of its acquired</span>
 <span id="L175"><span class="lineNum">     175</span>                 :             :     //       resources: mutexes, semaphores, file handles, etc.</span>
-<span id="L176"><span class="lineNum">     176</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 34 times"> + </span>]:<span class="tlaGNC">          44 :     if ( isActive() )</span></span>
+<span id="L176"><span class="lineNum">     176</span>         [<span class="tlaGBC" title="Branch 0 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 35 times"> + </span>]:<span class="tlaGNC">          44 :     if ( isActive() )</span></span>
 <span id="L177"><span class="lineNum">     177</span>                 :             :     {</span>
 <span id="L178"><span class="lineNum">     178</span>                 :             :         // Ask the runnable object nicely to stop</span>
-<span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaGNC">          10 :         m_runnable.pleaseStop();</span></span>
-<span id="L180"><span class="lineNum">     180</span>                 :<span class="tlaGNC">          10 :         Kit::System::sleep( KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS );  // Yield execution and allow time for the thread to actually exit.</span></span>
+<span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaGNC">           9 :         m_runnable.pleaseStop();</span></span>
+<span id="L180"><span class="lineNum">     180</span>                 :<span class="tlaGNC">           9 :         Kit::System::sleep( KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS );  // Yield execution and allow time for the thread to actually exit.</span></span>
 <span id="L181"><span class="lineNum">     181</span>                 :             : </span>
 <span id="L182"><span class="lineNum">     182</span>                 :             :         // Just to make sure: Brute the force the thread to end - IF it is still running</span>
 <span id="L183"><span class="lineNum">     183</span>                 :             :         // NOTE: This will NOT free any resources associated with the thread including the stack!</span>
-<span id="L184"><span class="lineNum">     184</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">          10 :         if ( isActive() )</span></span>
+<span id="L184"><span class="lineNum">     184</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 9 times"> + </span>]:<span class="tlaGNC">           9 :         if ( isActive() )</span></span>
 <span id="L185"><span class="lineNum">     185</span>                 :             :         {</span>
 <span id="L186"><span class="lineNum">     186</span>                 :<span class="tlaUNC tlaBgUNC">           0 :             pthread_cancel( m_nativeThreadHdl );</span></span>
 <span id="L187"><span class="lineNum">     187</span>                 :             :         }</span>
@@ -317,16 +317,16 @@
 <span id="L255"><span class="lineNum">     255</span>                 :<span class="tlaGNC">          44 : }</span></span>
 <span id="L256"><span class="lineNum">     256</span>                 :             : </span>
 <span id="L257"><span class="lineNum">     257</span>                 :             : //////////////////////////////</span>
-<span id="L258"><span class="lineNum">     258</span>                 :<span class="tlaGNC">       48991 : Kit::System::Thread* Kit::System::Thread::tryGetCurrent() noexcept</span></span>
+<span id="L258"><span class="lineNum">     258</span>                 :<span class="tlaGNC">       48997 : Kit::System::Thread* Kit::System::Thread::tryGetCurrent() noexcept</span></span>
 <span id="L259"><span class="lineNum">     259</span>                 :             : {</span>
 <span id="L260"><span class="lineNum">     260</span>                 :             :     // Trap potential error</span>
-<span id="L261"><span class="lineNum">     261</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 48991 times"> + </span>]:<span class="tlaGNC">       48991 :     if ( !keyCreated_ )</span></span>
+<span id="L261"><span class="lineNum">     261</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 48997 times"> + </span>]:<span class="tlaGNC">       48997 :     if ( !keyCreated_ )</span></span>
 <span id="L262"><span class="lineNum">     262</span>                 :             :     {</span>
 <span id="L263"><span class="lineNum">     263</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::FatalError::logRaw( Shutdown::eOSAL, &quot;Thread::tryGetCurrent().  Have not yet created 'Tls Index'.&quot; );</span></span>
 <span id="L264"><span class="lineNum">     264</span>                 :             :     }</span>
 <span id="L265"><span class="lineNum">     265</span>                 :             : </span>
-<span id="L266"><span class="lineNum">     266</span>                 :<span class="tlaGNC tlaBgGNC">       48991 :     auto* ptr = static_cast&lt;Kit::System::Posix::Thread*&gt;( pthread_getspecific( tsdKey_ ) );</span></span>
-<span id="L267"><span class="lineNum">     267</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 48991 times"> + </span>]:<span class="tlaGNC">       48991 :     return isActiveThread( ptr ) ? ptr : nullptr;</span></span>
+<span id="L266"><span class="lineNum">     266</span>                 :<span class="tlaGNC tlaBgGNC">       48997 :     auto* ptr = static_cast&lt;Kit::System::Posix::Thread*&gt;( pthread_getspecific( tsdKey_ ) );</span></span>
+<span id="L267"><span class="lineNum">     267</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 48997 times"> + </span>]:<span class="tlaGNC">       48997 :     return isActiveThread( ptr ) ? ptr : nullptr;</span></span>
 <span id="L268"><span class="lineNum">     268</span>                 :             : }</span>
 <span id="L269"><span class="lineNum">     269</span>                 :             : </span>
 <span id="L270"><span class="lineNum">     270</span>                 :             : </span>

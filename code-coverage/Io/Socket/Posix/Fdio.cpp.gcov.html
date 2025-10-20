@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-19 21:20:40</td>
+            <td class="headerValue">2025-10-20 12:09:20</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">56.2&nbsp;%</td>
@@ -89,11 +89,11 @@
 <span id="L27"><span class="lineNum">      27</span>                 :             : </span>
 <span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC tlaBgGNC">          24 : void Fdio::close( int&amp; fd ) noexcept</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
-<span id="L30"><span class="lineNum">      30</span>         [<span class="tlaGBC" title="Branch 0 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          24 :     if ( fd != INVALID_FD )</span></span>
+<span id="L30"><span class="lineNum">      30</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">          24 :     if ( fd != INVALID_FD )</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     {</span>
-<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          13 :         ::shutdown( fd, SHUT_RDWR );</span></span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          13 :         ::close( fd );</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          13 :         fd = INVALID_FD;</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          14 :         ::shutdown( fd, SHUT_RDWR );</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          14 :         ::close( fd );</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          14 :         fd = INVALID_FD;</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     }</span>
 <span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          24 : }</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : </span>
