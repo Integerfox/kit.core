@@ -33,7 +33,7 @@ jobs:
           script: |
             const workflows = [
               "Build Windows MSVC",
-              "Build Windows MinGW", 
+              "Build Windows Clang", 
               "Build Linux GCC",
               "Build Windows STM ARM",
               "Build Windows Atmel ARM"
