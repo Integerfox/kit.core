@@ -8,7 +8,6 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "kit_config.h"
 #include "EventLoopWithPScheduling.h"
 #include "Kit/System/EventLoop.h"
 

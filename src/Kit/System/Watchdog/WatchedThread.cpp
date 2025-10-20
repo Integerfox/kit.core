@@ -8,8 +8,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/System/Watchdog/WatchedThread.h"
-#include "Kit/System/Watchdog/Supervisor.h"
+#include "WatchedThread.h"
+#include "Supervisor.h"
 
 using namespace Kit::System;
 
@@ -18,27 +18,4 @@ WatchedThread::WatchedThread( uint32_t wdogTimeoutMs ) noexcept
     : m_currentCountMs( wdogTimeoutMs )
     , m_wdogTimeoutMs( wdogTimeoutMs )
 {
-}
-
-/////////////////////////
-WatchedRawThread::WatchedRawThread( uint32_t wdogTimeoutMs ) noexcept
-    : WatchedThread( wdogTimeoutMs )
-{
-}
-
-bool WatchedRawThread::startWatching() noexcept
-{
-    Supervisor::beginWatching( *this );
-    return true;  // Method no longer fails, but maintain return type for compatibility
-}
-
-bool WatchedRawThread::stopWatching() noexcept
-{
-    Supervisor::endWatching( *this );
-    return true;  // Method no longer fails, but maintain return type for compatibility
-}
-
-void WatchedRawThread::kickWatchdog() noexcept
-{
-    Supervisor::reloadThread( *this );
 }

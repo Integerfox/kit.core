@@ -13,6 +13,11 @@
 #include "Kit/Container/ListItem.h"
 #include <cstdint>
 
+/// Default watchdog timeout for watched threads in milliseconds
+#ifndef OPTION_SYSTEM_WATCHDOG_WATCHED_THREAD_DEFAULT_TIMEOUT_MS
+#define OPTION_SYSTEM_WATCHDOG_WATCHED_THREAD_DEFAULT_TIMEOUT_MS  1000
+#endif
+
 ///
 namespace Kit {
 ///
@@ -29,7 +34,7 @@ public:
     /** Constructor
         @param wdogTimeoutMs The watchdog timeout period for this thread in milliseconds
      */
-    WatchedThread( uint32_t wdogTimeoutMs = 1000 ) noexcept;
+    WatchedThread( uint32_t wdogTimeoutMs = OPTION_SYSTEM_WATCHDOG_WATCHED_THREAD_DEFAULT_TIMEOUT_MS ) noexcept;
 
 public:
     /** Current countdown timer in milliseconds. This value is decremented by the
@@ -44,37 +49,6 @@ public:
     uint32_t m_wdogTimeoutMs;
 };
 
-/** WatchedRawThread - A concrete implementation for raw threads that provides
-    wrapper methods for manual watchdog management via the Supervisor.
- */
-class WatchedRawThread : public WatchedThread
-{
-public:
-    /** Constructor
-        @param wdogTimeoutMs The watchdog timeout period for this thread in milliseconds
-     */
-    WatchedRawThread( uint32_t wdogTimeoutMs = 1000 ) noexcept;
-
-    /** Starts watchdog monitoring for this thread by registering it with the Supervisor.
-        @return true if successfully started monitoring, false otherwise
-     */
-    bool startWatching() noexcept;
-
-    /** Stops watchdog monitoring for this thread by unregistering it from the Supervisor.
-        @return true if successfully stopped monitoring, false otherwise
-     */
-    bool stopWatching() noexcept;
-
-    /** Kicks/reloads the watchdog timer for this thread via the Supervisor.
-        This should be called periodically to indicate the thread is healthy.
-     */
-    void kickWatchdog() noexcept;
-
-
-    /// Virtual destructor
-    virtual ~WatchedRawThread() = default;
-};
-
-};  // end namespace System
-};  // end namespace Kit
+}  // end namespace System
+}  // end namespace Kit
 #endif  // end header latch

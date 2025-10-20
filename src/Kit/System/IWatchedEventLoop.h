@@ -1,5 +1,5 @@
-#ifndef KIT_SYSTEM_WATCHDOG_IWATCHEDEVENTLOOP_H_
-#define KIT_SYSTEM_WATCHDOG_IWATCHEDEVENTLOOP_H_
+#ifndef KIT_SYSTEM_IWATCHEDEVENTLOOP_H_
+#define KIT_SYSTEM_IWATCHEDEVENTLOOP_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -17,8 +17,8 @@ namespace Kit {
 ///
 namespace System {
 
-// Forward declaration - EventLoop is in Kit::System namespace
-class EventLoop;
+// Forward declaration - TimerManager is in Kit::System namespace
+class TimerManager;
 
 /** This abstract interface defines the API for watching/monitoring an EventLoop
     for watchdog purposes. The interface provides methods to start/stop monitoring
@@ -32,9 +32,9 @@ public:
     /** Starts the watchdog monitoring for this event loop.
         Should be called when the event loop begins execution.
 
-        @param eventLoop Reference to the EventLoop instance that is being watched
+        @param timingSource Reference to the Timing source (aka EventLoop) for the thread that is being watched
      */
-    virtual void startWatcher( Kit::System::EventLoop& eventLoop ) noexcept = 0;
+    virtual void startWatcher( Kit::System::TimerManager& timingSource ) noexcept = 0;
 
     /** Stops the watchdog monitoring for this event loop.
         Should be called when the event loop is shutting down.
@@ -62,10 +62,10 @@ public:
 }  // end namespace Kit
 
 // ============================================================================
-// Watchdog Macros
+// Watchdog Macros for EventLoop
 // ============================================================================
 
-/** Compile-time macros for instrumenting EventLoop and raw threads with watchdog monitoring.
+/** Compile-time macros for instrumenting EventLoop with watchdog monitoring.
     These macros can be enabled/disabled at compile time and support both
     direct function calls and pointer-based calls for flexibility.
  */
@@ -73,19 +73,19 @@ public:
 #ifdef USE_KIT_SYSTEM_WATCHDOG
 
 /** Macro to start watchdog monitoring in an EventLoop.
-    Usage: KIT_SYSTEM_WATCHDOG_START_EVENTLOOP(thisPtr, evLoop)
+    Usage: KIT_SYSTEM_WATCHDOG_START_EVENTLOOP(thisPtr, timingSource)
 
     @param thisPtr The IWatchedEventLoop instance pointer
-    @param evLoop Reference to the EventLoop instance that is being watched
+    @param timingSource Reference to the TimerManager instance that provides timing
  */
-#define KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( thisPtr, evLoop ) \
-    do                                                         \
-    {                                                          \
-        if ( thisPtr )                                         \
-        {                                                      \
-            thisPtr->startWatcher( evLoop );                   \
-        }                                                      \
-    }                                                          \
+#define KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( thisPtr, timingSource ) \
+    do                                                               \
+    {                                                                \
+        if ( thisPtr )                                               \
+        {                                                            \
+            thisPtr->startWatcher( timingSource );                   \
+        }                                                            \
+    }                                                                \
     while ( 0 )
 
 /** Macro to stop watchdog monitoring in an EventLoop.
@@ -118,72 +118,18 @@ public:
     }                                                    \
     while ( 0 )
 
-/** Macro to start watchdog monitoring for a raw thread.
-    Usage: KIT_SYSTEM_WATCHDOG_START_RAWTHREAD(threadPtr)
-
-    @param threadPtr The WatchedRawThread instance pointer
- */
-#define KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( threadPtr ) \
-    do                                                   \
-    {                                                    \
-        if ( threadPtr )                                 \
-        {                                                \
-            threadPtr->startWatching();                  \
-        }                                                \
-    }                                                    \
-    while ( 0 )
-
-/** Macro to stop watchdog monitoring for a raw thread.
-    Usage: KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD(threadPtr)
-
-    @param threadPtr The WatchedRawThread instance pointer
- */
-#define KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( threadPtr ) \
-    do                                                  \
-    {                                                   \
-        if ( threadPtr )                                \
-        {                                               \
-            threadPtr->stopWatching();                  \
-        }                                               \
-    }                                                   \
-    while ( 0 )
-
-/** Macro to kick/reload watchdog for a raw thread.
-    Usage: KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD(threadPtr)
-
-    @param threadPtr The WatchedRawThread instance pointer
- */
-#define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( threadPtr ) \
-    do                                                  \
-    {                                                   \
-        if ( threadPtr )                                \
-        {                                               \
-            threadPtr->kickWatchdog();                  \
-        }                                               \
-    }                                                   \
-    while ( 0 )
-
 #else
 
 // When watchdog is disabled, macros expand to nothing
 
 /// Watchdog framework disabled at compile time
-#define KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( thisPtr, evLoop )
+#define KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( thisPtr, timingSource )
 
 /// Watchdog framework disabled at compile time
 #define KIT_SYSTEM_WATCHDOG_STOP_EVENTLOOP( thisPtr )
 
 /// Watchdog framework disabled at compile time
 #define KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( thisPtr )
-
-/// Watchdog framework disabled at compile time
-#define KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( threadPtr )
-
-/// Watchdog framework disabled at compile time
-#define KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( threadPtr )
-
-/// Watchdog framework disabled at compile time
-#define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( threadPtr )
 
 #endif  // USE_KIT_SYSTEM_WATCHDOG
 

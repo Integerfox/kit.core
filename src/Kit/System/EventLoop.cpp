@@ -8,16 +8,15 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "kit_config.h"
 #include "EventLoop.h"
 #include "Assert.h"
 #include "ElapsedTime.h"
 #include "Kit/System/IEventFlag.h"
 #include "Trace.h"
 #include "GlobalLock.h"
-#include "Kit/System/Watchdog/IWatchedEventLoop.h"
+#include "Kit/System/IWatchedEventLoop.h"
 
-#define SECT_ "EventLoop"
+#define SECT_ "Kit::System::EventLoop"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -29,11 +28,11 @@ EventLoop::EventLoop( uint32_t                           timeOutPeriodInMsec,
                       IWatchedEventLoop*                 watchdog ) noexcept
     : IRunnable()
     , m_eventList( eventFlagsList )
+    , m_watchdog( watchdog )
     , m_timeout( timeOutPeriodInMsec )
     , m_timeStartOfLoop( 0 )
     , m_events( 0 )
     , m_run( true )
-    , m_watchdog( watchdog )
 {
     KIT_SYSTEM_ASSERT( timeOutPeriodInMsec > 0 );
 }

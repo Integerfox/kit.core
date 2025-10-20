@@ -10,11 +10,9 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/System/Watchdog/IWatchedEventLoop.h"
+#include "Kit/System/IWatchedEventLoop.h"
 #include "Kit/System/Watchdog/WatchedThread.h"
-#include "Kit/System/Watchdog/Supervisor.h"
 #include "Kit/System/Timer.h"
-#include "Kit/System/ElapsedTime.h"
 #include <cstdint>
 
 ///
@@ -47,7 +45,7 @@ public:
 
 public:
     /// See IWatchedEventLoop
-    void startWatcher( Kit::System::EventLoop& eventLoop ) noexcept override;
+    void startWatcher( Kit::System::TimerManager& timingSource ) noexcept override;
 
     /// See IWatchedEventLoop
     void stopWatcher() noexcept override;

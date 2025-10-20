@@ -8,7 +8,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/System/Watchdog/Supervisor.h"
+#include "Supervisor.h"
+#include "Hal.h"
 #include "Kit/System/ElapsedTime.h"
 
 using namespace Kit::System;
@@ -61,7 +62,7 @@ void Supervisor::monitorThreads() noexcept
             // Check for an expired thread timer
             if ( thread->m_currentCountMs <= delta )
             {
-                tripWdog();  // EXPIRED
+                Kit::System::tripWdog();  // EXPIRED
                 return;      // Never executes because the tripWatchdog() method never returns, but it simplifies testing
             }
 
@@ -71,7 +72,7 @@ void Supervisor::monitorThreads() noexcept
         }
 
         // If I get here - all monitored threads are 'healthy'
-        kickWdog();
+        Supervisor::kickWdog();
         m_timeMarker = now;
     }
 }
@@ -82,4 +83,35 @@ void Supervisor::reloadThread( WatchedThread& thread ) noexcept
 
     // Reset the thread's countdown timer
     thread.m_currentCountMs = thread.m_wdogTimeoutMs;
+}
+
+/////////////////////////
+// Supervisor class static method implementations
+
+bool Supervisor::enableWdog() noexcept
+{
+    return Kit_System_Watchdog_hal_enable_wdog();
+}
+
+void Supervisor::kickWdog() noexcept
+{
+    Kit_System_Watchdog_hal_kick_wdog();
+}
+
+/////////////////////////
+// C++ wrapper functions for the HAL interface
+
+bool Kit::System::enableWdog() noexcept
+{
+    return Kit_System_Watchdog_hal_enable_wdog();
+}
+
+void Kit::System::kickWdog() noexcept
+{
+    Kit_System_Watchdog_hal_kick_wdog();
+}
+
+void Kit::System::tripWdog() noexcept
+{
+    Kit_System_Watchdog_hal_trip_wdog();
 }

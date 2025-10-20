@@ -10,7 +10,6 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "kit_config.h"
 #include "Kit/System/EventLoop.h"
 #include "Kit/System/PeriodicScheduler.h"
 

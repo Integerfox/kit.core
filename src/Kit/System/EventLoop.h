@@ -17,7 +17,7 @@
 #include "Kit/System/IEventManager.h"
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/TimerManager.h"
-#include "Kit/System/Watchdog/IWatchedEventLoop.h"
+#include "Kit/System/IWatchedEventLoop.h"
 
 /** Specifies the default timeout period for waiting on a event.
  */
@@ -62,7 +62,9 @@ public:
         monitor any event flags.
 
         The 'watchdog' parameter is optional and can be used to provide
-        watchdog monitoring for this event loop.
+        watchdog monitoring for this event loop.  If used, the application
+        must also enable the Watchdog using the USE_KIT_SYSTEM_WATCHDOG
+        configuration option in its the kit_config.h header files
 
         WARNING: The application CANNOT modify the eventFlagsList after the
                  EventLoop instance is created.
@@ -175,6 +177,9 @@ protected:
     /// List of Event Flags that the Event Loop monitors (can be null)
     Kit::Container::SList<IEventFlag>* m_eventList;
 
+    /// Optional watchdog monitor for this event loop
+    IWatchedEventLoop* m_watchdog;
+
     /// Timeout period for waiting on the next event
     uint32_t m_timeout;
 
@@ -186,9 +191,6 @@ protected:
 
     /// Flag used to help with the pleaseStop() request
     volatile bool m_run;
-
-    /// Optional watchdog monitor for this event loop
-    IWatchedEventLoop* m_watchdog;
 };
 
 }  // end namespaces
