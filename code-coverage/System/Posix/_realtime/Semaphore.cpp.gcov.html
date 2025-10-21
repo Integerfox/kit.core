@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-20 12:09:20</td>
+            <td class="headerValue">2025-10-21 21:56:17</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -79,15 +79,15 @@
 <span id="L17"><span class="lineNum">      17</span>                 :             : </span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : </span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : //////////////////////////////////////////////////</span>
-<span id="L20"><span class="lineNum">      20</span>                 :<span class="tlaGNC tlaBgGNC">          82 : void Semaphore::wait() noexcept</span></span>
+<span id="L20"><span class="lineNum">      20</span>                 :<span class="tlaGNC tlaBgGNC">          81 : void Semaphore::wait() noexcept</span></span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : {</span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          82 :     sem_wait( &amp;m_sema );</span></span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          82 : }</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          81 :     sem_wait( &amp;m_sema );</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          81 : }</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : </span>
-<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">       26748 : bool Semaphore::timedWait( uint32_t timeout ) noexcept</span></span>
+<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">       26769 : bool Semaphore::timedWait( uint32_t timeout ) noexcept</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : {</span>
-<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">       26748 :     return timedWaitInRealTime( timeout );</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">       26769 :     return timedWaitInRealTime( timeout );</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : }</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : </span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : } // end namespace</span>

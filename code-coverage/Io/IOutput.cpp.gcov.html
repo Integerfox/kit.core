@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-20 12:09:20</td>
+            <td class="headerValue">2025-10-21 21:56:17</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -89,12 +89,12 @@
 <span id="L27"><span class="lineNum">      27</span>                 :             : }</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : </span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : </span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">        5349 : bool IOutput::write( const char* string ) noexcept</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">        5348 : bool IOutput::write( const char* string ) noexcept</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : {</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             :     KIT_SYSTEM_ASSERT( string != nullptr );</span>
 <span id="L33"><span class="lineNum">      33</span>                 :             :     </span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">        5349 :     ByteCount_T numBytes = strlen( string );</span></span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">        5349 :     return write( string, numBytes );</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">        5348 :     ByteCount_T numBytes = strlen( string );</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">        5348 :     return write( string, numBytes );</span></span>
 <span id="L36"><span class="lineNum">      36</span>                 :             : }</span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : </span>
 <span id="L38"><span class="lineNum">      38</span>                 :             : </span>
@@ -125,22 +125,22 @@
 <span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">           6 :     return write( formatBuffer(), numBytes );</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : }</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">        5392 : bool IOutput::write( const void* buffer, ByteCount_T numBytes ) noexcept</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">        5391 : bool IOutput::write( const void* buffer, ByteCount_T numBytes ) noexcept</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : {</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     KIT_SYSTEM_ASSERT( buffer != nullptr );</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : </span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">        5392 :     ByteCount_T written = 0;</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">        5391 :     ByteCount_T written = 0;</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     auto*       ptr     = static_cast&lt;const uint8_t*&gt;( buffer );</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             : </span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     // Loop until all data is written</span>
-<span id="L74"><span class="lineNum">      74</span>         [<span class="tlaGBC" title="Branch 0 was taken 5391 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5366 times"> + </span>]:<span class="tlaGNC">       10757 :     while ( numBytes &gt; 0 )</span></span>
+<span id="L74"><span class="lineNum">      74</span>         [<span class="tlaGBC" title="Branch 0 was taken 5390 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5365 times"> + </span>]:<span class="tlaGNC">       10755 :     while ( numBytes &gt; 0 )</span></span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     {</span>
-<span id="L76"><span class="lineNum">      76</span>         [<span class="tlaGBC" title="Branch 0 was taken 5365 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 26 times"> + </span>]:<span class="tlaGNC">        5391 :         if ( !write( ptr, numBytes, written ) )</span></span>
+<span id="L76"><span class="lineNum">      76</span>         [<span class="tlaGBC" title="Branch 0 was taken 5364 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 26 times"> + </span>]:<span class="tlaGNC">        5390 :         if ( !write( ptr, numBytes, written ) )</span></span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :         {</span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :             return false;</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :         }</span>
-<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">        5365 :         numBytes -= written;</span></span>
-<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">        5365 :         ptr      += written;</span></span>
+<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">        5364 :         numBytes -= written;</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">        5364 :         ptr      += written;</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :     }</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             : </span>
 <span id="L84"><span class="lineNum">      84</span>                 :             :     // If I get here, all data has been written</span>
