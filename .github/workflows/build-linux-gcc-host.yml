@@ -1,17 +1,22 @@
 name: Build Linux GCC
 on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      event_name:
+        required: true
+        type: string
+      run_number:
+        required: true
+        type: string
+      ref_name:
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.run_id }}
   cancel-in-progress: true
 
 jobs:
@@ -64,25 +69,25 @@ jobs:
           rm -rf ./docs/publish/doxygen
           mkdir -p ./docs/publish/doxygen
           cd ./top
-          ./run_doxygen.py ${{ github.ref_name }} ${{ github.run_number }} nochm
+          ./run_doxygen.py ${{ inputs.ref_name }} ${{ inputs.run_number }} nochm
         
       # Build PRs
       - name: Run build script - for PRs
-        if: github.event_name == 'pull_request'
+        if: inputs.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
           ./top/gha_linux_gcc-host.sh 0 
 
       # Build Stable branches
       - name: Run build script - for stable branches
-        if: github.event_name != 'pull_request'
+        if: inputs.event_name != 'pull_request'
         run: |
           echo "Running build script for stable branches..."
-          ./top/gha_linux_gcc-host.sh ${{ github.run_number }} ${{ github.ref_name }}
+          ./top/gha_linux_gcc-host.sh ${{ inputs.run_number }} ${{ inputs.ref_name }}
 
       # Publish Doxygen documentation (but only when building main branch)
       - name: Publish Doxygen documentation
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        if: inputs.event_name != 'pull_request' && inputs.ref_name == 'main'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
