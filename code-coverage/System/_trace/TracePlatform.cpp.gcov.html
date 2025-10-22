@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-21 21:56:17</td>
+            <td class="headerValue">2025-10-22 01:28:10</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -102,10 +102,10 @@
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : </span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : ////////////////////////////////////////////////////////////////////////////////</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC tlaBgGNC">        5280 : void PrivateTracePlatform::output( Kit::Text::IString&amp; src )</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC tlaBgGNC">        5283 : void PrivateTracePlatform::output( Kit::Text::IString&amp; src )</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : {</span>
-<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">        5280 :     activePtr_-&gt;write( src.getString() );</span></span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">        5280 : }</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">        5283 :     activePtr_-&gt;write( src.getString() );</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">        5283 : }</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : </span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : /* Info settings:</span>
@@ -117,18 +117,18 @@
 <span id="L55"><span class="lineNum">      55</span>                 :             :     eMAX      --&gt;  &quot;&gt;&gt; DD HH:MM:SS.MMM (&lt;section name&gt;) [&lt;thread name&gt;] {&lt;filename&gt;,&lt;line#&gt;[,&lt;funcname&gt;]} &lt;user message&gt;&quot;</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : */</span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        5280 : void PrivateTracePlatform::appendInfo( Kit::Text::IString&amp; dst, Trace::InfoLevel_T info, const char* section, const char* filename, int linenum, const char* funcname )</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        5283 : void PrivateTracePlatform::appendInfo( Kit::Text::IString&amp; dst, Trace::InfoLevel_T info, const char* section, const char* filename, int linenum, const char* funcname )</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : {</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :     const char* threadName = &quot;n/a&quot;;</span>
-<span id="L61"><span class="lineNum">      61</span>         [<span class="tlaGBC" title="Branch 0 was taken 5280 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5280 :     if ( Kit::System::Thread::tryGetCurrent() != nullptr )</span></span>
+<span id="L61"><span class="lineNum">      61</span>         [<span class="tlaGBC" title="Branch 0 was taken 5283 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5283 :     if ( Kit::System::Thread::tryGetCurrent() != nullptr )</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :     {</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :         threadName = Kit::System::Thread::myName();</span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :     }</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     // Level: eBRIEF</span>
-<span id="L67"><span class="lineNum">      67</span>         [<span class="tlaGBC" title="Branch 0 was taken 5280 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5280 :     if ( info &gt; Trace::eNONE )</span></span>
+<span id="L67"><span class="lineNum">      67</span>         [<span class="tlaGBC" title="Branch 0 was taken 5283 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5283 :     if ( info &gt; Trace::eNONE )</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     {</span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        5280 :         dst.clear();</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        5283 :         dst.clear();</span></span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : </span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :         // Indent &quot;simulated time&quot; time stamps</span>
 <span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 1886 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 92 times"> + </span>]:<span class="tlaGNC">        1978 :         if ( KIT_SYSTEM_SIM_TICK_USING_SIM_TICKS() )</span></span>
@@ -139,27 +139,27 @@
 <span id="L77"><span class="lineNum">      77</span>                 :             :         // Add time stamp (Note: Elapsed time may not be valid/working when</span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :         // the scheduler has not been started - so use 'zero' instead)</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :         uint64_t now = 0;</span>
-<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 5280 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5280 :         if ( isSchedulingEnabled() )</span></span>
+<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 5283 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5283 :         if ( isSchedulingEnabled() )</span></span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :         {</span>
-<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">        5280 :             now = ElapsedTime::millisecondsEx();</span></span>
+<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">        5283 :             now = ElapsedTime::millisecondsEx();</span></span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :         }</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             :         Kit::Text::Format::timestamp( dst, now, true, true, true );</span>
-<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">        5280 :         dst += ' ';</span></span>
+<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">        5283 :         dst += ' ';</span></span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : </span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :         // LEVEL: eINFO</span>
-<span id="L88"><span class="lineNum">      88</span>         [<span class="tlaGBC" title="Branch 0 was taken 5280 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5280 :         if ( info &gt; Trace::eBRIEF )</span></span>
+<span id="L88"><span class="lineNum">      88</span>         [<span class="tlaGBC" title="Branch 0 was taken 5283 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5283 :         if ( info &gt; Trace::eBRIEF )</span></span>
 <span id="L89"><span class="lineNum">      89</span>                 :             :         {</span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :             // Add section name</span>
-<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">        5280 :             dst.formatAppend( &quot;(%s) &quot;, section );</span></span>
+<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">        5283 :             dst.formatAppend( &quot;(%s) &quot;, section );</span></span>
 <span id="L92"><span class="lineNum">      92</span>                 :             : </span>
 <span id="L93"><span class="lineNum">      93</span>                 :             :             // LEVEL: eVERBOSE</span>
-<span id="L94"><span class="lineNum">      94</span>         [<span class="tlaGBC" title="Branch 0 was taken 5202 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 78 times"> + </span>]:<span class="tlaGNC">        5280 :             if ( info &gt; Trace::eINFO )</span></span>
+<span id="L94"><span class="lineNum">      94</span>         [<span class="tlaGBC" title="Branch 0 was taken 5203 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 80 times"> + </span>]:<span class="tlaGNC">        5283 :             if ( info &gt; Trace::eINFO )</span></span>
 <span id="L95"><span class="lineNum">      95</span>                 :             :             {</span>
 <span id="L96"><span class="lineNum">      96</span>                 :             :                 // Add Thread name</span>
-<span id="L97"><span class="lineNum">      97</span>                 :<span class="tlaGNC">        5202 :                 dst.formatAppend( &quot;[%s] &quot;, threadName );</span></span>
+<span id="L97"><span class="lineNum">      97</span>                 :<span class="tlaGNC">        5203 :                 dst.formatAppend( &quot;[%s] &quot;, threadName );</span></span>
 <span id="L98"><span class="lineNum">      98</span>                 :             : </span>
 <span id="L99"><span class="lineNum">      99</span>                 :             :                 // LEVEL: eMAX</span>
-<span id="L100"><span class="lineNum">     100</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 5202 times"> + </span>]:<span class="tlaGNC">        5202 :                 if ( info &gt; Trace::eVERBOSE )</span></span>
+<span id="L100"><span class="lineNum">     100</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 5203 times"> + </span>]:<span class="tlaGNC">        5203 :                 if ( info &gt; Trace::eVERBOSE )</span></span>
 <span id="L101"><span class="lineNum">     101</span>                 :             :                 {</span>
 <span id="L102"><span class="lineNum">     102</span>                 :<span class="tlaUNC tlaBgUNC">           0 :                     dst.formatAppend( &quot;{%s,%d&quot;, filename, linenum );</span></span>
 <span id="L103"><span class="lineNum">     103</span>                 :             : </span>
@@ -173,7 +173,7 @@
 <span id="L111"><span class="lineNum">     111</span>                 :             :             }</span>
 <span id="L112"><span class="lineNum">     112</span>                 :             :         }</span>
 <span id="L113"><span class="lineNum">     113</span>                 :             :     }</span>
-<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC tlaBgGNC">        5280 : }</span></span>
+<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC tlaBgGNC">        5283 : }</span></span>
 <span id="L115"><span class="lineNum">     115</span>                 :             : </span>
 <span id="L116"><span class="lineNum">     116</span>                 :             : </span>
 <span id="L117"><span class="lineNum">     117</span>                 :             : }  // end namespaces</span>

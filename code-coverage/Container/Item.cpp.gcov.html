@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-21 21:56:17</td>
+            <td class="headerValue">2025-10-22 01:28:10</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -84,18 +84,18 @@
 <span id="L22"><span class="lineNum">      22</span>                 :             : {</span>
 <span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">         380 : }</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">       19690 : bool Item::isInContainer_( const void* containerPtr ) const noexcept</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">       19714 : bool Item::isInContainer_( const void* containerPtr ) const noexcept</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : {</span>
-<span id="L27"><span class="lineNum">      27</span>         [<span class="tlaGBC" title="Branch 0 was taken 9462 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10228 times"> + </span>]:<span class="tlaGNC">       19690 :     if ( m_inListPtr_ != containerPtr )</span></span>
+<span id="L27"><span class="lineNum">      27</span>         [<span class="tlaGBC" title="Branch 0 was taken 9484 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10230 times"> + </span>]:<span class="tlaGNC">       19714 :     if ( m_inListPtr_ != containerPtr )</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :     {</span>
-<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">        9462 :         return false;</span></span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">        9484 :         return false;</span></span>
 <span id="L30"><span class="lineNum">      30</span>                 :             :     }</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     return true;</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : }</span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">       12321 : bool Item::insert_( void* newContainerPtr ) noexcept</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">       12323 : bool Item::insert_( void* newContainerPtr ) noexcept</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : {</span>
-<span id="L36"><span class="lineNum">      36</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 12317 times"> + </span>]:<span class="tlaGNC">       12321 :     if ( m_inListPtr_ )</span></span>
+<span id="L36"><span class="lineNum">      36</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 12319 times"> + </span>]:<span class="tlaGNC">       12323 :     if ( m_inListPtr_ )</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :     {</span>
 <span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">           4 :         Kit::System::FatalError::logf( Kit::System::Shutdown::eCONTAINER,</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :                                        &quot;Container Error: Double Insert. item=%p, prev container=%p, new container=%p&quot;,</span>
@@ -106,21 +106,21 @@
 <span id="L44"><span class="lineNum">      44</span>                 :             :     }</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     else</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     {</span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">       12317 :         m_inListPtr_ = newContainerPtr;</span></span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">       12317 :         return true;</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">       12319 :         m_inListPtr_ = newContainerPtr;</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">       12319 :         return true;</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     }</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : }</span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : </span>
-<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">       16855 : void Item::remove_( Item* itemPtr ) noexcept</span></span>
+<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">       16862 : void Item::remove_( Item* itemPtr ) noexcept</span></span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : {</span>
-<span id="L54"><span class="lineNum">      54</span>         [<span class="tlaGBC" title="Branch 0 was taken 12279 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4576 times"> + </span>]:<span class="tlaGNC">       16855 :     if ( itemPtr )</span></span>
+<span id="L54"><span class="lineNum">      54</span>         [<span class="tlaGBC" title="Branch 0 was taken 12281 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4581 times"> + </span>]:<span class="tlaGNC">       16862 :     if ( itemPtr )</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     {</span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">       12279 :         itemPtr-&gt;m_inListPtr_ = nullptr;</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">       12281 :         itemPtr-&gt;m_inListPtr_ = nullptr;</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     }</span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">       16855 : }</span></span>
-<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC">      110684 : bool Item::validateNextOkay_( const void* containerPtr ) const noexcept</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">       16862 : }</span></span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC">      110542 : bool Item::validateNextOkay_( const void* containerPtr ) const noexcept</span></span>
 <span id="L60"><span class="lineNum">      60</span>                 :             : {</span>
-<span id="L61"><span class="lineNum">      61</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 110682 times"> + </span>]:<span class="tlaGNC">      110684 :     if ( m_inListPtr_ != containerPtr )</span></span>
+<span id="L61"><span class="lineNum">      61</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 110540 times"> + </span>]:<span class="tlaGNC">      110542 :     if ( m_inListPtr_ != containerPtr )</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :     {</span>
 <span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">           2 :         Kit::System::FatalError::logf( Kit::System::Shutdown::eCONTAINER,</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :                                        &quot;Container Error: Invalid next() call. item=%p, container=%p&quot;,</span>

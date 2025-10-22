@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-21 21:56:17</td>
+            <td class="headerValue">2025-10-22 01:28:10</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">80.0&nbsp;%</td>
@@ -115,26 +115,26 @@
 <span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">        5764 : }</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : </span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">       26769 : bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">       26771 : bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : {</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :     // Convert milliseconds to the nanosleep time spec</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     static const long nsec2msec = 1000000;</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :     static const long msec2sec  = 1000;</span>
-<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">       26769 :     time_t            sec       = timeout / msec2sec;</span></span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">       26769 :     long              nsec      = (timeout % msec2sec)*nsec2msec;</span></span>
+<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">       26771 :     time_t            sec       = timeout / msec2sec;</span></span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">       26771 :     long              nsec      = (timeout % msec2sec)*nsec2msec;</span></span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :     struct timespec ts;</span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">       26769 :     clock_gettime( CLOCK_REALTIME, &amp;ts );</span></span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">       26769 :     ts.tv_sec  += sec;</span></span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">       26769 :     ts.tv_nsec += nsec;</span></span>
-<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 31 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 26738 times"> + </span>]:<span class="tlaGNC">       26769 :     if ( ts.tv_nsec &gt; 999999999 )</span></span>
+<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">       26771 :     clock_gettime( CLOCK_REALTIME, &amp;ts );</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">       26771 :     ts.tv_sec  += sec;</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">       26771 :     ts.tv_nsec += nsec;</span></span>
+<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 37 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 26734 times"> + </span>]:<span class="tlaGNC">       26771 :     if ( ts.tv_nsec &gt; 999999999 )</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     {</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          31 :         ts.tv_nsec -= 1000000000;</span></span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          31 :         ts.tv_sec++;</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          37 :         ts.tv_nsec -= 1000000000;</span></span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          37 :         ts.tv_sec++;</span></span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :     }</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             : </span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">       26769 :     int result = sem_timedwait( &amp;m_sema, &amp;ts );</span></span>
-<span id="L75"><span class="lineNum">      75</span>   [<span class="tlaGBC" title="Branch 0 was taken 26612 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 157 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 26612 times"> + </span>]:<span class="tlaGNC">       26769 :     return result == -1 &amp;&amp; errno == ETIMEDOUT ? false : true;</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">       26771 :     int result = sem_timedwait( &amp;m_sema, &amp;ts );</span></span>
+<span id="L75"><span class="lineNum">      75</span>   [<span class="tlaGBC" title="Branch 0 was taken 26615 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 156 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 26615 times"> + </span>]:<span class="tlaGNC">       26771 :     return result == -1 &amp;&amp; errno == ETIMEDOUT ? false : true;</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : }</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : } // end namespaces</span>
