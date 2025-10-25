@@ -15,23 +15,23 @@ using namespace Kit::System;
 
 /////////////////////////
 RawThread::RawThread( uint32_t wdogTimeoutMs ) noexcept
-    : WatchedThread( wdogTimeoutMs )
+    : Kit::System::Watchdog::WatchedThread( wdogTimeoutMs )
 {
 }
 
 bool RawThread::startWatching() noexcept
 {
-    Supervisor::beginWatching( *this );
+    Watchdog::Supervisor::beginWatching( *this );
     return true;  // Method no longer fails, but maintain return type for compatibility
 }
 
 bool RawThread::stopWatching() noexcept
 {
-    Supervisor::endWatching( *this );
+    Watchdog::Supervisor::endWatching( *this );
     return true;  // Method no longer fails, but maintain return type for compatibility
 }
 
 void RawThread::kickWatchdog() noexcept
 {
-    Supervisor::reloadThread( *this );
+    Watchdog::Supervisor::reloadThread( *this );
 }

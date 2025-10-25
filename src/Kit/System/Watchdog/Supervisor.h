@@ -30,25 +30,8 @@
 namespace Kit {
 ///
 namespace System {
-
-/** C++ wrapper functions for the HAL interface.
-    These provide type-safe access to the HAL functions.
- */
-
-/** Enables the watchdog hardware.
-    @return true if watchdog was successfully enabled, false otherwise
- */
-bool enableWdog() noexcept;
-
-/** Kicks (resets/feeds) the watchdog to prevent it from timing out.
-    This should be called periodically when all monitored threads are healthy.
- */
-void kickWdog() noexcept;
-
-/** Trips the watchdog to force a system reset. This is called
-    when a monitored thread has failed.
- */
-void tripWdog() noexcept;
+///
+namespace Watchdog {
 
 /** This class provides a centralized supervisor for monitoring all watched threads
     in the system. It maintains a list of threads being monitored and provides
@@ -120,6 +103,7 @@ protected:
     static bool m_isEnabled;
 };
 
+}  // end namespace Watchdog
 }  // end namespace System
 }  // end namespace Kit
 #endif  // end header latch

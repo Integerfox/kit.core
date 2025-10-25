@@ -9,12 +9,13 @@
 /** @file */
 
 #include "WatchedEventThread.h"
-#include "Kit/System/Watchdog/Supervisor.h"
+#include "Supervisor.h"
+#include "Hal.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/TimerManager.h"
 #include "Kit/System/Assert.h"
 
-using namespace Kit::System;
+using namespace Kit::System::Watchdog;
 
 /////////////////////////
 WatchedEventThread::WatchedEventThread( uint32_t wdogTimeoutMs, uint32_t healthCheckIntervalMs, bool isSupervisor ) noexcept
@@ -87,7 +88,7 @@ void WatchedEventThread::healthTimerExpired() noexcept
     if ( !performHealthCheck() )
     {
         // Health check failed - trip the watchdog immediately
-        Kit::System::tripWdog();
+        Kit_System_Watchdog_hal_trip_wdog();
         return;
     }
 

@@ -11,13 +11,14 @@
 #include "Supervisor.h"
 #include "Hal.h"
 #include "Kit/System/ElapsedTime.h"
+#include "Kit/System/Mutex.h"
 
-using namespace Kit::System;
+using namespace Kit::System::Watchdog;
 
 /////////////////////////
 // Static member definitions
 Kit::Container::SList<WatchedThread> Supervisor::m_watchedThreads;
-Mutex                                Supervisor::m_mutex;
+Kit::System::Mutex                   Supervisor::m_mutex;
 uint32_t                             Supervisor::m_currentTick = 0;
 bool                                 Supervisor::m_isEnabled   = false;
 uint32_t                             Supervisor::m_timeMarker  = 0;
@@ -62,7 +63,7 @@ void Supervisor::monitorThreads() noexcept
             // Check for an expired thread timer
             if ( thread->m_currentCountMs <= delta )
             {
-                Kit::System::tripWdog();  // EXPIRED
+                Kit_System_Watchdog_hal_trip_wdog();  // EXPIRED
                 return;      // Never executes because the tripWatchdog() method never returns, but it simplifies testing
             }
 
@@ -96,22 +97,4 @@ bool Supervisor::enableWdog() noexcept
 void Supervisor::kickWdog() noexcept
 {
     Kit_System_Watchdog_hal_kick_wdog();
-}
-
-/////////////////////////
-// C++ wrapper functions for the HAL interface
-
-bool Kit::System::enableWdog() noexcept
-{
-    return Kit_System_Watchdog_hal_enable_wdog();
-}
-
-void Kit::System::kickWdog() noexcept
-{
-    Kit_System_Watchdog_hal_kick_wdog();
-}
-
-void Kit::System::tripWdog() noexcept
-{
-    Kit_System_Watchdog_hal_trip_wdog();
 }

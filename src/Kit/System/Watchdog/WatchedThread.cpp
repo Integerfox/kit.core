@@ -9,9 +9,8 @@
 /** @file */
 
 #include "WatchedThread.h"
-#include "Supervisor.h"
 
-using namespace Kit::System;
+using namespace Kit::System::Watchdog;
 
 /////////////////////////
 WatchedThread::WatchedThread( uint32_t wdogTimeoutMs ) noexcept

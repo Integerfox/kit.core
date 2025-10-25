@@ -19,6 +19,8 @@
 namespace Kit {
 ///
 namespace System {
+///
+namespace Watchdog {
 
 /** This class implements the IWatchedEventLoop interface and provides
     watchdog monitoring capabilities for event loops. It inherits from
@@ -87,6 +89,7 @@ protected:
     bool m_isActive;
 };
 
+}  // end namespace Watchdog
 }  // end namespace System
 }  // end namespace Kit
 #endif  // end header latch

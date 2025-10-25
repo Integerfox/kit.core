@@ -12,8 +12,10 @@
 
 #include <stdbool.h>
 
+#ifdef __cplusplus
 // Hardware Abstraction Layer (HAL) for watchdog functionality
 extern "C"
+#endif
 {
     /** Enables the watchdog hardware.
         @return true if watchdog was successfully enabled, false otherwise
@@ -29,6 +31,8 @@ extern "C"
         when a monitored thread has failed.
      */
     void Kit_System_Watchdog_hal_trip_wdog( void );
+#ifdef __cplusplus
 }
+#endif
 
 #endif  // end header latch

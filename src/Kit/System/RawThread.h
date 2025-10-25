@@ -11,7 +11,7 @@
 /** @file */
 
 #include "kit_config.h"
-#include "Watchdog/WatchedThread.h"
+#include "Kit/System/Watchdog/WatchedThread.h"
 #include <cstdint>
 
 /// Default watchdog timeout for raw threads in milliseconds
@@ -23,36 +23,6 @@
 namespace Kit {
 ///
 namespace System {
-
-/** RawThread - A concrete implementation for raw threads that provides
-    wrapper methods for manual watchdog management via the Supervisor.
- */
-class RawThread : public WatchedThread
-{
-public:
-    /** Constructor
-        @param wdogTimeoutMs The watchdog timeout period for this thread in milliseconds
-     */
-    RawThread( uint32_t wdogTimeoutMs = OPTION_SYSTEM_WATCHDOG_RAW_THREAD_DEFAULT_TIMEOUT_MS ) noexcept;
-
-    /** Starts watchdog monitoring for this thread by registering it with the Supervisor.
-        @return true if successfully started monitoring, false otherwise
-     */
-    bool startWatching() noexcept;
-
-    /** Stops watchdog monitoring for this thread by unregistering it from the Supervisor.
-        @return true if successfully stopped monitoring, false otherwise
-     */
-    bool stopWatching() noexcept;
-
-    /** Kicks/reloads the watchdog timer for this thread via the Supervisor.
-        This should be called periodically to indicate the thread is healthy.
-     */
-    void kickWatchdog() noexcept;
-};
-
-}  // end namespace System
-}  // end namespace Kit
 
 // ============================================================================
 // Watchdog Macros for Raw Threads
@@ -124,5 +94,35 @@ public:
 #define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( threadPtr )
 
 #endif  // USE_KIT_SYSTEM_WATCHDOG
+
+/** RawThread - A concrete implementation for raw threads that provides
+    wrapper methods for manual watchdog management via the Supervisor.
+ */
+class RawThread : public Kit::System::Watchdog::WatchedThread
+{
+public:
+    /** Constructor
+        @param wdogTimeoutMs The watchdog timeout period for this thread in milliseconds
+     */
+    RawThread( uint32_t wdogTimeoutMs = OPTION_SYSTEM_WATCHDOG_RAW_THREAD_DEFAULT_TIMEOUT_MS ) noexcept;
+
+    /** Starts watchdog monitoring for this thread by registering it with the Supervisor.
+        @return true if successfully started monitoring, false otherwise
+     */
+    bool startWatching() noexcept;
+
+    /** Stops watchdog monitoring for this thread by unregistering it from the Supervisor.
+        @return true if successfully stopped monitoring, false otherwise
+     */
+    bool stopWatching() noexcept;
+
+    /** Kicks/reloads the watchdog timer for this thread via the Supervisor.
+        This should be called periodically to indicate the thread is healthy.
+     */
+    void kickWatchdog() noexcept;
+};
+
+}  // end namespace System
+}  // end namespace Kit
 
 #endif  // end header latch

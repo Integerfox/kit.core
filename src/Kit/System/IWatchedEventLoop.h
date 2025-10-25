@@ -12,55 +12,6 @@
 
 #include "kit_config.h"
 
-///
-namespace Kit {
-///
-namespace System {
-
-// Forward declaration - TimerManager is in Kit::System namespace
-class TimerManager;
-
-/** This abstract interface defines the API for watching/monitoring an EventLoop
-    for watchdog purposes. The interface provides methods to start/stop monitoring
-    and to perform periodic watchdog checks.
-
-    NOTE: The classes method should ONLY be called/invoked using the above macros
- */
-class IWatchedEventLoop
-{
-public:
-    /** Starts the watchdog monitoring for this event loop.
-        Should be called when the event loop begins execution.
-
-        @param timingSource Reference to the Timing source (aka EventLoop) for the thread that is being watched
-     */
-    virtual void startWatcher( Kit::System::TimerManager& timingSource ) noexcept = 0;
-
-    /** Stops the watchdog monitoring for this event loop.
-        Should be called when the event loop is shutting down.
-     */
-    virtual void stopWatcher() noexcept = 0;
-
-    /** Performs watchdog monitoring check. This method should be called
-        periodically during event loop execution to indicate the thread
-        is still alive and processing events.
-     */
-    virtual void monitorWdog() noexcept = 0;
-
-    /** Returns true if this is the supervisor thread responsible for
-        monitoring other threads.
-
-        @return true if this is the supervisor thread, false otherwise
-     */
-    virtual bool isSupervisorThread() const noexcept = 0;
-
-    /// Virtual destructor
-    virtual ~IWatchedEventLoop() = default;
-};
-
-}  // end namespace System
-}  // end namespace Kit
-
 // ============================================================================
 // Watchdog Macros for EventLoop
 // ============================================================================
@@ -132,5 +83,54 @@ public:
 #define KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( thisPtr )
 
 #endif  // USE_KIT_SYSTEM_WATCHDOG
+
+///
+namespace Kit {
+///
+namespace System {
+
+// Forward declaration - TimerManager is in Kit::System namespace
+class TimerManager;
+
+/** This abstract interface defines the API for watching/monitoring an EventLoop
+    for watchdog purposes. The interface provides methods to start/stop monitoring
+    and to perform periodic watchdog checks.
+
+    NOTE: The classes method should ONLY be called/invoked using the above macros
+ */
+class IWatchedEventLoop
+{
+public:
+    /** Starts the watchdog monitoring for this event loop.
+        Should be called when the event loop begins execution.
+
+        @param timingSource Reference to the Timing source (aka EventLoop) for the thread that is being watched
+     */
+    virtual void startWatcher( Kit::System::TimerManager& timingSource ) noexcept = 0;
+
+    /** Stops the watchdog monitoring for this event loop.
+        Should be called when the event loop is shutting down.
+     */
+    virtual void stopWatcher() noexcept = 0;
+
+    /** Performs watchdog monitoring check. This method should be called
+        periodically during event loop execution to indicate the thread
+        is still alive and processing events.
+     */
+    virtual void monitorWdog() noexcept = 0;
+
+    /** Returns true if this is the supervisor thread responsible for
+        monitoring other threads.
+
+        @return true if this is the supervisor thread, false otherwise
+     */
+    virtual bool isSupervisorThread() const noexcept = 0;
+
+    /// Virtual destructor
+    virtual ~IWatchedEventLoop() = default;
+};
+
+}  // end namespace System
+}  // end namespace Kit
 
 #endif  // end header latch
