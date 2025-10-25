@@ -4,16 +4,16 @@ permissions:
   pull-requests: write
 on:
   workflow_call:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+    inputs:
+      event_name:
+        required: true
+        type: string
+      run_number:
+        required: true
+        type: string
+      ref_name:
+        required: true
+        type: string
 
 jobs:
   vc_windows_build:
@@ -50,14 +50,14 @@ jobs:
 
       # Build PRs
       - name: Run build script - for PRs
-        if: github.event_name == 'pull_request'
+        if: inputs.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
           .\top\gha_windows_msvc.bat 0 
 
       # Build Stable branches
       - name: Run build script - for stable branches
-        if: github.event_name != 'pull_request'
+        if: inputs.event_name != 'pull_request'
         run: |
           echo "Running build script for stable branches..."
-          .\top\gha_windows_msvc.bat ${{ github.run_number }} ${{ github.ref_name }}
+          .\top\gha_windows_msvc.bat ${{ inputs.run_number }} ${{ inputs.ref_name }}

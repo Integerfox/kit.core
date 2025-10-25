@@ -1,71 +1,81 @@
-name: Deploy and Tag
+name: CI/CD Pipeline
 on:
-  workflow_run:
-    workflows: 
-      - "Build Windows MSVC"
-      - "Build Windows MinGW" 
-      - "Build Linux GCC"
-      - "Build Windows STM ARM"
-      - "Build Windows Atmel ARM"
-    types:
-      - completed
+  pull_request:
+    branches:
+      - main
+  push:
     branches:
       - main
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    # Only run if ALL workflows completed successfully
-    if: >
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event != 'pull_request'
-    
-    permissions:
-      contents: write
+permissions:
+  contents: write
+  pull-requests: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Run all build workflows in parallel
+  build-linux-gcc:
+    name: Build Linux GCC
+    uses: ./.github/workflows/build-linux-gcc-host.yml
+    with:
+      event_name: ${{ github.event_name }}
+      run_number: ${{ github.run_number }}
+      ref_name: ${{ github.ref_name }}
+
+  build-windows-msvc:
+    name: Build Windows MSVC
+    uses: ./.github/workflows/build-windows-msvc.yml
+    with:
+      event_name: ${{ github.event_name }}
+      run_number: ${{ github.run_number }}
+      ref_name: ${{ github.ref_name }}
+
+  build-windows-clang:
+    name: Build Windows Clang
+    uses: ./.github/workflows/build-windows-clang-host.yml
+    with:
+      event_name: ${{ github.event_name }}
+      run_number: ${{ github.run_number }}
+      ref_name: ${{ github.ref_name }}
+
+  build-windows-stm-arm:
+    name: Build Windows STM ARM
+    uses: ./.github/workflows/build-windows_stm-arm.yml
+    with:
+      event_name: ${{ github.event_name }}
+      run_number: ${{ github.run_number }}
+      ref_name: ${{ github.ref_name }}
+
+  build-windows-atmel-arm:
+    name: Build Windows Atmel ARM
+    uses: ./.github/workflows/build-windows_atmel-arm.yml
+    with:
+      event_name: ${{ github.event_name }}
+      run_number: ${{ github.run_number }}
+      ref_name: ${{ github.ref_name }}
+
+  # Deploy only after all builds succeed and only for main branch pushes (not PRs)
+  deploy:
+    name: Deploy and Tag
+    runs-on: ubuntu-latest
+    needs: [build-linux-gcc, build-windows-msvc, build-windows-clang, build-windows-stm-arm, build-windows-atmel-arm]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Check all workflows completed successfully
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const workflows = [
-              "Build Windows MSVC",
-              "Build Windows Clang", 
-              "Build Linux GCC",
-              "Build Windows STM ARM",
-              "Build Windows Atmel ARM"
-            ];
-            
-            const runs = await github.rest.actions.listWorkflowRunsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head_sha: context.payload.workflow_run.head_sha
-            });
-            
-            const relevantRuns = runs.data.workflow_runs.filter(run => 
-              workflows.includes(run.name) && 
-              run.head_sha === context.payload.workflow_run.head_sha
-            );
-            
-            console.log(`Found ${relevantRuns.length} relevant workflow runs`);
-            
-            const allSuccessful = relevantRuns.every(run => run.conclusion === 'success');
-            const allCompleted = relevantRuns.length === workflows.length;
-            
-            if (!allCompleted) {
-              core.setFailed(`Not all workflows completed. Found ${relevantRuns.length} out of ${workflows.length}`);
-              return;
-            }
-            
-            if (!allSuccessful) {
-              core.setFailed('Not all workflows were successful');
-              return;
-            }
-            
-            console.log('All workflows completed successfully!');
+      - name: All builds successful
+        run: |
+          echo "🎉 All build workflows completed successfully!"
+          echo "✅ Build Linux GCC: Success"
+          echo "✅ Build Windows MSVC: Success" 
+          echo "✅ Build Windows Clang: Success"
+          echo "✅ Build Windows STM ARM: Success"
+          echo "✅ Build Windows Atmel ARM: Success"
 
       - name: Create Tag
         run: |
@@ -74,7 +84,7 @@ jobs:
           
           BRANCH_NAME=$(git branch --show-current)
           BRANCH_NAME=$(echo "$BRANCH_NAME" | tr -d '[:punct:]')
-          TAG_NAME=$BRANCH_NAME-bld-${{ github.event.workflow_run.run_number }}
+          TAG_NAME=$BRANCH_NAME-bld-${{ github.run_number }}
           echo "Creating tag: $TAG_NAME"
           
           git tag "$TAG_NAME" 
