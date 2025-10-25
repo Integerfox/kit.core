@@ -4,6 +4,9 @@ def display_summary():
 
 # DOCOPT command line definition
 USAGE="""
+NOTE: This command is the process of BEING DEPRECATED - do NOT use.
+NOTE: This command is the process of BEING DEPRECATED - do NOT use.
+NOTE: This command is the process of BEING DEPRECATED - do NOT use.
 Removes a previously 'mounted' repository
 ===============================================================================
 usage: evie [common-opts] umount [options] <dst> <repo> <origin> <id>
