@@ -54,27 +54,10 @@
         }
       },
       {
-        "pkgname": "stm32f2-sdk",
-        "pkgtype": "readonly",
-        "virtualAdoption": false,
-        "adoptedDate": "Sat Oct 25 16:20:28 2025",
-        "parentDir": "xpkgs",
-        "version": {
-          "semanticVersion": null,
-          "branch": null,
-          "tag": "v1.28.3"
-        },
-        "repo": {
-          "name": "STM32CubeF4",
-          "type": "git",
-          "origin": "git@github.com:STMicroelectronics"
-        }
-      },
-      {
         "pkgname": "stm32f4-sdk",
         "pkgtype": "readonly",
         "virtualAdoption": false,
-        "adoptedDate": "Sat Oct 25 16:22:49 2025",
+        "adoptedDate": "Sat Oct 25 16:34:03 2025",
         "parentDir": "xpkgs",
         "version": {
           "semanticVersion": null,
@@ -84,7 +67,7 @@
         "repo": {
           "name": "STM32CubeF4",
           "type": "git",
-          "origin": "git@github.com:STMicroelectronics"
+          "origin": "https://github.com/STMicroelectronics"
         }
       }
     ]
