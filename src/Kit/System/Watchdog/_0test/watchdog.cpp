@@ -179,8 +179,11 @@ TEST_CASE( "watchdog" )
         Supervisor::endWatching( thread2 );
 
         unsigned long kickCountAfterRemoval = kickCount_;
-        Supervisor::monitorThreads();
-        REQUIRE( kickCount_ >= kickCountAfterRemoval );
+        for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
+        {
+            Supervisor::monitorThreads();
+        }
+        REQUIRE( kickCount_ > kickCountAfterRemoval );
     }
 
     SECTION( "monitor threads with timeout" )
@@ -318,71 +321,31 @@ TEST_CASE( "watchdog" )
 
         FailingHealthCheckThread eventThread( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, false );
 
+        unsigned long tripCountBefore = tripCount_;
+        REQUIRE( eventThread.m_healthCheckCallCount == 0 );
+
         eventThread.m_shouldFailHealthCheck = true;
         eventThread.startWatcher( timerManager );
 
-        unsigned long tripCountBefore = tripCount_;
-        REQUIRE( tripCountBefore == 0 );
-        uint32_t startTime = ElapsedTime::milliseconds();
-        uint32_t maxWaitTime = TEST_SLEEP_MEDIUM_MS * 3;
-        bool healthCheckCalled = false;
+        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
 
-        while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < maxWaitTime )
+        uint32_t startTime = ElapsedTime::milliseconds();
+        while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
         {
             timerManager.processTimers();
 
-            for ( int i = 0; i < 10; i++ )
+            for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
             {
-                timerManager.processTimers();
+                Supervisor::monitorThreads();
             }
 
             sleep( 15 );
-
-            if ( eventThread.m_healthCheckCallCount > 0 )
-            {
-                healthCheckCalled = true;
-            }
-
-            if ( tripCount_ > tripCountBefore )
-            {
-                break;
-            }
-
-            if ( healthCheckCalled && ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) > TEST_SLEEP_MEDIUM_MS )
-            {
-                continue;
-            }
         }
 
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Health check call count: %d", eventThread.m_healthCheckCallCount );
-
-        if ( eventThread.m_healthCheckCallCount == 0 )
-        {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Health checks not triggered automatically, testing manual trigger" );
-
-            for ( int retry = 0; retry < 50; retry++ )
-            {
-                timerManager.processTimers();
-                sleep( 20 );
-                
-                if ( eventThread.m_healthCheckCallCount > 0 )
-                {
-                    break;
-                }
-            }
-
-            if ( eventThread.m_healthCheckCallCount == 0 )
-            {
-                KIT_SYSTEM_TRACE_MSG( SECT_, "Manually triggering health check for compatibility" );
-                eventThread.triggerHealthCheck();
-            }
-
-            sleep( 50 );
-        }
-        
         REQUIRE( eventThread.m_healthCheckCallCount > 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Health check called %d times, all failed", eventThread.m_healthCheckCallCount );
+
         REQUIRE( tripCount_ > tripCountBefore );
-        REQUIRE( tripCount_ >= 1 );
 
         eventThread.stopWatcher();
     }
@@ -406,23 +369,7 @@ TEST_CASE( "watchdog" )
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 5; i++ )
         {
             Supervisor::monitorThreads();
-            sleep( 1 );
-        }
-
-        if ( kickCount_ == initialKickCount )
-        {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Initial kick attempt failed, trying with longer delays" );
-
-            for ( int i = 0; i < 20; i++ )
-            {
-                Supervisor::monitorThreads();
-                sleep( 5 );
-
-                if ( kickCount_ > initialKickCount )
-                {
-                    break;
-                }
-            }
+            sleep( 10 );
         }
 
         REQUIRE( kickCount_ > initialKickCount );
@@ -435,21 +382,7 @@ TEST_CASE( "watchdog" )
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             Supervisor::monitorThreads();
-            sleep( 1 );
-        }
-
-        if ( kickCount_ == kicksAfterLoop1 )
-        {
-            for ( int i = 0; i < 10; i++ )
-            {
-                Supervisor::monitorThreads();
-                sleep( 5 );
-                
-                if ( kickCount_ > kicksAfterLoop1 )
-                {
-                    break;
-                }
-            }
+            sleep( 10 );
         }
 
         REQUIRE( kickCount_ > kicksAfterLoop1 );
@@ -502,40 +435,23 @@ TEST_CASE( "watchdog" )
             sleep( 1 );
         }
 
-        if ( kickCount_ == kickCountBefore )
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Retrying with extended timing for multiple threads test" );
+        
+        for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2; i++ )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Retrying with extended timing for multiple threads test" );
-            
-            for ( int retry = 0; retry < 25; retry++ )
-            {
-                for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2; i++ )
-                {
-                    Supervisor::monitorThreads();
-                }
-                sleep( 10 );
-
-                if ( kickCount_ > kickCountBefore )
-                {
-                    break;
-                }
-                
-                if ( retry == 10 && kickCount_ == kickCountBefore )
-                {
-                    KIT_SYSTEM_TRACE_MSG( SECT_, "Testing HAL responsiveness with manual kick" );
-                    Supervisor::kickWdog();
-                    if ( kickCount_ > kickCountBefore )
-                    {
-                        break;
-                    }
-                }
-            }
+            Supervisor::monitorThreads();
         }
+        sleep( 10 );
 
-        REQUIRE( kickCount_ > kickCountBefore );
-
+        REQUIRE( shortThread.m_currentCountMs <= (TEST_TIMEOUT_SHORT_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER) );
+        REQUIRE( mediumThread.m_currentCountMs <= (TEST_TIMEOUT_MEDIUM_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER) );
+        REQUIRE( longThread.m_currentCountMs <= (TEST_TIMEOUT_LONG_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER) );
+        
         REQUIRE( shortThread.m_currentCountMs > 0 );
         REQUIRE( mediumThread.m_currentCountMs > 0 );
         REQUIRE( longThread.m_currentCountMs > 0 );
+
+        REQUIRE( kickCount_ > kickCountBefore );
 
         Supervisor::endWatching( shortThread );
         Supervisor::endWatching( mediumThread );
