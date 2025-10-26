@@ -3,16 +3,17 @@ permissions:
   contents: read
   pull-requests: write
 on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  workflow_call:
+    inputs:
+      event_name:
+        required: true
+        type: string
+      run_number:
+        required: true
+        type: string
+      ref_name:
+        required: true
+        type: string
 
 jobs:
   atmel_arm_windows_build:
@@ -44,14 +45,14 @@ jobs:
 
       # Build PRs
       - name: Run build script - for PRs
-        if: github.event_name == 'pull_request'
+        if: inputs.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
           .\top\gha_windows_atmel-arm.bat 0 
 
       # Build Stable branches
       - name: Run build script - for stable branches
-        if: github.event_name != 'pull_request'
+        if: inputs.event_name != 'pull_request'
         run: |
           echo "Running build script for stable branches..."
-          .\top\gha_windows_atmel-arm.bat ${{ github.run_number }} ${{ github.ref_name }}
+          .\top\gha_windows_atmel-arm.bat ${{ inputs.run_number }} ${{ inputs.ref_name }}

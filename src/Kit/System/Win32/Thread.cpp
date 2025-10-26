@@ -161,7 +161,7 @@ const char* Thread::getName() const noexcept
 
 //////////////////////////////
 // DWORD WINAPI Thread::entryPoint(void* data)
-void __cdecl Thread::entryPoint( void* data )
+void __stdcall Thread::entryPoint( void* data )
 {
     // Initialize the TLS Value for this thread.
     TlsSetValue( dwTlsIndex_, data );

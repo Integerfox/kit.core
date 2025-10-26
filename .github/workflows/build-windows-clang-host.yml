@@ -1,4 +1,4 @@
-name: Build Windows STM ARM
+name: Build Windows Clang
 permissions:
   contents: read
   pull-requests: write
@@ -16,8 +16,8 @@ on:
         type: string
 
 jobs:
-  stm_arm_windows_build:
-    name: STM ARM Cortex M/R Compiler Windows Build
+  clang_64_windows_build:
+    name: Clang Compiler Windows 64bit Build
     runs-on: windows-latest
     timeout-minutes: 30
 
@@ -39,6 +39,12 @@ jobs:
         with:
           version: '1.11.1'
 
+      # Clang setup -->The clang-msvc compiler is part of the base Windows image.
+      #- name: Clang compiler
+      #  uses: rlalik/setup-cpp-compiler@master
+      #  with:
+      #    compiler: clang
+
       # This step is commented out, but can be used for debugging purposes.
       #- name: Setup tmate session 
       # uses: mxschmitt/action-tmate@v3
@@ -48,11 +54,11 @@ jobs:
         if: inputs.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
-          .\top\gha_windows_stm-arm.bat 0 
+          .\top\gha_windows_clang-host.bat 0 
 
       # Build Stable branches
       - name: Run build script - for stable branches
         if: inputs.event_name != 'pull_request'
         run: |
           echo "Running build script for stable branches..."
-          .\top\gha_windows_stm-arm.bat ${{ inputs.run_number }} ${{ inputs.ref_name }}
+          .\top\gha_windows_clang-host.bat ${{ inputs.run_number }} ${{ inputs.ref_name }}
