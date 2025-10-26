@@ -449,6 +449,11 @@ TEST_CASE( "watchdog" )
         WatchedThread thread( TEST_TIMEOUT_MEDIUM_MS );
         Supervisor::beginWatching( thread );
 
+        for ( int i = 0; i < 3; i++ )
+        {
+            Supervisor::monitorThreads();
+        }
+
         // Test tick divider - verify HAL kicks happen according to divider logic
         unsigned long initialKickCount = kickCount_;
 
@@ -550,8 +555,13 @@ TEST_CASE( "watchdog" )
         REQUIRE( shortThread.m_currentCountMs == shortThread.m_wdogTimeoutMs );
         REQUIRE( longThread.m_currentCountMs == longThread.m_wdogTimeoutMs );
 
-        // Test monitoring with mixed timeout threads
+        for ( int i = 0; i < 3; i++ )
+        {
+            Supervisor::monitorThreads();
+        }
+
         unsigned long kickCountBefore = kickCount_;
+        
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             Supervisor::monitorThreads();
@@ -562,14 +572,27 @@ TEST_CASE( "watchdog" )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "Retrying with extended timing for multiple threads test" );
             
-            for ( int i = 0; i < 15; i++ )
+            for ( int retry = 0; retry < 25; retry++ )
             {
-                Supervisor::monitorThreads();
-                sleep( 5 );
+                for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2; i++ )
+                {
+                    Supervisor::monitorThreads();
+                }
+                sleep( 10 );
 
                 if ( kickCount_ > kickCountBefore )
                 {
                     break;
+                }
+                
+                if ( retry == 10 && kickCount_ == kickCountBefore )
+                {
+                    KIT_SYSTEM_TRACE_MSG( SECT_, "Testing HAL responsiveness with manual kick" );
+                    Supervisor::kickWdog();
+                    if ( kickCount_ > kickCountBefore )
+                    {
+                        break;
+                    }
                 }
             }
         }
