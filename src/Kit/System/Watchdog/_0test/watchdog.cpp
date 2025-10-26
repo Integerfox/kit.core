@@ -82,7 +82,6 @@ public:
     int m_healthCheckCallCount;
 
 public:
-    ///
     FailingHealthCheckThread( uint32_t wdogTimeoutMs, uint32_t healthCheckIntervalMs, bool isSupervisor = false )
         : Kit::System::Watchdog::WatchedEventThread( wdogTimeoutMs, healthCheckIntervalMs, isSupervisor )
         , m_shouldFailHealthCheck( false )
@@ -96,7 +95,6 @@ public:
     }
 
 protected:
-    // Override to simulate pass/fail health checks
     bool performHealthCheck() noexcept override
     {
         m_healthCheckCallCount++;
@@ -118,33 +116,28 @@ TEST_CASE( "watchdog" )
     {
         KIT_SYSTEM_TRACE_MSG( SECT_, "Testing Supervisor class basic operations" );
 
-        // Reset and verify initial HAL state
         watchdogEnabled_ = false;
         kickCount_ = 0;
         tripCount_ = 0;
 
-        // Test enabling watchdog
         bool enabled = Supervisor::enableWdog();
         REQUIRE( enabled == true );
-        REQUIRE( watchdogEnabled_ == true );  // Verify HAL enable was called
+        REQUIRE( watchdogEnabled_ == true );
 
-        // Test kicking hardware watchdog
-        REQUIRE( kickCount_ == 0 );  // Verify initial state
+        REQUIRE( kickCount_ == 0 );
         Supervisor::kickWdog();
         KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor kicked hardware watchdog" );
-        REQUIRE( kickCount_ == 1 );  // Verify HAL kick was called exactly once
+        REQUIRE( kickCount_ == 1 );
     }
 
     SECTION( "watched thread construction" )
     {
         KIT_SYSTEM_TRACE_MSG( SECT_, "Testing WatchedThread construction and properties" );
 
-        // Test custom timeout
         WatchedThread thread1( TEST_TIMEOUT_LONG_MS );
         REQUIRE( thread1.m_wdogTimeoutMs == TEST_TIMEOUT_LONG_MS );
         REQUIRE( thread1.m_currentCountMs == TEST_TIMEOUT_LONG_MS );
 
-        // Test explicit timeout specification
         WatchedThread thread2( TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( thread2.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( thread2.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
@@ -159,39 +152,29 @@ TEST_CASE( "watchdog" )
         WatchedThread thread1( TEST_TIMEOUT_MEDIUM_MS );
         WatchedThread thread2( TEST_TIMEOUT_LONG_MS );
 
-        // Test beginWatching - adds thread to supervision
         Supervisor::beginWatching( thread1 );
         Supervisor::beginWatching( thread2 );
 
-        // Verify initial state after registration
         REQUIRE( thread1.m_currentCountMs == thread1.m_wdogTimeoutMs );
         REQUIRE( thread2.m_currentCountMs == thread2.m_wdogTimeoutMs );
 
-        // Test reloadThread - resets countdown timer
         thread1.m_currentCountMs = TEST_TIMEOUT_SHORT_MS;
         Supervisor::reloadThread( thread1 );
         REQUIRE( thread1.m_currentCountMs == thread1.m_wdogTimeoutMs );
 
-        // Test monitorThreads with healthy threads
-        // Need to call monitorThreads multiple times due to tick divider
         unsigned long kickCountBefore = kickCount_;
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             Supervisor::monitorThreads();
         }
-        // Verify that monitorThreads kicked the hardware watchdog for healthy threads
-        REQUIRE( kickCount_ > kickCountBefore );  // Should have kicked HAL watchdog
+        REQUIRE( kickCount_ > kickCountBefore );
 
-        // Test endWatching - removes thread from supervision
-        // After endWatching, threads should no longer be monitored
         Supervisor::endWatching( thread1 );
         Supervisor::endWatching( thread2 );
 
-        // Verify endWatching worked by checking kick behavior changes
         unsigned long kickCountAfterRemoval = kickCount_;
-        Supervisor::monitorThreads();  // Should not kick since no threads are being watched
-        // Note: In current implementation, monitorThreads still kicks even with no threads
-        REQUIRE( kickCount_ >= kickCountAfterRemoval );  // Should not decrease kicks
+        Supervisor::monitorThreads();
+        REQUIRE( kickCount_ >= kickCountAfterRemoval );
     }
 
     SECTION( "monitor threads with timeout" )
@@ -203,30 +186,24 @@ TEST_CASE( "watchdog" )
         WatchedThread thread( TEST_TIMEOUT_SHORT_MS );
         Supervisor::beginWatching( thread );
 
-        // Simulate timeout by setting count to very low value and waiting for real time to pass
-        thread.m_currentCountMs = 1;  // Very short timeout
+        thread.m_currentCountMs = 1;
 
-        // Call monitorThreads once to establish time marker
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             Supervisor::monitorThreads();
         }
 
-        // Wait enough time to ensure timeout condition (longer than thread timeout)
-        sleep( TEST_SLEEP_MEDIUM_MS );  // Wait longer than the 1ms timeout
+        sleep( TEST_SLEEP_MEDIUM_MS );
 
-        // Verify HAL trip behavior - before and after state  
         unsigned long tripCountBefore = tripCount_;
 
-        // Monitor should detect timeout and trip watchdog
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
-            Supervisor::monitorThreads();  // This should call tripWdog() internally
-            if ( tripCount_ > tripCountBefore ) break;  // Trip occurred, no need to continue
+            Supervisor::monitorThreads();
+            if ( tripCount_ > tripCountBefore ) break;
         }
 
-        // Verify that HAL tripWdog() was actually called
-        REQUIRE( tripCount_ > tripCountBefore );  // Should have incremented trip counter
+        REQUIRE( tripCount_ > tripCountBefore );
 
         Supervisor::endWatching( thread );
     }
@@ -235,18 +212,15 @@ TEST_CASE( "watchdog" )
     {
         KIT_SYSTEM_TRACE_MSG( SECT_, "Testing WatchedEventThread construction" );
 
-        // Test supervisor thread
         WatchedEventThread supervisorThread( 1500, 750, true );
         REQUIRE( supervisorThread.m_wdogTimeoutMs == 1500 );
         REQUIRE( supervisorThread.m_currentCountMs == 1500 );
         REQUIRE( supervisorThread.isSupervisorThread() == true );
 
-        // Test regular thread
         WatchedEventThread regularThread( TEST_TIMEOUT_MEDIUM_MS, TEST_TIMEOUT_MEDIUM_MS / 2, false );
         REQUIRE( regularThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( regularThread.isSupervisorThread() == false );
 
-        // Test default non-supervisor
         WatchedEventThread defaultThread( TEST_TIMEOUT_MEDIUM_MS, TEST_TIMEOUT_MEDIUM_MS / 2 );
         REQUIRE( defaultThread.isSupervisorThread() == false );
     }
@@ -260,25 +234,19 @@ TEST_CASE( "watchdog" )
 
         FailingHealthCheckThread eventThread( TEST_TIMEOUT_MEDIUM_MS, TEST_TIMEOUT_SHORT_MS, false );
 
-        // Test startWatcher
         eventThread.startWatcher( timerManager );
-        // Verify thread properties are set correctly
         REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
 
-        // Test stopWatcher
         eventThread.stopWatcher();
 
-        // Verify multiple start/stop calls are safe (should be idempotent)
         eventThread.startWatcher( timerManager );
-        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );  // Should reset properly
+        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
 
         eventThread.stopWatcher();
-        // Multiple stops should be safe - no crash expected
         eventThread.stopWatcher();
 
-        // Test that we can restart after stopping
         eventThread.startWatcher( timerManager );
-        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );  // Should be valid again
+        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
         eventThread.stopWatcher();
     }
 
@@ -291,64 +259,48 @@ TEST_CASE( "watchdog" )
 
         FailingHealthCheckThread eventThread( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, false );
 
-        // Verify initial HAL state before starting health checks
         unsigned long kickCountBefore = kickCount_;
         unsigned long tripCountBefore = tripCount_;
-        REQUIRE( eventThread.m_healthCheckCallCount == 0 );  // Should start with no health checks
+        REQUIRE( eventThread.m_healthCheckCallCount == 0 );
 
-        // Start with healthy behavior
         eventThread.m_shouldFailHealthCheck = false;
         eventThread.startWatcher( timerManager );
 
-        // Verify initial thread state after starting watcher
-        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );  // Should be properly initialized
+        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
 
-        // Process timer events to trigger health checks and supervisor monitoring
         uint32_t startTime = ElapsedTime::milliseconds();
         while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
         {
             timerManager.processTimers();
 
-            // Also trigger supervisor monitoring to ensure HAL kicks occur for healthy threads
             for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
             {
                 Supervisor::monitorThreads();
             }
 
-            sleep( 10 );  // Small sleep to allow timer processing
+            sleep( 10 );
         }
 
-        // Verify health checks were called and successful
         REQUIRE( eventThread.m_healthCheckCallCount > 0 );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Health check called %d times, all successful", eventThread.m_healthCheckCallCount );
 
-        // Verify HAL behavior - successful health checks should result in HAL kicks but NO trips
-        REQUIRE( kickCount_ > kickCountBefore );  // Should have kicked HAL watchdog during healthy operation
-        REQUIRE( tripCount_ == tripCountBefore );  // Should NOT have tripped watchdog for healthy thread
+        REQUIRE( kickCount_ > kickCountBefore );
+        REQUIRE( tripCount_ == tripCountBefore );
+        REQUIRE( eventThread.m_currentCountMs > 0 );
 
-        // Verify thread remained healthy throughout the test
-        REQUIRE( eventThread.m_currentCountMs > 0 );  // Thread should not have timed out
-
-        // Verify the thread is still being monitored properly by triggering supervisor monitoring
         unsigned long kickCountAfterHealthChecks = kickCount_;
 
-        // Call supervisor monitoring to verify thread is still healthy and being managed
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             Supervisor::monitorThreads();
         }
 
-        // Verify continued HAL kick behavior (proving thread is still healthy and monitored)
-        REQUIRE( kickCount_ > kickCountAfterHealthChecks );  // Should continue kicking for healthy thread
-        REQUIRE( tripCount_ == tripCountBefore );  // Should still have no trips
-
-        // Final verification: thread should still be healthy after supervisor monitoring
-        REQUIRE( eventThread.m_currentCountMs > 0 );  // Thread should remain healthy
+        REQUIRE( kickCount_ > kickCountAfterHealthChecks );
+        REQUIRE( tripCount_ == tripCountBefore );
+        REQUIRE( eventThread.m_currentCountMs > 0 );
 
         eventThread.stopWatcher();
-
-        // Verify clean shutdown - thread properties should be preserved after stopping
-        REQUIRE( eventThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );  // Timeout should remain unchanged
+        REQUIRE( eventThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
     }
 
     SECTION( "health check failure" )
@@ -360,15 +312,11 @@ TEST_CASE( "watchdog" )
 
         FailingHealthCheckThread eventThread( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, false );
 
-        // Configure to fail health check
         eventThread.m_shouldFailHealthCheck = true;
         eventThread.startWatcher( timerManager );
 
-        // Verify initial HAL trip state before health check failure
         unsigned long tripCountBefore = tripCount_;
-        REQUIRE( tripCountBefore == 0 );  // Should start with no trips
-
-        // Process timer events to trigger health check failure
+        REQUIRE( tripCountBefore == 0 );
         uint32_t startTime = ElapsedTime::milliseconds();
         uint32_t maxWaitTime = TEST_SLEEP_MEDIUM_MS * 3;
         bool healthCheckCalled = false;
@@ -384,30 +332,24 @@ TEST_CASE( "watchdog" )
 
             sleep( 15 );
 
-            // Check if health check was called
             if ( eventThread.m_healthCheckCallCount > 0 )
             {
                 healthCheckCalled = true;
             }
 
-            // Check if trip has occurred, break early if detected
             if ( tripCount_ > tripCountBefore )
             {
                 break;
             }
 
-            // Break if health check was called but no trip yet
             if ( healthCheckCalled && ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) > TEST_SLEEP_MEDIUM_MS )
             {
-                // Give more time for trip to occur after health check failure
                 continue;
             }
         }
 
-        // Verify that health check failure actually triggered tripWdog()
         KIT_SYSTEM_TRACE_MSG( SECT_, "Health check call count: %d", eventThread.m_healthCheckCallCount );
 
-        // Platform-specific expectations
         if ( eventThread.m_healthCheckCallCount == 0 )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "Health checks not triggered automatically, testing manual trigger" );
@@ -415,7 +357,7 @@ TEST_CASE( "watchdog" )
             for ( int retry = 0; retry < 50; retry++ )
             {
                 timerManager.processTimers();
-                sleep( 20 );  // Longer sleep between attempts
+                sleep( 20 );
                 
                 if ( eventThread.m_healthCheckCallCount > 0 )
                 {
@@ -426,16 +368,15 @@ TEST_CASE( "watchdog" )
             if ( eventThread.m_healthCheckCallCount == 0 )
             {
                 KIT_SYSTEM_TRACE_MSG( SECT_, "Manually triggering health check for compatibility" );
-                eventThread.triggerHealthCheck();  // This should fail and may trigger trip logic
+                eventThread.triggerHealthCheck();
             }
 
-            // Allow time for trip processing
             sleep( 50 );
         }
         
-        REQUIRE( eventThread.m_healthCheckCallCount > 0 );  // Health check should have been called
-        REQUIRE( tripCount_ > tripCountBefore );  // Should have incremented trip counter
-        REQUIRE( tripCount_ >= 1 );  // Should be at least one trip from health check failure
+        REQUIRE( eventThread.m_healthCheckCallCount > 0 );
+        REQUIRE( tripCount_ > tripCountBefore );
+        REQUIRE( tripCount_ >= 1 );
 
         eventThread.stopWatcher();
     }
@@ -454,7 +395,6 @@ TEST_CASE( "watchdog" )
             Supervisor::monitorThreads();
         }
 
-        // Test tick divider - verify HAL kicks happen according to divider logic
         unsigned long initialKickCount = kickCount_;
 
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 5; i++ )
@@ -463,7 +403,6 @@ TEST_CASE( "watchdog" )
             sleep( 1 );
         }
 
-        // Platform-specific handling for HAL kick verification
         if ( kickCount_ == initialKickCount )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "Initial kick attempt failed, trying with longer delays" );
@@ -475,21 +414,18 @@ TEST_CASE( "watchdog" )
 
                 if ( kickCount_ > initialKickCount )
                 {
-                    break;  // Success!
+                    break;
                 }
             }
         }
 
-        // Verify that HAL kicks occurred (should be more than initial)
         REQUIRE( kickCount_ > initialKickCount );
         unsigned long kicksAfterLoop1 = kickCount_;
 
-        // Simulate partial time passage and verify thread countdown behavior
         uint32_t originalCount = thread.m_currentCountMs;
         thread.m_currentCountMs = TEST_TIMEOUT_MEDIUM_MS / 2;
-        REQUIRE( thread.m_currentCountMs < originalCount );  // Verify we set it lower
+        REQUIRE( thread.m_currentCountMs < originalCount );
 
-        // Multiple monitoring calls should eventually process timing
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             Supervisor::monitorThreads();
@@ -510,11 +446,8 @@ TEST_CASE( "watchdog" )
             }
         }
 
-        // Verify more HAL kicks occurred during second loop
         REQUIRE( kickCount_ > kicksAfterLoop1 );
-
-        // Verify thread is still healthy (not timed out)
-        REQUIRE( thread.m_currentCountMs > 0 );  // Should not have hit zero
+        REQUIRE( thread.m_currentCountMs > 0 );
 
         Supervisor::endWatching( thread );
     }
@@ -529,29 +462,24 @@ TEST_CASE( "watchdog" )
         WatchedThread mediumThread( TEST_TIMEOUT_MEDIUM_MS );
         WatchedThread longThread( TEST_TIMEOUT_LONG_MS );
 
-        // Verify different timeout values are set correctly
         REQUIRE( shortThread.m_wdogTimeoutMs == TEST_TIMEOUT_SHORT_MS );
         REQUIRE( mediumThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( longThread.m_wdogTimeoutMs == TEST_TIMEOUT_LONG_MS );
 
-        // Begin watching all threads and verify initial state
         Supervisor::beginWatching( shortThread );
         Supervisor::beginWatching( mediumThread );
         Supervisor::beginWatching( longThread );
 
-        // Verify all threads are properly initialized
         REQUIRE( shortThread.m_currentCountMs == shortThread.m_wdogTimeoutMs );
         REQUIRE( mediumThread.m_currentCountMs == mediumThread.m_wdogTimeoutMs );
         REQUIRE( longThread.m_currentCountMs == longThread.m_wdogTimeoutMs );
 
-        // Test selective reloading - modify medium thread then reload it
-        mediumThread.m_currentCountMs = TEST_TIMEOUT_SHORT_MS;  // Set to different value
-        REQUIRE( mediumThread.m_currentCountMs != mediumThread.m_wdogTimeoutMs );  // Verify it's different
+        mediumThread.m_currentCountMs = TEST_TIMEOUT_SHORT_MS;
+        REQUIRE( mediumThread.m_currentCountMs != mediumThread.m_wdogTimeoutMs );
 
         Supervisor::reloadThread( mediumThread );
-        REQUIRE( mediumThread.m_currentCountMs == mediumThread.m_wdogTimeoutMs );  // Should be reset
+        REQUIRE( mediumThread.m_currentCountMs == mediumThread.m_wdogTimeoutMs );
 
-        // Verify other threads were not affected by selective reload
         REQUIRE( shortThread.m_currentCountMs == shortThread.m_wdogTimeoutMs );
         REQUIRE( longThread.m_currentCountMs == longThread.m_wdogTimeoutMs );
 
@@ -597,14 +525,12 @@ TEST_CASE( "watchdog" )
             }
         }
 
-        REQUIRE( kickCount_ > kickCountBefore );  // Should have kicked HAL for healthy threads
+        REQUIRE( kickCount_ > kickCountBefore );
 
-        // Verify all threads are still healthy after monitoring
         REQUIRE( shortThread.m_currentCountMs > 0 );
         REQUIRE( mediumThread.m_currentCountMs > 0 );
         REQUIRE( longThread.m_currentCountMs > 0 );
 
-        // End watching all threads
         Supervisor::endWatching( shortThread );
         Supervisor::endWatching( mediumThread );
         Supervisor::endWatching( longThread );
@@ -619,50 +545,36 @@ TEST_CASE( "watchdog" )
 
         FailingHealthCheckThread supervisorThread( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, true );
 
-        // Verify supervisor thread properties
         REQUIRE( supervisorThread.isSupervisorThread() == true );
         REQUIRE( supervisorThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( supervisorThread.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
 
-        // Test startWatcher with supervisor thread
         supervisorThread.startWatcher( timerManager );
         REQUIRE( supervisorThread.m_currentCountMs == supervisorThread.m_wdogTimeoutMs );
 
-        // Test supervisor-specific monitorWdog behavior
-        // The startWatcher() call above should have already added this thread to supervision
-        // Verify the thread is properly managed by checking HAL kick behavior
         unsigned long kickCountBefore = kickCount_;
 
-        // Call monitorWdog multiple times to trigger the tick divider and establish time marker
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
-            supervisorThread.monitorWdog();  // This calls Supervisor::monitorThreads()
+            supervisorThread.monitorWdog();
         }
 
-        // Verify that monitorWdog() resulted in HAL kicks (proving supervision is working)
-        REQUIRE( kickCount_ > kickCountBefore );  // Should have kicked HAL watchdog
+        REQUIRE( kickCount_ > kickCountBefore );
 
-        // Wait a small amount of time to allow time-based processing
-        sleep( 10 );  // Small sleep to create elapsed time
+        sleep( 10 );
 
-        // Test that calling monitorWdog with elapsed time continues to work properly
         kickCountBefore = kickCount_;
 
-        // Call monitorWdog again to trigger watchdog processing with elapsed time
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
-            supervisorThread.monitorWdog();  // Should process watchdog timing
+            supervisorThread.monitorWdog();
         }
 
-        // Verify that monitoring continued to work (more HAL kicks)
-        REQUIRE( kickCount_ > kickCountBefore );  // Should have kicked HAL again
-
-        // The count behavior depends on implementation details, but thread should remain healthy
-        REQUIRE( supervisorThread.m_currentCountMs > 0 );  // Should not timeout during normal operation
+        REQUIRE( kickCount_ > kickCountBefore );
+        REQUIRE( supervisorThread.m_currentCountMs > 0 );
         supervisorThread.stopWatcher();
 
-        // After stopping, verify supervisor can still be called safely
-        supervisorThread.monitorWdog();  // Should not crash after being stopped
+        supervisorThread.monitorWdog();
     }
 
     SECTION( "edge cases" )
@@ -671,40 +583,33 @@ TEST_CASE( "watchdog" )
 
         Supervisor::enableWdog();
 
-        // Test zero timeout
         WatchedThread zeroThread( 0 );
         REQUIRE( zeroThread.m_wdogTimeoutMs == 0 );
-        REQUIRE( zeroThread.m_currentCountMs == 0 );  // Should match timeout value
+        REQUIRE( zeroThread.m_currentCountMs == 0 );
 
-        // Test reload on non-watched thread
         WatchedThread orphanThread( TEST_TIMEOUT_MEDIUM_MS );
         uint32_t originalCount = orphanThread.m_currentCountMs;
-        Supervisor::reloadThread( orphanThread );  // Should not crash
-        REQUIRE( orphanThread.m_currentCountMs == originalCount );  // Should be unchanged since not watched
+        Supervisor::reloadThread( orphanThread );
+        REQUIRE( orphanThread.m_currentCountMs == originalCount );
 
-        // Test monitor with no threads
         unsigned long kickCountBefore = kickCount_;
-        Supervisor::monitorThreads();  // Should complete without issues
-        // Note: Current implementation may or may not kick when no threads - documenting behavior
-        REQUIRE( kickCount_ >= kickCountBefore );  // Should not decrease
+        Supervisor::monitorThreads();
+        REQUIRE( kickCount_ >= kickCountBefore );
 
-        // Test proper add/remove sequence
         WatchedThread thread( TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( thread.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
 
         Supervisor::beginWatching( thread );
-        REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );  // Should be properly initialized
+        REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );
 
         Supervisor::endWatching( thread );
-        // After removing, thread state should be preserved but not monitored
-        REQUIRE( thread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );  // Timeout should remain unchanged
+        REQUIRE( thread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
 
-        // Test that removed threads can be re-added - verify re-initialization
         Supervisor::beginWatching( thread );
-        REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );  // Should be re-initialized properly
+        REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );
 
         Supervisor::endWatching( thread );
-        REQUIRE( thread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );  // Should remain consistent
+        REQUIRE( thread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
