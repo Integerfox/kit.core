@@ -19,7 +19,7 @@ class ToolChain( base.ToolChain ):
     #--------------------------------------------------------------------------
     def __init__( self, exename, prjdir, build_variants, sdk_root, bsp_mx_root, freertos_root, linker_script, default_variant='release', env_error=None ):
         base.ToolChain.__init__( self, exename, prjdir, build_variants, default_variant )
-        self._ccname     = 'GCC Arm-Cortex (none-eabi) Compiler'
+        self._ccname     = 'GCC Arm-Cortex (none-eabi) compiler'
         self._cc         = 'arm-none-eabi-gcc' 
         self._asm        = 'arm-none-eabi-gcc' 
         self._ld         = 'arm-none-eabi-gcc' 
