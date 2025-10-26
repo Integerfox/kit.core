@@ -1,5 +1,5 @@
-#ifndef Cpl_System_FreeRTOS_Thread_h_
-#define Cpl_System_FreeRTOS_Thread_h_
+#ifndef KIT_SYSTEM_FREERTOS_THREAD_H_
+#define KIT_SYSTEM_FREERTOS_THREAD_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,50 +11,34 @@
 /** @file */
 
 
-#include "colony_config.h"
-#include "Cpl/System/Thread.h"
-#include "Cpl/System/Tls.h"
-#include "Cpl/Text/FString.h"
+#include "kit_config.h"
+#include "Kit/System/Thread.h"
+#include "Kit/Text/FString.h"
 #include "task.h"
 
 
 /** Provides the default stack size (since FreeRTOS does not provide one)
  */
-#ifndef OPTION_CPL_SYSTEM_FREERTOS_DEFAULT_STACK_SIZE
-#define OPTION_CPL_SYSTEM_FREERTOS_DEFAULT_STACK_SIZE   (1024*3)
+#ifndef OPTION_KIT_SYSTEM_FREERTOS_DEFAULT_STACK_SIZE
+#define OPTION_KIT_SYSTEM_FREERTOS_DEFAULT_STACK_SIZE ( 1024 * 3 )
 #endif
 
 
-// Forward declaration for making the Tls class a friend
-namespace Cpl {
-namespace System {
-class Tls;
-};
-};
-
-
 ///
-namespace Cpl {
+namespace Kit {
 namespace System {
 namespace FreeRTOS {
 
 /** This concrete class implements a Thread object using FreeRTOS threads
  */
-class Thread : public Cpl::System::Thread
+class Thread : public Kit::System::Thread
 {
 protected:
     /// Reference to the runnable object for the thread
-    Cpl::System::Runnable&  m_runnable;
+    Kit::System::IRunnable& m_runnable;
 
     /// ASCII name of the task
-    Cpl::Text::FString<configMAX_TASK_NAME_LEN>  m_name;
-
-    /// internal handle
-    TaskHandle_t            m_threadHandle;
-
-    /// Thread Local storage
-    void*                   m_tlsArray[OPTION_CPL_SYSTEM_TLS_DESIRED_MIN_INDEXES];
-
+    Kit::Text::FString<configMAX_TASK_NAME_LEN> m_name;
 
 public:
     /** Constructor.
@@ -62,58 +46,39 @@ public:
               memory. Stack memory is allocated from the HEAP
 
             o If zero is passed as the stack size, then the default stack size
-              is set based on the OPTION_CPL_SYSTEM_FREERTOS_DEFAULT_STACK_SIZE
+              is set based on the OPTION_KIT_SYSTEM_FREERTOS_DEFAULT_STACK_SIZE
               parameter.
      */
-    Thread( Runnable&      runnable,
-            const char*    name,
-            int            priority      = CPL_SYSTEM_THREAD_PRIORITY_NORMAL,
-            unsigned       stackSize     = 0
-    );
+    Thread( IRunnable&  runnable,
+            const char* name,
+            int         priority  = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
+            unsigned    stackSize = 0 ) noexcept;
 
     /// Destructor
     ~Thread();
 
 public:
-    /// See Cpl::System::Thread
-    const char* getName() noexcept;
-
-    /// See Cpl::System::Thread
-    size_t getId() noexcept;
-
-    /// See Cpl::System::Thread
-    bool isRunning( void ) noexcept;
-
-    /// See Cpl::System::Thread
-    Cpl_System_Thread_NativeHdl_T getNativeHandle( void ) noexcept;
-
-    /// See Cpl::System::Thread
-    Runnable& getRunnable( void ) noexcept;
-
+    /// See Kit::System::Thread
+    const char* getName() const noexcept override;
 
 public:
-    /// See Cpl::System::Signable
-    int signal( void ) noexcept;
+    /// See Kit::System::ISignable
+    int signal() noexcept override;
 
-    /// See Cpl::System::Signable
-    int su_signal( void ) noexcept;
+    /// See Kit::System::ISignable
+    int su_signal() noexcept override;
 
-
-
-private:
-    /// Entry point for all newly created threads
-    static void entryPoint( void* data );
 
 protected:
-    /// Returns access to the TLS key array
-    static void** getTlsArray() noexcept;
+    /// Entry point for all newly created threads
+    static void entryPoint( void* data ) noexcept;
 
 
 public:
-    /** COMPONENT Scoped constructor to convert the native FreeRTOS thread to a 
-        Cpl Thread. THIS CONSTRUCTOR SHOULD NEVER BE USED BY THE APPLICATION!
+    /** COMPONENT Scoped constructor to convert the native FreeRTOS thread to a
+        Kit Thread. THIS CONSTRUCTOR SHOULD NEVER BE USED BY THE APPLICATION!
      */
-    Thread( const char* threadName, Cpl::System::Runnable& dummyRunnable );
+    Thread( const char* threadName, Kit::System::IRunnable& dummyRunnable ) noexcept;
 
     /** This is helper method to 'convert' the first/main FreeRTOS thread
         to a CPL thread.  The method can be called many times - but it
@@ -121,12 +86,11 @@ public:
         working with the Arduino platform/framework where it creates
         the first/main FreeRTOS thread.
      */
-    static void makeNativeMainThreadACplThread( void );
+    static void makeNativeMainThreadAKitThread() noexcept;
 
 public:
     /// Housekeeping
-    friend class Cpl::System::Thread;
-    friend class Cpl::System::Tls;
+    friend class Kit::System::Thread;
 };
 
 /** This is a helper class that can be used to make the current thread
@@ -137,30 +101,23 @@ public:
 
     ** ONLY USE THIS CLASS IF YOU KNOW WHAT YOU ARE DOING **
  */
-class MakeCurrentThreadACplThread : public Cpl::System::Runnable
+class MakeCurrentThreadACplThread : public Kit::System::IRunnable
 {
 protected:
     // Empty run function
-    // Note: Leave my 'running state' set to false -->this is so I don't 
-    // terminate the native thread prematurely when/if the Thread instance
-    // is deleted.  In theory this can't happen since the Thread and Runnable
-    // instance pointers for the native thread are never exposed to the 
-    // application and/or explicitly deleted.
-    void appRun() {}
-
+    void entry() noexcept override {}
 
 public:
     /// Converts the native thread to a CPL thread
-    MakeCurrentThreadACplThread( const char* threadName="main" )
+    MakeCurrentThreadACplThread( const char* threadName = "main" ) noexcept
     {
         // Create a thread object for the native thread
-        m_running = true;
-        new Cpl::System::FreeRTOS::Thread( threadName, *this );
+        m_parentThreadPtr_ = new Kit::System::FreeRTOS::Thread( threadName, *this );
     }
 };
 
 
-};      // end namespaces
-};
-};
+}  // end namespaces
+}
+}
 #endif  // end header latch

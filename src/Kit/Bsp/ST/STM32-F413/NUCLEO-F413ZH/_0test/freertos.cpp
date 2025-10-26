@@ -1,9 +1,19 @@
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
 
-#include "Bsp/Api.h"
+
+#include "Kit/Bsp/Api.h"
 #include "Kit/System/Api.h"
-#include <stdio.h>
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/FreeRTOS/Thread.h"
+#include <stdio.h>
 
 class Thread1 : public Kit::System::IRunnable
 {
@@ -23,12 +33,12 @@ protected:
             uint32_t now = Kit::System::ElapsedTime::milliseconds();
             if ( now - timeMark1 >= 100 )
             {
-                Bsp_Api_toggle_debug1();
+                Bsp_toggle_debug1();
                 timeMark1 = now;
             }
             if ( now - timeMark2 >= 1000 )
             {
-                Bsp_Api_toggle_debug2();
+                Bsp_toggle_debug2();
                 timeMark2 = now;
                 printf( "now=%lu\n", now );
             }
@@ -48,7 +58,7 @@ static Thread1 runnable_;
 int main( void )
 {
     // Initialize the board
-    Bsp_Api_initialize();
+    Bsp_initialize();
     printf( "\n**** BSP TEST APPLICATION STARTED ****\n\n" );
 
     //// Initialize CPL

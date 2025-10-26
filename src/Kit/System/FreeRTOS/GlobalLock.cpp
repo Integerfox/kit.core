@@ -9,19 +9,24 @@
 /** @file */
 
 
-#include "colony_map.h"
-#include "Cpl/System/GlobalLock.h"
+#include "kit_map.h"    // For FreeRTOS includes
+#include "Kit/System/GlobalLock.h"
 
-
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
 //////////////////////////////////////////////////////////////////////////////
-void Cpl::System::GlobalLock::begin( void )
+void GlobalLock::begin( void )
 {
-     taskDISABLE_INTERRUPTS();
+    taskDISABLE_INTERRUPTS();
 }
 
-void Cpl::System::GlobalLock::end( void )
+void GlobalLock::end( void )
 {
-     taskENABLE_INTERRUPTS();
-
+    taskENABLE_INTERRUPTS();
 }
+
+} // end namespace
+}
+//------------------------------------------------------------------------------

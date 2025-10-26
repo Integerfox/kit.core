@@ -10,29 +10,33 @@
 
 
 
-#include "Cpl/System/Semaphore.h"
-#include "Cpl/System/FatalError.h"
+#include "Kit/System/Semaphore.h"
+#include "Kit/System/FatalError.h"
+#include "Kit/System/Shutdown.h"
 
 
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
 //////////////////////////////////////////////////
-Cpl::System::Semaphore::Semaphore( unsigned initialCount )
+Semaphore::Semaphore( unsigned initialCount )
 {
     m_sema = xSemaphoreCreateCounting( 0x7FFF, initialCount );
     if ( m_sema == NULL )
     {
-        Cpl::System::FatalError::logf( "Cpl:System::Semaphore::Semaphore().  Failed to create semaphore" );
+        FatalError::logf( Shutdown::eOSAL, "Kit:System::Semaphore::Semaphore().  Failed to create semaphore" );
     }
 }
 
-Cpl::System::Semaphore::~Semaphore()
+Semaphore::~Semaphore()
 {
     vSemaphoreDelete( &m_sema );
 }
 
 
 //////////////////////////////////////////////////
-int Cpl::System::Semaphore::signal( void ) noexcept
+int Semaphore::signal( void ) noexcept
 {
     xSemaphoreGive( m_sema );
     return 0;
@@ -43,7 +47,7 @@ int Cpl::System::Semaphore::signal( void ) noexcept
           defined 'return zero on success' semantics.  This is to overcome
           the oddities of FreeRTOS.
  */
-int Cpl::System::Semaphore::su_signal( void ) noexcept
+int Semaphore::su_signal( void ) noexcept
 {
     BaseType_t higherPriorityTaskWoken = pdFALSE;
     xSemaphoreGiveFromISR( m_sema, &higherPriorityTaskWoken );
@@ -52,34 +56,36 @@ int Cpl::System::Semaphore::su_signal( void ) noexcept
 
 
 //////////////////////////////////////////////////
-void Cpl::System::Semaphore::wait( void ) noexcept
+void Semaphore::wait( void ) noexcept
 {
     xSemaphoreTake( m_sema, portMAX_DELAY );
 }
 
 
-bool Cpl::System::Semaphore::timedWait( unsigned long timeout ) noexcept
+bool Semaphore::timedWait( unsigned long timeout ) noexcept
 {
     return xSemaphoreTake( m_sema, timeout * portTICK_PERIOD_MS ) == pdTRUE;
 }
 
 
-bool Cpl::System::Semaphore::tryWait( void ) noexcept
+bool Semaphore::tryWait( void ) noexcept
 {
     return xSemaphoreTake( m_sema, 0 ) == pdTRUE;
 }
 
 
-void Cpl::System::Semaphore::waitInRealTime( void ) noexcept
+void Semaphore::waitInRealTime( void ) noexcept
 {
     xSemaphoreTake( m_sema, portMAX_DELAY );
 }
 
 
-bool Cpl::System::Semaphore::timedWaitInRealTime( unsigned long timeout ) noexcept
+bool Semaphore::timedWaitInRealTime( unsigned long timeout ) noexcept
 {
     return xSemaphoreTake( m_sema, timeout * portTICK_PERIOD_MS ) == pdTRUE;
 }
 
-
+} // end namespace
+}
+//------------------------------------------------------------------------------
 

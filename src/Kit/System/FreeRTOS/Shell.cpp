@@ -9,21 +9,23 @@
 /** @file */
 
 
-#include "Cpl/System/Shell.h"
+#include "Kit/System/Shell.h"
 
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
-bool Cpl::System::Shell::isAvailable()
+bool Shell::isAvailable()
 {
     return false;
 }
 
 
-int Cpl::System::Shell::execute( const char* cmdstring, bool noEchoStdOut, bool noEchoStdErr )
+int Shell::execute( const char* cmdstring, bool noEchoStdOut, bool noEchoStdErr )
 {
     return -1;
 }
 
-
-
-
-
+} // end namespace
+}
+//------------------------------------------------------------------------------

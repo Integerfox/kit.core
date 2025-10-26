@@ -9,15 +9,15 @@
 /** @file */
 
 
-#include "Cpl/System/Shutdown.h"
-#include "Bsp/Api.h"
+#include "Kit/System/Shutdown.h"
+#include "Kit/Bsp/Api.h"
 #include "FreeRTOS.h"
 #include "task.h"
 
 
-/// 
-using namespace Cpl::System;
-
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
 ////////////////////////////////////////////////////////////////////////////////
 static int shutdown_application_( int exit_code )
@@ -31,7 +31,7 @@ static int shutdown_application_( int exit_code )
     // If the scheduler is not running (typical case is it hasn't been started) -->then lock up in forever loop
     else
     {
-        Bsp_Api_disableIrqs();
+        Bsp_disable_irqs();
         for ( ;;);
     }
 
@@ -40,12 +40,14 @@ static int shutdown_application_( int exit_code )
 
 int Shutdown::success( void )
 {
-    return shutdown_application_( notifyShutdownHandlers_( OPTION_CPL_SYSTEM_SHUTDOWN_SUCCESS_ERROR_CODE ) );
+    return shutdown_application_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }
 
 int Shutdown::failure( int exit_code )
 {
-    return shutdown_application_( notifyShutdownHandlers_( exit_code ) );
+    return shutdown_application_( notifyShutdownHandlers( exit_code ) );
 }
 
-
+} // end namespace
+}
+//------------------------------------------------------------------------------

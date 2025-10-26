@@ -9,15 +9,17 @@
 /** @file */
 
 #include "Kit/System/Api.h"
-#include "Kit/System/Private_.h"
+#include "Kit/System/Private.h"
 #include "Kit/System/FatalError.h"
-#include "Bsp/Api.h"
+#include "Kit/Bsp/Api.h"
 #include "FreeRTOS.h"
+#include "Kit/System/PrivateStartup.h"
 #include "task.h"
 
 
-/// 
-using namespace Kit::System;
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
 ///
 ///
@@ -26,74 +28,78 @@ static Mutex tracingMutex_;
 static Mutex tracingOutputMutex_;
 static Mutex sysList_;
 
-bool cpl_system_thread_freertos_schedulerStarted_ = false;
+bool g_Kit_System_thread_freertos_schedulerStarted = false;
 
 ////////////////////////////////////////////////////////////////////////////////
-void Api::initialize( void )
+void initialize( void )
 {
     // Init the Colony.Core sub-systems
-    StartupHook_::notifyStartupClients();
+    IStartupHook::notifyStartupClients();
 }
 
 
-void Api::enableScheduling( void )
+void enableScheduling( void )
 {
     // This method should never return
-    cpl_system_thread_freertos_schedulerStarted_ = true;            // Manually track the scheduler state since xTaskGetSchedulerState() is return 'taskSCHEDULER_RUNNING' BEFORE I have started the scheduler!!!!
+    g_Kit_System_thread_freertos_schedulerStarted = true;            // Manually track the scheduler state since xTaskGetSchedulerState() is return 'taskSCHEDULER_RUNNING' BEFORE I have started the scheduler!!!!
     vTaskStartScheduler();
 
     // If I get here something is wrong!!
-    Bsp_Api_disableIrqs();
+    Bsp_disable_irqs();
     for ( ;;)
     {
-        Bsp_Api_nop();
+        Bsp_nop();
     }
 }
 
-bool Api::isSchedulingEnabled( void )
+bool isSchedulingEnabled( void )
 {
-    return cpl_system_thread_freertos_schedulerStarted_;
+    return g_Kit_System_thread_freertos_schedulerStarted;
 }
 
-void Api::sleep( unsigned long milliseconds ) noexcept
-{
-    vTaskDelay( milliseconds * portTICK_PERIOD_MS );
-}
-
-void Api::sleepInRealTime( unsigned long milliseconds ) noexcept
+void sleep( unsigned long milliseconds ) noexcept
 {
     vTaskDelay( milliseconds * portTICK_PERIOD_MS );
 }
 
+void sleepInRealTime( unsigned long milliseconds ) noexcept
+{
+    vTaskDelay( milliseconds * portTICK_PERIOD_MS );
+}
 
-void Api::suspendScheduling(void)
+
+void suspendScheduling(void)
 {
     vTaskSuspendAll();
 }
 
-void Api::resumeScheduling(void)
+void resumeScheduling(void)
 {
     xTaskResumeAll();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Mutex& Locks_::system( void )
+Mutex& PrivateLocks::system( void )
 {
     return systemMutex_;
 }
 
 
-Mutex& Locks_::tracing( void )
+Mutex& PrivateLocks::tracing( void )
 {
     return tracingMutex_;
 }
 
-Mutex& Locks_::sysLists( void )
+Mutex& PrivateLocks::sysLists( void )
 {
     return sysList_;
 }
 
-Mutex& Locks_::tracingOutput( void )
+Mutex& PrivateLocks::tracingOutput( void )
 {
     return tracingOutputMutex_;
 }
+
+} // end namespace
+}
+//------------------------------------------------------------------------------

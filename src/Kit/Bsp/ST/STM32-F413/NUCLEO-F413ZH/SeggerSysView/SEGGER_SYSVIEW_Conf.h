@@ -79,7 +79,7 @@ Additional information:
 **********************************************************************
 */
 
-#include "colony_config.h"
+#include "kit_config.h"
 
 #endif  // SEGGER_SYSVIEW_CONF_H
 

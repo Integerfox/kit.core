@@ -9,45 +9,50 @@
 /** @file */
 
 
-#include "Cpl/System/Mutex.h"
-#include "Cpl/System/Api.h"
-#include "Cpl/System/FatalError.h"
+#include "Kit/System/Mutex.h"
+#include "Kit/System/Api.h"
+#include "Kit/System/FatalError.h"
 
-
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
 //////////////////////////////////////////////////////////////////////////////
-Cpl::System::Mutex::Mutex()
+Mutex::Mutex()
 {
     m_mutex = xSemaphoreCreateRecursiveMutex();
     if ( m_mutex == NULL )
     {
-        Cpl::System::FatalError::logf( "Cpl:System::Mutex::Mutex().  Failed to create mutex" );
+        FatalError::logf( Shutdown::eOSAL, "Kit::System::Mutex::Mutex().  Failed to create mutex" );
     }
 }
 
-Cpl::System::Mutex::~Mutex()
+Mutex::~Mutex()
 {
     vSemaphoreDelete( m_mutex );
 }
 
-
-void Cpl::System::Mutex::lock( void )
+void Mutex::lock( void )
 {
-    // Do nothing if the scheduler has not yet been started, i.e, if there is only 
+    // Do nothing if the scheduler has not yet been started, i.e, if there is only
     // one thread running -->then by definition I have mutual exclusion. It also allows
     // an application to lock a mutex BEFORE the scheduler has been started (i am looking
-    // at you Cpl::System::Trace engine).
-    if ( Cpl::System::Api::isSchedulingEnabled() )
+    // at you Trace engine).
+    if ( isSchedulingEnabled() )
     {
         xSemaphoreTakeRecursive( m_mutex, portMAX_DELAY );
     }
 }
 
 
-void Cpl::System::Mutex::unlock( void )
+void Mutex::unlock( void )
 {
-    if ( Cpl::System::Api::isSchedulingEnabled() )
+    if ( isSchedulingEnabled() )
     {
         xSemaphoreGiveRecursive( m_mutex );
     }
 }
+
+}  // end namespace
+}
+//------------------------------------------------------------------------------

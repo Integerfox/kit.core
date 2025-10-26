@@ -1,13 +1,13 @@
-/*-----------------------------------------------------------------------------
-* This file is part of the Shift-Right Open Repository.  The Repository is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the root directory or on the Internet at
-* http://www.shift-right.com/openrepo/license.htm
-*
-* Copyright (c) 2014-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
+
 
 #include "Bsp/ST/NUCLEO-F413ZH/alpha1/console/Output.h"
 #include "Cpl/System/Trace.h"

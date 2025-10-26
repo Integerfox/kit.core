@@ -1,19 +1,18 @@
-/*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2017-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
 
-#include "Bsp/Api.h"
+#include "Kit/Bsp/Api.h"
 #include "stm32f4xx_hal.h"
-#include "Bsp/ST/NUCLEO-F413ZH/alpha1/MX/Core/Inc/gpio.h"
-#include "Bsp/ST/NUCLEO-F413ZH/alpha1/console/Output.h"
-#include "Cpl/System/Trace.h"
+#include "Kit/Bsp/ST/STM32-F413/NUCLEO-F413ZH/MX/Core/Inc/gpio.h"
+//#include "Kit/Bsp/ST/STM32-F413/NUCLEO-F413ZH/console/Output.h"
+//#include "Kit/System/Trace.h"
 
 #ifdef ENABLE_BSP_SEGGER_SYSVIEW   
 #define INIT_SEGGER_SYSVIEW()   SEGGER_SYSVIEW_Conf()
@@ -24,7 +23,7 @@
 #define SECT_   "bsp"
 
 ///////////////////////////////////////////
-void Bsp_Api_initialize( void )
+void Bsp_initialize( void )
 {
     /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
     HAL_Init();
@@ -44,6 +43,6 @@ void Bsp_Api_initialize( void )
     INIT_SEGGER_SYSVIEW();
 
     // Start the Console/Trace UART
-    g_bspConsoleStream.start( USART3_IRQn, &huart3 );
+//    g_bspConsoleStream.start( USART3_IRQn, &huart3 );
 }
 

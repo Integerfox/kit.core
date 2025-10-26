@@ -9,25 +9,25 @@
 * Redistributions of the source code must retain the above copyright notice.
 *----------------------------------------------------------------------------*/
 
-#include "Cpl/System/ElapsedTime.h"
+#include "Kit/System/ElapsedTime.h"
 
 
-/// 
-using namespace Cpl::System;
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
 
 ///////////////////////////////////////////////////////////////
 // Simulated time NOT supported
-unsigned long ElapsedTime::milliseconds( void ) noexcept
+uint32_t ElapsedTime::milliseconds() noexcept
 {
     return millisecondsInRealTime();
 }
 
-unsigned long ElapsedTime::seconds( void ) noexcept
+uint64_t ElapsedTime::millisecondsEx() noexcept
 {
-    return secondsInRealTime();
+    return millisecondsInRealTimeEx();
 }
 
-ElapsedTime::Precision_T ElapsedTime::precision( void ) noexcept
-{
-    return precisionInRealTime();
+} // end namespace
 }
+//------------------------------------------------------------------------------
