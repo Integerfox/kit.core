@@ -88,7 +88,7 @@ void WatchedEventThread::healthTimerExpired() noexcept
     if ( !performHealthCheck() )
     {
         // Health check failed - trip the watchdog immediately
-        Kit_System_Watchdog_hal_trip_wdog();
+        Supervisor::tripWdog();
         return;
     }
 

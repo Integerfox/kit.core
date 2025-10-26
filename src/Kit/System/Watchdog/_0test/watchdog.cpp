@@ -11,6 +11,7 @@
 #include "Kit/System/Watchdog/Supervisor.h"
 #include "Kit/System/Watchdog/WatchedThread.h"
 #include "Kit/System/Watchdog/WatchedEventThread.h"
+#include "Kit/System/Watchdog/RawThread.h"
 #include "Kit/System/Watchdog/Hal.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
@@ -128,6 +129,11 @@ TEST_CASE( "watchdog" )
         Supervisor::kickWdog();
         KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor kicked hardware watchdog" );
         REQUIRE( kickCount_ == 1 );
+
+        unsigned long tripCountBefore = tripCount_;
+        Supervisor::tripWdog();
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor tripped hardware watchdog via API" );
+        REQUIRE( tripCount_ == tripCountBefore + 1 );
     }
 
     SECTION( "watched thread construction" )
@@ -610,6 +616,71 @@ TEST_CASE( "watchdog" )
 
         Supervisor::endWatching( thread );
         REQUIRE( thread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+
+        unsigned long tripCountBefore = tripCount_;
+        
+        Supervisor::tripWdog();
+        REQUIRE( tripCount_ == tripCountBefore + 1 );
+        
+        tripCountBefore = tripCount_;
+        Supervisor::tripWdog();
+        REQUIRE( tripCount_ == tripCountBefore + 1 );
+        
+        Supervisor::tripWdog();
+        REQUIRE( tripCount_ == tripCountBefore + 2 );
+    }
+
+    SECTION( "rawthread inline implementation" )
+    {
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Testing RawThread inlined wrapper methods" );
+
+        Supervisor::enableWdog();
+
+        RawThread rawThread1( TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( rawThread1.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( rawThread1.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
+
+        RawThread rawThread2( TEST_TIMEOUT_SHORT_MS );
+        REQUIRE( rawThread2.m_wdogTimeoutMs == TEST_TIMEOUT_SHORT_MS );
+        REQUIRE( rawThread2.m_currentCountMs == TEST_TIMEOUT_SHORT_MS );
+
+        rawThread1.startWatching();
+        REQUIRE( rawThread1.m_currentCountMs == rawThread1.m_wdogTimeoutMs );
+
+        rawThread2.startWatching();
+        REQUIRE( rawThread2.m_currentCountMs == rawThread2.m_wdogTimeoutMs );
+
+        rawThread1.m_currentCountMs = TEST_TIMEOUT_SHORT_MS;
+        rawThread1.kickWatchdog();
+        REQUIRE( rawThread1.m_currentCountMs == rawThread1.m_wdogTimeoutMs );
+
+        rawThread1.stopWatching();
+        rawThread2.stopWatching();
+
+        unsigned long kickCountBefore = kickCount_;
+        for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
+        {
+            Supervisor::monitorThreads();
+        }
+        REQUIRE( kickCount_ >= kickCountBefore );
+
+        RawThread* rawThreadPtr = new RawThread( TEST_TIMEOUT_LONG_MS );
+        REQUIRE( rawThreadPtr->m_wdogTimeoutMs == TEST_TIMEOUT_LONG_MS );
+
+        KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( rawThreadPtr );
+        REQUIRE( rawThreadPtr->m_currentCountMs == rawThreadPtr->m_wdogTimeoutMs );
+
+        rawThreadPtr->m_currentCountMs = TEST_TIMEOUT_SHORT_MS;
+        KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( rawThreadPtr );
+        REQUIRE( rawThreadPtr->m_currentCountMs == rawThreadPtr->m_wdogTimeoutMs );
+
+        KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( rawThreadPtr );
+        delete rawThreadPtr;
+
+        RawThread* nullPtr = nullptr;
+        KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( nullPtr );
+        KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( nullPtr );
+        KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( nullPtr );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

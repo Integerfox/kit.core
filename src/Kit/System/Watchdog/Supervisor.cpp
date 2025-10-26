@@ -63,8 +63,8 @@ void Supervisor::monitorThreads() noexcept
             // Check for an expired thread timer
             if ( thread->m_currentCountMs <= delta )
             {
-                Kit_System_Watchdog_hal_trip_wdog();  // EXPIRED
-                return;      // Never executes because the tripWatchdog() method never returns, but it simplifies testing
+                Supervisor::tripWdog();  // EXPIRED
+                return;      // Never executes because the tripWdog() method never returns, but it simplifies testing
             }
 
             // Decrement the thread's timer and get the next thread in the list
@@ -91,10 +91,27 @@ void Supervisor::reloadThread( WatchedThread& thread ) noexcept
 
 bool Supervisor::enableWdog() noexcept
 {
-    return Kit_System_Watchdog_hal_enable_wdog();
+    bool result = Kit_System_Watchdog_hal_enable_wdog();
+    if ( result )
+    {
+        m_isEnabled = true;
+    }
+    return result;
 }
 
 void Supervisor::kickWdog() noexcept
 {
     Kit_System_Watchdog_hal_kick_wdog();
+}
+
+void Supervisor::tripWdog() noexcept
+{
+    // Ensure watchdog is enabled before tripping
+    if ( !m_isEnabled )
+    {
+        enableWdog();
+    }
+    
+    // Trip the watchdog to force system reset
+    Kit_System_Watchdog_hal_trip_wdog();
 }

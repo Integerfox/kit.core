@@ -86,6 +86,12 @@ public:
      */
     static void kickWdog() noexcept;
 
+    /** Trips the watchdog to force a system reset. This method ensures the
+        watchdog is enabled (calling enableWdog() if necessary) before tripping
+        to guarantee a system reset occurs.
+     */
+    static void tripWdog() noexcept;
+
 protected:
     /// List of threads being monitored
     static Kit::Container::SList<WatchedThread> m_watchedThreads;
