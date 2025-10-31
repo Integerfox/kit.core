@@ -1,3 +1,4 @@
+#if 0
 /**
  * \file heap_useNewlib_ST.c
  * \brief Wrappers required to use newlib malloc-family within FreeRTOS.
@@ -285,3 +286,4 @@ size_t xPortGetFreeHeapSize( void ) PRIVILEGED_FUNCTION {
 
 //! No implementation needed, but stub provided in case application already calls vPortInitialiseBlocks
 void vPortInitialiseBlocks( void ) PRIVILEGED_FUNCTION {}
+#endif

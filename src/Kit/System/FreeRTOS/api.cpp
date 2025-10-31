@@ -28,7 +28,7 @@ static Mutex tracingMutex_;
 static Mutex tracingOutputMutex_;
 static Mutex sysList_;
 
-bool g_Kit_System_thread_freertos_schedulerStarted = false;
+static bool schedulerStarted_ = false;
 
 ////////////////////////////////////////////////////////////////////////////////
 void initialize( void )
@@ -38,15 +38,15 @@ void initialize( void )
 }
 
 
+// This method should never return
 void enableScheduling( void )
 {
-    // This method should never return
-    g_Kit_System_thread_freertos_schedulerStarted = true;            // Manually track the scheduler state since xTaskGetSchedulerState() is return 'taskSCHEDULER_RUNNING' BEFORE I have started the scheduler!!!!
+    schedulerStarted_ = true;  // Manually track the scheduler state since xTaskGetSchedulerState() returns 'taskSCHEDULER_RUNNING' BEFORE I have started the scheduler!!!!
     vTaskStartScheduler();
 
     // If I get here something is wrong!!
     Bsp_disable_irqs();
-    for ( ;;)
+    for ( ;; )
     {
         Bsp_nop();
     }
@@ -54,7 +54,7 @@ void enableScheduling( void )
 
 bool isSchedulingEnabled( void )
 {
-    return g_Kit_System_thread_freertos_schedulerStarted;
+    return schedulerStarted_;
 }
 
 void sleep( unsigned long milliseconds ) noexcept
@@ -68,12 +68,12 @@ void sleepInRealTime( unsigned long milliseconds ) noexcept
 }
 
 
-void suspendScheduling(void)
+void suspendScheduling( void )
 {
     vTaskSuspendAll();
 }
 
-void resumeScheduling(void)
+void resumeScheduling( void )
 {
     xTaskResumeAll();
 }
@@ -100,6 +100,6 @@ Mutex& PrivateLocks::tracingOutput( void )
     return tracingOutputMutex_;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

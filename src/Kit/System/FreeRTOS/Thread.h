@@ -13,6 +13,7 @@
 
 #include "kit_config.h"
 #include "Kit/System/Thread.h"
+#include "Kit/System/IRunnable.h"
 #include "Kit/Text/FString.h"
 #include "task.h"
 
@@ -21,6 +22,14 @@
  */
 #ifndef OPTION_KIT_SYSTEM_FREERTOS_DEFAULT_STACK_SIZE
 #define OPTION_KIT_SYSTEM_FREERTOS_DEFAULT_STACK_SIZE ( 1024 * 3 )
+#endif
+
+/** The time (in milliseconds) to wait when the Thread instance is being destroyed
+    and the associated IRunnable object is still running - BEFORE forcibly terminating
+    the thread.
+ */
+#ifndef KIT_SYSTEM_THREAD_FREERTOS_DESTROY_WAIT_MS
+#define KIT_SYSTEM_THREAD_FREERTOS_DESTROY_WAIT_MS 100
 #endif
 
 
@@ -34,9 +43,6 @@ namespace FreeRTOS {
 class Thread : public Kit::System::Thread
 {
 protected:
-    /// Reference to the runnable object for the thread
-    Kit::System::IRunnable& m_runnable;
-
     /// ASCII name of the task
     Kit::Text::FString<configMAX_TASK_NAME_LEN> m_name;
 
@@ -55,7 +61,7 @@ public:
             unsigned    stackSize = 0 ) noexcept;
 
     /// Destructor
-    ~Thread();
+    ~Thread() noexcept;
 
 public:
     /// See Kit::System::Thread
@@ -101,15 +107,15 @@ public:
 
     ** ONLY USE THIS CLASS IF YOU KNOW WHAT YOU ARE DOING **
  */
-class MakeCurrentThreadACplThread : public Kit::System::IRunnable
+class MakeCurrentThreadAKitThread : public Kit::System::IRunnable
 {
 protected:
     // Empty run function
     void entry() noexcept override {}
 
 public:
-    /// Converts the native thread to a CPL thread
-    MakeCurrentThreadACplThread( const char* threadName = "main" ) noexcept
+    /// Converts the native thread to a Kit thread
+    MakeCurrentThreadAKitThread( const char* threadName = "main" ) noexcept
     {
         // Create a thread object for the native thread
         m_parentThreadPtr_ = new Kit::System::FreeRTOS::Thread( threadName, *this );

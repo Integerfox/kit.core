@@ -79,7 +79,6 @@ public:
     /// See Kit::System::ISignable
     int su_signal() noexcept override;
 
-
 protected:
     /// Entry point for all newly created threads
     static void* entryPoint( void* data );

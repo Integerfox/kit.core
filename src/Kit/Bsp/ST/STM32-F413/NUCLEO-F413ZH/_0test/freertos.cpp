@@ -21,10 +21,10 @@ public:
     Thread1() {};
 
 protected:
-    void appRun()
+    void entry() noexcept override
     {
         Kit::System::Thread& t1 = Kit::System::Thread::getCurrent();
-        printf( "Thread Running: %s, %x, %p\n", t1.getName(), t1.getId(), t1.getNativeHandle() );
+        printf( "Thread Running: %s, %p\n", t1.getName(), t1.getId() );
  
         uint32_t timeMark1 = Kit::System::ElapsedTime::milliseconds();
         uint32_t timeMark2 = timeMark1;
@@ -62,10 +62,10 @@ int main( void )
     printf( "\n**** BSP TEST APPLICATION STARTED ****\n\n" );
 
     //// Initialize CPL
-    Kit::System::Api::initialize();
+    Kit::System::initialize();
 
     //// Create my test thread
-    Kit::System::Thread* t1 = Kit::System::FreeRTOS::Thread::create( runnable_, "TEST", CPL_SYSTEM_THREAD_PRIORITY_NORMAL );
+    Kit::System::Thread* t1 = Kit::System::FreeRTOS::Thread::create( runnable_, "TEST", KIT_SYSTEM_THREAD_PRIORITY_NORMAL );
     if ( t1 == nullptr )
     {
         printf( "Failed to created thread!!\n" );

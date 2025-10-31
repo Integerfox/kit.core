@@ -22,7 +22,6 @@
 #include "Kit/System/FatalError.h"
 #include "Kit/System/Shutdown.h"
 #include "Kit/System/Trace.h"
-#include "Kit/Text/btoa.h"
 #include "Kit/Text/FString.h"
 #include "FreeRTOS.h"
 #include "task.h"
@@ -32,12 +31,35 @@ using namespace Kit::System;
 #define EXTRA_INFO      "\n@@ Fatal Error: "
 #define SIZET_SIZE      ((sizeof(size_t) / 4 ) * 10 + 1)
 
-#ifndef CPL_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE
-#define CPL_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE     128
+#ifndef KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE
+#define KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE     128
 #endif
 
-static Kit::Text::FString<CPL_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE> buffer_;
+void FatalError::log( int exitCode, const char* message )
+{
+}
 
+void FatalError::log( int exitCode, const char* message, size_t value )
+{
+}
+
+
+void FatalError::logf( int exitCode, const char* format, ... )
+{
+}
+
+
+void FatalError::logRaw( int exitCode, const char* message )
+{
+}
+
+void FatalError::logRaw( int exitCode, const char* message, size_t value )
+{
+}
+
+
+#if 0
+static Kit::Text::FString<KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE> buffer_;
 
 ////////////////////////////////////////////////////////////////////////////////
 void FatalError::log( const char* message )
@@ -54,7 +76,7 @@ void FatalError::log( const char* message )
         Kit::System::Api::sleep( 250 );
     }
 
-    Shutdown::failure( OPTION_CPL_SYSTEM_FATAL_ERROR_EXIT_CODE );
+    Shutdown::failure( OPTION_KIT_SYSTEM_FATAL_ERROR_EXIT_CODE );
 }
 
 void FatalError::log( const char* message, size_t value )
@@ -74,7 +96,7 @@ void FatalError::log( const char* message, size_t value )
         Kit::System::Api::sleep( 150 );
     }
 
-    Shutdown::failure( OPTION_CPL_SYSTEM_FATAL_ERROR_EXIT_CODE );
+    Shutdown::failure( OPTION_KIT_SYSTEM_FATAL_ERROR_EXIT_CODE );
 }
 
 
@@ -90,7 +112,7 @@ void FatalError::logf( const char* format, ... )
         Kit::System::Trace::getDefaultOutputStream_()->write( buffer_ );
     }
 
-    Shutdown::failure( OPTION_CPL_SYSTEM_FATAL_ERROR_EXIT_CODE );
+    Shutdown::failure( OPTION_KIT_SYSTEM_FATAL_ERROR_EXIT_CODE );
 }
 
 
@@ -107,3 +129,4 @@ void FatalError::logRaw( const char* message, size_t value )
 
 
 
+#endif
