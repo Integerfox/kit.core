@@ -125,11 +125,6 @@ TEST_CASE( "watchdog" )
         REQUIRE( enabled == true );
         REQUIRE( watchdogEnabled_ == true );
 
-        REQUIRE( kickCount_ == 0 );
-        Supervisor::kickWdog();
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor kicked hardware watchdog" );
-        REQUIRE( kickCount_ == 1 );
-
         unsigned long tripCountBefore = tripCount_;
         Supervisor::tripWdog();
         KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor tripped hardware watchdog via API" );
@@ -158,11 +153,20 @@ TEST_CASE( "watchdog" )
         WatchedThread thread1( TEST_TIMEOUT_MEDIUM_MS );
         WatchedThread thread2( TEST_TIMEOUT_LONG_MS );
 
+        // Verify not in list initially
+        REQUIRE( thread1.m_inListPtr_ == nullptr );
+        REQUIRE( thread2.m_inListPtr_ == nullptr );
+
+        // Begin watching and verify they are added to supervisor's list
+        thread1.m_currentCountMs = thread1.m_wdogTimeoutMs - 1;
+        thread2.m_currentCountMs = thread2.m_wdogTimeoutMs - 1;
         Supervisor::beginWatching( thread1 );
         Supervisor::beginWatching( thread2 );
 
         REQUIRE( thread1.m_currentCountMs == thread1.m_wdogTimeoutMs );
         REQUIRE( thread2.m_currentCountMs == thread2.m_wdogTimeoutMs );
+        REQUIRE( thread1.m_inListPtr_ != nullptr );
+        REQUIRE( thread2.m_inListPtr_ != nullptr );
 
         thread1.m_currentCountMs = TEST_TIMEOUT_SHORT_MS;
         Supervisor::reloadThread( thread1 );
@@ -175,8 +179,11 @@ TEST_CASE( "watchdog" )
         }
         REQUIRE( kickCount_ > kickCountBefore );
 
+        // End watching and verify they are removed from supervisor's list
         Supervisor::endWatching( thread1 );
         Supervisor::endWatching( thread2 );
+        REQUIRE( thread1.m_inListPtr_ == nullptr );
+        REQUIRE( thread2.m_inListPtr_ == nullptr );
 
         unsigned long kickCountAfterRemoval = kickCount_;
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
@@ -193,7 +200,15 @@ TEST_CASE( "watchdog" )
         Supervisor::enableWdog();
 
         WatchedThread thread( TEST_TIMEOUT_SHORT_MS );
+
+        // Verify not in list initially
+        REQUIRE( thread.m_inListPtr_ == nullptr );
+
+        // Begin watching and verify it's added to supervisor's list
+        thread.m_currentCountMs = thread.m_wdogTimeoutMs - 1;
         Supervisor::beginWatching( thread );
+        REQUIRE( thread.m_inListPtr_ != nullptr );
+        REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );
 
         thread.m_currentCountMs = 1;
 
@@ -214,7 +229,9 @@ TEST_CASE( "watchdog" )
 
         REQUIRE( tripCount_ > tripCountBefore );
 
+        // End watching and verify it's removed from supervisor's list
         Supervisor::endWatching( thread );
+        REQUIRE( thread.m_inListPtr_ == nullptr );
     }
 
     SECTION( "watched event thread construction" )
@@ -357,7 +374,15 @@ TEST_CASE( "watchdog" )
         Supervisor::enableWdog();
 
         WatchedThread thread( TEST_TIMEOUT_MEDIUM_MS );
+
+        // Verify not in list initially
+        REQUIRE( thread.m_inListPtr_ == nullptr );
+
+        // Begin watching and verify it's added to supervisor's list
+        thread.m_currentCountMs = thread.m_wdogTimeoutMs - 1;
         Supervisor::beginWatching( thread );
+        REQUIRE( thread.m_inListPtr_ != nullptr );
+        REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );
 
         for ( int i = 0; i < 3; i++ )
         {
@@ -388,7 +413,9 @@ TEST_CASE( "watchdog" )
         REQUIRE( kickCount_ > kicksAfterLoop1 );
         REQUIRE( thread.m_currentCountMs > 0 );
 
+        // End watching and verify it's removed from supervisor's list
         Supervisor::endWatching( thread );
+        REQUIRE( thread.m_inListPtr_ == nullptr );
     }
 
     SECTION( "multiple threads with different timeouts" )
@@ -405,6 +432,15 @@ TEST_CASE( "watchdog" )
         REQUIRE( mediumThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( longThread.m_wdogTimeoutMs == TEST_TIMEOUT_LONG_MS );
 
+        // Verify not in list initially
+        REQUIRE( shortThread.m_inListPtr_ == nullptr );
+        REQUIRE( mediumThread.m_inListPtr_ == nullptr );
+        REQUIRE( longThread.m_inListPtr_ == nullptr );
+
+        // Begin watching and verify they are added to supervisor's list
+        shortThread.m_currentCountMs = shortThread.m_wdogTimeoutMs - 1;
+        mediumThread.m_currentCountMs = mediumThread.m_wdogTimeoutMs - 1;
+        longThread.m_currentCountMs = longThread.m_wdogTimeoutMs - 1;
         Supervisor::beginWatching( shortThread );
         Supervisor::beginWatching( mediumThread );
         Supervisor::beginWatching( longThread );
@@ -412,6 +448,9 @@ TEST_CASE( "watchdog" )
         REQUIRE( shortThread.m_currentCountMs == shortThread.m_wdogTimeoutMs );
         REQUIRE( mediumThread.m_currentCountMs == mediumThread.m_wdogTimeoutMs );
         REQUIRE( longThread.m_currentCountMs == longThread.m_wdogTimeoutMs );
+        REQUIRE( shortThread.m_inListPtr_ != nullptr );
+        REQUIRE( mediumThread.m_inListPtr_ != nullptr );
+        REQUIRE( longThread.m_inListPtr_ != nullptr );
 
         mediumThread.m_currentCountMs = TEST_TIMEOUT_SHORT_MS;
         REQUIRE( mediumThread.m_currentCountMs != mediumThread.m_wdogTimeoutMs );
@@ -453,9 +492,13 @@ TEST_CASE( "watchdog" )
 
         REQUIRE( kickCount_ > kickCountBefore );
 
+        // End watching and verify they are removed from supervisor's list
         Supervisor::endWatching( shortThread );
         Supervisor::endWatching( mediumThread );
         Supervisor::endWatching( longThread );
+        REQUIRE( shortThread.m_inListPtr_ == nullptr );
+        REQUIRE( mediumThread.m_inListPtr_ == nullptr );
+        REQUIRE( longThread.m_inListPtr_ == nullptr );
     }
 
     SECTION( "watchedeventthread supervisor mode" )
@@ -511,8 +554,10 @@ TEST_CASE( "watchdog" )
 
         WatchedThread orphanThread( TEST_TIMEOUT_MEDIUM_MS );
         uint32_t originalCount = orphanThread.m_currentCountMs;
+        REQUIRE( orphanThread.m_inListPtr_ == nullptr );  // Not in supervisor's list
         Supervisor::reloadThread( orphanThread );
         REQUIRE( orphanThread.m_currentCountMs == originalCount );
+        REQUIRE( orphanThread.m_inListPtr_ == nullptr );  // Still not in supervisor's list
 
         unsigned long kickCountBefore = kickCount_;
         Supervisor::monitorThreads();
@@ -520,18 +565,29 @@ TEST_CASE( "watchdog" )
 
         WatchedThread thread( TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( thread.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( thread.m_inListPtr_ == nullptr );
 
+        // Begin watching and verify it's added to supervisor's list
+        thread.m_currentCountMs = thread.m_wdogTimeoutMs - 1;
         Supervisor::beginWatching( thread );
         REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );
+        REQUIRE( thread.m_inListPtr_ != nullptr );
 
+        // End watching and verify it's removed from supervisor's list
         Supervisor::endWatching( thread );
         REQUIRE( thread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( thread.m_inListPtr_ == nullptr );
 
+        // Begin watching again and verify it's added back to supervisor's list
+        thread.m_currentCountMs = thread.m_wdogTimeoutMs - 1;
         Supervisor::beginWatching( thread );
         REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );
+        REQUIRE( thread.m_inListPtr_ != nullptr );
 
+        // End watching and verify it's removed from supervisor's list
         Supervisor::endWatching( thread );
         REQUIRE( thread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( thread.m_inListPtr_ == nullptr );
 
         unsigned long tripCountBefore = tripCount_;
         
@@ -560,18 +616,27 @@ TEST_CASE( "watchdog" )
         REQUIRE( rawThread2.m_wdogTimeoutMs == TEST_TIMEOUT_SHORT_MS );
         REQUIRE( rawThread2.m_currentCountMs == TEST_TIMEOUT_SHORT_MS );
 
-        rawThread1.startWatching();
-        REQUIRE( rawThread1.m_currentCountMs == rawThread1.m_wdogTimeoutMs );
+        // Test macro usage scenario with proper verification
+        REQUIRE( rawThread1.m_inListPtr_ == nullptr );  // Not in a list
+        rawThread1.m_currentCountMs = rawThread1.m_wdogTimeoutMs - 1;  // Some other value than the reload timeout
+        KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( rawThread1 );
+        REQUIRE( rawThread1.m_currentCountMs == rawThread1.m_wdogTimeoutMs );  // Now is the Reload timeout
+        REQUIRE( rawThread1.m_inListPtr_ != nullptr );  // In a list
 
-        rawThread2.startWatching();
+        REQUIRE( rawThread2.m_inListPtr_ == nullptr );
+        rawThread2.m_currentCountMs = rawThread2.m_wdogTimeoutMs - 1;
+        KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( rawThread2 );
         REQUIRE( rawThread2.m_currentCountMs == rawThread2.m_wdogTimeoutMs );
+        REQUIRE( rawThread2.m_inListPtr_ != nullptr );
 
-        rawThread1.m_currentCountMs = TEST_TIMEOUT_SHORT_MS;
-        rawThread1.kickWatchdog();
+        rawThread1.m_currentCountMs = rawThread1.m_wdogTimeoutMs - 1;
+        KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( rawThread1 );
         REQUIRE( rawThread1.m_currentCountMs == rawThread1.m_wdogTimeoutMs );
 
-        rawThread1.stopWatching();
-        rawThread2.stopWatching();
+        KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( rawThread1 );
+        REQUIRE( rawThread1.m_inListPtr_ == nullptr );
+        KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( rawThread2 );
+        REQUIRE( rawThread2.m_inListPtr_ == nullptr );
 
         unsigned long kickCountBefore = kickCount_;
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
@@ -579,24 +644,6 @@ TEST_CASE( "watchdog" )
             Supervisor::monitorThreads();
         }
         REQUIRE( kickCount_ >= kickCountBefore );
-
-        RawThread* rawThreadPtr = new RawThread( TEST_TIMEOUT_LONG_MS );
-        REQUIRE( rawThreadPtr->m_wdogTimeoutMs == TEST_TIMEOUT_LONG_MS );
-
-        KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( rawThreadPtr );
-        REQUIRE( rawThreadPtr->m_currentCountMs == rawThreadPtr->m_wdogTimeoutMs );
-
-        rawThreadPtr->m_currentCountMs = TEST_TIMEOUT_SHORT_MS;
-        KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( rawThreadPtr );
-        REQUIRE( rawThreadPtr->m_currentCountMs == rawThreadPtr->m_wdogTimeoutMs );
-
-        KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( rawThreadPtr );
-        delete rawThreadPtr;
-
-        RawThread* nullPtr = nullptr;
-        KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( nullPtr );
-        KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( nullPtr );
-        KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( nullPtr );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

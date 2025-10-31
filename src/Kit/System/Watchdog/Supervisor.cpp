@@ -73,7 +73,7 @@ void Supervisor::monitorThreads() noexcept
         }
 
         // If I get here - all monitored threads are 'healthy'
-        Supervisor::kickWdog();
+        Kit_System_Watchdog_hal_kick_wdog();
         m_timeMarker = now;
     }
 }
@@ -97,11 +97,6 @@ bool Supervisor::enableWdog() noexcept
         m_isEnabled = true;
     }
     return result;
-}
-
-void Supervisor::kickWdog() noexcept
-{
-    Kit_System_Watchdog_hal_kick_wdog();
 }
 
 void Supervisor::tripWdog() noexcept
