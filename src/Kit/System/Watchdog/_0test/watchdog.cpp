@@ -428,13 +428,6 @@ TEST_CASE( "watchdog" )
         }
 
         unsigned long kickCountBefore = kickCount_;
-        
-        for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
-        {
-            Supervisor::monitorThreads();
-            sleep( 1 );
-        }
-
         KIT_SYSTEM_TRACE_MSG( SECT_, "Retrying with extended timing for multiple threads test" );
         
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2; i++ )
