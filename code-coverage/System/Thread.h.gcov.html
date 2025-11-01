@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-22 01:36:26</td>
+            <td class="headerValue">2025-11-01 18:49:30</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -217,7 +217,7 @@
 <span id="L155"><span class="lineNum">     155</span>                 :             :     /// Returns the name for the current thread</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             :     static inline const char* myName() noexcept</span>
 <span id="L157"><span class="lineNum">     157</span>                 :             :     {</span>
-<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC tlaBgGNC">        5287 :         return getCurrent().getName();</span></span>
+<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC tlaBgGNC">        5701 :         return getCurrent().getName();</span></span>
 <span id="L159"><span class="lineNum">     159</span>                 :             :     }</span>
 <span id="L160"><span class="lineNum">     160</span>                 :             : </span>
 <span id="L161"><span class="lineNum">     161</span>                 :             :     /// Returns the ID for the current thread</span>
@@ -345,11 +345,11 @@
 <span id="L283"><span class="lineNum">     283</span>                 :             : </span>
 <span id="L284"><span class="lineNum">     284</span>                 :             : protected:</span>
 <span id="L285"><span class="lineNum">     285</span>                 :             :     /// Constructor</span>
-<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC">          54 :     Thread( IRunnable&amp; runnable ) noexcept</span></span>
-<span id="L287"><span class="lineNum">     287</span>                 :<span class="tlaGNC">          54 :         : m_runnable( runnable )</span></span>
+<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC">          57 :     Thread( IRunnable&amp; runnable ) noexcept</span></span>
+<span id="L287"><span class="lineNum">     287</span>                 :<span class="tlaGNC">          57 :         : m_runnable( runnable )</span></span>
 <span id="L288"><span class="lineNum">     288</span>                 :             :     {</span>
-<span id="L289"><span class="lineNum">     289</span>                 :<span class="tlaGNC">          54 :         memset( m_tlsArray, 0, sizeof( m_tlsArray ) );</span></span>
-<span id="L290"><span class="lineNum">     290</span>                 :<span class="tlaGNC">          54 :     }</span></span>
+<span id="L289"><span class="lineNum">     289</span>                 :<span class="tlaGNC">          57 :         memset( m_tlsArray, 0, sizeof( m_tlsArray ) );</span></span>
+<span id="L290"><span class="lineNum">     290</span>                 :<span class="tlaGNC">          57 :     }</span></span>
 <span id="L291"><span class="lineNum">     291</span>                 :             :     </span>
 <span id="L292"><span class="lineNum">     292</span>                 :             : </span>
 <span id="L293"><span class="lineNum">     293</span>                 :             :     /** Helper method that should be called from the native's entry function.</span>

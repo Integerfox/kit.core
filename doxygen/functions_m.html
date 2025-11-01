@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 158-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 178-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -59,6 +59,8 @@ $(function() {
 <li>m_counters&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#ac83f5bbcf94dd22d4bd1b91dd354f12d">Kit::System::TimerManager</a></li>
 <li>m_curDir&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_dir_walker.html#ac6bbf23edd86ac74f6a972bc11127057">Kit::Io::File::DirWalker</a></li>
 <li>m_curFsEntry&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_dir_walker.html#a2a99e48b6c87eef9f1ad6b78de87c6ef">Kit::Io::File::DirWalker</a></li>
+<li>m_currentCountMs&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html#a6b5c038accd6cda07fede6fd65a2d119">Kit::System::Watchdog::WatchedThread</a></li>
+<li>m_currentTick&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a251a81e7c9dc3f55221f70c8efdb7e92">Kit::System::Watchdog::Supervisor</a></li>
 <li>m_curTicks&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_sim_tick.html#ab5d0c1d6b1a7a5b945be10ccbef6c5f1">Kit::System::SimTick</a></li>
 <li>m_elements&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_ring_buffer_base.html#abbeba728c6d3a3a48aec9713729d94dc">Kit::Container::RingBufferBase</a>, <a class="el" href="class_kit_1_1_container_1_1_stack.html#a6b049df02375c5b1c1aa39d638747f28">Kit::Container::Stack&lt; ITEM &gt;</a></li>
 <li>m_endThreadFunc&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_periodic_scheduler.html#a625d0099600c80d58edead49d0246a7c">Kit::System::PeriodicScheduler</a></li>
@@ -75,6 +77,7 @@ $(function() {
 <li>m_firstExecution&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_periodic_scheduler.html#afe659d2aeac8013bbc308434ac07d892">Kit::System::PeriodicScheduler</a></li>
 <li>m_funcname&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a1474072b9aa60eccb4f986004b48bc1b">Kit::System::Trace</a></li>
 <li>m_headPtr&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_d_list_base.html#aebaae3cd880c456b1363be7956b18dc0">Kit::Container::DListBase</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list_base.html#ae9e63891fa3794ea1392c72567a438dc">Kit::Container::SListBase</a></li>
+<li>m_healthCheckIntervalMs&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_event_thread.html#abebc9c12a4971ccf16e784559d0f4ed1">Kit::System::Watchdog::WatchedEventThread</a></li>
 <li>m_idleFunc&#160;:&#160;<a class="el" href="class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html#ad260882f4174e3cf60dddeaae38da8c3">Kit::EventQueue::WithPeriodicScheduling</a>, <a class="el" href="class_kit_1_1_system_1_1_event_loop_with_p_scheduling.html#a0a6e87a0cd7db59df0cc767ef1ef6531">Kit::System::EventLoopWithPScheduling</a></li>
 <li>m_inEos&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_input.html#a11e9c0678fb276bca4031c5a53b5165c">Kit::Io::File::Input</a>, <a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_input_delegate.html#a5fa2d2d6bf74805516648a6772422129">Kit::Io::Stdio::InputDelegate</a></li>
 <li>m_inFd&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_input.html#acd237a2bd60a2d4477878cb9fd3a28c9">Kit::Io::File::Input</a>, <a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_input_delegate.html#a348cc65672102dce238fc6452b2f6576">Kit::Io::Stdio::InputDelegate</a></li>
@@ -84,8 +87,11 @@ $(function() {
 <li>m_intervals&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_periodic_scheduler.html#a0a9c4db4563092c9ca7d93bc6483e8de">Kit::System::PeriodicScheduler</a></li>
 <li>m_inTickCall&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#a9762d923fb3ef9f0d22ed37f3aa1734c">Kit::System::TimerManager</a></li>
 <li>m_is_NOT_root_&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_map_item.html#a229c5436ba2d5c074f27b9d434f47155">Kit::Container::MapItem</a></li>
+<li>m_isActive&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_event_thread.html#a54472e11b29a3eca7bee98a0ca57e966">Kit::System::Watchdog::WatchedEventThread</a></li>
 <li>m_isDir&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html#a7210f72cdd9a9969e581ecf7c36d2d46">Kit::Io::File::System::Info_T</a></li>
+<li>m_isEnabled&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a25bab08fe3c16f924d8054feec92a77a">Kit::System::Watchdog::Supervisor</a></li>
 <li>m_isFile&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html#a9a5b608ca645c20a5b423ccaa61530d1">Kit::Io::File::System::Info_T</a></li>
+<li>m_isSupervisor&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_event_thread.html#a6e5b350fb5c68b67c2ed8e9ca1416d02">Kit::System::Watchdog::WatchedEventThread</a></li>
 <li>m_keyData&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html#ad0c60961bdcb8e42f9d0dd7a1498c704">Kit::Container::KeyPlainType&lt; DATATYPE &gt;</a></li>
 <li>m_keyIdx&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_tls.html#a28c93edb52a9a96d63ceed497cdd9d8d">Kit::System::Tls</a></li>
 <li>m_len&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_key_string_buffer.html#a08aaf56d040f1b5910ba6d4ba4928e1d">Kit::Container::KeyStringBuffer</a></li>
@@ -94,7 +100,7 @@ $(function() {
 <li>m_lock&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_socket_1_1_listener_runnable.html#a61ce506f1936b3d935384686b552ae5b">Kit::Io::Socket::ListenerRunnable</a></li>
 <li>m_maxItems&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_stack.html#a3c754113780b549b06e718bdccd0b555">Kit::Container::Stack&lt; ITEM &gt;</a></li>
 <li>m_mtime&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html#a6301db927c17633f78e552d528039c20">Kit::Io::File::System::Info_T</a></li>
-<li>m_mutex&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_mutex.html#a6d2107792c6d57e825a04cf9fd2a0959">Kit::System::Mutex</a></li>
+<li>m_mutex&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_mutex.html#a6d2107792c6d57e825a04cf9fd2a0959">Kit::System::Mutex</a>, <a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a6708f333628cfb3548b84579af667239">Kit::System::Watchdog::Supervisor</a></li>
 <li>m_myString&#160;:&#160;<a class="el" href="class_kit_1_1_text_1_1_string_item.html#ac90108bded150698fff19f6c080c7502">Kit::Text::StringItem</a></li>
 <li>m_name&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">Kit::System::Posix::Thread</a>, <a class="el" href="class_kit_1_1_system_1_1_win32_1_1_thread.html#afda490e265b4d357617acba1caeff0d6">Kit::System::Win32::Thread</a></li>
 <li>m_nativeThreadHdl&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_thread.html#a307be9f73d12090b8eef0b21ef3a4eae">Kit::System::Thread</a></li>
@@ -141,13 +147,18 @@ $(function() {
 <li>m_tailPtr&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_d_list_base.html#a5197319b8cff0f1ea5daa64d535d189c">Kit::Container::DListBase</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list_base.html#ab028834dd549c97791ac26f5ed1317b2">Kit::Container::SListBase</a></li>
 <li>m_threadId&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_sim_tick.html#a11323e233f3df2173cec916e34b1aab8">Kit::System::SimTick</a></li>
 <li>m_timeMark&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#ab4315f3a00ff7b5327b92e2c2701f601">Kit::System::TimerManager</a></li>
+<li>m_timeMarker&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a2db04906935285bb7db59c0415f72bb2">Kit::System::Watchdog::Supervisor</a></li>
 <li>m_timeNow&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#ae455fb9cacbacf10fd5208097fca7fc0">Kit::System::TimerManager</a></li>
 <li>m_timeout&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_event_loop.html#aeaf7cc35e2de6eb6248d4a8074d1ae12">Kit::System::EventLoop</a></li>
+<li>m_timer&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_event_thread.html#afa89ea869c0341249c389e0b227c9cf7">Kit::System::Watchdog::WatchedEventThread</a></li>
 <li>m_timeStartOfLoop&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ae9516369e84c3728ce3fda2adf561d4c">Kit::System::EventLoop</a></li>
 <li>m_timingSource&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_timer.html#aa98066ecdf8c907f53c5c0b05cdfabe0">Kit::System::Timer</a></li>
 <li>m_tlsArray&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_thread.html#aa8100053b1eaa38682067841797603e6">Kit::System::Thread</a></li>
 <li>m_truncated&#160;:&#160;<a class="el" href="class_kit_1_1_text_1_1_string_base.html#ac90dd13a00677d55540708e860b77404">Kit::Text::StringBase</a></li>
 <li>m_waiter&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">Kit::Itc::SyncReturnHandler</a>, <a class="el" href="class_kit_1_1_system_1_1_sim_tick.html#a0901f537ae7cb9b3aecf010bb41f6be5">Kit::System::SimTick</a></li>
+<li>m_watchdog&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a552a21d882de0f73a221fb59b595ad4a">Kit::System::EventLoop</a></li>
+<li>m_watchedThreads&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a0921cfea16e600ae45d1e6b4935210ba">Kit::System::Watchdog::Supervisor</a></li>
+<li>m_wdogTimeoutMs&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html#aa439543ba84d8b87742f24310b7eaf92">Kit::System::Watchdog::WatchedThread</a></li>
 <li>m_writeable&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html#a3890e12b42af30bf96356e172fa7132e">Kit::Io::File::System::Info_T</a></li>
 <li>m_writeIdx&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_ring_buffer_base.html#aa1eafc28324bee46be7256f60e68952a">Kit::Container::RingBufferBase</a></li>
 <li>m_wrkEntryName&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_dir_walker.html#a91a86a66c0c2ead1fcd52f90e0baf5e8">Kit::Io::File::DirWalker</a></li>
@@ -161,6 +172,8 @@ $(function() {
 <li>millisecondsEx()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html#aa2b2b17065d3735b539458927f5dd6ac">Kit::System::ElapsedTime</a></li>
 <li>millisecondsInRealTime()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html#adce63e6f14bf83a2d51229272fbf84ad">Kit::System::ElapsedTime</a></li>
 <li>millisecondsInRealTimeEx()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html#a5a64feaca7fe47884c52ca768d8a6b76">Kit::System::ElapsedTime</a></li>
+<li>monitorThreads()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a41e4a492e449d7e15f187abc4ea4479a">Kit::System::Watchdog::Supervisor</a></li>
+<li>monitorWdog()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_i_watched_event_loop.html#a9f2da6dbac85a1e0e526ae39169ef651">Kit::System::IWatchedEventLoop</a>, <a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_event_thread.html#af9b1b65d1c7b576d40f5adcb72cee0d2">Kit::System::Watchdog::WatchedEventThread</a></li>
 <li>move()&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_d_list.html#a0778772eb0d38f87aa8bab90794d9d02">Kit::Container::DList&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_d_list_base.html#a768d6efd57145cbe00fb2c0928451343">Kit::Container::DListBase</a>, <a class="el" href="class_kit_1_1_container_1_1_map.html#a5f2af8c48e9076e01a004302eb7d841a">Kit::Container::Map&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list.html#abc40b1397c6225d11dca870005a31d20">Kit::Container::SList&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list_base.html#ae185292c1f9c8ea5b6d36bdde5ccf72e">Kit::Container::SListBase</a>, <a class="el" href="class_kit_1_1_io_1_1_file_1_1_posix_1_1_fdio.html#ac919e62e723860fe398cfad0ab31df8c">Kit::Io::File::Posix::Fdio</a>, <a class="el" href="class_kit_1_1_io_1_1_file_1_1_win32_1_1_fdio.html#ae4fe96dcfc83f7732d35d15619e03bbd">Kit::Io::File::Win32::Fdio</a></li>
 <li>moveFile()&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html#ab6c2c4b8e8a813ab4803fbf4d6d213c9">Kit::Io::File::System</a></li>
 <li>msecToCounts()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#a03fc852e510dc1e19e8b9067d14b22b3">Kit::System::TimerManager</a></li>
@@ -172,7 +185,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 22 2025 01:34:07 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Nov 1 2025 18:47:07 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
