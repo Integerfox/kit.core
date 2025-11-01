@@ -6,7 +6,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file Project/build specific 'Mappings'
+/** @file Project/build specific 'Mappings'  
 
           Note: Intentionally there is NO Header latch (see LHeader Pattern)
                 for why.
@@ -19,4 +19,4 @@
 #include "Kit/System/Win32/mappings.h"
 
 // strapi mapping
-#include "Kit/Text/_mappings/_mingw/strapi.h"
+#include "Kit/Text/_mappings/_clang-msvc/strapi.h"
