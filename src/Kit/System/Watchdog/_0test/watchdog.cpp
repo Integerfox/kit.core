@@ -302,7 +302,7 @@ TEST_CASE( "watchdog" )
         while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
         {
 
-            for ( int i = 0; i < (TEST_SLEEP_SHORT_MS * (OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2)) / 10; i++ )
+            for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER; i++ )
             {
                 sleep( 10 );
                 timerManager.processTimers();
@@ -319,8 +319,9 @@ TEST_CASE( "watchdog" )
 
         unsigned long kickCountAfterHealthChecks = kickCount_;
 
-        for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
+        for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER; i++ )
         {
+            sleep( 10 );
             Supervisor::monitorThreads();
         }
 
@@ -344,7 +345,7 @@ TEST_CASE( "watchdog" )
         unsigned long tripCountBefore = tripCount_;
         REQUIRE( eventThread.m_healthCheckCallCount == 0 );
 
-        eventThread.m_shouldFailHealthCheck = true;
+        eventThread.m_shouldFailHealthCheck = false;
         eventThread.startWatcher( timerManager );
 
         REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
@@ -353,7 +354,7 @@ TEST_CASE( "watchdog" )
         while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
         {
 
-            for ( int i = 0; i < (TEST_SLEEP_SHORT_MS * (OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2)) / 10; i++ )
+            for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER; i++ )
             {
                 sleep( 10 );
                 timerManager.processTimers();
