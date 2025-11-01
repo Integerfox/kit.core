@@ -10,8 +10,10 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
+#define USE_KIT_SYSTEM_WATCHDOG
+#define OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER 1
+
 #define USE_KIT_SYSTEM_TRACE
 #define USE_KIT_SYSTEM_ASSERT_MACRO
-#define USE_KIT_SYSTEM_WATCHDOG
 #define KitTextToStringMaxUnsigned_T uint64_t
 #endif

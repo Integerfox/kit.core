@@ -22,7 +22,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define SECT_                  "_0test"
+#define SECT_ "_0test"
 
 //------------------------------------------------------------------------------
 // HAL Stub Implementation for Testing
@@ -99,8 +99,7 @@ protected:
     bool performHealthCheck() noexcept override
     {
         m_healthCheckCallCount++;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Health check called %d times, should fail: %s",
-                             m_healthCheckCallCount, m_shouldFailHealthCheck ? "true" : "false" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Health check called %d times, should fail: %s", m_healthCheckCallCount, m_shouldFailHealthCheck ? "true" : "false" );
         return !m_shouldFailHealthCheck;
     }
 };
@@ -118,8 +117,8 @@ TEST_CASE( "watchdog" )
         KIT_SYSTEM_TRACE_MSG( SECT_, "Testing Supervisor class basic operations" );
 
         watchdogEnabled_ = false;
-        kickCount_ = 0;
-        tripCount_ = 0;
+        kickCount_       = 0;
+        tripCount_       = 0;
 
         bool enabled = Supervisor::enableWdog();
         REQUIRE( enabled == true );
@@ -224,7 +223,8 @@ TEST_CASE( "watchdog" )
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             Supervisor::monitorThreads();
-            if ( tripCount_ > tripCountBefore ) break;
+            if ( tripCount_ > tripCountBefore )
+                break;
         }
 
         REQUIRE( tripCount_ > tripCountBefore );
@@ -297,14 +297,13 @@ TEST_CASE( "watchdog" )
         uint32_t startTime = ElapsedTime::milliseconds();
         while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
         {
-            timerManager.processTimers();
 
             for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
             {
+                sleep( 10 );
+                timerManager.processTimers();
                 Supervisor::monitorThreads();
             }
-
-            sleep( 10 );
         }
 
         REQUIRE( eventThread.m_healthCheckCallCount > 0 );
@@ -356,7 +355,7 @@ TEST_CASE( "watchdog" )
                 Supervisor::monitorThreads();
             }
 
-            sleep( 15 );
+            sleep( 10 );
         }
 
         REQUIRE( eventThread.m_healthCheckCallCount > 0 );
@@ -400,7 +399,7 @@ TEST_CASE( "watchdog" )
         REQUIRE( kickCount_ > initialKickCount );
         unsigned long kicksAfterLoop1 = kickCount_;
 
-        uint32_t originalCount = thread.m_currentCountMs;
+        uint32_t originalCount  = thread.m_currentCountMs;
         thread.m_currentCountMs = TEST_TIMEOUT_MEDIUM_MS / 2;
         REQUIRE( thread.m_currentCountMs < originalCount );
 
@@ -438,9 +437,9 @@ TEST_CASE( "watchdog" )
         REQUIRE( longThread.m_inListPtr_ == nullptr );
 
         // Begin watching and verify they are added to supervisor's list
-        shortThread.m_currentCountMs = shortThread.m_wdogTimeoutMs - 1;
+        shortThread.m_currentCountMs  = shortThread.m_wdogTimeoutMs - 1;
         mediumThread.m_currentCountMs = mediumThread.m_wdogTimeoutMs - 1;
-        longThread.m_currentCountMs = longThread.m_wdogTimeoutMs - 1;
+        longThread.m_currentCountMs   = longThread.m_wdogTimeoutMs - 1;
         Supervisor::beginWatching( shortThread );
         Supervisor::beginWatching( mediumThread );
         Supervisor::beginWatching( longThread );
@@ -463,17 +462,17 @@ TEST_CASE( "watchdog" )
 
         unsigned long kickCountBefore = kickCount_;
         KIT_SYSTEM_TRACE_MSG( SECT_, "Retrying with extended timing for multiple threads test" );
-        
+
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2; i++ )
         {
+            sleep( 10 );
             Supervisor::monitorThreads();
         }
-        sleep( 10 );
 
-        REQUIRE( shortThread.m_currentCountMs <= (TEST_TIMEOUT_SHORT_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER) );
-        REQUIRE( mediumThread.m_currentCountMs <= (TEST_TIMEOUT_MEDIUM_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER) );
-        REQUIRE( longThread.m_currentCountMs <= (TEST_TIMEOUT_LONG_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER) );
-        
+        REQUIRE( shortThread.m_currentCountMs <= ( TEST_TIMEOUT_SHORT_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER ) );
+        REQUIRE( mediumThread.m_currentCountMs <= ( TEST_TIMEOUT_MEDIUM_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER ) );
+        REQUIRE( longThread.m_currentCountMs <= ( TEST_TIMEOUT_LONG_MS - OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER ) );
+
         REQUIRE( shortThread.m_currentCountMs > 0 );
         REQUIRE( mediumThread.m_currentCountMs > 0 );
         REQUIRE( longThread.m_currentCountMs > 0 );
@@ -509,12 +508,12 @@ TEST_CASE( "watchdog" )
 
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
+            sleep( 10 );
             supervisorThread.monitorWdog();
         }
 
         REQUIRE( kickCount_ > kickCountBefore );
 
-        sleep( 10 );
 
         kickCountBefore = kickCount_;
 
@@ -541,7 +540,7 @@ TEST_CASE( "watchdog" )
         REQUIRE( zeroThread.m_currentCountMs == 0 );
 
         WatchedThread orphanThread( TEST_TIMEOUT_MEDIUM_MS );
-        uint32_t originalCount = orphanThread.m_currentCountMs;
+        uint32_t      originalCount = orphanThread.m_currentCountMs;
         REQUIRE( orphanThread.m_inListPtr_ == nullptr );  // Not in supervisor's list
         Supervisor::reloadThread( orphanThread );
         REQUIRE( orphanThread.m_currentCountMs == originalCount );
@@ -578,14 +577,14 @@ TEST_CASE( "watchdog" )
         REQUIRE( thread.m_inListPtr_ == nullptr );
 
         unsigned long tripCountBefore = tripCount_;
-        
+
         Supervisor::tripWdog();
         REQUIRE( tripCount_ == tripCountBefore + 1 );
-        
+
         tripCountBefore = tripCount_;
         Supervisor::tripWdog();
         REQUIRE( tripCount_ == tripCountBefore + 1 );
-        
+
         Supervisor::tripWdog();
         REQUIRE( tripCount_ == tripCountBefore + 2 );
     }
@@ -605,11 +604,11 @@ TEST_CASE( "watchdog" )
         REQUIRE( rawThread2.m_currentCountMs == TEST_TIMEOUT_SHORT_MS );
 
         // Test macro usage scenario with proper verification
-        REQUIRE( rawThread1.m_inListPtr_ == nullptr );  // Not in a list
+        REQUIRE( rawThread1.m_inListPtr_ == nullptr );                 // Not in a list
         rawThread1.m_currentCountMs = rawThread1.m_wdogTimeoutMs - 1;  // Some other value than the reload timeout
         KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( rawThread1 );
         REQUIRE( rawThread1.m_currentCountMs == rawThread1.m_wdogTimeoutMs );  // Now is the Reload timeout
-        REQUIRE( rawThread1.m_inListPtr_ != nullptr );  // In a list
+        REQUIRE( rawThread1.m_inListPtr_ != nullptr );                         // In a list
 
         REQUIRE( rawThread2.m_inListPtr_ == nullptr );
         rawThread2.m_currentCountMs = rawThread2.m_wdogTimeoutMs - 1;
@@ -629,6 +628,7 @@ TEST_CASE( "watchdog" )
         unsigned long kickCountBefore = kickCount_;
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
+            sleep(10);
             Supervisor::monitorThreads();
         }
         REQUIRE( kickCount_ >= kickCountBefore );
