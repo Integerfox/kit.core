@@ -10,10 +10,11 @@
 
 #include "WatchedEventThread.h"
 #include "Supervisor.h"
-#include "Hal.h"
-#include "Kit/System/ElapsedTime.h"
 #include "Kit/System/TimerManager.h"
 #include "Kit/System/Assert.h"
+#include "Kit/System/Trace.h"
+
+#define SECT_ "Kit::System::Watchdog::WatchedEventThread"
 
 using namespace Kit::System::Watchdog;
 
@@ -84,10 +85,13 @@ bool WatchedEventThread::performHealthCheck() noexcept
 
 void WatchedEventThread::healthTimerExpired() noexcept
 {
+    KIT_SYSTEM_TRACE_MSG( SECT_, "***** Health timer expired" );
+
     // Perform the health check
     if ( !performHealthCheck() )
     {
         // Health check failed - trip the watchdog immediately
+        KIT_SYSTEM_TRACE_MSG( SECT_, "***** Health check failed - tripping watchdog" );
         Supervisor::tripWdog();
         return;
     }
