@@ -18,7 +18,8 @@
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/Api.h"
-#include "Kit/System/TimerManager.h"
+#include "Kit/System/EventLoop.h"
+#include "Kit/System/Thread.h"
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -260,110 +261,85 @@ TEST_CASE( "watchdog" )
 
         FailingHealthCheckThread eventThread( TEST_TIMEOUT_MEDIUM_MS, TEST_TIMEOUT_SHORT_MS, false );
 
+        REQUIRE( eventThread.m_inListPtr_ == nullptr );
         eventThread.startWatcher( timerManager );
         REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
+        REQUIRE( eventThread.m_inListPtr_ != nullptr );
 
         eventThread.stopWatcher();
-
-        eventThread.startWatcher( timerManager );
-        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
-
-        eventThread.stopWatcher();
-        eventThread.stopWatcher();
+        REQUIRE( eventThread.m_inListPtr_ == nullptr );
 
         eventThread.startWatcher( timerManager );
         REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
+        REQUIRE( eventThread.m_inListPtr_ != nullptr );
+
         eventThread.stopWatcher();
+        REQUIRE( eventThread.m_inListPtr_ == nullptr );
+        eventThread.stopWatcher();
+        REQUIRE( eventThread.m_inListPtr_ == nullptr );
+
+        eventThread.startWatcher( timerManager );
+        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
+        REQUIRE( eventThread.m_inListPtr_ != nullptr );
+        eventThread.stopWatcher();
+        REQUIRE( eventThread.m_inListPtr_ == nullptr );
     }
 
     SECTION( "health check success" )
     {
         KIT_SYSTEM_TRACE_MSG( SECT_, "Testing successful health checks" );
 
-        Supervisor::enableWdog();
-        TimerManager timerManager;
-
-        FailingHealthCheckThread eventThread( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, false );
-
+        FailingHealthCheckThread uut( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, true );
+        uut.m_shouldFailHealthCheck = false;
+        EventLoop     testEventLoop( 10, nullptr, &uut );
         unsigned long kickCountBefore = kickCount_;
         unsigned long tripCountBefore = tripCount_;
-        REQUIRE( eventThread.m_healthCheckCallCount == 0 );
+        REQUIRE( uut.m_healthCheckCallCount == 0 );
 
-        eventThread.m_shouldFailHealthCheck = false;
-        eventThread.startWatcher( timerManager );
+        auto* t1 = Kit::System::Thread::create( testEventLoop, "TEST" );
+        REQUIRE( t1 );
 
-        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
+        Supervisor::enableWdog();
+        sleep( TEST_TIMEOUT_MEDIUM_MS * 2 );
 
-        uint32_t startTime = ElapsedTime::milliseconds();
-        while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_TIMEOUT_MEDIUM_MS )
-        {
-
-            for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER; i++ )
-            {
-                sleep( 10 );
-                timerManager.processTimers();
-                Supervisor::monitorThreads();
-            }
-        }
-
-        REQUIRE( eventThread.m_healthCheckCallCount > 0 );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Health check called %d times, all successful", eventThread.m_healthCheckCallCount );
+        REQUIRE( uut.m_healthCheckCallCount > 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Health check called %d times, all successful", uut.m_healthCheckCallCount );
 
         REQUIRE( kickCount_ > kickCountBefore );
         REQUIRE( tripCount_ == tripCountBefore );
-        REQUIRE( eventThread.m_currentCountMs > 0 );
 
         unsigned long kickCountAfterHealthChecks = kickCount_;
-
-        for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER; i++ )
-        {
-            sleep( 10 );
-            Supervisor::monitorThreads();
-        }
+        sleep( TEST_TIMEOUT_MEDIUM_MS * 2 );
 
         REQUIRE( kickCount_ > kickCountAfterHealthChecks );
         REQUIRE( tripCount_ == tripCountBefore );
-        REQUIRE( eventThread.m_currentCountMs > 0 );
 
-        eventThread.stopWatcher();
-        REQUIRE( eventThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+        testEventLoop.pleaseStop();
+        Kit::System::Thread::destroy( *t1, 100 );
     }
 
     SECTION( "health check failure" )
     {
         KIT_SYSTEM_TRACE_MSG( SECT_, "Testing health check failure triggers watchdog trip" );
 
-        Supervisor::enableWdog();
-        TimerManager timerManager;
-
-        FailingHealthCheckThread eventThread( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, false );
-
+        FailingHealthCheckThread uut( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, true );
+        uut.m_shouldFailHealthCheck = true;
+        EventLoop     testEventLoop( 10, nullptr, &uut );
         unsigned long tripCountBefore = tripCount_;
-        REQUIRE( eventThread.m_healthCheckCallCount == 0 );
+        REQUIRE( uut.m_healthCheckCallCount == 0 );
 
-        eventThread.m_shouldFailHealthCheck = true;
-        eventThread.startWatcher( timerManager );
+        auto* t1 = Kit::System::Thread::create( testEventLoop, "TEST" );
+        REQUIRE( t1 );
 
-        REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
+        Supervisor::enableWdog();
+        sleep( TEST_TIMEOUT_MEDIUM_MS * 2 );
 
-        uint32_t startTime = ElapsedTime::milliseconds();
-        while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_TIMEOUT_MEDIUM_MS )
-        {
-
-            for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER; i++ )
-            {
-                sleep( 10 );
-                timerManager.processTimers();
-                Supervisor::monitorThreads();
-            }
-        }
-
-        REQUIRE( eventThread.m_healthCheckCallCount > 0 );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Health check called %d times, all failed", eventThread.m_healthCheckCallCount );
-
+        REQUIRE( uut.m_healthCheckCallCount > 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Health check called %d times, all successful", uut.m_healthCheckCallCount );
         REQUIRE( tripCount_ > tripCountBefore );
 
-        eventThread.stopWatcher();
+        testEventLoop.pleaseStop();
+        Kit::System::Thread::destroy( *t1, 100 );
     }
 
     SECTION( "supervisor timing and tick divider" )
@@ -496,7 +472,7 @@ TEST_CASE( "watchdog" )
         REQUIRE( supervisorThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
         REQUIRE( supervisorThread.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
 
-        supervisorThread.startWatcher( timerManager );
+        KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( &supervisorThread, timerManager );
         REQUIRE( supervisorThread.m_currentCountMs == supervisorThread.m_wdogTimeoutMs );
 
         unsigned long kickCountBefore = kickCount_;
@@ -504,7 +480,7 @@ TEST_CASE( "watchdog" )
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             sleep( 10 );
-            supervisorThread.monitorWdog();
+            KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( &supervisorThread );
         }
 
         REQUIRE( kickCount_ > kickCountBefore );
@@ -515,14 +491,41 @@ TEST_CASE( "watchdog" )
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
             sleep( 10 );
-            supervisorThread.monitorWdog();
+            KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( &supervisorThread );
         }
 
         REQUIRE( kickCount_ > kickCountBefore );
         REQUIRE( supervisorThread.m_currentCountMs > 0 );
-        supervisorThread.stopWatcher();
+        KIT_SYSTEM_WATCHDOG_STOP_EVENTLOOP( &supervisorThread );
+    }
 
-        supervisorThread.monitorWdog();
+    SECTION( "watchedeventthread NON supervisor mode" )
+    {
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Testing WatchedEventThread in non-supervisor mode" );
+
+        Supervisor::enableWdog();
+        TimerManager timerManager;
+
+        FailingHealthCheckThread nonSupervisorThread( TEST_TIMEOUT_MEDIUM_MS, TEST_SLEEP_SHORT_MS, false );
+
+        REQUIRE( nonSupervisorThread.isSupervisorThread() == false );
+        REQUIRE( nonSupervisorThread.m_wdogTimeoutMs == TEST_TIMEOUT_MEDIUM_MS );
+        REQUIRE( nonSupervisorThread.m_currentCountMs == TEST_TIMEOUT_MEDIUM_MS );
+
+        nonSupervisorThread.startWatcher( timerManager );
+        REQUIRE( nonSupervisorThread.m_currentCountMs == nonSupervisorThread.m_wdogTimeoutMs );
+
+        unsigned long kickCountBefore = kickCount_;
+
+        for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
+        {
+            sleep( 10 );
+            nonSupervisorThread.monitorWdog();
+        }
+
+        REQUIRE( kickCount_ == kickCountBefore );
+
+        nonSupervisorThread.stopWatcher();
     }
 
     SECTION( "edge cases" )

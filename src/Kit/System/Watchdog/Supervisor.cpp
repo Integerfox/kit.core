@@ -19,9 +19,9 @@ using namespace Kit::System::Watchdog;
 // Static member definitions
 Kit::Container::SList<WatchedThread> Supervisor::m_watchedThreads;
 Kit::System::Mutex                   Supervisor::m_mutex;
-uint32_t                             Supervisor::m_currentTick = 0;
-bool                                 Supervisor::m_isEnabled   = false;
-uint32_t                             Supervisor::m_timeMarker  = 0;
+uint32_t                             Supervisor::m_currentTick;
+bool                                 Supervisor::m_isEnabled;
+uint32_t                             Supervisor::m_timeMarker;
 
 /////////////////////////
 
@@ -46,6 +46,12 @@ void Supervisor::endWatching( WatchedThread& threadBeingMonitored ) noexcept
 
 void Supervisor::monitorThreads() noexcept
 {
+    // Not enabled -->do nothing
+    if ( !m_isEnabled )
+    {
+        return;  
+    }
+
     // Use tick divider to reduce monitoring frequency
     m_currentTick++;
     if ( m_currentTick >= OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER )
@@ -64,7 +70,7 @@ void Supervisor::monitorThreads() noexcept
             if ( thread->m_currentCountMs <= delta )
             {
                 Supervisor::tripWdog();  // EXPIRED
-                return;      // Never executes because the tripWdog() method never returns, but it simplifies testing
+                return;                  // Never executes because the tripWdog() method never returns, but it simplifies testing
             }
 
             // Decrement the thread's timer and get the next thread in the list
@@ -94,7 +100,8 @@ bool Supervisor::enableWdog() noexcept
     bool result = Kit_System_Watchdog_hal_enable_wdog();
     if ( result )
     {
-        m_isEnabled = true;
+        m_timeMarker = Kit::System::ElapsedTime::milliseconds();
+        m_isEnabled  = true;
     }
     return result;
 }
@@ -106,7 +113,7 @@ void Supervisor::tripWdog() noexcept
     {
         enableWdog();
     }
-    
+
     // Trip the watchdog to force system reset
     Kit_System_Watchdog_hal_trip_wdog();
 }
