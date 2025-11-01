@@ -9,8 +9,8 @@
 /** @file */
 
 #include "EventLoopWithPScheduling.h"
-#include "Kit/System/EventLoop.h"
-
+#include "EventLoop.h"
+#include "IWatchedEventLoop.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
