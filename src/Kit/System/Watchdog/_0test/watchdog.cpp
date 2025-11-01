@@ -302,7 +302,7 @@ TEST_CASE( "watchdog" )
         while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
         {
 
-            for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
+            for ( int i = 0; i < (TEST_SLEEP_SHORT_MS * (OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2)) / 10; i++ )
             {
                 sleep( 10 );
                 timerManager.processTimers();
@@ -353,7 +353,7 @@ TEST_CASE( "watchdog" )
         while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
         {
 
-            for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
+            for ( int i = 0; i < (TEST_SLEEP_SHORT_MS * (OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 2)) / 10; i++ )
             {
                 sleep( 10 );
                 timerManager.processTimers();
