@@ -81,11 +81,6 @@ public:
      */
     static void reloadThread( WatchedThread& thread ) noexcept;
 
-    /** Kicks the hardware watchdog. Should be called periodically when all
-        monitored threads are healthy. Typically called by the supervisor thread.
-     */
-    static void kickWdog() noexcept;
-
     /** Trips the watchdog to force a system reset. This method ensures the
         watchdog is enabled (calling enableWdog() if necessary) before tripping
         to guarantee a system reset occurs.

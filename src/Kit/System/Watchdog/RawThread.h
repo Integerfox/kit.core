@@ -34,62 +34,38 @@ namespace Watchdog {
 #ifdef USE_KIT_SYSTEM_WATCHDOG
 
 /** Macro to start watchdog monitoring for a raw thread.
-    Usage: KIT_SYSTEM_WATCHDOG_START_RAWTHREAD(threadPtr)
+    Usage: KIT_SYSTEM_WATCHDOG_START_RAWTHREAD(instance)
 
-    @param threadPtr The RawThread instance pointer
+    @param instance The RawThread instance
  */
-#define KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( threadPtr ) \
-    do                                                   \
-    {                                                    \
-        if ( threadPtr )                                 \
-        {                                                \
-            threadPtr->startWatching();                  \
-        }                                                \
-    }                                                    \
-    while ( 0 )
+#define KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( instance )  instance.startWatching()
 
 /** Macro to stop watchdog monitoring for a raw thread.
-    Usage: KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD(threadPtr)
+    Usage: KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD(instance)
 
-    @param threadPtr The RawThread instance pointer
+    @param instance The RawThread instance
  */
-#define KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( threadPtr ) \
-    do                                                  \
-    {                                                   \
-        if ( threadPtr )                                \
-        {                                               \
-            threadPtr->stopWatching();                  \
-        }                                               \
-    }                                                   \
-    while ( 0 )
+#define KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( instance )   instance.stopWatching()
 
 /** Macro to kick/reload watchdog for a raw thread.
-    Usage: KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD(threadPtr)
+    Usage: KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD(instance)
 
-    @param threadPtr The RawThread instance pointer
+    @param instance The RawThread instance
  */
-#define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( threadPtr ) \
-    do                                                  \
-    {                                                   \
-        if ( threadPtr )                                \
-        {                                               \
-            threadPtr->kickWatchdog();                  \
-        }                                               \
-    }                                                   \
-    while ( 0 )
+#define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( instance )   instance.reload()
 
 #else
 
 // When watchdog is disabled, macros expand to nothing
 
 /// Watchdog framework disabled at compile time
-#define KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( threadPtr )
+#define KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( instance )
 
 /// Watchdog framework disabled at compile time
-#define KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( threadPtr )
+#define KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( instance )
 
 /// Watchdog framework disabled at compile time
-#define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( threadPtr )
+#define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( instance )
 
 #endif  // USE_KIT_SYSTEM_WATCHDOG
 
@@ -124,7 +100,7 @@ public:
     /** Kicks/reloads the watchdog timer for this thread via the Supervisor.
         This should be called periodically to indicate the thread is healthy.
      */
-    void kickWatchdog() noexcept
+    void reload() noexcept
     {
         Supervisor::reloadThread( *this );
     }
