@@ -10,7 +10,6 @@
 
 #include "EventLoopWithPScheduling.h"
 #include "EventLoop.h"
-#include "IWatchedEventLoop.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
