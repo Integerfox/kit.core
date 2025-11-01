@@ -461,11 +461,6 @@ TEST_CASE( "watchdog" )
         REQUIRE( shortThread.m_currentCountMs == shortThread.m_wdogTimeoutMs );
         REQUIRE( longThread.m_currentCountMs == longThread.m_wdogTimeoutMs );
 
-        for ( int i = 0; i < 3; i++ )
-        {
-            Supervisor::monitorThreads();
-        }
-
         unsigned long kickCountBefore = kickCount_;
         KIT_SYSTEM_TRACE_MSG( SECT_, "Retrying with extended timing for multiple threads test" );
         
