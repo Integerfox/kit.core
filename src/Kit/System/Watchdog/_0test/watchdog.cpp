@@ -174,6 +174,7 @@ TEST_CASE( "watchdog" )
         unsigned long kickCountBefore = kickCount_;
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
+            sleep( 10 );
             Supervisor::monitorThreads();
         }
         REQUIRE( kickCount_ > kickCountBefore );
@@ -187,6 +188,7 @@ TEST_CASE( "watchdog" )
         unsigned long kickCountAfterRemoval = kickCount_;
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
+            sleep( 10 );
             Supervisor::monitorThreads();
         }
         REQUIRE( kickCount_ > kickCountAfterRemoval );
@@ -213,6 +215,7 @@ TEST_CASE( "watchdog" )
 
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
+            sleep( 10 );
             Supervisor::monitorThreads();
         }
 
@@ -222,6 +225,7 @@ TEST_CASE( "watchdog" )
 
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
+            sleep( 10 );
             Supervisor::monitorThreads();
             if ( tripCount_ > tripCountBefore )
                 break;
@@ -348,14 +352,13 @@ TEST_CASE( "watchdog" )
         uint32_t startTime = ElapsedTime::milliseconds();
         while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
         {
-            timerManager.processTimers();
 
             for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
             {
+                sleep( 10 );
+                timerManager.processTimers();
                 Supervisor::monitorThreads();
             }
-
-            sleep( 10 );
         }
 
         REQUIRE( eventThread.m_healthCheckCallCount > 0 );
@@ -383,17 +386,12 @@ TEST_CASE( "watchdog" )
         REQUIRE( thread.m_inListPtr_ != nullptr );
         REQUIRE( thread.m_currentCountMs == thread.m_wdogTimeoutMs );
 
-        for ( int i = 0; i < 3; i++ )
-        {
-            Supervisor::monitorThreads();
-        }
 
         unsigned long initialKickCount = kickCount_;
-
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 5; i++ )
         {
-            Supervisor::monitorThreads();
             sleep( 10 );
+            Supervisor::monitorThreads();
         }
 
         REQUIRE( kickCount_ > initialKickCount );
@@ -519,6 +517,7 @@ TEST_CASE( "watchdog" )
 
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
+            sleep( 10 );
             supervisorThread.monitorWdog();
         }
 
@@ -628,7 +627,7 @@ TEST_CASE( "watchdog" )
         unsigned long kickCountBefore = kickCount_;
         for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER + 1; i++ )
         {
-            sleep(10);
+            sleep( 10 );
             Supervisor::monitorThreads();
         }
         REQUIRE( kickCount_ >= kickCountBefore );
