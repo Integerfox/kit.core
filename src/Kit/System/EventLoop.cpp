@@ -14,8 +14,9 @@
 #include "Kit/System/IEventFlag.h"
 #include "Trace.h"
 #include "GlobalLock.h"
+#include "Kit/System/IWatchedEventLoop.h"
 
-#define SECT_ "EventLoop"
+#define SECT_ "Kit::System::EventLoop"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -23,9 +24,11 @@ namespace System {
 
 ///////////////////////
 EventLoop::EventLoop( uint32_t                           timeOutPeriodInMsec,
-                      Kit::Container::SList<IEventFlag>* eventFlagsList ) noexcept
+                      Kit::Container::SList<IEventFlag>* eventFlagsList,
+                      IWatchedEventLoop*                 watchdog ) noexcept
     : IRunnable()
     , m_eventList( eventFlagsList )
+    , m_watchdog( watchdog )
     , m_timeout( timeOutPeriodInMsec )
     , m_timeStartOfLoop( 0 )
     , m_events( 0 )
@@ -50,11 +53,15 @@ void EventLoop::startEventLoop() noexcept
     // Initialize/start the timer manager
     startManager();
     m_run = true;
+
+    // Start watchdog monitoring if enabled
+    KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( m_watchdog, *this );
 }
 
 void EventLoop::stopEventLoop() noexcept
 {
-    // Nothing currently needed
+    // Stop watchdog monitoring if enabled
+    KIT_SYSTEM_WATCHDOG_STOP_EVENTLOOP( m_watchdog );
 }
 
 bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
@@ -115,6 +122,10 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
 
     // Timer Check
     processTimers();
+
+    // Watchdog monitoring (if enabled)
+    KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( m_watchdog );
+
     return true;
 }
 

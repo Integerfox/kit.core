@@ -97,6 +97,6 @@ private:
 
 
 
-};      // end namespaces
-};
+}      // end namespaces
+}
 #endif  // end header latch

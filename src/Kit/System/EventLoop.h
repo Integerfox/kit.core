@@ -10,12 +10,14 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "Kit/System/IEventFlag.h"
 #include "Kit/System/IRunnable.h"
 #include "Kit/System/ISignable.h"
 #include "Kit/System/IEventManager.h"
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/TimerManager.h"
+#include "Kit/System/IWatchedEventLoop.h"
 
 /** Specifies the default timeout period for waiting on a event.
  */
@@ -59,11 +61,17 @@ public:
         When the 'eventFlagsList' parameter is null then the EventLoop will not
         monitor any event flags.
 
+        The 'watchdog' parameter is optional and can be used to provide
+        watchdog monitoring for this event loop.  If used, the application
+        must also enable the Watchdog using the USE_KIT_SYSTEM_WATCHDOG
+        configuration option in its the kit_config.h header files
+
         WARNING: The application CANNOT modify the eventFlagsList after the
                  EventLoop instance is created.
      */
     EventLoop( uint32_t                           timeOutPeriodInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
-               Kit::Container::SList<IEventFlag>* eventFlagsList      = nullptr ) noexcept;
+               Kit::Container::SList<IEventFlag>* eventFlagsList      = nullptr,
+               IWatchedEventLoop*                 watchdog            = nullptr ) noexcept;
 
     /// Virtual destructor
     virtual ~EventLoop() = default;
@@ -168,6 +176,9 @@ protected:
 
     /// List of Event Flags that the Event Loop monitors (can be null)
     Kit::Container::SList<IEventFlag>* m_eventList;
+
+    /// Optional watchdog monitor for this event loop
+    IWatchedEventLoop* m_watchdog;
 
     /// Timeout period for waiting on the next event
     uint32_t m_timeout;

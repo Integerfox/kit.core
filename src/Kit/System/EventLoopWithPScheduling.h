@@ -40,6 +40,9 @@ public:
     /** Constructor.  The argument 'timingTickInMsec' specifies the timing
         resolution that will be used for Kit::System::Timers AND for the
         periodic scheduling.
+
+        The 'watchdog' parameter is optional and can be used to provide
+        watchdog monitoring for this event loop with periodic scheduling.
      */
     EventLoopWithPScheduling( Interval_T                         intervals[],
                               Hook_T                             beginThreadProcessing = nullptr,
@@ -48,7 +51,8 @@ public:
                               NowFunc_T                          nowFunc               = ElapsedTime::millisecondsEx,
                               IdleFunc_T                         idleFunc              = nullptr,
                               uint32_t                           timeOutPeriodInMsec   = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
-                              Kit::Container::SList<IEventFlag>* eventFlagsList        = nullptr ) noexcept;
+                              Kit::Container::SList<IEventFlag>* eventFlagsList        = nullptr,
+                              IWatchedEventLoop*                 watchdog              = nullptr ) noexcept;
 
 
 public:
