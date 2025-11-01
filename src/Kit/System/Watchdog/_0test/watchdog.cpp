@@ -90,10 +90,6 @@ public:
     {
     }
 
-    bool triggerHealthCheck()
-    {
-        return performHealthCheck();
-    }
 
 protected:
     bool performHealthCheck() noexcept override
@@ -299,7 +295,7 @@ TEST_CASE( "watchdog" )
         REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
 
         uint32_t startTime = ElapsedTime::milliseconds();
-        while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
+        while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_TIMEOUT_MEDIUM_MS )
         {
 
             for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER; i++ )
@@ -345,13 +341,13 @@ TEST_CASE( "watchdog" )
         unsigned long tripCountBefore = tripCount_;
         REQUIRE( eventThread.m_healthCheckCallCount == 0 );
 
-        eventThread.m_shouldFailHealthCheck = false;
+        eventThread.m_shouldFailHealthCheck = true;
         eventThread.startWatcher( timerManager );
 
         REQUIRE( eventThread.m_currentCountMs == eventThread.m_wdogTimeoutMs );
 
         uint32_t startTime = ElapsedTime::milliseconds();
-        while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_SLEEP_MEDIUM_MS )
+        while ( ElapsedTime::deltaMilliseconds( startTime, ElapsedTime::milliseconds() ) < TEST_TIMEOUT_MEDIUM_MS )
         {
 
             for ( int i = 0; i < OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER; i++ )
