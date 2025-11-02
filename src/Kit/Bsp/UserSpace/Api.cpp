@@ -8,44 +8,36 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Bsp/Api.h"
-#include "Cpl/System/Mutex.h"
-#include "Cpl/System/Private_.h"     // Slight cheat here.  I use the 'System' mutex to better emulate the semantics of disable/enable interrupts
-
+#include "Kit/Bsp/Api.h"
+#include "Kit/System/Mutex.h"
+#include "Kit/System/Private.h"  // Slight cheat here.  I use the 'System' mutex to better emulate the semantics of disable/enable interrupts
 
 
 ///////////////////////////////////////////////////////////
-void Bsp_Api_initialize( void )
+void Bsp_initialize( void )
 {
 }
 
-
-void Bsp_Api_disableIrqs_MAP( void )
+void Bsp_disable_irqs_MAP( void )
 {
-    Cpl::System::Locks_::system().lock();
+    Kit::System::PrivateLocks::system().lock();
 }
 
-
-void Bsp_Api_enableIrqs_MAP( void )
+void Bsp_enable_irqs_MAP( void )
 {
-    Cpl::System::Locks_::system().unlock();
+    Kit::System::PrivateLocks::system().unlock();
 }
 
-
-void Bsp_Api_pushAndDisableIrqs_MAP( void )
+void Bsp_push_and_disable_irqs_MAP( void )
 {
-    Cpl::System::Locks_::system().lock();
+    Kit::System::PrivateLocks::system().lock();
 }
 
-
-void Bsp_Api_popIrqs_MAP( void )
+void Bsp_pop_irqs_MAP( void )
 {
-    Cpl::System::Locks_::system().unlock();
+    Kit::System::PrivateLocks::system().unlock();
 }
 
-
-void Bsp_Api_nop_MAP( void )
+void Bsp_nop_MAP( void )
 {
 }
-
-

@@ -6,6 +6,7 @@
 #    - ONLY edit/add statements in the sections marked by BEGIN/END EDITS
 #      markers.
 #    - Maintain indentation level and use spaces (it's a python thing) 
+#    - rvalues must be enclosed in quotes (single ' ' or double " ")
 #    - The structure/class 'BuildValues' contains (at a minimum the
 #      following data members.  Any member not specifically set defaults
 #      to null/empty string
@@ -25,7 +26,11 @@
 # get definition of the Options structure
 from nqbplib.base import BuildValues
 from nqbplib.my_globals import *
-import os, copy 
+from nqbplib.utils import config_catch2
+import os, copy
+
+# Capture project/build directory
+prjdir = os.path.dirname(os.path.abspath(__file__))
 
 
 #===================================================
@@ -33,38 +38,45 @@ import os, copy
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'hw_echo'
+FINAL_OUTPUT_NAME = 'a.out'
 
-# Path to SDK and the ST CubeMX generated BSP files
-prj_dir       = os.path.dirname(os.path.abspath(__file__))
-bsp_path      = os.path.join( "src", "Kit", "Bsp", "ST", "NUCLEO-F413ZH" )
-bsp_mx        = os.path.join( bsp_path, "MX" )
-sdk_root      = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "stm32F4-SDK")
-bsp_mx_root   = os.path.join( NQBP_PKG_ROOT(), bsp_mx )
-freertos_root = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "freertos-v10")
-sysview_root  = os.path.join( NQBP_PKG_ROOT(), bsp_path, "SeggerSysView" )
-sysview_root  = sysview_root.replace("\\", "/")
 
-#
-# For build config/variant: "win32" 
+# 
+# For build config/variant: "posix64" 
 #
 
-# Set project specific 'base' (i.e always used) options
-base_release = BuildValues()        # Do NOT comment out this line
-target_flags             = '-DUSE_STM32F4XX_NUCLEO_144 -DSTM32F413xx'
-base_release.cflags      = f' -Wall {target_flags} -Werror -DENABLE_BSP_SEGGER_SYSVIEW -I{sysview_root}'
-base_release.cppflags    = ' -std=c++11 -Wno-int-in-bool-context'
-base_release.asmflags    = f' {target_flags}'
-base_release.firstobjs   = f'_BUILT_DIR_.{bsp_mx}/Core/Src'
-base_release.firstobjs   = base_release.firstobjs + f' {bsp_mx}/../Stdio.o'
-#base_release.lastobjs    = base_release.lastobjs + f' {bsp_mx}/../syscalls.o' 
+# Construct option structs
+base_posix64      = BuildValues()
+optimized_posix64 = BuildValues()
+debug_posix64     = BuildValues()
+
+# Set project specific 'base' (i.e always used) options. Note: Catch2 requires C++17 or newer. Note: Catch2 requires C++17 or newer
+base_posix64.cflags    = '-m64 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage -fprofile-update=atomic'
+base_posix64.linkflags = '-m64 -fprofile-arcs'
 
 # Set project specific 'optimized' options
-optimized_release = BuildValues()    # Do NOT comment out this line
+optimized_posix64.cflags    = '-O3'
 
 # Set project specific 'debug' options
-debug_release = BuildValues()       # Do NOT comment out this line
-#debug_release.cflags = '-D_MY_APP_DEBUG_SWITCH_'
+
+
+#
+# For build config/variant: "posix32"
+#
+
+# Set project specific 'base' (i.e always used) options. Note: Catch2 requires C++17 or newer
+base_posix32           = BuildValues()        # Do NOT comment out this line
+base_posix32.cflags    = '-m32 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage -fprofile-update=atomic'
+base_posix32.linkflags = '-m32 -fprofile-arcs'
+
+
+# Set project specific 'optimized' options
+optimized_posix32           = BuildValues()    # Do NOT comment out this line
+optimized_posix32.cflags    = '-O3'
+
+# Set project specific 'debug' options
+debug_posix32           = BuildValues()       # Do NOT comment out this line
+
 
 
 #-------------------------------------------------
@@ -72,29 +84,32 @@ debug_release = BuildValues()       # Do NOT comment out this line
 # ONE build configuration/variant 
 #-------------------------------------------------
 
-release_opts = { 'user_base':base_release, 
-                 'user_optimized':optimized_release, 
-                 'user_debug':debug_release
+posix32_opts = { 'user_base':base_posix32, 
+                 'user_optimized':optimized_posix32, 
+                 'user_debug':debug_posix32
                }
                
-
                
+posix64_opts = { 'user_base':base_posix64, 
+                 'user_optimized':optimized_posix64, 
+                 'user_debug':debug_posix64
+               }
+  
+        
 # Add new variant option dictionary to # dictionary of 
 # build variants
-build_variants = { 'stm32':release_opts,
-                 }  
+build_variants = { 'posix':posix32_opts,
+                   'posix64':posix64_opts,
+                 }    
 
 #---------------------------------------------------
 # END EDITS/CUSTOMIZATIONS
 #===================================================
 
-
 # Select Module that contains the desired toolchain
-from nqbplib.toolchains.windows.arm_gcc_stm32.stm32F4 import ToolChain
+from nqbplib.toolchains.linux.gcc.console_exe import ToolChain
 
 # Function that instantiates an instance of the toolchain
 def create():
-    lscript  = 'STM32F413ZHTx_FLASH.ld'
-    tc = ToolChain( FINAL_OUTPUT_NAME, prj_dir, build_variants, sdk_root, bsp_mx_root, freertos_root, lscript, "stm32" )
-    return tc
-
+    tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, "posix64" )
+    return tc 
