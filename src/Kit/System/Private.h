@@ -32,10 +32,10 @@ class PrivateLocks
 {
 public:
     /// Global mutex for use for interfaces/class in the Kit::System namespace
-    static Mutex& system();
+    static Mutex& system() noexcept;
 
     /// Same as 'system', except usage is for 'long' critical sections (i.e. walking lists, printing, etc.)
-    static Mutex& sysLists();
+    static Mutex& sysLists() noexcept;
 
     /** Global mutex for use for tracing sub-system.  This mutex is to protect 
         the Trace engine's internal/meta data.  This mutex is NOT used to guard
@@ -44,10 +44,10 @@ public:
         not cause high priority threads to block on the trace output when their
         trace statements are not enabled at run time.
      */
-    static Mutex& tracing();
+    static Mutex& tracing() noexcept;
 
     /// Global mutex for use for the tracing sub-system OUTPUT (see above for more details)
-    static Mutex& tracingOutput();
+    static Mutex& tracingOutput() noexcept;
 };
 
 /** This class defines the interface to the platform specific implementation of the
@@ -59,11 +59,11 @@ public:
     /** This method append the 'info' information to the provide String for the
         specified infoLevel.
      */
-    static void appendInfo( Kit::Text::IString& dst, Trace::InfoLevel_T info, const char* section, const char* filename, int linenum, const char* funcname );
+    static void appendInfo( Kit::Text::IString& dst, Trace::InfoLevel_T info, const char* section, const char* filename, int linenum, const char* funcname ) noexcept;
 
     /** This method output the string to the logging destination/stream/media
      */
-    static void output( Kit::Text::IString& src );
+    static void output( Kit::Text::IString& src ) noexcept;
 };
 
 

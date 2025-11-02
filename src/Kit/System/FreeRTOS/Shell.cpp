@@ -15,13 +15,13 @@
 namespace Kit {
 namespace System {
 
-bool Shell::isAvailable()
+bool Shell::isAvailable() noexcept
 {
     return false;
 }
 
 
-int Shell::execute( const char* cmdstring, bool noEchoStdOut, bool noEchoStdErr )
+int Shell::execute( const char* cmdstring, bool noEchoStdOut, bool noEchoStdErr ) noexcept
 {
     return -1;
 }

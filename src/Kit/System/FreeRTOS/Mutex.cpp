@@ -18,21 +18,21 @@ namespace Kit {
 namespace System {
 
 //////////////////////////////////////////////////////////////////////////////
-Mutex::Mutex()
+Mutex::Mutex() noexcept
 {
     m_mutex = xSemaphoreCreateRecursiveMutex();
-    if ( m_mutex == NULL )
+    if ( m_mutex == nullptr )
     {
         FatalError::logf( Shutdown::eOSAL, "Kit::System::Mutex::Mutex().  Failed to create mutex" );
     }
 }
 
-Mutex::~Mutex()
+Mutex::~Mutex() noexcept
 {
     vSemaphoreDelete( m_mutex );
 }
 
-void Mutex::lock( void )
+void Mutex::lock( void ) noexcept
 {
     // Do nothing if the scheduler has not yet been started, i.e, if there is only
     // one thread running -->then by definition I have mutual exclusion. It also allows
@@ -45,7 +45,7 @@ void Mutex::lock( void )
 }
 
 
-void Mutex::unlock( void )
+void Mutex::unlock( void ) noexcept
 {
     if ( isSchedulingEnabled() )
     {

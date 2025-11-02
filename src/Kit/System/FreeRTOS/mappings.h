@@ -40,13 +40,13 @@
 #define KIT_SYSTEM_ASSERT_MAP(e)                Kit_System_assert_c_wrapper( e, __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME )
 
 /// Mapping
-#define KitSystemThreadID_T_MAP       TaskHandle_t  
+#define KitSystemThreadID_T_MAP                 TaskHandle_t  
 
 /// Mapping
-#define KitSystemMutex_T_MAP                  SemaphoreHandle_t
+#define KitSystemMutex_T_MAP                    SemaphoreHandle_t
 
 /// Mapping
-#define KitSystemSema_T_MAP                   SemaphoreHandle_t
+#define KitSystemSema_T_MAP                     SemaphoreHandle_t
 
 
 

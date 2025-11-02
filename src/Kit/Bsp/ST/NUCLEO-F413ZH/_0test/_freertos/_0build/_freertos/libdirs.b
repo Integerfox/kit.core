@@ -5,8 +5,8 @@ src/Kit/Io
 
 # CPL OSAL
 src/Kit/System
+src/Kit/System/_fatalerror < null.cpp
 src/Kit/System/FreeRTOS
-src/Kit/System/FreeRTOS/_fatalerror
 src/Kit/System/_assert
 src/Kit/System/_trace
 

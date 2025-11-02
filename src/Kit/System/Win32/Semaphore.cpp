@@ -16,12 +16,12 @@ namespace System {
 
 
 //////////////////////////////////////////////////
-Semaphore::Semaphore( unsigned initialCount )
+Semaphore::Semaphore( unsigned initialCount ) noexcept
 {
     m_sema = CreateSemaphore( 0, initialCount, 0x7FFF, 0 ); // Create in the "EMPTY" state
 }
 
-Semaphore::~Semaphore()
+Semaphore::~Semaphore() noexcept
 {
     CloseHandle( m_sema );
 }

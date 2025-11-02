@@ -38,12 +38,12 @@ static int shutdown_application_( int exit_code )
     return exit_code;
 }
 
-int Shutdown::success( void )
+int Shutdown::success( void ) noexcept
 {
     return shutdown_application_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }
 
-int Shutdown::failure( int exit_code )
+int Shutdown::failure( int exit_code ) noexcept
 {
     return shutdown_application_( notifyShutdownHandlers( exit_code ) );
 }

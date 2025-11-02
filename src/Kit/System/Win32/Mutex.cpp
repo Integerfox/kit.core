@@ -12,23 +12,23 @@
 
 
 //////////////////////////////////////////////////////////////////////////////
-Kit::System::Mutex::Mutex()
+Kit::System::Mutex::Mutex() noexcept
 {
     InitializeCriticalSection( &m_mutex );
 }
 
-Kit::System::Mutex::~Mutex()
+Kit::System::Mutex::~Mutex() noexcept
 {
     DeleteCriticalSection( &m_mutex );
 }
 
-void Kit::System::Mutex::lock()
+void Kit::System::Mutex::lock() noexcept
 {
     EnterCriticalSection( &m_mutex );
 }
 
 
-void Kit::System::Mutex::unlock()
+void Kit::System::Mutex::unlock() noexcept
 {
     LeaveCriticalSection( &m_mutex );
 }

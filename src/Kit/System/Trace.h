@@ -480,7 +480,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static void redirect_( Kit::Io::IOutput& newMedia );
+    static void redirect_( Kit::Io::IOutput& newMedia ) noexcept;
 
     /** This method is used to revert the trace output to its default output
         destination/stream/media. There is no guaranty on what happens to trace
@@ -490,7 +490,7 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static void revert_();
+    static void revert_() noexcept;
 
 public:
     /** This COMPONENT Scoped method provides the Output stream to the Trace

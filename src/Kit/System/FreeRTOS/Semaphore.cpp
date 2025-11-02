@@ -20,16 +20,16 @@ namespace Kit {
 namespace System {
 
 //////////////////////////////////////////////////
-Semaphore::Semaphore( unsigned initialCount )
+Semaphore::Semaphore( unsigned initialCount ) noexcept
 {
     m_sema = xSemaphoreCreateCounting( 0x7FFF, initialCount );
-    if ( m_sema == NULL )
+    if ( m_sema == nullptr )
     {
         FatalError::logf( Shutdown::eOSAL, "Kit:System::Semaphore::Semaphore().  Failed to create semaphore" );
     }
 }
 
-Semaphore::~Semaphore()
+Semaphore::~Semaphore() noexcept
 {
     vSemaphoreDelete( &m_sema );
 }

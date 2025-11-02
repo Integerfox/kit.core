@@ -61,7 +61,7 @@ namespace FreeRTOS {
 
 
 ////////////////////////////////////
-Thread::Thread( const char* threadName, Kit::System::IRunnable& dummyRunnable )
+Thread::Thread( const char* threadName, Kit::System::IRunnable& dummyRunnable ) noexcept
     : Kit::System::Thread( dummyRunnable )
     , m_name( threadName )
 {
@@ -77,7 +77,7 @@ Thread::Thread( const char* threadName, Kit::System::IRunnable& dummyRunnable )
 Thread::Thread( Kit::System::IRunnable& runnable,
                 const char*             name,
                 int                     priority,
-                unsigned                stackSize )
+                unsigned                stackSize ) noexcept
     : Kit::System::Thread( runnable )
     , m_name( name )
 {
@@ -99,7 +99,7 @@ Thread::Thread( Kit::System::IRunnable& runnable,
     }
 }
 
-void Thread::entryPoint( void* data )
+void Thread::entryPoint( void* data ) noexcept
 {
     // Convert data arg to a pointer to a Thread Object
     auto* myThreadPtr = static_cast<Thread*>(data);
@@ -118,7 +118,7 @@ void Thread::entryPoint( void* data )
         ;
 }
 
-Thread::~Thread()
+Thread::~Thread() noexcept
 {
     // NOTE: In general it is not a good thing to "kill" threads - but to
     //       let the thread "run-to-completion", i.e. have the run() method
