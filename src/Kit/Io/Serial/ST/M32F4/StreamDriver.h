@@ -143,10 +143,16 @@ protected:
 
 private:
     /// Prevent access to the copy constructor -->Driver can not be copied!
-    StreamDriver( const StreamDriver& m );
+    StreamDriver( const StreamDriver& m ) = delete;
 
     /// Prevent access to the assignment operator -->Driver can not be copied!
-    const StreamDriver& operator=( const StreamDriver& m );
+    const StreamDriver& operator=( const StreamDriver& m ) = delete;
+
+    /// Prevent access to the move constructor -->Driver can not be copied!
+    StreamDriver( StreamDriver&& m ) = delete;
+
+    /// Prevent access to the move assignment operator -->Driver can not be copied!
+    StreamDriver& operator=( StreamDriver&& m ) = delete;
 
 
 protected:

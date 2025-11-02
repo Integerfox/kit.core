@@ -10,6 +10,11 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
+
 #define USE_KIT_SYSTEM_ASSERT
+#define USE_KIT_SYSTEM_TRACE
+
+#define OPTION_BSP_CONSOLE_RX_FIFO_SIZE (1024*10)  // For testing large data transfers
+#define OPTION_BSP_CONSOLE_TX_FIFO_SIZE (1024*10)
 
 #endif

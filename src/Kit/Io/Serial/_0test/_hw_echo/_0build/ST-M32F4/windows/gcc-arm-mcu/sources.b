@@ -1,2 +1,2 @@
 # share a common main
-../../../../freertos.cpp
+../../main.cpp
