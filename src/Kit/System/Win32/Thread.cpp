@@ -51,7 +51,7 @@ protected:
         m_parentThreadPtr_ = new Kit::System::Win32::Thread( *this );
     }
 };
-};  // end namespace
+}  // end namespace
 
 ///
 static RegisterInitHandler_ autoRegisterSystemInitHook_;

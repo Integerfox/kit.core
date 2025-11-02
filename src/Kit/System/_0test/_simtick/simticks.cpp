@@ -303,7 +303,7 @@ public:
 };
 
 
-};  // end namespace
+}  // end namespace
 
 ////////////////////////////////////////////////////////////////////////////////
 // NOTE: Including the 'simtimer' test case in the same file as 'simticks' forces it

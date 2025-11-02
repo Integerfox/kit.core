@@ -9,14 +9,13 @@
 /** @file */
 
 #include "EventLoopWithPScheduling.h"
-#include "Kit/System/EventLoop.h"
-
+#include "EventLoop.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace System {
 
-///////////////////////    
+///////////////////////
 EventLoopWithPScheduling::EventLoopWithPScheduling( Interval_T                         intervals[],
                                                     Hook_T                             beginThreadProcessing,
                                                     Hook_T                             endThreadProcessing,
@@ -24,8 +23,9 @@ EventLoopWithPScheduling::EventLoopWithPScheduling( Interval_T                  
                                                     NowFunc_T                          nowFunc,
                                                     IdleFunc_T                         idleFunc,
                                                     uint32_t                           timeOutPeriodInMsec,
-                                                    Kit::Container::SList<IEventFlag>* eventFlagsList ) noexcept
-    : EventLoop( timeOutPeriodInMsec, eventFlagsList )
+                                                    Kit::Container::SList<IEventFlag>* eventFlagsList,
+                                                    IWatchedEventLoop*                 watchdog ) noexcept
+    : EventLoop( timeOutPeriodInMsec, eventFlagsList, watchdog )
     , PeriodicScheduler( intervals, beginThreadProcessing, endThreadProcessing, slippageFunc, nowFunc )
     , m_idleFunc( idleFunc )
 {
