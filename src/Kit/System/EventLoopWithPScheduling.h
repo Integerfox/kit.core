@@ -23,16 +23,15 @@ namespace System {
     event based 'thread'.  The timing resolution of the periodic scheduling is a
     determined by the 'timingTickInMsec' argument value in the class's constructor.
     For example if 'timingTickInMsec' is 10ms then no interval should have a
-    interval duration less than 10ms.
+    an execution frequency faster than 100Hz (i.e. 10ms).
 
     The order of processing is:
 
        1. The Event Loop signal, Event Flags, and Software Timers are processed.
        2. The Periodic scheduler's executeScheduler() method is called
        3. The optional 'Idle' function is called.
-       4. The loop is repeated until there are no expired timers, and no event
-          flags - at which point the thread blocks and wait for any of the above
-          asynchronous actions to wake up the thread.
+       4. The thread blocks and wait for any of the asynchronous actions in step 1
+          to wake up the thread.
  */
 class EventLoopWithPScheduling : public EventLoop, public PeriodicScheduler
 {

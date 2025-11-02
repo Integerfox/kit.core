@@ -10,6 +10,6 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
-#define USE_KIT_SYSTEM_ASSERT_MACRO
+#define USE_KIT_SYSTEM_ASSERT
 
 #endif

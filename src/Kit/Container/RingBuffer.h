@@ -11,7 +11,7 @@
 /** @file */
 
 #include "Kit/Container/RingBufferBase.h"
-
+#include "Kit/System/Assert.h"
 
 ///
 namespace Kit {
@@ -38,20 +38,21 @@ namespace Container {
 
     Template Args:
         ITEM:=      Type of the data stored in the Ring Buffer
-        N:=         Size of the array that is allocated to hold the Ring Buffer
-                    data.  The actual maximum number of elements that can be
-                    stored in the Ring Buffer is N-1.
  */
-template <class ITEM, int N>
+template <class ITEM>
 class RingBuffer : public RingBufferBase
 {
 public:
     /// Constructor
-    RingBuffer()
+    RingBuffer( ITEM* memoryBuffer, unsigned N )
         : RingBufferBase( N )
+        , m_bufferMemory( memoryBuffer )
     {
+        KIT_SYSTEM_ASSERT( memoryBuffer != nullptr );
+        KIT_SYSTEM_ASSERT( N > 1);
+
         // Start with a clean buffer (helps with debugging)
-        memset( m_ringBufferMemory, 0, sizeof( m_ringBufferMemory ) );
+        memset( memoryBuffer, 0, sizeof( ITEM ) * N );
     }
 
 public:
@@ -60,7 +61,7 @@ public:
      */
     bool add( const ITEM& item ) noexcept
     {
-        return RingBufferBase::add( &item, sizeof( ITEM ), m_ringBufferMemory );
+        return RingBufferBase::add( &item, sizeof( ITEM ), m_bufferMemory );
     }
 
     /** Removes an item from the ring buffer.  Returns true on success.  If the
@@ -68,7 +69,7 @@ public:
         is not updated) */
     bool remove( ITEM& item ) noexcept
     {
-        return RingBufferBase::remove( &item, sizeof( ITEM ), m_ringBufferMemory );
+        return RingBufferBase::remove( &item, sizeof( ITEM ), m_bufferMemory );
     }
 
     /** This method inspects the head of the ring buffer without removing it.
@@ -78,7 +79,7 @@ public:
      */
     bool peekHead( ITEM& item ) noexcept
     {
-        return RingBufferBase::peekHead( &item, sizeof( ITEM ), m_ringBufferMemory );
+        return RingBufferBase::peekHead( &item, sizeof( ITEM ), m_bufferMemory );
     }
 
     /** This method inspects the tail of the ring buffer without removing it.
@@ -88,7 +89,7 @@ public:
      */
     bool peekTail( ITEM& item ) noexcept
     {
-        return RingBufferBase::peekTail( &item, sizeof( ITEM ), m_ringBufferMemory );
+        return RingBufferBase::peekTail( &item, sizeof( ITEM ), m_bufferMemory );
     }
 
 public:
@@ -100,7 +101,7 @@ public:
      */
     ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
     {
-        return static_cast<ITEM*>(RingBufferBase::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_ringBufferMemory ));
+        return static_cast<ITEM*>(RingBufferBase::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ));
     }
 
     /** This method 'removes' N elements - that were removed using the
@@ -129,7 +130,7 @@ public:
      */
     ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
     {
-        return static_cast<ITEM*>(RingBufferBase::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_ringBufferMemory ));
+        return static_cast<ITEM*>(RingBufferBase::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ));
     }
 
     /** This method 'adds' N elements - that were populated using the
@@ -151,20 +152,20 @@ public:
 
 protected:
     /// Memory for the Ring buffer
-    ITEM m_ringBufferMemory[N];
+    ITEM* m_bufferMemory;
 
 private:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
-    RingBuffer( const RingBuffer<ITEM, N>& m ) = delete;
+    RingBuffer( const RingBuffer<ITEM>& m ) = delete;
 
     /// Prevent access to the assignment operator -->Ring Buffers can not be copied!
-    RingBuffer<ITEM, N>& operator=( const RingBuffer<ITEM, N>& m ) = delete;
+    RingBuffer<ITEM>& operator=( const RingBuffer<ITEM>& m ) = delete;
 
     /// Prevent access to the move constructor -->Ring Buffers can not be implicitly moved!
-    RingBuffer( RingBuffer<ITEM, N>&& m ) = delete;
+    RingBuffer( RingBuffer<ITEM>&& m ) = delete;
 
     /// Prevent access to the move assignment operator -->Ring Buffers can not be implicitly moved!
-    RingBuffer<ITEM, N>& operator=( RingBuffer<ITEM, N>&& m ) = delete;
+    RingBuffer<ITEM>& operator=( RingBuffer<ITEM>&& m ) = delete;
 };
 
 }  // end namespaces

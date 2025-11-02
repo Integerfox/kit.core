@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
-#define USE_KIT_SYSTEM_ASSERT_MACRO
+#define USE_KIT_SYSTEM_ASSERT
 #define KitTextToStringMaxUnsigned_T uint64_t
 
 #define USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
