@@ -1,4 +1,3 @@
-#if 0
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -9,9 +8,26 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Bsp/Api.h"
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/console/Output.h"
+#include "Api.h"
+#include "Stdio.h"
+#include "Kit/Container/RingBufferAllocate.h"
+#include "Kit/System/Trace.h"
 
+#ifndef USE_BSP_USE_PRINTF
+static Kit::Container::RingBufferAllocate<uint8_t, OPTION_BSP_CONSOLE_TX_FIFO_SIZE+1> txFifo_;
+static Kit::Container::RingBufferAllocate<uint8_t, OPTION_BSP_CONSOLE_RX_FIFO_SIZE+1> rxFifo_;
+
+Kit::Io::Serial::ST::M32F4::InputOutput     g_bspConsoleStream( txFifo_, rxFifo_ );
+
+// Have trace and the console share the same stream
+Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_( void ) noexcept
+{
+    return &g_bspConsoleStream;
+}
+
+
+// PRINTF SUPPORT 
+#else
 
 // Map printf to the UART3
 #ifdef __GNUC__
@@ -29,10 +45,10 @@ PUTCHAR_PROTOTYPE
     /* Place your implementation of fputc here */
     /* e.g. write a character to the USART3 and Loop until the end of transmission */
     
-    //HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFFFFFF);
+    HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFFFFFF);
 
-    char byte = ch & 0xFF;
-    g_bspConsoleStream.write( byte );
+    // char byte = ch & 0xFF;
+    // g_bspConsoleStream.write( byte );
 
     return ch;
 }

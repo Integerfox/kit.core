@@ -24,11 +24,9 @@ src/Kit/Text/_mappings/_arm_gcc_stm32
 src/Kit/Io/Serial/ST/M32F4
 
 # BSP
-#src/Kit/Bsp/ST/NUCLEO-F413ZH/trace
 src/Kit/Bsp/ST/NUCLEO-F413ZH 
 src/Kit/Bsp/ST/NUCLEO-F413ZH/MX 
 src/Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Src > freertos.c
-src/Kit/Bsp/ST/NUCLEO-F413ZH/console
 
 # SEGGER SysVIEW
 src/Kit/Bsp/ST/NUCLEO-F413ZH/SeggerSysView

@@ -13,10 +13,8 @@
 #include "Kit/System/Api.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/FreeRTOS/Thread.h"
-#include "Kit/System/Trace.h"
 #include <stdio.h>
-
-#define SECT_ "_0test"
+#include <inttypes.h>
 
 class Thread1 : public Kit::System::IRunnable
 {
@@ -27,7 +25,7 @@ protected:
     void entry() noexcept override
     {
         Kit::System::Thread& t1 = Kit::System::Thread::getCurrent();
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Thread Running: %s, %p", t1.getName(), t1.getId() );
+        printf(  "Thread Running: %s, %p\n", t1.getName(), t1.getId() );
  
         uint32_t timeMark1 = Kit::System::ElapsedTime::milliseconds();
         uint32_t timeMark2 = timeMark1;
@@ -43,7 +41,7 @@ protected:
             {
                 Bsp_toggle_debug2();
                 timeMark2 = now;
-                KIT_SYSTEM_TRACE_MSG( SECT_,  "now=%lu", now );
+                printf(  "now=%" PRIu32 "\n", now );
             }
 
             uint32_t now2 = Kit::System::ElapsedTime::milliseconds();
@@ -62,7 +60,7 @@ int main( void )
 {
     // Initialize the board
     Bsp_initialize();
-    KIT_SYSTEM_TRACE_MSG( SECT_,  "\n**** BSP TEST APPLICATION STARTED ****" );
+    printf(  "**** BSP TEST APPLICATION STARTED ****\n" );
 
     //// Initialize CPL
     Kit::System::initialize();
@@ -71,12 +69,12 @@ int main( void )
     Kit::System::Thread* t1 = Kit::System::FreeRTOS::Thread::create( runnable_, "TEST", KIT_SYSTEM_THREAD_PRIORITY_NORMAL );
     if ( t1 == nullptr )
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Failed to created thread!!" );
+        printf(  "Failed to created thread!!\n" );
         while ( 1 );
     }
     else
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Thread created %s thread", t1->getName() );
+        printf(  "Thread created %s thread\n", t1->getName() );
     }
 
     //// Start the scheduler

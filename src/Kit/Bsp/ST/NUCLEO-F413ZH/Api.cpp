@@ -11,7 +11,8 @@
 #include "Kit/Bsp/Api.h"
 #include "stm32f4xx_hal.h"
 #include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/gpio.h"
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/console/Output.h"
+#include "Kit/Bsp/ST/NUCLEO-F413ZH/Stdio.h"
+#include "Stdio.h"
 
 #ifdef ENABLE_BSP_SEGGER_SYSVIEW   
 #define INIT_SEGGER_SYSVIEW()   SEGGER_SYSVIEW_Conf()
@@ -19,7 +20,11 @@
 #define INIT_SEGGER_SYSVIEW()   
 #endif
 
-#define SECT_   "bsp"
+#ifndef USE_BSP_USE_PRINTF
+#define INIT_KIT_CONSOLE()    g_bspConsoleStream.start( USART3_IRQn, &huart3 )
+#else
+#define INIT_KIT_CONSOLE()
+#endif
 
 ///////////////////////////////////////////
 void Bsp_initialize( void )
@@ -42,6 +47,6 @@ void Bsp_initialize( void )
     INIT_SEGGER_SYSVIEW();
 
     // Start the Console/Trace UART
-    g_bspConsoleStream.start( USART3_IRQn, &huart3 );
+    INIT_KIT_CONSOLE();
 }
 
