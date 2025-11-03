@@ -33,7 +33,7 @@ import os, copy
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'hw_echo'
+FINAL_OUTPUT_NAME = 'hw_basic3'
 
 # Path to SDK and the ST CubeMX generated BSP files
 prj_dir       = os.path.dirname(os.path.abspath(__file__))
@@ -57,7 +57,6 @@ base_release.cppflags    = ' -std=c++11 -Wno-int-in-bool-context'
 base_release.asmflags    = f' {target_flags}'
 base_release.firstobjs   = f'_BUILT_DIR_.{bsp_mx}/Core/Src'
 base_release.firstobjs   = base_release.firstobjs + f' {bsp_mx}/../Stdio.o'
-#base_release.lastobjs    = base_release.lastobjs + f' {bsp_mx}/../syscalls.o' 
 
 # Set project specific 'optimized' options
 optimized_release = BuildValues()    # Do NOT comment out this line

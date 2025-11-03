@@ -33,7 +33,7 @@ import os, copy
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'blink-freertos'
+FINAL_OUTPUT_NAME = 'hw_basic'
 
 # Path to SDK and the ST CubeMX generated BSP files
 prj_dir       = os.path.dirname(os.path.abspath(__file__))
