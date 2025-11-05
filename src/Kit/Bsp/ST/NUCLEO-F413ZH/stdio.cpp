@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Api.h"
-#include "Stdio.h"
+#include "stdio.h"
 #include "Kit/Container/RingBufferAllocate.h"
 #include "Kit/System/Trace.h"
 

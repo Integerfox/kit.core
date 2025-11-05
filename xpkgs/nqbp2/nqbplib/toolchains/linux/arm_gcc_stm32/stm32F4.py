@@ -1,9 +1,9 @@
 #------------------------------------------------------------------------------
 # TOOLCHAIN
 #
-#   Host:       Windows
+#   Host:       Linux
 #   Compiler:   arm-none-eabi-gcc
-#   Target:     STM32F7xxx Micro-controllers
+#   Target:     STM32F4xxx Micro-controllers
 #   Output:     .BIN|ELF|UF2 file
 #------------------------------------------------------------------------------
 
@@ -29,43 +29,41 @@ class ToolChain( base.ToolChain ):
         self._printsz    = 'arm-none-eabi-size'
         self._asm_ext    = 's'    
         self._asm_ext2   = 'S'   
-        self._shell      = 'cmd.exe /C'
-        self._rm         = 'del /f'
-        self._os_sep     = '/' # Force unix directory separator (for using a response file with gcc on Windoze Host)
 
         self._clean_pkg_dirs.extend( ['_stm32'] )
 
         # Define paths
         self._base_release.inc = self._base_release.inc + \
-                ' -I' + sdk_root + r'\Drivers\STM32F7xx_HAL_Driver\Inc' + \
-                ' -I' + sdk_root + r'\Drivers\STM32F7xx_HAL_Driver\Inc\Legacy' + \
-                ' -I' + sdk_root + r'\Drivers\CMSIS\Device\ST\STM32F7xx\Include' + \
-                ' -I' + sdk_root + r'\Drivers\CMSIS\Include' + \
-                ' -I' + sdk_root + r'\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS' + \
-                ' -I' + freertos_root + r'\include' + \
-                ' -I' + freertos_root + r'\portable\GCC\ARM_CM7\r0p1' + \
+                ' -I' + sdk_root + '/Drivers/STM32F4xx_HAL_Driver/Inc' + \
+                ' -I' + sdk_root + '/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy' + \
+                ' -I' + sdk_root + '/Drivers/CMSIS/Device/ST/STM32F4xx/Include' + \
+                ' -I' + sdk_root + '/Drivers/CMSIS/Include' + \
+                ' -I' + sdk_root + '/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS' + \
+                ' -I' + freertos_root + '/include' + \
+                ' -I' + freertos_root + '/portable/GCC/ARM_CM4F' + \
                 ' -I' + bsp_mx_root + \
-                ' -I' + bsp_mx_root + r'\Core\Inc'
-
+                ' -I' + bsp_mx_root + '/Core/Inc'
 
         # 
-        mcu                             = '-mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb'
-        common_flags                    = f' {mcu} --specs=nano.specs' 
-        self._base_release.cflags       = self._base_release.cflags + common_flags + ' -DUSE_HAL_DRIVER  -ffunction-sections -fdata-sections -Wno-array-bounds -Wno-stringop-truncation'
-        self._base_release.c_only_flags = self._base_release.c_only_flags + ' -std=gnu11  -Os'
-        self._base_release.cppflags     = self._base_release.cppflags + ' -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess -fno-threadsafe-statics -fno-rtti -fno-exceptions -fno-unwind-tables -fno-use-cxa-atexit'
+        mcu                             = '-mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb'
+        common_flags                    = f'{mcu} --specs=nano.specs --specs=nosys.specs -u _printf_float '
+        cpp_and_c_flags                 = '-ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -DUSE_HAL_DRIVER -Wno-array-bounds -Wno-stringop-truncation -Wno-stringop-overflow'
+        self._base_release.c_only_flags = self._base_release.c_only_flags + ' -std=gnu11'
+        self._base_release.cflags       = self._base_release.cflags + common_flags + cpp_and_c_flags + ' -g'
+        self._base_release.cppflags     = self._base_release.cppflags + ' -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess  -fno-rtti -fno-exceptions -fno-unwind-tables  -fno-threadsafe-statics -fno-use-cxa-atexit'
+
         self._base_release.asmflags     = self._base_release.cflags + ' -x assembler-with-cpp'
         self._base_release.asminc       = self._base_release.asminc + self._base_release.inc
         self._base_release.exclude_clangd.extend(['-std=gnu11', 
                                                   '--param max-inline-insns-single=500',
-                                                  '-mcpu=cortex-m7',
-                                                  '-mfpu=fpv5-d16',
+                                                  '-mcpu=cortex-m4',
+                                                  '-mfpu=fpv4-sp-d16',
                                                   '-mfloat-abi=hard',
                                                   '-mthumb',
                                                   '--specs=nano.specs'])
         
         linker_script                   = os.path.join( bsp_mx_root, linker_script )
-        self._base_release.linkflags    = f' --specs=nosys.specs {common_flags} -T{linker_script}  -Wl,-Map={exename}.map -Wl,--gc-sections -static' 
+        self._base_release.linkflags    = f' {common_flags} -T{linker_script}  -Wl,-Map={exename}.map -Wl,--gc-sections' 
         self._base_release.linklibs     = ' -Wl,--start-group -lc -lm -Wl,--end-group'                                        
         
 
@@ -73,7 +71,7 @@ class ToolChain( base.ToolChain ):
         self._optimized_release.linkflags  = self._optimized_release.linkflags + ' -DNDEBUG'
 
         # Debug options, flags, etc.
-        self._debug_release.cflags     = r'-g3 -DDEBUG'
+        self._debug_release.cflags     = self._debug_release.cflags + r' -g3 -DDEBUG'
         
  
    #--------------------------------------------------------------------------
@@ -122,17 +120,3 @@ class ToolChain( base.ToolChain ):
     def get_asm_extensions(self):
         extlist = [ self._asm_ext, self._asm_ext2 ]
         return extlist
-
-
-    # Because Windoze is pain!
-    def _build_ar_rule( self ):
-        self._win32_withrspfile_build_ar_rule()
-
-    def _build_compile_rule( self ):
-        self._build_withrspfile_compile_rule()
-
-    def _build_assembly_rule( self ):
-        self._build_withrspfile_assembly_rule()
-
-    def _build_link_rule( self ):
-        self._build_withrspfile_link_rule()

@@ -11,8 +11,7 @@
 #include "Kit/Bsp/Api.h"
 #include "stm32f4xx_hal.h"
 #include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/gpio.h"
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/Stdio.h"
-#include "Stdio.h"
+#include "stdio.h"
 
 #ifdef ENABLE_BSP_SEGGER_SYSVIEW   
 #define INIT_SEGGER_SYSVIEW()   SEGGER_SYSVIEW_Conf()

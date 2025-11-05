@@ -43,7 +43,6 @@ sdk_root      = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "stm32f4-sdk")
 bsp_mx_root   = os.path.join( NQBP_PKG_ROOT(), bsp_mx )
 freertos_root = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "freertos-v10")
 sysview_root  = os.path.join( NQBP_PKG_ROOT(), bsp_path, "SeggerSysView" )
-sysview_root  = sysview_root.replace("\\", "/")
 
 #
 # For build config/variant: 
@@ -89,7 +88,7 @@ build_variants = { 'stm32':release_opts,
 
 
 # Select Module that contains the desired toolchain
-from nqbplib.toolchains.windows.arm_gcc_stm32.stm32F4 import ToolChain
+from nqbplib.toolchains.linux.arm_gcc_stm32.stm32F4 import ToolChain
 
 # Function that instantiates an instance of the toolchain
 def create():
