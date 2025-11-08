@@ -27,12 +27,12 @@ void OnProjectLoad (void) {
   Project.SetTargetIF ("SWD");
   Project.SetTIFSpeed ("4 MHz");
   Project.AddSvdFile ("$(InstallDir)/Config/CPU/Cortex-M4F.svd");
-  Project.AddSvdFile ("$(NQBP_PKG_ROOT)/src/Kit/Bsp/ST/STM32-F413/STM32F413.svd");
+  Project.AddSvdFile ("$(NQBP_PKG_ROOT)/src/Kit/Bsp/ST/STM32F413.svd");
   //
   // User settings
   //
   File.Open ("_stm32/hw_basic3.elf");
-  Project.SetOSPlugin ("FreeRTOSPlugin_CM4");
+  Project.SetOSPlugin ("FreeRTOSPlugin_Cortex-M.js");
 }
 
 /*********************************************************************

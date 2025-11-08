@@ -29,7 +29,7 @@ src/Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Src > freertos.c
 src/Kit/Bsp/ST/NUCLEO-F413ZH/SeggerSysView
 
 # SDK
-xpkgs/stm32F4-SDK/Drivers/STM32F4xx_HAL_Driver/Src > stm32f4xx_hal_timebase_rtc_alarm_template.c stm32f4xx_hal_timebase_rtc_wakeup_template.c stm32f4xx_hal_timebase_tim_template.c
+xpkgs/stm32f4-sdk/Drivers/STM32F4xx_HAL_Driver/Src > stm32f4xx_hal_timebase_rtc_alarm_template.c stm32f4xx_hal_timebase_rtc_wakeup_template.c stm32f4xx_hal_timebase_tim_template.c
 
 # FreeRTOS
 xpkgs/freertos-v10

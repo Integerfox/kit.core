@@ -10,7 +10,7 @@
 
 #include "StreamDriver.h"
 #include "Kit/System/Shutdown.h"
-#include "Kit/System/api.h"
+#include "Kit/System/Api.h"
 #include "Kit/System/FatalError.h"
 
 ///
