@@ -37,5 +37,5 @@ Options:
 
     
 Notes:
-    o The command MUST be run in the root of the primary respostiory.
+    o The command MUST be run in the root of the primary repository.
 """

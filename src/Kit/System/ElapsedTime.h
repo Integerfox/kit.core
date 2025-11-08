@@ -21,13 +21,13 @@ namespace System {
 /** This class defines the interface for accessing the elapsed time since power
     up and/or reset of the platform.  Elapsed time has millisecond precision.
     Elapsed time is kept in a free running counter - which will roll
-    over after its data type has been exceeded
+    over after its data type has been exceeded 
 
     There are two set of methods for accessing elapsed time:
     1. The default 'API' that uses uint32_t to represent elapsed time.  The
        32bit counter rolls over after 49.7 days.
     2. Extended 'API' that uses a 64bit data type to represent elapsed time.
-       The 64bit counter rolls over after 584 million years.
+       The 64bit counter rolls over after 584 million years. elapsed 
 
     NOTE: The two APIs share the same underlying timing source, i.e. the returned
           values are 'in-sync'

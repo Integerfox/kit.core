@@ -37,10 +37,10 @@ public:
     /** Constructor.  The semaphore is created with the specified 'initialCount'.
         A count of zero, will cause an immediate call to 'wait()' to block.
      */
-    Semaphore( unsigned initialCount=0 );
+    Semaphore( unsigned initialCount=0 ) noexcept;
 
     /// Destructor
-    ~Semaphore();
+    ~Semaphore() noexcept;
 
 
 public:

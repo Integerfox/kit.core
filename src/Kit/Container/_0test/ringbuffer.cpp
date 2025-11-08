@@ -9,7 +9,7 @@
 /** @file */
 
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/Container/RingBuffer.h"
+#include "Kit/Container/RingBufferAllocate.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include <cstdint>
 #include <string.h>
@@ -24,18 +24,18 @@ using namespace Kit::System;
 #define NUM_ELEMENTS 5
 
 namespace {
-class MyRingBuffer : public RingBuffer<uint64_t, NUM_ELEMENTS + 1>
+class MyRingBuffer : public RingBufferAllocate<uint64_t, NUM_ELEMENTS + 1>
 {
 public:
     // Constructor
     MyRingBuffer()
-        : RingBuffer<uint64_t, NUM_ELEMENTS + 1>()
+        : RingBufferAllocate<uint64_t, NUM_ELEMENTS + 1>()
     {
     }
 
     uint64_t* getMemoryPtr()
     {
-        return m_ringBufferMemory;
+        return m_rawMemory;
     }
 };
 
@@ -258,9 +258,9 @@ TEST_CASE( "RingBuffer" )
         REQUIRE( uut.peekTail( peekItem ) == false );
     }
 
-    SECTION( "Operations" )
+    SECTION( "Operations-int8" )
     {
-        RingBuffer<int8_t, NUM_ELEMENTS + 1> uut;
+        RingBufferAllocate<int8_t, NUM_ELEMENTS + 1> uut;
 
         int8_t item     = 0;
         int8_t peekItem = 0;
@@ -462,9 +462,10 @@ TEST_CASE( "RingBuffer" )
         REQUIRE( uut.getNumItems() == 0 );
     }
 
-    SECTION( "Operations" )
+    SECTION( "Operations-uint64" )
     {
-        RingBuffer<uint64_t, NUM_ELEMENTS + 1> uut;
+        uint64_t             rawMemory[( NUM_ELEMENTS + 1 )] = { 0 };
+        RingBuffer<uint64_t> uut( rawMemory, NUM_ELEMENTS + 1 );
 
         uint64_t item     = 0;
         uint64_t peekItem = 0;

@@ -25,6 +25,14 @@ jobs:
       run_number: ${{ github.run_number }}
       ref_name: ${{ github.ref_name }}
 
+  build-linux-stm-arm:
+    name: Build Linux STM ARM
+    uses: ./.github/workflows/build-linux_stm-arm.yml
+    with:
+      event_name: ${{ github.event_name }}
+      run_number: ${{ github.run_number }}
+      ref_name: ${{ github.ref_name }}
+
   build-windows-msvc:
     name: Build Windows MSVC
     uses: ./.github/workflows/build-windows-msvc.yml
@@ -61,7 +69,7 @@ jobs:
   deploy:
     name: Deploy and Tag
     runs-on: ubuntu-latest
-    needs: [build-linux-gcc, build-windows-msvc, build-windows-clang, build-windows-stm-arm, build-windows-atmel-arm]
+    needs: [build-linux-gcc, build-linux-stm-arm, build-windows-msvc, build-windows-clang, build-windows-stm-arm, build-windows-atmel-arm]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     steps:
@@ -72,6 +80,7 @@ jobs:
         run: |
           echo "🎉 All build workflows completed successfully!"
           echo "✅ Build Linux GCC: Success"
+          echo "✅ Build Linux STM ARM: Success"
           echo "✅ Build Windows MSVC: Success" 
           echo "✅ Build Windows Clang: Success"
           echo "✅ Build Windows STM ARM: Success"

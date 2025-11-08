@@ -27,7 +27,7 @@ namespace Container {
 
     Template ARGS:
         ITEM    - Data type of the object stored in the Map.  'ITEM' must
-                  be a sub-class of the Cpl::Container::MapItem base
+                  be a sub-class of the Kit::Container::MapItem base
                   class.
  */
 

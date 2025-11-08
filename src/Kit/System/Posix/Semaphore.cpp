@@ -20,12 +20,12 @@ namespace System {
 
 
 //////////////////////////////////////////////////
-Semaphore::Semaphore( unsigned initialCount )
+Semaphore::Semaphore( unsigned initialCount ) noexcept
 {
     sem_init( &m_sema, 0, initialCount );
 }
 
-Semaphore::~Semaphore()
+Semaphore::~Semaphore() noexcept
 {
     sem_destroy( &m_sema );
 }

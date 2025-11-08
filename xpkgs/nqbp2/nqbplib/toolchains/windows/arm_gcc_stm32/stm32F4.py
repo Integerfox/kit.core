@@ -19,7 +19,7 @@ class ToolChain( base.ToolChain ):
     #--------------------------------------------------------------------------
     def __init__( self, exename, prjdir, build_variants, sdk_root, bsp_mx_root, freertos_root, linker_script, default_variant='release', env_error=None ):
         base.ToolChain.__init__( self, exename, prjdir, build_variants, default_variant )
-        self._ccname     = 'GCC Arm-Cortex (none-eabi) Compiler'
+        self._ccname     = 'GCC Arm-Cortex (none-eabi) compiler'
         self._cc         = 'arm-none-eabi-gcc' 
         self._asm        = 'arm-none-eabi-gcc' 
         self._ld         = 'arm-none-eabi-gcc' 
@@ -42,7 +42,7 @@ class ToolChain( base.ToolChain ):
                 ' -I' + sdk_root + r'\Drivers\CMSIS\Device\ST\STM32F4xx\Include' + \
                 ' -I' + sdk_root + r'\Drivers\CMSIS\Include' + \
                 ' -I' + sdk_root + r'\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS' + \
-                ' -I' + freertos_root + r'\Include' + \
+                ' -I' + freertos_root + r'\include' + \
                 ' -I' + freertos_root + r'\portable\GCC\ARM_CM4F' + \
                 ' -I' + bsp_mx_root + \
                 ' -I' + bsp_mx_root + r'\Core\Inc'

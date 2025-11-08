@@ -42,7 +42,7 @@ class ToolChain( base.ToolChain ):
                 ' -I' + sdk_root + r'\Drivers\CMSIS\Device\ST\STM32F7xx\Include' + \
                 ' -I' + sdk_root + r'\Drivers\CMSIS\Include' + \
                 ' -I' + sdk_root + r'\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS' + \
-                ' -I' + freertos_root + r'\Include' + \
+                ' -I' + freertos_root + r'\include' + \
                 ' -I' + freertos_root + r'\portable\GCC\ARM_CM7\r0p1' + \
                 ' -I' + bsp_mx_root + \
                 ' -I' + bsp_mx_root + r'\Core\Inc'

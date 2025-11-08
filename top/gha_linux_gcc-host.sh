@@ -6,7 +6,7 @@ set -x
 #
 # The script ASSUMES that the working directory is the package root
 #
-# usage: build_linux_gcc-host.sh <buildNumber> [branch]
+# usage: build_linux_gcc-host.sh <buildNumber>
 # 
 
 # setup the environment

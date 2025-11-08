@@ -29,6 +29,10 @@ jobs:
           git config --global core.safecrlf false
       - uses: actions/checkout@v2
 
+      # Install Arm GNU Toolchain (arm-none-eabi-gcc)
+      - name: Install Arm GNU Toolchain (arm-none-eabi-gcc)
+        uses: carlosperate/arm-none-eabi-gcc-action@v1
+
       # Python setup
       - uses: actions/setup-python@v5
         with:

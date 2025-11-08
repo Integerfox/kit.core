@@ -4,6 +4,9 @@ def display_summary():
 
 # DOCOPT command line definition
 USAGE = """
+NOTE: This command is the process of BEING DEPRECATED - do NOT use.
+NOTE: This command is the process of BEING DEPRECATED - do NOT use.
+NOTE: This command is the process of BEING DEPRECATED - do NOT use.
 Creates a semi-tracked/local copy of the specified repository/branch/reference
 ===============================================================================
 usage: evie [common-opts] mount [options] <dst> <repo> <origin> <id>

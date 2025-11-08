@@ -14,7 +14,6 @@
 #include "Kit/System/SimTick.h"
 #include "Kit/System/Private.h"
 #include "Kit/Text/Format.h"
-#include <cstdint>
 
 
 //------------------------------------------------------------------------------
@@ -25,14 +24,14 @@ namespace System {
 ////////////////////////////////////////////////////////////////////////////////
 static Kit::Io::IOutput* activePtr_ = Trace::getDefaultOutputStream_();
 
-void Trace::redirect_( Kit::Io::IOutput& newMedia )
+void Trace::redirect_( Kit::Io::IOutput& newMedia ) noexcept
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     activePtr_ = &newMedia;
 }
 
 
-void Trace::revert_()
+void Trace::revert_() noexcept
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     activePtr_ = getDefaultOutputStream_();
@@ -40,7 +39,7 @@ void Trace::revert_()
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void PrivateTracePlatform::output( Kit::Text::IString& src )
+void PrivateTracePlatform::output( Kit::Text::IString& src ) noexcept
 {
     activePtr_->write( src.getString() );
 }
@@ -55,7 +54,12 @@ void PrivateTracePlatform::output( Kit::Text::IString& src )
     eMAX      -->  ">> DD HH:MM:SS.MMM (<section name>) [<thread name>] {<filename>,<line#>[,<funcname>]} <user message>"
 
 */
-void PrivateTracePlatform::appendInfo( Kit::Text::IString& dst, Trace::InfoLevel_T info, const char* section, const char* filename, int linenum, const char* funcname )
+void PrivateTracePlatform::appendInfo( Kit::Text::IString& dst,
+                                       Trace::InfoLevel_T  info,
+                                       const char*         section,
+                                       const char*         filename,
+                                       int                 linenum,
+                                       const char*         funcname ) noexcept
 {
     const char* threadName = "n/a";
     if ( Kit::System::Thread::tryGetCurrent() != nullptr )

@@ -207,13 +207,13 @@ def run( common_args, cmd_argv ):
             # Check for cyclical deps
             if ( check_cyclical_deps( json_dict, d, args) == False ):
                 # Remove the package
-                cmd = f"evie.py {vopt} --scm {d['repo']['type']} umount -p {d['pkgname']} {branch_opt} {d['parentDir']} {d['repo']['name']} {d['repo']['origin']} {d['version']['tag']}"
+                cmd = f"evie.py {vopt} --scm {d['repo']['type']} rm -p {d['pkgname']} {branch_opt} {d['parentDir']} {d['repo']['name']} {d['repo']['origin']} {d['version']['tag']}"
                 t   = utils.run_shell( cmd, common_args['-v'] )
-                utils.check_results( t, f"ERROR: Failed to umount the repo: {d['repo']['name']}, 'umount', 'get-error-msg', common_args['--scm']" )
-
+                utils.check_results( t, f"ERROR: Failed to remove the package: {d['repo']['name']}, 'rm', 'get-error-msg', common_args['--scm']" )
+            
                 # Display parting message (if there is one)
                 print("Adoption was 'reverted'")
-                utils.display_scm_message( 'umount', 'get-success-msg', common_args['--scm'] )
+                utils.display_scm_message( 'rm', 'get-success-msg', common_args['--scm'] )
                 sys.exit(1)
 
 

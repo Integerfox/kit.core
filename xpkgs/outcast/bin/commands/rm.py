@@ -66,7 +66,7 @@ def run( common_args, cmd_argv ):
         utils.write_package_file( json_dict )
 
         # Display parting message (if there is one)
-        utils.display_scm_message( 'umount', 'get-success-msg', common_args['--scm'] )
+        utils.display_scm_message( 'rm', 'get-success-msg', common_args['--scm'] )
 
     # FOREIGN Package
     elif ( pkgobj['pkgtype'] == 'foreign' ):
