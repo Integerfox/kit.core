@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 178-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 182-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -71,13 +71,13 @@ $(function() {
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/** This class defines the interface for accessing the elapsed time since power</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">    up and/or reset of the platform.  Elapsed time has millisecond precision.</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">    Elapsed time is kept in a free running counter - which will roll</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">    over after its data type has been exceeded</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">    over after its data type has been exceeded </span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"></span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">    There are two set of methods for accessing elapsed time:</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">    1. The default &#39;API&#39; that uses uint32_t to represent elapsed time.  The</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">       32bit counter rolls over after 49.7 days.</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">    2. Extended &#39;API&#39; that uses a 64bit data type to represent elapsed time.</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">       The 64bit counter rolls over after 584 million years.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">       The 64bit counter rolls over after 584 million years. elapsed </span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">    NOTE: The two APIs share the same underlying timing source, i.e. the returned</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">          values are &#39;in-sync&#39;</span></div>
@@ -268,11 +268,11 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_system_1_1_elapsed_time_html_aa5205d662a5766cf4c880987e577406c"><div class="ttname"><a href="class_kit_1_1_system_1_1_elapsed_time.html#aa5205d662a5766cf4c880987e577406c">Kit::System::ElapsedTime::secondsInRealTime</a></div><div class="ttdeci">static uint32_t secondsInRealTime() noexcept</div><div class="ttdoc">This method is the same as seconds(), EXCEPT that is ALWAYS guaranteed to return elapsed time in 'rea...</div><div class="ttdef"><b>Definition</b> ElapsedTime.h:112</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_elapsed_time_html_ac377b8a01254fcf459b8f968a1599569"><div class="ttname"><a href="class_kit_1_1_system_1_1_elapsed_time.html#ac377b8a01254fcf459b8f968a1599569">Kit::System::ElapsedTime::deltaSeconds</a></div><div class="ttdeci">static uint32_t deltaSeconds(uint32_t startTime, uint32_t endTime=seconds()) noexcept</div><div class="ttdoc">This method returns the delta time, in seconds, between the specified 'startTime' and 'endTime'.</div><div class="ttdef"><b>Definition</b> ElapsedTime.h:80</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_elapsed_time_html_adce63e6f14bf83a2d51229272fbf84ad"><div class="ttname"><a href="class_kit_1_1_system_1_1_elapsed_time.html#adce63e6f14bf83a2d51229272fbf84ad">Kit::System::ElapsedTime::millisecondsInRealTime</a></div><div class="ttdeci">static uint32_t millisecondsInRealTime() noexcept</div><div class="ttdoc">This method is the same as milliseconds(), EXCEPT that is ALWAYS guaranteed to return elapsed time in...</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 1 2025 18:47:06 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Nov 8 2025 21:00:10 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

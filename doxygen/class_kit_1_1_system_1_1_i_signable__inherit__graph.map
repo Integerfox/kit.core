@@ -1,19 +1,21 @@
 <map id="Kit::System::ISignable" name="Kit::System::ISignable">
-<area shape="rect" id="Node000001" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="5,111,171,137"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread." alt="" coords="221,62,395,87"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="158,106,250,85,251,90,159,111"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore." alt="" coords="219,111,397,137"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="185,121,218,121,218,127,185,127"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="233,161,383,186"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="159,137,251,158,250,163,158,142"/>
+<area shape="rect" id="Node000001" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="5,126,171,151"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread." alt="" coords="221,70,395,95"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,120,257,93,258,98,152,125"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore." alt="" coords="219,126,397,151"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="185,136,218,136,218,141,185,141"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="233,190,383,215"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="147,153,264,187,263,192,145,158"/>
 <area shape="rect" id="Node000003" href="$class_kit_1_1_event_queue_1_1_server.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing events from Ev..." alt="" coords="458,13,635,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="383,57,484,35,485,41,384,62"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="374,64,492,35,494,41,376,69"/>
 <area shape="rect" id="Node000005" href="$class_kit_1_1_system_1_1_event_loop_with_p_scheduling.html" title="This class extends the EventLoop class to add periodic scheduling to an event based &#39;thread&#39;." alt="" coords="445,63,648,103"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="409,75,445,77,445,82,408,81"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="408,80,445,80,445,85,408,85"/>
 <area shape="rect" id="Node000004" href="$class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html" title="This class extends the Kit::EventQueue::Server class to add periodic scheduling to an event based &#39;th..." alt="" coords="696,5,913,45"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="649,23,696,23,696,28,649,28"/>
-<area shape="rect" id="Node000008" href="$class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads." alt="" coords="477,144,617,184"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="397,167,476,164,476,169,397,173"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_system_1_1_win32_1_1_thread.html" title="This concrete class implements a Thread object using Win32 threads." alt="" coords="473,208,620,248"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="378,187,474,209,472,214,377,192"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html" title="This concrete class implements a Thread object using FreeRTOS threads." alt="" coords="463,127,630,167"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="376,184,463,164,464,169,377,189"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads." alt="" coords="477,191,617,231"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="397,203,476,206,476,211,397,208"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_system_1_1_win32_1_1_thread.html" title="This concrete class implements a Thread object using Win32 threads." alt="" coords="473,255,620,295"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="365,217,480,252,479,257,363,222"/>
 </map>

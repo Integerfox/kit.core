@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 178-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 182-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -129,56 +129,55 @@ $(function() {
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">    /// See Kit::System::ISignable</span></div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#aa26531e94531d70dc51e41e045c7ef76">   80</a></span><span class="comment"></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#aa26531e94531d70dc51e41e045c7ef76">su_signal</a>() noexcept override;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>protected:<span class="comment"></span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">    /// Entry point for all newly created threads</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#ab2ee85562d557e9320c2927b42165493">   85</a></span><span class="comment"></span>    static <span class="keywordtype">void</span>* <a class="code hl_function" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#ab2ee85562d557e9320c2927b42165493">entryPoint</a>( <span class="keywordtype">void</span>* data );</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>protected:<span class="comment"></span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">    /// Entry point for all newly created threads</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#ab2ee85562d557e9320c2927b42165493">   84</a></span><span class="comment"></span>    static <span class="keywordtype">void</span>* <a class="code hl_function" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#ab2ee85562d557e9320c2927b42165493">entryPoint</a>( <span class="keywordtype">void</span>* data );</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>public:<span class="comment"></span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">    /** Private constructor to convert the native Posix thread to a Kit Thread.</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">        THIS CONSTRUCTOR SHOULD NEVER BE USED BY THE APPLICATION!</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a4a48fac28d29e240e27b3ce374bcab71">   92</a></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_posix_1_1_thread.html">Thread</a>( <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::System::<a class="code hl_class" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a>&amp; dummyRunnable );</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>protected:<span class="comment"></span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">    /// ASCII name of the task</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">   96</a></span><span class="comment"></span>    <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Text::FString&lt;64&gt; <a class="code hl_variable" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">m_name</a>;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"></span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">    /// The thread synchronized message semaphore.</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a45834b19337055c042dcbe31d717d590">   99</a></span><span class="comment"></span>    <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::System::<a class="code hl_class" href="class_kit_1_1_system_1_1_semaphore.html">Semaphore</a> <a class="code hl_variable" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a45834b19337055c042dcbe31d717d590">m_syncSema</a>;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>public:<span class="comment"></span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">    /// Housekeeping</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a4b752da217c6717bd1c3c31428277f67">  103</a></span><span class="comment"></span>    friend class <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::System::<a class="code hl_class" href="class_kit_1_1_system_1_1_posix_1_1_thread.html">Thread</a>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>};</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">    /** Private constructor to convert the native Posix thread to a Kit Thread.</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">        THIS CONSTRUCTOR SHOULD NEVER BE USED BY THE APPLICATION!</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a4a48fac28d29e240e27b3ce374bcab71">   91</a></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_posix_1_1_thread.html">Thread</a>( <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::System::<a class="code hl_class" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a>&amp; dummyRunnable );</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>protected:<span class="comment"></span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">    /// ASCII name of the task</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">   95</a></span><span class="comment"></span>    <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Text::FString&lt;64&gt; <a class="code hl_variable" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">m_name</a>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"></span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">    /// The thread synchronized message semaphore.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a45834b19337055c042dcbe31d717d590">   98</a></span><span class="comment"></span>    <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::System::<a class="code hl_class" href="class_kit_1_1_system_1_1_semaphore.html">Semaphore</a> <a class="code hl_variable" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a45834b19337055c042dcbe31d717d590">m_syncSema</a>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">    /// Housekeeping</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a4b752da217c6717bd1c3c31428277f67">  102</a></span><span class="comment"></span>    friend class <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::System::<a class="code hl_class" href="class_kit_1_1_system_1_1_posix_1_1_thread.html">Thread</a>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>};</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_f_string_8h_html"><div class="ttname"><a href="_f_string_8h.html">FString.h</a></div></div>
 <div class="ttc" id="a_semaphore_8h_html"><div class="ttname"><a href="_semaphore_8h.html">Semaphore.h</a></div></div>
 <div class="ttc" id="a_thread_8h_html"><div class="ttname"><a href="_thread_8h.html">Thread.h</a></div></div>
-<div class="ttc" id="a_thread_8h_html_ac880fe51a701f3ea6b1c2085ee78cdb6"><div class="ttname"><a href="_thread_8h.html#ac880fe51a701f3ea6b1c2085ee78cdb6">KIT_SYSTEM_THREAD_PRIORITY_NORMAL</a></div><div class="ttdeci">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL</div><div class="ttdoc">The recommended/default priority for a thread.</div><div class="ttdef"><b>Definition</b> Thread.h:32</div></div>
+<div class="ttc" id="a_thread_8h_html_ac880fe51a701f3ea6b1c2085ee78cdb6"><div class="ttname"><a href="_thread_8h.html#ac880fe51a701f3ea6b1c2085ee78cdb6">KIT_SYSTEM_THREAD_PRIORITY_NORMAL</a></div><div class="ttdeci">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL</div><div class="ttdoc">The recommended/default priority for a thread.</div><div class="ttdef"><b>Definition</b> Thread.h:31</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_runnable_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_runnable.html">Kit::System::IRunnable</a></div><div class="ttdoc">This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob...</div><div class="ttdef"><b>Definition</b> IRunnable.h:27</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html">Kit::System::Posix::Thread</a></div><div class="ttdoc">This concrete class implements a Thread object using Posix threads.</div><div class="ttdef"><b>Definition</b> Thread.h:38</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a45834b19337055c042dcbe31d717d590"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a45834b19337055c042dcbe31d717d590">Kit::System::Posix::Thread::m_syncSema</a></div><div class="ttdeci">Kit::System::Semaphore m_syncSema</div><div class="ttdoc">The thread synchronized message semaphore.</div><div class="ttdef"><b>Definition</b> Thread.h:99</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a45834b19337055c042dcbe31d717d590"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a45834b19337055c042dcbe31d717d590">Kit::System::Posix::Thread::m_syncSema</a></div><div class="ttdeci">Kit::System::Semaphore m_syncSema</div><div class="ttdoc">The thread synchronized message semaphore.</div><div class="ttdef"><b>Definition</b> Thread.h:98</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a7444b24fcb5e2601403d80b9cb6323b7"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7444b24fcb5e2601403d80b9cb6323b7">Kit::System::Posix::Thread::signal</a></div><div class="ttdeci">int signal() noexcept override</div><div class="ttdoc">See Kit::System::ISignable.</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a7867ea4fa8071cf4be58b8b912014a9d"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">Kit::System::Posix::Thread::m_name</a></div><div class="ttdeci">Kit::Text::FString&lt; 64 &gt; m_name</div><div class="ttdoc">ASCII name of the task.</div><div class="ttdef"><b>Definition</b> Thread.h:96</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a7867ea4fa8071cf4be58b8b912014a9d"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">Kit::System::Posix::Thread::m_name</a></div><div class="ttdeci">Kit::Text::FString&lt; 64 &gt; m_name</div><div class="ttdoc">ASCII name of the task.</div><div class="ttdef"><b>Definition</b> Thread.h:95</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_a81a9528d927f3601cdd1539830148b9a"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a81a9528d927f3601cdd1539830148b9a">Kit::System::Posix::Thread::Thread</a></div><div class="ttdeci">Thread(IRunnable &amp;runnable, const char *name, int priority=KIT_SYSTEM_THREAD_PRIORITY_NORMAL, unsigned stackSize=0, int schedType=SCHED_OTHER, bool allowSimTicks=true)</div><div class="ttdoc">Constructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_aa26531e94531d70dc51e41e045c7ef76"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#aa26531e94531d70dc51e41e045c7ef76">Kit::System::Posix::Thread::su_signal</a></div><div class="ttdeci">int su_signal() noexcept override</div><div class="ttdoc">See Kit::System::ISignable.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_ab2ee85562d557e9320c2927b42165493"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#ab2ee85562d557e9320c2927b42165493">Kit::System::Posix::Thread::entryPoint</a></div><div class="ttdeci">static void * entryPoint(void *data)</div><div class="ttdoc">Entry point for all newly created threads.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_ac2712e01d6c57a1545d41a978d4526ff"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#ac2712e01d6c57a1545d41a978d4526ff">Kit::System::Posix::Thread::getName</a></div><div class="ttdeci">const char * getName() const noexcept override</div><div class="ttdoc">See Kit::System::Thread.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_posix_1_1_thread_html_af73953d82d73ab904dedc6c67329d187"><div class="ttname"><a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#af73953d82d73ab904dedc6c67329d187">Kit::System::Posix::Thread::~Thread</a></div><div class="ttdeci">~Thread()</div><div class="ttdoc">Destructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html">Kit::System::Semaphore</a></div><div class="ttdoc">This semaphore concrete class defines the interface for a Counting Semaphore.</div><div class="ttdef"><b>Definition</b> Semaphore.h:35</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_thread_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_thread.html">Kit::System::Thread</a></div><div class="ttdoc">This mostly abstract class defines the operations that can be performed on a thread.</div><div class="ttdef"><b>Definition</b> Thread.h:84</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_thread_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_thread.html">Kit::System::Thread</a></div><div class="ttdoc">This mostly abstract class defines the operations that can be performed on a thread.</div><div class="ttdef"><b>Definition</b> Thread.h:83</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 1 2025 18:47:06 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Nov 8 2025 21:00:10 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

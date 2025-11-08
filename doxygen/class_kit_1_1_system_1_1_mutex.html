@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 178-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 182-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -58,8 +58,7 @@ $(function() {
  <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This concrete mutex class defines the interface for a mutex that has "recursive" semantics. </p>
-<p>Recursive semantic allows the thread that owns the mutex to acquire ownership multiple times by calling <a class="el" href="#aabf0be9b881b7b9995b7e9e84cb2e54d" title="This method is invoked prior to entering a critical section.">lock()</a> multiple times. <br  />
- There must be a corresponding number of <a class="el" href="#a7499658daf6a5c7e1c1f8a5e9713d515" title="This method is invoke at the end of a critical section.">unlock()</a> calls made before the ownership of the mutex is released. </p>
+<p>Recursive semantic allows the thread that owns the mutex to acquire ownership multiple times by calling <a class="el" href="#a3523eae62451ee2b5e802582e3834ca9" title="This method is invoked prior to entering a critical section.">lock()</a> multiple times. There must be a corresponding number of <a class="el" href="#ac662a58f33fae43000b6a09200a1fcc2" title="This method is invoke at the end of a critical section.">unlock()</a> calls made before the ownership of the mutex is released. </p>
 </div>
 <p><code>#include &lt;<a class="el" href="_mutex_8h_source.html">Mutex.h</a>&gt;</code></p>
 <table class="memberdecls">
@@ -71,18 +70,18 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a647b479e060e414c4f6732210fd388ea" id="r_a647b479e060e414c4f6732210fd388ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a647b479e060e414c4f6732210fd388ea">Mutex</a> ()</td></tr>
-<tr class="memdesc:a647b479e060e414c4f6732210fd388ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:a647b479e060e414c4f6732210fd388ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef380c680ea25caab911056693d8d664" id="r_aef380c680ea25caab911056693d8d664"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef380c680ea25caab911056693d8d664">~Mutex</a> ()</td></tr>
-<tr class="memdesc:aef380c680ea25caab911056693d8d664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
-<tr class="separator:aef380c680ea25caab911056693d8d664"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabf0be9b881b7b9995b7e9e84cb2e54d" id="r_aabf0be9b881b7b9995b7e9e84cb2e54d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabf0be9b881b7b9995b7e9e84cb2e54d">lock</a> ()</td></tr>
-<tr class="memdesc:aabf0be9b881b7b9995b7e9e84cb2e54d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is invoked prior to entering a critical section.  <br /></td></tr>
-<tr class="separator:aabf0be9b881b7b9995b7e9e84cb2e54d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7499658daf6a5c7e1c1f8a5e9713d515" id="r_a7499658daf6a5c7e1c1f8a5e9713d515"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7499658daf6a5c7e1c1f8a5e9713d515">unlock</a> ()</td></tr>
-<tr class="memdesc:a7499658daf6a5c7e1c1f8a5e9713d515"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is invoke at the end of a critical section.  <br /></td></tr>
-<tr class="separator:a7499658daf6a5c7e1c1f8a5e9713d515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c5486b25c85abf5801d7e52a99c014b" id="r_a0c5486b25c85abf5801d7e52a99c014b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c5486b25c85abf5801d7e52a99c014b">Mutex</a> () noexcept</td></tr>
+<tr class="memdesc:a0c5486b25c85abf5801d7e52a99c014b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a0c5486b25c85abf5801d7e52a99c014b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80e6b1715b545fa68056a6c22da22f3d" id="r_a80e6b1715b545fa68056a6c22da22f3d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80e6b1715b545fa68056a6c22da22f3d">~Mutex</a> () noexcept</td></tr>
+<tr class="memdesc:a80e6b1715b545fa68056a6c22da22f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a80e6b1715b545fa68056a6c22da22f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3523eae62451ee2b5e802582e3834ca9" id="r_a3523eae62451ee2b5e802582e3834ca9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3523eae62451ee2b5e802582e3834ca9">lock</a> () noexcept</td></tr>
+<tr class="memdesc:a3523eae62451ee2b5e802582e3834ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is invoked prior to entering a critical section.  <br /></td></tr>
+<tr class="separator:a3523eae62451ee2b5e802582e3834ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac662a58f33fae43000b6a09200a1fcc2" id="r_ac662a58f33fae43000b6a09200a1fcc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac662a58f33fae43000b6a09200a1fcc2">unlock</a> () noexcept</td></tr>
+<tr class="memdesc:ac662a58f33fae43000b6a09200a1fcc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is invoke at the end of a critical section.  <br /></td></tr>
+<tr class="separator:ac662a58f33fae43000b6a09200a1fcc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -91,11 +90,14 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a6d2107792c6d57e825a04cf9fd2a0959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a647b479e060e414c4f6732210fd388ea" name="a647b479e060e414c4f6732210fd388ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a647b479e060e414c4f6732210fd388ea">&#9670;&#160;</a></span>Mutex()</h2>
+<a id="a0c5486b25c85abf5801d7e52a99c014b" name="a0c5486b25c85abf5801d7e52a99c014b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c5486b25c85abf5801d7e52a99c014b">&#9670;&#160;</a></span>Mutex()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Kit::System::Mutex::Mutex </td>
@@ -104,17 +106,25 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
 
 </div>
 </div>
-<a id="aef380c680ea25caab911056693d8d664" name="aef380c680ea25caab911056693d8d664"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef380c680ea25caab911056693d8d664">&#9670;&#160;</a></span>~Mutex()</h2>
+<a id="a80e6b1715b545fa68056a6c22da22f3d" name="a80e6b1715b545fa68056a6c22da22f3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e6b1715b545fa68056a6c22da22f3d">&#9670;&#160;</a></span>~Mutex()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Kit::System::Mutex::~Mutex </td>
@@ -123,6 +133,11 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Destructor. </p>
@@ -130,11 +145,14 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aabf0be9b881b7b9995b7e9e84cb2e54d" name="aabf0be9b881b7b9995b7e9e84cb2e54d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabf0be9b881b7b9995b7e9e84cb2e54d">&#9670;&#160;</a></span>lock()</h2>
+<a id="a3523eae62451ee2b5e802582e3834ca9" name="a3523eae62451ee2b5e802582e3834ca9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3523eae62451ee2b5e802582e3834ca9">&#9670;&#160;</a></span>lock()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Kit::System::Mutex::lock </td>
@@ -143,6 +161,11 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method is invoked prior to entering a critical section. </p>
@@ -150,11 +173,14 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a7499658daf6a5c7e1c1f8a5e9713d515" name="a7499658daf6a5c7e1c1f8a5e9713d515"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7499658daf6a5c7e1c1f8a5e9713d515">&#9670;&#160;</a></span>unlock()</h2>
+<a id="ac662a58f33fae43000b6a09200a1fcc2" name="ac662a58f33fae43000b6a09200a1fcc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac662a58f33fae43000b6a09200a1fcc2">&#9670;&#160;</a></span>unlock()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Kit::System::Mutex::unlock </td>
@@ -163,6 +189,11 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>This method is invoke at the end of a critical section. </p>
@@ -201,7 +232,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 1 2025 18:47:07 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Nov 8 2025 21:00:10 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 178-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 182-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -57,13 +57,13 @@ $(function() {
  <a href="#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class extends the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> class to add periodic scheduling to an event based 'thread'. </p>
-<p>The timing resolution of the periodic scheduling is a determined by the 'timingTickInMsec' argument value in the class's constructor. For example if 'timingTickInMsec' is 10ms then no interval should have a interval duration less than 10ms.</p>
+<p>The timing resolution of the periodic scheduling is a determined by the 'timingTickInMsec' argument value in the class's constructor. For example if 'timingTickInMsec' is 10ms then no interval should have a an execution frequency faster than 100Hz (i.e. 10ms).</p>
 <p>The order of processing is:</p>
 <ol type="1">
 <li>The Event Loop signal, Event Flags, and Software Timers are processed.</li>
 <li>The Periodic scheduler's <a class="el" href="class_kit_1_1_system_1_1_periodic_scheduler.html#a25a0a5483d2ab2faa501d8e60e8d841f" title="This method is used to invoke the scheduler.">executeScheduler()</a> method is called</li>
 <li>The optional 'Idle' function is called.</li>
-<li>The loop is repeated until there are no expired timers, and no event flags - at which point the thread blocks and wait for any of the above asynchronous actions to wake up the thread. </li>
+<li>The thread blocks and wait for any of the asynchronous actions in step 1 to wake up the thread. </li>
 </ol>
 </div>
 <p><code>#include &lt;<a class="el" href="_event_loop_with_p_scheduling_8h_source.html">EventLoopWithPScheduling.h</a>&gt;</code></p>
@@ -419,7 +419,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 1 2025 18:47:07 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Nov 8 2025 21:00:10 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

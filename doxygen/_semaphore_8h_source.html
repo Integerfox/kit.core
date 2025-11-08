@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 178-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 182-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -87,13 +87,13 @@ $(function() {
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">    /** Constructor.  The semaphore is created with the specified &#39;initialCount&#39;.</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">        A count of zero, will cause an immediate call to &#39;wait()&#39; to block.</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_semaphore.html#a64922e3c5e4fc9f655f667e26db23788">   40</a></span>    <a class="code hl_function" href="class_kit_1_1_system_1_1_semaphore.html#a64922e3c5e4fc9f655f667e26db23788">Semaphore</a>( <span class="keywordtype">unsigned</span> initialCount=0 );</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_semaphore.html#a12187b509144d280b4ca619e7b83be3a">   40</a></span>    <a class="code hl_function" href="class_kit_1_1_system_1_1_semaphore.html#a12187b509144d280b4ca619e7b83be3a">Semaphore</a>( <span class="keywordtype">unsigned</span> initialCount=0 ) noexcept;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"></span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">    /// Destructor</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_semaphore.html#a463b4cbd0b68db9b6745698f735f4b34">   43</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_system_1_1_semaphore.html#a463b4cbd0b68db9b6745698f735f4b34">~Semaphore</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_semaphore.html#a508ae8a6df9876b3568a18b3a88ad79e">   43</a></span><span class="comment"></span>    ~<a class="code hl_class" href="class_kit_1_1_system_1_1_semaphore.html">Semaphore</a>() noexcept;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>public:<span class="comment"></span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">    /** This method causes the current thread to block and wait till the</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">        semaphore is signaled/set.  NOTE: Can only be called from a Thread</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">        context!</span></div>
@@ -158,11 +158,10 @@ $(function() {
 <div class="ttc" id="a_semaphore_8h_html_a863018c12200a6484aa902b0323fa8bc"><div class="ttname"><a href="_semaphore_8h.html#a863018c12200a6484aa902b0323fa8bc">KitSystemSema_T</a></div><div class="ttdeci">#define KitSystemSema_T</div><div class="ttdoc">Defer the definition of the a raw semaphore type to the application's 'platform'.</div><div class="ttdef"><b>Definition</b> Semaphore.h:18</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a></div><div class="ttdoc">This abstract class defines the interface by which a client can cause an object that is waiting-on-a-...</div><div class="ttdef"><b>Definition</b> ISignable.h:24</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html">Kit::System::Semaphore</a></div><div class="ttdoc">This semaphore concrete class defines the interface for a Counting Semaphore.</div><div class="ttdef"><b>Definition</b> Semaphore.h:35</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a12187b509144d280b4ca619e7b83be3a"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a12187b509144d280b4ca619e7b83be3a">Kit::System::Semaphore::Semaphore</a></div><div class="ttdeci">Semaphore(unsigned initialCount=0) noexcept</div><div class="ttdoc">Constructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a1f45b14d517f25b1c55c57861c1ecef6"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a1f45b14d517f25b1c55c57861c1ecef6">Kit::System::Semaphore::Api</a></div><div class="ttdeci">friend class Api</div><div class="ttdoc">Friends(s)</div><div class="ttdef"><b>Definition</b> Semaphore.h:99</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a463b4cbd0b68db9b6745698f735f4b34"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a463b4cbd0b68db9b6745698f735f4b34">Kit::System::Semaphore::~Semaphore</a></div><div class="ttdeci">~Semaphore()</div><div class="ttdoc">Destructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a4fa79becefe8da3acd6a59aa094ef188"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a4fa79becefe8da3acd6a59aa094ef188">Kit::System::Semaphore::m_sema</a></div><div class="ttdeci">KitSystemSema_T m_sema</div><div class="ttdoc">Raw Semaphore handle/instance/pointer.</div><div class="ttdef"><b>Definition</b> Semaphore.h:80</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a62eaf07e4d2e91a355f649cb82f244c9"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a62eaf07e4d2e91a355f649cb82f244c9">Kit::System::Semaphore::su_signal</a></div><div class="ttdeci">int su_signal() noexcept override</div><div class="ttdoc">ISignable API.</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a64922e3c5e4fc9f655f667e26db23788"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a64922e3c5e4fc9f655f667e26db23788">Kit::System::Semaphore::Semaphore</a></div><div class="ttdeci">Semaphore(unsigned initialCount=0)</div><div class="ttdoc">Constructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a7ae39e2a069b7f4d24ee0edec6473b5d"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a7ae39e2a069b7f4d24ee0edec6473b5d">Kit::System::Semaphore::signal</a></div><div class="ttdeci">int signal() noexcept override</div><div class="ttdoc">ISignable API.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a8dd1be3cda3d51b6b0a8837ea4c0ef93"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a8dd1be3cda3d51b6b0a8837ea4c0ef93">Kit::System::Semaphore::timedWaitInRealTime</a></div><div class="ttdeci">bool timedWaitInRealTime(uint32_t timeoutMs) noexcept</div><div class="ttdoc">Helper method for supporting SimTicks and 'real' tick in the same build.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_a8fc1bbc6c339f4cd50048115c772245b"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#a8fc1bbc6c339f4cd50048115c772245b">Kit::System::Semaphore::tryWait</a></div><div class="ttdeci">bool tryWait() noexcept</div><div class="ttdoc">This method is the same as wait(), except that if the semaphore count is zero, the method returns imm...</div></div>
@@ -170,11 +169,11 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_ab749bd3c09783410bebfa0dc023a18c1"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#ab749bd3c09783410bebfa0dc023a18c1">Kit::System::Semaphore::timedWait</a></div><div class="ttdeci">bool timedWait(uint32_t timeoutMs) noexcept</div><div class="ttdoc">This method is the same as wait(), except that 'timeout' specifies the maximum amount of time,...</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_semaphore_html_ac48389b643f4620204e11876bddcd70c"><div class="ttname"><a href="class_kit_1_1_system_1_1_semaphore.html#ac48389b643f4620204e11876bddcd70c">Kit::System::Semaphore::wait</a></div><div class="ttdeci">void wait() noexcept</div><div class="ttdoc">This method causes the current thread to block and wait till the semaphore is signaled/set.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_sim_tick_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_sim_tick.html">Kit::System::SimTick</a></div><div class="ttdoc">This class define the interface to provide a simulates system tick (in milliseconds) to the applicati...</div><div class="ttdef"><b>Definition</b> SimTick.h:227</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div><div class="ttdef"><b>Definition</b> AvlTree_.h:26</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 1 2025 18:47:06 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Nov 8 2025 21:00:10 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

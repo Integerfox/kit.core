@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 178-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 182-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -81,12 +81,12 @@ o The class inherits from 'ISignable' which contains/defines the
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a64922e3c5e4fc9f655f667e26db23788" id="r_a64922e3c5e4fc9f655f667e26db23788"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64922e3c5e4fc9f655f667e26db23788">Semaphore</a> (unsigned initialCount=0)</td></tr>
-<tr class="memdesc:a64922e3c5e4fc9f655f667e26db23788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:a64922e3c5e4fc9f655f667e26db23788"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a463b4cbd0b68db9b6745698f735f4b34" id="r_a463b4cbd0b68db9b6745698f735f4b34"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a463b4cbd0b68db9b6745698f735f4b34">~Semaphore</a> ()</td></tr>
-<tr class="memdesc:a463b4cbd0b68db9b6745698f735f4b34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
-<tr class="separator:a463b4cbd0b68db9b6745698f735f4b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12187b509144d280b4ca619e7b83be3a" id="r_a12187b509144d280b4ca619e7b83be3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12187b509144d280b4ca619e7b83be3a">Semaphore</a> (unsigned initialCount=0) noexcept</td></tr>
+<tr class="memdesc:a12187b509144d280b4ca619e7b83be3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a12187b509144d280b4ca619e7b83be3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508ae8a6df9876b3568a18b3a88ad79e" id="r_a508ae8a6df9876b3568a18b3a88ad79e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a508ae8a6df9876b3568a18b3a88ad79e">~Semaphore</a> () noexcept</td></tr>
+<tr class="memdesc:a508ae8a6df9876b3568a18b3a88ad79e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
+<tr class="separator:a508ae8a6df9876b3568a18b3a88ad79e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac48389b643f4620204e11876bddcd70c" id="r_ac48389b643f4620204e11876bddcd70c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac48389b643f4620204e11876bddcd70c">wait</a> () noexcept</td></tr>
 <tr class="memdesc:ac48389b643f4620204e11876bddcd70c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method causes the current thread to block and wait till the semaphore is signaled/set.  <br /></td></tr>
 <tr class="separator:ac48389b643f4620204e11876bddcd70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,11 +132,14 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>SimTick</b></td></tr
 <tr class="separator:a00f6e4a28db4c896af02dc34e982c1a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a64922e3c5e4fc9f655f667e26db23788" name="a64922e3c5e4fc9f655f667e26db23788"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64922e3c5e4fc9f655f667e26db23788">&#9670;&#160;</a></span>Semaphore()</h2>
+<a id="a12187b509144d280b4ca619e7b83be3a" name="a12187b509144d280b4ca619e7b83be3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12187b509144d280b4ca619e7b83be3a">&#9670;&#160;</a></span>Semaphore()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Kit::System::Semaphore::Semaphore </td>
@@ -145,6 +148,11 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>SimTick</b></td></tr
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
@@ -152,11 +160,14 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>SimTick</b></td></tr
 
 </div>
 </div>
-<a id="a463b4cbd0b68db9b6745698f735f4b34" name="a463b4cbd0b68db9b6745698f735f4b34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a463b4cbd0b68db9b6745698f735f4b34">&#9670;&#160;</a></span>~Semaphore()</h2>
+<a id="a508ae8a6df9876b3568a18b3a88ad79e" name="a508ae8a6df9876b3568a18b3a88ad79e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a508ae8a6df9876b3568a18b3a88ad79e">&#9670;&#160;</a></span>~Semaphore()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Kit::System::Semaphore::~Semaphore </td>
@@ -165,6 +176,11 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>SimTick</b></td></tr
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Destructor. </p>
@@ -424,7 +440,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>SimTick</b></td></tr
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 1 2025 18:47:07 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Nov 8 2025 21:00:10 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

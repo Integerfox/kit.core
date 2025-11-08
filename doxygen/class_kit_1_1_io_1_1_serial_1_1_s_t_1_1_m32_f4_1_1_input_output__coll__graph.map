@@ -1,0 +1,39 @@
+<map id="Kit::Io::Serial::ST::M32F4::InputOutput" name="Kit::Io::Serial::ST::M32F4::InputOutput">
+<area shape="rect" id="Node000001" title="This concrete class implements the InputOutput stream interface built on top of ST HAL Layer/SDK." alt="" coords="1273,114,1432,154"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_io_1_1_i_input_output.html" title="This abstract class defines a interface for operating on an input&#45;output stream." alt="" coords="971,92,1120,117"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1134,110,1274,124,1273,129,1133,116"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_io_1_1_i_input.html" title="This partially abstract class defines a interface for operating on an input stream (example of a stre..." alt="" coords="629,48,734,73"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="748,65,936,86,971,91,970,96,936,91,748,70"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_io_1_1_i_close.html" title="This abstract class defines a close operation that is intended to be used Input and Output streams/fi..." alt="" coords="313,5,421,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="434,15,498,18,564,26,642,45,641,50,564,31,497,24,434,21"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str..." alt="" coords="623,97,739,123"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="423,32,589,82,633,95,632,100,587,87,421,37"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_io_1_1_i_eos.html" title="This abstract class defines a isEos() operation that is intended to be used Input and Output streams." alt="" coords="319,73,414,99"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="427,79,628,62,629,67,428,84"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="428,88,623,103,623,108,427,93"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="753,106,971,103,971,108,753,112"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html" title="This concrete class implements a non&#45;busy&#45;wait blocking Transmit/Receive Stream UART driver with a SO..." alt="" coords="961,225,1130,265"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="1114,218,1295,152,1297,157,1115,223"/>
+<area shape="rect" id="Node000016" href="$class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#struct_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver_1_1_hal_mapping___t" title="Used to map a HAL UART Handle to an instance of this class." alt="" coords="1268,197,1437,252"/>
+<area shape="poly" id="edge21_Node000016_Node000007" title=" " alt="" coords="1144,251,1194,252,1244,249,1267,245,1268,250,1244,254,1194,257,1144,257"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="606,172,757,197"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="730,200,799,219,882,232,961,239,960,244,881,237,798,225,728,205"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob..." alt="" coords="960,157,1131,183"/>
+<area shape="poly" id="edge15_Node000012_Node000008" title=" " alt="" coords="770,169,799,166,867,164,936,166,960,166,960,172,936,171,867,170,799,171,771,174"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="284,132,449,157"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="463,154,606,173,606,178,463,159"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="281,220,453,245"/>
+<area shape="poly" id="edge11_Node000008_Node000010" title=" " alt="" coords="463,215,605,193,606,199,464,221"/>
+<area shape="poly" id="edge13_Node000010_Node000010" title=" " alt="" coords="343,205,350,197,367,193,381,196,389,202,391,212,387,221,382,219,386,211,385,205,378,201,367,199,353,201,347,209"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="40,220,189,245"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="203,230,281,230,281,235,203,235"/>
+<area shape="poly" id="edge14_Node000008_Node000012" title=" " alt="" coords="946,185,936,186,843,189,757,189,757,184,843,184,936,181,946,180"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_container_1_1_ring_buffer.html" title=" " alt="" coords="588,285,775,325"/>
+<area shape="poly" id="edge16_Node000007_Node000013" title=" " alt="" coords="788,294,861,285,935,273,979,262,981,267,937,278,861,290,788,299"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_container_1_1_ring_buffer_base.html" title="This &#39;implementation&#39; class provide the base functionality for a ring buffer." alt="" coords="5,323,224,348"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="238,335,346,335,460,330,587,316,588,322,460,335,346,340,238,341"/>
+<area shape="rect" id="Node000015" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="273,281,460,321"/>
+<area shape="poly" id="edge19_Node000015_Node000014" title=" " alt="" coords="221,318,273,311,273,316,222,323"/>
+<area shape="poly" id="edge18_Node000013_Node000015" title=" " alt="" coords="474,299,588,301,588,306,474,305"/>
+<area shape="poly" id="edge20_Node000007_Node000016" title=" " alt="" coords="1254,231,1155,237,1131,239,1130,233,1154,231,1254,226"/>
+</map>

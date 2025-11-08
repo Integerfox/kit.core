@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 178-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 182-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -51,6 +51,7 @@ $(function() {
 <li>m_balance_&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_map_item.html#a154beb824577f74d4d1065920bc9005e">Kit::Container::MapItem</a></li>
 <li>m_beginThreadFunc&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_periodic_scheduler.html#a76627aa69c7428141f9d6d51aa2cde6c">Kit::System::PeriodicScheduler</a></li>
 <li>m_blockSize&#160;:&#160;<a class="el" href="class_kit_1_1_text_1_1_d_string.html#a25214297e352aa13d792d8058368bd25">Kit::Text::DString</a></li>
+<li>m_bufferMemory&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a871717c2d544a72a74d44985ec55eb7c">Kit::Container::RingBuffer&lt; ITEM &gt;</a></li>
 <li>m_client&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_response_message.html#a28b2fd714ef2fb2a65c9967ead386bbe">Kit::Itc::ResponseMessage&lt; CLIENT, SERVICE, PAYLOAD &gt;</a></li>
 <li>m_clientEventQueue&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_async_return_handler.html#a1981f2c918399df4146569ad095328c6">Kit::Itc::AsyncReturnHandler</a></li>
 <li>m_clientPtr&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_socket_1_1_listener_runnable.html#ac8a67b960edb939c1dd649b9603f258d">Kit::Io::Socket::ListenerRunnable</a></li>
@@ -62,9 +63,11 @@ $(function() {
 <li>m_currentCountMs&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html#a6b5c038accd6cda07fede6fd65a2d119">Kit::System::Watchdog::WatchedThread</a></li>
 <li>m_currentTick&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a251a81e7c9dc3f55221f70c8efdb7e92">Kit::System::Watchdog::Supervisor</a></li>
 <li>m_curTicks&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_sim_tick.html#ab5d0c1d6b1a7a5b945be10ccbef6c5f1">Kit::System::SimTick</a></li>
+<li>m_driver&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html#a5f8e09b7fc153e27429d378453f8770a">Kit::Io::Serial::ST::M32F4::InputOutput</a></li>
 <li>m_elements&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_ring_buffer_base.html#abbeba728c6d3a3a48aec9713729d94dc">Kit::Container::RingBufferBase</a>, <a class="el" href="class_kit_1_1_container_1_1_stack.html#a6b049df02375c5b1c1aa39d638747f28">Kit::Container::Stack&lt; ITEM &gt;</a></li>
 <li>m_endThreadFunc&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_periodic_scheduler.html#a625d0099600c80d58edead49d0246a7c">Kit::System::PeriodicScheduler</a></li>
 <li>m_eos&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_input_output.html#aec289eb0839623b0207fe4f48ad5b531">Kit::Io::File::InputOutput</a>, <a class="el" href="class_kit_1_1_io_1_1_socket_1_1_input_output.html#a71051acda93c2fb201b36819ceead414">Kit::Io::Socket::InputOutput</a></li>
+<li>m_errCount&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#af5160fda206c8f172753841945f02d14">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
 <li>m_eventFlagsMask&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_event_flag_base.html#a616b23b61d7b67638d1bf83ad06edee6">Kit::System::EventFlagBase</a></li>
 <li>m_eventList&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a3449bee8c45cb8db333f2d0608bbd1f9">Kit::System::EventLoop</a></li>
 <li>m_eventLoop&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_mailbox.html#ad19e2213253ce5ec6cf50a90208a75a9">Kit::Itc::Mailbox</a></li>
@@ -98,11 +101,12 @@ $(function() {
 <li>m_linenum&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a066e4c0f236327e108b62eec9542f10f">Kit::System::Trace</a></li>
 <li>m_listeningSocket&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_socket_1_1_listener_runnable.html#ae3abfd6ca3b78dbe7ad95d0dcae1feb2">Kit::Io::Socket::ListenerRunnable</a></li>
 <li>m_lock&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_socket_1_1_listener_runnable.html#a61ce506f1936b3d935384686b552ae5b">Kit::Io::Socket::ListenerRunnable</a></li>
+<li>m_mappings&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#a937ad502bd9614e30b929571d3a4ccd3">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
 <li>m_maxItems&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_stack.html#a3c754113780b549b06e718bdccd0b555">Kit::Container::Stack&lt; ITEM &gt;</a></li>
 <li>m_mtime&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html#a6301db927c17633f78e552d528039c20">Kit::Io::File::System::Info_T</a></li>
 <li>m_mutex&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_mutex.html#a6d2107792c6d57e825a04cf9fd2a0959">Kit::System::Mutex</a>, <a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a6708f333628cfb3548b84579af667239">Kit::System::Watchdog::Supervisor</a></li>
 <li>m_myString&#160;:&#160;<a class="el" href="class_kit_1_1_text_1_1_string_item.html#ac90108bded150698fff19f6c080c7502">Kit::Text::StringItem</a></li>
-<li>m_name&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">Kit::System::Posix::Thread</a>, <a class="el" href="class_kit_1_1_system_1_1_win32_1_1_thread.html#afda490e265b4d357617acba1caeff0d6">Kit::System::Win32::Thread</a></li>
+<li>m_name&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html#ae816f6be685ec1a17c896b166424107e">Kit::System::FreeRTOS::Thread</a>, <a class="el" href="class_kit_1_1_system_1_1_posix_1_1_thread.html#a7867ea4fa8071cf4be58b8b912014a9d">Kit::System::Posix::Thread</a>, <a class="el" href="class_kit_1_1_system_1_1_win32_1_1_thread.html#afda490e265b4d357617acba1caeff0d6">Kit::System::Win32::Thread</a></li>
 <li>m_nativeThreadHdl&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_thread.html#a307be9f73d12090b8eef0b21ef3a4eae">Kit::System::Thread</a></li>
 <li>m_newline&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_line_reader.html#a838d84d297d9136144514f42c18a2293">Kit::Io::LineReader</a>, <a class="el" href="class_kit_1_1_io_1_1_line_writer.html#ae81928fcf0716f568c1007ae3a2bcdd6">Kit::Io::LineWriter</a></li>
 <li>m_nextPtr_&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_list_item.html#a66dbce57c6a71f5148cfbb7d325cbe3c">Kit::Container::ListItem</a></li>
@@ -119,6 +123,7 @@ $(function() {
 <li>m_prevPtr_&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html#a8806ed11a9b5048a751a94a216f4be4c">Kit::Container::ExtendedListItem</a></li>
 <li>m_priority&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_win32_1_1_thread.html#ab6c57e25f5b5784c65f236814b20d0f5">Kit::System::Win32::Thread</a></li>
 <li>m_rawConnectionInfo&#160;:&#160;<a class="el" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#aae5a079bc047dccc1ec23e9e31a08f52">Kit::Io::Socket::IListenerClientRequest::Payload_T</a></li>
+<li>m_rawMemory&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_ring_buffer_allocate.html#aa0d6bf10a74dbca81afc4121a6f34d85">Kit::Container::RingBufferAllocate&lt; ITEM, N &gt;</a></li>
 <li>m_readable&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html#a60bc142b2d8a7cc1b23332cef2163a77">Kit::Io::File::System::Info_T</a></li>
 <li>m_readIdx&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_ring_buffer_base.html#a021897c37869286443aff3e8837a9e8c">Kit::Container::RingBufferBase</a></li>
 <li>m_reference&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_reference_item.html#af81855dfc75cfca0a822c27a534b917c">Kit::Container::ReferenceItem&lt; REFITEM, ITEMTYPE &gt;</a></li>
@@ -126,9 +131,11 @@ $(function() {
 <li>m_request&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_response_message.html#aba4a45e89f8e525f3585bfa907a56cf7">Kit::Itc::ResponseMessage&lt; CLIENT, SERVICE, PAYLOAD &gt;</a></li>
 <li>m_responseMsg&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_async_return_handler.html#a5c1757112f4f14cab052444910c92f76">Kit::Itc::AsyncReturnHandler</a></li>
 <li>m_rh&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_response_message.html#a1370bc444bd248061dc8baec19542e3a">Kit::Itc::ResponseMessage&lt; CLIENT, SERVICE, PAYLOAD &gt;</a>, <a class="el" href="class_kit_1_1_itc_1_1_server_message.html#a21d85615489710db0007eba8c1b73fe4">Kit::Itc::ServerMessage</a></li>
-<li>m_ringBufferMemory&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#aa2b493962b0f14bc8ac0568012fd2cdf">Kit::Container::RingBuffer&lt; ITEM, N &gt;</a></li>
 <li>m_run&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a42ff3727ae7d48d0782412463bd16520">Kit::System::EventLoop</a></li>
 <li>m_runnable&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_thread.html#a0ac6bbe5f393611e508bb42d315885c2">Kit::System::Thread</a></li>
+<li>m_rxActive&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#a56bc2781fe70993014ad058bd409c7db">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
+<li>m_rxBuffer&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#a9f791bcfcd8364ef0504529cfebe1c39">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
+<li>m_rxWaiterPtr&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#a86a769ca17ab38494c177d9ca09db2fc">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
 <li>m_scope&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a61cdc78e2d8b112ccc401d3eeeb2d842">Kit::System::Trace</a></li>
 <li>m_section&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#ab0fce2ae5cf1bb8a76670a6d171eb544">Kit::System::Trace</a></li>
 <li>m_sema&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ae56572b3851678258f75613fbec72a70">Kit::System::EventLoop</a>, <a class="el" href="class_kit_1_1_system_1_1_semaphore.html#a4fa79becefe8da3acd6a59aa094ef188">Kit::System::Semaphore</a></li>
@@ -155,6 +162,11 @@ $(function() {
 <li>m_timingSource&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_timer.html#aa98066ecdf8c907f53c5c0b05cdfabe0">Kit::System::Timer</a></li>
 <li>m_tlsArray&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_thread.html#aa8100053b1eaa38682067841797603e6">Kit::System::Thread</a></li>
 <li>m_truncated&#160;:&#160;<a class="el" href="class_kit_1_1_text_1_1_string_base.html#ac90dd13a00677d55540708e860b77404">Kit::Text::StringBase</a></li>
+<li>m_txBuffer&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#a12480b9d55802f0c648740d97e883ac6">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
+<li>m_txSize&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#a9313d46ed8bc017c92750e6c9d2e30b5">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
+<li>m_txWaiterPtr&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#a7d908535230dc3ceba5a63da9a899864">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
+<li>m_uartHdl&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#a77b122d7ac26edd225eaed4c0342ab0a">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
+<li>m_uartIrqNum&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_stream_driver.html#acec47e5b4381c035759a06d2e8944f50">Kit::Io::Serial::ST::M32F4::StreamDriver</a></li>
 <li>m_waiter&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_sync_return_handler.html#a9763681f5f6278b0d17f451e5a9d9314">Kit::Itc::SyncReturnHandler</a>, <a class="el" href="class_kit_1_1_system_1_1_sim_tick.html#a0901f537ae7cb9b3aecf010bb41f6be5">Kit::System::SimTick</a></li>
 <li>m_watchdog&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a552a21d882de0f73a221fb59b595ad4a">Kit::System::EventLoop</a></li>
 <li>m_watchedThreads&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor.html#a0921cfea16e600ae45d1e6b4935210ba">Kit::System::Watchdog::Supervisor</a></li>
@@ -163,6 +175,8 @@ $(function() {
 <li>m_writeIdx&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_ring_buffer_base.html#aa1eafc28324bee46be7256f60e68952a">Kit::Container::RingBufferBase</a></li>
 <li>m_wrkEntryName&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_dir_walker.html#a91a86a66c0c2ead1fcd52f90e0baf5e8">Kit::Io::File::DirWalker</a></li>
 <li>Mailbox()&#160;:&#160;<a class="el" href="class_kit_1_1_itc_1_1_mailbox.html#a20b0f9a96a99cfd99243720b768f8360">Kit::Itc::Mailbox</a></li>
+<li>MakeCurrentThreadAKitThread()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread.html#acb2719e5b833557b0e3ffaca5220cc7d">Kit::System::FreeRTOS::MakeCurrentThreadAKitThread</a></li>
+<li>makeNativeMainThreadAKitThread()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html#a72cfe00d05a4fb5f249b5fbb81a8e129">Kit::System::FreeRTOS::Thread</a></li>
 <li>Map()&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_map.html#aafe86b0e1adf4ca20489cbf800ce423d">Kit::Container::Map&lt; ITEM &gt;</a></li>
 <li>MapItem()&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_map_item.html#a0545e10ba0b66f55d5a9d7f68d72fad5">Kit::Container::MapItem</a></li>
 <li>MAX_STREAMS&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_tee_output.html#a30f34005f90edc7cbc9b5ec6f771d480">Kit::Io::TeeOutput</a></li>
@@ -177,7 +191,7 @@ $(function() {
 <li>move()&#160;:&#160;<a class="el" href="class_kit_1_1_container_1_1_d_list.html#a0778772eb0d38f87aa8bab90794d9d02">Kit::Container::DList&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_d_list_base.html#a768d6efd57145cbe00fb2c0928451343">Kit::Container::DListBase</a>, <a class="el" href="class_kit_1_1_container_1_1_map.html#a5f2af8c48e9076e01a004302eb7d841a">Kit::Container::Map&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list.html#abc40b1397c6225d11dca870005a31d20">Kit::Container::SList&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list_base.html#ae185292c1f9c8ea5b6d36bdde5ccf72e">Kit::Container::SListBase</a>, <a class="el" href="class_kit_1_1_io_1_1_file_1_1_posix_1_1_fdio.html#ac919e62e723860fe398cfad0ab31df8c">Kit::Io::File::Posix::Fdio</a>, <a class="el" href="class_kit_1_1_io_1_1_file_1_1_win32_1_1_fdio.html#ae4fe96dcfc83f7732d35d15619e03bbd">Kit::Io::File::Win32::Fdio</a></li>
 <li>moveFile()&#160;:&#160;<a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html#ab6c2c4b8e8a813ab4803fbf4d6d213c9">Kit::Io::File::System</a></li>
 <li>msecToCounts()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#a03fc852e510dc1e19e8b9067d14b22b3">Kit::System::TimerManager</a></li>
-<li>Mutex()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_mutex.html#a647b479e060e414c4f6732210fd388ea">Kit::System::Mutex</a></li>
+<li>Mutex()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_mutex.html#a0c5486b25c85abf5801d7e52a99c014b">Kit::System::Mutex</a></li>
 <li>myId()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_thread.html#aca3da5e4d26d028ffb85b078bcd6d880">Kit::System::Thread</a></li>
 <li>myName()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_thread.html#a2142767b3bc83904ae0cf31ea21424df">Kit::System::Thread</a></li>
 <li>myRunnable()&#160;:&#160;<a class="el" href="class_kit_1_1_system_1_1_thread.html#ab38ff506973eaecdfb590f35fffe16c2">Kit::System::Thread</a></li>
@@ -185,7 +199,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 1 2025 18:47:07 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Nov 8 2025 21:00:10 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
