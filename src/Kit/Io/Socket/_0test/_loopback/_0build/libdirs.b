@@ -1,5 +1,5 @@
 # UUT
-src/Kit/Io/Socket/_0test < loopback.cpp
+src/Kit/Io/Socket/_0test/_loopback
 src/Kit/Io/Socket
 
 src/Kit/System/_testsupport

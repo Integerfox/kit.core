@@ -1,5 +1,5 @@
 # UUT
-src/Kit/Io/Socket/_0test < server.cpp
+src/Kit/Io/Socket/_0test/_server
 src/Kit/Io/Socket
 
 src/Kit/Io
