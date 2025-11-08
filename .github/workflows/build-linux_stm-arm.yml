@@ -1,0 +1,58 @@
+name: Build Linux STM ARM
+permissions:
+  contents: read
+  pull-requests: write
+on:
+  workflow_call:
+    inputs:
+      event_name:
+        required: true
+        type: string
+      run_number:
+        required: true
+        type: string
+      ref_name:
+        required: true
+        type: string
+
+jobs:
+  stm_arm_linux_build:
+    name: STM ARM Cortex M/R Compiler Linux Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # Checkout code
+      - name: Checkout code
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.safecrlf false
+      - uses: actions/checkout@v2
+
+      # Python setup
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' 
+
+      # Ninja setup
+      - uses: seanmiddleditch/gha-setup-ninja@master
+        with:
+          version: '1.11.1'
+
+      # This step is commented out, but can be used for debugging purposes.
+      #- name: Setup tmate session 
+      # uses: mxschmitt/action-tmate@v3
+
+      # Build PRs
+      - name: Run build script - for PRs
+        if: inputs.event_name == 'pull_request'
+        run: |
+          echo "Running build script for PRs..."
+          ./top/gha_linux_stm-arm.sh 0
+
+      # Build Stable branches
+      - name: Run build script - for stable branches
+        if: inputs.event_name != 'pull_request'
+        run: |
+          echo "Running build script for stable branches..."
+          ./top/gha_linux_stm-arm.sh ${{ inputs.run_number }} ${{ inputs.ref_name }}
