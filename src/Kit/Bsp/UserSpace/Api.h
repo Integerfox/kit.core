@@ -32,19 +32,19 @@ extern "C"
     /*---------------------------------------------------------------------------*/
 
     /// Generic API - map to a single/global mutex to simulate EI/DI
-    void Bsp_disable_irqs_MAP( void );
+    void Bsp_disable_irqs_MAP();
 
     /// Generic API - map to a single/global mutex to simulate EI/DI
-    void Bsp_enable_irqs_MAP( void );
+    void Bsp_enable_irqs_MAP();
 
     /// Generic API - map to a single/global mutex to simulate EI/DI
-    void Bsp_push_and_disable_irqs_MAP( void );
+    void Bsp_push_and_disable_irqs_MAP();
 
     /// Generic API - map to a single/global mutex to simulate EI/DI
-    void Bsp_pop_irqs_MAP( void );
+    void Bsp_pop_irqs_MAP();
 
     /// Generic API -->use a empty function to simulate a nop
-    void Bsp_nop_MAP( void );
+    void Bsp_nop_MAP();
 
 
 /// Generic API -->do nothing

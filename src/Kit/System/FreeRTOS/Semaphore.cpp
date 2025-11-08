@@ -36,7 +36,7 @@ Semaphore::~Semaphore() noexcept
 
 
 //////////////////////////////////////////////////
-int Semaphore::signal( void ) noexcept
+int Semaphore::signal() noexcept
 {
     xSemaphoreGive( m_sema );
     return 0;
@@ -47,7 +47,7 @@ int Semaphore::signal( void ) noexcept
           defined 'return zero on success' semantics.  This is to overcome
           the oddities of FreeRTOS.
  */
-int Semaphore::su_signal( void ) noexcept
+int Semaphore::su_signal() noexcept
 {
     BaseType_t higherPriorityTaskWoken = pdFALSE;
     xSemaphoreGiveFromISR( m_sema, &higherPriorityTaskWoken );
@@ -56,7 +56,7 @@ int Semaphore::su_signal( void ) noexcept
 
 
 //////////////////////////////////////////////////
-void Semaphore::wait( void ) noexcept
+void Semaphore::wait() noexcept
 {
     xSemaphoreTake( m_sema, portMAX_DELAY );
 }
@@ -68,13 +68,13 @@ bool Semaphore::timedWait( unsigned long timeout ) noexcept
 }
 
 
-bool Semaphore::tryWait( void ) noexcept
+bool Semaphore::tryWait() noexcept
 {
     return xSemaphoreTake( m_sema, 0 ) == pdTRUE;
 }
 
 
-void Semaphore::waitInRealTime( void ) noexcept
+void Semaphore::waitInRealTime() noexcept
 {
     xSemaphoreTake( m_sema, portMAX_DELAY );
 }

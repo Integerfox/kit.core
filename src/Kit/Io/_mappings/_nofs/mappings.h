@@ -15,15 +15,15 @@
 
  */
 
-#define KitIoStdioHandle_T_MAP                int  //!< Mapping.  No FS support -->no used
-#define KitIoSocketHandle_T_MAP               int  //!< Mapping.  No FS support -->no used
-#define KitIoFileHandle_T_MAP                 int  //!< Mapping.  No FS support -->no used
-#define KitIoFileDirectory_T_MAP              int  //!< Mapping.  No FS support -->no used
+#define KitIoStdioHandle_T_MAP                int  //!< Mapping.  No FS support -->not used
+#define KitIoSocketHandle_T_MAP               int  //!< Mapping.  No FS support -->not used
+#define KitIoFileHandle_T_MAP                 int  //!< Mapping.  No FS support -->not used
+#define KitIoFileDirectory_T_MAP              int  //!< Mapping.  No FS support -->not used
 
 
-#define KIT_IO_NEW_LINE_NATIVE_MAP            "\012"  //!< Mapping. No FS support -->no used
-#define KIT_IO_DIRECTORY_SEPARATOR_NATIVE_MAP '/'     //!< Mapping. No FS support -->no used
-#define KIT_IO_FILE_MAX_NAME_MAP              1       //!< Mapping. No FS support -->no used
+#define KIT_IO_NEW_LINE_NATIVE_MAP            "\012"  //!< Mapping. No FS support -->not used
+#define KIT_IO_DIRECTORY_SEPARATOR_NATIVE_MAP '/'     //!< Mapping. No FS support -->not used
+#define KIT_IO_FILE_MAX_NAME_MAP              1       //!< Mapping. No FS support -->not used
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -49,7 +49,7 @@ public:
         , m_bufferMemory( memoryBuffer )
     {
         KIT_SYSTEM_ASSERT( memoryBuffer != nullptr );
-        KIT_SYSTEM_ASSERT( N > 1);
+        KIT_SYSTEM_ASSERT( N > 1 );
 
         // Start with a clean buffer (helps with debugging)
         memset( memoryBuffer, 0, sizeof( ITEM ) * N );
@@ -101,7 +101,7 @@ public:
      */
     ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
     {
-        return static_cast<ITEM*>(RingBufferBase::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ));
+        return static_cast<ITEM*>( RingBufferBase::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
     }
 
     /** This method 'removes' N elements - that were removed using the
@@ -130,7 +130,7 @@ public:
      */
     ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
     {
-        return static_cast<ITEM*>(RingBufferBase::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ));
+        return static_cast<ITEM*>( RingBufferBase::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
     }
 
     /** This method 'adds' N elements - that were populated using the

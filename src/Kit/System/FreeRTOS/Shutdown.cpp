@@ -38,7 +38,7 @@ static int shutdown_application_( int exit_code )
     return exit_code;
 }
 
-int Shutdown::success( void ) noexcept
+int Shutdown::success() noexcept
 {
     return shutdown_application_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }

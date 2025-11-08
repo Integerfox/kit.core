@@ -20,3 +20,6 @@
 
 // IO mapping
 #include "Kit/Io/_mappings/_posix/mappings.h"
+
+// BSP mapping
+#include "Kit/Bsp/UserSpace/Api.h"

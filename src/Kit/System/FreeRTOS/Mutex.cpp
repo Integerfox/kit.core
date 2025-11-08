@@ -32,7 +32,7 @@ Mutex::~Mutex() noexcept
     vSemaphoreDelete( m_mutex );
 }
 
-void Mutex::lock( void ) noexcept
+void Mutex::lock() noexcept
 {
     // Do nothing if the scheduler has not yet been started, i.e, if there is only
     // one thread running -->then by definition I have mutual exclusion. It also allows
@@ -45,7 +45,7 @@ void Mutex::lock( void ) noexcept
 }
 
 
-void Mutex::unlock( void ) noexcept
+void Mutex::unlock() noexcept
 {
     if ( isSchedulingEnabled() )
     {

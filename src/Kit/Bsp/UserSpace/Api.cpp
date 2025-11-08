@@ -14,30 +14,30 @@
 
 
 ///////////////////////////////////////////////////////////
-void Bsp_initialize( void )
+void Bsp_initialize()
 {
 }
 
-void Bsp_disable_irqs_MAP( void )
-{
-    Kit::System::PrivateLocks::system().lock();
-}
-
-void Bsp_enable_irqs_MAP( void )
-{
-    Kit::System::PrivateLocks::system().unlock();
-}
-
-void Bsp_push_and_disable_irqs_MAP( void )
+void Bsp_disable_irqs_MAP()
 {
     Kit::System::PrivateLocks::system().lock();
 }
 
-void Bsp_pop_irqs_MAP( void )
+void Bsp_enable_irqs_MAP()
 {
     Kit::System::PrivateLocks::system().unlock();
 }
 
-void Bsp_nop_MAP( void )
+void Bsp_push_and_disable_irqs_MAP()
+{
+    Kit::System::PrivateLocks::system().lock();
+}
+
+void Bsp_pop_irqs_MAP()
+{
+    Kit::System::PrivateLocks::system().unlock();
+}
+
+void Bsp_nop_MAP()
 {
 }

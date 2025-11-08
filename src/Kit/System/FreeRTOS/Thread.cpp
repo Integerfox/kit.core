@@ -30,7 +30,7 @@ class RegisterInitHandler_ : public Kit::System::IRunnable,
 {
 protected:
     // Empty 'run' function -- it is never called!
-    void entry( void ) noexcept override {}
+    void entry() noexcept override {}
 
 public:
     ///

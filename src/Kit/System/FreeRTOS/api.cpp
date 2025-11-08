@@ -31,7 +31,7 @@ static Mutex sysList_;
 static bool schedulerStarted_ = false;
 
 ////////////////////////////////////////////////////////////////////////////////
-void initialize( void ) noexcept
+void initialize() noexcept
 {
     // Init the Colony.Core sub-systems
     IStartupHook::notifyStartupClients();
@@ -39,7 +39,7 @@ void initialize( void ) noexcept
 
 
 // This method should never return
-void enableScheduling( void ) noexcept
+void enableScheduling() noexcept
 {
     schedulerStarted_ = true;  // Manually track the scheduler state since xTaskGetSchedulerState() returns 'taskSCHEDULER_RUNNING' BEFORE I have started the scheduler!!!!
     vTaskStartScheduler();
@@ -52,7 +52,7 @@ void enableScheduling( void ) noexcept
     }
 }
 
-bool isSchedulingEnabled( void ) noexcept
+bool isSchedulingEnabled() noexcept
 {
     return schedulerStarted_;
 }
@@ -68,34 +68,34 @@ void sleepInRealTime( unsigned long milliseconds ) noexcept
 }
 
 
-void suspendScheduling( void ) noexcept
+void suspendScheduling() noexcept
 {
     vTaskSuspendAll();
 }
 
-void resumeScheduling( void ) noexcept
+void resumeScheduling() noexcept
 {
     xTaskResumeAll();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Mutex& PrivateLocks::system( void ) noexcept
+Mutex& PrivateLocks::system() noexcept
 {
     return systemMutex_;
 }
 
 
-Mutex& PrivateLocks::tracing( void ) noexcept
+Mutex& PrivateLocks::tracing() noexcept
 {
     return tracingMutex_;
 }
 
-Mutex& PrivateLocks::sysLists( void ) noexcept
+Mutex& PrivateLocks::sysLists() noexcept
 {
     return sysList_;
 }
 
-Mutex& PrivateLocks::tracingOutput( void )
+Mutex& PrivateLocks::tracingOutput() noexcept
 {
     return tracingOutputMutex_;
 }

@@ -17,12 +17,12 @@ namespace Kit {
 namespace System {
 
 //////////////////////////////////////////////////////////////////////////////
-void GlobalLock::begin( void )
+void GlobalLock::begin()
 {
     taskDISABLE_INTERRUPTS();
 }
 
-void GlobalLock::end( void )
+void GlobalLock::end()
 {
     taskENABLE_INTERRUPTS();
 }
