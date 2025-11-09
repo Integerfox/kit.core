@@ -27,7 +27,7 @@ namespace System {
     1. The default 'API' that uses uint32_t to represent elapsed time.  The
        32bit counter rolls over after 49.7 days.
     2. Extended 'API' that uses a 64bit data type to represent elapsed time.
-       The 64bit counter rolls over after 584 million years. elapsed 
+       The 64bit counter rolls over after 584 million years.
 
     NOTE: The two APIs share the same underlying timing source, i.e. the returned
           values are 'in-sync'

@@ -22,8 +22,8 @@ namespace System {
 /** This class extends the EventLoop class to add periodic scheduling to an
     event based 'thread'.  The timing resolution of the periodic scheduling is a
     determined by the 'timingTickInMsec' argument value in the class's constructor.
-    For example if 'timingTickInMsec' is 10ms then no interval should have a
-    an execution frequency faster than 100Hz (i.e. 10ms).
+    For example if 'timingTickInMsec' is 10ms then no interval should have an
+    execution frequency faster than 100Hz (i.e. 10ms).
 
     The order of processing is:
 

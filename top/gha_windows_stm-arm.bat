@@ -19,12 +19,12 @@ echo:%PATH%
 
 :: Build the projects
 cd %_ROOT%\projects
-python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows stm-arm -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
+python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows gcc-arm-mcu -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
 IF ERRORLEVEL 1 EXIT /b 1
 
 :: Build the unit tests
 cd %_ROOT%\src
-python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows stm-arm -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
+python %NQBP_BIN%\other\bob.py -v4 --script-prefix python --p2 windows gcc-arm-mcu -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
 IF ERRORLEVEL 1 EXIT /b 1
 
 ::
