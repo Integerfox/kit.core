@@ -41,6 +41,8 @@ alias fixx="$NQBP_BIN/other/fixx.py"
 alias whatcc="echo $NQBP_CC_SELECTED"
 alias vcc="$NQBP_PKG_ROOT/top/tca2.py --html-dir $NQBP_PKG_ROOT/docs/publish/code-coverage view"
 alias map="$NQBP_PKG_ROOT/scripts/kit.core/map.py" 
+alias vdox="xdg-open $NQBP_PKG_ROOT/docs/publish/doxygen/index.html &>/dev/null &" 
+
 
 
 # No compiler option selected
