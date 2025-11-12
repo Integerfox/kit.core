@@ -23,7 +23,7 @@ out-of-the-box:
 * Moving to a new Microcontroller, Microprocessor, or new PCBA is a low-risk activity because none of the application’s
   business logic is dependent on hardware specific entities.  
   * This means that only the lowest drivers are impacted when transitioning to a new hardware platform.  For example,
-    if you started the project with a function simulator your application already runs on least two platforms – so
+    if you started the project with a functional simulator your application already runs on least two platforms – so
     the mechanics of supporting yet another platform has already been defined/laid out.
 
 ## Core Concepts
