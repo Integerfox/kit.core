@@ -43,7 +43,7 @@ The KIT library's OSAL layer has been ported to run on the following platforms/O
 | Bare Metal | No underlying Operating System and the application is a 'super loop' |
 | POSIX | Any POSIX compliant operating system.  Note: It has only been validate on Linux (and some limited testing with MacOS) |
 | Windows | Windows 10 or higher operating system |
-| FreeRTOS | [Real-Time Operating System](https://www.freertos.org/) (RTOS) for Microcontrollers. Support for multi-core (SMP) is planned by **not** yet implemented |
+| FreeRTOS | [Real-Time Operating System](https://www.freertos.org/) (RTOS) for Microcontrollers. Support for multi-core (SMP) is planned **but** not yet implemented |
 
 @ref porting_guide "Porting Guide" - Step-by-step instructions for porting KIT's OSAL.
 
