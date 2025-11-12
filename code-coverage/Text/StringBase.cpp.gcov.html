@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-09 15:34:45</td>
+            <td class="headerValue">2025-11-12 02:46:01</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">98.2&nbsp;%</td>
@@ -89,20 +89,20 @@
 <span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">         415 : }</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : </span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : ///////////////////////////////</span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">        5846 : void StringBase::clear() noexcept</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">        5844 : void StringBase::clear() noexcept</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : {</span>
-<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">        5846 :     memset( m_strPtr, 0, maxLength() );</span></span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">        5846 :     m_truncated = false;</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">        5846 : }</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">        5844 :     memset( m_strPtr, 0, maxLength() );</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">        5844 :     m_truncated = false;</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">        5844 : }</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : </span>
 <span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">           1 : StringBase::operator char() const noexcept</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : {</span>
 <span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">           1 :     return m_strPtr[0];</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             : }</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">      909513 : int StringBase::length() const noexcept</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">      909559 : int StringBase::length() const noexcept</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : {</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">      909513 :     return strlen( m_strPtr );</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">      909559 :     return strlen( m_strPtr );</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : }</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : </span>
 <span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">         205 : bool StringBase::isEmpty() const noexcept</span></span>
@@ -110,14 +110,14 @@
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         205 :     return *( m_strPtr ) == '\0';</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : }</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">       11561 : bool StringBase::truncated() const noexcept</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">       11557 : bool StringBase::truncated() const noexcept</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : {</span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">       11561 :     return m_truncated;</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">       11557 :     return m_truncated;</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : }</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">      909550 : bool StringBase::operator==( const char* string ) const noexcept</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">      909596 : bool StringBase::operator==( const char* string ) const noexcept</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : {</span>
-<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 909549 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 903481 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 6068 times"> + </span>]:<span class="tlaGNC">      909550 :     return string ? strcmp( m_strPtr, string ) == 0 : false;</span></span>
+<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 909595 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 903529 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 6066 times"> + </span>]:<span class="tlaGNC">      909596 :     return string ? strcmp( m_strPtr, string ) == 0 : false;</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : }</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             : </span>
 <span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">           8 : bool StringBase::operator==( const IString&amp; string ) const noexcept</span></span>
@@ -265,38 +265,38 @@
 <span id="L202"><span class="lineNum">     202</span>                 :<span class="tlaGNC">           8 :     va_end( ap );</span></span>
 <span id="L203"><span class="lineNum">     203</span>                 :             : }</span>
 <span id="L204"><span class="lineNum">     204</span>                 :             : </span>
-<span id="L205"><span class="lineNum">     205</span>                 :<span class="tlaGNC">       11328 : void StringBase::formatAppend( const char* format, ... ) noexcept</span></span>
+<span id="L205"><span class="lineNum">     205</span>                 :<span class="tlaGNC">       11324 : void StringBase::formatAppend( const char* format, ... ) noexcept</span></span>
 <span id="L206"><span class="lineNum">     206</span>                 :             : {</span>
-<span id="L207"><span class="lineNum">     207</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11326 times"> + </span>]:<span class="tlaGNC">       11328 :     if ( !format )</span></span>
+<span id="L207"><span class="lineNum">     207</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11322 times"> + </span>]:<span class="tlaGNC">       11324 :     if ( !format )</span></span>
 <span id="L208"><span class="lineNum">     208</span>                 :             :     {</span>
 <span id="L209"><span class="lineNum">     209</span>                 :<span class="tlaGNC">           2 :         return;</span></span>
 <span id="L210"><span class="lineNum">     210</span>                 :             :     }</span>
 <span id="L211"><span class="lineNum">     211</span>                 :             : </span>
 <span id="L212"><span class="lineNum">     212</span>                 :             :     va_list ap;</span>
-<span id="L213"><span class="lineNum">     213</span>                 :<span class="tlaGNC">       11326 :     va_start( ap, format );</span></span>
-<span id="L214"><span class="lineNum">     214</span>                 :<span class="tlaGNC">       11326 :     vformatAppend( format, ap );</span></span>
-<span id="L215"><span class="lineNum">     215</span>                 :<span class="tlaGNC">       11326 :     va_end( ap );</span></span>
+<span id="L213"><span class="lineNum">     213</span>                 :<span class="tlaGNC">       11322 :     va_start( ap, format );</span></span>
+<span id="L214"><span class="lineNum">     214</span>                 :<span class="tlaGNC">       11322 :     vformatAppend( format, ap );</span></span>
+<span id="L215"><span class="lineNum">     215</span>                 :<span class="tlaGNC">       11322 :     va_end( ap );</span></span>
 <span id="L216"><span class="lineNum">     216</span>                 :             : }</span>
 <span id="L217"><span class="lineNum">     217</span>                 :             : </span>
-<span id="L218"><span class="lineNum">     218</span>                 :<span class="tlaGNC">        5712 : void StringBase::formatOpt( bool appendFlag, const char* format, ... ) noexcept</span></span>
+<span id="L218"><span class="lineNum">     218</span>                 :<span class="tlaGNC">        5710 : void StringBase::formatOpt( bool appendFlag, const char* format, ... ) noexcept</span></span>
 <span id="L219"><span class="lineNum">     219</span>                 :             : {</span>
-<span id="L220"><span class="lineNum">     220</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 5711 times"> + </span>]:<span class="tlaGNC">        5712 :     if ( !format )</span></span>
+<span id="L220"><span class="lineNum">     220</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 5709 times"> + </span>]:<span class="tlaGNC">        5710 :     if ( !format )</span></span>
 <span id="L221"><span class="lineNum">     221</span>                 :             :     {</span>
 <span id="L222"><span class="lineNum">     222</span>                 :<span class="tlaGNC">           1 :         return;</span></span>
 <span id="L223"><span class="lineNum">     223</span>                 :             :     }</span>
 <span id="L224"><span class="lineNum">     224</span>                 :             : </span>
 <span id="L225"><span class="lineNum">     225</span>                 :             :     va_list ap;</span>
-<span id="L226"><span class="lineNum">     226</span>                 :<span class="tlaGNC">        5711 :     va_start( ap, format );</span></span>
-<span id="L227"><span class="lineNum">     227</span>         [<span class="tlaGBC" title="Branch 0 was taken 5706 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">        5711 :     if ( appendFlag )</span></span>
+<span id="L226"><span class="lineNum">     226</span>                 :<span class="tlaGNC">        5709 :     va_start( ap, format );</span></span>
+<span id="L227"><span class="lineNum">     227</span>         [<span class="tlaGBC" title="Branch 0 was taken 5704 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">        5709 :     if ( appendFlag )</span></span>
 <span id="L228"><span class="lineNum">     228</span>                 :             :     {</span>
-<span id="L229"><span class="lineNum">     229</span>                 :<span class="tlaGNC">        5706 :         vformatAppend( format, ap );</span></span>
+<span id="L229"><span class="lineNum">     229</span>                 :<span class="tlaGNC">        5704 :         vformatAppend( format, ap );</span></span>
 <span id="L230"><span class="lineNum">     230</span>                 :             :     }</span>
 <span id="L231"><span class="lineNum">     231</span>                 :             :     else</span>
 <span id="L232"><span class="lineNum">     232</span>                 :             :     {</span>
 <span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">           5 :         vformat( format, ap );</span></span>
 <span id="L234"><span class="lineNum">     234</span>                 :             :     }</span>
 <span id="L235"><span class="lineNum">     235</span>                 :             : </span>
-<span id="L236"><span class="lineNum">     236</span>                 :<span class="tlaGNC">        5711 :     va_end( ap );</span></span>
+<span id="L236"><span class="lineNum">     236</span>                 :<span class="tlaGNC">        5709 :     va_end( ap );</span></span>
 <span id="L237"><span class="lineNum">     237</span>                 :             : }</span>
 <span id="L238"><span class="lineNum">     238</span>                 :             : </span>
 <span id="L239"><span class="lineNum">     239</span>                 :<span class="tlaGNC">          22 : void StringBase::vformat( const char* format, va_list ap ) noexcept</span></span>
@@ -310,18 +310,18 @@
 <span id="L247"><span class="lineNum">     247</span>                 :<span class="tlaGNC">          21 :     validateSizeAfterFormat( maxLength(), flen, maxLength() );</span></span>
 <span id="L248"><span class="lineNum">     248</span>                 :             : }</span>
 <span id="L249"><span class="lineNum">     249</span>                 :             : </span>
-<span id="L250"><span class="lineNum">     250</span>                 :<span class="tlaGNC">       22733 : void StringBase::vformatAppend( const char* format, va_list ap ) noexcept</span></span>
+<span id="L250"><span class="lineNum">     250</span>                 :<span class="tlaGNC">       22725 : void StringBase::vformatAppend( const char* format, va_list ap ) noexcept</span></span>
 <span id="L251"><span class="lineNum">     251</span>                 :             : {</span>
-<span id="L252"><span class="lineNum">     252</span>         [<span class="tlaGBC" title="Branch 0 was taken 22732 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">       22733 :     if ( !format )</span></span>
+<span id="L252"><span class="lineNum">     252</span>         [<span class="tlaGBC" title="Branch 0 was taken 22724 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">       22725 :     if ( !format )</span></span>
 <span id="L253"><span class="lineNum">     253</span>                 :             :     {</span>
 <span id="L254"><span class="lineNum">     254</span>                 :             :         return;</span>
 <span id="L255"><span class="lineNum">     255</span>                 :             :     }</span>
 <span id="L256"><span class="lineNum">     256</span>                 :             : </span>
-<span id="L257"><span class="lineNum">     257</span>                 :<span class="tlaGNC">       22732 :     int   len   = strlen( m_strPtr );</span></span>
-<span id="L258"><span class="lineNum">     258</span>                 :<span class="tlaGNC">       22732 :     int   avail = maxLength() - len;</span></span>
-<span id="L259"><span class="lineNum">     259</span>                 :<span class="tlaGNC">       22732 :     char* ptr   = m_strPtr + len;</span></span>
-<span id="L260"><span class="lineNum">     260</span>                 :<span class="tlaGNC">       22732 :     int   flen  = vsnprintf( ptr, avail + 1, format, ap );</span></span>
-<span id="L261"><span class="lineNum">     261</span>                 :<span class="tlaGNC">       22732 :     validateSizeAfterFormat( avail, flen, maxLength() );</span></span>
+<span id="L257"><span class="lineNum">     257</span>                 :<span class="tlaGNC">       22724 :     int   len   = strlen( m_strPtr );</span></span>
+<span id="L258"><span class="lineNum">     258</span>                 :<span class="tlaGNC">       22724 :     int   avail = maxLength() - len;</span></span>
+<span id="L259"><span class="lineNum">     259</span>                 :<span class="tlaGNC">       22724 :     char* ptr   = m_strPtr + len;</span></span>
+<span id="L260"><span class="lineNum">     260</span>                 :<span class="tlaGNC">       22724 :     int   flen  = vsnprintf( ptr, avail + 1, format, ap );</span></span>
+<span id="L261"><span class="lineNum">     261</span>                 :<span class="tlaGNC">       22724 :     validateSizeAfterFormat( avail, flen, maxLength() );</span></span>
 <span id="L262"><span class="lineNum">     262</span>                 :             : }</span>
 <span id="L263"><span class="lineNum">     263</span>                 :             : </span>
 <span id="L264"><span class="lineNum">     264</span>                 :<span class="tlaGNC">           3 : void StringBase::vformatOpt( bool appendFlag, const char* format, va_list ap ) noexcept</span></span>
@@ -544,9 +544,9 @@
 <span id="L481"><span class="lineNum">     481</span>                 :<span class="tlaGNC">         534 :     return replaceCount;</span></span>
 <span id="L482"><span class="lineNum">     482</span>                 :             : }</span>
 <span id="L483"><span class="lineNum">     483</span>                 :             : </span>
-<span id="L484"><span class="lineNum">     484</span>                 :<span class="tlaGNC">      927382 : const char* StringBase::getString() const noexcept</span></span>
+<span id="L484"><span class="lineNum">     484</span>                 :<span class="tlaGNC">      927422 : const char* StringBase::getString() const noexcept</span></span>
 <span id="L485"><span class="lineNum">     485</span>                 :             : {</span>
-<span id="L486"><span class="lineNum">     486</span>                 :<span class="tlaGNC">      927382 :     return m_strPtr;</span></span>
+<span id="L486"><span class="lineNum">     486</span>                 :<span class="tlaGNC">      927422 :     return m_strPtr;</span></span>
 <span id="L487"><span class="lineNum">     487</span>                 :             : }</span>
 <span id="L488"><span class="lineNum">     488</span>                 :             : </span>
 <span id="L489"><span class="lineNum">     489</span>                 :<span class="tlaGNC">          45 : char* StringBase::getBuffer( int&amp; maxAllowedLength ) noexcept</span></span>
@@ -579,7 +579,7 @@
 <span id="L516"><span class="lineNum">     516</span>                 :             : ////////////////////////////////////</span>
 <span id="L517"><span class="lineNum">     517</span>                 :<span class="tlaGNC">          33 : void StringBase::validateSizeAfterFormat( int availableLen, int formattedLen, int maxlen ) noexcept</span></span>
 <span id="L518"><span class="lineNum">     518</span>                 :             : {</span>
-<span id="L519"><span class="lineNum">     519</span>   [<span class="tlaGBC" title="Branch 0 was taken 29 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 22727 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 5 times"> + </span> :<span class="tlaGNC">       22786 :     if ( formattedLen &lt;= availableLen &amp;&amp; formattedLen &gt;= 0 )</span></span>
+<span id="L519"><span class="lineNum">     519</span>   [<span class="tlaGBC" title="Branch 0 was taken 29 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 22719 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 5 times"> + </span> :<span class="tlaGNC">       22778 :     if ( formattedLen &lt;= availableLen &amp;&amp; formattedLen &gt;= 0 )</span></span>
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 7 times"> + </span>]
 <span id="L520"><span class="lineNum">     520</span>                 :             :     {</span>
 <span id="L521"><span class="lineNum">     521</span>                 :<span class="tlaGNC">          53 :         m_truncated = false;</span></span>
@@ -604,10 +604,10 @@
 <span id="L540"><span class="lineNum">     540</span>                 :<span class="tlaGNC">         106 :     return *this;</span></span>
 <span id="L541"><span class="lineNum">     541</span>                 :             : }</span>
 <span id="L542"><span class="lineNum">     542</span>                 :             : </span>
-<span id="L543"><span class="lineNum">     543</span>                 :<span class="tlaGNC">        6386 : IString&amp; StringBase::operator=( const char* string ) noexcept</span></span>
+<span id="L543"><span class="lineNum">     543</span>                 :<span class="tlaGNC">        6384 : IString&amp; StringBase::operator=( const char* string ) noexcept</span></span>
 <span id="L544"><span class="lineNum">     544</span>                 :             : {</span>
-<span id="L545"><span class="lineNum">     545</span>         [<span class="tlaGBC" title="Branch 0 was taken 6384 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">        6386 :     copyIn( string, string ? strlen( string ) : 0 );</span></span>
-<span id="L546"><span class="lineNum">     546</span>                 :<span class="tlaGNC">        6386 :     return *this;</span></span>
+<span id="L545"><span class="lineNum">     545</span>         [<span class="tlaGBC" title="Branch 0 was taken 6382 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">        6384 :     copyIn( string, string ? strlen( string ) : 0 );</span></span>
+<span id="L546"><span class="lineNum">     546</span>                 :<span class="tlaGNC">        6384 :     return *this;</span></span>
 <span id="L547"><span class="lineNum">     547</span>                 :             : }</span>
 <span id="L548"><span class="lineNum">     548</span>                 :             : </span>
 <span id="L549"><span class="lineNum">     549</span>                 :<span class="tlaGNC">           4 : IString&amp; StringBase::operator=( char c ) noexcept</span></span>
@@ -622,16 +622,16 @@
 <span id="L558"><span class="lineNum">     558</span>                 :<span class="tlaGNC">          75 :     return *this;</span></span>
 <span id="L559"><span class="lineNum">     559</span>                 :             : }</span>
 <span id="L560"><span class="lineNum">     560</span>                 :             : </span>
-<span id="L561"><span class="lineNum">     561</span>                 :<span class="tlaGNC">        7630 : IString&amp; StringBase::operator+=( const char* string ) noexcept</span></span>
+<span id="L561"><span class="lineNum">     561</span>                 :<span class="tlaGNC">        7628 : IString&amp; StringBase::operator+=( const char* string ) noexcept</span></span>
 <span id="L562"><span class="lineNum">     562</span>                 :             : {</span>
-<span id="L563"><span class="lineNum">     563</span>         [<span class="tlaGBC" title="Branch 0 was taken 7628 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">        7630 :     appendTo( string, string ? strlen( string ) : 0 );</span></span>
-<span id="L564"><span class="lineNum">     564</span>                 :<span class="tlaGNC">        7630 :     return *this;</span></span>
+<span id="L563"><span class="lineNum">     563</span>         [<span class="tlaGBC" title="Branch 0 was taken 7626 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">        7628 :     appendTo( string, string ? strlen( string ) : 0 );</span></span>
+<span id="L564"><span class="lineNum">     564</span>                 :<span class="tlaGNC">        7628 :     return *this;</span></span>
 <span id="L565"><span class="lineNum">     565</span>                 :             : }</span>
 <span id="L566"><span class="lineNum">     566</span>                 :             : </span>
-<span id="L567"><span class="lineNum">     567</span>                 :<span class="tlaGNC">        6040 : IString&amp; StringBase::operator+=( char c ) noexcept</span></span>
+<span id="L567"><span class="lineNum">     567</span>                 :<span class="tlaGNC">        6038 : IString&amp; StringBase::operator+=( char c ) noexcept</span></span>
 <span id="L568"><span class="lineNum">     568</span>                 :             : {</span>
-<span id="L569"><span class="lineNum">     569</span>                 :<span class="tlaGNC">        6040 :     appendTo( &amp;c, 1 );</span></span>
-<span id="L570"><span class="lineNum">     570</span>                 :<span class="tlaGNC">        6040 :     return *this;</span></span>
+<span id="L569"><span class="lineNum">     569</span>                 :<span class="tlaGNC">        6038 :     appendTo( &amp;c, 1 );</span></span>
+<span id="L570"><span class="lineNum">     570</span>                 :<span class="tlaGNC">        6038 :     return *this;</span></span>
 <span id="L571"><span class="lineNum">     571</span>                 :             : }</span>
 <span id="L572"><span class="lineNum">     572</span>                 :             : </span>
 <span id="L573"><span class="lineNum">     573</span>                 :             : </span>

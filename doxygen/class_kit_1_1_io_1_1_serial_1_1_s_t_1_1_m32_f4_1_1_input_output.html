@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,16 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io::Serial::ST::M32F4::InputOutput Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This concrete class implements the <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html" title="This concrete class implements the InputOutput stream interface built on top of ST HAL Layer/SDK.">InputOutput</a> stream interface built on top of <a class="el" href="namespace_kit_1_1_io_1_1_serial_1_1_s_t.html" title="The ST namespace provides interfaces for ST specific hardware, i.e.">ST</a> HAL Layer/SDK.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This concrete class implements the <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html" title="This concrete class implements the InputOutput stream interface built on top of ST HAL Layer/SDK.">InputOutput</a> stream interface built on top of <a class="el" href="namespace_kit_1_1_io_1_1_serial_1_1_s_t.html" title="The ST namespace provides interfaces for ST specific hardware, i.e.">ST</a> HAL Layer/SDK. </p>
-<p>The implementation ASSUMES that at most there is only ONE client attempt to use the <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html" title="This concrete class implements the InputOutput stream interface built on top of ST HAL Layer/SDK.">InputOutput</a> stream at any given time. It is okay to call the <a class="el" href="#a2ae65ed0aa2e5718756054d99fbb4e15" title="See Kit::Io::Input.">read()</a>, <a class="el" href="#a2b19169f37f75c0e1a1d8ec12a2dda19" title="See Kit::Io::Output.">write()</a>, etc.from different threads - but the calls CANNOT be concurrent. It is the application's responsibility to provide additional thread-safety/concurrence protection.</p>
-<p>Note: The 'receiver' and the 'transmitter' methods MAY be called concurrently. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_serial_2_s_t_2_m32_f4_2_input_output_8h_source.html">InputOutput.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Io::Serial::ST::M32F4::InputOutput:</div>
@@ -84,31 +80,34 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4906c64912d83e402d557cd8a20f98a0" id="r_a4906c64912d83e402d557cd8a20f98a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4906c64912d83e402d557cd8a20f98a0">~InputOutput</a> (void)</td></tr>
 <tr class="memdesc:a4906c64912d83e402d557cd8a20f98a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
 <tr class="separator:a4906c64912d83e402d557cd8a20f98a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a899fc145b659b18071524d34d3ce3893" id="r_a899fc145b659b18071524d34d3ce3893"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a899fc145b659b18071524d34d3ce3893">start</a> (IRQn_Type uartIrqNum, UART_HandleTypeDef *uartHdlToUse) noexcept</td></tr>
-<tr class="memdesc:a899fc145b659b18071524d34d3ce3893"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method MUST be used to finish the initialization of the stream and start is underlying drivers.  <br /></td></tr>
-<tr class="separator:a899fc145b659b18071524d34d3ce3893"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ae65ed0aa2e5718756054d99fbb4e15" id="r_a2ae65ed0aa2e5718756054d99fbb4e15"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ae65ed0aa2e5718756054d99fbb4e15">read</a> (void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesRead) noexcept override</td></tr>
-<tr class="memdesc:a2ae65ed0aa2e5718756054d99fbb4e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::Input.  <br /></td></tr>
-<tr class="separator:a2ae65ed0aa2e5718756054d99fbb4e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbd7741cee041b5360fdd9fc46807a75" id="r_acbd7741cee041b5360fdd9fc46807a75"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbd7741cee041b5360fdd9fc46807a75">available</a> () noexcept override</td></tr>
 <tr class="memdesc:acbd7741cee041b5360fdd9fc46807a75"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::Input.  <br /></td></tr>
 <tr class="separator:acbd7741cee041b5360fdd9fc46807a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa84c8a0df7f3bfb465ccecb9bb293720" id="r_aa84c8a0df7f3bfb465ccecb9bb293720"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa84c8a0df7f3bfb465ccecb9bb293720">getRxErrorsCounts</a> (bool clearCount=true) noexcept</td></tr>
-<tr class="memdesc:aa84c8a0df7f3bfb465ccecb9bb293720"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to retrieve and optionally clear the RX Error counter.  <br /></td></tr>
-<tr class="separator:aa84c8a0df7f3bfb465ccecb9bb293720"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b19169f37f75c0e1a1d8ec12a2dda19" id="r_a2b19169f37f75c0e1a1d8ec12a2dda19"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b19169f37f75c0e1a1d8ec12a2dda19">write</a> (const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesWritten) noexcept override</td></tr>
-<tr class="memdesc:a2b19169f37f75c0e1a1d8ec12a2dda19"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::Output.  <br /></td></tr>
-<tr class="separator:a2b19169f37f75c0e1a1d8ec12a2dda19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca70d0273159d4745dd40a7af98cf546" id="r_aca70d0273159d4745dd40a7af98cf546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca70d0273159d4745dd40a7af98cf546">flush</a> () noexcept override</td></tr>
-<tr class="memdesc:aca70d0273159d4745dd40a7af98cf546"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::Output.  <br /></td></tr>
-<tr class="separator:aca70d0273159d4745dd40a7af98cf546"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9022d42b29af6452a51e2be3a24864f" id="r_ac9022d42b29af6452a51e2be3a24864f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9022d42b29af6452a51e2be3a24864f">isEos</a> () noexcept override</td></tr>
-<tr class="memdesc:ac9022d42b29af6452a51e2be3a24864f"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::IsEos. Note: This method always returns false.  <br /></td></tr>
-<tr class="separator:ac9022d42b29af6452a51e2be3a24864f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92b1f3802308d5301e60b993489d4b82" id="r_a92b1f3802308d5301e60b993489d4b82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92b1f3802308d5301e60b993489d4b82">close</a> () noexcept override</td></tr>
 <tr class="memdesc:a92b1f3802308d5301e60b993489d4b82"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::Output.  <br /></td></tr>
 <tr class="separator:a92b1f3802308d5301e60b993489d4b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca70d0273159d4745dd40a7af98cf546" id="r_aca70d0273159d4745dd40a7af98cf546"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca70d0273159d4745dd40a7af98cf546">flush</a> () noexcept override</td></tr>
+<tr class="memdesc:aca70d0273159d4745dd40a7af98cf546"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::Output.  <br /></td></tr>
+<tr class="separator:aca70d0273159d4745dd40a7af98cf546"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa84c8a0df7f3bfb465ccecb9bb293720" id="r_aa84c8a0df7f3bfb465ccecb9bb293720"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa84c8a0df7f3bfb465ccecb9bb293720">getRxErrorsCounts</a> (bool clearCount=true) noexcept</td></tr>
+<tr class="memdesc:aa84c8a0df7f3bfb465ccecb9bb293720"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to retrieve and optionally clear the RX Error counter.  <br /></td></tr>
+<tr class="separator:aa84c8a0df7f3bfb465ccecb9bb293720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9022d42b29af6452a51e2be3a24864f" id="r_ac9022d42b29af6452a51e2be3a24864f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9022d42b29af6452a51e2be3a24864f">isEos</a> () noexcept override</td></tr>
+<tr class="memdesc:ac9022d42b29af6452a51e2be3a24864f"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::IsEos. Note: This method always returns false.  <br /></td></tr>
+<tr class="separator:ac9022d42b29af6452a51e2be3a24864f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ae65ed0aa2e5718756054d99fbb4e15" id="r_a2ae65ed0aa2e5718756054d99fbb4e15"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ae65ed0aa2e5718756054d99fbb4e15">read</a> (void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesRead) noexcept override</td></tr>
+<tr class="memdesc:a2ae65ed0aa2e5718756054d99fbb4e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::Input.  <br /></td></tr>
+<tr class="separator:a2ae65ed0aa2e5718756054d99fbb4e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a899fc145b659b18071524d34d3ce3893" id="r_a899fc145b659b18071524d34d3ce3893"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a899fc145b659b18071524d34d3ce3893">start</a> (IRQn_Type uartIrqNum, UART_HandleTypeDef *uartHdlToUse) noexcept</td></tr>
+<tr class="memdesc:a899fc145b659b18071524d34d3ce3893"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method MUST be used to finish the initialization of the stream and start is underlying drivers.  <br /></td></tr>
+<tr class="separator:a899fc145b659b18071524d34d3ce3893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b19169f37f75c0e1a1d8ec12a2dda19" id="r_a2b19169f37f75c0e1a1d8ec12a2dda19"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b19169f37f75c0e1a1d8ec12a2dda19">write</a> (const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesWritten) noexcept override</td></tr>
+<tr class="memdesc:a2b19169f37f75c0e1a1d8ec12a2dda19"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Io::Output.  <br /></td></tr>
+<tr class="separator:a2b19169f37f75c0e1a1d8ec12a2dda19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_io_1_1_i_input"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_io_1_1_i_input')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a></td></tr>
+<tr class="memitem:a77bbb71dcabda3d7d9faed428874c032 inherit pub_methods_class_kit_1_1_io_1_1_i_input" id="r_a77bbb71dcabda3d7d9faed428874c032"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_input.html#a77bbb71dcabda3d7d9faed428874c032">~IInput</a> () noexcept=default</td></tr>
+<tr class="memdesc:a77bbb71dcabda3d7d9faed428874c032 inherit pub_methods_class_kit_1_1_io_1_1_i_input"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the make the destructor virtual.  <br /></td></tr>
+<tr class="separator:a77bbb71dcabda3d7d9faed428874c032 inherit pub_methods_class_kit_1_1_io_1_1_i_input"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa23da02212c7f2267452b83e061e4e57 inherit pub_methods_class_kit_1_1_io_1_1_i_input" id="r_aa23da02212c7f2267452b83e061e4e57"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_input.html#aa23da02212c7f2267452b83e061e4e57">read</a> (char &amp;c) noexcept</td></tr>
 <tr class="memdesc:aa23da02212c7f2267452b83e061e4e57 inherit pub_methods_class_kit_1_1_io_1_1_i_input"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a single byte from the stream.  <br /></td></tr>
 <tr class="separator:aa23da02212c7f2267452b83e061e4e57 inherit pub_methods_class_kit_1_1_io_1_1_i_input"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,9 +120,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6b7b4767aaa1b977ac7dbe705a6d2cb9 inherit pub_methods_class_kit_1_1_io_1_1_i_input" id="r_a6b7b4767aaa1b977ac7dbe705a6d2cb9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_input.html#a6b7b4767aaa1b977ac7dbe705a6d2cb9">read</a> (void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytesToRead) noexcept</td></tr>
 <tr class="memdesc:a6b7b4767aaa1b977ac7dbe705a6d2cb9 inherit pub_methods_class_kit_1_1_io_1_1_i_input"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is similar to read( void* buffer, int numBytes, int&amp; bytesRead ), except that it will NOT return until 'numBytesToRead' have been read.  <br /></td></tr>
 <tr class="separator:a6b7b4767aaa1b977ac7dbe705a6d2cb9 inherit pub_methods_class_kit_1_1_io_1_1_i_input"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77bbb71dcabda3d7d9faed428874c032 inherit pub_methods_class_kit_1_1_io_1_1_i_input" id="r_a77bbb71dcabda3d7d9faed428874c032"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_input.html#a77bbb71dcabda3d7d9faed428874c032">~IInput</a> () noexcept=default</td></tr>
-<tr class="memdesc:a77bbb71dcabda3d7d9faed428874c032 inherit pub_methods_class_kit_1_1_io_1_1_i_input"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the make the destructor virtual.  <br /></td></tr>
-<tr class="separator:a77bbb71dcabda3d7d9faed428874c032 inherit pub_methods_class_kit_1_1_io_1_1_i_input"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_io_1_1_i_close"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_io_1_1_i_close')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_io_1_1_i_close.html">Kit::Io::IClose</a></td></tr>
 <tr class="memitem:add2685594bd575eec0205376073121e3 inherit pub_methods_class_kit_1_1_io_1_1_i_close" id="r_add2685594bd575eec0205376073121e3"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_close.html#add2685594bd575eec0205376073121e3">~IClose</a> () noexcept=default</td></tr>
 <tr class="memdesc:add2685594bd575eec0205376073121e3 inherit pub_methods_class_kit_1_1_io_1_1_i_close"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the make the destructor virtual.  <br /></td></tr>
@@ -133,6 +129,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a91e305d25e263b51ae3d019f5f473065 inherit pub_methods_class_kit_1_1_io_1_1_i_eos"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the make the destructor virtual.  <br /></td></tr>
 <tr class="separator:a91e305d25e263b51ae3d019f5f473065 inherit pub_methods_class_kit_1_1_io_1_1_i_eos"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_io_1_1_i_output"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_io_1_1_i_output')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a></td></tr>
+<tr class="memitem:ac2e19725508fa30d1dc4ce0ccae39e85 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_ac2e19725508fa30d1dc4ce0ccae39e85"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#ac2e19725508fa30d1dc4ce0ccae39e85">~IOutput</a> () noexcept=default</td></tr>
+<tr class="memdesc:ac2e19725508fa30d1dc4ce0ccae39e85 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the make the destructor virtual.  <br /></td></tr>
+<tr class="separator:ac2e19725508fa30d1dc4ce0ccae39e85 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d050f126fa3601935e50f974e3a7322 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_a4d050f126fa3601935e50f974e3a7322"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#a4d050f126fa3601935e50f974e3a7322">vwrite</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;formatBuffer, const char *format, va_list ap) noexcept</td></tr>
+<tr class="memdesc:a4d050f126fa3601935e50f974e3a7322 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as write( String&amp; formatBuffer, const char* format,...), except that it is called with a va_list instead of a variable number of arguments.  <br /></td></tr>
+<tr class="separator:a4d050f126fa3601935e50f974e3a7322 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d5478cfce943f9af1f7c45d20d81cc4 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_a5d5478cfce943f9af1f7c45d20d81cc4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#a5d5478cfce943f9af1f7c45d20d81cc4">write</a> (char c) noexcept</td></tr>
 <tr class="memdesc:a5d5478cfce943f9af1f7c45d20d81cc4 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a single byte to the stream.  <br /></td></tr>
 <tr class="separator:a5d5478cfce943f9af1f7c45d20d81cc4 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,18 +144,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aafc5d199d019e525a0ae16cbf2b43d00 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_aafc5d199d019e525a0ae16cbf2b43d00"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#aafc5d199d019e525a0ae16cbf2b43d00">write</a> (const <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;string) noexcept</td></tr>
 <tr class="memdesc:aafc5d199d019e525a0ae16cbf2b43d00 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a string to the stream.  <br /></td></tr>
 <tr class="separator:aafc5d199d019e525a0ae16cbf2b43d00 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0190a4dfbabd9ab633ff18ea68027760 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_a0190a4dfbabd9ab633ff18ea68027760"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#a0190a4dfbabd9ab633ff18ea68027760">write</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;formatBuffer, const char *format,...) noexcept</td></tr>
-<tr class="memdesc:a0190a4dfbabd9ab633ff18ea68027760 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formatted write to the stream.  <br /></td></tr>
-<tr class="separator:a0190a4dfbabd9ab633ff18ea68027760 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d050f126fa3601935e50f974e3a7322 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_a4d050f126fa3601935e50f974e3a7322"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#a4d050f126fa3601935e50f974e3a7322">vwrite</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;formatBuffer, const char *format, va_list ap) noexcept</td></tr>
-<tr class="memdesc:a4d050f126fa3601935e50f974e3a7322 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as write( String&amp; formatBuffer, const char* format,...), except that it is called with a va_list instead of a variable number of arguments.  <br /></td></tr>
-<tr class="separator:a4d050f126fa3601935e50f974e3a7322 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f0b12bd47c7212e7b260ff40c4351b4 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_a6f0b12bd47c7212e7b260ff40c4351b4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#a6f0b12bd47c7212e7b260ff40c4351b4">write</a> (const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytes) noexcept</td></tr>
 <tr class="memdesc:a6f0b12bd47c7212e7b260ff40c4351b4 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the content of the buffer to the stream.  <br /></td></tr>
 <tr class="separator:a6f0b12bd47c7212e7b260ff40c4351b4 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2e19725508fa30d1dc4ce0ccae39e85 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_ac2e19725508fa30d1dc4ce0ccae39e85"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#ac2e19725508fa30d1dc4ce0ccae39e85">~IOutput</a> () noexcept=default</td></tr>
-<tr class="memdesc:ac2e19725508fa30d1dc4ce0ccae39e85 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the make the destructor virtual.  <br /></td></tr>
-<tr class="separator:ac2e19725508fa30d1dc4ce0ccae39e85 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0190a4dfbabd9ab633ff18ea68027760 inherit pub_methods_class_kit_1_1_io_1_1_i_output" id="r_a0190a4dfbabd9ab633ff18ea68027760"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_output.html#a0190a4dfbabd9ab633ff18ea68027760">write</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;formatBuffer, const char *format,...) noexcept</td></tr>
+<tr class="memdesc:a0190a4dfbabd9ab633ff18ea68027760 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formatted write to the stream.  <br /></td></tr>
+<tr class="separator:a0190a4dfbabd9ab633ff18ea68027760 inherit pub_methods_class_kit_1_1_io_1_1_i_output"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -161,7 +157,11 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:a5f8e09b7fc153e27429d378453f8770a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Driver.  <br /></td></tr>
 <tr class="separator:a5f8e09b7fc153e27429d378453f8770a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This concrete class implements the <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html" title="This concrete class implements the InputOutput stream interface built on top of ST HAL Layer/SDK.">InputOutput</a> stream interface built on top of <a class="el" href="namespace_kit_1_1_io_1_1_serial_1_1_s_t.html" title="The ST namespace provides interfaces for ST specific hardware, i.e.">ST</a> HAL Layer/SDK. </p>
+<p>The implementation ASSUMES that at most there is only ONE client attempt to use the <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html" title="This concrete class implements the InputOutput stream interface built on top of ST HAL Layer/SDK.">InputOutput</a> stream at any given time. It is okay to call the <a class="el" href="#a2ae65ed0aa2e5718756054d99fbb4e15" title="See Kit::Io::Input.">read()</a>, <a class="el" href="#a2b19169f37f75c0e1a1d8ec12a2dda19" title="See Kit::Io::Output.">write()</a>, etc.from different threads - but the calls CANNOT be concurrent. It is the application's responsibility to provide additional thread-safety/concurrence protection.</p>
+<p>Note: The 'receiver' and the 'transmitter' methods MAY be called concurrently. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afadefe3d4d9100703b4bcb2ffa1a096b" name="afadefe3d4d9100703b4bcb2ffa1a096b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afadefe3d4d9100703b4bcb2ffa1a096b">&#9670;&#160;</a></span>InputOutput()</h2>
 
@@ -488,7 +488,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,21 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_io_1_1_socket_1_1_i_listener_client-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_io_1_1_socket_1_1_i_listener_client-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io::Socket::IListenerClient Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class defines the callback mechanism used for accepting incoming socket connections.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class defines the callback mechanism used for accepting incoming socket connections. </p>
-<p>This is interface is NOT thread safe.</p>
-<p>In-thread Client: It is okay for the client to be running in the same thread as the listener. However, the client should NOT return from the <a class="el" href="#a306f7babd47f979733deac7bb48e0d4a" title="This method is a callback method that is called when the listener has accepted in incoming socket req...">newConnection()</a> method until the client is 'done' with the socket. <br  />
-</p>
-<p>Out-of-thread Client: For this use case, the client should NOT inherit/implement this class directly because it is NOT thread safe. Instead, the client should inherit from the <a class="el" href="class_kit_1_1_io_1_1_socket_1_1_listener_client_sync.html" title="This partially concrete class implements the synchronous ITC interface for the Listener Client.">ListenerClientSync</a> class and then implement the request(msg) method. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_listener_client_8h_source.html">IListenerClient.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Io::Socket::IListenerClient:</div>
@@ -72,14 +66,20 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a306f7babd47f979733deac7bb48e0d4a" id="r_a306f7babd47f979733deac7bb48e0d4a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a306f7babd47f979733deac7bb48e0d4a">newConnection</a> (<a class="el" href="_types_8h.html#a307fe39ec3b04fb223b9aa11585441ba">KitIoSocketHandle_T</a> newFd, const char *rawConnectionInfo) noexcept=0</td></tr>
-<tr class="memdesc:a306f7babd47f979733deac7bb48e0d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is a callback method that is called when the listener has accepted in incoming socket request.  <br /></td></tr>
-<tr class="separator:a306f7babd47f979733deac7bb48e0d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dfa3cae35e1671c0b00e6663ece74e5" id="r_a1dfa3cae35e1671c0b00e6663ece74e5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dfa3cae35e1671c0b00e6663ece74e5">~IListenerClient</a> ()=default</td></tr>
 <tr class="memdesc:a1dfa3cae35e1671c0b00e6663ece74e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:a1dfa3cae35e1671c0b00e6663ece74e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a306f7babd47f979733deac7bb48e0d4a" id="r_a306f7babd47f979733deac7bb48e0d4a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a306f7babd47f979733deac7bb48e0d4a">newConnection</a> (<a class="el" href="_types_8h.html#a307fe39ec3b04fb223b9aa11585441ba">KitIoSocketHandle_T</a> newFd, const char *rawConnectionInfo) noexcept=0</td></tr>
+<tr class="memdesc:a306f7babd47f979733deac7bb48e0d4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is a callback method that is called when the listener has accepted in incoming socket request.  <br /></td></tr>
+<tr class="separator:a306f7babd47f979733deac7bb48e0d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class defines the callback mechanism used for accepting incoming socket connections. </p>
+<p>This is interface is NOT thread safe.</p>
+<p>In-thread Client: It is okay for the client to be running in the same thread as the listener. However, the client should NOT return from the <a class="el" href="#a306f7babd47f979733deac7bb48e0d4a" title="This method is a callback method that is called when the listener has accepted in incoming socket req...">newConnection()</a> method until the client is 'done' with the socket. <br  />
+</p>
+<p>Out-of-thread Client: For this use case, the client should NOT inherit/implement this class directly because it is NOT thread safe. Instead, the client should inherit from the <a class="el" href="class_kit_1_1_io_1_1_socket_1_1_listener_client_sync.html" title="This partially concrete class implements the synchronous ITC interface for the Listener Client.">ListenerClientSync</a> class and then implement the request(msg) method. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1dfa3cae35e1671c0b00e6663ece74e5" name="a1dfa3cae35e1671c0b00e6663ece74e5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1dfa3cae35e1671c0b00e6663ece74e5">&#9670;&#160;</a></span>~IListenerClient()</h2>
 
@@ -149,7 +149,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

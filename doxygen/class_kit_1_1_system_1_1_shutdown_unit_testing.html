@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,19 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_shutdown_unit_testing-members.html">List of all members</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="class_kit_1_1_system_1_1_shutdown_unit_testing-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::ShutdownUnitTesting Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This class provides methods to access the unit testing support for the <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Kit::System::Shutdown</a> interface.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class provides methods to access the unit testing support for the <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Kit::System::Shutdown</a> interface. </p>
-<p>This class provides an implementation of <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Shutdown</a> interface that has the ability to count the number times the <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Shutdown</a> interface is/was called instead of exiting. It can also alter the application's exit code.</p>
-<p>Notes: o The <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Shutdown</a> implementation assumes/uses the C Library 'exit()' method. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_shutdown_unit_testing_8h_source.html">ShutdownUnitTesting.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -69,14 +65,18 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:af39922136a8a0ae0459461f801b825f8" id="r_af39922136a8a0ae0459461f801b825f8"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af39922136a8a0ae0459461f801b825f8">getAndClearCounter</a> () noexcept</td></tr>
 <tr class="memdesc:af39922136a8a0ae0459461f801b825f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current call count AND clears the call counter.  <br /></td></tr>
 <tr class="separator:af39922136a8a0ae0459461f801b825f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a560b47caa82eadb31cdf989617abf304" id="r_a560b47caa82eadb31cdf989617abf304"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a560b47caa82eadb31cdf989617abf304">setExitCode</a> (int new_exit_code) noexcept</td></tr>
-<tr class="memdesc:a560b47caa82eadb31cdf989617abf304"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows the application to exit - but always with the specified 'new_exit_code' (i.e.  <br /></td></tr>
-<tr class="separator:a560b47caa82eadb31cdf989617abf304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac60504ee69423e18bb2c480ba4e2ea6b" id="r_ac60504ee69423e18bb2c480ba4e2ea6b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac60504ee69423e18bb2c480ba4e2ea6b">restore</a> () noexcept</td></tr>
 <tr class="memdesc:ac60504ee69423e18bb2c480ba4e2ea6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method restores the exit/shutdown behavior to its 'non-test' paradigm.  <br /></td></tr>
 <tr class="separator:ac60504ee69423e18bb2c480ba4e2ea6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a560b47caa82eadb31cdf989617abf304" id="r_a560b47caa82eadb31cdf989617abf304"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a560b47caa82eadb31cdf989617abf304">setExitCode</a> (int new_exit_code) noexcept</td></tr>
+<tr class="memdesc:a560b47caa82eadb31cdf989617abf304"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows the application to exit - but always with the specified 'new_exit_code' (i.e.  <br /></td></tr>
+<tr class="separator:a560b47caa82eadb31cdf989617abf304"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class provides methods to access the unit testing support for the <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Kit::System::Shutdown</a> interface. </p>
+<p>This class provides an implementation of <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Shutdown</a> interface that has the ability to count the number times the <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Shutdown</a> interface is/was called instead of exiting. It can also alter the application's exit code.</p>
+<p>Notes: o The <a class="el" href="class_kit_1_1_system_1_1_shutdown.html" title="This class defines methods for forcibly terminating the application.">Shutdown</a> implementation assumes/uses the C Library 'exit()' method. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad50bf3b85da701eb460fb6469bdffd5a" name="ad50bf3b85da701eb460fb6469bdffd5a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad50bf3b85da701eb460fb6469bdffd5a">&#9670;&#160;</a></span>clearAndUseCounter()</h2>
 
@@ -193,7 +193,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

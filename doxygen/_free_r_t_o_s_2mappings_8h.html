@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -51,14 +51,10 @@ $(function() {
   <div class="headertitle"><div class="title">mappings.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file provides the mappings for Platform specific types, etc. </p>
-<p>needed by <a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">Kit::System</a> </p>
-</div><div class="textblock"><code>#include &quot;FreeRTOS.h&quot;</code><br />
-<code>#include &quot;semphr.h&quot;</code><br />
-<code>#include &quot;task.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="c__assert_8h_source.html">Kit/System/_assert/c_assert.h</a>&quot;</code><br />
-</div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+
+<p>This file provides the mappings for Platform specific types, etc.  
+<a href="#details">More...</a></p>
+<div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for mappings.h:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -70,36 +66,36 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aa6cfaefa5fcd4e06a68266e7ad8b21de" id="r_aa6cfaefa5fcd4e06a68266e7ad8b21de"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6cfaefa5fcd4e06a68266e7ad8b21de">KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME</a>&#160;&#160;&#160;__func__</td></tr>
-<tr class="memdesc:aa6cfaefa5fcd4e06a68266e7ad8b21de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use C++11 function name.  <br /></td></tr>
-<tr class="separator:aa6cfaefa5fcd4e06a68266e7ad8b21de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1001ed31a73eab414a8b1caf55062b74" id="r_a1001ed31a73eab414a8b1caf55062b74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1001ed31a73eab414a8b1caf55062b74">KIT_SYSTEM_ASSERT_MAP</a>(e)&#160;&#160;&#160;<a class="el" href="c__assert_8h.html#a7cfd566d1dc97933300bf758007f9fa9">Kit_System_assert_c_wrapper</a>( e, __FILE__, __LINE__, <a class="el" href="#aa6cfaefa5fcd4e06a68266e7ad8b21de">KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME</a> )</td></tr>
 <tr class="memdesc:a1001ed31a73eab414a8b1caf55062b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
 <tr class="separator:a1001ed31a73eab414a8b1caf55062b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe9727bffcc3a3ef6a419df8608200d8" id="r_afe9727bffcc3a3ef6a419df8608200d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe9727bffcc3a3ef6a419df8608200d8">KitSystemThreadID_T_MAP</a>&#160;&#160;&#160;TaskHandle_t</td></tr>
-<tr class="memdesc:afe9727bffcc3a3ef6a419df8608200d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
-<tr class="separator:afe9727bffcc3a3ef6a419df8608200d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6cfaefa5fcd4e06a68266e7ad8b21de" id="r_aa6cfaefa5fcd4e06a68266e7ad8b21de"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6cfaefa5fcd4e06a68266e7ad8b21de">KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME</a>&#160;&#160;&#160;__func__</td></tr>
+<tr class="memdesc:aa6cfaefa5fcd4e06a68266e7ad8b21de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use C++11 function name.  <br /></td></tr>
+<tr class="separator:aa6cfaefa5fcd4e06a68266e7ad8b21de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9cca7c78fe6160f6743bf8ef3f3ba06" id="r_aa9cca7c78fe6160f6743bf8ef3f3ba06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9cca7c78fe6160f6743bf8ef3f3ba06">KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP</a>&#160;&#160;&#160;(configMAX_PRIORITIES - 1)</td></tr>
+<tr class="memdesc:aa9cca7c78fe6160f6743bf8ef3f3ba06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
+<tr class="separator:aa9cca7c78fe6160f6743bf8ef3f3ba06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6febf1f6032519ac645efde0172a539" id="r_ab6febf1f6032519ac645efde0172a539"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6febf1f6032519ac645efde0172a539">KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP</a>&#160;&#160;&#160;(-1)</td></tr>
+<tr class="memdesc:ab6febf1f6032519ac645efde0172a539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
+<tr class="separator:ab6febf1f6032519ac645efde0172a539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7429a04147a6025a29cf917352d3c906" id="r_a7429a04147a6025a29cf917352d3c906"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7429a04147a6025a29cf917352d3c906">KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP</a>&#160;&#160;&#160;1</td></tr>
+<tr class="memdesc:a7429a04147a6025a29cf917352d3c906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
+<tr class="separator:a7429a04147a6025a29cf917352d3c906"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1d710fbdf092dc6f541c35f7001faa1" id="r_ab1d710fbdf092dc6f541c35f7001faa1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1d710fbdf092dc6f541c35f7001faa1">KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP</a>&#160;&#160;&#160;(configMAX_PRIORITIES/2)</td></tr>
+<tr class="memdesc:ab1d710fbdf092dc6f541c35f7001faa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
+<tr class="separator:ab1d710fbdf092dc6f541c35f7001faa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3821460130f63639c1c9d1295746d36" id="r_aa3821460130f63639c1c9d1295746d36"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3821460130f63639c1c9d1295746d36">KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP</a>&#160;&#160;&#160;(1)</td></tr>
+<tr class="memdesc:aa3821460130f63639c1c9d1295746d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
+<tr class="separator:aa3821460130f63639c1c9d1295746d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42877529a669f11670b7400cad64c7e1" id="r_a42877529a669f11670b7400cad64c7e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42877529a669f11670b7400cad64c7e1">KitSystemMutex_T_MAP</a>&#160;&#160;&#160;SemaphoreHandle_t</td></tr>
 <tr class="memdesc:a42877529a669f11670b7400cad64c7e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
 <tr class="separator:a42877529a669f11670b7400cad64c7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2996c19bfe4f8126d7b03791b66e1814" id="r_a2996c19bfe4f8126d7b03791b66e1814"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2996c19bfe4f8126d7b03791b66e1814">KitSystemSema_T_MAP</a>&#160;&#160;&#160;SemaphoreHandle_t</td></tr>
 <tr class="memdesc:a2996c19bfe4f8126d7b03791b66e1814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
 <tr class="separator:a2996c19bfe4f8126d7b03791b66e1814"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9cca7c78fe6160f6743bf8ef3f3ba06" id="r_aa9cca7c78fe6160f6743bf8ef3f3ba06"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9cca7c78fe6160f6743bf8ef3f3ba06">KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP</a>&#160;&#160;&#160;(configMAX_PRIORITIES - 1)</td></tr>
-<tr class="memdesc:aa9cca7c78fe6160f6743bf8ef3f3ba06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
-<tr class="separator:aa9cca7c78fe6160f6743bf8ef3f3ba06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1d710fbdf092dc6f541c35f7001faa1" id="r_ab1d710fbdf092dc6f541c35f7001faa1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab1d710fbdf092dc6f541c35f7001faa1">KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP</a>&#160;&#160;&#160;(configMAX_PRIORITIES/2)</td></tr>
-<tr class="memdesc:ab1d710fbdf092dc6f541c35f7001faa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
-<tr class="separator:ab1d710fbdf092dc6f541c35f7001faa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7429a04147a6025a29cf917352d3c906" id="r_a7429a04147a6025a29cf917352d3c906"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7429a04147a6025a29cf917352d3c906">KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP</a>&#160;&#160;&#160;1</td></tr>
-<tr class="memdesc:a7429a04147a6025a29cf917352d3c906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
-<tr class="separator:a7429a04147a6025a29cf917352d3c906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3821460130f63639c1c9d1295746d36" id="r_aa3821460130f63639c1c9d1295746d36"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3821460130f63639c1c9d1295746d36">KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP</a>&#160;&#160;&#160;(1)</td></tr>
-<tr class="memdesc:aa3821460130f63639c1c9d1295746d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
-<tr class="separator:aa3821460130f63639c1c9d1295746d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6febf1f6032519ac645efde0172a539" id="r_ab6febf1f6032519ac645efde0172a539"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6febf1f6032519ac645efde0172a539">KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP</a>&#160;&#160;&#160;(-1)</td></tr>
-<tr class="memdesc:ab6febf1f6032519ac645efde0172a539"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
-<tr class="separator:ab6febf1f6032519ac645efde0172a539"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe9727bffcc3a3ef6a419df8608200d8" id="r_afe9727bffcc3a3ef6a419df8608200d8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe9727bffcc3a3ef6a419df8608200d8">KitSystemThreadID_T_MAP</a>&#160;&#160;&#160;TaskHandle_t</td></tr>
+<tr class="memdesc:afe9727bffcc3a3ef6a419df8608200d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
+<tr class="separator:afe9727bffcc3a3ef6a419df8608200d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -107,7 +103,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:a03b3792a5ae4e8f98f7adc2fc85c8104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
 <tr class="separator:a03b3792a5ae4e8f98f7adc2fc85c8104"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This file provides the mappings for Platform specific types, etc. </p>
+<p>needed by <a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">Kit::System</a> </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a1001ed31a73eab414a8b1caf55062b74" name="a1001ed31a73eab414a8b1caf55062b74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1001ed31a73eab414a8b1caf55062b74">&#9670;&#160;</a></span>KIT_SYSTEM_ASSERT_MAP</h2>
 
@@ -302,7 +301,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:25 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

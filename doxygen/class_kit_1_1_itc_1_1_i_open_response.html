@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,16 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_itc_1_1_i_open_response-members.html">List of all members</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_itc_1_1_i_open_response-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Itc::IOpenResponse Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class define response message types for a set of ITC services.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class define response message types for a set of ITC services. </p>
-<p>The <a class="el" href="#a4aa5eda4d98c7bd09c2c97ac4f82399f" title="Response: OpenMsg.">response()</a> method(s) are to be implemented by the 'client'</p>
-<p>NOTE: Typically the 'Open Request' is done synchronously. This interface is provided for completeness for the edge case of doing the Open Request asynchronously. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_open_request_8h_source.html">IOpenRequest.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -70,14 +66,18 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4aa5eda4d98c7bd09c2c97ac4f82399f" id="r_a4aa5eda4d98c7bd09c2c97ac4f82399f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4aa5eda4d98c7bd09c2c97ac4f82399f">response</a> (<a class="el" href="#a92d1d28e01045d9c38c46ada40f138be">OpenMsg</a> &amp;msg) noexcept=0</td></tr>
-<tr class="memdesc:a4aa5eda4d98c7bd09c2c97ac4f82399f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Response: OpenMsg.  <br /></td></tr>
-<tr class="separator:a4aa5eda4d98c7bd09c2c97ac4f82399f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff2381bf7c1bc2d4d37b1a94e775b5a5" id="r_aff2381bf7c1bc2d4d37b1a94e775b5a5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff2381bf7c1bc2d4d37b1a94e775b5a5">~IOpenResponse</a> ()=default</td></tr>
 <tr class="memdesc:aff2381bf7c1bc2d4d37b1a94e775b5a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:aff2381bf7c1bc2d4d37b1a94e775b5a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aa5eda4d98c7bd09c2c97ac4f82399f" id="r_a4aa5eda4d98c7bd09c2c97ac4f82399f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4aa5eda4d98c7bd09c2c97ac4f82399f">response</a> (<a class="el" href="#a92d1d28e01045d9c38c46ada40f138be">OpenMsg</a> &amp;msg) noexcept=0</td></tr>
+<tr class="memdesc:a4aa5eda4d98c7bd09c2c97ac4f82399f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Response: OpenMsg.  <br /></td></tr>
+<tr class="separator:a4aa5eda4d98c7bd09c2c97ac4f82399f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class define response message types for a set of ITC services. </p>
+<p>The <a class="el" href="#a4aa5eda4d98c7bd09c2c97ac4f82399f" title="Response: OpenMsg.">response()</a> method(s) are to be implemented by the 'client'</p>
+<p>NOTE: Typically the 'Open Request' is done synchronously. This interface is provided for completeness for the edge case of doing the Open Request asynchronously. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a92d1d28e01045d9c38c46ada40f138be" name="a92d1d28e01045d9c38c46ada40f138be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a92d1d28e01045d9c38c46ada40f138be">&#9670;&#160;</a></span>OpenMsg</h2>
 
@@ -156,7 +156,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

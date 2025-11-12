@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -52,11 +52,7 @@ $(function() {
   <div class="headertitle"><div class="title">SimTick.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;kit_config.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="_semaphore_8h_source.html">Kit/System/Semaphore.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_thread_8h_source.html">Kit/System/Thread.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_item_8h_source.html">Kit/Container/Item.h</a>&quot;</code><br />
-</div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+<div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for SimTick.h:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -83,30 +79,30 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:afa698eb077ebb817cd422180e81c2bb1" id="r_afa698eb077ebb817cd422180e81c2bb1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa698eb077ebb817cd422180e81c2bb1">KIT_SYSTEM_SIM_TICK_APPLICATION_WAIT</a>()</td></tr>
+<tr class="memdesc:afa698eb077ebb817cd422180e81c2bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
+<tr class="separator:afa698eb077ebb817cd422180e81c2bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3145598dee998c0fd7bdc146c219aedd" id="r_a3145598dee998c0fd7bdc146c219aedd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3145598dee998c0fd7bdc146c219aedd">KIT_SYSTEM_SIM_TICK_ON_THREAD_EXIT_</a>()</td></tr>
+<tr class="memdesc:a3145598dee998c0fd7bdc146c219aedd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
+<tr class="separator:a3145598dee998c0fd7bdc146c219aedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94a771ab25abe5e920879836bec72314" id="r_a94a771ab25abe5e920879836bec72314"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94a771ab25abe5e920879836bec72314">KIT_SYSTEM_SIM_TICK_REAL_TIME_THREAD_INIT_</a>()</td></tr>
+<tr class="memdesc:a94a771ab25abe5e920879836bec72314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
+<tr class="separator:a94a771ab25abe5e920879836bec72314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ebe805e1f0d977d44102f1144707ad" id="r_ac0ebe805e1f0d977d44102f1144707ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0ebe805e1f0d977d44102f1144707ad">KIT_SYSTEM_SIM_TICK_THREAD_INIT_</a>(f)</td></tr>
+<tr class="memdesc:ac0ebe805e1f0d977d44102f1144707ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
+<tr class="separator:ac0ebe805e1f0d977d44102f1144707ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5926f31af9a67780bbd3a4af312a79e6" id="r_a5926f31af9a67780bbd3a4af312a79e6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5926f31af9a67780bbd3a4af312a79e6">KIT_SYSTEM_SIM_TICK_TOP_LEVEL_WAIT</a>()</td></tr>
+<tr class="memdesc:a5926f31af9a67780bbd3a4af312a79e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
+<tr class="separator:a5926f31af9a67780bbd3a4af312a79e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60cb3cf6eb755492fb7ce0d2027cb43d" id="r_a60cb3cf6eb755492fb7ce0d2027cb43d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60cb3cf6eb755492fb7ce0d2027cb43d">KIT_SYSTEM_SIM_TICK_USING_SIM_TICKS</a>()&#160;&#160;&#160;false</td></tr>
+<tr class="memdesc:a60cb3cf6eb755492fb7ce0d2027cb43d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
+<tr class="separator:a60cb3cf6eb755492fb7ce0d2027cb43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08b2cb809c1f1db25e1cbc60e0def886" id="r_a08b2cb809c1f1db25e1cbc60e0def886"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08b2cb809c1f1db25e1cbc60e0def886">OPTION_KIT_SYSTEM_SIM_TICK_MIN_TICKS_FOR_ADVANCE</a>&#160;&#160;&#160;10</td></tr>
 <tr class="memdesc:a08b2cb809c1f1db25e1cbc60e0def886"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum number of ticks required to advance the simulated time.  <br /></td></tr>
 <tr class="separator:a08b2cb809c1f1db25e1cbc60e0def886"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a764e2f3d6bb05c02090c19a2200fbe67" id="r_a764e2f3d6bb05c02090c19a2200fbe67"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a764e2f3d6bb05c02090c19a2200fbe67">OPTION_KIT_SYSTEM_SIM_TICK_YEILD_SLEEP_TIME</a>&#160;&#160;&#160;1</td></tr>
 <tr class="memdesc:a764e2f3d6bb05c02090c19a2200fbe67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Value passed to the <a class="el" href="namespace_kit_1_1_system.html#a9ce80b51370ac7c69e2887f653d519a3" title="This method causes the current thread to be suspended for n milliseconds.">Kit::System::sleep()</a> call to effectively yield the CPU do allow the threads running in simulated time to actually begin executing.  <br /></td></tr>
 <tr class="separator:a764e2f3d6bb05c02090c19a2200fbe67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5926f31af9a67780bbd3a4af312a79e6" id="r_a5926f31af9a67780bbd3a4af312a79e6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5926f31af9a67780bbd3a4af312a79e6">KIT_SYSTEM_SIM_TICK_TOP_LEVEL_WAIT</a>()</td></tr>
-<tr class="memdesc:a5926f31af9a67780bbd3a4af312a79e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
-<tr class="separator:a5926f31af9a67780bbd3a4af312a79e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa698eb077ebb817cd422180e81c2bb1" id="r_afa698eb077ebb817cd422180e81c2bb1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa698eb077ebb817cd422180e81c2bb1">KIT_SYSTEM_SIM_TICK_APPLICATION_WAIT</a>()</td></tr>
-<tr class="memdesc:afa698eb077ebb817cd422180e81c2bb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
-<tr class="separator:afa698eb077ebb817cd422180e81c2bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60cb3cf6eb755492fb7ce0d2027cb43d" id="r_a60cb3cf6eb755492fb7ce0d2027cb43d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60cb3cf6eb755492fb7ce0d2027cb43d">KIT_SYSTEM_SIM_TICK_USING_SIM_TICKS</a>()&#160;&#160;&#160;false</td></tr>
-<tr class="memdesc:a60cb3cf6eb755492fb7ce0d2027cb43d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
-<tr class="separator:a60cb3cf6eb755492fb7ce0d2027cb43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0ebe805e1f0d977d44102f1144707ad" id="r_ac0ebe805e1f0d977d44102f1144707ad"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0ebe805e1f0d977d44102f1144707ad">KIT_SYSTEM_SIM_TICK_THREAD_INIT_</a>(f)</td></tr>
-<tr class="memdesc:ac0ebe805e1f0d977d44102f1144707ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
-<tr class="separator:ac0ebe805e1f0d977d44102f1144707ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94a771ab25abe5e920879836bec72314" id="r_a94a771ab25abe5e920879836bec72314"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94a771ab25abe5e920879836bec72314">KIT_SYSTEM_SIM_TICK_REAL_TIME_THREAD_INIT_</a>()</td></tr>
-<tr class="memdesc:a94a771ab25abe5e920879836bec72314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
-<tr class="separator:a94a771ab25abe5e920879836bec72314"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3145598dee998c0fd7bdc146c219aedd" id="r_a3145598dee998c0fd7bdc146c219aedd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3145598dee998c0fd7bdc146c219aedd">KIT_SYSTEM_SIM_TICK_ON_THREAD_EXIT_</a>()</td></tr>
-<tr class="memdesc:a3145598dee998c0fd7bdc146c219aedd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate Tick disabled.  <br /></td></tr>
-<tr class="separator:a3145598dee998c0fd7bdc146c219aedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="afa698eb077ebb817cd422180e81c2bb1" name="afa698eb077ebb817cd422180e81c2bb1"></a>
@@ -260,7 +256,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:25 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

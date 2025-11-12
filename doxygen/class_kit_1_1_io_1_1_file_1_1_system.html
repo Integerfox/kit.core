@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_io_1_1_file_1_1_system-members.html">List of all members</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-static-methods">Static Protected Member Functions</a>  </div>
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="class_kit_1_1_io_1_1_file_1_1_system-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io::File::System Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This concrete class defines the interface for handling and manipulating entries in the <a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html" title="This concrete class defines the interface for handling and manipulating entries in the System&#39;s File ...">System</a>'s <a class="el" href="namespace_kit_1_1_io_1_1_file.html" title="The &#39;File&#39; namespace provides the base/common interfaces for reading and writing data from/to Files.">File</a> system.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This concrete class defines the interface for handling and manipulating entries in the <a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html" title="This concrete class defines the interface for handling and manipulating entries in the System&#39;s File ...">System</a>'s <a class="el" href="namespace_kit_1_1_io_1_1_file.html" title="The &#39;File&#39; namespace provides the base/common interfaces for reading and writing data from/to Files.">File</a> system. </p>
-<p>The directory separator is ALWAYS 'dirSep'. If necessary it will be internally converted to the OS/platform specific delimiter. Directory paths can contain drive designators, but ONLY if the native OS supports it. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_system_8h_source.html">System.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -70,90 +67,90 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:acb791614d6d71c48a1c29b6341655a1a" id="r_acb791614d6d71c48a1c29b6341655a1a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb791614d6d71c48a1c29b6341655a1a">appendFile</a> (const char *srcName, const char *destFile) noexcept</td></tr>
+<tr class="memdesc:acb791614d6d71c48a1c29b6341655a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends the context of the 'srcName' file to the specified 'dstName' file.  <br /></td></tr>
+<tr class="separator:acb791614d6d71c48a1c29b6341655a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b46b62607f7f65091af385fe3e0a94e" id="r_a3b46b62607f7f65091af385fe3e0a94e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b46b62607f7f65091af385fe3e0a94e">closeDirectory</a> (<a class="el" href="_system_8h.html#a9960d786c59ee2bbb7a820205dc1742e">KitIoFileDirectory_T</a> &amp;hdl) noexcept</td></tr>
+<tr class="memdesc:a3b46b62607f7f65091af385fe3e0a94e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the directory handle.  <br /></td></tr>
+<tr class="separator:a3b46b62607f7f65091af385fe3e0a94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eab90d4fb74882dc928e4f0ebe97093" id="r_a8eab90d4fb74882dc928e4f0ebe97093"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8eab90d4fb74882dc928e4f0ebe97093">copyFile</a> (const char *srcName, const char *dstName) noexcept</td></tr>
+<tr class="memdesc:a8eab90d4fb74882dc928e4f0ebe97093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the context of the 'srcName' file to the specified 'dstName' file.  <br /></td></tr>
+<tr class="separator:a8eab90d4fb74882dc928e4f0ebe97093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64dcaf86d62ca3b0bf15cbd1c862d41" id="r_ab64dcaf86d62ca3b0bf15cbd1c862d41"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab64dcaf86d62ca3b0bf15cbd1c862d41">createDirectory</a> (const char *dirName) noexcept</td></tr>
+<tr class="memdesc:ab64dcaf86d62ca3b0bf15cbd1c862d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the 'dirName' as a directory.  <br /></td></tr>
+<tr class="separator:ab64dcaf86d62ca3b0bf15cbd1c862d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ab52c31ccdd0b97a0b530c0b9532484" id="r_a9ab52c31ccdd0b97a0b530c0b9532484"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ab52c31ccdd0b97a0b530c0b9532484">createFile</a> (const char *fileName) noexcept</td></tr>
+<tr class="memdesc:a9ab52c31ccdd0b97a0b530c0b9532484"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the 'fileName' as an empty file.  <br /></td></tr>
+<tr class="separator:a9ab52c31ccdd0b97a0b530c0b9532484"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff7ad06fbc258255144052964b9219f1" id="r_aff7ad06fbc258255144052964b9219f1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff7ad06fbc258255144052964b9219f1">exists</a> (const char *fsEntryName) noexcept</td></tr>
 <tr class="memdesc:aff7ad06fbc258255144052964b9219f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the FS Entry exists physically exists in the OS's file system.  <br /></td></tr>
 <tr class="separator:aff7ad06fbc258255144052964b9219f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8347d7718145ef54d86672205ea3708" id="r_ac8347d7718145ef54d86672205ea3708"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8347d7718145ef54d86672205ea3708">isFile</a> (const char *fsEntryName) noexcept</td></tr>
-<tr class="memdesc:ac8347d7718145ef54d86672205ea3708"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the FS Entry is a file.  <br /></td></tr>
-<tr class="separator:ac8347d7718145ef54d86672205ea3708"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a164e89407c8f69a0ab909dc73cb645f0" id="r_a164e89407c8f69a0ab909dc73cb645f0"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a164e89407c8f69a0ab909dc73cb645f0">getFirstDirEntry</a> (<a class="el" href="_system_8h.html#a9960d786c59ee2bbb7a820205dc1742e">KitIoFileDirectory_T</a> &amp;hdl, <a class="el" href="namespace_kit_1_1_io_1_1_file.html#ac22907a9e9a53bde2918e2d2f3a542da">NameString</a> &amp;dirNameToList, <a class="el" href="namespace_kit_1_1_io_1_1_file.html#ac22907a9e9a53bde2918e2d2f3a542da">NameString</a> &amp;dstFirstEntryName) noexcept</td></tr>
+<tr class="memdesc:a164e89407c8f69a0ab909dc73cb645f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the first entry in the directory.  <br /></td></tr>
+<tr class="separator:a164e89407c8f69a0ab909dc73cb645f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78e68176753a1ae0525c8f3d319999dd" id="r_a78e68176753a1ae0525c8f3d319999dd"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78e68176753a1ae0525c8f3d319999dd">getInfo</a> (const char *fsEntryName, <a class="el" href="#struct_kit_1_1_io_1_1_file_1_1_system_1_1_info___t">Info_T</a> &amp;infoOut) noexcept</td></tr>
+<tr class="memdesc:a78e68176753a1ae0525c8f3d319999dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns information about the file system entry.  <br /></td></tr>
+<tr class="separator:a78e68176753a1ae0525c8f3d319999dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac575ff26c479dbdbce2cd0df2456c371" id="r_ac575ff26c479dbdbce2cd0df2456c371"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac575ff26c479dbdbce2cd0df2456c371">getNative</a> (const char *fsEntryName) noexcept</td></tr>
+<tr class="memdesc:ac575ff26c479dbdbce2cd0df2456c371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the file system entry name in its in native format.  <br /></td></tr>
+<tr class="separator:ac575ff26c479dbdbce2cd0df2456c371"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0adcff1e00c87bea45c71e80e22c044" id="r_ad0adcff1e00c87bea45c71e80e22c044"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0adcff1e00c87bea45c71e80e22c044">getNextDirEntry</a> (<a class="el" href="_system_8h.html#a9960d786c59ee2bbb7a820205dc1742e">KitIoFileDirectory_T</a> &amp;hdl, <a class="el" href="namespace_kit_1_1_io_1_1_file.html#ac22907a9e9a53bde2918e2d2f3a542da">NameString</a> &amp;dstNextEntryName) noexcept</td></tr>
+<tr class="memdesc:ad0adcff1e00c87bea45c71e80e22c044"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next entry in the directory.  <br /></td></tr>
+<tr class="separator:ad0adcff1e00c87bea45c71e80e22c044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fd14a01ae41cfb877d934f16cc43c47" id="r_a4fd14a01ae41cfb877d934f16cc43c47"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fd14a01ae41cfb877d934f16cc43c47">getStandard</a> (const char *fsEntryName) noexcept</td></tr>
+<tr class="memdesc:a4fd14a01ae41cfb877d934f16cc43c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the file system entry name in the 'Standard' format.  <br /></td></tr>
+<tr class="separator:a4fd14a01ae41cfb877d934f16cc43c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fe566c813d2c7ffe13e6a47bcb15db1" id="r_a4fe566c813d2c7ffe13e6a47bcb15db1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fe566c813d2c7ffe13e6a47bcb15db1">isDirectory</a> (const char *fsEntryName) noexcept</td></tr>
 <tr class="memdesc:a4fe566c813d2c7ffe13e6a47bcb15db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the FS Entry is a directory.  <br /></td></tr>
 <tr class="separator:a4fe566c813d2c7ffe13e6a47bcb15db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8347d7718145ef54d86672205ea3708" id="r_ac8347d7718145ef54d86672205ea3708"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8347d7718145ef54d86672205ea3708">isFile</a> (const char *fsEntryName) noexcept</td></tr>
+<tr class="memdesc:ac8347d7718145ef54d86672205ea3708"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the FS Entry is a file.  <br /></td></tr>
+<tr class="separator:ac8347d7718145ef54d86672205ea3708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5760a559d0da9563c33b1cbf7fb10a26" id="r_a5760a559d0da9563c33b1cbf7fb10a26"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5760a559d0da9563c33b1cbf7fb10a26">isReadable</a> (const char *fsEntryName) noexcept</td></tr>
 <tr class="memdesc:a5760a559d0da9563c33b1cbf7fb10a26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the user has read permission for the file system entry.  <br /></td></tr>
 <tr class="separator:a5760a559d0da9563c33b1cbf7fb10a26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32967dd4dc45dae2b049d0992fcc453e" id="r_a32967dd4dc45dae2b049d0992fcc453e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32967dd4dc45dae2b049d0992fcc453e">isWriteable</a> (const char *fsEntryName) noexcept</td></tr>
 <tr class="memdesc:a32967dd4dc45dae2b049d0992fcc453e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the user has write permission for the file system entry.  <br /></td></tr>
 <tr class="separator:a32967dd4dc45dae2b049d0992fcc453e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1c4e0ed6af4ed47cb177a4609fd73f3" id="r_af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1c4e0ed6af4ed47cb177a4609fd73f3">size</a> (const char *fsEntryName) noexcept</td></tr>
-<tr class="memdesc:af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size, in bytes, of the file.  <br /></td></tr>
-<tr class="separator:af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48785652565af2e0d6af8ddc05884b8a" id="r_a48785652565af2e0d6af8ddc05884b8a"><td class="memItemLeft" align="right" valign="top">static time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48785652565af2e0d6af8ddc05884b8a">timeModified</a> (const char *fsEntryName) noexcept</td></tr>
-<tr class="memdesc:a48785652565af2e0d6af8ddc05884b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the time/date the file entry was last modified.  <br /></td></tr>
-<tr class="separator:a48785652565af2e0d6af8ddc05884b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78e68176753a1ae0525c8f3d319999dd" id="r_a78e68176753a1ae0525c8f3d319999dd"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a78e68176753a1ae0525c8f3d319999dd">getInfo</a> (const char *fsEntryName, <a class="el" href="#struct_kit_1_1_io_1_1_file_1_1_system_1_1_info___t">Info_T</a> &amp;infoOut) noexcept</td></tr>
-<tr class="memdesc:a78e68176753a1ae0525c8f3d319999dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns information about the file system entry.  <br /></td></tr>
-<tr class="separator:a78e68176753a1ae0525c8f3d319999dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ab52c31ccdd0b97a0b530c0b9532484" id="r_a9ab52c31ccdd0b97a0b530c0b9532484"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ab52c31ccdd0b97a0b530c0b9532484">createFile</a> (const char *fileName) noexcept</td></tr>
-<tr class="memdesc:a9ab52c31ccdd0b97a0b530c0b9532484"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the 'fileName' as an empty file.  <br /></td></tr>
-<tr class="separator:a9ab52c31ccdd0b97a0b530c0b9532484"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab64dcaf86d62ca3b0bf15cbd1c862d41" id="r_ab64dcaf86d62ca3b0bf15cbd1c862d41"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab64dcaf86d62ca3b0bf15cbd1c862d41">createDirectory</a> (const char *dirName) noexcept</td></tr>
-<tr class="memdesc:ab64dcaf86d62ca3b0bf15cbd1c862d41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the 'dirName' as a directory.  <br /></td></tr>
-<tr class="separator:ab64dcaf86d62ca3b0bf15cbd1c862d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3a68a7acb68b414a9cdc1c4767abc9d" id="r_ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3a68a7acb68b414a9cdc1c4767abc9d">renameInPlace</a> (const char *oldName, const char *newName) noexcept</td></tr>
-<tr class="memdesc:ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renames the file system entry name in the OS's file system.  <br /></td></tr>
-<tr class="separator:ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6c2c4b8e8a813ab4803fbf4d6d213c9" id="r_ab6c2c4b8e8a813ab4803fbf4d6d213c9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6c2c4b8e8a813ab4803fbf4d6d213c9">moveFile</a> (const char *oldFileName, const char *newFileName) noexcept</td></tr>
 <tr class="memdesc:ab6c2c4b8e8a813ab4803fbf4d6d213c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves and/or renames the specified file.  <br /></td></tr>
 <tr class="separator:ab6c2c4b8e8a813ab4803fbf4d6d213c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a673c3b29fc586d2cf22db153cb82e380" id="r_a673c3b29fc586d2cf22db153cb82e380"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a673c3b29fc586d2cf22db153cb82e380">remove</a> (const char *fsEntryName) noexcept</td></tr>
 <tr class="memdesc:a673c3b29fc586d2cf22db153cb82e380"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the file system entry from the OS's file system.  <br /></td></tr>
 <tr class="separator:a673c3b29fc586d2cf22db153cb82e380"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eab90d4fb74882dc928e4f0ebe97093" id="r_a8eab90d4fb74882dc928e4f0ebe97093"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8eab90d4fb74882dc928e4f0ebe97093">copyFile</a> (const char *srcName, const char *dstName) noexcept</td></tr>
-<tr class="memdesc:a8eab90d4fb74882dc928e4f0ebe97093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the context of the 'srcName' file to the specified 'dstName' file.  <br /></td></tr>
-<tr class="separator:a8eab90d4fb74882dc928e4f0ebe97093"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb791614d6d71c48a1c29b6341655a1a" id="r_acb791614d6d71c48a1c29b6341655a1a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb791614d6d71c48a1c29b6341655a1a">appendFile</a> (const char *srcName, const char *destFile) noexcept</td></tr>
-<tr class="memdesc:acb791614d6d71c48a1c29b6341655a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends the context of the 'srcName' file to the specified 'dstName' file.  <br /></td></tr>
-<tr class="separator:acb791614d6d71c48a1c29b6341655a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac575ff26c479dbdbce2cd0df2456c371" id="r_ac575ff26c479dbdbce2cd0df2456c371"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac575ff26c479dbdbce2cd0df2456c371">getNative</a> (const char *fsEntryName) noexcept</td></tr>
-<tr class="memdesc:ac575ff26c479dbdbce2cd0df2456c371"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the file system entry name in its in native format.  <br /></td></tr>
-<tr class="separator:ac575ff26c479dbdbce2cd0df2456c371"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fd14a01ae41cfb877d934f16cc43c47" id="r_a4fd14a01ae41cfb877d934f16cc43c47"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fd14a01ae41cfb877d934f16cc43c47">getStandard</a> (const char *fsEntryName) noexcept</td></tr>
-<tr class="memdesc:a4fd14a01ae41cfb877d934f16cc43c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the file system entry name in the 'Standard' format.  <br /></td></tr>
-<tr class="separator:a4fd14a01ae41cfb877d934f16cc43c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a164e89407c8f69a0ab909dc73cb645f0" id="r_a164e89407c8f69a0ab909dc73cb645f0"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a164e89407c8f69a0ab909dc73cb645f0">getFirstDirEntry</a> (<a class="el" href="_system_8h.html#a9960d786c59ee2bbb7a820205dc1742e">KitIoFileDirectory_T</a> &amp;hdl, <a class="el" href="namespace_kit_1_1_io_1_1_file.html#ac22907a9e9a53bde2918e2d2f3a542da">NameString</a> &amp;dirNameToList, <a class="el" href="namespace_kit_1_1_io_1_1_file.html#ac22907a9e9a53bde2918e2d2f3a542da">NameString</a> &amp;dstFirstEntryName) noexcept</td></tr>
-<tr class="memdesc:a164e89407c8f69a0ab909dc73cb645f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the first entry in the directory.  <br /></td></tr>
-<tr class="separator:a164e89407c8f69a0ab909dc73cb645f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0adcff1e00c87bea45c71e80e22c044" id="r_ad0adcff1e00c87bea45c71e80e22c044"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0adcff1e00c87bea45c71e80e22c044">getNextDirEntry</a> (<a class="el" href="_system_8h.html#a9960d786c59ee2bbb7a820205dc1742e">KitIoFileDirectory_T</a> &amp;hdl, <a class="el" href="namespace_kit_1_1_io_1_1_file.html#ac22907a9e9a53bde2918e2d2f3a542da">NameString</a> &amp;dstNextEntryName) noexcept</td></tr>
-<tr class="memdesc:ad0adcff1e00c87bea45c71e80e22c044"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next entry in the directory.  <br /></td></tr>
-<tr class="separator:ad0adcff1e00c87bea45c71e80e22c044"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b46b62607f7f65091af385fe3e0a94e" id="r_a3b46b62607f7f65091af385fe3e0a94e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b46b62607f7f65091af385fe3e0a94e">closeDirectory</a> (<a class="el" href="_system_8h.html#a9960d786c59ee2bbb7a820205dc1742e">KitIoFileDirectory_T</a> &amp;hdl) noexcept</td></tr>
-<tr class="memdesc:a3b46b62607f7f65091af385fe3e0a94e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the directory handle.  <br /></td></tr>
-<tr class="separator:a3b46b62607f7f65091af385fe3e0a94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a040581eca3c4a3db7fabbb2bbcbf252a" id="r_a040581eca3c4a3db7fabbb2bbcbf252a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a040581eca3c4a3db7fabbb2bbcbf252a">splitDrive</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;drive, char driveSeparator=':') noexcept</td></tr>
-<tr class="memdesc:a040581eca3c4a3db7fabbb2bbcbf252a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the drive letter from the complete name.  <br /></td></tr>
-<tr class="separator:a040581eca3c4a3db7fabbb2bbcbf252a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9c00a46e31455a0ec7efaac34403155" id="r_ad9c00a46e31455a0ec7efaac34403155"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9c00a46e31455a0ec7efaac34403155">splitFullpath</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;fullpath, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
-<tr class="memdesc:ad9c00a46e31455a0ec7efaac34403155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the full path (drive+path) from the complete name.  <br /></td></tr>
-<tr class="separator:ad9c00a46e31455a0ec7efaac34403155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3c345c37241109627b6478657b785ca" id="r_ab3c345c37241109627b6478657b785ca"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3c345c37241109627b6478657b785ca">splitPath</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;path, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
-<tr class="memdesc:ab3c345c37241109627b6478657b785ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the path (no drive) from the complete name.  <br /></td></tr>
-<tr class="separator:ab3c345c37241109627b6478657b785ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec7950ace66b8e4fb33e9e99715e5a76" id="r_aec7950ace66b8e4fb33e9e99715e5a76"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec7950ace66b8e4fb33e9e99715e5a76">splitFullname</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;fullname, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
-<tr class="memdesc:aec7950ace66b8e4fb33e9e99715e5a76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the full file name (name+extension) from the complete name.  <br /></td></tr>
-<tr class="separator:aec7950ace66b8e4fb33e9e99715e5a76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6432c10dda1b40cb7acf99a30af0eaf" id="r_ae6432c10dda1b40cb7acf99a30af0eaf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6432c10dda1b40cb7acf99a30af0eaf">splitName</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;name, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
-<tr class="memdesc:ae6432c10dda1b40cb7acf99a30af0eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file name from the complete name.  <br /></td></tr>
-<tr class="separator:ae6432c10dda1b40cb7acf99a30af0eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0a27b0b1fe553bbfc5c40fd8df06194" id="r_ab0a27b0b1fe553bbfc5c40fd8df06194"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0a27b0b1fe553bbfc5c40fd8df06194">splitExtension</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;extension, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
-<tr class="memdesc:ab0a27b0b1fe553bbfc5c40fd8df06194"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file extension from the complete name.  <br /></td></tr>
-<tr class="separator:ab0a27b0b1fe553bbfc5c40fd8df06194"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa6ee047deeeacc13328ba03ffad023f" id="r_afa6ee047deeeacc13328ba03ffad023f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa6ee047deeeacc13328ba03ffad023f">splitFullpathFullName</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;fullpath, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;fullname, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
-<tr class="memdesc:afa6ee047deeeacc13328ba03ffad023f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the full path and name from the complete name.  <br /></td></tr>
-<tr class="separator:afa6ee047deeeacc13328ba03ffad023f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3a68a7acb68b414a9cdc1c4767abc9d" id="r_ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3a68a7acb68b414a9cdc1c4767abc9d">renameInPlace</a> (const char *oldName, const char *newName) noexcept</td></tr>
+<tr class="memdesc:ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renames the file system entry name in the OS's file system.  <br /></td></tr>
+<tr class="separator:ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1c4e0ed6af4ed47cb177a4609fd73f3" id="r_af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1c4e0ed6af4ed47cb177a4609fd73f3">size</a> (const char *fsEntryName) noexcept</td></tr>
+<tr class="memdesc:af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size, in bytes, of the file.  <br /></td></tr>
+<tr class="separator:af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1fac64728507e887faec0bbe5edcd53" id="r_ad1fac64728507e887faec0bbe5edcd53"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1fac64728507e887faec0bbe5edcd53">split</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *fullPath, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *drive, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *path, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *fullName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *name, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *extension, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
 <tr class="memdesc:ad1fac64728507e887faec0bbe5edcd53"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method breaks the specified <a class="el" href="namespace_kit_1_1_io_1_1_file.html" title="The &#39;File&#39; namespace provides the base/common interfaces for reading and writing data from/to Files.">File</a> <a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html" title="This concrete class defines the interface for handling and manipulating entries in the System&#39;s File ...">System</a> Entry name into it's individual components.  <br /></td></tr>
 <tr class="separator:ad1fac64728507e887faec0bbe5edcd53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a040581eca3c4a3db7fabbb2bbcbf252a" id="r_a040581eca3c4a3db7fabbb2bbcbf252a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a040581eca3c4a3db7fabbb2bbcbf252a">splitDrive</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;drive, char driveSeparator=':') noexcept</td></tr>
+<tr class="memdesc:a040581eca3c4a3db7fabbb2bbcbf252a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the drive letter from the complete name.  <br /></td></tr>
+<tr class="separator:a040581eca3c4a3db7fabbb2bbcbf252a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0a27b0b1fe553bbfc5c40fd8df06194" id="r_ab0a27b0b1fe553bbfc5c40fd8df06194"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0a27b0b1fe553bbfc5c40fd8df06194">splitExtension</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;extension, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
+<tr class="memdesc:ab0a27b0b1fe553bbfc5c40fd8df06194"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file extension from the complete name.  <br /></td></tr>
+<tr class="separator:ab0a27b0b1fe553bbfc5c40fd8df06194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec7950ace66b8e4fb33e9e99715e5a76" id="r_aec7950ace66b8e4fb33e9e99715e5a76"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec7950ace66b8e4fb33e9e99715e5a76">splitFullname</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;fullname, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
+<tr class="memdesc:aec7950ace66b8e4fb33e9e99715e5a76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the full file name (name+extension) from the complete name.  <br /></td></tr>
+<tr class="separator:aec7950ace66b8e4fb33e9e99715e5a76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9c00a46e31455a0ec7efaac34403155" id="r_ad9c00a46e31455a0ec7efaac34403155"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad9c00a46e31455a0ec7efaac34403155">splitFullpath</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;fullpath, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
+<tr class="memdesc:ad9c00a46e31455a0ec7efaac34403155"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the full path (drive+path) from the complete name.  <br /></td></tr>
+<tr class="separator:ad9c00a46e31455a0ec7efaac34403155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa6ee047deeeacc13328ba03ffad023f" id="r_afa6ee047deeeacc13328ba03ffad023f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa6ee047deeeacc13328ba03ffad023f">splitFullpathFullName</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;fullpath, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;fullname, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
+<tr class="memdesc:afa6ee047deeeacc13328ba03ffad023f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the full path and name from the complete name.  <br /></td></tr>
+<tr class="separator:afa6ee047deeeacc13328ba03ffad023f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6432c10dda1b40cb7acf99a30af0eaf" id="r_ae6432c10dda1b40cb7acf99a30af0eaf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6432c10dda1b40cb7acf99a30af0eaf">splitName</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;name, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
+<tr class="memdesc:ae6432c10dda1b40cb7acf99a30af0eaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the file name from the complete name.  <br /></td></tr>
+<tr class="separator:ae6432c10dda1b40cb7acf99a30af0eaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3c345c37241109627b6478657b785ca" id="r_ab3c345c37241109627b6478657b785ca"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3c345c37241109627b6478657b785ca">splitPath</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;path, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
+<tr class="memdesc:ab3c345c37241109627b6478657b785ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the path (no drive) from the complete name.  <br /></td></tr>
+<tr class="separator:ab3c345c37241109627b6478657b785ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48785652565af2e0d6af8ddc05884b8a" id="r_a48785652565af2e0d6af8ddc05884b8a"><td class="memItemLeft" align="right" valign="top">static time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48785652565af2e0d6af8ddc05884b8a">timeModified</a> (const char *fsEntryName) noexcept</td></tr>
+<tr class="memdesc:a48785652565af2e0d6af8ddc05884b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the time/date the file entry was last modified.  <br /></td></tr>
+<tr class="separator:a48785652565af2e0d6af8ddc05884b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -161,7 +158,10 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memdesc:ac5c38f2f606335c6cd723afab88cf0fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method. Returns an internal work buffer large enough to 'max path'.  <br /></td></tr>
 <tr class="separator:ac5c38f2f606335c6cd723afab88cf0fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This concrete class defines the interface for handling and manipulating entries in the <a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html" title="This concrete class defines the interface for handling and manipulating entries in the System&#39;s File ...">System</a>'s <a class="el" href="namespace_kit_1_1_io_1_1_file.html" title="The &#39;File&#39; namespace provides the base/common interfaces for reading and writing data from/to Files.">File</a> system. </p>
+<p>The directory separator is ALWAYS 'dirSep'. If necessary it will be internally converted to the OS/platform specific delimiter. Directory paths can contain drive designators, but ONLY if the native OS supports it. </p>
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
 <a name="struct_kit_1_1_io_1_1_file_1_1_system_1_1_info___t" id="struct_kit_1_1_io_1_1_file_1_1_system_1_1_info___t"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#struct_kit_1_1_io_1_1_file_1_1_system_1_1_info___t">&#9670;&#160;</a></span>Kit::Io::File::System::Info_T</h2>
 
@@ -1245,7 +1245,7 @@ false if the 'oldName' does not exist or if the 'newName' already exists. </dd><
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -54,13 +54,7 @@ $(function() {
 
 <p>The <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> namespace provides classes for various types of containers.  
 <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> namespace provides classes for various types of containers. </p>
-<p>All of the containers use 'intrusive listing' mechanism, i.e. every item that is put into a container contains the memory/fields that are necessary to be in the container. No memory is allocated when an 'item' in inserted into a container and all of the containers can contain an infinite number (RAM permitting) number of items. There are two major side effects of intrusive containers. </p><pre class="fragment">1) All items/classes that are to put into containers, must inherit
-   from the base class ::Item.
-
-2) A given item/instance can be in AT MOST one and ONLY one container.
-</pre> </div><table class="memberdecls">
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_avl_tree__.html">AvlTree_</a></td></tr>
@@ -126,47 +120,53 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a6cf22be8a0e1891dfd179eba0264c44e" id="r_a6cf22be8a0e1891dfd179eba0264c44e"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6cf22be8a0e1891dfd179eba0264c44e">KeyInteger_T</a></td></tr>
-<tr class="memdesc:a6cf22be8a0e1891dfd179eba0264c44e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:a6cf22be8a0e1891dfd179eba0264c44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36e96d6068f73a09ba31c43e0766ad6a" id="r_a36e96d6068f73a09ba31c43e0766ad6a"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36e96d6068f73a09ba31c43e0766ad6a">KeyUnsigned_T</a></td></tr>
-<tr class="memdesc:a36e96d6068f73a09ba31c43e0766ad6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:a36e96d6068f73a09ba31c43e0766ad6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5e281408b1e644c4f37db6a77d76382" id="r_ac5e281408b1e644c4f37db6a77d76382"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5e281408b1e644c4f37db6a77d76382">KeyLong_T</a></td></tr>
-<tr class="memdesc:ac5e281408b1e644c4f37db6a77d76382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:ac5e281408b1e644c4f37db6a77d76382"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb4e08d1312d0118de64ebc140f82f28" id="r_abb4e08d1312d0118de64ebc140f82f28"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; unsigned long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb4e08d1312d0118de64ebc140f82f28">KeyULong_T</a></td></tr>
-<tr class="memdesc:abb4e08d1312d0118de64ebc140f82f28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:abb4e08d1312d0118de64ebc140f82f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd1b63bab8d408420d8ee9b965928e70" id="r_acd1b63bab8d408420d8ee9b965928e70"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd1b63bab8d408420d8ee9b965928e70">KeySizet_T</a></td></tr>
-<tr class="memdesc:acd1b63bab8d408420d8ee9b965928e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:acd1b63bab8d408420d8ee9b965928e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c16d0f4baf8f1e7505c45ecb400aa37" id="r_a0c16d0f4baf8f1e7505c45ecb400aa37"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; int8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c16d0f4baf8f1e7505c45ecb400aa37">KeyInteger8_T</a></td></tr>
-<tr class="memdesc:a0c16d0f4baf8f1e7505c45ecb400aa37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:a0c16d0f4baf8f1e7505c45ecb400aa37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7cbd194ac417997bd71250670d7af0a0" id="r_a7cbd194ac417997bd71250670d7af0a0"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7cbd194ac417997bd71250670d7af0a0">KeyUinteger8_T</a></td></tr>
-<tr class="memdesc:a7cbd194ac417997bd71250670d7af0a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:a7cbd194ac417997bd71250670d7af0a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a444f077f01651ff2a14af3f952fbb7d0" id="r_a444f077f01651ff2a14af3f952fbb7d0"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; int16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a444f077f01651ff2a14af3f952fbb7d0">KeyInteger16_T</a></td></tr>
 <tr class="memdesc:a444f077f01651ff2a14af3f952fbb7d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
 <tr class="separator:a444f077f01651ff2a14af3f952fbb7d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a4a57a31beca272c540da5b2100c562" id="r_a6a4a57a31beca272c540da5b2100c562"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a4a57a31beca272c540da5b2100c562">KeyUinteger16_T</a></td></tr>
-<tr class="memdesc:a6a4a57a31beca272c540da5b2100c562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:a6a4a57a31beca272c540da5b2100c562"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa30e9ea5848e026c235ae9b2087dee53" id="r_aa30e9ea5848e026c235ae9b2087dee53"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; int32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa30e9ea5848e026c235ae9b2087dee53">KeyInteger32_T</a></td></tr>
 <tr class="memdesc:aa30e9ea5848e026c235ae9b2087dee53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
 <tr class="separator:aa30e9ea5848e026c235ae9b2087dee53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44fa69e72b55de113126b28e6c3a2216" id="r_a44fa69e72b55de113126b28e6c3a2216"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44fa69e72b55de113126b28e6c3a2216">KeyUinteger32_T</a></td></tr>
-<tr class="memdesc:a44fa69e72b55de113126b28e6c3a2216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
-<tr class="separator:a44fa69e72b55de113126b28e6c3a2216"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada6ef183172a0514750d1f96878fd171" id="r_ada6ef183172a0514750d1f96878fd171"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; int64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada6ef183172a0514750d1f96878fd171">KeyInteger64_T</a></td></tr>
 <tr class="memdesc:ada6ef183172a0514750d1f96878fd171"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
 <tr class="separator:ada6ef183172a0514750d1f96878fd171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c16d0f4baf8f1e7505c45ecb400aa37" id="r_a0c16d0f4baf8f1e7505c45ecb400aa37"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; int8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c16d0f4baf8f1e7505c45ecb400aa37">KeyInteger8_T</a></td></tr>
+<tr class="memdesc:a0c16d0f4baf8f1e7505c45ecb400aa37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:a0c16d0f4baf8f1e7505c45ecb400aa37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cf22be8a0e1891dfd179eba0264c44e" id="r_a6cf22be8a0e1891dfd179eba0264c44e"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6cf22be8a0e1891dfd179eba0264c44e">KeyInteger_T</a></td></tr>
+<tr class="memdesc:a6cf22be8a0e1891dfd179eba0264c44e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:a6cf22be8a0e1891dfd179eba0264c44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5e281408b1e644c4f37db6a77d76382" id="r_ac5e281408b1e644c4f37db6a77d76382"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5e281408b1e644c4f37db6a77d76382">KeyLong_T</a></td></tr>
+<tr class="memdesc:ac5e281408b1e644c4f37db6a77d76382"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:ac5e281408b1e644c4f37db6a77d76382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd1b63bab8d408420d8ee9b965928e70" id="r_acd1b63bab8d408420d8ee9b965928e70"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd1b63bab8d408420d8ee9b965928e70">KeySizet_T</a></td></tr>
+<tr class="memdesc:acd1b63bab8d408420d8ee9b965928e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:acd1b63bab8d408420d8ee9b965928e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a4a57a31beca272c540da5b2100c562" id="r_a6a4a57a31beca272c540da5b2100c562"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; uint16_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a4a57a31beca272c540da5b2100c562">KeyUinteger16_T</a></td></tr>
+<tr class="memdesc:a6a4a57a31beca272c540da5b2100c562"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:a6a4a57a31beca272c540da5b2100c562"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44fa69e72b55de113126b28e6c3a2216" id="r_a44fa69e72b55de113126b28e6c3a2216"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44fa69e72b55de113126b28e6c3a2216">KeyUinteger32_T</a></td></tr>
+<tr class="memdesc:a44fa69e72b55de113126b28e6c3a2216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:a44fa69e72b55de113126b28e6c3a2216"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3649be92f5142fd0acb193e098345c11" id="r_a3649be92f5142fd0acb193e098345c11"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; uint64_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3649be92f5142fd0acb193e098345c11">KeyUinteger64_T</a></td></tr>
 <tr class="memdesc:a3649be92f5142fd0acb193e098345c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
 <tr class="separator:a3649be92f5142fd0acb193e098345c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cbd194ac417997bd71250670d7af0a0" id="r_a7cbd194ac417997bd71250670d7af0a0"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7cbd194ac417997bd71250670d7af0a0">KeyUinteger8_T</a></td></tr>
+<tr class="memdesc:a7cbd194ac417997bd71250670d7af0a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:a7cbd194ac417997bd71250670d7af0a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb4e08d1312d0118de64ebc140f82f28" id="r_abb4e08d1312d0118de64ebc140f82f28"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; unsigned long &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb4e08d1312d0118de64ebc140f82f28">KeyULong_T</a></td></tr>
+<tr class="memdesc:abb4e08d1312d0118de64ebc140f82f28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:abb4e08d1312d0118de64ebc140f82f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36e96d6068f73a09ba31c43e0766ad6a" id="r_a36e96d6068f73a09ba31c43e0766ad6a"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_container_1_1_key_plain_type.html">KeyPlainType</a>&lt; unsigned &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36e96d6068f73a09ba31c43e0766ad6a">KeyUnsigned_T</a></td></tr>
+<tr class="memdesc:a36e96d6068f73a09ba31c43e0766ad6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pre-defined key.  <br /></td></tr>
+<tr class="separator:a36e96d6068f73a09ba31c43e0766ad6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> namespace provides classes for various types of containers. </p>
+<p>All of the containers use 'intrusive listing' mechanism, i.e. every item that is put into a container contains the memory/fields that are necessary to be in the container. No memory is allocated when an 'item' in inserted into a container and all of the containers can contain an infinite number (RAM permitting) number of items. There are two major side effects of intrusive containers. </p><pre class="fragment">1) All items/classes that are to put into containers, must inherit
+   from the base class ::Item.
+
+2) A given item/instance can be in AT MOST one and ONLY one container.
+</pre> </div><h2 class="groupheader">Typedef Documentation</h2>
 <a id="a444f077f01651ff2a14af3f952fbb7d0" name="a444f077f01651ff2a14af3f952fbb7d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a444f077f01651ff2a14af3f952fbb7d0">&#9670;&#160;</a></span>KeyInteger16_T</h2>
 
@@ -378,7 +378,7 @@ Typedefs</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

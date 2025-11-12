@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_container_1_1_avl_tree__-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_container_1_1_avl_tree__-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::AvlTree_ Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This concrete class implements the core functionality of for AVL Binary tree (i.e.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This concrete class implements the core functionality of for AVL Binary tree (i.e. </p>
-<p>a sorted list with fast searches, inserts, and deletes). Tree does not allow duplicate keys. Clients should NOT USE THIS CLASS DIRECTLY, but via a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a>. The <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> class is a wrapper that makes the AVL tree type safe.</p>
-<p>This class was adapted from Jonathan Bertoni C code snippet: 'non-recursive non-allocating avl tree code'</p>
-<p>The original code is in the public domain and is available at: <a href="https://sourceforge.net/snippet/detail.php?type=snippet&id=100933">https://sourceforge.net/snippet/detail.php?type=snippet&amp;id=100933</a> </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_avl_tree___8h_source.html">AvlTree_.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -70,18 +65,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aab4837fba8898c137fcfc6eb6d18eeb1" id="r_aab4837fba8898c137fcfc6eb6d18eeb1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aab4837fba8898c137fcfc6eb6d18eeb1">AvlTree_</a> (const char *ignoreThisParameter_usedToCreateAUniqueConstructor)</td></tr>
 <tr class="memdesc:aab4837fba8898c137fcfc6eb6d18eeb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a special constructor for when the list is statically declared (i.e.  <br /></td></tr>
 <tr class="separator:aab4837fba8898c137fcfc6eb6d18eeb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab56941bbc935081b0f60616ad8758fb2" id="r_ab56941bbc935081b0f60616ad8758fb2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab56941bbc935081b0f60616ad8758fb2">insert</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> &amp;node)</td></tr>
-<tr class="memdesc:ab56941bbc935081b0f60616ad8758fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts an item into the tree.  <br /></td></tr>
-<tr class="separator:ab56941bbc935081b0f60616ad8758fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c8b86094c670beb4b808cb46705506c" id="r_a5c8b86094c670beb4b808cb46705506c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c8b86094c670beb4b808cb46705506c">removeItem</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> &amp;node)</td></tr>
-<tr class="memdesc:a5c8b86094c670beb4b808cb46705506c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the specified item from the tree.  <br /></td></tr>
-<tr class="separator:a5c8b86094c670beb4b808cb46705506c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a922ab9df703767c5ca1af74cfffec17f" id="r_a922ab9df703767c5ca1af74cfffec17f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a922ab9df703767c5ca1af74cfffec17f">find</a> (const <a class="el" href="class_kit_1_1_container_1_1_key.html">Key</a> &amp;keyToFind) const</td></tr>
 <tr class="memdesc:a922ab9df703767c5ca1af74cfffec17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for a item with a matching key. Returns nullptr if not found.  <br /></td></tr>
 <tr class="separator:a922ab9df703767c5ca1af74cfffec17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53c4def06e612a0fc1239ded9802e801" id="r_a53c4def06e612a0fc1239ded9802e801"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53c4def06e612a0fc1239ded9802e801">first</a> () const</td></tr>
 <tr class="memdesc:a53c4def06e612a0fc1239ded9802e801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the first item in the tree. Returns nullptr if tree is empty.  <br /></td></tr>
 <tr class="separator:a53c4def06e612a0fc1239ded9802e801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab56941bbc935081b0f60616ad8758fb2" id="r_ab56941bbc935081b0f60616ad8758fb2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab56941bbc935081b0f60616ad8758fb2">insert</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> &amp;node)</td></tr>
+<tr class="memdesc:ab56941bbc935081b0f60616ad8758fb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts an item into the tree.  <br /></td></tr>
+<tr class="separator:ab56941bbc935081b0f60616ad8758fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e15f2c8b2c258c6622b863f946bfde8" id="r_a9e15f2c8b2c258c6622b863f946bfde8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e15f2c8b2c258c6622b863f946bfde8">last</a> () const</td></tr>
 <tr class="memdesc:a9e15f2c8b2c258c6622b863f946bfde8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last item in the tree. Returns nullptr if tree is empty.  <br /></td></tr>
 <tr class="separator:a9e15f2c8b2c258c6622b863f946bfde8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -91,8 +83,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a50e0ea5a8a91110bbc8c5540f963e137" id="r_a50e0ea5a8a91110bbc8c5540f963e137"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50e0ea5a8a91110bbc8c5540f963e137">previous</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> &amp;current) const</td></tr>
 <tr class="memdesc:a50e0ea5a8a91110bbc8c5540f963e137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the previous item in the tree. Returns nullptr if at the start-of-tree.  <br /></td></tr>
 <tr class="separator:a50e0ea5a8a91110bbc8c5540f963e137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c8b86094c670beb4b808cb46705506c" id="r_a5c8b86094c670beb4b808cb46705506c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c8b86094c670beb4b808cb46705506c">removeItem</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> &amp;node)</td></tr>
+<tr class="memdesc:a5c8b86094c670beb4b808cb46705506c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the specified item from the tree.  <br /></td></tr>
+<tr class="separator:a5c8b86094c670beb4b808cb46705506c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This concrete class implements the core functionality of for AVL Binary tree (i.e. </p>
+<p>a sorted list with fast searches, inserts, and deletes). Tree does not allow duplicate keys. Clients should NOT USE THIS CLASS DIRECTLY, but via a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a>. The <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> class is a wrapper that makes the AVL tree type safe.</p>
+<p>This class was adapted from Jonathan Bertoni C code snippet: 'non-recursive non-allocating avl tree code'</p>
+<p>The original code is in the public domain and is available at: <a href="https://sourceforge.net/snippet/detail.php?type=snippet&id=100933">https://sourceforge.net/snippet/detail.php?type=snippet&amp;id=100933</a> </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab7cb1848341dcd187ff03fd7593e14d5" name="ab7cb1848341dcd187ff03fd7593e14d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab7cb1848341dcd187ff03fd7593e14d5">&#9670;&#160;</a></span>AvlTree_() <span class="overload">[1/2]</span></h2>
 
@@ -275,7 +275,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

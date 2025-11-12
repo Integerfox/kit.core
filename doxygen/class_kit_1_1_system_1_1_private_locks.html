@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,27 +46,25 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_private_locks-members.html">List of all members</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="class_kit_1_1_system_1_1_private_locks-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::PrivateLocks Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This class provide access to KIT Library's internal global mutexes.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class provide access to KIT Library's internal global mutexes. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_private_8h_source.html">Private.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a5499fbb18674279baf2bb5704ea3709b" id="r_a5499fbb18674279baf2bb5704ea3709b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5499fbb18674279baf2bb5704ea3709b">system</a> () noexcept</td></tr>
-<tr class="memdesc:a5499fbb18674279baf2bb5704ea3709b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global mutex for use for interfaces/class in the <a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">Kit::System</a> namespace.  <br /></td></tr>
-<tr class="separator:a5499fbb18674279baf2bb5704ea3709b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e51c1322e9790b3eddff9259a3d885d" id="r_a6e51c1322e9790b3eddff9259a3d885d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e51c1322e9790b3eddff9259a3d885d">sysLists</a> () noexcept</td></tr>
 <tr class="memdesc:a6e51c1322e9790b3eddff9259a3d885d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as 'system', except usage is for 'long' critical sections (i.e. walking lists, printing, etc.)  <br /></td></tr>
 <tr class="separator:a6e51c1322e9790b3eddff9259a3d885d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5499fbb18674279baf2bb5704ea3709b" id="r_a5499fbb18674279baf2bb5704ea3709b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5499fbb18674279baf2bb5704ea3709b">system</a> () noexcept</td></tr>
+<tr class="memdesc:a5499fbb18674279baf2bb5704ea3709b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global mutex for use for interfaces/class in the <a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">Kit::System</a> namespace.  <br /></td></tr>
+<tr class="separator:a5499fbb18674279baf2bb5704ea3709b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08ef9577ba8c8b327d0b16e3be053e1b" id="r_a08ef9577ba8c8b327d0b16e3be053e1b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08ef9577ba8c8b327d0b16e3be053e1b">tracing</a> () noexcept</td></tr>
 <tr class="memdesc:a08ef9577ba8c8b327d0b16e3be053e1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global mutex for use for tracing sub-system.  <br /></td></tr>
 <tr class="separator:a08ef9577ba8c8b327d0b16e3be053e1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -74,7 +72,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:aabf5cc1aa267c3c03e5afa1c1c1e3dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global mutex for use for the tracing sub-system OUTPUT (see above for more details)  <br /></td></tr>
 <tr class="separator:aabf5cc1aa267c3c03e5afa1c1c1e3dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class provide access to KIT Library's internal global mutexes. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6e51c1322e9790b3eddff9259a3d885d" name="a6e51c1322e9790b3eddff9259a3d885d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6e51c1322e9790b3eddff9259a3d885d">&#9670;&#160;</a></span>sysLists()</h2>
 
@@ -190,7 +190,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

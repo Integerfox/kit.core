@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -52,6 +52,131 @@ $(function() {
   <div class="headertitle"><div class="title">Trace.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>This file provides an interface for a 'printf' tracing mechanism.  
+<a href="#details">More...</a></p>
+<div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for Trace.h:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="_trace_8h__incl.svg" width="863" height="330"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div><div class="textblock"><div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="_trace_8h__dep__incl.svg" width="166" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="_trace_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_trace.html">Kit::System::Trace</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class provide a 'printf' tracing mechanism.  <a href="class_kit_1_1_system_1_1_trace.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_kit" id="r_namespace_kit"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit.html">Kit</a></td></tr>
+<tr class="memdesc:namespace_kit"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward reference to break dependency on the Dm namespace. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_kit_1_1_system" id="r_namespace_kit_1_1_system"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html">Kit::System</a></td></tr>
+<tr class="memdesc:namespace_kit_1_1_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The '<a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">System</a>' namespace contains platform independent foundation abstractions and classes related to program execution. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:aae434b392fc82459f761e767a6b78f03" id="r_aae434b392fc82459f761e767a6b78f03"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae434b392fc82459f761e767a6b78f03">KIT_SYSTEM_TRACE_ALLOCATE</a>(type,  varname,  initval)</td></tr>
+<tr class="memdesc:aae434b392fc82459f761e767a6b78f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:aae434b392fc82459f761e767a6b78f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1de46d981ebf30d2c50377ad90d3166e" id="r_a1de46d981ebf30d2c50377ad90d3166e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1de46d981ebf30d2c50377ad90d3166e">KIT_SYSTEM_TRACE_CLEAR_THREAD_FILTER</a>()</td></tr>
+<tr class="memdesc:a1de46d981ebf30d2c50377ad90d3166e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a1de46d981ebf30d2c50377ad90d3166e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7a75a7018bd3e91e1f6086f9a70d93c" id="r_aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7a75a7018bd3e91e1f6086f9a70d93c">KIT_SYSTEM_TRACE_DISABLE</a>()</td></tr>
+<tr class="memdesc:aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d334899f6b0b04fa204885842185398" id="r_a1d334899f6b0b04fa204885842185398"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d334899f6b0b04fa204885842185398">KIT_SYSTEM_TRACE_DISABLE_SECTION</a>(sect)</td></tr>
+<tr class="memdesc:a1d334899f6b0b04fa204885842185398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a1d334899f6b0b04fa204885842185398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9694f3a47e9aa63f715d683c9c9c73d1" id="r_a9694f3a47e9aa63f715d683c9c9c73d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9694f3a47e9aa63f715d683c9c9c73d1">KIT_SYSTEM_TRACE_ENABLE</a>()</td></tr>
+<tr class="memdesc:a9694f3a47e9aa63f715d683c9c9c73d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a9694f3a47e9aa63f715d683c9c9c73d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54f4742884ad133cd9b4dae1c6da104f" id="r_a54f4742884ad133cd9b4dae1c6da104f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54f4742884ad133cd9b4dae1c6da104f">KIT_SYSTEM_TRACE_ENABLE_SECTION</a>(sect)</td></tr>
+<tr class="memdesc:a54f4742884ad133cd9b4dae1c6da104f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a54f4742884ad133cd9b4dae1c6da104f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affd51372ff299f56c74e808dd9f49338" id="r_affd51372ff299f56c74e808dd9f49338"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affd51372ff299f56c74e808dd9f49338">KIT_SYSTEM_TRACE_FUNC</a>(sect)</td></tr>
+<tr class="memdesc:affd51372ff299f56c74e808dd9f49338"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:affd51372ff299f56c74e808dd9f49338"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7fa2511c31281a2486dfafb5523a15f" id="r_ae7fa2511c31281a2486dfafb5523a15f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7fa2511c31281a2486dfafb5523a15f">KIT_SYSTEM_TRACE_GET_INFO_LEVEL</a>()&#160;&#160;&#160;( (<a class="el" href="class_kit_1_1_system_1_1_trace.html#add80da6b96634d485121bc2fe7113f7e">Kit::System::Trace::InfoLevel_T</a>)0 )</td></tr>
+<tr class="memdesc:ae7fa2511c31281a2486dfafb5523a15f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:ae7fa2511c31281a2486dfafb5523a15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d1959c3400fa6ca84c7a0b1dc38b5d0" id="r_a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d1959c3400fa6ca84c7a0b1dc38b5d0">KIT_SYSTEM_TRACE_GET_SECTIONS</a>(dst)&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6688e1ccec9f285cd7d80a6347ee1d25" id="r_a6688e1ccec9f285cd7d80a6347ee1d25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6688e1ccec9f285cd7d80a6347ee1d25">KIT_SYSTEM_TRACE_GET_THREAD_FILTERS</a>(dst)&#160;&#160;&#160;0</td></tr>
+<tr class="memdesc:a6688e1ccec9f285cd7d80a6347ee1d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a6688e1ccec9f285cd7d80a6347ee1d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe09f4b0db5f2d626c13c7aabfa18e2c" id="r_afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe09f4b0db5f2d626c13c7aabfa18e2c">KIT_SYSTEM_TRACE_IS_COMPILED</a>()&#160;&#160;&#160;false</td></tr>
+<tr class="memdesc:afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns false if TRACE was NOT activated/enabled at compile time.  <br /></td></tr>
+<tr class="separator:afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1106f846b9e97db1f895c902fd45ad8a" id="r_a1106f846b9e97db1f895c902fd45ad8a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1106f846b9e97db1f895c902fd45ad8a">KIT_SYSTEM_TRACE_IS_ENABLED</a>()&#160;&#160;&#160;false</td></tr>
+<tr class="memdesc:a1106f846b9e97db1f895c902fd45ad8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a1106f846b9e97db1f895c902fd45ad8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a666aa9d3415c8c27bc696998d8cdb848" id="r_a666aa9d3415c8c27bc696998d8cdb848"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a666aa9d3415c8c27bc696998d8cdb848">KIT_SYSTEM_TRACE_IS_SECTION_ENABLED</a>(sect)&#160;&#160;&#160;false</td></tr>
+<tr class="memdesc:a666aa9d3415c8c27bc696998d8cdb848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a666aa9d3415c8c27bc696998d8cdb848"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81d2cd2e1ab6d21d0288c42215c35bb0" id="r_a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>(sect, ...)</td></tr>
+<tr class="memdesc:a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b976913ce967edc389dcaffa42a29c" id="r_a19b976913ce967edc389dcaffa42a29c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a19b976913ce967edc389dcaffa42a29c">KIT_SYSTEM_TRACE_REDIRECT</a>(newdst)</td></tr>
+<tr class="memdesc:a19b976913ce967edc389dcaffa42a29c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a19b976913ce967edc389dcaffa42a29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4948bfa2c087ce7febeda7cb90a088f9" id="r_a4948bfa2c087ce7febeda7cb90a088f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4948bfa2c087ce7febeda7cb90a088f9">KIT_SYSTEM_TRACE_REVERT</a>()</td></tr>
+<tr class="memdesc:a4948bfa2c087ce7febeda7cb90a088f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a4948bfa2c087ce7febeda7cb90a088f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4849f01b9ff7bf607d1a34cee4e36835" id="r_a4849f01b9ff7bf607d1a34cee4e36835"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4849f01b9ff7bf607d1a34cee4e36835">KIT_SYSTEM_TRACE_SCOPE</a>(sect,  label)</td></tr>
+<tr class="memdesc:a4849f01b9ff7bf607d1a34cee4e36835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a4849f01b9ff7bf607d1a34cee4e36835"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9525fcd5624cadd7a080cc7f32d65d2f" id="r_a9525fcd5624cadd7a080cc7f32d65d2f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9525fcd5624cadd7a080cc7f32d65d2f">KIT_SYSTEM_TRACE_SET_INFO_LEVEL</a>(l)</td></tr>
+<tr class="memdesc:a9525fcd5624cadd7a080cc7f32d65d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a9525fcd5624cadd7a080cc7f32d65d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb9fcad8b577cf78488f64af092fb576" id="r_afb9fcad8b577cf78488f64af092fb576"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb9fcad8b577cf78488f64af092fb576">KIT_SYSTEM_TRACE_SET_THREAD_2FILTERS</a>(t1,  t2)</td></tr>
+<tr class="memdesc:afb9fcad8b577cf78488f64af092fb576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:afb9fcad8b577cf78488f64af092fb576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0f674e7e36e957ad6b038d0a7e2fcbd" id="r_ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0f674e7e36e957ad6b038d0a7e2fcbd">KIT_SYSTEM_TRACE_SET_THREAD_3FILTERS</a>(t1,  t2,  t3)</td></tr>
+<tr class="memdesc:ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a8a3bc55c0271b2f081fc672fec0c52" id="r_a9a8a3bc55c0271b2f081fc672fec0c52"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a8a3bc55c0271b2f081fc672fec0c52">KIT_SYSTEM_TRACE_SET_THREAD_4FILTERS</a>(t1,  t2,  t3,  t4)</td></tr>
+<tr class="memdesc:a9a8a3bc55c0271b2f081fc672fec0c52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a9a8a3bc55c0271b2f081fc672fec0c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d467411c315a05554b6c7976ea94f3d" id="r_a1d467411c315a05554b6c7976ea94f3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d467411c315a05554b6c7976ea94f3d">KIT_SYSTEM_TRACE_SET_THREAD_FILTER</a>(t1)</td></tr>
+<tr class="memdesc:a1d467411c315a05554b6c7976ea94f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a1d467411c315a05554b6c7976ea94f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0c568a73c11ac5ae042c46833b1e4aa" id="r_ae0c568a73c11ac5ae042c46833b1e4aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0c568a73c11ac5ae042c46833b1e4aa">OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE</a>&#160;&#160;&#160;true</td></tr>
+<tr class="memdesc:ae0c568a73c11ac5ae042c46833b1e4aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">The compile time default setting what enable/disable state the trace starts in.  <br /></td></tr>
+<tr class="separator:ae0c568a73c11ac5ae042c46833b1e4aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c74ac1d4e1df990ee89f618c1740038" id="r_a0c74ac1d4e1df990ee89f618c1740038"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c74ac1d4e1df990ee89f618c1740038">OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL</a>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#add80da6b96634d485121bc2fe7113f7eaf1576010bcc261a990e66fafe63ab0bd">Kit::System::Trace::eBRIEF</a></td></tr>
+<tr class="memdesc:a0c74ac1d4e1df990ee89f618c1740038"><td class="mdescLeft">&#160;</td><td class="mdescRight">The compile time default setting for the info level.  <br /></td></tr>
+<tr class="separator:a0c74ac1d4e1df990ee89f618c1740038"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3153d816ef1920417278d4dfdd78b9a4" id="r_a3153d816ef1920417278d4dfdd78b9a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3153d816ef1920417278d4dfdd78b9a4">OPTION_KIT_SYSTEM_TRACE_MAX_BUFFER</a>&#160;&#160;&#160;511</td></tr>
+<tr class="memdesc:a3153d816ef1920417278d4dfdd78b9a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size, in bytes (without the null terminator), of trace engine's internal String use to construct a complete (info + user msg) trace message.  <br /></td></tr>
+<tr class="separator:a3153d816ef1920417278d4dfdd78b9a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74ee645f0e08d41c952435028dbc4f29" id="r_a74ee645f0e08d41c952435028dbc4f29"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74ee645f0e08d41c952435028dbc4f29">OPTION_KIT_SYSTEM_TRACE_MAX_SECTION_NAME_LEN</a>&#160;&#160;&#160;63</td></tr>
+<tr class="memdesc:a74ee645f0e08d41c952435028dbc4f29"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default maximum size, in bytes, for a section name (not including the null terminator).  <br /></td></tr>
+<tr class="separator:a74ee645f0e08d41c952435028dbc4f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a407dee2a3187289526ed58ccc59fbdd8" id="r_a407dee2a3187289526ed58ccc59fbdd8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a407dee2a3187289526ed58ccc59fbdd8">OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS</a>&#160;&#160;&#160;8</td></tr>
+<tr class="memdesc:a407dee2a3187289526ed58ccc59fbdd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default maximum number of actively enabled 'sections' supported.  <br /></td></tr>
+<tr class="separator:a407dee2a3187289526ed58ccc59fbdd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad385ce8bd9cadfa5acff1cd9626bdb6f" id="r_ad385ce8bd9cadfa5acff1cd9626bdb6f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad385ce8bd9cadfa5acff1cd9626bdb6f">OPTION_KIT_SYSTEM_TRACE_PREFIX_STRING</a>&#160;&#160;&#160;&quot;&gt;&gt; &quot;</td></tr>
+<tr class="memdesc:ad385ce8bd9cadfa5acff1cd9626bdb6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">String literal that is the prefix for all trace messages.  <br /></td></tr>
+<tr class="separator:ad385ce8bd9cadfa5acff1cd9626bdb6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57e67049631c7e0ab538a6693aa1da80" id="r_a57e67049631c7e0ab538a6693aa1da80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57e67049631c7e0ab538a6693aa1da80">OPTION_KIT_SYSTEM_TRACE_SUFFIX_STRING</a>&#160;&#160;&#160;&quot;\n&quot;</td></tr>
+<tr class="memdesc:a57e67049631c7e0ab538a6693aa1da80"><td class="mdescLeft">&#160;</td><td class="mdescRight">String literal that is the final suffix for all trace messages.  <br /></td></tr>
+<tr class="separator:a57e67049631c7e0ab538a6693aa1da80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file provides an interface for a 'printf' tracing mechanism. </p>
 <p>The output of tracing messages typically defaults (dependent on the target platform) to stdout. However, the output can be redirected to any Kit::Stream::Output instance.</p>
@@ -96,133 +221,7 @@ $(function() {
                                      KIT_SYSTEM_TRACE_MSG( "bob, "This is an example Trace Msg. Y=d, X=d", y, x);
                                      ...
                                  }
-</pre> </div><div class="textblock"><code>#include &quot;kit_config.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i_string_8h_source.html">Kit/Text/IString.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="printfchecker_8h_source.html">Kit/System/printfchecker.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_i_output_8h_source.html">Kit/Io/IOutput.h</a>&quot;</code><br />
-</div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for Trace.h:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_trace_8h__incl.svg" width="863" height="330"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div><div class="textblock"><div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_trace_8h__dep__incl.svg" width="166" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div>
-<p><a href="_trace_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_trace.html">Kit::System::Trace</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class provide a 'printf' tracing mechanism.  <a href="class_kit_1_1_system_1_1_trace.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
-Namespaces</h2></td></tr>
-<tr class="memitem:namespace_kit" id="r_namespace_kit"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit.html">Kit</a></td></tr>
-<tr class="memdesc:namespace_kit"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward reference to break dependency on the Dm namespace. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespace_kit_1_1_system" id="r_namespace_kit_1_1_system"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html">Kit::System</a></td></tr>
-<tr class="memdesc:namespace_kit_1_1_system"><td class="mdescLeft">&#160;</td><td class="mdescRight">The '<a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">System</a>' namespace contains platform independent foundation abstractions and classes related to program execution. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:affd51372ff299f56c74e808dd9f49338" id="r_affd51372ff299f56c74e808dd9f49338"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affd51372ff299f56c74e808dd9f49338">KIT_SYSTEM_TRACE_FUNC</a>(sect)</td></tr>
-<tr class="memdesc:affd51372ff299f56c74e808dd9f49338"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:affd51372ff299f56c74e808dd9f49338"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4849f01b9ff7bf607d1a34cee4e36835" id="r_a4849f01b9ff7bf607d1a34cee4e36835"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4849f01b9ff7bf607d1a34cee4e36835">KIT_SYSTEM_TRACE_SCOPE</a>(sect,  label)</td></tr>
-<tr class="memdesc:a4849f01b9ff7bf607d1a34cee4e36835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a4849f01b9ff7bf607d1a34cee4e36835"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81d2cd2e1ab6d21d0288c42215c35bb0" id="r_a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>(sect, ...)</td></tr>
-<tr class="memdesc:a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9694f3a47e9aa63f715d683c9c9c73d1" id="r_a9694f3a47e9aa63f715d683c9c9c73d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9694f3a47e9aa63f715d683c9c9c73d1">KIT_SYSTEM_TRACE_ENABLE</a>()</td></tr>
-<tr class="memdesc:a9694f3a47e9aa63f715d683c9c9c73d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a9694f3a47e9aa63f715d683c9c9c73d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7a75a7018bd3e91e1f6086f9a70d93c" id="r_aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7a75a7018bd3e91e1f6086f9a70d93c">KIT_SYSTEM_TRACE_DISABLE</a>()</td></tr>
-<tr class="memdesc:aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1106f846b9e97db1f895c902fd45ad8a" id="r_a1106f846b9e97db1f895c902fd45ad8a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1106f846b9e97db1f895c902fd45ad8a">KIT_SYSTEM_TRACE_IS_ENABLED</a>()&#160;&#160;&#160;false</td></tr>
-<tr class="memdesc:a1106f846b9e97db1f895c902fd45ad8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a1106f846b9e97db1f895c902fd45ad8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a666aa9d3415c8c27bc696998d8cdb848" id="r_a666aa9d3415c8c27bc696998d8cdb848"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a666aa9d3415c8c27bc696998d8cdb848">KIT_SYSTEM_TRACE_IS_SECTION_ENABLED</a>(sect)&#160;&#160;&#160;false</td></tr>
-<tr class="memdesc:a666aa9d3415c8c27bc696998d8cdb848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a666aa9d3415c8c27bc696998d8cdb848"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9525fcd5624cadd7a080cc7f32d65d2f" id="r_a9525fcd5624cadd7a080cc7f32d65d2f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9525fcd5624cadd7a080cc7f32d65d2f">KIT_SYSTEM_TRACE_SET_INFO_LEVEL</a>(l)</td></tr>
-<tr class="memdesc:a9525fcd5624cadd7a080cc7f32d65d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a9525fcd5624cadd7a080cc7f32d65d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7fa2511c31281a2486dfafb5523a15f" id="r_ae7fa2511c31281a2486dfafb5523a15f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7fa2511c31281a2486dfafb5523a15f">KIT_SYSTEM_TRACE_GET_INFO_LEVEL</a>()&#160;&#160;&#160;( (<a class="el" href="class_kit_1_1_system_1_1_trace.html#add80da6b96634d485121bc2fe7113f7e">Kit::System::Trace::InfoLevel_T</a>)0 )</td></tr>
-<tr class="memdesc:ae7fa2511c31281a2486dfafb5523a15f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:ae7fa2511c31281a2486dfafb5523a15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54f4742884ad133cd9b4dae1c6da104f" id="r_a54f4742884ad133cd9b4dae1c6da104f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54f4742884ad133cd9b4dae1c6da104f">KIT_SYSTEM_TRACE_ENABLE_SECTION</a>(sect)</td></tr>
-<tr class="memdesc:a54f4742884ad133cd9b4dae1c6da104f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a54f4742884ad133cd9b4dae1c6da104f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d334899f6b0b04fa204885842185398" id="r_a1d334899f6b0b04fa204885842185398"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d334899f6b0b04fa204885842185398">KIT_SYSTEM_TRACE_DISABLE_SECTION</a>(sect)</td></tr>
-<tr class="memdesc:a1d334899f6b0b04fa204885842185398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a1d334899f6b0b04fa204885842185398"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d467411c315a05554b6c7976ea94f3d" id="r_a1d467411c315a05554b6c7976ea94f3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d467411c315a05554b6c7976ea94f3d">KIT_SYSTEM_TRACE_SET_THREAD_FILTER</a>(t1)</td></tr>
-<tr class="memdesc:a1d467411c315a05554b6c7976ea94f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a1d467411c315a05554b6c7976ea94f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb9fcad8b577cf78488f64af092fb576" id="r_afb9fcad8b577cf78488f64af092fb576"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb9fcad8b577cf78488f64af092fb576">KIT_SYSTEM_TRACE_SET_THREAD_2FILTERS</a>(t1,  t2)</td></tr>
-<tr class="memdesc:afb9fcad8b577cf78488f64af092fb576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:afb9fcad8b577cf78488f64af092fb576"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0f674e7e36e957ad6b038d0a7e2fcbd" id="r_ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0f674e7e36e957ad6b038d0a7e2fcbd">KIT_SYSTEM_TRACE_SET_THREAD_3FILTERS</a>(t1,  t2,  t3)</td></tr>
-<tr class="memdesc:ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a8a3bc55c0271b2f081fc672fec0c52" id="r_a9a8a3bc55c0271b2f081fc672fec0c52"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a8a3bc55c0271b2f081fc672fec0c52">KIT_SYSTEM_TRACE_SET_THREAD_4FILTERS</a>(t1,  t2,  t3,  t4)</td></tr>
-<tr class="memdesc:a9a8a3bc55c0271b2f081fc672fec0c52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a9a8a3bc55c0271b2f081fc672fec0c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6688e1ccec9f285cd7d80a6347ee1d25" id="r_a6688e1ccec9f285cd7d80a6347ee1d25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6688e1ccec9f285cd7d80a6347ee1d25">KIT_SYSTEM_TRACE_GET_THREAD_FILTERS</a>(dst)&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:a6688e1ccec9f285cd7d80a6347ee1d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a6688e1ccec9f285cd7d80a6347ee1d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1de46d981ebf30d2c50377ad90d3166e" id="r_a1de46d981ebf30d2c50377ad90d3166e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1de46d981ebf30d2c50377ad90d3166e">KIT_SYSTEM_TRACE_CLEAR_THREAD_FILTER</a>()</td></tr>
-<tr class="memdesc:a1de46d981ebf30d2c50377ad90d3166e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a1de46d981ebf30d2c50377ad90d3166e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d1959c3400fa6ca84c7a0b1dc38b5d0" id="r_a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d1959c3400fa6ca84c7a0b1dc38b5d0">KIT_SYSTEM_TRACE_GET_SECTIONS</a>(dst)&#160;&#160;&#160;0</td></tr>
-<tr class="memdesc:a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19b976913ce967edc389dcaffa42a29c" id="r_a19b976913ce967edc389dcaffa42a29c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a19b976913ce967edc389dcaffa42a29c">KIT_SYSTEM_TRACE_REDIRECT</a>(newdst)</td></tr>
-<tr class="memdesc:a19b976913ce967edc389dcaffa42a29c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a19b976913ce967edc389dcaffa42a29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4948bfa2c087ce7febeda7cb90a088f9" id="r_a4948bfa2c087ce7febeda7cb90a088f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4948bfa2c087ce7febeda7cb90a088f9">KIT_SYSTEM_TRACE_REVERT</a>()</td></tr>
-<tr class="memdesc:a4948bfa2c087ce7febeda7cb90a088f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:a4948bfa2c087ce7febeda7cb90a088f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe09f4b0db5f2d626c13c7aabfa18e2c" id="r_afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe09f4b0db5f2d626c13c7aabfa18e2c">KIT_SYSTEM_TRACE_IS_COMPILED</a>()&#160;&#160;&#160;false</td></tr>
-<tr class="memdesc:afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns false if TRACE was NOT activated/enabled at compile time.  <br /></td></tr>
-<tr class="separator:afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae434b392fc82459f761e767a6b78f03" id="r_aae434b392fc82459f761e767a6b78f03"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae434b392fc82459f761e767a6b78f03">KIT_SYSTEM_TRACE_ALLOCATE</a>(type,  varname,  initval)</td></tr>
-<tr class="memdesc:aae434b392fc82459f761e767a6b78f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
-<tr class="separator:aae434b392fc82459f761e767a6b78f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a407dee2a3187289526ed58ccc59fbdd8" id="r_a407dee2a3187289526ed58ccc59fbdd8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a407dee2a3187289526ed58ccc59fbdd8">OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS</a>&#160;&#160;&#160;8</td></tr>
-<tr class="memdesc:a407dee2a3187289526ed58ccc59fbdd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default maximum number of actively enabled 'sections' supported.  <br /></td></tr>
-<tr class="separator:a407dee2a3187289526ed58ccc59fbdd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74ee645f0e08d41c952435028dbc4f29" id="r_a74ee645f0e08d41c952435028dbc4f29"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74ee645f0e08d41c952435028dbc4f29">OPTION_KIT_SYSTEM_TRACE_MAX_SECTION_NAME_LEN</a>&#160;&#160;&#160;63</td></tr>
-<tr class="memdesc:a74ee645f0e08d41c952435028dbc4f29"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default maximum size, in bytes, for a section name (not including the null terminator).  <br /></td></tr>
-<tr class="separator:a74ee645f0e08d41c952435028dbc4f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3153d816ef1920417278d4dfdd78b9a4" id="r_a3153d816ef1920417278d4dfdd78b9a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3153d816ef1920417278d4dfdd78b9a4">OPTION_KIT_SYSTEM_TRACE_MAX_BUFFER</a>&#160;&#160;&#160;511</td></tr>
-<tr class="memdesc:a3153d816ef1920417278d4dfdd78b9a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size, in bytes (without the null terminator), of trace engine's internal String use to construct a complete (info + user msg) trace message.  <br /></td></tr>
-<tr class="separator:a3153d816ef1920417278d4dfdd78b9a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad385ce8bd9cadfa5acff1cd9626bdb6f" id="r_ad385ce8bd9cadfa5acff1cd9626bdb6f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad385ce8bd9cadfa5acff1cd9626bdb6f">OPTION_KIT_SYSTEM_TRACE_PREFIX_STRING</a>&#160;&#160;&#160;&quot;&gt;&gt; &quot;</td></tr>
-<tr class="memdesc:ad385ce8bd9cadfa5acff1cd9626bdb6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">String literal that is the prefix for all trace messages.  <br /></td></tr>
-<tr class="separator:ad385ce8bd9cadfa5acff1cd9626bdb6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57e67049631c7e0ab538a6693aa1da80" id="r_a57e67049631c7e0ab538a6693aa1da80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57e67049631c7e0ab538a6693aa1da80">OPTION_KIT_SYSTEM_TRACE_SUFFIX_STRING</a>&#160;&#160;&#160;&quot;\n&quot;</td></tr>
-<tr class="memdesc:a57e67049631c7e0ab538a6693aa1da80"><td class="mdescLeft">&#160;</td><td class="mdescRight">String literal that is the final suffix for all trace messages.  <br /></td></tr>
-<tr class="separator:a57e67049631c7e0ab538a6693aa1da80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c74ac1d4e1df990ee89f618c1740038" id="r_a0c74ac1d4e1df990ee89f618c1740038"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c74ac1d4e1df990ee89f618c1740038">OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL</a>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#add80da6b96634d485121bc2fe7113f7eaf1576010bcc261a990e66fafe63ab0bd">Kit::System::Trace::eBRIEF</a></td></tr>
-<tr class="memdesc:a0c74ac1d4e1df990ee89f618c1740038"><td class="mdescLeft">&#160;</td><td class="mdescRight">The compile time default setting for the info level.  <br /></td></tr>
-<tr class="separator:a0c74ac1d4e1df990ee89f618c1740038"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0c568a73c11ac5ae042c46833b1e4aa" id="r_ae0c568a73c11ac5ae042c46833b1e4aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0c568a73c11ac5ae042c46833b1e4aa">OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE</a>&#160;&#160;&#160;true</td></tr>
-<tr class="memdesc:ae0c568a73c11ac5ae042c46833b1e4aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">The compile time default setting what enable/disable state the trace starts in.  <br /></td></tr>
-<tr class="separator:ae0c568a73c11ac5ae042c46833b1e4aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+</pre> </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="aae434b392fc82459f761e767a6b78f03" name="aae434b392fc82459f761e767a6b78f03"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae434b392fc82459f761e767a6b78f03">&#9670;&#160;</a></span>KIT_SYSTEM_TRACE_ALLOCATE</h2>
 
@@ -800,7 +799,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

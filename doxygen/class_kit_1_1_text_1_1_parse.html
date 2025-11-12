@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,41 +46,41 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_text_1_1_parse-members.html">List of all members</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="class_kit_1_1_text_1_1_parse-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Text::Parse Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This static class contains collection of methods that parse 'formatted' text strings to binary data.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This static class contains collection of methods that parse 'formatted' text strings to binary data. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_parse_8h_source.html">Parse.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a66672ae006ca4c5b499a5ebc00f8ea58" id="r_a66672ae006ca4c5b499a5ebc00f8ea58"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66672ae006ca4c5b499a5ebc00f8ea58">asciiHex</a> (void *dstBinary, const char *srcString, size_t dstMaxLen) noexcept</td></tr>
-<tr class="memdesc:a66672ae006ca4c5b499a5ebc00f8ea58"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method will convert an 'ASCII HEX' string to an equivalent binary buffer, i.e.  <br /></td></tr>
-<tr class="separator:a66672ae006ca4c5b499a5ebc00f8ea58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29a0bc6c2a021ecdb985120a13d4b772" id="r_a29a0bc6c2a021ecdb985120a13d4b772"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29a0bc6c2a021ecdb985120a13d4b772">asciiBinary</a> (void *dstBinary, const char *srcString, size_t dstMaxLen, bool reverse=false) noexcept</td></tr>
 <tr class="memdesc:a29a0bc6c2a021ecdb985120a13d4b772"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method will convert an 'ASCII BINARY' string to an equivalent binary buffer, i.e.  <br /></td></tr>
 <tr class="separator:a29a0bc6c2a021ecdb985120a13d4b772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66672ae006ca4c5b499a5ebc00f8ea58" id="r_a66672ae006ca4c5b499a5ebc00f8ea58"><td class="memItemLeft" align="right" valign="top">static size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66672ae006ca4c5b499a5ebc00f8ea58">asciiHex</a> (void *dstBinary, const char *srcString, size_t dstMaxLen) noexcept</td></tr>
+<tr class="memdesc:a66672ae006ca4c5b499a5ebc00f8ea58"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method will convert an 'ASCII HEX' string to an equivalent binary buffer, i.e.  <br /></td></tr>
+<tr class="separator:a66672ae006ca4c5b499a5ebc00f8ea58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaad0a189093cd4b91e0f43c4b7c6174" id="r_aaaad0a189093cd4b91e0f43c4b7c6174"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaad0a189093cd4b91e0f43c4b7c6174">asciiHexUnsafe</a> (const char *inString, size_t numCharToScan, uint8_t *outData) noexcept</td></tr>
+<tr class="memdesc:aaaad0a189093cd4b91e0f43c4b7c6174"><td class="mdescLeft">&#160;</td><td class="mdescRight">This UNSAFE method converts up to 'numCharToScan' characters from the ASCII HEX text string.  <br /></td></tr>
+<tr class="separator:aaaad0a189093cd4b91e0f43c4b7c6174"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea3e28d41ae0073544d4d794c4526f92" id="r_aea3e28d41ae0073544d4d794c4526f92"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea3e28d41ae0073544d4d794c4526f92">hexChar</a> (char c) noexcept</td></tr>
+<tr class="memdesc:aea3e28d41ae0073544d4d794c4526f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the binary value for the 'ASCII HEX' character 'c'.  <br /></td></tr>
+<tr class="separator:aea3e28d41ae0073544d4d794c4526f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97b0e9e13938df580ef504587372e20e" id="r_a97b0e9e13938df580ef504587372e20e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97b0e9e13938df580ef504587372e20e">timestamp</a> (const char *timeStampToParse, uint32_t &amp;convertedValue) noexcept</td></tr>
 <tr class="memdesc:a97b0e9e13938df580ef504587372e20e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method parses a 'timestamp' with the following format: [DD ]HH:MM:SS[.sss] (it is the inverse of Format::timestampXXX() methods) into a elapsed time value.  <br /></td></tr>
 <tr class="separator:a97b0e9e13938df580ef504587372e20e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66d7f2a53f69795d55ebf78027164697" id="r_a66d7f2a53f69795d55ebf78027164697"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66d7f2a53f69795d55ebf78027164697">timestamp</a> (const char *timeStampToParse, uint64_t &amp;convertedValue) noexcept</td></tr>
 <tr class="memdesc:a66d7f2a53f69795d55ebf78027164697"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is same as 32bit <a class="el" href="#a97b0e9e13938df580ef504587372e20e" title="This method parses a &#39;timestamp&#39; with the following format: [DD ]HH:MM:SS[.sss] (it is the inverse of...">timestamp()</a> method - except that the maximum number of days increased to 75 years.  <br /></td></tr>
 <tr class="separator:a66d7f2a53f69795d55ebf78027164697"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea3e28d41ae0073544d4d794c4526f92" id="r_aea3e28d41ae0073544d4d794c4526f92"><td class="memItemLeft" align="right" valign="top">static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aea3e28d41ae0073544d4d794c4526f92">hexChar</a> (char c) noexcept</td></tr>
-<tr class="memdesc:aea3e28d41ae0073544d4d794c4526f92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the binary value for the 'ASCII HEX' character 'c'.  <br /></td></tr>
-<tr class="separator:aea3e28d41ae0073544d4d794c4526f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaad0a189093cd4b91e0f43c4b7c6174" id="r_aaaad0a189093cd4b91e0f43c4b7c6174"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaad0a189093cd4b91e0f43c4b7c6174">asciiHexUnsafe</a> (const char *inString, size_t numCharToScan, uint8_t *outData) noexcept</td></tr>
-<tr class="memdesc:aaaad0a189093cd4b91e0f43c4b7c6174"><td class="mdescLeft">&#160;</td><td class="mdescRight">This UNSAFE method converts up to 'numCharToScan' characters from the ASCII HEX text string.  <br /></td></tr>
-<tr class="separator:aaaad0a189093cd4b91e0f43c4b7c6174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This static class contains collection of methods that parse 'formatted' text strings to binary data. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a29a0bc6c2a021ecdb985120a13d4b772" name="a29a0bc6c2a021ecdb985120a13d4b772"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a29a0bc6c2a021ecdb985120a13d4b772">&#9670;&#160;</a></span>asciiBinary()</h2>
 
@@ -302,7 +302,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

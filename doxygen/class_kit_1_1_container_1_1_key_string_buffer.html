@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_container_1_1_key_string_buffer-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="class_kit_1_1_container_1_1_key_string_buffer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::KeyStringBuffer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This class provides a '<a class="el" href="class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k...">Key</a>' wrapper for a array of Character of length N, i.e.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class provides a '<a class="el" href="class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k...">Key</a>' wrapper for a array of Character of length N, i.e. </p>
-<p>a string that is NOT null terminated. Keys of this type can used to compare against other <a class="el" href="class_kit_1_1_container_1_1_key_string_buffer.html" title="This class provides a &#39;Key&#39; wrapper for a array of Character of length N, i.e.">KeyStringBuffer</a>, <a class="el" href="class_kit_1_1_container_1_1_key_literal_string.html" title="This class provides a &#39;Key&#39; wrapper for a C string literal.">KeyLiteralString</a>, or Items that use a Kit::Text::String as their key </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_key_8h_source.html">Key.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Container::KeyStringBuffer:</div>
@@ -81,12 +78,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a608c9716183a07a43f84429687a52403" id="r_a608c9716183a07a43f84429687a52403"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a608c9716183a07a43f84429687a52403">KeyStringBuffer</a> (const char *startOfString, size_t lenOfStringInBytes) noexcept</td></tr>
 <tr class="memdesc:a608c9716183a07a43f84429687a52403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a608c9716183a07a43f84429687a52403"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abedf7441e928288e150b0d5e27c2be69" id="r_abedf7441e928288e150b0d5e27c2be69"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abedf7441e928288e150b0d5e27c2be69">getKeyValue</a> (size_t &amp;lenOfStringInBytes) const noexcept</td></tr>
-<tr class="memdesc:abedf7441e928288e150b0d5e27c2be69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k...">Key</a>'s content value.  <br /></td></tr>
-<tr class="separator:abedf7441e928288e150b0d5e27c2be69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c6d46e9e590a4b4e6f8b391cd4c8019" id="r_a5c6d46e9e590a4b4e6f8b391cd4c8019"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c6d46e9e590a4b4e6f8b391cd4c8019">compareKey</a> (const <a class="el" href="class_kit_1_1_container_1_1_key.html">Key</a> &amp;key) const noexcept override</td></tr>
 <tr class="memdesc:a5c6d46e9e590a4b4e6f8b391cd4c8019"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Container::key.  <br /></td></tr>
 <tr class="separator:a5c6d46e9e590a4b4e6f8b391cd4c8019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abedf7441e928288e150b0d5e27c2be69" id="r_abedf7441e928288e150b0d5e27c2be69"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abedf7441e928288e150b0d5e27c2be69">getKeyValue</a> (size_t &amp;lenOfStringInBytes) const noexcept</td></tr>
+<tr class="memdesc:abedf7441e928288e150b0d5e27c2be69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k...">Key</a>'s content value.  <br /></td></tr>
+<tr class="separator:abedf7441e928288e150b0d5e27c2be69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b14e4d3eff523804e4072876c33fd49" id="r_a0b14e4d3eff523804e4072876c33fd49"><td class="memItemLeft" align="right" valign="top">const void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b14e4d3eff523804e4072876c33fd49">getRawKey</a> (unsigned *returnRawKeyLenPtr=0) const noexcept override</td></tr>
 <tr class="memdesc:a0b14e4d3eff523804e4072876c33fd49"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::Container::key.  <br /></td></tr>
 <tr class="separator:a0b14e4d3eff523804e4072876c33fd49"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -103,14 +100,17 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a202ff2ffd0d2455fd0863a46b73930d3" id="r_a202ff2ffd0d2455fd0863a46b73930d3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a202ff2ffd0d2455fd0863a46b73930d3">m_stringKeyPtr</a></td></tr>
-<tr class="memdesc:a202ff2ffd0d2455fd0863a46b73930d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the key's storage. Note: Making the member variable public because it makes things simpler (and yes it technically a hack)  <br /></td></tr>
-<tr class="separator:a202ff2ffd0d2455fd0863a46b73930d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08aaf56d040f1b5910ba6d4ba4928e1d" id="r_a08aaf56d040f1b5910ba6d4ba4928e1d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08aaf56d040f1b5910ba6d4ba4928e1d">m_len</a></td></tr>
 <tr class="memdesc:a08aaf56d040f1b5910ba6d4ba4928e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the string (does NOT include the null terminator!). See previous comment about being a public member variable.  <br /></td></tr>
 <tr class="separator:a08aaf56d040f1b5910ba6d4ba4928e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a202ff2ffd0d2455fd0863a46b73930d3" id="r_a202ff2ffd0d2455fd0863a46b73930d3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a202ff2ffd0d2455fd0863a46b73930d3">m_stringKeyPtr</a></td></tr>
+<tr class="memdesc:a202ff2ffd0d2455fd0863a46b73930d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the key's storage. Note: Making the member variable public because it makes things simpler (and yes it technically a hack)  <br /></td></tr>
+<tr class="separator:a202ff2ffd0d2455fd0863a46b73930d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class provides a '<a class="el" href="class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k...">Key</a>' wrapper for a array of Character of length N, i.e. </p>
+<p>a string that is NOT null terminated. Keys of this type can used to compare against other <a class="el" href="class_kit_1_1_container_1_1_key_string_buffer.html" title="This class provides a &#39;Key&#39; wrapper for a array of Character of length N, i.e.">KeyStringBuffer</a>, <a class="el" href="class_kit_1_1_container_1_1_key_literal_string.html" title="This class provides a &#39;Key&#39; wrapper for a C string literal.">KeyLiteralString</a>, or Items that use a Kit::Text::String as their key </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a608c9716183a07a43f84429687a52403" name="a608c9716183a07a43f84429687a52403"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a608c9716183a07a43f84429687a52403">&#9670;&#160;</a></span>KeyStringBuffer()</h2>
 
@@ -309,7 +309,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,18 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_trace-members.html">List of all members</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_kit_1_1_system_1_1_trace-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::Trace Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This concrete class provide a 'printf' tracing mechanism.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This concrete class provide a 'printf' tracing mechanism. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_trace_8h_source.html">Trace.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -87,48 +85,39 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a29e3694232faf449080fac3b8cd268a9" id="r_a29e3694232faf449080fac3b8cd268a9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29e3694232faf449080fac3b8cd268a9">traceLocation_</a> (const char *section, const char *filename, int linenum, const char *funcname)</td></tr>
-<tr class="memdesc:a29e3694232faf449080fac3b8cd268a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to trace the 'location' for general purpose trace messages.  <br /></td></tr>
-<tr class="separator:a29e3694232faf449080fac3b8cd268a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2553f2c0fade649690eb9c85c9e53f1" id="r_ae2553f2c0fade649690eb9c85c9e53f1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2553f2c0fade649690eb9c85c9e53f1">traceUserMsg_</a> (const char *format,...)</td></tr>
-<tr class="memdesc:ae2553f2c0fade649690eb9c85c9e53f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to generate general purpose trace messages.  <br /></td></tr>
-<tr class="separator:ae2553f2c0fade649690eb9c85c9e53f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a142db61f82010609bd38065d47454689" id="r_a142db61f82010609bd38065d47454689"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a142db61f82010609bd38065d47454689">enable_</a> ()</td></tr>
-<tr class="memdesc:a142db61f82010609bd38065d47454689"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method enables the output/logging of trace message at run-time.  <br /></td></tr>
-<tr class="separator:a142db61f82010609bd38065d47454689"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6ec2701e45319865e9916aa632ff53c" id="r_ad6ec2701e45319865e9916aa632ff53c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6ec2701e45319865e9916aa632ff53c">disable_</a> ()</td></tr>
-<tr class="memdesc:ad6ec2701e45319865e9916aa632ff53c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method disables the output/logging of trace message at run-time.  <br /></td></tr>
-<tr class="separator:ad6ec2701e45319865e9916aa632ff53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28af034c29ac49e67726885529d9500a" id="r_a28af034c29ac49e67726885529d9500a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28af034c29ac49e67726885529d9500a">isEnabled_</a> ()</td></tr>
-<tr class="memdesc:a28af034c29ac49e67726885529d9500a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if tracing is enabled, i.e.  <br /></td></tr>
-<tr class="separator:a28af034c29ac49e67726885529d9500a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4c184cf1729985ba13e6e4b76fed0ef" id="r_ae4c184cf1729985ba13e6e4b76fed0ef"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4c184cf1729985ba13e6e4b76fed0ef">setInfoLevel_</a> (<a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a> newLevel)</td></tr>
-<tr class="memdesc:ae4c184cf1729985ba13e6e4b76fed0ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets the information level for the trace messages.  <br /></td></tr>
-<tr class="separator:ae4c184cf1729985ba13e6e4b76fed0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54c9c25bb482d54e39128b0b114c3e8a" id="r_a54c9c25bb482d54e39128b0b114c3e8a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54c9c25bb482d54e39128b0b114c3e8a">getInfoLevel_</a> () noexcept</td></tr>
-<tr class="memdesc:a54c9c25bb482d54e39128b0b114c3e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current information level setting.  <br /></td></tr>
-<tr class="separator:a54c9c25bb482d54e39128b0b114c3e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39377c50d8c7e1b546b3d5a30755a282" id="r_a39377c50d8c7e1b546b3d5a30755a282"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39377c50d8c7e1b546b3d5a30755a282">enableSection_</a> (const char *sectionToEnable)</td></tr>
-<tr class="memdesc:a39377c50d8c7e1b546b3d5a30755a282"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method enables the output/logging of trace message at run-time for the specified 'section'.  <br /></td></tr>
-<tr class="separator:a39377c50d8c7e1b546b3d5a30755a282"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac16de27698ee59e8726898a16a4a030" id="r_aac16de27698ee59e8726898a16a4a030"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac16de27698ee59e8726898a16a4a030">disableSection_</a> (const char *sectionToDisable)</td></tr>
-<tr class="memdesc:aac16de27698ee59e8726898a16a4a030"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method disables the output/logging of trace message at run-time for the specified 'section'.  <br /></td></tr>
-<tr class="separator:aac16de27698ee59e8726898a16a4a030"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93371ad21b12a39aca3fde1b78c1ff6b" id="r_a93371ad21b12a39aca3fde1b78c1ff6b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93371ad21b12a39aca3fde1b78c1ff6b">isSectionEnabled_</a> (const char *section)</td></tr>
-<tr class="memdesc:a93371ad21b12a39aca3fde1b78c1ff6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if tracing is enabled AND the specified 'section' has been enabled.  <br /></td></tr>
-<tr class="separator:a93371ad21b12a39aca3fde1b78c1ff6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad07946412886e40ea88f04a2b59f45b1" id="r_ad07946412886e40ea88f04a2b59f45b1"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad07946412886e40ea88f04a2b59f45b1">getSections_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
-<tr class="memdesc:ad07946412886e40ea88f04a2b59f45b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'sections' and returns the actual section name(s) via the IString 'dst'.  <br /></td></tr>
-<tr class="separator:ad07946412886e40ea88f04a2b59f45b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54d930b9a0b012797c0cf9d621edf54b" id="r_a54d930b9a0b012797c0cf9d621edf54b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54d930b9a0b012797c0cf9d621edf54b">setThreadFilter_</a> (const char *threadName1, const char *threadName2=nullptr, const char *threadName3=nullptr, const char *threadName4=nullptr)</td></tr>
-<tr class="memdesc:a54d930b9a0b012797c0cf9d621edf54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method applies a filter by thread name when generating output, i.e.  <br /></td></tr>
-<tr class="separator:a54d930b9a0b012797c0cf9d621edf54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a137e6b9104ffceda2e0cb4b8f177b794" id="r_a137e6b9104ffceda2e0cb4b8f177b794"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a137e6b9104ffceda2e0cb4b8f177b794">getThreadFilters_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
-<tr class="memdesc:a137e6b9104ffceda2e0cb4b8f177b794"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'thread filters' and returns the actual thread name(s) via the IString 'dst'.  <br /></td></tr>
-<tr class="separator:a137e6b9104ffceda2e0cb4b8f177b794"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba1784cab8547da73d5a179da962aa58" id="r_aba1784cab8547da73d5a179da962aa58"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba1784cab8547da73d5a179da962aa58">clearThreadFilter_</a> ()</td></tr>
 <tr class="memdesc:aba1784cab8547da73d5a179da962aa58"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method removes that thread filter (if there is one present).  <br /></td></tr>
 <tr class="separator:aba1784cab8547da73d5a179da962aa58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ec2701e45319865e9916aa632ff53c" id="r_ad6ec2701e45319865e9916aa632ff53c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad6ec2701e45319865e9916aa632ff53c">disable_</a> ()</td></tr>
+<tr class="memdesc:ad6ec2701e45319865e9916aa632ff53c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method disables the output/logging of trace message at run-time.  <br /></td></tr>
+<tr class="separator:ad6ec2701e45319865e9916aa632ff53c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac16de27698ee59e8726898a16a4a030" id="r_aac16de27698ee59e8726898a16a4a030"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac16de27698ee59e8726898a16a4a030">disableSection_</a> (const char *sectionToDisable)</td></tr>
+<tr class="memdesc:aac16de27698ee59e8726898a16a4a030"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method disables the output/logging of trace message at run-time for the specified 'section'.  <br /></td></tr>
+<tr class="separator:aac16de27698ee59e8726898a16a4a030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a142db61f82010609bd38065d47454689" id="r_a142db61f82010609bd38065d47454689"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a142db61f82010609bd38065d47454689">enable_</a> ()</td></tr>
+<tr class="memdesc:a142db61f82010609bd38065d47454689"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method enables the output/logging of trace message at run-time.  <br /></td></tr>
+<tr class="separator:a142db61f82010609bd38065d47454689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39377c50d8c7e1b546b3d5a30755a282" id="r_a39377c50d8c7e1b546b3d5a30755a282"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39377c50d8c7e1b546b3d5a30755a282">enableSection_</a> (const char *sectionToEnable)</td></tr>
+<tr class="memdesc:a39377c50d8c7e1b546b3d5a30755a282"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method enables the output/logging of trace message at run-time for the specified 'section'.  <br /></td></tr>
+<tr class="separator:a39377c50d8c7e1b546b3d5a30755a282"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8094bffd737f25c55cbe4662eb5ef195" id="r_a8094bffd737f25c55cbe4662eb5ef195"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8094bffd737f25c55cbe4662eb5ef195">getDefaultOutputStream_</a> () noexcept</td></tr>
+<tr class="memdesc:a8094bffd737f25c55cbe4662eb5ef195"><td class="mdescLeft">&#160;</td><td class="mdescRight">This COMPONENT Scoped method provides the Output stream to the <a class="el" href="class_kit_1_1_system_1_1_trace.html" title="This concrete class provide a &#39;printf&#39; tracing mechanism.">Trace</a> Engine.  <br /></td></tr>
+<tr class="separator:a8094bffd737f25c55cbe4662eb5ef195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54c9c25bb482d54e39128b0b114c3e8a" id="r_a54c9c25bb482d54e39128b0b114c3e8a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54c9c25bb482d54e39128b0b114c3e8a">getInfoLevel_</a> () noexcept</td></tr>
+<tr class="memdesc:a54c9c25bb482d54e39128b0b114c3e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current information level setting.  <br /></td></tr>
+<tr class="separator:a54c9c25bb482d54e39128b0b114c3e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad07946412886e40ea88f04a2b59f45b1" id="r_ad07946412886e40ea88f04a2b59f45b1"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad07946412886e40ea88f04a2b59f45b1">getSections_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
+<tr class="memdesc:ad07946412886e40ea88f04a2b59f45b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'sections' and returns the actual section name(s) via the IString 'dst'.  <br /></td></tr>
+<tr class="separator:ad07946412886e40ea88f04a2b59f45b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a137e6b9104ffceda2e0cb4b8f177b794" id="r_a137e6b9104ffceda2e0cb4b8f177b794"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a137e6b9104ffceda2e0cb4b8f177b794">getThreadFilters_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
+<tr class="memdesc:a137e6b9104ffceda2e0cb4b8f177b794"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'thread filters' and returns the actual thread name(s) via the IString 'dst'.  <br /></td></tr>
+<tr class="separator:a137e6b9104ffceda2e0cb4b8f177b794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28af034c29ac49e67726885529d9500a" id="r_a28af034c29ac49e67726885529d9500a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28af034c29ac49e67726885529d9500a">isEnabled_</a> ()</td></tr>
+<tr class="memdesc:a28af034c29ac49e67726885529d9500a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if tracing is enabled, i.e.  <br /></td></tr>
+<tr class="separator:a28af034c29ac49e67726885529d9500a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93371ad21b12a39aca3fde1b78c1ff6b" id="r_a93371ad21b12a39aca3fde1b78c1ff6b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93371ad21b12a39aca3fde1b78c1ff6b">isSectionEnabled_</a> (const char *section)</td></tr>
+<tr class="memdesc:a93371ad21b12a39aca3fde1b78c1ff6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if tracing is enabled AND the specified 'section' has been enabled.  <br /></td></tr>
+<tr class="separator:a93371ad21b12a39aca3fde1b78c1ff6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac48c673261fdac8addf8c3067530d5e8" id="r_ac48c673261fdac8addf8c3067530d5e8"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac48c673261fdac8addf8c3067530d5e8">passedThreadFilter_</a> ()</td></tr>
 <tr class="memdesc:ac48c673261fdac8addf8c3067530d5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the thread filter has been set and the current thread's name 'passes' the thread filter check, i.e.  <br /></td></tr>
 <tr class="separator:ac48c673261fdac8addf8c3067530d5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,29 +127,40 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a2d6a4abdeeac273a6a5b1d31d45c4c98" id="r_a2d6a4abdeeac273a6a5b1d31d45c4c98"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d6a4abdeeac273a6a5b1d31d45c4c98">revert_</a> () noexcept</td></tr>
 <tr class="memdesc:a2d6a4abdeeac273a6a5b1d31d45c4c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to revert the trace output to its default output destination/stream/media.  <br /></td></tr>
 <tr class="separator:a2d6a4abdeeac273a6a5b1d31d45c4c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8094bffd737f25c55cbe4662eb5ef195" id="r_a8094bffd737f25c55cbe4662eb5ef195"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8094bffd737f25c55cbe4662eb5ef195">getDefaultOutputStream_</a> () noexcept</td></tr>
-<tr class="memdesc:a8094bffd737f25c55cbe4662eb5ef195"><td class="mdescLeft">&#160;</td><td class="mdescRight">This COMPONENT Scoped method provides the Output stream to the <a class="el" href="class_kit_1_1_system_1_1_trace.html" title="This concrete class provide a &#39;printf&#39; tracing mechanism.">Trace</a> Engine.  <br /></td></tr>
-<tr class="separator:a8094bffd737f25c55cbe4662eb5ef195"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4c184cf1729985ba13e6e4b76fed0ef" id="r_ae4c184cf1729985ba13e6e4b76fed0ef"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4c184cf1729985ba13e6e4b76fed0ef">setInfoLevel_</a> (<a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a> newLevel)</td></tr>
+<tr class="memdesc:ae4c184cf1729985ba13e6e4b76fed0ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets the information level for the trace messages.  <br /></td></tr>
+<tr class="separator:ae4c184cf1729985ba13e6e4b76fed0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d930b9a0b012797c0cf9d621edf54b" id="r_a54d930b9a0b012797c0cf9d621edf54b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54d930b9a0b012797c0cf9d621edf54b">setThreadFilter_</a> (const char *threadName1, const char *threadName2=nullptr, const char *threadName3=nullptr, const char *threadName4=nullptr)</td></tr>
+<tr class="memdesc:a54d930b9a0b012797c0cf9d621edf54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method applies a filter by thread name when generating output, i.e.  <br /></td></tr>
+<tr class="separator:a54d930b9a0b012797c0cf9d621edf54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e3694232faf449080fac3b8cd268a9" id="r_a29e3694232faf449080fac3b8cd268a9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29e3694232faf449080fac3b8cd268a9">traceLocation_</a> (const char *section, const char *filename, int linenum, const char *funcname)</td></tr>
+<tr class="memdesc:a29e3694232faf449080fac3b8cd268a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to trace the 'location' for general purpose trace messages.  <br /></td></tr>
+<tr class="separator:a29e3694232faf449080fac3b8cd268a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2553f2c0fade649690eb9c85c9e53f1" id="r_ae2553f2c0fade649690eb9c85c9e53f1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2553f2c0fade649690eb9c85c9e53f1">traceUserMsg_</a> (const char *format,...)</td></tr>
+<tr class="memdesc:ae2553f2c0fade649690eb9c85c9e53f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to generate general purpose trace messages.  <br /></td></tr>
+<tr class="separator:ae2553f2c0fade649690eb9c85c9e53f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a5d08568d2bff230a919537a087e5b5aa" id="r_a5d08568d2bff230a919537a087e5b5aa"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d08568d2bff230a919537a087e5b5aa">m_filename</a></td></tr>
 <tr class="memdesc:a5d08568d2bff230a919537a087e5b5aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caches trace info for exit message.  <br /></td></tr>
 <tr class="separator:a5d08568d2bff230a919537a087e5b5aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a066e4c0f236327e108b62eec9542f10f" id="r_a066e4c0f236327e108b62eec9542f10f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a066e4c0f236327e108b62eec9542f10f">m_linenum</a></td></tr>
-<tr class="memdesc:a066e4c0f236327e108b62eec9542f10f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caches trace info for exit message.  <br /></td></tr>
-<tr class="separator:a066e4c0f236327e108b62eec9542f10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1474072b9aa60eccb4f986004b48bc1b" id="r_a1474072b9aa60eccb4f986004b48bc1b"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1474072b9aa60eccb4f986004b48bc1b">m_funcname</a></td></tr>
 <tr class="memdesc:a1474072b9aa60eccb4f986004b48bc1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caches trace info for exit message.  <br /></td></tr>
 <tr class="separator:a1474072b9aa60eccb4f986004b48bc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0fce2ae5cf1bb8a76670a6d171eb544" id="r_ab0fce2ae5cf1bb8a76670a6d171eb544"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0fce2ae5cf1bb8a76670a6d171eb544">m_section</a></td></tr>
-<tr class="memdesc:ab0fce2ae5cf1bb8a76670a6d171eb544"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caches trace info for exit message.  <br /></td></tr>
-<tr class="separator:ab0fce2ae5cf1bb8a76670a6d171eb544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066e4c0f236327e108b62eec9542f10f" id="r_a066e4c0f236327e108b62eec9542f10f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a066e4c0f236327e108b62eec9542f10f">m_linenum</a></td></tr>
+<tr class="memdesc:a066e4c0f236327e108b62eec9542f10f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caches trace info for exit message.  <br /></td></tr>
+<tr class="separator:a066e4c0f236327e108b62eec9542f10f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61cdc78e2d8b112ccc401d3eeeb2d842" id="r_a61cdc78e2d8b112ccc401d3eeeb2d842"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61cdc78e2d8b112ccc401d3eeeb2d842">m_scope</a></td></tr>
 <tr class="memdesc:a61cdc78e2d8b112ccc401d3eeeb2d842"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caches trace info for exit message.  <br /></td></tr>
 <tr class="separator:a61cdc78e2d8b112ccc401d3eeeb2d842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0fce2ae5cf1bb8a76670a6d171eb544" id="r_ab0fce2ae5cf1bb8a76670a6d171eb544"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0fce2ae5cf1bb8a76670a6d171eb544">m_section</a></td></tr>
+<tr class="memdesc:ab0fce2ae5cf1bb8a76670a6d171eb544"><td class="mdescLeft">&#160;</td><td class="mdescRight">Caches trace info for exit message.  <br /></td></tr>
+<tr class="separator:ab0fce2ae5cf1bb8a76670a6d171eb544"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This concrete class provide a 'printf' tracing mechanism. </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="add80da6b96634d485121bc2fe7113f7e" name="add80da6b96634d485121bc2fe7113f7e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add80da6b96634d485121bc2fe7113f7e">&#9670;&#160;</a></span>InfoLevel_T</h2>
 
@@ -926,7 +926,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

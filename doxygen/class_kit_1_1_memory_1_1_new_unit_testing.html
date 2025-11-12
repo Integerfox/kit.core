@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,21 +46,16 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_memory_1_1_new_unit_testing-members.html">List of all members</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="class_kit_1_1_memory_1_1_new_unit_testing-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Memory::NewUnitTesting Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This class provides methods to access the unit testing support for overriding the global new/delete operators.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class provides methods to access the unit testing support for overriding the global new/delete operators. </p>
-<p>The main purpose is to be able to trigger memory allocation failures. It also provides (very) limited memory leak detection.</p>
-<p>Note: About memory leak detection - it DOESN'T really work with the Catch2 framework. This is because Catch2 does a lot of dynamic memory allocation while the test is running - which means that Catch2's new/delete are all mixed in with UUT's new/deletes :(.</p>
-<p>NOTE: THIS INTERFACE IS <b>NOT</b> THREAD SAFE!! </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_new_unit_testing_8h_source.html">NewUnitTesting.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -71,23 +66,28 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:adcef0110c4f0798027ab43bf30d5e08f" id="r_adcef0110c4f0798027ab43bf30d5e08f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adcef0110c4f0798027ab43bf30d5e08f">clearStats</a> () noexcept</td></tr>
+<tr class="memdesc:adcef0110c4f0798027ab43bf30d5e08f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method unconditionally clears the stats.  <br /></td></tr>
+<tr class="separator:adcef0110c4f0798027ab43bf30d5e08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f79cc0948244672a51b255a21bafe91" id="r_a7f79cc0948244672a51b255a21bafe91"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f79cc0948244672a51b255a21bafe91">disable</a> () noexcept</td></tr>
 <tr class="memdesc:a7f79cc0948244672a51b255a21bafe91"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method will cause the next call(s) to 'new' to return a null pointer.  <br /></td></tr>
 <tr class="separator:a7f79cc0948244672a51b255a21bafe91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76a836a8aa7519032e8f628b30e15c78" id="r_a76a836a8aa7519032e8f628b30e15c78"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76a836a8aa7519032e8f628b30e15c78">enable</a> () noexcept</td></tr>
 <tr class="memdesc:a76a836a8aa7519032e8f628b30e15c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'undos' the <a class="el" href="#a7f79cc0948244672a51b255a21bafe91" title="This method will cause the next call(s) to &#39;new&#39; to return a null pointer.">disable()</a> call, i.e.  <br /></td></tr>
 <tr class="separator:a76a836a8aa7519032e8f628b30e15c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bdf4fdf213a1baee8b10f76c229f9ec" id="r_a8bdf4fdf213a1baee8b10f76c229f9ec"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8bdf4fdf213a1baee8b10f76c229f9ec">setNewDeleteDelta</a> (long delta, bool ignoreDelta=false) noexcept</td></tr>
-<tr class="memdesc:a8bdf4fdf213a1baee8b10f76c229f9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to set the 'expected' delta between the number of calls to new and delete.  <br /></td></tr>
-<tr class="separator:a8bdf4fdf213a1baee8b10f76c229f9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29a949e137ac4470a926107038173428" id="r_a29a949e137ac4470a926107038173428"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29a949e137ac4470a926107038173428">getStats</a> (<a class="el" href="#struct_kit_1_1_memory_1_1_new_unit_testing_1_1_stats">Stats</a> &amp;stats, bool resetStats=true) noexcept</td></tr>
 <tr class="memdesc:a29a949e137ac4470a926107038173428"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns and optionally clears the metrics collected with respect to Test heap.  <br /></td></tr>
 <tr class="separator:a29a949e137ac4470a926107038173428"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcef0110c4f0798027ab43bf30d5e08f" id="r_adcef0110c4f0798027ab43bf30d5e08f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adcef0110c4f0798027ab43bf30d5e08f">clearStats</a> () noexcept</td></tr>
-<tr class="memdesc:adcef0110c4f0798027ab43bf30d5e08f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method unconditionally clears the stats.  <br /></td></tr>
-<tr class="separator:adcef0110c4f0798027ab43bf30d5e08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bdf4fdf213a1baee8b10f76c229f9ec" id="r_a8bdf4fdf213a1baee8b10f76c229f9ec"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8bdf4fdf213a1baee8b10f76c229f9ec">setNewDeleteDelta</a> (long delta, bool ignoreDelta=false) noexcept</td></tr>
+<tr class="memdesc:a8bdf4fdf213a1baee8b10f76c229f9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to set the 'expected' delta between the number of calls to new and delete.  <br /></td></tr>
+<tr class="separator:a8bdf4fdf213a1baee8b10f76c229f9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class provides methods to access the unit testing support for overriding the global new/delete operators. </p>
+<p>The main purpose is to be able to trigger memory allocation failures. It also provides (very) limited memory leak detection.</p>
+<p>Note: About memory leak detection - it DOESN'T really work with the Catch2 framework. This is because Catch2 does a lot of dynamic memory allocation while the test is running - which means that Catch2's new/delete are all mixed in with UUT's new/deletes :(.</p>
+<p>NOTE: THIS INTERFACE IS <b>NOT</b> THREAD SAFE!! </p>
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
 <a name="struct_kit_1_1_memory_1_1_new_unit_testing_1_1_stats" id="struct_kit_1_1_memory_1_1_new_unit_testing_1_1_stats"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#struct_kit_1_1_memory_1_1_new_unit_testing_1_1_stats">&#9670;&#160;</a></span>Kit::Memory::NewUnitTesting::Stats</h2>
 
@@ -289,7 +289,7 @@ m_numNewCallsFailed</td>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

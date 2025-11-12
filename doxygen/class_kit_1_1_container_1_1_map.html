@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,21 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_container_1_1_map-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_container_1_1_map-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::Map&lt; ITEM &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This template class implements an <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> using an AVL Binary tree (i.e.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class ITEM&gt;<br />
-class Kit::Container::Map&lt; ITEM &gt;</div><p>This template class implements an <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> using an AVL Binary tree (i.e. </p>
-<p>a sorted list with fast searches, inserts, and deletes).</p>
-<p>NOTE: The MAP does not allow entries with duplicate key value (i.e. the <a class="el" href="#ae0c91873dfb707b66f4944085a3c9dfe" title="Inserts an item into the tree.">insert()</a> method will fail when attempting to add an item with a duplicate key value as existing item in the MAP).</p>
-<p>Template ARGS: ITEM - Data type of the object stored in the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a>. 'ITEM' must be a sub-class of the <a class="el" href="class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ...">Kit::Container::MapItem</a> base class. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_map_8h_source.html">Map.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -71,47 +65,53 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a635f282f630f61af17005178a5cd88c5" id="r_a635f282f630f61af17005178a5cd88c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a635f282f630f61af17005178a5cd88c5">Map</a> (const char *ignoreThisParameter_usedToCreateAUniqueConstructor) noexcept</td></tr>
 <tr class="memdesc:a635f282f630f61af17005178a5cd88c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a special constructor for when the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> is statically declared (i.e.  <br /></td></tr>
 <tr class="separator:a635f282f630f61af17005178a5cd88c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0c91873dfb707b66f4944085a3c9dfe" id="r_ae0c91873dfb707b66f4944085a3c9dfe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0c91873dfb707b66f4944085a3c9dfe">insert</a> (ITEM &amp;node) noexcept</td></tr>
-<tr class="memdesc:ae0c91873dfb707b66f4944085a3c9dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts an item into the tree.  <br /></td></tr>
-<tr class="separator:ae0c91873dfb707b66f4944085a3c9dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a094a0119c30f6af747ddb8b85689f575" id="r_a094a0119c30f6af747ddb8b85689f575"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a094a0119c30f6af747ddb8b85689f575">remove</a> (const <a class="el" href="class_kit_1_1_container_1_1_key.html">Key</a> &amp;keyOfItemToDelete) noexcept</td></tr>
-<tr class="memdesc:a094a0119c30f6af747ddb8b85689f575"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the node (if it exists) that has the matching key.  <br /></td></tr>
-<tr class="separator:a094a0119c30f6af747ddb8b85689f575"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3828893954f82f677a91e78029e3d0a" id="r_ad3828893954f82f677a91e78029e3d0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3828893954f82f677a91e78029e3d0a">removeItem</a> (ITEM &amp;node) noexcept</td></tr>
-<tr class="memdesc:ad3828893954f82f677a91e78029e3d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the specified item from the tree.  <br /></td></tr>
-<tr class="separator:ad3828893954f82f677a91e78029e3d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a528ada2aa19165914b0803381a8df46f" id="r_a528ada2aa19165914b0803381a8df46f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a528ada2aa19165914b0803381a8df46f">clearTheMap</a> ()</td></tr>
+<tr class="memdesc:a528ada2aa19165914b0803381a8df46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empties the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a>. All references to the item(s) in the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> are lost.  <br /></td></tr>
+<tr class="separator:a528ada2aa19165914b0803381a8df46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c8a6f02127b22229fe3eeea4b18f9cd" id="r_a9c8a6f02127b22229fe3eeea4b18f9cd"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c8a6f02127b22229fe3eeea4b18f9cd">find</a> (const <a class="el" href="class_kit_1_1_container_1_1_key.html">Key</a> &amp;keyToFind) const noexcept</td></tr>
 <tr class="memdesc:a9c8a6f02127b22229fe3eeea4b18f9cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for a item with a matching key.  <br /></td></tr>
 <tr class="separator:a9c8a6f02127b22229fe3eeea4b18f9cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91a01651eedcb49eee1970700ea81b8a" id="r_a91a01651eedcb49eee1970700ea81b8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a91a01651eedcb49eee1970700ea81b8a">isInMap</a> (ITEM &amp;node) const noexcept</td></tr>
-<tr class="memdesc:a91a01651eedcb49eee1970700ea81b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified item is in the map; else false is returned.  <br /></td></tr>
-<tr class="separator:a91a01651eedcb49eee1970700ea81b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12927d7316c3a111b5a7d4719a1e09bb" id="r_a12927d7316c3a111b5a7d4719a1e09bb"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12927d7316c3a111b5a7d4719a1e09bb">first</a> () const noexcept</td></tr>
 <tr class="memdesc:a12927d7316c3a111b5a7d4719a1e09bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the first item in the tree. The item remains in the tree. Returns 0 if tree is empty.  <br /></td></tr>
 <tr class="separator:a12927d7316c3a111b5a7d4719a1e09bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b0c9077626500dd5ed6076341492dfa" id="r_a7b0c9077626500dd5ed6076341492dfa"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b0c9077626500dd5ed6076341492dfa">last</a> () const noexcept</td></tr>
-<tr class="memdesc:a7b0c9077626500dd5ed6076341492dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last item in the tree. The item remains in the tree. Returns 0 if tree is empty.  <br /></td></tr>
-<tr class="separator:a7b0c9077626500dd5ed6076341492dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa76c8052a7a5bb2aae06e44ff4db9b36" id="r_aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa76c8052a7a5bb2aae06e44ff4db9b36">next</a> (ITEM &amp;current) const noexcept</td></tr>
-<tr class="memdesc:aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next item in the tree. The item remains in the tree. Returns 0 if at the end-of-tree.  <br /></td></tr>
-<tr class="separator:aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c6277831a0e1fb424e08ec6787f052c" id="r_a0c6277831a0e1fb424e08ec6787f052c"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c6277831a0e1fb424e08ec6787f052c">previous</a> (ITEM &amp;current) const noexcept</td></tr>
-<tr class="memdesc:a0c6277831a0e1fb424e08ec6787f052c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the previous item in the tree. The item remains in the tree. Returns 0 if at the start-of-tree.  <br /></td></tr>
-<tr class="separator:a0c6277831a0e1fb424e08ec6787f052c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8d3a257ce47fa7dde3ede74c855f91a" id="r_ac8d3a257ce47fa7dde3ede74c855f91a"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac8d3a257ce47fa7dde3ede74c855f91a">getFirst</a> () noexcept</td></tr>
 <tr class="memdesc:ac8d3a257ce47fa7dde3ede74c855f91a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the list.  <br /></td></tr>
 <tr class="separator:ac8d3a257ce47fa7dde3ede74c855f91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ca8258966335f569732dce3314bd6ed" id="r_a3ca8258966335f569732dce3314bd6ed"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ca8258966335f569732dce3314bd6ed">getLast</a> () noexcept</td></tr>
 <tr class="memdesc:a3ca8258966335f569732dce3314bd6ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the last item in the list.  <br /></td></tr>
 <tr class="separator:a3ca8258966335f569732dce3314bd6ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0c91873dfb707b66f4944085a3c9dfe" id="r_ae0c91873dfb707b66f4944085a3c9dfe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0c91873dfb707b66f4944085a3c9dfe">insert</a> (ITEM &amp;node) noexcept</td></tr>
+<tr class="memdesc:ae0c91873dfb707b66f4944085a3c9dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts an item into the tree.  <br /></td></tr>
+<tr class="separator:ae0c91873dfb707b66f4944085a3c9dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91a01651eedcb49eee1970700ea81b8a" id="r_a91a01651eedcb49eee1970700ea81b8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a91a01651eedcb49eee1970700ea81b8a">isInMap</a> (ITEM &amp;node) const noexcept</td></tr>
+<tr class="memdesc:a91a01651eedcb49eee1970700ea81b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified item is in the map; else false is returned.  <br /></td></tr>
+<tr class="separator:a91a01651eedcb49eee1970700ea81b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b0c9077626500dd5ed6076341492dfa" id="r_a7b0c9077626500dd5ed6076341492dfa"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b0c9077626500dd5ed6076341492dfa">last</a> () const noexcept</td></tr>
+<tr class="memdesc:a7b0c9077626500dd5ed6076341492dfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the last item in the tree. The item remains in the tree. Returns 0 if tree is empty.  <br /></td></tr>
+<tr class="separator:a7b0c9077626500dd5ed6076341492dfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f2af8c48e9076e01a004302eb7d841a" id="r_a5f2af8c48e9076e01a004302eb7d841a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f2af8c48e9076e01a004302eb7d841a">move</a> (<a class="el" href="class_kit_1_1_container_1_1_map.html">Map</a>&lt; ITEM &gt; &amp;dst)</td></tr>
 <tr class="memdesc:a5f2af8c48e9076e01a004302eb7d841a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the content of the this <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> to the specified <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a>.  <br /></td></tr>
 <tr class="separator:a5f2af8c48e9076e01a004302eb7d841a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a528ada2aa19165914b0803381a8df46f" id="r_a528ada2aa19165914b0803381a8df46f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a528ada2aa19165914b0803381a8df46f">clearTheMap</a> ()</td></tr>
-<tr class="memdesc:a528ada2aa19165914b0803381a8df46f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empties the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a>. All references to the item(s) in the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> are lost.  <br /></td></tr>
-<tr class="separator:a528ada2aa19165914b0803381a8df46f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76c8052a7a5bb2aae06e44ff4db9b36" id="r_aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa76c8052a7a5bb2aae06e44ff4db9b36">next</a> (ITEM &amp;current) const noexcept</td></tr>
+<tr class="memdesc:aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the next item in the tree. The item remains in the tree. Returns 0 if at the end-of-tree.  <br /></td></tr>
+<tr class="separator:aa76c8052a7a5bb2aae06e44ff4db9b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6277831a0e1fb424e08ec6787f052c" id="r_a0c6277831a0e1fb424e08ec6787f052c"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c6277831a0e1fb424e08ec6787f052c">previous</a> (ITEM &amp;current) const noexcept</td></tr>
+<tr class="memdesc:a0c6277831a0e1fb424e08ec6787f052c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the previous item in the tree. The item remains in the tree. Returns 0 if at the start-of-tree.  <br /></td></tr>
+<tr class="separator:a0c6277831a0e1fb424e08ec6787f052c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a094a0119c30f6af747ddb8b85689f575" id="r_a094a0119c30f6af747ddb8b85689f575"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a094a0119c30f6af747ddb8b85689f575">remove</a> (const <a class="el" href="class_kit_1_1_container_1_1_key.html">Key</a> &amp;keyOfItemToDelete) noexcept</td></tr>
+<tr class="memdesc:a094a0119c30f6af747ddb8b85689f575"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the node (if it exists) that has the matching key.  <br /></td></tr>
+<tr class="separator:a094a0119c30f6af747ddb8b85689f575"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3828893954f82f677a91e78029e3d0a" id="r_ad3828893954f82f677a91e78029e3d0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3828893954f82f677a91e78029e3d0a">removeItem</a> (ITEM &amp;node) noexcept</td></tr>
+<tr class="memdesc:ad3828893954f82f677a91e78029e3d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the specified item from the tree.  <br /></td></tr>
+<tr class="separator:ad3828893954f82f677a91e78029e3d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ITEM&gt;<br />
+class Kit::Container::Map&lt; ITEM &gt;</div><p>This template class implements an <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> using an AVL Binary tree (i.e. </p>
+<p>a sorted list with fast searches, inserts, and deletes).</p>
+<p>NOTE: The MAP does not allow entries with duplicate key value (i.e. the <a class="el" href="#ae0c91873dfb707b66f4944085a3c9dfe" title="Inserts an item into the tree.">insert()</a> method will fail when attempting to add an item with a duplicate key value as existing item in the MAP).</p>
+<p>Template ARGS: ITEM - Data type of the object stored in the <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a>. 'ITEM' must be a sub-class of the <a class="el" href="class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ...">Kit::Container::MapItem</a> base class. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aafe86b0e1adf4ca20489cbf800ce423d" name="aafe86b0e1adf4ca20489cbf800ce423d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aafe86b0e1adf4ca20489cbf800ce423d">&#9670;&#160;</a></span>Map() <span class="overload">[1/2]</span></h2>
 
@@ -561,7 +561,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,25 +46,21 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_thread-members.html">List of all members</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
-<a href="#friends">Friends</a>  </div>
+<a href="#friends">Friends</a> &#124;
+<a href="class_kit_1_1_system_1_1_thread-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::Thread Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This mostly abstract class defines the operations that can be performed on a thread.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This mostly abstract class defines the operations that can be performed on a thread. </p>
-<p>NOTE: The thread contains a built in counting semaphore that is usable by the developer/application. This semaphore can be used to assist in implementing inter-thread-communications and/or ISR-to-thread communications.</p>
-<p>NOTE: There are default implementations provided for several member and class methods. They are contained in the Thread.cpp file in this directory. If your Operating <a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">System</a> port requires a different implementation, then omit compiling the Thread.cpp file (in this directory) and provided your own implementation. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_thread_8h_source.html">Thread.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::System::Thread:</div>
@@ -89,31 +85,31 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aabe2e27929d2a1d1e791da89d94fcf89" id="r_aabe2e27929d2a1d1e791da89d94fcf89"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabe2e27929d2a1d1e791da89d94fcf89">getName</a> () const noexcept=0</td></tr>
-<tr class="memdesc:aabe2e27929d2a1d1e791da89d94fcf89"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the name (null terminated string) of the current thread.  <br /></td></tr>
-<tr class="separator:aabe2e27929d2a1d1e791da89d94fcf89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac296754eef49c011aa93dc8ce1b33907" id="r_ac296754eef49c011aa93dc8ce1b33907"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_thread_8h.html#abb6292149f07f23128aed1bffa1e727d">KitSystemThreadID_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac296754eef49c011aa93dc8ce1b33907">getId</a> () const noexcept</td></tr>
-<tr class="memdesc:ac296754eef49c011aa93dc8ce1b33907"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the task's unique identifier.  <br /></td></tr>
-<tr class="separator:ac296754eef49c011aa93dc8ce1b33907"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad10f6fbd404ef1f17fffc38f0cffa380" id="r_ad10f6fbd404ef1f17fffc38f0cffa380"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad10f6fbd404ef1f17fffc38f0cffa380">isActive</a> () const noexcept</td></tr>
-<tr class="memdesc:ad10f6fbd404ef1f17fffc38f0cffa380"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the 'executing' state of the thread.  <br /></td></tr>
-<tr class="separator:ad10f6fbd404ef1f17fffc38f0cffa380"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a848c3502bd34a4274443dc250e11419c" id="r_a848c3502bd34a4274443dc250e11419c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a848c3502bd34a4274443dc250e11419c">getRunnable</a> () const noexcept</td></tr>
-<tr class="memdesc:a848c3502bd34a4274443dc250e11419c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a reference to the thread's <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob...">IRunnable</a> object NOTE: Default implementation is provided in the Thread.cpp file.  <br /></td></tr>
-<tr class="separator:a848c3502bd34a4274443dc250e11419c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace6b223060cb85b5d9d03111a83a4b23" id="r_ace6b223060cb85b5d9d03111a83a4b23"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace6b223060cb85b5d9d03111a83a4b23">~Thread</a> () noexcept=default</td></tr>
 <tr class="memdesc:ace6b223060cb85b5d9d03111a83a4b23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:ace6b223060cb85b5d9d03111a83a4b23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac296754eef49c011aa93dc8ce1b33907" id="r_ac296754eef49c011aa93dc8ce1b33907"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_thread_8h.html#abb6292149f07f23128aed1bffa1e727d">KitSystemThreadID_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac296754eef49c011aa93dc8ce1b33907">getId</a> () const noexcept</td></tr>
+<tr class="memdesc:ac296754eef49c011aa93dc8ce1b33907"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the task's unique identifier.  <br /></td></tr>
+<tr class="separator:ac296754eef49c011aa93dc8ce1b33907"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabe2e27929d2a1d1e791da89d94fcf89" id="r_aabe2e27929d2a1d1e791da89d94fcf89"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabe2e27929d2a1d1e791da89d94fcf89">getName</a> () const noexcept=0</td></tr>
+<tr class="memdesc:aabe2e27929d2a1d1e791da89d94fcf89"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the name (null terminated string) of the current thread.  <br /></td></tr>
+<tr class="separator:aabe2e27929d2a1d1e791da89d94fcf89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a848c3502bd34a4274443dc250e11419c" id="r_a848c3502bd34a4274443dc250e11419c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a848c3502bd34a4274443dc250e11419c">getRunnable</a> () const noexcept</td></tr>
+<tr class="memdesc:a848c3502bd34a4274443dc250e11419c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a reference to the thread's <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob...">IRunnable</a> object NOTE: Default implementation is provided in the Thread.cpp file.  <br /></td></tr>
+<tr class="separator:a848c3502bd34a4274443dc250e11419c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad10f6fbd404ef1f17fffc38f0cffa380" id="r_ad10f6fbd404ef1f17fffc38f0cffa380"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad10f6fbd404ef1f17fffc38f0cffa380">isActive</a> () const noexcept</td></tr>
+<tr class="memdesc:ad10f6fbd404ef1f17fffc38f0cffa380"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the 'executing' state of the thread.  <br /></td></tr>
+<tr class="separator:ad10f6fbd404ef1f17fffc38f0cffa380"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_system_1_1_i_signable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_system_1_1_i_signable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a></td></tr>
+<tr class="memitem:a2bc4d6efa5aa693c6e560bb0effc252a inherit pub_methods_class_kit_1_1_system_1_1_i_signable" id="r_a2bc4d6efa5aa693c6e560bb0effc252a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_i_signable.html#a2bc4d6efa5aa693c6e560bb0effc252a">~ISignable</a> ()=default</td></tr>
+<tr class="memdesc:a2bc4d6efa5aa693c6e560bb0effc252a inherit pub_methods_class_kit_1_1_system_1_1_i_signable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a2bc4d6efa5aa693c6e560bb0effc252a inherit pub_methods_class_kit_1_1_system_1_1_i_signable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72c130b85d33277148381e554908ffb6 inherit pub_methods_class_kit_1_1_system_1_1_i_signable" id="r_a72c130b85d33277148381e554908ffb6"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_i_signable.html#a72c130b85d33277148381e554908ffb6">signal</a> () noexcept=0</td></tr>
 <tr class="memdesc:a72c130b85d33277148381e554908ffb6 inherit pub_methods_class_kit_1_1_system_1_1_i_signable"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called by client to cause the server to become unblock and ready to run.  <br /></td></tr>
 <tr class="separator:a72c130b85d33277148381e554908ffb6 inherit pub_methods_class_kit_1_1_system_1_1_i_signable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4e2c4865999347547d60b525b2b9d1a inherit pub_methods_class_kit_1_1_system_1_1_i_signable" id="r_af4e2c4865999347547d60b525b2b9d1a"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_i_signable.html#af4e2c4865999347547d60b525b2b9d1a">su_signal</a> () noexcept=0</td></tr>
 <tr class="memdesc:af4e2c4865999347547d60b525b2b9d1a inherit pub_methods_class_kit_1_1_system_1_1_i_signable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="class_kit_1_1_system_1_1_i_signable.html#a72c130b85d33277148381e554908ffb6" title="This method is called by client to cause the server to become unblock and ready to run.">signal()</a>, EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
 <tr class="separator:af4e2c4865999347547d60b525b2b9d1a inherit pub_methods_class_kit_1_1_system_1_1_i_signable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bc4d6efa5aa693c6e560bb0effc252a inherit pub_methods_class_kit_1_1_system_1_1_i_signable" id="r_a2bc4d6efa5aa693c6e560bb0effc252a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_i_signable.html#a2bc4d6efa5aa693c6e560bb0effc252a">~ISignable</a> ()=default</td></tr>
-<tr class="memdesc:a2bc4d6efa5aa693c6e560bb0effc252a inherit pub_methods_class_kit_1_1_system_1_1_i_signable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
-<tr class="separator:a2bc4d6efa5aa693c6e560bb0effc252a inherit pub_methods_class_kit_1_1_system_1_1_i_signable"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_container_1_1_item"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_container_1_1_item')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_container_1_1_item.html">Kit::Container::Item</a></td></tr>
 <tr class="memitem:a629af4bb1ce1c34f7d72437e55eb69df inherit pub_methods_class_kit_1_1_container_1_1_item" id="r_a629af4bb1ce1c34f7d72437e55eb69df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">insert_</a> (void *newContainerPtr) noexcept</td></tr>
 <tr class="memdesc:a629af4bb1ce1c34f7d72437e55eb69df inherit pub_methods_class_kit_1_1_container_1_1_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to trap when inserting an item in multiple containers.  <br /></td></tr>
@@ -127,42 +123,42 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a53d9bfee3825dc5a228ecd17a2922da1" id="r_a53d9bfee3825dc5a228ecd17a2922da1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1">getCurrent</a> () noexcept</td></tr>
-<tr class="memdesc:a53d9bfee3825dc5a228ecd17a2922da1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a reference to the currently executing thread.  <br /></td></tr>
-<tr class="separator:a53d9bfee3825dc5a228ecd17a2922da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a228748591aa2986620c3c50c3f820fc9" id="r_a228748591aa2986620c3c50c3f820fc9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a228748591aa2986620c3c50c3f820fc9">tryGetCurrent</a> () noexcept</td></tr>
-<tr class="memdesc:a228748591aa2986620c3c50c3f820fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Special version of <a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1" title="This method returns a reference to the currently executing thread.">getCurrent()</a>.  <br /></td></tr>
-<tr class="separator:a228748591aa2986620c3c50c3f820fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6aad4e1a48414c26ecb60b2c1a72ee1e" id="r_a6aad4e1a48414c26ecb60b2c1a72ee1e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6aad4e1a48414c26ecb60b2c1a72ee1e">wait</a> () noexcept</td></tr>
-<tr class="memdesc:a6aad4e1a48414c26ecb60b2c1a72ee1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method causes the CURRENT thread to wait until its 'thread semaphore' is signal/set.  <br /></td></tr>
-<tr class="separator:a6aad4e1a48414c26ecb60b2c1a72ee1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac97c1ed8137e886db9571d072c5062ea" id="r_ac97c1ed8137e886db9571d072c5062ea"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac97c1ed8137e886db9571d072c5062ea">tryWait</a> () noexcept</td></tr>
-<tr class="memdesc:ac97c1ed8137e886db9571d072c5062ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is similar to <a class="el" href="class_kit_1_1_system_1_1_semaphore.html#a8fc1bbc6c339f4cd50048115c772245b" title="This method is the same as wait(), except that if the semaphore count is zero, the method returns imm...">Semaphore::tryWait()</a>, except that it operates on the thread semaphore.  <br /></td></tr>
-<tr class="separator:ac97c1ed8137e886db9571d072c5062ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a511d855ba644ed9e2328ec1a69d07f93" id="r_a511d855ba644ed9e2328ec1a69d07f93"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a511d855ba644ed9e2328ec1a69d07f93">timedWait</a> (uint32_t timeoutInMsec) noexcept</td></tr>
-<tr class="memdesc:a511d855ba644ed9e2328ec1a69d07f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a6aad4e1a48414c26ecb60b2c1a72ee1e" title="This method causes the CURRENT thread to wait until its &#39;thread semaphore&#39; is signal/set.">wait()</a>, except the call will return after 'timeoutInMsec' has expired without the thread being signaled.  <br /></td></tr>
-<tr class="separator:a511d855ba644ed9e2328ec1a69d07f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9edca7d20f7e88d28b4119557ba256a7" id="r_a9edca7d20f7e88d28b4119557ba256a7"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9edca7d20f7e88d28b4119557ba256a7">isActiveThread</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> *threadPtr) noexcept</td></tr>
-<tr class="memdesc:a9edca7d20f7e88d28b4119557ba256a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is the similar to the <a class="el" href="#ad10f6fbd404ef1f17fffc38f0cffa380" title="This method returns the &#39;executing&#39; state of the thread.">isActive()</a> method, but it operates on the specified thread pointer.  <br /></td></tr>
-<tr class="separator:a9edca7d20f7e88d28b4119557ba256a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2142767b3bc83904ae0cf31ea21424df" id="r_a2142767b3bc83904ae0cf31ea21424df"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2142767b3bc83904ae0cf31ea21424df">myName</a> () noexcept</td></tr>
-<tr class="memdesc:a2142767b3bc83904ae0cf31ea21424df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name for the current thread.  <br /></td></tr>
-<tr class="separator:a2142767b3bc83904ae0cf31ea21424df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca3da5e4d26d028ffb85b078bcd6d880" id="r_aca3da5e4d26d028ffb85b078bcd6d880"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_thread_8h.html#abb6292149f07f23128aed1bffa1e727d">KitSystemThreadID_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca3da5e4d26d028ffb85b078bcd6d880">myId</a> () noexcept</td></tr>
-<tr class="memdesc:aca3da5e4d26d028ffb85b078bcd6d880"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ID for the current thread.  <br /></td></tr>
-<tr class="separator:aca3da5e4d26d028ffb85b078bcd6d880"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab38ff506973eaecdfb590f35fffe16c2" id="r_ab38ff506973eaecdfb590f35fffe16c2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab38ff506973eaecdfb590f35fffe16c2">myRunnable</a> () noexcept</td></tr>
-<tr class="memdesc:ab38ff506973eaecdfb590f35fffe16c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a reference to the current thread' runnable instance.  <br /></td></tr>
-<tr class="separator:ab38ff506973eaecdfb590f35fffe16c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a403ad209f47796a1651551056e11d345" id="r_a403ad209f47796a1651551056e11d345"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a403ad209f47796a1651551056e11d345">traverse</a> (<a class="el" href="class_kit_1_1_system_1_1_thread_1_1_i_traverser.html">Thread::ITraverser</a> &amp;client) noexcept</td></tr>
-<tr class="memdesc:a403ad209f47796a1651551056e11d345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal Iterator that allows the Client to traverse the list active threads.  <br /></td></tr>
-<tr class="separator:a403ad209f47796a1651551056e11d345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad96eb17f995caf9354ef066b4bc16c63" id="r_ad96eb17f995caf9354ef066b4bc16c63"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad96eb17f995caf9354ef066b4bc16c63">create</a> (<a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a> &amp;runnable, const char *name, int priority=<a class="el" href="_thread_8h.html#ac880fe51a701f3ea6b1c2085ee78cdb6">KIT_SYSTEM_THREAD_PRIORITY_NORMAL</a>, int stackSize=0, void *stackPtr=0, bool allowSimTicks=true) noexcept</td></tr>
 <tr class="memdesc:ad96eb17f995caf9354ef066b4bc16c63"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method creates a thread according to the specified parameters.  <br /></td></tr>
 <tr class="separator:ad96eb17f995caf9354ef066b4bc16c63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34f3b7f50ea5457caa8e162d36273a5f" id="r_a34f3b7f50ea5457caa8e162d36273a5f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34f3b7f50ea5457caa8e162d36273a5f">destroy</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> &amp;threadToDestroy, uint32_t delayTimeMsToWaitIfActive=0) noexcept</td></tr>
 <tr class="memdesc:a34f3b7f50ea5457caa8e162d36273a5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to destroy a thread that was created by the <a class="el" href="class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread.">Thread</a> Factory.  <br /></td></tr>
 <tr class="separator:a34f3b7f50ea5457caa8e162d36273a5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53d9bfee3825dc5a228ecd17a2922da1" id="r_a53d9bfee3825dc5a228ecd17a2922da1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1">getCurrent</a> () noexcept</td></tr>
+<tr class="memdesc:a53d9bfee3825dc5a228ecd17a2922da1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a reference to the currently executing thread.  <br /></td></tr>
+<tr class="separator:a53d9bfee3825dc5a228ecd17a2922da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9edca7d20f7e88d28b4119557ba256a7" id="r_a9edca7d20f7e88d28b4119557ba256a7"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9edca7d20f7e88d28b4119557ba256a7">isActiveThread</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> *threadPtr) noexcept</td></tr>
+<tr class="memdesc:a9edca7d20f7e88d28b4119557ba256a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is the similar to the <a class="el" href="#ad10f6fbd404ef1f17fffc38f0cffa380" title="This method returns the &#39;executing&#39; state of the thread.">isActive()</a> method, but it operates on the specified thread pointer.  <br /></td></tr>
+<tr class="separator:a9edca7d20f7e88d28b4119557ba256a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca3da5e4d26d028ffb85b078bcd6d880" id="r_aca3da5e4d26d028ffb85b078bcd6d880"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_thread_8h.html#abb6292149f07f23128aed1bffa1e727d">KitSystemThreadID_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca3da5e4d26d028ffb85b078bcd6d880">myId</a> () noexcept</td></tr>
+<tr class="memdesc:aca3da5e4d26d028ffb85b078bcd6d880"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ID for the current thread.  <br /></td></tr>
+<tr class="separator:aca3da5e4d26d028ffb85b078bcd6d880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2142767b3bc83904ae0cf31ea21424df" id="r_a2142767b3bc83904ae0cf31ea21424df"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2142767b3bc83904ae0cf31ea21424df">myName</a> () noexcept</td></tr>
+<tr class="memdesc:a2142767b3bc83904ae0cf31ea21424df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name for the current thread.  <br /></td></tr>
+<tr class="separator:a2142767b3bc83904ae0cf31ea21424df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab38ff506973eaecdfb590f35fffe16c2" id="r_ab38ff506973eaecdfb590f35fffe16c2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab38ff506973eaecdfb590f35fffe16c2">myRunnable</a> () noexcept</td></tr>
+<tr class="memdesc:ab38ff506973eaecdfb590f35fffe16c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a reference to the current thread' runnable instance.  <br /></td></tr>
+<tr class="separator:ab38ff506973eaecdfb590f35fffe16c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a511d855ba644ed9e2328ec1a69d07f93" id="r_a511d855ba644ed9e2328ec1a69d07f93"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a511d855ba644ed9e2328ec1a69d07f93">timedWait</a> (uint32_t timeoutInMsec) noexcept</td></tr>
+<tr class="memdesc:a511d855ba644ed9e2328ec1a69d07f93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a6aad4e1a48414c26ecb60b2c1a72ee1e" title="This method causes the CURRENT thread to wait until its &#39;thread semaphore&#39; is signal/set.">wait()</a>, except the call will return after 'timeoutInMsec' has expired without the thread being signaled.  <br /></td></tr>
+<tr class="separator:a511d855ba644ed9e2328ec1a69d07f93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a403ad209f47796a1651551056e11d345" id="r_a403ad209f47796a1651551056e11d345"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a403ad209f47796a1651551056e11d345">traverse</a> (<a class="el" href="class_kit_1_1_system_1_1_thread_1_1_i_traverser.html">Thread::ITraverser</a> &amp;client) noexcept</td></tr>
+<tr class="memdesc:a403ad209f47796a1651551056e11d345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal Iterator that allows the Client to traverse the list active threads.  <br /></td></tr>
+<tr class="separator:a403ad209f47796a1651551056e11d345"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a228748591aa2986620c3c50c3f820fc9" id="r_a228748591aa2986620c3c50c3f820fc9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a228748591aa2986620c3c50c3f820fc9">tryGetCurrent</a> () noexcept</td></tr>
+<tr class="memdesc:a228748591aa2986620c3c50c3f820fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Special version of <a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1" title="This method returns a reference to the currently executing thread.">getCurrent()</a>.  <br /></td></tr>
+<tr class="separator:a228748591aa2986620c3c50c3f820fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac97c1ed8137e886db9571d072c5062ea" id="r_ac97c1ed8137e886db9571d072c5062ea"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac97c1ed8137e886db9571d072c5062ea">tryWait</a> () noexcept</td></tr>
+<tr class="memdesc:ac97c1ed8137e886db9571d072c5062ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is similar to <a class="el" href="class_kit_1_1_system_1_1_semaphore.html#a8fc1bbc6c339f4cd50048115c772245b" title="This method is the same as wait(), except that if the semaphore count is zero, the method returns imm...">Semaphore::tryWait()</a>, except that it operates on the thread semaphore.  <br /></td></tr>
+<tr class="separator:ac97c1ed8137e886db9571d072c5062ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aad4e1a48414c26ecb60b2c1a72ee1e" id="r_a6aad4e1a48414c26ecb60b2c1a72ee1e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6aad4e1a48414c26ecb60b2c1a72ee1e">wait</a> () noexcept</td></tr>
+<tr class="memdesc:a6aad4e1a48414c26ecb60b2c1a72ee1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method causes the CURRENT thread to wait until its 'thread semaphore' is signal/set.  <br /></td></tr>
+<tr class="separator:a6aad4e1a48414c26ecb60b2c1a72ee1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_kit_1_1_container_1_1_item"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_class_kit_1_1_container_1_1_item')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_kit_1_1_container_1_1_item.html">Kit::Container::Item</a></td></tr>
 <tr class="memitem:ae4e75698e6e4d9ee6ecd2c53be52815b inherit pub_static_methods_class_kit_1_1_container_1_1_item" id="r_ae4e75698e6e4d9ee6ecd2c53be52815b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_item.html#ae4e75698e6e4d9ee6ecd2c53be52815b">remove_</a> (<a class="el" href="class_kit_1_1_container_1_1_item.html">Item</a> *itemPtr) noexcept</td></tr>
 <tr class="memdesc:ae4e75698e6e4d9ee6ecd2c53be52815b inherit pub_static_methods_class_kit_1_1_container_1_1_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to do the proper 'clean-up' for the multiple-containers-error-trap when removing an item from a container.  <br /></td></tr>
@@ -193,24 +189,24 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
-<tr class="memitem:a20a2ae373761dde998ce3fbf1032e41f" id="r_a20a2ae373761dde998ce3fbf1032e41f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a20a2ae373761dde998ce3fbf1032e41f">launchRunnable</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> &amp;threadHdl) noexcept</td></tr>
-<tr class="memdesc:a20a2ae373761dde998ce3fbf1032e41f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method that should be called from the native's entry function.  <br /></td></tr>
-<tr class="separator:a20a2ae373761dde998ce3fbf1032e41f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a217cd74015a7492184e0b60a379ba932" id="r_a217cd74015a7492184e0b60a379ba932"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a217cd74015a7492184e0b60a379ba932">addThreadToActiveList</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> &amp;thread) noexcept</td></tr>
 <tr class="memdesc:a217cd74015a7492184e0b60a379ba932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to safe add to the active thread list NOTE: Default implementation is provided in the Thread.cpp file.  <br /></td></tr>
 <tr class="separator:a217cd74015a7492184e0b60a379ba932"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a2ae373761dde998ce3fbf1032e41f" id="r_a20a2ae373761dde998ce3fbf1032e41f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a20a2ae373761dde998ce3fbf1032e41f">launchRunnable</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> &amp;threadHdl) noexcept</td></tr>
+<tr class="memdesc:a20a2ae373761dde998ce3fbf1032e41f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method that should be called from the native's entry function.  <br /></td></tr>
+<tr class="separator:a20a2ae373761dde998ce3fbf1032e41f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff59453b3325520279ce7625ce51e141" id="r_aff59453b3325520279ce7625ce51e141"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff59453b3325520279ce7625ce51e141">removeThreadFromActiveList</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> &amp;thread) noexcept</td></tr>
 <tr class="memdesc:aff59453b3325520279ce7625ce51e141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to safely remove from the active thread list NOTE: Default implementation is provided in the Thread.cpp file.  <br /></td></tr>
 <tr class="separator:aff59453b3325520279ce7625ce51e141"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a0ac6bbe5f393611e508bb42d315885c2" id="r_a0ac6bbe5f393611e508bb42d315885c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ac6bbe5f393611e508bb42d315885c2">m_runnable</a></td></tr>
-<tr class="memdesc:a0ac6bbe5f393611e508bb42d315885c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the thread's runnable object.  <br /></td></tr>
-<tr class="separator:a0ac6bbe5f393611e508bb42d315885c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a307be9f73d12090b8eef0b21ef3a4eae" id="r_a307be9f73d12090b8eef0b21ef3a4eae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_thread_8h.html#abb6292149f07f23128aed1bffa1e727d">KitSystemThreadID_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a307be9f73d12090b8eef0b21ef3a4eae">m_nativeThreadHdl</a></td></tr>
 <tr class="memdesc:a307be9f73d12090b8eef0b21ef3a4eae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Native file handle for the thread instance.  <br /></td></tr>
 <tr class="separator:a307be9f73d12090b8eef0b21ef3a4eae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ac6bbe5f393611e508bb42d315885c2" id="r_a0ac6bbe5f393611e508bb42d315885c2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ac6bbe5f393611e508bb42d315885c2">m_runnable</a></td></tr>
+<tr class="memdesc:a0ac6bbe5f393611e508bb42d315885c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the thread's runnable object.  <br /></td></tr>
+<tr class="separator:a0ac6bbe5f393611e508bb42d315885c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8100053b1eaa38682067841797603e6" id="r_aa8100053b1eaa38682067841797603e6"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8100053b1eaa38682067841797603e6">m_tlsArray</a> [<a class="el" href="_tls_8h.html#a73ac8a4e2608d6b8b10de2baadc24918">OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES</a>]</td></tr>
 <tr class="memdesc:aa8100053b1eaa38682067841797603e6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread.">Thread</a> Local storage.  <br /></td></tr>
 <tr class="separator:aa8100053b1eaa38682067841797603e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,7 +228,11 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a47813c3c6e3e515d21236c39f0345ab1 inherit pub_attribs_class_kit_1_1_container_1_1_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug field.  <br /></td></tr>
 <tr class="separator:a47813c3c6e3e515d21236c39f0345ab1 inherit pub_attribs_class_kit_1_1_container_1_1_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This mostly abstract class defines the operations that can be performed on a thread. </p>
+<p>NOTE: The thread contains a built in counting semaphore that is usable by the developer/application. This semaphore can be used to assist in implementing inter-thread-communications and/or ISR-to-thread communications.</p>
+<p>NOTE: There are default implementations provided for several member and class methods. They are contained in the Thread.cpp file in this directory. If your Operating <a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">System</a> port requires a different implementation, then omit compiling the Thread.cpp file (in this directory) and provided your own implementation. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ace6b223060cb85b5d9d03111a83a4b23" name="ace6b223060cb85b5d9d03111a83a4b23"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ace6b223060cb85b5d9d03111a83a4b23">&#9670;&#160;</a></span>~Thread()</h2>
 
@@ -1005,7 +1005,7 @@ o This method only deletes/destroys the Thread instance -- it does
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_itc_1_1_i_open-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_itc_1_1_i_open-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Itc::IOpen Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class defines an open interface.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class defines an open interface. </p>
-<p>This open interface provides the ability to run an "initialize/open" routine for a ITC server object IN its execution thread (i.e. the thread that the ITC server object executes its ITC requests in). The open call is a SYNCHRONOUS ITC call. This has the following effects/requirements:</p>
-<p>1) The caller MUST be in a different thread than the thread of the object being opened.</p>
-<p>2) The thread of the caller will block until the ITC server object has completed its initialization (i.e. called returnToSender() on the Open Request message). </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_open_8h_source.html">IOpen.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Itc::IOpen:</div>
@@ -71,14 +66,19 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab11d6cd8896668c349c151c4e59c9dc6" id="r_ab11d6cd8896668c349c151c4e59c9dc6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab11d6cd8896668c349c151c4e59c9dc6">open</a> (void *args=nullptr) noexcept=0</td></tr>
-<tr class="memdesc:ab11d6cd8896668c349c151c4e59c9dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronously opens/initializes the called object.  <br /></td></tr>
-<tr class="separator:ab11d6cd8896668c349c151c4e59c9dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af833dabc9e49db484314acf8d322e401" id="r_af833dabc9e49db484314acf8d322e401"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af833dabc9e49db484314acf8d322e401">~IOpen</a> ()=default</td></tr>
 <tr class="memdesc:af833dabc9e49db484314acf8d322e401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:af833dabc9e49db484314acf8d322e401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab11d6cd8896668c349c151c4e59c9dc6" id="r_ab11d6cd8896668c349c151c4e59c9dc6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab11d6cd8896668c349c151c4e59c9dc6">open</a> (void *args=nullptr) noexcept=0</td></tr>
+<tr class="memdesc:ab11d6cd8896668c349c151c4e59c9dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Synchronously opens/initializes the called object.  <br /></td></tr>
+<tr class="separator:ab11d6cd8896668c349c151c4e59c9dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class defines an open interface. </p>
+<p>This open interface provides the ability to run an "initialize/open" routine for a ITC server object IN its execution thread (i.e. the thread that the ITC server object executes its ITC requests in). The open call is a SYNCHRONOUS ITC call. This has the following effects/requirements:</p>
+<p>1) The caller MUST be in a different thread than the thread of the object being opened.</p>
+<p>2) The thread of the caller will block until the ITC server object has completed its initialization (i.e. called returnToSender() on the Open Request message). </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af833dabc9e49db484314acf8d322e401" name="af833dabc9e49db484314acf8d322e401"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af833dabc9e49db484314acf8d322e401">&#9670;&#160;</a></span>~IOpen()</h2>
 
@@ -143,7 +143,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

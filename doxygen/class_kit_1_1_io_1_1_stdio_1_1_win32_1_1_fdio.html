@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,17 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_io_1_1_stdio_1_1_win32_1_1_fdio-members.html">List of all members</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="class_kit_1_1_io_1_1_stdio_1_1_win32_1_1_fdio-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io::Stdio::Win32::Fdio Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This static class provides a collection of functions for operating on <a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_win32.html" title="The &#39;Win32&#39; namespace provides the Windows specific implementation for its parent namespace.">Win32</a> handles.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This static class provides a collection of functions for operating on <a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_win32.html" title="The &#39;Win32&#39; namespace provides the Windows specific implementation for its parent namespace.">Win32</a> handles. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_stdio_2_win32_2_fdio_8h_source.html">Fdio.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Io::Stdio::Win32::Fdio:</div>
@@ -68,29 +66,31 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ade75f3b6edfb0ea38f4ff3514a67f600" id="r_ade75f3b6edfb0ea38f4ff3514a67f600"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade75f3b6edfb0ea38f4ff3514a67f600">write</a> (HANDLE fd, bool &amp;eosFlag, const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesWritten) noexcept</td></tr>
-<tr class="memdesc:ade75f3b6edfb0ea38f4ff3514a67f600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor 'fd'.  <br /></td></tr>
-<tr class="separator:ade75f3b6edfb0ea38f4ff3514a67f600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a33ff8d17f2365ff1b07992effe2c46" id="r_a6a33ff8d17f2365ff1b07992effe2c46"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a33ff8d17f2365ff1b07992effe2c46">available</a> (HANDLE fd) noexcept</td></tr>
+<tr class="memdesc:a6a33ff8d17f2365ff1b07992effe2c46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is data available to be read from the file descriptor.  <br /></td></tr>
+<tr class="separator:a6a33ff8d17f2365ff1b07992effe2c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb77fa180035bbc899085ed9d2274112" id="r_adb77fa180035bbc899085ed9d2274112"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb77fa180035bbc899085ed9d2274112">availableStdin</a> (HANDLE fd) noexcept</td></tr>
+<tr class="memdesc:adb77fa180035bbc899085ed9d2274112"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is data available to be read from STDIN.  <br /></td></tr>
+<tr class="separator:adb77fa180035bbc899085ed9d2274112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cda67ab3bcdc93f220182d2514f754f" id="r_a9cda67ab3bcdc93f220182d2514f754f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9cda67ab3bcdc93f220182d2514f754f">close</a> (HANDLE &amp;fd) noexcept</td></tr>
+<tr class="memdesc:a9cda67ab3bcdc93f220182d2514f754f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the file descriptor 'fd'.  <br /></td></tr>
+<tr class="separator:a9cda67ab3bcdc93f220182d2514f754f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41e679c0bf4f395e833f1d1892a60b53" id="r_a41e679c0bf4f395e833f1d1892a60b53"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a41e679c0bf4f395e833f1d1892a60b53">flush</a> (HANDLE fd) noexcept</td></tr>
 <tr class="memdesc:a41e679c0bf4f395e833f1d1892a60b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes the file descriptor 'fd'.  <br /></td></tr>
 <tr class="separator:a41e679c0bf4f395e833f1d1892a60b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8df0efedec94b512ec5f5ff2f55f44da" id="r_a8df0efedec94b512ec5f5ff2f55f44da"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8df0efedec94b512ec5f5ff2f55f44da">isOpened</a> (HANDLE fd) noexcept</td></tr>
 <tr class="memdesc:a8df0efedec94b512ec5f5ff2f55f44da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the file descriptor is in the open state.  <br /></td></tr>
 <tr class="separator:a8df0efedec94b512ec5f5ff2f55f44da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9cda67ab3bcdc93f220182d2514f754f" id="r_a9cda67ab3bcdc93f220182d2514f754f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9cda67ab3bcdc93f220182d2514f754f">close</a> (HANDLE &amp;fd) noexcept</td></tr>
-<tr class="memdesc:a9cda67ab3bcdc93f220182d2514f754f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the file descriptor 'fd'.  <br /></td></tr>
-<tr class="separator:a9cda67ab3bcdc93f220182d2514f754f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace3793cbb74294c50b4ae98339ebba23" id="r_ace3793cbb74294c50b4ae98339ebba23"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace3793cbb74294c50b4ae98339ebba23">read</a> (HANDLE fd, bool &amp;eosFlag, void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesRead) noexcept</td></tr>
 <tr class="memdesc:ace3793cbb74294c50b4ae98339ebba23"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method attempts to read up to 'numBytes' from the file descriptor.  <br /></td></tr>
 <tr class="separator:ace3793cbb74294c50b4ae98339ebba23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb77fa180035bbc899085ed9d2274112" id="r_adb77fa180035bbc899085ed9d2274112"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb77fa180035bbc899085ed9d2274112">availableStdin</a> (HANDLE fd) noexcept</td></tr>
-<tr class="memdesc:adb77fa180035bbc899085ed9d2274112"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is data available to be read from STDIN.  <br /></td></tr>
-<tr class="separator:adb77fa180035bbc899085ed9d2274112"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a33ff8d17f2365ff1b07992effe2c46" id="r_a6a33ff8d17f2365ff1b07992effe2c46"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a33ff8d17f2365ff1b07992effe2c46">available</a> (HANDLE fd) noexcept</td></tr>
-<tr class="memdesc:a6a33ff8d17f2365ff1b07992effe2c46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is data available to be read from the file descriptor.  <br /></td></tr>
-<tr class="separator:a6a33ff8d17f2365ff1b07992effe2c46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade75f3b6edfb0ea38f4ff3514a67f600" id="r_ade75f3b6edfb0ea38f4ff3514a67f600"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade75f3b6edfb0ea38f4ff3514a67f600">write</a> (HANDLE fd, bool &amp;eosFlag, const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesWritten) noexcept</td></tr>
+<tr class="memdesc:ade75f3b6edfb0ea38f4ff3514a67f600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor 'fd'.  <br /></td></tr>
+<tr class="separator:ade75f3b6edfb0ea38f4ff3514a67f600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This static class provides a collection of functions for operating on <a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_win32.html" title="The &#39;Win32&#39; namespace provides the Windows specific implementation for its parent namespace.">Win32</a> handles. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6a33ff8d17f2365ff1b07992effe2c46" name="a6a33ff8d17f2365ff1b07992effe2c46"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a33ff8d17f2365ff1b07992effe2c46">&#9670;&#160;</a></span>available()</h2>
 
@@ -336,7 +336,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

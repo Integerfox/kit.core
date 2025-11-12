@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -53,11 +53,7 @@ $(function() {
 
 <p>The '<a class="el" href="namespace_kit_1_1_event_queue.html" title="The &#39;EventQueue&#39; namespace is used to provide a &#39;common&#39; Event Queue type when there are multiple ort...">EventQueue</a>' namespace is used to provide a 'common' Event Queue type when there are multiple orthogonal sources of events.  
 <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The '<a class="el" href="namespace_kit_1_1_event_queue.html" title="The &#39;EventQueue&#39; namespace is used to provide a &#39;common&#39; Event Queue type when there are multiple ort...">EventQueue</a>' namespace is used to provide a 'common' Event Queue type when there are multiple orthogonal sources of events. </p>
-<p>For example, the KIT library supports ITC message and Data Model change notification events. Neither ITC or the DM have direct dependencies on each other - and while MOST applications will use both types of events, there is no requirement to always include both in an application.</p>
-<p>The driving reason to have a 'common' Event Queue type is that to 'send|post' an event - a reference to a Event Queue is needed. Typically objects are provided a reference to their Event Queue in their constructor and the reference is stored as member variable to the class. If there was NOT a common Event Queue - then a class that uses ITC and DM change notifications would be required to 'cache' two different Event Queue references (i.e. this is the case when using the CPL library - Cpl::Itc::PostApi vs Cpl::Dm::MailboxServer). </p>
-</div><table class="memberdecls">
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_event_queue_1_1_i_change_notification.html">IChangeNotification</a></td></tr>
@@ -76,10 +72,14 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class extends the <a class="el" href="class_kit_1_1_event_queue_1_1_server.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing events from Ev...">Kit::EventQueue::Server</a> class to add periodic scheduling to an event based 'thread'.  <a href="class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The '<a class="el" href="namespace_kit_1_1_event_queue.html" title="The &#39;EventQueue&#39; namespace is used to provide a &#39;common&#39; Event Queue type when there are multiple ort...">EventQueue</a>' namespace is used to provide a 'common' Event Queue type when there are multiple orthogonal sources of events. </p>
+<p>For example, the KIT library supports ITC message and Data Model change notification events. Neither ITC or the DM have direct dependencies on each other - and while MOST applications will use both types of events, there is no requirement to always include both in an application.</p>
+<p>The driving reason to have a 'common' Event Queue type is that to 'send|post' an event - a reference to a Event Queue is needed. Typically objects are provided a reference to their Event Queue in their constructor and the reference is stored as member variable to the class. If there was NOT a common Event Queue - then a class that uses ITC and DM change notifications would be required to 'cache' two different Event Queue references (i.e. this is the case when using the CPL library - Cpl::Itc::PostApi vs Cpl::Dm::MailboxServer). </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

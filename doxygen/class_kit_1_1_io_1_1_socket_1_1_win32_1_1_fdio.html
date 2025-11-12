@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,59 +46,59 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_io_1_1_socket_1_1_win32_1_1_fdio-members.html">List of all members</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="class_kit_1_1_io_1_1_socket_1_1_win32_1_1_fdio-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io::Socket::Win32::Fdio Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This static class provides a collection of functions for operating on <a class="el" href="namespace_kit_1_1_io_1_1_socket_1_1_win32.html" title="The &#39;Win32&#39; namespace provides the Win32 specific implementation for its parent namespace.">Win32</a> file descriptors for BSD sockets.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This static class provides a collection of functions for operating on <a class="el" href="namespace_kit_1_1_io_1_1_socket_1_1_win32.html" title="The &#39;Win32&#39; namespace provides the Win32 specific implementation for its parent namespace.">Win32</a> file descriptors for BSD sockets. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_socket_2_win32_2_fdio_8h_source.html">Fdio.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a8b9e10818250afeb1e3885138d42d710" id="r_a8b9e10818250afeb1e3885138d42d710"><td class="memItemLeft" align="right" valign="top">static SOCKET&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b9e10818250afeb1e3885138d42d710">acceptConnection</a> (SOCKET listeningFd, struct sockaddr_in &amp;client_addr) noexcept</td></tr>
+<tr class="memdesc:a8b9e10818250afeb1e3885138d42d710"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is to accept an incoming connection request.  <br /></td></tr>
+<tr class="separator:a8b9e10818250afeb1e3885138d42d710"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab31d8e7a6f9dca14adc96c71c7497e42" id="r_ab31d8e7a6f9dca14adc96c71c7497e42"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab31d8e7a6f9dca14adc96c71c7497e42">available</a> (SOCKET fd) noexcept</td></tr>
+<tr class="memdesc:ab31d8e7a6f9dca14adc96c71c7497e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is data available to be read from the file descriptor.  <br /></td></tr>
+<tr class="separator:ab31d8e7a6f9dca14adc96c71c7497e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f6ef464abda77c1f7158b9ef78fd861" id="r_a0f6ef464abda77c1f7158b9ef78fd861"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f6ef464abda77c1f7158b9ef78fd861">close</a> (SOCKET &amp;fd) noexcept</td></tr>
 <tr class="memdesc:a0f6ef464abda77c1f7158b9ef78fd861"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the file descriptor 'fd'.  <br /></td></tr>
 <tr class="separator:a0f6ef464abda77c1f7158b9ef78fd861"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7895e0b2f967e3611249daf406a8e6b" id="r_ae7895e0b2f967e3611249daf406a8e6b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7895e0b2f967e3611249daf406a8e6b">write</a> (SOCKET fd, bool &amp;eosFlag, const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesWritten) noexcept</td></tr>
-<tr class="memdesc:ae7895e0b2f967e3611249daf406a8e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor 'fd'.  <br /></td></tr>
-<tr class="separator:ae7895e0b2f967e3611249daf406a8e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fb70ed24fbb722ff9715e7f7a9fec84" id="r_a3fb70ed24fbb722ff9715e7f7a9fec84"><td class="memItemLeft" align="right" valign="top">static SOCKET&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fb70ed24fbb722ff9715e7f7a9fec84">createListeningSocket</a> (int port, unsigned numRetries, uint32_t delayBetweenRetriesMs) noexcept</td></tr>
+<tr class="memdesc:a3fb70ed24fbb722ff9715e7f7a9fec84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the "listening" socket.  <br /></td></tr>
+<tr class="separator:a3fb70ed24fbb722ff9715e7f7a9fec84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4809e2d4029b35ec730ec40e711e3adb" id="r_a4809e2d4029b35ec730ec40e711e3adb"><td class="memItemLeft" align="right" valign="top">static SOCKET&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4809e2d4029b35ec730ec40e711e3adb">createSocket</a> (struct addrinfo *addr) noexcept</td></tr>
+<tr class="memdesc:a4809e2d4029b35ec730ec40e711e3adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a file descriptor for the specified socket address info.  <br /></td></tr>
+<tr class="separator:a4809e2d4029b35ec730ec40e711e3adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eceaa413d228d411d99189b7d5e1cbe" id="r_a4eceaa413d228d411d99189b7d5e1cbe"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4eceaa413d228d411d99189b7d5e1cbe">enableKeepAlive</a> (SOCKET fd) noexcept</td></tr>
+<tr class="memdesc:a4eceaa413d228d411d99189b7d5e1cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method enables the SO_KEEPALIVE option on the specified socket.  <br /></td></tr>
+<tr class="separator:a4eceaa413d228d411d99189b7d5e1cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afed676be9257ce8c9db4cb016c471fa2" id="r_afed676be9257ce8c9db4cb016c471fa2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afed676be9257ce8c9db4cb016c471fa2">flush</a> (SOCKET fd) noexcept</td></tr>
 <tr class="memdesc:afed676be9257ce8c9db4cb016c471fa2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flushes the file descriptor 'fd'.  <br /></td></tr>
 <tr class="separator:afed676be9257ce8c9db4cb016c471fa2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49b4da5f17e3535f61e5389e2cd25244" id="r_a49b4da5f17e3535f61e5389e2cd25244"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49b4da5f17e3535f61e5389e2cd25244">freeAddresses</a> (struct addrinfo *results) noexcept</td></tr>
+<tr class="memdesc:a49b4da5f17e3535f61e5389e2cd25244"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method frees the memory associated with the 'results' argument that was populated by a previous call to the <a class="el" href="#a10b3aeaf00d0e7dad6dc2156ffa63876" title="This resolved the specific network address string and port number (IPv4 or IPv6) to a socket address ...">resolveAddress()</a> method.  <br /></td></tr>
+<tr class="separator:a49b4da5f17e3535f61e5389e2cd25244"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa283618953a56600ba19601d7162b069" id="r_aa283618953a56600ba19601d7162b069"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa283618953a56600ba19601d7162b069">isOpened</a> (SOCKET fd) noexcept</td></tr>
 <tr class="memdesc:aa283618953a56600ba19601d7162b069"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the file descriptor is in the open state.  <br /></td></tr>
 <tr class="separator:aa283618953a56600ba19601d7162b069"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bcfe30787c2a84dba4b01e96dad42db" id="r_a9bcfe30787c2a84dba4b01e96dad42db"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bcfe30787c2a84dba4b01e96dad42db">read</a> (SOCKET fd, bool &amp;eosFlag, void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesRead) noexcept</td></tr>
 <tr class="memdesc:a9bcfe30787c2a84dba4b01e96dad42db"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method attempts to read up to 'numBytes' from the file descriptor.  <br /></td></tr>
 <tr class="separator:a9bcfe30787c2a84dba4b01e96dad42db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab31d8e7a6f9dca14adc96c71c7497e42" id="r_ab31d8e7a6f9dca14adc96c71c7497e42"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab31d8e7a6f9dca14adc96c71c7497e42">available</a> (SOCKET fd) noexcept</td></tr>
-<tr class="memdesc:ab31d8e7a6f9dca14adc96c71c7497e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is data available to be read from the file descriptor.  <br /></td></tr>
-<tr class="separator:ab31d8e7a6f9dca14adc96c71c7497e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fb70ed24fbb722ff9715e7f7a9fec84" id="r_a3fb70ed24fbb722ff9715e7f7a9fec84"><td class="memItemLeft" align="right" valign="top">static SOCKET&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fb70ed24fbb722ff9715e7f7a9fec84">createListeningSocket</a> (int port, unsigned numRetries, uint32_t delayBetweenRetriesMs) noexcept</td></tr>
-<tr class="memdesc:a3fb70ed24fbb722ff9715e7f7a9fec84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the "listening" socket.  <br /></td></tr>
-<tr class="separator:a3fb70ed24fbb722ff9715e7f7a9fec84"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b9e10818250afeb1e3885138d42d710" id="r_a8b9e10818250afeb1e3885138d42d710"><td class="memItemLeft" align="right" valign="top">static SOCKET&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b9e10818250afeb1e3885138d42d710">acceptConnection</a> (SOCKET listeningFd, struct sockaddr_in &amp;client_addr) noexcept</td></tr>
-<tr class="memdesc:a8b9e10818250afeb1e3885138d42d710"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is to accept an incoming connection request.  <br /></td></tr>
-<tr class="separator:a8b9e10818250afeb1e3885138d42d710"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4eceaa413d228d411d99189b7d5e1cbe" id="r_a4eceaa413d228d411d99189b7d5e1cbe"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4eceaa413d228d411d99189b7d5e1cbe">enableKeepAlive</a> (SOCKET fd) noexcept</td></tr>
-<tr class="memdesc:a4eceaa413d228d411d99189b7d5e1cbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method enables the SO_KEEPALIVE option on the specified socket.  <br /></td></tr>
-<tr class="separator:a4eceaa413d228d411d99189b7d5e1cbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10b3aeaf00d0e7dad6dc2156ffa63876" id="r_a10b3aeaf00d0e7dad6dc2156ffa63876"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10b3aeaf00d0e7dad6dc2156ffa63876">resolveAddress</a> (const char *remoteHostName, int portNumToConnectTo, struct addrinfo *&amp;results) noexcept</td></tr>
 <tr class="memdesc:a10b3aeaf00d0e7dad6dc2156ffa63876"><td class="mdescLeft">&#160;</td><td class="mdescRight">This resolved the specific network address string and port number (IPv4 or IPv6) to a socket address info structure.  <br /></td></tr>
 <tr class="separator:a10b3aeaf00d0e7dad6dc2156ffa63876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a49b4da5f17e3535f61e5389e2cd25244" id="r_a49b4da5f17e3535f61e5389e2cd25244"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a49b4da5f17e3535f61e5389e2cd25244">freeAddresses</a> (struct addrinfo *results) noexcept</td></tr>
-<tr class="memdesc:a49b4da5f17e3535f61e5389e2cd25244"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method frees the memory associated with the 'results' argument that was populated by a previous call to the <a class="el" href="#a10b3aeaf00d0e7dad6dc2156ffa63876" title="This resolved the specific network address string and port number (IPv4 or IPv6) to a socket address ...">resolveAddress()</a> method.  <br /></td></tr>
-<tr class="separator:a49b4da5f17e3535f61e5389e2cd25244"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4809e2d4029b35ec730ec40e711e3adb" id="r_a4809e2d4029b35ec730ec40e711e3adb"><td class="memItemLeft" align="right" valign="top">static SOCKET&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4809e2d4029b35ec730ec40e711e3adb">createSocket</a> (struct addrinfo *addr) noexcept</td></tr>
-<tr class="memdesc:a4809e2d4029b35ec730ec40e711e3adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a file descriptor for the specified socket address info.  <br /></td></tr>
-<tr class="separator:a4809e2d4029b35ec730ec40e711e3adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7895e0b2f967e3611249daf406a8e6b" id="r_ae7895e0b2f967e3611249daf406a8e6b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7895e0b2f967e3611249daf406a8e6b">write</a> (SOCKET fd, bool &amp;eosFlag, const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesWritten) noexcept</td></tr>
+<tr class="memdesc:ae7895e0b2f967e3611249daf406a8e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor 'fd'.  <br /></td></tr>
+<tr class="separator:ae7895e0b2f967e3611249daf406a8e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This static class provides a collection of functions for operating on <a class="el" href="namespace_kit_1_1_io_1_1_socket_1_1_win32.html" title="The &#39;Win32&#39; namespace provides the Win32 specific implementation for its parent namespace.">Win32</a> file descriptors for BSD sockets. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8b9e10818250afeb1e3885138d42d710" name="a8b9e10818250afeb1e3885138d42d710"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b9e10818250afeb1e3885138d42d710">&#9670;&#160;</a></span>acceptConnection()</h2>
 
@@ -504,7 +504,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

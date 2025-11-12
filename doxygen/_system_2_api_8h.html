@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -51,11 +51,10 @@ $(function() {
   <div class="headertitle"><div class="title">Api.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This file defines methods for initializing the KIT C++ class library and other startup/init actions. </p>
-<p>NOTE: The KIT C++ class library MUST BE INITIALIZED before calling any other methods/class/functions in the <a class="el" href="namespace_kit.html" title="Forward reference to break dependency on the Dm namespace.">Kit</a> namespace! </p>
-</div><div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
-</div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+
+<p>This file defines methods for initializing the KIT C++ class library and other startup/init actions.  
+<a href="#details">More...</a></p>
+<div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for Api.h:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -83,15 +82,18 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a09af4e2eba5e8a0b986cebe0d2bbe9cb" id="r_a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html#a09af4e2eba5e8a0b986cebe0d2bbe9cb">Kit::System::initialize</a> () noexcept</td></tr>
-<tr class="memdesc:a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the KIT C++ class library.  <br /></td></tr>
-<tr class="separator:a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaf10d7b2ba64ba90e57bdd88c1ea666" id="r_aaaf10d7b2ba64ba90e57bdd88c1ea666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html#aaaf10d7b2ba64ba90e57bdd88c1ea666">Kit::System::enableScheduling</a> () noexcept</td></tr>
 <tr class="memdesc:aaaf10d7b2ba64ba90e57bdd88c1ea666"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to initiate thread scheduling.  <br /></td></tr>
 <tr class="separator:aaaf10d7b2ba64ba90e57bdd88c1ea666"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09af4e2eba5e8a0b986cebe0d2bbe9cb" id="r_a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html#a09af4e2eba5e8a0b986cebe0d2bbe9cb">Kit::System::initialize</a> () noexcept</td></tr>
+<tr class="memdesc:a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the KIT C++ class library.  <br /></td></tr>
+<tr class="separator:a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9aa4f2aa7d6133fc710a14cfc1a56f2f" id="r_a9aa4f2aa7d6133fc710a14cfc1a56f2f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html#a9aa4f2aa7d6133fc710a14cfc1a56f2f">Kit::System::isSchedulingEnabled</a> () noexcept</td></tr>
 <tr class="memdesc:a9aa4f2aa7d6133fc710a14cfc1a56f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function returns true if scheduling has enabled using the <a class="el" href="namespace_kit_1_1_system.html#aaaf10d7b2ba64ba90e57bdd88c1ea666" title="This function is used to initiate thread scheduling.">enableScheduling()</a> functions.  <br /></td></tr>
 <tr class="separator:a9aa4f2aa7d6133fc710a14cfc1a56f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbe19a17e287546b44bdd4b0842f621f" id="r_afbe19a17e287546b44bdd4b0842f621f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html#afbe19a17e287546b44bdd4b0842f621f">Kit::System::resumeScheduling</a> () noexcept</td></tr>
+<tr class="memdesc:afbe19a17e287546b44bdd4b0842f621f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to resume thread scheduling after a call to suspendScheduling has been made.  <br /></td></tr>
+<tr class="separator:afbe19a17e287546b44bdd4b0842f621f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ce80b51370ac7c69e2887f653d519a3" id="r_a9ce80b51370ac7c69e2887f653d519a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html#a9ce80b51370ac7c69e2887f653d519a3">Kit::System::sleep</a> (uint32_t milliseconds) noexcept</td></tr>
 <tr class="memdesc:a9ce80b51370ac7c69e2887f653d519a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method causes the current thread to be suspended for n milliseconds.  <br /></td></tr>
 <tr class="separator:a9ce80b51370ac7c69e2887f653d519a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,14 +103,14 @@ Functions</h2></td></tr>
 <tr class="memitem:aaf03c210892ea5fafba57bb96bb99bd4" id="r_aaf03c210892ea5fafba57bb96bb99bd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html#aaf03c210892ea5fafba57bb96bb99bd4">Kit::System::suspendScheduling</a> () noexcept</td></tr>
 <tr class="memdesc:aaf03c210892ea5fafba57bb96bb99bd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to temporarily suspend thread scheduling, i.e.  <br /></td></tr>
 <tr class="separator:aaf03c210892ea5fafba57bb96bb99bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbe19a17e287546b44bdd4b0842f621f" id="r_afbe19a17e287546b44bdd4b0842f621f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system.html#afbe19a17e287546b44bdd4b0842f621f">Kit::System::resumeScheduling</a> () noexcept</td></tr>
-<tr class="memdesc:afbe19a17e287546b44bdd4b0842f621f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to resume thread scheduling after a call to suspendScheduling has been made.  <br /></td></tr>
-<tr class="separator:afbe19a17e287546b44bdd4b0842f621f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This file defines methods for initializing the KIT C++ class library and other startup/init actions. </p>
+<p>NOTE: The KIT C++ class library MUST BE INITIALIZED before calling any other methods/class/functions in the <a class="el" href="namespace_kit.html" title="Forward reference to break dependency on the Dm namespace.">Kit</a> namespace! </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:25 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

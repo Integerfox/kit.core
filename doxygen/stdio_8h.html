@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -51,13 +51,10 @@ $(function() {
   <div class="headertitle"><div class="title">stdio.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>By default the BSP provides a KIT IO Stream for application' console. </p>
-<p>The application can disabled the IO Stream by defining the macro USE_BSP_USE_PRINTF. When the macro is used the C's library's printf() output will be send to the UART directly and the KIT IO stream (g_bspConsoleStream) will not be available.</p>
-<p>NOTE: When USE_BSP_USE_PRINTF, the C library buffers the printf output, i.e. output is not sent until a newline is encountered the output stream </p>
-</div><div class="textblock"><code>#include &quot;kit_config.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="_serial_2_s_t_2_m32_f4_2_input_output_8h_source.html">Kit/Io/Serial/ST/M32F4/InputOutput.h</a>&quot;</code><br />
-</div><div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+
+<p>By default the BSP provides a KIT IO Stream for application' console.  
+<a href="#details">More...</a></p>
+<div class="textblock"><div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for stdio.h:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
@@ -69,12 +66,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a48c6480a8685f73984d4b01f03e21b93" id="r_a48c6480a8685f73984d4b01f03e21b93"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48c6480a8685f73984d4b01f03e21b93">OPTION_BSP_CONSOLE_TX_FIFO_SIZE</a>&#160;&#160;&#160;1024</td></tr>
-<tr class="memdesc:a48c6480a8685f73984d4b01f03e21b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default size of the software TX FIFO used by the console UART Stream.  <br /></td></tr>
-<tr class="separator:a48c6480a8685f73984d4b01f03e21b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace1441e715fac723cc0f5e3c36a394fd" id="r_ace1441e715fac723cc0f5e3c36a394fd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace1441e715fac723cc0f5e3c36a394fd">OPTION_BSP_CONSOLE_RX_FIFO_SIZE</a>&#160;&#160;&#160;1024</td></tr>
 <tr class="memdesc:ace1441e715fac723cc0f5e3c36a394fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default size of the software RX FIFO used by the console UART Stream.  <br /></td></tr>
 <tr class="separator:ace1441e715fac723cc0f5e3c36a394fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48c6480a8685f73984d4b01f03e21b93" id="r_a48c6480a8685f73984d4b01f03e21b93"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48c6480a8685f73984d4b01f03e21b93">OPTION_BSP_CONSOLE_TX_FIFO_SIZE</a>&#160;&#160;&#160;1024</td></tr>
+<tr class="memdesc:a48c6480a8685f73984d4b01f03e21b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default size of the software TX FIFO used by the console UART Stream.  <br /></td></tr>
+<tr class="separator:a48c6480a8685f73984d4b01f03e21b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -82,7 +79,11 @@ Variables</h2></td></tr>
 <tr class="memdesc:a0a64fbfca11bbbaa8bcf0e8ab8f3c39d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expose the Console stream.  <br /></td></tr>
 <tr class="separator:a0a64fbfca11bbbaa8bcf0e8ab8f3c39d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>By default the BSP provides a KIT IO Stream for application' console. </p>
+<p>The application can disabled the IO Stream by defining the macro USE_BSP_USE_PRINTF. When the macro is used the C's library's printf() output will be send to the UART directly and the KIT IO stream (g_bspConsoleStream) will not be available.</p>
+<p>NOTE: When USE_BSP_USE_PRINTF, the C library buffers the printf output, i.e. output is not sent until a newline is encountered the output stream </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ace1441e715fac723cc0f5e3c36a394fd" name="ace1441e715fac723cc0f5e3c36a394fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ace1441e715fac723cc0f5e3c36a394fd">&#9670;&#160;</a></span>OPTION_BSP_CONSOLE_RX_FIFO_SIZE</h2>
 
@@ -143,7 +144,7 @@ Variables</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:25 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

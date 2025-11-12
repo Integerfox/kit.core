@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,23 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_i_event_manager-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_system_1_1_i_event_manager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::IEventManager Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class defines the interface to signal a 'Event Flag'.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class defines the interface to signal a 'Event Flag'. </p>
-<p>Event Flags are used to indicate that an 'event' has occurred</p>
-<p>Each <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> supports up to 32 individual Event Flags (numbered 0-31).</p>
-<p>Event Flags are used to indicate that an 'event' has occurred. Individual event flags can be viewed as binary semaphores with respect to be signaled/ waiting (though waiting is done on the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a>'s entire set of event flags).</p>
-<p>A <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> can wait for at least one event to be signaled. When the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> is waiting on event(s) and it is then signaled - all of the Events that were in the signaled state when the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> was unblocked are cleared.</p>
-<p>The <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">IEventManager</a> interface is inherently thread safe. <br  />
- </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_event_manager_8h_source.html">IEventManager.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::System::IEventManager:</div>
@@ -74,23 +66,31 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a489347252c4d2000f59907092204955f" id="r_a489347252c4d2000f59907092204955f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a489347252c4d2000f59907092204955f">signalMultipleEvents</a> (uint32_t events) noexcept=0</td></tr>
-<tr class="memdesc:a489347252c4d2000f59907092204955f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is called by clients to signal one or more Event Flags.  <br /></td></tr>
-<tr class="separator:a489347252c4d2000f59907092204955f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaef0d8b8658c6aa3b055110e31a715e" id="r_aaaef0d8b8658c6aa3b055110e31a715e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaef0d8b8658c6aa3b055110e31a715e">signalEvent</a> (uint8_t eventNumber) noexcept=0</td></tr>
-<tr class="memdesc:aaaef0d8b8658c6aa3b055110e31a715e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is similar to signalEvents(), except that it sets one event flags.  <br /></td></tr>
-<tr class="separator:aaaef0d8b8658c6aa3b055110e31a715e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae18687658c65f499e764fa8c1b03f216" id="r_ae18687658c65f499e764fa8c1b03f216"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae18687658c65f499e764fa8c1b03f216">su_signalMultipleEvents</a> (uint32_t events) noexcept=0</td></tr>
-<tr class="memdesc:ae18687658c65f499e764fa8c1b03f216"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is same as <a class="el" href="#a489347252c4d2000f59907092204955f" title="This operation is called by clients to signal one or more Event Flags.">signalMultipleEvents()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
-<tr class="separator:ae18687658c65f499e764fa8c1b03f216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb18155c78909037aaa0d5b4ba0318c9" id="r_adb18155c78909037aaa0d5b4ba0318c9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb18155c78909037aaa0d5b4ba0318c9">su_signalEvent</a> (uint8_t eventNumber) noexcept=0</td></tr>
-<tr class="memdesc:adb18155c78909037aaa0d5b4ba0318c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is same as <a class="el" href="#aaaef0d8b8658c6aa3b055110e31a715e" title="This operation is similar to signalEvents(), except that it sets one event flags.">signalEvent()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
-<tr class="separator:adb18155c78909037aaa0d5b4ba0318c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba7ccac3e816fa8ed6f6d755364eed25" id="r_aba7ccac3e816fa8ed6f6d755364eed25"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba7ccac3e816fa8ed6f6d755364eed25">~IEventManager</a> ()=default</td></tr>
 <tr class="memdesc:aba7ccac3e816fa8ed6f6d755364eed25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual Destructor.  <br /></td></tr>
 <tr class="separator:aba7ccac3e816fa8ed6f6d755364eed25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaef0d8b8658c6aa3b055110e31a715e" id="r_aaaef0d8b8658c6aa3b055110e31a715e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaef0d8b8658c6aa3b055110e31a715e">signalEvent</a> (uint8_t eventNumber) noexcept=0</td></tr>
+<tr class="memdesc:aaaef0d8b8658c6aa3b055110e31a715e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is similar to signalEvents(), except that it sets one event flags.  <br /></td></tr>
+<tr class="separator:aaaef0d8b8658c6aa3b055110e31a715e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a489347252c4d2000f59907092204955f" id="r_a489347252c4d2000f59907092204955f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a489347252c4d2000f59907092204955f">signalMultipleEvents</a> (uint32_t events) noexcept=0</td></tr>
+<tr class="memdesc:a489347252c4d2000f59907092204955f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is called by clients to signal one or more Event Flags.  <br /></td></tr>
+<tr class="separator:a489347252c4d2000f59907092204955f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb18155c78909037aaa0d5b4ba0318c9" id="r_adb18155c78909037aaa0d5b4ba0318c9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb18155c78909037aaa0d5b4ba0318c9">su_signalEvent</a> (uint8_t eventNumber) noexcept=0</td></tr>
+<tr class="memdesc:adb18155c78909037aaa0d5b4ba0318c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is same as <a class="el" href="#aaaef0d8b8658c6aa3b055110e31a715e" title="This operation is similar to signalEvents(), except that it sets one event flags.">signalEvent()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
+<tr class="separator:adb18155c78909037aaa0d5b4ba0318c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18687658c65f499e764fa8c1b03f216" id="r_ae18687658c65f499e764fa8c1b03f216"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae18687658c65f499e764fa8c1b03f216">su_signalMultipleEvents</a> (uint32_t events) noexcept=0</td></tr>
+<tr class="memdesc:ae18687658c65f499e764fa8c1b03f216"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is same as <a class="el" href="#a489347252c4d2000f59907092204955f" title="This operation is called by clients to signal one or more Event Flags.">signalMultipleEvents()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
+<tr class="separator:ae18687658c65f499e764fa8c1b03f216"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class defines the interface to signal a 'Event Flag'. </p>
+<p>Event Flags are used to indicate that an 'event' has occurred</p>
+<p>Each <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> supports up to 32 individual Event Flags (numbered 0-31).</p>
+<p>Event Flags are used to indicate that an 'event' has occurred. Individual event flags can be viewed as binary semaphores with respect to be signaled/ waiting (though waiting is done on the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a>'s entire set of event flags).</p>
+<p>A <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> can wait for at least one event to be signaled. When the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> is waiting on event(s) and it is then signaled - all of the Events that were in the signaled state when the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> was unblocked are cleared.</p>
+<p>The <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">IEventManager</a> interface is inherently thread safe. <br  />
+ </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aba7ccac3e816fa8ed6f6d755364eed25" name="aba7ccac3e816fa8ed6f6d755364eed25"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aba7ccac3e816fa8ed6f6d755364eed25">&#9670;&#160;</a></span>~IEventManager()</h2>
 
@@ -245,7 +245,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

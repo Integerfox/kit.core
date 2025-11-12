@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,18 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_io_1_1_i_line_writer-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_io_1_1_i_line_writer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io::ILineWriter Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class defines a interface for a stream line writer.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class defines a interface for a stream line writer. </p>
-<p>A line writer allows the client to write lines to a stream. The interface also handles the output of the 'new line' character(s). </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_line_writer_8h_source.html">ILineWriter.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Io::ILineWriter:</div>
@@ -69,24 +66,33 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a9058e144a65734c1f7b6e5c7d7e74851" id="r_a9058e144a65734c1f7b6e5c7d7e74851"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9058e144a65734c1f7b6e5c7d7e74851">~ILineWriter</a> () noexcept=default</td></tr>
+<tr class="memdesc:a9058e144a65734c1f7b6e5c7d7e74851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the make the destructor virtual.  <br /></td></tr>
+<tr class="separator:a9058e144a65734c1f7b6e5c7d7e74851"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e5418687cb02e669df36cd3741217d2" id="r_a8e5418687cb02e669df36cd3741217d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e5418687cb02e669df36cd3741217d2">close</a> () noexcept=0</td></tr>
+<tr class="memdesc:a8e5418687cb02e669df36cd3741217d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the writer and the underlying output stream.  <br /></td></tr>
+<tr class="separator:a8e5418687cb02e669df36cd3741217d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad2bd5fe296b00e297560c2b5a97073" id="r_a0ad2bd5fe296b00e297560c2b5a97073"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ad2bd5fe296b00e297560c2b5a97073">flush</a> () noexcept=0</td></tr>
+<tr class="memdesc:a0ad2bd5fe296b00e297560c2b5a97073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forces all buffered data (if any) to be written to the stream media.  <br /></td></tr>
+<tr class="separator:a0ad2bd5fe296b00e297560c2b5a97073"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a834a313339ce205396a4d898213ed805" id="r_a834a313339ce205396a4d898213ed805"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a834a313339ce205396a4d898213ed805">print</a> (const char *srcstring) noexcept=0</td></tr>
 <tr class="memdesc:a834a313339ce205396a4d898213ed805"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the specified string to the stream.  <br /></td></tr>
 <tr class="separator:a834a313339ce205396a4d898213ed805"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad67d22ffc9bc1849ca1533f97a6e22ae" id="r_ad67d22ffc9bc1849ca1533f97a6e22ae"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad67d22ffc9bc1849ca1533f97a6e22ae">println</a> (const char *srcstring) noexcept=0</td></tr>
-<tr class="memdesc:ad67d22ffc9bc1849ca1533f97a6e22ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the specified string to the stream and then appends the newline character(s) to the stream.  <br /></td></tr>
-<tr class="separator:ad67d22ffc9bc1849ca1533f97a6e22ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68eff33ad4c751b4938a9910eb33af8e" id="r_a68eff33ad4c751b4938a9910eb33af8e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68eff33ad4c751b4938a9910eb33af8e">print</a> (const char *srcstring, int numbytes) noexcept=0</td></tr>
 <tr class="memdesc:a68eff33ad4c751b4938a9910eb33af8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the first 'numbytes' bytes of the specified string to the stream.  <br /></td></tr>
 <tr class="separator:a68eff33ad4c751b4938a9910eb33af8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a207fe4438bb9db1d511569a63c70da95" id="r_a207fe4438bb9db1d511569a63c70da95"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a207fe4438bb9db1d511569a63c70da95">println</a> (const char *srcstring, int numbytes) noexcept=0</td></tr>
-<tr class="memdesc:a207fe4438bb9db1d511569a63c70da95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the first 'numbytes' bytes of the specified string to the stream and then appends the newline character(s) to the stream.  <br /></td></tr>
-<tr class="separator:a207fe4438bb9db1d511569a63c70da95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6248bdada259bc2eec750839730bc58a" id="r_a6248bdada259bc2eec750839730bc58a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6248bdada259bc2eec750839730bc58a">println</a> () noexcept=0</td></tr>
-<tr class="memdesc:a6248bdada259bc2eec750839730bc58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the newline character(s) to the stream.  <br /></td></tr>
-<tr class="separator:a6248bdada259bc2eec750839730bc58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a4e936ab47a20ceed3096e04a54c732" id="r_a6a4e936ab47a20ceed3096e04a54c732"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a4e936ab47a20ceed3096e04a54c732">print</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;formatBuffer, const char *format,...) noexcept=0</td></tr>
 <tr class="memdesc:a6a4e936ab47a20ceed3096e04a54c732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Formatted output to the stream.  <br /></td></tr>
 <tr class="separator:a6a4e936ab47a20ceed3096e04a54c732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6248bdada259bc2eec750839730bc58a" id="r_a6248bdada259bc2eec750839730bc58a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6248bdada259bc2eec750839730bc58a">println</a> () noexcept=0</td></tr>
+<tr class="memdesc:a6248bdada259bc2eec750839730bc58a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the newline character(s) to the stream.  <br /></td></tr>
+<tr class="separator:a6248bdada259bc2eec750839730bc58a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad67d22ffc9bc1849ca1533f97a6e22ae" id="r_ad67d22ffc9bc1849ca1533f97a6e22ae"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad67d22ffc9bc1849ca1533f97a6e22ae">println</a> (const char *srcstring) noexcept=0</td></tr>
+<tr class="memdesc:ad67d22ffc9bc1849ca1533f97a6e22ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the specified string to the stream and then appends the newline character(s) to the stream.  <br /></td></tr>
+<tr class="separator:ad67d22ffc9bc1849ca1533f97a6e22ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a207fe4438bb9db1d511569a63c70da95" id="r_a207fe4438bb9db1d511569a63c70da95"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a207fe4438bb9db1d511569a63c70da95">println</a> (const char *srcstring, int numbytes) noexcept=0</td></tr>
+<tr class="memdesc:a207fe4438bb9db1d511569a63c70da95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs the first 'numbytes' bytes of the specified string to the stream and then appends the newline character(s) to the stream.  <br /></td></tr>
+<tr class="separator:a207fe4438bb9db1d511569a63c70da95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c33b40ce57f56dec184f0192ed6ef20" id="r_a0c33b40ce57f56dec184f0192ed6ef20"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c33b40ce57f56dec184f0192ed6ef20">println</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;formatBuffer, const char *format,...) noexcept=0</td></tr>
 <tr class="memdesc:a0c33b40ce57f56dec184f0192ed6ef20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as above, except newline character(s) are appended to the end of the formatted output.  <br /></td></tr>
 <tr class="separator:a0c33b40ce57f56dec184f0192ed6ef20"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -96,17 +102,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a57042f3d0b9252e1a657eb4bdb2ed438" id="r_a57042f3d0b9252e1a657eb4bdb2ed438"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57042f3d0b9252e1a657eb4bdb2ed438">vprintln</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;formatBuffer, const char *format, va_list ap) noexcept=0</td></tr>
 <tr class="memdesc:a57042f3d0b9252e1a657eb4bdb2ed438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as println( String&amp; formatBuffer, const char* format,...), except that it is called with a va_list instead of a variable number of arguments.  <br /></td></tr>
 <tr class="separator:a57042f3d0b9252e1a657eb4bdb2ed438"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ad2bd5fe296b00e297560c2b5a97073" id="r_a0ad2bd5fe296b00e297560c2b5a97073"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ad2bd5fe296b00e297560c2b5a97073">flush</a> () noexcept=0</td></tr>
-<tr class="memdesc:a0ad2bd5fe296b00e297560c2b5a97073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forces all buffered data (if any) to be written to the stream media.  <br /></td></tr>
-<tr class="separator:a0ad2bd5fe296b00e297560c2b5a97073"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e5418687cb02e669df36cd3741217d2" id="r_a8e5418687cb02e669df36cd3741217d2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e5418687cb02e669df36cd3741217d2">close</a> () noexcept=0</td></tr>
-<tr class="memdesc:a8e5418687cb02e669df36cd3741217d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Closes the writer and the underlying output stream.  <br /></td></tr>
-<tr class="separator:a8e5418687cb02e669df36cd3741217d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9058e144a65734c1f7b6e5c7d7e74851" id="r_a9058e144a65734c1f7b6e5c7d7e74851"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9058e144a65734c1f7b6e5c7d7e74851">~ILineWriter</a> () noexcept=default</td></tr>
-<tr class="memdesc:a9058e144a65734c1f7b6e5c7d7e74851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lets the make the destructor virtual.  <br /></td></tr>
-<tr class="separator:a9058e144a65734c1f7b6e5c7d7e74851"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class defines a interface for a stream line writer. </p>
+<p>A line writer allows the client to write lines to a stream. The interface also handles the output of the 'new line' character(s). </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9058e144a65734c1f7b6e5c7d7e74851" name="a9058e144a65734c1f7b6e5c7d7e74851"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9058e144a65734c1f7b6e5c7d7e74851">&#9670;&#160;</a></span>~ILineWriter()</h2>
 
@@ -509,7 +509,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

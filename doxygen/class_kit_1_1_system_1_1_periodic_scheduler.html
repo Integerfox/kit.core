@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,26 +46,19 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_periodic_scheduler-members.html">List of all members</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_kit_1_1_system_1_1_periodic_scheduler-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::PeriodicScheduler Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This concrete class is a 'policy' object that is used to add polled based, cooperative monotonic scheduling to a Runnable object.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This concrete class is a 'policy' object that is used to add polled based, cooperative monotonic scheduling to a Runnable object. </p>
-<p>Monotonic in this content means that if a 'interval' method is scheduled to execute at a periodic rate of 200Hz, then the method will be called on every 5ms boundary of the system time.</p>
-<p>The scheduler makes its best attempt at being monotonic and deterministic, BUT because the scheduling is polled and cooperative (i.e. its is the application's responsibility to not-overrun/over-allocate the processing done during each interval) the actual the timing cannot be guaranteed. That said, the scheduler will detect and report when the interval timing slips.</p>
-<p>The usage of this class is to implement (or extended) a Cpl::System::Runnable object, i.e. invoked inside the 'forever' loop of the Runnable object's appRun() method. The scheduler can be use within a 'bare' forever loop and it can be used with existing event based Runnable objects to add periodic scheduling. See Cpl::Dm::PeriodicScheduler for example extending an event based Runnable object to include periodic scheduling.</p>
-<p>NOTE: A uint64_t is used for the millisecond time keeping because it provides a larger range and can accommodate long-running applications (i.e. a uint32_t rolls over every 49.7 days; a uint64_t rolls over every 584 million years).</p>
-<p>NOTE: A "traditional C function pointer" paradigm is used to provide application specialization. This is by design on the premise that it simplifies the Application "main" in that 'start-up child classes' are not required to be created for each interval and/or for the scheduler hooks. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_periodic_scheduler_8h_source.html">PeriodicScheduler.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::System::PeriodicScheduler:</div>
@@ -90,21 +83,21 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a0feaa97fa5dde4cf663693b81f8b2616" id="r_a0feaa97fa5dde4cf663693b81f8b2616"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0feaa97fa5dde4cf663693b81f8b2616">IntervalCallbackFunc_T</a>) (uint64_t currentTick, uint64_t currentInterval, void *context)</td></tr>
-<tr class="memdesc:a0feaa97fa5dde4cf663693b81f8b2616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for an interval method.  <br /></td></tr>
-<tr class="separator:a0feaa97fa5dde4cf663693b81f8b2616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ccaea76fdd22612ea79cbb20dc53a4a" id="r_a0ccaea76fdd22612ea79cbb20dc53a4a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ccaea76fdd22612ea79cbb20dc53a4a">ReportSlippageFunc_T</a>) (<a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html">Interval_T</a> &amp;intervalThatSlipped, uint64_t currentTick, uint64_t missedInterval)</td></tr>
-<tr class="memdesc:a0ccaea76fdd22612ea79cbb20dc53a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the method that is used to report to the Application when an Interval does not execute 'on time'.  <br /></td></tr>
-<tr class="separator:a0ccaea76fdd22612ea79cbb20dc53a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26b87fb9f58e1fff08475ff59c829bea" id="r_a26b87fb9f58e1fff08475ff59c829bea"><td class="memItemLeft" align="right" valign="top">typedef uint64_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26b87fb9f58e1fff08475ff59c829bea">NowFunc_T</a>) ()</td></tr>
-<tr class="memdesc:a26b87fb9f58e1fff08475ff59c829bea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the function that returns current system.  <br /></td></tr>
-<tr class="separator:a26b87fb9f58e1fff08475ff59c829bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a544f639d070093250b1ff4867cd4d263" id="r_a544f639d070093250b1ff4867cd4d263"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a544f639d070093250b1ff4867cd4d263">Hook_T</a>) (uint64_t currentTick)</td></tr>
 <tr class="memdesc:a544f639d070093250b1ff4867cd4d263"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the optional functions that are used to provide hooks during startup/shutdown of the thread/loop[ to perform application specific processing.  <br /></td></tr>
 <tr class="separator:a544f639d070093250b1ff4867cd4d263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ab4fb3dabe4ba8b8618dbd8a79b4e0c" id="r_a0ab4fb3dabe4ba8b8618dbd8a79b4e0c"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ab4fb3dabe4ba8b8618dbd8a79b4e0c">IdleFunc_T</a>) (uint64_t currentTick, bool atLeastOneIntervalExecuted)</td></tr>
 <tr class="memdesc:a0ab4fb3dabe4ba8b8618dbd8a79b4e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an optional method that is called every time the Runnable's object executes its event/scheduling loop.  <br /></td></tr>
 <tr class="separator:a0ab4fb3dabe4ba8b8618dbd8a79b4e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0feaa97fa5dde4cf663693b81f8b2616" id="r_a0feaa97fa5dde4cf663693b81f8b2616"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0feaa97fa5dde4cf663693b81f8b2616">IntervalCallbackFunc_T</a>) (uint64_t currentTick, uint64_t currentInterval, void *context)</td></tr>
+<tr class="memdesc:a0feaa97fa5dde4cf663693b81f8b2616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for an interval method.  <br /></td></tr>
+<tr class="separator:a0feaa97fa5dde4cf663693b81f8b2616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26b87fb9f58e1fff08475ff59c829bea" id="r_a26b87fb9f58e1fff08475ff59c829bea"><td class="memItemLeft" align="right" valign="top">typedef uint64_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26b87fb9f58e1fff08475ff59c829bea">NowFunc_T</a>) ()</td></tr>
+<tr class="memdesc:a26b87fb9f58e1fff08475ff59c829bea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the function that returns current system.  <br /></td></tr>
+<tr class="separator:a26b87fb9f58e1fff08475ff59c829bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ccaea76fdd22612ea79cbb20dc53a4a" id="r_a0ccaea76fdd22612ea79cbb20dc53a4a"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ccaea76fdd22612ea79cbb20dc53a4a">ReportSlippageFunc_T</a>) (<a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html">Interval_T</a> &amp;intervalThatSlipped, uint64_t currentTick, uint64_t missedInterval)</td></tr>
+<tr class="memdesc:a0ccaea76fdd22612ea79cbb20dc53a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the method that is used to report to the Application when an Interval does not execute 'on time'.  <br /></td></tr>
+<tr class="separator:a0ccaea76fdd22612ea79cbb20dc53a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -114,15 +107,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab35e7e5e928a287e33b65a4a3b191de2" id="r_ab35e7e5e928a287e33b65a4a3b191de2"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab35e7e5e928a287e33b65a4a3b191de2">~PeriodicScheduler</a> ()=default</td></tr>
 <tr class="memdesc:ab35e7e5e928a287e33b65a4a3b191de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:ab35e7e5e928a287e33b65a4a3b191de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25a0a5483d2ab2faa501d8e60e8d841f" id="r_a25a0a5483d2ab2faa501d8e60e8d841f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25a0a5483d2ab2faa501d8e60e8d841f">executeScheduler</a> () noexcept</td></tr>
-<tr class="memdesc:a25a0a5483d2ab2faa501d8e60e8d841f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to invoke the scheduler.  <br /></td></tr>
-<tr class="separator:a25a0a5483d2ab2faa501d8e60e8d841f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bc0b5b267c53884024fdcefe499d7c5" id="r_a2bc0b5b267c53884024fdcefe499d7c5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bc0b5b267c53884024fdcefe499d7c5">beginLoop</a> () noexcept</td></tr>
 <tr class="memdesc:a2bc0b5b267c53884024fdcefe499d7c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is expected to be called ONCE when the 'thread' is started and prior to the thread entering its 'forever' loop.  <br /></td></tr>
 <tr class="separator:a2bc0b5b267c53884024fdcefe499d7c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa674a0a684f002e7ae68fc669643c6b9" id="r_aa674a0a684f002e7ae68fc669643c6b9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa674a0a684f002e7ae68fc669643c6b9">endLoop</a> () noexcept</td></tr>
 <tr class="memdesc:aa674a0a684f002e7ae68fc669643c6b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is expected to be called ONCE when the 'thread' has exited its 'forever' loop (but before the thread has actually terminated)  <br /></td></tr>
 <tr class="separator:aa674a0a684f002e7ae68fc669643c6b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25a0a5483d2ab2faa501d8e60e8d841f" id="r_a25a0a5483d2ab2faa501d8e60e8d841f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25a0a5483d2ab2faa501d8e60e8d841f">executeScheduler</a> () noexcept</td></tr>
+<tr class="memdesc:a25a0a5483d2ab2faa501d8e60e8d841f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to invoke the scheduler.  <br /></td></tr>
+<tr class="separator:a25a0a5483d2ab2faa501d8e60e8d841f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -132,15 +125,6 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a0a9c4db4563092c9ca7d93bc6483e8de" id="r_a0a9c4db4563092c9ca7d93bc6483e8de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html">Interval_T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a9c4db4563092c9ca7d93bc6483e8de">m_intervals</a></td></tr>
-<tr class="memdesc:a0a9c4db4563092c9ca7d93bc6483e8de"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of Intervals Pointers.  <br /></td></tr>
-<tr class="separator:a0a9c4db4563092c9ca7d93bc6483e8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3be6988bad73c3ef1b7bbea7bf1e2c3" id="r_ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a0ccaea76fdd22612ea79cbb20dc53a4a">ReportSlippageFunc_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3be6988bad73c3ef1b7bbea7bf1e2c3">m_reportSlippage</a></td></tr>
-<tr class="memdesc:ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report slippage method.  <br /></td></tr>
-<tr class="separator:ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1be060d65e26cebdb8186a59c1acc829" id="r_a1be060d65e26cebdb8186a59c1acc829"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a26b87fb9f58e1fff08475ff59c829bea">NowFunc_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1be060d65e26cebdb8186a59c1acc829">m_nowFunc</a></td></tr>
-<tr class="memdesc:a1be060d65e26cebdb8186a59c1acc829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current system callback.  <br /></td></tr>
-<tr class="separator:a1be060d65e26cebdb8186a59c1acc829"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76627aa69c7428141f9d6d51aa2cde6c" id="r_a76627aa69c7428141f9d6d51aa2cde6c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a544f639d070093250b1ff4867cd4d263">Hook_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76627aa69c7428141f9d6d51aa2cde6c">m_beginThreadFunc</a></td></tr>
 <tr class="memdesc:a76627aa69c7428141f9d6d51aa2cde6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application hook during thread start-up.  <br /></td></tr>
 <tr class="separator:a76627aa69c7428141f9d6d51aa2cde6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,8 +134,24 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:afe659d2aeac8013bbc308434ac07d892" id="r_afe659d2aeac8013bbc308434ac07d892"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe659d2aeac8013bbc308434ac07d892">m_firstExecution</a></td></tr>
 <tr class="memdesc:afe659d2aeac8013bbc308434ac07d892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to managing the 'first' execution.  <br /></td></tr>
 <tr class="separator:afe659d2aeac8013bbc308434ac07d892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a9c4db4563092c9ca7d93bc6483e8de" id="r_a0a9c4db4563092c9ca7d93bc6483e8de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html">Interval_T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a9c4db4563092c9ca7d93bc6483e8de">m_intervals</a></td></tr>
+<tr class="memdesc:a0a9c4db4563092c9ca7d93bc6483e8de"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of Intervals Pointers.  <br /></td></tr>
+<tr class="separator:a0a9c4db4563092c9ca7d93bc6483e8de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be060d65e26cebdb8186a59c1acc829" id="r_a1be060d65e26cebdb8186a59c1acc829"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a26b87fb9f58e1fff08475ff59c829bea">NowFunc_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1be060d65e26cebdb8186a59c1acc829">m_nowFunc</a></td></tr>
+<tr class="memdesc:a1be060d65e26cebdb8186a59c1acc829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current system callback.  <br /></td></tr>
+<tr class="separator:a1be060d65e26cebdb8186a59c1acc829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3be6988bad73c3ef1b7bbea7bf1e2c3" id="r_ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a0ccaea76fdd22612ea79cbb20dc53a4a">ReportSlippageFunc_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3be6988bad73c3ef1b7bbea7bf1e2c3">m_reportSlippage</a></td></tr>
+<tr class="memdesc:ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report slippage method.  <br /></td></tr>
+<tr class="separator:ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This concrete class is a 'policy' object that is used to add polled based, cooperative monotonic scheduling to a Runnable object. </p>
+<p>Monotonic in this content means that if a 'interval' method is scheduled to execute at a periodic rate of 200Hz, then the method will be called on every 5ms boundary of the system time.</p>
+<p>The scheduler makes its best attempt at being monotonic and deterministic, BUT because the scheduling is polled and cooperative (i.e. its is the application's responsibility to not-overrun/over-allocate the processing done during each interval) the actual the timing cannot be guaranteed. That said, the scheduler will detect and report when the interval timing slips.</p>
+<p>The usage of this class is to implement (or extended) a Cpl::System::Runnable object, i.e. invoked inside the 'forever' loop of the Runnable object's appRun() method. The scheduler can be use within a 'bare' forever loop and it can be used with existing event based Runnable objects to add periodic scheduling. See Cpl::Dm::PeriodicScheduler for example extending an event based Runnable object to include periodic scheduling.</p>
+<p>NOTE: A uint64_t is used for the millisecond time keeping because it provides a larger range and can accommodate long-running applications (i.e. a uint32_t rolls over every 49.7 days; a uint64_t rolls over every 584 million years).</p>
+<p>NOTE: A "traditional C function pointer" paradigm is used to provide application specialization. This is by design on the premise that it simplifies the Application "main" in that 'start-up child classes' are not required to be created for each interval and/or for the scheduler hooks. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a544f639d070093250b1ff4867cd4d263" name="a544f639d070093250b1ff4867cd4d263"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a544f639d070093250b1ff4867cd4d263">&#9670;&#160;</a></span>Hook_T</h2>
 
@@ -585,7 +585,7 @@ currentInterval:=  10200 ms
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,22 +46,29 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_text_1_1_string_to-members.html">List of all members</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-static-methods">Static Protected Member Functions</a>  </div>
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="class_kit_1_1_text_1_1_string_to-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Text::StringTo Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This static class contains collection of methods that wrap the standard C library functions for converting text/string to binary values.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This static class contains collection of methods that wrap the standard C library functions for converting text/string to binary values. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_string_to_8h_source.html">StringTo.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a75de1ce7af8d188c97ab4995290e2d4f" id="r_a75de1ce7af8d188c97ab4995290e2d4f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75de1ce7af8d188c97ab4995290e2d4f">boolean</a> (bool &amp;convertedValue, const char *string, const char *trueToken=&quot;T&quot;, const char *falseToken=&quot;F&quot;, const char **endptr=nullptr) noexcept</td></tr>
+<tr class="memdesc:a75de1ce7af8d188c97ab4995290e2d4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method convert the specified string to an boolean.  <br /></td></tr>
+<tr class="separator:a75de1ce7af8d188c97ab4995290e2d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8794a2160267779d68ad5dd47d2c2dcf" id="r_a8794a2160267779d68ad5dd47d2c2dcf"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8794a2160267779d68ad5dd47d2c2dcf">floating</a> (double &amp;convertedValue, const char *string, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</td></tr>
+<tr class="memdesc:a8794a2160267779d68ad5dd47d2c2dcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is the same as <a class="el" href="#a1c705fcc60f44c3c72721e7511d24b65" title="This method converts the specified string to an single precisions floating point number.">floating()</a> above, except that it converts the string to double precision floating point.  <br /></td></tr>
+<tr class="separator:a8794a2160267779d68ad5dd47d2c2dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c705fcc60f44c3c72721e7511d24b65" id="r_a1c705fcc60f44c3c72721e7511d24b65"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c705fcc60f44c3c72721e7511d24b65">floating</a> (float &amp;convertedValue, const char *string, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</td></tr>
+<tr class="memdesc:a1c705fcc60f44c3c72721e7511d24b65"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the specified string to an single precisions floating point number.  <br /></td></tr>
+<tr class="separator:a1c705fcc60f44c3c72721e7511d24b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a46cc841f70facc6a7c44f313abad93" id="r_a5a46cc841f70facc6a7c44f313abad93"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a5a46cc841f70facc6a7c44f313abad93"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a5a46cc841f70facc6a7c44f313abad93">signedInt</a> (T &amp;convertedValue, const char *string, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</td></tr>
 <tr class="memdesc:a5a46cc841f70facc6a7c44f313abad93"><td class="mdescLeft">&#160;</td><td class="mdescRight">This template method converts the specified string to an signed integer.  <br /></td></tr>
@@ -70,29 +77,22 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:af73d958578d575ba2ae136a53d4dc035"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#af73d958578d575ba2ae136a53d4dc035">unsignedInt</a> (T &amp;convertedValue, const char *string, int base=10, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</td></tr>
 <tr class="memdesc:af73d958578d575ba2ae136a53d4dc035"><td class="mdescLeft">&#160;</td><td class="mdescRight">This template method converts the specified string to an unsigned integer.  <br /></td></tr>
 <tr class="separator:af73d958578d575ba2ae136a53d4dc035"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c705fcc60f44c3c72721e7511d24b65" id="r_a1c705fcc60f44c3c72721e7511d24b65"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c705fcc60f44c3c72721e7511d24b65">floating</a> (float &amp;convertedValue, const char *string, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</td></tr>
-<tr class="memdesc:a1c705fcc60f44c3c72721e7511d24b65"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the specified string to an single precisions floating point number.  <br /></td></tr>
-<tr class="separator:a1c705fcc60f44c3c72721e7511d24b65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8794a2160267779d68ad5dd47d2c2dcf" id="r_a8794a2160267779d68ad5dd47d2c2dcf"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8794a2160267779d68ad5dd47d2c2dcf">floating</a> (double &amp;convertedValue, const char *string, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</td></tr>
-<tr class="memdesc:a8794a2160267779d68ad5dd47d2c2dcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is the same as <a class="el" href="#a1c705fcc60f44c3c72721e7511d24b65" title="This method converts the specified string to an single precisions floating point number.">floating()</a> above, except that it converts the string to double precision floating point.  <br /></td></tr>
-<tr class="separator:a8794a2160267779d68ad5dd47d2c2dcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75de1ce7af8d188c97ab4995290e2d4f" id="r_a75de1ce7af8d188c97ab4995290e2d4f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75de1ce7af8d188c97ab4995290e2d4f">boolean</a> (bool &amp;convertedValue, const char *string, const char *trueToken=&quot;T&quot;, const char *falseToken=&quot;F&quot;, const char **endptr=nullptr) noexcept</td></tr>
-<tr class="memdesc:a75de1ce7af8d188c97ab4995290e2d4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method convert the specified string to an boolean.  <br /></td></tr>
-<tr class="separator:a75de1ce7af8d188c97ab4995290e2d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a4529e58c2006ad2180066cb6061837c3" id="r_a4529e58c2006ad2180066cb6061837c3"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4529e58c2006ad2180066cb6061837c3">a2d</a> (double &amp;convertedValue, const char *string, const char *validStopChars, const char **end) noexcept</td></tr>
+<tr class="memdesc:a4529e58c2006ad2180066cb6061837c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method.  <br /></td></tr>
+<tr class="separator:a4529e58c2006ad2180066cb6061837c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acab759d17e17ee267794b8282b18747b" id="r_acab759d17e17ee267794b8282b18747b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acab759d17e17ee267794b8282b18747b">a2ll</a> (long long &amp;convertedValue, const char *string, int base, const char *validStopChars, const char **end) noexcept</td></tr>
 <tr class="memdesc:acab759d17e17ee267794b8282b18747b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method.  <br /></td></tr>
 <tr class="separator:acab759d17e17ee267794b8282b18747b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32556ae23e90be4f487880eabcbbb202" id="r_a32556ae23e90be4f487880eabcbbb202"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32556ae23e90be4f487880eabcbbb202">a2ull</a> (unsigned long long &amp;convertedValue, const char *string, int base=10, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</td></tr>
 <tr class="memdesc:a32556ae23e90be4f487880eabcbbb202"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method.  <br /></td></tr>
 <tr class="separator:a32556ae23e90be4f487880eabcbbb202"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4529e58c2006ad2180066cb6061837c3" id="r_a4529e58c2006ad2180066cb6061837c3"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4529e58c2006ad2180066cb6061837c3">a2d</a> (double &amp;convertedValue, const char *string, const char *validStopChars, const char **end) noexcept</td></tr>
-<tr class="memdesc:a4529e58c2006ad2180066cb6061837c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method.  <br /></td></tr>
-<tr class="separator:a4529e58c2006ad2180066cb6061837c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This static class contains collection of methods that wrap the standard C library functions for converting text/string to binary values. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4529e58c2006ad2180066cb6061837c3" name="a4529e58c2006ad2180066cb6061837c3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4529e58c2006ad2180066cb6061837c3">&#9670;&#160;</a></span>a2d()</h2>
 
@@ -462,7 +462,7 @@ template&lt;typename T &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

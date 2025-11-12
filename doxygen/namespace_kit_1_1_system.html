@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -55,10 +55,7 @@ $(function() {
 
 <p>The '<a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">System</a>' namespace contains platform independent foundation abstractions and classes related to program execution.  
 <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The '<a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">System</a>' namespace contains platform independent foundation abstractions and classes related to program execution. </p>
-<p>The interfaces and abstractions are designed to support multi-threaded and bare metal applications. </p>
-</div><table class="memberdecls">
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespace_kit_1_1_system_1_1_free_r_t_o_s" id="r_namespace_kit_1_1_system_1_1_free_r_t_o_s"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_system_1_1_free_r_t_o_s.html">FreeRTOS</a></td></tr>
@@ -160,15 +157,18 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a09af4e2eba5e8a0b986cebe0d2bbe9cb" id="r_a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09af4e2eba5e8a0b986cebe0d2bbe9cb">initialize</a> () noexcept</td></tr>
-<tr class="memdesc:a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the KIT C++ class library.  <br /></td></tr>
-<tr class="separator:a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaf10d7b2ba64ba90e57bdd88c1ea666" id="r_aaaf10d7b2ba64ba90e57bdd88c1ea666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaf10d7b2ba64ba90e57bdd88c1ea666">enableScheduling</a> () noexcept</td></tr>
 <tr class="memdesc:aaaf10d7b2ba64ba90e57bdd88c1ea666"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to initiate thread scheduling.  <br /></td></tr>
 <tr class="separator:aaaf10d7b2ba64ba90e57bdd88c1ea666"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09af4e2eba5e8a0b986cebe0d2bbe9cb" id="r_a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a09af4e2eba5e8a0b986cebe0d2bbe9cb">initialize</a> () noexcept</td></tr>
+<tr class="memdesc:a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the KIT C++ class library.  <br /></td></tr>
+<tr class="separator:a09af4e2eba5e8a0b986cebe0d2bbe9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9aa4f2aa7d6133fc710a14cfc1a56f2f" id="r_a9aa4f2aa7d6133fc710a14cfc1a56f2f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9aa4f2aa7d6133fc710a14cfc1a56f2f">isSchedulingEnabled</a> () noexcept</td></tr>
 <tr class="memdesc:a9aa4f2aa7d6133fc710a14cfc1a56f2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function returns true if scheduling has enabled using the <a class="el" href="#aaaf10d7b2ba64ba90e57bdd88c1ea666" title="This function is used to initiate thread scheduling.">enableScheduling()</a> functions.  <br /></td></tr>
 <tr class="separator:a9aa4f2aa7d6133fc710a14cfc1a56f2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbe19a17e287546b44bdd4b0842f621f" id="r_afbe19a17e287546b44bdd4b0842f621f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbe19a17e287546b44bdd4b0842f621f">resumeScheduling</a> () noexcept</td></tr>
+<tr class="memdesc:afbe19a17e287546b44bdd4b0842f621f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to resume thread scheduling after a call to suspendScheduling has been made.  <br /></td></tr>
+<tr class="separator:afbe19a17e287546b44bdd4b0842f621f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ce80b51370ac7c69e2887f653d519a3" id="r_a9ce80b51370ac7c69e2887f653d519a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ce80b51370ac7c69e2887f653d519a3">sleep</a> (uint32_t milliseconds) noexcept</td></tr>
 <tr class="memdesc:a9ce80b51370ac7c69e2887f653d519a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method causes the current thread to be suspended for n milliseconds.  <br /></td></tr>
 <tr class="separator:a9ce80b51370ac7c69e2887f653d519a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,11 +178,11 @@ Functions</h2></td></tr>
 <tr class="memitem:aaf03c210892ea5fafba57bb96bb99bd4" id="r_aaf03c210892ea5fafba57bb96bb99bd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaf03c210892ea5fafba57bb96bb99bd4">suspendScheduling</a> () noexcept</td></tr>
 <tr class="memdesc:aaf03c210892ea5fafba57bb96bb99bd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to temporarily suspend thread scheduling, i.e.  <br /></td></tr>
 <tr class="separator:aaf03c210892ea5fafba57bb96bb99bd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbe19a17e287546b44bdd4b0842f621f" id="r_afbe19a17e287546b44bdd4b0842f621f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbe19a17e287546b44bdd4b0842f621f">resumeScheduling</a> () noexcept</td></tr>
-<tr class="memdesc:afbe19a17e287546b44bdd4b0842f621f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to resume thread scheduling after a call to suspendScheduling has been made.  <br /></td></tr>
-<tr class="separator:afbe19a17e287546b44bdd4b0842f621f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The '<a class="el" href="namespace_kit_1_1_system.html" title="The &#39;System&#39; namespace contains platform independent foundation abstractions and classes related to p...">System</a>' namespace contains platform independent foundation abstractions and classes related to program execution. </p>
+<p>The interfaces and abstractions are designed to support multi-threaded and bare metal applications. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="aaaf10d7b2ba64ba90e57bdd88c1ea666" name="aaaf10d7b2ba64ba90e57bdd88c1ea666"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaaf10d7b2ba64ba90e57bdd88c1ea666">&#9670;&#160;</a></span>enableScheduling()</h2>
 
@@ -386,7 +386,7 @@ o This method should only be called ONCE!
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

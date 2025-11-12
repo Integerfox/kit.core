@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,17 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_i_signable-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_system_1_1_i_signable-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::ISignable Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class defines the interface by which a client can cause an object that is waiting-on-a-signal to become unblocked.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class defines the interface by which a client can cause an object that is waiting-on-a-signal to become unblocked. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_signable_8h_source.html">ISignable.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::System::ISignable:</div>
@@ -68,17 +66,19 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a2bc4d6efa5aa693c6e560bb0effc252a" id="r_a2bc4d6efa5aa693c6e560bb0effc252a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bc4d6efa5aa693c6e560bb0effc252a">~ISignable</a> ()=default</td></tr>
+<tr class="memdesc:a2bc4d6efa5aa693c6e560bb0effc252a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a2bc4d6efa5aa693c6e560bb0effc252a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72c130b85d33277148381e554908ffb6" id="r_a72c130b85d33277148381e554908ffb6"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72c130b85d33277148381e554908ffb6">signal</a> () noexcept=0</td></tr>
 <tr class="memdesc:a72c130b85d33277148381e554908ffb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called by client to cause the server to become unblock and ready to run.  <br /></td></tr>
 <tr class="separator:a72c130b85d33277148381e554908ffb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4e2c4865999347547d60b525b2b9d1a" id="r_af4e2c4865999347547d60b525b2b9d1a"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4e2c4865999347547d60b525b2b9d1a">su_signal</a> () noexcept=0</td></tr>
 <tr class="memdesc:af4e2c4865999347547d60b525b2b9d1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a72c130b85d33277148381e554908ffb6" title="This method is called by client to cause the server to become unblock and ready to run.">signal()</a>, EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
 <tr class="separator:af4e2c4865999347547d60b525b2b9d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bc4d6efa5aa693c6e560bb0effc252a" id="r_a2bc4d6efa5aa693c6e560bb0effc252a"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2bc4d6efa5aa693c6e560bb0effc252a">~ISignable</a> ()=default</td></tr>
-<tr class="memdesc:a2bc4d6efa5aa693c6e560bb0effc252a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
-<tr class="separator:a2bc4d6efa5aa693c6e560bb0effc252a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class defines the interface by which a client can cause an object that is waiting-on-a-signal to become unblocked. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2bc4d6efa5aa693c6e560bb0effc252a" name="a2bc4d6efa5aa693c6e560bb0effc252a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2bc4d6efa5aa693c6e560bb0effc252a">&#9670;&#160;</a></span>~ISignable()</h2>
 
@@ -173,7 +173,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

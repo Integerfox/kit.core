@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,33 +46,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_text_1_1_string_item-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_kit_1_1_text_1_1_string_item-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Text::StringItem Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This partially concrete provides a wrapper class that allows a <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a> object to be stored directly in one the KIT Containers.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This partially concrete provides a wrapper class that allows a <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a> object to be stored directly in one the KIT Containers. </p>
-<p>A <a class="el" href="class_kit_1_1_text_1_1_string_item.html" title="This partially concrete provides a wrapper class that allows a IString object to be stored directly i...">StringItem</a> can be stored in a SList, DList, and Map.</p>
-<p>Notes: </p><pre class="fragment">o The allocation of the actual IString is deferred to child classes.
 
-o When storing a StringItem in a 'keyed' container (i.e. Map) the
-  application MUST NOT change the value of the internal string since it
-  is the 'key' value that is used to determine its placement in the Map.
-  Modifying the internal IString while the StringItem is in a Map will
-  CORRUPT the Container.
-
-o StringItem instances CANNOT be copied.  This is to avoid potential
-  Container corruption since the individual Items contain the memory
-  for the Containers' linkage, i.e. a copied container Item is
-  analogous to storing a single Item in more than one Container at the
-  same time.
-</pre> </div>
 <p><code>#include &lt;<a class="el" href="_string_item_8h_source.html">StringItem.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Text::StringItem:</div>
@@ -94,21 +78,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1b653c03635074ed3d855b98ec056da5" id="r_a1b653c03635074ed3d855b98ec056da5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b653c03635074ed3d855b98ec056da5">get</a> () const noexcept</td></tr>
 <tr class="memdesc:a1b653c03635074ed3d855b98ec056da5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a reference to the actual <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a>.  <br /></td></tr>
 <tr class="separator:a1b653c03635074ed3d855b98ec056da5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac392133aed2cddec55b7e0f51e43956" id="r_aac392133aed2cddec55b7e0f51e43956"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac392133aed2cddec55b7e0f51e43956">getString</a> () const noexcept</td></tr>
-<tr class="memdesc:aac392133aed2cddec55b7e0f51e43956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the internal C string.  <br /></td></tr>
-<tr class="separator:aac392133aed2cddec55b7e0f51e43956"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31b0c88b58e86b24f007d41a6fc47074" id="r_a31b0c88b58e86b24f007d41a6fc47074"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31b0c88b58e86b24f007d41a6fc47074">operator IString &amp;</a> () const noexcept</td></tr>
-<tr class="memdesc:a31b0c88b58e86b24f007d41a6fc47074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast to a <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a> reference.  <br /></td></tr>
-<tr class="separator:a31b0c88b58e86b24f007d41a6fc47074"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a90a174c978d8c049cd76a9258cbf85b1" id="r_a90a174c978d8c049cd76a9258cbf85b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90a174c978d8c049cd76a9258cbf85b1">operator const char *</a> () const noexcept</td></tr>
-<tr class="memdesc:a90a174c978d8c049cd76a9258cbf85b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast to read-only character string pointer.  <br /></td></tr>
-<tr class="separator:a90a174c978d8c049cd76a9258cbf85b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2570796f90b693520c711069a8024fa7" id="r_a2570796f90b693520c711069a8024fa7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2570796f90b693520c711069a8024fa7">operator()</a> () const noexcept</td></tr>
-<tr class="memdesc:a2570796f90b693520c711069a8024fa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a Read-only pointer to the "raw" (short-hand for <a class="el" href="#aac392133aed2cddec55b7e0f51e43956" title="Returns a pointer to the internal C string.">getString()</a>)  <br /></td></tr>
-<tr class="separator:a2570796f90b693520c711069a8024fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab24e08dcdc6dd31ce06b80575d8d58ef" id="r_ab24e08dcdc6dd31ce06b80575d8d58ef"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_kit_1_1_container_1_1_key.html">Kit::Container::Key</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab24e08dcdc6dd31ce06b80575d8d58ef">getKey</a> () const noexcept</td></tr>
 <tr class="memdesc:ab24e08dcdc6dd31ce06b80575d8d58ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <a class="el" href="class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k...">Kit::Container::Key</a> (A <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a> is-a Key)  <br /></td></tr>
 <tr class="separator:ab24e08dcdc6dd31ce06b80575d8d58ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac392133aed2cddec55b7e0f51e43956" id="r_aac392133aed2cddec55b7e0f51e43956"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac392133aed2cddec55b7e0f51e43956">getString</a> () const noexcept</td></tr>
+<tr class="memdesc:aac392133aed2cddec55b7e0f51e43956"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the internal C string.  <br /></td></tr>
+<tr class="separator:aac392133aed2cddec55b7e0f51e43956"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90a174c978d8c049cd76a9258cbf85b1" id="r_a90a174c978d8c049cd76a9258cbf85b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90a174c978d8c049cd76a9258cbf85b1">operator const char *</a> () const noexcept</td></tr>
+<tr class="memdesc:a90a174c978d8c049cd76a9258cbf85b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast to read-only character string pointer.  <br /></td></tr>
+<tr class="separator:a90a174c978d8c049cd76a9258cbf85b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31b0c88b58e86b24f007d41a6fc47074" id="r_a31b0c88b58e86b24f007d41a6fc47074"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31b0c88b58e86b24f007d41a6fc47074">operator IString &amp;</a> () const noexcept</td></tr>
+<tr class="memdesc:a31b0c88b58e86b24f007d41a6fc47074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast to a <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a> reference.  <br /></td></tr>
+<tr class="separator:a31b0c88b58e86b24f007d41a6fc47074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2570796f90b693520c711069a8024fa7" id="r_a2570796f90b693520c711069a8024fa7"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2570796f90b693520c711069a8024fa7">operator()</a> () const noexcept</td></tr>
+<tr class="memdesc:a2570796f90b693520c711069a8024fa7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a Read-only pointer to the "raw" (short-hand for <a class="el" href="#aac392133aed2cddec55b7e0f51e43956" title="Returns a pointer to the internal C string.">getString()</a>)  <br /></td></tr>
+<tr class="separator:a2570796f90b693520c711069a8024fa7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_container_1_1_item"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_container_1_1_item')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_container_1_1_item.html">Kit::Container::Item</a></td></tr>
 <tr class="memitem:a629af4bb1ce1c34f7d72437e55eb69df inherit pub_methods_class_kit_1_1_container_1_1_item" id="r_a629af4bb1ce1c34f7d72437e55eb69df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">insert_</a> (void *newContainerPtr) noexcept</td></tr>
 <tr class="memdesc:a629af4bb1ce1c34f7d72437e55eb69df inherit pub_methods_class_kit_1_1_container_1_1_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to trap when inserting an item in multiple containers.  <br /></td></tr>
@@ -132,24 +116,24 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a79b7dc33a74ffda3465a99b12b3f855c inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_a79b7dc33a74ffda3465a99b12b3f855c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a79b7dc33a74ffda3465a99b12b3f855c">MapItem</a> (const char *ignoreThisParameter_usedToCreateAUniqueConstructor) noexcept</td></tr>
 <tr class="memdesc:a79b7dc33a74ffda3465a99b12b3f855c inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor --&gt;special constructor to allow a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> to be statically allocated.  <br /></td></tr>
 <tr class="separator:a79b7dc33a74ffda3465a99b12b3f855c inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adef86b5f11f5676141ffb897e1088928 inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_adef86b5f11f5676141ffb897e1088928"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#adef86b5f11f5676141ffb897e1088928">initialize</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *parent) noexcept</td></tr>
-<tr class="memdesc:adef86b5f11f5676141ffb897e1088928 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the node when being inserted in the tree.  <br /></td></tr>
-<tr class="separator:adef86b5f11f5676141ffb897e1088928 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb62279c18abbb85010bc84507ef6c62 inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_abb62279c18abbb85010bc84507ef6c62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#abb62279c18abbb85010bc84507ef6c62">getParent</a> () const</td></tr>
-<tr class="memdesc:abb62279c18abbb85010bc84507ef6c62 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tree connection/pointer.  <br /></td></tr>
-<tr class="separator:abb62279c18abbb85010bc84507ef6c62 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a848090d2520cd74153e1c1c3cd9226cb inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_a848090d2520cd74153e1c1c3cd9226cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a848090d2520cd74153e1c1c3cd9226cb">setParent</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *n)</td></tr>
-<tr class="memdesc:a848090d2520cd74153e1c1c3cd9226cb inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tree connection/pointer.  <br /></td></tr>
-<tr class="separator:a848090d2520cd74153e1c1c3cd9226cb inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae59e5aa19a878793c0f2a44604b35e63 inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_ae59e5aa19a878793c0f2a44604b35e63"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#ae59e5aa19a878793c0f2a44604b35e63">getLeft</a> () const</td></tr>
 <tr class="memdesc:ae59e5aa19a878793c0f2a44604b35e63 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tree connection/pointer.  <br /></td></tr>
 <tr class="separator:ae59e5aa19a878793c0f2a44604b35e63 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a6a5e4716118e685d9f65187111df3e inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_a9a6a5e4716118e685d9f65187111df3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a9a6a5e4716118e685d9f65187111df3e">setLeft</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *n)</td></tr>
-<tr class="memdesc:a9a6a5e4716118e685d9f65187111df3e inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tree connection/pointer.  <br /></td></tr>
-<tr class="separator:a9a6a5e4716118e685d9f65187111df3e inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb62279c18abbb85010bc84507ef6c62 inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_abb62279c18abbb85010bc84507ef6c62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#abb62279c18abbb85010bc84507ef6c62">getParent</a> () const</td></tr>
+<tr class="memdesc:abb62279c18abbb85010bc84507ef6c62 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tree connection/pointer.  <br /></td></tr>
+<tr class="separator:abb62279c18abbb85010bc84507ef6c62 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6164beadb8077f59a592719b9a60cbc0 inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_a6164beadb8077f59a592719b9a60cbc0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a6164beadb8077f59a592719b9a60cbc0">getRight</a> () const</td></tr>
 <tr class="memdesc:a6164beadb8077f59a592719b9a60cbc0 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get tree connection/pointer.  <br /></td></tr>
 <tr class="separator:a6164beadb8077f59a592719b9a60cbc0 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adef86b5f11f5676141ffb897e1088928 inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_adef86b5f11f5676141ffb897e1088928"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#adef86b5f11f5676141ffb897e1088928">initialize</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *parent) noexcept</td></tr>
+<tr class="memdesc:adef86b5f11f5676141ffb897e1088928 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the node when being inserted in the tree.  <br /></td></tr>
+<tr class="separator:adef86b5f11f5676141ffb897e1088928 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a6a5e4716118e685d9f65187111df3e inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_a9a6a5e4716118e685d9f65187111df3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a9a6a5e4716118e685d9f65187111df3e">setLeft</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *n)</td></tr>
+<tr class="memdesc:a9a6a5e4716118e685d9f65187111df3e inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tree connection/pointer.  <br /></td></tr>
+<tr class="separator:a9a6a5e4716118e685d9f65187111df3e inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a848090d2520cd74153e1c1c3cd9226cb inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_a848090d2520cd74153e1c1c3cd9226cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a848090d2520cd74153e1c1c3cd9226cb">setParent</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *n)</td></tr>
+<tr class="memdesc:a848090d2520cd74153e1c1c3cd9226cb inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tree connection/pointer.  <br /></td></tr>
+<tr class="separator:a848090d2520cd74153e1c1c3cd9226cb inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aead21f8637d3dc52281c2b3b992ae789 inherit pro_methods_class_kit_1_1_container_1_1_map_item" id="r_aead21f8637d3dc52281c2b3b992ae789"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#aead21f8637d3dc52281c2b3b992ae789">setRight</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *n)</td></tr>
 <tr class="memdesc:aead21f8637d3dc52281c2b3b992ae789 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tree connection/pointer.  <br /></td></tr>
 <tr class="separator:aead21f8637d3dc52281c2b3b992ae789 inherit pro_methods_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -188,15 +172,15 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:ac90108bded150698fff19f6c080c7502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the actual IString/storage.  <br /></td></tr>
 <tr class="separator:ac90108bded150698fff19f6c080c7502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_kit_1_1_container_1_1_map_item"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_class_kit_1_1_container_1_1_map_item')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_kit_1_1_container_1_1_map_item.html">Kit::Container::MapItem</a></td></tr>
-<tr class="memitem:a2c37ace8442b4ab64ab4a35468290e65 inherit pro_attribs_class_kit_1_1_container_1_1_map_item" id="r_a2c37ace8442b4ab64ab4a35468290e65"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a2c37ace8442b4ab64ab4a35468290e65">m_parentPtr_</a></td></tr>
-<tr class="memdesc:a2c37ace8442b4ab64ab4a35468290e65 inherit pro_attribs_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Link field to the parent node.  <br /></td></tr>
-<tr class="separator:a2c37ace8442b4ab64ab4a35468290e65 inherit pro_attribs_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a154beb824577f74d4d1065920bc9005e inherit pro_attribs_class_kit_1_1_container_1_1_map_item" id="r_a154beb824577f74d4d1065920bc9005e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#aa8449da4b451b884d51ce60e874181f1">Balance_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a154beb824577f74d4d1065920bc9005e">m_balance_</a></td></tr>
 <tr class="memdesc:a154beb824577f74d4d1065920bc9005e inherit pro_attribs_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Balance status.  <br /></td></tr>
 <tr class="separator:a154beb824577f74d4d1065920bc9005e inherit pro_attribs_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a229c5436ba2d5c074f27b9d434f47155 inherit pro_attribs_class_kit_1_1_container_1_1_map_item" id="r_a229c5436ba2d5c074f27b9d434f47155"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a229c5436ba2d5c074f27b9d434f47155">m_is_NOT_root_</a></td></tr>
 <tr class="memdesc:a229c5436ba2d5c074f27b9d434f47155 inherit pro_attribs_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">I am the root node.  <br /></td></tr>
 <tr class="separator:a229c5436ba2d5c074f27b9d434f47155 inherit pro_attribs_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c37ace8442b4ab64ab4a35468290e65 inherit pro_attribs_class_kit_1_1_container_1_1_map_item" id="r_a2c37ace8442b4ab64ab4a35468290e65"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_map_item.html#a2c37ace8442b4ab64ab4a35468290e65">m_parentPtr_</a></td></tr>
+<tr class="memdesc:a2c37ace8442b4ab64ab4a35468290e65 inherit pro_attribs_class_kit_1_1_container_1_1_map_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Link field to the parent node.  <br /></td></tr>
+<tr class="separator:a2c37ace8442b4ab64ab4a35468290e65 inherit pro_attribs_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -224,7 +208,23 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:aa8449da4b451b884d51ce60e874181f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Magic values for balance status.  <a href="class_kit_1_1_container_1_1_map_item.html#aa8449da4b451b884d51ce60e874181f1">More...</a><br /></td></tr>
 <tr class="separator:aa8449da4b451b884d51ce60e874181f1 inherit pro_types_class_kit_1_1_container_1_1_map_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This partially concrete provides a wrapper class that allows a <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a> object to be stored directly in one the KIT Containers. </p>
+<p>A <a class="el" href="class_kit_1_1_text_1_1_string_item.html" title="This partially concrete provides a wrapper class that allows a IString object to be stored directly i...">StringItem</a> can be stored in a SList, DList, and Map.</p>
+<p>Notes: </p><pre class="fragment">o The allocation of the actual IString is deferred to child classes.
+
+o When storing a StringItem in a 'keyed' container (i.e. Map) the
+  application MUST NOT change the value of the internal string since it
+  is the 'key' value that is used to determine its placement in the Map.
+  Modifying the internal IString while the StringItem is in a Map will
+  CORRUPT the Container.
+
+o StringItem instances CANNOT be copied.  This is to avoid potential
+  Container corruption since the individual Items contain the memory
+  for the Containers' linkage, i.e. a copied container Item is
+  analogous to storing a single Item in more than one Container at the
+  same time.
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a56d5a2af6b95319755a04919c4aef5cd" name="a56d5a2af6b95319755a04919c4aef5cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a56d5a2af6b95319755a04919c4aef5cd">&#9670;&#160;</a></span>StringItem()</h2>
 
@@ -448,7 +448,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

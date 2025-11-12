@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,18 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_io_1_1_socket_1_1_i_listener-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_io_1_1_socket_1_1_i_listener-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io::Socket::IListener Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class defines the interface for a SIMPLE socket listener.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class defines the interface for a SIMPLE socket listener. </p>
-<p>A socket listener 'listens' for potential TCP/IP socket connections. When a request for a connection comes in, the listener notifies the client. It is the client's responsibility to determine if the connection request is accepted as well as provide memory for the accepted connection. The client is also responsible for reclaiming the memory once the socket connection has been terminated. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_listener_8h_source.html">IListener.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Io::Socket::IListener:</div>
@@ -69,6 +66,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a339f13453cd7e6f68961d5fc7b6f8ab9" id="r_a339f13453cd7e6f68961d5fc7b6f8ab9"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a339f13453cd7e6f68961d5fc7b6f8ab9">~IListener</a> ()</td></tr>
+<tr class="memdesc:a339f13453cd7e6f68961d5fc7b6f8ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a339f13453cd7e6f68961d5fc7b6f8ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a575a6008beb1940579794cdf23d40205" id="r_a575a6008beb1940579794cdf23d40205"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a575a6008beb1940579794cdf23d40205">startListening</a> (<a class="el" href="class_kit_1_1_io_1_1_socket_1_1_i_listener_client.html">IListenerClient</a> &amp;client, int portNumToListenOn) noexcept=0</td></tr>
 <tr class="memdesc:a575a6008beb1940579794cdf23d40205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the Listener listening.  <br /></td></tr>
 <tr class="separator:a575a6008beb1940579794cdf23d40205"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -76,11 +76,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1a162eaa4f303a3fa3645dfeb0b663bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the Listener. <br  />
   <br /></td></tr>
 <tr class="separator:a1a162eaa4f303a3fa3645dfeb0b663bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a339f13453cd7e6f68961d5fc7b6f8ab9" id="r_a339f13453cd7e6f68961d5fc7b6f8ab9"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a339f13453cd7e6f68961d5fc7b6f8ab9">~IListener</a> ()</td></tr>
-<tr class="memdesc:a339f13453cd7e6f68961d5fc7b6f8ab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
-<tr class="separator:a339f13453cd7e6f68961d5fc7b6f8ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class defines the interface for a SIMPLE socket listener. </p>
+<p>A socket listener 'listens' for potential TCP/IP socket connections. When a request for a connection comes in, the listener notifies the client. It is the client's responsibility to determine if the connection request is accepted as well as provide memory for the accepted connection. The client is also responsible for reclaiming the memory once the socket connection has been terminated. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a339f13453cd7e6f68961d5fc7b6f8ab9" name="a339f13453cd7e6f68961d5fc7b6f8ab9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a339f13453cd7e6f68961d5fc7b6f8ab9">&#9670;&#160;</a></span>~IListener()</h2>
 
@@ -178,7 +178,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

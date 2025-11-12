@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,24 +46,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_container_1_1_ring_buffer_base-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_kit_1_1_container_1_1_ring_buffer_base-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::RingBufferBase Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This 'implementation' class provide the base functionality for a ring buffer.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This 'implementation' class provide the base functionality for a ring buffer. </p>
-<p>The Ring buffer is ISR/Thread safe as long as following constraints are met:</p><ul>
-<li>Writing to an 'unsigned' data type is an atomic machine instruction.</li>
-<li>There is SINGLE producer (add) and a SINGLE consumer (remove)</li>
-</ul>
-<p>NOTE: This class is not intended to be used directly. A child class is required to provide the ring buffer memory and type safety. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_ring_buffer_base_8h_source.html">RingBufferBase.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Container::RingBufferBase:</div>
@@ -75,65 +68,72 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af4f049473b9c8e2f8967225a5549ad04" id="r_af4f049473b9c8e2f8967225a5549ad04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4f049473b9c8e2f8967225a5549ad04">isEmpty</a> () const noexcept</td></tr>
-<tr class="memdesc:af4f049473b9c8e2f8967225a5549ad04"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the Ring Buffer is empty.  <br /></td></tr>
-<tr class="separator:af4f049473b9c8e2f8967225a5549ad04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ac716a342d9dfdf34656e4aca36e60f" id="r_a7ac716a342d9dfdf34656e4aca36e60f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ac716a342d9dfdf34656e4aca36e60f">isFull</a> () const noexcept</td></tr>
-<tr class="memdesc:a7ac716a342d9dfdf34656e4aca36e60f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the Ring Buffer is full.  <br /></td></tr>
-<tr class="separator:a7ac716a342d9dfdf34656e4aca36e60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9847a7b75185ab0fb0c759c587adf36e" id="r_a9847a7b75185ab0fb0c759c587adf36e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9847a7b75185ab0fb0c759c587adf36e">clearTheBuffer</a> () noexcept</td></tr>
+<tr class="memdesc:a9847a7b75185ab0fb0c759c587adf36e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method resets the underlying read/write indexes, i.e.  <br /></td></tr>
+<tr class="separator:a9847a7b75185ab0fb0c759c587adf36e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac420a299a57b6388cd679ce79f464548" id="r_ac420a299a57b6388cd679ce79f464548"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac420a299a57b6388cd679ce79f464548">getMaxItems</a> () const noexcept</td></tr>
 <tr class="memdesc:ac420a299a57b6388cd679ce79f464548"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the maximum number of items that can be stored in the Ring buffer.  <br /></td></tr>
 <tr class="separator:ac420a299a57b6388cd679ce79f464548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6007f916f97521bdd5effec278704a2c" id="r_a6007f916f97521bdd5effec278704a2c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6007f916f97521bdd5effec278704a2c">getNumItems</a> () const noexcept</td></tr>
 <tr class="memdesc:a6007f916f97521bdd5effec278704a2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the CURRENT number of elements in the Ring Buffer.  <br /></td></tr>
 <tr class="separator:a6007f916f97521bdd5effec278704a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9847a7b75185ab0fb0c759c587adf36e" id="r_a9847a7b75185ab0fb0c759c587adf36e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9847a7b75185ab0fb0c759c587adf36e">clearTheBuffer</a> () noexcept</td></tr>
-<tr class="memdesc:a9847a7b75185ab0fb0c759c587adf36e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method resets the underlying read/write indexes, i.e.  <br /></td></tr>
-<tr class="separator:a9847a7b75185ab0fb0c759c587adf36e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4f049473b9c8e2f8967225a5549ad04" id="r_af4f049473b9c8e2f8967225a5549ad04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4f049473b9c8e2f8967225a5549ad04">isEmpty</a> () const noexcept</td></tr>
+<tr class="memdesc:af4f049473b9c8e2f8967225a5549ad04"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the Ring Buffer is empty.  <br /></td></tr>
+<tr class="separator:af4f049473b9c8e2f8967225a5549ad04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac716a342d9dfdf34656e4aca36e60f" id="r_a7ac716a342d9dfdf34656e4aca36e60f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ac716a342d9dfdf34656e4aca36e60f">isFull</a> () const noexcept</td></tr>
+<tr class="memdesc:a7ac716a342d9dfdf34656e4aca36e60f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the Ring Buffer is full.  <br /></td></tr>
+<tr class="separator:a7ac716a342d9dfdf34656e4aca36e60f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:af201d9c3b3512b2f457857af12e4d2f5" id="r_af201d9c3b3512b2f457857af12e4d2f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af201d9c3b3512b2f457857af12e4d2f5">RingBufferBase</a> (unsigned numMaxElements) noexcept</td></tr>
 <tr class="memdesc:af201d9c3b3512b2f457857af12e4d2f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:af201d9c3b3512b2f457857af12e4d2f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dc6c8b8d2fc9fd3e963e873e17f01eb" id="r_a3dc6c8b8d2fc9fd3e963e873e17f01eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3dc6c8b8d2fc9fd3e963e873e17f01eb">remove</a> (void *elemPtr, size_t elemSize, const void *srcRingBufMemory) noexcept</td></tr>
-<tr class="memdesc:a3dc6c8b8d2fc9fd3e963e873e17f01eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the Ring buffer.  <br /></td></tr>
-<tr class="separator:a3dc6c8b8d2fc9fd3e963e873e17f01eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad57364a875a5e3f058fe4b2ae9773cc6" id="r_ad57364a875a5e3f058fe4b2ae9773cc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad57364a875a5e3f058fe4b2ae9773cc6">add</a> (const void *elemPtr, size_t elemSize, void *dstRingBufMemory) noexcept</td></tr>
 <tr class="memdesc:ad57364a875a5e3f058fe4b2ae9773cc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a new item to the Ring Buffer as the last item in the buffer.  <br /></td></tr>
 <tr class="separator:ad57364a875a5e3f058fe4b2ae9773cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af74d2b72b63d6cf7a716bfb2aa179796" id="r_af74d2b72b63d6cf7a716bfb2aa179796"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af74d2b72b63d6cf7a716bfb2aa179796">peekHead</a> (void *elemPtr, size_t elemSize, const void *srcRingBufMemory) noexcept</td></tr>
-<tr class="memdesc:af74d2b72b63d6cf7a716bfb2aa179796"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the head element of the Ring buffer without removing it.  <br /></td></tr>
-<tr class="separator:af74d2b72b63d6cf7a716bfb2aa179796"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63b084312199071dec5d5f17fd5711d4" id="r_a63b084312199071dec5d5f17fd5711d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63b084312199071dec5d5f17fd5711d4">peekTail</a> (void *elemPtr, size_t elemSize, const void *srcRingBufMemory) noexcept</td></tr>
-<tr class="memdesc:a63b084312199071dec5d5f17fd5711d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the tail element of the Ring buffer without removing it.  <br /></td></tr>
-<tr class="separator:a63b084312199071dec5d5f17fd5711d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4fd1c461ee81e9d520ded2a742d5aaa" id="r_aa4fd1c461ee81e9d520ded2a742d5aaa"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4fd1c461ee81e9d520ded2a742d5aaa">peekNextRemoveItems</a> (unsigned &amp;dstNumFlatElements, size_t elemSize, const void *srcRingBufMemory) const noexcept</td></tr>
-<tr class="memdesc:aa4fd1c461ee81e9d520ded2a742d5aaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be removed.  <br /></td></tr>
-<tr class="separator:aa4fd1c461ee81e9d520ded2a742d5aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3f8a745650981c99f1f03ab875ac657" id="r_ae3f8a745650981c99f1f03ab875ac657"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3f8a745650981c99f1f03ab875ac657">removeElements</a> (unsigned numElementsToRemove) noexcept</td></tr>
-<tr class="memdesc:ae3f8a745650981c99f1f03ab875ac657"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'removes' N elements - that were removed using the pointer returned from peekNextRemoveItems - from the ring buffer.  <br /></td></tr>
-<tr class="separator:ae3f8a745650981c99f1f03ab875ac657"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6cab22770ae1b490ef95e836422d5438" id="r_a6cab22770ae1b490ef95e836422d5438"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6cab22770ae1b490ef95e836422d5438">peekNextAddItems</a> (unsigned &amp;dstNumFlatElements, size_t elemSize, const void *srcRingBufMemory) const noexcept</td></tr>
-<tr class="memdesc:a6cab22770ae1b490ef95e836422d5438"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be added.  <br /></td></tr>
-<tr class="separator:a6cab22770ae1b490ef95e836422d5438"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbce39b73b5a09a45c162cde1aceed48" id="r_afbce39b73b5a09a45c162cde1aceed48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbce39b73b5a09a45c162cde1aceed48">addElements</a> (unsigned numElementsAdded) noexcept</td></tr>
 <tr class="memdesc:afbce39b73b5a09a45c162cde1aceed48"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'adds' N elements - that were populated using the pointer returned from peekNextAddItems - to the ring buffer.  <br /></td></tr>
 <tr class="separator:afbce39b73b5a09a45c162cde1aceed48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af74d2b72b63d6cf7a716bfb2aa179796" id="r_af74d2b72b63d6cf7a716bfb2aa179796"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af74d2b72b63d6cf7a716bfb2aa179796">peekHead</a> (void *elemPtr, size_t elemSize, const void *srcRingBufMemory) noexcept</td></tr>
+<tr class="memdesc:af74d2b72b63d6cf7a716bfb2aa179796"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the head element of the Ring buffer without removing it.  <br /></td></tr>
+<tr class="separator:af74d2b72b63d6cf7a716bfb2aa179796"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cab22770ae1b490ef95e836422d5438" id="r_a6cab22770ae1b490ef95e836422d5438"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6cab22770ae1b490ef95e836422d5438">peekNextAddItems</a> (unsigned &amp;dstNumFlatElements, size_t elemSize, const void *srcRingBufMemory) const noexcept</td></tr>
+<tr class="memdesc:a6cab22770ae1b490ef95e836422d5438"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be added.  <br /></td></tr>
+<tr class="separator:a6cab22770ae1b490ef95e836422d5438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4fd1c461ee81e9d520ded2a742d5aaa" id="r_aa4fd1c461ee81e9d520ded2a742d5aaa"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4fd1c461ee81e9d520ded2a742d5aaa">peekNextRemoveItems</a> (unsigned &amp;dstNumFlatElements, size_t elemSize, const void *srcRingBufMemory) const noexcept</td></tr>
+<tr class="memdesc:aa4fd1c461ee81e9d520ded2a742d5aaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be removed.  <br /></td></tr>
+<tr class="separator:aa4fd1c461ee81e9d520ded2a742d5aaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b084312199071dec5d5f17fd5711d4" id="r_a63b084312199071dec5d5f17fd5711d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63b084312199071dec5d5f17fd5711d4">peekTail</a> (void *elemPtr, size_t elemSize, const void *srcRingBufMemory) noexcept</td></tr>
+<tr class="memdesc:a63b084312199071dec5d5f17fd5711d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the tail element of the Ring buffer without removing it.  <br /></td></tr>
+<tr class="separator:a63b084312199071dec5d5f17fd5711d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dc6c8b8d2fc9fd3e963e873e17f01eb" id="r_a3dc6c8b8d2fc9fd3e963e873e17f01eb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3dc6c8b8d2fc9fd3e963e873e17f01eb">remove</a> (void *elemPtr, size_t elemSize, const void *srcRingBufMemory) noexcept</td></tr>
+<tr class="memdesc:a3dc6c8b8d2fc9fd3e963e873e17f01eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the Ring buffer.  <br /></td></tr>
+<tr class="separator:a3dc6c8b8d2fc9fd3e963e873e17f01eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3f8a745650981c99f1f03ab875ac657" id="r_ae3f8a745650981c99f1f03ab875ac657"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3f8a745650981c99f1f03ab875ac657">removeElements</a> (unsigned numElementsToRemove) noexcept</td></tr>
+<tr class="memdesc:ae3f8a745650981c99f1f03ab875ac657"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'removes' N elements - that were removed using the pointer returned from peekNextRemoveItems - from the ring buffer.  <br /></td></tr>
+<tr class="separator:ae3f8a745650981c99f1f03ab875ac657"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:abbeba728c6d3a3a48aec9713729d94dc" id="r_abbeba728c6d3a3a48aec9713729d94dc"><td class="memItemLeft" align="right" valign="top">const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbeba728c6d3a3a48aec9713729d94dc">m_elements</a></td></tr>
+<tr class="memdesc:abbeba728c6d3a3a48aec9713729d94dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of element in the 'ring memory.  <br /></td></tr>
+<tr class="separator:abbeba728c6d3a3a48aec9713729d94dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a021897c37869286443aff3e8837a9e8c" id="r_a021897c37869286443aff3e8837a9e8c"><td class="memItemLeft" align="right" valign="top">volatile unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a021897c37869286443aff3e8837a9e8c">m_readIdx</a></td></tr>
 <tr class="memdesc:a021897c37869286443aff3e8837a9e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the next item to be read from the ring.  <br /></td></tr>
 <tr class="separator:a021897c37869286443aff3e8837a9e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1eafc28324bee46be7256f60e68952a" id="r_aa1eafc28324bee46be7256f60e68952a"><td class="memItemLeft" align="right" valign="top">volatile unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1eafc28324bee46be7256f60e68952a">m_writeIdx</a></td></tr>
 <tr class="memdesc:aa1eafc28324bee46be7256f60e68952a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Index of the next item to be added to the ring.  <br /></td></tr>
 <tr class="separator:aa1eafc28324bee46be7256f60e68952a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbeba728c6d3a3a48aec9713729d94dc" id="r_abbeba728c6d3a3a48aec9713729d94dc"><td class="memItemLeft" align="right" valign="top">const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbeba728c6d3a3a48aec9713729d94dc">m_elements</a></td></tr>
-<tr class="memdesc:abbeba728c6d3a3a48aec9713729d94dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of element in the 'ring memory.  <br /></td></tr>
-<tr class="separator:abbeba728c6d3a3a48aec9713729d94dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This 'implementation' class provide the base functionality for a ring buffer. </p>
+<p>The Ring buffer is ISR/Thread safe as long as following constraints are met:</p><ul>
+<li>Writing to an 'unsigned' data type is an atomic machine instruction.</li>
+<li>There is SINGLE producer (add) and a SINGLE consumer (remove)</li>
+</ul>
+<p>NOTE: This class is not intended to be used directly. A child class is required to provide the ring buffer memory and type safety. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af201d9c3b3512b2f457857af12e4d2f5" name="af201d9c3b3512b2f457857af12e4d2f5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af201d9c3b3512b2f457857af12e4d2f5">&#9670;&#160;</a></span>RingBufferBase()</h2>
 
@@ -664,7 +664,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

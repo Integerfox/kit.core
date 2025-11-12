@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,18 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_mutex_1_1_scope_lock-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_system_1_1_mutex_1_1_scope_lock-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::Mutex::ScopeLock Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This concrete class provides a simple mechanism for providing mutex protection for a "scope block".  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This concrete class provides a simple mechanism for providing mutex protection for a "scope block". </p>
-<p>The class is instantiated as a local variable for the scope block it is meant to protected. When this object is created - it calls <a class="el" href="class_kit_1_1_system_1_1_mutex.html#a3523eae62451ee2b5e802582e3834ca9" title="This method is invoked prior to entering a critical section.">lock()</a> on its mutex. When this object is destroyed - it calls <a class="el" href="class_kit_1_1_system_1_1_mutex.html#ac662a58f33fae43000b6a09200a1fcc2" title="This method is invoke at the end of a critical section.">unlock()</a> on its mutex. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_mutex_8h_source.html">Mutex.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -69,7 +66,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a65d3f9fea08d1cfc330f6ef1e3159912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. This method releases ownership of the mutex.  <br /></td></tr>
 <tr class="separator:a65d3f9fea08d1cfc330f6ef1e3159912"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This concrete class provides a simple mechanism for providing mutex protection for a "scope block". </p>
+<p>The class is instantiated as a local variable for the scope block it is meant to protected. When this object is created - it calls <a class="el" href="class_kit_1_1_system_1_1_mutex.html#a3523eae62451ee2b5e802582e3834ca9" title="This method is invoked prior to entering a critical section.">lock()</a> on its mutex. When this object is destroyed - it calls <a class="el" href="class_kit_1_1_system_1_1_mutex.html#ac662a58f33fae43000b6a09200a1fcc2" title="This method is invoke at the end of a critical section.">unlock()</a> on its mutex. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0233e77fc41708dcba1855102e2fac98" name="a0233e77fc41708dcba1855102e2fac98"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0233e77fc41708dcba1855102e2fac98">&#9670;&#160;</a></span>ScopeLock()</h2>
 
@@ -130,7 +130,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

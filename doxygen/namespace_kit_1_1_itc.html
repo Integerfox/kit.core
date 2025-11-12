@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -53,44 +53,7 @@ $(function() {
 
 <p>The <a class="el" href="namespace_kit_1_1_itc.html" title="The Itc namespace provides classes for message based Inter Thread Communications (ITC) as well as Eve...">Itc</a> namespace provides classes for message based Inter Thread Communications (ITC) as well as Event Flags.  
 <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_itc.html" title="The Itc namespace provides classes for message based Inter Thread Communications (ITC) as well as Eve...">Itc</a> namespace provides classes for message based Inter Thread Communications (ITC) as well as Event Flags. </p>
-<p>The ITC message mechanism has the following characteristics: </p><pre class="fragment">o The ITC model is a client-server model, where client(s) send messages
-  to server(s).  
-
-o Messages can be sent asynchronously or synchronously.
-
-o Data flow between clients and server can be uni-directional or 
-  bi-directional (determined by the application). Because this is
-  inter-thread communication, data can be shared via pointers (if
-  desired) since Clients and Servers share the same address space.
-
-o Data is shared between clients and server using the concept of a
-  'payload'.  In addition, a convention of ownership is used to
-  provide thread-safe  access to the payload.
-  - A client initially owns the payload, i.e. can access the data
-    in the payload without the use of critical sections.
-  - When a client sends (or posts) a message, there is implicit transfer
-    of ownership of the payload.  After sending the message, the client
-    is obligated to NOT access the payload contents.
-  - When a server received a message, the server now 'owns' the payload
-    and can access the data in the payload without the use of critical
-    sections.
-  - When a server 'returns' a message, there is implicit transfer of
-    ownership of the payload back to the client. After returning the
-    message, the server is obligated to NOT access the payload contents.
-
-o NO dynamic memory is used.  Clients are responsible for providing all
-  of the memory required for the individual message(s).
-  - This translates to no hard limits to the number of messages a server
-    can receive.  It also means that the application does NOT have to
-    worry about 'overflowing' message queues and/or mailboxes.
-  - Another side effect of the memory paradigm is that there is NO 
-    'broadcast' messages.
-
-o 100% type safe. Messages and payloads are handled and dispatched with 
-  NO typecasting required.
-</pre> </div><table class="memberdecls">
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_async_return_handler.html">AsyncReturnHandler</a></td></tr>
@@ -148,10 +111,47 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class implements a synchronous ReturnHandler.  <a href="class_kit_1_1_itc_1_1_sync_return_handler.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_itc.html" title="The Itc namespace provides classes for message based Inter Thread Communications (ITC) as well as Eve...">Itc</a> namespace provides classes for message based Inter Thread Communications (ITC) as well as Event Flags. </p>
+<p>The ITC message mechanism has the following characteristics: </p><pre class="fragment">o The ITC model is a client-server model, where client(s) send messages
+  to server(s).  
+
+o Messages can be sent asynchronously or synchronously.
+
+o Data flow between clients and server can be uni-directional or 
+  bi-directional (determined by the application). Because this is
+  inter-thread communication, data can be shared via pointers (if
+  desired) since Clients and Servers share the same address space.
+
+o Data is shared between clients and server using the concept of a
+  'payload'.  In addition, a convention of ownership is used to
+  provide thread-safe  access to the payload.
+  - A client initially owns the payload, i.e. can access the data
+    in the payload without the use of critical sections.
+  - When a client sends (or posts) a message, there is implicit transfer
+    of ownership of the payload.  After sending the message, the client
+    is obligated to NOT access the payload contents.
+  - When a server received a message, the server now 'owns' the payload
+    and can access the data in the payload without the use of critical
+    sections.
+  - When a server 'returns' a message, there is implicit transfer of
+    ownership of the payload back to the client. After returning the
+    message, the server is obligated to NOT access the payload contents.
+
+o NO dynamic memory is used.  Clients are responsible for providing all
+  of the memory required for the individual message(s).
+  - This translates to no hard limits to the number of messages a server
+    can receive.  It also means that the application does NOT have to
+    worry about 'overflowing' message queues and/or mailboxes.
+  - Another side effect of the memory paradigm is that there is NO 
+    'broadcast' messages.
+
+o 100% type safe. Messages and payloads are handled and dispatched with 
+  NO typecasting required.
+</pre> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

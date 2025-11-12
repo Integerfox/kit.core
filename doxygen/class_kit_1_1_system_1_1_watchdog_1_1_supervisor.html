@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,16 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor-members.html">List of all members</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="class_kit_1_1_system_1_1_watchdog_1_1_supervisor-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::Watchdog::Supervisor Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This class provides a centralized supervisor for monitoring all watched threads in the system.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class provides a centralized supervisor for monitoring all watched threads in the system. </p>
-<p>It maintains a list of threads being monitored and provides thread-safe methods for managing the watchdog system.</p>
-<p>All methods are static and thread-safe to allow access from multiple threads. The class uses a composition relationship with SList&lt;WatchedThread&gt; to manage the collection of monitored threads. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_supervisor_8h_source.html">Supervisor.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::System::Watchdog::Supervisor:</div>
@@ -71,12 +67,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a5db2553366dc8fc51aacc9026197454d" id="r_a5db2553366dc8fc51aacc9026197454d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5db2553366dc8fc51aacc9026197454d">enableWdog</a> () noexcept</td></tr>
-<tr class="memdesc:a5db2553366dc8fc51aacc9026197454d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the watchdog system.  <br /></td></tr>
-<tr class="separator:a5db2553366dc8fc51aacc9026197454d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7fef83e556fc41974bce6ba63299fb4" id="r_ac7fef83e556fc41974bce6ba63299fb4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac7fef83e556fc41974bce6ba63299fb4">beginWatching</a> (<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html">WatchedThread</a> &amp;threadToMonitor) noexcept</td></tr>
 <tr class="memdesc:ac7fef83e556fc41974bce6ba63299fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begins monitoring a thread.  <br /></td></tr>
 <tr class="separator:ac7fef83e556fc41974bce6ba63299fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5db2553366dc8fc51aacc9026197454d" id="r_a5db2553366dc8fc51aacc9026197454d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5db2553366dc8fc51aacc9026197454d">enableWdog</a> () noexcept</td></tr>
+<tr class="memdesc:a5db2553366dc8fc51aacc9026197454d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the watchdog system.  <br /></td></tr>
+<tr class="separator:a5db2553366dc8fc51aacc9026197454d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a024cae7e3421d76a024887e56b809274" id="r_a024cae7e3421d76a024887e56b809274"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a024cae7e3421d76a024887e56b809274">endWatching</a> (<a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html">WatchedThread</a> &amp;threadBeingMonitored) noexcept</td></tr>
 <tr class="memdesc:a024cae7e3421d76a024887e56b809274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops monitoring a thread.  <br /></td></tr>
 <tr class="separator:a024cae7e3421d76a024887e56b809274"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,23 +88,27 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a0921cfea16e600ae45d1e6b4935210ba" id="r_a0921cfea16e600ae45d1e6b4935210ba"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_container_1_1_s_list.html">Kit::Container::SList</a>&lt; <a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html">WatchedThread</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0921cfea16e600ae45d1e6b4935210ba">m_watchedThreads</a></td></tr>
-<tr class="memdesc:a0921cfea16e600ae45d1e6b4935210ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of threads being monitored.  <br /></td></tr>
-<tr class="separator:a0921cfea16e600ae45d1e6b4935210ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6708f333628cfb3548b84579af667239" id="r_a6708f333628cfb3548b84579af667239"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6708f333628cfb3548b84579af667239">m_mutex</a></td></tr>
-<tr class="memdesc:a6708f333628cfb3548b84579af667239"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics.">Mutex</a> for thread-safe access to the watched threads list.  <br /></td></tr>
-<tr class="separator:a6708f333628cfb3548b84579af667239"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a251a81e7c9dc3f55221f70c8efdb7e92" id="r_a251a81e7c9dc3f55221f70c8efdb7e92"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a251a81e7c9dc3f55221f70c8efdb7e92">m_currentTick</a></td></tr>
 <tr class="memdesc:a251a81e7c9dc3f55221f70c8efdb7e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current tick count for the divider.  <br /></td></tr>
 <tr class="separator:a251a81e7c9dc3f55221f70c8efdb7e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2db04906935285bb7db59c0415f72bb2" id="r_a2db04906935285bb7db59c0415f72bb2"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2db04906935285bb7db59c0415f72bb2">m_timeMarker</a></td></tr>
-<tr class="memdesc:a2db04906935285bb7db59c0415f72bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time marker for elapsed time calculations.  <br /></td></tr>
-<tr class="separator:a2db04906935285bb7db59c0415f72bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25bab08fe3c16f924d8054feec92a77a" id="r_a25bab08fe3c16f924d8054feec92a77a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25bab08fe3c16f924d8054feec92a77a">m_isEnabled</a></td></tr>
 <tr class="memdesc:a25bab08fe3c16f924d8054feec92a77a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating if watchdog system is enabled.  <br /></td></tr>
 <tr class="separator:a25bab08fe3c16f924d8054feec92a77a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6708f333628cfb3548b84579af667239" id="r_a6708f333628cfb3548b84579af667239"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6708f333628cfb3548b84579af667239">m_mutex</a></td></tr>
+<tr class="memdesc:a6708f333628cfb3548b84579af667239"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics.">Mutex</a> for thread-safe access to the watched threads list.  <br /></td></tr>
+<tr class="separator:a6708f333628cfb3548b84579af667239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2db04906935285bb7db59c0415f72bb2" id="r_a2db04906935285bb7db59c0415f72bb2"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2db04906935285bb7db59c0415f72bb2">m_timeMarker</a></td></tr>
+<tr class="memdesc:a2db04906935285bb7db59c0415f72bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time marker for elapsed time calculations.  <br /></td></tr>
+<tr class="separator:a2db04906935285bb7db59c0415f72bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0921cfea16e600ae45d1e6b4935210ba" id="r_a0921cfea16e600ae45d1e6b4935210ba"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_container_1_1_s_list.html">Kit::Container::SList</a>&lt; <a class="el" href="class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html">WatchedThread</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0921cfea16e600ae45d1e6b4935210ba">m_watchedThreads</a></td></tr>
+<tr class="memdesc:a0921cfea16e600ae45d1e6b4935210ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of threads being monitored.  <br /></td></tr>
+<tr class="separator:a0921cfea16e600ae45d1e6b4935210ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class provides a centralized supervisor for monitoring all watched threads in the system. </p>
+<p>It maintains a list of threads being monitored and provides thread-safe methods for managing the watchdog system.</p>
+<p>All methods are static and thread-safe to allow access from multiple threads. The class uses a composition relationship with SList&lt;WatchedThread&gt; to manage the collection of monitored threads. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac7fef83e556fc41974bce6ba63299fb4" name="ac7fef83e556fc41974bce6ba63299fb4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac7fef83e556fc41974bce6ba63299fb4">&#9670;&#160;</a></span>beginWatching()</h2>
 
@@ -422,7 +422,7 @@ Static Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

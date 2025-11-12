@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,21 +46,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_timer_manager-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_kit_1_1_system_1_1_timer_manager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::TimerManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This concrete class implements manages a list of Software Timers.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This concrete class implements manages a list of Software Timers. </p>
-<p>When an individual timer's Count object reaches zero, its callback method is invoked and it is remove from the Active List. The Active List is designed to be very efficient with respect to decrement counts when there are many Timers in the list, i.e. the amount of time to decrement the individual Timers is NOT a function of the number of active Timers.</p>
-<p>The <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager requires that the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager instances, all <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> instances, and the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a>'s Context (i.e. the code that executes the timer expired callbacks) all execute in the SAME thread. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_timer_manager_8h_source.html">TimerManager.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::System::TimerManager:</div>
@@ -82,12 +78,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad3a9e7e5c32d29d2a9454616f6eeef88" id="r_ad3a9e7e5c32d29d2a9454616f6eeef88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3a9e7e5c32d29d2a9454616f6eeef88">TimerManager</a> ()</td></tr>
 <tr class="memdesc:ad3a9e7e5c32d29d2a9454616f6eeef88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:ad3a9e7e5c32d29d2a9454616f6eeef88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eb51ea344f3c72772c8a2c754e57fd7" id="r_a8eb51ea344f3c72772c8a2c754e57fd7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8eb51ea344f3c72772c8a2c754e57fd7">startManager</a> () noexcept</td></tr>
-<tr class="memdesc:a8eb51ea344f3c72772c8a2c754e57fd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method starts the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager.  <br /></td></tr>
-<tr class="separator:a8eb51ea344f3c72772c8a2c754e57fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c434e30abb7ef7445a106dc540a730c" id="r_a7c434e30abb7ef7445a106dc540a730c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c434e30abb7ef7445a106dc540a730c">processTimers</a> () noexcept</td></tr>
-<tr class="memdesc:a7c434e30abb7ef7445a106dc540a730c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method processes the current active timer lists.  <br /></td></tr>
-<tr class="separator:a7c434e30abb7ef7445a106dc540a730c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4082422ffe95551289a72b8aaf988549" id="r_a4082422ffe95551289a72b8aaf988549"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4082422ffe95551289a72b8aaf988549">areActiveTimers</a> () const noexcept</td></tr>
 <tr class="memdesc:a4082422ffe95551289a72b8aaf988549"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is at least one active timer.  <br /></td></tr>
 <tr class="separator:a4082422ffe95551289a72b8aaf988549"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,6 +90,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a03fc852e510dc1e19e8b9067d14b22b3" id="r_a03fc852e510dc1e19e8b9067d14b22b3"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03fc852e510dc1e19e8b9067d14b22b3">msecToCounts</a> (uint32_t durationInMsecs) const noexcept</td></tr>
 <tr class="memdesc:a03fc852e510dc1e19e8b9067d14b22b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the requested duration in milliseconds to counter ticks.  <br /></td></tr>
 <tr class="separator:a03fc852e510dc1e19e8b9067d14b22b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c434e30abb7ef7445a106dc540a730c" id="r_a7c434e30abb7ef7445a106dc540a730c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c434e30abb7ef7445a106dc540a730c">processTimers</a> () noexcept</td></tr>
+<tr class="memdesc:a7c434e30abb7ef7445a106dc540a730c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method processes the current active timer lists.  <br /></td></tr>
+<tr class="separator:a7c434e30abb7ef7445a106dc540a730c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8eb51ea344f3c72772c8a2c754e57fd7" id="r_a8eb51ea344f3c72772c8a2c754e57fd7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8eb51ea344f3c72772c8a2c754e57fd7">startManager</a> () noexcept</td></tr>
+<tr class="memdesc:a8eb51ea344f3c72772c8a2c754e57fd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method starts the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager.  <br /></td></tr>
+<tr class="separator:a8eb51ea344f3c72772c8a2c754e57fd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -118,6 +114,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ac83f5bbcf94dd22d4bd1b91dd354f12d" id="r_ac83f5bbcf94dd22d4bd1b91dd354f12d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; <a class="el" href="class_kit_1_1_system_1_1_i_counter.html">ICounter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac83f5bbcf94dd22d4bd1b91dd354f12d">m_counters</a></td></tr>
 <tr class="memdesc:ac83f5bbcf94dd22d4bd1b91dd354f12d"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of active counters. Points to a physical list.  <br /></td></tr>
 <tr class="separator:ac83f5bbcf94dd22d4bd1b91dd354f12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9762d923fb3ef9f0d22ed37f3aa1734c" id="r_a9762d923fb3ef9f0d22ed37f3aa1734c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9762d923fb3ef9f0d22ed37f3aa1734c">m_inTickCall</a></td></tr>
+<tr class="memdesc:a9762d923fb3ef9f0d22ed37f3aa1734c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to tracks when I am actively processing/consuming ticks.  <br /></td></tr>
+<tr class="separator:a9762d923fb3ef9f0d22ed37f3aa1734c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a200a7c0a50c1f0073af42963858d04d3" id="r_a200a7c0a50c1f0073af42963858d04d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; <a class="el" href="class_kit_1_1_system_1_1_i_counter.html">ICounter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a200a7c0a50c1f0073af42963858d04d3">m_pendingAttach</a></td></tr>
 <tr class="memdesc:a200a7c0a50c1f0073af42963858d04d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of Pending-to-attach counters (this happens when timers attach from the timer-expired-callbacks). Points to a physical list.  <br /></td></tr>
 <tr class="separator:a200a7c0a50c1f0073af42963858d04d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,11 +126,12 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:ae455fb9cacbacf10fd5208097fca7fc0" id="r_ae455fb9cacbacf10fd5208097fca7fc0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae455fb9cacbacf10fd5208097fca7fc0">m_timeNow</a></td></tr>
 <tr class="memdesc:ae455fb9cacbacf10fd5208097fca7fc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Elapsed time of the current processing cycle.  <br /></td></tr>
 <tr class="separator:ae455fb9cacbacf10fd5208097fca7fc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9762d923fb3ef9f0d22ed37f3aa1734c" id="r_a9762d923fb3ef9f0d22ed37f3aa1734c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9762d923fb3ef9f0d22ed37f3aa1734c">m_inTickCall</a></td></tr>
-<tr class="memdesc:a9762d923fb3ef9f0d22ed37f3aa1734c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to tracks when I am actively processing/consuming ticks.  <br /></td></tr>
-<tr class="separator:a9762d923fb3ef9f0d22ed37f3aa1734c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This concrete class implements manages a list of Software Timers. </p>
+<p>When an individual timer's Count object reaches zero, its callback method is invoked and it is remove from the Active List. The Active List is designed to be very efficient with respect to decrement counts when there are many Timers in the list, i.e. the amount of time to decrement the individual Timers is NOT a function of the number of active Timers.</p>
+<p>The <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager requires that the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager instances, all <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> instances, and the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a>'s Context (i.e. the code that executes the timer expired callbacks) all execute in the SAME thread. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad3a9e7e5c32d29d2a9454616f6eeef88" name="ad3a9e7e5c32d29d2a9454616f6eeef88"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad3a9e7e5c32d29d2a9454616f6eeef88">&#9670;&#160;</a></span>TimerManager()</h2>
 
@@ -527,7 +527,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,16 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_itc_1_1_i_close_response-members.html">List of all members</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_itc_1_1_i_close_response-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Itc::ICloseResponse Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class define response message types for a set of ITC services.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class define response message types for a set of ITC services. </p>
-<p>The <a class="el" href="#ab7a54588ae8e82fcdd0de2a240dfde00" title="Response: CloseMsg.">response()</a> method(s) are to be implemented by the 'client'</p>
-<p>NOTE: Typically the 'Close Request' is done synchronously. This interface is provided for completeness for the edge case of doing the Close Request asynchronously. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_close_request_8h_source.html">ICloseRequest.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -70,14 +66,18 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab7a54588ae8e82fcdd0de2a240dfde00" id="r_ab7a54588ae8e82fcdd0de2a240dfde00"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7a54588ae8e82fcdd0de2a240dfde00">response</a> (<a class="el" href="#abc76559fc793b2094d5ef2c43cf7c3e3">CloseMsg</a> &amp;msg) noexcept=0</td></tr>
-<tr class="memdesc:ab7a54588ae8e82fcdd0de2a240dfde00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Response: CloseMsg.  <br /></td></tr>
-<tr class="separator:ab7a54588ae8e82fcdd0de2a240dfde00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a003089546821fff3a14cec422b8477f0" id="r_a003089546821fff3a14cec422b8477f0"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a003089546821fff3a14cec422b8477f0">~ICloseResponse</a> ()=default</td></tr>
 <tr class="memdesc:a003089546821fff3a14cec422b8477f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:a003089546821fff3a14cec422b8477f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7a54588ae8e82fcdd0de2a240dfde00" id="r_ab7a54588ae8e82fcdd0de2a240dfde00"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7a54588ae8e82fcdd0de2a240dfde00">response</a> (<a class="el" href="#abc76559fc793b2094d5ef2c43cf7c3e3">CloseMsg</a> &amp;msg) noexcept=0</td></tr>
+<tr class="memdesc:ab7a54588ae8e82fcdd0de2a240dfde00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Response: CloseMsg.  <br /></td></tr>
+<tr class="separator:ab7a54588ae8e82fcdd0de2a240dfde00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class define response message types for a set of ITC services. </p>
+<p>The <a class="el" href="#ab7a54588ae8e82fcdd0de2a240dfde00" title="Response: CloseMsg.">response()</a> method(s) are to be implemented by the 'client'</p>
+<p>NOTE: Typically the 'Close Request' is done synchronously. This interface is provided for completeness for the edge case of doing the Close Request asynchronously. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="abc76559fc793b2094d5ef2c43cf7c3e3" name="abc76559fc793b2094d5ef2c43cf7c3e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc76559fc793b2094d5ef2c43cf7c3e3">&#9670;&#160;</a></span>CloseMsg</h2>
 
@@ -156,7 +156,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

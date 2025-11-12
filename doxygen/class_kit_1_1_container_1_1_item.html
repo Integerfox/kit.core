@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,24 +46,18 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_container_1_1_item-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a>  </div>
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="class_kit_1_1_container_1_1_item-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::Item Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This class is used by the Intrusive <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> classes to enforce the semantic and item/element can be in at most ONE container at any given time.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class is used by the Intrusive <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> classes to enforce the semantic and item/element can be in at most ONE container at any given time. </p>
-<p>Intrusive containers are 'limitless' containers in that can hold any number of elements because each element contains the 'container- linkage' fields, i.e. no dynamic memory required to added an element to the container.</p>
-<p>NOTE: Enforcing the above semantics adds RAM overhead to a <a class="el" href="class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be...">Item</a> class. <br  />
- However, debugging a logic error where a single item is inserted into multiple containers at the same time IS EXTREMELY DIFFICULT to debug, i.e. the extra overhead is worth it.</p>
-<p>NOTE: Client code, i.e. application code that needs to define a 'containerized' class only needs to inherit from this interface. The Client code SHOULD/SHALL NOT access any of its members or methods! These members/methods are intended to ONLY be accessible by the container classes. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_item_8h_source.html">Item.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Container::Item:</div>
@@ -106,7 +100,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:acbdb631d3373ecd8d950a37c1f60204d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor used ONLY with the child class <a class="el" href="class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ...">MapItem</a>: --&gt;special constructor to allow a <a class="el" href="class_kit_1_1_container_1_1_map.html" title="This template class implements an Map using an AVL Binary tree (i.e.">Map</a> to be statically allocated.  <br /></td></tr>
 <tr class="separator:acbdb631d3373ecd8d950a37c1f60204d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class is used by the Intrusive <a class="el" href="namespace_kit_1_1_container.html" title="The Container namespace provides classes for various types of containers.">Container</a> classes to enforce the semantic and item/element can be in at most ONE container at any given time. </p>
+<p>Intrusive containers are 'limitless' containers in that can hold any number of elements because each element contains the 'container- linkage' fields, i.e. no dynamic memory required to added an element to the container.</p>
+<p>NOTE: Enforcing the above semantics adds RAM overhead to a <a class="el" href="class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be...">Item</a> class. <br  />
+ However, debugging a logic error where a single item is inserted into multiple containers at the same time IS EXTREMELY DIFFICULT to debug, i.e. the extra overhead is worth it.</p>
+<p>NOTE: Client code, i.e. application code that needs to define a 'containerized' class only needs to inherit from this interface. The Client code SHOULD/SHALL NOT access any of its members or methods! These members/methods are intended to ONLY be accessible by the container classes. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0651eeca42c71226d1aae9df521bc260" name="a0651eeca42c71226d1aae9df521bc260"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0651eeca42c71226d1aae9df521bc260">&#9670;&#160;</a></span>Item() <span class="overload">[1/2]</span></h2>
 
@@ -299,7 +299,7 @@ Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

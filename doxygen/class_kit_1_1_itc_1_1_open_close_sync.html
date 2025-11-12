@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,19 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_itc_1_1_open_close_sync-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_itc_1_1_open_close_sync-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Itc::OpenCloseSync Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This partially concrete class extends the ITC <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html" title="This partially concrete class implements the synchronous ITC open call for the OpenApi.">OpenSync</a> class and implements the synchronous ITC close call for the CloseApi.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This partially concrete class extends the ITC <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html" title="This partially concrete class implements the synchronous ITC open call for the OpenApi.">OpenSync</a> class and implements the synchronous ITC close call for the CloseApi. </p>
-<p>The subclass is still required to implement the ITC <a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#a2b08878ea61f26389fbe7fa8440a2cec" title="ITC Request: Close.">request()</a> method.</p>
-<p>NOTE: This class is derived from <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html" title="This partially concrete class implements the synchronous ITC open call for the OpenApi.">OpenSync</a> --&gt;if you support a <a class="el" href="#a868b0b14909843af54b9961aa45aacde" title="See Kit::Itc::IClose.">close()</a>, call, you better have had an <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html#a9e6f726ae05255ba607dedad27cf78f8" title="See Kit::Itc::IOpen.">open()</a> call. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_open_close_sync_8h_source.html">OpenCloseSync.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Itc::OpenCloseSync:</div>
@@ -110,25 +106,29 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_class_kit_1_1_itc_1_1_i_open_request"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_class_kit_1_1_itc_1_1_i_open_request')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_kit_1_1_itc_1_1_i_open_request.html">Kit::Itc::IOpenRequest</a></td></tr>
-<tr class="memitem:aed042374a37f51cc0ea5b63a91091ced inherit pub_types_class_kit_1_1_itc_1_1_i_open_request" id="r_aed042374a37f51cc0ea5b63a91091ced"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_itc_1_1_s_a_p.html">Kit::Itc::SAP</a>&lt; <a class="el" href="class_kit_1_1_itc_1_1_i_open_request.html">IOpenRequest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_i_open_request.html#aed042374a37f51cc0ea5b63a91091ced">SAP</a></td></tr>
-<tr class="memdesc:aed042374a37f51cc0ea5b63a91091ced inherit pub_types_class_kit_1_1_itc_1_1_i_open_request"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_itc_1_1_s_a_p.html" title="This concrete template class represents the interface to a ITC Service Access Point (SAP).">SAP</a> for this API.  <br /></td></tr>
-<tr class="separator:aed042374a37f51cc0ea5b63a91091ced inherit pub_types_class_kit_1_1_itc_1_1_i_open_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29f0534c78eaec0863f889dcfec2893c inherit pub_types_class_kit_1_1_itc_1_1_i_open_request" id="r_a29f0534c78eaec0863f889dcfec2893c"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_itc_1_1_request_message.html">RequestMessage</a>&lt; <a class="el" href="class_kit_1_1_itc_1_1_i_open_request.html">IOpenRequest</a>, <a class="el" href="struct_kit_1_1_itc_1_1_i_open_request_1_1_open_payload___t.html">OpenPayload_T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_i_open_request.html#a29f0534c78eaec0863f889dcfec2893c">OpenMsg</a></td></tr>
 <tr class="memdesc:a29f0534c78eaec0863f889dcfec2893c inherit pub_types_class_kit_1_1_itc_1_1_i_open_request"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message Type: Open.  <br /></td></tr>
 <tr class="separator:a29f0534c78eaec0863f889dcfec2893c inherit pub_types_class_kit_1_1_itc_1_1_i_open_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed042374a37f51cc0ea5b63a91091ced inherit pub_types_class_kit_1_1_itc_1_1_i_open_request" id="r_aed042374a37f51cc0ea5b63a91091ced"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_itc_1_1_s_a_p.html">Kit::Itc::SAP</a>&lt; <a class="el" href="class_kit_1_1_itc_1_1_i_open_request.html">IOpenRequest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_i_open_request.html#aed042374a37f51cc0ea5b63a91091ced">SAP</a></td></tr>
+<tr class="memdesc:aed042374a37f51cc0ea5b63a91091ced inherit pub_types_class_kit_1_1_itc_1_1_i_open_request"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_itc_1_1_s_a_p.html" title="This concrete template class represents the interface to a ITC Service Access Point (SAP).">SAP</a> for this API.  <br /></td></tr>
+<tr class="separator:aed042374a37f51cc0ea5b63a91091ced inherit pub_types_class_kit_1_1_itc_1_1_i_open_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_class_kit_1_1_itc_1_1_i_close_request"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_class_kit_1_1_itc_1_1_i_close_request')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html">Kit::Itc::ICloseRequest</a></td></tr>
-<tr class="memitem:a5e5134df3064f0f308988f0e47c112b0 inherit pub_types_class_kit_1_1_itc_1_1_i_close_request" id="r_a5e5134df3064f0f308988f0e47c112b0"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_itc_1_1_s_a_p.html">Kit::Itc::SAP</a>&lt; <a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html">ICloseRequest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#a5e5134df3064f0f308988f0e47c112b0">SAP</a></td></tr>
-<tr class="memdesc:a5e5134df3064f0f308988f0e47c112b0 inherit pub_types_class_kit_1_1_itc_1_1_i_close_request"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_itc_1_1_s_a_p.html" title="This concrete template class represents the interface to a ITC Service Access Point (SAP).">SAP</a> for this API.  <br /></td></tr>
-<tr class="separator:a5e5134df3064f0f308988f0e47c112b0 inherit pub_types_class_kit_1_1_itc_1_1_i_close_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af640fa7fab0512af28d722efc314690d inherit pub_types_class_kit_1_1_itc_1_1_i_close_request" id="r_af640fa7fab0512af28d722efc314690d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_itc_1_1_request_message.html">RequestMessage</a>&lt; <a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html">ICloseRequest</a>, <a class="el" href="struct_kit_1_1_itc_1_1_i_close_request_1_1_close_payload___t.html">ClosePayload_T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#af640fa7fab0512af28d722efc314690d">CloseMsg</a></td></tr>
 <tr class="memdesc:af640fa7fab0512af28d722efc314690d inherit pub_types_class_kit_1_1_itc_1_1_i_close_request"><td class="mdescLeft">&#160;</td><td class="mdescRight">Message Type: Close.  <br /></td></tr>
 <tr class="separator:af640fa7fab0512af28d722efc314690d inherit pub_types_class_kit_1_1_itc_1_1_i_close_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e5134df3064f0f308988f0e47c112b0 inherit pub_types_class_kit_1_1_itc_1_1_i_close_request" id="r_a5e5134df3064f0f308988f0e47c112b0"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_itc_1_1_s_a_p.html">Kit::Itc::SAP</a>&lt; <a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html">ICloseRequest</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#a5e5134df3064f0f308988f0e47c112b0">SAP</a></td></tr>
+<tr class="memdesc:a5e5134df3064f0f308988f0e47c112b0 inherit pub_types_class_kit_1_1_itc_1_1_i_close_request"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_itc_1_1_s_a_p.html" title="This concrete template class represents the interface to a ITC Service Access Point (SAP).">SAP</a> for this API.  <br /></td></tr>
+<tr class="separator:a5e5134df3064f0f308988f0e47c112b0 inherit pub_types_class_kit_1_1_itc_1_1_i_close_request"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_kit_1_1_itc_1_1_open_sync"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_class_kit_1_1_itc_1_1_open_sync')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html">Kit::Itc::OpenSync</a></td></tr>
 <tr class="memitem:acfb41b89924eada397f338a0f058af7f inherit pro_attribs_class_kit_1_1_itc_1_1_open_sync" id="r_acfb41b89924eada397f338a0f058af7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_open_sync.html#acfb41b89924eada397f338a0f058af7f">m_eventQueue</a></td></tr>
 <tr class="memdesc:acfb41b89924eada397f338a0f058af7f inherit pro_attribs_class_kit_1_1_itc_1_1_open_sync"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html" title="This mailbox class implements an Inter Thread Communications message queue.">Mailbox</a> (of the server implementing the ITC <a class="el" href="class_kit_1_1_itc_1_1_i_open_request.html#ae6bcb6295c031898be4e038ee67a726c" title="ITC Request: Open.">request()</a> method.  <br /></td></tr>
 <tr class="separator:acfb41b89924eada397f338a0f058af7f inherit pro_attribs_class_kit_1_1_itc_1_1_open_sync"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This partially concrete class extends the ITC <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html" title="This partially concrete class implements the synchronous ITC open call for the OpenApi.">OpenSync</a> class and implements the synchronous ITC close call for the CloseApi. </p>
+<p>The subclass is still required to implement the ITC <a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#a2b08878ea61f26389fbe7fa8440a2cec" title="ITC Request: Close.">request()</a> method.</p>
+<p>NOTE: This class is derived from <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html" title="This partially concrete class implements the synchronous ITC open call for the OpenApi.">OpenSync</a> --&gt;if you support a <a class="el" href="#a868b0b14909843af54b9961aa45aacde" title="See Kit::Itc::IClose.">close()</a>, call, you better have had an <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html#a9e6f726ae05255ba607dedad27cf78f8" title="See Kit::Itc::IOpen.">open()</a> call. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a822101da15ec729a3baa905e4c04fa92" name="a822101da15ec729a3baa905e4c04fa92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a822101da15ec729a3baa905e4c04fa92">&#9670;&#160;</a></span>OpenCloseSync()</h2>
 
@@ -193,7 +193,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,40 +46,38 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_text_1_1_format-members.html">List of all members</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pro-static-methods">Static Protected Member Functions</a>  </div>
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="class_kit_1_1_text_1_1_format-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Text::Format Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This static class contains some general purpose string formatting functions.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This static class contains some general purpose string formatting functions. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_format_8h_source.html">Format.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a57da64616c04eb995b0199fe8b7c136a" id="r_a57da64616c04eb995b0199fe8b7c136a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57da64616c04eb995b0199fe8b7c136a">string</a> (const void *buffer, int len, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;destString, bool appendToString=false) noexcept</td></tr>
-<tr class="memdesc:a57da64616c04eb995b0199fe8b7c136a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method will take a raw data buffer and convert it to an 'viewable' string.  <br /></td></tr>
-<tr class="separator:a57da64616c04eb995b0199fe8b7c136a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70f44454a844eaa896d79c7d2d61107f" id="r_a70f44454a844eaa896d79c7d2d61107f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70f44454a844eaa896d79c7d2d61107f">asciiHex</a> (const void *binaryData, int len, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;destString, bool upperCase=true, bool appendToString=false, char separator='\0') noexcept</td></tr>
-<tr class="memdesc:a70f44454a844eaa896d79c7d2d61107f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method will convert a binary buffer to 'ASCII HEX', e.g.  <br /></td></tr>
-<tr class="separator:a70f44454a844eaa896d79c7d2d61107f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a09bc6cfb722cfc6dbd33cb07cc0611" id="r_a4a09bc6cfb722cfc6dbd33cb07cc0611"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a09bc6cfb722cfc6dbd33cb07cc0611">asciiBinary</a> (const void *binaryData, int len, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;destString, bool appendToString=false, bool reverse=false) noexcept</td></tr>
 <tr class="memdesc:a4a09bc6cfb722cfc6dbd33cb07cc0611"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the binary buffer to a single string that is ASCII BINARY.  <br /></td></tr>
 <tr class="separator:a4a09bc6cfb722cfc6dbd33cb07cc0611"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8403602e9003fa4b5f0fa3d34e4c67a" id="r_ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8403602e9003fa4b5f0fa3d34e4c67a">viewer</a> (const void *binaryData, int len, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;destString, int bytesPerLine=16, const char *separator=&quot;    &quot;, bool upperCase=true, bool appendToString=false) noexcept</td></tr>
-<tr class="memdesc:ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the binary buffer to a single string that is the ASCII HEX followed by 'separator', then by the binary data as 'viewable' text.  <br /></td></tr>
-<tr class="separator:ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70f44454a844eaa896d79c7d2d61107f" id="r_a70f44454a844eaa896d79c7d2d61107f"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70f44454a844eaa896d79c7d2d61107f">asciiHex</a> (const void *binaryData, int len, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;destString, bool upperCase=true, bool appendToString=false, char separator='\0') noexcept</td></tr>
+<tr class="memdesc:a70f44454a844eaa896d79c7d2d61107f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method will convert a binary buffer to 'ASCII HEX', e.g.  <br /></td></tr>
+<tr class="separator:a70f44454a844eaa896d79c7d2d61107f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57da64616c04eb995b0199fe8b7c136a" id="r_a57da64616c04eb995b0199fe8b7c136a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57da64616c04eb995b0199fe8b7c136a">string</a> (const void *buffer, int len, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;destString, bool appendToString=false) noexcept</td></tr>
+<tr class="memdesc:a57da64616c04eb995b0199fe8b7c136a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method will take a raw data buffer and convert it to an 'viewable' string.  <br /></td></tr>
+<tr class="separator:a57da64616c04eb995b0199fe8b7c136a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cfafbe31ac2154d525a0fded66b44a9" id="r_a1cfafbe31ac2154d525a0fded66b44a9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1cfafbe31ac2154d525a0fded66b44a9">timestamp</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;buffer, uint32_t timeStampInMsecs, bool encodeMsec=true, bool encodeDay=true, bool appendToString=false) noexcept</td></tr>
 <tr class="memdesc:a1cfafbe31ac2154d525a0fded66b44a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the binary 32 bit millisecond count of 'timeStampInMsecs' to a string with the following format: "[DD ]HH:MM:SS[.SSS]".  <br /></td></tr>
 <tr class="separator:a1cfafbe31ac2154d525a0fded66b44a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7140e7653cb02541e9b1730d06f576ad" id="r_a7140e7653cb02541e9b1730d06f576ad"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7140e7653cb02541e9b1730d06f576ad">timestamp</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;buffer, uint64_t timeStampInMsecs, bool encodeMsec=true, bool encodeDay=true, bool appendToString=false) noexcept</td></tr>
 <tr class="memdesc:a7140e7653cb02541e9b1730d06f576ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is the same as timeStamp() but converts a 64bit millisecond counter.  <br /></td></tr>
 <tr class="separator:a7140e7653cb02541e9b1730d06f576ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8403602e9003fa4b5f0fa3d34e4c67a" id="r_ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8403602e9003fa4b5f0fa3d34e4c67a">viewer</a> (const void *binaryData, int len, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;destString, int bytesPerLine=16, const char *separator=&quot;    &quot;, bool upperCase=true, bool appendToString=false) noexcept</td></tr>
+<tr class="memdesc:ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the binary buffer to a single string that is the ASCII HEX followed by 'separator', then by the binary data as 'viewable' text.  <br /></td></tr>
+<tr class="separator:ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -87,7 +85,9 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a6c7b72ba1ebef2ac4cbef28abb5f2ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method.  <br /></td></tr>
 <tr class="separator:a6c7b72ba1ebef2ac4cbef28abb5f2ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This static class contains some general purpose string formatting functions. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4a09bc6cfb722cfc6dbd33cb07cc0611" name="a4a09bc6cfb722cfc6dbd33cb07cc0611"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4a09bc6cfb722cfc6dbd33cb07cc0611">&#9670;&#160;</a></span>asciiBinary()</h2>
 
@@ -438,7 +438,7 @@ Static Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

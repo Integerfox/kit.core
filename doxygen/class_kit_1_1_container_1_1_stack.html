@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,20 +46,16 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_container_1_1_stack-members.html">List of all members</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_kit_1_1_container_1_1_stack-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::Stack&lt; ITEM &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This template class implements a <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a> that has a fixed depth and stores copies of the data items.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class ITEM&gt;<br />
-class Kit::Container::Stack&lt; ITEM &gt;</div><p>This template class implements a <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a> that has a fixed depth and stores copies of the data items. </p>
-<p>Template Args: ITEM:= Type of the data stored in the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a> </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_stack_8h_source.html">Stack.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Container::Stack&lt; ITEM &gt;:</div>
@@ -74,50 +70,54 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8bf0ff0edaf79cce09090df2771db28f" id="r_a8bf0ff0edaf79cce09090df2771db28f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8bf0ff0edaf79cce09090df2771db28f">Stack</a> (unsigned maxElements, ITEM memoryForElements[]) noexcept</td></tr>
 <tr class="memdesc:a8bf0ff0edaf79cce09090df2771db28f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a8bf0ff0edaf79cce09090df2771db28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe522b68fd541f72d61b092301b1a81e" id="r_abe522b68fd541f72d61b092301b1a81e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe522b68fd541f72d61b092301b1a81e">push</a> (const ITEM &amp;src) noexcept</td></tr>
-<tr class="memdesc:abe522b68fd541f72d61b092301b1a81e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an item to the top of the stack.  <br /></td></tr>
-<tr class="separator:abe522b68fd541f72d61b092301b1a81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1fb02ab4460b4efc9643d7769f6ca9f" id="r_ac1fb02ab4460b4efc9643d7769f6ca9f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1fb02ab4460b4efc9643d7769f6ca9f">pop</a> (ITEM &amp;dst) noexcept</td></tr>
-<tr class="memdesc:ac1fb02ab4460b4efc9643d7769f6ca9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the top item of the stack.  <br /></td></tr>
-<tr class="separator:ac1fb02ab4460b4efc9643d7769f6ca9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4b6e191667ba38b221d6eb9192b0ec1" id="r_aa4b6e191667ba38b221d6eb9192b0ec1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4b6e191667ba38b221d6eb9192b0ec1">pop</a> () noexcept</td></tr>
-<tr class="memdesc:aa4b6e191667ba38b221d6eb9192b0ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes AND discards the top item of the stack.  <br /></td></tr>
-<tr class="separator:aa4b6e191667ba38b221d6eb9192b0ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e3e63b3ff233028546d9d2ddcf9aa83" id="r_a5e3e63b3ff233028546d9d2ddcf9aa83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e3e63b3ff233028546d9d2ddcf9aa83">peekTop</a> (ITEM &amp;dst) const noexcept</td></tr>
-<tr class="memdesc:a5e3e63b3ff233028546d9d2ddcf9aa83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of the item on the top of the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>.  <br /></td></tr>
-<tr class="separator:a5e3e63b3ff233028546d9d2ddcf9aa83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac28798f8a08ce61fe19a7f5e54d8ace5" id="r_ac28798f8a08ce61fe19a7f5e54d8ace5"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac28798f8a08ce61fe19a7f5e54d8ace5">peekTop</a> () noexcept</td></tr>
-<tr class="memdesc:ac28798f8a08ce61fe19a7f5e54d8ace5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a POINTER to the top item of the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>.  <br /></td></tr>
-<tr class="separator:ac28798f8a08ce61fe19a7f5e54d8ace5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31bd13b1f027a8ce2916fe2362ebf802" id="r_a31bd13b1f027a8ce2916fe2362ebf802"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31bd13b1f027a8ce2916fe2362ebf802">clearTheStack</a> () noexcept</td></tr>
+<tr class="memdesc:a31bd13b1f027a8ce2916fe2362ebf802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empties the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>. All references to the item(s) in the stack are lost.  <br /></td></tr>
+<tr class="separator:a31bd13b1f027a8ce2916fe2362ebf802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2c97c4c1f0fc65336c16eba4e6f5964" id="r_ab2c97c4c1f0fc65336c16eba4e6f5964"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2c97c4c1f0fc65336c16eba4e6f5964">getMaxItems</a> () const noexcept</td></tr>
+<tr class="memdesc:ab2c97c4c1f0fc65336c16eba4e6f5964"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the maximum number of items that can be stored in the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>.  <br /></td></tr>
+<tr class="separator:ab2c97c4c1f0fc65336c16eba4e6f5964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b6fe3a20a1b6e4500020ef285050f02" id="r_a2b6fe3a20a1b6e4500020ef285050f02"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b6fe3a20a1b6e4500020ef285050f02">getNumItems</a> () const noexcept</td></tr>
+<tr class="memdesc:a2b6fe3a20a1b6e4500020ef285050f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current number of items in the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>.  <br /></td></tr>
+<tr class="separator:a2b6fe3a20a1b6e4500020ef285050f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee81ba9b0077b7a7cbdc1dc4d8faf62f" id="r_aee81ba9b0077b7a7cbdc1dc4d8faf62f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee81ba9b0077b7a7cbdc1dc4d8faf62f">isEmpty</a> () const noexcept</td></tr>
 <tr class="memdesc:aee81ba9b0077b7a7cbdc1dc4d8faf62f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a> is empty.  <br /></td></tr>
 <tr class="separator:aee81ba9b0077b7a7cbdc1dc4d8faf62f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48edbd511e7291b38284d641f13a4aa9" id="r_a48edbd511e7291b38284d641f13a4aa9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48edbd511e7291b38284d641f13a4aa9">isFull</a> () const noexcept</td></tr>
 <tr class="memdesc:a48edbd511e7291b38284d641f13a4aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns true if the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a> is full.  <br /></td></tr>
 <tr class="separator:a48edbd511e7291b38284d641f13a4aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b6fe3a20a1b6e4500020ef285050f02" id="r_a2b6fe3a20a1b6e4500020ef285050f02"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b6fe3a20a1b6e4500020ef285050f02">getNumItems</a> () const noexcept</td></tr>
-<tr class="memdesc:a2b6fe3a20a1b6e4500020ef285050f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current number of items in the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>.  <br /></td></tr>
-<tr class="separator:a2b6fe3a20a1b6e4500020ef285050f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2c97c4c1f0fc65336c16eba4e6f5964" id="r_ab2c97c4c1f0fc65336c16eba4e6f5964"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2c97c4c1f0fc65336c16eba4e6f5964">getMaxItems</a> () const noexcept</td></tr>
-<tr class="memdesc:ab2c97c4c1f0fc65336c16eba4e6f5964"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the maximum number of items that can be stored in the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>.  <br /></td></tr>
-<tr class="separator:ab2c97c4c1f0fc65336c16eba4e6f5964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31bd13b1f027a8ce2916fe2362ebf802" id="r_a31bd13b1f027a8ce2916fe2362ebf802"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31bd13b1f027a8ce2916fe2362ebf802">clearTheStack</a> () noexcept</td></tr>
-<tr class="memdesc:a31bd13b1f027a8ce2916fe2362ebf802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empties the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>. All references to the item(s) in the stack are lost.  <br /></td></tr>
-<tr class="separator:a31bd13b1f027a8ce2916fe2362ebf802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac28798f8a08ce61fe19a7f5e54d8ace5" id="r_ac28798f8a08ce61fe19a7f5e54d8ace5"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac28798f8a08ce61fe19a7f5e54d8ace5">peekTop</a> () noexcept</td></tr>
+<tr class="memdesc:ac28798f8a08ce61fe19a7f5e54d8ace5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a POINTER to the top item of the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>.  <br /></td></tr>
+<tr class="separator:ac28798f8a08ce61fe19a7f5e54d8ace5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3e63b3ff233028546d9d2ddcf9aa83" id="r_a5e3e63b3ff233028546d9d2ddcf9aa83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e3e63b3ff233028546d9d2ddcf9aa83">peekTop</a> (ITEM &amp;dst) const noexcept</td></tr>
+<tr class="memdesc:a5e3e63b3ff233028546d9d2ddcf9aa83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a copy of the item on the top of the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a>.  <br /></td></tr>
+<tr class="separator:a5e3e63b3ff233028546d9d2ddcf9aa83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4b6e191667ba38b221d6eb9192b0ec1" id="r_aa4b6e191667ba38b221d6eb9192b0ec1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4b6e191667ba38b221d6eb9192b0ec1">pop</a> () noexcept</td></tr>
+<tr class="memdesc:aa4b6e191667ba38b221d6eb9192b0ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes AND discards the top item of the stack.  <br /></td></tr>
+<tr class="separator:aa4b6e191667ba38b221d6eb9192b0ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1fb02ab4460b4efc9643d7769f6ca9f" id="r_ac1fb02ab4460b4efc9643d7769f6ca9f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1fb02ab4460b4efc9643d7769f6ca9f">pop</a> (ITEM &amp;dst) noexcept</td></tr>
+<tr class="memdesc:ac1fb02ab4460b4efc9643d7769f6ca9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the top item of the stack.  <br /></td></tr>
+<tr class="separator:ac1fb02ab4460b4efc9643d7769f6ca9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe522b68fd541f72d61b092301b1a81e" id="r_abe522b68fd541f72d61b092301b1a81e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe522b68fd541f72d61b092301b1a81e">push</a> (const ITEM &amp;src) noexcept</td></tr>
+<tr class="memdesc:abe522b68fd541f72d61b092301b1a81e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an item to the top of the stack.  <br /></td></tr>
+<tr class="separator:abe522b68fd541f72d61b092301b1a81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a6b049df02375c5b1c1aa39d638747f28" id="r_a6b049df02375c5b1c1aa39d638747f28"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b049df02375c5b1c1aa39d638747f28">m_elements</a></td></tr>
-<tr class="memdesc:a6b049df02375c5b1c1aa39d638747f28"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> for the Elements.  <br /></td></tr>
-<tr class="separator:a6b049df02375c5b1c1aa39d638747f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a941e7a2693796285101db3e65a92dba1" id="r_a941e7a2693796285101db3e65a92dba1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a941e7a2693796285101db3e65a92dba1">m_count</a></td></tr>
 <tr class="memdesc:a941e7a2693796285101db3e65a92dba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current number of items in the stack.  <br /></td></tr>
 <tr class="separator:a941e7a2693796285101db3e65a92dba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b049df02375c5b1c1aa39d638747f28" id="r_a6b049df02375c5b1c1aa39d638747f28"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b049df02375c5b1c1aa39d638747f28">m_elements</a></td></tr>
+<tr class="memdesc:a6b049df02375c5b1c1aa39d638747f28"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> for the Elements.  <br /></td></tr>
+<tr class="separator:a6b049df02375c5b1c1aa39d638747f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c754113780b549b06e718bdccd0b555" id="r_a3c754113780b549b06e718bdccd0b555"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c754113780b549b06e718bdccd0b555">m_maxItems</a></td></tr>
 <tr class="memdesc:a3c754113780b549b06e718bdccd0b555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum number of items in that the stack can hold.  <br /></td></tr>
 <tr class="separator:a3c754113780b549b06e718bdccd0b555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class ITEM&gt;<br />
+class Kit::Container::Stack&lt; ITEM &gt;</div><p>This template class implements a <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a> that has a fixed depth and stores copies of the data items. </p>
+<p>Template Args: ITEM:= Type of the data stored in the <a class="el" href="class_kit_1_1_container_1_1_stack.html" title="This template class implements a Stack that has a fixed depth and stores copies of the data items.">Stack</a> </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a8bf0ff0edaf79cce09090df2771db28f" name="a8bf0ff0edaf79cce09090df2771db28f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8bf0ff0edaf79cce09090df2771db28f">&#9670;&#160;</a></span>Stack()</h2>
 
@@ -535,7 +535,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

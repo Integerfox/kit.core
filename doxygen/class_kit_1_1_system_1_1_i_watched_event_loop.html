@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,19 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_i_watched_event_loop-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_system_1_1_i_watched_event_loop-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::IWatchedEventLoop Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract interface defines the API for watching/monitoring an <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> for watchdog purposes.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract interface defines the API for watching/monitoring an <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> for watchdog purposes. </p>
-<p>The interface provides methods to start/stop monitoring and to perform periodic watchdog checks.</p>
-<p>NOTE: The classes method should ONLY be called/invoked using the above macros </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_watched_event_loop_8h_source.html">IWatchedEventLoop.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::System::IWatchedEventLoop:</div>
@@ -70,23 +66,27 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a46e84c9863d65b7b4a751c2be2e58399" id="r_a46e84c9863d65b7b4a751c2be2e58399"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46e84c9863d65b7b4a751c2be2e58399">~IWatchedEventLoop</a> ()=default</td></tr>
+<tr class="memdesc:a46e84c9863d65b7b4a751c2be2e58399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:a46e84c9863d65b7b4a751c2be2e58399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af08541916e3c73883f1c3e9715486aa6" id="r_af08541916e3c73883f1c3e9715486aa6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af08541916e3c73883f1c3e9715486aa6">isSupervisorThread</a> () const noexcept=0</td></tr>
+<tr class="memdesc:af08541916e3c73883f1c3e9715486aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this is the supervisor thread responsible for monitoring other threads.  <br /></td></tr>
+<tr class="separator:af08541916e3c73883f1c3e9715486aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f2da6dbac85a1e0e526ae39169ef651" id="r_a9f2da6dbac85a1e0e526ae39169ef651"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f2da6dbac85a1e0e526ae39169ef651">monitorWdog</a> () noexcept=0</td></tr>
+<tr class="memdesc:a9f2da6dbac85a1e0e526ae39169ef651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs watchdog monitoring check.  <br /></td></tr>
+<tr class="separator:a9f2da6dbac85a1e0e526ae39169ef651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab98c55dac40a9af64ab18ffad8fd023f" id="r_ab98c55dac40a9af64ab18ffad8fd023f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab98c55dac40a9af64ab18ffad8fd023f">startWatcher</a> (<a class="el" href="class_kit_1_1_system_1_1_timer_manager.html">Kit::System::TimerManager</a> &amp;timingSource) noexcept=0</td></tr>
 <tr class="memdesc:ab98c55dac40a9af64ab18ffad8fd023f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the watchdog monitoring for this event loop.  <br /></td></tr>
 <tr class="separator:ab98c55dac40a9af64ab18ffad8fd023f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f499928b08bc5285655a7d612b1c832" id="r_a7f499928b08bc5285655a7d612b1c832"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f499928b08bc5285655a7d612b1c832">stopWatcher</a> () noexcept=0</td></tr>
 <tr class="memdesc:a7f499928b08bc5285655a7d612b1c832"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the watchdog monitoring for this event loop.  <br /></td></tr>
 <tr class="separator:a7f499928b08bc5285655a7d612b1c832"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f2da6dbac85a1e0e526ae39169ef651" id="r_a9f2da6dbac85a1e0e526ae39169ef651"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f2da6dbac85a1e0e526ae39169ef651">monitorWdog</a> () noexcept=0</td></tr>
-<tr class="memdesc:a9f2da6dbac85a1e0e526ae39169ef651"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs watchdog monitoring check.  <br /></td></tr>
-<tr class="separator:a9f2da6dbac85a1e0e526ae39169ef651"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af08541916e3c73883f1c3e9715486aa6" id="r_af08541916e3c73883f1c3e9715486aa6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af08541916e3c73883f1c3e9715486aa6">isSupervisorThread</a> () const noexcept=0</td></tr>
-<tr class="memdesc:af08541916e3c73883f1c3e9715486aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if this is the supervisor thread responsible for monitoring other threads.  <br /></td></tr>
-<tr class="separator:af08541916e3c73883f1c3e9715486aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46e84c9863d65b7b4a751c2be2e58399" id="r_a46e84c9863d65b7b4a751c2be2e58399"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46e84c9863d65b7b4a751c2be2e58399">~IWatchedEventLoop</a> ()=default</td></tr>
-<tr class="memdesc:a46e84c9863d65b7b4a751c2be2e58399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
-<tr class="separator:a46e84c9863d65b7b4a751c2be2e58399"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract interface defines the API for watching/monitoring an <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> for watchdog purposes. </p>
+<p>The interface provides methods to start/stop monitoring and to perform periodic watchdog checks.</p>
+<p>NOTE: The classes method should ONLY be called/invoked using the above macros </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a46e84c9863d65b7b4a751c2be2e58399" name="a46e84c9863d65b7b4a751c2be2e58399"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a46e84c9863d65b7b4a751c2be2e58399">&#9670;&#160;</a></span>~IWatchedEventLoop()</h2>
 
@@ -247,7 +247,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,19 +46,16 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_container_1_1_d_list_base-members.html">List of all members</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_kit_1_1_container_1_1_d_list_base-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::DListBase Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This protected base class implements a NON-TYPE-SAFE a doubly linked list which maintains the ordering imposed on it by the application.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This protected base class implements a NON-TYPE-SAFE a doubly linked list which maintains the ordering imposed on it by the application. </p>
-<p>It is intended to be the base class for a type-safe template class. Having a non-templatized base class reduces the memory footprint when an application has more than one type specific <a class="el" href="class_kit_1_1_container_1_1_d_list_base.html" title="This protected base class implements a NON-TYPE-SAFE a doubly linked list which maintains the orderin...">DListBase</a> class </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_d_list_base_8h_source.html">DListBase.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Container::DListBase:</div>
@@ -83,48 +80,48 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a93a64d89f3516789edf05a01061f708f" id="r_a93a64d89f3516789edf05a01061f708f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93a64d89f3516789edf05a01061f708f">DListBase</a> (const char *ignoreThisParameter_usedToCreateAUniqueConstructor) noexcept</td></tr>
 <tr class="memdesc:a93a64d89f3516789edf05a01061f708f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a special constructor for when the list is statically declared (i.e.  <br /></td></tr>
 <tr class="separator:a93a64d89f3516789edf05a01061f708f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a768d6efd57145cbe00fb2c0928451343" id="r_a768d6efd57145cbe00fb2c0928451343"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a768d6efd57145cbe00fb2c0928451343">move</a> (<a class="el" href="class_kit_1_1_container_1_1_d_list_base.html">DListBase</a> &amp;dst) noexcept</td></tr>
-<tr class="memdesc:a768d6efd57145cbe00fb2c0928451343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the content of the this queue to the specified queue.  <br /></td></tr>
-<tr class="separator:a768d6efd57145cbe00fb2c0928451343"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf39e1b0d53db2ebfa1e94dd4628ef05" id="r_adf39e1b0d53db2ebfa1e94dd4628ef05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf39e1b0d53db2ebfa1e94dd4628ef05">clearTheList</a> () noexcept</td></tr>
 <tr class="memdesc:adf39e1b0d53db2ebfa1e94dd4628ef05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empties the list. All references to the item(s) in the list are lost.  <br /></td></tr>
 <tr class="separator:adf39e1b0d53db2ebfa1e94dd4628ef05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f8986c55969854643127697e387167b" id="r_a3f8986c55969854643127697e387167b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f8986c55969854643127697e387167b">find</a> (const <a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) const noexcept</td></tr>
+<tr class="memdesc:a3f8986c55969854643127697e387167b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified item is already in the list, else false.  <br /></td></tr>
+<tr class="separator:a3f8986c55969854643127697e387167b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7ba53941936e984c8b75a48a2b67d18" id="r_ad7ba53941936e984c8b75a48a2b67d18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7ba53941936e984c8b75a48a2b67d18">first</a> () const noexcept</td></tr>
+<tr class="memdesc:ad7ba53941936e984c8b75a48a2b67d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the first item in the list.  <br /></td></tr>
+<tr class="separator:ad7ba53941936e984c8b75a48a2b67d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebd35f49e8d5bef24d7bf9e6629b71a7" id="r_aebd35f49e8d5bef24d7bf9e6629b71a7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebd35f49e8d5bef24d7bf9e6629b71a7">getFirst</a> () noexcept</td></tr>
 <tr class="memdesc:aebd35f49e8d5bef24d7bf9e6629b71a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the list. Returns nullptr if the list is empty.  <br /></td></tr>
 <tr class="separator:aebd35f49e8d5bef24d7bf9e6629b71a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afda82ca4319241bd881ee943d2333abd" id="r_afda82ca4319241bd881ee943d2333abd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afda82ca4319241bd881ee943d2333abd">getLast</a> () noexcept</td></tr>
 <tr class="memdesc:afda82ca4319241bd881ee943d2333abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the last item in the list. Returns nullptr if the list is empty.  <br /></td></tr>
 <tr class="separator:afda82ca4319241bd881ee943d2333abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c5b9f4dad14574a55198be18d8c714a" id="r_a3c5b9f4dad14574a55198be18d8c714a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c5b9f4dad14574a55198be18d8c714a">putFirst</a> (<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) noexcept</td></tr>
-<tr class="memdesc:a3c5b9f4dad14574a55198be18d8c714a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the 'item' as the last item in the list.  <br /></td></tr>
-<tr class="separator:a3c5b9f4dad14574a55198be18d8c714a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd1604d850deeec89135491450969bce" id="r_abd1604d850deeec89135491450969bce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd1604d850deeec89135491450969bce">putLast</a> (<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) noexcept</td></tr>
-<tr class="memdesc:abd1604d850deeec89135491450969bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the 'item' as the last item in the list.  <br /></td></tr>
-<tr class="separator:abd1604d850deeec89135491450969bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7ba53941936e984c8b75a48a2b67d18" id="r_ad7ba53941936e984c8b75a48a2b67d18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7ba53941936e984c8b75a48a2b67d18">first</a> () const noexcept</td></tr>
-<tr class="memdesc:ad7ba53941936e984c8b75a48a2b67d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the first item in the list.  <br /></td></tr>
-<tr class="separator:ad7ba53941936e984c8b75a48a2b67d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abadb3d119fff458d7913ec00af6704cc" id="r_abadb3d119fff458d7913ec00af6704cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abadb3d119fff458d7913ec00af6704cc">last</a> () const noexcept</td></tr>
-<tr class="memdesc:abadb3d119fff458d7913ec00af6704cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the last item in the list.  <br /></td></tr>
-<tr class="separator:abadb3d119fff458d7913ec00af6704cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5348e76a1ea50355995eeb04bc250c8" id="r_ac5348e76a1ea50355995eeb04bc250c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5348e76a1ea50355995eeb04bc250c8">remove</a> (<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) noexcept</td></tr>
-<tr class="memdesc:ac5348e76a1ea50355995eeb04bc250c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the specified 'item' element from the list.  <br /></td></tr>
-<tr class="separator:ac5348e76a1ea50355995eeb04bc250c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf471b3c66cbe2c75360398c746e9949" id="r_acf471b3c66cbe2c75360398c746e9949"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf471b3c66cbe2c75360398c746e9949">insertAfter</a> (<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;after, <a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) noexcept</td></tr>
 <tr class="memdesc:acf471b3c66cbe2c75360398c746e9949"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the "item" into the list behind the "after" element.  <br /></td></tr>
 <tr class="separator:acf471b3c66cbe2c75360398c746e9949"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb2a5fbd816d86b87a2927046a8d7143" id="r_afb2a5fbd816d86b87a2927046a8d7143"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb2a5fbd816d86b87a2927046a8d7143">insertBefore</a> (<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;before, <a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) noexcept</td></tr>
 <tr class="memdesc:afb2a5fbd816d86b87a2927046a8d7143"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the "item" into the list ahead of the "before" element.  <br /></td></tr>
 <tr class="separator:afb2a5fbd816d86b87a2927046a8d7143"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f8986c55969854643127697e387167b" id="r_a3f8986c55969854643127697e387167b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f8986c55969854643127697e387167b">find</a> (const <a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) const noexcept</td></tr>
-<tr class="memdesc:a3f8986c55969854643127697e387167b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified item is already in the list, else false.  <br /></td></tr>
-<tr class="separator:a3f8986c55969854643127697e387167b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abadb3d119fff458d7913ec00af6704cc" id="r_abadb3d119fff458d7913ec00af6704cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abadb3d119fff458d7913ec00af6704cc">last</a> () const noexcept</td></tr>
+<tr class="memdesc:abadb3d119fff458d7913ec00af6704cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the last item in the list.  <br /></td></tr>
+<tr class="separator:abadb3d119fff458d7913ec00af6704cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a768d6efd57145cbe00fb2c0928451343" id="r_a768d6efd57145cbe00fb2c0928451343"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a768d6efd57145cbe00fb2c0928451343">move</a> (<a class="el" href="class_kit_1_1_container_1_1_d_list_base.html">DListBase</a> &amp;dst) noexcept</td></tr>
+<tr class="memdesc:a768d6efd57145cbe00fb2c0928451343"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the content of the this queue to the specified queue.  <br /></td></tr>
+<tr class="separator:a768d6efd57145cbe00fb2c0928451343"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeded7af1bf145d150dd99430df0eae18" id="r_aeded7af1bf145d150dd99430df0eae18"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeded7af1bf145d150dd99430df0eae18">next</a> (const <a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) const noexcept</td></tr>
 <tr class="memdesc:aeded7af1bf145d150dd99430df0eae18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the item after the item "item".  <br /></td></tr>
 <tr class="separator:aeded7af1bf145d150dd99430df0eae18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac978777fa9401ebdfe3fbbf87ade6619" id="r_ac978777fa9401ebdfe3fbbf87ade6619"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac978777fa9401ebdfe3fbbf87ade6619">previous</a> (const <a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;current) const noexcept</td></tr>
 <tr class="memdesc:ac978777fa9401ebdfe3fbbf87ade6619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the item before the item "current".  <br /></td></tr>
 <tr class="separator:ac978777fa9401ebdfe3fbbf87ade6619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c5b9f4dad14574a55198be18d8c714a" id="r_a3c5b9f4dad14574a55198be18d8c714a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c5b9f4dad14574a55198be18d8c714a">putFirst</a> (<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) noexcept</td></tr>
+<tr class="memdesc:a3c5b9f4dad14574a55198be18d8c714a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the 'item' as the last item in the list.  <br /></td></tr>
+<tr class="separator:a3c5b9f4dad14574a55198be18d8c714a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd1604d850deeec89135491450969bce" id="r_abd1604d850deeec89135491450969bce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd1604d850deeec89135491450969bce">putLast</a> (<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) noexcept</td></tr>
+<tr class="memdesc:abd1604d850deeec89135491450969bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the 'item' as the last item in the list.  <br /></td></tr>
+<tr class="separator:abd1604d850deeec89135491450969bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5348e76a1ea50355995eeb04bc250c8" id="r_ac5348e76a1ea50355995eeb04bc250c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5348e76a1ea50355995eeb04bc250c8">remove</a> (<a class="el" href="class_kit_1_1_container_1_1_extended_list_item.html">ExtendedListItem</a> &amp;item) noexcept</td></tr>
+<tr class="memdesc:ac5348e76a1ea50355995eeb04bc250c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the specified 'item' element from the list.  <br /></td></tr>
+<tr class="separator:ac5348e76a1ea50355995eeb04bc250c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -135,7 +132,10 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:a5197319b8cff0f1ea5daa64d535d189c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Points to the last item in the list.  <br /></td></tr>
 <tr class="separator:a5197319b8cff0f1ea5daa64d535d189c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This protected base class implements a NON-TYPE-SAFE a doubly linked list which maintains the ordering imposed on it by the application. </p>
+<p>It is intended to be the base class for a type-safe template class. Having a non-templatized base class reduces the memory footprint when an application has more than one type specific <a class="el" href="class_kit_1_1_container_1_1_d_list_base.html" title="This protected base class implements a NON-TYPE-SAFE a doubly linked list which maintains the orderin...">DListBase</a> class </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae8a07f4d5b214fa7e2251cb3ec80bb34" name="ae8a07f4d5b214fa7e2251cb3ec80bb34"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8a07f4d5b214fa7e2251cb3ec80bb34">&#9670;&#160;</a></span>DListBase() <span class="overload">[1/2]</span></h2>
 
@@ -641,7 +641,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

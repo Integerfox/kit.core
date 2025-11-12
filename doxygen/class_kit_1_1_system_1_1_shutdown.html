@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,22 +46,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_system_1_1_shutdown-members.html">List of all members</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="class_kit_1_1_system_1_1_shutdown-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::Shutdown Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This class defines methods for forcibly terminating the application.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class defines methods for forcibly terminating the application. </p>
-<p>How gracefully (or not) the shutdown is dependent on the actual platform implementation. In addition, what 'shutdown' means is also platform dependent, e.g. on an embedded platform it may invoke a reboot and/or restart of the application.</p>
-<p>Since this is a forcibly shutdown there are no guaranties with respect to releasing resources.</p>
-<p>The interface does provide for callback method(s) to be called on shutdown. These methods are guaranteed to be called (or at least attempted to be called in the case of true code failure). </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_shutdown_8h_source.html">Shutdown.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -96,20 +91,25 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1fae89e28a8b5d5546f2aced904f88c1" id="r_a1fae89e28a8b5d5546f2aced904f88c1"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fae89e28a8b5d5546f2aced904f88c1">success</a> () noexcept</td></tr>
-<tr class="memdesc:a1fae89e28a8b5d5546f2aced904f88c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will force a shutdown of the application with a 'success' exit code.  <br /></td></tr>
-<tr class="separator:a1fae89e28a8b5d5546f2aced904f88c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65effd19cf91b936b344c22477cee5c7" id="r_a65effd19cf91b936b344c22477cee5c7"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a65effd19cf91b936b344c22477cee5c7">failure</a> (int exitCode=<a class="el" href="#a78033321542516454b160892dc4fe290aad62674d527a33f31e6258a2ac7d3172">eFAILURE</a>) noexcept</td></tr>
 <tr class="memdesc:a65effd19cf91b936b344c22477cee5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will force a shutdown of the application with a 'failure' exit code.  <br /></td></tr>
 <tr class="separator:a65effd19cf91b936b344c22477cee5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ead4cd4eeda57044d32ade76387a87c" id="r_a5ead4cd4eeda57044d32ade76387a87c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ead4cd4eeda57044d32ade76387a87c">registerHandler</a> (<a class="el" href="class_kit_1_1_system_1_1_shutdown_1_1_i_handler.html">Shutdown::IHandler</a> &amp;instanceToRegister) noexcept</td></tr>
-<tr class="memdesc:a5ead4cd4eeda57044d32ade76387a87c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to register a callback method that will be called when <a class="el" href="#a1fae89e28a8b5d5546f2aced904f88c1" title="This function will force a shutdown of the application with a &#39;success&#39; exit code.">success()</a> or <a class="el" href="#a65effd19cf91b936b344c22477cee5c7" title="This function will force a shutdown of the application with a &#39;failure&#39; exit code.">failure()</a> is called and before the application exits.  <br /></td></tr>
-<tr class="separator:a5ead4cd4eeda57044d32ade76387a87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad953c6af9f9aea16d089e87589b0730e" id="r_ad953c6af9f9aea16d089e87589b0730e"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad953c6af9f9aea16d089e87589b0730e">notifyShutdownHandlers</a> (int exitCode) noexcept</td></tr>
 <tr class="memdesc:ad953c6af9f9aea16d089e87589b0730e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This COMPONENT Scoped method.  <br /></td></tr>
 <tr class="separator:ad953c6af9f9aea16d089e87589b0730e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ead4cd4eeda57044d32ade76387a87c" id="r_a5ead4cd4eeda57044d32ade76387a87c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ead4cd4eeda57044d32ade76387a87c">registerHandler</a> (<a class="el" href="class_kit_1_1_system_1_1_shutdown_1_1_i_handler.html">Shutdown::IHandler</a> &amp;instanceToRegister) noexcept</td></tr>
+<tr class="memdesc:a5ead4cd4eeda57044d32ade76387a87c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to register a callback method that will be called when <a class="el" href="#a1fae89e28a8b5d5546f2aced904f88c1" title="This function will force a shutdown of the application with a &#39;success&#39; exit code.">success()</a> or <a class="el" href="#a65effd19cf91b936b344c22477cee5c7" title="This function will force a shutdown of the application with a &#39;failure&#39; exit code.">failure()</a> is called and before the application exits.  <br /></td></tr>
+<tr class="separator:a5ead4cd4eeda57044d32ade76387a87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fae89e28a8b5d5546f2aced904f88c1" id="r_a1fae89e28a8b5d5546f2aced904f88c1"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fae89e28a8b5d5546f2aced904f88c1">success</a> () noexcept</td></tr>
+<tr class="memdesc:a1fae89e28a8b5d5546f2aced904f88c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function will force a shutdown of the application with a 'success' exit code.  <br /></td></tr>
+<tr class="separator:a1fae89e28a8b5d5546f2aced904f88c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class defines methods for forcibly terminating the application. </p>
+<p>How gracefully (or not) the shutdown is dependent on the actual platform implementation. In addition, what 'shutdown' means is also platform dependent, e.g. on an embedded platform it may invoke a reboot and/or restart of the application.</p>
+<p>Since this is a forcibly shutdown there are no guaranties with respect to releasing resources.</p>
+<p>The interface does provide for callback method(s) to be called on shutdown. These methods are guaranteed to be called (or at least attempted to be called in the case of true code failure). </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a78033321542516454b160892dc4fe290" name="a78033321542516454b160892dc4fe290"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a78033321542516454b160892dc4fe290">&#9670;&#160;</a></span>anonymous enum</h2>
 
@@ -286,7 +286,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

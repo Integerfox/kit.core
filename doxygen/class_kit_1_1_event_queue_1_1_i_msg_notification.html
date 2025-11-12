@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 186-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 198-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,18 +46,15 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="class_kit_1_1_event_queue_1_1_i_msg_notification-members.html">List of all members</a> &#124;
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="class_kit_1_1_event_queue_1_1_i_msg_notification-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::EventQueue::IMsgNotification Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>This abstract class represents the interface used to send ITC messages to a ITC mailbox.  
  <a href="#details">More...</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class represents the interface used to send ITC messages to a ITC mailbox. </p>
-<p>The ITC messaging has a client-server paradigm which means that this interface is always invoked by the client. </p>
-</div>
+
 <p><code>#include &lt;<a class="el" href="_i_msg_notification_8h_source.html">IMsgNotification.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::EventQueue::IMsgNotification:</div>
@@ -69,17 +66,20 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:abec2d70cc3b543cde8329dd4755dac74" id="r_abec2d70cc3b543cde8329dd4755dac74"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abec2d70cc3b543cde8329dd4755dac74">~IMsgNotification</a> ()=default</td></tr>
+<tr class="memdesc:abec2d70cc3b543cde8329dd4755dac74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
+<tr class="separator:abec2d70cc3b543cde8329dd4755dac74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae93defa9715b9d3fa8216a1fdf8ad865" id="r_ae93defa9715b9d3fa8216a1fdf8ad865"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae93defa9715b9d3fa8216a1fdf8ad865">post</a> (<a class="el" href="class_kit_1_1_itc_1_1_i_message.html">Kit::Itc::IMessage</a> &amp;msg) noexcept=0</td></tr>
 <tr class="memdesc:ae93defa9715b9d3fa8216a1fdf8ad865"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is called by clients, which wish to send a message to the owner of this mailbox.  <br /></td></tr>
 <tr class="separator:ae93defa9715b9d3fa8216a1fdf8ad865"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c3351cb87af1996d5b776b39ec39155" id="r_a8c3351cb87af1996d5b776b39ec39155"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c3351cb87af1996d5b776b39ec39155">postSync</a> (<a class="el" href="class_kit_1_1_itc_1_1_i_message.html">Kit::Itc::IMessage</a> &amp;msg) noexcept=0</td></tr>
 <tr class="memdesc:a8c3351cb87af1996d5b776b39ec39155"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is called by clients which wish to send a message to the owner of this mailbox, and then block on the client's thread semaphore.  <br /></td></tr>
 <tr class="separator:a8c3351cb87af1996d5b776b39ec39155"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abec2d70cc3b543cde8329dd4755dac74" id="r_abec2d70cc3b543cde8329dd4755dac74"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abec2d70cc3b543cde8329dd4755dac74">~IMsgNotification</a> ()=default</td></tr>
-<tr class="memdesc:abec2d70cc3b543cde8329dd4755dac74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
-<tr class="separator:abec2d70cc3b543cde8329dd4755dac74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This abstract class represents the interface used to send ITC messages to a ITC mailbox. </p>
+<p>The ITC messaging has a client-server paradigm which means that this interface is always invoked by the client. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abec2d70cc3b543cde8329dd4755dac74" name="abec2d70cc3b543cde8329dd4755dac74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abec2d70cc3b543cde8329dd4755dac74">&#9670;&#160;</a></span>~IMsgNotification()</h2>
 
@@ -174,7 +174,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 9 2025 15:32:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Nov 12 2025 02:43:26 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
