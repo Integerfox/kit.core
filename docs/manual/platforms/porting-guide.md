@@ -1,8 +1,6 @@
 # Porting Guide {#porting_guide}
 
-\brief Step-by-step guide for porting Kit library to new platforms and hardware
-architectures. Step-by-step guide for porting Kit to new platforms and hardware. 
-This guide explains how to port the Kit library to new platforms.
+\brief This guide provides a step-by-step process for porting the Kit library to new platforms and hardware architectures.
 
 [TOC]
 
