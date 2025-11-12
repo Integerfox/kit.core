@@ -16,7 +16,7 @@ out-of-the-box:
 * Automated unit tests that execute as terminal applications on Windows and Linux, i.e. CI/CD ready.  In practice
   over 80% of your application can be unit test this way.
 * Functional simulator for your application on Day 0.  Since +80% of your application can be unit tested off
-  target – building a function simulator is minimal effort (i.e. it is more of planning effort that a coding effort).
+  target – building a functional simulator is minimal effort (i.e. it is more of planning effort that a coding effort).
   * What is Day 0?  You can stand up the functional simulator before you have built, purchased, or even defined your
     hardware platform.  This means you can write and test production code as soon as the project starts. **No more
     gating firmware development by HW availability**.
