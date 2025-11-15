@@ -205,7 +205,6 @@ TEST_CASE( "EventLoopWithPScheduling" )
     SECTION( "scheduler - no watchdog" )
     {
         // Scheduler with no thread watchdog
-        WatchedEventThread     wdogSetup( WDOG_TIMEOUT_MS, WDOG_THREAD_HEALTH_CHECK_MS, true );
         WithPeriodicScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, nullptr, OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, nullptr, nullptr );
 
         auto* t1 = Kit::System::Thread::create( uut, "WATCHED-THREAD" );

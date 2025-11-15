@@ -32,6 +32,12 @@ doskey setexe=git update-index --chmod=+x $*
 doskey ports=reg query HKLM\HARDWARE\DEVICEMAP\SERIALCOMM
 doskey map=%NQBP_PKG_ROOT%scripts\colony.core\map.py $*
 
+doskey bgcc=%NQBP_BIN%\other\bob.py -v --p2 windows gcc-host
+doskey bmsvc=%NQBP_BIN%\other\bob.py -v --p2 windows msvc
+doskey bclang=%NQBP_BIN%\other\bob.py -v --p2 windows  clang-host
+doskey tnat=%NQBP_BIN%\other\chuck.py -v --dir windows --match a.exe --m2 a.py --m3 aa.exe --m4 aa.py
+
+
 ::doskey lcov=perl %LCOV_BIN_PATH%\lcov
 ::doskey genhtml=perl %LCOV_BIN_PATH%\genhtml
 

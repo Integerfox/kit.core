@@ -62,9 +62,8 @@ TEST_CASE( "watchdog" )
 
     SECTION( "server - no watchdog" )
     {
-        // Server with with the thread's watchdog "enabled"
-        WatchedEventThread wdogSetup( WDOG_TIMEOUT_MS, WDOG_THREAD_HEALTH_CHECK_MS, true );
-        Server             uut( OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD );
+        // Server with no thread watchdog
+        Server uut( OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD );
 
         auto* t1 = Kit::System::Thread::create( uut, "WATCHED-THREAD" );
         REQUIRE( t1 );
@@ -75,7 +74,7 @@ TEST_CASE( "watchdog" )
 
         REQUIRE( g_watchdogEnabled == true );
         REQUIRE( g_kickCount == 0 );
-        REQUIRE( g_kickCount == 0 );
+        REQUIRE( g_tripCount == 0 );
 
         uut.pleaseStop();
         Kit::System::Thread::destroy( *t1, 100 );
