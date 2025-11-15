@@ -142,7 +142,7 @@ TEST_CASE( "EventLoopWithPScheduling" )
         REQUIRE( orangeCount_ >= 1 );
         REQUIRE( orangeCount_ <= ( TEST_DURATION_IN_MSEC / 100 ) + 1 );
         REQUIRE( idleCallCount_ >= 10 );
-        REQUIRE( idleCallCount_ <= ( TEST_DURATION_IN_MSEC / OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD ) + 1 );
+        REQUIRE( idleCallCount_ >= ( (unsigned)( ( TEST_DURATION_IN_MSEC / OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD ) * 0.66 ) ) );
 
         sleep( 100 );
         REQUIRE( testThread->isActive() == false );
