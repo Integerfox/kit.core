@@ -1,0 +1,127 @@
+name: Update Wiki Sidebar TOC
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+jobs:
+  update-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Clone wiki repository
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          # clone the wiki as a separate local repo
+          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git wiki
+
+      - name: Create generator script
+        run: |
+          mkdir -p .github/wiki-scripts
+          cat > .github/wiki-scripts/generate-wiki-sidebar.js <<'NODE'
+const fs = require('fs');
+const path = require('path');
+
+const wikiDir = process.argv[2] || '.';
+const maxLevel = parseInt(process.argv[3] || '3', 10); // include up to H2/H3 etc (H1 is page title)
+const sidebarFile = path.join(wikiDir, '_Sidebar.md');
+
+function slugify(raw) {
+  // close approximation of GitHub anchor generation
+  return raw
+    .trim()
+    .toLowerCase()
+    .replace(/<\/?[^>]+(>|$)/g, '')      // strip HTML tags
+    .replace(/[\u2019']/g, '')           // remove apostrophes
+    .replace(/[^a-z0-9 _-]/g, '')        // remove punctuation except space and hyphen/underscore
+    .replace(/\s+/g, '-')               // spaces to hyphens
+    .replace(/-+/g, '-')
+    .replace(/^[-_]+|[-_]+$/g, '');
+}
+
+function getTitle(content, filename) {
+  const lines = content.split(/\r?\n/);
+  for (const line of lines) {
+    const m = line.match(/^#\s+(.*)$/);
+    if (m) return m[1].trim();
+  }
+  // fall back to filename without extension
+  return path.basename(filename, '.md').replace(/-/g, ' ');
+}
+
+function getHeadings(content, levelLimit) {
+  const lines = content.split(/\r?\n/);
+  const headings = [];
+  const headingRegex = /^(#{2,6})\s+(.*)$/; // headings from ## to ######
+  for (const line of lines) {
+    const m = line.match(headingRegex);
+    if (m) {
+      const level = m[1].length; // number of # characters
+      if (level <= levelLimit) {
+        headings.push({ level, text: m[2].trim() });
+      }
+    }
+  }
+  return headings;
+}
+
+const files = fs.readdirSync(wikiDir)
+  .filter(f => f.endsWith('.md'))
+  .filter(f => f !== '_Sidebar.md')
+  .sort((a,b) => a.localeCompare(b, undefined, {sensitivity: 'base'}));
+
+let out = '# Table of contents\n\n';
+
+for (const file of files) {
+  try {
+    const fp = path.join(wikiDir, file);
+    const content = fs.readFileSync(fp, 'utf8');
+    const title = getTitle(content, file);
+    const pageName = path.basename(file, '.md'); // link target
+    // top-level entry
+    out += `- [${title}](${encodeURI(pageName)})\n`;
+
+    const headings = getHeadings(content, Math.min(maxLevel, 6));
+    for (const h of headings) {
+      // create an indent for H2 -> 2 spaces, H3 -> 4 spaces, etc.
+      const indent = '  '.repeat(Math.max(0, h.level - 2));
+      const anchor = slugify(h.text);
+      out += `${indent}- [${h.text}](${encodeURI(pageName)}#${encodeURI(anchor)})\n`;
+    }
+  } catch (err) {
+    console.error('Failed to read', file, err);
+  }
+}
+
+fs.writeFileSync(sidebarFile, out, 'utf8');
+console.log('Wrote', sidebarFile);
+NODE
+
+      - name: Generate sidebar TOC
+        run: node .github/wiki-scripts/generate-wiki-sidebar.js wiki 3
+
+      - name: Commit & push changes to wiki if any
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+        run: |
+          cd wiki
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _Sidebar.md || true
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(wiki): update _Sidebar.md TOC"
+            git push origin HEAD
+            echo "Pushed updated _Sidebar.md"
+          else
+            echo "No changes to _Sidebar.md"
+          fi
