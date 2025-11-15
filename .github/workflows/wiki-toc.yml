@@ -24,9 +24,10 @@ jobs:
       - name: Clone wiki repository
         env:
           REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           # clone the wiki as a separate local repo
-          git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git wiki
+          git clone https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.wiki.git wiki
 
       - name: Generate sidebar TOC
         run: node .github/wiki-scripts/generate-wiki-sidebar.js wiki 3
