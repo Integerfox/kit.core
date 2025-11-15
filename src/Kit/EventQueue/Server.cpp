@@ -18,9 +18,10 @@ namespace EventQueue {
 
 /////////////////////
 Server::Server( uint32_t                                        timeOutPeriodInMsec,
-                Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList ) noexcept
+                Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList,
+                Kit::System::IWatchedEventLoop*                 watchdog ) noexcept
     : Kit::Itc::Mailbox( *( static_cast<Kit::System::ISignable*>( this ) ) )
-    , EventLoop( timeOutPeriodInMsec, eventFlagsList )
+    , EventLoop( timeOutPeriodInMsec, eventFlagsList, watchdog )
 {
 }
 

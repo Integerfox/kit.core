@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/System/EventLoop.h"
+#include "Kit/System/IWatchedEventLoop.h"
 #include "Kit/Itc/Mailbox.h"
 
 
@@ -33,7 +34,8 @@ public:
         of the method's arguments.
      */
     Server( uint32_t                                        timeOutPeriodInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
-            Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList      = nullptr ) noexcept;
+            Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList      = nullptr,
+            Kit::System::IWatchedEventLoop*                 watchdog            = nullptr ) noexcept;
 
 protected:
     /// See Kit::System::IRunnable

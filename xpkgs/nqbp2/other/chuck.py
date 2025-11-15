@@ -22,7 +22,11 @@ Arguments:
                          
                          
 Options:
-    --m2 PATTERN         A seconnd 'PATTERN' that will be OR'd with the --match
+    --m2 PATTERN         An additional 'PATTERN' that will be OR'd with the --match
+                         argument.
+    --m3 PATTERN         An additional 'PATTERN' that will be OR'd with the --match
+                         argument.
+    --m4 PATTERN         An additional 'PATTERN' that will be OR'd with the --match
                          argument.
     --path TESTPATH      The full path to 'root' directory that will be used
                          when searching for test applications. If no path is 
@@ -144,6 +148,10 @@ if __name__ == '__main__':
         all = utils.walk_file_list( args['--match'], ppath )
         if ( args['--m2'] ):
             all.extend( utils.walk_file_list( args['--m2'], ppath ) )
+        if ( args['--m3'] ):
+            all.extend( utils.walk_file_list( args['--m3'], ppath ) )
+        if ( args['--m4'] ):
+            all.extend( utils.walk_file_list( args['--m4'], ppath ) )
              
         # Apply directory filter
         tests = []

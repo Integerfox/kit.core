@@ -15,4 +15,8 @@
 #define KitTextToStringMaxUnsigned_T uint64_t
 
 #define USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
+
+#define USE_KIT_SYSTEM_WATCHDOG
+#define OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER 4
+
 #endif

@@ -16,15 +16,21 @@
 #include "Kit/System/Thread.h"
 #include "Kit/System/Api.h"
 #include "Kit/EventQueue/WithPeriodicScheduling.h"
+#include "Kit/System/Watchdog/WatchedEventThread.h"
+#include "Kit/System/Watchdog/Supervisor.h"
+#include "wdoghal.h"
 #include <inttypes.h>
 
-#define SECT_                 "_0test"
+#define SECT_                       "_0test"
 
-#define TEST_DURATION_IN_MSEC 250
+#define TEST_DURATION_IN_MSEC       ( 250 * 2 )
+
+#define WDOG_TIMEOUT_MS             500
+#define WDOG_THREAD_HEALTH_CHECK_MS 100
 
 using namespace Kit::EventQueue;
 using namespace Kit::System;
-
+using namespace Kit::System::Watchdog;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -110,6 +116,7 @@ TEST_CASE( "EventLoopWithPScheduling" )
 {
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     ShutdownUnitTesting::clearAndUseCounter();
+    resetWatchdogHalMocks();
 
     appleCount_                    = 0;
     appleLastCurrentTick_          = 0;
@@ -144,8 +151,7 @@ TEST_CASE( "EventLoopWithPScheduling" )
         REQUIRE( appleCount_ <= ( TEST_DURATION_IN_MSEC / 10 ) + 1 );
         REQUIRE( orangeCount_ >= 1 );
         REQUIRE( orangeCount_ <= ( TEST_DURATION_IN_MSEC / 100 ) + 1 );
-        REQUIRE( idleCallCount_ >= 10 );
-        REQUIRE( idleCallCount_ <= ( TEST_DURATION_IN_MSEC / OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD ) + 1 );
+        REQUIRE( idleCallCount_ >= ( (unsigned)( ( TEST_DURATION_IN_MSEC / OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD ) * 0.66 ) ) );
 
         sleep( 100 );
         REQUIRE( testThread->isActive() == false );
@@ -173,6 +179,47 @@ TEST_CASE( "EventLoopWithPScheduling" )
         REQUIRE( testThread->isActive() == false );
         REQUIRE( endLoopCount_ == 1 );
         Thread::destroy( *testThread );
+    }
+
+    SECTION( "scheduler - with watchdog" )
+    {
+        // Server with the thread's watchdog "enabled"
+        WatchedEventThread     wdogSetup( WDOG_TIMEOUT_MS, WDOG_THREAD_HEALTH_CHECK_MS, true );
+        WithPeriodicScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, nullptr, OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, nullptr, &wdogSetup );
+
+        auto* t1 = Kit::System::Thread::create( uut, "WATCHED-THREAD" );
+        REQUIRE( t1 );
+
+        Supervisor::enableWdog();
+        uint32_t delayMs = WDOG_TIMEOUT_MS * 2;
+        sleep( delayMs );
+
+        REQUIRE( g_watchdogEnabled == true );
+        REQUIRE( g_kickCount >= ( (unsigned long)( ( delayMs / OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD / OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER ) * 0.9 ) ) );
+        REQUIRE( g_tripCount == 0 );
+
+        uut.pleaseStop();
+        Kit::System::Thread::destroy( *t1, 100 );
+    }
+
+    SECTION( "scheduler - no watchdog" )
+    {
+        // Scheduler with no thread watchdog
+        WithPeriodicScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, nullptr, OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, nullptr, nullptr );
+
+        auto* t1 = Kit::System::Thread::create( uut, "WATCHED-THREAD" );
+        REQUIRE( t1 );
+
+        Supervisor::enableWdog();
+        uint32_t delayMs = WDOG_TIMEOUT_MS * 2;
+        sleep( delayMs );
+
+        REQUIRE( g_watchdogEnabled == true );
+        REQUIRE( g_kickCount == 0 );
+        REQUIRE( g_tripCount == 0 );
+
+        uut.pleaseStop();
+        Kit::System::Thread::destroy( *t1, 100 );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

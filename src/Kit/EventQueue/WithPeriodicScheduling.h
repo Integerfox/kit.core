@@ -59,7 +59,8 @@ public:
                             NowFunc_T                                       nowFunc               = Kit::System::ElapsedTime::millisecondsEx,
                             IdleFunc_T                                      idleFunc              = nullptr,
                             uint32_t                                        timeOutPeriodInMsec   = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
-                            Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList        = nullptr ) noexcept;
+                            Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList        = nullptr,
+                            Kit::System::IWatchedEventLoop*                 watchdog              = nullptr ) noexcept;
 
 public:
     /// See Kit::System::IRunnable
