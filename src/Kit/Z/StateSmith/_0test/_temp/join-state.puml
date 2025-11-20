@@ -1,0 +1,52 @@
+@startuml JoinState
+
+' Recommended PlantUML settings for StateSmith FSM diagrams.
+hide empty description
+'scale 1.25
+
+' Note: StateSmith treats state names and events as case insensitive.
+' More info: https://github.com/StateSmith/StateSmith/wiki/PlantUML
+'
+
+'// INITIAL FSM STATE
+[*] -down-> State1  : / ActionA();
+
+'// A Choice state
+state c1 <<choice>>
+
+' // A Join state
+state j1 <<join>>
+j1 --> State3 : / {\nActionG();}
+state State1
+State1 -> c1 : Event1
+c1 -> State2 : [guard1()] / ActionB();
+c1 --> j1 : else / {\nActionC();}
+
+
+state State2
+State2 -up-> TERMINAL : Event3
+State2 --> j1 : Event2
+State2 : enter / {\nActionH();\nActionB();}
+State2 : do / ActionF();
+
+state State3 {
+    [*] -up-> State3A
+    state State3A
+    state State3B
+}
+State3A -> State3B : Event1
+State3B -left-> State3A : Event2
+State3 -up-> State1 : Event3 / ActionA();
+
+State3A : enter / ActionD();
+State3B : exit / ActionE();
+
+state TERMINAL <<terminate>>
+
+
+' //////////////////////// StateSmith config ////////////////////////
+' The below special comment block sets the StateSmith configuration.
+' More info: https://github.com/StateSmith/StateSmith/issues/335
+'
+
+@enduml

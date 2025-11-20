@@ -42,19 +42,20 @@ alias whatcc="echo $NQBP_CC_SELECTED"
 alias vcc="$NQBP_PKG_ROOT/top/tca2.py --html-dir $NQBP_PKG_ROOT/docs/publish/code-coverage view"
 alias map="$NQBP_PKG_ROOT/scripts/kit.core/map.py" 
 alias vdox="xdg-open $NQBP_PKG_ROOT/docs/publish/doxygen/index.html &>/dev/null &" 
+alias genfsm2="$NQBP_BIN/other/genfsm2.py"
 
 
 
 # No compiler option selected
 if [ -z "$1" ]; then
-	pushd $HERE/top >/dev/null 2>&1
-	echo "Current toolchain: $NQBP_CC_SELECTED"
-	./compiler-list.sh
-	popd >/dev/null 2>&1
+    pushd $HERE/top >/dev/null 2>&1
+    echo "Current toolchain: $NQBP_CC_SELECTED"
+    ./compiler-list.sh
+    popd >/dev/null 2>&1
 else
     pushd $HERE/top >/dev/null 2>&1
-	source ./compiler-list.sh $1
-	EVARS=$(printenv | grep NQBP)
-	IFS=$'\n'; for e in $EVARS; do export $e; done;
-	popd >/dev/null 2>&1
+    source ./compiler-list.sh $1
+    EVARS=$(printenv | grep NQBP)
+    IFS=$'\n'; for e in $EVARS; do export $e; done;
+    popd >/dev/null 2>&1
 fi

@@ -1,0 +1,114 @@
+' The name of the FSM diagram should match the filename (MyFsm.puml).
+@startuml MyFsm2
+
+' Recommended PlantUML settings for StateSmith FSM diagrams.
+hide empty description
+'scale 1.25
+
+' Note: StateSmith treats state names and events as case insensitive.
+' More info: https://github.com/StateSmith/StateSmith/wiki/PlantUML
+'
+' CHEAT SHEET for PlantUML arrow syntax:
+' -down-> or -->
+' -right-> or -> (default arrow)
+' -left->
+' -up->
+
+'// INITIAL FSM STATE
+[*] -down-> State1  : / ActionA();
+
+'// A Choice state
+state c1 <<choice>>
+
+state j1 <<choice>>
+
+state State1
+State1 -> c1 : Event1
+c1 -> State2 : [guard1()] / ActionB();
+c1 --> j1 : else / {\nActionC();}
+
+j1 -down-> State3 :  / ActionG();
+state State2
+State2 -up-> TERMINAL : Event3
+State2 --> j1 : Event2
+State2 : enter / {\nActionH();\nActionB();}
+State2 : do / ActionF();
+
+state State3 {
+    [*] -up-> State3A
+    state State3A
+    state State3B
+}
+
+State3A -> State3B : Event1
+State3B -left-> State3A : Event2
+State3 -up-> State1 : Event3 / ActionA();
+
+State3A : enter / ActionD();
+State3B : exit / ActionE();
+
+state TERMINAL <<terminate>>
+
+
+' //////////////////////// StateSmith config ////////////////////////
+' The below special comment block sets the StateSmith configuration.
+' More info: https://github.com/StateSmith/StateSmith/issues/335
+'
+' The following config is used to enable the NQPB genfsm2.py script.  Only edit
+' the FSM settings. Do NOT edit/remove the GENFSM2 settings unless you
+' know what you are doing.
+
+'///////////////////////////////////////////////////////////////////
+' FSM Settings.
+'  NameSpace -->a single or nested namespace is allowed, e.g.
+'    Examples:
+'      # Single namespace
+'      RenderConfig.Cpp.NameSpace = "Foo"
+
+'      # Nested namespaces
+'      RenderConfig.Cpp.NameSpace = "Foo::Bar"
+'
+'  BaseClassCode -->enables the inclusion of an event queue parent class.  If
+'                   no event queue is needed, comment the line out. When including
+'                   the event queue, the trailing numeric value specifies the depth
+'                   of the event queue.
+'    Examples:
+'      # No event queue ()
+'      #RenderConfig.Cpp.ClassName = "<MARKER:PARENT_EVENT_QUEUE:4>"
+'
+'      # Event queue with depth of 4
+'      RenderConfig.Cpp.ClassName = "<MARKER:PARENT_EVENT_QUEUE:4>"
+
+/'! $CONFIG : toml
+RenderConfig.Cpp.NameSpace = "Foo::Bar"
+#RenderConfig.Cpp.BaseClassCode  = "<MARKER:PARENT_EVENT_QUEUE:4>"
+RenderConfig.Cpp.BaseClassCode  = "Bob"
+'/
+
+
+'///////////////////////////////////////////////////////////////////
+' GENFSM2 Settings.
+'
+
+/'! $CONFIG : toml
+
+RenderConfig.Cpp.IncludeGuardLabel = "<MARKER:INCLUDE_GUARD_LABEL>"
+RenderConfig.Cpp.HFileTopPostIncludeGuard = "// <MARKER:COPYRIGHT>"
+RenderConfig.Cpp.HFileExtension = ".h"
+RenderConfig.Cpp.HFileIncludes = "<MARKER:HEADER_INCLUDES>"
+RenderConfig.Cpp.ClassCode = """
+RenderConfig.Cpp.CFileTop = "// <MARKER:COPYRIGHT>"
+// ------------- Start of Injected ClassCode ----------------------------------
+// <MARKER:OTHER>
+// <MARKER:ACTIONS>
+// <MARKER:GUARDS>
+// ------------- End of Injected ClassCode ----------------------------------
+"""
+
+# More Cpp settings are available. See docs.
+
+[SmRunnerSettings]
+outputCodeGenTimestamp = true
+
+'/
+@enduml
