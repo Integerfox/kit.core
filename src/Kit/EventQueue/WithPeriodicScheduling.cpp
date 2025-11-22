@@ -24,8 +24,9 @@ WithPeriodicScheduling::WithPeriodicScheduling( Interval_T                      
                                                 NowFunc_T                                       nowFunc,
                                                 IdleFunc_T                                      idleFunc,
                                                 uint32_t                                        timeOutPeriodInMsec,
-                                                Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList ) noexcept
-    : Server( timeOutPeriodInMsec, eventFlagsList )
+                                                Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList,
+                                                Kit::System::IWatchedEventLoop*                 watchdog ) noexcept
+    : Server( timeOutPeriodInMsec, eventFlagsList, watchdog )
     , Kit::System::PeriodicScheduler( intervals, beginThreadProcessing, endThreadProcessing, slippageFunc, nowFunc )
     , m_idleFunc( idleFunc )
 {
