@@ -1,5 +1,5 @@
-' The name of the FSM diagram should match the filename (Bob.puml).
-@startuml Bob
+' The name of the FSM diagram should match the filename (MyFsm.puml).
+@startuml MyFsm
 
 ' Recommended PlantUML settings for StateSmith FSM diagrams.
 hide empty description
@@ -14,8 +14,7 @@ hide empty description
 ' -left->
 ' -up->
 
-
-' ADD YOUR STATES and TRANSITIONS HERE
+'// INITIAL FSM STATE
 [*] -down-> State1  : / ActionA();
 
 '// A Choice state
@@ -69,9 +68,10 @@ state TERMINAL <<terminate>>
 '      # Nested namespaces
 '      RenderConfig.Cpp.NameSpace = "Foo::Bar"
 '
-'  BaseClassCode -->This configuration option is 'hijacked' to specify the
-'                   depth of the event queue. If no event queue is needed, 
-'                   comment the line out.
+'  BaseClassCode -->enables the inclusion of an event queue parent class.  If
+'                   no event queue is needed, comment the line out. When including
+'                   the event queue, the trailing numeric value specifies the depth
+'                   of the event queue.
 '    Examples:
 '      # No event queue ()
 '      #RenderConfig.Cpp.ClassName = "<MARKER:PARENT_EVENT_QUEUE:4>"
@@ -80,7 +80,7 @@ state TERMINAL <<terminate>>
 '      RenderConfig.Cpp.ClassName = "<MARKER:PARENT_EVENT_QUEUE:4>"
 
 /'! $CONFIG : toml
-RenderConfig.Cpp.NameSpace      = "Foo::Bar"
+RenderConfig.Cpp.NameSpace = "Foo::Bar"
 RenderConfig.Cpp.BaseClassCode  = "<MARKER:PARENT_EVENT_QUEUE:4>"
 '/
 
@@ -99,9 +99,9 @@ RenderConfig.Cpp.CFileTop = "// <MARKER:COPYRIGHT>"
 RenderConfig.Cpp.CFileIncludes = "<MARKER:HEADER_INCLUDES>"
 RenderConfig.Cpp.ClassCode = """
 // ------------- Start of Injected ClassCode ----------------------------------
+// <MARKER:OTHER>
 // <MARKER:ACTIONS>
 // <MARKER:GUARDS>
-// <MARKER:OTHER>
 // ------------- End of Injected ClassCode ----------------------------------
 """
 

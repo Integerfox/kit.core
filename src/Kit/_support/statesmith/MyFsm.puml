@@ -1,5 +1,5 @@
 ' The name of the FSM diagram should match the filename (MyFsm.puml).
-@startuml MyFsm2
+@startuml MyFsm
 
 ' Recommended PlantUML settings for StateSmith FSM diagrams.
 hide empty description
@@ -14,40 +14,10 @@ hide empty description
 ' -left->
 ' -up->
 
-'// INITIAL FSM STATE
-[*] -down-> State1  : / ActionA();
 
-'// A Choice state
-state c1 <<choice>>
-
-state j1 <<choice>>
-
-state State1
-State1 -> c1 : Event1
-c1 -> State2 : [guard1()] / ActionB();
-c1 --> j1 : else / {\nActionC();}
-
-j1 -down-> State3 :  / ActionG();
-state State2
-State2 -up-> TERMINAL : Event3
-State2 --> j1 : Event2
-State2 : enter / {\nActionH();\nActionB();}
-State2 : do / ActionF();
-
-state State3 {
-    [*] -up-> State3A
-    state State3A
-    state State3B
-}
-
-State3A -> State3B : Event1
-State3B -left-> State3A : Event2
-State3 -up-> State1 : Event3 / ActionA();
-
-State3A : enter / ActionD();
-State3B : exit / ActionE();
-
-state TERMINAL <<terminate>>
+' ADD YOUR STATES and TRANSITIONS HERE
+state Idle
+[*] -down-> Idle : / Initialize();
 
 
 ' //////////////////////// StateSmith config ////////////////////////
@@ -68,10 +38,9 @@ state TERMINAL <<terminate>>
 '      # Nested namespaces
 '      RenderConfig.Cpp.NameSpace = "Foo::Bar"
 '
-'  BaseClassCode -->enables the inclusion of an event queue parent class.  If
-'                   no event queue is needed, comment the line out. When including
-'                   the event queue, the trailing numeric value specifies the depth
-'                   of the event queue.
+'  BaseClassCode -->This configuration option is 'hijacked' to specify the
+'                   depth of the event queue. If no event queue is needed, 
+'                   comment the line out.
 '    Examples:
 '      # No event queue ()
 '      #RenderConfig.Cpp.ClassName = "<MARKER:PARENT_EVENT_QUEUE:4>"
@@ -82,7 +51,6 @@ state TERMINAL <<terminate>>
 /'! $CONFIG : toml
 RenderConfig.Cpp.NameSpace = "Foo::Bar"
 #RenderConfig.Cpp.BaseClassCode  = "<MARKER:PARENT_EVENT_QUEUE:4>"
-RenderConfig.Cpp.BaseClassCode  = "Bob"
 '/
 
 
@@ -96,12 +64,13 @@ RenderConfig.Cpp.IncludeGuardLabel = "<MARKER:INCLUDE_GUARD_LABEL>"
 RenderConfig.Cpp.HFileTopPostIncludeGuard = "// <MARKER:COPYRIGHT>"
 RenderConfig.Cpp.HFileExtension = ".h"
 RenderConfig.Cpp.HFileIncludes = "<MARKER:HEADER_INCLUDES>"
-RenderConfig.Cpp.ClassCode = """
 RenderConfig.Cpp.CFileTop = "// <MARKER:COPYRIGHT>"
+RenderConfig.Cpp.CFileIncludes = "<MARKER:HEADER_INCLUDES>"
+RenderConfig.Cpp.ClassCode = """
 // ------------- Start of Injected ClassCode ----------------------------------
-// <MARKER:OTHER>
 // <MARKER:ACTIONS>
 // <MARKER:GUARDS>
+// <MARKER:OTHER>
 // ------------- End of Injected ClassCode ----------------------------------
 """
 

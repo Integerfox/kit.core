@@ -160,6 +160,8 @@ def run( argv, copyright=None ):
 
     # Diagram file name
     fsmname = args['<fsmname>']
+    if fsmname.endswith( ".puml" ):  # Strip any .puml extension
+        fsmname = fsmname[:-5]
     fsmdiag = fsmname + ".puml"
     symbols["fsm_name"]    =  fsmname
     symbols["fsm_diagram"] =  fsmdiag
@@ -347,7 +349,8 @@ def update_generated_header():
             prev_line          = ""
             for line in inf:
                 stripped_line = line.strip()
-
+                stripped_prev = prev_line.strip()
+                
                 # Skip next line when needed
                 if skip_next:
                     prev_line = line
@@ -372,6 +375,10 @@ def update_generated_header():
                         line = f'#include "{symbols["ringbuffer_include"]}"\n'
                     else:
                         continue
+
+                # Rename the start() method
+                if stripped_line.startswith( "void start()" ):
+                    line = line.replace( "start()", "startFsm()" )
 
                 # Patch namespace if needed
                 if line.startswith( "namespace "):
@@ -424,15 +431,15 @@ def update_generated_header():
                         line = f"{int(symbols['namespace_count'])*'}'}\n"
                 
                 # Fix non-doxygen comment styles
-                if stripped_line.startswith( "//" ) and not stripped_line.startswith( "///" ):
+                if stripped_line.startswith( "//" ) and not stripped_line.startswith( "///" ) and not stripped_line.startswith("// -" ) and not stripped_line.startswith("// #" ):
                     line = line.replace( "//", "///", 1 )
 
                 # Trap uncomment enum lines
-                if stripped_line.startswith( "enum" ) and not prev_line.lstrip().startswith("///" ):
+                if stripped_line.startswith( "enum" ) and not stripped_prev.startswith("///" ):
                     outf.write( "    /// Enum definition\n" )
 
                 # Trap uncomment void functions lines
-                if stripped_line.startswith( "void" ) and not prev_line.lstrip().startswith("///" ):
+                if stripped_line.startswith( "void" ) and not stripped_prev.startswith("///" ):
                     outf.write( "    /// State Machine function\n" )
 
                 # Output the (possibly modified) line
@@ -490,8 +497,12 @@ def update_generated_cpp():
                         skip_next = True
 
                 # Rename the original dispatch event method to fsmDispatchEvent
-                if stripped_line.startswith( "void Bob::dispatchEvent(EventId eventId)" ) and symbols['has_event_queue']:
+                if stripped_line.startswith( f"void {symbols['fsm_name']}::dispatchEvent(EventId eventId)" ) and symbols['has_event_queue']:
                     line = line.replace( "dispatchEvent", "fsmDispatchEvent" )
+
+                # Rename the start() method
+                if stripped_line.startswith( f"void {symbols['fsm_name']}::start()" ):
+                    line = line.replace( "start()", "startFsm()" )
 
                 # Patch the end-namespace
                 if line.rstrip() == "}":
@@ -639,7 +650,6 @@ def generate_plantuml_file():
         outf.write( "/'! $CONFIG : toml\n" )
         outf.write( "RenderConfig.Cpp.NameSpace = \"Foo::Bar\"\n" )
         outf.write( "#RenderConfig.Cpp.BaseClassCode  = \"<MARKER:PARENT_EVENT_QUEUE:4>\"\n" )
-        outf.write( "RenderConfig.Cpp.BaseClassCode  = \"Bob\"\n" )
         outf.write( "'/\n" )
         outf.write( "\n" )
         outf.write( "\n" )
@@ -670,71 +680,6 @@ def generate_plantuml_file():
         outf.write( "\n" )
         outf.write( "'/\n" )
         outf.write( "@enduml\n" )
-
-
-#
-def cleanup_for_doxygen( headerfile ):
-    tmpfile = headerfile + ".tmp"
-    skip_state = 0
-    with open( headerfile ) as inf:
-        with open( tmpfile, "w") as outf:  
-            for line in inf:
-                if line.startswith( "namespace") and skip_state == 0:
-                    outf.write( "#ifndef DOXYGEN_WILL_SKIP_THIS\n\n");
-                    outf.write( line );
-                    skip_state += 1
-                    continue
-                if line.startswith( "#endif") and skip_state == 1:
-                    outf.write( "#endif // !DOXYGEN_WILL_SKIP_THIS\n\n");
-                    outf.write( line );
-                    skip_state += 1
-                    continue
-                outf.write( line )
-
-    os.remove( headerfile )
-    os.rename( tmpfile, headerfile )
- 
-#
-def cleanup_fsm_for_doxygen( headerfile, classname):
-    tmpfile = headerfile + ".tmp"
-    skip_state = 0
-    brace_state = 0
-    with open( headerfile ) as inf:
-        with open( tmpfile, "w") as outf:  
-            for line in inf:
-                # count curly braces (after the namespace)
-                if skip_state > 0:
-                    if '{' in line:
-                        brace_state += 1
-                    if '}' in line:
-                        brace_state -= 1
-                if line.startswith( "namespace") and skip_state == 0:
-                    outf.write( line );
-                    outf.write( "    /// Finite State Machine class\n");
-                    skip_state += 1
-                    continue
-                if line.strip().startswith( "class") and skip_state == 1:
-                    outf.write( line );
-                    skip_state += 1
-                    continue
-                if line.strip().startswith( "{") and skip_state == 2:
-                    outf.write( line );
-                    outf.write( "    /// @cond \n");
-                    skip_state += 1
-                    continue
-
-                if skip_state > 0 and brace_state == 0 and line.endswith("};}\n"):
-                    outf.write( "    /// @endcond \n");
-                    outf.write( line );
-                    continue
-                if line.find( 'Here is the graph that shows the state machine' ) == -1:
-                    outf.write( line )
-                else:
-                    outf.write( f"/** \\class {classname}\n\nHere is the graph that shows the state machine this class implements\n\n\\dot\n" )
-
-    os.remove( headerfile )
-    os.rename( tmpfile, headerfile )
-
 
 #------------------------------------------------------------------------------
 # MAIN

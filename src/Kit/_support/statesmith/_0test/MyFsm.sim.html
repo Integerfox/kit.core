@@ -259,9 +259,15 @@ State1 : State1
 
 state ROOT.(ChoicePoint)(c1) <<choice>>
 
-j1
+state ROOT.(ChoicePoint)(j1) <<choice>>
 
-j1 : j1
+State2
+
+State2 : State2
+
+State2 : enter / #123; ActionH()#59;\nActionB()#59; #125;
+
+State2 : do / #123; ActionF()#59; #125;
 
 state State3 {
 
@@ -283,14 +289,6 @@ state State3 {
 
 }
 
-State2
-
-State2 : State2
-
-State2 : enter / #123; ActionH()#59;\nActionB()#59; #125;
-
-State2 : do / #123; ActionF()#59; #125;
-
 TERMINAL
 
 TERMINAL : TERMINAL
@@ -301,9 +299,13 @@ State1 --> ROOT.(ChoicePoint)(c1) : Event1
 
 ROOT.(ChoicePoint)(c1) --> State2 : [guard1()] / #123; ActionB()#59; #125;
 
-ROOT.(ChoicePoint)(c1) --> j1 : else / #123; ActionC()#59; #125;
+ROOT.(ChoicePoint)(c1) --> ROOT.(ChoicePoint)(j1) : else / #123; ActionC()#59; #125;
 
-j1 --> State3 : do / #123; ActionG()#59; #125;
+ROOT.(ChoicePoint)(j1) --> State3 : / #123; ActionG()#59; #125;
+
+State2 --> TERMINAL : Event3
+
+State2 --> ROOT.(ChoicePoint)(j1) : Event2
 
 State3 --> State1 : Event3 / #123; ActionA()#59; #125;
 
@@ -312,10 +314,6 @@ State3.(InitialState) --> State3A
 State3A --> State3B : Event1
 
 State3B --> State3A : Event2
-
-State2 --> TERMINAL : Event3
-
-State2 --> j1 : Event2
 
 
 
@@ -359,7 +357,7 @@ State2 --> j1 : Event2
 // Algorithm: Balanced2. See https://github.com/StateSmith/StateSmith/wiki/Algorithms
 
 // Generated state machine
-class JoinState
+class MyFsm
 {
 // Null by default.
 // May be overridden to override guard evaluation (eg. in a simulator)
@@ -379,17 +377,16 @@ evaluateGuard = null;
     static StateId = 
     {
         ROOT : 0,
-        J1 : 1,
-        STATE1 : 2,
-        STATE2 : 3,
-        STATE3 : 4,
-        STATE3A : 5,
-        STATE3B : 6,
-        TERMINAL : 7,
+        STATE1 : 1,
+        STATE2 : 2,
+        STATE3 : 3,
+        STATE3A : 4,
+        STATE3B : 5,
+        TERMINAL : 6,
     }
     static { Object.freeze(this.StateId); }
     
-    static StateIdCount = 8;
+    static StateIdCount = 7;
     static { Object.freeze(this.StateIdCount); }
     
     // Used internally by state machine. Feel free to inspect, but don't modify.
@@ -432,65 +429,57 @@ evaluateGuard = null;
     {
         switch (this.stateId)
         {
-            // STATE: JoinState
-            case JoinState.StateId.ROOT:
+            // STATE: MyFsm
+            case MyFsm.StateId.ROOT:
                 // No events handled by this state (or its ancestors).
                 break;
             
-            // STATE: j1
-            case JoinState.StateId.J1:
-                switch (eventId)
-                {
-                    case JoinState.EventId.DO: this.#J1_do(); break;
-                }
-                break;
-            
             // STATE: State1
-            case JoinState.StateId.STATE1:
+            case MyFsm.StateId.STATE1:
                 switch (eventId)
                 {
-                    case JoinState.EventId.EVENT1: this.#STATE1_event1(); break;
+                    case MyFsm.EventId.EVENT1: this.#STATE1_event1(); break;
                 }
                 break;
             
             // STATE: State2
-            case JoinState.StateId.STATE2:
+            case MyFsm.StateId.STATE2:
                 switch (eventId)
                 {
-                    case JoinState.EventId.DO: this.#STATE2_do(); break;
-                    case JoinState.EventId.EVENT3: this.#STATE2_event3(); break;
-                    case JoinState.EventId.EVENT2: this.#STATE2_event2(); break;
+                    case MyFsm.EventId.DO: this.#STATE2_do(); break;
+                    case MyFsm.EventId.EVENT3: this.#STATE2_event3(); break;
+                    case MyFsm.EventId.EVENT2: this.#STATE2_event2(); break;
                 }
                 break;
             
             // STATE: State3
-            case JoinState.StateId.STATE3:
+            case MyFsm.StateId.STATE3:
                 switch (eventId)
                 {
-                    case JoinState.EventId.EVENT3: this.#STATE3_event3(); break;
+                    case MyFsm.EventId.EVENT3: this.#STATE3_event3(); break;
                 }
                 break;
             
             // STATE: State3A
-            case JoinState.StateId.STATE3A:
+            case MyFsm.StateId.STATE3A:
                 switch (eventId)
                 {
-                    case JoinState.EventId.EVENT1: this.#STATE3A_event1(); break;
-                    case JoinState.EventId.EVENT3: this.#STATE3_event3(); break; // First ancestor handler for this event
+                    case MyFsm.EventId.EVENT1: this.#STATE3A_event1(); break;
+                    case MyFsm.EventId.EVENT3: this.#STATE3_event3(); break; // First ancestor handler for this event
                 }
                 break;
             
             // STATE: State3B
-            case JoinState.StateId.STATE3B:
+            case MyFsm.StateId.STATE3B:
                 switch (eventId)
                 {
-                    case JoinState.EventId.EVENT2: this.#STATE3B_event2(); break;
-                    case JoinState.EventId.EVENT3: this.#STATE3_event3(); break; // First ancestor handler for this event
+                    case MyFsm.EventId.EVENT2: this.#STATE3B_event2(); break;
+                    case MyFsm.EventId.EVENT3: this.#STATE3_event3(); break; // First ancestor handler for this event
                 }
                 break;
             
             // STATE: TERMINAL
-            case JoinState.StateId.TERMINAL:
+            case MyFsm.StateId.TERMINAL:
                 // No events handled by this state (or its ancestors).
                 break;
         }
@@ -505,19 +494,17 @@ evaluateGuard = null;
         {
             switch (this.stateId)
             {
-                case JoinState.StateId.J1: this.#J1_exit(); break;
+                case MyFsm.StateId.STATE1: this.#STATE1_exit(); break;
                 
-                case JoinState.StateId.STATE1: this.#STATE1_exit(); break;
+                case MyFsm.StateId.STATE2: this.#STATE2_exit(); break;
                 
-                case JoinState.StateId.STATE2: this.#STATE2_exit(); break;
+                case MyFsm.StateId.STATE3: this.#STATE3_exit(); break;
                 
-                case JoinState.StateId.STATE3: this.#STATE3_exit(); break;
+                case MyFsm.StateId.STATE3A: this.#STATE3A_exit(); break;
                 
-                case JoinState.StateId.STATE3A: this.#STATE3A_exit(); break;
+                case MyFsm.StateId.STATE3B: this.#STATE3B_exit(); break;
                 
-                case JoinState.StateId.STATE3B: this.#STATE3B_exit(); break;
-                
-                case JoinState.StateId.TERMINAL: this.#TERMINAL_exit(); break;
+                case MyFsm.StateId.TERMINAL: this.#TERMINAL_exit(); break;
                 
                 default: return;  // Just to be safe. Prevents infinite loop if state ID memory is somehow corrupted.
             }
@@ -531,45 +518,15 @@ evaluateGuard = null;
     
     #ROOT_enter()
     {
-        this.stateId = JoinState.StateId.ROOT;
+        this.stateId = MyFsm.StateId.ROOT;
     }
     
-    
-    ////////////////////////////////////////////////////////////////////////////////
-    // event handlers for state J1
-    ////////////////////////////////////////////////////////////////////////////////
-    
-    #J1_enter()
+    #ROOT_ChoicePoint_j1__transition()
     {
-        this.stateId = JoinState.StateId.J1;
-        
-        // j1 behavior
-        // uml: enter / { this.tracer?.enterState('j1'); }
+        // ROOT.<ChoicePoint>(j1) behavior
+        // uml: / { this.tracer?.log("⚡ FSM would execute action: " + "ActionG();");this.tracer?.edgeTransition("edge4"); } TransitionTo(State3)
         {
-            // Step 1: execute action `this.tracer?.enterState('j1');`
-            this.tracer?.enterState('j1');
-        } // end of behavior for j1
-    }
-    
-    #J1_exit()
-    {
-        // j1 behavior
-        // uml: exit / { this.tracer?.exitState('j1'); }
-        {
-            // Step 1: execute action `this.tracer?.exitState('j1');`
-            this.tracer?.exitState('j1');
-        } // end of behavior for j1
-        
-        this.stateId = JoinState.StateId.ROOT;
-    }
-    
-    #J1_do()
-    {
-        // j1 behavior
-        // uml: do / { this.tracer?.log("⚡ FSM would execute action: " + "ActionG();");this.tracer?.edgeTransition("edge4"); } TransitionTo(State3)
-        {
-            // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition).
-            this.#J1_exit();
+            // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition). Already at LCA, no exiting required.
             
             // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionG();");this.tracer?.edgeTransition("edge4");`.
             this.tracer?.log("⚡ FSM would execute action: " + "ActionG();");this.tracer?.edgeTransition("edge4");
@@ -578,12 +535,12 @@ evaluateGuard = null;
             this.#STATE3_enter();
             
             // State3.<InitialState> behavior
-            // uml: / { this.tracer?.edgeTransition("edge6"); } TransitionTo(State3A)
+            // uml: / { this.tracer?.edgeTransition("edge8"); } TransitionTo(State3A)
             {
                 // Step 1: Exit states until we reach `State3` state (Least Common Ancestor for transition). Already at LCA, no exiting required.
                 
-                // Step 2: Transition action: `this.tracer?.edgeTransition("edge6");`.
-                this.tracer?.edgeTransition("edge6");
+                // Step 2: Transition action: `this.tracer?.edgeTransition("edge8");`.
+                this.tracer?.edgeTransition("edge8");
                 
                 // Step 3: Enter/move towards transition target `State3A`.
                 this.#STATE3A_enter();
@@ -591,9 +548,7 @@ evaluateGuard = null;
                 // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
                 return;
             } // end of behavior for State3.<InitialState>
-        } // end of behavior for j1
-        
-        // No ancestor handles this event.
+        } // end of behavior for ROOT.<ChoicePoint>(j1)
     }
     
     
@@ -603,7 +558,7 @@ evaluateGuard = null;
     
     #STATE1_enter()
     {
-        this.stateId = JoinState.StateId.STATE1;
+        this.stateId = MyFsm.StateId.STATE1;
         
         // State1 behavior
         // uml: enter / { this.tracer?.enterState('State1'); }
@@ -622,7 +577,7 @@ evaluateGuard = null;
             this.tracer?.exitState('State1');
         } // end of behavior for State1
         
-        this.stateId = JoinState.StateId.ROOT;
+        this.stateId = MyFsm.StateId.ROOT;
     }
     
     #STATE1_event1()
@@ -656,18 +611,19 @@ evaluateGuard = null;
             } // end of behavior for ROOT.<ChoicePoint>(c1)
             
             // ROOT.<ChoicePoint>(c1) behavior
-            // uml: else / { this.tracer?.log("⚡ FSM would execute action: " + "ActionC();");this.tracer?.edgeTransition("edge3"); } TransitionTo(j1)
+            // uml: else / { this.tracer?.log("⚡ FSM would execute action: " + "ActionC();");this.tracer?.edgeTransition("edge3"); } TransitionTo(ROOT.<ChoicePoint>(j1))
             {
                 // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition). Already at LCA, no exiting required.
                 
                 // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionC();");this.tracer?.edgeTransition("edge3");`.
                 this.tracer?.log("⚡ FSM would execute action: " + "ActionC();");this.tracer?.edgeTransition("edge3");
                 
-                // Step 3: Enter/move towards transition target `j1`.
-                this.#J1_enter();
+                // Step 3: Enter/move towards transition target `ROOT.<ChoicePoint>(j1)`.
+                // ROOT.<ChoicePoint>(j1) is a pseudo state and cannot have an `enter` trigger.
                 
-                // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
-                return;
+                // Finish transition by calling pseudo state transition function.
+                this.#ROOT_ChoicePoint_j1__transition();
+                return; // event processing immediately stops when a transition finishes. No other behaviors for this state are checked.
             } // end of behavior for ROOT.<ChoicePoint>(c1)
         } // end of behavior for State1
         
@@ -681,7 +637,7 @@ evaluateGuard = null;
     
     #STATE2_enter()
     {
-        this.stateId = JoinState.StateId.STATE2;
+        this.stateId = MyFsm.StateId.STATE2;
         
         // State2 behavior
         // uml: enter / { this.tracer?.enterState('State2'); }
@@ -707,7 +663,7 @@ evaluateGuard = null;
             this.tracer?.exitState('State2');
         } // end of behavior for State2
         
-        this.stateId = JoinState.StateId.ROOT;
+        this.stateId = MyFsm.StateId.ROOT;
     }
     
     #STATE2_do()
@@ -725,19 +681,20 @@ evaluateGuard = null;
     #STATE2_event2()
     {
         // State2 behavior
-        // uml: Event2 / { this.tracer?.edgeTransition("edge10"); } TransitionTo(j1)
+        // uml: Event2 / { this.tracer?.edgeTransition("edge6"); } TransitionTo(ROOT.<ChoicePoint>(j1))
         {
             // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition).
             this.#STATE2_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge10");`.
-            this.tracer?.edgeTransition("edge10");
+            // Step 2: Transition action: `this.tracer?.edgeTransition("edge6");`.
+            this.tracer?.edgeTransition("edge6");
             
-            // Step 3: Enter/move towards transition target `j1`.
-            this.#J1_enter();
+            // Step 3: Enter/move towards transition target `ROOT.<ChoicePoint>(j1)`.
+            // ROOT.<ChoicePoint>(j1) is a pseudo state and cannot have an `enter` trigger.
             
-            // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
-            return;
+            // Finish transition by calling pseudo state transition function.
+            this.#ROOT_ChoicePoint_j1__transition();
+            return; // event processing immediately stops when a transition finishes. No other behaviors for this state are checked.
         } // end of behavior for State2
         
         // No ancestor handles this event.
@@ -746,13 +703,13 @@ evaluateGuard = null;
     #STATE2_event3()
     {
         // State2 behavior
-        // uml: Event3 / { this.tracer?.edgeTransition("edge9"); } TransitionTo(TERMINAL)
+        // uml: Event3 / { this.tracer?.edgeTransition("edge5"); } TransitionTo(TERMINAL)
         {
             // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition).
             this.#STATE2_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge9");`.
-            this.tracer?.edgeTransition("edge9");
+            // Step 2: Transition action: `this.tracer?.edgeTransition("edge5");`.
+            this.tracer?.edgeTransition("edge5");
             
             // Step 3: Enter/move towards transition target `TERMINAL`.
             this.#TERMINAL_enter();
@@ -771,7 +728,7 @@ evaluateGuard = null;
     
     #STATE3_enter()
     {
-        this.stateId = JoinState.StateId.STATE3;
+        this.stateId = MyFsm.StateId.STATE3;
         
         // State3 behavior
         // uml: enter / { this.tracer?.enterState('State3'); }
@@ -790,19 +747,19 @@ evaluateGuard = null;
             this.tracer?.exitState('State3');
         } // end of behavior for State3
         
-        this.stateId = JoinState.StateId.ROOT;
+        this.stateId = MyFsm.StateId.ROOT;
     }
     
     #STATE3_event3()
     {
         // State3 behavior
-        // uml: Event3 / { this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge5"); } TransitionTo(State1)
+        // uml: Event3 / { this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge7"); } TransitionTo(State1)
         {
             // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition).
-            this.#exitUpToStateHandler(JoinState.StateId.ROOT);
+            this.#exitUpToStateHandler(MyFsm.StateId.ROOT);
             
-            // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge5");`.
-            this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge5");
+            // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge7");`.
+            this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge7");
             
             // Step 3: Enter/move towards transition target `State1`.
             this.#STATE1_enter();
@@ -821,7 +778,7 @@ evaluateGuard = null;
     
     #STATE3A_enter()
     {
-        this.stateId = JoinState.StateId.STATE3A;
+        this.stateId = MyFsm.StateId.STATE3A;
         
         // State3A behavior
         // uml: enter / { this.tracer?.enterState('State3A'); }
@@ -847,19 +804,19 @@ evaluateGuard = null;
             this.tracer?.exitState('State3A');
         } // end of behavior for State3A
         
-        this.stateId = JoinState.StateId.STATE3;
+        this.stateId = MyFsm.StateId.STATE3;
     }
     
     #STATE3A_event1()
     {
         // State3A behavior
-        // uml: Event1 / { this.tracer?.edgeTransition("edge7"); } TransitionTo(State3B)
+        // uml: Event1 / { this.tracer?.edgeTransition("edge9"); } TransitionTo(State3B)
         {
             // Step 1: Exit states until we reach `State3` state (Least Common Ancestor for transition).
             this.#STATE3A_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge7");`.
-            this.tracer?.edgeTransition("edge7");
+            // Step 2: Transition action: `this.tracer?.edgeTransition("edge9");`.
+            this.tracer?.edgeTransition("edge9");
             
             // Step 3: Enter/move towards transition target `State3B`.
             this.#STATE3B_enter();
@@ -878,7 +835,7 @@ evaluateGuard = null;
     
     #STATE3B_enter()
     {
-        this.stateId = JoinState.StateId.STATE3B;
+        this.stateId = MyFsm.StateId.STATE3B;
         
         // State3B behavior
         // uml: enter / { this.tracer?.enterState('State3B'); }
@@ -904,19 +861,19 @@ evaluateGuard = null;
             this.tracer?.exitState('State3B');
         } // end of behavior for State3B
         
-        this.stateId = JoinState.StateId.STATE3;
+        this.stateId = MyFsm.StateId.STATE3;
     }
     
     #STATE3B_event2()
     {
         // State3B behavior
-        // uml: Event2 / { this.tracer?.edgeTransition("edge8"); } TransitionTo(State3A)
+        // uml: Event2 / { this.tracer?.edgeTransition("edge10"); } TransitionTo(State3A)
         {
             // Step 1: Exit states until we reach `State3` state (Least Common Ancestor for transition).
             this.#STATE3B_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge8");`.
-            this.tracer?.edgeTransition("edge8");
+            // Step 2: Transition action: `this.tracer?.edgeTransition("edge10");`.
+            this.tracer?.edgeTransition("edge10");
             
             // Step 3: Enter/move towards transition target `State3A`.
             this.#STATE3A_enter();
@@ -935,7 +892,7 @@ evaluateGuard = null;
     
     #TERMINAL_enter()
     {
-        this.stateId = JoinState.StateId.TERMINAL;
+        this.stateId = MyFsm.StateId.TERMINAL;
         
         // TERMINAL behavior
         // uml: enter / { this.tracer?.enterState('TERMINAL'); }
@@ -954,7 +911,7 @@ evaluateGuard = null;
             this.tracer?.exitState('TERMINAL');
         } // end of behavior for TERMINAL
         
-        this.stateId = JoinState.StateId.ROOT;
+        this.stateId = MyFsm.StateId.ROOT;
     }
     
     // Thread safe.
@@ -962,14 +919,13 @@ evaluateGuard = null;
     {
         switch (id)
         {
-            case JoinState.StateId.ROOT: return "ROOT";
-            case JoinState.StateId.J1: return "J1";
-            case JoinState.StateId.STATE1: return "STATE1";
-            case JoinState.StateId.STATE2: return "STATE2";
-            case JoinState.StateId.STATE3: return "STATE3";
-            case JoinState.StateId.STATE3A: return "STATE3A";
-            case JoinState.StateId.STATE3B: return "STATE3B";
-            case JoinState.StateId.TERMINAL: return "TERMINAL";
+            case MyFsm.StateId.ROOT: return "ROOT";
+            case MyFsm.StateId.STATE1: return "STATE1";
+            case MyFsm.StateId.STATE2: return "STATE2";
+            case MyFsm.StateId.STATE3: return "STATE3";
+            case MyFsm.StateId.STATE3A: return "STATE3A";
+            case MyFsm.StateId.STATE3B: return "STATE3B";
+            case MyFsm.StateId.TERMINAL: return "TERMINAL";
             default: return "?";
         }
     }
@@ -979,10 +935,10 @@ evaluateGuard = null;
     {
         switch (id)
         {
-            case JoinState.EventId.DO: return "DO";
-            case JoinState.EventId.EVENT1: return "EVENT1";
-            case JoinState.EventId.EVENT2: return "EVENT2";
-            case JoinState.EventId.EVENT3: return "EVENT3";
+            case MyFsm.EventId.DO: return "DO";
+            case MyFsm.EventId.EVENT1: return "EVENT1";
+            case MyFsm.EventId.EVENT2: return "EVENT2";
+            case MyFsm.EventId.EVENT3: return "EVENT3";
             default: return "?";
         }
     }
@@ -1028,8 +984,10 @@ evaluateGuard = null;
   "State1": [
     "Event1"
   ],
-  "j1": [
-    "do"
+  "State2": [
+    "do",
+    "Event2",
+    "Event3"
   ],
   "State3": [
     "Event3"
@@ -1039,11 +997,6 @@ evaluateGuard = null;
     "Event3"
   ],
   "State3B": [
-    "Event2",
-    "Event3"
-  ],
-  "State2": [
-    "do",
     "Event2",
     "Event3"
   ],
@@ -1157,7 +1110,7 @@ evaluateGuard = null;
             document.querySelector('tbody').appendChild(row);
         }
 
-        var sm = new JoinState();
+        var sm = new MyFsm();
 
         // prompt the user to evaluate guards manually
         sm.evaluateGuard = (vertexName, behaviorUml) => {
@@ -1218,7 +1171,7 @@ evaluateGuard = null;
 
         // The simulator uses a tracer callback to perform operations such as 
         // state highlighting and logging. You do not need this functionality
-        // when using JoinState.js in your own applications, although you may
+        // when using MyFsm.js in your own applications, although you may
         // choose to implement a tracer for debugging purposes.
         sm.tracer = {
             enterState: (mermaidName) => {
@@ -1255,7 +1208,7 @@ evaluateGuard = null;
                     clearHighlightedEdges();
                     sm.tracer?.log('<span class="dispatched"><span class="trigger">' + diagramEventName + '</span> DISPATCHED</span>', true);
                     const fsmEventName = diagramEventName.toUpperCase();
-                    sm.dispatchEvent(JoinState.EventId[fsmEventName]); 
+                    sm.dispatchEvent(MyFsm.EventId[fsmEventName]); 
                 }
             });
             document.getElementById('buttons').appendChild(button);
