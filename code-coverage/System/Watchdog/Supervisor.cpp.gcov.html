@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-22 19:04:12</td>
+            <td class="headerValue">2025-11-22 20:09:05</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">71.4&nbsp;%</td>
@@ -107,27 +107,27 @@
 <span id="L45"><span class="lineNum">      45</span>                 :             :     m_watchedThreads.remove( threadBeingMonitored );</span>
 <span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">          20 : }</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         904 : void Supervisor::monitorThreads() noexcept</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         911 : void Supervisor::monitorThreads() noexcept</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : {</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     // Not enabled --&gt;do nothing</span>
-<span id="L51"><span class="lineNum">      51</span>         [<span class="tlaGBC" title="Branch 0 was taken 904 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         904 :     if ( !m_isEnabled )</span></span>
+<span id="L51"><span class="lineNum">      51</span>         [<span class="tlaGBC" title="Branch 0 was taken 911 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         911 :     if ( !m_isEnabled )</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     {</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :         return;  </span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     }</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :     // Use tick divider to reduce monitoring frequency</span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">         904 :     m_currentTick++;</span></span>
-<span id="L58"><span class="lineNum">      58</span>         [<span class="tlaGBC" title="Branch 0 was taken 283 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 621 times"> + </span>]:<span class="tlaGNC">         904 :     if ( m_currentTick &gt;= OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER )</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">         911 :     m_currentTick++;</span></span>
+<span id="L58"><span class="lineNum">      58</span>         [<span class="tlaGBC" title="Branch 0 was taken 285 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 626 times"> + </span>]:<span class="tlaGNC">         911 :     if ( m_currentTick &gt;= OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER )</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     {</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :         // Housekeeping</span>
-<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">         283 :         m_currentTick  = 0;</span></span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">         283 :         uint32_t now   = Kit::System::ElapsedTime::milliseconds();</span></span>
-<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">         283 :         uint32_t delta = Kit::System::ElapsedTime::deltaMilliseconds( m_timeMarker, now );</span></span>
+<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">         285 :         m_currentTick  = 0;</span></span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">         285 :         uint32_t now   = Kit::System::ElapsedTime::milliseconds();</span></span>
+<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">         285 :         uint32_t delta = Kit::System::ElapsedTime::deltaMilliseconds( m_timeMarker, now );</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : </span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :         // Walk the list of monitored threads</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :         WatchedThread*                thread = m_watchedThreads.first();</span>
-<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 285 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 244 times"> + </span>]:<span class="tlaGNC">         529 :         while ( thread )</span></span>
+<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 285 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 246 times"> + </span>]:<span class="tlaGNC">         531 :         while ( thread )</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :         {</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :             // Check for an expired thread timer</span>
 <span id="L71"><span class="lineNum">      71</span>         [<span class="tlaGBC" title="Branch 0 was taken 39 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 246 times"> + </span>]:<span class="tlaGNC">         285 :             if ( thread-&gt;m_currentCountMs &lt;= delta )</span></span>
@@ -142,8 +142,8 @@
 <span id="L80"><span class="lineNum">      80</span>                 :             :         }</span>
 <span id="L81"><span class="lineNum">      81</span>                 :             : </span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :         // If I get here - all monitored threads are 'healthy'</span>
-<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">         244 :         Kit_System_Watchdog_hal_kick_wdog();</span></span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">         244 :         m_timeMarker = now;</span></span>
+<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">         246 :         Kit_System_Watchdog_hal_kick_wdog();</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">         246 :         m_timeMarker = now;</span></span>
 <span id="L85"><span class="lineNum">      85</span>                 :             :     }</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : }</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             : </span>
