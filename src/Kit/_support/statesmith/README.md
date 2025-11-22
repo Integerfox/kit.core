@@ -48,6 +48,6 @@ output of the StateSmith tool to be specific to the KIT library design model.
 - StateSmith does not support UML Junction pseudo states.  However a Choice
   pseudo state can be used where the Choice state has a single outbound
   transition and no guard, or else clause is used on the outbound transition
-- The are limitation for StateSmith generated a HTML file that simulates the
+- There are limitations for StateSmith generated HTML files that simulate the
   State Machine behavior.  See this [wiki page](https://github.com/StateSmith/StateSmith/wiki/Simulator)
   for details

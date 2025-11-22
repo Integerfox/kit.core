@@ -26,7 +26,7 @@
 from nqbplib.base import BuildValues
 from nqbplib.my_globals import *
 from nqbplib.utils import config_catch2
-import os, copy 
+import os 
 
 # Capture project/build directory
 prjdir = os.path.dirname(os.path.abspath(__file__))

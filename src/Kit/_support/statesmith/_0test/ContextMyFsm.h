@@ -20,12 +20,6 @@ namespace Bar {
 
 /** This class implements the 'Context' for the MyFSM State Diagram
 
-    Clients to the ContextMyFsm should only use the public interface methods below
-    for interacting with the State Machine.  A 'good' design these public methods
-    would be 
-
-        - startFsm()
-        - postEvent()
     This interface is NOT thread safe.
  */
 class ContextMyFsm : public MyFsm, public IWidget

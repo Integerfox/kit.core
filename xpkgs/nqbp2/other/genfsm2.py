@@ -19,13 +19,12 @@ import os
 
 # Make sure the environment is properly set
 NQBP_BIN = os.environ.get('NQBP_BIN')
-if NQBP_BIN == None:
+if NQBP_BIN is None:
     sys.exit( "ERROR: The environment variable NQBP_BIN is not set!" )
 sys.path.append( NQBP_BIN )
 
 #
 from nqbplib.docopt.docopt import docopt
-from nqbplib import utils
 
 # 
 usage = """ 
@@ -187,7 +186,7 @@ def run( argv, copyright=None ):
     if args['-v']:
         print(f"Running StateSmith command: {cmd}")
     p = subprocess.Popen( cmd, shell=True )
-    r = p.communicate()
+    p.communicate()
     if p.returncode != 0:
         exit("ERROR: StateSmith encountered an error or failed to run." )
 
@@ -310,13 +309,13 @@ def prescan_generated_cpp():
 def derive_symbols():
     global symbols
     
-    # Convert the nested namespace to a list of namespaces in heiarchaly order
-    # Note: The may only be a single namespace
+    # Convert the nested namespace to a list of namespaces in hierarchically order
+    # Note: There may only be a single namespace
     namespaces = symbols.get('nested_namespace', '').split('::')
     symbols['namespace_list']  = namespaces
     symbols['namespace_count'] = len( namespaces )
 
-    # Dervice Header guard - consiste of the all upper case with the namespace(s) concatenated with the FSM name and then trailing _H_
+    # Derive Header guard - consists of the all upper case with the namespace(s) concatenated with the FSM name and then trailing _H_
     symbols['include_guard_label'] = "_".join( [ n.upper() for n in namespaces ] + [ symbols['fsm_name'].upper(), "H" ] ) + "_"
 
     # Determine if there is parent event queue class
@@ -330,7 +329,7 @@ def derive_symbols():
             symbols['ringbuffer_include'] = ringbuffer_include[osal]
             symbols['trace_include']      = trace_include[osal]
             symbols['fatalerror_include'] = fatalerror_include[osal]
-    except:
+    except KeyError:
         symbols['ringbuffer_include'] = "\n"
         symbols['has_event_queue'] = False
     
@@ -405,7 +404,7 @@ def update_generated_header():
                 # Patch the constructor to initialize the event queue (when used)
                 if stripped_line.startswith( f"{symbols['fsm_name']}()" ):
                     if symbols['has_event_queue']:
-                        line = f'    {symbols["fsm_name"]}() : {ringbuffer_constructor[osal]}\n'
+                        line = f'    {symbols["fsm_name"]}() : {ringbuffer_constructor[osal]}, m_processingFsmEvent(false)\n'
 
                 # Add the ACTION methods
                 if line.startswith( MARKER_ACTION_METHODS ):
@@ -459,8 +458,6 @@ def update_generated_cpp():
     with open( srccpp ) as inf:
         with open( dstcpp, "w") as outf:  
             skip_next          = False
-            found_other_marker = False
-            namespace_found    = False
             for line in inf:
                 stripped_line = line.strip()
 
@@ -488,7 +485,6 @@ def update_generated_cpp():
 
                 # Patch namespace if needed
                 if line.startswith( "namespace "):
-                    namespace_found = True
                     if symbols['namespace_count'] > 1:
                         line = ""
                         for ns in symbols['namespace_list']:
@@ -623,7 +619,7 @@ def generate_plantuml_file():
         outf.write( "' The below special comment block sets the StateSmith configuration.\n" )
         outf.write( "' More info: https://github.com/StateSmith/StateSmith/issues/335\n" )
         outf.write( "'\n" )
-        outf.write( "' The following config is used to enable the NQPB genfsm2.py script.  Only edit\n" )
+        outf.write( "' The following config is used to enable the NQBP genfsm2.py script.  Only edit\n" )
         outf.write( "' the FSM settings. Do NOT edit/remove the GENFSM2 settings unless you\n" )
         outf.write( "' know what you are doing.\n" )
         outf.write( "\n" )

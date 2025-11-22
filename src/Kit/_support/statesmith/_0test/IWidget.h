@@ -17,8 +17,7 @@ namespace Foo {
 namespace Bar {
 
 /** This abstract class defines the public interface for interacting with
-    concrete widget that implements the implements the 'Context' for the
-    MyFSM State Diagram
+    concrete widget that implements the 'Context' for the MyFSM State Diagram
 
     NOTE: The public facing interface and the subsequent mapping to FSM events is
           COMPLETELY fabricated and has NO meaningful relationship to the actual
