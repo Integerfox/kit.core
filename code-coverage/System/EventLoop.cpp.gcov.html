@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-22 20:09:05</td>
+            <td class="headerValue">2025-11-22 20:33:04</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">88.5&nbsp;%</td>
+            <td class="headerCovTableEntryHi">92.3&nbsp;%</td>
             <td class="headerCovTableEntry">26</td>
-            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">24</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -103,9 +103,9 @@
 <span id="L41"><span class="lineNum">      41</span>                 :             : {</span>
 <span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">          14 :     startEventLoop();</span></span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :     bool run = true;</span>
-<span id="L44"><span class="lineNum">      44</span>         [<span class="tlaGBC" title="Branch 0 was taken 23824 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14 times"> + </span>]:<span class="tlaGNC">       23838 :     while ( run )</span></span>
+<span id="L44"><span class="lineNum">      44</span>         [<span class="tlaGBC" title="Branch 0 was taken 23846 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14 times"> + </span>]:<span class="tlaGNC">       23860 :     while ( run )</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     {</span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">       23824 :         run = waitAndProcessEvents();</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">       23846 :         run = waitAndProcessEvents();</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          14 :     stopEventLoop();</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          14 : }</span></span>
@@ -126,48 +126,48 @@
 <span id="L64"><span class="lineNum">      64</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          15 :     KIT_SYSTEM_WATCHDOG_STOP_EVENTLOOP( m_watchdog );</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">          37 : }</span></span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : </span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">       24807 : bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">       24836 : bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     // Trap my exit/please-stop condition</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">       24807 :     GlobalLock::begin();</span></span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">       24807 :     bool stayRunning = m_run;</span></span>
-<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">       24807 :     GlobalLock::end();</span></span>
-<span id="L73"><span class="lineNum">      73</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 24807 times"> + </span>]:<span class="tlaGNC">       24807 :     if ( !stayRunning )</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">       24836 :     GlobalLock::begin();</span></span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">       24836 :     bool stayRunning = m_run;</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">       24836 :     GlobalLock::end();</span></span>
+<span id="L73"><span class="lineNum">      73</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 24835 times"> + </span>]:<span class="tlaGNC">       24836 :     if ( !stayRunning )</span></span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :     {</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :         return false;</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :     }</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :     // Skip waiting if it has been a 'long time' since we last processed events</span>
-<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">       24807 :     uint32_t now = ElapsedTime::milliseconds();</span></span>
-<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 3096 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 21711 times"> + </span>]:<span class="tlaGNC">       24807 :     if ( ElapsedTime::deltaMilliseconds( m_timeStartOfLoop, now ) &gt; m_timeout )</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">       24835 :     uint32_t now = ElapsedTime::milliseconds();</span></span>
+<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 3127 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 21708 times"> + </span>]:<span class="tlaGNC">       24835 :     if ( ElapsedTime::deltaMilliseconds( m_timeStartOfLoop, now ) &gt; m_timeout )</span></span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :     {</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :         skipWait = true;</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :     }</span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">       24807 :     m_timeStartOfLoop = now;</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">       24835 :     m_timeStartOfLoop = now;</span></span>
 <span id="L85"><span class="lineNum">      85</span>                 :             : </span>
 <span id="L86"><span class="lineNum">      86</span>                 :             :     // Wait for something to happen...</span>
-<span id="L87"><span class="lineNum">      87</span>         [<span class="tlaGBC" title="Branch 0 was taken 21709 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3098 times"> + </span>]:<span class="tlaGNC">       24807 :     if ( !skipWait )</span></span>
+<span id="L87"><span class="lineNum">      87</span>         [<span class="tlaGBC" title="Branch 0 was taken 21701 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3134 times"> + </span>]:<span class="tlaGNC">       24835 :     if ( !skipWait )</span></span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :     {</span>
-<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">       21709 :         m_sema.timedWait( m_timeout );  // Note: For Tick Simulation: the timedWait() calls topLevelWait() if the semaphore has not been signaled</span></span>
+<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">       21701 :         m_sema.timedWait( m_timeout );  // Note: For Tick Simulation: the timedWait() calls topLevelWait() if the semaphore has not been signaled</span></span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     }</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             : </span>
 <span id="L92"><span class="lineNum">      92</span>                 :             :     // Trap my exit/please-stop condition AGAIN since a lot could have happen while I was waiting....</span>
-<span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">       24807 :     GlobalLock::begin();</span></span>
-<span id="L94"><span class="lineNum">      94</span>                 :<span class="tlaGNC">       24807 :     stayRunning = m_run;</span></span>
-<span id="L95"><span class="lineNum">      95</span>                 :<span class="tlaGNC">       24807 :     GlobalLock::end();</span></span>
-<span id="L96"><span class="lineNum">      96</span>         [<span class="tlaGBC" title="Branch 0 was taken 37 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 24770 times"> + </span>]:<span class="tlaGNC">       24807 :     if ( !stayRunning )</span></span>
+<span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">       24835 :     GlobalLock::begin();</span></span>
+<span id="L94"><span class="lineNum">      94</span>                 :<span class="tlaGNC">       24835 :     stayRunning = m_run;</span></span>
+<span id="L95"><span class="lineNum">      95</span>                 :<span class="tlaGNC">       24835 :     GlobalLock::end();</span></span>
+<span id="L96"><span class="lineNum">      96</span>         [<span class="tlaGBC" title="Branch 0 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 24799 times"> + </span>]:<span class="tlaGNC">       24835 :     if ( !stayRunning )</span></span>
 <span id="L97"><span class="lineNum">      97</span>                 :             :     {</span>
 <span id="L98"><span class="lineNum">      98</span>                 :             :         return false;</span>
 <span id="L99"><span class="lineNum">      99</span>                 :             :     }</span>
 <span id="L100"><span class="lineNum">     100</span>                 :             : </span>
 <span id="L101"><span class="lineNum">     101</span>                 :             :     // Capture the current state of the event flags</span>
-<span id="L102"><span class="lineNum">     102</span>                 :<span class="tlaGNC">       24770 :     GlobalLock::begin();</span></span>
-<span id="L103"><span class="lineNum">     103</span>                 :<span class="tlaGNC">       24770 :     uint32_t events = m_events;</span></span>
-<span id="L104"><span class="lineNum">     104</span>                 :<span class="tlaGNC">       24770 :     m_events        = 0;</span></span>
-<span id="L105"><span class="lineNum">     105</span>                 :<span class="tlaGNC">       24770 :     GlobalLock::end();</span></span>
+<span id="L102"><span class="lineNum">     102</span>                 :<span class="tlaGNC">       24799 :     GlobalLock::begin();</span></span>
+<span id="L103"><span class="lineNum">     103</span>                 :<span class="tlaGNC">       24799 :     uint32_t events = m_events;</span></span>
+<span id="L104"><span class="lineNum">     104</span>                 :<span class="tlaGNC">       24799 :     m_events        = 0;</span></span>
+<span id="L105"><span class="lineNum">     105</span>                 :<span class="tlaGNC">       24799 :     GlobalLock::end();</span></span>
 <span id="L106"><span class="lineNum">     106</span>                 :             : </span>
 <span id="L107"><span class="lineNum">     107</span>                 :             :     // Process Event Flags</span>
-<span id="L108"><span class="lineNum">     108</span>   [<span class="tlaGBC" title="Branch 0 was taken 84 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 24686 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 84 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">       24770 :     if ( events &amp;&amp; m_eventList )</span></span>
+<span id="L108"><span class="lineNum">     108</span>   [<span class="tlaGBC" title="Branch 0 was taken 84 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 24715 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 84 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">       24799 :     if ( events &amp;&amp; m_eventList )</span></span>
 <span id="L109"><span class="lineNum">     109</span>                 :             :     {</span>
 <span id="L110"><span class="lineNum">     110</span>                 :             :         // Walk my list of event flag handlers and notify the ones that are interested in the active event(s)</span>
 <span id="L111"><span class="lineNum">     111</span>                 :             :         IEventFlag* eventPtr = m_eventList-&gt;first();</span>
@@ -183,12 +183,12 @@
 <span id="L121"><span class="lineNum">     121</span>                 :             :     }</span>
 <span id="L122"><span class="lineNum">     122</span>                 :             : </span>
 <span id="L123"><span class="lineNum">     123</span>                 :             :     // Timer Check</span>
-<span id="L124"><span class="lineNum">     124</span>                 :<span class="tlaGNC">       24770 :     processTimers();</span></span>
+<span id="L124"><span class="lineNum">     124</span>                 :<span class="tlaGNC">       24799 :     processTimers();</span></span>
 <span id="L125"><span class="lineNum">     125</span>                 :             : </span>
 <span id="L126"><span class="lineNum">     126</span>                 :             :     // Watchdog monitoring (if enabled)</span>
-<span id="L127"><span class="lineNum">     127</span>   [<span class="tlaGBC" title="Branch 0 was taken 866 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 442 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 866 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        1308 :     KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( m_watchdog );</span></span>
+<span id="L127"><span class="lineNum">     127</span>   [<span class="tlaGBC" title="Branch 0 was taken 873 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 439 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 873 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        1312 :     KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( m_watchdog );</span></span>
 <span id="L128"><span class="lineNum">     128</span>                 :             : </span>
-<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">       23462 :     return true;</span></span>
+<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">       23487 :     return true;</span></span>
 <span id="L130"><span class="lineNum">     130</span>                 :             : }</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             : </span>
 <span id="L132"><span class="lineNum">     132</span>                 :             : //////////////////////////////////////</span>
@@ -202,18 +202,18 @@
 <span id="L140"><span class="lineNum">     140</span>                 :<span class="tlaUNC">           0 :     return m_sema.su_signal();</span></span>
 <span id="L141"><span class="lineNum">     141</span>                 :             : }</span>
 <span id="L142"><span class="lineNum">     142</span>                 :             : </span>
-<span id="L143"><span class="lineNum">     143</span>                 :<span class="tlaGNC tlaBgGNC">          53 : void EventLoop::pleaseStop() noexcept</span></span>
+<span id="L143"><span class="lineNum">     143</span>                 :<span class="tlaGNC tlaBgGNC">          50 : void EventLoop::pleaseStop() noexcept</span></span>
 <span id="L144"><span class="lineNum">     144</span>                 :             : {</span>
 <span id="L145"><span class="lineNum">     145</span>                 :             :     KIT_SYSTEM_TRACE_FUNC( SECT_ );</span>
 <span id="L146"><span class="lineNum">     146</span>                 :             : </span>
 <span id="L147"><span class="lineNum">     147</span>                 :             :     // Set my flag/state to exit my top level thread loop</span>
-<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          53 :     GlobalLock::begin();</span></span>
-<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">          53 :     m_run = false;</span></span>
-<span id="L150"><span class="lineNum">     150</span>                 :<span class="tlaGNC">          53 :     GlobalLock::end();</span></span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          50 :     GlobalLock::begin();</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">          50 :     m_run = false;</span></span>
+<span id="L150"><span class="lineNum">     150</span>                 :<span class="tlaGNC">          50 :     GlobalLock::end();</span></span>
 <span id="L151"><span class="lineNum">     151</span>                 :             : </span>
 <span id="L152"><span class="lineNum">     152</span>                 :             :     // Signal myself in case the thread is blocked waiting for the 'next event'</span>
-<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">          53 :     m_sema.signal();</span></span>
-<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC">          53 : }</span></span>
+<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">          50 :     m_sema.signal();</span></span>
+<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC">          50 : }</span></span>
 <span id="L155"><span class="lineNum">     155</span>                 :             : </span>
 <span id="L156"><span class="lineNum">     156</span>                 :<span class="tlaGNC">          84 : void EventLoop::signalMultipleEvents( uint32_t events ) noexcept</span></span>
 <span id="L157"><span class="lineNum">     157</span>                 :             : {</span>

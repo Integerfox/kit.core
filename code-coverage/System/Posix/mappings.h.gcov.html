@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-22 20:09:05</td>
+            <td class="headerValue">2025-11-22 20:33:04</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -118,8 +118,8 @@
 <span id="L56"><span class="lineNum">      56</span>                 :             : inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : {</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :     struct timespec tm;</span>
-<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC tlaBgGNC">       54354 :     clock_gettime( CLOCK_MONOTONIC, &amp;tm );</span></span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">       54336 :     return (uint32_t)(tm.tv_sec * 1000 + tm.tv_nsec / 1000000);</span></span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC tlaBgGNC">       54402 :     clock_gettime( CLOCK_MONOTONIC, &amp;tm );</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">       54384 :     return (uint32_t)(tm.tv_sec * 1000 + tm.tv_nsec / 1000000);</span></span>
 <span id="L61"><span class="lineNum">      61</span>                 :             : }</span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : //</span>
