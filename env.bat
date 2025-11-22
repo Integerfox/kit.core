@@ -36,10 +36,7 @@ doskey bgcc=%NQBP_BIN%\other\bob.py -v --p2 windows gcc-host
 doskey bmsvc=%NQBP_BIN%\other\bob.py -v --p2 windows msvc
 doskey bclang=%NQBP_BIN%\other\bob.py -v --p2 windows  clang-host
 doskey tnat=%NQBP_BIN%\other\chuck.py -v --dir windows --match a.exe --m2 a.py --m3 aa.exe --m4 aa.py
-
-
-::doskey lcov=perl %LCOV_BIN_PATH%\lcov
-::doskey genhtml=perl %LCOV_BIN_PATH%\genhtml
+doskey genfsm2=%NQBP_BIN%\other\genfsm2.py $*
 
 :: Add Ninja to the command path, but only once
 IF "/%NQBP2_DONOT_ADD_NINJA_TO_PATH%" == "/" set PATH=%NQBP_XPKGS_ROOT%\nqbp2\ninja;%PATH% & set NQBP2_DONOT_ADD_NINJA_TO_PATH=true

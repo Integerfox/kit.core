@@ -88,7 +88,7 @@ class ClassName {
 ### Testing Patterns
 - Tests in `_0test/` directories use **Catch2** framework
 - Test files: `*.cpp` (no separate `_test.cpp` suffix)
-- Mock implementations in `src/Kit/_testsupport/`
+- Mock implementations in `src/Kit/_support/`
 - Hardware loopback tests in `_0test/_hw_*` subdirectories
 
 ## Key Components

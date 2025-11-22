@@ -12,6 +12,7 @@
 
 #include "Kit/Container/RingBufferBase.h"
 #include "Kit/System/Assert.h"
+#include <string.h>
 
 ///
 namespace Kit {

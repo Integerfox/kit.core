@@ -22,7 +22,7 @@ import os, sys, shutil
 
 # Get access to the other NQBP scripts
 NQBP_BIN = os.environ.get('NQBP_BIN')
-if ( NQBP_BIN == None ):
+if ( NQBP_BIN is None ):
     sys.exit( "ERROR: The environment variable NQBP_BIN is not set!" )
 sys.path.append( NQBP_BIN )
 from nqbplib import utils

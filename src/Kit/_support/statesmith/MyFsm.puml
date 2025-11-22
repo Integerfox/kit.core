@@ -1,0 +1,83 @@
+' The name of the FSM diagram should match the filename (MyFsm.puml).
+@startuml MyFsm
+
+' Recommended PlantUML settings for StateSmith FSM diagrams.
+hide empty description
+'scale 1.25
+
+' Note: StateSmith treats state names and events as case insensitive.
+' More info: https://github.com/StateSmith/StateSmith/wiki/PlantUML
+'
+' CHEAT SHEET for PlantUML arrow syntax:
+' -down-> or -->
+' -right-> or -> (default arrow)
+' -left->
+' -up->
+
+
+' ADD YOUR STATES and TRANSITIONS HERE
+state Idle
+[*] -down-> Idle : / Initialize();
+
+
+' //////////////////////// StateSmith config ////////////////////////
+' The below special comment block sets the StateSmith configuration.
+' More info: https://github.com/StateSmith/StateSmith/issues/335
+'
+' The following config is used to enable the NQPB genfsm2.py script.  Only edit
+' the FSM settings. Do NOT edit/remove the GENFSM2 settings unless you
+' know what you are doing.
+
+'///////////////////////////////////////////////////////////////////
+' FSM Settings.
+'  NameSpace -->a single or nested namespace is allowed, e.g.
+'    Examples:
+'      # Single namespace
+'      RenderConfig.Cpp.NameSpace = "Foo"
+
+'      # Nested namespaces
+'      RenderConfig.Cpp.NameSpace = "Foo::Bar"
+'
+'  BaseClassCode -->This configuration option is 'hijacked' to specify the
+'                   depth of the event queue. If no event queue is needed, 
+'                   comment the line out.
+'    Examples:
+'      # No event queue ()
+'      #RenderConfig.Cpp.ClassName = "<MARKER:PARENT_EVENT_QUEUE:4>"
+'
+'      # Event queue with depth of 4
+'      RenderConfig.Cpp.ClassName = "<MARKER:PARENT_EVENT_QUEUE:4>"
+
+/'! $CONFIG : toml
+RenderConfig.Cpp.NameSpace = "Foo::Bar"
+#RenderConfig.Cpp.BaseClassCode  = "<MARKER:PARENT_EVENT_QUEUE:4>"
+'/
+
+
+'///////////////////////////////////////////////////////////////////
+' GENFSM2 Settings.
+'
+
+/'! $CONFIG : toml
+
+RenderConfig.Cpp.IncludeGuardLabel = "<MARKER:INCLUDE_GUARD_LABEL>"
+RenderConfig.Cpp.HFileTopPostIncludeGuard = "// <MARKER:COPYRIGHT>"
+RenderConfig.Cpp.HFileExtension = ".h"
+RenderConfig.Cpp.HFileIncludes = "<MARKER:HEADER_INCLUDES>"
+RenderConfig.Cpp.CFileTop = "// <MARKER:COPYRIGHT>"
+RenderConfig.Cpp.CFileIncludes = "<MARKER:HEADER_INCLUDES>"
+RenderConfig.Cpp.ClassCode = """
+// ------------- Start of Injected ClassCode ----------------------------------
+// <MARKER:ACTIONS>
+// <MARKER:GUARDS>
+// <MARKER:OTHER>
+// ------------- End of Injected ClassCode ----------------------------------
+"""
+
+# More Cpp settings are available. See docs.
+
+[SmRunnerSettings]
+outputCodeGenTimestamp = true
+
+'/
+@enduml

@@ -49,7 +49,7 @@ new hardware platforms and drivers as resources permit.
     * Linux
 * Inter-Thread-Communications (ITC) via message passing.
 *	[Limitless containers](https://patternsinthemachine.net/2022/09/limitless-containers-without-dynamic-memory-allocation-in-c-c/) with no dynamic memory allocation
-*	[Data Model](https://patternsinthemachine.net/2022/12/data-model-introduction-to-the-data-model-architecture/) framework 
+*	[Data Model](https://patternsinthemachine.net/2022/12/data-model-introduction-to-the-data-model-architecture/) framework
 *	JSON Parsing and formatting
 * Text utilities
   *	Standardize set of C string library functions
