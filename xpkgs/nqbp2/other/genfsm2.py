@@ -243,7 +243,6 @@ def prescan_generated_header():
 # Returns a dictionary with the found symbols/values
 def prescan_generated_cpp():
     global symbols
-    namespace   = ""
     action_methods = set()
     guard_methods = set()
     
@@ -318,20 +317,16 @@ def derive_symbols():
     # Derive Header guard - consists of the all upper case with the namespace(s) concatenated with the FSM name and then trailing _H_
     symbols['include_guard_label'] = "_".join( [ n.upper() for n in namespaces ] + [ symbols['fsm_name'].upper(), "H" ] ) + "_"
 
-    # Determine if there is parent event queue class
-    try:
-        if symbols["que_depth"] == '0':
-            symbols['ringbuffer_include'] = "\n"
-            symbols['trace_include']      = "\n"
-            symbols['fatalerror_include'] = "\n"
-        else:
-            symbols['has_event_queue'] = True
-            symbols['ringbuffer_include'] = ringbuffer_include[osal]
-            symbols['trace_include']      = trace_include[osal]
-            symbols['fatalerror_include'] = fatalerror_include[osal]
-    except KeyError:
+    # Determine if there is parent event queue class. Note: the dictionary is initialized with default KVP for que_depth(0) and has_event_queue (false)
+    if symbols["que_depth"] == '0':
         symbols['ringbuffer_include'] = "\n"
-        symbols['has_event_queue'] = False
+        symbols['trace_include']      = "\n"
+        symbols['fatalerror_include'] = "\n"
+    else:
+        symbols['has_event_queue'] = True
+        symbols['ringbuffer_include'] = ringbuffer_include[osal]
+        symbols['trace_include']      = trace_include[osal]
+        symbols['fatalerror_include'] = fatalerror_include[osal]
     
 
 def update_generated_header():
