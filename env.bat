@@ -31,9 +31,7 @@ doskey fixx=%NQBP_BIN%\other\fixx.py $*
 doskey setexe=git update-index --chmod=+x $*
 doskey ports=reg query HKLM\HARDWARE\DEVICEMAP\SERIALCOMM
 doskey map=%NQBP_PKG_ROOT%scripts\colony.core\map.py $*
-
-::doskey lcov=perl %LCOV_BIN_PATH%\lcov
-::doskey genhtml=perl %LCOV_BIN_PATH%\genhtml
+doskey genfsm2=%NQBP_BIN%\other\genfsm2.py $*
 
 :: Add Ninja to the command path, but only once
 IF "/%NQBP2_DONOT_ADD_NINJA_TO_PATH%" == "/" set PATH=%NQBP_XPKGS_ROOT%\nqbp2\ninja;%PATH% & set NQBP2_DONOT_ADD_NINJA_TO_PATH=true
