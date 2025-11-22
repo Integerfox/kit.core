@@ -22,7 +22,7 @@
 /** Specifies the default timeout period for waiting on a event.
  */
 #ifndef OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD
-#define OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD 1  //!< 1 msec timeout, aka 1 msec timer resolution for Software Timers
+#define OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD 10  //!< 10 msec timeout, aka 10 msec timer resolution for Software Timers
 #endif
 
 ///

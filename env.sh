@@ -43,7 +43,8 @@ alias vcc="$NQBP_PKG_ROOT/top/tca2.py --html-dir $NQBP_PKG_ROOT/docs/publish/cod
 alias map="$NQBP_PKG_ROOT/scripts/kit.core/map.py" 
 alias vdox="xdg-open $NQBP_PKG_ROOT/docs/publish/doxygen/index.html &>/dev/null &" 
 alias genfsm2="$NQBP_BIN/other/genfsm2.py"
-
+alias bgcc="$NQBP_BIN/other/bob.py -v --p2 linux gcc-host"
+alias tnat="$NQBP_BIN/other/chuck.py -v --dir linux --match a.out --m2 a.py --m3 aa.out --m4 aa.py"
 
 
 # No compiler option selected
