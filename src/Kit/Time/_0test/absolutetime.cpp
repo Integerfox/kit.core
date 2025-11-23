@@ -33,9 +33,9 @@ TEST_CASE( "absolutetime" )
 
         uint64_t nowSec  = Kit::Time::getAbsoluteTimeSeconds();
         uint64_t nowMsec = Kit::Time::getAbsoluteTimeMilliseconds();
-        KIT_SYSTEM_TRACE_ALLOCATE( time_t, ansiTime, now )
+        KIT_SYSTEM_TRACE_ALLOCATE( time_t, ansiTime, now );
         KIT_SYSTEM_TRACE_MSG( SECT_, "AnsiNow=%" PRIu64 ", UTC time=%s, sizeof(time_t)=%zu", now64, asctime( gmtime( &ansiTime ) ), sizeof( time_t ) );
-        KIT_SYSTEM_TRACE_ALLOCATE( time_t, ansiTime2, now )
+        KIT_SYSTEM_TRACE_ALLOCATE( time_t, ansiTime2, now );
         KIT_SYSTEM_TRACE_MSG( SECT_, "uutSec=%" PRIu64 ", UTC time=%s, sizeof(time_t)=%zu", nowSec, asctime( gmtime( &ansiTime2 ) ), sizeof( time_t ) );
 
         // Make sure times are 'consistent'
