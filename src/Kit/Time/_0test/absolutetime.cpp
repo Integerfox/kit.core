@@ -31,19 +31,19 @@ TEST_CASE( "absolutetime" )
         time( &now );
         auto now64 = static_cast<uint64_t>( now );
 
-        uint64_t nowSec   = Kit::Time::getAbsoluteTimeSeconds();
-        uint64_t nowMsec  = Kit::Time::getAbsoluteTimeMilliseconds();
-        time_t   ansiTime = now;
+        uint64_t nowSec  = Kit::Time::getAbsoluteTimeSeconds();
+        uint64_t nowMsec = Kit::Time::getAbsoluteTimeMilliseconds();
+        KIT_SYSTEM_TRACE_ALLOCATE( time_t, ansiTime, now )
         KIT_SYSTEM_TRACE_MSG( SECT_, "AnsiNow=%" PRIu64 ", UTC time=%s, sizeof(time_t)=%zu", now64, asctime( gmtime( &ansiTime ) ), sizeof( time_t ) );
-        ansiTime = nowSec;
-        KIT_SYSTEM_TRACE_MSG( SECT_, "uutSec=%" PRIu64 ", UTC time=%s, sizeof(time_t)=%zu", nowSec, asctime( gmtime( &ansiTime ) ), sizeof( time_t ) );
+        KIT_SYSTEM_TRACE_ALLOCATE( time_t, ansiTime2, now )
+        KIT_SYSTEM_TRACE_MSG( SECT_, "uutSec=%" PRIu64 ", UTC time=%s, sizeof(time_t)=%zu", nowSec, asctime( gmtime( &ansiTime2 ) ), sizeof( time_t ) );
 
         // Make sure times are 'consistent'
-        REQUIRE( (nowSec*1000L) <= nowMsec );
-        REQUIRE( nowMsec < ( (nowSec + 1)*1000L ) );
+        REQUIRE( ( nowSec * 1000L ) <= nowMsec );
+        REQUIRE( nowMsec < ( ( nowSec + 1 ) * 1000L ) );
         REQUIRE( now64 <= nowSec );
         REQUIRE( nowSec <= ( now64 + 2 ) );  // Allow for 2 seconds of 'slop'
-        REQUIRE( now64*1000L <= nowMsec );
+        REQUIRE( now64 * 1000L <= nowMsec );
         REQUIRE( nowMsec <= ( ( now64 + 2 ) * 1000L ) );  // Allow for 2 seconds of 'slop'
     }
 
