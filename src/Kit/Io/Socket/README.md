@@ -1,5 +1,5 @@
 # Kit::Io::Socket
-@brief namespace description for Cpl::Io::Socket
-@namespace Cpl::Io::Socket @brief
+@brief namespace description for Kit::Io::Socket
+@namespace Kit::Io::Socket @brief
 
 The Socket namespace provides interfaces for creating BSD socket connections.

@@ -4,13 +4,13 @@
 
 The Bsp namespace is the root name space for microcontroller Board Support Packages (BSPs).
 
-BSP are responsible for encapsuling the MCU data sheet, board schematic, 
-cross compiler, and MCU Vendor supplied SDK/generated code.  In BSP are/required:
+BSP are responsible for encapsulating the MCU data sheet, board schematic, 
+cross compiler, and MCU Vendor supplied SDK/generated code.  In general, BSPs are required to:
 
 - Support a the common/generic interface defined in this root namespace (i.e
   `Api.h`)
 - In general BSP are not intended to be reused across multiple physical boards.
-  In fact each revision of a PCBA - that impact on firmware behavior - should
+  In fact each revision of a PCBA - that impacts firmware behavior - should
   have its own BSP instance in the namespace.
 
 NOTE: A microcontroller BSP is similar in concept to a Linux BSP, but a
@@ -21,7 +21,7 @@ NOTE: A microcontroller BSP is similar in concept to a Linux BSP, but a
       drivers.  For example, do **not** put an SPI or I2C driver implementation
       in your BSP.  Instead put under the `src/Kit/Driver` tree.  It is okay to
       have Hardware/Chip specific drivers in the Driver tree - but these drivers
-      must go through BSP interfaces for access HW Registers, etc. (i.e. can
-      not contain any MCU/compiler specific code).  
+      must go through BSP interfaces for accessing HW Registers, etc. (i.e. cannot
+      contain any MCU/compiler specific code).  
 
 TODO: Add link to future blog article on the *Indirect BSP* pattern
