@@ -39,7 +39,7 @@ output of the StateSmith tool to be specific to the KIT library design model.
 - The script only needs-to-be/should-be run when the State Machine Plant UML
   file changes.
   - Recommendation is to **not** have your CI build run the `genfsm2.py` script
-- The [ContextMyFsm.h](https://github.com/Integerfox/kit.cpre/blob/main/src/Kit/_support/statesmith/_0test/ContextMyFsm.h)
+- The [ContextMyFsm.h](https://github.com/Integerfox/kit.core/blob/main/src/Kit/_support/statesmith/_0test/ContextMyFsm.h)
   provides an example of how an application provides the 'context' for the State 
   Machine diagram, i.e implements the Action and Guard methods.
 
