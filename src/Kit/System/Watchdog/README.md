@@ -4,7 +4,7 @@
 
 This namespace provides the infrastructure for incorporating a hardware
 watchdog into an application where individual threads can *watched* independently
-of each.
+of each other.
 
 Features supported:
 
@@ -21,7 +21,7 @@ Features supported:
 - HAL interface defined to decouple the framework from the target
   platform.
 
-- Once the Hardware Watchdog has been started it is not be disabled.
+- Once the Hardware Watchdog has been started it will not be disabled.
 
 - The framework requires ONE event based thread (i.e. executes the
   `Kit::System::EventLoop` code) that the 'Watchdog Supervisor' runs in.  This
@@ -38,4 +38,7 @@ Features supported:
   thread basis.
 
 NOTE: **Not** all threads should or can be 'watched-dogged'.  For example the
-      TShell typically runs in a 'raw thread' that spends 99.9% of its time blocked on reading a serial stream.  For this use case - the thread should **never** be registered with "entity" that is responsible for monitoring individual threads.
+      TShell typically runs in a 'raw thread' that spends 99.9% of its time
+      blocked on reading a serial stream.  For this use case - the thread should
+      **never** be registered with "entity" that is responsible for monitoring
+      individual threads.

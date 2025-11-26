@@ -2,7 +2,7 @@
 @brief namespace description for Kit::Itc
 @namespace Kit::Itc @brief
 
-The Itc namespace provides classes for message based Inter Thread Communications(ITC) as well as Event Flags.
+The Itc namespace provides classes for message based Inter Thread Communications (ITC) as well as Event Flags.
 
 The ITC message mechanism has the following characteristics:
 
@@ -42,7 +42,7 @@ The ITC message mechanism has the following characteristics:
   can receive.  It also means that the application does NOT have to
   worry about overflowing message queues and/or mailboxes.
 
-- Another side effect of the memory paradigm is that there is NO
+- Another side effect of the memory paradigm is that there are NO
   broadcast messages.
 
 - 100% type safe. Messages and payloads are handled and dispatched with
