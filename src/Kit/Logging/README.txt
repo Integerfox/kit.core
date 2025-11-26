@@ -1,9 +1,13 @@
-/** @namespace Kit::Logging
+# Kit::Logging
+@brief Namespace description for Kit::Logging
+@namespace Kit::Logging @brief
 
-The 'Logging' namespace provides the KIT library's "domain" specific logging
-identifiers and methods.  See The Kit::Logging::Framework namespace for details
-of the KIT library's approach to logging and its design (and for what "domain"
-means in the context of Logging) 
+The Logging namespace provides the KIT library's "domain" specific logging
+identifiers and methods.
+
+See The Kit::Logging::Framework namespace for details of the KIT library's
+approach to logging and its design (and for what "domain" means in the context
+of Logging).
 
 - The interface is thread safe.
 

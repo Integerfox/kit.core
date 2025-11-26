@@ -1,8 +1,12 @@
-/** @namespace Kit::Logging::Framework
+# Kit::Logging::Framework
+@brief Namespace description for Kit::Logging::Framework
+@namespace Kit::Logging::Framework @brief
 
-The 'Framework' namespace provides the non-domain specific framework for Logging
-events.  Note: The namespace does NOT include, NOT responsible for persistently
-storing log entries. framework provides the following features:
+The Framework namespace provides the non-domain specific framework for Logging
+events.  Note: This namespace does NOT include, NOT responsible for persistently
+storing log entries.
+
+## Framework provides the following features:
 
 - The interface is thread safe.
 
