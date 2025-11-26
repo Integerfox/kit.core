@@ -1,0 +1,7 @@
+# Kit::Io
+@brief namespace description for Kit::Io
+@namespace Kit::Io @brief
+
+The Io namespace provides the base/common interfaces for reading and writing data from/to streams and files.
+
+Essentially the Kit::Io* namespaces provide platform independent interfaces for operations that would typically be done using Posix file descriptors or Windows file HANDLEs.
