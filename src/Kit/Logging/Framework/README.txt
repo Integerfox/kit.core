@@ -1,7 +1,8 @@
-/** @namespace Kit::Logging
+/** @namespace Kit::Logging::Framework
 
-The 'Logging' namespace provides a framework for Logging events.  The framework
-provides the following features:
+The 'Framework' namespace provides the non-domain specific framework for Logging
+events.  Note: The namespace does NOT include, NOT responsible for persistently
+storing log entries. framework provides the following features:
 
 - The interface is thread safe.
 
