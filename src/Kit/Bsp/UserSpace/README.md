@@ -1,5 +1,5 @@
+# Kit::Bsp::UserSpace
 @brief namespace description for Kit::Bsp::UserSpace
-
 @namespace Kit::Bsp::UserSpace @brief
 
 This UserSpace namespace contains a Null BSP for applications that run on a desktop OS in user space.  

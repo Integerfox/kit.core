@@ -1,5 +1,5 @@
+# Kit::System::Watchdog
 @brief namespace description for Kit::System::Watchdog
-
 @namespace Kit::System::Watchdog @brief
 
 This namespace provides the infrastructure for incorporating a hardware

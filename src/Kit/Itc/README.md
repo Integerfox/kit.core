@@ -1,5 +1,5 @@
+# Kit::Itc
 @brief namespace description for Kit::Itc
-
 @namespace Kit::Itc @brief
 
 The Itc namespace provides classes for message based Inter Thread Communications(ITC) as well as Event Flags.

@@ -1,5 +1,5 @@
+# Kit::Io::Stdio
 @brief namespace description for Kit::Io::Stdio
-
 @namespace Kit::Io::Stdio @brief
 
 The Stdio namespace provides concrete classes for the C Library's stdin, stdout,and stderr input/output streams.  

@@ -1,5 +1,5 @@
+# Kit::Text
 @brief namespace description for Kit::Text
-
 @namespace Kit::Text @brief
 
 The Text namespace provides yet-another String class and additional string and/or text processing utilities.  

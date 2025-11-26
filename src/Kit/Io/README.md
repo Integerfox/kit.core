@@ -1,5 +1,5 @@
+# Kit::Io
 @brief namespace description for Kit::Io
-
 @namespace Kit::Io @brief
 
 The Io namespace provides the base/common interfaces for reading and writing data from/to streams and files.

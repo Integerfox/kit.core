@@ -1,5 +1,5 @@
+# Kit::System
 @brief namespace description for Kit::System
-
 @namespace Kit::System @brief
 
 The System namespace contains platform independent foundation abstractions and classes related to program execution.

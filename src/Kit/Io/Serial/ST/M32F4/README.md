@@ -1,5 +1,5 @@
+# Kit::Io::Serial::ST::M32F4
 @brief namespace description for Kit::Io::Serial::ST::M32F4
-
 @namespace Kit::Io::Serial::ST::M32F4 @brief
 
 The M32F4 namespace provides implementation of the Kit::Io::Output interface over a serial port using a STM32F4xxx MCU.

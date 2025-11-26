@@ -1,5 +1,5 @@
+# Kit::Container
 @brief namespace description for Kit::Container
-
 @namespace Kit::Container @brief
 
 The Container namespace provides classes for various types of containers.

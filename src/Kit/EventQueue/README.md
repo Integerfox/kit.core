@@ -1,5 +1,5 @@
+# Kit::EventQueue
 @brief namespace description for Kit::EventQueue
-
 @namespace Kit::EventQueue @brief
 
 The EventQueue namespace is used to provide a common Event Queue type when there are multiple orthogonal sources of events.

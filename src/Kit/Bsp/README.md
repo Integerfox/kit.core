@@ -1,5 +1,5 @@
+# Kit::Bsp
 @brief namespace description for Kit::Bsp
-
 @namespace Kit::Bsp @brief
 
 The Bsp namespace is the root name space for microcontroller Board Support Packages (BSPs).
