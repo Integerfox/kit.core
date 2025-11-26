@@ -30,7 +30,7 @@ namespace Time {
           as the source for elapsed milliseconds.  The implementation can be
           changed/overridden by defining USE_KIT_TIME_BOOTTIME_WITH_ABSOLUTETIME
           in the kit_config.h file.  In this case, the AbsoluteTime interface is
-          used for the elapsed portion of the boot time.
+          used for the elapsed time portion of the boot time.
  */
 uint64_t getBootTime() noexcept;
 

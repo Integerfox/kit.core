@@ -1,5 +1,5 @@
-#ifndef KIT_LOGGING_FRAMEWORK_NULLDOMAIN_H_
-#define KIT_LOGGING_FRAMEWORK_NULLDOMAIN_H_
+#ifndef KIT_LOGGING_FRAMEWORK_NULLPACKAGE_H_
+#define KIT_LOGGING_FRAMEWORK_NULLPACKAGE_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Logging/Framework/IDomain.h"
+#include "Kit/Logging/Framework/IPackage.h"
 
 
 ///
@@ -23,23 +23,22 @@ namespace Api {
 /** This concrete class implements the Logging Domain interface for 'Null'
     domain instances, i.e. used when unsupported Domain ID is encountered
 */
-class NullDomain : public Kit::Logging::Framework::IDomain
+class NullPackage : public Kit::Logging::Framework::IPackage
 {
 public:
     /// Constructor
-    NullDomain() = default;
-
+    NullPackage() = default;
 public:
-    /// See Kit::Logging::Framework::IDomain
-    uint8_t domainId() noexcept override { return NULL_DOMAIN_ID; };
+    /// See Kit::Logging::Framework::IPackage
+    uint8_t packageId() noexcept override { return NULL_PACKAGE_ID; };
 
-    /// See Kit::Logging::Framework::IDomain
-    const char* domainIdString() noexcept override { return NULL_DOMAIN_ID_TEXT; };
+    /// See Kit::Logging::Framework::IPackage
+    const char* packageIdString() noexcept override { return NULL_PACKAGE_ID_TEXT; };
 
-    /// See Kit::Logging::Framework::IDomain
+    /// See Kit::Logging::Framework::IPackage
     const char* subSystemIdToString( uint8_t subSystemId ) noexcept override { return OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT; };
 
-    /// See Kit::Logging::Framework::IDomain
+    /// See Kit::Logging::Framework::IPackage
     const char* messageIdToString( uint8_t subSystemId, uint8_t messageId ) noexcept override { return OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT; };
 };
 

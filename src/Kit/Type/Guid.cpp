@@ -1,26 +1,24 @@
-/*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
 /** @file */
 
 #include "Guid.h"
-#include "Cpl/Text/misc.h"
+#include "Kit/Text/Parse.h"
+#include <string.h>
 
-using namespace Cpl::Type;
-
+using namespace Kit::Type;
 bool Guid_T::operator ==( const Guid_T other ) const
 {
     return memcmp( block, other.block, sizeof( block ) ) == 0;
 }
 
-bool Guid_T::toString( Cpl::Text::String& formattedOutput, bool withBraces )
+bool Guid_T::toString( Kit::Text::IString& formattedOutput, bool withBraces )
 {
     formattedOutput.format( "%s%02x%02x%02x%02x-%02x%02x-%02x%02x-%02x%02x-%02x%02x%02x%02x%02x%02x%s",
                             withBraces ? "{" : "",
@@ -48,7 +46,7 @@ bool Guid_T::toString( Cpl::Text::String& formattedOutput, bool withBraces )
 bool Guid_T::fromString( const char* stringGuid )
 {
     // Check for bad input
-    if ( stringGuid == 0 )
+    if ( stringGuid == nullptr )
     {
         return false;
     }
@@ -57,7 +55,7 @@ bool Guid_T::fromString( const char* stringGuid )
     // Check for leading/trailing '{}'
     if ( stringGuid[0] == '{' )
     {
-        if ( stringGuid[CPL_TYPE_GUID_MAX_FORMATTED_WITH_BRACES_LENGTH - 1] != '}' )
+        if ( stringGuid[KIT_TYPE_GUID_MAX_FORMATTED_WITH_BRACES_LENGTH - 1] != '}' )
         {
             return false;
         }
@@ -66,7 +64,7 @@ bool Guid_T::fromString( const char* stringGuid )
 
     // First block of 8 characters
     uint8_t* binaryOutput = block;
-    if ( !Cpl::Text::unhex( stringGuid, 8, binaryOutput ) )
+    if ( !Kit::Text::Parse::asciiHexUnsafe( stringGuid, 8, binaryOutput ) )
     {
         return false;
     }
@@ -84,7 +82,7 @@ bool Guid_T::fromString( const char* stringGuid )
         stringGuid++;
 
         // Check for block of 4
-        if ( !Cpl::Text::unhex( stringGuid, 4, binaryOutput ) )
+        if ( !Kit::Text::Parse::asciiHexUnsafe( stringGuid, 4, binaryOutput ) )
         {
             return false;
         }
@@ -100,7 +98,7 @@ bool Guid_T::fromString( const char* stringGuid )
         return false;
     }
     stringGuid++;
-    if ( !Cpl::Text::unhex( stringGuid, 12, binaryOutput ) )
+    if ( !Kit::Text::Parse::asciiHexUnsafe( stringGuid, 12, binaryOutput ) )
     {
         return false;
     }

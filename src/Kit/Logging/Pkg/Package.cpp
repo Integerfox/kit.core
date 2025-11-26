@@ -8,14 +8,14 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Domain.h"
+#include "Package.h"
 #include "SubSystemId.h"
-#include "Kit/Logging/Api/OsalMsgId.h"
-#include "Kit/Logging/Api/DriverMsgId.h"
-#include "Kit/Logging/Framework/IDomain.h"
+#include "Kit/Logging/Pkg/OsalMsgId.h"
+#include "Kit/Logging/Pkg/DriverMsgId.h"
+#include "Kit/Logging/Framework/IPackage.h"
 #include "SubSystemId.h"
 
-using namespace Kit::Logging::Api;
+using namespace Kit::Logging::Pkg;
 
 
 // Helper method to convert BETTER ENUM to a string
@@ -31,22 +31,22 @@ static const char* enumToString( uint8_t numericValue, const char* unknownText )
 }
 
 /////////////
-uint8_t Domain::domainId() noexcept
+uint8_t Package::packageId() noexcept
 {
-    return KIT_LOGGING_DOMAIN_DOMAIN_ID;
+    return KIT_LOGGING_PKG_PACKAGE_ID;
 }
 
-const char* Domain::domainIdString() noexcept
+const char* Package::packageIdString() noexcept
 {
-    return OPTION_KIT_LOGGING_DOMAIN_DOMAIN_ID_TEXT;
+    return OPTION_KIT_LOGGING_PKG_PACKAGE_ID_TEXT;
 }
 
-const char* Domain::subSystemIdToString( uint8_t subSystemId ) noexcept
+const char* Package::subSystemIdToString( uint8_t subSystemId ) noexcept
 {
     return enumToString<SubSystemId>( subSystemId, OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT );
 }
 
-const char* Domain::messageIdToString( uint8_t subSystemId, uint8_t messageId ) noexcept
+const char* Package::messageIdToString( uint8_t subSystemId, uint8_t messageId ) noexcept
 {
     switch ( subSystemId )
     {

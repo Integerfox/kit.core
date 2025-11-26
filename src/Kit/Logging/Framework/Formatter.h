@@ -1,5 +1,5 @@
-#ifndef KIT_LOGGING_FORMATTER_H_
-#define KIT_LOGGING_FORMATTER_H_
+#ifndef KIT_LOGGING_FRAMEWORK_FORMATTER_H_
+#define KIT_LOGGING_FRAMEWORK_FORMATTER_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,27 +10,49 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Logging/EntryData_T.h"
+#include "Kit/Logging/Framework/EntryData.h"
+#include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Text/IString.h"
-#include <inttypes.h>
 
 
-/** The size, in bytes, need to 'format' the message text with the 'textified'
-      category and message IDs.  The size does NOT include the space reserved
-      for the null terminator
+/** The size, in bytes, needed to format the persistent storage ID.  The size
+    does not include the space reserved for the null terminator
+    */
+#ifndef OPTION_KIT_LOGGING_FORMATTER_PERSISTENT_STORAGE_ID_TEXT_LEN
+#define OPTION_KIT_LOGGING_FORMATTER_PERSISTENT_STORAGE_ID_TEXT_LEN (16+3)  // 16 digits + brackets
+#endif
+
+/** The size, in bytes, needed to format the timestamp information.  The size
+    does not include the space reserved for the null terminator
+ */
+#ifndef OPTION_KIT_LOGGING_FORMATTER_TIMESTAMP_TEXT_LEN
+#define OPTION_KIT_LOGGING_FORMATTER_TIMESTAMP_TEXT_LEN 31
+#endif
+
+/** The size, in bytes, needed to 'format' the message text with the 'textified'
+      log entry.  The size does NOT include the space reserved for the null
+      terminator
    */
 #ifndef OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN
-#define OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN ( OPTION_KIT_LOGGING_MAX_MSG_TEXT_LEN + OPTION_KIT_LOGGING_MAX_LEN_CATEGORY_ID_TEXT + 1 + OPTION_KIT_LOGGING_MAX_LEN_MESSAGE_ID_TEXT + 2 )
+#define OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN                       \
+    ( OPTION_KIT_LOGGING_FORMATTER_PERSISTENT_STORAGE_ID_TEXT_LEN + 1 + \
+      OPTION_KIT_LOGGING_FORMATTER_TIMESTAMP_TEXT_LEN + 1 +             \
+      OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_CLASSIFICATION_ID_TEXT + 1 + \
+      OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_PACKAGE_ID_TEXT + 1 +        \
+      OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_SUBSYSTEM_ID_TEXT + 1 +      \
+      OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_MESSAGE_ID_TEXT + 2 )
 #endif
 
 ///
 namespace Kit {
 ///
 namespace Logging {
+///
+namespace Framework {
 
 /** This class provides a collection of formatting method(s) for log entries
  */
-class EntryFormatter
+class Formatter
 {
 public:
     /** Converts a binary EntryData_T struct instance to formatted text. The
@@ -46,17 +68,18 @@ public:
         \code
 
         The format is:
-            [<storageId>] (<bootCnt>:YYYY/MM/DD-HH:MM:SS.mmm) <category>-<domainId>-<sourceId>-<msgId>: <messageText>
+            [<storageIdInHex>] (<bootCnt>:YYYY/MM/DD-HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
         OR
-            (<bootCnt>:YYYY/MM/DD-HH:MM:SS.mmm) <category>-<domainId>-<sourceId>-<msgId>: <messageText>
+            (<bootCnt>:YYYY/MM/DD-HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
         \endcode
     */
-    static bool toString( const Kit::Logging::EntryData_T& srcEntryToFormat,
-                          Kit::Text::IString&              dstStringBuf,
-                          uint64_t                         persistentStorageId = UINT64_MAX ) noexcept;
+    static bool toString( IApplication&                               application,
+                          const Kit::Logging::Framework::EntryData_T& srcEntryToFormat,
+                          Kit::Text::IString&                         dstStringBuf,
+                          uint64_t                                    persistentStorageId = UINT64_MAX ) noexcept;
 };
 
-
 }  // end namespaces
+}
 }
 #endif  // end header latch

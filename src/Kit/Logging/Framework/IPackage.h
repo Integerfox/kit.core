@@ -1,5 +1,5 @@
-#ifndef KIT_LOGGING_IDOMAIN_H_
-#define KIT_LOGGING_IDOMAIN_H_
+#ifndef KIT_LOGGING_FRAMEWORK_IPACKAGE_H_
+#define KIT_LOGGING_FRAMEWORK_IPACKAGE_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -14,6 +14,11 @@
 #include <stdint.h>
 
 
+/// The text string for the 'unknown' Package ID
+#ifndef OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT
+#define OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT "UNKNOWN"
+#endif
+
 /// The text string for the 'unknown' SubSystem ID
 #ifndef OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT
 #define OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT "UNKNOWN"
@@ -23,12 +28,7 @@
 #ifndef OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT
 #define OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT "UNKNOWN"
 #endif
-
-/// The text string for the 'unknown' Domain ID
-#ifndef OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_DOMAIN_ID_TEXT
-#define OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_DOMAIN_ID_TEXT "UNKNOWN"
-#endif
-
+    
 
 ///
 namespace Kit {
@@ -37,24 +37,24 @@ namespace Logging {
 ///
 namespace Framework {
 
-/** This abstract class defines a set of functionality that a Domain
+/** This abstract class defines a set of functionality that a Package
     is responsible for providing.
 */
-class IDomain
+class IPackage
 {
 public:
     /// Null/Invalid Domain ID
-    static constexpr uint8_t NULL_DOMAIN_ID = 0;
+    static constexpr uint8_t NULL_PACKAGE_ID = 0;
 
     /// Null/Invalid Domain ID Text
-    static constexpr const char* NULL_DOMAIN_ID_TEXT = "OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_DOMAIN_ID_TEXT";
+    static constexpr const char* NULL_PACKAGE_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT;
 
 public:
-    /// This method returns the Domain's ID as a numeric value
-    virtual uint8_t domainId() noexcept = 0;
+    /// This method returns the Package's ID as a numeric value
+    virtual uint8_t packageId() noexcept = 0;
 
-    /// This method returns the Domain's ID as text string
-    virtual const char* domainIdString() noexcept = 0;
+    /// This method returns the Package's ID as text string
+    virtual const char* packageIdString() noexcept = 0;
 
     /** This method is used to convert a numeric Sub-system ID into a text string.
         NOTE: This method never 'fails'.  If an unknown/unsupported Sub-system ID
@@ -70,7 +70,7 @@ public:
 
 public:
     /// Virtual destructor
-    virtual ~IDomain() noexcept {}
+    virtual ~IPackage() noexcept {}
 };
 
 }  // end namespaces

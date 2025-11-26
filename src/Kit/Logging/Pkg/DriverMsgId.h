@@ -1,5 +1,5 @@
-#ifndef KIT_LOGGING_API_OSALMSGID_H_
-#define KIT_LOGGING_API_OSALMSGID_H_
+#ifndef KIT_LOGGING_PKG_DRIVERMSGID_H_
+#define KIT_LOGGING_PKG_DRIVERMSGID_H_
 /*-----------------------------------------------------------------------------
 * This file is part of the Colony.Core Project.  The Colony.Core Project is an
 * open source project with a BSD type of licensing agreement.  See the license
@@ -20,22 +20,27 @@ namespace Kit {
 ///
 namespace Logging {
 ///
-namespace Api {
+namespace Pkg {
 
-/** This enumeration defines Logging message codes for the OSAL sub-system
+/** This enumeration defines Logging message codes for the Driver sub-system
 
         Note: Each symbol's length must be less than or equal to 32 characters
            123456789 123456789 123456789 12
 
-    @param OsalMsgId                         Enum
+    @param DriverMsgId                       Enum
 
-    @param FATAL_ERROR                       The application call the Fatal Error handler
-    @param SHUTDOWN                          The application initiated an orderly shutdown
+    @param START_ERR                         Error occurred while Starting the driver
+    @param STOP_ERR                          Error occurred while Stopping the driver
+    @param NOT_STARTED_ERR                   Error occurred when the Start was not called
+    @param ERROR                             General Purpose Error
+
  */
 // clang-format off
-BETTER_ENUM( OsalMsgId, uint8_t
-             , FATAL_ERROR
-             , SHUTDOWN
+BETTER_ENUM( DriverMsgId, uint8_t
+             , START_ERR
+             , STOP_ERR
+             , NOT_STARTED_ERR
+             , ERROR
 );
 // clang-format on
 
