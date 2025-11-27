@@ -68,9 +68,9 @@ public:
         \code
 
         The format is:
-            [<storageIdInHex>] (<bootCnt>:YYYY/MM/DD-HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
+            [<storageIdInHex>] (<bootCnt>:YYYY-MM-DD HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
         OR
-            (<bootCnt>:YYYY/MM/DD-HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
+            (<bootCnt>:YYYY-MM-DD HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
         \endcode
     */
     static bool toString( IApplication&                               application,

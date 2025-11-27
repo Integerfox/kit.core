@@ -17,7 +17,7 @@ This file declares the Logging functions available to the KIT Logging Domain.
 */
 
 #include "Kit/Logging/Pkg/ClassificationId.h"
-#include "Kit/Logging/Pkg/OsalMsgId.h"
+#include "Kit/Logging/Pkg/SystemMsgId.h"
 #include "Kit/Logging/Pkg/DriverMsgId.h"
 #include "Kit/System/printfchecker.h"
 
@@ -31,9 +31,9 @@ namespace Pkg {
 
 
 /*---------------------------------------------------------------------------*/
-/// This method generates a OSAL Sub-system log entry
+/// This method generates a SYSTEM Sub-system log entry
 KIT_SYSTEM_PRINTF_CHECKER(3, 4)
-void logfOsal( ClassificationId catId, OsalMsgId msgCode, const char* msgTextFormat, ... ) noexcept;
+void logfSystem( ClassificationId catId, SystemMsgId msgCode, const char* msgTextFormat, ... ) noexcept;
 
 /// This method generates a DRIVER Sub-system log entry
 KIT_SYSTEM_PRINTF_CHECKER(3, 4)

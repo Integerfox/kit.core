@@ -11,7 +11,6 @@
 /** @file */
 
 
-#include "Kit/Logging/Framework/TimeApi.h"
 #include "Kit/Memory/CursorBE.h"
 
 // #include "Kit/Persistent/Payload.h" // TODO: Add persistent logging support

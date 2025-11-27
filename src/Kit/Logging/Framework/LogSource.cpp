@@ -16,36 +16,32 @@
 #include "Kit/System/Trace.h"
 #include "Kit/Time/BootTime.h"
 
-using namespace Kit::Logging::Framework;
 
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Logging {
+namespace Framework {
 
 ////////////////////////////////////////////////////////////////////////////////
 LogSource::LogSource( IApplication& appInstance,
                       /* Kit::Container::RingBufferMP<EntryData_T>& logEntryFIFO, */
-                      uint8_t     classificationIdForQueueOverflow,
-                      const char* classificationTextForQueueOverflow,
-                      uint8_t     packageIdForQueueOverflow,
-                      const char* packageTextForQueueOverflow,
-                      uint8_t     subSystemIdForQueueOverflow,
-                      const char* subSystemTextForQueueOverflow ) noexcept
+                      uint8_t classificationIdForQueueOverflow,
+                      uint8_t packageIdForQueueOverflow,
+                      uint8_t subSystemIdForQueueOverflow,
+                      uint8_t messageIdForQueueOverflow ) noexcept
     : m_app( appInstance )
     /*, m_logFifo( logEntryFIFO ) */
     , m_classificationFilterMask( 0xFFFFFFFF )
     , m_packageFilterMask( 0xFFFFFFFF )
-    , m_classificationTextForQueueOverflow( classificationTextForQueueOverflow )
-    , m_packageTextForQueueOverflow( packageTextForQueueOverflow )
-    , m_subSystemTextForQueueOverflow( subSystemTextForQueueOverflow )
     , m_overflowCount( 0 )
     , m_classificationIdForQueueOverflow( classificationIdForQueueOverflow )
     , m_packageIdForQueueOverflow( packageIdForQueueOverflow )
     , m_subSystemIdForQueueOverflow( subSystemIdForQueueOverflow )
+    , m_messageIdForQueueOverflow( messageIdForQueueOverflow )
     , m_queueFull( false )
 {
     KIT_SYSTEM_ASSERT( classificationIdForQueueOverflow > 0 && classificationIdForQueueOverflow <= 32 );
-    KIT_SYSTEM_ASSERT( classificationTextForQueueOverflow != nullptr );
     KIT_SYSTEM_ASSERT( packageIdForQueueOverflow > 0 && packageIdForQueueOverflow <= 32 );
-    KIT_SYSTEM_ASSERT( packageTextForQueueOverflow != nullptr );
-    KIT_SYSTEM_ASSERT( subSystemTextForQueueOverflow != nullptr );
 
     // m_logFifo.clearTheBuffer();
 }
@@ -79,6 +75,32 @@ void LogSource::setClassificationMask( KitLoggingClassificationMask_T newMask ) 
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_lock );
     m_classificationFilterMask = newMask;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+KitLoggingPackageMask_T LogSource::enablePackage( KitLoggingPackageMask_T packageMask ) noexcept
+{
+    Kit::System::Mutex::ScopeLock criticalSection( m_lock );
+    KitLoggingPackageMask_T       oldMask  = m_packageFilterMask;
+    m_packageFilterMask                   |= packageMask;
+    return oldMask;
+}
+KitLoggingPackageMask_T LogSource::disablePackage( KitLoggingPackageMask_T packageMask ) noexcept
+{
+    Kit::System::Mutex::ScopeLock criticalSection( m_lock );
+    KitLoggingPackageMask_T       oldMask  = m_packageFilterMask;
+    m_packageFilterMask                   &= ~packageMask;
+    return oldMask;
+}
+KitLoggingPackageMask_T LogSource::getPackageEnabledMask() noexcept
+{
+    Kit::System::Mutex::ScopeLock criticalSection( m_lock );
+    return m_packageFilterMask;
+}
+void LogSource::setPackageMask( KitLoggingPackageMask_T newMask ) noexcept
+{
+    Kit::System::Mutex::ScopeLock criticalSection( m_lock );
+    m_packageFilterMask = newMask;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -178,3 +200,8 @@ void LogSource::vlogf( uint8_t     classificationId,
         KIT_SYSTEM_TRACE_RESTRICTED_MSG( m_app.classificationIdToString( classificationId ), "%s", m_workBuffer.getString() );
     }
 }
+
+} // end namespace
+}
+}
+//------------------------------------------------------------------------------

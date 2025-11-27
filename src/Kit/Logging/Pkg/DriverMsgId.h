@@ -29,9 +29,8 @@ namespace Pkg {
 
     @param DriverMsgId                       Enum
 
-    @param START_ERR                         Error occurred while Starting the driver
-    @param STOP_ERR                          Error occurred while Stopping the driver
-    @param NOT_STARTED_ERR                   Error occurred when the Start was not called
+    @param START_ERR                         Error occurred associated with Starting the driver
+    @param STOP_ERR                          Error occurred associated with Stopping the driver
     @param ERROR                             General Purpose Error
 
  */
@@ -39,7 +38,6 @@ namespace Pkg {
 BETTER_ENUM( DriverMsgId, uint8_t
              , START_ERR
              , STOP_ERR
-             , NOT_STARTED_ERR
              , ERROR
 );
 // clang-format on

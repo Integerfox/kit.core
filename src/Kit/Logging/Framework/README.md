@@ -34,7 +34,7 @@ different in purpose.
     - Because all log entries have a unique identifier - it simplifies creating
       documentation for consumption by field/tech support, end-customer, and
       regulatory requirements.
-  - It is *easier* (than tracing) to enforce not leaking any intellectual
+  - It is *easier* than tracing to enforce not leaking any intellectual
     property in its information text.  Note: *easy* is relative term ;-).
 
 ## The KIT Framework provides the following features
@@ -42,7 +42,7 @@ different in purpose.
 - The interface is thread safe.
 
 - When an entry is logged it is timestamped.  The application is required to
-  provide the implementation of the time-stamp interface.  
+  support/implement the Boot-time interface/methods (see `src/Kit/Time/BootTime.h`).
 
 - Each entry 'logged' has a classification (e.g. CRITICAL, WARNING, etc.), a
   unique entry identifier, and free formatted information text

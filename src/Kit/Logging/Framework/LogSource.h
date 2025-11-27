@@ -17,10 +17,7 @@
 #include "Kit/Text/FString.h"
 
 // #include "Kit/Container/RingBufferMP.h"
-// #include "Kit/Dm/MailboxServer.h"
-#include "Kit/Itc/CloseSync.h"
-// #include "Kit/Dm/SubscriberComposer.h"
-#include "Kit/Logging/Framework/EntryData_T.h"
+#include "Kit/Logging/Framework/EntryData.h"
 #include <stdint.h>
 
 /** The minimum amount of log FIFO queue space that must be available before
@@ -57,11 +54,9 @@ public:
     LogSource( IApplication& appInstance,
                /* Kit::Container::RingBufferMP<EntryData_T>& logEntryFIFO, */
                uint8_t     classificationIdForQueueOverflow,
-               const char* classificationTextForQueueOverflow,
                uint8_t     packageIdForQueueOverflow,
-               const char* packageTextForQueueOverflow,
                uint8_t     subSystemIdForQueueOverflow,
-               const char* subSystemTextForQueueOverflow ) noexcept;
+               uint8_t     messageIdForQueueOverflow ) noexcept;
 
 
 public:
@@ -122,15 +117,6 @@ protected:
     /// Current Package filter mask
     KitLoggingPackageMask_T m_packageFilterMask;
 
-    /// Overflow text for classification
-    const char* m_classificationTextForQueueOverflow;
-
-    /// Overflow text for package
-    const char* m_packageTextForQueueOverflow;
-
-    /// Overflow text for subsystem
-    const char* m_subSystemTextForQueueOverflow;
-
     /// Number of log entries dropped due to FIFO full condition
     uint16_t m_overflowCount;
 
@@ -143,6 +129,8 @@ protected:
     /// Overflow ID for subsystem
     uint8_t m_subSystemIdForQueueOverflow;
 
+    /// Overflow ID for message
+    uint8_t m_messageIdForQueueOverflow;
     /// Work buffer to convert log entries to text
     Kit::Text::FString<OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN + 1> m_workBuffer;
 

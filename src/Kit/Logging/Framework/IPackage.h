@@ -44,10 +44,10 @@ class IPackage
 {
 public:
     /// Null/Invalid Domain ID
-    static constexpr uint8_t NULL_PACKAGE_ID = 0;
+    static constexpr uint8_t NULL_ID = 0;
 
     /// Null/Invalid Domain ID Text
-    static constexpr const char* NULL_PACKAGE_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT;
+    static constexpr const char* NULL_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT;
 
 public:
     /// This method returns the Package's ID as a numeric value

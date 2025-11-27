@@ -1,5 +1,5 @@
-#ifndef KIT_LOGGING_PKG_OSALMSGID_H_
-#define KIT_LOGGING_PKG_OSALMSGID_H_
+#ifndef KIT_LOGGING_PKG_SYSTEMMSGID_H_
+#define KIT_LOGGING_PKG_SYSTEMMSGID_H_
 /*-----------------------------------------------------------------------------
 * This file is part of the Colony.Core Project.  The Colony.Core Project is an
 * open source project with a BSD type of licensing agreement.  See the license
@@ -27,15 +27,17 @@ namespace Pkg {
         Note: Each symbol's length must be less than or equal to 32 characters
            123456789 123456789 123456789 12
 
-    @param OsalMsgId                         Enum
+    @param SystemMsgId                       Enum
 
     @param FATAL_ERROR                       The application call the Fatal Error handler
     @param SHUTDOWN                          The application initiated an orderly shutdown
+    @param LOGGING                           Error/Event occurred in the Logging framework
  */
 // clang-format off
-BETTER_ENUM( OsalMsgId, uint8_t
+BETTER_ENUM( SystemMsgId, uint8_t
              , FATAL_ERROR
              , SHUTDOWN
+             , LOGGING
 );
 // clang-format on
 

@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "colony_config.h"
+#include "kit_config.h"
 #include "Kit/System/printfchecker.h"
 #include <stdint.h>
 #include <stdarg.h>
@@ -133,29 +133,31 @@ public:
         NOTE: If the classification ID is invalid (i.e. out of range) the method
         returns 0.
      */
-    static uint32_t classificationIdToMask( uint8_t classificationId ) noexcept;
+    static KitLoggingClassificationMask_T classificationIdToMask( uint8_t classificationId ) noexcept;
 
     /** This method converts a Classification ID filter-mask to classification
         ID.
 
-        NOTE: If an invalid filter-mask is provided, then IApplication::NULL_CLASSIFICATION_ID
+        NOTE: If an invalid filter-mask is provided, e.g. the ID value exceeds
+              the number of bits in the Mask Type, then IApplication::NULL_CLASSIFICATION_ID
               is returned.
      */
-    static uint8_t maskToClassificationId( uint32_t classificationMask ) noexcept;
+    static uint8_t maskToClassificationId( KitLoggingClassificationMask_T classificationMask ) noexcept;
 
     /** This method is used to convert a numeric Package ID into a filter-mask.
         NOTE: If the package ID is invalid (i.e. out of range) the method
         returns 0.
      */
-    static uint32_t packageIdToMask( uint8_t packageId ) noexcept;
+    static KitLoggingPackageMask_T packageIdToMask( uint8_t packageId ) noexcept;
 
     /** This method converts a Package ID filter-mask to package
         ID.
 
-        NOTE: If an invalid filter-mask is provided, then IPackage::NULL_PACKAGE_ID
+        NOTE: If an invalid filter-mask is provided, e.g. the ID value exceeds
+              the number of bits in the Mask Type, then IPackage::NULL_ID
               is returned.
      */
-    static uint8_t maskToPackageId( uint32_t packageMask ) noexcept;
+    static uint8_t maskToPackageId( KitLoggingPackageMask_T packageMask ) noexcept;
 
 public:
     /// Virtual destructor

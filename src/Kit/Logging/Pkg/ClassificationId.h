@@ -14,26 +14,26 @@
 
 Note: The Application is responsible for defining the Classification values.  The
       valid range for a Classification ID is [1-32]. If the Application does not
-      'support' a Package's Classification - the Application sets the Package's 
+      'support' a Package's Classification - the Application sets the Package's
       Classification value to zero.
 */
 
 
-#include "kit_map.h"
+#include "kit_config.h"
 #include "Kit/Type/BetterEnum.h"
 #include <stdint.h>
 
-/// Defer the actual values to the Application.
-#define KIT_LOGGING_API_CLASSIFICATION_ID_FATAL 1  // KIT_LOGGING_API_CLASSIFICATION_ID_FATAL_MAP
+/// Defer the actual values to the Application (via the kit_config.h file).
+#define KIT_LOGGING_API_CLASSIFICATION_ID_FATAL KIT_LOGGING_API_CLASSIFICATION_ID_FATAL_MAPCFG
 
-/// Defer the actual values to the Application.
-#define KIT_LOGGING_API_CLASSIFICATION_ID_WARNING 2  // KIT_LOGGING_API_CLASSIFICATION_ID_WARNING_MAP
+/// Defer the actual values to the Application (via the kit_config.h file).
+#define KIT_LOGGING_API_CLASSIFICATION_ID_WARNING KIT_LOGGING_API_CLASSIFICATION_ID_WARNING_MAPCFG
 
-/// Defer the actual values to the Application.
-#define KIT_LOGGING_API_CLASSIFICATION_ID_EVENT 3  // KIT_LOGGING_API_CLASSIFICATION_ID_EVENT_MAP
+/// Defer the actual values to the Application (via the kit_config.h file).
+#define KIT_LOGGING_API_CLASSIFICATION_ID_EVENT KIT_LOGGING_API_CLASSIFICATION_ID_EVENT_MAPCFG
 
-/// Defer the actual values to the Application.
-#define KIT_LOGGING_API_CLASSIFICATION_ID_INFO 4  // KIT_LOGGING_API_CLASSIFICATION_ID_INFO_MAP
+/// Defer the actual values to the Application (via the kit_config.h file).
+#define KIT_LOGGING_API_CLASSIFICATION_ID_INFO KIT_LOGGING_API_CLASSIFICATION_ID_INFO_MAPCFG
 
 ///
 namespace Kit {
@@ -42,13 +42,13 @@ namespace Logging {
 ///
 namespace Pkg {
 
-/** This enumeration defines the logging Classification IDs for the KIT Logging Package. 
+/** This enumeration defines the logging Classification IDs for the KIT Logging Package.
     NOTE: The valid range for a Classification ID is [1-32].
 
     Note: Each symbol's length must be less than or equal to 16 characters
            123456789 123456
 
-    @param ClassificationId           Enum
+    @param ClassificationId     Enum
 
     @param FATAL                A fatal unrecoverable error occurred.  The system will be 'shutdown'.  What 'shutdown' means is platform dependent.
     @param WARNING              A recoverable error and/or an unexpected condition occurred

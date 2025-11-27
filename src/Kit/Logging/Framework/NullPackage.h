@@ -30,10 +30,10 @@ public:
     NullPackage() = default;
 public:
     /// See Kit::Logging::Framework::IPackage
-    uint8_t packageId() noexcept override { return NULL_PACKAGE_ID; };
+    uint8_t packageId() noexcept override { return NULL_ID; };
 
     /// See Kit::Logging::Framework::IPackage
-    const char* packageIdString() noexcept override { return NULL_PACKAGE_ID_TEXT; };
+    const char* packageIdString() noexcept override { return NULL_ID_TEXT; };
 
     /// See Kit::Logging::Framework::IPackage
     const char* subSystemIdToString( uint8_t subSystemId ) noexcept override { return OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT; };

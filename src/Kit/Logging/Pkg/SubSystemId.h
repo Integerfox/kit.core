@@ -1,15 +1,15 @@
 #ifndef KIT_LOGGING_PKG_SUBSYSTEMID_H_
 #define KIT_LOGGING_PKG_SUBSYSTEMID_H_
 /*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2023  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+ * This file is part of the Colony.Core Project.  The Colony.Core Project is an
+ * open source project with a BSD type of licensing agreement.  See the license
+ * agreement (license.txt) in the top/ directory or on the Internet at
+ * http://integerfox.com/colony.core/license.txt
+ *
+ * Copyright (c) 2014-2023  John T. Taylor
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
 /** @file */
 
 #include "Kit/Type/BetterEnum.h"
@@ -30,17 +30,17 @@ namespace Pkg {
 
     @param SubSystemId       Enum
 
-    @param OSAL              Kit OSAL, i.e. the Kit::System namespace
+    @param SYSTEM            Kit OS Abstraction Layer and System services.
     @param DRIVER            Kit Drivers, i.e. the Kit::Driver namespace
  */
 // clang-format off
 BETTER_ENUM( SubSystemId, uint8_t
-             , OSAL = 1
+             , SYSTEM
              , DRIVER
 );
 // clang-format on
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

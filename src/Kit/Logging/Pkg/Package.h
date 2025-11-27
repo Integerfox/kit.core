@@ -11,12 +11,10 @@
 /** @file */
 
 #include "kit_config.h"
-#include "kit_map.h"
 #include "Kit/Logging/Framework/IPackage.h"
-#include <stdint.h>
 
-/// Defer the actual Package numeric value for the Kit Package to the Application
-#define KIT_LOGGING_PKG_PACKAGE_ID 1  // KIT_LOGGING_PKG_PACKAGE_ID_MAP
+/// Defer the actual Package numeric value for the Kit Package to the Application (via the kit_config.h file).
+#define KIT_LOGGING_PKG_PACKAGE_ID KIT_LOGGING_PKG_PACKAGE_ID_MAPCFG
 
 /// The Kit Package ID Text String
 #ifndef OPTION_KIT_LOGGING_PKG_PACKAGE_ID_TEXT
@@ -35,6 +33,13 @@ namespace Pkg {
 */
 class Package : public Kit::Logging::Framework::IPackage
 {
+    public:
+    /// The Package's ID
+    static constexpr uint8_t PACKAGE_ID = KIT_LOGGING_PKG_PACKAGE_ID;
+
+    /// The Package's ID Text String
+    static constexpr const char* PACKAGE_ID_TEXT = OPTION_KIT_LOGGING_PKG_PACKAGE_ID_TEXT;
+    
 public:
     /// Constructor
     Package() = default;

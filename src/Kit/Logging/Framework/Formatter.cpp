@@ -14,8 +14,10 @@
 #include <inttypes.h>
 
 
-using namespace Kit::Logging::Framework;
-
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Logging {
+namespace Framework {
 
 //////////////////////////////////////////////////////////////////////////////
 bool Formatter::toString( IApplication&                               application,
@@ -43,7 +45,7 @@ bool Formatter::toString( IApplication&                               applicatio
     struct tm* utcTimePtr = Kit::Time::gmtimeMT( &seconds, &utcTime );
     if ( utcTimePtr != nullptr )
     {
-        dstStringBuf.formatAppend( "%04d/%02d/%02d-%02d:%02d:%02d.%03u) ",
+        dstStringBuf.formatAppend( "%04d-%02d-%02d %02d:%02d:%02d.%03u) ",
                                    utcTimePtr->tm_year + 1900,
                                    utcTimePtr->tm_mon + 1,
                                    utcTimePtr->tm_mday,
@@ -69,3 +71,8 @@ bool Formatter::toString( IApplication&                               applicatio
     // All done!
     return !dstStringBuf.truncated();
 }
+
+} // end namespace
+}
+}
+//------------------------------------------------------------------------------
