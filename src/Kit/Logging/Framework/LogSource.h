@@ -53,20 +53,20 @@ public:
     /// Constructor
     LogSource( IApplication& appInstance,
                /* Kit::Container::RingBufferMP<EntryData_T>& logEntryFIFO, */
-               uint8_t     classificationIdForQueueOverflow,
-               uint8_t     packageIdForQueueOverflow,
-               uint8_t     subSystemIdForQueueOverflow,
-               uint8_t     messageIdForQueueOverflow ) noexcept;
+               uint8_t classificationIdForQueueOverflow,
+               uint8_t packageIdForQueueOverflow,
+               uint8_t subSystemIdForQueueOverflow,
+               uint8_t messageIdForQueueOverflow ) noexcept;
 
 
 public:
     /// See Kit::Logging::Framework::ILog
-    void vlogf( uint8_t     classificationId,
-                uint8_t     packageId,
-                uint8_t     subSystemId,
-                uint8_t     messageId,
-                const char* formatInfoText,
-                va_list     ap ) noexcept override;
+    LogResult_T vlogf( uint8_t     classificationId,
+                       uint8_t     packageId,
+                       uint8_t     subSystemId,
+                       uint8_t     messageId,
+                       const char* formatInfoText,
+                       va_list     ap ) noexcept override;
 
 public:
     /// See Kit::Logging::Framework::ILog

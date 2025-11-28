@@ -1,5 +1,5 @@
-#ifndef KIT_LOGGING_FRAMEWORK_MOCKED4TEST_KITONLY_CFG_H_
-#define KIT_LOGGING_FRAMEWORK_MOCKED4TEST_KITONLY_CFG_H_
+#ifndef KIT_LOGGING_FRAMEWORK_MOCKED4TEST_KITONLY_MAPCFG_H_
+#define KIT_LOGGING_FRAMEWORK_MOCKED4TEST_KITONLY_MAPCFG_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -16,7 +16,7 @@
 
     NOTE: Do not include OTHER HEADER FILES in this file!  It will create
           circular dependencies issues.  Unfortunately, this means that contents
-          of this file must be 'hand-coded'.  The good news is after the
+          of this file must be 'hand-crafted'.  The good news is that after the
           initial creation - the contents rarely change
 */
 

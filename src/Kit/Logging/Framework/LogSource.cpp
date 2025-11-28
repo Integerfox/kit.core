@@ -149,13 +149,14 @@ bool LogSource::isQueFull() noexcept
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void LogSource::vlogf( uint8_t     classificationId,
-                       uint8_t     packageId,
-                       uint8_t     subSystemId,
-                       uint8_t     messageId,
-                       const char* formatInfoText,
-                       va_list     ap ) noexcept
+LogSource::LogResult_T LogSource::vlogf( uint8_t     classificationId,
+                                         uint8_t     packageId,
+                                         uint8_t     subSystemId,
+                                         uint8_t     messageId,
+                                         const char* formatInfoText,
+                                         va_list     ap ) noexcept
 {
+    LogResult_T                   result = FILTERED;
     Kit::System::Mutex::ScopeLock criticalSection( m_lock );
 
     // Validate classificationId against the number of bits in KitLoggingClassificationMask_T
@@ -192,16 +193,27 @@ void LogSource::vlogf( uint8_t     classificationId,
             // if ( logEntryFIFO_->isFull() )
             // {
             //     m_queueFull = true;
+            //     result     = QUEUE_FULL;
             // }
+            // else
+            // {
+                result = ADDED;
+            // }
+        }
+        else
+        {
+            result = QUEUE_FULL;
         }
 
         // Echo to the Trace engine (always echoed even when not added to the FIFO)
         Formatter::toString( m_app, logEntry, m_workBuffer );
         KIT_SYSTEM_TRACE_RESTRICTED_MSG( m_app.classificationIdToString( classificationId ), "%s", m_workBuffer.getString() );
     }
+
+    return result;
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

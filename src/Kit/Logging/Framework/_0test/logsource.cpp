@@ -1,4 +1,3 @@
-#if 0
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -9,13 +8,10 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Logging/Framework/Formatter.h"
+#include "Kit/Logging/Framework/LogSource.h"
 #include "Kit/Logging/Pkg/ClassificationId.h"
-#include "Kit/Logging/Pkg/DriverMsgId.h"
-#include "Kit/Logging/Pkg/Package.h"
+#include "Kit/Logging/Pkg/Log.h"
 #include "Kit/Logging/Pkg/SubSystemId.h"
-#include "Kit/Logging/Pkg/SystemMsgId.h"
-#include "Kit/Time/BootTime.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Logging/Framework/Mocked4Test/KitOnly.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
@@ -28,25 +24,19 @@ using namespace Kit::Logging::Framework::Mocked4Test;
 
 #define SECT_ "_0test"
 
+// Create a LogSource instance for the tests
+static KitOnly logApp_;
+
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "LogSource" )
 {
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-    KitOnly                                                       logApp;
-    EntryData_T                                                   logEntry;
-    Kit::Text::FString<OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN> formattedText;
-    const char*                                                   msgText = "";
 
     SECTION( "basic" )
     {
-        logEntry.m_timestamp        = Kit::Time::constructBootTime( 5, 1672531199123 );  // 2022/12/31-23:59:59.123 UTC
-        logEntry.m_classificationId = ClassificationId::WARNING;
-        logEntry.m_packageId        = Package::PACKAGE_ID;
-        logEntry.m_subSystemId      = SubSystemId::SYSTEM;
-        logEntry.m_messageId        = SystemMsgId::SHUTDOWN;
-        msgText                     = "Test log message";
-        strcpy( logEntry.m_infoText, msgText );
+        unsigned               arg    = 42;
+        LogSource::LogResult_T result = logfSystem( ClassificationId::EVENT, SubSystemId::SYSTEM, SystemMsgId::SHUTDOWN, "shutdown message = %u", arg );
 
         bool result = Formatter::toString( logApp, logEntry, formattedText );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
@@ -69,4 +59,3 @@ TEST_CASE( "LogSource" )
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
-#endif

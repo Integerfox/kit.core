@@ -9,11 +9,8 @@
 /** @file */
 
 #include "Kit/Logging/Framework/Formatter.h"
-#include "Kit/Logging/Pkg/ClassificationId.h"
-#include "Kit/Logging/Pkg/DriverMsgId.h"
+#include "Kit/Logging/Pkg/Log.h"
 #include "Kit/Logging/Pkg/Package.h"
-#include "Kit/Logging/Pkg/SubSystemId.h"
-#include "Kit/Logging/Pkg/SystemMsgId.h"
 #include "Kit/Time/BootTime.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Logging/Framework/Mocked4Test/KitOnly.h"

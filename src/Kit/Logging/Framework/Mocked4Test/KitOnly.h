@@ -1,5 +1,5 @@
-#ifndef KIT_LOGGING_FRAMEWORK_MOCKED4TEST_LOGSOURCE_H_
-#define KIT_LOGGING_FRAMEWORK_MOCKED4TEST_LOGSOURCE_H_
+#ifndef KIT_LOGGING_FRAMEWORK_MOCKED4TEST_KIT_ONLY_H_
+#define KIT_LOGGING_FRAMEWORK_MOCKED4TEST_KIT_ONLY_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,13 +10,9 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Logging/Framework/LogSource.h"
-#include "Kit/Logging/Pkg/ClassificationId.h"
-#include "Kit/Logging/Pkg/SubSystemId.h"
+#include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Pkg/Package.h"
-#include "Kit/Logging/Framework/Mocked4Test/WhiteBox.h"
-#include "Kit/Logging/Pkg/SubSystemId.h"
-#include "Kit/Logging/Pkg/SystemMsgId.h"
+
 ///
 namespace Kit {
 ///
@@ -30,66 +26,46 @@ namespace Mocked4Test {
     IApplication instance, and the Log entry FIFO. The IApplication instance
     ONLY supports a single Logging Package -->the KIT library
     */
-class KitOnly : public Kit::Logging::Framework::IApplication, public Kit::Logging::Framework::LogSource, public WhiteBox
+class KitOnly : public Kit::Logging::Framework::IApplication
 {
 public:
     /// Constructor
-    KitOnly() noexcept
-        : LogSource( *this,
-                     /* m_logFifo, */
-                     Kit::Logging::Pkg::ClassificationId::WARNING,
-                     Kit::Logging::Pkg::Package::PACKAGE_ID,
-                     Kit::Logging::Pkg::SubSystemId::SYSTEM,
-                     Kit::Logging::Pkg::SystemMsgId::LOGGING )
-    {
-    }
+    KitOnly() noexcept;
 
 public:
     /// See Kit::Logging::Framework::IApplication
-    const char*
-    classificationIdToString( uint8_t classificationId ) noexcept override
-    {
-        return Kit::Type::betterEnumToString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
-            classificationId,
-            OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT );
-    }
+    const char* classificationIdToString( uint8_t classificationId ) noexcept override;
 
     /// See Kit::Logging::Framework::IApplication
-    IPackage& getPackage( uint8_t packageId ) noexcept override
-    {
-        // Only support the KIT Package
-        return m_kitPackage;
-    }
+    IPackage& getPackage( uint8_t packageId ) noexcept override;
 
 public:
-    /// The KIT Package instance
+    /// The KIT Package instance (is public to allow unit test access)
     Kit::Logging::Pkg::Package m_kitPackage;
+
+    /// The Log entry FIFO (is public to allow unit test access)
+    // Kit::Container::RingBufferMP<Kit::Logging::EntryData_T> m_logQueue;
 
 public:
     //---------------- WhiteBox support -----------------
 
-    /// Intercept to collect called metrics
-    void vlogf( uint8_t     classificationId,
-                uint8_t     packageId,
-                uint8_t     subSystemId,
-                uint8_t     messageId,
-                const char* formatInfoText,
-                va_list     ap ) noexcept override
-    {
-        m_logEntryCount++;
-        LogSource::vlogf( classificationId,
-                          packageId,
-                          subSystemId,
-                          messageId,
-                          formatInfoText,
-                          ap );
-    }
+    /// This method resets the 'internals' for a known default state, i.e. clears the log queue, resets the overflow count, etc.
+    void reset() noexcept;
 
-    /// See Kit::Logging::Framework::Mocked4Test::WhiteBox
-    bool isLogQueueFull() const noexcept override { return m_queueFull; }
+    /// Returns the number of currently queued logged entries
+    // uint32_t getLogQueueCount() const noexcept;
 
-    /// See Kit::Logging::Framework::Mocked4Test::WhiteBox
-    uint32_t getOverflowedLogEntryCount() const noexcept override { return m_overflowCount; }
+    /// Clears all entries from the log queue
+    // void clearLogQueue() noexcept;
+
+    /// Returns the logging framework's 'queue full' status
+    bool isLogQueueFull() const noexcept;
+
+    /// Returns the current number of overflowed log entries
+    uint32_t getOverflowedLogEntryCount() const noexcept;
+
+    /// Returns the number of times Kit::Logging::Framework::Log::vlogf() was called
+    uint32_t getLogCallCount() const noexcept;
 };
 
 }  // end namespaces
