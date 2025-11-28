@@ -45,7 +45,7 @@ class RingBuffer : public RingBufferBase
 {
 public:
     /// Constructor
-    RingBuffer( ITEM* memoryBuffer, unsigned N )
+    RingBuffer( ITEM* memoryBuffer, unsigned N, bool initializeMemory = true )
         : RingBufferBase( N )
         , m_bufferMemory( memoryBuffer )
     {
@@ -53,7 +53,10 @@ public:
         KIT_SYSTEM_ASSERT( N > 1 );
 
         // Start with a clean buffer (helps with debugging)
-        memset( memoryBuffer, 0, sizeof( ITEM ) * N );
+        if ( initializeMemory )
+        {
+            memset( static_cast<void*>( memoryBuffer ), 0, sizeof( ITEM ) * N );
+        }
     }
 
 public:

@@ -8,8 +8,10 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/System/Assert.h"
 #include "KitOnly.h"
 #include "Kit/Logging/Framework/Logger.h"
+
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -18,15 +20,16 @@ namespace Framework {
 
 // Access to Whitebox variable
 extern uint32_t g_vlogfCallCount;
-extern bool     g_queueFull;
+extern bool     g_queueOverflowed;
 extern uint16_t g_overflowCount;
+extern void     resetLoggerState() noexcept;
 
 namespace Mocked4Test {
 
 ////////////////////////////////////////////////
 KitOnly::KitOnly() noexcept
 {
-    Framework::initialize( *this /*, m_logFifo, */ );
+    Framework::initialize( *this, m_logFifo );
 }
 
 const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexcept
@@ -36,7 +39,6 @@ const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexce
         OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT );
 }
 
-/// See Kit::Logging::Framework::IApplication
 IPackage& KitOnly::getPackage( uint8_t packageId ) noexcept
 {
     // Only supports the KIT Package
@@ -44,19 +46,29 @@ IPackage& KitOnly::getPackage( uint8_t packageId ) noexcept
 }
 
 ////////////////////////////////////////////////
-/// See Kit::Logging::Framework::Mocked4Test::WhiteBox
-bool KitOnly::isLogQueueFull() const noexcept
+bool KitOnly::isLogQueOverflowed() const noexcept
 {
-    return g_queueFull;
+    return g_queueOverflowed;
 }
 
-/// See Kit::Logging::Framework::Mocked4Test::WhiteBox
 uint32_t KitOnly::getOverflowedLogEntryCount() const noexcept
 {
     return g_overflowCount;
 }
 
-} // end namespace
+void KitOnly::reset() noexcept
+{
+    Framework::resetLoggerState();
+    m_logFifo.clearTheBuffer();
+}
+
+uint32_t KitOnly::getLogCallCount() const noexcept
+{
+    return g_vlogfCallCount;
+}
+
+
+}  // end namespace
 }
 }
 }

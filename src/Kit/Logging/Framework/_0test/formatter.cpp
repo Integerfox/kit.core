@@ -10,9 +10,9 @@
 
 #include "Kit/Logging/Framework/Formatter.h"
 #include "Kit/Logging/Pkg/Log.h"
-#include "Kit/Logging/Pkg/Package.h"
 #include "Kit/Time/BootTime.h"
 #include "Kit/System/Trace.h"
+#include "Kit/Text/FString.h"
 #include "Kit/Logging/Framework/Mocked4Test/KitOnly.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
@@ -24,15 +24,17 @@ using namespace Kit::Logging::Framework::Mocked4Test;
 
 #define SECT_ "_0test"
 
+// Use the same static instance as the Logger test to avoid pointer corruption
+extern KitOnly logApp_;
+
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "Formatter" )
 {
-    KIT_SYSTEM_TRACE_FUNC( SECT_ );
+    KIT_SYSTEM_TRACE_SCOPE( SECT_ , "Formatter" );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-    KitOnly                                                       logApp;
+    logApp_.reset();
     EntryData_T                                                   logEntry;
     Kit::Text::FString<OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN> formattedText;
-    const char*                                                   msgText = "";
 
     SECTION( "basic" )
     {
@@ -41,10 +43,9 @@ TEST_CASE( "Formatter" )
         logEntry.m_packageId        = Package::PACKAGE_ID;
         logEntry.m_subSystemId      = SubSystemId::SYSTEM;
         logEntry.m_messageId        = SystemMsgId::SHUTDOWN;
-        msgText                     = "Test log message";
-        strcpy( logEntry.m_infoText, msgText );
+        strcpy( logEntry.m_infoText, "Test log message" );
 
-        bool result = Formatter::toString( logApp, logEntry, formattedText );
+        bool result = Formatter::toString( logApp_, logEntry, formattedText );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
@@ -54,10 +55,9 @@ TEST_CASE( "Formatter" )
         logEntry.m_packageId        = Package::PACKAGE_ID;
         logEntry.m_subSystemId      = SubSystemId::DRIVER;
         logEntry.m_messageId        = DriverMsgId::STOP_ERR;
-        msgText                     = "With Persistent Storage ID log message";
-        strcpy( logEntry.m_infoText, msgText );
+        strcpy( logEntry.m_infoText, "With Persistent Storage ID log message" );
 
-        result = Formatter::toString( logApp, logEntry, formattedText, 12 );
+        result = Formatter::toString( logApp_, logEntry, formattedText, 12 );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "[12] (60000:2022-12-31 23:59:59.123) INFO-KIT-DRIVER-STOP_ERR: With Persistent Storage ID log message" );

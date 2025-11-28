@@ -86,7 +86,7 @@
 
 
 //////////////////////////////////////////////////////////////////////////////
-#ifdef USE_KIT_SYSTEM_RESTRICTED_TRACE
+#if defined( USE_KIT_SYSTEM_RESTRICTED_TRACE ) || defined( USE_KIT_SYSTEM_TRACE )
 
 /** This is SPECIAL macro wrapper in that it NOT compiled out when USE_KIT_SYSTEM_TRACE
     is NOT defined.  The use case for this is when the Application needs to
@@ -117,7 +117,7 @@
 #else
 #define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )
 #define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE( type, varname, initval )
-#endif  // end USE_KIT_SYSTEM_RESTRICTED_TRACE
+#endif  // end USE_KIT_SYSTEM_RESTRICTED_TRACE || USE_KIT_SYSTEM_TRACE
 
 
 #ifdef USE_KIT_SYSTEM_TRACE

@@ -12,7 +12,7 @@
 
     This file declares the public facing Logging interface for managing the
     logging framework (i.e. everything except generating log entries).
-    
+
     See the Kit/Logging/Framework/Log.h file details for the public interface
     for generating log entries.
 
@@ -21,10 +21,19 @@
 
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/types.h"
+#include "Kit/Logging/Framework/EntryData.h"
 #include "Kit/Logging/Pkg/Package.h"
 #include "Kit/Logging/Pkg/ClassificationId.h"
 #include "Kit/Logging/Pkg/SubSystemId.h"
 #include "Kit/Logging/Pkg/SystemMsgId.h"
+#include "Kit/Container/RingBuffer.h"  // TODO: Needs to be Kit::Container::RingBufferMP
+
+/** Minimum number of free entries that MUST be available in the log entry
+    queue before logging is resumed after a 'queue full' condition.
+ */
+#ifndef OPTION_KIT_LOGGING_FRAMEWORK_MIN_QUEUE_SPACE
+#define OPTION_KIT_LOGGING_FRAMEWORK_MIN_QUEUE_SPACE 4
+#endif
 
 ///
 namespace Kit {
@@ -36,14 +45,16 @@ namespace Framework {
 
 /*----------------------------------------------------------------------------*/
 /** This method is used to initialize the Logging framework. It must be called
-    before any LOGGING methods are called.
+    before ANY calls to Kit::Logging::Framework::vlogf() method.
+
+    TODO: logEntryFIFO needs to be a Kit::Container::RingBufferMP
  */
-void initialize( IApplication& appInstance,
-                 /* Kit::Container::RingBufferMP<EntryData_T>& logEntryFIFO, */
-                 uint8_t classificationIdForQueueOverflow = Kit::Logging::Pkg::ClassificationId::WARNING,
-                 uint8_t packageIdForQueueOverflow        = Kit::Logging::Pkg::Package::PACKAGE_ID,
-                 uint8_t subSystemIdForQueueOverflow      = Kit::Logging::Pkg::SubSystemId::SYSTEM,
-                 uint8_t messageIdForQueueOverflow        = Kit::Logging::Pkg::SystemMsgId::LOGGING ) noexcept;
+void initialize( IApplication&                            appInstance,
+                 Kit::Container::RingBuffer<EntryData_T>& logEntryFIFO,
+                 uint8_t                                  classificationIdForQueueOverflow = Kit::Logging::Pkg::ClassificationId::WARNING,
+                 uint8_t                                  packageIdForQueueOverflow        = Kit::Logging::Pkg::Package::PACKAGE_ID,
+                 uint8_t                                  subSystemIdForQueueOverflow      = Kit::Logging::Pkg::SubSystemId::SYSTEM,
+                 uint8_t                                  messageIdForQueueOverflow        = Kit::Logging::Pkg::SystemMsgId::LOGGING ) noexcept;
 
 /*----------------------------------------------------------------------------*/
 /** This method is used to enable one or more log Classifications ID, i.e

@@ -8,11 +8,14 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/System/Assert.h"
 #include "Log.h"
+#include "Logger.h"
 #include "Formatter.h"
 #include "Kit/Text/FString.h"
 #include "Kit/System/Mutex.h"
-
+#include "Kit/System/Trace.h"
+#include "Kit/Time/BootTime.h"
 
 #define NUM_BITS( type ) ( sizeof( type ) * 8 )
 
@@ -21,80 +24,116 @@ namespace Kit {
 namespace Logging {
 namespace Framework {
 
-/// Log entry FIFO
-// static Kit::Container::RingBufferMP<EntryData_T>* logFifo_;
-static Kit::System::Mutex                                                lock_;
+/* NOTE: Several variables are exposed as global variables (in the Kit::Logging::Framework
+         namespace). This hack is done explicitly to support unit testing of
+         other modules that generate log entries.  In an attempt to limit the
+         'damage' of having global variables - these variables are NOT
+         documented in Doxygen.
+*/
+
+static Kit::Container::RingBuffer<EntryData_T>*                          logFifo_;  // TODO: Needs to be Kit::Container::RingBufferMP
+Kit::System::Mutex                                                       g_lock;
 static IApplication*                                                     app_;
 static KitLoggingClassificationMask_T                                    classificationFilterMask_;
 static KitLoggingPackageMask_T                                           packageFilterMask_;
-static uint16_t                                                          overflowCount_;
+uint16_t                                                                 g_overflowCount;
 static uint8_t                                                           classificationIdForQueueOverflow_;
 static uint8_t                                                           packageIdForQueueOverflow_;
 static uint8_t                                                           subSystemIdForQueueOverflow_;
 static uint8_t                                                           messageIdForQueueOverflow_;
 static Kit::Text::FString<OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN + 1> workBuffer_;
-static bool                                                              queueFull_;
+static uint64_t                                                          overflowedTimestamp_;
+bool                                                                     g_queueOverflowed;
+unsigned                                                                 g_vlogfCallCount;  // Only used for unit testing
 
-void initialize( IApplication& appInstance,
-                 /* Kit::Container::RingBufferMP<EntryData_T>& logEntryFIFO, */
-                 uint8_t classificationIdForQueueOverflow,
-                 uint8_t packageIdForQueueOverflow,
-                 uint8_t subSystemIdForQueueOverflow,
-                 uint8_t messageIdForQueueOverflow ) noexcept
+
+static bool isQueueOverflowed( uint64_t timestamp ) noexcept;
+static void createAndAddOverflowEntry() noexcept;
+
+// CAUTION: This method is visible to the application by design. This method is
+// for INTERNAL and unit testing purposes ONLY. Application code MUST NOT call
+// this method!
+void resetLoggerState() noexcept
 {
-    app_ = &appInstance;
-    // logFifo_                             = &logEntryFIFO;
-    classificationFilterMask_         = 0xFFFFFFFF;
-    packageFilterMask_                = 0xFFFFFFFF;
-    overflowCount_                    = 0;
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
+    g_overflowCount           = 0;
+    g_queueOverflowed         = false;
+    classificationFilterMask_ = 0xFFFFFFFF;
+    packageFilterMask_        = 0xFFFFFFFF;
+    g_vlogfCallCount          = 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void initialize( IApplication&                            appInstance,
+                 Kit::Container::RingBuffer<EntryData_T>& logFifo,
+                 uint8_t                                  classificationIdForQueueOverflow,
+                 uint8_t                                  packageIdForQueueOverflow,
+                 uint8_t                                  subSystemIdForQueueOverflow,
+                 uint8_t                                  messageIdForQueueOverflow ) noexcept
+{
+    app_                              = &appInstance;
+    logFifo_                          = &logFifo;
     classificationIdForQueueOverflow_ = classificationIdForQueueOverflow;
     packageIdForQueueOverflow_        = packageIdForQueueOverflow;
     subSystemIdForQueueOverflow_      = subSystemIdForQueueOverflow;
     messageIdForQueueOverflow_        = messageIdForQueueOverflow;
-    queueFull_                        = false;
+    resetLoggerState();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void createAndAddOverflowEntry() noexcept
 {
-#if 0
-    // Generate entry
-    EntryData_T logEntry;
-    logEntry.classification = overflowClassificationId_;
-    logEntry.msgId          = overflowMsgId_;
-    logEntry.timestamp      = Kit::Time::getBootTime();
+    // Generate entry (zero-initialize to avoid copying uninitialized padding bytes)
+    EntryData_T logEntry = {};
+    logEntry.m_timestamp        = Kit::Time::getBootTime();
+    logEntry.m_classificationId = classificationIdForQueueOverflow_;
+    logEntry.m_packageId        = packageIdForQueueOverflow_;
+    logEntry.m_subSystemId      = subSystemIdForQueueOverflow_;
+    logEntry.m_messageId        = messageIdForQueueOverflow_;
 
-    // Format text
-    Kit::Text::FString<OPTION_KIT_LOGGING_FRAMEWORK_MAX_FORMATTED_MSG_TEXT_LEN> stringBuf;
-    startText( stringBuf, classificationTextForQueueOverflow_, overflowMsgText_ );
-    stringBuf.formatAppend( "overflow count=%d", overflowCount_ );
+    // Create the info text
+    workBuffer_.format( "OVERFLOW! Num entries lost=%u, @", g_overflowCount );
+    Formatter::appendFormattedTimestamp( overflowedTimestamp_, workBuffer_ );
+    strncpy( logEntry.m_infoText, workBuffer_.getString(), OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN );
+    logEntry.m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN] = '\0';  // Ensure the text string is null terminated
 
     // Add to the FIFO and echo to trace
-    // logEntryFIFO_->add( logEntry );
-    KIT_SYSTEM_TRACE_MSG( classificationTextForQueueOverflow_,  "%s", stringBuf.getString() ) );
-#endif
+    logFifo_->add( logEntry );
+    Formatter::toString( *app_, logEntry, workBuffer_ );
+    KIT_SYSTEM_TRACE_RESTRICTED_MSG( app_->classificationIdToString( logEntry.m_classificationId ), "%s", workBuffer_.getString() );
 }
 
-bool isQueFull() noexcept
+bool isQueueOverflowed( uint64_t timestamp ) noexcept
 {
-    // Return immediately if not in the overflowed state
-    if ( !queueFull_ )
+    // Return immediately if NOT in the overflowed state AND there is space available in the queue
+    if ( !g_queueOverflowed && !logFifo_->isFull() )
     {
         return false;
     }
 
-    // // Has space freed up?
-    // unsigned available = logEntryFIFO_->getMaxItems() - logEntryFIFO_->getNumItems();
-    // if ( available >= OPTION_KIT_LOGGING_FRAMEWORK_MIN_QUEUE_SPACE )
-    // {
-    //     createAndAddOverflowEntry();
-    //     overflowCount_ = 0;
-    //     queueFull_     = false;
-    //     return false;
-    // }
+    // If I get here that means we are attempting to add a log entry while the
+    // queue is full OR we are already in the overflow state and are waiting on
+    // the queue hysteresis to clear.
+    g_queueOverflowed = true;
+
+    // Has space freed up?
+    unsigned available = logFifo_->getMaxItems() - logFifo_->getNumItems();
+    if ( available >= OPTION_KIT_LOGGING_FRAMEWORK_MIN_QUEUE_SPACE )
+    {
+        createAndAddOverflowEntry();
+        g_overflowCount   = 0;
+        g_queueOverflowed = false;
+        return false;
+    }
+
+    // First time in overflow state - record the timestamp
+    if ( g_overflowCount == 0 )
+    {
+        overflowedTimestamp_ = timestamp;
+    }
 
     // No space - count the number of 'dropped' log entries
-    overflowCount_++;
+    g_overflowCount++;
     return true;
 }
 
@@ -107,8 +146,12 @@ LogResult_T vlogf( uint8_t     classificationId,
                    const char* formatInfoText,
                    va_list     ap ) noexcept
 {
+    KIT_SYSTEM_ASSERT( app_ != nullptr );
+    KIT_SYSTEM_ASSERT( logFifo_ != nullptr );
+
     LogResult_T                   result = FILTERED;
-    Kit::System::Mutex::ScopeLock criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
+    g_vlogfCallCount++;
 
     // Validate classificationId against the number of bits in KitLoggingClassificationMask_T
     if ( classificationId > ( sizeof( KitLoggingClassificationMask_T ) * 8 ) )
@@ -123,11 +166,12 @@ LogResult_T vlogf( uint8_t     classificationId,
     }
 
     // Check if enabled
-    if ( ( classificationId & classificationFilterMask_ ) &&
-         ( packageId & packageFilterMask_ ) )
+    auto classMask = classificationIdToMask( classificationId );
+    auto pkgMask   = packageIdToMask( packageId );
+    if ( ( classMask & classificationFilterMask_ ) && ( pkgMask & packageFilterMask_ ) )
     {
-        // Generate entry
-        EntryData_T logEntry;
+        // Generate entry (zero-initialize to avoid copying uninitialized padding bytes)
+        EntryData_T logEntry = {};
         logEntry.m_classificationId = classificationId;
         logEntry.m_packageId        = packageId;
         logEntry.m_subSystemId      = subSystemId;
@@ -137,23 +181,12 @@ LogResult_T vlogf( uint8_t     classificationId,
         logEntry.m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN] = '\0';  // Ensure the text string is null terminated
 
         // Manage the queue overflow state
-        if ( !isQueFull() )
+        result = QUEUE_FULL;
+        if ( !isQueueOverflowed( logEntry.m_timestamp ) )
         {
-            // // Space available in the queue -->add the new entry
-            // logEntryFIFO_->add( logEntry );
-            // if ( logEntryFIFO_->isFull() )
-            // {
-            //     queueFull_ = true;
-            //     result     = QUEUE_FULL;
-            // }
-            // else
-            // {
+            // Space available in the queue -->add the new entry
+            logFifo_->add( logEntry );
             result = ADDED;
-            // }
-        }
-        else
-        {
-            result = QUEUE_FULL;
         }
 
         // Echo to the Trace engine (always echoed even when not added to the FIFO)
@@ -167,7 +200,7 @@ LogResult_T vlogf( uint8_t     classificationId,
 ////////////////////////////////////////////////////////////////////////////////
 KitLoggingClassificationMask_T enableClassification( KitLoggingClassificationMask_T classificationMask ) noexcept
 {
-    Kit::System::Mutex::ScopeLock  criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock  criticalSection( g_lock );
     KitLoggingClassificationMask_T oldMask  = classificationFilterMask_;
     classificationFilterMask_              |= classificationMask;
     return oldMask;
@@ -175,7 +208,7 @@ KitLoggingClassificationMask_T enableClassification( KitLoggingClassificationMas
 
 KitLoggingClassificationMask_T disableClassification( KitLoggingClassificationMask_T classificationMask ) noexcept
 {
-    Kit::System::Mutex::ScopeLock  criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock  criticalSection( g_lock );
     KitLoggingClassificationMask_T oldMask  = classificationFilterMask_;
     classificationFilterMask_              &= ~classificationMask;
     return oldMask;
@@ -183,39 +216,42 @@ KitLoggingClassificationMask_T disableClassification( KitLoggingClassificationMa
 
 KitLoggingClassificationMask_T getClassificationEnabledMask() noexcept
 {
-    Kit::System::Mutex::ScopeLock criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     return classificationFilterMask_;
 }
 
 void setClassificationMask( KitLoggingClassificationMask_T newMask ) noexcept
 {
-    Kit::System::Mutex::ScopeLock criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     classificationFilterMask_ = newMask;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 KitLoggingPackageMask_T enablePackage( KitLoggingPackageMask_T packageMask ) noexcept
 {
-    Kit::System::Mutex::ScopeLock criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     KitLoggingPackageMask_T       oldMask  = packageFilterMask_;
     packageFilterMask_                    |= packageMask;
     return oldMask;
 }
+
 KitLoggingPackageMask_T disablePackage( KitLoggingPackageMask_T packageMask ) noexcept
 {
-    Kit::System::Mutex::ScopeLock criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     KitLoggingPackageMask_T       oldMask  = packageFilterMask_;
     packageFilterMask_                    &= ~packageMask;
     return oldMask;
 }
+
 KitLoggingPackageMask_T getPackageEnabledMask() noexcept
 {
-    Kit::System::Mutex::ScopeLock criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     return packageFilterMask_;
 }
+
 void setPackageMask( KitLoggingPackageMask_T newMask ) noexcept
 {
-    Kit::System::Mutex::ScopeLock criticalSection( lock_ );
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     packageFilterMask_ = newMask;
 }
 

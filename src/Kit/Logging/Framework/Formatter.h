@@ -77,6 +77,10 @@ public:
                           const Kit::Logging::Framework::EntryData_T& srcEntryToFormat,
                           Kit::Text::IString&                         dstStringBuf,
                           uint64_t                                    persistentStorageId = UINT64_MAX ) noexcept;
+
+    /// Helper method: Appends the formatted timestamp to 'dstStringBuf' (uses the same timestamp formatting as toString())
+    static void appendFormattedTimestamp( uint64_t                    timestamp,
+                                          Kit::Text::IString&         dstStringBuf ) noexcept;                      
 };
 
 }  // end namespaces

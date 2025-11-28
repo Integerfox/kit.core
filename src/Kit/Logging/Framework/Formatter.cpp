@@ -20,22 +20,13 @@ namespace Logging {
 namespace Framework {
 
 //////////////////////////////////////////////////////////////////////////////
-bool Formatter::toString( IApplication&                               application,
-                          const Kit::Logging::Framework::EntryData_T& srcEntryToFormat,
-                          Kit::Text::IString&                         dstStringBuf,
-                          uint64_t                                    persistentStorageId ) noexcept
+void Formatter::appendFormattedTimestamp( uint64_t                    timestamp,
+                                          Kit::Text::IString&         dstStringBuf ) noexcept
 {
-    dstStringBuf.clear();
-    if ( persistentStorageId != UINT64_MAX )
-    {
-        // Format the Persistent Storage ID
-        dstStringBuf.formatAppend( "[%" PRIu64 "] ", persistentStorageId );
-    }
-
     // Append the boot-counter portion of the entry's timestamp
     uint16_t bootCounter;
     uint64_t elapsedTimeMs;
-    Kit::Time::parseBootTime( srcEntryToFormat.m_timestamp, bootCounter, elapsedTimeMs );
+    Kit::Time::parseBootTime( timestamp, bootCounter, elapsedTimeMs );
     dstStringBuf.formatAppend( "(%u:", bootCounter );
 
     // Convert elapsed time (ms since epoch) to absolute UTC time format
@@ -54,6 +45,22 @@ bool Formatter::toString( IApplication&                               applicatio
                                    utcTimePtr->tm_sec,
                                    milliseconds );
     }
+}
+
+bool Formatter::toString( IApplication&                               application,
+                          const Kit::Logging::Framework::EntryData_T& srcEntryToFormat,
+                          Kit::Text::IString&                         dstStringBuf,
+                          uint64_t                                    persistentStorageId ) noexcept
+{
+    dstStringBuf.clear();
+    if ( persistentStorageId != UINT64_MAX )
+    {
+        // Format the Persistent Storage ID
+        dstStringBuf.formatAppend( "[%" PRIu64 "] ", persistentStorageId );
+    }
+
+    // Append the boot-counter portion of the entry's timestamp
+    appendFormattedTimestamp( srcEntryToFormat.m_timestamp, dstStringBuf );
 
     // Append the identifiers and the info text to the log entry
     const char* classificationText = application.classificationIdToString( srcEntryToFormat.m_classificationId );
