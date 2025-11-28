@@ -62,7 +62,7 @@ void KitOnly::reset() noexcept
     m_logFifo.clearTheBuffer();
 }
 
-uint32_t KitOnly::getLogCallCount() const noexcept
+uint32_t KitOnly::getVLogfCallCount() const noexcept
 {
     return g_vlogfCallCount;
 }

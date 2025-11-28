@@ -33,6 +33,7 @@ namespace Framework {
 */
 class IApplication
 {
+public:
     /// Null/Invalid Classification ID
     static constexpr uint8_t NULL_CLASSIFICATION_ID = 0;
 

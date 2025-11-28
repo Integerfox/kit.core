@@ -92,7 +92,7 @@ void createAndAddOverflowEntry() noexcept
     logEntry.m_messageId        = messageIdForQueueOverflow_;
 
     // Create the info text
-    workBuffer_.format( "OVERFLOW! Num entries lost=%u, @", g_overflowCount );
+    workBuffer_.format( "OVERFLOW! Num entries lost=%u ", g_overflowCount );
     Formatter::appendFormattedTimestamp( overflowedTimestamp_, workBuffer_ );
     strncpy( logEntry.m_infoText, workBuffer_.getString(), OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN );
     logEntry.m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN] = '\0';  // Ensure the text string is null terminated
@@ -148,6 +148,7 @@ LogResult_T vlogf( uint8_t     classificationId,
 {
     KIT_SYSTEM_ASSERT( app_ != nullptr );
     KIT_SYSTEM_ASSERT( logFifo_ != nullptr );
+    KIT_SYSTEM_ASSERT( formatInfoText != nullptr );
 
     LogResult_T                   result = FILTERED;
     Kit::System::Mutex::ScopeLock criticalSection( g_lock );

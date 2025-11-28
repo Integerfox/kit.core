@@ -80,7 +80,7 @@ public:
     uint32_t getOverflowedLogEntryCount() const noexcept;
 
     /// Returns the number of times Kit::Logging::Framework::Log::vlogf() was called
-    uint32_t getLogCallCount() const noexcept;
+    uint32_t getVLogfCallCount() const noexcept;
 };
 
 }  // end namespaces
