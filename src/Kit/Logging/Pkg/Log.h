@@ -14,12 +14,23 @@ This file declares the Logging functions available to the KIT Logging Domain.
 
 */
 
+#include "kit_config.h"
 #include "Kit/Logging/Pkg/Package.h"
 #include "Kit/Logging/Pkg/ClassificationId.h"
 #include "Kit/Logging/Pkg/SubSystemId.h"
 #include "Kit/Logging/Pkg/MsgId.h"
 #include "Kit/Logging/Framework/Log.h"
 #include "Kit/System/printfchecker.h"
+
+
+/** Support Conditionally compiling out calls to the Logging framework.  This
+    allows the KIT library to be used WITHOUT the Logging framework being
+    implemented or mocked.  The default is to ENABLE the Logging APIs.
+*/
+#ifdef DISABLED_KIT_LOGGING_PKG_LOG_API
+#define logfSystem( classificationId, messageId, ... ) ::Kit::Logging::Framework::LogResult_T::ADDED
+#define logfDriver( classificationId, messageId, ... ) ::Kit::Logging::Framework::LogResult_T::ADDED
+#else
 
 ///
 namespace Kit {
@@ -52,8 +63,10 @@ inline Framework::LogResult_T logfDriver( ClassificationId catId, DriverMsgId ms
     return result;
 }
 
-
 }  // end namespaces
 }
 }
+
+
+#endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
 #endif  // end header latch
