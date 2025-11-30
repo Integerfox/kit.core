@@ -66,7 +66,7 @@ protected:
     /// The PKGZ Package instance
     PkgZ::Logging::Pkg::Package m_pkgzPackage;
 
-    /// Null Package instance to handle unknown Package IDs
+    /// The Null Package instance (for unknown Package IDs)
     Kit::Logging::Framework::NullPackage m_nullPackage;
 };
 

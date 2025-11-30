@@ -14,11 +14,6 @@
 #include <stdint.h>
 
 
-/// The text string for the 'unknown' category ID
-#ifndef OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT
-#define OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT "UNKNOWN"
-#endif
-
 ///
 namespace Kit {
 ///
@@ -38,8 +33,7 @@ public:
     static constexpr uint8_t NULL_CLASSIFICATION_ID = 0;
 
     /// Null/Invalid Classification ID Text
-    static constexpr const char* NULL_CLASSIFICATION_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT;
-
+    static constexpr const char* NULL_CLASSIFICATION_ID_TEXT = "?";
 public:
     /** This method returns true if specific Classification ID is supported by
         the application

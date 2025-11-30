@@ -15,7 +15,6 @@
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/EntryData.h"
 #include "Kit/Logging/Pkg/Package.h"
-#include "Kit/Logging/Framework/NullPackage.h"
 #include "Kit/Container/RingBufferAllocate.h"  // TODO: Needs to be Kit::Container::RingBufferAllocateMP
 
 /// Define the maximum number of log entries in the FIFO used for unit testing.
@@ -61,10 +60,10 @@ protected:
     /// Internal Log entry FIFO storage
     Kit::Logging::Framework::EntryData_T* m_logFifoStorage;
 
-    /// The Null Package instance (for unknown Package IDs - which cannot occur when using the Kit::Logging::Log interface)
+    /// Null Package instance (for unsupported Package ID requests)
     Kit::Logging::Framework::NullPackage m_nullPkg;
 
-public:
+    public:
     /// The KIT Package instance (is public to allow unit test access)
     Kit::Logging::Pkg::Package m_kitPackage;
 

@@ -42,8 +42,8 @@ public:
                                          uint8_t      messageId,
                                          const char*& dstMessageText ) noexcept override
     {
-        dstSubSystemText = IPackage::NULL_SUBSYS_ID_TEXT;
-        dstMessageText   = IPackage::NULL_MSG_ID_TEXT;
+        dstSubSystemText = nullptr;
+        dstMessageText   = nullptr;
         return false;
     }
 };

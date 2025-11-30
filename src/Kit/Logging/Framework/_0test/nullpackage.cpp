@@ -31,8 +31,8 @@ TEST_CASE( "NullPackage" )
         const char* subSystemText = nullptr;
         const char* messageText   = nullptr;
         REQUIRE( uut.subSystemAndMessageIdsToString( 1, subSystemText, 1, messageText ) == false );
-        REQUIRE( strcmp( subSystemText, IPackage::NULL_SUBSYS_ID_TEXT ) == 0 );
-        REQUIRE( strcmp( messageText, IPackage::NULL_MSG_ID_TEXT ) == 0 );
+        REQUIRE( subSystemText == nullptr );
+        REQUIRE( messageText == nullptr );
     }   
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );

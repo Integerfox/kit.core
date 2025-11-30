@@ -76,7 +76,7 @@ TEST_CASE( "Formatter" )
         bool result = Formatter::toString( logApp_, logEntry, formattedText );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
-        REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-UNKNOWN-UNKNOWN: Test log message2" );
+        REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-?-?: Test log message2" );
 
         logEntry.m_timestamp        = Kit::Time::constructBootTime( 5, 1672531199123 );  // 2022/12/31-23:59:59.123 UTC
         logEntry.m_classificationId = ClassificationId::WARNING;
@@ -88,7 +88,7 @@ TEST_CASE( "Formatter" )
         result = Formatter::toString( logApp_, logEntry, formattedText );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
-        REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-UNKNOWN: Test log message3" );
+        REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-?: Test log message3" );
     }
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );

@@ -46,20 +46,20 @@ public:
     /// Null/Invalid Package ID
     static constexpr uint8_t NULL_PKG_ID = 0;
 
-    /// Null/Invalid Package ID Text
-    static constexpr const char* NULL_PKG_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT;
+    /// Null/Invalid Package ID
+    static constexpr const char* NULL_PKG_ID_TEXT = "?";
 
     /// Null/Invalid SubSystem ID
     static constexpr uint8_t NULL_SUBSYS_ID = 0xFF;
 
-    /// Null/Invalid SubSystem ID Text
-    static constexpr const char* NULL_SUBSYS_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT;
+    /// Null/Invalid SubSystem Text
+    static constexpr const char* NULL_SUBSYS_ID_TEXT = "?";
 
     /// Null/Invalid Message ID
     static constexpr uint8_t NULL_MSG_ID = 0xFF;
-
-    /// Null/Invalid Message ID Text
-    static constexpr const char* NULL_MSG_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT;
+    
+    /// Null/Invalid Message Text
+    static constexpr const char* NULL_MSG_ID_TEXT = "?";
 
 public:
     /// This method returns the Package's ID as a numeric value

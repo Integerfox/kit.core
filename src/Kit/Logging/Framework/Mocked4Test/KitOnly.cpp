@@ -40,15 +40,15 @@ bool KitOnly::isClassificationIdValid( uint8_t classificationId ) noexcept
 
 bool KitOnly::isPackageIdValid( uint8_t packageId ) noexcept
 {
-    // Only supports the KIT Package
-    return packageId == m_kitPackage.PACKAGE_ID;
+    Kit::Logging::Framework::IPackage& foundPkg = getPackage( packageId );
+    return &foundPkg != &m_nullPkg;
 }
 
 const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexcept
 {
     return Kit::Type::betterEnumToString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
         classificationId,
-        OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT );
+        NULL_CLASSIFICATION_ID_TEXT ); 
 }
 
 IPackage& KitOnly::getPackage( uint8_t packageId ) noexcept
