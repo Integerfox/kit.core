@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 212-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -94,13 +94,13 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:ac6bbf23edd86ac74f6a972bc11127057"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current directory being processed.  <br /></td></tr>
 <tr class="separator:ac6bbf23edd86ac74f6a972bc11127057"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a99e48b6c87eef9f1ad6b78de87c6ef" id="r_a2a99e48b6c87eef9f1ad6b78de87c6ef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_kit_1_1_io_1_1_file.html#ac22907a9e9a53bde2918e2d2f3a542da">NameString</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a99e48b6c87eef9f1ad6b78de87c6ef">m_curFsEntry</a></td></tr>
-<tr class="memdesc:a2a99e48b6c87eef9f1ad6b78de87c6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> for the current file/dir entry (include space for the null terminator)  <br /></td></tr>
+<tr class="memdesc:a2a99e48b6c87eef9f1ad6b78de87c6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> for the current file/dir entry (include space for the null terminator)  <br /></td></tr>
 <tr class="separator:a2a99e48b6c87eef9f1ad6b78de87c6ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82641ed10969a212ba3c3a77cf560e70" id="r_a82641ed10969a212ba3c3a77cf560e70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_stack.html">Kit::Container::Stack</a>&lt; <a class="el" href="struct_kit_1_1_io_1_1_file_1_1_dir_walker_1_1_dir_depth___t.html">DirDepth_T</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82641ed10969a212ba3c3a77cf560e70">m_stack</a></td></tr>
 <tr class="memdesc:a82641ed10969a212ba3c3a77cf560e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stack of directory names (so we don't use recursion)  <br /></td></tr>
 <tr class="separator:a82641ed10969a212ba3c3a77cf560e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16fc7487b56e04d3a800fc9e163baff1" id="r_a16fc7487b56e04d3a800fc9e163baff1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_kit_1_1_io_1_1_file_1_1_dir_walker_1_1_dir_depth___t.html">DirDepth_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a16fc7487b56e04d3a800fc9e163baff1">m_stackMemory</a> [<a class="el" href="_dir_walker_8h.html#ab73733b471a3151ab7b716f275d0fb0b">OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH</a>]</td></tr>
-<tr class="memdesc:a16fc7487b56e04d3a800fc9e163baff1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> for the stack.  <br /></td></tr>
+<tr class="memdesc:a16fc7487b56e04d3a800fc9e163baff1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> for the stack.  <br /></td></tr>
 <tr class="separator:a16fc7487b56e04d3a800fc9e163baff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91a86a66c0c2ead1fcd52f90e0baf5e8" id="r_a91a86a66c0c2ead1fcd52f90e0baf5e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_kit_1_1_io_1_1_file.html#ac22907a9e9a53bde2918e2d2f3a542da">NameString</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a91a86a66c0c2ead1fcd52f90e0baf5e8">m_wrkEntryName</a></td></tr>
 <tr class="memdesc:a91a86a66c0c2ead1fcd52f90e0baf5e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary/work variable.  <br /></td></tr>
@@ -211,7 +211,7 @@ Protected Attributes</h2></td></tr>
 <p>This method allows the caller to walk the contents of the 'dirToList' directory (assuming the entry is a directory). </p>
 <p>The default behavior is to list only the current directory. The Caller can override the depth of the traversal. Also, by default only the file name without its path is returned. The caller can optionally have the traverse call only return the name of files (omitting any directory names found) OR names of directories (omitting any file names found). Returns true when successfully and the entire traversal complete; else false is return if their is an error (e.g. 'dirToList' is a file or does not exist) or the 'walker' aborted the traversal.</p>
 <p>NOTE: The is no guaranteed order to the traversal, only that all items per the specified depth will be traversed.</p>
-<p>WARNING: On most platforms, the underlying OS calls dynamically allocate memory. The OS clean-up after itself but there still is the risk of failure do to lack of memory. <a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> failures are handled silently - but will not crash traversal. </p>
+<p>WARNING: On most platforms, the underlying OS calls dynamically allocate memory. The OS clean-up after itself but there still is the risk of failure do to lack of memory. <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> failures are handled silently - but will not crash traversal. </p>
 
 </div>
 </div>
@@ -260,7 +260,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> for the current file/dir entry (include space for the null terminator) </p>
+<p><a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> for the current file/dir entry (include space for the null terminator) </p>
 
 </div>
 </div>
@@ -308,7 +308,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> for the stack. </p>
+<p><a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> for the stack. </p>
 
 </div>
 </div>
@@ -342,7 +342,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 22 2025 21:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

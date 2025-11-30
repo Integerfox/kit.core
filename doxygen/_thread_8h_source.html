@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 212-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -236,7 +236,7 @@ $(function() {
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">            The return code from the method is used by the traverser to continue</span></div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><span class="comment">            the traversal (eCONTINUE), or abort the traversal (eABORT).</span></div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_thread_1_1_i_traverser.html#abab1bf9000c1bcf8dcb06210757dae1f">  189</a></span>        <span class="keyword">virtual</span> <a class="code hl_enumeration" href="_traverser_status_8h.html#adbf3acb7f931223bc52db54394f8ba4b">Kit::Type::TraverserStatus</a> <a class="code hl_function" href="class_kit_1_1_system_1_1_thread_1_1_i_traverser.html#abab1bf9000c1bcf8dcb06210757dae1f">item</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_thread.html">Thread</a>&amp; nextThread ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_thread_1_1_i_traverser.html#abab1bf9000c1bcf8dcb06210757dae1f">  189</a></span>        <span class="keyword">virtual</span> <a class="code hl_enumeration" href="namespace_kit_1_1_type.html#adbf3acb7f931223bc52db54394f8ba4b">Kit::Type::TraverserStatus</a> <a class="code hl_function" href="class_kit_1_1_system_1_1_thread_1_1_i_traverser.html#abab1bf9000c1bcf8dcb06210757dae1f">item</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_thread.html">Thread</a>&amp; nextThread ) <span class="keyword">noexcept</span> = 0;</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    };</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment"></span> </div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">    /** Internal Iterator that allows the Client to traverse the list</span></div>
@@ -388,7 +388,6 @@ $(function() {
 <div class="ttc" id="a_tls_8h_html"><div class="ttname"><a href="_tls_8h.html">Tls.h</a></div></div>
 <div class="ttc" id="a_tls_8h_html_a73ac8a4e2608d6b8b10de2baadc24918"><div class="ttname"><a href="_tls_8h.html#a73ac8a4e2608d6b8b10de2baadc24918">OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES</a></div><div class="ttdeci">#define OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES</div><div class="ttdoc">This constant defines the DESIRED minimum of number of TLS instances/index.</div><div class="ttdef"><b>Definition</b> Tls.h:30</div></div>
 <div class="ttc" id="a_traverser_status_8h_html"><div class="ttname"><a href="_traverser_status_8h.html">TraverserStatus.h</a></div></div>
-<div class="ttc" id="a_traverser_status_8h_html_adbf3acb7f931223bc52db54394f8ba4b"><div class="ttname"><a href="_traverser_status_8h.html#adbf3acb7f931223bc52db54394f8ba4b">Kit::Type::TraverserStatus</a></div><div class="ttdeci">TraverserStatus</div><div class="ttdoc">This class defines a set of status(s) that are used with the traverser design pattern.</div><div class="ttdef"><b>Definition</b> TraverserStatus.h:23</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_list_item_html"><div class="ttname"><a href="class_kit_1_1_container_1_1_list_item.html">Kit::Container::ListItem</a></div><div class="ttdoc">This class is used by the Container classes to implement a various types of linked lists containers.</div><div class="ttdef"><b>Definition</b> ListItem.h:25</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_runnable_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_runnable.html">Kit::System::IRunnable</a></div><div class="ttdoc">This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob...</div><div class="ttdef"><b>Definition</b> IRunnable.h:27</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_signable_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a></div><div class="ttdoc">This abstract class defines the interface by which a client can cause an object that is waiting-on-a-...</div><div class="ttdef"><b>Definition</b> ISignable.h:24</div></div>
@@ -420,11 +419,12 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_system_1_1_thread_html_ae74259f5ecf135728f6d3a84c34211e2"><div class="ttname"><a href="class_kit_1_1_system_1_1_thread.html#ae74259f5ecf135728f6d3a84c34211e2">Kit::System::Thread::KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG</a></div><div class="ttdeci">KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG()</div><div class="ttdoc">Optional: Flag to allow simulated ticks for this thread.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_thread_html_aff59453b3325520279ce7625ce51e141"><div class="ttname"><a href="class_kit_1_1_system_1_1_thread.html#aff59453b3325520279ce7625ce51e141">Kit::System::Thread::removeThreadFromActiveList</a></div><div class="ttdeci">static void removeThreadFromActiveList(Thread &amp;thread) noexcept</div><div class="ttdoc">Helper method to safely remove from the active thread list NOTE: Default implementation is provided i...</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_tls_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_tls.html">Kit::System::Tls</a></div><div class="ttdoc">This concrete interface defines a interface for Thread Local Storage (TLS).</div><div class="ttdef"><b>Definition</b> Tls.h:64</div></div>
+<div class="ttc" id="anamespace_kit_1_1_type_html_adbf3acb7f931223bc52db54394f8ba4b"><div class="ttname"><a href="namespace_kit_1_1_type.html#adbf3acb7f931223bc52db54394f8ba4b">Kit::Type::TraverserStatus</a></div><div class="ttdeci">TraverserStatus</div><div class="ttdoc">This class defines a set of status(s) that are used with the traverser design pattern.</div><div class="ttdef"><b>Definition</b> TraverserStatus.h:23</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 22 2025 21:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

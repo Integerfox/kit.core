@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 212-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -260,7 +260,7 @@ Protected Attributes</h2></td></tr>
 <p>The 'timeOutPeriodInMsec' parameter specifies how long the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> will wait for an event before timing out and processing the software timers. The value of 'timeOutPeriodInMsec' is the resolution of the timing source for the Software Timers, i.e. the event loop will 'wake-up' at least every 'timeOutPeriodInMsec' milliseconds.</p>
 <p>A fatal error is generated if 'timeOutPeriodInMsec' is set to zero.</p>
 <p>When the 'eventFlagsList' parameter is null then the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> will not monitor any event flags.</p>
-<p>The 'watchdog' parameter is optional and can be used to provide watchdog monitoring for this event loop. If used, the application must also enable the Watchdog using the USE_KIT_SYSTEM_WATCHDOG configuration option in its the kit_config.h header files</p>
+<p>The 'watchdog' parameter is optional and can be used to provide watchdog monitoring for this event loop. If used, the application must also enable the <a class="el" href="namespace_kit_1_1_system_1_1_watchdog.html" title="This namespace provides the infrastructure for incorporating a hardware watchdog into an application ...">Watchdog</a> using the USE_KIT_SYSTEM_WATCHDOG configuration option in its the kit_config.h header files</p>
 <p>WARNING: The application CANNOT modify the eventFlagsList after the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> instance is created. </p>
 
 </div>
@@ -808,7 +808,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 22 2025 21:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

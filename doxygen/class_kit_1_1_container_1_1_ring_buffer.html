@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 212-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -121,7 +121,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a871717c2d544a72a74d44985ec55eb7c" id="r_a871717c2d544a72a74d44985ec55eb7c"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a871717c2d544a72a74d44985ec55eb7c">m_bufferMemory</a></td></tr>
-<tr class="memdesc:a871717c2d544a72a74d44985ec55eb7c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> for the Ring buffer.  <br /></td></tr>
+<tr class="memdesc:a871717c2d544a72a74d44985ec55eb7c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> for the Ring buffer.  <br /></td></tr>
 <tr class="separator:a871717c2d544a72a74d44985ec55eb7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_kit_1_1_container_1_1_ring_buffer_base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_class_kit_1_1_container_1_1_ring_buffer_base')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_base.html">Kit::Container::RingBufferBase</a></td></tr>
 <tr class="memitem:abbeba728c6d3a3a48aec9713729d94dc inherit pro_attribs_class_kit_1_1_container_1_1_ring_buffer_base" id="r_abbeba728c6d3a3a48aec9713729d94dc"><td class="memItemLeft" align="right" valign="top">const unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_base.html#abbeba728c6d3a3a48aec9713729d94dc">m_elements</a></td></tr>
@@ -170,7 +170,7 @@ Additional Inherited Members</h2></td></tr>
 class Kit::Container::RingBuffer&lt; ITEM &gt;</div><p>This template class implements a Ring Buffer. </p>
 <p>A Ring Buffer instance IS ISR/Thread safe WHEN using a SINGLE Producer and SINGLE consumer of the buffer. See the <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_base.html" title="This &#39;implementation&#39; class provide the base functionality for a ring buffer.">RingBufferBase</a> class for additional details.</p>
 <p>There is a set of methods that allow the application direct memory access - AS A LINEAR BUFFER - to a subset of the ring buffer's data. At any given time the size of the linear buffer is restricted to the amount of data that can be accessed without 'wrapping' the ring buffer memory space. The intended use case for these methods is for bulk copy operations (e.g populating a FIFO or a DMA buffer). <a class="el" href="#a9a70f0db2816455a7ae20cb39269efb2" title="This method returns a pointer to the next item to be removed.">peekNextRemoveItems()</a> <a class="el" href="#a7a50c280cca8d9768293c5572efe2fa8" title="This method &#39;removes&#39; N elements - that were removed using the pointer returned from peekNextRemoveIt...">removeElements()</a> <a class="el" href="#a1e11b1cbd7fdd7ce120dbac9dc99d7cc" title="This method returns a pointer to the next item to be added.">peekNextAddItems()</a> <a class="el" href="#a7d519398b6660f274b2264073265d9d9" title="This method &#39;adds&#39; N elements - that were populated using the pointer returned from peekNextAddItems ...">addElements()</a></p>
-<p>Template Args: ITEM:= Type of the data stored in the Ring Buffer </p>
+<p>Template Args: ITEM:= <a class="el" href="namespace_kit_1_1_type.html" title="The Type namespace provides various types that are not unique to a single namespace.">Type</a> of the data stored in the Ring Buffer </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a128d80f06e0e7489ebc6f4f30b516d33" name="a128d80f06e0e7489ebc6f4f30b516d33"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a128d80f06e0e7489ebc6f4f30b516d33">&#9670;&#160;</a></span>RingBuffer()</h2>
@@ -475,7 +475,7 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="namespace_kit_1_1_memory.html" title="The &#39;Memory&#39; namespace provides a collection interfaces that allow a application to manually manage &quot;...">Memory</a> for the Ring buffer. </p>
+<p><a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> for the Ring buffer. </p>
 
 </div>
 </div>
@@ -485,7 +485,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 22 2025 21:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

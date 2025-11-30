@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-22 21:51:49</td>
+            <td class="headerValue">2025-11-30 19:17:08</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryMed">56.2&nbsp;%</td>
+            <td class="headerCovTableEntryMed">53.1&nbsp;%</td>
             <td class="headerCovTableEntry">32</td>
-            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">17</td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -87,15 +87,15 @@
 <span id="L25"><span class="lineNum">      25</span>                 :             : namespace Posix {</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : </span>
-<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC tlaBgGNC">          24 : void Fdio::close( int&amp; fd ) noexcept</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC tlaBgGNC">          23 : void Fdio::close( int&amp; fd ) noexcept</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
-<span id="L30"><span class="lineNum">      30</span>         [<span class="tlaGBC" title="Branch 0 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          24 :     if ( fd != INVALID_FD )</span></span>
+<span id="L30"><span class="lineNum">      30</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 9 times"> + </span>]:<span class="tlaGNC">          23 :     if ( fd != INVALID_FD )</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     {</span>
-<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          13 :         ::shutdown( fd, SHUT_RDWR );</span></span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          13 :         ::close( fd );</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          13 :         fd = INVALID_FD;</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          14 :         ::shutdown( fd, SHUT_RDWR );</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          14 :         ::close( fd );</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          14 :         fd = INVALID_FD;</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     }</span>
-<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          24 : }</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          23 : }</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : </span>
 <span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">          16 : bool Fdio::write( int fd, bool&amp; eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T&amp; bytesWritten ) noexcept</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             : {</span>
@@ -143,12 +143,12 @@
 <span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaUNC">           0 :     return fd != INVALID_FD;</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             : }</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             : </span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC tlaBgGNC">          20 : bool Fdio::read( int fd, bool&amp; eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead ) noexcept</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC tlaBgGNC">          19 : bool Fdio::read( int fd, bool&amp; eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead ) noexcept</span></span>
 <span id="L85"><span class="lineNum">      85</span>                 :             : {</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             :     KIT_SYSTEM_ASSERT( buffer != nullptr );</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             : </span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :     // Throw an error if the socket had already been closed</span>
-<span id="L89"><span class="lineNum">      89</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">          20 :     if ( fd == INVALID_FD )</span></span>
+<span id="L89"><span class="lineNum">      89</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">          19 :     if ( fd == INVALID_FD )</span></span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     {</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :         return false;</span>
 <span id="L92"><span class="lineNum">      92</span>                 :             :     }</span>

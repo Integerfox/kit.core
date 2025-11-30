@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-22 21:51:49</td>
+            <td class="headerValue">2025-11-30 19:17:08</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">58.1&nbsp;%</td>
@@ -109,7 +109,7 @@
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : public:</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     /// Removes the first item in the list.  Returns nullptr if the list is empty.</span>
-<span id="L50"><span class="lineNum">      50</span>   [<span class="tlaGBC" title="Branch 0 was taken 3651 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 21102 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 983 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3651 times"> + </span> :<span class="tlaGNC">       34059 :     ITEM* get() noexcept { return static_cast&lt;ITEM*&gt;(DListBase::getFirst()); }</span></span>
+<span id="L50"><span class="lineNum">      50</span>   [<span class="tlaGBC" title="Branch 0 was taken 3642 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 21128 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 992 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3642 times"> + </span> :<span class="tlaGNC">       34076 :     ITEM* get() noexcept { return static_cast&lt;ITEM*&gt;(DListBase::getFirst()); }</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaUNC" title="Branch 8 was not taken"> - </span> 
 <span class="lineNum">        </span>             <span class="tlaGBC" title="Branch 9 was taken 2 times"> + </span>]
 <span id="L51"><span class="lineNum">      51</span>                 :             : </span>
@@ -175,7 +175,7 @@
 <span id="L101"><span class="lineNum">     101</span>                 :             :     /** Insert the &quot;item&quot; ITEM into the list behind the &quot;after&quot; ITEM element.</span>
 <span id="L102"><span class="lineNum">     102</span>                 :             :         If 'after' is nullptr, then 'item' is added to the head of the list.</span>
 <span id="L103"><span class="lineNum">     103</span>                 :             :      */</span>
-<span id="L104"><span class="lineNum">     104</span>                 :<span class="tlaGNC">         292 :     void insertAfter( ITEM&amp; after, ITEM&amp; item ) noexcept { DListBase::insertAfter( after, item ); }</span></span>
+<span id="L104"><span class="lineNum">     104</span>                 :<span class="tlaGNC">         285 :     void insertAfter( ITEM&amp; after, ITEM&amp; item ) noexcept { DListBase::insertAfter( after, item ); }</span></span>
 <span id="L105"><span class="lineNum">     105</span>                 :             : </span>
 <span id="L106"><span class="lineNum">     106</span>                 :             :     /** Insert the &quot;item&quot; ITEM into the list ahead of the &quot;before&quot; ITEM element.</span>
 <span id="L107"><span class="lineNum">     107</span>                 :             :         If 'before' is nullptr, then 'item' is added to the tail of the list.</span>
@@ -183,7 +183,7 @@
 <span id="L109"><span class="lineNum">     109</span>                 :             :         Note: This insert operation is more expensive than insertAfter() because</span>
 <span id="L110"><span class="lineNum">     110</span>                 :             :         a traversal of the list is required to find the 'before' item</span>
 <span id="L111"><span class="lineNum">     111</span>                 :             :      */</span>
-<span id="L112"><span class="lineNum">     112</span>                 :<span class="tlaGNC">        4310 :     void insertBefore( ITEM&amp; before, ITEM&amp; item ) noexcept { DListBase::insertBefore( before, item ); }</span></span>
+<span id="L112"><span class="lineNum">     112</span>                 :<span class="tlaGNC">        4317 :     void insertBefore( ITEM&amp; before, ITEM&amp; item ) noexcept { DListBase::insertBefore( before, item ); }</span></span>
 <span id="L113"><span class="lineNum">     113</span>                 :             : </span>
 <span id="L114"><span class="lineNum">     114</span>                 :             :     /// Returns true if the specified item is already in the list, else false.</span>
 <span id="L115"><span class="lineNum">     115</span>                 :<span class="tlaGNC">        4839 :     bool find( const ITEM&amp; item ) const noexcept { return DListBase::find( item ); }</span></span>
@@ -191,8 +191,8 @@
 <span id="L117"><span class="lineNum">     117</span>                 :             :     /** Return a pointer to the first item in the list. The returned item</span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :         remains in the list.  Returns nullptr if the list is empty.</span>
 <span id="L119"><span class="lineNum">     119</span>                 :             :      */</span>
-<span id="L120"><span class="lineNum">     120</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 4619 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 127 times"> + </span> :<span class="tlaGNC">       32162 :     ITEM* first() const noexcept { return static_cast&lt;ITEM*&gt;(DListBase::first()); }</span></span>
-<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 3431 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 19325 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 4541 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 119 times"> + </span>]
+<span id="L120"><span class="lineNum">     120</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 4619 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 127 times"> + </span> :<span class="tlaGNC">       32155 :     ITEM* first() const noexcept { return static_cast&lt;ITEM*&gt;(DListBase::first()); }</span></span>
+<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 3437 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 19312 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 4541 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 119 times"> + </span>]
 <span id="L121"><span class="lineNum">     121</span>                 :             : </span>
 <span id="L122"><span class="lineNum">     122</span>                 :             :     /** Return a pointer to the last item in the list. The returned item remains</span>
 <span id="L123"><span class="lineNum">     123</span>                 :             :         in the list.  Returns nullptr if the list is empty.</span>
@@ -202,7 +202,7 @@
 <span id="L127"><span class="lineNum">     127</span>                 :             :     /** Return a pointer to the item after the &quot;item&quot;. Both items remain in</span>
 <span id="L128"><span class="lineNum">     128</span>                 :             :         the list.  Returns nullptr when the end-of-list is reached.</span>
 <span id="L129"><span class="lineNum">     129</span>                 :             :      */</span>
-<span id="L130"><span class="lineNum">     130</span>   [<span class="tlaGBC" title="Branch 0 was taken 50 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 6806 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 21 times"> + </span>]:<span class="tlaGNC">        6923 :     ITEM* next( const ITEM&amp; item ) const noexcept { return static_cast&lt;ITEM*&gt;(DListBase::next( item )); }</span></span>
+<span id="L130"><span class="lineNum">     130</span>   [<span class="tlaGBC" title="Branch 0 was taken 50 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 6804 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 21 times"> + </span>]:<span class="tlaGNC">        6921 :     ITEM* next( const ITEM&amp; item ) const noexcept { return static_cast&lt;ITEM*&gt;(DListBase::next( item )); }</span></span>
 <span id="L131"><span class="lineNum">     131</span>                 :             : </span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :     /** Return a pointer to the item before the &quot;item&quot;. Both items remain in</span>
 <span id="L133"><span class="lineNum">     133</span>                 :             :         the list.  Returns nullptr when the front-of-list is reached.</span>

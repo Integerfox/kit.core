@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-22 21:51:49</td>
+            <td class="headerValue">2025-11-30 19:17:08</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -102,12 +102,12 @@
 <span id="L40"><span class="lineNum">      40</span>                 :             :     bool run = true;</span>
 <span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">           4 :     while ( run )</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     {</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         326 :         run = waitAndProcessEvents( isPendingMessage() );</span></span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">         326 :         if ( run )</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         328 :         run = waitAndProcessEvents( isPendingMessage() );</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">         328 :         if ( run )</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :         {</span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">         322 :             bool atLeastOne = executeScheduler();</span></span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">         322 :             processMessages();</span></span>
-<span id="L48"><span class="lineNum">      48</span>         [<span class="tlaGBC" title="Branch 0 was taken 268 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 54 times"> + </span>]:<span class="tlaGNC">         322 :             if ( m_idleFunc )</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">         324 :             bool atLeastOne = executeScheduler();</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">         324 :             processMessages();</span></span>
+<span id="L48"><span class="lineNum">      48</span>         [<span class="tlaGBC" title="Branch 0 was taken 270 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 54 times"> + </span>]:<span class="tlaGNC">         324 :             if ( m_idleFunc )</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :             {</span>
 <span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">          54 :                 ( m_idleFunc )( (m_nowFunc)(), atLeastOne );</span></span>
 <span id="L51"><span class="lineNum">      51</span>                 :             :             }</span>
