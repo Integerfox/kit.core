@@ -12,7 +12,6 @@
 
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/EntryData.h"
-#include "Kit/Logging/Framework/NullPackage.h"
 #include "Kit/Container/RingBuffer.h"  // TODO: Needs to be Kit::Container::RingBufferMP
 #include "Kit/Logging/Framework/_0test/_3pkgs/PkgZ/Logging/Pkg/Package.h"
 #include "Kit/Logging/Framework/_0test/_3pkgs/Foo/Logging/Pkg/Package.h"
@@ -44,13 +43,10 @@ public:
     bool isClassificationIdValid( uint8_t classificationId ) noexcept override;
 
     /// See Kit::Logging::Framework::IApplication
-    bool isPackageIdValid( uint8_t packageId ) noexcept override;
-
-    /// See Kit::Logging::Framework::IApplication
     const char* classificationIdToString( uint8_t classificationId ) noexcept override;
 
     /// See Kit::Logging::Framework::IApplication
-    Kit::Logging::Framework::IPackage& getPackage( uint8_t packageId ) noexcept override;
+    Kit::Logging::Framework::IPackage* getPackage( uint8_t packageId ) noexcept override;
 
 protected:
     /// Internal Log entry FIFO storage
@@ -65,9 +61,6 @@ protected:
 
     /// The PKGZ Package instance
     PkgZ::Logging::Pkg::Package m_pkgzPackage;
-
-    /// The Null Package instance (for unknown Package IDs)
-    Kit::Logging::Framework::NullPackage m_nullPackage;
 };
 
 }  // end namespaces

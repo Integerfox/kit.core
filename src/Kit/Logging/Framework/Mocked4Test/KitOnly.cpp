@@ -38,12 +38,6 @@ bool KitOnly::isClassificationIdValid( uint8_t classificationId ) noexcept
     return Kit::Logging::Pkg::ClassificationId::_from_integral_nothrow( classificationId );
 }
 
-bool KitOnly::isPackageIdValid( uint8_t packageId ) noexcept
-{
-    Kit::Logging::Framework::IPackage& foundPkg = getPackage( packageId );
-    return &foundPkg != &m_nullPkg;
-}
-
 const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexcept
 {
     return Kit::Type::betterEnumToString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
@@ -51,10 +45,14 @@ const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexce
         NULL_CLASSIFICATION_ID_TEXT ); 
 }
 
-IPackage& KitOnly::getPackage( uint8_t packageId ) noexcept
+IPackage* KitOnly::getPackage( uint8_t packageId ) noexcept
 {
-    // Only supports the KIT Package (note: casting is required to get around "Operands to ‘?:’ have different types" compiler error -->NOT because the abstract types are different)
-    return packageId == m_kitPackage.PACKAGE_ID ? static_cast<IPackage&>( m_kitPackage ) : static_cast<IPackage&>( m_nullPkg );
+    // Only supports the KIT Package
+    if ( packageId == m_kitPackage.PACKAGE_ID )
+    {
+        return &m_kitPackage;
+    }
+    return nullptr;
 }
 
 ////////////////////////////////////////////////

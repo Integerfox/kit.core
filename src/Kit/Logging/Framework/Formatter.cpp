@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Formatter.h"
+#include "Kit/Logging/Framework/IPackage.h"
 #include "Kit/Time/BootTime.h"
 #include "Kit/Time/gmtime.h"
 #include <inttypes.h>
@@ -64,22 +65,28 @@ bool Formatter::toString( IApplication&                               applicatio
 
     // Append the identifiers and the info text to the log entry
     const char* classificationText = application.classificationIdToString( srcEntryToFormat.m_classificationId );
-    IPackage&   pkg                = application.getPackage( srcEntryToFormat.m_packageId );
-    const char* packageText        = pkg.packageIdString();
-    const char* subSystemText;
-    const char* messageIdText;
-    if ( pkg.subSystemAndMessageIdsToString( srcEntryToFormat.m_subSystemId,
-                                             subSystemText,
-                                             srcEntryToFormat.m_messageId,
-                                             messageIdText ) == false )
+    const char* packageText        = IPackage::NULL_PKG_ID_TEXT;
+    const char* subSystemText      = IPackage::NULL_SUBSYS_ID_TEXT;
+    const char* messageIdText      = IPackage::NULL_MSG_ID_TEXT;
+    IPackage*   pkgPtr             = application.getPackage( srcEntryToFormat.m_packageId );
+    if ( pkgPtr != nullptr )
     {
-        if ( subSystemText == nullptr )
+        packageText   = pkgPtr->packageIdString();
+        subSystemText = nullptr;
+        messageIdText = nullptr;
+        if ( pkgPtr->subSystemAndMessageIdsToString( srcEntryToFormat.m_subSystemId,
+                                                     subSystemText,
+                                                     srcEntryToFormat.m_messageId,
+                                                     messageIdText ) == false )
         {
-            subSystemText = IPackage::NULL_SUBSYS_ID_TEXT;
-        }
-        if ( messageIdText == nullptr )
-        {
-            messageIdText = IPackage::NULL_MSG_ID_TEXT;
+            if ( subSystemText == nullptr )
+            {
+                subSystemText = IPackage::NULL_SUBSYS_ID_TEXT;
+            }
+            if ( messageIdText == nullptr )
+            {
+                messageIdText = IPackage::NULL_MSG_ID_TEXT;
+            }
         }
     }
     dstStringBuf.formatAppend( "%s-%s-%s-%s: %s",

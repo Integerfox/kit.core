@@ -159,7 +159,8 @@ LogResult_T vlogf( uint8_t     classificationId,
     }
 
     // Validate packageId
-    if ( app_->isPackageIdValid( packageId ) == false )
+    IPackage* pkgPtr = app_->getPackage( packageId );
+    if ( pkgPtr == nullptr )
     {
         errMsgId = Pkg::LoggingMsgId::UNKNOWN_PACKAGE_ID;
     }
@@ -170,7 +171,7 @@ LogResult_T vlogf( uint8_t     classificationId,
         // Validate Remaining IDs
         const char* dstSubSystemText = nullptr;
         const char* dstMessageText   = nullptr;
-        if ( app_->getPackage( packageId ).subSystemAndMessageIdsToString( subSystemId, dstSubSystemText, messageId, dstMessageText ) == false )
+        if ( pkgPtr->subSystemAndMessageIdsToString( subSystemId, dstSubSystemText, messageId, dstMessageText ) == false )
         {
             errMsgId = dstSubSystemText == nullptr ? Pkg::LoggingMsgId::UNKNOWN_SUBSYSTEM_ID : Pkg::LoggingMsgId::UNKNOWN_MESSAGE_ID;
         }

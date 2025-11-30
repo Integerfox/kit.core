@@ -10,7 +10,6 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Logging/Framework/NullPackage.h"
 #include "kit_config.h"
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/EntryData.h"
@@ -48,22 +47,16 @@ public:
     bool isClassificationIdValid( uint8_t classificationId ) noexcept override;
 
     /// See Kit::Logging::Framework::IApplication
-    bool isPackageIdValid( uint8_t packageId ) noexcept override;
-
-    /// See Kit::Logging::Framework::IApplication
     const char* classificationIdToString( uint8_t classificationId ) noexcept override;
 
     /// See Kit::Logging::Framework::IApplication
-    IPackage& getPackage( uint8_t packageId ) noexcept override;
+    IPackage* getPackage( uint8_t packageId ) noexcept override;
 
 protected:
     /// Internal Log entry FIFO storage
     Kit::Logging::Framework::EntryData_T* m_logFifoStorage;
 
-    /// Null Package instance (for unsupported Package ID requests)
-    Kit::Logging::Framework::NullPackage m_nullPkg;
-
-    public:
+public:
     /// The KIT Package instance (is public to allow unit test access)
     Kit::Logging::Pkg::Package m_kitPackage;
 

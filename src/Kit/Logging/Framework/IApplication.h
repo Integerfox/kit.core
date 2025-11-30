@@ -40,11 +40,6 @@ public:
      */
     virtual bool isClassificationIdValid( uint8_t classificationId ) noexcept = 0;
 
-    /** This method returns true if the specific Package ID is supported by
-        the application
-     */
-    virtual bool isPackageIdValid( uint8_t packageId ) noexcept = 0;
-
 public:
     /** This method is used to convert a numeric Classification ID into a text
         string.  The returned string must be a null-terminated string and astring
@@ -56,9 +51,9 @@ public:
     virtual const char* classificationIdToString( uint8_t classificationId ) noexcept = 0;
 
     /** This method return's the IPackage instance as for the specified 'packageId'.
-        If the packageId is not recognized, then the NullPackage instance is returned
+        If the packageId is not recognized, then a nullptr is returned.
      */
-    virtual IPackage& getPackage( uint8_t packageId ) noexcept = 0;
+    virtual IPackage* getPackage( uint8_t packageId ) noexcept = 0;
 
 public:
     /// Virtual destructor

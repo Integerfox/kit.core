@@ -31,12 +31,6 @@ bool Foo::isClassificationIdValid( uint8_t classificationId ) noexcept
     return ::Foo::Logging::Pkg::ClassificationId::_from_integral_nothrow( classificationId );
 }
 
-bool Foo::isPackageIdValid( uint8_t packageId ) noexcept
-{
-    Kit::Logging::Framework::IPackage& foundPkg = getPackage( packageId );
-    return &foundPkg != &m_nullPackage;
-}
-
 const char* Foo::classificationIdToString( uint8_t classificationId ) noexcept
 {
     return Kit::Type::betterEnumToString<::Foo::Logging::Pkg::ClassificationId, uint8_t>(
@@ -44,19 +38,19 @@ const char* Foo::classificationIdToString( uint8_t classificationId ) noexcept
         NULL_CLASSIFICATION_ID_TEXT );
 }
 
-Kit::Logging::Framework::IPackage& Foo::getPackage( uint8_t packageId ) noexcept
+Kit::Logging::Framework::IPackage* Foo::getPackage( uint8_t packageId ) noexcept
 {
     // Brute force lookup since only three packages are supported (and its a unit test)
     switch ( packageId )
     {
     case Pkg::Package::PACKAGE_ID:
-        return m_fooPackage;
+        return &m_fooPackage;
     case Kit::Logging::Pkg::Package::PACKAGE_ID:
-        return m_kitPackage;
+        return &m_kitPackage;
     case PkgZ::Logging::Pkg::Package::PACKAGE_ID:
-        return m_pkgzPackage;
+        return &m_pkgzPackage;
     default:
-        return m_nullPackage;
+        return nullptr;
     }
 }
 
