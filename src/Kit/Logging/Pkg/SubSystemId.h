@@ -30,7 +30,7 @@ namespace Pkg {
 
     @param SubSystemId       Enum
 
-    @param LOGGING           Kit Logging sub-system
+    @param LOGGING           Kit Logging sub-system.  Note: Only the Kit::Logging uses this SubSystem ID, i.e. there is no `logfLogging` function in Log.h
     @param SYSTEM            Kit OS Abstraction Layer and System services.
     @param DRIVER            Kit Drivers, i.e. the Kit::Driver namespace
  */

@@ -10,3 +10,9 @@ approach to logging and its design.
 
 See The Kit::Logging::Pkg namespace for details of the Kit namespace
 specific log identifiers and methods.
+
+## Class Diagram
+
+![Kit Logging Class Diagram](class-diagram.png)
+
+Here is a simplified class diagram for the Logging framework
