@@ -9,10 +9,9 @@
 /** @file */
 
 #include "Package.h"
+#include "MsgId.h"
 #include "SubSystemId.h"
-#include "Kit/Logging/Pkg/SystemMsgId.h"
-#include "Kit/Logging/Pkg/DriverMsgId.h"
-#include "Kit/Logging/Framework/IPackage.h"
+
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -20,16 +19,16 @@ namespace Logging {
 namespace Pkg {
 
 
-// Helper method to convert BETTER ENUM to a string
-template <typename ENUM>
-static const char* enumToString( uint8_t numericValue, const char* unknownText ) noexcept
+// Helper method
+template <typename MSG_ENUM>
+static bool isValidMessage( uint8_t messageId, const char*& dstMessageText ) noexcept
 {
-    auto maybe = ENUM::_from_integral_nothrow( numericValue );
-    if ( !maybe )
+    auto maybe = MSG_ENUM::_from_integral_nothrow( messageId );
+    if ( maybe )
     {
-        return unknownText;
+        dstMessageText = maybe->_to_string();
     }
-    return maybe->_to_string();
+    return maybe;
 }
 
 /////////////
@@ -43,27 +42,40 @@ const char* Package::packageIdString() noexcept
     return PACKAGE_ID_TEXT;
 }
 
-const char* Package::subSystemIdToString( uint8_t subSystemId ) noexcept
-{
-    return Kit::Type::betterEnumToString<SubSystemId, uint8_t>( subSystemId, OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT );
-}
 
-const char* Package::messageIdToString( uint8_t subSystemId, uint8_t messageId ) noexcept
+bool Package::subSystemAndMessageIdsToString( uint8_t      subSystemId,
+                                              const char*& dstSubSystemText,
+                                              uint8_t      messageId,
+                                              const char*& dstMessageText ) noexcept
 {
+    dstSubSystemText = nullptr;
+    dstMessageText   = nullptr;
+    bool found       = false;
     switch ( subSystemId )
     {
     case SubSystemId::SYSTEM:
-        return Kit::Type::betterEnumToString<SystemMsgId, uint8_t>( messageId, OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT );
+        dstSubSystemText = ( +SubSystemId::SYSTEM )._to_string();
+        found            = isValidMessage<SystemMsgId>( messageId, dstMessageText );
+        break;
 
     case SubSystemId::DRIVER:
-        return Kit::Type::betterEnumToString<DriverMsgId, uint8_t>( messageId, OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT );
+        dstSubSystemText = ( +SubSystemId::DRIVER )._to_string();
+        found            = isValidMessage<DriverMsgId>( messageId, dstMessageText );
+        break;
+
+    case SubSystemId::LOGGING:
+        dstSubSystemText = ( +SubSystemId::LOGGING )._to_string();
+        found            = isValidMessage<LoggingMsgId>( messageId, dstMessageText );
+        break;
 
     default:
-        return OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT;
+        break;
     }
+
+    return found;
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

@@ -10,13 +10,12 @@
 
 #include "Kit/Logging/Framework/Logger.h"
 #include "Kit/Logging/Framework/EntryData.h"
-#include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/IPackage.h"
 #include "Kit/Logging/Framework/Log.h"
-#include "Kit/Logging/Pkg/Log.h"
 #include "Kit/Logging/Framework/Mocked4Test/KitOnly.h"
 #include "Kit/Logging/Framework/types.h"
-#include "Kit/System/Trace.h"
+#include "Kit/Logging/Pkg/MsgId.h"
+#include "Kit/Logging/Pkg/SubSystemId.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "Kit/Time/BootTime.h"
 #include "Kit/System/Api.h"
@@ -36,8 +35,8 @@ using namespace Kit::Logging::Pkg;
 
 #define OVERFLOW_CLASSIFICATION_ID Kit::Logging::Pkg::ClassificationId::WARNING
 #define OVERFLOW_PACKAGE_ID        MY_PACKAGE_ID
-#define OVERFLOW_SUBSYSTEM_ID      Kit::Logging::Pkg::SubSystemId::SYSTEM
-#define OVERFLOW_MESSAGE_ID        Kit::Logging::Pkg::SystemMsgId::LOGGING
+#define OVERFLOW_SUBSYSTEM_ID      Kit::Logging::Pkg::SubSystemId::LOGGING
+#define OVERFLOW_MESSAGE_ID        Kit::Logging::Pkg::LoggingMsgId::OVERFLOW
 
 
 // Create a Log-Application instance for the tests. Also provide whitebox testing support
@@ -94,16 +93,26 @@ TEST_CASE( "Logger" )
         REQUIRE( logApp_.getLogQueueCount() == 0 );
 
         unsigned    arg    = 42;
-        LogResult_T result = logf( MY_EVENT, MY_PACKAGE_ID, 0, 0, "My message = %u", arg );
-
+        LogResult_T result = logf( MY_EVENT, MY_PACKAGE_ID, Kit::Logging::Pkg::SubSystemId::DRIVER, Kit::Logging::Pkg::DriverMsgId::START_ERR, "My message = %u", ++arg );
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( logApp_.getLogQueueCount() == 1u );
         REQUIRE( logApp_.m_logFifo.remove( entry ) );
         REQUIRE( entry.m_classificationId == MY_EVENT );
         REQUIRE( entry.m_packageId == MY_PACKAGE_ID );
-        REQUIRE( entry.m_subSystemId == 0u );
-        REQUIRE( entry.m_messageId == 0u );
-        REQUIRE( strcmp( entry.m_infoText, "My message = 42" ) == 0 );
+        REQUIRE( entry.m_subSystemId == Kit::Logging::Pkg::SubSystemId::DRIVER );
+        REQUIRE( entry.m_messageId == Kit::Logging::Pkg::DriverMsgId::START_ERR );
+        REQUIRE( strcmp( entry.m_infoText, "My message = 43" ) == 0 );
+        REQUIRE( entry.m_timestamp >= now );
+
+        result = logf( MY_EVENT, MY_PACKAGE_ID, Kit::Logging::Pkg::SubSystemId::SYSTEM, Kit::Logging::Pkg::SystemMsgId::SHUTDOWN, "My message = %u", ++arg );
+        REQUIRE( result == LogResult_T::ADDED );
+        REQUIRE( logApp_.getLogQueueCount() == 1u );
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_classificationId == MY_EVENT );
+        REQUIRE( entry.m_packageId == MY_PACKAGE_ID );
+        REQUIRE( entry.m_subSystemId == Kit::Logging::Pkg::SubSystemId::SYSTEM );
+        REQUIRE( entry.m_messageId == Kit::Logging::Pkg::SystemMsgId::SHUTDOWN );
+        REQUIRE( strcmp( entry.m_infoText, "My message = 44" ) == 0 );
         REQUIRE( entry.m_timestamp >= now );
     }
 
@@ -197,31 +206,50 @@ TEST_CASE( "Logger" )
     {
         REQUIRE( logApp_.getLogQueueCount() == 0 );
 
-        unsigned    arg    = 420;
-        LogResult_T result = logf( MY_EVENT, 200, 0, 0, "My message = %u", arg );
-        REQUIRE( result == LogResult_T::FILTERED );
-        REQUIRE( logApp_.getLogQueueCount() == 0 );
-        REQUIRE( logApp_.m_logFifo.remove( entry ) == false );
+        unsigned    arg    = 42;
+        LogResult_T result = logf( MY_EVENT, MY_PACKAGE_ID, IPackage::NULL_SUBSYS_ID, 0, "My message = %u", arg );
+        REQUIRE( result == LogResult_T::ADDED );
+        REQUIRE( logApp_.getLogQueueCount() == 1u );
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_classificationId == Kit::Logging::Pkg::ClassificationId::WARNING );
+        REQUIRE( entry.m_packageId == Kit::Logging::Pkg::Package::PACKAGE_ID );
+        REQUIRE( entry.m_subSystemId == Kit::Logging::Pkg::SubSystemId::LOGGING );
+        REQUIRE( entry.m_messageId == Kit::Logging::Pkg::LoggingMsgId::UNKNOWN_SUBSYSTEM_ID );
+        REQUIRE( strcmp( entry.m_infoText, "ClassificationID=3, PackageID=1, SubSystemID=255, MessageID=0." ) == 0 );
+        REQUIRE( entry.m_timestamp >= now );
 
-        result = logf( 210, MY_PACKAGE_ID, 0, 0, "My message = %u", ++arg );
-        REQUIRE( result == LogResult_T::FILTERED );
-        REQUIRE( logApp_.getLogQueueCount() == 0 );
-        REQUIRE( logApp_.m_logFifo.remove( entry ) == false );
+        result = logf( MY_EVENT, MY_PACKAGE_ID, Kit::Logging::Pkg::SubSystemId::DRIVER, IPackage::NULL_MSG_ID, "My message = %u", ++arg );
+        REQUIRE( result == LogResult_T::ADDED );
+        REQUIRE( logApp_.getLogQueueCount() == 1u );
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_classificationId == Kit::Logging::Pkg::ClassificationId::WARNING );
+        REQUIRE( entry.m_packageId == Kit::Logging::Pkg::Package::PACKAGE_ID );
+        REQUIRE( entry.m_subSystemId == Kit::Logging::Pkg::SubSystemId::LOGGING );
+        REQUIRE( entry.m_messageId == Kit::Logging::Pkg::LoggingMsgId::UNKNOWN_MESSAGE_ID );
+        REQUIRE( strcmp( entry.m_infoText, "ClassificationID=3, PackageID=1, SubSystemID=2, MessageID=255." ) == 0 );
+        REQUIRE( entry.m_timestamp >= now );
 
-        result = logf( 0, MY_PACKAGE_ID, 0, 0, "My message = %u", ++arg );
-        REQUIRE( result == LogResult_T::FILTERED );
-        REQUIRE( logApp_.getLogQueueCount() == 0 );
-        REQUIRE( logApp_.m_logFifo.remove( entry ) == false );
+        result = logf( 100, MY_PACKAGE_ID, Kit::Logging::Pkg::SubSystemId::DRIVER, Kit::Logging::Pkg::DriverMsgId::START_ERR, "My message = %u", ++arg );
+        REQUIRE( result == LogResult_T::ADDED );
+        REQUIRE( logApp_.getLogQueueCount() == 1u );
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_classificationId == Kit::Logging::Pkg::ClassificationId::WARNING );
+        REQUIRE( entry.m_packageId == Kit::Logging::Pkg::Package::PACKAGE_ID );
+        REQUIRE( entry.m_subSystemId == Kit::Logging::Pkg::SubSystemId::LOGGING );
+        REQUIRE( entry.m_messageId == Kit::Logging::Pkg::LoggingMsgId::UNKNOWN_CLASSIFICATION_ID );
+        REQUIRE( strcmp( entry.m_infoText, "ClassificationID=100, PackageID=1, SubSystemID=2, MessageID=0." ) == 0 );
+        REQUIRE( entry.m_timestamp >= now );
 
-        result = logf( MY_EVENT, 100, 0, 0, "My message = %u", ++arg );
-        REQUIRE( result == LogResult_T::FILTERED );
-        REQUIRE( logApp_.getLogQueueCount() == 0 );
-        REQUIRE( logApp_.m_logFifo.remove( entry ) == false );
-
-        result = logf( MY_EVENT, 0, 0, 0, "My message = %u", ++arg );
-        REQUIRE( result == LogResult_T::FILTERED );
-        REQUIRE( logApp_.getLogQueueCount() == 0 );
-        REQUIRE( logApp_.m_logFifo.remove( entry ) == false );
+        result = logf( MY_EVENT, 101, Kit::Logging::Pkg::SubSystemId::DRIVER, Kit::Logging::Pkg::DriverMsgId::START_ERR, "My message = %u", ++arg );
+        REQUIRE( result == LogResult_T::ADDED );
+        REQUIRE( logApp_.getLogQueueCount() == 1u );
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_classificationId == Kit::Logging::Pkg::ClassificationId::WARNING );
+        REQUIRE( entry.m_packageId == Kit::Logging::Pkg::Package::PACKAGE_ID );
+        REQUIRE( entry.m_subSystemId == Kit::Logging::Pkg::SubSystemId::LOGGING );
+        REQUIRE( entry.m_messageId == Kit::Logging::Pkg::LoggingMsgId::UNKNOWN_PACKAGE_ID );
+        REQUIRE( strcmp( entry.m_infoText, "ClassificationID=3, PackageID=101, SubSystemID=2, MessageID=0." ) == 0 );
+        REQUIRE( entry.m_timestamp >= now );
     }
 
     SECTION( "overflow" )
@@ -308,7 +336,7 @@ TEST_CASE( "Logger" )
         {
             REQUIRE( logApp_.m_logFifo.remove( entry ) );
         }
-        REQUIRE( logApp_.getLogQueueCount() == 2 );     // Still two entries left
+        REQUIRE( logApp_.getLogQueueCount() == 2 );  // Still two entries left
 
         // Now attempt more entries - it should fail
         auto oldNow = now;
@@ -321,7 +349,7 @@ TEST_CASE( "Logger" )
 
         // Remove one more entry to reach the hysteresis limit
         REQUIRE( logApp_.m_logFifo.remove( entry ) );
-        REQUIRE( logApp_.getLogQueueCount() == 1 );     // Still one entries left
+        REQUIRE( logApp_.getLogQueueCount() == 1 );  // Still one entries left
 
         // Now add another entry - should succeed and clear overflow state
         now = Kit::Time::getBootTime();
@@ -331,7 +359,7 @@ TEST_CASE( "Logger" )
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( logApp_.isLogQueOverflowed() == false );
         REQUIRE( logApp_.getOverflowedLogEntryCount() == 0u );
-        REQUIRE( logApp_.getLogQueueCount() == ( 1 + 2 ) ); // 1 previous entry + overflow log entry + 1 new entry
+        REQUIRE( logApp_.getLogQueueCount() == ( 1 + 2 ) );  // 1 previous entry + overflow log entry + 1 new entry
         REQUIRE( logApp_.m_logFifo.remove( entry ) );
         REQUIRE( entry.m_classificationId == MY_INFO );
         REQUIRE( entry.m_packageId == MY_PACKAGE_ID );

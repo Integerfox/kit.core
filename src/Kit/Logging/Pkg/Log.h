@@ -8,7 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
 This file declares the Logging functions available to the KIT Logging Domain.
 
@@ -17,8 +17,7 @@ This file declares the Logging functions available to the KIT Logging Domain.
 #include "Kit/Logging/Pkg/Package.h"
 #include "Kit/Logging/Pkg/ClassificationId.h"
 #include "Kit/Logging/Pkg/SubSystemId.h"
-#include "Kit/Logging/Pkg/SystemMsgId.h"
-#include "Kit/Logging/Pkg/DriverMsgId.h"
+#include "Kit/Logging/Pkg/MsgId.h"
 #include "Kit/Logging/Framework/Log.h"
 #include "Kit/System/printfchecker.h"
 
@@ -32,29 +31,29 @@ namespace Pkg {
 
 /*---------------------------------------------------------------------------*/
 /// This method generates a SYSTEM Sub-system log entry
-KIT_SYSTEM_PRINTF_CHECKER(4, 5)
-inline Framework::LogResult_T logfSystem( ClassificationId catId, SubSystemId subSysId, SystemMsgId msgId, const char* msgTextFormat, ... ) noexcept
+KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
+inline Framework::LogResult_T logfSystem( ClassificationId catId, SystemMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
     va_list ap;
     va_start( ap, msgTextFormat );
-    auto result = Framework::vlogf( catId, Package::PACKAGE_ID, subSysId, msgId, msgTextFormat, ap );
+    auto result = Framework::vlogf( catId, Package::PACKAGE_ID, SubSystemId::SYSTEM, msgId, msgTextFormat, ap );
     va_end( ap );
     return result;
 }
 
 /// This method generates a DRIVER Sub-system log entry
-KIT_SYSTEM_PRINTF_CHECKER(4, 5)
-inline Framework::LogResult_T logfDriver( ClassificationId catId, SubSystemId subSysId, DriverMsgId msgId, const char* msgTextFormat, ... ) noexcept
+KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
+inline Framework::LogResult_T logfDriver( ClassificationId catId, DriverMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
     va_list ap;
     va_start( ap, msgTextFormat );
-    auto result = Framework::vlogf( catId, Package::PACKAGE_ID, subSysId, msgId, msgTextFormat, ap );
+    auto result = Framework::vlogf( catId, Package::PACKAGE_ID, SubSystemId::DRIVER, msgId, msgTextFormat, ap );
     va_end( ap );
     return result;
 }
 
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

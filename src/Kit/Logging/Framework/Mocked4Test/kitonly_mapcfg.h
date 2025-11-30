@@ -23,16 +23,16 @@
 // Note: Classification ID Valid Range: 1-32
 
 /// Kit Package: Logging Classification IDs
-#define KIT_LOGGING_API_CLASSIFICATION_ID_FATAL_MAPCFG 1
+#define KIT_LOGGING_PKG_CLASSIFICATION_ID_FATAL_MAPCFG 1
 
 /// Kit Package: Logging Classification IDs
-#define KIT_LOGGING_API_CLASSIFICATION_ID_WARNING_MAPCFG 2
+#define KIT_LOGGING_PKG_CLASSIFICATION_ID_WARNING_MAPCFG 2
 
 /// Kit Package: Logging Classification IDs
-#define KIT_LOGGING_API_CLASSIFICATION_ID_EVENT_MAPCFG 3
+#define KIT_LOGGING_PKG_CLASSIFICATION_ID_EVENT_MAPCFG 3
 
 /// Kit Package: Logging Classification IDs
-#define KIT_LOGGING_API_CLASSIFICATION_ID_INFO_MAPCFG 4
+#define KIT_LOGGING_PKG_CLASSIFICATION_ID_INFO_MAPCFG 4
 
 // Note: Package ID Valid Range: 1-32
 

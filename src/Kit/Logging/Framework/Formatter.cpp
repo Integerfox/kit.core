@@ -20,8 +20,8 @@ namespace Logging {
 namespace Framework {
 
 //////////////////////////////////////////////////////////////////////////////
-void Formatter::appendFormattedTimestamp( uint64_t                    timestamp,
-                                          Kit::Text::IString&         dstStringBuf ) noexcept
+void Formatter::appendFormattedTimestamp( uint64_t            timestamp,
+                                          Kit::Text::IString& dstStringBuf ) noexcept
 {
     // Append the boot-counter portion of the entry's timestamp
     uint16_t bootCounter;
@@ -66,8 +66,22 @@ bool Formatter::toString( IApplication&                               applicatio
     const char* classificationText = application.classificationIdToString( srcEntryToFormat.m_classificationId );
     IPackage&   pkg                = application.getPackage( srcEntryToFormat.m_packageId );
     const char* packageText        = pkg.packageIdString();
-    const char* subSystemText      = pkg.subSystemIdToString( srcEntryToFormat.m_subSystemId );
-    const char* messageIdText      = pkg.messageIdToString( srcEntryToFormat.m_subSystemId, srcEntryToFormat.m_messageId );
+    const char* subSystemText;
+    const char* messageIdText;
+    if ( pkg.subSystemAndMessageIdsToString( srcEntryToFormat.m_subSystemId,
+                                             subSystemText,
+                                             srcEntryToFormat.m_messageId,
+                                             messageIdText ) == false )
+    {
+        if ( subSystemText == nullptr )
+        {
+            subSystemText = IPackage::NULL_SUBSYS_ID_TEXT;
+        }
+        if ( messageIdText == nullptr )
+        {
+            messageIdText = IPackage::NULL_MSG_ID_TEXT;
+        }
+    }
     dstStringBuf.formatAppend( "%s-%s-%s-%s: %s",
                                classificationText,
                                packageText,
@@ -79,7 +93,7 @@ bool Formatter::toString( IApplication&                               applicatio
     return !dstStringBuf.truncated();
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

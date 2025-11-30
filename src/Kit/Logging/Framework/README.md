@@ -55,8 +55,13 @@ different in purpose.
     - SubSystem ID
     - Message ID
   - Free formatted Information Text.  Has printf semantics.
+
 - The application is responsible defining the set of Classification IDs as well
   as providing the application specific mappings for Package IDs.
+  - If/when 'unknown' IDs (Classification, Package, Sub-system, Message) are
+    detected, a special log entry is generated - in lieu of the original log
+    entry - to report the error.  The original IDs are contained in the info
+    text for resolving the error.
 
 - Supports run time filtering - with respect to what gets written to persistently
   store - by Classification and Package IDs.

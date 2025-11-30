@@ -44,9 +44,9 @@ namespace Framework {
 /// Result codes for the Log::vlogf() method
 enum LogResult_T
 {
-    ADDED      = 0,  //!< Log entry was successfully created and placed into the log entry queue,
-    FILTERED   = 1,  //!< Log entry was filtered out by the Classification/Package filters
-    QUEUE_FULL = -1  //!< Log entry queue was full - log entry was NOT added
+    ADDED      = 0,   //!< Log entry was successfully created and placed into the log entry queue,
+    FILTERED   = 1,   //!< Log entry was filtered out by the Classification/Package filters
+    QUEUE_FULL = -1,  //!< Log entry queue was full - log entry was NOT added
 };
 
 

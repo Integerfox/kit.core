@@ -22,10 +22,7 @@
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/types.h"
 #include "Kit/Logging/Framework/EntryData.h"
-#include "Kit/Logging/Pkg/Package.h"
 #include "Kit/Logging/Pkg/ClassificationId.h"
-#include "Kit/Logging/Pkg/SubSystemId.h"
-#include "Kit/Logging/Pkg/SystemMsgId.h"
 #include "Kit/Container/RingBuffer.h"  // TODO: Needs to be Kit::Container::RingBufferMP
 
 /** Minimum number of free entries that MUST be available in the log entry
@@ -51,10 +48,7 @@ namespace Framework {
  */
 void initialize( IApplication&                            appInstance,
                  Kit::Container::RingBuffer<EntryData_T>& logEntryFIFO,
-                 uint8_t                                  classificationIdForQueueOverflow = Kit::Logging::Pkg::ClassificationId::WARNING,
-                 uint8_t                                  packageIdForQueueOverflow        = Kit::Logging::Pkg::Package::PACKAGE_ID,
-                 uint8_t                                  subSystemIdForQueueOverflow      = Kit::Logging::Pkg::SubSystemId::SYSTEM,
-                 uint8_t                                  messageIdForQueueOverflow        = Kit::Logging::Pkg::SystemMsgId::LOGGING ) noexcept;
+                 uint8_t                                  classificationLoggingError = Kit::Logging::Pkg::ClassificationId::WARNING ) noexcept;
 
 /*----------------------------------------------------------------------------*/
 /** This method is used to enable one or more log Classifications ID, i.e
@@ -149,7 +143,7 @@ KitLoggingPackageMask_T packageIdToMask( uint8_t packageId ) noexcept;
     ID.
 
     NOTE: If an invalid filter-mask is provided, e.g. the ID value exceeds
-          the number of bits in the Mask Type, then IPackage::NULL_ID
+          the number of bits in the Mask Type, then IPackage::NULL_PKG_ID
           is returned.
  */
 uint8_t maskToPackageId( KitLoggingPackageMask_T packageMask ) noexcept;

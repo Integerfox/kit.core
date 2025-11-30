@@ -18,7 +18,7 @@ namespace Kit {
 ///
 namespace Logging {
 ///
-namespace Api {
+namespace Framework {
 
 /** This concrete class implements the Logging Domain interface for 'Null'
     domain instances, i.e. used when unsupported Domain ID is encountered
@@ -28,18 +28,24 @@ class NullPackage : public Kit::Logging::Framework::IPackage
 public:
     /// Constructor
     NullPackage() = default;
+    
 public:
     /// See Kit::Logging::Framework::IPackage
-    uint8_t packageId() noexcept override { return NULL_ID; };
+    uint8_t packageId() noexcept override { return NULL_PKG_ID; };
 
     /// See Kit::Logging::Framework::IPackage
-    const char* packageIdString() noexcept override { return NULL_ID_TEXT; };
+    const char* packageIdString() noexcept override { return NULL_PKG_ID_TEXT; };
 
     /// See Kit::Logging::Framework::IPackage
-    const char* subSystemIdToString( uint8_t subSystemId ) noexcept override { return OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT; };
-
-    /// See Kit::Logging::Framework::IPackage
-    const char* messageIdToString( uint8_t subSystemId, uint8_t messageId ) noexcept override { return OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT; };
+    bool subSystemAndMessageIdsToString( uint8_t      subSystemId,
+                                         const char*& dstSubSystemText,
+                                         uint8_t      messageId,
+                                         const char*& dstMessageText ) noexcept override
+    {
+        dstSubSystemText = nullptr;
+        dstMessageText   = nullptr;
+        return false;
+    }
 };
 
 }  // end namespaces

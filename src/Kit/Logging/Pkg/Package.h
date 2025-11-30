@@ -33,13 +33,13 @@ namespace Pkg {
 */
 class Package : public Kit::Logging::Framework::IPackage
 {
-    public:
+public:
     /// The Package's ID
     static constexpr uint8_t PACKAGE_ID = KIT_LOGGING_PKG_PACKAGE_ID;
 
     /// The Package's ID Text String
     static constexpr const char* PACKAGE_ID_TEXT = OPTION_KIT_LOGGING_PKG_PACKAGE_ID_TEXT;
-    
+
 public:
     /// Constructor
     Package() = default;
@@ -52,10 +52,10 @@ public:
     const char* packageIdString() noexcept override;
 
     /// See Kit::Logging::Framework::IPackage
-    const char* subSystemIdToString( uint8_t subSystemId ) noexcept override;
-
-    /// See Kit::Logging::Framework::IPackage
-    const char* messageIdToString( uint8_t subSystemId, uint8_t messageId ) noexcept override;
+    bool subSystemAndMessageIdsToString( uint8_t      subSystemId,
+                                         const char*& dstSubSystemText,
+                                         uint8_t      messageId,
+                                         const char*& dstMessageText ) noexcept override;
 };
 
 }  // end namespaces

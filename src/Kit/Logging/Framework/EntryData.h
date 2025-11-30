@@ -64,8 +64,8 @@ public:
     uint64_t m_timestamp;                                                    //!< Time-stamp - as Kit::Time::BootTime - for the entry.
     uint8_t  m_classificationId;                                             //!< Classification identifier.  Valid Range is [1 to the number of bits in KitLoggingClassificationMask_T]
     uint8_t  m_packageId;                                                    //!< Package identifier. Valid Range is [1 to the number of bits in KitLoggingPackageMask_T]
-    uint8_t  m_subSystemId;                                                  //!< SubSystem identifier. Valid Range is [0-255]. SubSystem values are ONLY unique WITHIN a Package.
-    uint8_t  m_messageId;                                                    //!< Message type enumeration identifier.  Valid Range is [0-255]. Message IDs are ONLY unique WITHIN a SubSystem.
+    uint8_t  m_subSystemId;                                                  //!< SubSystem identifier. Valid Range is [0-254]. SubSystem values are ONLY unique WITHIN a Package.
+    uint8_t  m_messageId;                                                    //!< Message type enumeration identifier.  Valid Range is [0-254]. Message IDs are ONLY unique WITHIN a SubSystem.
     char     m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN + 1];  //!< The information text associated with log entry.
 
 public:

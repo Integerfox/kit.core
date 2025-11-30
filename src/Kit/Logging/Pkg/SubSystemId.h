@@ -30,11 +30,13 @@ namespace Pkg {
 
     @param SubSystemId       Enum
 
+    @param LOGGING           Kit Logging sub-system
     @param SYSTEM            Kit OS Abstraction Layer and System services.
     @param DRIVER            Kit Drivers, i.e. the Kit::Driver namespace
  */
 // clang-format off
 BETTER_ENUM( SubSystemId, uint8_t
+             , LOGGING
              , SYSTEM
              , DRIVER
 );

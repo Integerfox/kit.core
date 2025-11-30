@@ -1,0 +1,65 @@
+#ifndef PKGZ_LOGGING_PKG_PACKAGE_H_
+#define PKGZ_LOGGING_PKG_PACKAGE_H_
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
+
+#include "kit_config.h"
+#include "Kit/Logging/Framework/IPackage.h"
+
+/// Defer the actual Package numeric value for the PkgZ Package to the Application (via the kit_config.h file).
+#define PKGZ_LOGGING_PKG_PACKAGE_ID PKGZ_LOGGING_PKG_PACKAGE_ID_MAPCFG
+
+/// The PkgZ Package ID Text String
+#ifndef OPTION_PKGZ_LOGGING_PKG_PACKAGE_ID_TEXT
+#define OPTION_PKGZ_LOGGING_PKG_PACKAGE_ID_TEXT "PKGZ"
+#endif
+
+
+///
+namespace PkgZ {
+///
+namespace Logging {
+///
+namespace Pkg {
+    
+/** This concrete class implements the Logging Package interface for the PkgZ test
+    Package
+*/
+class Package : public Kit::Logging::Framework::IPackage
+{
+public:
+    /// The Package's ID
+    static constexpr uint8_t PACKAGE_ID = PKGZ_LOGGING_PKG_PACKAGE_ID;
+
+    /// The Package's ID Text String
+    static constexpr const char* PACKAGE_ID_TEXT = OPTION_PKGZ_LOGGING_PKG_PACKAGE_ID_TEXT;
+
+public:
+    /// Constructor
+    Package() = default;
+
+public:
+    /// See Kit::Logging::Framework::IPackage
+    uint8_t packageId() noexcept override;
+
+    /// See Kit::Logging::Framework::IPackage
+    const char* packageIdString() noexcept override;
+
+    /// See Kit::Logging::Framework::IPackage
+    bool subSystemAndMessageIdsToString( uint8_t      subSystemId,
+                                         const char*& dstSubSystemText,
+                                         uint8_t      messageId,
+                                         const char*& dstMessageText ) noexcept override;
+};
+
+}  // end namespaces
+}
+}
+#endif  // end header latch

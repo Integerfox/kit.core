@@ -8,11 +8,17 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Logging/Framework/IApplication.h"
+#include "Kit/Logging/Framework/IPackage.h"
+#include "Kit/Logging/Pkg/Package.h"
 #include "Kit/System/Assert.h"
 #include "Log.h"
 #include "Logger.h"
 #include "Formatter.h"
+#include "Kit/Logging/Pkg/MsgId.h"
+#include "Kit/Logging/Pkg/SubSystemId.h"
 #include "Kit/Text/FString.h"
+#include "Kit/Text/BString.h"
 #include "Kit/System/Mutex.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Time/BootTime.h"
@@ -37,10 +43,7 @@ static IApplication*                                                     app_;
 static KitLoggingClassificationMask_T                                    classificationFilterMask_;
 static KitLoggingPackageMask_T                                           packageFilterMask_;
 uint16_t                                                                 g_overflowCount;
-static uint8_t                                                           classificationIdForQueueOverflow_;
-static uint8_t                                                           packageIdForQueueOverflow_;
-static uint8_t                                                           subSystemIdForQueueOverflow_;
-static uint8_t                                                           messageIdForQueueOverflow_;
+static uint8_t                                                           classificationLoggingError_;
 static Kit::Text::FString<OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN + 1> workBuffer_;
 static uint64_t                                                          overflowedTimestamp_;
 bool                                                                     g_queueOverflowed;
@@ -66,17 +69,11 @@ void resetLoggerState() noexcept
 ////////////////////////////////////////////////////////////////////////////////
 void initialize( IApplication&                            appInstance,
                  Kit::Container::RingBuffer<EntryData_T>& logFifo,
-                 uint8_t                                  classificationIdForQueueOverflow,
-                 uint8_t                                  packageIdForQueueOverflow,
-                 uint8_t                                  subSystemIdForQueueOverflow,
-                 uint8_t                                  messageIdForQueueOverflow ) noexcept
+                 uint8_t                                  classificationLoggingError ) noexcept
 {
-    app_                              = &appInstance;
-    logFifo_                          = &logFifo;
-    classificationIdForQueueOverflow_ = classificationIdForQueueOverflow;
-    packageIdForQueueOverflow_        = packageIdForQueueOverflow;
-    subSystemIdForQueueOverflow_      = subSystemIdForQueueOverflow;
-    messageIdForQueueOverflow_        = messageIdForQueueOverflow;
+    app_                        = &appInstance;
+    logFifo_                    = &logFifo;
+    classificationLoggingError_ = classificationLoggingError;
     resetLoggerState();
 }
 
@@ -84,12 +81,12 @@ void initialize( IApplication&                            appInstance,
 void createAndAddOverflowEntry() noexcept
 {
     // Generate entry (zero-initialize to avoid copying uninitialized padding bytes)
-    EntryData_T logEntry = {};
+    EntryData_T logEntry        = {};
     logEntry.m_timestamp        = Kit::Time::getBootTime();
-    logEntry.m_classificationId = classificationIdForQueueOverflow_;
-    logEntry.m_packageId        = packageIdForQueueOverflow_;
-    logEntry.m_subSystemId      = subSystemIdForQueueOverflow_;
-    logEntry.m_messageId        = messageIdForQueueOverflow_;
+    logEntry.m_classificationId = classificationLoggingError_;
+    logEntry.m_packageId        = Pkg::Package::PACKAGE_ID;
+    logEntry.m_subSystemId      = Pkg::SubSystemId::LOGGING;
+    logEntry.m_messageId        = Pkg::LoggingMsgId::OVERFLOW;
 
     // Create the info text
     workBuffer_.format( "OVERFLOW! Num entries lost=%u ", g_overflowCount );
@@ -150,37 +147,65 @@ LogResult_T vlogf( uint8_t     classificationId,
     KIT_SYSTEM_ASSERT( logFifo_ != nullptr );
     KIT_SYSTEM_ASSERT( formatInfoText != nullptr );
 
-    LogResult_T                   result = FILTERED;
+    LogResult_T                   result   = FILTERED;
+    uint8_t                       errMsgId = IPackage::NULL_MSG_ID;
     Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     g_vlogfCallCount++;
 
     // Validate classificationId against the number of bits in KitLoggingClassificationMask_T
-    if ( classificationId > ( sizeof( KitLoggingClassificationMask_T ) * 8 ) )
+    if ( classificationId > ( sizeof( KitLoggingClassificationMask_T ) * 8 ) || classificationId == 0 )
     {
-        classificationId = 0;
+        errMsgId = Pkg::LoggingMsgId::UNKNOWN_CLASSIFICATION_ID;
     }
 
     // Validate packageId against the number of bits in KitLoggingPackageMask_T
-    if ( packageId > ( sizeof( KitLoggingPackageMask_T ) * 8 ) )
+    if ( packageId > ( sizeof( KitLoggingPackageMask_T ) * 8 ) || packageId == 0 )
     {
-        packageId = 0;
+        errMsgId = Pkg::LoggingMsgId::UNKNOWN_PACKAGE_ID;
     }
 
-    // Check if enabled
-    auto classMask = classificationIdToMask( classificationId );
-    auto pkgMask   = packageIdToMask( packageId );
+    // Validate Remaining IDs
+    const char* dstSubSystemText = nullptr;
+    const char* dstMessageText   = nullptr;
+    if ( app_->getPackage( packageId ).subSystemAndMessageIdsToString( subSystemId, dstSubSystemText, messageId, dstMessageText ) == false )
+    {
+        errMsgId = dstSubSystemText == nullptr ? Pkg::LoggingMsgId::UNKNOWN_SUBSYSTEM_ID : Pkg::LoggingMsgId::UNKNOWN_MESSAGE_ID;
+    }
+
+    // Generate entry
+    EntryData_T logEntry        = {};
+    logEntry.m_classificationId = classificationId;
+    logEntry.m_packageId        = packageId;
+    logEntry.m_subSystemId      = subSystemId;
+    logEntry.m_messageId        = messageId;
+    logEntry.m_timestamp        = Kit::Time::getBootTime();
+    Kit::Text::BString formattingBuffer( logEntry.m_infoText, sizeof( logEntry.m_infoText ) );
+    if ( errMsgId == IPackage::NULL_MSG_ID )
+    {
+        // No logging error - format the user message
+        formattingBuffer.vformat( formatInfoText, ap );
+    }
+    else
+    {
+        // Replace the original IDs with the error IDs
+        logEntry.m_classificationId = classificationLoggingError_;
+        logEntry.m_packageId        = Pkg::Package::PACKAGE_ID;
+        logEntry.m_subSystemId      = Pkg::SubSystemId::LOGGING;
+        logEntry.m_messageId        = errMsgId;
+
+        // There was an error - format an error message
+        formattingBuffer.format( "ClassificationID=%u, PackageID=%u, SubSystemID=%u, MessageID=%u.",
+                                 classificationId,
+                                 packageId,
+                                 subSystemId,
+                                 messageId );
+    }
+
+    // Must pass the filter checks to be added to the log queue
+    auto classMask = classificationIdToMask( logEntry.m_classificationId );
+    auto pkgMask   = packageIdToMask( logEntry.m_packageId );
     if ( ( classMask & classificationFilterMask_ ) && ( pkgMask & packageFilterMask_ ) )
     {
-        // Generate entry (zero-initialize to avoid copying uninitialized padding bytes)
-        EntryData_T logEntry = {};
-        logEntry.m_classificationId = classificationId;
-        logEntry.m_packageId        = packageId;
-        logEntry.m_subSystemId      = subSystemId;
-        logEntry.m_messageId        = messageId;
-        logEntry.m_timestamp        = Kit::Time::getBootTime();
-        vsnprintf( logEntry.m_infoText, sizeof( logEntry.m_infoText ), formatInfoText, ap );
-        logEntry.m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN] = '\0';  // Ensure the text string is null terminated
-
         // Manage the queue overflow state
         result = QUEUE_FULL;
         if ( !isQueueOverflowed( logEntry.m_timestamp ) )
@@ -189,12 +214,11 @@ LogResult_T vlogf( uint8_t     classificationId,
             logFifo_->add( logEntry );
             result = ADDED;
         }
-
-        // Echo to the Trace engine (always echoed even when not added to the FIFO)
-        Formatter::toString( *app_, logEntry, workBuffer_ );
-        KIT_SYSTEM_TRACE_RESTRICTED_MSG( app_->classificationIdToString( classificationId ), "%s", workBuffer_.getString() );
     }
 
+    // Echo to the Trace engine (always echoed even when filtered)
+    Formatter::toString( *app_, logEntry, workBuffer_ );
+    KIT_SYSTEM_TRACE_RESTRICTED_MSG( app_->classificationIdToString( classificationId ), "%s", workBuffer_.getString() );
     return result;
 }
 

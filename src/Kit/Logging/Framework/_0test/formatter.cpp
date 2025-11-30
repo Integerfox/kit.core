@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Kit/Logging/Framework/Formatter.h"
+#include "Kit/Logging/Framework/IPackage.h"
 #include "Kit/Logging/Pkg/Log.h"
 #include "Kit/Time/BootTime.h"
 #include "Kit/System/Trace.h"
@@ -61,6 +62,33 @@ TEST_CASE( "Formatter" )
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "[12] (60000:2022-12-31 23:59:59.123) INFO-KIT-DRIVER-STOP_ERR: With Persistent Storage ID log message" );
+    }
+
+    SECTION( "errors" )
+    {
+        logEntry.m_timestamp        = Kit::Time::constructBootTime( 5, 1672531199123 );  // 2022/12/31-23:59:59.123 UTC
+        logEntry.m_classificationId = ClassificationId::WARNING;
+        logEntry.m_packageId        = Package::PACKAGE_ID;
+        logEntry.m_subSystemId      = IPackage::NULL_SUBSYS_ID;
+        logEntry.m_messageId        = SystemMsgId::SHUTDOWN;
+        strcpy( logEntry.m_infoText, "Test log message2" );
+
+        bool result = Formatter::toString( logApp_, logEntry, formattedText );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
+        REQUIRE( result == true );
+        REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-UNKNOWN-UNKNOWN: Test log message2" );
+
+        logEntry.m_timestamp        = Kit::Time::constructBootTime( 5, 1672531199123 );  // 2022/12/31-23:59:59.123 UTC
+        logEntry.m_classificationId = ClassificationId::WARNING;
+        logEntry.m_packageId        = Package::PACKAGE_ID;
+        logEntry.m_subSystemId      = SubSystemId::SYSTEM;
+        logEntry.m_messageId        = IPackage::NULL_MSG_ID;
+        strcpy( logEntry.m_infoText, "Test log message3" );
+
+        result = Formatter::toString( logApp_, logEntry, formattedText );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
+        REQUIRE( result == true );
+        REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-UNKNOWN: Test log message3" );
     }
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );

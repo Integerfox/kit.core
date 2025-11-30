@@ -41,7 +41,10 @@ public:
     static constexpr const char* NULL_CLASSIFICATION_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT;
 
 public:
-    /** This method is used to convert a numeric Classification ID into a text string.
+    /** This method is used to convert a numeric Classification ID into a text
+        string.  The returned string must be a null-terminated string and astring
+        length of less or equal to OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_CLASSIFICATION_ID_TEXT.
+
         NOTE: This method never 'fails'.  If an unknown/unsupported Classification ID
         is used - the methods returns: OPTION_KIT_LOGGING_UNKNOWN_CLASSIFICATION_ID_TEXT
      */
