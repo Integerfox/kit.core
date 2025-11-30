@@ -1,0 +1,163 @@
+@startuml class-diagram
+
+title Kit::Logging Namespace - Class Diagram
+
+namespace Kit.Logging.Framework {
+    
+    enum LogResult_T {
+        ADDED = 0
+        FILTERED = 1
+        QUEUE_FULL = -1
+    }
+    
+    class EntryData_T <<struct>> {
+        +EntryData_T()
+        +getData()
+        +putData()
+    }
+    
+    interface IApplication {
+        +{abstract} isClassificationIdValid()
+        +{abstract} classificationIdToString()
+        +{abstract} getPackage()
+    }
+    
+    interface IPackage {
+        +{abstract} packageId()
+        +{abstract} packageIdString()
+        +{abstract} subSystemAndMessageIdsToString()
+    }
+    
+    class Formatter {
+        +{static} toString()
+        +{static} appendFormattedTimestamp()
+    }
+    
+    class LogSink {
+        Requires a child class to 
+        provide the persistent
+        storage implementation
+        ==
+        +LogSink()
+        +request()
+        #{abstract} dispatchLogEntry()
+    }
+    
+    class "Logger (functions)" as Logger <<namespace>> {
+        Collection of Application-level
+        functions for managing the
+        logging framework
+        ==
+        +initialize()
+        +enableClassification()
+        +disableClassification()
+        +setClassificationMask()
+        +getClassificationEnabledMask()
+        +enablePackage()
+        +disablePackage()
+        +setPackageMask()
+        +getPackageEnabledMask()
+        +classificationIdToMask()
+        +maskToClassificationId()
+        +packageIdToMask()
+        +maskToPackageId()
+    }
+    
+    class "Log (functions)" as Log <<namespace>> {
+        Package independent function for
+        generating log entries
+        ==
+        +vlogf()
+    }
+    
+    IApplication --> IPackage : provides
+    Formatter --> IApplication : uses
+    Formatter --> EntryData_T : formats
+    LogSink --> EntryData_T : consumes
+    Log --> LogResult_T : returns
+    Logger --> IApplication : uses
+}
+
+namespace Kit.Logging.Framework.Mocked4Test {
+    
+    class KitOnly {
+        A realized 'application' to satisfy the
+        Logging framework requirements. Only 
+        supports logging for the Kit namespace
+        and provides white-box access for testing.
+        ==
+        +KitOnly()
+        .. IApplication Interface ..
+        +isClassificationIdValid()
+        +classificationIdToString()
+        +getPackage()
+        .. WhiteBox Testing Support ..
+        +reset()
+        +getLogQueueCount()
+        +clearLogQueue()
+        +isLogQueOverflowed()
+        +getOverflowedLogEntryCount()
+        +getVLogfCallCount()
+    }
+    
+    KitOnly --|> Kit.Logging.Framework.IApplication
+}
+
+namespace Kit.Logging.Pkg {
+    
+    class Package {
+        +Package()
+        +packageId()
+        +packageIdString()
+        +subSystemAndMessageIdsToString()
+    }
+    
+    enum ClassificationId <<BetterEnum>> {
+        FATAL
+        WARNING
+        EVENT
+        INFO
+    }
+    
+    enum SubSystemId <<BetterEnum>> {
+        LOGGING
+        SYSTEM
+        DRIVER
+    }
+    
+    enum LoggingMsgId <<BetterEnum>> {
+        OVERFLOW
+        UNKNOWN_CLASSIFICATION_ID
+        UNKNOWN_PACKAGE_ID
+        UNKNOWN_SUBSYSTEM_ID
+        UNKNOWN_MESSAGE_ID
+    }
+    
+    enum SystemMsgId <<BetterEnum>> {
+        FATAL_ERROR
+        SHUTDOWN
+    }
+    
+    enum DriverMsgId <<BetterEnum>> {
+        START_ERR
+        STOP_ERR
+        ERROR
+    }
+    
+    class "Log (functions)" as PkgLog <<namespace>> {
+        Type-safe logging functions
+        for the Kit Package/Namespace
+        ==
+        +logfSystem()
+        +logfDriver()
+    }
+    
+    Package --|> Kit.Logging.Framework.IPackage
+    PkgLog --> ClassificationId : uses
+    PkgLog --> SubSystemId : uses
+    PkgLog --> SystemMsgId : uses
+    PkgLog --> DriverMsgId : uses
+    PkgLog --> Kit.Logging.Framework.Log : delegates to
+}
+
+@enduml
