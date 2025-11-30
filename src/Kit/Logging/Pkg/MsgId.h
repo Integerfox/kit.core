@@ -29,7 +29,7 @@ namespace Pkg {
 
     @param LoggingMsgId                      Enum
 
-    @param OVERFLOW                          The logging FIFO overflowed, i.e. entries are being generated faster than they can be stored to persistent storage
+    @param QUEUE_OVERFLOW                          The logging FIFO overflowed, i.e. entries are being generated faster than they can be stored to persistent storage
     @param UNKNOWN_CLASSIFICATION_ID         Entry was generated with unknown/unsupported Classification ID.
     @param UNKNOWN_PACKAGE_ID                Entry was generated with unknown/unsupported Package ID.
     @param UNKNOWN_SUBSYSTEM_ID              Entry was generated with unknown/unsupported Sub-system ID.
@@ -37,7 +37,7 @@ namespace Pkg {
  */
 // clang-format off
 BETTER_ENUM( LoggingMsgId, uint8_t
-             , OVERFLOW
+             , QUEUE_OVERFLOW
              , UNKNOWN_CLASSIFICATION_ID
              , UNKNOWN_PACKAGE_ID
              , UNKNOWN_SUBSYSTEM_ID
@@ -72,14 +72,14 @@ BETTER_ENUM( SystemMsgId, uint8_t
 
     @param START_ERR                         Error occurred associated with Starting the driver
     @param STOP_ERR                          Error occurred associated with Stopping the driver
-    @param ERROR                             General Purpose Error
+    @param OPERATION_ERROR                   General Purpose Error
 
  */
 // clang-format off
 BETTER_ENUM( DriverMsgId, uint8_t
              , START_ERR
              , STOP_ERR
-             , ERROR
+             , OPERATION_ERROR
 );
 // clang-format on
 

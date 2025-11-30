@@ -126,7 +126,7 @@ namespace Kit.Logging.Pkg {
     }
     
     enum LoggingMsgId <<BetterEnum>> {
-        OVERFLOW
+        QUEUE_OVERFLOW
         UNKNOWN_CLASSIFICATION_ID
         UNKNOWN_PACKAGE_ID
         UNKNOWN_SUBSYSTEM_ID
@@ -141,7 +141,7 @@ namespace Kit.Logging.Pkg {
     enum DriverMsgId <<BetterEnum>> {
         START_ERR
         STOP_ERR
-        ERROR
+        OPERATION_ERROR
     }
     
     class "Log (functions)" as PkgLog <<namespace>> {

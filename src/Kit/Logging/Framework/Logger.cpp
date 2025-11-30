@@ -53,18 +53,25 @@ unsigned                                                                 g_vlogf
 static bool isQueueOverflowed( uint64_t timestamp ) noexcept;
 static void createAndAddOverflowEntry() noexcept;
 
-// CAUTION: This method is visible to the application by design. This method is
-// for INTERNAL and unit testing purposes ONLY. Application code MUST NOT call
-// this method!
-void resetLoggerState() noexcept
+// Note: Need a function that can be called from the initialize() method, i.e. to avoid the use case of initialize() be called BEFORE the mutex object has been created
+static void resetWithoutCriticalSection() noexcept
 {
-    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     g_overflowCount           = 0;
     g_queueOverflowed         = false;
     classificationFilterMask_ = 0xFFFFFFFF;
     packageFilterMask_        = 0xFFFFFFFF;
     g_vlogfCallCount          = 0;
 }
+
+// CAUTION: This method is visible to the application by design. This method is
+// for INTERNAL and unit testing purposes ONLY. Application code MUST NOT call
+// this method!
+void resetLoggerState() noexcept
+{
+    Kit::System::Mutex::ScopeLock criticalSection( g_lock );
+    resetWithoutCriticalSection();
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 void initialize( IApplication&                            appInstance,
@@ -74,7 +81,7 @@ void initialize( IApplication&                            appInstance,
     app_                        = &appInstance;
     logFifo_                    = &logFifo;
     classificationLoggingError_ = classificationLoggingError;
-    resetLoggerState();
+    resetWithoutCriticalSection();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,10 +93,10 @@ void createAndAddOverflowEntry() noexcept
     logEntry.m_classificationId = classificationLoggingError_;
     logEntry.m_packageId        = Pkg::Package::PACKAGE_ID;
     logEntry.m_subSystemId      = Pkg::SubSystemId::LOGGING;
-    logEntry.m_messageId        = Pkg::LoggingMsgId::OVERFLOW;
+    logEntry.m_messageId        = Pkg::LoggingMsgId::QUEUE_OVERFLOW;
 
     // Create the info text
-    workBuffer_.format( "OVERFLOW! Num entries lost=%u ", g_overflowCount );
+    workBuffer_.format( "QUEUE_OVERFLOW! Num entries lost=%u ", g_overflowCount );
     Formatter::appendFormattedTimestamp( overflowedTimestamp_, workBuffer_ );
     strncpy( logEntry.m_infoText, workBuffer_.getString(), OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN );
     logEntry.m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN] = '\0';  // Ensure the text string is null terminated

@@ -14,10 +14,8 @@
 #define USE_KIT_SYSTEM_ASSERT
 #define KitTextToStringMaxUnsigned_T uint64_t
 
-// Configuration for Logging Identifiers
-#include "Kit/Logging/Framework/Mocked4Test/kitonly_mapcfg.h"
+// Logging configuration
+#include "../../common_logging_config.h"
 
-// Set Host Endianess (actual endianess does not matter for the test)
-#define USE_KIT_TYPE_ENDIAN_LE_HOST
 
 #endif

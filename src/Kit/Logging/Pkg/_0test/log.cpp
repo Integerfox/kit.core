@@ -62,12 +62,12 @@ TEST_CASE( "Log" )
 
     SECTION( "Driver" )
     {
-        auto result = Kit::Logging::Pkg::logfDriver( ClassificationId::INFO, DriverMsgId::ERROR, "Driver log message: %s", "Hello" );
+        auto result = Kit::Logging::Pkg::logfDriver( ClassificationId::INFO, DriverMsgId::OPERATION_ERROR, "Driver log message: %s", "Hello" );
         REQUIRE( result == result_ );
         REQUIRE( lastClassificationId_ == ClassificationId::INFO );
         REQUIRE( lastPackageId_ == Package::PACKAGE_ID );
         REQUIRE( lastSubSystemId_ == SubSystemId::DRIVER );
-        REQUIRE( lastMessageId_ == DriverMsgId::ERROR );
+        REQUIRE( lastMessageId_ == DriverMsgId::OPERATION_ERROR );
         REQUIRE( strcmp( lastInfoText_.getString(), "Driver log message: Hello" ) == 0 );
     }
 

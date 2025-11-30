@@ -36,7 +36,7 @@ using namespace Kit::Logging::Pkg;
 #define OVERFLOW_CLASSIFICATION_ID Kit::Logging::Pkg::ClassificationId::WARNING
 #define OVERFLOW_PACKAGE_ID        MY_PACKAGE_ID
 #define OVERFLOW_SUBSYSTEM_ID      Kit::Logging::Pkg::SubSystemId::LOGGING
-#define OVERFLOW_MESSAGE_ID        Kit::Logging::Pkg::LoggingMsgId::OVERFLOW
+#define OVERFLOW_MESSAGE_ID        Kit::Logging::Pkg::LoggingMsgId::QUEUE_OVERFLOW
 
 
 // Create a Log-Application instance for the tests. Also provide whitebox testing support
@@ -295,7 +295,7 @@ TEST_CASE( "Logger" )
         REQUIRE( entry.m_packageId == OVERFLOW_PACKAGE_ID );
         REQUIRE( entry.m_subSystemId == OVERFLOW_SUBSYSTEM_ID );
         REQUIRE( entry.m_messageId == OVERFLOW_MESSAGE_ID );
-#define OVERFLOW_TEXT_PREFIX "OVERFLOW! Num entries lost=1 (0:1970-01-01 00:00:0"
+#define OVERFLOW_TEXT_PREFIX "QUEUE_OVERFLOW! Num entries lost=1 (0:1970-01-01 00:00:0"
         REQUIRE( strncmp( entry.m_infoText, OVERFLOW_TEXT_PREFIX, strlen( OVERFLOW_TEXT_PREFIX ) ) == 0 );
         REQUIRE( entry.m_timestamp >= now );
         REQUIRE( logApp_.m_logFifo.remove( entry ) );
