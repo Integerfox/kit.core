@@ -8,6 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Logging/Framework/IPackage.h"
 #include "Kit/System/Assert.h"
 #include "KitOnly.h"
 #include "Kit/Logging/Framework/Logger.h"
@@ -32,6 +33,17 @@ KitOnly::KitOnly() noexcept
     Framework::initialize( *this, m_logFifo );
 }
 
+bool KitOnly::isClassificationIdValid( uint8_t classificationId ) noexcept
+{
+    return Kit::Logging::Pkg::ClassificationId::_from_integral_nothrow( classificationId );
+}
+
+bool KitOnly::isPackageIdValid( uint8_t packageId ) noexcept
+{
+    // Only supports the KIT Package
+    return packageId == m_kitPackage.PACKAGE_ID;
+}
+
 const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexcept
 {
     return Kit::Type::betterEnumToString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
@@ -41,8 +53,8 @@ const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexce
 
 IPackage& KitOnly::getPackage( uint8_t packageId ) noexcept
 {
-    // Only supports the KIT Package
-    return m_kitPackage;
+    // Only supports the KIT Package (note: casting is required to get around "Operands to ‘?:’ have different types" compiler error -->NOT because the abstract types are different)
+    return packageId == m_kitPackage.PACKAGE_ID ? static_cast<IPackage&>( m_kitPackage ) : static_cast<IPackage&>( m_nullPkg );
 }
 
 ////////////////////////////////////////////////

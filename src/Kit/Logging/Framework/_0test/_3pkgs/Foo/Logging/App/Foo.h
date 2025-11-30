@@ -41,6 +41,12 @@ public:
 
 public:
     /// See Kit::Logging::Framework::IApplication
+    bool isClassificationIdValid( uint8_t classificationId ) noexcept override;
+
+    /// See Kit::Logging::Framework::IApplication
+    bool isPackageIdValid( uint8_t packageId ) noexcept override;
+
+    /// See Kit::Logging::Framework::IApplication
     const char* classificationIdToString( uint8_t classificationId ) noexcept override;
 
     /// See Kit::Logging::Framework::IApplication

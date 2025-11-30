@@ -1,5 +1,5 @@
-#ifndef KIT_CONFIG_H_
-#define KIT_CONFIG_H_
+#ifndef KIT_COMMON_LOGGING_CONFIG_H_
+#define KIT_COMMON_LOGGING_CONFIG_H_
 /*-----------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,11 +10,11 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
-#define USE_KIT_SYSTEM_ASSERT
-#define KitTextToStringMaxUnsigned_T uint64_t
 
-// Logging Configuration
-#include "../../common_logging_config.h"
+// Configuration for Logging Identifiers
+#include "Kit/Logging/Framework/Mocked4Test/kitonly_mapcfg.h"
 
+// Set Host Endianess (actual endianess does not matter for the test)
+#define USE_KIT_TYPE_ENDIAN_LE_HOST
 
 #endif

@@ -8,8 +8,10 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Pkg/Log.h"
 #include "Kit/Logging/Pkg/Package.h"
+#include "Kit/Logging/Pkg/MsgId.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
@@ -31,16 +33,36 @@ TEST_CASE( "Package" )
         REQUIRE( uut.packageId() == KIT_LOGGING_PKG_PACKAGE_ID );
         REQUIRE( strcmp( uut.packageIdString(), OPTION_KIT_LOGGING_PKG_PACKAGE_ID_TEXT ) == 0 );
 
-        REQUIRE( strcmp( uut.subSystemIdToString( SubSystemId::SYSTEM ), "SYSTEM" ) == 0 );
-        REQUIRE( strcmp( uut.subSystemIdToString( 0xFF ), OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT ) == 0 );
+        const char* subSystemText = nullptr;
+        const char* messageText   = nullptr;
+        REQUIRE( uut.subSystemAndMessageIdsToString(SubSystemId::SYSTEM , subSystemText, SystemMsgId::SHUTDOWN, messageText));
+        REQUIRE( strcmp( subSystemText, "SYSTEM" ) == 0 );
+        REQUIRE( strcmp( messageText, "SHUTDOWN" ) == 0 );
 
-        REQUIRE( strcmp( uut.messageIdToString( SubSystemId::SYSTEM, SystemMsgId::SHUTDOWN ), "SHUTDOWN" ) == 0 );
-        REQUIRE( strcmp( uut.messageIdToString( SubSystemId::SYSTEM, 0xFF ), OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT ) == 0 );
+        REQUIRE( uut.subSystemAndMessageIdsToString(100, subSystemText, DriverMsgId::STOP_ERR, messageText) == false );
+        REQUIRE( subSystemText == nullptr );
+        REQUIRE( messageText == nullptr );      
 
-        REQUIRE( strcmp( uut.messageIdToString( SubSystemId::DRIVER, DriverMsgId::STOP_ERR ), "STOP_ERR" ) == 0 );
-        REQUIRE( strcmp( uut.messageIdToString( SubSystemId::DRIVER, 0xFF ), OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT ) == 0 );
+        REQUIRE( uut.subSystemAndMessageIdsToString(SubSystemId::DRIVER , subSystemText, 200, messageText) == false );
+        REQUIRE( strcmp( subSystemText, "DRIVER" ) == 0 );
+        REQUIRE( messageText == nullptr );
 
-        REQUIRE( strcmp( uut.messageIdToString( 0xFF, SystemMsgId::SHUTDOWN ), OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT ) == 0 );
+        REQUIRE( uut.subSystemAndMessageIdsToString(SubSystemId::LOGGING , subSystemText, LoggingMsgId::UNKNOWN_MESSAGE_ID, messageText));
+        REQUIRE( strcmp( subSystemText, "LOGGING" ) == 0 );
+        REQUIRE( strcmp( messageText, "UNKNOWN_MESSAGE_ID" ) == 0 );
+    }
+
+    SECTION("unknown ids")
+    {
+        KIT_SYSTEM_TRACE_MSG( SECT_, "unknown text Classification: %s", OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "unknown text Package  : %s", OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "unknown text SubSystem: %s", OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "unknown text Message  : %s", OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT );
+        
+        REQUIRE( strcmp( OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT, "UNKNOWN-CLASS" ) == 0 );
+        REQUIRE( strcmp( OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT, "UNKNOWN-PKG" ) == 0 );
+        REQUIRE( strcmp( OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT, "UNKNOWN-SS" ) == 0 );
+        REQUIRE( strcmp( OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT, "UNKNOWN-MSG" ) == 0 );
     }
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );

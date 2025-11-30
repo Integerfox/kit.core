@@ -10,10 +10,12 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Logging/Framework/NullPackage.h"
 #include "kit_config.h"
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/EntryData.h"
 #include "Kit/Logging/Pkg/Package.h"
+#include "Kit/Logging/Framework/NullPackage.h"
 #include "Kit/Container/RingBufferAllocate.h"  // TODO: Needs to be Kit::Container::RingBufferAllocateMP
 
 /// Define the maximum number of log entries in the FIFO used for unit testing.
@@ -44,6 +46,12 @@ public:
 
 public:
     /// See Kit::Logging::Framework::IApplication
+    bool isClassificationIdValid( uint8_t classificationId ) noexcept override;
+
+    /// See Kit::Logging::Framework::IApplication
+    bool isPackageIdValid( uint8_t packageId ) noexcept override;
+
+    /// See Kit::Logging::Framework::IApplication
     const char* classificationIdToString( uint8_t classificationId ) noexcept override;
 
     /// See Kit::Logging::Framework::IApplication
@@ -53,12 +61,16 @@ protected:
     /// Internal Log entry FIFO storage
     Kit::Logging::Framework::EntryData_T* m_logFifoStorage;
 
+    /// The Null Package instance (for unknown Package IDs - which cannot occur when using the Kit::Logging::Log interface)
+    Kit::Logging::Framework::NullPackage m_nullPkg;
+
 public:
     /// The KIT Package instance (is public to allow unit test access)
     Kit::Logging::Pkg::Package m_kitPackage;
 
+
     /// The Log entry FIFO (is public to allow unit test access). TODO: Needs to be Kit::Container::RingBufferMP
-    Kit::Container::RingBufferAllocate<Kit::Logging::Framework::EntryData_T, OPTION_KIT_LOGGING_FRAMEWORK_MOCKED4TEST_MAX_LOG_ENTRIES+1> m_logFifo;
+    Kit::Container::RingBufferAllocate<Kit::Logging::Framework::EntryData_T, OPTION_KIT_LOGGING_FRAMEWORK_MOCKED4TEST_MAX_LOG_ENTRIES + 1> m_logFifo;
 
 
 public:

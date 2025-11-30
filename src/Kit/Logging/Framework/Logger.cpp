@@ -152,24 +152,28 @@ LogResult_T vlogf( uint8_t     classificationId,
     Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     g_vlogfCallCount++;
 
-    // Validate classificationId against the number of bits in KitLoggingClassificationMask_T
-    if ( classificationId > ( sizeof( KitLoggingClassificationMask_T ) * 8 ) || classificationId == 0 )
+    // Validate classificationId
+    if ( app_->isClassificationIdValid( classificationId ) == false )
     {
         errMsgId = Pkg::LoggingMsgId::UNKNOWN_CLASSIFICATION_ID;
     }
 
-    // Validate packageId against the number of bits in KitLoggingPackageMask_T
-    if ( packageId > ( sizeof( KitLoggingPackageMask_T ) * 8 ) || packageId == 0 )
+    // Validate packageId
+    if ( app_->isPackageIdValid( packageId ) == false )
     {
         errMsgId = Pkg::LoggingMsgId::UNKNOWN_PACKAGE_ID;
     }
 
-    // Validate Remaining IDs
-    const char* dstSubSystemText = nullptr;
-    const char* dstMessageText   = nullptr;
-    if ( app_->getPackage( packageId ).subSystemAndMessageIdsToString( subSystemId, dstSubSystemText, messageId, dstMessageText ) == false )
+    // If the package ID is not valid -->then skip subSystemId/messageId validation (since we cannot look it up)
+    else
     {
-        errMsgId = dstSubSystemText == nullptr ? Pkg::LoggingMsgId::UNKNOWN_SUBSYSTEM_ID : Pkg::LoggingMsgId::UNKNOWN_MESSAGE_ID;
+        // Validate Remaining IDs
+        const char* dstSubSystemText = nullptr;
+        const char* dstMessageText   = nullptr;
+        if ( app_->getPackage( packageId ).subSystemAndMessageIdsToString( subSystemId, dstSubSystemText, messageId, dstMessageText ) == false )
+        {
+            errMsgId = dstSubSystemText == nullptr ? Pkg::LoggingMsgId::UNKNOWN_SUBSYSTEM_ID : Pkg::LoggingMsgId::UNKNOWN_MESSAGE_ID;
+        }
     }
 
     // Generate entry
@@ -218,7 +222,7 @@ LogResult_T vlogf( uint8_t     classificationId,
 
     // Echo to the Trace engine (always echoed even when filtered)
     Formatter::toString( *app_, logEntry, workBuffer_ );
-    KIT_SYSTEM_TRACE_RESTRICTED_MSG( app_->classificationIdToString( classificationId ), "%s", workBuffer_.getString() );
+    KIT_SYSTEM_TRACE_RESTRICTED_MSG( app_->classificationIdToString( logEntry.m_classificationId ), "%s", workBuffer_.getString() );
     return result;
 }
 

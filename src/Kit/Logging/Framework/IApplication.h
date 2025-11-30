@@ -41,6 +41,17 @@ public:
     static constexpr const char* NULL_CLASSIFICATION_ID_TEXT = OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_CLASSIFICATION_ID_TEXT;
 
 public:
+    /** This method returns true if specific Classification ID is supported by
+        the application
+     */
+    virtual bool isClassificationIdValid( uint8_t classificationId ) noexcept = 0;
+
+    /** This method returns true if the specific Package ID is supported by
+        the application
+     */
+    virtual bool isPackageIdValid( uint8_t packageId ) noexcept = 0;
+
+public:
     /** This method is used to convert a numeric Classification ID into a text
         string.  The returned string must be a null-terminated string and astring
         length of less or equal to OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_CLASSIFICATION_ID_TEXT.

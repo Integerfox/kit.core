@@ -27,6 +27,18 @@ Foo::Foo( Kit::Container::RingBuffer<Kit::Logging::Framework::EntryData_T>& logF
     Kit::Logging::Framework::initialize( *this, logFifo );
 }
 
+bool Foo::isClassificationIdValid( uint8_t classificationId ) noexcept
+{
+    return ::Foo::Logging::Pkg::ClassificationId::_from_integral_nothrow( classificationId );
+}
+
+bool Foo::isPackageIdValid( uint8_t packageId ) noexcept
+{
+    // Only supports the KIT Package
+    Kit::Logging::Framework::IPackage& foundPkg = getPackage( packageId );
+    return &foundPkg != &m_nullPackage;
+}
+
 const char* Foo::classificationIdToString( uint8_t classificationId ) noexcept
 {
     return Kit::Type::betterEnumToString<::Foo::Logging::Pkg::ClassificationId, uint8_t>(

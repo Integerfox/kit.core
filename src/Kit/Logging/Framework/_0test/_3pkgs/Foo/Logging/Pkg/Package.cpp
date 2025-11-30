@@ -11,12 +11,22 @@
 #include "Package.h"
 #include "MsgId.h"
 #include "SubSystemId.h"
-
+#include "Kit/Logging/Framework/types.h"
 
 //------------------------------------------------------------------------------
 namespace Foo {
 namespace Logging {
 namespace Pkg {
+
+// Compile-time validation of PACKAGE_ID
+static_assert( Package::PACKAGE_ID > 0 && Package::PACKAGE_ID <= sizeof( KitLoggingPackageMask_T ) * 8, "PACKAGE_ID cannot be zero or exceeds the number of bits in KitLoggingPackageMask_T" );
+
+// Compile-time validation that SubSystemId/MessageId does not contain a symbol with value 255
+// Note: Using _size_constant to make this scalable - validates the max underlying value is < 255
+static_assert( SubSystemId::_size_constant > 0 && SubSystemId::_size_constant <= 255, "SubSystemId enum size must not exceed 255, and since enums are 0-indexed, no value can be 255" );
+static_assert( UiMsgId::_size_constant > 0 && UiMsgId::_size_constant <= 255, "UiMsgId enum size must not exceed 255, and since enums are 0-indexed, no value can be 255" );
+static_assert( DatabaseMsgId::_size_constant > 0 && DatabaseMsgId::_size_constant <= 255, "DatabaseMsgId enum size must not exceed 255, and since enums are 0-indexed, no value can be 255" );
+static_assert( ApiMsgId::_size_constant > 0 && ApiMsgId::_size_constant <= 255, "ApiMsgId enum size must not exceed 255, and since enums are 0-indexed, no value can be 255" );
 
 
 // Helper method
