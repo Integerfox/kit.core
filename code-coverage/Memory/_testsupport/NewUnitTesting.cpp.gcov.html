@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-30 19:17:08</td>
+            <td class="headerValue">2025-12-02 03:54:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryLo">30.0&nbsp;%</td>
@@ -172,11 +172,11 @@
 <span id="L110"><span class="lineNum">     110</span>                 :             : }</span>
 <span id="L111"><span class="lineNum">     111</span>                 :             : </span>
 <span id="L112"><span class="lineNum">     112</span>                 :             : </span>
-<span id="L113"><span class="lineNum">     113</span>                 :<span class="tlaGNC">        1153 : static void my_delete( void* ptr ) noexcept</span></span>
+<span id="L113"><span class="lineNum">     113</span>                 :<span class="tlaGNC">        1172 : static void my_delete( void* ptr ) noexcept</span></span>
 <span id="L114"><span class="lineNum">     114</span>                 :             : {</span>
 <span id="L115"><span class="lineNum">     115</span>                 :             :     // Update metrics</span>
-<span id="L116"><span class="lineNum">     116</span>                 :<span class="tlaGNC">        1153 :     metrics_.m_numDeleteCalls++;</span></span>
-<span id="L117"><span class="lineNum">     117</span>         [<span class="tlaGBC" title="Branch 0 was taken 1153 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        1153 :     if ( !ptr )</span></span>
+<span id="L116"><span class="lineNum">     116</span>                 :<span class="tlaGNC">        1172 :     metrics_.m_numDeleteCalls++;</span></span>
+<span id="L117"><span class="lineNum">     117</span>         [<span class="tlaGBC" title="Branch 0 was taken 1172 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        1172 :     if ( !ptr )</span></span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :     {</span>
 <span id="L119"><span class="lineNum">     119</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         metrics_.m_numDeleteCalls_withNullPtr++;</span></span>
 <span id="L120"><span class="lineNum">     120</span>                 :             :     }</span>
@@ -184,9 +184,9 @@
 <span id="L122"><span class="lineNum">     122</span>                 :             :     // C++ standard says it is okay to delete a null pointer (make sure we DON'T free a null pointer)</span>
 <span id="L123"><span class="lineNum">     123</span>                 :             :     if ( ptr )</span>
 <span id="L124"><span class="lineNum">     124</span>                 :             :     {</span>
-<span id="L125"><span class="lineNum">     125</span>                 :<span class="tlaGNC tlaBgGNC">        1153 :         free( ptr );</span></span>
+<span id="L125"><span class="lineNum">     125</span>                 :<span class="tlaGNC tlaBgGNC">        1172 :         free( ptr );</span></span>
 <span id="L126"><span class="lineNum">     126</span>                 :             :     }</span>
-<span id="L127"><span class="lineNum">     127</span>                 :<span class="tlaGNC">        1153 : }</span></span>
+<span id="L127"><span class="lineNum">     127</span>                 :<span class="tlaGNC">        1172 : }</span></span>
 <span id="L128"><span class="lineNum">     128</span>                 :             : </span>
 <span id="L129"><span class="lineNum">     129</span>                 :             : </span>
 <span id="L130"><span class="lineNum">     130</span>                 :             : ////////////////////////////////////////////////////////////////////////////////</span>
@@ -246,10 +246,10 @@
 <span id="L184"><span class="lineNum">     184</span>                 :<span class="tlaGNC">          77 :     return Kit::Memory::my_new( sz );</span></span>
 <span id="L185"><span class="lineNum">     185</span>                 :             : }</span>
 <span id="L186"><span class="lineNum">     186</span>                 :             : </span>
-<span id="L187"><span class="lineNum">     187</span>                 :<span class="tlaGNC">        1084 : void operator delete( void* ptr ) noexcept</span></span>
+<span id="L187"><span class="lineNum">     187</span>                 :<span class="tlaGNC">        1103 : void operator delete( void* ptr ) noexcept</span></span>
 <span id="L188"><span class="lineNum">     188</span>                 :             : {</span>
-<span id="L189"><span class="lineNum">     189</span>                 :<span class="tlaGNC">        1084 :     Kit::Memory::my_delete( ptr );</span></span>
-<span id="L190"><span class="lineNum">     190</span>                 :<span class="tlaGNC">        1084 : }</span></span>
+<span id="L189"><span class="lineNum">     189</span>                 :<span class="tlaGNC">        1103 :     Kit::Memory::my_delete( ptr );</span></span>
+<span id="L190"><span class="lineNum">     190</span>                 :<span class="tlaGNC">        1103 : }</span></span>
 <span id="L191"><span class="lineNum">     191</span>                 :             : </span>
 <span id="L192"><span class="lineNum">     192</span>                 :<span class="tlaGNC">          69 : void operator delete[]( void* ptr ) noexcept</span></span>
 <span id="L193"><span class="lineNum">     193</span>                 :             : {</span>

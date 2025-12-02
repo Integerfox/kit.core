@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 220-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -67,7 +67,7 @@ $(function() {
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_trace_8h__dep__incl.svg" width="166" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="_trace_8h__dep__incl.svg" width="363" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_trace_8h_source.html">Go to the source code of this file.</a></p>
@@ -89,70 +89,82 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aae434b392fc82459f761e767a6b78f03" id="r_aae434b392fc82459f761e767a6b78f03"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae434b392fc82459f761e767a6b78f03">KIT_SYSTEM_TRACE_ALLOCATE</a>(type,  varname,  initval)</td></tr>
-<tr class="memdesc:aae434b392fc82459f761e767a6b78f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="memitem:aae434b392fc82459f761e767a6b78f03" id="r_aae434b392fc82459f761e767a6b78f03"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae434b392fc82459f761e767a6b78f03">KIT_SYSTEM_TRACE_ALLOCATE</a>(type,  varname,  initval)&#160;&#160;&#160;type varname = initval</td></tr>
+<tr class="memdesc:aae434b392fc82459f761e767a6b78f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate a variable that is only 'used' when tracing is enabled.  <br /></td></tr>
 <tr class="separator:aae434b392fc82459f761e767a6b78f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1de46d981ebf30d2c50377ad90d3166e" id="r_a1de46d981ebf30d2c50377ad90d3166e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1de46d981ebf30d2c50377ad90d3166e">KIT_SYSTEM_TRACE_CLEAR_THREAD_FILTER</a>()</td></tr>
+<tr class="memitem:a1de46d981ebf30d2c50377ad90d3166e" id="r_a1de46d981ebf30d2c50377ad90d3166e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1de46d981ebf30d2c50377ad90d3166e">KIT_SYSTEM_TRACE_CLEAR_THREAD_FILTER</a>()&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#aba1784cab8547da73d5a179da962aa58">Kit::System::Trace::clearThreadFilter_</a>()</td></tr>
 <tr class="memdesc:a1de46d981ebf30d2c50377ad90d3166e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a1de46d981ebf30d2c50377ad90d3166e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa7a75a7018bd3e91e1f6086f9a70d93c" id="r_aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7a75a7018bd3e91e1f6086f9a70d93c">KIT_SYSTEM_TRACE_DISABLE</a>()</td></tr>
+<tr class="memitem:aa7a75a7018bd3e91e1f6086f9a70d93c" id="r_aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7a75a7018bd3e91e1f6086f9a70d93c">KIT_SYSTEM_TRACE_DISABLE</a>()&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#ad6ec2701e45319865e9916aa632ff53c">Kit::System::Trace::disable_</a>()</td></tr>
 <tr class="memdesc:aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:aa7a75a7018bd3e91e1f6086f9a70d93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d334899f6b0b04fa204885842185398" id="r_a1d334899f6b0b04fa204885842185398"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d334899f6b0b04fa204885842185398">KIT_SYSTEM_TRACE_DISABLE_SECTION</a>(sect)</td></tr>
+<tr class="memitem:a1d334899f6b0b04fa204885842185398" id="r_a1d334899f6b0b04fa204885842185398"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d334899f6b0b04fa204885842185398">KIT_SYSTEM_TRACE_DISABLE_SECTION</a>(sect)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#aac16de27698ee59e8726898a16a4a030">Kit::System::Trace::disableSection_</a>( sect )</td></tr>
 <tr class="memdesc:a1d334899f6b0b04fa204885842185398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a1d334899f6b0b04fa204885842185398"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9694f3a47e9aa63f715d683c9c9c73d1" id="r_a9694f3a47e9aa63f715d683c9c9c73d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9694f3a47e9aa63f715d683c9c9c73d1">KIT_SYSTEM_TRACE_ENABLE</a>()</td></tr>
+<tr class="memitem:a1d334899f6b0b04fa204885842185398" id="r_a1d334899f6b0b04fa204885842185398"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d334899f6b0b04fa204885842185398">KIT_SYSTEM_TRACE_DISABLE_SECTION</a>(sect)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#aac16de27698ee59e8726898a16a4a030">Kit::System::Trace::disableSection_</a>( sect )</td></tr>
+<tr class="memdesc:a1d334899f6b0b04fa204885842185398"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
+<tr class="separator:a1d334899f6b0b04fa204885842185398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9694f3a47e9aa63f715d683c9c9c73d1" id="r_a9694f3a47e9aa63f715d683c9c9c73d1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9694f3a47e9aa63f715d683c9c9c73d1">KIT_SYSTEM_TRACE_ENABLE</a>()&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a142db61f82010609bd38065d47454689">Kit::System::Trace::enable_</a>()</td></tr>
 <tr class="memdesc:a9694f3a47e9aa63f715d683c9c9c73d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a9694f3a47e9aa63f715d683c9c9c73d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54f4742884ad133cd9b4dae1c6da104f" id="r_a54f4742884ad133cd9b4dae1c6da104f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54f4742884ad133cd9b4dae1c6da104f">KIT_SYSTEM_TRACE_ENABLE_SECTION</a>(sect)</td></tr>
+<tr class="memitem:a54f4742884ad133cd9b4dae1c6da104f" id="r_a54f4742884ad133cd9b4dae1c6da104f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54f4742884ad133cd9b4dae1c6da104f">KIT_SYSTEM_TRACE_ENABLE_SECTION</a>(sect)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a39377c50d8c7e1b546b3d5a30755a282">Kit::System::Trace::enableSection_</a>( sect )</td></tr>
 <tr class="memdesc:a54f4742884ad133cd9b4dae1c6da104f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a54f4742884ad133cd9b4dae1c6da104f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affd51372ff299f56c74e808dd9f49338" id="r_affd51372ff299f56c74e808dd9f49338"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affd51372ff299f56c74e808dd9f49338">KIT_SYSTEM_TRACE_FUNC</a>(sect)</td></tr>
+<tr class="memitem:affd51372ff299f56c74e808dd9f49338" id="r_affd51372ff299f56c74e808dd9f49338"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affd51372ff299f56c74e808dd9f49338">KIT_SYSTEM_TRACE_FUNC</a>(sect)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html">Kit::System::Trace</a> kitSystemTraceInstance_( __FILE__, __LINE__, <a class="el" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a>, sect, <a class="el" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a> )</td></tr>
 <tr class="memdesc:affd51372ff299f56c74e808dd9f49338"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:affd51372ff299f56c74e808dd9f49338"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7fa2511c31281a2486dfafb5523a15f" id="r_ae7fa2511c31281a2486dfafb5523a15f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7fa2511c31281a2486dfafb5523a15f">KIT_SYSTEM_TRACE_GET_INFO_LEVEL</a>()&#160;&#160;&#160;( (<a class="el" href="class_kit_1_1_system_1_1_trace.html#add80da6b96634d485121bc2fe7113f7e">Kit::System::Trace::InfoLevel_T</a>)0 )</td></tr>
+<tr class="memitem:ae7fa2511c31281a2486dfafb5523a15f" id="r_ae7fa2511c31281a2486dfafb5523a15f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7fa2511c31281a2486dfafb5523a15f">KIT_SYSTEM_TRACE_GET_INFO_LEVEL</a>()&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54c9c25bb482d54e39128b0b114c3e8a">Kit::System::Trace::getInfoLevel_</a>()</td></tr>
 <tr class="memdesc:ae7fa2511c31281a2486dfafb5523a15f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:ae7fa2511c31281a2486dfafb5523a15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d1959c3400fa6ca84c7a0b1dc38b5d0" id="r_a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d1959c3400fa6ca84c7a0b1dc38b5d0">KIT_SYSTEM_TRACE_GET_SECTIONS</a>(dst)&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a5d1959c3400fa6ca84c7a0b1dc38b5d0" id="r_a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d1959c3400fa6ca84c7a0b1dc38b5d0">KIT_SYSTEM_TRACE_GET_SECTIONS</a>(dst)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#ad07946412886e40ea88f04a2b59f45b1">Kit::System::Trace::getSections_</a>( dst )</td></tr>
 <tr class="memdesc:a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a5d1959c3400fa6ca84c7a0b1dc38b5d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6688e1ccec9f285cd7d80a6347ee1d25" id="r_a6688e1ccec9f285cd7d80a6347ee1d25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6688e1ccec9f285cd7d80a6347ee1d25">KIT_SYSTEM_TRACE_GET_THREAD_FILTERS</a>(dst)&#160;&#160;&#160;0</td></tr>
+<tr class="memitem:a6688e1ccec9f285cd7d80a6347ee1d25" id="r_a6688e1ccec9f285cd7d80a6347ee1d25"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6688e1ccec9f285cd7d80a6347ee1d25">KIT_SYSTEM_TRACE_GET_THREAD_FILTERS</a>(dst)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a137e6b9104ffceda2e0cb4b8f177b794">Kit::System::Trace::getThreadFilters_</a>( dst )</td></tr>
 <tr class="memdesc:a6688e1ccec9f285cd7d80a6347ee1d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a6688e1ccec9f285cd7d80a6347ee1d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe09f4b0db5f2d626c13c7aabfa18e2c" id="r_afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe09f4b0db5f2d626c13c7aabfa18e2c">KIT_SYSTEM_TRACE_IS_COMPILED</a>()&#160;&#160;&#160;false</td></tr>
-<tr class="memdesc:afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns false if TRACE was NOT activated/enabled at compile time.  <br /></td></tr>
+<tr class="memitem:afe09f4b0db5f2d626c13c7aabfa18e2c" id="r_afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe09f4b0db5f2d626c13c7aabfa18e2c">KIT_SYSTEM_TRACE_IS_COMPILED</a>()&#160;&#160;&#160;true</td></tr>
+<tr class="memdesc:afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if TRACE was activated/enabled at compile time.  <br /></td></tr>
 <tr class="separator:afe09f4b0db5f2d626c13c7aabfa18e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1106f846b9e97db1f895c902fd45ad8a" id="r_a1106f846b9e97db1f895c902fd45ad8a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1106f846b9e97db1f895c902fd45ad8a">KIT_SYSTEM_TRACE_IS_ENABLED</a>()&#160;&#160;&#160;false</td></tr>
+<tr class="memitem:a1106f846b9e97db1f895c902fd45ad8a" id="r_a1106f846b9e97db1f895c902fd45ad8a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1106f846b9e97db1f895c902fd45ad8a">KIT_SYSTEM_TRACE_IS_ENABLED</a>()&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a28af034c29ac49e67726885529d9500a">Kit::System::Trace::isEnabled_</a>()</td></tr>
 <tr class="memdesc:a1106f846b9e97db1f895c902fd45ad8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a1106f846b9e97db1f895c902fd45ad8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a666aa9d3415c8c27bc696998d8cdb848" id="r_a666aa9d3415c8c27bc696998d8cdb848"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a666aa9d3415c8c27bc696998d8cdb848">KIT_SYSTEM_TRACE_IS_SECTION_ENABLED</a>(sect)&#160;&#160;&#160;false</td></tr>
+<tr class="memitem:a666aa9d3415c8c27bc696998d8cdb848" id="r_a666aa9d3415c8c27bc696998d8cdb848"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a666aa9d3415c8c27bc696998d8cdb848">KIT_SYSTEM_TRACE_IS_SECTION_ENABLED</a>(sect)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a93371ad21b12a39aca3fde1b78c1ff6b">Kit::System::Trace::isSectionEnabled_</a>( sect )</td></tr>
 <tr class="memdesc:a666aa9d3415c8c27bc696998d8cdb848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a666aa9d3415c8c27bc696998d8cdb848"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81d2cd2e1ab6d21d0288c42215c35bb0" id="r_a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>(sect, ...)</td></tr>
 <tr class="memdesc:a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a81d2cd2e1ab6d21d0288c42215c35bb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19b976913ce967edc389dcaffa42a29c" id="r_a19b976913ce967edc389dcaffa42a29c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a19b976913ce967edc389dcaffa42a29c">KIT_SYSTEM_TRACE_REDIRECT</a>(newdst)</td></tr>
+<tr class="memitem:a8c94ee0f95704f9036ca685e0ffe8559" id="r_a8c94ee0f95704f9036ca685e0ffe8559"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a>&#160;&#160;&#160;__func__</td></tr>
+<tr class="memdesc:a8c94ee0f95704f9036ca685e0ffe8559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use C++11 function name.  <br /></td></tr>
+<tr class="separator:a8c94ee0f95704f9036ca685e0ffe8559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19b976913ce967edc389dcaffa42a29c" id="r_a19b976913ce967edc389dcaffa42a29c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a19b976913ce967edc389dcaffa42a29c">KIT_SYSTEM_TRACE_REDIRECT</a>(newdst)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#abd7192f52efe1e9cb61f978d79f34441">Kit::System::Trace::redirect_</a>( newdst )</td></tr>
 <tr class="memdesc:a19b976913ce967edc389dcaffa42a29c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a19b976913ce967edc389dcaffa42a29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4948bfa2c087ce7febeda7cb90a088f9" id="r_a4948bfa2c087ce7febeda7cb90a088f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4948bfa2c087ce7febeda7cb90a088f9">KIT_SYSTEM_TRACE_REVERT</a>()</td></tr>
+<tr class="memitem:a255349e7cb2f6d6b4a84d84d66d7b166" id="r_a255349e7cb2f6d6b4a84d84d66d7b166"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a255349e7cb2f6d6b4a84d84d66d7b166">KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE</a>(type,  varname,  initval)&#160;&#160;&#160;type varname = initval</td></tr>
+<tr class="memdesc:a255349e7cb2f6d6b4a84d84d66d7b166"><td class="mdescLeft">&#160;</td><td class="mdescRight">'Restricted' version of the ALLOCATE macro. Read the above comments before using!  <br /></td></tr>
+<tr class="separator:a255349e7cb2f6d6b4a84d84d66d7b166"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48dd31b965f82a046c51ca9310f8efc0" id="r_a48dd31b965f82a046c51ca9310f8efc0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48dd31b965f82a046c51ca9310f8efc0">KIT_SYSTEM_TRACE_RESTRICTED_MSG</a>(sect, ...)</td></tr>
+<tr class="memdesc:a48dd31b965f82a046c51ca9310f8efc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is SPECIAL macro wrapper in that it NOT compiled out when USE_KIT_SYSTEM_TRACE is NOT defined.  <br /></td></tr>
+<tr class="separator:a48dd31b965f82a046c51ca9310f8efc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4948bfa2c087ce7febeda7cb90a088f9" id="r_a4948bfa2c087ce7febeda7cb90a088f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4948bfa2c087ce7febeda7cb90a088f9">KIT_SYSTEM_TRACE_REVERT</a>()&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a2d6a4abdeeac273a6a5b1d31d45c4c98">Kit::System::Trace::revert_</a>()</td></tr>
 <tr class="memdesc:a4948bfa2c087ce7febeda7cb90a088f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a4948bfa2c087ce7febeda7cb90a088f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4849f01b9ff7bf607d1a34cee4e36835" id="r_a4849f01b9ff7bf607d1a34cee4e36835"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4849f01b9ff7bf607d1a34cee4e36835">KIT_SYSTEM_TRACE_SCOPE</a>(sect,  label)</td></tr>
+<tr class="memitem:a4849f01b9ff7bf607d1a34cee4e36835" id="r_a4849f01b9ff7bf607d1a34cee4e36835"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4849f01b9ff7bf607d1a34cee4e36835">KIT_SYSTEM_TRACE_SCOPE</a>(sect,  label)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html">Kit::System::Trace</a> kitSystemTraceInstance_( __FILE__, __LINE__, <a class="el" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a>, sect, label )</td></tr>
 <tr class="memdesc:a4849f01b9ff7bf607d1a34cee4e36835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a4849f01b9ff7bf607d1a34cee4e36835"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9525fcd5624cadd7a080cc7f32d65d2f" id="r_a9525fcd5624cadd7a080cc7f32d65d2f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9525fcd5624cadd7a080cc7f32d65d2f">KIT_SYSTEM_TRACE_SET_INFO_LEVEL</a>(l)</td></tr>
+<tr class="memitem:a9525fcd5624cadd7a080cc7f32d65d2f" id="r_a9525fcd5624cadd7a080cc7f32d65d2f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9525fcd5624cadd7a080cc7f32d65d2f">KIT_SYSTEM_TRACE_SET_INFO_LEVEL</a>(l)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#ae4c184cf1729985ba13e6e4b76fed0ef">Kit::System::Trace::setInfoLevel_</a>( l )</td></tr>
 <tr class="memdesc:a9525fcd5624cadd7a080cc7f32d65d2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a9525fcd5624cadd7a080cc7f32d65d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb9fcad8b577cf78488f64af092fb576" id="r_afb9fcad8b577cf78488f64af092fb576"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb9fcad8b577cf78488f64af092fb576">KIT_SYSTEM_TRACE_SET_THREAD_2FILTERS</a>(t1,  t2)</td></tr>
+<tr class="memitem:afb9fcad8b577cf78488f64af092fb576" id="r_afb9fcad8b577cf78488f64af092fb576"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb9fcad8b577cf78488f64af092fb576">KIT_SYSTEM_TRACE_SET_THREAD_2FILTERS</a>(t1,  t2)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54d930b9a0b012797c0cf9d621edf54b">Kit::System::Trace::setThreadFilter_</a>( t1, t2 )</td></tr>
 <tr class="memdesc:afb9fcad8b577cf78488f64af092fb576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:afb9fcad8b577cf78488f64af092fb576"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0f674e7e36e957ad6b038d0a7e2fcbd" id="r_ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0f674e7e36e957ad6b038d0a7e2fcbd">KIT_SYSTEM_TRACE_SET_THREAD_3FILTERS</a>(t1,  t2,  t3)</td></tr>
+<tr class="memitem:ac0f674e7e36e957ad6b038d0a7e2fcbd" id="r_ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0f674e7e36e957ad6b038d0a7e2fcbd">KIT_SYSTEM_TRACE_SET_THREAD_3FILTERS</a>(t1,  t2,  t3)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54d930b9a0b012797c0cf9d621edf54b">Kit::System::Trace::setThreadFilter_</a>( t1, t2, t3 )</td></tr>
 <tr class="memdesc:ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:ac0f674e7e36e957ad6b038d0a7e2fcbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a8a3bc55c0271b2f081fc672fec0c52" id="r_a9a8a3bc55c0271b2f081fc672fec0c52"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a8a3bc55c0271b2f081fc672fec0c52">KIT_SYSTEM_TRACE_SET_THREAD_4FILTERS</a>(t1,  t2,  t3,  t4)</td></tr>
+<tr class="memitem:a9a8a3bc55c0271b2f081fc672fec0c52" id="r_a9a8a3bc55c0271b2f081fc672fec0c52"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a8a3bc55c0271b2f081fc672fec0c52">KIT_SYSTEM_TRACE_SET_THREAD_4FILTERS</a>(t1,  t2,  t3,  t4)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54d930b9a0b012797c0cf9d621edf54b">Kit::System::Trace::setThreadFilter_</a>( t1, t2, t3, t4 )</td></tr>
 <tr class="memdesc:a9a8a3bc55c0271b2f081fc672fec0c52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a9a8a3bc55c0271b2f081fc672fec0c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d467411c315a05554b6c7976ea94f3d" id="r_a1d467411c315a05554b6c7976ea94f3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d467411c315a05554b6c7976ea94f3d">KIT_SYSTEM_TRACE_SET_THREAD_FILTER</a>(t1)</td></tr>
+<tr class="memitem:a1d467411c315a05554b6c7976ea94f3d" id="r_a1d467411c315a05554b6c7976ea94f3d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1d467411c315a05554b6c7976ea94f3d">KIT_SYSTEM_TRACE_SET_THREAD_FILTER</a>(t1)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54d930b9a0b012797c0cf9d621edf54b">Kit::System::Trace::setThreadFilter_</a>( t1 )</td></tr>
 <tr class="memdesc:a1d467411c315a05554b6c7976ea94f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro Wrapper.  <br /></td></tr>
 <tr class="separator:a1d467411c315a05554b6c7976ea94f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0c568a73c11ac5ae042c46833b1e4aa" id="r_ae0c568a73c11ac5ae042c46833b1e4aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0c568a73c11ac5ae042c46833b1e4aa">OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE</a>&#160;&#160;&#160;true</td></tr>
@@ -195,7 +207,7 @@ Macros</h2></td></tr>
 </pre>
 
 
-</pre><h2><a class="anchor" id="autotoc_md27"></a>
+</pre><h2><a class="anchor" id="autotoc_md36"></a>
 <pre>How to use the KIT_SYSTEM_TRACE_xxx macros</pre></h2>
 <pre></pre><pre>    The trace functionality is provided by the KIT_SYSTEM_TRACE and
     KIT_SYSTEM_TRACEMSG macros.  The remaining macros are used to enable/disable
@@ -241,12 +253,12 @@ Macros</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">initval</span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">initval</span>&#160;)&#160;&#160;&#160;type varname = initval</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Macro Wrapper. </p>
+<p>Allocate a variable that is only 'used' when tracing is enabled. </p>
 
 </div>
 </div>
@@ -260,7 +272,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_CLEAR_THREAD_FILTER</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#aba1784cab8547da73d5a179da962aa58">Kit::System::Trace::clearThreadFilter_</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -279,7 +291,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_DISABLE</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#ad6ec2701e45319865e9916aa632ff53c">Kit::System::Trace::disable_</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -289,7 +301,7 @@ Macros</h2></td></tr>
 </div>
 </div>
 <a id="a1d334899f6b0b04fa204885842185398" name="a1d334899f6b0b04fa204885842185398"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d334899f6b0b04fa204885842185398">&#9670;&#160;</a></span>KIT_SYSTEM_TRACE_DISABLE_SECTION</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d334899f6b0b04fa204885842185398">&#9670;&#160;</a></span>KIT_SYSTEM_TRACE_DISABLE_SECTION <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -298,7 +310,26 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_DISABLE_SECTION</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">sect</span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#aac16de27698ee59e8726898a16a4a030">Kit::System::Trace::disableSection_</a>( sect )</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Macro Wrapper. </p>
+
+</div>
+</div>
+<a id="a1d334899f6b0b04fa204885842185398" name="a1d334899f6b0b04fa204885842185398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d334899f6b0b04fa204885842185398">&#9670;&#160;</a></span>KIT_SYSTEM_TRACE_DISABLE_SECTION <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KIT_SYSTEM_TRACE_DISABLE_SECTION</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">sect</span></td><td>)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#aac16de27698ee59e8726898a16a4a030">Kit::System::Trace::disableSection_</a>( sect )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -317,7 +348,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_ENABLE</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a142db61f82010609bd38065d47454689">Kit::System::Trace::enable_</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -336,7 +367,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_ENABLE_SECTION</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">sect</span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a39377c50d8c7e1b546b3d5a30755a282">Kit::System::Trace::enableSection_</a>( sect )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -355,7 +386,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_FUNC</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">sect</span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html">Kit::System::Trace</a> kitSystemTraceInstance_( __FILE__, __LINE__, <a class="el" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a>, sect, <a class="el" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a> )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -374,7 +405,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_GET_INFO_LEVEL</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td>&#160;&#160;&#160;( (<a class="el" href="class_kit_1_1_system_1_1_trace.html#add80da6b96634d485121bc2fe7113f7e">Kit::System::Trace::InfoLevel_T</a>)0 )</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54c9c25bb482d54e39128b0b114c3e8a">Kit::System::Trace::getInfoLevel_</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -393,7 +424,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_GET_SECTIONS</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">dst</span></td><td>)</td>
-          <td>&#160;&#160;&#160;0</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#ad07946412886e40ea88f04a2b59f45b1">Kit::System::Trace::getSections_</a>( dst )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -412,7 +443,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_GET_THREAD_FILTERS</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">dst</span></td><td>)</td>
-          <td>&#160;&#160;&#160;0</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a137e6b9104ffceda2e0cb4b8f177b794">Kit::System::Trace::getThreadFilters_</a>( dst )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -431,12 +462,12 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_IS_COMPILED</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td>&#160;&#160;&#160;false</td>
+          <td>&#160;&#160;&#160;true</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns false if TRACE was NOT activated/enabled at compile time. </p>
+<p>Returns true if TRACE was activated/enabled at compile time. </p>
 
 </div>
 </div>
@@ -450,7 +481,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_IS_ENABLED</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td>&#160;&#160;&#160;false</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a28af034c29ac49e67726885529d9500a">Kit::System::Trace::isEnabled_</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -469,7 +500,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_IS_SECTION_ENABLED</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">sect</span></td><td>)</td>
-          <td>&#160;&#160;&#160;false</td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a93371ad21b12a39aca3fde1b78c1ff6b">Kit::System::Trace::isSectionEnabled_</a>( sect )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -496,8 +527,36 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span>                                                                                                        \</div>
+<div class="line">    {                                                                                                         \</div>
+<div class="line">        if ( <a class="code hl_function" href="class_kit_1_1_system_1_1_trace.html#a93371ad21b12a39aca3fde1b78c1ff6b">Kit::System::Trace::isSectionEnabled_</a>( sect ) &amp;&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_trace.html#ac48c673261fdac8addf8c3067530d5e8">Kit::System::Trace::passedThreadFilter_</a>() )     \</div>
+<div class="line">        {                                                                                                     \</div>
+<div class="line">            Kit::System::Trace::traceLocation_( sect, __FILE__, __LINE__, <a class="code hl_define" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a> ); \</div>
+<div class="line">            Kit::System::Trace::traceUserMsg_( __VA_ARGS__ );                                                 \</div>
+<div class="line">        }                                                                                                     \</div>
+<div class="line">    }                                                                                                         \</div>
+<div class="line">    while ( 0 )</div>
+<div class="ttc" id="a_trace_8h_html_a8c94ee0f95704f9036ca685e0ffe8559"><div class="ttname"><a href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</div><div class="ttdoc">Use C++11 function name.</div><div class="ttdef"><b>Definition</b> Trace.h:129</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_trace_html_a93371ad21b12a39aca3fde1b78c1ff6b"><div class="ttname"><a href="class_kit_1_1_system_1_1_trace.html#a93371ad21b12a39aca3fde1b78c1ff6b">Kit::System::Trace::isSectionEnabled_</a></div><div class="ttdeci">static bool isSectionEnabled_(const char *section)</div><div class="ttdoc">Returns true if tracing is enabled AND the specified 'section' has been enabled.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_trace_html_ac48c673261fdac8addf8c3067530d5e8"><div class="ttname"><a href="class_kit_1_1_system_1_1_trace.html#ac48c673261fdac8addf8c3067530d5e8">Kit::System::Trace::passedThreadFilter_</a></div><div class="ttdeci">static bool passedThreadFilter_()</div><div class="ttdoc">This method returns true if the thread filter has been set and the current thread's name 'passes' the...</div></div>
+</div><!-- fragment -->
 <p>Macro Wrapper. </p>
+
+</div>
+</div>
+<a id="a8c94ee0f95704f9036ca685e0ffe8559" name="a8c94ee0f95704f9036ca685e0ffe8559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c94ee0f95704f9036ca685e0ffe8559">&#9670;&#160;</a></span>KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KIT_SYSTEM_TRACE_PRETTY_FUNCNAME&#160;&#160;&#160;__func__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use C++11 function name. </p>
 
 </div>
 </div>
@@ -511,12 +570,74 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_REDIRECT</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">newdst</span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#abd7192f52efe1e9cb61f978d79f34441">Kit::System::Trace::redirect_</a>( newdst )</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Macro Wrapper. </p>
+
+</div>
+</div>
+<a id="a255349e7cb2f6d6b4a84d84d66d7b166" name="a255349e7cb2f6d6b4a84d84d66d7b166"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a255349e7cb2f6d6b4a84d84d66d7b166">&#9670;&#160;</a></span>KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">type, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">varname, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">initval</span>&#160;)&#160;&#160;&#160;type varname = initval</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>'Restricted' version of the ALLOCATE macro. Read the above comments before using! </p>
+
+</div>
+</div>
+<a id="a48dd31b965f82a046c51ca9310f8efc0" name="a48dd31b965f82a046c51ca9310f8efc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48dd31b965f82a046c51ca9310f8efc0">&#9670;&#160;</a></span>KIT_SYSTEM_TRACE_RESTRICTED_MSG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KIT_SYSTEM_TRACE_RESTRICTED_MSG</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">sect, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>...</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span>                                                                                                        \</div>
+<div class="line">    {                                                                                                         \</div>
+<div class="line">        if ( <a class="code hl_function" href="class_kit_1_1_system_1_1_trace.html#a93371ad21b12a39aca3fde1b78c1ff6b">Kit::System::Trace::isSectionEnabled_</a>( sect ) &amp;&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_trace.html#ac48c673261fdac8addf8c3067530d5e8">Kit::System::Trace::passedThreadFilter_</a>() )     \</div>
+<div class="line">        {                                                                                                     \</div>
+<div class="line">            Kit::System::Trace::traceLocation_( sect, __FILE__, __LINE__, <a class="code hl_define" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a> ); \</div>
+<div class="line">            Kit::System::Trace::traceUserMsg_( __VA_ARGS__ );                                                 \</div>
+<div class="line">        }                                                                                                     \</div>
+<div class="line">    }                                                                                                         \</div>
+<div class="line">    while ( 0 )</div>
+</div><!-- fragment -->
+<p>This is SPECIAL macro wrapper in that it NOT compiled out when USE_KIT_SYSTEM_TRACE is NOT defined. </p>
+<p>The use case for this is when the Application needs to disable - at compile time - the trace statements because the memory footprint of all of the trace strings is 'too expensive' for the target. However, there are situations where 'some' trace statements are needed (e.g. when the logging engine echos log entries to the trace engine, or when error occurs bring up the logging sub-system's persistent storage media).</p>
+<p>WARNING: Use this macro sparingly as it negates the purpose of being able to compile out the trace statements. If you are not sure if you should use this macro, you probably should NOT be using it! </p>
 
 </div>
 </div>
@@ -530,7 +651,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_REVERT</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a2d6a4abdeeac273a6a5b1d31d45c4c98">Kit::System::Trace::revert_</a>()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -553,7 +674,7 @@ Macros</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">label</span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">label</span>&#160;)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html">Kit::System::Trace</a> kitSystemTraceInstance_( __FILE__, __LINE__, <a class="el" href="#a8c94ee0f95704f9036ca685e0ffe8559">KIT_SYSTEM_TRACE_PRETTY_FUNCNAME</a>, sect, label )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -572,7 +693,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_SET_INFO_LEVEL</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">l</span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#ae4c184cf1729985ba13e6e4b76fed0ef">Kit::System::Trace::setInfoLevel_</a>( l )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -595,7 +716,7 @@ Macros</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">t2</span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">t2</span>&#160;)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54d930b9a0b012797c0cf9d621edf54b">Kit::System::Trace::setThreadFilter_</a>( t1, t2 )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -623,7 +744,7 @@ Macros</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">t3</span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">t3</span>&#160;)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54d930b9a0b012797c0cf9d621edf54b">Kit::System::Trace::setThreadFilter_</a>( t1, t2, t3 )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -656,7 +777,7 @@ Macros</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">t4</span>&#160;)</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname">t4</span>&#160;)&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54d930b9a0b012797c0cf9d621edf54b">Kit::System::Trace::setThreadFilter_</a>( t1, t2, t3, t4 )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -675,7 +796,7 @@ Macros</h2></td></tr>
           <td class="memname">#define KIT_SYSTEM_TRACE_SET_THREAD_FILTER</td>
           <td>(</td>
           <td class="paramtype"></td>          <td class="paramname"><span class="paramname">t1</span></td><td>)</td>
-          <td></td>
+          <td>&#160;&#160;&#160;<a class="el" href="class_kit_1_1_system_1_1_trace.html#a54d930b9a0b012797c0cf9d621edf54b">Kit::System::Trace::setThreadFilter_</a>( t1 )</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -799,7 +920,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Dec 2 2025 03:51:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

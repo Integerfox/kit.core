@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-30 19:17:08</td>
+            <td class="headerValue">2025-12-02 03:54:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryLo">37.5&nbsp;%</td>
@@ -87,20 +87,20 @@
 <span id="L25"><span class="lineNum">      25</span>                 :             : namespace System {</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : ////////////////////////////////////////////////////////////////////////////////</span>
-<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC tlaBgGNC">         118 : void ShutdownUnitTesting::clearAndUseCounter() noexcept</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC tlaBgGNC">         156 : void ShutdownUnitTesting::clearAndUseCounter() noexcept</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">         118 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">         118 :     counter_  = 0;</span></span>
-<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">         118 :     counting_ = true;</span></span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">         118 :     testing_  = true;</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">         118 : }</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">         156 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">         156 :     counter_  = 0;</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">         156 :     counting_ = true;</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">         156 :     testing_  = true;</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">         156 : }</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : </span>
-<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">         141 : size_t ShutdownUnitTesting::getAndClearCounter() noexcept</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">         179 : size_t ShutdownUnitTesting::getAndClearCounter() noexcept</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : {</span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">         141 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         141 :     size_t temp = counter_;</span></span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">         141 :     counter_    = 0;</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">         141 :     return temp;</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">         179 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         179 :     size_t temp = counter_;</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">         179 :     counter_    = 0;</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">         179 :     return temp;</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : }</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : </span>

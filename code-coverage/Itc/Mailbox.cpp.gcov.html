@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-30 19:17:08</td>
+            <td class="headerValue">2025-12-02 03:54:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -109,27 +109,27 @@
 <span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">          35 :     Kit::System::Thread::wait();</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          35 : }</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">         907 : void Mailbox::processMessages() noexcept</span></span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">         901 : void Mailbox::processMessages() noexcept</span></span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : {</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     // Get the next message</span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">         907 :     Kit::System::GlobalLock::begin();</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">         901 :     Kit::System::GlobalLock::begin();</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     IMessage* msgPtr = get();</span>
-<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">         907 :     Kit::System::GlobalLock::end();</span></span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">         901 :     Kit::System::GlobalLock::end();</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     // Dispatch at MOST one message</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :     if ( msgPtr )</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     {</span>
 <span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">          51 :         msgPtr-&gt;process();</span></span>
 <span id="L61"><span class="lineNum">      61</span>                 :             :     }</span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">         907 : }</span></span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">         901 : }</span></span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">         928 : bool Mailbox::isPendingMessage() noexcept</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">         922 : bool Mailbox::isPendingMessage() noexcept</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : {</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     // Get the next message</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">         928 :     Kit::System::GlobalLock::begin();</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">         922 :     Kit::System::GlobalLock::begin();</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     IMessage* msgPtr = first();</span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">         928 :     Kit::System::GlobalLock::end();</span></span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">         928 :     return msgPtr != nullptr;</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">         922 :     Kit::System::GlobalLock::end();</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">         922 :     return msgPtr != nullptr;</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : }</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             : </span>
 <span id="L73"><span class="lineNum">      73</span>                 :             : }  // end namespace</span>

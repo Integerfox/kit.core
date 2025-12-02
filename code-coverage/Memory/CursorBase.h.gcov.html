@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Memory/CursorBase.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Memory</a> - CursorBase.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-12-02 03:54:57</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
+            <td class="headerCovTableEntry">38</td>
+            <td class="headerCovTableEntry">19</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : #ifndef KIT_MEMORY_CURSOR_BASE_H_</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : #define KIT_MEMORY_CURSOR_BASE_H_</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  *</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : </span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : #include &lt;cstdint&gt;</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : #include &lt;stdint.h&gt;</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             : #include &lt;stdlib.h&gt;</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : </span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : ///</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : namespace Kit {</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : ///</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : namespace Memory {</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : </span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : /** This internal concrete class provides common methods that are used for</span>
+<span id="L23"><span class="lineNum">      23</span>                 :             :     extracting and inserting data from/to a Memory Buffer.  Because there are no</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :     guaranties on the address alignment of data in the Memory buffer - this class</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     uses memcpy() operations to read/write data from/to the Memory buffer to avoid</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :     memory address alignment errors when operating on multibyte data.</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :     A 'public' child class is required to provide the 'Endian' semantics for the</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             :     memory buffer - i.e. BIG ENDIAN or LITTLE ENDIAN - when reading/writing. It</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :     is the public child class that provides the methods to read/write multi-byte</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             :     data types (e.g. uint16_t, uint32_t, float, double, etc).</span>
+<span id="L32"><span class="lineNum">      32</span>                 :             : </span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :     Usage:</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :         1. Create an cursor instance specifying a memory buffer and optionally a</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :            starting offset into the buffer.</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :         2. Use the various methods to read/write data from/to the</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :            memory Buffer.  The cursor maintains a SINGLE internal buffer pointer</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :            that is advanced by the size of each read/write operation.</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :         3. The cursor will not 'overrun' the maximum memory buffer size.  If an</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :            overrun is attempted - the cursor enters an error state and all</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :            subsequent read/write operations will fail.  The error state can</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :            be cleared by calling setPosition() with a valid offset.</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             : </span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :   */</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             : class CursorBase</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             : {</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             : protected:</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :     /** Constructor. 'srcBuffer' must be a valid pointer to a memory buffer and</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :         'srcBufferSize' must be less than SIZE_MAX</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :      */</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :     CursorBase( void* srcBuffer, size_t srcBufferSize, size_t startingOffset );</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             : </span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : </span>
+<span id="L54"><span class="lineNum">      54</span>                 :             : public:</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :     /** Returns true if the cursor is in an error state (e.g. an 'overrun' was</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :         attempted).  Once the cursor is in an error state - it can only be</span>
+<span id="L57"><span class="lineNum">      57</span>                 :             :         'clear' by calling setPosition() with a valid 'newOffset'</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :      */</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :     bool errorOccurred() const noexcept;</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             : </span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :     /// Sets the internal pointer to a new offset.  Note: this WILL clear an existing error condition.</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :     bool setPosition( size_t newOffset ) noexcept;</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             : </span>
+<span id="L64"><span class="lineNum">      64</span>                 :             :     /// Returns the current position.  Note: 'position' is a ZERO based index/value</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :     inline size_t getPosition() const noexcept</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             :     {</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :         return m_bufPtr - m_baseBufPtr;</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             :     }</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             : </span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :     /// Returns the 'remaining byte' count</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :     inline size_t getRemainingCount() const noexcept</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :     {</span>
+<span id="L73"><span class="lineNum">      73</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">          38 :         return m_bytesRemaining;</span></span>
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 2 times"> + </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaGBC" title="Branch 16 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaGBC" title="Branch 18 was taken 2 times"> + </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 19 was not taken"> - </span><span class="tlaGBC" title="Branch 20 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 21 was not taken"> - </span><span class="tlaGBC" title="Branch 22 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 23 was not taken"> - </span> 
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 24 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 25 was not taken"> - </span><span class="tlaGBC" title="Branch 26 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 27 was not taken"> - </span><span class="tlaGBC" title="Branch 28 was taken 2 times"> + </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 29 was not taken"> - </span><span class="tlaGBC" title="Branch 30 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 31 was not taken"> - </span><span class="tlaGBC" title="Branch 32 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 33 was not taken"> - </span> 
+<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 34 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 35 was not taken"> - </span><span class="tlaGBC" title="Branch 36 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 37 was not taken"> - </span>]
+<span id="L74"><span class="lineNum">      74</span>                 :             :     }</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             : </span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :     /** Advances the internal offset 'numBytes'. Does NOT clear any existing</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :         error condition. However if the advance would cause an overrun - the</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :         cursor enters an error state and return false.</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :      */</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :     bool skip( size_t numBytes );</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             : </span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :     /// Returns the maximum size of the internal buffer, i.e. the original value provided in the Constructor</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             :     inline size_t getBufferSize() const noexcept</span>
+<span id="L84"><span class="lineNum">      84</span>                 :             :     {</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             :         return m_bufferSize;</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :     }</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             : </span>
+<span id="L88"><span class="lineNum">      88</span>                 :             : public:</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             :     /// Read a single byte. Returns false if there was an error</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             :     inline bool readU8( uint8_t&amp; dstData ) noexcept</span>
+<span id="L91"><span class="lineNum">      91</span>                 :             :     {</span>
+<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">           4 :         return readAndAdvance( &amp;dstData, sizeof( dstData ) );</span></span>
+<span id="L93"><span class="lineNum">      93</span>                 :             :     }</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             : </span>
+<span id="L95"><span class="lineNum">      95</span>                 :             :     /// Read a single byte. Returns false if there was an error</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             :     inline bool readI8( int8_t&amp; dstData ) noexcept</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             :     {</span>
+<span id="L98"><span class="lineNum">      98</span>                 :<span class="tlaGNC">           6 :         return readAndAdvance( &amp;dstData, sizeof( dstData ) );</span></span>
+<span id="L99"><span class="lineNum">      99</span>                 :             :     }</span>
+<span id="L100"><span class="lineNum">     100</span>                 :             : </span>
+<span id="L101"><span class="lineNum">     101</span>                 :             :     /// Read N bytes. Returns false if there was an error</span>
+<span id="L102"><span class="lineNum">     102</span>                 :             :     inline bool read( void* dstBuffer, size_t numBytesToRead ) noexcept</span>
+<span id="L103"><span class="lineNum">     103</span>                 :             :     {</span>
+<span id="L104"><span class="lineNum">     104</span>                 :<span class="tlaGNC">          10 :         return readAndAdvance( dstBuffer, numBytesToRead );</span></span>
+<span id="L105"><span class="lineNum">     105</span>                 :             :     }</span>
+<span id="L106"><span class="lineNum">     106</span>                 :             : </span>
+<span id="L107"><span class="lineNum">     107</span>                 :             : public:</span>
+<span id="L108"><span class="lineNum">     108</span>                 :             :     /// Write a single byte. Returns false if there was an error</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             :     inline bool writeU8( uint8_t srcData ) noexcept</span>
+<span id="L110"><span class="lineNum">     110</span>                 :             :     {</span>
+<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC">           4 :         return writeAndAdvance( &amp;srcData, sizeof( srcData ) );</span></span>
+<span id="L112"><span class="lineNum">     112</span>                 :             :     }</span>
+<span id="L113"><span class="lineNum">     113</span>                 :             : </span>
+<span id="L114"><span class="lineNum">     114</span>                 :             :     /// Write a single byte. Returns false if there was an error</span>
+<span id="L115"><span class="lineNum">     115</span>                 :             :     inline bool writeI8( int8_t srcData ) noexcept</span>
+<span id="L116"><span class="lineNum">     116</span>                 :             :     {</span>
+<span id="L117"><span class="lineNum">     117</span>                 :<span class="tlaGNC">           8 :         return writeAndAdvance( &amp;srcData, sizeof( srcData ) );</span></span>
+<span id="L118"><span class="lineNum">     118</span>                 :             :     }</span>
+<span id="L119"><span class="lineNum">     119</span>                 :             : </span>
+<span id="L120"><span class="lineNum">     120</span>                 :             :     /// Write N bytes. Returns false if there was an error</span>
+<span id="L121"><span class="lineNum">     121</span>                 :             :     inline bool write( const void* srcBuffer, size_t numBytesToWrite ) noexcept</span>
+<span id="L122"><span class="lineNum">     122</span>                 :             :     {</span>
+<span id="L123"><span class="lineNum">     123</span>                 :<span class="tlaGNC">           4 :         return writeAndAdvance( srcBuffer, numBytesToWrite );</span></span>
+<span id="L124"><span class="lineNum">     124</span>                 :             :     }</span>
+<span id="L125"><span class="lineNum">     125</span>                 :             : </span>
+<span id="L126"><span class="lineNum">     126</span>                 :             :     /// Write 'fillByte' N times (where N='numBytes').  Returns false if there was an error</span>
+<span id="L127"><span class="lineNum">     127</span>                 :             :     bool fill( size_t numBytes, uint8_t fillByte = 0 ) noexcept;</span>
+<span id="L128"><span class="lineNum">     128</span>                 :             : </span>
+<span id="L129"><span class="lineNum">     129</span>                 :             : protected:</span>
+<span id="L130"><span class="lineNum">     130</span>                 :             :     /// Helper method</span>
+<span id="L131"><span class="lineNum">     131</span>                 :             :     bool readAndAdvance( void* dstPtr, size_t dstSize ) noexcept;</span>
+<span id="L132"><span class="lineNum">     132</span>                 :             : </span>
+<span id="L133"><span class="lineNum">     133</span>                 :             :     /// Helper method</span>
+<span id="L134"><span class="lineNum">     134</span>                 :             :     bool writeAndAdvance( const void* srcPtr, size_t srcSize ) noexcept;</span>
+<span id="L135"><span class="lineNum">     135</span>                 :             : </span>
+<span id="L136"><span class="lineNum">     136</span>                 :             : protected:</span>
+<span id="L137"><span class="lineNum">     137</span>                 :             :     /// Start of the physical buffer</span>
+<span id="L138"><span class="lineNum">     138</span>                 :             :     uint8_t* m_baseBufPtr;</span>
+<span id="L139"><span class="lineNum">     139</span>                 :             : </span>
+<span id="L140"><span class="lineNum">     140</span>                 :             :     /// Current pointer/offset</span>
+<span id="L141"><span class="lineNum">     141</span>                 :             :     uint8_t* m_bufPtr;</span>
+<span id="L142"><span class="lineNum">     142</span>                 :             : </span>
+<span id="L143"><span class="lineNum">     143</span>                 :             :     /// Absolute size of the buffer</span>
+<span id="L144"><span class="lineNum">     144</span>                 :             :     size_t m_bufferSize;</span>
+<span id="L145"><span class="lineNum">     145</span>                 :             : </span>
+<span id="L146"><span class="lineNum">     146</span>                 :             :     /// Bytes remaining</span>
+<span id="L147"><span class="lineNum">     147</span>                 :             :     size_t m_bytesRemaining;</span>
+<span id="L148"><span class="lineNum">     148</span>                 :             : };</span>
+<span id="L149"><span class="lineNum">     149</span>                 :             : </span>
+<span id="L150"><span class="lineNum">     150</span>                 :             : }  // end namespaces</span>
+<span id="L151"><span class="lineNum">     151</span>                 :             : }</span>
+<span id="L152"><span class="lineNum">     152</span>                 :             : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 220-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -63,7 +63,7 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;kit_map.h&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;kit_config.h&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="_types_8h.html">Kit/Io/Types.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="_io_2_types_8h.html">Kit/Io/Types.h</a>&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_f_string_8h.html">Kit/Text/FString.h</a>&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;time.h&gt;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
@@ -413,10 +413,10 @@ $(function() {
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>}</div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_f_string_8h_html"><div class="ttname"><a href="_f_string_8h.html">FString.h</a></div></div>
+<div class="ttc" id="a_io_2_types_8h_html"><div class="ttname"><a href="_io_2_types_8h.html">Types.h</a></div></div>
 <div class="ttc" id="a_system_8h_html_a5c47387fb447e8b90041d1b05df32422"><div class="ttname"><a href="_system_8h.html#a5c47387fb447e8b90041d1b05df32422">KIT_IO_FILE_MAX_NAME</a></div><div class="ttdeci">#define KIT_IO_FILE_MAX_NAME</div><div class="ttdoc">Defer the maximum size of path/file name to the platform.</div><div class="ttdef"><b>Definition</b> System.h:57</div></div>
 <div class="ttc" id="a_system_8h_html_a9960d786c59ee2bbb7a820205dc1742e"><div class="ttname"><a href="_system_8h.html#a9960d786c59ee2bbb7a820205dc1742e">KitIoFileDirectory_T</a></div><div class="ttdeci">#define KitIoFileDirectory_T</div><div class="ttdoc">Defer the HAL type to the platform.</div><div class="ttdef"><b>Definition</b> System.h:21</div></div>
 <div class="ttc" id="a_system_8h_html_ac651a06c8e21c06e8a83599a17a4922e"><div class="ttname"><a href="_system_8h.html#ac651a06c8e21c06e8a83599a17a4922e">KIT_IO_DIRECTORY_SEPARATOR_NATIVE</a></div><div class="ttdeci">#define KIT_IO_DIRECTORY_SEPARATOR_NATIVE</div><div class="ttdoc">The application must provide/map the native directory separator.</div><div class="ttdef"><b>Definition</b> System.h:50</div></div>
-<div class="ttc" id="a_types_8h_html"><div class="ttname"><a href="_types_8h.html">Types.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_file_1_1_system_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_file_1_1_system.html">Kit::Io::File::System</a></div><div class="ttdoc">This concrete class defines the interface for handling and manipulating entries in the System's File ...</div><div class="ttdef"><b>Definition</b> System.h:76</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_file_1_1_system_html_a040581eca3c4a3db7fabbb2bbcbf252a"><div class="ttname"><a href="class_kit_1_1_io_1_1_file_1_1_system.html#a040581eca3c4a3db7fabbb2bbcbf252a">Kit::Io::File::System::splitDrive</a></div><div class="ttdeci">static void splitDrive(const char *fsEntryName, Kit::Text::IString &amp;drive, char driveSeparator=':') noexcept</div><div class="ttdoc">Extracts the drive letter from the complete name.</div><div class="ttdef"><b>Definition</b> System.h:254</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_file_1_1_system_html_a164e89407c8f69a0ab909dc73cb645f0"><div class="ttname"><a href="class_kit_1_1_io_1_1_file_1_1_system.html#a164e89407c8f69a0ab909dc73cb645f0">Kit::Io::File::System::getFirstDirEntry</a></div><div class="ttdeci">static bool getFirstDirEntry(KitIoFileDirectory_T &amp;hdl, NameString &amp;dirNameToList, NameString &amp;dstFirstEntryName) noexcept</div><div class="ttdoc">Returns the first entry in the directory.</div></div>
@@ -462,7 +462,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Dec 2 2025 03:51:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

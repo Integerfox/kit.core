@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 220-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -60,7 +60,7 @@ $(function() {
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *----------------------------------------------------------------------------*/</span><span class="comment"></span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/** @file */</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="_types_8h.html">Kit/Io/Types.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="_io_2_types_8h.html">Kit/Io/Types.h</a>&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_request_message_8h.html">Kit/Itc/RequestMessage.h</a>&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="_s_a_p_8h.html">Kit/Itc/SAP.h</a>&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
@@ -92,13 +92,13 @@ $(function() {
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#aae5a079bc047dccc1ec23e9e31a08f52">   42</a></span><span class="comment"></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_variable" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#aae5a079bc047dccc1ec23e9e31a08f52">m_rawConnectionInfo</a>;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"></span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">        /// IN: Accepted socket descriptor (passed to client)</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a84921785c3775076113fe6e118885d88">   45</a></span><span class="comment"></span>        <a class="code hl_define" href="_types_8h.html#a307fe39ec3b04fb223b9aa11585441ba">KitIoSocketHandle_T</a> <a class="code hl_variable" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a84921785c3775076113fe6e118885d88">m_acceptedFd</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a84921785c3775076113fe6e118885d88">   45</a></span><span class="comment"></span>        <a class="code hl_define" href="_io_2_types_8h.html#a307fe39ec3b04fb223b9aa11585441ba">KitIoSocketHandle_T</a> <a class="code hl_variable" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a84921785c3775076113fe6e118885d88">m_acceptedFd</a>;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"></span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        /// OUT: Client&#39;s acceptance flag/status (returned to the listener)</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a60ff549895b917928347aa17cc8ac51d">   48</a></span><span class="comment"></span>        <span class="keywordtype">bool</span> <a class="code hl_variable" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a60ff549895b917928347aa17cc8ac51d">m_accepted</a>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"></span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">        /// Constructor</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a03a7174d4291b817dabe8606a936c34f">   51</a></span><span class="comment"></span>        <a class="code hl_function" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a03a7174d4291b817dabe8606a936c34f">Payload_T</a>( <a class="code hl_define" href="_types_8h.html#a307fe39ec3b04fb223b9aa11585441ba">KitIoSocketHandle_T</a> newfd, <span class="keyword">const</span> <span class="keywordtype">char</span>* rawConnectionInfo )</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a03a7174d4291b817dabe8606a936c34f">   51</a></span><span class="comment"></span>        <a class="code hl_function" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a03a7174d4291b817dabe8606a936c34f">Payload_T</a>( <a class="code hl_define" href="_io_2_types_8h.html#a307fe39ec3b04fb223b9aa11585441ba">KitIoSocketHandle_T</a> newfd, <span class="keyword">const</span> <span class="keywordtype">char</span>* rawConnectionInfo )</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            : <a class="code hl_variable" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#aae5a079bc047dccc1ec23e9e31a08f52">m_rawConnectionInfo</a>( rawConnectionInfo )</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            , <a class="code hl_variable" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a84921785c3775076113fe6e118885d88">m_acceptedFd</a>( newfd )</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            , <a class="code hl_variable" href="struct_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_1_1_payload___t.html#a60ff549895b917928347aa17cc8ac51d">m_accepted</a>( false )</div>
@@ -125,10 +125,10 @@ $(function() {
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="ttc" id="a_io_2_types_8h_html"><div class="ttname"><a href="_io_2_types_8h.html">Types.h</a></div></div>
+<div class="ttc" id="a_io_2_types_8h_html_a307fe39ec3b04fb223b9aa11585441ba"><div class="ttname"><a href="_io_2_types_8h.html#a307fe39ec3b04fb223b9aa11585441ba">KitIoSocketHandle_T</a></div><div class="ttdeci">#define KitIoSocketHandle_T</div><div class="ttdoc">Defers the &quot;file descriptor&quot; for a socket handle type to the target platform.</div><div class="ttdef"><b>Definition</b> Types.h:54</div></div>
 <div class="ttc" id="a_request_message_8h_html"><div class="ttname"><a href="_request_message_8h.html">RequestMessage.h</a></div></div>
 <div class="ttc" id="a_s_a_p_8h_html"><div class="ttname"><a href="_s_a_p_8h.html">SAP.h</a></div></div>
-<div class="ttc" id="a_types_8h_html"><div class="ttname"><a href="_types_8h.html">Types.h</a></div></div>
-<div class="ttc" id="a_types_8h_html_a307fe39ec3b04fb223b9aa11585441ba"><div class="ttname"><a href="_types_8h.html#a307fe39ec3b04fb223b9aa11585441ba">KitIoSocketHandle_T</a></div><div class="ttdeci">#define KitIoSocketHandle_T</div><div class="ttdoc">Defers the &quot;file descriptor&quot; for a socket handle type to the target platform.</div><div class="ttdef"><b>Definition</b> Types.h:54</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_socket_1_1_i_listener_client_request.html">Kit::Io::Socket::IListenerClientRequest</a></div><div class="ttdoc">This abstract class define message types and payloads for a set of ITC services.</div><div class="ttdef"><b>Definition</b> IListenerClientRequest.h:31</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_html_a47f2bacf2f64c0a723c2610bb547b3ad"><div class="ttname"><a href="class_kit_1_1_io_1_1_socket_1_1_i_listener_client_request.html#a47f2bacf2f64c0a723c2610bb547b3ad">Kit::Io::Socket::IListenerClientRequest::request</a></div><div class="ttdeci">virtual void request(NewConnectionMsg &amp;msg)=0</div><div class="ttdoc">Request: NewConnection.</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_socket_1_1_i_listener_client_request_html_a7e2cfa169775ceb77febb97d639e19db"><div class="ttname"><a href="class_kit_1_1_io_1_1_socket_1_1_i_listener_client_request.html#a7e2cfa169775ceb77febb97d639e19db">Kit::Io::Socket::IListenerClientRequest::SAP</a></div><div class="ttdeci">Kit::Itc::SAP&lt; IListenerClientRequest &gt; SAP</div><div class="ttdoc">SAP for this API.</div><div class="ttdef"><b>Definition</b> IListenerClientRequest.h:34</div></div>
@@ -144,7 +144,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Dec 2 2025 03:51:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

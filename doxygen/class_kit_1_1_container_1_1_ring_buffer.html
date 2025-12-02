@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 220-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -62,7 +62,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer__inherit__graph.svg" width="780" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer__inherit__graph.svg" width="1496" height="244"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::RingBuffer&lt; ITEM &gt;:</div>
@@ -74,9 +74,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a128d80f06e0e7489ebc6f4f30b516d33" id="r_a128d80f06e0e7489ebc6f4f30b516d33"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a128d80f06e0e7489ebc6f4f30b516d33">RingBuffer</a> (ITEM *memoryBuffer, unsigned N)</td></tr>
-<tr class="memdesc:a128d80f06e0e7489ebc6f4f30b516d33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:a128d80f06e0e7489ebc6f4f30b516d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeae33a075bbf6ed87fbb3b16993d84ea" id="r_aeae33a075bbf6ed87fbb3b16993d84ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeae33a075bbf6ed87fbb3b16993d84ea">RingBuffer</a> (ITEM *memoryBuffer, unsigned N, bool initializeMemory=true)</td></tr>
+<tr class="memdesc:aeae33a075bbf6ed87fbb3b16993d84ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:aeae33a075bbf6ed87fbb3b16993d84ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b350edc1e9c9f5a084e9739d45a3d1d" id="r_a4b350edc1e9c9f5a084e9739d45a3d1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b350edc1e9c9f5a084e9739d45a3d1d">add</a> (const ITEM &amp;item) noexcept</td></tr>
 <tr class="memdesc:a4b350edc1e9c9f5a084e9739d45a3d1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds new item to the ring buffer.  <br /></td></tr>
 <tr class="separator:a4b350edc1e9c9f5a084e9739d45a3d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,8 +172,8 @@ class Kit::Container::RingBuffer&lt; ITEM &gt;</div><p>This template class imple
 <p>There is a set of methods that allow the application direct memory access - AS A LINEAR BUFFER - to a subset of the ring buffer's data. At any given time the size of the linear buffer is restricted to the amount of data that can be accessed without 'wrapping' the ring buffer memory space. The intended use case for these methods is for bulk copy operations (e.g populating a FIFO or a DMA buffer). <a class="el" href="#a9a70f0db2816455a7ae20cb39269efb2" title="This method returns a pointer to the next item to be removed.">peekNextRemoveItems()</a> <a class="el" href="#a7a50c280cca8d9768293c5572efe2fa8" title="This method &#39;removes&#39; N elements - that were removed using the pointer returned from peekNextRemoveIt...">removeElements()</a> <a class="el" href="#a1e11b1cbd7fdd7ce120dbac9dc99d7cc" title="This method returns a pointer to the next item to be added.">peekNextAddItems()</a> <a class="el" href="#a7d519398b6660f274b2264073265d9d9" title="This method &#39;adds&#39; N elements - that were populated using the pointer returned from peekNextAddItems ...">addElements()</a></p>
 <p>Template Args: ITEM:= <a class="el" href="namespace_kit_1_1_type.html" title="The Type namespace provides various types that are not unique to a single namespace.">Type</a> of the data stored in the Ring Buffer </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a128d80f06e0e7489ebc6f4f30b516d33" name="a128d80f06e0e7489ebc6f4f30b516d33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a128d80f06e0e7489ebc6f4f30b516d33">&#9670;&#160;</a></span>RingBuffer()</h2>
+<a id="aeae33a075bbf6ed87fbb3b16993d84ea" name="aeae33a075bbf6ed87fbb3b16993d84ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeae33a075bbf6ed87fbb3b16993d84ea">&#9670;&#160;</a></span>RingBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +191,12 @@ template&lt;class ITEM &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned</td>          <td class="paramname"><span class="paramname"><em>N</em></span>&#160;)</td>
+          <td class="paramtype">unsigned</td>          <td class="paramname"><span class="paramname"><em>N</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>initializeMemory</em><span class="paramdefsep"> = </span><span class="paramdefval">true</span></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -485,7 +490,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Dec 2 2025 03:51:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

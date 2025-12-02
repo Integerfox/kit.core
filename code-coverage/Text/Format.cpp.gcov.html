@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-30 19:17:08</td>
+            <td class="headerValue">2025-12-02 03:54:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -106,14 +106,14 @@
 <span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">           7 :     return !destString.truncated();</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : }</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             : </span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">          15 : bool Format::asciiHex( const void* binaryData,</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">          21 : bool Format::asciiHex( const void* binaryData,</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :                        int         len,</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :                        IString&amp;    destString,</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :                        bool        upperCase,</span>
 <span id="L51"><span class="lineNum">      51</span>                 :             :                        bool        appendToString,</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :                        char        separator ) noexcept</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : {</span>
-<span id="L54"><span class="lineNum">      54</span>         [<span class="tlaGBC" title="Branch 0 was taken 11 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">          15 :     if ( !binaryData || len &lt;= 0 )</span></span>
+<span id="L54"><span class="lineNum">      54</span>         [<span class="tlaGBC" title="Branch 0 was taken 17 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">          21 :     if ( !binaryData || len &lt;= 0 )</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     {</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :         return false;  // Do nothing!</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     }</span>
@@ -121,30 +121,30 @@
 <span id="L59"><span class="lineNum">      59</span>                 :             :     // Select look-up table based on a requested 'case'</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :     static const char lowerCaseTable[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };</span>
 <span id="L61"><span class="lineNum">      61</span>                 :             :     static const char upperCaseTable[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };</span>
-<span id="L62"><span class="lineNum">      62</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 9 times"> + </span>]:<span class="tlaGNC">          11 :     const char*       tableP           = upperCase ? upperCaseTable : lowerCaseTable;</span></span>
+<span id="L62"><span class="lineNum">      62</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span>]:<span class="tlaGNC">          17 :     const char*       tableP           = upperCase ? upperCaseTable : lowerCaseTable;</span></span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :     // Clear Destination</span>
-<span id="L65"><span class="lineNum">      65</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          11 :     if ( !appendToString )</span></span>
+<span id="L65"><span class="lineNum">      65</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          17 :     if ( !appendToString )</span></span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     {</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">           8 :         destString.clear();</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">          14 :         destString.clear();</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     }</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : </span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :     // Convert the data</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     const char* ptr = static_cast&lt;const char*&gt;( binaryData );</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :     char        c;</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     int         i;</span>
-<span id="L74"><span class="lineNum">      74</span>         [<span class="tlaGBC" title="Branch 0 was taken 54 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          65 :     for ( i = 0; i &lt; len; i++, ptr++ )</span></span>
+<span id="L74"><span class="lineNum">      74</span>         [<span class="tlaGBC" title="Branch 0 was taken 90 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 17 times"> + </span>]:<span class="tlaGNC">         107 :     for ( i = 0; i &lt; len; i++, ptr++ )</span></span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     {</span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          54 :         c           = *ptr;</span></span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          54 :         destString += tableP[( c &gt;&gt; 4 ) &amp; 0x0F];</span></span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">          54 :         destString += tableP[c &amp; 0x0F];</span></span>
-<span id="L79"><span class="lineNum">      79</span>   [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 49 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">          54 :         if ( separator != '\0' &amp;&amp; ( i + 1 ) &lt; len )</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          90 :         c           = *ptr;</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          90 :         destString += tableP[( c &gt;&gt; 4 ) &amp; 0x0F];</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">          90 :         destString += tableP[c &amp; 0x0F];</span></span>
+<span id="L79"><span class="lineNum">      79</span>   [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 85 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">          90 :         if ( separator != '\0' &amp;&amp; ( i + 1 ) &lt; len )</span></span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :         {</span>
 <span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">           4 :             destString += separator;</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :         }</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :     }</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             : </span>
-<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">          11 :     return !destString.truncated();</span></span>
+<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">          17 :     return !destString.truncated();</span></span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : }</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             : </span>
 <span id="L88"><span class="lineNum">      88</span>                 :<span class="tlaGNC">           6 : bool Format::asciiBinary( const void* binaryData,</span></span>
@@ -207,7 +207,7 @@
 <span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">           4 :     return Format::string( binaryData, len, destString, true );</span></span>
 <span id="L146"><span class="lineNum">     146</span>                 :             : }</span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : </span>
-<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">        5744 : bool Format::formatMsec( IString&amp;  buffer,</span></span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">        5828 : bool Format::formatMsec( IString&amp;  buffer,</span></span>
 <span id="L149"><span class="lineNum">     149</span>                 :             :                          long long elapsedMsec,</span>
 <span id="L150"><span class="lineNum">     150</span>                 :             :                          bool      encodeMsec,</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :                          bool      encodeDay,</span>
@@ -217,30 +217,30 @@
 <span id="L155"><span class="lineNum">     155</span>                 :             :     lldiv_t   result;</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             : </span>
 <span id="L157"><span class="lineNum">     157</span>                 :             :     // Separate seconds and milliseconds</span>
-<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC">        5744 :     result                = lldiv( elapsedMsec, 1000LL );</span></span>
+<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC">        5828 :     result                = lldiv( elapsedMsec, 1000LL );</span></span>
 <span id="L159"><span class="lineNum">     159</span>                 :             :     long long msec        = result.rem;</span>
 <span id="L160"><span class="lineNum">     160</span>                 :             :     long long elapsedSecs = result.quot;</span>
 <span id="L161"><span class="lineNum">     161</span>                 :             : </span>
 <span id="L162"><span class="lineNum">     162</span>                 :             :     // Get hours</span>
-<span id="L163"><span class="lineNum">     163</span>                 :<span class="tlaGNC">        5744 :     result = lldiv( elapsedSecs, 60L * 60LL );</span></span>
+<span id="L163"><span class="lineNum">     163</span>                 :<span class="tlaGNC">        5828 :     result = lldiv( elapsedSecs, 60L * 60LL );</span></span>
 <span id="L164"><span class="lineNum">     164</span>                 :             :     hh     = result.quot;</span>
 <span id="L165"><span class="lineNum">     165</span>                 :             :     t      = result.rem;</span>
 <span id="L166"><span class="lineNum">     166</span>                 :             : </span>
 <span id="L167"><span class="lineNum">     167</span>                 :             :     // Get Minutes &amp; Seconds</span>
-<span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">        5744 :     result = lldiv( t, 60L );</span></span>
+<span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">        5828 :     result = lldiv( t, 60L );</span></span>
 <span id="L169"><span class="lineNum">     169</span>                 :             :     mm     = result.quot;</span>
 <span id="L170"><span class="lineNum">     170</span>                 :             :     ss     = result.rem;</span>
 <span id="L171"><span class="lineNum">     171</span>                 :             : </span>
 <span id="L172"><span class="lineNum">     172</span>                 :             :     // Format string</span>
-<span id="L173"><span class="lineNum">     173</span>         [<span class="tlaGBC" title="Branch 0 was taken 5740 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">        5744 :     if ( encodeDay )</span></span>
+<span id="L173"><span class="lineNum">     173</span>         [<span class="tlaGBC" title="Branch 0 was taken 5824 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">        5828 :     if ( encodeDay )</span></span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :     {</span>
-<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">        5740 :         result = lldiv( hh, 24LL );</span></span>
+<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">        5824 :         result = lldiv( hh, 24LL );</span></span>
 <span id="L176"><span class="lineNum">     176</span>                 :             :         dd     = result.quot;</span>
 <span id="L177"><span class="lineNum">     177</span>                 :             :         hh     = result.rem;</span>
 <span id="L178"><span class="lineNum">     178</span>                 :             : </span>
-<span id="L179"><span class="lineNum">     179</span>         [<span class="tlaGBC" title="Branch 0 was taken 5737 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">        5740 :         if ( encodeMsec )</span></span>
+<span id="L179"><span class="lineNum">     179</span>         [<span class="tlaGBC" title="Branch 0 was taken 5821 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">        5824 :         if ( encodeMsec )</span></span>
 <span id="L180"><span class="lineNum">     180</span>                 :             :         {</span>
-<span id="L181"><span class="lineNum">     181</span>                 :<span class="tlaGNC">        5737 :             buffer.formatOpt( appendToString,</span></span>
+<span id="L181"><span class="lineNum">     181</span>                 :<span class="tlaGNC">        5821 :             buffer.formatOpt( appendToString,</span></span>
 <span id="L182"><span class="lineNum">     182</span>                 :             :                               &quot;%02u %02u:%02u:%02u.%03u&quot;,</span>
 <span id="L183"><span class="lineNum">     183</span>                 :             :                               static_cast&lt;unsigned&gt;( dd ),</span>
 <span id="L184"><span class="lineNum">     184</span>                 :             :                               static_cast&lt;unsigned&gt;( hh ),</span>
@@ -279,7 +279,7 @@
 <span id="L217"><span class="lineNum">     217</span>                 :             :         }</span>
 <span id="L218"><span class="lineNum">     218</span>                 :             :     }</span>
 <span id="L219"><span class="lineNum">     219</span>                 :             : </span>
-<span id="L220"><span class="lineNum">     220</span>                 :<span class="tlaGNC">        5744 :     return !buffer.truncated();</span></span>
+<span id="L220"><span class="lineNum">     220</span>                 :<span class="tlaGNC">        5828 :     return !buffer.truncated();</span></span>
 <span id="L221"><span class="lineNum">     221</span>                 :             : }</span>
 <span id="L222"><span class="lineNum">     222</span>                 :             : </span>
 <span id="L223"><span class="lineNum">     223</span>                 :             : </span>

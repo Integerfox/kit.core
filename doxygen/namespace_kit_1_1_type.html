@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 216-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 220-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,7 +46,10 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Kit::Type Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -54,6 +57,23 @@ $(function() {
 <p>The <a class="el" href="namespace_kit_1_1_type.html" title="The Type namespace provides various types that are not unique to a single namespace.">Type</a> namespace provides various types that are not unique to a single namespace.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_kit_1_1_type_1_1_guid___t.html">Guid_T</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This structure defines a type for a 16 Byte GUID/UUID.  <a href="struct_kit_1_1_type_1_1_guid___t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:union_kit_1_1_type_1_1_guid___t_8____unnamed2____" id="r_union_kit_1_1_type_1_1_guid___t_8____unnamed2____"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#union_kit_1_1_type_1_1_guid___t_8____unnamed2____">Guid_T.__unnamed2__</a></td></tr>
+<tr class="memdesc:union_kit_1_1_type_1_1_guid___t_8____unnamed2____"><td class="mdescLeft">&#160;</td><td class="mdescRight">Value as single memory block, and/or internal structure.  <a href="#union_kit_1_1_type_1_1_guid___t_8____unnamed2____">More...</a><br /></td></tr>
+<tr class="separator:union_kit_1_1_type_1_1_guid___t_8____unnamed2____"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:struct_kit_1_1_type_1_1_guid___t_8____unnamed2_____8____unnamed4____" id="r_struct_kit_1_1_type_1_1_guid___t_8____unnamed2_____8____unnamed4____"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#struct_kit_1_1_type_1_1_guid___t_8____unnamed2_____8____unnamed4____">Guid_T.__unnamed2__.__unnamed4__</a></td></tr>
+<tr class="separator:struct_kit_1_1_type_1_1_guid___t_8____unnamed2_____8____unnamed4____"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a4ec99b1b991af8de4388ce51325e822a" id="r_a4ec99b1b991af8de4388ce51325e822a"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="class_kit_1_1_text_1_1_f_string.html">Kit::Text::FString</a>&lt; <a class="el" href="_guid_8h.html#a38127d1c335dde33e99078e89b3d95c4">KIT_TYPE_GUID_MAX_FORMATTED_LENGTH</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ec99b1b991af8de4388ce51325e822a">GuidString_T</a></td></tr>
+<tr class="memdesc:a4ec99b1b991af8de4388ce51325e822a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience typedef for a GUID String.  <br /></td></tr>
+<tr class="separator:a4ec99b1b991af8de4388ce51325e822a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:adbf3acb7f931223bc52db54394f8ba4b" id="r_adbf3acb7f931223bc52db54394f8ba4b"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbf3acb7f931223bc52db54394f8ba4b">TraverserStatus</a> { <a class="el" href="#adbf3acb7f931223bc52db54394f8ba4ba213513a9a74f61787cb0d6ac102750c6">eABORT</a>
@@ -61,10 +81,127 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:adbf3acb7f931223bc52db54394f8ba4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class defines a set of status(s) that are used with the traverser design pattern.  <a href="#adbf3acb7f931223bc52db54394f8ba4b">More...</a><br /></td></tr>
 <tr class="separator:adbf3acb7f931223bc52db54394f8ba4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aa86e7b3ecf0a40c0bc6bce612c33187d" id="r_aa86e7b3ecf0a40c0bc6bce612c33187d"><td class="memTemplParams" colspan="2">template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </td></tr>
+<tr class="memitem:aa86e7b3ecf0a40c0bc6bce612c33187d"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aa86e7b3ecf0a40c0bc6bce612c33187d">betterEnumToString</a> (NUMERIC_TYPE numericValue, const char *unknownText) noexcept</td></tr>
+<tr class="memdesc:aa86e7b3ecf0a40c0bc6bce612c33187d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handy method to convert numeric value to its BETTER ENUM string.The caller provides the 'unknown' text if numericValue does not map to a valid ENUM symbol.  <br /></td></tr>
+<tr class="separator:aa86e7b3ecf0a40c0bc6bce612c33187d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27f84d41bbaab9d4a1c1bb4b108ae3e0" id="r_a27f84d41bbaab9d4a1c1bb4b108ae3e0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27f84d41bbaab9d4a1c1bb4b108ae3e0">endianBswap16</a> (uint16_t x)</td></tr>
+<tr class="memdesc:a27f84d41bbaab9d4a1c1bb4b108ae3e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method. Do not call directly - always use the macros above.  <br /></td></tr>
+<tr class="separator:a27f84d41bbaab9d4a1c1bb4b108ae3e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5f3174fb7349e50c03a0df20fdc383f" id="r_ad5f3174fb7349e50c03a0df20fdc383f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5f3174fb7349e50c03a0df20fdc383f">endianBswap32</a> (uint32_t x)</td></tr>
+<tr class="memdesc:ad5f3174fb7349e50c03a0df20fdc383f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method. Do not call directly - always use the macros above.  <br /></td></tr>
+<tr class="separator:ad5f3174fb7349e50c03a0df20fdc383f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b2a01aca8c02a4d6ef2d0a2570b7657" id="r_a0b2a01aca8c02a4d6ef2d0a2570b7657"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b2a01aca8c02a4d6ef2d0a2570b7657">endianBswap64</a> (uint64_t x)</td></tr>
+<tr class="memdesc:a0b2a01aca8c02a4d6ef2d0a2570b7657"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method. Do not call directly - always use the macros above.  <br /></td></tr>
+<tr class="separator:a0b2a01aca8c02a4d6ef2d0a2570b7657"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb7536fcc4e4f3bab57113afaca01679" id="r_aeb7536fcc4e4f3bab57113afaca01679"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb7536fcc4e4f3bab57113afaca01679">endianBswapF32</a> (float x)</td></tr>
+<tr class="memdesc:aeb7536fcc4e4f3bab57113afaca01679"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method. Do not call directly - always use the macros above.  <br /></td></tr>
+<tr class="separator:aeb7536fcc4e4f3bab57113afaca01679"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01ddd6bda36beb88626fd13d1d8e4661" id="r_a01ddd6bda36beb88626fd13d1d8e4661"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01ddd6bda36beb88626fd13d1d8e4661">endianBswapF64</a> (double x)</td></tr>
+<tr class="memdesc:a01ddd6bda36beb88626fd13d1d8e4661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method. Do not call directly - always use the macros above.  <br /></td></tr>
+<tr class="separator:a01ddd6bda36beb88626fd13d1d8e4661"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_type.html" title="The Type namespace provides various types that are not unique to a single namespace.">Type</a> namespace provides various types that are not unique to a single namespace. </p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="union_kit_1_1_type_1_1_guid___t_8____unnamed2____" id="union_kit_1_1_type_1_1_guid___t_8____unnamed2____"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#union_kit_1_1_type_1_1_guid___t_8____unnamed2____">&#9670;&#160;</a></span>Kit::Type::Guid_T.__unnamed2__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union Kit::Type::Guid_T.__unnamed2__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><p>Value as single memory block, and/or internal structure. </p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="aa4d79cb252987ad7f099770543e601a1" name="aa4d79cb252987ad7f099770543e601a1"></a>struct <a class="el" href="#struct_kit_1_1_type_1_1_guid___t_8____unnamed2_____8____unnamed4____">Guid_T.__unnamed2__.__unnamed4__</a></td>
+<td class="fieldname">
+__unnamed__</td>
+<td class="fielddoc">
+</td></tr>
+<tr><td class="fieldtype">
+<a id="a1709630fc424454eb2ceadb556dc03c9" name="a1709630fc424454eb2ceadb556dc03c9"></a>uint8_t</td>
+<td class="fieldname">
+block[<a class="el" href="_guid_8h.html#afead7e528b4dbe027c32c8c6a07ffc47">KIT_TYPE_GUID_BINARY_LENGTH</a>]</td>
+<td class="fielddoc">
+GUID value as single block of memory. </td></tr>
+</table>
+
+</div>
+</div>
+<a name="struct_kit_1_1_type_1_1_guid___t_8____unnamed2_____8____unnamed4____" id="struct_kit_1_1_type_1_1_guid___t_8____unnamed2_____8____unnamed4____"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#struct_kit_1_1_type_1_1_guid___t_8____unnamed2_____8____unnamed4____">&#9670;&#160;</a></span>Kit::Type::Guid_T.__unnamed2__.__unnamed4__</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct Kit::Type::Guid_T.__unnamed2__.__unnamed4__</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"></div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="a6a5716a162842157f4f022704d705c50" name="a6a5716a162842157f4f022704d705c50"></a>uint8_t</td>
+<td class="fieldname">
+clock_seq_hi_lo[2]</td>
+<td class="fielddoc">
+Variant (1-3 bits), Clock sequence (13-15 bits) </td></tr>
+<tr><td class="fieldtype">
+<a id="a0eb2e77a9f27ea4fa4c1c7dfabcce750" name="a0eb2e77a9f27ea4fa4c1c7dfabcce750"></a>uint8_t</td>
+<td class="fieldname">
+node[6]</td>
+<td class="fielddoc">
+Node ID (48 bits) </td></tr>
+<tr><td class="fieldtype">
+<a id="afcb0791c973f0c5a82adfef5cc52c433" name="afcb0791c973f0c5a82adfef5cc52c433"></a>uint8_t</td>
+<td class="fieldname">
+time_hi_version[2]</td>
+<td class="fielddoc">
+Version (4bits) and high 12 bits of time. </td></tr>
+<tr><td class="fieldtype">
+<a id="aea9854a946bcd320877fc6c1c746240b" name="aea9854a946bcd320877fc6c1c746240b"></a>uint8_t</td>
+<td class="fieldname">
+time_low[4]</td>
+<td class="fielddoc">
+Low 32 bits of the time. </td></tr>
+<tr><td class="fieldtype">
+<a id="ace32057bea1bbb4b67223f30b0acb7c6" name="ace32057bea1bbb4b67223f30b0acb7c6"></a>uint8_t</td>
+<td class="fieldname">
+time_mid[2]</td>
+<td class="fielddoc">
+Middle 16 bits of the time. </td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a4ec99b1b991af8de4388ce51325e822a" name="a4ec99b1b991af8de4388ce51325e822a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ec99b1b991af8de4388ce51325e822a">&#9670;&#160;</a></span>GuidString_T</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="class_kit_1_1_text_1_1_f_string.html">Kit::Text::FString</a>&lt;<a class="el" href="_guid_8h.html#a38127d1c335dde33e99078e89b3d95c4">KIT_TYPE_GUID_MAX_FORMATTED_LENGTH</a>&gt; <a class="el" href="#a4ec99b1b991af8de4388ce51325e822a">Kit::Type::GuidString_T</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience typedef for a GUID String. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="adbf3acb7f931223bc52db54394f8ba4b" name="adbf3acb7f931223bc52db54394f8ba4b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adbf3acb7f931223bc52db54394f8ba4b">&#9670;&#160;</a></span>TraverserStatus</h2>
 
@@ -96,10 +233,179 @@ Enumerations</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="aa86e7b3ecf0a40c0bc6bce612c33187d" name="aa86e7b3ecf0a40c0bc6bce612c33187d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa86e7b3ecf0a40c0bc6bce612c33187d">&#9670;&#160;</a></span>betterEnumToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * Kit::Type::betterEnumToString </td>
+          <td>(</td>
+          <td class="paramtype">NUMERIC_TYPE</td>          <td class="paramname"><span class="paramname"><em>numericValue</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>unknownText</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handy method to convert numeric value to its BETTER ENUM string.The caller provides the 'unknown' text if numericValue does not map to a valid ENUM symbol. </p>
+
+</div>
+</div>
+<a id="a27f84d41bbaab9d4a1c1bb4b108ae3e0" name="a27f84d41bbaab9d4a1c1bb4b108ae3e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27f84d41bbaab9d4a1c1bb4b108ae3e0">&#9670;&#160;</a></span>endianBswap16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t Kit::Type::endianBswap16 </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal method. Do not call directly - always use the macros above. </p>
+
+</div>
+</div>
+<a id="ad5f3174fb7349e50c03a0df20fdc383f" name="ad5f3174fb7349e50c03a0df20fdc383f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5f3174fb7349e50c03a0df20fdc383f">&#9670;&#160;</a></span>endianBswap32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Kit::Type::endianBswap32 </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal method. Do not call directly - always use the macros above. </p>
+
+</div>
+</div>
+<a id="a0b2a01aca8c02a4d6ef2d0a2570b7657" name="a0b2a01aca8c02a4d6ef2d0a2570b7657"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b2a01aca8c02a4d6ef2d0a2570b7657">&#9670;&#160;</a></span>endianBswap64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t Kit::Type::endianBswap64 </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal method. Do not call directly - always use the macros above. </p>
+
+</div>
+</div>
+<a id="aeb7536fcc4e4f3bab57113afaca01679" name="aeb7536fcc4e4f3bab57113afaca01679"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb7536fcc4e4f3bab57113afaca01679">&#9670;&#160;</a></span>endianBswapF32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Kit::Type::endianBswapF32 </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal method. Do not call directly - always use the macros above. </p>
+
+</div>
+</div>
+<a id="a01ddd6bda36beb88626fd13d1d8e4661" name="a01ddd6bda36beb88626fd13d1d8e4661"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ddd6bda36beb88626fd13d1d8e4661">&#9670;&#160;</a></span>endianBswapF64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Kit::Type::endianBswapF64 </td>
+          <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>x</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal method. Do not call directly - always use the macros above. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 30 2025 19:14:39 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Dec 2 2025 03:51:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
