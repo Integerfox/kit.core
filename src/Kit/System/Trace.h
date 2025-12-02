@@ -114,14 +114,6 @@
 /// 'Restricted' version of the ALLOCATE macro.  Read the above comments before using!
 #define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE( type, varname, initval ) type varname = initval
 
-#else
-#define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )
-#define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE( type, varname, initval )
-#endif  // end USE_KIT_SYSTEM_RESTRICTED_TRACE || USE_KIT_SYSTEM_TRACE
-
-
-#ifdef USE_KIT_SYSTEM_TRACE
-
 
 // PRETTY_FUNCTION macro is non-standard
 #if defined( __GNUC__ )
@@ -138,6 +130,7 @@
 #endif  // end __PRETTY_FUNCTION__
 
 
+#ifdef USE_KIT_SYSTEM_TRACE
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_FUNC( sect ) Kit::System::Trace kitSystemTraceInstance_( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME )
 
@@ -155,6 +148,7 @@
         }                                                                                                     \
     }                                                                                                         \
     while ( 0 )
+#endif // end USE_KIT_SYSTEM_TRACE
 
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_ENABLE() Kit::System::Trace::enable_()
@@ -216,8 +210,14 @@
 /// Allocate a variable that is only 'used' when tracing is enabled
 #define KIT_SYSTEM_TRACE_ALLOCATE( type, varname, initval ) type varname = initval
 
-
 #else
+
+/// Macro Wrapper
+#define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )
+
+/// Macro Wrapper
+#define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE( type, varname, initval )
+
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_FUNC( sect )
 
@@ -284,7 +284,7 @@
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_ALLOCATE( type, varname, initval )
 
-#endif  // USE_KIT_SYSTEM_TRACE
+#endif  // end USE_KIT_SYSTEM_TRACE || USE_KIT_SYSTEM_RESTRICTED_TRACE
 
 
 //////////////////////////////////////////////////////////////////////////////

@@ -12,6 +12,20 @@
 
 This file declares the Logging functions available to the KIT Logging Domain.
 
+CLIENTS SHOULD NOT call the Kit::Logging::Pkg::logfXXX() method directly. Instead
+the should use the KIT_LOGGING_LOG_XXX() macros.  This allows the application
+to compile out the KIT library's usage of the Logging framework if desired.
+
+The compile switch do 'disable' the Logging framework usage is:
+    DISABLED_KIT_LOGGING_PKG_LOG_API
+
+When this switch is defined the KIT_LOGGING_LOG_XXX() macros convert the logging
+calls into KIT_SYSTEM_TRACE_RESTRICTED_MSG calls
+
+NOTE: When the Application compiles out the Logging engine using the
+      DISABLED_KIT_LOGGING_PKG_LOG_API switch - it must still provide the
+      "logging configuration", i.e. the assignment absolute values for 
+      classification and package IDs.
 */
 
 #include "kit_config.h"
@@ -23,14 +37,33 @@ This file declares the Logging functions available to the KIT Logging Domain.
 #include "Kit/System/printfchecker.h"
 
 
-/** Support Conditionally compiling out calls to the Logging framework.  This
-    allows the KIT library to be used WITHOUT the Logging framework being
-    implemented or mocked.  The default is to ENABLE the Logging APIs.
-*/
+// Support Conditionally compiling the Logging calls to Trace calls 
 #ifdef DISABLED_KIT_LOGGING_PKG_LOG_API
-#define logfSystem( classificationId, messageId, ... ) ::Kit::Logging::Framework::LogResult_T::ADDED
-#define logfDriver( classificationId, messageId, ... ) ::Kit::Logging::Framework::LogResult_T::ADDED
+#define KIT_LOGGING_LOG_SYSTEM( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, ::Kit::Logging::Pkg::Package::PACKAGE_ID, ::Kit::Logging::Pkg::SubSystemId::SYSTEM, messageId, __VA_ARGS__ )
+#define KIT_LOGGING_LOG_DRIVER( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, ::Kit::Logging::Pkg::Package::PACKAGE_ID, ::Kit::Logging::Pkg::SubSystemId::DRIVER, messageId, __VA_ARGS__ )
 #else
+
+/** This method generates a SYSTEM Sub-system log entry
+    @param classificationId               Classification ID of the log entry
+    @param messageId                      Message ID of the log entry
+    @param msgTextFormat                  Printf style format string for the log entry's info text
+    @param ...                            Variable arguments for the format string
+
+    @return Kit::Logging::Framework::LogResult_T
+*/
+#define KIT_LOGGING_LOG_SYSTEM( classificationId, messageId, ... ) ::Kit::Logging::Pkg::logfSystem( classificationId, messageId, __VA_ARGS__ )
+
+/** This method generates a DRIVER Sub-system log entry
+    @param classificationId               Classification ID of the log entry
+    @param messageId                      Message ID of the log entry
+    @param msgTextFormat                  Printf style format string for the log entry's info text
+    @param ...                            Variable arguments for the format string
+
+    @return Kit::Logging::Framework::LogResult_T
+*/
+#define KIT_LOGGING_LOG_DRIVER( classificationId, messageId, ... ) ::Kit::Logging::Pkg::logfDriver( classificationId, messageId, __VA_ARGS__ )
+
+#endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
 
 ///
 namespace Kit {
@@ -41,7 +74,7 @@ namespace Pkg {
 
 
 /*---------------------------------------------------------------------------*/
-/// This method generates a SYSTEM Sub-system log entry
+/// This method generates a SYSTEM Sub-system log entry. Do not call directly, use the KIT_LOGGING_LOG_SYSTEM() macro
 KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
 inline Framework::LogResult_T logfSystem( ClassificationId catId, SystemMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
@@ -52,7 +85,7 @@ inline Framework::LogResult_T logfSystem( ClassificationId catId, SystemMsgId ms
     return result;
 }
 
-/// This method generates a DRIVER Sub-system log entry
+/// This method generates a DRIVER Sub-system log entry.Do not call directly, use the KIT_LOGGING_LOG_DRIVER() macro
 KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
 inline Framework::LogResult_T logfDriver( ClassificationId catId, DriverMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
@@ -67,6 +100,4 @@ inline Framework::LogResult_T logfDriver( ClassificationId catId, DriverMsgId ms
 }
 }
 
-
-#endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
 #endif  // end header latch

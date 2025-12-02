@@ -8,7 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
 This file declares the Logging functions available to the KIT Logging Domain.
 
@@ -21,6 +21,46 @@ This file declares the Logging functions available to the KIT Logging Domain.
 #include "Kit/Logging/Framework/Log.h"
 #include "Kit/System/printfchecker.h"
 
+
+// Support Conditionally compiling the Logging calls to Trace calls. 
+#ifdef DISABLED_KIT_LOGGING_PKG_LOG_API
+#define PKGZ_LOGGING_LOG_CORE( classificationId, messageId, ... )    KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::CORE, messageId, __VA_ARGS__ )
+#define PKGZ_LOGGING_LOG_NETWORK( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::NETWORK, messageId, __VA_ARGS__ )
+#define PKGZ_LOGGING_LOG_STORAGE( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::STORAGE, messageId, __VA_ARGS__ )
+#else
+
+/** This method generates a CORE Sub-system log entry
+    @param classificationId               Classification ID of the log entry
+    @param messageId                      Message ID of the log entry
+    @param msgTextFormat                  Printf style format string for the log entry's info text
+    @param ...                            Variable arguments for the format string
+
+    @return Kit::Logging::Framework::LogResult_T
+*/
+#define PKGZ_LOGGING_LOG_CORE( classificationId, messageId, ... )    ::PkgZ::Logging::Pkg::logfCore( classificationId, messageId, __VA_ARGS__ )
+
+/** This method generates a NETWORK Sub-system log entry
+    @param classificationId               Classification ID of the log entry
+    @param messageId                      Message ID of the log entry
+    @param msgTextFormat                  Printf style format string for the log entry's info text
+    @param ...                            Variable arguments for the format string
+
+    @return Kit::Logging::Framework::LogResult_T
+*/
+#define PKGZ_LOGGING_LOG_NETWORK( classificationId, messageId, ... ) ::PkgZ::Logging::Pkg::logfNetwork( classificationId, messageId, __VA_ARGS__ )
+
+/** This method generates a STORAGE Sub-system log entry
+    @param classificationId               Classification ID of the log entry
+    @param messageId                      Message ID of the log entry
+    @param msgTextFormat                  Printf style format string for the log entry's info text
+    @param ...                            Variable arguments for the format string
+
+    @return Kit::Logging::Framework::LogResult_T
+*/
+#define PKGZ_LOGGING_LOG_STORAGE( classificationId, messageId, ... ) ::PkgZ::Logging::Pkg::logfStorage( classificationId, messageId, __VA_ARGS__
+
+#endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
+
 ///
 namespace PkgZ {
 ///
@@ -30,8 +70,8 @@ namespace Pkg {
 
 
 /*---------------------------------------------------------------------------*/
-/// This method generates a CORE Sub-system log entry
-KIT_SYSTEM_PRINTF_CHECKER(3, 4)
+/// This method generates a CORE Sub-system log entry. Do not call directly, use the PKGZ_LOGGING_LOG_SYSTEM() macro
+KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
 inline Kit::Logging::Framework::LogResult_T logfCore( ClassificationId catId, CoreMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
     va_list ap;
@@ -41,8 +81,8 @@ inline Kit::Logging::Framework::LogResult_T logfCore( ClassificationId catId, Co
     return result;
 }
 
-/// This method generates a NETWORK Sub-system log entry
-KIT_SYSTEM_PRINTF_CHECKER(3, 4)
+/// This method generates a NETWORK Sub-system log entry. Do not call directly, use the PKGZ_LOGGING_LOG_NETWORK() macro
+KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
 inline Kit::Logging::Framework::LogResult_T logfNetwork( ClassificationId catId, NetworkMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
     va_list ap;
@@ -52,8 +92,8 @@ inline Kit::Logging::Framework::LogResult_T logfNetwork( ClassificationId catId,
     return result;
 }
 
-/// This method generates a STORAGE Sub-system log entry
-KIT_SYSTEM_PRINTF_CHECKER(3, 4)
+/// This method generates a STORAGE Sub-system log entry. Do not call directly, use the PKGZ_LOGGING_LOG_STORAGE() macro
+KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
 inline Kit::Logging::Framework::LogResult_T logfStorage( ClassificationId catId, StorageMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
     va_list ap;
@@ -63,7 +103,8 @@ inline Kit::Logging::Framework::LogResult_T logfStorage( ClassificationId catId,
     return result;
 }
 
-}      // end namespaces
+
+}
 }
 }
 #endif  // end header latch

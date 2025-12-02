@@ -13,6 +13,7 @@ int main( int argc, char* argv[] )
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "WARNING" );
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "EVENT" );
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "DEBUG" );
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( "*LOG_" );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
 
     // Run the test(s)

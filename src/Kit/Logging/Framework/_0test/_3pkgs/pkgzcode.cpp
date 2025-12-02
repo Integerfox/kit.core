@@ -33,7 +33,7 @@ TEST_CASE( "PkgZ" )
 
     SECTION( "basic" )
     {
-        result = PkgZ::Logging::Pkg::logfCore(ClassificationId::METRICS, CoreMsgId::CONFIG_ERROR, "Metrics Classification --> mapped to EVENT" );
+        result = PKGZ_LOGGING_LOG_CORE(ClassificationId::METRICS, CoreMsgId::CONFIG_ERROR, "Metrics Classification --> mapped to EVENT" );
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( g_logFifo.getNumItems() == 1u );
         REQUIRE( g_logFifo.remove( entry ) );
@@ -42,7 +42,7 @@ TEST_CASE( "PkgZ" )
         REQUIRE( entry.m_subSystemId == SubSystemId::CORE );
         REQUIRE( entry.m_messageId == CoreMsgId::CONFIG_ERROR );
 
-        result = logfNetwork( ClassificationId::DEBUG, NetworkMsgId::SEND_ERROR, "DEBUG 1-1 classification mapping --> mapped to DEBUG" );
+        result = PKGZ_LOGGING_LOG_NETWORK( ClassificationId::DEBUG, NetworkMsgId::SEND_ERROR, "DEBUG 1-1 classification mapping --> mapped to DEBUG" );
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( g_logFifo.getNumItems() == 1u );
         REQUIRE( g_logFifo.remove( entry ) );

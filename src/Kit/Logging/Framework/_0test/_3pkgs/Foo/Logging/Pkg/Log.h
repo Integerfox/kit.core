@@ -21,6 +21,46 @@ This file declares the Logging functions available to the FOO Logging Domain.
 #include "Kit/Logging/Framework/Log.h"
 #include "Kit/System/printfchecker.h"
 
+
+// Support Conditionally compiling the Logging calls to Trace calls. 
+#ifdef DISABLED_KIT_LOGGING_PKG_LOG_API
+#define FOO_LOGGING_LOG_UI( classificationId, messageId, ... )       KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::UI, messageId, __VA_ARGS__ )
+#define FOO_LOGGING_LOG_DATABASE( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::DATABASE, messageId, __VA_ARGS__ )
+#define FOO_LOGGING_LOG_API( classificationId, messageId, ... )      KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::API, messageId, __VA_ARGS__ )
+#else
+
+/** This method generates a UI Sub-system log entry
+    @param classificationId               Classification ID of the log entry
+    @param messageId                      Message ID of the log entry
+    @param msgTextFormat                  Printf style format string for the log entry's info text
+    @param ...                            Variable arguments for the format string
+
+    @return Kit::Logging::Framework::LogResult_T
+*/
+#define FOO_LOGGING_LOG_UI( classificationId, messageId, ... )       ::Foo::Logging::Pkg::logfUi( classificationId, messageId, __VA_ARGS__ )
+
+/** This method generates a DATABASE Sub-system log entry
+    @param classificationId               Classification ID of the log entry
+    @param messageId                      Message ID of the log entry
+    @param msgTextFormat                  Printf style format string for the log entry's info text
+    @param ...                            Variable arguments for the format string
+
+    @return Kit::Logging::Framework::LogResult_T
+*/
+#define FOO_LOGGING_LOG_DATABASE( classificationId, messageId, ... ) ::Foo::Logging::Pkg::logfDatabase( classificationId, messageId, __VA_ARGS__ )
+
+/** This method generates a API Sub-system log entry
+    @param classificationId               Classification ID of the log entry
+    @param messageId                      Message ID of the log entry
+    @param msgTextFormat                  Printf style format string for the log entry's info text
+    @param ...                            Variable arguments for the format string
+
+    @return Kit::Logging::Framework::LogResult_T
+*/
+#define FOO_LOGGING_LOG_API( classificationId, messageId, ... ) ::Foo::Logging::Pkg::logfApi( classificationId, messageId, __VA_ARGS__ )
+
+#endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
+
 ///
 namespace Foo {
 ///

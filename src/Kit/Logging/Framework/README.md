@@ -91,9 +91,11 @@ different in purpose.
   tracks how many log entries where discarded and generates a special log entry
   with the details once there is space in the queue.
 
-- An application can disable the KIT's library usage of Logging framework at
+- An application can *disable* the KIT's library usage of Logging framework at
   compile time by include the the following in its `kit_config.h` header file.
-  When using the this compiler flag, the application will not need to provide a
+  *Disable* in this context means that a KIT TRACE Message will be generated 
+  instead of Log entry. When using the this compiler flag, the application will
+  not need to provide a
   mocked logging implementation when it does not require logging.
   - `#define DISABLED_KIT_LOGGING_PKG_LOG_API`
 

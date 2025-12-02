@@ -35,7 +35,7 @@ TEST_CASE( "App" )
 
     SECTION( "basic" )
     {
-        result = logfApi( ClassificationId::WARNING, ApiMsgId::AUTH_FAILED, "API auth failed for user %s", "test_user" );
+        result = FOO_LOGGING_LOG_API( ClassificationId::WARNING, ApiMsgId::AUTH_FAILED, "API auth failed for user %s", "test_user" );
 
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( g_logFifo.getNumItems() == 1u );

@@ -51,7 +51,7 @@ TEST_CASE( "Log" )
 
     SECTION( "System" )
     {
-        auto result = Kit::Logging::Pkg::logfSystem( ClassificationId::EVENT, SystemMsgId::SHUTDOWN, "System log message: %u", 123 );
+        auto result = KIT_LOGGING_LOG_SYSTEM( ClassificationId::EVENT, SystemMsgId::SHUTDOWN, "System log message: %u", 123 );
         REQUIRE( result == result_ );
         REQUIRE( lastClassificationId_ == ClassificationId::EVENT );
         REQUIRE( lastPackageId_ == Package::PACKAGE_ID );
@@ -62,7 +62,7 @@ TEST_CASE( "Log" )
 
     SECTION( "Driver" )
     {
-        auto result = Kit::Logging::Pkg::logfDriver( ClassificationId::INFO, DriverMsgId::OPERATION_ERROR, "Driver log message: %s", "Hello" );
+        auto result = KIT_LOGGING_LOG_DRIVER( ClassificationId::INFO, DriverMsgId::OPERATION_ERROR, "Driver log message: %s", "Hello" );
         REQUIRE( result == result_ );
         REQUIRE( lastClassificationId_ == ClassificationId::INFO );
         REQUIRE( lastPackageId_ == Package::PACKAGE_ID );

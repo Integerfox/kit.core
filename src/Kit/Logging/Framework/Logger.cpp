@@ -18,9 +18,7 @@
 #include "Kit/Logging/Pkg/MsgId.h"
 #include "Kit/Logging/Pkg/SubSystemId.h"
 #include "Kit/Text/FString.h"
-#include "Kit/Text/BString.h"
 #include "Kit/System/Mutex.h"
-#include "Kit/System/Trace.h"
 #include "Kit/Time/BootTime.h"
 
 #define NUM_BITS( type ) ( sizeof( type ) * 8 )
@@ -154,7 +152,6 @@ LogResult_T vlogf( uint8_t     classificationId,
     KIT_SYSTEM_ASSERT( logFifo_ != nullptr );
     KIT_SYSTEM_ASSERT( formatInfoText != nullptr );
 
-    LogResult_T                   result   = FILTERED;
     uint8_t                       errMsgId = IPackage::NULL_MSG_ID;
     Kit::System::Mutex::ScopeLock criticalSection( g_lock );
     g_vlogfCallCount++;
@@ -214,8 +211,9 @@ LogResult_T vlogf( uint8_t     classificationId,
     }
 
     // Must pass the filter checks to be added to the log queue
-    auto classMask = classificationIdToMask( logEntry.m_classificationId );
-    auto pkgMask   = packageIdToMask( logEntry.m_packageId );
+    LogResult_T result    = FILTERED;
+    auto        classMask = classificationIdToMask( logEntry.m_classificationId );
+    auto        pkgMask   = packageIdToMask( logEntry.m_packageId );
     if ( ( classMask & classificationFilterMask_ ) && ( pkgMask & packageFilterMask_ ) )
     {
         // Manage the queue overflow state

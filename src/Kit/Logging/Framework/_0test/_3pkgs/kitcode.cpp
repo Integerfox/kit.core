@@ -32,7 +32,7 @@ TEST_CASE( "Kit" )
 
     SECTION( "basic" )
     {
-        result = logfSystem( ClassificationId::FATAL, SystemMsgId::SHUTDOWN, "Fatal Classification --> mapped to WARNING" );
+        result = KIT_LOGGING_LOG_SYSTEM( ClassificationId::FATAL, SystemMsgId::SHUTDOWN, "Fatal Classification --> mapped to WARNING. x=%u", 42 );
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( g_logFifo.getNumItems() == 1u );
         REQUIRE( g_logFifo.remove( entry ) );
@@ -41,7 +41,8 @@ TEST_CASE( "Kit" )
         REQUIRE( entry.m_subSystemId == SubSystemId::SYSTEM );
         REQUIRE( entry.m_messageId == SystemMsgId::SHUTDOWN );
 
-        result = logfDriver( ClassificationId::EVENT, DriverMsgId::START_ERR, "EVENT 1-1 classification mapping --> mapped to EVENT" );
+        float pi = 3.14159f;
+        result = KIT_LOGGING_LOG_DRIVER( ClassificationId::EVENT, DriverMsgId::START_ERR, "EVENT 1-1 classification mapping --> mapped to EVENT. pi=%f", pi );
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( g_logFifo.getNumItems() == 1u );
         REQUIRE( g_logFifo.remove( entry ) );
