@@ -29,35 +29,14 @@ This file declares the Logging functions available to the KIT Logging Domain.
 #define PKGZ_LOGGING_LOG_STORAGE( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::STORAGE, messageId, __VA_ARGS__ )
 #else
 
-/** This method generates a CORE Sub-system log entry
-    @param classificationId               Classification ID of the log entry
-    @param messageId                      Message ID of the log entry
-    @param msgTextFormat                  Printf style format string for the log entry's info text
-    @param ...                            Variable arguments for the format string
-
-    @return Kit::Logging::Framework::LogResult_T
-*/
+/// This method generates a CORE Sub-system log entry.  See logfCore() for details
 #define PKGZ_LOGGING_LOG_CORE( classificationId, messageId, ... )    ::PkgZ::Logging::Pkg::logfCore( classificationId, messageId, __VA_ARGS__ )
 
-/** This method generates a NETWORK Sub-system log entry
-    @param classificationId               Classification ID of the log entry
-    @param messageId                      Message ID of the log entry
-    @param msgTextFormat                  Printf style format string for the log entry's info text
-    @param ...                            Variable arguments for the format string
-
-    @return Kit::Logging::Framework::LogResult_T
-*/
+/// This method generates a NETWORK Sub-system log entry. See logfNetwork() for details
 #define PKGZ_LOGGING_LOG_NETWORK( classificationId, messageId, ... ) ::PkgZ::Logging::Pkg::logfNetwork( classificationId, messageId, __VA_ARGS__ )
 
-/** This method generates a STORAGE Sub-system log entry
-    @param classificationId               Classification ID of the log entry
-    @param messageId                      Message ID of the log entry
-    @param msgTextFormat                  Printf style format string for the log entry's info text
-    @param ...                            Variable arguments for the format string
-
-    @return Kit::Logging::Framework::LogResult_T
-*/
-#define PKGZ_LOGGING_LOG_STORAGE( classificationId, messageId, ... ) ::PkgZ::Logging::Pkg::logfStorage( classificationId, messageId, __VA_ARGS__
+/// This method generates a STORAGE Sub-system log entry. See logfStorage() for details
+#define PKGZ_LOGGING_LOG_STORAGE( classificationId, messageId, ... ) ::PkgZ::Logging::Pkg::logfStorage( classificationId, messageId, __VA_ARGS__ )
 
 #endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
 

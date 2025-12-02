@@ -73,12 +73,15 @@ inline void tracef_buildSection_( char* buf, size_t bufSize, uint8_t classificat
     message. Because the intended use case for this method is when there is NO
     logging engine the application, i.e. DISABLED_KIT_LOGGING_PKG_LOG_API is
     defined.  This prevents converting numeric IDs to text symbols. The trace section
-    is derived from all of the IDs.  The format is:
-    LOG_<classificationId>.<packageId>.<subSystemId>.<messageId>
+    is derived from all of the IDs.  
+    
+    \code
+    The format is: LOG_<classificationId>.<packageId>.<subSystemId>.<messageId>
 
     For example, given:
         classificationId=3, packageId=5, subSystemId=2, messageId=10
     The trace section would be "LOG_3.5.2.10".
+    \endcode
 
     The macro always evaluates to LogResult_T::ADDED.
 

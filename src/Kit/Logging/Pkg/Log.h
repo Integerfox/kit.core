@@ -43,24 +43,10 @@ NOTE: When the Application compiles out the Logging engine using the
 #define KIT_LOGGING_LOG_DRIVER( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, ::Kit::Logging::Pkg::Package::PACKAGE_ID, ::Kit::Logging::Pkg::SubSystemId::DRIVER, messageId, __VA_ARGS__ )
 #else
 
-/** This method generates a SYSTEM Sub-system log entry
-    @param classificationId               Classification ID of the log entry
-    @param messageId                      Message ID of the log entry
-    @param msgTextFormat                  Printf style format string for the log entry's info text
-    @param ...                            Variable arguments for the format string
-
-    @return Kit::Logging::Framework::LogResult_T
-*/
+/// This method generates a SYSTEM Sub-system log entry. See logfSystem() for details
 #define KIT_LOGGING_LOG_SYSTEM( classificationId, messageId, ... ) ::Kit::Logging::Pkg::logfSystem( classificationId, messageId, __VA_ARGS__ )
 
-/** This method generates a DRIVER Sub-system log entry
-    @param classificationId               Classification ID of the log entry
-    @param messageId                      Message ID of the log entry
-    @param msgTextFormat                  Printf style format string for the log entry's info text
-    @param ...                            Variable arguments for the format string
-
-    @return Kit::Logging::Framework::LogResult_T
-*/
+/// This method generates a DRIVER Sub-system log entry. See logfDriver() for details
 #define KIT_LOGGING_LOG_DRIVER( classificationId, messageId, ... ) ::Kit::Logging::Pkg::logfDriver( classificationId, messageId, __VA_ARGS__ )
 
 #endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
