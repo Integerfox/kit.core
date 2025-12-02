@@ -86,7 +86,33 @@
 
 
 //////////////////////////////////////////////////////////////////////////////
-#ifdef USE_KIT_SYSTEM_TRACE
+#if defined( USE_KIT_SYSTEM_RESTRICTED_TRACE ) || defined( USE_KIT_SYSTEM_TRACE )
+
+/** This is SPECIAL macro wrapper in that it NOT compiled out when USE_KIT_SYSTEM_TRACE
+    is NOT defined.  The use case for this is when the Application needs to
+    disable - at compile time - the trace statements because the memory footprint
+    of all of the trace strings is 'too expensive' for the target.  However,
+    there are situations where 'some' trace statements are needed (e.g. when the
+    logging engine echos log entries to the trace engine, or when error occurs
+    bring up the logging sub-system's persistent storage media).
+
+    WARNING: Use this macro sparingly as it negates the purpose of being able
+             to compile out the trace statements. If you are not sure if you
+             should use this macro, you probably should NOT be using it!
+ */
+#define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )                                                              \
+    do                                                                                                        \
+    {                                                                                                         \
+        if ( Kit::System::Trace::isSectionEnabled_( sect ) && Kit::System::Trace::passedThreadFilter_() )     \
+        {                                                                                                     \
+            Kit::System::Trace::traceLocation_( sect, __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME ); \
+            Kit::System::Trace::traceUserMsg_( __VA_ARGS__ );                                                 \
+        }                                                                                                     \
+    }                                                                                                         \
+    while ( 0 )
+
+/// 'Restricted' version of the ALLOCATE macro.  Read the above comments before using!
+#define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE( type, varname, initval ) type varname = initval
 
 
 // PRETTY_FUNCTION macro is non-standard
@@ -104,6 +130,7 @@
 #endif  // end __PRETTY_FUNCTION__
 
 
+#ifdef USE_KIT_SYSTEM_TRACE
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_FUNC( sect ) Kit::System::Trace kitSystemTraceInstance_( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME )
 
@@ -121,6 +148,7 @@
         }                                                                                                     \
     }                                                                                                         \
     while ( 0 )
+#endif // end USE_KIT_SYSTEM_TRACE
 
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_ENABLE() Kit::System::Trace::enable_()
@@ -182,8 +210,14 @@
 /// Allocate a variable that is only 'used' when tracing is enabled
 #define KIT_SYSTEM_TRACE_ALLOCATE( type, varname, initval ) type varname = initval
 
-
 #else
+
+/// Macro Wrapper
+#define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )
+
+/// Macro Wrapper
+#define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE( type, varname, initval )
+
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_FUNC( sect )
 
@@ -250,7 +284,7 @@
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_ALLOCATE( type, varname, initval )
 
-#endif  // USE_KIT_SYSTEM_TRACE
+#endif  // end USE_KIT_SYSTEM_TRACE || USE_KIT_SYSTEM_RESTRICTED_TRACE
 
 
 //////////////////////////////////////////////////////////////////////////////

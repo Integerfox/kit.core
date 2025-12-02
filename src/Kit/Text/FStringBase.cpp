@@ -24,41 +24,44 @@ char FStringBase::m_noMemory[1] = { '\0' };
 
 ///////////////////////////////
 FStringBase::FStringBase( const char* string, char* internalString, int maxLen ) noexcept
-    : StringBase( internalString ), m_internalMaxlen( maxLen )
+    : StringBase( internalString ? internalString : m_noMemory )
+    , m_internalMaxlen( ( maxLen < 0 || internalString == nullptr ) ? 0 : maxLen )
 {
     // trap the case of a NULL initializer string
     if ( string == nullptr )
     {
-        internalString[0] = '\0';
+        m_strPtr[0] = '\0';
     }
     else
     {
         int inStrLen = (int)strlen( string );
-        m_truncated  = inStrLen <= maxLen ? false : true;
-        strncpy( internalString, string, maxLen );
-        internalString[maxLen] = '\0';
+        m_truncated  = inStrLen <= m_internalMaxlen ? false : true;
+        strncpy( m_strPtr, string, m_internalMaxlen );
+        m_strPtr[m_internalMaxlen] = '\0';
     }
 }
 
 FStringBase::FStringBase( char c, char* internalString, int maxLen ) noexcept
-    : StringBase( internalString ), m_internalMaxlen( maxLen )
+    : StringBase( internalString ? internalString : m_noMemory )
+    , m_internalMaxlen( ( maxLen < 0 || internalString == nullptr ) ? 0 : maxLen )
 {
-    if ( maxLen > 0 )
+    if ( m_internalMaxlen > 0 )
     {
-        internalString[0] = c;
-        internalString[1] = '\0';
+        m_strPtr[0] = c;
+        m_strPtr[1] = '\0';
     }
 
     // Handle the case of 'memsize' is zero
     else
     {
-        internalString[0] = '\0';
+        m_strPtr[0] = '\0';
     }
 }
 
 /// Constructor
 FStringBase::FStringBase( int num, char* internalString, int maxLen ) noexcept
-    : StringBase( internalString ), m_internalMaxlen( maxLen )
+    : StringBase( internalString ? internalString : m_noMemory )
+    , m_internalMaxlen( ( maxLen < 0 || internalString == nullptr ) ? 0 : maxLen )
 {
     int flen = snprintf( m_strPtr, m_internalMaxlen + 1, "%d", num );
     validateSizeAfterFormat( m_internalMaxlen, flen, m_internalMaxlen );
@@ -67,7 +70,8 @@ FStringBase::FStringBase( int num, char* internalString, int maxLen ) noexcept
 
 /// Constructor
 FStringBase::FStringBase( unsigned num, char* internalString, int maxLen ) noexcept
-    : StringBase( internalString ), m_internalMaxlen( maxLen )
+    : StringBase( internalString ? internalString : m_noMemory )
+    , m_internalMaxlen( ( maxLen < 0 || internalString == nullptr ) ? 0 : maxLen )
 {
     int flen = snprintf( m_strPtr, m_internalMaxlen + 1, "%u", num );
     validateSizeAfterFormat( m_internalMaxlen, flen, m_internalMaxlen );
@@ -75,7 +79,8 @@ FStringBase::FStringBase( unsigned num, char* internalString, int maxLen ) noexc
 
 /// Constructor
 FStringBase::FStringBase( long num, char* internalString, int maxLen ) noexcept
-    : StringBase( internalString ), m_internalMaxlen( maxLen )
+    : StringBase( internalString ? internalString : m_noMemory )
+    , m_internalMaxlen( ( maxLen < 0 || internalString == nullptr ) ? 0 : maxLen )
 {
     int flen = snprintf( m_strPtr, m_internalMaxlen + 1, "%ld", num );
     validateSizeAfterFormat( m_internalMaxlen, flen, m_internalMaxlen );
@@ -83,7 +88,8 @@ FStringBase::FStringBase( long num, char* internalString, int maxLen ) noexcept
 
 /// Constructor
 FStringBase::FStringBase( long long num, char* internalString, int maxLen ) noexcept
-    : StringBase( internalString ), m_internalMaxlen( maxLen )
+    : StringBase( internalString ? internalString : m_noMemory )
+    , m_internalMaxlen( ( maxLen < 0 || internalString == nullptr ) ? 0 : maxLen )
 {
     int flen = snprintf( m_strPtr, m_internalMaxlen + 1, "%lld", num );
     validateSizeAfterFormat( m_internalMaxlen, flen, m_internalMaxlen );
@@ -92,7 +98,8 @@ FStringBase::FStringBase( long long num, char* internalString, int maxLen ) noex
 
 /// Constructor
 FStringBase::FStringBase( unsigned long num, char* internalString, int maxLen ) noexcept
-    : StringBase( internalString ), m_internalMaxlen( maxLen )
+    : StringBase( internalString ? internalString : m_noMemory )
+    , m_internalMaxlen( ( maxLen < 0 || internalString == nullptr ) ? 0 : maxLen )
 {
     int flen = snprintf( m_strPtr, m_internalMaxlen + 1, "%lu", num );
     validateSizeAfterFormat( m_internalMaxlen, flen, m_internalMaxlen );
@@ -100,7 +107,8 @@ FStringBase::FStringBase( unsigned long num, char* internalString, int maxLen ) 
 
 /// Constructor
 FStringBase::FStringBase( unsigned long long num, char* internalString, int maxLen ) noexcept
-    : StringBase( internalString ), m_internalMaxlen( maxLen )
+    : StringBase( internalString ? internalString : m_noMemory )
+    , m_internalMaxlen( ( maxLen < 0 || internalString == nullptr ) ? 0 : maxLen )
 {
     int flen = snprintf( m_strPtr, m_internalMaxlen + 1, "%llu", num );
     validateSizeAfterFormat( m_internalMaxlen, flen, m_internalMaxlen );
@@ -181,13 +189,13 @@ int FStringBase::maxLength() const noexcept
 ////////////////////////////
 IString& FStringBase::operator=( int num ) noexcept
 {
-    format( "%d" , num );
+    format( "%d", num );
     return *this;
 }
 
 IString& FStringBase::operator=( unsigned num ) noexcept
 {
-    format( "%u" , num );
+    format( "%u", num );
     return *this;
 }
 

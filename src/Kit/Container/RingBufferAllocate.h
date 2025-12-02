@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/Container/RingBuffer.h"
+#include <string.h>
 
 
 ///
@@ -34,8 +35,10 @@ class RingBufferAllocate : public RingBuffer<ITEM>
 public:
     /// Constructor
     RingBufferAllocate()
-        : RingBuffer<ITEM>( m_rawMemory, N )
+        : RingBuffer<ITEM>( m_rawMemory, N, false )
     {
+        // Initialize the ring buffer memory - it helps with debugging
+        memset( static_cast<void*>(m_rawMemory), 0, sizeof( ITEM ) * N );
     }
 
 protected:
