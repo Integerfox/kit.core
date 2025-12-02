@@ -189,7 +189,7 @@ TEST_CASE( "CursorLE" )
 
         REQUIRE( cursor.setPosition( 0 ) );
         REQUIRE( cursor.errorOccurred() == false );
-        int8_t dummy;
+        int8_t dummy = 42;
         REQUIRE( cursor.write( &dummy, BUFFER_SIZE + 1 ) == false );
         REQUIRE( cursor.errorOccurred() );
         REQUIRE( cursor.writeI8( dummy ) == false );
