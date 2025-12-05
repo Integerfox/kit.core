@@ -12,6 +12,9 @@
 #include "Kit/System/Mutex.h"
 #include "Kit/System/Shutdown.h"
 #include "Kit/System/Private.h"
+#include "Kit/Logging/Pkg/Log.h"
+
+using namespace Kit::Logging::Pkg;
 
 
 ///
@@ -88,6 +91,7 @@ int Shutdown::success() noexcept
 {
     bool trueExit = true;
     int  exitCode = preprocess_shutdown_( eSUCCESS, trueExit );
+    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN , "Orderly shutdown initiated. True exit=%d", trueExit );
     if ( trueExit )
     {
         exitCode = notifyShutdownHandlers( exitCode );

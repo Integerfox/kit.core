@@ -13,7 +13,9 @@
 #include "Kit/Bsp/Api.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "Kit/Logging/Pkg/Log.h"
 
+using namespace Kit::Logging::Pkg;
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -40,6 +42,7 @@ static int shutdown_application_( int exit_code )
 
 int Shutdown::success() noexcept
 {
+    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN , "Orderly shutdown initiated..." );
     return shutdown_application_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }
 
