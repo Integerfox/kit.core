@@ -22,12 +22,7 @@ This file declares the Logging functions available to the FOO Logging Domain.
 #include "Kit/System/printfchecker.h"
 
 
-// Support Conditionally compiling the Logging calls to Trace calls. 
-#ifdef DISABLED_KIT_LOGGING_PKG_LOG_API
-#define FOO_LOGGING_LOG_UI( classificationId, messageId, ... )       KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::UI, messageId, __VA_ARGS__ )
-#define FOO_LOGGING_LOG_DATABASE( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::DATABASE, messageId, __VA_ARGS__ )
-#define FOO_LOGGING_LOG_API( classificationId, messageId, ... )      KitLoggingFramework_logTracef( classificationId, Package::PACKAGE_ID, SubSystemId::API, messageId, __VA_ARGS__ )
-#else
+// NOTE: Since this an "application" -->the use of logging is or is not a requirement, i.e. its not an optional thingy
 
 /// This method generates a UI Sub-system log entry. See logfUi() for details
 #define FOO_LOGGING_LOG_UI( classificationId, messageId, ... )       ::Foo::Logging::Pkg::logfUi( classificationId, messageId, __VA_ARGS__ )
@@ -37,8 +32,6 @@ This file declares the Logging functions available to the FOO Logging Domain.
 
 /// This method generates a API Sub-system log entry. See logfApi() for details
 #define FOO_LOGGING_LOG_API( classificationId, messageId, ... ) ::Foo::Logging::Pkg::logfApi( classificationId, messageId, __VA_ARGS__ )
-
-#endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
 
 ///
 namespace Foo {

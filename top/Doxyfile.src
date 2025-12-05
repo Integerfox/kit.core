@@ -2363,7 +2363,9 @@ INCLUDE_FILE_PATTERNS  =
 PREDEFINED             = DOXYGEN_WILL_SKIP_THIS \
                          USE_KIT_TYPE_ENDIAN_LE_HOST \
                          USE_KIT_SYSTEM_RESTRICTED_TRACE \
-                         USE_KIT_SYSTEM_TRACE 
+                         USE_KIT_SYSTEM_TRACE \
+                         USE_KIT_LOGGING_PKG_LOG_API
+
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The

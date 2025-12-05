@@ -11,6 +11,9 @@
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
 
+// Enable logging in Packages used (not including the Application's package)
+#define USE_KIT_LOGGING_PKG_LOG_API
+#define USE_PKGZ_LOGGING_PKG_LOG_API
 
 // Configuration for Logging Identifiers
 #include "Kit/Logging/Framework/_0test/_3pkgs/Foo/Logging/App/foo_mapcfg.h"

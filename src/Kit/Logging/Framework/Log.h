@@ -71,10 +71,10 @@ inline void tracef_buildSection_( char* buf, size_t bufSize, uint8_t classificat
 
 /** This macro 'converts' a logging request into a KIT_SYSTEM_TRACE_RESTRICTED_MSG
     message. Because the intended use case for this method is when there is NO
-    logging engine the application, i.e. DISABLED_KIT_LOGGING_PKG_LOG_API is
+    logging engine the application, i.e. USE_KIT_LOGGING_PKG_LOG_API is NOT
     defined.  This prevents converting numeric IDs to text symbols. The trace section
-    is derived from all of the IDs.  
-    
+    is derived from all of the IDs.
+
     \code
     The format is: LOG_<classificationId>.<packageId>.<subSystemId>.<messageId>
 
@@ -85,19 +85,16 @@ inline void tracef_buildSection_( char* buf, size_t bufSize, uint8_t classificat
 
     The macro always evaluates to LogResult_T::ADDED.
 
-    NOTE: When the Application compiles out the Logging engine using the
-          DISABLED_KIT_LOGGING_PKG_LOG_API switch - it must still provide the
-          "logging configuration", i.e. the assignment absolute values for
-          classification and package IDs.
+    NOTE: When the Application enables the logging engine using the
+          USE_KIT_LOGGING_PKG_LOG_API switch - it must the "logging configuration",
+          i.e. the assignment absolute values for classification and package IDs.
  */
-#define KitLoggingFramework_logTracef( classificationId, packageId, subSystemId, messageId, ... )                     \
-    ( [&]() -> LogResult_T {                                                                   \
-        char sectionBuf[32];                                                                   \
-        Kit::Logging::Framework::tracef_buildSection_( sectionBuf, sizeof(sectionBuf),         \
-                                                       classificationId, packageId,            \
-                                                       subSystemId, messageId );               \
-        KIT_SYSTEM_TRACE_RESTRICTED_MSG( sectionBuf, __VA_ARGS__ );                            \
-        return LogResult_T::ADDED;                                                             \
+#define KitLoggingFramework_logTracef( classificationId, packageId, subSystemId, messageId, ... )                                               \
+    ( [&]() -> ::Kit::Logging::Framework::LogResult_T {                                                                                                                    \
+        char sectionBuf[32];                                                                                                                    \
+        Kit::Logging::Framework::tracef_buildSection_( sectionBuf, sizeof( sectionBuf ), classificationId, packageId, subSystemId, messageId ); \
+        KIT_SYSTEM_TRACE_RESTRICTED_MSG( sectionBuf, __VA_ARGS__ );                                                                             \
+        return ::Kit::Logging::Framework::LogResult_T::ADDED;                                                                                                              \
     }() )
 
 }  // end namespaces

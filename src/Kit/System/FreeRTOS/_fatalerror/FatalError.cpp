@@ -25,10 +25,20 @@
 #include "Kit/System/Trace.h"
 #include "Kit/Text/ToString.h"
 #include "Kit/Text/FString.h"
+#include "Kit/Logging/Pkg/Log.h"
 #include "FreeRTOS.h"
 #include "task.h"
 
 using namespace Kit::System;
+using namespace Kit::Logging::Pkg;  // Helps with Log Enums
+
+// Use Logging/Trace if available
+#if defined( USE_KIT_SYSTEM_TRACE ) || defined( USE_KIT_SYSTEM_TRACE_RESTRICTED )
+#define OUTPUT( text ) KIT_LOGGING_LOG_SYSTEM( ClassificationId::FATAL, SystemMsgId::FATAL_ERROR, "%s", text );
+#else
+#define OUTPUT( text ) Kit::System::Trace::getDefaultOutputStream_()->write( text )
+#endif
+
 
 #define EXTRA_INFO "\n@@ Fatal Error: "
 #define SIZET_SIZE ( ( sizeof( size_t ) / 4 ) * 10 + 1 )
@@ -44,11 +54,10 @@ void FatalError::log( int exitCode, const char* message )
 {
     if ( xTaskGetSchedulerState() == taskSCHEDULER_RUNNING )
     {
-        Kit::Io::IOutput* ptr = Kit::System::Trace::getDefaultOutputStream_();
-
-        ptr->write( EXTRA_INFO );
-        ptr->write( message );
-        ptr->write( "\n" );
+        buffer_  = EXTRA_INFO;
+        buffer_ += message;
+        buffer_ += "\n";
+        OUTPUT( buffer_.getString() );
 
         // Allow time for the error message to be outputted
         Kit::System::sleep( 150 );
@@ -61,14 +70,14 @@ void FatalError::log( int exitCode, const char* message, size_t value )
 {
     if ( xTaskGetSchedulerState() == taskSCHEDULER_RUNNING )
     {
-        int               dummy = 0;
-        Kit::Io::IOutput* ptr   = Kit::System::Trace::getDefaultOutputStream_();
+        int dummy = 0;
 
-        ptr->write( EXTRA_INFO );
-        ptr->write( message );
-        ptr->write( ". v:= " );
-        ptr->write( Kit::Text::ToString::unsignedInt<size_t>( value, buffer_.getBuffer( dummy ), SIZET_SIZE, 16 ) );
-        ptr->write( "\n" );
+        buffer_  = EXTRA_INFO;
+        buffer_ += message;
+        buffer_ += ". v:= ";
+        buffer_ += Kit::Text::ToString::unsignedInt<size_t>( value, buffer_.getBuffer( dummy ), SIZET_SIZE, 16 );
+        buffer_ += "\n";
+        OUTPUT( buffer_.getString() );
 
         // Allow time for the error message to be outputted
         Kit::System::sleep( 150 );
@@ -87,11 +96,13 @@ void FatalError::logf( int exitCode, const char* format, ... )
     {
         buffer_ = EXTRA_INFO;
         buffer_.vformatAppend( format, ap );
-        Kit::System::Trace::getDefaultOutputStream_()->write( buffer_ );
+        buffer_ += "\n";
+        OUTPUT( buffer_.getString() );
 
         // Allow time for the error message to be outputted
         Kit::System::sleep( 150 );
     }
+    va_end( ap );
 
     Shutdown::failure( exitCode );
 }
