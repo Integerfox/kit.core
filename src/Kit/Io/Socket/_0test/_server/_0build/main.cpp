@@ -11,6 +11,7 @@ int main( int argc, char* argv[] )
     // Enable trace
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( "*LOG_" );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
 
     // Run the test(s)
