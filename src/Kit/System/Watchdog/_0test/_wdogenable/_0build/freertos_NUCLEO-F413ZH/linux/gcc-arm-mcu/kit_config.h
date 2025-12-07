@@ -16,4 +16,8 @@
 #define USE_KIT_SYSTEM_WATCHDOG
 #define USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
 
+// Set tick divider to 1 for immediate hardware watchdog kicking
+// Default is 10, but we need fast response for proper watchdog operation
+#define OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER 1
+
 #endif

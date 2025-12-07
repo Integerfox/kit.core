@@ -35,7 +35,7 @@
 #include "Kit/EventQueue/Server.h"
 #include <cstdint>
 
-#define SECT_ "_hw_rawthread"
+#define SECT_ "_0test"
 
 ///
 using namespace Kit::System;
@@ -161,6 +161,10 @@ int main( void )
 
     // Initialize the KIT system
     Kit::System::initialize();
+
+    KIT_SYSTEM_TRACE_ENABLE();
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
 
     KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
     KIT_SYSTEM_TRACE_MSG( SECT_, "Raw Thread Stuck Test" );
