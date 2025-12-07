@@ -134,8 +134,17 @@ static volatile uint32_t supervisorCounter_ = 0;
 
 int main( void )
 {
+    // Initialize the board (HAL, clocks, GPIOs, UART)
+    Bsp_initialize();
+
     // Initialize the KIT system
     Kit::System::initialize();
+
+    KIT_SYSTEM_TRACE_ENABLE();
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( "_hw_wdogenable" );
+    //    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized" );
 
     KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
     KIT_SYSTEM_TRACE_MSG( SECT_, "Watchdog Enable Test Starting" );

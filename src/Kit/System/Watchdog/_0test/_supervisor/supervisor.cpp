@@ -147,6 +147,9 @@ protected:
 
 int main( void )
 {
+    // Initialize the board (HAL, clocks, GPIOs, UART)
+    Bsp_initialize();
+
     // Initialize the KIT system
     Kit::System::initialize();
 
