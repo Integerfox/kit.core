@@ -32,7 +32,7 @@ using namespace Kit::Logging::Pkg;  // Helps with Log Enums
 #if defined( USE_KIT_SYSTEM_TRACE ) || defined( USE_KIT_SYSTEM_TRACE_RESTRICTED )
 #define OUTPUT( text ) KIT_LOGGING_LOG_SYSTEM( ClassificationId::FATAL, SystemMsgId::FATAL_ERROR, "%s", text );
 #else
-#define OUTPUT( text ) fprintf( stderr, "%s\n", text )
+#define OUTPUT( text ) fprintf( stderr, "\n%s\n", text )
 #endif
 
 
@@ -50,14 +50,14 @@ static Kit::Text::FString<KIT_SYSTEM_FATAL_ERROR_BUFSIZE> buffer_;
 //////////////////////////////
 void FatalError::log( int exitCode, const char* message )
 {
-    buffer_.format( "\n%s [%d]: %s\n", EXTRA_INFO, exitCode, message );
+    buffer_.format( "%s [%d]: %s", EXTRA_INFO, exitCode, message );
     OUTPUT( buffer_.getString() );
     Shutdown::failure( exitCode );
 }
 
 void FatalError::log( int exitCode, const char* message, size_t value )
 {
-    buffer_.format( "\n%s [%d]: %s [%zu]\n", EXTRA_INFO, exitCode, message, value );
+    buffer_.format( "%s [%d]: %s [%zu]", EXTRA_INFO, exitCode, message, value );
     OUTPUT( buffer_.getString() );
     Shutdown::failure( exitCode );
 }
@@ -68,10 +68,9 @@ void FatalError::logf( int exitCode, const char* format, ... )
     va_list ap;
     va_start( ap, format );
 
-    buffer_.format( "\n%s [%d]: ", EXTRA_INFO, exitCode );
+    buffer_.format( "%s [%d]: ", EXTRA_INFO, exitCode );
     buffer_.vformatAppend( format, ap );
     va_end( ap );
-    buffer_ += "\n";
     OUTPUT( buffer_.getString() );
     Shutdown::failure( exitCode );
 }

@@ -13,6 +13,8 @@
 #include "Kit/System/Api.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/FreeRTOS/Thread.h"
+#include "Kit/System/Trace.h"
+#include "Kit/Io/Null.h"
 #include <stdio.h>
 #include <inttypes.h>
 
@@ -83,3 +85,13 @@ int main( void )
 }
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Tracing in NOT used -->but still have to satisfy the interface contract
+
+static Kit::Io::Null nullOutput_;
+Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_() noexcept
+{
+    return &nullOutput_;
+}
