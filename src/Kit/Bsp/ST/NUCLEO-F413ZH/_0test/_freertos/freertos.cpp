@@ -88,7 +88,7 @@ int main( void )
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Tracing in NOT used -->but still have to satisfy the interface contract
+// Tracing is NOT used -->but still have to satisfy the interface contract
 
 static Kit::Io::Null nullOutput_;
 Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_() noexcept
