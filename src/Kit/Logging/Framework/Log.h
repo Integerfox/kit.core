@@ -86,7 +86,7 @@ inline void tracef_buildSection_( char* buf, size_t bufSize, uint8_t classificat
     The macro always evaluates to LogResult_T::ADDED.
 
     NOTE: When the Application enables the logging engine using the
-          USE_KIT_LOGGING_PKG_LOG_API switch - it must the "logging configuration",
+          USE_KIT_LOGGING_PKG_LOG_API switch - it must provide the "logging configuration",
           i.e. the assignment absolute values for classification and package IDs.
  */
 #define KitLoggingFramework_logTracef( classificationId, packageId, subSystemId, messageId, ... )                                               \

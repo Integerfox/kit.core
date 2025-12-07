@@ -92,10 +92,10 @@ different in purpose.
   with the details once there is space in the queue.
 
 - An application must  *enable* the KIT's library usage of Logging framework at
-  compile time by include the the following in its `kit_config.h` header file.
+  compile time by including the following in its `kit_config.h` header file.
   When logging is disabled, the KIT_LOGGING_LOG_xxx() calls will generate
   KIT TRACE Messages instead of Log entries. Also when disabled, a default
-  mapping of Classification IDs and the KIT Package are provide.
+  mapping of Classification IDs and the KIT Package are provided.
   - `#define USE_KIT_LOGGING_PKG_LOG_API`
 
 ## Design Goals and Constraints

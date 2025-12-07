@@ -17,8 +17,6 @@ This file declares the Logging functions available to the KIT Logging Domain.
 #include "kit_config.h"
 #include "Kit/Logging/Framework/types.h"
 #include "Kit/System/printfchecker.h"
-#include "Kit/System/printfchecker.h"
-
 
 // Support Conditionally compiling the Logging calls to Trace calls. 
 #ifndef USE_PKGZ_LOGGING_PKG_LOG_API
@@ -56,7 +54,7 @@ This file declares the Logging functions available to the KIT Logging Domain.
 #endif  // end !USE_PKGZ_LOGGING_PKG_LOG_API
 
 //
-// The following includes MUST BE AFTER the macros above.  The 'weird' ordering is so that a default Logging IDs can be provided when NOT ENABLING logging
+// The following includes MUST BE AFTER the macros above.  The 'weird' ordering is so that default Logging IDs can be provided when NOT ENABLING logging
 //
 #include "Kit/Logging/Framework/_0test/_3pkgs/PkgZ/Logging/Pkg/Package.h"
 #include "Kit/Logging/Framework/_0test/_3pkgs/PkgZ/Logging/Pkg/ClassificationId.h"

@@ -63,7 +63,7 @@ NOTE: When the Application enables the Logging engine by defining
 #endif  // end !USE_KIT_LOGGING_PKG_LOG_API
 
 //
-// The following includes MUST BE AFTER the macros above.  The 'weird' ordering is so that a default Logging IDs can be provided when NOT ENABLING logging
+// The following includes MUST BE AFTER the macros above.  The 'weird' ordering is so that default Logging IDs can be provided when NOT ENABLING logging
 //
 #include "Kit/Logging/Pkg/Package.h"
 #include "Kit/Logging/Pkg/ClassificationId.h"

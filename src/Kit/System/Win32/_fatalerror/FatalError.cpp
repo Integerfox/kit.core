@@ -40,11 +40,11 @@ using namespace Kit::Logging::Pkg;  // Helps with Log Enums
 namespace Kit {
 namespace System {
 
-#ifndef KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE
-#define KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE 256
+#ifndef KIT_SYSTEM_FATAL_ERROR_BUFSIZE
+#define KIT_SYSTEM_FATAL_ERROR_BUFSIZE 256
 #endif
 
-static Kit::Text::FString<KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE> buffer_;
+static Kit::Text::FString<KIT_SYSTEM_FATAL_ERROR_BUFSIZE> buffer_;
 
 
 //////////////////////////////
