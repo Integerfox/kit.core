@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 03:54:57</td>
+            <td class="headerValue">2025-12-07 18:39:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">70.0&nbsp;%</td>
@@ -614,25 +614,25 @@
 <span id="L547"><span class="lineNum">     547</span>                 :             :                                                                                                                                                                   : _names_match_nocase( stringizedName, referenceName, index + 1 );</span>
 <span id="L548"><span class="lineNum">     548</span>                 :             : }</span>
 <span id="L549"><span class="lineNum">     549</span>                 :             : </span>
-<span id="L550"><span class="lineNum">     550</span>                 :<span class="tlaGNC">          25 : inline void _trim_names( const char* const* raw_names,</span></span>
+<span id="L550"><span class="lineNum">     550</span>                 :<span class="tlaGNC">         105 : inline void _trim_names( const char* const* raw_names,</span></span>
 <span id="L551"><span class="lineNum">     551</span>                 :             :                          const char**       trimmed_names,</span>
 <span id="L552"><span class="lineNum">     552</span>                 :             :                          char*              storage,</span>
 <span id="L553"><span class="lineNum">     553</span>                 :             :                          std::size_t        count )</span>
 <span id="L554"><span class="lineNum">     554</span>                 :             : {</span>
 <span id="L555"><span class="lineNum">     555</span>                 :             :     std::size_t offset = 0;</span>
 <span id="L556"><span class="lineNum">     556</span>                 :             : </span>
-<span id="L557"><span class="lineNum">     557</span>         [<span class="tlaGBC" title="Branch 0 was taken 87 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 25 times"> + </span>]:<span class="tlaGNC">         112 :     for ( std::size_t index = 0; index &lt; count; ++index )</span></span>
+<span id="L557"><span class="lineNum">     557</span>         [<span class="tlaGBC" title="Branch 0 was taken 359 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 105 times"> + </span>]:<span class="tlaGNC">         464 :     for ( std::size_t index = 0; index &lt; count; ++index )</span></span>
 <span id="L558"><span class="lineNum">     558</span>                 :             :     {</span>
-<span id="L559"><span class="lineNum">     559</span>                 :<span class="tlaGNC">          87 :         trimmed_names[index] = storage + offset;</span></span>
+<span id="L559"><span class="lineNum">     559</span>                 :<span class="tlaGNC">         359 :         trimmed_names[index] = storage + offset;</span></span>
 <span id="L560"><span class="lineNum">     560</span>                 :             : </span>
 <span id="L561"><span class="lineNum">     561</span>                 :             :         std::size_t trimmed_length =</span>
-<span id="L562"><span class="lineNum">     562</span>                 :<span class="tlaGNC">          87 :             std::strcspn( raw_names[index], _name_enders );</span></span>
-<span id="L563"><span class="lineNum">     563</span>                 :<span class="tlaGNC">          87 :         storage[offset + trimmed_length] = '\0';</span></span>
+<span id="L562"><span class="lineNum">     562</span>                 :<span class="tlaGNC">         359 :             std::strcspn( raw_names[index], _name_enders );</span></span>
+<span id="L563"><span class="lineNum">     563</span>                 :<span class="tlaGNC">         359 :         storage[offset + trimmed_length] = '\0';</span></span>
 <span id="L564"><span class="lineNum">     564</span>                 :             : </span>
-<span id="L565"><span class="lineNum">     565</span>                 :<span class="tlaGNC">          87 :         std::size_t raw_length  = std::strlen( raw_names[index] );</span></span>
-<span id="L566"><span class="lineNum">     566</span>                 :<span class="tlaGNC">          87 :         offset                 += raw_length + 1;</span></span>
+<span id="L565"><span class="lineNum">     565</span>                 :<span class="tlaGNC">         359 :         std::size_t raw_length  = std::strlen( raw_names[index] );</span></span>
+<span id="L566"><span class="lineNum">     566</span>                 :<span class="tlaGNC">         359 :         offset                 += raw_length + 1;</span></span>
 <span id="L567"><span class="lineNum">     567</span>                 :             :     }</span>
-<span id="L568"><span class="lineNum">     568</span>                 :<span class="tlaGNC">          25 : }</span></span>
+<span id="L568"><span class="lineNum">     568</span>                 :<span class="tlaGNC">         105 : }</span></span>
 <span id="L569"><span class="lineNum">     569</span>                 :             : </span>
 <span id="L570"><span class="lineNum">     570</span>                 :             : </span>
 <span id="L571"><span class="lineNum">     571</span>                 :             : // Eager initialization.</span>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 220-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 225-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -188,8 +188,8 @@ The KIT Framework provides the following features</h1>
 </ul>
 </li>
 <li>The log entry FIFO can overflow if the application is not storing log entries faster than the application is generating entries. When this happens, the framework discards log entries until space frees up in the queue. The framework tracks how many log entries where discarded and generates a special log entry with the details once there is space in the queue.</li>
-<li>An application can <em>disable</em> the KIT's library usage of <a class="el" href="namespace_kit_1_1_logging.html" title="The Logging namespace contains a logging framework as well as the Kit namespace specific logging iden...">Logging</a> framework at compile time by include the the following in its <code>kit_config.h</code> header file. <em>Disable</em> in this context means that a KIT TRACE Message will be generated instead of Log entry. When using the this compiler flag, the application will not need to provide a mocked logging implementation when it does not require logging.<ul>
-<li><code>#define DISABLED_KIT_LOGGING_PKG_LOG_API</code></li>
+<li>An application must <em>enable</em> the KIT's library usage of <a class="el" href="namespace_kit_1_1_logging.html" title="The Logging namespace contains a logging framework as well as the Kit namespace specific logging iden...">Logging</a> framework at compile time by including the following in its <code>kit_config.h</code> header file. When logging is disabled, the KIT_LOGGING_LOG_xxx() calls will generate KIT TRACE Messages instead of Log entries. Also when disabled, a default mapping of Classification IDs and the KIT Package are provided.<ul>
+<li><code>#define USE_KIT_LOGGING_PKG_LOG_API</code></li>
 </ul>
 </li>
 </ul>
@@ -739,7 +739,7 @@ Logging Packages: A Typical Application</h2>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 2 2025 03:51:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Dec 7 2025 18:36:24 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 220-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 225-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -60,7 +60,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_pkg_2_log_8h__incl.svg" width="2004" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="_pkg_2_log_8h__incl.svg" width="1918" height="594"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_pkg_2_log_8h_source.html">Go to the source code of this file.</a></p>
@@ -98,9 +98,9 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file declares the Logging functions available to the KIT Logging Domain. </p>
 <p>CLIENTS SHOULD NOT call the Kit::Logging::Pkg::logfXXX() method directly. Instead the should use the KIT_LOGGING_LOG_XXX() macros. This allows the application to compile out the KIT library's usage of the Logging framework if desired.</p>
-<p>The compile switch do 'disable' the Logging framework usage is: DISABLED_KIT_LOGGING_PKG_LOG_API</p>
-<p>When this switch is defined the KIT_LOGGING_LOG_XXX() macros convert the logging calls into KIT_SYSTEM_TRACE_RESTRICTED_MSG calls</p>
-<p>NOTE: When the Application compiles out the Logging engine using the DISABLED_KIT_LOGGING_PKG_LOG_API switch - it must still provide the "logging configuration", i.e. the assignment absolute values for classification and package IDs. </p>
+<p>The compile switch do enable the Logging framework usage is: USE_KIT_LOGGING_PKG_LOG_API</p>
+<p>When this switch is NOT defined the KIT_LOGGING_LOG_XXX() macros convert the logging calls into KIT_SYSTEM_TRACE_RESTRICTED_MSG calls</p>
+<p>NOTE: When the Application enables the Logging engine by defining USE_KIT_LOGGING_PKG_LOG_API switch - it is required to provide the "logging configuration", i.e. the assignment absolute values for classification and package IDs. </p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="ad0a406b13c969f3fe8b2f262d16d3878" name="ad0a406b13c969f3fe8b2f262d16d3878"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad0a406b13c969f3fe8b2f262d16d3878">&#9670;&#160;</a></span>KIT_LOGGING_LOG_DRIVER</h2>
@@ -161,7 +161,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 2 2025 03:51:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Dec 7 2025 18:36:24 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

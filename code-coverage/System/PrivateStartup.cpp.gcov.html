@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 03:54:57</td>
+            <td class="headerValue">2025-12-07 18:39:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -87,22 +87,22 @@
 <span id="L25"><span class="lineNum">      25</span>                 :             : </span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : ////////////////////////////////////////////////////////////////////////////////</span>
-<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC tlaBgGNC">          63 : IStartupHook::IStartupHook( InitLevel myInitLevel ) noexcept</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC tlaBgGNC">          66 : IStartupHook::IStartupHook( InitLevel myInitLevel ) noexcept</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">          63 :     registerHook( *this, myInitLevel );</span></span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          63 : }</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">          66 :     registerHook( *this, myInitLevel );</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          66 : }</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : </span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          63 : void IStartupHook::registerHook( IStartupHook&amp; callbackInstance, InitLevel initOrder ) noexcept</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          66 : void IStartupHook::registerHook( IStartupHook&amp; callbackInstance, InitLevel initOrder ) noexcept</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : {</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     // NOTE: The assumption is that sub-system register at the time of when</span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :     //       constructor for static object execute - which is before main()</span>
 <span id="L38"><span class="lineNum">      38</span>                 :             :     //       is enter so there should be only one thread.</span>
-<span id="L39"><span class="lineNum">      39</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 58 times"> + </span>]:<span class="tlaGNC">          63 :     if ( initOrder == IStartupHook::TEST_INFRA )</span></span>
+<span id="L39"><span class="lineNum">      39</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 61 times"> + </span>]:<span class="tlaGNC">          66 :     if ( initOrder == IStartupHook::TEST_INFRA )</span></span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :     {</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :         levelTest_.put( callbackInstance );</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     }</span>
-<span id="L43"><span class="lineNum">      43</span>         [<span class="tlaGBC" title="Branch 0 was taken 55 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          58 :     else if ( initOrder == IStartupHook::SYSTEM )</span></span>
+<span id="L43"><span class="lineNum">      43</span>         [<span class="tlaGBC" title="Branch 0 was taken 58 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          61 :     else if ( initOrder == IStartupHook::SYSTEM )</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     {</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :         levelSystem_.put( callbackInstance );</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     }</span>
@@ -114,7 +114,7 @@
 <span id="L52"><span class="lineNum">      52</span>                 :             :     {</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :         levelApplication_.put( callbackInstance );</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     }</span>
-<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">          63 : }</span></span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">          66 : }</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          19 : void IStartupHook::notifyStartupClients() noexcept</span></span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : {</span>
@@ -131,9 +131,9 @@
 <span id="L69"><span class="lineNum">      69</span>                 :             : </span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :     // Do SYSTEM level next</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     ptr = levelSystem_.get();</span>
-<span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 55 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">          74 :     while ( ptr != 0 )</span></span>
+<span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 58 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">          77 :     while ( ptr != 0 )</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     {</span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">          55 :         ptr-&gt;notify( SYSTEM );</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">          58 :         ptr-&gt;notify( SYSTEM );</span></span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :         ptr = levelSystem_.get();</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :     }</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>

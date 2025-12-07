@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-02 03:54:57</td>
+            <td class="headerValue">2025-12-07 18:39:57</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">70.4&nbsp;%</td>
@@ -100,11 +100,11 @@
 <span id="L38"><span class="lineNum">      38</span>                 :             : {</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     unsigned waiters    = 0;</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :     SimTick* simInfoPtr = waiters_.get();</span>
-<span id="L41"><span class="lineNum">      41</span>         [<span class="tlaGBC" title="Branch 0 was taken 2864 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1184 times"> + </span>]:<span class="tlaGNC">        4048 :     while ( simInfoPtr )</span></span>
+<span id="L41"><span class="lineNum">      41</span>         [<span class="tlaGBC" title="Branch 0 was taken 2861 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1184 times"> + </span>]:<span class="tlaGNC">        4045 :     while ( simInfoPtr )</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     {</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">        2864 :         waiters++;</span></span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">        2864 :         simInfoPtr-&gt;m_ackPending = true;</span></span>
-<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">        2864 :         simInfoPtr-&gt;m_waiter.signal();</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">        2861 :         waiters++;</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">        2861 :         simInfoPtr-&gt;m_ackPending = true;</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">        2861 :         simInfoPtr-&gt;m_waiter.signal();</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :         simInfoPtr = waiters_.get();</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">        1184 :     return waiters;</span></span>
@@ -149,9 +149,9 @@
 <span id="L87"><span class="lineNum">      87</span>                 :<span class="tlaGNC">        1184 :         myLock_.unlock();</span></span>
 <span id="L88"><span class="lineNum">      88</span>                 :             : </span>
 <span id="L89"><span class="lineNum">      89</span>                 :             :         // Wait for all the 'sim threads' to complete their tick processing</span>
-<span id="L90"><span class="lineNum">      90</span>         [<span class="tlaGBC" title="Branch 0 was taken 2864 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1184 times"> + </span>]:<span class="tlaGNC">        4048 :         while ( waiters-- )</span></span>
+<span id="L90"><span class="lineNum">      90</span>         [<span class="tlaGBC" title="Branch 0 was taken 2861 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1184 times"> + </span>]:<span class="tlaGNC">        4045 :         while ( waiters-- )</span></span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :         {</span>
-<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">        2864 :             tickSource_.wait();</span></span>
+<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">        2861 :             tickSource_.wait();</span></span>
 <span id="L93"><span class="lineNum">      93</span>                 :             :         }</span>
 <span id="L94"><span class="lineNum">      94</span>                 :             :     }</span>
 <span id="L95"><span class="lineNum">      95</span>                 :             : </span>
@@ -180,45 +180,45 @@
 <span id="L118"><span class="lineNum">     118</span>                 :             : }</span>
 <span id="L119"><span class="lineNum">     119</span>                 :             : </span>
 <span id="L120"><span class="lineNum">     120</span>                 :             : </span>
-<span id="L121"><span class="lineNum">     121</span>                 :<span class="tlaGNC">        5723 : void SimTick::topLevelWait() noexcept</span></span>
+<span id="L121"><span class="lineNum">     121</span>                 :<span class="tlaGNC">        5717 : void SimTick::topLevelWait() noexcept</span></span>
 <span id="L122"><span class="lineNum">     122</span>                 :             : {</span>
 <span id="L123"><span class="lineNum">     123</span>                 :             :     // Get my thread's SimInfo</span>
-<span id="L124"><span class="lineNum">     124</span>                 :<span class="tlaGNC">        5723 :     auto* simInfoPtr = static_cast&lt;SimTick*&gt;( simTlsPtr_-&gt;get() );</span></span>
+<span id="L124"><span class="lineNum">     124</span>                 :<span class="tlaGNC">        5717 :     auto* simInfoPtr = static_cast&lt;SimTick*&gt;( simTlsPtr_-&gt;get() );</span></span>
 <span id="L125"><span class="lineNum">     125</span>                 :             : </span>
 <span id="L126"><span class="lineNum">     126</span>                 :             :     // NEVER block if a non-simulated-tick thread</span>
-<span id="L127"><span class="lineNum">     127</span>         [<span class="tlaGBC" title="Branch 0 was taken 5723 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5723 :     if ( !simInfoPtr )</span></span>
+<span id="L127"><span class="lineNum">     127</span>         [<span class="tlaGBC" title="Branch 0 was taken 5717 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        5717 :     if ( !simInfoPtr )</span></span>
 <span id="L128"><span class="lineNum">     128</span>                 :             :     {</span>
 <span id="L129"><span class="lineNum">     129</span>                 :             :         return;</span>
 <span id="L130"><span class="lineNum">     130</span>                 :             :     }</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             : </span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :     // Test my thread's tick counter against the System tick count and queue my thread to wait for next tick if tick counts match</span>
-<span id="L133"><span class="lineNum">     133</span>         [<span class="tlaGBC" title="Branch 0 was taken 2864 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2859 times"> + </span>]:<span class="tlaGNC">        5723 :     if ( testAndQueue( simInfoPtr ) )</span></span>
+<span id="L133"><span class="lineNum">     133</span>         [<span class="tlaGBC" title="Branch 0 was taken 2861 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2856 times"> + </span>]:<span class="tlaGNC">        5717 :     if ( testAndQueue( simInfoPtr ) )</span></span>
 <span id="L134"><span class="lineNum">     134</span>                 :             :     {</span>
-<span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">        2864 :         simInfoPtr-&gt;m_ackPending = false;</span></span>
-<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">        2864 :         tickSource_.signal();</span></span>
-<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">        2864 :         simInfoPtr-&gt;m_waiter.waitInRealTime();</span></span>
+<span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">        2861 :         simInfoPtr-&gt;m_ackPending = false;</span></span>
+<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">        2861 :         tickSource_.signal();</span></span>
+<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">        2861 :         simInfoPtr-&gt;m_waiter.waitInRealTime();</span></span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :     }</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             : }</span>
 <span id="L140"><span class="lineNum">     140</span>                 :             : </span>
 <span id="L141"><span class="lineNum">     141</span>                 :             : </span>
-<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">        5723 : bool SimTick::testAndQueue( SimTick* simInfoPtr ) noexcept</span></span>
+<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">        5717 : bool SimTick::testAndQueue( SimTick* simInfoPtr ) noexcept</span></span>
 <span id="L143"><span class="lineNum">     143</span>                 :             : {</span>
 <span id="L144"><span class="lineNum">     144</span>                 :             :     // SCOPE Critical section</span>
 <span id="L145"><span class="lineNum">     145</span>                 :             :     Mutex::ScopeLock criticalSection( myLock_ );</span>
 <span id="L146"><span class="lineNum">     146</span>                 :             : </span>
 <span id="L147"><span class="lineNum">     147</span>                 :             :     // Wait while my thread's simulate time match the system simulate time</span>
-<span id="L148"><span class="lineNum">     148</span>         [<span class="tlaGBC" title="Branch 0 was taken 2864 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2859 times"> + </span>]:<span class="tlaGNC">        5723 :     if ( simInfoPtr-&gt;m_curTicks == milliseconds_ )</span></span>
+<span id="L148"><span class="lineNum">     148</span>         [<span class="tlaGBC" title="Branch 0 was taken 2861 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2856 times"> + </span>]:<span class="tlaGNC">        5717 :     if ( simInfoPtr-&gt;m_curTicks == milliseconds_ )</span></span>
 <span id="L149"><span class="lineNum">     149</span>                 :             :     {</span>
 <span id="L150"><span class="lineNum">     150</span>                 :             :         // Add this thread to the waiting list</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :         waiters_.put( *simInfoPtr );</span>
 <span id="L152"><span class="lineNum">     152</span>                 :             : </span>
 <span id="L153"><span class="lineNum">     153</span>                 :             :         // Set flag/return code that I need to wait for the next simulated tick</span>
-<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC">        2864 :         return true;</span></span>
+<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC">        2861 :         return true;</span></span>
 <span id="L155"><span class="lineNum">     155</span>                 :             :     }</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             : </span>
 <span id="L157"><span class="lineNum">     157</span>                 :             :     // Update my threads internal tick count</span>
-<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC">        2859 :     simInfoPtr-&gt;m_curTicks = milliseconds_;</span></span>
-<span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">        2859 :     return false;</span></span>
+<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC">        2856 :     simInfoPtr-&gt;m_curTicks = milliseconds_;</span></span>
+<span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">        2856 :     return false;</span></span>
 <span id="L160"><span class="lineNum">     160</span>                 :             : }</span>
 <span id="L161"><span class="lineNum">     161</span>                 :             : </span>
 <span id="L162"><span class="lineNum">     162</span>                 :             : </span>
@@ -252,16 +252,16 @@
 <span id="L190"><span class="lineNum">     190</span>                 :             : }</span>
 <span id="L191"><span class="lineNum">     191</span>                 :             : </span>
 <span id="L192"><span class="lineNum">     192</span>                 :             : </span>
-<span id="L193"><span class="lineNum">     193</span>                 :<span class="tlaGNC tlaBgGNC">        7596 : bool SimTick::usingSimTicks() noexcept</span></span>
+<span id="L193"><span class="lineNum">     193</span>                 :<span class="tlaGNC tlaBgGNC">        7593 : bool SimTick::usingSimTicks() noexcept</span></span>
 <span id="L194"><span class="lineNum">     194</span>                 :             : {</span>
 <span id="L195"><span class="lineNum">     195</span>                 :             :     // If I have not yet created the TLS key/index --&gt;then NO threads are using simulated time</span>
-<span id="L196"><span class="lineNum">     196</span>         [<span class="tlaGBC" title="Branch 0 was taken 7596 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        7596 :     if ( !simTlsPtr_ )</span></span>
+<span id="L196"><span class="lineNum">     196</span>         [<span class="tlaGBC" title="Branch 0 was taken 7593 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">        7593 :     if ( !simTlsPtr_ )</span></span>
 <span id="L197"><span class="lineNum">     197</span>                 :             :     {</span>
 <span id="L198"><span class="lineNum">     198</span>                 :             :         return false;</span>
 <span id="L199"><span class="lineNum">     199</span>                 :             :     }</span>
 <span id="L200"><span class="lineNum">     200</span>                 :             : </span>
 <span id="L201"><span class="lineNum">     201</span>                 :             :     // If my thread's SimInfo is NULL --&gt;then I am NOT using simulated time</span>
-<span id="L202"><span class="lineNum">     202</span>                 :<span class="tlaGNC">        7596 :     return simTlsPtr_-&gt;get() != nullptr;</span></span>
+<span id="L202"><span class="lineNum">     202</span>                 :<span class="tlaGNC">        7593 :     return simTlsPtr_-&gt;get() != nullptr;</span></span>
 <span id="L203"><span class="lineNum">     203</span>                 :             : }</span>
 <span id="L204"><span class="lineNum">     204</span>                 :             : </span>
 <span id="L205"><span class="lineNum">     205</span>                 :             : </span>
@@ -335,20 +335,20 @@
 <span id="L273"><span class="lineNum">     273</span>                 :             : </span>
 <span id="L274"><span class="lineNum">     274</span>                 :             : </span>
 <span id="L275"><span class="lineNum">     275</span>                 :             : /////////////////////////////////////////////</span>
-<span id="L276"><span class="lineNum">     276</span>                 :<span class="tlaGNC">        2859 : void sleep( uint32_t milliseconds ) noexcept</span></span>
+<span id="L276"><span class="lineNum">     276</span>                 :<span class="tlaGNC">        2857 : void sleep( uint32_t milliseconds ) noexcept</span></span>
 <span id="L277"><span class="lineNum">     277</span>                 :             : {</span>
 <span id="L278"><span class="lineNum">     278</span>                 :             :     // If I have not yet created the TLS key/index --&gt;then NO threads are using simulated time</span>
-<span id="L279"><span class="lineNum">     279</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2859 times"> + </span>]:<span class="tlaGNC">        2859 :     if ( simTlsPtr_ == nullptr )</span></span>
+<span id="L279"><span class="lineNum">     279</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2857 times"> + </span>]:<span class="tlaGNC">        2857 :     if ( simTlsPtr_ == nullptr )</span></span>
 <span id="L280"><span class="lineNum">     280</span>                 :             :     {</span>
 <span id="L281"><span class="lineNum">     281</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         sleepInRealTime( milliseconds );</span></span>
 <span id="L282"><span class="lineNum">     282</span>                 :<span class="tlaUNC">           0 :         return;</span></span>
 <span id="L283"><span class="lineNum">     283</span>                 :             :     }</span>
 <span id="L284"><span class="lineNum">     284</span>                 :             :     </span>
 <span id="L285"><span class="lineNum">     285</span>                 :             :     // Get my thread's SimInfo</span>
-<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC tlaBgGNC">        2859 :     auto* simInfoPtr = static_cast&lt;SimTick*&gt;( simTlsPtr_-&gt;get() );</span></span>
+<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC tlaBgGNC">        2857 :     auto* simInfoPtr = static_cast&lt;SimTick*&gt;( simTlsPtr_-&gt;get() );</span></span>
 <span id="L287"><span class="lineNum">     287</span>                 :             : </span>
 <span id="L288"><span class="lineNum">     288</span>                 :             :     // ALWAYS use the 'real' sleep call when I am a non-simulated-tick thread</span>
-<span id="L289"><span class="lineNum">     289</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2859 times"> + </span>]:<span class="tlaGNC">        2859 :     if ( !simInfoPtr )</span></span>
+<span id="L289"><span class="lineNum">     289</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2857 times"> + </span>]:<span class="tlaGNC">        2857 :     if ( !simInfoPtr )</span></span>
 <span id="L290"><span class="lineNum">     290</span>                 :             :     {</span>
 <span id="L291"><span class="lineNum">     291</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         sleepInRealTime( milliseconds );</span></span>
 <span id="L292"><span class="lineNum">     292</span>                 :             :     }</span>
@@ -357,57 +357,57 @@
 <span id="L295"><span class="lineNum">     295</span>                 :             :     else</span>
 <span id="L296"><span class="lineNum">     296</span>                 :             :     {</span>
 <span id="L297"><span class="lineNum">     297</span>                 :             :         // Loop until enough simulated ticks have elapsed</span>
-<span id="L298"><span class="lineNum">     298</span>                 :<span class="tlaGNC tlaBgGNC">        2859 :         uint64_t msecEx = milliseconds;</span></span>
-<span id="L299"><span class="lineNum">     299</span>         [<span class="tlaGBC" title="Branch 0 was taken 5723 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2859 times"> + </span>]:<span class="tlaGNC">        8582 :         while ( msecEx )</span></span>
+<span id="L298"><span class="lineNum">     298</span>                 :<span class="tlaGNC tlaBgGNC">        2857 :         uint64_t msecEx = milliseconds;</span></span>
+<span id="L299"><span class="lineNum">     299</span>         [<span class="tlaGBC" title="Branch 0 was taken 5717 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2857 times"> + </span>]:<span class="tlaGNC">        8574 :         while ( msecEx )</span></span>
 <span id="L300"><span class="lineNum">     300</span>                 :             :         {</span>
 <span id="L301"><span class="lineNum">     301</span>                 :             :             // Get the current time</span>
-<span id="L302"><span class="lineNum">     302</span>                 :<span class="tlaGNC">        5723 :             myLock_.lock();</span></span>
-<span id="L303"><span class="lineNum">     303</span>                 :<span class="tlaGNC">        5723 :             uint64_t start = milliseconds_;</span></span>
-<span id="L304"><span class="lineNum">     304</span>                 :<span class="tlaGNC">        5723 :             myLock_.unlock();</span></span>
+<span id="L302"><span class="lineNum">     302</span>                 :<span class="tlaGNC">        5717 :             myLock_.lock();</span></span>
+<span id="L303"><span class="lineNum">     303</span>                 :<span class="tlaGNC">        5717 :             uint64_t start = milliseconds_;</span></span>
+<span id="L304"><span class="lineNum">     304</span>                 :<span class="tlaGNC">        5717 :             myLock_.unlock();</span></span>
 <span id="L305"><span class="lineNum">     305</span>                 :             : </span>
 <span id="L306"><span class="lineNum">     306</span>                 :             :             // Wait on the tick</span>
-<span id="L307"><span class="lineNum">     307</span>                 :<span class="tlaGNC">        5723 :             SimTick::topLevelWait();</span></span>
-<span id="L308"><span class="lineNum">     308</span>                 :<span class="tlaGNC">        5723 :             myLock_.lock();</span></span>
-<span id="L309"><span class="lineNum">     309</span>                 :<span class="tlaGNC">        5723 :             uint64_t current = milliseconds_;</span></span>
-<span id="L310"><span class="lineNum">     310</span>                 :<span class="tlaGNC">        5723 :             myLock_.unlock();</span></span>
+<span id="L307"><span class="lineNum">     307</span>                 :<span class="tlaGNC">        5717 :             SimTick::topLevelWait();</span></span>
+<span id="L308"><span class="lineNum">     308</span>                 :<span class="tlaGNC">        5717 :             myLock_.lock();</span></span>
+<span id="L309"><span class="lineNum">     309</span>                 :<span class="tlaGNC">        5717 :             uint64_t current = milliseconds_;</span></span>
+<span id="L310"><span class="lineNum">     310</span>                 :<span class="tlaGNC">        5717 :             myLock_.unlock();</span></span>
 <span id="L311"><span class="lineNum">     311</span>                 :             : </span>
 <span id="L312"><span class="lineNum">     312</span>                 :             :             // Subtract the elapsed time from my count down timer</span>
-<span id="L313"><span class="lineNum">     313</span>         [<span class="tlaGBC" title="Branch 0 was taken 2864 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2859 times"> + </span>]:<span class="tlaGNC">        5723 :             uint64_t delta = ElapsedTime::deltaMilliseconds( static_cast&lt;uint32_t&gt;( start ), static_cast&lt;uint32_t&gt;( current ) );</span></span>
-<span id="L314"><span class="lineNum">     314</span>         [<span class="tlaGBC" title="Branch 0 was taken 2864 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2859 times"> + </span>]:<span class="tlaGNC">        5723 :             msecEx         = msecEx &gt; delta ? msecEx - delta : 0;</span></span>
+<span id="L313"><span class="lineNum">     313</span>         [<span class="tlaGBC" title="Branch 0 was taken 2860 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2857 times"> + </span>]:<span class="tlaGNC">        5717 :             uint64_t delta = ElapsedTime::deltaMilliseconds( static_cast&lt;uint32_t&gt;( start ), static_cast&lt;uint32_t&gt;( current ) );</span></span>
+<span id="L314"><span class="lineNum">     314</span>         [<span class="tlaGBC" title="Branch 0 was taken 2860 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2857 times"> + </span>]:<span class="tlaGNC">        5717 :             msecEx         = msecEx &gt; delta ? msecEx - delta : 0;</span></span>
 <span id="L315"><span class="lineNum">     315</span>                 :             :         }</span>
 <span id="L316"><span class="lineNum">     316</span>                 :             :     }</span>
 <span id="L317"><span class="lineNum">     317</span>                 :             : }</span>
 <span id="L318"><span class="lineNum">     318</span>                 :             : </span>
 <span id="L319"><span class="lineNum">     319</span>                 :             : </span>
 <span id="L320"><span class="lineNum">     320</span>                 :             : ///////////////////////////////////////////////////////////////</span>
-<span id="L321"><span class="lineNum">     321</span>                 :<span class="tlaGNC">       14470 : uint32_t ElapsedTime::milliseconds() noexcept</span></span>
+<span id="L321"><span class="lineNum">     321</span>                 :<span class="tlaGNC">       14476 : uint32_t ElapsedTime::milliseconds() noexcept</span></span>
 <span id="L322"><span class="lineNum">     322</span>                 :             : {</span>
-<span id="L323"><span class="lineNum">     323</span>                 :<span class="tlaGNC">       14470 :     return static_cast&lt;uint32_t&gt;( millisecondsEx() );</span></span>
+<span id="L323"><span class="lineNum">     323</span>                 :<span class="tlaGNC">       14476 :     return static_cast&lt;uint32_t&gt;( millisecondsEx() );</span></span>
 <span id="L324"><span class="lineNum">     324</span>                 :             : }</span>
 <span id="L325"><span class="lineNum">     325</span>                 :             : </span>
-<span id="L326"><span class="lineNum">     326</span>                 :<span class="tlaGNC">       16448 : uint64_t ElapsedTime::millisecondsEx() noexcept</span></span>
+<span id="L326"><span class="lineNum">     326</span>                 :<span class="tlaGNC">       16454 : uint64_t ElapsedTime::millisecondsEx() noexcept</span></span>
 <span id="L327"><span class="lineNum">     327</span>                 :             : {</span>
 <span id="L328"><span class="lineNum">     328</span>                 :             :     // If I have not yet created the TLS key/index --&gt;then NO threads are using simulated time</span>
-<span id="L329"><span class="lineNum">     329</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 16448 times"> + </span>]:<span class="tlaGNC">       16448 :     if ( simTlsPtr_ == nullptr )</span></span>
+<span id="L329"><span class="lineNum">     329</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 16454 times"> + </span>]:<span class="tlaGNC">       16454 :     if ( simTlsPtr_ == nullptr )</span></span>
 <span id="L330"><span class="lineNum">     330</span>                 :             :     {</span>
 <span id="L331"><span class="lineNum">     331</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         return ElapsedTime::millisecondsInRealTimeEx();;</span></span>
 <span id="L332"><span class="lineNum">     332</span>                 :             :     }</span>
 <span id="L333"><span class="lineNum">     333</span>                 :             : </span>
 <span id="L334"><span class="lineNum">     334</span>                 :             :     // Get my thread's SimInfo</span>
-<span id="L335"><span class="lineNum">     335</span>                 :<span class="tlaGNC tlaBgGNC">       16448 :     auto* simInfoPtr = static_cast&lt;SimTick*&gt;( simTlsPtr_-&gt;get() );</span></span>
+<span id="L335"><span class="lineNum">     335</span>                 :<span class="tlaGNC tlaBgGNC">       16454 :     auto* simInfoPtr = static_cast&lt;SimTick*&gt;( simTlsPtr_-&gt;get() );</span></span>
 <span id="L336"><span class="lineNum">     336</span>                 :             : </span>
 <span id="L337"><span class="lineNum">     337</span>                 :             :     // ALWAYS use the 'real' elapsed time when I am a non-simulated-tick thread</span>
-<span id="L338"><span class="lineNum">     338</span>         [<span class="tlaGBC" title="Branch 0 was taken 92 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 16356 times"> + </span>]:<span class="tlaGNC">       16448 :     if ( !simInfoPtr )</span></span>
+<span id="L338"><span class="lineNum">     338</span>         [<span class="tlaGBC" title="Branch 0 was taken 92 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 16362 times"> + </span>]:<span class="tlaGNC">       16454 :     if ( !simInfoPtr )</span></span>
 <span id="L339"><span class="lineNum">     339</span>                 :             :     {</span>
 <span id="L340"><span class="lineNum">     340</span>                 :<span class="tlaGNC">          92 :         return ElapsedTime::millisecondsInRealTimeEx();</span></span>
 <span id="L341"><span class="lineNum">     341</span>                 :             :     }</span>
 <span id="L342"><span class="lineNum">     342</span>                 :             : </span>
 <span id="L343"><span class="lineNum">     343</span>                 :             : </span>
 <span id="L344"><span class="lineNum">     344</span>                 :             :     // Thread is using simulated time --&gt;return the simulate time</span>
-<span id="L345"><span class="lineNum">     345</span>                 :<span class="tlaGNC">       16356 :     myLock_.lock();</span></span>
-<span id="L346"><span class="lineNum">     346</span>                 :<span class="tlaGNC">       16356 :     uint64_t msec = milliseconds_;</span></span>
-<span id="L347"><span class="lineNum">     347</span>                 :<span class="tlaGNC">       16356 :     myLock_.unlock();</span></span>
-<span id="L348"><span class="lineNum">     348</span>                 :<span class="tlaGNC">       16356 :     return msec;</span></span>
+<span id="L345"><span class="lineNum">     345</span>                 :<span class="tlaGNC">       16362 :     myLock_.lock();</span></span>
+<span id="L346"><span class="lineNum">     346</span>                 :<span class="tlaGNC">       16362 :     uint64_t msec = milliseconds_;</span></span>
+<span id="L347"><span class="lineNum">     347</span>                 :<span class="tlaGNC">       16362 :     myLock_.unlock();</span></span>
+<span id="L348"><span class="lineNum">     348</span>                 :<span class="tlaGNC">       16362 :     return msec;</span></span>
 <span id="L349"><span class="lineNum">     349</span>                 :             : }</span>
 <span id="L350"><span class="lineNum">     350</span>                 :             : </span>
 <span id="L351"><span class="lineNum">     351</span>                 :             : </span>
