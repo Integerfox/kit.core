@@ -10,7 +10,10 @@
 
 
 #include "Kit/System/Shutdown.h"
+#include "Kit/Logging/Pkg/Log.h"
 #include <stdlib.h>
+
+using namespace Kit::Logging::Pkg;
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -25,6 +28,7 @@ static int shutdownApplication_( int exitCode ) noexcept
 
 int Shutdown::success() noexcept
 {
+    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN , "Orderly shutdown initiated..." );
     return shutdownApplication_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }
 

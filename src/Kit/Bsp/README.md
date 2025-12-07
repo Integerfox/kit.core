@@ -4,7 +4,7 @@
 
 The Bsp namespace is the root name space for microcontroller Board Support Packages (BSPs).
 
-BSP are responsible for encapsulating the MCU data sheet, board schematic, 
+BSP are responsible for encapsulating the MCU data sheet, board schematic,
 cross compiler, and MCU Vendor supplied SDK/generated code.  In general, BSPs are required to:
 
 - Support a the common/generic interface defined in this root namespace (i.e
@@ -24,4 +24,6 @@ NOTE: A microcontroller BSP is similar in concept to a Linux BSP, but a
       must go through BSP interfaces for accessing HW Registers, etc. (i.e. cannot
       contain any MCU/compiler specific code).  
 
-TODO: Add link to future blog article on the *Indirect BSP* pattern
+See the [Indirect Microcontroller BSP](https://patternsinthemachine.net/2025/12/indirect-microcontroller-bsp/)
+article for how the application and drivers should *access* the interfaces provided
+by a BSP.

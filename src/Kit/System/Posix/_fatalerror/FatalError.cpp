@@ -19,27 +19,47 @@
 
 #include "Kit/System/FatalError.h"
 #include "Kit/System/Shutdown.h"
+#include "Kit/Logging/Pkg/Log.h"
+#include "Kit/Text/FString.h"
 #include <stdarg.h>
 #include <stdio.h>
 
 
 #define EXTRA_INFO "@@ Fatal Error"
 
+using namespace Kit::Logging::Pkg;  // Helps with Log Enums
+
+// Use Logging/Trace if available
+#if defined( USE_KIT_SYSTEM_TRACE ) || defined( USE_KIT_SYSTEM_TRACE_RESTRICTED )
+#define OUTPUT( text ) KIT_LOGGING_LOG_SYSTEM( ClassificationId::FATAL, SystemMsgId::FATAL_ERROR, "%s", text );
+#else
+#define OUTPUT( text ) fprintf( stderr, "\n%s\n", text )
+#endif
+
+
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace System {
+
+#ifndef KIT_SYSTEM_FATAL_ERROR_BUFSIZE
+#define KIT_SYSTEM_FATAL_ERROR_BUFSIZE 256
+#endif
+
+static Kit::Text::FString<KIT_SYSTEM_FATAL_ERROR_BUFSIZE> buffer_;
 
 
 //////////////////////////////
 void FatalError::log( int exitCode, const char* message )
 {
-    fprintf( stderr, "\n%s [%d]: %s\n", EXTRA_INFO, exitCode, message );
+    buffer_.format( "%s [%d]: %s", EXTRA_INFO, exitCode, message );
+    OUTPUT( buffer_.getString() );
     Shutdown::failure( exitCode );
 }
 
 void FatalError::log( int exitCode, const char* message, size_t value )
 {
-    fprintf( stderr, "\n%s [%d]: %s [%p]\n", EXTRA_INFO, exitCode, message, (void*)value );
+    buffer_.format( "%s [%d]: %s [%zu]", EXTRA_INFO, exitCode, message, value );
+    OUTPUT( buffer_.getString() );
     Shutdown::failure( exitCode );
 }
 
@@ -49,9 +69,10 @@ void FatalError::logf( int exitCode, const char* format, ... )
     va_list ap;
     va_start( ap, format );
 
-    fprintf( stderr, "\n%s [%d]: ", EXTRA_INFO, exitCode );
-    vfprintf( stderr, format, ap );
-    fprintf( stderr, "\n" );
+    buffer_.format( "%s [%d]: ", EXTRA_INFO, exitCode );
+    buffer_.vformatAppend( format, ap );
+    va_end( ap );
+    OUTPUT( buffer_.getString() );
     Shutdown::failure( exitCode );
 }
 

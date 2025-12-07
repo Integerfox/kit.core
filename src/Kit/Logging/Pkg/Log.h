@@ -16,29 +16,40 @@ CLIENTS SHOULD NOT call the Kit::Logging::Pkg::logfXXX() method directly. Instea
 the should use the KIT_LOGGING_LOG_XXX() macros.  This allows the application
 to compile out the KIT library's usage of the Logging framework if desired.
 
-The compile switch do 'disable' the Logging framework usage is:
-    DISABLED_KIT_LOGGING_PKG_LOG_API
+The compile switch do enable the Logging framework usage is:
+    USE_KIT_LOGGING_PKG_LOG_API
 
-When this switch is defined the KIT_LOGGING_LOG_XXX() macros convert the logging
+When this switch is NOT defined the KIT_LOGGING_LOG_XXX() macros convert the logging
 calls into KIT_SYSTEM_TRACE_RESTRICTED_MSG calls
 
-NOTE: When the Application compiles out the Logging engine using the
-      DISABLED_KIT_LOGGING_PKG_LOG_API switch - it must still provide the
-      "logging configuration", i.e. the assignment absolute values for 
+NOTE: When the Application enables the Logging engine by defining
+      USE_KIT_LOGGING_PKG_LOG_API switch - it is required to provide the
+      "logging configuration", i.e. the assignment absolute values for
       classification and package IDs.
 */
 
 #include "kit_config.h"
-#include "Kit/Logging/Pkg/Package.h"
-#include "Kit/Logging/Pkg/ClassificationId.h"
-#include "Kit/Logging/Pkg/SubSystemId.h"
-#include "Kit/Logging/Pkg/MsgId.h"
-#include "Kit/Logging/Framework/Log.h"
+#include "Kit/Logging/Framework/types.h"
 #include "Kit/System/printfchecker.h"
 
-
-// Support Conditionally compiling the Logging calls to Trace calls 
-#ifdef DISABLED_KIT_LOGGING_PKG_LOG_API
+// Support Conditionally compiling the Logging calls to Trace calls
+#ifndef USE_KIT_LOGGING_PKG_LOG_API
+// Provide default mapping configuration values if not provided by the application
+#ifndef KIT_LOGGING_PKG_PACKAGE_ID_MAPCFG
+#define KIT_LOGGING_PKG_PACKAGE_ID_MAPCFG 1
+#endif
+#ifndef KIT_LOGGING_PKG_CLASSIFICATION_ID_FATAL_MAPCFG
+#define KIT_LOGGING_PKG_CLASSIFICATION_ID_FATAL_MAPCFG 1
+#endif
+#ifndef KIT_LOGGING_PKG_CLASSIFICATION_ID_WARNING_MAPCFG
+#define KIT_LOGGING_PKG_CLASSIFICATION_ID_WARNING_MAPCFG 2
+#endif
+#ifndef KIT_LOGGING_PKG_CLASSIFICATION_ID_EVENT_MAPCFG
+#define KIT_LOGGING_PKG_CLASSIFICATION_ID_EVENT_MAPCFG 3
+#endif
+#ifndef KIT_LOGGING_PKG_CLASSIFICATION_ID_INFO_MAPCFG
+#define KIT_LOGGING_PKG_CLASSIFICATION_ID_INFO_MAPCFG 4
+#endif
 #define KIT_LOGGING_LOG_SYSTEM( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, ::Kit::Logging::Pkg::Package::PACKAGE_ID, ::Kit::Logging::Pkg::SubSystemId::SYSTEM, messageId, __VA_ARGS__ )
 #define KIT_LOGGING_LOG_DRIVER( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, ::Kit::Logging::Pkg::Package::PACKAGE_ID, ::Kit::Logging::Pkg::SubSystemId::DRIVER, messageId, __VA_ARGS__ )
 #else
@@ -49,7 +60,18 @@ NOTE: When the Application compiles out the Logging engine using the
 /// This method generates a DRIVER Sub-system log entry. See logfDriver() for details
 #define KIT_LOGGING_LOG_DRIVER( classificationId, messageId, ... ) ::Kit::Logging::Pkg::logfDriver( classificationId, messageId, __VA_ARGS__ )
 
-#endif  // end DISABLED_KIT_LOGGING_PKG_LOG_API
+#endif  // end !USE_KIT_LOGGING_PKG_LOG_API
+
+//
+// The following includes MUST BE AFTER the macros above.  The 'weird' ordering is so that default Logging IDs can be provided when NOT ENABLING logging
+//
+#include "Kit/Logging/Pkg/Package.h"
+#include "Kit/Logging/Pkg/ClassificationId.h"
+#include "Kit/Logging/Pkg/SubSystemId.h"
+#include "Kit/Logging/Pkg/MsgId.h"
+#include "Kit/Logging/Framework/Log.h"
+
+
 
 ///
 namespace Kit {
