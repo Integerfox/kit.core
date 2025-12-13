@@ -221,9 +221,9 @@ public:
     }
 };
 
-//------------------------------------------------------------------------------
-// Static Storage for Objects (to avoid stack corruption)
-//------------------------------------------------------------------------------
+// Allocating static storage for objects that must persist after main() exits
+// when the scheduler starts. These cannot be stack-allocated because FreeRTOS
+// will reuse/corrupt the main stack.
 
 static uint8_t supervisorWdogStorage_[sizeof(WatchedEventThread)] __attribute__((aligned(8)));
 static uint8_t eventLoopStorage_[sizeof(Server)] __attribute__((aligned(8)));
