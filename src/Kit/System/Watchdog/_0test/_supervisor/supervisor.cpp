@@ -32,6 +32,7 @@
 #include "Kit/System/EventLoop.h"
 #include "Kit/EventQueue/Server.h"
 #include <cstdint>
+#include <string.h>
 
 #define SECT_ "_0test"
 
@@ -73,6 +74,9 @@ using namespace Kit::EventQueue;
 // Test State
 //------------------------------------------------------------------------------
 
+/// Counter to track elapsed time in the event loop
+static volatile uint32_t eventLoopCounter_ = 0;
+
 /// Counter to track when to trigger the stuck condition
 static volatile uint32_t runCounter_ = 0;
 
@@ -86,9 +90,15 @@ static volatile bool triggerStuck_ = false;
 class TestEventLoop : public Server
 {
 public:
+    /** Constructor
+        @param timeoutPeriod Event loop timeout period
+        @param wdogSetup Pointer to watchdog setup interface
+     */
     TestEventLoop( unsigned long timeoutPeriod,
-                   IWatchedEventLoop* wdogSetup )
-        : Server( timeoutPeriod, nullptr, wdogSetup )
+                   IWatchedEventLoop* wdogSetup ) noexcept
+        : Server( timeoutPeriod
+                , nullptr
+                , wdogSetup )
     {
     }
 
@@ -98,23 +108,23 @@ protected:
     {
         startEventLoop();
 
-        // Run the event loop for NORMAL_RUN_DELAY_MS
-        uint32_t startTime = HAL_GetTick();
+        // Run the event loop until told to get stuck
         bool run = true;
-        while ( run && ( ( HAL_GetTick() - startTime ) < NORMAL_RUN_DELAY_MS ) )
+        while ( run && !triggerStuck_ )
         {
             run = waitAndProcessEvents();
+            eventLoopCounter_++;
         }
 
         // Check if we should trigger the stuck condition
         if ( triggerStuck_ )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "*** SUPERVISOR STUCK - Entering busy loop ***" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Busy loop will last %u ms (HW timeout is %u ms)",
+            KIT_SYSTEM_TRACE_MSG( SECT_, "*** SUPERVISOR STUCK - Entering busy loop ***\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Busy loop will last %u ms (HW timeout is %u ms)\r\n",
                                   (unsigned)STUCK_DURATION_MS, (unsigned)HW_WATCHDOG_TIMEOUT_MS );
 
             // Get stuck in a busy loop (no watchdog refresh)
-            startTime = HAL_GetTick();
+            uint32_t startTime = HAL_GetTick();
             while ( ( HAL_GetTick() - startTime ) < STUCK_DURATION_MS )
             {
                 // Busy wait - watchdog will NOT be refreshed
@@ -127,7 +137,7 @@ protected:
             }
 
             // If we get here, the watchdog failed to reset us
-            KIT_SYSTEM_TRACE_MSG( SECT_, "*** ERROR: Watchdog did not reset system! ***" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "*** ERROR: Watchdog did not reset system! ***\r\n" );
             triggerStuck_ = false;
         }
 
@@ -142,6 +152,74 @@ protected:
 };
 
 //------------------------------------------------------------------------------
+// Test Monitor Thread
+//------------------------------------------------------------------------------
+
+/// Test monitor runnable that coordinates the test
+class TestMonitor : public IRunnable
+{
+public:
+    void entry() noexcept override
+    {
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Test monitor starting\r\n" );
+        
+        // Give supervisor thread time to start, initialize, and have its
+        // first health check timer fire
+        sleep( 1000 );
+
+        if ( !Supervisor::enableWdog() )
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to enable hardware watchdog!\r\n" );
+            FatalError::logf( Shutdown::eFAILURE, "Failed to enable hardware watchdog\r\n" );
+        }
+
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Hardware watchdog enabled successfully\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Running normally for %u ms...\r\n", NORMAL_RUN_DELAY_MS );
+        // Run normally for a bit to establish that watchdog is working
+        while ( runCounter_ < NORMAL_RUN_DELAY_MS )
+        {
+            Bsp_toggle_debug1();
+            sleep( 500 );
+            runCounter_ += 500;
+        }
+
+        // Now trigger the stuck condition
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Triggering stuck condition...\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Waiting for watchdog reset...\r\n" );
+
+        triggerStuck_ = true;
+
+        // Wait for the watchdog to reset us
+        for ( int32_t i = 0; i < 10; ++i )
+        {
+            sleep( 500 );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Still waiting for reset... (%d)\r\n", (int)i );
+        }
+
+        // If we get here, something went wrong
+        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Test FAILED\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Watchdog did not reset the system\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
+
+        // Blink LED rapidly to indicate failure
+        for ( ;; )
+        {
+            Bsp_toggle_debug1();
+            sleep( 100 );
+        }
+    }
+};
+
+//------------------------------------------------------------------------------
+// Static Storage for Objects (to avoid stack corruption)
+//------------------------------------------------------------------------------
+
+static uint8_t supervisorWdogStorage_[sizeof(WatchedEventThread)] __attribute__((aligned(8)));
+static uint8_t eventLoopStorage_[sizeof(TestEventLoop)] __attribute__((aligned(8)));
+static uint8_t testMonitorStorage_[sizeof(TestMonitor)] __attribute__((aligned(8)));
+
+//------------------------------------------------------------------------------
 // Main Application
 //------------------------------------------------------------------------------
 
@@ -149,6 +227,14 @@ int main( void )
 {
     // Initialize the board (HAL, clocks, GPIOs, UART)
     Bsp_initialize();
+    
+    // Small delay to let UART stabilize
+    HAL_Delay( 200 );
+    
+    // Test raw UART transmission (bypasses everything)
+    const char* msg = "\r\n\r\n**** SUPERVISOR STUCK TEST START ****\r\n";
+    HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), 1000);
+    HAL_Delay( 100 );
 
     // Initialize the KIT system
     Kit::System::initialize();
@@ -157,21 +243,14 @@ int main( void )
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
 
-    KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor Stuck Test" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "HW Watchdog Timeout: %u ms", HW_WATCHDOG_TIMEOUT_MS );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Stuck Duration: %u ms", STUCK_DURATION_MS );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
-
-    // Check if this is a watchdog reset
+    // Check if this is a watchdog reset BEFORE starting test
     if ( __HAL_RCC_GET_FLAG( RCC_FLAG_IWDGRST ) != RESET )
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "*** WATCHDOG RESET DETECTED ***" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Test PASSED" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "System was correctly reset by watchdog" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "when supervisor thread was stuck" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
+        const char* successMsg = "*** WATCHDOG RESET DETECTED ***\r\n";
+        HAL_UART_Transmit(&huart3, (uint8_t*)successMsg, strlen(successMsg), 1000);
+        const char* successMsg2 = "Test PASSED - System was reset by watchdog when supervisor was stuck\r\n";
+        HAL_UART_Transmit(&huart3, (uint8_t*)successMsg2, strlen(successMsg2), 1000);
+        
         __HAL_RCC_CLEAR_RESET_FLAGS();
 
         // Keep both LEDs on to indicate success
@@ -185,69 +264,51 @@ int main( void )
         }
     }
 
+    const char* msg2 = "KIT System initialized\r\n";
+    HAL_UART_Transmit(&huart3, (uint8_t*)msg2, strlen(msg2), 1000);
+
+    char buf[200];
+    snprintf(buf, sizeof(buf), "Supervisor Stuck Test Starting\r\nHW Watchdog Timeout: %u ms\r\nStuck Duration: %u ms\r\n", 
+             HW_WATCHDOG_TIMEOUT_MS, STUCK_DURATION_MS);
+    HAL_UART_Transmit(&huart3, (uint8_t*)buf, strlen(buf), 1000);
+
     // First run - set up the test
-    KIT_SYSTEM_TRACE_MSG( SECT_, "First run - setting up watchdog test" );
+    const char* msg3 = "First run - setting up watchdog test\r\n";
+    HAL_UART_Transmit(&huart3, (uint8_t*)msg3, strlen(msg3), 1000);
 
-    // Configure the supervisor thread (event thread)
-    WatchedEventThread supervisorWdog( SUPERVISOR_WDOG_TIMEOUT_MS,
-                                       SUPERVISOR_HEALTH_CHECK_MS,
-                                       true );  // This is the supervisor thread
+    // Configure the supervisor thread (event thread) using placement new
+    WatchedEventThread* supervisorWdog = new (supervisorWdogStorage_) WatchedEventThread(
+        SUPERVISOR_WDOG_TIMEOUT_MS,
+        SUPERVISOR_HEALTH_CHECK_MS,
+        true );  // This is the supervisor thread
 
-    // Create the custom event loop for the supervisor thread
-    TestEventLoop eventLoop( OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
-                             &supervisorWdog );
+    // Create the custom event loop for the supervisor thread using placement new
+    TestEventLoop* eventLoop = new (eventLoopStorage_) TestEventLoop(
+        OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
+        supervisorWdog );
 
     // Create and start the supervisor thread
-    auto* supervisorThread = Thread::create( eventLoop, "SUPERVISOR" );
+    auto* supervisorThread = Thread::create( *eventLoop, "SUPERVISOR" );
     if ( !supervisorThread )
     {
         FatalError::logf( Shutdown::eFAILURE, "Failed to create supervisor thread" );
     }
+    const char* msg4 = "Supervisor thread created\r\n";
+    HAL_UART_Transmit(&huart3, (uint8_t*)msg4, strlen(msg4), 1000);
 
-    // Enable the hardware watchdog
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Enabling hardware watchdog..." );
-    if ( !Supervisor::enableWdog() )
+    // Create and start the test monitor thread
+    TestMonitor* testMonitor = new (testMonitorStorage_) TestMonitor();
+    auto* monitorThread = Thread::create( *testMonitor, "TEST_MONITOR" );
+    if ( !monitorThread )
     {
-        FatalError::logf( Shutdown::eFAILURE, "Failed to enable hardware watchdog" );
+        FatalError::logf( Shutdown::eFAILURE, "Failed to create test monitor thread" );
     }
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Hardware watchdog enabled successfully" );
+    const char* msg6 = "Test monitor thread created\r\n";
+    HAL_UART_Transmit(&huart3, (uint8_t*)msg6, strlen(msg6), 1000);
+    
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Starting scheduler...\r\n" );
+    enableScheduling();
 
-    // Run normally for a bit to establish that watchdog is working
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Running normally for %u ms...", NORMAL_RUN_DELAY_MS );
-
-    while ( runCounter_ < NORMAL_RUN_DELAY_MS )
-    {
-        Bsp_toggle_debug1();
-        HAL_Delay( 500 );
-        runCounter_ += 500;
-    }
-
-    // Now trigger the stuck condition
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Triggering stuck condition..." );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Waiting for watchdog reset..." );
-
-    triggerStuck_ = true;
-
-    // Wait a bit more - the supervisor thread will get stuck in its event loop
-    // and the watchdog should reset us
-    for ( int i = 0; i < 10; i++ )
-    {
-        HAL_Delay( 500 );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Still waiting for reset... (%d)", i );
-    }
-
-    // If we get here, something went wrong
-    KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Test FAILED" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Watchdog did not reset the system" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
-
-    // Blink LED rapidly to indicate failure
-    while ( 1 )
-    {
-        Bsp_toggle_debug1();
-        HAL_Delay( 100 );
-    }
-
+    // Should never reach here
     return 0;
 }

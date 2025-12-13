@@ -83,8 +83,9 @@ protected:
     RawThread m_wdog;
 
 public:
-    /// Constructor
-    RawThreadRunnable()
+    /** Constructor. Initializes the raw thread with watchdog monitoring.
+     */
+    RawThreadRunnable() noexcept
         : m_wdog( RAW_THREAD_WDOG_TIMEOUT_MS )
     {
     }
@@ -103,7 +104,7 @@ public:
         while ( rawThreadCounter_ < TEST_DURATION_MS )
         {
             // Do some work
-            iterations++;
+            ++iterations;
             Bsp_toggle_debug2();
 
             // Kick the watchdog to indicate we're alive
@@ -139,8 +140,15 @@ static volatile uint32_t supervisorCounter_ = 0;
 class SupervisorWatchdog : public WatchedEventThread
 {
 public:
-    SupervisorWatchdog( uint32_t wdogTimeoutMs, uint32_t healthCheckIntervalMs, bool isSupervisor )
-        : WatchedEventThread( wdogTimeoutMs, healthCheckIntervalMs, isSupervisor )
+    /** Constructor
+        @param wdogTimeoutMs Watchdog timeout period in milliseconds
+        @param healthCheckIntervalMs Health check interval in milliseconds
+        @param isSupervisor Flag indicating if this is the supervisor thread
+     */
+    SupervisorWatchdog( uint32_t wdogTimeoutMs, uint32_t healthCheckIntervalMs, bool isSupervisor ) noexcept
+        : WatchedEventThread( wdogTimeoutMs
+                            , healthCheckIntervalMs
+                            , isSupervisor )
     {
     }
 
@@ -191,9 +199,9 @@ public:
         // Test completed successfully
         KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Test PASSED\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Ran for %u ms without watchdog reset\r\n", TEST_DURATION_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor iterations: %lu\r\n", supervisorCounter_ / 500 );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread iterations: %lu\r\n", rawThreadCounter_ / 100 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Ran for %u ms without watchdog reset\r\n", (unsigned)TEST_DURATION_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor iterations: %lu\r\n", (unsigned long)(supervisorCounter_ / 500) );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread iterations: %lu\r\n", (unsigned long)(rawThreadCounter_ / 100) );
         KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
 
         // Keep LEDs on to indicate success
