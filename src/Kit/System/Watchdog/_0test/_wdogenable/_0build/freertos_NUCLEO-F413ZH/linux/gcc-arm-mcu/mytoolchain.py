@@ -50,7 +50,7 @@ sysview_root  = os.path.join( NQBP_PKG_ROOT(), bsp_path, "SeggerSysView" )
 
 # Set project specific 'base' (i.e always used) options
 base_release = BuildValues()        # Do NOT comment out this line
-target_flags             = '-DUSE_STM32F4XX_NUCLEO_144 -DSTM32F413xx -DHAL_IWDG_MODULE_ENABLED'
+target_flags = '-DUSE_STM32F4XX_NUCLEO_144 -DSTM32F413xx -DHAL_IWDG_MODULE_ENABLED'
 base_release.cflags      = f' -Wall {target_flags} -Werror -DENABLE_BSP_SEGGER_SYSVIEW -I{sysview_root}'
 base_release.cppflags    = ' -std=c++11 -Wno-int-in-bool-context'
 base_release.asmflags    = f' {target_flags}'
@@ -95,3 +95,4 @@ def create():
     lscript  = 'STM32F413ZHTx_FLASH.ld'
     tc = ToolChain( FINAL_OUTPUT_NAME, prj_dir, build_variants, sdk_root, bsp_mx_root, freertos_root, lscript, "stm32" )
     return tc
+
