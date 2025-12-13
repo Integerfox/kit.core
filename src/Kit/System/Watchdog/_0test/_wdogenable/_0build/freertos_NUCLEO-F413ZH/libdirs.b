@@ -8,7 +8,6 @@ src/Kit/Io/Serial/ST/M32F4
 # KIT Middle-ware
 src/Kit/Container
 src/Kit/Text
-src/Kit/Io
 src/Kit/EventQueue
 src/Kit/Itc
 
