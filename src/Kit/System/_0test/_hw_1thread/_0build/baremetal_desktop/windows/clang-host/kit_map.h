@@ -20,3 +20,6 @@
 
 // strapi mapping
 #include "Kit/Text/_mappings/_clang-msvc/strapi.h"
+
+// User Space BSP
+#include "Kit/Bsp/UserSpace/Api.h"
