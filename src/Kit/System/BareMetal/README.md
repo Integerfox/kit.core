@@ -3,12 +3,12 @@
 @namespace Kit::System::BareMetal @brief
 
 Concrete implementation of the platform specific classes/features of the
-Kit::System namespace interfaces for a Baremetal/Singled-threaded system.
+Kit::System namespace interfaces for a Bare-metal/Singled-threaded system.
 
 Platform Dependent Behaviors:
 
 - **ElapsedTime**.  The platform is required to provide the number of milliseconds
-                    since power-up.
+                    since power-up as well as a busy-wait for M milliseconds method.
 
 - **EventLoop**.  Fully functional.  This includes EventFlags and Software Timers.
 
