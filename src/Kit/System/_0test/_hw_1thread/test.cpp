@@ -177,9 +177,9 @@ public:
         // Capture the expired time
         uint32_t now = ElapsedTime::milliseconds();
         KIT_SYSTEM_TRACE_MSG( SECT_,
-                              "(%s) Timer expired. TLS Counter=%zu",
+                              "(%s) Timer expired. TLS Counter=%" PRIu32,
                               Thread::myName(),
-                              m_tlsCounter );
+                              (uint32_t) m_tlsCounter );
 
         // Exit the "loop"
         if ( m_tlsCounter >= m_maxCount )
