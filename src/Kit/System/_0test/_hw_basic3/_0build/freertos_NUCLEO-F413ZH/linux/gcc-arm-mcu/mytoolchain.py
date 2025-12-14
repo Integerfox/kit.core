@@ -54,6 +54,7 @@ target_flags             = '-DUSE_STM32F4XX_NUCLEO_144 -DSTM32F413xx'
 base_release.cflags      = f' -Wall {target_flags} -Werror -DENABLE_BSP_SEGGER_SYSVIEW -I{sysview_root}'
 base_release.cppflags    = ' -std=c++11 -Wno-int-in-bool-context'
 base_release.asmflags    = f' {target_flags}'
+base_release.linkflags   = '-Wl,--no-warn-rwx-segments'
 base_release.firstobjs   = f'_BUILT_DIR_.{bsp_mx}/Core/Src'
 base_release.firstobjs   = base_release.firstobjs + f' {bsp_mx}/../stdio.o'
 

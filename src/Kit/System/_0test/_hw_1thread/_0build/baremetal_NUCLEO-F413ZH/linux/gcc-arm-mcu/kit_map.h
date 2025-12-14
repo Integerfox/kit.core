@@ -13,7 +13,7 @@
 */
 
 // OSAL mappings
-#include "Kit/System/FreeRTOS/mappings.h"
+#include "Kit/System/BareMetal/mappings.h"
 
 // strapi mapping
 #include "Kit/Text/_mappings/_arm_gcc_stm32/strapi.h"
@@ -22,4 +22,4 @@
 #include "Kit/Io/_mappings/_nofs/mappings.h"
 
 // BSP
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/Api.h"
+#include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/Api.h"

@@ -19,18 +19,15 @@ extern void runtests( size_t maxLoopCount );
 
 int main( void )
 {
-    // Initialize the board
+    // Initialize the board and the KIT library
     Bsp_initialize();
-    printf( "\n**** KIT-SYSTEM TEST APPLICATION STARTED ****\n\n" );  // May not print on all targets
-
-    // Initialize KIT
     Kit::System::initialize();
 
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
     //    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized" );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "\n**** KIT-SYSTEM TEST APPLICATION STARTED ****" );  // May not print on all targets
 
     // Go run the test(s) (Note: This method should never return)
     runtests( 1000);    // 1000 Loop * 0.5sec = 500 seconds max

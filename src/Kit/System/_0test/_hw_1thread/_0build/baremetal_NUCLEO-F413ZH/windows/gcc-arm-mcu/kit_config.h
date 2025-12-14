@@ -14,5 +14,4 @@
 #define USE_KIT_SYSTEM_ASSERT
 #define USE_KIT_SYSTEM_TRACE
 
-#define USE_BAREMETAL_BSP
 #endif

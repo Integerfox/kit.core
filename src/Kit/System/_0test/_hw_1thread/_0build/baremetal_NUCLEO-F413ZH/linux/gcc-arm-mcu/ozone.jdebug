@@ -31,8 +31,7 @@ void OnProjectLoad (void) {
   //
   // User settings
   //
-  File.Open ("_stm32/hw_basic.elf");
-  Project.SetOSPlugin ("FreeRTOSPlugin_Cortex-M.js");
+  File.Open ("_stm32/hw_1thread.elf");
 }
 
 /*********************************************************************
