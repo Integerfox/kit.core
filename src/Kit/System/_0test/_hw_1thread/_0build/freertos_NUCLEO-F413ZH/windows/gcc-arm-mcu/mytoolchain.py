@@ -37,7 +37,7 @@ FINAL_OUTPUT_NAME = 'hw_basic'
 
 # Path to SDK and the ST CubeMX generated BSP files
 prj_dir       = os.path.dirname(os.path.abspath(__file__))
-bsp_path      = os.path.join( "src", "Kit", "Bsp", "ST", "NUCLEO-F413ZH" )
+bsp_path      = os.path.join( "src", "Kit", "Bsp", "ST", "freertos_NUCLEO-F413ZH" )
 bsp_mx        = os.path.join( bsp_path, "MX" )
 sdk_root      = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "stm32f4-sdk")
 bsp_mx_root   = os.path.join( NQBP_PKG_ROOT(), bsp_mx )
