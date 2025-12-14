@@ -15,8 +15,8 @@
 // IO mapping.  Note: Needs to be include FIRST because of winsock2.h ordering issues
 #include "Kit/Io/_mappings/_win32/mappings.h"
 
-// OSAL mappings
-#include "Kit/System/Win32/mappings.h"
+// Bare-Metal OSAL mappings
+#include "Kit/System/BareMetal/mappings.h"
 
 // strapi mapping
 #include "Kit/Text/_mappings/_clang-msvc/strapi.h"
