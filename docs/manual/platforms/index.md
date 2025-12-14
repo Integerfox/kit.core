@@ -57,7 +57,7 @@ repository.
 |---------|---------|
 | POSIX | Multi-thread application. Typical use case is for off-target unit testing, but can also be used for embedded Linux development. |
 | Windows | Multi-thread application. Typical use case is for off-target unit testing. Can be used for Windows Console applications. |
-| [ST NUCLEO-F413ZH](https://www.st.com/en/evaluation-tools/nucleo-f413zh.html) Evaluation board | The F413ZH is a ARM Cortex-M4 microcontroller. Includes a basic BSP and drivers support for the ST's STM32F4 family of microcontrollers. |
+| [ST NUCLEO-F413ZH](https://www.st.com/en/evaluation-tools/nucleo-f413zh.html) Evaluation board (FreeRTOS) | The F413ZH is a ARM Cortex-M4 microcontroller. Includes a basic BSP and drivers support for the ST's STM32F4 family of microcontrollers running FreeRTOS. |
 
 Planned/coming platforms.
 

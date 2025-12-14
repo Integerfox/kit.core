@@ -10,7 +10,7 @@
 
 #include "Kit/Bsp/Api.h"
 #include "Kit/System/Api.h"
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/stdio.h"
+#include "Kit/Bsp/ST/freertos_NUCLEO-F413ZH/stdio.h"
 
 extern void loopback_test( Kit::Io::IInputOutput& fd );
 
