@@ -10,14 +10,9 @@
 
 #include "Kit/Bsp/Api.h"
 #include "stm32f4xx_hal.h"
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/gpio.h"
+#include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/gpio.h"
 #include "stdio.h"
 
-#ifdef ENABLE_BSP_SEGGER_SYSVIEW   
-#define INIT_SEGGER_SYSVIEW()   SEGGER_SYSVIEW_Conf()
-#else
-#define INIT_SEGGER_SYSVIEW()   
-#endif
 
 #ifndef USE_BSP_USE_PRINTF
 #define INIT_KIT_CONSOLE()    g_bspConsoleStream.start( USART3_IRQn, &huart3 )
@@ -37,13 +32,9 @@ void Bsp_initialize( void )
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
     MX_ADC1_Init();
-    MX_TIM4_Init();
     MX_USART3_UART_Init();
     MX_I2C2_Init();
     MX_SPI3_Init();
-
-    // Initialize System View (asap after the basic board initialization has completed)
-    INIT_SEGGER_SYSVIEW();
 
     // Start the Console/Trace UART
     INIT_KIT_CONSOLE();

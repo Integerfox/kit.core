@@ -1,5 +1,5 @@
-#ifndef BSP_STM32_NUCLEO_F413ZH_API_H_
-#define BSP_STM32_NUCLEO_F413ZH_API_H_
+#ifndef BSP_STM32_BAREMETAL_NUCLEO_F413ZH_API_H_
+#define BSP_STM32_BAREMETAL_NUCLEO_F413ZH_API_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -25,17 +25,13 @@
 
 
 #include "kit_config.h"
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/main.h"   // Access the PINs
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/usart.h"  // Access the UART handles/instances
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/tim.h"    // Access the PWMs/Timers
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/i2c.h"    // Access the I2C handles/instances
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/adc.h"    // Access the AIN handles/instances
-#include "Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Inc/spi.h"    // Access the SPI handles/instances
+#include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/main.h"   // Access the PINs
+#include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/usart.h"  // Access the UART handles/instances
+#include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/i2c.h"    // Access the I2C handles/instances
+#include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/adc.h"    // Access the AIN handles/instances
+#include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/spi.h"    // Access the SPI handles/instances
 
 
-#ifdef ENABLE_BSP_SEGGER_SYSVIEW
-#include "SEGGER_SYSVIEW.h"  // Expose (to the application) the SYSVIEW APIs when enabled
-#endif
 
 //////////////////////////////////////////////////////////
 /// ARM Specific APIs
@@ -108,13 +104,15 @@
 
 
 //////////////////////////////////////////////////////////
-/// FreeRTOS specific APIs
+/// RTOS specific APIs
 //////////////////////////////////////////////////////////
 
-/** This method informs the schedule that a context switch is required on exit
-    from the ISR.  The 'r' argument is the result for the su_signal() call.
+/** This method only applies when there is actual RTOS -->in theory
+    this should be mapped to a NOP.  However as a 'CHEAT' to get
+    around "unused variable" warnings - we increment the passed in
+    variable.
  */
-#define Bsp_yield_on_exit( r ) portYIELD_FROM_ISR( r )
+#define Bsp_yield_on_exit( r )  r++
 
 
 #endif  // end header latch

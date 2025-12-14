@@ -1,5 +1,5 @@
-#ifndef BSP_NUCLEO_F413ZH_STDIO_H_
-#define BSP_NUCLEO_F413ZH_STDIO_H_
+#ifndef BSP_BAREMETAL_NUCLEO_F413ZH_STDIO_H_
+#define BSP_BAREMETAL_NUCLEO_F413ZH_STDIO_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -19,6 +19,10 @@
     NOTE: When USE_BSP_USE_PRINTF, the C library buffers the printf output, i.e.
           output is not sent until a newline is encountered the output stream
 
+    NOTE: Since the BSP is for a bare-metal platform, there are no threads,
+          which means blocking-wait semantics become BUSY-WAIT semantics.
+          Use the console IO stream with care! Always call available() before
+          reading data.
 */
 
 #include "kit_config.h"

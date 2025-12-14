@@ -11,20 +11,7 @@
 #include "kit_config.h"
 #include <stdlib.h>
 #include <ios>
-#include "FreeRTOS.h"
 
-
-/** If using one of FreeRTOS's heap strategies/options that supports freeing
-    memory - THEN define this symbol
- */
-#ifdef USE_FULL_FEATURED_HEAP
-#define rtosFree    vPortFree
-
-#else
-/** The default is to using a heap that does NOT support freeing memory
- */
-#define rtosFree(p)     // Ignore the delete/free call
-#endif
 
 
 ///// Provide a non-exception-throwing new/delete so exception code does NOT get
@@ -32,12 +19,11 @@
 ///// from libstdc++.a)
 //
 //
-void *operator new( size_t size, std::nothrow_t const& ) throw() { return pvPortMalloc(size); }
-void *operator new[]( size_t size, std::nothrow_t const& ) throw() { return pvPortMalloc(size); }
+void *operator new( size_t size, std::nothrow_t const& ) throw() { return malloc(size); }
+void *operator new[]( size_t size, std::nothrow_t const& ) throw() { return malloc(size); }
 
-void operator delete(void* p) throw() { rtosFree( p ); }
-void operator delete[]( void* p ) throw() { rtosFree( p ); }
-
+void operator delete(void* p) throw() { free( p ); }
+void operator delete[]( void* p ) throw() { free( p ); }
 const std::nothrow_t std::nothrow;
 //
 //

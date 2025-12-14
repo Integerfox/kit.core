@@ -41,11 +41,11 @@ using namespace Kit::Logging::Pkg;  // Helps with Log Enums
 #define EXTRA_INFO "@@ Fatal Error: "
 #define SIZET_SIZE ( ( sizeof( size_t ) / 4 ) * 10 + 1 )
 
-#ifndef KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE
-#define KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE 128
+#ifndef KIT_SYSTEM_BAREMETAL_FATAL_ERROR_BUFSIZE
+#define KIT_SYSTEM_BAREMETAL_FATAL_ERROR_BUFSIZE 128
 #endif
 
-static Kit::Text::FString<KIT_SYSTEM_FREERTOS_FATAL_ERROR_BUFSIZE> buffer_;
+static Kit::Text::FString<KIT_SYSTEM_BAREMETAL_FATAL_ERROR_BUFSIZE> buffer_;
 
 ////////////////////////////////////////////////////////////////////////////////
 void FatalError::log( int exitCode, const char* message )
