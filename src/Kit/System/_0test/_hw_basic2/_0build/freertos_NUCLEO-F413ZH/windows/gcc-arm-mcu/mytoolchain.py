@@ -25,7 +25,7 @@
 # get definition of the Options structure
 from nqbplib.base import BuildValues
 from nqbplib.my_globals import *
-import os, copy 
+import os
 
 
 #===================================================

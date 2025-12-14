@@ -9,7 +9,6 @@
 /** @file */
 
 
-
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/GlobalLock.h"
 #include "Kit/System/ElapsedTime.h"
@@ -64,7 +63,7 @@ bool Semaphore::tryWait( void ) noexcept
 
 void Semaphore::waitInRealTime( void ) noexcept
 {
-    for(;;)
+    for ( ;; )
     {
         GlobalLock::begin();
         if ( m_sema > 0 )
@@ -81,7 +80,7 @@ bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
 {
     uint32_t start = ElapsedTime::milliseconds();
 
-    for ( ;;)
+    for ( ;; )
     {
         GlobalLock::begin();
         if ( m_sema > 0 )
@@ -109,7 +108,6 @@ void Semaphore::wait( void ) noexcept
     waitInRealTime();
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------
-

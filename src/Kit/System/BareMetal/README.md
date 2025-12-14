@@ -3,7 +3,7 @@
 @namespace Kit::System::BareMetal @brief
 
 Concrete implementation of the platform specific classes/features of the
-Kit::System namespace interfaces for a Bare-metal/Singled-threaded system.
+Kit::System namespace interfaces for a Bare-metal/Single-threaded system.
 
 Platform Dependent Behaviors:
 
