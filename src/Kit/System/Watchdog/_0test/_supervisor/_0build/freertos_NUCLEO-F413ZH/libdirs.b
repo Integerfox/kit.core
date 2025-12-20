@@ -1,6 +1,9 @@
 # Unit test
 src/Kit/System/Watchdog/_0test/_supervisor
 
+# Platform-specific main
+src/Kit/System/Watchdog/_0test/_supervisor/_0build/freertos_NUCLEO-F413ZH
+
 
 # Output stream for the KIT Console
 src/Kit/Io/Serial/ST/M32F4
