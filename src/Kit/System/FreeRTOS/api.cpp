@@ -57,12 +57,12 @@ bool isSchedulingEnabled() noexcept
     return schedulerStarted_;
 }
 
-void sleep( unsigned long milliseconds ) noexcept
+void sleep( uint32_t milliseconds ) noexcept
 {
     vTaskDelay( milliseconds * portTICK_PERIOD_MS );
 }
 
-void sleepInRealTime( unsigned long milliseconds ) noexcept
+void sleepInRealTime( uint32_t milliseconds ) noexcept
 {
     vTaskDelay( milliseconds * portTICK_PERIOD_MS );
 }
