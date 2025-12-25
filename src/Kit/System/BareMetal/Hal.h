@@ -25,7 +25,7 @@ namespace BareMetal {
 
 
 /** This method is used to initialize the HAL/Target layer.  What needs to be
-    an/or is initialized is platform specific.
+    initialized is platform specific.
  */
 void initialize( void ) noexcept;
 
