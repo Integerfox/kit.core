@@ -35,20 +35,20 @@
 </a>
 </g>
 </g>
-<!-- Node9 -->
-<g id="Node000009" class="node">
-<title>Node9</title>
-<g id="a_Node000009"><a xlink:href="_socket_2_win32_2_fdio_8h.html" target="_top" xlink:title=" ">
+<!-- Node10 -->
+<g id="Node000010" class="node">
+<title>Node10</title>
+<g id="a_Node000010"><a xlink:href="_socket_2_win32_2_fdio_8h.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="414.5,-228 303.5,-228 303.5,-198 414.5,-198 414.5,-228"/>
 <text text-anchor="start" x="311.5" y="-216" font-family="Helvetica,sans-Serif" font-size="10.00">Kit/Io/Socket/Win32</text>
 <text text-anchor="middle" x="359" y="-205" font-family="Helvetica,sans-Serif" font-size="10.00">/Fdio.h</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node9 -->
-<g id="edge8_Node000001_Node000009" class="edge">
-<title>Node1&#45;&gt;Node9</title>
-<g id="a_edge8_Node000001_Node000009"><a xlink:title=" ">
+<!-- Node1&#45;&gt;Node10 -->
+<g id="edge9_Node000001_Node000010" class="edge">
+<title>Node1&#45;&gt;Node10</title>
+<g id="a_edge9_Node000001_Node000010"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M304.72,-257.5C316.01,-248.45 330.3,-237 341.39,-228.11"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="302.39,-254.88 296.77,-263.87 306.76,-260.35 302.39,-254.88"/>
 </a>
@@ -92,20 +92,20 @@
 </a>
 </g>
 </g>
-<!-- Node8 -->
-<g id="Node000008" class="node">
-<title>Node8</title>
-<g id="a_Node000008"><a xlink:href="_logger_8h.html" target="_top" xlink:title="This file declares the public facing Logging interface for managing the logging framework (i....">
+<!-- Node9 -->
+<g id="Node000009" class="node">
+<title>Node9</title>
+<g id="a_Node000009"><a xlink:href="_logger_8h.html" target="_top" xlink:title="This file declares the public facing Logging interface for managing the logging framework (i....">
 <polygon fill="white" stroke="#666666" points="423.5,-162 294.5,-162 294.5,-132 423.5,-132 423.5,-162"/>
 <text text-anchor="start" x="302.5" y="-150" font-family="Helvetica,sans-Serif" font-size="10.00">Kit/Logging/Framework</text>
 <text text-anchor="middle" x="359" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">/Logger.h</text>
 </a>
 </g>
 </g>
-<!-- Node2&#45;&gt;Node8 -->
-<g id="edge7_Node000002_Node000008" class="edge">
-<title>Node2&#45;&gt;Node8</title>
-<g id="a_edge7_Node000002_Node000008"><a xlink:title=" ">
+<!-- Node2&#45;&gt;Node9 -->
+<g id="edge8_Node000002_Node000009" class="edge">
+<title>Node2&#45;&gt;Node9</title>
+<g id="a_edge8_Node000002_Node000009"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M242.96,-199.22C267.25,-188.5 301.91,-173.2 327.02,-162.12"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="241.29,-196.13 233.56,-203.37 244.12,-202.53 241.29,-196.13"/>
 </a>
@@ -152,10 +152,10 @@
 <!-- Node7 -->
 <g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_Node000007"><a xlink:href="stdio_8h.html" target="_top" xlink:title="By default the BSP provides a KIT IO Stream for application&#39; console.">
-<polygon fill="white" stroke="#666666" points="290,-30 138,-30 138,0 290,0 290,-30"/>
-<text text-anchor="start" x="146" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Kit/Bsp/ST/NUCLEO&#45;F413ZH</text>
-<text text-anchor="middle" x="214" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/stdio.h</text>
+<g id="a_Node000007"><a xlink:href="baremetal___n_u_c_l_e_o-_f413_z_h_2stdio_8h.html" target="_top" xlink:title="By default the BSP provides a KIT IO Stream for application&#39; console.">
+<polygon fill="white" stroke="#666666" points="204.5,-30 63.5,-30 63.5,0 204.5,0 204.5,-30"/>
+<text text-anchor="start" x="71.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Kit/Bsp/ST/baremetal</text>
+<text text-anchor="middle" x="134" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_NUCLEO&#45;F413ZH/stdio.h</text>
 </a>
 </g>
 </g>
@@ -163,8 +163,27 @@
 <g id="edge6_Node000006_Node000007" class="edge">
 <title>Node6&#45;&gt;Node7</title>
 <g id="a_edge6_Node000006_Node000007"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M214,-55.54C214,-46.96 214,-37.61 214,-30.16"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="210.5,-55.8 214,-65.8 217.5,-55.8 210.5,-55.8"/>
+<path fill="none" stroke="#63b8ff" d="M188.35,-59.48C176.39,-49.91 162.47,-38.77 151.7,-30.16"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="186.25,-62.28 196.25,-65.8 190.62,-56.82 186.25,-62.28"/>
+</a>
+</g>
+</g>
+<!-- Node8 -->
+<g id="Node000008" class="node">
+<title>Node8</title>
+<g id="a_Node000008"><a xlink:href="freertos___n_u_c_l_e_o-_f413_z_h_2stdio_8h.html" target="_top" xlink:title="By default the BSP provides a KIT IO Stream for application&#39; console.">
+<polygon fill="white" stroke="#666666" points="363.5,-30 222.5,-30 222.5,0 363.5,0 363.5,-30"/>
+<text text-anchor="start" x="230.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Kit/Bsp/ST/freertos</text>
+<text text-anchor="middle" x="293" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_NUCLEO&#45;F413ZH/stdio.h</text>
+</a>
+</g>
+</g>
+<!-- Node6&#45;&gt;Node8 -->
+<g id="edge7_Node000006_Node000008" class="edge">
+<title>Node6&#45;&gt;Node8</title>
+<g id="a_edge7_Node000006_Node000008"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M239.33,-59.48C251.14,-49.91 264.89,-38.77 275.52,-30.16"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="237.1,-56.78 231.53,-65.8 241.51,-62.22 237.1,-56.78"/>
 </a>
 </g>
 </g>

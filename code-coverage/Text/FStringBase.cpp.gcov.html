@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-07 18:39:57</td>
+            <td class="headerValue">2025-12-25 15:46:09</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">74.1&nbsp;%</td>
@@ -85,23 +85,23 @@
 <span id="L23"><span class="lineNum">      23</span>                 :             : </span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : ///////////////////////////////</span>
-<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC tlaBgGNC">         500 : FStringBase::FStringBase( const char* string, char* internalString, int maxLen ) noexcept</span></span>
+<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC tlaBgGNC">         511 : FStringBase::FStringBase( const char* string, char* internalString, int maxLen ) noexcept</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :     : StringBase( internalString ? internalString : m_noMemory )</span>
-<span id="L28"><span class="lineNum">      28</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 499 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 498 times"> + </span>]:<span class="tlaGNC">         501 :     , m_internalMaxlen( ( maxLen &lt; 0 || internalString == nullptr ) ? 0 : maxLen )</span></span>
+<span id="L28"><span class="lineNum">      28</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 510 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 509 times"> + </span>]:<span class="tlaGNC">         512 :     , m_internalMaxlen( ( maxLen &lt; 0 || internalString == nullptr ) ? 0 : maxLen )</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             :     // trap the case of a NULL initializer string</span>
-<span id="L31"><span class="lineNum">      31</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 498 times"> + </span>]:<span class="tlaGNC">         500 :     if ( string == nullptr )</span></span>
+<span id="L31"><span class="lineNum">      31</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 509 times"> + </span>]:<span class="tlaGNC">         511 :     if ( string == nullptr )</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :             :     {</span>
 <span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">           2 :         m_strPtr[0] = '\0';</span></span>
 <span id="L34"><span class="lineNum">      34</span>                 :             :     }</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     else</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     {</span>
-<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">         498 :         int inStrLen = (int)strlen( string );</span></span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">         498 :         m_truncated  = inStrLen &lt;= m_internalMaxlen ? false : true;</span></span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         498 :         strncpy( m_strPtr, string, m_internalMaxlen );</span></span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">         498 :         m_strPtr[m_internalMaxlen] = '\0';</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">         509 :         int inStrLen = (int)strlen( string );</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">         509 :         m_truncated  = inStrLen &lt;= m_internalMaxlen ? false : true;</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         509 :         strncpy( m_strPtr, string, m_internalMaxlen );</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">         509 :         m_strPtr[m_internalMaxlen] = '\0';</span></span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     }</span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         500 : }</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         511 : }</span></span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
 <span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">           3 : FStringBase::FStringBase( char c, char* internalString, int maxLen ) noexcept</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     : StringBase( internalString ? internalString : m_noMemory )</span>
@@ -178,36 +178,36 @@
 <span id="L116"><span class="lineNum">     116</span>                 :             : </span>
 <span id="L117"><span class="lineNum">     117</span>                 :             : </span>
 <span id="L118"><span class="lineNum">     118</span>                 :             : ///////////////////////////////</span>
-<span id="L119"><span class="lineNum">     119</span>                 :<span class="tlaGNC">        6675 : void FStringBase::copyIn( const char* src, int len ) noexcept</span></span>
+<span id="L119"><span class="lineNum">     119</span>                 :<span class="tlaGNC">        6693 : void FStringBase::copyIn( const char* src, int len ) noexcept</span></span>
 <span id="L120"><span class="lineNum">     120</span>                 :             : {</span>
 <span id="L121"><span class="lineNum">     121</span>                 :             :     // Trap null pointer for 'src' string</span>
-<span id="L122"><span class="lineNum">     122</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6673 times"> + </span>]:<span class="tlaGNC">        6675 :     if ( !src )</span></span>
+<span id="L122"><span class="lineNum">     122</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6691 times"> + </span>]:<span class="tlaGNC">        6693 :     if ( !src )</span></span>
 <span id="L123"><span class="lineNum">     123</span>                 :             :     {</span>
 <span id="L124"><span class="lineNum">     124</span>                 :<span class="tlaGNC">           2 :         m_truncated = true;</span></span>
 <span id="L125"><span class="lineNum">     125</span>                 :<span class="tlaGNC">           2 :         m_strPtr[0] = '\0';</span></span>
 <span id="L126"><span class="lineNum">     126</span>                 :             :     }</span>
 <span id="L127"><span class="lineNum">     127</span>                 :             :     else</span>
 <span id="L128"><span class="lineNum">     128</span>                 :             :     {</span>
-<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">        6673 :         m_truncated = len &lt;= m_internalMaxlen ? false : true;</span></span>
-<span id="L130"><span class="lineNum">     130</span>         [<span class="tlaGBC" title="Branch 0 was taken 6663 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">        6673 :         len         = std::min( m_internalMaxlen, len );</span></span>
-<span id="L131"><span class="lineNum">     131</span>                 :<span class="tlaGNC">        6673 :         strncpy( m_strPtr, src, len );</span></span>
-<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">        6673 :         m_strPtr[len] = '\0';</span></span>
+<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">        6691 :         m_truncated = len &lt;= m_internalMaxlen ? false : true;</span></span>
+<span id="L130"><span class="lineNum">     130</span>         [<span class="tlaGBC" title="Branch 0 was taken 6681 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">        6691 :         len         = std::min( m_internalMaxlen, len );</span></span>
+<span id="L131"><span class="lineNum">     131</span>                 :<span class="tlaGNC">        6691 :         strncpy( m_strPtr, src, len );</span></span>
+<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">        6691 :         m_strPtr[len] = '\0';</span></span>
 <span id="L133"><span class="lineNum">     133</span>                 :             :     }</span>
-<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">        6675 : }</span></span>
+<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">        6693 : }</span></span>
 <span id="L135"><span class="lineNum">     135</span>                 :             : </span>
-<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">       14062 : void FStringBase::appendTo( const char* string, int len ) noexcept</span></span>
+<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">       14092 : void FStringBase::appendTo( const char* string, int len ) noexcept</span></span>
 <span id="L137"><span class="lineNum">     137</span>                 :             : {</span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :     // Note: Do NOTHING if null string pointer is passed</span>
-<span id="L139"><span class="lineNum">     139</span>         [<span class="tlaGBC" title="Branch 0 was taken 14060 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">       14062 :     if ( string )</span></span>
+<span id="L139"><span class="lineNum">     139</span>         [<span class="tlaGBC" title="Branch 0 was taken 14090 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">       14092 :     if ( string )</span></span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :     {</span>
-<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">       14060 :         int curlen  = strlen( m_strPtr );</span></span>
-<span id="L142"><span class="lineNum">     142</span>         [<span class="tlaGBC" title="Branch 0 was taken 44 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14016 times"> + </span>]:<span class="tlaGNC">       14060 :         int avail   = m_internalMaxlen - curlen;</span></span>
-<span id="L143"><span class="lineNum">     143</span>                 :<span class="tlaGNC">       14060 :         int copylen = std::min( len, avail );</span></span>
-<span id="L144"><span class="lineNum">     144</span>                 :<span class="tlaGNC">       14060 :         m_truncated = copylen == len ? false : true;</span></span>
-<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">       14060 :         strncat( m_strPtr, string, copylen );</span></span>
-<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">       14060 :         m_strPtr[curlen + copylen] = '\0';</span></span>
+<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">       14090 :         int curlen  = strlen( m_strPtr );</span></span>
+<span id="L142"><span class="lineNum">     142</span>         [<span class="tlaGBC" title="Branch 0 was taken 44 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14046 times"> + </span>]:<span class="tlaGNC">       14090 :         int avail   = m_internalMaxlen - curlen;</span></span>
+<span id="L143"><span class="lineNum">     143</span>                 :<span class="tlaGNC">       14090 :         int copylen = std::min( len, avail );</span></span>
+<span id="L144"><span class="lineNum">     144</span>                 :<span class="tlaGNC">       14090 :         m_truncated = copylen == len ? false : true;</span></span>
+<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">       14090 :         strncat( m_strPtr, string, copylen );</span></span>
+<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">       14090 :         m_strPtr[curlen + copylen] = '\0';</span></span>
 <span id="L147"><span class="lineNum">     147</span>                 :             :     }</span>
-<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">       14062 : }</span></span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">       14092 : }</span></span>
 <span id="L149"><span class="lineNum">     149</span>                 :             : </span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : </span>
 <span id="L151"><span class="lineNum">     151</span>                 :<span class="tlaGNC">          14 : void FStringBase::insertAt( int insertOffset, const char* stringToInsert ) noexcept</span></span>
@@ -243,9 +243,9 @@
 <span id="L181"><span class="lineNum">     181</span>                 :<span class="tlaGNC">          10 :     m_strPtr[m_internalMaxlen] = '\0';</span></span>
 <span id="L182"><span class="lineNum">     182</span>                 :             : }</span>
 <span id="L183"><span class="lineNum">     183</span>                 :             : </span>
-<span id="L184"><span class="lineNum">     184</span>                 :<span class="tlaGNC">       52758 : int FStringBase::maxLength() const noexcept</span></span>
+<span id="L184"><span class="lineNum">     184</span>                 :<span class="tlaGNC">       52896 : int FStringBase::maxLength() const noexcept</span></span>
 <span id="L185"><span class="lineNum">     185</span>                 :             : {</span>
-<span id="L186"><span class="lineNum">     186</span>                 :<span class="tlaGNC">       52758 :     return m_internalMaxlen;</span></span>
+<span id="L186"><span class="lineNum">     186</span>                 :<span class="tlaGNC">       52896 :     return m_internalMaxlen;</span></span>
 <span id="L187"><span class="lineNum">     187</span>                 :             : }</span>
 <span id="L188"><span class="lineNum">     188</span>                 :             : </span>
 <span id="L189"><span class="lineNum">     189</span>                 :             : ////////////////////////////</span>

@@ -1,15 +1,17 @@
 <map id="Kit::System::Thread" name="Kit::System::Thread">
-<area shape="rect" id="Node000001" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="423,77,573,102"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html" title="This concrete class implements a Thread object using FreeRTOS threads." alt="" coords="621,5,788,45"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="552,70,639,43,640,48,554,75"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads." alt="" coords="635,69,775,109"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="587,87,635,87,635,92,587,92"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_system_1_1_win32_1_1_thread.html" title="This concrete class implements a Thread object using Win32 threads." alt="" coords="631,133,778,173"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="554,104,640,131,639,136,552,109"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="206,51,371,77"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="385,73,423,78,422,83,385,78"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="203,101,375,126"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="389,99,422,95,422,101,389,105"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="5,101,155,126"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="169,111,202,111,202,116,169,116"/>
+<area shape="rect" id="Node000001" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="423,109,573,134"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_system_1_1_bare_metal_1_1_thread.html" title="This concrete class implements a Thread object on a bare&#45;metal platform, i.e NO operating system,..." alt="" coords="621,5,793,45"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="532,100,620,55,649,43,651,48,622,60,535,104"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html" title="This concrete class implements a Thread object using FreeRTOS threads." alt="" coords="624,69,791,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="586,105,623,99,624,105,587,110"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads." alt="" coords="637,133,777,173"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="587,132,638,140,637,145,586,138"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_system_1_1_win32_1_1_thread.html" title="This concrete class implements a Thread object using Win32 threads." alt="" coords="634,197,781,237"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="535,138,622,183,651,195,649,200,620,188,532,143"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="206,83,371,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="385,105,423,110,422,115,385,110"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="203,133,375,158"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="389,131,422,127,422,133,389,137"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="5,133,155,158"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="169,143,202,143,202,148,169,148"/>
 </map>
