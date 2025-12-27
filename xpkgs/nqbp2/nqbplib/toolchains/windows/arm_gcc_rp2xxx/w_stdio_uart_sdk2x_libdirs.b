@@ -1,3 +1,6 @@
+# UART stdio
+xpkgs/pico-sdk/src/rp2_common/pico_stdio_uart
+
 # SDK-Multicore
 xpkgs/pico-sdk/src/rp2_common/pico_multicore
 

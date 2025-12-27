@@ -33,51 +33,38 @@ import os
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'hello_usb'
+FINAL_OUTPUT_NAME = 'hw_basic'
 
-# magic paths
-sdk_root     = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "pico-sdk" )
-bsp_rel_root = os.path.join( "src", "Kit", "Bsp", "RPi", "baremetal_arm_pico2w" )
-linkerscript = os.path.join( sdk_root, 'src', 'rp2_common', 'pico_crt0', 'rp2350', 'memmap_default.ld')
+# Path to SDK and the ST CubeMX generated BSP files
+prj_dir       = os.path.dirname(os.path.abspath(__file__))
+bsp_path      = os.path.join( "src", "Kit", "Bsp", "ST", "freertos_NUCLEO-F413ZH" )
+bsp_mx        = os.path.join( bsp_path, "MX" )
+sdk_root      = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "stm32f4-sdk")
+bsp_mx_root   = os.path.join( NQBP_PKG_ROOT(), bsp_mx )
+freertos_root = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "freertos-v10")
+sysview_root  = os.path.join( NQBP_PKG_ROOT(), bsp_path, "SeggerSysView" )
 
-# USB build options
-sdk_usb = ' -DCFG_TUSB_MCU=OPT_MCU_RP2040' + \
-          ' -DCFG_TUSB_OS=OPT_OS_PICO' + \
-          ' -DLIB_PICO_FIX_RP2040_USB_DEVICE_ENUMERATION=1' + \
-          ' -DPICO_RP2040_USB_DEVICE_UFRAME_FIX=1'
-
-# SDK Build options
-sdk_opt = ' -DPICO_32BIT=1' + \
-          ' -DPICO_BUILD=1' + \
-          ' -DPICO_ON_DEVICE=1' + \
-          ' -DPICO_COPY_TO_RAM=0' + \
-          ' -DPICO_USE_BLOCKED_RAM=0' + \
-          ' -DPICO_CXX_ENABLE_EXCEPTIONS=0' + \
-          ' -DPICO_NO_FLASH=0' + \
-          ' -DPICO_NO_HARDWARE=0' + \
-          ' -DPICO_CXX_ENABLE_EXCEPTIONS=0'
-
-# Wifi build options
-wifi_opt = ' -DPICO_CYW43_SUPPORTED=1' + \
-           ' -DLIB_PICO_CYW43_ARCH=1' + \
-           ' -DPICO_CYW43_ARCH_THREADSAFE_BACKGROUND=1' + \
-           ' -DLIB_PICO_ASYNC_CONTEXT_THREADSAFE_BACKGROUND=1' + \
-           ' -DCYW43_LWIP=0'
-
+#
+# For build config/variant: 
+#
 
 # Set project specific 'base' (i.e always used) options
 base_release = BuildValues()        # Do NOT comment out this line
-wifi_firmware            = '43439A0-7.95.49.00.combined'
-common_flags             = f' {wifi_opt} {sdk_opt} {sdk_usb}'
-base_release.cflags      = f' -Wall {common_flags}'
-base_release.cppflags    = ' -std=gnu++11'
-base_release.asmflags    = f' {common_flags}'
+target_flags             = '-DUSE_STM32F4XX_NUCLEO_144 -DSTM32F413xx'
+base_release.cflags      = f' -Wall {target_flags} -Werror -DENABLE_BSP_SEGGER_SYSVIEW -I{sysview_root}'
+base_release.cppflags    = ' -std=c++11 -Wno-int-in-bool-context'
+base_release.asmflags    = f' {target_flags}'
+base_release.linkflags   = '-Wl,--no-warn-rwx-segments'
+base_release.firstobjs   = f'_BUILT_DIR_.{bsp_mx}/Core/Src'
+base_release.firstobjs   = base_release.firstobjs + f' {bsp_mx}/../stdio.o'
 
 # Set project specific 'optimized' options
 optimized_release = BuildValues()    # Do NOT comment out this line
 
 # Set project specific 'debug' options
 debug_release = BuildValues()       # Do NOT comment out this line
+#debug_release.cflags = '-D_MY_APP_DEBUG_SWITCH_'
+
 
 #-------------------------------------------------
 # ONLY edit this section if you are have more than
@@ -93,23 +80,20 @@ release_opts = { 'user_base':base_release,
                
 # Add new variant option dictionary to # dictionary of 
 # build variants
-build_variants = { 'pico':release_opts,
+build_variants = { 'stm32':release_opts,
                  }  
 
 #---------------------------------------------------
 # END EDITS/CUSTOMIZATIONS
 #===================================================
 
-# Capture project/build directory
-import os
-prjdir = os.path.dirname(os.path.abspath(__file__))
-
 
 # Select Module that contains the desired toolchain
-from nqbplib.toolchains.windows.arm_gcc_rp2xxx.w_stdio_usb_sdk2x import ToolChain
+from nqbplib.toolchains.linux.arm_gcc_stm32.stm32F4 import ToolChain
 
 # Function that instantiates an instance of the toolchain
 def create():
     lscript  = 'STM32F413ZHTx_FLASH.ld'
-    tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, NQBP_PKG_ROOT(), bsp_rel_root, "rp2350", "pico2_w", sdk_root, "pico", linkerscript )
+    tc = ToolChain( FINAL_OUTPUT_NAME, prj_dir, build_variants, sdk_root, bsp_mx_root, freertos_root, lscript, "stm32" )
     return tc
+

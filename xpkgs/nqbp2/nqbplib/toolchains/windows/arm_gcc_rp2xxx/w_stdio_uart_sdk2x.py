@@ -64,7 +64,6 @@ class ToolChain( base.ToolChain ):
                 ' -I' + sdk_src_path + r'\common\pico_stdlib_headers\include' + \
                 ' -I' + sdk_src_path + r'\common\pico_sync\include' + \
                 ' -I' + sdk_src_path + r'\common\pico_time\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_usb_reset_interface_headers\include' + \
                 ' -I' + sdk_src_path + r'\common\pico_util\include' + \
                 ' -I' + sdk_src_path + r'\rp2_common\boot_bootrom_headers\include' + \
                 ' -I' + sdk_src_path + r'\rp2_common\hardware_adc\include' + \
@@ -119,24 +118,15 @@ class ToolChain( base.ToolChain ):
                 ' -I' + sdk_src_path + r'\rp2_common\pico_runtime_init\include' + \
                 ' -I' + sdk_src_path + r'\rp2_common\pico_status_led\include' + \
                 ' -I' + sdk_src_path + r'\rp2_common\pico_stdio\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_stdio_usb\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_stdio_uart\include' + \
                 ' -I' + sdk_src_path + r'\rp2_common\pico_time_adapter\include' + \
                 ' -I' + sdk_src_path + r'\rp2_common\pico_unique_id\include ' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_fix\rp2040_usb_device_enumeration\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_fix\rp2040_usb_device_enumeration\include' + \
                 ' -I' + sdk_src_path + f'\\{mcu_part_num}\\boot_stage2\\include' + \
                 ' -I' + sdk_src_path + f'\\{mcu_part_num}\\hardware_regs\\include' + \
                 ' -I' + sdk_src_path + f'\\{mcu_part_num}\\hardware_structs\\include' + \
                 ' -I' + sdk_src_path + f'\\{mcu_part_num}\\pico_platform\\include'
 
         
-        # USB support
-        usb_src_path = os.path.join( abs_sdk_root, 'lib', 'tinyusb' )
-        self._base_release.inc = self._base_release.inc + \
-                ' -I' + usb_src_path  + r'\src' + \
-                ' -I' + usb_src_path  + r'\src\common' + \
-                ' -I' + usb_src_path  + r'\hw'
-          
         #
         skd_libopts = '-DLIB_BOOT_STAGE2_HEADERS=1' + \
             ' -DLIB_PICO_ATOMIC=1' + \
@@ -180,10 +170,9 @@ class ToolChain( base.ToolChain ):
             ' -DLIB_PICO_TIME_ADAPTER=1' + \
             ' -DLIB_PICO_UNIQUE_ID=1' + \
             ' -DLIB_PICO_UTIL=1' + \
-            ' -DLIB_PICO_FIX_RP2040_USB_DEVICE_ENUMERATION=1' + \
             ' -DLIB_PICO_TIME_ADAPTER=1' + \
-            ' -DLIB_PICO_STDIO_UART=0' + \
-            ' -DLIB_PICO_STDIO_USB=1'
+            ' -DLIB_PICO_STDIO_UART=1' + \
+            ' -DLIB_PICO_STDIO_USB=0'
             
 
         # RP2040 Specific additions 
@@ -257,18 +246,17 @@ class ToolChain( base.ToolChain ):
         # When linked from static libraries, the linker excludes these objects because constructors
         # have no explicit symbol references - causing hardware initialization to be skipped.
         self._base_release.firstobjs    = f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_crt0' + \
-                                          f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_stdio_usb' + \
                                           f' _BUILT_DIR_.xpkgs/pico-sdk/src/{mcu_part_num}/pico_platform' + \
                                           f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_runtime_init' + \
                                           f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_unique_id'
 
 
         # Optimized options, flags, etc.
-        self._optimized_release.cflags     = self._optimized_release.cflags + r' -DCFG_TUSB_DEBUG=0 -DNDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Release\"'
+        self._optimized_release.cflags     = self._optimized_release.cflags + r' -DNDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Release\"'
         self._optimized_release.linkflags  = self._optimized_release.linkflags + ' -DNDEBUG'
 
         # Debug options, flags, etc.
-        self._debug_release.cflags     = self._debug_release.cflags + r' -DCFG_TUSB_DEBUG=1 -DDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Debug\"'
+        self._debug_release.cflags     = self._debug_release.cflags + r' -DDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Debug\"'
         self._debug_release.linkflags  = self._debug_release.linkflags + ' -DDEBUG'
         
 
