@@ -22,7 +22,7 @@ class ToolChain( base.ToolChain ):
     #--------------------------------------------------------------------------
     def __init__( self, exename, prjdir, build_variants, abs_repo_root, bsp_rel_path, 
                   mcu_part_num, board, abs_sdk_root, default_variant, linker_script,
-                  cyw43_firmware_bin='43439A0-7.95.49.00.combined', env_error=None ):
+                  env_error=None ):
 
         mcu_part_num = mcu_part_num.lower()
         base.ToolChain.__init__( self, exename, prjdir, build_variants, default_variant )

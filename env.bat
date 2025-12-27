@@ -30,7 +30,7 @@ doskey killpy=taskkill /F /IM python.exe
 doskey fixx=%NQBP_BIN%\other\fixx.py $*
 doskey setexe=git update-index --chmod=+x $*
 doskey ports=reg query HKLM\HARDWARE\DEVICEMAP\SERIALCOMM
-doskey map=%NQBP_PKG_ROOT%scripts\colony.core\map.py $*
+doskey map=%NQBP_PKG_ROOT%scripts\kit\map.py $*
 
 doskey bmsvc=%NQBP_BIN%\other\bob.py -v --p2 windows msvc $*
 doskey bclang=%NQBP_BIN%\other\bob.py -v --p2 windows  clang-host $*
