@@ -1,0 +1,395 @@
+#------------------------------------------------------------------------------
+# TOOLCHAIN
+#
+#   Host:       Windows
+#   Compiler:   gcc-arm-none-eabi 
+#   Target:     Raspberry Pi Pico and Pico 2 (RP2040/RP2350)
+#   Output:     .BIN|ELF|UF2 file
+#   SDK:        pico-sdk v2.x
+#
+# TODO: FIXME: Need to run pioasm tool to generate the cyw43_bus_pio_spi.pio.h
+#              header file.  Currently is prebuilt and included in the BSP.                  
+#------------------------------------------------------------------------------
+
+import sys, os
+from nqbplib import base
+from nqbplib import utils
+from nqbplib import my_globals
+
+
+class ToolChain( base.ToolChain ):
+
+    #--------------------------------------------------------------------------
+    def __init__( self, exename, prjdir, build_variants, abs_repo_root, bsp_rel_path, 
+                  mcu_part_num, board, abs_sdk_root, default_variant, linker_script,
+                  cyw43_firmware_bin='43439A0-7.95.49.00.combined', env_error=None ):
+
+        mcu_part_num = mcu_part_num.lower()
+        base.ToolChain.__init__( self, exename, prjdir, build_variants, default_variant )
+        self._ccname     = 'GCC Arm-Cortex (none-eabi) Compiler'
+        self._cc         = 'arm-none-eabi-gcc' 
+        self._asm        = 'arm-none-eabi-gcc' 
+        self._ld         = 'arm-none-eabi-gcc' 
+        self._ar         = 'arm-none-eabi-ar' 
+        self._objcpy     = 'arm-none-eabi-objcopy' 
+        self._objdmp     = 'arm-none-eabi-objdump' 
+        self._printsz    = 'arm-none-eabi-size'
+        self._pad_chksum = os.path.join( abs_sdk_root, 'src', mcu_part_num, 'boot_stage2', "pad_checksum" )
+        self._picotool   = 'picotool.exe'
+        self._pioasm     = 'pioasm.exe'  # os.path.join( sdk_root, 'tools', 'pioasm.exe' )
+        self._asm_ext    = 'asm'    
+        self._asm_ext2   = 'S'   
+        self._shell      = 'cmd.exe /C'
+        self._rm         = 'del /f'
+        self._os_sep     = '/' # Force unix directory separator (for using a response file with gcc on Windoze Host)
+
+        self._clean_pkg_dirs.extend( ['_pico'] )
+
+        # Define paths
+        bsp_src_path = os.path.join( abs_repo_root, bsp_rel_path )  # The BSP directory must contain a pico/ sub-directory with the board config_autogen.h & version.h files
+        sdk_src_path = os.path.join( abs_sdk_root, 'src' )
+        sdk_lib_path = os.path.join( abs_sdk_root, 'lib' )
+        self._base_release.inc = self._base_release.inc + \
+                ' -I' + sdk_lib_path + r'\cyw43-driver\src' + \
+                ' -I' + sdk_lib_path + r'\cyw43-driver\firmware' + \
+                ' -I' + bsp_src_path + \
+                ' -I' + sdk_src_path + r'\boards\include' + \
+                ' -I' + sdk_src_path + r'\common\boot_picobin_headers\include' + \
+                ' -I' + sdk_src_path + r'\common\boot_picoboot_headers\include' + \
+                ' -I' + sdk_src_path + r'\common\hardware_claim\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_base_headers\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_binary_info\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_bit_ops_headers\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_divider_headers\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_stdlib_headers\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_sync\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_time\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_usb_reset_interface_headers\include' + \
+                ' -I' + sdk_src_path + r'\common\pico_util\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\boot_bootrom_headers\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_adc\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_base\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_boot_lock\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_clocks\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_dcp\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_divider\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_dma\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_exception\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_flash\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_gpio\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_hazard3\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_i2c\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_irq\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_pio\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_pll\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_pwm\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_rcp\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_resets\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_riscv\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_spi\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_sync\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_sync_spin_lock\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_ticks\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_timer\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_uart\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_vreg\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_watchdog\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_xip_cache\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\hardware_xosc\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_async_context\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_atomic\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_bootrom\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_cyw43_arch\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_cyw43_driver\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_driver\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_double\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_flash\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_float\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_int64_ops\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_malloc\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_mem_ops\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_multicore\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_platform_common\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_platform_compiler\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_platform_panic\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_platform_sections\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_printf\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_rand\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_runtime\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_runtime_init\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_status_led\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_stdio\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_stdio_usb\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_time_adapter\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_unique_id\include ' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_fix\rp2040_usb_device_enumeration\include' + \
+                ' -I' + sdk_src_path + r'\rp2_common\pico_fix\rp2040_usb_device_enumeration\include' + \
+                ' -I' + sdk_src_path + f'\\{mcu_part_num}\\boot_stage2\\include' + \
+                ' -I' + sdk_src_path + f'\\{mcu_part_num}\\hardware_regs\\include' + \
+                ' -I' + sdk_src_path + f'\\{mcu_part_num}\\hardware_structs\\include' + \
+                ' -I' + sdk_src_path + f'\\{mcu_part_num}\\pico_platform\\include'
+
+        
+        # USB support
+        usb_src_path = os.path.join( abs_sdk_root, 'lib', 'tinyusb' )
+        self._base_release.inc = self._base_release.inc + \
+                ' -I' + usb_src_path  + r'\src' + \
+                ' -I' + usb_src_path  + r'\src\common' + \
+                ' -I' + usb_src_path  + r'\hw'
+          
+        #
+        skd_libopts = '-DLIB_BOOT_STAGE2_HEADERS=1' + \
+            ' -DLIB_PICO_ATOMIC=1' + \
+            ' -DLIB_PICO_BIT_OPS=1' + \
+            ' -DLIB_PICO_BIT_OPS_PICO=1' + \
+            ' -DLIB_PICO_CLIB_INTERFACE=1' + \
+            ' -DLIB_PICO_CRT0=1' + \
+            ' -DLIB_PICO_CXX_OPTIONS=1' + \
+            ' -DLIB_PICO_DIVIDER=1' + \
+            ' -DLIB_PICO_DIVIDER_COMPILER=1' + \
+            ' -DLIB_PICO_DOUBLE=1' + \
+            ' -DLIB_PICO_DOUBLE_PICO=1' + \
+            ' -DLIB_PICO_FLASH=1' + \
+            ' -DLIB_PICO_FLOAT=1' + \
+            ' -DLIB_PICO_FLOAT_PICO=1' + \
+            ' -DLIB_PICO_FLOAT_PICO_VFP=1' + \
+            ' -DLIB_PICO_INT64_OPS=1' + \
+            ' -DLIB_PICO_INT64_OPS_COMPILER=1' + \
+            ' -DLIB_PICO_MALLOC=1' + \
+            ' -DLIB_PICO_MEM_OPS=1' + \
+            ' -DLIB_PICO_MEM_OPS_COMPILER=1' + \
+            ' -DLIB_PICO_NEWLIB_INTERFACE=1' + \
+            ' -DLIB_PICO_PLATFORM=1' + \
+            ' -DLIB_PICO_PLATFORM_COMMON=1' + \
+            ' -DLIB_PICO_PLATFORM_COMPILER=1' + \
+            ' -DLIB_PICO_PLATFORM_PANIC=1' + \
+            ' -DLIB_PICO_PLATFORM_SECTIONS=1' + \
+            ' -DLIB_PICO_PRINTF=1' + \
+            ' -DLIB_PICO_PRINTF_PICO=1' + \
+            ' -DLIB_PICO_RUNTIME=1' + \
+            ' -DLIB_PICO_RUNTIME_INIT=1' + \
+            ' -DLIB_PICO_STANDARD_BINARY_INFO=1' + \
+            ' -DLIB_PICO_STANDARD_LINK=1' + \
+            ' -DLIB_PICO_STDIO=1' + \
+            ' -DLIB_PICO_STDLIB=1' + \
+            ' -DLIB_PICO_SYNC=1' + \
+            ' -DLIB_PICO_SYNC_CRITICAL_SECTION=1' + \
+            ' -DLIB_PICO_SYNC_MUTEX=1' + \
+            ' -DLIB_PICO_SYNC_SEM=1' + \
+            ' -DLIB_PICO_TIME=1' + \
+            ' -DLIB_PICO_TIME_ADAPTER=1' + \
+            ' -DLIB_PICO_UNIQUE_ID=1' + \
+            ' -DLIB_PICO_UTIL=1' + \
+            ' -DLIB_PICO_FIX_RP2040_USB_DEVICE_ENUMERATION=1' + \
+            ' -DLIB_PICO_TIME_ADAPTER=1' + \
+            ' -DLIB_PICO_STDIO_UART=0' + \
+            ' -DLIB_PICO_STDIO_USB=1'
+            
+
+        # RP2040 Specific additions 
+        sdkboot = os.path.join( abs_sdk_root, 'src', mcu_part_num, 'boot_stage2' )
+        mcu      = '-mcpu=cortex-m0plus'
+        platform = '-DPICO_RP2040=1 -DPICO_PLATFORM=rp2040'
+        self._uf2_family = 'rp2040'
+        if mcu_part_num == 'rp2040':
+            pass
+            
+        # RP2350 Specific additions
+        elif mcu_part_num.lower() == 'rp2350':
+            mcu      = '-mcpu=cortex-m33 '
+            platform = '-mcmse -march=armv8-m.main+fp+dsp -DPICO_RP2350=1 -DPICO_PLATFORM=rp2350'
+            self._uf2_family = 'rp2350-arm-s'
+
+        # Error
+        else:
+            raise Exception( f"Unsupported MCU type '{mcu}' specified for ARM GCC RP2xxx toolchain." )  
+        
+        #
+        common_flags                    = f' -O3 -mthumb -ffunction-sections -fdata-sections -Wno-array-bounds -Wno-stringop-truncation'
+        common_flags                    = f' {common_flags} -DPICO_TARGET_NAME=\\"{exename}\\" -DPICO_BOARD=\\"{board}\\"'
+        common_flags                    = f' {mcu} {common_flags} {skd_libopts}'
+        self._base_release.cflags       = f' {self._base_release.cflags} {common_flags}'
+        self._base_release.c_only_flags = f' {self._base_release.c_only_flags} -std=gnu11'
+        common_cpp_flags                = ' -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess -fno-threadsafe-statics -fno-rtti -fno-exceptions'
+        common_cpp_flags                = f' {common_cpp_flags} -fno-unwind-tables -fno-use-cxa-atexit -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess'
+        self._base_release.cppflags     = f' {self._base_release.cppflags} {common_cpp_flags}'
+        self._base_release.asmflags     = self._base_release.cflags 
+        self._base_release.asminc       = f' {self._base_release.asminc} {self._base_release.inc} -I {sdk_src_path}/{mcu_part_num}/boot_stage2/asminclude'
+        self._base_release.exclude_clangd.append('-std=gnu11')
+        
+        # wrapper_funcs                   = '-Wl,--wrap=printf -Wl,--wrap=vprintf -Wl,--wrap=puts -Wl,--wrap=putchar -Wl,--wrap=getchar -Wl,--wrap=sprintf -Wl,--wrap=snprintf ' \
+        # '                                  -Wl,--wrap=vsnprintf -Wl,--wrap=__clzsi2 -Wl,--wrap=__clzdi2 -Wl,--wrap=__ctzsi2 -Wl,--wrap=__ctzdi2 -Wl,--wrap=__popcountsi2 -Wl,' \
+        # '                                  --wrap=__popcountdi2 -Wl,--wrap=__clz -Wl,--wrap=__clzl -Wl,--wrap=__clzll -Wl,--wrap=__aeabi_idiv -Wl,--wrap=__aeabi_idivmod ' \
+        # '                                   -Wl,--wrap=__aeabi_ldivmod -Wl,--wrap=__aeabi_uidiv -Wl,--wrap=__aeabi_uidivmod -Wl,--wrap=__aeabi_uldivmod -Wl,--wrap=__aeabi_dadd ' \
+        # '-Wl,--wrap=__aeabi_ddiv -Wl,--wrap=__aeabi_dmul -Wl,--wrap=__aeabi_drsub -Wl,--wrap=__aeabi_dsub -Wl,--wrap=__aeabi_cdcmpeq -Wl,--wrap=__aeabi_cdrcmple -Wl,--wrap=__aeabi_cdcmple -Wl,--wrap=__aeabi_dcmpeq -Wl,--wrap=__aeabi_dcmplt -Wl,--wrap=__aeabi_dcmple -Wl,--wrap=__aeabi_dcmpge -Wl,--wrap=__aeabi_dcmpgt -Wl,--wrap=__aeabi_dcmpun -Wl,--wrap=__aeabi_i2d -Wl,--wrap=__aeabi_l2d -Wl,--wrap=__aeabi_ui2d -Wl,--wrap=__aeabi_ul2d -Wl,--wrap=__aeabi_d2iz -Wl,--wrap=__aeabi_d2lz -Wl,--wrap=__aeabi_d2uiz -Wl,--wrap=__aeabi_d2ulz -Wl,--wrap=__aeabi_d2f -Wl,--wrap=sqrt -Wl,--wrap=cos -Wl,--wrap=sin -Wl,--wrap=tan -Wl,--wrap=atan2 -Wl,--wrap=exp -Wl,--wrap=log -Wl,--wrap=ldexp -Wl,--wrap=copysign -Wl,--wrap=trunc -Wl,--wrap=floor -Wl,--wrap=ceil -Wl,--wrap=round -Wl,--wrap=sincos -Wl,--wrap=asin -Wl,--wrap=acos -Wl,--wrap=atan -Wl,--wrap=sinh -Wl,--wrap=cosh -Wl,--wrap=tanh -Wl,--wrap=asinh -Wl,--wrap=acosh -Wl,--wrap=atanh -Wl,--wrap=exp2 -Wl,--wrap=log2 -Wl,--wrap=exp10 -Wl,--wrap=log10 -Wl,--wrap=pow -Wl,--wrap=powint -Wl,--wrap=hypot -Wl,--wrap=cbrt -Wl,--wrap=fmod -Wl,--wrap=drem -Wl,--wrap=remainder -Wl,--wrap=remquo -Wl,--wrap=expm1 -Wl,--wrap=log1p -Wl,--wrap=fma -Wl,--wrap=__aeabi_lmul -Wl,--wrap=__aeabi_fadd -Wl,--wrap=__aeabi_fdiv -Wl,--wrap=__aeabi_fmul -Wl,--wrap=__aeabi_frsub -Wl,--wrap=__aeabi_fsub -Wl,--wrap=__aeabi_cfcmpeq -Wl,--wrap=__aeabi_cfrcmple -Wl,--wrap=__aeabi_cfcmple -Wl,--wrap=__aeabi_fcmpeq -Wl,--wrap=__aeabi_fcmplt -Wl,--wrap=__aeabi_fcmple -Wl,--wrap=__aeabi_fcmpge -Wl,--wrap=__aeabi_fcmpgt -Wl,--wrap=__aeabi_fcmpun -Wl,--wrap=__aeabi_i2f -Wl,--wrap=__aeabi_l2f -Wl,--wrap=__aeabi_ui2f -Wl,--wrap=__aeabi_ul2f -Wl,--wrap=__aeabi_f2iz -Wl,--wrap=__aeabi_f2lz -Wl,--wrap=__aeabi_f2uiz -Wl,--wrap=__aeabi_f2ulz -Wl,--wrap=__aeabi_f2d -Wl,--wrap=sqrtf -Wl,--wrap=cosf -Wl,--wrap=sinf -Wl,--wrap=tanf -Wl,--wrap=atan2f -Wl,--wrap=expf -Wl,--wrap=logf -Wl,--wrap=ldexpf -Wl,--wrap=copysignf -Wl,--wrap=truncf -Wl,--wrap=floorf -Wl,--wrap=ceilf -Wl,--wrap=roundf -Wl,--wrap=sincosf -Wl,--wrap=asinf -Wl,--wrap=acosf -Wl,--wrap=atanf -Wl,--wrap=sinhf -Wl,--wrap=coshf -Wl,--wrap=tanhf -Wl,--wrap=asinhf -Wl,--wrap=acoshf -Wl,--wrap=atanhf -Wl,--wrap=exp2f -Wl,--wrap=log2f -Wl,--wrap=exp10f -Wl,--wrap=log10f -Wl,--wrap=powf -Wl,--wrap=powintf -Wl,--wrap=hypotf -Wl,--wrap=cbrtf -Wl,--wrap=fmodf -Wl,--wrap=dremf -Wl,--wrap=remainderf -Wl,--wrap=remquof -Wl,--wrap=expm1f -Wl,--wrap=log1pf -Wl,--wrap=fmaf -Wl,--wrap=malloc -Wl,--wrap=calloc -Wl,--wrap=realloc -Wl,--wrap=free -Wl,--wrap=memcpy -Wl,--wrap=memset -Wl,--wrap=__aeabi_memcpy -Wl,--wrap=__aeabi_memset -Wl,--wrap=__aeabi_memcpy4 -Wl,--wrap=__aeabi_memset4 -Wl,--wrap=__aeabi_memcpy8 -Wl,--wrap=__aeabi_memset8'
+        wrapper_funcs                   = ' -Wl,--wrap=__ctzdi2 -Wl,--wrap=__aeabi_dadd -Wl,--wrap=__aeabi_ddiv -Wl,--wrap=__aeabi_dmul' + \
+                                          ' -Wl,--wrap=__aeabi_drsub -Wl,--wrap=__aeabi_dsub -Wl,--wrap=__aeabi_cdcmpeq -Wl,--wrap=__aeabi_cdrcmple' + \
+                                          ' -Wl,--wrap=__aeabi_cdcmple -Wl,--wrap=__aeabi_dcmpeq -Wl,--wrap=__aeabi_dcmplt -Wl,--wrap=__aeabi_dcmple' + \
+                                          ' -Wl,--wrap=__aeabi_dcmpge -Wl,--wrap=__aeabi_dcmpgt -Wl,--wrap=__aeabi_dcmpun -Wl,--wrap=__aeabi_i2d' + \
+                                          ' -Wl,--wrap=__aeabi_l2d -Wl,--wrap=__aeabi_ui2d -Wl,--wrap=__aeabi_ul2d -Wl,--wrap=__aeabi_d2iz' + \
+                                          ' -Wl,--wrap=__aeabi_d2lz -Wl,--wrap=__aeabi_d2uiz -Wl,--wrap=__aeabi_d2ulz -Wl,--wrap=__aeabi_d2f' + \
+                                          ' -Wl,--wrap=sqrt -Wl,--wrap=cos -Wl,--wrap=sin -Wl,--wrap=tan -Wl,--wrap=atan2 -Wl,--wrap=exp -Wl,--wrap=log' + \
+                                          ' -Wl,--wrap=ldexp -Wl,--wrap=copysign -Wl,--wrap=trunc -Wl,--wrap=floor -Wl,--wrap=ceil -Wl,--wrap=round' + \
+                                          ' -Wl,--wrap=sincos -Wl,--wrap=asin -Wl,--wrap=acos -Wl,--wrap=atan -Wl,--wrap=sinh -Wl,--wrap=cosh' + \
+                                          ' -Wl,--wrap=tanh -Wl,--wrap=asinh -Wl,--wrap=acosh -Wl,--wrap=atanh -Wl,--wrap=exp2 -Wl,--wrap=log2' + \
+                                          ' -Wl,--wrap=exp10 -Wl,--wrap=log10 -Wl,--wrap=pow -Wl,--wrap=powint -Wl,--wrap=hypot -Wl,--wrap=cbrt' + \
+                                          ' -Wl,--wrap=fmod -Wl,--wrap=drem -Wl,--wrap=remainder -Wl,--wrap=remquo -Wl,--wrap=expm1 -Wl,--wrap=log1p' + \
+                                          ' -Wl,--wrap=fma -Wl,--wrap=__aeabi_l2f -Wl,--wrap=__aeabi_ul2f -Wl,--wrap=__aeabi_f2lz -Wl,--wrap=__aeabi_f2ulz' + \
+                                          ' -Wl,--wrap=cosf -Wl,--wrap=sinf -Wl,--wrap=tanf -Wl,--wrap=atan2f -Wl,--wrap=expf -Wl,--wrap=logf' + \
+                                          ' -Wl,--wrap=sincosf -Wl,--wrap=ldexpf -Wl,--wrap=copysignf -Wl,--wrap=truncf -Wl,--wrap=floorf -Wl,--wrap=ceilf' + \
+                                          ' -Wl,--wrap=roundf -Wl,--wrap=asinf -Wl,--wrap=acosf -Wl,--wrap=atanf -Wl,--wrap=sinhf -Wl,--wrap=coshf' + \
+                                          ' -Wl,--wrap=tanhf -Wl,--wrap=asinhf -Wl,--wrap=acoshf -Wl,--wrap=atanhf -Wl,--wrap=exp2f -Wl,--wrap=log2f' + \
+                                          ' -Wl,--wrap=exp10f -Wl,--wrap=log10f -Wl,--wrap=powf -Wl,--wrap=powintf -Wl,--wrap=hypotf -Wl,--wrap=cbrtf' + \
+                                          ' -Wl,--wrap=fmodf -Wl,--wrap=dremf -Wl,--wrap=remainderf -Wl,--wrap=remquof -Wl,--wrap=expm1f -Wl,--wrap=log1pf' + \
+                                          ' -Wl,--wrap=fmaf -Wl,--wrap=malloc -Wl,--wrap=calloc -Wl,--wrap=realloc -Wl,--wrap=free' + \
+                                          ' -Wl,--wrap=sprintf -Wl,--wrap=snprintf -Wl,--wrap=vsnprintf -Wl,--wrap=printf -Wl,--wrap=vprintf' + \
+                                          ' -Wl,--wrap=puts -Wl,--wrap=putchar -Wl,--wrap=getchar'
+        self._base_release.linkflags    = f' -nostartfiles {mcu} -mthumb -Wl,--build-id=none --specs=nosys.specs -Wl,-z,max-page-size=4096 -fno-rtti -fno-exceptions -fno-unwind-tables -fno-use-cxa-atexit -Wl,--gc-sections {wrapper_funcs} -Wl,-L{bsp_src_path} -Wl,--script={linker_script} bs2_default_padded_checksummed.S -Wl,--no-warn-rwx-segments -Wl,-Map={exename}.elf.map' 
+                                        
+        boot_linker_script              = os.path.join( abs_sdk_root, "src", mcu_part_num, "boot_stage2", "boot_stage2.ld" )
+        self._boot_obj                  = f'xpkgs/pico-sdk/src/{mcu_part_num}/boot_stage2/compile_time_choice.o'
+        self._bootloader_link_flags     = f'{mcu} -O3 -DNDEBUG -Wl,--build-id=none --specs=nosys.specs -nostartfiles -Wl,--script={boot_linker_script} -Wl,-Map=bs2_default.elf.map'   
+        
+
+        # 
+        # CRITICAL: pico_runtime_init and pico_unique_id MUST be linked as object files (not from libraries)
+        # because they contain __attribute__((constructor)) functions in .preinit_array sections.
+        # When linked from static libraries, the linker excludes these objects because constructors
+        # have no explicit symbol references - causing hardware initialization to be skipped.
+        self._base_release.firstobjs    = f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_crt0' + \
+                                          f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_stdio_usb' + \
+                                          f' _BUILT_DIR_.xpkgs/pico-sdk/src/{mcu_part_num}/pico_platform' + \
+                                          f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_runtime_init' + \
+                                          f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_unique_id'
+
+
+        # Optimized options, flags, etc.
+        self._optimized_release.cflags     = self._optimized_release.cflags + r' -DCFG_TUSB_DEBUG=0 -DNDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Release\"'
+        self._optimized_release.linkflags  = self._optimized_release.linkflags + ' -DNDEBUG'
+
+        # Debug options, flags, etc.
+        self._debug_release.cflags     = self._debug_release.cflags + r' -DCFG_TUSB_DEBUG=1 -DDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Debug\"'
+        self._debug_release.linkflags  = self._debug_release.linkflags + ' -DDEBUG'
+        
+# build hello_usb.elf hello_usb.dis hello_usb.hex hello_usb.bin hello_usb.uf2 | 
+# ${cmake_ninja_workdir}hello_usb.dis ${cmake_ninja_workdir}hello_usb.hex ${cmake_ninja_workdir}hello_usb.bin ${cmake_ninja_workdir}hello_usb.uf2: 
+# CXX_EXECUTABLE_LINKER__hello_usb_Release CMakeFiles/hello_usb.dir/hello_usb.c.obj 
+# CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdlib/stdlib.c.obj
+# CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_gpio/gpio.c.obj 
+# CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2350/pico_platform/platform.c.obj 
+# CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_platform_common/common.c.obj
+#  CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_platform_panic/panic.c.obj
+#  CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/hardware_claim/claim.c.obj 
+# CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_sync/sync.c.obj
+# CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_irq/irq.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_irq/irq_handler_chain.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_sync/sem.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_sync/lock_core.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_sync/mutex.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_sync/critical_section.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_time/time.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_time/timeout_helper.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_timer/timer.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_util/datetime.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_util/pheap.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/common/pico_util/queue.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_uart/uart.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_clocks/clocks.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_pll/pll.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_vreg/vreg.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_watchdog/watchdog.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_ticks/ticks.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_bootrom/bootrom.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_bootrom/bootrom_lock.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_boot_lock/boot_lock.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_flash/flash.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_xosc/xosc.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_divider/divider.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_runtime/runtime.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_runtime_init/runtime_init.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_runtime_init/runtime_init_stack_guard.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_divider/divider_compiler.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_math.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_aeabi_dcp.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_fma_dcp.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_sci_m33.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_conv_m33.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_float/float_math.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_float/float_conv32_vfp.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_float/float_common_m33.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_float/float_sci_m33_vfp.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_malloc/malloc.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_atomic/atomic.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_cxx_options/new_delete.cpp.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_printf/printf.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_crt0/crt0.S.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_clib_interface/newlib_interface.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio/stdio.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio_usb/reset_interface.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_unique_id/unique_id.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_flash/flash.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_xip_cache/xip_cache.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/device/usbd.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/device/usbd_control.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/audio/audio_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/cdc/cdc_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/dfu/dfu_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/hid/hid_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/midi/midi_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/msc/msc_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/net/ncm_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/vendor/vendor_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/video/video_device.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/tusb.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/common/tusb_fifo.c.obj CMakeFiles/hello_usb.dir/C_/Users/Valued_Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj | pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_library.dir/./bs2_default_padded_checksummed.S.obj C$:/Users/Valued$ Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_crt0/rp2350/memmap_default.ld || pico-sdk/src/rp2350/boot_stage2/bs2_default_library
+#   FLAGS = -mcpu=cortex-m33 -mthumb -march=armv8-m.main+fp+dsp -mfloat-abi=softfp -mcmse -g -O3 -DNDEBUG
+#   LINK_FLAGS = -Wl,-Map=C:/temp/bob/hello_usb/build/hello_usb.elf.map --specs=nosys.specs -Wl,--wrap=__ctzdi2 -Wl,--wrap=__aeabi_dadd -Wl,--wrap=__aeabi_ddiv -Wl,--wrap=__aeabi_dmul -Wl,--wrap=__aeabi_drsub -Wl,--wrap=__aeabi_dsub -Wl,--wrap=__aeabi_cdcmpeq -Wl,--wrap=__aeabi_cdrcmple -Wl,--wrap=__aeabi_cdcmple -Wl,--wrap=__aeabi_dcmpeq -Wl,--wrap=__aeabi_dcmplt -Wl,--wrap=__aeabi_dcmple -Wl,--wrap=__aeabi_dcmpge -Wl,--wrap=__aeabi_dcmpgt -Wl,--wrap=__aeabi_dcmpun -Wl,--wrap=__aeabi_i2d -Wl,--wrap=__aeabi_l2d -Wl,--wrap=__aeabi_ui2d -Wl,--wrap=__aeabi_ul2d -Wl,--wrap=__aeabi_d2iz -Wl,--wrap=__aeabi_d2lz -Wl,--wrap=__aeabi_d2uiz -Wl,--wrap=__aeabi_d2ulz -Wl,--wrap=__aeabi_d2f -Wl,--wrap=sqrt -Wl,--wrap=cos -Wl,--wrap=sin -Wl,--wrap=tan -Wl,--wrap=atan2 -Wl,--wrap=exp -Wl,--wrap=log -Wl,--wrap=ldexp -Wl,--wrap=copysign -Wl,--wrap=trunc -Wl,--wrap=floor -Wl,--wrap=ceil -Wl,--wrap=round -Wl,--wrap=sincos -Wl,--wrap=asin -Wl,--wrap=acos -Wl,--wrap=atan -Wl,--wrap=sinh -Wl,--wrap=cosh -Wl,--wrap=tanh -Wl,--wrap=asinh -Wl,--wrap=acosh -Wl,--wrap=atanh -Wl,--wrap=exp2 -Wl,--wrap=log2 -Wl,--wrap=exp10 -Wl,--wrap=log10 -Wl,--wrap=pow -Wl,--wrap=powint -Wl,--wrap=hypot -Wl,--wrap=cbrt -Wl,--wrap=fmod -Wl,--wrap=drem -Wl,--wrap=remainder -Wl,--wrap=remquo -Wl,--wrap=expm1 -Wl,--wrap=log1p -Wl,--wrap=fma -Wl,--wrap=__aeabi_l2f -Wl,--wrap=__aeabi_ul2f -Wl,--wrap=__aeabi_f2lz -Wl,--wrap=__aeabi_f2ulz -Wl,--wrap=cosf -Wl,--wrap=sinf -Wl,--wrap=tanf -Wl,--wrap=atan2f -Wl,--wrap=expf -Wl,--wrap=logf -Wl,--wrap=sincosf -Wl,--wrap=ldexpf -Wl,--wrap=copysignf -Wl,--wrap=truncf -Wl,--wrap=floorf -Wl,--wrap=ceilf -Wl,--wrap=roundf -Wl,--wrap=asinf -Wl,--wrap=acosf -Wl,--wrap=atanf -Wl,--wrap=sinhf -Wl,--wrap=coshf -Wl,--wrap=tanhf -Wl,--wrap=asinhf -Wl,--wrap=acoshf -Wl,--wrap=atanhf -Wl,--wrap=exp2f -Wl,--wrap=log2f -Wl,--wrap=exp10f -Wl,--wrap=log10f -Wl,--wrap=powf -Wl,--wrap=powintf -Wl,--wrap=hypotf -Wl,--wrap=cbrtf -Wl,--wrap=fmodf -Wl,--wrap=dremf -Wl,--wrap=remainderf -Wl,--wrap=remquof -Wl,--wrap=expm1f -Wl,--wrap=log1pf -Wl,--wrap=fmaf -Wl,--wrap=malloc -Wl,--wrap=calloc -Wl,--wrap=realloc -Wl,--wrap=free -Wl,-LC:/temp/bob/hello_usb/build "-Wl,--script=C:/Users/Valued Customer/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_crt0/rp2350/memmap_default.ld" -Wl,-z,max-page-size=4096 -Wl,--gc-sections -Wl,--no-warn-rwx-segments -Wl,--wrap=sprintf -Wl,--wrap=snprintf -Wl,--wrap=vsnprintf -Wl,--wrap=printf -Wl,--wrap=vprintf -Wl,--wrap=puts -Wl,--wrap=putchar -Wl,--wrap=getchar
+#   LINK_LIBRARIES = pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_library.dir/./bs2_default_padded_checksummed.S.obj
+#   OBJECT_DIR = CMakeFiles\hello_usb.dir
+#   POST_BUILD = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\temp\bob\hello_usb\build && "C:\Users\Valued Customer\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-objdump.exe" -h C:/temp/bob/hello_usb/build/hello_usb.elf > hello_usb.dis && "C:\Users\Valued Customer\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-objdump.exe" -d C:/temp/bob/hello_usb/build/hello_usb.elf >> hello_usb.dis && "C:\Users\Valued Customer\.pico-sdk\picotool\2.2.0-a4\picotool\picotool.exe" coprodis --quiet hello_usb.dis hello_usb.dis && cd /D C:\temp\bob\hello_usb\build && "C:\Users\Valued Customer\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-objcopy.exe" -Oihex C:/temp/bob/hello_usb/build/hello_usb.elf hello_usb.hex && cd /D C:\temp\bob\hello_usb\build && "C:\Users\Valued Customer\.pico-sdk\toolchain\14_2_Rel1\bin\arm-none-eabi-objcopy.exe" -Obinary C:/temp/bob/hello_usb/build/hello_usb.elf hello_usb.bin && cd /D C:\temp\bob\hello_usb\build && "C:\Users\Valued Customer\.pico-sdk\picotool\2.2.0-a4\picotool\picotool.exe" uf2 convert --quiet C:/temp/bob/hello_usb/build/hello_usb.elf hello_usb.uf2 --family rp2350-arm-s --abs-block"
+#   PRE_LINK = cd .
+#   RESTAT = 1
+#   TARGET_FILE = hello_usb.elf
+#   TARGET_PDB = hello_usb.elf.dbg
+#   RSP_FILE = CMakeFiles\hello_usb.rsp
+
+   #--------------------------------------------------------------------------
+    def link( self, arguments, inf, local_external_setting, variant ):
+        # Finish creating the second state boot loader
+        self._ninja_writer.build(
+               outputs    = 'bs2_default.elf',
+               rule       = 'generic_cmd',
+               inputs     = self._boot_obj ,
+               variables  = {"generic_cmd":self._ld, "generic_cmd_opts":self._bootloader_link_flags, "generic_cmd_opts_out":'-o'} )
+        self._ninja_writer.newline()
+        self._ninja_writer.build(
+               outputs    = 'bs2_default.bin',
+               rule       = 'objcpy_rule',
+               inputs     = 'bs2_default.elf' ,
+               variables  = {"objcpy_opts":'-O binary'} )
+        self._ninja_writer.newline()
+        self._ninja_writer.build(
+               outputs    = 'bs2_default.dis',
+               rule       = 'objdmp_2stage_rule',
+               inputs     = 'bs2_default.elf',
+               variables  = {"objdmp_opts1":'-h', "objdmp_opts2":'-d'} )
+        self._ninja_writer.newline()
+        self._ninja_writer.build(
+               outputs    = 'bs2_default_padded_checksummed.S',
+               rule       = 'generic_cmd',
+               inputs     = 'bs2_default.bin' ,
+               variables  = {"generic_cmd":f'python {self._pad_chksum}', "generic_cmd_opts":"-s 0xffffffff"} )
+        self._ninja_writer.newline()
+
+        # Run the linker
+        base.ToolChain.link(self, arguments, inf, local_external_setting, variant, ['bs2_default_padded_checksummed.S'], outname=self._final_output_name + ".elf" )
+
+
+        # Generate the .BIN file
+        self._ninja_writer.build(
+               outputs    = self._final_output_name + ".bin",
+               rule       = 'objcpy_rule',
+               inputs     = self._final_output_name + ".elf" ,
+               variables  = {"objcpy_opts":'-O binary'} )
+        self._ninja_writer.newline()
+
+        # Generate the .HEX file
+        self._ninja_writer.build(
+               outputs    = self._final_output_name + ".hex",
+               rule       = 'objcpy_rule',
+               inputs     = self._final_output_name + ".elf",
+               variables  = {"objcpy_opts":'-O ihex'} )
+        self._ninja_writer.newline()
+ 
+        # Generate disassembly file
+        self._ninja_writer.build(
+               outputs    = self._final_output_name + ".dis",
+               rule       = 'objdmp_2stage_rule',
+               inputs     = self._final_output_name + ".elf",
+               variables  = {"objdmp_opts1":'-h', "objdmp_opts2":'-d'} )
+        self._ninja_writer.newline()
+
+        # Generate the UF2file
+        self._ninja_writer.rule( 
+            name = 'picotool_uf2', 
+            command = f'$shell {self._picotool} uf2 convert --quiet $in $out --family {self._uf2_family} --abs-block', 
+            description = "Creating UF2: $out" )
+        self._ninja_writer.build(
+               outputs    = self._final_output_name + ".uf2",
+               rule       = 'picotool_uf2',
+               inputs     = self._final_output_name + ".elf" )
+        self._ninja_writer.newline()
+
+# self._picotool uf2 convert --quiet C:/temp/bob/blink/blink/build/blink.elf blink.uf2 --family rp2350-arm-s --abs-block"
+        # Run the 'size' command
+        self._ninja_writer.rule( 
+            name = 'print_size', 
+            command = f'$shell {self._printsz} --format=berkeley {self._final_output_name+ ".elf"}', 
+            description = "Generic Command: $cmd" )
+        self._create_always_build_statments( "print_size", "dummy_printsize", impilicit_list=self._final_output_name+ ".elf" )
+ 
+        return None
+ 
+    def finalize( self, arguments, builtlibs, objfiles, local_external_setting, linkout=None ):
+        self._ninja_writer.default( [self._final_output_name + ".uf2", self._final_output_name + ".dis", "bs2_default.dis", "dummy_printsize_final"] )
+        #self._ninja_writer.default( [self._final_output_name + ".dis", "bs2_default.dis", "dummy_printsize_final"] )
+
+
+    #--------------------------------------------------------------------------
+    def get_asm_extensions(self):
+        extlist = [ self._asm_ext, self._asm_ext2 ]
+        return extlist
+
+
+    # Because Windoze is pain!
+    def _build_ar_rule( self ):
+        self._win32_withrspfile_build_ar_rule()
+
+    def _build_compile_rule( self ):
+        self._build_withrspfile_compile_rule()
+
+    def _build_assembly_rule( self ):
+        self._build_withrspfile_assembly_rule()
+
+    def _build_link_rule( self ):
+        self._build_withrspfile_link_rule()
