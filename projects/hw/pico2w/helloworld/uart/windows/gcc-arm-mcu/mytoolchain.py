@@ -61,7 +61,6 @@ wifi_opt = ' -DPICO_CYW43_SUPPORTED=1' + \
 
 # Set project specific 'base' (i.e always used) options
 base_release = BuildValues()        # Do NOT comment out this line
-wifi_firmware            = '43439A0-7.95.49.00.combined'
 common_flags             = f' {wifi_opt} {sdk_opt}'
 base_release.cflags      = f' -Wall {common_flags}'
 base_release.cppflags    = ' -std=gnu++11'
@@ -107,7 +106,3 @@ def create():
     lscript  = 'STM32F413ZHTx_FLASH.ld'
     tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, NQBP_PKG_ROOT(), bsp_rel_root, "rp2350", "pico2_w", sdk_root, "pico", linkerscript )
     return tc
-
-# def __init__( self, exename, prjdir, build_variants, abs_repo_root, bsp_rel_path, 
-#                   mcu, board, abs_sdk_root, default_variant='release', 
-#                   cyw43_firmware_bin='43439A0-7.95.49.00.combined', env_error=None ):

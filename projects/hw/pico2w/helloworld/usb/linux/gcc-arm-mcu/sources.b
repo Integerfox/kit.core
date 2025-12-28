@@ -1,2 +1,2 @@
 # share a common main
-../../main.cpp
+../../../hello.c

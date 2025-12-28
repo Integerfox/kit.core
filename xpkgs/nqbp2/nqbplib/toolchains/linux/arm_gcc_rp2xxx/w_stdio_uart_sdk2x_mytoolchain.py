@@ -33,18 +33,12 @@ import os
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'hello_usb'
+FINAL_OUTPUT_NAME = 'hello_uart'
 
 # magic paths
 sdk_root     = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "pico-sdk" )
 bsp_rel_root = os.path.join( "src", "Kit", "Bsp", "RPi", "baremetal_arm_pico2w" )
 linkerscript = os.path.join( sdk_root, 'src', 'rp2_common', 'pico_crt0', 'rp2350', 'memmap_default.ld')
-
-# USB build options
-sdk_usb = ' -DCFG_TUSB_MCU=OPT_MCU_RP2040' + \
-          ' -DCFG_TUSB_OS=OPT_OS_PICO' + \
-          ' -DLIB_PICO_FIX_RP2040_USB_DEVICE_ENUMERATION=1' + \
-          ' -DPICO_RP2040_USB_DEVICE_UFRAME_FIX=1'
 
 # SDK Build options
 sdk_opt = ' -DPICO_32BIT=1' + \
@@ -67,8 +61,7 @@ wifi_opt = ' -DPICO_CYW43_SUPPORTED=1' + \
 
 # Set project specific 'base' (i.e always used) options
 base_release = BuildValues()        # Do NOT comment out this line
-wifi_firmware            = '43439A0-7.95.49.00.combined'
-common_flags             = f' {wifi_opt} {sdk_opt} {sdk_usb}'
+common_flags             = f' {wifi_opt} {sdk_opt}'
 base_release.cflags      = f' -Wall {common_flags}'
 base_release.cppflags    = ' -std=gnu++11'
 base_release.asmflags    = f' {common_flags}'
@@ -106,7 +99,7 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 
 
 # Select Module that contains the desired toolchain
-from nqbplib.toolchains.linux.arm_gcc_rp2xxx.w_stdio_usb_sdk2x import ToolChain
+from nqbplib.toolchains.linux.arm_gcc_rp2xxx.w_stdio_uart_sdk2x import ToolChain
 
 # Function that instantiates an instance of the toolchain
 def create():

@@ -35,108 +35,96 @@ class ToolChain( base.ToolChain ):
         self._objdmp     = 'arm-none-eabi-objdump' 
         self._printsz    = 'arm-none-eabi-size'
         self._pad_chksum = os.path.join( abs_sdk_root, 'src', mcu_part_num, 'boot_stage2', "pad_checksum" )
-        self._picotool   = 'picotool.exe' # FIXME: os.path.join( sdk_root, 'tools', 'picotool.exe' )
-        self._pioasm     = 'pioasm.exe'   # FIXME: os.path.join( sdk_root, 'tools', 'pioasm.exe' )
+        self._picotool   = 'picotool' # FIXME: os.path.join( sdk_root, 'tools', 'picotool' )
+        self._pioasm     = 'pioasm'   # FIXME: os.path.join( sdk_root, 'tools', 'pioasm' )
         self._asm_ext    = 'asm'    
         self._asm_ext2   = 'S'   
-        self._shell      = 'cmd.exe /C'
-        self._rm         = 'del /f'
-        self._os_sep     = '/' # Force unix directory separator (for using a response file with gcc on Windoze Host)
 
         self._clean_pkg_dirs.extend( ['_pico'] )
+        self._base_release.exclude_clangd.extend(['-std=gnu11', '-mcpu=cortex-m33', '-mcmse', '-march=armv8-m.main+fp+dsp', '-mcpu=cortex-m0plus'])
 
         # Define paths
         bsp_src_path = os.path.join( abs_repo_root, bsp_rel_path )  # The BSP directory must contain a pico/ sub-directory with the board config_autogen.h & version.h files
         sdk_src_path = os.path.join( abs_sdk_root, 'src' )
         sdk_lib_path = os.path.join( abs_sdk_root, 'lib' )
         self._base_release.inc = self._base_release.inc + \
-                ' -I' + sdk_lib_path + r'\cyw43-driver\src' + \
-                ' -I' + sdk_lib_path + r'\cyw43-driver\firmware' + \
+                ' -I' + sdk_lib_path + '/cyw43-driver/src' + \
+                ' -I' + sdk_lib_path + '/cyw43-driver/firmware' + \
                 ' -I' + bsp_src_path + \
-                ' -I' + sdk_src_path + r'\boards\include' + \
-                ' -I' + sdk_src_path + r'\common\boot_picobin_headers\include' + \
-                ' -I' + sdk_src_path + r'\common\boot_picoboot_headers\include' + \
-                ' -I' + sdk_src_path + r'\common\hardware_claim\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_base_headers\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_binary_info\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_bit_ops_headers\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_divider_headers\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_stdlib_headers\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_sync\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_time\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_usb_reset_interface_headers\include' + \
-                ' -I' + sdk_src_path + r'\common\pico_util\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\boot_bootrom_headers\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_adc\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_base\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_boot_lock\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_clocks\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_dcp\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_divider\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_dma\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_exception\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_flash\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_gpio\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_hazard3\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_i2c\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_irq\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_pio\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_pll\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_pwm\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_rcp\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_resets\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_riscv\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_spi\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_sync\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_sync_spin_lock\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_ticks\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_timer\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_uart\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_vreg\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_watchdog\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_xip_cache\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\hardware_xosc\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_async_context\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_atomic\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_bootrom\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_cyw43_arch\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_cyw43_driver\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_driver\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_double\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_flash\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_float\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_int64_ops\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_malloc\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_mem_ops\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_multicore\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_platform_common\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_platform_compiler\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_platform_panic\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_platform_sections\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_printf\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_rand\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_runtime\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_runtime_init\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_status_led\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_stdio\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_stdio_usb\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_time_adapter\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_unique_id\include ' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_fix\rp2040_usb_device_enumeration\include' + \
-                ' -I' + sdk_src_path + r'\rp2_common\pico_fix\rp2040_usb_device_enumeration\include' + \
-                ' -I' + sdk_src_path + f'\\{mcu_part_num}\\boot_stage2\\include' + \
-                ' -I' + sdk_src_path + f'\\{mcu_part_num}\\hardware_regs\\include' + \
-                ' -I' + sdk_src_path + f'\\{mcu_part_num}\\hardware_structs\\include' + \
-                ' -I' + sdk_src_path + f'\\{mcu_part_num}\\pico_platform\\include'
+                ' -I' + sdk_src_path + '/boards/include' + \
+                ' -I' + sdk_src_path + '/common/boot_picobin_headers/include' + \
+                ' -I' + sdk_src_path + '/common/boot_picoboot_headers/include' + \
+                ' -I' + sdk_src_path + '/common/hardware_claim/include' + \
+                ' -I' + sdk_src_path + '/common/pico_base_headers/include' + \
+                ' -I' + sdk_src_path + '/common/pico_binary_info/include' + \
+                ' -I' + sdk_src_path + '/common/pico_bit_ops_headers/include' + \
+                ' -I' + sdk_src_path + '/common/pico_divider_headers/include' + \
+                ' -I' + sdk_src_path + '/common/pico_stdlib_headers/include' + \
+                ' -I' + sdk_src_path + '/common/pico_sync/include' + \
+                ' -I' + sdk_src_path + '/common/pico_time/include' + \
+                ' -I' + sdk_src_path + '/common/pico_util/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/boot_bootrom_headers/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_adc/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_base/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_boot_lock/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_clocks/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_dcp/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_divider/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_dma/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_exception/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_flash/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_gpio/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_hazard3/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_i2c/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_irq/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_pio/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_pll/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_pwm/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_rcp/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_resets/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_riscv/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_spi/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_sync/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_sync_spin_lock/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_ticks/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_timer/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_uart/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_vreg/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_watchdog/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_xip_cache/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/hardware_xosc/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_async_context/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_atomic/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_bootrom/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_cyw43_arch/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_cyw43_driver/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_driver/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_double/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_flash/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_float/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_int64_ops/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_malloc/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_mem_ops/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_multicore/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_platform_common/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_platform_compiler/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_platform_panic/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_platform_sections/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_printf/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_rand/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_runtime/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_runtime_init/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_status_led/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_stdio/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_stdio_uart/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_time_adapter/include' + \
+                ' -I' + sdk_src_path + '/rp2_common/pico_unique_id/include ' + \
+                ' -I' + sdk_src_path + f'/{mcu_part_num}/boot_stage2/include' + \
+                ' -I' + sdk_src_path + f'/{mcu_part_num}/hardware_regs/include' + \
+                ' -I' + sdk_src_path + f'/{mcu_part_num}/hardware_structs/include' + \
+                ' -I' + sdk_src_path + f'/{mcu_part_num}/pico_platform/include'
 
         
-        # USB support
-        usb_src_path = os.path.join( abs_sdk_root, 'lib', 'tinyusb' )
-        self._base_release.inc = self._base_release.inc + \
-                ' -I' + usb_src_path  + r'\src' + \
-                ' -I' + usb_src_path  + r'\src\common' + \
-                ' -I' + usb_src_path  + r'\hw'
-          
         #
         skd_libopts = '-DLIB_BOOT_STAGE2_HEADERS=1' + \
             ' -DLIB_PICO_ATOMIC=1' + \
@@ -180,10 +168,9 @@ class ToolChain( base.ToolChain ):
             ' -DLIB_PICO_TIME_ADAPTER=1' + \
             ' -DLIB_PICO_UNIQUE_ID=1' + \
             ' -DLIB_PICO_UTIL=1' + \
-            ' -DLIB_PICO_FIX_RP2040_USB_DEVICE_ENUMERATION=1' + \
             ' -DLIB_PICO_TIME_ADAPTER=1' + \
-            ' -DLIB_PICO_STDIO_UART=0' + \
-            ' -DLIB_PICO_STDIO_USB=1'
+            ' -DLIB_PICO_STDIO_UART=1' + \
+            ' -DLIB_PICO_STDIO_USB=0'
             
 
         # RP2040 Specific additions 
@@ -215,7 +202,6 @@ class ToolChain( base.ToolChain ):
         self._base_release.cppflags     = f' {self._base_release.cppflags} {common_cpp_flags}'
         self._base_release.asmflags     = self._base_release.cflags 
         self._base_release.asminc       = f' {self._base_release.asminc} {self._base_release.inc} -I {sdk_src_path}/{mcu_part_num}/boot_stage2/asminclude'
-        self._base_release.exclude_clangd.append('-std=gnu11')
         
         wrapper_funcs                   = ' -Wl,--wrap=__ctzdi2 -Wl,--wrap=__aeabi_dadd -Wl,--wrap=__aeabi_ddiv -Wl,--wrap=__aeabi_dmul' + \
                                           ' -Wl,--wrap=__aeabi_drsub -Wl,--wrap=__aeabi_dsub -Wl,--wrap=__aeabi_cdcmpeq -Wl,--wrap=__aeabi_cdrcmple' + \
@@ -252,18 +238,17 @@ class ToolChain( base.ToolChain ):
         # When linked from static libraries, the linker excludes these objects because constructors
         # have no explicit symbol references - causing hardware initialization to be skipped.
         self._base_release.firstobjs    = f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_crt0' + \
-                                          f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_stdio_usb' + \
                                           f' _BUILT_DIR_.xpkgs/pico-sdk/src/{mcu_part_num}/pico_platform' + \
                                           f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_runtime_init' + \
                                           f' _BUILT_DIR_.xpkgs/pico-sdk/src/rp2_common/pico_unique_id'
 
 
         # Optimized options, flags, etc.
-        self._optimized_release.cflags     = self._optimized_release.cflags + r' -DCFG_TUSB_DEBUG=0 -DNDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Release\"'
+        self._optimized_release.cflags     = self._optimized_release.cflags + r' -DNDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Release\"'
         self._optimized_release.linkflags  = self._optimized_release.linkflags + ' -DNDEBUG'
 
         # Debug options, flags, etc.
-        self._debug_release.cflags     = self._debug_release.cflags + r' -DCFG_TUSB_DEBUG=1 -DDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Debug\"'
+        self._debug_release.cflags     = self._debug_release.cflags + r' -DDEBUG -DPICO_CMAKE_BUILD_TYPE=\"Debug\"'
         self._debug_release.linkflags  = self._debug_release.linkflags + ' -DDEBUG'
         
 
@@ -354,17 +339,3 @@ class ToolChain( base.ToolChain ):
     def get_asm_extensions(self):
         extlist = [ self._asm_ext, self._asm_ext2 ]
         return extlist
-
-
-    # Because Windoze is pain!
-    def _build_ar_rule( self ):
-        self._win32_withrspfile_build_ar_rule()
-
-    def _build_compile_rule( self ):
-        self._build_withrspfile_compile_rule()
-
-    def _build_assembly_rule( self ):
-        self._build_withrspfile_assembly_rule()
-
-    def _build_link_rule( self ):
-        self._build_withrspfile_link_rule()
