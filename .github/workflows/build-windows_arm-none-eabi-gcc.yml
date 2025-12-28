@@ -1,4 +1,4 @@
-name: Build Linux STM ARM
+name: Build Windows ARM Cortex M/R (arm-none-eabi-gcc)
 permissions:
   contents: read
   pull-requests: write
@@ -16,9 +16,9 @@ on:
         type: string
 
 jobs:
-  stm_arm_linux_build:
-    name: STM ARM Cortex M/R Compiler Linux Build
-    runs-on: ubuntu-latest
+  arm_cortex_windows_build:
+    name: ARM Cortex M/R Compiler Windows Build
+    runs-on: windows-latest
     timeout-minutes: 30
 
     steps:
@@ -52,11 +52,11 @@ jobs:
         if: inputs.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
-          ./top/gha_linux_stm-arm.sh 0
+          .\top\gha_windows_arm-none-eabi-gcc.bat 0 
 
       # Build Stable branches
       - name: Run build script - for stable branches
         if: inputs.event_name != 'pull_request'
         run: |
           echo "Running build script for stable branches..."
-          ./top/gha_linux_stm-arm.sh ${{ inputs.run_number }} ${{ inputs.ref_name }}
+          .\top\gha_windows_arm-none-eabi-gcc.bat ${{ inputs.run_number }} ${{ inputs.ref_name }}

@@ -10,7 +10,7 @@ set -x
 # 
 
 # setup the environment
-source ./env.sh 1
+source ./env.sh 2
 
 # Get script directory and set paths
 _TOPDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -20,12 +20,6 @@ BUILD_NUMBER="$1"
 echo "Root:          $_ROOT"
 echo "Top:           $_TOPDIR"
 echo "Build Number:  $BUILD_NUMBER"
-
-#
-# Build STM projects
-#
-# Set up the compiler (which is included in the repo)
-source ./env.sh 5
 
 # Set the CI build flag
 export NQBP_CI_BUILD="1"

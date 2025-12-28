@@ -1,4 +1,4 @@
-name: Build Windows Atmel ARM
+name: Build Linux ARM Cortex M/R (arm-none-eabi-gcc)
 permissions:
   contents: read
   pull-requests: write
@@ -16,9 +16,9 @@ on:
         type: string
 
 jobs:
-  atmel_arm_windows_build:
-    name: Atmel ARM Cortex M/R Compiler Windows Build
-    runs-on: windows-latest
+  arm_cortex_linux_build:
+    name: ARM Cortex M/R Compiler Linux Build
+    runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
@@ -52,11 +52,11 @@ jobs:
         if: inputs.event_name == 'pull_request'
         run: |
           echo "Running build script for PRs..."
-          .\top\gha_windows_atmel-arm.bat 0 
+          ./top/gha_linux_arm-none-eabi-gcc.sh 0
 
       # Build Stable branches
       - name: Run build script - for stable branches
         if: inputs.event_name != 'pull_request'
         run: |
           echo "Running build script for stable branches..."
-          .\top\gha_windows_atmel-arm.bat ${{ inputs.run_number }} ${{ inputs.ref_name }}
+          ./top/gha_linux_arm-none-eabi-gcc.sh ${{ inputs.run_number }} ${{ inputs.ref_name }}
