@@ -54,7 +54,7 @@ public:
     InputOutput( Kit::Container::RingBuffer<uint8_t>& txBuffer,                          //!< Software TX FIFO
                  Kit::Container::RingBuffer<uint8_t>& rxBuffer,                          //!< Software RX FIFO
                  uart_inst_t*                         uartHdl = BSP_DEFAULT_UART_HANDLE  //!< Which UART to use
-    ) noexcept;
+                 ) noexcept;
 
     /// Destructor
     ~InputOutput( void ) noexcept;
@@ -67,7 +67,7 @@ public:
                 unsigned      dataBits = 8,                        //!< Number of data bits.  Range is [5..8]
                 unsigned      stopBits = 1,                        //!< Number of stop bits.  Range is [1..2]
                 uart_parity_t parity   = UART_PARITY_NONE          //!< Parity setting.  See hardware/uart.h for enumeration
-    ) noexcept;
+                ) noexcept;
 
     /// This method is used to stop the stream/driver. The stream can be restarted after is has been stopped
     void stop() noexcept;
@@ -93,7 +93,7 @@ public:
     /// See Kit::Io::IOutput
     void flush() noexcept override;
 
-    /// See Kit::Io::IIsEos. Note: This method always returns false
+    /// See Kit::Io::IEos. Note: This method always returns false
     bool isEos() noexcept override;
 
     /// See Kit::Io::IOutput
