@@ -30,7 +30,7 @@
     \code
         extern Kit::Io::IInputOutput& g_bspConsoleStream;
     \endcode
-    
+
     NOTE: Exposing the console stream avoids the BSP header files have a C++ code
           in them and prevents circular dependencies issues.
 */
@@ -52,12 +52,13 @@
 
 
 /// Starts the console stream (must be called before using the console stream)
-void Bsp_startConsoleStream( unsigned long baudRate = 115200,                     //!< Baud rate in hertz
-                             unsigned      txPin    = PICO_DEFAULT_UART_TX_PIN,   //!< Transmit Pin
-                             unsigned      rxPin    = PICO_DEFAULT_UART_RX_PIN,   //!< Receive Pin
-                             unsigned      dataBits = 8,                          //!< Number of data bits.  Range is [5..8]
-                             unsigned      stopBits = 1,                          //!< Number of stop bits.  Range is [1..2]
-                             uart_parity_t parity   = UART_PARITY_NONE ) noexcept;  //!< Parity setting.  See hardware/uart.h for enumeration
-
+void Bsp_startConsoleStream( unsigned long baudRate = 115200,                    //!< Baud rate in hertz
+                             unsigned      txPin    = PICO_DEFAULT_UART_TX_PIN,  //!< Transmit Pin
+                             unsigned      rxPin    = PICO_DEFAULT_UART_RX_PIN,  //!< Receive Pin
+                             unsigned      dataBits = 8,                         //!< Number of data bits.  Range is [5..8]
+                             unsigned      stopBits = 1,                         //!< Number of stop bits.  Range is [1..2]
+                             uart_parity_t parity   = UART_PARITY_NONE           //!< Parity setting.  See hardware/uart.h for enumeration
+                             ) noexcept;
+                             
 /*----------------------------------------------------------------------------*/
 #endif  // end header latch
