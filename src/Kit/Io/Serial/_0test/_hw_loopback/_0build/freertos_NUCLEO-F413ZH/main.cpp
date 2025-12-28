@@ -10,8 +10,9 @@
 
 #include "Kit/Bsp/Api.h"
 #include "Kit/System/Api.h"
-#include "Kit/Bsp/ST/freertos_NUCLEO-F413ZH/stdio.h"
+#include "Kit/Io/IInputOutput.h"
 
+extern Kit::Io::IInputOutput& g_bspConsoleStream;
 extern void loopback_test( Kit::Io::IInputOutput& fd );
 
 /*-----------------------------------------------------------*/
@@ -20,7 +21,7 @@ int main( void )
     // Initialize the board
     Bsp_initialize();
 
-    // Initialize CPL
+    // Initialize KIT
     Kit::System::initialize();
 
     // Go run the test(s) (Note: This method should never return)
@@ -35,5 +36,5 @@ int main( void )
 
 size_t getErrorCounts( bool clearCounts )
 {
-    return g_bspConsoleStream.getRxErrorsCounts( clearCounts );
+    return Bsp_getConsoleStreamErrorCounts( clearCounts );
 }

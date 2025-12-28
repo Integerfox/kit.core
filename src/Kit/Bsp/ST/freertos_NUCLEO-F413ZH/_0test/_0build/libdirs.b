@@ -1,9 +1,9 @@
-# CPL Middle-ware
+# KIT Middle-ware
 src/Kit/Container
 src/Kit/Text
 src/Kit/Io
 
-# CPL OSAL
+# KIT OSAL
 src/Kit/System
 src/Kit/System/_fatalerror < null.cpp
 src/Kit/System/FreeRTOS

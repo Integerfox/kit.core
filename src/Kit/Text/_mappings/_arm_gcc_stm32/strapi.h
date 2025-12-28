@@ -13,8 +13,6 @@
     This file provides the mapping of the 'strapi' to the GCC ARM-M4 NOABI
     C/C++ compiler with the STM32 micro-controllers
 
-    The GCC/ARM compiler provides all of the strapi natively.
-
  */
 
 
@@ -22,9 +20,6 @@
 
 #include <string.h>
 
-
-//#define HAVE_KIT_TEXT_STRUPR
-//#define HAVE_KIT_TEXT_STRLWR
 #define HAVE_KIT_TEXT_STRSET
 #define HAVE_KIT_TEXT_STRNSET
 #define HAVE_KIT_TEXT_STRREV

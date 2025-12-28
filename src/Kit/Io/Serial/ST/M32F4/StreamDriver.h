@@ -160,7 +160,7 @@ protected:
     struct HalMapping_T
     {
         UART_HandleTypeDef* halHandle;  //!< HAL Handle of the UART
-        StreamDriver*       driver;     //!< Associated CPL driver instance
+        StreamDriver*       driver;     //!< Associated KIT driver instance
     };
 
 protected:

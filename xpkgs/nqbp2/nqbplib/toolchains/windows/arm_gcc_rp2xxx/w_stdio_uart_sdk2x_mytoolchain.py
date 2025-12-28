@@ -61,7 +61,6 @@ wifi_opt = ' -DPICO_CYW43_SUPPORTED=1' + \
 
 # Set project specific 'base' (i.e always used) options
 base_release = BuildValues()        # Do NOT comment out this line
-wifi_firmware            = '43439A0-7.95.49.00.combined'
 common_flags             = f' {wifi_opt} {sdk_opt}'
 base_release.cflags      = f' -Wall {common_flags}'
 base_release.cppflags    = ' -std=gnu++11'

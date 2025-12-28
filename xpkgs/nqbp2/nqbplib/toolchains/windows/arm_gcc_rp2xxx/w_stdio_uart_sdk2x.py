@@ -44,6 +44,7 @@ class ToolChain( base.ToolChain ):
         self._os_sep     = '/' # Force unix directory separator (for using a response file with gcc on Windoze Host)
 
         self._clean_pkg_dirs.extend( ['_pico'] )
+        self._base_release.exclude_clangd.extend(['-std=gnu11', '-mcpu=cortex-m33', '-mcmse', '-march=armv8-m.main+fp+dsp', '-mcpu=cortex-m0plus'])
 
         # Define paths
         bsp_src_path = os.path.join( abs_repo_root, bsp_rel_path )  # The BSP directory must contain a pico/ sub-directory with the board config_autogen.h & version.h files
@@ -204,7 +205,6 @@ class ToolChain( base.ToolChain ):
         self._base_release.cppflags     = f' {self._base_release.cppflags} {common_cpp_flags}'
         self._base_release.asmflags     = self._base_release.cflags 
         self._base_release.asminc       = f' {self._base_release.asminc} {self._base_release.inc} -I {sdk_src_path}/{mcu_part_num}/boot_stage2/asminclude'
-        self._base_release.exclude_clangd.append('-std=gnu11')
         
         # wrapper_funcs                   = '-Wl,--wrap=printf -Wl,--wrap=vprintf -Wl,--wrap=puts -Wl,--wrap=putchar -Wl,--wrap=getchar -Wl,--wrap=sprintf -Wl,--wrap=snprintf ' \
         # '                                  -Wl,--wrap=vsnprintf -Wl,--wrap=__clzsi2 -Wl,--wrap=__clzdi2 -Wl,--wrap=__ctzsi2 -Wl,--wrap=__ctzdi2 -Wl,--wrap=__popcountsi2 -Wl,' \

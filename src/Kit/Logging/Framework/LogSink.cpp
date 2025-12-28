@@ -52,7 +52,7 @@ void LogSink::request( CloseMsg& msg ) noexcept
 //         // Drain the buffer (but limit how many adds at one time) and write the entries to persistent storage
 //         unsigned                   iterations = 0;
 //         Kit::Logging::EntryData_T  entry;
-//         while ( iterations < OPTION_CPL_LOGGING_LOGSINK_MAX_BATCH_WRITE && m_logBuffer.remove( entry ) )
+//         while ( iterations < OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE && m_logBuffer.remove( entry ) )
 //         {
 //             dispatchLogEntry( entry );
 //             iterations++;

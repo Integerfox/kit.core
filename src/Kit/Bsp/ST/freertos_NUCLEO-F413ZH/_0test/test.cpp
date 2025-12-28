@@ -64,7 +64,7 @@ int main( void )
     Bsp_initialize();
     printf(  "**** BSP TEST APPLICATION STARTED ****\n" );
 
-    //// Initialize CPL
+    //// Initialize KIT
     Kit::System::initialize();
 
     //// Create my test thread
