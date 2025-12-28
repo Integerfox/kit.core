@@ -12,14 +12,11 @@
                 for why.
 */
 
-// OSAL mappings
-#include "Kit/System/FreeRTOS/mappings.h"
+// BSP
+#include "Kit/Bsp/RPi/baremetal_arm_pico2w/Api.h"
 
-// strapi mapping
-#include "Kit/Text/_mappings/_arm_gcc_stm32/strapi.h"
+// Text
+#include "Kit/Text/_mappings/_arm_gcc_rp2xxx/strapi.h"
 
 // IO mapping.  
 #include "Kit/Io/_mappings/_nofs/mappings.h"
-
-// BSP
-#include "Kit/Bsp/ST/freertos_NUCLEO-F413ZH/Api.h"

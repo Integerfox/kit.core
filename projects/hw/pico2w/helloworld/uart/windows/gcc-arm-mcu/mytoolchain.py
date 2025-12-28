@@ -103,6 +103,5 @@ from nqbplib.toolchains.windows.arm_gcc_rp2xxx.w_stdio_uart_sdk2x import ToolCha
 
 # Function that instantiates an instance of the toolchain
 def create():
-    lscript  = 'STM32F413ZHTx_FLASH.ld'
     tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, NQBP_PKG_ROOT(), bsp_rel_root, "rp2350", "pico2_w", sdk_root, "pico", linkerscript )
     return tc

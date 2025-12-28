@@ -11,8 +11,8 @@ src/Kit/Io
 
 # KIT OSAL
 src/Kit/System
-src/Kit/System/Baremetal
-src/Kit/System/Baremetal/_fatalerror
+src/Kit/System/BareMetal
+src/Kit/System/BareMetal/_fatalerror
 src/Kit/System/_assert
 src/Kit/System/_trace
 

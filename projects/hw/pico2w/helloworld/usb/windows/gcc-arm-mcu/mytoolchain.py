@@ -33,7 +33,7 @@ import os
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'hello_usb'
+FINAL_OUTPUT_NAME = 'b'
 
 # magic paths
 sdk_root     = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "pico-sdk" )
@@ -67,7 +67,6 @@ wifi_opt = ' -DPICO_CYW43_SUPPORTED=1' + \
 
 # Set project specific 'base' (i.e always used) options
 base_release = BuildValues()        # Do NOT comment out this line
-wifi_firmware            = '43439A0-7.95.49.00.combined'
 common_flags             = f' {wifi_opt} {sdk_opt} {sdk_usb}'
 base_release.cflags      = f' -Wall {common_flags}'
 base_release.cppflags    = ' -std=gnu++11'
@@ -110,6 +109,5 @@ from nqbplib.toolchains.windows.arm_gcc_rp2xxx.w_stdio_usb_sdk2x import ToolChai
 
 # Function that instantiates an instance of the toolchain
 def create():
-    lscript  = 'STM32F413ZHTx_FLASH.ld'
     tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, NQBP_PKG_ROOT(), bsp_rel_root, "rp2350", "pico2_w", sdk_root, "pico", linkerscript )
     return tc

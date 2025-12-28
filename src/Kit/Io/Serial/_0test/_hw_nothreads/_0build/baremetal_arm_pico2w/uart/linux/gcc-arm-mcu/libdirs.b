@@ -1,3 +1,3 @@
-# Use common (across compilers) libdirs.b
-../libdirs.b
+# common SDK directories
+../../../libdirs.b
 ../../libdirs.b

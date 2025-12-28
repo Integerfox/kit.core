@@ -11,7 +11,8 @@
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
 
-#define USE_KIT_SYSTEM_ASSERT
-#define USE_KIT_SYSTEM_TRACE
+// USE a KIT stream for the BSP console (printf is not supported)
+#define USE_BSP_NO_STDIO
+
 
 #endif
