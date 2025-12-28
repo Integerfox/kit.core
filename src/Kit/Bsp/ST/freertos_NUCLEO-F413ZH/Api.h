@@ -69,6 +69,9 @@
 #define Bsp_nop_MAP() __asm( "nop" )
 
 /// Generic API
+#define Bsp_yield_on_exit_MAP( r ) portYIELD_FROM_ISR( r )
+
+/// Generic API
 #define Bsp_disable_irqs_MAP() __disable_irq()
 
 /// Generic API (with memory barrier protection)
@@ -105,16 +108,6 @@
 
 /// Generic API
 #define Bsp_toggle_debug2_MAP() HAL_GPIO_TogglePin( LD2_GPIO_Port, LD2_Pin )
-
-
-//////////////////////////////////////////////////////////
-/// FreeRTOS specific APIs
-//////////////////////////////////////////////////////////
-
-/** This method informs the schedule that a context switch is required on exit
-    from the ISR.  The 'r' argument is the result for the su_signal() call.
- */
-#define Bsp_yield_on_exit( r ) portYIELD_FROM_ISR( r )
 
 
 #endif  // end header latch

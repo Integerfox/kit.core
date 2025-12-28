@@ -12,11 +12,11 @@
 
     By default the BSP does NOT provide a KIT IO Stream for application' console.
     The application can enabled the IO Stream by defining the macro
-    USE_BSP_NO_STDIO.  When the macro is NOT used the C's library's printf()
+    USE_BSP_KIT_IO_STREAM.  When the macro is NOT used the C's library's printf()
     output will be send to the UART directly and the KIT IO stream (g_bspConsoleStream)
     will not be available.
 
-    NOTE: When USE_BSP_NO_STDIO is NOT defined, the C library buffers the printf
+    NOTE: When USE_BSP_KIT_IO_STREAM is NOT defined, the C library buffers the printf
           output, i.e. output is not sent until a newline is encountered the output stream
 
     NOTE: Since the BSP is for a bare-metal platform, there are no threads,

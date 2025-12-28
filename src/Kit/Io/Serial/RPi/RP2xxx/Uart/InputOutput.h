@@ -15,6 +15,7 @@
 #include "Kit/Io/Types.h"
 #include "hardware/uart.h"
 #include "Kit/Container/RingBuffer.h"
+#include "Kit/System/Thread.h"
 #include <stdint.h>
 
 /// Handle for UART0
@@ -127,6 +128,12 @@ protected:
 
     /// Critical section for ISR/thread/Core exclusion
     critical_section_t* m_lock;
+
+    /// Handle of the blocked TX client thread (if there is one)
+    Kit::System::Thread* volatile m_txWaiterPtr;
+
+    /// Handle of the blocked RX client thread (if there is one)
+    Kit::System::Thread* volatile m_rxWaiterPtr;
 
     /// My started/stopped state
     bool m_started;

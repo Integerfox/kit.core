@@ -12,7 +12,7 @@
 
 
 // USE a KIT stream for the BSP console (printf is not supported)
-#define USE_BSP_NO_STDIO
+#define USE_BSP_KIT_IO_STREAM
 
 
 #endif

@@ -64,6 +64,13 @@
 /// Generic API
 #define Bsp_nop_MAP() __asm( "nop" )
 
+/** Generic API. This method only applies when there is actual RTOS -->in theory
+    this should be mapped to a NOP.  However as a 'CHEAT' to get
+    around "unused variable" warnings - we increment the passed in
+    variable.
+ */
+#define Bsp_yield_on_exit_MAP( r )  r++
+
 /// Generic API
 #define Bsp_disable_irqs_MAP() __disable_irq()
 
@@ -102,17 +109,6 @@
 /// Generic API
 #define Bsp_toggle_debug2_MAP() HAL_GPIO_TogglePin( LD2_GPIO_Port, LD2_Pin )
 
-
-//////////////////////////////////////////////////////////
-/// RTOS specific APIs
-//////////////////////////////////////////////////////////
-
-/** This method only applies when there is actual RTOS -->in theory
-    this should be mapped to a NOP.  However as a 'CHEAT' to get
-    around "unused variable" warnings - we increment the passed in
-    variable.
- */
-#define Bsp_yield_on_exit( r )  r++
 
 
 #endif  // end header latch

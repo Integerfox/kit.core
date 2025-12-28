@@ -12,7 +12,9 @@
 
 
 // USE a KIT stream for the BSP console (printf is not supported)
-#define USE_BSP_NO_STDIO
+#define USE_BSP_KIT_IO_STREAM
 
+#define OPTION_BSP_CONSOLE_RX_FIFO_SIZE 64
+#define OPTION_BSP_CONSOLE_TX_FIFO_SIZE 16
 
 #endif

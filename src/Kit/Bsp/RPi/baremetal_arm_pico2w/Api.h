@@ -24,7 +24,7 @@
 
     OPTIONAL Compile switches:
 
-        USE_BSP_NO_STDIO    - Defining this symbol will prevent initializing
+        USE_BSP_KIT_IO_STREAM    - Defining this symbol will prevent initializing
                               SDK's stdio sub-system.  This is for when the
                               application is supplying its own driver for
                               UART0
@@ -47,6 +47,13 @@
 
 /// Generic API
 #define Bsp_nop_MAP() __asm( "nop" )
+
+/** Generic API. This method only applies when there is actual RTOS -->in theory
+    this should be mapped to a NOP.  However as a 'CHEAT' to get
+    around "unused variable" warnings - we increment the passed in
+    variable.
+ */
+#define Bsp_yield_on_exit_MAP( r )  r++
 
 /// Generic API
 #define Bsp_disable_irqs_MAP disable_interrupts

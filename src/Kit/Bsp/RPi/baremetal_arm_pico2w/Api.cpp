@@ -20,7 +20,7 @@
 
 critical_section_t g_bspGlobalCritSec_;
 
-#ifdef USE_BSP_NO_STDIO
+#ifdef USE_BSP_KIT_IO_STREAM
 #define INIT_STDIO() Bsp_startConsoleStream()   // Accept default parameters: 115200, default TX/RX pins, 8N1
 #else
 #define INIT_STDIO() stdio_init_all()

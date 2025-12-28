@@ -10,7 +10,6 @@
 
 #include "InputOutput.h"
 #include "pico/critical_section.h"
-#include <cstdint>
 #include <hardware/gpio.h>
 #include <hardware/irq.h>
 #include <hardware/timer.h>
@@ -30,20 +29,6 @@ InputOutput* InputOutput::m_uart1Instance;
 
 static critical_section_t lockUart0_;
 static critical_section_t lockUart1_;
-
-// Fill the HW Transmit FIFO.  Assumed to be called from within a critical section
-// static void su_fillHWTxFifo( uart_inst_t* uartHdl, Kit::Container::RingBuffer<uint8_t>& txBuffer ) noexcept
-// {
-//     while ( uart_is_writable( uartHdl ) )
-//     {
-//         uint8_t c;
-//         if ( txBuffer.remove( c ) == false )
-//         {
-//             break;
-//         }
-//         uart_putc_raw( uartHdl, c );
-//     }
-// }
 
 // Fill the HW Transmit FIFO - provides critical section protection
 static void fillHWTxFifo( uart_inst_t* uartHdl, Kit::Container::RingBuffer<uint8_t>& txBuffer, critical_section_t* lock ) noexcept
@@ -99,6 +84,8 @@ InputOutput::InputOutput( Kit::Container::RingBuffer<uint8_t>& txBuffer,
     , m_rxFifo( rxBuffer )
     , m_uartHdl( uartHdl )
     , m_lock( nullptr )
+    , m_txWaiterPtr( nullptr )
+    , m_rxWaiterPtr( nullptr )
     , m_started( false )
 {
     if ( m_uartHdl == KIT_IO_SERIAL_RPI_RP2XXX_UART_HANDLE_UART0 )
@@ -181,6 +168,18 @@ void InputOutput::stop() noexcept
         }
 
         uart_deinit( m_uartHdl );
+
+        // Free up any blocked clients (if there are any)
+        if ( m_txWaiterPtr )
+        {
+            m_txWaiterPtr->signal();
+        }
+        if ( m_rxWaiterPtr )
+        {
+            m_rxWaiterPtr->signal();
+        }
+        m_txWaiterPtr = nullptr;
+        m_rxWaiterPtr = nullptr;
     }
 }
 
@@ -216,6 +215,14 @@ void InputOutput::su_irqHandler() noexcept
         // the core where read/write is being called is the same core as where
         // the ISR run
         drainHWRxFifo( m_uartHdl, m_rxFifo, m_lock );
+
+        // unblock waiting client (if there is one) now that I have least one byte
+        if ( m_rxWaiterPtr )
+        {
+            int result    = m_rxWaiterPtr->su_signal();
+            m_rxWaiterPtr = nullptr;
+            Bsp_yield_on_exit( result );
+        }
     }
 
     // Transmit IRQ
@@ -224,8 +231,20 @@ void InputOutput::su_irqHandler() noexcept
         // Fill the HW Transmit FIFO (See previous comment about why a Critical section is needed in the ISR)
         fillHWTxFifo( m_uartHdl, m_txFifo, m_lock );
 
+        // By definition if I get here - there is space available in the TX FIFO.
+        // Unblock waiting client (if there is one) now that there is space in the FIFO
+        if ( m_txWaiterPtr )
+        {
+            int result    = m_txWaiterPtr->su_signal();
+            m_txWaiterPtr = nullptr;
+            Bsp_yield_on_exit( result );
+        }
+
         // Disable TX IRQ for now if we have nothing left to transmit
-        if ( m_txFifo.isEmpty() )
+        critical_section_enter_blocking( m_lock );
+        bool txFifoEmpty = m_txFifo.isEmpty();
+        critical_section_exit( m_lock );
+        if ( txFifoEmpty )
         {
             uart_set_irqs_enabled( m_uartHdl, true, false );
         }
@@ -264,6 +283,27 @@ bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRe
         return true;
     }
 
+    // Block if there is no data available
+    // NOTE: A RX Error has the potential to unblock the reader WHILE the RX FIFO is still empty
+    Kit::System::Thread& myThread = Kit::System::Thread::getCurrent();
+    for ( ;; )
+    {
+        critical_section_enter_blocking( m_lock );
+        if ( m_rxFifo.getNumItems() == 0 )
+        {
+            m_rxWaiterPtr = &myThread;
+            critical_section_exit( m_lock );
+
+            // Wait for incoming byte
+            Kit::System::Thread::wait();
+        }
+        else
+        {
+            critical_section_exit( m_lock );
+            break;
+        }
+    }
+
     // Drain the SW RX FIFO
     while ( numBytes )
     {
@@ -286,7 +326,7 @@ bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRe
     return true;
 }
 
-bool InputOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool InputOutput::write( const void* buffer, ByteCount_T numBytesToTx, ByteCount_T& bytesWritten ) noexcept
 {
     bytesWritten          = 0;
     const uint8_t* srcPtr = static_cast<const uint8_t*>( buffer );
@@ -298,34 +338,60 @@ bool InputOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& 
     }
 
     // Ignore write of zero bytes
-    if ( maxBytes == 0 )
+    if ( numBytesToTx == 0 )
     {
         return true;
     }
 
-    // Fill the SW TX FIFO
-    while ( maxBytes )
+    // Loop until all data is transferred the SW TX FIFO
+    for ( ;; )
     {
-        // Attempt to add the next byte to SW TX FIFO
-        critical_section_enter_blocking( m_lock );
-        bool notFull = m_txFifo.add( *srcPtr );
-        critical_section_exit( m_lock );
-        if ( notFull == false )
+        // Fill the SW TX FIFO
+        while ( numBytesToTx )
+        {
+            // Attempt to add the next byte to SW TX FIFO
+            critical_section_enter_blocking( m_lock );
+            bool notFull = m_txFifo.add( *srcPtr );
+            critical_section_exit( m_lock );
+            if ( notFull == false )
+            {
+                break;
+            }
+
+            // Advance to next incoming byte
+            srcPtr++;
+            numBytesToTx--;
+            bytesWritten++;
+        }
+
+        // If not all my outbound data fits in the buffer -->I will block
+        if ( numBytesToTx )
+        {
+            Kit::System::Thread& myThread = Kit::System::Thread::getCurrent();
+
+            // INTERRUPT/CRITICAL SECTION: Set Waiter
+            critical_section_enter_blocking( m_lock );
+            m_txWaiterPtr = &myThread;
+            critical_section_exit( m_lock );
+        }
+
+        // Trigger a transmit if the Transmitter has gone had gone idle
+        uart_set_irqs_enabled( m_uartHdl, true, true );
+        fillHWTxFifo( m_uartHdl, m_txFifo, m_lock );
+
+        // Wait (if necessary) for buffer to be transmitted/drained
+        if ( numBytesToTx )
+        {
+            Kit::System::Thread::wait();
+        }
+
+        // All done -->exit outer loop
+        else
         {
             break;
         }
-
-        // Advance to next incoming byte
-        srcPtr++;
-        maxBytes--;
-        bytesWritten++;
     }
 
-    // Trigger a transmit if the Transmitter has gone had gone idle
-    uart_set_irqs_enabled( m_uartHdl, true, true );
-    fillHWTxFifo( m_uartHdl, m_txFifo, m_lock );
-
-    // If I get here, the write operation succeeded
     return true;
 }
 
