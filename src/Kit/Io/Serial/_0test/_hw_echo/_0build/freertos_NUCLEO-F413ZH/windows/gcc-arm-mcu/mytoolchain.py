@@ -57,7 +57,6 @@ base_release.cppflags    = ' -std=c++11 -Wno-int-in-bool-context'
 base_release.asmflags    = f' {target_flags}'
 base_release.linkflags   = '-Wl,--no-warn-rwx-segments'
 base_release.firstobjs   = f'_BUILT_DIR_.{bsp_mx}/Core/Src'
-#base_release.firstobjs   = base_release.firstobjs + f' {bsp_mx}/../console.o'
 
 # Set project specific 'optimized' options
 optimized_release = BuildValues()    # Do NOT comment out this line
