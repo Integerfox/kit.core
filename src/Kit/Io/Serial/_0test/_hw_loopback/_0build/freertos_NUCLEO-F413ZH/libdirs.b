@@ -21,12 +21,12 @@ src/Kit/System/_trace
 
 # BSP
 src/Kit/Text/_mappings/_arm_gcc_stm32
-src/Kit/Bsp/ST/NUCLEO-F413ZH 
-src/Kit/Bsp/ST/NUCLEO-F413ZH/MX 
-src/Kit/Bsp/ST/NUCLEO-F413ZH/MX/Core/Src > freertos.c
+src/Kit/Bsp/ST/freertos_NUCLEO-F413ZH 
+src/Kit/Bsp/ST/freertos_NUCLEO-F413ZH/MX 
+src/Kit/Bsp/ST/freertos_NUCLEO-F413ZH/MX/Core/Src > freertos.c
 
 # SEGGER SysVIEW
-src/Kit/Bsp/ST/NUCLEO-F413ZH/SeggerSysView
+src/Kit/Bsp/ST/freertos_NUCLEO-F413ZH/SeggerSysView
 
 # SDK
 xpkgs/stm32f4-sdk/Drivers/STM32F4xx_HAL_Driver/Src > stm32f4xx_hal_timebase_rtc_alarm_template.c stm32f4xx_hal_timebase_rtc_wakeup_template.c stm32f4xx_hal_timebase_tim_template.c

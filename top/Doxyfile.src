@@ -1020,8 +1020,8 @@ EXCLUDE_SYMLINKS       = NO
 
 EXCLUDE_PATTERNS       = */_0test/* \
                          /*_mappings/* \
-                         */Bsp/ST/NUCLEO*/MX/* \
-                         */Bsp/ST/NUCLEO*/SeggerSysView/* \
+                         */Bsp/ST/*NUCLEO*/MX/* \
+                         */Bsp/ST/*NUCLEO*/SeggerSysView/* \
                          mappings_.h
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names

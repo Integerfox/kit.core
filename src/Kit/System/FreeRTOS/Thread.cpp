@@ -43,7 +43,7 @@ protected:
     void notify( IStartupHook::InitLevel initLevel ) noexcept override
     {
         // Create a thread object for the native thread
-        m_parentThreadPtr_ = new (std::nothrow) Kit::System::FreeRTOS::Thread( "main", *this );
+        m_parentThreadPtr_ = new ( std::nothrow ) Kit::System::FreeRTOS::Thread( "main", *this );
     }
 };
 
@@ -51,7 +51,6 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 }  // end anonymous namespace
 // #endif
-
 
 
 //------------------------------------------------------------------------------
@@ -102,7 +101,7 @@ Thread::Thread( Kit::System::IRunnable& runnable,
 void Thread::entryPoint( void* data ) noexcept
 {
     // Convert data arg to a pointer to a Thread Object
-    auto* myThreadPtr = static_cast<Thread*>(data);
+    auto* myThreadPtr = static_cast<Thread*>( data );
 
     // Plant the address the thread object into FreeRTOS's TCB
     vTaskSetApplicationTaskTag( myThreadPtr->m_nativeThreadHdl, (TaskHookFunction_t)myThreadPtr );
@@ -200,14 +199,13 @@ bool Kit::System::Thread::timedWait( uint32_t msecs ) noexcept
 }
 
 
-
 //////////////////////////////
-Kit::System::Thread* Kit::System::Thread::create( IRunnable&   runnable,
+Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
                                                   const char* name,
                                                   int         priority,
                                                   int         stackSize,
                                                   void*       stackPtr,
-                                                  bool        allowSimTicks )
+                                                  bool        allowSimTicks ) noexcept
 {
     return new ( std::nothrow ) Kit::System::FreeRTOS::Thread( runnable, name, priority, stackSize );
 }
@@ -226,6 +224,6 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
 }
 
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

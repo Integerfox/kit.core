@@ -62,7 +62,7 @@ void Semaphore::wait() noexcept
 }
 
 
-bool Semaphore::timedWait( unsigned long timeout ) noexcept
+bool Semaphore::timedWait( uint32_t timeout ) noexcept
 {
     return xSemaphoreTake( m_sema, timeout * portTICK_PERIOD_MS ) == pdTRUE;
 }
@@ -80,7 +80,7 @@ void Semaphore::waitInRealTime() noexcept
 }
 
 
-bool Semaphore::timedWaitInRealTime( unsigned long timeout ) noexcept
+bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
 {
     return xSemaphoreTake( m_sema, timeout * portTICK_PERIOD_MS ) == pdTRUE;
 }
