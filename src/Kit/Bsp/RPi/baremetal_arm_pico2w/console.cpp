@@ -8,6 +8,9 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+// Only has meaning when USE_BSP_KIT_IO_STREAM is defined
+#ifdef USE_BSP_KIT_IO_STREAM
+
 #include "Api.h"
 #include "Kit/Io/IInputOutput.h"
 #include "Kit/Io/Serial/RPi/RP2xxx/Uart/InputOutput.h"
@@ -37,3 +40,5 @@ Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_( void ) noexcept
 {
     return &consolefd_;
 }
+
+#endif  // USE_BSP_KIT_IO_STREAM

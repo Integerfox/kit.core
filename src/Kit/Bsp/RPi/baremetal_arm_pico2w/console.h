@@ -35,6 +35,8 @@
           in them and prevents circular dependencies issues.
 */
 
+// Only has meaning when USE_BSP_KIT_IO_STREAM is defined
+#ifdef USE_BSP_KIT_IO_STREAM
 #include "kit_config.h"
 #include "hardware/uart.h"
 
@@ -61,4 +63,5 @@ void Bsp_startConsoleStream( unsigned long baudRate = 115200,                   
                              ) noexcept;
                              
 /*----------------------------------------------------------------------------*/
+#endif  // USE_BSP_KIT_IO_STREAM
 #endif  // end header latch
