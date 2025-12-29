@@ -35,9 +35,9 @@
           in them and prevents circular dependencies issues.
 */
 
-// Only has meaning when USE_BSP_KIT_IO_STREAM is defined
-#ifdef USE_BSP_KIT_IO_STREAM
 #include "kit_config.h"
+#ifdef USE_BSP_KIT_IO_STREAM    // Only has meaning when USE_BSP_KIT_IO_STREAM is defined
+
 #include "hardware/uart.h"
 
 /** Default size of the software TX FIFO used by the console UART Stream

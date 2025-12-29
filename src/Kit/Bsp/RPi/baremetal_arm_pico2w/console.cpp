@@ -8,10 +8,10 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-// Only has meaning when USE_BSP_KIT_IO_STREAM is defined
-#ifdef USE_BSP_KIT_IO_STREAM
 
 #include "Api.h"
+#ifdef USE_BSP_KIT_IO_STREAM    // Only has meaning when USE_BSP_KIT_IO_STREAM is defined
+
 #include "Kit/Io/IInputOutput.h"
 #include "Kit/Io/Serial/RPi/RP2xxx/Uart/InputOutput.h"
 #include "Kit/Container/RingBufferAllocate.h"
