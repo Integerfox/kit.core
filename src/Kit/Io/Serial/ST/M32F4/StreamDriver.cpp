@@ -155,37 +155,6 @@ bool StreamDriver::write( const void* data, ByteCount_T numBytesToTx ) noexcept
         return true;
     }
 
-    // Pre-scheduler support:
-    // The interrupt-driven TX path relies on Kit::System::Thread primitives
-    // (e.g. Thread::wait()) to block when the FIFO is full. If the RTOS
-    // scheduler is not started (common during early boot or watchdog-reset
-    // detection paths), there is no safe way to block/yield.
-    //
-    // Use a blocking/polled transmit in this case so Trace/console output works
-    // before enableScheduling() is called.
-    if ( !Kit::System::isSchedulingEnabled() )
-    {
-        const uint8_t* ptr = static_cast<const uint8_t*>( data );
-        while ( numBytesToTx )
-        {
-            uint16_t chunk = 0xFFFFU;
-            if ( numBytesToTx < static_cast<ByteCount_T>( chunk ) )
-            {
-                chunk = static_cast<uint16_t>( numBytesToTx );
-            }
-
-            if ( HAL_UART_Transmit( m_uartHdl, const_cast<uint8_t*>( ptr ), chunk, 0xFFFFFFFFU ) != HAL_OK )
-            {
-                return false;
-            }
-
-            ptr += chunk;
-            numBytesToTx -= chunk;
-        }
-
-        return true;
-    }
-
     // Loop until all data has been transferred to the outbound buffer
     uint8_t* ptr = (uint8_t*)data;
     for ( ;; )

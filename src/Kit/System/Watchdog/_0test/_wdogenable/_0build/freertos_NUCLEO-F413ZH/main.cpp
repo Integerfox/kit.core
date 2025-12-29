@@ -32,33 +32,6 @@ int main( void )
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
 
-    KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "       BOOT SEQUENCE STARTED\r\n" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
-
-    // Check if this is a watchdog reset BEFORE starting the test
-    if ( __HAL_RCC_GET_FLAG( RCC_FLAG_IWDGRST ) != RESET )
-    {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "*** UNEXPECTED WATCHDOG RESET DETECTED ***\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Test FAILED - System was reset by watchdog\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-
-        __HAL_RCC_CLEAR_RESET_FLAGS();
-        Bsp_turn_on_debug1();
-
-        // Blink LED rapidly to indicate failure
-        for ( ;; )
-        {
-            Bsp_toggle_debug1();
-            HAL_Delay( 100 );
-        }
-    }
-
-    KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized\r\n" );
-
     // Run the platform-independent test (Note: This method should never return)
     runTests();
 

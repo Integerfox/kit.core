@@ -81,9 +81,6 @@ using namespace Kit::EventQueue;
 // Raw Thread Implementation
 //------------------------------------------------------------------------------
 
-/// Counter for raw thread to track when to get stuck
-static volatile uint32_t rawThreadCounter_ = 0;
-
 /// Flag to trigger the stuck condition
 static volatile bool triggerRawThreadStuck_ = false;
 
@@ -123,7 +120,6 @@ public:
 
             // Wait a bit (less than our watchdog timeout)
             sleep( 100 );
-            rawThreadCounter_ += 100;
         }
 
         // Now get stuck in a busy loop WITHOUT kicking the watchdog
@@ -241,54 +237,120 @@ static Server supervisorEventLoop_(
     &supervisorThreadWDogConfig_ );
 
 //------------------------------------------------------------------------------
+// Main Test Runnable (Runs in Raw Main Thread)
+//------------------------------------------------------------------------------
+
+/** Main test coordinator that runs in an initial raw thread (not watched).
+    This approach allows trace output before the scheduler starts, avoiding
+    the need for busy-wait serial driver logic.
+ */
+class MainTestRunnable : public IRunnable
+{
+public:
+    void entry() noexcept override
+    {
+        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       BOOT SEQUENCE STARTED\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
+
+        // Check if this is a watchdog reset BEFORE starting the test
+        if ( __HAL_RCC_GET_FLAG( RCC_FLAG_IWDGRST ) != RESET )
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "*** WATCHDOG RESET DETECTED ***\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Test PASSED - System was reset by watchdog\r\n" );
+
+            __HAL_RCC_CLEAR_RESET_FLAGS();
+
+            // Keep both LEDs on to indicate success
+            Bsp_turn_on_debug1();
+            Bsp_turn_on_debug2();
+
+            for ( ;; )
+            {
+                HAL_Delay( 1000 );
+            }
+        }
+
+        KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized\r\n" );
+
+        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n\r\n**** RAW THREAD STUCK TEST START ****\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw Thread Stuck Test Starting\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "HW Watchdog Timeout: %u ms\r\n", HW_WATCHDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw Thread Timeout: %u ms\r\n", RAW_THREAD_WDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Stuck Duration: %u ms\r\n", STUCK_DURATION_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "First run - setting up watchdog test\r\n" );
+
+        // Create and start the supervisor thread
+        auto* supervisorThread = Thread::create( supervisorEventLoop_, "SUPERVISOR" );
+        if ( !supervisorThread )
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create supervisor thread\r\n" );
+            FatalError::logf( Shutdown::eFAILURE, "Failed to create supervisor thread" );
+            return;
+        }
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor thread created\r\n" );
+
+        // Create and start the raw thread
+        auto* rawThread = Thread::create( rawThreadRunnable_, "RAW_THREAD" );
+        if ( !rawThread )
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create raw thread\r\n" );
+            FatalError::logf( Shutdown::eFAILURE, "Failed to create raw thread" );
+            return;
+        }
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread created\r\n" );
+
+        // Create and start the test monitor thread
+        auto* monitorThread = Thread::create( testMonitor_, "TEST_MONITOR" );
+        if ( !monitorThread )
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create test monitor thread\r\n" );
+            FatalError::logf( Shutdown::eFAILURE, "Failed to create test monitor thread" );
+            return;
+        }
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Test monitor thread created\r\n" );
+
+        // Main thread job is done - idle forever
+        for ( ;; )
+        {
+            sleep( 1000 );
+        }
+    }
+};
+
+//------------------------------------------------------------------------------
 // Core Test Function
 //------------------------------------------------------------------------------
+
+/// Main test runnable instance
+static MainTestRunnable mainTestRunnable_;
 
 /** Run the raw thread stuck test.
     This function is platform independent and can be called from platform-specific
     main() implementations.
+    
+    This creates an initial raw main thread that is NOT watched by the supervisor.
+    This allows trace output to work before the scheduler starts, without requiring
+    busy-wait serial driver logic.
+    
     @return True if test setup succeeded, false otherwise
  */
 bool runTests()
 {
-    KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n\r\n**** RAW THREAD STUCK TEST START ****\r\n" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Raw Thread Stuck Test Starting\r\n" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "HW Watchdog Timeout: %u ms\r\n", HW_WATCHDOG_TIMEOUT_MS );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Raw Thread Timeout: %u ms\r\n", RAW_THREAD_WDOG_TIMEOUT_MS );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Stuck Duration: %u ms\r\n", STUCK_DURATION_MS );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "First run - setting up watchdog test\r\n" );
-
-    // Create and start the supervisor thread
-    auto* supervisorThread = Thread::create( supervisorEventLoop_, "SUPERVISOR" );
-    if ( !supervisorThread )
+    // Create an initial raw main thread (not watched) to coordinate test setup
+    auto* mainThread = Thread::create( mainTestRunnable_, "MAIN" );
+    if ( !mainThread )
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create supervisor thread\r\n" );
-        FatalError::logf( Shutdown::eFAILURE, "Failed to create supervisor thread" );
+        // Can't use trace here since scheduler isn't started yet
+        FatalError::logf( Shutdown::eFAILURE, "Failed to create main thread" );
         return false;
     }
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor thread created\r\n" );
 
-    // Create and start the raw thread
-    auto* rawThread = Thread::create( rawThreadRunnable_, "RAW_THREAD" );
-    if ( !rawThread )
-    {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create raw thread\r\n" );
-        FatalError::logf( Shutdown::eFAILURE, "Failed to create raw thread" );
-        return false;
-    }
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread created\r\n" );
-
-    // Create and start the test monitor thread
-    auto* monitorThread = Thread::create( testMonitor_, "TEST_MONITOR" );
-    if ( !monitorThread )
-    {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create test monitor thread\r\n" );
-        FatalError::logf( Shutdown::eFAILURE, "Failed to create test monitor thread" );
-        return false;
-    }
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Test monitor thread created\r\n" );
-    
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Starting scheduler...\r\n" );
+    // Start the scheduler - control transfers to mainTestRunnable_.entry()
     enableScheduling();
 
     // Should never reach here
