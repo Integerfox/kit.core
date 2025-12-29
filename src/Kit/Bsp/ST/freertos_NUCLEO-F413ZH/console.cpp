@@ -9,7 +9,7 @@
 /** @file */
 
 #include "Api.h"
-#include "stdio.h"
+#include "console.h"
 #include "Kit/Container/RingBufferAllocate.h"
 #include "Kit/Io/Serial/ST/M32F4/InputOutput.h"
 #include "Kit/System/Trace.h"
