@@ -1,5 +1,5 @@
-#ifndef BSP_STM32_NUCLEO_F413ZH_API_H_
-#define BSP_STM32_NUCLEO_F413ZH_API_H_
+#ifndef BSP_STM32_FREERTOS_NUCLEO_F413ZH_API_H_
+#define BSP_STM32_FREERTOS_NUCLEO_F413ZH_API_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -68,7 +68,7 @@
 /// Generic API
 #define Bsp_nop_MAP() __asm( "nop" )
 
-/// Generic API
+/// Generic API. This method only applies when there is actual RTOS
 #define Bsp_yield_on_exit_MAP( r ) portYIELD_FROM_ISR( r )
 
 /// Generic API

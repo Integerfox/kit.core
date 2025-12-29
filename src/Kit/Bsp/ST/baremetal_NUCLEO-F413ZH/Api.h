@@ -18,8 +18,8 @@
 
 
     DO NOT include this file directly! Instead include the generic BSP
-    interface - src/Bsp/Api.h - and then configure your project's
-    'colony_map.h' to include THIS file.
+    interface - src/Kit/Bsp/Api.h - and then configure your project's
+    'kit_map.h' to include THIS file.
 
 *----------------------------------------------------------------------------*/
 
@@ -31,7 +31,9 @@
 #include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/adc.h"    // Access the AIN handles/instances
 #include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/spi.h"    // Access the SPI handles/instances
 
-
+#ifdef ENABLE_BSP_SEGGER_SYSVIEW
+#include "SEGGER_SYSVIEW.h"  // Expose (to the application) the SYSVIEW APIs when enabled
+#endif
 
 //////////////////////////////////////////////////////////
 /// ARM Specific APIs
