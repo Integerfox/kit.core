@@ -8,10 +8,10 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     By default the BSP provides a KIT IO Stream for application' console.  The
-    application can disabled the IO Stream by defining the macro 
+    application can disabled the IO Stream by defining the macro
     USE_BSP_USE_PRINTF.  When the macro is used the C's library's printf()
     output will be send to the UART directly and the KIT IO stream (g_bspConsoleStream)
     will not be available.
@@ -19,32 +19,39 @@
     NOTE: When USE_BSP_USE_PRINTF, the C library buffers the printf output, i.e.
           output is not sent until a newline is encountered the output stream
 
-    NOTE: Since the BSP is for a bare-metal platform, there are no threads,
-          which means blocking-wait semantics become BUSY-WAIT semantics.
-          Use the console IO stream with care! Always call available() before
-          reading data.
-*/
+    The underlying KIT IO Stream is indirectly exposed/available in the global
+    namespace as g_bspConsoleStream.  To get access, you code must include the
+    following statement:
+    \code
+        extern Kit::Io::IInputOutput& g_bspConsoleStream;
+    \endcode
+
+    NOTE: Exposing the console stream avoids the BSP header files have a C++ code
+          in them and prevents circular dependencies issues.
+ */
 
 #include "kit_config.h"
-#include "Kit/Io/Serial/ST/M32F4/InputOutput.h"
+#include "Kit/Bsp/Api.h"
 
 /** Default size of the software TX FIFO used by the console UART Stream
  */
 #ifndef OPTION_BSP_CONSOLE_TX_FIFO_SIZE
-#define OPTION_BSP_CONSOLE_TX_FIFO_SIZE     1024
+#define OPTION_BSP_CONSOLE_TX_FIFO_SIZE 1024
 #endif
 
- /** Default size of the software RX FIFO used by the console UART Stream
-  */
+/** Default size of the software RX FIFO used by the console UART Stream
+ */
 #ifndef OPTION_BSP_CONSOLE_RX_FIFO_SIZE
-#define OPTION_BSP_CONSOLE_RX_FIFO_SIZE     1024
+#define OPTION_BSP_CONSOLE_RX_FIFO_SIZE 1024
 #endif
 
 
+/// Starts the console stream (must be called before using the console stream)
+void Bsp_startConsoleStream( IRQn_Type           uartIrqNum,
+                             UART_HandleTypeDef* uartHdlToUse ) noexcept;
 
-#ifndef USE_BSP_USE_PRINTF
-/// Expose the Console stream
-extern Kit::Io::Serial::ST::M32F4::InputOutput   g_bspConsoleStream;
-#endif
+
+/// Get the console stream's RX error counts and optionally clear the counts
+size_t Bsp_getConsoleStreamErrorCounts( bool clearCounts );
 
 #endif  // end header latch
