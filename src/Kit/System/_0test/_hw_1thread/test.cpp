@@ -36,6 +36,10 @@ namespace {
 #define OPTION_TEST_LED_DELAY_TIME_MS 500
 #endif
 
+/// Tolerance multiplier for time measurements
+#ifndef OPTION_TEST_TIME_TOLERANCE_MULTIPLIER
+#define OPTION_TEST_TIME_TOLERANCE_MULTIPLIER 1.25
+#endif
 
 class MyEventLoop : public Kit::System::EventLoop, public Kit::System::Timer
 {
@@ -69,31 +73,40 @@ public:
         // Verify the many of the thread scheduling APIs work as expected
         if ( isSchedulingEnabled() == false )
         {
-            FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Scheduling NOT enabled at thread start",
-                              Thread::myName() );
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Scheduling NOT enabled at thread start",
+                                  Thread::myName() );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
+            FatalError::logf( Shutdown::eFAILURE, "Scheduling NOT enabled at thread start" );
             return;
         }
         suspendScheduling();
         resumeScheduling();
         if ( isSchedulingEnabled() == false )
         {
-            FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Scheduling NOT enabled after resumeScheduling()",
-                              Thread::myName() );
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Scheduling NOT enabled after resumeScheduling()",
+                                  Thread::myName() );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
+            FatalError::logf( Shutdown::eFAILURE, "Scheduling NOT enabled after resumeScheduling()" );
             return;
         }
 
         uint32_t now = ElapsedTime::milliseconds();
         sleep( OPTION_TEST_LED_DELAY_TIME_MS );
         uint32_t elapsed = ElapsedTime::deltaMilliseconds( now, ElapsedTime::milliseconds() );
-        if ( elapsed < OPTION_TEST_LED_DELAY_TIME_MS || elapsed > ( (uint32_t)( OPTION_TEST_LED_DELAY_TIME_MS * 1.25 ) ) )
+        if ( elapsed < OPTION_TEST_LED_DELAY_TIME_MS || elapsed > ( (uint32_t)( OPTION_TEST_LED_DELAY_TIME_MS * OPTION_TEST_TIME_TOLERANCE_MULTIPLIER ) ) )
         {
-            FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Bad sleep duration (%" PRIu32 " ms). Expected around %" PRIu32 " ms",
-                              Thread::myName(),
-                              elapsed,
-                              (uint32_t)OPTION_TEST_LED_DELAY_TIME_MS );
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Bad sleep duration (%" PRIu32 " ms). Expected around %" PRIu32 " ms",
+                                  Thread::myName(),
+                                  elapsed,
+                                  (uint32_t)OPTION_TEST_LED_DELAY_TIME_MS );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
+            FatalError::logf( Shutdown::eFAILURE, "Bad sleep duration" );
             return;
         }
 
@@ -101,9 +114,12 @@ public:
         bool result = Thread::tryWait();
         if ( result == true )
         {
-            FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Thread::tryWait() returned true unexpectedly",
-                              Thread::myName() );
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Thread::tryWait() returned true unexpectedly",
+                                  Thread::myName() );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
+            FatalError::logf( Shutdown::eFAILURE, "Thread::tryWait() returned true unexpectedly" );
             return;
         }
         Thread::getCurrent().signal();
@@ -113,31 +129,42 @@ public:
         result = Thread::tryWait();
         if ( result == true )
         {
-            FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Thread::tryWait() returned true unexpectedly (wait() did not decrement the count or signal() didn't increment the count correctly)",
-                              Thread::myName() );
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Thread::tryWait() returned true unexpectedly (wait() did not decrement the count or signal() didn't increment the count correctly)",
+                                  Thread::myName() );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
+            FatalError::logf( Shutdown::eFAILURE, "Thread::tryWait() returned true unexpectedly" );
             return;
         }
         Thread::getCurrent().signal();
         result = Thread::tryWait();
         if ( result == false )
         {
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Thread::tryWait() returned false unexpectedly (after signal())",
+                                  Thread::myName() );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
             FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Thread::tryWait() returned false unexpectedly (after signal())",
-                              Thread::myName() );
+                              "Thread::tryWait() returned false unexpectedly" );
             return;
         }
 
         now = ElapsedTime::milliseconds();
         Thread::timedWait( OPTION_TEST_LED_DELAY_TIME_MS );
         elapsed = ElapsedTime::deltaMilliseconds( now, ElapsedTime::milliseconds() );
-        if ( elapsed < OPTION_TEST_LED_DELAY_TIME_MS || elapsed > ( (uint32_t)( OPTION_TEST_LED_DELAY_TIME_MS * 1.25 ) ) )
+        if ( elapsed < OPTION_TEST_LED_DELAY_TIME_MS || elapsed > ( (uint32_t)( OPTION_TEST_LED_DELAY_TIME_MS * OPTION_TEST_TIME_TOLERANCE_MULTIPLIER ) ) )
         {
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Bad Thread::timedWait duration (%" PRIu32 " ms). Expected around %" PRIu32 " ms",
+                                  Thread::myName(),
+                                  elapsed,
+                                  (uint32_t)OPTION_TEST_LED_DELAY_TIME_MS );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
             FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Bad Thread::timedWait duration (%" PRIu32 " ms). Expected around %" PRIu32 " ms",
-                              Thread::myName(),
-                              elapsed,
-                              (uint32_t) OPTION_TEST_LED_DELAY_TIME_MS );
+                              "Bad Thread::timedWait duration" );
             return;
         }
 
@@ -179,7 +206,7 @@ public:
         KIT_SYSTEM_TRACE_MSG( SECT_,
                               "(%s) Timer expired. TLS Counter=%" PRIu32,
                               Thread::myName(),
-                              (uint32_t) m_tlsCounter );
+                              (uint32_t)m_tlsCounter );
 
         // Exit the "loop"
         if ( m_tlsCounter >= m_maxCount )
@@ -192,19 +219,25 @@ public:
         size_t* tlsPtr = (size_t*)m_tlsKey.get();
         if ( tlsPtr == nullptr )
         {
-            FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Bad TLS value (nullptr)",
-                              Thread::myName() );
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Bad TLS value (nullptr)",
+                                  Thread::myName() );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
+            FatalError::logf( Shutdown::eFAILURE, "Bad TLS value (nullptr)" );
             pleaseStop();
             return;
         }
         if ( *tlsPtr != m_tlsCounter )
         {
-            FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Bad TLS value (%p) - should be (%p)",
-                              Thread::myName(),
-                              (void*)*tlsPtr,
-                              (void*)m_tlsCounter );
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Bad TLS value (%p) - should be (%p)",
+                                  Thread::myName(),
+                                  (void*)*tlsPtr,
+                                  (void*)m_tlsCounter );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
+            FatalError::logf( Shutdown::eFAILURE, "Bad TLS value" );
             pleaseStop();
             return;
         }
@@ -216,19 +249,21 @@ public:
 
         // Validate the timer interval
         uint32_t elapsed = ElapsedTime::deltaMilliseconds( m_timeMarker, now );
-        if ( elapsed < OPTION_TEST_LED_DELAY_TIME_MS || elapsed > ( (uint32_t)( OPTION_TEST_LED_DELAY_TIME_MS * 1.25 ) ) )
+        if ( elapsed < OPTION_TEST_LED_DELAY_TIME_MS || elapsed > ( (uint32_t)( OPTION_TEST_LED_DELAY_TIME_MS * OPTION_TEST_TIME_TOLERANCE_MULTIPLIER ) ) )
         {
-            FatalError::logf( Shutdown::eFAILURE,
-                              "(%s) Bad Timer duration (%" PRIu32 " ms). Expected around %" PRIu32 " ms",
-                              Thread::myName(),
-                              elapsed,
-                              (uint32_t) OPTION_TEST_LED_DELAY_TIME_MS );
+            // Display error message -->and add wait to allow message to be sent before FatalError halts the system
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                                  "(%s) Bad Timer duration (%" PRIu32 " ms). Expected around %" PRIu32 " ms",
+                                  Thread::myName(),
+                                  elapsed,
+                                  (uint32_t)OPTION_TEST_LED_DELAY_TIME_MS );
+            Kit::System::sleep( OPTION_TEST_LED_DELAY_TIME_MS );
+            FatalError::logf( Shutdown::eFAILURE, "Bad Timer duration" );
             pleaseStop();
             return;
         }
         m_timeMarker = now;
-        Timer::start( (uint32_t) OPTION_TEST_LED_DELAY_TIME_MS );
-        sleep( (uint32_t) OPTION_TEST_LED_DELAY_TIME_MS );
+        Timer::start( (uint32_t)OPTION_TEST_LED_DELAY_TIME_MS );
     }
 
     void toggleLED()

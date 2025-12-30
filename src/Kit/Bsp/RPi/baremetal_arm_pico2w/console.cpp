@@ -10,12 +10,14 @@
 
 
 #include "Api.h"
-#ifdef USE_BSP_KIT_IO_STREAM    // Only has meaning when USE_BSP_KIT_IO_STREAM is defined
-
+#include "Kit/System/Trace.h"
 #include "Kit/Io/IInputOutput.h"
+
+// Use Blocking UART stream for the KIT console/trace output
+#ifdef USE_BSP_KIT_IO_STREAM    
+
 #include "Kit/Io/Serial/RPi/RP2xxx/Uart/InputOutput.h"
 #include "Kit/Container/RingBufferAllocate.h"
-#include "Kit/System/Trace.h"
 
 static Kit::Container::RingBufferAllocate<uint8_t, OPTION_BSP_CONSOLE_TX_FIFO_SIZE + 1> txFifo_;
 static Kit::Container::RingBufferAllocate<uint8_t, OPTION_BSP_CONSOLE_RX_FIFO_SIZE + 1> rxFifo_;
@@ -41,4 +43,18 @@ Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_( void ) noexcept
     return &consolefd_;
 }
 
+// Use busy-wait stdio stream for the KIT console/trace output
+#else
+
+#include "Kit/Io/Serial/RPi/RP2xxx/Stdio/Output.h"
+
+static Kit::Io::Serial::RPi::RP2xxx::Stdio::Output stdioOutput_;
+
+// Global console stream object
+//Kit::Io::IInputOutput& g_bspConsoleStream = &stdioOutput_;
+
+Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_( void ) noexcept
+{
+    return &stdioOutput_;
+}
 #endif  // USE_BSP_KIT_IO_STREAM
