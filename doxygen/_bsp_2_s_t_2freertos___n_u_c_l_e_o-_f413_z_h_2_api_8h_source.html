@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 240-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 252-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -48,8 +48,8 @@ $(function() {
   <div class="headertitle"><div class="title">Api.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef BSP_STM32_NUCLEO_F413ZH_API_H_</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define BSP_STM32_NUCLEO_F413ZH_API_H_</span></div>
+<a href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef BSP_STM32_FREERTOS_NUCLEO_F413ZH_API_H_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define BSP_STM32_FREERTOS_NUCLEO_F413ZH_API_H_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">/*------------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright Integer Fox Authors</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *</span></div>
@@ -68,8 +68,8 @@ $(function() {
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">    DO NOT include this file directly! Instead include the generic BSP</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">    interface - src/Bsp/Api.h - and then configure your project&#39;s</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">    &#39;colony_map.h&#39; to include THIS file.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">    interface - src/Kit/Bsp/Api.h - and then configure your project&#39;s</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">    &#39;kit_map.h&#39; to include THIS file.</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">*----------------------------------------------------------------------------*/</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
@@ -81,7 +81,7 @@ $(function() {
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;Kit/Bsp/ST/freertos_NUCLEO-F413ZH/MX/Core/Inc/i2c.h&quot;</span>    <span class="comment">// Access the I2C handles/instances</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &quot;Kit/Bsp/ST/freertos_NUCLEO-F413ZH/MX/Core/Inc/adc.h&quot;</span>    <span class="comment">// Access the AIN handles/instances</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;Kit/Bsp/ST/freertos_NUCLEO-F413ZH/MX/Core/Inc/spi.h&quot;</span>    <span class="comment">// Access the SPI handles/instances</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;<a class="code" href="_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2console_8h.html">Kit/Bsp/ST/freertos_NUCLEO-F413ZH/console.h</a>&quot;</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#ifdef ENABLE_BSP_SEGGER_SYSVIEW</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#include &quot;SEGGER_SYSVIEW.h&quot;</span>  <span class="comment">// Expose (to the application) the SYSVIEW APIs when enabled</span></div>
@@ -118,60 +118,54 @@ $(function() {
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">/// Generic API</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#af74c8d3148f8317ac3a8aa1e441ed061">   69</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_nop_MAP() __asm( &quot;nop&quot; )</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a0196bced3108fdcd983e917ffd15f325">   72</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_disable_irqs_MAP() __disable_irq()</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">/// Generic API. This method only applies when there is actual RTOS</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a3ce6dae6bbf15af162eb365e227cf437">   72</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_yield_on_exit_MAP( r ) portYIELD_FROM_ISR( r )</span></div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"></span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">/// Generic API (with memory barrier protection)</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a855f10343eee59e1f0a8e007cd1495ec">   75</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_enable_irqs_MAP() \</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">    do                        \</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">    {                         \</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor">        __enable_irq();       \</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">        __ISB();              \</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">    }                         \</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">    while ( 0 )</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"></span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a3344ad767432680cc293da7d4ca4fcef">   84</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_push_and_disable_irqs_MAP() Bsp_disable_irqs_MAP()  </span><span class="comment">// FIXME: This really needs to PUSH the IRQ state!!!</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">/// Generic API</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a0196bced3108fdcd983e917ffd15f325">   75</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_disable_irqs_MAP() __disable_irq()</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">/// Generic API (with memory barrier protection)</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a855f10343eee59e1f0a8e007cd1495ec">   78</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_enable_irqs_MAP() \</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">    do                        \</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">    {                         \</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="preprocessor">        __enable_irq();       \</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">        __ISB();              \</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">    }                         \</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">    while ( 0 )</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#af9e0c22e4f3a3c43d06786566e3d3017">   87</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_pop_irqs_MAP() Bsp_enable_irqs_MAP()  </span><span class="comment">// FIXME: This really needs to POP the IRQ state!!!!</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment"></span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a8ec204572b9f49f4e930c76be5b4602b">   91</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_turn_on_debug1_MAP() HAL_GPIO_WritePin( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET )</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a3344ad767432680cc293da7d4ca4fcef">   87</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_push_and_disable_irqs_MAP() Bsp_disable_irqs_MAP()  </span><span class="comment">// FIXME: This really needs to PUSH the IRQ state!!!</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">/// Generic API</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#af9e0c22e4f3a3c43d06786566e3d3017">   90</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_pop_irqs_MAP() Bsp_enable_irqs_MAP()  </span><span class="comment">// FIXME: This really needs to POP the IRQ state!!!!</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"></span> </div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#af40c8d1fe79f4e83d81b0d9542fcafa6">   94</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_turn_off_debug1_MAP() HAL_GPIO_WritePin( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET )</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a8ec204572b9f49f4e930c76be5b4602b">   94</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_turn_on_debug1_MAP() HAL_GPIO_WritePin( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET )</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"></span> </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#af5cf36d9316323e5b52775aa0d46ad1b">   97</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_toggle_debug1_MAP() HAL_GPIO_TogglePin( LD1_GPIO_Port, LD1_Pin )</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"></span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a3ab86a5760fb0a9e63255432fc639665">  101</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_turn_on_debug2_MAP() HAL_GPIO_WritePin( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET )</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#af40c8d1fe79f4e83d81b0d9542fcafa6">   97</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_turn_off_debug1_MAP() HAL_GPIO_WritePin( LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET )</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment"></span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">/// Generic API</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#af5cf36d9316323e5b52775aa0d46ad1b">  100</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_toggle_debug1_MAP() HAL_GPIO_TogglePin( LD1_GPIO_Port, LD1_Pin )</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"></span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a0916bb9bf707367b4f094eddb4cdac60">  104</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_turn_off_debug2_MAP() HAL_GPIO_WritePin( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET )</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a3ab86a5760fb0a9e63255432fc639665">  104</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_turn_on_debug2_MAP() HAL_GPIO_WritePin( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET )</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"></span> </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">/// Generic API</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#abd356a3f9776962d8f7255b3688ac2f6">  107</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_toggle_debug2_MAP() HAL_GPIO_TogglePin( LD2_GPIO_Port, LD2_Pin )</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"></span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment">//////////////////////////////////////////////////////////</span></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">/// FreeRTOS specific APIs</span></div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">//////////////////////////////////////////////////////////</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"></span><span class="comment"></span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">/** This method informs the schedule that a context switch is required on exit</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">    from the ISR.  The &#39;r&#39; argument is the result for the su_signal() call.</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a8b3d71caf3cf5597576a5dd3e25e60ee">  117</a></span><span class="preprocessor">#define Bsp_yield_on_exit( r ) portYIELD_FROM_ISR( r )</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#a0916bb9bf707367b4f094eddb4cdac60">  107</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_turn_off_debug2_MAP() HAL_GPIO_WritePin( LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET )</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"></span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">/// Generic API</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="_bsp_2_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2_api_8h.html#abd356a3f9776962d8f7255b3688ac2f6">  110</a></span><span class="comment"></span><span class="preprocessor">#define Bsp_toggle_debug2_MAP() HAL_GPIO_TogglePin( LD2_GPIO_Port, LD2_Pin )</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="ttc" id="a_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2console_8h_html"><div class="ttname"><a href="_s_t_2freertos___n_u_c_l_e_o-_f413_z_h_2console_8h.html">console.h</a></div><div class="ttdoc">By default the BSP provides a KIT IO Stream for application' console.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 25 2025 15:42:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jan 1 2026 20:37:34 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

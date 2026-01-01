@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 240-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 252-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -238,7 +238,7 @@ $(function() {
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment">    /// Constructor</span></div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment"></span>    DmMailbox( <a class="code hl_class" href="class_kit_1_1_system_1_1_semaphore.html">Kit::System::Semaphore</a>&amp;              signalToNotify,</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>               <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>                        timingTickInMsec = OPTION_CPL_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>               <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>                        timingTickInMsec = <a class="code hl_define" href="_event_loop_8h.html#a96b9b7b4fc83c760d364e7aed2f1ebcf">OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD</a>,</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>               Kit::System::SharedEventHandlerApi*  eventHandler     = 0)</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        : MailboxServer( timingTickInMsec, eventHandler )</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        , m_sema( signalToNotify )</div>
@@ -293,7 +293,7 @@ $(function() {
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="comment">    /// Constructor</span></div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="comment"></span>    ItcMailbox( <a class="code hl_class" href="class_kit_1_1_system_1_1_semaphore.html">Kit::System::Semaphore</a>&amp;              signalToNotify,</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>                <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>                        timingTickInMsec = OPTION_CPL_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>                <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>                        timingTickInMsec = <a class="code hl_define" href="_event_loop_8h.html#a96b9b7b4fc83c760d364e7aed2f1ebcf">OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD</a>,</div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                Kit::System::SharedEventHandlerApi*  eventHandler     = 0 )</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        : MailboxServer( timingTickInMsec, eventHandler )</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        , m_sema( signalToNotify )</div>
@@ -469,6 +469,7 @@ $(function() {
 <div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span> </div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="ttc" id="a_event_loop_8h_html_a96b9b7b4fc83c760d364e7aed2f1ebcf"><div class="ttname"><a href="_event_loop_8h.html#a96b9b7b4fc83c760d364e7aed2f1ebcf">OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD</a></div><div class="ttdeci">#define OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD</div><div class="ttdoc">Specifies the default timeout period for waiting on a event.</div><div class="ttdef"><b>Definition</b> EventLoop.h:25</div></div>
 <div class="ttc" id="a_i_input_8h_html"><div class="ttname"><a href="_i_input_8h.html">IInput.h</a></div></div>
 <div class="ttc" id="a_sim_tick_8h_html"><div class="ttname"><a href="_sim_tick_8h.html">SimTick.h</a></div></div>
 <div class="ttc" id="a_system_2_api_8h_html"><div class="ttname"><a href="_system_2_api_8h.html">Api.h</a></div><div class="ttdoc">This file defines methods for initializing the KIT C++ class library and other startup/init actions.</div></div>
@@ -484,7 +485,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 25 2025 15:42:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jan 1 2026 20:37:34 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

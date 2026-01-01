@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-25 15:46:09</td>
+            <td class="headerValue">2026-01-01 20:41:03</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -207,7 +207,7 @@
 <span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">           4 :     return Format::string( binaryData, len, destString, true );</span></span>
 <span id="L146"><span class="lineNum">     146</span>                 :             : }</span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : </span>
-<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">        5844 : bool Format::formatMsec( IString&amp;  buffer,</span></span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">        5843 : bool Format::formatMsec( IString&amp;  buffer,</span></span>
 <span id="L149"><span class="lineNum">     149</span>                 :             :                          long long elapsedMsec,</span>
 <span id="L150"><span class="lineNum">     150</span>                 :             :                          bool      encodeMsec,</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :                          bool      encodeDay,</span>
@@ -217,30 +217,30 @@
 <span id="L155"><span class="lineNum">     155</span>                 :             :     lldiv_t   result;</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             : </span>
 <span id="L157"><span class="lineNum">     157</span>                 :             :     // Separate seconds and milliseconds</span>
-<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC">        5844 :     result                = lldiv( elapsedMsec, 1000LL );</span></span>
+<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC">        5843 :     result                = lldiv( elapsedMsec, 1000LL );</span></span>
 <span id="L159"><span class="lineNum">     159</span>                 :             :     long long msec        = result.rem;</span>
 <span id="L160"><span class="lineNum">     160</span>                 :             :     long long elapsedSecs = result.quot;</span>
 <span id="L161"><span class="lineNum">     161</span>                 :             : </span>
 <span id="L162"><span class="lineNum">     162</span>                 :             :     // Get hours</span>
-<span id="L163"><span class="lineNum">     163</span>                 :<span class="tlaGNC">        5844 :     result = lldiv( elapsedSecs, 60L * 60LL );</span></span>
+<span id="L163"><span class="lineNum">     163</span>                 :<span class="tlaGNC">        5843 :     result = lldiv( elapsedSecs, 60L * 60LL );</span></span>
 <span id="L164"><span class="lineNum">     164</span>                 :             :     hh     = result.quot;</span>
 <span id="L165"><span class="lineNum">     165</span>                 :             :     t      = result.rem;</span>
 <span id="L166"><span class="lineNum">     166</span>                 :             : </span>
 <span id="L167"><span class="lineNum">     167</span>                 :             :     // Get Minutes &amp; Seconds</span>
-<span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">        5844 :     result = lldiv( t, 60L );</span></span>
+<span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">        5843 :     result = lldiv( t, 60L );</span></span>
 <span id="L169"><span class="lineNum">     169</span>                 :             :     mm     = result.quot;</span>
 <span id="L170"><span class="lineNum">     170</span>                 :             :     ss     = result.rem;</span>
 <span id="L171"><span class="lineNum">     171</span>                 :             : </span>
 <span id="L172"><span class="lineNum">     172</span>                 :             :     // Format string</span>
-<span id="L173"><span class="lineNum">     173</span>         [<span class="tlaGBC" title="Branch 0 was taken 5840 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">        5844 :     if ( encodeDay )</span></span>
+<span id="L173"><span class="lineNum">     173</span>         [<span class="tlaGBC" title="Branch 0 was taken 5839 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">        5843 :     if ( encodeDay )</span></span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :     {</span>
-<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">        5840 :         result = lldiv( hh, 24LL );</span></span>
+<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">        5839 :         result = lldiv( hh, 24LL );</span></span>
 <span id="L176"><span class="lineNum">     176</span>                 :             :         dd     = result.quot;</span>
 <span id="L177"><span class="lineNum">     177</span>                 :             :         hh     = result.rem;</span>
 <span id="L178"><span class="lineNum">     178</span>                 :             : </span>
-<span id="L179"><span class="lineNum">     179</span>         [<span class="tlaGBC" title="Branch 0 was taken 5837 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">        5840 :         if ( encodeMsec )</span></span>
+<span id="L179"><span class="lineNum">     179</span>         [<span class="tlaGBC" title="Branch 0 was taken 5836 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">        5839 :         if ( encodeMsec )</span></span>
 <span id="L180"><span class="lineNum">     180</span>                 :             :         {</span>
-<span id="L181"><span class="lineNum">     181</span>                 :<span class="tlaGNC">        5837 :             buffer.formatOpt( appendToString,</span></span>
+<span id="L181"><span class="lineNum">     181</span>                 :<span class="tlaGNC">        5836 :             buffer.formatOpt( appendToString,</span></span>
 <span id="L182"><span class="lineNum">     182</span>                 :             :                               &quot;%02u %02u:%02u:%02u.%03u&quot;,</span>
 <span id="L183"><span class="lineNum">     183</span>                 :             :                               static_cast&lt;unsigned&gt;( dd ),</span>
 <span id="L184"><span class="lineNum">     184</span>                 :             :                               static_cast&lt;unsigned&gt;( hh ),</span>
@@ -279,7 +279,7 @@
 <span id="L217"><span class="lineNum">     217</span>                 :             :         }</span>
 <span id="L218"><span class="lineNum">     218</span>                 :             :     }</span>
 <span id="L219"><span class="lineNum">     219</span>                 :             : </span>
-<span id="L220"><span class="lineNum">     220</span>                 :<span class="tlaGNC">        5844 :     return !buffer.truncated();</span></span>
+<span id="L220"><span class="lineNum">     220</span>                 :<span class="tlaGNC">        5843 :     return !buffer.truncated();</span></span>
 <span id="L221"><span class="lineNum">     221</span>                 :             : }</span>
 <span id="L222"><span class="lineNum">     222</span>                 :             : </span>
 <span id="L223"><span class="lineNum">     223</span>                 :             : </span>

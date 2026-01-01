@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 240-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 252-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -167,11 +167,11 @@ $(function() {
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_thread.html#a53d9bfee3825dc5a228ecd17a2922da1">  117</a></span>    static <a class="code hl_class" href="class_kit_1_1_system_1_1_thread.html">Thread</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_thread.html#a53d9bfee3825dc5a228ecd17a2922da1">getCurrent</a>() noexcept;</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"></span> </div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">    /** Special version of getCurrent().  getCurrent() will trigger a FATAL error</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">        when called from a NON CPL thread.  tryGetCurrent() will return a nullptr</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">        when it detects that the current thread is NOT a CPL thread.</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">        when called from a NON KIT thread.  tryGetCurrent() will return a nullptr</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">        when it detects that the current thread is NOT a KIT thread.</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment"></span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">        This method should ONLY be used when your application has mix of CPL and</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">        non-CPL threads, i.e. the default should be to use getCurrent().</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">        This method should ONLY be used when your application has mix of KIT and</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">        non-KIT threads, i.e. the default should be to use getCurrent().</span></div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">     */</span></div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_thread.html#a228748591aa2986620c3c50c3f820fc9">  126</a></span>    static <a class="code hl_class" href="class_kit_1_1_system_1_1_thread.html">Thread</a>* <a class="code hl_function" href="class_kit_1_1_system_1_1_thread.html#a228748591aa2986620c3c50c3f820fc9">tryGetCurrent</a>() noexcept;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"></span> </div>
@@ -424,7 +424,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 25 2025 15:42:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jan 1 2026 20:37:34 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

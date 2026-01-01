@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 240-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 252-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -842,8 +842,8 @@ o This method only deletes/destroys the Thread instance -- it does
 </div><div class="memdoc">
 
 <p>Special version of <a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1" title="This method returns a reference to the currently executing thread.">getCurrent()</a>. </p>
-<p><a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1" title="This method returns a reference to the currently executing thread.">getCurrent()</a> will trigger a FATAL error when called from a NON CPL thread. <a class="el" href="#a228748591aa2986620c3c50c3f820fc9" title="Special version of getCurrent().">tryGetCurrent()</a> will return a nullptr when it detects that the current thread is NOT a CPL thread.</p>
-<p>This method should ONLY be used when your application has mix of CPL and non-CPL threads, i.e. the default should be to use <a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1" title="This method returns a reference to the currently executing thread.">getCurrent()</a>. </p>
+<p><a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1" title="This method returns a reference to the currently executing thread.">getCurrent()</a> will trigger a FATAL error when called from a NON KIT thread. <a class="el" href="#a228748591aa2986620c3c50c3f820fc9" title="Special version of getCurrent().">tryGetCurrent()</a> will return a nullptr when it detects that the current thread is NOT a KIT thread.</p>
+<p>This method should ONLY be used when your application has mix of KIT and non-KIT threads, i.e. the default should be to use <a class="el" href="#a53d9bfee3825dc5a228ecd17a2922da1" title="This method returns a reference to the currently executing thread.">getCurrent()</a>. </p>
 
 </div>
 </div>
@@ -1005,7 +1005,7 @@ o This method only deletes/destroys the Thread instance -- it does
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 25 2025 15:42:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jan 1 2026 20:37:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 240-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 252-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -123,7 +123,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a72cfe00d05a4fb5f249b5fbb81a8e129" id="r_a72cfe00d05a4fb5f249b5fbb81a8e129"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72cfe00d05a4fb5f249b5fbb81a8e129">makeNativeMainThreadAKitThread</a> () noexcept</td></tr>
-<tr class="memdesc:a72cfe00d05a4fb5f249b5fbb81a8e129"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is helper method to 'convert' the first/main <a class="el" href="namespace_kit_1_1_system_1_1_free_r_t_o_s.html" title="Concrete implementation of the platform specific classes/features of the Kit::System namespace interf...">FreeRTOS</a> thread to a CPL thread.  <br /></td></tr>
+<tr class="memdesc:a72cfe00d05a4fb5f249b5fbb81a8e129"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is helper method to 'convert' the first/main <a class="el" href="namespace_kit_1_1_system_1_1_free_r_t_o_s.html" title="Concrete implementation of the platform specific classes/features of the Kit::System namespace interf...">FreeRTOS</a> thread to a KIT thread.  <br /></td></tr>
 <tr class="separator:a72cfe00d05a4fb5f249b5fbb81a8e129"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_class_kit_1_1_system_1_1_thread"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_class_kit_1_1_system_1_1_thread')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="class_kit_1_1_system_1_1_thread.html">Kit::System::Thread</a></td></tr>
 <tr class="memitem:ad96eb17f995caf9354ef066b4bc16c63 inherit pub_static_methods_class_kit_1_1_system_1_1_thread" id="r_ad96eb17f995caf9354ef066b4bc16c63"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_system_1_1_thread.html">Thread</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_thread.html#ad96eb17f995caf9354ef066b4bc16c63">create</a> (<a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a> &amp;runnable, const char *name, int priority=<a class="el" href="_thread_8h.html#ac880fe51a701f3ea6b1c2085ee78cdb6">KIT_SYSTEM_THREAD_PRIORITY_NORMAL</a>, int stackSize=0, void *stackPtr=0, bool allowSimTicks=true) noexcept</td></tr>
@@ -424,7 +424,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This is helper method to 'convert' the first/main <a class="el" href="namespace_kit_1_1_system_1_1_free_r_t_o_s.html" title="Concrete implementation of the platform specific classes/features of the Kit::System namespace interf...">FreeRTOS</a> thread to a CPL thread. </p>
+<p>This is helper method to 'convert' the first/main <a class="el" href="namespace_kit_1_1_system_1_1_free_r_t_o_s.html" title="Concrete implementation of the platform specific classes/features of the Kit::System namespace interf...">FreeRTOS</a> thread to a KIT thread. </p>
 <p>The method can be called many times - but it does the 'conversation' once. The motivation for this method was working with the Arduino platform/framework where it creates the first/main <a class="el" href="namespace_kit_1_1_system_1_1_free_r_t_o_s.html" title="Concrete implementation of the platform specific classes/features of the Kit::System namespace interf...">FreeRTOS</a> thread. </p>
 
 </div>
@@ -543,7 +543,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 25 2025 15:42:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jan 1 2026 20:37:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

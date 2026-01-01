@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-25 15:46:09</td>
+            <td class="headerValue">2026-01-01 20:41:03</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">56.2&nbsp;%</td>
@@ -208,13 +208,13 @@
 <span id="L146"><span class="lineNum">     146</span>                 :             :     virtual const char* getString() const noexcept = 0;</span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : </span>
 <span id="L148"><span class="lineNum">     148</span>                 :             :     /// Cast to read-only character string pointer.</span>
-<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC tlaBgGNC">       12334 :     inline operator const char*() const noexcept { return getString(); }</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC tlaBgGNC">       12332 :     inline operator const char*() const noexcept { return getString(); }</span></span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : </span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :     /// Returns a Read-only pointer to the &quot;raw&quot; (short-hand for getString())</span>
 <span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">          20 :     inline const char* operator()() const noexcept { return getString(); }</span></span>
 <span id="L153"><span class="lineNum">     153</span>                 :             : </span>
 <span id="L154"><span class="lineNum">     154</span>                 :             :     /// Returns the specified character. If n is out-bounds, then '\0' is returned</span>
-<span id="L155"><span class="lineNum">     155</span>   [<span class="tlaGBC" title="Branch 0 was taken 701609 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 614564 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 87045 times"> + </span> :<span class="tlaGNC">      701614 :     inline char operator[]( int i ) const noexcept { return i &lt; 0 || i &gt; length() ? '\0' : getString()[i]; }</span></span>
+<span id="L155"><span class="lineNum">     155</span>   [<span class="tlaGBC" title="Branch 0 was taken 702832 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 615634 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 87198 times"> + </span> :<span class="tlaGNC">      702837 :     inline char operator[]( int i ) const noexcept { return i &lt; 0 || i &gt; length() ? '\0' : getString()[i]; }</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
 <span class="lineNum">        </span>       <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaUNC" title="Branch 10 was not taken"> - </span><span class="tlaGBC" title="Branch 11 was taken 1 time"> + </span>]
 <span id="L156"><span class="lineNum">     156</span>                 :             : </span>

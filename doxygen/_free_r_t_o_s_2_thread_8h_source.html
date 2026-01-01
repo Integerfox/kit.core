@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 240-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 252-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -137,7 +137,7 @@ $(function() {
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html#aff3e49c335c0f4b8d1560ca12a685efd">   87</a></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html">Thread</a>( const <span class="keywordtype">char</span>* threadName, <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::System::<a class="code hl_class" href="class_kit_1_1_system_1_1_i_runnable.html">IRunnable</a>&amp; dummyRunnable ) noexcept;</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span> </div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">    /** This is helper method to &#39;convert&#39; the first/main FreeRTOS thread</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">        to a CPL thread.  The method can be called many times - but it</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">        to a KIT thread.  The method can be called many times - but it</span></div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">        does the &#39;conversation&#39; once.  The motivation for this method was</span></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">        working with the Arduino platform/framework where it creates</span></div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">        the first/main FreeRTOS thread.</span></div>
@@ -150,8 +150,8 @@ $(function() {
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>};</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"></span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">/** This is a helper class that can be used to make the current thread</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">    a CPL thread.  This class should only be used when the &#39;application&#39;</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">    contains active threads there were not created through the CPL</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">    a KIT thread.  This class should only be used when the &#39;application&#39;</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">    contains active threads there were not created through the KIT</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">    libraries APIs.  For example: On the Arduino Feather52 platform,</span></div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">    the Arduino framework creates the &#39;main&#39; thread.</span></div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"></span> </div>
@@ -181,11 +181,11 @@ $(function() {
 <div class="ttc" id="a_i_runnable_8h_html"><div class="ttname"><a href="_i_runnable_8h.html">IRunnable.h</a></div></div>
 <div class="ttc" id="a_thread_8h_html"><div class="ttname"><a href="_thread_8h.html">Thread.h</a></div></div>
 <div class="ttc" id="a_thread_8h_html_ac880fe51a701f3ea6b1c2085ee78cdb6"><div class="ttname"><a href="_thread_8h.html#ac880fe51a701f3ea6b1c2085ee78cdb6">KIT_SYSTEM_THREAD_PRIORITY_NORMAL</a></div><div class="ttdeci">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL</div><div class="ttdoc">The recommended/default priority for a thread.</div><div class="ttdef"><b>Definition</b> Thread.h:31</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread.html">Kit::System::FreeRTOS::MakeCurrentThreadAKitThread</a></div><div class="ttdoc">This is a helper class that can be used to make the current thread a CPL thread.</div><div class="ttdef"><b>Definition</b> Thread.h:111</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread.html">Kit::System::FreeRTOS::MakeCurrentThreadAKitThread</a></div><div class="ttdoc">This is a helper class that can be used to make the current thread a KIT thread.</div><div class="ttdef"><b>Definition</b> Thread.h:111</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread_html_a097a14883f5af523b9bf7034a32b25d2"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread.html#a097a14883f5af523b9bf7034a32b25d2">Kit::System::FreeRTOS::MakeCurrentThreadAKitThread::entry</a></div><div class="ttdeci">void entry() noexcept override</div><div class="ttdoc">This method is called when the Thread is started.</div><div class="ttdef"><b>Definition</b> Thread.h:114</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread_html_acb2719e5b833557b0e3ffaca5220cc7d"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_make_current_thread_a_kit_thread.html#acb2719e5b833557b0e3ffaca5220cc7d">Kit::System::FreeRTOS::MakeCurrentThreadAKitThread::MakeCurrentThreadAKitThread</a></div><div class="ttdeci">MakeCurrentThreadAKitThread(const char *threadName=&quot;main&quot;) noexcept</div><div class="ttdoc">Converts the native thread to a Kit thread.</div><div class="ttdef"><b>Definition</b> Thread.h:118</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html">Kit::System::FreeRTOS::Thread</a></div><div class="ttdoc">This concrete class implements a Thread object using FreeRTOS threads.</div><div class="ttdef"><b>Definition</b> Thread.h:44</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread_html_a72cfe00d05a4fb5f249b5fbb81a8e129"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html#a72cfe00d05a4fb5f249b5fbb81a8e129">Kit::System::FreeRTOS::Thread::makeNativeMainThreadAKitThread</a></div><div class="ttdeci">static void makeNativeMainThreadAKitThread() noexcept</div><div class="ttdoc">This is helper method to 'convert' the first/main FreeRTOS thread to a CPL thread.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread_html_a72cfe00d05a4fb5f249b5fbb81a8e129"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html#a72cfe00d05a4fb5f249b5fbb81a8e129">Kit::System::FreeRTOS::Thread::makeNativeMainThreadAKitThread</a></div><div class="ttdeci">static void makeNativeMainThreadAKitThread() noexcept</div><div class="ttdoc">This is helper method to 'convert' the first/main FreeRTOS thread to a KIT thread.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread_html_a8f72452490b62f9aad8041a4403002a0"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html#a8f72452490b62f9aad8041a4403002a0">Kit::System::FreeRTOS::Thread::signal</a></div><div class="ttdeci">int signal() noexcept override</div><div class="ttdoc">See Kit::System::ISignable.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread_html_ac467faf494a04b7110d33169e1b9c359"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html#ac467faf494a04b7110d33169e1b9c359">Kit::System::FreeRTOS::Thread::getName</a></div><div class="ttdeci">const char * getName() const noexcept override</div><div class="ttdoc">See Kit::System::Thread.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread_html_acbec91b806083f72e04de1a7d6f698a4"><div class="ttname"><a href="class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html#acbec91b806083f72e04de1a7d6f698a4">Kit::System::FreeRTOS::Thread::su_signal</a></div><div class="ttdeci">int su_signal() noexcept override</div><div class="ttdoc">See Kit::System::ISignable.</div></div>
@@ -199,7 +199,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 25 2025 15:42:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jan 1 2026 20:37:34 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
