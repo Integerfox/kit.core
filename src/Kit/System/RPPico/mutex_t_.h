@@ -1,5 +1,5 @@
-#ifndef Cpl_System_RP2040_mutex_t_h_
-#define Cpl_System_RP2040_mutex_t_h_
+#ifndef KIT_SYSTEM_RPPICO_MUTEX_T_H_
+#define KIT_SYSTEM_RPPICO_MUTEX_T_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,50 +10,50 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Cpl/System/PrivateStartup_.h"
+#include "Kit/System/PrivateStartup.h"
 #include "pico/mutex.h"
 #include <new>
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace System {
 ///
-namespace RP2040 {
+namespace RPPico {
 
 /** This class implements a brute force approach to initializing a 'pico
-    mutex' when the Cpl C++ library is initialized.  This is to support
-    statically allocated/created Cpl::System::Mutex instances. The issue here
+    mutex' when the Kit C++ library is initialized.  This is to support
+    statically allocated/created Kit::System::Mutex instances. The issue here
     is that 'pico mutex' need to be initialized AFTER main() is called.  The 
     Pico-SDK solution for statically allocating mutex instances is C solution 
-    that does not work inside the Cpl::System::Mutex object.
+    that does not work inside the Kit::System::Mutex object.
  */
-class Mutex_T : public Cpl::System::StartupHook_
+class Mutex_T : public Kit::System::IStartupHook
 {
 public:
     /** Constructor.
         Note: The registration is assumed to be done from a static allocated
-              instance (i.e. before main() and Cpl::System::Api::initialize() is
+              instance (i.e. before main() and Kit::System::Api::initialize() is
               called).  However, registering AFTER wards is a don't care because
-              the 'start-up list' is only used during the call to Cpl::System::Api::initialize() 
+              the 'start-up list' is only used during the call to Kit::System::Api::initialize() 
      */
-    Mutex_T() :StartupHook_( eSYSTEM ), m_rp2040Mutex(nullptr) {}
+    Mutex_T() :IStartupHook( SYSTEM ), m_sdkMutex(nullptr) {}
 
 
 protected:
-    /// This method is called when Cpl::System::Api::initialize() executes
-    void notify( InitLevel_T init_level )
+    /// This method is called when Kit::System::initialize() executes
+    void notify( InitLevel init_level )
     {
-        m_rp2040Mutex = new recursive_mutex_t;
-        if ( m_rp2040Mutex )
+        m_sdkMutex = new recursive_mutex_t;
+        if ( m_sdkMutex )
         {
-            recursive_mutex_init( m_rp2040Mutex );
+            recursive_mutex_init( m_sdkMutex );
         }
     }
 
 public:
-    /// Platform Mutex instance. Note: Made public to simply access from the Cpl::System::Mutex class
-    recursive_mutex_t*   m_rp2040Mutex;
+    /// Platform Mutex instance. Note: Made public to simply access from the Kit::System::Mutex class
+    recursive_mutex_t*   m_sdkMutex;
 };
 
 

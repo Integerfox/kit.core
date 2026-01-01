@@ -7,8 +7,9 @@
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
 /** @file */
-#include "Cpl/System/GlobalLock.h"
-#include "Cpl/System/Private_.h"
+#include "Kit/System/GlobalLock.h"
+#include "Kit/System/Private.h"
+#include "Kit/System/PrivateStartup.h"
 #include "pico/sync.h"
 
 
@@ -17,32 +18,33 @@ static critical_section_t globalCritSec_;
 namespace {
 
 /// This class is to 'zero' the elapsed to the start of the application
-class RegisterInitHandler_ : public Cpl::System::StartupHook_
+class RegisterInitHandler_ : public Kit::System::IStartupHook
 {
 public:
     ///
-    RegisterInitHandler_() :StartupHook_( eSYSTEM ) {}
+    RegisterInitHandler_() :IStartupHook( SYSTEM ) {}
 
 
 protected:
     ///
-    void notify( InitLevel_T init_level )
+    void notify( InitLevel init_level )
     {
         critical_section_init( &globalCritSec_ );
     }
 };
-}; // end namespace
+
+} // end namespace
 
 ///
 static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 //////////////////////////////////////////////////////////////////////////////
-void Cpl::System::GlobalLock::begin( void )
+void Kit::System::GlobalLock::begin( void )
 {
     critical_section_enter_blocking( &globalCritSec_ );
 }
 
-void Cpl::System::GlobalLock::end( void )
+void Kit::System::GlobalLock::end( void )
 {
     critical_section_exit( &globalCritSec_ );
 }

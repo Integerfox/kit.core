@@ -6,7 +6,7 @@ Concrete implementation of the platform specific classes/features of the
 Kit::System namespace interfaces for the Raspberry RP2xxx MCUs' dual cores,
 i.e. a maximum of 2 threads - one per core.
 
-**NOTE**: Currently on the the Dual ARM cores are supported.  TBD for supporting
+**NOTE**: Currently only the the Dual ARM cores are supported.  TBD for supporting
           the dual RISC-V cores on the RP2350.
           
 ## Platform Dependent Behaviors
@@ -17,7 +17,7 @@ i.e. a maximum of 2 threads - one per core.
 **Mutex** - Fully functional.  Note: The memory for internal Mutex type 
             is allocated from the Heap.
 
-**GlobalLock** - The GlobalLock maps the RP2040 SDK's critical section.  There are
+**GlobalLock** - The GlobalLock maps the RP2xxx SDK's critical section.  There are
                  some subtle details here - but it effective disables IRQs on 
                  the calling core AND provides mutual exclusion with respect to
                  the other core.

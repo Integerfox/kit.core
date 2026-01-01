@@ -8,33 +8,39 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Cpl/System/Mutex.h"
+#include "Kit/System/Mutex.h"
 
 //////////////////////////////////////////////////////////////////////////////
-Cpl::System::Mutex::Mutex()
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
+
+Mutex::Mutex()
 {
-    // Nothing needed.  The initialization of the mutex is done when the Cpl C++ library is initialized
+    // Nothing needed.  The initialization of the mutex is done when the Kit C++ library is initialized
 }
 
-Cpl::System::Mutex::~Mutex()
+Mutex::~Mutex()
 {
     // Nothing needed
 }
 
-void Cpl::System::Mutex::lock( void )
+void Mutex::lock( void )
 {
-    if ( m_mutex.m_rp2040Mutex )
+    if ( m_mutex.m_sdkMutex )
     {
-        recursive_mutex_enter_blocking( m_mutex.m_rp2040Mutex );
+        recursive_mutex_enter_blocking( m_mutex.m_sdkMutex );
     }
 }
 
-void Cpl::System::Mutex::unlock( void )
+void Mutex::unlock( void )
 {
-    if ( m_mutex.m_rp2040Mutex )
+    if ( m_mutex.m_sdkMutex )
     {
-        recursive_mutex_exit( m_mutex.m_rp2040Mutex );
+        recursive_mutex_exit( m_mutex.m_sdkMutex );
     }
 }
 
-
+}  // end namespace
+}
+//------------------------------------------------------------------------------

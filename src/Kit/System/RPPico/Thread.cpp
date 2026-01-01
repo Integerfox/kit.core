@@ -9,16 +9,17 @@
 /** @file */
 
 #include "Thread.h"
-#include "Cpl/Memory/Aligned.h"
-#include "Cpl/System/Api.h"
-#include "Cpl/System/FatalError.h"
-#include "Cpl/System/Private_.h"
+#include "Kit/Memory/Aligned.h"
+#include "Kit/System/api.h"
+#include "Kit/System/FatalError.h"
+#include "Kit/System/Private_.h"
 #include "hardware/watchdog.h"
 #include "pico/multicore.h"
 #include "pico/platform.h"
 #include <new>
+
 //
-using namespace Cpl::System::RP2040;
+using namespace Kit::System::RPPico;
 
 // Internal states
 #define THREAD_STATE_DOES_NOT_EXIST 0
@@ -26,13 +27,13 @@ using namespace Cpl::System::RP2040;
 #define THREAD_STATE_CREATED        2
 #define THREAD_STATE_RUNNING        3
 
-typedef Cpl::Memory::AlignedClass<Thread> ThreadMem_T;
+typedef Kit::Memory::AlignedClass<Thread> ThreadMem_T;
 
 // Private variables
 static volatile bool                schedulingEnabled_;
-static volatile unsigned            states_[CPL_SYSTEM_RP2040_NUM_CORES];
-static ThreadMem_T                  threadMemory_[CPL_SYSTEM_RP2040_NUM_CORES];
-static Cpl::System::RP2040::Thread *threads_[CPL_SYSTEM_RP2040_NUM_CORES];
+static volatile unsigned            states_[KIT_SYSTEM_RPPICO_NUM_CORES];
+static ThreadMem_T                  threadMemory_[KIT_SYSTEM_RPPICO_NUM_CORES];
+static Kit::System::RPPico::Thread *threads_[KIT_SYSTEM_RPPICO_NUM_CORES];
 
 static void                         core1Entry( void );
 inline static void                  launchCore1()
@@ -45,9 +46,9 @@ namespace {
 
 // This class is used to allocate the actual thread instances.  In addition it
 // has the side effect of turn the initial entry/native/main 'thread' into a
-// Cpl::System::Thread (i.e. adds the thread semaphore)
-class RegisterInitHandler_ : public Cpl::System::StartupHook_,
-                             public Cpl::System::Runnable
+// Kit::System::Thread (i.e. adds the thread semaphore)
+class RegisterInitHandler_ : public Kit::System::StartupHook_,
+                             public Kit::System::Runnable
 {
 protected:
     // Empty run function -- it is never called!
@@ -75,7 +76,7 @@ protected:
 static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 void                        Thread::createThreadInstance( unsigned               coreId,
-                                   Cpl::System::Runnable &runnable,
+                                   Kit::System::Runnable &runnable,
                                    const char            *name ) noexcept
 {
     threads_[coreId] =
@@ -83,7 +84,7 @@ void                        Thread::createThreadInstance( unsigned              
 }
 
 ////////////////////////////////////
-Thread::Thread( Cpl::System::Runnable &runnable, const char *name, unsigned coreId )
+Thread::Thread( Kit::System::Runnable &runnable, const char *name, unsigned coreId )
     : m_runnable( &runnable ), m_name( name ), m_coreId( coreId )
 {
 }
@@ -94,7 +95,7 @@ Thread::~Thread()
 }
 
 //////////////////////////////
-void Cpl::System::Api::enableScheduling( void )
+void Kit::System::Api::enableScheduling( void )
 {
     // Do nothing if called twice
     if ( !schedulingEnabled_ )
@@ -102,7 +103,7 @@ void Cpl::System::Api::enableScheduling( void )
         // Fail if the application has NOT 'created' core0 thread
         if ( states_[0] != THREAD_STATE_CREATED )
         {
-            Cpl::System::FatalError::log(
+            Kit::System::FatalError::log(
                 "The Application has NOT created any threads" );
         }
 
@@ -139,7 +140,7 @@ void core1Entry( void )
     states_[1] = THREAD_STATE_ALLOCATED;
 }
 
-bool Cpl::System::Api::isSchedulingEnabled( void )
+bool Kit::System::Api::isSchedulingEnabled( void )
 {
     return schedulingEnabled_;
 }
@@ -170,7 +171,7 @@ bool Thread::isRunning() noexcept
     return m_runnable->isRunning();
 }
 
-Cpl::System::Runnable &Thread::getRunnable( void ) noexcept
+Kit::System::Runnable &Thread::getRunnable( void ) noexcept
 {
     return *m_runnable;
 }
@@ -183,7 +184,7 @@ Cpl_System_Thread_NativeHdl_T Thread::getNativeHandle( void ) noexcept
 //////////////////////////////
 
 //////////////////////////////
-Cpl::System::Thread &Cpl::System::Thread::getCurrent() noexcept
+Kit::System::Thread &Kit::System::Thread::getCurrent() noexcept
 {
     // Note: All thread instances are created when the CPL library is initialized
     // - so in theory there is always a valid current thread
@@ -191,51 +192,51 @@ Cpl::System::Thread &Cpl::System::Thread::getCurrent() noexcept
     return *( threads_[coreIdx] );
 }
 
-Cpl::System::Thread *Cpl::System::Thread::tryGetCurrent() noexcept
+Kit::System::Thread *Kit::System::Thread::tryGetCurrent() noexcept
 {
-    return &( Cpl::System::Thread::getCurrent() );
+    return &( Kit::System::Thread::getCurrent() );
 }
 
-void Cpl::System::Thread::wait() noexcept
+void Kit::System::Thread::wait() noexcept
 {
     unsigned coreIdx = get_core_num();
     threads_[coreIdx]->m_syncSema.wait();
 }
 
-bool Cpl::System::Thread::tryWait() noexcept
+bool Kit::System::Thread::tryWait() noexcept
 {
     unsigned coreIdx = get_core_num();
     return threads_[coreIdx]->m_syncSema.tryWait();
 }
 
-bool Cpl::System::Thread::timedWait( unsigned long timeout ) noexcept
+bool Kit::System::Thread::timedWait( unsigned long timeout ) noexcept
 {
     unsigned coreIdx = get_core_num();
     return threads_[coreIdx]->m_syncSema.timedWait( timeout );
 }
 
-const char *Cpl::System::Thread::myName() noexcept
+const char *Kit::System::Thread::myName() noexcept
 {
     unsigned coreIdx = get_core_num();
     return threads_[coreIdx]->m_name;
 }
 
-size_t Cpl::System::Thread::myId() noexcept
+size_t Kit::System::Thread::myId() noexcept
 {
     unsigned coreIdx = get_core_num();
     return threads_[coreIdx]->m_coreId;
 }
 
 //////////////////////////////
-void Cpl::System::Thread::traverse(
-    Cpl::System::Thread::Traverser &client ) noexcept
+void Kit::System::Thread::traverse(
+    Kit::System::Thread::Traverser &client ) noexcept
 {
-    Cpl::System::Mutex::ScopeBlock mylock( Cpl::System::Locks_::sysLists() );
-    for ( unsigned idx = 0; idx < CPL_SYSTEM_RP2040_NUM_CORES; idx++ )
+    Kit::System::Mutex::ScopeBlock mylock( Kit::System::Locks_::sysLists() );
+    for ( unsigned idx = 0; idx < KIT_SYSTEM_RPPICO_NUM_CORES; idx++ )
     {
         if ( states_[idx] == THREAD_STATE_RUNNING )
         {
-            if ( client.item( *( threads_[idx] ) ) == Cpl::Type::Traverser::eABORT )
+            if ( client.item( *( threads_[idx] ) ) == Kit::Type::Traverser::eABORT )
             {
                 break;
             }
@@ -244,7 +245,7 @@ void Cpl::System::Thread::traverse(
 }
 
 //////////////////////////////
-Cpl::System::Thread *Cpl::System::Thread::create( Runnable   &runnable,
+Kit::System::Thread *Kit::System::Thread::create( Runnable   &runnable,
                                                   const char *name,
                                                   int         priority,
                                                   int         stackSize,
@@ -278,7 +279,7 @@ Cpl::System::Thread *Cpl::System::Thread::create( Runnable   &runnable,
     return 0;
 }
 
-void Cpl::System::Thread::destroy( Thread &threadToDestroy )
+void Kit::System::Thread::destroy( Thread &threadToDestroy )
 {
     // Ignore request to destroy thread0/core0 thread
     if ( threadToDestroy.getNativeHandle() == 1 )

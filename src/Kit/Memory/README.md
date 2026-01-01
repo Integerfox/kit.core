@@ -8,4 +8,6 @@ specific/related behavior.
 For example:
 
 - Interfaces to manually manage "dynamic memory" independent of the actual heap.
+  
+- Managing endianness when copying 'external' incoming/outgoing binary data
 

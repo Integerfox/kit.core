@@ -1,5 +1,5 @@
-#ifndef Cpl_System_RP2040_Thread_h_
-#define Cpl_System_RP2040_Thread_h_
+#ifndef KIT_SYSTEM_RPPICO_THREAD_H_
+#define KIT_SYSTEM_RPPICO_THREAD_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,29 +10,28 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "colony_config.h"
-#include "Cpl/System/Thread.h"
-#include "Cpl/System/Semaphore.h"
-#include "Cpl/System/Tls.h"
-#include "Cpl/Text/FString.h"
+#include "kit_config.h"
+#include "Kit/System/Thread.h"
+#include "Kit/System/Semaphore.h"
+#include "Kit/Text/FString.h"
 
 
 
 /// Size, in bytes (not including the null terminator), of a thread name
-#ifndef OPTION_CPL_SYSTEM_RP2040_THREAD_NAME_LEN        
-#define OPTION_CPL_SYSTEM_RP2040_THREAD_NAME_LEN        16
+#ifndef OPTION_CPL_SYSTEM_RPPICOTHREAD_NAME_LEN        
+#define OPTION_CPL_SYSTEM_RPPICOTHREAD_NAME_LEN        16
 #endif
 
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace System {
 ///
-namespace RP2040 {
+namespace RPPico {
 
 /** This concrete class implements a Thread object that maps 1 to 1 with
-    a processor core on the Raspberry PI RP2040 micro-controller.
+    a processor core on the Raspberry PI RP2xxx micro-controller.
 
     At least one thread must be created and at most only two threads can be
     created. The first thread created executes on core0.  The second thread
@@ -47,7 +46,7 @@ namespace RP2040 {
 
     The 'native' thread handle is the core number (i.e. 0 or 1).
 
-    Threads can ONLY be created using the Cpl::System::Thread::create() method.
+    Threads can ONLY be created using the Kit::System::Thread::create() method.
     When created threads:
         - Only the 'runnable' and 'name' should be specified.
         - The stack sizes are defined by the build symbols: PICO_STACK_SIZE
@@ -63,10 +62,10 @@ namespace RP2040 {
            core.  This includes interrupt processing on the other core.
 
   */
-class Thread : public Cpl::System::Thread
+class Thread : public Kit::System::Thread
 {
 protected:
-    /// Private Constructor. Application can only create thread using the Cpl::System::Thread::create() method.
+    /// Private Constructor. Application can only create thread using the Kit::System::Thread::create() method.
     Thread( Runnable& runnable, const char* name, unsigned coreId );
 
 public:
@@ -74,27 +73,27 @@ public:
     ~Thread();
 
 public:
-    /// See Cpl::System::Thread
+    /// See Kit::System::Thread
     const char* getName() noexcept;
 
-    /// See Cpl::System::Thread
+    /// See Kit::System::Thread
     size_t getId() noexcept;
 
-    /// See Cpl::System::Thread
+    /// See Kit::System::Thread
     bool isRunning( void ) noexcept;
 
-    /// See Cpl::System::Thread
+    /// See Kit::System::Thread
     Cpl_System_Thread_NativeHdl_T getNativeHandle( void ) noexcept;
 
-    /// See Cpl::System::Thread
+    /// See Kit::System::Thread
     Runnable& getRunnable( void ) noexcept;
 
 
 public:
-    /// See Cpl::System::Signable
+    /// See Kit::System::Signable
     int signal( void ) noexcept;
 
-    /// See Cpl::System::Signable
+    /// See Kit::System::Signable
     int su_signal( void ) noexcept;
 
 
@@ -105,25 +104,25 @@ public:
 
         Helper method to internally allocate a thread. 
      */
-    static void createThreadInstance( unsigned coreId, Cpl::System::Runnable& runnable, const char* name ) noexcept;
+    static void createThreadInstance( unsigned coreId, Kit::System::Runnable& runnable, const char* name ) noexcept;
 
 
 protected:
     /// The thread synchronized message semaphore.
-    Cpl::System::Semaphore  m_syncSema;
+    Kit::System::Semaphore  m_syncSema;
 
     /// Pointer to the runnable object for the thread
-    Cpl::System::Runnable*  m_runnable;
+    Kit::System::Runnable*  m_runnable;
 
     /// Thread name
-    Cpl::Text::FString<OPTION_CPL_SYSTEM_RP2040_THREAD_NAME_LEN> m_name;
+    Kit::Text::FString<OPTION_CPL_SYSTEM_RPPICOTHREAD_NAME_LEN> m_name;
 
     /// internal handle
     unsigned                m_coreId;
 
 public:
     /// Housekeeping
-    friend class Cpl::System::Thread;
+    friend class Kit::System::Thread;
 };
 
 
