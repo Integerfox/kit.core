@@ -14,7 +14,7 @@
 
 #define SECT_ "_0test"
 
-extern bool runTests();
+extern bool runTests( bool wasWatchdogReset );
 
 /*-----------------------------------------------------------*/
 int main( void )
@@ -32,8 +32,16 @@ int main( void )
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
 
-    // Run the platform-independent test (Note: This method should never return)
-    runTests();
+    // Check if this is a watchdog reset (HAL-specific, kept in main.cpp)
+    bool wasWatchdogReset = ( __HAL_RCC_GET_FLAG( RCC_FLAG_IWDGRST ) != RESET );
+    if ( wasWatchdogReset )
+    {
+        __HAL_RCC_CLEAR_RESET_FLAGS();
+    }
+
+    // Run the platform-independent test, passing the reset status
+    // Note: This method should never return
+    runTests( wasWatchdogReset );
 
     // Should never reach here
     return 0;

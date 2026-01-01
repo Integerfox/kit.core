@@ -205,6 +205,7 @@ public:
         KIT_SYSTEM_TRACE_MSG( SECT_, "Watchdog did not reset the system\r\n" );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread timeout was not detected\r\n" );
         KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
+
         // Blink LED rapidly to indicate failure
         for ( ;; )
         {
@@ -246,43 +247,45 @@ static Server supervisorEventLoop_(
  */
 class MainTestRunnable : public IRunnable
 {
+private:
+    bool m_wasWatchdogReset;
+
 public:
+    MainTestRunnable( bool wasWatchdogReset ) noexcept
+        : m_wasWatchdogReset( wasWatchdogReset )
+    {
+    }
+
     void entry() noexcept override
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "       BOOT SEQUENCE STARTED\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
-
-        // Check if this is a watchdog reset BEFORE starting the test
-        if ( __HAL_RCC_GET_FLAG( RCC_FLAG_IWDGRST ) != RESET )
+        // Check if this was a watchdog reset (expected for this test)
+        if ( m_wasWatchdogReset )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
             KIT_SYSTEM_TRACE_MSG( SECT_, "*** WATCHDOG RESET DETECTED ***\r\n" );
             KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
             KIT_SYSTEM_TRACE_MSG( SECT_, "Test PASSED - System was reset by watchdog\r\n" );
-
-            __HAL_RCC_CLEAR_RESET_FLAGS();
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
 
             // Keep both LEDs on to indicate success
             Bsp_turn_on_debug1();
             Bsp_turn_on_debug2();
 
+            // Test passed - idle forever
             for ( ;; )
             {
-                HAL_Delay( 1000 );
+                sleep( 1000 );
             }
         }
 
-        KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized\r\n" );
-
-        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n\r\n**** RAW THREAD STUCK TEST START ****\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw Thread Stuck Test Starting\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "HW Watchdog Timeout: %u ms\r\n", HW_WATCHDOG_TIMEOUT_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw Thread Timeout: %u ms\r\n", RAW_THREAD_WDOG_TIMEOUT_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Stuck Duration: %u ms\r\n", STUCK_DURATION_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "First run - setting up watchdog test\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       RAW THREAD STUCK TEST START\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       HW Watchdog Timeout: %u ms\r\n", HW_WATCHDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       Raw Thread Timeout: %u ms\r\n", RAW_THREAD_WDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       Stuck Duration: %u ms\r\n", STUCK_DURATION_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
 
         // Create and start the supervisor thread
         auto* supervisorThread = Thread::create( supervisorEventLoop_, "SUPERVISOR" );
@@ -326,9 +329,6 @@ public:
 // Core Test Function
 //------------------------------------------------------------------------------
 
-/// Main test runnable instance
-static MainTestRunnable mainTestRunnable_;
-
 /** Run the raw thread stuck test.
     This function is platform independent and can be called from platform-specific
     main() implementations.
@@ -337,10 +337,14 @@ static MainTestRunnable mainTestRunnable_;
     This allows trace output to work before the scheduler starts, without requiring
     busy-wait serial driver logic.
     
+    @param wasWatchdogReset Flag indicating if the system was reset by watchdog
     @return True if test setup succeeded, false otherwise
  */
-bool runTests()
+bool runTests( bool wasWatchdogReset )
 {
+    // Create main test runnable with watchdog reset status
+    static MainTestRunnable mainTestRunnable_( wasWatchdogReset );
+
     // Create an initial raw main thread (not watched) to coordinate test setup
     auto* mainThread = Thread::create( mainTestRunnable_, "MAIN" );
     if ( !mainThread )
