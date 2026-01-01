@@ -87,7 +87,7 @@ public:
     Thread( const char* threadName, Kit::System::IRunnable& dummyRunnable ) noexcept;
 
     /** This is helper method to 'convert' the first/main FreeRTOS thread
-        to a CPL thread.  The method can be called many times - but it
+        to a KIT thread.  The method can be called many times - but it
         does the 'conversation' once.  The motivation for this method was
         working with the Arduino platform/framework where it creates
         the first/main FreeRTOS thread.
@@ -100,8 +100,8 @@ public:
 };
 
 /** This is a helper class that can be used to make the current thread
-    a CPL thread.  This class should only be used when the 'application'
-    contains active threads there were not created through the CPL
+    a KIT thread.  This class should only be used when the 'application'
+    contains active threads there were not created through the KIT
     libraries APIs.  For example: On the Arduino Feather52 platform,
     the Arduino framework creates the 'main' thread.
 

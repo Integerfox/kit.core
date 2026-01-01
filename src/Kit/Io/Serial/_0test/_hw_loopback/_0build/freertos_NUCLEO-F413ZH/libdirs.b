@@ -6,12 +6,12 @@ src/Kit/Io/Serial/_0test/_hw_loopback
 src/Kit/Io/Serial/ST/M32F4
 
 
-# CPL Middle-ware
+# KIT Middle-ware
 src/Kit/Container
 src/Kit/Text
 src/Kit/Io
 
-# CPL OSAL
+# KIT OSAL
 src/Kit/System
 src/Kit/System/FreeRTOS
 src/Kit/System/FreeRTOS/_fatalerror

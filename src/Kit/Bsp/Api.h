@@ -51,8 +51,22 @@ void Bsp_initialize( void );
     */
 #define Bsp_nop Bsp_nop_MAP
 
+/** RTOS helper: this method is to informs the scheduler that a context switch
+    is required on exit from the ISR.  The 'result' argument is the return value
+    from a call to su_signal()  
+
+    NOTE: If you are not using an RTOS, or your RTOS does not require this
+          functionality, you can define this macro as a NOP.
+
+    \b Prototype:
+        void Bsp_yield_on_exit( int result );
+
+    */
+#define Bsp_yield_on_exit   Bsp_yield_on_exit_MAP
+
 
 /////////////////////////////////////////////////////////////////////////////
+
 //
 /** This method will disable ALL interrupts, i.e manipulate the global
     enable/disable flag in the PSW.

@@ -18,8 +18,8 @@
 
 
     DO NOT include this file directly! Instead include the generic BSP
-    interface - src/Bsp/Api.h - and then configure your project's
-    'colony_map.h' to include THIS file.
+    interface - src/Kit/Bsp/Api.h - and then configure your project's
+    'kit_map.h' to include THIS file.
 
 *----------------------------------------------------------------------------*/
 
@@ -31,7 +31,9 @@
 #include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/adc.h"    // Access the AIN handles/instances
 #include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/spi.h"    // Access the SPI handles/instances
 
-
+#ifdef ENABLE_BSP_SEGGER_SYSVIEW
+#include "SEGGER_SYSVIEW.h"  // Expose (to the application) the SYSVIEW APIs when enabled
+#endif
 
 //////////////////////////////////////////////////////////
 /// ARM Specific APIs
@@ -63,6 +65,13 @@
 
 /// Generic API
 #define Bsp_nop_MAP() __asm( "nop" )
+
+/** Generic API. This method only applies when there is actual RTOS -->in theory
+    this should be mapped to a NOP.  However as a 'CHEAT' to get
+    around "unused variable" warnings - we increment the passed in
+    variable.
+ */
+#define Bsp_yield_on_exit_MAP( r )  r++
 
 /// Generic API
 #define Bsp_disable_irqs_MAP() __disable_irq()
@@ -102,17 +111,6 @@
 /// Generic API
 #define Bsp_toggle_debug2_MAP() HAL_GPIO_TogglePin( LD2_GPIO_Port, LD2_Pin )
 
-
-//////////////////////////////////////////////////////////
-/// RTOS specific APIs
-//////////////////////////////////////////////////////////
-
-/** This method only applies when there is actual RTOS -->in theory
-    this should be mapped to a NOP.  However as a 'CHEAT' to get
-    around "unused variable" warnings - we increment the passed in
-    variable.
- */
-#define Bsp_yield_on_exit( r )  r++
 
 
 #endif  // end header latch
