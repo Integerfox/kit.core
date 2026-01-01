@@ -22,6 +22,7 @@ set PATH=%OUTCAST2_PATH%\bin;%PATH%
 :: Set helper macros
 doskey top=cd %_HERE%
 doskey t=cd %_HERE%
+doskey sancho=%NQBP_BIN%\other\sancho.py $*
 doskey bob=%NQBP_BIN%\other\bob.py $*
 doskey chuck=%NQBP_BIN%\other\chuck.py $*
 doskey ratt=%NQBP_XPKGS_ROOT%\ratt\bin\ratt.py $*

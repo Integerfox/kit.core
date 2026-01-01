@@ -34,6 +34,7 @@ export SINELABORE_PATH=~/sinelabore/bin
 
 # Set helper macros
 alias t="cd $HERE"
+alias sancho="$NQBP_BIN/other/sancho.py"
 alias bob="$NQBP_BIN/other/bob.py"
 alias chuck="$NQBP_BIN/other/chuck.py"
 alias ratt="$NQBP_XPKGS_ROOT/ratt/bin/ratt.py"
