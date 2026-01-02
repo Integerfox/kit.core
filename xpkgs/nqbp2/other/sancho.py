@@ -39,7 +39,7 @@ from nqbplib.docopt.docopt import docopt
 from nqbplib import utils
 from nqbplib.my_globals import NQBP_PKG_ROOT
 
-BILL_VERSION = '1.0'
+SANCHO_VERSION = '1.0'
 
 #------------------------------------------------------------------------------
 def find_nqbp_files_recursive(directory, repo_root=None):
@@ -398,5 +398,5 @@ def run( arguments ):
 #------------------------------------------------------------------------------
 # BEGIN
 if __name__ == '__main__':
-    arguments = docopt(__doc__, version=BILL_VERSION)
+    arguments = docopt(__doc__, version=SANCHO_VERSION)
     sys.exit( run(arguments) )
