@@ -55,7 +55,6 @@ base_release.cflags      = f' -Wall {target_flags} -Werror -DENABLE_BSP_SEGGER_S
 base_release.cppflags    = ' -std=c++11 -Wno-int-in-bool-context'
 base_release.asmflags    = f' {target_flags}'
 base_release.firstobjs   = f'_BUILT_DIR_.{bsp_mx}/Core/Src'
-base_release.firstobjs   = base_release.firstobjs + f' {bsp_mx}/../Stdio.o'
 
 # Set project specific 'optimized' options
 optimized_release = BuildValues()    # Do NOT comment out this line
