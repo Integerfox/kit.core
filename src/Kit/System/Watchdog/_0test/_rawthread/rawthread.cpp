@@ -103,7 +103,7 @@ public:
     /// Thread entry point
     void entry() noexcept override
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread starting (wdog timeout: %u ms)\r\n",
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread starting (wdog timeout: %u ms)",
                               (unsigned)RAW_THREAD_WDOG_TIMEOUT_MS );
 
         // Start watchdog monitoring for this thread
@@ -123,10 +123,10 @@ public:
         }
 
         // Now get stuck in a busy loop WITHOUT kicking the watchdog
-        KIT_SYSTEM_TRACE_MSG( SECT_, "*** RAW THREAD STUCK - Entering busy loop ***\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Busy loop will last %u ms (thread timeout is %u ms)\r\n",
+        KIT_SYSTEM_TRACE_MSG( SECT_, "*** RAW THREAD STUCK - Entering busy loop ***" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Busy loop will last %u ms (thread timeout is %u ms)",
                               STUCK_DURATION_MS, RAW_THREAD_WDOG_TIMEOUT_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor should detect timeout and trip watchdog\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor should detect timeout and trip watchdog" );
 
         uint32_t startTime = ElapsedTime::milliseconds();
         while ( !ElapsedTime::expiredMilliseconds( startTime, STUCK_DURATION_MS ) )
@@ -138,7 +138,7 @@ public:
         }
 
         // If we get here, the watchdog failed to reset us
-        KIT_SYSTEM_TRACE_MSG( SECT_, "*** ERROR: Watchdog did not reset system! ***\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "*** ERROR: Watchdog did not reset system! ***" );
 
         // Stop watchdog monitoring
         KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( m_wdog );
@@ -152,78 +152,11 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// Test Monitor Thread
-//------------------------------------------------------------------------------
-
-/// Test monitor runnable that coordinates the test
-class TestMonitor : public IRunnable
-{
-public:
-    void entry() noexcept override
-    {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Test monitor starting\r\n" );
-        
-        // Give supervisor thread time to start, initialize, and have its
-        // first health check timer fire
-        sleep( 1000 );
-
-        if ( !Supervisor::enableWdog() )
-        {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to enable hardware watchdog!\r\n" );
-            FatalError::logf( Shutdown::eFAILURE, "Failed to enable hardware watchdog\r\n" );
-        }
-
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Hardware watchdog enabled successfully\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Running normally for %u ms...\r\n", NORMAL_RUN_DELAY_MS );
-        // Run normally for a bit to establish that watchdog is working
-        uint32_t mainCounter = 0;
-        while ( mainCounter < NORMAL_RUN_DELAY_MS )
-        {
-            Bsp_toggle_debug1();
-            sleep( 500 );
-            mainCounter += 500;
-        }
-
-        // Now trigger the stuck condition in the raw thread
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Triggering raw thread stuck condition...\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread will stop kicking its watchdog\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Waiting for supervisor to detect and trip watchdog...\r\n" );
-
-        triggerRawThreadStuck_ = true;
-
-        // Wait for the watchdog to reset us
-        for ( int32_t i = 0; i < 20; ++i )
-        {
-            sleep( 500 );
-            Bsp_toggle_debug1();
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Still waiting for reset... (%d)\r\n", (int)i );
-        }
-
-        // If we get here, something went wrong
-        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Test FAILED\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Watchdog did not reset the system\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread timeout was not detected\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
-
-        // Blink LED rapidly to indicate failure
-        for ( ;; )
-        {
-            Bsp_toggle_debug1();
-            sleep( 100 );
-        }
-    }
-};
-
-//------------------------------------------------------------------------------
 // Static Objects
 //------------------------------------------------------------------------------
 
 /// Raw thread runnable instance
 static RawThreadRunnable rawThreadRunnable_;
-
-/// Test monitor instance
-static TestMonitor testMonitor_;
 
 /// Supervisor watchdog configuration
 static WatchedEventThread supervisorThreadWDogConfig_( 
@@ -261,11 +194,11 @@ public:
         // Check if this was a watchdog reset (expected for this test)
         if ( m_wasWatchdogReset )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "*** WATCHDOG RESET DETECTED ***\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Test PASSED - System was reset by watchdog\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "*** WATCHDOG RESET DETECTED ***" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Test PASSED - System was reset by watchdog" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
 
             // Keep both LEDs on to indicate success
             Bsp_turn_on_debug1();
@@ -278,49 +211,68 @@ public:
             }
         }
 
-        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "       RAW THREAD STUCK TEST START\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "       HW Watchdog Timeout: %u ms\r\n", HW_WATCHDOG_TIMEOUT_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "       Raw Thread Timeout: %u ms\r\n", RAW_THREAD_WDOG_TIMEOUT_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "       Stuck Duration: %u ms\r\n", STUCK_DURATION_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       RAW THREAD STUCK TEST START" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       HW Watchdog Timeout: %u ms", HW_WATCHDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       Raw Thread Timeout: %u ms", RAW_THREAD_WDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       Stuck Duration: %u ms", STUCK_DURATION_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
 
         // Create and start the supervisor thread
         auto* supervisorThread = Thread::create( supervisorEventLoop_, "SUPERVISOR" );
         if ( !supervisorThread )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create supervisor thread\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create supervisor thread" );
             FatalError::logf( Shutdown::eFAILURE, "Failed to create supervisor thread" );
             return;
         }
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor thread created\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor thread created" );
 
         // Create and start the raw thread
         auto* rawThread = Thread::create( rawThreadRunnable_, "RAW_THREAD" );
         if ( !rawThread )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create raw thread\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create raw thread" );
             FatalError::logf( Shutdown::eFAILURE, "Failed to create raw thread" );
             return;
         }
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread created\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread created" );
 
-        // Create and start the test monitor thread
-        auto* monitorThread = Thread::create( testMonitor_, "TEST_MONITOR" );
-        if ( !monitorThread )
+        // Give supervisor thread time to start, initialize, and have its
+        // first health check timer fire
+        sleep( 1000 );
+        if ( !Supervisor::enableWdog() )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create test monitor thread\r\n" );
-            FatalError::logf( Shutdown::eFAILURE, "Failed to create test monitor thread" );
-            return;
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to enable hardware watchdog!" );
+            FatalError::logf( Shutdown::eFAILURE, "Failed to enable hardware watchdog" );
         }
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Test monitor thread created\r\n" );
+        // Wait a bit before triggering the stuck condition
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Main thread sleeping %u ms before triggering stuck condition...",
+                              NORMAL_RUN_DELAY_MS );
+        sleep( NORMAL_RUN_DELAY_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Main thread triggering raw thread stuck condition" );
+        triggerRawThreadStuck_ = true;
 
-        // Main thread job is done - idle forever
+        // Wait for the watchdog to reset us
+        for ( int32_t i = 0; i < 20; ++i )
+        {
+            sleep( 500 );
+            Bsp_toggle_debug1();
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Still waiting for reset... (%d)", (int)i );
+        }
+
+        // If we get here, something went wrong
+        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Test FAILED" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Watchdog did not reset the system" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread timeout was not detected" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
+
+        // Blink LED rapidly to indicate failure
         for ( ;; )
         {
-            sleep( 1000 );
+            Bsp_toggle_debug1();
+            sleep( 100 );
         }
     }
 };

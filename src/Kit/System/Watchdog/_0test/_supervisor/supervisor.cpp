@@ -81,126 +81,37 @@ static volatile uint32_t runCounter_ = 0;
 static volatile bool triggerStuck_ = false;
 
 //------------------------------------------------------------------------------
-// Custom Event Loop with Stuck Simulation
+// Custom Watcher for Stuck Simulation
 //------------------------------------------------------------------------------
 
-class TestEventLoop : public Server
+/** Custom watcher that fails health checks when triggerStuck_ is set.
+    This causes the hardware watchdog to expire and reset the system.
+ */
+class TestWatcher : public WatchedEventThread
 {
 public:
     /** Constructor
-        @param timeoutPeriod Event loop timeout period
-        @param wdogSetup Pointer to watchdog setup interface
+        @param wdogTimeoutMs Software watchdog timeout in milliseconds
+        @param healthCheckIntervalMs Health check interval in milliseconds
+        @param isSupervisor True if this is the supervisor thread
      */
-    TestEventLoop( unsigned long timeoutPeriod,
-                   IWatchedEventLoop* wdogSetup ) noexcept
-        : Server( timeoutPeriod
-                , nullptr
-                , wdogSetup )
+    TestWatcher( uint32_t wdogTimeoutMs, uint32_t healthCheckIntervalMs, bool isSupervisor ) noexcept
+        : WatchedEventThread( wdogTimeoutMs, healthCheckIntervalMs, isSupervisor )
     {
     }
 
 protected:
-    /// Override entry to inject stuck condition in the event loop thread
-    void entry() noexcept override
+    /** Override to implement custom health check logic.
+        When triggerStuck_ is true, this returns false to simulate a stuck thread,
+        which prevents the hardware watchdog from being refreshed.
+     */
+    bool performHealthCheck() noexcept override
     {
-        startEventLoop();
-
-        // Run the event loop until told to get stuck
-        bool run = true;
-        while ( run && !triggerStuck_ )
-        {
-            run = waitAndProcessEvents();
-        }
-
-        // Check if we should trigger the stuck condition
         if ( triggerStuck_ )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "*** SUPERVISOR STUCK - Entering busy loop ***\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Busy loop will last %u ms (HW timeout is %u ms)\r\n",
-                                  (unsigned)STUCK_DURATION_MS, (unsigned)HW_WATCHDOG_TIMEOUT_MS );
-
-            // Get stuck in a busy loop (no watchdog refresh)
-            uint32_t startTime = ElapsedTime::milliseconds();
-            while ( !ElapsedTime::expiredMilliseconds( startTime, STUCK_DURATION_MS ) )
-            {
-                // Busy wait - watchdog will NOT be refreshed
-                Bsp_toggle_debug2();
-                // Small delay to make LED visible
-                sleep( 50 );
-            }
-
-            // If we get here, the watchdog failed to reset us
-            KIT_SYSTEM_TRACE_MSG( SECT_, "*** ERROR: Watchdog did not reset system! ***\r\n" );
-            triggerStuck_ = false;
+            KIT_SYSTEM_TRACE_MSG( SECT_, "*** Health check FAILED - Simulating stuck condition ***" );
         }
-
-        // Continue normal event loop until stopped
-        while ( run )
-        {
-            run = waitAndProcessEvents();
-        }
-
-        stopEventLoop();
-    }
-};
-
-//------------------------------------------------------------------------------
-// Test Monitor Thread
-//------------------------------------------------------------------------------
-
-/// Test monitor runnable that coordinates the test
-class TestMonitor : public IRunnable
-{
-public:
-    void entry() noexcept override
-    {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Test monitor starting\r\n" );
-        
-        // Give supervisor thread time to start, initialize, and have its
-        // first health check timer fire
-        sleep( 1000 );
-
-        if ( !Supervisor::enableWdog() )
-        {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to enable hardware watchdog!\r\n" );
-            FatalError::logf( Shutdown::eFAILURE, "Failed to enable hardware watchdog\r\n" );
-        }
-
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Hardware watchdog enabled successfully\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Running normally for %u ms...\r\n", NORMAL_RUN_DELAY_MS );
-        // Run normally for a bit to establish that watchdog is working
-        while ( runCounter_ < NORMAL_RUN_DELAY_MS )
-        {
-            Bsp_toggle_debug1();
-            sleep( 500 );
-            runCounter_ += 500;
-        }
-
-        // Now trigger the stuck condition
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Triggering stuck condition...\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Waiting for watchdog reset...\r\n" );
-
-        triggerStuck_ = true;
-
-        // Wait for the watchdog to reset us
-        for ( int32_t i = 0; i < 10; ++i )
-        {
-            sleep( 500 );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Still waiting for reset... (%d)\r\n", (int)i );
-        }
-
-        // If we get here, something went wrong
-        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Test FAILED\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Watchdog did not reset the system\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================\r\n" );
-
-        // Blink LED rapidly to indicate failure
-        for ( ;; )
-        {
-            Bsp_toggle_debug1();
-            sleep( 100 );
-        }
+        return !triggerStuck_;
     }
 };
 
@@ -208,18 +119,16 @@ public:
 // Static Objects
 //------------------------------------------------------------------------------
 
-/// Test monitor instance
-static TestMonitor testMonitor_;
-
-/// Supervisor watchdog configuration
-static WatchedEventThread supervisorThreadWDogConfig_( 
+/// Supervisor watchdog configuration (custom watcher)
+static TestWatcher supervisorThreadWDogConfig_( 
     SUPERVISOR_WDOG_TIMEOUT_MS, 
     SUPERVISOR_HEALTH_CHECK_MS, 
     true );
 
-/// Supervisor event loop (custom with stuck simulation)
-static TestEventLoop supervisorEventLoop_( 
+/// Supervisor event loop (standard EventQueue::Server)
+static Server supervisorEventLoop_( 
     OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, 
+    nullptr,
     &supervisorThreadWDogConfig_ );
 
 //------------------------------------------------------------------------------
@@ -246,11 +155,11 @@ public:
         // Check if this was a watchdog reset (expected for this test)
         if ( m_wasWatchdogReset )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "*** WATCHDOG RESET DETECTED ***\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Test PASSED - System was reset by watchdog\r\n" );
-            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "*** WATCHDOG RESET DETECTED ***" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Test PASSED - System was reset by watchdog" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
 
             // Keep both LEDs on to indicate success
             Bsp_turn_on_debug1();
@@ -263,38 +172,69 @@ public:
             }
         }
 
-        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "       SUPERVISOR STUCK TEST START\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "       HW Watchdog Timeout: %u ms\r\n", HW_WATCHDOG_TIMEOUT_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "       Stuck Duration: %u ms\r\n", STUCK_DURATION_MS );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================\r\n" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       SUPERVISOR STUCK TEST START" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       HW Watchdog Timeout: %u ms", HW_WATCHDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       Stuck Duration: %u ms", STUCK_DURATION_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
 
         // Create and start the supervisor thread
         auto* supervisorThread = Thread::create( supervisorEventLoop_, "SUPERVISOR" );
         if ( !supervisorThread )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create supervisor thread\r\n" );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create supervisor thread" );
             FatalError::logf( Shutdown::eFAILURE, "Failed to create supervisor thread" );
             return;
         }
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor thread created\r\n" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor thread created" );
 
-        // Create and start the test monitor thread
-        auto* monitorThread = Thread::create( testMonitor_, "TEST_MONITOR" );
-        if ( !monitorThread )
+        // Give supervisor thread time to start, initialize, and have its
+        // first health check timer fire
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Waiting for supervisor to initialize..." );
+        sleep( 1000 );
+
+        // Enable the hardware watchdog
+        if ( !Supervisor::enableWdog() )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create test monitor thread\r\n" );
-            FatalError::logf( Shutdown::eFAILURE, "Failed to create test monitor thread" );
-            return;
+            KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to enable hardware watchdog!" );
+            FatalError::logf( Shutdown::eFAILURE, "Failed to enable hardware watchdog" );
         }
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Test monitor thread created\r\n" );
 
-        // Main thread job is done - idle forever
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Hardware watchdog enabled successfully" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Running normally for %u ms...", NORMAL_RUN_DELAY_MS );
+        
+        // Run normally for a bit to establish that watchdog is working
+        while ( runCounter_ < NORMAL_RUN_DELAY_MS )
+        {
+            Bsp_toggle_debug1();
+            sleep( 500 );
+            runCounter_ += 500;
+        }
+
+        // Now trigger the stuck condition by setting the flag
+        // The TestWatcher will fail health checks, preventing watchdog refresh
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Triggering stuck condition..." );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Waiting for watchdog reset..." );
+        triggerStuck_ = true;
+
+        // Wait for the watchdog to reset us
+        for ( int32_t i = 0; i < 10; ++i )
+        {
+            sleep( 500 );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Still waiting for reset... (%d)", (int)i );
+        }
+
+        // If we get here, something went wrong
+        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       Test FAILED" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "       Watchdog did not reset the system" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "==================================================" );
+
+        // Blink LED rapidly to indicate failure
         for ( ;; )
         {
-            sleep( 1000 );
+            Bsp_toggle_debug1();
+            sleep( 100 );
         }
     }
 };
