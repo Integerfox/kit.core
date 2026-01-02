@@ -11,11 +11,11 @@
 #include "Kit/Bsp/Api.h"
 #include "stm32f4xx_hal.h"
 #include "Kit/Bsp/ST/baremetal_NUCLEO-F413ZH/MX/Core/Inc/gpio.h"
-#include "stdio.h"
+#include "console.h"
 
 
 #ifndef USE_BSP_USE_PRINTF
-#define INIT_KIT_CONSOLE()    g_bspConsoleStream.start( USART3_IRQn, &huart3 )
+#define INIT_KIT_CONSOLE()    Bsp_startConsoleStream( USART3_IRQn, &huart3 )
 #else
 #define INIT_KIT_CONSOLE()
 #endif

@@ -11,5 +11,5 @@ event a reference to a Event Queue is needed.  Typically objects are provided
 a reference to their Event Queue in their constructor and the reference is stored
 as member variable to the class.  If there was NOT a common Event Queue, then a
 class that uses ITC and DM change notifications would be required to cache two
-different Event Queue references (i.e. this is the case when using the CPL
-library: `Cpl::Itc::PostApi` vs `Cpl::Dm::MailboxServer`).
+different Event Queue references (i.e. this is the case when using the KIT
+library: `Kit::Itc::PostApi` vs `Kit::Dm::MailboxServer`).

@@ -167,7 +167,7 @@ standard names. */
 /* USER CODE BEGIN Defines */
 /* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */
 
-/* CPL Does not use native FreeRTOS timers */
+/* KIT Does not use native FreeRTOS timers */
 #undef  configUSE_TIMERS
 #define configUSE_TIMERS    0
 

@@ -188,7 +188,7 @@ class DmMailbox : public Kit::Dm::MailboxServer
 public:
     /// Constructor
     DmMailbox( Kit::System::Semaphore&              signalToNotify,
-               unsigned long                        timingTickInMsec = OPTION_CPL_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
+               unsigned long                        timingTickInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
                Kit::System::SharedEventHandlerApi*  eventHandler     = 0)
         : MailboxServer( timingTickInMsec, eventHandler )
         , m_sema( signalToNotify )
@@ -243,7 +243,7 @@ class ItcMailbox : public Kit::Itc::MailboxServer
 public:
     /// Constructor
     ItcMailbox( Kit::System::Semaphore&              signalToNotify,
-                unsigned long                        timingTickInMsec = OPTION_CPL_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
+                unsigned long                        timingTickInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
                 Kit::System::SharedEventHandlerApi*  eventHandler     = 0 )
         : MailboxServer( timingTickInMsec, eventHandler )
         , m_sema( signalToNotify )

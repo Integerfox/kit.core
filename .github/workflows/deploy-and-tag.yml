@@ -25,9 +25,9 @@ jobs:
       run_number: ${{ github.run_number }}
       ref_name: ${{ github.ref_name }}
 
-  build-linux-stm-arm:
-    name: Build Linux STM ARM
-    uses: ./.github/workflows/build-linux_stm-arm.yml
+  build-linux-arm-cortex:
+    name: Build Linux ARM Cortex M/R
+    uses: ./.github/workflows/build-linux_arm-none-eabi-gcc.yml
     with:
       event_name: ${{ github.event_name }}
       run_number: ${{ github.run_number }}
@@ -49,17 +49,9 @@ jobs:
       run_number: ${{ github.run_number }}
       ref_name: ${{ github.ref_name }}
 
-  build-windows-stm-arm:
-    name: Build Windows STM ARM
-    uses: ./.github/workflows/build-windows_stm-arm.yml
-    with:
-      event_name: ${{ github.event_name }}
-      run_number: ${{ github.run_number }}
-      ref_name: ${{ github.ref_name }}
-
-  build-windows-atmel-arm:
-    name: Build Windows Atmel ARM
-    uses: ./.github/workflows/build-windows_atmel-arm.yml
+  build-windows-arm-cortex:
+    name: Build Windows ARM Cortex M/R
+    uses: ./.github/workflows/build-windows_arm-none-eabi-gcc.yml
     with:
       event_name: ${{ github.event_name }}
       run_number: ${{ github.run_number }}
@@ -69,7 +61,7 @@ jobs:
   deploy:
     name: Deploy and Tag
     runs-on: ubuntu-latest
-    needs: [build-linux-gcc, build-linux-stm-arm, build-windows-msvc, build-windows-clang, build-windows-stm-arm, build-windows-atmel-arm]
+    needs: [build-linux-gcc, build-linux-arm-cortex, build-windows-msvc, build-windows-clang, build-windows-arm-cortex]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     steps:
@@ -80,12 +72,10 @@ jobs:
         run: |
           echo "🎉 All build workflows completed successfully!"
           echo "✅ Build Linux GCC: Success"
-          echo "✅ Build Linux STM ARM: Success"
+          echo "✅ Build Linux ARM Cortex M/R: Success"
           echo "✅ Build Windows MSVC: Success" 
           echo "✅ Build Windows Clang: Success"
-          echo "✅ Build Windows STM ARM: Success"
-          echo "✅ Build Windows Atmel ARM: Success"
-
+          echo "✅ Build Windows ARM Cortex M/R: Success"
       - name: Create Tag
         run: |
           git config --local user.name "GitHub Actions"

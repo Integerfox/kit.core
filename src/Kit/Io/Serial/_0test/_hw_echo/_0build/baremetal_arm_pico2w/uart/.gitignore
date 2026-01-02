@@ -1,0 +1,18 @@
+# Build artifact directories
+_stm32/
+_arduino/
+_pico/
+
+# more stuff
+*.uf2
+*.lst
+*.map
+*.bin
+*.elf
+*.hex
+
+# visual studio
+*.ilk
+*.pdb
+*.sln
+*.user
