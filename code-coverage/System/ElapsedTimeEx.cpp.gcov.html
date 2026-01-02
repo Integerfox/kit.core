@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-01 20:41:03</td>
+            <td class="headerValue">2026-01-02 16:40:19</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -117,15 +117,15 @@
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : ///////////////////////////////////////////////////////////////</span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        4888 : uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        4892 : uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : {</span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">        4888 :     Kit::System::Mutex::ScopeLock lock( Kit::System::PrivateLocks::system() );</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">        4892 :     Kit::System::Mutex::ScopeLock lock( Kit::System::PrivateLocks::system() );</span></span>
 <span id="L61"><span class="lineNum">      61</span>                 :             : </span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">        4874 :     uint64_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();</span></span>
-<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">        4888 :     uint64_t delta    = newTime - lastMsec_;</span></span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">        4888 :     lastMsec_         = newTime;</span></span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">        4888 :     elapsedMsec_     += delta;</span></span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">        4888 :     return elapsedMsec_;</span></span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">        4878 :     uint64_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();</span></span>
+<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">        4892 :     uint64_t delta    = newTime - lastMsec_;</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">        4892 :     lastMsec_         = newTime;</span></span>
+<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">        4892 :     elapsedMsec_     += delta;</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">        4892 :     return elapsedMsec_;</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : }</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : </span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : </span>

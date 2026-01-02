@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-01 20:41:03</td>
+            <td class="headerValue">2026-01-02 16:40:19</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
@@ -123,18 +123,18 @@
 <span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">           9 :     m_isActive = false;</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : }</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">         866 : void WatchedEventThread::monitorWdog() noexcept</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">         860 : void WatchedEventThread::monitorWdog() noexcept</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : {</span>
-<span id="L66"><span class="lineNum">      66</span>         [<span class="tlaGBC" title="Branch 0 was taken 866 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         866 :     if ( !m_isActive )</span></span>
+<span id="L66"><span class="lineNum">      66</span>         [<span class="tlaGBC" title="Branch 0 was taken 860 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         860 :     if ( !m_isActive )</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :     {</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :         return;</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     }</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">         866 :     Supervisor::monitorThreads();</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">         860 :     Supervisor::monitorThreads();</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : }</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             : </span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         875 : bool WatchedEventThread::isSupervisorThread() const noexcept</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         869 : bool WatchedEventThread::isSupervisorThread() const noexcept</span></span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : {</span>
-<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">         875 :     return m_isSupervisor;</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">         869 :     return m_isSupervisor;</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : }</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
 <span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">          18 : bool WatchedEventThread::performHealthCheck() noexcept</span></span>
