@@ -2,14 +2,13 @@
 r"""
 General purpose utility for integrating NQBP into other tools, e.g. VSCode
 ===============================================================================
-usage: sancho [options] buildirs PATH
+usage: sancho [options] build-dirs PATH
        sancho [options] compiler PATH
 
 Arguments:
-    buildirs    Generates a list of nqbp build project directories that might
+    build-dirs  Generates a list of nqbp build project directories that might
                 build/use the specified file or directory. The build directories
-                are listed in the 'most relevant' order. NOTE: The xpkgs/
-                directory at the repository root is excluded from searches.
+                are listed in the 'most relevant' order. 
     compiler    Looks up the compiler option number for env.bat/env.sh based
                 on the build directory path.  NOTE: PATH must be a build
                 directory that contains an nqbp.py file.
@@ -17,12 +16,14 @@ Arguments:
                 repository root directory).
 
 Options:
-    -v                   Verbose output
-    -h, --help           Display help
+    -c CONFIG   Configuration file to use (relative to repository root)
+                [default: .nqbp-configuration.json]
+    -v          Verbose output
+    -h, --help  Display help
 
 Examples:
     ; Find build projects for a specific file
-    sancho.py buildirs src/Kit/System/Api.h
+    sancho.py build-dirs src/Kit/System/Api.h
     
     ; Find compiler option for a build directory
     sancho.py compiler src/Kit/Container/_0test/_0build/windows/msvc
@@ -31,6 +32,7 @@ Examples:
 
 import os
 import sys
+import json
 import platform
 from pathlib import Path
 
@@ -42,13 +44,47 @@ from nqbplib.my_globals import NQBP_PKG_ROOT
 SANCHO_VERSION = '1.0'
 
 #------------------------------------------------------------------------------
-def find_nqbp_files_recursive(directory, repo_root=None):
+def parse_exclude_list(repo_root, config_file_name='.nqbp-configuration.json'):
+    """
+    Parse the configuration file to get exclude patterns.
+    
+    The file contains a JSON object with an "exclude-list" array.
+    
+    Args:
+        repo_root: Repository root path
+        config_file_name: Name of configuration file (relative to repo_root)
+        
+    Returns:
+        List of exclude patterns (strings)
+    """
+    config_file = Path(repo_root) / config_file_name
+    
+    if not config_file.exists():
+        return []
+    
+    try:
+        with open(config_file, 'r') as f:
+            config = json.load(f)
+            
+            # Get exclude-list array
+            exclude_patterns = config.get('exclude-list', [])
+            
+            # Normalize path separators
+            exclude_patterns = [p.replace('\\', '/') for p in exclude_patterns]
+            
+            return exclude_patterns
+    except (json.JSONDecodeError, IOError):
+        return []
+
+
+def find_nqbp_files_recursive(directory, repo_root=None, exclude_patterns=None):
     """
     Recursively search for nqbp.py files in a directory tree.
     
     Args:
         directory: Path to search
-        repo_root: Repository root path (to skip xpkgs at repo root level)
+        repo_root: Repository root path 
+        exclude_patterns: List of path patterns to exclude
         
     Returns:
         List of directories containing nqbp.py
@@ -59,26 +95,33 @@ def find_nqbp_files_recursive(directory, repo_root=None):
     if not directory.exists() or not directory.is_dir():
         return results
     
-    # Determine xpkgs path to skip
-    xpkgs_path = None
-    if repo_root:
-        xpkgs_path = Path(repo_root) / 'xpkgs'
+    # Default exclude patterns to empty list if not provided
+    if exclude_patterns is None:
+        exclude_patterns = []
     
     try:
         for root, dirs, files in os.walk(directory):
             root_path = Path(root)
             
-            # Skip if current root is inside xpkgs directory
-            if xpkgs_path and (root_path == xpkgs_path or xpkgs_path in root_path.parents):
-                dirs[:] = []  # Don't recurse into any subdirectories
-                continue
+            # Check if current path matches any exclude pattern
+            if repo_root and exclude_patterns:
+                try:
+                    rel_path = str(root_path.relative_to(repo_root)).replace('\\', '/')
+                    should_exclude = False
+                    for pattern in exclude_patterns:
+                        # Check if the path starts with the exclude pattern
+                        if rel_path.startswith(pattern):
+                            should_exclude = True
+                            break
+                    
+                    if should_exclude:
+                        dirs[:] = []  # Don't recurse into subdirectories
+                        continue
+                except ValueError:
+                    pass  # Path not relative to repo_root
             
             # Skip hidden directories and common ignore patterns
             dirs[:] = [d for d in dirs if not d.startswith('.') and d not in ['node_modules', '__pycache__']]
-            
-            # Remove xpkgs from dirs list to prevent descending into it
-            if xpkgs_path and 'xpkgs' in dirs and root_path == repo_root:
-                dirs.remove('xpkgs')
             
             # Sort directories alphabetically for consistent traversal order
             dirs.sort()
@@ -94,17 +137,136 @@ def find_nqbp_files_recursive(directory, repo_root=None):
     return results
 
 
-def find_build_projects(file_path, repo_root):
+def separate_test_directories(project_dirs, repo_root):
+    """
+    Separate project directories into test directories and non-test directories.
+    Test directories are those whose path relative to repo_root starts with 'tests/'.
+    
+    Args:
+        project_dirs: List of Path objects to build directories
+        repo_root: Repository root path
+        
+    Returns:
+        Tuple of (non_test_dirs, test_dirs)
+    """
+    repo_root = Path(repo_root).resolve()
+    test_dirs = []
+    non_test_dirs = []
+    
+    for project_dir in project_dirs:
+        # Get relative path from repo root
+        try:
+            rel_path = project_dir.relative_to(repo_root)
+            rel_path_str = str(rel_path).replace('\\', '/')
+            
+            # Check if path starts with 'tests/'
+            if rel_path_str.startswith('tests/'):
+                test_dirs.append(project_dir)
+            else:
+                non_test_dirs.append(project_dir)
+        except ValueError:
+            # Path is not relative to repo root, treat as non-test
+            non_test_dirs.append(project_dir)
+    
+    return non_test_dirs, test_dirs
+
+
+def parse_active_projects_file(repo_root, config_file_name='.nqbp-configuration.json'):
+    """
+    Parse the configuration file to get active project patterns from JSON.
+    
+    The file contains a JSON object with an "active-projects" array.
+    
+    Args:
+        repo_root: Repository root path
+        config_file_name: Name of configuration file (relative to repo_root)
+        
+    Returns:
+        List of partial path patterns (strings)
+    """
+    config_file = Path(repo_root) / config_file_name
+    
+    if not config_file.exists():
+        return []
+    
+    try:
+        with open(config_file, 'r') as f:
+            config = json.load(f)
+            
+            # Get active-projects array
+            patterns = config.get('active-projects', [])
+            
+            # Normalize path separators
+            patterns = [p.replace('\\', '/') for p in patterns]
+            
+            return patterns
+    except (json.JSONDecodeError, IOError):
+        return []
+
+
+def separate_active_projects(project_dirs, input_dir, repo_root, config_file_name='.nqbp-configuration.json'):
+    """
+    Separate project directories into active projects and other projects.
+    
+    Active projects are build directories whose path (relative to repo root)
+    starts with any of the patterns from the configuration file.
+    
+    Args:
+        project_dirs: List of Path objects to build directories
+        input_dir: The input directory being queried (unused, kept for API compatibility)
+        repo_root: Repository root path
+        config_file_name: Name of configuration file (relative to repo_root)
+        
+    Returns:
+        Tuple of (active_dirs, other_dirs)
+    """
+    repo_root = Path(repo_root).resolve()
+    
+    # Parse active projects file
+    active_patterns = parse_active_projects_file(repo_root, config_file_name)
+    
+    if not active_patterns:
+        # No active projects file or empty, return all as "other"
+        return [], list(project_dirs)
+    
+    # Separate directories based on whether they match any active pattern
+    active_dirs = []
+    other_dirs = []
+    
+    for project_dir in project_dirs:
+        try:
+            rel_path = str(project_dir.relative_to(repo_root)).replace('\\', '/')
+            
+            # Check if this build directory starts with any active pattern
+            is_active = False
+            for pattern in active_patterns:
+                if rel_path.startswith(pattern):
+                    is_active = True
+                    break
+            
+            if is_active:
+                active_dirs.append(project_dir)
+            else:
+                other_dirs.append(project_dir)
+        except ValueError:
+            other_dirs.append(project_dir)
+    
+    return active_dirs, other_dirs
+
+
+def find_build_projects(file_path, repo_root, config_file_name='.nqbp-configuration.json'):
     """
     Find all nqbp.py build projects in the repository.
     
-    Walks the entire repository (excluding xpkgs/) and generates a list of directories 
-    containing nqbp.py, separated into platform matches and non-matches. Both lists are
-    then sorted by proximity to the input file/directory.
+    Walks the entire repository (except for the exclude list) and generates a 
+    list of directories containing nqbp.py, separated into platform matches and
+    non-matches. Both lists are then sorted by proximity to the input file/directory.
+    each platform group.
     
     Args:
         file_path: Path to file or directory to use as reference for proximity sorting
         repo_root: Repository root path
+        config_file_name: Name of configuration file (relative to repo_root)
         
     Returns:
         Tuple of (platform_matches, non_matches) - both are proximity-sorted lists of Path objects
@@ -118,71 +280,93 @@ def find_build_projects(file_path, repo_root):
     else:
         input_dir = file_path
     
-    # Find all nqbp.py directories in the entire repo (excluding xpkgs)
-    all_nqbp_dirs = find_nqbp_files_recursive(repo_root, repo_root)
+    # Get exclude patterns from configuration
+    exclude_patterns = parse_exclude_list(repo_root, config_file_name)
     
-    # Separate into platform matches and non-matches
-    platform_matches, non_matches = separate_platform_matches(all_nqbp_dirs)
+    # Find all nqbp.py directories in the entire repo (excluding patterns in exclude-list)
+    all_nqbp_dirs = find_nqbp_files_recursive(repo_root, repo_root, exclude_patterns)
     
-    # Sort both lists by proximity to input directory
-    platform_matches = sort_by_proximity(platform_matches, input_dir)
-    non_matches = sort_by_proximity(non_matches, input_dir)
+    # Separate into active projects (always first) and other projects
+    active_dirs, other_dirs = separate_active_projects(all_nqbp_dirs, input_dir, repo_root, config_file_name)
+    
+    # Process other directories (apply all sorting criteria)
+    non_test_dirs, test_dirs = separate_test_directories(other_dirs, repo_root)
+    platform_matches_non_test, non_matches_non_test = separate_platform_matches(non_test_dirs)
+    platform_matches_test, non_matches_test = separate_platform_matches(test_dirs)
+    
+    platform_matches_non_test = sort_by_proximity(platform_matches_non_test, input_dir, repo_root)
+    non_matches_non_test = sort_by_proximity(non_matches_non_test, input_dir, repo_root)
+    platform_matches_test = sort_by_proximity(platform_matches_test, input_dir, repo_root)
+    non_matches_test = sort_by_proximity(non_matches_test, input_dir, repo_root)
+    
+    # Combine: test directories first, then non-test directories
+    platform_matches = platform_matches_test + platform_matches_non_test
+    non_matches = non_matches_test + non_matches_non_test
+    
+    # Prepend active projects to platform_matches (they always come first)
+    platform_matches = active_dirs + platform_matches
     
     # Return as two separate lists
     return platform_matches, non_matches
 
 
-def sort_by_proximity(project_dirs, input_dir):
+def sort_by_proximity(project_dirs, input_dir, repo_root):
     """
-    Sort build directories by their distance from the input directory.
+    Sort build directories by how many parent directories they share with the input directory.
     
-    Distance is measured by the minimum number of 'cd' steps needed to navigate
-    from the input directory to the build directory.
+    The comparison excludes the top-level root directory (e.g., src/, tests/, projects/)
+    from both paths before counting matching directory components.
     
-    Within the same distance, directories are sorted alphabetically.
+    More matching directories = higher priority (listed first).
+    Within the same match count, directories are sorted alphabetically.
     
     Args:
         project_dirs: List of Path objects to build directories
-        input_dir: Reference directory for distance calculation
+        input_dir: Reference directory for matching calculation
+        repo_root: Repository root path
         
     Returns:
-        Sorted list of Path objects, closest first
+        Sorted list of Path objects, most matches first
     """
-    def calculate_distance(build_dir, ref_dir):
+    def get_path_without_root(path):
         """
-        Calculate the number of directory steps between two paths.
-        Returns the sum of steps up to common ancestor + steps down to target.
+        Get the path components excluding the top-level root directory.
+        E.g., /repo/src/Kit/Container -> ['Kit', 'Container']
         """
-        # Find common ancestor
-        build_parts = build_dir.parts
-        ref_parts = ref_dir.parts
-        
-        # Find the length of the common prefix
-        common_length = 0
-        for i in range(min(len(build_parts), len(ref_parts))):
-            if build_parts[i] == ref_parts[i]:
-                common_length = i + 1
-            else:
-                break
-        
-        # Steps up from ref_dir to common ancestor
-        steps_up = len(ref_parts) - common_length
-        
-        # Steps down from common ancestor to build_dir
-        steps_down = len(build_parts) - common_length
-        
-        # Total distance
-        return steps_up + steps_down
+        try:
+            rel_path = path.relative_to(repo_root)
+            parts = rel_path.parts
+            # Skip the first component (src/, tests/, projects/, etc.)
+            return list(parts[1:]) if len(parts) > 1 else []
+        except ValueError:
+            # Path not relative to repo_root, return empty
+            return []
     
-    # Calculate distance for each directory and pair it with the directory
-    dirs_with_distance = [(calculate_distance(project_dir, input_dir), project_dir) 
-                          for project_dir in project_dirs]
+    def count_matching_components(build_dir, ref_dir):
+        """
+        Count how many directory components match between the two paths,
+        excluding their top-level root directories.
+        """
+        build_parts = get_path_without_root(build_dir)
+        ref_parts = get_path_without_root(ref_dir)
+        
+        # Count how many components from ref_parts appear in build_parts (in order)
+        matches = 0
+        for ref_part in ref_parts:
+            if ref_part in build_parts:
+                matches += 1
+        
+        return matches
     
-    # Sort by distance first, then alphabetically by path
-    dirs_with_distance.sort(key=lambda x: (x[0], x[1]))
+    # Calculate match count for each directory and pair it with the directory
+    dirs_with_matches = [(count_matching_components(project_dir, input_dir), project_dir) 
+                         for project_dir in project_dirs]
+    
+    # Sort by match count descending (more matches first), then alphabetically by path
+    dirs_with_matches.sort(key=lambda x: (-x[0], x[1]))
     
     # Return just the directories
-    return [d[1] for d in dirs_with_distance]
+    return [d[1] for d in dirs_with_matches]
 
 
 def separate_platform_matches(project_dirs):
@@ -217,60 +401,54 @@ def separate_platform_matches(project_dirs):
     return platform_matches, non_matches
 
 
-def parse_build_naming_file(repo_root):
+def parse_build_naming_file(repo_root, config_file_name='.nqbp-configuration.json'):
     """
-    Parse the .nqbp-build-naming.txt file to get compiler mappings.
+    Parse the configuration file to get compiler mappings from JSON.
     
-    The file uses INI-style syntax with platform sections like [windows], [linux].
-    Under each section are lines in the format:
-    compiler_number = partial_path_pattern
+    The file contains a JSON object with a "build-naming" array.
+    Each element in the array contains platform mappings where:
+    - Keys are compiler names (e.g., "msvc", "gcc-host")
+    - Values are compiler numbers
     
     Args:
         repo_root: Repository root path
+        config_file_name: Name of configuration file (relative to repo_root)
         
     Returns:
-        Dictionary mapping platform -> list of (compiler_number, pattern) tuples
+        Dictionary mapping platform -> dict of {pattern: compiler_number}
     """
-    naming_file = Path(repo_root) / '.nqbp-build-naming.txt'
+    config_file = Path(repo_root) / config_file_name
     
-    if not naming_file.exists():
+    if not config_file.exists():
         return {}
     
-    mappings = {}
-    current_platform = None
-    
-    with open(naming_file, 'r') as f:
-        for line in f:
-            line = line.strip()
+    try:
+        with open(config_file, 'r') as f:
+            config = json.load(f)
             
-            # Skip empty lines and comments
-            if not line or line.startswith('#') or line.startswith(';'):
-                continue
+            # Get build-naming array
+            build_naming = config.get('build-naming', [])
             
-            # Check for section header [platform]
-            if line.startswith('[') and line.endswith(']'):
-                current_platform = line[1:-1].strip().lower()
-                if current_platform not in mappings:
-                    mappings[current_platform] = []
-                continue
+            # Convert to the format expected by find_compiler_option
+            # Platform -> {pattern: compiler_number}
+            mappings = {}
+            for platform_obj in build_naming:
+                for platform, compiler_map in platform_obj.items():
+                    mappings[platform.lower()] = compiler_map
             
-            # Parse compiler mapping: number = pattern
-            if current_platform and '=' in line:
-                parts = line.split('=', 1)
-                compiler_num = parts[0].strip()
-                pattern = parts[1].strip()
-                mappings[current_platform].append((compiler_num, pattern))
-    
-    return mappings
+            return mappings
+    except (json.JSONDecodeError, IOError):
+        return {}
 
 
-def find_compiler_option(build_dir_path, repo_root):
+def find_compiler_option(build_dir_path, repo_root, config_file_name='.nqbp-configuration.json'):
     """
     Find the compiler option number for a given build directory.
     
     Args:
         build_dir_path: Path to the build directory
         repo_root: Repository root path
+        config_file_name: Name of configuration file (relative to repo_root)
         
     Returns:
         Compiler option number as string, or None if not found
@@ -292,14 +470,15 @@ def find_compiler_option(build_dir_path, repo_root):
     current_platform = platform.system().lower()
     
     # Parse the build naming file
-    mappings = parse_build_naming_file(repo_root)
+    mappings = parse_build_naming_file(repo_root, config_file_name)
     
     # Check if we have mappings for current platform
     if current_platform not in mappings:
         return None
     
     # Try to match patterns
-    for compiler_num, pattern in mappings[current_platform]:
+    # mappings[platform] is a dict of {compiler_name: compiler_number}
+    for pattern, compiler_num in mappings[current_platform].items():
         # Build full pattern: platform/pattern_value
         full_pattern = f"{current_platform}/{pattern}"
         
@@ -308,7 +487,7 @@ def find_compiler_option(build_dir_path, repo_root):
         
         # Check if pattern is in the path
         if full_pattern in rel_path_str:
-            return compiler_num
+            return str(compiler_num)
     
     return None
 
@@ -331,6 +510,9 @@ def run( arguments ):
     # Default the projects/ dir path to the current working directory
     utils.set_pkg_and_wrkspace_roots( os.getcwd() )
     repo_root = NQBP_PKG_ROOT()
+    
+    # Get configuration file name
+    config_file_name = arguments['-c']
 
     # Handle compiler subcommand
     if arguments['compiler']:
@@ -347,7 +529,7 @@ def run( arguments ):
                 print(f"Error: Directory does not contain nqbp.py: {arguments['PATH']}", file=sys.stderr)
             return 1
         
-        compiler_num = find_compiler_option(input_path, repo_root)
+        compiler_num = find_compiler_option(input_path, repo_root, config_file_name)
         
         if compiler_num is None:
             if arguments['-v']:
@@ -358,10 +540,10 @@ def run( arguments ):
         print(compiler_num)
         return 0
     
-    # Handle buildirs subcommand
-    if arguments['buildirs']:
+    # Handle build-dirs subcommand
+    if arguments['build-dirs']:
         # Find build projects
-        platform_matches, non_matches = find_build_projects(input_path, repo_root)
+        platform_matches, non_matches = find_build_projects(input_path, repo_root, config_file_name)
         
         # Combine for display
         all_projects = platform_matches + non_matches
