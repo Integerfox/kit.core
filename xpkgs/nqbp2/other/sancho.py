@@ -261,7 +261,6 @@ def find_build_projects(file_path, repo_root, config_file_name='.nqbp-configurat
     Walks the entire repository (except for the exclude list) and generates a 
     list of directories containing nqbp.py, separated into platform matches and
     non-matches. Both lists are then sorted by proximity to the input file/directory.
-    each platform group.
     
     Args:
         file_path: Path to file or directory to use as reference for proximity sorting
@@ -350,11 +349,19 @@ def sort_by_proximity(project_dirs, input_dir, repo_root):
         build_parts = get_path_without_root(build_dir)
         ref_parts = get_path_without_root(ref_dir)
         
-        # Count how many components from ref_parts appear in build_parts (in order)
+        # Count how many components from ref_parts appear in build_parts in order
         matches = 0
+        last_match_index = -1
+        
         for ref_part in ref_parts:
-            if ref_part in build_parts:
+            # Look for ref_part in build_parts after the last matched position
+            try:
+                index = build_parts.index(ref_part, last_match_index + 1)
                 matches += 1
+                last_match_index = index
+            except ValueError:
+                # ref_part not found in remaining build_parts, continue to next
+                pass
         
         return matches
     

@@ -19,10 +19,9 @@ export NQBP_XPKGS_ROOT="$HERE"/xpkgs
 export NQBP_BIN="$NQBP_XPKGS_ROOT/nqbp2"
 export NQBP_SHELL_SCRIPT_EXTENSION=".sh"
 
-# Add Ninja to the command path, but only once
-if [ -z "$NQBP2_DONOT_ADD_NINJA_TO_PATH" ]; then
+# Add Ninja to the command path if not already available
+if ! command -v ninja &> /dev/null; then
     export PATH=$PATH:$NQBP_BIN/ninja
-    export NQBP2_DONOT_ADD_NINJA_TO_PATH=true
 fi
 
 # Outcast setup
@@ -51,13 +50,14 @@ alias tnat="$NQBP_BIN/other/chuck.py -v --dir linux --match a.out --m2 a.py --m3
 # No compiler option selected
 if [ -z "$1" ]; then
     pushd $HERE/top >/dev/null 2>&1
-    echo "Current toolchain: $NQBP_CC_SELECTED"
+    echo "Configured toolchains:"
+    ./compiler-list.sh isConfigured
+    echo ""
+    echo "Available toolchains:"
     ./compiler-list.sh
     popd >/dev/null 2>&1
 else
     pushd $HERE/top >/dev/null 2>&1
     source ./compiler-list.sh $1
-    EVARS=$(printenv | grep NQBP)
-    IFS=$'\n'; for e in $EVARS; do export $e; done;
     popd >/dev/null 2>&1
 fi
