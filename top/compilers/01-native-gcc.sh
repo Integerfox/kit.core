@@ -39,6 +39,6 @@ EOF
 
 # Compiler not found/not installed
 else
-    echo "Error: The native GCC compiler needs to be in the PATH"
+    echo "Error: The $NAME needs to be in the PATH"
 fi
 

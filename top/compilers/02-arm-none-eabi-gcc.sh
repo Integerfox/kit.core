@@ -28,5 +28,5 @@ elif [ -n "$GCC_VERSION" ]; then
 
 # Compiler not found/not installed
 else
-    echo "Error: The path to the ARM7 M/R Cortex Cross compiler needs to be added to the PATH"
+    echo "Error: The $NAME needs to be in the PATH"
 fi

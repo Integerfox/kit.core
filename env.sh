@@ -9,8 +9,10 @@
 
 HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# ensure the CWD is in the path
-export PATH=$PATH:.
+# ensure the CWD is in the path (only add if not already present)
+if [[ ":$PATH:" != *":.:"* ]]; then
+    export PATH=$PATH:.
+fi
 
 # Set the NQBP_BIN path
 export NQBP_PKG_ROOT="$HERE"
@@ -38,7 +40,6 @@ alias bob="$NQBP_BIN/other/bob.py"
 alias chuck="$NQBP_BIN/other/chuck.py"
 alias ratt="$NQBP_XPKGS_ROOT/ratt/bin/ratt.py"
 alias fixx="$NQBP_BIN/other/fixx.py"
-alias whatcc="echo $NQBP_CC_SELECTED"
 alias vcc="$NQBP_PKG_ROOT/top/tca2.py --html-dir $NQBP_PKG_ROOT/docs/publish/code-coverage view"
 alias map="$NQBP_PKG_ROOT/scripts/kit/map.py" 
 alias vdox="xdg-open $NQBP_PKG_ROOT/docs/publish/doxygen/index.html &>/dev/null &" 
