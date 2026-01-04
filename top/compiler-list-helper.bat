@@ -4,7 +4,6 @@
 :: usage: compiler-list-helper 
 :: Returns: <index>, <filename>, <name>
 
-
 :: Configure compilers
 del /q /f _compiler_.txt 1>nul 2>nul
 setlocal enableextensions enabledelayedexpansion

@@ -14,7 +14,7 @@ echo:Build Number  %BUILD_NUMBER%
 :: Build STM projects
 ::
 :: Set up the compiler 
-call ./env.bat 5
+call ./env.bat 4
 echo:%PATH%
 
 :: Build the projects
