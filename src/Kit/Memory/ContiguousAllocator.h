@@ -28,6 +28,23 @@ namespace Memory {
 class ContiguousAllocator : public Allocator
 {
 public:
+    /// Structure for memory info/status
+    struct MemoryInfo_T
+    {
+        /// Pointer to the start of the contiguous memory block
+        void* m_memoryStartPtr;
+
+        /// Total size of the contiguous block memory used by allocator in bytes
+        size_t m_totalLenInBytes;
+
+        /// Maximum number of 'words' in the block of memory.  Note: Unit is 'words' NOT bytes (i.e. word size is defined by wordSize() method)
+        size_t m_maxWords;
+
+        /// Number of remaining/free 'words' in the block of memory.
+        size_t m_freeWords;
+    };
+
+public:
     /** Resets the allocator, i.e. effectively frees all allocated memory.  It
         is the caller's RESPONSIBILTY to ensure that it is kosher to free all
         of the memory.
@@ -35,20 +52,22 @@ public:
     virtual void reset() noexcept = 0;
 
 public:
-    /** This method returns a pointer to the start of Allocator's contiguous
-        memory AND the total number of bytes allocated so far.
+    /** This method returns information about Allocator's contiguous memory
+        and allocate/free status. The return value is reference to the 'dstInfo'
+        argument.
 
         NOTE: This method has GREAT POWER and it is the responsibility of the
               Application to use it correctly (Uncle Ben 2002).
      */
-    virtual void* getMemoryStart( size_t& dstAllocatedLenInBytes ) noexcept = 0;
+    virtual MemoryInfo_T& getMemoryStart( MemoryInfo_T& dstInfo ) noexcept = 0;
+
 
 private:
     /** Hide/disable the individual release method (it does not fit the
         contiguous semantics).  If it gets called via the parent 'Allocator'
         interface - it does NOTHING
      */
-    void release( void* ptr ) {};
+    void release( void* ptr ) noexcept {};
 };
 
 

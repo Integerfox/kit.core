@@ -14,10 +14,11 @@
 #include "pico/sync.h"
 #include "pico/multicore.h"
 
+
+
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace System {
-
 
 ///
 static Mutex systemMutex_;
@@ -26,8 +27,7 @@ static Mutex tracingOutputMutex_;
 static Mutex sysListMutex_;
 
 
-////////////////////////////////////////////////////////////////////////////////
-void initialize( void )
+    void initialize( void ) noexcept
 {
     // Init the Colony.Core sub-systems
     IStartupHook::notifyStartupClients();
@@ -48,46 +48,46 @@ void sleepInRealTime( uint32_t milliseconds ) noexcept
 ////////////////////////////////////////////////////////////////////////////////
 extern void suspend_resume_scheduling_not_supported();
 
-void suspendScheduling( void )
+void suspendScheduling( void ) noexcept
 {
     // NOT Supported.  Throw a link-time error
     suspend_resume_scheduling_not_supported();
 
     // FIXME: In theory this call should put the 'other' core into a known/busy-wait
-    // state - but I can't get it to work - the calling core just blocks forever :(. 
-    //multicore_lockout_start_blocking();
+    // state - but I can't get it to work - the calling core just blocks forever :(.
+    // multicore_lockout_start_blocking();
 }
 
-void resumeScheduling( void )
+void resumeScheduling( void ) noexcept
 {
     // NOT Supported.  Throw a link-time error
     suspend_resume_scheduling_not_supported();
 
     // FIXME: See comment above
-    //multicore_lockout_end_blocking();
+    // multicore_lockout_end_blocking();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-Mutex& PrivateLocks::system( void )
+
+Mutex& PrivateLocks::system( void ) noexcept
 {
     return systemMutex_;
 }
 
-Mutex& PrivateLocks::sysLists( void )
+Mutex& PrivateLocks::sysLists( void ) noexcept
 {
     return sysListMutex_;
 }
 
-Mutex& PrivateLocks::tracing( void )
+Mutex& PrivateLocks::tracing( void ) noexcept
 {
     return tracingMutex_;
 }
 
-Mutex& PrivateLocks::tracingOutput( void )
+Mutex& PrivateLocks::tracingOutput( void ) noexcept
 {
     return tracingOutputMutex_;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

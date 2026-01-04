@@ -42,7 +42,7 @@ public:
 
 protected:
     ///
-    void notify( InitLevel init_level ) override
+    void notify( InitLevel init_level ) noexcept override
     {
         elapsedMsec_ = 0;
         lastMsec_    = KitSystemElapsedTime_getTimeInMilliseconds();

@@ -42,7 +42,7 @@ public:
 
 protected:
     /// This method is called when Kit::System::initialize() executes
-    void notify( InitLevel init_level )
+    void notify( InitLevel init_level ) noexcept override
     {
         m_sdkMutex = new recursive_mutex_t;
         if ( m_sdkMutex )

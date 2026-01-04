@@ -27,7 +27,7 @@ public:
 
 protected:
     ///
-    void notify( InitLevel init_level )
+    void notify( InitLevel init_level ) noexcept override
     {
         critical_section_init( &globalCritSec_ );
     }

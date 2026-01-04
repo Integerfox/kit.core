@@ -9,17 +9,16 @@
 /** @file */
 
 #include "Thread.h"
-#include "Kit/Memory/Aligned.h"
-#include "Kit/System/api.h"
+#include "Kit/Memory/AlignedClass.h"
+#include "Kit/System/PrivateStartup.h"
+#include "Kit/System/Api.h"
+#include "Kit/System/Assert.h"
 #include "Kit/System/FatalError.h"
-#include "Kit/System/Private_.h"
 #include "hardware/watchdog.h"
 #include "pico/multicore.h"
 #include "pico/platform.h"
 #include <new>
 
-//
-using namespace Kit::System::RPPico;
 
 // Internal states
 #define THREAD_STATE_DOES_NOT_EXIST 0
@@ -27,16 +26,25 @@ using namespace Kit::System::RPPico;
 #define THREAD_STATE_CREATED        2
 #define THREAD_STATE_RUNNING        3
 
-typedef Kit::Memory::AlignedClass<Thread> ThreadMem_T;
+typedef Kit::Memory::AlignedClass<Kit::System::RPPico::Thread> ThreadMem_T;
 
 // Private variables
 static volatile bool                schedulingEnabled_;
 static volatile unsigned            states_[KIT_SYSTEM_RPPICO_NUM_CORES];
 static ThreadMem_T                  threadMemory_[KIT_SYSTEM_RPPICO_NUM_CORES];
-static Kit::System::RPPico::Thread *threads_[KIT_SYSTEM_RPPICO_NUM_CORES];
+static Kit::System::RPPico::Thread* threads_[KIT_SYSTEM_RPPICO_NUM_CORES];
 
-static void                         core1Entry( void );
-inline static void                  launchCore1()
+////////////////////////////////////
+static void core1Entry( void )
+{
+    multicore_lockout_victim_init();  // Enable SDK support on core1 for 'suspending scheduling'
+    states_[1] = THREAD_STATE_RUNNING;
+    threads_[1]->getRunnable().entry();  // Execute the Runnable object
+    multicore_reset_core1();             // Self terminate if/when the Runnable object completes its processing
+    states_[1] = THREAD_STATE_ALLOCATED;
+}
+
+inline static void launchCore1()
 {
     multicore_launch_core1( core1Entry );
 }
@@ -47,45 +55,46 @@ namespace {
 // This class is used to allocate the actual thread instances.  In addition it
 // has the side effect of turn the initial entry/native/main 'thread' into a
 // Kit::System::Thread (i.e. adds the thread semaphore)
-class RegisterInitHandler_ : public Kit::System::StartupHook_,
-                             public Kit::System::Runnable
+class RegisterInitHandler_ : public Kit::System::IStartupHook,
+                             public Kit::System::IRunnable
 {
 protected:
     // Empty run function -- it is never called!
-    void appRun() {}
+    void entry() noexcept override {}
 
 public:
     ///
     RegisterInitHandler_()
-        : StartupHook_( eSYSTEM ) { m_running = true; }
+        : IStartupHook( SYSTEM )
+    {
+    }
 
 protected:
     ///
-    void notify( InitLevel_T init_level )
+    void notify( InitLevel init_level ) noexcept override
     {
         // Create a thread objects
-        Thread::createThreadInstance( 0, *this, "core0" );
-        Thread::createThreadInstance( 1, *this, "core1" );
+        Kit::System::RPPico::Thread::createThreadInstance( 0, *this );
+        Kit::System::RPPico::Thread::createThreadInstance( 1, *this );
         states_[0] = THREAD_STATE_ALLOCATED;
         states_[1] = THREAD_STATE_ALLOCATED;
     }
 };
-};  // end namespace
+}  // end namespace
 
 ///
 static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
-void                        Thread::createThreadInstance( unsigned               coreId,
-                                   Kit::System::Runnable &runnable,
-                                   const char            *name ) noexcept
-{
-    threads_[coreId] =
-        new ( threadMemory_[coreId].m_byteMem ) Thread( runnable, name, coreId );
-}
 
 ////////////////////////////////////
-Thread::Thread( Kit::System::Runnable &runnable, const char *name, unsigned coreId )
-    : m_runnable( &runnable ), m_name( name ), m_coreId( coreId )
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
+namespace RPPico {
+
+Thread::Thread( Kit::System::IRunnable& runnable, unsigned coreId ) noexcept
+    : Kit::System::Thread( runnable )
+    , m_coreId( coreId )
 {
 }
 
@@ -94,55 +103,10 @@ Thread::~Thread()
     // Nothing needed
 }
 
-//////////////////////////////
-void Kit::System::Api::enableScheduling( void )
+void Thread::createThreadInstance( unsigned                coreId,
+                                   Kit::System::IRunnable& runnable ) noexcept
 {
-    // Do nothing if called twice
-    if ( !schedulingEnabled_ )
-    {
-        // Fail if the application has NOT 'created' core0 thread
-        if ( states_[0] != THREAD_STATE_CREATED )
-        {
-            Kit::System::FatalError::log(
-                "The Application has NOT created any threads" );
-        }
-
-        // Housekeeping
-        schedulingEnabled_ = true;
-
-        // start core1 if it has been created
-        if ( states_[1] == THREAD_STATE_CREATED )
-        {
-            launchCore1();
-        }
-
-        // start core0
-        multicore_lockout_victim_init();  // Enable SDK support on core0 for
-                                          // 'suspending scheduling'
-        states_[0] = THREAD_STATE_RUNNING;
-        threads_[0]->getRunnable().run();
-
-        // If thread0/core0 runs to completion - force a cold boot
-        watchdog_enable( 1, 1 );
-        while ( 1 )
-            ;
-    }
-}
-
-void core1Entry( void )
-{
-    multicore_lockout_victim_init();  // Enable SDK support on core1 for
-                                      // 'suspending scheduling'
-    states_[1] = THREAD_STATE_RUNNING;
-    threads_[1]->getRunnable().run();  // Execute the Runnable object
-    multicore_reset_core1();           // Self terminate if/when the Runnable object
-                                       // completes its processing
-    states_[1] = THREAD_STATE_ALLOCATED;
-}
-
-bool Kit::System::Api::isSchedulingEnabled( void )
-{
-    return schedulingEnabled_;
+    threads_[coreId] = new ( threadMemory_[coreId].m_byteMem ) Thread( runnable, coreId );
 }
 
 //////////////////////////////
@@ -156,45 +120,70 @@ int Thread::su_signal() noexcept
     return m_syncSema.su_signal();
 }
 
-const char *Thread::getName() noexcept
+const char* Thread::getName() const noexcept
 {
-    return m_name;
+    return m_coreId == 0 ? "CORE0" : "CORE1";
 }
 
-size_t Thread::getId() noexcept
+}  // end namespace
+}
+}
+//------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace System {
+
+void enableScheduling() noexcept
 {
-    return m_coreId;
+    // Do nothing if called twice
+    if ( !schedulingEnabled_ )
+    {
+        // Fail if the application has NOT 'created' core0 thread
+        if ( states_[0] != THREAD_STATE_CREATED )
+        {
+            FatalError::log( Shutdown::eOSAL, "The Application has NOT created any threads" );
+        }
+
+        // Housekeeping
+        schedulingEnabled_ = true;
+
+        // start core1 if it has been created
+        if ( states_[1] == THREAD_STATE_CREATED )
+        {
+            launchCore1();
+        }
+
+        // start core0
+        multicore_lockout_victim_init();  // Enable SDK support on core0 for 'suspending scheduling'
+        states_[0] = THREAD_STATE_RUNNING;
+        threads_[0]->getRunnable().entry();
+
+        // If thread0/core0 runs to completion - force a cold boot
+        watchdog_enable( 1, 1 );
+        while ( 1 )
+        {
+            ;
+        }
+    }
 }
 
-bool Thread::isRunning() noexcept
+bool isSchedulingEnabled( void ) noexcept
 {
-    return m_runnable->isRunning();
+    return schedulingEnabled_;
 }
 
-Kit::System::Runnable &Thread::getRunnable( void ) noexcept
-{
-    return *m_runnable;
-}
-
-Cpl_System_Thread_NativeHdl_T Thread::getNativeHandle( void ) noexcept
-{
-    return m_coreId;
-}
 
 //////////////////////////////
-
-//////////////////////////////
-Kit::System::Thread &Kit::System::Thread::getCurrent() noexcept
+Kit::System::Thread* Kit::System::Thread::tryGetCurrent() noexcept
 {
-    // Note: All thread instances are created when the CPL library is initialized
-    // - so in theory there is always a valid current thread
     unsigned coreIdx = get_core_num();
-    return *( threads_[coreIdx] );
-}
-
-Kit::System::Thread *Kit::System::Thread::tryGetCurrent() noexcept
-{
-    return &( Kit::System::Thread::getCurrent() );
+    auto     state   = states_[coreIdx];
+    if ( state == THREAD_STATE_RUNNING )
+    {
+        return threads_[coreIdx];
+    }
+    return nullptr;
 }
 
 void Kit::System::Thread::wait() noexcept
@@ -209,54 +198,25 @@ bool Kit::System::Thread::tryWait() noexcept
     return threads_[coreIdx]->m_syncSema.tryWait();
 }
 
-bool Kit::System::Thread::timedWait( unsigned long timeout ) noexcept
+bool Kit::System::Thread::timedWait( uint32_t timeout ) noexcept
 {
     unsigned coreIdx = get_core_num();
     return threads_[coreIdx]->m_syncSema.timedWait( timeout );
 }
 
-const char *Kit::System::Thread::myName() noexcept
-{
-    unsigned coreIdx = get_core_num();
-    return threads_[coreIdx]->m_name;
-}
-
-size_t Kit::System::Thread::myId() noexcept
-{
-    unsigned coreIdx = get_core_num();
-    return threads_[coreIdx]->m_coreId;
-}
 
 //////////////////////////////
-void Kit::System::Thread::traverse(
-    Kit::System::Thread::Traverser &client ) noexcept
-{
-    Kit::System::Mutex::ScopeBlock mylock( Kit::System::Locks_::sysLists() );
-    for ( unsigned idx = 0; idx < KIT_SYSTEM_RPPICO_NUM_CORES; idx++ )
-    {
-        if ( states_[idx] == THREAD_STATE_RUNNING )
-        {
-            if ( client.item( *( threads_[idx] ) ) == Kit::Type::Traverser::eABORT )
-            {
-                break;
-            }
-        }
-    }
-}
-
-//////////////////////////////
-Kit::System::Thread *Kit::System::Thread::create( Runnable   &runnable,
-                                                  const char *name,
+Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
+                                                  const char* name,
                                                   int         priority,
                                                   int         stackSize,
-                                                  void       *stackPtr,
-                                                  bool        allowSimTicks )
+                                                  void*       stackPtr,
+                                                  bool        allowSimTicks ) noexcept
 {
     // 'Create' the first thread
     if ( states_[0] == THREAD_STATE_ALLOCATED )
     {
         states_[0]              = THREAD_STATE_CREATED;
-        threads_[0]->m_name     = name;
         threads_[0]->m_runnable = &runnable;
         return threads_[0];
     }
@@ -265,7 +225,6 @@ Kit::System::Thread *Kit::System::Thread::create( Runnable   &runnable,
     else if ( states_[1] == THREAD_STATE_ALLOCATED )
     {
         states_[1]              = THREAD_STATE_CREATED;
-        threads_[1]->m_name     = name;
         threads_[1]->m_runnable = &runnable;
         if ( schedulingEnabled_ )
         {
@@ -276,19 +235,26 @@ Kit::System::Thread *Kit::System::Thread::create( Runnable   &runnable,
 
     // If I get here then, ALL threads have already be 'created' -->so the fail
     // the call
-    return 0;
+    return nullptr;
 }
 
-void Kit::System::Thread::destroy( Thread &threadToDestroy )
+void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMsToWaitIfActive ) noexcept
 {
     // Ignore request to destroy thread0/core0 thread
-    if ( threadToDestroy.getNativeHandle() == 1 )
+    if ( threadToDestroy.getId() == 1 )
     {
         // Ignore if thread1/core1 is not running
         if ( states_[1] == THREAD_STATE_RUNNING )
         {
+            // Wait for the thread to stop
+            if ( delayTimeMsToWaitIfActive > 0 )
+            {
+                threadToDestroy.m_runnable.pleaseStop();
+                threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
+            }
+
             // NOTE: In general it is not a good thing to "kill" threads - but to
-            //       let the thread "run-to-completion", i.e. have the run() method
+            //       let the thread "run-to-completion", i.e. have the entry() method
             //       of the associated Runnable object complete.  If you do
             //       need to kill a thread - be dang sure that it is state such
             //       that it is ok to die - i.e. it has released all of its acquired
@@ -298,3 +264,7 @@ void Kit::System::Thread::destroy( Thread &threadToDestroy )
         }
     }
 }
+
+}  // end namespace
+}
+//------------------------------------------------------------------------------

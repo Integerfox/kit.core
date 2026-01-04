@@ -45,7 +45,7 @@ public:
 
 protected:
     /// This method is called when Kit::System::initialize() executes
-    void notify( InitLevel init_level )
+    void notify( InitLevel init_level ) noexcept override
     {
         m_sdkSema = new semaphore_t;
         if ( m_sdkSema )

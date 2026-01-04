@@ -66,7 +66,7 @@ class Thread : public Kit::System::Thread
 {
 protected:
     /// Private Constructor. Application can only create thread using the Kit::System::Thread::create() method.
-    Thread( Runnable& runnable, const char* name, unsigned coreId );
+    Thread( IRunnable& runnable, unsigned coreId ) noexcept;
 
 public:
     /// Destructor
@@ -74,22 +74,8 @@ public:
 
 public:
     /// See Kit::System::Thread
-    const char* getName() noexcept;
+    const char* getName() const noexcept override;
 
-    /// See Kit::System::Thread
-    size_t getId() noexcept;
-
-    /// See Kit::System::Thread
-    bool isRunning( void ) noexcept;
-
-    /// See Kit::System::Thread
-    Cpl_System_Thread_NativeHdl_T getNativeHandle( void ) noexcept;
-
-    /// See Kit::System::Thread
-    Runnable& getRunnable( void ) noexcept;
-
-
-public:
     /// See Kit::System::Signable
     int signal( void ) noexcept;
 
@@ -104,7 +90,7 @@ public:
 
         Helper method to internally allocate a thread. 
      */
-    static void createThreadInstance( unsigned coreId, Kit::System::Runnable& runnable, const char* name ) noexcept;
+    static void createThreadInstance( unsigned coreId, Kit::System::IRunnable& runnable ) noexcept;
 
 
 protected:
@@ -112,10 +98,7 @@ protected:
     Kit::System::Semaphore  m_syncSema;
 
     /// Pointer to the runnable object for the thread
-    Kit::System::Runnable*  m_runnable;
-
-    /// Thread name
-    Kit::Text::FString<OPTION_CPL_SYSTEM_RPPICOTHREAD_NAME_LEN> m_name;
+    Kit::System::IRunnable*  m_runnable;
 
     /// internal handle
     unsigned                m_coreId;

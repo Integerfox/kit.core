@@ -54,7 +54,7 @@ size_t Pool::wordSize() const noexcept
     return m_alignedBlockSize;
 }
 
-void* Pool::allocate( size_t numbytes )
+void* Pool::allocate( size_t numbytes ) noexcept
 {
     void* ptr = nullptr;
 
@@ -100,7 +100,7 @@ void* Pool::allocate( size_t numbytes )
 }
 
 
-void Pool::release( void* ptr )
+void Pool::release( void* ptr ) noexcept
 {
     // Handle the case of ptr == 0  \(per semantic of the Allocator interface)
     if ( ptr == nullptr )

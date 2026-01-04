@@ -1,5 +1,5 @@
-#ifndef Cpl_Memory_HPool_h_
-#define Cpl_Memory_HPool_h_
+#ifndef KIT_MEMORY_HPOOL_H_
+#define KIT_MEMORY_HPOOL_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,94 +11,93 @@
 /** @file */
 
 
-#include "Cpl/Memory/Pool_.h"
-#include "Cpl/Memory/Aligned.h"
+#include "Kit/Memory/Pool.h"
+#include "Kit/Memory/AlignedClass.h"
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Memory {
 
 
-/** This template class defines a concrete Allocator that allocates its block
-	memory from the HEAP.  However, once the initial set of blocks are
-	allocated, no more heap operations are performed.  All of the memory is
-	aligned to size_t boundaries.
+/** This template class defines a concrete Allocator that allocates memory from
+    the HEAP for a memory pool that can create up to N concurrent instances of
+    class T.  However, once the initial set of blocks are allocated, no more
+    heap operations are performed.  All of the memory is aligned to  class "T"
+    alignment boundaries.
 
-	NOTES:
+    NOTES:
 
-		1) If you only need memory for ONE instance - use AlignedClass structure
-		   in Aligned.h instead.
+        1) If you only need memory for ONE instance - use AlignedClass structure
+           in Aligned.h instead.
 
-		2) The class is not inherently multi-thread safe.
+        2) The class is not inherently multi-thread safe.
 
-		3) If the requested number of bytes on the allocate() method is greater
-		   than the block size (i.e. sizeof(T)), 0 is returned.
+        3) If the requested number of bytes on the allocate() method is greater
+           than the block size (i.e. sizeof(T)), 0 is returned.
 
-		4) The class can be deleted. However, it is the responsibility of the
-		   Application to properly clean-up/release ALL outstanding block
-		   allocations before deleting the HPool instance.
+        4) The class can be deleted. However, it is the responsibility of the
+           Application to properly clean-up/release ALL outstanding block
+           allocations before deleting the HPool instance.
 
 
-	Template args: class "T" is the type of class to allocated
+    Template args: class "T" is the type of class to allocated
  */
 
 template <class T>
 class HPool : public Allocator
 {
 protected:
-	/// Allocate memory for BlockInfo_ instances
-	Pool_::BlockInfo_*  m_infoBlocks;
+    /// Allocate memory for BlockInfo_ instances
+    Pool::BlockInfo* m_infoBlocks;
 
-	/// Allocate blocks
-	AlignedClass<T>*    m_blocks;
+    /// Allocate blocks
+    AlignedClass<T>* m_blocks;
 
-	/// My Pool work object
-	Pool_*              m_poolPtr;
-
-
-public:
-	/** Constructor.  When the 'fatalErrors' argument is set to true, memory errors
-		(e.g. out-of-memory) will generate a Cpl::System::FatalError call.
-	 */
-	HPool( size_t maxNumBlocks, bool fatalErrors = false )
-		:m_infoBlocks( new Pool_::BlockInfo_[maxNumBlocks]() ),
-		m_blocks( new AlignedClass<T>[maxNumBlocks] ),
-		m_poolPtr( new Pool_( m_infoBlocks, sizeof( T ), sizeof( AlignedClass<T> ), maxNumBlocks, m_blocks, fatalErrors ) )
-	{
-	}
-
-
-	/// Destructor.
-	~HPool()
-	{
-		delete m_poolPtr;
-		delete[] m_blocks;
-		delete[] m_infoBlocks;
-	}
+    /// My Pool work object
+    Pool* m_poolPtr;
 
 
 public:
-	/// See Cpl::Memory::Allocator
-	void* allocate( size_t numbytes ) { return m_poolPtr->allocate( numbytes ); }
+    /** Constructor.  When the 'fatalErrors' argument is set to true, memory errors
+        (e.g. out-of-memory) will generate a Kit::System::FatalError call.
+     */
+    HPool( size_t maxNumBlocks, bool fatalErrors = false )
+        : m_infoBlocks( new Pool::BlockInfo[maxNumBlocks]() )
+        , m_blocks( new AlignedClass<T>[maxNumBlocks] )
+        , m_poolPtr( new Pool( m_infoBlocks, sizeof( T ), alignof( AlignedClass<T> ), maxNumBlocks, m_blocks, fatalErrors ) )
+    {
+    }
 
-	/// See Cpl::Memory::Allocator
-	void release( void *ptr ) { m_poolPtr->release( ptr ); }
 
-	/// See Cpl::Memory::Allocator
-	size_t wordSize() const noexcept { return m_poolPtr->wordSize(); }
+    /// Destructor.
+    ~HPool()
+    {
+        delete m_poolPtr;
+        delete[] m_blocks;
+        delete[] m_infoBlocks;
+    }
+
+
+public:
+    /// See Kit::Memory::Allocator
+    void* allocate( size_t numbytes ) noexcept { return m_poolPtr->allocate( numbytes ); }
+
+    /// See Kit::Memory::Allocator
+    void release( void* ptr ) noexcept { m_poolPtr->release( ptr ); }
+
+    /// See Kit::Memory::Allocator
+    size_t wordSize() const noexcept { return m_poolPtr->wordSize(); }
 
 private:
-	/// Prevent access to the copy constructor -->HPools can not be copied!
-	HPool( const HPool& m );
+    /// Prevent access to the copy constructor -->HPools can not be copied!
+    HPool( const HPool& m );
 
-	/// Prevent access to the assignment operator -->HPools can not be copied!
-	const HPool& operator=( const HPool& m );
-
+    /// Prevent access to the assignment operator -->HPools can not be copied!
+    const HPool& operator=( const HPool& m );
 };
 
 
-
-};      // end namespaces
-};
+}   // end namespaces
+}
 #endif  // end header latch

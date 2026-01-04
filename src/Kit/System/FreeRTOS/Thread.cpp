@@ -120,7 +120,7 @@ void Thread::entryPoint( void* data ) noexcept
 Thread::~Thread() noexcept
 {
     // NOTE: In general it is not a good thing to "kill" threads - but to
-    //       let the thread "run-to-completion", i.e. have the run() method
+    //       let the thread "run-to-completion", i.e. have the entry() method
     //       of the associated IRunnable object complete.  If you do
     //       need to kill a thread - be dang sure that it is state such
     //       that it is ok to die - i.e. it has released all of its acquired
