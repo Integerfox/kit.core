@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-02 16:40:19</td>
+            <td class="headerValue">2026-01-05 13:04:03</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">72.7&nbsp;%</td>
@@ -129,14 +129,14 @@
 <span id="L67"><span class="lineNum">      67</span>                 :             :         }</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : </span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :         // Has the interval expired?</span>
-<span id="L70"><span class="lineNum">      70</span>         [<span class="tlaGBC" title="Branch 0 was taken 395 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 382 times"> + </span>]:<span class="tlaGNC">         777 :         if ( ElapsedTime::expiredMillisecondsEx( interval-&gt;timeMarker, interval-&gt;duration, currentTick ) )</span></span>
+<span id="L70"><span class="lineNum">      70</span>         [<span class="tlaGBC" title="Branch 0 was taken 394 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 383 times"> + </span>]:<span class="tlaGNC">         777 :         if ( ElapsedTime::expiredMillisecondsEx( interval-&gt;timeMarker, interval-&gt;duration, currentTick ) )</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :         {</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :             atLeastOne            = true;</span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         395 :             interval-&gt;timeMarker += interval-&gt;duration;</span></span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">         395 :             ( interval-&gt;callbackFunc )( currentTick, interval-&gt;timeMarker, interval-&gt;context );</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         394 :             interval-&gt;timeMarker += interval-&gt;duration;</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">         394 :             ( interval-&gt;callbackFunc )( currentTick, interval-&gt;timeMarker, interval-&gt;context );</span></span>
 <span id="L75"><span class="lineNum">      75</span>                 :             : </span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :             // Check for slippage</span>
-<span id="L77"><span class="lineNum">      77</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 391 times"> + </span>]:<span class="tlaGNC">         395 :             if ( ElapsedTime::expiredMillisecondsEx( interval-&gt;timeMarker, interval-&gt;duration, currentTick ) )</span></span>
+<span id="L77"><span class="lineNum">      77</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 390 times"> + </span>]:<span class="tlaGNC">         394 :             if ( ElapsedTime::expiredMillisecondsEx( interval-&gt;timeMarker, interval-&gt;duration, currentTick ) )</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :             {</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :                 // Report the slippage to the application</span>
 <span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           4 :                 if ( m_reportSlippage )</span></span>

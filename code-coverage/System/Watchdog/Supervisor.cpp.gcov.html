@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-02 16:40:19</td>
+            <td class="headerValue">2026-01-05 13:04:03</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">71.4&nbsp;%</td>
@@ -107,17 +107,17 @@
 <span id="L45"><span class="lineNum">      45</span>                 :             :     m_watchedThreads.remove( threadBeingMonitored );</span>
 <span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">          20 : }</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         897 : void Supervisor::monitorThreads() noexcept</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         898 : void Supervisor::monitorThreads() noexcept</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : {</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     // Not enabled --&gt;do nothing</span>
-<span id="L51"><span class="lineNum">      51</span>         [<span class="tlaGBC" title="Branch 0 was taken 897 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         897 :     if ( !m_isEnabled )</span></span>
+<span id="L51"><span class="lineNum">      51</span>         [<span class="tlaGBC" title="Branch 0 was taken 898 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         898 :     if ( !m_isEnabled )</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     {</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :         return;  </span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     }</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :     // Use tick divider to reduce monitoring frequency</span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">         897 :     m_currentTick++;</span></span>
-<span id="L58"><span class="lineNum">      58</span>         [<span class="tlaGBC" title="Branch 0 was taken 281 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 616 times"> + </span>]:<span class="tlaGNC">         897 :     if ( m_currentTick &gt;= OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER )</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">         898 :     m_currentTick++;</span></span>
+<span id="L58"><span class="lineNum">      58</span>         [<span class="tlaGBC" title="Branch 0 was taken 281 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 617 times"> + </span>]:<span class="tlaGNC">         898 :     if ( m_currentTick &gt;= OPTION_KIT_SYSTEM_WATCHDOG_SUPERVISOR_TICK_DIVIDER )</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     {</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :         // Housekeeping</span>
 <span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">         281 :         m_currentTick  = 0;</span></span>
@@ -127,23 +127,23 @@
 <span id="L65"><span class="lineNum">      65</span>                 :             :         // Walk the list of monitored threads</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :         WatchedThread*                thread = m_watchedThreads.first();</span>
-<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 283 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 243 times"> + </span>]:<span class="tlaGNC">         526 :         while ( thread )</span></span>
+<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 281 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 242 times"> + </span>]:<span class="tlaGNC">         523 :         while ( thread )</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :         {</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :             // Check for an expired thread timer</span>
-<span id="L71"><span class="lineNum">      71</span>         [<span class="tlaGBC" title="Branch 0 was taken 38 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 245 times"> + </span>]:<span class="tlaGNC">         283 :             if ( thread-&gt;m_currentCountMs &lt;= delta )</span></span>
+<span id="L71"><span class="lineNum">      71</span>         [<span class="tlaGBC" title="Branch 0 was taken 39 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 242 times"> + </span>]:<span class="tlaGNC">         281 :             if ( thread-&gt;m_currentCountMs &lt;= delta )</span></span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :             {</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :                 Supervisor::tripWdog();  // EXPIRED</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :                 return;                  // Never executes because the tripWdog() method never returns, but it simplifies testing</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :             }</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : </span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :             // Decrement the thread's timer and get the next thread in the list</span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">         245 :             thread-&gt;m_currentCountMs -= delta;</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">         242 :             thread-&gt;m_currentCountMs -= delta;</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :             thread                    = m_watchedThreads.next( *thread );</span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :         }</span>
 <span id="L81"><span class="lineNum">      81</span>                 :             : </span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :         // If I get here - all monitored threads are 'healthy'</span>
-<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">         243 :         Kit_System_Watchdog_hal_kick_wdog();</span></span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">         243 :         m_timeMarker = now;</span></span>
+<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">         242 :         Kit_System_Watchdog_hal_kick_wdog();</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">         242 :         m_timeMarker = now;</span></span>
 <span id="L85"><span class="lineNum">      85</span>                 :             :     }</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : }</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             : </span>
@@ -172,13 +172,13 @@
 <span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC">           5 : void Supervisor::tripWdog() noexcept</span></span>
 <span id="L111"><span class="lineNum">     111</span>                 :             : {</span>
 <span id="L112"><span class="lineNum">     112</span>                 :             :     // Ensure watchdog is enabled before tripping</span>
-<span id="L113"><span class="lineNum">     113</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 38 times"> + </span>]:<span class="tlaGNC">          43 :     if ( !m_isEnabled )</span></span>
+<span id="L113"><span class="lineNum">     113</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 39 times"> + </span>]:<span class="tlaGNC">          44 :     if ( !m_isEnabled )</span></span>
 <span id="L114"><span class="lineNum">     114</span>                 :             :     {</span>
 <span id="L115"><span class="lineNum">     115</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         enableWdog();</span></span>
 <span id="L116"><span class="lineNum">     116</span>                 :             :     }</span>
 <span id="L117"><span class="lineNum">     117</span>                 :             : </span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :     // Trip the watchdog to force system reset</span>
-<span id="L119"><span class="lineNum">     119</span>                 :<span class="tlaGNC tlaBgGNC">          43 :     Kit_System_Watchdog_hal_trip_wdog();</span></span>
+<span id="L119"><span class="lineNum">     119</span>                 :<span class="tlaGNC tlaBgGNC">          44 :     Kit_System_Watchdog_hal_trip_wdog();</span></span>
 <span id="L120"><span class="lineNum">     120</span>                 :<span class="tlaGNC">           5 : }</span></span>
         </pre>
               </td>
