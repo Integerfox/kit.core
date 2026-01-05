@@ -1,0 +1,22 @@
+{
+    "active-projects": [
+    ],
+    "exclude-list": [
+        "xpkgs"
+    ],
+    "build-naming": [
+        {
+            "windows": {
+                "msvc": 1,
+                "clang-host": 3,
+                "gcc-arm-mcu": 5
+            }
+        },
+        {
+            "linux": {
+                "gcc-host": 1,
+                "gcc-arm-mcu": 2
+            }
+        }
+    ]
+}

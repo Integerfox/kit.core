@@ -9,8 +9,10 @@
 
 HERE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# ensure the CWD is in the path
-export PATH=$PATH:.
+# ensure the CWD is in the path (only add if not already present)
+if [[ ":$PATH:" != *":.:"* ]]; then
+    export PATH=$PATH:.
+fi
 
 # Set the NQBP_BIN path
 export NQBP_PKG_ROOT="$HERE"
@@ -19,10 +21,9 @@ export NQBP_XPKGS_ROOT="$HERE"/xpkgs
 export NQBP_BIN="$NQBP_XPKGS_ROOT/nqbp2"
 export NQBP_SHELL_SCRIPT_EXTENSION=".sh"
 
-# Add Ninja to the command path, but only once
-if [ -z "$NQBP2_DONOT_ADD_NINJA_TO_PATH" ]; then
+# Add Ninja to the command path if not already available
+if ! command -v ninja &> /dev/null; then
     export PATH=$PATH:$NQBP_BIN/ninja
-    export NQBP2_DONOT_ADD_NINJA_TO_PATH=true
 fi
 
 # Outcast setup
@@ -34,11 +35,11 @@ export SINELABORE_PATH=~/sinelabore/bin
 
 # Set helper macros
 alias t="cd $HERE"
+alias sancho="$NQBP_BIN/other/sancho.py"
 alias bob="$NQBP_BIN/other/bob.py"
 alias chuck="$NQBP_BIN/other/chuck.py"
 alias ratt="$NQBP_XPKGS_ROOT/ratt/bin/ratt.py"
 alias fixx="$NQBP_BIN/other/fixx.py"
-alias whatcc="echo $NQBP_CC_SELECTED"
 alias vcc="$NQBP_PKG_ROOT/top/tca2.py --html-dir $NQBP_PKG_ROOT/docs/publish/code-coverage view"
 alias map="$NQBP_PKG_ROOT/scripts/kit/map.py" 
 alias vdox="xdg-open $NQBP_PKG_ROOT/docs/publish/doxygen/index.html &>/dev/null &" 
@@ -50,13 +51,14 @@ alias tnat="$NQBP_BIN/other/chuck.py -v --dir linux --match a.out --m2 a.py --m3
 # No compiler option selected
 if [ -z "$1" ]; then
     pushd $HERE/top >/dev/null 2>&1
-    echo "Current toolchain: $NQBP_CC_SELECTED"
+    echo "Configured toolchains:"
+    ./compiler-list.sh isConfigured
+    echo ""
+    echo "Available toolchains:"
     ./compiler-list.sh
     popd >/dev/null 2>&1
 else
     pushd $HERE/top >/dev/null 2>&1
     source ./compiler-list.sh $1
-    EVARS=$(printenv | grep NQBP)
-    IFS=$'\n'; for e in $EVARS; do export $e; done;
     popd >/dev/null 2>&1
 fi
