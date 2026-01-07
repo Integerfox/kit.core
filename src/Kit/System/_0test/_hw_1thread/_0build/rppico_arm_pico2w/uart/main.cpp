@@ -20,6 +20,17 @@
 
 extern void runtests( size_t maxLoopCount );
 
+// The _hw_1thread tests calls suspend/resume scheduling which is not currently
+// (1-6-2026) currently supported -->so provide dummy functions so we link/run
+namespace Kit {
+namespace System {
+void suspend_resume_scheduling_not_supported()
+{
+    KIT_SYSTEM_TRACE_MSG( SECT_, "suspendScheduling()/resumeScheduling() NOT supported on RPPico" );
+}
+}  // end namespace
+}
+
 /*-----------------------------------------------------------*/
 int main( void )
 {

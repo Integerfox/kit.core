@@ -62,7 +62,7 @@ bool Thread::isActiveThread( Thread* threadPtr ) noexcept
 {
     // NOTE: I have to walk the list of active threads because 'threadPtr' may or may not be valid Thread pointer
     Mutex::ScopeLock lock( PrivateLocks::sysLists() );
-    Thread* ptr = threadList_.first();
+    Thread*          ptr = threadList_.first();
     while ( ptr )
     {
         if ( ptr == threadPtr )
@@ -74,13 +74,13 @@ bool Thread::isActiveThread( Thread* threadPtr ) noexcept
     return false;
 }
 
- void Thread::addThreadToActiveList( Thread& thread ) noexcept
+void Thread::addThreadToActiveList( Thread& thread ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     threadList_.put( thread );
 }
 
- void Thread::removeThreadFromActiveList( Thread& thread ) noexcept
+void Thread::removeThreadFromActiveList( Thread& thread ) noexcept
 {
     Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     threadList_.remove( thread );
@@ -92,10 +92,11 @@ void Thread::launchRunnable( Thread& threadHdl ) noexcept
     addThreadToActiveList( threadHdl );
 
     // Launch the IRunnable object
-    threadHdl.m_runnable.setThread( &threadHdl );
+    auto& runnable = threadHdl.getRunnable();
+    runnable.setThread( &threadHdl );
     KIT_SYSTEM_SIM_TICK_THREAD_INIT_( threadHdl.m_allowSimTicks );
-    threadHdl.m_runnable.entry();
-    threadHdl.m_runnable.setThread( nullptr );
+    runnable.entry();
+    runnable.setThread( nullptr );
     KIT_SYSTEM_SIM_TICK_ON_THREAD_EXIT_();
 
     // Remove the thread from the list of active threads

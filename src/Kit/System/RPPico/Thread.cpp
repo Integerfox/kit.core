@@ -12,6 +12,7 @@
 #include "Kit/Memory/AlignedClass.h"
 #include "Kit/System/PrivateStartup.h"
 #include "Kit/System/Api.h"
+#include "Kit/System/Trace.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/FatalError.h"
 #include "hardware/watchdog.h"
@@ -19,6 +20,7 @@
 #include "pico/platform.h"
 #include <new>
 
+#define SECT_ "Kit::System::RPPico::Thread"
 
 // Internal states
 #define THREAD_STATE_DOES_NOT_EXIST 0
@@ -60,7 +62,10 @@ class RegisterInitHandler_ : public Kit::System::IStartupHook,
 {
 protected:
     // Empty run function -- it is never called!
-    void entry() noexcept override {}
+    void entry() noexcept override
+    {
+        KIT_SYSTEM_TRACE_MSG( SECT_, "ERROR: RegisterInitHandler_::entry() called - this should never happen!" );
+    }
 
 public:
     ///
@@ -94,6 +99,7 @@ namespace RPPico {
 
 Thread::Thread( Kit::System::IRunnable& runnable, unsigned coreId ) noexcept
     : Kit::System::Thread( runnable )
+    , m_runnablePtr( &runnable )
     , m_coreId( coreId )
 {
 }
@@ -123,6 +129,12 @@ int Thread::su_signal() noexcept
 const char* Thread::getName() const noexcept
 {
     return m_coreId == 0 ? "CORE0" : "CORE1";
+}
+
+Kit::System::IRunnable& Thread::getRunnable() const noexcept
+{
+    KIT_SYSTEM_ASSERT( m_runnablePtr != nullptr );
+    return *m_runnablePtr;
 }
 
 }  // end namespace
@@ -216,16 +228,16 @@ Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
     // 'Create' the first thread
     if ( states_[0] == THREAD_STATE_ALLOCATED )
     {
-        states_[0]              = THREAD_STATE_CREATED;
-        threads_[0]->m_runnable = &runnable;
+        states_[0]                 = THREAD_STATE_CREATED;
+        threads_[0]->m_runnablePtr = &runnable;
         return threads_[0];
     }
 
     // 'Create' the second thread
     else if ( states_[1] == THREAD_STATE_ALLOCATED )
     {
-        states_[1]              = THREAD_STATE_CREATED;
-        threads_[1]->m_runnable = &runnable;
+        states_[1]                 = THREAD_STATE_CREATED;
+        threads_[1]->m_runnablePtr = &runnable;
         if ( schedulingEnabled_ )
         {
             launchCore1();
@@ -249,7 +261,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
             // Wait for the thread to stop
             if ( delayTimeMsToWaitIfActive > 0 )
             {
-                threadToDestroy.m_runnable.pleaseStop();
+                threadToDestroy.getRunnable().pleaseStop();
                 threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
             }
 

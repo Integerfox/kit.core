@@ -13,7 +13,7 @@
 */
 
 // OSAL mappings
-#include "Kit/System/BareMetal/mappings.h"
+#include "Kit/System/RPPico/mappings.h"
 
 // BSP
 #include "Kit/Bsp/RPi/baremetal_arm_pico2w/Api.h"
