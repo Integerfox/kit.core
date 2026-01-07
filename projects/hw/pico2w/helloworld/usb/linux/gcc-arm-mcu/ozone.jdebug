@@ -22,17 +22,14 @@ void OnProjectLoad (void) {
   //
   // Dialog-generated settings
   //
-  Project.SetDevice ("STM32F413ZH");
+  Project.SetDevice ("RP2350_M33_0");
   Project.SetHostIF ("USB", "");
   Project.SetTargetIF ("SWD");
   Project.SetTIFSpeed ("4 MHz");
-  Project.AddSvdFile ("$(InstallDir)/Config/CPU/Cortex-M4F.svd");
-  Project.AddSvdFile ("$(NQBP_PKG_ROOT)/src/Kit/Bsp/ST/STM32F413.svd");
   //
   // User settings
   //
-  File.Open ("_stm32/hw_basic.elf");
-  Project.SetOSPlugin ("FreeRTOSPlugin_Cortex-M.js");
+  File.Open ("_pico/hello_usb.elf");
 }
 
 /*********************************************************************
