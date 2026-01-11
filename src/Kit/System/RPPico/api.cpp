@@ -53,6 +53,7 @@ extern volatile bool g_kitCore1IsRunning;
 
 void suspendScheduling( void ) noexcept
 {
+    // NOTE: The multicore_lockout_xxx() method assume/require that BOTH cores are executing
     Mutex::ScopeLock criticalSection( PrivateLocks::system() );
     if ( g_kitCore1IsRunning )
     {
@@ -62,6 +63,7 @@ void suspendScheduling( void ) noexcept
 
 void resumeScheduling( void ) noexcept
 {
+    // NOTE: The multicore_lockout_xxx() method assume/require that BOTH cores are executing
     Mutex::ScopeLock criticalSection( PrivateLocks::system() );
     if ( g_kitCore1IsRunning )
     {

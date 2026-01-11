@@ -44,7 +44,6 @@ static void core1Entry( void )
     multicore_lockout_victim_init();  // Enable SDK support on core1 for 'suspending scheduling'
     states_[1] = THREAD_STATE_RUNNING;
     threads_[1]->getRunnable().entry();  // Execute the Runnable object
-    multicore_reset_core1();             // Self terminate if/when the Runnable object completes its processing
     states_[1] = THREAD_STATE_ALLOCATED;
 }
 
