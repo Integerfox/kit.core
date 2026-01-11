@@ -39,6 +39,8 @@ FINAL_OUTPUT_NAME = 'b'
 sdk_root     = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "pico-sdk" )
 bsp_rel_root = os.path.join( "src", "Kit", "Bsp", "RPi", "baremetal_arm_pico2w" )
 linkerscript = os.path.join( sdk_root, 'src', 'rp2_common', 'pico_crt0', 'rp2350', 'memmap_default.ld')
+core0_stack_size = 0x1000
+core1_stack_size = 0x1000
 
 # SDK Build options
 sdk_opt = ' -DPICO_32BIT=1' + \
@@ -49,7 +51,9 @@ sdk_opt = ' -DPICO_32BIT=1' + \
           ' -DPICO_CXX_ENABLE_EXCEPTIONS=0' + \
           ' -DPICO_NO_FLASH=0' + \
           ' -DPICO_NO_HARDWARE=0' + \
-          ' -DPICO_CXX_ENABLE_EXCEPTIONS=0'
+          ' -DPICO_CXX_ENABLE_EXCEPTIONS=0' + \
+          f' -DPICO_STACK_SIZE={core0_stack_size}' + \
+          f' -DPICO_CORE1_STACK_SIZE={core1_stack_size}'
 
 # Wifi build options
 wifi_opt = ' -DPICO_CYW43_SUPPORTED=1' + \

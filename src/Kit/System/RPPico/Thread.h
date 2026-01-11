@@ -76,9 +76,6 @@ public:
     /// See Kit::System::Thread
     const char* getName() const noexcept override;
 
-    /// Override to use m_runnablePtr pointer when it's been set by create()
-    Kit::System::IRunnable& getRunnable() const noexcept override;
-
     /// See Kit::System::Signable
     int signal( void ) noexcept;
 
@@ -99,9 +96,6 @@ public:
 protected:
     /// The thread synchronized message semaphore.
     Kit::System::Semaphore  m_syncSema;
-
-    /// Pointer to the actual runnable object (overrides base class reference when set)
-    Kit::System::IRunnable*  m_runnablePtr;
 
     /// internal handle
     unsigned                m_coreId;

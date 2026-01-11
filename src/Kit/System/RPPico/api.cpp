@@ -15,7 +15,6 @@
 #include "pico/multicore.h"
 
 
-
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace System {
@@ -26,11 +25,13 @@ static Mutex tracingMutex_;
 static Mutex tracingOutputMutex_;
 static Mutex sysListMutex_;
 
-
-    void initialize( void ) noexcept
+// Global flag indicating if the Kit C++ library has been initialized
+bool g_kitInitialized;
+void initialize( void ) noexcept
 {
     // Init the Colony.Core sub-systems
     IStartupHook::notifyStartupClients();
+    g_kitInitialized = true;
 }
 
 

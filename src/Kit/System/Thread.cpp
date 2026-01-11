@@ -41,7 +41,7 @@ bool Thread::isActive() const noexcept
 
 IRunnable& Thread::getRunnable() const noexcept
 {
-    return m_runnable;
+    return *m_runnable;
 }
 
 Thread& Thread::getCurrent() noexcept
@@ -92,11 +92,10 @@ void Thread::launchRunnable( Thread& threadHdl ) noexcept
     addThreadToActiveList( threadHdl );
 
     // Launch the IRunnable object
-    auto& runnable = threadHdl.getRunnable();
-    runnable.setThread( &threadHdl );
+    threadHdl.m_runnable->setThread( &threadHdl );
     KIT_SYSTEM_SIM_TICK_THREAD_INIT_( threadHdl.m_allowSimTicks );
-    runnable.entry();
-    runnable.setThread( nullptr );
+    threadHdl.m_runnable->entry();
+    threadHdl.m_runnable->setThread( nullptr );
     KIT_SYSTEM_SIM_TICK_ON_THREAD_EXIT_();
 
     // Remove the thread from the list of active threads

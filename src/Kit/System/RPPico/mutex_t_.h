@@ -37,23 +37,19 @@ public:
               called).  However, registering AFTER wards is a don't care because
               the 'start-up list' is only used during the call to Kit::System::Api::initialize() 
      */
-    Mutex_T() :IStartupHook( SYSTEM ), m_sdkMutex(nullptr) {}
+    Mutex_T() :IStartupHook( SYSTEM ) {}
 
 
 protected:
     /// This method is called when Kit::System::initialize() executes
     void notify( InitLevel init_level ) noexcept override
     {
-        m_sdkMutex = new recursive_mutex_t;
-        if ( m_sdkMutex )
-        {
-            recursive_mutex_init( m_sdkMutex );
-        }
+        recursive_mutex_init( &m_sdkMutex );
     }
 
 public:
     /// Platform Mutex instance. Note: Made public to simply access from the Kit::System::Mutex class
-    recursive_mutex_t*   m_sdkMutex;
+    recursive_mutex_t   m_sdkMutex;
 };
 
 

@@ -283,7 +283,7 @@ public:
 protected:
     /// Constructor
     Thread( IRunnable& runnable ) noexcept
-        : m_runnable( runnable )
+        : m_runnable( &runnable )
     {
         memset( m_tlsArray, 0, sizeof( m_tlsArray ) );
     }
@@ -311,8 +311,8 @@ protected:
     static void removeThreadFromActiveList( Thread& thread ) noexcept;
 
 protected:
-    /// Reference to the thread's runnable object
-    IRunnable& m_runnable;
+    /// Pointer to the thread's runnable object (note: is pointer to allow late binding)
+    IRunnable* m_runnable;
 
     /// Native file handle for the thread instance
     KitSystemThreadID_T m_nativeThreadHdl;
