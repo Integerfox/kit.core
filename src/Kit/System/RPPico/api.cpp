@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Kit/System/Api.h"
+#include "Kit/System/Mutex.h"
 #include "Kit/System/Private.h"
 #include "Kit/System/PrivateStartup.h"
 #include "pico/sync.h"
@@ -47,25 +48,25 @@ void sleepInRealTime( uint32_t milliseconds ) noexcept
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-extern void suspend_resume_scheduling_not_supported();
+
+extern volatile bool g_kitCore1IsRunning;
 
 void suspendScheduling( void ) noexcept
 {
-    // NOT Supported.  Throw a link-time error
-    suspend_resume_scheduling_not_supported();
-
-    // FIXME: In theory this call should put the 'other' core into a known/busy-wait
-    // state - but I can't get it to work - the calling core just blocks forever :(.
-    // multicore_lockout_start_blocking();
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    if ( g_kitCore1IsRunning )
+    {
+        multicore_lockout_start_blocking();
+    }
 }
 
 void resumeScheduling( void ) noexcept
 {
-    // NOT Supported.  Throw a link-time error
-    suspend_resume_scheduling_not_supported();
-
-    // FIXME: See comment above
-    // multicore_lockout_end_blocking();
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    if ( g_kitCore1IsRunning )
+    {
+        multicore_lockout_end_blocking();
+    }
 }
 
 

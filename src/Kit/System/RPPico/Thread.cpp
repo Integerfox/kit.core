@@ -10,9 +10,11 @@
 
 #include "Thread.h"
 #include "Kit/Memory/AlignedClass.h"
+#include "Kit/System/Private.h"
 #include "Kit/System/PrivateStartup.h"
 #include "Kit/System/Api.h"
 #include "Kit/System/Trace.h"
+#include "Kit/System/Mutex.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/FatalError.h"
 #include "hardware/watchdog.h"
@@ -212,6 +214,8 @@ bool Kit::System::Thread::timedWait( uint32_t timeout ) noexcept
 
 
 //////////////////////////////
+volatile bool g_kitCore1IsRunning;  // Needed for suspend/resume scheduling
+
 Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
                                                   const char* name,
                                                   int         priority,
@@ -234,6 +238,8 @@ Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
         threads_[1]->m_runnable = &runnable;
         if ( schedulingEnabled_ )
         {
+            Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+            g_kitCore1IsRunning = true;
             launchCore1();
         }
         return threads_[1];
@@ -265,7 +271,11 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
             //       need to kill a thread - be dang sure that it is state such
             //       that it is ok to die - i.e. it has released all of its acquired
             //       resources: mutexes, semaphores, file handles, etc.
-            multicore_reset_core1();
+            {
+                Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+                g_kitCore1IsRunning = false;
+                multicore_reset_core1();
+            }
             states_[1] = THREAD_STATE_ALLOCATED;
         }
     }
