@@ -172,6 +172,52 @@ TEST_CASE( "CursorLE" )
         REQUIRE( sqword == -811183134362 );
     }
 
+    SECTION( "template1" )
+    {
+        CursorLE cursor( bufferMemory_, sizeof( bufferMemory_ ) );
+        REQUIRE( cursor.write( (int8_t)-42 ) );
+        REQUIRE( cursor.write( (int16_t)-10234 ) );
+        REQUIRE( cursor.write( (int32_t)-305450464 ) );
+        REQUIRE( cursor.write( (int64_t)-811183134362 ) );
+        REQUIRE( cursor.setPosition( 0 ) );
+        int8_t  sbyte;
+        int16_t sword;
+        int32_t sdword;
+        int64_t sqword;
+
+        REQUIRE( cursor.read( sbyte ) );
+        REQUIRE( cursor.read( sword ) );
+        REQUIRE( cursor.read( sdword ) );
+        REQUIRE( cursor.read( sqword ) );
+        REQUIRE( sbyte == -42 );
+        REQUIRE( sword == -10234 );
+        REQUIRE( sdword == -305450464 );
+        REQUIRE( sqword == -811183134362 );
+    }
+
+    SECTION( "template2" )
+    {
+        CursorLE cursor( bufferMemory_, sizeof( bufferMemory_ ) );
+        REQUIRE( cursor.write( (uint8_t)42 ) );
+        REQUIRE( cursor.write( (uint16_t)10234 ) );
+        REQUIRE( cursor.write( (uint32_t)305450464 ) );
+        REQUIRE( cursor.write( (uint64_t)811183134362 ) );
+        REQUIRE( cursor.setPosition( 0 ) );
+        uint8_t  sbyte;
+        uint16_t sword;
+        uint32_t sdword;
+        uint64_t sqword;
+
+        REQUIRE( cursor.read( sbyte ) );
+        REQUIRE( cursor.read( sword ) );
+        REQUIRE( cursor.read( sdword ) );
+        REQUIRE( cursor.read( sqword ) );
+        REQUIRE( sbyte == 42 );
+        REQUIRE( sword == 10234 );
+        REQUIRE( sdword == 305450464 );
+        REQUIRE( sqword == 811183134362 );
+    }
+    
     SECTION( "skip" )
     {
         CursorLE cursor( bufferMemory_, sizeof( bufferMemory_ ) );

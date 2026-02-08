@@ -45,7 +45,6 @@
     {                                  \
         HAL_NVIC_DisableIRQ( irqNum ); \
         __DSB();                       \
-        __ISB();                       \
     }                                  \
     while ( 0 )
 
@@ -54,8 +53,6 @@
     do                                \
     {                                 \
         HAL_NVIC_EnableIRQ( irqNum ); \
-        __DSB();                      \
-        __ISB();                      \
     }                                 \
     while ( 0 )
 
@@ -79,7 +76,6 @@
     {                          \
         __disable_irq();       \
         __DSB();               \
-        __ISB();               \
     }                          \
     while ( 0 )
 
@@ -88,8 +84,6 @@
     do                        \
     {                         \
         __enable_irq();       \
-        __DSB();              \
-        __ISB();              \
     }                         \
     while ( 0 )
 

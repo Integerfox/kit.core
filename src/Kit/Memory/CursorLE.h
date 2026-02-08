@@ -12,6 +12,7 @@
 
 #include "Kit/Memory/CursorBase.h"
 #include "Kit/Type/endian.h"
+#include <type_traits>
 
 ///
 namespace Kit {
@@ -98,6 +99,34 @@ public:
     }
 
 public:
+    // Bring the base class overloads of read into scope
+    using CursorBase::read;
+
+    /// Template method to read N bytes. Only valid for integer types. Returns false if there was an error
+    template <class T>
+    inline bool read( T& dstData ) noexcept
+    {
+        static_assert( std::is_integral<T>::value, "Template parameter T must be an integral type" );
+        bool result = readAndAdvance( &dstData, sizeof( T ) );
+        switch ( sizeof( T ) )
+        {
+        case 2:
+            dstData = KIT_TYPE_LE16TOH( dstData );
+            break;
+        case 4:
+            dstData = KIT_TYPE_LE32TOH( dstData );
+            break;
+        case 8:
+            dstData = KIT_TYPE_LE64TOH( dstData );
+            break;
+        default:
+            // No byte swapping for non-standard sizes
+            break;
+        }
+        return result;
+    }
+
+public:
     /// Write a single word. Returns false if there was an error
     inline bool writeU16( uint16_t srcData ) noexcept
     {
@@ -158,6 +187,34 @@ public:
     inline bool write( const void* srcBuffer, size_t numBytesToWrite ) noexcept
     {
         return writeAndAdvance( srcBuffer, numBytesToWrite );
+    }
+
+public:
+    // Bring the base class overloads of write into scope
+    using CursorBase::write;
+
+    /// Template method to write N bytes. Only valid for integer types. Returns false if there was an error
+    template <class T>
+    inline bool write( T srcData ) noexcept
+    {
+        static_assert( std::is_integral<T>::value, "Template parameter T must be an integral type" );
+        T tempData = srcData;
+        switch ( sizeof( T ) )
+        {
+        case 2:
+            tempData = KIT_TYPE_HTOLE16( srcData );
+            break;
+        case 4:
+            tempData = KIT_TYPE_HTOLE32( srcData );
+            break;
+        case 8:
+            tempData = KIT_TYPE_HTOLE64( srcData );
+            break;
+        default:
+            // No byte swapping for non-standard sizes
+            break;
+        }
+        return writeAndAdvance( &tempData, sizeof( tempData ) );
     }
 };
 

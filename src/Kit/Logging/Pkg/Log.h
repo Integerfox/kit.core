@@ -34,6 +34,7 @@ NOTE: When the Application enables the Logging engine by defining
 
 // Support Conditionally compiling the Logging calls to Trace calls
 #ifndef USE_KIT_LOGGING_PKG_LOG_API
+
 // Provide default mapping configuration values if not provided by the application
 #ifndef KIT_LOGGING_PKG_PACKAGE_ID_MAPCFG
 #define KIT_LOGGING_PKG_PACKAGE_ID_MAPCFG 1
@@ -50,8 +51,22 @@ NOTE: When the Application enables the Logging engine by defining
 #ifndef KIT_LOGGING_PKG_CLASSIFICATION_ID_INFO_MAPCFG
 #define KIT_LOGGING_PKG_CLASSIFICATION_ID_INFO_MAPCFG 4
 #endif
-#define KIT_LOGGING_LOG_SYSTEM( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, ::Kit::Logging::Pkg::Package::PACKAGE_ID, ::Kit::Logging::Pkg::SubSystemId::SYSTEM, messageId, __VA_ARGS__ )
-#define KIT_LOGGING_LOG_DRIVER( classificationId, messageId, ... ) KitLoggingFramework_logTracef( classificationId, ::Kit::Logging::Pkg::Package::PACKAGE_ID, ::Kit::Logging::Pkg::SubSystemId::DRIVER, messageId, __VA_ARGS__ )
+
+/// This method generates a SYSTEM Sub-system log entry. See logfSystem() for details
+#define KIT_LOGGING_LOG_SYSTEM( classificationId, messageId, ... )           \
+    KitLoggingFramework_logTracef( classificationId,                         \
+                                   ::Kit::Logging::Pkg::Package::PACKAGE_ID, \
+                                   ::Kit::Logging::Pkg::SubSystemId::SYSTEM, \
+                                   messageId,                                \
+                                   __VA_ARGS__ )
+#define KIT_LOGGING_LOG_DRIVER( classificationId, messageId, ... )           \
+    KitLoggingFramework_logTracef( classificationId,                         \
+                                   ::Kit::Logging::Pkg::Package::PACKAGE_ID, \
+                                   ::Kit::Logging::Pkg::SubSystemId::DRIVER, \
+                                   messageId,                                \
+                                   __VA_ARGS__ )
+
+
 #else
 
 /// This method generates a SYSTEM Sub-system log entry. See logfSystem() for details
@@ -72,7 +87,6 @@ NOTE: When the Application enables the Logging engine by defining
 #include "Kit/Logging/Framework/Log.h"
 
 
-
 ///
 namespace Kit {
 ///
@@ -84,7 +98,10 @@ namespace Pkg {
 /*---------------------------------------------------------------------------*/
 /// This method generates a SYSTEM Sub-system log entry. Do not call directly, use the KIT_LOGGING_LOG_SYSTEM() macro
 KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
-inline Framework::LogResult_T logfSystem( ClassificationId catId, SystemMsgId msgId, const char* msgTextFormat, ... ) noexcept
+inline Framework::LogResult_T logfSystem( ClassificationId catId,
+                                          SystemMsgId      msgId,
+                                          const char*      msgTextFormat,
+                                          ... ) noexcept
 {
     va_list ap;
     va_start( ap, msgTextFormat );
@@ -95,7 +112,10 @@ inline Framework::LogResult_T logfSystem( ClassificationId catId, SystemMsgId ms
 
 /// This method generates a DRIVER Sub-system log entry.Do not call directly, use the KIT_LOGGING_LOG_DRIVER() macro
 KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
-inline Framework::LogResult_T logfDriver( ClassificationId catId, DriverMsgId msgId, const char* msgTextFormat, ... ) noexcept
+inline Framework::LogResult_T logfDriver( ClassificationId catId,
+                                          DriverMsgId      msgId,
+                                          const char*      msgTextFormat,
+                                          ... ) noexcept
 {
     va_list ap;
     va_start( ap, msgTextFormat );

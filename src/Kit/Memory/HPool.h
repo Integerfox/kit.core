@@ -35,7 +35,8 @@ namespace Memory {
         2) The class is not inherently multi-thread safe.
 
         3) If the requested number of bytes on the allocate() method is greater
-           than the block size (i.e. sizeof(T)), 0 is returned.
+           than the block size (i.e. sizeof(T)), nullptr is returned if
+           'fatalErrors' is false; else a fatal error is generated.
 
         4) The class can be deleted. However, it is the responsibility of the
            Application to properly clean-up/release ALL outstanding block

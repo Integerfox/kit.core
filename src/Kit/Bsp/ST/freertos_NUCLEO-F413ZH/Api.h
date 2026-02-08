@@ -47,7 +47,6 @@
     {                                  \
         HAL_NVIC_DisableIRQ( irqNum ); \
         __DSB();                       \
-        __ISB();                       \
     }                                  \
     while ( 0 )
 
@@ -56,8 +55,6 @@
     do                                \
     {                                 \
         HAL_NVIC_EnableIRQ( irqNum ); \
-        __DSB();                      \
-        __ISB();                      \
     }                                 \
     while ( 0 )
 
@@ -72,14 +69,18 @@
 #define Bsp_yield_on_exit_MAP( r ) portYIELD_FROM_ISR( r )
 
 /// Generic API
-#define Bsp_disable_irqs_MAP() __disable_irq()
+#define Bsp_disable_irqs_MAP() \
+    do                         \
+    {                          \
+        __disable_irq();       \
+        __DSB();               \
+    }
 
 /// Generic API (with memory barrier protection)
 #define Bsp_enable_irqs_MAP() \
     do                        \
     {                         \
         __enable_irq();       \
-        __ISB();              \
     }                         \
     while ( 0 )
 
