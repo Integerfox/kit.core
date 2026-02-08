@@ -12,6 +12,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <atomic>
 
 ///
 namespace Kit {
@@ -37,13 +38,13 @@ public:
     /// This method returns true if the Ring Buffer is empty
     bool isEmpty() const noexcept
     {
-        return m_readIdx == m_writeIdx;
+        return m_readIdx.load( std::memory_order_acquire ) == m_writeIdx.load( std::memory_order_acquire );
     }
 
     /// This method returns true if the Ring Buffer is full
     bool isFull() const noexcept
     {
-        return ( ( m_writeIdx + 1 ) % m_elements ) == m_readIdx;
+        return ( ( m_writeIdx.load( std::memory_order_acquire ) + 1 ) % m_elements ) == m_readIdx.load( std::memory_order_acquire );
     }
 
     /// This method returns the maximum number of items that can be stored in the Ring buffer.
@@ -55,7 +56,7 @@ public:
     /// This method returns the CURRENT number of elements in the Ring Buffer
     unsigned getNumItems() const noexcept
     {
-        return ( m_writeIdx - m_readIdx + m_elements ) % m_elements;
+        return ( m_writeIdx.load( std::memory_order_acquire ) - m_readIdx.load( std::memory_order_acquire ) + m_elements ) % m_elements;
     }
 
 public:
@@ -66,7 +67,8 @@ public:
      */
     void clearTheBuffer() noexcept
     {
-        m_readIdx = m_writeIdx = 0;
+        m_readIdx.store( 0, std::memory_order_relaxed );
+        m_writeIdx.store( 0, std::memory_order_relaxed );
     }
 
 protected:
@@ -126,7 +128,8 @@ protected:
     void removeElements( unsigned numElementsToRemove ) noexcept
     {
         // By definition/design - I simply have to update the read index
-        m_readIdx = ( m_readIdx + numElementsToRemove ) % m_elements;
+        unsigned localReadIdx = m_readIdx.load( std::memory_order_relaxed );
+        m_readIdx.store( ( localReadIdx + numElementsToRemove ) % m_elements, std::memory_order_release );
     }
 
 protected:
@@ -153,7 +156,8 @@ protected:
     void addElements( unsigned numElementsAdded ) noexcept
     {
         // By definition/design - I simply have to update the write index
-        m_writeIdx = ( m_writeIdx + numElementsAdded ) % m_elements;
+        unsigned localWriteIdx = m_writeIdx.load( std::memory_order_relaxed );
+        m_writeIdx.store( ( localWriteIdx + numElementsAdded ) % m_elements, std::memory_order_release );
     }
 
 protected:
@@ -161,13 +165,13 @@ protected:
         updated when a read operation is performed.  In addition, the variable
         is atomically updated.
      */
-    volatile unsigned m_readIdx;
+    std::atomic<unsigned> m_readIdx;
 
     /** Index of the next item to be added to the ring.  This variable
         is only updated when a add operation is performed.  In addition,
         the variable is atomically updated.
      */
-    volatile unsigned m_writeIdx;
+    std::atomic<unsigned> m_writeIdx;
 
     /// Maximum number of element in the 'ring memory
     const unsigned m_elements;

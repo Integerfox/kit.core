@@ -30,8 +30,8 @@ bool RingBufferBase::remove( void* elemPtr, size_t elemSize, const void* srcRing
     KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
 
     // Snapshot of ring buffer's indexes
-    unsigned readIdx  = m_readIdx;
-    unsigned writeIdx = m_writeIdx;
+    const unsigned readIdx  = m_readIdx.load( std::memory_order_relaxed );
+    const unsigned writeIdx = m_writeIdx.load( std::memory_order_acquire );
 
     // Trap - the Ring buffer is empty
     if ( readIdx == writeIdx )
@@ -44,7 +44,7 @@ bool RingBufferBase::remove( void* elemPtr, size_t elemSize, const void* srcRing
     memcpy( elemPtr, srcPtr, elemSize );
 
     // Update the read index
-    m_readIdx = ( readIdx + 1 ) % m_elements;
+    m_readIdx.store( ( readIdx + 1 ) % m_elements, std::memory_order_release );
     return true;
 }
 
@@ -55,8 +55,8 @@ bool RingBufferBase::add( const void* elemPtr, size_t elemSize, void* dstRingBuf
     KIT_SYSTEM_ASSERT( dstRingBufMemory != nullptr );
 
     // Snapshot of ring buffer's indexes
-    unsigned readIdx  = m_readIdx;
-    unsigned writeIdx = m_writeIdx;
+    const unsigned readIdx  = m_readIdx.load( std::memory_order_acquire );
+    const unsigned writeIdx = m_writeIdx.load( std::memory_order_relaxed );
 
     // Trap - the Ring buffer is full
     if ( ( writeIdx + 1 ) % m_elements == readIdx )
@@ -69,7 +69,7 @@ bool RingBufferBase::add( const void* elemPtr, size_t elemSize, void* dstRingBuf
     memcpy( dstPtr, elemPtr, elemSize );
 
     // Update the write index
-    m_writeIdx = ( writeIdx + 1 ) % m_elements;
+    m_writeIdx.store( ( writeIdx + 1 ) % m_elements, std::memory_order_release );
     return true;
 }
 
@@ -80,8 +80,8 @@ bool RingBufferBase::peekHead( void* elemPtr, size_t elemSize, const void* srcRi
     KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
 
     // Snapshot of ring buffer's indexes
-    unsigned readIdx  = m_readIdx;
-    unsigned writeIdx = m_writeIdx;
+    const unsigned readIdx  = m_readIdx.load( std::memory_order_acquire );
+    const unsigned writeIdx = m_writeIdx.load( std::memory_order_acquire );
 
     // Trap - the Ring buffer is empty
     if ( readIdx == writeIdx )
@@ -103,8 +103,8 @@ bool RingBufferBase::peekTail( void* elemPtr, size_t elemSize, const void* srcRi
     KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
 
     // Snapshot of ring buffer's indexes
-    unsigned readIdx  = m_readIdx;
-    unsigned writeIdx = m_writeIdx;
+    const unsigned readIdx  = m_readIdx.load( std::memory_order_acquire );
+    const unsigned writeIdx = m_writeIdx.load( std::memory_order_acquire );
 
     // Trap - the Ring buffer is empty
     if ( readIdx == writeIdx )
@@ -127,8 +127,8 @@ void* RingBufferBase::peekNextRemoveItems( unsigned& dstNumFlatElements, size_t 
     KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
 
     // Snapshot of ring buffer's indexes
-    unsigned readIdx  = m_readIdx;
-    unsigned writeIdx = m_writeIdx;
+    const unsigned readIdx  = m_readIdx.load( std::memory_order_relaxed );
+    const unsigned writeIdx = m_writeIdx.load( std::memory_order_acquire );
 
     // Check for empty
     if ( readIdx == writeIdx )
@@ -152,8 +152,8 @@ void* RingBufferBase::peekNextRemoveItems( unsigned& dstNumFlatElements, size_t 
 void* RingBufferBase::peekNextAddItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
 {
     // Snapshot of ring buffer's indexes
-    unsigned readIdx  = m_readIdx;
-    unsigned writeIdx = m_writeIdx;
+    const unsigned readIdx  = m_readIdx.load( std::memory_order_acquire );
+    const unsigned writeIdx = m_writeIdx.load( std::memory_order_relaxed );
 
     // Check for full
     if ( ( ( writeIdx + 1 ) % m_elements ) == readIdx )
