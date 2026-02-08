@@ -9,11 +9,11 @@
 /** @file */
 
 #include "Kit/System/Api.h"
+#include "Kit/System/Mutex.h"
 #include "Kit/System/Private.h"
 #include "Kit/System/PrivateStartup.h"
 #include "pico/sync.h"
 #include "pico/multicore.h"
-
 
 
 //------------------------------------------------------------------------------
@@ -26,11 +26,13 @@ static Mutex tracingMutex_;
 static Mutex tracingOutputMutex_;
 static Mutex sysListMutex_;
 
-
-    void initialize( void ) noexcept
+// Global flag indicating if the Kit C++ library has been initialized
+bool g_kitInitialized;
+void initialize( void ) noexcept
 {
     // Init the Colony.Core sub-systems
     IStartupHook::notifyStartupClients();
+    g_kitInitialized = true;
 }
 
 
@@ -46,25 +48,27 @@ void sleepInRealTime( uint32_t milliseconds ) noexcept
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-extern void suspend_resume_scheduling_not_supported();
+
+extern volatile bool g_kitCore1IsRunning;
 
 void suspendScheduling( void ) noexcept
 {
-    // NOT Supported.  Throw a link-time error
-    suspend_resume_scheduling_not_supported();
-
-    // FIXME: In theory this call should put the 'other' core into a known/busy-wait
-    // state - but I can't get it to work - the calling core just blocks forever :(.
-    // multicore_lockout_start_blocking();
+    // NOTE: The multicore_lockout_xxx() method assume/require that BOTH cores are executing
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    if ( g_kitCore1IsRunning )
+    {
+        multicore_lockout_start_blocking();
+    }
 }
 
 void resumeScheduling( void ) noexcept
 {
-    // NOT Supported.  Throw a link-time error
-    suspend_resume_scheduling_not_supported();
-
-    // FIXME: See comment above
-    // multicore_lockout_end_blocking();
+    // NOTE: The multicore_lockout_xxx() method assume/require that BOTH cores are executing
+    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    if ( g_kitCore1IsRunning )
+    {
+        multicore_lockout_end_blocking();
+    }
 }
 
 

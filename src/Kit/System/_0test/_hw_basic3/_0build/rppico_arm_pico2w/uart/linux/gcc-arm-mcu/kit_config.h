@@ -1,3 +1,5 @@
+#ifndef KIT_CONFIG_H_
+#define KIT_CONFIG_H_
 /*-----------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -6,20 +8,11 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file Project/build specific 'Mappings'  
+/** @file Project/build specific 'Options' (see LConfig Pattern) */
 
-          Note: Intentionally there is NO Header latch (see LHeader Pattern)
-                for why.
-*/
 
-// OSAL mappings
-#include "Kit/System/RPPico/mappings.h"
+// USE a KIT stream for the BSP console (printf is not supported)
+#define USE_BSP_KIT_IO_STREAM
 
-// BSP
-#include "Kit/Bsp/RPi/baremetal_arm_pico2w/Api.h"
 
-// Text
-#include "Kit/Text/_mappings/_arm_gcc_rp2xxx/strapi.h"
-
-// IO mapping.  
-#include "Kit/Io/_mappings/_nofs/mappings.h"
+#endif

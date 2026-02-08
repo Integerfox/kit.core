@@ -37,7 +37,6 @@ public:
      */
     Semaphore_T( unsigned initialCount ) 
         : IStartupHook( SYSTEM )
-        , m_sdkSema( nullptr )
         , m_initialCount( initialCount ) 
     {
     }
@@ -47,16 +46,12 @@ protected:
     /// This method is called when Kit::System::initialize() executes
     void notify( InitLevel init_level ) noexcept override
     {
-        m_sdkSema = new semaphore_t;
-        if ( m_sdkSema )
-        {
-            sem_init( m_sdkSema, m_initialCount, 0x7FFF );
-        }
+        sem_init( &m_sdkSema, m_initialCount, 0x7FFF );
     }
 
 public:
     /// Platform Semaphore instance. Note: Made public to simply access from the Kit::System::Semaphore class
-    semaphore_t*    m_sdkSema;
+    semaphore_t    m_sdkSema;
 
 protected:
     /// Initial count

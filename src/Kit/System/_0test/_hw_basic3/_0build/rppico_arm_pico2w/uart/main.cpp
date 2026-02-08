@@ -18,7 +18,7 @@
 
 #define SECT_ "_0test"
 
-extern void runtests( size_t maxLoopCount );
+extern void runtests();
 
 
 /*-----------------------------------------------------------*/
@@ -35,7 +35,7 @@ int main( void )
     KIT_SYSTEM_TRACE_MSG( SECT_, "\n**** KIT-SYSTEM TEST APPLICATION STARTED ****" );  // May not print on all targets
 
     // Go run the test(s) (Note: This method should never return)
-    runtests( 10000 );  // 10000 Loop * 0.5sec = 5000 seconds max
+    runtests();
 
     // I should never get here!
     for ( ;; )

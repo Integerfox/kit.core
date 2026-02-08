@@ -97,9 +97,6 @@ protected:
     /// The thread synchronized message semaphore.
     Kit::System::Semaphore  m_syncSema;
 
-    /// Pointer to the runnable object for the thread
-    Kit::System::IRunnable*  m_runnable;
-
     /// internal handle
     unsigned                m_coreId;
 

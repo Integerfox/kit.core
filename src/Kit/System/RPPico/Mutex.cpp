@@ -15,9 +15,17 @@
 namespace Kit {
 namespace System {
 
+extern bool g_kitInitialized;
+
 Mutex::Mutex()
 {
-    // Nothing needed.  The initialization of the mutex is done when the Kit C++ library is initialized
+    // Note: Mutexes created (including static allocated instances) before
+    // the Kit C++ library is initialized are initialized as part of the KIT
+    // library's initialization process
+    if ( g_kitInitialized )
+    {
+        recursive_mutex_init( &( m_mutex.m_sdkMutex ) );
+    }
 }
 
 Mutex::~Mutex()
@@ -27,18 +35,12 @@ Mutex::~Mutex()
 
 void Mutex::lock( void )
 {
-    if ( m_mutex.m_sdkMutex )
-    {
-        recursive_mutex_enter_blocking( m_mutex.m_sdkMutex );
-    }
+    recursive_mutex_enter_blocking( &( m_mutex.m_sdkMutex ) );
 }
 
 void Mutex::unlock( void )
 {
-    if ( m_mutex.m_sdkMutex )
-    {
-        recursive_mutex_exit( m_mutex.m_sdkMutex );
-    }
+    recursive_mutex_exit( &( m_mutex.m_sdkMutex ) );
 }
 
 }  // end namespace
