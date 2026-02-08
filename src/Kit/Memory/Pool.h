@@ -27,9 +27,9 @@ namespace Memory {
 
 /** This internal (to the namespace) concrete class implements a Memory Allocator
     using a pool of fixed size blocks.  The implementation relies on a sub-class
-    to allocate the actual memory for the blocks.
+    to allocate the actual memory for the blocks. In addition, the sub-class
+    is responsible for the proper alignment of the blocks.
  */
-
 class Pool : public Allocator
 {
 public:
@@ -53,7 +53,6 @@ public:
      */
     Pool( BlockInfo infoBlocks[],
           size_t    blockSize,
-          size_t    alignedBlockSize,
           size_t    numBlocks,
           void*     arrayOfMemoryBlocks,
           bool      errorsAreFatal = OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL );
@@ -81,9 +80,6 @@ public:
 
     /// Block size
     size_t m_blockSize;
-
-    /// Block size
-    size_t m_alignedBlockSize;
 
     /// Flag that controls memory errors behavior
     bool m_fatalErrors;

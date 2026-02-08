@@ -2,7 +2,7 @@
 @brief namespace description for Kit::System::RPPico
 @namespace Kit::System::RPPico @brief
 
-Concrete implementation of the platform specific classes/features of the 
+Concrete implementation of the platform specific classes/features of the
 Kit::System namespace interfaces for the Raspberry RP2xxx MCUs' dual cores,
 i.e. a maximum of 2 threads - one per core.
 
@@ -11,18 +11,18 @@ i.e. a maximum of 2 threads - one per core.
           
 ## Platform Dependent Behaviors
 
-**Thread** - The first thread created runs on core0.  A SINGLE additional 
+**Thread** - The first thread created runs on core0.  A SINGLE additional
              thread can be created that runs on core1.
 
-**Mutex** - Fully functional.  Note: The memory for internal Mutex type 
+**Mutex** - Fully functional.  Note: The memory for internal Mutex type
             is allocated from the Heap.
 
 **GlobalLock** - The GlobalLock maps the RP2xxx SDK's critical section.  There are
-                 some subtle details here - but it effective disables IRQs on 
+                 some subtle details here - but it effective disables IRQs on
                  the calling core AND provides mutual exclusion with respect to
                  the other core.
 
-**Semaphore** - Fully functional.  Note: The memory for internal Semaphore type 
+**Semaphore** - Fully functional.  Note: The memory for internal Semaphore type
                 is allocated from the Heap.
 
 **Tls** - Fully functional.

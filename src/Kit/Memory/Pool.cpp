@@ -25,12 +25,10 @@ namespace Memory {
 /////////////////////////////
 Pool::Pool( BlockInfo infoBlocks[],
             size_t    blockSize,
-            size_t    alignedBlockSize,
             size_t    numBlocks,
             void*     arrayOfMemoryBlocks,
             bool      errorsAreFatal )
     : m_blockSize( blockSize )
-    , m_alignedBlockSize( alignedBlockSize )
     , m_fatalErrors( errorsAreFatal )
 {
     KIT_SYSTEM_ASSERT( infoBlocks != nullptr );
@@ -42,7 +40,7 @@ Pool::Pool( BlockInfo infoBlocks[],
     for ( i = 0; i < numBlocks; i++ )
     {
         infoBlocks[i].m_blockPtr  = blockPtr;
-        blockPtr                 += alignedBlockSize;
+        blockPtr                 += blockSize;
         m_freeList.put( infoBlocks[i] );
     }
 }
@@ -51,7 +49,7 @@ Pool::Pool( BlockInfo infoBlocks[],
 /////////////////////////////
 size_t Pool::wordSize() const noexcept
 {
-    return m_alignedBlockSize;
+    return m_blockSize;
 }
 
 void* Pool::allocate( size_t numbytes ) noexcept

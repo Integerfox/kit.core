@@ -13,6 +13,7 @@
 
 #include "Kit/Memory/Pool.h"
 #include "Kit/Memory/AlignedClass.h"
+#include "Kit/System/Assert.h"
 
 ///
 namespace Kit {
@@ -65,9 +66,11 @@ public:
     HPool( size_t maxNumBlocks, bool fatalErrors = false )
         : m_infoBlocks( new Pool::BlockInfo[maxNumBlocks]() )
         , m_blocks( new AlignedClass<T>[maxNumBlocks] )
-        , m_poolPtr( new Pool( m_infoBlocks, sizeof( T ), alignof( AlignedClass<T> ), maxNumBlocks, m_blocks, fatalErrors ) )
+        , m_poolPtr( new Pool( m_infoBlocks, sizeof( AlignedClass<T> ), maxNumBlocks, m_blocks, fatalErrors ) )
     {
+        KIT_SYSTEM_ASSERT( m_poolPtr != nullptr );
     }
+
 
 
     /// Destructor.

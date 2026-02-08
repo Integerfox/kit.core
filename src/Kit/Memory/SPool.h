@@ -62,7 +62,7 @@ public:
      */
     SPool( bool fatalErrors = false )
         : m_infoBlocks()
-        , m_pool( m_infoBlocks, sizeof( T ), sizeof( AlignedClass<T> ), N, m_blocks, fatalErrors )
+        , m_pool( m_infoBlocks, sizeof( AlignedClass<T> ), N, m_blocks, fatalErrors )
     {
     }
 

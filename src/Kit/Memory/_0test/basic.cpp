@@ -45,7 +45,8 @@ struct struct2_T
 #define NUM_POOL7 6
 #define NUM_POOL8 4
 
-#define ALIGMENT  sizeof( size_t )
+#define ALIGNMENT1  alignof( struct1_T )
+#define ALIGNMENT2  alignof( struct2_T )
 
 
 static SPool<struct2_T, NUM_POOL5> pool5_s2;
@@ -66,6 +67,12 @@ TEST_CASE( "basic", "[basic]" )
     HPool<struct1_T>            pool2_s1( NUM_POOL2, true );
     SPool<struct2_T, NUM_POOL3> pool3_s2;
     HPool<struct2_T>            pool4_s2( NUM_POOL4 );
+    
+    // Word size
+    REQUIRE( pool1_s1.wordSize() == sizeof( AlignedClass<struct1_T> ) );
+    REQUIRE( pool2_s1.wordSize() == sizeof( AlignedClass<struct1_T> ) );
+    REQUIRE( pool3_s2.wordSize() == sizeof( AlignedClass<struct2_T> ) );
+    REQUIRE( pool4_s2.wordSize() == sizeof( AlignedClass<struct2_T> ) );
 
     //
     // allocate test
@@ -76,7 +83,7 @@ TEST_CASE( "basic", "[basic]" )
         s1Ptr       = (struct1_T*)pool1_s1.allocate( sizeof( struct1_T ) );
         cache_s1[i] = s1Ptr;
         REQUIRE( s1Ptr != 0 );
-        int alignment = (size_t)s1Ptr % ALIGMENT;
+        int alignment = (size_t)s1Ptr % ALIGNMENT1;
         KIT_SYSTEM_TRACE_MSG( SECT_, "STACK, S1, Static: ptr=%p, alignment=%d, sizeof=%zu", s1Ptr, alignment, sizeof( struct1_T ) );
         REQUIRE( alignment == 0 );
     }
@@ -101,7 +108,7 @@ TEST_CASE( "basic", "[basic]" )
     {
         s1Ptr         = (struct1_T*)pool2_s1.allocate( sizeof( struct1_T ) );
         cache_s1[i]   = s1Ptr;
-        int alignment = (size_t)s1Ptr % ALIGMENT;
+        int alignment = (size_t)s1Ptr % ALIGNMENT1;
         KIT_SYSTEM_TRACE_MSG( SECT_, "STACK, S1, Heap: ptr=%p, alignment=%d, sizeof=%zu", s1Ptr, alignment, sizeof( struct1_T ) );
         REQUIRE( alignment == 0 );
     }
@@ -128,7 +135,7 @@ TEST_CASE( "basic", "[basic]" )
         s2Ptr       = (struct2_T*)pool3_s2.allocate( sizeof( struct2_T ) );
         cache_s2[i] = s2Ptr;
         REQUIRE( s2Ptr != 0 );
-        int alignment = (size_t)s2Ptr % ALIGMENT;
+        int alignment = (size_t)s2Ptr % ALIGNMENT2;
         KIT_SYSTEM_TRACE_MSG( SECT_, "STACK, S2, Static: ptr=%p, alignment=%d, sizeof=%zu", s2Ptr, alignment, sizeof( struct2_T ) );
         REQUIRE( alignment == 0 );
     }
@@ -154,7 +161,7 @@ TEST_CASE( "basic", "[basic]" )
         s2Ptr       = (struct2_T*)pool4_s2.allocate( sizeof( struct2_T ) );
         cache_s2[i] = s2Ptr;
         REQUIRE( s2Ptr != 0 );
-        int alignment = (size_t)s2Ptr % ALIGMENT;
+        int alignment = (size_t)s2Ptr % ALIGNMENT2;
         KIT_SYSTEM_TRACE_MSG( SECT_, "HEAP, S2, Static: ptr=%p, alignment=%d, sizeof=%zu", s2Ptr, alignment, sizeof( struct2_T ) );
         REQUIRE( alignment == 0 );
     }
@@ -180,7 +187,7 @@ TEST_CASE( "basic", "[basic]" )
         s2Ptr       = (struct2_T*)pool5_s2.allocate( sizeof( struct2_T ) );
         cache_s2[i] = s2Ptr;
         REQUIRE( s2Ptr != 0 );
-        int alignment = (size_t)s2Ptr % ALIGMENT;
+        int alignment = (size_t)s2Ptr % ALIGNMENT2;
         KIT_SYSTEM_TRACE_MSG( SECT_, "STATIC, S2, Static: ptr=%p, alignment=%d, sizeof=%zu", s2Ptr, alignment, sizeof( struct2_T ) );
         REQUIRE( alignment == 0 );
     }
@@ -206,7 +213,7 @@ TEST_CASE( "basic", "[basic]" )
         s2Ptr       = (struct2_T*)pool6_s2.allocate( sizeof( struct2_T ) );
         cache_s2[i] = s2Ptr;
         REQUIRE( s2Ptr != 0 );
-        int alignment = (size_t)s2Ptr % ALIGMENT;
+        int alignment = (size_t)s2Ptr % ALIGNMENT2;
         KIT_SYSTEM_TRACE_MSG( SECT_, "STATIC, S2, Heap: ptr=%p, alignment=%d, sizeof=%zu", s2Ptr, alignment, sizeof( struct2_T ) );
         REQUIRE( alignment == 0 );
     }
@@ -232,7 +239,7 @@ TEST_CASE( "basic", "[basic]" )
         s1Ptr       = (struct1_T*)pool7_s1.allocate( sizeof( struct1_T ) );
         cache_s1[i] = s1Ptr;
         REQUIRE( s1Ptr != 0 );
-        int alignment = (size_t)s1Ptr % ALIGMENT;
+        int alignment = (size_t)s1Ptr % ALIGNMENT1;
         KIT_SYSTEM_TRACE_MSG( SECT_, "STATIC, S1, Static: ptr=%p, alignment=%d, sizeof=%zu", s1Ptr, alignment, sizeof( struct1_T ) );
         REQUIRE( alignment == 0 );
     }
@@ -257,7 +264,7 @@ TEST_CASE( "basic", "[basic]" )
     {
         s1Ptr         = (struct1_T*)pool8_s1.allocate( sizeof( struct1_T ) );
         cache_s1[i]   = s1Ptr;
-        int alignment = (size_t)s1Ptr % ALIGMENT;
+        int alignment = (size_t)s1Ptr % ALIGNMENT1;
         KIT_SYSTEM_TRACE_MSG( SECT_, "STATIC, S1, Heap: ptr=%p, alignment=%d, sizeof=%zu", s1Ptr, alignment, sizeof( struct1_T ) );
         REQUIRE( alignment == 0 );
     }
