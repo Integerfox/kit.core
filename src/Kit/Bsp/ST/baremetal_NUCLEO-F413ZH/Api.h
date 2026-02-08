@@ -71,16 +71,24 @@
     around "unused variable" warnings - we increment the passed in
     variable.
  */
-#define Bsp_yield_on_exit_MAP( r )  r++
+#define Bsp_yield_on_exit_MAP( r ) r++
 
 /// Generic API
-#define Bsp_disable_irqs_MAP() __disable_irq()
+#define Bsp_disable_irqs_MAP() \
+    do                        \
+    {                          \
+        __disable_irq();       \
+        __DSB();               \
+        __ISB();               \
+    }                          \
+    while ( 0 )
 
 /// Generic API (with memory barrier protection)
 #define Bsp_enable_irqs_MAP() \
     do                        \
     {                         \
         __enable_irq();       \
+        __DSB();              \
         __ISB();              \
     }                         \
     while ( 0 )
@@ -110,7 +118,6 @@
 
 /// Generic API
 #define Bsp_toggle_debug2_MAP() HAL_GPIO_TogglePin( LD2_GPIO_Port, LD2_Pin )
-
 
 
 #endif  // end header latch
