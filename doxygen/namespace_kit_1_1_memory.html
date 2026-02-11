@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 260-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 263-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -56,6 +56,15 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:struct_kit_1_1_memory_1_1_aligned_class" id="r_struct_kit_1_1_memory_1_1_aligned_class"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#struct_kit_1_1_memory_1_1_aligned_class">AlignedClass</a></td></tr>
+<tr class="memdesc:struct_kit_1_1_memory_1_1_aligned_class"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a convenience type used to create a memory block that is large enough to hold the memory footprint of ONE instance of 'class T' with proper alignment.  <a href="#struct_kit_1_1_memory_1_1_aligned_class">More...</a><br /></td></tr>
+<tr class="separator:struct_kit_1_1_memory_1_1_aligned_class"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_allocator.html">Allocator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This abstract class defines the interface for a <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Allocator</a>.  <a href="class_kit_1_1_memory_1_1_allocator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_contiguous_allocator.html">ContiguousAllocator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This abstract class is used 'extend' the <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Allocator</a> to have contiguous semantics.  <a href="class_kit_1_1_memory_1_1_contiguous_allocator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_cursor_base.html">CursorBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This internal concrete class provides common methods that are used for extracting and inserting data from/to a <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> Buffer.  <a href="class_kit_1_1_memory_1_1_cursor_base.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -65,20 +74,59 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_cursor_l_e.html">CursorLE</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This 'public' concrete class provides LITTLE ENDIAN byte ordering semantics for a Cursor.  <a href="class_kit_1_1_memory_1_1_cursor_l_e.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_h_pool.html">HPool</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This template class defines a concrete <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Allocator</a> that allocates memory from the HEAP for a memory pool that can create up to N concurrent instances of class T.  <a href="class_kit_1_1_memory_1_1_h_pool.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_lean_heap.html">LeanHeap</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This template class manages an allocate-only-heap with statically allocated memory.  <a href="class_kit_1_1_memory_1_1_lean_heap.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_new_unit_testing.html">NewUnitTesting</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class provides methods to access the unit testing support for overriding the global new/delete operators.  <a href="class_kit_1_1_memory_1_1_new_unit_testing.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_pool.html">Pool</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This internal (to the namespace) concrete class implements a <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Allocator</a> using a pool of fixed size blocks.  <a href="class_kit_1_1_memory_1_1_pool.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_s_pool.html">SPool</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This template class defines a concrete <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Allocator</a> that STATICALLY allocates all of its <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> and can allocate up to N instances of the specified Class.  <a href="class_kit_1_1_memory_1_1_s_pool.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> namespace provides a collection interfaces that deal with memory specific/related behavior. </p>
 <p>For example:</p>
 <ul>
-<li>Interfaces to manually manage "dynamic memory" independent of the actual heap. </li>
+<li>Interfaces to manually manage "dynamic memory" independent of the actual heap.</li>
+<li>Managing endianness when copying 'external' incoming/outgoing binary data </li>
 </ul>
-</div></div><!-- contents -->
+</div><hr/><h2 class="groupheader">Class Documentation</h2>
+<a name="struct_kit_1_1_memory_1_1_aligned_class" id="struct_kit_1_1_memory_1_1_aligned_class"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#struct_kit_1_1_memory_1_1_aligned_class">&#9670;&#160;</a></span>Kit::Memory::AlignedClass</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct Kit::Memory::AlignedClass</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
+struct Kit::Memory::AlignedClass&lt; T &gt;</div><p>This is a convenience type used to create a memory block that is large enough to hold the memory footprint of ONE instance of 'class T' with proper alignment. </p>
+</div><table class="fieldtable">
+<tr><th colspan="3">Class Members</th></tr>
+<tr><td class="fieldtype">
+<a id="ad3cc3809cfc5395f134ab3686adc1eab" name="ad3cc3809cfc5395f134ab3686adc1eab"></a>uint8_t</td>
+<td class="fieldname">
+m_byteMem[sizeof(T)]</td>
+<td class="fielddoc">
+This member defines the memory as a properly aligned character array. </td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 5 2026 13:00:24 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Feb 11 2026 22:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

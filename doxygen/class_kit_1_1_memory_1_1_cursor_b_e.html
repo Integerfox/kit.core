@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 260-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 263-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -76,6 +76,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8ab4883b9962c743b3b20a9aa5c91921" id="r_a8ab4883b9962c743b3b20a9aa5c91921"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ab4883b9962c743b3b20a9aa5c91921">CursorBE</a> (void *srcBuffer, size_t srcBufferSize, size_t startingOffset=0)</td></tr>
 <tr class="memdesc:a8ab4883b9962c743b3b20a9aa5c91921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a8ab4883b9962c743b3b20a9aa5c91921"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab739d5a9c0f2c1fad90688694dabff06" id="r_ab739d5a9c0f2c1fad90688694dabff06"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:ab739d5a9c0f2c1fad90688694dabff06"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab739d5a9c0f2c1fad90688694dabff06">read</a> (T &amp;dstData) noexcept</td></tr>
+<tr class="memdesc:ab739d5a9c0f2c1fad90688694dabff06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template method to read N bytes. Only valid for integer types. Returns false if there was an error.  <br /></td></tr>
+<tr class="separator:ab739d5a9c0f2c1fad90688694dabff06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af36b532bc759ec9072af32543f6f700e" id="r_af36b532bc759ec9072af32543f6f700e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af36b532bc759ec9072af32543f6f700e">read</a> (void *dstBuffer, size_t numBytesToRead) noexcept</td></tr>
+<tr class="memdesc:af36b532bc759ec9072af32543f6f700e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read N bytes. Returns false if there was an error.  <br /></td></tr>
+<tr class="separator:af36b532bc759ec9072af32543f6f700e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa283d20da620ae06e91e721a9008f958" id="r_aa283d20da620ae06e91e721a9008f958"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa283d20da620ae06e91e721a9008f958">readF32</a> (float &amp;dstData) noexcept</td></tr>
 <tr class="memdesc:aa283d20da620ae06e91e721a9008f958"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a Real32. Returns false if there was an error.  <br /></td></tr>
 <tr class="separator:aa283d20da620ae06e91e721a9008f958"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,6 +107,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2f2666d79d50417cfe75171c074231c5" id="r_a2f2666d79d50417cfe75171c074231c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f2666d79d50417cfe75171c074231c5">readU64</a> (uint64_t &amp;dstData) noexcept</td></tr>
 <tr class="memdesc:a2f2666d79d50417cfe75171c074231c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a quad word. Returns false if there was an error.  <br /></td></tr>
 <tr class="separator:a2f2666d79d50417cfe75171c074231c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e0c8ed237a544412b76e18582afb69d" id="r_a2e0c8ed237a544412b76e18582afb69d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2e0c8ed237a544412b76e18582afb69d">write</a> (const void *srcBuffer, size_t numBytesToWrite) noexcept</td></tr>
+<tr class="memdesc:a2e0c8ed237a544412b76e18582afb69d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write N bytes. Returns false if there was an error.  <br /></td></tr>
+<tr class="separator:a2e0c8ed237a544412b76e18582afb69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92a9bf72372842cf5b88bcc8bb633ffc" id="r_a92a9bf72372842cf5b88bcc8bb633ffc"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a92a9bf72372842cf5b88bcc8bb633ffc"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a92a9bf72372842cf5b88bcc8bb633ffc">write</a> (T srcData) noexcept</td></tr>
+<tr class="memdesc:a92a9bf72372842cf5b88bcc8bb633ffc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template method to write N bytes. Only valid for integer types. Returns false if there was an error.  <br /></td></tr>
+<tr class="separator:a92a9bf72372842cf5b88bcc8bb633ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb32248d8c8b252ccc65927aa6b32f9a" id="r_aeb32248d8c8b252ccc65927aa6b32f9a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb32248d8c8b252ccc65927aa6b32f9a">writeF32</a> (float srcData) noexcept</td></tr>
 <tr class="memdesc:aeb32248d8c8b252ccc65927aa6b32f9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a Real32. Returns false if there was an error.  <br /></td></tr>
 <tr class="separator:aeb32248d8c8b252ccc65927aa6b32f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,6 +246,66 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab739d5a9c0f2c1fad90688694dabff06" name="ab739d5a9c0f2c1fad90688694dabff06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab739d5a9c0f2c1fad90688694dabff06">&#9670;&#160;</a></span>read() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kit::Memory::CursorBE::read </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>dstData</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Template method to read N bytes. Only valid for integer types. Returns false if there was an error. </p>
+
+</div>
+</div>
+<a id="af36b532bc759ec9072af32543f6f700e" name="af36b532bc759ec9072af32543f6f700e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af36b532bc759ec9072af32543f6f700e">&#9670;&#160;</a></span>read() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kit::Memory::CursorBase::read </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>dstBuffer</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>numBytesToRead</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read N bytes. Returns false if there was an error. </p>
+
+</div>
+</div>
 <a id="aa283d20da620ae06e91e721a9008f958" name="aa283d20da620ae06e91e721a9008f958"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa283d20da620ae06e91e721a9008f958">&#9670;&#160;</a></span>readF32()</h2>
 
@@ -445,6 +519,66 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Read a quad word. Returns false if there was an error. </p>
+
+</div>
+</div>
+<a id="a2e0c8ed237a544412b76e18582afb69d" name="a2e0c8ed237a544412b76e18582afb69d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e0c8ed237a544412b76e18582afb69d">&#9670;&#160;</a></span>write() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kit::Memory::CursorBase::write </td>
+          <td>(</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>srcBuffer</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>numBytesToWrite</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write N bytes. Returns false if there was an error. </p>
+
+</div>
+</div>
+<a id="a92a9bf72372842cf5b88bcc8bb633ffc" name="a92a9bf72372842cf5b88bcc8bb633ffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a9bf72372842cf5b88bcc8bb633ffc">&#9670;&#160;</a></span>write() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kit::Memory::CursorBE::write </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>srcData</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Template method to write N bytes. Only valid for integer types. Returns false if there was an error. </p>
 
 </div>
 </div>
@@ -670,7 +804,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 5 2026 13:00:24 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Feb 11 2026 22:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

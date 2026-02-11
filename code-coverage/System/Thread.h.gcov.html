@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-05 13:04:03</td>
+            <td class="headerValue">2026-02-11 22:53:15</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -216,7 +216,7 @@
 <span id="L154"><span class="lineNum">     154</span>                 :             :     /// Returns the name for the current thread</span>
 <span id="L155"><span class="lineNum">     155</span>                 :             :     static inline const char* myName() noexcept</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             :     {</span>
-<span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC tlaBgGNC">        5843 :         return getCurrent().getName();</span></span>
+<span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC tlaBgGNC">        5905 :         return getCurrent().getName();</span></span>
 <span id="L158"><span class="lineNum">     158</span>                 :             :     }</span>
 <span id="L159"><span class="lineNum">     159</span>                 :             : </span>
 <span id="L160"><span class="lineNum">     160</span>                 :             :     /// Returns the ID for the current thread</span>
@@ -345,7 +345,7 @@
 <span id="L283"><span class="lineNum">     283</span>                 :             : protected:</span>
 <span id="L284"><span class="lineNum">     284</span>                 :             :     /// Constructor</span>
 <span id="L285"><span class="lineNum">     285</span>                 :<span class="tlaGNC">          71 :     Thread( IRunnable&amp; runnable ) noexcept</span></span>
-<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC">          71 :         : m_runnable( runnable )</span></span>
+<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC">          71 :         : m_runnable( &amp;runnable )</span></span>
 <span id="L287"><span class="lineNum">     287</span>                 :             :     {</span>
 <span id="L288"><span class="lineNum">     288</span>                 :<span class="tlaGNC">          71 :         memset( m_tlsArray, 0, sizeof( m_tlsArray ) );</span></span>
 <span id="L289"><span class="lineNum">     289</span>                 :<span class="tlaGNC">          71 :     }</span></span>
@@ -373,8 +373,8 @@
 <span id="L311"><span class="lineNum">     311</span>                 :             :     static void removeThreadFromActiveList( Thread&amp; thread ) noexcept;</span>
 <span id="L312"><span class="lineNum">     312</span>                 :             : </span>
 <span id="L313"><span class="lineNum">     313</span>                 :             : protected:</span>
-<span id="L314"><span class="lineNum">     314</span>                 :             :     /// Reference to the thread's runnable object</span>
-<span id="L315"><span class="lineNum">     315</span>                 :             :     IRunnable&amp; m_runnable;</span>
+<span id="L314"><span class="lineNum">     314</span>                 :             :     /// Pointer to the thread's runnable object (note: is pointer to allow late binding)</span>
+<span id="L315"><span class="lineNum">     315</span>                 :             :     IRunnable* m_runnable;</span>
 <span id="L316"><span class="lineNum">     316</span>                 :             : </span>
 <span id="L317"><span class="lineNum">     317</span>                 :             :     /// Native file handle for the thread instance</span>
 <span id="L318"><span class="lineNum">     318</span>                 :             :     KitSystemThreadID_T m_nativeThreadHdl;</span>

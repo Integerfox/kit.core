@@ -1,60 +1,80 @@
 <map id="Kit::Container::ListItem" name="Kit::Container::ListItem">
-<area shape="rect" id="Node000001" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="204,291,376,316"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_container_1_1_extended_list_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers." alt="" coords="431,113,611,153"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="308,278,357,224,389,195,424,169,459,150,462,155,427,174,393,199,361,228,312,282"/>
-<area shape="rect" id="Node000017" href="$class_kit_1_1_system_1_1_i_event_flag.html" title="This abstract class defines the call&#45;back interface when an Event Flag has signaled." alt="" coords="433,184,608,209"/>
-<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="318,280,366,249,424,218,457,207,459,212,426,223,369,253,321,285"/>
-<area shape="rect" id="Node000019" href="$class_kit_1_1_system_1_1_i_startup_hook.html" title="This class defines a start&#45;up handler/hook that allows a KIT Library sub&#45;system to register to be cal..." alt="" coords="425,233,616,259"/>
-<area shape="poly" id="edge19_Node000001_Node000019" title=" " alt="" coords="355,285,468,256,470,261,356,290"/>
-<area shape="rect" id="Node000020" href="$class_kit_1_1_system_1_1_shutdown_1_1_i_handler.html" title="This call defines the callback interface that is used when the application is shutdown." alt="" coords="436,283,605,323"/>
-<area shape="poly" id="edge20_Node000001_Node000020" title=" " alt="" coords="390,301,436,301,436,306,390,306"/>
-<area shape="rect" id="Node000021" href="$class_kit_1_1_system_1_1_sim_tick.html" title="This class define the interface to provide a simulates system tick (in milliseconds) to the applicati..." alt="" coords="442,348,599,373"/>
-<area shape="poly" id="edge21_Node000001_Node000021" title=" " alt="" coords="356,317,470,345,468,351,355,322"/>
-<area shape="rect" id="Node000022" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="445,397,596,423"/>
-<area shape="poly" id="edge22_Node000001_Node000022" title=" " alt="" coords="321,322,369,353,426,384,459,395,457,400,424,388,366,358,318,326"/>
-<area shape="rect" id="Node000027" href="$class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html" title="This class represents a thread being monitored by the watchdog system." alt="" coords="436,518,605,558"/>
-<area shape="poly" id="edge27_Node000001_Node000027" title=" " alt="" coords="315,324,502,516,498,520,312,328"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="5,291,155,316"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,301,204,301,204,306,169,306"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_container_1_1_keyed_item.html" title="This abstract class represents a item that can be used with containers that have a concept of Key&#45;Val..." alt="" coords="672,63,861,88"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="620,107,711,85,712,91,621,112"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_itc_1_1_i_message.html" title="This abstract class defines the operations for an ITC message." alt="" coords="699,112,834,137"/>
-<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="624,127,699,124,699,130,624,132"/>
-<area shape="rect" id="Node000013" href="$class_kit_1_1_system_1_1_i_counter.html" title="This abstract class defines the call&#45;back interface for a Counter object." alt="" coords="687,161,847,187"/>
-<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="625,147,691,159,690,164,624,153"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ..." alt="" coords="943,29,1120,55"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="875,59,942,51,943,56,876,64"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_text_1_1_string_item.html" title="This partially concrete provides a wrapper class that allows a IString object to be stored directly i..." alt="" coords="1224,29,1375,55"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1134,39,1224,39,1224,45,1134,45"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_text_1_1_d_string_item.html" title="This concrete class implements the StringItem class for a &#39;String&#39; using a &#39;DString&#39; as the internal ..." alt="" coords="1643,5,1804,31"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1388,34,1643,20,1643,25,1389,40"/>
-<area shape="rect" id="Node000008" href="$class_kit_1_1_text_1_1_f_string_item.html" title="This template class implements the StringItem class for a &#39;String&#39; using a &#39;FString&#39; as the internal ..." alt="" coords="1625,55,1821,80"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="1389,45,1625,59,1625,64,1388,50"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_itc_1_1_response_message.html" title="This template class represents a client response message, which is posted to the client&#39;s mailbox aft..." alt="" coords="917,79,1145,119"/>
-<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="847,114,917,108,917,113,848,120"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_itc_1_1_server_message.html" title="This partially concrete class represents a defined message, which is posted to a mailbox&#45;server as a ..." alt="" coords="945,144,1117,169"/>
-<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="848,132,945,144,945,149,847,137"/>
-<area shape="rect" id="Node000012" href="$class_kit_1_1_itc_1_1_request_message.html" title="This concrete template class represents a service request message to a particular server." alt="" coords="1208,133,1391,173"/>
-<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="1131,153,1208,151,1208,157,1131,158"/>
-<area shape="rect" id="Node000014" href="$class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer." alt="" coords="960,197,1103,223"/>
-<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="861,184,960,198,959,203,860,189"/>
-<area shape="rect" id="Node000015" href="$class_kit_1_1_system_1_1_timer_composer.html" title=" " alt="" coords="1619,209,1828,264"/>
-<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="1116,209,1595,226,1619,227,1618,233,1595,231,1116,215"/>
-<area shape="rect" id="Node000016" href="$class_kit_1_1_system_1_1_timer_composer.html" title="This template class implements a Software Timer that is context independent and allows for a single c..." alt="" coords="1195,247,1404,287"/>
-<area shape="poly" id="edge15_Node000014_Node000016" title=" " alt="" coords="1105,223,1206,245,1205,250,1104,228"/>
-<area shape="poly" id="edge16_Node000016_Node000015" title=" " alt="" coords="1418,265,1505,262,1594,255,1618,253,1619,258,1595,261,1505,267,1418,270"/>
-<area shape="rect" id="Node000018" href="$class_kit_1_1_system_1_1_event_flag_base.html" title="This is helper class that perform an auto&#45;registration of the Event Flag instance with a list of Even..." alt="" coords="665,211,868,236"/>
-<area shape="poly" id="edge18_Node000017_Node000018" title=" " alt="" coords="622,205,665,210,665,215,621,210"/>
-<area shape="rect" id="Node000023" href="$class_kit_1_1_system_1_1_bare_metal_1_1_thread.html" title="This concrete class implements a Thread object on a bare&#45;metal platform, i.e NO operating system,..." alt="" coords="681,262,853,302"/>
-<area shape="poly" id="edge23_Node000022_Node000023" title=" " alt="" coords="606,389,614,384,631,367,638,349,647,330,664,312,684,300,687,304,667,316,651,333,643,351,635,370,618,388,608,394"/>
-<area shape="rect" id="Node000024" href="$class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html" title="This concrete class implements a Thread object using FreeRTOS threads." alt="" coords="683,326,850,366"/>
-<area shape="poly" id="edge24_Node000022_Node000024" title=" " alt="" coords="585,391,615,383,691,363,692,369,617,389,586,396"/>
-<area shape="rect" id="Node000025" href="$class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads." alt="" coords="697,390,837,430"/>
-<area shape="poly" id="edge25_Node000022_Node000025" title=" " alt="" coords="610,407,696,407,696,413,610,413"/>
-<area shape="rect" id="Node000026" href="$class_kit_1_1_system_1_1_win32_1_1_thread.html" title="This concrete class implements a Thread object using Win32 threads." alt="" coords="693,454,840,494"/>
-<area shape="poly" id="edge26_Node000022_Node000026" title=" " alt="" coords="585,424,694,452,693,458,583,429"/>
-<area shape="rect" id="Node000028" href="$class_kit_1_1_system_1_1_watchdog_1_1_raw_thread.html" title="RawThread &#45; A concrete implementation for raw threads that provides wrapper methods for manual watchd..." alt="" coords="682,518,851,558"/>
-<area shape="poly" id="edge28_Node000027_Node000028" title=" " alt="" coords="619,535,682,535,682,541,619,541"/>
-<area shape="rect" id="Node000029" href="$class_kit_1_1_system_1_1_watchdog_1_1_watched_event_thread.html" title="This class implements the IWatchedEventLoop interface and provides watchdog monitoring capabilities f..." alt="" coords="682,582,851,622"/>
-<area shape="poly" id="edge29_Node000027_Node000029" title=" " alt="" coords="612,559,690,579,689,585,611,564"/>
+<area shape="rect" id="Node000001" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="204,567,376,592"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_container_1_1_extended_list_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers." alt="" coords="431,137,611,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="303,553,506,176,511,178,307,555"/>
+<area shape="rect" id="Node000018" href="$class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator." alt="" coords="437,353,604,379"/>
+<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="313,555,504,377,507,381,317,559"/>
+<area shape="rect" id="Node000024" href="$class_kit_1_1_system_1_1_i_event_flag.html" title="This abstract class defines the call&#45;back interface when an Event Flag has signaled." alt="" coords="433,472,608,497"/>
+<area shape="poly" id="edge24_Node000001_Node000024" title=" " alt="" coords="325,558,424,510,470,495,472,500,426,515,327,563"/>
+<area shape="rect" id="Node000026" href="$class_kit_1_1_system_1_1_i_startup_hook.html" title="This class defines a start&#45;up handler/hook that allows a KIT Library sub&#45;system to register to be cal..." alt="" coords="425,525,616,551"/>
+<area shape="poly" id="edge26_Node000001_Node000026" title=" " alt="" coords="374,562,449,548,450,553,375,567"/>
+<area shape="rect" id="Node000029" href="$class_kit_1_1_system_1_1_shutdown_1_1_i_handler.html" title="This call defines the callback interface that is used when the application is shutdown." alt="" coords="436,575,605,615"/>
+<area shape="poly" id="edge29_Node000001_Node000029" title=" " alt="" coords="390,584,436,587,436,592,389,589"/>
+<area shape="rect" id="Node000030" href="$class_kit_1_1_system_1_1_sim_tick.html" title="This class define the interface to provide a simulates system tick (in milliseconds) to the applicati..." alt="" coords="442,640,599,665"/>
+<area shape="poly" id="edge30_Node000001_Node000030" title=" " alt="" coords="338,594,426,625,470,637,468,642,425,630,337,599"/>
+<area shape="rect" id="Node000031" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="445,749,596,775"/>
+<area shape="poly" id="edge31_Node000001_Node000031" title=" " alt="" coords="320,599,505,747,501,751,317,603"/>
+<area shape="rect" id="Node000037" href="$class_kit_1_1_system_1_1_watchdog_1_1_watched_thread.html" title="This class represents a thread being monitored by the watchdog system." alt="" coords="436,966,605,1006"/>
+<area shape="poly" id="edge37_Node000001_Node000037" title=" " alt="" coords="308,603,510,965,506,967,303,605"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="5,567,155,592"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,577,204,577,204,582,169,582"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_container_1_1_keyed_item.html" title="This abstract class represents a item that can be used with containers that have a concept of Key&#45;Val..." alt="" coords="691,33,880,59"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="561,127,609,98,664,72,714,56,715,61,666,76,612,103,564,132"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_itc_1_1_i_message.html" title="This abstract class defines the operations for an ITC message." alt="" coords="718,87,853,112"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="624,131,665,122,723,110,724,115,666,127,625,136"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_memory_1_1_pool_1_1_block_info.html" title="Helper class so I can put my blocks into to my standard containers." alt="" coords="713,137,858,177"/>
+<area shape="poly" id="edge12_Node000003_Node000013" title=" " alt="" coords="624,154,712,154,712,159,624,159"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_system_1_1_i_counter.html" title="This abstract class defines the call&#45;back interface for a Counter object." alt="" coords="705,201,865,227"/>
+<area shape="poly" id="edge13_Node000003_Node000014" title=" " alt="" coords="625,177,666,186,724,199,723,204,665,191,624,182"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_container_1_1_map_item.html" title="This abstract class represents a item that can be contained in an Map (aka a sorted list implemented ..." alt="" coords="980,29,1157,55"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="893,42,980,41,980,46,894,47"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_text_1_1_string_item.html" title="This partially concrete provides a wrapper class that allows a IString object to be stored directly i..." alt="" coords="1261,29,1412,55"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1171,39,1261,39,1261,45,1171,45"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_text_1_1_d_string_item.html" title="This concrete class implements the StringItem class for a &#39;String&#39; using a &#39;DString&#39; as the internal ..." alt="" coords="1680,5,1841,31"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="1426,34,1680,20,1680,25,1426,40"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_text_1_1_f_string_item.html" title="This template class implements the StringItem class for a &#39;String&#39; using a &#39;FString&#39; as the internal ..." alt="" coords="1663,55,1859,80"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="1426,45,1663,59,1662,64,1426,50"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_itc_1_1_response_message.html" title="This template class represents a client response message, which is posted to the client&#39;s mailbox aft..." alt="" coords="955,79,1183,119"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="866,97,954,97,954,102,866,102"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_itc_1_1_server_message.html" title="This partially concrete class represents a defined message, which is posted to a mailbox&#45;server as a ..." alt="" coords="983,144,1155,169"/>
+<area shape="poly" id="edge10_Node000009_Node000011" title=" " alt="" coords="863,112,1006,141,1005,147,862,117"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_itc_1_1_request_message.html" title="This concrete template class represents a service request message to a particular server." alt="" coords="1245,137,1428,177"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="1168,154,1245,154,1245,159,1168,159"/>
+<area shape="rect" id="Node000015" href="$class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer." alt="" coords="997,201,1140,227"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="879,211,997,211,997,217,879,217"/>
+<area shape="rect" id="Node000016" href="$class_kit_1_1_system_1_1_timer_composer.html" title=" " alt="" coords="1656,216,1865,271"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="1154,213,1371,219,1632,230,1656,232,1656,237,1632,235,1370,224,1154,218"/>
+<area shape="rect" id="Node000017" href="$class_kit_1_1_system_1_1_timer_composer.html" title="This template class implements a Software Timer that is context independent and allows for a single c..." alt="" coords="1232,251,1441,291"/>
+<area shape="poly" id="edge16_Node000015_Node000017" title=" " alt="" coords="1143,227,1243,249,1242,254,1142,232"/>
+<area shape="poly" id="edge17_Node000017_Node000016" title=" " alt="" coords="1455,268,1632,259,1656,257,1656,262,1632,265,1455,273"/>
+<area shape="rect" id="Node000019" href="$class_kit_1_1_memory_1_1_contiguous_allocator.html" title="This abstract class is used &#39;extend&#39; the Memory Allocator to have contiguous semantics." alt="" coords="665,255,905,280"/>
+<area shape="poly" id="edge19_Node000018_Node000019" title=" " alt="" coords="552,344,604,315,664,289,705,277,706,283,666,294,606,320,555,349"/>
+<area shape="rect" id="Node000021" href="$class_kit_1_1_memory_1_1_h_pool.html" title="This template class defines a concrete Allocator that allocates memory from the HEAP for a memory poo..." alt="" coords="693,304,878,329"/>
+<area shape="poly" id="edge21_Node000018_Node000021" title=" " alt="" coords="602,348,716,327,717,332,603,353"/>
+<area shape="rect" id="Node000022" href="$class_kit_1_1_memory_1_1_pool.html" title="This internal (to the namespace) concrete class implements a Memory Allocator using a pool of fixed s..." alt="" coords="717,353,854,379"/>
+<area shape="poly" id="edge22_Node000018_Node000022" title=" " alt="" coords="618,363,717,363,717,369,618,369"/>
+<area shape="rect" id="Node000023" href="$class_kit_1_1_memory_1_1_s_pool.html" title="This template class defines a concrete Allocator that STATICALLY allocates all of its Memory and can ..." alt="" coords="713,403,858,443"/>
+<area shape="poly" id="edge23_Node000018_Node000023" title=" " alt="" coords="594,379,713,405,712,410,593,384"/>
+<area shape="rect" id="Node000020" href="$class_kit_1_1_memory_1_1_lean_heap.html" title="This template class manages an allocate&#45;only&#45;heap with statically allocated memory." alt="" coords="961,251,1176,291"/>
+<area shape="poly" id="edge20_Node000019_Node000020" title=" " alt="" coords="919,267,961,267,961,272,919,272"/>
+<area shape="rect" id="Node000025" href="$class_kit_1_1_system_1_1_event_flag_base.html" title="This is helper class that perform an auto&#45;registration of the Event Flag instance with a list of Even..." alt="" coords="684,468,887,493"/>
+<area shape="poly" id="edge25_Node000024_Node000025" title=" " alt="" coords="622,480,684,480,684,485,622,486"/>
+<area shape="rect" id="Node000027" href="$class_kit_1_1_system_1_1_r_p_pico_1_1_mutex___t.html" title="This class implements a brute force approach to initializing a &#39;pico mutex&#39; when the Kit C++ library ..." alt="" coords="711,518,860,558"/>
+<area shape="poly" id="edge27_Node000026_Node000027" title=" " alt="" coords="630,535,710,535,710,541,630,541"/>
+<area shape="rect" id="Node000028" href="$class_kit_1_1_system_1_1_r_p_pico_1_1_semaphore___t.html" title="This class implements a brute force approach to initializing a &#39;pico semaphore&#39; when the Kit C++ libr..." alt="" coords="711,582,860,622"/>
+<area shape="poly" id="edge28_Node000026_Node000028" title=" " alt="" coords="588,551,711,581,710,587,587,557"/>
+<area shape="rect" id="Node000032" href="$class_kit_1_1_system_1_1_bare_metal_1_1_thread.html" title="This concrete class implements a Thread object on a bare&#45;metal platform, i.e NO operating system,..." alt="" coords="699,646,871,686"/>
+<area shape="poly" id="edge32_Node000031_Node000032" title=" " alt="" coords="559,741,664,696,702,683,704,689,666,700,561,746"/>
+<area shape="rect" id="Node000033" href="$class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html" title="This concrete class implements a Thread object using FreeRTOS threads." alt="" coords="702,710,869,750"/>
+<area shape="poly" id="edge33_Node000031_Node000033" title=" " alt="" coords="609,749,702,737,702,743,610,754"/>
+<area shape="rect" id="Node000034" href="$class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads." alt="" coords="715,774,855,814"/>
+<area shape="poly" id="edge34_Node000031_Node000034" title=" " alt="" coords="610,770,715,783,715,788,609,775"/>
+<area shape="rect" id="Node000035" href="$class_kit_1_1_system_1_1_r_p_pico_1_1_thread.html" title="This concrete class implements a Thread object that maps 1 to 1 with a processor core on the Raspberr..." alt="" coords="711,838,860,878"/>
+<area shape="poly" id="edge35_Node000031_Node000035" title=" " alt="" coords="561,778,666,823,711,838,710,843,664,829,559,783"/>
+<area shape="rect" id="Node000036" href="$class_kit_1_1_system_1_1_win32_1_1_thread.html" title="This concrete class implements a Thread object using Win32 threads." alt="" coords="712,902,859,942"/>
+<area shape="poly" id="edge36_Node000031_Node000036" title=" " alt="" coords="543,783,596,836,630,864,667,888,713,906,711,911,664,892,627,868,592,840,540,787"/>
+<area shape="rect" id="Node000038" href="$class_kit_1_1_system_1_1_watchdog_1_1_raw_thread.html" title="RawThread &#45; A concrete implementation for raw threads that provides wrapper methods for manual watchd..." alt="" coords="701,966,870,1006"/>
+<area shape="poly" id="edge38_Node000037_Node000038" title=" " alt="" coords="619,983,700,983,700,989,619,989"/>
+<area shape="rect" id="Node000039" href="$class_kit_1_1_system_1_1_watchdog_1_1_watched_event_thread.html" title="This class implements the IWatchedEventLoop interface and provides watchdog monitoring capabilities f..." alt="" coords="701,1030,870,1070"/>
+<area shape="poly" id="edge39_Node000037_Node000039" title=" " alt="" coords="618,1007,703,1027,701,1033,617,1012"/>
 </map>

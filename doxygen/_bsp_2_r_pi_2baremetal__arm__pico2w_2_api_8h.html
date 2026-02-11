@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 260-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 263-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -75,19 +75,19 @@ Macros</h2></td></tr>
 <tr class="memitem:afd2bc16590aa6a77810f2c41135517c8" id="r_afd2bc16590aa6a77810f2c41135517c8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd2bc16590aa6a77810f2c41135517c8">BSP_DEFAULT_UART_TX_PIN</a>&#160;&#160;&#160;PICO_DEFAULT_UART_TX_PIN</td></tr>
 <tr class="memdesc:afd2bc16590aa6a77810f2c41135517c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default UART Settings.  <br /></td></tr>
 <tr class="separator:afd2bc16590aa6a77810f2c41135517c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f6db1711c079f1da4ccb019c4fa77f7" id="r_a7f6db1711c079f1da4ccb019c4fa77f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f6db1711c079f1da4ccb019c4fa77f7">Bsp_disable_irqs_MAP</a>&#160;&#160;&#160;disable_interrupts</td></tr>
-<tr class="memdesc:a7f6db1711c079f1da4ccb019c4fa77f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic API.  <br /></td></tr>
-<tr class="separator:a7f6db1711c079f1da4ccb019c4fa77f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4fcb59df8a1da2b6cacde573d21e9be" id="r_aa4fcb59df8a1da2b6cacde573d21e9be"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa4fcb59df8a1da2b6cacde573d21e9be">Bsp_enable_irqs_MAP</a>&#160;&#160;&#160;enable_interrupts</td></tr>
-<tr class="memdesc:aa4fcb59df8a1da2b6cacde573d21e9be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic API.  <br /></td></tr>
-<tr class="separator:aa4fcb59df8a1da2b6cacde573d21e9be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0196bced3108fdcd983e917ffd15f325" id="r_a0196bced3108fdcd983e917ffd15f325"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0196bced3108fdcd983e917ffd15f325">Bsp_disable_irqs_MAP</a>()</td></tr>
+<tr class="memdesc:a0196bced3108fdcd983e917ffd15f325"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic API.  <br /></td></tr>
+<tr class="separator:a0196bced3108fdcd983e917ffd15f325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a855f10343eee59e1f0a8e007cd1495ec" id="r_a855f10343eee59e1f0a8e007cd1495ec"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a855f10343eee59e1f0a8e007cd1495ec">Bsp_enable_irqs_MAP</a>()</td></tr>
+<tr class="memdesc:a855f10343eee59e1f0a8e007cd1495ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic API.  <br /></td></tr>
+<tr class="separator:a855f10343eee59e1f0a8e007cd1495ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af74c8d3148f8317ac3a8aa1e441ed061" id="r_af74c8d3148f8317ac3a8aa1e441ed061"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af74c8d3148f8317ac3a8aa1e441ed061">Bsp_nop_MAP</a>()&#160;&#160;&#160;__asm( &quot;nop&quot; )</td></tr>
 <tr class="memdesc:af74c8d3148f8317ac3a8aa1e441ed061"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mappings for Generic APIs.  <br /></td></tr>
 <tr class="separator:af74c8d3148f8317ac3a8aa1e441ed061"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9e0c22e4f3a3c43d06786566e3d3017" id="r_af9e0c22e4f3a3c43d06786566e3d3017"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9e0c22e4f3a3c43d06786566e3d3017">Bsp_pop_irqs_MAP</a>()&#160;&#160;&#160;restore_interrupts_from_disabled( bspIrqStatus_unique_name )</td></tr>
+<tr class="memitem:af9e0c22e4f3a3c43d06786566e3d3017" id="r_af9e0c22e4f3a3c43d06786566e3d3017"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9e0c22e4f3a3c43d06786566e3d3017">Bsp_pop_irqs_MAP</a>()&#160;&#160;&#160;    restore_interrupts_from_disabled( bspIrqStatus_unique_name );</td></tr>
 <tr class="memdesc:af9e0c22e4f3a3c43d06786566e3d3017"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic API.  <br /></td></tr>
 <tr class="separator:af9e0c22e4f3a3c43d06786566e3d3017"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3344ad767432680cc293da7d4ca4fcef" id="r_a3344ad767432680cc293da7d4ca4fcef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3344ad767432680cc293da7d4ca4fcef">Bsp_push_and_disable_irqs_MAP</a>()&#160;&#160;&#160;uint32_t bspIrqStatus_unique_name = save_and_disable_interrupts()</td></tr>
+<tr class="memitem:a3344ad767432680cc293da7d4ca4fcef" id="r_a3344ad767432680cc293da7d4ca4fcef"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3344ad767432680cc293da7d4ca4fcef">Bsp_push_and_disable_irqs_MAP</a>()</td></tr>
 <tr class="memdesc:a3344ad767432680cc293da7d4ca4fcef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic API.  <br /></td></tr>
 <tr class="separator:a3344ad767432680cc293da7d4ca4fcef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad08873e5b977d94877be357d7b90f358" id="r_ad08873e5b977d94877be357d7b90f358"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad08873e5b977d94877be357d7b90f358">Bsp_toggle_debug1_MAP</a>&#160;&#160;&#160;<a class="el" href="#a6d2007f481a798df90abf9bcd10d6aa5">Bsp_toggleDebug1</a></td></tr>
@@ -188,34 +188,51 @@ UART0</h2>
 
 </div>
 </div>
-<a id="a7f6db1711c079f1da4ccb019c4fa77f7" name="a7f6db1711c079f1da4ccb019c4fa77f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f6db1711c079f1da4ccb019c4fa77f7">&#9670;&#160;</a></span>Bsp_disable_irqs_MAP</h2>
+<a id="a0196bced3108fdcd983e917ffd15f325" name="a0196bced3108fdcd983e917ffd15f325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0196bced3108fdcd983e917ffd15f325">&#9670;&#160;</a></span>Bsp_disable_irqs_MAP</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define Bsp_disable_irqs_MAP&#160;&#160;&#160;disable_interrupts</td>
+          <td class="memname">#define Bsp_disable_irqs_MAP</td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span>                         \</div>
+<div class="line">    {                          \</div>
+<div class="line">        disable_interrupts();  \</div>
+<div class="line">        __dsb();               \</div>
+<div class="line">    }                          \</div>
+<div class="line">    while ( 0 )</div>
+</div><!-- fragment -->
 <p>Generic API. </p>
 
 </div>
 </div>
-<a id="aa4fcb59df8a1da2b6cacde573d21e9be" name="aa4fcb59df8a1da2b6cacde573d21e9be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4fcb59df8a1da2b6cacde573d21e9be">&#9670;&#160;</a></span>Bsp_enable_irqs_MAP</h2>
+<a id="a855f10343eee59e1f0a8e007cd1495ec" name="a855f10343eee59e1f0a8e007cd1495ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a855f10343eee59e1f0a8e007cd1495ec">&#9670;&#160;</a></span>Bsp_enable_irqs_MAP</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define Bsp_enable_irqs_MAP&#160;&#160;&#160;enable_interrupts</td>
+          <td class="memname">#define Bsp_enable_irqs_MAP</td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span>                        \</div>
+<div class="line">    {                         \</div>
+<div class="line">        enable_interrupts();  \</div>
+<div class="line">    }                         \</div>
+<div class="line">    while ( 0 )</div>
+</div><!-- fragment -->
 <p>Generic API. </p>
 
 </div>
@@ -250,7 +267,7 @@ UART0</h2>
           <td class="memname">#define Bsp_pop_irqs_MAP</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td>&#160;&#160;&#160;restore_interrupts_from_disabled( bspIrqStatus_unique_name )</td>
+          <td>&#160;&#160;&#160;    restore_interrupts_from_disabled( bspIrqStatus_unique_name );</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -269,11 +286,13 @@ UART0</h2>
           <td class="memname">#define Bsp_push_and_disable_irqs_MAP</td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td>&#160;&#160;&#160;uint32_t bspIrqStatus_unique_name = save_and_disable_interrupts()</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line">    uint32_t bspIrqStatus_unique_name = save_and_disable_interrupts(); \</div>
+<div class="line">    __dsb();</div>
+</div><!-- fragment -->
 <p>Generic API. </p>
 
 </div>
@@ -496,7 +515,7 @@ UART0</h2>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 5 2026 13:00:24 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Feb 11 2026 22:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

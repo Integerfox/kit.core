@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-01-05 13:04:03</td>
+            <td class="headerValue">2026-02-11 22:53:15</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryLo">16.7&nbsp;%</td>
@@ -126,17 +126,17 @@
 <span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaUNC">           0 : }</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : </span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC tlaBgGNC">           6 : void FatalError::logf( int exitCode, const char* format, ... )</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC tlaBgGNC">          18 : void FatalError::logf( int exitCode, const char* format, ... )</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     va_list ap;</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">           6 :     va_start( ap, format );</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          18 :     va_start( ap, format );</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : </span>
-<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">           6 :     buffer_.format( &quot;%s [%d]: &quot;, EXTRA_INFO, exitCode );</span></span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">           6 :     buffer_.vformatAppend( format, ap );</span></span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">           6 :     va_end( ap );</span></span>
-<span id="L75"><span class="lineNum">      75</span>   [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">          12 :     OUTPUT( buffer_.getString() );</span></span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">           6 :     Shutdown::failure( exitCode );</span></span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">           6 : }</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">          18 :     buffer_.format( &quot;%s [%d]: &quot;, EXTRA_INFO, exitCode );</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          18 :     buffer_.vformatAppend( format, ap );</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">          18 :     va_end( ap );</span></span>
+<span id="L75"><span class="lineNum">      75</span>   [<span class="tlaGBC" title="Branch 0 was taken 18 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 18 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">          36 :     OUTPUT( buffer_.getString() );</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          18 :     Shutdown::failure( exitCode );</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          18 : }</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : </span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : //////////////////////////////</span>

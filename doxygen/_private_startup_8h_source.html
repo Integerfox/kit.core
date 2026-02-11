@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 260-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 263-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -103,7 +103,7 @@ $(function() {
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">        process. The &#39;initLevel&#39; informs the client what initialize</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">        level context the notifyInit() method is being called.</span></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_startup_hook.html#ac389154533ae8daa7676f1f749333900">   56</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_startup_hook.html#ac389154533ae8daa7676f1f749333900">notify</a>( <a class="code hl_enumeration" href="class_kit_1_1_system_1_1_i_startup_hook.html#ac42654fa4de82328eea4b5d58cdd23da">InitLevel</a> initLevel ) = 0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_startup_hook.html#a357acf1c664b8a1a477e9b67fb87c467">   56</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_startup_hook.html#a357acf1c664b8a1a477e9b67fb87c467">notify</a>( <a class="code hl_enumeration" href="class_kit_1_1_system_1_1_i_startup_hook.html#ac42654fa4de82328eea4b5d58cdd23da">InitLevel</a> initLevel ) <span class="keyword">noexcept</span> = 0;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">protected</span>:<span class="comment"></span></div>
@@ -142,17 +142,17 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_container_1_1_list_item_html"><div class="ttname"><a href="class_kit_1_1_container_1_1_list_item.html">Kit::Container::ListItem</a></div><div class="ttdoc">This class is used by the Container classes to implement a various types of linked lists containers.</div><div class="ttdef"><b>Definition</b> ListItem.h:25</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html">Kit::System::IStartupHook</a></div><div class="ttdoc">This class defines a start-up handler/hook that allows a KIT Library sub-system to register to be cal...</div><div class="ttdef"><b>Definition</b> PrivateStartup.h:34</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html_a232866e7cc773f08c154c50b3e4321fa"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html#a232866e7cc773f08c154c50b3e4321fa">Kit::System::IStartupHook::~IStartupHook</a></div><div class="ttdeci">virtual ~IStartupHook()</div><div class="ttdoc">Ensure the destructor is virtual.</div><div class="ttdef"><b>Definition</b> PrivateStartup.h:67</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html_a357acf1c664b8a1a477e9b67fb87c467"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html#a357acf1c664b8a1a477e9b67fb87c467">Kit::System::IStartupHook::notify</a></div><div class="ttdeci">virtual void notify(InitLevel initLevel) noexcept=0</div><div class="ttdoc">Initialized last.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html_a86ed5aa0071f5ed3674023f674048107"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html#a86ed5aa0071f5ed3674023f674048107">Kit::System::IStartupHook::registerHook</a></div><div class="ttdeci">static void registerHook(IStartupHook &amp;callbackInstance, InitLevel initOrder) noexcept</div><div class="ttdoc">This is used to register instance of this class.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html_abdde02e7fb3f23655b9bab7badfb6371"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html#abdde02e7fb3f23655b9bab7badfb6371">Kit::System::IStartupHook::IStartupHook</a></div><div class="ttdeci">IStartupHook(InitLevel myInitLevel) noexcept</div><div class="ttdoc">Base Class constructor --&gt;performs the callback/init-level registration.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html_ac12bb4f78330420fc847d7b08152ece8"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html#ac12bb4f78330420fc847d7b08152ece8">Kit::System::IStartupHook::notifyStartupClients</a></div><div class="ttdeci">static void notifyStartupClients() noexcept</div><div class="ttdoc">This method is intended to be USED ONLY by the Kit::System::Api::init() method to trigger all of the ...</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html_ac389154533ae8daa7676f1f749333900"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html#ac389154533ae8daa7676f1f749333900">Kit::System::IStartupHook::notify</a></div><div class="ttdeci">virtual void notify(InitLevel initLevel)=0</div><div class="ttdoc">Initialized last.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html_ac42654fa4de82328eea4b5d58cdd23da"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html#ac42654fa4de82328eea4b5d58cdd23da">Kit::System::IStartupHook::InitLevel</a></div><div class="ttdeci">InitLevel</div><div class="ttdoc">This enum defines 'init_levels'.</div><div class="ttdef"><b>Definition</b> PrivateStartup.h:43</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_startup_hook_html_ac42654fa4de82328eea4b5d58cdd23daa30a496209ecaa2fdf3b80294616ae58b"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_startup_hook.html#ac42654fa4de82328eea4b5d58cdd23daa30a496209ecaa2fdf3b80294616ae58b">Kit::System::IStartupHook::SYSTEM</a></div><div class="ttdeci">@ SYSTEM</div><div class="ttdoc">Initialized first.</div><div class="ttdef"><b>Definition</b> PrivateStartup.h:45</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 5 2026 13:00:24 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Feb 11 2026 22:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

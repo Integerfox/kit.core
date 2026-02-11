@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 260-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 263-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -64,7 +64,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_system_1_1_i_startup_hook__inherit__graph.svg" width="202" height="183"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_system_1_1_i_startup_hook__inherit__graph.svg" width="334" height="271"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::System::IStartupHook:</div>
@@ -89,9 +89,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a232866e7cc773f08c154c50b3e4321fa" id="r_a232866e7cc773f08c154c50b3e4321fa"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a232866e7cc773f08c154c50b3e4321fa">~IStartupHook</a> ()</td></tr>
 <tr class="memdesc:a232866e7cc773f08c154c50b3e4321fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure the destructor is virtual.  <br /></td></tr>
 <tr class="separator:a232866e7cc773f08c154c50b3e4321fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac389154533ae8daa7676f1f749333900" id="r_ac389154533ae8daa7676f1f749333900"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac389154533ae8daa7676f1f749333900">notify</a> (<a class="el" href="#ac42654fa4de82328eea4b5d58cdd23da">InitLevel</a> initLevel)=0</td></tr>
-<tr class="memdesc:ac389154533ae8daa7676f1f749333900"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialized last.  <br /></td></tr>
-<tr class="separator:ac389154533ae8daa7676f1f749333900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a357acf1c664b8a1a477e9b67fb87c467" id="r_a357acf1c664b8a1a477e9b67fb87c467"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a357acf1c664b8a1a477e9b67fb87c467">notify</a> (<a class="el" href="#ac42654fa4de82328eea4b5d58cdd23da">InitLevel</a> initLevel) noexcept=0</td></tr>
+<tr class="memdesc:a357acf1c664b8a1a477e9b67fb87c467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialized last.  <br /></td></tr>
+<tr class="separator:a357acf1c664b8a1a477e9b67fb87c467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_container_1_1_item"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_container_1_1_item')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_container_1_1_item.html">Kit::Container::Item</a></td></tr>
 <tr class="memitem:a629af4bb1ce1c34f7d72437e55eb69df inherit pub_methods_class_kit_1_1_container_1_1_item" id="r_a629af4bb1ce1c34f7d72437e55eb69df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">insert_</a> (void *newContainerPtr) noexcept</td></tr>
 <tr class="memdesc:a629af4bb1ce1c34f7d72437e55eb69df inherit pub_methods_class_kit_1_1_container_1_1_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to trap when inserting an item in multiple containers.  <br /></td></tr>
@@ -229,8 +229,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac389154533ae8daa7676f1f749333900" name="ac389154533ae8daa7676f1f749333900"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac389154533ae8daa7676f1f749333900">&#9670;&#160;</a></span>notify()</h2>
+<a id="a357acf1c664b8a1a477e9b67fb87c467" name="a357acf1c664b8a1a477e9b67fb87c467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a357acf1c664b8a1a477e9b67fb87c467">&#9670;&#160;</a></span>notify()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,13 +247,15 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Initialized last. </p>
 <p>This method is called as part of the KIT Library <a class="el" href="namespace_kit_1_1_system.html#a09af4e2eba5e8a0b986cebe0d2bbe9cb" title="This function initializes the KIT C++ class library.">initialize()</a> process. The 'initLevel' informs the client what initialize level context the notifyInit() method is being called. </p>
+
+<p>Implemented in <a class="el" href="class_kit_1_1_system_1_1_r_p_pico_1_1_mutex___t.html#a6c30960eace1c7b53c1b4858f84fce0e">Kit::System::RPPico::Mutex_T</a>, and <a class="el" href="class_kit_1_1_system_1_1_r_p_pico_1_1_semaphore___t.html#a75b1dfc53e958becd1608b40270abc11">Kit::System::RPPico::Semaphore_T</a>.</p>
 
 </div>
 </div>
@@ -323,7 +325,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jan 5 2026 13:00:24 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Feb 11 2026 22:49:30 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
