@@ -111,13 +111,13 @@ public:
         switch ( sizeof( T ) )
         {
         case 2:
-            dstData = KIT_TYPE_LE16TOH( dstData );
+            dstData = static_cast<T>( KIT_TYPE_LE16TOH( dstData ) );
             break;
         case 4:
-            dstData = KIT_TYPE_LE32TOH( dstData );
+            dstData = static_cast<T>( KIT_TYPE_LE32TOH( dstData ) );
             break;
         case 8:
-            dstData = KIT_TYPE_LE64TOH( dstData );
+            dstData = static_cast<T>( KIT_TYPE_LE64TOH( dstData ) );
             break;
         default:
             // No byte swapping for non-standard sizes
@@ -202,13 +202,13 @@ public:
         switch ( sizeof( T ) )
         {
         case 2:
-            tempData = KIT_TYPE_HTOLE16( srcData );
+            tempData = static_cast<T>( KIT_TYPE_HTOLE16( srcData ) );
             break;
         case 4:
-            tempData = KIT_TYPE_HTOLE32( srcData );
+            tempData = static_cast<T>( KIT_TYPE_HTOLE32( srcData ) );
             break;
         case 8:
-            tempData = KIT_TYPE_HTOLE64( srcData );
+            tempData = static_cast<T>( KIT_TYPE_HTOLE64( srcData ) );
             break;
         default:
             // No byte swapping for non-standard sizes

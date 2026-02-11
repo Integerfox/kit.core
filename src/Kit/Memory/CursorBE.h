@@ -112,13 +112,13 @@ public:
         switch ( sizeof( T ) )
         {
         case 2:
-            dstData = KIT_TYPE_BE16TOH( dstData );
+            dstData = static_cast<T>( KIT_TYPE_BE16TOH( dstData ) );
             break;
         case 4:
-            dstData = KIT_TYPE_BE32TOH( dstData );
+            dstData = static_cast<T>( KIT_TYPE_BE32TOH( dstData ) );
             break;
         case 8:
-            dstData = KIT_TYPE_BE64TOH( dstData );
+            dstData = static_cast<T>( KIT_TYPE_BE64TOH( dstData ) );
             break;
         default:
             // No byte swapping for non-standard sizes
@@ -197,13 +197,13 @@ public:
         switch ( sizeof( T ) )
         {
         case 2:
-            tempData = KIT_TYPE_HTOBE16( srcData );
+            tempData = static_cast<T>( KIT_TYPE_HTOBE16( srcData ) );
             break;
         case 4:
-            tempData = KIT_TYPE_HTOBE32( srcData );
+            tempData = static_cast<T>( KIT_TYPE_HTOBE32( srcData ) );
             break;
         case 8:
-            tempData = KIT_TYPE_HTOBE64( srcData );
+            tempData = static_cast<T>( KIT_TYPE_HTOBE64( srcData ) );
             break;
         default:
             // No byte swapping for non-standard sizes
