@@ -20,7 +20,7 @@ IF "%EFILE%"=="" (
     goto :eof
 )
 :foundfile
-echo Loading   %EFILE%   onto Pico2W device...
+echo Loading   %EFILE%   onto Pico device...
 picotool load -fx %EFILE% 
 
 :eof

@@ -1,5 +1,5 @@
-#ifndef BSP_BAREMETAL_ARM_PICO2W_CONSOLE_H_
-#define BSP_BAREMETAL_ARM_PICO2W_CONSOLE_H_
+#ifndef BSP_BAREMETAL_PICO_CONSOLE_H_
+#define BSP_BAREMETAL_PICO_CONSOLE_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

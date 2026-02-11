@@ -12,10 +12,14 @@
 #include "Kit/Bsp/Api.h"
 #include "pico/stdio.h"
 #include "pico/critical_section.h"
-#include "pico/cyw43_arch.h"
+#include "hardware/gpio.h"
 #include <ios>
 
 #define SECT_   "bsp"
+
+#ifndef PICO_DEFAULT_LED_PIN
+#define PICO_DEFAULT_LED_PIN 25
+#endif
 
 
 critical_section_t g_bspGlobalCritSec_;
@@ -35,12 +39,9 @@ void Bsp_initialize( void )
     // Initialize STDIO
     INIT_STDIO();
 
-    // Initialize the Wifi chip
-    int err = cyw43_arch_init();
-    if ( err )
-    {
-        printf( "**ERROR: WiFi init failed: %d", err );
-    }
+    // Initialize the onboard LED (GPIO 25 on Pico)
+    gpio_init( PICO_DEFAULT_LED_PIN );
+    gpio_set_dir( PICO_DEFAULT_LED_PIN, GPIO_OUT );
 }
 
 
@@ -48,19 +49,19 @@ static bool debugLed1State_;
 void Bsp_turnOnDebug1()
 {
     debugLed1State_ = true;
-    cyw43_arch_gpio_put( CYW43_WL_GPIO_LED_PIN, debugLed1State_ );
+    gpio_put( PICO_DEFAULT_LED_PIN, debugLed1State_ );
 }
 
 void Bsp_turnOffDebug1()
 {
     debugLed1State_ = false;
-    cyw43_arch_gpio_put( CYW43_WL_GPIO_LED_PIN, debugLed1State_ );
+    gpio_put( PICO_DEFAULT_LED_PIN, debugLed1State_ );
 }
 
 void Bsp_toggleDebug1()
 {
     debugLed1State_ = !debugLed1State_;
-    cyw43_arch_gpio_put( CYW43_WL_GPIO_LED_PIN, debugLed1State_ );
+    gpio_put( PICO_DEFAULT_LED_PIN, debugLed1State_ );
 }
 
 

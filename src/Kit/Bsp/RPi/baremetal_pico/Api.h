@@ -1,5 +1,5 @@
-#ifndef BSP_RPI_BAREMETAL_ARM_PICO_API_H_
-#define BSP_RPI_BAREMETAL_ARM_PICO_API_H_
+#ifndef BSP_RPI_BAREMETAL_PICO_API_H_
+#define BSP_RPI_BAREMETAL_PICO_API_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -38,7 +38,7 @@
 #include "hardware/sync.h"
 
 #ifdef __cplusplus
-#include "Kit/Bsp/RPi/baremetal_arm_pico/console.h"
+#include "Kit/Bsp/RPi/baremetal_pico/console.h"
 #endif
 
 //////////////////////////////////////////////////////////

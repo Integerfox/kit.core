@@ -37,8 +37,8 @@ FINAL_OUTPUT_NAME = 'hello_uart'
 
 # magic paths
 sdk_root     = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "pico-sdk" )
-bsp_rel_root = os.path.join( "src", "Kit", "Bsp", "RPi", "baremetal_arm_pico2w" )
-linkerscript = os.path.join( sdk_root, 'src', 'rp2_common', 'pico_crt0', 'rp2350', 'memmap_default.ld')
+bsp_rel_root = os.path.join( "src", "Kit", "Bsp", "RPi", "baremetal_pico" )
+linkerscript = os.path.join( sdk_root, 'src', 'rp2_common', 'pico_crt0', 'rp2040', 'memmap_default.ld')
 
 # SDK Build options
 sdk_opt = ' -DPICO_32BIT=1' + \
@@ -51,17 +51,10 @@ sdk_opt = ' -DPICO_32BIT=1' + \
           ' -DPICO_NO_HARDWARE=0' + \
           ' -DPICO_CXX_ENABLE_EXCEPTIONS=0'
 
-# Wifi build options
-wifi_opt = ' -DPICO_CYW43_SUPPORTED=1' + \
-           ' -DLIB_PICO_CYW43_ARCH=1' + \
-           ' -DPICO_CYW43_ARCH_THREADSAFE_BACKGROUND=1' + \
-           ' -DLIB_PICO_ASYNC_CONTEXT_THREADSAFE_BACKGROUND=1' + \
-           ' -DCYW43_LWIP=0'
-
 
 # Set project specific 'base' (i.e always used) options
 base_release = BuildValues()        # Do NOT comment out this line
-common_flags             = f' {wifi_opt} {sdk_opt}'
+common_flags             = f' {sdk_opt}'
 base_release.cflags      = f' -Wall {common_flags}'
 base_release.cppflags    = ' -std=gnu++11'
 base_release.asmflags    = f' {common_flags}'
@@ -103,5 +96,5 @@ from nqbplib.toolchains.linux.arm_gcc_rp2xxx.w_stdio_uart_sdk2x import ToolChain
 
 # Function that instantiates an instance of the toolchain
 def create():
-    tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, NQBP_PKG_ROOT(), bsp_rel_root, "rp2350", "pico2_w", sdk_root, "pico", linkerscript )
+    tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, NQBP_PKG_ROOT(), bsp_rel_root, "rp2040", "pico", sdk_root, "pico", linkerscript )
     return tc

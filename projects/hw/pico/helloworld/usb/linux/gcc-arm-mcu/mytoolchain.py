@@ -37,7 +37,7 @@ FINAL_OUTPUT_NAME = 'hello_usb'
 
 # magic paths
 sdk_root     = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "pico-sdk" )
-bsp_rel_root = os.path.join( "src", "Kit", "Bsp", "RPi", "baremetal_arm_pico" )
+bsp_rel_root = os.path.join( "src", "Kit", "Bsp", "RPi", "baremetal_pico" )
 linkerscript = os.path.join( sdk_root, 'src', 'rp2_common', 'pico_crt0', 'rp2040', 'memmap_default.ld')
 
 # USB build options
