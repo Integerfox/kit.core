@@ -22,7 +22,6 @@ namespace Container {
 /** This 'implementation' class provide the base functionality for a ring buffer.
 
     The Ring buffer is ISR/Thread safe as long as following constraints are met:
-    - Writing to an 'unsigned' data type is an atomic machine instruction.
     - There is SINGLE producer (add) and a SINGLE consumer (remove)
 
     NOTE: This class is not intended to be used directly. A child class is
