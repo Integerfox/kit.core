@@ -7,7 +7,7 @@
 :: usage: load.bat [elffile]
 
 set EFILE=
-IF NOT "/%1"=="/%1" SET EFILE=%1
+IF NOT "%1"=="" SET EFILE=%1
 IF "%EFILE%"=="" (
     for %%f in (_pico\*.elf) do (
         echo %%f | findstr /i /v "bs2_default.elf" >nul

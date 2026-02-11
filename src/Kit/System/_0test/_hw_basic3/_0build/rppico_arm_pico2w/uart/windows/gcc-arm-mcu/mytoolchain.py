@@ -98,7 +98,6 @@ build_variants = { 'pico':release_opts,
 #===================================================
 
 # Capture project/build directory
-import os
 prjdir = os.path.dirname(os.path.abspath(__file__))
 
 

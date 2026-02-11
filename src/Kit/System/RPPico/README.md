@@ -6,7 +6,7 @@ Concrete implementation of the platform specific classes/features of the
 Kit::System namespace interfaces for the Raspberry RP2xxx MCUs' dual cores,
 i.e. a maximum of 2 threads - one per core.
 
-**NOTE**: Currently only the the Dual ARM cores are supported.  TBD for supporting
+**NOTE**: Currently only the Dual ARM cores are supported.  TBD for supporting
           the dual RISC-V cores on the RP2350.
           
 ## Platform Dependent Behaviors
@@ -18,7 +18,7 @@ i.e. a maximum of 2 threads - one per core.
             is allocated from the Heap.
 
 **GlobalLock** - The GlobalLock maps the RP2xxx SDK's critical section.  There are
-                 some subtle details here - but it effective disables IRQs on
+                 some subtle details here - but it effectively disables IRQs on
                  the calling core AND provides mutual exclusion with respect to
                  the other core.
 
@@ -28,11 +28,11 @@ i.e. a maximum of 2 threads - one per core.
 **Tls** - Fully functional.
 
 **ElapsedTime** - Fully functional.  
-              
+
 **EventLoop** - Fully functional.  This includes EventFlags and Software Timers.
 
+## Application Start-up sequence
 
-## Application Start-up sequence:
 1. MCU Resets.
 
 2. Core0 begins executing. Core1 is in the sleep state.
@@ -53,7 +53,7 @@ i.e. a maximum of 2 threads - one per core.
 
 6. The Application 'starts threading' by calling `Kit::System::enableScheduling()`.
 
-7. Once the 'threading' has been enable, the Application can optional create the second
+7. Once the 'threading' has been enabled, the Application can optionally create the second
    thread assuming that only 1 thread was created prior to `enableScheduling()` call. 
 
 ## Notes: 
@@ -61,6 +61,6 @@ i.e. a maximum of 2 threads - one per core.
    by calling `Kit::System::Thread::destroy()`.  If the second thread terminated itself,
    i.e. the Runnable object ran to completion, CORE1 will be put into the sleep state.
 
-2. A second thread can be created 'again' after `destory()` has been called.
+2. A second thread can be created 'again' after `destroy()` has been called.
 
 3. Calling `destroy()` on the first thread has NO effect.
