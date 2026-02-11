@@ -29,7 +29,7 @@ namespace Pkg {
 
     @param LoggingMsgId                      Enum
 
-    @param QUEUE_OVERFLOW                          The logging FIFO overflowed, i.e. entries are being generated faster than they can be stored to persistent storage
+    @param QUEUE_OVERFLOW                    The logging FIFO overflowed, i.e. entries are being generated faster than they can be stored to persistent storage
     @param UNKNOWN_CLASSIFICATION_ID         Entry was generated with unknown/unsupported Classification ID.
     @param UNKNOWN_PACKAGE_ID                Entry was generated with unknown/unsupported Package ID.
     @param UNKNOWN_SUBSYSTEM_ID              Entry was generated with unknown/unsupported Sub-system ID.

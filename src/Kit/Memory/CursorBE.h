@@ -12,6 +12,7 @@
 
 #include "Kit/Memory/CursorBase.h"
 #include "Kit/Type/endian.h"
+#include <type_traits>
 
 ///
 namespace Kit {
@@ -99,6 +100,34 @@ public:
     }
 
 public:
+    // Bring the base class overloads of read into scope
+    using CursorBase::read;
+
+    /// Template method to read N bytes. Only valid for integer types. Returns false if there was an error
+    template <class T>
+    inline bool read( T& dstData ) noexcept
+    {
+        static_assert( std::is_integral<T>::value, "Template parameter T must be an integral type" );
+        bool result = readAndAdvance( &dstData, sizeof( T ) );
+        switch ( sizeof( T ) )
+        {
+        case 2:
+            dstData = static_cast<T>( KIT_TYPE_BE16TOH( dstData ) );
+            break;
+        case 4:
+            dstData = static_cast<T>( KIT_TYPE_BE32TOH( dstData ) );
+            break;
+        case 8:
+            dstData = static_cast<T>( KIT_TYPE_BE64TOH( dstData ) );
+            break;
+        default:
+            // No byte swapping for non-standard sizes
+            break;
+        }
+        return result;
+    }
+
+public:
     /// Write a single word. Returns false if there was an error
     inline bool writeU16( uint16_t srcData ) noexcept
     {
@@ -152,6 +181,34 @@ public:
     inline bool writeF64( double srcData ) noexcept
     {
         auto tempData = KIT_TYPE_HTOBEF64( srcData );
+        return writeAndAdvance( &tempData, sizeof( tempData ) );
+    }
+
+public:
+    // Bring the base class overloads of write into scope
+    using CursorBase::write;
+
+    /// Template method to write N bytes. Only valid for integer types. Returns false if there was an error
+    template <class T>
+    inline bool write( T srcData ) noexcept
+    {
+        static_assert( std::is_integral<T>::value, "Template parameter T must be an integral type" );
+        T tempData = srcData;
+        switch ( sizeof( T ) )
+        {
+        case 2:
+            tempData = static_cast<T>( KIT_TYPE_HTOBE16( srcData ) );
+            break;
+        case 4:
+            tempData = static_cast<T>( KIT_TYPE_HTOBE32( srcData ) );
+            break;
+        case 8:
+            tempData = static_cast<T>( KIT_TYPE_HTOBE64( srcData ) );
+            break;
+        default:
+            // No byte swapping for non-standard sizes
+            break;
+        }
         return writeAndAdvance( &tempData, sizeof( tempData ) );
     }
 };

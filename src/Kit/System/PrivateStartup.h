@@ -53,7 +53,7 @@ public:
         process. The 'initLevel' informs the client what initialize
         level context the notifyInit() method is being called.
      */
-    virtual void notify( InitLevel initLevel ) = 0;
+    virtual void notify( InitLevel initLevel ) noexcept = 0;
 
 
 protected:

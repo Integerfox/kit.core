@@ -176,7 +176,7 @@ Thread::~Thread()
     if ( isActive() )
     {
         // Ask the runnable object nicely to stop
-        m_runnable.pleaseStop();
+        m_runnable->pleaseStop();
         Kit::System::sleep( KIT_SYSTEM_THREAD_POSIX_DESTROY_WAIT_MS );  // Yield execution and allow time for the thread to actually exit.
 
         // Just to make sure: Brute the force the thread to end - IF it is still running
@@ -247,7 +247,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
     // Wait for the thread to stop (if it is still running)
     if ( delayTimeMsToWaitIfActive > 0 && threadToDestroy.isActive() )
     {
-        threadToDestroy.m_runnable.pleaseStop();
+        threadToDestroy.m_runnable->pleaseStop();
         threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
     }
 

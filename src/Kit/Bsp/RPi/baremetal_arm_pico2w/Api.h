@@ -53,19 +53,34 @@
     around "unused variable" warnings - we increment the passed in
     variable.
  */
-#define Bsp_yield_on_exit_MAP( r )  r++
+#define Bsp_yield_on_exit_MAP( r ) r++
 
 /// Generic API
-#define Bsp_disable_irqs_MAP disable_interrupts
+#define Bsp_disable_irqs_MAP() \
+    do                         \
+    {                          \
+        disable_interrupts();  \
+        __dsb();               \
+    }                          \
+    while ( 0 )
 
 /// Generic API
-#define Bsp_enable_irqs_MAP enable_interrupts
+#define Bsp_enable_irqs_MAP() \
+    do                        \
+    {                         \
+        enable_interrupts();  \
+    }                         \
+    while ( 0 )
 
 /// Generic API
-#define Bsp_push_and_disable_irqs_MAP() uint32_t bspIrqStatus_unique_name = save_and_disable_interrupts()
+#define Bsp_push_and_disable_irqs_MAP()                                \
+    uint32_t bspIrqStatus_unique_name = save_and_disable_interrupts(); \
+    __dsb();
+
 
 /// Generic API
-#define Bsp_pop_irqs_MAP() restore_interrupts_from_disabled( bspIrqStatus_unique_name )
+#define Bsp_pop_irqs_MAP() \
+    restore_interrupts_from_disabled( bspIrqStatus_unique_name );
 
 
 /// Generic API
