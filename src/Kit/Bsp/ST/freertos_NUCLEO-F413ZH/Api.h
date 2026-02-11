@@ -69,26 +69,27 @@
 #define Bsp_yield_on_exit_MAP( r ) portYIELD_FROM_ISR( r )
 
 /// Generic API
-#define Bsp_disable_irqs_MAP() \
-    do                         \
-    {                          \
-        __disable_irq();       \
-        __DSB();               \
-    }
+#define Bsp_disable_irqs_MAP \
+    do \
+    { \
+        __disable_irq(); \
+        __DSB(); \
+    } \
+    while ( 0 )
 
 /// Generic API (with memory barrier protection)
-#define Bsp_enable_irqs_MAP() \
-    do                        \
-    {                         \
-        __enable_irq();       \
-    }                         \
+#define Bsp_enable_irqs_MAP \
+    do \
+    { \
+        __enable_irq(); \
+    } \
     while ( 0 )
 
 /// Generic API
-#define Bsp_push_and_disable_irqs_MAP() Bsp_disable_irqs_MAP()  // FIXME: This really needs to PUSH the IRQ state!!!
+#define Bsp_push_and_disable_irqs_MAP Bsp_disable_irqs_MAP  // FIXME: This really needs to PUSH the IRQ state!!!
 
 /// Generic API
-#define Bsp_pop_irqs_MAP() Bsp_enable_irqs_MAP()  // FIXME: This really needs to POP the IRQ state!!!!
+#define Bsp_pop_irqs_MAP Bsp_enable_irqs_MAP  // FIXME: This really needs to POP the IRQ state!!!!
 
 
 /// Generic API
