@@ -60,7 +60,7 @@
     do                         \
     {                          \
         disable_interrupts();  \
-        __DSB();               \
+        __dsb();               \
     }                          \
     while ( 0 )
 
@@ -75,7 +75,7 @@
 /// Generic API
 #define Bsp_push_and_disable_irqs_MAP()                                \
     uint32_t bspIrqStatus_unique_name = save_and_disable_interrupts(); \
-    __DSB();
+    __dsb();
 
 
 /// Generic API
