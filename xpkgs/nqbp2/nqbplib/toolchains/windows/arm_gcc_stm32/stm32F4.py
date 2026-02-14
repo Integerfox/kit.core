@@ -54,7 +54,7 @@ class ToolChain( base.ToolChain ):
         cpp_and_c_flags                 = '-ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -DUSE_HAL_DRIVER -Wno-array-bounds -Wno-stringop-truncation -Wno-stringop-overflow'
         self._base_release.c_only_flags = self._base_release.c_only_flags + ' -std=gnu11'
         self._base_release.cflags       = self._base_release.cflags + common_flags + cpp_and_c_flags + ' -g'
-        self._base_release.cppflags     = self._base_release.cppflags + ' -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess  -fno-rtti -fno-exceptions -fno-unwind-tables  -fno-threadsafe-statics -fno-use-cxa-atexit'
+        self._base_release.cppflags     = self._base_release.cppflags + ' -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess  -fno-rtti -fno-exceptions -fno-unwind-tables  -fno-threadsafe-statics -fno-use-cxa-atexit -D_GLIBCXX_ASSERTIONS=0'
 
         self._base_release.asmflags     = self._base_release.cflags + ' -x assembler-with-cpp'
         self._base_release.asminc       = self._base_release.asminc + self._base_release.inc
