@@ -24,14 +24,20 @@ namespace Container {
     The Ring buffer is ISR/Thread safe as long as following constraints are met:
     - There is SINGLE producer (add) and a SINGLE consumer (remove)
 
+    NOTE: This class uses the C++ std::atomic type to ensure thread safety of 
+          the read/write indexes. This class should ONLY be used on hardware 
+          targets that support std::atomic with full lock-free semantics.  For 
+          example - the Arm Cortex-M3/M4/M7 have hardware instructions to 
+          support full lock-free atomics.
+
     NOTE: This class is not intended to be used directly. A child class is
           required to provide the ring buffer memory and type safety.
  */
-class RingBufferBase
+class RingBufferBaseAtomic
 {
 protected:
     /// Constructor
-    RingBufferBase( unsigned numMaxElements ) noexcept;
+    RingBufferBaseAtomic( unsigned numMaxElements ) noexcept;
 
 public:
     /// This method returns true if the Ring Buffer is empty
@@ -177,16 +183,16 @@ protected:
 
 private:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
-    RingBufferBase( const RingBufferBase& m ) = delete;
+    RingBufferBaseAtomic( const RingBufferBaseAtomic& m ) = delete;
 
     /// Prevent access to the assignment operator -->Ring Buffers can not be copied!
-    RingBufferBase& operator=( const RingBufferBase& m ) = delete;
+    RingBufferBaseAtomic& operator=( const RingBufferBaseAtomic& m ) = delete;
 
     /// Prevent access to the move constructor -->Ring Buffers can not be implicitly moved!
-    RingBufferBase( RingBufferBase&& m ) = delete;
+    RingBufferBaseAtomic( RingBufferBaseAtomic&& m ) = delete;
 
     /// Prevent access to the move assignment operator -->Ring Buffers can not be implicitly moved!
-    RingBufferBase& operator=( RingBufferBase&& m ) = delete;
+    RingBufferBaseAtomic& operator=( RingBufferBaseAtomic&& m ) = delete;
 };
 
 

@@ -8,7 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "RingBufferBase.h"
+#include "RingBufferBaseAtomic.h"
 #include "Kit/System/Assert.h"
 #include <string.h>
 
@@ -16,14 +16,14 @@
 namespace Kit { 
 namespace Container { 
 
-RingBufferBase::RingBufferBase( unsigned numMaxElements ) noexcept
+RingBufferBaseAtomic::RingBufferBaseAtomic( unsigned numMaxElements ) noexcept
     : m_readIdx( 0 )
     , m_writeIdx( 0 )
     , m_elements( numMaxElements )
 {
 }
 
-bool RingBufferBase::remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
+bool RingBufferBaseAtomic::remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
 {
     KIT_SYSTEM_ASSERT( elemPtr != nullptr );
     KIT_SYSTEM_ASSERT( elemSize > 0 );
@@ -48,7 +48,7 @@ bool RingBufferBase::remove( void* elemPtr, size_t elemSize, const void* srcRing
     return true;
 }
 
-bool RingBufferBase::add( const void* elemPtr, size_t elemSize, void* dstRingBufMemory ) noexcept
+bool RingBufferBaseAtomic::add( const void* elemPtr, size_t elemSize, void* dstRingBufMemory ) noexcept
 {
     KIT_SYSTEM_ASSERT( elemPtr != nullptr );
     KIT_SYSTEM_ASSERT( elemSize > 0 );
@@ -73,7 +73,7 @@ bool RingBufferBase::add( const void* elemPtr, size_t elemSize, void* dstRingBuf
     return true;
 }
 
-bool RingBufferBase::peekHead( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
+bool RingBufferBaseAtomic::peekHead( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
 {
     KIT_SYSTEM_ASSERT( elemPtr != nullptr );
     KIT_SYSTEM_ASSERT( elemSize > 0 );
@@ -96,7 +96,7 @@ bool RingBufferBase::peekHead( void* elemPtr, size_t elemSize, const void* srcRi
     return true;
 }
 
-bool RingBufferBase::peekTail( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
+bool RingBufferBaseAtomic::peekTail( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept
 {
     KIT_SYSTEM_ASSERT( elemPtr != nullptr );
     KIT_SYSTEM_ASSERT( elemSize > 0 );
@@ -122,7 +122,7 @@ bool RingBufferBase::peekTail( void* elemPtr, size_t elemSize, const void* srcRi
     return true;
 }
 
-void* RingBufferBase::peekNextRemoveItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
+void* RingBufferBaseAtomic::peekNextRemoveItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
 {
     KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );
 
@@ -149,7 +149,7 @@ void* RingBufferBase::peekNextRemoveItems( unsigned& dstNumFlatElements, size_t 
     return srcPtr;
 }
 
-void* RingBufferBase::peekNextAddItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
+void* RingBufferBaseAtomic::peekNextAddItems( unsigned& dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept
 {
     // Snapshot of ring buffer's indexes
     const unsigned readIdx  = m_readIdx.load( std::memory_order_acquire );

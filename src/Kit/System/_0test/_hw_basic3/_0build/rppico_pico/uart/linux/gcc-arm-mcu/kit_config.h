@@ -10,6 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
+#define USE_KIT_CONTAINER_RINGBUFFER_VOLATILE
 
 // USE a KIT stream for the BSP console (printf is not supported)
 #define USE_BSP_KIT_IO_STREAM

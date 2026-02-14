@@ -10,14 +10,9 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
+#define USE_KIT_CONTAINER_RINGBUFFER_VOLATILE
 
 // USE a KIT stream for the BSP console (printf is not supported)
 #define USE_BSP_KIT_IO_STREAM
-
-// Because of CYW43 WiFi driver async interactions - we need to increase the time tolerance multiplier on start-up (basically turn off time checking)
-#define OPTION_TEST_TIME_TOLERANCE_MULTIPLIER 10
-#define USE_KIT_SYSTEM_TRACE
-#define OPTION_BSP_CONSOLE_RX_FIFO_SIZE 1024
-#define OPTION_BSP_CONSOLE_TX_FIFO_SIZE 1024
 
 #endif

@@ -18,8 +18,7 @@
 #include "Kit/System/Tls.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/GlobalLock.h"
-#include <cstdint>
-
+#include <inttypes.h>
 
 #define SECT_ "_0test"
 
@@ -95,7 +94,7 @@ public:
 
         for ( ;; )
         {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Top of MyRunnable::entry(%zu)", m_tlsCounter );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Top of MyRunnable::entry(%" PRIu32 ")", (uint32_t)m_tlsCounter );
             m_tlsKey.set( (void*)m_tlsCounter );
             testMutex();
             testGlobalLock();
