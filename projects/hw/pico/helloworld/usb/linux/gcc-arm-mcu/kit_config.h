@@ -10,6 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
+#define USE_KIT_CONTAINER_RINGBUFFER_VOLATILE
 
 
 #endif

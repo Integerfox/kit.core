@@ -18,8 +18,7 @@
 #include "Kit/System/Tls.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/GlobalLock.h"
-#include <cstdint>
-
+#include <inttypes.h>
 
 #define SECT_ "_0test"
 

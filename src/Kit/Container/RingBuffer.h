@@ -10,9 +10,23 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Container/RingBufferBase.h"
+#include "kit_config.h"
 #include "Kit/System/Assert.h"
 #include <string.h>
+
+/** Compile time switch the select which implementation of the Ring Buffer to
+    use.  The default implementation uses C++11 atomics (vs. using only the
+    volatile keyword).  Older hardware (such as ARM Cortex-M0) do not have
+    native hardware instructions to support full lock-free atomics, i.e. it
+    is more efficient to use the volatile-based implementation on those targets. 
+ */
+#if defined( USE_KIT_CONTAINER_RINGBUFFER_VOLATILE )
+#include "Kit/Container/RingBufferBaseVolatile.h"
+#define RingBufferBaseType RingBufferBaseVolatile
+#else
+#include "Kit/Container/RingBufferBaseAtomic.h"
+#define RingBufferBaseType RingBufferBaseAtomic
+#endif
 
 ///
 namespace Kit {
@@ -23,7 +37,7 @@ namespace Container {
 /** This template class implements a Ring Buffer.
 
     A Ring Buffer instance IS ISR/Thread safe WHEN using a SINGLE Producer and
-    SINGLE consumer of the buffer.  See the RingBufferBase class for additional
+    SINGLE consumer of the buffer.  See the RingBufferBaseType class for additional
     details.
 
     There is a set of methods that allow the application direct memory access -
@@ -41,12 +55,12 @@ namespace Container {
         ITEM:=      Type of the data stored in the Ring Buffer
  */
 template <class ITEM>
-class RingBuffer : public RingBufferBase
+class RingBuffer : public RingBufferBaseType
 {
 public:
     /// Constructor
     RingBuffer( ITEM* memoryBuffer, unsigned N, bool initializeMemory = true )
-        : RingBufferBase( N )
+        : RingBufferBaseType( N )
         , m_bufferMemory( memoryBuffer )
     {
         KIT_SYSTEM_ASSERT( memoryBuffer != nullptr );
@@ -65,7 +79,7 @@ public:
      */
     bool add( const ITEM& item ) noexcept
     {
-        return RingBufferBase::add( &item, sizeof( ITEM ), m_bufferMemory );
+        return RingBufferBaseType::add( &item, sizeof( ITEM ), m_bufferMemory );
     }
 
     /** Removes an item from the ring buffer.  Returns true on success.  If the
@@ -73,7 +87,7 @@ public:
         is not updated) */
     bool remove( ITEM& item ) noexcept
     {
-        return RingBufferBase::remove( &item, sizeof( ITEM ), m_bufferMemory );
+        return RingBufferBaseType::remove( &item, sizeof( ITEM ), m_bufferMemory );
     }
 
     /** This method inspects the head of the ring buffer without removing it.
@@ -83,7 +97,7 @@ public:
      */
     bool peekHead( ITEM& item ) noexcept
     {
-        return RingBufferBase::peekHead( &item, sizeof( ITEM ), m_bufferMemory );
+        return RingBufferBaseType::peekHead( &item, sizeof( ITEM ), m_bufferMemory );
     }
 
     /** This method inspects the tail of the ring buffer without removing it.
@@ -93,7 +107,7 @@ public:
      */
     bool peekTail( ITEM& item ) noexcept
     {
-        return RingBufferBase::peekTail( &item, sizeof( ITEM ), m_bufferMemory );
+        return RingBufferBaseType::peekTail( &item, sizeof( ITEM ), m_bufferMemory );
     }
 
 public:
@@ -105,7 +119,7 @@ public:
      */
     ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
     {
-        return static_cast<ITEM*>( RingBufferBase::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
+        return static_cast<ITEM*>( RingBufferBaseType::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
     }
 
     /** This method 'removes' N elements - that were removed using the
@@ -122,7 +136,7 @@ public:
      */
     void removeElements( unsigned numElementsToRemove ) noexcept
     {
-        RingBufferBase::removeElements( numElementsToRemove );
+        RingBufferBaseType::removeElements( numElementsToRemove );
     }
 
 public:
@@ -134,7 +148,7 @@ public:
      */
     ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
     {
-        return static_cast<ITEM*>( RingBufferBase::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
+        return static_cast<ITEM*>( RingBufferBaseType::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
     }
 
     /** This method 'adds' N elements - that were populated using the
@@ -151,7 +165,7 @@ public:
      */
     void addElements( unsigned numElementsAdded ) noexcept
     {
-        RingBufferBase::addElements( numElementsAdded );
+        RingBufferBaseType::addElements( numElementsAdded );
     }
 
 protected:
