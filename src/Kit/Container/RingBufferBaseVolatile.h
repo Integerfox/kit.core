@@ -18,7 +18,7 @@ namespace Kit {
 ///
 namespace Container {
 
-/** This 'implementation' class provide the base functionality for a ring buffer.
+/** This 'implementation' class provides the base functionality for a ring buffer.
 
     The Ring buffer is ISR/Thread safe as long as following constraints are met:
     - Writing to an 'unsigned' data type is an atomic machine instruction.

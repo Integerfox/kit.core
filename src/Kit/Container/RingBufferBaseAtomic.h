@@ -1,5 +1,5 @@
-#ifndef KIT_CONTAINER_RINGBUFFERBASE_H_
-#define KIT_CONTAINER_RINGBUFFERBASE_H_
+#ifndef KIT_CONTAINER_RINGBUFFERBASEATOMIC_H_
+#define KIT_CONTAINER_RINGBUFFERBASEATOMIC_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
