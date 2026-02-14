@@ -194,11 +194,11 @@ class ToolChain( base.ToolChain ):
         #
         common_flags                    = f' -O3 -mthumb -ffunction-sections -fdata-sections -Wno-array-bounds -Wno-stringop-truncation'
         common_flags                    = f' {common_flags} -DPICO_TARGET_NAME=\\"{exename}\\" -DPICO_BOARD=\\"{board}\\"'
-        common_flags                    = f' {mcu} {common_flags} {skd_libopts}'
+        common_flags                    = f' {mcu} {common_flags} {skd_libopts} {platform}'
         self._base_release.cflags       = f' {self._base_release.cflags} {common_flags}'
         self._base_release.c_only_flags = f' {self._base_release.c_only_flags} -std=gnu11'
         common_cpp_flags                = ' -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess -fno-threadsafe-statics -fno-rtti -fno-exceptions'
-        common_cpp_flags                = f' {common_cpp_flags} -fno-unwind-tables -fno-use-cxa-atexit -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess'
+        common_cpp_flags                = f' {common_cpp_flags} -fno-unwind-tables -fno-use-cxa-atexit -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess -D_GLIBCXX_ASSERTIONS=0'
         self._base_release.cppflags     = f' {self._base_release.cppflags} {common_cpp_flags}'
         self._base_release.asmflags     = self._base_release.cflags 
         self._base_release.asminc       = f' {self._base_release.asminc} {self._base_release.inc} -I {sdk_src_path}/{mcu_part_num}/boot_stage2/asminclude'

@@ -41,7 +41,7 @@ public:
 
 protected:
     ///
-    void notify( InitLevel init_level )
+    void notify( InitLevel init_level ) noexcept override
     {
         // Set up TLS storage for working buffer for File/Path names
         if ( workNameTlsPtr_ == nullptr )
