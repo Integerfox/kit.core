@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Kit/System/Mutex.h"
+#include "Kit/System/Api.h"
 
 //////////////////////////////////////////////////////////////////////////////
 //------------------------------------------------------------------------------
@@ -35,12 +36,22 @@ Mutex::~Mutex()
 
 void Mutex::lock( void )
 {
-    recursive_mutex_enter_blocking( &( m_mutex.m_sdkMutex ) );
+    // Do nothing if the scheduler has not yet been started, i.e, if there is only
+    // one thread running -->then by definition I have mutual exclusion. It also allows
+    // an application to lock a mutex BEFORE the scheduler has been started (i am looking
+    // at you Trace engine).
+    if ( isSchedulingEnabled() )
+    {
+        recursive_mutex_enter_blocking( &( m_mutex.m_sdkMutex ) );
+    }
 }
 
 void Mutex::unlock( void )
 {
-    recursive_mutex_exit( &( m_mutex.m_sdkMutex ) );
+    if ( isSchedulingEnabled() )
+    {
+        recursive_mutex_exit( &( m_mutex.m_sdkMutex ) );
+    }
 }
 
 }  // end namespace

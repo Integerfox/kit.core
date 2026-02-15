@@ -15,7 +15,6 @@
 namespace Kit {
 namespace EventQueue {
 
-
 /////////////////////
 Server::Server( uint32_t                                        timeOutPeriodInMsec,
                 Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList,
@@ -25,21 +24,21 @@ Server::Server( uint32_t                                        timeOutPeriodInM
 {
 }
 
-/////////////////////
 void Server::entry() noexcept
 {
     startEventLoop();
     bool run = true;
     while ( run )
     {
-        run = waitAndProcessEvents( isPendingMessage() );
+        run = serverWaitAndProcessEvents();
         if ( run )
         {
-            processMessages();
+            serverProcessEvents();
         }
     }
     stopEventLoop();
 }
+
 
 }  // end namespace
 }

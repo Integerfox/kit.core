@@ -33,7 +33,7 @@ namespace EventQueue {
 
 
 /** This abstract class represents an Event Queue where events can be 
-    delivered to.  See README.txt for additional details
+    delivered to.  See README.md for additional details
  */
 class IQueue: KIT_EVENT_QUEUE_SUPPORTED_EVENT_TYPES
 {

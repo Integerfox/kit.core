@@ -14,7 +14,7 @@
 /// Forward reference to break dependency on the Dm namespace
 namespace Kit {
 namespace Dm {
-class ISubscriber;
+class IObserver;
 }
 }
 
@@ -27,35 +27,36 @@ namespace EventQueue {
 
 
 /** This abstract class defines the interface to manage Data Model Change
-    notification events that are published to Model Points.
+    notification events that are published from Model Points.
 
-    NOTE: The requirements and/or semantics of Model Point subscription is
-            that Subscriptions, Notifications, and Cancel-of-Subscriptions
-            all happen in a SINGLE thread and that thread is the 'Subscribers'
-            thread.
+    NOTE: The requirements and/or semantics of Model Point Observers are
+          that subscriptions, notifications, and cancel-of-subscriptions
+          all happen in a SINGLE thread and that thread is the 'Observers'
+          thread.
 
-    NOTE: Use of this interface is RESTRICTED to the Kit::Dm namespace. The 
-          Application (or other namespaces) should NEVER use this interface
+    NOTE: Use of this interface is RESTRICTED to the Kit::Dm and Kit::EventQueue
+          namespaces. The Application (or other namespaces) should NEVER use
+          this interface
  */
 class IChangeNotification
 {
 public:
     /** This method is used add a new 'change notification' to its list
         of pending change notifications.  Calling this method when the
-        subscriber is already registered for change notification will cause
+        observer is already registered for change notification will cause
         a FATAL ERROR.
 
         This method IS thread safe.
      */
-    virtual void addPendingChangingNotification( Kit::Dm::ISubscriber& subscriber ) noexcept = 0;
+    virtual void addPendingChangingNotification( Kit::Dm::IObserver& observer ) noexcept = 0;
 
     /** This method is used remove a pending 'change notification' from its list
         of pending change notifications.  It is okay to call this method even if
-        the Subscriber is not current registered for change notifications.
+        the observer is not current registered for change notifications.
 
         This method IS thread safe.
      */
-    virtual void removePendingChangingNotification( Kit::Dm::ISubscriber& subscriber ) noexcept = 0;
+    virtual void removePendingChangingNotification( Kit::Dm::IObserver& observer ) noexcept = 0;
 
 
 public:
