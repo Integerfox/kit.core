@@ -204,7 +204,7 @@ class ToolChain( base.ToolChain ):
         #
         common_flags                    = f' -O3 -mthumb -ffunction-sections -fdata-sections -Wno-array-bounds -Wno-stringop-truncation'
         common_flags                    = f' {common_flags} -DPICO_TARGET_NAME=\\"{exename}\\" -DPICO_BOARD=\\"{board}\\"'
-        common_flags                    = f' {mcu} {common_flags} {skd_libopts}'
+        common_flags                    = f' {mcu} {common_flags} {skd_libopts} {platform}'
         self._base_release.cflags       = f' {self._base_release.cflags} {common_flags}'
         self._base_release.c_only_flags = f' {self._base_release.c_only_flags} -std=gnu11'
         common_cpp_flags                = ' -Wno-restrict -Wno-address-of-packed-member -Wno-class-memaccess -fno-threadsafe-statics -fno-rtti -fno-exceptions'

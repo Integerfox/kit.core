@@ -33,7 +33,7 @@ import os
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'b'
+FINAL_OUTPUT_NAME = 'hello_usb'
 
 # magic paths
 sdk_root     = os.path.join( NQBP_PKG_ROOT(), "xpkgs", "pico-sdk" )
@@ -100,7 +100,6 @@ build_variants = { 'pico':release_opts,
 #===================================================
 
 # Capture project/build directory
-import os
 prjdir = os.path.dirname(os.path.abspath(__file__))
 
 

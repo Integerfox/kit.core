@@ -30,7 +30,7 @@ static bool schedulerStarted_ = false;
 
 void initialize() noexcept
 {
-    // Init the Colony.Core sub-systems
+    // Init the KIT library sub-systems
     IStartupHook::notifyStartupClients();
 }
 

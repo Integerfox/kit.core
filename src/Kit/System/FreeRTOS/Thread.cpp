@@ -120,7 +120,7 @@ void Thread::entryPoint( void* data ) noexcept
 Thread::~Thread() noexcept
 {
     // NOTE: In general it is not a good thing to "kill" threads - but to
-    //       let the thread "run-to-completion", i.e. have the run() method
+    //       let the thread "run-to-completion", i.e. have the entry() method
     //       of the associated IRunnable object complete.  If you do
     //       need to kill a thread - be dang sure that it is state such
     //       that it is ok to die - i.e. it has released all of its acquired
@@ -128,7 +128,7 @@ Thread::~Thread() noexcept
     if ( isActive() )
     {
         // Ask the runnable object nicely to stop
-        m_runnable.pleaseStop();
+        m_runnable->pleaseStop();
         Kit::System::sleep( KIT_SYSTEM_THREAD_FREERTOS_DESTROY_WAIT_MS );  // Yield execution and allow time for the thread to actually exit.
 
         // Just to make sure: Brute the force the thread to end - IF it is still running
@@ -216,7 +216,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
     // Wait for the thread to stop (if it is still running)
     if ( delayTimeMsToWaitIfActive > 0 && threadToDestroy.isActive() )
     {
-        threadToDestroy.m_runnable.pleaseStop();
+        threadToDestroy.m_runnable->pleaseStop();
         threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
     }
 
