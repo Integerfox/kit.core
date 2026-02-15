@@ -1,0 +1,45 @@
+# Unit test
+src/Kit/Driver/Flash/_0test/_hw_w25q
+
+# Flash Drivers
+src/Kit/Driver/Flash/W25Q
+src/Kit/Driver/NV/Flash
+
+# SPI Driver
+src/Kit/Driver/SPI/ST/M32F4
+
+# DIO Driver  
+src/Kit/Driver/Dio/ST/M32F4
+
+# Output stream for the KIT Console
+src/Kit/Io/Serial/ST/M32F4
+
+# KIT Middle-ware
+src/Kit/Container
+src/Kit/Text
+src/Kit/Io
+
+# KIT OSAL
+src/Kit/System
+src/Kit/System/FreeRTOS
+src/Kit/System/FreeRTOS/_fatalerror
+src/Kit/System/_assert
+src/Kit/System/_trace
+
+
+# BSP
+src/Kit/Text/_mappings/_arm_gcc_stm32
+src/Kit/Bsp/ST/freertos_NUCLEO-F413ZH 
+src/Kit/Bsp/ST/freertos_NUCLEO-F413ZH/MX 
+src/Kit/Bsp/ST/freertos_NUCLEO-F413ZH/MX/Core/Src > freertos.c
+
+# SEGGER SysVIEW
+src/Kit/Bsp/ST/freertos_NUCLEO-F413ZH/SeggerSysView
+
+# SDK
+xpkgs/stm32f4-sdk/Drivers/STM32F4xx_HAL_Driver/Src > stm32f4xx_hal_timebase_rtc_alarm_template.c stm32f4xx_hal_timebase_rtc_wakeup_template.c stm32f4xx_hal_timebase_tim_template.c
+
+# FreeRTOS
+xpkgs/freertos-v10
+xpkgs/freertos-v10/portable/MemMang < heap_1.c
+xpkgs/freertos-v10/portable/GCC/ARM_CM4F
