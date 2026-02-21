@@ -11,11 +11,11 @@
 /** @file */
 
 
-#include "Cpl/Dm/Mp/Numeric.h"
+#include "Kit/Dm/Mp/NumericBase.h"
 #include <stdint.h>
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -23,51 +23,55 @@ namespace Mp {
 
 
 /** This class provides a concrete implementation for a Point who's data is a
-	uint32_t.
+    uint32_t.
 
-	The toJSON()/fromJSON format is:
-		\code
+    The toJSON() format is:
+        \code
 
-		{ name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, val:<numvalue> }
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, 
+          val:{ "dec":<numvalue>,
+                "hex":<hexvalue>
+              }
+        }
 
-		where <numvalue> is integer numeric  
+        \endcode
 
-		\endcode
+    The "val" format for the fromJSON() format is:
+        \code
 
- NOTE: All methods in this class ARE thread Safe unless explicitly
-		  documented otherwise.
+        val:<numvalue> OR val:"0x<hexvalue>"
+
+        \endcode
+
+    NOTE: All methods in this class ARE thread Safe unless explicitly
+          documented otherwise.
  */
-class Uint32 : public Numeric<uint32_t,Uint32>
+class Uint32 : public UnsignedInteger<uint32_t, Uint32>
 {
 public:
-	/** Constructor. Invalid MP.  
-	 */
-	Uint32(Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName )
-		: Numeric<uint32_t, Uint32>(myModelBase, symbolicName )
-	{
-	}
+    /** Constructor. Invalid MP.
+     */
+    Uint32( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : UnsignedInteger<uint32_t, Uint32>( myModelBase, symbolicName )
+    {
+    }
 
-	/// Constructor. Valid MP.  Requires an initial value
-	Uint32(Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName, uint32_t initialValue )
-		: Numeric<uint32_t, Uint32>(myModelBase, symbolicName, initialValue)
-	{
-	}
-
-public:
-	/// Type safe subscriber
-	typedef Cpl::Dm::Subscriber<Uint32> Observer;
+    /// Constructor. Valid MP.  Requires an initial value
+    Uint32( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, uint32_t initialValue )
+        : UnsignedInteger<uint32_t, Uint32>( myModelBase, symbolicName, initialValue )
+    {
+    }
 
 public:
-	///  See Cpl::Dm::ModelPoint.
-	const char* getTypeAsText() const noexcept
-	{
-		return "Cpl::Dm::Mp::Uint32";
-	}
+    ///  See Kit::Dm::ModelPoint.
+    const char* getTypeAsText() const noexcept
+    {
+        return "Kit::Dm::Mp::Uint32";
+    }
 };
 
 
-
-};      // end namespaces
-};
-};
+}       // end namespaces
+}
+}
 #endif  // end header latch

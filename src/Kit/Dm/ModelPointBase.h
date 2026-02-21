@@ -31,10 +31,10 @@ class ModelPointBase : public Kit::Dm::IModelPoint
 protected:
     /// Constructor
     ModelPointBase( IModelDatabase& myModelBase,
-                       const char*     symbolicName,
-                       void*           myDataPtr,
-                       size_t          dataSizeInBytes,
-                       bool            isValid = false );
+                    const char*     symbolicName,
+                    void*           myDataPtr,
+                    size_t          dataSizeInBytes,
+                    bool            isValid = false );
 
 public:
     /// See Kit::Dm::IModelPoint
@@ -201,7 +201,7 @@ protected:
     /// Helper FSM method
     virtual void transitionToSubscribed( IObserver& observer ) noexcept;
 
-    /** Helper method when converting MP to a JSON string. 
+    /** Helper method when converting MP to a JSON string.
         Note: endJSON() MUST always be called after this method to release the
         global JSON document
      */
@@ -222,7 +222,6 @@ protected:
         the data (i.e. perform a memset(m_dataPtr,0, m_dataSize) call on the data)
      */
     virtual void hookSetInvalid() noexcept;
-
 
 protected:
     /// List of Active Subscribers

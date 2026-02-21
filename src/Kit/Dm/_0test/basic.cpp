@@ -8,36 +8,36 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Catch/catch.hpp"
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/Dm/ModelDatabase.h"
-#include "Cpl/Dm/Mp/Uint32.h"
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/System/Trace.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Uint32.h"
 #include "common.h"
-
+#include <cstdint>
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
 // Allocate/create my Model Database
-static ModelDatabase    modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
 // Allocate my Model Points
-static Mp::Uint32       mp_apple_( modelDb_, "APPLE1" );
-static Mp::Uint32       mp_orange_( modelDb_, "ORANGE1" );
-static Mp::Uint32       mp_cherry_( modelDb_, "CHERRY1" );
-static Mp::Uint32       mp_plum_( modelDb_, "PLUM1" );
+static Mp::Uint32 mp_apple_( modelDb_, "APPLE1" );
+static Mp::Uint32 mp_orange_( modelDb_, "ORANGE1" );
+static Mp::Uint32 mp_cherry_( modelDb_, "CHERRY1" );
+static Mp::Uint32 mp_plum_( modelDb_, "PLUM1" );
 
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "common" )
 {
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     SECTION( "seqnum" )
     {
         // Test Sequence number
         uint16_t seqNum = mp_apple_.getSequenceNumber();
-        REQUIRE( seqNum != ModelPoint::SEQUENCE_NUMBER_UNKNOWN );
+        REQUIRE( seqNum != IModelPoint::SEQUENCE_NUMBER_UNKNOWN );
         REQUIRE( mp_apple_.isNotValid() == true );
 
         uint16_t seqNum2 = mp_apple_.write( 10 );
@@ -66,16 +66,31 @@ TEST_CASE( "common" )
         REQUIRE( mp_apple_.isNotValid() == true );
         REQUIRE( seqNum + 1 == seqNum2 );
 
-        // NOTE: Test must leave the model point in the invalid state
+        uint16_t i = 0;
+        uint16_t loopCount = UINT16_MAX - seqNum2;
+        for ( ; i < loopCount; i++ )
+        {
+            seqNum = mp_apple_.touch();
+            REQUIRE( seqNum == (seqNum2+1) );
+            REQUIRE( seqNum != 1 );
+            seqNum2 = seqNum;
+        }
+        seqNum = mp_apple_.touch();
+        REQUIRE( seqNum == 1 );
     }
 
     SECTION( "invalid" )
     {
+        mp_apple_.setInvalid();
+
         // Invalid values
         REQUIRE( mp_apple_.isNotValid() == true );
 
         mp_apple_.write( 0 );
         REQUIRE( mp_apple_.isNotValid() == false );
+        uint16_t seqNum;
+        REQUIRE( mp_apple_.isNotValid( &seqNum ) == false );
+        REQUIRE( seqNum == mp_apple_.getSequenceNumber() );
 
         mp_apple_.setInvalid();
         REQUIRE( mp_apple_.isNotValid() == true );
@@ -103,12 +118,12 @@ TEST_CASE( "common" )
         REQUIRE( locked == false );
         REQUIRE( mp_apple_.isNotValid() == true );
 
-        mp_apple_.setInvalid( ModelPoint::eUNLOCK );
+        mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
         REQUIRE( mp_apple_.isNotValid() == true );
         locked = mp_apple_.isLocked();
         REQUIRE( locked == false );
 
-        mp_apple_.setInvalid( ModelPoint::eLOCK );
+        mp_apple_.setInvalid( false, IModelPoint::eLOCK );
         REQUIRE( mp_apple_.isNotValid() == true );
         locked = mp_apple_.isLocked();
         REQUIRE( locked == true );
@@ -122,7 +137,7 @@ TEST_CASE( "common" )
         locked = mp_apple_.isLocked();
         REQUIRE( locked == true );
 
-        mp_apple_.write( 12, ModelPoint::eUNLOCK );
+        mp_apple_.write( 12, false, IModelPoint::eUNLOCK );
         valid = mp_apple_.read( value );
         REQUIRE( mp_apple_.isNotValid() == false );
         REQUIRE( valid == true );
@@ -138,26 +153,26 @@ TEST_CASE( "common" )
     SECTION( "find" )
     {
         // Look up non existent MPs
-        Mp::Uint32* mp = (Mp::Uint32*) modelDb_.lookupModelPoint( "APPLE" );
+        Mp::Uint32* mp = (Mp::Uint32*)modelDb_.lookupModelPoint( "APPLE" );
         REQUIRE( mp == 0 );
-        mp = (Mp::Uint32*) modelDb_.lookupModelPoint( "ORANGE" );
+        mp = (Mp::Uint32*)modelDb_.lookupModelPoint( "ORANGE" );
         REQUIRE( mp == 0 );
-        mp = (Mp::Uint32*) modelDb_.lookupModelPoint( "CHERRY" );
+        mp = (Mp::Uint32*)modelDb_.lookupModelPoint( "CHERRY" );
         REQUIRE( mp == 0 );
-        mp = (Mp::Uint32*) modelDb_.lookupModelPoint( "PLUM" );
+        mp = (Mp::Uint32*)modelDb_.lookupModelPoint( "PLUM" );
         REQUIRE( mp == 0 );
 
         // Look up MPs
-        mp = (Mp::Uint32*) modelDb_.lookupModelPoint( "APPLE1" );
+        mp = (Mp::Uint32*)modelDb_.lookupModelPoint( "APPLE1" );
         REQUIRE( mp == &mp_apple_ );
         REQUIRE( mp->isNotValid() == true );
-        mp = (Mp::Uint32*) modelDb_.lookupModelPoint( "ORANGE1" );
+        mp = (Mp::Uint32*)modelDb_.lookupModelPoint( "ORANGE1" );
         REQUIRE( mp == &mp_orange_ );
         REQUIRE( mp->isNotValid() == true );
-        mp = (Mp::Uint32*) modelDb_.lookupModelPoint( "CHERRY1" );
+        mp = (Mp::Uint32*)modelDb_.lookupModelPoint( "CHERRY1" );
         REQUIRE( mp == &mp_cherry_ );
         REQUIRE( mp->isNotValid() == true );
-        mp = (Mp::Uint32*) modelDb_.lookupModelPoint( "PLUM1" );
+        mp = (Mp::Uint32*)modelDb_.lookupModelPoint( "PLUM1" );
         REQUIRE( mp == &mp_plum_ );
         REQUIRE( mp->isNotValid() == true );
 
@@ -166,7 +181,7 @@ TEST_CASE( "common" )
         REQUIRE( mp->isNotValid() == false );
         REQUIRE( mp_plum_.isNotValid() == false );
         uint32_t value;
-        bool    valid = mp_plum_.read( value );
+        bool     valid = mp_plum_.read( value );
         REQUIRE( valid == true );
         REQUIRE( value == 10 );
     }
@@ -180,23 +195,23 @@ TEST_CASE( "common" )
 
 
         // Look up MPs
-        Mp::Uint32* mp = (Mp::Uint32*) myDb.lookupModelPoint( "APPLE1" );
+        Mp::Uint32* mp = (Mp::Uint32*)myDb.lookupModelPoint( "APPLE1" );
         REQUIRE( mp == &myApple );
         REQUIRE( mp->isNotValid() == true );
-        mp = (Mp::Uint32*) myDb.lookupModelPoint( "ORANGE1" );
+        mp = (Mp::Uint32*)myDb.lookupModelPoint( "ORANGE1" );
         REQUIRE( mp == 0 );
-        mp = (Mp::Uint32*) myDb.lookupModelPoint( "CHERRY1" );
+        mp = (Mp::Uint32*)myDb.lookupModelPoint( "CHERRY1" );
         REQUIRE( mp->isNotValid() == true );
         REQUIRE( mp == &myCherry );
-        mp = (Mp::Uint32*) myDb.lookupModelPoint( "PLUM1" );
+        mp = (Mp::Uint32*)myDb.lookupModelPoint( "PLUM1" );
         REQUIRE( mp == 0 );
 
         // Traverse the Database
-        ModelPoint* mpPtr = myDb.getFirstByName();
+        IModelPoint* mpPtr = myDb.getFirstByName();
         REQUIRE( strcmp( mpPtr->getName(), "APPLE1" ) == 0 );
         mpPtr = myDb.getNextByName( *mpPtr );
         REQUIRE( strcmp( mpPtr->getName(), "CHERRY1" ) == 0 );
     }
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

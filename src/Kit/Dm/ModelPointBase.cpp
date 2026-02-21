@@ -12,9 +12,6 @@
 #include "Kit/System/Mutex.h"
 #include "Kit/EventQueue/IChangeNotification.h"
 #include "Kit/System/Shutdown.h"
-#include "MailboxServer.h"
-#include "Kit/Text/Strip.h"
-#include "Kit/Text/StringTo.h"
 #include "Kit/System/Assert.h"
 
 
@@ -567,6 +564,7 @@ JsonDocument& ModelPointBase::beginJSON( bool isValid, bool locked, uint16_t seq
         IModelDatabase::g_doc_["seqnum"] = seqnum;
         IModelDatabase::g_doc_["locked"] = locked;
     }
+    return IModelDatabase::g_doc_;
 }
 
 void ModelPointBase::endJSON( char* dst, size_t dstSize, bool& truncated, bool verbose, bool pretty ) noexcept

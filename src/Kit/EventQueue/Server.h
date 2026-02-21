@@ -16,12 +16,16 @@
 
 
 ///
+#ifndef USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
+#include "Kit/Dm/ChangeHandler.h"
+#endif
+
+///
 namespace Kit {
 ///
 namespace EventQueue {
 
 #ifndef USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
-#include "Kit/Dm/ChangeHandler.h"
 
 /** This concrete class extends the Kit::System::EventLoop interface to include
     processing events from Event Queue.  Depending on the compile time configuration,
