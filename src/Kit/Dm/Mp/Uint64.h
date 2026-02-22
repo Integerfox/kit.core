@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_Mp_Uint64_h_
-#define Cpl_Dm_Mp_Uint64_h_
+#ifndef KIT_DM_MP_UINT64_H_
+#define KIT_DM_MP_UINT64_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,10 +11,11 @@
 /** @file */
 
 
-#include "Cpl/Dm/Mp/Numeric.h"
+#include "Kit/Dm/Mp/NumericBase.h"
+#include <stdint.h>
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -22,52 +23,55 @@ namespace Mp {
 
 
 /** This class provides a concrete implementation for a Point who's data is a
-	uint64_t.
+    uint64_t.
 
-	The toJSON()/fromJSON format is:
-		\code
+    The toJSON() format is:
+        \code
 
-		{ name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, val:<numvalue> }
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, 
+          val:{ "dec":<numvalue>,
+                "hex":<hexvalue>
+              }
+        }
 
-		where <numvalue> is integer numeric
+        \endcode
 
-		\endcode
+    The "val" format for the fromJSON() format is:
+        \code
 
- NOTE: All methods in this class ARE thread Safe unless explicitly
-		  documented otherwise.
+        val:<numvalue> OR val:"0x<hexvalue>"
+
+        \endcode
+
+    NOTE: All methods in this class ARE thread Safe unless explicitly
+          documented otherwise.
  */
-class Uint64 : public Numeric<uint64_t, Uint64>
+class Uint64 : public UnsignedInteger<uint64_t, Uint64>
 {
 public:
-	/** Constructor. Invalid MP.
-	 */
-	Uint64( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName )
-		: Numeric<uint64_t, Uint64>( myModelBase, symbolicName )
-	{
-	}
+    /** Constructor. Invalid MP.
+     */
+    Uint64( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : UnsignedInteger<uint64_t, Uint64>( myModelBase, symbolicName )
+    {
+    }
 
-	/// Constructor. Valid MP.  Requires an initial value
-	Uint64( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName, uint64_t initialValue )
-		: Numeric<uint64_t, Uint64>( myModelBase, symbolicName, initialValue )
-	{
-	}
-
-public:
-	/// Type safe subscriber
-	typedef Cpl::Dm::Subscriber<Uint64> Observer;
-
+    /// Constructor. Valid MP.  Requires an initial value
+    Uint64( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, uint64_t initialValue )
+        : UnsignedInteger<uint64_t, Uint64>( myModelBase, symbolicName, initialValue )
+    {
+    }
 
 public:
-	///  See Cpl::Dm::ModelPoint.
-	const char* getTypeAsText() const noexcept
-	{
-		return "Cpl::Dm::Mp::Uint64";
-	}
+    ///  See Kit::Dm::ModelPoint.
+    const char* getTypeAsText() const noexcept
+    {
+        return "Kit::Dm::Mp::Uint64";
+    }
 };
 
 
-
-};      // end namespaces
-};
-};
+}       // end namespaces
+}
+}
 #endif  // end header latch

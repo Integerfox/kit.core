@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_Mp_Uint32_h_
-#define Cpl_Dm_Mp_Uint32_h_
+#ifndef KIT_DM_MP_UINT32_H_
+#define KIT_DM_MP_UINT32_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

@@ -1,5 +1,5 @@
-#ifndef KIT_DM_MP_INT32_H_
-#define KIT_DM_MP_INT32_H_
+#ifndef KIT_DM_MP_INT8_H_
+#define KIT_DM_MP_INT8_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -23,7 +23,7 @@ namespace Mp {
 
 
 /** This class provides a concrete implementation for a Point who's data is a
-    int32_t.
+    int8_t.
 
     The toJSON() format is:
         \code
@@ -46,19 +46,19 @@ namespace Mp {
     NOTE: All methods in this class ARE thread Safe unless explicitly
           documented otherwise.
  */
-class Int32 : public SignedInteger<int32_t, Int32>
+class Int8 : public SignedInteger<int8_t, Int8>
 {
 public:
     /** Constructor. Invalid MP.
      */
-    Int32( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
-        : SignedInteger<int32_t, Int32>( myModelBase, symbolicName )
+    Int8( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : SignedInteger<int8_t, Int8>( myModelBase, symbolicName )
     {
     }
 
     /// Constructor. Valid MP.  Requires an initial value
-    Int32( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, int32_t initialValue )
-        : SignedInteger<int32_t, Int32>( myModelBase, symbolicName, initialValue )
+    Int8( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, int8_t initialValue )
+        : SignedInteger<int8_t, Int8>( myModelBase, symbolicName, initialValue )
     {
     }
 
@@ -66,7 +66,7 @@ public:
     ///  See Kit::Dm::ModelPoint.
     const char* getTypeAsText() const noexcept
     {
-        return "Kit::Dm::Mp::Int32";
+        return "Kit::Dm::Mp::Int8";
     }
 };
 

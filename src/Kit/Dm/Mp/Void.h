@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_Mp_Void_h_
-#define Cpl_Dm_Mp_Void_h_
+#ifndef KIT_DM_MP_VOID_H_
+#define KIT_DM_MP_VOID_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,10 +11,10 @@
 /** @file */
 
 
-#include "Cpl/Dm/Mp/Numeric.h"
+#include "Kit/Dm/Mp/NumericBase.h"
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -22,84 +22,106 @@ namespace Mp {
 
 
 /** This class provides a concrete implementation for a Point who's data is a
-	void pointer.  
-	
-	On general principle there should NOT be model point type that is generic 
-	(it goes against the whole 'model-points-are-type-safe' thingy). HOWEVER, 
-	there are some cases where it is desirable to have MP contain a pointer - 
-	where the actual definition of what that pointer points to is 'not visible' 
-	
-	Shorter version: DO NOT USE THIS MODEL POINT TYPE UNLESS YOU HAVE NO 
-	ALTERNATIVE. Not wanting to take the time to create a new model point type
-	(with test code) is NOT an acceptable excuse for using this model point 
-	type.
+    void pointer.
 
-	The toJSON()/fromJSON format is:
-		\code
+    On general principle there should NOT be model point type that is generic
+    (it goes against the whole 'model-points-are-type-safe' thingy). HOWEVER,
+    there are some cases where it is desirable to have MP contain a pointer -
+    where the actual definition of what that pointer points to is 'not visible'
 
-		{ name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, val:"<hexvalue>" }
+    Shorter version: DO NOT USE THIS MODEL POINT TYPE UNLESS YOU HAVE NO
+    ALTERNATIVE. Not wanting to take the time to create a new model point type
+    (with test code) is NOT an acceptable excuse for using this model point
+    type.
 
-		\endcode
+    The toJSON() format is:
+        \code
 
- NOTE: All methods in this class ARE thread Safe unless explicitly
-		  documented otherwise.
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
+          val:"<hexValueWithNoLeading0xPrefix>" }
+
+        \endcode
+
+    The "val" format for the fromJSON() format is below.  NOTE: setting a Pointer
+    value from JSON is not something that is likely to be useful in general (i.e
+    DON'T do it), but it is supported for completeness.
+        \code
+
+        val:"<hexValueWithNoLeading0xPrefix>"
+
+        \endcode
+
+    NOTE: All methods in this class ARE thread Safe unless explicitly
+          documented otherwise.
  */
-class Void : public Pointer_<Void>
+class Void : public Numeric<void*, Void>
 {
 public:
-    /// Constructor. Invalid MP. 
-    Void( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName )
-        :Pointer_<Void>( myModelBase, symbolicName )
+    /// Constructor. Invalid MP.
+    Void( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : Numeric<void*, Void>( myModelBase, symbolicName )
     {
     }
 
     /// Constructor. Valid MP.  Requires an initial value
-    Void( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName, void* initialValue )
-        : Pointer_<Void>( myModelBase, symbolicName, initialValue )
+    Void( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, void* initialValue )
+        : Numeric<void*, Void>( myModelBase, symbolicName, initialValue )
     {
     }
 
 
 public:
-    /// Type safe read. See Cpl::Dm::ModelPoint
-    inline bool read( void*& dstData, uint16_t* seqNumPtr = 0 ) const noexcept
-    {
-        return readData( &dstData, sizeof( void* ), seqNumPtr );
-    }
-
-    /// Type safe write. See Cpl::Dm::ModelPoint
-    inline uint16_t write( void* newValue, Cpl::Dm::ModelPoint::LockRequest_T lockRequest = Cpl::Dm::ModelPoint::eNO_REQUEST ) noexcept
-    {
-        return writeData( &newValue, sizeof( void* ), lockRequest );
-    }
-
-public:
-    /// Type safe subscriber
-    typedef Cpl::Dm::Subscriber<Void> Observer;
-
-    /// See Cpl::Dm::ModelPointCommon
-    inline bool readAndSync( void*& dstData, SubscriberApi& observerToSync )
-    {
-        uint16_t seqNum;
-        return ModelPointCommon_::readAndSync( &dstData, sizeof( void* ), seqNum, observerToSync );
-    }
-
-    /// See Cpl::Dm::ModelPointCommon
-    inline bool readAndSync( void*& dstData, uint16_t& seqNum, SubscriberApi& observerToSync )
-    {
-        return ModelPointCommon_::readAndSync( &dstData, sizeof( void* ), seqNum, observerToSync );
-    }
-
-    ///  See Cpl::Dm::ModelPoint.
+    ///  See Kit::Dm::ModelPoint.
     const char* getTypeAsText() const noexcept
     {
-        return "Cpl::Dm::Mp::Void";
+        return "Kit::Dm::Mp::Void*";
+    }
+
+protected:
+    /** See Kit::Dm::Point. Note: NO loading '0x' prefix
+        \code
+            Output: val:"<hexadecimal value>"
+        \endcode
+     */
+    bool setJSONVal( JsonDocument& doc ) noexcept
+    {
+        Kit::Text::FString<20> hexString;
+        hexString.format( "%" PRIXPTR, (uintptr_t)Numeric<void*, Void>::m_data );
+        doc["val"] = (char*)hexString.getString();
+        return true;
+    }
+
+public:
+    /** See Kit::Dm::Point. Note: NO loading '0x' prefix
+        \code
+            Input: val:"<hexvalue>"
+            For example:
+                { "val": "7B" }
+        \endcode
+     */
+    bool fromJSON_( JsonVariant& src, Kit::Dm::IModelPoint::LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept
+    {
+        // Parse as a hex string (e.g. "0x12")
+        if ( src.is<const char*>() )
+        {
+            // Try to parse the string as a number
+            size_t val;
+            if ( Kit::Text::StringTo::unsignedInt( val, src.as<const char*>(), 16 ) )
+            {
+                retSequenceNumber = this->write( (void*)val, false, lockRequest );
+                return true;
+            }
+        }
+        if ( errorMsg )
+        {
+            *errorMsg = "Invalid syntax for the 'val' key/value pair";
+        }
+        return false;
     }
 };
 
 
-
-};      // end namespaces
-};
-};
+}  // end namespaces
+}
+}
 #endif  // end header latch

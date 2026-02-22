@@ -10,7 +10,6 @@
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/System/Trace.h"
 #include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Dm/Mp/Uint32.h"
 #include "common.h"

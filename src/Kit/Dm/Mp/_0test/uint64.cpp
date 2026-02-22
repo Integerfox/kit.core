@@ -8,11 +8,11 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Catch/catch.hpp"
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/Dm/ModelDatabase.h"
-#include "Cpl/Dm/Mp/Uint64.h"
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/System/Trace.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Uint64.h"
 #include <string.h>
 
 #define STRCMP( s1, s2 ) ( strcmp( s1, s2 ) == 0 )
@@ -22,7 +22,7 @@
 #define INITIAL_VALUE    42
 
 ////////////////////////////////////////////////////////////////////////////////
-using namespace Cpl::Dm;
+using namespace Kit::Dm;
 
 // Allocate/create my Model Database
 static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
@@ -38,12 +38,13 @@ static Mp::Uint64 mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 //
 TEST_CASE( "Uint64" )
 {
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    char     string[MAX_STR_LENG + 1];
-    bool     truncated;
-    bool     valid;
+    char    string[MAX_STR_LENG + 1];
+    bool    truncated;
+    bool    valid;
     uint64_t value;
+    mp_apple_.setInvalid();
 
     SECTION( "gets" )
     {
@@ -58,16 +59,13 @@ TEST_CASE( "Uint64" )
         REQUIRE( s == sizeof( value ) + sizeof( bool ) );
 
         const char* mpType = mp_apple_.getTypeAsText();
-        CPL_SYSTEM_TRACE_MSG( SECT_, ( "typeText: [%s]", mpType ) );
-        REQUIRE( strcmp( mpType, "Cpl::Dm::Mp::Uint64" ) == 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType );
+        REQUIRE( strcmp( mpType, "Kit::Dm::Mp::Uint64" ) == 0 );
     }
 
 
     SECTION( "read/writes" )
     {
-        // Start with MP in the invalid state
-        mp_apple_.setInvalid();
-
         mp_apple_.increment( 2 );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
@@ -82,60 +80,19 @@ TEST_CASE( "Uint64" )
         REQUIRE( value == INITIAL_VALUE );
     }
 
-    SECTION( "bit-operations" )
-    {
-        uint16_t seqNum1 = mp_apple_.write( 0xA5 );
-        uint16_t seqNum2 = mp_apple_.bitwiseOR( 0xF0 );
-        REQUIRE( ( seqNum1 + 1 ) == seqNum2 );
-        valid = mp_apple_.read( value );
-        REQUIRE( valid );
-        REQUIRE( value == ( 0xA5 | 0xF0 ) );
-
-        mp_apple_.bitwiseAND( 0xF01 );
-        valid = mp_apple_.read( value );
-        REQUIRE( valid );
-        REQUIRE( value == 0x01 );
-
-        mp_apple_.bitwiseXOR( 0xF01 );
-        valid = mp_apple_.read( value );
-        REQUIRE( valid );
-        REQUIRE( value == 0xF00 );
-
-        seqNum1 = mp_apple_.bitwiseClearAndSet( 0x300, 0x0A0 );
-        valid = mp_apple_.readThenClear( value, &seqNum2 );
-        REQUIRE( ( seqNum1 + 1 ) == seqNum2 );
-        REQUIRE( valid );
-        REQUIRE( value == 0xCA0 );
-        valid = mp_apple_.read( value );
-        REQUIRE( valid );
-        REQUIRE( value == 0);
-
-        mp_apple_.write( 0xA5 );
-        valid = mp_apple_.readThenClearBits( value, 0xF0 );
-        REQUIRE( valid );
-        REQUIRE( value == 0xA5 );
-        valid = mp_apple_.read( value );
-        REQUIRE( valid );
-        REQUIRE( value == 0x05);
-
-        seqNum1 = mp_apple_.setInvalid();
-        valid = mp_apple_.readThenClear( value, &seqNum2 );
-        REQUIRE( valid == false );
-        REQUIRE( seqNum1 == seqNum2 );
-    }
-
     SECTION( "toJSON-pretty" )
     {
-        mp_apple_.write( 127 );
+        mp_apple_.write( 0x7F000000 );
         mp_apple_.toJSON( string, MAX_STR_LENG, truncated, true, true );
-        CPL_SYSTEM_TRACE_MSG( SECT_, ( "toJSON: [%s]", string ) );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
         StaticJsonDocument<1024> doc;
         DeserializationError     err = deserializeJson( doc, string );
         REQUIRE( err == DeserializationError::Ok );
         REQUIRE( doc["locked"] == false );
         REQUIRE( doc["valid"] == true );
-        REQUIRE( doc["val"] == 127 );
+        REQUIRE( doc["val"]["dec"] == 2130706432 );
+        REQUIRE( STRCMP( doc["val"]["hex"], "0x7F000000" ) );
     }
 
     SECTION( "fromJSON" )
@@ -151,5 +108,5 @@ TEST_CASE( "Uint64" )
         REQUIRE( value == 1234 );
     }
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_Mp_Int64_h_
-#define Cpl_Dm_Mp_Int64_h_
+#ifndef KIT_DM_MP_INT64_H_
+#define KIT_DM_MP_INT64_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,10 +11,11 @@
 /** @file */
 
 
-#include "Cpl/Dm/Mp/Numeric.h"
+#include "Kit/Dm/Mp/NumericBase.h"
+#include <stdint.h>
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -22,51 +23,55 @@ namespace Mp {
 
 
 /** This class provides a concrete implementation for a Point who's data is a
-	int64_t.
+    int64_t.
 
-	The toJSON()/fromJSON format is:
-		\code
+    The toJSON() format is:
+        \code
 
-		{ name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, val:<numvalue> }
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, 
+          val:{ "dec":<numvalue>,
+                "hex":<hexvalue>
+              }
+        }
 
-		where <numvalue> is integer numeric
+        \endcode
 
-		\endcode
+    The "val" format for the fromJSON() format is:
+        \code
 
- NOTE: All methods in this class ARE thread Safe unless explicitly
-		  documented otherwise.
+        val:<numvalue> OR val:"0x<hexvalue>"
+
+        \endcode
+
+    NOTE: All methods in this class ARE thread Safe unless explicitly
+          documented otherwise.
  */
-class Int64 : public Numeric<int64_t, Int64>
+class Int64 : public SignedInteger<int64_t, Int64>
 {
 public:
-	/** Constructor. Invalid MP.
-	 */
-	Int64( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName )
-		: Numeric<int64_t, Int64>( myModelBase, symbolicName )
-	{
-	}
+    /** Constructor. Invalid MP.
+     */
+    Int64( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : SignedInteger<int64_t, Int64>( myModelBase, symbolicName )
+    {
+    }
 
-	/// Constructor. Valid MP.  Requires an initial value
-	Int64( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName, int64_t initialValue )
-		: Numeric<int64_t, Int64>( myModelBase, symbolicName, initialValue )
-	{
-	}
-
-public:
-	/// Type safe subscriber
-	typedef Cpl::Dm::Subscriber<Int64> Observer;
+    /// Constructor. Valid MP.  Requires an initial value
+    Int64( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, int64_t initialValue )
+        : SignedInteger<int64_t, Int64>( myModelBase, symbolicName, initialValue )
+    {
+    }
 
 public:
-	///  See Cpl::Dm::ModelPoint.
-	const char* getTypeAsText() const noexcept
-	{
-		return "Cpl::Dm::Mp::Int64";
-	}
+    ///  See Kit::Dm::ModelPoint.
+    const char* getTypeAsText() const noexcept
+    {
+        return "Kit::Dm::Mp::Int64";
+    }
 };
 
 
-
-};      // end namespaces
-};
-};
+}       // end namespaces
+}
+}
 #endif  // end header latch

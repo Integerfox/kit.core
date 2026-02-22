@@ -18,6 +18,7 @@
 #include <string.h>
 #include <stdint.h>
 #include <inttypes.h>
+#include <type_traits>
 #include <sys/types.h>
 
 /// Endianess of a Bit array.  For little endian set to true; else set to false
@@ -280,9 +281,9 @@ protected:
     bool setJSONVal( JsonDocument& doc ) noexcept
     {
         Kit::Text::FString<sizeof( OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE ) * 2 + 2> hexString;
-        OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE                                       val = Integer<ELEMTYPE, MPTYPE>::m_data;
         //
-        JsonObject valObj = doc.createNestedObject( "val" );
+        OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE val    = (typename std::make_unsigned<ELEMTYPE>::type)Integer<ELEMTYPE, MPTYPE>::m_data;
+        JsonObject                           valObj = doc.createNestedObject( "val" );
         hexString.format( "0x%" OPTION_KIT_DM_MP_MAX_INT_HEX_PRINTF_FORMAT, val );
         valObj["dec"] = Integer<ELEMTYPE, MPTYPE>::m_data;
         valObj["hex"] = (char*)hexString.getString();
@@ -304,7 +305,7 @@ public:
         // Parse a number
         if ( src.is<ELEMTYPE>() )
         {
-            retSequenceNumber = write( src.as<ELEMTYPE>(), false, lockRequest );
+            retSequenceNumber = this->write( src.as<ELEMTYPE>(), false, lockRequest );
             return true;
         }
 
