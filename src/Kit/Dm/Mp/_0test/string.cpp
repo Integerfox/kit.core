@@ -8,43 +8,45 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/EventQueue/Server.h"
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
 #include "common.h"
-#include "Catch/catch.hpp"
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/System/Api.h"
-#include "Cpl/System/Thread.h"
-#include "Cpl/Text/FString.h"
-#include "Cpl/Text/DString.h"
-#include "Cpl/Dm/ModelDatabase.h"
-#include "Cpl/Dm/Mp/String.h"
-#include "Cpl/Itc/CloseSync.h"
+#include "Kit/Text/FString.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/String.h"
 #include <string.h>
 
-#define STRCMP(s1,s2)       (strcmp(s1,s2)==0)
-#define MAX_STR_LENG        1024
-#define SECT_               "_0test"
+#define STRCMP( s1, s2 ) ( strcmp( s1, s2 ) == 0 )
+#define MAX_STR_LENG     1024
+#define SECT_            "_0test"
 
-#define MY_UUT_DATA_SIZE    8
+#define MY_UUT_DATA_SIZE 8
 
-#define INITIAL_VALUE       "Hello World"
+#define INITIAL_VALUE    "Hello World"
 
-using namespace Cpl::Dm;
+using namespace Kit::Dm;
+using namespace Kit::Dm::Mp;
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
 // Allocate/create my Model Database
-static ModelDatabase    modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
 // Allocate my Model Points
-static Mp::String<MY_UUT_DATA_SIZE> mp_apple_( modelDb_, "APPLE" );
-static Mp::String<MY_UUT_DATA_SIZE> mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
+static String<MY_UUT_DATA_SIZE> mp_apple_( modelDb_, "APPLE" );
+static String<MY_UUT_DATA_SIZE> mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 
 // Don't let the Runnable object go out of scope before its thread has actually terminated!
-static MailboxServer         t1Mbox_;
+static Kit::EventQueue::Server t1Mbox_;
 
 
+template <>
+void Viewer<StringBase, Kit::Text::FString<MY_UUT_DATA_SIZE>>::displayElement( const char* label, Kit::Text::FString<MY_UUT_DATA_SIZE>& elem )
+{
+    KIT_SYSTEM_TRACE_MSG( SECT_, "%s:%s", label, elem.getString() );
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -53,13 +55,13 @@ static MailboxServer         t1Mbox_;
 //
 TEST_CASE( "String" )
 {
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    Cpl::Text::FString<MAX_STR_LENG>     errorMsg = "noerror";
-    Cpl::Text::FString<MY_UUT_DATA_SIZE> valStr;
-    char string[MAX_STR_LENG + 1];
-    bool truncated;
-    bool valid;
+    Kit::Text::FString<MAX_STR_LENG>     errorMsg = "noerror";
+    Kit::Text::FString<MY_UUT_DATA_SIZE> valStr;
+    char                                 string[MAX_STR_LENG + 1];
+    bool                                 truncated;
+    bool                                 valid;
     mp_apple_.setInvalid();
 
     SECTION( "gets" )
@@ -69,14 +71,14 @@ TEST_CASE( "String" )
         REQUIRE( strcmp( name, "APPLE" ) == 0 );
 
         size_t s = mp_apple_.getSize();
-        REQUIRE( s == MY_UUT_DATA_SIZE+1 );
+        REQUIRE( s == MY_UUT_DATA_SIZE + 1 );
 
         s = mp_apple_.getExternalSize();
         REQUIRE( s == MY_UUT_DATA_SIZE + 1 + sizeof( bool ) );
 
         const char* mpType = mp_apple_.getTypeAsText();
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("typeText: [%s]", mpType) );
-        REQUIRE( strcmp( mpType, "Cpl::Dm::Mp::String" ) == 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType );
+        REQUIRE( strcmp( mpType, "Kit::Dm::Mp::String" ) == 0 );
     }
 
 
@@ -85,7 +87,7 @@ TEST_CASE( "String" )
         mp_apple_.write( "12345678" );
         valid = mp_apple_.read( valStr );
         REQUIRE( valid );
-        REQUIRE( valStr == "12345678"  );
+        REQUIRE( valStr == "12345678" );
         mp_apple_.write( "bob" );
         valid = mp_apple_.read( valStr );
         REQUIRE( valid );
@@ -104,7 +106,7 @@ TEST_CASE( "String" )
         REQUIRE( STRCMP( string, "Ver" ) );
 
         uint16_t seqNum  = mp_apple_.getSequenceNumber();
-        uint16_t seqNum2 = mp_apple_.write( 0, 10 );
+        uint16_t seqNum2 = mp_apple_.write( nullptr, 10, false );
         REQUIRE( seqNum == seqNum2 );
         mp_apple_.read( valStr );
         REQUIRE( valStr == "Very Lon" );
@@ -127,27 +129,27 @@ TEST_CASE( "String" )
     {
         mp_apple_.write( "Hi Bob" );
         mp_apple_.toJSON( string, MAX_STR_LENG, truncated, true, true );
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("toJSON: [%s]", string) );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
         StaticJsonDocument<1024> doc;
-        DeserializationError err = deserializeJson( doc, string );
+        DeserializationError     err = deserializeJson( doc, string );
         REQUIRE( err == DeserializationError::Ok );
         REQUIRE( doc["locked"] == false );
         REQUIRE( doc["valid"] == true );
         REQUIRE( doc["val"]["maxLen"] == MY_UUT_DATA_SIZE );
-        REQUIRE( STRCMP(doc["val"]["text"], "Hi Bob") );
+        REQUIRE( STRCMP( doc["val"]["text"], "Hi Bob" ) );
     }
 
     SECTION( "fromJSON" )
     {
-        const char* json = "{name:\"APPLE\", val:{text:\"good bye\"}}";
-        bool result = modelDb_.fromJSON( json );
+        const char* json   = "{name:\"APPLE\", val:{text:\"good bye\"}}";
+        bool        result = modelDb_.fromJSON( json );
         REQUIRE( result == true );
         valid = mp_apple_.read( valStr );
         REQUIRE( valid );
         REQUIRE( valStr == "good bye" );
 
-        json = "{name:\"APPLE\", val:true}";
+        json   = "{name:\"APPLE\", val:true}";
         result = modelDb_.fromJSON( json, &errorMsg );
         REQUIRE( result == false );
         REQUIRE( errorMsg != "noerror" );
@@ -158,24 +160,23 @@ TEST_CASE( "String" )
 
     SECTION( "observer" )
     {
-        CPL_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        Cpl::Text::FString<10> expectedVal = "bob";
-        Viewer<Mp::String<MY_UUT_DATA_SIZE>, Cpl::Text::FString<10>>  viewer_apple1( t1Mbox_, Cpl::System::Thread::getCurrent(), mp_apple_, expectedVal );
-        Cpl::System::Thread* t1 = Cpl::System::Thread::create( t1Mbox_, "T1" );
+        KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
+        Kit::Text::FString<MY_UUT_DATA_SIZE>                            expectedVal = "bob";
+        Viewer<StringBase, Kit::Text::FString<MY_UUT_DATA_SIZE>> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
+        Kit::System::Thread*                                                       t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
         viewer_apple1.open();
         mp_apple_.write( expectedVal );
-        Cpl::System::Thread::wait();
+        Kit::System::Thread::wait();
         viewer_apple1.close();
 
         // Shutdown threads
         t1Mbox_.pleaseStop();
-        Cpl::System::Api::sleep( 100 ); // allow time for threads to stop
-        REQUIRE( t1->isRunning() == false );
-        Cpl::System::Thread::destroy( *t1 );
-        Cpl::System::Api::sleep( 100 ); // allow time for threads to stop BEFORE the runnable object goes out of scope
+        Kit::System::sleep( 100 );  // allow time for threads to stop
+        REQUIRE( t1->isActive() == false );
+        WAIT_FOR_THREAD_TO_STOP( t1 );
     }
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

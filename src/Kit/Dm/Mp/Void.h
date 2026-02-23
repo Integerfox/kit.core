@@ -11,7 +11,8 @@
 /** @file */
 
 
-#include "Kit/Dm/Mp/NumericBase.h"
+#include "Kit/Dm/Mp/PrimitiveType.h"
+#include <cstdint>
 
 ///
 namespace Kit {
@@ -38,7 +39,7 @@ namespace Mp {
         \code
 
         { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
-          val:"<hexValueWithNoLeading0xPrefix>" }
+          val:"0x<hexValue" }
 
         \endcode
 
@@ -47,32 +48,50 @@ namespace Mp {
     DON'T do it), but it is supported for completeness.
         \code
 
-        val:"<hexValueWithNoLeading0xPrefix>"
+        val:"0x<hexValue>"
 
         \endcode
 
     NOTE: All methods in this class ARE thread Safe unless explicitly
           documented otherwise.
  */
-class Void : public Numeric<void*, Void>
+class Void : public PrimitiveType<uintptr_t, Void>
 {
 public:
     /// Constructor. Invalid MP.
     Void( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
-        : Numeric<void*, Void>( myModelBase, symbolicName )
+        : PrimitiveType<uintptr_t, Void>( myModelBase, symbolicName )
     {
     }
 
     /// Constructor. Valid MP.  Requires an initial value
     Void( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, void* initialValue )
-        : Numeric<void*, Void>( myModelBase, symbolicName, initialValue )
+        : PrimitiveType<uintptr_t, Void>( myModelBase, symbolicName, (uintptr_t)initialValue )
     {
     }
 
+public:
+    /** Type safe read. See Kit::Dm::IModelPoint. Note: the underlying data is
+        a uintptr_t, but the read/write methods use void* for type safety.
+     */
+    inline bool read( void*& dstData, uint16_t* seqNumPtr = nullptr ) const noexcept
+    {
+        return Kit::Dm::ModelPointBase::readData( &dstData, sizeof( uintptr_t ), seqNumPtr );
+    }
+
+    /** Type safe write. See Kit::Dm::IModelPoint. Note: the underlying data is
+        a uintptr_t, but the read/write methods use void* for type safety.
+     */
+    inline uint16_t write( void*                               newValue,
+                           bool                                forceChgNotification = false,
+                           Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    {
+        return Kit::Dm::ModelPointBase::writeData( &newValue, sizeof( uintptr_t ), forceChgNotification, lockRequest );
+    }
 
 public:
     ///  See Kit::Dm::ModelPoint.
-    const char* getTypeAsText() const noexcept
+    const char* getTypeAsText() const noexcept override
     {
         return "Kit::Dm::Mp::Void*";
     }
@@ -80,35 +99,33 @@ public:
 protected:
     /** See Kit::Dm::Point. Note: NO loading '0x' prefix
         \code
-            Output: val:"<hexadecimal value>"
+            Output: val:"0x<hexadecimal value>"
         \endcode
      */
-    bool setJSONVal( JsonDocument& doc ) noexcept
+    bool setJSONVal( JsonDocument& doc ) noexcept override
     {
         Kit::Text::FString<20> hexString;
-        hexString.format( "%" PRIXPTR, (uintptr_t)Numeric<void*, Void>::m_data );
-        doc["val"] = (char*)hexString.getString();
+        hexString.format( "0x%" PRIXPTR, this->m_data );
+        doc["val"] = (char*) hexString.getString();
         return true;
     }
 
 public:
-    /** See Kit::Dm::Point. Note: NO loading '0x' prefix
+    /** See Kit::Dm::Point.
         \code
-            Input: val:"<hexvalue>"
-            For example:
-                { "val": "7B" }
+            Input: val:"0x<hexvalue>"
         \endcode
      */
-    bool fromJSON_( JsonVariant& src, Kit::Dm::IModelPoint::LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept
+    bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override
     {
-        // Parse as a hex string (e.g. "0x12")
+        // Parse as a hex string (e.g. "0xA12F")
         if ( src.is<const char*>() )
         {
             // Try to parse the string as a number
-            size_t val;
+            uintptr_t val;
             if ( Kit::Text::StringTo::unsignedInt( val, src.as<const char*>(), 16 ) )
             {
-                retSequenceNumber = this->write( (void*)val, false, lockRequest );
+                retSequenceNumber = PrimitiveType<uintptr_t, Void>::write( val, false, lockRequest );
                 return true;
             }
         }

@@ -8,14 +8,14 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Catch/catch.hpp"
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/System/Api.h"
-#include "Cpl/Text/FString.h"
-#include "Cpl/Text/DString.h"
-#include "Cpl/Dm/ModelDatabase.h"
-#include "Cpl/Dm/Mp/Double.h"
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/System/Trace.h"
+#include "Kit/System/Api.h"
+#include "Kit/Text/FString.h"
+#include "Kit/Text/DString.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Double.h"
 #include <string.h>
 
 #define STRCMP(s1,s2)       (strcmp(s1,s2)==0)
@@ -27,7 +27,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
-using namespace Cpl::Dm;
+using namespace Kit::Dm;
 
 // Allocate/create my Model Database
 static ModelDatabase    modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
@@ -43,7 +43,7 @@ static Mp::Double       mp_orange_( modelDb_, "ORANGE", MAGIC_VALUE );
 //
 TEST_CASE( "Double" )
 {
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     char    string[MAX_STR_LENG + 1];
     bool    truncated;
@@ -63,8 +63,8 @@ TEST_CASE( "Double" )
         REQUIRE( s == sizeof( value ) + sizeof( bool ) );
 
         const char* mpType = mp_apple_.getTypeAsText();
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("typeText: [%s]", mpType) );
-        REQUIRE( strcmp( mpType, "Cpl::Dm::Mp::Double" ) == 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType );
+        REQUIRE( strcmp( mpType, "Kit::Dm::Mp::Double" ) == 0 );
     }
 
 
@@ -80,29 +80,29 @@ TEST_CASE( "Double" )
         uint16_t seqNum = mp_apple_.write( MAGIC_VALUE );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
-        REQUIRE( Cpl::Math::areDoublesEqual( value, MAGIC_VALUE ) );
+        REQUIRE( Kit::Math::areDoublesEqual( value, MAGIC_VALUE ) );
         uint16_t seqNum2 = mp_apple_.increment( MAGIC_INC );
         mp_apple_.read( value );
-        REQUIRE( Cpl::Math::areDoublesEqual( value, MAGIC_VALUE + MAGIC_INC ) );
+        REQUIRE( Kit::Math::areDoublesEqual( value, MAGIC_VALUE + MAGIC_INC ) );
         REQUIRE( seqNum + 1 == seqNum2 );
 
         valid = mp_orange_.read( value );
         REQUIRE( valid );
-        REQUIRE( Cpl::Math::areDoublesEqual( value, MAGIC_VALUE ) );
+        REQUIRE( Kit::Math::areDoublesEqual( value, MAGIC_VALUE ) );
     }
 
     SECTION( "toJSON-pretty" )
     {
-        mp_apple_.write( 127 );
+        mp_apple_.write( 127.01 );
         mp_apple_.toJSON( string, MAX_STR_LENG, truncated, true, true );
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("toJSON: [%s]", string) );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
         StaticJsonDocument<1024> doc;
         DeserializationError err = deserializeJson( doc, string );
         REQUIRE( err == DeserializationError::Ok );
         REQUIRE( doc["locked"] == false );
         REQUIRE( doc["valid"] == true );
-        REQUIRE( doc["val"] == 127 );
+        REQUIRE( Kit::Math::areDoublesEqual( doc["val"], 127.01 ) );
     }
 
     SECTION( "fromJSON" )
@@ -110,13 +110,13 @@ TEST_CASE( "Double" )
         // Start with MP in the invalid state
         mp_apple_.setInvalid();
 
-        const char* json = "{name:\"APPLE\", val:1234}";
+        const char* json = "{name:\"APPLE\", val:1234.1}";
         bool result = modelDb_.fromJSON( json );
         REQUIRE( result == true );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
-        REQUIRE( value == 1234 );
+        REQUIRE( Kit::Math::areDoublesEqual( value, 1234.1 ) );
     }
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

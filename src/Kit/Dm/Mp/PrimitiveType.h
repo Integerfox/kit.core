@@ -49,10 +49,10 @@ namespace Dm {
 namespace Mp {
 
 /** This template class provides a mostly concrete implementation for a Model
-    Point who's data is a C numeric primitive type of type: 'ELEMTYPE'.
+    Point who's data is a C primitive type of type: 'ELEMTYPE'.
  */
 template <class ELEMTYPE, class MPTYPE>
-class Numeric : public Kit::Dm::ModelPointBase
+class PrimitiveType : public Kit::Dm::ModelPointBase
 {
 protected:
     /// The element's value
@@ -60,13 +60,13 @@ protected:
 
 protected:
     /// Constructor: Invalid MP
-    Numeric( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+    PrimitiveType( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
         : Kit::Dm::ModelPointBase( myModelBase, symbolicName, &m_data, sizeof( m_data ), false )
     {
     }
 
     /// Constructor: Valid MP (requires initial value)
-    Numeric( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, ELEMTYPE initialValue )
+    PrimitiveType( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, ELEMTYPE initialValue )
         : Kit::Dm::ModelPointBase( myModelBase, symbolicName, &m_data, sizeof( m_data ), true )
     {
         m_data = initialValue;
@@ -85,24 +85,6 @@ public:
                            Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         return Kit::Dm::ModelPointBase::writeData( &newValue, sizeof( ELEMTYPE ), forceChgNotification, lockRequest );
-    }
-
-    /// Atomic increment
-    inline uint16_t increment( ELEMTYPE                            incSize              = 1,
-                               bool                                forceChgNotification = false,
-                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
-    {
-        Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return write( m_data + incSize, forceChgNotification, lockRequest );
-    }
-
-    /// Atomic decrement
-    inline uint16_t decrement( ELEMTYPE                            decSize              = 1,
-                               bool                                forceChgNotification = false,
-                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
-    {
-        Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return write( m_data - decSize, forceChgNotification, lockRequest );
     }
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
@@ -139,24 +121,88 @@ public:
     {
         return ModelPointBase::readAndSync( &dstData, sizeof( ELEMTYPE ), seqNum, observerToSync );
     }
+
+protected:
+    /// See Kit::Dm::Point.
+    bool setJSONVal( JsonDocument& doc ) noexcept override
+    {
+        doc["val"] = m_data;
+        return true;
+    }    
+
+public:
+    /// See Kit::Dm::Point.
+    bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override
+    {
+        if ( src.is<ELEMTYPE>() )
+        {
+            retSequenceNumber = write( src.as<ELEMTYPE>(), lockRequest );
+            return true;
+        }
+        if ( errorMsg )
+        {
+            *errorMsg = "Invalid syntax for the 'val' key/value pair";
+        }
+        return false;
+    }
+
+};
+
+/** This template class extends the PrimitiveType class to provide numeric
+    operations.
+ */
+template <class ELEMTYPE, class MPTYPE>
+class NumericBase : public PrimitiveType<ELEMTYPE, MPTYPE>
+{
+protected:
+    /// Constructor: Invalid MP
+    NumericBase( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : PrimitiveType<ELEMTYPE, MPTYPE>( myModelBase, symbolicName )
+    {
+    }
+
+    /// Constructor: Valid MP (requires initial value)
+    NumericBase( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, ELEMTYPE initialValue )
+        : PrimitiveType<ELEMTYPE, MPTYPE>( myModelBase, symbolicName, initialValue )
+    {
+    }
+
+public:
+    /// Atomic increment
+    inline uint16_t increment( ELEMTYPE                            incSize              = 1,
+                               bool                                forceChgNotification = false,
+                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    {
+        Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
+        return this->write( this->m_data + incSize, forceChgNotification, lockRequest );
+    }
+
+    /// Atomic decrement
+    inline uint16_t decrement( ELEMTYPE                            decSize              = 1,
+                               bool                                forceChgNotification = false,
+                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    {
+        Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
+        return this->write( this->m_data - decSize, forceChgNotification, lockRequest );
+    }
 };
 
 /** This template class provides a mostly concrete implementation for a Model
     Point who's data is a C integer primitive type of type: 'ELEMTYPE'.
  */
 template <class ELEMTYPE, class MPTYPE>
-class Integer : public Numeric<ELEMTYPE, MPTYPE>
+class Integer : public NumericBase<ELEMTYPE, MPTYPE>
 {
 protected:
     /// Constructor: Invalid MP
     Integer( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
-        : Numeric<ELEMTYPE, MPTYPE>( myModelBase, symbolicName )
+        : NumericBase<ELEMTYPE, MPTYPE>( myModelBase, symbolicName )
     {
     }
 
     /// Constructor: Valid MP (requires initial value)
     Integer( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, ELEMTYPE initialValue )
-        : Numeric<ELEMTYPE, MPTYPE>( myModelBase, symbolicName, initialValue )
+        : NumericBase<ELEMTYPE, MPTYPE>( myModelBase, symbolicName, initialValue )
     {
     }
 
@@ -175,7 +221,7 @@ public:
                                        Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        dstData          = Numeric<ELEMTYPE, MPTYPE>::m_data;
+        dstData          = this->m_data;
         ELEMTYPE newData = dstData & ~maskToClear;
         return Kit::Dm::ModelPointBase::writeData( &newData, sizeof( ELEMTYPE ), forceChgNotification, lockRequest );
     }
@@ -194,7 +240,7 @@ public:
                                Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( Numeric<ELEMTYPE, MPTYPE>::m_data | maskToOR, forceChgNotification, lockRequest );
+        return this->write( this->m_data | maskToOR, forceChgNotification, lockRequest );
     }
 
     /// Atomic bitwise XOR operation
@@ -203,7 +249,7 @@ public:
                                 Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( Numeric<ELEMTYPE, MPTYPE>::m_data ^ maskToXOR, forceChgNotification, lockRequest );
+        return this->write( this->m_data ^ maskToXOR, forceChgNotification, lockRequest );
     }
 
     /// Atomic bitwise AND operation
@@ -212,7 +258,7 @@ public:
                                 Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( Numeric<ELEMTYPE, MPTYPE>::m_data & maskToAND, forceChgNotification, lockRequest );
+        return this->write( this->m_data & maskToAND, forceChgNotification, lockRequest );
     }
 
     /// Atomic bitwise AND operation
@@ -222,7 +268,7 @@ public:
                                         Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( ( Numeric<ELEMTYPE, MPTYPE>::m_data & ~maskToClear ) | maskToSet, forceChgNotification, lockRequest );
+        return this->write( ( this->m_data & ~maskToClear ) | maskToSet, forceChgNotification, lockRequest );
     }
 
 public:
@@ -232,7 +278,7 @@ public:
                             Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( Numeric<ELEMTYPE, MPTYPE>::m_data | ( 1 << bitPosition ), forceChgNotification, lockRequest );
+        return this->write( this->m_data | ( 1 << bitPosition ), forceChgNotification, lockRequest );
     }
 
     /// Atomic operation to set the zero indexed bit to a 0.
@@ -241,7 +287,7 @@ public:
                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( Numeric<ELEMTYPE, MPTYPE>::m_data & ~( 1 << bitPosition ), forceChgNotification, lockRequest );
+        return this->write( this->m_data & ~( 1 << bitPosition ), forceChgNotification, lockRequest );
     }
 
     /// Atomic operation to toggle the zero indexed bit.
@@ -250,7 +296,7 @@ public:
                              Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( Numeric<ELEMTYPE, MPTYPE>::m_data ^ ( 1 << bitPosition ), forceChgNotification, lockRequest );
+        return this->write( this->m_data ^ ( 1 << bitPosition ), forceChgNotification, lockRequest );
     }
 };
 
@@ -273,7 +319,7 @@ protected:
     }
 
 protected:
-    /** See Kit::Dm::Point.
+    /** Override the Parent's implementation. See Kit::Dm::Point.
         \code
             Output: val{ "dec": <decimal value>, "hex": <hexadecimal value> }
         \endcode
@@ -282,16 +328,16 @@ protected:
     {
         Kit::Text::FString<sizeof( OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE ) * 2 + 2> hexString;
         //
-        OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE val    = (typename std::make_unsigned<ELEMTYPE>::type)Integer<ELEMTYPE, MPTYPE>::m_data;
+        OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE val    = (typename std::make_unsigned<ELEMTYPE>::type)this->m_data;
         JsonObject                           valObj = doc.createNestedObject( "val" );
         hexString.format( "0x%" OPTION_KIT_DM_MP_MAX_INT_HEX_PRINTF_FORMAT, val );
-        valObj["dec"] = Integer<ELEMTYPE, MPTYPE>::m_data;
+        valObj["dec"] = this->m_data;
         valObj["hex"] = (char*)hexString.getString();
         return true;
     }
 
 public:
-    /** See Kit::Dm::Point.
+    /** Override the Parent's implementation. See Kit::Dm::Point.
         \code
             Input: val: <number> OR val: "<string that can be parsed as a number>"
             For example:
@@ -316,7 +362,7 @@ public:
             OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE val;
             if ( Kit::Text::StringTo::signedInt( val, src.as<const char*>(), 0 ) )
             {
-                retSequenceNumber = this->write( (ELEMTYPE)val, false, lockRequest );
+                retSequenceNumber = this->write( static_cast<ELEMTYPE>(val), false, lockRequest );
                 return true;
             }
         }
@@ -346,7 +392,7 @@ protected:
     }
 
 protected:
-    /** See Kit::Dm::Point.
+    /** Override the Parent's implementation. See Kit::Dm::Point.
         \code
             Output: val{ "dec": <decimal value>, "hex": <hexadecimal value> }
         \endcode
@@ -363,7 +409,7 @@ protected:
     }
 
 public:
-    /** See Kit::Dm::Point.
+    /** Override the Parent's implementation. See Kit::Dm::Point.
         \code
             Input: val: <number> OR val: "<string that can be parsed as a number>"
             For example:
@@ -388,7 +434,7 @@ public:
             OPTION_KIT_DM_MP_MAX_UNSIGNED_INT_TYPE val;
             if ( Kit::Text::StringTo::unsignedInt( val, src.as<const char*>(), 0 ) )
             {
-                retSequenceNumber = this->write( (ELEMTYPE)val, false, lockRequest );
+                retSequenceNumber = this->write( static_cast<ELEMTYPE>(val), false, lockRequest );
                 return true;
             }
         }

@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_Mp_String_h_
-#define Cpl_Dm_Mp_String_h_
+#ifndef KIT_DM_MP_STRING_H_
+#define Kit_Dm_Mp_String_h_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,68 +10,81 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Cpl/Dm/ModelPointCommon_.h"
+#include "Kit/Dm/ModelPointBase.h"
+#include "Kit/Dm/Observer.h"
 
-
- ///
-namespace Cpl {
+///
+namespace Kit {
 ///
 namespace Dm {
 ///
 namespace Mp {
 
 
-/** This mostly concrete class provides the base implementation for a Point 
-    who's data is a null terminated string.  The concrete child class is 
-    responsible for providing the string storage and the attach/detach
-    methods.
+/** This mostly concrete class provides the base implementation for a Point
+    who's data is a null terminated string.  The concrete child class is
+    responsible for providing the string storage
 
-    The toJSON()/fromJSON format is:
-    \code
+    The toJSON() format is:
+        \code
 
-    { name:"<mpname>", type:"<mptypestring>", valid:true|false seqnum:nnnn, locked:true|false, val:{maxLen:<len>,text:"<newvalue>" }
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
+          val:"<stringvalue>"
+        }
 
-    \endcode
+        \endcode
 
+    The "val" format for the fromJSON() format is:
+        \code
 
+        val:"<stringvalue>"
+
+        \endcode
     NOTE: All methods in this class ARE thread Safe unless explicitly
           documented otherwise.
 
     NOTE: The MP's null terminator for the string storage IS imported/exported.
  */
-class StringBase_ : public Cpl::Dm::ModelPointCommon_
+class StringBase : public Kit::Dm::ModelPointBase
 {
 protected:
     /** Constructor. Invalid MP.
      */
-    StringBase_( Cpl::Dm::ModelDatabase& myModelBase,
-                 const char*             symbolicName,
-                 char*                   myDataPtr,
-                 size_t                  dataSizeInBytesIncludingNullTerminator );
+    StringBase( Kit::Dm::IModelDatabase& myModelBase,
+                const char*              symbolicName,
+                char*                    myDataPtr,
+                size_t                   dataSizeInBytesIncludingNullTerminator );
 
     /// Constructor. Valid MP.  Requires an initial value
-    StringBase_( Cpl::Dm::ModelDatabase& myModelBase,
-                 const char*             symbolicName,
-                 char*                   myDataPtr,
-                 size_t                  dataSizeInBytesIncludingNullTerminator,
-                 const char*             initialValue );
+    StringBase( Kit::Dm::IModelDatabase& myModelBase,
+                const char*              symbolicName,
+                char*                    myDataPtr,
+                size_t                   dataSizeInBytesIncludingNullTerminator,
+                const char*              initialValue );
 
 
 public:
-    /// Type safe read. See Cpl::Dm::ModelPoint
-    bool read( Cpl::Text::String& dstData, uint16_t* seqNumPtr=0 ) const noexcept;
+    /// Type safe read. See Kit::Dm::ModelPoint
+    bool read( Kit::Text::IString& dstData, uint16_t* seqNumPtr = 0 ) const noexcept;
 
-    /// Type safe read. See Cpl::Dm::ModelPoint
-    bool read( char* dstData, size_t dataSizeInBytesIncludingNullTerminator, uint16_t* seqNumPtr=0 ) const noexcept;
+    /// Type safe read. See Kit::Dm::ModelPoint
+    bool read( char*     dstData,
+               size_t    dataSizeInBytesIncludingNullTerminator,
+               uint16_t* seqNumPtr = 0 ) const noexcept;
 
-    /// Type safe write of a null terminated string. See Cpl::Dm::ModelPoint
-    inline uint16_t write( const char* srcNullTerminatedString, LockRequest_T lockRequest = eNO_REQUEST ) noexcept
+    /// Type safe write of a null terminated string. See Kit::Dm::ModelPoint
+    inline uint16_t write( const char*   srcNullTerminatedString,
+                           bool          forceChangeNotification = false,
+                           LockRequest_T lockRequest             = eNO_REQUEST ) noexcept
     {
-        return write( srcNullTerminatedString, strlen( srcNullTerminatedString ), lockRequest );
+        return write( srcNullTerminatedString, strlen( srcNullTerminatedString ), forceChangeNotification, lockRequest );
     }
 
-    /// Same as write(), except only writes at most 'srcLen' bytes
-    uint16_t write( const char* srcData, size_t dataSizeInBytesIncludingNullTerminator, LockRequest_T lockRequest = eNO_REQUEST ) noexcept;
+    /// Same as write(), except only writes at most 'srcLen' bytes, 'srcLen' should NOT include the null terminator.
+    uint16_t write( const char*   srcData,
+                    size_t        srcLen,
+                    bool          forceChangeNotification = false,
+                    LockRequest_T lockRequest             = eNO_REQUEST ) noexcept;
 
     /// Returns the maximum size WITHOUT the null terminator of the string storage
     inline size_t getMaxLength() const noexcept
@@ -80,91 +93,102 @@ public:
     }
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
-    uint16_t copyFrom( const StringBase_& src, LockRequest_T lockRequest = eNO_REQUEST ) noexcept;
-
-    ///  See Cpl::Dm::ModelPoint.
-    const char* getTypeAsText() const noexcept
+    inline uint16_t copyFrom( const StringBase& src, LockRequest_T lockRequest = eNO_REQUEST ) noexcept
     {
-        return "Cpl::Dm::Mp::String";
+        return copyDataAndStateFrom( src, lockRequest );
+    }
+
+    ///  See Kit::Dm::ModelPoint.
+    const char* getTypeAsText() const noexcept override
+    {
+        return "Kit::Dm::Mp::String";
     }
 
 public:
-    /// See Cpl::Dm::Point.  
-    bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Cpl::Text::String* errorMsg ) noexcept;
+    /// Type safe register observer
+    inline void attach( Kit::Dm::Observer<StringBase>& observer,
+                        uint16_t                       initialSeqNumber = SEQUENCE_NUMBER_UNKNOWN ) noexcept
+    {
+        attachObserver( observer, initialSeqNumber );
+    }
 
-    /// See Cpl::Dm::Point.  
-    bool isDataEqual_( const void* otherData ) const noexcept;
+    /// Type safe un-register observer
+    inline void detach( Kit::Dm::Observer<StringBase>& observer ) noexcept
+    {
+        detachObserver( observer );
+    }
+
+public:
+    /// See Kit::Dm::ModelPointCommon
+    inline bool readAndSync( Kit::Text::IString& dstData, IObserver& observerToSync )
+    {
+        uint16_t seqNum;
+        return readAndSync( dstData, seqNum, observerToSync );
+    }
+
+    /// See Kit::Dm::ModelPointCommon
+    inline bool readAndSync( Kit::Text::IString& dstData,
+                             uint16_t&           seqNum,
+                             IObserver&          observerToSync )
+    {
+        bool result = read( dstData, &seqNum );
+        attachObserver( observerToSync, seqNum );
+        return result;
+    }
+
+    /// See Kit::Dm::ModelPointCommon
+    inline bool readAndSync( char* dstData, size_t dataSizeInBytesIncludingNullTerminator, IObserver& observerToSync )
+    {
+        uint16_t seqNum;
+        return readAndSync( dstData, dataSizeInBytesIncludingNullTerminator, seqNum, observerToSync );
+    }
+
+    /// See Kit::Dm::ModelPointCommon
+    inline bool readAndSync( char*      dstData,
+                             size_t     dataSizeInBytesIncludingNullTerminator,
+                             uint16_t&  seqNum,
+                             IObserver& observerToSync )
+    {
+        bool result = read( dstData, dataSizeInBytesIncludingNullTerminator, &seqNum );
+        attachObserver( observerToSync, seqNum );
+        return result;
+    }
+
+public:
+    /// See Kit::Dm::Point.
+    bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override;
+
+    /// See Kit::Dm::Point.
+    bool isDataEqual_( const void* otherData ) const noexcept override;
 
 protected:
-    /// See Cpl::Dm::Point.  
-    void setJSONVal( JsonDocument& doc ) noexcept;
+    /// See Kit::Dm::Point.
+    bool setJSONVal( JsonDocument& doc ) noexcept override;
 };
 
 
 /** This concrete template class provides the storage for a Point
-    who's data is a null terminated string.  
+    who's data is a null terminated string.
 
     Template Args:
         S:=      Max Size of the String WITHOUT the null terminator!
  */
-template<int S>
-class String : public StringBase_
+template <int S>
+class String : public StringBase
 {
 public:
     /** Constructor. Invalid Point.
      */
-    String( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName )
-        : StringBase_( myModelBase, symbolicName, m_data, sizeof( m_data ) )
+    String( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : StringBase( myModelBase, symbolicName, m_data, sizeof( m_data ) )
     {
     }
 
     /// Constructor. Valid Point.  Requires an initial value
-    String( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName, const char* initialValue )
-        : StringBase_( myModelBase, symbolicName, m_data, sizeof( m_data ), initialValue )
+    String( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, const char* initialValue )
+        : StringBase( myModelBase, symbolicName, m_data, sizeof( m_data ), initialValue )
     {
     }
-
-public:
-    /// Type safe subscriber
-    typedef Cpl::Dm::Subscriber<String> Observer;
-
-    /// Type safe register observer
-    inline void attach( Observer& observer, uint16_t initialSeqNumber=SEQUENCE_NUMBER_UNKNOWN ) noexcept
-    {
-        attachSubscriber( observer, initialSeqNumber );
-    }
-
-    /// Type safe un-register observer
-    inline void detach( Observer& observer ) noexcept
-    {
-        detachSubscriber( observer );
-    }
-
-    /** This method is used to read the MP contents and synchronize
-        the observer with the current MP contents.  This method should ONLY be
-        used in the notification callback method and the 'observerToSync'
-        argument MUST be the argument provided by the callback method
-
-        Note: The observer will be subscribed for change notifications after
-              this call.
-     */
-    inline bool readAndSync( Cpl::Text::String& dstData, SubscriberApi& observerToSync )
-    {
-        uint16_t seqNum;
-        bool result = read( dstData, &seqNum );
-        attachSubscriber( observerToSync, seqNum );
-        return result;
-    }
-
-    /// Same as readAndSync() above, except using a raw char array
-    inline bool readAndSync( char* dstData, size_t dataSizeInBytesIncludingNullTerminator, SubscriberApi& observerToSync )
-    {
-        uint16_t seqNum;
-        bool result = read( dstData, dataSizeInBytesIncludingNullTerminator, &seqNum );
-        attachSubscriber( observerToSync, seqNum );
-        return result;
-    }
-
 
 protected:
     /// The MP's raw storage
@@ -172,7 +196,7 @@ protected:
 };
 
 
-};      // end namespaces
-};
-};
+}       // end namespaces
+}
+}
 #endif  // end header latch

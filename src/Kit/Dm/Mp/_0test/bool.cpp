@@ -8,17 +8,13 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/EventQueue/Server.h"
 #include "common.h"
-#include "Catch/catch.hpp"
-#include "Cpl/System/_testsupport/Shutdown_TS.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/System/Api.h"
-#include "Cpl/System/Thread.h"
-#include "Cpl/Text/FString.h"
-#include "Cpl/Text/DString.h"
-#include "Cpl/Dm/ModelDatabase.h"
-#include "Cpl/Dm/Mp/Bool.h"
-#include "Cpl/Itc/CloseSync.h"
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/Text/FString.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Bool.h"
 #include <string.h>
 
 #define STRCMP(s1,s2)       (strcmp(s1,s2)==0)
@@ -29,7 +25,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
-using namespace Cpl::Dm;
+using namespace Kit::Dm;
 
 // Allocate/create my Model Database
 static ModelDatabase    modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
@@ -40,7 +36,7 @@ static Mp::Bool       mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 
 
 // Don't let the Runnable object go out of scope before its thread has actually terminated!
-static MailboxServer         t1Mbox_;
+static Kit::EventQueue::Server  t1Mbox_;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -50,9 +46,9 @@ static MailboxServer         t1Mbox_;
 //
 TEST_CASE( "Bool" )
 {
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    Cpl::Text::FString<MAX_STR_LENG> errorMsg = "noerror";
+    Kit::Text::FString<MAX_STR_LENG> errorMsg = "noerror";
     char string[MAX_STR_LENG + 1];
     bool truncated;
     bool valid;
@@ -72,10 +68,9 @@ TEST_CASE( "Bool" )
         REQUIRE( s == sizeof( value ) + sizeof( bool ) );
 
         const char* mpType = mp_apple_.getTypeAsText();
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("typeText: [%s]", mpType) );
-        REQUIRE( strcmp( mpType, "Cpl::Dm::Mp::Bool" ) == 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType) ;
+        REQUIRE( strcmp( mpType, "Kit::Dm::Mp::Bool" ) == 0 );
     }
-
 
     SECTION( "read/writes" )
     {
@@ -110,7 +105,7 @@ TEST_CASE( "Bool" )
     {
         mp_apple_.write( true );
         mp_apple_.toJSON( string, MAX_STR_LENG, truncated, true, true );
-        CPL_SYSTEM_TRACE_MSG( SECT_, ("toJSON: [%s]", string) );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
         StaticJsonDocument<1024> doc;
         DeserializationError err = deserializeJson( doc, string );
@@ -140,22 +135,23 @@ TEST_CASE( "Bool" )
 
     SECTION( "observer" )
     {
-        CPL_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        Viewer<Mp::Bool,bool>     viewer_apple1( t1Mbox_, Cpl::System::Thread::getCurrent(), mp_apple_, true );
-        Cpl::System::Thread* t1 = Cpl::System::Thread::create( t1Mbox_, "T1" );
+        KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
+        bool expectedVal = true;
+        Viewer<Mp::Bool,bool>     viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
+        Kit::System::Thread* t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
         viewer_apple1.open();
         mp_apple_.write( true );
-        Cpl::System::Thread::wait();
+        Kit::System::Thread::wait();
         viewer_apple1.close();
 
         // Shutdown threads
         t1Mbox_.pleaseStop();
         WAIT_FOR_THREAD_TO_STOP( t1 );
-        Cpl::System::Thread::destroy( *t1 );
+        Kit::System::Thread::destroy( *t1 );
     }
 
 
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

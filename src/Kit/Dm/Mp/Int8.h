@@ -11,7 +11,7 @@
 /** @file */
 
 
-#include "Kit/Dm/Mp/NumericBase.h"
+#include "Kit/Dm/Mp/PrimitiveType.h"
 #include <stdint.h>
 
 ///

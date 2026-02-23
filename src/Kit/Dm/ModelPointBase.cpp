@@ -18,7 +18,7 @@
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace Dm {
-    
+
 /// IObserver States
 enum State_T
 {
@@ -243,7 +243,7 @@ size_t ModelPointBase::exportData( void* dstDataStream, size_t maxDstLength, uin
             if ( exportMetadata_( dstDataStream, bytesAdded ) )
             {
                 // Export Data
-                uint8_t* dstPtr   = ( (uint8_t*)dstDataStream ) + bytesAdded;
+                uint8_t* dstPtr   = static_cast<uint8_t*>( dstDataStream ) + bytesAdded;
                 size_t   dataSize = getSize();
                 memcpy( dstPtr, const_cast<ModelPointBase*>( this )->getImportExportDataPointer_(), dataSize );
 
@@ -284,7 +284,7 @@ size_t ModelPointBase::importData( const void* srcDataStream, size_t srcLength, 
             if ( importMetadata_( srcDataStream, bytesConsumed ) )
             {
                 // Import Data
-                const uint8_t* srcPtr   = ( (const uint8_t*)srcDataStream ) + bytesConsumed;
+                const uint8_t* srcPtr   = static_cast<const uint8_t*>( srcDataStream ) + bytesConsumed;
                 size_t         dataSize = getSize();
                 memcpy( getImportExportDataPointer_(), srcPtr, dataSize );
 
@@ -382,7 +382,7 @@ void ModelPointBase::processSubscriptionEvent_( IObserver& observer, Event_T eve
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
 
-    switch ( (State_T)observer.getState_() )
+    switch ( static_cast<State_T>(observer.getState_()) )
     {
     case eSTATE_UNSUBSCRIBED:
         switch ( event )

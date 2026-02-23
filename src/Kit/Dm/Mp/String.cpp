@@ -10,54 +10,52 @@
 
 
 #include "String.h"
-#include "Cpl/System/Assert.h"
-#include "Cpl/System/FatalError.h"
+#include "Kit/Dm/ModelPointBase.h"
+#include "Kit/System/Assert.h"
+#include "Kit/System/FatalError.h"
 #include <string.h>
 
-#define ESTIMATED_JSON_OVERHEAD		128
 
-#define META_DATA_OVERHEAD          (1 + sizeof( String::Data ))    // Include the Metadata and space for the null terminator
-
-///
-using namespace Cpl::Dm::Mp;
+//------------------------------------------------------------------------------
+namespace Kit {
+namespace Dm {
+namespace Mp {
 
 ///////////////////////////////////////////////////////////////////////////////
-StringBase_::StringBase_( Cpl::Dm::ModelDatabase& myModelBase,
-                          const char*             symbolicName,
-                          char*                   myDataPtr,
-                          size_t                  dataSizeInBytesIncludingNullTerminator )
-    : Cpl::Dm::ModelPointCommon_( myModelBase, symbolicName, myDataPtr, dataSizeInBytesIncludingNullTerminator, false )
+StringBase::StringBase( Kit::Dm::IModelDatabase& myModelBase,
+                        const char*              symbolicName,
+                        char*                    myDataPtr,
+                        size_t                   dataSizeInBytesIncludingNullTerminator )
+    : Kit::Dm::ModelPointBase( myModelBase, symbolicName, myDataPtr, dataSizeInBytesIncludingNullTerminator, false )
 {
     // Clear the entire string INCLUDING the null terminator
-    // NOTE: The Null terminator NEVER gets written over
-    memset( (void*) myDataPtr, 0, dataSizeInBytesIncludingNullTerminator );
+    memset( (void*)myDataPtr, 0, dataSizeInBytesIncludingNullTerminator );
 }
 
 /// Constructor. Valid MP.  Requires an initial value
-StringBase_::StringBase_( Cpl::Dm::ModelDatabase& myModelBase,
-                          const char*             symbolicName,
-                          char*                   myDataPtr,
-                          size_t                  dataSizeInBytesIncludingNullTerminator,
-                          const char*             initialValue )
-    : Cpl::Dm::ModelPointCommon_( myModelBase, symbolicName, myDataPtr, dataSizeInBytesIncludingNullTerminator, true )
+StringBase::StringBase( Kit::Dm::IModelDatabase& myModelBase,
+                        const char*              symbolicName,
+                        char*                    myDataPtr,
+                        size_t                   dataSizeInBytesIncludingNullTerminator,
+                        const char*              initialValue )
+    : Kit::Dm::ModelPointBase( myModelBase, symbolicName, myDataPtr, dataSizeInBytesIncludingNullTerminator, true )
 {
     // Set the initial value
-    strncpy( (char*) myDataPtr, initialValue, dataSizeInBytesIncludingNullTerminator );
-    
+    strncpy( myDataPtr, initialValue, dataSizeInBytesIncludingNullTerminator );
+
     // Make sure that the last byte of the raw storage is the NULL TERMINATOR
-    // NOTE: The Null terminator NEVER gets written over
-    ((char*)myDataPtr)[dataSizeInBytesIncludingNullTerminator-1] = '\0';
+    myDataPtr[dataSizeInBytesIncludingNullTerminator - 1] = '\0';
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool StringBase_::read( Cpl::Text::String& dstData, uint16_t* seqNumPtr ) const noexcept
+bool StringBase::read( Kit::Text::IString& dstData, uint16_t* seqNumPtr ) const noexcept
 {
-    int   bufferMaxLength;  
+    int   bufferMaxLength;
     char* dstStringPtr = dstData.getBuffer( bufferMaxLength );
-    return read( dstStringPtr, bufferMaxLength+1, seqNumPtr ); // Note: the 'bufferMaxLength' returned does NOT include space for the null terminator
+    return read( dstStringPtr, bufferMaxLength + 1, seqNumPtr );  // Note: the 'bufferMaxLength' returned does NOT include space for the null terminator
 }
 
-bool StringBase_::read( char* dstData, size_t dataSizeInBytesIncludingNullTerminator, uint16_t* seqNumPtr ) const noexcept
+bool StringBase::read( char* dstData, size_t dataSizeInBytesIncludingNullTerminator, uint16_t* seqNumPtr ) const noexcept
 {
     // Max sure the length does not exceed the MP's 'string' storage
     if ( dataSizeInBytesIncludingNullTerminator > m_dataSize )
@@ -66,12 +64,15 @@ bool StringBase_::read( char* dstData, size_t dataSizeInBytesIncludingNullTermin
     }
 
     // Ensure the returned result is always null terminated
-    bool valid = readData( dstData, dataSizeInBytesIncludingNullTerminator, seqNumPtr );
+    bool valid                                          = readData( dstData, dataSizeInBytesIncludingNullTerminator, seqNumPtr );
     dstData[dataSizeInBytesIncludingNullTerminator - 1] = '\0';
     return valid;
 }
 
-uint16_t StringBase_::write( const char* srcData, size_t srcLenInBytesIncludingNullTerminator, LockRequest_T lockRequest ) noexcept
+uint16_t StringBase::write( const char*   srcData,
+                            size_t        srcLen,
+                            bool          forceChangeNotification,
+                            LockRequest_T lockRequest ) noexcept
 {
     // Trap the null pointer case -->Do NOTHING
     if ( srcData == 0 )
@@ -80,53 +81,41 @@ uint16_t StringBase_::write( const char* srcData, size_t srcLenInBytesIncludingN
     }
 
     // Max sure the length does not exceed the MP's 'string' storage
-    if ( srcLenInBytesIncludingNullTerminator > m_dataSize )
+    if ( srcLen > m_dataSize - 1 )  // Note: the 'srcLen' should NOT include the null terminator
     {
-        srcLenInBytesIncludingNullTerminator = m_dataSize;
+        srcLen = m_dataSize - 1;
     }
-    
-    m_modelDatabase.lock_();
-    uint16_t seqNum = writeData( srcData, srcLenInBytesIncludingNullTerminator, lockRequest );
-    ((char*) (m_dataPtr))[m_dataSize - 1] = '\0'; // Ensure my new value properly null terminated
-    m_modelDatabase.unlock_();
+
+    Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
+    uint16_t                      seqNum    = writeData( srcData, srcLen, lockRequest );
+    char*                         myDataPtr = static_cast<char*>( m_dataPtr );
+    myDataPtr[srcLen]                       = '\0';  // Ensure my new value properly null terminated
     return seqNum;
 }
 
-uint16_t StringBase_::copyFrom( const StringBase_& src, LockRequest_T lockRequest ) noexcept
+bool StringBase::isDataEqual_( const void* otherData ) const noexcept
 {
-    // Handle the src.invalid case
-    if ( src.isNotValid() )
-    {
-        return setInvalid();
-    }
-
-    m_modelDatabase.lock_();
-    uint16_t seqNum = StringBase_::write( (const char*) src.m_dataPtr, src.m_dataSize, lockRequest );
-    m_modelDatabase.unlock_();
-    return seqNum;
+    const char* otherStringPtr = static_cast<const char*>( otherData );
+    size_t      otherLen       = strlen( otherStringPtr );
+    size_t      myLen          = strlen( static_cast<const char*>( m_dataPtr ) );
+    return otherLen == myLen && strncmp( otherStringPtr, static_cast<const char*>( m_dataPtr ), myLen ) == 0;
 }
 
-
-bool StringBase_::isDataEqual_( const void* otherData ) const noexcept
-{
-    const char* otherStringPtr = (const char*) otherData;
-    size_t otherLen = strlen( otherStringPtr );
-    size_t myLen    = strlen( (const char*) m_dataPtr );
-    return otherLen == myLen && strncmp( otherStringPtr, (const char*) m_dataPtr, myLen ) == 0;
-}
-
-void StringBase_::setJSONVal( JsonDocument& doc ) noexcept
+bool StringBase::setJSONVal( JsonDocument& doc ) noexcept
 {
     // Create value object
     JsonObject valObj = doc.createNestedObject( "val" );
 
-    // Construct the 'val' key/value pair 
+    // Construct the 'val' key/value pair
     valObj["maxLen"] = getMaxLength();
-    valObj["text"]   = (char*) m_dataPtr;;
+    valObj["text"]   = (char*)m_dataPtr;
+    return true;
 }
 
-
-bool StringBase_::fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Cpl::Text::String* errorMsg ) noexcept
+bool StringBase::fromJSON_( JsonVariant&        src,
+                            LockRequest_T       lockRequest,
+                            uint16_t&           retSequenceNumber,
+                            Kit::Text::IString* errorMsg ) noexcept
 {
     // Note: Max size is ignored, i.e. do NOT support reallocating sizes via JSON
 
@@ -142,6 +131,11 @@ bool StringBase_::fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16
     }
 
     // Note: if the incoming string is longer than the MP storage, it will be truncated
-    retSequenceNumber = write( newValue, lockRequest );
+    retSequenceNumber = write( newValue, false, lockRequest );
     return true;
 }
+
+} // end namespace
+}
+}
+//------------------------------------------------------------------------------

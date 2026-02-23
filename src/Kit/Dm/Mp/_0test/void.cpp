@@ -91,7 +91,7 @@ TEST_CASE( "Void" )
         REQUIRE( err == DeserializationError::Ok );
         REQUIRE( doc["locked"] == false );
         REQUIRE( doc["valid"] == true );
-        REQUIRE( STRCMP( doc["val"], "7F00" ) );
+        REQUIRE( STRCMP( doc["val"], "0x7F00" ) );
     }
 
     SECTION( "fromJSON" )
@@ -99,7 +99,7 @@ TEST_CASE( "Void" )
         // Start with MP in the invalid state
         mp_apple_.setInvalid();
 
-        const char* json   = "{name:\"APPLE\", val:\"A234\"}";
+        const char* json   = "{name:\"APPLE\", val:\"0xA234\"}";
         bool        result = modelDb_.fromJSON( json );
         REQUIRE( result == true );
         valid = mp_apple_.read( value );

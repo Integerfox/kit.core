@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_Mp_Float_h_
-#define Cpl_Dm_Mp_Float_h_
+#ifndef KIT_DM_MP_FLOAT_H_
+#define KIT_DM_MP_FLOAT_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,11 +11,11 @@
 /** @file */
 
 
-#include "Cpl/Dm/Mp/Numeric.h"
-#include "Cpl/Math/real.h"
+#include "Kit/Dm/Mp/PrimitiveType.h"
+#include "Kit/Math/real.h"
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -25,56 +25,59 @@ namespace Mp {
 /** This class provides a concrete implementation for a Point who's data is a
     float.
 
-    The toJSON()/fromJSON format is:
-    \code
+    The toJSON() format is:
+        \code
 
-    { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, val:<numvalue> }
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, 
+          val:<floatvalue>}
 
-    \endcode
+        \endcode
+
+    The "val" format for the fromJSON() format is:
+        \code
+
+        val:<floatvalue>
+
+        \endcode
 
     NOTE: All methods in this class ARE thread Safe unless explicitly
           documented otherwise.
  */
-class Float : public Numeric<float, Float>
+class Float : public NumericBase<float, Float>
 {
 public:
     /** Constructor. Invalid MP.
      */
-    Float( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName )
-        : Numeric<float, Float>( myModelBase, symbolicName )
+    Float( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : NumericBase<float, Float>( myModelBase, symbolicName )
     {
     }
 
     /// Constructor. Valid MP.  Requires an initial value
-    Float( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName, float initialValue )
-        : Numeric<float, Float>( myModelBase, symbolicName, initialValue )
+    Float( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, float initialValue )
+        : NumericBase<float, Float>( myModelBase, symbolicName, initialValue )
     {
     }
 
 public:
-    /// Type safe subscriber
-    typedef Cpl::Dm::Subscriber<Float> Observer;
-
-
-public:
-    ///  See Cpl::Dm::ModelPoint.
+    ///  See Kit::Dm::ModelPoint.
     const char* getTypeAsText() const noexcept
     {
-        return "Cpl::Dm::Mp::Float";
+        return "Kit::Dm::Mp::Float";
     }
 
 protected:
     /// Override parent implementation for 'correct' floating point comparison
     bool isDataEqual_( const void* otherData ) const noexcept
     {
-        float* other = (float*) otherData;
-        return Cpl::Math::areFloatsEqual( m_data, *other );
+        const float* other = static_cast<const float*>(otherData);
+        return Kit::Math::areFloatsEqual( m_data, *other );
     }
 };
 
 
 
-};      // end namespaces
-};
-};
+}       // end namespaces
+}
+}
 #endif  // end header latch
