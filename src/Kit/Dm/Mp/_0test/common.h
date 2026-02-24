@@ -105,4 +105,70 @@ public:
     }
 };
 
+// Need a different viewer for arrays because the readAndSync() method are different for arrays vs non-arrays
+template <class MPTYPE, class ELEMTYPE, int N>
+class ViewerArray : public Kit::Itc::OpenCloseSync
+{
+    static_assert( N >= 5, "ViewerArray: N must be at least 5" );
+
+public:
+    ///
+    Kit::System::Thread& m_masterThread;
+    ///
+    Kit::Dm::ObserverCallback<MPTYPE> m_observerMp1;
+    ///
+    MPTYPE& m_mp;
+    ///
+    ELEMTYPE m_val[N];
+
+    /// Constructor
+    ViewerArray( Kit::EventQueue::Server& myMbox, Kit::System::Thread& masterThread, MPTYPE& mpToMonitor, ELEMTYPE* array )
+        : Kit::Itc::OpenCloseSync( myMbox )
+        , m_masterThread( masterThread )
+        , m_observerMp1( myMbox )
+        , m_mp( mpToMonitor )
+    {
+        m_observerMp1.template setCallback<ViewerArray<MPTYPE, ELEMTYPE, N>, &ViewerArray<MPTYPE, ELEMTYPE, N>::mp1_changed>( this );
+        memcpy( m_val, array, N );
+    }
+
+public:
+    ///
+    void request( Kit::Itc::IOpenRequest::OpenMsg& msg ) noexcept override
+    {
+        m_mp.attach( m_observerMp1 );
+        msg.returnToSender();
+    }
+
+    ///
+    void request( Kit::Itc::ICloseRequest::CloseMsg& msg ) noexcept override
+    {
+        m_mp.detach( m_observerMp1 );
+        msg.returnToSender();
+    }
+
+
+public:
+    void mp1_changed( MPTYPE& modelPointThatChanged, Kit::Dm::IObserver& clientObserver ) noexcept
+    {
+        if ( modelPointThatChanged.isNotValidAndSync( clientObserver ) == false )
+        {
+            uint8_t val[N] = {
+                0,
+            };
+            REQUIRE( modelPointThatChanged.readAndSync( val, N, clientObserver ) );
+            REQUIRE( memcmp( val, m_val, N ) == 0 );
+            displayElement( "new", val );
+            displayElement( "exp", m_val );
+
+            m_masterThread.signal();
+        }
+    }
+
+    void displayElement( const char* label, ELEMTYPE* array )
+    {
+        KIT_SYSTEM_TRACE_MSG( "_0test", "%s:%X %X %X ... %X %X", label, array[0], array[1], array[2], array[N-2], array[N-1] );
+    }
+};
+
 #endif  // end header latch
