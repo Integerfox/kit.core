@@ -45,18 +45,18 @@ namespace Mp {
 
     NOTE: The MP's null terminator for the string storage IS imported/exported.
  */
-class StringBase : public Kit::Dm::ModelPointBase
+class String : public Kit::Dm::ModelPointBase
 {
 protected:
     /** Constructor. Invalid MP.
      */
-    StringBase( Kit::Dm::IModelDatabase& myModelBase,
+    String( Kit::Dm::IModelDatabase& myModelBase,
                 const char*              symbolicName,
                 char*                    myDataPtr,
                 size_t                   dataSizeInBytesIncludingNullTerminator );
 
     /// Constructor. Valid MP.  Requires an initial value
-    StringBase( Kit::Dm::IModelDatabase& myModelBase,
+    String( Kit::Dm::IModelDatabase& myModelBase,
                 const char*              symbolicName,
                 char*                    myDataPtr,
                 size_t                   dataSizeInBytesIncludingNullTerminator,
@@ -93,7 +93,7 @@ public:
     }
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
-    inline uint16_t copyFrom( const StringBase& src, LockRequest_T lockRequest = eNO_REQUEST ) noexcept
+    inline uint16_t copyFrom( const String& src, LockRequest_T lockRequest = eNO_REQUEST ) noexcept
     {
         return copyDataAndStateFrom( src, lockRequest );
     }
@@ -106,14 +106,14 @@ public:
 
 public:
     /// Type safe register observer
-    inline void attach( Kit::Dm::Observer<StringBase>& observer,
+    inline void attach( Kit::Dm::Observer<String>& observer,
                         uint16_t                       initialSeqNumber = SEQUENCE_NUMBER_UNKNOWN ) noexcept
     {
         attachObserver( observer, initialSeqNumber );
     }
 
     /// Type safe un-register observer
-    inline void detach( Kit::Dm::Observer<StringBase>& observer ) noexcept
+    inline void detach( Kit::Dm::Observer<String>& observer ) noexcept
     {
         detachObserver( observer );
     }
@@ -174,19 +174,19 @@ protected:
         S:=      Max Size of the String WITHOUT the null terminator!
  */
 template <int S>
-class String : public StringBase
+class StringAllocate : public String
 {
 public:
     /** Constructor. Invalid Point.
      */
-    String( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
-        : StringBase( myModelBase, symbolicName, m_data, sizeof( m_data ) )
+    StringAllocate( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : String( myModelBase, symbolicName, m_data, sizeof( m_data ) )
     {
     }
 
     /// Constructor. Valid Point.  Requires an initial value
-    String( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, const char* initialValue )
-        : StringBase( myModelBase, symbolicName, m_data, sizeof( m_data ), initialValue )
+    StringAllocate( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, const char* initialValue )
+        : String( myModelBase, symbolicName, m_data, sizeof( m_data ), initialValue )
     {
     }
 

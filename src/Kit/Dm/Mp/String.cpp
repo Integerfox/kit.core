@@ -11,8 +11,6 @@
 
 #include "String.h"
 #include "Kit/Dm/ModelPointBase.h"
-#include "Kit/System/Assert.h"
-#include "Kit/System/FatalError.h"
 #include <string.h>
 
 
@@ -22,10 +20,10 @@ namespace Dm {
 namespace Mp {
 
 ///////////////////////////////////////////////////////////////////////////////
-StringBase::StringBase( Kit::Dm::IModelDatabase& myModelBase,
-                        const char*              symbolicName,
-                        char*                    myDataPtr,
-                        size_t                   dataSizeInBytesIncludingNullTerminator )
+String::String( Kit::Dm::IModelDatabase& myModelBase,
+                const char*              symbolicName,
+                char*                    myDataPtr,
+                size_t                   dataSizeInBytesIncludingNullTerminator )
     : Kit::Dm::ModelPointBase( myModelBase, symbolicName, myDataPtr, dataSizeInBytesIncludingNullTerminator, false )
 {
     // Clear the entire string INCLUDING the null terminator
@@ -33,11 +31,11 @@ StringBase::StringBase( Kit::Dm::IModelDatabase& myModelBase,
 }
 
 /// Constructor. Valid MP.  Requires an initial value
-StringBase::StringBase( Kit::Dm::IModelDatabase& myModelBase,
-                        const char*              symbolicName,
-                        char*                    myDataPtr,
-                        size_t                   dataSizeInBytesIncludingNullTerminator,
-                        const char*              initialValue )
+String::String( Kit::Dm::IModelDatabase& myModelBase,
+                const char*              symbolicName,
+                char*                    myDataPtr,
+                size_t                   dataSizeInBytesIncludingNullTerminator,
+                const char*              initialValue )
     : Kit::Dm::ModelPointBase( myModelBase, symbolicName, myDataPtr, dataSizeInBytesIncludingNullTerminator, true )
 {
     // Set the initial value
@@ -48,14 +46,14 @@ StringBase::StringBase( Kit::Dm::IModelDatabase& myModelBase,
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-bool StringBase::read( Kit::Text::IString& dstData, uint16_t* seqNumPtr ) const noexcept
+bool String::read( Kit::Text::IString& dstData, uint16_t* seqNumPtr ) const noexcept
 {
     int   bufferMaxLength;
     char* dstStringPtr = dstData.getBuffer( bufferMaxLength );
     return read( dstStringPtr, bufferMaxLength + 1, seqNumPtr );  // Note: the 'bufferMaxLength' returned does NOT include space for the null terminator
 }
 
-bool StringBase::read( char* dstData, size_t dataSizeInBytesIncludingNullTerminator, uint16_t* seqNumPtr ) const noexcept
+bool String::read( char* dstData, size_t dataSizeInBytesIncludingNullTerminator, uint16_t* seqNumPtr ) const noexcept
 {
     // Max sure the length does not exceed the MP's 'string' storage
     if ( dataSizeInBytesIncludingNullTerminator > m_dataSize )
@@ -69,10 +67,10 @@ bool StringBase::read( char* dstData, size_t dataSizeInBytesIncludingNullTermina
     return valid;
 }
 
-uint16_t StringBase::write( const char*   srcData,
-                            size_t        srcLen,
-                            bool          forceChangeNotification,
-                            LockRequest_T lockRequest ) noexcept
+uint16_t String::write( const char*   srcData,
+                        size_t        srcLen,
+                        bool          forceChangeNotification,
+                        LockRequest_T lockRequest ) noexcept
 {
     // Trap the null pointer case -->Do NOTHING
     if ( srcData == 0 )
@@ -93,7 +91,7 @@ uint16_t StringBase::write( const char*   srcData,
     return seqNum;
 }
 
-bool StringBase::isDataEqual_( const void* otherData ) const noexcept
+bool String::isDataEqual_( const void* otherData ) const noexcept
 {
     const char* otherStringPtr = static_cast<const char*>( otherData );
     size_t      otherLen       = strlen( otherStringPtr );
@@ -101,7 +99,7 @@ bool StringBase::isDataEqual_( const void* otherData ) const noexcept
     return otherLen == myLen && strncmp( otherStringPtr, static_cast<const char*>( m_dataPtr ), myLen ) == 0;
 }
 
-bool StringBase::setJSONVal( JsonDocument& doc ) noexcept
+bool String::setJSONVal( JsonDocument& doc ) noexcept
 {
     // Create value object
     JsonObject valObj = doc.createNestedObject( "val" );
@@ -112,10 +110,10 @@ bool StringBase::setJSONVal( JsonDocument& doc ) noexcept
     return true;
 }
 
-bool StringBase::fromJSON_( JsonVariant&        src,
-                            LockRequest_T       lockRequest,
-                            uint16_t&           retSequenceNumber,
-                            Kit::Text::IString* errorMsg ) noexcept
+bool String::fromJSON_( JsonVariant&        src,
+                        LockRequest_T       lockRequest,
+                        uint16_t&           retSequenceNumber,
+                        Kit::Text::IString* errorMsg ) noexcept
 {
     // Note: Max size is ignored, i.e. do NOT support reallocating sizes via JSON
 
@@ -135,7 +133,7 @@ bool StringBase::fromJSON_( JsonVariant&        src,
     return true;
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

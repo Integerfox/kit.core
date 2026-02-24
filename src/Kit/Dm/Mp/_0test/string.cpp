@@ -35,15 +35,15 @@ using namespace Kit::Dm::Mp;
 static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
 // Allocate my Model Points
-static String<MY_UUT_DATA_SIZE> mp_apple_( modelDb_, "APPLE" );
-static String<MY_UUT_DATA_SIZE> mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
+static StringAllocate<MY_UUT_DATA_SIZE> mp_apple_( modelDb_, "APPLE" );
+static StringAllocate<MY_UUT_DATA_SIZE> mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 
 // Don't let the Runnable object go out of scope before its thread has actually terminated!
 static Kit::EventQueue::Server t1Mbox_;
 
 
 template <>
-void Viewer<StringBase, Kit::Text::FString<MY_UUT_DATA_SIZE>>::displayElement( const char* label, Kit::Text::FString<MY_UUT_DATA_SIZE>& elem )
+void Viewer<String, Kit::Text::FString<MY_UUT_DATA_SIZE>>::displayElement( const char* label, Kit::Text::FString<MY_UUT_DATA_SIZE>& elem )
 {
     KIT_SYSTEM_TRACE_MSG( SECT_, "%s:%s", label, elem.getString() );
 }
@@ -161,9 +161,9 @@ TEST_CASE( "String" )
     SECTION( "observer" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        Kit::Text::FString<MY_UUT_DATA_SIZE>                            expectedVal = "bob";
-        Viewer<StringBase, Kit::Text::FString<MY_UUT_DATA_SIZE>> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
-        Kit::System::Thread*                                                       t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
+        Kit::Text::FString<MY_UUT_DATA_SIZE>                 expectedVal = "bob";
+        Viewer<String, Kit::Text::FString<MY_UUT_DATA_SIZE>> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
+        Kit::System::Thread*                                 t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
         viewer_apple1.open();

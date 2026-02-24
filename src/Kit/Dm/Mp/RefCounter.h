@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_Mp_RefCounter_h_
-#define Cpl_Dm_Mp_RefCounter_h_
+#ifndef KIT_DM_MP_REFCOUNTER_H_
+#define KIT_DM_MP_REFCOUNTER_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,10 +11,10 @@
 /** @file */
 
 
-#include "Cpl/Dm/ModelPointCommon_.h"
+#include "Kit/Dm/Mp/PrimitiveType.h"
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -33,110 +33,92 @@ namespace Mp {
         3) Transition to zero
         4) Transition from zero to value greater than zero
 
-    The toJSON/fromJSON() format is:
-    \code
+    The toJSON() format is:
+        \code
 
-    { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, val:"<act><numvalue>" }
-    { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, val:numvalue> }
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
+          val:<numvalue>
+        }
 
-        where <act> can be:
-            "+"				-->increment the counter
-            "-"				-->decrement the counter
+        \endcode
 
-        NOTE: The value for the "val" key/value pair is a STRING, NOT a numeric
+    The "val" format for the fromJSON() format is:
+        \code
+
+        val:"[<act>]<numvalue>
+            where <act> can be:
+            "+"             -->increment the counter
+            "-"             -->decrement the counter
+            (no prefix)     -->reset the counter to the specified value
 
         Examples:
-            toJSON():
-                { name:"mp_visitors", type:"Cpl::Dm::Mp::RefCounter", valid:true, seqnum:12, locked:false, val:12 }
+                { name:"mp_visitors", val:"+2" }    // Increments the point by 2
+                { name:"mp_visitors", val:"-1" }    // Decrements the point by 1
+                { name:"mp_visitors", val:0 }       // Resets the counter to zero
 
-            fromJSON():
-                { name:"mp_visitors", val:"+2" }	// Increments the point by 2
-                { name:"mp_visitors", val:"-1" }	// Decrements the point by 1
-                { name:"mp_visitors", val:0 }		// Resets the counter to zero
-
-    \endcode
-
+        \endcode
 
     NOTE: All methods in this class ARE thread Safe unless explicitly
           documented otherwise.
  */
-class RefCounter : public ModelPointCommon_
+class RefCounter : public PrimitiveType<uint32_t, RefCounter>
 {
 public:
-    /// Constructor. Invalid MP. 
-    RefCounter( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName );
+    /// Constructor. Invalid MP.
+    RefCounter( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : PrimitiveType<uint32_t, RefCounter>( myModelBase, symbolicName )
+    {
+    }
 
     /// Constructor. Valid MP.  Requires an initial value
-    RefCounter( Cpl::Dm::ModelDatabase& myModelBase, const char* symbolicName, uint32_t initialValue );
+    RefCounter( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, uint32_t initialValue )
+        : PrimitiveType<uint32_t, RefCounter>( myModelBase, symbolicName, initialValue )
+    {
+    }
 
 
 public:
     /// Increments the counter.  Note: The counter is protected from overflowing
-    virtual uint16_t increment( uint32_t incrementAmount=1, LockRequest_T lockRequest = eNO_REQUEST ) noexcept;
+    uint16_t increment( uint32_t      incrementAmount         = 1,
+                        bool          forceChangeNotification = false,
+                        LockRequest_T lockRequest             = eNO_REQUEST ) noexcept;
 
-    /// Decrements the counter. Note: The counter is protected from underflowing
-    virtual uint16_t decrement( uint32_t decrementAmount=1, LockRequest_T lockRequest = eNO_REQUEST ) noexcept;
+    /// Decrements the counter. Note: the counter is protected from underflowing
+    uint16_t decrement( uint32_t      decrementAmount         = 1,
+                        bool          forceChangeNotification = false,
+                        LockRequest_T lockRequest             = eNO_REQUEST ) noexcept;
 
-    /// Type safe read. See Cpl::Dm::ModelPoint
-    inline bool read( uint32_t& dstData, uint16_t* seqNumPtr=0 ) const noexcept
+
+    /// Resets the counter to zero (or to a specific value). Alias for write()
+    uint16_t reset( uint32_t      newValue                = 0,
+                    bool          forceChangeNotification = false,
+                    LockRequest_T lockRequest             = eNO_REQUEST ) noexcept;
+
+    ///  See Kit::Dm::ModelPoint.
+    const char* getTypeAsText() const noexcept override
     {
-        return readData( &dstData, sizeof( m_data ), seqNumPtr );
+        return "Kit::Dm::Mp::RefCounter";
     }
 
-    /// Resets the counter to zero (or to a specific value)
-    virtual uint16_t reset( uint32_t newValue=0, LockRequest_T lockRequest = eNO_REQUEST ) noexcept;
-
-    /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
-    inline uint16_t copyFrom( const RefCounter& src, LockRequest_T lockRequest = eNO_REQUEST ) noexcept
-    {
-        return copyDataAndStateFrom( src, lockRequest );
-    }
-
-    ///  See Cpl::Dm::ModelPoint.
-    const char* getTypeAsText() const noexcept;
 
 public:
-    /// Type safe subscriber
-    typedef Cpl::Dm::Subscriber<RefCounter> Observer;
+    /// See Kit::Dm::Point.
+    bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override;
 
-    /// Type safe register observer
-    void attach( Observer& observer, uint16_t initialSeqNumber=SEQUENCE_NUMBER_UNKNOWN ) noexcept;
-
-    /// Type safe un-register observer
-    void detach( Observer& observer ) noexcept;
-
-    /// See Cpl::Dm::Point.  
-    bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Cpl::Text::String* errorMsg ) noexcept;
-
-    /// See Cpl::Dm::ModelPointCommon
-    inline bool readAndSync( uint32_t& dstData, SubscriberApi& observerToSync )
-    {
-        uint16_t seqNum;
-        return ModelPointCommon_::readAndSync( &dstData, sizeof( m_data ), seqNum, observerToSync );
-    }
-
-    /// See Cpl::Dm::ModelPointCommon
-    inline bool readAndSync( uint32_t& dstData, uint16_t& seqNum, SubscriberApi& observerToSync )
-    {
-        return ModelPointCommon_::readAndSync( &dstData, sizeof( m_data ), seqNum, observerToSync );
-    }
-
-    protected:
-    /// See Cpl::Dm::Point.  
-    void setJSONVal( JsonDocument& doc ) noexcept;
+protected:
+    /// See Kit::Dm::Point.
+    bool setJSONVal( JsonDocument& doc ) noexcept override;
 
     /// Helper method for only generating change notification on certain transitions
     void updateAndCheckForChangeNotification( uint32_t newValue );
 
-
-protected:
-    /// My data
-    uint32_t m_data;
+private:
+    /// write() is not accessible - use reset(), increment(), or decrement() instead
+    using PrimitiveType<uint32_t, RefCounter>::write;
 };
 
 
-
-};      // end namespaces
-};
-};
+}  // end namespaces
+}
+}
 #endif  // end header latch
