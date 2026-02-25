@@ -12,7 +12,6 @@
 
 
 #include "Kit/Dm/Mp/PrimitiveType.h"
-#include <stdint.h>
 
 ///
 namespace Kit {

@@ -114,7 +114,7 @@ public:
                              size_t     srcIndex = 0 )
     {
         bool result = ArrayBase::readArrayElements( dstArrray, dstNumElements, srcIndex, &seqNum );
-        attach( observerToSync, seqNum );
+        attachObserver( observerToSync, seqNum );
         return result;
     }
 
@@ -136,6 +136,7 @@ public:
     /// See Kit::Dm::Point.
     bool fromJSON_( JsonVariant& src, Kit::Dm::IModelPoint::LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override
     {
+        
         // Check for object
         if ( src.is<JsonObject>() == false )
         {

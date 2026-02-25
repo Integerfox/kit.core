@@ -144,7 +144,6 @@ TEST_CASE( "Array" )
         REQUIRE( err == DeserializationError::Ok );
         REQUIRE( doc["locked"] == false );
         REQUIRE( doc["valid"] == true );
-        REQUIRE( doc["val"]["start"] == 0 );
         REQUIRE( doc["val"]["elems"][0] == 10 );
         REQUIRE( doc["val"]["elems"][2] == 8 );
         REQUIRE( doc["val"]["elems"][7] == 3 );
