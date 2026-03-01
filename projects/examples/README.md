@@ -1,4 +1,6 @@
-# Projects.Examples
+# Projects.Examples {#projects_examples}
 
-The contained directories are 'build directories' for the KIT library's
+\brief Root directory for the example applications.
+
+The contained directories are Example Applications for the KIT library's
 how-to examples.

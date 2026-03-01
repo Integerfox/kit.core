@@ -20,6 +20,20 @@ namespace Transaction {
 
 /** This concreate class implements a type safe MP for the data structure: Foo_T
 
+    The toJSON() format is:
+        ```
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
+          val: {
+            "upper":nnnn, "lower":nnnn, "result":nnnn, "isValid":true|false
+          }
+        }
+        ```
+
+    The "val" format for the fromJSON() format is:
+        ```
+        val: {"upper":nnnn, "lower":nnnn, "result":nnnn, "isValid":true|false }
+        ```
+
     NOTES:
     - The parent class (Kit::Dm::Mp::Scalar) provides the implementation
       for all of the standard MP operations (e.g. read, write, attachObserver,
@@ -34,25 +48,6 @@ namespace Transaction {
     - The toJSON() method supports only updating the specified/included KVPs,
       e.g. "val":{"upper":12}" - is a read/modify operation that only updates
       the 'upperLimit' field of the MP's data structure.
-
-    The toJSON() format is:
-        \code
-
-        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
-          val: {
-            "upper":nnnn, "lower":nnnn, "result":nnnn, "isValid":true|false
-          }
-        }
-
-        \endcode
-
-    The "val" format for the fromJSON() format is:
-        \code
-
-        val: {"upper":nnnn, "lower":nnnn, "result":nnnn, "isValid":true|false }
-
-        \endcode
-
 
 */
 class MpFoo : public Kit::Dm::Mp::Scalar<Foo_T, MpFoo>

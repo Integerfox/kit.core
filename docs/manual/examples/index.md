@@ -21,7 +21,11 @@ This section provides practical code examples demonstrating how to use various K
 
 ### Change Notifications
 
+- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+
 ### Create new Model Point type
+
+- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
 ### Persistent Storage
 

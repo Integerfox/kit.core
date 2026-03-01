@@ -1,4 +1,6 @@
-# Projects.Examples.Dm.Transaction
+# Projects.Examples.Dm.Transaction {#projects_examples_dm_transaction}
+
+\brief Using Data Model Change notification for Inter-Thread-Communication (ITC).
 
 The directory contains a example application that illustrate how to use a model
 point for an **asynchronous** 'request-with-response' transaction.  A transaction
@@ -39,6 +41,11 @@ on the specific use case/requirements.
     done with a `Bool` MP where transition to `true` triggers the server/action,
     and the server returns "success" by setting the MP to invalid and returns
     to "fail" by setting the MP to `false`
+
+## Source Code
+
+- Root source directory: [projects/examples/Dm/Transaction](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction)
+- Build directory: [projects/examples/Dm/Transaction/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction/_0build)
 
 ## Class Diagram
 
