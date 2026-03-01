@@ -63,13 +63,13 @@ protected:
 
 protected:
     /// Helper method that waits for events
-    bool serverWaitAndProcessEvents() noexcept
+    virtual bool serverWaitAndProcessEvents() noexcept
     {
         return waitAndProcessEvents( isPendingMessage() || m_changeHandler.isPendingPendingChangingNotifications() );
     }
 
     /// Helper method that processes events
-    void serverProcessEvents() noexcept
+    virtual void serverProcessEvents() noexcept
     {
         m_changeHandler.processChangeNotifications();
         processMessages();
@@ -103,13 +103,13 @@ protected:
 
 protected:
     /// Helper method that waits for events
-    bool serverWaitAndProcessEvents() noexcept
+    virtual bool serverWaitAndProcessEvents() noexcept
     {
         return waitAndProcessEvents( isPendingMessage() );
     }
 
     /// Helper method that processes events
-    void serverProcessEvents() noexcept
+    virtual void serverProcessEvents() noexcept
     {
         processMessages();
     }

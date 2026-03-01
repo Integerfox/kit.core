@@ -1,5 +1,5 @@
-#ifndef TRANSACTION_FOOT_H_
-#define TRANSACTION_FOOT_H_
+#ifndef DM_TRANSACTION_FOOT_H_
+#define DM_TRANSACTION_FOOT_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

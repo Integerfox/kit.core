@@ -1,0 +1,101 @@
+@startuml ClassDiagram
+
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+hide members
+left to right direction
+
+' ============================================================================
+' example.cpp - leftmost element
+' ============================================================================
+
+class "example.cpp" as exampleApp <<application>>
+
+' ============================================================================
+' Application Classes  (middle column)
+' ============================================================================
+
+package "Dm::Transaction" {
+    class Foo_T <<struct>>
+    class MpFoo
+    class Client
+    class Server
+}
+
+package "mp" {
+    object "trigger : MpFoo" as mpTrigger
+    object "g_modelDatabase : ModelDatabase" as mpDB
+}
+
+' ============================================================================
+' Kit Classes  (right column, stacked vertically)
+' ============================================================================
+
+package "Kit::EventQueue" {
+    class "Server" as EqServer
+}
+
+package "Kit::Itc" {
+    class OpenCloseSync
+}
+
+package "Kit::System" {
+    class Semaphore
+    class Thread
+    class Shutdown
+    class Timer
+}
+
+package "Kit::Dm" {
+    class "Mp::Scalar<Foo_T, MpFoo>" as ScalarBase
+    class "ObserverCallback<MpFoo>" as ObsCallback
+}
+
+' ============================================================================
+' Layout hints
+' ============================================================================
+
+' Pin exampleApp to the left of the Dm::Transaction classes
+exampleApp  -[hidden]right- Client
+
+' Stack Dm::Transaction above mp (vertically)
+Server      -[hidden]down-  mpTrigger
+
+' Stack Kit packages vertically (right column)
+EqServer    -[hidden]down-  OpenCloseSync
+OpenCloseSync -[hidden]down- Semaphore
+Semaphore   -[hidden]down-  ScalarBase
+
+' ============================================================================
+' Inheritance
+' ============================================================================
+
+Client  --|>  OpenCloseSync
+Client  --|>  Timer
+Server  --|>  OpenCloseSync
+MpFoo   --|>  ScalarBase
+
+' ============================================================================
+' Composition / Aggregation
+' ============================================================================
+
+Client  o--  MpFoo       : m_mpFoo
+Client  *--  ObsCallback : m_obFoo
+Server  o--  MpFoo       : m_mpFoo
+Server  *--  ObsCallback : m_obFoo
+MpFoo   ..>  Foo_T       : data type
+mpTrigger --> mpDB       : registered in
+
+' ============================================================================
+' example.cpp usage relationships
+' ============================================================================
+
+exampleApp ..> EqServer  : mbox_
+exampleApp ..> Semaphore : waitForShutdown_
+exampleApp ..> Thread    : t1
+exampleApp ..> Server    : myServer_
+exampleApp ..> Client    : myClient_
+exampleApp ..> Shutdown  : success() / failure()
+exampleApp ..> mpTrigger : mp::trigger
+
+@enduml

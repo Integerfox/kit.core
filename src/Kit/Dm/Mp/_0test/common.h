@@ -47,7 +47,7 @@ public:
     bool m_firstTime;
 
     /// Constructor
-    Viewer( Kit::EventQueue::Server& myMbox, Kit::System::Thread& masterThread, MPTYPE& mpToMonitor, ELEMTYPE& elemValue )
+    Viewer( Kit::EventQueue::IQueue& myMbox, Kit::System::Thread& masterThread, MPTYPE& mpToMonitor, ELEMTYPE& elemValue )
         : Kit::Itc::OpenCloseSync( myMbox )
         , m_masterThread( masterThread )
         , m_observerMp1( myMbox )

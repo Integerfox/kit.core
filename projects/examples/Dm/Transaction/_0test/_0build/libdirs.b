@@ -1,5 +1,4 @@
-projects/examples/Dm/Transaction/Mp
-projects/examples/Dm/Transaction/Mp/_0test
+projects/examples/Dm/Transaction/_0test
 
 src/Kit/Dm/
 src/Kit/EventQueue

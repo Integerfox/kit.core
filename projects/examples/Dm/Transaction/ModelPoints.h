@@ -1,5 +1,5 @@
-#ifndef KIT_IO_IEOS_H_
-#define KIT_IO_IEOS_H_
+#ifndef MP_TRANSACTION_MODEL_POINTS_H_
+#define MP_TRANSACTION_MODEL_POINTS_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -8,35 +8,55 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file */
+/** @file
 
+    This file defines all of the Model Points for Example application.
 
-///
-namespace Kit {
-///
-namespace Io {
+    All of the model points are placed into the 'mp' namespace.  The model
+    point names map 1-to-1 with the instance names.
 
-/** This abstract class defines a isEos() operation that is intended to be used
-    Input and Output streams.  Since InputOutput streams are supported we end up
-    with 2 isEos() methods when the InputOutput class inherits from Input and
-    Output interfaces.  This causes basically a 'diamond' problem.  By making
-    the isEof() it owns interface and a parent class - we can use the 'virtual
-    mechanism' in C++ to ensure that for InputOutput classes there is one and
-    only one isEos() method.
+    The Application/Client is RESPONSIBLE for ensuring input values are with
+    the defined range for the model point instance.
  */
-class IEos
-{
-public:
-    /** This method returns true if End-of-Stream was encountered on the stream.
-     */
-    virtual bool isEos()  = 0;
+
+ #include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Bool.h"
+ #include "Dm/Transaction/MpFoo.h"
+///
+namespace mp {
+
+/*---------------------------------------------------------------------------*/
+/** This model point is used to trigger a client/server transaction.
+
+    \b Units: struct
+
+    \b Range: invalid             --> "idle"
+              transition to valid -->Notifies the Server (of the request)
+              updated while valid -->Notifies the Client (of the response)
+              
+
+    \b Notes:
+        The application is responsible for ensuring that there is only at most
+        one transaction 'in-flight'at any given time.
+*/
+extern Dm::Transaction::MpFoo trigger;
+
+/** This model point is used to terminate the application
+
+    \b Units: bool
+
+    \b Range: invalid --> "running"
+              true    --> "terminate" the application
+              false   --> ignored/not-used
+              
+    \b Notes:
+*/
+extern Kit::Dm::Mp::Bool shutdownRequest;
 
 
-public:
-    /// Lets the make the destructor virtual
-    virtual ~IEos() noexcept = default;
-};
+/*---------------------------------------------------------------------------*/
+/// The Application's Model Point Database
+extern Kit::Dm::ModelDatabase   g_modelDatabase;
 
 }  // end namespaces
-}
 #endif  // end header latch

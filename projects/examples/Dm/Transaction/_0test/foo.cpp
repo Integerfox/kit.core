@@ -15,11 +15,10 @@
 #include "Kit/EventQueue/Server.h"
 #include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Text/FString.h"
-#include "Dm/Transaction/Mp/Foo.h"
+#include "Dm/Transaction/MpFoo.h"
 #include <string.h>
 
 using namespace Dm::Transaction;
-using namespace Dm::Transaction::Mp;
 
 #define STRCMP( s1, s2 ) ( strcmp( s1, s2 ) == 0 )
 #define MAX_STR_LENG     1024
@@ -34,15 +33,15 @@ static const Foo_T INITIAL_VALUE = { 12, 34, 56, true };
 static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
 // Allocate my Model Points
-static Foo mp_apple_( modelDb_, "APPLE" );
-static Foo mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
+static MpFoo mp_apple_( modelDb_, "APPLE" );
+static MpFoo mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 
 
 // Don't let the Runnable object go out of scope before its thread has actually terminated!
 static Kit::EventQueue::Server t1Mbox_;
 
 template <>
-void Viewer<Foo, Foo_T>::displayElement( const char* label, Foo_T& elem )
+void Viewer<MpFoo, Foo_T>::displayElement( const char* label, Foo_T& elem )
 {
     KIT_SYSTEM_TRACE_MSG( SECT_, "%s:u=%d, l=%d, r=%d, v=%d", label, elem.upperLimit, elem.lowerLimit, elem.randomNumber, elem.isValid );
 }
@@ -52,7 +51,7 @@ void Viewer<Foo, Foo_T>::displayElement( const char* label, Foo_T& elem )
 //
 // Note: The bare minimum I need to test code that is 'new' to concrete MP type
 //
-TEST_CASE( "Foo" )
+TEST_CASE( "MpFoo" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
@@ -77,7 +76,7 @@ TEST_CASE( "Foo" )
 
         const char* mpType = mp_apple_.getTypeAsText();
         KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType );
-        REQUIRE( strcmp( mpType, "Dm::Transaction::Mp::Foo" ) == 0 );
+        REQUIRE( strcmp( mpType, "Dm::Transaction::Mp::MpFoo" ) == 0 );
     }
 
     SECTION( "read/writes" )
@@ -160,7 +159,7 @@ TEST_CASE( "Foo" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
         Foo_T expectedVal = { 212, 234, 256, true };
-        Viewer<Foo, Foo_T> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
+        Viewer<MpFoo, Foo_T> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
         Kit::System::Thread*   t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test

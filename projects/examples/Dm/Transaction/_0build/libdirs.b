@@ -1,5 +1,4 @@
 projects/examples/Dm/Transaction
-projects/examples/Dm/Transaction/Mp
 
 # KIT middleware
 src/Kit/Dm/

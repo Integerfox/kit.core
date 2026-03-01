@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/Dm/IObserver.h"
+#include "Kit/EventQueue/IQueue.h"
 #include "Kit/Itc/IOpenRequest.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/EventQueue/Server.h"
@@ -57,7 +58,7 @@ public:
     bool m_done;
 
     /// Constructor
-    Viewer( Kit::EventQueue::Server& myMbox,
+    Viewer( Kit::EventQueue::IQueue& myMbox,
             Kit::System::Thread&     masterThread,
             Mp::Uint32&              mp1,
             uint32_t                 mpEndValue1 )
@@ -179,7 +180,7 @@ public:
     Kit::System::TimerComposer<Writer> m_timer;
 
     /// Constructor
-    Writer( Kit::EventQueue::Server& myMbox,
+    Writer( Kit::EventQueue::IQueue& myMbox,
             Kit::System::Thread&     masterThread,
             Mp::Uint32&              mp1,
             uint32_t                 intervalMsec,

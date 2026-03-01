@@ -10,6 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/System/ITimingSource.h"
 #include "kit_config.h"
 
 // ============================================================================
@@ -89,9 +90,6 @@ namespace Kit {
 ///
 namespace System {
 
-// Forward declaration - TimerManager is in Kit::System namespace
-class TimerManager;
-
 /** This abstract interface defines the API for watching/monitoring an EventLoop
     for watchdog purposes. The interface provides methods to start/stop monitoring
     and to perform periodic watchdog checks.
@@ -106,7 +104,7 @@ public:
 
         @param timingSource Reference to the Timing source (aka EventLoop) for the thread that is being watched
      */
-    virtual void startWatcher( Kit::System::TimerManager& timingSource ) noexcept = 0;
+    virtual void startWatcher( Kit::System::ITimingSource& timingSource ) noexcept = 0;
 
     /** Stops the watchdog monitoring for this event loop.
         Should be called when the event loop is shutting down.

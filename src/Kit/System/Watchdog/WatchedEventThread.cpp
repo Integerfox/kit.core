@@ -28,7 +28,7 @@ WatchedEventThread::WatchedEventThread( uint32_t wdogTimeoutMs, uint32_t healthC
     KIT_SYSTEM_ASSERT( wdogTimeoutMs > healthCheckIntervalMs );
 }
 
-void WatchedEventThread::startWatcher( Kit::System::TimerManager& timingSource ) noexcept
+void WatchedEventThread::startWatcher( Kit::System::ITimingSource& timingSource ) noexcept
 {
     if ( m_isActive )
     {

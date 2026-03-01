@@ -1,5 +1,3 @@
-#ifndef KIT_IO_IEOS_H_
-#define KIT_IO_IEOS_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,33 +8,16 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-
-///
-namespace Kit {
-///
-namespace Io {
-
-/** This abstract class defines a isEos() operation that is intended to be used
-    Input and Output streams.  Since InputOutput streams are supported we end up
-    with 2 isEos() methods when the InputOutput class inherits from Input and
-    Output interfaces.  This causes basically a 'diamond' problem.  By making
-    the isEof() it owns interface and a parent class - we can use the 'virtual
-    mechanism' in C++ to ensure that for InputOutput classes there is one and
-    only one isEos() method.
- */
-class IEos
-{
-public:
-    /** This method returns true if End-of-Stream was encountered on the stream.
-     */
-    virtual bool isEos()  = 0;
+#include "ModelPoints.h"
 
 
-public:
-    /// Lets the make the destructor virtual
-    virtual ~IEos() noexcept = default;
-};
+// Helper macros to simplify the instantiation of the MP instances
+#define ALLOC_INVALID( t, n )                t mp::n( mp::g_modelDatabase, ( #n ) )
+#define ALLOC_INVALID_ALERT( t, n, en, pri ) t mp::n( mp::g_modelDatabase, ( #n ), en, (uint8_t)pri )
 
-}  // end namespaces
-}
-#endif  // end header latch
+/// Static allocate the MP database
+Kit::Dm::ModelDatabase mp::g_modelDatabase( "ignoreThisParameter_usedToCreateAUniqueConstructor" );
+
+/*----------------------------------------------------------------------------*/
+ALLOC_INVALID( Dm::Transaction::MpFoo, trigger );
+ALLOC_INVALID( Kit::Dm::Mp::Bool, shutdownRequest );

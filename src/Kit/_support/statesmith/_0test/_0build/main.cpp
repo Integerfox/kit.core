@@ -6,7 +6,7 @@ static Foo::Bar::ContextMyFsm myWidget_;
 
 int main( int argc, char* argv[] )
 {
-    // Initialize Colony
+    // Initialize the KIT Library
     Kit::System::initialize();
 
     // Enable trace

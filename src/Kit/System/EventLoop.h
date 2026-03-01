@@ -46,7 +46,7 @@ namespace System {
 
     NOTE: The EventLoop does NOT use/consume the Thread Semaphore.
  */
-class EventLoop : public IRunnable, public IEventManager, public ISignable, public TimerManager
+class EventLoop : virtual public IRunnable, virtual public IEventManager, virtual public ISignable, public TimerManager
 {
 public:
     /** Constructor. The 'timeOutPeriodInMsec' parameter specifies how

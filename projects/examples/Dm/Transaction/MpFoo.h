@@ -17,8 +17,6 @@
 namespace Dm {
 ///
 namespace Transaction {
-///
-namespace Mp {
 
 /** This concreate class implements a type safe MP for the data structure: Foo_T
 
@@ -27,10 +25,10 @@ namespace Mp {
       for all of the standard MP operations (e.g. read, write, attachObserver,
       detachObserver, etc).
 
-    - The Foo class must provide the toJSON() and fromJSON() methods for the
+    - The MpFoo class must provide the toJSON() and fromJSON() methods for the
       Foo_T structure
 
-    - The Foo class provides additional "write" operations to enforce its
+    - The MpFoo class provides additional "write" operations to enforce its
       intended transaction paradigm.
 
     - The toJSON() method supports only updating the specified/included KVPs,
@@ -57,26 +55,37 @@ namespace Mp {
 
 
 */
-class Foo : public Kit::Dm::Mp::Scalar<Foo_T, Foo>
+class MpFoo : public Kit::Dm::Mp::Scalar<Foo_T, MpFoo>
 {
 public:
     /// Constructor. Invalid MP.
-    Foo( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
-        : Kit::Dm::Mp::Scalar<Foo_T, Foo>( myModelBase, symbolicName )
+    MpFoo( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName )
+        : Kit::Dm::Mp::Scalar<Foo_T, MpFoo>( myModelBase, symbolicName )
     {
     }
 
     /// Constructor. Valid MP.  Requires an initial value.  A copy is made of the 'initialValue' argument.
-    Foo( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, const Foo_T& initialValue )
-        : Kit::Dm::Mp::Scalar<Foo_T, Foo>( myModelBase, symbolicName, initialValue )
+    MpFoo( Kit::Dm::IModelDatabase& myModelBase, const char* symbolicName, const Foo_T& initialValue )
+        : Kit::Dm::Mp::Scalar<Foo_T, MpFoo>( myModelBase, symbolicName, initialValue )
     {
+    }
+
+public:
+    /// Convenience method to trigger a Server request
+    inline uint16_t triggerRequest( int32_t                             upperLimit,
+                                    int32_t                             lowerLimit,
+                                    bool                                forceChangeNotification = false,
+                                    Kit::Dm::IModelPoint::LockRequest_T lockRequest             = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    {
+        Foo_T newData = { upperLimit, lowerLimit, 0, false };
+        return write( newData, forceChangeNotification, lockRequest );
     }
 
 public:
     /// See Kit::Dm::ModelPoint.
     const char* getTypeAsText() const noexcept override
     {
-        return "Dm::Transaction::Mp::Foo";
+        return "Dm::Transaction::Mp::MpFoo";
     }
 
 protected:
@@ -124,6 +133,5 @@ public:
 };
 
 }  // end namespaces
-}
 }
 #endif  // end header latch
