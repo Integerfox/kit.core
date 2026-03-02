@@ -10,34 +10,34 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Cpl/Persistent/Record.h"
-#include "Cpl/Persistent/RecordServer.h"
-#include "Cpl/Persistent/Chunk.h"
-#include "Cpl/Persistent/Payload.h"
-#include "Cpl/Dm/ModelPoint.h"
-#include "Cpl/Dm/SubscriberComposer.h"
-#include "Cpl/Dm/Persistent/FlushRequest.h"
-#include "Cpl/Dm/Persistent/EraseRequest.h"
-#include "Cpl/System/Timer.h"
+#include "Kit/Persistent/Record.h"
+#include "Kit/Persistent/RecordServer.h"
+#include "Kit/Persistent/Chunk.h"
+#include "Kit/Persistent/Payload.h"
+#include "Kit/Dm/ModelPoint.h"
+#include "Kit/Dm/SubscriberComposer.h"
+#include "Kit/Dm/Persistent/FlushRequest.h"
+#include "Kit/Dm/Persistent/EraseRequest.h"
+#include "Kit/System/Timer.h"
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
 namespace Persistent {
 
-/** This mostly concrete class implements the Cpl::Persistent::Record interface
+/** This mostly concrete class implements the Kit::Persistent::Record interface
     where a Record instance contains the data from N model points.  A final
     child class is needed to provide the specifics of 'resetting' the Record's
     data.
  */
 class Record :
-    public Cpl::Persistent::Record,
-    public Cpl::Persistent::Payload,
+    public Kit::Persistent::Record,
+    public Kit::Persistent::Payload,
     public FlushRequest,
     public EraseRequest,
-    public Cpl::System::Timer
+    public Kit::System::Timer
 {
 public:
     /** This data structure associates a Data Model subscriber instance with a
@@ -45,8 +45,8 @@ public:
      */
     typedef struct
     {
-        Cpl::Dm::ModelPoint*                                        mpPtr;          //!< Pointer to a Model Point 
-        Cpl::Dm::SubscriberComposer<Record, Cpl::Dm::ModelPoint>*   observerPtr;    //!< Place holder to for dynamically allocated Subscriber Instance.  Note: A ZERO value will not allocate a subscriber
+        Kit::Dm::ModelPoint*                                        mpPtr;          //!< Pointer to a Model Point 
+        Kit::Dm::SubscriberComposer<Record, Kit::Dm::ModelPoint>*   observerPtr;    //!< Place holder to for dynamically allocated Subscriber Instance.  Note: A ZERO value will not allocate a subscriber
     } Item_T;
 
 public:
@@ -69,7 +69,7 @@ public:
         attempting multiple NVRAM writes for each MP change notification.
      */
     Record( Item_T                  itemList[],
-            Cpl::Persistent::Chunk& chunkHandler,
+            Kit::Persistent::Chunk& chunkHandler,
             uint8_t                 schemaMajorIndex,
             uint8_t                 schemaMinorIndex,
             uint32_t                writeDelayMs    = 0,
@@ -80,16 +80,16 @@ public:
 
 
 public:
-    /// See Cpl::Persistent::Record
-    void start( Cpl::Dm::MailboxServer& myMbox ) noexcept;
+    /// See Kit::Persistent::Record
+    void start( Kit::Dm::MailboxServer& myMbox ) noexcept;
 
-    /// See Cpl::Persistent::Record
+    /// See Kit::Persistent::Record
     void stop() noexcept;
 
-    /// See Cpl::Persistent::Payload
+    /// See Kit::Persistent::Payload
     size_t getData( void* dst, size_t maxDstLen ) noexcept;
 
-    /// See Cpl::Persistent::Payload
+    /// See Kit::Persistent::Payload
     bool putData( const void* src, size_t srcLen ) noexcept;
 
 public:
@@ -101,19 +101,19 @@ public:
         Note: Use this method with CAUTION.  The call will BLOCK the calling
         thread for an undetermined amount of time!!
      */
-    bool flush( Cpl::Persistent::RecordServer& myRecordsServer ) noexcept;
+    bool flush( Kit::Persistent::RecordServer& myRecordsServer ) noexcept;
 
     /** Synchronous Invalidate/logically-erase of the Record in persistent storage.
         Note: Use this method with CAUTION.  The call will BLOCK the calling
         thread for an undetermined amount of time!!
      */
-    bool erase( Cpl::Persistent::RecordServer& myRecordsServer ) noexcept;
+    bool erase( Kit::Persistent::RecordServer& myRecordsServer ) noexcept;
 
 public:
-    /// See Cpl::Dm::Persistent::FlushRequest
+    /// See Kit::Dm::Persistent::FlushRequest
     void request( FlushMsg& msg );
 
-    /// See Cpl::Dm::Persistent::EraseRequest
+    /// See Kit::Dm::Persistent::EraseRequest
     void request( EraseMsg& msg );
 
 protected:
@@ -158,7 +158,7 @@ protected:
 
 protected:
     /// Callback method for Model Point change notifications
-    virtual void dataChanged( Cpl::Dm::ModelPoint& point, Cpl::Dm::SubscriberApi& observer ) noexcept;
+    virtual void dataChanged( Kit::Dm::ModelPoint& point, Kit::Dm::SubscriberApi& observer ) noexcept;
 
     /// Helper method that is used to initiate the update to the NVRAM
     virtual void updateNVRAM() noexcept;
@@ -168,7 +168,7 @@ protected:
     Item_T*                     m_items;
 
     /// Chunk handler for the Record
-    Cpl::Persistent::Chunk&    m_chunkHandler;
+    Kit::Persistent::Chunk&    m_chunkHandler;
 
     /// Delay time, in milliseconds, when updated NVRAM (i.e. 'settling time' after an MP update before writing NVRAM)
     uint32_t                    m_delayMs;
@@ -190,10 +190,10 @@ protected:
 };
 
 /// Magic value to indicate that Subscriber instance should be allocated for Model Point item
-#define CPL_DM_PERISTENCE_RECORD_USE_SUBSCRIBER     ((Cpl::Dm::SubscriberComposer<Record,Cpl::Dm::ModelPoint>*) 1 )
+#define CPL_DM_PERISTENCE_RECORD_USE_SUBSCRIBER     ((Kit::Dm::SubscriberComposer<Record,Kit::Dm::ModelPoint>*) 1 )
 
 /// Magic value to indicate that Subscriber instance should NOT be allocated for Model Point item
-#define CPL_DM_PERISTENCE_RECORD_NO_SUBSCRIBER      ((Cpl::Dm::SubscriberComposer<Record,Cpl::Dm::ModelPoint>*) 0 )
+#define CPL_DM_PERISTENCE_RECORD_NO_SUBSCRIBER      ((Kit::Dm::SubscriberComposer<Record,Kit::Dm::ModelPoint>*) 0 )
 
 
 

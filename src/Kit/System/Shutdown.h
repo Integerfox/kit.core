@@ -111,7 +111,7 @@ public:
         returned by the last shutdown handler.
 
         Note: The recommended approach for exiting the application due to an
-              error is to use the Cpl::System::FatalError interface so that
+              error is to use the Kit::System::FatalError interface so that
               the 'why' of the failure has the potential for being captured.
      */
     static int failure( int exitCode = eFAILURE ) noexcept;

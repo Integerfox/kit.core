@@ -97,7 +97,7 @@ public:
 public:
     /** This method is the same as milliseconds(), EXCEPT that is ALWAYS
         guaranteed to return elapsed time in 'real time'.  See the
-        Cpl::System::SimTick for more details about real time vs. simulated
+        Kit::System::SimTick for more details about real time vs. simulated
         time.  It is recommended the application NOT CALL this method because
         then that code can NOT be simulated using the SimTick interface.
      */

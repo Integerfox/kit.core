@@ -9,21 +9,21 @@
 /** @file */
 
 #include "Record.h"
-#include "Cpl/System/Assert.h"
-#include "Cpl/System/Trace.h"
-#include "Cpl/System/ElapsedTime.h"
-#include "Cpl/Itc/SyncReturnHandler.h"
+#include "Kit/System/Assert.h"
+#include "Kit/System/Trace.h"
+#include "Kit/System/ElapsedTime.h"
+#include "Kit/Itc/SyncReturnHandler.h"
 
 
-#define SECT_ "Cpl::Dm::Persistent"
+#define SECT_ "Kit::Dm::Persistent"
 
 
 ///
-using namespace Cpl::Dm::Persistent;
+using namespace Kit::Dm::Persistent;
 
 //////////////////////////////////////////////////////
 Record::Record( Item_T                  itemList[],
-                Cpl::Persistent::Chunk& chunkHandler,
+                Kit::Persistent::Chunk& chunkHandler,
                 uint8_t                 schemaMajorIndex,
                 uint8_t                 schemaMinorIndex,
                 uint32_t                writeDelayMs,
@@ -46,7 +46,7 @@ Record::~Record()
     stop();
 }
 
-void Record::start( Cpl::Dm::MailboxServer& myMbox ) noexcept
+void Record::start( Kit::Dm::MailboxServer& myMbox ) noexcept
 {
     if ( !m_started )
     {
@@ -97,7 +97,7 @@ void Record::start( Cpl::Dm::MailboxServer& myMbox ) noexcept
             if ( m_items[i].observerPtr != CPL_DM_PERISTENCE_RECORD_NO_SUBSCRIBER )
             {
                 // Allocate Subscriber
-                m_items[i].observerPtr = new Cpl::Dm::SubscriberComposer<Record, Cpl::Dm::ModelPoint>( myMbox, *this, &Record::dataChanged );
+                m_items[i].observerPtr = new Kit::Dm::SubscriberComposer<Record, Kit::Dm::ModelPoint>( myMbox, *this, &Record::dataChanged );
                 if ( m_items[i].observerPtr )
                 {
                     // Subscribe with the current sequence number so there will be NO IMMEDIATE call back
@@ -105,7 +105,7 @@ void Record::start( Cpl::Dm::MailboxServer& myMbox ) noexcept
                 }
                 else
                 {
-                    Cpl::System::FatalError::logf( "Cpl::Dm::Persistent::Record::start().  Failed to allocate subscriber (i=%u)", i );
+                    Kit::System::FatalError::logf( "Kit::Dm::Persistent::Record::start().  Failed to allocate subscriber (i=%u)", i );
                 }
             }
         }
@@ -222,7 +222,7 @@ bool Record::putData( const void* src, size_t srcLen ) noexcept
     return true;
 }
 
-void Record::dataChanged( Cpl::Dm::ModelPoint& point, Cpl::Dm::SubscriberApi& observer ) noexcept
+void Record::dataChanged( Kit::Dm::ModelPoint& point, Kit::Dm::SubscriberApi& observer ) noexcept
 {
     CPL_SYSTEM_TRACE_MSG( SECT_, ("Record Changed: mp=%s, timeMarker=%u", point.getName(), m_timerMarker) );
 
@@ -244,23 +244,23 @@ void Record::dataChanged( Cpl::Dm::ModelPoint& point, Cpl::Dm::SubscriberApi& ob
     else
     {
         // If the timer is not running -->then this is the 'first' change notification
-        uint32_t now = Cpl::System::ElapsedTime::milliseconds();
-        if ( Cpl::System::Timer::count() == 0 )
+        uint32_t now = Kit::System::ElapsedTime::milliseconds();
+        if ( Kit::System::Timer::count() == 0 )
         {
             m_timerMarker = now;
         }
 
         // Update NVRAM if the maximum delay time has expired
-        if ( Cpl::System::ElapsedTime::expiredMilliseconds( m_timerMarker, m_maxDelayMs, now ) )
+        if ( Kit::System::ElapsedTime::expiredMilliseconds( m_timerMarker, m_maxDelayMs, now ) )
         {
-            Cpl::System::Timer::stop();
+            Kit::System::Timer::stop();
             updateNVRAM();
         }
 
         // Start my software timer to delay the update to NVRAM
         else
         {
-            Cpl::System::Timer::start( m_delayMs );
+            Kit::System::Timer::start( m_delayMs );
         }
     }
 }
@@ -294,20 +294,20 @@ void Record::request( EraseMsg& msg )
     msg.returnToSender();
 }
 
-bool Record::flush( Cpl::Persistent::RecordServer& myRecordsServer ) noexcept
+bool Record::flush( Kit::Persistent::RecordServer& myRecordsServer ) noexcept
 {
-    Cpl::Dm::Persistent::FlushRequest::Payload      payload;
-    Cpl::Itc::SyncReturnHandler                     srh;
-    Cpl::Dm::Persistent::FlushRequest::FlushMsg     msg( *this, payload, srh );
+    Kit::Dm::Persistent::FlushRequest::Payload      payload;
+    Kit::Itc::SyncReturnHandler                     srh;
+    Kit::Dm::Persistent::FlushRequest::FlushMsg     msg( *this, payload, srh );
     myRecordsServer.postSync( msg );
     return payload.m_success;
 }
 
-bool Record::erase( Cpl::Persistent::RecordServer& myRecordsServer ) noexcept
+bool Record::erase( Kit::Persistent::RecordServer& myRecordsServer ) noexcept
 {
-    Cpl::Dm::Persistent::EraseRequest::Payload    payload;
-    Cpl::Itc::SyncReturnHandler                   srh;
-    Cpl::Dm::Persistent::EraseRequest::EraseMsg   msg( *this, payload, srh );
+    Kit::Dm::Persistent::EraseRequest::Payload    payload;
+    Kit::Itc::SyncReturnHandler                   srh;
+    Kit::Dm::Persistent::EraseRequest::EraseMsg   msg( *this, payload, srh );
     myRecordsServer.postSync( msg );
     return payload.m_success;
 }

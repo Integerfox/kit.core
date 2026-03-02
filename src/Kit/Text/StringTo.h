@@ -53,7 +53,8 @@ public:
         bool      result = a2ll( dstVal, string, 10, validStopChars, endptr );
 
         // Check if the value is within the range of type T
-        if ( result && ( dstVal >= std::numeric_limits<T>::min() && dstVal <= std::numeric_limits<T>::max() ) )
+        // Note: parentheses around min/max prevent expansion of Windows min/max macros
+        if ( result && ( dstVal >= (std::numeric_limits<T>::min)() && dstVal <= (std::numeric_limits<T>::max)() ) )
         {
             convertedValue = static_cast<T>( dstVal );
             return true;
@@ -90,7 +91,8 @@ public:
         bool               result = a2ull( dstVal, string, base, validStopChars, endptr );
 
         // Check if the value is within the range of type T
-        if ( result && dstVal <= std::numeric_limits<T>::max() )
+        // Note: parentheses around max prevent expansion of Windows max macro
+        if ( result && dstVal <= (std::numeric_limits<T>::max)() )
         {
             convertedValue = static_cast<T>( dstVal );
             return true;

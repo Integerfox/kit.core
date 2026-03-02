@@ -11,12 +11,12 @@
 /** @file */
 
 #include "colony_config.h"
-#include "Cpl/TShell/Cmd/Command.h"
-#include "Cpl/Dm/ModelDatabaseApi.h"
+#include "Kit/TShell/Cmd/Command.h"
+#include "Kit/Dm/ModelDatabaseApi.h"
 
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -30,7 +30,7 @@ namespace TShell {
     specifying the actual command name, e.g. 'dm0' is database number 0,
     'dm1' is database number 1, etc.
  */
-class Dm : public Cpl::TShell::Cmd::Command
+class Dm : public Kit::TShell::Cmd::Command
 {
 public:
     /// The command usage string
@@ -53,28 +53,28 @@ public:
 
 protected:
     /// Model Point Database to access
-    Cpl::Dm::ModelDatabaseApi& m_database;
+    Kit::Dm::ModelDatabaseApi& m_database;
 
     /// Dynamic 
 public:
-    /// See Cpl::TShell::Command                                                               `
+    /// See Kit::TShell::Command                                                               `
     const char* getUsage() const noexcept { return usage; }
 
-    /// See Cpl::TShell::Command
+    /// See Kit::TShell::Command
     const char* getHelp() const noexcept { return detailedHelp; }
 
 
 public:
     /// Constructor
-    Dm( Cpl::Container::SList<Cpl::TShell::Command>&  commandList, 
-        Cpl::Dm::ModelDatabaseApi&                  modelDatabase, 
+    Dm( Kit::Container::SList<Kit::TShell::Command>&  commandList, 
+        Kit::Dm::ModelDatabaseApi&                  modelDatabase, 
         const char*                                 cmdNameAndDatabaseNumber="dm",
-        Cpl::TShell::Security::Permission_T         minPermLevel=OPTION_TSHELL_CMD_COMMAND_DEFAULT_PERMISSION_LEVEL ) noexcept;
+        Kit::TShell::Security::Permission_T         minPermLevel=OPTION_TSHELL_CMD_COMMAND_DEFAULT_PERMISSION_LEVEL ) noexcept;
 
 
 public:
-    /// See Cpl::TShell::Command
-    Cpl::TShell::Command::Result_T execute( Cpl::TShell::Context_& context, char* cmdString, Cpl::Io::Output& outfd ) noexcept;
+    /// See Kit::TShell::Command
+    Kit::TShell::Command::Result_T execute( Kit::TShell::Context_& context, char* cmdString, Kit::Io::Output& outfd ) noexcept;
 
 };
 

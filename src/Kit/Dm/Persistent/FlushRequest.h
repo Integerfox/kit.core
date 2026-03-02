@@ -11,12 +11,12 @@
 /** @file */
 
 
-#include "Cpl/Itc/RequestMessage.h"
-#include "Cpl/Itc/ResponseMessage.h"
-#include "Cpl/Itc/SAP.h"
+#include "Kit/Itc/RequestMessage.h"
+#include "Kit/Itc/ResponseMessage.h"
+#include "Kit/Itc/SAP.h"
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -26,7 +26,7 @@ namespace Persistent {
 /** This abstract class define ITC message type and payload for the application
     to request flushing the Record to persistent storage
 
-    See the Cpl/Itc/README.txt file for the semantics for the 'ownership' of the
+    See the Kit/Itc/README.txt file for the semantics for the 'ownership' of the
     payload contents.
 
     NOTE: This interface can/should NOT be used synchronously.  The application
@@ -36,7 +36,7 @@ class FlushRequest
 {
 public:
     /// SAP for this API
-    typedef Cpl::Itc::SAP<FlushRequest> SAP;
+    typedef Kit::Itc::SAP<FlushRequest> SAP;
 
 public:
     /// Payload for Message: GetLatest
@@ -57,7 +57,7 @@ public:
 
 public:
     /// Message Type: GetLatest
-    typedef Cpl::Itc::RequestMessage<FlushRequest, Payload> FlushMsg;
+    typedef Kit::Itc::RequestMessage<FlushRequest, Payload> FlushMsg;
 
     /// Request: Flush message
     virtual void request( FlushMsg& msg ) = 0;
@@ -77,7 +77,7 @@ class FlushResponse
 {
 public:
     /// Response Message Type
-    typedef Cpl::Itc::ResponseMessage<FlushResponse,
+    typedef Kit::Itc::ResponseMessage<FlushResponse,
                                       FlushRequest,
                                       FlushRequest::Payload> FlushMsg;
 

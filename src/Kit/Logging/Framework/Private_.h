@@ -18,7 +18,7 @@
 #include <stdarg.h>
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Logging {
 

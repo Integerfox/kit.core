@@ -9,24 +9,24 @@
 /** @file */
 
 #include "helpers.h"
-#include "Cpl/TShell/Maker.h"
+#include "Kit/TShell/Maker.h"
 
-#include "Cpl/Dm/TShell/Dm.h"
-#include "Cpl/Dm/ModelDatabase.h"
-#include "Cpl/Dm/Mp/Int32.h"
+#include "Kit/Dm/TShell/Dm.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Int32.h"
 
 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-extern Cpl::Container::SList<Cpl::TShell::Command>   cmdlist;
+extern Kit::Container::SList<Kit::TShell::Command>   cmdlist;
 
-static Cpl::TShell::Maker cmdProcessor_( cmdlist );
+static Kit::TShell::Maker cmdProcessor_( cmdlist );
 
-static Cpl::TShell::Cmd::Help    helpCmd_( cmdlist );
-static Cpl::TShell::Cmd::Bye     byeCmd_( cmdlist );
-static Cpl::TShell::Cmd::Trace   traceCmd_( cmdlist );
-static Cpl::TShell::Cmd::TPrint  tprintCmd_( cmdlist );
+static Kit::TShell::Cmd::Help    helpCmd_( cmdlist );
+static Kit::TShell::Cmd::Bye     byeCmd_( cmdlist );
+static Kit::TShell::Cmd::Trace   traceCmd_( cmdlist );
+static Kit::TShell::Cmd::TPrint  tprintCmd_( cmdlist );
 
 
 static Apple   mockApp;
@@ -34,11 +34,11 @@ static Bob     bobCmd( cmdlist, mockApp );
 
 
 // Allocate/create my Model Database
-static Cpl::Dm::ModelDatabase   modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static Kit::Dm::ModelDatabase   modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
-static Cpl::Dm::TShell::Dm		dmCmd_( cmdlist, modelDb_, "dm" );
+static Kit::Dm::TShell::Dm		dmCmd_( cmdlist, modelDb_, "dm" );
 
 // Allocate my Model Points
-static Cpl::Dm::Mp::Int32       mp_apple_( modelDb_, "APPLE"  );
+static Kit::Dm::Mp::Int32       mp_apple_( modelDb_, "APPLE"  );
 
-static Cpl::Dm::Mp::Int32       mp_orange_( modelDb_, "ORANGE", 32 );
+static Kit::Dm::Mp::Int32       mp_orange_( modelDb_, "ORANGE", 32 );

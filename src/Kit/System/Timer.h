@@ -66,13 +66,13 @@ public:
     virtual void setTimingSource( ITimingSource& timingSource ) noexcept;
 
 protected:
-    /// See Cpl::System::ICounter
+    /// See Kit::System::ICounter
     void decrement( uint32_t milliseconds = 1 ) noexcept override;
 
-    /// See Cpl::System::ICounter
+    /// See Kit::System::ICounter
     void increment( uint32_t milliseconds = 1 ) noexcept override;
 
-    /// See Cpl::System::ICounter
+    /// See Kit::System::ICounter
     uint32_t count() const noexcept override;
 
 protected:
@@ -126,7 +126,7 @@ public:
     }
 
 protected:
-    /// See Cpl::System::ICounter
+    /// See Kit::System::ICounter
     void expired() noexcept
     {
         ( m_context.*m_expiredFuncPtr )();

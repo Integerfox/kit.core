@@ -242,7 +242,7 @@ public:
         @param allowSimTicks  With this argument is true the thread will be created to
                               use/support simulated time when 'Simulate ticks' are enabled.
                               A value false will force the thread to always be a 'real time'
-                              thread.  See Cpl::System::SimTicks for more details about
+                              thread.  See Kit::System::SimTicks for more details about
                               simulated time.
      */
     static Thread* create( IRunnable&   runnable,

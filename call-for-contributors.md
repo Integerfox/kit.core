@@ -28,8 +28,8 @@ Note: The list is tenative and is in no particular order
 * OSAL: Additional RTOSes
 * Additional File Systems
 * Integrate lvgl (or other Graphic libraries)
-* Networking: Integrate lwIP for Cpl::Io::Socket interface
-* Networking: TLS support – what does this mean for the Cpl::Io::Socket interfaces?
+* Networking: Integrate lwIP for Kit::Io::Socket interface
+* Networking: TLS support – what does this mean for the Kit::Io::Socket interfaces?
 * Networking: Add abstraction/support for UDP
 * Networking: Revisit “socket” API (can they be simpler?)
 * Networking: Abstractions for other protocol stacks (e.g. BLE, ZigBee, etc.)

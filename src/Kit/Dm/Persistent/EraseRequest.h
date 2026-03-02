@@ -11,12 +11,12 @@
 /** @file */
 
 
-#include "Cpl/Itc/RequestMessage.h"
-#include "Cpl/Itc/ResponseMessage.h"
-#include "Cpl/Itc/SAP.h"
+#include "Kit/Itc/RequestMessage.h"
+#include "Kit/Itc/ResponseMessage.h"
+#include "Kit/Itc/SAP.h"
 
 ///
-namespace Cpl {
+namespace Kit {
 ///
 namespace Dm {
 ///
@@ -27,7 +27,7 @@ namespace Persistent {
     to request invalidating/corrupting the Record in persistent storage (i.e.
     logically erase the record in persistent storage)
 
-    See the Cpl/Itc/README.txt file for the semantics for the 'ownership' of the
+    See the Kit/Itc/README.txt file for the semantics for the 'ownership' of the
     payload contents.
 
     NOTE: This interface can/should NOT be used synchronously.  The application
@@ -37,7 +37,7 @@ class EraseRequest
 {
 public:
     /// SAP for this API
-    typedef Cpl::Itc::SAP<EraseRequest> SAP;
+    typedef Kit::Itc::SAP<EraseRequest> SAP;
 
 public:
     /// Payload for Message 
@@ -58,7 +58,7 @@ public:
 
 public:
     /// Message Type:
-    typedef Cpl::Itc::RequestMessage<EraseRequest, Payload> EraseMsg;
+    typedef Kit::Itc::RequestMessage<EraseRequest, Payload> EraseMsg;
 
     /// Request: Erase message
     virtual void request( EraseMsg& msg ) = 0;
@@ -78,7 +78,7 @@ class EraseResponse
 {
 public:
     /// Response Message Type
-    typedef Cpl::Itc::ResponseMessage<EraseResponse,
+    typedef Kit::Itc::ResponseMessage<EraseResponse,
                                       EraseRequest,
                                       EraseRequest::Payload> EraseMsg;
 

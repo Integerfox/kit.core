@@ -9,31 +9,31 @@
 /** @file */
 
 #include "Dm.h"
-#include "Cpl/Dm/ModelPoint.h"
-#include "Cpl/Text/strip.h"
-#include "Cpl/Text/FString.h"
-#include "Cpl/Text/Tokenizer/TextBlock.h"
+#include "Kit/Dm/ModelPoint.h"
+#include "Kit/Text/strip.h"
+#include "Kit/Text/FString.h"
+#include "Kit/Text/Tokenizer/TextBlock.h"
 #include <string.h>
 
 ///
-using namespace Cpl::Dm::TShell;
+using namespace Kit::Dm::TShell;
 
 
 ///////////////////////////
-Dm::Dm( Cpl::Container::SList<Cpl::TShell::Command>&  commandList,
-		Cpl::Dm::ModelDatabaseApi&                  modelDatabase,
+Dm::Dm( Kit::Container::SList<Kit::TShell::Command>&  commandList,
+		Kit::Dm::ModelDatabaseApi&                  modelDatabase,
 		const char*                                 cmdNameAndDatabaseNumber,
-		Cpl::TShell::Security::Permission_T         minPermLevel ) noexcept
-	: Cpl::TShell::Cmd::Command( commandList, cmdNameAndDatabaseNumber, minPermLevel )
+		Kit::TShell::Security::Permission_T         minPermLevel ) noexcept
+	: Kit::TShell::Cmd::Command( commandList, cmdNameAndDatabaseNumber, minPermLevel )
 	, m_database( modelDatabase )
 {
 }
 
 
 ///////////////////////////
-Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char* cmdString, Cpl::Io::Output& outfd ) noexcept
+Kit::TShell::Command::Result_T Dm::execute( Kit::TShell::Context_& context, char* cmdString, Kit::Io::Output& outfd ) noexcept
 {
-	const char* subCmd = Cpl::Text::stripSpace( Cpl::Text::stripNotSpace( cmdString ) );
+	const char* subCmd = Kit::Text::stripSpace( Kit::Text::stripNotSpace( cmdString ) );
 
 	// Initial check for not-enough-tokens
 	if ( subCmd == 0 || *subCmd == '\0' )
@@ -44,7 +44,7 @@ Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char
 	// LIST sub-command
 	if ( strncmp( subCmd, "ls", 2 ) == 0 )
 	{
-		Cpl::Text::Tokenizer::TextBlock tokens( cmdString, context.getDelimiterChar(), context.getTerminatorChar(), context.getQuoteChar(), context.getEscapeChar() );
+		Kit::Text::Tokenizer::TextBlock tokens( cmdString, context.getDelimiterChar(), context.getTerminatorChar(), context.getQuoteChar(), context.getEscapeChar() );
 
 		// Too many args?
 		if ( tokens.numParameters() > 4 )
@@ -56,7 +56,7 @@ Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char
 		const char* filter = tokens.numParameters() == 3 ? tokens.getParameter( 2 ) : 0;
 
 		// Walk the Model database
-		Cpl::Dm::ModelPoint* point = m_database.getFirstByName();
+		Kit::Dm::ModelPoint* point = m_database.getFirstByName();
 		while ( point )
 		{
 			if ( filter == 0 || strstr( point->getName(), filter ) != 0 )
@@ -78,7 +78,7 @@ Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char
 	// READ Sub-command
 	else if ( strncmp( subCmd, "read", 4 ) == 0 )
 	{
-		Cpl::Text::Tokenizer::TextBlock tokens( cmdString, context.getDelimiterChar(), context.getTerminatorChar(), context.getQuoteChar(), context.getEscapeChar() );
+		Kit::Text::Tokenizer::TextBlock tokens( cmdString, context.getDelimiterChar(), context.getTerminatorChar(), context.getQuoteChar(), context.getEscapeChar() );
 
 		// Wrong number of args?
 		if ( tokens.numParameters() < 2 )
@@ -91,7 +91,7 @@ Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char
 		}
 
 		// Look-up the model point
-		Cpl::Dm::ModelPoint* point = m_database.lookupModelPoint( tokens.getParameter( 2 ) );
+		Kit::Dm::ModelPoint* point = m_database.lookupModelPoint( tokens.getParameter( 2 ) );
 		if ( point == 0 )
 		{
 			return Command::eERROR_INVALID_ARGS;
@@ -100,7 +100,7 @@ Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char
 		// Generate the JSON object/string for the Model point
 		bool				truncated;
 		int					outlen;
-		Cpl::Text::String&	outtext    = context.getOutputBuffer();
+		Kit::Text::String&	outtext    = context.getOutputBuffer();
 		char*				outptr     = outtext.getBuffer( outlen );
 		if ( point->toJSON( outptr, outlen, truncated, true, true ) == false )
 		{
@@ -115,14 +115,14 @@ Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char
 	else if ( strncmp( subCmd, "write", 5 ) == 0 )
 	{
 		// Find the start of the JSON object
-		const char* json   = Cpl::Text::stripSpace( Cpl::Text::stripNotSpace( subCmd ) );
+		const char* json   = Kit::Text::stripSpace( Kit::Text::stripNotSpace( subCmd ) );
 		if ( *json != '{' )
 		{
 			return Command::eERROR_INVALID_ARGS;
 		}
 
 		// Attempt to update the Model Point
-		Cpl::Text::FString<128> errorMsg;
+		Kit::Text::FString<128> errorMsg;
 		if ( !m_database.fromJSON( json, &errorMsg ) )
 		{
 			context.writeFrame( errorMsg );
@@ -134,7 +134,7 @@ Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char
 	// TOUCH Sub-command
 	else if (strncmp(subCmd, "touch", 5) == 0)
 	{
-		Cpl::Text::Tokenizer::TextBlock tokens(cmdString, context.getDelimiterChar(), context.getTerminatorChar(), context.getQuoteChar(), context.getEscapeChar());
+		Kit::Text::Tokenizer::TextBlock tokens(cmdString, context.getDelimiterChar(), context.getTerminatorChar(), context.getQuoteChar(), context.getEscapeChar());
 
 		// Wrong number of args?
 		if (tokens.numParameters() < 2)
@@ -147,7 +147,7 @@ Cpl::TShell::Command::Result_T Dm::execute( Cpl::TShell::Context_& context, char
 		}
 
 		// Look-up the model point
-		Cpl::Dm::ModelPoint* point = m_database.lookupModelPoint(tokens.getParameter(2));
+		Kit::Dm::ModelPoint* point = m_database.lookupModelPoint(tokens.getParameter(2));
 		if (point == 0)
 		{
 			return Command::eERROR_INVALID_ARGS;

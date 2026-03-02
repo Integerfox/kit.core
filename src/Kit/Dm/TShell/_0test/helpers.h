@@ -9,20 +9,20 @@
 /** @file */
 
 #include "colony_config.h"
-#include "Cpl/System/Api.h"
+#include "Kit/System/Api.h"
 
 #include "Bsp/Api.h"
-#include "Cpl/System/Thread.h"
-#include "Cpl/System/Mutex.h"
-#include "Cpl/System/Private_.h"
-#include "Cpl/Text/atob.h"
-#include "Cpl/Text/FString.h"
-#include "Cpl/Text/Tokenizer/TextBlock.h"
+#include "Kit/System/Thread.h"
+#include "Kit/System/Mutex.h"
+#include "Kit/System/Private_.h"
+#include "Kit/Text/atob.h"
+#include "Kit/Text/FString.h"
+#include "Kit/Text/Tokenizer/TextBlock.h"
 
-#include "Cpl/TShell/Cmd/Help.h"
-#include "Cpl/TShell/Cmd/Bye.h"
-#include "Cpl/TShell/Cmd/Trace.h"
-#include "Cpl/TShell/Cmd/TPrint.h"
+#include "Kit/TShell/Cmd/Help.h"
+#include "Kit/TShell/Cmd/Bye.h"
+#include "Kit/TShell/Cmd/Trace.h"
+#include "Kit/TShell/Cmd/TPrint.h"
 
 
 #define SECT_     "_0test"
@@ -31,11 +31,11 @@
 namespace {
 
 
-class Apple : public Cpl::System::Runnable
+class Apple : public Kit::System::Runnable
 {
 public:
 	///
-	Cpl::System::Mutex m_lock;
+	Kit::System::Mutex m_lock;
 	///
 	unsigned long      m_delay;
 	///
@@ -53,14 +53,14 @@ public:
 	/// 
 	void setOutputState( bool newstate )
 	{
-		Cpl::System::Mutex::ScopeBlock lock( m_lock );
+		Kit::System::Mutex::ScopeBlock lock( m_lock );
 		m_outputTrace = newstate;
 	}
 
 	/// 
 	void setDelay( unsigned long newdelay )
 	{
-		Cpl::System::Mutex::ScopeBlock lock( m_lock );
+		Kit::System::Mutex::ScopeBlock lock( m_lock );
 		m_delay = newdelay;
 	}
 
@@ -79,7 +79,7 @@ public:
 			unsigned long delay  = m_delay;
 			m_lock.unlock();
 
-			Cpl::System::Api::sleep( delay );
+			Kit::System::Api::sleep( delay );
 			if ( output )
 			{
 				CPL_SYSTEM_TRACE_MSG( SECT_, ( "Trace (_0test): loop counter=%u", counter ) );
@@ -90,13 +90,13 @@ public:
 };
 
 
-class Bob : public Cpl::TShell::Cmd::Command
+class Bob : public Kit::TShell::Cmd::Command
 {
 public:
-	/// See Cpl::TShell::Command
+	/// See Kit::TShell::Command
 	const char* getUsage() const noexcept { return "bob on|off [delay]"; }
 
-	/// See Cpl::TShell::Command
+	/// See Kit::TShell::Command
 	const char* getHelp() const noexcept { return "  Sets the test trace output to on/off and delay time between msgs"; }
 
 	///
@@ -105,18 +105,18 @@ public:
 
 public:
 	/// Constructor
-	Bob( Cpl::Container::SList<Cpl::TShell::Command>& commandList, Apple& application ) noexcept
+	Bob( Kit::Container::SList<Kit::TShell::Command>& commandList, Apple& application ) noexcept
 		:Command( commandList, "bob" )
 		, m_app( application )
 	{
 	}
 
 public:
-	/// See Cpl::TShell::Command
-	Cpl::TShell::Command::Result_T execute( Cpl::TShell::Context_& context, char* cmdString, Cpl::Io::Output& outfd ) noexcept
+	/// See Kit::TShell::Command
+	Kit::TShell::Command::Result_T execute( Kit::TShell::Context_& context, char* cmdString, Kit::Io::Output& outfd ) noexcept
 	{
-		Cpl::Text::Tokenizer::TextBlock tokens( cmdString, context.getDelimiterChar(), context.getTerminatorChar(), context.getQuoteChar(), context.getEscapeChar() );
-		Cpl::Text::String& token = context.getTokenBuffer();
+		Kit::Text::Tokenizer::TextBlock tokens( cmdString, context.getDelimiterChar(), context.getTerminatorChar(), context.getQuoteChar(), context.getEscapeChar() );
+		Kit::Text::String& token = context.getTokenBuffer();
 
 		// Error checking
 		if ( tokens.numParameters() > 3 || tokens.numParameters() < 2 )
@@ -132,7 +132,7 @@ public:
 		if ( tokens.numParameters() > 2 )
 		{
 			unsigned long newdelay = 250;
-			Cpl::Text::a2ul( newdelay, tokens.getParameter( 2 ) );
+			Kit::Text::a2ul( newdelay, tokens.getParameter( 2 ) );
 			m_app.setDelay( newdelay );
 		}
 

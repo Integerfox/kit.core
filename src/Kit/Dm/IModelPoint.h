@@ -38,6 +38,10 @@ namespace Dm {
            to ANY Model Point in a given Model Data Base.
         3) All methods in this class ARE thread Safe unless explicitly
            documented otherwise.
+        4) When a Model Point transitions (or initialized in) to the invalid set,
+           its 'data' is set to all zero so that transition from the invalid to the
+           valid state when using read-modify-write operation is consistent in 
+           its behavior.
  */
 class IModelPoint : public Kit::Container::ExtendedListItem
 {

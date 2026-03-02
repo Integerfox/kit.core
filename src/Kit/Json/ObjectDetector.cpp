@@ -13,7 +13,7 @@
 #include "ObjectDetector.h"
 #include <stdint.h>
 
-using namespace Cpl::Json;
+using namespace Kit::Json;
 
 
 //////////////////////////////////

@@ -167,7 +167,7 @@ public:
         {
             if ( errorMsg )
             {
-                errorMsg->format( "Number of array elements ([%lu+%lu)] exceeds the MP's element count (%lu)", startIdx, numElements, m_numElements );
+                errorMsg->format( "Number of array elements ([%zu+%zu)] exceeds the MP's element count (%zu)", startIdx, numElements, m_numElements );
             }
             return false;
         }

@@ -10,6 +10,9 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
+#define USE_KIT_SYSTEM_TRACE
 #define USE_KIT_SYSTEM_ASSERT
+
+#define OPTION_DM_TRANSACTION_CLIENT_NUM_ITERATIONS 10
 
 #endif

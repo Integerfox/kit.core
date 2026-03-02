@@ -38,12 +38,12 @@ namespace System {
     That said, the scheduler will detect and report when the interval timing
     slips.
 
-    The usage of this class is to implement (or extended) a Cpl::System::Runnable
+    The usage of this class is to implement (or extended) a Kit::System::Runnable
     object, i.e. invoked inside the 'forever' loop of the Runnable object's appRun()
     method.  The scheduler can be use within a 'bare' forever loop and it can be
     used with existing event based Runnable objects to add periodic scheduling.
-    See Cpl::Dm::PeriodicScheduler for example extending an event based Runnable
-    object to include periodic scheduling.
+    See Kit::EventQueue::WithPeriodicScheduler for example extending an event
+    based Runnable object to include periodic scheduling.
 
     NOTE: A uint64_t is used for the millisecond time keeping because it
           provides a larger range and can accommodate long-running applications
