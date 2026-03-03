@@ -35,7 +35,7 @@ namespace Framework {
          documented in Doxygen.
 */
 
-static Kit::Container::RingBuffer<EntryData_T>*                          logFifo_;  // TODO: Needs to be Kit::Container::RingBufferMP
+static Kit::Container::RingBuffer<EntryData_T>*                          logFifo_;  
 Kit::System::Mutex                                                       g_lock;
 static IApplication*                                                     app_;
 static KitLoggingClassificationMask_T                                    classificationFilterMask_;

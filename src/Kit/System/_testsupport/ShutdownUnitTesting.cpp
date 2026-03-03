@@ -39,8 +39,8 @@ void ShutdownUnitTesting::clearAndUseCounter() noexcept
 size_t ShutdownUnitTesting::getAndClearCounter() noexcept
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::system() );
-    size_t temp = counter_;
-    counter_    = 0;
+    size_t           temp = counter_;
+    counter_              = 0;
     return temp;
 }
 
@@ -75,7 +75,15 @@ static int preprocess_shutdown_( int exitCode, bool& trueExit ) noexcept
         if ( counting_ )
         {
             counter_++;
-            trueExit = false;
+            if ( counter_ < OPTION_KIT_SYSTEM_SHUTDOWN_UNI_TESTING_MAX_FATAL_ERRORS )
+            {
+                trueExit = false;
+            }
+            else
+            {
+                trueExit = true;
+                exitCode = exitCode_;
+            }
         }
         else
         {
@@ -87,11 +95,12 @@ static int preprocess_shutdown_( int exitCode, bool& trueExit ) noexcept
     return exitCode;
 }
 
+
 int Shutdown::success() noexcept
 {
     bool trueExit = true;
     int  exitCode = preprocess_shutdown_( eSUCCESS, trueExit );
-    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN , "Orderly shutdown initiated. True exit=%d", trueExit );
+    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN, "Orderly shutdown initiated. True exit=%d", trueExit );
     if ( trueExit )
     {
         exitCode = notifyShutdownHandlers( exitCode );
@@ -114,6 +123,6 @@ int Shutdown::failure( int exitCode ) noexcept
     return exitCode;
 }
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

@@ -63,7 +63,7 @@ protected:
 
 protected:
     /// Platform specific method to save the entry
-    virtual void dispatchLogEntry( Kit::Logging::Framework::EntryData_T& src )
+    virtual void dispatchLogEntry( Kit::Logging::Framework::EntryData_T& src ) noexcept
     {
         // Default is to do nothing
     }

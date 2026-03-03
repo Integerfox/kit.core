@@ -9,6 +9,7 @@
 /** @file */
 
 #include "LogSink.h"
+#include "Kit/Dm/IModelPoint.h"
 #include "Kit/Dm/IObserver.h"
 
 using namespace Kit::Logging::Framework;
@@ -65,6 +66,13 @@ void LogSink::elementCountChanged( Kit::Dm::Mp::Uint32& mp, Kit::Dm::IObserver& 
         }
 
         // Reattach the observer after draining the buffer
+        // Note: Force an immediate notification if there are still entries in the
+        //       buffer (i.e. if I exited the loop because I reached the batch write
+        //       limit instead of draining the buffer)
+        if ( m_logBuffer.isEmpty() == false )
+        {
+            seqNum = Kit::Dm::IModelPoint::SEQUENCE_NUMBER_UNKNOWN;
+        }
         mp.attach( m_obElementCount, seqNum );
     }
 }
