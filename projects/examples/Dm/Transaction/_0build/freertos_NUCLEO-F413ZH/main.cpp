@@ -10,13 +10,32 @@
 
 #include "Kit/Bsp/Api.h"
 #include "Kit/System/Api.h"
+#include "Kit/System/IRunnable.h"
+#include "Kit/System/Thread.h"
 #include "Dm/Transaction/example.h"
 
-// extern Kit::Io::IInputOutput& g_bspConsoleStream;
-// extern void echo_test( Kit::Io::IInputOutput& fd );
-// extern size_t getErrorCounts( bool clearCounts = false );
+namespace {  // Anonymous namespace
 
+// 'main' thread for running the Example application
+class MyMainThread : public Kit::System::IRunnable
+{
+public:
+    void entry() noexcept override
+    {
+        Dm::Transaction::runExample();
+
+        // Don't let the thread end if/when the application returns, just loop forever waiting for a reset/power-cycle
+        for ( ;; )
+            ;
+    }
+};
+
+
+}  // end anonymous namespace
 /*-----------------------------------------------------------*/
+// Don't create on the stack due to how FreeRTOS handles the original stack when starting the scheduler.
+static MyMainThread mainThread_;  // Static instance of the application thread
+
 int main( void )
 {
     // Initialize the board
@@ -25,17 +44,10 @@ int main( void )
     // Initialize KIT
     Kit::System::initialize();
 
-    // Run the example application 
-    Dm::Transaction::runExample();
+    // Create/start the application thread
+    Kit::System::Thread::create( mainThread_, "main" );
 
-    // If/when the example application returns, we loop forever waiting for a reset/power-cycle
-    for ( ;; );
+    // Start the scheduler (Note: This method should never return)
+    Kit::System::enableScheduling();
     return 0;
 }
-
-
-size_t getErrorCounts( bool clearCounts )
-{
-    return Bsp_getConsoleStreamErrorCounts( clearCounts );
-}
-

@@ -18,6 +18,7 @@
 #include "Kit/EventQueue/IQueue.h"
 #include "Kit/System/Timer.h"
 #include "Kit/System/Trace.h"
+#include "Kit/System/Shutdown.h"
 #include <inttypes.h>
 
 /// Periodic Time interval, in milliseconds, for the Client to issue a request to the Server

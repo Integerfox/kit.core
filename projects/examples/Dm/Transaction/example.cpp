@@ -8,8 +8,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/System/Semaphore.h"
 #include "kit_config.h"
+#include "Kit/System/Semaphore.h"
 #include "example.h"
 #include "Client.h"
 #include "Server.h"
@@ -18,7 +18,7 @@
 #include "Kit/System/Thread.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/Assert.h"
-#include "Kit/_support/testing/helpers.h"
+#include "Kit/System/Shutdown.h"
 
 /// Time, in milliseconds, to wait for runnable object to stop.
 //  NOTE: the `destroy()` method calls `pleaseStop()` on the runnable

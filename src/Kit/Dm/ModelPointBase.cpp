@@ -11,6 +11,7 @@
 #include "ModelPointBase.h"
 #include "Kit/System/Mutex.h"
 #include "Kit/EventQueue/IChangeNotification.h"
+#include "Kit/System/FatalError.h"
 #include "Kit/System/Shutdown.h"
 #include "Kit/System/Assert.h"
 

@@ -33,7 +33,10 @@ import os
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'hw_echo'
+FINAL_OUTPUT_NAME = 'example'
+
+# Root directory for the examples
+example_root = os.path.join( NQBP_PKG_ROOT(), 'projects', 'examples' )
 
 # Path to SDK and the ST CubeMX generated BSP files
 prj_dir       = os.path.dirname(os.path.abspath(__file__))
@@ -53,6 +56,7 @@ sysview_root  = sysview_root.replace("\\", "/")
 base_release = BuildValues()        # Do NOT comment out this line
 target_flags             = '-DUSE_STM32F4XX_NUCLEO_144 -DSTM32F413xx'
 base_release.cflags      = f' -Wall {target_flags} -Werror -DENABLE_BSP_SEGGER_SYSVIEW -I{sysview_root}'
+base_release.inc         = f' -I{example_root}'
 base_release.cppflags    = ' -std=c++11 -Wno-int-in-bool-context'
 base_release.asmflags    = f' {target_flags}'
 base_release.linkflags   = '-Wl,--no-warn-rwx-segments'
