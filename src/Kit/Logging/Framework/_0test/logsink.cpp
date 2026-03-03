@@ -103,6 +103,29 @@ TEST_CASE( "LogSink" )
         uut.close();
     }
 
+        SECTION( "nominal" )
+    {
+        uut.open();
+
+        EntryData_T entry;
+        for ( unsigned i = 0; i < OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE-1; i++ )
+        {
+            entry.m_timestamp        = i;
+            entry.m_classificationId = i;
+            entry.m_packageId        = i;
+            entry.m_subSystemId      = i;
+            entry.m_messageId        = i;
+            strcpy( entry.m_infoText, "Test log message" );
+            REQUIRE( logFifo.add( entry ) == true );
+        }
+
+        // Allow time for the LogSink to process the entries
+        Kit::System::sleep( 300 );
+        REQUIRE( uut.numProcessed == OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE-1 );
+
+        uut.close();
+    }
+
     // Shutdown thread(s)
     t1Mbox_.pleaseStop();
     WAIT_FOR_THREAD_TO_STOP( t1 );
