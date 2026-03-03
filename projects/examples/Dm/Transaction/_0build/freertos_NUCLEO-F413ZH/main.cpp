@@ -1,0 +1,41 @@
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
+
+#include "Kit/Bsp/Api.h"
+#include "Kit/System/Api.h"
+#include "Dm/Transaction/example.h"
+
+// extern Kit::Io::IInputOutput& g_bspConsoleStream;
+// extern void echo_test( Kit::Io::IInputOutput& fd );
+// extern size_t getErrorCounts( bool clearCounts = false );
+
+/*-----------------------------------------------------------*/
+int main( void )
+{
+    // Initialize the board
+    Bsp_initialize();
+
+    // Initialize KIT
+    Kit::System::initialize();
+
+    // Run the example application 
+    Dm::Transaction::runExample();
+
+    // If/when the example application returns, we loop forever waiting for a reset/power-cycle
+    for ( ;; );
+    return 0;
+}
+
+
+size_t getErrorCounts( bool clearCounts )
+{
+    return Bsp_getConsoleStreamErrorCounts( clearCounts );
+}
+
