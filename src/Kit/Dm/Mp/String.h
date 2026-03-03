@@ -1,5 +1,5 @@
 #ifndef KIT_DM_MP_STRING_H_
-#define Kit_Dm_Mp_String_h_
+#define KIT_DM_MP_STRING_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

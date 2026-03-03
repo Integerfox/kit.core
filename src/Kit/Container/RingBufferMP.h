@@ -91,7 +91,7 @@ public:
         return result;
     }
 
-    // Same as add() but also returns the sequence number after the increment operation
+    /// Same as add() but also returns the sequence number after the increment operation
     bool add( const ITEM& item, uint16_t& seqNum ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );

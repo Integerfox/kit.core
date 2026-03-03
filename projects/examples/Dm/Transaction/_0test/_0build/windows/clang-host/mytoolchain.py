@@ -42,6 +42,7 @@ FINAL_OUTPUT_NAME = 'a.exe'
 (catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'windows/clang-host', 'a' )
 
 
+example_root = os.path.join( NQBP_PKG_ROOT(), 'projects', 'examples' )
 
 
 #
@@ -55,7 +56,7 @@ debug_win32     = BuildValues()
 
 # Set 'base' options
 base_win32.cflags     = '-m32 -std=c++17 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
-base_win32.inc        = catch2_inc
+base_win32.inc        = f'{catch2_inc} -I{example_root}'
 base_win32.linkflags  = '-m32'
 base_win32.firstobjs  = unit_test_objects
 base_win32.linklibs   = f'{catch2_lib}'

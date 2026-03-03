@@ -41,6 +41,7 @@ FINAL_OUTPUT_NAME = 'a.exe'
 # Using Catch2 
 (catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'windows/msvc', 'lib' )
 
+example_root = os.path.join( NQBP_PKG_ROOT(), 'projects', 'examples' )
 
 #
 # For build config/variant: "win32" 
@@ -50,7 +51,7 @@ FINAL_OUTPUT_NAME = 'a.exe'
 base_win32           = BuildValues()        # Do NOT comment out this line
 base_win32.cflags    = '/W3 /WX /EHsc '  # /EHsc enables exceptions /std:c++17
 base_win32.firstobjs = unit_test_objects
-base_win32.inc       = catch2_inc
+base_win32.inc       = f'{catch2_inc} -I{example_root}'
 base_win32.linklibs  = catch2_lib
 
 # Set project specific 'optimized' options
