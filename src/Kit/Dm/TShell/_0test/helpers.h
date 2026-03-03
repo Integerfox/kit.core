@@ -82,8 +82,8 @@ public:
 			Kit::System::Api::sleep( delay );
 			if ( output )
 			{
-				CPL_SYSTEM_TRACE_MSG( SECT_, ( "Trace (_0test): loop counter=%u", counter ) );
-				CPL_SYSTEM_TRACE_MSG( "bob", ( "Trace (bob): loop counter=%u", counter ) );
+				KIT_SYSTEM_TRACE_MSG( SECT_, ( "Trace (_0test): loop counter=%u", counter ) );
+				KIT_SYSTEM_TRACE_MSG( "bob", ( "Trace (bob): loop counter=%u", counter ) );
 			}
 		}
 	}

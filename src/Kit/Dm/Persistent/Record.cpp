@@ -37,7 +37,7 @@ Record::Record( Item_T                  itemList[],
     , m_minor( schemaMinorIndex )
     , m_started( false )
 {
-    CPL_SYSTEM_ASSERT( itemList );
+    KIT_SYSTEM_ASSERT( itemList );
 }
 
 Record::~Record()
@@ -63,7 +63,7 @@ void Record::start( Kit::Dm::MailboxServer& myMbox ) noexcept
         if ( !m_chunkHandler.loadData( *this ) )
         {
             // No valid data -->reset to my defaults
-            CPL_SYSTEM_TRACE_MSG( SECT_, ("Initial loadData() failed. mp[0]=%s", m_items[0].mpPtr->getName()) );
+            KIT_SYSTEM_TRACE_MSG( SECT_, ("Initial loadData() failed. mp[0]=%s", m_items[0].mpPtr->getName()) );
             if ( resetData() )
             {
                 updateNVRAM();
@@ -79,7 +79,7 @@ void Record::start( Kit::Dm::MailboxServer& myMbox ) noexcept
         // Record was successfully loaded -->allow for optional child class processing
         else
         {
-            CPL_SYSTEM_TRACE_MSG( SECT_, ("Initial loadData() succeeded! mp[0]=%s", m_items[0].mpPtr->getName()) );
+            KIT_SYSTEM_TRACE_MSG( SECT_, ("Initial loadData() succeeded! mp[0]=%s", m_items[0].mpPtr->getName()) );
             hookProcessPostRecordLoaded();
         }
 
@@ -148,7 +148,7 @@ size_t Record::getRecordSize() noexcept
 
 size_t Record::getData( void* dst, size_t maxDstLen ) noexcept
 {
-    CPL_SYSTEM_ASSERT( maxDstLen > 2 );
+    KIT_SYSTEM_ASSERT( maxDstLen > 2 );
 
     // Write Schema identifiers
     uint8_t* buffer = (uint8_t*) dst;
@@ -184,7 +184,7 @@ size_t Record::getData( void* dst, size_t maxDstLen ) noexcept
 
 bool Record::putData( const void* src, size_t srcLen ) noexcept
 {
-    CPL_SYSTEM_ASSERT( srcLen > 2 );
+    KIT_SYSTEM_ASSERT( srcLen > 2 );
 
     // Get schema identifiers
     const uint8_t* buffer = (const uint8_t*) src;
@@ -224,7 +224,7 @@ bool Record::putData( const void* src, size_t srcLen ) noexcept
 
 void Record::dataChanged( Kit::Dm::ModelPoint& point, Kit::Dm::SubscriberApi& observer ) noexcept
 {
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("Record Changed: mp=%s, timeMarker=%u", point.getName(), m_timerMarker) );
+    KIT_SYSTEM_TRACE_MSG( SECT_, ("Record Changed: mp=%s, timeMarker=%u", point.getName(), m_timerMarker) );
 
     // NOTE: The observer instance is PURPOSELY not synchronized with the read 
     //       of the MP data.  This is because there can be multiple MPs that 
@@ -272,7 +272,7 @@ void Record::expired( void ) noexcept
 
 void Record::updateNVRAM() noexcept
 {
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("updateNVRAM()") );
+    KIT_SYSTEM_TRACE_MSG( SECT_, ("updateNVRAM()") );
 
     // NOTE: If the write to the storage media failed -->the RAM contents are 
     // still valid so no immediate issue.  However, on the next power cycle the 
@@ -283,14 +283,14 @@ void Record::updateNVRAM() noexcept
 void Record::request( FlushMsg& msg )
 {
     msg.getPayload().m_success = m_chunkHandler.updateData( *this );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("Flush Request. mp[0]=%s. success=%d", m_items[0].mpPtr->getName(), msg.getPayload().m_success) );
+    KIT_SYSTEM_TRACE_MSG( SECT_, ("Flush Request. mp[0]=%s. success=%d", m_items[0].mpPtr->getName(), msg.getPayload().m_success) );
     msg.returnToSender();
 }
 
 void Record::request( EraseMsg& msg )
 {
     msg.getPayload().m_success = m_chunkHandler.updateData( *this, 0, true );
-    CPL_SYSTEM_TRACE_MSG( SECT_, ("Erase Request. mp[0]=%s. success=%d", m_items[0].mpPtr->getName(), msg.getPayload().m_success) );
+    KIT_SYSTEM_TRACE_MSG( SECT_, ("Erase Request. mp[0]=%s. success=%d", m_items[0].mpPtr->getName(), msg.getPayload().m_success) );
     msg.returnToSender();
 }
 

@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_SubscriberApi_h_
-#define Cpl_Dm_SubscriberApi_h_
+#ifndef KIT_DM_IOBSERVER_H_
+#define KIT_DM_IOBSERVER_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

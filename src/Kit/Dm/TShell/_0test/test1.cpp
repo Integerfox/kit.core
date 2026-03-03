@@ -42,12 +42,12 @@ void shell_test( Kit::Io::Input& infd, Kit::Io::Output& outfd )
 	int32_t value;
 	bool valid = mp_apple_.read( value );
 	printf( "valid=%d\n", valid );
-	CPL_SYSTEM_ASSERT( value == 111 );
-	CPL_SYSTEM_ASSERT( valid);
+	KIT_SYSTEM_ASSERT( value == 111 );
+	KIT_SYSTEM_ASSERT( valid);
 	valid = mp_orange_.read( value );
 	printf( "valid=%d\n", valid );
-	CPL_SYSTEM_ASSERT( value == 32 );
-	CPL_SYSTEM_ASSERT( valid);
+	KIT_SYSTEM_ASSERT( value == 32 );
+	KIT_SYSTEM_ASSERT( valid);
 	
 	// Exit the application with a 'pass' result
 	Kit::System::Shutdown::success();

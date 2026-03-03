@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_ModelDatabase_h_
-#define Cpl_Dm_ModelDatabase_h_
+#ifndef KIT_DM_MODELDATABASE_H_
+#define KIT_DM_MODELDATABASE_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -92,7 +92,7 @@ protected:
     /// Mutex for making the Database thread safe
     Kit::System::Mutex m_lock;
 
-    /// Keep track if the point list has beed sorted
+    /// Keep track if the point list has been sorted
     bool m_listSorted;
 
 private:

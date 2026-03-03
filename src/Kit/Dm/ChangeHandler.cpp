@@ -65,7 +65,7 @@ void ChangeHandler::removePendingChangingNotification( IObserver& observer ) noe
     Kit::System::GlobalLock::end();
 }
 
-bool ChangeHandler::isPendingPendingChangingNotifications() noexcept
+bool ChangeHandler::isPendingChangingNotifications() noexcept
 {
     Kit::System::GlobalLock::begin();
     bool pending = m_pendingMpNotifications.first() != nullptr;

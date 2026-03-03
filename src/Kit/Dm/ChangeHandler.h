@@ -1,5 +1,5 @@
-#ifndef Cpl_Dm_EventLoop_h_
-#define Cpl_Dm_EventLoop_h_
+#ifndef KIT_DM_CHANGEHANDLER_H_
+#define KIT_DM_CHANGEHANDLER_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -23,8 +23,6 @@ namespace Dm {
 /** This concrete class provides the implementation for processing change notifications
     as well as managing change notification subscriptions.  It is intended to be
     used by the Event Queue server
-
-
  */
 class ChangeHandler
 {
@@ -68,7 +66,7 @@ public:
 
         This method IS thread safe.
      */
-    bool isPendingPendingChangingNotifications() noexcept;
+    bool isPendingChangingNotifications() noexcept;
 
     /** This method processes pending change notifications
 

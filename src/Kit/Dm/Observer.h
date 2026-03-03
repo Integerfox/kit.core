@@ -103,7 +103,7 @@ public:
 
 protected:
     /// See Kit::Dm::IObserver
-    void genericModelPointChanged_( IModelPoint& modelPointThatChanged, IObserver& clientObserver ) noexcept override { modelPointChanged( *( (MP*)&modelPointThatChanged ), clientObserver ); }
+    void genericModelPointChanged_( IModelPoint& modelPointThatChanged, IObserver& clientObserver ) noexcept override { modelPointChanged( static_cast<MP&>( modelPointThatChanged ), clientObserver ); }
 };
 
 

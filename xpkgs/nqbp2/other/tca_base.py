@@ -110,7 +110,7 @@ def run(argv):
     arcopt = ' --exclude-unreachable-branches --decisions ' # Setup 'arc' excludes for C++ code (see https://gcovr.com/en/stable/faq.html) 
     if ( args['--all'] ):
         arcopt = ''
-    excludes = '--exclude=.*_0test.* --exclude=.*/xsrc/.* --exclude=.*src/Catch.* --exclude=.*src/Cpl/Json/Arduino.h --exclude=.*src/Cpl/Json/ArduinoHelpers.cpp --exclude=.*src/Cpl/Type/enum.h --exclude-unreachable-branches --exclude-lines-by-pattern .*CPL_SYSTEM_TRACE.* --exclude-lines-by-pattern .*CPL_SYSTEM_ASSERT.*'
+    excludes = '--exclude=.*_0test.* --exclude=.*/xsrc/.* --exclude=.*src/Catch.* --exclude=.*src/Cpl/Json/Arduino.h --exclude=.*src/Cpl/Json/ArduinoHelpers.cpp --exclude=.*src/Cpl/Type/enum.h --exclude-unreachable-branches --exclude-lines-by-pattern .*KIT_SYSTEM_TRACE.* --exclude-lines-by-pattern .*KIT_SYSTEM_ASSERT.*'
     gcovr_args = f'{excludes} --gcov-ignore-parse-errors=negative_hits.warn -j 8 {arcopt} {gcovr_root} --object-directory . '
     
 

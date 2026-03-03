@@ -11,7 +11,7 @@
 /** @file */
 
 #include "Kit/Container/RingBufferMP.h"
-
+#include <string.h>
 
 ///
 namespace Kit {

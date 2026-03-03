@@ -65,7 +65,7 @@ struct Foo_T
     }
 
     /// Comparison operator (for DM support)
-    bool operator==( Foo_T const other ) const
+    bool operator==( Foo_T const& other ) const
     {
         return memcmp( this, &other, sizeof( Foo_T ) ) == 0;
     }

@@ -123,7 +123,7 @@ static Kit::Persistent::MirroredChunk chunk( fd1, fd2 );
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "record" )
 {
-    CPL_SYSTEM_TRACE_SCOPE( SECT_, "RECORD Test" );
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD Test" );
     Kit::System::Shutdown_TS::clearAndUseCounter();
 
     MyRecord uut( chunk, 0, 0 );
@@ -351,7 +351,7 @@ TEST_CASE( "record" )
 
 TEST_CASE( "record-badmajor" )
 {
-    CPL_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
     Kit::System::Shutdown_TS::clearAndUseCounter();
 
     MyRecord uut( chunk, 2, 2 );
@@ -401,7 +401,7 @@ TEST_CASE( "record-badmajor" )
 
 TEST_CASE( "record-badminor" )
 {
-    CPL_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
     Kit::System::Shutdown_TS::clearAndUseCounter();
 
     MyRecord uut( chunk, 2, 1 );
@@ -453,7 +453,7 @@ TEST_CASE( "record-badminor" )
 
 TEST_CASE( "record-verify" )
 {
-    CPL_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
     Kit::System::Shutdown_TS::clearAndUseCounter();
 
     MyRecord uut( chunk, 2, 1 );
@@ -495,7 +495,7 @@ TEST_CASE( "record-verify" )
 
 TEST_CASE( "nvram update delayed" )
 {
-    CPL_SYSTEM_TRACE_SCOPE( SECT_, "RECORD Test" );
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD Test" );
     Kit::System::Shutdown_TS::clearAndUseCounter();
 
     // Delete files

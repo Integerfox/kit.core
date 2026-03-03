@@ -115,7 +115,7 @@ fatalerror_logf = {
     "KIT": "Kit::System::FatalError::logf( Kit::System::Shutdown::eFSM_EVENT_OVERFLOW,"
 }
 trace_msg = {
-    "CPL": "CPL_SYSTEM_TRACE_MSG( SECT_, (",
+    "CPL": "KIT_SYSTEM_TRACE_MSG( SECT_, (",
     "KIT": "KIT_SYSTEM_TRACE_MSG( SECT_,"
 }
 trace_msg_suffix = {
