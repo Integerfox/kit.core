@@ -14,6 +14,9 @@
 #include "Kit/Dm/Mp/Scalar.h"
 #include "Kit/Text/FString.h"
 #include "Kit/Text/StringTo.h"
+#ifndef __STDC_FORMAT_MACROS
+#define __STDC_FORMAT_MACROS    // Required for PRI*/SCN* macros in C++ (e.g. arm-none-eabi newlib)
+#endif
 #include <inttypes.h>
 
 /// The largest supported signed integer type for SignedInteger MP - as a intXX_t type
