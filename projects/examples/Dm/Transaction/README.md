@@ -42,11 +42,15 @@ on the specific use case/requirements.
     and the server returns "success" by setting the MP to invalid and returns
     to "fail" by setting the MP to `false`
 
-## Source Code
-
-- Root source directory: [projects/examples/Dm/Transaction](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction)
-- Build directory: [projects/examples/Dm/Transaction/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction/_0build)
-
 ## Class Diagram
 
 ![Transaction Example Class Diagram](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction/ClassDiagram.png)
+
+## Implementation
+
+- Root source directory: [projects/examples/Dm/Transaction](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction)
+- Build directory: [projects/examples/Dm/Transaction/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction/_0build)
+- Build Targets:
+  - Host: Linux, Windows
+  - NUCLEO-F413ZH w/FreeRTOS
+
