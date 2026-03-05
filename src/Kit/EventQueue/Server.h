@@ -96,7 +96,7 @@ protected:
     /// Helper method that waits for events
     virtual bool serverWaitAndProcessEvents() noexcept
     {
-        return waitAndProcessEvents( isPendingMessage() || m_changeHandler.isPendingPendingChangingNotifications() );
+        return waitAndProcessEvents( isPendingMessage() || m_changeHandler.isPendingChangingNotifications() );
     }
 
     /// Helper method that processes events
