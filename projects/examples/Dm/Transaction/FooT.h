@@ -28,7 +28,7 @@ namespace Transaction {
     - The copy constructor and copy operator are implemented to ensure that
       any 'pad' bytes in the structure get zero'd out.  This is desired because
       the default 'comparison operation' in the DM framework uses memcmp.  A
-      more sophisticated comparision approach can be used - but it requires the
+      more sophisticated comparison approach can be used - but it requires the
       concrete Model Point to supply/implement the comparison method.
  */
 struct Foo_T

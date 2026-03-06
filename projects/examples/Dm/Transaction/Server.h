@@ -86,7 +86,7 @@ protected:
             // 'Alive' feedback when running on hardware
             Bsp_toggle_debug1();
 
-            // Generate a Radom number between the upper and lower limits and write to the MP
+            // Generate a Random number between the upper and lower limits and write to the MP
             // TODO: Need a Random Number interface
             data.randomNumber = ( ( data.upperLimit - data.lowerLimit ) / 2 ) + data.lowerLimit;
             data.isValid      = true;  // For this example - the result is always valid (because I am lazy)

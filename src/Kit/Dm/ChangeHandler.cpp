@@ -12,7 +12,6 @@
 #include "IObserver.h"
 #include "IModelPoint.h"
 #include "Kit/System/Assert.h"
-#include "Kit/System/Thread.h"
 #include "Kit/System/GlobalLock.h"
 
 

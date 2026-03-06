@@ -19,8 +19,6 @@ concurrency:
   # Use the branch name as the group key so that a push event and a
   # pull_request.synchronize event for the same branch share the same slot
   # and do not produce duplicate runs.
-  #   - pull_request event: github.head_ref = "79-add-data-model-framework"
-  #   - push event:         github.head_ref = "", github.ref_name = "79-add-data-model-framework"
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 

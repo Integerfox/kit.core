@@ -67,7 +67,7 @@ public:
     }
 
 protected:
-    /// Override parent implementation for 'correct' doubleing point comparison
+    /// Override parent implementation for 'correct' double-precision floating-point comparison
     bool isDataEqual_( const void* otherData ) const noexcept
     {
         const double* other = static_cast<const double*>(otherData);
