@@ -17,22 +17,40 @@
 </a>
 </g>
 </g>
-<!-- Node13 -->
-<g id="Node000013" class="node">
-<title>Node13</title>
-<g id="a_Node000013"><a xlink:href="class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html" target="_top" xlink:title="This class extends the Kit::EventQueue::Server class to add periodic scheduling to an event based &#39;th...">
-<polygon fill="white" stroke="#666666" points="1145,-137.5 982,-137.5 982,-107.5 1145,-107.5 1145,-137.5"/>
-<text text-anchor="start" x="990" y="-125.5" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::EventQueue::WithPeriodic</text>
-<text text-anchor="middle" x="1063.5" y="-114.5" font-family="Helvetica,sans-Serif" font-size="10.00">Scheduling</text>
+<!-- Node14 -->
+<g id="Node000014" class="node">
+<title>Node14</title>
+<g id="a_Node000014"><a xlink:href="class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html" target="_top" xlink:title="This class extends the Kit::EventQueue::Server class to add periodic scheduling to an event based &#39;th...">
+<polygon fill="white" stroke="#666666" points="1145,-159.5 982,-159.5 982,-129.5 1145,-129.5 1145,-159.5"/>
+<text text-anchor="start" x="990" y="-147.5" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::EventQueue::WithPeriodic</text>
+<text text-anchor="middle" x="1063.5" y="-136.5" font-family="Helvetica,sans-Serif" font-size="10.00">Scheduling</text>
 </a>
 </g>
 </g>
-<!-- Node1&#45;&gt;Node13 -->
-<g id="edge13_Node000001_Node000013" class="edge">
-<title>Node1&#45;&gt;Node13</title>
-<g id="a_edge13_Node000001_Node000013"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M955.22,-122.5C963.98,-122.5 972.93,-122.5 981.75,-122.5"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="955.05,-119 945.05,-122.5 955.05,-126 955.05,-119"/>
+<!-- Node1&#45;&gt;Node14 -->
+<g id="edge14_Node000001_Node000014" class="edge">
+<title>Node1&#45;&gt;Node14</title>
+<g id="a_edge14_Node000001_Node000014"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M955.22,-131.6C963.98,-132.66 972.93,-133.73 981.75,-134.79"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="955.4,-128.1 945.05,-130.38 954.56,-135.05 955.4,-128.1"/>
+</a>
+</g>
+</g>
+<!-- Node15 -->
+<g id="Node000015" class="node">
+<title>Node15</title>
+<g id="a_Node000015"><a xlink:href="class_test_event_queue_server.html" target="_top" xlink:title="This class is a EventQueue Server that signals the provided semaphore when it begins execution.">
+<polygon fill="white" stroke="#666666" points="1127,-111 1000,-111 1000,-92 1127,-92 1127,-111"/>
+<text text-anchor="middle" x="1063.5" y="-99" font-family="Helvetica,sans-Serif" font-size="10.00">TestEventQueueServer</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node15 -->
+<g id="edge15_Node000001_Node000015" class="edge">
+<title>Node1&#45;&gt;Node15</title>
+<g id="a_edge15_Node000001_Node000015"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M955.22,-113.81C970.07,-112.11 985.49,-110.34 999.86,-108.69"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="954.59,-110.36 945.05,-114.98 955.38,-117.31 954.59,-110.36"/>
 </a>
 </g>
 </g>
@@ -244,6 +262,24 @@
 <g id="a_edge12_Node000008_Node000012"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M590.99,-21.75C596.81,-23.47 602.56,-25.39 608,-27.5 640.51,-40.14 675.49,-61.47 694.56,-73.84"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="591.78,-18.33 581.21,-19.02 589.9,-25.08 591.78,-18.33"/>
+</a>
+</g>
+</g>
+<!-- Node13 -->
+<g id="Node000013" class="node">
+<title>Node13</title>
+<g id="a_Node000013"><a xlink:href="class_kit_1_1_system_1_1_i_timing_source.html" target="_top" xlink:title="This abstract class defines the interface for a timing source.">
+<polygon fill="white" stroke="#666666" points="335,-19 186,-19 186,0 335,0 335,-19"/>
+<text text-anchor="middle" x="260.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::System::ITimingSource</text>
+</a>
+</g>
+</g>
+<!-- Node13&#45;&gt;Node12 -->
+<g id="edge13_Node000012_Node000013" class="edge">
+<title>Node13&#45;&gt;Node12</title>
+<g id="a_edge13_Node000012_Node000013"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M345.54,-9.5C381.22,-9.5 422.46,-9.5 456.98,-9.5"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="345.14,-6 335.14,-9.5 345.14,-13 345.14,-6"/>
 </a>
 </g>
 </g>

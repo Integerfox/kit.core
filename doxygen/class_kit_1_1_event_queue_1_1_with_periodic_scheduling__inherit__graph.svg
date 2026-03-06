@@ -250,16 +250,34 @@
 <!-- Node14 -->
 <g id="Node000014" class="node">
 <title>Node14</title>
-<g id="a_Node000014"><a xlink:href="class_kit_1_1_system_1_1_periodic_scheduler.html" target="_top" xlink:title="This concrete class is a &#39;policy&#39; object that is used to add polled based, cooperative monotonic sche...">
+<g id="a_Node000014"><a xlink:href="class_kit_1_1_system_1_1_i_timing_source.html" target="_top" xlink:title="This abstract class defines the interface for a timing source.">
+<polygon fill="white" stroke="#666666" points="335,-19 186,-19 186,0 335,0 335,-19"/>
+<text text-anchor="middle" x="260.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::System::ITimingSource</text>
+</a>
+</g>
+</g>
+<!-- Node14&#45;&gt;Node13 -->
+<g id="edge14_Node000013_Node000014" class="edge">
+<title>Node14&#45;&gt;Node13</title>
+<g id="a_edge14_Node000013_Node000014"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M345.54,-9.5C381.22,-9.5 422.46,-9.5 456.98,-9.5"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="345.14,-6 335.14,-9.5 345.14,-13 345.14,-6"/>
+</a>
+</g>
+</g>
+<!-- Node15 -->
+<g id="Node000015" class="node">
+<title>Node15</title>
+<g id="a_Node000015"><a xlink:href="class_kit_1_1_system_1_1_periodic_scheduler.html" target="_top" xlink:title="This concrete class is a &#39;policy&#39; object that is used to add polled based, cooperative monotonic sche...">
 <polygon fill="white" stroke="#666666" points="978,-103 812,-103 812,-84 978,-84 978,-103"/>
 <text text-anchor="middle" x="895" y="-91" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::System::PeriodicScheduler</text>
 </a>
 </g>
 </g>
-<!-- Node14&#45;&gt;Node1 -->
-<g id="edge14_Node000001_Node000014" class="edge">
-<title>Node14&#45;&gt;Node1</title>
-<g id="a_edge14_Node000001_Node000014"><a xlink:title=" ">
+<!-- Node15&#45;&gt;Node1 -->
+<g id="edge15_Node000001_Node000015" class="edge">
+<title>Node15&#45;&gt;Node1</title>
+<g id="a_edge15_Node000001_Node000015"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M988.04,-99.04C996.96,-99.57 1005.97,-100.11 1014.78,-100.64"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="988.2,-95.54 978.01,-98.43 987.78,-102.53 988.2,-95.54"/>
 </a>

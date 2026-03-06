@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,7 +46,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">helpers.h File Reference</div></div>
 </div><!--header-->
@@ -59,43 +59,226 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="helpers_8h__incl.svg" width="1080" height="344"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="helpers_8h__incl.svg" width="2880" height="872"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="helpers_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a787a1a867be0fe05b76f89879c2d8ad9" id="r_a787a1a867be0fe05b76f89879c2d8ad9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a787a1a867be0fe05b76f89879c2d8ad9">OPTION_KIT_TESTING_SUPPORT_HELPERS_TRACE_SECT</a>&#160;&#160;&#160;&quot;_0test&quot;</td></tr>
-<tr class="memdesc:a787a1a867be0fe05b76f89879c2d8ad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Trace section used by/for the Helper methods.  <br /></td></tr>
-<tr class="separator:a787a1a867be0fe05b76f89879c2d8ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_async_open_close.html">AsyncOpenClose</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class is used to 'convert' the synchronous ITC semantics of open/close requests to asynchronous.  <a href="class_async_open_close.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_test_event_queue_server.html">TestEventQueueServer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class is a EventQueue Server that signals the provided semaphore when it begins execution.  <a href="class_test_event_queue_server.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a8bbc9d8e5474b9a9db66c667824051a7" id="r_a8bbc9d8e5474b9a9db66c667824051a7"><td class="memTemplParams" colspan="2">template&lt;class MPTYPE , class VALTYPE &gt; </td></tr>
+<tr class="memitem:a8bbc9d8e5474b9a9db66c667824051a7"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a8bbc9d8e5474b9a9db66c667824051a7">minWaitOnEnumModelPoint</a> (MPTYPE &amp;src, VALTYPE expectedVal, unsigned long minWait, VALTYPE *lastVal=nullptr, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</td></tr>
+<tr class="memdesc:a8bbc9d8e5474b9a9db66c667824051a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is the same <a class="el" href="#a3c29d5890a760e38aef6f2e6e8efb04a" title="This function performs a blocking wait by monitoring a Model Point for a specific value.">minWaitOnModelPoint()</a> above, expect that it expected VALTYPE to be BETTER_NUM.  <br /></td></tr>
+<tr class="separator:a8bbc9d8e5474b9a9db66c667824051a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c29d5890a760e38aef6f2e6e8efb04a" id="r_a3c29d5890a760e38aef6f2e6e8efb04a"><td class="memTemplParams" colspan="2">template&lt;class MPTYPE , class VALTYPE &gt; </td></tr>
+<tr class="memitem:a3c29d5890a760e38aef6f2e6e8efb04a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a3c29d5890a760e38aef6f2e6e8efb04a">minWaitOnModelPoint</a> (MPTYPE &amp;src, VALTYPE expectedVal, unsigned long minWait, VALTYPE *lastVal=nullptr, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</td></tr>
+<tr class="memdesc:a3c29d5890a760e38aef6f2e6e8efb04a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function performs a blocking wait by monitoring a Model Point for a specific value.  <br /></td></tr>
+<tr class="separator:a3c29d5890a760e38aef6f2e6e8efb04a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78a766a003c35697869f5905987115fb" id="r_a78a766a003c35697869f5905987115fb"><td class="memTemplParams" colspan="2">template&lt;class MPTYPE &gt; </td></tr>
+<tr class="memitem:a78a766a003c35697869f5905987115fb"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a78a766a003c35697869f5905987115fb">minWaitOnModelPointSeqNumChange</a> (MPTYPE &amp;src, uint16_t currentSeqNum, unsigned long minWait, uint16_t *newSeqNum=nullptr, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</td></tr>
+<tr class="memdesc:a78a766a003c35697869f5905987115fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is similar to <a class="el" href="#a3c29d5890a760e38aef6f2e6e8efb04a" title="This function performs a blocking wait by monitoring a Model Point for a specific value.">minWaitOnModelPoint&lt;&gt;()</a>, except that it waits for a change in the MP's sequence number.  <br /></td></tr>
+<tr class="separator:a78a766a003c35697869f5905987115fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ffa5d11cbfa608869ee6c5e18c93826" id="r_a8ffa5d11cbfa608869ee6c5e18c93826"><td class="memTemplParams" colspan="2">template&lt;class MPTYPE &gt; </td></tr>
+<tr class="memitem:a8ffa5d11cbfa608869ee6c5e18c93826"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a8ffa5d11cbfa608869ee6c5e18c93826">minWaitOnModelPointValidState</a> (MPTYPE &amp;src, bool expectedValidState, unsigned long minWait, int8_t *lastVal=nullptr, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</td></tr>
+<tr class="memdesc:a8ffa5d11cbfa608869ee6c5e18c93826"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is similar to <a class="el" href="#a3c29d5890a760e38aef6f2e6e8efb04a" title="This function performs a blocking wait by monitoring a Model Point for a specific value.">minWaitOnModelPoint&lt;&gt;()</a>, except that it waits on valid/invalid state of the MP.  <br /></td></tr>
+<tr class="separator:a8ffa5d11cbfa608869ee6c5e18c93826"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89ddbd887d81a50448bd39b762b9de16" id="r_a89ddbd887d81a50448bd39b762b9de16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89ddbd887d81a50448bd39b762b9de16">minWaitOnStreamData</a> (<a class="el" href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a> &amp;stream, unsigned long minWait=10, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</td></tr>
 <tr class="memdesc:a89ddbd887d81a50448bd39b762b9de16"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function performs a blocking wait by monitoring an input stream for available data.  <br /></td></tr>
 <tr class="separator:a89ddbd887d81a50448bd39b762b9de16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines helper functions/interface for writing unit tests. </p>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a787a1a867be0fe05b76f89879c2d8ad9" name="a787a1a867be0fe05b76f89879c2d8ad9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a787a1a867be0fe05b76f89879c2d8ad9">&#9670;&#160;</a></span>OPTION_KIT_TESTING_SUPPORT_HELPERS_TRACE_SECT</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a8bbc9d8e5474b9a9db66c667824051a7" name="a8bbc9d8e5474b9a9db66c667824051a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bbc9d8e5474b9a9db66c667824051a7">&#9670;&#160;</a></span>minWaitOnEnumModelPoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class MPTYPE , class VALTYPE &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">#define OPTION_KIT_TESTING_SUPPORT_HELPERS_TRACE_SECT&#160;&#160;&#160;&quot;_0test&quot;</td>
+          <td class="memname">bool minWaitOnEnumModelPoint </td>
+          <td>(</td>
+          <td class="paramtype">MPTYPE &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALTYPE</td>          <td class="paramname"><span class="paramname"><em>expectedVal</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>minWait</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALTYPE *</td>          <td class="paramname"><span class="paramname"><em>lastVal</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>maxWaitMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10000</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>waitDelayMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10</span></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Default Trace section used by/for the Helper methods. </p>
+<p>This function is the same <a class="el" href="#a3c29d5890a760e38aef6f2e6e8efb04a" title="This function performs a blocking wait by monitoring a Model Point for a specific value.">minWaitOnModelPoint()</a> above, expect that it expected VALTYPE to be BETTER_NUM. </p>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
+<a id="a3c29d5890a760e38aef6f2e6e8efb04a" name="a3c29d5890a760e38aef6f2e6e8efb04a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c29d5890a760e38aef6f2e6e8efb04a">&#9670;&#160;</a></span>minWaitOnModelPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class MPTYPE , class VALTYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool minWaitOnModelPoint </td>
+          <td>(</td>
+          <td class="paramtype">MPTYPE &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALTYPE</td>          <td class="paramname"><span class="paramname"><em>expectedVal</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>minWait</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">VALTYPE *</td>          <td class="paramname"><span class="paramname"><em>lastVal</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>maxWaitMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10000</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>waitDelayMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10</span></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function performs a blocking wait by monitoring a Model Point for a specific value. </p>
+<p>The method waits a specified amount of time BEFORE checking for the expected value. The method returns true if the specified MP's values matches the expected value; else the method will eventually time out and return false. </p>
+
+</div>
+</div>
+<a id="a78a766a003c35697869f5905987115fb" name="a78a766a003c35697869f5905987115fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78a766a003c35697869f5905987115fb">&#9670;&#160;</a></span>minWaitOnModelPointSeqNumChange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class MPTYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool minWaitOnModelPointSeqNumChange </td>
+          <td>(</td>
+          <td class="paramtype">MPTYPE &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>currentSeqNum</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>minWait</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *</td>          <td class="paramname"><span class="paramname"><em>newSeqNum</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>maxWaitMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10000</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>waitDelayMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10</span></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method is similar to <a class="el" href="#a3c29d5890a760e38aef6f2e6e8efb04a" title="This function performs a blocking wait by monitoring a Model Point for a specific value.">minWaitOnModelPoint&lt;&gt;()</a>, except that it waits for a change in the MP's sequence number. </p>
+
+</div>
+</div>
+<a id="a8ffa5d11cbfa608869ee6c5e18c93826" name="a8ffa5d11cbfa608869ee6c5e18c93826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ffa5d11cbfa608869ee6c5e18c93826">&#9670;&#160;</a></span>minWaitOnModelPointValidState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class MPTYPE &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool minWaitOnModelPointValidState </td>
+          <td>(</td>
+          <td class="paramtype">MPTYPE &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>expectedValidState</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>minWait</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t *</td>          <td class="paramname"><span class="paramname"><em>lastVal</em><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>maxWaitMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10000</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>waitDelayMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10</span></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This method is similar to <a class="el" href="#a3c29d5890a760e38aef6f2e6e8efb04a" title="This function performs a blocking wait by monitoring a Model Point for a specific value.">minWaitOnModelPoint&lt;&gt;()</a>, except that it waits on valid/invalid state of the MP. </p>
+
+</div>
+</div>
 <a id="a89ddbd887d81a50448bd39b762b9de16" name="a89ddbd887d81a50448bd39b762b9de16"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a89ddbd887d81a50448bd39b762b9de16">&#9670;&#160;</a></span>minWaitOnStreamData()</h2>
 
@@ -141,7 +324,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -66,7 +66,7 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// #include &quot;Kit/Persistent/Payload.h&quot; // TODO: Add persistent logging support</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;<a class="code" href="_string_8h.html">string.h</a>&gt;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/** The size, in bytes, reserved to store the text portion of the log entry.</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">    The size does NOT include the space reserved for the null terminator</span></div>
@@ -178,6 +178,7 @@ $(function() {
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_cursor_b_e_8h_html"><div class="ttname"><a href="_cursor_b_e_8h.html">CursorBE.h</a></div></div>
 <div class="ttc" id="a_entry_data_8h_html_acd9729243120f443e354fc01d18ac69a"><div class="ttname"><a href="_entry_data_8h.html#acd9729243120f443e354fc01d18ac69a">OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN</a></div><div class="ttdeci">#define OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN</div><div class="ttdoc">The size, in bytes, reserved to store the text portion of the log entry.</div><div class="ttdef"><b>Definition</b> EntryData.h:25</div></div>
+<div class="ttc" id="a_string_8h_html"><div class="ttname"><a href="_string_8h.html">String.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_cursor_b_e_html"><div class="ttname"><a href="class_kit_1_1_memory_1_1_cursor_b_e.html">Kit::Memory::CursorBE</a></div><div class="ttdoc">This 'public' concrete class provides BIG ENDIAN byte ordering semantics for a Cursor.</div><div class="ttdef"><b>Definition</b> CursorBE.h:28</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_cursor_b_e_html_a2f2666d79d50417cfe75171c074231c5"><div class="ttname"><a href="class_kit_1_1_memory_1_1_cursor_b_e.html#a2f2666d79d50417cfe75171c074231c5">Kit::Memory::CursorBE::readU64</a></div><div class="ttdeci">bool readU64(uint64_t &amp;dstData) noexcept</div><div class="ttdoc">Read a quad word. Returns false if there was an error.</div><div class="ttdef"><b>Definition</b> CursorBE.h:71</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_cursor_b_e_html_a92a9bf72372842cf5b88bcc8bb633ffc"><div class="ttname"><a href="class_kit_1_1_memory_1_1_cursor_b_e.html#a92a9bf72372842cf5b88bcc8bb633ffc">Kit::Memory::CursorBE::write</a></div><div class="ttdeci">bool write(T srcData) noexcept</div><div class="ttdoc">Template method to write N bytes. Only valid for integer types. Returns false if there was an error.</div><div class="ttdef"><b>Definition</b> CursorBE.h:193</div></div>
@@ -186,7 +187,7 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_cursor_base_html_a33742ab1f715695577d183414821a5c9"><div class="ttname"><a href="class_kit_1_1_memory_1_1_cursor_base.html#a33742ab1f715695577d183414821a5c9">Kit::Memory::CursorBase::writeU8</a></div><div class="ttdeci">bool writeU8(uint8_t srcData) noexcept</div><div class="ttdoc">Write a single byte. Returns false if there was an error.</div><div class="ttdef"><b>Definition</b> CursorBase.h:109</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_cursor_base_html_ab516d010bfdf5ed9928d40dcb688328d"><div class="ttname"><a href="class_kit_1_1_memory_1_1_cursor_base.html#ab516d010bfdf5ed9928d40dcb688328d">Kit::Memory::CursorBase::readU8</a></div><div class="ttdeci">bool readU8(uint8_t &amp;dstData) noexcept</div><div class="ttdoc">Read a single byte. Returns false if there was an error.</div><div class="ttdef"><b>Definition</b> CursorBase.h:90</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_cursor_base_html_ac4c5b50a82f12adb535603da2b6c81bd"><div class="ttname"><a href="class_kit_1_1_memory_1_1_cursor_base.html#ac4c5b50a82f12adb535603da2b6c81bd">Kit::Memory::CursorBase::errorOccurred</a></div><div class="ttdeci">bool errorOccurred() const noexcept</div><div class="ttdoc">Returns true if the cursor is in an error state (e.g.</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 <div class="ttc" id="astruct_kit_1_1_logging_1_1_framework_1_1_entry_data___t_html"><div class="ttname"><a href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a></div><div class="ttdoc">Defines the content of the Log entry.</div><div class="ttdef"><b>Definition</b> EntryData.h:62</div></div>
 <div class="ttc" id="astruct_kit_1_1_logging_1_1_framework_1_1_entry_data___t_html_a0a3f810b6910909fb866473b3c0f3ab9"><div class="ttname"><a href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#a0a3f810b6910909fb866473b3c0f3ab9">Kit::Logging::Framework::EntryData_T::m_timestamp</a></div><div class="ttdeci">uint64_t m_timestamp</div><div class="ttdoc">Time-stamp - as Kit::Time::BootTime - for the entry.</div><div class="ttdef"><b>Definition</b> EntryData.h:64</div></div>
 <div class="ttc" id="astruct_kit_1_1_logging_1_1_framework_1_1_entry_data___t_html_a2da4cca8c299dc686b029eca894c58ce"><div class="ttname"><a href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#a2da4cca8c299dc686b029eca894c58ce">Kit::Logging::Framework::EntryData_T::m_packageId</a></div><div class="ttdeci">uint8_t m_packageId</div><div class="ttdoc">Package identifier.</div><div class="ttdef"><b>Definition</b> EntryData.h:66</div></div>
@@ -201,7 +202,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

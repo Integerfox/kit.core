@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -120,7 +120,7 @@ $(function() {
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_queue_8h_html"><div class="ttname"><a href="_i_queue_8h.html">IQueue.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_msg_notification_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_msg_notification.html">Kit::EventQueue::IMsgNotification</a></div><div class="ttdoc">This abstract class represents the interface used to send ITC messages to a ITC mailbox.</div><div class="ttdef"><b>Definition</b> IMsgNotification.h:31</div></div>
-<div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_queue_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a></div><div class="ttdoc">This abstract class represents an Event Queue where events can be delivered to.</div><div class="ttdef"><b>Definition</b> IQueue.h:39</div></div>
+<div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_queue_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a></div><div class="ttdoc">This abstract class represents an Event Queue where events can be delivered to.</div><div class="ttdef"><b>Definition</b> IQueue.h:52</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_i_message_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_i_message.html">Kit::Itc::IMessage</a></div><div class="ttdoc">This abstract class defines the operations for an ITC message.</div><div class="ttdef"><b>Definition</b> IMessage.h:23</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_s_a_p_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_s_a_p.html">Kit::Itc::SAP</a></div><div class="ttdoc">This concrete template class represents the interface to a ITC Service Access Point (SAP).</div><div class="ttdef"><b>Definition</b> SAP.h:27</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_s_a_p_html_a28cfdef861d852b2659a27d6aab01d7d"><div class="ttname"><a href="class_kit_1_1_itc_1_1_s_a_p.html#a28cfdef861d852b2659a27d6aab01d7d">Kit::Itc::SAP::post</a></div><div class="ttdeci">void post(IMessage &amp;msg) noexcept override</div><div class="ttdoc">See Kit::EventQueue::IMsgNotification.</div><div class="ttdef"><b>Definition</b> SAP.h:48</div></div>
@@ -129,11 +129,11 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_s_a_p_html_a5c67aa5723d479d806bc0f484d0a0109"><div class="ttname"><a href="class_kit_1_1_itc_1_1_s_a_p.html#a5c67aa5723d479d806bc0f484d0a0109">Kit::Itc::SAP::getService</a></div><div class="ttdeci">SERVICE &amp; getService() noexcept</div><div class="ttdoc">Returns a reference to the associated Kit::Itc::Request instance.</div><div class="ttdef"><b>Definition</b> SAP.h:40</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_s_a_p_html_aabf27d4c8c6791f2981e0e8e9ba32aa7"><div class="ttname"><a href="class_kit_1_1_itc_1_1_s_a_p.html#aabf27d4c8c6791f2981e0e8e9ba32aa7">Kit::Itc::SAP::SAP</a></div><div class="ttdeci">SAP(SERVICE &amp;api, Kit::EventQueue::IQueue &amp;eventQueue) noexcept</div><div class="ttdoc">This constructor requires a reference to the request API and its associated mailbox/post-message API.</div><div class="ttdef"><b>Definition</b> SAP.h:33</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_s_a_p_html_ad24193e961aaecbcf66dd87f1c51a655"><div class="ttname"><a href="class_kit_1_1_itc_1_1_s_a_p.html#ad24193e961aaecbcf66dd87f1c51a655">Kit::Itc::SAP::m_api</a></div><div class="ttdeci">SERVICE &amp; m_api</div><div class="ttdoc">Reference to the instance that implements the request service.</div><div class="ttdef"><b>Definition</b> SAP.h:61</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

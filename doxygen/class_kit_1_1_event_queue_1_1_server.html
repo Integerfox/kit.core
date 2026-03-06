@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -48,6 +48,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_kit_1_1_event_queue_1_1_server-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::EventQueue::Server Class Reference</div></div>
 </div><!--header-->
@@ -56,7 +57,7 @@ $(function() {
 <p>This concrete class extends the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">Kit::System::EventLoop</a> interface to include processing events from Event Queue.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_server_8h_source.html">Server.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="src_2_kit_2_event_queue_2_server_8h_source.html">Server.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::EventQueue::Server:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -69,7 +70,7 @@ $(function() {
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_event_queue_1_1_server__coll__graph.svg" width="2887" height="524"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_event_queue_1_1_server__coll__graph.svg" width="2986" height="544"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -77,6 +78,42 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2364d35d50864dfaee3e4152986452d1" id="r_a2364d35d50864dfaee3e4152986452d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2364d35d50864dfaee3e4152986452d1">Server</a> (uint32_t timeOutPeriodInMsec=<a class="el" href="_event_loop_8h.html#a96b9b7b4fc83c760d364e7aed2f1ebcf">OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD</a>, <a class="el" href="class_kit_1_1_container_1_1_s_list.html">Kit::Container::SList</a>&lt; <a class="el" href="class_kit_1_1_system_1_1_i_event_flag.html">Kit::System::IEventFlag</a> &gt; *eventFlagsList=nullptr, <a class="el" href="class_kit_1_1_system_1_1_i_watched_event_loop.html">Kit::System::IWatchedEventLoop</a> *watchdog=nullptr) noexcept</td></tr>
 <tr class="memdesc:a2364d35d50864dfaee3e4152986452d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a2364d35d50864dfaee3e4152986452d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca2e2230e7dd3765114d547ba7d279e9" id="r_aca2e2230e7dd3765114d547ba7d279e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca2e2230e7dd3765114d547ba7d279e9">addPendingChangingNotification</a> (<a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;observer) noexcept override</td></tr>
+<tr class="memdesc:aca2e2230e7dd3765114d547ba7d279e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_event_queue_1_1_i_change_notification.html" title="This abstract class defines the interface to manage Data Model Change notification events that are pu...">Kit::EventQueue::IChangeNotification</a>.  <br /></td></tr>
+<tr class="separator:aca2e2230e7dd3765114d547ba7d279e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9759df4214d6fe1c8cec1ae3b75e59" id="r_aca9759df4214d6fe1c8cec1ae3b75e59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca9759df4214d6fe1c8cec1ae3b75e59">attach</a> (<a class="el" href="class_kit_1_1_system_1_1_i_counter.html">Kit::System::ICounter</a> &amp;c) noexcept override</td></tr>
+<tr class="memdesc:aca9759df4214d6fe1c8cec1ae3b75e59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:aca9759df4214d6fe1c8cec1ae3b75e59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a105bbd68d83eedcfa4196f0afbd134" id="r_a9a105bbd68d83eedcfa4196f0afbd134"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a105bbd68d83eedcfa4196f0afbd134">detach</a> (<a class="el" href="class_kit_1_1_system_1_1_i_counter.html">Kit::System::ICounter</a> &amp;c) noexcept override</td></tr>
+<tr class="memdesc:a9a105bbd68d83eedcfa4196f0afbd134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:a9a105bbd68d83eedcfa4196f0afbd134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87ef0cf3dd95f90724f621c1fb1ee501" id="r_a87ef0cf3dd95f90724f621c1fb1ee501"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87ef0cf3dd95f90724f621c1fb1ee501">msecToCounts</a> (uint32_t ms) const noexcept override</td></tr>
+<tr class="memdesc:a87ef0cf3dd95f90724f621c1fb1ee501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:a87ef0cf3dd95f90724f621c1fb1ee501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a736e5693125107db95c21dbf57107afb" id="r_a736e5693125107db95c21dbf57107afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a736e5693125107db95c21dbf57107afb">pleaseStop</a> () noexcept override</td></tr>
+<tr class="memdesc:a736e5693125107db95c21dbf57107afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:a736e5693125107db95c21dbf57107afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae70c6c1a0c5876fb4cfbd6a7d58ca5f9" id="r_ae70c6c1a0c5876fb4cfbd6a7d58ca5f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae70c6c1a0c5876fb4cfbd6a7d58ca5f9">removePendingChangingNotification</a> (<a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;observer) noexcept override</td></tr>
+<tr class="memdesc:ae70c6c1a0c5876fb4cfbd6a7d58ca5f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_event_queue_1_1_i_change_notification.html" title="This abstract class defines the interface to manage Data Model Change notification events that are pu...">Kit::EventQueue::IChangeNotification</a>.  <br /></td></tr>
+<tr class="separator:ae70c6c1a0c5876fb4cfbd6a7d58ca5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b62c68405f8cc17610dcbcd7f011180" id="r_a8b62c68405f8cc17610dcbcd7f011180"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b62c68405f8cc17610dcbcd7f011180">signal</a> () noexcept override</td></tr>
+<tr class="memdesc:a8b62c68405f8cc17610dcbcd7f011180"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:a8b62c68405f8cc17610dcbcd7f011180"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab580686859e5b7456538d9c3fd23b0e7" id="r_ab580686859e5b7456538d9c3fd23b0e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab580686859e5b7456538d9c3fd23b0e7">signalEvent</a> (uint8_t eventNumber) noexcept override</td></tr>
+<tr class="memdesc:ab580686859e5b7456538d9c3fd23b0e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:ab580686859e5b7456538d9c3fd23b0e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fdff1f796d2ef0f17190373719818b4" id="r_a2fdff1f796d2ef0f17190373719818b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fdff1f796d2ef0f17190373719818b4">signalMultipleEvents</a> (uint32_t events) noexcept override</td></tr>
+<tr class="memdesc:a2fdff1f796d2ef0f17190373719818b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:a2fdff1f796d2ef0f17190373719818b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10bf9bab81afde0d4a81e40fde1a75d5" id="r_a10bf9bab81afde0d4a81e40fde1a75d5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10bf9bab81afde0d4a81e40fde1a75d5">su_signal</a> () noexcept override</td></tr>
+<tr class="memdesc:a10bf9bab81afde0d4a81e40fde1a75d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:a10bf9bab81afde0d4a81e40fde1a75d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad00afa3c6307e57a12f805c5ec4d7d17" id="r_ad00afa3c6307e57a12f805c5ec4d7d17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad00afa3c6307e57a12f805c5ec4d7d17">su_signalEvent</a> (uint8_t eventNumber) noexcept override</td></tr>
+<tr class="memdesc:ad00afa3c6307e57a12f805c5ec4d7d17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:ad00afa3c6307e57a12f805c5ec4d7d17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a140bdc1ae035ba5cf1177c0f061648d7" id="r_a140bdc1ae035ba5cf1177c0f061648d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a140bdc1ae035ba5cf1177c0f061648d7">su_signalMultipleEvents</a> (uint32_t events) noexcept override</td></tr>
+<tr class="memdesc:a140bdc1ae035ba5cf1177c0f061648d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
+<tr class="separator:a140bdc1ae035ba5cf1177c0f061648d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_itc_1_1_mailbox"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_itc_1_1_mailbox')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_itc_1_1_mailbox.html">Kit::Itc::Mailbox</a></td></tr>
 <tr class="memitem:a20b0f9a96a99cfd99243720b768f8360 inherit pub_methods_class_kit_1_1_itc_1_1_mailbox" id="r_a20b0f9a96a99cfd99243720b768f8360"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html#a20b0f9a96a99cfd99243720b768f8360">Mailbox</a> (<a class="el" href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a> &amp;myEventLoop) noexcept</td></tr>
 <tr class="memdesc:a20b0f9a96a99cfd99243720b768f8360 inherit pub_methods_class_kit_1_1_itc_1_1_mailbox"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
@@ -162,25 +199,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae12425d8cff3b8c388a7651fd7dbe23a inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:ae12425d8cff3b8c388a7651fd7dbe23a inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac98e0900ddff9c917d784b3e9990ff14 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_ac98e0900ddff9c917d784b3e9990ff14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ac98e0900ddff9c917d784b3e9990ff14">pleaseStop</a> () noexcept override</td></tr>
-<tr class="memdesc:ac98e0900ddff9c917d784b3e9990ff14 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Cpl::System::IRunnable.  <br /></td></tr>
+<tr class="memdesc:ac98e0900ddff9c917d784b3e9990ff14 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob...">Kit::System::IRunnable</a>.  <br /></td></tr>
 <tr class="separator:ac98e0900ddff9c917d784b3e9990ff14 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2438029fd24f63baf634b69624a6868f inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_a2438029fd24f63baf634b69624a6868f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a2438029fd24f63baf634b69624a6868f">signal</a> () noexcept override</td></tr>
-<tr class="memdesc:a2438029fd24f63baf634b69624a6868f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Cpl::System::ISignable.  <br /></td></tr>
+<tr class="memdesc:a2438029fd24f63baf634b69624a6868f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting-on-a-...">Kit::System::ISignable</a>.  <br /></td></tr>
 <tr class="separator:a2438029fd24f63baf634b69624a6868f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae19bc0b4ee166c4714d70fdc86d0f314 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_ae19bc0b4ee166c4714d70fdc86d0f314"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ae19bc0b4ee166c4714d70fdc86d0f314">signalEvent</a> (uint8_t eventNumber) noexcept override</td></tr>
-<tr class="memdesc:ae19bc0b4ee166c4714d70fdc86d0f314 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Cpl::System::IEventManager.  <br /></td></tr>
+<tr class="memdesc:ae19bc0b4ee166c4714d70fdc86d0f314 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
 <tr class="separator:ae19bc0b4ee166c4714d70fdc86d0f314 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f587f7ef1a1484135bfe46dcf87352f inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_a4f587f7ef1a1484135bfe46dcf87352f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a4f587f7ef1a1484135bfe46dcf87352f">signalMultipleEvents</a> (uint32_t events) noexcept override</td></tr>
-<tr class="memdesc:a4f587f7ef1a1484135bfe46dcf87352f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Cpl::System::IEventManager.  <br /></td></tr>
+<tr class="memdesc:a4f587f7ef1a1484135bfe46dcf87352f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
 <tr class="separator:a4f587f7ef1a1484135bfe46dcf87352f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2cfc4c1fa7ccb74dab0124514555a72 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_af2cfc4c1fa7ccb74dab0124514555a72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#af2cfc4c1fa7ccb74dab0124514555a72">su_signal</a> () noexcept override</td></tr>
-<tr class="memdesc:af2cfc4c1fa7ccb74dab0124514555a72 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Cpl::System::ISignable.  <br /></td></tr>
+<tr class="memdesc:af2cfc4c1fa7ccb74dab0124514555a72 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting-on-a-...">Kit::System::ISignable</a>.  <br /></td></tr>
 <tr class="separator:af2cfc4c1fa7ccb74dab0124514555a72 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d75aed5b80068f509299373351768c8 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_a5d75aed5b80068f509299373351768c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a5d75aed5b80068f509299373351768c8">su_signalEvent</a> (uint8_t eventNumber) noexcept override</td></tr>
-<tr class="memdesc:a5d75aed5b80068f509299373351768c8 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Cpl::System::IEventManager.  <br /></td></tr>
+<tr class="memdesc:a5d75aed5b80068f509299373351768c8 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
 <tr class="separator:a5d75aed5b80068f509299373351768c8 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7b6fcb81ecd1fa40e30b612dd4d2015 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_aa7b6fcb81ecd1fa40e30b612dd4d2015"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#aa7b6fcb81ecd1fa40e30b612dd4d2015">su_signalMultipleEvents</a> (uint32_t events) noexcept override</td></tr>
-<tr class="memdesc:aa7b6fcb81ecd1fa40e30b612dd4d2015 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Cpl::System::IEventManager.  <br /></td></tr>
+<tr class="memdesc:aa7b6fcb81ecd1fa40e30b612dd4d2015 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
 <tr class="separator:aa7b6fcb81ecd1fa40e30b612dd4d2015 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_system_1_1_i_runnable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_system_1_1_i_runnable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html">Kit::System::IRunnable</a></td></tr>
 <tr class="memitem:adc92ec5337cb44ef6f42a97a1f212a02 inherit pub_methods_class_kit_1_1_system_1_1_i_runnable" id="r_adc92ec5337cb44ef6f42a97a1f212a02"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_i_runnable.html#adc92ec5337cb44ef6f42a97a1f212a02">~IRunnable</a> () noexcept=default</td></tr>
@@ -204,15 +241,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4082422ffe95551289a72b8aaf988549 inherit pub_methods_class_kit_1_1_system_1_1_timer_manager" id="r_a4082422ffe95551289a72b8aaf988549"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#a4082422ffe95551289a72b8aaf988549">areActiveTimers</a> () const noexcept</td></tr>
 <tr class="memdesc:a4082422ffe95551289a72b8aaf988549 inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is at least one active timer.  <br /></td></tr>
 <tr class="separator:a4082422ffe95551289a72b8aaf988549 inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9f2f0c527bee7248a8cc6a9ba98cd1e inherit pub_methods_class_kit_1_1_system_1_1_timer_manager" id="r_ab9f2f0c527bee7248a8cc6a9ba98cd1e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#ab9f2f0c527bee7248a8cc6a9ba98cd1e">attach</a> (<a class="el" href="class_kit_1_1_system_1_1_i_counter.html">ICounter</a> &amp;clientToCallback) noexcept</td></tr>
-<tr class="memdesc:ab9f2f0c527bee7248a8cc6a9ba98cd1e inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register for notification.  <br /></td></tr>
-<tr class="separator:ab9f2f0c527bee7248a8cc6a9ba98cd1e inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc77eecf4550214aac1ccc836997895b inherit pub_methods_class_kit_1_1_system_1_1_timer_manager" id="r_afc77eecf4550214aac1ccc836997895b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#afc77eecf4550214aac1ccc836997895b">detach</a> (<a class="el" href="class_kit_1_1_system_1_1_i_counter.html">ICounter</a> &amp;clientToCallback) noexcept</td></tr>
-<tr class="memdesc:afc77eecf4550214aac1ccc836997895b inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unregister for notification.  <br /></td></tr>
-<tr class="separator:afc77eecf4550214aac1ccc836997895b inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03fc852e510dc1e19e8b9067d14b22b3 inherit pub_methods_class_kit_1_1_system_1_1_timer_manager" id="r_a03fc852e510dc1e19e8b9067d14b22b3"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#a03fc852e510dc1e19e8b9067d14b22b3">msecToCounts</a> (uint32_t durationInMsecs) const noexcept</td></tr>
-<tr class="memdesc:a03fc852e510dc1e19e8b9067d14b22b3 inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the requested duration in milliseconds to counter ticks.  <br /></td></tr>
-<tr class="separator:a03fc852e510dc1e19e8b9067d14b22b3 inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c434e30abb7ef7445a106dc540a730c inherit pub_methods_class_kit_1_1_system_1_1_timer_manager" id="r_a7c434e30abb7ef7445a106dc540a730c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#a7c434e30abb7ef7445a106dc540a730c">processTimers</a> () noexcept</td></tr>
 <tr class="memdesc:a7c434e30abb7ef7445a106dc540a730c inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method processes the current active timer lists.  <br /></td></tr>
 <tr class="separator:a7c434e30abb7ef7445a106dc540a730c inherit pub_methods_class_kit_1_1_system_1_1_timer_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -225,6 +253,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a95b553d2d14016e0c451f91e05671900" id="r_a95b553d2d14016e0c451f91e05671900"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95b553d2d14016e0c451f91e05671900">entry</a> () noexcept override</td></tr>
 <tr class="memdesc:a95b553d2d14016e0c451f91e05671900"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob...">Kit::System::IRunnable</a>.  <br /></td></tr>
 <tr class="separator:a95b553d2d14016e0c451f91e05671900"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20bd432111a6ecdb4101f9e227b37a1f" id="r_a20bd432111a6ecdb4101f9e227b37a1f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a20bd432111a6ecdb4101f9e227b37a1f">serverProcessEvents</a> () noexcept</td></tr>
+<tr class="memdesc:a20bd432111a6ecdb4101f9e227b37a1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method that processes events.  <br /></td></tr>
+<tr class="separator:a20bd432111a6ecdb4101f9e227b37a1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaf06239f453c592affa32b1b38b13c9" id="r_aeaf06239f453c592affa32b1b38b13c9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaf06239f453c592affa32b1b38b13c9">serverWaitAndProcessEvents</a> () noexcept</td></tr>
+<tr class="memdesc:aeaf06239f453c592affa32b1b38b13c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method that waits for events.  <br /></td></tr>
+<tr class="separator:aeaf06239f453c592affa32b1b38b13c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_kit_1_1_itc_1_1_mailbox"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_class_kit_1_1_itc_1_1_mailbox')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_kit_1_1_itc_1_1_mailbox.html">Kit::Itc::Mailbox</a></td></tr>
 <tr class="memitem:a804ce1242626455c8b170f814ae3f2ee inherit pro_methods_class_kit_1_1_itc_1_1_mailbox" id="r_a804ce1242626455c8b170f814ae3f2ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html#a804ce1242626455c8b170f814ae3f2ee">isPendingMessage</a> () noexcept</td></tr>
 <tr class="memdesc:a804ce1242626455c8b170f814ae3f2ee inherit pro_methods_class_kit_1_1_itc_1_1_mailbox"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method IS thread safe.  <br /></td></tr>
@@ -280,7 +314,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ada8623aefd43b57edc52de47038d8184 inherit pro_methods_class_kit_1_1_container_1_1_s_list_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_kit_1_1_system_1_1_event_loop"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_class_kit_1_1_system_1_1_event_loop')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_kit_1_1_system_1_1_event_loop.html">Kit::System::EventLoop</a></td></tr>
 <tr class="memitem:a49d8c80698772de19f1fcdb026b33d57 inherit pro_methods_class_kit_1_1_system_1_1_event_loop" id="r_a49d8c80698772de19f1fcdb026b33d57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a49d8c80698772de19f1fcdb026b33d57">entry</a> () noexcept override</td></tr>
-<tr class="memdesc:a49d8c80698772de19f1fcdb026b33d57 inherit pro_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Cpl::System::IRunnable.  <br /></td></tr>
+<tr class="memdesc:a49d8c80698772de19f1fcdb026b33d57 inherit pro_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob...">Kit::System::IRunnable</a>.  <br /></td></tr>
 <tr class="separator:a49d8c80698772de19f1fcdb026b33d57 inherit pro_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c9d4438483e01a1153819145ab22320 inherit pro_methods_class_kit_1_1_system_1_1_event_loop" id="r_a4c9d4438483e01a1153819145ab22320"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a4c9d4438483e01a1153819145ab22320">startEventLoop</a> () noexcept</td></tr>
 <tr class="memdesc:a4c9d4438483e01a1153819145ab22320 inherit pro_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to initialize the Event Loop's thread has started to executed.  <br /></td></tr>
@@ -309,8 +343,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:aeb68653c338976e82d67d660c06a60df inherit pro_methods_class_kit_1_1_system_1_1_timer_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used by the Tick source to information the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager that there are no more ticks for the timing source's current tick cycle.  <br /></td></tr>
 <tr class="separator:aeb68653c338976e82d67d660c06a60df inherit pro_methods_class_kit_1_1_system_1_1_timer_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ab0a67e9513954b16e96f5204d16a53fd" id="r_ab0a67e9513954b16e96f5204d16a53fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_dm_1_1_change_handler.html">Kit::Dm::ChangeHandler</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0a67e9513954b16e96f5204d16a53fd">m_changeHandler</a></td></tr>
+<tr class="memdesc:ab0a67e9513954b16e96f5204d16a53fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change Handler for processing Data Model change notifications.  <br /></td></tr>
+<tr class="separator:ab0a67e9513954b16e96f5204d16a53fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_kit_1_1_itc_1_1_mailbox"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_class_kit_1_1_itc_1_1_mailbox')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_kit_1_1_itc_1_1_mailbox.html">Kit::Itc::Mailbox</a></td></tr>
 <tr class="memitem:ad19e2213253ce5ec6cf50a90208a75a9 inherit pro_attribs_class_kit_1_1_itc_1_1_mailbox" id="r_ad19e2213253ce5ec6cf50a90208a75a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_system_1_1_i_signable.html">Kit::System::ISignable</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html#ad19e2213253ce5ec6cf50a90208a75a9">m_eventLoop</a></td></tr>
 <tr class="memdesc:ad19e2213253ce5ec6cf50a90208a75a9 inherit pro_attribs_class_kit_1_1_itc_1_1_mailbox"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Event Loop/thread that I wait-on/dispatch-msgs-from.  <br /></td></tr>
@@ -330,7 +367,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a2744e45e4b47c0742642cfab1228e05c inherit pro_attribs_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">The variable holds the current state of all Event Flags.  <br /></td></tr>
 <tr class="separator:a2744e45e4b47c0742642cfab1228e05c inherit pro_attribs_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42ff3727ae7d48d0782412463bd16520 inherit pro_attribs_class_kit_1_1_system_1_1_event_loop" id="r_a42ff3727ae7d48d0782412463bd16520"><td class="memItemLeft" align="right" valign="top">volatile bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a42ff3727ae7d48d0782412463bd16520">m_run</a></td></tr>
-<tr class="memdesc:a42ff3727ae7d48d0782412463bd16520 inherit pro_attribs_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag used to help with the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ac98e0900ddff9c917d784b3e9990ff14" title="See Cpl::System::IRunnable.">pleaseStop()</a> request.  <br /></td></tr>
+<tr class="memdesc:a42ff3727ae7d48d0782412463bd16520 inherit pro_attribs_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag used to help with the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ac98e0900ddff9c917d784b3e9990ff14" title="See Kit::System::IRunnable.">pleaseStop()</a> request.  <br /></td></tr>
 <tr class="separator:a42ff3727ae7d48d0782412463bd16520 inherit pro_attribs_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae56572b3851678258f75613fbec72a70 inherit pro_attribs_class_kit_1_1_system_1_1_event_loop" id="r_ae56572b3851678258f75613fbec72a70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_system_1_1_semaphore.html">Semaphore</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ae56572b3851678258f75613fbec72a70">m_sema</a></td></tr>
 <tr class="memdesc:ae56572b3851678258f75613fbec72a70 inherit pro_attribs_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore.">Semaphore</a> associated with the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a> (note: the <a class="el" href="class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread.">Thread</a> semaphore is NOT used)  <br /></td></tr>
@@ -410,6 +447,91 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aca2e2230e7dd3765114d547ba7d279e9" name="aca2e2230e7dd3765114d547ba7d279e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca2e2230e7dd3765114d547ba7d279e9">&#9670;&#160;</a></span>addPendingChangingNotification()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::addPendingChangingNotification </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>observer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>See <a class="el" href="class_kit_1_1_event_queue_1_1_i_change_notification.html" title="This abstract class defines the interface to manage Data Model Change notification events that are pu...">Kit::EventQueue::IChangeNotification</a>. </p>
+
+</div>
+</div>
+<a id="aca9759df4214d6fe1c8cec1ae3b75e59" name="aca9759df4214d6fe1c8cec1ae3b75e59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca9759df4214d6fe1c8cec1ae3b75e59">&#9670;&#160;</a></span>attach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::attach </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_system_1_1_i_counter.html">Kit::System::ICounter</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#ab9f2f0c527bee7248a8cc6a9ba98cd1e">Kit::System::TimerManager</a>.</p>
+
+</div>
+</div>
+<a id="a9a105bbd68d83eedcfa4196f0afbd134" name="a9a105bbd68d83eedcfa4196f0afbd134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a105bbd68d83eedcfa4196f0afbd134">&#9670;&#160;</a></span>detach()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kit::EventQueue::Server::detach </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_system_1_1_i_counter.html">Kit::System::ICounter</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#afc77eecf4550214aac1ccc836997895b">Kit::System::TimerManager</a>.</p>
+
+</div>
+</div>
 <a id="a95b553d2d14016e0c451f91e05671900" name="a95b553d2d14016e0c451f91e05671900"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a95b553d2d14016e0c451f91e05671900">&#9670;&#160;</a></span>entry()</h2>
 
@@ -437,17 +559,357 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html#a3e2c4359330ab60b590e1e83c91bd7fc">Kit::System::IRunnable</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html#ade5d1e5990cc65c91d8c0160934086b8">Kit::EventQueue::WithPeriodicScheduling</a>.</p>
+<p>Reimplemented in <a class="el" href="class_test_event_queue_server.html#a2e7127b20afe4c5430bcc5418b1ed061">TestEventQueueServer</a>, and <a class="el" href="class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html#ade5d1e5990cc65c91d8c0160934086b8">Kit::EventQueue::WithPeriodicScheduling</a>.</p>
+
+</div>
+</div>
+<a id="a87ef0cf3dd95f90724f621c1fb1ee501" name="a87ef0cf3dd95f90724f621c1fb1ee501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ef0cf3dd95f90724f621c1fb1ee501">&#9670;&#160;</a></span>msecToCounts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t Kit::EventQueue::Server::msecToCounts </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>ms</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#a03fc852e510dc1e19e8b9067d14b22b3">Kit::System::TimerManager</a>.</p>
+
+</div>
+</div>
+<a id="a736e5693125107db95c21dbf57107afb" name="a736e5693125107db95c21dbf57107afb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a736e5693125107db95c21dbf57107afb">&#9670;&#160;</a></span>pleaseStop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::pleaseStop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html#ae25b7e341117378695ffbcddabedb76b">Kit::System::IRunnable</a>.</p>
+
+</div>
+</div>
+<a id="ae70c6c1a0c5876fb4cfbd6a7d58ca5f9" name="ae70c6c1a0c5876fb4cfbd6a7d58ca5f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae70c6c1a0c5876fb4cfbd6a7d58ca5f9">&#9670;&#160;</a></span>removePendingChangingNotification()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::removePendingChangingNotification </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>observer</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>See <a class="el" href="class_kit_1_1_event_queue_1_1_i_change_notification.html" title="This abstract class defines the interface to manage Data Model Change notification events that are pu...">Kit::EventQueue::IChangeNotification</a>. </p>
+
+</div>
+</div>
+<a id="a20bd432111a6ecdb4101f9e227b37a1f" name="a20bd432111a6ecdb4101f9e227b37a1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20bd432111a6ecdb4101f9e227b37a1f">&#9670;&#160;</a></span>serverProcessEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Kit::EventQueue::Server::serverProcessEvents </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper method that processes events. </p>
+
+<p>Reimplemented in <a class="el" href="class_test_event_queue_server.html#a4f5f75fd3f4a40db78ed89d2559a683d">TestEventQueueServer</a>.</p>
+
+</div>
+</div>
+<a id="aeaf06239f453c592affa32b1b38b13c9" name="aeaf06239f453c592affa32b1b38b13c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaf06239f453c592affa32b1b38b13c9">&#9670;&#160;</a></span>serverWaitAndProcessEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Kit::EventQueue::Server::serverWaitAndProcessEvents </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Helper method that waits for events. </p>
+
+</div>
+</div>
+<a id="a8b62c68405f8cc17610dcbcd7f011180" name="a8b62c68405f8cc17610dcbcd7f011180"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b62c68405f8cc17610dcbcd7f011180">&#9670;&#160;</a></span>signal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Kit::EventQueue::Server::signal </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_signable.html#a72c130b85d33277148381e554908ffb6">Kit::System::ISignable</a>.</p>
+
+</div>
+</div>
+<a id="ab580686859e5b7456538d9c3fd23b0e7" name="ab580686859e5b7456538d9c3fd23b0e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab580686859e5b7456538d9c3fd23b0e7">&#9670;&#160;</a></span>signalEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::signalEvent </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>eventNumber</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html#aaaef0d8b8658c6aa3b055110e31a715e">Kit::System::IEventManager</a>.</p>
+
+</div>
+</div>
+<a id="a2fdff1f796d2ef0f17190373719818b4" name="a2fdff1f796d2ef0f17190373719818b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fdff1f796d2ef0f17190373719818b4">&#9670;&#160;</a></span>signalMultipleEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::signalMultipleEvents </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>events</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html#a489347252c4d2000f59907092204955f">Kit::System::IEventManager</a>.</p>
+
+</div>
+</div>
+<a id="a10bf9bab81afde0d4a81e40fde1a75d5" name="a10bf9bab81afde0d4a81e40fde1a75d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10bf9bab81afde0d4a81e40fde1a75d5">&#9670;&#160;</a></span>su_signal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Kit::EventQueue::Server::su_signal </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_signable.html#af4e2c4865999347547d60b525b2b9d1a">Kit::System::ISignable</a>.</p>
+
+</div>
+</div>
+<a id="ad00afa3c6307e57a12f805c5ec4d7d17" name="ad00afa3c6307e57a12f805c5ec4d7d17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad00afa3c6307e57a12f805c5ec4d7d17">&#9670;&#160;</a></span>su_signalEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::su_signalEvent </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>eventNumber</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html#adb18155c78909037aaa0d5b4ba0318c9">Kit::System::IEventManager</a>.</p>
+
+</div>
+</div>
+<a id="a140bdc1ae035ba5cf1177c0f061648d7" name="a140bdc1ae035ba5cf1177c0f061648d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a140bdc1ae035ba5cf1177c0f061648d7">&#9670;&#160;</a></span>su_signalMultipleEvents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::su_signalMultipleEvents </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>events</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
+
+<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html#ae18687658c65f499e764fa8c1b03f216">Kit::System::IEventManager</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab0a67e9513954b16e96f5204d16a53fd" name="ab0a67e9513954b16e96f5204d16a53fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0a67e9513954b16e96f5204d16a53fd">&#9670;&#160;</a></span>m_changeHandler</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_dm_1_1_change_handler.html">Kit::Dm::ChangeHandler</a> Kit::EventQueue::Server::m_changeHandler</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Change Handler for processing Data Model change notifications. </p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Kit/EventQueue/<a class="el" href="_server_8h_source.html">Server.h</a></li>
+<li>Kit/EventQueue/<a class="el" href="src_2_kit_2_event_queue_2_server_8h_source.html">Server.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

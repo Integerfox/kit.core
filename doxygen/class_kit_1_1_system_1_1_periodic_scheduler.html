@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -148,7 +148,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><p>This concrete class is a 'policy' object that is used to add polled based, cooperative monotonic scheduling to a Runnable object. </p>
 <p>Monotonic in this content means that if a 'interval' method is scheduled to execute at a periodic rate of 200Hz, then the method will be called on every 5ms boundary of the system time.</p>
 <p>The scheduler makes its best attempt at being monotonic and deterministic, BUT because the scheduling is polled and cooperative (i.e. its is the application's responsibility to not-overrun/over-allocate the processing done during each interval) the actual the timing cannot be guaranteed. That said, the scheduler will detect and report when the interval timing slips.</p>
-<p>The usage of this class is to implement (or extended) a Cpl::System::Runnable object, i.e. invoked inside the 'forever' loop of the Runnable object's appRun() method. The scheduler can be use within a 'bare' forever loop and it can be used with existing event based Runnable objects to add periodic scheduling. See Cpl::Dm::PeriodicScheduler for example extending an event based Runnable object to include periodic scheduling.</p>
+<p>The usage of this class is to implement (or extended) a Kit::System::Runnable object, i.e. invoked inside the 'forever' loop of the Runnable object's appRun() method. The scheduler can be use within a 'bare' forever loop and it can be used with existing event based Runnable objects to add periodic scheduling. See Kit::EventQueue::WithPeriodicScheduler for example extending an event based Runnable object to include periodic scheduling.</p>
 <p>NOTE: A uint64_t is used for the millisecond time keeping because it provides a larger range and can accommodate long-running applications (i.e. a uint32_t rolls over every 49.7 days; a uint64_t rolls over every 584 million years).</p>
 <p>NOTE: A "traditional C function pointer" paradigm is used to provide application specialization. This is by design on the premise that it simplifies the Application "main" in that 'start-up child classes' are not required to be created for each interval and/or for the scheduler hooks. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
@@ -585,7 +585,7 @@ currentInterval:=  10200 ms
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

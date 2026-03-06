@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -62,7 +62,7 @@ $(function() {
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;kit_config.h&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_assert_8h.html">Kit/System/Assert.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;<a class="code" href="_string_8h.html">string.h</a>&gt;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/** Compile time switch the select which implementation of the Ring Buffer to</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">    use.  The default implementation uses C++11 atomics (vs. using only the</span></div>
@@ -243,6 +243,7 @@ $(function() {
 <div class="ttc" id="a_assert_8h_html_a01b4941fc3ef648efdb3ff3f4b7dcd54"><div class="ttname"><a href="_assert_8h.html#a01b4941fc3ef648efdb3ff3f4b7dcd54">KIT_SYSTEM_ASSERT</a></div><div class="ttdeci">#define KIT_SYSTEM_ASSERT(e)</div><div class="ttdoc">Empty macro.</div><div class="ttdef"><b>Definition</b> Assert.h:34</div></div>
 <div class="ttc" id="a_ring_buffer_base_atomic_8h_html"><div class="ttname"><a href="_ring_buffer_base_atomic_8h.html">RingBufferBaseAtomic.h</a></div></div>
 <div class="ttc" id="a_ring_buffer_base_volatile_8h_html"><div class="ttname"><a href="_ring_buffer_base_volatile_8h.html">RingBufferBaseVolatile.h</a></div></div>
+<div class="ttc" id="a_string_8h_html"><div class="ttname"><a href="_string_8h.html">String.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_html"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a></div><div class="ttdoc">This template class implements a Ring Buffer.</div><div class="ttdef"><b>Definition</b> RingBuffer.h:59</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_html_a067ef2cf4a483997e7e85873f2efb4cd"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer.html#a067ef2cf4a483997e7e85873f2efb4cd">Kit::Container::RingBuffer::peekHead</a></div><div class="ttdeci">bool peekHead(ITEM &amp;item) noexcept</div><div class="ttdoc">This method inspects the head of the ring buffer without removing it.</div><div class="ttdef"><b>Definition</b> RingBuffer.h:98</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_html_a1e11b1cbd7fdd7ce120dbac9dc99d7cc"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer.html#a1e11b1cbd7fdd7ce120dbac9dc99d7cc">Kit::Container::RingBuffer::peekNextAddItems</a></div><div class="ttdeci">ITEM * peekNextAddItems(unsigned &amp;dstNumFlatElements) const noexcept</div><div class="ttdoc">This method returns a pointer to the next item to be added.</div><div class="ttdef"><b>Definition</b> RingBuffer.h:149</div></div>
@@ -254,11 +255,11 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_html_ac3c986b1c6595fc1eca21d4e63427320"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer.html#ac3c986b1c6595fc1eca21d4e63427320">Kit::Container::RingBuffer::peekTail</a></div><div class="ttdeci">bool peekTail(ITEM &amp;item) noexcept</div><div class="ttdoc">This method inspects the tail of the ring buffer without removing it.</div><div class="ttdef"><b>Definition</b> RingBuffer.h:108</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_html_aeae33a075bbf6ed87fbb3b16993d84ea"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer.html#aeae33a075bbf6ed87fbb3b16993d84ea">Kit::Container::RingBuffer::RingBuffer</a></div><div class="ttdeci">RingBuffer(ITEM *memoryBuffer, unsigned N, bool initializeMemory=true)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> RingBuffer.h:62</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_html_af30609f25225a17178e151519e82f348"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer.html#af30609f25225a17178e151519e82f348">Kit::Container::RingBuffer::remove</a></div><div class="ttdeci">bool remove(ITEM &amp;item) noexcept</div><div class="ttdoc">Removes an item from the ring buffer.</div><div class="ttdef"><b>Definition</b> RingBuffer.h:88</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

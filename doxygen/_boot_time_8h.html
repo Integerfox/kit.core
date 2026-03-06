@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -56,7 +56,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_boot_time_8h__incl.svg" width="203" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="_boot_time_8h__incl.svg" width="1511" height="623"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_boot_time_8h_source.html">Go to the source code of this file.</a></p>
@@ -64,7 +64,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespace_kit" id="r_namespace_kit"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit.html">Kit</a></td></tr>
-<tr class="memdesc:namespace_kit"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward reference to break dependency on the Dm namespace. <br /></td></tr>
+<tr class="memdesc:namespace_kit"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_kit_1_1_time" id="r_namespace_kit_1_1_time"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_time.html">Kit::Time</a></td></tr>
 <tr class="memdesc:namespace_kit_1_1_time"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="namespace_kit_1_1_time.html" title="The Time namespace provides time sources (other than the Kit::System::ElapsedTime interface),...">Time</a> namespace provides <em>time sources</em> (other than the <a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html" title="This class defines the interface for accessing the elapsed time since power up and/or reset of the pl...">Kit::System::ElapsedTime</a> interface), time related functions, etc. <br /></td></tr>
@@ -78,6 +78,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a7ed042091ef6a4055a48c77ec5d83c3d" id="r_a7ed042091ef6a4055a48c77ec5d83c3d"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_time.html#a7ed042091ef6a4055a48c77ec5d83c3d">Kit::Time::getBootTime</a> () noexcept</td></tr>
 <tr class="memdesc:a7ed042091ef6a4055a48c77ec5d83c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns 'Boot <a class="el" href="namespace_kit_1_1_time.html" title="The Time namespace provides time sources (other than the Kit::System::ElapsedTime interface),...">Time</a>' which include the current boot counter and elapsed time - in milliseconds - since the MCU was reset.  <br /></td></tr>
 <tr class="separator:a7ed042091ef6a4055a48c77ec5d83c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e7d696cac145f7ecbab397730c8050" id="r_a81e7d696cac145f7ecbab397730c8050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_time.html#a81e7d696cac145f7ecbab397730c8050">Kit::Time::initializeBootTime</a> (<a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a> &amp;bootCounterMp) noexcept</td></tr>
+<tr class="memdesc:a81e7d696cac145f7ecbab397730c8050"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to initialize boot time logic.  <br /></td></tr>
+<tr class="separator:a81e7d696cac145f7ecbab397730c8050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b21309d66fbb1e9cd6db4ab789329a8" id="r_a9b21309d66fbb1e9cd6db4ab789329a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_time.html#a9b21309d66fbb1e9cd6db4ab789329a8">Kit::Time::parseBootTime</a> (uint64_t srcBootTime, uint16_t &amp;dstBootCounter, uint64_t &amp;dstElapsedTimeMs) noexcept</td></tr>
 <tr class="memdesc:a9b21309d66fbb1e9cd6db4ab789329a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method breaks 'boot time' into itself individual fields.  <br /></td></tr>
 <tr class="separator:a9b21309d66fbb1e9cd6db4ab789329a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -85,7 +88,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -57,10 +57,10 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_r_p_pico_1_1_mutex___t.html">Mutex_T</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class implements a brute force approach to initializing a 'pico mutex' when the <a class="el" href="namespace_kit.html" title="Forward reference to break dependency on the Dm namespace.">Kit</a> C++ library is initialized.  <a href="class_kit_1_1_system_1_1_r_p_pico_1_1_mutex___t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class implements a brute force approach to initializing a 'pico mutex' when the <a class="el" href="namespace_kit.html" title="Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.">Kit</a> C++ library is initialized.  <a href="class_kit_1_1_system_1_1_r_p_pico_1_1_mutex___t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_r_p_pico_1_1_semaphore___t.html">Semaphore_T</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class implements a brute force approach to initializing a 'pico semaphore' when the <a class="el" href="namespace_kit.html" title="Forward reference to break dependency on the Dm namespace.">Kit</a> C++ library is initialized.  <a href="class_kit_1_1_system_1_1_r_p_pico_1_1_semaphore___t.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class implements a brute force approach to initializing a 'pico semaphore' when the <a class="el" href="namespace_kit.html" title="Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.">Kit</a> C++ library is initialized.  <a href="class_kit_1_1_system_1_1_r_p_pico_1_1_semaphore___t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_r_p_pico_1_1_thread.html">Thread</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class implements a <a class="el" href="class_kit_1_1_system_1_1_r_p_pico_1_1_thread.html" title="This concrete class implements a Thread object that maps 1 to 1 with a processor core on the Raspberr...">Thread</a> object that maps 1 to 1 with a processor core on the Raspberry PI RP2xxx micro-controller.  <a href="class_kit_1_1_system_1_1_r_p_pico_1_1_thread.html#details">More...</a><br /></td></tr>
@@ -69,7 +69,7 @@ Classes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concrete implementation of the platform specific classes/features of the <a class="el" href="namespace_kit_1_1_system.html" title="The System namespace contains platform independent foundation abstractions and classes related to pro...">Kit::System</a> namespace interfaces for the Raspberry RP2xxx MCUs' dual cores, i.e. a maximum of 2 threads - one per core. </p>
 <p><b>NOTE</b>: Currently only the Dual ARM cores are supported. TBD for supporting the dual RISC-V cores on the RP2350.</p>
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md51"></a>
 Platform Dependent Behaviors</h1>
 <p><b><a class="el" href="class_kit_1_1_system_1_1_r_p_pico_1_1_thread.html" title="This concrete class implements a Thread object that maps 1 to 1 with a processor core on the Raspberr...">Thread</a></b> - The first thread created runs on core0. A SINGLE additional thread can be created that runs on core1.</p>
 <p><b><a class="el" href="class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics.">Mutex</a></b> - Fully functional. Note: The memory for internal <a class="el" href="class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics.">Mutex</a> type is allocated from the Heap.</p>
@@ -79,7 +79,7 @@ Platform Dependent Behaviors</h1>
 <p><b><a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html" title="This class defines the interface for accessing the elapsed time since power up and/or reset of the pl...">ElapsedTime</a></b> - Fully functional. <br  />
 </p>
 <p><b><a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a></b> - Fully functional. This includes EventFlags and Software Timers.</p>
-<h1><a class="anchor" id="autotoc_md44"></a>
+<h1><a class="anchor" id="autotoc_md52"></a>
 Application Start-up sequence</h1>
 <ol type="1">
 <li>MCU Resets.</li>
@@ -97,7 +97,7 @@ Application Start-up sequence</h1>
 <li>The Application 'starts threading' by calling <code><a class="el" href="namespace_kit_1_1_system.html#aaaf10d7b2ba64ba90e57bdd88c1ea666" title="This function is used to initiate thread scheduling.">Kit::System::enableScheduling()</a></code>.</li>
 <li>Once the 'threading' has been enabled, the Application can optionally create the second thread assuming that only 1 thread was created prior to <code><a class="el" href="namespace_kit_1_1_system.html#aaaf10d7b2ba64ba90e57bdd88c1ea666" title="This function is used to initiate thread scheduling.">enableScheduling()</a></code> call.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md45"></a>
+<h1><a class="anchor" id="autotoc_md53"></a>
 Notes:</h1>
 <ol type="1">
 <li>The second thread can be forcibly stopped (i.e. CORE1 put into the sleep state) by calling <code><a class="el" href="class_kit_1_1_system_1_1_thread.html#a34f3b7f50ea5457caa8e162d36273a5f" title="This method is used to destroy a thread that was created by the Thread Factory.">Kit::System::Thread::destroy()</a></code>. If the second thread terminated itself, i.e. the Runnable object ran to completion, CORE1 will be put into the sleep state.</li>
@@ -107,7 +107,7 @@ Notes:</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

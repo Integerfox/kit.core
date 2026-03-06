@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-25 00:02:35</td>
+            <td class="headerValue">2026-03-06 02:39:35</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -77,15 +77,15 @@
 <span id="L15"><span class="lineNum">      15</span>                 :             : namespace Kit {</span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : namespace Itc {</span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : </span>
-<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC tlaBgGNC">          35 : SyncReturnHandler::SyncReturnHandler( Kit::System::ISignable&amp; clientSemaphore ) noexcept</span></span>
-<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC">          35 :     : m_waiter( clientSemaphore )</span></span>
+<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC tlaBgGNC">          71 : SyncReturnHandler::SyncReturnHandler( Kit::System::ISignable&amp; clientSemaphore ) noexcept</span></span>
+<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC">          71 :     : m_waiter( clientSemaphore )</span></span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : {</span>
-<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">          35 : }</span></span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">          71 : }</span></span>
 <span id="L22"><span class="lineNum">      22</span>                 :             : </span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          35 : void SyncReturnHandler::rts() noexcept</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          71 : void SyncReturnHandler::rts() noexcept</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : {</span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">          35 :     m_waiter.signal();</span></span>
-<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">          35 : }</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">          71 :     m_waiter.signal();</span></span>
+<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">          71 : }</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : </span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : }  // end namespace</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : }</span>

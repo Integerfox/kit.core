@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-25 00:02:35</td>
+            <td class="headerValue">2026-03-06 02:39:35</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -77,35 +77,34 @@
 <span id="L15"><span class="lineNum">      15</span>                 :             : namespace Kit {</span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : namespace EventQueue {</span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : </span>
-<span id="L18"><span class="lineNum">      18</span>                 :             : </span>
-<span id="L19"><span class="lineNum">      19</span>                 :             : /////////////////////</span>
-<span id="L20"><span class="lineNum">      20</span>                 :<span class="tlaGNC tlaBgGNC">          21 : Server::Server( uint32_t                                        timeOutPeriodInMsec,</span></span>
-<span id="L21"><span class="lineNum">      21</span>                 :             :                 Kit::Container::SList&lt;Kit::System::IEventFlag&gt;* eventFlagsList,</span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          21 :                 Kit::System::IWatchedEventLoop*                 watchdog ) noexcept</span></span>
-<span id="L23"><span class="lineNum">      23</span>                 :             :     : Kit::Itc::Mailbox( *( static_cast&lt;Kit::System::ISignable*&gt;( this ) ) )</span>
-<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          21 :     , EventLoop( timeOutPeriodInMsec, eventFlagsList, watchdog )</span></span>
-<span id="L25"><span class="lineNum">      25</span>                 :             : {</span>
-<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">          21 : }</span></span>
-<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
-<span id="L28"><span class="lineNum">      28</span>                 :             : /////////////////////</span>
-<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          17 : void Server::entry() noexcept</span></span>
-<span id="L30"><span class="lineNum">      30</span>                 :             : {</span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          17 :     startEventLoop();</span></span>
-<span id="L32"><span class="lineNum">      32</span>                 :             :     bool run = true;</span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          17 :     while ( run )</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :             :     {</span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">         594 :         run = waitAndProcessEvents( isPendingMessage() );</span></span>
-<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">         594 :         if ( run )</span></span>
-<span id="L37"><span class="lineNum">      37</span>                 :             :         {</span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">         577 :             processMessages();</span></span>
-<span id="L39"><span class="lineNum">      39</span>                 :             :         }</span>
-<span id="L40"><span class="lineNum">      40</span>                 :             :     }</span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          17 :     stopEventLoop();</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">          17 : }</span></span>
-<span id="L43"><span class="lineNum">      43</span>                 :             : </span>
-<span id="L44"><span class="lineNum">      44</span>                 :             : }  // end namespace</span>
-<span id="L45"><span class="lineNum">      45</span>                 :             : }</span>
-<span id="L46"><span class="lineNum">      46</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : /////////////////////</span>
+<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC tlaBgGNC">          29 : Server::Server( uint32_t                                        timeOutPeriodInMsec,</span></span>
+<span id="L20"><span class="lineNum">      20</span>                 :             :                 Kit::Container::SList&lt;Kit::System::IEventFlag&gt;* eventFlagsList,</span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">          25 :                 Kit::System::IWatchedEventLoop*                 watchdog ) noexcept</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :             :     : Kit::Itc::Mailbox( *( static_cast&lt;Kit::System::ISignable*&gt;( this ) ) )</span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          29 :     , EventLoop( timeOutPeriodInMsec, eventFlagsList, watchdog )</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :             : {</span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">          29 : }</span></span>
+<span id="L26"><span class="lineNum">      26</span>                 :             : </span>
+<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">          27 : void Server::entry() noexcept</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :             : {</span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          27 :     startEventLoop();</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :     bool run = true;</span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          27 :     while ( run )</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :     {</span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">         998 :         run = serverWaitAndProcessEvents();</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">         998 :         if ( run )</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :         {</span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">         971 :             serverProcessEvents();</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :         }</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :     }</span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">          27 :     stopEventLoop();</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          27 : }</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :             : </span>
+<span id="L42"><span class="lineNum">      42</span>                 :             : </span>
+<span id="L43"><span class="lineNum">      43</span>                 :             : }  // end namespace</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             : }</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             : //------------------------------------------------------------------------------</span>
         </pre>
               </td>
             </tr>

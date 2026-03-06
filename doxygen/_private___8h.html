@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,6 +46,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Private_.h File Reference</div></div>
 </div><!--header-->
@@ -63,71 +64,28 @@ $(function() {
 </div>
 <p><a href="_private___8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespace_kit" id="r_namespace_kit"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit.html">Kit</a></td></tr>
+<tr class="memdesc:namespace_kit"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_kit_1_1_logging" id="r_namespace_kit_1_1_logging"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_logging.html">Kit::Logging</a></td></tr>
+<tr class="memdesc:namespace_kit_1_1_logging"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="namespace_kit_1_1_logging.html" title="The Logging namespace contains a logging framework as well as the Kit namespace specific logging iden...">Logging</a> namespace contains a logging framework as well as the <a class="el" href="namespace_kit.html" title="Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.">Kit</a> namespace specific logging identifiers and methods. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad3836940663ea49fa3a410e1666b1e7e" id="r_ad3836940663ea49fa3a410e1666b1e7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3836940663ea49fa3a410e1666b1e7e">Cpl::Logging::createAndAddLogEntry_</a> (uint32_t category, const char *catIdText, uint16_t msgId, const char *msgIdText, const char *format, va_list ap) noexcept</td></tr>
-<tr class="memdesc:ad3836940663ea49fa3a410e1666b1e7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to create the log entry and insert into the entry queue.  <br /></td></tr>
-<tr class="separator:ad3836940663ea49fa3a410e1666b1e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae65f165da280eb376f9b8cefe6514dfe" id="r_ae65f165da280eb376f9b8cefe6514dfe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_logging.html#ae65f165da280eb376f9b8cefe6514dfe">Kit::Logging::createAndAddLogEntry_</a> (uint32_t category, const char *catIdText, uint16_t msgId, const char *msgIdText, const char *format, va_list ap) noexcept</td></tr>
+<tr class="memdesc:ae65f165da280eb376f9b8cefe6514dfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to create the log entry and insert into the entry queue.  <br /></td></tr>
+<tr class="separator:ae65f165da280eb376f9b8cefe6514dfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file contains private (i.e. </p>
 <p>the application SHOULD never call this method directory for the logging framework </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="ad3836940663ea49fa3a410e1666b1e7e" name="ad3836940663ea49fa3a410e1666b1e7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3836940663ea49fa3a410e1666b1e7e">&#9670;&#160;</a></span>createAndAddLogEntry_()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Cpl::Logging::createAndAddLogEntry_ </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>category</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>catIdText</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>msgId</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>msgIdText</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>format</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">va_list</td>          <td class="paramname"><span class="paramname"><em>ap</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>This method is used to create the log entry and insert into the entry queue. </p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

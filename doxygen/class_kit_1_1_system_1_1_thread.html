@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -375,7 +375,7 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramname">priority</td><td>a priority ranging from highest priority (KIT_SYSTEM_THREAD_PRIORITY_HIGHEST) to lowest priority (KIT_SYSTEM_THREAD_PRIORITY_LOWEST). Priorities are defined in relative 'levels' to the max/normal/min settings because there is no standardized priority settings across Operating Systems. If the priority value exceeds the upper/lower bounds the platform's priority range, the thread's priority will be clamped to the upper/lower bound of the priority range. </td></tr>
     <tr><td class="paramname">stackSize</td><td>Requested size, in bytes, of the stack for the thread. A value of of zero will size the thread's stack per the platform's default stack size setting. </td></tr>
     <tr><td class="paramname">stackPtr</td><td>Pointer to the stack memory to be used for the thread's stack. If zero is passed, then the underlying platform/OS will allocate the stack memory. </td></tr>
-    <tr><td class="paramname">allowSimTicks</td><td>With this argument is true the thread will be created to use/support simulated time when 'Simulate ticks' are enabled. A value false will force the thread to always be a 'real time' thread. See Cpl::System::SimTicks for more details about simulated time. </td></tr>
+    <tr><td class="paramname">allowSimTicks</td><td>With this argument is true the thread will be created to use/support simulated time when 'Simulate ticks' are enabled. A value false will force the thread to always be a 'real time' thread. See Kit::System::SimTicks for more details about simulated time. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1005,7 +1005,7 @@ o This method only deletes/destroys the Thread instance -- it does
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

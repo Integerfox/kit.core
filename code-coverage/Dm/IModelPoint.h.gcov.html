@@ -1,0 +1,624 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Dm/IModelPoint.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Dm</a> - IModelPoint.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-03-06 02:39:35</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : #ifndef KIT_DM_IMODELPOINT_H_</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : #define KIT_DM_IMODELPOINT_H_</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  *</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : </span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : </span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : #include &quot;kit_config.h&quot;</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             : #include &quot;Kit/Container/ListItem.h&quot;</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : #include &quot;Kit/Text/IString.h&quot;</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : #include &quot;Kit/Dm/IObserver.h&quot;</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : #include &quot;Kit/Json/Arduino.h&quot;</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : #include &lt;stddef.h&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : #include &lt;stdint.h&gt;</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : </span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : ///</span>
+<span id="L23"><span class="lineNum">      23</span>                 :             : namespace Kit {</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             : ///</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             : namespace Dm {</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             : </span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
+<span id="L28"><span class="lineNum">      28</span>                 :             : /** This mostly abstract class defines the interface for a Model Point.  A</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             :     Model Point contains an instance of a Point's data and is responsible for</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :     managing thread safe access to the 'Point'.  The intent of a Model point is</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             :     that it is the Application's canonical source for a 'Point'</span>
+<span id="L32"><span class="lineNum">      32</span>                 :             : </span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :     NOTES:</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :         1) The concrete leaf classes are responsible for ensuring type</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :            safety.</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :         2) All methods are atomic, i.e. a protected by the Model Base's mutex.</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :            This means that all methods will block if there is a call in-progress</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :            to ANY Model Point in a given Model Data Base.</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :         3) All methods in this class ARE thread Safe unless explicitly</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :            documented otherwise.</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :         4) When a Model Point transitions (or initialized in) to the invalid set,</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :            its 'data' is set to all zero so that transition from the invalid to the</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :            valid state when using read-modify-write operation is consistent in </span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :            its behavior.</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             :  */</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             : class IModelPoint : public Kit::Container::ExtendedListItem</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             : {</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             : public:</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :     /// Options related to the Model Point's locked state</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     enum LockRequest_T</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :     {</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :         eNO_REQUEST,  //!&lt; No change in the MP's lock state is requested</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             :         eLOCK,        //!&lt; Request to lock the MP.  If the MP is already lock - the request is ignored and the update operation silent fails</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :         eUNLOCK,      //!&lt; Request to unlock the MP.  If the MP is already unlocked - the request is ignored and the update operation is completed</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :     };</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : </span>
+<span id="L57"><span class="lineNum">      57</span>                 :             : </span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : public:</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :     /** Magic value to use when registering for a change notification and</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :         application does not 'know' the current sequence number value of the</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :         Model Point.</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :      */</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :     static constexpr uint16_t SEQUENCE_NUMBER_UNKNOWN = 0;</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : </span>
+<span id="L65"><span class="lineNum">      65</span>                 :             : public:</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             :     /** This method returns the Model Point's name as a null terminated string.</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             : </span>
+<span id="L68"><span class="lineNum">      68</span>                 :             :         Note: Model Point names are assumed to be unique.  However, it is</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             :               responsibility of the Application to enforce this constraint.  If</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :               names are not unique then the look-up by Model Point name</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :               functionality will fail.  No other functionality depends on have</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :               unique names.</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             :      */</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             :     virtual const char* getName() const noexcept = 0;</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             : </span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :     /** This method returns the Model Point's current sequence number.</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :      */</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :     virtual uint16_t getSequenceNumber() const noexcept = 0;</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             : </span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :     /** This method does NOT alter the MP's data or state, but unconditionally</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :         triggers the MP change notification(s). The method returns the Model</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :         Point's sequence number after the method completes.</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             :      */</span>
+<span id="L84"><span class="lineNum">      84</span>                 :             :     virtual uint16_t touch() noexcept = 0;</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             : </span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :     /** This method returns the RAM size, in bytes, of the Model Point's data.</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             :      */</span>
+<span id="L88"><span class="lineNum">      88</span>                 :             :     virtual size_t getSize() const noexcept = 0;</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             : </span>
+<span id="L90"><span class="lineNum">      90</span>                 :             : </span>
+<span id="L91"><span class="lineNum">      91</span>                 :             : public:</span>
+<span id="L92"><span class="lineNum">      92</span>                 :             :     /** This method returns true when the MP data is invalid.  The method</span>
+<span id="L93"><span class="lineNum">      93</span>                 :             :         optionally returns the Point's sequence number via the argument</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             :         'seqNumPtr'.</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             :      */</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             :     virtual bool isNotValid( uint16_t* seqNumPtr = 0 ) const noexcept = 0;</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             : </span>
+<span id="L98"><span class="lineNum">      98</span>                 :             :     /** This method is used to mark the element's data as invalid.</span>
+<span id="L99"><span class="lineNum">      99</span>                 :             : </span>
+<span id="L100"><span class="lineNum">     100</span>                 :             :         The method returns the Model Point's sequence number after updating</span>
+<span id="L101"><span class="lineNum">     101</span>                 :             :         the valid state.</span>
+<span id="L102"><span class="lineNum">     102</span>                 :             : </span>
+<span id="L103"><span class="lineNum">     103</span>                 :             :         Notes:</span>
+<span id="L104"><span class="lineNum">     104</span>                 :             :         1) Any write operation will set the Model Point's state to valid.</span>
+<span id="L105"><span class="lineNum">     105</span>                 :             :         2) Change Notification(s) will ONLY be triggered when:</span>
+<span id="L106"><span class="lineNum">     106</span>                 :             :            a) forceChgNotification is true, OR</span>
+<span id="L107"><span class="lineNum">     107</span>                 :             :            b) there is valid to invalid state transition (i.e. if the Model</span>
+<span id="L108"><span class="lineNum">     108</span>                 :             :               Point is already in the invalid state - no change notification will</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             :               be triggered), OR</span>
+<span id="L110"><span class="lineNum">     110</span>                 :             :         3) If the Model Point is locked then the invalidate operation...</span>
+<span id="L111"><span class="lineNum">     111</span>                 :             :            a) If lockRequest == eNO_REQUEST, the operation silently fails, i.e.</span>
+<span id="L112"><span class="lineNum">     112</span>                 :             :               nothing is done. OR</span>
+<span id="L113"><span class="lineNum">     113</span>                 :             :            b) If lockRequest != eNO_REQUEST, the operation is performed and the</span>
+<span id="L114"><span class="lineNum">     114</span>                 :             :               the new lock state is applied</span>
+<span id="L115"><span class="lineNum">     115</span>                 :             :      */</span>
+<span id="L116"><span class="lineNum">     116</span>                 :             :     virtual uint16_t setInvalid( bool forceChgNotification = false, LockRequest_T lockRequest = eNO_REQUEST ) noexcept = 0;</span>
+<span id="L117"><span class="lineNum">     117</span>                 :             : </span>
+<span id="L118"><span class="lineNum">     118</span>                 :             : public:</span>
+<span id="L119"><span class="lineNum">     119</span>                 :             :     /** This method converts the Model Point's data to JSON string and</span>
+<span id="L120"><span class="lineNum">     120</span>                 :             :         copies the resultant string into 'dst'.  If the Model Point's data</span>
+<span id="L121"><span class="lineNum">     121</span>                 :             :         cannot be represented as a JSON object then the contents of 'dst' is</span>
+<span id="L122"><span class="lineNum">     122</span>                 :             :         set to an empty string and the method returns false; else the method</span>
+<span id="L123"><span class="lineNum">     123</span>                 :             :         returns true. The format of the string is specific to the concrete leaf</span>
+<span id="L124"><span class="lineNum">     124</span>                 :             :         class. However, it is strongly recommended that the output of this method</span>
+<span id="L125"><span class="lineNum">     125</span>                 :             :         be the same format that is expected for the fromJSON() method.</span>
+<span id="L126"><span class="lineNum">     126</span>                 :             : </span>
+<span id="L127"><span class="lineNum">     127</span>                 :             :         NOTE: If the converted string is larger than the memory allocated by</span>
+<span id="L128"><span class="lineNum">     128</span>                 :             :               'dst' then the string result in 'dst' will be truncated. The</span>
+<span id="L129"><span class="lineNum">     129</span>                 :             :               caller is required to check 'truncated' flag for the truncated</span>
+<span id="L130"><span class="lineNum">     130</span>                 :             :               scenario.</span>
+<span id="L131"><span class="lineNum">     131</span>                 :             : </span>
+<span id="L132"><span class="lineNum">     132</span>                 :             : </span>
+<span id="L133"><span class="lineNum">     133</span>                 :             :         The general output format:</span>
+<span id="L134"><span class="lineNum">     134</span>                 :             :         \code</span>
+<span id="L135"><span class="lineNum">     135</span>                 :             : </span>
+<span id="L136"><span class="lineNum">     136</span>                 :             :         { name:&quot;&lt;mpname&gt;&quot;, type:&quot;&lt;mptypestring&gt;&quot;, valid:true|false, seqnum:nnnn, locked:true|false, val:&lt;value&gt; }</span>
+<span id="L137"><span class="lineNum">     137</span>                 :             : </span>
+<span id="L138"><span class="lineNum">     138</span>                 :             :         Notes:</span>
+<span id="L139"><span class="lineNum">     139</span>                 :             :             - The MP is in the valid state if/when the 'valid' value is true</span>
+<span id="L140"><span class="lineNum">     140</span>                 :             :             - The 'val' key/value pair is omitted if the MP is in the invalid state</span>
+<span id="L141"><span class="lineNum">     141</span>                 :             :             - The 'val' key/value pair can be a single element, an object, or</span>
+<span id="L142"><span class="lineNum">     142</span>                 :             :               array. etc. -- it is specific to the concrete MP type/class.</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             : </span>
+<span id="L144"><span class="lineNum">     144</span>                 :             : </span>
+<span id="L145"><span class="lineNum">     145</span>                 :             :         \endcode</span>
+<span id="L146"><span class="lineNum">     146</span>                 :             :      */</span>
+<span id="L147"><span class="lineNum">     147</span>                 :             :     virtual bool toJSON( char*  dst,</span>
+<span id="L148"><span class="lineNum">     148</span>                 :             :                          size_t dstSize,</span>
+<span id="L149"><span class="lineNum">     149</span>                 :             :                          bool&amp;  truncated,</span>
+<span id="L150"><span class="lineNum">     150</span>                 :             :                          bool   verbose = true,</span>
+<span id="L151"><span class="lineNum">     151</span>                 :             :                          bool   pretty  = false ) noexcept = 0;</span>
+<span id="L152"><span class="lineNum">     152</span>                 :             : </span>
+<span id="L153"><span class="lineNum">     153</span>                 :             : </span>
+<span id="L154"><span class="lineNum">     154</span>                 :             :     /** This method returns a string identifier for the Model Point's data type.</span>
+<span id="L155"><span class="lineNum">     155</span>                 :             :         This value IS GUARANTEED to be unique (within an Application).  The</span>
+<span id="L156"><span class="lineNum">     156</span>                 :             :         format of the string is the Model Point's fully qualified namespace and</span>
+<span id="L157"><span class="lineNum">     157</span>                 :             :         class type as a string. For example, the for Kit::Dm::Mp::Uint32 Model</span>
+<span id="L158"><span class="lineNum">     158</span>                 :             :         Point the function would return &quot;Kit::Dm::Mp::Uint32&quot;</span>
+<span id="L159"><span class="lineNum">     159</span>                 :             : </span>
+<span id="L160"><span class="lineNum">     160</span>                 :             :         Note: The type string can contain additional information, but adding</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             :               a '-' character followed by the extra info.  For example:</span>
+<span id="L162"><span class="lineNum">     162</span>                 :             :               &quot;Kit::Dm::Mp::Uint32-hex&quot;</span>
+<span id="L163"><span class="lineNum">     163</span>                 :             :      */</span>
+<span id="L164"><span class="lineNum">     164</span>                 :             :     virtual const char* getTypeAsText() const noexcept = 0;</span>
+<span id="L165"><span class="lineNum">     165</span>                 :             : </span>
+<span id="L166"><span class="lineNum">     166</span>                 :             : public:</span>
+<span id="L167"><span class="lineNum">     167</span>                 :             :     /** This method returns true if the Model Point is in the locked state.</span>
+<span id="L168"><span class="lineNum">     168</span>                 :             :         In the locked state - ALL WRITE/UPDATE OPERATIONS (except for changing</span>
+<span id="L169"><span class="lineNum">     169</span>                 :             :         the locked state) are silently ignored/dropped.</span>
+<span id="L170"><span class="lineNum">     170</span>                 :             :      */</span>
+<span id="L171"><span class="lineNum">     171</span>                 :             :     virtual bool isLocked() const noexcept = 0;</span>
+<span id="L172"><span class="lineNum">     172</span>                 :             : </span>
+<span id="L173"><span class="lineNum">     173</span>                 :             :     /** This updates the lock state of the Model Point. Model Points support</span>
+<span id="L174"><span class="lineNum">     174</span>                 :             :         the concept of a client 'locking' the MP's data value.  When a MP's</span>
+<span id="L175"><span class="lineNum">     175</span>                 :             :         data has been locked - any attempted writes/updated operation to the</span>
+<span id="L176"><span class="lineNum">     176</span>                 :             :         MP will SILENTLY fail.  The Application uses the 'eUNLOCK' lock request</span>
+<span id="L177"><span class="lineNum">     177</span>                 :             :         to remove the locked state from the MP's data.</span>
+<span id="L178"><span class="lineNum">     178</span>                 :             : </span>
+<span id="L179"><span class="lineNum">     179</span>                 :             :         This method never triggers change notification(s).</span>
+<span id="L180"><span class="lineNum">     180</span>                 :             : </span>
+<span id="L181"><span class="lineNum">     181</span>                 :             :         The method returns the MP's sequence number at the time of when then</span>
+<span id="L182"><span class="lineNum">     182</span>                 :             :         lock request was applied.</span>
+<span id="L183"><span class="lineNum">     183</span>                 :             :      */</span>
+<span id="L184"><span class="lineNum">     184</span>                 :             :     virtual uint16_t setLockState( LockRequest_T lockRequest ) noexcept = 0;</span>
+<span id="L185"><span class="lineNum">     185</span>                 :             : </span>
+<span id="L186"><span class="lineNum">     186</span>                 :             :     /// Short hand for unconditionally removing the lock from the MP</span>
+<span id="L187"><span class="lineNum">     187</span>                 :<span class="tlaGNC tlaBgGNC">          19 :     inline uint16_t removeLock() noexcept { return setLockState( eUNLOCK ); }</span></span>
+<span id="L188"><span class="lineNum">     188</span>                 :             : </span>
+<span id="L189"><span class="lineNum">     189</span>                 :             :     /// Short hand for putting the MP into the locked state</span>
+<span id="L190"><span class="lineNum">     190</span>                 :<span class="tlaGNC">           3 :     inline uint16_t applyLock() noexcept { return setLockState( eLOCK ); }</span></span>
+<span id="L191"><span class="lineNum">     191</span>                 :             : </span>
+<span id="L192"><span class="lineNum">     192</span>                 :             : </span>
+<span id="L193"><span class="lineNum">     193</span>                 :             : public:</span>
+<span id="L194"><span class="lineNum">     194</span>                 :             :     /** This method is used to export the Model Point's instance data content</span>
+<span id="L195"><span class="lineNum">     195</span>                 :             :         to a raw data stream.  It is the responsibility of the caller to ensure</span>
+<span id="L196"><span class="lineNum">     196</span>                 :             :         that there is sufficient memory available for the data being exported.</span>
+<span id="L197"><span class="lineNum">     197</span>                 :             :         The method returns the number of bytes exported.</span>
+<span id="L198"><span class="lineNum">     198</span>                 :             : </span>
+<span id="L199"><span class="lineNum">     199</span>                 :             :         When the 'includeLockedState' argument is set to true, the method</span>
+<span id="L200"><span class="lineNum">     200</span>                 :             :         export's the MP's locked state (in addition to the MP's value and</span>
+<span id="L201"><span class="lineNum">     201</span>                 :             :         valid state).</span>
+<span id="L202"><span class="lineNum">     202</span>                 :             : </span>
+<span id="L203"><span class="lineNum">     203</span>                 :             :         If the number of returns bytes equals zero then the export operation</span>
+<span id="L204"><span class="lineNum">     204</span>                 :             :         encountered an error.</span>
+<span id="L205"><span class="lineNum">     205</span>                 :             : </span>
+<span id="L206"><span class="lineNum">     206</span>                 :             :         The method optionally return the Model Point's sequence number at the</span>
+<span id="L207"><span class="lineNum">     207</span>                 :             :         time of the export.</span>
+<span id="L208"><span class="lineNum">     208</span>                 :             :      */</span>
+<span id="L209"><span class="lineNum">     209</span>                 :             :     virtual size_t exportData( void*     dstDataStream,</span>
+<span id="L210"><span class="lineNum">     210</span>                 :             :                                size_t    maxDstLength,</span>
+<span id="L211"><span class="lineNum">     211</span>                 :             :                                uint16_t* retSequenceNumber  = 0,</span>
+<span id="L212"><span class="lineNum">     212</span>                 :             :                                bool      includeLockedState = false ) const noexcept = 0;</span>
+<span id="L213"><span class="lineNum">     213</span>                 :             : </span>
+<span id="L214"><span class="lineNum">     214</span>                 :             :     /** This method is used to populate the Model Point's data content from the</span>
+<span id="L215"><span class="lineNum">     215</span>                 :             :         a raw data stream/pointer.  It is the responsibility of the caller to</span>
+<span id="L216"><span class="lineNum">     216</span>                 :             :         ensure that the data stream is appropriate for element type and that</span>
+<span id="L217"><span class="lineNum">     217</span>                 :             :         the data stream content was originally created by the corresponding</span>
+<span id="L218"><span class="lineNum">     218</span>                 :             :         export() method. The method returns the number of bytes consumed from</span>
+<span id="L219"><span class="lineNum">     219</span>                 :             :         the data stream.</span>
+<span id="L220"><span class="lineNum">     220</span>                 :             : </span>
+<span id="L221"><span class="lineNum">     221</span>                 :             :         When the 'includeLockedState' argument is set to true, the method</span>
+<span id="L222"><span class="lineNum">     222</span>                 :             :         imports's the MP's locked state (in addition to the MP's value and</span>
+<span id="L223"><span class="lineNum">     223</span>                 :             :         valid state).</span>
+<span id="L224"><span class="lineNum">     224</span>                 :             : </span>
+<span id="L225"><span class="lineNum">     225</span>                 :             :         If the number of returns bytes equals zero then the import operation</span>
+<span id="L226"><span class="lineNum">     226</span>                 :             :         encountered an error.</span>
+<span id="L227"><span class="lineNum">     227</span>                 :             : </span>
+<span id="L228"><span class="lineNum">     228</span>                 :             :         The method optionally return the Model Point's sequence number once the</span>
+<span id="L229"><span class="lineNum">     229</span>                 :             :         import has completed.</span>
+<span id="L230"><span class="lineNum">     230</span>                 :             : </span>
+<span id="L231"><span class="lineNum">     231</span>                 :             :         The method ALWAYS triggers a change notification(s) for the Model Point</span>
+<span id="L232"><span class="lineNum">     232</span>                 :             :      */</span>
+<span id="L233"><span class="lineNum">     233</span>                 :             :     virtual size_t importData( const void* srcDataStream,</span>
+<span id="L234"><span class="lineNum">     234</span>                 :             :                                size_t      srcLength,</span>
+<span id="L235"><span class="lineNum">     235</span>                 :             :                                uint16_t*   retSequenceNumber  = 0,</span>
+<span id="L236"><span class="lineNum">     236</span>                 :             :                                bool        includeLockedState = false ) noexcept = 0;</span>
+<span id="L237"><span class="lineNum">     237</span>                 :             : </span>
+<span id="L238"><span class="lineNum">     238</span>                 :             :     /** Returns the size, in bytes, of the element's data content.</span>
+<span id="L239"><span class="lineNum">     239</span>                 :             : </span>
+<span id="L240"><span class="lineNum">     240</span>                 :             :         When 'includeLockedState is set to true, the 'externalSize' includes</span>
+<span id="L241"><span class="lineNum">     241</span>                 :             :         space for the MP's locked state; else the returned size only includes</span>
+<span id="L242"><span class="lineNum">     242</span>                 :             :         space for the MP's value and valid state..</span>
+<span id="L243"><span class="lineNum">     243</span>                 :             : </span>
+<span id="L244"><span class="lineNum">     244</span>                 :             :         NOTE: The size returned is the size of the Point data WHEN it</span>
+<span id="L245"><span class="lineNum">     245</span>                 :             :               is being exported/imported - this is NOT the value of</span>
+<span id="L246"><span class="lineNum">     246</span>                 :             :               the size of the Point's internal storage use for the</span>
+<span id="L247"><span class="lineNum">     247</span>                 :             :               data content.</span>
+<span id="L248"><span class="lineNum">     248</span>                 :             :      */</span>
+<span id="L249"><span class="lineNum">     249</span>                 :             :     virtual size_t getExternalSize( bool includeLockedState = false ) const = 0;</span>
+<span id="L250"><span class="lineNum">     250</span>                 :             : </span>
+<span id="L251"><span class="lineNum">     251</span>                 :             : </span>
+<span id="L252"><span class="lineNum">     252</span>                 :             : public:</span>
+<span id="L253"><span class="lineNum">     253</span>                 :             :     /** This method is used to subscribe to on-change notification in a GENERIC</span>
+<span id="L254"><span class="lineNum">     254</span>                 :             :         manner. This means the on-change callback notification WILL NOT be type</span>
+<span id="L255"><span class="lineNum">     255</span>                 :             :         specific.  USE WITH CAUTION - using type specific callbacks is the</span>
+<span id="L256"><span class="lineNum">     256</span>                 :             :         preferred usage.</span>
+<span id="L257"><span class="lineNum">     257</span>                 :             : </span>
+<span id="L258"><span class="lineNum">     258</span>                 :             :         See the attach() method below for additional details of subscribing</span>
+<span id="L259"><span class="lineNum">     259</span>                 :             :      */</span>
+<span id="L260"><span class="lineNum">     260</span>                 :             :     virtual void genericAttach( IObserver&amp; observer,</span>
+<span id="L261"><span class="lineNum">     261</span>                 :             :                                 uint16_t   initialSeqNumber = SEQUENCE_NUMBER_UNKNOWN ) noexcept = 0;</span>
+<span id="L262"><span class="lineNum">     262</span>                 :             : </span>
+<span id="L263"><span class="lineNum">     263</span>                 :             :     /** This is method is used to detach a GENERIC Subscriber from a Model Point.</span>
+<span id="L264"><span class="lineNum">     264</span>                 :             : </span>
+<span id="L265"><span class="lineNum">     265</span>                 :             :         See the detach() method below for additional details of subscribing</span>
+<span id="L266"><span class="lineNum">     266</span>                 :             :      */</span>
+<span id="L267"><span class="lineNum">     267</span>                 :             :     virtual void genericDetach( IObserver&amp; observer ) noexcept = 0;</span>
+<span id="L268"><span class="lineNum">     268</span>                 :             : </span>
+<span id="L269"><span class="lineNum">     269</span>                 :             : </span>
+<span id="L270"><span class="lineNum">     270</span>                 :             : protected:</span>
+<span id="L271"><span class="lineNum">     271</span>                 :             :     /** This method copies the Model Point's content to the caller's Point</span>
+<span id="L272"><span class="lineNum">     272</span>                 :             :         instance. The method returns the Model Point's valid state.  The</span>
+<span id="L273"><span class="lineNum">     273</span>                 :             :         MP's sequence number is optionally return if 'seqNumPtr' is set to</span>
+<span id="L274"><span class="lineNum">     274</span>                 :             :         a non-zero value.</span>
+<span id="L275"><span class="lineNum">     275</span>                 :             : </span>
+<span id="L276"><span class="lineNum">     276</span>                 :             :         If the method returns false then the MP's the data is invalid and the</span>
+<span id="L277"><span class="lineNum">     277</span>                 :             :         contents of 'dst' is meaningless.</span>
+<span id="L278"><span class="lineNum">     278</span>                 :             : </span>
+<span id="L279"><span class="lineNum">     279</span>                 :             :         Notes:</span>
+<span id="L280"><span class="lineNum">     280</span>                 :             :         1) The assumption is that Model Point's internal data and 'dstData' are</span>
+<span id="L281"><span class="lineNum">     281</span>                 :             :            of the same type.</span>
+<span id="L282"><span class="lineNum">     282</span>                 :             :         2) The data size of the 'dstSize' is ALWAYS honored when coping the</span>
+<span id="L283"><span class="lineNum">     283</span>                 :             :            data from the Model Point</span>
+<span id="L284"><span class="lineNum">     284</span>                 :             :         3) The Model Point's sequence number is not changed.</span>
+<span id="L285"><span class="lineNum">     285</span>                 :             :      */</span>
+<span id="L286"><span class="lineNum">     286</span>                 :             :     virtual bool readData( void* dstData, size_t dstSize, uint16_t* seqNumPtr = 0 ) const noexcept = 0;</span>
+<span id="L287"><span class="lineNum">     287</span>                 :             : </span>
+<span id="L288"><span class="lineNum">     288</span>                 :             :     /** This method writes the caller Point instance to the Model Point's</span>
+<span id="L289"><span class="lineNum">     289</span>                 :             :         internal data.  The method returns the Model Point's sequence number</span>
+<span id="L290"><span class="lineNum">     290</span>                 :             :         after the method completes.</span>
+<span id="L291"><span class="lineNum">     291</span>                 :             : </span>
+<span id="L292"><span class="lineNum">     292</span>                 :             :         Model Point supports the concept of a client 'locking' the MP's data</span>
+<span id="L293"><span class="lineNum">     293</span>                 :             :         value.  When a MP's data has been locked - all attempted writes to the</span>
+<span id="L294"><span class="lineNum">     294</span>                 :             :         MP - with lockRequest == eNO_REQUEST - will SILENTLY fail.  The</span>
+<span id="L295"><span class="lineNum">     295</span>                 :             :         Application uses the removeLock() method or the 'eUNLOCK' lock request</span>
+<span id="L296"><span class="lineNum">     296</span>                 :             :         to remove the locked state from the MP's data.  The application can</span>
+<span id="L297"><span class="lineNum">     297</span>                 :             :         also updated the value of MP when it is locked state by setting</span>
+<span id="L298"><span class="lineNum">     298</span>                 :             :         lockRequest == eLOCK.</span>
+<span id="L299"><span class="lineNum">     299</span>                 :             : </span>
+<span id="L300"><span class="lineNum">     300</span>                 :             :         Notes:</span>
+<span id="L301"><span class="lineNum">     301</span>                 :             :         1) The assumption is that Model Point's internal data and 'srcData' are</span>
+<span id="L302"><span class="lineNum">     302</span>                 :             :            of the same type.</span>
+<span id="L303"><span class="lineNum">     303</span>                 :             :         2) The data size of the Model Points data instance is ALWAYS honored</span>
+<span id="L304"><span class="lineNum">     304</span>                 :             :            when coping the data from 'srcData'</span>
+<span id="L305"><span class="lineNum">     305</span>                 :             :      */</span>
+<span id="L306"><span class="lineNum">     306</span>                 :             :     virtual uint16_t writeData( const void*   srcData,</span>
+<span id="L307"><span class="lineNum">     307</span>                 :             :                                 size_t        srcSize,</span>
+<span id="L308"><span class="lineNum">     308</span>                 :             :                                 bool          forceChgNotification = false,</span>
+<span id="L309"><span class="lineNum">     309</span>                 :             :                                 LockRequest_T lockRequest          = eNO_REQUEST ) noexcept = 0;</span>
+<span id="L310"><span class="lineNum">     310</span>                 :             : </span>
+<span id="L311"><span class="lineNum">     311</span>                 :             : </span>
+<span id="L312"><span class="lineNum">     312</span>                 :             : protected:</span>
+<span id="L313"><span class="lineNum">     313</span>                 :             :     /** This method is used to attach a observer to a Model Point.  Once</span>
+<span id="L314"><span class="lineNum">     314</span>                 :             :         attached the observer will receive a change notification (aka a</span>
+<span id="L315"><span class="lineNum">     315</span>                 :             :         callback) every time the Model Point's data/state changes. Once, a</span>
+<span id="L316"><span class="lineNum">     316</span>                 :             :         observer is attached - it will stay attached to the application</span>
+<span id="L317"><span class="lineNum">     317</span>                 :             :         calls detach().</span>
+<span id="L318"><span class="lineNum">     318</span>                 :             : </span>
+<span id="L319"><span class="lineNum">     319</span>                 :             :         There is no limit to the number of observers that can attach to</span>
+<span id="L320"><span class="lineNum">     320</span>                 :             :         a Model Point.</span>
+<span id="L321"><span class="lineNum">     321</span>                 :             : </span>
+<span id="L322"><span class="lineNum">     322</span>                 :             :         The attach() method can be called even if the observer is already</span>
+<span id="L323"><span class="lineNum">     323</span>                 :             :         attached.  When this happens, the attach process is 'restarted', i.e.</span>
+<span id="L324"><span class="lineNum">     324</span>                 :             :         the 'initialSeqNumber' is used for the observer's sequence number.</span>
+<span id="L325"><span class="lineNum">     325</span>                 :             : </span>
+<span id="L326"><span class="lineNum">     326</span>                 :             :         The change-detect mechanism uses a sequence number.  Each Model Point</span>
+<span id="L327"><span class="lineNum">     327</span>                 :             :         and each observer has sequence number.  When the observer's sequence</span>
+<span id="L328"><span class="lineNum">     328</span>                 :             :         number does not equals the Model Point's sequence number - the observer</span>
+<span id="L329"><span class="lineNum">     329</span>                 :             :         receives a change notification and the observer's sequence number is</span>
+<span id="L330"><span class="lineNum">     330</span>                 :             :         updated to match the Model Point's sequence number at the time of</span>
+<span id="L331"><span class="lineNum">     331</span>                 :             :         change notification.  When a observer attaches to Model Point with</span>
+<span id="L332"><span class="lineNum">     332</span>                 :             :         an the 'seqNumber' argument set to SEQUENCE_NUMBER_UNKNOWN, the</span>
+<span id="L333"><span class="lineNum">     333</span>                 :             :         observer will get an 'immediate' change notification.</span>
+<span id="L334"><span class="lineNum">     334</span>                 :             : </span>
+<span id="L335"><span class="lineNum">     335</span>                 :             :         The callbacks for the Change Notifications are called as part of the</span>
+<span id="L336"><span class="lineNum">     336</span>                 :             :         Event Queue server.  As part of the asynchronous processing (timers,</span>
+<span id="L337"><span class="lineNum">     337</span>                 :             :         ITC, EventFlags, etc.) of the Event Queue server will also process</span>
+<span id="L338"><span class="lineNum">     338</span>                 :             :         all pending Change Notification and invoke the call backs.  What does</span>
+<span id="L339"><span class="lineNum">     339</span>                 :             :         that all mean?  The Change notifications are &quot;local&quot; to the observer's</span>
+<span id="L340"><span class="lineNum">     340</span>                 :             :         thread very similar to how the Kit::Timers work.  It also means that</span>
+<span id="L341"><span class="lineNum">     341</span>                 :             :         no change notification callback will be called till the Event Queue server</span>
+<span id="L342"><span class="lineNum">     342</span>                 :             :         loops back to the &quot;top&quot; of its forever loop.</span>
+<span id="L343"><span class="lineNum">     343</span>                 :             : </span>
+<span id="L344"><span class="lineNum">     344</span>                 :             :         NOTE: The Change Notification mechanism does NOT guarantee that a</span>
+<span id="L345"><span class="lineNum">     345</span>                 :             :               client will receive a notification for EVERY change to a Model</span>
+<span id="L346"><span class="lineNum">     346</span>                 :             :               Point (i.e. 'fast edges' could/will be missed).  What is guaranteed</span>
+<span id="L347"><span class="lineNum">     347</span>                 :             :               is that once a Model Point's value has 'settle' all registered</span>
+<span id="L348"><span class="lineNum">     348</span>                 :             :               observers will have received change notification for the Model</span>
+<span id="L349"><span class="lineNum">     349</span>                 :             :               Point's current value.</span>
+<span id="L350"><span class="lineNum">     350</span>                 :             :      */</span>
+<span id="L351"><span class="lineNum">     351</span>                 :             :     virtual void attachObserver( IObserver&amp; observer,</span>
+<span id="L352"><span class="lineNum">     352</span>                 :             :                                  uint16_t   initialSeqNumber = SEQUENCE_NUMBER_UNKNOWN ) noexcept = 0;</span>
+<span id="L353"><span class="lineNum">     353</span>                 :             : </span>
+<span id="L354"><span class="lineNum">     354</span>                 :             :     /** This method is used to detach an observer from a Model Point.  See the</span>
+<span id="L355"><span class="lineNum">     355</span>                 :             :         attach() method for more details about the Subscription/Change</span>
+<span id="L356"><span class="lineNum">     356</span>                 :             :         Notification mechanism.</span>
+<span id="L357"><span class="lineNum">     357</span>                 :             : </span>
+<span id="L358"><span class="lineNum">     358</span>                 :             :         The detach() method can be called even if the observer is NOT</span>
+<span id="L359"><span class="lineNum">     359</span>                 :             :         currently attached.  The detach() method can be called within the</span>
+<span id="L360"><span class="lineNum">     360</span>                 :             :         Change Notification callback.</span>
+<span id="L361"><span class="lineNum">     361</span>                 :             :      */</span>
+<span id="L362"><span class="lineNum">     362</span>                 :             :     virtual void detachObserver( IObserver&amp; observer ) noexcept = 0;</span>
+<span id="L363"><span class="lineNum">     363</span>                 :             : </span>
+<span id="L364"><span class="lineNum">     364</span>                 :             : </span>
+<span id="L365"><span class="lineNum">     365</span>                 :             : public:</span>
+<span id="L366"><span class="lineNum">     366</span>                 :             :     /// Observer events</span>
+<span id="L367"><span class="lineNum">     367</span>                 :             :     enum Event_T</span>
+<span id="L368"><span class="lineNum">     368</span>                 :             :     {</span>
+<span id="L369"><span class="lineNum">     369</span>                 :             :         eATTACH,          //!&lt; The Application is requesting to subscribe to a model point</span>
+<span id="L370"><span class="lineNum">     370</span>                 :             :         eDETACH,          //!&lt; The Application is requesting to un-subscribe from the model point</span>
+<span id="L371"><span class="lineNum">     371</span>                 :             :         eDATA_CHANGED,    //!&lt; The model point's data/state has change a pending change notification is needed</span>
+<span id="L372"><span class="lineNum">     372</span>                 :             :         eNOTIFYING,       //!&lt; The observer's change notification callback is being called</span>
+<span id="L373"><span class="lineNum">     373</span>                 :             :         eNOTIFY_COMPLETE  //!&lt; The observer's change notification callback has been completed</span>
+<span id="L374"><span class="lineNum">     374</span>                 :             :     };</span>
+<span id="L375"><span class="lineNum">     375</span>                 :             : </span>
+<span id="L376"><span class="lineNum">     376</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L377"><span class="lineNum">     377</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L378"><span class="lineNum">     378</span>                 :             :         NEVER call this method.</span>
+<span id="L379"><span class="lineNum">     379</span>                 :             : </span>
+<span id="L380"><span class="lineNum">     380</span>                 :             :         This method is used by Model Point to process events related to the</span>
+<span id="L381"><span class="lineNum">     381</span>                 :             :         subscription/change-notification process</span>
+<span id="L382"><span class="lineNum">     382</span>                 :             : </span>
+<span id="L383"><span class="lineNum">     383</span>                 :             :         This method is Thread Safe</span>
+<span id="L384"><span class="lineNum">     384</span>                 :             :      */</span>
+<span id="L385"><span class="lineNum">     385</span>                 :             :     virtual void processSubscriptionEvent_( IObserver&amp; observer,</span>
+<span id="L386"><span class="lineNum">     386</span>                 :             :                                             Event_T    event ) noexcept = 0;</span>
+<span id="L387"><span class="lineNum">     387</span>                 :             : </span>
+<span id="L388"><span class="lineNum">     388</span>                 :             : </span>
+<span id="L389"><span class="lineNum">     389</span>                 :             : public:</span>
+<span id="L390"><span class="lineNum">     390</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L391"><span class="lineNum">     391</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L392"><span class="lineNum">     392</span>                 :             :         NEVER call this method.</span>
+<span id="L393"><span class="lineNum">     393</span>                 :             : </span>
+<span id="L394"><span class="lineNum">     394</span>                 :             :         This method is used to unconditionally update the Model Point's data.</span>
+<span id="L395"><span class="lineNum">     395</span>                 :             : </span>
+<span id="L396"><span class="lineNum">     396</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L397"><span class="lineNum">     397</span>                 :             : </span>
+<span id="L398"><span class="lineNum">     398</span>                 :             :         Notes:</span>
+<span id="L399"><span class="lineNum">     399</span>                 :             :         1) The assumption is that Model Point Data instance and 'src' are the</span>
+<span id="L400"><span class="lineNum">     400</span>                 :             :            of the same type.</span>
+<span id="L401"><span class="lineNum">     401</span>                 :             :         2) The internal data size of the Model Point instance is ALWAYS honored</span>
+<span id="L402"><span class="lineNum">     402</span>                 :             :            when coping the data from 'src'</span>
+<span id="L403"><span class="lineNum">     403</span>                 :             :         3) The Model Point's sequence number is not changed.</span>
+<span id="L404"><span class="lineNum">     404</span>                 :             :         4) The Model Point's valid and locked states are not changed</span>
+<span id="L405"><span class="lineNum">     405</span>                 :             :     */</span>
+<span id="L406"><span class="lineNum">     406</span>                 :             :     virtual void copyDataFrom_( const void* srcData, size_t srcSize ) noexcept = 0;</span>
+<span id="L407"><span class="lineNum">     407</span>                 :             : </span>
+<span id="L408"><span class="lineNum">     408</span>                 :             : </span>
+<span id="L409"><span class="lineNum">     409</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L410"><span class="lineNum">     410</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L411"><span class="lineNum">     411</span>                 :             :         NEVER call this method.</span>
+<span id="L412"><span class="lineNum">     412</span>                 :             : </span>
+<span id="L413"><span class="lineNum">     413</span>                 :             :         This method is used update's the caller's 'Point Data' with the Model</span>
+<span id="L414"><span class="lineNum">     414</span>                 :             :         Point's data.</span>
+<span id="L415"><span class="lineNum">     415</span>                 :             : </span>
+<span id="L416"><span class="lineNum">     416</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L417"><span class="lineNum">     417</span>                 :             : </span>
+<span id="L418"><span class="lineNum">     418</span>                 :             :         Notes:</span>
+<span id="L419"><span class="lineNum">     419</span>                 :             :         1) The assumption is that Model Point Data instance and 'dst' are the</span>
+<span id="L420"><span class="lineNum">     420</span>                 :             :            of the same type.</span>
+<span id="L421"><span class="lineNum">     421</span>                 :             :         2) The 'dstSize' of the destination ALWAYS honored when coping the</span>
+<span id="L422"><span class="lineNum">     422</span>                 :             :            Model Point's data to 'dst'</span>
+<span id="L423"><span class="lineNum">     423</span>                 :             :         3) The Model Point's sequence number is not changed.</span>
+<span id="L424"><span class="lineNum">     424</span>                 :             :         4) The Model Point's valid and locked states are not changed</span>
+<span id="L425"><span class="lineNum">     425</span>                 :             :     */</span>
+<span id="L426"><span class="lineNum">     426</span>                 :             :     virtual void copyDataTo_( void* dstData, size_t dstSize ) const noexcept = 0;</span>
+<span id="L427"><span class="lineNum">     427</span>                 :             : </span>
+<span id="L428"><span class="lineNum">     428</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L429"><span class="lineNum">     429</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L430"><span class="lineNum">     430</span>                 :             :         NEVER call this method.</span>
+<span id="L431"><span class="lineNum">     431</span>                 :             : </span>
+<span id="L432"><span class="lineNum">     432</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L433"><span class="lineNum">     433</span>                 :             : </span>
+<span id="L434"><span class="lineNum">     434</span>                 :             :         This method compares the Model Point's data to the data of 'other' Model</span>
+<span id="L435"><span class="lineNum">     435</span>                 :             :         Point and returns true if the data of both points are the same. It is</span>
+<span id="L436"><span class="lineNum">     436</span>                 :             :         assumed that Model Point instance and 'other' are the of the same leaf</span>
+<span id="L437"><span class="lineNum">     437</span>                 :             :         class type.</span>
+<span id="L438"><span class="lineNum">     438</span>                 :             :      */</span>
+<span id="L439"><span class="lineNum">     439</span>                 :             :     virtual bool isDataEqual_( const void* otherData ) const noexcept = 0;</span>
+<span id="L440"><span class="lineNum">     440</span>                 :             : </span>
+<span id="L441"><span class="lineNum">     441</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L442"><span class="lineNum">     442</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L443"><span class="lineNum">     443</span>                 :             :         NEVER call this method.</span>
+<span id="L444"><span class="lineNum">     444</span>                 :             : </span>
+<span id="L445"><span class="lineNum">     445</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L446"><span class="lineNum">     446</span>                 :             : </span>
+<span id="L447"><span class="lineNum">     447</span>                 :             :         This method returns a pointer to the Model Point's data for Import/Export</span>
+<span id="L448"><span class="lineNum">     448</span>                 :             :         operations.  BE VERY CAREFULL on how the pointer is used!</span>
+<span id="L449"><span class="lineNum">     449</span>                 :             :      */</span>
+<span id="L450"><span class="lineNum">     450</span>                 :             :     virtual void* getImportExportDataPointer_() noexcept = 0;</span>
+<span id="L451"><span class="lineNum">     451</span>                 :             : </span>
+<span id="L452"><span class="lineNum">     452</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L453"><span class="lineNum">     453</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L454"><span class="lineNum">     454</span>                 :             :         NEVER call this method.</span>
+<span id="L455"><span class="lineNum">     455</span>                 :             : </span>
+<span id="L456"><span class="lineNum">     456</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L457"><span class="lineNum">     457</span>                 :             : </span>
+<span id="L458"><span class="lineNum">     458</span>                 :             :         This method returns the &quot;internal size&quot; of the Model Point's data point.</span>
+<span id="L459"><span class="lineNum">     459</span>                 :             :         This length (when applicable) INCLUDES ANY 'META/EXTRA' DATA that is</span>
+<span id="L460"><span class="lineNum">     460</span>                 :             :         NOT the valid/locked meta-data - but is used with the internal</span>
+<span id="L461"><span class="lineNum">     461</span>                 :             :         import()/export() methods.  Or said another way - this is the 'external'</span>
+<span id="L462"><span class="lineNum">     462</span>                 :             :         data size of MP's data minus the meta data size of the MP's valid and</span>
+<span id="L463"><span class="lineNum">     463</span>                 :             :         locked states.</span>
+<span id="L464"><span class="lineNum">     464</span>                 :             :    */</span>
+<span id="L465"><span class="lineNum">     465</span>                 :             :     virtual size_t getInternalDataSize_() const noexcept = 0;</span>
+<span id="L466"><span class="lineNum">     466</span>                 :             : </span>
+<span id="L467"><span class="lineNum">     467</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L468"><span class="lineNum">     468</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L469"><span class="lineNum">     469</span>                 :             :         NEVER call this method.</span>
+<span id="L470"><span class="lineNum">     470</span>                 :             : </span>
+<span id="L471"><span class="lineNum">     471</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L472"><span class="lineNum">     472</span>                 :             : </span>
+<span id="L473"><span class="lineNum">     473</span>                 :             :         This method is used to export meta data when exporting a model</span>
+<span id="L474"><span class="lineNum">     474</span>                 :             :         point.  If there is error in exporting the metadata false is returned;</span>
+<span id="L475"><span class="lineNum">     475</span>                 :             :         else true is returned.</span>
+<span id="L476"><span class="lineNum">     476</span>                 :             : </span>
+<span id="L477"><span class="lineNum">     477</span>                 :             :         A default implementation is provided that always returns true, i.e. for</span>
+<span id="L478"><span class="lineNum">     478</span>                 :             :         model points that do not have metadata (above and beyond the valid and</span>
+<span id="L479"><span class="lineNum">     479</span>                 :             :         locked states).</span>
+<span id="L480"><span class="lineNum">     480</span>                 :             : </span>
+<span id="L481"><span class="lineNum">     481</span>                 :             :         NOTE: The overall size of the destination has been validated with respect</span>
+<span id="L482"><span class="lineNum">     482</span>                 :             :               holding both the Model Point's metadata and the data - so the</span>
+<span id="L483"><span class="lineNum">     483</span>                 :             :               no 'dstLength' argument is passed/provided.</span>
+<span id="L484"><span class="lineNum">     484</span>                 :             :     */</span>
+<span id="L485"><span class="lineNum">     485</span>                 :<span class="tlaGNC">           4 :     virtual bool exportMetadata_( void* dstDataStream, size_t&amp; bytesAdded ) const noexcept</span></span>
+<span id="L486"><span class="lineNum">     486</span>                 :             :     {</span>
+<span id="L487"><span class="lineNum">     487</span>                 :<span class="tlaGNC">           4 :         bytesAdded = 0;</span></span>
+<span id="L488"><span class="lineNum">     488</span>                 :<span class="tlaGNC">           4 :         return true;</span></span>
+<span id="L489"><span class="lineNum">     489</span>                 :             :     }</span>
+<span id="L490"><span class="lineNum">     490</span>                 :             : </span>
+<span id="L491"><span class="lineNum">     491</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L492"><span class="lineNum">     492</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L493"><span class="lineNum">     493</span>                 :             :         NEVER call this method.</span>
+<span id="L494"><span class="lineNum">     494</span>                 :             : </span>
+<span id="L495"><span class="lineNum">     495</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L496"><span class="lineNum">     496</span>                 :             : </span>
+<span id="L497"><span class="lineNum">     497</span>                 :             :         This method is used to import meta data when importing a model</span>
+<span id="L498"><span class="lineNum">     498</span>                 :             :         point.  If the incoming meta data is 'not-valid/not-compatible' then</span>
+<span id="L499"><span class="lineNum">     499</span>                 :             :         false is returned and the import operation will fail; else true is</span>
+<span id="L500"><span class="lineNum">     500</span>                 :             :         returned.</span>
+<span id="L501"><span class="lineNum">     501</span>                 :             : </span>
+<span id="L502"><span class="lineNum">     502</span>                 :             :         A default implementation is provided that always returns true, i.e. for</span>
+<span id="L503"><span class="lineNum">     503</span>                 :             :         model points that do not have metadata (above and beyond the valid and</span>
+<span id="L504"><span class="lineNum">     504</span>                 :             :         locked states).</span>
+<span id="L505"><span class="lineNum">     505</span>                 :             : </span>
+<span id="L506"><span class="lineNum">     506</span>                 :             :         NOTE: The overall size of the source has been validated with respect</span>
+<span id="L507"><span class="lineNum">     507</span>                 :             :               containing both the Model Point's metadata and the data - so the</span>
+<span id="L508"><span class="lineNum">     508</span>                 :             :               no 'srcLength' argument is passed/provided.</span>
+<span id="L509"><span class="lineNum">     509</span>                 :             :    */</span>
+<span id="L510"><span class="lineNum">     510</span>                 :<span class="tlaGNC">           4 :     virtual bool importMetadata_( const void* srcDataStream, size_t&amp; bytesConsumed ) noexcept</span></span>
+<span id="L511"><span class="lineNum">     511</span>                 :             :     {</span>
+<span id="L512"><span class="lineNum">     512</span>                 :<span class="tlaGNC">           4 :         bytesConsumed = 0;</span></span>
+<span id="L513"><span class="lineNum">     513</span>                 :<span class="tlaGNC">           4 :         return true;</span></span>
+<span id="L514"><span class="lineNum">     514</span>                 :             :     }</span>
+<span id="L515"><span class="lineNum">     515</span>                 :             : </span>
+<span id="L516"><span class="lineNum">     516</span>                 :             : </span>
+<span id="L517"><span class="lineNum">     517</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L518"><span class="lineNum">     518</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L519"><span class="lineNum">     519</span>                 :             :         NEVER call this method.</span>
+<span id="L520"><span class="lineNum">     520</span>                 :             : </span>
+<span id="L521"><span class="lineNum">     521</span>                 :             :         This method attempts to convert JSON object 'src' to its binary format</span>
+<span id="L522"><span class="lineNum">     522</span>                 :             :         and copies the result to the Model Point's internal data. The expected</span>
+<span id="L523"><span class="lineNum">     523</span>                 :             :         format of the JSON string is specific to the concrete leaf class.</span>
+<span id="L524"><span class="lineNum">     524</span>                 :             : </span>
+<span id="L525"><span class="lineNum">     525</span>                 :             :         See Kit::Dm::ModelDatabaseApi::fromJSON() method for JSON format.</span>
+<span id="L526"><span class="lineNum">     526</span>                 :             :      */</span>
+<span id="L527"><span class="lineNum">     527</span>                 :             :     virtual bool fromJSON_( JsonVariant&amp;        src,</span>
+<span id="L528"><span class="lineNum">     528</span>                 :             :                             LockRequest_T       lockRequest,</span>
+<span id="L529"><span class="lineNum">     529</span>                 :             :                             uint16_t&amp;           retSequenceNumber,</span>
+<span id="L530"><span class="lineNum">     530</span>                 :             :                             Kit::Text::IString* errorMsg ) noexcept = 0;</span>
+<span id="L531"><span class="lineNum">     531</span>                 :             : </span>
+<span id="L532"><span class="lineNum">     532</span>                 :             : </span>
+<span id="L533"><span class="lineNum">     533</span>                 :             : protected:</span>
+<span id="L534"><span class="lineNum">     534</span>                 :             :     /** This method converts the MP data to a JSON key/value pair.  The key</span>
+<span id="L535"><span class="lineNum">     535</span>                 :             :         must be 'val' This method is only called when the MP data is valid</span>
+<span id="L536"><span class="lineNum">     536</span>                 :             :      */</span>
+<span id="L537"><span class="lineNum">     537</span>                 :             :     virtual bool setJSONVal( JsonDocument&amp; doc ) noexcept = 0;</span>
+<span id="L538"><span class="lineNum">     538</span>                 :             : </span>
+<span id="L539"><span class="lineNum">     539</span>                 :             : </span>
+<span id="L540"><span class="lineNum">     540</span>                 :             : public:</span>
+<span id="L541"><span class="lineNum">     541</span>                 :             :     /// Virtual destructor to make the compiler happy</span>
+<span id="L542"><span class="lineNum">     542</span>                 :             :     virtual ~IModelPoint() {}</span>
+<span id="L543"><span class="lineNum">     543</span>                 :             : };</span>
+<span id="L544"><span class="lineNum">     544</span>                 :             : </span>
+<span id="L545"><span class="lineNum">     545</span>                 :             : </span>
+<span id="L546"><span class="lineNum">     546</span>                 :             : };  // end namespaces</span>
+<span id="L547"><span class="lineNum">     547</span>                 :             : };</span>
+<span id="L548"><span class="lineNum">     548</span>                 :             : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

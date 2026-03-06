@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-25 00:02:35</td>
+            <td class="headerValue">2026-03-06 02:39:35</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -100,12 +100,12 @@
 <span id="L38"><span class="lineNum">      38</span>                 :             :     That said, the scheduler will detect and report when the interval timing</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     slips.</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
-<span id="L41"><span class="lineNum">      41</span>                 :             :     The usage of this class is to implement (or extended) a Cpl::System::Runnable</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :     The usage of this class is to implement (or extended) a Kit::System::Runnable</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     object, i.e. invoked inside the 'forever' loop of the Runnable object's appRun()</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :     method.  The scheduler can be use within a 'bare' forever loop and it can be</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     used with existing event based Runnable objects to add periodic scheduling.</span>
-<span id="L45"><span class="lineNum">      45</span>                 :             :     See Cpl::Dm::PeriodicScheduler for example extending an event based Runnable</span>
-<span id="L46"><span class="lineNum">      46</span>                 :             :     object to include periodic scheduling.</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             :     See Kit::EventQueue::WithPeriodicScheduler for example extending an event</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :     based Runnable object to include periodic scheduling.</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     NOTE: A uint64_t is used for the millisecond time keeping because it</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :           provides a larger range and can accommodate long-running applications</span>

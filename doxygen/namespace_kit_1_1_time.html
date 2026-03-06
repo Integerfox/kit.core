@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -74,6 +74,9 @@ Functions</h2></td></tr>
 <tr class="memitem:abb025a195fc9a8e95dde64e2e175cc46" id="r_abb025a195fc9a8e95dde64e2e175cc46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb025a195fc9a8e95dde64e2e175cc46">halSetAbsoluteTime</a> (uint64_t utcEpochMilliseconds) noexcept</td></tr>
 <tr class="memdesc:abb025a195fc9a8e95dde64e2e175cc46"><td class="mdescLeft">&#160;</td><td class="mdescRight">This platform independent method is used to set the target's current absolute time.  <br /></td></tr>
 <tr class="separator:abb025a195fc9a8e95dde64e2e175cc46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e7d696cac145f7ecbab397730c8050" id="r_a81e7d696cac145f7ecbab397730c8050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81e7d696cac145f7ecbab397730c8050">initializeBootTime</a> (<a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a> &amp;bootCounterMp) noexcept</td></tr>
+<tr class="memdesc:a81e7d696cac145f7ecbab397730c8050"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to initialize boot time logic.  <br /></td></tr>
+<tr class="separator:a81e7d696cac145f7ecbab397730c8050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b21309d66fbb1e9cd6db4ab789329a8" id="r_a9b21309d66fbb1e9cd6db4ab789329a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b21309d66fbb1e9cd6db4ab789329a8">parseBootTime</a> (uint64_t srcBootTime, uint16_t &amp;dstBootCounter, uint64_t &amp;dstElapsedTimeMs) noexcept</td></tr>
 <tr class="memdesc:a9b21309d66fbb1e9cd6db4ab789329a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method breaks 'boot time' into itself individual fields.  <br /></td></tr>
 <tr class="separator:a9b21309d66fbb1e9cd6db4ab789329a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -258,6 +261,35 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a81e7d696cac145f7ecbab397730c8050" name="a81e7d696cac145f7ecbab397730c8050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e7d696cac145f7ecbab397730c8050">&#9670;&#160;</a></span>initializeBootTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::Time::initializeBootTime </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bootCounterMp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method is used to initialize boot time logic. </p>
+<p>It MUST be called BEFORE the first call to <a class="el" href="#a7ed042091ef6a4055a48c77ec5d83c3d" title="This method returns &#39;Boot Time&#39; which include the current boot counter and elapsed time - in millisec...">getBootTime()</a>.</p>
+<p>'bootCounterMp' is the Model Point instance that contains current boot count </p>
+
+</div>
+</div>
 <a id="a9b21309d66fbb1e9cd6db4ab789329a8" name="a9b21309d66fbb1e9cd6db4ab789329a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b21309d66fbb1e9cd6db4ab789329a8">&#9670;&#160;</a></span>parseBootTime()</h2>
 
@@ -297,7 +329,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

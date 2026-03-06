@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -54,7 +54,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This class implements a brute force approach to initializing a 'pico mutex' when the <a class="el" href="namespace_kit.html" title="Forward reference to break dependency on the Dm namespace.">Kit</a> C++ library is initialized.  
+<p>This class implements a brute force approach to initializing a 'pico mutex' when the <a class="el" href="namespace_kit.html" title="Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.">Kit</a> C++ library is initialized.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="mutex__t___8h_source.html">mutex_t_.h</a>&gt;</code></p>
@@ -154,7 +154,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ae4e75698e6e4d9ee6ecd2c53be52815b inherit pub_static_methods_class_kit_1_1_container_1_1_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class implements a brute force approach to initializing a 'pico mutex' when the <a class="el" href="namespace_kit.html" title="Forward reference to break dependency on the Dm namespace.">Kit</a> C++ library is initialized. </p>
+<div class="textblock"><p>This class implements a brute force approach to initializing a 'pico mutex' when the <a class="el" href="namespace_kit.html" title="Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.">Kit</a> C++ library is initialized. </p>
 <p>This is to support statically allocated/created <a class="el" href="class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics.">Kit::System::Mutex</a> instances. The issue here is that 'pico mutex' need to be initialized AFTER main() is called. The Pico-SDK solution for statically allocating mutex instances is C solution that does not work inside the <a class="el" href="class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics.">Kit::System::Mutex</a> object. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af8bb175aa26d5304c078d22499ff775f" name="af8bb175aa26d5304c078d22499ff775f"></a>
@@ -238,7 +238,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

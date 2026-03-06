@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -70,14 +70,14 @@ $(function() {
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_logging_1_1_framework_1_1_log_sink__coll__graph.svg" width="648" height="378"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_logging_1_1_framework_1_1_log_sink__coll__graph.svg" width="5364" height="526"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4b4e5ef65f4dc3669670ed5368296077" id="r_a4b4e5ef65f4dc3669670ed5368296077"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b4e5ef65f4dc3669670ed5368296077">LogSink</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;myMbox) noexcept</td></tr>
-<tr class="memdesc:a4b4e5ef65f4dc3669670ed5368296077"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:a4b4e5ef65f4dc3669670ed5368296077"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72a8efe0c7cb2278bf61e0ef9a8a56e0" id="r_a72a8efe0c7cb2278bf61e0ef9a8a56e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72a8efe0c7cb2278bf61e0ef9a8a56e0">LogSink</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;myMbox, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a> &gt; &amp;incomingEntriesBuffer) noexcept</td></tr>
+<tr class="memdesc:a72a8efe0c7cb2278bf61e0ef9a8a56e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a72a8efe0c7cb2278bf61e0ef9a8a56e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bc28c13b438a780334b4f93abe9300b" id="r_a1bc28c13b438a780334b4f93abe9300b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bc28c13b438a780334b4f93abe9300b">request</a> (<a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#af640fa7fab0512af28d722efc314690d">CloseMsg</a> &amp;msg) noexcept override</td></tr>
 <tr class="memdesc:a1bc28c13b438a780334b4f93abe9300b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method stops the sink (See <a class="el" href="class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close...">Kit::Itc::OpenCloseSync</a>)  <br /></td></tr>
 <tr class="separator:a1bc28c13b438a780334b4f93abe9300b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,14 +109,23 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a34c4b7870887fd7b77739a0ba61f17be" id="r_a34c4b7870887fd7b77739a0ba61f17be"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34c4b7870887fd7b77739a0ba61f17be">dispatchLogEntry</a> (<a class="el" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a> &amp;src)</td></tr>
-<tr class="memdesc:a34c4b7870887fd7b77739a0ba61f17be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element Count Change notification.  <br /></td></tr>
-<tr class="separator:a34c4b7870887fd7b77739a0ba61f17be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af83c11d4ebea640fe7c94bc2c83e0c31" id="r_af83c11d4ebea640fe7c94bc2c83e0c31"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af83c11d4ebea640fe7c94bc2c83e0c31">dispatchLogEntry</a> (<a class="el" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a> &amp;src) noexcept</td></tr>
+<tr class="memdesc:af83c11d4ebea640fe7c94bc2c83e0c31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Platform specific method to save the entry.  <br /></td></tr>
+<tr class="separator:af83c11d4ebea640fe7c94bc2c83e0c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb9026f863759d569f289e0bbf3d371d" id="r_aeb9026f863759d569f289e0bbf3d371d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb9026f863759d569f289e0bbf3d371d">elementCountChanged</a> (<a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a> &amp;mp, <a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;clientObserver) noexcept</td></tr>
+<tr class="memdesc:aeb9026f863759d569f289e0bbf3d371d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Element Count Change notification.  <br /></td></tr>
+<tr class="separator:aeb9026f863759d569f289e0bbf3d371d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a3334a103c6da5d70fdddd9141abc01c7" id="r_a3334a103c6da5d70fdddd9141abc01c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3334a103c6da5d70fdddd9141abc01c7">m_logBuffer</a></td></tr>
+<tr class="memdesc:a3334a103c6da5d70fdddd9141abc01c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Log Ring Buffer.  <br /></td></tr>
+<tr class="separator:a3334a103c6da5d70fdddd9141abc01c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9412829e3a0c8e25f8f580d3673c552" id="r_af9412829e3a0c8e25f8f580d3673c552"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_dm_1_1_observer_callback.html">Kit::Dm::ObserverCallback</a>&lt; <a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9412829e3a0c8e25f8f580d3673c552">m_obElementCount</a></td></tr>
+<tr class="memdesc:af9412829e3a0c8e25f8f580d3673c552"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observer for change notification (to the RingBuffer)  <br /></td></tr>
+<tr class="separator:af9412829e3a0c8e25f8f580d3673c552"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89d2558e5143eecd5f9008099fd4a141" id="r_a89d2558e5143eecd5f9008099fd4a141"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89d2558e5143eecd5f9008099fd4a141">m_opened</a></td></tr>
-<tr class="memdesc:a89d2558e5143eecd5f9008099fd4a141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observer for change notification (to the RingBuffer)  <br /></td></tr>
+<tr class="memdesc:a89d2558e5143eecd5f9008099fd4a141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Track my open state.  <br /></td></tr>
 <tr class="separator:a89d2558e5143eecd5f9008099fd4a141"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_kit_1_1_itc_1_1_open_sync"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_class_kit_1_1_itc_1_1_open_sync')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_kit_1_1_itc_1_1_open_sync.html">Kit::Itc::OpenSync</a></td></tr>
 <tr class="memitem:acfb41b89924eada397f338a0f058af7f inherit pro_attribs_class_kit_1_1_itc_1_1_open_sync" id="r_acfb41b89924eada397f338a0f058af7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_itc_1_1_open_sync.html#acfb41b89924eada397f338a0f058af7f">m_eventQueue</a></td></tr>
@@ -142,11 +151,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is responsible for consuming the application's Log buffer and 'dispatching' log entries. </p>
-<p>By default, the class simply drains the log buffer and discards the entries. A child class is required to provide a meaningful implementation of the <a class="el" href="#a34c4b7870887fd7b77739a0ba61f17be" title="Element Count Change notification.">dispatchLogEntry()</a> method.</p>
+<p>By default, the class simply drains the log buffer and discards the entries. A child class is required to provide a meaningful implementation of the <a class="el" href="#af83c11d4ebea640fe7c94bc2c83e0c31" title="Platform specific method to save the entry.">dispatchLogEntry()</a> method.</p>
 <p>FYI: The Kit::Persistent framework provides an alternate 'log sink' that writes log entries to Non-volatile storage along with an a API to retrieve the log entries. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4b4e5ef65f4dc3669670ed5368296077" name="a4b4e5ef65f4dc3669670ed5368296077"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b4e5ef65f4dc3669670ed5368296077">&#9670;&#160;</a></span>LogSink()</h2>
+<a id="a72a8efe0c7cb2278bf61e0ef9a8a56e0" name="a72a8efe0c7cb2278bf61e0ef9a8a56e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72a8efe0c7cb2278bf61e0ef9a8a56e0">&#9670;&#160;</a></span>LogSink()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -157,8 +166,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">Kit::Logging::Framework::LogSink::LogSink </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>myMbox</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>myMbox</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>incomingEntriesBuffer</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -173,8 +186,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a34c4b7870887fd7b77739a0ba61f17be" name="a34c4b7870887fd7b77739a0ba61f17be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34c4b7870887fd7b77739a0ba61f17be">&#9670;&#160;</a></span>dispatchLogEntry()</h2>
+<a id="af83c11d4ebea640fe7c94bc2c83e0c31" name="af83c11d4ebea640fe7c94bc2c83e0c31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af83c11d4ebea640fe7c94bc2c83e0c31">&#9670;&#160;</a></span>dispatchLogEntry()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,13 +204,43 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Platform specific method to save the entry. </p>
+
+</div>
+</div>
+<a id="aeb9026f863759d569f289e0bbf3d371d" name="aeb9026f863759d569f289e0bbf3d371d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb9026f863759d569f289e0bbf3d371d">&#9670;&#160;</a></span>elementCountChanged()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::Logging::Framework::LogSink::elementCountChanged </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>mp</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>clientObserver</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Element Count Change notification. </p>
-<p>Platform specific method to save the entry </p>
 
 </div>
 </div>
@@ -260,6 +303,54 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a3334a103c6da5d70fdddd9141abc01c7" name="a3334a103c6da5d70fdddd9141abc01c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3334a103c6da5d70fdddd9141abc01c7">&#9670;&#160;</a></span>m_logBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt;<a class="el" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a>&gt;&amp; Kit::Logging::Framework::LogSink::m_logBuffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The Log Ring Buffer. </p>
+
+</div>
+</div>
+<a id="af9412829e3a0c8e25f8f580d3673c552" name="af9412829e3a0c8e25f8f580d3673c552"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9412829e3a0c8e25f8f580d3673c552">&#9670;&#160;</a></span>m_obElementCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_dm_1_1_observer_callback.html">Kit::Dm::ObserverCallback</a>&lt;<a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a>&gt; Kit::Logging::Framework::LogSink::m_obElementCount</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Observer for change notification (to the RingBuffer) </p>
+
+</div>
+</div>
 <a id="a89d2558e5143eecd5f9008099fd4a141" name="a89d2558e5143eecd5f9008099fd4a141"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a89d2558e5143eecd5f9008099fd4a141">&#9670;&#160;</a></span>m_opened</h2>
 
@@ -280,8 +371,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Observer for change notification (to the RingBuffer) </p>
-<p>The Log Ring Buffer Track my open state </p>
+<p>Track my open state. </p>
 
 </div>
 </div>
@@ -291,7 +381,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -60,7 +60,7 @@ $(function() {
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *----------------------------------------------------------------------------*/</span><span class="comment"></span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/** @file */</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor"> #include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor"> #include &lt;<a class="code" href="_string_8h.html">string.h</a>&gt;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">///</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_kit.html">Kit</a> {<span class="comment"></span></div>
@@ -178,6 +178,7 @@ $(function() {
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>}       <span class="comment">// end namespaces</span></div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="ttc" id="a_string_8h_html"><div class="ttname"><a href="_string_8h.html">String.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_strip_html"><div class="ttname"><a href="class_kit_1_1_text_1_1_strip.html">Kit::Text::Strip</a></div><div class="ttdoc">This all static class contains a set of methods that provide basic building blocks for parsing 'token...</div><div class="ttdef"><b>Definition</b> Strip.h:25</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_strip_html_a14c01cca10e6de74de58e62c7ccb1a05"><div class="ttname"><a href="class_kit_1_1_text_1_1_strip.html#a14c01cca10e6de74de58e62c7ccb1a05">Kit::Text::Strip::removeTrailingChars</a></div><div class="ttdeci">static void removeTrailingChars(char *s, const char *charsSet)</div><div class="ttdoc">This method is the same as removeTrailingSpaces(), except the specified characters set is used for &quot;w...</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_strip_html_a18aaeef444fd947a38612277ed808734"><div class="ttname"><a href="class_kit_1_1_text_1_1_strip.html#a18aaeef444fd947a38612277ed808734">Kit::Text::Strip::isCharInString</a></div><div class="ttdeci">static bool isCharInString(const char *charsSet, const char c)</div><div class="ttdoc">This method returns true if the character 'c' is one of character(s) contained in 'charsSet'; else fa...</div><div class="ttdef"><b>Definition</b> Strip.h:121</div></div>
@@ -188,11 +189,11 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_text_1_1_strip_html_ab59a7acf178d465636fe39d7a581e53c"><div class="ttname"><a href="class_kit_1_1_text_1_1_strip.html#ab59a7acf178d465636fe39d7a581e53c">Kit::Text::Strip::removeTrailingSpace</a></div><div class="ttdeci">static void removeTrailingSpace(char *s)</div><div class="ttdoc">This method TRUNCATES the specified null-terminated string by eliminating any trailing white space.</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_strip_html_ad1079c827b49ac733f18ff48a1b2752b"><div class="ttname"><a href="class_kit_1_1_text_1_1_strip.html#ad1079c827b49ac733f18ff48a1b2752b">Kit::Text::Strip::notChars</a></div><div class="ttdeci">static const char * notChars(const char *s, const char *charsSet)</div><div class="ttdoc">This method is the same as notSpace(), except the specified character set is used to terminate the se...</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_strip_html_afcd05dcb73b39e6d3e8e4f05c0688276"><div class="ttname"><a href="class_kit_1_1_text_1_1_strip.html#afcd05dcb73b39e6d3e8e4f05c0688276">Kit::Text::Strip::trailingSpace</a></div><div class="ttdeci">static const char * trailingSpace(const char *s)</div><div class="ttdoc">This method returns a pointer to the LAST non-whitespace character in the specified null-terminated s...</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

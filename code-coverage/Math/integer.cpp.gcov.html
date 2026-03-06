@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Math/integer.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Math</a> - integer.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-03-06 02:39:35</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             :  *</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  *</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             : /** @file */</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             : </span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : #include &quot;integer.h&quot;</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : #include &quot;Kit/System/Assert.h&quot;</span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : </span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : </span>
+<span id="L15"><span class="lineNum">      15</span>                 :<span class="tlaGNC tlaBgGNC">          10 : void Kit::Math::incrementLargeInteger( uint8_t* integerToBeIncrement, int integerSizeInBytes, uint8_t incValue, bool littleEndian ) noexcept</span></span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : {</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             :     KIT_SYSTEM_ASSERT( integerToBeIncrement );</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             :     KIT_SYSTEM_ASSERT( integerSizeInBytes &gt;= 1 );</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : </span>
+<span id="L20"><span class="lineNum">      20</span>                 :             :     // Deal with Big vs Little endian</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             :     int idx       = 0;</span>
+<span id="L22"><span class="lineNum">      22</span>                 :             :     int direction = 1;</span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          10 :     int endIdx    = integerSizeInBytes - 1;</span></span>
+<span id="L24"><span class="lineNum">      24</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">          10 :     if ( !littleEndian )</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     {</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :         idx       = integerSizeInBytes - 1;</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             :         direction = -1;</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :         endIdx    = 0;</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             : </span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :     }</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             : </span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :     // Loop through all of the bytes in the 'integer'</span>
+<span id="L33"><span class="lineNum">      33</span>         [<span class="tlaGBC" title="Branch 0 was taken 54 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          56 :     for( ; idx != (endIdx+direction); idx += direction )</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :     {</span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">          54 :         uint16_t result = (uint16_t) integerToBeIncrement[idx] + incValue;</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          54 :         integerToBeIncrement[idx] = (uint8_t) result;</span></span>
+<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 46 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span>]:<span class="tlaGNC">          54 :         if ( ( result &gt;&gt; 8 ) == 0 )</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :         {</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :             break;</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :         }</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :         incValue = (uint8_t) ( result &gt;&gt; 8 );</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :     }</span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">          10 : }</span></span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

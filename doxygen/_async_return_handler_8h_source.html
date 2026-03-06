@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -102,7 +102,7 @@ $(function() {
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_queue_8h_html"><div class="ttname"><a href="_i_queue_8h.html">IQueue.h</a></div></div>
 <div class="ttc" id="a_i_return_handler_8h_html"><div class="ttname"><a href="_i_return_handler_8h.html">IReturnHandler.h</a></div></div>
-<div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_queue_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a></div><div class="ttdoc">This abstract class represents an Event Queue where events can be delivered to.</div><div class="ttdef"><b>Definition</b> IQueue.h:39</div></div>
+<div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_queue_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a></div><div class="ttdoc">This abstract class represents an Event Queue where events can be delivered to.</div><div class="ttdef"><b>Definition</b> IQueue.h:52</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_async_return_handler_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_async_return_handler.html">Kit::Itc::AsyncReturnHandler</a></div><div class="ttdoc">This class implements an asynchronous ReturnHandler.</div><div class="ttdef"><b>Definition</b> AsyncReturnHandler.h:32</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_async_return_handler_html_a1981f2c918399df4146569ad095328c6"><div class="ttname"><a href="class_kit_1_1_itc_1_1_async_return_handler.html#a1981f2c918399df4146569ad095328c6">Kit::Itc::AsyncReturnHandler::m_clientEventQueue</a></div><div class="ttdeci">EventQueue::IQueue &amp; m_clientEventQueue</div><div class="ttdoc">Refers to the eventLoop/thread to which the response message will be posted.</div><div class="ttdef"><b>Definition</b> AsyncReturnHandler.h:44</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_async_return_handler_html_a4f1e7c40cae3217263f213543ebebea0"><div class="ttname"><a href="class_kit_1_1_itc_1_1_async_return_handler.html#a4f1e7c40cae3217263f213543ebebea0">Kit::Itc::AsyncReturnHandler::rts</a></div><div class="ttdeci">void rts() noexcept override</div><div class="ttdoc">See Kit::Itc::IReturnHandler.</div></div>
@@ -110,11 +110,11 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_async_return_handler_html_aaacf029e5a2c15332825a08498eb769e"><div class="ttname"><a href="class_kit_1_1_itc_1_1_async_return_handler.html#aaacf029e5a2c15332825a08498eb769e">Kit::Itc::AsyncReturnHandler::AsyncReturnHandler</a></div><div class="ttdeci">AsyncReturnHandler(Kit::EventQueue::IQueue &amp;clientEventQueue, IMessage &amp;msg) noexcept</div><div class="ttdoc">The constructor initializes the response mailbox and message references.</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_i_message_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_i_message.html">Kit::Itc::IMessage</a></div><div class="ttdoc">This abstract class defines the operations for an ITC message.</div><div class="ttdef"><b>Definition</b> IMessage.h:23</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_i_return_handler_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_i_return_handler.html">Kit::Itc::IReturnHandler</a></div><div class="ttdoc">This abstract class represents the action that is executed by ITC framework in response to a Service ...</div><div class="ttdef"><b>Definition</b> IReturnHandler.h:26</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

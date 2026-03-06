@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -88,12 +88,12 @@ $(function() {
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">    That said, the scheduler will detect and report when the interval timing</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">    slips.</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"></span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">    The usage of this class is to implement (or extended) a Cpl::System::Runnable</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">    The usage of this class is to implement (or extended) a Kit::System::Runnable</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">    object, i.e. invoked inside the &#39;forever&#39; loop of the Runnable object&#39;s appRun()</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">    method.  The scheduler can be use within a &#39;bare&#39; forever loop and it can be</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">    used with existing event based Runnable objects to add periodic scheduling.</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">    See Cpl::Dm::PeriodicScheduler for example extending an event based Runnable</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    object to include periodic scheduling.</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">    See Kit::EventQueue::WithPeriodicScheduler for example extending an event</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    based Runnable object to include periodic scheduling.</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">    NOTE: A uint64_t is used for the millisecond time keeping because it</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">          provides a larger range and can accommodate long-running applications</span></div>
@@ -290,7 +290,7 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_system_1_1_periodic_scheduler_html_ab3be6988bad73c3ef1b7bbea7bf1e2c3"><div class="ttname"><a href="class_kit_1_1_system_1_1_periodic_scheduler.html#ab3be6988bad73c3ef1b7bbea7bf1e2c3">Kit::System::PeriodicScheduler::m_reportSlippage</a></div><div class="ttdeci">ReportSlippageFunc_T m_reportSlippage</div><div class="ttdoc">Report slippage method.</div><div class="ttdef"><b>Definition</b> PeriodicScheduler.h:205</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_periodic_scheduler_html_ac92c6a338664aaf58a31b13ddcc3db85"><div class="ttname"><a href="class_kit_1_1_system_1_1_periodic_scheduler.html#ac92c6a338664aaf58a31b13ddcc3db85">Kit::System::PeriodicScheduler::PeriodicScheduler</a></div><div class="ttdeci">PeriodicScheduler(Interval_T intervals[], Hook_T beginThreadProcessing=nullptr, Hook_T endThreadProcessing=nullptr, ReportSlippageFunc_T slippageFunc=nullptr, NowFunc_T nowFunc=ElapsedTime::millisecondsEx) noexcept</div><div class="ttdoc">Constructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_periodic_scheduler_html_afe659d2aeac8013bbc308434ac07d892"><div class="ttname"><a href="class_kit_1_1_system_1_1_periodic_scheduler.html#afe659d2aeac8013bbc308434ac07d892">Kit::System::PeriodicScheduler::m_firstExecution</a></div><div class="ttdeci">bool m_firstExecution</div><div class="ttdoc">Flag to managing the 'first' execution.</div><div class="ttdef"><b>Definition</b> PeriodicScheduler.h:217</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to break dependency on the Dm namespace.</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 <div class="ttc" id="astruct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t_html"><div class="ttname"><a href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html">Kit::System::PeriodicScheduler::Interval_T</a></div><div class="ttdoc">Defines an interval.</div><div class="ttdef"><b>Definition</b> PeriodicScheduler.h:88</div></div>
 <div class="ttc" id="astruct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t_html_a0a8dbcd2ff6a5bcbaf1783b4f34a12c6"><div class="ttname"><a href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html#a0a8dbcd2ff6a5bcbaf1783b4f34a12c6">Kit::System::PeriodicScheduler::Interval_T::duration</a></div><div class="ttdeci">uint64_t duration</div><div class="ttdoc">The amount time in the Interval's period.</div><div class="ttdef"><b>Definition</b> PeriodicScheduler.h:91</div></div>
 <div class="ttc" id="astruct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t_html_a2615b89840c914ef75a3ecce642b6b67"><div class="ttname"><a href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html#a2615b89840c914ef75a3ecce642b6b67">Kit::System::PeriodicScheduler::Interval_T::callbackFunc</a></div><div class="ttdeci">IntervalCallbackFunc_T callbackFunc</div><div class="ttdoc">Callback function pointer.</div><div class="ttdef"><b>Definition</b> PeriodicScheduler.h:89</div></div>
@@ -300,7 +300,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

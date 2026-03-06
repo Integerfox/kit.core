@@ -142,9 +142,9 @@
 <g id="Node000008" class="node">
 <title>Node8</title>
 <g id="a_Node000008"><a xlink:href="class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html" target="_top" xlink:title="This class extends the Kit::EventQueue::Server class to add periodic scheduling to an event based &#39;th...">
-<polygon fill="white" stroke="#666666" points="1092,-94 929,-94 929,-64 1092,-64 1092,-94"/>
-<text text-anchor="start" x="937" y="-82" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::EventQueue::WithPeriodic</text>
-<text text-anchor="middle" x="1010.5" y="-71" font-family="Helvetica,sans-Serif" font-size="10.00">Scheduling</text>
+<polygon fill="white" stroke="#666666" points="1092,-116 929,-116 929,-86 1092,-86 1092,-116"/>
+<text text-anchor="start" x="937" y="-104" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::EventQueue::WithPeriodic</text>
+<text text-anchor="middle" x="1010.5" y="-93" font-family="Helvetica,sans-Serif" font-size="10.00">Scheduling</text>
 </a>
 </g>
 </g>
@@ -152,8 +152,26 @@
 <g id="edge8_Node000007_Node000008" class="edge">
 <title>Node7&#45;&gt;Node8</title>
 <g id="a_edge8_Node000007_Node000008"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M902.22,-79C910.98,-79 919.93,-79 928.75,-79"/>
-<polygon fill="#63b8ff" stroke="#63b8ff" points="902.05,-75.5 892.05,-79 902.05,-82.5 902.05,-75.5"/>
+<path fill="none" stroke="#63b8ff" d="M902.22,-88.1C910.98,-89.16 919.93,-90.23 928.75,-91.29"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="902.4,-84.6 892.05,-86.88 901.56,-91.55 902.4,-84.6"/>
+</a>
+</g>
+</g>
+<!-- Node9 -->
+<g id="Node000009" class="node">
+<title>Node9</title>
+<g id="a_Node000009"><a xlink:href="class_test_event_queue_server.html" target="_top" xlink:title="This class is a EventQueue Server that signals the provided semaphore when it begins execution.">
+<polygon fill="white" stroke="#666666" points="1074,-67.5 947,-67.5 947,-48.5 1074,-48.5 1074,-67.5"/>
+<text text-anchor="middle" x="1010.5" y="-55.5" font-family="Helvetica,sans-Serif" font-size="10.00">TestEventQueueServer</text>
+</a>
+</g>
+</g>
+<!-- Node7&#45;&gt;Node9 -->
+<g id="edge9_Node000007_Node000009" class="edge">
+<title>Node7&#45;&gt;Node9</title>
+<g id="a_edge9_Node000007_Node000009"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M902.22,-70.31C917.07,-68.61 932.49,-66.84 946.86,-65.19"/>
+<polygon fill="#63b8ff" stroke="#63b8ff" points="901.59,-66.86 892.05,-71.48 902.38,-73.81 901.59,-66.86"/>
 </a>
 </g>
 </g>

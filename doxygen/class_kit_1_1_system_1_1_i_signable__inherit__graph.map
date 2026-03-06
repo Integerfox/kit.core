@@ -1,25 +1,27 @@
 <map id="Kit::System::ISignable" name="Kit::System::ISignable">
-<area shape="rect" id="Node000001" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="5,150,171,175"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread." alt="" coords="221,70,395,95"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,143,271,93,273,98,137,148"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore." alt="" coords="219,150,397,175"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="185,160,218,160,218,165,185,165"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="233,230,383,255"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="137,177,273,227,271,232,135,182"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_event_queue_1_1_server.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing events from Ev..." alt="" coords="458,13,635,38"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="374,64,492,35,494,41,376,69"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_system_1_1_event_loop_with_p_scheduling.html" title="This class extends the EventLoop class to add periodic scheduling to an event based &#39;thread&#39;." alt="" coords="445,63,648,103"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="408,80,445,80,445,85,408,85"/>
+<area shape="rect" id="Node000001" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="5,178,171,203"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread." alt="" coords="221,98,395,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,171,271,121,273,126,137,176"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore." alt="" coords="219,178,397,203"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="185,188,218,188,218,193,185,193"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="233,258,383,283"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="137,205,273,255,271,260,135,210"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_event_queue_1_1_server.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing events from Ev..." alt="" coords="458,41,635,66"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="374,92,492,63,494,69,376,97"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_system_1_1_event_loop_with_p_scheduling.html" title="This class extends the EventLoop class to add periodic scheduling to an event based &#39;thread&#39;." alt="" coords="445,91,648,131"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="408,108,445,108,445,113,408,113"/>
 <area shape="rect" id="Node000004" href="$class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html" title="This class extends the Kit::EventQueue::Server class to add periodic scheduling to an event based &#39;th..." alt="" coords="696,5,913,45"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="649,23,696,23,696,28,649,28"/>
-<area shape="rect" id="Node000008" href="$class_kit_1_1_system_1_1_bare_metal_1_1_thread.html" title="This concrete class implements a Thread object on a bare&#45;metal platform, i.e NO operating system,..." alt="" coords="461,127,633,167"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="345,221,444,176,477,164,479,169,446,181,347,226"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html" title="This concrete class implements a Thread object using FreeRTOS threads." alt="" coords="463,191,630,231"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="396,228,463,219,463,224,397,233"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads." alt="" coords="477,255,617,295"/>
-<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="397,252,477,263,476,268,396,257"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_system_1_1_r_p_pico_1_1_thread.html" title="This concrete class implements a Thread object that maps 1 to 1 with a processor core on the Raspberr..." alt="" coords="472,319,621,359"/>
-<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="347,259,446,304,479,316,477,321,444,309,345,264"/>
-<area shape="rect" id="Node000012" href="$class_kit_1_1_system_1_1_win32_1_1_thread.html" title="This concrete class implements a Thread object using Win32 threads." alt="" coords="473,383,620,423"/>
-<area shape="poly" id="edge11_Node000007_Node000012" title=" " alt="" coords="330,264,380,317,412,344,447,368,474,381,472,386,444,373,409,349,376,320,326,268"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="649,40,695,34,696,40,649,45"/>
+<area shape="rect" id="Node000005" href="$class_test_event_queue_server.html" title="This class is a EventQueue Server that signals the provided semaphore when it begins execution." alt="" coords="720,70,889,95"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="649,62,720,70,720,76,649,68"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_system_1_1_bare_metal_1_1_thread.html" title="This concrete class implements a Thread object on a bare&#45;metal platform, i.e NO operating system,..." alt="" coords="461,155,633,195"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="345,249,444,204,477,192,479,197,446,209,347,254"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_system_1_1_free_r_t_o_s_1_1_thread.html" title="This concrete class implements a Thread object using FreeRTOS threads." alt="" coords="463,219,630,259"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="396,256,463,247,463,252,397,261"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads." alt="" coords="477,283,617,323"/>
+<area shape="poly" id="edge10_Node000008_Node000011" title=" " alt="" coords="397,280,477,291,476,296,396,285"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_system_1_1_r_p_pico_1_1_thread.html" title="This concrete class implements a Thread object that maps 1 to 1 with a processor core on the Raspberr..." alt="" coords="472,347,621,387"/>
+<area shape="poly" id="edge11_Node000008_Node000012" title=" " alt="" coords="347,287,446,332,479,344,477,349,444,337,345,292"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_system_1_1_win32_1_1_thread.html" title="This concrete class implements a Thread object using Win32 threads." alt="" coords="473,411,620,451"/>
+<area shape="poly" id="edge12_Node000008_Node000013" title=" " alt="" coords="330,292,380,345,412,372,447,396,474,409,472,414,444,401,409,377,376,348,326,296"/>
 </map>

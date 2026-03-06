@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 270-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 285-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -52,7 +52,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This abstract class defines the interface to manage Data Model Change notification events that are published to Model Points.  
+<p>This abstract class defines the interface to manage Data Model Change notification events that are published from Model Points.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_i_change_notification_8h_source.html">IChangeNotification.h</a>&gt;</code></p>
@@ -62,17 +62,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad5d5cf317390e6e4ac433641aa951d81" id="r_ad5d5cf317390e6e4ac433641aa951d81"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad5d5cf317390e6e4ac433641aa951d81">~IChangeNotification</a> ()=default</td></tr>
 <tr class="memdesc:ad5d5cf317390e6e4ac433641aa951d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:ad5d5cf317390e6e4ac433641aa951d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fdfbd7ae8a4b03c107995b40d1726ee" id="r_a1fdfbd7ae8a4b03c107995b40d1726ee"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fdfbd7ae8a4b03c107995b40d1726ee">addPendingChangingNotification</a> (Kit::Dm::ISubscriber &amp;subscriber) noexcept=0</td></tr>
-<tr class="memdesc:a1fdfbd7ae8a4b03c107995b40d1726ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used add a new 'change notification' to its list of pending change notifications.  <br /></td></tr>
-<tr class="separator:a1fdfbd7ae8a4b03c107995b40d1726ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aa04b77b348bf784be17e5e2adf7686" id="r_a5aa04b77b348bf784be17e5e2adf7686"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5aa04b77b348bf784be17e5e2adf7686">removePendingChangingNotification</a> (Kit::Dm::ISubscriber &amp;subscriber) noexcept=0</td></tr>
-<tr class="memdesc:a5aa04b77b348bf784be17e5e2adf7686"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used remove a pending 'change notification' from its list of pending change notifications.  <br /></td></tr>
-<tr class="separator:a5aa04b77b348bf784be17e5e2adf7686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c96b214990cff30c326aab208f8ef10" id="r_a7c96b214990cff30c326aab208f8ef10"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c96b214990cff30c326aab208f8ef10">addPendingChangingNotification</a> (<a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;observer) noexcept=0</td></tr>
+<tr class="memdesc:a7c96b214990cff30c326aab208f8ef10"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used add a new 'change notification' to its list of pending change notifications.  <br /></td></tr>
+<tr class="separator:a7c96b214990cff30c326aab208f8ef10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a7d705a8cd1498ccceca8abc782d0b9" id="r_a8a7d705a8cd1498ccceca8abc782d0b9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a7d705a8cd1498ccceca8abc782d0b9">removePendingChangingNotification</a> (<a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;observer) noexcept=0</td></tr>
+<tr class="memdesc:a8a7d705a8cd1498ccceca8abc782d0b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used remove a pending 'change notification' from its list of pending change notifications.  <br /></td></tr>
+<tr class="separator:a8a7d705a8cd1498ccceca8abc782d0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This abstract class defines the interface to manage Data Model Change notification events that are published to Model Points. </p>
-<p>NOTE: The requirements and/or semantics of Model Point subscription is that Subscriptions, Notifications, and Cancel-of-Subscriptions all happen in a SINGLE thread and that thread is the 'Subscribers' thread.</p>
-<p>NOTE: Use of this interface is RESTRICTED to the Kit::Dm namespace. The Application (or other namespaces) should NEVER use this interface </p>
+<div class="textblock"><p>This abstract class defines the interface to manage Data Model Change notification events that are published from Model Points. </p>
+<p>NOTE: The requirements and/or semantics of Model Point Observers are that subscriptions, notifications, and cancel-of-subscriptions all happen in a SINGLE thread and that thread is the 'Observers' thread.</p>
+<p>NOTE: Use of this interface is RESTRICTED to the <a class="el" href="namespace_kit_1_1_dm.html" title="The &#39;Dm&#39; namespace is the root namespace for a framework of the Data Model architecture pattern.">Kit::Dm</a> and <a class="el" href="namespace_kit_1_1_event_queue.html" title="The EventQueue namespace is used to provide a common Event Queue type when there are multiple orthogo...">Kit::EventQueue</a> namespaces. The Application (or other namespaces) should NEVER use this interface </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad5d5cf317390e6e4ac433641aa951d81" name="ad5d5cf317390e6e4ac433641aa951d81"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad5d5cf317390e6e4ac433641aa951d81">&#9670;&#160;</a></span>~IChangeNotification()</h2>
@@ -102,8 +102,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1fdfbd7ae8a4b03c107995b40d1726ee" name="a1fdfbd7ae8a4b03c107995b40d1726ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fdfbd7ae8a4b03c107995b40d1726ee">&#9670;&#160;</a></span>addPendingChangingNotification()</h2>
+<a id="a7c96b214990cff30c326aab208f8ef10" name="a7c96b214990cff30c326aab208f8ef10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c96b214990cff30c326aab208f8ef10">&#9670;&#160;</a></span>addPendingChangingNotification()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -114,7 +114,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void Kit::EventQueue::IChangeNotification::addPendingChangingNotification </td>
           <td>(</td>
-          <td class="paramtype">Kit::Dm::ISubscriber &amp;</td>          <td class="paramname"><span class="paramname"><em>subscriber</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>observer</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -126,13 +126,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This method is used add a new 'change notification' to its list of pending change notifications. </p>
-<p>Calling this method when the subscriber is already registered for change notification will cause a FATAL ERROR.</p>
+<p>Calling this method when the observer is already registered for change notification will cause a FATAL ERROR.</p>
 <p>This method IS thread safe. </p>
 
 </div>
 </div>
-<a id="a5aa04b77b348bf784be17e5e2adf7686" name="a5aa04b77b348bf784be17e5e2adf7686"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5aa04b77b348bf784be17e5e2adf7686">&#9670;&#160;</a></span>removePendingChangingNotification()</h2>
+<a id="a8a7d705a8cd1498ccceca8abc782d0b9" name="a8a7d705a8cd1498ccceca8abc782d0b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a7d705a8cd1498ccceca8abc782d0b9">&#9670;&#160;</a></span>removePendingChangingNotification()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,7 +143,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void Kit::EventQueue::IChangeNotification::removePendingChangingNotification </td>
           <td>(</td>
-          <td class="paramtype">Kit::Dm::ISubscriber &amp;</td>          <td class="paramname"><span class="paramname"><em>subscriber</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>observer</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -155,7 +155,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This method is used remove a pending 'change notification' from its list of pending change notifications. </p>
-<p>It is okay to call this method even if the Subscriber is not current registered for change notifications.</p>
+<p>It is okay to call this method even if the observer is not current registered for change notifications.</p>
 <p>This method IS thread safe. </p>
 
 </div>
@@ -166,7 +166,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Feb 24 2026 23:58:35 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Mar 6 2026 02:35:12 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

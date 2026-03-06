@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-25 00:02:35</td>
+            <td class="headerValue">2026-03-06 02:39:35</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">87.5&nbsp;%</td>
@@ -219,8 +219,8 @@
 <span id="L157"><span class="lineNum">     157</span>                 :             :     void freeCurrentString() noexcept;</span>
 <span id="L158"><span class="lineNum">     158</span>                 :             : </span>
 <span id="L159"><span class="lineNum">     159</span>                 :             :     /// Returns the max length of internal WITHOUT the '\0' string terminator</span>
-<span id="L160"><span class="lineNum">     160</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span> :<span class="tlaGNC">          49 :     inline int maxStrLen() const noexcept { return m_storageLen - 1; }</span></span>
-<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 18 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 3 times"> + </span>]
+<span id="L160"><span class="lineNum">     160</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span> :<span class="tlaGNC">          63 :     inline int maxStrLen() const noexcept { return m_storageLen - 1; }</span></span>
+<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 18 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 28 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 3 times"> + </span>]
 <span id="L161"><span class="lineNum">     161</span>                 :             : </span>
 <span id="L162"><span class="lineNum">     162</span>                 :             :     /// Validates the just created string is 'valid'</span>
 <span id="L163"><span class="lineNum">     163</span>                 :             :     void validateAndCopy( const char* string, int len ) noexcept;</span>

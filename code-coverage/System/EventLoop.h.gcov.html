@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-25 00:02:35</td>
+            <td class="headerValue">2026-03-06 02:39:35</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -108,7 +108,7 @@
 <span id="L46"><span class="lineNum">      46</span>                 :             : </span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     NOTE: The EventLoop does NOT use/consume the Thread Semaphore.</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :  */</span>
-<span id="L49"><span class="lineNum">      49</span>                 :             : class EventLoop : public IRunnable, public IEventManager, public ISignable, public TimerManager</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             : class EventLoop : virtual public IRunnable, virtual public IEventManager, virtual public ISignable, public TimerManager</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : {</span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : public:</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     /** Constructor. The 'timeOutPeriodInMsec' parameter specifies how</span>
@@ -136,7 +136,7 @@
 <span id="L74"><span class="lineNum">      74</span>                 :             :                IWatchedEventLoop*                 watchdog            = nullptr ) noexcept;</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             : </span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :     /// Virtual destructor</span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC tlaBgGNC">          25 :     virtual ~EventLoop() = default;</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC tlaBgGNC">          43 :     virtual ~EventLoop() = default;</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : </span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : protected:</span>
@@ -203,33 +203,33 @@
 <span id="L141"><span class="lineNum">     141</span>                 :             :     virtual void stopEventLoop() noexcept;</span>
 <span id="L142"><span class="lineNum">     142</span>                 :             : </span>
 <span id="L143"><span class="lineNum">     143</span>                 :             : public:</span>
-<span id="L144"><span class="lineNum">     144</span>                 :             :     /// See Cpl::System::ISignable</span>
+<span id="L144"><span class="lineNum">     144</span>                 :             :     /// See Kit::System::ISignable</span>
 <span id="L145"><span class="lineNum">     145</span>                 :             :     int signal() noexcept override;</span>
 <span id="L146"><span class="lineNum">     146</span>                 :             : </span>
-<span id="L147"><span class="lineNum">     147</span>                 :             :     /// See Cpl::System::ISignable</span>
+<span id="L147"><span class="lineNum">     147</span>                 :             :     /// See Kit::System::ISignable</span>
 <span id="L148"><span class="lineNum">     148</span>                 :             :     int su_signal() noexcept override;</span>
 <span id="L149"><span class="lineNum">     149</span>                 :             : </span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : </span>
 <span id="L151"><span class="lineNum">     151</span>                 :             : public:</span>
-<span id="L152"><span class="lineNum">     152</span>                 :             :     /// See Cpl::System::IRunnable</span>
+<span id="L152"><span class="lineNum">     152</span>                 :             :     /// See Kit::System::IRunnable</span>
 <span id="L153"><span class="lineNum">     153</span>                 :             :     void pleaseStop() noexcept override;</span>
 <span id="L154"><span class="lineNum">     154</span>                 :             : </span>
 <span id="L155"><span class="lineNum">     155</span>                 :             : </span>
 <span id="L156"><span class="lineNum">     156</span>                 :             : protected:</span>
-<span id="L157"><span class="lineNum">     157</span>                 :             :     /// See Cpl::System::IRunnable</span>
+<span id="L157"><span class="lineNum">     157</span>                 :             :     /// See Kit::System::IRunnable</span>
 <span id="L158"><span class="lineNum">     158</span>                 :             :     void entry() noexcept override;</span>
 <span id="L159"><span class="lineNum">     159</span>                 :             : </span>
 <span id="L160"><span class="lineNum">     160</span>                 :             : public:</span>
-<span id="L161"><span class="lineNum">     161</span>                 :             :     /// See Cpl::System::IEventManager</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             :     /// See Kit::System::IEventManager</span>
 <span id="L162"><span class="lineNum">     162</span>                 :             :     void signalMultipleEvents( uint32_t events ) noexcept override;</span>
 <span id="L163"><span class="lineNum">     163</span>                 :             : </span>
-<span id="L164"><span class="lineNum">     164</span>                 :             :     /// See Cpl::System::IEventManager</span>
+<span id="L164"><span class="lineNum">     164</span>                 :             :     /// See Kit::System::IEventManager</span>
 <span id="L165"><span class="lineNum">     165</span>                 :             :     void signalEvent( uint8_t eventNumber ) noexcept override;</span>
 <span id="L166"><span class="lineNum">     166</span>                 :             : </span>
-<span id="L167"><span class="lineNum">     167</span>                 :             :     /// See Cpl::System::IEventManager</span>
+<span id="L167"><span class="lineNum">     167</span>                 :             :     /// See Kit::System::IEventManager</span>
 <span id="L168"><span class="lineNum">     168</span>                 :             :     void su_signalMultipleEvents( uint32_t events ) noexcept override;</span>
 <span id="L169"><span class="lineNum">     169</span>                 :             : </span>
-<span id="L170"><span class="lineNum">     170</span>                 :             :     /// See Cpl::System::IEventManager</span>
+<span id="L170"><span class="lineNum">     170</span>                 :             :     /// See Kit::System::IEventManager</span>
 <span id="L171"><span class="lineNum">     171</span>                 :             :     void su_signalEvent( uint8_t eventNumber ) noexcept override;</span>
 <span id="L172"><span class="lineNum">     172</span>                 :             : </span>
 <span id="L173"><span class="lineNum">     173</span>                 :             : protected:</span>
