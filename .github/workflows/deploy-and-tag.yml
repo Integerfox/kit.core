@@ -7,9 +7,6 @@ on:
   push:
     branches:
       - main
-      - '**'   # Redundant trigger: catches pushes when pull_request.synchronize
-               # is not fired by GitHub. Concurrency group (below) prevents
-               # duplicate runs when both events fire for the same branch push.
 
 permissions:
   contents: write
