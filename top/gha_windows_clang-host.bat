@@ -48,7 +48,7 @@ IF ERRORLEVEL 1 EXIT /b 1
 
 :: Build the example projects (and any unit tests they may contain)
 cd %_ROOT%\projects
-python %NQBP_BIN%\other\bob.py -v --script-prefix python --p2 windows clang-host -c --bldtime --try win32 --bldnum %BUILD_NUMBER%
+python %NQBP_BIN%\other\bob.py -v --script-prefix python --exclude xpkgs --p2 windows clang-host -c --bldtime --try win32 --bldnum %BUILD_NUMBER%
 IF ERRORLEVEL 1 EXIT /b 1
 
 :: Run unit tests

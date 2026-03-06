@@ -50,7 +50,7 @@ IF ERRORLEVEL 1 EXIT /b 1
 :: Build all of the example projects (and any unit tests they may contain)
 cd %_ROOT%\projects
 echo:Building projects...
-python %NQBP_BIN%\other\bob.py -v --script-prefix python --p2 windows msvc -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
+python %NQBP_BIN%\other\bob.py -v --script-prefix python --exclude xpkgs --p2 windows msvc -c --bldtime --bld-all --bldnum %BUILD_NUMBER%
 IF ERRORLEVEL 1 EXIT /b 1
 
 :: Run unit tests

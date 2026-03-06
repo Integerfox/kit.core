@@ -40,7 +40,7 @@ popd
 
 # Build example projects (and any unit tests they may contain)
 pushd projects
-$NQBP_BIN/other/bob.py -v4 --p2 linux gcc-host -c --try posix64 
+$NQBP_BIN/other/bob.py -v4 --exclude xpkgs --p2 linux gcc-host -c --try posix64 
 
 # Run all unit tests under the projects/ tree
 $NQBP_BIN/other/chuck.py -vt --match a.out --d2 linux --dir gcc-host
