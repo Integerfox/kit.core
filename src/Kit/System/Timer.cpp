@@ -16,19 +16,19 @@ namespace Kit {
 namespace System {
 
 /////////////////////////////
-Timer::Timer( TimerManager& timingSource ) noexcept
+Timer::Timer( ITimingSource& timingSource ) noexcept
     : m_timingSource( &timingSource )
     , m_count( 0 )
 {
 }
 
-Timer::Timer( TimerManager* timingSourcePtr ) noexcept
+Timer::Timer( ITimingSource* timingSourcePtr ) noexcept
     : m_timingSource( timingSourcePtr )
     , m_count( 0 )
 {
 }
 
-void Timer::setTimingSource( TimerManager& timingSource ) noexcept
+void Timer::setTimingSource( ITimingSource& timingSource ) noexcept
 {
     m_timingSource = &timingSource;
 }

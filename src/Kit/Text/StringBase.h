@@ -190,10 +190,10 @@ public:
     IString& operator+=( char c ) noexcept override;
 
 public:
-    /// See Cpl::Container::Key
+    /// See Kit::Container::Key
     int compareKey( const Key& key ) const noexcept override;
 
-    /// See Cpl::Container::Key
+    /// See Kit::Container::Key
     const void* getRawKey( unsigned* returnRawKeyLenPtr = 0 ) const noexcept override;
 
 protected:  // Helpers

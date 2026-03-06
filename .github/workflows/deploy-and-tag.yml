@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
       - main
+    types: [opened, synchronize, reopened]
   push:
     branches:
       - main
@@ -12,7 +13,10 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  # Use the branch name as the group key so that a push event and a
+  # pull_request.synchronize event for the same branch share the same slot
+  # and do not produce duplicate runs.
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:

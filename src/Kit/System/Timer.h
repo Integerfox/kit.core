@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/System/TimerManager.h"
+#include "Kit/System/ITimingSource.h"
 
 ///
 namespace Kit {
@@ -42,10 +42,10 @@ class Timer : public ICounter
 {
 public:
     /// Constructor
-    Timer( TimerManager& timingSource ) noexcept;
+    Timer( ITimingSource& timingSource ) noexcept;
 
     /// Constructor. Alternate constructor - that optionally defers the assignment of the timing source
-    Timer( TimerManager* timingSource = nullptr ) noexcept;
+    Timer( ITimingSource* timingSource = nullptr ) noexcept;
 
 public:
     /** Starts the timer with an initial count down count duration of
@@ -63,21 +63,21 @@ public:
     /** Sets the timing source.  This method CAN ONLY BE CALLED when the timer
         has never been started or it has been stopped
      */
-    virtual void setTimingSource( TimerManager& timingSource ) noexcept;
+    virtual void setTimingSource( ITimingSource& timingSource ) noexcept;
 
 protected:
-    /// See Cpl::System::ICounter
+    /// See Kit::System::ICounter
     void decrement( uint32_t milliseconds = 1 ) noexcept override;
 
-    /// See Cpl::System::ICounter
+    /// See Kit::System::ICounter
     void increment( uint32_t milliseconds = 1 ) noexcept override;
 
-    /// See Cpl::System::ICounter
+    /// See Kit::System::ICounter
     uint32_t count() const noexcept override;
 
 protected:
     /// The timer's tick source
-    TimerManager* m_timingSource;
+    ITimingSource* m_timingSource;
 
     /// Current count
     uint32_t m_count;
@@ -104,7 +104,7 @@ public:
     /// Constructor
     TimerComposer( CONTEXT&               timerContextInstance,
                    TimerExpiredFunction_T expiredCallbackFunc,
-                   TimerManager&          timingSource ) noexcept
+                   ITimingSource&          timingSource ) noexcept
         : Timer( timingSource )
         , m_context( timerContextInstance )
         , m_expiredFuncPtr( expiredCallbackFunc )
@@ -118,7 +118,7 @@ public:
      */
     TimerComposer( CONTEXT&               timerContextInstance,
                    TimerExpiredFunction_T expiredCallbackFunc,
-                   TimerManager*          timingSourcePtr = nullptr ) noexcept
+                   ITimingSource*          timingSourcePtr = nullptr ) noexcept
         : Timer( timingSourcePtr )
         , m_context( timerContextInstance )
         , m_expiredFuncPtr( expiredCallbackFunc )
@@ -126,7 +126,7 @@ public:
     }
 
 protected:
-    /// See Cpl::System::ICounter
+    /// See Kit::System::ICounter
     void expired() noexcept
     {
         ( m_context.*m_expiredFuncPtr )();

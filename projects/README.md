@@ -1,7 +1,7 @@
-# Catch2
+# Projects
 
-The contained projects are used build the [Catch2](https://github.com/catchorg/Catch2) unit test framework library.
+The contained directories are 'build directories' for various projects.  Projects
+can range from how-to-examples, to exploring/evaluating hardware targets, to libraries
+and applications that support KIT library development.
 
-The KIT library does not use a pre-built Catch2 library.  Instead it builds the
-Catch2 library 'on demand' using the same compiler toolchain as the unit test
-project.
+All of the contained projects are built as part of CI KIT library process. However verification of these project is outside the scope of the CI process

@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/System/ICounter.h"
+#include "Kit/System/ITimingSource.h"
 #include "Kit/Container/DList.h"
 
 ///
@@ -29,7 +30,7 @@ namespace System {
     instances, and the Timer's Context (i.e. the code that executes the
     timer expired callbacks) all execute in the SAME thread.
  */
-class TimerManager
+class TimerManager: virtual public ITimingSource
 {
 public:
     /// Constructor

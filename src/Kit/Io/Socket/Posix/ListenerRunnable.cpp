@@ -16,7 +16,7 @@
 #include <arpa/inet.h>
 
 
-#define SECT_ "Cpl::Io::Socket::Posix"
+#define SECT_ "Kit::Io::Socket::Posix"
 
 //------------------------------------------------------------------------------
 namespace Kit {

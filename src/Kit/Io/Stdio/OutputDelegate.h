@@ -23,7 +23,7 @@ namespace Io {
 namespace Stdio {
 
 /** This concrete class implements a Output stream using the underlying platform's
-    native OS interface' sfor the C library's stdout and stderr streams.
+    native OS interface's for the C library's stdout and stderr streams.
 
     Design Note: It is important that this class be concrete class that can
     be created by application code that is target/platform independent.  This is
@@ -42,16 +42,16 @@ public:
     /// Pull in overloaded methods from base class
     using Kit::Io::IOutput::write;
 
-    /// See Cpl::Io::IOutput
+    /// See Kit::Io::IOutput
     bool write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept override;
 
-    /// See Cpl::Io::Output
+    /// See Kit::Io::Output
     void flush() noexcept override;
 
-    /// See Cpl::Io::IEos
+    /// See Kit::Io::IEos
     bool isEos()  noexcept override;
 
-    /// See Cpl::Io::IClose
+    /// See Kit::Io::IClose
     void close() noexcept override;
 
 protected:

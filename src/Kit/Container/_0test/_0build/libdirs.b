@@ -1,6 +1,8 @@
 src/Kit/Container > RingBufferBaseVolatile.cpp
 src/Kit/Container/_0test
 
+src/Kit/Dm
+src/Kit/Dm/Mp
 src/Kit/Text
 src/Kit/System
 src/Kit/System/_trace

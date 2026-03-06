@@ -1,4 +1,4 @@
-# Catch2
+# Projects.xpkgs.Catch2
 
 The contained projects are used build the [Catch2](https://github.com/catchorg/Catch2) unit test framework library.
 

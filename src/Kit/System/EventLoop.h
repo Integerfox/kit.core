@@ -46,7 +46,7 @@ namespace System {
 
     NOTE: The EventLoop does NOT use/consume the Thread Semaphore.
  */
-class EventLoop : public IRunnable, public IEventManager, public ISignable, public TimerManager
+class EventLoop : virtual public IRunnable, virtual public IEventManager, virtual public ISignable, public TimerManager
 {
 public:
     /** Constructor. The 'timeOutPeriodInMsec' parameter specifies how
@@ -141,33 +141,33 @@ protected:
     virtual void stopEventLoop() noexcept;
 
 public:
-    /// See Cpl::System::ISignable
+    /// See Kit::System::ISignable
     int signal() noexcept override;
 
-    /// See Cpl::System::ISignable
+    /// See Kit::System::ISignable
     int su_signal() noexcept override;
 
 
 public:
-    /// See Cpl::System::IRunnable
+    /// See Kit::System::IRunnable
     void pleaseStop() noexcept override;
 
 
 protected:
-    /// See Cpl::System::IRunnable
+    /// See Kit::System::IRunnable
     void entry() noexcept override;
 
 public:
-    /// See Cpl::System::IEventManager
+    /// See Kit::System::IEventManager
     void signalMultipleEvents( uint32_t events ) noexcept override;
 
-    /// See Cpl::System::IEventManager
+    /// See Kit::System::IEventManager
     void signalEvent( uint8_t eventNumber ) noexcept override;
 
-    /// See Cpl::System::IEventManager
+    /// See Kit::System::IEventManager
     void su_signalMultipleEvents( uint32_t events ) noexcept override;
 
-    /// See Cpl::System::IEventManager
+    /// See Kit::System::IEventManager
     void su_signalEvent( uint8_t eventNumber ) noexcept override;
 
 protected:

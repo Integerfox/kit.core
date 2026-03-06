@@ -10,8 +10,7 @@
 
 #include "BootTime.h"
 
-// TODO: MP Support
-//static Cpl::Dm::Mp::Uint32* mpBootCounterPtr_;
+static Kit::Dm::Mp::Uint32* mpBootCounterPtr_;
 
 #define MASK_ELAPSED_TIME  0x0000FFFFFFFFFFFFLL
 #define SHIFT_ELAPSED_TIME ( 6 * 8 )
@@ -30,13 +29,12 @@ uint64_t Kit::Time::getBootTime() noexcept
     uint64_t now  = GET_TIME();
     now          &= MASK_ELAPSED_TIME;
 
-    // TODO: MP Support
-    // if ( mpBootCounterPtr_ )
-    // {
-    //     uint32_t bootCount = 0;  // Default to zero if MP is not valid
-    //     mpBootCounterPtr_->read( bootCount );
-    //     now |= ( (uint64_t)( bootCount ) ) << SHIFT_ELAPSED_TIME;
-    // }
+    if ( mpBootCounterPtr_ )
+    {
+        uint32_t bootCount = 0;  // Default to zero if MP is not valid
+        mpBootCounterPtr_->read( bootCount );
+        now |= ( (uint64_t)( bootCount ) ) << SHIFT_ELAPSED_TIME;
+    }
     return now;
 }
 
@@ -53,8 +51,7 @@ uint64_t Kit::Time::constructBootTime( uint16_t srcBootCounter, uint64_t srcElap
     return bt;
 }
 
-// TODO: MP Support
-// void Kit::Time::initializeBootTime( Cpl::Dm::Mp::Uint32& bootCounterMp ) noexcept
-// {
-//     mpBootCounterPtr_ = &bootCounterMp;
-// }
+void Kit::Time::initializeBootTime( Kit::Dm::Mp::Uint32& bootCounterMp ) noexcept
+{
+    mpBootCounterPtr_ = &bootCounterMp;
+}

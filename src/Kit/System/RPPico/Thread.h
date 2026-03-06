@@ -18,8 +18,8 @@
 
 
 /// Size, in bytes (not including the null terminator), of a thread name
-#ifndef OPTION_CPL_SYSTEM_RPPICOTHREAD_NAME_LEN        
-#define OPTION_CPL_SYSTEM_RPPICOTHREAD_NAME_LEN        16
+#ifndef OPTION_KIT_SYSTEM_RPPICOTHREAD_NAME_LEN        
+#define OPTION_KIT_SYSTEM_RPPICOTHREAD_NAME_LEN        16
 #endif
 
 

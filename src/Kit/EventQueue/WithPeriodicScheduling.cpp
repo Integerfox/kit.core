@@ -40,11 +40,11 @@ void WithPeriodicScheduling::entry() noexcept
     bool run = true;
     while ( run )
     {
-        run = waitAndProcessEvents( isPendingMessage() );
+        run = serverWaitAndProcessEvents();
         if ( run )
         {
             bool atLeastOne = executeScheduler();
-            processMessages();
+            serverProcessEvents();
             if ( m_idleFunc )
             {
                 ( m_idleFunc )( (m_nowFunc)(), atLeastOne );

@@ -12,7 +12,7 @@
 
 #include "kit_config.h"
 #include <stdint.h>
-// #include "Kit/Dm/Mp/Uint32.h"
+#include "Kit/Dm/Mp/Uint32.h"
 
 ///
 namespace Kit {
@@ -42,13 +42,12 @@ void parseBootTime( uint64_t  srcBootTime,
 /// This method is used to manually construct a boot time value
 uint64_t constructBootTime( uint16_t srcBootCounter, uint64_t srcElapsedTimeMs ) noexcept;
 
-// TODO: Need Model Point support the persistent storage of the Boot Counter
-// /** This method is used to initialize boot time logic.  It MUST be called
-//     BEFORE the first call to getBootTime().
+/** This method is used to initialize boot time logic.  It MUST be called
+    BEFORE the first call to getBootTime().
 
-//     'bootCounterMp' is the Model Point instance that contains current boot count
-//  */
-// void initializeBootTime( Kit::Dm::Mp::Uint32& bootCounterMp ) noexcept;
+    'bootCounterMp' is the Model Point instance that contains current boot count
+ */
+void initializeBootTime( Kit::Dm::Mp::Uint32& bootCounterMp ) noexcept;
 
 }  // end namespaces
 }

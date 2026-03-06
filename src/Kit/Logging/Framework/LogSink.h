@@ -10,11 +10,12 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Dm/IObserver.h"
 #include "kit_config.h"
-// #include "Kit/Container/RingBufferMP.h"
+#include "Kit/Container/RingBufferMP.h"
 #include "Kit/EventQueue/IQueue.h"
 #include "Kit/Itc/OpenCloseSync.h"
-// #include "Kit/Dm/SubscriberComposer.h"
+#include "Kit/Dm/ObserverCallback.h"
 #include "Kit/Logging/Framework/EntryData.h"
 
 
@@ -46,8 +47,8 @@ class LogSink : public Kit::Itc::OpenCloseSync
 {
 public:
     /// Constructor
-    LogSink( Kit::EventQueue::IQueue& myMbox /*,
-             Kit::Container::RingBufferMP<Kit::Logging::EntryData_T>& incomingEntriesBuffer */ ) noexcept;
+    LogSink( Kit::EventQueue::IQueue&                                            myMbox,
+             Kit::Container::RingBufferMP<Kit::Logging::Framework::EntryData_T>& incomingEntriesBuffer ) noexcept;
 
 public:
     /// This method starts the sink (See Kit::Itc::OpenCloseSync)
@@ -58,21 +59,21 @@ public:
 
 protected:
     /// Element Count Change notification
-    // void elementCountChanged( Kit::Dm::Mp::Uint32& mp, Kit::Dm::SubscriberApi& clientObserver ) noexcept;
+    void elementCountChanged( Kit::Dm::Mp::Uint32& mp, Kit::Dm::IObserver& clientObserver ) noexcept;
 
 protected:
     /// Platform specific method to save the entry
-    virtual void dispatchLogEntry( Kit::Logging::Framework::EntryData_T& src )
+    virtual void dispatchLogEntry( Kit::Logging::Framework::EntryData_T& src ) noexcept
     {
         // Default is to do nothing
     }
 
 protected:
     /// Observer for change notification (to the RingBuffer)
-    // Kit::Dm::SubscriberComposer<LogSink, Kit::Dm::Mp::Uint32>   m_observerElementCount;
+    Kit::Dm::ObserverCallback<Kit::Dm::Mp::Uint32> m_obElementCount;
 
     /// The Log Ring Buffer
-    // Kit::Container::RingBufferMP<Kit::Logging::Framework::EntryData_T>&    m_logBuffer;
+    Kit::Container::RingBufferMP<Kit::Logging::Framework::EntryData_T>& m_logBuffer;
 
     /// Track my open state
     bool m_opened;

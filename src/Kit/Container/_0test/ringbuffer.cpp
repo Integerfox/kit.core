@@ -12,8 +12,6 @@
 #include "Kit/Container/RingBufferAllocate.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include <cstdint>
-#include <string.h>
-#include <sys/types.h>
 
 
 ///

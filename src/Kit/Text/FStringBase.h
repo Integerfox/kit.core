@@ -66,16 +66,16 @@ protected:
 
 
 public:
-    /// see Cpl::Text::String
+    /// see Kit::Text::String
     void copyIn( const char* string, int n ) noexcept override;
 
-    /// see Cpl::Text::String
+    /// see Kit::Text::String
     void appendTo( const char* string, int n ) noexcept override;
 
-    /// see Cpl::Text::String
+    /// see Kit::Text::String
     void insertAt( int insertOffset, const char* stringToInsert ) noexcept override;
 
-    /// see Cpl::Text::String
+    /// see Kit::Text::String
     int maxLength() const noexcept override;
 
 public:

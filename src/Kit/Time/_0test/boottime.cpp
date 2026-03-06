@@ -13,15 +13,16 @@
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/Trace.h"
 #include "Kit/System/ElapsedTime.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Uint32.h"
 #include <inttypes.h>
 
 #define SECT_ "_0test"
 
 using namespace Kit::Time;
 
-// TODO: Need Model Point support
-// static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
-// static Kit::Dm::Mp::Uint32    mp_bootCounter( modelDb_, "bootCounter" );
+static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static Kit::Dm::Mp::Uint32    mp_bootCounter_( modelDb_, "bootCounter" );
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +30,7 @@ TEST_CASE( "boottime" )
 {
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-    // mp_bootCounter.setInvalid(); // TODO: Need Model Point support
+    mp_bootCounter_.setInvalid();
 
     SECTION( "errors" )
     {
@@ -42,9 +43,7 @@ TEST_CASE( "boottime" )
         REQUIRE( bootCounter == 0 );
         REQUIRE( nowTime >= now );
 
-        // MP invalid
-        // initializeBootTime( mp_bootCounter ); // TODO: Need Model Point support
-        // mp_bootCounter.setInvalid();
+        initializeBootTime( mp_bootCounter_ );
         now            = Kit::System::ElapsedTime::milliseconds();
         bootTime       = getBootTime();
         uint64_t later = Kit::System::ElapsedTime::milliseconds();
@@ -58,9 +57,8 @@ TEST_CASE( "boottime" )
 
     SECTION( "happy-path" )
     {
-        // TODO: Need Model Point support
-        // mp_bootCounter.write( 2 );
-        // initializeBootTime( mp_bootCounter );
+        mp_bootCounter_.write( 2 );
+        initializeBootTime( mp_bootCounter_ );
 
         uint64_t now         = Kit::System::ElapsedTime::milliseconds();
         uint64_t bootTime    = getBootTime();
@@ -68,8 +66,7 @@ TEST_CASE( "boottime" )
         uint16_t bootCounter = 0;
         uint64_t nowTime     = 0;
         parseBootTime( bootTime, bootCounter, nowTime );
-        // REQUIRE( bootCounter == 2 ); // TODO: Need Model Point support
-        REQUIRE( bootCounter == 0 );
+        REQUIRE( bootCounter == 2 );
 
         REQUIRE( nowTime >= now );
         REQUIRE( nowTime <= later );
