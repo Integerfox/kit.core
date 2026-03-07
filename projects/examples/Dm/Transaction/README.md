@@ -44,7 +44,7 @@ on the specific use case/requirements.
 
 ## Class Diagram
 
-![Transaction Example Class Diagram](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction/ClassDiagram.png)
+![Transaction Example Class Diagram](ClassDiagram.png)
 
 ## Implementation
 
