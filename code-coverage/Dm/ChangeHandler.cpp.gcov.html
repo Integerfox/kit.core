@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-06 02:39:35</td>
+            <td class="headerValue">2026-03-07 21:51:37</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -83,12 +83,12 @@
 <span id="L21"><span class="lineNum">      21</span>                 :             : namespace Dm {</span>
 <span id="L22"><span class="lineNum">      22</span>                 :             : </span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : ///////////////////</span>
-<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC tlaBgGNC">         393 : void ChangeHandler::processChangeNotifications() noexcept</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC tlaBgGNC">         389 : void ChangeHandler::processChangeNotifications() noexcept</span></span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : {</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             :     // Get the next pending change notification</span>
-<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">         393 :     Kit::System::GlobalLock::begin();</span></span>
+<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">         389 :     Kit::System::GlobalLock::begin();</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :     IObserver* observerPtr = m_pendingMpNotifications.get();</span>
-<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">         393 :     Kit::System::GlobalLock::end();</span></span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">         389 :     Kit::System::GlobalLock::end();</span></span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : </span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     // Execute - at MOST one - the change notification callback</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             :     if ( observerPtr )</span>
@@ -107,7 +107,7 @@
 <span id="L45"><span class="lineNum">      45</span>                 :             :         // Update the subscriber's state</span>
 <span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">          60 :         modelPoint.processSubscriptionEvent_( *observerPtr, IModelPoint::eNOTIFY_COMPLETE );</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         393 : }</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         389 : }</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
 <span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">          60 : void ChangeHandler::addPendingChangingNotification( IObserver&amp; observer, Kit::System::ISignable&amp; myEventLoop ) noexcept</span></span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : {</span>
@@ -126,12 +126,12 @@
 <span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaUNC">           0 :     Kit::System::GlobalLock::end();</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaUNC">           0 : }</span></span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : </span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC tlaBgGNC">         393 : bool ChangeHandler::isPendingChangingNotifications() noexcept</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC tlaBgGNC">         391 : bool ChangeHandler::isPendingChangingNotifications() noexcept</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">         393 :     Kit::System::GlobalLock::begin();</span></span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">         393 :     bool pending = m_pendingMpNotifications.first() != nullptr;</span></span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">         393 :     Kit::System::GlobalLock::end();</span></span>
-<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">         393 :     return pending;</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">         391 :     Kit::System::GlobalLock::begin();</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">         391 :     bool pending = m_pendingMpNotifications.first() != nullptr;</span></span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">         391 :     Kit::System::GlobalLock::end();</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">         391 :     return pending;</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             : }</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : </span>
 <span id="L75"><span class="lineNum">      75</span>                 :             : } // end namespace</span>
