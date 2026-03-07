@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-07 21:51:37</td>
+            <td class="headerValue">2026-03-07 22:02:30</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -100,9 +100,9 @@
 <span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">           4 :     m_eventQueueHdl = &amp;myEventQueue;</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">           4 : }</span></span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          60 : Kit::EventQueue::IChangeNotification* ObserverBase::getIChangeNotification_() const noexcept</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          62 : Kit::EventQueue::IChangeNotification* ObserverBase::getIChangeNotification_() const noexcept</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : {</span>
-<span id="L43"><span class="lineNum">      43</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 60 times"> + </span>]:<span class="tlaGNC">          60 :      if ( m_eventQueueHdl == nullptr )</span></span>
+<span id="L43"><span class="lineNum">      43</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 62 times"> + </span>]:<span class="tlaGNC">          62 :      if ( m_eventQueueHdl == nullptr )</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     {</span>
 <span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :                                        &quot;Kit::Dm::Observer().  Protocol Error.  getIChangeNotification_() was called before setEventQueue()&quot; );</span>
@@ -112,34 +112,34 @@
 <span id="L50"><span class="lineNum">      50</span>                 :             :     return m_eventQueueHdl;</span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : }</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : </span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC tlaBgGNC">          93 : void ObserverBase::setModelPoint_( IModelPoint* modelPoint ) noexcept</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC tlaBgGNC">          95 : void ObserverBase::setModelPoint_( IModelPoint* modelPoint ) noexcept</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : {</span>
-<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">          93 :     m_point = modelPoint;</span></span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          93 : }</span></span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">          95 :     m_point = modelPoint;</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          95 : }</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : </span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">         256 : int ObserverBase::getState_() const noexcept</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">         264 : int ObserverBase::getState_() const noexcept</span></span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : {</span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">         256 :     return m_state;</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">         264 :     return m_state;</span></span>
 <span id="L61"><span class="lineNum">      61</span>                 :             : }</span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
-<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">         201 : void ObserverBase::setState_( int newState ) noexcept</span></span>
+<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">         207 : void ObserverBase::setState_( int newState ) noexcept</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : {</span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">         201 :     m_state = newState;</span></span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">         201 : }</span></span>
+<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">         207 :     m_state = newState;</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">         207 : }</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : </span>
-<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">         115 : uint16_t ObserverBase::getSequenceNumber_() const noexcept</span></span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">         117 : uint16_t ObserverBase::getSequenceNumber_() const noexcept</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : {</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">         115 :     return m_seqNumber;</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">         117 :     return m_seqNumber;</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : }</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             : </span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         127 : void ObserverBase::setSequenceNumber_( uint16_t newSeqNumber ) noexcept</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         131 : void ObserverBase::setSequenceNumber_( uint16_t newSeqNumber ) noexcept</span></span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : {</span>
-<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">         127 :     m_seqNumber = newSeqNumber;</span></span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">         127 : }</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">         131 :     m_seqNumber = newSeqNumber;</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">         131 : }</span></span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">          60 : IModelPoint* ObserverBase::getModelPoint_() noexcept</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">          62 : IModelPoint* ObserverBase::getModelPoint_() noexcept</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : {</span>
-<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 60 times"> + </span>]:<span class="tlaGNC">          60 :     if ( m_point == nullptr )</span></span>
+<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 62 times"> + </span>]:<span class="tlaGNC">          62 :     if ( m_point == nullptr )</span></span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :     {</span>
 <span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,</span></span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :                                        &quot;Kit::Dm::Observer().  Protocol Error.  getModelPoint_() was called before setModelPoint_()&quot; );</span>
