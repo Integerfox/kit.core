@@ -11,13 +11,13 @@
 /** @file */
 
 #include "kit_config.h"
-#include "Kit/Memory/Allocator.h"
+#include "Kit/Memory/IAllocator.h"
 #include "Kit/Container/DList.h"
 #include <stdint.h>
 
 /** Default option for the 'errorsAreFatal' parameter to the Pool constructor */
 #ifndef OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL
-#define OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL    true // Default is to throw a fatal error
+#define OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL true  // Default is to throw a fatal error
 #endif
 
 
@@ -30,7 +30,7 @@ namespace Memory {
     to allocate the actual memory for the blocks. In addition, the sub-class
     is responsible for the proper alignment of the blocks.
  */
-class Pool : public Allocator
+class Pool : public IAllocator
 {
 public:
     /// Helper class so I can put my blocks into to my standard containers
@@ -62,16 +62,16 @@ public:
     ~Pool() = default;
 
 public:
-    /// See Kit::Memory::Allocator
+    /// See Kit::Memory::IAllocator
     void* allocate( size_t numbytes ) noexcept override;
 
-    /// See Kit::Memory::Allocator
+    /// See Kit::Memory::IAllocator
     void release( void* ptr ) noexcept override;
 
-    /// See Kit::Memory::Allocator
+    /// See Kit::Memory::IAllocator
     size_t wordSize() const noexcept override;
 
-    protected:
+protected:
     /// My free list of blocks
     Kit::Container::DList<BlockInfo> m_freeList;
 

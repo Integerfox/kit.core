@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Memory/ContiguousAllocator.h"
+#include "Kit/Memory/IContiguousAllocator.h"
 #include <cstddef>
 #include <cstring>
 
@@ -42,7 +42,7 @@ namespace Memory {
  */
 
 template <size_t MAXWORDS, typename WORDTYPE = std::max_align_t>
-class LeanHeap : public ContiguousAllocator
+class LeanHeap : public IContiguousAllocator
 {
     static_assert( MAXWORDS > 0, "MAXWORDS must be greater than 0" );
 

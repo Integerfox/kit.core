@@ -14,11 +14,14 @@
 #include "Kit/System/Assert.h"
 #include <string.h>
 
-/** Compile time switch the select which implementation of the Ring Buffer to
+/** Compile time switch that select which implementation of the Ring Buffer to
     use.  The default implementation uses C++11 atomics (vs. using only the
     volatile keyword).  Older hardware (such as ARM Cortex-M0) do not have
-    native hardware instructions to support full lock-free atomics, i.e. it
-    is more efficient to use the volatile-based implementation on those targets. 
+    native hardware instructions to support full lock-free atomics, which means
+    the compiler can generate enable/disable interrupt calls for honoring the
+    C++11 atomics semantics (which is what the whole 'thread/ISR safe' ring
+    buffer implementation was trying to avoid). So for older hardware, the 
+    volatile implementation is the better solution.
  */
 #if defined( USE_KIT_CONTAINER_RINGBUFFER_VOLATILE )
 #include "Kit/Container/RingBufferBaseVolatile.h"

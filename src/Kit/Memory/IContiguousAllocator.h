@@ -1,5 +1,5 @@
-#ifndef KIT_MEMORY_CONTIGUOUS_ALLOCATOR_H_
-#define KIT_MEMORY_CONTIGUOUS_ALLOCATOR_H_
+#ifndef KIT_MEMORY_CONTIGUOUS_IALLOCATOR_H_
+#define KIT_MEMORY_CONTIGUOUS_IALLOCATOR_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Memory/Allocator.h"
+#include "Kit/Memory/IAllocator.h"
 #include <stdint.h>
 
 ///
@@ -25,7 +25,7 @@ namespace Memory {
     hidden and replaced with a reset() method that releases/frees ALL memory
     allocated.
 */
-class ContiguousAllocator : public Allocator
+class IContiguousAllocator : public IAllocator
 {
 public:
     /// Structure for memory info/status
@@ -71,6 +71,6 @@ private:
 };
 
 
-};  // end namespaces
-};
+}       // end namespaces
+}
 #endif  // end header latch

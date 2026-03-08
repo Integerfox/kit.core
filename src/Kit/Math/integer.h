@@ -25,7 +25,7 @@ namespace Kit {
 namespace Math {
 
 
-/** This method treats the binary array a single 'large integer' and increment
+/** This method treats the binary array a single 'large integer' and increments
     the array/large-integer by N.  N is limited to [0,255].
 
     If the 'littleEndian' flag is set to the true, then the increment starts 

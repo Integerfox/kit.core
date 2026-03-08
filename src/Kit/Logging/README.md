@@ -13,6 +13,6 @@ specific log identifiers and methods.
 
 ## Class Diagram
 
-![Kit Logging Class Diagram](class-diagram.png)
+![Kit Logging Class Diagram](class-diagram_kitlogging.png)
 
 Here is a simplified class diagram for the Logging framework

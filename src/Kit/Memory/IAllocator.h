@@ -1,5 +1,5 @@
-#ifndef KIT_MEMORY_ALLOCATOR_H_
-#define KIT_MEMORY_ALLOCATOR_H_
+#ifndef KIT_MEMORY_IALLOCATOR_H_
+#define KIT_MEMORY_IALLOCATOR_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -25,18 +25,18 @@ namespace Memory {
     at run-time (i.e. provides the memory for "dynamic" memory allocations).
 
     The following is an example on how to dynamically create/destroy object
-    using the memory provided by a Allocator object:
+    using the memory provided by a IAllocator object:
 
     @code
 
     Example of placement new:
     -------------------------
     #include <new>
-    #include "Kit/Memory/Allocator.h"
+    #include "Kit/Memory/IAllocator.h"
 
     class Foo { .... };
 
-    Foo* newMe( Allocator& src, ...)
+    Foo* newMe( IAllocator& src, ...)
     {
         // Get a chunk memory large enough to contain an instance of Foo
         void* mem = src.allocate(sizeof(Foo));
@@ -56,7 +56,7 @@ namespace Memory {
 
     Example of delete for an object created with by placement new:
     --------------------------------------------------------------
-    void deleteMe( Foo* ptr, Allocator& src )
+    void deleteMe( Foo* ptr, IAllocator& src )
     {
         // Since delete is not called ->I have to Explicitly call the destructor!
         ptr->~Foo();
@@ -68,7 +68,7 @@ namespace Memory {
 
     @endcode
 */
-class Allocator : public Kit::Container::ListItem
+class IAllocator : public Kit::Container::ListItem
 {
 public:
     /** Allocate and returns a pointer to at least numBytes of storage.
@@ -118,7 +118,7 @@ public:
 
 public:
     /// Provide a virtual destructor
-    virtual ~Allocator() = default;
+    virtual ~IAllocator() = default;
 };
 
 

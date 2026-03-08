@@ -44,7 +44,7 @@ on the specific use case/requirements.
 
 ## Class Diagram
 
-![Transaction Example Class Diagram](ClassDiagram.png)
+![Transaction Example Class Diagram](classDiagram_examplesdmtransaction.png)
 
 ## Implementation
 
