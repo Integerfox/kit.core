@@ -2,29 +2,40 @@
 
 skinparam classAttributeIconSize 0
 skinparam packageStyle rectangle
-hide members
 left to right direction
 
 ' ============================================================================
-' example.cpp - leftmost element
+' Application Classes
 ' ============================================================================
 
-class "example.cpp" as exampleApp <<application>>
+package "Itc::Synchronous" {
 
-' ============================================================================
-' Application Classes  (middle column)
-' ============================================================================
+    class "example.cpp" as exampleApp <<application>>
 
-package "Dm::Transaction" {
-    class Foo_T <<struct>>
-    class MpFoo
-    class Client
-    class Server
-}
+    class IRate <<interface>> {
+        + set(flashRateMs : uint32_t) : bool
+    }
 
-package "mp" {
-    object "trigger : MpFoo" as mpTrigger
-    object "g_modelDatabase : ModelDatabase" as mpDB
+    class IRateRequest <<abstract>> {
+        + request(msg : RateMsg&) : void
+    }
+
+    class RateSync {
+        + RateSync(myEventQueue : IQueue&)
+        + set(flashRateMs : uint32_t) : bool
+    }
+
+    class Server {
+        + Server(myMbox : IQueue&, initialFlashRateMs : uint32_t)
+        + request(msg : RateMsg&) : void
+        + request(msg : OpenMsg&) : void
+        + request(msg : CloseMsg&) : void
+        + expired() : void
+    }
+
+    IRate        -[hidden]down- IRateRequest
+    IRateRequest -[hidden]down- RateSync
+    RateSync     -[hidden]down- Server
 }
 
 ' ============================================================================
@@ -40,62 +51,38 @@ package "Kit::Itc" {
 }
 
 package "Kit::System" {
-    class Semaphore
+    class Timer
     class Thread
     class Shutdown
-    class Timer
-}
 
-package "Kit::Dm" {
-    class "Mp::Scalar<Foo_T, MpFoo>" as ScalarBase
-    class "ObserverCallback<MpFoo>" as ObsCallback
+    Timer  -[hidden]down- Thread
+    Thread -[hidden]down- Shutdown
 }
 
 ' ============================================================================
 ' Layout hints
 ' ============================================================================
 
-' Pin exampleApp to the left of the Dm::Transaction classes
-exampleApp  -[hidden]right- Client
-
-' Stack Dm::Transaction above mp (vertically)
-Server      -[hidden]down-  mpTrigger
-
-' Stack Kit packages vertically (right column)
-EqServer    -[hidden]down-  OpenCloseSync
-OpenCloseSync -[hidden]down- Semaphore
-Semaphore   -[hidden]down-  ScalarBase
+EqServer      -[hidden]down-  OpenCloseSync
+OpenCloseSync -[hidden]down-  Timer
 
 ' ============================================================================
 ' Inheritance
 ' ============================================================================
 
-Client  --|>  OpenCloseSync
-Client  --|>  Timer
-Server  --|>  OpenCloseSync
-MpFoo   --|>  ScalarBase
+RateSync --|> IRate
+RateSync --|> IRateRequest
+Server   --|> RateSync
+Server   --|> OpenCloseSync
+Server   --|> Timer
 
 ' ============================================================================
-' Composition / Aggregation
+' example.cpp usage / composition relationships
 ' ============================================================================
 
-Client  o--  MpFoo       : m_mpFoo
-Client  *--  ObsCallback : m_obFoo
-Server  o--  MpFoo       : m_mpFoo
-Server  *--  ObsCallback : m_obFoo
-MpFoo   ..>  Foo_T       : data type
-mpTrigger --> mpDB       : registered in
-
-' ============================================================================
-' example.cpp usage relationships
-' ============================================================================
-
-exampleApp ..> EqServer  : mbox_
-exampleApp ..> Semaphore : waitForShutdown_
-exampleApp ..> Thread    : t1
-exampleApp ..> Server    : myServer_
-exampleApp ..> Client    : myClient_
-exampleApp ..> Shutdown  : success() / failure()
-exampleApp ..> mpTrigger : mp::trigger
+exampleApp *--  Server   : myServer_
+exampleApp o--  EqServer : mbox_
+exampleApp ..>  Thread   : create / destroy
+exampleApp ..>  Shutdown : notifyShutdownHandlers()
 
 @enduml

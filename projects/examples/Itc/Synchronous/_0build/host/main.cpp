@@ -7,5 +7,5 @@ int main( int argc, char* argv[] )
     Kit::System::initialize();
 
     // Run the application example
-    return Itc::Synchronous::runExample();
+    return Itc::Synchronous::runExample( 1 );
 }

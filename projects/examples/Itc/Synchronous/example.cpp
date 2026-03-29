@@ -35,7 +35,7 @@ namespace Synchronous {
 
 static int                     exitCode_;
 static Kit::EventQueue::Server mbox_;  // Note: The client and the server CAN NOT execute in the same thread
-static Server   myServer_( mbox_ );
+static Server                  myServer_( mbox_ );
 
 static uint32_t flashRatesMs[] = { OPTION_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_MS,
                                    OPTION_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_MS * 2,
@@ -43,11 +43,11 @@ static uint32_t flashRatesMs[] = { OPTION_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_
                                    OPTION_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_MS * 8 };
 
 //
-int runExample() noexcept
+int runExample( unsigned numCycles ) noexcept
 {
     // Enable tracing
     KIT_SYSTEM_TRACE_ENABLE();
-    //KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
+    // KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
 
@@ -60,25 +60,29 @@ int runExample() noexcept
     // Open/start the server and client
     myServer_.open();
 
-    // cycle through a set of flash rates
-    for ( unsigned idx = 0; idx < sizeof( flashRatesMs ) / sizeof( flashRatesMs[0] ); ++idx )
+    // Outer loop
+    while ( numCycles-- )
     {
-        uint32_t flashRate = flashRatesMs[idx];
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Setting flash rate to %" PRIu32 " ms", flashRate );
-        bool success = myServer_.set( flashRate );
-        if ( success )
+        // cycle through a set of flash rates
+        for ( unsigned idx = 0; idx < sizeof( flashRatesMs ) / sizeof( flashRatesMs[0] ); ++idx )
         {
-            // Let the new flash rate run for a while
-            Kit::System::sleep( flashRate * 2 * 5 );  // Run each flash rate for 5 full on/off cycles
+            uint32_t flashRate = flashRatesMs[idx];
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Setting flash rate to %" PRIu32 " ms", flashRate );
+            bool success = myServer_.set( flashRate );
+            if ( success )
+            {
+                // Let the new flash rate run for a while
+                Kit::System::sleep( flashRate * 2 * 10 );  // Run each flash rate for 10 full on/off cycles
+            }
+            else
+            {
+                KIT_SYSTEM_TRACE_MSG( SECT_, "Failed to set flash rate to %" PRIu32 " ms (idx=%u)", flashRate, idx );
+            }
         }
-        else
-        {
-            KIT_SYSTEM_TRACE_MSG( SECT_, "Failed to set flash rate to %" PRIu32 " ms (idx=%u)", flashRate, idx );
-        }
+
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Finished flash rate cycling" );
     }
 
-
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Finished flash rate cycling" );
     myServer_.close();
 
     // Shutdown the KIT library

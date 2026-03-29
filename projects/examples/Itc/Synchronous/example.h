@@ -18,7 +18,7 @@ namespace Synchronous {
 /** Entry point for the Itc Synchronous example. Assumes that the KIT library
     has been initialized and the OSAL's scheduler is 'running'
  */
-int runExample() noexcept;
+int runExample( unsigned numCycles = 0xFFFF ) noexcept;
 
 }  // end namespace(s)
 }
