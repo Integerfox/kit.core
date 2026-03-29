@@ -35,8 +35,8 @@
 /** The model point type large enough to hold the boot counter type.  See 
     comments for `KitTimeBootCount_T` for additional details
  */
-#ifndef KitTimeBootCountMp_T
-#define KitTimeBootCountMp_T Kit::Dm::Mp::Uint16
+#ifndef KitTimeMpBootCount
+#define KitTimeMpBootCount Kit::Dm::Mp::Uint16
 #endif
 
 ///
@@ -72,7 +72,7 @@ uint64_t constructBootTime( KitTimeBootCount_T srcBootCounter, uint64_t srcElaps
 
     'bootCounterMp' is the Model Point instance that contains current boot count
  */
-void initializeBootTime( KitTimeBootCountMp_T& bootCounterMp ) noexcept;
+void initializeBootTime( KitTimeMpBootCount& bootCounterMp ) noexcept;
 
 }  // end namespaces
 }

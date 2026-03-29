@@ -21,7 +21,7 @@
 using namespace Kit::Time;
 
 static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
-static KitTimeBootCountMp_T   mp_bootCounter_( modelDb_, "bootCounter" );
+static KitTimeMpBootCount   mp_bootCounter_( modelDb_, "bootCounter" );
 
 
 ////////////////////////////////////////////////////////////////////////////////

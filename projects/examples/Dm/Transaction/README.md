@@ -46,6 +46,10 @@ on the specific use case/requirements.
 
 ![Transaction Example Class Diagram](classDiagram_examplesdmtransaction.png)
 
+## See Also
+
+- @ref Kit::Dm "Kit::Dm namespace documentation"
+
 ## Implementation
 
 - Root source directory: [projects/examples/Dm/Transaction](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Dm/Transaction)

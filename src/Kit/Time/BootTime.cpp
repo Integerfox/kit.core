@@ -10,7 +10,7 @@
 
 #include "BootTime.h"
 
-static KitTimeBootCountMp_T* mpBootCounterPtr_;
+static KitTimeMpBootCount* mpBootCounterPtr_;
 
 #define SHIFT_ELAPSED_TIME ( ( sizeof( uint64_t ) - sizeof( KitTimeBootCount_T ) ) * 8 )
 #define MASK_ELAPSED_TIME  ( ( UINT64_C( 1 ) << SHIFT_ELAPSED_TIME ) - 1 )
@@ -51,7 +51,7 @@ uint64_t Kit::Time::constructBootTime( KitTimeBootCount_T srcBootCounter, uint64
     return bt;
 }
 
-void Kit::Time::initializeBootTime( KitTimeBootCountMp_T& bootCounterMp ) noexcept
+void Kit::Time::initializeBootTime( KitTimeMpBootCount& bootCounterMp ) noexcept
 {
     mpBootCounterPtr_ = &bootCounterMp;
 }
