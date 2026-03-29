@@ -40,10 +40,10 @@ writes to persistent storage.
   application defined IRunnable object instead of [IQueue](https://github.com/Integerfox/kit.core/blob/main/src/Kit/EventQueue/IQueue.h)
   instance/thread.
 
-- A ITC request message class must be created. See xxxx.h
+- A ITC request message class must be created. See [IRateRequest.h](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Itc/Synchronous/IRateRequest.h)
 
 - It is recommended to create a separate class that abstracts the synchronous ITC
-  messaging as a function call.  See xxxx.h
+  messaging as a function call.  See [RateSync.h](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Itc/Synchronous/RateSync.h)
 
 - It is recommended to have a single exit point from the message request
   function - that calls returnToSender() on the message - to ensure that the
@@ -56,7 +56,7 @@ writes to persistent storage.
 
 ## Class Diagram
 
-![Transaction Example Class Diagram](classDiagram_examplesdmtransaction.png)
+![Transaction Example Class Diagram](classDiagram_examplesitcsynchronous.png)
 
 ## See Also
 
