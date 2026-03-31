@@ -13,7 +13,7 @@ uses a synchronous ITC message to set the flash rate.
 ## Use cases
 
 The most common use is to use synchronous ITC messaging for doing in-thread
-initialization and shutdown of widgets (i.e. see the [OpenCloseSync.h](https://github.com/Integerfox/kit.core/blob/main/src/Kit/Itc/OpenCloseSync.h)). In this use case the 'main application' thread is only used to start and shutdown
+initialization and shutdown of widgets (i.e. see the [OpenCloseSync.h](https://github.com/Integerfox/kit.core/blob/main/src/Kit/Itc/OpenCloseSync.h). In this use case the 'main application' thread is only used to start and shutdown
 the application's widget - so there is no/minimal danger of deadlock. In addition
 the synchronous nature of the messages allows the widgets to initialized/shutdown
 sequentially.

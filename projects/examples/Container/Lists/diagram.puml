@@ -1,0 +1,88 @@
+@startuml classDiagram_examplesitcsynchronous
+
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+left to right direction
+
+' ============================================================================
+' Application Classes
+' ============================================================================
+
+package "Itc::Synchronous" {
+
+    class "example.cpp" as exampleApp <<application>>
+
+    class IRate <<interface>> {
+        + set(flashRateMs : uint32_t) : bool
+    }
+
+    class IRateRequest <<abstract>> {
+        + request(msg : RateMsg&) : void
+    }
+
+    class RateSync {
+        + RateSync(myEventQueue : IQueue&)
+        + set(flashRateMs : uint32_t) : bool
+    }
+
+    class Server {
+        + Server(myMbox : IQueue&, initialFlashRateMs : uint32_t)
+        + request(msg : RateMsg&) : void
+        + request(msg : OpenMsg&) : void
+        + request(msg : CloseMsg&) : void
+        + expired() : void
+    }
+
+    IRate        -[hidden]down- IRateRequest
+    IRateRequest -[hidden]down- RateSync
+    RateSync     -[hidden]down- Server
+}
+
+' ============================================================================
+' Kit Classes  (right column, stacked vertically)
+' ============================================================================
+
+package "Kit::EventQueue" {
+    class "Server" as EqServer
+}
+
+package "Kit::Itc" {
+    class OpenCloseSync
+}
+
+package "Kit::System" {
+    class Timer
+    class Thread
+    class Shutdown
+
+    Timer  -[hidden]down- Thread
+    Thread -[hidden]down- Shutdown
+}
+
+' ============================================================================
+' Layout hints
+' ============================================================================
+
+EqServer      -[hidden]down-  OpenCloseSync
+OpenCloseSync -[hidden]down-  Timer
+
+' ============================================================================
+' Inheritance
+' ============================================================================
+
+RateSync --|> IRate
+RateSync --|> IRateRequest
+Server   --|> RateSync
+Server   --|> OpenCloseSync
+Server   --|> Timer
+
+' ============================================================================
+' example.cpp usage / composition relationships
+' ============================================================================
+
+exampleApp *--  Server   : myServer_
+exampleApp o--  EqServer : mbox_
+exampleApp ..>  Thread   : create / destroy
+exampleApp ..>  Shutdown : notifyShutdownHandlers()
+
+@enduml

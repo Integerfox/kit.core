@@ -13,7 +13,6 @@ This section provides practical code examples demonstrating how to use various K
 - @ref examples_container_slist "SList" - Singly Linked List
 - @ref examples_container_dlist "DList" - Doubly Linked List
 
-- @ref user_guide "User Guide" - Comprehensive usage documentation
 
 ## Data Model
 
@@ -31,11 +30,15 @@ This section provides practical code examples demonstrating how to use various K
 
 ## Inter-thread Messaging
 
-## Requests
+### Requests
 
-## Responses
+- @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
 
-## Open/Close Messages
+### Responses
+
+### Open/Close Messages
+
+- @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
 
 ## Streams and Files
 

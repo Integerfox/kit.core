@@ -80,7 +80,7 @@ public:
     /** Adds new item to the ring buffer. Returns true on success. If the ring
         buffer is full, then false is returned (and ring buffer is not updated).
      */
-    bool add( const ITEM& item ) noexcept
+    virtual bool add( const ITEM& item ) noexcept
     {
         return RingBufferBaseType::add( &item, sizeof( ITEM ), m_bufferMemory );
     }
@@ -88,7 +88,7 @@ public:
     /** Removes an item from the ring buffer.  Returns true on success.  If the
         ring buffer is empty, then false is returned (and the 'item' argument
         is not updated) */
-    bool remove( ITEM& item ) noexcept
+    virtual bool remove( ITEM& item ) noexcept
     {
         return RingBufferBaseType::remove( &item, sizeof( ITEM ), m_bufferMemory );
     }
@@ -98,7 +98,7 @@ public:
         The method returns true if the operation was successful; else false is
         returned, i.e. the Ring buffer is empty.
      */
-    bool peekHead( ITEM& item ) noexcept
+    virtual bool peekHead( ITEM& item ) noexcept
     {
         return RingBufferBaseType::peekHead( &item, sizeof( ITEM ), m_bufferMemory );
     }
@@ -108,7 +108,7 @@ public:
         The method returns true if the operation was successful; else false is
         returned, i.e. the Ring buffer is empty.
      */
-    bool peekTail( ITEM& item ) noexcept
+    virtual bool peekTail( ITEM& item ) noexcept
     {
         return RingBufferBaseType::peekTail( &item, sizeof( ITEM ), m_bufferMemory );
     }
@@ -120,7 +120,7 @@ public:
 
         If the Ring buffer is empty, a null pointer is returned
      */
-    ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
+    virtual ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
     {
         return static_cast<ITEM*>( RingBufferBaseType::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
     }
@@ -137,7 +137,7 @@ public:
                  DON'T USE IT.  If this method is used improperly, it WILL
                  CORRUPT the Ring Buffer!
      */
-    void removeElements( unsigned numElementsToRemove ) noexcept
+    virtual void removeElements( unsigned numElementsToRemove ) noexcept
     {
         RingBufferBaseType::removeElements( numElementsToRemove );
     }
@@ -149,7 +149,7 @@ public:
 
         If the Ring buffer is full, a null pointer is returned
      */
-    ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
+    virtual ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
     {
         return static_cast<ITEM*>( RingBufferBaseType::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
     }
@@ -166,7 +166,7 @@ public:
                  DON'T USE IT. If this method is used improperly, it WILL
                  CORRUPT the Ring Buffer!
      */
-    void addElements( unsigned numElementsAdded ) noexcept
+    virtual void addElements( unsigned numElementsAdded ) noexcept
     {
         RingBufferBaseType::addElements( numElementsAdded );
     }
