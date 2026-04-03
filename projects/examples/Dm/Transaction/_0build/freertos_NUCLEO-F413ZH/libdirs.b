@@ -1,15 +1,3 @@
-# Example app
-projects/examples/Dm/Transaction
-
-# KIT middleware
-src/Kit/Dm/
-src/Kit/Dm/Mp
-src/Kit/EventQueue
-src/Kit/Itc
-src/Kit/Container
-src/Kit/Text
-src/Kit/Io
-
 # Output stream for the KIT Console
 src/Kit/Io/Serial/ST/M32F4
 

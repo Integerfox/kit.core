@@ -10,9 +10,8 @@ This section provides practical code examples demonstrating how to use various K
 
 ## Containers
 
-- @ref examples_container_slist "SList" - Singly Linked List
-- @ref examples_container_dlist "DList" - Doubly Linked List
-
+- @ref projects_examples_container_list "Lists" - Singly and Doubly Linked Lists
+- @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
 
 ## Data Model
 
@@ -21,6 +20,8 @@ This section provides practical code examples demonstrating how to use various K
 ### Change Notifications
 
 - @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+
+- @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
 
 ### Create new Model Point type
 

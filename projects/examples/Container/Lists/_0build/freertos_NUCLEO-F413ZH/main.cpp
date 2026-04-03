@@ -12,7 +12,7 @@
 #include "Kit/System/Api.h"
 #include "Kit/System/IRunnable.h"
 #include "Kit/System/Thread.h"
-#include "Container/Lists/example.h"
+#include "Container/RingBuffer/example.h"
 
 namespace {  // Anonymous namespace
 
@@ -22,7 +22,7 @@ class MyMainThread : public Kit::System::IRunnable
 public:
     void entry() noexcept override
     {
-        Container::Lists::runExample( 2 );
+        Container::RingBuffer::runExample();
 
         // Don't let the thread end if/when the application returns, just loop forever waiting for a reset/power-cycle
         for ( ;; )
