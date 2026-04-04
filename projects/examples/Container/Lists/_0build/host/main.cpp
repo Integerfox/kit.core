@@ -7,5 +7,5 @@ int main( int argc, char* argv[] )
     Kit::System::initialize();
 
     // Run the application example
-    return Container::Lists::runExample();
+    return Container::Lists::runExample( 2 );
 }

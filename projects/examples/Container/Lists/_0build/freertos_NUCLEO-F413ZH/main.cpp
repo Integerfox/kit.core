@@ -22,7 +22,7 @@ class MyMainThread : public Kit::System::IRunnable
 public:
     void entry() noexcept override
     {
-        Container::Lists::runExample( 2 );
+        Container::Lists::runExample();
 
         // Don't let the thread end if/when the application returns, just loop forever waiting for a reset/power-cycle
         for ( ;; )
