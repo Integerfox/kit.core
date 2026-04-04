@@ -1,4 +1,4 @@
-@startuml classDiagram_examplesitcsynchronous
+@startuml classDiagram_examplescontainerlists
 
 skinparam classAttributeIconSize 0
 skinparam packageStyle rectangle
@@ -8,81 +8,71 @@ left to right direction
 ' Application Classes
 ' ============================================================================
 
-package "Itc::Synchronous" {
+package "Container::Lists" {
 
     class "example.cpp" as exampleApp <<application>>
 
-    class IRate <<interface>> {
-        + set(flashRateMs : uint32_t) : bool
+    abstract class Period {
+        + getLEDOnOffState() : bool
+        + getDurationMs() : uint32_t
+        + ~Period()
     }
 
-    class IRateRequest <<abstract>> {
-        + request(msg : RateMsg&) : void
+    class OnPeriod {
+        + OnPeriod(durationMs : uint32_t)
+        + getLEDOnOffState() : bool
+        + getDurationMs() : uint32_t
     }
 
-    class RateSync {
-        + RateSync(myEventQueue : IQueue&)
-        + set(flashRateMs : uint32_t) : bool
+    class OffPeriod {
+        + OffPeriod(durationMs : uint32_t)
+        + getLEDOnOffState() : bool
+        + getDurationMs() : uint32_t
     }
 
-    class Server {
-        + Server(myMbox : IQueue&, initialFlashRateMs : uint32_t)
-        + request(msg : RateMsg&) : void
-        + request(msg : OpenMsg&) : void
-        + request(msg : CloseMsg&) : void
-        + expired() : void
+    class Flasher {
+        + Flasher()
+        + runPattern(pattern : DList<Period>&) : void
     }
 
-    IRate        -[hidden]down- IRateRequest
-    IRateRequest -[hidden]down- RateSync
-    RateSync     -[hidden]down- Server
+    Flasher  -[hidden]down- Period
+    Period   -[hidden]down- OnPeriod
+    OnPeriod -[hidden]right- OffPeriod
 }
 
 ' ============================================================================
-' Kit Classes  (right column, stacked vertically)
+' Kit Classes
 ' ============================================================================
 
-package "Kit::EventQueue" {
-    class "Server" as EqServer
-}
+package "Kit::Container" {
+    class "DList<T>" as DList
+    class ExtendedListItem
 
-package "Kit::Itc" {
-    class OpenCloseSync
-}
-
-package "Kit::System" {
-    class Timer
-    class Thread
-    class Shutdown
-
-    Timer  -[hidden]down- Thread
-    Thread -[hidden]down- Shutdown
+    ExtendedListItem -[hidden]down- DList
 }
 
 ' ============================================================================
 ' Layout hints
 ' ============================================================================
 
-EqServer      -[hidden]down-  OpenCloseSync
-OpenCloseSync -[hidden]down-  Timer
+exampleApp -[hidden]right- Flasher
 
 ' ============================================================================
 ' Inheritance
 ' ============================================================================
 
-RateSync --|> IRate
-RateSync --|> IRateRequest
-Server   --|> RateSync
-Server   --|> OpenCloseSync
-Server   --|> Timer
+Period   --|> ExtendedListItem
+OnPeriod --|> Period
+OffPeriod --|> Period
 
 ' ============================================================================
 ' example.cpp usage / composition relationships
 ' ============================================================================
 
-exampleApp *--  Server   : myServer_
-exampleApp o--  EqServer : mbox_
-exampleApp ..>  Thread   : create / destroy
-exampleApp ..>  Shutdown : notifyShutdownHandlers()
+exampleApp *--  Flasher   : myFlasher_
+exampleApp *--  OnPeriod  : on*_
+exampleApp *--  OffPeriod : off*_
+exampleApp ..>  DList     : uses DList<Period>
+Flasher    ..>  DList     : runPattern()
 
 @enduml

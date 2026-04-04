@@ -1,0 +1,114 @@
+@startuml classDiagram_examplescontainerringbuffer
+
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam PackageTitleAlignment right
+hide members
+left to right direction
+
+' ============================================================================
+' example.cpp - leftmost element
+' ============================================================================
+
+
+' ============================================================================
+' Application Classes  (middle column)
+' ============================================================================
+    
+
+package "Container::RingBuffer" {
+    class "example.cpp" as exampleApp <<application>>
+    class FlashCode_T <<struct>>
+    class LedServer
+    class Producer
+}
+
+package "mp" {
+    object "flashCodeQueueElementCount : Uint32" as mpElementCount
+    object "g_modelDatabase : ModelDatabase" as mpDB
+}
+
+' ============================================================================
+' Kit Classes  (right column, stacked vertically)
+' ============================================================================
+
+package "Kit::Container" {
+    class "RingBufferMPAllocate<FlashCode_T,N>" as RbMPAlloc
+    class "RingBufferMP<FlashCode_T>" as RbMP
+    class "RingBuffer<FlashCode_T>" as Rb
+    class RingBufferBaseAtomic
+}
+
+package "Kit::Itc" {
+    class OpenCloseSync
+}
+
+package "Kit::Dm" {
+    class "Mp::Uint32" as MpUint32
+    class "ObserverCallback<Uint32>" as ObsCallback
+    class ModelDatabase
+}
+
+package "Kit::EventQueue" {
+    class "Server" as EqServer
+}
+
+package "Kit::System" {
+    class Semaphore
+    class Thread
+    class Shutdown
+    class Mutex
+}
+
+' ============================================================================
+' Layout hints
+' ============================================================================
+
+' Pin exampleApp to the left of the Container::RingBuffer classes
+exampleApp      -[hidden]right-  LedServer
+
+' Stack Container::RingBuffer above mp (vertically)
+Producer        -[hidden]down-   mpElementCount
+
+' Stack Kit packages vertically (right column)
+RbMPAlloc       -[hidden]down-   OpenCloseSync
+OpenCloseSync   -[hidden]down-   MpUint32
+MpUint32        -[hidden]down-   EqServer
+EqServer        -[hidden]down-   Semaphore
+
+' ============================================================================
+' Inheritance
+' ============================================================================
+
+LedServer   --|>  OpenCloseSync
+Producer    --|>  OpenCloseSync
+RbMPAlloc   --|>  RbMP
+RbMP        --|>  Rb
+Rb          --|>  RingBufferBaseAtomic
+
+' ============================================================================
+' Composition / Aggregation
+' ============================================================================
+
+LedServer   o-->  RbMP          
+LedServer   *-->  ObsCallback   
+Producer    o-->  RbMP          
+Producer    *-->  ObsCallback   
+RbMP        o-->  MpUint32      
+RbMP        *-->  Mutex         
+RbMPAlloc   ..>  FlashCode_T   
+mpElementCount --> mpDB        
+
+' ============================================================================
+' example.cpp usage relationships
+' ============================================================================
+
+exampleApp ..> EqServer    
+exampleApp ..> Semaphore   : waitForShutdown_
+exampleApp ..> Thread      : create(t1, t2)
+exampleApp ..> LedServer   
+exampleApp ..> Producer     
+exampleApp ..> Shutdown    : success() / failure()
+exampleApp ..> RbMPAlloc   
+
+@enduml

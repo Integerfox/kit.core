@@ -91,7 +91,7 @@ public:
     }
 
     /// Same as add() but also returns the sequence number after the increment operation
-    bool add( const ITEM& item, uint16_t& seqNum ) noexcept
+    bool add( const ITEM& item, uint16_t& seqNum ) noexcept 
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         //
@@ -146,7 +146,7 @@ public:
 
 public:
     /// See Kit::RingBuffer::isEmpty
-    ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
+    ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         return RingBuffer<ITEM>::peekNextRemoveItems( dstNumFlatElements );

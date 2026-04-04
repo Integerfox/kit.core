@@ -1,5 +1,5 @@
-#ifndef MP_TRANSACTION_MODEL_POINTS_H_
-#define MP_TRANSACTION_MODEL_POINTS_H_
+#ifndef CONTAINER_RINGBUFFER_MODELPOINTS_H_
+#define CONTAINER_RINGBUFFER_MODELPOINTS_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -20,39 +20,26 @@
  */
 
 #include "Kit/Dm/ModelDatabase.h"
-#include "Kit/Dm/Mp/Bool.h"
-#include "Dm/Transaction/MpFoo.h"
+#include "Kit/Dm/Mp/Uint32.h"
 
 ///
 namespace mp {
 
 /*---------------------------------------------------------------------------*/
-/** This model point is used to trigger a client/server transaction.
+/** This model point contains the current count of the number of elements
+    in the Flash Codes Ring Buffernumber.  The MP is to generate change notifications
+    when the number of elements in the buffer changes.
 
-    \b Units: struct
+    \b Units: count of elements
 
-    \b Range: invalid             --> "idle"
-              transition to valid -->Notifies the Server (of the request)
-              updated while valid -->Notifies the Client (of the response)
-
-
-    \b Notes:
-        The application is responsible for ensuring that there is only at most
-        one transaction 'in-flight'at any given time.
-*/
-extern Dm::Transaction::MpFoo trigger;
-
-/** This model point is used to terminate the application
-
-    \b Units: bool
-
-    \b Range: invalid --> "running"
-              true    --> "terminate" the application
-              false   --> ignored/not-used
+    \b Range: invalid  -->No items have ever been added to the Ring Buffer
+              valid    -->number of current elements in the Ring Buffer. 
 
     \b Notes:
+        n/a
 */
-extern Kit::Dm::Mp::Bool shutdownRequest;
+extern Kit::Dm::Mp::Uint32 flashCodeQueueElementCount;
+
 
 
 /*---------------------------------------------------------------------------*/

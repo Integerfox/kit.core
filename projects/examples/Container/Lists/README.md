@@ -14,10 +14,9 @@ run-time efficient with respect to removing and inserting items from/in the
 'middle' of the list than singly linked list.  This efficiency comes at the
 expense of more RAM usage **per** item.
 
-Flash Pattern
-    list of on|off times
-    repeat at end-of-list
-    
+The example application contains a `Flasher` class that accepts a `DList<Period>`
+reference where the list contains N on/off periods that is used to flash a LED.
+
 ## Details, Constraints, Requirements
 
 - The linked lists are type safe that can contain **any** class type - as long
@@ -36,8 +35,8 @@ Flash Pattern
 - At any given time, a list item can be contained in **at most one** list.
 
 - A class that inherits from `ListItem` can only be contained within a
-  `SList><>`.  A class that inherits from `ExtendedListItem` can be contained
-  either a `SList><>` or `DList<>`.
+  `SList<>`.  A class that inherits from `ExtendedListItem` can be contained
+  either in a `SList<>` or `DList<>`.
 
 - The link list are **not** inherently thread safe.  If thread safety is needed
   the recommendation is to create a *wrapper* class to provide the necessary
@@ -50,12 +49,12 @@ Flash Pattern
 
 ## See Also
 
-- @ref Kit::Itc "Kit::Container namespace documentation"
+- @ref Kit::Container "Kit::Container namespace documentation"
 
 ## Implementation
 
-- Root source directory: [projects/examples/Container/Lists](https://github.com/Integerfox/kit.core/blob/main/projects/Container/Itc/Lists)
-- Build directory: [projects/examples/Container/Lists/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/Container/Itc/Lists/_0build)
+- Root source directory: [projects/examples/Container/Lists](https://github.com/Integerfox/kit.core/blob/main/projects/Container/Lists)
+- Build directory: [projects/examples/Container/Lists/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/Container/Lists/_0build)
 - Build Targets:
   - Host: Linux, Windows
   - NUCLEO-F413ZH w/FreeRTOS

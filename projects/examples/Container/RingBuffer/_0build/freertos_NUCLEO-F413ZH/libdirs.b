@@ -1,10 +1,24 @@
+# Example app
+projects/examples/Container/RingBuffer
+
+# KIT middleware
+src/Kit/Dm/
+src/Kit/Dm/Mp
+src/Kit/EventQueue
+src/Kit/Itc
+src/Kit/Container
+src/Kit/Text
+src/Kit/Io
+
 # Output stream for the KIT Console
 src/Kit/Io/Serial/ST/M32F4
 
 # KIT OSAL
+src/Kit/System
 src/Kit/System/FreeRTOS
 src/Kit/System/FreeRTOS/_fatalerror
 src/Kit/System/_assert
+src/Kit/System/_trace
 
 
 # BSP
