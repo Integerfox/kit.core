@@ -17,6 +17,7 @@ your IDE or editor of choice.  That said there are optional scripts/functionalit
 that **is** IDE specific.  For example:
 
 - Helper scripts to launch the Segger's Ozone debugger
+- Support for launching the Host GDB debugger inside of VS Code
 - Support for VS Code's Clang intellisense and auto-formatting.
 
 If you contribute the KIT library - it is recommended that you use [VS Code](https://code.visualstudio.com/download).
@@ -44,6 +45,7 @@ The KIT library's OSAL layer has been ported to run on the following platforms/O
 | POSIX | Any POSIX compliant operating system.  Note: It has only been validated on Linux (with some limited testing with MacOS) |
 | Windows | Windows 10 or higher operating system |
 | FreeRTOS | [Real-Time Operating System](https://www.freertos.org/) (RTOS) for Microcontrollers. Support for multi-core (SMP) is planned **but** not yet implemented |
+| RPPico | Raspberry PI RP2xxx specific. The KIT OSAL directly implemented using the RP2xxx C/C++ SDK where each MCU core is thread.  A maximum of 2 threads, i.e. RP2xxx is a dual core MCU |
 
 @ref porting_guide "Porting Guide" - Step-by-step instructions for porting KIT's OSAL.
 
@@ -57,18 +59,20 @@ repository.
 |---------|---------|
 | POSIX | Multi-thread application. Typical use case is for off-target unit testing, but can also be used for embedded Linux development. |
 | Windows | Multi-thread application. Typical use case is for off-target unit testing. Can be used for Windows Console applications. |
-| [ST NUCLEO-F413ZH](https://www.st.com/en/evaluation-tools/nucleo-f413zh.html) Evaluation board | The F413ZH is a ARM Cortex-M4 microcontroller. Includes basic BSPs and drivers support for the ST's STM32F4 family of microcontrollers. <br> - Bare Metal <br> - FreeRTOS. |
+| [ST NUCLEO-F413ZH](https://www.st.com/en/evaluation-tools/nucleo-f413zh.html) Evaluation board | The F413ZH is a ARM Cortex-M4 microcontroller. Includes basic BSPs and drivers support for the ST's STM32F4 family of microcontrollers. <br> - Bare Metal <br> - FreeRTOS |
+| [PICO](https://www.raspberrypi.com/products/raspberry-pi-pico/) |  Raspberry PI RP2040 without WIFI. <br> - Bare Metal <br> - RPPico |
+| [PICO2W](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) |  Raspberry PI RP2350 with WIFI. <br> - Bare Metal <br> - RPPico |
+
 
 Planned/coming platforms.
 
 | Platform | Description/Notes |
 |---------|---------|
 | [Adafruit Grand Central M4 Express](https://www.adafruit.com/grandcentral)| The board contains a Microchip ATSAMD51 microcontroller. The included BSP supports and is integrated with the Arduino framework. |
-| [PICO/PICOW](https://www.raspberrypi.com/products/raspberry-pi-pico/) |  Raspberry PI RP2040 with and without WIFI. Also includes port of the KIT OSAL to directly run on the MCU's dual core where each core runs a single thread. |
-| [PICO2/PICO2W](https://www.raspberrypi.com/products/raspberry-pi-pico-2/) |  Raspberry PI RP2350 with and without WIFI. Also includes port of the KIT OSAL to directly run on the MCU's dual core where each core runs a single thread. TBD if the RISC cores are supported.|
+| **Open to requests....** |  Needs to be general available (and low cost) HW |
 
 ## See Also
 
-- @ref examples "Code Examples" - Platform-specific examples
+- @ref examples "Code Examples" -  Practical examples and use cases
 - @ref getting_started "Getting Started Guide"
 - [API Reference](namespaces.html)
