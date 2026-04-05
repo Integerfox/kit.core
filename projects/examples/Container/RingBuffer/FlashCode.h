@@ -19,8 +19,8 @@ namespace RingBuffer {
 
 
 /** This struct defines a Flash code.  A Flash code consists of an On and Off
-    LED periods that is repeated N times.e Flash code is executed by
-    running the ON period followed by the OFF period.
+    LED periods that is repeated N times. A Flash code is executed by
+    running the cycle defined by the ON period followed by the OFF period N times.
  */
 struct FlashCode_T
 {

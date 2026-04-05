@@ -27,7 +27,7 @@ namespace mp {
 
 /*---------------------------------------------------------------------------*/
 /** This model point contains the current count of the number of elements
-    in the Flash Codes Ring Buffernumber.  The MP is to generate change notifications
+    in the Flash Codes Ring Buffer. The MP is used to generate change notifications
     when the number of elements in the buffer changes.
 
     \b Units: count of elements

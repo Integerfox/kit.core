@@ -66,7 +66,7 @@ int runExample() noexcept
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
 
-    KIT_SYSTEM_TRACE_MSG( SECT_, "**** Starting Dm Transaction Example... ****" );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "**** Starting Container Ring Buffer Example... ****" );
 
     // Create the threads
     auto* t1 = Kit::System::Thread::create( mboxLedServer_, "LED" );

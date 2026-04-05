@@ -24,7 +24,7 @@
     increase the size of the boot counter type.  However, the more bits allocated
     to the boot counter - less bits are available for elapsed milliseconds.
 
-    NOTE: The application is REQUIRED to change KitTimeBootMp_T to match the type
+    NOTE: The application is REQUIRED to change KitTimeMpBootCount to match the type
           of the 'overridden' boot counter type.
 
  */

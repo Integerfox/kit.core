@@ -41,25 +41,25 @@ protected:
 
 public:
     /// This method returns true if the Ring Buffer is empty
-    bool isEmpty() const noexcept
+    virtual bool isEmpty() const noexcept
     {
         return m_readIdx == m_writeIdx;
     }
 
     /// This method returns true if the Ring Buffer is full
-    bool isFull() const noexcept
+    virtual bool isFull() const noexcept
     {
         return ( ( m_writeIdx + 1 ) % m_elements ) == m_readIdx;
     }
 
     /// This method returns the maximum number of items that can be stored in the Ring buffer.
-    unsigned getMaxItems() const noexcept
+    virtual unsigned getMaxItems() const noexcept
     {
         return m_elements - 1;
     }
 
     /// This method returns the CURRENT number of elements in the Ring Buffer
-    unsigned getNumItems() const noexcept
+    virtual unsigned getNumItems() const noexcept
     {
         return ( m_writeIdx - m_readIdx + m_elements ) % m_elements;
     }
@@ -70,7 +70,7 @@ public:
         the Ring Buffer is NOT in use. It is the application's responsibility
         for ensuring this condition is met.
      */
-    void clearTheBuffer() noexcept
+    virtual void clearTheBuffer() noexcept
     {
         m_readIdx = m_writeIdx = 0;
     }

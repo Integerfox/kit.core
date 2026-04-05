@@ -10,6 +10,8 @@
 
 #include "BootTime.h"
 
+static_assert( sizeof( KitTimeBootCount_T ) <= sizeof( uint64_t ), "KitTimeBootCount_T must not exceed the size of uint64_t" );
+
 static KitTimeMpBootCount* mpBootCounterPtr_;
 
 #define SHIFT_ELAPSED_TIME ( ( sizeof( uint64_t ) - sizeof( KitTimeBootCount_T ) ) * 8 )

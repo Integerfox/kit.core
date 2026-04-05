@@ -21,9 +21,9 @@ namespace Itc {
 namespace Synchronous {
 
 
-/** This partially concrete class implements provides the synchronous semantics
-    for ITC IRateRequest message, i.e. it provides functional call semantics
-    to the ITC transaction.  A subclass is still required to implement the IRateRequest
+/** This partially concrete class provides the synchronous semantics for ITC 
+    IRateRequest message, i.e. it provides functional call semantics to the ITC
+    transaction.  A subclass is still required to implement the IRateRequest
     request() method.
  */
 class RateSync : public IRateRequest, public IRate
