@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 288-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 291-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -64,7 +64,7 @@ $(function() {
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_ring_buffer_8h__dep__incl.svg" width="1351" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="_ring_buffer_8h__dep__incl.svg" width="1720" height="227"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_ring_buffer_8h_source.html">Go to the source code of this file.</a></p>
@@ -87,7 +87,7 @@ Namespaces</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:af245d5628d90b69e35513fb05f4ec8e5" id="r_af245d5628d90b69e35513fb05f4ec8e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af245d5628d90b69e35513fb05f4ec8e5">RingBufferBaseType</a>&#160;&#160;&#160;RingBufferBaseAtomic</td></tr>
-<tr class="memdesc:af245d5628d90b69e35513fb05f4ec8e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile time switch the select which implementation of the Ring Buffer to use.  <br /></td></tr>
+<tr class="memdesc:af245d5628d90b69e35513fb05f4ec8e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile time switch that select which implementation of the Ring Buffer to use.  <br /></td></tr>
 <tr class="separator:af245d5628d90b69e35513fb05f4ec8e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -103,15 +103,15 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Compile time switch the select which implementation of the Ring Buffer to use. </p>
-<p>The default implementation uses C++11 atomics (vs. using only the volatile keyword). Older hardware (such as ARM Cortex-M0) do not have native hardware instructions to support full lock-free atomics, i.e. it is more efficient to use the volatile-based implementation on those targets. </p>
+<p>Compile time switch that select which implementation of the Ring Buffer to use. </p>
+<p>The default implementation uses C++11 atomics (vs. using only the volatile keyword). Older hardware (such as ARM Cortex-M0) do not have native hardware instructions to support full lock-free atomics, which means the compiler can generate enable/disable interrupt calls for honoring the C++11 atomics semantics (which is what the whole 'thread/ISR safe' ring buffer implementation was trying to avoid). So for older hardware, the volatile implementation is the better solution. </p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 7 2026 22:30:13 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Apr 9 2026 23:54:08 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

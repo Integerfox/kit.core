@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">69.1&nbsp;%</td>
+            <td class="headerCovTableEntryLo">69.0&nbsp;%</td>
             <td class="headerCovTableEntry">726</td>
-            <td class="headerCovTableEntry">502</td>
+            <td class="headerCovTableEntry">501</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-07 22:35:11</td>
+            <td class="headerValue">2026-04-09 23:58:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.7&nbsp;%</td>
@@ -609,12 +609,12 @@
 <span id="L547"><span class="lineNum">     547</span>                 :<span class="tlaGNC tlaBgGNC">         877 :         return !str_;</span></span>
 <span id="L548"><span class="lineNum">     548</span>                 :             :     }</span>
 <span id="L549"><span class="lineNum">     549</span>                 :             :     FORCE_INLINE size_t size() const {</span>
-<span id="L550"><span class="lineNum">     550</span>   [<span class="tlaGBC" title="Branch 0 was taken 1501 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        1560 :         return str_ ? ::strlen( str_ ) : 0;</span></span>
+<span id="L550"><span class="lineNum">     550</span>   [<span class="tlaGBC" title="Branch 0 was taken 377 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1129 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        1560 :         return str_ ? ::strlen( str_ ) : 0;</span></span>
 <span id="L551"><span class="lineNum">     551</span>                 :             :     }</span>
 <span id="L552"><span class="lineNum">     552</span>                 :             :     char operator[]( size_t i ) const {</span>
 <span id="L553"><span class="lineNum">     553</span>                 :             :         ARDUINOJSON_ASSERT( str_ != 0 );</span>
 <span id="L554"><span class="lineNum">     554</span>                 :             :         ARDUINOJSON_ASSERT( i &lt;= size() );</span>
-<span id="L555"><span class="lineNum">     555</span>                 :<span class="tlaGNC">         788 :         return str_[i];</span></span>
+<span id="L555"><span class="lineNum">     555</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         return str_[i];</span></span>
 <span id="L556"><span class="lineNum">     556</span>                 :             :     }</span>
 <span id="L557"><span class="lineNum">     557</span>                 :             :     const char* data() const {</span>
 <span id="L558"><span class="lineNum">     558</span>                 :             :         return str_;</span>
@@ -671,7 +671,7 @@
 <span id="L609"><span class="lineNum">     609</span>                 :             :         return !str_;</span>
 <span id="L610"><span class="lineNum">     610</span>                 :             :     }</span>
 <span id="L611"><span class="lineNum">     611</span>                 :             :     size_t size() const {</span>
-<span id="L612"><span class="lineNum">     612</span>                 :<span class="tlaGNC">         218 :         return size_;</span></span>
+<span id="L612"><span class="lineNum">     612</span>                 :<span class="tlaGNC tlaBgGNC">         218 :         return size_;</span></span>
 <span id="L613"><span class="lineNum">     613</span>                 :             :     }</span>
 <span id="L614"><span class="lineNum">     614</span>                 :             :     char operator[]( size_t i ) const {</span>
 <span id="L615"><span class="lineNum">     615</span>                 :             :         ARDUINOJSON_ASSERT( str_ != 0 );</span>
@@ -1280,15 +1280,15 @@
 <span id="L1212"><span class="lineNum">    1212</span>                 :             :                             numeric_limits&lt;VariantSlotDiff&gt;::lowest() );</span>
 <span id="L1213"><span class="lineNum">    1213</span>                 :             :         ARDUINOJSON_ASSERT( slot - this &lt;=</span>
 <span id="L1214"><span class="lineNum">    1214</span>                 :             :                             numeric_limits&lt;VariantSlotDiff&gt;::highest() );</span>
-<span id="L1215"><span class="lineNum">    1215</span>                 :<span class="tlaGNC tlaBgGNC">         238 :         next_ = VariantSlotDiff( slot - this );</span></span>
+<span id="L1215"><span class="lineNum">    1215</span>                 :<span class="tlaGNC tlaBgGNC">         254 :         next_ = VariantSlotDiff( slot - this );</span></span>
 <span id="L1216"><span class="lineNum">    1216</span>                 :             :     }</span>
 <span id="L1217"><span class="lineNum">    1217</span>                 :             :     void setKey( JsonString k ) {</span>
 <span id="L1218"><span class="lineNum">    1218</span>                 :             :         ARDUINOJSON_ASSERT( k );</span>
 <span id="L1219"><span class="lineNum">    1219</span>                 :             :         if ( k.isLinked() )</span>
-<span id="L1220"><span class="lineNum">    1220</span>                 :<span class="tlaGNC">         220 :             flags_ &amp;= VALUE_MASK;</span></span>
+<span id="L1220"><span class="lineNum">    1220</span>                 :<span class="tlaGNC">         245 :             flags_ &amp;= VALUE_MASK;</span></span>
 <span id="L1221"><span class="lineNum">    1221</span>                 :             :         else</span>
 <span id="L1222"><span class="lineNum">    1222</span>                 :<span class="tlaGNC">         135 :             flags_ |= OWNED_KEY_BIT;</span></span>
-<span id="L1223"><span class="lineNum">    1223</span>                 :<span class="tlaGNC">         248 :         key_ = k.c_str();</span></span>
+<span id="L1223"><span class="lineNum">    1223</span>                 :<span class="tlaGNC">         273 :         key_ = k.c_str();</span></span>
 <span id="L1224"><span class="lineNum">    1224</span>                 :             :     }</span>
 <span id="L1225"><span class="lineNum">    1225</span>                 :             :     const char* key() const {</span>
 <span id="L1226"><span class="lineNum">    1226</span>                 :<span class="tlaGNC">         623 :         return key_;</span></span>
@@ -1297,8 +1297,8 @@
 <span id="L1229"><span class="lineNum">    1229</span>                 :             :         return (flags_ &amp; OWNED_KEY_BIT) != 0;</span>
 <span id="L1230"><span class="lineNum">    1230</span>                 :             :     }</span>
 <span id="L1231"><span class="lineNum">    1231</span>                 :             :     void clear() {</span>
-<span id="L1232"><span class="lineNum">    1232</span>                 :<span class="tlaGNC">         344 :         next_ = 0;</span></span>
-<span id="L1233"><span class="lineNum">    1233</span>                 :<span class="tlaGNC">         344 :         flags_ = 0;</span></span>
+<span id="L1232"><span class="lineNum">    1232</span>                 :<span class="tlaGNC">         369 :         next_ = 0;</span></span>
+<span id="L1233"><span class="lineNum">    1233</span>                 :<span class="tlaGNC">         369 :         flags_ = 0;</span></span>
 <span id="L1234"><span class="lineNum">    1234</span>                 :<span class="tlaGNC">         318 :         key_ = 0;</span></span>
 <span id="L1235"><span class="lineNum">    1235</span>                 :             :     }</span>
 <span id="L1236"><span class="lineNum">    1236</span>                 :             :     void movePointers( ptrdiff_t stringDistance, ptrdiff_t variantDistance ) {</span>
@@ -1386,7 +1386,7 @@
 <span id="L1318"><span class="lineNum">    1318</span>                 :<span class="tlaGNC">         104 :         overflowed_ = false;</span></span>
 <span id="L1319"><span class="lineNum">    1319</span>                 :             :     }</span>
 <span id="L1320"><span class="lineNum">    1320</span>                 :             :     bool canAlloc( size_t bytes ) const {</span>
-<span id="L1321"><span class="lineNum">    1321</span>                 :<span class="tlaGNC">         347 :         return left_ + bytes &lt;= right_;</span></span>
+<span id="L1321"><span class="lineNum">    1321</span>                 :<span class="tlaGNC">         373 :         return left_ + bytes &lt;= right_;</span></span>
 <span id="L1322"><span class="lineNum">    1322</span>                 :             :     }</span>
 <span id="L1323"><span class="lineNum">    1323</span>                 :             :     bool owns( void* p ) const {</span>
 <span id="L1324"><span class="lineNum">    1324</span>                 :             :         return begin_ &lt;= p &amp;&amp; p &lt; end_;</span>
@@ -1446,11 +1446,11 @@
 <span id="L1378"><span class="lineNum">    1378</span>                 :             :         return reinterpret_cast&lt;T*&gt;(allocRight( sizeof( T ) ));</span>
 <span id="L1379"><span class="lineNum">    1379</span>                 :             :     }</span>
 <span id="L1380"><span class="lineNum">    1380</span>                 :             :     void* allocRight( size_t bytes ) {</span>
-<span id="L1381"><span class="lineNum">    1381</span>                 :<span class="tlaGNC">         344 :         if ( !canAlloc( bytes ) ) {</span></span>
+<span id="L1381"><span class="lineNum">    1381</span>                 :<span class="tlaGNC">         369 :         if ( !canAlloc( bytes ) ) {</span></span>
 <span id="L1382"><span class="lineNum">    1382</span>                 :<span class="tlaUNC tlaBgUNC">           0 :             overflowed_ = true;</span></span>
 <span id="L1383"><span class="lineNum">    1383</span>                 :             :             return 0;</span>
 <span id="L1384"><span class="lineNum">    1384</span>                 :             :         }</span>
-<span id="L1385"><span class="lineNum">    1385</span>                 :<span class="tlaGNC tlaBgGNC">         344 :         right_ -= bytes;</span></span>
+<span id="L1385"><span class="lineNum">    1385</span>                 :<span class="tlaGNC tlaBgGNC">         369 :         right_ -= bytes;</span></span>
 <span id="L1386"><span class="lineNum">    1386</span>                 :             :         return right_;</span>
 <span id="L1387"><span class="lineNum">    1387</span>                 :             :     }</span>
 <span id="L1388"><span class="lineNum">    1388</span>                 :             :     char *begin_, *left_, *right_, *end_;</span>
@@ -2013,7 +2013,7 @@
 <span id="L1942"><span class="lineNum">    1942</span>                 :             :     }</span>
 <span id="L1943"><span class="lineNum">    1943</span>                 :             :     void setBoolean( bool value ) {</span>
 <span id="L1944"><span class="lineNum">    1944</span>                 :             :         setType( VALUE_IS_BOOLEAN );</span>
-<span id="L1945"><span class="lineNum">    1945</span>                 :<span class="tlaGNC">          98 :         content_.asBoolean = value;</span></span>
+<span id="L1945"><span class="lineNum">    1945</span>                 :<span class="tlaGNC">          97 :         content_.asBoolean = value;</span></span>
 <span id="L1946"><span class="lineNum">    1946</span>                 :<span class="tlaGNC">          42 :     }</span></span>
 <span id="L1947"><span class="lineNum">    1947</span>                 :             :     void setFloat( JsonFloat value ) {</span>
 <span id="L1948"><span class="lineNum">    1948</span>                 :             :         setType( VALUE_IS_FLOAT );</span>
@@ -2046,7 +2046,7 @@
 <span id="L1975"><span class="lineNum">    1975</span>                 :             :     template &lt;typename T&gt;</span>
 <span id="L1976"><span class="lineNum">    1976</span>                 :             :     typename enable_if&lt;is_unsigned&lt;T&gt;::value&gt;::type setInteger( T value ) {</span>
 <span id="L1977"><span class="lineNum">    1977</span>                 :             :         setType( VALUE_IS_UNSIGNED_INTEGER );</span>
-<span id="L1978"><span class="lineNum">    1978</span>                 :<span class="tlaGNC tlaBgGNC">          78 :         content_.asUnsignedInteger = static_cast&lt;JsonUInt&gt;(value);</span></span>
+<span id="L1978"><span class="lineNum">    1978</span>                 :<span class="tlaGNC tlaBgGNC">          79 :         content_.asUnsignedInteger = static_cast&lt;JsonUInt&gt;(value);</span></span>
 <span id="L1979"><span class="lineNum">    1979</span>                 :<span class="tlaGNC">          38 :     }</span></span>
 <span id="L1980"><span class="lineNum">    1980</span>                 :             :     template &lt;typename T&gt;</span>
 <span id="L1981"><span class="lineNum">    1981</span>                 :             :     typename enable_if&lt;is_signed&lt;T&gt;::value&gt;::type setInteger( T value ) {</span>
@@ -2062,8 +2062,8 @@
 <span id="L1991"><span class="lineNum">    1991</span>                 :             :             setType( VALUE_IS_LINKED_STRING );</span>
 <span id="L1992"><span class="lineNum">    1992</span>                 :             :         else</span>
 <span id="L1993"><span class="lineNum">    1993</span>                 :             :             setType( VALUE_IS_OWNED_STRING );</span>
-<span id="L1994"><span class="lineNum">    1994</span>                 :<span class="tlaGNC tlaBgGNC">         168 :         content_.asString.data = s.c_str();</span></span>
-<span id="L1995"><span class="lineNum">    1995</span>                 :<span class="tlaGNC">         168 :         content_.asString.size = s.size();</span></span>
+<span id="L1994"><span class="lineNum">    1994</span>                 :<span class="tlaGNC tlaBgGNC">         169 :         content_.asString.data = s.c_str();</span></span>
+<span id="L1995"><span class="lineNum">    1995</span>                 :<span class="tlaGNC">         169 :         content_.asString.size = s.size();</span></span>
 <span id="L1996"><span class="lineNum">    1996</span>                 :             :     }</span>
 <span id="L1997"><span class="lineNum">    1997</span>                 :             :     CollectionData&amp; toArray() {</span>
 <span id="L1998"><span class="lineNum">    1998</span>                 :             :         setType( VALUE_IS_ARRAY );</span>
@@ -3742,7 +3742,7 @@
 <span id="L3652"><span class="lineNum">    3652</span>                 :             :     detail::VariantData data_;</span>
 <span id="L3653"><span class="lineNum">    3653</span>                 :             : protected:</span>
 <span id="L3654"><span class="lineNum">    3654</span>                 :             :     detail::MemoryPool* getPool() {</span>
-<span id="L3655"><span class="lineNum">    3655</span>                 :<span class="tlaGNC">          87 :         return &amp;pool_;</span></span>
+<span id="L3655"><span class="lineNum">    3655</span>                 :<span class="tlaGNC">          88 :         return &amp;pool_;</span></span>
 <span id="L3656"><span class="lineNum">    3656</span>                 :             :     }</span>
 <span id="L3657"><span class="lineNum">    3657</span>                 :             :     detail::VariantData* getData() {</span>
 <span id="L3658"><span class="lineNum">    3658</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">          68 :         return &amp;data_;</span></span>
@@ -4022,11 +4022,11 @@
 <span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 6 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 1 time"> + </span>]
 <span id="L3932"><span class="lineNum">    3932</span>                 :             :         ARDUINOJSON_ASSERT( pool-&gt;owns( tail_ ) );  // Can't alter a linked array/object</span>
 <span id="L3933"><span class="lineNum">    3933</span>                 :             :         tail_-&gt;setNextNotNull( slot );</span>
-<span id="L3934"><span class="lineNum">    3934</span>                 :<span class="tlaGNC">         238 :         tail_ = slot;</span></span>
+<span id="L3934"><span class="lineNum">    3934</span>                 :<span class="tlaGNC">         254 :         tail_ = slot;</span></span>
 <span id="L3935"><span class="lineNum">    3935</span>                 :             :     }</span>
 <span id="L3936"><span class="lineNum">    3936</span>                 :             :     else {</span>
-<span id="L3937"><span class="lineNum">    3937</span>                 :<span class="tlaGNC">          81 :         head_ = slot;</span></span>
-<span id="L3938"><span class="lineNum">    3938</span>                 :<span class="tlaGNC">          81 :         tail_ = slot;</span></span>
+<span id="L3937"><span class="lineNum">    3937</span>                 :<span class="tlaGNC">         115 :         head_ = slot;</span></span>
+<span id="L3938"><span class="lineNum">    3938</span>                 :<span class="tlaGNC">         115 :         tail_ = slot;</span></span>
 <span id="L3939"><span class="lineNum">    3939</span>                 :             :     }</span>
 <span id="L3940"><span class="lineNum">    3940</span>                 :             :     slot-&gt;clear();</span>
 <span id="L3941"><span class="lineNum">    3941</span>                 :<span class="tlaGNC">         143 :     return slot;</span></span>
@@ -4102,7 +4102,7 @@
 <span id="L4010"><span class="lineNum">    4010</span>                 :             : }</span>
 <span id="L4011"><span class="lineNum">    4011</span>                 :             : template &lt;typename TAdaptedString&gt;</span>
 <span id="L4012"><span class="lineNum">    4012</span>                 :             : inline VariantData* CollectionData::getMember( TAdaptedString key ) const {</span>
-<span id="L4013"><span class="lineNum">    4013</span>                 :<span class="tlaGNC tlaBgGNC">         544 :     VariantSlot* slot = getSlot( key );</span></span>
+<span id="L4013"><span class="lineNum">    4013</span>                 :<span class="tlaGNC tlaBgGNC">         587 :     VariantSlot* slot = getSlot( key );</span></span>
 <span id="L4014"><span class="lineNum">    4014</span>         [<span class="tlaGBC" title="Branch 0 was taken 235 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 119 times"> + </span>]:<span class="tlaGNC">         354 :     return slot ? slot-&gt;data() : 0;</span></span>
 <span id="L4015"><span class="lineNum">    4015</span>                 :             : }</span>
 <span id="L4016"><span class="lineNum">    4016</span>                 :             : template &lt;typename TAdaptedString&gt;</span>

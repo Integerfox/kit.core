@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 288-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 291-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -54,7 +54,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This internal (to the namespace) concrete class implements a <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Allocator</a> using a pool of fixed size blocks.  
+<p>This internal (to the namespace) concrete class implements a <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> Allocator using a pool of fixed size blocks.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_pool_8h_source.html">Pool.h</a>&gt;</code></p>
@@ -70,7 +70,7 @@ $(function() {
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_memory_1_1_pool__coll__graph.svg" width="415" height="627"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_memory_1_1_pool__coll__graph.svg" width="418" height="627"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
@@ -88,21 +88,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a53d3fb43c3ac2f3a5ca3281a18ee9f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
 <tr class="separator:a53d3fb43c3ac2f3a5ca3281a18ee9f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76ddd8bd3f0a62de7c279959aa9c6f46" id="r_a76ddd8bd3f0a62de7c279959aa9c6f46"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76ddd8bd3f0a62de7c279959aa9c6f46">allocate</a> (size_t numbytes) noexcept override</td></tr>
-<tr class="memdesc:a76ddd8bd3f0a62de7c279959aa9c6f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::Allocator</a>.  <br /></td></tr>
+<tr class="memdesc:a76ddd8bd3f0a62de7c279959aa9c6f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::IAllocator</a>.  <br /></td></tr>
 <tr class="separator:a76ddd8bd3f0a62de7c279959aa9c6f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d09bde46c9a54000d9cd2975bfe4637" id="r_a9d09bde46c9a54000d9cd2975bfe4637"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d09bde46c9a54000d9cd2975bfe4637">release</a> (void *ptr) noexcept override</td></tr>
-<tr class="memdesc:a9d09bde46c9a54000d9cd2975bfe4637"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::Allocator</a>.  <br /></td></tr>
+<tr class="memdesc:a9d09bde46c9a54000d9cd2975bfe4637"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::IAllocator</a>.  <br /></td></tr>
 <tr class="separator:a9d09bde46c9a54000d9cd2975bfe4637"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39cc68cd8471de4d50b7661dccb908b9" id="r_a39cc68cd8471de4d50b7661dccb908b9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39cc68cd8471de4d50b7661dccb908b9">wordSize</a> () const noexcept override</td></tr>
-<tr class="memdesc:a39cc68cd8471de4d50b7661dccb908b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::Allocator</a>.  <br /></td></tr>
+<tr class="memdesc:a39cc68cd8471de4d50b7661dccb908b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::IAllocator</a>.  <br /></td></tr>
 <tr class="separator:a39cc68cd8471de4d50b7661dccb908b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_kit_1_1_memory_1_1_allocator"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_memory_1_1_allocator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_memory_1_1_allocator.html">Kit::Memory::Allocator</a></td></tr>
-<tr class="memitem:a34c071ed61c452ea178dbc77bda88f27 inherit pub_methods_class_kit_1_1_memory_1_1_allocator" id="r_a34c071ed61c452ea178dbc77bda88f27"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_allocator.html#a34c071ed61c452ea178dbc77bda88f27">~Allocator</a> ()=default</td></tr>
-<tr class="memdesc:a34c071ed61c452ea178dbc77bda88f27 inherit pub_methods_class_kit_1_1_memory_1_1_allocator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide a virtual destructor.  <br /></td></tr>
-<tr class="separator:a34c071ed61c452ea178dbc77bda88f27 inherit pub_methods_class_kit_1_1_memory_1_1_allocator"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54879ec55ba376aff336fa54a59e1507 inherit pub_methods_class_kit_1_1_memory_1_1_allocator" id="r_a54879ec55ba376aff336fa54a59e1507"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_allocator.html#a54879ec55ba376aff336fa54a59e1507">allocatedSizeForNBytes</a> (size_t nbytes) const noexcept</td></tr>
-<tr class="memdesc:a54879ec55ba376aff336fa54a59e1507 inherit pub_methods_class_kit_1_1_memory_1_1_allocator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method that determines the actual amount of memory that actually allocated for a successful allocate request of N bytes.  <br /></td></tr>
-<tr class="separator:a54879ec55ba376aff336fa54a59e1507 inherit pub_methods_class_kit_1_1_memory_1_1_allocator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_class_kit_1_1_memory_1_1_i_allocator"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_memory_1_1_i_allocator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html">Kit::Memory::IAllocator</a></td></tr>
+<tr class="memitem:a14bd227f9bc6d3e18ed7a68520af2d18 inherit pub_methods_class_kit_1_1_memory_1_1_i_allocator" id="r_a14bd227f9bc6d3e18ed7a68520af2d18"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html#a14bd227f9bc6d3e18ed7a68520af2d18">~IAllocator</a> ()=default</td></tr>
+<tr class="memdesc:a14bd227f9bc6d3e18ed7a68520af2d18 inherit pub_methods_class_kit_1_1_memory_1_1_i_allocator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide a virtual destructor.  <br /></td></tr>
+<tr class="separator:a14bd227f9bc6d3e18ed7a68520af2d18 inherit pub_methods_class_kit_1_1_memory_1_1_i_allocator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab85d490368f27580ae13ad4cf20c1b00 inherit pub_methods_class_kit_1_1_memory_1_1_i_allocator" id="r_ab85d490368f27580ae13ad4cf20c1b00"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html#ab85d490368f27580ae13ad4cf20c1b00">allocatedSizeForNBytes</a> (size_t nbytes) const noexcept</td></tr>
+<tr class="memdesc:ab85d490368f27580ae13ad4cf20c1b00 inherit pub_methods_class_kit_1_1_memory_1_1_i_allocator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience method that determines the actual amount of memory that actually allocated for a successful allocate request of N bytes.  <br /></td></tr>
+<tr class="separator:ab85d490368f27580ae13ad4cf20c1b00 inherit pub_methods_class_kit_1_1_memory_1_1_i_allocator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_container_1_1_item"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_container_1_1_item')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_container_1_1_item.html">Kit::Container::Item</a></td></tr>
 <tr class="memitem:a629af4bb1ce1c34f7d72437e55eb69df inherit pub_methods_class_kit_1_1_container_1_1_item" id="r_a629af4bb1ce1c34f7d72437e55eb69df"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_item.html#a629af4bb1ce1c34f7d72437e55eb69df">insert_</a> (void *newContainerPtr) noexcept</td></tr>
 <tr class="memdesc:a629af4bb1ce1c34f7d72437e55eb69df inherit pub_methods_class_kit_1_1_container_1_1_item"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to trap when inserting an item in multiple containers.  <br /></td></tr>
@@ -159,7 +159,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:acbdb631d3373ecd8d950a37c1f60204d inherit pro_methods_class_kit_1_1_container_1_1_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This internal (to the namespace) concrete class implements a <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Allocator</a> using a pool of fixed size blocks. </p>
+<div class="textblock"><p>This internal (to the namespace) concrete class implements a <a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> Allocator using a pool of fixed size blocks. </p>
 <p>The implementation relies on a sub-class to allocate the actual memory for the blocks. In addition, the sub-class is responsible for the proper alignment of the blocks. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab08d9993a29fe353dcc113a7a37c557f" name="ab08d9993a29fe353dcc113a7a37c557f"></a>
@@ -252,9 +252,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>See <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::Allocator</a>. </p>
+<p>See <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::IAllocator</a>. </p>
 
-<p>Implements <a class="el" href="class_kit_1_1_memory_1_1_allocator.html#a9dfa9c08f397567391c0d99f25961c3e">Kit::Memory::Allocator</a>.</p>
+<p>Implements <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html#af36d00305938635933ddd71eb1df2a34">Kit::Memory::IAllocator</a>.</p>
 
 </div>
 </div>
@@ -281,9 +281,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>See <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::Allocator</a>. </p>
+<p>See <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::IAllocator</a>. </p>
 
-<p>Implements <a class="el" href="class_kit_1_1_memory_1_1_allocator.html#a6449726ec8bd3597b3df568bf38159ba">Kit::Memory::Allocator</a>.</p>
+<p>Implements <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html#aff2729be3bd77f28cbb2b6d5fc9ef14b">Kit::Memory::IAllocator</a>.</p>
 
 </div>
 </div>
@@ -310,9 +310,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>See <a class="el" href="class_kit_1_1_memory_1_1_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::Allocator</a>. </p>
+<p>See <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html" title="This abstract class defines the interface for a Memory Allocator.">Kit::Memory::IAllocator</a>. </p>
 
-<p>Implements <a class="el" href="class_kit_1_1_memory_1_1_allocator.html#a808233524e39fdc2aa92225214c2114b">Kit::Memory::Allocator</a>.</p>
+<p>Implements <a class="el" href="class_kit_1_1_memory_1_1_i_allocator.html#a73f81f292797b9d19a2f9b7bf4f1c7b2">Kit::Memory::IAllocator</a>.</p>
 
 </div>
 </div>
@@ -419,7 +419,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 7 2026 22:30:13 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Apr 9 2026 23:54:08 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

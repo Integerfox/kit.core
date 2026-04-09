@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-07 22:35:11</td>
+            <td class="headerValue">2026-04-09 23:58:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -73,13 +73,13 @@
 <span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
 <span id="L12"><span class="lineNum">      12</span>                 :             : </span>
 <span id="L13"><span class="lineNum">      13</span>                 :             : #include &quot;kit_config.h&quot;</span>
-<span id="L14"><span class="lineNum">      14</span>                 :             : #include &quot;Kit/Memory/Allocator.h&quot;</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : #include &quot;Kit/Memory/IAllocator.h&quot;</span>
 <span id="L15"><span class="lineNum">      15</span>                 :             : #include &quot;Kit/Container/DList.h&quot;</span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : #include &lt;stdint.h&gt;</span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : </span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : /** Default option for the 'errorsAreFatal' parameter to the Pool constructor */</span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : #ifndef OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL</span>
-<span id="L20"><span class="lineNum">      20</span>                 :             : #define OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL    true // Default is to throw a fatal error</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : #define OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL true  // Default is to throw a fatal error</span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : #endif</span>
 <span id="L22"><span class="lineNum">      22</span>                 :             : </span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : </span>
@@ -92,7 +92,7 @@
 <span id="L30"><span class="lineNum">      30</span>                 :             :     to allocate the actual memory for the blocks. In addition, the sub-class</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     is responsible for the proper alignment of the blocks.</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             :  */</span>
-<span id="L33"><span class="lineNum">      33</span>                 :             : class Pool : public Allocator</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             : class Pool : public IAllocator</span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : {</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : public:</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     /// Helper class so I can put my blocks into to my standard containers</span>
@@ -124,16 +124,16 @@
 <span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">           4 :     ~Pool() = default;</span></span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : public:</span>
-<span id="L65"><span class="lineNum">      65</span>                 :             :     /// See Kit::Memory::Allocator</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :     /// See Kit::Memory::IAllocator</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     void* allocate( size_t numbytes ) noexcept override;</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : </span>
-<span id="L68"><span class="lineNum">      68</span>                 :             :     /// See Kit::Memory::Allocator</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             :     /// See Kit::Memory::IAllocator</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     void release( void* ptr ) noexcept override;</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : </span>
-<span id="L71"><span class="lineNum">      71</span>                 :             :     /// See Kit::Memory::Allocator</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :     /// See Kit::Memory::IAllocator</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :     size_t wordSize() const noexcept override;</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             : </span>
-<span id="L74"><span class="lineNum">      74</span>                 :             :     protected:</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             : protected:</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     /// My free list of blocks</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :     Kit::Container::DList&lt;BlockInfo&gt; m_freeList;</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>

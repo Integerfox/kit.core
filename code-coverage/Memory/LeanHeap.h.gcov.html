@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-07 22:35:11</td>
+            <td class="headerValue">2026-04-09 23:58:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -72,7 +72,7 @@
 <span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
 <span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
 <span id="L12"><span class="lineNum">      12</span>                 :             : </span>
-<span id="L13"><span class="lineNum">      13</span>                 :             : #include &quot;Kit/Memory/ContiguousAllocator.h&quot;</span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : #include &quot;Kit/Memory/IContiguousAllocator.h&quot;</span>
 <span id="L14"><span class="lineNum">      14</span>                 :             : #include &lt;cstddef&gt;</span>
 <span id="L15"><span class="lineNum">      15</span>                 :             : #include &lt;cstring&gt;</span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : </span>
@@ -104,7 +104,7 @@
 <span id="L42"><span class="lineNum">      42</span>                 :             :  */</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : template &lt;size_t MAXWORDS, typename WORDTYPE = std::max_align_t&gt;</span>
-<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC tlaBgGNC">           1 : class LeanHeap : public ContiguousAllocator</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC tlaBgGNC">           1 : class LeanHeap : public IContiguousAllocator</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             : {</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     static_assert( MAXWORDS &gt; 0, &quot;MAXWORDS must be greater than 0&quot; );</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : </span>

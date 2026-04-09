@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 288-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 291-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -62,7 +62,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer__inherit__graph.svg" width="1430" height="442"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer__inherit__graph.svg" width="1430" height="670"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::RingBuffer&lt; ITEM &gt;:</div>
@@ -77,30 +77,30 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeae33a075bbf6ed87fbb3b16993d84ea" id="r_aeae33a075bbf6ed87fbb3b16993d84ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeae33a075bbf6ed87fbb3b16993d84ea">RingBuffer</a> (ITEM *memoryBuffer, unsigned N, bool initializeMemory=true)</td></tr>
 <tr class="memdesc:aeae33a075bbf6ed87fbb3b16993d84ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:aeae33a075bbf6ed87fbb3b16993d84ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b350edc1e9c9f5a084e9739d45a3d1d" id="r_a4b350edc1e9c9f5a084e9739d45a3d1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b350edc1e9c9f5a084e9739d45a3d1d">add</a> (const ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a4b350edc1e9c9f5a084e9739d45a3d1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds new item to the ring buffer.  <br /></td></tr>
-<tr class="separator:a4b350edc1e9c9f5a084e9739d45a3d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d519398b6660f274b2264073265d9d9" id="r_a7d519398b6660f274b2264073265d9d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d519398b6660f274b2264073265d9d9">addElements</a> (unsigned numElementsAdded) noexcept</td></tr>
-<tr class="memdesc:a7d519398b6660f274b2264073265d9d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'adds' N elements - that were populated using the pointer returned from peekNextAddItems - to the ring buffer.  <br /></td></tr>
-<tr class="separator:a7d519398b6660f274b2264073265d9d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a067ef2cf4a483997e7e85873f2efb4cd" id="r_a067ef2cf4a483997e7e85873f2efb4cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a067ef2cf4a483997e7e85873f2efb4cd">peekHead</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a067ef2cf4a483997e7e85873f2efb4cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the head of the ring buffer without removing it.  <br /></td></tr>
-<tr class="separator:a067ef2cf4a483997e7e85873f2efb4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e11b1cbd7fdd7ce120dbac9dc99d7cc" id="r_a1e11b1cbd7fdd7ce120dbac9dc99d7cc"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e11b1cbd7fdd7ce120dbac9dc99d7cc">peekNextAddItems</a> (unsigned &amp;dstNumFlatElements) const noexcept</td></tr>
-<tr class="memdesc:a1e11b1cbd7fdd7ce120dbac9dc99d7cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be added.  <br /></td></tr>
-<tr class="separator:a1e11b1cbd7fdd7ce120dbac9dc99d7cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a70f0db2816455a7ae20cb39269efb2" id="r_a9a70f0db2816455a7ae20cb39269efb2"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a70f0db2816455a7ae20cb39269efb2">peekNextRemoveItems</a> (unsigned &amp;dstNumFlatElements) const noexcept</td></tr>
-<tr class="memdesc:a9a70f0db2816455a7ae20cb39269efb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be removed.  <br /></td></tr>
-<tr class="separator:a9a70f0db2816455a7ae20cb39269efb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3c986b1c6595fc1eca21d4e63427320" id="r_ac3c986b1c6595fc1eca21d4e63427320"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac3c986b1c6595fc1eca21d4e63427320">peekTail</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:ac3c986b1c6595fc1eca21d4e63427320"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the tail of the ring buffer without removing it.  <br /></td></tr>
-<tr class="separator:ac3c986b1c6595fc1eca21d4e63427320"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af30609f25225a17178e151519e82f348" id="r_af30609f25225a17178e151519e82f348"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af30609f25225a17178e151519e82f348">remove</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:af30609f25225a17178e151519e82f348"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes an item from the ring buffer.  <br /></td></tr>
-<tr class="separator:af30609f25225a17178e151519e82f348"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a50c280cca8d9768293c5572efe2fa8" id="r_a7a50c280cca8d9768293c5572efe2fa8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a50c280cca8d9768293c5572efe2fa8">removeElements</a> (unsigned numElementsToRemove) noexcept</td></tr>
-<tr class="memdesc:a7a50c280cca8d9768293c5572efe2fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'removes' N elements - that were removed using the pointer returned from peekNextRemoveItems - from the ring buffer.  <br /></td></tr>
-<tr class="separator:a7a50c280cca8d9768293c5572efe2fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0913afa137fe3a705cd0502da49f566f" id="r_a0913afa137fe3a705cd0502da49f566f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0913afa137fe3a705cd0502da49f566f">add</a> (const ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a0913afa137fe3a705cd0502da49f566f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds new item to the ring buffer.  <br /></td></tr>
+<tr class="separator:a0913afa137fe3a705cd0502da49f566f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a7f18891f2177ecd2fb76ff1b82a67d" id="r_a8a7f18891f2177ecd2fb76ff1b82a67d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a7f18891f2177ecd2fb76ff1b82a67d">addElements</a> (unsigned numElementsAdded) noexcept</td></tr>
+<tr class="memdesc:a8a7f18891f2177ecd2fb76ff1b82a67d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'adds' N elements - that were populated using the pointer returned from peekNextAddItems - to the ring buffer.  <br /></td></tr>
+<tr class="separator:a8a7f18891f2177ecd2fb76ff1b82a67d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd4393984427876165398964f6233edc" id="r_acd4393984427876165398964f6233edc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd4393984427876165398964f6233edc">peekHead</a> (ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:acd4393984427876165398964f6233edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the head of the ring buffer without removing it.  <br /></td></tr>
+<tr class="separator:acd4393984427876165398964f6233edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f6ff50c037a35cb45d8f372f15861e8" id="r_a2f6ff50c037a35cb45d8f372f15861e8"><td class="memItemLeft" align="right" valign="top">virtual ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f6ff50c037a35cb45d8f372f15861e8">peekNextAddItems</a> (unsigned &amp;dstNumFlatElements) const noexcept</td></tr>
+<tr class="memdesc:a2f6ff50c037a35cb45d8f372f15861e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be added.  <br /></td></tr>
+<tr class="separator:a2f6ff50c037a35cb45d8f372f15861e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6195ff563fcfa4a2da0606537fad5a7" id="r_ac6195ff563fcfa4a2da0606537fad5a7"><td class="memItemLeft" align="right" valign="top">virtual ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6195ff563fcfa4a2da0606537fad5a7">peekNextRemoveItems</a> (unsigned &amp;dstNumFlatElements) const noexcept</td></tr>
+<tr class="memdesc:ac6195ff563fcfa4a2da0606537fad5a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be removed.  <br /></td></tr>
+<tr class="separator:ac6195ff563fcfa4a2da0606537fad5a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71a500d42c5b91efa636eff378bc6797" id="r_a71a500d42c5b91efa636eff378bc6797"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71a500d42c5b91efa636eff378bc6797">peekTail</a> (ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a71a500d42c5b91efa636eff378bc6797"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the tail of the ring buffer without removing it.  <br /></td></tr>
+<tr class="separator:a71a500d42c5b91efa636eff378bc6797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd7deb4479d534f0b0a4b2124c973f3" id="r_a4dd7deb4479d534f0b0a4b2124c973f3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4dd7deb4479d534f0b0a4b2124c973f3">remove</a> (ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a4dd7deb4479d534f0b0a4b2124c973f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes an item from the ring buffer.  <br /></td></tr>
+<tr class="separator:a4dd7deb4479d534f0b0a4b2124c973f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ebc7a150c49b7a143f6514341bf718c" id="r_a9ebc7a150c49b7a143f6514341bf718c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9ebc7a150c49b7a143f6514341bf718c">removeElements</a> (unsigned numElementsToRemove) noexcept</td></tr>
+<tr class="memdesc:a9ebc7a150c49b7a143f6514341bf718c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'removes' N elements - that were removed using the pointer returned from peekNextRemoveItems - from the ring buffer.  <br /></td></tr>
+<tr class="separator:a9ebc7a150c49b7a143f6514341bf718c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -112,7 +112,7 @@ Protected Attributes</h2></td></tr>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class ITEM&gt;<br />
 class Kit::Container::RingBuffer&lt; ITEM &gt;</div><p>This template class implements a Ring Buffer. </p>
 <p>A Ring Buffer instance IS ISR/Thread safe WHEN using a SINGLE Producer and SINGLE consumer of the buffer. See the RingBufferBaseType class for additional details.</p>
-<p>There is a set of methods that allow the application direct memory access - AS A LINEAR BUFFER - to a subset of the ring buffer's data. At any given time the size of the linear buffer is restricted to the amount of data that can be accessed without 'wrapping' the ring buffer memory space. The intended use case for these methods is for bulk copy operations (e.g populating a FIFO or a DMA buffer). <a class="el" href="#a9a70f0db2816455a7ae20cb39269efb2" title="This method returns a pointer to the next item to be removed.">peekNextRemoveItems()</a> <a class="el" href="#a7a50c280cca8d9768293c5572efe2fa8" title="This method &#39;removes&#39; N elements - that were removed using the pointer returned from peekNextRemoveIt...">removeElements()</a> <a class="el" href="#a1e11b1cbd7fdd7ce120dbac9dc99d7cc" title="This method returns a pointer to the next item to be added.">peekNextAddItems()</a> <a class="el" href="#a7d519398b6660f274b2264073265d9d9" title="This method &#39;adds&#39; N elements - that were populated using the pointer returned from peekNextAddItems ...">addElements()</a></p>
+<p>There is a set of methods that allow the application direct memory access - AS A LINEAR BUFFER - to a subset of the ring buffer's data. At any given time the size of the linear buffer is restricted to the amount of data that can be accessed without 'wrapping' the ring buffer memory space. The intended use case for these methods is for bulk copy operations (e.g populating a FIFO or a DMA buffer). <a class="el" href="#ac6195ff563fcfa4a2da0606537fad5a7" title="This method returns a pointer to the next item to be removed.">peekNextRemoveItems()</a> <a class="el" href="#a9ebc7a150c49b7a143f6514341bf718c" title="This method &#39;removes&#39; N elements - that were removed using the pointer returned from peekNextRemoveIt...">removeElements()</a> <a class="el" href="#a2f6ff50c037a35cb45d8f372f15861e8" title="This method returns a pointer to the next item to be added.">peekNextAddItems()</a> <a class="el" href="#a8a7f18891f2177ecd2fb76ff1b82a67d" title="This method &#39;adds&#39; N elements - that were populated using the pointer returned from peekNextAddItems ...">addElements()</a></p>
 <p>Template Args: ITEM:= <a class="el" href="namespace_kit_1_1_type.html" title="The Type namespace provides various types that are not unique to a single namespace.">Type</a> of the data stored in the Ring Buffer </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aeae33a075bbf6ed87fbb3b16993d84ea" name="aeae33a075bbf6ed87fbb3b16993d84ea"></a>
@@ -154,8 +154,8 @@ template&lt;class ITEM &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a4b350edc1e9c9f5a084e9739d45a3d1d" name="a4b350edc1e9c9f5a084e9739d45a3d1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4b350edc1e9c9f5a084e9739d45a3d1d">&#9670;&#160;</a></span>add()</h2>
+<a id="a0913afa137fe3a705cd0502da49f566f" name="a0913afa137fe3a705cd0502da49f566f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0913afa137fe3a705cd0502da49f566f">&#9670;&#160;</a></span>add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +166,7 @@ template&lt;class ITEM &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::add </td>
+          <td class="memname">virtual bool <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::add </td>
           <td>(</td>
           <td class="paramtype">const ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
@@ -174,7 +174,7 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -182,10 +182,12 @@ template&lt;class ITEM &gt; </div>
 <p>Adds new item to the ring buffer. </p>
 <p>Returns true on success. If the ring buffer is full, then false is returned (and ring buffer is not updated). </p>
 
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#abce4605251007f1a8a325a6b88f36368">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a6e298c65d5ccf837c845a650b8506698">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+
 </div>
 </div>
-<a id="a7d519398b6660f274b2264073265d9d9" name="a7d519398b6660f274b2264073265d9d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d519398b6660f274b2264073265d9d9">&#9670;&#160;</a></span>addElements()</h2>
+<a id="a8a7f18891f2177ecd2fb76ff1b82a67d" name="a8a7f18891f2177ecd2fb76ff1b82a67d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a7f18891f2177ecd2fb76ff1b82a67d">&#9670;&#160;</a></span>addElements()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -196,7 +198,7 @@ template&lt;class ITEM &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::addElements </td>
+          <td class="memname">virtual void <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::addElements </td>
           <td>(</td>
           <td class="paramtype">unsigned</td>          <td class="paramname"><span class="paramname"><em>numElementsAdded</em></span></td><td>)</td>
           <td></td>
@@ -204,20 +206,22 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>This method 'adds' N elements - that were populated using the pointer returned from peekNextAddItems - to the ring buffer. </p>
 <p>Basically its updates the write index to reflect items added using direct memory access.</p>
-<p>'numElementsAdded' be less than or equal to the 'dstNumFlatElements' returned from <a class="el" href="#a1e11b1cbd7fdd7ce120dbac9dc99d7cc" title="This method returns a pointer to the next item to be added.">peekNextAddItems()</a>.</p>
+<p>'numElementsAdded' be less than or equal to the 'dstNumFlatElements' returned from <a class="el" href="#a2f6ff50c037a35cb45d8f372f15861e8" title="This method returns a pointer to the next item to be added.">peekNextAddItems()</a>.</p>
 <p>CAUTION: IF YOU DON'T UNDERSTAND THE USE CASE FOR THIS METHOD - THEN DON'T USE IT. If this method is used improperly, it WILL CORRUPT the Ring Buffer! </p>
+
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a34cbb53deb4fe4770712fd92f04be77c">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a067ef2cf4a483997e7e85873f2efb4cd" name="a067ef2cf4a483997e7e85873f2efb4cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a067ef2cf4a483997e7e85873f2efb4cd">&#9670;&#160;</a></span>peekHead()</h2>
+<a id="acd4393984427876165398964f6233edc" name="acd4393984427876165398964f6233edc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd4393984427876165398964f6233edc">&#9670;&#160;</a></span>peekHead()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -228,7 +232,7 @@ template&lt;class ITEM &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::peekHead </td>
+          <td class="memname">virtual bool <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::peekHead </td>
           <td>(</td>
           <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
@@ -236,7 +240,7 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -244,10 +248,12 @@ template&lt;class ITEM &gt; </div>
 <p>This method inspects the head of the ring buffer without removing it. </p>
 <p>The contents of the head element will be copied into the 'item' argument. The method returns true if the operation was successful; else false is returned, i.e. the Ring buffer is empty. </p>
 
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a781f8957d7c42296b36169408defff44">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#afad187acfcd3127795b2a9d66a88c4f1">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+
 </div>
 </div>
-<a id="a1e11b1cbd7fdd7ce120dbac9dc99d7cc" name="a1e11b1cbd7fdd7ce120dbac9dc99d7cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e11b1cbd7fdd7ce120dbac9dc99d7cc">&#9670;&#160;</a></span>peekNextAddItems()</h2>
+<a id="a2f6ff50c037a35cb45d8f372f15861e8" name="a2f6ff50c037a35cb45d8f372f15861e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f6ff50c037a35cb45d8f372f15861e8">&#9670;&#160;</a></span>peekNextAddItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +264,7 @@ template&lt;class ITEM &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::peekNextAddItems </td>
+          <td class="memname">virtual ITEM * <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::peekNextAddItems </td>
           <td>(</td>
           <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>dstNumFlatElements</em></span></td><td>)</td>
           <td> const</td>
@@ -266,7 +272,7 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -275,10 +281,12 @@ template&lt;class ITEM &gt; </div>
 <p>In addition it returns the number of elements that can be added as linear/flat buffer (i.e. without wrapping around raw buffer memory)</p>
 <p>If the Ring buffer is full, a null pointer is returned </p>
 
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#af8e6b2940d390a51d1aa571aa9069687">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+
 </div>
 </div>
-<a id="a9a70f0db2816455a7ae20cb39269efb2" name="a9a70f0db2816455a7ae20cb39269efb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a70f0db2816455a7ae20cb39269efb2">&#9670;&#160;</a></span>peekNextRemoveItems()</h2>
+<a id="ac6195ff563fcfa4a2da0606537fad5a7" name="ac6195ff563fcfa4a2da0606537fad5a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6195ff563fcfa4a2da0606537fad5a7">&#9670;&#160;</a></span>peekNextRemoveItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,7 +297,7 @@ template&lt;class ITEM &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::peekNextRemoveItems </td>
+          <td class="memname">virtual ITEM * <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::peekNextRemoveItems </td>
           <td>(</td>
           <td class="paramtype">unsigned &amp;</td>          <td class="paramname"><span class="paramname"><em>dstNumFlatElements</em></span></td><td>)</td>
           <td> const</td>
@@ -297,7 +305,7 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -306,10 +314,12 @@ template&lt;class ITEM &gt; </div>
 <p>In addition it returns the number of elements that can be removed as linear/flat buffer (i.e. without wrapping around raw buffer memory)</p>
 <p>If the Ring buffer is empty, a null pointer is returned </p>
 
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a58feef76fc26a4526cb93858f585dfa0">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+
 </div>
 </div>
-<a id="ac3c986b1c6595fc1eca21d4e63427320" name="ac3c986b1c6595fc1eca21d4e63427320"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3c986b1c6595fc1eca21d4e63427320">&#9670;&#160;</a></span>peekTail()</h2>
+<a id="a71a500d42c5b91efa636eff378bc6797" name="a71a500d42c5b91efa636eff378bc6797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71a500d42c5b91efa636eff378bc6797">&#9670;&#160;</a></span>peekTail()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -320,7 +330,7 @@ template&lt;class ITEM &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::peekTail </td>
+          <td class="memname">virtual bool <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::peekTail </td>
           <td>(</td>
           <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
@@ -328,7 +338,7 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -336,10 +346,12 @@ template&lt;class ITEM &gt; </div>
 <p>This method inspects the tail of the ring buffer without removing it. </p>
 <p>The contents of the tail element will be copied into the 'item' argument. The method returns true if the operation was successful; else false is returned, i.e. the Ring buffer is empty. </p>
 
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#ae8678e935642d8b79a23fd46bdbbcc67">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a97b9db1676c62ed359ecf9c9fc58bd11">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+
 </div>
 </div>
-<a id="af30609f25225a17178e151519e82f348" name="af30609f25225a17178e151519e82f348"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af30609f25225a17178e151519e82f348">&#9670;&#160;</a></span>remove()</h2>
+<a id="a4dd7deb4479d534f0b0a4b2124c973f3" name="a4dd7deb4479d534f0b0a4b2124c973f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd7deb4479d534f0b0a4b2124c973f3">&#9670;&#160;</a></span>remove()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,7 +362,7 @@ template&lt;class ITEM &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::remove </td>
+          <td class="memname">virtual bool <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::remove </td>
           <td>(</td>
           <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
@@ -358,7 +370,7 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -366,10 +378,12 @@ template&lt;class ITEM &gt; </div>
 <p>Removes an item from the ring buffer. </p>
 <p>Returns true on success. If the ring buffer is empty, then false is returned (and the 'item' argument is not updated) </p>
 
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#ae18ab509fa5de0eba39ec946e36012ab">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a05c72c0cd46d9cad6bc24f006e227797">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+
 </div>
 </div>
-<a id="a7a50c280cca8d9768293c5572efe2fa8" name="a7a50c280cca8d9768293c5572efe2fa8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a50c280cca8d9768293c5572efe2fa8">&#9670;&#160;</a></span>removeElements()</h2>
+<a id="a9ebc7a150c49b7a143f6514341bf718c" name="a9ebc7a150c49b7a143f6514341bf718c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ebc7a150c49b7a143f6514341bf718c">&#9670;&#160;</a></span>removeElements()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -380,7 +394,7 @@ template&lt;class ITEM &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::removeElements </td>
+          <td class="memname">virtual void <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer</a>&lt; ITEM &gt;::removeElements </td>
           <td>(</td>
           <td class="paramtype">unsigned</td>          <td class="paramname"><span class="paramname"><em>numElementsToRemove</em></span></td><td>)</td>
           <td></td>
@@ -388,15 +402,17 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>This method 'removes' N elements - that were removed using the pointer returned from peekNextRemoveItems - from the ring buffer. </p>
 <p>Basically it updates the read index to reflect items removed using direct memory access.</p>
-<p>'numElementsToRemove' be less than or equal to the 'dstNumFlatElements' returned from <a class="el" href="#a9a70f0db2816455a7ae20cb39269efb2" title="This method returns a pointer to the next item to be removed.">peekNextRemoveItems()</a>.</p>
+<p>'numElementsToRemove' be less than or equal to the 'dstNumFlatElements' returned from <a class="el" href="#ac6195ff563fcfa4a2da0606537fad5a7" title="This method returns a pointer to the next item to be removed.">peekNextRemoveItems()</a>.</p>
 <p>CAUTION: IF YOU DON'T UNDERSTAND THE USE CASE FOR THIS METHOD - THEN DON'T USE IT. If this method is used improperly, it WILL CORRUPT the Ring Buffer! </p>
+
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#af4b49f9a9389109607dbbed7544095d1">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -433,7 +449,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 7 2026 22:30:13 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Apr 9 2026 23:54:08 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

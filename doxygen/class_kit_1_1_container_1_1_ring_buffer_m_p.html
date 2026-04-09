@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 288-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 291-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -63,7 +63,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer_m_p__inherit__graph.svg" width="1075" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer_m_p__inherit__graph.svg" width="1075" height="210"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::RingBufferMP&lt; ITEM &gt;:</div>
@@ -78,85 +78,61 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab6abeefbe0f055cce61862da7d4d7d37" id="r_ab6abeefbe0f055cce61862da7d4d7d37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6abeefbe0f055cce61862da7d4d7d37">RingBufferMP</a> (<a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a> &amp;mpElementCount, ITEM *memoryBuffer, unsigned N, bool initializeMemory=true)</td></tr>
 <tr class="memdesc:ab6abeefbe0f055cce61862da7d4d7d37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:ab6abeefbe0f055cce61862da7d4d7d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f51547e8b71ecd8a6209a18f1ca736b" id="r_a1f51547e8b71ecd8a6209a18f1ca736b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f51547e8b71ecd8a6209a18f1ca736b">add</a> (const ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a1f51547e8b71ecd8a6209a18f1ca736b"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:a1f51547e8b71ecd8a6209a18f1ca736b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abce4605251007f1a8a325a6b88f36368" id="r_abce4605251007f1a8a325a6b88f36368"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abce4605251007f1a8a325a6b88f36368">add</a> (const ITEM &amp;item) noexcept override</td></tr>
+<tr class="memdesc:abce4605251007f1a8a325a6b88f36368"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:abce4605251007f1a8a325a6b88f36368"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80b100e9e87d3b7741abc315e870c158" id="r_a80b100e9e87d3b7741abc315e870c158"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80b100e9e87d3b7741abc315e870c158">add</a> (const ITEM &amp;item, uint16_t &amp;seqNum) noexcept</td></tr>
-<tr class="memdesc:a80b100e9e87d3b7741abc315e870c158"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a1f51547e8b71ecd8a6209a18f1ca736b" title="See Kit::RingBuffer::isEmpty.">add()</a> but also returns the sequence number after the increment operation.  <br /></td></tr>
+<tr class="memdesc:a80b100e9e87d3b7741abc315e870c158"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#abce4605251007f1a8a325a6b88f36368" title="See Kit::RingBuffer.">add()</a> but also returns the sequence number after the increment operation.  <br /></td></tr>
 <tr class="separator:a80b100e9e87d3b7741abc315e870c158"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3bf4e21d81834a97392414f93468bd2" id="r_aa3bf4e21d81834a97392414f93468bd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3bf4e21d81834a97392414f93468bd2">addElements</a> (unsigned numElementsAdded) noexcept</td></tr>
-<tr class="memdesc:aa3bf4e21d81834a97392414f93468bd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:aa3bf4e21d81834a97392414f93468bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84bbb00c0e7de0b321d72c4cbd5738de" id="r_a84bbb00c0e7de0b321d72c4cbd5738de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84bbb00c0e7de0b321d72c4cbd5738de">addElements</a> (unsigned numElementsAdded) noexcept override</td></tr>
+<tr class="memdesc:a84bbb00c0e7de0b321d72c4cbd5738de"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:a84bbb00c0e7de0b321d72c4cbd5738de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0636860e7c798ce4debe156ee4d87aa" id="r_af0636860e7c798ce4debe156ee4d87aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0636860e7c798ce4debe156ee4d87aa">addElements</a> (unsigned numElementsAdded, uint16_t &amp;seqNum) noexcept</td></tr>
-<tr class="memdesc:af0636860e7c798ce4debe156ee4d87aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#aa3bf4e21d81834a97392414f93468bd2" title="See Kit::RingBuffer::isEmpty.">addElements()</a> but also returns the sequence number after the increment operation.  <br /></td></tr>
+<tr class="memdesc:af0636860e7c798ce4debe156ee4d87aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a84bbb00c0e7de0b321d72c4cbd5738de" title="See Kit::RingBuffer.">addElements()</a> but also returns the sequence number after the increment operation.  <br /></td></tr>
 <tr class="separator:af0636860e7c798ce4debe156ee4d87aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad69c164c8ef8149a642e85c6d90e669c" id="r_ad69c164c8ef8149a642e85c6d90e669c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad69c164c8ef8149a642e85c6d90e669c">clearTheBuffer</a> () noexcept</td></tr>
-<tr class="memdesc:ad69c164c8ef8149a642e85c6d90e669c"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:ad69c164c8ef8149a642e85c6d90e669c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cac7f11520ec1911cc8dd23e7d06cb8" id="r_a3cac7f11520ec1911cc8dd23e7d06cb8"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cac7f11520ec1911cc8dd23e7d06cb8">getMaxItems</a> () const noexcept</td></tr>
-<tr class="memdesc:a3cac7f11520ec1911cc8dd23e7d06cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:a3cac7f11520ec1911cc8dd23e7d06cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0970112e004be2db228129a9a5b7f140" id="r_a0970112e004be2db228129a9a5b7f140"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0970112e004be2db228129a9a5b7f140">getNumItems</a> () const noexcept</td></tr>
-<tr class="memdesc:a0970112e004be2db228129a9a5b7f140"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:a0970112e004be2db228129a9a5b7f140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa4ec049e7c06a8d1cb75df577aca6c7" id="r_aaa4ec049e7c06a8d1cb75df577aca6c7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa4ec049e7c06a8d1cb75df577aca6c7">isEmpty</a> () const noexcept</td></tr>
-<tr class="memdesc:aaa4ec049e7c06a8d1cb75df577aca6c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:aaa4ec049e7c06a8d1cb75df577aca6c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a909cec39a10699d59c9f840e65b269c2" id="r_a909cec39a10699d59c9f840e65b269c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a909cec39a10699d59c9f840e65b269c2">isFull</a> () const noexcept</td></tr>
-<tr class="memdesc:a909cec39a10699d59c9f840e65b269c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:a909cec39a10699d59c9f840e65b269c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7275cd64ddae6462a5168983002bba86" id="r_a7275cd64ddae6462a5168983002bba86"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7275cd64ddae6462a5168983002bba86">peekHead</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a7275cd64ddae6462a5168983002bba86"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:a7275cd64ddae6462a5168983002bba86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d98580c63025cd78b6585093a8f3f48" id="r_a5d98580c63025cd78b6585093a8f3f48"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d98580c63025cd78b6585093a8f3f48">peekNextAddItems</a> (unsigned &amp;dstNumFlatElements) const noexcept</td></tr>
-<tr class="memdesc:a5d98580c63025cd78b6585093a8f3f48"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:a5d98580c63025cd78b6585093a8f3f48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addaa01d7fc502accb745344c1f14ed82" id="r_addaa01d7fc502accb745344c1f14ed82"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addaa01d7fc502accb745344c1f14ed82">peekNextRemoveItems</a> (unsigned &amp;dstNumFlatElements) const noexcept</td></tr>
-<tr class="memdesc:addaa01d7fc502accb745344c1f14ed82"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:addaa01d7fc502accb745344c1f14ed82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c2d9f5015a093dc9ce00ef45e8cffb8" id="r_a9c2d9f5015a093dc9ce00ef45e8cffb8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c2d9f5015a093dc9ce00ef45e8cffb8">peekTail</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a9c2d9f5015a093dc9ce00ef45e8cffb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:a9c2d9f5015a093dc9ce00ef45e8cffb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a614b5a1b70aa59d062a1bf0a90211bfc" id="r_a614b5a1b70aa59d062a1bf0a90211bfc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a614b5a1b70aa59d062a1bf0a90211bfc">remove</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a614b5a1b70aa59d062a1bf0a90211bfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:a614b5a1b70aa59d062a1bf0a90211bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affe734a1da5f9a73c2c224ed50a2fec4" id="r_affe734a1da5f9a73c2c224ed50a2fec4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affe734a1da5f9a73c2c224ed50a2fec4">clearTheBuffer</a> () noexcept override</td></tr>
+<tr class="memdesc:affe734a1da5f9a73c2c224ed50a2fec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:affe734a1da5f9a73c2c224ed50a2fec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad689b85a0afa6c04eb77ec3707d38100" id="r_ad689b85a0afa6c04eb77ec3707d38100"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad689b85a0afa6c04eb77ec3707d38100">getMaxItems</a> () const noexcept override</td></tr>
+<tr class="memdesc:ad689b85a0afa6c04eb77ec3707d38100"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:ad689b85a0afa6c04eb77ec3707d38100"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d2ab5a16d7c44b42c88c074a5523951" id="r_a9d2ab5a16d7c44b42c88c074a5523951"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d2ab5a16d7c44b42c88c074a5523951">getNumItems</a> () const noexcept override</td></tr>
+<tr class="memdesc:a9d2ab5a16d7c44b42c88c074a5523951"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:a9d2ab5a16d7c44b42c88c074a5523951"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b0c9e619ddfe9cf2d03c2dabea9b891" id="r_a6b0c9e619ddfe9cf2d03c2dabea9b891"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b0c9e619ddfe9cf2d03c2dabea9b891">isEmpty</a> () const noexcept override</td></tr>
+<tr class="memdesc:a6b0c9e619ddfe9cf2d03c2dabea9b891"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:a6b0c9e619ddfe9cf2d03c2dabea9b891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a729f5b2496d2e37a66fc8b2ac1dd8424" id="r_a729f5b2496d2e37a66fc8b2ac1dd8424"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a729f5b2496d2e37a66fc8b2ac1dd8424">isFull</a> () const noexcept override</td></tr>
+<tr class="memdesc:a729f5b2496d2e37a66fc8b2ac1dd8424"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:a729f5b2496d2e37a66fc8b2ac1dd8424"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a781f8957d7c42296b36169408defff44" id="r_a781f8957d7c42296b36169408defff44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a781f8957d7c42296b36169408defff44">peekHead</a> (ITEM &amp;item) noexcept override</td></tr>
+<tr class="memdesc:a781f8957d7c42296b36169408defff44"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:a781f8957d7c42296b36169408defff44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a208fb873300673b8b50da6f012ae549c" id="r_a208fb873300673b8b50da6f012ae549c"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a208fb873300673b8b50da6f012ae549c">peekNextAddItems</a> (unsigned &amp;dstNumFlatElements) const noexcept override</td></tr>
+<tr class="memdesc:a208fb873300673b8b50da6f012ae549c"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:a208fb873300673b8b50da6f012ae549c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e04c80929e2fb80d0caa1d9e4ee0d0" id="r_a99e04c80929e2fb80d0caa1d9e4ee0d0"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99e04c80929e2fb80d0caa1d9e4ee0d0">peekNextRemoveItems</a> (unsigned &amp;dstNumFlatElements) const noexcept override</td></tr>
+<tr class="memdesc:a99e04c80929e2fb80d0caa1d9e4ee0d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
+<tr class="separator:a99e04c80929e2fb80d0caa1d9e4ee0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8678e935642d8b79a23fd46bdbbcc67" id="r_ae8678e935642d8b79a23fd46bdbbcc67"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae8678e935642d8b79a23fd46bdbbcc67">peekTail</a> (ITEM &amp;item) noexcept override</td></tr>
+<tr class="memdesc:ae8678e935642d8b79a23fd46bdbbcc67"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:ae8678e935642d8b79a23fd46bdbbcc67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18ab509fa5de0eba39ec946e36012ab" id="r_ae18ab509fa5de0eba39ec946e36012ab"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae18ab509fa5de0eba39ec946e36012ab">remove</a> (ITEM &amp;item) noexcept override</td></tr>
+<tr class="memdesc:ae18ab509fa5de0eba39ec946e36012ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:ae18ab509fa5de0eba39ec946e36012ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d0966f06b6828abb0b1f64d2e90b7ea" id="r_a8d0966f06b6828abb0b1f64d2e90b7ea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8d0966f06b6828abb0b1f64d2e90b7ea">remove</a> (ITEM &amp;item, uint16_t &amp;seqNum) noexcept</td></tr>
-<tr class="memdesc:a8d0966f06b6828abb0b1f64d2e90b7ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a614b5a1b70aa59d062a1bf0a90211bfc" title="See Kit::RingBuffer::isEmpty.">remove()</a> but also returns the sequence number after the decrement operation.  <br /></td></tr>
+<tr class="memdesc:a8d0966f06b6828abb0b1f64d2e90b7ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#ae18ab509fa5de0eba39ec946e36012ab" title="See Kit::RingBuffer.">remove()</a> but also returns the sequence number after the decrement operation.  <br /></td></tr>
 <tr class="separator:a8d0966f06b6828abb0b1f64d2e90b7ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0c5324bf549345a95df408a712fe77c" id="r_ab0c5324bf549345a95df408a712fe77c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0c5324bf549345a95df408a712fe77c">removeElements</a> (unsigned numElementsToRemove) noexcept</td></tr>
-<tr class="memdesc:ab0c5324bf549345a95df408a712fe77c"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer::isEmpty.  <br /></td></tr>
-<tr class="separator:ab0c5324bf549345a95df408a712fe77c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54af0f5fb2a2c8833bf3cd5e29578a9c" id="r_a54af0f5fb2a2c8833bf3cd5e29578a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54af0f5fb2a2c8833bf3cd5e29578a9c">removeElements</a> (unsigned numElementsToRemove) noexcept override</td></tr>
+<tr class="memdesc:a54af0f5fb2a2c8833bf3cd5e29578a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">See Kit::RingBuffer.  <br /></td></tr>
+<tr class="separator:a54af0f5fb2a2c8833bf3cd5e29578a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9d1446758399dd30b9390db93deeb3f" id="r_ab9d1446758399dd30b9390db93deeb3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9d1446758399dd30b9390db93deeb3f">removeElements</a> (unsigned numElementsToRemove, uint16_t &amp;seqNum) noexcept</td></tr>
-<tr class="memdesc:ab9d1446758399dd30b9390db93deeb3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#ab0c5324bf549345a95df408a712fe77c" title="See Kit::RingBuffer::isEmpty.">removeElements()</a> but also returns the sequence number after the decrement operation.  <br /></td></tr>
+<tr class="memdesc:ab9d1446758399dd30b9390db93deeb3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a54af0f5fb2a2c8833bf3cd5e29578a9c" title="See Kit::RingBuffer.">removeElements()</a> but also returns the sequence number after the decrement operation.  <br /></td></tr>
 <tr class="separator:ab9d1446758399dd30b9390db93deeb3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_container_1_1_ring_buffer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer&lt; ITEM &gt;</a></td></tr>
 <tr class="memitem:aeae33a075bbf6ed87fbb3b16993d84ea inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_aeae33a075bbf6ed87fbb3b16993d84ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#aeae33a075bbf6ed87fbb3b16993d84ea">RingBuffer</a> (ITEM *memoryBuffer, unsigned N, bool initializeMemory=true)</td></tr>
 <tr class="memdesc:aeae33a075bbf6ed87fbb3b16993d84ea inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:aeae33a075bbf6ed87fbb3b16993d84ea inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4b350edc1e9c9f5a084e9739d45a3d1d inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_a4b350edc1e9c9f5a084e9739d45a3d1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a4b350edc1e9c9f5a084e9739d45a3d1d">add</a> (const ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a4b350edc1e9c9f5a084e9739d45a3d1d inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds new item to the ring buffer.  <br /></td></tr>
-<tr class="separator:a4b350edc1e9c9f5a084e9739d45a3d1d inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d519398b6660f274b2264073265d9d9 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_a7d519398b6660f274b2264073265d9d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a7d519398b6660f274b2264073265d9d9">addElements</a> (unsigned numElementsAdded) noexcept</td></tr>
-<tr class="memdesc:a7d519398b6660f274b2264073265d9d9 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'adds' N elements - that were populated using the pointer returned from peekNextAddItems - to the ring buffer.  <br /></td></tr>
-<tr class="separator:a7d519398b6660f274b2264073265d9d9 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a067ef2cf4a483997e7e85873f2efb4cd inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_a067ef2cf4a483997e7e85873f2efb4cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a067ef2cf4a483997e7e85873f2efb4cd">peekHead</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a067ef2cf4a483997e7e85873f2efb4cd inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the head of the ring buffer without removing it.  <br /></td></tr>
-<tr class="separator:a067ef2cf4a483997e7e85873f2efb4cd inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e11b1cbd7fdd7ce120dbac9dc99d7cc inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_a1e11b1cbd7fdd7ce120dbac9dc99d7cc"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a1e11b1cbd7fdd7ce120dbac9dc99d7cc">peekNextAddItems</a> (unsigned &amp;dstNumFlatElements) const noexcept</td></tr>
-<tr class="memdesc:a1e11b1cbd7fdd7ce120dbac9dc99d7cc inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be added.  <br /></td></tr>
-<tr class="separator:a1e11b1cbd7fdd7ce120dbac9dc99d7cc inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a70f0db2816455a7ae20cb39269efb2 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_a9a70f0db2816455a7ae20cb39269efb2"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a9a70f0db2816455a7ae20cb39269efb2">peekNextRemoveItems</a> (unsigned &amp;dstNumFlatElements) const noexcept</td></tr>
-<tr class="memdesc:a9a70f0db2816455a7ae20cb39269efb2 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns a pointer to the next item to be removed.  <br /></td></tr>
-<tr class="separator:a9a70f0db2816455a7ae20cb39269efb2 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3c986b1c6595fc1eca21d4e63427320 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_ac3c986b1c6595fc1eca21d4e63427320"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#ac3c986b1c6595fc1eca21d4e63427320">peekTail</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:ac3c986b1c6595fc1eca21d4e63427320 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method inspects the tail of the ring buffer without removing it.  <br /></td></tr>
-<tr class="separator:ac3c986b1c6595fc1eca21d4e63427320 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af30609f25225a17178e151519e82f348 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_af30609f25225a17178e151519e82f348"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#af30609f25225a17178e151519e82f348">remove</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:af30609f25225a17178e151519e82f348 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes an item from the ring buffer.  <br /></td></tr>
-<tr class="separator:af30609f25225a17178e151519e82f348 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a50c280cca8d9768293c5572efe2fa8 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_a7a50c280cca8d9768293c5572efe2fa8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a7a50c280cca8d9768293c5572efe2fa8">removeElements</a> (unsigned numElementsToRemove) noexcept</td></tr>
-<tr class="memdesc:a7a50c280cca8d9768293c5572efe2fa8 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method 'removes' N elements - that were removed using the pointer returned from peekNextRemoveItems - from the ring buffer.  <br /></td></tr>
-<tr class="separator:a7a50c280cca8d9768293c5572efe2fa8 inherit pub_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -224,8 +200,8 @@ template&lt;class ITEM &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1f51547e8b71ecd8a6209a18f1ca736b" name="a1f51547e8b71ecd8a6209a18f1ca736b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f51547e8b71ecd8a6209a18f1ca736b">&#9670;&#160;</a></span>add() <span class="overload">[1/2]</span></h2>
+<a id="abce4605251007f1a8a325a6b88f36368" name="abce4605251007f1a8a325a6b88f36368"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abce4605251007f1a8a325a6b88f36368">&#9670;&#160;</a></span>add() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,12 +220,14 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a0913afa137fe3a705cd0502da49f566f">Kit::Container::RingBuffer&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -282,12 +260,12 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Same as <a class="el" href="#a1f51547e8b71ecd8a6209a18f1ca736b" title="See Kit::RingBuffer::isEmpty.">add()</a> but also returns the sequence number after the increment operation. </p>
+<p>Same as <a class="el" href="#abce4605251007f1a8a325a6b88f36368" title="See Kit::RingBuffer.">add()</a> but also returns the sequence number after the increment operation. </p>
 
 </div>
 </div>
-<a id="aa3bf4e21d81834a97392414f93468bd2" name="aa3bf4e21d81834a97392414f93468bd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3bf4e21d81834a97392414f93468bd2">&#9670;&#160;</a></span>addElements() <span class="overload">[1/2]</span></h2>
+<a id="a84bbb00c0e7de0b321d72c4cbd5738de" name="a84bbb00c0e7de0b321d72c4cbd5738de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84bbb00c0e7de0b321d72c4cbd5738de">&#9670;&#160;</a></span>addElements() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -306,12 +284,14 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a8a7f18891f2177ecd2fb76ff1b82a67d">Kit::Container::RingBuffer&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -344,12 +324,12 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Same as <a class="el" href="#aa3bf4e21d81834a97392414f93468bd2" title="See Kit::RingBuffer::isEmpty.">addElements()</a> but also returns the sequence number after the increment operation. </p>
+<p>Same as <a class="el" href="#a84bbb00c0e7de0b321d72c4cbd5738de" title="See Kit::RingBuffer.">addElements()</a> but also returns the sequence number after the increment operation. </p>
 
 </div>
 </div>
-<a id="ad69c164c8ef8149a642e85c6d90e669c" name="ad69c164c8ef8149a642e85c6d90e669c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad69c164c8ef8149a642e85c6d90e669c">&#9670;&#160;</a></span>clearTheBuffer()</h2>
+<a id="affe734a1da5f9a73c2c224ed50a2fec4" name="affe734a1da5f9a73c2c224ed50a2fec4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affe734a1da5f9a73c2c224ed50a2fec4">&#9670;&#160;</a></span>clearTheBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -368,17 +348,17 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
 
 </div>
 </div>
-<a id="a3cac7f11520ec1911cc8dd23e7d06cb8" name="a3cac7f11520ec1911cc8dd23e7d06cb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cac7f11520ec1911cc8dd23e7d06cb8">&#9670;&#160;</a></span>getMaxItems()</h2>
+<a id="ad689b85a0afa6c04eb77ec3707d38100" name="ad689b85a0afa6c04eb77ec3707d38100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad689b85a0afa6c04eb77ec3707d38100">&#9670;&#160;</a></span>getMaxItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -397,17 +377,17 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
 
 </div>
 </div>
-<a id="a0970112e004be2db228129a9a5b7f140" name="a0970112e004be2db228129a9a5b7f140"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0970112e004be2db228129a9a5b7f140">&#9670;&#160;</a></span>getNumItems()</h2>
+<a id="a9d2ab5a16d7c44b42c88c074a5523951" name="a9d2ab5a16d7c44b42c88c074a5523951"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d2ab5a16d7c44b42c88c074a5523951">&#9670;&#160;</a></span>getNumItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -426,17 +406,17 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
 
 </div>
 </div>
-<a id="aaa4ec049e7c06a8d1cb75df577aca6c7" name="aaa4ec049e7c06a8d1cb75df577aca6c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa4ec049e7c06a8d1cb75df577aca6c7">&#9670;&#160;</a></span>isEmpty()</h2>
+<a id="a6b0c9e619ddfe9cf2d03c2dabea9b891" name="a6b0c9e619ddfe9cf2d03c2dabea9b891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b0c9e619ddfe9cf2d03c2dabea9b891">&#9670;&#160;</a></span>isEmpty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -455,17 +435,17 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
 
 </div>
 </div>
-<a id="a909cec39a10699d59c9f840e65b269c2" name="a909cec39a10699d59c9f840e65b269c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a909cec39a10699d59c9f840e65b269c2">&#9670;&#160;</a></span>isFull()</h2>
+<a id="a729f5b2496d2e37a66fc8b2ac1dd8424" name="a729f5b2496d2e37a66fc8b2ac1dd8424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a729f5b2496d2e37a66fc8b2ac1dd8424">&#9670;&#160;</a></span>isFull()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -484,17 +464,17 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
 
 </div>
 </div>
-<a id="a7275cd64ddae6462a5168983002bba86" name="a7275cd64ddae6462a5168983002bba86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7275cd64ddae6462a5168983002bba86">&#9670;&#160;</a></span>peekHead()</h2>
+<a id="a781f8957d7c42296b36169408defff44" name="a781f8957d7c42296b36169408defff44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a781f8957d7c42296b36169408defff44">&#9670;&#160;</a></span>peekHead()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -513,17 +493,19 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#acd4393984427876165398964f6233edc">Kit::Container::RingBuffer&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a5d98580c63025cd78b6585093a8f3f48" name="a5d98580c63025cd78b6585093a8f3f48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d98580c63025cd78b6585093a8f3f48">&#9670;&#160;</a></span>peekNextAddItems()</h2>
+<a id="a208fb873300673b8b50da6f012ae549c" name="a208fb873300673b8b50da6f012ae549c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a208fb873300673b8b50da6f012ae549c">&#9670;&#160;</a></span>peekNextAddItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -542,17 +524,19 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a2f6ff50c037a35cb45d8f372f15861e8">Kit::Container::RingBuffer&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
-<a id="addaa01d7fc502accb745344c1f14ed82" name="addaa01d7fc502accb745344c1f14ed82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addaa01d7fc502accb745344c1f14ed82">&#9670;&#160;</a></span>peekNextRemoveItems()</h2>
+<a id="a99e04c80929e2fb80d0caa1d9e4ee0d0" name="a99e04c80929e2fb80d0caa1d9e4ee0d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99e04c80929e2fb80d0caa1d9e4ee0d0">&#9670;&#160;</a></span>peekNextRemoveItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -571,17 +555,19 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>See Kit::RingBuffer::isEmpty. </p>
 
+<p>Reimplemented from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#ac6195ff563fcfa4a2da0606537fad5a7">Kit::Container::RingBuffer&lt; ITEM &gt;</a>.</p>
+
 </div>
 </div>
-<a id="a9c2d9f5015a093dc9ce00ef45e8cffb8" name="a9c2d9f5015a093dc9ce00ef45e8cffb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9c2d9f5015a093dc9ce00ef45e8cffb8">&#9670;&#160;</a></span>peekTail()</h2>
+<a id="ae8678e935642d8b79a23fd46bdbbcc67" name="ae8678e935642d8b79a23fd46bdbbcc67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8678e935642d8b79a23fd46bdbbcc67">&#9670;&#160;</a></span>peekTail()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -600,17 +586,19 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a71a500d42c5b91efa636eff378bc6797">Kit::Container::RingBuffer&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
-<a id="a614b5a1b70aa59d062a1bf0a90211bfc" name="a614b5a1b70aa59d062a1bf0a90211bfc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a614b5a1b70aa59d062a1bf0a90211bfc">&#9670;&#160;</a></span>remove() <span class="overload">[1/2]</span></h2>
+<a id="ae18ab509fa5de0eba39ec946e36012ab" name="ae18ab509fa5de0eba39ec946e36012ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18ab509fa5de0eba39ec946e36012ab">&#9670;&#160;</a></span>remove() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -629,12 +617,14 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a4dd7deb4479d534f0b0a4b2124c973f3">Kit::Container::RingBuffer&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -667,12 +657,12 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Same as <a class="el" href="#a614b5a1b70aa59d062a1bf0a90211bfc" title="See Kit::RingBuffer::isEmpty.">remove()</a> but also returns the sequence number after the decrement operation. </p>
+<p>Same as <a class="el" href="#ae18ab509fa5de0eba39ec946e36012ab" title="See Kit::RingBuffer.">remove()</a> but also returns the sequence number after the decrement operation. </p>
 
 </div>
 </div>
-<a id="ab0c5324bf549345a95df408a712fe77c" name="ab0c5324bf549345a95df408a712fe77c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0c5324bf549345a95df408a712fe77c">&#9670;&#160;</a></span>removeElements() <span class="overload">[1/2]</span></h2>
+<a id="a54af0f5fb2a2c8833bf3cd5e29578a9c" name="a54af0f5fb2a2c8833bf3cd5e29578a9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54af0f5fb2a2c8833bf3cd5e29578a9c">&#9670;&#160;</a></span>removeElements() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -691,12 +681,14 @@ template&lt;class ITEM &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>See Kit::RingBuffer::isEmpty. </p>
+<p>See Kit::RingBuffer. </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a9ebc7a150c49b7a143f6514341bf718c">Kit::Container::RingBuffer&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -729,7 +721,7 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Same as <a class="el" href="#ab0c5324bf549345a95df408a712fe77c" title="See Kit::RingBuffer::isEmpty.">removeElements()</a> but also returns the sequence number after the decrement operation. </p>
+<p>Same as <a class="el" href="#a54af0f5fb2a2c8833bf3cd5e29578a9c" title="See Kit::RingBuffer.">removeElements()</a> but also returns the sequence number after the decrement operation. </p>
 
 </div>
 </div>
@@ -784,7 +776,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 7 2026 22:30:13 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Apr 9 2026 23:54:08 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -1,11 +1,18 @@
 <map id="Kit::Itc::IClose" name="Kit::Itc::IClose">
-<area shape="rect" id="Node000001" title="This abstract class defines an close interface." alt="" coords="236,5,348,31"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close..." alt="" coords="205,79,379,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="295,44,295,79,289,79,289,44"/>
-<area shape="rect" id="Node000003" href="$class_dm_1_1_transaction_1_1_client.html" title="This concrete class is a &#39;client&#39; to request/trigger the &#39;server&#39; to generate a random number." alt="" coords="5,159,179,185"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="251,112,122,162,120,157,249,107"/>
-<area shape="rect" id="Node000004" href="$class_dm_1_1_transaction_1_1_server.html" title="This concrete class is a &#39;server&#39; that responds to requests from a &#39;client&#39; to generate." alt="" coords="203,159,381,185"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="295,118,295,159,289,159,289,118"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_logging_1_1_framework_1_1_log_sink.html" title="This class is responsible for consuming the application&#39;s Log buffer and &#39;dispatching&#39; log entries." alt="" coords="405,152,585,192"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="335,106,447,149,445,154,333,111"/>
+<area shape="rect" id="Node000001" title="This abstract class defines an close interface." alt="" coords="5,134,117,159"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close..." alt="" coords="165,134,339,159"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="131,144,165,144,165,149,131,149"/>
+<area shape="rect" id="Node000003" href="$class_container_1_1_ring_buffer_1_1_led_server.html" title="This concrete class monitors the a Queue of LED Flash codes and the consumes&#45;and&#45;executes the Flash c..." alt="" coords="396,5,557,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="279,123,327,89,385,55,412,43,415,48,388,60,330,94,282,128"/>
+<area shape="rect" id="Node000004" href="$class_container_1_1_ring_buffer_1_1_producer.html" title="This concrete class is responsible for generating flash codes (i.e." alt="" coords="396,69,557,109"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="315,128,397,107,399,112,316,133"/>
+<area shape="rect" id="Node000005" href="$class_dm_1_1_transaction_1_1_client.html" title="This concrete class is a &#39;client&#39; to request/trigger the &#39;server&#39; to generate a random number." alt="" coords="390,134,563,159"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="353,153,390,153,390,158,353,158"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="353,135,390,135,390,141,353,140"/>
+<area shape="rect" id="Node000006" href="$class_dm_1_1_transaction_1_1_server.html" title="This concrete class is a &#39;server&#39; that responds to requests from a &#39;client&#39; to generate." alt="" coords="388,183,565,209"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="324,160,419,181,417,186,323,165"/>
+<area shape="rect" id="Node000007" href="$class_itc_1_1_synchronous_1_1_server.html" title="This concrete class is a &#39;server&#39; that flashes the LED." alt="" coords="387,233,566,258"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="286,164,333,191,388,218,424,230,423,235,386,222,331,196,284,169"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_logging_1_1_framework_1_1_log_sink.html" title="This class is responsible for consuming the application&#39;s Log buffer and &#39;dispatching&#39; log entries." alt="" coords="387,283,567,323"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="275,168,324,217,355,244,388,267,414,280,412,285,385,272,352,248,320,221,271,171"/>
 </map>
