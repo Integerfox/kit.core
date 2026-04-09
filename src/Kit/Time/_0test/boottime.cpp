@@ -14,7 +14,6 @@
 #include "Kit/System/Trace.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/Dm/ModelDatabase.h"
-#include "Kit/Dm/Mp/Uint32.h"
 #include <inttypes.h>
 
 #define SECT_ "_0test"
@@ -22,7 +21,7 @@
 using namespace Kit::Time;
 
 static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
-static Kit::Dm::Mp::Uint32    mp_bootCounter_( modelDb_, "bootCounter" );
+static KitTimeMpBootCount   mp_bootCounter_( modelDb_, "bootCounter" );
 
 
 ////////////////////////////////////////////////////////////////////////////////

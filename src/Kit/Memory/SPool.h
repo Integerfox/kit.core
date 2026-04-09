@@ -24,6 +24,11 @@ namespace Memory {
     all of its Memory and can allocate up to N instances of the specified Class.
     All of the memory is aligned to class "T" alignment boundaries.
 
+    The class uses composition (instead of inheritance) of the Pool class to
+    manage the actual pool. Composition was chosen because the constructors
+    for elements in the m_infoBlocks[] must execute BEFORE the constructor of 
+    the Pool class.
+
     NOTES:
 
         1) If you only need memory for ONE instance - use AlignedClass structure
@@ -45,7 +50,7 @@ namespace Memory {
  */
 
 template <class T, int N>
-class SPool : public Allocator
+class SPool : public IAllocator
 {
 protected:
     /// Allocate blocks
@@ -68,13 +73,13 @@ public:
     }
 
 public:
-    /// See Kit::Memory::Allocator
+    /// See Kit::Memory::IAllocator
     void* allocate( size_t numbytes ) noexcept { return m_pool.allocate( numbytes ); }
 
-    /// See Kit::Memory::Allocator
+    /// See Kit::Memory::IAllocator
     void release( void* ptr ) noexcept { m_pool.release( ptr ); }
 
-    /// See Kit::Memory::Allocator
+    /// See Kit::Memory::IAllocator
     size_t wordSize() const noexcept { return m_pool.wordSize(); }
 
 private:

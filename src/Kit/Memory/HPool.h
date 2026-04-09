@@ -27,6 +27,12 @@ namespace Memory {
     heap operations are performed.  All of the memory is aligned to  class "T"
     alignment boundaries.
 
+    The class uses composition (instead of inheritance) of the Pool class to
+    manage the actual pool. Composition was chosen because the Pool class does
+    not directly capture the original allocated memory pointers/address.  So
+    this class retains the original allocated memory pointers and frees the memory
+    when its destructor fires.
+
     NOTES:
 
         1) If you only need memory for ONE instance - use AlignedClass structure
@@ -47,7 +53,7 @@ namespace Memory {
  */
 
 template <class T>
-class HPool : public Allocator
+class HPool : public IAllocator
 {
 protected:
     /// Allocate memory for BlockInfo_ instances
@@ -77,9 +83,9 @@ public:
     /// Destructor.
     ~HPool()
     {
-        delete m_poolPtr;
-        delete[] m_blocks;
         delete[] m_infoBlocks;
+        delete[] m_blocks;
+        delete m_poolPtr;
     }
 
 

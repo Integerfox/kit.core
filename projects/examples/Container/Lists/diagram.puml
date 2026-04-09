@@ -1,0 +1,78 @@
+@startuml classDiagram_examplescontainerlists
+
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+left to right direction
+
+' ============================================================================
+' Application Classes
+' ============================================================================
+
+package "Container::Lists" {
+
+    class "example.cpp" as exampleApp <<application>>
+
+    abstract class Period {
+        + getLEDOnOffState() : bool
+        + getDurationMs() : uint32_t
+        + ~Period()
+    }
+
+    class OnPeriod {
+        + OnPeriod(durationMs : uint32_t)
+        + getLEDOnOffState() : bool
+        + getDurationMs() : uint32_t
+    }
+
+    class OffPeriod {
+        + OffPeriod(durationMs : uint32_t)
+        + getLEDOnOffState() : bool
+        + getDurationMs() : uint32_t
+    }
+
+    class Flasher {
+        + Flasher()
+        + runPattern(pattern : DList<Period>&) : void
+    }
+
+    Flasher  -[hidden]down- Period
+    Period   -[hidden]down- OnPeriod
+    OnPeriod -[hidden]right- OffPeriod
+}
+
+' ============================================================================
+' Kit Classes
+' ============================================================================
+
+package "Kit::Container" {
+    class "DList<T>" as DList
+    class ExtendedListItem
+
+    ExtendedListItem -[hidden]down- DList
+}
+
+' ============================================================================
+' Layout hints
+' ============================================================================
+
+exampleApp -[hidden]right- Flasher
+
+' ============================================================================
+' Inheritance
+' ============================================================================
+
+Period   --|> ExtendedListItem
+OnPeriod --|> Period
+OffPeriod --|> Period
+
+' ============================================================================
+' example.cpp usage / composition relationships
+' ============================================================================
+
+exampleApp *--  Flasher   : myFlasher_
+exampleApp *--  OnPeriod  : on*_
+exampleApp *--  OffPeriod : off*_
+exampleApp ..>  DList     : uses DList<Period>
+Flasher    ..>  DList     : runPattern()
+
+@enduml

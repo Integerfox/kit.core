@@ -29,4 +29,4 @@ istream& operator>> ( istream &in, Kit::Text::IString& instring )
     return in.read( dstPtr, maxlen );
 }
 
-};
+}

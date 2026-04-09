@@ -41,25 +41,25 @@ protected:
 
 public:
     /// This method returns true if the Ring Buffer is empty
-    bool isEmpty() const noexcept
+    virtual bool isEmpty() const noexcept
     {
         return m_readIdx.load( std::memory_order_acquire ) == m_writeIdx.load( std::memory_order_acquire );
     }
 
     /// This method returns true if the Ring Buffer is full
-    bool isFull() const noexcept
+    virtual bool isFull() const noexcept
     {
         return ( ( m_writeIdx.load( std::memory_order_acquire ) + 1 ) % m_elements ) == m_readIdx.load( std::memory_order_acquire );
     }
 
     /// This method returns the maximum number of items that can be stored in the Ring buffer.
-    unsigned getMaxItems() const noexcept
+    virtual unsigned getMaxItems() const noexcept
     {
         return m_elements - 1;
     }
 
     /// This method returns the CURRENT number of elements in the Ring Buffer
-    unsigned getNumItems() const noexcept
+    virtual unsigned getNumItems() const noexcept
     {
         return ( m_writeIdx.load( std::memory_order_acquire ) - m_readIdx.load( std::memory_order_acquire ) + m_elements ) % m_elements;
     }
@@ -70,7 +70,7 @@ public:
         the Ring Buffer is NOT in use. It is the application's responsibility
         for ensuring this condition is met.
      */
-    void clearTheBuffer() noexcept
+    virtual void clearTheBuffer() noexcept
     {
         m_readIdx.store( 0, std::memory_order_relaxed );
         m_writeIdx.store( 0, std::memory_order_relaxed );

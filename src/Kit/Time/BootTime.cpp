@@ -10,10 +10,12 @@
 
 #include "BootTime.h"
 
-static Kit::Dm::Mp::Uint32* mpBootCounterPtr_;
+static_assert( sizeof( KitTimeBootCount_T ) <= sizeof( uint64_t ), "KitTimeBootCount_T must not exceed the size of uint64_t" );
 
-#define MASK_ELAPSED_TIME  0x0000FFFFFFFFFFFFLL
-#define SHIFT_ELAPSED_TIME ( 6 * 8 )
+static KitTimeMpBootCount* mpBootCounterPtr_;
+
+#define SHIFT_ELAPSED_TIME ( ( sizeof( uint64_t ) - sizeof( KitTimeBootCount_T ) ) * 8 )
+#define MASK_ELAPSED_TIME  ( ( UINT64_C( 1 ) << SHIFT_ELAPSED_TIME ) - 1 )
 
 #ifdef USE_KIT_TIME_BOOTTIME_WITH_ABSOLUTETIME
 #include "AbsoluteTime.h"
@@ -31,27 +33,27 @@ uint64_t Kit::Time::getBootTime() noexcept
 
     if ( mpBootCounterPtr_ )
     {
-        uint32_t bootCount = 0;  // Default to zero if MP is not valid
+        KitTimeBootCount_T bootCount = 0;  // Default to zero if MP is not valid
         mpBootCounterPtr_->read( bootCount );
         now |= ( (uint64_t)( bootCount ) ) << SHIFT_ELAPSED_TIME;
     }
     return now;
 }
 
-void Kit::Time::parseBootTime( uint64_t srcBootTime, uint16_t& dstBootCounter, uint64_t& dstElapsedTimeMs ) noexcept
+void Kit::Time::parseBootTime( uint64_t srcBootTime, KitTimeBootCount_T& dstBootCounter, uint64_t& dstElapsedTimeMs ) noexcept
 {
-    dstBootCounter   = (uint16_t)( srcBootTime >> SHIFT_ELAPSED_TIME );
+    dstBootCounter   = (KitTimeBootCount_T)( srcBootTime >> SHIFT_ELAPSED_TIME );
     dstElapsedTimeMs = srcBootTime & MASK_ELAPSED_TIME;
 }
 
-uint64_t Kit::Time::constructBootTime( uint16_t srcBootCounter, uint64_t srcElapsedTimeMs ) noexcept
+uint64_t Kit::Time::constructBootTime( KitTimeBootCount_T srcBootCounter, uint64_t srcElapsedTimeMs ) noexcept
 {
     uint64_t bt  = srcElapsedTimeMs & MASK_ELAPSED_TIME;
     bt          |= ( (uint64_t)srcBootCounter ) << SHIFT_ELAPSED_TIME;
     return bt;
 }
 
-void Kit::Time::initializeBootTime( Kit::Dm::Mp::Uint32& bootCounterMp ) noexcept
+void Kit::Time::initializeBootTime( KitTimeMpBootCount& bootCounterMp ) noexcept
 {
     mpBootCounterPtr_ = &bootCounterMp;
 }

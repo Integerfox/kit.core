@@ -10,10 +10,8 @@ This section provides practical code examples demonstrating how to use various K
 
 ## Containers
 
-- @ref examples_container_slist "SList" - Singly Linked List
-- @ref examples_container_dlist "DList" - Doubly Linked List
-
-- @ref user_guide "User Guide" - Comprehensive usage documentation
+- @ref projects_examples_container_list "Lists" - Singly and Doubly Linked Lists
+- @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
 
 ## Data Model
 
@@ -23,19 +21,29 @@ This section provides practical code examples demonstrating how to use various K
 
 - @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
+- @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
+
 ### Create new Model Point type
 
 - @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
 ### Persistent Storage
 
+### Unit Testing new Model Point type
+
+- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+
 ## Inter-thread Messaging
 
-## Requests
+### Requests
 
-## Responses
+- @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
 
-## Open/Close Messages
+### Responses
+
+### Open/Close Messages
+
+- @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
 
 ## Streams and Files
 

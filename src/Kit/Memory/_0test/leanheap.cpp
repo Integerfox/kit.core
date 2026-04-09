@@ -37,7 +37,7 @@ TEST_CASE( "LeanHeap" )
                           MAX_WORDS,
                           ALIGNED_WORD_VALUE );
 
-    ContiguousAllocator::MemoryInfo_T memInfo;
+    IContiguousAllocator::MemoryInfo_T memInfo;
     uut.getMemoryStart( memInfo );
     REQUIRE( memInfo.m_memoryStartPtr != nullptr );
     REQUIRE( memInfo.m_freeWords == memInfo.m_maxWords );
@@ -96,7 +96,7 @@ TEST_CASE( "LeanHeap2" )
                           sizeof( WORD_TYPE2 ),
                           ALIGNED_WORD_VALUE2 );
 
-    ContiguousAllocator::MemoryInfo_T memInfo;
+    IContiguousAllocator::MemoryInfo_T memInfo;
     uut.getMemoryStart( memInfo );
     REQUIRE( memInfo.m_memoryStartPtr != nullptr );
     REQUIRE( memInfo.m_freeWords == memInfo.m_maxWords );

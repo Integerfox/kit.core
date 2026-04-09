@@ -1,0 +1,2 @@
+# Shared main
+../../main.cpp

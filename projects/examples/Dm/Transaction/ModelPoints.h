@@ -19,9 +19,10 @@
     the defined range for the model point instance.
  */
 
- #include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Dm/Mp/Bool.h"
- #include "Dm/Transaction/MpFoo.h"
+#include "Dm/Transaction/MpFoo.h"
+
 ///
 namespace mp {
 
@@ -33,7 +34,7 @@ namespace mp {
     \b Range: invalid             --> "idle"
               transition to valid -->Notifies the Server (of the request)
               updated while valid -->Notifies the Client (of the response)
-              
+
 
     \b Notes:
         The application is responsible for ensuring that there is only at most
@@ -48,7 +49,7 @@ extern Dm::Transaction::MpFoo trigger;
     \b Range: invalid --> "running"
               true    --> "terminate" the application
               false   --> ignored/not-used
-              
+
     \b Notes:
 */
 extern Kit::Dm::Mp::Bool shutdownRequest;
@@ -56,7 +57,7 @@ extern Kit::Dm::Mp::Bool shutdownRequest;
 
 /*---------------------------------------------------------------------------*/
 /// The Application's Model Point Database
-extern Kit::Dm::ModelDatabase   g_modelDatabase;
+extern Kit::Dm::ModelDatabase g_modelDatabase;
 
 }  // end namespaces
 #endif  // end header latch

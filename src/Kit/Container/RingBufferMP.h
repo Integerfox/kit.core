@@ -40,36 +40,35 @@ public:
     }
 
 public:
-    /// See Kit::RingBuffer::isEmpty
-    bool isEmpty() const noexcept
+    /// See Kit::RingBuffer
+    bool isEmpty() const noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         return RingBuffer<ITEM>::isEmpty();
     }
 
-    /// See Kit::RingBuffer::isEmpty
-    bool isFull() const noexcept
+    /// See Kit::RingBuffer
+    bool isFull() const noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         return RingBuffer<ITEM>::isFull();
     }
 
-    /// See Kit::RingBuffer::isEmpty
-    unsigned getMaxItems() const noexcept
+    /// See Kit::RingBuffer
+    unsigned getMaxItems() const noexcept override
     {
         return RingBuffer<ITEM>::getMaxItems();
     }
 
-    /// See Kit::RingBuffer::isEmpty
-    unsigned getNumItems() const noexcept
+    /// See Kit::RingBuffer
+    unsigned getNumItems() const noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         return RingBuffer<ITEM>::getNumItems();
     }
 
-public:
-    /// See Kit::RingBuffer::isEmpty
-    void clearTheBuffer() noexcept
+    /// See Kit::RingBuffer
+    void clearTheBuffer() noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         m_mpElementCount.write( 0 );
@@ -77,8 +76,8 @@ public:
     }
 
 public:
-    /// See Kit::RingBuffer::isEmpty
-    bool add( const ITEM& item ) noexcept
+    /// See Kit::RingBuffer
+    bool add( const ITEM& item ) noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         //
@@ -92,7 +91,7 @@ public:
     }
 
     /// Same as add() but also returns the sequence number after the increment operation
-    bool add( const ITEM& item, uint16_t& seqNum ) noexcept
+    bool add( const ITEM& item, uint16_t& seqNum ) noexcept 
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         //
@@ -105,8 +104,8 @@ public:
         return result;
     }
 
-    /// See Kit::RingBuffer::isEmpty
-    bool remove( ITEM& item ) noexcept
+    /// See Kit::RingBuffer
+    bool remove( ITEM& item ) noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         //
@@ -131,15 +130,15 @@ public:
         return result;
     }
 
-    /// See Kit::RingBuffer::isEmpty
-    bool peekHead( ITEM& item ) noexcept
+    /// See Kit::RingBuffer
+    bool peekHead( ITEM& item ) noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         return RingBuffer<ITEM>::peekHead( item );
     }
 
-    /// See Kit::RingBuffer::isEmpty
-    bool peekTail( ITEM& item ) noexcept
+    /// See Kit::RingBuffer
+    bool peekTail( ITEM& item ) noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         return RingBuffer<ITEM>::peekTail( item );
@@ -147,14 +146,14 @@ public:
 
 public:
     /// See Kit::RingBuffer::isEmpty
-    ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
+    ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         return RingBuffer<ITEM>::peekNextRemoveItems( dstNumFlatElements );
     }
 
-    /// See Kit::RingBuffer::isEmpty
-    void removeElements( unsigned numElementsToRemove ) noexcept
+    /// See Kit::RingBuffer
+    void removeElements( unsigned numElementsToRemove ) noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         m_mpElementCount.decrement( numElementsToRemove );
@@ -170,15 +169,15 @@ public:
     }
 
 public:
-    /// See Kit::RingBuffer::isEmpty
-    ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
+    /// See Kit::RingBuffer
+    ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         return RingBuffer<ITEM>::peekNextAddItems( dstNumFlatElements );
     }
 
-    /// See Kit::RingBuffer::isEmpty
-    void addElements( unsigned numElementsAdded ) noexcept
+    /// See Kit::RingBuffer
+    void addElements( unsigned numElementsAdded ) noexcept override
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         m_mpElementCount.increment( numElementsAdded );

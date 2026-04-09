@@ -14,11 +14,14 @@
 #include "Kit/System/Assert.h"
 #include <string.h>
 
-/** Compile time switch the select which implementation of the Ring Buffer to
+/** Compile time switch that select which implementation of the Ring Buffer to
     use.  The default implementation uses C++11 atomics (vs. using only the
     volatile keyword).  Older hardware (such as ARM Cortex-M0) do not have
-    native hardware instructions to support full lock-free atomics, i.e. it
-    is more efficient to use the volatile-based implementation on those targets. 
+    native hardware instructions to support full lock-free atomics, which means
+    the compiler can generate enable/disable interrupt calls for honoring the
+    C++11 atomics semantics (which is what the whole 'thread/ISR safe' ring
+    buffer implementation was trying to avoid). So for older hardware, the 
+    volatile implementation is the better solution.
  */
 #if defined( USE_KIT_CONTAINER_RINGBUFFER_VOLATILE )
 #include "Kit/Container/RingBufferBaseVolatile.h"
@@ -77,7 +80,7 @@ public:
     /** Adds new item to the ring buffer. Returns true on success. If the ring
         buffer is full, then false is returned (and ring buffer is not updated).
      */
-    bool add( const ITEM& item ) noexcept
+    virtual bool add( const ITEM& item ) noexcept
     {
         return RingBufferBaseType::add( &item, sizeof( ITEM ), m_bufferMemory );
     }
@@ -85,7 +88,7 @@ public:
     /** Removes an item from the ring buffer.  Returns true on success.  If the
         ring buffer is empty, then false is returned (and the 'item' argument
         is not updated) */
-    bool remove( ITEM& item ) noexcept
+    virtual bool remove( ITEM& item ) noexcept
     {
         return RingBufferBaseType::remove( &item, sizeof( ITEM ), m_bufferMemory );
     }
@@ -95,7 +98,7 @@ public:
         The method returns true if the operation was successful; else false is
         returned, i.e. the Ring buffer is empty.
      */
-    bool peekHead( ITEM& item ) noexcept
+    virtual bool peekHead( ITEM& item ) noexcept
     {
         return RingBufferBaseType::peekHead( &item, sizeof( ITEM ), m_bufferMemory );
     }
@@ -105,7 +108,7 @@ public:
         The method returns true if the operation was successful; else false is
         returned, i.e. the Ring buffer is empty.
      */
-    bool peekTail( ITEM& item ) noexcept
+    virtual bool peekTail( ITEM& item ) noexcept
     {
         return RingBufferBaseType::peekTail( &item, sizeof( ITEM ), m_bufferMemory );
     }
@@ -117,7 +120,7 @@ public:
 
         If the Ring buffer is empty, a null pointer is returned
      */
-    ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
+    virtual ITEM* peekNextRemoveItems( unsigned& dstNumFlatElements ) const noexcept
     {
         return static_cast<ITEM*>( RingBufferBaseType::peekNextRemoveItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
     }
@@ -134,7 +137,7 @@ public:
                  DON'T USE IT.  If this method is used improperly, it WILL
                  CORRUPT the Ring Buffer!
      */
-    void removeElements( unsigned numElementsToRemove ) noexcept
+    virtual void removeElements( unsigned numElementsToRemove ) noexcept
     {
         RingBufferBaseType::removeElements( numElementsToRemove );
     }
@@ -146,7 +149,7 @@ public:
 
         If the Ring buffer is full, a null pointer is returned
      */
-    ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
+    virtual ITEM* peekNextAddItems( unsigned& dstNumFlatElements ) const noexcept
     {
         return static_cast<ITEM*>( RingBufferBaseType::peekNextAddItems( dstNumFlatElements, sizeof( ITEM ), m_bufferMemory ) );
     }
@@ -163,7 +166,7 @@ public:
                  DON'T USE IT. If this method is used improperly, it WILL
                  CORRUPT the Ring Buffer!
      */
-    void addElements( unsigned numElementsAdded ) noexcept
+    virtual void addElements( unsigned numElementsAdded ) noexcept
     {
         RingBufferBaseType::addElements( numElementsAdded );
     }

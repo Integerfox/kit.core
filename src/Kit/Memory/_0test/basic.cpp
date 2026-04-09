@@ -82,7 +82,7 @@ TEST_CASE( "basic", "[basic]" )
     {
         s1Ptr       = (struct1_T*)pool1_s1.allocate( sizeof( struct1_T ) );
         cache_s1[i] = s1Ptr;
-        REQUIRE( s1Ptr != 0 );
+        REQUIRE( s1Ptr != nullptr );
         int alignment = (size_t)s1Ptr % ALIGNMENT1;
         KIT_SYSTEM_TRACE_MSG( SECT_, "STACK, S1, Static: ptr=%p, alignment=%d, sizeof=%zu", s1Ptr, alignment, sizeof( struct1_T ) );
         REQUIRE( alignment == 0 );

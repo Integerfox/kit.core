@@ -23,7 +23,7 @@ def main():
     
     # Define the input and output files
     puml_file = os.path.join( script_dir , "class-diagram.puml")
-    png_file = os.path.join( script_dir , "class-diagram.png")
+    png_file = os.path.join( script_dir , "class-diagram_kitlogging.png")
     
     # Check if the input file exists
     if not os.path.exists(puml_file):

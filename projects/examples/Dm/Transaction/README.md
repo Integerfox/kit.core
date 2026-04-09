@@ -44,7 +44,11 @@ on the specific use case/requirements.
 
 ## Class Diagram
 
-![Transaction Example Class Diagram](ClassDiagram.png)
+![Transaction Example Class Diagram](classDiagram_examplesdmtransaction.png)
+
+## See Also
+
+- @ref Kit::Dm "Kit::Dm namespace documentation"
 
 ## Implementation
 
