@@ -53,8 +53,8 @@ reference where the list contains N on/off periods that is used to flash a LED.
 
 ## Implementation
 
-- Root source directory: [projects/examples/Container/Lists](https://github.com/Integerfox/kit.core/blob/main/projects/Container/Lists)
-- Build directory: [projects/examples/Container/Lists/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/Container/Lists/_0build)
+- Root source directory: [projects/examples/Container/Lists](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Container/Lists)
+- Build directory: [projects/examples/Container/Lists/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Container/Lists/_0build)
 - Build Targets:
   - Host: Linux, Windows
   - NUCLEO-F413ZH w/FreeRTOS

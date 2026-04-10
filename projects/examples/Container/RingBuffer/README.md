@@ -42,8 +42,8 @@ drive the board's debug LED.
 
 ## Implementation
 
-- Root source directory: [projects/examples/Container/RingBuffer](https://github.com/Integerfox/kit.core/blob/main/projects/Container/RingBuffer)
-- Build directory: [projects/examples/Container/RingBuffer/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/Container/RingBuffer/_0build)
+- Root source directory: [projects/examples/Container/RingBuffer](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Container/RingBuffer)
+- Build directory: [projects/examples/Container/RingBuffer/_0build](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Container/RingBuffer/_0build)
 - Build Targets:
   - Host: Linux, Windows
   - NUCLEO-F413ZH w/FreeRTOS
