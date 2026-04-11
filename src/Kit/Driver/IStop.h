@@ -22,10 +22,11 @@ namespace Driver {
 class IStop
 {
 public:
-    /** This method is use to stop the driver at run time.  This
-        method is NOT thread-safe.  It is application responsibility to provide
-        any thread-safety that it needs with respect to stopping (and starting)
-        drivers.
+    /** This method is used to stop the driver at run time.
+    
+        This method is NOT thread-safe.  It is the application's responsibility
+        to provide any thread safety that it needs with respect to stopping (and
+        starting) drivers.
      */
     virtual void stop() noexcept = 0;
 

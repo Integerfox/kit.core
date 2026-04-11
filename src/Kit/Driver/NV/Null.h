@@ -31,10 +31,11 @@ namespace Driver {
 ///
 namespace NV {
 
-/** This concrete class provide a 'null' implementation for the NV::IApi interface.
-    The implementation returns 'successful' for all methods while silently discarding
-    of the output bytes.  This allows the driver to a passive 'stub' when a
-    platform specific driver is available.dle any threading issues.
+/** This concrete class provides a 'null' implementation of the NV::IApi interface.
+    The implementation reports success for all operations while not storing any
+    written data. Reads return zero-filled data when the destination buffer is
+    large enough. This allows the driver to be used as a passive 'stub' when a
+    platform-specific driver is not available.
  */
 class Null : public IApi
 {
@@ -48,7 +49,7 @@ public:
 
 public:
     /// See Kit::Driver::IStart for details
-    bool start( void* startArgs = nullptr ) noexcept override
+    bool start( void* = nullptr ) noexcept override
     {
         return true;
     }
@@ -58,12 +59,12 @@ public:
 
 public:
     /// See Kit::Driver::IApi for details
-    virtual bool write( size_t      dstOffset,
-                        const void* srcData,
-                        size_t      numBytesToWrite ) noexcept override { return true; }
+    virtual bool write( size_t,
+                        const void*,
+                        size_t ) noexcept override { return true; }
 
     /// See Kit::Driver::IApi for details. Note: the 'dstData' is set to all zeros
-    virtual bool read( size_t srcOffset,
+    virtual bool read( size_t,
                        void*  dstData,
                        size_t sizeDstData,
                        size_t numBytesToRead ) noexcept override

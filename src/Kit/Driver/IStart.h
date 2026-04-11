@@ -16,39 +16,40 @@ namespace Kit {
 ///
 namespace Driver {
 
-/** This abstract class defines the method for starting a driver.  The 
+/** This abstract class defines the method for starting a driver.  The
     KIT driver model requires:
-    
+
     - All drivers must be started at run time before they can be used, i.e. the
       driver implementation will fail all calls if the driver has not been
       started.
 
     - All drivers should be stopped (see IStop) when they are no longer needed
-      or when the application is performing a orderly shutdown.
+      or when the application is performing an orderly shutdown.
 
-    - Drivers are implemented in a way that allows them to be started and 
-      stopped multiple times during the life of the application. 
+    - Drivers are implemented in a way that allows them to be started and
+      stopped multiple times during the life of the application.
 
-    - Calling start() on already started driver shall no effect, i.e. no actions
-      taken other than returning true.
+    - Calling start() on an already started driver shall have no effect, i.e. no
+      actions are taken other than returning true.
 
-    - Calling stop() on a driver that is not started shall no effect, i.e. no actions
-      taken.
+    - Calling stop() on a driver that is not started shall have no effect, i.e. 
+      no actions are taken.
  */
 class IStart
 {
 public:
-    /** This method is use to start/initialize the driver at run time.  This
-        method is NOT thread-safe.  It is application responsibility to provide
-        any thread-safety that it needs with respect to starting (and stopping)
-        drivers.
+    /** This method is used to start/initialize the driver at run time.  This
+        method is NOT thread-safe.  It is the application's responsibility to 
+        provide any thread-safety that it needs with respect to starting (and
+        stopping) drivers.
 
-        The 'startArgs' optional argument that provides run time information to the
-        driver.  When used, the definition of what 'startArgs' is driver is specific
-        to the individual concrete driver implementations. 
-    
-        The method return true if the driver is successfully started; else false
-        is returned.
+        The optional 'startArgs' argument provides run-time information to the
+        driver.  When used, the definition of 'startArgs' is specific to the
+        individual concrete driver implementations, i.e. 'startArgs' is NOT
+        type safe.
+
+        The method returns true if the driver is successfully started; otherwise,
+        false is returned.
      */
     virtual bool start( void* startArgs = nullptr ) noexcept = 0;
 

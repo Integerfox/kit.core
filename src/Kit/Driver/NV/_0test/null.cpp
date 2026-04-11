@@ -41,7 +41,7 @@ TEST_CASE( "Null" )
 
     SECTION( "read/write")
     {
-        const size_t numBytes = 10;
+        constexpr size_t numBytes = 10;
         uint8_t srcData[numBytes];
         uint8_t dstData[numBytes];
         uint8_t expectedData[numBytes]; // The read() method always returns all zeros

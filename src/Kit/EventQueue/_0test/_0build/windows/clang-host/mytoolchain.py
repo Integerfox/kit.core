@@ -44,7 +44,7 @@ FINAL_OUTPUT_NAME = 'a.exe'
 
 
 #
-# For build config/variant: "win64"
+# For build config/variant: "win32"
 #
 
 # Construct option structs
