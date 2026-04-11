@@ -19,8 +19,13 @@ IF "/%1"=="/" GOTO :displaylist
 :: Configure compilers
 set NQBP_CC_SELECTED=no compiler selected
 for /f "tokens=1,2,3* delims=," %%i in (_compiler_.txt) do (
-    IF "/%%i"=="/%1" SET NQBP_CC_SELECTED=%%k & call compilers\%%j
+    IF "/%%i"=="/%1" (
+        SET NQBP_CC_SELECTED=%%k
+        call compilers\%%j
+        goto :compiler_set
+    )
 )
+:compiler_set
 IF "%NQBP_CC_SELECTED%"=="no compiler selected" GOTO :invalidselection
 exit /b 0
 
