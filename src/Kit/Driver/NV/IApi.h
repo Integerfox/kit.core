@@ -23,14 +23,15 @@ namespace NV {
 
 /** This class defines the interface for a platform independent Non-volatile
     storage driver. Only basic read/write operations are defined.  How the NV
-    storage is used is left the application and/or upper layers
+    storage is used is left up to the application and/or upper layers
 
-    The Interface assumes byte-level erasing/writing to persistent storage. In
-    addition, the interface provides the client with a page model, where an
-    individual page represents the maximum amount of data that can be written
-    in a single physical update of the NV storage.  That said - the client is NOT
-    required to write in page sized chunks. The page information is provided allow
-    clients to optimize (if desired) their writes to the NV storage.
+    The Interface assumes byte-level erasing/writing semantics with respect to
+    persistent storage. In addition, the interface provides the client with a
+    page model, where an individual page represents the maximum amount of data
+    that can be written in a single physical update of the NV storage.  That 
+    said - the client is NOT required to write in page sized chunks. The page
+    information is provided to allow clients to optimize (if desired) their
+    writes to the NV storage.
 
     The interface itself is NOT thread safe. It is the responsibility of
     the users/clients of the driver to handle any threading issues.
