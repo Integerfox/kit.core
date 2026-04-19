@@ -26,7 +26,7 @@ package "Itc::Synchronous" {
     }
 
     class Server {
-        + Server(myMbox : IQueue&, initialFlashRateMs : uint32_t)
+        + Server(myEventQueue : IQueue&, initialFlashRateMs : uint32_t)
         + request(msg : RateMsg&) : void
         + request(msg : OpenMsg&) : void
         + request(msg : CloseMsg&) : void

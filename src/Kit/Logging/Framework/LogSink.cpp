@@ -15,10 +15,10 @@
 using namespace Kit::Logging::Framework;
 
 //////////////////////////////
-LogSink::LogSink( Kit::EventQueue::IQueue&                                            myMbox,
+LogSink::LogSink( Kit::EventQueue::IQueue&                                            myEventQueue,
                   Kit::Container::RingBufferMP<Kit::Logging::Framework::EntryData_T>& incomingEntriesBuffer ) noexcept
-    : Kit::Itc::OpenCloseSync( myMbox )
-    , m_obElementCount( myMbox )
+    : Kit::Itc::OpenCloseSync( myEventQueue )
+    , m_obElementCount( myEventQueue )
     , m_logBuffer( incomingEntriesBuffer )
     , m_opened( false )
 {

@@ -39,7 +39,7 @@ namespace Framework {
     log buffer and discards the entries.  A child class is required to provide
     a meaningful implementation of the dispatchLogEntry() method.
 
-    FYI: The Kit::Persistent framework provides an alternate 'log sink' that
+    FYI: The Kit::Persistence framework provides an alternate 'log sink' that
          writes log entries to Non-volatile storage along with an a API to
          retrieve the log entries.
  */
@@ -47,7 +47,7 @@ class LogSink : public Kit::Itc::OpenCloseSync
 {
 public:
     /// Constructor
-    LogSink( Kit::EventQueue::IQueue&                                            myMbox,
+    LogSink( Kit::EventQueue::IQueue&                                            myEventQueue,
              Kit::Container::RingBufferMP<Kit::Logging::Framework::EntryData_T>& incomingEntriesBuffer ) noexcept;
 
 public:

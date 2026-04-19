@@ -54,12 +54,12 @@ class Client : public Kit::Itc::OpenCloseSync, public Kit::System::Timer
 {
 public:
     /// Constructor
-    Client( Kit::EventQueue::IQueue& myMbox,
+    Client( Kit::EventQueue::IQueue& myEventQueue,
             MpFoo&                   mpFoo )
-        : Kit::Itc::OpenCloseSync( myMbox )
-        , Kit::System::Timer( myMbox )
+        : Kit::Itc::OpenCloseSync( myEventQueue )
+        , Kit::System::Timer( myEventQueue )
         , m_mpFoo( mpFoo )
-        , m_obFoo( myMbox )
+        , m_obFoo( myEventQueue )
         , m_opened( false )
     {
         m_obFoo.setCallback<Client, &Client::triggerChanged>( this );

@@ -32,8 +32,8 @@ public:
     unsigned numProcessed;
 
 public:
-    MyUtt( Kit::EventQueue::IQueue& myMbox, Kit::Container::RingBufferMPAllocate<EntryData_T, NUM_LOG_ENTRIES+1>& logFifo )
-        : LogSink( myMbox, logFifo )
+    MyUtt( Kit::EventQueue::IQueue& myEventQueue, Kit::Container::RingBufferMPAllocate<EntryData_T, NUM_LOG_ENTRIES + 1>& logFifo )
+        : LogSink( myEventQueue, logFifo )
         , numProcessed( 0 )
     {
     }
@@ -65,8 +65,8 @@ static Kit::EventQueue::Server t1Mbox_;
 TEST_CASE( "LogSink" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-    Kit::Container::RingBufferMPAllocate<EntryData_T, (NUM_LOG_ENTRIES + 1)> logFifo( mp_logFifoCount_ );
-    MyUtt                                                                  uut( t1Mbox_, logFifo );
+    Kit::Container::RingBufferMPAllocate<EntryData_T, ( NUM_LOG_ENTRIES + 1 )> logFifo( mp_logFifoCount_ );
+    MyUtt                                                                      uut( t1Mbox_, logFifo );
     mp_logFifoCount_.setInvalid();
 
     Kit::System::Thread* t1 = Kit::System::Thread::create( t1Mbox_, "UUT" );
@@ -103,12 +103,12 @@ TEST_CASE( "LogSink" )
         uut.close();
     }
 
-        SECTION( "nominal" )
+    SECTION( "nominal" )
     {
         uut.open();
 
         EntryData_T entry;
-        for ( unsigned i = 0; i < OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE-1; i++ )
+        for ( unsigned i = 0; i < OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE - 1; i++ )
         {
             entry.m_timestamp        = i;
             entry.m_classificationId = i;
@@ -121,7 +121,7 @@ TEST_CASE( "LogSink" )
 
         // Allow time for the LogSink to process the entries
         Kit::System::sleep( 300 );
-        REQUIRE( uut.numProcessed == OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE-1 );
+        REQUIRE( uut.numProcessed == OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE - 1 );
 
         uut.close();
     }

@@ -78,12 +78,12 @@ different in purpose.
   a thread-safe FIFO.  It is the application's responsibility to consume the
   entries from the FIFO and record them in persistent storage.  The FIFO supports
   change notifications via a model point - see `Kit::Containers::RingBufferMP`.
-  - The log entry data structure inherits from the `Kit::Persistent::Payload`
+  - The log entry data structure inherits from the `Kit::Persistence::Payload`
     interface.  The Payload interface defines two methods to serialize and
     deserialize the log entry data structure.  While this introduces a dependency
-    on the Kit::Persistent namespace - the Payload interface definition has no
+    on the Kit::Persistence namespace - the Payload interface definition has no
     other dependencies, i.e. the application is NOT required to use the
-    Kit::Persistent namespace for storing the log entry to persistent media.
+    Kit::Persistence namespace for storing the log entry to persistent media.
 
 - The log entry FIFO can overflow if the application is not storing log entries
   faster than the application is generating entries. When this happens, the
