@@ -31,9 +31,14 @@ void Fletcher16::reset( void ) noexcept
 ///////////////////////////////////////
 void Fletcher16::accumulate( const void* bytes, unsigned numbytes ) noexcept
 {
-    unsigned i;
+    // Skip if no data or bad pointer
+    if ( bytes == nullptr || numbytes == 0 )
+    {
+        return;
+    }
+
     uint8_t* ptr = static_cast<uint8_t*>( const_cast<void*>( bytes ) );
-    for ( i = 0; i < numbytes; i++, ptr++ )
+    for ( unsigned i = 0; i < numbytes; i++, ptr++ )
     {
         m_sum1 = ( (uint16_t)m_sum1 + (uint16_t)( *ptr ) ) % 255;
         m_sum2 = ( (uint16_t)m_sum2 + (uint16_t)m_sum1 ) % 255;
@@ -42,7 +47,7 @@ void Fletcher16::accumulate( const void* bytes, unsigned numbytes ) noexcept
 
 bool Fletcher16::finalize( void* destBuffer, unsigned destBufferSize ) noexcept
 {
-    if ( destBufferSize < sizeof( m_sum1 ) + sizeof( m_sum2 ) )
+    if ( destBuffer == nullptr || destBufferSize < sizeof( m_sum1 ) + sizeof( m_sum2 ) )
     {
         return false;
     }

@@ -69,10 +69,15 @@ void Crc16CcittFast::reset( void ) noexcept
 ///////////////////////////////////////
 void Crc16CcittFast::accumulate( const void* bytes, unsigned numbytes ) noexcept
 {
-    unsigned i;
+    // Skip if no data or bad pointer
+    if ( bytes == nullptr || numbytes == 0 )
+    {
+        return;
+    }
+
     uint8_t* ptr = static_cast<uint8_t*>(const_cast<void*>(bytes));
 
-    for ( i = 0; i < numbytes; i++, ptr++ )
+    for ( unsigned i = 0; i < numbytes; i++, ptr++ )
     {
         m_crc = table_[( m_crc >> 8 ^ *ptr ) & 0xffU] ^ ( m_crc << 8 );
     }
@@ -80,7 +85,7 @@ void Crc16CcittFast::accumulate( const void* bytes, unsigned numbytes ) noexcept
 
 bool Crc16CcittFast::finalize( void* destBuffer, unsigned destBufferSize ) noexcept
 {
-    if ( destBufferSize < sizeof( m_crc ) )
+    if ( destBuffer == nullptr || destBufferSize < sizeof( m_crc ) )
     {
         return false;
     }

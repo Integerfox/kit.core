@@ -36,7 +36,7 @@ public:
     /// See Kit::Checksum::IEdc
     void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept override;
 
-    /// See Kit::Checksum::IEdc
+    /// See Kit::Checksum::IEdc. The checksum is Little Endian in the 'destBuffer'
     bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept override;
 
     /// See Kit::Checksum::IEdc
@@ -45,7 +45,7 @@ public:
     /// See Kit::Checksum::IEdc
     unsigned getEdcSize() const noexcept override { return sizeof( m_sum1 ) + sizeof( m_sum2 ); }
 
-    protected:
+protected:
     /// current sum
     uint8_t m_sum1;
 
@@ -54,6 +54,6 @@ public:
 };
 
 
-};  // end namespaces
-};
+}       // end namespaces
+}
 #endif  // end header latch

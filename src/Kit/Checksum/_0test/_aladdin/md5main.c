@@ -40,7 +40,7 @@
   2002-04-13 lpd Splits off main program into a separate file, md5main.c.
  */
 
-#include "Cpl/Checksum/md5_aladdin_.h" // JTT 5/28/2015: was: #include "md5.h"
+#include "Kit/Checksum/md5_aladdin_.h" // JTT 5/28/2015: was: #include "md5.h"
 #include <math.h>
 #include <stdio.h>
 #include <string.h>

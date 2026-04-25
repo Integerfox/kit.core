@@ -41,7 +41,7 @@ public:
     /// See Kit::Checksum::IEdc
     void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept override;
 
-    /// See Kit::Checksum::IEdc
+    /// See Kit::Checksum::IEdc. The checksum is Big Endian in the 'destBuffer'
     bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept override;
 
     /// See Kit::Checksum::IEdc

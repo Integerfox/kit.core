@@ -40,7 +40,7 @@ public:
     ///  Call the method for every byte being hash'd
     virtual void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept = 0;
 
-    /** Call this method to finalize the Hash.  The calculated Hash value is 
+    /** Call this method to finalize the Hash.  The calculated Hash value is
         returned via the 'destBuffer' parameter. The byte ordering of the copied
         Hash value is defined by the concrete child class.
 
@@ -56,10 +56,14 @@ public:
 
 
 public:
+    /// Retuns the size, in bytes, of the Hash's digest.
+    virtual unsigned getDigestSize() const noexcept = 0;
+
+public:
     /// Virtual destructor
     virtual ~IHash() = default;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch
