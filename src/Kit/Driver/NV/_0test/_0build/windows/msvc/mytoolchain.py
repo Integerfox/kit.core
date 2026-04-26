@@ -36,34 +36,30 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'b.exe'
+FINAL_OUTPUT_NAME = 'a.exe'
 
 # Using Catch2 
-(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'windows/clang-host', 'a' )
-
+(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'windows/msvc', 'lib' )
 
 
 #
-# For build config/variant: "win32"
+# For build config/variant: "win32" 
 #
 
-# Construct option structs
-base_win32      = BuildValues()
-optimized_win32 = BuildValues()
-debug_win32     = BuildValues()
+# Set project specific 'base' (i.e always used) options. Note: Catch2 requires C++17 or newer
+base_win32           = BuildValues()        # Do NOT comment out this line
+base_win32.cflags    = '/W3 /WX /EHsc '  # /EHsc enables exceptions /std:c++17
+base_win32.firstobjs = unit_test_objects
+base_win32.inc       = catch2_inc
+base_win32.linklibs  = catch2_lib
 
-# Set 'base' options
-base_win32.cflags     = '-m32 -std=c++17 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
-base_win32.inc        = catch2_inc
-base_win32.linkflags  = '-m32'
-base_win32.firstobjs  = unit_test_objects
-base_win32.linklibs   = f'{catch2_lib}'
+# Set project specific 'optimized' options
+optimized_win32          = BuildValues()    # Do NOT comment out this line
+optimized_win32.cflags   = '/O2'
 
-# Set 'Optimized' options
-optimized_win32.cflags    = '-O3'
-
-# Set 'debug' options
-
+# Set project specific 'debug' options
+debug_win32          = BuildValues()       # Do NOT comment out this line
+debug_win32.cflags   = '/D "KIT_DEBUG"'
 
 
 #-------------------------------------------------
@@ -71,27 +67,25 @@ optimized_win32.cflags    = '-O3'
 # ONE build configuration/variant 
 #-------------------------------------------------
 
-# Add new dictionary of for new build configuration options
-win32_opts = { 'user_base':base_win32,
-               'user_optimized':optimized_win32,
-               'user_debug':debug_win32
-             }
-
+win32_build_opts = { 'user_base':base_win32, 
+                     'user_optimized':optimized_win32, 
+                     'user_debug':debug_win32
+                   }
+               
 # Add new variant option dictionary to # dictionary of 
 # build variants
-build_variants = { 'win32':win32_opts,
-                 }
-
+build_variants = { 'win32':win32_build_opts,
+                 }    
 
 #---------------------------------------------------
 # END EDITS/CUSTOMIZATIONS
 #===================================================
 
-# Select Module that contains the desired toolchain
-from nqbplib.toolchains.windows.clang_msvc.console_exe import ToolChain
 
+# Select Module that contains the desired toolchain
+from nqbplib.toolchains.windows.vc12.console_exe import ToolChain
 
 # Function that instantiates an instance of the toolchain
 def create():
-    tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, "win32" )
+    tc = ToolChain( FINAL_OUTPUT_NAME, prjdir, build_variants, 'win32' )
     return tc 

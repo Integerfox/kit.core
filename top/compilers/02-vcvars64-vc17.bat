@@ -30,8 +30,7 @@ if "/%_CC_VER%"=="/" (
 )
 :: Display the version info
 for /f "tokens=7 delims= " %%a in ('cl 2^>^&1 ^| findstr /R /C:"Version"') do set _CC_VER=%%a
-SET NAME=%NAME%. Ver:%_CC_VER%
-echo:Environment set: %NAME%
+echo:Environment set: Visual Studio VC17 x64. Ver:%_CC_VER%
 
 
 
