@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 18:43:00</td>
+            <td class="headerValue">2026-04-26 19:00:39</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -190,7 +190,7 @@
 <span id="L128"><span class="lineNum">     128</span>                 :             : /// Internal method.  Do not call directly - always use the macros above</span>
 <span id="L129"><span class="lineNum">     129</span>                 :             : inline uint16_t endianBswap16( uint16_t x )</span>
 <span id="L130"><span class="lineNum">     130</span>                 :             : {</span>
-<span id="L131"><span class="lineNum">     131</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">           6 :     return ( x &lt;&lt; 8 ) | ( x &gt;&gt; 8 );</span></span>
+<span id="L131"><span class="lineNum">     131</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">           7 :     return ( x &lt;&lt; 8 ) | ( x &gt;&gt; 8 );</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
 <span class="lineNum">        </span>       <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span>]
 <span id="L132"><span class="lineNum">     132</span>                 :             : }</span>
@@ -198,7 +198,7 @@
 <span id="L134"><span class="lineNum">     134</span>                 :             : /// Internal method.  Do not call directly - always use the macros above</span>
 <span id="L135"><span class="lineNum">     135</span>                 :             : inline uint32_t endianBswap32( uint32_t x )</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             : {</span>
-<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          26 :     return ( x &gt;&gt; 24 ) | ( x &gt;&gt; 8 &amp; 0xff00 ) | ( x &lt;&lt; 8 &amp; 0xff0000 ) | ( x &lt;&lt; 24 );</span></span>
+<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          27 :     return ( x &gt;&gt; 24 ) | ( x &gt;&gt; 8 &amp; 0xff00 ) | ( x &lt;&lt; 8 &amp; 0xff0000 ) | ( x &lt;&lt; 24 );</span></span>
 <span id="L138"><span class="lineNum">     138</span>                 :             : }</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             : </span>
 <span id="L140"><span class="lineNum">     140</span>                 :             : /// Internal method. Do not call directly - always use the macros above</span>

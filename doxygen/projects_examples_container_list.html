@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 299-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 300-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -49,7 +49,7 @@ $(function() {
 <p>The linked lists are type safe that can contain <b>any</b> class type - as long as the class's inheritance tree includes <code>ListItem</code> for a singly linked list (<code>SList&lt;&gt;</code>) or <code>ExtendedListItem</code> for a doubly linked list (<code>DList&lt;&gt;</code>).</p>
 <p>The example application only uses a doubly linked list. The semantic of a doubly and singly linked lists are the same (i.e. same set of methods). The different between the two list types - is that the doubly linked list is more run-time efficient with respect to removing and inserting items from/in the 'middle' of the list than singly linked list. This efficiency comes at the expense of more RAM usage <b>per</b> item.</p>
 <p>The example application contains a <code>Flasher</code> class that accepts a <code>DList&lt;Period&gt;</code> reference where the list contains N on/off periods that is used to flash a LED.</p>
-<h1><a class="anchor" id="autotoc_md127"></a>
+<h1><a class="anchor" id="autotoc_md129"></a>
 Details, Constraints, Requirements</h1>
 <ul>
 <li>The linked lists are type safe that can contain <b>any</b> class type - as long as the class's inheritance tree includes <code>ListItem</code> for a singly linked list (<code>SList&lt;&gt;</code>) or <code>ExtendedListItem</code> for a doubly linked list (<code>DList&lt;&gt;</code>).</li>
@@ -59,18 +59,18 @@ Details, Constraints, Requirements</h1>
 <li>A class that inherits from <code>ListItem</code> can only be contained within a <code>SList&lt;&gt;</code>. A class that inherits from <code>ExtendedListItem</code> can be contained either in a <code>SList&lt;&gt;</code> or <code>DList&lt;&gt;</code>.</li>
 <li>The link list are <b>not</b> inherently thread safe. If thread safety is needed the recommendation is to create a <em>wrapper</em> class to provide the necessary thread safe. See the <a href="https://github.com/Integerfox/kit.core/blob/main/src/Kit/Container/RingBufferMT.h"><code>RingBufferMT</code></a> class as an example of implementing a thread-safe wrapper.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md128"></a>
+<h1><a class="anchor" id="autotoc_md130"></a>
 Class Diagram</h1>
 <div class="image">
 <img src="classDiagram_examplescontainerlists.png" alt=""/>
 <div class="caption">
 Transaction Example Class Diagram</div></div>
-    <h1><a class="anchor" id="autotoc_md129"></a>
+    <h1><a class="anchor" id="autotoc_md131"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="namespace_kit_1_1_container.html">Kit::Container namespace documentation</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md130"></a>
+<h1><a class="anchor" id="autotoc_md132"></a>
 Implementation</h1>
 <ul>
 <li>Root source directory: <a href="https://github.com/Integerfox/kit.core/blob/main/projects/examples/Container/Lists">projects/examples/Container/Lists</a></li>
@@ -85,7 +85,7 @@ Implementation</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 26 2026 18:38:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Apr 26 2026 18:55:51 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

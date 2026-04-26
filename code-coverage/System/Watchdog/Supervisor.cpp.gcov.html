@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 18:43:00</td>
+            <td class="headerValue">2026-04-26 19:00:39</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">71.4&nbsp;%</td>
@@ -127,17 +127,17 @@
 <span id="L65"><span class="lineNum">      65</span>                 :             :         // Walk the list of monitored threads</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :         WatchedThread*                thread = m_watchedThreads.first();</span>
-<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 288 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 247 times"> + </span>]:<span class="tlaGNC">         535 :         while ( thread )</span></span>
+<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 289 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 247 times"> + </span>]:<span class="tlaGNC">         536 :         while ( thread )</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :         {</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :             // Check for an expired thread timer</span>
-<span id="L71"><span class="lineNum">      71</span>         [<span class="tlaGBC" title="Branch 0 was taken 39 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 249 times"> + </span>]:<span class="tlaGNC">         288 :             if ( thread-&gt;m_currentCountMs &lt;= delta )</span></span>
+<span id="L71"><span class="lineNum">      71</span>         [<span class="tlaGBC" title="Branch 0 was taken 39 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 250 times"> + </span>]:<span class="tlaGNC">         289 :             if ( thread-&gt;m_currentCountMs &lt;= delta )</span></span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :             {</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :                 Supervisor::tripWdog();  // EXPIRED</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :                 return;                  // Never executes because the tripWdog() method never returns, but it simplifies testing</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :             }</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : </span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :             // Decrement the thread's timer and get the next thread in the list</span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">         249 :             thread-&gt;m_currentCountMs -= delta;</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">         250 :             thread-&gt;m_currentCountMs -= delta;</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :             thread                    = m_watchedThreads.next( *thread );</span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :         }</span>
 <span id="L81"><span class="lineNum">      81</span>                 :             : </span>

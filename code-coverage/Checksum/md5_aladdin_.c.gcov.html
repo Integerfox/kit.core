@@ -1,0 +1,457 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Checksum/md5_aladdin_.c</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Checksum</a> - md5_aladdin_.c</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">99.1&nbsp;%</td>
+            <td class="headerCovTableEntry">107</td>
+            <td class="headerCovTableEntry">106</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">86.4&nbsp;%</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntry">19</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : /*</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             :   Copyright (C) 1999, 2000, 2002 Aladdin Enterprises.  All rights reserved.</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : </span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :   This software is provided 'as-is', without any express or implied</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :   warranty.  In no event will the authors be held liable for any damages</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :   arising from the use of this software.</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             : </span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :   Permission is granted to anyone to use this software for any purpose,</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :   including commercial applications, and to alter it and redistribute it</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :   freely, subject to the following restrictions:</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : </span>
+<span id="L12"><span class="lineNum">      12</span>                 :             :   1. The origin of this software must not be misrepresented; you must not</span>
+<span id="L13"><span class="lineNum">      13</span>                 :             :      claim that you wrote the original software. If you use this software</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             :      in a product, an acknowledgment in the product documentation would be</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             :      appreciated but is not required.</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             :   2. Altered source versions must be plainly marked as such, and must not be</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             :      misrepresented as being the original software.</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             :   3. This notice may not be removed or altered from any source distribution.</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : </span>
+<span id="L20"><span class="lineNum">      20</span>                 :             :   L. Peter Deutsch</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             :   ghost@aladdin.com</span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : </span>
+<span id="L23"><span class="lineNum">      23</span>                 :             :  */</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             : /* $Id: md5.c,v 1.6 2002/04/13 19:20:28 lpd Exp $ */</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             : /*</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :   Independent implementation of MD5 (RFC 1321).</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :   This code implements the MD5 Algorithm defined in RFC 1321, whose</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             :   text is available at</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :         http://www.ietf.org/rfc/rfc1321.txt</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             :   The code is derived from the text of the RFC, including the test suite</span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :   (section A.5) but excluding the rest of Appendix A.  It does not include</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :   any code or documentation that is identified in the RFC as being</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :   copyrighted.</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             : </span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :   The original and principal author of md5.c is L. Peter Deutsch</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :   &lt;ghost@aladdin.com&gt;.  Other authors are noted in the change history</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :   that follows (in reverse chronological order):</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             : </span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :   2002-04-13 lpd Clarified derivation from RFC 1321; now handles byte order</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :         either statically or dynamically; added missing #include &lt;string.h&gt;</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :         in library.</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :   2002-03-11 lpd Corrected argument list for main(), and added int return</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :         type, in test program and T value program.</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             :   2002-02-21 lpd Added missing #include &lt;stdio.h&gt; in test program.</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :   2000-07-03 lpd Patched to eliminate warnings about &quot;constant is</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :         unsigned in ANSI C, signed in traditional&quot;; made test program</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :         self-checking.</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :   1999-11-04 lpd Edited comments slightly for automatic TOC extraction.</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :   1999-10-18 lpd Fixed typo in header comment (ansi2knr rather than md5).</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :   1999-05-03 lpd Original version.</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :  */</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : </span>
+<span id="L54"><span class="lineNum">      54</span>                 :             : #include &quot;md5_aladdin_.h&quot; // JTT 5/28/2015: was: #include &quot;md5.h&quot;</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             : #include &lt;string.h&gt;</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : </span>
+<span id="L57"><span class="lineNum">      57</span>                 :             : #undef BYTE_ORDER       /* 1 = big-endian, -1 = little-endian, 0 = unknown */</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : #ifdef ARCH_IS_BIG_ENDIAN</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             : #  define BYTE_ORDER (ARCH_IS_BIG_ENDIAN ? 1 : -1)</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             : #else</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             : #  define BYTE_ORDER 0</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             : #endif</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             : </span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : #define T_MASK ((md5_word_t)~0)</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             : #define T1 /* 0xd76aa478 */ (T_MASK ^ 0x28955b87)</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             : #define T2 /* 0xe8c7b756 */ (T_MASK ^ 0x173848a9)</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             : #define T3    0x242070db</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             : #define T4 /* 0xc1bdceee */ (T_MASK ^ 0x3e423111)</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             : #define T5 /* 0xf57c0faf */ (T_MASK ^ 0x0a83f050)</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             : #define T6    0x4787c62a</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             : #define T7 /* 0xa8304613 */ (T_MASK ^ 0x57cfb9ec)</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             : #define T8 /* 0xfd469501 */ (T_MASK ^ 0x02b96afe)</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             : #define T9    0x698098d8</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             : #define T10 /* 0x8b44f7af */ (T_MASK ^ 0x74bb0850)</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             : #define T11 /* 0xffff5bb1 */ (T_MASK ^ 0x0000a44e)</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             : #define T12 /* 0x895cd7be */ (T_MASK ^ 0x76a32841)</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             : #define T13    0x6b901122</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             : #define T14 /* 0xfd987193 */ (T_MASK ^ 0x02678e6c)</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             : #define T15 /* 0xa679438e */ (T_MASK ^ 0x5986bc71)</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             : #define T16    0x49b40821</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             : #define T17 /* 0xf61e2562 */ (T_MASK ^ 0x09e1da9d)</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             : #define T18 /* 0xc040b340 */ (T_MASK ^ 0x3fbf4cbf)</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             : #define T19    0x265e5a51</span>
+<span id="L84"><span class="lineNum">      84</span>                 :             : #define T20 /* 0xe9b6c7aa */ (T_MASK ^ 0x16493855)</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             : #define T21 /* 0xd62f105d */ (T_MASK ^ 0x29d0efa2)</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             : #define T22    0x02441453</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             : #define T23 /* 0xd8a1e681 */ (T_MASK ^ 0x275e197e)</span>
+<span id="L88"><span class="lineNum">      88</span>                 :             : #define T24 /* 0xe7d3fbc8 */ (T_MASK ^ 0x182c0437)</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             : #define T25    0x21e1cde6</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             : #define T26 /* 0xc33707d6 */ (T_MASK ^ 0x3cc8f829)</span>
+<span id="L91"><span class="lineNum">      91</span>                 :             : #define T27 /* 0xf4d50d87 */ (T_MASK ^ 0x0b2af278)</span>
+<span id="L92"><span class="lineNum">      92</span>                 :             : #define T28    0x455a14ed</span>
+<span id="L93"><span class="lineNum">      93</span>                 :             : #define T29 /* 0xa9e3e905 */ (T_MASK ^ 0x561c16fa)</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             : #define T30 /* 0xfcefa3f8 */ (T_MASK ^ 0x03105c07)</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             : #define T31    0x676f02d9</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             : #define T32 /* 0x8d2a4c8a */ (T_MASK ^ 0x72d5b375)</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             : #define T33 /* 0xfffa3942 */ (T_MASK ^ 0x0005c6bd)</span>
+<span id="L98"><span class="lineNum">      98</span>                 :             : #define T34 /* 0x8771f681 */ (T_MASK ^ 0x788e097e)</span>
+<span id="L99"><span class="lineNum">      99</span>                 :             : #define T35    0x6d9d6122</span>
+<span id="L100"><span class="lineNum">     100</span>                 :             : #define T36 /* 0xfde5380c */ (T_MASK ^ 0x021ac7f3)</span>
+<span id="L101"><span class="lineNum">     101</span>                 :             : #define T37 /* 0xa4beea44 */ (T_MASK ^ 0x5b4115bb)</span>
+<span id="L102"><span class="lineNum">     102</span>                 :             : #define T38    0x4bdecfa9</span>
+<span id="L103"><span class="lineNum">     103</span>                 :             : #define T39 /* 0xf6bb4b60 */ (T_MASK ^ 0x0944b49f)</span>
+<span id="L104"><span class="lineNum">     104</span>                 :             : #define T40 /* 0xbebfbc70 */ (T_MASK ^ 0x4140438f)</span>
+<span id="L105"><span class="lineNum">     105</span>                 :             : #define T41    0x289b7ec6</span>
+<span id="L106"><span class="lineNum">     106</span>                 :             : #define T42 /* 0xeaa127fa */ (T_MASK ^ 0x155ed805)</span>
+<span id="L107"><span class="lineNum">     107</span>                 :             : #define T43 /* 0xd4ef3085 */ (T_MASK ^ 0x2b10cf7a)</span>
+<span id="L108"><span class="lineNum">     108</span>                 :             : #define T44    0x04881d05</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             : #define T45 /* 0xd9d4d039 */ (T_MASK ^ 0x262b2fc6)</span>
+<span id="L110"><span class="lineNum">     110</span>                 :             : #define T46 /* 0xe6db99e5 */ (T_MASK ^ 0x1924661a)</span>
+<span id="L111"><span class="lineNum">     111</span>                 :             : #define T47    0x1fa27cf8</span>
+<span id="L112"><span class="lineNum">     112</span>                 :             : #define T48 /* 0xc4ac5665 */ (T_MASK ^ 0x3b53a99a)</span>
+<span id="L113"><span class="lineNum">     113</span>                 :             : #define T49 /* 0xf4292244 */ (T_MASK ^ 0x0bd6ddbb)</span>
+<span id="L114"><span class="lineNum">     114</span>                 :             : #define T50    0x432aff97</span>
+<span id="L115"><span class="lineNum">     115</span>                 :             : #define T51 /* 0xab9423a7 */ (T_MASK ^ 0x546bdc58)</span>
+<span id="L116"><span class="lineNum">     116</span>                 :             : #define T52 /* 0xfc93a039 */ (T_MASK ^ 0x036c5fc6)</span>
+<span id="L117"><span class="lineNum">     117</span>                 :             : #define T53    0x655b59c3</span>
+<span id="L118"><span class="lineNum">     118</span>                 :             : #define T54 /* 0x8f0ccc92 */ (T_MASK ^ 0x70f3336d)</span>
+<span id="L119"><span class="lineNum">     119</span>                 :             : #define T55 /* 0xffeff47d */ (T_MASK ^ 0x00100b82)</span>
+<span id="L120"><span class="lineNum">     120</span>                 :             : #define T56 /* 0x85845dd1 */ (T_MASK ^ 0x7a7ba22e)</span>
+<span id="L121"><span class="lineNum">     121</span>                 :             : #define T57    0x6fa87e4f</span>
+<span id="L122"><span class="lineNum">     122</span>                 :             : #define T58 /* 0xfe2ce6e0 */ (T_MASK ^ 0x01d3191f)</span>
+<span id="L123"><span class="lineNum">     123</span>                 :             : #define T59 /* 0xa3014314 */ (T_MASK ^ 0x5cfebceb)</span>
+<span id="L124"><span class="lineNum">     124</span>                 :             : #define T60    0x4e0811a1</span>
+<span id="L125"><span class="lineNum">     125</span>                 :             : #define T61 /* 0xf7537e82 */ (T_MASK ^ 0x08ac817d)</span>
+<span id="L126"><span class="lineNum">     126</span>                 :             : #define T62 /* 0xbd3af235 */ (T_MASK ^ 0x42c50dca)</span>
+<span id="L127"><span class="lineNum">     127</span>                 :             : #define T63    0x2ad7d2bb</span>
+<span id="L128"><span class="lineNum">     128</span>                 :             : #define T64 /* 0xeb86d391 */ (T_MASK ^ 0x14792c6e)</span>
+<span id="L129"><span class="lineNum">     129</span>                 :             : </span>
+<span id="L130"><span class="lineNum">     130</span>                 :             : </span>
+<span id="L131"><span class="lineNum">     131</span>                 :             : static void</span>
+<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC tlaBgGNC">           9 : md5_process(md5_state_t *pms, const md5_byte_t *data /*[64]*/)</span></span>
+<span id="L133"><span class="lineNum">     133</span>                 :             : {</span>
+<span id="L134"><span class="lineNum">     134</span>                 :             :     md5_word_t</span>
+<span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">           9 :         a = pms-&gt;abcd[0], b = pms-&gt;abcd[1],</span></span>
+<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">           9 :         c = pms-&gt;abcd[2], d = pms-&gt;abcd[3];</span></span>
+<span id="L137"><span class="lineNum">     137</span>                 :             :     md5_word_t t;</span>
+<span id="L138"><span class="lineNum">     138</span>                 :             : #if BYTE_ORDER &gt; 0</span>
+<span id="L139"><span class="lineNum">     139</span>                 :             :     /* Define storage only for big-endian CPUs. */</span>
+<span id="L140"><span class="lineNum">     140</span>                 :             :     md5_word_t X[16];</span>
+<span id="L141"><span class="lineNum">     141</span>                 :             : #else</span>
+<span id="L142"><span class="lineNum">     142</span>                 :             :     /* Define storage for little-endian or both types of CPUs. */</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             :     md5_word_t xbuf[16];</span>
+<span id="L144"><span class="lineNum">     144</span>                 :             :     const md5_word_t *X;</span>
+<span id="L145"><span class="lineNum">     145</span>                 :             : #endif</span>
+<span id="L146"><span class="lineNum">     146</span>                 :             : </span>
+<span id="L147"><span class="lineNum">     147</span>                 :             :     {</span>
+<span id="L148"><span class="lineNum">     148</span>                 :             : #if BYTE_ORDER == 0</span>
+<span id="L149"><span class="lineNum">     149</span>                 :             :         /*</span>
+<span id="L150"><span class="lineNum">     150</span>                 :             :          * Determine dynamically whether this is a big-endian or</span>
+<span id="L151"><span class="lineNum">     151</span>                 :             :          * little-endian machine, since we can use a more efficient</span>
+<span id="L152"><span class="lineNum">     152</span>                 :             :          * algorithm on the latter.</span>
+<span id="L153"><span class="lineNum">     153</span>                 :             :          */</span>
+<span id="L154"><span class="lineNum">     154</span>                 :             :         static const int w = 1;</span>
+<span id="L155"><span class="lineNum">     155</span>                 :             : </span>
+<span id="L156"><span class="lineNum">     156</span>                 :             :         if (*((const md5_byte_t *)&amp;w)) /* dynamic little-endian */</span>
+<span id="L157"><span class="lineNum">     157</span>                 :             : #endif</span>
+<span id="L158"><span class="lineNum">     158</span>                 :             : #if BYTE_ORDER &lt;= 0          /* little-endian */</span>
+<span id="L159"><span class="lineNum">     159</span>                 :             :         {</span>
+<span id="L160"><span class="lineNum">     160</span>                 :             :             /*</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             :              * On little-endian machines, we can process properly aligned</span>
+<span id="L162"><span class="lineNum">     162</span>                 :             :              * data without copying it.</span>
+<span id="L163"><span class="lineNum">     163</span>                 :             :              */</span>
+<span id="L164"><span class="lineNum">     164</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 9 times"> + </span>]:<span class="tlaGNC">           9 :             if (!((data - (const md5_byte_t *)0) &amp; 3)) {</span></span>
+<span id="L165"><span class="lineNum">     165</span>                 :             :                 /* data are properly aligned */</span>
+<span id="L166"><span class="lineNum">     166</span>                 :             :                 X = (const md5_word_t *)data;</span>
+<span id="L167"><span class="lineNum">     167</span>                 :             :             } else {</span>
+<span id="L168"><span class="lineNum">     168</span>                 :             :                 /* not aligned */</span>
+<span id="L169"><span class="lineNum">     169</span>                 :             :                 memcpy(xbuf, data, 64);</span>
+<span id="L170"><span class="lineNum">     170</span>                 :             :                 X = xbuf;</span>
+<span id="L171"><span class="lineNum">     171</span>                 :             :             }</span>
+<span id="L172"><span class="lineNum">     172</span>                 :             :         }</span>
+<span id="L173"><span class="lineNum">     173</span>                 :             : #endif</span>
+<span id="L174"><span class="lineNum">     174</span>                 :             : #if BYTE_ORDER == 0</span>
+<span id="L175"><span class="lineNum">     175</span>                 :             :         else                    /* dynamic big-endian */</span>
+<span id="L176"><span class="lineNum">     176</span>                 :             : #endif</span>
+<span id="L177"><span class="lineNum">     177</span>                 :             : #if BYTE_ORDER &gt;= 0          /* big-endian */</span>
+<span id="L178"><span class="lineNum">     178</span>                 :             :         {</span>
+<span id="L179"><span class="lineNum">     179</span>                 :             :             /*</span>
+<span id="L180"><span class="lineNum">     180</span>                 :             :              * On big-endian machines, we must arrange the bytes in the</span>
+<span id="L181"><span class="lineNum">     181</span>                 :             :              * right order.</span>
+<span id="L182"><span class="lineNum">     182</span>                 :             :              */</span>
+<span id="L183"><span class="lineNum">     183</span>                 :             :             const md5_byte_t *xp = data;</span>
+<span id="L184"><span class="lineNum">     184</span>                 :             :             int i;</span>
+<span id="L185"><span class="lineNum">     185</span>                 :             : </span>
+<span id="L186"><span class="lineNum">     186</span>                 :             : #  if BYTE_ORDER == 0</span>
+<span id="L187"><span class="lineNum">     187</span>                 :             :             X = xbuf;           /* (dynamic only) */</span>
+<span id="L188"><span class="lineNum">     188</span>                 :             : #  else</span>
+<span id="L189"><span class="lineNum">     189</span>                 :             : #    define xbuf X              /* (static only) */</span>
+<span id="L190"><span class="lineNum">     190</span>                 :             : #  endif</span>
+<span id="L191"><span class="lineNum">     191</span>                 :             :             for (i = 0; i &lt; 16; ++i, xp += 4)</span>
+<span id="L192"><span class="lineNum">     192</span>                 :             :                 xbuf[i] = xp[0] + (xp[1] &lt;&lt; 8) + (xp[2] &lt;&lt; 16) + (xp[3] &lt;&lt; 24);</span>
+<span id="L193"><span class="lineNum">     193</span>                 :             :         }</span>
+<span id="L194"><span class="lineNum">     194</span>                 :             : #endif</span>
+<span id="L195"><span class="lineNum">     195</span>                 :             :     }</span>
+<span id="L196"><span class="lineNum">     196</span>                 :             : </span>
+<span id="L197"><span class="lineNum">     197</span>                 :             : #define ROTATE_LEFT(x, n) (((x) &lt;&lt; (n)) | ((x) &gt;&gt; (32 - (n))))</span>
+<span id="L198"><span class="lineNum">     198</span>                 :             : </span>
+<span id="L199"><span class="lineNum">     199</span>                 :             :     /* Round 1. */</span>
+<span id="L200"><span class="lineNum">     200</span>                 :             :     /* Let [abcd k s i] denote the operation</span>
+<span id="L201"><span class="lineNum">     201</span>                 :             :        a = b + ((a + F(b,c,d) + X[k] + T[i]) &lt;&lt;&lt; s). */</span>
+<span id="L202"><span class="lineNum">     202</span>                 :             : #define F(x, y, z) (((x) &amp; (y)) | (~(x) &amp; (z)))</span>
+<span id="L203"><span class="lineNum">     203</span>                 :             : #define SET(a, b, c, d, k, s, Ti)\</span>
+<span id="L204"><span class="lineNum">     204</span>                 :             :   t = a + F(b,c,d) + X[k] + Ti;\</span>
+<span id="L205"><span class="lineNum">     205</span>                 :             :   a = ROTATE_LEFT(t, s) + b</span>
+<span id="L206"><span class="lineNum">     206</span>                 :             :     /* Do the following 16 operations. */</span>
+<span id="L207"><span class="lineNum">     207</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  0,  7,  T1);</span></span>
+<span id="L208"><span class="lineNum">     208</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  1, 12,  T2);</span></span>
+<span id="L209"><span class="lineNum">     209</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b,  2, 17,  T3);</span></span>
+<span id="L210"><span class="lineNum">     210</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  3, 22,  T4);</span></span>
+<span id="L211"><span class="lineNum">     211</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  4,  7,  T5);</span></span>
+<span id="L212"><span class="lineNum">     212</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  5, 12,  T6);</span></span>
+<span id="L213"><span class="lineNum">     213</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b,  6, 17,  T7);</span></span>
+<span id="L214"><span class="lineNum">     214</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  7, 22,  T8);</span></span>
+<span id="L215"><span class="lineNum">     215</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  8,  7,  T9);</span></span>
+<span id="L216"><span class="lineNum">     216</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  9, 12, T10);</span></span>
+<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b, 10, 17, T11);</span></span>
+<span id="L218"><span class="lineNum">     218</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a, 11, 22, T12);</span></span>
+<span id="L219"><span class="lineNum">     219</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d, 12,  7, T13);</span></span>
+<span id="L220"><span class="lineNum">     220</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c, 13, 12, T14);</span></span>
+<span id="L221"><span class="lineNum">     221</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b, 14, 17, T15);</span></span>
+<span id="L222"><span class="lineNum">     222</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a, 15, 22, T16);</span></span>
+<span id="L223"><span class="lineNum">     223</span>                 :             : #undef SET</span>
+<span id="L224"><span class="lineNum">     224</span>                 :             : </span>
+<span id="L225"><span class="lineNum">     225</span>                 :             :      /* Round 2. */</span>
+<span id="L226"><span class="lineNum">     226</span>                 :             :      /* Let [abcd k s i] denote the operation</span>
+<span id="L227"><span class="lineNum">     227</span>                 :             :           a = b + ((a + G(b,c,d) + X[k] + T[i]) &lt;&lt;&lt; s). */</span>
+<span id="L228"><span class="lineNum">     228</span>                 :             : #define G(x, y, z) (((x) &amp; (z)) | ((y) &amp; ~(z)))</span>
+<span id="L229"><span class="lineNum">     229</span>                 :             : #define SET(a, b, c, d, k, s, Ti)\</span>
+<span id="L230"><span class="lineNum">     230</span>                 :             :   t = a + G(b,c,d) + X[k] + Ti;\</span>
+<span id="L231"><span class="lineNum">     231</span>                 :             :   a = ROTATE_LEFT(t, s) + b</span>
+<span id="L232"><span class="lineNum">     232</span>                 :             :      /* Do the following 16 operations. */</span>
+<span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  1,  5, T17);</span></span>
+<span id="L234"><span class="lineNum">     234</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  6,  9, T18);</span></span>
+<span id="L235"><span class="lineNum">     235</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b, 11, 14, T19);</span></span>
+<span id="L236"><span class="lineNum">     236</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  0, 20, T20);</span></span>
+<span id="L237"><span class="lineNum">     237</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  5,  5, T21);</span></span>
+<span id="L238"><span class="lineNum">     238</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c, 10,  9, T22);</span></span>
+<span id="L239"><span class="lineNum">     239</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b, 15, 14, T23);</span></span>
+<span id="L240"><span class="lineNum">     240</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  4, 20, T24);</span></span>
+<span id="L241"><span class="lineNum">     241</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  9,  5, T25);</span></span>
+<span id="L242"><span class="lineNum">     242</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c, 14,  9, T26);</span></span>
+<span id="L243"><span class="lineNum">     243</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b,  3, 14, T27);</span></span>
+<span id="L244"><span class="lineNum">     244</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  8, 20, T28);</span></span>
+<span id="L245"><span class="lineNum">     245</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d, 13,  5, T29);</span></span>
+<span id="L246"><span class="lineNum">     246</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  2,  9, T30);</span></span>
+<span id="L247"><span class="lineNum">     247</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b,  7, 14, T31);</span></span>
+<span id="L248"><span class="lineNum">     248</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a, 12, 20, T32);</span></span>
+<span id="L249"><span class="lineNum">     249</span>                 :             : #undef SET</span>
+<span id="L250"><span class="lineNum">     250</span>                 :             : </span>
+<span id="L251"><span class="lineNum">     251</span>                 :             :      /* Round 3. */</span>
+<span id="L252"><span class="lineNum">     252</span>                 :             :      /* Let [abcd k s t] denote the operation</span>
+<span id="L253"><span class="lineNum">     253</span>                 :             :           a = b + ((a + H(b,c,d) + X[k] + T[i]) &lt;&lt;&lt; s). */</span>
+<span id="L254"><span class="lineNum">     254</span>                 :             : #define H(x, y, z) ((x) ^ (y) ^ (z))</span>
+<span id="L255"><span class="lineNum">     255</span>                 :             : #define SET(a, b, c, d, k, s, Ti)\</span>
+<span id="L256"><span class="lineNum">     256</span>                 :             :   t = a + H(b,c,d) + X[k] + Ti;\</span>
+<span id="L257"><span class="lineNum">     257</span>                 :             :   a = ROTATE_LEFT(t, s) + b</span>
+<span id="L258"><span class="lineNum">     258</span>                 :             :      /* Do the following 16 operations. */</span>
+<span id="L259"><span class="lineNum">     259</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  5,  4, T33);</span></span>
+<span id="L260"><span class="lineNum">     260</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  8, 11, T34);</span></span>
+<span id="L261"><span class="lineNum">     261</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b, 11, 16, T35);</span></span>
+<span id="L262"><span class="lineNum">     262</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a, 14, 23, T36);</span></span>
+<span id="L263"><span class="lineNum">     263</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  1,  4, T37);</span></span>
+<span id="L264"><span class="lineNum">     264</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  4, 11, T38);</span></span>
+<span id="L265"><span class="lineNum">     265</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b,  7, 16, T39);</span></span>
+<span id="L266"><span class="lineNum">     266</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a, 10, 23, T40);</span></span>
+<span id="L267"><span class="lineNum">     267</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d, 13,  4, T41);</span></span>
+<span id="L268"><span class="lineNum">     268</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  0, 11, T42);</span></span>
+<span id="L269"><span class="lineNum">     269</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b,  3, 16, T43);</span></span>
+<span id="L270"><span class="lineNum">     270</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  6, 23, T44);</span></span>
+<span id="L271"><span class="lineNum">     271</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  9,  4, T45);</span></span>
+<span id="L272"><span class="lineNum">     272</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c, 12, 11, T46);</span></span>
+<span id="L273"><span class="lineNum">     273</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b, 15, 16, T47);</span></span>
+<span id="L274"><span class="lineNum">     274</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  2, 23, T48);</span></span>
+<span id="L275"><span class="lineNum">     275</span>                 :             : #undef SET</span>
+<span id="L276"><span class="lineNum">     276</span>                 :             : </span>
+<span id="L277"><span class="lineNum">     277</span>                 :             :      /* Round 4. */</span>
+<span id="L278"><span class="lineNum">     278</span>                 :             :      /* Let [abcd k s t] denote the operation</span>
+<span id="L279"><span class="lineNum">     279</span>                 :             :           a = b + ((a + I(b,c,d) + X[k] + T[i]) &lt;&lt;&lt; s). */</span>
+<span id="L280"><span class="lineNum">     280</span>                 :             : #define I(x, y, z) ((y) ^ ((x) | ~(z)))</span>
+<span id="L281"><span class="lineNum">     281</span>                 :             : #define SET(a, b, c, d, k, s, Ti)\</span>
+<span id="L282"><span class="lineNum">     282</span>                 :             :   t = a + I(b,c,d) + X[k] + Ti;\</span>
+<span id="L283"><span class="lineNum">     283</span>                 :             :   a = ROTATE_LEFT(t, s) + b</span>
+<span id="L284"><span class="lineNum">     284</span>                 :             :      /* Do the following 16 operations. */</span>
+<span id="L285"><span class="lineNum">     285</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  0,  6, T49);</span></span>
+<span id="L286"><span class="lineNum">     286</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  7, 10, T50);</span></span>
+<span id="L287"><span class="lineNum">     287</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b, 14, 15, T51);</span></span>
+<span id="L288"><span class="lineNum">     288</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  5, 21, T52);</span></span>
+<span id="L289"><span class="lineNum">     289</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d, 12,  6, T53);</span></span>
+<span id="L290"><span class="lineNum">     290</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c,  3, 10, T54);</span></span>
+<span id="L291"><span class="lineNum">     291</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b, 10, 15, T55);</span></span>
+<span id="L292"><span class="lineNum">     292</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  1, 21, T56);</span></span>
+<span id="L293"><span class="lineNum">     293</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  8,  6, T57);</span></span>
+<span id="L294"><span class="lineNum">     294</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c, 15, 10, T58);</span></span>
+<span id="L295"><span class="lineNum">     295</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b,  6, 15, T59);</span></span>
+<span id="L296"><span class="lineNum">     296</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a, 13, 21, T60);</span></span>
+<span id="L297"><span class="lineNum">     297</span>                 :<span class="tlaGNC">           9 :     SET(a, b, c, d,  4,  6, T61);</span></span>
+<span id="L298"><span class="lineNum">     298</span>                 :<span class="tlaGNC">           9 :     SET(d, a, b, c, 11, 10, T62);</span></span>
+<span id="L299"><span class="lineNum">     299</span>                 :<span class="tlaGNC">           9 :     SET(c, d, a, b,  2, 15, T63);</span></span>
+<span id="L300"><span class="lineNum">     300</span>                 :<span class="tlaGNC">           9 :     SET(b, c, d, a,  9, 21, T64);</span></span>
+<span id="L301"><span class="lineNum">     301</span>                 :             : #undef SET</span>
+<span id="L302"><span class="lineNum">     302</span>                 :             : </span>
+<span id="L303"><span class="lineNum">     303</span>                 :             :      /* Then perform the following additions. (That is increment each</span>
+<span id="L304"><span class="lineNum">     304</span>                 :             :         of the four registers by the value it had before this block</span>
+<span id="L305"><span class="lineNum">     305</span>                 :             :         was started.) */</span>
+<span id="L306"><span class="lineNum">     306</span>                 :<span class="tlaGNC">           9 :     pms-&gt;abcd[0] += a;</span></span>
+<span id="L307"><span class="lineNum">     307</span>                 :<span class="tlaGNC">           9 :     pms-&gt;abcd[1] += b;</span></span>
+<span id="L308"><span class="lineNum">     308</span>                 :<span class="tlaGNC">           9 :     pms-&gt;abcd[2] += c;</span></span>
+<span id="L309"><span class="lineNum">     309</span>                 :<span class="tlaGNC">           9 :     pms-&gt;abcd[3] += d;</span></span>
+<span id="L310"><span class="lineNum">     310</span>                 :<span class="tlaGNC">           9 : }</span></span>
+<span id="L311"><span class="lineNum">     311</span>                 :             : </span>
+<span id="L312"><span class="lineNum">     312</span>                 :             : void</span>
+<span id="L313"><span class="lineNum">     313</span>                 :<span class="tlaGNC">           9 : md5_init(md5_state_t *pms)</span></span>
+<span id="L314"><span class="lineNum">     314</span>                 :             : {</span>
+<span id="L315"><span class="lineNum">     315</span>                 :<span class="tlaGNC">           9 :     pms-&gt;count[0] = pms-&gt;count[1] = 0;</span></span>
+<span id="L316"><span class="lineNum">     316</span>                 :<span class="tlaGNC">           9 :     pms-&gt;abcd[0] = 0x67452301;</span></span>
+<span id="L317"><span class="lineNum">     317</span>                 :<span class="tlaGNC">           9 :     pms-&gt;abcd[1] = /*0xefcdab89*/ T_MASK ^ 0x10325476;</span></span>
+<span id="L318"><span class="lineNum">     318</span>                 :<span class="tlaGNC">           9 :     pms-&gt;abcd[2] = /*0x98badcfe*/ T_MASK ^ 0x67452301;</span></span>
+<span id="L319"><span class="lineNum">     319</span>                 :<span class="tlaGNC">           9 :     pms-&gt;abcd[3] = 0x10325476;</span></span>
+<span id="L320"><span class="lineNum">     320</span>                 :<span class="tlaGNC">           9 : }</span></span>
+<span id="L321"><span class="lineNum">     321</span>                 :             : </span>
+<span id="L322"><span class="lineNum">     322</span>                 :             : void</span>
+<span id="L323"><span class="lineNum">     323</span>                 :<span class="tlaGNC">          20 : md5_append(md5_state_t *pms, const md5_byte_t *data, int nbytes)</span></span>
+<span id="L324"><span class="lineNum">     324</span>                 :             : {</span>
+<span id="L325"><span class="lineNum">     325</span>                 :             :     const md5_byte_t *p = data;</span>
+<span id="L326"><span class="lineNum">     326</span>                 :             :     int left = nbytes;</span>
+<span id="L327"><span class="lineNum">     327</span>                 :<span class="tlaGNC">          20 :     int offset = (pms-&gt;count[0] &gt;&gt; 3) &amp; 63;</span></span>
+<span id="L328"><span class="lineNum">     328</span>                 :<span class="tlaGNC">          20 :     md5_word_t nbits = (md5_word_t)(nbytes &lt;&lt; 3);</span></span>
+<span id="L329"><span class="lineNum">     329</span>                 :             : </span>
+<span id="L330"><span class="lineNum">     330</span>         [<span class="tlaGBC" title="Branch 0 was taken 20 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          20 :     if (nbytes &lt;= 0)</span></span>
+<span id="L331"><span class="lineNum">     331</span>                 :             :         return;</span>
+<span id="L332"><span class="lineNum">     332</span>                 :             : </span>
+<span id="L333"><span class="lineNum">     333</span>                 :             :     /* Update the message length. */</span>
+<span id="L334"><span class="lineNum">     334</span>                 :<span class="tlaGNC">          20 :     pms-&gt;count[1] += nbytes &gt;&gt; 29;</span></span>
+<span id="L335"><span class="lineNum">     335</span>                 :<span class="tlaGNC">          20 :     pms-&gt;count[0] += nbits;</span></span>
+<span id="L336"><span class="lineNum">     336</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 20 times"> + </span>]:<span class="tlaGNC">          20 :     if (pms-&gt;count[0] &lt; nbits)</span></span>
+<span id="L337"><span class="lineNum">     337</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         pms-&gt;count[1]++;</span></span>
+<span id="L338"><span class="lineNum">     338</span>                 :             : </span>
+<span id="L339"><span class="lineNum">     339</span>                 :             :     /* Process an initial partial block. */</span>
+<span id="L340"><span class="lineNum">     340</span>         [<span class="tlaGBC" title="Branch 0 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7 times"> + </span>]:<span class="tlaGNC tlaBgGNC">          20 :     if (offset) {</span></span>
+<span id="L341"><span class="lineNum">     341</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 12 times"> + </span>]:<span class="tlaGNC">          13 :         int copy = (offset + nbytes &gt; 64 ? 64 - offset : nbytes);</span></span>
+<span id="L342"><span class="lineNum">     342</span>                 :             : </span>
+<span id="L343"><span class="lineNum">     343</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">          13 :         memcpy(pms-&gt;buf + offset, p, copy);</span></span>
+<span id="L344"><span class="lineNum">     344</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">          13 :         if (offset + copy &lt; 64)</span></span>
+<span id="L345"><span class="lineNum">     345</span>                 :             :             return;</span>
+<span id="L346"><span class="lineNum">     346</span>                 :<span class="tlaGNC">           8 :         p += copy;</span></span>
+<span id="L347"><span class="lineNum">     347</span>                 :<span class="tlaGNC">           8 :         left -= copy;</span></span>
+<span id="L348"><span class="lineNum">     348</span>                 :<span class="tlaGNC">           8 :         md5_process(pms, pms-&gt;buf);</span></span>
+<span id="L349"><span class="lineNum">     349</span>                 :             :     }</span>
+<span id="L350"><span class="lineNum">     350</span>                 :             : </span>
+<span id="L351"><span class="lineNum">     351</span>                 :             :     /* Process full blocks. */</span>
+<span id="L352"><span class="lineNum">     352</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span>]:<span class="tlaGNC">          16 :     for (; left &gt;= 64; p += 64, left -= 64)</span></span>
+<span id="L353"><span class="lineNum">     353</span>                 :<span class="tlaGNC">           1 :         md5_process(pms, p);</span></span>
+<span id="L354"><span class="lineNum">     354</span>                 :             : </span>
+<span id="L355"><span class="lineNum">     355</span>                 :             :     /* Process a final partial block. */</span>
+<span id="L356"><span class="lineNum">     356</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7 times"> + </span>]:<span class="tlaGNC">          15 :     if (left)</span></span>
+<span id="L357"><span class="lineNum">     357</span>                 :<span class="tlaGNC">           8 :         memcpy(pms-&gt;buf, p, left);</span></span>
+<span id="L358"><span class="lineNum">     358</span>                 :             : }</span>
+<span id="L359"><span class="lineNum">     359</span>                 :             : </span>
+<span id="L360"><span class="lineNum">     360</span>                 :             : void</span>
+<span id="L361"><span class="lineNum">     361</span>                 :<span class="tlaGNC">           7 : md5_finish(md5_state_t *pms, md5_byte_t digest[16])</span></span>
+<span id="L362"><span class="lineNum">     362</span>                 :             : {</span>
+<span id="L363"><span class="lineNum">     363</span>                 :             :     static const md5_byte_t pad[64] = {</span>
+<span id="L364"><span class="lineNum">     364</span>                 :             :         0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span>
+<span id="L365"><span class="lineNum">     365</span>                 :             :         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span>
+<span id="L366"><span class="lineNum">     366</span>                 :             :         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span>
+<span id="L367"><span class="lineNum">     367</span>                 :             :         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0</span>
+<span id="L368"><span class="lineNum">     368</span>                 :             :     };</span>
+<span id="L369"><span class="lineNum">     369</span>                 :             :     md5_byte_t data[8];</span>
+<span id="L370"><span class="lineNum">     370</span>                 :             :     int i;</span>
+<span id="L371"><span class="lineNum">     371</span>                 :             : </span>
+<span id="L372"><span class="lineNum">     372</span>                 :             :     /* Save the length before padding. */</span>
+<span id="L373"><span class="lineNum">     373</span>         [<span class="tlaGBC" title="Branch 0 was taken 56 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7 times"> + </span>]:<span class="tlaGNC">          63 :     for (i = 0; i &lt; 8; ++i)</span></span>
+<span id="L374"><span class="lineNum">     374</span>                 :<span class="tlaGNC">          56 :         data[i] = (md5_byte_t)(pms-&gt;count[i &gt;&gt; 2] &gt;&gt; ((i &amp; 3) &lt;&lt; 3));</span></span>
+<span id="L375"><span class="lineNum">     375</span>                 :             :     /* Pad to 56 bytes mod 64. */</span>
+<span id="L376"><span class="lineNum">     376</span>                 :<span class="tlaGNC">           7 :     md5_append(pms, pad, ((55 - (pms-&gt;count[0] &gt;&gt; 3)) &amp; 63) + 1);</span></span>
+<span id="L377"><span class="lineNum">     377</span>                 :             :     /* Append the length. */</span>
+<span id="L378"><span class="lineNum">     378</span>                 :<span class="tlaGNC">           7 :     md5_append(pms, data, 8);</span></span>
+<span id="L379"><span class="lineNum">     379</span>         [<span class="tlaGBC" title="Branch 0 was taken 112 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7 times"> + </span>]:<span class="tlaGNC">         119 :     for (i = 0; i &lt; 16; ++i)</span></span>
+<span id="L380"><span class="lineNum">     380</span>                 :<span class="tlaGNC">         112 :         digest[i] = (md5_byte_t)(pms-&gt;abcd[i &gt;&gt; 2] &gt;&gt; ((i &amp; 3) &lt;&lt; 3));</span></span>
+<span id="L381"><span class="lineNum">     381</span>                 :<span class="tlaGNC">           7 : }</span></span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
