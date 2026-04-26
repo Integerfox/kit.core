@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 291-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 299-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -68,13 +68,13 @@ Namespaces</h2></td></tr>
 <li>Support a the common/generic interface defined in this root namespace (i.e <code>Api.h</code>)</li>
 <li>In general BSP are not intended to be reused across multiple physical boards. In fact each revision of a PCBA - that impacts firmware behavior - should have its own BSP instance in the namespace.</li>
 </ul>
-<p>NOTE: A microcontroller BSP is similar in concept to a Linux BSP, but a microcontroller BSP is significantly different in practice. The BSPs in this namespace should be as <em>small/thin</em> as possible and do not contain any application business logic. In addition, BSPs should not contain <em>drivers</em> per say, but provide the lowest level lego blocks for building drivers. For example, do <b>not</b> put an SPI or I2C driver implementation in your BSP. Instead put under the <code>src/Kit/Driver</code> tree. It is okay to have Hardware/Chip specific drivers in the Driver tree - but these drivers must go through BSP interfaces for accessing HW Registers, etc. (i.e. cannot contain any MCU/compiler specific code). <br  />
+<p>NOTE: A microcontroller BSP is similar in concept to a Linux BSP, but a microcontroller BSP is significantly different in practice. The BSPs in this namespace should be as <em>small/thin</em> as possible and do not contain any application business logic. In addition, BSPs should not contain <em>drivers</em> per say, but provide the lowest level lego blocks for building drivers. For example, do <b>not</b> put an SPI or I2C driver implementation in your BSP. Instead put under the <code>src/Kit/Driver</code> tree. It is okay to have Hardware/Chip specific drivers in the <a class="el" href="namespace_kit_1_1_driver.html" title="The Driver namespace contains various types of drivers, driver abstractions, and concrete drivers.">Driver</a> tree - but these drivers must go through BSP interfaces for accessing HW Registers, etc. (i.e. cannot contain any MCU/compiler specific code). <br  />
 </p>
 <p>See the <a href="https://patternsinthemachine.net/2025/12/indirect-microcontroller-bsp/">Indirect Microcontroller BSP</a> article for how the application and drivers should <em>access</em> the interfaces provided by a BSP. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Apr 9 2026 23:54:08 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Apr 26 2026 18:38:15 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
