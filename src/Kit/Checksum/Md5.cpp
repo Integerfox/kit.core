@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Md5.h"
+#include <climits>
 #include <string.h>
 
 //------------------------------------------------------------------------------
@@ -31,7 +32,7 @@ void Md5::reset( void ) noexcept
 void Md5::accumulate( const void* bytes, unsigned numbytes ) noexcept
 {
     // Skip if no data or bad pointer
-    if ( bytes == nullptr || numbytes == 0 )
+    if ( bytes == nullptr || numbytes == 0 || numbytes > INT_MAX )
     {
         return;
     }

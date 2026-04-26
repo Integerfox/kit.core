@@ -37,7 +37,7 @@ void Fletcher16::accumulate( const void* bytes, unsigned numbytes ) noexcept
         return;
     }
 
-    uint8_t* ptr = static_cast<uint8_t*>( const_cast<void*>( bytes ) );
+    auto* ptr = static_cast<const uint8_t*>( bytes );
     for ( unsigned i = 0; i < numbytes; i++, ptr++ )
     {
         m_sum1 = ( (uint16_t)m_sum1 + (uint16_t)( *ptr ) ) % 255;
@@ -52,9 +52,9 @@ bool Fletcher16::finalize( void* destBuffer, unsigned destBufferSize ) noexcept
         return false;
     }
 
-    uint8_t  sumlo = 255 - ( ( (uint16_t)m_sum1 + (uint16_t)m_sum2 ) % 255 );
-    uint8_t  sumhi = 255 - ( ( (uint16_t)m_sum1 + (uint16_t)sumlo ) % 255 );
-    uint8_t* ptr   = static_cast<uint8_t*>( destBuffer );
+    uint8_t sumlo = 255 - ( ( (uint16_t)m_sum1 + (uint16_t)m_sum2 ) % 255 );
+    uint8_t sumhi = 255 - ( ( (uint16_t)m_sum1 + (uint16_t)sumlo ) % 255 );
+    auto*   ptr   = static_cast<uint8_t*>( destBuffer );
     if ( ptr )
     {
         *ptr++ = sumlo;

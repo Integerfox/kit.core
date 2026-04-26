@@ -32,7 +32,7 @@ namespace Checksum {
           the dstString argument is still updated with a  truncated value and the
           method return false.
  */
-inline bool binToAsciiHex( void*               srcBinValue,
+inline bool binToAsciiHex( const void*         srcBinValue,
                            unsigned            srcBinSize,
                            Kit::Text::IString& dstString,
                            bool                uppercase = true,

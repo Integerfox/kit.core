@@ -1,5 +1,5 @@
-#ifndef Cpl_Checksum_Md5Aladdin_h_
-#define Cpl_Checksum_Md5Aladdin_h_
+#ifndef KIT_CHECKSUM_MD5_H_
+#define KIT_CHECKSUM_MD5_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -39,16 +39,16 @@ public:
 
 public:
     /// See Kit::Checksum::IHash
-    void reset( void ) noexcept;
+    void reset( void ) noexcept override;
 
     /// See Kit::Checksum::IHash
-    void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept;
+    void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept override;
 
     /// See Kit::Checksum::IHash
-     bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept;
+     bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept override;
 
     /// See Kit::Checksum::IHash
-    unsigned getDigestSize() const noexcept { return eDIGEST_LEN; }
+    unsigned getDigestSize() const noexcept override { return eDIGEST_LEN; }
 
 protected:
     /// Hash state

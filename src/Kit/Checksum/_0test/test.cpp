@@ -18,6 +18,7 @@
 #include "Kit/Checksum/Md5.h"
 #include "Kit/Checksum/Utils.h"
 #include "Kit/Type/endian.h"
+#include <string.h>
 
 ///
 using namespace Kit::Checksum;
@@ -30,8 +31,8 @@ using namespace Kit::Checksum;
 #define DATALEN_        9
 #define MAX_CRCLEN_     4
 
-#define CRC_CCITT_xFFFF 0x29B1     // CRC value for the text string "12346789"   (see http://www.zorc.breitbandkatze.de/crc.html)
-#define CRC_ETHERNET    0x376E6E7  // CRC value for the text string "12346789"   (see http://www.zorc.breitbandkatze.de/crc.html, Final XOR val=0)
+#define CRC_CCITT_xFFFF 0x29B1     // CRC value for the text string "123456789"   (see http://www.zorc.breitbandkatze.de/crc.html)
+#define CRC_ETHERNET    0x376E6E7  // CRC value for the text string "123456789"   (see http://www.zorc.breitbandkatze.de/crc.html, Final XOR val=0)
 #define FLETCHER16      0x1e03     // Fletcher checksum for the text "123456789"
 
 // clang-format off

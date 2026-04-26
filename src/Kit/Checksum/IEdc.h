@@ -1,5 +1,5 @@
-#ifndef KIT_CHECKSUM_IAPI_H_
-#define KIT_CHECKSUM_IAPI_H_
+#ifndef KIT_CHECKSUM_IEDC_H_
+#define KIT_CHECKSUM_IEDC_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

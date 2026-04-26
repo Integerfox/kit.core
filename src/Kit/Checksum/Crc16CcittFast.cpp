@@ -75,7 +75,7 @@ void Crc16CcittFast::accumulate( const void* bytes, unsigned numbytes ) noexcept
         return;
     }
 
-    uint8_t* ptr = static_cast<uint8_t*>(const_cast<void*>(bytes));
+    auto* ptr = static_cast<const uint8_t*>( bytes );
 
     for ( unsigned i = 0; i < numbytes; i++, ptr++ )
     {
@@ -90,7 +90,7 @@ bool Crc16CcittFast::finalize( void* destBuffer, unsigned destBufferSize ) noexc
         return false;
     }
 
-    uint8_t* ptr = static_cast<uint8_t*>(destBuffer);
+    uint8_t* ptr = static_cast<uint8_t*>( destBuffer );
     if ( ptr )
     {
         *ptr++ = ( m_crc >> 8 ) & 0xFF;
