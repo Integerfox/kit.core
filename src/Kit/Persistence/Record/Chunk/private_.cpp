@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_CHUNK_CRC_H
-#define KIT_PERSISTENCE_RECORD_CHUNK_CRC_H
+#ifndef KIT_PERSISTENCE_RECORD_CRC_H
+#define KIT_PERSISTENCE_RECORD_CRC_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -14,7 +14,6 @@
 #include "Kit/Persistence/Record/IPayload.h"
 #include "Kit/Persistence/Record/IChunk.h"
 #include "Kit/Persistence/Record/IMedia.h"
-#include "Kit/Persistence/Record/Chunk/private_.h"
 #include "Kit/Checksum/IEdc.h"
 
 ///
@@ -30,12 +29,6 @@ namespace Chunk {
     detection of corrupted persistently stored data using a CRC and or Checksum.
     The strength and bit width of the CRC is determined by the IEdc instance
     provided in the class's constructor.
-
-    NOTE: This class requires a work buffer to transfer data to/from the Record's
-          IPayload.  That buffer MUST be able to hold the entire Record's data 
-          payload plus the additional meta data persistent stored. There is a
-          default buffer provided in the class's constructor.  See private_.h for
-          additional details about the default buffer.
  */
 class Crc : public IChunk
 {
@@ -43,12 +36,10 @@ public:
     /// Constructor
     Crc( IMedia&              media,
          Kit::Checksum::IEdc& edc,
-         uint8_t*             workBuffer     = g_workBuffer_,
-         Size_T               workBufferSize = sizeof( g_workBuffer_ ) ) noexcept
+         uint8_t*             workBuffer ) noexcept
         : m_media( media )
         , m_crc( edc )
         , m_workBuffer( workBuffer )
-        , m_workBufferSize( workBufferSize )
     {
     }
 
@@ -71,16 +62,6 @@ public:
     Size_T getMetadataLength() const noexcept override;
 
 protected:
-    /// Helper method. Encapsulates pushing data to the record
-    virtual bool pushToRecord( IPayload& dstHandler, Size_T sizeDataToPush );
-
-    /// Helper method. Encapsulates retrieving data from the record.  Returns the length of the data
-    virtual Size_T pullFromRecord( IPayload& srcHandler );
-
-    /// Helper method. Encapsulates actions that occur when there is NO VALID data
-    virtual void resetChunkOnBadData();
-
-protected:
     /// Persistent storage media
     IMedia& m_media;
 
@@ -89,9 +70,6 @@ protected:
 
     /// Buffer for storing the Record's data when transferring to/from persistent storage
     uint8_t* m_workBuffer;
-
-    /// Work buffer size (in bytes)
-    Size_T m_workBufferSize;
 };
 
 }  // end namespaces
