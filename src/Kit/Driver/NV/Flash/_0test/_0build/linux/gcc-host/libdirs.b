@@ -1,0 +1,2 @@
+../libdirs.b
+../../libdirs.b
