@@ -14,6 +14,11 @@
 #include "Kit/System/Assert.h"
 #include "Kit/Persistence/Record/Chunk/Crc.h"
 #include "Kit/Checksum/Fletcher16.h"
+#include "Kit/Checksum/Crc32EthernetFast.h"
+#include "Kit/Persistence/Record/Media/FileAdapter.h"
+#include "Kit/EventQueue/Server.h"
+#include "Kit/Io/File/System.h"
+#include "Kit/Io/File/Output.h"
 
 #define SECT_ "_0test"
 
@@ -95,39 +100,45 @@ public:
 
 static MyPayload payload1_( "Hello" );
 static MyPayload payload2_( "World" );
-static Record*   records_[] = { 0 };
 
-static RecordServer mockEvents_( records_ );
-
-#define FILE_NAME_REGION1 "region1.nvram"
-
+#define MEDIA_FILE_NAME  "media.bin"
+#define MEDIA_FILE_NAME2 "media2.bin"
+#define MEDIA_MAX_SIZE   128
 
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "CrcChunk" )
 {
-    KIT_SYSTEM_TRACE_SCOPE( SECT_, "CRC-CHUNK test" );
-    Cpl::System::Shutdown_TS::clearAndUseCounter();
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "CRC test" );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    FileAdapter fd1( FILE_NAME_REGION1, 0, 128 );
-    MyUut       uut( fd1 );
+    Kit::EventQueue::Server   mockEventQueue;
+    Media::FileAdapter        fd1( MEDIA_FILE_NAME, MEDIA_MAX_SIZE );
+    Kit::Checksum::Fletcher16 crc;
+    MyUut                     uut( fd1, crc );
+    payload1_.m_putCount = 0;
+    payload1_.m_getCount = 0;
+    payload2_.m_putCount = 0;
+    payload2_.m_getCount = 0;
 
     SECTION( "start/stop" )
     {
         REQUIRE( uut.m_startCount == 0 );
         REQUIRE( uut.m_stopCount == 0 );
-        uut.start( mockEvents_ );
+        uut.start( mockEventQueue );
         REQUIRE( uut.m_startCount == 1 );
         REQUIRE( uut.m_stopCount == 0 );
         uut.stop();
         REQUIRE( uut.m_startCount == 1 );
         REQUIRE( uut.m_stopCount == 1 );
+
+        REQUIRE( uut.getMetadataLength() == ( sizeof( Size_T ) + crc.getEdcSize() ) );  // Expected: Data Len Field size + CRC size
     }
 
     SECTION( "Load/update" )
     {
         // Delete files
-        Cpl::Io::File::Api::remove( FILE_NAME_REGION1 );
-        uut.start( mockEvents_ );
+        Kit::Io::File::System::remove( MEDIA_FILE_NAME );
+        uut.start( mockEventQueue );
 
         bool result = uut.loadData( payload1_ );
         REQUIRE( result == false );
@@ -157,21 +168,20 @@ TEST_CASE( "CrcChunk" )
         uut.stop();
     }
 
+
     SECTION( "corrupt CRC" )
     {
-        uut.start( mockEvents_ );
+        uut.start( mockEventQueue );
 
         // Read the data
-        payload2_.m_putCount = 0;
-        payload2_.m_getCount = 0;
-        bool result          = uut.loadData( payload2_ );
+        bool result = uut.loadData( payload2_ );
         REQUIRE( result == true );
         REQUIRE( payload2_.m_getCount == 0 );
         REQUIRE( payload2_.m_putCount == 1 );
         REQUIRE( strcmp( payload2_.m_buffer, payload2_.m_getString ) == 0 );
 
         // Corrupt region 2
-        Cpl::Io::File::Output fd( FILE_NAME_REGION1 );
+        Kit::Io::File::Output fd( MEDIA_FILE_NAME );
         REQUIRE( fd.isOpened() );
         fd.write( "junk" );
         fd.close();
@@ -188,10 +198,10 @@ TEST_CASE( "CrcChunk" )
     SECTION( "Erase" )
     {
         // Delete files
-        Cpl::Io::File::Api::remove( FILE_NAME_REGION1 );
+        Kit::Io::File::System::remove( MEDIA_FILE_NAME );
         payload1_.m_putCount = 0;
         payload1_.m_getCount = 0;
-        uut.start( mockEvents_ );
+        uut.start( mockEventQueue );
 
         bool result = uut.loadData( payload1_ );
         REQUIRE( result == false );
@@ -217,42 +227,46 @@ TEST_CASE( "CrcChunk" )
         uut.stop();
     }
 
-    SECTION( "null media region" )
+    SECTION( "different CRC" )
     {
-        NullRegionMedia uutFd( 0, 128 );
-        MyUut           chunk( uutFd );
-        payload1_.m_putCount = 0;
-        payload1_.m_getCount = 0;
+        // Delete files
+        Kit::Io::File::System::remove( MEDIA_FILE_NAME2 );
 
-        bool result = chunk.loadData( payload1_ );
+        Kit::Checksum::Crc32EthernetFast crc2;
+        Media::FileAdapter               fd2( MEDIA_FILE_NAME2, MEDIA_MAX_SIZE );
+        MyUut                            uut2( fd2, crc2 );
+        REQUIRE( uut2.getMetadataLength() == ( sizeof( Size_T ) + crc2.getEdcSize() ) );  // Expected: Data Len Field size + CRC size
+
+        uut2.start( mockEventQueue );
+
+        bool result = uut2.loadData( payload1_ );
         REQUIRE( result == false );
         REQUIRE( payload1_.m_putCount == 0 );
 
         REQUIRE( payload1_.m_getCount == 0 );
-        uut.updateData( payload1_ );
+        uut2.updateData( payload1_ );
         REQUIRE( payload1_.m_getCount == 1 );
 
-        result = chunk.loadData( payload1_ );
-        REQUIRE( result == false );
-        REQUIRE( payload1_.m_putCount == 0 );
+        result = uut2.loadData( payload1_ );
+        REQUIRE( result == true );
+        REQUIRE( payload1_.m_putCount == 1 );
+        REQUIRE( strcmp( payload1_.m_buffer, payload1_.m_getString ) == 0 );
 
-        uut.stop();
+        REQUIRE( payload2_.m_getCount == 0 );
+        uut2.updateData( payload2_ );
+        REQUIRE( payload2_.m_getCount == 1 );
+        REQUIRE( payload1_.m_putCount == 1 );
+
+        result = uut2.loadData( payload2_ );
+        REQUIRE( result == true );
+        REQUIRE( payload2_.m_putCount == 1 );
+        REQUIRE( payload1_.m_putCount == 1 );
+        printf( "buffer=[%s], expected=[%s]\n", payload2_.m_buffer, payload2_.m_getString );
+        REQUIRE( strcmp( payload2_.m_buffer, payload2_.m_getString ) == 0 );
+
+        uut2.stop();
     }
 
-    SECTION( "null media - start/stop" )
-    {
-        NullRegionMedia uutFd( 0, 128 );
-        MyUut           chunk( uutFd );
 
-        REQUIRE( chunk.m_startCount == 0 );
-        REQUIRE( chunk.m_stopCount == 0 );
-        chunk.start( mockEvents_ );
-        REQUIRE( chunk.m_startCount == 1 );
-        REQUIRE( chunk.m_stopCount == 0 );
-        chunk.stop();
-        REQUIRE( chunk.m_startCount == 1 );
-        REQUIRE( chunk.m_stopCount == 1 );
-    }
-
-    REQUIRE( Cpl::System::Shutdown_TS::getAndClearCounter() == 0u );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

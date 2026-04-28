@@ -42,7 +42,7 @@ bool Crc::pushToRecord( IPayload& dstHandler, Size_T sizeDataToPush )
 }
 Size_T Crc::pullFromRecord( IPayload& srcHandler )
 {
-    return srcHandler.copyFrom( m_workBuffer, m_workBufferSize );
+    return srcHandler.copyTo( m_workBuffer, m_workBufferSize );
 }
 
 void Crc::resetChunkOnBadData()

@@ -67,6 +67,7 @@ public:
     bool updateData( IPayload& source,
                      Size_T    index      = 0,
                      bool      invalidate = false ) noexcept override;
+                     
     /// See Kit::Persistence::Record::IChunk
     Size_T getMetadataLength() const noexcept override;
 
