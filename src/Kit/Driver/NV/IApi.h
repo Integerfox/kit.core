@@ -10,10 +10,9 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-
-#include <stdlib.h>
 #include "Kit/Driver/IStart.h"
 #include "Kit/Driver/IStop.h"
+#include <stdlib.h>
 
 ///
 namespace Kit {
@@ -22,23 +21,22 @@ namespace Driver {
 ///
 namespace NV {
 
-
 /** This class defines the interface for a platform independent Non-volatile
     storage driver. Only basic read/write operations are defined.  How the NV
-    storage is used is left the application and/or upper layers
+    storage is used is left up to the application and/or upper layers
 
-    The Interface assumes a paradigm of the NV storage is broken up into N
-    pages where each page contains M bytes.  Page information is provided
-    for informational purposes only.  The application is NOT required to use
-    page boundaries when performing read/write operations.  However, the
-    application can use the page information to optimize its read/write
-    operations.
+    The Interface assumes byte-level erasing/writing semantics with respect to
+    persistent storage. In addition, the interface provides the client with a
+    page model, where an individual page represents the maximum amount of data
+    that can be written in a single physical update of the NV storage.  That 
+    said - the client is NOT required to write in page sized chunks. The page
+    information is provided to allow clients to optimize (if desired) their
+    writes to the NV storage.
 
     The interface itself is NOT thread safe. It is the responsibility of
     the users/clients of the driver to handle any threading issues.
  */
-class IApi : public virtual IStart,
-             public virtual IStop
+class IApi : public virtual Kit::Driver::IStart, public virtual Kit::Driver::IStop
 {
 public:
     /** This method writes N bytes from 'srcData' starting at the storage offset
@@ -62,47 +60,48 @@ public:
                         size_t      numBytesToWrite ) noexcept = 0;
 
     /** This method reads N bytes starting at the storage offset of 'srcOffset'
-        and stores the bytes into 'dstData'. The application is responsible for
-        ensuring that the size 'dstData' is at least 'numBytesToRead' in length.
+        and stores the bytes into 'dstData'. 
 
         The method returns true if operation was successful; else false is
-        returned.
+        returned. Note: If 'sizeDstData' is less than 'numBytesToRead' then
+        the method fails immediately.
      */
     virtual bool read( size_t srcOffset,
                        void*  dstData,
+                       size_t sizeDstData,
                        size_t numBytesToRead ) noexcept = 0;
 
 
+public:
+    /** This method returns the total number of NV storage pages.  A Page is
+        defined as the boundary/maximum amount of data that can be written in
+        a single physical update of the NV storage
+
+        NOTE: ALWAYS use the getTotalSize() method for querying/determining the
+              total available storage size.
+     */
+    virtual size_t getNumPages() const noexcept = 0;
+
+    /** This method returns the NV storage page size.  See getNumPages() for
+        more details about the definition of a page.
+
+        NOTE: ALWAYS use the getTotalSize() method for querying/determining the
+              total available storage size.
+     */
+    virtual size_t getPageSize() const noexcept = 0;
+
     /** The method that returns the total storage size in bytes.
 
-        NOTE: This is canonical source of truth for the total available storage,
+        Note: This is canonical source of truth for the total available storage,
               i.e, if the driver instance is a 'Gang' driver instance then
               the method CAN return a different result from: getNumPages() * getPageSize()
      */
     virtual size_t getTotalSize() const noexcept = 0;
 
 public:
-    /** This method returns the total number of NV storage pages.  A Page is
-        defined as the boundary/maximum amount of data that can be written in
-        a single physical update of the NV storage.
-
-        NOTE: This method is provided for informational purposes only.  The
-              application is NOT required to use page boundaries when performing
-              read/write operations.
-     */
-    virtual size_t getNumPages() const noexcept = 0;
-
-    /** This method returns the NV storage page size.  See getNumPages() for
-        more details about the definition of a page.
-     */
-    virtual size_t getPageSize() const noexcept = 0;
-
-
-public:
     /// Virtual destructor
-    virtual ~IApi() noexcept = default;
+    virtual ~IApi() noexcept;
 };
-
 
 }  // end namespaces
 }

@@ -1,18 +1,12 @@
 # Kit::Driver
+
 @brief namespace description for Kit::Driver
 @namespace Kit::Driver @brief
 
-The Driver namespace provides a collection of platform/target independent
-concrete device drivers.  Note: Some of the drivers maybe very specific to a
-hardware device, peripheral, IC, etc.  However all of the drivers will have a
-defined Hardware Abstraction Layer (HAL) - that allows the concrete driver to be
-decoupled from a specific target/BSP.  This paradigm allows reuse of the drivers
-when the some device/peripheral is common across multiple physical targets.
+The Driver namespace contains various types of drivers, driver abstractions,
+and concrete drivers.
 
-The various driver interfaces are/were created as needed, i.e. there is NO grand
-plan to design the canonical set of drivers.  In addition, the are/will-be
-drivers that are very similar - but different for some reason or other.  This
-is OKAY.  If an existing driver make sense for you application - then use it.
-What you should NOT do - is for force your application design to accommodate
-an existing driver interface (i.e. instead create a new driver that meets your
-requirements).
+NOTE: The design model for the drivers is to use pure virtual interfaces as their
+      public interface to decouple the client code from any specific implementation
+      or hardware dependence.  This approach is functionally equivalent (in memory
+      footprint and CPU cycle times) to using a C struct with function pointers.

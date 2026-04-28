@@ -16,38 +16,49 @@ namespace Kit {
 ///
 namespace Driver {
 
-/** This abstract class defines a start operation that is intended to start and/or
-    activate a driver.  Once a driver has been started it, it should be 'stopped'
-    (by calling its IStop interface) when/if the application performs a graceful
-    shutdown.
+/** This abstract class defines the method for starting a driver.  The
+    KIT driver model requires:
 
-    Note: It is possible for a concrete driver class to implement more than one
-          abstract driver interfaces.  This use case introduces the classic C
-          'diamond' inheritance problem.  The diamond inheritance is resolved
-          by requiring each abstract driver interface to use 'virtual' inheritance
-          when inheriting from IStart.  This ensures that there is only one
-          start() method in the concrete child classes
+    - All drivers must be started at run time before they can be used, i.e. the
+      driver implementation will fail all calls if the driver has not been
+      started.
+
+    - All drivers should be stopped (see IStop) when they are no longer needed
+      or when the application is performing an orderly shutdown.
+
+    - Drivers are implemented in a way that allows them to be started and
+      stopped multiple times during the life of the application.
+
+    - Calling start() on an already started driver shall have no effect, i.e. no
+      actions are taken other than returning true.
+
+    - Calling stop() on a driver that is not started shall have no effect, i.e. 
+      no actions are taken.
  */
 class IStart
 {
 public:
-    /** This method starts the driver.  It supports passing optional start
-        arguments via the startArgs parameter.  The actual start arguments are
-        platform and driver specific.
+    /** This method is used to start/initialize the driver at run time.  This
+        method is NOT thread-safe.  It is the application's responsibility to 
+        provide any thread-safety that it needs with respect to starting (and
+        stopping) drivers.
 
-        The method returns true if the driver was started successfully,
-        otherwise it returns false.
+        The optional 'startArgs' argument provides run-time information to the
+        driver.  When used, the definition of 'startArgs' is specific to the
+        individual concrete driver implementations, i.e. 'startArgs' is NOT
+        type safe.
 
-        Note: Calling start() on an already started driver has no effect.
+        The method returns true if the driver is successfully started; otherwise,
+        false is returned.
      */
     virtual bool start( void* startArgs = nullptr ) noexcept = 0;
 
-
 public:
-    /// Virtual destructor
+    /// Lets the make the destructor virtual
     virtual ~IStart() noexcept = default;
+
 };
 
-}  // end namespaces
+}       // end namespaces
 }
 #endif  // end header latch
