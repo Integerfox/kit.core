@@ -130,6 +130,7 @@ public:
     /// See Kit::Driver::NV::IApi
     bool read( size_t srcOffset,
                void*  dstData,
+               size_t sizeDstData,
                size_t numBytesToRead ) noexcept override;
 
     /// See Kit::Driver::NV::IApi

@@ -139,7 +139,7 @@ void runTests()
         check( nv.write( 0, writeData, sizeof( writeData ) ) == true, "Write 5 bytes succeeds" );
 
         uint8_t readData[5] = { 0 };
-        check( nv.read( 0, readData, sizeof( readData ) ) == true, "Read 5 bytes succeeds" );
+        check( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true, "Read 5 bytes succeeds" );
         check( memcmp( readData, writeData, sizeof( writeData ) ) == 0, "Read data matches written data" );
     }
 
@@ -151,7 +151,7 @@ void runTests()
         check( nv.write( 0, data2, sizeof( data2 ) ) == true, "Partial overwrite succeeds" );
 
         uint8_t readData[5] = { 0 };
-        check( nv.read( 0, readData, sizeof( readData ) ) == true, "Read after overwrite succeeds" );
+        check( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true, "Read after overwrite succeeds" );
         check( readData[0] == 0xAA, "Byte 0 updated correctly" );
         check( readData[1] == 0xBB, "Byte 1 updated correctly" );
         check( readData[2] == 0x03, "Byte 2 preserved" );
@@ -169,11 +169,11 @@ void runTests()
         check( nv.write( 512, dataB, sizeof( dataB ) ) == true, "Write page 2 succeeds" );
 
         uint8_t readA[2] = { 0 };
-        check( nv.read( 256, readA, sizeof( readA ) ) == true, "Read page 1 succeeds" );
+        check( nv.read( 256, readA, sizeof( readA ), sizeof( readA ) ) == true, "Read page 1 succeeds" );
         check( readA[0] == 0x11 && readA[1] == 0x22, "Page 1 data correct" );
 
         uint8_t readB[2] = { 0 };
-        check( nv.read( 512, readB, sizeof( readB ) ) == true, "Read page 2 succeeds" );
+        check( nv.read( 512, readB, sizeof( readB ), sizeof( readB ) ) == true, "Read page 2 succeeds" );
         check( readB[0] == 0x33 && readB[1] == 0x44, "Page 2 data correct" );
     }
 
@@ -185,14 +185,14 @@ void runTests()
 
         // Verify data from test 3/4 survived
         uint8_t readData[5] = { 0 };
-        check( nv.read( 0, readData, sizeof( readData ) ) == true, "Read after restart succeeds" );
+        check( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true, "Read after restart succeeds" );
         check( readData[0] == 0xAA, "Byte 0 persisted" );
         check( readData[1] == 0xBB, "Byte 1 persisted" );
         check( readData[2] == 0x03, "Byte 2 persisted" );
 
         // Verify page 1 data survived
         uint8_t readA[2] = { 0 };
-        check( nv.read( 256, readA, sizeof( readA ) ) == true, "Read page 1 after restart succeeds" );
+        check( nv.read( 256, readA, sizeof( readA ), sizeof( readA ) ) == true, "Read page 1 after restart succeeds" );
         check( readA[0] == 0x11 && readA[1] == 0x22, "Page 1 data persisted" );
     }
 

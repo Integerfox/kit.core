@@ -128,7 +128,7 @@ TEST_CASE( "NV Flash 4K - Basic Read/Write" )
         REQUIRE( nv.write( 0, writeData, sizeof( writeData ) ) == true );
 
         uint8_t readData[5] = { 0 };
-        REQUIRE( nv.read( 0, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( memcmp( readData, writeData, sizeof( writeData ) ) == 0 );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
@@ -136,7 +136,7 @@ TEST_CASE( "NV Flash 4K - Basic Read/Write" )
     SECTION( "read unwritten area returns 0xFF" )
     {
         uint8_t readData[10];
-        REQUIRE( nv.read( 0, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
 
         uint8_t expected[10];
         memset( expected, 0xFF, sizeof( expected ) );
@@ -155,7 +155,7 @@ TEST_CASE( "NV Flash 4K - Basic Read/Write" )
         REQUIRE( nv.write( 0, pageData, NV_PAGE_SIZE_4K ) == true );
 
         uint8_t readBack[NV_PAGE_SIZE_4K];
-        REQUIRE( nv.read( 0, readBack, NV_PAGE_SIZE_4K ) == true );
+        REQUIRE( nv.read( 0, readBack, NV_PAGE_SIZE_4K, NV_PAGE_SIZE_4K ) == true );
         REQUIRE( memcmp( readBack, pageData, NV_PAGE_SIZE_4K ) == 0 );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
@@ -183,7 +183,7 @@ TEST_CASE( "NV Flash 4K - Read-Modify-Write Preservation" )
 
         // Read back 10 bytes: should be B2 C4 03 04 05 06 07 08 09 0A
         uint8_t readData[10];
-        REQUIRE( nv.read( 0, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
 
         REQUIRE( readData[0] == 0xB2 );
         REQUIRE( readData[1] == 0xC4 );
@@ -215,7 +215,7 @@ TEST_CASE( "NV Flash 4K - Read-Modify-Write Preservation" )
 
         // Read back: should be B2 C4 03 04 05 DD EE FF 09 0A
         uint8_t readData[10];
-        REQUIRE( nv.read( 0, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
 
         REQUIRE( readData[0] == 0xB2 );
         REQUIRE( readData[1] == 0xC4 );
@@ -264,7 +264,7 @@ TEST_CASE( "NV Flash 4K - Scatter Write" )
 
         // Verify page 0: should be 99 BB CC DD
         uint8_t read0[4];
-        REQUIRE( nv.read( 0, read0, sizeof( read0 ) ) == true );
+        REQUIRE( nv.read( 0, read0, sizeof( read0 ), sizeof( read0 ) ) == true );
         REQUIRE( read0[0] == 0x99 );
         REQUIRE( read0[1] == 0xBB );
         REQUIRE( read0[2] == 0xCC );
@@ -272,7 +272,7 @@ TEST_CASE( "NV Flash 4K - Scatter Write" )
 
         // Verify page 1: should be 44 55 66 77
         uint8_t read1[4];
-        REQUIRE( nv.read( 256, read1, sizeof( read1 ) ) == true );
+        REQUIRE( nv.read( 256, read1, sizeof( read1 ), sizeof( read1 ) ) == true );
         REQUIRE( read1[0] == 0x44 );
         REQUIRE( read1[1] == 0x55 );
         REQUIRE( read1[2] == 0x66 );
@@ -280,7 +280,7 @@ TEST_CASE( "NV Flash 4K - Scatter Write" )
 
         // Verify page 2: should be EE FF
         uint8_t read2[2];
-        REQUIRE( nv.read( 512, read2, sizeof( read2 ) ) == true );
+        REQUIRE( nv.read( 512, read2, sizeof( read2 ), sizeof( read2 ) ) == true );
         REQUIRE( read2[0] == 0xEE );
         REQUIRE( read2[1] == 0xFF );
 
@@ -309,7 +309,7 @@ TEST_CASE( "NV Flash 4K - Cross-Page Write" )
 
         // Read back from page 0 (last 6 bytes)
         uint8_t read0[6];
-        REQUIRE( nv.read( 250, read0, 6 ) == true );
+        REQUIRE( nv.read( 250, read0, 6, 6 ) == true );
         REQUIRE( read0[0] == 0xA0 );
         REQUIRE( read0[1] == 0xA1 );
         REQUIRE( read0[2] == 0xA2 );
@@ -319,13 +319,13 @@ TEST_CASE( "NV Flash 4K - Cross-Page Write" )
 
         // Read back from page 1 (first 14 bytes)
         uint8_t read1[14];
-        REQUIRE( nv.read( 256, read1, 14 ) == true );
+        REQUIRE( nv.read( 256, read1, 14, 14 ) == true );
         REQUIRE( read1[0] == 0xA6 );
         REQUIRE( read1[1] == 0xA7 );
 
         // Read the full 20 bytes as one operation
         uint8_t readFull[20];
-        REQUIRE( nv.read( 250, readFull, 20 ) == true );
+        REQUIRE( nv.read( 250, readFull, 20, 20 ) == true );
         REQUIRE( memcmp( readFull, writeData, 20 ) == 0 );
 
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
@@ -352,7 +352,7 @@ TEST_CASE( "NV Flash 4K - Format" )
 
         // Read should return 0xFF (erased state)
         uint8_t readData[3];
-        REQUIRE( nv.read( 0, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( readData[0] == 0xFF );
         REQUIRE( readData[1] == 0xFF );
         REQUIRE( readData[2] == 0xFF );
@@ -371,7 +371,7 @@ TEST_CASE( "NV Flash 4K - Format" )
         REQUIRE( nv.write( 0, data2, sizeof( data2 ) ) == true );
 
         uint8_t readData[2];
-        REQUIRE( nv.read( 0, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( readData[0] == 0x30 );
         REQUIRE( readData[1] == 0x40 );
 
@@ -408,13 +408,13 @@ TEST_CASE( "NV Flash 4K - Startup Scan Rebuilds Page Map" )
             nv.start();
 
             uint8_t read0[3];
-            REQUIRE( nv.read( 0, read0, sizeof( read0 ) ) == true );
+            REQUIRE( nv.read( 0, read0, sizeof( read0 ), sizeof( read0 ) ) == true );
             REQUIRE( read0[0] == 0xAA );
             REQUIRE( read0[1] == 0xBB );
             REQUIRE( read0[2] == 0xCC );
 
             uint8_t read1[2];
-            REQUIRE( nv.read( 256, read1, sizeof( read1 ) ) == true );
+            REQUIRE( nv.read( 256, read1, sizeof( read1 ), sizeof( read1 ) ) == true );
             REQUIRE( read1[0] == 0x11 );
             REQUIRE( read1[1] == 0x22 );
 
@@ -449,7 +449,7 @@ TEST_CASE( "NV Flash 4K - Startup Scan Rebuilds Page Map" )
             nv.start();
 
             uint8_t readData[1];
-            REQUIRE( nv.read( 0, readData, 1 ) == true );
+            REQUIRE( nv.read( 0, readData, 1, 1 ) == true );
             REQUIRE( readData[0] == 0x03 );
 
             nv.stop();
@@ -494,7 +494,7 @@ TEST_CASE( "NV Flash 4K - Sector Reclamation" )
 
         // Verify last write is readable
         uint8_t readData[4];
-        REQUIRE( nv.read( 0, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( readData[0] == 39 );
         REQUIRE( readData[1] == 40 );
         REQUIRE( readData[2] == 41 );
@@ -523,7 +523,7 @@ TEST_CASE( "NV Flash 4K - Boundary Conditions" )
         REQUIRE( nv.write( offset, data, sizeof( data ) ) == true );
 
         uint8_t readData[2];
-        REQUIRE( nv.read( offset, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( offset, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( readData[0] == 0xFE );
         REQUIRE( readData[1] == 0xFD );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
@@ -539,7 +539,7 @@ TEST_CASE( "NV Flash 4K - Boundary Conditions" )
     SECTION( "read beyond NV space fails" )
     {
         uint8_t data[1];
-        REQUIRE( nv.read( NV_TOTAL_SIZE_4K, data, 1 ) == false );
+        REQUIRE( nv.read( NV_TOTAL_SIZE_4K, data, 1, 1 ) == false );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
@@ -562,7 +562,7 @@ TEST_CASE( "NV Flash 4K - Boundary Conditions" )
         // Don't start it
         uint8_t data[] = { 0x01 };
         REQUIRE( nv2.write( 0, data, 1 ) == false );
-        REQUIRE( nv2.read( 0, data, 1 ) == false );
+        REQUIRE( nv2.read( 0, data, 1, 1 ) == false );
         REQUIRE( nv2.format() == false );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
@@ -628,7 +628,7 @@ TEST_CASE( "NV Flash 4K - All Logical Pages" )
         {
             uint8_t data;
             size_t  offset = page * NV_PAGE_SIZE_4K;
-            REQUIRE( nv.read( offset, &data, 1 ) == true );
+            REQUIRE( nv.read( offset, &data, 1, 1 ) == true );
             REQUIRE( data == static_cast<uint8_t>( page + 0x40 ) );
         }
 
@@ -673,7 +673,7 @@ TEST_CASE( "NV Flash 128K - Basic Read/Write" )
         REQUIRE( nv.write( 0, writeData, sizeof( writeData ) ) == true );
 
         uint8_t readData[3];
-        REQUIRE( nv.read( 0, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( memcmp( readData, writeData, sizeof( writeData ) ) == 0 );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
@@ -685,7 +685,7 @@ TEST_CASE( "NV Flash 128K - Basic Read/Write" )
         REQUIRE( nv.write( offset, writeData, sizeof( writeData ) ) == true );
 
         uint8_t readData[2];
-        REQUIRE( nv.read( offset, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( offset, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( memcmp( readData, writeData, sizeof( writeData ) ) == 0 );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
@@ -698,7 +698,7 @@ TEST_CASE( "NV Flash 128K - Basic Read/Write" )
         REQUIRE( nv.write( offset, writeData, sizeof( writeData ) ) == true );
 
         uint8_t readData[2];
-        REQUIRE( nv.read( offset, readData, sizeof( readData ) ) == true );
+        REQUIRE( nv.read( offset, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( readData[0] == 0xDE );
         REQUIRE( readData[1] == 0xAD );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
@@ -730,7 +730,7 @@ TEST_CASE( "NV Flash 128K - Scatter Writes Across Wide Range" )
         {
             uint8_t data;
             size_t  offset = pages[i] * NV_PAGE_SIZE_128K;
-            REQUIRE( nv.read( offset, &data, 1 ) == true );
+            REQUIRE( nv.read( offset, &data, 1, 1 ) == true );
             REQUIRE( data == static_cast<uint8_t>( pages[i] & 0xFF ) );
         }
 
@@ -764,7 +764,7 @@ TEST_CASE( "NV Flash 128K - Restart Persistence" )
             nv.start();
 
             uint8_t readData[2];
-            REQUIRE( nv.read( 50000, readData, sizeof( readData ) ) == true );
+            REQUIRE( nv.read( 50000, readData, sizeof( readData ), sizeof( readData ) ) == true );
             REQUIRE( readData[0] == 0xCA );
             REQUIRE( readData[1] == 0xFE );
 

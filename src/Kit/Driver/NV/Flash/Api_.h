@@ -209,9 +209,16 @@ bool Api<MAX_LOGICAL_PAGES>::write( size_t      dstOffset,
 template <size_t MAX_LOGICAL_PAGES>
 bool Api<MAX_LOGICAL_PAGES>::read( size_t srcOffset,
                                    void*  dstData,
+                                   size_t sizeDstData,
                                    size_t numBytesToRead ) noexcept
 {
     if ( !m_isStarted || dstData == nullptr || numBytesToRead == 0 )
+    {
+        return false;
+    }
+
+    // Validate destination buffer size
+    if ( sizeDstData < numBytesToRead )
     {
         return false;
     }

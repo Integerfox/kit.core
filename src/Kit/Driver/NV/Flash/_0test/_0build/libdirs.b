@@ -1,6 +1,9 @@
 # NV Flash driver test sources
 src/Kit/Driver/NV/Flash/_0test
 
+# NV interface
+src/Kit/Driver/NV
+
 # Dependencies
 src/Kit/System
 src/Kit/Container
