@@ -63,7 +63,7 @@ public:
     /** This method reads 'bytesToRead' bytes from the media at the specified
         offset.
 
-        The method returns the number of bytes read.  A return value of ZERO
+        The method returns the number of bytes read.  A return value of KIT_PERSISTENCE_SIZE_MAX
         indicates that an error occurred.
      */
     virtual Size_T read( Size_T offset,

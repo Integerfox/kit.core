@@ -21,12 +21,22 @@ namespace Record {
 ///
 namespace Media {
 
-/** This concrete class implements the Chunk interface by using a CRC
-    for ensuring data integrity.  The size/strength of the CRC is determined 
-    by the concrete implementation of the class.  The CRC is
+/** This concrete class implements the IMedia interface using the
+    Kit::Io::File interfaces. Each instance of this class uses a single file
+    as the storage media.  It is the responsibility of the application to ensure
+    that each instance has a unique file name
  */
 class FileAdapter : public Kit::Persistence::Record::IMedia
 {
+public:
+    /// Constructor
+    FileAdapter( const char* fileName, size_t allocatedLen ) noexcept
+        : m_fname( fileName )
+        , m_maxLen( allocatedLen )
+    {
+    }
+
+
 public:
     /// See Kit::Persistence::Record::IMedia
     void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
@@ -41,10 +51,16 @@ public:
     /// See Kit::Persistence::Record::IMedia
     Size_T read( Size_T offset, void* dstBuffer, Size_T bytesToRead ) noexcept override;
 
-
 public:
     /// See Kit::Persistence::Record::IMedia
     Size_T getMaxSize() const noexcept override;
+
+protected:
+    /// Name of the file used for storage
+    const char* m_fname;
+
+    /// Maximum support storage size
+    size_t m_maxLen;
 };
 
 }  // end namespaces
@@ -52,4 +68,3 @@ public:
 }
 }
 #endif  // end header latch
-

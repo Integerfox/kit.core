@@ -35,7 +35,7 @@ class Fdio : public Kit::Io::Stdio::Win32::Fdio
 {
 public:
     /** Opens a file.  The default arguments are set for:
-            o Read/Write access
+            o Read access
             o Do NOT create the file if the file does not exist
             o Do NOT truncate the file contents
      */

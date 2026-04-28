@@ -47,6 +47,9 @@ constexpr Size_T KIT_PERSISTENCE_SIZE_MAX = static_cast<Size_T>(-1);
 #define OPTION_KIT_PERSISTENCE_MEDIA_LITTLE_ENDIAN  1
 #endif
 
+}  // end namespaces
+}
+
 /** Kit::Memory::CursorXX class type for storage media using Little Endian byte
     ordering for multi-byte meta data fields
  */
@@ -57,7 +60,4 @@ constexpr Size_T KIT_PERSISTENCE_SIZE_MAX = static_cast<Size_T>(-1);
 #include "Kit/Memory/CursorBE.h"
 #define KIT_PERSISTENCE_MEDIA_CURSOR Kit::Memory::CursorBE
 #endif
-
-}  // end namespaces
-}
 #endif  // end header latch

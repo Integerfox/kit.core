@@ -11,7 +11,7 @@
 /** @file */
 
 #include "Kit/Persistence/Record/IMedia.h"
-
+#include "Kit/Driver/NV/IApi.h"
 ///
 namespace Kit {
 ///
@@ -21,14 +21,23 @@ namespace Record {
 ///
 namespace Media {
 
-/** This abstract class defines the operations that can be performed on a
-    persistent media.  The application is responsible for managing the
-    physical storage provided by each concrete IMedia instance.
-
-    There is a one-to-one relationship between IChunk and IMedia instances.
+/** This concrete class implements the IMedia interface using the NV driver
+    API (aka EEPROM media)
  */
 class NVAdapter : public Kit::Persistence::Record::IMedia
 {
+
+public:
+    /// Constructor.
+    NVAdapter( Kit::Driver::NV::IApi& lowLevelDriver,
+               size_t                 startingOffset,
+               size_t                 allocatedLen ) noexcept
+        : m_driver( lowLevelDriver )
+        , m_startingOffset( startingOffset )
+        , m_allocatedLen( allocatedLen )
+    {
+    }
+
 public:
     /// See Kit::Persistence::Record::IMedia
     void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
@@ -47,6 +56,16 @@ public:
 public:
     /// See Kit::Persistence::Record::IMedia
     Size_T getMaxSize() const noexcept override;
+
+protected:
+    /// Low level NV driver
+    Kit::Driver::NV::IApi& m_driver;
+
+    /// Starting offset for 'allocated' space within the NV media
+    size_t m_startingOffset;
+
+    /// Length of the 'allocated' space within the NV media
+    size_t m_allocatedLen;
 };
 
 }  // end namespaces
