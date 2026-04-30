@@ -32,6 +32,7 @@ elif [ -n "$GCC_VERSION" ]; then
 #!/bin/bash
 # GDB wrapper script to setup environment
 source "$(dirname "$0")/env.sh" 1
+export DEBUGINFOD_URLS=""
 gdb "$@"
 EOF
     chmod +x "$NQBP_PKG_ROOT/.vscode-gdb-wrapper.sh"

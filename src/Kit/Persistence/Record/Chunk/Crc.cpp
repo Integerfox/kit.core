@@ -36,20 +36,6 @@ void Crc::stop() noexcept
     m_media.stop();
 }
 
-bool Crc::pushToRecord( IPayload& dstHandler, Size_T sizeDataToPush )
-{
-    return dstHandler.copyFrom( m_workBuffer, sizeDataToPush );
-}
-Size_T Crc::pullFromRecord( IPayload& srcHandler )
-{
-    return srcHandler.copyTo( m_workBuffer, m_workBufferSize );
-}
-
-void Crc::resetChunkOnBadData()
-{
-    // Nothing required at this time (i.e. is a hook for child classes)
-}
-
 Size_T Crc::getMetadataLength() const noexcept
 {
     return TOTAL_META;
@@ -63,13 +49,9 @@ bool Crc::loadData( IPayload& dstHandler, Size_T index ) noexcept
 
     // Read the data length. This is the length of the application data WITHOUT
     // any of the chunk's meta data
-    if ( m_media.read( offset, m_workBuffer, sizeof( Size_T ) ) == sizeof( Size_T ) )
+    Size_T datalen;
+    if ( readSizeT( datalen, offset ) )
     {
-        // Convert the data length from the media's Endianess to the Host/MCU Endianess
-        KIT_PERSISTENCE_MEDIA_CURSOR cursor( m_workBuffer, sizeof( Size_T ) );
-        Size_T                       datalen;
-        cursor.read( datalen );
-
         // Make sure we have enough buffer space
         Size_T dataRemaining = datalen + META_CRC;
         if ( dataRemaining > m_workBufferSize )
@@ -78,31 +60,15 @@ bool Crc::loadData( IPayload& dstHandler, Size_T index ) noexcept
             return false;
         }
 
-        // CRC includes the record's data length field
-        m_crc.accumulate( &datalen, sizeof( datalen ) );
-        offset += sizeof( datalen );
-
         // Read the data AND CRC bytes
-        // NOTE: The endianess of the CRC in the payload is determined by the concrete IEdc
-        //       implementation, i.e. no 'cursor' is required to when reading the CRC bytes.
-        uint8_t* dstPtr = m_workBuffer;
-        while ( dataRemaining )
+        if ( readRecordData( datalen, offset ) )
         {
-            size_t bytesRead = m_media.read( offset, dstPtr, dataRemaining );
-            if ( bytesRead == 0 )
+            // Check the CRC
+            if ( m_crc.isOkay() )
             {
-                break;
+                // Pass the data to the client
+                return pushToRecord( dstHandler, datalen );
             }
-            m_crc.accumulate( m_workBuffer, bytesRead );
-            offset        += bytesRead;
-            dataRemaining -= bytesRead;
-        }
-
-        // Check the CRC
-        if ( m_crc.isOkay() )
-        {
-            // Pass the data to the client
-            return pushToRecord( dstHandler, datalen );
         }
     }
 
@@ -159,7 +125,7 @@ bool Crc::updateData( IPayload& srcHandler, Size_T index, bool invalidate ) noex
             // Corrupt the CRC when erasing the data
             m_workBuffer[0] ^= 0xA5;
         }
-        result &= m_media.write( offset, m_workBuffer, META_CRC);
+        result &= m_media.write( offset, m_workBuffer, META_CRC );
     }
 
     return result;

@@ -56,18 +56,22 @@ public:
         The method return true of the write operation was successful, else false
         is returned.
      */
-    virtual bool write( Size_T offset,
-                        const void*     srcData,
-                        Size_T srcLen ) noexcept = 0;
+    virtual bool write( Size_T      offset,
+                        const void* srcData,
+                        Size_T      srcLen ) noexcept = 0;
 
     /** This method reads 'bytesToRead' bytes from the media at the specified
-        offset.
+        offset.  The method does not return until:
+
+        1) All requested bytes have been read,
+        2) OR all available bytes have been read (i.e. end of media reached),
+        3) OR an error occurs.
 
         The method returns the number of bytes read.  A return value of KIT_PERSISTENCE_SIZE_MAX
         indicates that an error occurred.
      */
     virtual Size_T read( Size_T offset,
-                         void* dstBuffer,
+                         void*  dstBuffer,
                          Size_T bytesToRead ) noexcept = 0;
 
 
