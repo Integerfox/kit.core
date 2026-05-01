@@ -12,7 +12,7 @@
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/Assert.h"
-#include "Kit/Persistence/Record/Chunk/Crc.h"
+#include "Kit/Persistence/Record/Chunk/Mirrored.h"
 #include "Kit/Checksum/Fletcher16.h"
 #include "Kit/Checksum/Crc32EthernetFast.h"
 #include "Kit/Persistence/Record/Media/FileAdapter.h"
@@ -31,15 +31,16 @@ using namespace Kit::Persistence;
 ////////////////////////////////////////////////////////////////////////////////
 namespace {
 
-class MyUut : public Crc
+class MyUut : public Mirrored
 {
 public:
     int m_startCount;
     int m_stopCount;
 
-    MyUut( IMedia&              media,
+    MyUut( IMedia&              mediaA,
+           IMedia&              mediaB,
            Kit::Checksum::IEdc& edc )
-        : Crc( media, edc )
+        : Mirrored( mediaA, mediaB, edc )
         , m_startCount( 0 )
         , m_stopCount( 0 )
     {
@@ -47,14 +48,14 @@ public:
 
     void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
     {
-        Crc::start( myEventQueue );
+        Mirrored::start( myEventQueue );
         m_startCount++;
     }
 
     /// See Cpl::Persistent::Chunk
     void stop() noexcept
     {
-        Crc::stop();
+        Mirrored::stop();
         m_stopCount++;
     }
 };
@@ -78,7 +79,7 @@ public:
 
     Size_T copyTo( void* dst, Size_T maxDstLen ) noexcept override
     {
-        Size_T len = strlen( m_getString ) + 1;
+        Size_T len = strlen( m_getString );
         KIT_SYSTEM_ASSERT( maxDstLen >= len );
         m_getCount++;
 
@@ -101,20 +102,24 @@ public:
 static MyPayload payload1_( "Hello" );
 static MyPayload payload2_( "World" );
 
-#define MEDIA_FILE_NAME  "media.bin"
-#define MEDIA_FILE_NAME2 "media2.bin"
-#define MEDIA_MAX_SIZE   128
+#define MEDIA_A_FILE_NAME  "mediaA.bin"
+#define MEDIA_A_FILE_NAME2 "mediaA2.bin"
+#define MEDIA_B_FILE_NAME  "mediaB.bin"
+#define MEDIA_B_FILE_NAME2 "mediaB2.bin"
+
+#define MEDIA_MAX_SIZE     128
 
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "Crc" )
+TEST_CASE( "Mirrored" )
 {
     KIT_SYSTEM_TRACE_SCOPE( SECT_, "CRC test" );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     Kit::EventQueue::Server   mockEventQueue;
-    Media::FileAdapter        fd1( MEDIA_FILE_NAME, MEDIA_MAX_SIZE );
+    Media::FileAdapter        fdA( MEDIA_A_FILE_NAME, MEDIA_MAX_SIZE );
+    Media::FileAdapter        fdB( MEDIA_B_FILE_NAME, MEDIA_MAX_SIZE );
     Kit::Checksum::Fletcher16 crc;
-    MyUut                     uut( fd1, crc );
+    MyUut                     uut( fdA, fdB, crc );
     payload1_.m_putCount = 0;
     payload1_.m_getCount = 0;
     payload2_.m_putCount = 0;
@@ -131,13 +136,14 @@ TEST_CASE( "Crc" )
         REQUIRE( uut.m_startCount == 1 );
         REQUIRE( uut.m_stopCount == 1 );
 
-        REQUIRE( uut.getMetadataLength() == ( sizeof( Size_T ) + crc.getEdcSize() ) );  // Expected: Data Len Field size + CRC size
+        REQUIRE( uut.getMetadataLength() == ( sizeof(uint64_t) + sizeof( Size_T ) + crc.getEdcSize() ) );  // Expected: TransID + Data Len Field size + CRC size
     }
 
     SECTION( "Load/update" )
     {
         // Delete files
-        Kit::Io::File::System::remove( MEDIA_FILE_NAME );
+        Kit::Io::File::System::remove( MEDIA_A_FILE_NAME );
+        Kit::Io::File::System::remove( MEDIA_B_FILE_NAME );
         uut.start( mockEventQueue );
 
         bool result = uut.loadData( payload1_ );
@@ -180,17 +186,53 @@ TEST_CASE( "Crc" )
         REQUIRE( payload2_.m_putCount == 1 );
         REQUIRE( strcmp( payload2_.m_buffer, payload2_.m_getString ) == 0 );
 
-        // Corrupt region 2
-        Kit::Io::File::Output fd( MEDIA_FILE_NAME );
+        // Corrupt A
+        Kit::Io::File::Output fd( MEDIA_A_FILE_NAME );
         REQUIRE( fd.isOpened() );
         fd.write( "junk" );
         fd.close();
 
-        // Read the data (should be bad)
+        // Read the data (should be good)
+        result = uut.loadData( payload2_ );
+        REQUIRE( result == true );
+        REQUIRE( payload2_.m_getCount == 0 );
+        REQUIRE( payload2_.m_putCount == 2 );
+
+        // Update thd data on disk
+        uut.updateData( payload1_ );
+        REQUIRE( payload1_.m_getCount == 1 );
+
+        // Corrupt B
+        Kit::Io::File::Output fd2( MEDIA_B_FILE_NAME );
+        REQUIRE( fd2.isOpened() );
+        fd2.write( "junk" );
+        fd2.close();
+
+        // Read the data (should be good)
+        result = uut.loadData( payload2_ );
+        REQUIRE( result == true );
+        REQUIRE( payload2_.m_getCount == 0 );
+        REQUIRE( payload2_.m_putCount == 3 );
+
+        // Update thd data on disk
+        uut.updateData( payload1_ );
+        REQUIRE( payload1_.m_getCount == 2 );
+
+        // Corrupt A and B
+        Kit::Io::File::Output fd3( MEDIA_A_FILE_NAME );
+        REQUIRE( fd3.isOpened() );
+        fd3.write( "junk" );
+        fd3.close();
+        Kit::Io::File::Output fd4( MEDIA_B_FILE_NAME );
+        REQUIRE( fd4.isOpened() );
+        fd4.write( "junk" );
+        fd4.close();
+
+        // Read the data (should be BAD)
         result = uut.loadData( payload2_ );
         REQUIRE( result == false );
         REQUIRE( payload2_.m_getCount == 0 );
-        REQUIRE( payload2_.m_putCount == 1 );
+        REQUIRE( payload2_.m_putCount == 3 );
 
         uut.stop();
     }
@@ -198,7 +240,8 @@ TEST_CASE( "Crc" )
     SECTION( "Erase" )
     {
         // Delete files
-        Kit::Io::File::System::remove( MEDIA_FILE_NAME );
+        Kit::Io::File::System::remove( MEDIA_A_FILE_NAME );
+        Kit::Io::File::System::remove( MEDIA_B_FILE_NAME );
         payload1_.m_putCount = 0;
         payload1_.m_getCount = 0;
         uut.start( mockEventQueue );
@@ -230,12 +273,14 @@ TEST_CASE( "Crc" )
     SECTION( "different CRC" )
     {
         // Delete files
-        Kit::Io::File::System::remove( MEDIA_FILE_NAME2 );
+        Kit::Io::File::System::remove( MEDIA_A_FILE_NAME2 );
+        Kit::Io::File::System::remove( MEDIA_B_FILE_NAME2 );
 
         Kit::Checksum::Crc32EthernetFast crc2;
-        Media::FileAdapter               fd2( MEDIA_FILE_NAME2, MEDIA_MAX_SIZE );
-        MyUut                            uut2( fd2, crc2 );
-        REQUIRE( uut2.getMetadataLength() == ( sizeof( Size_T ) + crc2.getEdcSize() ) );  // Expected: Data Len Field size + CRC size
+        Media::FileAdapter               fd2( MEDIA_A_FILE_NAME2, MEDIA_MAX_SIZE );
+        Media::FileAdapter               fd3( MEDIA_B_FILE_NAME2, MEDIA_MAX_SIZE );
+        MyUut                            uut2( fd2, fd3, crc2 );
+        REQUIRE( uut2.getMetadataLength() == ( sizeof(uint64_t) + sizeof( Size_T ) + crc2.getEdcSize() ) );  // Expected: TransID + Data Len Field size + CRC size
 
         uut2.start( mockEventQueue );
 

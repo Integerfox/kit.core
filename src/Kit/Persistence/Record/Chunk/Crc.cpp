@@ -50,7 +50,7 @@ bool Crc::loadData( IPayload& dstHandler, Size_T index ) noexcept
     // Read the data length. This is the length of the application data WITHOUT
     // any of the chunk's meta data
     Size_T datalen;
-    if ( readSizeT( datalen, offset ) )
+    if ( readSizeT( datalen, offset, m_media ) )
     {
         // Make sure we have enough buffer space
         Size_T dataRemaining = datalen + META_CRC;
@@ -61,7 +61,7 @@ bool Crc::loadData( IPayload& dstHandler, Size_T index ) noexcept
         }
 
         // Read the data AND CRC bytes
-        if ( readRecordData( datalen, offset ) )
+        if ( readRecordData( datalen + META_CRC, offset, m_media ) )
         {
             // Check the CRC
             if ( m_crc.isOkay() )
@@ -81,8 +81,8 @@ bool Crc::updateData( IPayload& srcHandler, Size_T index, bool invalidate ) noex
 {
     // Get the IPayload data
     memset( m_workBuffer, 0, m_workBufferSize );  // zero out all of the data - to ensure known values for the 'extra-space' (if there is any)
-    Size_T len = pullFromRecord( srcHandler );
-    if ( len == KIT_PERSISTENCE_SIZE_MAX )
+    Size_T dataLen = pullFromRecord( srcHandler );
+    if ( dataLen == KIT_PERSISTENCE_SIZE_MAX )
     {
         return false;
     }
@@ -98,25 +98,16 @@ bool Crc::updateData( IPayload& srcHandler, Size_T index, bool invalidate ) noex
     bool   result = true;
     m_crc.reset();
 
-    // Convert the data length from the Host/MCU Endianess to the media's Endianess
-    Size_T                       bufferRecordLen;
-    KIT_PERSISTENCE_MEDIA_CURSOR cursor( &bufferRecordLen, sizeof( bufferRecordLen ) );
-    cursor.write( len );
-
     // Write the data length to persistent storage. This is the length of the application data WITHOUT any of the chunk's meta data
-    result &= m_media.write( offset, &bufferRecordLen, sizeof( bufferRecordLen ) );
-    m_crc.accumulate( &bufferRecordLen, sizeof( bufferRecordLen ) );
-    offset += sizeof( bufferRecordLen );
+    result &= writeSizeT( dataLen, offset, m_media );
 
     // Write Application's data
-    result &= m_media.write( offset, m_workBuffer, len );
-    m_crc.accumulate( m_workBuffer, len );
-    offset += len;
+    result &= writeRecordData( dataLen, offset, m_media );
 
     // Finalize the CRC and write it to persistent storage.
-    // Note: The endianess of the CRC in the payload is determined by the concrete
-    //       IEdc implementation, i.e. no 'cursor' is required to when writing the
-    //       CRC bytes.
+    // NOTE: The endianess of the CRC in the payload is determined by the concrete
+    //       IEdc implementation, i.e. no endian conversion is required by the
+    //       Chunk when writing the CRC bytes.
     result &= m_crc.finalize( m_workBuffer, m_workBufferSize );
     if ( result )
     {

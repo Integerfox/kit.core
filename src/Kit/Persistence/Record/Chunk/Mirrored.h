@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_ICHUNK_H
-#define KIT_PERSISTENCE_RECORD_ICHUNK_H
+#ifndef KIT_PERSISTENCE_RECORD_CHUNK_MIRRORED_H
+#define KIT_PERSISTENCE_RECORD_CHUNK_MIRRORED_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,8 +11,10 @@
 /** @file */
 
 #include "Kit/EventQueue/IQueue.h"
-#include "Kit/Persistence/Record/IPayload.h"
-#include <stdlib.h>
+#include "Kit/Persistence/Record/Chunk/private_.h"
+#include "Kit/Persistence/Record/Chunk/Common.h"
+#include "Kit/Persistence/Record/IMedia.h"
+
 
 ///
 namespace Kit {
@@ -20,86 +22,69 @@ namespace Kit {
 namespace Persistence {
 ///
 namespace Record {
+///
+namespace Chunk {
 
-/** This abstract class defines the interface for managing a 'chunk'. A chunk is
-    responsible for managing the meta-data (e.g. CRC) associated with a Record's
-    data when stored in persistent storage. A chunk is also responsible for
-    reading and writing the Record's data from/to persistent storage
+/** This concrete class implements the IChunk interface by storing two copies
+    of the Record's data, where each copy is CRC'd.  This ensures that if power
+    fails during a write operation to persistent media - there will also be a
+    good 'previous' copy of the data available.
 
-    There is a one-to-one relationship between a IChunk and IRecord instances.
+    - The strength and bit width of the CRC is determined by the IEdc instance
+      provided in the class's constructor.
+
+    - The class requires two IMedia instances, one for each copy of the Record.
  */
-class IChunk
+class Mirrored : public Common
 {
 public:
-    /** This method is to start/initialize the chunk.  It is typically only
-        called once at the startup of the application.  However, start() can be
-        called after a previous call to the stop() method.
-
-        This method is called when the corresponding Record instance is 'started'
-
-        The 'myEventQueue' is a reference to the RecordServer's Event Queue, i.e. the
-        event loop for the thread that the Chunk executes in.
-     */
-    virtual void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept = 0;
-
-    /** This method is to stop/shutdown the chunk.  It is typically only
-        called once during an orderly shutdown of the application. However,
-        start() can be after a previous call to the stop() method.
-     */
-    virtual void stop() noexcept = 0;
-
+    /// Constructor
+    Mirrored( IMedia&              mediaA,
+              IMedia&              mediaB,
+              Kit::Checksum::IEdc& edc,
+              uint8_t*             workBuffer     = g_workBuffer_,
+              Size_T               workBufferSize = sizeof( g_workBuffer_ ) ) noexcept
+        : Common( mediaA, edc, workBuffer, workBufferSize )
+        , m_mediaB( mediaB )
+    {
+    }
 
 public:
-    /** This method is used to initiate the sequence to retrieve a Record's
-        data from persistent storage. 
+    /// See Kit::Persistence::Record::IChunk
+    void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
 
-        The 'index' offset can be used by the Chunk client to 'index into' the
-        Chunk's region instead of starting at offset zero.  This argument should
-        only be used when multiple instances of a Record is being stored in
-        a single region.
+    /// See Kit::Persistence::Record::IChunk
+    void stop() noexcept override;
 
-        The method returns true if the read operation was successful and that
-        the data is 'valid'; else false is returned
-     */
-    virtual bool loadData( IPayload& destination,
-                           size_t    index = 0 ) noexcept = 0;
+    /// See Kit::Persistence::Record::IChunk
+    bool loadData( IPayload& destination,
+                   Size_T    index = 0 ) noexcept override;
 
-    /** This method is used to update persistent storage with new data for the
-        Record.  The entire record is written/updated when this call is made.
-        The method does not return until the write operation has completed.
+    /// See Kit::Persistence::Record::IChunk
+    bool updateData( IPayload& source,
+                     Size_T    index      = 0,
+                     bool      invalidate = false ) noexcept override;
 
-        If the 'invalidate' argument is true, the instead of writing the
-        new data to persistent storage, all binary zero's are written AND all
-        of the chunk's metadata is invalidated.  This effectively erases the
-        Record, i.e. the next time the record is loaded, it will fail because
-        the chunk data is NOT valid.
+    /// See Kit::Persistence::Record::IChunk
+    Size_T getMetadataLength() const noexcept override;
 
-        The 'index' offset can be used by the Chunk client to 'index into' the
-        Chunk's region instead of starting at offset zero.  This argument should
-        only be used when multiple instances of a Record is being stored in
-        a single region.
+protected:
+    /// Helper method.  If the region is 'corrupt' a transaction ID of zero is returned
+    uint64_t virtual getTransactionId( IMedia& media, Size_T& dataLen, Size_T index=0  );
 
-        The method returns true if successful; else false is returned.  It is
-        the responsibility of the Record/Application to decided what to do when
-        there is error (e.g. ignored, a log entry generated, etc.)
-    */
-    virtual bool updateData( IPayload& source,
-                             size_t    index      = 0,
-                             bool      invalidate = false ) noexcept = 0;
+    protected:
+    /// Current Transaction ID (the larger the value - the newer the data)
+    uint64_t m_transId;
 
+    /// 2nd media instance for the mirrored copy of the record
+    IMedia& m_mediaB;
 
-public:
-    /** This method returns the size, in bytes, of any/all metadata that is
-        included with the record when it is stored in persistent storage.
-     */
-    virtual size_t getMetadataLength() const noexcept = 0;
-
-public:
-    /// Virtual destructor
-    virtual ~IChunk() = default;
+    /// Pointer to the current media (i.e. newest read/written media)
+    IMedia* m_currentMedia;
 };
 
 }  // end namespaces
+}
 }
 }
 #endif  // end header latch

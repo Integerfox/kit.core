@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Common.h"
+#include "Kit/Persistence/Record/IMedia.h"
 #include "Kit/Persistence/Types.h"
 #include <string.h>
 
@@ -20,15 +21,12 @@ namespace Persistence {
 namespace Record {
 namespace Chunk {
 
-#define META_LEN   sizeof( Size_T )
-#define META_CRC   m_crc.getEdcSize()
-#define TOTAL_META ( META_LEN + META_CRC )
 
 /////////////////////
-bool Common::readSizeT( Size_T& value, Size_T& offset, void* workBuffer ) noexcept
+bool Common::readSizeT( Size_T& value, Size_T& offset, IMedia& media ) noexcept
 {
-    uint8_t* buffer = ( workBuffer != nullptr ) ? static_cast<uint8_t*>( workBuffer ) : m_workBuffer;
-    if ( m_media.read( offset, buffer, sizeof( Size_T ) ) == sizeof( Size_T ) )
+    uint8_t buffer[sizeof( Size_T )];
+    if ( media.read( offset, buffer, sizeof( Size_T ) ) == sizeof( Size_T ) )
     {
         // Convert the data length from the media's Endianess to the Host/MCU Endianess
         KIT_PERSISTENCE_MEDIA_CURSOR cursor( buffer, sizeof( Size_T ) );
@@ -42,10 +40,10 @@ bool Common::readSizeT( Size_T& value, Size_T& offset, void* workBuffer ) noexce
     return false;
 }
 
-bool Common::readUint64( uint64_t& value, Size_T& offset, void* workBuffer ) noexcept
+bool Common::readUint64( uint64_t& value, Size_T& offset, IMedia& media ) noexcept
 {
-    uint8_t* buffer = ( workBuffer != nullptr ) ? static_cast<uint8_t*>( workBuffer ) : m_workBuffer;
-    if ( m_media.read( offset, buffer, sizeof( uint64_t ) ) == sizeof( uint64_t ) )
+    uint8_t buffer[sizeof( uint64_t )];
+    if ( media.read( offset, buffer, sizeof( uint64_t ) ) == sizeof( uint64_t ) )
     {
         // Convert the data length from the media's Endianess to the Host/MCU Endianess
         KIT_PERSISTENCE_MEDIA_CURSOR cursor( buffer, sizeof( uint64_t ) );
@@ -59,9 +57,48 @@ bool Common::readUint64( uint64_t& value, Size_T& offset, void* workBuffer ) noe
     return false;
 }
 
-bool Common::readRecordData( Size_T dataLen, Size_T& offset ) noexcept
+bool Common::readRecordData( Size_T dataLen, Size_T& offset, IMedia& media ) noexcept
 {
-    if ( m_media.read( offset, m_workBuffer, dataLen ) == dataLen )
+    if ( media.read( offset, m_workBuffer, dataLen ) == dataLen )
+    {
+        m_crc.accumulate( m_workBuffer, dataLen );
+        offset += dataLen;  // Advance the offset to point to the next byte
+        return true;
+    }
+    return false;
+}
+
+bool Common::writeSizeT( Size_T value, Size_T& offset, IMedia& media ) noexcept
+{
+    uint8_t buffer[sizeof( Size_T )];
+    KIT_PERSISTENCE_MEDIA_CURSOR cursor( buffer, sizeof( Size_T ) );
+    cursor.write( value );
+    if ( media.write( offset, buffer, sizeof( Size_T ) ) )
+    {
+        m_crc.accumulate( buffer, sizeof( Size_T ) );
+        offset += sizeof( Size_T );
+        return true;
+    }
+    return false;
+}
+
+bool Common::writeUint64( uint64_t value, Size_T& offset, IMedia& media ) noexcept
+{
+    uint8_t buffer[sizeof( uint64_t )];
+    KIT_PERSISTENCE_MEDIA_CURSOR cursor( buffer, sizeof( uint64_t ) );
+    cursor.write( value );
+    if ( media.write( offset, buffer, sizeof( uint64_t ) ) )
+    {
+        m_crc.accumulate( buffer, sizeof( uint64_t ) );
+        offset += sizeof( uint64_t );
+        return true;
+    }
+    return false;
+}
+
+bool Common::writeRecordData( Size_T dataLen, Size_T& offset, IMedia& media ) noexcept
+{
+    if ( media.write( offset, m_workBuffer, dataLen ) )
     {
         m_crc.accumulate( m_workBuffer, dataLen );
         offset += dataLen;  // Advance the offset to point to the next byte
