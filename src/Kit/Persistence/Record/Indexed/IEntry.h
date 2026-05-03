@@ -72,17 +72,17 @@ public:
               is used as a work buffer when traversing the list.
 
      */
-    virtual bool getNext( uint64_t            newerThanTimestamp,
+    virtual bool getNext( uint64_t       newerThanTimestamp,
                           const Marker_T beginHereMarker,
-                          IPayload&           dst,
+                          IPayload&      dst,
                           Marker_T&      entryMarker ) noexcept = 0;
 
     /** This method is similar to getNext(), except that it returns the next
         oldest entry.
      */
-    virtual bool getPrevious( uint64_t            olderThanTimestamp,
+    virtual bool getPrevious( uint64_t       olderThanTimestamp,
                               const Marker_T beginHereMarker,
-                              IPayload&           dst,
+                              IPayload&      dst,
                               Marker_T&      entryMarker ) noexcept = 0;
 
 public:
@@ -95,15 +95,15 @@ public:
         NOTE: 'dst' is ALWAYS updated EVEN if no valid entry was 'found',
               basically 'dst' is used as a work buffer when traversing the list.
      */
-    virtual bool getByEntryIndex( size_t         entryIndex,
-                                  IPayload&      dst,
+    virtual bool getByEntryIndex( Size_T    entryIndex,
+                                  IPayload& dst,
                                   Marker_T& entryMarker ) noexcept = 0;
 
 
     /** This method returns the maximum allowed 'entryIndex' when calling
         getByEntryIndex().
      */
-    virtual size_t getMaxIndex() const noexcept = 0;
+    virtual Size_T getMaxIndex() const noexcept = 0;
 
 public:
     /** This method appends an entry to the list of Indexed Entries.  The method
@@ -118,13 +118,13 @@ public:
 public:
     /** This method reset's the 'head pointer' to the beginning of the
         available storage, i.e. it is a logical clear of the entries stored
-        in persistent storage. 
+        in persistent storage.
      */
     virtual void resetHead() noexcept = 0;
 
     /** This method will erase ALL entries in persistent storage.  Depending
         on the platform and storage size of the IMedia instance this method
-        can take a VERY LONG TIME to complete.  
+        can take a VERY LONG TIME to complete.
 
         CAUTION: With great power comes, comes great responsibility!
 

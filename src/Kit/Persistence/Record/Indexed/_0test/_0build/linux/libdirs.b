@@ -1,0 +1,7 @@
+# Platform
+src/Kit/System/Posix
+src/Kit/System/Posix/_fatalerror
+src/Kit/Text/_mappings/_posix
+src/Kit/Io/Stdio/Posix
+src/Kit/Io/File/Posix
+src/Kit/System/Posix/_realtime

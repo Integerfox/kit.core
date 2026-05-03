@@ -31,7 +31,7 @@ namespace Indexed {
     This class is responsible for managing the 'head pointer' for the logical
     RingBuffer that is used to manage multiple entries.
 */
-class EntryRecord : public IEntry 
+class EntryRecord : public IEntry
 {
 public:
     /// Constructor.
@@ -87,12 +87,12 @@ public:
                       Marker_T&      entryMarker ) noexcept override;
 
     /// See Kit::Persistence::Record::Indexed::IEntry
-    bool getByEntryIndex( size_t    entryIndex,
+    bool getByEntryIndex( Size_T    entryIndex,
                           IPayload& dst,
                           Marker_T& entryMarker ) noexcept override;
 
-                          /// See Kit::Persistence::Record::Indexed::IEntry
-    size_t getMaxIndex() const noexcept override;
+    /// See Kit::Persistence::Record::Indexed::IEntry
+    Size_T getMaxIndex() const noexcept override;
 
     /// See Kit::Persistence::Record::Indexed::IEntry
     bool addEntry( const IPayload& src ) noexcept override;
@@ -124,10 +124,10 @@ protected:
     void scanAllEntries();
 
     /// Helper method: 'increments' the offset by the size of entry (and handles the 'roll-over' case)
-    size_t incrementOffset( Size_T offsetToIncrement ) const noexcept;
+    Size_T incrementOffset( Size_T offsetToIncrement ) const noexcept;
 
     /// Helper method: 'decrements' the offset by the size of entry (and handles the 'roll-over' case)
-    size_t decrementOffset( Size_T offsetToDecrement ) const noexcept;
+    Size_T decrementOffset( Size_T offsetToDecrement ) const noexcept;
 
     /// Helper method: get an entry by its offset
     bool getByOffset( Size_T            offset,
