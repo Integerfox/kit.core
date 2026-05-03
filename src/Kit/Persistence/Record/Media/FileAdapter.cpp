@@ -21,9 +21,10 @@ namespace Record {
 namespace Media {
 
 
-void FileAdapter::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
+bool FileAdapter::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
 {
     // Nothing needed
+    return true;
 }
 
 void FileAdapter::stop() noexcept

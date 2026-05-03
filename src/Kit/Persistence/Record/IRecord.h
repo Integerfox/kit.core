@@ -35,8 +35,11 @@ public:
         The 'myEventQueue' is a reference to the Record Server's Event Queue, i.e.
         the event loop for the thread that the Record Server executes in. Example 
         usage of 'myEventQueue' is if the IRecord needs/uses a software timer
+
+        The method returns true on success; else false is returned when an error
+        occurred during the start.
      */
-    virtual void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept = 0;
+    virtual bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept = 0;
 
     /** This method is used to stop/shutdown the Record.  It is typically only
         called once during an orderly shutdown of the application. However,
@@ -45,9 +48,8 @@ public:
     virtual void stop() noexcept = 0;
 
 public:
-    /** This method returns the total size, in bytes, of the Record.  The length
-        includes all framing/metadata bytes as well as the size of the Record's
-        'payload'
+    /** This method returns the total number of bytes that make up the Record's
+        'meta data' when the record is stored in persistent storage
      */
     virtual Size_T getSize() const noexcept = 0;
 

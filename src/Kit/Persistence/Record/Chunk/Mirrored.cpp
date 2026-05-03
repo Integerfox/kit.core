@@ -28,12 +28,14 @@ namespace Chunk {
 
 /////////////////////
 
-void Mirrored::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
+bool Mirrored::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
 {
-    m_media.start( myEventQueue );
-    m_mediaB.start( myEventQueue );
+    bool result = true;
+    result &= m_media.start( myEventQueue );
+    result &= m_mediaB.start( myEventQueue );
     m_transId      = 0;
     m_currentMedia = nullptr;
+    return result;
 }
 
 void Mirrored::stop() noexcept

@@ -39,9 +39,12 @@ public:
         The 'myEventQueue' is a reference to the Record Server's Event Queue,
         i.e. the event loop for the thread that the Record Server executes in.
         Example usage of 'myEventQueue' is if the IMedia needs/uses a software
-        timer
+        timer.
+
+        The method returns true on success; else false is returned when an error
+        occurred during the start.
      */
-    virtual void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept = 0;
+    virtual bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept = 0;
 
     /** This method is used to stop/shutdown the IMedia instance.  It is typically only
         called once during an orderly shutdown of the application. However,

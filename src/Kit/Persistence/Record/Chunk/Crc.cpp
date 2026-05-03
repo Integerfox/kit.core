@@ -26,9 +26,9 @@ namespace Chunk {
 
 /////////////////////
 
-void Crc::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
+bool Crc::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
 {
-    m_media.start( myEventQueue );
+    return m_media.start( myEventQueue );
 }
 
 void Crc::stop() noexcept

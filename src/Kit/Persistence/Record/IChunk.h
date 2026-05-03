@@ -38,9 +38,12 @@ public:
 
         The 'myEventQueue' is a reference to the RecordServer's Event Queue, i.e. the
         event loop for the thread that the Chunk executes in.  Example usage of
-        'myEventQueue' is if the IChunk needs/uses a software timer
+        'myEventQueue' is if the IChunk needs/uses a software timer.
+
+        The method returns true on success; else false is returned when an error
+        occurred during the start. 
      */
-    virtual void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept = 0;
+    virtual bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept = 0;
 
     /** This method is to stop/shutdown the chunk.  It is typically only
         called once during an orderly shutdown of the application. However,
@@ -54,9 +57,9 @@ public:
         data from persistent storage.
 
         The 'index' offset can be used by the Chunk client to 'index into' the
-        Chunk's region instead of starting at offset zero.  This argument should
-        only be used when multiple instances of a Record is being stored in
-        a single region.
+        Chunk's IMedia instead of starting at offset zero.  This argument should
+        only be used when multiple 'entries' are being stored in
+        a single IMedia storage.
 
         The method returns true if the read operation was successful and that
         the data is 'valid'; else false is returned
@@ -75,9 +78,9 @@ public:
         the chunk data is NOT valid.
 
         The 'index' offset can be used by the Chunk client to 'index into' the
-        Chunk's region instead of starting at offset zero.  This argument should
-        only be used when multiple instances of a Record is being stored in
-        a single region.
+        Chunk's IMedia instead of starting at offset zero.  This argument should
+        only be used when multiple 'entries' are being stored in a single IMedia
+        storage.
 
         The method returns true if successful; else false is returned.  It is
         the responsibility of the Record/Application to decided what to do when

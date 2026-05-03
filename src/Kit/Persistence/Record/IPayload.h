@@ -43,6 +43,11 @@ public:
      */
     virtual bool copyFrom( const void* src, Size_T srcLen ) noexcept = 0;
 
+    /** This method returns maximum number of bytes that can be copied to/from
+        the payload.  NOTE: Is is possible the value returned by the copyTo()
+        method to be less than the value returned by this method. 
+     */
+    virtual Size_T getMaxPayloadSize() const noexcept = 0;
 
 public:
     /// Virtual destructor

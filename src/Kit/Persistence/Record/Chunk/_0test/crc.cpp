@@ -45,10 +45,10 @@ public:
     {
     }
 
-    void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
+    bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
     {
-        Crc::start( myEventQueue );
         m_startCount++;
+        return Crc::start( myEventQueue );
     }
 
     /// See Cpl::Persistent::Chunk
@@ -124,7 +124,7 @@ TEST_CASE( "Crc" )
     {
         REQUIRE( uut.m_startCount == 0 );
         REQUIRE( uut.m_stopCount == 0 );
-        uut.start( mockEventQueue );
+        REQUIRE( uut.start( mockEventQueue ) );
         REQUIRE( uut.m_startCount == 1 );
         REQUIRE( uut.m_stopCount == 0 );
         uut.stop();
@@ -138,7 +138,7 @@ TEST_CASE( "Crc" )
     {
         // Delete files
         Kit::Io::File::System::remove( MEDIA_FILE_NAME );
-        uut.start( mockEventQueue );
+        REQUIRE( uut.start( mockEventQueue ) );
 
         bool result = uut.loadData( payload1_ );
         REQUIRE( result == false );
@@ -171,7 +171,7 @@ TEST_CASE( "Crc" )
 
     SECTION( "corrupt CRC" )
     {
-        uut.start( mockEventQueue );
+        REQUIRE( uut.start( mockEventQueue ) );
 
         // Read the data
         bool result = uut.loadData( payload2_ );
@@ -201,7 +201,7 @@ TEST_CASE( "Crc" )
         Kit::Io::File::System::remove( MEDIA_FILE_NAME );
         payload1_.m_putCount = 0;
         payload1_.m_getCount = 0;
-        uut.start( mockEventQueue );
+        REQUIRE( uut.start( mockEventQueue ) );
 
         bool result = uut.loadData( payload1_ );
         REQUIRE( result == false );

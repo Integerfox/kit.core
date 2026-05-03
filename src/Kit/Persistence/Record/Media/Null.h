@@ -40,7 +40,7 @@ public:
 
 public:
     /// See Kit::Persistence::Record::IMedia
-    void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override {};
+    bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override { return true; }
 
     /// See Kit::Persistence::Record::IMedia
     void stop() noexcept override {};

@@ -38,7 +38,7 @@ TEST_CASE( "Null" )
     Kit::EventQueue::Server mockEventQueue;
     Null                    uut( 12 );
 
-    uut.start( mockEventQueue );
+    REQUIRE( uut.start( mockEventQueue ) == true );
     uut.stop();
     REQUIRE( uut.getMaxSize() == 12 );
 

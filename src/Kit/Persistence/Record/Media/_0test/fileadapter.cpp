@@ -45,7 +45,7 @@ TEST_CASE( "FileAdapter" )
     FileAdapter             uut( "out.txt", 12 );
     char                    buffer[13];
 
-    uut.start( mockEventQueue );
+    REQUIRE( uut.start( mockEventQueue ) == true );
     uut.stop();
     REQUIRE( uut.getMaxSize() == 12 );
 

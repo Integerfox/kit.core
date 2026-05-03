@@ -51,7 +51,7 @@ public:
 
 public:
     /// See Kit::Persistence::Record::IChunk
-    void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
+    bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
 
     /// See Kit::Persistence::Record::IChunk
     void stop() noexcept override;
