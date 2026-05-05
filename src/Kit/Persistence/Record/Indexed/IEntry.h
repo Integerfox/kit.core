@@ -114,24 +114,6 @@ public:
         writing) false is returned.
      */
     virtual bool addEntry( const IPayload& src ) noexcept = 0;
-
-public:
-    /** This method reset's the 'head pointer' to the beginning of the
-        available storage, i.e. it is a logical clear of the entries stored
-        in persistent storage.
-     */
-    virtual void resetHead() noexcept = 0;
-
-    /** This method will erase ALL entries in persistent storage.  Depending
-        on the platform and storage size of the IMedia instance this method
-        can take a VERY LONG TIME to complete.
-
-        CAUTION: With great power comes, comes great responsibility!
-
-        Returns true when successful; else false is returned.  When false is
-        returned that state of 'entries' in persistent storage is undetermined.
-     */
-    virtual bool eraseAllEntries() noexcept = 0;
 };
 
 

@@ -31,6 +31,14 @@ entries is to persistently store log entries.
       to provide protection against corrupting the head record if power fails
       during an update.
 
+  - There is **no method** for erasing entries. There is no need for the
+    application to 'manually' reset or clear the entries to 'make room' or 'free
+    of space'. The 'latest' N entries are always guaranteed to be stored.  
+
+    - If the application needs to 'erase' the entries - it must do it **outside**
+      of the `Indexed` interfaces (e.g delete the underlying file when using a
+      `IMedia::FileAdapter`)
+
 - A 64 bit 'timestamp' is associated with each entry.  The timestamp value is a
   free running counter that is used to determine the **relative** age between
   entries.

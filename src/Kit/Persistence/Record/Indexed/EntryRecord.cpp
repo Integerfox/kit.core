@@ -66,10 +66,13 @@ Size_T EntryRecord::getSize() const noexcept
 Size_T EntryRecord::copyTo( void* dst, Size_T maxDstLen ) noexcept
 {
     // Error cases
-    if ( maxDstLen < m_entrySize || m_entryPayloadHandlerPtr == 0 || dst == nullptr )
+    if ( m_entryPayloadHandlerPtr == nullptr ||
+         dst == nullptr ||
+         maxDstLen < ( m_entryPayloadHandlerPtr->getMaxPayloadSize() + getEntryMetadataSize() ) )
     {
-        return 0;
+        return KIT_PERSISTENCE_SIZE_MAX;
     }
+
 
     // Plant the timestamp
     KIT_PERSISTENCE_MEDIA_CURSOR cursor( dst, maxDstLen );
@@ -91,16 +94,16 @@ bool EntryRecord::copyFrom( const void* src, Size_T srcLen ) noexcept
 
     // Extract the timestamp
     KIT_PERSISTENCE_MEDIA_CURSOR cursor( const_cast<void*>( src ), srcLen );
-    cursor.read( m_latestTimestamp );
+    cursor.read( m_entryTimestamp );
 
     // ONLY Consuming the meta-data/timestamp
-    if ( m_entryPayloadHandlerPtr == 0 )
+    if ( m_entryPayloadHandlerPtr == nullptr )
     {
         return true;
     }
 
     // If there is sufficient space -->go ahead copy the entry data
-    if ( srcLen >= m_entrySize )
+    if ( srcLen >= ( m_entryPayloadHandlerPtr->getMaxPayloadSize() + getEntryMetadataSize() ) )
     {
         auto* srcPtr = static_cast<const uint8_t*>( src ) + getEntryMetadataSize();
         return m_entryPayloadHandlerPtr->copyFrom( srcPtr, srcLen - getEntryMetadataSize() );
@@ -191,10 +194,19 @@ Size_T EntryRecord::getMaxIndex() const noexcept
 bool EntryRecord::addEntry( const IPayload& src ) noexcept
 {
     // Increment my head pointer/index
-    Size_T latestOffset = incrementOffset( m_latestOffset );
+    size_t latestOffset = incrementOffset( m_latestOffset );
     m_entryTimestamp    = m_latestTimestamp + 1;
 
-    // Write the index record
+    // Set the application payload handler
+    m_entryPayloadHandlerPtr = const_cast<IPayload*>( &src );
+
+    // Write the entry
+    if ( !writeToMedia( latestOffset ) )
+    {
+        return false;
+    }
+
+    // Write the index record ONLY after the entry has been successfully written to persistent storage.
     m_headRecord.setLatestOffset( latestOffset, m_entryTimestamp );
     if ( !m_headRecord.writeToMedia() )
     {
@@ -203,50 +215,7 @@ bool EntryRecord::addEntry( const IPayload& src ) noexcept
     m_latestOffset    = latestOffset;
     m_latestTimestamp = m_entryTimestamp;
     hookOnLatestTimestampUpdated( m_latestTimestamp );
-
-    // Set the application payload handler
-    m_entryPayloadHandlerPtr = const_cast<IPayload*>( &src );
-
-    // Write the entry
-    return writeToMedia( m_latestOffset );
-}
-
-void EntryRecord::resetHead() noexcept
-{
-}
-
-bool EntryRecord::eraseAllEntries() noexcept
-{
-    // 'clear' the entire ENTRY Region - 128 bytes at a time
-    static const uint8_t buffer[128] = {
-        0,
-    };
-    bool   result       = true;
-    Size_T remainingLen = m_entryMedia.getMaxSize();
-    Size_T offset       = 0;
-    while ( remainingLen && result )
-    {
-        Size_T len    = remainingLen < sizeof( buffer ) ? remainingLen : sizeof( buffer );
-        result        = m_entryMedia.write( offset, buffer, len );
-        offset       += len;
-        remainingLen -= len;
-    }
-
-    // Reset my head pointer
-    m_latestOffset    = 0;
-    m_latestTimestamp = 0;
-
-    // If there was an error -->try our best to recover the actual head pointer
-    if ( !result )
-    {
-        scanAllEntries();  // Note: This will also update m_latestOffset and m_latestTimestamp to the 'correct' values
-    }
-
-    // Update the index record in persistent storage
-    m_headRecord.setLatestOffset( m_latestOffset, m_latestTimestamp );
-    m_headRecord.writeToMedia();
-    hookOnLatestTimestampUpdated( m_latestTimestamp );
-    return result;
+    return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -285,8 +254,7 @@ void EntryRecord::verifyIndex() noexcept
         // Possible causes:
         // 1. Virgin flash
         // 2. Corruption of the entry
-        // 3. A new index was written, but the associated entry was not written due to a power fail
-        // 4. The 'integrity' of the Ring Buffer has been compromised
+        // 3. The 'integrity' of the Ring Buffer has been compromised
 
         // To Recover: Scan the entire region to derive the latest timestamp from what
         //             is persistently stored and then update index record in persistent media
@@ -300,19 +268,72 @@ void EntryRecord::verifyIndex() noexcept
 
 void EntryRecord::scanAllEntries()
 {
-    m_latestOffset    = 0;
-    m_latestTimestamp = 0;
-
-    for ( Size_T offset = 0; offset <= m_maxOffset; offset += m_entrySize )
+    // Helper: read only the timestamp metadata at a given byte offset.
+    // Returns 0 for any corrupt or unwritten entry, so that corrupt entries
+    // sort as the smallest possible value (i.e. "older than any valid entry").
+    auto readTimestampAt = [this]( Size_T byteOffset ) -> uint64_t
     {
-        if ( readFromMedia( offset ) )
+        m_entryPayloadHandlerPtr = nullptr;
+        if ( readFromMedia( byteOffset ) )
         {
-            if ( m_entryTimestamp > m_latestTimestamp || m_latestTimestamp == 0 )
-            {
-                m_latestTimestamp = m_entryTimestamp;
-                m_latestOffset    = offset;
-            }
+            return m_entryTimestamp;
         }
+        return 0;
+    };
+
+    // NOTE: By definition there are at least 2 entries, so the binary search is
+    // always valid and the "wrap-around" case is naturally handled by the 
+    // rotated-sorted property of the timestamps.
+
+    // The ring buffer's timestamps form a rotated-sorted ascending sequence
+    // (0 for unwritten/corrupt entries, which are the natural minimum).
+    // Binary search for the MINIMUM -- its predecessor (circularly) is the MAXIMUM.
+    // This reduces reads from O(N) to O(log N), which is critical for large
+    // entry counts backed by slow serial media (EEPROM, SPI NOR Flash).
+    //
+    // Examples (4 entries):
+    //   Not yet wrapped:  [0, 1, 2, 0]  -> min at idx 3, max at idx 2 (ts=2)
+    //   Fully wrapped:    [4, 5, 6, 7]  -> min at idx 0, max at idx 3 (ts=7)
+    //   Latest at idx 0:  [8, 5, 6, 7]  -> min at idx 1, max at idx 0 (ts=8)
+    //   Factory (erased): [0, 0, 0, 0]  -> min at idx 0, max at idx 3 (ts=0 -> no valid entries)
+    Size_T   lo   = 0;
+    Size_T   hi   = m_maxEntries - 1;
+    uint64_t tsHi = readTimestampAt( hi * m_entrySize );
+
+    while ( lo < hi )
+    {
+        Size_T   mid   = lo + ( hi - lo ) / 2;
+        uint64_t tsMid = readTimestampAt( mid * m_entrySize );
+
+        if ( tsMid > tsHi )
+        {
+            lo = mid + 1;   // minimum is in the upper half
+        }
+        else
+        {
+            hi   = mid;     // minimum is in the lower half (inclusive)
+            tsHi = tsMid;
+        }
+    }
+
+    // 'lo' is the index of the minimum; the maximum is at the preceding index
+    Size_T maxIndex    = ( lo + m_maxEntries - 1 ) % m_maxEntries;
+    m_latestOffset    = maxIndex * m_entrySize;
+    m_latestTimestamp = readTimestampAt( m_latestOffset );
+
+    // The candidate maximum may itself be corrupt (e.g. a hardware bit-flip on a
+    // previously valid entry).  Walk backward at most m_maxCorruptScan steps to
+    // find the most-recent valid entry before it.  The bound keeps startup firmly at
+    // O(log N + m_maxCorruptScan) — no linear-scan fallback.
+    //
+    // Note: the factory/all-erased case (every entry returns 0) is handled
+    // naturally: the backward walk exhausts m_maxCorruptScan steps, and
+    // m_latestTimestamp remains 0, which correctly signals "no valid entries".
+    for ( Size_T i = 0; i < m_maxCorruptScan && m_latestTimestamp == 0 && i < m_maxEntries - 1; i++ )
+    {
+        maxIndex          = ( maxIndex + m_maxEntries - 1 ) % m_maxEntries;
+        m_latestOffset    = maxIndex * m_entrySize;
+        m_latestTimestamp = readTimestampAt( m_latestOffset );
     }
 }
 

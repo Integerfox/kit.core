@@ -48,8 +48,8 @@ public:
     virtual void stop() noexcept = 0;
 
 public:
-    /** This method returns the total number of bytes that make up the Record's
-        'meta data' when the record is stored in persistent storage
+    /** This method returns the total number of bytes of Record when stored in 
+        persistent storage. This includes both the payload and any metadata.
      */
     virtual Size_T getSize() const noexcept = 0;
 

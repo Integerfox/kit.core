@@ -10,10 +10,21 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "Kit/Persistence/Record/Indexed/IEntry.h"
 #include "Kit/Persistence/Record/Indexed/IHead.h"
 #include "Kit/Persistence/Record/IMedia.h"
 #include "Kit/Persistence/Record/IChunk.h"
+#include "Kit/System/Assert.h"
+
+/** The maximum number of consecutive corrupt entries to scan during recovery 
+    of the Record.  The larger this number, the more resilient the recovery
+    process is to consecutive corrupt entries, but it may increase the recovery
+    time - this includes the initial 'virgin' boot of the persistent storage.
+ */
+#ifndef KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_DEFAULT_MAX_CORRUPT_SCAN
+#define KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_DEFAULT_MAX_CORRUPT_SCAN 8
+#endif
 
 ///
 namespace Kit {
@@ -34,11 +45,20 @@ namespace Indexed {
 class EntryRecord : public IEntry
 {
 public:
-    /// Constructor.
+    /** Constructor.
+        @param entryChunkHandler      Chunk handler used to read/write each entry
+        @param singleEntrySizeInBytes Size of the application payload for one entry, in bytes
+        @param entryMedia             IMedia region that holds the entries
+        @param headRecord             IHead instance that persists the ring-buffer head pointer
+        @param maxCorruptScan         The maximum number of consecutive corrupt entries to scan during recovery of the Record.
+
+        NOTE: The Application MUST allocate storage for at least 2 entries 
+    */
     EntryRecord( IChunk& entryChunkHandler,
                  Size_T  singleEntrySizeInBytes,
                  IMedia& entryMedia,
-                 IHead&  headRecord ) noexcept
+                 IHead&  headRecord,
+                 Size_T  maxCorruptScan = KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_DEFAULT_MAX_CORRUPT_SCAN ) noexcept
         : m_chunk( entryChunkHandler )
         , m_headRecord( headRecord )
         , m_entryMedia( entryMedia )
@@ -46,8 +66,10 @@ public:
         , m_entrySize( singleEntrySizeInBytes + getEntryMetadataSize() + entryChunkHandler.getMetadataLength() )
         , m_maxEntries( entryMedia.getMaxSize() / ( m_entrySize ) )
         , m_maxOffset( ( m_maxEntries - 1 ) * m_entrySize )
+        , m_maxCorruptScan( maxCorruptScan )
         , m_started( false )
     {
+        KIT_SYSTEM_ASSERT( m_maxEntries > 1 );
     }
 
 public:
@@ -96,12 +118,6 @@ public:
 
     /// See Kit::Persistence::Record::Indexed::IEntry
     bool addEntry( const IPayload& src ) noexcept override;
-
-    /// See Kit::Persistence::Record::Indexed::IEntry
-    void resetHead() noexcept override;
-
-    /// See Kit::Persistence::Record::Indexed::IEntry
-    bool eraseAllEntries() noexcept override;
 
 public:
     /// See Kit::Persistence::Record::IDataRecord
@@ -170,6 +186,9 @@ protected:
 
     /// Offset of the latest record
     Size_T m_latestOffset;
+
+    /// Maximum consecutive corrupt entries to walk back over during startup scan
+    Size_T m_maxCorruptScan;
 
     /// Track the started state
     bool m_started;
