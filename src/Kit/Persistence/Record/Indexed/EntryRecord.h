@@ -119,6 +119,9 @@ public:
     /// See Kit::Persistence::Record::Indexed::IEntry
     bool addEntry( const IPayload& src ) noexcept override;
 
+    /// See Kit::Persistence::Record::Indexed::IEntry
+    void resetHead() noexcept override;
+
 public:
     /// See Kit::Persistence::Record::IDataRecord
     bool writeToMedia( Size_T index = 0 ) noexcept override;

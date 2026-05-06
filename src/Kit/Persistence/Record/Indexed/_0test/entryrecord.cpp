@@ -258,6 +258,22 @@ TEST_CASE( "EntryRecord" )
         uut.stop();
     }
 
+     SECTION( "reset head" )
+    {
+        REQUIRE( uut.start( mockEventQueue ) );
+
+        IEntry::Marker_T marker;
+        bool             result = uut.getLatest( appPayload, marker );
+        REQUIRE( result == true );
+        REQUIRE( marker.timestamp >= 3) ;
+
+        uut.resetHead();
+        result = uut.getLatest( appPayload, marker );
+        REQUIRE( result == false );
+        
+        uut.stop();
+    }
+
     SECTION( "error cases" )
     {
         Kit::Io::File::System::remove( MEDIA_FILE_NAME );
@@ -283,6 +299,7 @@ TEST_CASE( "EntryRecord" )
         // Stop the uut
         uut.stop();
     }
+
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

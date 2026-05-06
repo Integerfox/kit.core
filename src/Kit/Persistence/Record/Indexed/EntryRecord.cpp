@@ -218,6 +218,14 @@ bool EntryRecord::addEntry( const IPayload& src ) noexcept
     return true;
 }
 
+void EntryRecord::resetHead() noexcept
+{
+    m_latestOffset    = 0;
+    m_latestTimestamp = 0;
+    m_headRecord.setLatestOffset( m_latestOffset, m_latestTimestamp );
+    hookOnLatestTimestampUpdated( m_latestTimestamp );
+}
+
 ////////////////////////////////////////////////////////////////////////////
 bool EntryRecord::processNoValidData() noexcept
 {

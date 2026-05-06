@@ -39,6 +39,10 @@ entries is to persistently store log entries.
       of the `Indexed` interfaces (e.g delete the underlying file when using a
       `IMedia::FileAdapter`)
 
+    - There is a 'logical erase' (i.e. the `resetHead()` method) that can be
+      used to *abandon* all of the entries.  This method is cosmetic in that
+      no entries are actually erased/removed.
+
 - A 64 bit 'timestamp' is associated with each entry.  The timestamp value is a
   free running counter that is used to determine the **relative** age between
   entries.

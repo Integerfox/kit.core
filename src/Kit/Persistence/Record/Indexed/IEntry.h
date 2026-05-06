@@ -114,6 +114,17 @@ public:
         writing) false is returned.
      */
     virtual bool addEntry( const IPayload& src ) noexcept = 0;
+
+public:
+    /** This method resets the head pointer and the timestamp to zero.  It is
+         essentially a logical erase of the entires.  
+
+         NOTE: With respect to 'make room' for more entries, there is no actual
+               need to either logical or physical the entries, since the the
+               design always guarantees that the latest N entries are persistently
+               stored.
+     */
+    virtual void resetHead() noexcept = 0;
 };
 
 
