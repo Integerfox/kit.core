@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_ASYNC_RING_BUFFER_MANAGER_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_ASYNC_RING_BUFFER_MANAGER_H
+#ifndef KIT_PERSISTENCE_RECORD_SERVER_H
+#define KIT_PERSISTENCE_RECORD_SERVER_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -19,11 +19,11 @@
 /** Maximum number of supported Records the Manager supports. This value is used
     for error-checking only, i.e. to ensure the variable list recordList array
     is properly terminated with a nullptr.  This value is NOT used to limit the
-    number of Records the Manager can manage, i.e. the Manager can handle an 
+    number of Records the Server can manage, i.e. the Server can handle an 
     unlimited number of Records.
  */
-#ifndef OPTION_KIT_PERSISTENCE_RECORD_INDEXED_ASYNC_RING_BUFFER_MANAGER_MAX_RECORDS
-#define OPTION_KIT_PERSISTENCE_RECORD_INDEXED_ASYNC_RING_BUFFER_MANAGER_MAX_RECORDS 64
+#ifndef OPTION_KIT_PERSISTENCE_RECORD_SERVER_MAX_RECORDS
+#define OPTION_KIT_PERSISTENCE_RECORD_SERVER_MAX_RECORDS 64
 #endif
 
 ///
@@ -33,8 +33,9 @@ namespace Persistence {
 ///
 namespace Record {
 
-/** This concrete class provides an Event driven Runnable object for executing
-    the read/write operation to persistent storage media for N Records.
+/** This concrete class is responsible for starting and stopping a list
+    of IRecords objects, i.e. provides a thread-safe execution model
+    for the IRecords.
  */
 class Server : public Kit::Itc::OpenCloseSync
 {
@@ -52,7 +53,7 @@ public:
         , m_opened( false )
     {
         // Ensure the record list is properly terminated with a nullptr
-        for ( unsigned i = 0; i < OPTION_KIT_PERSISTENCE_RECORD_INDEXED_ASYNC_RING_BUFFER_MANAGER_MAX_RECORDS; i++ )
+        for ( unsigned i = 0; i < OPTION_KIT_PERSISTENCE_RECORD_SERVER_MAX_RECORDS; i++ )
         {
             if ( m_records[i] == nullptr )
             {
@@ -72,7 +73,7 @@ public:
             m_opened = true;
 
             // Start each record
-            for ( unsigned i = 0; m_records[i] != nullptr; i++ )
+            for ( unsigned i = 0; m_records[i] != nullptr && m_opened; i++ )
             {
                 m_opened &= m_records[i]->start( m_eventQueue );
             }
@@ -98,8 +99,8 @@ public:
     }
 
 protected:
-    /** Variable length list of Records to manage.  The last item list must be
-        ZERO to indicate the end-of-the list
+    /** Variable length list of Records to manage.  The last item in the list
+        must be ZERO to indicate the end-of-the list
      */
     IRecord** m_records;
 
