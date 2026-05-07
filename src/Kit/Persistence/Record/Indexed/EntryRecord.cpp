@@ -129,14 +129,27 @@ bool EntryRecord::getNext( uint64_t       newerThanTimestamp,
                            Marker_T&      entryMarker ) noexcept
 {
     // Set the starting offset to on where to begin the search
-    Size_T offset = incrementOffset( beginHereMarker.mediaOffset );
+    Size_T offset            = incrementOffset( beginHereMarker.mediaOffset );
+    Size_T consecutiveCorrupt = 0;
 
     // Loop through all possible entries
     for ( Size_T i = 0; i < m_maxEntries - 1; i++, offset = incrementOffset( offset ) )
     {
-        if ( getByOffset( offset, dst, entryMarker ) && m_entryTimestamp > newerThanTimestamp )
+        if ( !getByOffset( offset, dst, entryMarker ) )
         {
-            return true;
+            // Corrupt entry: abort if too many consecutive corrupt entries are encountered
+            if ( ++consecutiveCorrupt > m_maxConsecutiveCorruptSkip )
+            {
+                return false;
+            }
+        }
+        else
+        {
+            consecutiveCorrupt = 0;
+            if ( m_entryTimestamp > newerThanTimestamp )
+            {
+                return true;
+            }
         }
     }
 
@@ -150,14 +163,27 @@ bool EntryRecord::getPrevious( uint64_t       olderThanTimestamp,
                                Marker_T&      entryMarker ) noexcept
 {
     // Set the starting offset to on where to begin the search
-    Size_T offset = decrementOffset( beginHereMarker.mediaOffset );
+    Size_T offset            = decrementOffset( beginHereMarker.mediaOffset );
+    Size_T consecutiveCorrupt = 0;
 
     // Loop through all possible entries
     for ( Size_T i = 0; i < m_maxEntries - 1; i++, offset = decrementOffset( offset ) )
     {
-        if ( getByOffset( offset, dst, entryMarker ) && m_entryTimestamp < olderThanTimestamp )
+        if ( !getByOffset( offset, dst, entryMarker ) )
         {
-            return true;
+            // Corrupt entry: abort if too many consecutive corrupt entries are encountered
+            if ( ++consecutiveCorrupt > m_maxConsecutiveCorruptSkip )
+            {
+                return false;
+            }
+        }
+        else
+        {
+            consecutiveCorrupt = 0;
+            if ( m_entryTimestamp < olderThanTimestamp )
+            {
+                return true;
+            }
         }
     }
 

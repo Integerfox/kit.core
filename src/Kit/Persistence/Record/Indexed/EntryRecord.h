@@ -22,8 +22,17 @@
     process is to consecutive corrupt entries, but it may increase the recovery
     time - this includes the initial 'virgin' boot of the persistent storage.
  */
-#ifndef KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_DEFAULT_MAX_CORRUPT_SCAN
-#define KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_DEFAULT_MAX_CORRUPT_SCAN 8
+#ifndef OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN
+#define OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN 8
+#endif
+
+/** Number of consecutive corrupt entries skip over when using getNext/getPrevious 
+    to traverse the entries before declaring an error.  This provides fault tolerance
+    against entries that may have been corrupted when a power-loss occurs while writing
+    the entry to persistent storage.
+ */
+#ifndef OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP
+#define OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP 3
 #endif
 
 ///
@@ -46,11 +55,15 @@ class EntryRecord : public IEntry
 {
 public:
     /** Constructor.
-        @param entryChunkHandler      Chunk handler used to read/write each entry
-        @param singleEntrySizeInBytes Size of the application payload for one entry, in bytes
-        @param entryMedia             IMedia region that holds the entries
-        @param headRecord             IHead instance that persists the ring-buffer head pointer
-        @param maxCorruptScan         The maximum number of consecutive corrupt entries to scan during recovery of the Record.
+        @param entryChunkHandler          Chunk handler used to read/write each entry
+        @param singleEntrySizeInBytes     Size of the application payload for one entry, in bytes
+        @param entryMedia                 IMedia region that holds the entries
+        @param headRecord                 IHead instance that persists the ring-buffer head pointer
+        @param maxCorruptScan             The maximum number of consecutive corrupt entries to walk
+                                          back over when recovering the head pointer at startup.
+        @param maxConsecutiveCorruptSkip  The maximum number of consecutive corrupt entries to skip
+                                          over when traversing entries via getNext()/getPrevious()
+                                          before declaring a failure.
 
         NOTE: The Application MUST allocate storage for at least 2 entries 
     */
@@ -58,7 +71,8 @@ public:
                  Size_T  singleEntrySizeInBytes,
                  IMedia& entryMedia,
                  IHead&  headRecord,
-                 Size_T  maxCorruptScan = KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_DEFAULT_MAX_CORRUPT_SCAN ) noexcept
+                 Size_T  maxCorruptScan            = OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN,
+                 Size_T  maxConsecutiveCorruptSkip = OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP ) noexcept
         : m_chunk( entryChunkHandler )
         , m_headRecord( headRecord )
         , m_entryMedia( entryMedia )
@@ -67,6 +81,7 @@ public:
         , m_maxEntries( entryMedia.getMaxSize() / ( m_entrySize ) )
         , m_maxOffset( ( m_maxEntries - 1 ) * m_entrySize )
         , m_maxCorruptScan( maxCorruptScan )
+        , m_maxConsecutiveCorruptSkip( maxConsecutiveCorruptSkip )
         , m_started( false )
     {
         KIT_SYSTEM_ASSERT( m_maxEntries > 1 );
@@ -192,6 +207,9 @@ protected:
 
     /// Maximum consecutive corrupt entries to walk back over during startup scan
     Size_T m_maxCorruptScan;
+
+    /// Maximum consecutive corrupt entries to skip during getNext()/getPrevious() traversal
+    Size_T m_maxConsecutiveCorruptSkip;
 
     /// Track the started state
     bool m_started;

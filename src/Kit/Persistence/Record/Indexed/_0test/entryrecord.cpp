@@ -15,7 +15,7 @@
 #include "Kit/System/Trace.h"
 #include "Kit/System/Assert.h"
 #include "Kit/Persistence/Record/Chunk/Crc.h"
-#include "Kit/Checksum/Fletcher16.h"
+#include "Kit/Checksum/Crc16CcittFast.h"
 #include "Kit/Persistence/Record/Media/FileAdapter.h"
 #include "Kit/Persistence/Record/Indexed/EntryRecord.h"
 #include "Kit/Persistence/Record/Indexed/HeadRecord.h"
@@ -89,10 +89,10 @@ TEST_CASE( "EntryRecord" )
     Kit::EventQueue::Server   mockEventQueue;
     Media::FileAdapter        entryFd1( MEDIA_FILE_NAME, MEDIA_MAX_SIZE );
     Media::FileAdapter        headFd2( MEDIA_IDX_FILE_NAME, MEDIA_IDX_MAX_SIZE );
-    Kit::Checksum::Fletcher16 entryCrc;
-    Chunk::Crc                entryChunk( entryFd1, entryCrc );
-    Kit::Checksum::Fletcher16 headCrc;
-    Chunk::Crc                headChunk( headFd2, headCrc );
+    Kit::Checksum::Crc16CcittFast entryCrc;
+    Chunk::Crc                    entryChunk( entryFd1, entryCrc );
+    Kit::Checksum::Crc16CcittFast headCrc;
+    Chunk::Crc                    headChunk( headFd2, headCrc );
     HeadRecord                headRecord( headChunk );
     AppEntryPayload           appPayload;
     EntryRecord               uut( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord );
@@ -270,7 +270,7 @@ TEST_CASE( "EntryRecord" )
         uut.resetHead();
         result = uut.getLatest( appPayload, marker );
         REQUIRE( result == false );
-        
+
         uut.stop();
     }
 
@@ -298,6 +298,126 @@ TEST_CASE( "EntryRecord" )
 
         // Stop the uut
         uut.stop();
+    }
+
+    SECTION( "getNext - skip corrupt entries" )
+    {
+        Kit::Io::File::System::remove( MEDIA_FILE_NAME );
+        Kit::Io::File::System::remove( MEDIA_IDX_FILE_NAME );
+
+        // Use a local UUT with maxConsecutiveCorruptSkip=2 so the failure boundary
+        // is easy to trigger deterministically (3 consecutive corrupt entries fail)
+        EntryRecord uutSkip( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord,
+                             OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN,
+                             2 );
+        REQUIRE( uutSkip.start( mockEventQueue ) );
+
+        // Add 6 entries.  With a fresh start, addEntry() increments from offset 0, so:
+        //   ts=1 -> 1*expectedEntrySize
+        //   ts=2 -> 2*expectedEntrySize
+        //   ts=3 -> 3*expectedEntrySize
+        //   ts=4 -> 4*expectedEntrySize
+        //   ts=5 -> 5*expectedEntrySize
+        //   ts=6 -> 0   (wraps)
+        for ( int i = 0; i < 6; i++ )
+        {
+            appPayload.appSet( ENTRY1 );
+            REQUIRE( uutSkip.addEntry( appPayload ) == true );
+        }
+        uutSkip.stop();
+
+        // Starting marker: the entry at ts=1, offset=1*expectedEntrySize
+        IEntry::Marker_T startMarker;
+        startMarker.mediaOffset = 1 * expectedEntrySize;
+        startMarker.timestamp   = 1;
+
+        // Corrupt the 2 entries immediately following startMarker (ts=2 and ts=3)
+        uint8_t garbage[MEDIA_MAX_SIZE];
+        memset( garbage, 0xFF, expectedEntrySize );
+        REQUIRE( entryFd1.write( 2 * expectedEntrySize, garbage, expectedEntrySize ) == true );
+        REQUIRE( entryFd1.write( 3 * expectedEntrySize, garbage, expectedEntrySize ) == true );
+
+        // Restart: head record still points to ts=6 at offset 0 (not corrupted),
+        // so verifyIndex() accepts it and no full scan is triggered
+        REQUIRE( uutSkip.start( mockEventQueue ) );
+
+        // getNext should skip the 2 consecutive corrupt entries and return ts=4
+        IEntry::Marker_T resultMarker;
+        REQUIRE( uutSkip.getNext( 1, startMarker, appPayload, resultMarker ) == true );
+        REQUIRE( resultMarker.timestamp == 4 );
+
+        uutSkip.stop();
+
+        // Now corrupt a 3rd consecutive entry (ts=4 at 4*expectedEntrySize).
+        // Entries at 2*es, 3*es, 4*es are all corrupt: 3 consecutive, which
+        // exceeds the limit of 2, so getNext must return false.
+        REQUIRE( entryFd1.write( 4 * expectedEntrySize, garbage, expectedEntrySize ) == true );
+
+        REQUIRE( uutSkip.start( mockEventQueue ) );
+
+        REQUIRE( uutSkip.getNext( 1, startMarker, appPayload, resultMarker ) == false );
+
+        uutSkip.stop();
+    }
+
+    SECTION( "getPrevious - skip corrupt entries" )
+    {
+        Kit::Io::File::System::remove( MEDIA_FILE_NAME );
+        Kit::Io::File::System::remove( MEDIA_IDX_FILE_NAME );
+
+        // Use a local UUT with maxConsecutiveCorruptSkip=2 so the failure boundary
+        // is easy to trigger deterministically (3 consecutive corrupt entries fail)
+        EntryRecord uutSkip( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord,
+                             OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN,
+                             2 );
+        REQUIRE( uutSkip.start( mockEventQueue ) );
+
+        // Add 6 entries.  Entry layout after a fresh start:
+        //   ts=1 -> 1*expectedEntrySize
+        //   ts=2 -> 2*expectedEntrySize
+        //   ts=3 -> 3*expectedEntrySize
+        //   ts=4 -> 4*expectedEntrySize
+        //   ts=5 -> 5*expectedEntrySize
+        //   ts=6 -> 0   (wraps - this is the head/latest)
+        for ( int i = 0; i < 6; i++ )
+        {
+            appPayload.appSet( ENTRY1 );
+            REQUIRE( uutSkip.addEntry( appPayload ) == true );
+        }
+        uutSkip.stop();
+
+        // Starting marker: the latest entry at ts=6, offset=0
+        IEntry::Marker_T startMarker;
+        startMarker.mediaOffset = 0;
+        startMarker.timestamp   = 6;
+
+        // Corrupt the 2 entries immediately preceding startMarker (ts=5 and ts=4)
+        uint8_t garbage[MEDIA_MAX_SIZE];
+        memset( garbage, 0xFF, expectedEntrySize );
+        REQUIRE( entryFd1.write( 5 * expectedEntrySize, garbage, expectedEntrySize ) == true );
+        REQUIRE( entryFd1.write( 4 * expectedEntrySize, garbage, expectedEntrySize ) == true );
+
+        // Restart: head record still points to ts=6 at offset 0 (not corrupted),
+        // so verifyIndex() accepts it and no full scan is triggered
+        REQUIRE( uutSkip.start( mockEventQueue ) );
+
+        // getPrevious should skip the 2 consecutive corrupt entries and return ts=3
+        IEntry::Marker_T resultMarker;
+        REQUIRE( uutSkip.getPrevious( 6, startMarker, appPayload, resultMarker ) == true );
+        REQUIRE( resultMarker.timestamp == 3 );
+
+        uutSkip.stop();
+
+        // Now corrupt a 3rd consecutive entry (ts=3 at 3*expectedEntrySize).
+        // Entries at 5*es, 4*es, 3*es are all corrupt: 3 consecutive, which
+        // exceeds the limit of 2, so getPrevious must return false.
+        REQUIRE( entryFd1.write( 3 * expectedEntrySize, garbage, expectedEntrySize ) == true );
+
+        REQUIRE( uutSkip.start( mockEventQueue ) );
+
+        REQUIRE( uutSkip.getPrevious( 6, startMarker, appPayload, resultMarker ) == false );
+
+        uutSkip.stop();
     }
 
 
