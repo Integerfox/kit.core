@@ -10,17 +10,18 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/EventQueue/IQueue.h"
-#include "Kit/Persistence/Record/IRecord.h"
 #include "Kit/Itc/OpenCloseSync.h"
-#include "Kit/System/FatalError.h"
-#include "Kit/System/Shutdown.h"
+#include "Kit/Persistence/Record/Journal/IEntry.h"
+#include "Kit/Persistence/Record/Journal/ReaderSync.h"
+#include "Kit/Persistence/Record/Journal/ResetSync.h"
+#include "Kit/Container/RingBufferMP.h"
+#include "Kit/Dm/ObserverCallback.h"
 
 /** Maximum number of entries that can be written as the result of single
     change notification
  */
-#ifndef OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_SERVER_MAX_BATCH_WRITE
-#define OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_SERVER_MAX_BATCH_WRITE      4
+#ifndef OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE
+#define OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE 4
 #endif
 
 ///
@@ -29,36 +30,45 @@ namespace Kit {
 namespace Persistence {
 ///
 namespace Record {
+///
+namespace Journal {
 
-/** This concrete class provides an Event driven Runnable object for executing
-    the read/write operation to persistent storage media for N Records.
+/** This concrete template class implements the ITC messaging (and Model Point
+    monitoring needed to provide a thread-safe/asynchronous interface for
+    Journal Records. A single Server instance manages a single EntryRecord
+    instance. Multiple EntryRecords can be managed by creating multiple Server
+    instances
+
+    NOTE: EntryRecords are NOT managed by the Kit::Persistence::Record::Server.
+          They managed by this class (Kit::Persistence::Record::Journal::Server)
+
+    Template Args:
+        ENTRY:=   The Application specific class that defines an 'entry'
+
  */
-class Server : public Kit::Itc::OpenCloseSync
+template <class ENTRY>
+class Server : public Kit::Itc::OpenCloseSync,
+               public ReaderSync,
+               public ResetSync
 {
 public:
     /** Constructor.  The argument 'timingTickInMsec' specifies the timing
-        resolution that will be used for Cpl::Timer::Local Timers.
+        resolution that will be used for Kit::Timer::Local Timers.
 
         NOTE: 'recordList' is variable length array where the last entry in the
               array MUST BE a nullptr.
      */
-    Server( Kit::EventQueue::IQueue& myEventQueue,
-            IRecord*                 recordList[] ) noexcept
+    Server( Kit::EventQueue::IQueue&             myEventQueue,
+            IEntry&                              entryRecord,
+            Kit::Container::RingBufferMP<ENTRY>& incomingEntriesBuffer ) noexcept
         : OpenCloseSync( myEventQueue )
-        , m_records( recordList )
+        , ReaderSync( myEventQueue, entryRecord )
+        , ResetSync( myEventQueue )
+        , m_record( entryRecord )
+        , m_buffer( incomingEntriesBuffer )
         , m_opened( false )
     {
-        // Ensure the record list is properly terminated with a nullptr
-        for ( unsigned i = 0; i < OPTION_KIT_PERSISTENCE_RECORD_SERVER_MAX_RECORDS; i++ )
-        {
-            if ( m_records[i] == nullptr )
-            {
-                return;
-            }
-        }
-
-
-        Kit::System::FatalError::log( Kit::System::Shutdown::eASSERT, "Kit::Persistence::Record::Server was given an invalid record list" );
+        m_obBuffer.setCallback<Server, &Server::bufferElementCountChanged>( this );
     }
 
 public:
@@ -68,12 +78,7 @@ public:
         if ( !m_opened )
         {
             m_opened = true;
-
-            // Start each record
-            for ( unsigned i = 0; m_records[i] != nullptr; i++ )
-            {
-                m_opened &= m_records[i]->start( m_eventQueue );
-            }
+            m_buffer.m_mpElementCount.attach( m_obBuffer );
         }
 
         msg.returnToSender();
@@ -85,21 +90,27 @@ public:
         if ( m_opened )
         {
             m_opened = false;
-
-            // Stop each record
-            for ( unsigned i = 0; m_records[i] != nullptr; i++ )
-            {
-                m_records[i]->stop();
-            }
+            m_buffer.m_mpElementCount.detach( m_obBuffer );
         }
+
         msg.returnToSender();
     }
 
 protected:
-    /** Variable length list of Records to manage.  The last item list must be
-        ZERO to indicate the end-of-the list
-     */
-    IRecord** m_records;
+    /// Callback when the 'trigger' MP changes
+    void bufferElementCountChanged( Kit::Dm::Mp::Uint32& mp, Kit::Dm::IObserver& observer ) noexcept
+    {
+    }
+    
+protected:
+    /// Indexed Entry Record that handles the actual work to read/write the data
+    IEntry& m_record;
+
+    /// Observer for change notification (to the RingBuffer)
+    Kit::Dm::ObserverCallback<Dm::Mp::Uint32> m_obBuffer;
+
+    /// The incoming entries RingBuffer
+    Kit::Container::RingBufferMP<ENTRY>& m_buffer;
 
     /// Track my open state
     bool m_opened;
@@ -107,6 +118,7 @@ protected:
 
 
 }  // end namespaces
+}
 }
 }
 #endif  // end header latch

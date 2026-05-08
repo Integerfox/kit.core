@@ -62,7 +62,7 @@ usage for Journal entries is to persistently store log entries.
 
 - For thread safety, the application interfaces with the Journal records using
   ITC messaging and model points.  This is so that the physical reading and
-  writing of persistence storage can be down in separate or dedicated thread
+  writing of persistence storage can be done in separate or dedicated thread
   from the Application threads.
 
 - For *reading* journal entries the application can use the `IReader` interface

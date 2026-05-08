@@ -30,8 +30,8 @@ non-volatile data.  The sub-system has has the following features:
 - A Record Server can process an unlimited number of records.  It is also okay
   to have more than one Record Server instance.
 
-- Threading Model: A Record Server is a event-loop based runnable-object, aka is
-  a thread.  All read/write operations to the persistent media are performed
-  in this thread.  It is assumed that the business logic for individual records
-  is also performed in this thread - and that each record instance is thread
-  safe with respect to the rest of the system.
+- It is recommended that the Record Server execute in a dedicated thread if
+  possible.  This provides the application the flexible to have writing to
+  persistence storage as a *background task*.
+
+  - Multiple Record Server instances can share a single thread.
