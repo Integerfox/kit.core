@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_ENTRYRECORD_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_ENTRYRECORD_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_ENTRYRECORD_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_ENTRYRECORD_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,8 +11,8 @@
 /** @file */
 
 #include "kit_config.h"
-#include "Kit/Persistence/Record/Indexed/IEntry.h"
-#include "Kit/Persistence/Record/Indexed/IHead.h"
+#include "Kit/Persistence/Record/Journal/IEntry.h"
+#include "Kit/Persistence/Record/Journal/IHead.h"
 #include "Kit/Persistence/Record/IMedia.h"
 #include "Kit/Persistence/Record/IChunk.h"
 #include "Kit/System/Assert.h"
@@ -22,8 +22,8 @@
     process is to consecutive corrupt entries, but it may increase the recovery
     time - this includes the initial 'virgin' boot of the persistent storage.
  */
-#ifndef OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN
-#define OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN 8
+#ifndef OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN
+#define OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN 8
 #endif
 
 /** Number of consecutive corrupt entries skip over when using getNext/getPrevious 
@@ -31,8 +31,8 @@
     against entries that may have been corrupted when a power-loss occurs while writing
     the entry to persistent storage.
  */
-#ifndef OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP
-#define OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP 3
+#ifndef OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP
+#define OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP 3
 #endif
 
 ///
@@ -42,7 +42,7 @@ namespace Persistence {
 ///
 namespace Record {
 ///
-namespace Indexed {
+namespace Journal {
 
 /** This concrete class implements the IRecord interface that manages a collection
     of Entries that are timestamp and oldest entries are silently lost when the
@@ -71,8 +71,8 @@ public:
                  Size_T  singleEntrySizeInBytes,
                  IMedia& entryMedia,
                  IHead&  headRecord,
-                 Size_T  maxCorruptScan            = OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN,
-                 Size_T  maxConsecutiveCorruptSkip = OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP ) noexcept
+                 Size_T  maxCorruptScan            = OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN,
+                 Size_T  maxConsecutiveCorruptSkip = OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP ) noexcept
         : m_chunk( entryChunkHandler )
         , m_headRecord( headRecord )
         , m_entryMedia( entryMedia )
@@ -108,33 +108,33 @@ public:
     Size_T getMaxPayloadSize() const noexcept override;
 
 public:
-    /// See Kit::Persistence::Record::Indexed::IEntry
+    /// See Kit::Persistence::Record::Journal::IEntry
     bool getLatest( IPayload& dst, Marker_T& entryMarker ) noexcept override;
 
-    /// See Kit::Persistence::Record::Indexed::IEntry
+    /// See Kit::Persistence::Record::Journal::IEntry
     bool getNext( uint64_t       newerThanTimestamp,
                   const Marker_T beginHereMarker,
                   IPayload&      dst,
                   Marker_T&      entryMarker ) noexcept override;
 
-    /// See Kit::Persistence::Record::Indexed::IEntry
+    /// See Kit::Persistence::Record::Journal::IEntry
     bool getPrevious( uint64_t       olderThanTimestamp,
                       const Marker_T beginHereMarker,
                       IPayload&      dst,
                       Marker_T&      entryMarker ) noexcept override;
 
-    /// See Kit::Persistence::Record::Indexed::IEntry
+    /// See Kit::Persistence::Record::Journal::IEntry
     bool getByEntryIndex( Size_T    entryIndex,
                           IPayload& dst,
                           Marker_T& entryMarker ) noexcept override;
 
-    /// See Kit::Persistence::Record::Indexed::IEntry
+    /// See Kit::Persistence::Record::Journal::IEntry
     Size_T getMaxIndex() const noexcept override;
 
-    /// See Kit::Persistence::Record::Indexed::IEntry
+    /// See Kit::Persistence::Record::Journal::IEntry
     bool addEntry( const IPayload& src ) noexcept override;
 
-    /// See Kit::Persistence::Record::Indexed::IEntry
+    /// See Kit::Persistence::Record::Journal::IEntry
     void resetHead() noexcept override;
 
 public:

@@ -16,14 +16,14 @@
 #include "Kit/Persistence/Record/Chunk/Crc.h"
 #include "Kit/Checksum/Fletcher16.h"
 #include "Kit/Persistence/Record/Media/FileAdapter.h"
-#include "Kit/Persistence/Record/Indexed/HeadRecord.h"
+#include "Kit/Persistence/Record/Journal/HeadRecord.h"
 #include "Kit/EventQueue/Server.h"
 #include "Kit/Io/File/System.h"
 #include "Kit/Io/File/Output.h"
 #define SECT_ "_0test"
 
 ///
-using namespace Kit::Persistence::Record::Indexed;
+using namespace Kit::Persistence::Record::Journal;
 using namespace Kit::Persistence::Record;
 using namespace Kit::Persistence;
 

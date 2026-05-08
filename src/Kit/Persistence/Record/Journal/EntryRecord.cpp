@@ -13,13 +13,13 @@
 #include "Kit/System/Trace.h"
 #include <inttypes.h>
 
-#define SECT_ "Kit::Persistence::Record::Indexed::EntryRecord"
+#define SECT_ "Kit::Persistence::Record::Journal::EntryRecord"
 
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace Persistence {
 namespace Record {
-namespace Indexed {
+namespace Journal {
 
 
 bool EntryRecord::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept

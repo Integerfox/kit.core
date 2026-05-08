@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_HEADRECORD_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_HEADRECORD_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_HEADRECORD_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_HEADRECORD_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -11,7 +11,7 @@
 /** @file */
 
 #include "Kit/EventQueue/IQueue.h"
-#include "Kit/Persistence/Record/Indexed/IHead.h"
+#include "Kit/Persistence/Record/Journal/IHead.h"
 #include "Kit/Persistence/Record/IChunk.h"
 
 ///
@@ -21,7 +21,7 @@ namespace Persistence {
 ///
 namespace Record {
 ///
-namespace Indexed {
+namespace Journal {
 
 /** This concrete class is responsible for storing and retrieving the "head pointer"
     for the logical RingBuffer used by the EntryRecord to manage multiple entries.
@@ -60,10 +60,10 @@ public:
     Size_T getMaxPayloadSize() const noexcept override;
 
 public:
-    /// See Kit::Persistence::Record::Indexed::IHead
+    /// See Kit::Persistence::Record::Journal::IHead
     bool getLatestOffset( Size_T& offset, uint64_t& indexValue ) const noexcept override;
 
-    /// See Kit::Persistence::Record::Indexed::IHead
+    /// See Kit::Persistence::Record::Journal::IHead
     void setLatestOffset( Size_T offset, uint64_t indexValue ) noexcept override;
 
 

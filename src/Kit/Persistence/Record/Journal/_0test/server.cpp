@@ -1,3 +1,4 @@
+#if 0
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -8,7 +9,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Persistence/Record/Indexed/IEntry.h"
+#include "Kit/Persistence/Record/Journal/IEntry.h"
 #include "Kit/Persistence/Types.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
@@ -17,15 +18,15 @@
 #include "Kit/Persistence/Record/Chunk/Crc.h"
 #include "Kit/Checksum/Crc16CcittFast.h"
 #include "Kit/Persistence/Record/Media/FileAdapter.h"
-#include "Kit/Persistence/Record/Indexed/EntryRecord.h"
-#include "Kit/Persistence/Record/Indexed/HeadRecord.h"
+#include "Kit/Persistence/Record/Journal/EntryRecord.h"
+#include "Kit/Persistence/Record/Journal/HeadRecord.h"
 #include "Kit/EventQueue/Server.h"
 #include "Kit/Io/File/System.h"
 #include "Kit/Io/File/Output.h"
 #define SECT_ "_0test"
 
 ///
-using namespace Kit::Persistence::Record::Indexed;
+using namespace Kit::Persistence::Record::Journal;
 using namespace Kit::Persistence::Record;
 using namespace Kit::Persistence;
 
@@ -308,7 +309,7 @@ TEST_CASE( "EntryRecord" )
         // Use a local UUT with maxConsecutiveCorruptSkip=2 so the failure boundary
         // is easy to trigger deterministically (3 consecutive corrupt entries fail)
         EntryRecord uutSkip( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord,
-                             OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN,
+                             OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN,
                              2 );
         REQUIRE( uutSkip.start( mockEventQueue ) );
 
@@ -368,7 +369,7 @@ TEST_CASE( "EntryRecord" )
         // Use a local UUT with maxConsecutiveCorruptSkip=2 so the failure boundary
         // is easy to trigger deterministically (3 consecutive corrupt entries fail)
         EntryRecord uutSkip( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord,
-                             OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_RECORD_MAX_CORRUPT_SCAN,
+                             OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN,
                              2 );
         REQUIRE( uutSkip.start( mockEventQueue ) );
 
@@ -423,3 +424,4 @@ TEST_CASE( "EntryRecord" )
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
+#endif

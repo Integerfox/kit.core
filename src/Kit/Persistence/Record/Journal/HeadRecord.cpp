@@ -15,7 +15,7 @@
 namespace Kit {
 namespace Persistence {
 namespace Record {
-namespace Indexed {
+namespace Journal {
 
 
 bool HeadRecord::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept

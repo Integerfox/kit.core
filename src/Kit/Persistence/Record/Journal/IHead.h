@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_IHEAD_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_IHEAD_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_IHEAD_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_IHEAD_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -20,7 +20,7 @@ namespace Persistence {
 ///
 namespace Record {
 ///
-namespace Indexed {
+namespace Journal {
 
 
 /** This abstract class defines the interface to manage the newest

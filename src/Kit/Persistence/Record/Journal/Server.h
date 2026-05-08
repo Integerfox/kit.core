@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_SERVER_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_SERVER_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_SERVER_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_SERVER_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -19,8 +19,8 @@
 /** Maximum number of entries that can be written as the result of single
     change notification
  */
-#ifndef OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_SERVER_MAX_BATCH_WRITE
-#define OPTION_KIT_PERSISTENCE_INDEXED_ENTRY_SERVER_MAX_BATCH_WRITE      4
+#ifndef OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_SERVER_MAX_BATCH_WRITE
+#define OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_SERVER_MAX_BATCH_WRITE      4
 #endif
 
 ///

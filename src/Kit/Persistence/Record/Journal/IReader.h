@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_IREADER_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_IREADER_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_IREADER_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_IREADER_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Persistence/Record/Indexed/IEntry.h"
+#include "Kit/Persistence/Record/Journal/IEntry.h"
 
 ///
 namespace Kit {
@@ -19,20 +19,20 @@ namespace Persistence {
 ///
 namespace Record {
 ///
-namespace Indexed {
+namespace Journal {
 
 /** This abstract class defines interface for reading 'entries' from a
-    an Indexed Entry Record.
+    a Journal Entry Record.
 
-    See the README.md file for more details about "Indexed Records".
+    See the README.md file for more details about "Journal Records".
 
     NOTE: This interface/class IS THREAD SAFE and can be called from any thread,
-          EXCEPT for the thread that the Indexed::Server executes in.
+          EXCEPT for the thread that the Journal::Server executes in.
 */
 class IReader
 {
 public:
-    /** This method reads/retrieves the latest entry (from the list of Indexed
+    /** This method reads/retrieves the latest entry (from the list of Journal
         Entries) stored in the persistent media.  The method is synchronous in
         that the method does not return until the entry has been 'read' from
         the persistent media.

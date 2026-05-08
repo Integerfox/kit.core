@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_IWRITER_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_IWRITER_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_IWRITER_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_IWRITER_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Persistence/Record/Indexed/IEntry.h"
+#include "Kit/Persistence/Record/Journal/IEntry.h"
 
 ///
 namespace Kit {
@@ -19,31 +19,22 @@ namespace Persistence {
 ///
 namespace Record {
 ///
-namespace Indexed {
+namespace Journal {
 
-/** This abstract class defines interface for writing 'entries' to a
-    an Indexed Entry Record.
+/** This abstract class defines interface for 'resetting' entries in a
+    a Journal Entry Record.
 
-    See the README.md file for more details about "Indexed Records".
+    See the README.md file for more details about "Journal Records".
 
     NOTE: This interface/class IS THREAD SAFE and can be called from any thread,
-          EXCEPT for the thread that the Indexed::Server executes in.
+          EXCEPT for the thread that the Journal::Server executes in.
 */
-class IWriter
+class IReset
 {
-public:
-    /** This method appends an entry to the list of Indexed Entries.  The method
-        is synchronous in that the method does not return until the entry has
-        been 'written' the persistent media.
-
-        Returns true on success; else if an error occurred (e.g. IO error while
-        writing) false is returned.
-     */
-    virtual bool append( const IPayload& src ) noexcept = 0;
 
 public:
     /** This method resets the head pointer and the timestamp to zero.  It is
-        essentially a logical erase of the entires.  
+        essentially a logical erase of the entires.
 
         NOTE: With respect to 'making room' for more entries, there is no actual
               need to either logically or physically erase the entries, since the
@@ -51,6 +42,10 @@ public:
               stored.
      */
     virtual void logicalReset() noexcept = 0;
+
+public:
+    /// Virtual destructor
+    virtual ~IReset() noexcept = default;
 };
 
 

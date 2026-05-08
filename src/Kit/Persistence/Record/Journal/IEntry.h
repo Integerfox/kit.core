@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_IENTRY_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_IENTRY_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_IENTRY_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_IENTRY_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -19,12 +19,12 @@ namespace Persistence {
 ///
 namespace Record {
 ///
-namespace Indexed {
+namespace Journal {
 
 /** This abstract class defines interface for managing 'entries' from a
-    a collection of entries (i.e. read an entry from a IndexedEntryRecord).
+    a collection of entries (i.e. read an entry from a Journal EntryRecord).
 
-    See the README.md file for more details about "Indexed Records".
+    See the README.md file for more details about "Journal Records".
 
     NOTE: This interface/class is NOT THREAD SAFE and should only be 'used' from
           the Record Server's thread.
@@ -42,7 +42,7 @@ public:
     } Marker_T;
 
 public:
-    /** This method reads/retrieves the latest entry (from the list of Indexed
+    /** This method reads/retrieves the latest entry (from the list of Journal
         Entries) stored in the persistent media.  The method is synchronous in
         that the method does not return until the entry has been 'read' from
         the persistent media.
@@ -106,7 +106,7 @@ public:
     virtual Size_T getMaxIndex() const noexcept = 0;
 
 public:
-    /** This method appends an entry to the list of Indexed Entries.  The method
+    /** This method appends an entry to the list of Journal Entries.  The method
         is synchronous in that the method does not return until the entry has
         been 'written' the persistent media.
 

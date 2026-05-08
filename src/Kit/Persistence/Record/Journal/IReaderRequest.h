@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_IENTRYREQUEST_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_IENTRYREQUEST_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_IREADERREQUEST_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_IREADERREQUEST_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -14,7 +14,7 @@
 #include "Kit/Itc/RequestMessage.h"
 #include "Kit/Itc/ResponseMessage.h"
 #include "Kit/Persistence/Record/IPayload.h"
-#include "Kit/Persistence/Record/Indexed/IEntry.h"
+#include "Kit/Persistence/Record/Journal/IEntry.h"
 
 ///
 namespace Kit {
@@ -23,10 +23,10 @@ namespace Persistence {
 ///
 namespace Record {
 ///
-namespace Indexed {
+namespace Journal {
 
 /** This abstract class define ITC message type and payload for the application
-    to request read Indexed Entry data
+    to request read Journal Entry data
 
     See the Kit/Itc/README.txt file for the semantics for the 'ownership' of the
     payload contents.
@@ -34,14 +34,14 @@ namespace Indexed {
     NOTE: This interface can/should NOT be used synchronously.  The application
           is required to only use asynchronous semantics.
  */
-class GetLatestRequest
+class RetrieveLatestRequest
 {
 public:
     /// SAP for this API
-    typedef Kit::Itc::SAP<GetLatestRequest> SAP;
+    typedef Kit::Itc::SAP<RetrieveLatestRequest> SAP;
 
 public:
-    /// Payload for Message: GetLatest
+    /// Payload for Message: RetrieveLatest
     class Payload
     {
     public:
@@ -67,45 +67,45 @@ public:
 
 
 public:
-    /// Message Type: GetLatest
-    typedef Kit::Itc::RequestMessage<GetLatestRequest, Payload> GetLatestMsg;
+    /// Message Type: RetrieveLatest
+    typedef Kit::Itc::RequestMessage<RetrieveLatestRequest, Payload> RetrieveLatestMsg;
 
-    /// Request: GetLatest message
-    virtual void request( GetLatestMsg& msg ) = 0;
+    /// Request: RetrieveLatest message
+    virtual void request( RetrieveLatestMsg& msg ) = 0;
 
 public:
     /// Virtual Destructor
-    virtual ~GetLatestRequest() {}
+    virtual ~RetrieveLatestRequest() {}
 };
 
 
 /** This abstract class define ITC message type and payload for asynchronous
-    response (to the application) of a GetLatest message.
+    response (to the application) of a RetrieveLatest message.
 
     The Application is responsible for implementing the response method(s).
  */
-class GetLatestResponse
+class RetrieveLatestResponse
 {
 public:
     /// Response Message Type
-    typedef Kit::Itc::ResponseMessage<GetLatestResponse,
-                                      GetLatestRequest,
-                                      GetLatestRequest::Payload>
-        GetLatestMsg;
+    typedef Kit::Itc::ResponseMessage<RetrieveLatestResponse,
+                                      RetrieveLatestRequest,
+                                      RetrieveLatestRequest::Payload>
+        RetrieveLatestMsg;
 
 public:
     /// Response
-    virtual void response( GetLatestMsg& msg ) = 0;
+    virtual void response( RetrieveLatestMsg& msg ) = 0;
 
 
 public:
     /// Virtual destructor
-    virtual ~GetLatestResponse() {}
+    virtual ~RetrieveLatestResponse() {}
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 /** This abstract class define ITC message type and payload for the application
-    to request read Indexed Entry data
+    to request read Journal Entry data
 
     See the Kit/Itc/README.txt file for the semantics for the 'ownership' of the
     payload contents.
@@ -113,14 +113,14 @@ public:
     NOTE: This interface can/should NOT be used synchronously.  The application
           is required to only use asynchronous semantics.
  */
-class GetNextRequest
+class RetrieveNextRequest
 {
 public:
     /// SAP for this API
-    typedef Kit::Itc::SAP<GetNextRequest> SAP;
+    typedef Kit::Itc::SAP<RetrieveNextRequest> SAP;
 
 public:
-    /// Payload for Message: GetNext
+    /// Payload for Message: RetrieveNext
     class Payload
     {
     public:
@@ -151,45 +151,45 @@ public:
     };
 
 public:
-    /// Message Type: GetNext
-    typedef Kit::Itc::RequestMessage<GetNextRequest, Payload> GetNextMsg;
+    /// Message Type: RetrieveNext
+    typedef Kit::Itc::RequestMessage<RetrieveNextRequest, Payload> RetrieveNextMsg;
 
-    /// Request: GetNext message
-    virtual void request( GetNextMsg& msg ) = 0;
+    /// Request: RetrieveNext message
+    virtual void request( RetrieveNextMsg& msg ) = 0;
 
 public:
     /// Virtual Destructor
-    virtual ~GetNextRequest() {}
+    virtual ~RetrieveNextRequest() {}
 };
 
 
 /** This abstract class define ITC message type and payload for asynchronous
-    response (to the application) of a GetNext message.
+    response (to the application) of a RetrieveNext message.
 
     The Application is responsible for implementing the response method(s).
  */
-class GetNextResponse
+class RetrieveNextResponse
 {
 public:
     /// Response Message Type
-    typedef Kit::Itc::ResponseMessage<GetNextResponse,
-                                      GetNextRequest,
-                                      GetNextRequest::Payload>
-        GetNextMsg;
+    typedef Kit::Itc::ResponseMessage<RetrieveNextResponse,
+                                      RetrieveNextRequest,
+                                      RetrieveNextRequest::Payload>
+        RetrieveNextMsg;
 
 public:
     /// Response
-    virtual void response( GetNextMsg& msg ) = 0;
+    virtual void response( RetrieveNextMsg& msg ) = 0;
 
 
 public:
     /// Virtual destructor
-    virtual ~GetNextResponse() {}
+    virtual ~RetrieveNextResponse() {}
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 /** This abstract class define ITC message type and payload for the application
-    to request read Indexed Entry data
+    to request read Journal Entry data
 
     See the Kit/Itc/README.txt file for the semantics for the 'ownership' of the
     payload contents.
@@ -197,14 +197,14 @@ public:
     NOTE: This interface can/should NOT be used synchronously.  The application
           is required to only use asynchronous semantics.
  */
-class GetPreviousRequest
+class RetrievePreviousRequest
 {
 public:
     /// SAP for this API
-    typedef Kit::Itc::SAP<GetPreviousRequest> SAP;
+    typedef Kit::Itc::SAP<RetrievePreviousRequest> SAP;
 
 public:
-    /// Payload for Message: GetPrevious
+    /// Payload for Message: RetrievePrevious
     class Payload
     {
     public:
@@ -235,45 +235,45 @@ public:
     };
 
 
-    /// Message Type: GetPrevious
-    typedef Kit::Itc::RequestMessage<GetPreviousRequest, Payload> GetPreviousMsg;
+    /// Message Type: RetrievePrevious
+    typedef Kit::Itc::RequestMessage<RetrievePreviousRequest, Payload> RetrievePreviousMsg;
 
-    /// Request: GetPrevious message
-    virtual void request( GetPreviousMsg& msg ) = 0;
+    /// Request: RetrievePrevious message
+    virtual void request( RetrievePreviousMsg& msg ) = 0;
 
 public:
     /// Virtual Destructor
-    virtual ~GetPreviousRequest() {}
+    virtual ~RetrievePreviousRequest() {}
 };
 
 /** This abstract class define ITC message type and payload for asynchronous
-    response (to the application) of a GetPrevious message.
+    response (to the application) of a RetrievePrevious message.
 
     The Application is responsible for implementing the response method(s).
  */
-class GetPreviousResponse
+class RetrievePreviousResponse
 {
 public:
     /// Response Message Type
-    typedef Kit::Itc::ResponseMessage<GetPreviousResponse,
-                                      GetPreviousRequest,
-                                      GetPreviousRequest::Payload>
-        GetPreviousMsg;
+    typedef Kit::Itc::ResponseMessage<RetrievePreviousResponse,
+                                      RetrievePreviousRequest,
+                                      RetrievePreviousRequest::Payload>
+        RetrievePreviousMsg;
 
 public:
     /// Response
-    virtual void response( GetPreviousMsg& msg ) = 0;
+    virtual void response( RetrievePreviousMsg& msg ) = 0;
 
 
 public:
     /// Virtual destructor
-    virtual ~GetPreviousResponse() {}
+    virtual ~RetrievePreviousResponse() {}
 };
 
 
 ////////////////////////////////////////////////////////////////////////////////
 /** This abstract class define ITC message type and payload for the application
-    to request read Indexed Entry data
+    to request read Journal Entry data
 
     See the Kit/Itc/README.txt file for the semantics for the 'ownership' of the
     payload contents.
@@ -281,14 +281,14 @@ public:
     NOTE: This interface can/should NOT be used synchronously.  The application
           is required to only use asynchronous semantics.
  */
-class GetByEntryIndexRequest
+class RetrieveByEntryIndexRequest
 {
 public:
     /// SAP for this API
-    typedef Kit::Itc::SAP<GetByEntryIndexRequest> SAP;
+    typedef Kit::Itc::SAP<RetrieveByEntryIndexRequest> SAP;
 
 public:
-    /// Payload for Message: GetByBufferIndex
+    /// Payload for Message: RetrieveByBufferIndex
     class Payload
     {
     public:
@@ -316,39 +316,39 @@ public:
     };
 
 
-    /// Message Type: GetByBufferIndex
-    typedef Kit::Itc::RequestMessage<GetByEntryIndexRequest, Payload> GetByBufferIndexMsg;
+    /// Message Type: RetrieveByBufferIndex
+    typedef Kit::Itc::RequestMessage<RetrieveByEntryIndexRequest, Payload> RetrieveByBufferIndexMsg;
 
-    /// Request: GetByBufferIndex message
-    virtual void request( GetByBufferIndexMsg& msg ) = 0;
+    /// Request: RetrieveByBufferIndex message
+    virtual void request( RetrieveByBufferIndexMsg& msg ) = 0;
 
 public:
     /// Virtual Destructor
-    virtual ~GetByEntryIndexRequest() {}
+    virtual ~RetrieveByEntryIndexRequest() {}
 };
 
 /** This abstract class define ITC message type and payload for asynchronous
-    response (to the application) of a GetByEntryIndexRequest message.
+    response (to the application) of a RetrieveByEntryIndexRequest message.
 
     The Application is responsible for implementing the response method(s).
  */
-class GetByEntryIndexResponse
+class RetrieveByEntryIndexResponse
 {
 public:
     /// Response Message Type
-    typedef Kit::Itc::ResponseMessage<GetByEntryIndexResponse,
-                                      GetByEntryIndexRequest,
-                                      GetByEntryIndexRequest::Payload>
-        GetByEntryIndexMsg;
+    typedef Kit::Itc::ResponseMessage<RetrieveByEntryIndexResponse,
+                                      RetrieveByEntryIndexRequest,
+                                      RetrieveByEntryIndexRequest::Payload>
+        RetrieveByEntryIndexMsg;
 
 public:
     /// Response
-    virtual void response( GetByEntryIndexMsg& msg ) = 0;
+    virtual void response( RetrieveByEntryIndexMsg& msg ) = 0;
 
 
 public:
     /// Virtual destructor
-    virtual ~GetByEntryIndexResponse() {}
+    virtual ~RetrieveByEntryIndexResponse() {}
 };
 
 ////////////////////////////////////////////////////////////////////////////////

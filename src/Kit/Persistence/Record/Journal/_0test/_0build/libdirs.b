@@ -1,5 +1,5 @@
-src/Kit/Persistence/Record/Indexed
-src/Kit/Persistence/Record/Indexed/_0test
+src/Kit/Persistence/Record/Journal
+src/Kit/Persistence/Record/Journal/_0test
 
 src/Kit/Persistence/Record/Media
 src/Kit/Persistence/Record/Chunk
