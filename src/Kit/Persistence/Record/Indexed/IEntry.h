@@ -27,7 +27,7 @@ namespace Indexed {
     See the README.md file for more details about "Indexed Records".
 
     NOTE: This interface/class is NOT THREAD SAFE and should only be 'used' from
-      the Record Server's thread.
+          the Record Server's thread.
 */
 class IEntry : public Kit::Persistence::Record::IDataRecord
 {

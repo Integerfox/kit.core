@@ -7,6 +7,10 @@ ability for a single Record to contain N entries, where an entry content is
 defined by a Kit::Persistence::IPayload instance.  An example usage for Indexed
 entries is to persistently store log entries.
 
+**NOTE**: The core implementation is **not** thread safe.  See the *Application
+          Interfaces* section below for how clients/the-application safely
+          read and write indexed entries.
+
 - A single IChunk handler is used for writing all N entries.
 
 - For a given IEntry Record instance, all entries must be the same, fixed size.
@@ -50,3 +54,28 @@ entries is to persistently store log entries.
   - The larger an timestamp value is, the newer the entry is.
 
 - On-startup - only the "head record" is loaded into the RAM
+
+## Application Interfaces
+
+- For thread safety, the application interfaces with the Indexed records using
+  ITC messaging and model points.  This is so that the physical reading and writing of persistence storage can be down in separate or dedicated thread from the Application threads.
+
+- For *reading* indexed entries the application can use the `IReader` interface
+  which provides synchronous ITC wrappers over the raw ITC Request messages defined
+  in `IReaderRequest` header file. The application can bypass the `IReader`
+  interface and directly use the `IReaderRequest` if true asynchronous semantics
+  are required.
+
+- For *writing* indexed entries the application can use the `IWriter` interface
+  which provides synchronous ITC wrappers over the raw ITC Request messages defined
+  in `IWriterRequest` header file. The application can bypass the `IWriter`
+  interface and directly use the `IWriterRequest` if true asynchronous semantics
+  are required.
+
+- There is second thread safe mechanism to write indexed entries - using a
+  `Kit::Container::RingBufferMP`.  The `RingBufferMP` is a thread safe Ring Buffer
+  with an associated model point.  When the application adds to the Ring Buffer,
+  the `Indexed::RingBufferServer` gets a change notification and then drains
+  the Ring Buffer in the notification callback while executing the `persistence
+  storage` thread.
+  

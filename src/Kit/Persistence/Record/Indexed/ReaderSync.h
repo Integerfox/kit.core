@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_INDEXED_IENTRY_H
-#define KIT_PERSISTENCE_RECORD_INDEXED_IENTRY_H
+#ifndef KIT_PERSISTENCE_RECORD_INDEXED_ENTRY_REQUEST_SYNC_H
+#define KIT_PERSISTENCE_RECORD_INDEXED_ENTRY_REQUEST_SYNC_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Persistence/Record/IDataRecord.h"
+#include "Kit/Persistence/Record/Indexed/IEntryRequest.h"
 
 ///
 namespace Kit {
