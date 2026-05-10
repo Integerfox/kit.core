@@ -44,6 +44,8 @@ struct Commands_T
     static constexpr uint8_t JEDEC_ID           = 0x9F; //!< Read JEDEC manufacturer ID
     static constexpr uint8_t POWER_DOWN         = 0xB9; //!< Enter low power mode
     static constexpr uint8_t RELEASE_POWER_DOWN = 0xAB; //!< Exit low power mode
+    static constexpr uint8_t ENABLE_RESET       = 0x66; //!< Enable software reset
+    static constexpr uint8_t RESET_DEVICE       = 0x99; //!< Reset device
 };
 
 /** Status Register 1 bit definitions */

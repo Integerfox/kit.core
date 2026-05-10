@@ -10,6 +10,7 @@
 
 
 #include "Kit/Driver/SPI/ST/M32F4/Api.h"
+#include <string.h>
 
 ///
 using namespace Kit::Driver::SPI::ST::M32F4;
@@ -93,11 +94,36 @@ bool Api::read( void*  rxData,
         return false;
     }
 
-    HAL_StatusTypeDef status = HAL_SPI_Receive(
-        m_spiHandle,
-        static_cast<uint8_t*>( rxData ),
-        static_cast<uint16_t>( numBytes ),
-        m_timeoutMs );
+    // Use HAL_SPI_TransmitReceive with separate dummy TX buffer instead
+    // of HAL_SPI_Receive.  The STM32F4 HAL's HAL_SPI_Receive() does not
+    // clock data correctly in SPI Mode 3 (CPOL=1, CPHA=1), resulting
+    // in all-zero reads.  TransmitReceive avoids this by driving the
+    // clock via explicit dummy byte transmission.
+    static constexpr size_t CHUNK_SIZE = 32;
+    uint8_t  dummyTx[CHUNK_SIZE];
+    uint8_t* dst       = static_cast<uint8_t*>( rxData );
+    size_t   remaining = numBytes;
 
-    return ( status == HAL_OK );
+    while ( remaining > 0 )
+    {
+        size_t n = ( remaining > CHUNK_SIZE ) ? CHUNK_SIZE : remaining;
+        memset( dummyTx, 0xFF, n );
+
+        HAL_StatusTypeDef status = HAL_SPI_TransmitReceive(
+            m_spiHandle,
+            dummyTx,
+            dst,
+            static_cast<uint16_t>( n ),
+            m_timeoutMs );
+
+        if ( status != HAL_OK )
+        {
+            return false;
+        }
+
+        dst       += n;
+        remaining -= n;
+    }
+
+    return true;
 }

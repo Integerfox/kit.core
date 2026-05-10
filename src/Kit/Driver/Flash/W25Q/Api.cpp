@@ -39,6 +39,38 @@ bool Api::start( void* startArgs ) noexcept
 
     // Deassert chip select (CS = HIGH = inactive)
     m_cs.setHigh();
+
+    // Release from power-down mode first.  If a previous firmware put the
+    // flash into power-down mode (via 0xB9) and the MCU was reset without
+    // cycling power, the device ignores ALL commands including Enable Reset
+    // and Reset Device.  The Release Power-Down (0xAB) command is the only
+    // command recognised in power-down mode.
+    m_cs.setLow();
+    sendCommand( Commands_T::RELEASE_POWER_DOWN );
+    m_cs.setHigh();
+
+    // Wait for release from power-down to complete (tRES1 = 3us per W25Q
+    // datasheet).  Use a generous delay to cover all variants.
+    for ( volatile uint32_t i = 0; i < 1000; i++ ) {}
+
+    // Send software reset sequence to recover from any undefined state
+    // that may result from spurious clock edges during MCU power-on.
+    // The Enable Reset (66h) + Reset Device (99h) sequence resets the
+    // internal state machine to its power-on default.
+    m_cs.setLow();
+    sendCommand( Commands_T::ENABLE_RESET );
+    m_cs.setHigh();
+
+    // Short delay between the two reset commands (>50ns per datasheet)
+    for ( volatile uint32_t i = 0; i < 10; i++ ) {}
+
+    m_cs.setLow();
+    sendCommand( Commands_T::RESET_DEVICE );
+    m_cs.setHigh();
+
+    // Wait for reset to complete (tRST = 30us max per W25Q datasheet)
+    for ( volatile uint32_t i = 0; i < 5000; i++ ) {}
+
     m_started = true;
     return true;
 }
