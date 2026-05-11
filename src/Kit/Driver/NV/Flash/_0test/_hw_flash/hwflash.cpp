@@ -16,8 +16,10 @@
       - Flash device communication (JEDEC ID read)
       - Basic NV write and read back
       - Read-modify-write preservation
-      - Data persistence across driver stop/start (simulated power cycle)
+      - Multi-page write isolation
+      - Data persistence across driver stop/start
       - Format (factory reset)
+      - Driver statistics
 
     The test reports results via the serial console (UART).  A PASS/FAIL
     summary is printed at the end.
@@ -37,6 +39,7 @@
 #include "Kit/Driver/Dio/ST/M32F4/Output.h"
 #include "Kit/Driver/Flash/W25Q/Api.h"
 #include "Kit/Driver/NV/Flash/Api.h"
+#include "spi.h"
 #include <cstring>
 
 #define SECT_ "_0test"
@@ -113,10 +116,10 @@ public:
 
         // --- Initialize hardware drivers ---
         KIT_SYSTEM_TRACE_MSG( SECT_, "Initializing SPI and flash drivers..." );
-        SPI::ST::M32F4::Api  spiDriver( &hspi3 );
+        SPI::ST::M32F4::Api    spiDriver( &hspi3 );
         Dio::ST::M32F4::Output csPin( CS_SPI_Flash_GPIO_Port, CS_SPI_Flash_Pin );
-
         spiDriver.start();
+
         Flash::W25Q::Api flashDriver( spiDriver, csPin, Flash::W25Q::W25Q128 );
         flashDriver.start();
         KIT_SYSTEM_TRACE_MSG( SECT_, "Drivers initialized" );
@@ -155,6 +158,12 @@ public:
             uint8_t readData[5] = { 0 };
             check( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true, "Read 5 bytes succeeds" );
             check( memcmp( readData, writeData, sizeof( writeData ) ) == 0, "Read data matches written data" );
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                "  Written: [%02X %02X %02X %02X %02X]",
+                writeData[0], writeData[1], writeData[2], writeData[3], writeData[4] );
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                "  Read:    [%02X %02X %02X %02X %02X]",
+                readData[0], readData[1], readData[2], readData[3], readData[4] );
         }
 
         // --- Test 4: Read-Modify-Write ---

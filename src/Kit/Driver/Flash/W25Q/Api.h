@@ -86,6 +86,12 @@ static constexpr size_t CMD_ADDR_SIZE = 4;
 /** Chip erase timeout in milliseconds (up to 200 seconds) */
 static constexpr uint32_t CHIP_ERASE_TIMEOUT_MS = 200000;
 
+/** Approximate number of volatile loop iterations for a 1ms busy-wait delay.
+    Assumes an ARM Cortex-M4 at 48-200 MHz with ~8 cycles per iteration.
+    At 96 MHz: 12000 * 8 / 96e6 ≈ 1 ms.
+ */
+static constexpr uint32_t BUSY_POLL_DELAY_LOOPS = 12000;
+
 
 /** This class implements the Flash::IApi interface for the Winbond W25Q
     series SPI NOR flash devices.  It communicates with the flash device

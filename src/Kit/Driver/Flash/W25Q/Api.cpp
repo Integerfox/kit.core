@@ -353,8 +353,6 @@ bool Api::writeEnable() noexcept
 
 bool Api::waitUntilReady( uint32_t timeoutMs ) noexcept
 {
-    // In a real implementation, this would poll the status register with a
-    // timeout.  For now, we poll once per iteration.
     for ( uint32_t i = 0; i < timeoutMs; i++ )
     {
         m_cs.setLow();
@@ -380,7 +378,12 @@ bool Api::waitUntilReady( uint32_t timeoutMs ) noexcept
             return true; // Ready
         }
 
-        // In a real implementation, we would delay here
+        // Busy-wait approximately 1ms per iteration so that
+        // 'timeoutMs' iterations correspond to a real-time
+        // timeout in milliseconds.  The constant assumes a CPU
+        // clock in the 48-200 MHz range (~8 cycles per volatile
+        // loop iteration on Cortex-M4).
+        for ( volatile uint32_t d = 0; d < BUSY_POLL_DELAY_LOOPS; d++ ) {}
     }
 
     return false; // Timed out
