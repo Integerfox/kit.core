@@ -20,12 +20,26 @@
       - Data persistence across driver stop/start
       - Format (factory reset)
       - Driver statistics
+      - Wear leveling and sector reclamation
+      - Startup scan time
 
     The test reports results via the serial console (UART).  A PASS/FAIL
     summary is printed at the end.
 
     The flash region used by this test starts at address 0 and uses 32
     sectors (128 KB) to avoid conflicting with other flash contents.
+
+    Configuration Sizing (from design documentation):
+
+    | Parameter                | 4KB App Data      | 128KB App Data      |
+    |--------------------------|-------------------|---------------------|
+    | Physical Flash Required  | 128KB (32 sectors)| 4MB (1024 sectors)  |
+    | Page Map RAM             | 64 bytes          | 2048 bytes (2KB)    |
+    | Startup Scan Time        | ~16-25 ms         | ~500-625 ms         |
+    | Over-provisioning Ratio  | 28:1              | 28:1                |
+    | Total Record Slots       | 448               | 14,336              |
+
+    This hardware test uses the 4KB configuration.
 */
 
 
@@ -35,6 +49,7 @@
 #include "Kit/System/Thread.h"
 #include "Kit/System/FatalError.h"
 #include "Kit/System/Trace.h"
+#include "Kit/System/ElapsedTime.h"
 #include "Kit/Driver/SPI/ST/M32F4/Api.h"
 #include "Kit/Driver/Dio/ST/M32F4/Output.h"
 #include "Kit/Driver/Flash/W25Q/Api.h"
@@ -53,7 +68,10 @@ using namespace Kit::System;
 // Test Configuration
 // ============================================================================
 
-/** NV region: 128 KB of flash (32 sectors), 4 KB application data, 256-byte pages */
+/** NV region: 128 KB of flash (32 sectors), 4 KB application data, 256-byte pages.
+    Over-provisioning ratio: 28:1 (448 record slots / 16 logical pages).
+    Page map RAM: 16 * 4 = 64 bytes.
+ */
 static constexpr size_t   NV_PAGE_SIZE      = 256;
 static constexpr size_t   NV_TOTAL_SIZE     = 4096;
 static constexpr size_t   MAX_LOGICAL_PAGES = 16;
@@ -66,6 +84,17 @@ static const NV::Flash::Config_T NV_CONFIG = {
     NV_PAGE_SIZE,
     NV_TOTAL_SIZE
 };
+
+/** Expected sizing metrics from the design documentation */
+static constexpr size_t   EXPECTED_SECTORS            = 32;
+static constexpr size_t   EXPECTED_RECORDS_PER_SECTOR = 14;
+static constexpr size_t   EXPECTED_TOTAL_RECORD_SLOTS = EXPECTED_SECTORS * EXPECTED_RECORDS_PER_SECTOR; // 448
+static constexpr size_t   EXPECTED_PAGE_MAP_RAM_BYTES = MAX_LOGICAL_PAGES * sizeof( uint32_t );         // 64
+
+/** Maximum acceptable startup scan time in milliseconds.
+    Design doc estimates ~16-25 ms for 4KB config (448 headers at ~35us each).
+ */
+static constexpr uint32_t MAX_STARTUP_SCAN_TIME_MS = 100;
 
 
 // ============================================================================
@@ -231,6 +260,187 @@ public:
             KIT_SYSTEM_TRACE_MSG( SECT_,
                 "  Stats: erases=%lu free=%u valid=%u",
                 (unsigned long) eraseCount, (unsigned) freePages, (unsigned) validPages );
+
+            // Validate sizing metrics from design documentation
+            size_t totalSlots = freePages + validPages;
+            // After format (32 erases) + test writes, total should be close to 448
+            // Some slots may be INVALID (used by old records not yet reclaimed)
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                "  Sizing: total_slots=%u (expected ~%u), page_map_RAM=%u bytes",
+                (unsigned) totalSlots,
+                (unsigned) EXPECTED_TOTAL_RECORD_SLOTS,
+                (unsigned) EXPECTED_PAGE_MAP_RAM_BYTES );
+        }
+
+        // --- Test 8: Wear Leveling ---
+        //
+        // Verifies that repeated writes to the same logical page do NOT
+        // erase flash on every write.  The log-structured design appends
+        // new records to free slots and only erases when an entire sector
+        // of INVALID records can be reclaimed.
+        //
+        // With 448 total record slots and 16 logical pages, we expect:
+        //   - First ~432 writes (448 - 16 valid) consume free slots
+        //   - Erases should only occur after free slots are exhausted
+        //   - Over-provisioning ratio of 28:1 means ~1 erase per 10-14 writes
+        //     once reclamation starts
+        KIT_SYSTEM_TRACE_MSG( SECT_, "--- Test 8: Wear Leveling ---" );
+        {
+            // Re-format to start with a clean state
+            check( nv.format() == true, "Format before wear-leveling test" );
+
+            // Snapshot erase count after format (cumulative across driver lifetime)
+            uint32_t erasesAfterFormat;
+            size_t   dummy1, dummy2;
+            nv.getStatistics( erasesAfterFormat, dummy1, dummy2 );
+
+            // Write to page 0 repeatedly — each write creates a new record
+            // at a different physical location
+            static constexpr size_t NUM_WEAR_WRITES = 50;
+            bool allWritesOk = true;
+            for ( size_t i = 0; i < NUM_WEAR_WRITES; i++ )
+            {
+                uint8_t data[] = { static_cast<uint8_t>( i ),
+                                   static_cast<uint8_t>( i + 1 ) };
+                if ( !nv.write( 0, data, sizeof( data ) ) )
+                {
+                    allWritesOk = false;
+                    break;
+                }
+            }
+            check( allWritesOk, "50 repeated writes to same page succeed" );
+
+            // Verify the last write is readable
+            uint8_t lastRead[2] = { 0 };
+            check( nv.read( 0, lastRead, sizeof( lastRead ), sizeof( lastRead ) ) == true, "Read after repeated writes succeeds" );
+            check( lastRead[0] == ( NUM_WEAR_WRITES - 1 ) && lastRead[1] == NUM_WEAR_WRITES, "Last written data is correct" );
+
+            // Check statistics to verify wear leveling behavior
+            uint32_t eraseCount;
+            size_t   freePages;
+            size_t   validPages;
+            check( nv.getStatistics( eraseCount, freePages, validPages ) == true, "Stats after wear-leveling writes" );
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                "  After %u writes: erases=%lu free=%u valid=%u",
+                (unsigned) NUM_WEAR_WRITES,
+                (unsigned long) eraseCount, (unsigned) freePages, (unsigned) validPages );
+
+            // With 32 sectors (448 slots) and 50 writes to one page, we
+            // should NOT have needed to erase any sectors beyond the
+            // format — 50 writes << 448 free slots.
+            uint32_t extraErases = eraseCount - erasesAfterFormat;
+            check( extraErases == 0, "No extra erases needed (wear leveling effective)" );
+            check( validPages == 1, "Only 1 valid page (latest version)" );
+            check( freePages > 0, "Free slots remain" );
+
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                "  Wear-leveling: %u writes consumed %u slots, %u free remain",
+                (unsigned) NUM_WEAR_WRITES,
+                (unsigned)( EXPECTED_TOTAL_RECORD_SLOTS - freePages - validPages ),
+                (unsigned) freePages );
+        }
+
+        // --- Test 9: Sector Reclamation ---
+        //
+        // Exhausts the free record slots to force sector reclamation.
+        // After format, there are 448 free slots.  Writing to the same
+        // logical page uses 1 free slot per write (old record marked
+        // INVALID, new record written to free slot).  After ~447 writes,
+        // free slots are exhausted and the driver must erase a sector
+        // containing only INVALID records to reclaim space.
+        KIT_SYSTEM_TRACE_MSG( SECT_, "--- Test 9: Sector Reclamation ---" );
+        {
+            // Re-format for a clean starting state
+            check( nv.format() == true, "Format before reclamation test" );
+
+            // Determine how many writes we need to trigger at least one
+            // sector reclamation.  With 448 slots and 1 logical page,
+            // the first 447 writes consume free slots, the 448th should
+            // trigger reclamation of sector(s) with INVALID records.
+            //
+            // We write more than 448 to guarantee reclamation occurs.
+            static constexpr size_t WRITES_TO_TRIGGER_RECLAMATION = 460;
+
+            bool allWritesOk = true;
+            for ( size_t i = 0; i < WRITES_TO_TRIGGER_RECLAMATION; i++ )
+            {
+                uint8_t data[] = { static_cast<uint8_t>( i & 0xFF ),
+                                   static_cast<uint8_t>( ( i >> 8 ) & 0xFF ) };
+                if ( !nv.write( 0, data, sizeof( data ) ) )
+                {
+                    KIT_SYSTEM_TRACE_MSG( SECT_, "  Write failed at iteration %u", (unsigned) i );
+                    allWritesOk = false;
+                    break;
+                }
+            }
+            check( allWritesOk, "460 writes (forcing reclamation) all succeed" );
+
+            // Verify the last write is correct
+            uint8_t lastRead[2] = { 0 };
+            check( nv.read( 0, lastRead, sizeof( lastRead ), sizeof( lastRead ) ) == true, "Read after reclamation succeeds" );
+            uint8_t expectedByte0 = static_cast<uint8_t>( ( WRITES_TO_TRIGGER_RECLAMATION - 1 ) & 0xFF );
+            uint8_t expectedByte1 = static_cast<uint8_t>( ( ( WRITES_TO_TRIGGER_RECLAMATION - 1 ) >> 8 ) & 0xFF );
+            check( lastRead[0] == expectedByte0 && lastRead[1] == expectedByte1, "Data correct after reclamation" );
+
+            // Statistics should show reclamation occurred
+            uint32_t eraseCount;
+            size_t   freePages;
+            size_t   validPages;
+            check( nv.getStatistics( eraseCount, freePages, validPages ) == true, "Stats after reclamation" );
+
+            // eraseCount includes 32 from format + reclamation erases
+            uint32_t reclamationErases = eraseCount - EXPECTED_SECTORS;
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                "  Reclamation: erases=%lu (format=%u + reclaim=%lu) free=%u valid=%u",
+                (unsigned long) eraseCount,
+                (unsigned) EXPECTED_SECTORS,
+                (unsigned long) reclamationErases,
+                (unsigned) freePages,
+                (unsigned) validPages );
+
+            check( reclamationErases > 0, "Sector reclamation occurred" );
+            check( validPages == 1, "Only 1 valid page after reclamation" );
+            check( freePages > 0, "Free slots available after reclamation" );
+
+            // Verify data survives a restart after reclamation
+            nv.stop();
+            check( nv.start() == true, "Restart after reclamation succeeds" );
+            uint8_t persistRead[2] = { 0 };
+            check( nv.read( 0, persistRead, sizeof( persistRead ), sizeof( persistRead ) ) == true, "Read after restart-post-reclamation" );
+            check( persistRead[0] == expectedByte0 && persistRead[1] == expectedByte1, "Data persists after reclamation + restart" );
+        }
+
+        // --- Test 10: Startup Scan Time ---
+        //
+        // Measures the time taken by nv.start() to scan flash and rebuild
+        // the in-memory page map.  For the 4KB configuration (448 record
+        // slots), the design documentation estimates ~16-25 ms.
+        KIT_SYSTEM_TRACE_MSG( SECT_, "--- Test 10: Startup Scan Time ---" );
+        {
+            // Write to several pages so the scan finds valid records
+            uint8_t data[] = { 0x42 };
+            for ( size_t page = 0; page < MAX_LOGICAL_PAGES; page++ )
+            {
+                nv.write( page * NV_PAGE_SIZE, data, 1 );
+            }
+
+            // Stop and measure restart time
+            nv.stop();
+
+            uint32_t startTime = ElapsedTime::milliseconds();
+            check( nv.start() == true, "Restart for scan time measurement" );
+            uint32_t scanTime = ElapsedTime::deltaMilliseconds( startTime );
+
+            KIT_SYSTEM_TRACE_MSG( SECT_,
+                "  Startup scan time: %lu ms (max allowed: %lu ms)",
+                (unsigned long) scanTime,
+                (unsigned long) MAX_STARTUP_SCAN_TIME_MS );
+            check( scanTime <= MAX_STARTUP_SCAN_TIME_MS, "Scan time within acceptable range" );
+
+            // Verify data integrity after timed restart
+            uint8_t readData;
+            check( nv.read( 0, &readData, 1, 1 ) == true, "Read after timed restart" );
+            check( readData == 0x42, "Data correct after timed restart" );
         }
 
         // --- Summary ---
