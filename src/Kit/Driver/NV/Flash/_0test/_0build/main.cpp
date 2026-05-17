@@ -2,6 +2,11 @@
 #include "Kit/System/Trace.h"
 #include "catch2/catch_session.hpp"
 
+// Increase default stack size on Windows for large MockFlash test objects
+#ifdef _WIN32
+#pragma comment(linker, "/STACK:8388608")
+#endif
+
 int main( int argc, char* argv[] )
 {
     Kit::System::initialize();
