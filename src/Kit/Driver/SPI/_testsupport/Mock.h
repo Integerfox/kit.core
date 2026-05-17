@@ -87,15 +87,15 @@ public:
 
 
 protected:
-    bool     m_started;
-    bool     m_failNext;
-    uint8_t  m_txBuffer[MAX_BUFFER_SIZE];
-    uint8_t  m_rxBuffer[MAX_BUFFER_SIZE];
-    uint8_t  m_rxData[MAX_BUFFER_SIZE];
-    size_t   m_txCount;
-    size_t   m_rxCount;
-    size_t   m_rxDataPos;
-    size_t   m_rxDataLen;
+    bool     m_started;                  //!< Whether the driver has been started
+    bool     m_failNext;                 //!< If true, the next operation will fail
+    uint8_t  m_txBuffer[MAX_BUFFER_SIZE]; //!< Buffer recording transmitted bytes
+    uint8_t  m_rxBuffer[MAX_BUFFER_SIZE]; //!< Buffer for received bytes from transfers
+    uint8_t  m_rxData[MAX_BUFFER_SIZE];  //!< Pre-configured data returned on reads
+    size_t   m_txCount;                  //!< Total bytes transmitted
+    size_t   m_rxCount;                  //!< Total bytes received
+    size_t   m_rxDataPos;                //!< Current read position in m_rxData
+    size_t   m_rxDataLen;                //!< Length of configured rx data
 };
 
 

@@ -52,6 +52,7 @@ base_win32.cflags    = '/W3 /WX /EHsc '  # /EHsc enables exceptions /std:c++17
 base_win32.firstobjs = unit_test_objects
 base_win32.inc       = catch2_inc
 base_win32.linklibs  = catch2_lib
+base_win32.linkflags = '/STACK:8388608'
 
 # Set project specific 'optimized' options
 optimized_win32          = BuildValues()    # Do NOT comment out this line

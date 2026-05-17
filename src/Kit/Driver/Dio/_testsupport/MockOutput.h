@@ -100,10 +100,10 @@ public:
 
 
 protected:
-    bool     m_state;
-    uint32_t m_setHighCount;
-    uint32_t m_setLowCount;
-    uint32_t m_toggleCount;
+    bool     m_state;        //!< Current pin state (true=high, false=low)
+    uint32_t m_setHighCount; //!< Number of setHigh() calls
+    uint32_t m_setLowCount;  //!< Number of setLow() calls
+    uint32_t m_toggleCount;  //!< Number of toggle() calls
 };
 
 

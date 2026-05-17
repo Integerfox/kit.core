@@ -56,7 +56,7 @@ debug_win32     = BuildValues()
 # Set 'base' options
 base_win32.cflags     = '-m32 -std=c++17 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
 base_win32.inc        = catch2_inc
-base_win32.linkflags  = '-m32'
+base_win32.linkflags  = '-m32 -Wl,/STACK:8388608'
 base_win32.firstobjs  = unit_test_objects
 base_win32.linklibs   = f'{catch2_lib}'
 

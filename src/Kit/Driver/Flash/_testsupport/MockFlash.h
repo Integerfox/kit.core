@@ -34,6 +34,11 @@ namespace Flash {
 namespace TestSupport {
 
 
+/** Mock flash driver that simulates flash memory in RAM.
+    Template parameter TOTAL_SIZE specifies the total flash size,
+    SECTOR_SIZE specifies the erase sector size, and PAGE_SIZE
+    specifies the write page size.
+ */
 template <size_t TOTAL_SIZE, size_t SECTOR_SIZE = 4096, size_t PAGE_SIZE = 256>
 class MockFlash : public IApi
 {
@@ -215,23 +220,26 @@ public:
         m_eraseCount = 0;
     }
 
-    /// Direct access to flash memory for test verification
+    /// Direct access to flash memory for test verification (const)
     const uint8_t* getFlashMemory() const noexcept { return m_flash; }
+    /// Direct access to flash memory for test verification (mutable)
     uint8_t*       getFlashMemory() noexcept { return m_flash; }
 
-    /// Returns operation counts
+    /// Returns the number of read operations performed
     uint32_t getReadCount() const noexcept  { return m_readCount; }
+    /// Returns the number of write operations performed
     uint32_t getWriteCount() const noexcept { return m_writeCount; }
+    /// Returns the number of erase operations performed
     uint32_t getEraseCount() const noexcept { return m_eraseCount; }
 
 
 protected:
     uint8_t  m_flash[TOTAL_SIZE]; //!< Simulated flash memory
-    bool     m_started;
-    bool     m_failNext;
-    uint32_t m_readCount;
-    uint32_t m_writeCount;
-    uint32_t m_eraseCount;
+    bool     m_started;           //!< Whether the driver has been started
+    bool     m_failNext;          //!< If true, the next operation will fail
+    uint32_t m_readCount;         //!< Number of read operations performed
+    uint32_t m_writeCount;        //!< Number of write operations performed
+    uint32_t m_eraseCount;        //!< Number of erase operations performed
 };
 
 
