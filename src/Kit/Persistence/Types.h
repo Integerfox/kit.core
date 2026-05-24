@@ -25,7 +25,7 @@ namespace Persistence {
     an unsigned integer type).  This is because other types like - size_t, 
     unsigned, etc. - have different number of bits depending on the MCU/OS
     platform, Having target dependent sizes (e.g. think HW vs simulator) causes
-    problems when the type (i.e. sizeof(Size_T)) is used for the length of fields
+    problems when the type (e.g. sizeof(size_t)) is used for the length of fields
     that get persistently stored.
 */
 #ifndef OPTION_KIT_PERSISTENCE_SIZE_TYPE

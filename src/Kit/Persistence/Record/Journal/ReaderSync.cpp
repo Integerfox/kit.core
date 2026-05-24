@@ -67,7 +67,7 @@ bool ReaderSync::retrieveByEntryIndex( Size_T            entryIndex,
 {
     RetrieveByEntryIndexRequest::Payload                  msgPayload( dst, entryIndex );
     Kit::Itc::SyncReturnHandler                           srh;
-    RetrieveByEntryIndexRequest::RetrieveByBufferIndexMsg msg( *this, msgPayload, srh );
+    RetrieveByEntryIndexRequest::RetrieveByEntryIndexMsg msg( *this, msgPayload, srh );
     m_myEventQueue.postSync( msg );
 
     entryMarker = msgPayload.m_markerEntryRetrieved;

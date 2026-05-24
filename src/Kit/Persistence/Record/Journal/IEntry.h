@@ -117,7 +117,7 @@ public:
 
 public:
     /** This method resets the head pointer and the timestamp to zero.  It is
-         essentially a logical erase of the entires.  
+         essentially a logical erase of the entries.  
 
          NOTE: With respect to 'make room' for more entries, there is no actual
                need to either logical or physical the entries, since the the

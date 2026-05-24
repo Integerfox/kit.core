@@ -222,12 +222,12 @@ public:
 
         /** GET results (response field)
             true  = entry was successfully retrieved/found
-            false = no valid entry (that met the getXxx() criteria)
+            false = no valid entry (that met the retrieveXxx() criteria)
          */
         bool m_success;
 
     public:
-        /// Constructor. Use for getPrevious() message
+        /// Constructor. Use for retrievePrevious() message
         Payload( Kit::Persistence::Record::IPayload& entryDst, IEntry::Marker_T& beginHere, uint64_t olderThan )
             : m_olderThan( olderThan ), m_beginHereMarker( beginHere ), m_entryDst( entryDst ), m_success( false )
         {
@@ -288,11 +288,11 @@ public:
     typedef Kit::Itc::SAP<RetrieveByEntryIndexRequest> SAP;
 
 public:
-    /// Payload for Message: RetrieveByBufferIndex
+    /// Payload for Message: RetrieveByEntryIndex
     class Payload
     {
     public:
-        /// INPUT: buffer index
+        /// INPUT: entry index
         size_t m_index;
 
         /// INPUT/OUTPUT: Memory to hold the retrieved entry
@@ -303,12 +303,12 @@ public:
 
         /** GET results (response field)
             true  = entry was successfully retrieved/found
-            false = no valid entry (that met the getXxx() criteria)
+            false = no valid entry (that met the retrieveXxx() criteria)
          */
         bool m_success;
 
     public:
-        /// Constructor. Use for getLatest() message
+        /// Constructor. Use for retrieveByEntryIndex() message
         Payload( Kit::Persistence::Record::IPayload& entryDst, size_t index )
             : m_index( index ), m_entryDst( entryDst ), m_success( false )
         {
@@ -316,11 +316,11 @@ public:
     };
 
 
-    /// Message Type: RetrieveByBufferIndex
-    typedef Kit::Itc::RequestMessage<RetrieveByEntryIndexRequest, Payload> RetrieveByBufferIndexMsg;
+    /// Message Type: RetrieveByEntryIndex
+    typedef Kit::Itc::RequestMessage<RetrieveByEntryIndexRequest, Payload> RetrieveByEntryIndexMsg;
 
-    /// Request: RetrieveByBufferIndex message
-    virtual void request( RetrieveByBufferIndexMsg& msg ) = 0;
+    /// Request: RetrieveByEntryIndex message
+    virtual void request( RetrieveByEntryIndexMsg& msg ) = 0;
 
 public:
     /// Virtual Destructor

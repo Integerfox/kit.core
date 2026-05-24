@@ -59,7 +59,7 @@ void EntryRecord::stop() noexcept
 
 Size_T EntryRecord::getSize() const noexcept
 {
-    return m_maxEntries * m_entrySize;
+    return m_entrySize;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -368,6 +368,14 @@ void EntryRecord::scanAllEntries()
         maxIndex          = ( maxIndex + m_maxEntries - 1 ) % m_maxEntries;
         m_latestOffset    = maxIndex * m_entrySize;
         m_latestTimestamp = readTimestampAt( m_latestOffset );
+    }
+
+    // If no valid entry was found (factory/erased state), reset to offset 0 so that
+    // the first addEntry() writes to offset entrySize (index 1), which is the expected
+    // starting position for a virgin ring buffer.
+    if ( m_latestTimestamp == 0 )
+    {
+        m_latestOffset = 0;
     }
 }
 
