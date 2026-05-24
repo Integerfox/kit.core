@@ -74,13 +74,6 @@ bool ReaderSync::retrieveByEntryIndex( Size_T            entryIndex,
     return msgPayload.m_success;
 }
 
-Size_T ReaderSync::maxIndex() const noexcept
-{
-    // NOTE: No ITC message is needed to get the max index since the max index
-    //       is const data and is set when the Entry Record is constructed
-    return m_entry.getMaxIndex();
-}
-
 
 }  // end namespace
 }

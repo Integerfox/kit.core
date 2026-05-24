@@ -113,7 +113,7 @@ bool EntryRecord::copyFrom( const void* src, Size_T srcLen ) noexcept
 
 Size_T EntryRecord::getMaxPayloadSize() const noexcept
 {
-    return m_entrySize;
+    return m_entrySize * m_maxEntries;
 }
 
 ////////////////////////////////////////////////////////////////////////////

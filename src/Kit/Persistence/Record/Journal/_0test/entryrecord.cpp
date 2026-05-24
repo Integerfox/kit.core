@@ -108,8 +108,8 @@ TEST_CASE( "EntryRecord" )
 
         REQUIRE( uut.start( mockEventQueue ) );
         REQUIRE( uut.start( mockEventQueue ) );
-        REQUIRE( uut.getSize() == ( expectedEntrySize * expectedMaxEntries ) );
-        REQUIRE( uut.getMaxPayloadSize() == expectedEntrySize );
+        REQUIRE( uut.getSize() == expectedEntrySize  );
+        REQUIRE( uut.getMaxPayloadSize() == ( expectedEntrySize * expectedMaxEntries )  );
 
         // Stop the uut
         uut.stop();

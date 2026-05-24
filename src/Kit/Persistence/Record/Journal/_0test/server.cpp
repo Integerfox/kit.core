@@ -8,7 +8,9 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Persistence/Record/Journal/IEntry.h"
 #include "Kit/Persistence/Record/Journal/IReaderRequest.h"
+#include "Kit/Persistence/Record/Journal/IResetRequest.h"
 #include "Kit/Persistence/Types.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
@@ -26,7 +28,6 @@
 #include "Kit/EventQueue/Server.h"
 #include "Kit/Io/File/System.h"
 #include "Kit/_support/testing/helpers.h"
-#include "Kit/Itc/SyncReturnHandler.h"
 
 #define SECT_ "_0test"
 
@@ -103,7 +104,7 @@ static Kit::Persistence::Record::Chunk::Crc         entriesChunk( entriesFd, ent
 
 #define MAX_BUFFER_SIZE 10
 static AppEntryPayload                               memoryEntryBuffer_[MAX_BUFFER_SIZE];
-static Kit::Container::RingBufferMP<AppEntryPayload> entriesBuffer_( mp_elemCount_, memoryEntryBuffer_, MAX_BUFFER_SIZE );
+static Kit::Container::RingBufferMP<AppEntryPayload> entriesBuffer_( mp_elemCount_, memoryEntryBuffer_, MAX_BUFFER_SIZE, false ); // NOTE: Very important to set 'initializeMemory' to false since AppEntryPayload is a class type with vtable pointer
 
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "Server" )
@@ -142,91 +143,71 @@ TEST_CASE( "Server" )
         REQUIRE( minWaitOnModelPoint<Kit::Dm::Mp::Uint32, uint32_t>( mp_elemCount_, 0, 1000 ) );
 
         appPayload.appSet( "" );
-        RetrieveLatestRequest::Payload           payload( appPayload );
-        Kit::Itc::SyncReturnHandler              srh;
-        RetrieveLatestRequest::RetrieveLatestMsg msg( uut, payload, srh );
-        persistentEventQueue.postSync( msg );
-        REQUIRE( payload.m_success == true );
-        REQUIRE( payload.m_markerEntryRetrieved.mediaOffset == actualEntrySize * 3 );
-        REQUIRE( payload.m_markerEntryRetrieved.timestamp == 3 );
+        IEntry::Marker_T marker;
+        bool result = uut.retrieveLatest( appPayload, marker );
+        REQUIRE( result == true );
+        REQUIRE( marker.mediaOffset == actualEntrySize * 3 );
+        REQUIRE( marker.timestamp == 3 );
         REQUIRE( strncmp( appPayload.m_buffer, ENTRY3, strlen( ENTRY3 ) ) == 0 );
 
         uut.close();
     }
-#if 0
     SECTION( "startup - with data" )
     {
 
         uut.open();
 
         appPayload.appSet( "" );
-        GetLatestRequest::Payload      payload( appPayload );
-        Kit::Itc::SyncReturnHandler    srh;
-        GetLatestRequest::GetLatestMsg msg( uut, payload, srh );
-        persistentEventQueue.postSync( msg );
-        REQUIRE( payload.m_success == true );
-        REQUIRE( payload.m_markerEntryRetrieved.mediaOffset == actualEntrySize * 3 );
-        REQUIRE( payload.m_markerEntryRetrieved.timestamp == 3 );
+        IEntry::Marker_T marker;
+        bool result = uut.retrieveLatest( appPayload, marker );
+        REQUIRE( result == true );
+        REQUIRE( marker.mediaOffset == actualEntrySize * 3 );
+        REQUIRE( marker.timestamp == 3 );
         REQUIRE( strncmp( appPayload.m_buffer, ENTRY3, strlen( ENTRY3 ) ) == 0 );
 
         appPayload.appSet( "" );
-        GetNextRequest::Payload     payload2( appPayload, payload.m_markerEntryRetrieved, payload.m_markerEntryRetrieved.timestamp );
-        Kit::Itc::SyncReturnHandler srh2;
-        GetNextRequest::GetNextMsg  msg2( uut, payload2, srh2 );
-        persistentEventQueue.postSync( msg2 );
-        REQUIRE( payload2.m_success == false );
+        IEntry::Marker_T marker2;
+        result = uut.retrieveNext( marker.timestamp, marker, appPayload, marker2 );
+        REQUIRE( result == false );
 
         appPayload.appSet( "" );
-        GetPreviousRequest::Payload        payload3( appPayload, payload.m_markerEntryRetrieved, payload.m_markerEntryRetrieved.timestamp );
-        Kit::Itc::SyncReturnHandler        srh3;
-        GetPreviousRequest::GetPreviousMsg msg3( uut, payload3, srh3 );
-        persistentEventQueue.postSync( msg3 );
-        REQUIRE( payload3.m_success == true );
-        REQUIRE( payload3.m_markerEntryRetrieved.mediaOffset == actualEntrySize * 2 );
-        REQUIRE( payload3.m_markerEntryRetrieved.timestamp == 2 );
+        IEntry::Marker_T marker3;
+        result = uut.retrieveNext( marker2.timestamp, marker2, appPayload, marker3 );
+        REQUIRE( result == false );
+
+        appPayload.appSet( "" );
+        IEntry::Marker_T marker4;
+        result = uut.retrievePrevious( marker3.timestamp, marker3, appPayload, marker4 );
+        REQUIRE( result == true );
+        REQUIRE( marker4.mediaOffset == actualEntrySize * 2 );
+        REQUIRE( marker4.timestamp == 2 );
         REQUIRE( strncmp( appPayload.m_buffer, ENTRY2, strlen( ENTRY2 ) ) == 0 );
 
         size_t idx = 0;
         appPayload.appSet( "" );
-        GetByBufferIndexRequest::Payload             payload4( appPayload, idx );
-        Kit::Itc::SyncReturnHandler                  srh4;
-        GetByBufferIndexRequest::GetByBufferIndexMsg msg4( uut, payload4, srh4 );
-        persistentEventQueue.postSync( msg4 );
-        REQUIRE( payload4.m_success == true );
-        REQUIRE( payload4.m_markerEntryRetrieved.mediaOffset == ( actualEntrySize * idx + actualEntrySize ) );
-        REQUIRE( payload4.m_markerEntryRetrieved.timestamp == 1 );
+        IEntry::Marker_T marker5;
+        result = uut.retrieveByEntryIndex( idx, appPayload, marker5 );
+        REQUIRE( result == true );
+        REQUIRE( marker5.mediaOffset == ( actualEntrySize * idx + actualEntrySize ) );
+        REQUIRE( marker5.timestamp == 1 );
         REQUIRE( strncmp( appPayload.m_buffer, ENTRY1, strlen( ENTRY1 ) ) == 0 );
-        REQUIRE( uut.getMaxIndex() == MAX_ENTRIES - 1 );
+        Size_T expectedMaxIndex = ( ENTRY_REGION_SIZE / actualEntrySize ) - 1;
+        REQUIRE( uut.maxIndex() == expectedMaxIndex );
 
         uut.close();
     }
 
-
-    SECTION( "Clean-all" )
+    SECTION( "Reset" )
     {
         uut.open();
+        uut.logicalReset();
 
-        ClearAllEntriesRequest::Payload            payload;
-        Kit::Itc::SyncReturnHandler                srh;
-        ClearAllEntriesRequest::ClearAllEntriesMsg msg( uut, payload, srh );
-        persistentEventQueue.postSync( msg );
-
-        uint32_t count;
-        mp_elemCount_.read( count );
-        REQUIRE( count == 0 );
-
-        for ( size_t idx = 0; idx <= entryRecord.getMaxIndex(); idx++ )
-        {
-            GetByBufferIndexRequest::Payload             payload4( appPayload, 1 );
-            Kit::Itc::SyncReturnHandler                  srh4;
-            GetByBufferIndexRequest::GetByBufferIndexMsg msg4( uut, payload4, srh4 );
-            persistentEventQueue.postSync( msg4 );
-            REQUIRE( payload4.m_success == false );
-        }
+        IEntry::Marker_T marker;
+        bool result = uut.retrieveLatest( appPayload, marker );
+        REQUIRE( result == false );
 
         uut.close();
     }
-#endif
 
     persistentEventQueue.pleaseStop();
     Kit::System::Thread::destroy( *t1 );

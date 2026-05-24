@@ -53,23 +53,16 @@ public:
                                IPayload&         dst,
                                IEntry::Marker_T& entryMarker ) noexcept override;
 
-    /// See Kit::Persistence::Record::Journal::IReader
-    Size_T maxIndex() const noexcept override;
-
 protected:
     /// Constructor.
-    ReaderSync( Kit::EventQueue::IQueue& eventQueue, const IEntry& entry ) noexcept
-        : m_myEventQueue( eventQueue ),
-          m_entry( entry )
+    ReaderSync( Kit::EventQueue::IQueue& eventQueue ) noexcept
+        : m_myEventQueue( eventQueue )
     {
     }
 
 protected:
     /// IEventQueue of the child class implementing the IReaderRequest methods
     Kit::EventQueue::IQueue& m_myEventQueue;
-
-    /// IEntry reference for the child class implementing the IReaderRequest methods
-    const IEntry& m_entry;
 };
 
 

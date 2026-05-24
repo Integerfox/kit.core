@@ -57,14 +57,16 @@ public:
     /** Constructor.  The argument 'timingTickInMsec' specifies the timing
         resolution that will be used for Kit::Timer::Local Timers.
 
-        NOTE: 'recordList' is variable length array where the last entry in the
-              array MUST BE a nullptr.
+        NOTE: When the RingBufferMP 'incomingEntriesBuffer' is created it MUST
+              to be created with the 'initializeMemory' constructor flags set to
+              false - which is NOT the default behavior. This is because ENTRY
+              is not struct - but a class with a vtable pointer.
      */
     Server( Kit::EventQueue::IQueue&             myEventQueue,
             IEntry&                              entryRecord,
             Kit::Container::RingBufferMP<ENTRY>& incomingEntriesBuffer ) noexcept
         : OpenCloseSync( myEventQueue )
-        , ReaderSync( myEventQueue, entryRecord )
+        , ReaderSync( myEventQueue )
         , ResetSync( myEventQueue )
         , m_record( entryRecord )
         , m_obBuffer( myEventQueue )
@@ -140,7 +142,7 @@ public:
         msg.returnToSender();
     }
 
-    /// See Kit::Persistence::Journal::IEntry
+    /// See Kit::Persistence::Journal::IReader
     Size_T maxIndex() const noexcept override
     {
         return m_record.getMaxIndex();  // Note: NO Critical section is required since this is a 'constant' value
