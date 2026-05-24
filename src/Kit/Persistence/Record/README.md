@@ -1,8 +1,8 @@
-# Kit::Persistence::Records
-@brief namespace description for Kit::Persistence::Records
-@namespace Kit::Persistence::Records @brief
+# Kit::Persistence::Record
+@brief namespace description for Kit::Persistence::Record
+@namespace Kit::Persistence::Record @brief
 
-The 'Records' namespace provides a basic records based paradigm for storing
+The 'Record' namespace provides a basic records based paradigm for storing
 non-volatile data.  The sub-system has has the following features:
 
 - Persistent data is organizing and manage in terms of individual records.  

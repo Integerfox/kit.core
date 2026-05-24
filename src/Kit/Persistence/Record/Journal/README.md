@@ -1,6 +1,14 @@
 # Kit::Persistence::Record::Journal
 @brief namespace description for Kit::Persistence::Record::Journal
-@namespace Kit::Persistence::Record @brief
+@namespace Kit::Persistence::Record::Journal @brief
+
+## Class Diagram
+
+Here is a simplified class diagram for the Journal namespace
+
+![Kit Persistence Record Journal Class Diagram](class-diagram_kitpersistencerecordjournal.png)
+
+## Details
 
 The 'Journal' namespace extends the basic Persistent::Record interface with the
 ability for a single Record to contain N entries in chronological order, where
