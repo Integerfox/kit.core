@@ -101,23 +101,39 @@ bool HeadRecord::processNoValidData() noexcept
 }
 
 /////////////////////////////////////////////////////////////////////////////
-bool HeadRecord::getLatestOffset( Size_T& offset, uint64_t& indexValue ) const noexcept
+bool HeadRecord::getLatestOffset( Size_T& offset, uint64_t& timestamp ) const noexcept
 {
     if ( !m_validLatest )
     {
         return false;
     }
 
-    offset     = m_latestOffset;
-    indexValue = m_latestTimestamp;
+    offset    = m_latestOffset;
+    timestamp = m_latestTimestamp;
     return true;
 }
 
-void HeadRecord::setLatestOffset( Size_T offset, uint64_t indexValue ) noexcept
+void HeadRecord::setLatestOffset( Size_T offset, uint64_t timestamp ) noexcept
 {
     m_validLatest     = true;
     m_latestOffset    = offset;
-    m_latestTimestamp = indexValue;
+    m_latestTimestamp = timestamp;
+}
+
+IHead::State_T HeadRecord::getCurrentState() const noexcept
+{
+    IHead::State_T result;
+    result.latestOffset    = m_latestOffset;
+    result.latestTimestamp = m_latestTimestamp;
+    result.validLatest     = m_validLatest;
+    return result;
+}
+
+void HeadRecord::restoreState( const IHead::State_T& state ) noexcept
+{
+    m_latestOffset    = state.latestOffset;
+    m_latestTimestamp = state.latestTimestamp;
+    m_validLatest     = state.validLatest;
 }
 
 }  // end namespace

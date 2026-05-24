@@ -92,6 +92,8 @@ namespace Kit.Persistence.Record.Journal {
         ==
         +{abstract} getLatestOffset()
         +{abstract} setLatestOffset()
+        +{abstract} getCurrentState()
+        +{abstract} restoreState()
     }
 
     interface IReader {
@@ -185,6 +187,8 @@ namespace Kit.Persistence.Record.Journal {
         +getMaxPayloadSize()
         +getLatestOffset()
         +setLatestOffset()
+        +getCurrentState()
+        +restoreState()
         +writeToMedia()
         +readFromMedia()
         +processNoValidData()

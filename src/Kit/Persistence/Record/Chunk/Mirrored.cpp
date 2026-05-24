@@ -30,11 +30,11 @@ namespace Chunk {
 
 bool Mirrored::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
 {
-    bool result = true;
-    result &= m_media.start( myEventQueue );
-    result &= m_mediaB.start( myEventQueue );
-    m_transId      = 0;
-    m_currentMedia = nullptr;
+    bool result     = true;
+    result         &= m_media.start( myEventQueue );
+    result         &= m_mediaB.start( myEventQueue );
+    m_transId       = 0;
+    m_currentMedia  = nullptr;
     return result;
 }
 
@@ -165,9 +165,9 @@ uint64_t Mirrored::getTransactionId( IMedia& media, Size_T& dataLen, Size_T inde
         // Read the data length
         if ( readSizeT( dataLen, offset, media ) )
         {
-            // Make sure we have enough buffer space
+            // Make sure we have enough buffer space (account of possible integer overflow of 'datalen + META_CRC')
             Size_T dataRemaining = dataLen + META_CRC;
-            if ( dataRemaining > m_workBufferSize )
+            if ( dataRemaining > m_workBufferSize || dataRemaining < dataLen || dataRemaining < META_CRC )
             {
                 return 0;  // return 'error'
             }

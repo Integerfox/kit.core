@@ -30,8 +30,8 @@ class NVAdapter : public Kit::Persistence::Record::IMedia
 public:
     /// Constructor.
     NVAdapter( Kit::Driver::NV::IApi& lowLevelDriver,
-               size_t                 startingOffset,
-               size_t                 allocatedLen ) noexcept
+               Size_T                 startingOffset,
+               Size_T                 allocatedLen ) noexcept
         : m_driver( lowLevelDriver )
         , m_startingOffset( startingOffset )
         , m_allocatedLen( allocatedLen )
@@ -40,7 +40,7 @@ public:
 
 public:
     /// See Kit::Persistence::Record::IMedia
-    void start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
+    bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
 
     /// See Kit::Persistence::Record::IMedia
     void stop() noexcept override;
@@ -62,10 +62,10 @@ protected:
     Kit::Driver::NV::IApi& m_driver;
 
     /// Starting offset for 'allocated' space within the NV media
-    size_t m_startingOffset;
+    Size_T m_startingOffset;
 
     /// Length of the 'allocated' space within the NV media
-    size_t m_allocatedLen;
+    Size_T m_allocatedLen;
 };
 
 }  // end namespaces

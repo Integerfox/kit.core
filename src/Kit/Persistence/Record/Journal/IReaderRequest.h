@@ -211,7 +211,7 @@ public:
         /// INPUT: newer timestamp to search criteria
         uint64_t m_olderThan;
 
-        /// INPUT (optional): The 'marker' on where to begin searching from
+        /// INPUT: The 'marker' on where to begin searching from
         IEntry::Marker_T& m_beginHereMarker;
 
         /// INPUT/OUTPUT: Memory to hold the retrieved entry
@@ -293,7 +293,7 @@ public:
     {
     public:
         /// INPUT: entry index
-        size_t m_index;
+        Size_T m_index;
 
         /// INPUT/OUTPUT: Memory to hold the retrieved entry
         Kit::Persistence::Record::IPayload& m_entryDst;
@@ -309,7 +309,7 @@ public:
 
     public:
         /// Constructor. Use for retrieveByEntryIndex() message
-        Payload( Kit::Persistence::Record::IPayload& entryDst, size_t index )
+        Payload( Kit::Persistence::Record::IPayload& entryDst, Size_T index )
             : m_index( index ), m_entryDst( entryDst ), m_success( false )
         {
         }

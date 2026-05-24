@@ -36,12 +36,15 @@ public:
     /** This method resets the head pointer and the timestamp to zero.  It is
         essentially a logical erase of the entires.
 
+         Returns true if the reset was successful; else false is returned when an
+         error occurred during the reset.
+
         NOTE: With respect to 'making room' for more entries, there is no actual
               need to either logically or physically erase the entries, since the
               design always guarantees that the latest N entries are persistently
               stored.
      */
-    virtual void logicalReset() noexcept = 0;
+    virtual bool logicalReset() noexcept = 0;
 
 public:
     /// Virtual destructor

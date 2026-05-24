@@ -82,9 +82,11 @@ public:
     {
         if ( !m_opened )
         {
-            m_opened = true;
-            m_buffer.m_mpElementCount.attach( m_obBuffer );
-            m_record.start( m_eventQueue );
+            m_opened = m_record.start( m_eventQueue );
+            if ( m_opened )
+            {
+                m_buffer.m_mpElementCount.attach( m_obBuffer );
+            }
         }
 
         msg.returnToSender();
@@ -152,8 +154,7 @@ public:
     void request( LogicalResetMsg& msg ) noexcept override
     {
         LogicalResetRequest::Payload& payload = msg.getPayload();
-        m_record.resetHead();
-        payload.m_success = true;  // Note: resetHead() is void, so I assume it always succeeds
+        payload.m_success = m_record.resetHead();
         msg.returnToSender();
     }
 

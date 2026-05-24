@@ -48,7 +48,7 @@ public:
     {
     public:
         /** Clear results (response field)
-            true  = all entries where successfully cleared
+            true  = The reset was successful
             false = an error occurred
          */
         bool m_success;

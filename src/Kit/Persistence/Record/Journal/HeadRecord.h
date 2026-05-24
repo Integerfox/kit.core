@@ -61,11 +61,16 @@ public:
 
 public:
     /// See Kit::Persistence::Record::Journal::IHead
-    bool getLatestOffset( Size_T& offset, uint64_t& indexValue ) const noexcept override;
+    bool getLatestOffset( Size_T& offset, uint64_t& timestamp ) const noexcept override;
 
     /// See Kit::Persistence::Record::Journal::IHead
-    void setLatestOffset( Size_T offset, uint64_t indexValue ) noexcept override;
+    void setLatestOffset( Size_T offset, uint64_t timestamp ) noexcept override;
 
+    /// See Kit::Persistence::Record::Journal::IHead
+    IHead::State_T getCurrentState() const noexcept override;
+
+    /// See Kit::Persistence::Record::Journal::IHead
+    void restoreState( const IHead::State_T& state ) noexcept override;
 
 public:
     /// See Kit::Persistence::Record::IDataRecord

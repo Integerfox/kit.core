@@ -200,7 +200,7 @@ TEST_CASE( "Server" )
     SECTION( "Reset" )
     {
         uut.open();
-        uut.logicalReset();
+        REQUIRE( uut.logicalReset() == true );
 
         IEntry::Marker_T marker;
         bool result = uut.retrieveLatest( appPayload, marker );

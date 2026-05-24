@@ -86,20 +86,19 @@ TEST_CASE( "EntryRecord" )
     KIT_SYSTEM_TRACE_SCOPE( SECT_, "EntryRecord test" );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    Kit::EventQueue::Server   mockEventQueue;
-    Media::FileAdapter        entryFd1( MEDIA_FILE_NAME, MEDIA_MAX_SIZE );
-    Media::FileAdapter        headFd2( MEDIA_IDX_FILE_NAME, MEDIA_IDX_MAX_SIZE );
+    Kit::EventQueue::Server       mockEventQueue;
+    Media::FileAdapter            entryFd1( MEDIA_FILE_NAME, MEDIA_MAX_SIZE );
+    Media::FileAdapter            headFd2( MEDIA_IDX_FILE_NAME, MEDIA_IDX_MAX_SIZE );
     Kit::Checksum::Crc16CcittFast entryCrc;
     Chunk::Crc                    entryChunk( entryFd1, entryCrc );
     Kit::Checksum::Crc16CcittFast headCrc;
     Chunk::Crc                    headChunk( headFd2, headCrc );
-    HeadRecord                headRecord( headChunk );
-    AppEntryPayload           appPayload;
-    EntryRecord               uut( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord );
-    Size_T                    expectedPayloadSize = sizeof( uint64_t ) + ENTRY_MAX_SIZE;
-    Size_T                    expectedEntrySize   = expectedPayloadSize + entryChunk.getMetadataLength();
-    Size_T                    expectedCopySize    = ENTRY_MAX_SIZE + sizeof( uint64_t );
-    Size_T                    expectedMaxEntries  = MEDIA_MAX_SIZE / expectedEntrySize;
+    HeadRecord                    headRecord( headChunk );
+    AppEntryPayload               appPayload;
+    EntryRecord                   uut( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord );
+    Size_T                        expectedPayloadSize = sizeof( uint64_t ) + ENTRY_MAX_SIZE;
+    Size_T                        expectedEntrySize   = expectedPayloadSize + entryChunk.getMetadataLength();
+    Size_T                        expectedCopySize    = ENTRY_MAX_SIZE + sizeof( uint64_t );
 
     SECTION( "Start/Stop" )
     {
@@ -108,8 +107,8 @@ TEST_CASE( "EntryRecord" )
 
         REQUIRE( uut.start( mockEventQueue ) );
         REQUIRE( uut.start( mockEventQueue ) );
-        REQUIRE( uut.getSize() == expectedEntrySize  );
-        REQUIRE( uut.getMaxPayloadSize() == ( expectedEntrySize * expectedMaxEntries )  );
+        REQUIRE( uut.getSize() == expectedEntrySize );
+        REQUIRE( uut.getMaxPayloadSize() == expectedEntrySize );
 
         // Stop the uut
         uut.stop();
@@ -226,12 +225,12 @@ TEST_CASE( "EntryRecord" )
         uut.stop();
     }
 
-     SECTION( "Walk by index" )
+    SECTION( "Walk by index" )
     {
         REQUIRE( uut.start( mockEventQueue ) );
 
         IEntry::Marker_T marker;
-        bool result = uut.getByEntryIndex( 2, appPayload, marker );
+        bool             result = uut.getByEntryIndex( 2, appPayload, marker );
         REQUIRE( result == true );
         REQUIRE( strncmp( appPayload.m_buffer, ENTRY3, strlen( ENTRY3 ) ) == 0 );
 
@@ -249,23 +248,23 @@ TEST_CASE( "EntryRecord" )
         REQUIRE( result == true );
         REQUIRE( strncmp( appPayload.m_buffer, ENTRY2, strlen( ENTRY2 ) ) == 0 );
 
-        for ( size_t idx=0; idx <= uut.getMaxIndex() + 1; idx++ )
+        for ( size_t idx = 0; idx <= uut.getMaxIndex() + 1; idx++ )
         {
             IEntry::Marker_T marker;
-            bool expectedResult = idx < 3 ? true : false;
+            bool             expectedResult = idx < 3 ? true : false;
             REQUIRE( uut.getByEntryIndex( idx, appPayload, marker ) == expectedResult );
         }
         uut.stop();
     }
 
-     SECTION( "reset head" )
+    SECTION( "reset head" )
     {
         REQUIRE( uut.start( mockEventQueue ) );
 
         IEntry::Marker_T marker;
         bool             result = uut.getLatest( appPayload, marker );
         REQUIRE( result == true );
-        REQUIRE( marker.timestamp >= 3) ;
+        REQUIRE( marker.timestamp >= 3 );
 
         uut.resetHead();
         result = uut.getLatest( appPayload, marker );
@@ -307,9 +306,7 @@ TEST_CASE( "EntryRecord" )
 
         // Use a local UUT with maxConsecutiveCorruptSkip=2 so the failure boundary
         // is easy to trigger deterministically (3 consecutive corrupt entries fail)
-        EntryRecord uutSkip( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord,
-                             OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN,
-                             2 );
+        EntryRecord uutSkip( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord, OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN, 2 );
         REQUIRE( uutSkip.start( mockEventQueue ) );
 
         // Add 6 entries.  With a fresh start, addEntry() increments from offset 0, so:
@@ -367,9 +364,7 @@ TEST_CASE( "EntryRecord" )
 
         // Use a local UUT with maxConsecutiveCorruptSkip=2 so the failure boundary
         // is easy to trigger deterministically (3 consecutive corrupt entries fail)
-        EntryRecord uutSkip( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord,
-                             OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN,
-                             2 );
+        EntryRecord uutSkip( entryChunk, ENTRY_MAX_SIZE, entryFd1, headRecord, OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN, 2 );
         REQUIRE( uutSkip.start( mockEventQueue ) );
 
         // Add 6 entries.  Entry layout after a fresh start:

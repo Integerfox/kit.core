@@ -135,7 +135,7 @@ public:
     bool addEntry( const IPayload& src ) noexcept override;
 
     /// See Kit::Persistence::Record::Journal::IEntry
-    void resetHead() noexcept override;
+    bool resetHead() noexcept override;
 
 public:
     /// See Kit::Persistence::Record::IDataRecord

@@ -32,7 +32,7 @@ class ResetSync : public IReset,
 {
 public:
     /// See Kit::Persistence::Record::Journal::IReset
-    void logicalReset() noexcept override;
+    bool logicalReset() noexcept override;
 
 protected:
     /// Constructor.

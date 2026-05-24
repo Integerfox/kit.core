@@ -28,8 +28,17 @@ namespace Journal {
     head pointer to the virtual Ring Buffer of entries contain in a IEntry
     Record
 */
-class IHead: public IDataRecord 
+class IHead : public IDataRecord
 {
+public:
+    /// Head record state
+    struct State_T
+    {
+        uint64_t latestTimestamp;  //!< Timestamp of the latest entry
+        Size_T   latestOffset;     //!< Media offset of the latest entry
+        bool     validLatest;      //!< Indicates if the latest entry is valid (i.e. has been written at least once)
+    };
+
 public:
     /** This method returns the 'offset-index' (starting from the start of
         IMedia storage used for the entries) of the most recently written
@@ -38,14 +47,20 @@ public:
         Returns true if there is at least one valid 'entry' persistent stored;
         else false is returned;
      */
-    virtual bool getLatestOffset( Size_T& offset, uint64_t& indexValue ) const noexcept = 0;
+    virtual bool getLatestOffset( Size_T& offset, uint64_t& timestamp ) const noexcept = 0;
 
 
     /** This method updates/sets the 'offset-index' (starting from the start of
         IMedia storage used for the entries) of the most recently written
         entry.
      */
-    virtual void setLatestOffset( Size_T offset, uint64_t indexValue ) noexcept = 0;
+    virtual void setLatestOffset( Size_T offset, uint64_t timestamp ) noexcept = 0;
+
+    /// This method is to get the current state of the Head record
+    virtual State_T getCurrentState() const noexcept = 0;
+
+    /// This method is used to restore/set the state of the Head record, e.g. used when recoverying from errors
+    virtual void restoreState( const State_T& state ) noexcept = 0;
 
 public:
     /// Virtual destructor

@@ -30,7 +30,7 @@ class FileAdapter : public Kit::Persistence::Record::IMedia
 {
 public:
     /// Constructor
-    FileAdapter( const char* fileName, size_t allocatedLen ) noexcept
+    FileAdapter( const char* fileName, Size_T allocatedLen ) noexcept
         : m_fname( fileName )
         , m_maxLen( allocatedLen )
     {
@@ -60,7 +60,7 @@ protected:
     const char* m_fname;
 
     /// Maximum support storage size
-    size_t m_maxLen;
+    Size_T m_maxLen;
 };
 
 }  // end namespaces

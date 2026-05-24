@@ -19,12 +19,13 @@ namespace Persistence {
 namespace Record {
 namespace Journal {
 
-void ResetSync::logicalReset() noexcept
+bool ResetSync::logicalReset() noexcept
 {
     LogicalResetRequest::Payload       msgPayload;
     Kit::Itc::SyncReturnHandler        srh;
     LogicalResetRequest::LogicalResetMsg msg( *this, msgPayload, srh );
     m_myEventQueue.postSync( msg );
+    return msgPayload.m_success;
 }
 
 

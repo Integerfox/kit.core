@@ -113,7 +113,7 @@ bool EntryRecord::copyFrom( const void* src, Size_T srcLen ) noexcept
 
 Size_T EntryRecord::getMaxPayloadSize() const noexcept
 {
-    return m_entrySize * m_maxEntries;
+    return m_entrySize;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -129,7 +129,7 @@ bool EntryRecord::getNext( uint64_t       newerThanTimestamp,
                            Marker_T&      entryMarker ) noexcept
 {
     // Set the starting offset to on where to begin the search
-    Size_T offset            = incrementOffset( beginHereMarker.mediaOffset );
+    Size_T offset             = incrementOffset( beginHereMarker.mediaOffset );
     Size_T consecutiveCorrupt = 0;
 
     // Loop through all possible entries
@@ -163,7 +163,7 @@ bool EntryRecord::getPrevious( uint64_t       olderThanTimestamp,
                                Marker_T&      entryMarker ) noexcept
 {
     // Set the starting offset to on where to begin the search
-    Size_T offset            = decrementOffset( beginHereMarker.mediaOffset );
+    Size_T offset             = decrementOffset( beginHereMarker.mediaOffset );
     Size_T consecutiveCorrupt = 0;
 
     // Loop through all possible entries
@@ -220,7 +220,7 @@ Size_T EntryRecord::getMaxIndex() const noexcept
 bool EntryRecord::addEntry( const IPayload& src ) noexcept
 {
     // Increment my head pointer/index
-    size_t latestOffset = incrementOffset( m_latestOffset );
+    Size_T latestOffset = incrementOffset( m_latestOffset );
     m_entryTimestamp    = m_latestTimestamp + 1;
 
     // Set the application payload handler
@@ -229,13 +229,18 @@ bool EntryRecord::addEntry( const IPayload& src ) noexcept
     // Write the entry
     if ( !writeToMedia( latestOffset ) )
     {
+        // Clear the application payload handler since the entry was not successfully written to persistent storage
+        m_entryPayloadHandlerPtr = nullptr;  
         return false;
     }
 
     // Write the index record ONLY after the entry has been successfully written to persistent storage.
+    auto currentHeadState = m_headRecord.getCurrentState();
     m_headRecord.setLatestOffset( latestOffset, m_entryTimestamp );
     if ( !m_headRecord.writeToMedia() )
     {
+        // Roll back the head record to the previous value since the new head record failed to write to persistent storage
+        m_headRecord.restoreState( currentHeadState );
         return false;
     }
     m_latestOffset    = latestOffset;
@@ -244,19 +249,29 @@ bool EntryRecord::addEntry( const IPayload& src ) noexcept
     return true;
 }
 
-void EntryRecord::resetHead() noexcept
+bool EntryRecord::resetHead() noexcept
 {
-    m_latestOffset    = 0;
-    m_latestTimestamp = 0;
+    m_latestOffset        = 0;
+    m_latestTimestamp     = 0;
+    auto currentHeadState = m_headRecord.getCurrentState();
     m_headRecord.setLatestOffset( m_latestOffset, m_latestTimestamp );
+    if ( !m_headRecord.writeToMedia() )
+    {
+        // Roll back the head record to the previous value since the new head record failed to write to persistent storage
+        m_headRecord.restoreState( currentHeadState );
+        m_latestOffset    = currentHeadState.latestOffset;
+        m_latestTimestamp = currentHeadState.latestTimestamp;
+        return false;
+    }
+
     hookOnLatestTimestampUpdated( m_latestTimestamp );
+    return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////
 bool EntryRecord::processNoValidData() noexcept
 {
     // There is no "default" value/action when an entry is corrupt
-    // TODO: Is there were we skip over N corrupt entries?
     return false;
 }
 
@@ -305,8 +320,7 @@ void EntryRecord::scanAllEntries()
     // Helper: read only the timestamp metadata at a given byte offset.
     // Returns 0 for any corrupt or unwritten entry, so that corrupt entries
     // sort as the smallest possible value (i.e. "older than any valid entry").
-    auto readTimestampAt = [this]( Size_T byteOffset ) -> uint64_t
-    {
+    auto readTimestampAt = [this]( Size_T byteOffset ) -> uint64_t {
         m_entryPayloadHandlerPtr = nullptr;
         if ( readFromMedia( byteOffset ) )
         {
@@ -316,7 +330,7 @@ void EntryRecord::scanAllEntries()
     };
 
     // NOTE: By definition there are at least 2 entries, so the binary search is
-    // always valid and the "wrap-around" case is naturally handled by the 
+    // always valid and the "wrap-around" case is naturally handled by the
     // rotated-sorted property of the timestamps.
 
     // The ring buffer's timestamps form a rotated-sorted ascending sequence
@@ -341,17 +355,17 @@ void EntryRecord::scanAllEntries()
 
         if ( tsMid > tsHi )
         {
-            lo = mid + 1;   // minimum is in the upper half
+            lo = mid + 1;  // minimum is in the upper half
         }
         else
         {
-            hi   = mid;     // minimum is in the lower half (inclusive)
+            hi   = mid;  // minimum is in the lower half (inclusive)
             tsHi = tsMid;
         }
     }
 
     // 'lo' is the index of the minimum; the maximum is at the preceding index
-    Size_T maxIndex    = ( lo + m_maxEntries - 1 ) % m_maxEntries;
+    Size_T maxIndex   = ( lo + m_maxEntries - 1 ) % m_maxEntries;
     m_latestOffset    = maxIndex * m_entrySize;
     m_latestTimestamp = readTimestampAt( m_latestOffset );
 
