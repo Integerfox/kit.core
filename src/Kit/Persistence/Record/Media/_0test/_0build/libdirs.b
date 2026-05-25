@@ -13,4 +13,3 @@ src/Kit/Io
 src/Kit/Io/File
 
 src/Kit/System/_testsupport
-src/Kit/Memory/_testsupport

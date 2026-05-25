@@ -177,7 +177,7 @@ TEST_CASE( "Server" )
 
         appPayload.appSet( "" );
         IEntry::Marker_T marker4;
-        result = uut.retrievePrevious( marker3.timestamp, marker3, appPayload, marker4 );
+        result = uut.retrievePrevious( marker.timestamp, marker, appPayload, marker4 );
         REQUIRE( result == true );
         REQUIRE( marker4.mediaOffset == actualEntrySize * 2 );
         REQUIRE( marker4.timestamp == 2 );
