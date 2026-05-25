@@ -65,7 +65,7 @@ static Kit::EventQueue::Server t1Mbox_;
 TEST_CASE( "LogSink" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-    Kit::Container::RingBufferMPAllocate<EntryData_T, ( NUM_LOG_ENTRIES + 1 )> logFifo( mp_logFifoCount_ );
+    Kit::Container::RingBufferMPAllocate<EntryData_T, ( NUM_LOG_ENTRIES + 1 )> logFifo( mp_logFifoCount_, false ); // IMPORTANT: Must set the initialize-memory flag to FALSE since the EntryData_T type has a non-trivial constructor 
     MyUtt                                                                      uut( t1Mbox_, logFifo );
     mp_logFifoCount_.setInvalid();
 

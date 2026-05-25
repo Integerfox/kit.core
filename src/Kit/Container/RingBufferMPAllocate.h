@@ -22,6 +22,12 @@ namespace Container {
 /** This template class extends the RingBufferMP class by statically allocating 
     memory for the ring buffer.
 
+    NOTE: The default behavior of the RingBuffer is to initialize the memory 
+          buffer to all zeros. When the 'ITEM' type is a class type (i.e. not
+          struct or primitive type) then the 'initializeMemory' constructor flag
+          MUST be set to false - so as to not overwrite the vtable pointer of
+          the class instance.
+    
     Template Args:
         ITEM:=      Type of the data stored in the Ring Buffer
         N:=         Size of the array that is allocated to hold the Ring Buffer
@@ -33,11 +39,9 @@ class RingBufferMPAllocate : public RingBufferMP<ITEM>
 {
 public:
     /// Constructor
-    RingBufferMPAllocate( Kit::Dm::Mp::Uint32& mpElementCount )
-        : RingBufferMP<ITEM>( mpElementCount, m_rawMemory, N, false )
+    RingBufferMPAllocate( Kit::Dm::Mp::Uint32& mpElementCount, bool initializeMemory = true ) noexcept
+        : RingBufferMP<ITEM>( mpElementCount, m_rawMemory, N, initializeMemory )
     {
-        // Initialize the ring buffer memory - it helps with debugging
-        memset( static_cast<void*>(m_rawMemory), 0, sizeof( ITEM ) * N );
     }
 
 protected:

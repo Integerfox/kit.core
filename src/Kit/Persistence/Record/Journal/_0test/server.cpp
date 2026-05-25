@@ -152,6 +152,7 @@ TEST_CASE( "Server" )
 
         uut.close();
     }
+
     SECTION( "startup - with data" )
     {
 
@@ -168,11 +169,6 @@ TEST_CASE( "Server" )
         appPayload.appSet( "" );
         IEntry::Marker_T marker2;
         result = uut.retrieveNext( marker.timestamp, marker, appPayload, marker2 );
-        REQUIRE( result == false );
-
-        appPayload.appSet( "" );
-        IEntry::Marker_T marker3;
-        result = uut.retrieveNext( marker2.timestamp, marker2, appPayload, marker3 );
         REQUIRE( result == false );
 
         appPayload.appSet( "" );

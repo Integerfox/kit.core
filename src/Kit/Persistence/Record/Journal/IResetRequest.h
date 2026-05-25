@@ -32,9 +32,6 @@ namespace Journal {
 
     See the Kit/Itc/README.txt file for the semantics for the 'ownership' of the
     payload contents.
-
-    NOTE: This interface can/should NOT be used synchronously.  The application
-          is required to only use asynchronous semantics.
  */
 class LogicalResetRequest
 {

@@ -35,11 +35,18 @@ public:
     /** This structure define an 'marker' that identifies an entry's location
         in persistent media.
      */
-    typedef struct
+    struct Marker_T
     {
         uint64_t timestamp;    //!< The timestamp value for the entry (Note: this is free-running counter, i.e. is NOT elapsed based)
         Size_T   mediaOffset;  //!< Offset, within the IMedia storage to the start of the Entry
-    } Marker_T;
+
+        /// Constructor 
+        Marker_T()
+            : timestamp( 0 )
+            , mediaOffset( 0 )
+        {
+        }
+    };
 
 public:
     /** This method reads/retrieves the latest entry (from the list of Journal
@@ -117,7 +124,7 @@ public:
 
 public:
     /** This method resets the head pointer and the timestamp to zero.  It is
-         essentially a logical erase of the entries.  The method returns true if 
+         essentially a logical erase of the entries.  The method returns true if
          the reset was successful; else false is returned when an error occurred.
 
          NOTE: With respect to 'make room' for more entries, there is no actual

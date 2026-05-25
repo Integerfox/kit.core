@@ -78,7 +78,7 @@ different in purpose.
   a thread-safe FIFO.  It is the application's responsibility to consume the
   entries from the FIFO and record them in persistent storage.  The FIFO supports
   change notifications via a model point - see `Kit::Containers::RingBufferMP`.
-  - The log entry data structure inherits from the `Kit::Persistence::Payload`
+  - The log entry data structure inherits from the `Kit::Persistence::Record::IPayload`
     interface.  The Payload interface defines two methods to serialize and
     deserialize the log entry data structure.  While this introduces a dependency
     on the Kit::Persistence namespace - the Payload interface definition has no

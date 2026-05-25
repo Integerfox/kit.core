@@ -49,7 +49,8 @@ public:
     /// See Kit::Persistence::Record::IMedia.
     bool write( Size_T offset, const void* srcData, Size_T srcLen ) noexcept override
     {
-        if ( srcData == nullptr || ( offset + srcLen ) > m_maxSize )
+        Size_T endOffset = offset + srcLen;
+        if ( srcData == nullptr || endOffset > m_maxSize || endOffset < offset )
         {
             return false;
         }
@@ -59,7 +60,8 @@ public:
     /// See Kit::Persistence::Record::IMedia.
     Size_T read( Size_T offset, void* dstBuffer, Size_T bytesToRead ) noexcept override
     {
-        if ( ( offset + bytesToRead ) > m_maxSize || dstBuffer == nullptr )
+        Size_T endOffset = offset + bytesToRead;
+        if ( dstBuffer == nullptr || endOffset > m_maxSize || endOffset < offset )
         {
             return KIT_PERSISTENCE_SIZE_MAX;
         }

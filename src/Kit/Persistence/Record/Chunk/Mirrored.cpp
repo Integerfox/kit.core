@@ -167,7 +167,7 @@ uint64_t Mirrored::getTransactionId( IMedia& media, Size_T& dataLen, Size_T inde
         {
             // Make sure we have enough buffer space (account of possible integer overflow of 'datalen + META_CRC')
             Size_T dataRemaining = dataLen + META_CRC;
-            if ( dataRemaining > m_workBufferSize || dataRemaining < dataLen || dataRemaining < META_CRC )
+            if ( dataRemaining > m_workBufferSize || dataRemaining < dataLen )
             {
                 return 0;  // return 'error'
             }

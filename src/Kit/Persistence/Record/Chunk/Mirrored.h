@@ -70,9 +70,9 @@ public:
 
 protected:
     /// Helper method.  If the region is 'corrupt' a transaction ID of zero is returned
-    uint64_t virtual getTransactionId( IMedia& media, Size_T& dataLen, Size_T index=0  );
+    virtual uint64_t getTransactionId( IMedia& media, Size_T& dataLen, Size_T index = 0 );
 
-    protected:
+protected:
     /// Current Transaction ID (the larger the value - the newer the data)
     uint64_t m_transId;
 

@@ -1,5 +1,5 @@
-#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_IWRITER_H
-#define KIT_PERSISTENCE_RECORD_JOURNAL_IWRITER_H
+#ifndef KIT_PERSISTENCE_RECORD_JOURNAL_IRESET_H
+#define KIT_PERSISTENCE_RECORD_JOURNAL_IRESET_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

@@ -23,7 +23,7 @@ using namespace Kit::Logging::Framework;
 
 // Create the Application's Logging instance for the tests. 
 // Note: Not static so it can be shared with other tests
-Kit::Container::RingBufferAllocate<EntryData_T, 5> g_logFifo;
+Kit::Container::RingBufferAllocate<EntryData_T, 5> g_logFifo( false ); // IMPORTANT: Must set the initialize-memory flag to FALSE since the EntryData_T type has a non-trivial constructor
 Foo::Logging::App::Foo g_logApp( g_logFifo );
 
 ////////////////////////////////////////////////////////////////////////////////

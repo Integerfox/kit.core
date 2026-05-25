@@ -13,7 +13,7 @@
 
 #include "Kit/Memory/CursorBE.h"
 
-// #include "Kit/Persistent/Payload.h" // TODO: Add persistent logging support
+#include "Kit/Persistence/Record/IPayload.h"
 #include <cstdint>
 #include <stdint.h>
 #include <string.h>
@@ -58,7 +58,7 @@ namespace Logging {
 namespace Framework {
 
 /// Defines the content of the Log entry
-struct EntryData_T  // : public Kit::Persistence::Payload
+struct EntryData_T : public Kit::Persistence::Record::IPayload
 {
 public:
     uint64_t m_timestamp;                                                    //!< Time-stamp - as Kit::Time::BootTime - for the entry.
@@ -85,13 +85,12 @@ public:
     }
 
 public:
-    /// See Kit::Persistence::Payload (manual copy to ensure no pad bytes are copied)
-    /// NOTE: The data is stored in Big-Endian format in persistent storage
-    size_t getData( void* dst, size_t maxDstLen ) noexcept
+    /// See Kit::Persistence::Record::IPayload (manual copy to ensure no pad bytes are copied)
+    Kit::Persistence::Size_T copyTo( void* dst, Kit::Persistence::Size_T maxDstLen ) noexcept
     {
         if ( maxDstLen >= entryLen )
         {
-            Kit::Memory::CursorBE cursor( (uint8_t*)dst, maxDstLen );
+            KIT_PERSISTENCE_MEDIA_CURSOR cursor( (uint8_t*)dst, maxDstLen );
             cursor.writeU64( m_timestamp );
             cursor.writeU8( m_classificationId );
             cursor.writeU8( m_packageId );
@@ -103,12 +102,12 @@ public:
         return 0;
     }
 
-    /// See Kit::Persistence::Payload
-    bool putData( const void* src, size_t srcLen ) noexcept
+    /// See Kit::Persistence::Record::IPayload
+    bool copyFrom( const void* src, Kit::Persistence::Size_T srcLen ) noexcept
     {
         if ( srcLen >= entryLen )
         {
-            Kit::Memory::CursorBE cursor( (uint8_t*)src, srcLen );
+            KIT_PERSISTENCE_MEDIA_CURSOR cursor( (uint8_t*)src, srcLen );
             cursor.readU64( m_timestamp );
             cursor.readU8( m_classificationId );
             cursor.readU8( m_packageId );
@@ -118,6 +117,11 @@ public:
             return !cursor.errorOccurred();
         }
         return false;
+    }
+
+    Kit::Persistence::Size_T getMaxPayloadSize() const noexcept
+    {
+        return entryLen;
     }
 };
 

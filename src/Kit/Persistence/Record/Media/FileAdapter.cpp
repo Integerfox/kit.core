@@ -34,7 +34,9 @@ void FileAdapter::stop() noexcept
 
 bool FileAdapter::write( Size_T offset, const void* srcData, Size_T srcLen ) noexcept
 {
-    if ( srcData == nullptr || ( offset + srcLen ) > m_maxLen )
+    // Validate parameters (and check for overflow)
+    Size_T endOffset = offset + srcLen;
+    if ( srcData == nullptr || endOffset > m_maxLen || endOffset < offset )
     {
         return false;
     }
@@ -57,7 +59,8 @@ bool FileAdapter::write( Size_T offset, const void* srcData, Size_T srcLen ) noe
 
 Size_T FileAdapter::read( Size_T offset, void* dstBuffer, Size_T bytesToRead ) noexcept
 {
-    if ( dstBuffer == nullptr || ( offset + bytesToRead ) > m_maxLen )
+    Size_T endOffset = offset + bytesToRead;
+    if ( dstBuffer == nullptr || endOffset > m_maxLen || endOffset < offset )
     {
         return KIT_PERSISTENCE_SIZE_MAX;
     }

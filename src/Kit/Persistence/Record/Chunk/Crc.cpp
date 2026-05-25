@@ -54,7 +54,7 @@ bool Crc::loadData( IPayload& dstHandler, Size_T index ) noexcept
     {
         // Make sure we have enough buffer space (account of possible integer overflow of 'datalen + META_CRC')
         Size_T dataRemaining = datalen + META_CRC;
-        if ( dataRemaining > m_workBufferSize || dataRemaining < datalen || dataRemaining < META_CRC)
+        if ( dataRemaining > m_workBufferSize || dataRemaining < datalen )
         {
             resetChunkOnBadData();
             return false;
