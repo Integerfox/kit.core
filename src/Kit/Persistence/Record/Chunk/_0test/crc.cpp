@@ -93,6 +93,11 @@ public:
         memcpy( m_buffer, src, srcLen );
         return m_putResult;
     };
+
+    Size_T getMaxPayloadSize() const noexcept override
+    {
+        return sizeof( m_buffer );
+    }
 };
 
 
