@@ -68,7 +68,7 @@ class RingBuffer : public RingBufferBaseType
 {
 public:
     /// Constructor
-    RingBuffer( ITEM* memoryBuffer, unsigned N, bool initializeMemory = true )
+    RingBuffer( ITEM* memoryBuffer, unsigned N, bool initializeMemory = false ) noexcept
         : RingBufferBaseType( N )
         , m_bufferMemory( memoryBuffer )
     {

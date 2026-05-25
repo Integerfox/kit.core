@@ -40,7 +40,7 @@ class RingBufferAllocate : public RingBuffer<ITEM>
 {
 public:
     /// Constructor
-    RingBufferAllocate( bool initializeMemory = true ) noexcept
+    RingBufferAllocate( bool initializeMemory = false ) noexcept
         : RingBuffer<ITEM>( m_rawMemory, N, initializeMemory )
     {
     }

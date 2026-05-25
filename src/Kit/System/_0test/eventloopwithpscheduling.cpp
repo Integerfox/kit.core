@@ -97,8 +97,7 @@ static void     idleFunc( uint64_t currentTick, bool atLeastOneIntervalExecuted 
 
 static PeriodicScheduler::Interval_T intervals_[] = {
     { appleProcessInterval, 10, (void*)0xCAFE },
-    { orangeProcessInterval, 100, (void*)0xBEEF },
-    KIT_SYSTEM_PERIODIC_SCHEDULER_END_INTERVALS
+    { orangeProcessInterval, 100, (void*)0xBEEF }
 };
 
 
@@ -129,7 +128,13 @@ TEST_CASE( "EventLoopWithPScheduling" )
 
     SECTION( "happy path" )
     {
-        EventLoopWithPScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, idleFunc );
+        EventLoopWithPScheduling uut( intervals_,
+                                      sizeof( intervals_ ) / sizeof( intervals_[0] ),
+                                      loopStart,
+                                      loopEnd,
+                                      reportSlippage,
+                                      ElapsedTime::millisecondsEx,
+                                      idleFunc );
         Thread*                  testThread = Thread::create( uut, "TEST" );
         REQUIRE( testThread != nullptr );
         sleep( TEST_DURATION_IN_MSEC );
@@ -152,7 +157,12 @@ TEST_CASE( "EventLoopWithPScheduling" )
 
     SECTION( "no-idle-func" )
     {
-        EventLoopWithPScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx );
+        EventLoopWithPScheduling uut( intervals_,
+                                      sizeof( intervals_ ) / sizeof( intervals_[0] ),
+                                      loopStart,
+                                      loopEnd,
+                                      reportSlippage,
+                                      ElapsedTime::millisecondsEx );
         Thread*                  testThread = Thread::create( uut, "TEST" );
         REQUIRE( testThread != nullptr );
         sleep( TEST_DURATION_IN_MSEC );

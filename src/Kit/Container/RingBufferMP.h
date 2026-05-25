@@ -39,7 +39,7 @@ class RingBufferMP : public RingBuffer<ITEM>
 {
 public:
     /// Constructor
-    RingBufferMP( Kit::Dm::Mp::Uint32& mpElementCount, ITEM* memoryBuffer, unsigned N, bool initializeMemory = true )
+    RingBufferMP( Kit::Dm::Mp::Uint32& mpElementCount, ITEM* memoryBuffer, unsigned N, bool initializeMemory = false ) noexcept
         : RingBuffer<ITEM>( memoryBuffer, N, initializeMemory )
         , m_mpElementCount( mpElementCount )
     {

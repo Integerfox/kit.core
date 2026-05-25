@@ -100,7 +100,6 @@ static PeriodicScheduler::Interval_T intervals_[] = {
     { appleProcessInterval, 10, (void*)0xCAFE },
     { orangeProcessInterval, 20, (void*)0xBEEF },
     { cherryProcessInterval, 7, (void*)0xFEED },
-    KIT_SYSTEM_PERIODIC_SCHEDULER_END_INTERVALS
 };
 
 static uint64_t currentTick_;
@@ -141,7 +140,12 @@ TEST_CASE( "PeriodicScheduler" )
 
     SECTION( "no slippage reporting" )
     {
-        PeriodicScheduler uut( intervals_, loopStart, loopEnd, reportSlippage, now );
+        PeriodicScheduler uut( intervals_,
+                               sizeof( intervals_ ) / sizeof( intervals_[0] ),
+                               loopStart,
+                               loopEnd,
+                               reportSlippage,
+                               now );
         uint64_t          intervalTime;
 
         currentTick_ = 5;
@@ -223,7 +227,12 @@ TEST_CASE( "PeriodicScheduler" )
 
     SECTION( "Slippage" )
     {
-        PeriodicScheduler uut( intervals_, nullptr, nullptr, reportSlippage, now );
+        PeriodicScheduler uut( intervals_,
+                               sizeof( intervals_ ) / sizeof( intervals_[0] ),
+                               nullptr,
+                               nullptr,
+                               reportSlippage,
+                               now );
         uint64_t          intervalTime;
 
         currentTick_ = 5;

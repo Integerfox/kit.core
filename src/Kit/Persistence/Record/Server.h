@@ -13,18 +13,7 @@
 #include "Kit/EventQueue/IQueue.h"
 #include "Kit/Persistence/Record/IRecord.h"
 #include "Kit/Itc/OpenCloseSync.h"
-#include "Kit/System/FatalError.h"
-#include "Kit/System/Shutdown.h"
-
-/** Maximum number of supported Records the Manager supports. This value is used
-    for error-checking only, i.e. to ensure the variable list recordList array
-    is properly terminated with a nullptr.  This value is NOT used to limit the
-    number of Records the Server can manage, i.e. the Server can handle an 
-    unlimited number of Records.
- */
-#ifndef OPTION_KIT_PERSISTENCE_RECORD_SERVER_MAX_RECORDS
-#define OPTION_KIT_PERSISTENCE_RECORD_SERVER_MAX_RECORDS 64
-#endif
+#include "Kit/System/Assert.h"
 
 ///
 namespace Kit {
@@ -47,21 +36,14 @@ public:
               array MUST BE a nullptr.
      */
     Server( Kit::EventQueue::IQueue& myEventQueue,
-            IRecord*                 recordList[] ) noexcept
+            IRecord*                 recordList[],
+            unsigned                 numRecords ) noexcept
         : OpenCloseSync( myEventQueue )
         , m_records( recordList )
+        , m_numRecords( numRecords )
         , m_opened( false )
     {
-        // Ensure the record list is properly terminated with a nullptr
-        for ( unsigned i = 0; i < OPTION_KIT_PERSISTENCE_RECORD_SERVER_MAX_RECORDS; i++ )
-        {
-            if ( m_records[i] == nullptr )
-            {
-                return;
-            }
-        }
-
-        Kit::System::FatalError::log( Kit::System::Shutdown::eASSERT, "Kit::Persistence::Record::Server was given an invalid record list" );
+        KIT_SYSTEM_ASSERT( recordList );
     }
 
 public:
@@ -73,7 +55,7 @@ public:
             m_opened = true;
 
             // Start each record
-            for ( unsigned i = 0; m_records[i] != nullptr && m_opened; i++ )
+            for ( unsigned i = 0; i < m_numRecords && m_opened; i++ )
             {
                 m_opened &= m_records[i]->start( m_eventQueue );
             }
@@ -90,7 +72,7 @@ public:
             m_opened = false;
 
             // Stop each record
-            for ( unsigned i = 0; m_records[i] != nullptr; i++ )
+            for ( unsigned i = 0; i < m_numRecords; i++ )
             {
                 m_records[i]->stop();
             }
@@ -99,10 +81,11 @@ public:
     }
 
 protected:
-    /** Variable length list of Records to manage.  The last item in the list
-        must be ZERO to indicate the end-of-the list
-     */
+    /// Variable length list of Records to manage.  T
     IRecord** m_records;
+
+    /// Number of elements in the record list
+    unsigned m_numRecords;
 
     /// Track my open state
     bool m_opened;
