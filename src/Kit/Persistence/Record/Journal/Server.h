@@ -109,18 +109,22 @@ public:
     /// See Kit::Persistence::Journal::RetrieveLatestRequest
     void request( RetrieveLatestMsg& msg ) noexcept override
     {
-        RetrieveLatestRequest::Payload& payload = msg.getPayload();
+        ReadRequest::LatestPayload& payload = msg.getPayload();
         //
-        payload.m_success = m_record.getLatest( payload.m_entryDst, payload.m_markerEntryRetrieved );
+        payload.m_success = m_record.getLatest( payload.m_entryDst,
+                                                payload.m_markerEntryRetrieved );
         msg.returnToSender();
     }
 
     /// See Kit::Persistence::Journal::RetrieveNextRequest
     void request( RetrieveNextMsg& msg ) noexcept override
     {
-        RetrieveNextRequest::Payload& payload = msg.getPayload();
+        ReadRequest::NextPayload& payload = msg.getPayload();
         //
-        payload.m_success = m_record.getNext( payload.m_newerThan, payload.m_beginHereMarker, payload.m_entryDst, payload.m_markerEntryRetrieved );
+        payload.m_success = m_record.getNext( payload.m_newerThan,
+                                              payload.m_beginHereMarker,
+                                              payload.m_entryDst,
+                                              payload.m_markerEntryRetrieved );
         msg.returnToSender();
     }
 
@@ -128,9 +132,12 @@ public:
     /// See Kit::Persistence::Journal::RetrievePreviousRequest
     void request( RetrievePreviousMsg& msg ) noexcept override
     {
-        RetrievePreviousRequest::Payload& payload = msg.getPayload();
+        ReadRequest::PreviousPayload& payload = msg.getPayload();
         //
-        payload.m_success = m_record.getPrevious( payload.m_olderThan, payload.m_beginHereMarker, payload.m_entryDst, payload.m_markerEntryRetrieved );
+        payload.m_success = m_record.getPrevious( payload.m_olderThan,
+                                                  payload.m_beginHereMarker,
+                                                  payload.m_entryDst,
+                                                  payload.m_markerEntryRetrieved );
         msg.returnToSender();
     }
 
@@ -138,9 +145,11 @@ public:
     /// See Kit::Persistence::Journal::RetrieveByEntryIndexRequest
     void request( RetrieveByEntryIndexMsg& msg ) noexcept override
     {
-        RetrieveByEntryIndexRequest::Payload& payload = msg.getPayload();
+        ReadRequest::ByEntryIndexPayload& payload = msg.getPayload();
         //
-        payload.m_success = m_record.getByEntryIndex( payload.m_index, payload.m_entryDst, payload.m_markerEntryRetrieved );
+        payload.m_success = m_record.getByEntryIndex( payload.m_index,
+                                                      payload.m_entryDst,
+                                                      payload.m_markerEntryRetrieved );
         msg.returnToSender();
     }
 
@@ -154,7 +163,7 @@ public:
     void request( LogicalResetMsg& msg ) noexcept override
     {
         LogicalResetRequest::Payload& payload = msg.getPayload();
-        payload.m_success = m_record.resetHead();
+        payload.m_success                     = m_record.resetHead();
         msg.returnToSender();
     }
 
@@ -164,7 +173,7 @@ protected:
     {
         uint32_t count;
         uint16_t seqNum = 0;
-        if ( mp.readAndSync( count, seqNum , observer ) && count > 0 )
+        if ( mp.readAndSync( count, seqNum, observer ) && count > 0 )
         {
             // Temporarily disable callbacks to avoid un-necessary callbacks
             mp.detach( m_obBuffer );
@@ -172,7 +181,7 @@ protected:
             // Drain the buffer (but limit how many adds at one time) and write the entries to persistent storage
             unsigned iterations = 0;
             ENTRY    entry;
-            while ( iterations < OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE && m_buffer.remove( entry) )
+            while ( iterations < OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE && m_buffer.remove( entry ) )
             {
                 hookAddingEntry( entry );
                 m_record.addEntry( entry );

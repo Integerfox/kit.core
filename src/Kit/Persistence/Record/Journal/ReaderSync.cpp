@@ -9,7 +9,6 @@
 /** @file */
 
 #include "ReaderSync.h"
-#include "IReaderRequest.h"
 #include "Kit/Itc/SyncReturnHandler.h"
 
 
@@ -21,9 +20,9 @@ namespace Journal {
 
 bool ReaderSync::retrieveLatest( IPayload& dst, IEntry::Marker_T& entryMarker ) noexcept
 {
-    RetrieveLatestRequest::Payload           msgPayload( dst );
-    Kit::Itc::SyncReturnHandler              srh;
-    RetrieveLatestRequest::RetrieveLatestMsg msg( *this, msgPayload, srh );
+    ReadRequest::LatestPayload     msgPayload( dst );
+    Kit::Itc::SyncReturnHandler    srh;
+    ReadRequest::RetrieveLatestMsg msg( *this, msgPayload, srh );
     m_myEventQueue.postSync( msg );
 
     entryMarker = msgPayload.m_markerEntryRetrieved;
@@ -35,10 +34,10 @@ bool ReaderSync::retrieveNext( uint64_t               newerThanTimestamp,
                                IPayload&              dst,
                                IEntry::Marker_T&      entryMarker ) noexcept
 {
-    IEntry::Marker_T                     beginHere = beginHereMarker;
-    RetrieveNextRequest::Payload         msgPayload( dst, beginHere, newerThanTimestamp );
-    Kit::Itc::SyncReturnHandler          srh;
-    RetrieveNextRequest::RetrieveNextMsg msg( *this, msgPayload, srh );
+    IEntry::Marker_T             beginHere = beginHereMarker;
+    ReadRequest::NextPayload     msgPayload( dst, beginHere, newerThanTimestamp );
+    Kit::Itc::SyncReturnHandler  srh;
+    ReadRequest::RetrieveNextMsg msg( *this, msgPayload, srh );
     m_myEventQueue.postSync( msg );
 
     entryMarker = msgPayload.m_markerEntryRetrieved;
@@ -51,10 +50,10 @@ bool ReaderSync::retrievePrevious( uint64_t               olderThanTimestamp,
                                    IPayload&              dst,
                                    IEntry::Marker_T&      entryMarker ) noexcept
 {
-    IEntry::Marker_T                             beginHere = beginHereMarker;
-    RetrievePreviousRequest::Payload             msgPayload( dst, beginHere, olderThanTimestamp );
-    Kit::Itc::SyncReturnHandler                  srh;
-    RetrievePreviousRequest::RetrievePreviousMsg msg( *this, msgPayload, srh );
+    IEntry::Marker_T                 beginHere = beginHereMarker;
+    ReadRequest::PreviousPayload     msgPayload( dst, beginHere, olderThanTimestamp );
+    Kit::Itc::SyncReturnHandler      srh;
+    ReadRequest::RetrievePreviousMsg msg( *this, msgPayload, srh );
     m_myEventQueue.postSync( msg );
 
     entryMarker = msgPayload.m_markerEntryRetrieved;
@@ -65,9 +64,9 @@ bool ReaderSync::retrieveByEntryIndex( Size_T            entryIndex,
                                        IPayload&         dst,
                                        IEntry::Marker_T& entryMarker ) noexcept
 {
-    RetrieveByEntryIndexRequest::Payload                  msgPayload( dst, entryIndex );
-    Kit::Itc::SyncReturnHandler                           srh;
-    RetrieveByEntryIndexRequest::RetrieveByEntryIndexMsg msg( *this, msgPayload, srh );
+    ReadRequest::ByEntryIndexPayload     msgPayload( dst, entryIndex );
+    Kit::Itc::SyncReturnHandler          srh;
+    ReadRequest::RetrieveByEntryIndexMsg msg( *this, msgPayload, srh );
     m_myEventQueue.postSync( msg );
 
     entryMarker = msgPayload.m_markerEntryRetrieved;

@@ -27,10 +27,7 @@ namespace Journal {
     message request methods.
 */
 class ReaderSync : public IReader,
-                   public RetrieveLatestRequest,
-                   public RetrieveNextRequest,
-                   public RetrievePreviousRequest,
-                   public RetrieveByEntryIndexRequest
+                   public ReadRequest
 {
 public:
     /// See Kit::Persistence::Record::Journal::IReader
