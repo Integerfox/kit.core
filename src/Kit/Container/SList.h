@@ -21,9 +21,9 @@ namespace Container {
     ordering imposed on it by the application. It is type-safe wrapper around
     the SListBase class.
 
-    NOTE: ITEM must be a subclass of Kit::Container::ListItem.
+    NOTE: LIST_ITEM must be a subclass of Kit::Container::ListItem.
  */
-template <class ITEM>
+template <class LIST_ITEM>
 class SList : public SListBase
 {
 public:
@@ -40,107 +40,107 @@ public:
 
 public:
     /// Moves the content of the this queue to the specified queue.
-    void move( SList<ITEM>& dst ) noexcept { SListBase::move( dst ); }
+    void move( SList<LIST_ITEM>& dst ) noexcept { SListBase::move( dst ); }
 
     /// Empties the list.  All references to the item(s) in the list are lost.
     void clearTheList() noexcept { SListBase::clearTheList(); }
 
 public:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    ITEM* get() noexcept { return static_cast<ITEM*>( SListBase::getFirst() ); }
+    LIST_ITEM* get() noexcept { return static_cast<LIST_ITEM*>( SListBase::getFirst() ); }
 
     /// Adds the item as the last item in the list
-    void put( ITEM& item ) noexcept { SListBase::putLast( item ); }
+    void put( LIST_ITEM& item ) noexcept { SListBase::putLast( item ); }
 
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* head() const noexcept { return static_cast<ITEM*>( SListBase::first() ); }
+    LIST_ITEM* head() const noexcept { return static_cast<LIST_ITEM*>( SListBase::first() ); }
 
     /** Return a pointer to the last item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* tail() const noexcept { return static_cast<ITEM*>( SListBase::last() ); }
+    LIST_ITEM* tail() const noexcept { return static_cast<LIST_ITEM*>( SListBase::last() ); }
 
 public:
     /** Removes the top element from stack and return a pointer to it as a
         result. Returns nullptr, if the stack is empty
      */
-    ITEM* pop() noexcept { return static_cast<ITEM*>( SListBase::getFirst() ); }
+    LIST_ITEM* pop() noexcept { return static_cast<LIST_ITEM*>( SListBase::getFirst() ); }
 
-    /// Adds the ITEM item to top of the stack.
-    void push( ITEM& item ) noexcept { SListBase::putFirst( item ); }
+    /// Adds the LIST_ITEM item to top of the stack.
+    void push( LIST_ITEM& item ) noexcept { SListBase::putFirst( item ); }
 
-    /** Return a pointer to the top ITEM item in the stack. The returned item
+    /** Return a pointer to the top LIST_ITEM item in the stack. The returned item
         remains in the queue.  Returns nullptr if the stack is empty.
      */
-    ITEM* top() const noexcept { return static_cast<ITEM*>( SListBase::first() ); }
+    LIST_ITEM* top() const noexcept { return static_cast<LIST_ITEM*>( SListBase::first() ); }
 
 public:
     /** Removes the first item in the list.  Returns nullptr if the list
         is empty.
      */
-    ITEM* getFirst() noexcept { return static_cast<ITEM*>( SListBase::getFirst() ); }
+    LIST_ITEM* getFirst() noexcept { return static_cast<LIST_ITEM*>( SListBase::getFirst() ); }
 
     /** Removes the last item in the list.  Returns nullptr if the list
         is empty.
      */
-    ITEM* getLast() noexcept { return static_cast<ITEM*>( SListBase::getLast() ); }
+    LIST_ITEM* getLast() noexcept { return static_cast<LIST_ITEM*>( SListBase::getLast() ); }
 
     /// Adds the item as the first item in the list.
-    void putFirst( ITEM& item ) noexcept { SListBase::putFirst( item ); }
+    void putFirst( LIST_ITEM& item ) noexcept { SListBase::putFirst( item ); }
 
     /// Adds the item as the last item in the list.
-    void putLast( ITEM& item ) noexcept { SListBase::putLast( item ); }
+    void putLast( LIST_ITEM& item ) noexcept { SListBase::putLast( item ); }
 
-    /** Remove specified ITEM element from the list. Returns true if the
+    /** Remove specified LIST_ITEM element from the list. Returns true if the
         specified element was found and removed from the list, else false.
      */
-    bool remove( ITEM& item ) noexcept { return SListBase::remove( item ); }
+    bool remove( LIST_ITEM& item ) noexcept { return SListBase::remove( item ); }
 
-    /** Insert the "item" ITEM into the list behind the "after" ITEM element.
+    /** Insert the "item" LIST_ITEM into the list behind the "after" LIST_ITEM element.
         If 'after' is nullptr, then 'item' is added to the head of the list.
      */
-    void insertAfter( ITEM& after, ITEM& item ) noexcept { SListBase::insertAfter( after, item ); }
+    void insertAfter( LIST_ITEM& after, LIST_ITEM& item ) noexcept { SListBase::insertAfter( after, item ); }
 
-    /** Insert the "item" ITEM into the list ahead of the "before" ITEM element.
+    /** Insert the "item" LIST_ITEM into the list ahead of the "before" LIST_ITEM element.
         If 'before' is nullptr, then 'item' is added to the tail of the list.
 
         Note: This insert operation is more expensive than insertAfter() because
         a traversal of the list is required to find the 'before' item
      */
-    void insertBefore( ITEM& before, ITEM& item ) noexcept { SListBase::insertBefore( before, item ); }
+    void insertBefore( LIST_ITEM& before, LIST_ITEM& item ) noexcept { SListBase::insertBefore( before, item ); }
 
     /// Returns true if the specified item is already in the list, else false.
-    bool find( const ITEM& item ) const noexcept { return SListBase::find( item ); }
+    bool find( const LIST_ITEM& item ) const noexcept { return SListBase::find( item ); }
 
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* first() const noexcept { return static_cast<ITEM*>( SListBase::first() ); }
+    LIST_ITEM* first() const noexcept { return static_cast<LIST_ITEM*>( SListBase::first() ); }
 
     /** Return a pointer to the last item in the list. The returned item remains
         in the list.  Returns nullptr if the list is empty.
      */
-    ITEM* last() const noexcept { return static_cast<ITEM*>( SListBase::last() ); }
+    LIST_ITEM* last() const noexcept { return static_cast<LIST_ITEM*>( SListBase::last() ); }
 
     /** Return a pointer to the item after the item "item". Both items remain in
         the list.  Returns nullptr when the end-of-list is reached.
      */
-    ITEM* next( const ITEM& item ) const noexcept { return static_cast<ITEM*>( SListBase::next( item ) ); }
+    LIST_ITEM* next( const LIST_ITEM& item ) const noexcept { return static_cast<LIST_ITEM*>( SListBase::next( item ) ); }
 
 private:
     /// Prevent access to the copy constructor -->Containers can not be copied!
-    SList( const SList<ITEM>& m ) = delete;
+    SList( const SList<LIST_ITEM>& m ) = delete;
 
     /// Prevent access to the assignment operator -->Containers can not be copied!
-    SList<ITEM>& operator=( const SList<ITEM>& m ) = delete;
+    SList<LIST_ITEM>& operator=( const SList<LIST_ITEM>& m ) = delete;
 
     /// Prevent access to the move constructor -->Containers can not be implicitly moved!
-    SList( SList<ITEM>&& m ) = delete;
+    SList( SList<LIST_ITEM>&& m ) = delete;
 
     /// Prevent access to the move assignment operator -->Containers can not be implicitly moved!
-    SList<ITEM>& operator=( SList<ITEM>&& m ) = delete;
+    SList<LIST_ITEM>& operator=( SList<LIST_ITEM>&& m ) = delete;
 };
 
 
