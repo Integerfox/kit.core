@@ -53,6 +53,7 @@ public:
         periodic scheduling.
      */
     WithPeriodicScheduling( Interval_T                                      intervals[],
+                            unsigned                                        numnumIntervals,
                             Hook_T                                          beginThreadProcessing = nullptr,
                             Hook_T                                          endThreadProcessing   = nullptr,
                             ReportSlippageFunc_T                            slippageFunc          = nullptr,
