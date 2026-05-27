@@ -106,8 +106,7 @@ static void     idleFunc( uint64_t currentTick, bool atLeastOneIntervalExecuted 
 
 static PeriodicScheduler::Interval_T intervals_[] = {
     { appleProcessInterval, 10, (void*)0xCAFE },
-    { orangeProcessInterval, 100, (void*)0xBEEF },
-    KIT_SYSTEM_PERIODIC_SCHEDULER_END_INTERVALS
+    { orangeProcessInterval, 100, (void*)0xBEEF }
 };
 
 
@@ -139,7 +138,13 @@ TEST_CASE( "EventLoopWithPScheduling" )
 
     SECTION( "happy path" )
     {
-        WithPeriodicScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, idleFunc );
+        WithPeriodicScheduling uut( intervals_,
+                                    sizeof( intervals_ ) / sizeof( intervals_[0] ),
+                                    loopStart,
+                                    loopEnd,
+                                    reportSlippage,
+                                    ElapsedTime::millisecondsEx,
+                                    idleFunc );
         Thread*                testThread = Thread::create( uut, "TEST" );
         REQUIRE( testThread != nullptr );
         sleep( TEST_DURATION_IN_MSEC );
@@ -161,7 +166,12 @@ TEST_CASE( "EventLoopWithPScheduling" )
 
     SECTION( "no-idle-func" )
     {
-        WithPeriodicScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx );
+        WithPeriodicScheduling uut( intervals_,
+                                    sizeof( intervals_ ) / sizeof( intervals_[0] ),
+                                    loopStart,
+                                    loopEnd,
+                                    reportSlippage,
+                                    ElapsedTime::millisecondsEx );
         Thread*                testThread = Thread::create( uut, "TEST" );
         REQUIRE( testThread != nullptr );
         sleep( TEST_DURATION_IN_MSEC );
@@ -185,7 +195,16 @@ TEST_CASE( "EventLoopWithPScheduling" )
     {
         // Server with the thread's watchdog "enabled"
         WatchedEventThread     wdogSetup( WDOG_TIMEOUT_MS, WDOG_THREAD_HEALTH_CHECK_MS, true );
-        WithPeriodicScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, nullptr, OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, nullptr, &wdogSetup );
+        WithPeriodicScheduling uut( intervals_,
+                                    sizeof( intervals_ ) / sizeof( intervals_[0] ),
+                                    loopStart,
+                                    loopEnd,
+                                    reportSlippage,
+                                    ElapsedTime::millisecondsEx,
+                                    nullptr,
+                                    OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
+                                    nullptr,
+                                    &wdogSetup );
 
         auto* t1 = Kit::System::Thread::create( uut, "WATCHED-THREAD" );
         REQUIRE( t1 );
@@ -205,7 +224,16 @@ TEST_CASE( "EventLoopWithPScheduling" )
     SECTION( "scheduler - no watchdog" )
     {
         // Scheduler with no thread watchdog
-        WithPeriodicScheduling uut( intervals_, loopStart, loopEnd, reportSlippage, ElapsedTime::millisecondsEx, nullptr, OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, nullptr, nullptr );
+        WithPeriodicScheduling uut( intervals_,
+                                    sizeof( intervals_ ) / sizeof( intervals_[0] ),
+                                    loopStart,
+                                    loopEnd,
+                                    reportSlippage,
+                                    ElapsedTime::millisecondsEx,
+                                    nullptr,
+                                    OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
+                                    nullptr,
+                                    nullptr );
 
         auto* t1 = Kit::System::Thread::create( uut, "WATCHED-THREAD" );
         REQUIRE( t1 );
