@@ -26,7 +26,7 @@ namespace Container {
     OrderedListBase class.
 
     NOTE: The insert algorithm is STUPID. It is a brute force walk of the existing
-          items in the list and inserting them in order.  If performance with
+          items in the list and inserting new item in order.  If performance with
           respect to ordering is an issue, you will need to use the Map container
           which is implemented as a binary tree.
  */
