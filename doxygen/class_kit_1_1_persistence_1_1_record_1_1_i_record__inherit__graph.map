@@ -1,0 +1,13 @@
+<map id="Kit::Persistence::Record::IRecord" name="Kit::Persistence::Record::IRecord">
+<area shape="rect" id="Node000001" title="This abstract class defines the public interface for a Record instance." alt="" coords="5,37,181,77"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_persistence_1_1_record_1_1_i_data_record.html" title="This abstract extends the IRecord interface to include semantics for an unmanaged &#39;data store&#39;,..." alt="" coords="229,37,405,77"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,55,229,55,229,60,195,60"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_i_entry.html" title="This abstract class defines interface for managing &#39;entries&#39; from a a collection of entries (i...." alt="" coords="453,5,629,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="418,40,453,35,453,41,419,45"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_i_head.html" title="This abstract class defines the interface to manage the newest entry in an IEntry record." alt="" coords="453,69,629,109"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="419,69,453,74,453,79,418,74"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html" title="This concrete class implements the IRecord interface that manages a collection of Entries that are ti..." alt="" coords="677,5,853,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="643,23,677,23,677,28,643,28"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_head_record.html" title="This concrete class is responsible for storing and retrieving the &quot;head pointer&quot; for the logical Ring..." alt="" coords="677,69,853,109"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="643,87,677,87,677,92,643,92"/>
+</map>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td class="headerValue">2026-05-28 01:49:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -91,7 +91,7 @@
 <span id="L29"><span class="lineNum">      29</span>                 :             : public:</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             :     /// Constructor</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     CursorLE( void* srcBuffer, size_t srcBufferSize, size_t startingOffset = 0 )</span>
-<span id="L32"><span class="lineNum">      32</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">           8 :         : CursorBase( srcBuffer, srcBufferSize, startingOffset )</span></span>
+<span id="L32"><span class="lineNum">      32</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">         195 :         : CursorBase( srcBuffer, srcBufferSize, startingOffset )</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 14 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span>]
@@ -172,7 +172,7 @@
 <span id="L107"><span class="lineNum">     107</span>                 :             :     inline bool read( T&amp; dstData ) noexcept</span>
 <span id="L108"><span class="lineNum">     108</span>                 :             :     {</span>
 <span id="L109"><span class="lineNum">     109</span>                 :             :         static_assert( std::is_integral&lt;T&gt;::value, &quot;Template parameter T must be an integral type&quot; );</span>
-<span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC">           8 :         bool result = readAndAdvance( &amp;dstData, sizeof( T ) );</span></span>
+<span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC">         107 :         bool result = readAndAdvance( &amp;dstData, sizeof( T ) );</span></span>
 <span id="L111"><span class="lineNum">     111</span>                 :             :         switch ( sizeof( T ) )</span>
 <span id="L112"><span class="lineNum">     112</span>                 :             :         {</span>
 <span id="L113"><span class="lineNum">     113</span>                 :             :         case 2:</span>
@@ -263,7 +263,7 @@
 <span id="L198"><span class="lineNum">     198</span>                 :             :     inline bool write( T srcData ) noexcept</span>
 <span id="L199"><span class="lineNum">     199</span>                 :             :     {</span>
 <span id="L200"><span class="lineNum">     200</span>                 :             :         static_assert( std::is_integral&lt;T&gt;::value, &quot;Template parameter T must be an integral type&quot; );</span>
-<span id="L201"><span class="lineNum">     201</span>                 :<span class="tlaGNC">           7 :         T tempData = srcData;</span></span>
+<span id="L201"><span class="lineNum">     201</span>                 :<span class="tlaGNC">         125 :         T tempData = srcData;</span></span>
 <span id="L202"><span class="lineNum">     202</span>                 :             :         switch ( sizeof( T ) )</span>
 <span id="L203"><span class="lineNum">     203</span>                 :             :         {</span>
 <span id="L204"><span class="lineNum">     204</span>                 :             :         case 2:</span>
@@ -279,7 +279,7 @@
 <span id="L214"><span class="lineNum">     214</span>                 :             :             // No byte swapping for non-standard sizes</span>
 <span id="L215"><span class="lineNum">     215</span>                 :             :             break;</span>
 <span id="L216"><span class="lineNum">     216</span>                 :             :         }</span>
-<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">           8 :         return writeAndAdvance( &amp;tempData, sizeof( tempData ) );</span></span>
+<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">          96 :         return writeAndAdvance( &amp;tempData, sizeof( tempData ) );</span></span>
 <span id="L218"><span class="lineNum">     218</span>                 :             :     }</span>
 <span id="L219"><span class="lineNum">     219</span>                 :             : };</span>
 <span id="L220"><span class="lineNum">     220</span>                 :             : </span>

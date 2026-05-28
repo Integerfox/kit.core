@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 300-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 308-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -75,9 +75,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a72a8efe0c7cb2278bf61e0ef9a8a56e0" id="r_a72a8efe0c7cb2278bf61e0ef9a8a56e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72a8efe0c7cb2278bf61e0ef9a8a56e0">LogSink</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;myMbox, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a> &gt; &amp;incomingEntriesBuffer) noexcept</td></tr>
-<tr class="memdesc:a72a8efe0c7cb2278bf61e0ef9a8a56e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:a72a8efe0c7cb2278bf61e0ef9a8a56e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aa8bd1e510dcebfcfdf9358e38d2481" id="r_a9aa8bd1e510dcebfcfdf9358e38d2481"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9aa8bd1e510dcebfcfdf9358e38d2481">LogSink</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;myEventQueue, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a> &gt; &amp;incomingEntriesBuffer) noexcept</td></tr>
+<tr class="memdesc:a9aa8bd1e510dcebfcfdf9358e38d2481"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a9aa8bd1e510dcebfcfdf9358e38d2481"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bc28c13b438a780334b4f93abe9300b" id="r_a1bc28c13b438a780334b4f93abe9300b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bc28c13b438a780334b4f93abe9300b">request</a> (<a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#af640fa7fab0512af28d722efc314690d">CloseMsg</a> &amp;msg) noexcept override</td></tr>
 <tr class="memdesc:a1bc28c13b438a780334b4f93abe9300b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method stops the sink (See <a class="el" href="class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close...">Kit::Itc::OpenCloseSync</a>)  <br /></td></tr>
 <tr class="separator:a1bc28c13b438a780334b4f93abe9300b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,10 +152,10 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is responsible for consuming the application's Log buffer and 'dispatching' log entries. </p>
 <p>By default, the class simply drains the log buffer and discards the entries. A child class is required to provide a meaningful implementation of the <a class="el" href="#af83c11d4ebea640fe7c94bc2c83e0c31" title="Platform specific method to save the entry.">dispatchLogEntry()</a> method.</p>
-<p>FYI: The Kit::Persistent framework provides an alternate 'log sink' that writes log entries to Non-volatile storage along with an a API to retrieve the log entries. </p>
+<p>FYI: The <a class="el" href="namespace_kit_1_1_persistence.html" title="The &#39;Persistence&#39; namespace is top level namespace for services, widgets, utilities,...">Kit::Persistence</a> framework provides an alternate 'log sink' that writes log entries to Non-volatile storage along with an a API to retrieve the log entries. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a72a8efe0c7cb2278bf61e0ef9a8a56e0" name="a72a8efe0c7cb2278bf61e0ef9a8a56e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72a8efe0c7cb2278bf61e0ef9a8a56e0">&#9670;&#160;</a></span>LogSink()</h2>
+<a id="a9aa8bd1e510dcebfcfdf9358e38d2481" name="a9aa8bd1e510dcebfcfdf9358e38d2481"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aa8bd1e510dcebfcfdf9358e38d2481">&#9670;&#160;</a></span>LogSink()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,7 +166,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">Kit::Logging::Framework::LogSink::LogSink </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>myMbox</em>, </span></td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>myEventQueue</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -381,7 +381,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 26 2026 18:55:51 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu May 28 2026 01:44:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

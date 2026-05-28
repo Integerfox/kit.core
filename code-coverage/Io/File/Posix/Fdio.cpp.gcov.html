@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td class="headerValue">2026-05-28 01:49:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">82.1&nbsp;%</td>
@@ -86,27 +86,27 @@
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : </span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : //////////////////////</span>
-<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC tlaBgGNC">          29 : KitIoFileHandle_T Fdio::open( const char* fileEntryName, bool readOnly, bool forceCreate, bool forceEmptyFile ) noexcept</span></span>
+<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC tlaBgGNC">         567 : KitIoFileHandle_T Fdio::open( const char* fileEntryName, bool readOnly, bool forceCreate, bool forceEmptyFile ) noexcept</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : {</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     KIT_SYSTEM_ASSERT( fileEntryName != nullptr );</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : </span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     // Set open flags as requested</span>
-<span id="L32"><span class="lineNum">      32</span>         [<span class="tlaGBC" title="Branch 0 was taken 15 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14 times"> + </span>]:<span class="tlaGNC">          29 :     int flags = readOnly ? O_RDONLY : O_RDWR;</span></span>
+<span id="L32"><span class="lineNum">      32</span>         [<span class="tlaGBC" title="Branch 0 was taken 254 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 313 times"> + </span>]:<span class="tlaGNC">         567 :     int flags = readOnly ? O_RDONLY : O_RDWR;</span></span>
 <span id="L33"><span class="lineNum">      33</span>                 :             :     int mode  = 0666;</span>
-<span id="L34"><span class="lineNum">      34</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span>]:<span class="tlaGNC">          29 :     if ( forceCreate )</span></span>
+<span id="L34"><span class="lineNum">      34</span>         [<span class="tlaGBC" title="Branch 0 was taken 253 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 314 times"> + </span>]:<span class="tlaGNC">         567 :     if ( forceCreate )</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     {</span>
-<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          14 :         flags |= O_CREAT;</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">         253 :         flags |= O_CREAT;</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :     }</span>
-<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 17 times"> + </span>]:<span class="tlaGNC">          29 :     if ( forceEmptyFile )</span></span>
+<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 555 times"> + </span>]:<span class="tlaGNC">         567 :     if ( forceEmptyFile )</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     {</span>
 <span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          12 :         flags |= O_TRUNC;</span></span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     }</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : </span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     // Open the file</span>
-<span id="L45"><span class="lineNum">      45</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 29 times"> + </span>]:<span class="tlaGNC">          29 :     errno = 0;</span></span>
+<span id="L45"><span class="lineNum">      45</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 567 times"> + </span>]:<span class="tlaGNC">         567 :     errno = 0;</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     KitIoFileHandle_T fd( ::open( fileEntryName, flags, mode ) );</span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">          29 :     return fd;</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">         567 :     return fd;</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : }</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
 <span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">          11 : bool Fdio::length( KitIoFileHandle_T fd, ByteCount_T&amp; length ) noexcept</span></span>
@@ -146,15 +146,15 @@
 <span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">           4 :     return pos != (off_t)-1;</span></span>
 <span id="L85"><span class="lineNum">      85</span>                 :             : }</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : </span>
-<span id="L87"><span class="lineNum">      87</span>                 :<span class="tlaGNC">           9 : bool Fdio::setAbsolutePos( KitIoFileHandle_T fd, ByteCount_T newoffset ) noexcept</span></span>
+<span id="L87"><span class="lineNum">      87</span>                 :<span class="tlaGNC">         452 : bool Fdio::setAbsolutePos( KitIoFileHandle_T fd, ByteCount_T newoffset ) noexcept</span></span>
 <span id="L88"><span class="lineNum">      88</span>                 :             : {</span>
-<span id="L89"><span class="lineNum">      89</span>         [<span class="tlaGBC" title="Branch 0 was taken 7 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           9 :     if ( fd == INVALID_FD )</span></span>
+<span id="L89"><span class="lineNum">      89</span>         [<span class="tlaGBC" title="Branch 0 was taken 450 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">         452 :     if ( fd == INVALID_FD )</span></span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     {</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :         return false;</span>
 <span id="L92"><span class="lineNum">      92</span>                 :             :     }</span>
 <span id="L93"><span class="lineNum">      93</span>                 :             : </span>
-<span id="L94"><span class="lineNum">      94</span>                 :<span class="tlaGNC">           7 :     off_t pos = lseek( fd, (off_t)newoffset, SEEK_SET );</span></span>
-<span id="L95"><span class="lineNum">      95</span>                 :<span class="tlaGNC">           7 :     return pos != (off_t)-1;</span></span>
+<span id="L94"><span class="lineNum">      94</span>                 :<span class="tlaGNC">         450 :     off_t pos = lseek( fd, (off_t)newoffset, SEEK_SET );</span></span>
+<span id="L95"><span class="lineNum">      95</span>                 :<span class="tlaGNC">         450 :     return pos != (off_t)-1;</span></span>
 <span id="L96"><span class="lineNum">      96</span>                 :             : }</span>
 <span id="L97"><span class="lineNum">      97</span>                 :             : </span>
 <span id="L98"><span class="lineNum">      98</span>                 :<span class="tlaGNC">           7 : bool Fdio::setToEof( KitIoFileHandle_T fd ) noexcept</span></span>
@@ -201,10 +201,10 @@
 <span id="L139"><span class="lineNum">     139</span>                 :<span class="tlaGNC">           3 :     return ::rename( oldName, newName ) == 0;</span></span>
 <span id="L140"><span class="lineNum">     140</span>                 :             : }</span>
 <span id="L141"><span class="lineNum">     141</span>                 :             : </span>
-<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">          37 : bool Fdio::remove( const char* fsEntryName )</span></span>
+<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">          60 : bool Fdio::remove( const char* fsEntryName )</span></span>
 <span id="L143"><span class="lineNum">     143</span>                 :             : {</span>
 <span id="L144"><span class="lineNum">     144</span>                 :             :     KIT_SYSTEM_ASSERT( fsEntryName != nullptr );</span>
-<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">          37 :     return ::remove( fsEntryName ) == 0;</span></span>
+<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">          60 :     return ::remove( fsEntryName ) == 0;</span></span>
 <span id="L146"><span class="lineNum">     146</span>                 :             : }</span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : </span>
 <span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          39 : bool Fdio::openDirectory( KitIoFileDirectory_T&amp; hdl, const char* dirName ) noexcept</span></span>

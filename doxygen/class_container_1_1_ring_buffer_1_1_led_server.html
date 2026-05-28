@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 300-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 308-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -75,9 +75,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af27b5ffd07eb37c344392612352ffd2e" id="r_af27b5ffd07eb37c344392612352ffd2e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af27b5ffd07eb37c344392612352ffd2e">LedServer</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;myMbox, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_container_1_1_ring_buffer_1_1_flash_code___t.html">FlashCode_T</a> &gt; &amp;flashCodeQueue)</td></tr>
-<tr class="memdesc:af27b5ffd07eb37c344392612352ffd2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:af27b5ffd07eb37c344392612352ffd2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18c26e83cd470af685c5ab9932606387" id="r_a18c26e83cd470af685c5ab9932606387"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18c26e83cd470af685c5ab9932606387">LedServer</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;myEventQueue, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_container_1_1_ring_buffer_1_1_flash_code___t.html">FlashCode_T</a> &gt; &amp;flashCodeQueue)</td></tr>
+<tr class="memdesc:a18c26e83cd470af685c5ab9932606387"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a18c26e83cd470af685c5ab9932606387"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14aa988679780770add5d8ee13882d98" id="r_a14aa988679780770add5d8ee13882d98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14aa988679780770add5d8ee13882d98">request</a> (<a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#af640fa7fab0512af28d722efc314690d">CloseMsg</a> &amp;msg) noexcept override</td></tr>
 <tr class="memdesc:a14aa988679780770add5d8ee13882d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close...">Kit::Itc::OpenCloseSync</a>.  <br /></td></tr>
 <tr class="separator:a14aa988679780770add5d8ee13882d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,8 +153,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>This concrete class monitors the a Queue of LED Flash codes and the consumes-and-executes the Flash codes from the Queue. </p>
 <p>This class is thread safe </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="af27b5ffd07eb37c344392612352ffd2e" name="af27b5ffd07eb37c344392612352ffd2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af27b5ffd07eb37c344392612352ffd2e">&#9670;&#160;</a></span>LedServer()</h2>
+<a id="a18c26e83cd470af685c5ab9932606387" name="a18c26e83cd470af685c5ab9932606387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18c26e83cd470af685c5ab9932606387">&#9670;&#160;</a></span>LedServer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,7 +165,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">Container::RingBuffer::LedServer::LedServer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>myMbox</em>, </span></td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>myEventQueue</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -380,7 +380,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 26 2026 18:55:51 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu May 28 2026 01:44:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

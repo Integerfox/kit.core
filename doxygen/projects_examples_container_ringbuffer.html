@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 300-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 308-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -47,7 +47,7 @@ $(function() {
 <div class="textblock"><p>Ring Buffer with change notifications when items are added-to and removed-from the buffer.</p>
 <p><a class="anchor" id="md__2home_2runner_2work_2kit_8core_2kit_8core_2projects_2examples_2_container_2_ring_buffer_2_r_e_a_d_m_e"></a> </p>
 <p>The example application contains a data producer (<code>Producer</code>) that adds elements (i.e LED Flash codes) to the <code>RingBufferMP</code> instance. A consumer class (<code>LedServer</code>) drains all elements when it receives change notification that the data has been added to the Ring Buffer. The drain elements/flash-codes are used to drive the board's debug LED.</p>
-<h1><a class="anchor" id="autotoc_md133"></a>
+<h1><a class="anchor" id="autotoc_md141"></a>
 Details, Constraints, Requirements</h1>
 <ul>
 <li>The Ring Buffer classes are type safe they can contain <b>any</b> data type, i.e. primitive C/C++ types and structs/classes.</li>
@@ -56,19 +56,19 @@ Details, Constraints, Requirements</h1>
 <li>The Ring Buffer holds copies of the data items, i.e. items a copied into/from the buffer.</li>
 <li>The 'basic' Ring Buffer is not thread safe. However there exists two thread safe version of the Ring Buffer. One - <code>RingBufferMT</code> is wrapper to basic RingBuffer class that uses mutexes for enforcing critical sections. The <code>RingBufferMP</code> class is very similar to <code>RingBufferMT</code> in that uses a mutex, however the <code>RingBufferMT</code> class adds thread-safe Model Point that maintains the contained items count. This MP is used to generate change notification when the buffer' items count changes.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md134"></a>
+<h1><a class="anchor" id="autotoc_md142"></a>
 Class Diagram</h1>
 <div class="image">
 <img src="classDiagram_examplescontainerringbuffer.png" alt=""/>
 <div class="caption">
 Transaction Example Class Diagram</div></div>
-    <h1><a class="anchor" id="autotoc_md135"></a>
+    <h1><a class="anchor" id="autotoc_md143"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="namespace_kit_1_1_container.html">Kit::Container namespace documentation</a></li>
 <li><a class="el" href="namespace_kit_1_1_dm.html">Kit::Dm namespace documentation</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md136"></a>
+<h1><a class="anchor" id="autotoc_md144"></a>
 Implementation</h1>
 <ul>
 <li>Root source directory: <a href="https://github.com/Integerfox/kit.core/blob/main/projects/examples/Container/RingBuffer">projects/examples/Container/RingBuffer</a></li>
@@ -83,7 +83,7 @@ Implementation</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 26 2026 18:55:51 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu May 28 2026 01:44:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

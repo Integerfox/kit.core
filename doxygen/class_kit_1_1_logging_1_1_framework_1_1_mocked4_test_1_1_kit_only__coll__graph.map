@@ -1,23 +1,25 @@
 <map id="Kit::Logging::Framework::Mocked4Test::KitOnly" name="Kit::Logging::Framework::Mocked4Test::KitOnly">
-<area shape="rect" id="Node000001" title="This concrete class implements the ILog interface, provides a concrete IApplication instance,..." alt="" coords="1568,87,1748,127"/>
+<area shape="rect" id="Node000001" title="This concrete class implements the ILog interface, provides a concrete IApplication instance,..." alt="" coords="1568,133,1748,173"/>
 <area shape="rect" id="Node000002" href="$class_kit_1_1_logging_1_1_framework_1_1_i_application.html" title="This abstract class defines a set of functionality that the Application is responsible for providing." alt="" coords="1188,5,1368,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1382,33,1462,45,1545,63,1609,84,1608,89,1543,68,1461,51,1382,39"/>
-<area shape="rect" id="Node000003" href="$struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html" title="Defines the content of the Log entry." alt="" coords="631,75,811,115"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="825,93,1568,103,1568,108,825,99"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_container_1_1_ring_buffer_allocate.html" title=" " alt="" coords="1131,133,1425,217"/>
-<area shape="poly" id="edge8_Node000006_Node000003" title=" " alt="" coords="826,113,839,115,973,131,1107,145,1131,149,1130,154,1106,151,972,136,838,120,825,118"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_logging_1_1_pkg_1_1_package.html" title="This concrete class implements the Logging Package interface for the Kit Logging Package." alt="" coords="1209,253,1347,293"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="1360,248,1424,226,1534,173,1622,124,1624,129,1536,178,1426,230,1361,254"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_logging_1_1_framework_1_1_i_package.html" title="This abstract class defines a set of functionality that a Package is responsible for providing." alt="" coords="631,265,811,305"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="825,280,1208,272,1208,277,825,286"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1439,143,1567,120,1568,125,1440,148"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="417,143,604,183"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="618,162,1130,170,1130,175,618,167"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="5,179,157,205"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="171,183,417,166,417,172,171,189"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="207,200,393,240"/>
-<area shape="poly" id="edge11_Node000010_Node000008" title=" " alt="" coords="171,201,207,205,206,211,171,206"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_ring_buffer_allocate.html" title="This template class extends the RingBuffer class by statically allocating memory for the ring buffer." alt="" coords="628,200,815,240"/>
-<area shape="poly" id="edge9_Node000006_Node000009" title=" " alt="" coords="829,236,892,243,962,247,1035,246,1106,237,1146,228,1185,214,1186,219,1147,233,1107,243,1035,251,962,252,892,248,828,241"/>
-<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="407,217,628,217,628,223,407,223"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1382,43,1426,55,1529,93,1616,131,1613,136,1527,98,1425,60,1380,48"/>
+<area shape="rect" id="Node000003" href="$struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html" title="Defines the content of the Log entry." alt="" coords="631,139,811,179"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="825,165,1097,180,1261,182,1425,177,1568,163,1568,169,1426,183,1261,187,1097,185,825,170"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_ring_buffer_allocate.html" title=" " alt="" coords="1131,70,1425,154"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="825,150,1106,129,1130,127,1131,132,1107,135,825,156"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_persistence_1_1_record_1_1_i_payload.html" title="This abstract class defines the interface accessing the data payload of an individual Record instance..." alt="" coords="212,139,388,179"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="402,156,631,156,631,161,402,161"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_logging_1_1_pkg_1_1_package.html" title="This concrete class implements the Logging Package interface for the Kit Logging Package." alt="" coords="1209,241,1347,281"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="1361,257,1450,248,1498,238,1543,224,1591,200,1631,171,1634,176,1594,204,1545,229,1499,243,1451,253,1362,263"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_logging_1_1_framework_1_1_i_package.html" title="This abstract class defines a set of functionality that a Package is responsible for providing." alt="" coords="631,241,811,281"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="825,259,1208,259,1208,264,825,264"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1440,127,1568,141,1567,146,1439,132"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="417,7,604,47"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="618,12,722,6,845,6,977,16,1043,27,1108,41,1120,48,1132,55,1161,68,1159,72,1129,60,1118,52,1106,47,1042,32,977,21,845,11,722,11,618,18"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="5,46,157,71"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="171,49,417,31,417,36,171,55"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="207,68,393,108"/>
+<area shape="poly" id="edge12_Node000011_Node000009" title=" " alt="" coords="171,68,207,73,206,78,171,73"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_container_1_1_ring_buffer_allocate.html" title="This template class extends the RingBuffer class by statically allocating memory for the ring buffer." alt="" coords="628,69,815,109"/>
+<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="829,99,839,100,989,107,1131,110,1130,115,989,112,839,105,828,105"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="407,86,628,86,628,92,407,91"/>
 </map>

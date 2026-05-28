@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td class="headerValue">2026-05-28 01:49:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -101,7 +101,7 @@
 <span id="L39"><span class="lineNum">      39</span>                 :             :     log buffer and discards the entries.  A child class is required to provide</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :     a meaningful implementation of the dispatchLogEntry() method.</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : </span>
-<span id="L42"><span class="lineNum">      42</span>                 :             :     FYI: The Kit::Persistent framework provides an alternate 'log sink' that</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :     FYI: The Kit::Persistence framework provides an alternate 'log sink' that</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :          writes log entries to Non-volatile storage along with an a API to</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :          retrieve the log entries.</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :  */</span>
@@ -109,7 +109,7 @@
 <span id="L47"><span class="lineNum">      47</span>                 :             : {</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : public:</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     /// Constructor</span>
-<span id="L50"><span class="lineNum">      50</span>                 :             :     LogSink( Kit::EventQueue::IQueue&amp;                                            myMbox,</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     LogSink( Kit::EventQueue::IQueue&amp;                                            myEventQueue,</span>
 <span id="L51"><span class="lineNum">      51</span>                 :             :              Kit::Container::RingBufferMP&lt;Kit::Logging::Framework::EntryData_T&gt;&amp; incomingEntriesBuffer ) noexcept;</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : </span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : public:</span>

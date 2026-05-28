@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 300-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 308-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -62,7 +62,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer__inherit__graph.svg" width="1430" height="670"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer__inherit__graph.svg" width="1430" height="808"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::RingBuffer&lt; ITEM &gt;:</div>
@@ -74,9 +74,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aeae33a075bbf6ed87fbb3b16993d84ea" id="r_aeae33a075bbf6ed87fbb3b16993d84ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeae33a075bbf6ed87fbb3b16993d84ea">RingBuffer</a> (ITEM *memoryBuffer, unsigned N, bool initializeMemory=true)</td></tr>
-<tr class="memdesc:aeae33a075bbf6ed87fbb3b16993d84ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:aeae33a075bbf6ed87fbb3b16993d84ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a1323072b012ff06f814d12bdccd07a" id="r_a0a1323072b012ff06f814d12bdccd07a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a1323072b012ff06f814d12bdccd07a">RingBuffer</a> (ITEM *memoryBuffer, unsigned N, bool initializeMemory=false) noexcept</td></tr>
+<tr class="memdesc:a0a1323072b012ff06f814d12bdccd07a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a0a1323072b012ff06f814d12bdccd07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0913afa137fe3a705cd0502da49f566f" id="r_a0913afa137fe3a705cd0502da49f566f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0913afa137fe3a705cd0502da49f566f">add</a> (const ITEM &amp;item) noexcept</td></tr>
 <tr class="memdesc:a0913afa137fe3a705cd0502da49f566f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds new item to the ring buffer.  <br /></td></tr>
 <tr class="separator:a0913afa137fe3a705cd0502da49f566f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,10 +113,11 @@ Protected Attributes</h2></td></tr>
 class Kit::Container::RingBuffer&lt; ITEM &gt;</div><p>This template class implements a Ring Buffer. </p>
 <p>A Ring Buffer instance IS ISR/Thread safe WHEN using a SINGLE Producer and SINGLE consumer of the buffer. See the RingBufferBaseType class for additional details.</p>
 <p>There is a set of methods that allow the application direct memory access - AS A LINEAR BUFFER - to a subset of the ring buffer's data. At any given time the size of the linear buffer is restricted to the amount of data that can be accessed without 'wrapping' the ring buffer memory space. The intended use case for these methods is for bulk copy operations (e.g populating a FIFO or a DMA buffer). <a class="el" href="#ac6195ff563fcfa4a2da0606537fad5a7" title="This method returns a pointer to the next item to be removed.">peekNextRemoveItems()</a> <a class="el" href="#a9ebc7a150c49b7a143f6514341bf718c" title="This method &#39;removes&#39; N elements - that were removed using the pointer returned from peekNextRemoveIt...">removeElements()</a> <a class="el" href="#a2f6ff50c037a35cb45d8f372f15861e8" title="This method returns a pointer to the next item to be added.">peekNextAddItems()</a> <a class="el" href="#a8a7f18891f2177ecd2fb76ff1b82a67d" title="This method &#39;adds&#39; N elements - that were populated using the pointer returned from peekNextAddItems ...">addElements()</a></p>
+<p>NOTE: The default behavior of the <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer.">RingBuffer</a> is to initialize the memory buffer to all zeros. When the 'ITEM' type is a class type (i.e. not struct or primitive type) then the 'initializeMemory' constructor flag MUST be set to false - so as to not overwrite the vtable pointer of the class instance.</p>
 <p>Template Args: ITEM:= <a class="el" href="namespace_kit_1_1_type.html" title="The Type namespace provides various types that are not unique to a single namespace.">Type</a> of the data stored in the Ring Buffer </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aeae33a075bbf6ed87fbb3b16993d84ea" name="aeae33a075bbf6ed87fbb3b16993d84ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeae33a075bbf6ed87fbb3b16993d84ea">&#9670;&#160;</a></span>RingBuffer()</h2>
+<a id="a0a1323072b012ff06f814d12bdccd07a" name="a0a1323072b012ff06f814d12bdccd07a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a1323072b012ff06f814d12bdccd07a">&#9670;&#160;</a></span>RingBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -139,12 +140,12 @@ template&lt;class ITEM &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>initializeMemory</em><span class="paramdefsep"> = </span><span class="paramdefval">true</span></span>&#160;)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>initializeMemory</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -216,7 +217,7 @@ template&lt;class ITEM &gt; </div>
 <p>'numElementsAdded' be less than or equal to the 'dstNumFlatElements' returned from <a class="el" href="#a2f6ff50c037a35cb45d8f372f15861e8" title="This method returns a pointer to the next item to be added.">peekNextAddItems()</a>.</p>
 <p>CAUTION: IF YOU DON'T UNDERSTAND THE USE CASE FOR THIS METHOD - THEN DON'T USE IT. If this method is used improperly, it WILL CORRUPT the Ring Buffer! </p>
 
-<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a34cbb53deb4fe4770712fd92f04be77c">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; ENTRY &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a84bbb00c0e7de0b321d72c4cbd5738de">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a34cbb53deb4fe4770712fd92f04be77c">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -281,7 +282,7 @@ template&lt;class ITEM &gt; </div>
 <p>In addition it returns the number of elements that can be added as linear/flat buffer (i.e. without wrapping around raw buffer memory)</p>
 <p>If the Ring buffer is full, a null pointer is returned </p>
 
-<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#af8e6b2940d390a51d1aa571aa9069687">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; ENTRY &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a208fb873300673b8b50da6f012ae549c">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#af8e6b2940d390a51d1aa571aa9069687">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -314,7 +315,7 @@ template&lt;class ITEM &gt; </div>
 <p>In addition it returns the number of elements that can be removed as linear/flat buffer (i.e. without wrapping around raw buffer memory)</p>
 <p>If the Ring buffer is empty, a null pointer is returned </p>
 
-<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a58feef76fc26a4526cb93858f585dfa0">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; ENTRY &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a99e04c80929e2fb80d0caa1d9e4ee0d0">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#a58feef76fc26a4526cb93858f585dfa0">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -412,7 +413,7 @@ template&lt;class ITEM &gt; </div>
 <p>'numElementsToRemove' be less than or equal to the 'dstNumFlatElements' returned from <a class="el" href="#ac6195ff563fcfa4a2da0606537fad5a7" title="This method returns a pointer to the next item to be removed.">peekNextRemoveItems()</a>.</p>
 <p>CAUTION: IF YOU DON'T UNDERSTAND THE USE CASE FOR THIS METHOD - THEN DON'T USE IT. If this method is used improperly, it WILL CORRUPT the Ring Buffer! </p>
 
-<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#af4b49f9a9389109607dbbed7544095d1">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
+<p>Reimplemented in <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; ITEM &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; Container::RingBuffer::FlashCode_T &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; ENTRY &gt;</a>, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#a54af0f5fb2a2c8833bf3cd5e29578a9c">Kit::Container::RingBufferMP&lt; Kit::Logging::Framework::EntryData_T &gt;</a>, and <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_t.html#af4b49f9a9389109607dbbed7544095d1">Kit::Container::RingBufferMT&lt; ITEM &gt;</a>.</p>
 
 </div>
 </div>
@@ -449,7 +450,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 26 2026 18:55:51 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu May 28 2026 01:44:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

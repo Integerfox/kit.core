@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td class="headerValue">2026-05-28 01:49:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -84,7 +84,7 @@
 <span id="L22"><span class="lineNum">      22</span>                 :             : /** This class provides an implementation for the 16 Bit wide</span>
 <span id="L23"><span class="lineNum">      23</span>                 :             :     Fletcher Checksum</span>
 <span id="L24"><span class="lineNum">      24</span>                 :             :  */</span>
-<span id="L25"><span class="lineNum">      25</span>                 :             : class Fletcher16 : public IEdc</span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC tlaBgGNC">          15 : class Fletcher16 : public IEdc</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : {</span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : public:</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :     /// Constructor</span>
@@ -105,7 +105,7 @@
 <span id="L43"><span class="lineNum">      43</span>                 :             :     bool isOkay( void ) noexcept override;</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : </span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     /// See Kit::Checksum::IEdc</span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC tlaBgGNC">           2 :     unsigned getEdcSize() const noexcept override { return sizeof( m_sum1 ) + sizeof( m_sum2 ); }</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">          70 :     unsigned getEdcSize() const noexcept override { return sizeof( m_sum1 ) + sizeof( m_sum2 ); }</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : protected:</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     /// current sum</span>

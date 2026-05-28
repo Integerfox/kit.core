@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td class="headerValue">2026-05-28 01:49:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.7&nbsp;%</td>
@@ -2046,12 +2046,12 @@
 <span id="L1975"><span class="lineNum">    1975</span>                 :             :     template &lt;typename T&gt;</span>
 <span id="L1976"><span class="lineNum">    1976</span>                 :             :     typename enable_if&lt;is_unsigned&lt;T&gt;::value&gt;::type setInteger( T value ) {</span>
 <span id="L1977"><span class="lineNum">    1977</span>                 :             :         setType( VALUE_IS_UNSIGNED_INTEGER );</span>
-<span id="L1978"><span class="lineNum">    1978</span>                 :<span class="tlaGNC tlaBgGNC">          79 :         content_.asUnsignedInteger = static_cast&lt;JsonUInt&gt;(value);</span></span>
+<span id="L1978"><span class="lineNum">    1978</span>                 :<span class="tlaGNC tlaBgGNC">          78 :         content_.asUnsignedInteger = static_cast&lt;JsonUInt&gt;(value);</span></span>
 <span id="L1979"><span class="lineNum">    1979</span>                 :<span class="tlaGNC">          38 :     }</span></span>
 <span id="L1980"><span class="lineNum">    1980</span>                 :             :     template &lt;typename T&gt;</span>
 <span id="L1981"><span class="lineNum">    1981</span>                 :             :     typename enable_if&lt;is_signed&lt;T&gt;::value&gt;::type setInteger( T value ) {</span>
 <span id="L1982"><span class="lineNum">    1982</span>                 :             :         setType( VALUE_IS_SIGNED_INTEGER );</span>
-<span id="L1983"><span class="lineNum">    1983</span>                 :<span class="tlaGNC">           4 :         content_.asSignedInteger = value;</span></span>
+<span id="L1983"><span class="lineNum">    1983</span>                 :<span class="tlaGNC">           5 :         content_.asSignedInteger = value;</span></span>
 <span id="L1984"><span class="lineNum">    1984</span>                 :<span class="tlaGNC">           4 :     }</span></span>
 <span id="L1985"><span class="lineNum">    1985</span>                 :             :     void setNull() {</span>
 <span id="L1986"><span class="lineNum">    1986</span>                 :             :         setType( VALUE_IS_NULL );</span>

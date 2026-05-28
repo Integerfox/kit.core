@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td class="headerValue">2026-05-28 01:49:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">92.9&nbsp;%</td>
@@ -77,10 +77,10 @@
 <span id="L15"><span class="lineNum">      15</span>                 :             : using namespace Kit::Logging::Framework;</span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : </span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : //////////////////////////////</span>
-<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC tlaBgGNC">           3 : LogSink::LogSink( Kit::EventQueue::IQueue&amp;                                            myMbox,</span></span>
+<span id="L18"><span class="lineNum">      18</span>                 :<span class="tlaGNC tlaBgGNC">           3 : LogSink::LogSink( Kit::EventQueue::IQueue&amp;                                            myEventQueue,</span></span>
 <span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC">           3 :                   Kit::Container::RingBufferMP&lt;Kit::Logging::Framework::EntryData_T&gt;&amp; incomingEntriesBuffer ) noexcept</span></span>
-<span id="L20"><span class="lineNum">      20</span>                 :             :     : Kit::Itc::OpenCloseSync( myMbox )</span>
-<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">           3 :     , m_obElementCount( myMbox )</span></span>
+<span id="L20"><span class="lineNum">      20</span>                 :             :     : Kit::Itc::OpenCloseSync( myEventQueue )</span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">           3 :     , m_obElementCount( myEventQueue )</span></span>
 <span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">           3 :     , m_logBuffer( incomingEntriesBuffer )</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">           3 :     , m_opened( false )</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : {</span>

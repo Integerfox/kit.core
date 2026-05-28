@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td class="headerValue">2026-05-28 01:49:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -362,37 +362,37 @@
 <span id="L300"><span class="lineNum">     300</span>                 :             : </span>
 <span id="L301"><span class="lineNum">     301</span>                 :             : </span>
 <span id="L302"><span class="lineNum">     302</span>                 :             : ///////////////////////////////////////</span>
-<span id="L303"><span class="lineNum">     303</span>                 :<span class="tlaGNC tlaBgGNC">           1 : Crc32EthernetFast::Crc32EthernetFast() noexcept</span></span>
+<span id="L303"><span class="lineNum">     303</span>                 :<span class="tlaGNC tlaBgGNC">           3 : Crc32EthernetFast::Crc32EthernetFast() noexcept</span></span>
 <span id="L304"><span class="lineNum">     304</span>                 :             : {</span>
 <span id="L305"><span class="lineNum">     305</span>                 :             :     reset();</span>
-<span id="L306"><span class="lineNum">     306</span>                 :<span class="tlaGNC">           1 : }</span></span>
+<span id="L306"><span class="lineNum">     306</span>                 :<span class="tlaGNC">           3 : }</span></span>
 <span id="L307"><span class="lineNum">     307</span>                 :             : </span>
-<span id="L308"><span class="lineNum">     308</span>                 :<span class="tlaGNC">           3 : void Crc32EthernetFast::reset( void ) noexcept</span></span>
+<span id="L308"><span class="lineNum">     308</span>                 :<span class="tlaGNC">          18 : void Crc32EthernetFast::reset( void ) noexcept</span></span>
 <span id="L309"><span class="lineNum">     309</span>                 :             : {</span>
-<span id="L310"><span class="lineNum">     310</span>                 :<span class="tlaGNC">           4 :     m_crc = ~0;</span></span>
-<span id="L311"><span class="lineNum">     311</span>                 :<span class="tlaGNC">           3 : }</span></span>
+<span id="L310"><span class="lineNum">     310</span>                 :<span class="tlaGNC">          21 :     m_crc = ~0;</span></span>
+<span id="L311"><span class="lineNum">     311</span>                 :<span class="tlaGNC">          18 : }</span></span>
 <span id="L312"><span class="lineNum">     312</span>                 :             : </span>
 <span id="L313"><span class="lineNum">     313</span>                 :             : </span>
 <span id="L314"><span class="lineNum">     314</span>                 :             : ///////////////////////////////////////</span>
-<span id="L315"><span class="lineNum">     315</span>                 :<span class="tlaGNC">           6 : void Crc32EthernetFast::accumulate( const void* bytes, unsigned numbytes ) noexcept</span></span>
+<span id="L315"><span class="lineNum">     315</span>                 :<span class="tlaGNC">          38 : void Crc32EthernetFast::accumulate( const void* bytes, unsigned numbytes ) noexcept</span></span>
 <span id="L316"><span class="lineNum">     316</span>                 :             : {</span>
 <span id="L317"><span class="lineNum">     317</span>                 :             :     // Skip if no data or bad pointer</span>
-<span id="L318"><span class="lineNum">     318</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           6 :     if ( bytes == nullptr || numbytes == 0 )</span></span>
+<span id="L318"><span class="lineNum">     318</span>         [<span class="tlaGBC" title="Branch 0 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          38 :     if ( bytes == nullptr || numbytes == 0 )</span></span>
 <span id="L319"><span class="lineNum">     319</span>                 :             :     {</span>
 <span id="L320"><span class="lineNum">     320</span>                 :             :         return;</span>
 <span id="L321"><span class="lineNum">     321</span>                 :             :     }</span>
 <span id="L322"><span class="lineNum">     322</span>                 :             : </span>
 <span id="L323"><span class="lineNum">     323</span>                 :             :     auto* ptr = static_cast&lt;const uint8_t*&gt;( bytes );</span>
-<span id="L324"><span class="lineNum">     324</span>         [<span class="tlaGBC" title="Branch 0 was taken 31 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">          35 :     for ( unsigned i = 0; i &lt; numbytes; i++, ptr++ )</span></span>
+<span id="L324"><span class="lineNum">     324</span>         [<span class="tlaGBC" title="Branch 0 was taken 231 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 36 times"> + </span>]:<span class="tlaGNC">         267 :     for ( unsigned i = 0; i &lt; numbytes; i++, ptr++ )</span></span>
 <span id="L325"><span class="lineNum">     325</span>                 :             :     {</span>
-<span id="L326"><span class="lineNum">     326</span>                 :<span class="tlaGNC">          31 :         uint8_t temp = *ptr ^ ( m_crc &gt;&gt; ( 24 ) );</span></span>
-<span id="L327"><span class="lineNum">     327</span>                 :<span class="tlaGNC">          31 :         m_crc        = table_[temp] ^ ( m_crc &lt;&lt; 8 );</span></span>
+<span id="L326"><span class="lineNum">     326</span>                 :<span class="tlaGNC">         231 :         uint8_t temp = *ptr ^ ( m_crc &gt;&gt; ( 24 ) );</span></span>
+<span id="L327"><span class="lineNum">     327</span>                 :<span class="tlaGNC">         231 :         m_crc        = table_[temp] ^ ( m_crc &lt;&lt; 8 );</span></span>
 <span id="L328"><span class="lineNum">     328</span>                 :             :     }</span>
 <span id="L329"><span class="lineNum">     329</span>                 :             : }</span>
 <span id="L330"><span class="lineNum">     330</span>                 :             : </span>
-<span id="L331"><span class="lineNum">     331</span>                 :<span class="tlaGNC">           4 : bool Crc32EthernetFast::finalize( void* destBuffer, unsigned destBufferSize ) noexcept</span></span>
+<span id="L331"><span class="lineNum">     331</span>                 :<span class="tlaGNC">          10 : bool Crc32EthernetFast::finalize( void* destBuffer, unsigned destBufferSize ) noexcept</span></span>
 <span id="L332"><span class="lineNum">     332</span>                 :             : {</span>
-<span id="L333"><span class="lineNum">     333</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           4 :     if ( destBuffer == nullptr || destBufferSize &lt; sizeof( m_crc ) )</span></span>
+<span id="L333"><span class="lineNum">     333</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          10 :     if ( destBuffer == nullptr || destBufferSize &lt; sizeof( m_crc ) )</span></span>
 <span id="L334"><span class="lineNum">     334</span>                 :             :     {</span>
 <span id="L335"><span class="lineNum">     335</span>                 :             :         return false;</span>
 <span id="L336"><span class="lineNum">     336</span>                 :             :     }</span>
@@ -400,18 +400,18 @@
 <span id="L338"><span class="lineNum">     338</span>                 :             :     auto* ptr = static_cast&lt;uint8_t*&gt;( destBuffer );</span>
 <span id="L339"><span class="lineNum">     339</span>                 :             :     if ( ptr )</span>
 <span id="L340"><span class="lineNum">     340</span>                 :             :     {</span>
-<span id="L341"><span class="lineNum">     341</span>                 :<span class="tlaGNC">           2 :         *ptr++ = ( m_crc &gt;&gt; 24 ) &amp; 0xFF;</span></span>
-<span id="L342"><span class="lineNum">     342</span>                 :<span class="tlaGNC">           2 :         *ptr++ = ( m_crc &gt;&gt; 16 ) &amp; 0xFF;</span></span>
-<span id="L343"><span class="lineNum">     343</span>                 :<span class="tlaGNC">           2 :         *ptr++ = ( m_crc &gt;&gt; 8 ) &amp; 0xFF;</span></span>
-<span id="L344"><span class="lineNum">     344</span>                 :<span class="tlaGNC">           2 :         *ptr   = m_crc &amp; 0xFF;</span></span>
+<span id="L341"><span class="lineNum">     341</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( m_crc &gt;&gt; 24 ) &amp; 0xFF;</span></span>
+<span id="L342"><span class="lineNum">     342</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( m_crc &gt;&gt; 16 ) &amp; 0xFF;</span></span>
+<span id="L343"><span class="lineNum">     343</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( m_crc &gt;&gt; 8 ) &amp; 0xFF;</span></span>
+<span id="L344"><span class="lineNum">     344</span>                 :<span class="tlaGNC">           8 :         *ptr   = m_crc &amp; 0xFF;</span></span>
 <span id="L345"><span class="lineNum">     345</span>                 :             :     }</span>
 <span id="L346"><span class="lineNum">     346</span>                 :             : </span>
-<span id="L347"><span class="lineNum">     347</span>                 :<span class="tlaGNC">           2 :     return true;</span></span>
+<span id="L347"><span class="lineNum">     347</span>                 :<span class="tlaGNC">           8 :     return true;</span></span>
 <span id="L348"><span class="lineNum">     348</span>                 :             : }</span>
 <span id="L349"><span class="lineNum">     349</span>                 :             : </span>
-<span id="L350"><span class="lineNum">     350</span>                 :<span class="tlaGNC">           1 : bool Crc32EthernetFast::isOkay( void ) noexcept</span></span>
+<span id="L350"><span class="lineNum">     350</span>                 :<span class="tlaGNC">           7 : bool Crc32EthernetFast::isOkay( void ) noexcept</span></span>
 <span id="L351"><span class="lineNum">     351</span>                 :             : {</span>
-<span id="L352"><span class="lineNum">     352</span>                 :<span class="tlaGNC">           1 :     return m_crc == 0;</span></span>
+<span id="L352"><span class="lineNum">     352</span>                 :<span class="tlaGNC">           7 :     return m_crc == 0;</span></span>
 <span id="L353"><span class="lineNum">     353</span>                 :             : }</span>
 <span id="L354"><span class="lineNum">     354</span>                 :             : </span>
 <span id="L355"><span class="lineNum">     355</span>                 :             : }  // end namespace</span>

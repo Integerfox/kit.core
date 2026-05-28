@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 300-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 308-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -76,9 +76,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab2a29cd1a9e9a0276b9c1f1091b811a5" id="r_ab2a29cd1a9e9a0276b9c1f1091b811a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2a29cd1a9e9a0276b9c1f1091b811a5">Producer</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;myMbox, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_container_1_1_ring_buffer_1_1_flash_code___t.html">FlashCode_T</a> &gt; &amp;flashCodeQueue, unsigned maxRefills=UINT_MAX)</td></tr>
-<tr class="memdesc:ab2a29cd1a9e9a0276b9c1f1091b811a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:ab2a29cd1a9e9a0276b9c1f1091b811a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a565f3738f17505bf780a3557cc7c53b3" id="r_a565f3738f17505bf780a3557cc7c53b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a565f3738f17505bf780a3557cc7c53b3">Producer</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;myEventQueue, <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; <a class="el" href="struct_container_1_1_ring_buffer_1_1_flash_code___t.html">FlashCode_T</a> &gt; &amp;flashCodeQueue, unsigned maxRefills=UINT_MAX)</td></tr>
+<tr class="memdesc:a565f3738f17505bf780a3557cc7c53b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:a565f3738f17505bf780a3557cc7c53b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13856e2e55f033797a9183b6765537d8" id="r_a13856e2e55f033797a9183b6765537d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13856e2e55f033797a9183b6765537d8">request</a> (<a class="el" href="class_kit_1_1_itc_1_1_i_close_request.html#af640fa7fab0512af28d722efc314690d">CloseMsg</a> &amp;msg) noexcept override</td></tr>
 <tr class="memdesc:a13856e2e55f033797a9183b6765537d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close...">Kit::Itc::OpenCloseSync</a>.  <br /></td></tr>
 <tr class="separator:a13856e2e55f033797a9183b6765537d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,8 +166,8 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>This concrete class is responsible for generating flash codes (i.e. </p>
 <p>adding to the Flash Code RingBuffer. The class fills the entire Ring Buffer and then waits for the Ring Buffer to be empty before repeating the fill process </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab2a29cd1a9e9a0276b9c1f1091b811a5" name="ab2a29cd1a9e9a0276b9c1f1091b811a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab2a29cd1a9e9a0276b9c1f1091b811a5">&#9670;&#160;</a></span>Producer()</h2>
+<a id="a565f3738f17505bf780a3557cc7c53b3" name="a565f3738f17505bf780a3557cc7c53b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a565f3738f17505bf780a3557cc7c53b3">&#9670;&#160;</a></span>Producer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,7 +178,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">Container::RingBuffer::Producer::Producer </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>myMbox</em>, </span></td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>myEventQueue</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -470,7 +470,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 26 2026 18:55:51 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu May 28 2026 01:44:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

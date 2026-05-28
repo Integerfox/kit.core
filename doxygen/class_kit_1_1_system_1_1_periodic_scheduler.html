@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 300-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 308-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -101,9 +101,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac92c6a338664aaf58a31b13ddcc3db85" id="r_ac92c6a338664aaf58a31b13ddcc3db85"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac92c6a338664aaf58a31b13ddcc3db85">PeriodicScheduler</a> (<a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html">Interval_T</a> intervals[], <a class="el" href="#a544f639d070093250b1ff4867cd4d263">Hook_T</a> beginThreadProcessing=nullptr, <a class="el" href="#a544f639d070093250b1ff4867cd4d263">Hook_T</a> endThreadProcessing=nullptr, <a class="el" href="#a0ccaea76fdd22612ea79cbb20dc53a4a">ReportSlippageFunc_T</a> slippageFunc=nullptr, <a class="el" href="#a26b87fb9f58e1fff08475ff59c829bea">NowFunc_T</a> nowFunc=<a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html#aa2b2b17065d3735b539458927f5dd6ac">ElapsedTime::millisecondsEx</a>) noexcept</td></tr>
-<tr class="memdesc:ac92c6a338664aaf58a31b13ddcc3db85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
-<tr class="separator:ac92c6a338664aaf58a31b13ddcc3db85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4da913d8d5b35a25fb69a6941cea2f1" id="r_ab4da913d8d5b35a25fb69a6941cea2f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab4da913d8d5b35a25fb69a6941cea2f1">PeriodicScheduler</a> (<a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html">Interval_T</a> intervals[], unsigned numIntervals, <a class="el" href="#a544f639d070093250b1ff4867cd4d263">Hook_T</a> beginThreadProcessing=nullptr, <a class="el" href="#a544f639d070093250b1ff4867cd4d263">Hook_T</a> endThreadProcessing=nullptr, <a class="el" href="#a0ccaea76fdd22612ea79cbb20dc53a4a">ReportSlippageFunc_T</a> slippageFunc=nullptr, <a class="el" href="#a26b87fb9f58e1fff08475ff59c829bea">NowFunc_T</a> nowFunc=<a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html#aa2b2b17065d3735b539458927f5dd6ac">ElapsedTime::millisecondsEx</a>) noexcept</td></tr>
+<tr class="memdesc:ab4da913d8d5b35a25fb69a6941cea2f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
+<tr class="separator:ab4da913d8d5b35a25fb69a6941cea2f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab35e7e5e928a287e33b65a4a3b191de2" id="r_ab35e7e5e928a287e33b65a4a3b191de2"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab35e7e5e928a287e33b65a4a3b191de2">~PeriodicScheduler</a> ()=default</td></tr>
 <tr class="memdesc:ab35e7e5e928a287e33b65a4a3b191de2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:ab35e7e5e928a287e33b65a4a3b191de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +140,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a1be060d65e26cebdb8186a59c1acc829" id="r_a1be060d65e26cebdb8186a59c1acc829"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a26b87fb9f58e1fff08475ff59c829bea">NowFunc_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1be060d65e26cebdb8186a59c1acc829">m_nowFunc</a></td></tr>
 <tr class="memdesc:a1be060d65e26cebdb8186a59c1acc829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current system callback.  <br /></td></tr>
 <tr class="separator:a1be060d65e26cebdb8186a59c1acc829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a886487d06678739b88cd3f45edaad043" id="r_a886487d06678739b88cd3f45edaad043"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a886487d06678739b88cd3f45edaad043">m_numIntervals</a></td></tr>
+<tr class="memdesc:a886487d06678739b88cd3f45edaad043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Intervals in the 'intervals' array.  <br /></td></tr>
+<tr class="separator:a886487d06678739b88cd3f45edaad043"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3be6988bad73c3ef1b7bbea7bf1e2c3" id="r_ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a0ccaea76fdd22612ea79cbb20dc53a4a">ReportSlippageFunc_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3be6988bad73c3ef1b7bbea7bf1e2c3">m_reportSlippage</a></td></tr>
 <tr class="memdesc:ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Report slippage method.  <br /></td></tr>
 <tr class="separator:ab3be6988bad73c3ef1b7bbea7bf1e2c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,8 +243,8 @@ currentInterval:=  10200 ms
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac92c6a338664aaf58a31b13ddcc3db85" name="ac92c6a338664aaf58a31b13ddcc3db85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac92c6a338664aaf58a31b13ddcc3db85">&#9670;&#160;</a></span>PeriodicScheduler()</h2>
+<a id="ab4da913d8d5b35a25fb69a6941cea2f1" name="ab4da913d8d5b35a25fb69a6941cea2f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4da913d8d5b35a25fb69a6941cea2f1">&#9670;&#160;</a></span>PeriodicScheduler()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,6 +256,11 @@ currentInterval:=  10200 ms
           <td class="memname">Kit::System::PeriodicScheduler::PeriodicScheduler </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html">Interval_T</a></td>          <td class="paramname"><span class="paramname"><em>intervals</em>[], </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned</td>          <td class="paramname"><span class="paramname"><em>numIntervals</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -283,7 +291,7 @@ currentInterval:=  10200 ms
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-<p>The application provides a variable length array of interval definitions that will be scheduled. The last entry in the array must contain a 'null' <a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html" title="Defines an interval.">Interval_T</a> definition (i.e. all fields set to zero). The Scheduler assumes that each <a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html" title="Defines an interval.">Interval_T</a> definition has a unique period time.</p>
+<p>The application provides a variable length array of interval definitions that will be scheduled. The Scheduler assumes that each <a class="el" href="struct_kit_1_1_system_1_1_periodic_scheduler_1_1_interval___t.html" title="Defines an interval.">Interval_T</a> definition has a unique period time.</p>
 <p>The individual 'intervals' MUST be initialized (either statically or by calling initializeInterval()) before creating the scheduler.</p>
 <p>Notes:</p><ul>
 <li>When extending a event based (i.e. inherits from <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a>) runnable object with scheduling, the Application should define all of the scheduled Intervals to have period times that are multiples of the <a class="el" href="class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread.">EventLoop</a>'s 'timeOutPeriodInMsec' constructor value. </li>
@@ -555,6 +563,30 @@ currentInterval:=  10200 ms
 
 </div>
 </div>
+<a id="a886487d06678739b88cd3f45edaad043" name="a886487d06678739b88cd3f45edaad043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a886487d06678739b88cd3f45edaad043">&#9670;&#160;</a></span>m_numIntervals</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Kit::System::PeriodicScheduler::m_numIntervals</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of Intervals in the 'intervals' array. </p>
+
+</div>
+</div>
 <a id="ab3be6988bad73c3ef1b7bbea7bf1e2c3" name="ab3be6988bad73c3ef1b7bbea7bf1e2c3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3be6988bad73c3ef1b7bbea7bf1e2c3">&#9670;&#160;</a></span>m_reportSlippage</h2>
 
@@ -585,7 +617,7 @@ currentInterval:=  10200 ms
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 26 2026 18:55:51 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu May 28 2026 01:44:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

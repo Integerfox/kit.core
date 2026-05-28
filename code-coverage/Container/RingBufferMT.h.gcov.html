@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 19:00:39</td>
+            <td class="headerValue">2026-05-28 01:49:24</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -91,7 +91,7 @@
 <span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : public:</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     /// Constructor</span>
-<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">           5 :     RingBufferMT( ITEM* memoryBuffer, unsigned N, bool initializeMemory = true )</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">           5 :     RingBufferMT( ITEM* memoryBuffer, unsigned N, bool initializeMemory = false ) noexcept</span></span>
 <span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">           5 :         : RingBuffer&lt;ITEM&gt;( memoryBuffer, N, initializeMemory )</span></span>
 <span id="L34"><span class="lineNum">      34</span>                 :             :     {</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     }</span>
