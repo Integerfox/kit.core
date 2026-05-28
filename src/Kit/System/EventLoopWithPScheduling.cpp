@@ -17,6 +17,7 @@ namespace System {
 
 ///////////////////////
 EventLoopWithPScheduling::EventLoopWithPScheduling( Interval_T                         intervals[],
+                                                    unsigned                           numIntervals,
                                                     Hook_T                             beginThreadProcessing,
                                                     Hook_T                             endThreadProcessing,
                                                     ReportSlippageFunc_T               slippageFunc,
@@ -26,7 +27,7 @@ EventLoopWithPScheduling::EventLoopWithPScheduling( Interval_T                  
                                                     Kit::Container::SList<IEventFlag>* eventFlagsList,
                                                     IWatchedEventLoop*                 watchdog ) noexcept
     : EventLoop( timeOutPeriodInMsec, eventFlagsList, watchdog )
-    , PeriodicScheduler( intervals, beginThreadProcessing, endThreadProcessing, slippageFunc, nowFunc )
+    , PeriodicScheduler( intervals, numIntervals, beginThreadProcessing, endThreadProcessing, slippageFunc, nowFunc )
     , m_idleFunc( idleFunc )
 {
 }

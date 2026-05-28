@@ -43,11 +43,11 @@ class Server : public RateSync, public Kit::System::Timer, public Kit::Itc::Open
 {
 public:
     /// Constructor
-    Server( Kit::EventQueue::IQueue& myMbox,
+    Server( Kit::EventQueue::IQueue& myEventQueue,
             uint32_t                 initialFlashRateMs = 500 ) noexcept  // default to 1Hz
-        : RateSync( myMbox )
-        , Timer( myMbox )
-        , Kit::Itc::OpenCloseSync( myMbox )
+        : RateSync( myEventQueue )
+        , Timer( myEventQueue )
+        , Kit::Itc::OpenCloseSync( myEventQueue )
         , m_flashRateMs( initialFlashRateMs )
         , m_opened( false )
     {
@@ -131,7 +131,7 @@ public:
         uint32_t elapsed      = Kit::System::ElapsedTime::deltaMilliseconds( m_timeMarker, now );
         if ( elapsed >= m_flashRateMs )
         {
-            nextDuration = m_flashRateMs - (elapsed - m_flashRateMs);
+            nextDuration = m_flashRateMs - ( elapsed - m_flashRateMs );
         }
         Timer::start( nextDuration );
         m_timeMarker = now;

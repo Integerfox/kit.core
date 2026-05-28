@@ -25,6 +25,12 @@ namespace Container {
     give the RingBuffer change notification semantics with elements are added
     or removed.
 
+    NOTE: The default behavior of the RingBuffer is to initialize the memory 
+          buffer to all zeros. When the 'ITEM' type is a class type (i.e. not
+          struct or primitive type) then the 'initializeMemory' constructor flag
+          MUST be set to false - so as to not overwrite the vtable pointer of
+          the class instance.
+
     Template Args:
         ITEM:=      Type of the data stored in the Ring Buffer
  */
@@ -33,7 +39,7 @@ class RingBufferMP : public RingBuffer<ITEM>
 {
 public:
     /// Constructor
-    RingBufferMP( Kit::Dm::Mp::Uint32& mpElementCount, ITEM* memoryBuffer, unsigned N, bool initializeMemory = true )
+    RingBufferMP( Kit::Dm::Mp::Uint32& mpElementCount, ITEM* memoryBuffer, unsigned N, bool initializeMemory = false ) noexcept
         : RingBuffer<ITEM>( memoryBuffer, N, initializeMemory )
         , m_mpElementCount( mpElementCount )
     {

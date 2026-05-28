@@ -34,12 +34,12 @@ class Producer : public Kit::Itc::OpenCloseSync
 {
 public:
     /// Constructor
-    Producer( Kit::EventQueue::IQueue&                   myMbox,
+    Producer( Kit::EventQueue::IQueue&                   myEventQueue,
               Kit::Container::RingBufferMP<FlashCode_T>& flashCodeQueue,
               unsigned                                   maxRefills = UINT_MAX )
-        : Kit::Itc::OpenCloseSync( myMbox )
+        : Kit::Itc::OpenCloseSync( myEventQueue )
         , m_flashCodeQueue( flashCodeQueue )
-        , m_obFlashCodeQueue( myMbox )
+        , m_obFlashCodeQueue( myEventQueue )
         , m_maxRefills( maxRefills )
         , m_opened( false )
     {

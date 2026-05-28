@@ -17,6 +17,7 @@ namespace Kit {
 namespace System {
 
 PeriodicScheduler::PeriodicScheduler( Interval_T           intervals[],
+                                      unsigned             numIntervals,
                                       Hook_T               beginThreadProcessing,
                                       Hook_T               endThreadProcessing,
                                       ReportSlippageFunc_T slippageFunc,
@@ -26,6 +27,7 @@ PeriodicScheduler::PeriodicScheduler( Interval_T           intervals[],
     , m_nowFunc( nowFunc )
     , m_beginThreadFunc( beginThreadProcessing )
     , m_endThreadFunc( endThreadProcessing )
+    , m_numIntervals( numIntervals )
     , m_firstExecution( true )
 {
     KIT_SYSTEM_ASSERT( intervals );
@@ -52,10 +54,9 @@ void PeriodicScheduler::endLoop() noexcept
 bool PeriodicScheduler::executeScheduler() noexcept
 {
     bool        atLeastOne = false;
-    Interval_T* interval   = m_intervals;
 
     // Scan all intervals
-    while ( interval && interval->callbackFunc != 0 )
+    for ( unsigned i = 0; i < m_numIntervals; i++ )
     {
         // Get the current time
         uint64_t currentTick = (m_nowFunc)();
@@ -63,33 +64,30 @@ bool PeriodicScheduler::executeScheduler() noexcept
         // Initialize the interval (but only once)
         if ( m_firstExecution )
         {
-            setTimeMarker( *interval, currentTick );
+            setTimeMarker( m_intervals[i], currentTick );
         }
 
         // Has the interval expired?
-        if ( ElapsedTime::expiredMillisecondsEx( interval->timeMarker, interval->duration, currentTick ) )
+        if ( ElapsedTime::expiredMillisecondsEx( m_intervals[i].timeMarker, m_intervals[i].duration, currentTick ) )
         {
             atLeastOne            = true;
-            interval->timeMarker += interval->duration;
-            ( interval->callbackFunc )( currentTick, interval->timeMarker, interval->context );
+            m_intervals[i].timeMarker += m_intervals[i].duration;
+            ( m_intervals[i].callbackFunc )( currentTick, m_intervals[i].timeMarker, m_intervals[i].context );
 
             // Check for slippage
-            if ( ElapsedTime::expiredMillisecondsEx( interval->timeMarker, interval->duration, currentTick ) )
+            if ( ElapsedTime::expiredMillisecondsEx( m_intervals[i].timeMarker, m_intervals[i].duration, currentTick ) )
             {
                 // Report the slippage to the application
                 if ( m_reportSlippage )
                 {
-                    ( m_reportSlippage )( *interval, currentTick, interval->timeMarker );
+                    ( m_reportSlippage )( m_intervals[i], currentTick, m_intervals[i].timeMarker );
                 }
 
                 // Re-sync the most recent past interval boundary based on the actual time.
                 // Note: This operation only has a 'effect' if the slipped time is greater than 2 duration times
-                setTimeMarker( *interval, currentTick );
+                setTimeMarker( m_intervals[i], currentTick );
             }
         }
-
-        // Get the next interval
-        interval++;
     }
 
     // Clear flag now that we have properly initialized each interval

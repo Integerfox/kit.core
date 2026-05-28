@@ -13,14 +13,6 @@
 
 #include "Kit/System/ElapsedTime.h"
 
-/** Helper macro that is used to mark the end of an 'Interval Array'
- */
-#define KIT_SYSTEM_PERIODIC_SCHEDULER_END_INTERVALS \
-    {                                               \
-        nullptr, 0, nullptr                         \
-    }
-
-
 namespace Kit {
 ///
 namespace System {
@@ -144,10 +136,8 @@ public:
 
 public:
     /** Constructor. The application provides a variable length array of interval
-        definitions that will be scheduled.  The last entry in the
-        array must contain a 'null' Interval_T definition (i.e. all fields
-        set to zero).  The Scheduler assumes that each Interval_T definition
-        has a unique period time.
+        definitions that will be scheduled.  The Scheduler assumes that each
+        Interval_T definition has a unique period time.
 
         The individual 'intervals' MUST be initialized (either statically or
         by calling initializeInterval()) before creating the scheduler.
@@ -159,6 +149,7 @@ public:
               the EventLoop's 'timeOutPeriodInMsec' constructor value.
      */
     PeriodicScheduler( Interval_T           intervals[],
+                       unsigned             numIntervals,
                        Hook_T               beginThreadProcessing = nullptr,
                        Hook_T               endThreadProcessing   = nullptr,
                        ReportSlippageFunc_T slippageFunc          = nullptr,
@@ -212,6 +203,9 @@ protected:
 
     /// Application hook during thread shutdown
     Hook_T m_endThreadFunc;
+
+    /// Number of Intervals in the 'intervals' array
+    unsigned m_numIntervals;
 
     /// Flag to managing the 'first' execution
     bool m_firstExecution;

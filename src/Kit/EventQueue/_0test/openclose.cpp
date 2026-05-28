@@ -49,7 +49,7 @@ public:
         msg.returnToSender();
     }
 
-    /// See Kit::Itc::IOpenRequest
+    /// See Kit::Itc::ICloseRequest
     void request( CloseMsg& msg ) noexcept override
     {
         msg.getPayload().success = resultCloseMsg;
