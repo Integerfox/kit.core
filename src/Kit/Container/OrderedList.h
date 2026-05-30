@@ -1,5 +1,5 @@
-#ifndef KIT_CONTAINER_ORDERED_H_
-#define KIT_CONTAINER_ORDERED_H_
+#ifndef KIT_CONTAINER_ORDEREDLIST_H_
+#define KIT_CONTAINER_ORDEREDLIST_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

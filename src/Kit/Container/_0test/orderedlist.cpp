@@ -142,7 +142,7 @@ TEST_CASE( "OrderedList" )
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 1u );
     }
 
-    SECTION( "FIFO" )
+    SECTION( "Sorted" )
     {
         REQUIRE( list.getFirst() == nullptr );
         REQUIRE( list.first() == nullptr );

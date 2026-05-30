@@ -47,8 +47,8 @@ protected:
     }
 
 protected:
-    /** Inserts the 'item' into the list based on compare function of the
-        KeyedItem behind the "after" element.
+    /** Inserts the 'item' into the list in sorted order based on the
+         compare function of the KeyedItem.
      */
     void insert( KeyedItem& item ) noexcept;
 
