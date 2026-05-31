@@ -65,6 +65,11 @@ uint32_t Timer::count() const noexcept
     return m_count;
 }
 
+bool Timer::isRunning() const noexcept
+{
+    KIT_SYSTEM_ASSERT( m_timingSource );
+    return m_timingSource->isRunning( *this );
+}
 
 }  // end namespace
 }

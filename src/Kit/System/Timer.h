@@ -59,6 +59,9 @@ public:
      */
     virtual void stop() noexcept;
 
+    /// Returns true if the timer is currently running; else false is returned.
+    virtual bool isRunning() const noexcept;
+    
 public:
     /** Sets the timing source.  This method CAN ONLY BE CALLED when the timer
         has never been started or it has been stopped

@@ -33,6 +33,13 @@ public:
 
     /// This method converts the requested duration in milliseconds to counter ticks.
     virtual uint32_t msecToCounts( uint32_t durationInMsecs ) const noexcept = 0;
+
+    /// Returns true if the specified timer is active/currently running; else false is returned.
+    virtual bool isRunning( const ICounter& timerToInspect ) const noexcept = 0;
+
+public:
+    /// Virtual destructor
+    virtual ~ITimingSource() = default;
 };
 
 }  // end namespaces
