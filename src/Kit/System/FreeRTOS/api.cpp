@@ -59,12 +59,13 @@ bool isSchedulingEnabled() noexcept
 
 void sleep( uint32_t milliseconds ) noexcept
 {
-    vTaskDelay( milliseconds * portTICK_PERIOD_MS );
+    vTaskDelay( pdMS_TO_TICKS(milliseconds));
 }
 
 void sleepInRealTime( uint32_t milliseconds ) noexcept
 {
-    vTaskDelay( milliseconds * portTICK_PERIOD_MS );
+    vTaskDelay( pdMS_TO_TICKS(milliseconds));
+
 }
 
 

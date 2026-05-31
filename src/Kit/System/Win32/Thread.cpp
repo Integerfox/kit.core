@@ -224,7 +224,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
     if ( delayTimeMsToWaitIfActive > 0 && threadToDestroy.isActive() )
     {
         threadToDestroy.m_runnable->pleaseStop();
-        threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
+        sleep( delayTimeMsToWaitIfActive );
     }
 
     delete &threadToDestroy;
