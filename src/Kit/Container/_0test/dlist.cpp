@@ -349,6 +349,104 @@ TEST_CASE( "DList" )
         REQUIRE( list.pop() == nullptr );
     }
 
+    SECTION( "insertAfter: missing anchor does not consume item" )
+    {
+        DList<MyItem> foo;
+        MyItem        headItem( "head" );
+        MyItem        missingAnchor( "missing" );
+        MyItem        candidate( "candidate" );
+
+        foo.put( headItem );
+        REQUIRE( foo.find( candidate ) == false );
+
+        // Anchor is not in foo; candidate must remain unused
+        foo.insertAfter( missingAnchor, candidate );
+
+        REQUIRE( foo.find( candidate ) == false );
+        REQUIRE( STRING_EQ( foo.head()->m_name, "head" ) );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "head" ) );
+
+        // This should succeed and prove the item was not consumed by failed insertAfter
+        foo.put( candidate );
+        REQUIRE( foo.find( candidate ) == true );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "candidate" ) );
+    }
+
+    SECTION( "insertBefore: missing anchor does not consume item" )
+    {
+        DList<MyItem> foo;
+        MyItem        headItem( "head" );
+        MyItem        missingAnchor( "missing" );
+        MyItem        candidate( "candidate" );
+
+        foo.put( headItem );
+        REQUIRE( foo.find( candidate ) == false );
+
+        // Anchor is not in foo; candidate must remain unused
+        foo.insertBefore( missingAnchor, candidate );
+
+        REQUIRE( foo.find( candidate ) == false );
+        REQUIRE( STRING_EQ( foo.head()->m_name, "head" ) );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "head" ) );
+
+        // This should succeed and prove the item was not consumed by failed insertBefore
+        foo.put( candidate );
+        REQUIRE( foo.find( candidate ) == true );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "candidate" ) );
+    }
+
+    SECTION( "insertAfter: anchor from another live container does not consume item" )
+    {
+        DList<MyItem> foo;
+        DList<MyItem> bar;
+        MyItem        fooHead( "foo-head" );
+        MyItem        barHead( "bar-head" );
+        MyItem        candidate( "candidate" );
+
+        foo.put( fooHead );
+        bar.put( barHead );
+        REQUIRE( foo.find( candidate ) == false );
+
+        // Anchor is valid but belongs to another container
+        foo.insertAfter( barHead, candidate );
+
+        REQUIRE( foo.find( candidate ) == false );
+        REQUIRE( STRING_EQ( foo.head()->m_name, "foo-head" ) );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "foo-head" ) );
+        REQUIRE( STRING_EQ( bar.head()->m_name, "bar-head" ) );
+        REQUIRE( STRING_EQ( bar.tail()->m_name, "bar-head" ) );
+
+        foo.put( candidate );
+        REQUIRE( foo.find( candidate ) == true );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "candidate" ) );
+    }
+
+    SECTION( "insertBefore: anchor from another live container does not consume item" )
+    {
+        DList<MyItem> foo;
+        DList<MyItem> bar;
+        MyItem        fooHead( "foo-head" );
+        MyItem        barHead( "bar-head" );
+        MyItem        candidate( "candidate" );
+
+        foo.put( fooHead );
+        bar.put( barHead );
+        REQUIRE( foo.find( candidate ) == false );
+
+        // Anchor is valid but belongs to another container
+        foo.insertBefore( barHead, candidate );
+
+        REQUIRE( foo.find( candidate ) == false );
+        REQUIRE( STRING_EQ( foo.head()->m_name, "foo-head" ) );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "foo-head" ) );
+        REQUIRE( STRING_EQ( bar.head()->m_name, "bar-head" ) );
+        REQUIRE( STRING_EQ( bar.tail()->m_name, "bar-head" ) );
+
+        foo.put( candidate );
+        REQUIRE( foo.find( candidate ) == true );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "candidate" ) );
+    }
+
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
