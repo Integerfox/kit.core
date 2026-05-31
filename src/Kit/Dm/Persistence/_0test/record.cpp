@@ -8,48 +8,71 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Catch/catch.hpp"
-#include "Kit/System/_testsupport/Shutdown_TS.h"
+#include "Kit/Checksum/Fletcher16.h"
+#include "Kit/Dm/IObserver.h"
+#include "Kit/Dm/ObserverCallback.h"
+#include "Kit/EventQueue/Server.h"
+#include "Kit/System/ElapsedTime.h"
+#include "Kit/System/_testsupport/ShutdownUnitTesting.h"
+#include "catch2/catch_test_macros.hpp"
 #include "Kit/System/Trace.h"
 #include "Kit/System/Thread.h"
 #include "Kit/System/Api.h"
 #include "Kit/Dm/ModelDatabase.h"
-#include "Kit/Dm/Persistent/Record.h"
+#include "Kit/Dm/Persistence/Record.h"
 #include "Kit/Dm/Mp/Uint32.h"
-#include "Kit/Persistent/RecordServer.h"
-#include "Kit/Persistent/MirroredChunk.h"
-#include "Kit/Persistent/FileAdapter.h"
-#include "Kit/Io/File/Api.h"
-#include "Kit/Itc/SyncReturnHandler.h"
+#include "Kit/Persistence/Record/Server.h"
+#include "Kit/Persistence/Record/Chunk/Crc.h"
+#include "Kit/Persistence/Record/Media/FileAdapter.h"
+#include "Kit/Io/File/System.h"
 
 
-#define SECT_   "_0test"
+#define SECT_                      "_0test"
 
-#define FILE_NAME_REGION1   "region1.nvram"
-#define FILE_NAME_REGION2   "region2.nvram"
+#define FILE_NAME_REGION1          "region1.nvram"
 
-using namespace Kit::Dm::Persistent;
+#define EXPECTED_DM_RECORD_METALEN 2
+
+using namespace Kit::Dm::Persistence;
 
 // Allocate/create my Model Database
-static Kit::Dm::ModelDatabase    modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
 // Allocate my Model Points
-static Kit::Dm::Mp::Uint32       mp_apple_( modelDb_, "APPLE1" );
-static Kit::Dm::Mp::Uint32       mp_orange_( modelDb_, "ORANGE1" );
-static Kit::Dm::Mp::Uint32       mp_cherry_( modelDb_, "CHERRY1" );
-static Kit::Dm::Mp::Uint32       mp_plum_( modelDb_, "PLUM1" );
+static Kit::Dm::Mp::Uint32 mp_apple_( modelDb_, "APPLE1" );
+static Kit::Dm::Mp::Uint32 mp_orange_( modelDb_, "ORANGE1" );
+static Kit::Dm::Mp::Uint32 mp_cherry_( modelDb_, "CHERRY1" );
+static Kit::Dm::Mp::Uint32 mp_plum_( modelDb_, "PLUM1" );
 
-#define DEFAULT_APPLE        0xAAAA5555 
-#define DEFAULT_ORANGE       0xBBBB7777
-#define DEFAULT_PLUM         0xFFFF9999
-#define DEFAULT_CHERRY       0xDDDD3333
+#define DEFAULT_APPLE  0xAAAA5555
+#define DEFAULT_ORANGE 0xBBBB7777
+#define DEFAULT_PLUM   0xFFFF9999
+#define DEFAULT_CHERRY 0xDDDD3333
 
 
 class MyRecord : public Record
 {
 public:
-    MyRecord( Kit::Persistent::Chunk& chunkHandler, uint8_t major, uint8_t minor, uint32_t delayMs=0, uint32_t maxDelayMs=0 ) noexcept
-        : Record( m_itemList, chunkHandler, major, minor, delayMs, maxDelayMs )
+    constexpr static unsigned                       NUM_ITEMS = 3;
+    Kit::Dm::ObserverCallback<Kit::Dm::IModelPoint> m_observersList[NUM_ITEMS];
+    Item_T                                          m_itemList[NUM_ITEMS];
+    int                                             m_resetDataCount;
+    int                                             m_schemaChangeCount;
+    bool                                            m_resetDataResult;
+    int                                             m_dataChangedCount;
+    int                                             m_updateNVRAMCount;
+    uint32_t                                        m_deltaMs;
+    uint32_t                                        m_timeChange;
+
+public:
+    MyRecord( Kit::Persistence::Record::IChunk& chunkHandler, uint8_t major, uint8_t minor, uint32_t delayMs = 0, uint32_t maxDelayMs = 0 ) noexcept
+        : Record( m_itemList,
+                  NUM_ITEMS,
+                  chunkHandler,
+                  major,
+                  minor,
+                  delayMs,
+                  maxDelayMs )
         , m_resetDataCount( 0 )
         , m_schemaChangeCount( 0 )
         , m_resetDataResult( true )
@@ -58,10 +81,9 @@ public:
         , m_deltaMs( 0 )
         , m_timeChange( 0 )
     {
-        m_itemList[0] ={ &mp_apple_, CPL_DM_PERISTENCE_RECORD_USE_SUBSCRIBER };
-        m_itemList[1] ={ &mp_orange_, CPL_DM_PERISTENCE_RECORD_USE_SUBSCRIBER };
-        m_itemList[2] ={ &mp_plum_, CPL_DM_PERISTENCE_RECORD_NO_SUBSCRIBER };
-        m_itemList[3] ={ 0,0 };
+        m_itemList[0] = { &mp_apple_, &m_observersList[0] };
+        m_itemList[1] = { &mp_orange_, &m_observersList[1] };
+        m_itemList[2] = { &mp_plum_, nullptr };
     }
 
     bool resetData() noexcept
@@ -73,16 +95,16 @@ public:
         return m_resetDataResult;
     }
 
-    bool schemaChange( uint8_t      previousSchemaMajorIndex,
-                       uint8_t      previousSchemaMinorIndex,
-                       const void*  src,
-                       size_t       srcLen ) noexcept
+    bool schemaChange( uint8_t     previousSchemaMajorIndex,
+                       uint8_t     previousSchemaMinorIndex,
+                       const void* src,
+                       size_t      srcLen ) noexcept
     {
         m_schemaChangeCount++;
         return false;
     }
 
-    void dataChanged( Kit::Dm::ModelPoint& point, Kit::Dm::SubscriberApi& observer ) noexcept
+    void dataChanged( Kit::Dm::IModelPoint& point, Kit::Dm::IObserver& observer ) noexcept
     {
         if ( m_dataChangedCount == 0 )
         {
@@ -94,43 +116,64 @@ public:
 
     void updateNVRAM() noexcept
     {
-       
+
         m_deltaMs    = Kit::System::ElapsedTime::deltaMilliseconds( m_timeChange );
         m_timeChange = 0;
         m_updateNVRAMCount++;
         Record::updateNVRAM();
     }
-
-
-public:
-
-    Item_T m_itemList[3 + 1];
-    int m_resetDataCount;
-    int m_schemaChangeCount;
-    bool m_resetDataResult;
-    int m_dataChangedCount;
-    int m_updateNVRAMCount;
-    uint32_t m_deltaMs;
-    uint32_t m_timeChange;
 };
 
+class MyRecordBadList : public Record
+{
+public:
+    MyRecordBadList( Kit::Persistence::Record::IChunk& chunkHandler, uint8_t major, uint8_t minor ) noexcept
+        : Record( nullptr, 0, chunkHandler, major, minor )
+    {
+    }
+    bool resetData() noexcept
+    {
+        return false;
+    }
+};
 
+class MyRecordBadList2 : public Record
+{
+public:
+    constexpr static unsigned                       NUM_ITEMS = 3;
+    Kit::Dm::ObserverCallback<Kit::Dm::IModelPoint> m_observersList[NUM_ITEMS];
+    Item_T                                          m_itemList[NUM_ITEMS];
 
-static Kit::Persistent::FileAdapter fd1( FILE_NAME_REGION1, 0, 128 );
-static Kit::Persistent::FileAdapter fd2( FILE_NAME_REGION2, 0, 128 );
-static Kit::Persistent::MirroredChunk chunk( fd1, fd2 );
+public:
+    MyRecordBadList2( Kit::Persistence::Record::IChunk& chunkHandler, uint8_t major, uint8_t minor ) noexcept
+        : Record( m_itemList, NUM_ITEMS, chunkHandler, major, minor )
+    {
+        m_itemList[0] = { &mp_apple_, &m_observersList[0] };
+        m_itemList[1] = { nullptr, &m_observersList[1] };
+        m_itemList[2] = { &mp_plum_, nullptr };
+    }
+
+    bool resetData() noexcept
+    {
+        return false;
+    }
+};
+
+static Kit::Persistence::Record::Media::FileAdapter fd1( FILE_NAME_REGION1, 128 );
+static Kit::Checksum::Fletcher16                    crc;
+static Kit::Persistence::Record::Chunk::Crc         chunk_( fd1, crc );
 
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "record" )
+TEST_CASE( "Record" )
 {
     KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD Test" );
-    Kit::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    MyRecord uut( chunk, 0, 0 );
-    Kit::Persistent::Record* records[2] ={ &uut, 0 };
-
-    Kit::Persistent::RecordServer recordServer( records );
-    Kit::System::Thread* t1 = Kit::System::Thread::create( recordServer, "UUT" );
+    MyRecord                           uut( chunk_, 0, 0 );
+    Kit::Persistence::Record::IRecord* records[1] = { &uut };
+    Kit::EventQueue::Server            eventQueue;
+    Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
+    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT" );
     REQUIRE( t1 );
 
     mp_apple_.setInvalid();
@@ -140,11 +183,10 @@ TEST_CASE( "record" )
     SECTION( "no persistent data" )
     {
         // Delete files
-        Kit::Io::File::Api::remove( FILE_NAME_REGION1 );
-        Kit::Io::File::Api::remove( FILE_NAME_REGION2 );
+        Kit::Io::File::System::remove( FILE_NAME_REGION1 );
 
-        size_t recSize = uut.getRecordSize();
-        REQUIRE( recSize == 2 + 5 * 3 );
+        size_t recSize = uut.getSize();
+        REQUIRE( recSize == EXPECTED_DM_RECORD_METALEN + 5 * 3 + chunk_.getMetadataLength() );
 
         // No persistent data - and force NO-UPDATE
         uut.m_resetDataResult = false;
@@ -169,7 +211,7 @@ TEST_CASE( "record" )
 
 
         // Allow time for the changes to propagate and the data to be saved
-        Kit::System::Api::sleep( 1000 );
+        Kit::System::sleep( 1000 );
 
         recordServer.close();
     }
@@ -197,7 +239,7 @@ TEST_CASE( "record" )
         mp_plum_.increment();
 
         // Allow time for the changes to propagate and the data to be saved
-        Kit::System::Api::sleep( 1000 );
+        Kit::System::sleep( 1000 );
 
         recordServer.close();
     }
@@ -223,7 +265,7 @@ TEST_CASE( "record" )
         mp_plum_.increment();
 
         // Allow time for the changes to propagate and the data to be saved - WHICH won't happen beaus plum does not trigger a change notification
-        Kit::System::Api::sleep( 1000 );
+        Kit::System::sleep( 1000 );
 
         recordServer.close();
     }
@@ -269,10 +311,10 @@ TEST_CASE( "record" )
         mp_plum_.increment();
 
         // Flush the record
-        REQUIRE( uut.flush( recordServer ) );
+        REQUIRE( uut.flush() );
 
-        // Allow time for the changes to propagate and the data to be saved 
-        Kit::System::Api::sleep( 1000 );
+        // Allow time for the changes to propagate and the data to be saved
+        Kit::System::sleep( 1000 );
 
         recordServer.close();
     }
@@ -317,7 +359,7 @@ TEST_CASE( "record" )
         REQUIRE( value == DEFAULT_PLUM + 2 );
 
         // Flush the record
-        REQUIRE( uut.erase( recordServer ) );
+        REQUIRE( uut.erase() );
 
         recordServer.close();
     }
@@ -344,21 +386,20 @@ TEST_CASE( "record" )
     }
 
     Kit::System::Thread::destroy( *t1 );
-    Kit::System::Api::sleep( 1000 );
-    REQUIRE( Kit::System::Shutdown_TS::getAndClearCounter() == 0u );
+    Kit::System::sleep( 100 );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
-
-TEST_CASE( "record-badmajor" )
+TEST_CASE( "Record-badmajor" )
 {
     KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
-    Kit::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    MyRecord uut( chunk, 2, 2 );
-    Kit::Persistent::Record* records[2] ={ &uut, 0 };
-
-    Kit::Persistent::RecordServer recordServer( records );
-    Kit::System::Thread* t1 = Kit::System::Thread::create( recordServer, "UUT2" );
+    MyRecord                           uut( chunk_, 2, 2 );
+    Kit::Persistence::Record::IRecord* records[1] = { &uut };
+    Kit::EventQueue::Server            eventQueue;
+    Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
+    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT2" );
     REQUIRE( t1 );
 
     mp_apple_.setInvalid();
@@ -389,26 +430,26 @@ TEST_CASE( "record-badmajor" )
         mp_plum_.increment();
 
         // Allow time for the changes to propagate and the data to be saved
-        Kit::System::Api::sleep( 1000 );
+        Kit::System::sleep( 1000 );
 
         recordServer.close();
     }
 
     Kit::System::Thread::destroy( *t1 );
-    Kit::System::Api::sleep( 1000 );
-    REQUIRE( Kit::System::Shutdown_TS::getAndClearCounter() == 0u );
+    Kit::System::sleep( 100 );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
-TEST_CASE( "record-badminor" )
+TEST_CASE( "Record-badminor" )
 {
-    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
-    Kit::System::Shutdown_TS::clearAndUseCounter();
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad minor index Test" );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    MyRecord uut( chunk, 2, 1 );
-    Kit::Persistent::Record* records[2] ={ &uut, 0 };
-
-    Kit::Persistent::RecordServer recordServer( records );
-    Kit::System::Thread* t1 = Kit::System::Thread::create( recordServer, "UUT2" );
+    MyRecord                           uut( chunk_, 2, 1 );
+    Kit::Persistence::Record::IRecord* records[1] = { &uut };
+    Kit::EventQueue::Server            eventQueue;
+    Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
+    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT2" );
     REQUIRE( t1 );
 
     mp_apple_.setInvalid();
@@ -439,28 +480,27 @@ TEST_CASE( "record-badminor" )
         mp_plum_.increment();
 
         // Allow time for the changes to propagate and the data to be saved
-        Kit::System::Api::sleep( 1000 );
+        Kit::System::sleep( 1000 );
 
         recordServer.close();
     }
 
     Kit::System::Thread::destroy( *t1 );
-    Kit::System::Api::sleep( 1000 );
-    REQUIRE( Kit::System::Shutdown_TS::getAndClearCounter() == 0u );
+    Kit::System::sleep( 100 );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
-
-TEST_CASE( "record-verify" )
+TEST_CASE( "Record-verify" )
 {
     KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD2 - bad major index Test" );
-    Kit::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    MyRecord uut( chunk, 2, 1 );
-    Kit::Persistent::Record* records[2] ={ &uut, 0 };
-
-    Kit::Persistent::RecordServer recordServer( records );
-    Kit::System::Thread* t1 = Kit::System::Thread::create( recordServer, "UUT2" );
+    MyRecord                           uut( chunk_, 2, 1 );
+    Kit::Persistence::Record::IRecord* records[1] = { &uut };
+    Kit::EventQueue::Server            eventQueue;
+    Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
+    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT2" );
     REQUIRE( t1 );
 
     mp_apple_.setInvalid();
@@ -489,31 +529,32 @@ TEST_CASE( "record-verify" )
     }
 
     Kit::System::Thread::destroy( *t1 );
-    Kit::System::Api::sleep( 1000 );
-    REQUIRE( Kit::System::Shutdown_TS::getAndClearCounter() == 0u );
+    Kit::System::sleep( 100 );
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
-TEST_CASE( "nvram update delayed" )
+TEST_CASE( "NVRAM update delayed" )
 {
     KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD Test" );
-    Kit::System::Shutdown_TS::clearAndUseCounter();
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     // Delete files
-    Kit::Io::File::Api::remove( FILE_NAME_REGION1 );
-    Kit::Io::File::Api::remove( FILE_NAME_REGION2 );
+    Kit::Io::File::System::remove( FILE_NAME_REGION1 );
 
-    MyRecord uut( chunk, 0, 0, 700, 1000 );
-    Kit::Persistent::Record* records[2] ={ &uut, 0 };
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    Kit::Persistent::RecordServer recordServer( records );
-    Kit::System::Thread* t1 = Kit::System::Thread::create( recordServer, "UUT" );
+    MyRecord                           uut( chunk_, 0, 0, 700, 1000 );
+    Kit::Persistence::Record::IRecord* records[1] = { &uut };
+    Kit::EventQueue::Server            eventQueue;
+    Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
+    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT2" );
     REQUIRE( t1 );
 
     mp_apple_.setInvalid();
     mp_orange_.setInvalid();
     mp_plum_.setInvalid();
 
- 
+
     SECTION( "update with reset/default values" )
     {
         // Start the record
@@ -535,29 +576,48 @@ TEST_CASE( "nvram update delayed" )
         mp_apple_.increment();
         mp_orange_.increment();
         mp_plum_.increment();
-        Kit::System::Api::sleep( 100 );
+        Kit::System::sleep( 100 );
         mp_apple_.increment();
-        Kit::System::Api::sleep( 100 );
+        Kit::System::sleep( 100 );
         mp_plum_.increment();
-        Kit::System::Api::sleep( 100 );
+        Kit::System::sleep( 100 );
         mp_orange_.increment();
-        Kit::System::Api::sleep( 100 );
+        Kit::System::sleep( 100 );
         mp_apple_.increment();
-        Kit::System::Api::sleep( 100 );
+        Kit::System::sleep( 100 );
         mp_plum_.increment();
-        Kit::System::Api::sleep( 100 );
+        Kit::System::sleep( 100 );
         mp_orange_.increment();
 
         // Allow time for the changes to propagate and the data to be saved
-        Kit::System::Api::sleep( 1000+300 );
+        Kit::System::sleep( 1000 + 300 );
         REQUIRE( uut.m_dataChangedCount >= 3 );
-        REQUIRE( uut.m_updateNVRAMCount == 2 ); 
+        REQUIRE( uut.m_updateNVRAMCount == 2 );
         REQUIRE( uut.m_deltaMs > 700 );
 
         recordServer.close();
     }
-
     Kit::System::Thread::destroy( *t1 );
-    Kit::System::Api::sleep( 1000 );
-    REQUIRE( Kit::System::Shutdown_TS::getAndClearCounter() == 0u );
+    Kit::System::sleep( 100 );  // allow time for thread(s) to stop BEFORE the runnable object goes out of scope
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
+}
+
+TEST_CASE( "Errors" )
+{
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "Errors" );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
+
+    SECTION( "bad list pointer" )
+    {
+        MyRecordBadList uut( chunk_, 2, 1 );
+        REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 1u );
+    }
+
+    SECTION( "bad MP pointer" )
+    {
+        MyRecordBadList2        uut( chunk_, 2, 1 );
+        Kit::EventQueue::Server eventQueue;
+        uut.start( eventQueue );
+        REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 1u );
+    }
 }
