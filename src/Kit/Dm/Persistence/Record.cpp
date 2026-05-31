@@ -34,18 +34,20 @@ bool Record::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
             if ( m_items[i].mpPtr == nullptr )
             {
                 Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL, "Kit::Dm::Persistence::Record::m_items[%u].mpPtr is null", i );
-                return false; // Not really needed -->but helps with off-target unit tests
+                return false;  // Not really needed -->but helps with off-target unit tests
             }
         }
 
-        m_started = true;
+        // Start the chunk handler
+        if ( !m_chunkHandler.start( myEventQueue ) )
+        {
+            return false;
+        }
 
-        // Set the timing source (for my delay timer)
+        // Housekeeping
+        m_started         = true;
         m_myEventQueuePtr = &myEventQueue;
         setTimingSource( myEventQueue );
-
-        // Start the chunk handler
-        m_chunkHandler.start( myEventQueue );
 
         // Load the record's data from persistent storage
         bool subscribeForChanges = true;
@@ -97,6 +99,7 @@ void Record::stop() noexcept
     if ( m_started )
     {
         m_started = false;
+        Timer::stop();
 
         // Cancel subscriptions
         for ( unsigned i = 0; i < m_numItems; i++ )
@@ -236,7 +239,7 @@ void Record::dataChanged( Kit::Dm::IModelPoint& point, Kit::Dm::IObserver& obser
     {
         // If the timer is not running -->then this is the 'first' change notification
         uint32_t now = Kit::System::ElapsedTime::milliseconds();
-        if ( Kit::System::Timer::count() == 0 )
+        if ( !Timer::isRunning() )
         {
             m_timerMarker = now;
         }
@@ -244,14 +247,14 @@ void Record::dataChanged( Kit::Dm::IModelPoint& point, Kit::Dm::IObserver& obser
         // Update NVRAM if the maximum delay time has expired
         if ( Kit::System::ElapsedTime::expiredMilliseconds( m_timerMarker, m_maxDelayMs, now ) )
         {
-            Kit::System::Timer::stop();
+            Timer::stop();
             updateNVRAM();
         }
 
         // Start my software timer to delay the update to NVRAM
         else
         {
-            Kit::System::Timer::start( m_delayMs );
+            Timer::start( m_delayMs );
         }
     }
 }
@@ -277,6 +280,11 @@ void Record::request( EraseMsg& msg ) noexcept
 
 bool Record::flush() noexcept
 {
+    if ( !m_started )
+    {
+        return false;
+    }
+
     Kit::Dm::Persistence::IManageRequest::FlushPayload payload;
     Kit::Itc::SyncReturnHandler                        srh;
     Kit::Dm::Persistence::IManageRequest::FlushMsg     msg( *this, payload, srh );
@@ -286,6 +294,11 @@ bool Record::flush() noexcept
 
 bool Record::erase() noexcept
 {
+    if ( !m_started )
+    {
+        return false;
+    }
+
     Kit::Dm::Persistence::IManageRequest::ErasePayload payload;
     Kit::Itc::SyncReturnHandler                        srh;
     Kit::Dm::Persistence::IManageRequest::EraseMsg     msg( *this, payload, srh );

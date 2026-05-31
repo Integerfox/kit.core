@@ -128,7 +128,7 @@ class MyRecordBadList : public Record
 {
 public:
     MyRecordBadList( Kit::Persistence::Record::IChunk& chunkHandler, uint8_t major, uint8_t minor ) noexcept
-        : Record( nullptr, 0, chunkHandler, major, minor )
+        : Record( nullptr, 1, chunkHandler, major, minor )
     {
     }
     bool resetData() noexcept

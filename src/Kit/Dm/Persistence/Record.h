@@ -92,6 +92,7 @@ public:
         , m_started( false )
     {
         KIT_SYSTEM_ASSERT( itemList );
+        KIT_SYSTEM_ASSERT( numItems > 0 );
     }
 
     /// Destructor
