@@ -101,6 +101,9 @@ public:
     }
 
 public:
+    /// Re-expose Timer overload(s) to avoid hiding warnings with stricter compilers.
+    using Kit::System::Timer::start;
+
     /// See Kit::Persistence::Record::IRecord
     bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
 
