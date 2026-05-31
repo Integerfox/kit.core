@@ -42,6 +42,12 @@ void Mailbox::post( IMessage& msg ) noexcept
 
 void Mailbox::postSync( IMessage& msg ) noexcept
 {
+    // Drain stale thread-semaphore counts before issuing a synchronous ITC
+    // request so this wait corresponds to the current request completion.
+    while ( Kit::System::Thread::tryWait() )
+    {
+    }
+
     post( msg );
     KIT_SYSTEM_SIM_TICK_APPLICATION_WAIT();
     Kit::System::Thread::wait();

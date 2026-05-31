@@ -15,6 +15,7 @@
 #include "Kit/Itc/OpenSync.h"
 #include "Kit/EventQueue/Server.h"
 #include "Kit/System/Thread.h"
+#include "Kit/System/Api.h"
 
 ///
 using namespace Kit::Itc;
@@ -33,6 +34,7 @@ public:
     void* argsOpenMsg    = nullptr;
     bool  resultCloseMsg = true;
     void* argsCloseMsg   = nullptr;
+    int   openDelayMs    = 0;
 
     MockService( Kit::EventQueue::IQueue& myEventQueue ) noexcept
         : OpenCloseSync( myEventQueue )
@@ -44,6 +46,11 @@ public:
     /// See Kit::Itc::IOpenRequest
     void request( OpenMsg& msg ) noexcept override
     {
+        if ( openDelayMs > 0 )
+        {
+            Kit::System::sleep( openDelayMs );
+        }
+
         msg.getPayload().success = resultOpenMsg;
         argsOpenMsg              = msg.getPayload().args;
         isOpened                 = true;
@@ -111,6 +118,24 @@ TEST_CASE( "OpenClose" )
         REQUIRE( result == true );
         REQUIRE( uut.isOpened == false );
         REQUIRE( uut.argsCloseMsg == (void*)12 );
+    }
+
+    SECTION( "stale-thread-semaphore-count-is-drained" )
+    {
+        // Pre-load the current thread semaphore with an unrelated signal.
+        Thread::getCurrent().signal();
+
+        // Force server-side handling latency so a stale count would otherwise
+        // allow a premature return before this request completes.
+        uut.openDelayMs = 200;
+
+        bool result = uut.open();
+        REQUIRE( result == true );
+        REQUIRE( uut.isOpened == true );
+
+        result = uut.close();
+        REQUIRE( result == true );
+        REQUIRE( uut.isOpened == false );
     }
 
     // Shutdown threads
