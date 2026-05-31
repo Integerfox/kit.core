@@ -88,6 +88,9 @@ public:
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
     uint32_t msecToCounts( uint32_t ms ) const noexcept override        { return TimerManager::msecToCounts( ms ); }
 
+    /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
+    bool isRunning( const Kit::System::ICounter& timerToInspect ) const noexcept override { return TimerManager::isRunning( timerToInspect ); }
+
 protected:
     /// See Kit::System::IRunnable
     void entry() noexcept override;
@@ -140,6 +143,7 @@ public:
     void attach( Kit::System::ICounter& c ) noexcept override           { TimerManager::attach( c ); }
     bool detach( Kit::System::ICounter& c ) noexcept override           { return TimerManager::detach( c ); }
     uint32_t msecToCounts( uint32_t ms ) const noexcept override        { return TimerManager::msecToCounts( ms ); }
+    bool isRunning( const Kit::System::ICounter& timerToInspect ) const noexcept override { return TimerManager::isRunning( timerToInspect ); }
 
 protected:
     /// See Kit::System::IRunnable
