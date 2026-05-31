@@ -58,7 +58,7 @@ void TimerManager::tick( uint32_t msec ) noexcept
         ICounter* counterPtr = m_counters.first();
         if ( counterPtr == 0 )
         {
-                KIT_SYSTEM_TRACE_MSG( SECT_, " @@   NO PENDING TIMERS (msec=%" PRIu32 ")", msec );
+            KIT_SYSTEM_TRACE_MSG( SECT_, " @@   NO PENDING TIMERS (msec=%" PRIu32 ")", msec );
             // No timers registered -->do NOTHING
             break;
         }
@@ -84,7 +84,7 @@ void TimerManager::tick( uint32_t msec ) noexcept
             {
                 KIT_SYSTEM_TRACE_MSG( SECT_, " @@   EXPIRED call back. (%p)", counterPtr );
                 m_counters.get();                 // Remove the expired counter from the list
-                counterPtr->expired();             // Expire the counter
+                counterPtr->expired();            // Expire the counter
                 counterPtr = m_counters.first();  // Get next counter
             }
         }
@@ -195,6 +195,11 @@ uint32_t TimerManager::msecToCounts( uint32_t durationInMsecs ) const noexcept
     uint32_t delta = ElapsedTime::deltaMilliseconds( m_timeNow );
     KIT_SYSTEM_TRACE_MSG( SECT_, "milliseconds IN=%" PRIu32 ", count out=%" PRIu32, durationInMsecs, durationInMsecs + delta );
     return durationInMsecs + delta;
+}
+
+bool TimerManager::isRunning( const ICounter& timerToInspect ) const noexcept
+{
+    return m_pendingAttach.find( timerToInspect ) || m_counters.find( timerToInspect );
 }
 
 }  // end namespace

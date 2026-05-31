@@ -9,7 +9,6 @@
 /** @file */
 
 #include "Kit/System/IEventFlag.h"
-#include "kit_config.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/ElapsedTime.h"
@@ -157,8 +156,10 @@ public:
         KIT_SYSTEM_TRACE_MSG( SECT_, "Stopping AppObject: %s....", m_name );
 
         m_timer1.stop();
+        REQUIRE( m_timer1.isRunning() == false );
         m_deltaTime1 = ElapsedTime::deltaMilliseconds( m_timeMark1 );
         m_timer2.stop();
+        REQUIRE( m_timer2.isRunning() == false );
         m_deltaTime2 = ElapsedTime::deltaMilliseconds( m_timeMark1 );
     }
 
@@ -185,7 +186,10 @@ public:
                               m_count1,
                               m_timer1Duration );
         m_startTime1 = ElapsedTime::milliseconds();
+        REQUIRE( m_timer1.isRunning() == false );
         m_timer1.start( m_timer1Duration );
+        REQUIRE( m_timer1.isRunning() == true );
+
     }
 
     void timer2Expired() noexcept
@@ -209,7 +213,9 @@ public:
                               m_count2,
                               m_timer2Duration );
         m_startTime2 = ElapsedTime::milliseconds();
+        REQUIRE( m_timer2.isRunning() == false );
         m_timer2.start( m_timer2Duration );
+        REQUIRE( m_timer2.isRunning() == true );
     }
 
 public:
