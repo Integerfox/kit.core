@@ -59,7 +59,10 @@ public:
 
 public:
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void pleaseStop() noexcept override                                 { EventLoop::pleaseStop(); }
+    void pleaseStop() noexcept override;
+
+    /// See Kit::EventQueue::IMsgNotification
+    void postSync( Kit::Itc::IMessage& msg ) noexcept override;
     
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
     int  signal() noexcept override                                     { return EventLoop::signal(); }
@@ -130,7 +133,8 @@ public:
 
 public:
     // Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void pleaseStop() noexcept override                                 { EventLoop::pleaseStop(); }
+    void pleaseStop() noexcept override;
+    void postSync( Kit::Itc::IMessage& msg ) noexcept override;
     int  signal() noexcept override                                     { return EventLoop::signal(); }
     int  su_signal() noexcept override                                  { return EventLoop::su_signal(); }
     void signalMultipleEvents( uint32_t events ) noexcept override      { EventLoop::signalMultipleEvents( events ); }

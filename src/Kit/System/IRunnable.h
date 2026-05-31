@@ -48,6 +48,11 @@ public:
                by having the thread run itself to completion. Not all OSes
                support a polite way (i.e. reclaiming resource, memory, etc.) of
                killing threads.
+            3) For EventQueue-based threads, calling pleaseStop() means all
+               application-level activity for the thread has already been
+               shut down (e.g. no outstanding synchronous ITC callers and no
+               new requests being posted).  The APPLICATION is RESPONSIBLE for
+               making sure this is the case before calling pleaseStop().
      */
     virtual void pleaseStop() noexcept {}
 
