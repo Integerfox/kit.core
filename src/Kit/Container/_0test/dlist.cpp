@@ -92,8 +92,8 @@ TEST_CASE( "DList" )
         REQUIRE( emptylist_.head() == nullptr );
         REQUIRE( emptylist_.tail() == nullptr );
 
-        REQUIRE( staticlist_.head() != 0 );
-        REQUIRE( staticlist_.tail() != 0 );
+        REQUIRE( staticlist_.head() != nullptr );
+        REQUIRE( staticlist_.tail() != nullptr );
         REQUIRE( STRING_EQ( staticlist_.get()->m_name, "staticItem" ) );
     }
 
@@ -135,43 +135,43 @@ TEST_CASE( "DList" )
 
         list.put( apple );
 
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
 
         list.put( orange );
 
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "orange" ) );
 
         list.put( cherry );
 
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "cherry" ) );
 
         ptr1 = list.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "apple" ) );
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "orange" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "cherry" ) );
 
         ptr1 = list.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "orange" ) );
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "cherry" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "cherry" ) );
 
         ptr1 = list.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "cherry" ) );
         REQUIRE( list.head() == nullptr );
         REQUIRE( list.tail() == nullptr );
@@ -185,13 +185,13 @@ TEST_CASE( "DList" )
     {
         // Note: pop() == get(), top() == head(), push() == putFirst()
         list.push( apple );
-        REQUIRE( list.top() != 0 );
+        REQUIRE( list.top() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
 
         ptr1 = list.pop();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "apple" ) );
         REQUIRE( list.top() == nullptr );
         REQUIRE( list.tail() == nullptr );
@@ -203,7 +203,7 @@ TEST_CASE( "DList" )
         ptr1 = list.pop();
         list.push( plum );
         list.push( pear );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "cherry" ) );
         REQUIRE( STRING_EQ( list.top()->m_name, "pear" ) );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
@@ -226,20 +226,20 @@ TEST_CASE( "DList" )
         REQUIRE( STRING_EQ( list.tail()->m_name, "orange" ) );
 
         ptr1 = list.getFirst();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "apple" ) );
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "orange" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "orange" ) );
         list.putFirst( *ptr1 );
 
         ptr1 = list.getLast();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "orange" ) );
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
         list.putLast( *ptr1 );
 
@@ -317,13 +317,13 @@ TEST_CASE( "DList" )
 
         // Note: pop() == get(), top() == head(), push() == putFirst()
         list.push( apple );
-        REQUIRE( list.top() != 0 );
+        REQUIRE( list.top() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
 
         ptr1 = list.pop();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "apple" ) );
         REQUIRE( list.top() == nullptr );
         REQUIRE( list.tail() == nullptr );
@@ -335,7 +335,7 @@ TEST_CASE( "DList" )
         ptr1 = list.pop();
         list.push( plum );
         list.push( pear );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "cherry" ) );
         REQUIRE( STRING_EQ( list.top()->m_name, "pear" ) );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
