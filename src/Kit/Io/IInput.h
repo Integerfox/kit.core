@@ -75,7 +75,7 @@ public:
      */
     virtual bool read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept = 0;
 
-    /** This method is similar to read( void* buffer, int numBytes, int& bytesRead ),
+    /** This method is similar to read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ),
         except that it will NOT return until 'numBytesToRead' have been read.
         
         If the method fails, the contents of the 'buffer' is undefined.

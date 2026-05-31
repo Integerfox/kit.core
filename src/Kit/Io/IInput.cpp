@@ -45,6 +45,8 @@ bool IInput::read( Kit::Text::IString& destString ) noexcept
 
 bool IInput::read( Kit::Text::IString& destString, ByteCount_T numBytesToRead ) noexcept
 {
+    KIT_SYSTEM_ASSERT( numBytesToRead >= 0 );
+
     // Housekeeping
     int         maxlen = 0;
     char*       buffer = destString.getBuffer( maxlen );
@@ -54,11 +56,9 @@ bool IInput::read( Kit::Text::IString& destString, ByteCount_T numBytesToRead ) 
         numBytesToRead = len;  // Limit numBytesToRead to max allowed length of the string
     }
 
-    bool result = read( buffer, numBytesToRead );
-    if ( !result )
-    {
-        buffer[maxlen] = '\0';  // Ensure the string is terminated if there was an error
-    }
+    // Read the bytes
+    bool result            = read( buffer, numBytesToRead );
+    buffer[numBytesToRead] = '\0';  // Ensure the string is terminated
 
     return result;
 }
@@ -66,6 +66,7 @@ bool IInput::read( Kit::Text::IString& destString, ByteCount_T numBytesToRead ) 
 bool IInput::read( void* buffer, ByteCount_T numBytesToRead ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
+    KIT_SYSTEM_ASSERT( numBytesToRead >= 0 );
 
     // Reading zero bytes is a nop
     if ( numBytesToRead > 0 )

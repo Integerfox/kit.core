@@ -29,23 +29,34 @@ Connector::Result_T Connector::establish( const char* remoteHostName, int portNu
 
     // Walk the list of addresses until a connection succeeds
     struct addrinfo* ptr;
-    bool             failedCreateSocket = true;
+    bool             createdSocket      = false;
+    bool             sawRefused         = false;
+    bool             sawConnectError    = false;
     fdOut                               = INVALID_SOCKET;
     for ( ptr = adapters; ptr != nullptr; ptr = ptr->ai_next )
     {
         // Create a SOCKET for connecting to server
         fdOut = Win32::Fdio::createSocket( ptr );
-        if ( fdOut < 0 )
+        if ( fdOut == INVALID_SOCKET )
         {
             continue;  // Try the next address
         }
 
-        // If got here and still exited the loop with invalid file descriptor, it mostly likely means that the connect request was refused
-        failedCreateSocket = false;
+        // Track that we successfully created at least one socket.
+        createdSocket = true;
 
         // Attempt to connect to the remote host
         if ( connect( fdOut, ptr->ai_addr, ptr->ai_addrlen ) < 0 )
         {
+            int err = WSAGetLastError();
+            if ( err == WSAECONNREFUSED )
+            {
+                sawRefused = true;
+            }
+            else
+            {
+                sawConnectError = true;
+            }
             Win32::Fdio::close( fdOut );
             continue;  // Try the next address
         }
@@ -60,7 +71,11 @@ Connector::Result_T Connector::establish( const char* remoteHostName, int portNu
     // Check if a connection was made
     if ( fdOut == INVALID_SOCKET )
     {
-        return failedCreateSocket ? eERROR : eREFUSED;
+        if ( !createdSocket || sawConnectError )
+        {
+            return eERROR;
+        }
+        return sawRefused ? eREFUSED : eERROR;
     }
 
     // If I get here, I have successful connection to the remote Host
