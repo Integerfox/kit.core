@@ -12,7 +12,7 @@
 
 
 #include "kit_config.h"
-#include "Kit/Container/ListItem.h"
+#include "Kit/Container/KeyedItem.h"
 #include "Kit/Text/IString.h"
 #include "Kit/Dm/IObserver.h"
 #include "Kit/Json/Arduino.h"
@@ -40,10 +40,10 @@ namespace Dm {
            documented otherwise.
         4) When a Model Point transitions (or initialized in) to the invalid set,
            its 'data' is set to all zero so that transition from the invalid to the
-           valid state when using read-modify-write operation is consistent in 
+           valid state when using read-modify-write operation is consistent in
            its behavior.
  */
-class IModelPoint : public Kit::Container::ExtendedListItem
+class IModelPoint : public Kit::Container::KeyedItem, public Kit::Container::KeyLiteralString
 {
 public:
     /// Options related to the Model Point's locked state
@@ -536,6 +536,13 @@ protected:
      */
     virtual bool setJSONVal( JsonDocument& doc ) noexcept = 0;
 
+
+protected:
+    /// Protected Constructor (need because of the inheritance from KeyLiteralString)
+    IModelPoint( const char* name ) noexcept
+        : Kit::Container::KeyLiteralString( name )
+    {
+    }
 
 public:
     /// Virtual destructor to make the compiler happy

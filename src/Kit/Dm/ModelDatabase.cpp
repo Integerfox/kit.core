@@ -27,13 +27,11 @@ Kit::System::Mutex& IModelDatabase::getGlobalMutex_() noexcept
 //////////////////////////////////////////////
 ModelDatabase::ModelDatabase() noexcept
     : m_list()
-    , m_listSorted( false )
 {
 }
 
 ModelDatabase::ModelDatabase( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
     : m_list( ignoreThisParameter_usedToCreateAUniqueConstructor )
-    , m_listSorted( false )
 {
 }
 
@@ -49,13 +47,6 @@ IModelPoint* ModelDatabase::lookupModelPoint( const char* modelPointName ) noexc
 IModelPoint* ModelDatabase::getFirstByName() noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_lock );
-
-    // Only sort the list ONCE!
-    if ( !m_listSorted )
-    {
-        sortList();
-        m_listSorted = true;
-    }
     return m_list.first();
 }
 
@@ -69,7 +60,7 @@ IModelPoint* ModelDatabase::getNextByName( IModelPoint& currentModelPoint ) noex
 void ModelDatabase::insert_( IModelPoint& mpToAdd ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_lock );
-    m_list.putFirst( mpToAdd );
+    m_list.insert( mpToAdd );
 }
 
 Kit::System::Mutex& ModelDatabase::getMutex_() noexcept
@@ -173,59 +164,6 @@ bool ModelDatabase::fromJSON( const char* src, Kit::Text::IString* errorMsg, IMo
     return true;
 }
 
-void ModelDatabase::sortList() noexcept
-{
-    // This a BRUTE force sort, because I am lazy (and I am in hurry)
-
-    // Seed the sorted list with it
-    Kit::Container::SList<IModelPoint> sortedList;
-    IModelPoint*                       item = m_list.getFirst();
-    if ( item == nullptr )
-    {
-        return;  // the unsorted list is empty
-    }
-    sortedList.putFirst( *item );
-
-
-    // Walk the unsorted list
-    item = m_list.getFirst();
-    while ( item )
-    {
-        bool         moved          = false;
-        IModelPoint* prevSortedItem = nullptr;
-        IModelPoint* sortedItem     = sortedList.first();
-        while ( sortedItem )
-        {
-            // Insert before if new item is 'smaller' then the current sorted item
-            if ( strcmp( item->getName(), sortedItem->getName() ) < 0 )
-            {
-                if ( prevSortedItem )
-                {
-                    sortedList.insertAfter( *prevSortedItem, *item );
-                }
-                else
-                {
-                    sortedList.putFirst( *item );
-                }
-                moved = true;
-                break;
-            }
-            prevSortedItem = sortedItem;
-            sortedItem     = m_list.next( *sortedItem );
-        }
-
-        // new item is 'larger' than all items in the sorted listed
-        if ( !moved )
-        {
-            sortedList.putLast( *item );
-        }
-
-        item = m_list.getFirst();
-    }
-
-    // Make the unsorted list THE list
-    sortedList.move( m_list );
-}
 
 IModelPoint* ModelDatabase::find( const char* name ) noexcept
 {

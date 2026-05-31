@@ -212,5 +212,29 @@ TEST_CASE( "common" )
         REQUIRE( strcmp( mpPtr->getName(), "CHERRY1" ) == 0 );
     }
 
+    SECTION( "runtime_db_unsorted_insertion" )
+    {
+        // Create points in non-alphabetical order and verify in-order traversal
+        ModelDatabase myDb;
+        Mp::Uint32    myZulu( myDb, "ZULU" );
+        Mp::Uint32    myAlpha( myDb, "ALPHA" );
+        Mp::Uint32    myMike( myDb, "MIKE" );
+
+        IModelPoint* mpPtr = myDb.getFirstByName();
+        REQUIRE( mpPtr != nullptr );
+        REQUIRE( strcmp( mpPtr->getName(), "ALPHA" ) == 0 );
+
+        mpPtr = myDb.getNextByName( *mpPtr );
+        REQUIRE( mpPtr != nullptr );
+        REQUIRE( strcmp( mpPtr->getName(), "MIKE" ) == 0 );
+
+        mpPtr = myDb.getNextByName( *mpPtr );
+        REQUIRE( mpPtr != nullptr );
+        REQUIRE( strcmp( mpPtr->getName(), "ZULU" ) == 0 );
+
+        mpPtr = myDb.getNextByName( *mpPtr );
+        REQUIRE( mpPtr == nullptr );
+    }
+
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

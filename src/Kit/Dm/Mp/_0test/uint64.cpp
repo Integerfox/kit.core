@@ -108,5 +108,39 @@ TEST_CASE( "Uint64" )
         REQUIRE( value == 1234 );
     }
 
+    SECTION( "bit operations - high bit positions" )
+    {
+        uint16_t seqNum = mp_apple_.write( 0 );
+
+        // Highest valid bit for uint64_t
+        uint16_t seqNum2 = mp_apple_.setBit( 63 );
+        REQUIRE( seqNum2 == seqNum + 1 );
+        valid = mp_apple_.read( value );
+        REQUIRE( valid );
+        REQUIRE( value == ( static_cast<uint64_t>( 1 ) << 63 ) );
+
+        seqNum  = seqNum2;
+        seqNum2 = mp_apple_.clearBit( 63 );
+        REQUIRE( seqNum2 == seqNum + 1 );
+        valid = mp_apple_.read( value );
+        REQUIRE( valid );
+        REQUIRE( value == 0 );
+
+        seqNum  = seqNum2;
+        seqNum2 = mp_apple_.flipBit( 63 );
+        REQUIRE( seqNum2 == seqNum + 1 );
+        valid = mp_apple_.read( value );
+        REQUIRE( valid );
+        REQUIRE( value == ( static_cast<uint64_t>( 1 ) << 63 ) );
+
+        // Out-of-range bit should no-op and preserve sequence number
+        seqNum  = seqNum2;
+        seqNum2 = mp_apple_.setBit( 64 );
+        REQUIRE( seqNum2 == seqNum );
+        valid = mp_apple_.read( value );
+        REQUIRE( valid );
+        REQUIRE( value == ( static_cast<uint64_t>( 1 ) << 63 ) );
+    }
+
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

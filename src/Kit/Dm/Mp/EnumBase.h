@@ -135,7 +135,7 @@ public:
             return false;
         }
 
-        retSequenceNumber = write( *maybeValue, lockRequest );
+        retSequenceNumber = write( *maybeValue, false, lockRequest );
         return true;
     }
 };

@@ -193,7 +193,7 @@ public:
             {
                 tempArray[idx] = elems[idx + offset].as<ELEMTYPE>();
             }
-            retSequenceNumber  = ArrayBase::writeArrayElements( tempArray, idx, startIdx + offset, lockRequest );
+            retSequenceNumber  = ArrayBase::writeArrayElements( tempArray, idx, startIdx + offset, false, lockRequest );
             offset            += idx;
             numElements       -= idx;
         }
