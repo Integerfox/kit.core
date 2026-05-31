@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-28 01:49:24</td>
+            <td class="headerValue">2026-05-31 13:10:05</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryLo">28.6&nbsp;%</td>
@@ -90,20 +90,20 @@
 <span id="L28"><span class="lineNum">      28</span>                 :             : namespace System {</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : </span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : ////////////////////////////////////////////////////////////////////////////////</span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC tlaBgGNC">         329 : void ShutdownUnitTesting::clearAndUseCounter() noexcept</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC tlaBgGNC">         334 : void ShutdownUnitTesting::clearAndUseCounter() noexcept</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : {</span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">         329 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">         329 :     counter_  = 0;</span></span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">         329 :     counting_ = true;</span></span>
-<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">         329 :     testing_  = true;</span></span>
-<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">         329 : }</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">         334 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">         334 :     counter_  = 0;</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">         334 :     counting_ = true;</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">         334 :     testing_  = true;</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">         334 : }</span></span>
 <span id="L38"><span class="lineNum">      38</span>                 :             : </span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         369 : size_t ShutdownUnitTesting::getAndClearCounter() noexcept</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">         376 : size_t ShutdownUnitTesting::getAndClearCounter() noexcept</span></span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : {</span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">         369 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         369 :     size_t           temp = counter_;</span></span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         369 :     counter_              = 0;</span></span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">         369 :     return temp;</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">         376 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         376 :     size_t           temp = counter_;</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         376 :     counter_              = 0;</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">         376 :     return temp;</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : }</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             : </span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
@@ -124,22 +124,22 @@
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : ////////////////////////////////////////////////////////////////////////////////</span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC tlaBgGNC">          19 : static int preprocess_shutdown_( int exitCode, bool&amp; trueExit ) noexcept</span></span>
+<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC tlaBgGNC">          21 : static int preprocess_shutdown_( int exitCode, bool&amp; trueExit ) noexcept</span></span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : {</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">          19 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">          21 :     Mutex::ScopeLock criticalSection( PrivateLocks::system() );</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : </span>
-<span id="L69"><span class="lineNum">      69</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">          19 :     if ( !testing_ )</span></span>
+<span id="L69"><span class="lineNum">      69</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 21 times"> + </span>]:<span class="tlaGNC">          21 :     if ( !testing_ )</span></span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :     {</span>
 <span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         trueExit = true;</span></span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :     }</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     else</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :     {</span>
-<span id="L75"><span class="lineNum">      75</span>         [<span class="tlaGBC" title="Branch 0 was taken 19 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">          19 :         if ( counting_ )</span></span>
+<span id="L75"><span class="lineNum">      75</span>         [<span class="tlaGBC" title="Branch 0 was taken 21 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">          21 :         if ( counting_ )</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :         {</span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          19 :             counter_++;</span></span>
-<span id="L78"><span class="lineNum">      78</span>         [<span class="tlaGBC" title="Branch 0 was taken 19 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          19 :             if ( counter_ &lt; OPTION_KIT_SYSTEM_SHUTDOWN_UNI_TESTING_MAX_FATAL_ERRORS )</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          21 :             counter_++;</span></span>
+<span id="L78"><span class="lineNum">      78</span>         [<span class="tlaGBC" title="Branch 0 was taken 21 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          21 :             if ( counter_ &lt; OPTION_KIT_SYSTEM_SHUTDOWN_UNI_TESTING_MAX_FATAL_ERRORS )</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :             {</span>
-<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">          19 :                 trueExit = false;</span></span>
+<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">          21 :                 trueExit = false;</span></span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :             }</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :             else</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :             {</span>
@@ -154,7 +154,7 @@
 <span id="L92"><span class="lineNum">      92</span>                 :             :         }</span>
 <span id="L93"><span class="lineNum">      93</span>                 :             :     }</span>
 <span id="L94"><span class="lineNum">      94</span>                 :             : </span>
-<span id="L95"><span class="lineNum">      95</span>                 :<span class="tlaGNC tlaBgGNC">          19 :     return exitCode;</span></span>
+<span id="L95"><span class="lineNum">      95</span>                 :<span class="tlaGNC tlaBgGNC">          21 :     return exitCode;</span></span>
 <span id="L96"><span class="lineNum">      96</span>                 :             : }</span>
 <span id="L97"><span class="lineNum">      97</span>                 :             : </span>
 <span id="L98"><span class="lineNum">      98</span>                 :             : </span>
@@ -172,17 +172,17 @@
 <span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaUNC">           0 :     return exitCode;</span></span>
 <span id="L111"><span class="lineNum">     111</span>                 :             : }</span>
 <span id="L112"><span class="lineNum">     112</span>                 :             : </span>
-<span id="L113"><span class="lineNum">     113</span>                 :<span class="tlaGNC tlaBgGNC">          19 : int Shutdown::failure( int exitCode ) noexcept</span></span>
+<span id="L113"><span class="lineNum">     113</span>                 :<span class="tlaGNC tlaBgGNC">          21 : int Shutdown::failure( int exitCode ) noexcept</span></span>
 <span id="L114"><span class="lineNum">     114</span>                 :             : {</span>
-<span id="L115"><span class="lineNum">     115</span>                 :<span class="tlaGNC">          19 :     bool trueExit = true;</span></span>
-<span id="L116"><span class="lineNum">     116</span>                 :<span class="tlaGNC">          19 :     exitCode      = preprocess_shutdown_( exitCode, trueExit );</span></span>
-<span id="L117"><span class="lineNum">     117</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">          19 :     if ( trueExit )</span></span>
+<span id="L115"><span class="lineNum">     115</span>                 :<span class="tlaGNC">          21 :     bool trueExit = true;</span></span>
+<span id="L116"><span class="lineNum">     116</span>                 :<span class="tlaGNC">          21 :     exitCode      = preprocess_shutdown_( exitCode, trueExit );</span></span>
+<span id="L117"><span class="lineNum">     117</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 21 times"> + </span>]:<span class="tlaGNC">          21 :     if ( trueExit )</span></span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :     {</span>
 <span id="L119"><span class="lineNum">     119</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         exitCode = notifyShutdownHandlers( exitCode );</span></span>
 <span id="L120"><span class="lineNum">     120</span>                 :<span class="tlaUNC">           0 :         exit( exitCode );</span></span>
 <span id="L121"><span class="lineNum">     121</span>                 :             :     }</span>
 <span id="L122"><span class="lineNum">     122</span>                 :             : </span>
-<span id="L123"><span class="lineNum">     123</span>                 :<span class="tlaGNC tlaBgGNC">          19 :     return exitCode;</span></span>
+<span id="L123"><span class="lineNum">     123</span>                 :<span class="tlaGNC tlaBgGNC">          21 :     return exitCode;</span></span>
 <span id="L124"><span class="lineNum">     124</span>                 :             : }</span>
 <span id="L125"><span class="lineNum">     125</span>                 :             : </span>
 <span id="L126"><span class="lineNum">     126</span>                 :             : }  // end namespaces</span>

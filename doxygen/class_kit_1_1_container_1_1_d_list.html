@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kit: Kit::Container::DList&lt; ITEM &gt; Class Template Reference</title>
+<title>Kit: Kit::Container::DList&lt; EXT_ITEM &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 308-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 312-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -48,23 +48,23 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_kit_1_1_container_1_1_d_list-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">Kit::Container::DList&lt; ITEM &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">Kit::Container::DList&lt; EXT_ITEM &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This template class implements a singly linked list which maintains the ordering imposed on it by the application.  
+<p>This template class implements a double linked list which maintains the ordering imposed on it by the application.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_d_list_8h_source.html">DList.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Container::DList&lt; ITEM &gt;:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Kit::Container::DList&lt; EXT_ITEM &gt;:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
 <div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_d_list__inherit__graph.svg" width="808" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::DList&lt; ITEM &gt;:</div>
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::DList&lt; EXT_ITEM &gt;:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
@@ -73,75 +73,75 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aebdde7f089cf2b9bf70f9d151bf9caa6" id="r_aebdde7f089cf2b9bf70f9d151bf9caa6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebdde7f089cf2b9bf70f9d151bf9caa6">DList</a> () noexcept</td></tr>
-<tr class="memdesc:aebdde7f089cf2b9bf70f9d151bf9caa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Public constructor initializes head and tail pointers.  <br /></td></tr>
-<tr class="separator:aebdde7f089cf2b9bf70f9d151bf9caa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81a6c948332460aab0a53d1763ef797c" id="r_a81a6c948332460aab0a53d1763ef797c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81a6c948332460aab0a53d1763ef797c">DList</a> (const char *ignoreThisParameter_usedToCreateAUniqueConstructor) noexcept</td></tr>
-<tr class="memdesc:a81a6c948332460aab0a53d1763ef797c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a special constructor for when the list is statically declared (i.e.  <br /></td></tr>
-<tr class="separator:a81a6c948332460aab0a53d1763ef797c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bfa5c9af0752448080c8f6192499532" id="r_a1bfa5c9af0752448080c8f6192499532"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bfa5c9af0752448080c8f6192499532">clearTheList</a> () noexcept</td></tr>
-<tr class="memdesc:a1bfa5c9af0752448080c8f6192499532"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empties the list. All references to the item(s) in the list are lost.  <br /></td></tr>
-<tr class="separator:a1bfa5c9af0752448080c8f6192499532"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7134c92d6d910270efd5262296f0a1e5" id="r_a7134c92d6d910270efd5262296f0a1e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7134c92d6d910270efd5262296f0a1e5">find</a> (const ITEM &amp;item) const noexcept</td></tr>
-<tr class="memdesc:a7134c92d6d910270efd5262296f0a1e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified item is already in the list, else false.  <br /></td></tr>
-<tr class="separator:a7134c92d6d910270efd5262296f0a1e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c70e7e614babecf5e79261fadef073c" id="r_a1c70e7e614babecf5e79261fadef073c"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c70e7e614babecf5e79261fadef073c">first</a> () const noexcept</td></tr>
-<tr class="memdesc:a1c70e7e614babecf5e79261fadef073c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the first item in the list.  <br /></td></tr>
-<tr class="separator:a1c70e7e614babecf5e79261fadef073c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef6d3b37bf28125bb80ad466e3c6e312" id="r_aef6d3b37bf28125bb80ad466e3c6e312"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef6d3b37bf28125bb80ad466e3c6e312">get</a> () noexcept</td></tr>
-<tr class="memdesc:aef6d3b37bf28125bb80ad466e3c6e312"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the list. Returns nullptr if the list is empty.  <br /></td></tr>
-<tr class="separator:aef6d3b37bf28125bb80ad466e3c6e312"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75d044ec32a7e1bdb03e465814f16824" id="r_a75d044ec32a7e1bdb03e465814f16824"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75d044ec32a7e1bdb03e465814f16824">getFirst</a> () noexcept</td></tr>
-<tr class="memdesc:a75d044ec32a7e1bdb03e465814f16824"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the list.  <br /></td></tr>
-<tr class="separator:a75d044ec32a7e1bdb03e465814f16824"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1538970306a169376dfd70f9b9f86a7b" id="r_a1538970306a169376dfd70f9b9f86a7b"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1538970306a169376dfd70f9b9f86a7b">getLast</a> () noexcept</td></tr>
-<tr class="memdesc:a1538970306a169376dfd70f9b9f86a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the last item in the list.  <br /></td></tr>
-<tr class="separator:a1538970306a169376dfd70f9b9f86a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac97dfdb65bf34c2ffc6b027be2f9784a" id="r_ac97dfdb65bf34c2ffc6b027be2f9784a"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac97dfdb65bf34c2ffc6b027be2f9784a">head</a> () const noexcept</td></tr>
-<tr class="memdesc:ac97dfdb65bf34c2ffc6b027be2f9784a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the first item in the list.  <br /></td></tr>
-<tr class="separator:ac97dfdb65bf34c2ffc6b027be2f9784a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab97a2ed7e1fbd1118f6555961bbd3934" id="r_ab97a2ed7e1fbd1118f6555961bbd3934"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab97a2ed7e1fbd1118f6555961bbd3934">insertAfter</a> (ITEM &amp;after, ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:ab97a2ed7e1fbd1118f6555961bbd3934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the "item" ITEM into the list behind the "after" ITEM element.  <br /></td></tr>
-<tr class="separator:ab97a2ed7e1fbd1118f6555961bbd3934"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f380f7f06383b81c93cc7aed5d13f30" id="r_a9f380f7f06383b81c93cc7aed5d13f30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f380f7f06383b81c93cc7aed5d13f30">insertBefore</a> (ITEM &amp;before, ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a9f380f7f06383b81c93cc7aed5d13f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the "item" ITEM into the list ahead of the "before" ITEM element.  <br /></td></tr>
-<tr class="separator:a9f380f7f06383b81c93cc7aed5d13f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac43e61807e59841790bf0501f948dc7c" id="r_ac43e61807e59841790bf0501f948dc7c"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac43e61807e59841790bf0501f948dc7c">last</a> () const noexcept</td></tr>
-<tr class="memdesc:ac43e61807e59841790bf0501f948dc7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the last item in the list.  <br /></td></tr>
-<tr class="separator:ac43e61807e59841790bf0501f948dc7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0778772eb0d38f87aa8bab90794d9d02" id="r_a0778772eb0d38f87aa8bab90794d9d02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0778772eb0d38f87aa8bab90794d9d02">move</a> (<a class="el" href="class_kit_1_1_container_1_1_d_list.html">DList</a>&lt; ITEM &gt; &amp;dst) noexcept</td></tr>
-<tr class="memdesc:a0778772eb0d38f87aa8bab90794d9d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the content of the this queue to the specified queue.  <br /></td></tr>
-<tr class="separator:a0778772eb0d38f87aa8bab90794d9d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74a569dc120d608e5cad771fb9df0940" id="r_a74a569dc120d608e5cad771fb9df0940"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74a569dc120d608e5cad771fb9df0940">next</a> (const ITEM &amp;item) const noexcept</td></tr>
-<tr class="memdesc:a74a569dc120d608e5cad771fb9df0940"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the item after the "item".  <br /></td></tr>
-<tr class="separator:a74a569dc120d608e5cad771fb9df0940"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af54cc094063d148f47c9624c0d58ac78" id="r_af54cc094063d148f47c9624c0d58ac78"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af54cc094063d148f47c9624c0d58ac78">pop</a> () noexcept</td></tr>
-<tr class="memdesc:af54cc094063d148f47c9624c0d58ac78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the top element from stack and return a pointer to it as a result.  <br /></td></tr>
-<tr class="separator:af54cc094063d148f47c9624c0d58ac78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add9d87b0146c9a5740e3a2ed0811fa03" id="r_add9d87b0146c9a5740e3a2ed0811fa03"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add9d87b0146c9a5740e3a2ed0811fa03">previous</a> (const ITEM &amp;item) const noexcept</td></tr>
-<tr class="memdesc:add9d87b0146c9a5740e3a2ed0811fa03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the item before the "item".  <br /></td></tr>
-<tr class="separator:add9d87b0146c9a5740e3a2ed0811fa03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc03fb867f6d7df5f7a01c8934eb1a17" id="r_abc03fb867f6d7df5f7a01c8934eb1a17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc03fb867f6d7df5f7a01c8934eb1a17">push</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:abc03fb867f6d7df5f7a01c8934eb1a17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the ITEM item to top of the stack.  <br /></td></tr>
-<tr class="separator:abc03fb867f6d7df5f7a01c8934eb1a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88dcb94b907ada466609c60cf38afdd3" id="r_a88dcb94b907ada466609c60cf38afdd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88dcb94b907ada466609c60cf38afdd3">put</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a88dcb94b907ada466609c60cf38afdd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the item as the last item in the list.  <br /></td></tr>
-<tr class="separator:a88dcb94b907ada466609c60cf38afdd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5e93d457a681af80c8a6d2f4a32b291" id="r_ac5e93d457a681af80c8a6d2f4a32b291"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac5e93d457a681af80c8a6d2f4a32b291">putFirst</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:ac5e93d457a681af80c8a6d2f4a32b291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the item as the first item in the list.  <br /></td></tr>
-<tr class="separator:ac5e93d457a681af80c8a6d2f4a32b291"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f34c6888bcf78f28cd222a4732bbdab" id="r_a8f34c6888bcf78f28cd222a4732bbdab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f34c6888bcf78f28cd222a4732bbdab">putLast</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a8f34c6888bcf78f28cd222a4732bbdab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the item as the last item in the list.  <br /></td></tr>
-<tr class="separator:a8f34c6888bcf78f28cd222a4732bbdab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a415cedc69710ad5d8d27cab02330775b" id="r_a415cedc69710ad5d8d27cab02330775b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a415cedc69710ad5d8d27cab02330775b">remove</a> (ITEM &amp;item) noexcept</td></tr>
-<tr class="memdesc:a415cedc69710ad5d8d27cab02330775b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove specified ITEM element from the list.  <br /></td></tr>
-<tr class="separator:a415cedc69710ad5d8d27cab02330775b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbbb63ea8a539aa4aabead4f842eef7c" id="r_afbbb63ea8a539aa4aabead4f842eef7c"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbbb63ea8a539aa4aabead4f842eef7c">tail</a> () const noexcept</td></tr>
-<tr class="memdesc:afbbb63ea8a539aa4aabead4f842eef7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the last item in the list.  <br /></td></tr>
-<tr class="separator:afbbb63ea8a539aa4aabead4f842eef7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1faf2981d5615440f759e2a0f3da24d0" id="r_a1faf2981d5615440f759e2a0f3da24d0"><td class="memItemLeft" align="right" valign="top">ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1faf2981d5615440f759e2a0f3da24d0">top</a> () const noexcept</td></tr>
-<tr class="memdesc:a1faf2981d5615440f759e2a0f3da24d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the top ITEM item in the stack.  <br /></td></tr>
-<tr class="separator:a1faf2981d5615440f759e2a0f3da24d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe4b7338d1c8ee9a9f0e5eb2ad99ba2c" id="r_abe4b7338d1c8ee9a9f0e5eb2ad99ba2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe4b7338d1c8ee9a9f0e5eb2ad99ba2c">DList</a> () noexcept</td></tr>
+<tr class="memdesc:abe4b7338d1c8ee9a9f0e5eb2ad99ba2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Public constructor initializes head and tail pointers.  <br /></td></tr>
+<tr class="separator:abe4b7338d1c8ee9a9f0e5eb2ad99ba2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90078b74f359e7c32682d98abe3f774b" id="r_a90078b74f359e7c32682d98abe3f774b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90078b74f359e7c32682d98abe3f774b">DList</a> (const char *ignoreThisParameter_usedToCreateAUniqueConstructor) noexcept</td></tr>
+<tr class="memdesc:a90078b74f359e7c32682d98abe3f774b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is a special constructor for when the list is statically declared (i.e.  <br /></td></tr>
+<tr class="separator:a90078b74f359e7c32682d98abe3f774b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a165b14f3e75bb9a2898cd69752917a9f" id="r_a165b14f3e75bb9a2898cd69752917a9f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a165b14f3e75bb9a2898cd69752917a9f">clearTheList</a> () noexcept</td></tr>
+<tr class="memdesc:a165b14f3e75bb9a2898cd69752917a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empties the list. All references to the item(s) in the list are lost.  <br /></td></tr>
+<tr class="separator:a165b14f3e75bb9a2898cd69752917a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a044452221f2593d71b5659274696b07a" id="r_a044452221f2593d71b5659274696b07a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a044452221f2593d71b5659274696b07a">find</a> (const EXT_ITEM &amp;item) const noexcept</td></tr>
+<tr class="memdesc:a044452221f2593d71b5659274696b07a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the specified item is already in the list, else false.  <br /></td></tr>
+<tr class="separator:a044452221f2593d71b5659274696b07a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cba7c938e5e6c78fe9e9ebea8e401b7" id="r_a4cba7c938e5e6c78fe9e9ebea8e401b7"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cba7c938e5e6c78fe9e9ebea8e401b7">first</a> () const noexcept</td></tr>
+<tr class="memdesc:a4cba7c938e5e6c78fe9e9ebea8e401b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the first item in the list.  <br /></td></tr>
+<tr class="separator:a4cba7c938e5e6c78fe9e9ebea8e401b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1df546261001bd106c92ee2c4d0851b" id="r_ac1df546261001bd106c92ee2c4d0851b"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1df546261001bd106c92ee2c4d0851b">get</a> () noexcept</td></tr>
+<tr class="memdesc:ac1df546261001bd106c92ee2c4d0851b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the list. Returns nullptr if the list is empty.  <br /></td></tr>
+<tr class="separator:ac1df546261001bd106c92ee2c4d0851b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61ef280769169e7184e9f7cb20417f4" id="r_ac61ef280769169e7184e9f7cb20417f4"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac61ef280769169e7184e9f7cb20417f4">getFirst</a> () noexcept</td></tr>
+<tr class="memdesc:ac61ef280769169e7184e9f7cb20417f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the first item in the list.  <br /></td></tr>
+<tr class="separator:ac61ef280769169e7184e9f7cb20417f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b1c5bce68ade432fa985209a3fe21b1" id="r_a5b1c5bce68ade432fa985209a3fe21b1"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b1c5bce68ade432fa985209a3fe21b1">getLast</a> () noexcept</td></tr>
+<tr class="memdesc:a5b1c5bce68ade432fa985209a3fe21b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the last item in the list.  <br /></td></tr>
+<tr class="separator:a5b1c5bce68ade432fa985209a3fe21b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c88f2b17adb003031632dfb8837755f" id="r_a8c88f2b17adb003031632dfb8837755f"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c88f2b17adb003031632dfb8837755f">head</a> () const noexcept</td></tr>
+<tr class="memdesc:a8c88f2b17adb003031632dfb8837755f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the first item in the list.  <br /></td></tr>
+<tr class="separator:a8c88f2b17adb003031632dfb8837755f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af39ec2f6d1468fd533cc0ab58c46c8a9" id="r_af39ec2f6d1468fd533cc0ab58c46c8a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af39ec2f6d1468fd533cc0ab58c46c8a9">insertAfter</a> (EXT_ITEM &amp;after, EXT_ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:af39ec2f6d1468fd533cc0ab58c46c8a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the "item" EXT_ITEM into the list behind the "after" EXT_ITEM element.  <br /></td></tr>
+<tr class="separator:af39ec2f6d1468fd533cc0ab58c46c8a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd2b899d2bb1cf757bcd7a18264359f3" id="r_abd2b899d2bb1cf757bcd7a18264359f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd2b899d2bb1cf757bcd7a18264359f3">insertBefore</a> (EXT_ITEM &amp;before, EXT_ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:abd2b899d2bb1cf757bcd7a18264359f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert the "item" EXT_ITEM into the list ahead of the "before" EXT_ITEM element.  <br /></td></tr>
+<tr class="separator:abd2b899d2bb1cf757bcd7a18264359f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ac93039aecaf7f8ab307f778670789e" id="r_a2ac93039aecaf7f8ab307f778670789e"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ac93039aecaf7f8ab307f778670789e">last</a> () const noexcept</td></tr>
+<tr class="memdesc:a2ac93039aecaf7f8ab307f778670789e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the last item in the list.  <br /></td></tr>
+<tr class="separator:a2ac93039aecaf7f8ab307f778670789e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae86115e361dff780d975543d48e85198" id="r_ae86115e361dff780d975543d48e85198"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae86115e361dff780d975543d48e85198">move</a> (<a class="el" href="class_kit_1_1_container_1_1_d_list.html">DList</a>&lt; EXT_ITEM &gt; &amp;dst) noexcept</td></tr>
+<tr class="memdesc:ae86115e361dff780d975543d48e85198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the content of the this queue to the specified queue.  <br /></td></tr>
+<tr class="separator:ae86115e361dff780d975543d48e85198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e81e6fc155786055c0ca07677be3126" id="r_a8e81e6fc155786055c0ca07677be3126"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e81e6fc155786055c0ca07677be3126">next</a> (const EXT_ITEM &amp;item) const noexcept</td></tr>
+<tr class="memdesc:a8e81e6fc155786055c0ca07677be3126"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the item after the "item".  <br /></td></tr>
+<tr class="separator:a8e81e6fc155786055c0ca07677be3126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9604679f594f6282b5ae6c299f65a9db" id="r_a9604679f594f6282b5ae6c299f65a9db"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9604679f594f6282b5ae6c299f65a9db">pop</a> () noexcept</td></tr>
+<tr class="memdesc:a9604679f594f6282b5ae6c299f65a9db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the top element from stack and return a pointer to it as a result.  <br /></td></tr>
+<tr class="separator:a9604679f594f6282b5ae6c299f65a9db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa05f4625f3a69c8948e872ca56000a0c" id="r_aa05f4625f3a69c8948e872ca56000a0c"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa05f4625f3a69c8948e872ca56000a0c">previous</a> (const EXT_ITEM &amp;item) const noexcept</td></tr>
+<tr class="memdesc:aa05f4625f3a69c8948e872ca56000a0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the item before the "item".  <br /></td></tr>
+<tr class="separator:aa05f4625f3a69c8948e872ca56000a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a036442b76f4eb9523a94970a9eb0c151" id="r_a036442b76f4eb9523a94970a9eb0c151"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a036442b76f4eb9523a94970a9eb0c151">push</a> (EXT_ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a036442b76f4eb9523a94970a9eb0c151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the EXT_ITEM item to top of the stack.  <br /></td></tr>
+<tr class="separator:a036442b76f4eb9523a94970a9eb0c151"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ddb37433bcc10b8ea0d03dff2cf1d66" id="r_a6ddb37433bcc10b8ea0d03dff2cf1d66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ddb37433bcc10b8ea0d03dff2cf1d66">put</a> (EXT_ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a6ddb37433bcc10b8ea0d03dff2cf1d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the item as the last item in the list.  <br /></td></tr>
+<tr class="separator:a6ddb37433bcc10b8ea0d03dff2cf1d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a04a8cf89c7554413fc463f6a656ff4" id="r_a9a04a8cf89c7554413fc463f6a656ff4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a04a8cf89c7554413fc463f6a656ff4">putFirst</a> (EXT_ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a9a04a8cf89c7554413fc463f6a656ff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the item as the first item in the list.  <br /></td></tr>
+<tr class="separator:a9a04a8cf89c7554413fc463f6a656ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d3121ba1852115d0d867e984d9f7c9" id="r_a05d3121ba1852115d0d867e984d9f7c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05d3121ba1852115d0d867e984d9f7c9">putLast</a> (EXT_ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a05d3121ba1852115d0d867e984d9f7c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the item as the last item in the list.  <br /></td></tr>
+<tr class="separator:a05d3121ba1852115d0d867e984d9f7c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dd026aed3311cca12b66f5959468108" id="r_a1dd026aed3311cca12b66f5959468108"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dd026aed3311cca12b66f5959468108">remove</a> (EXT_ITEM &amp;item) noexcept</td></tr>
+<tr class="memdesc:a1dd026aed3311cca12b66f5959468108"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove specified EXT_ITEM element from the list.  <br /></td></tr>
+<tr class="separator:a1dd026aed3311cca12b66f5959468108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7405e0ce33277553f870757e0848431" id="r_af7405e0ce33277553f870757e0848431"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af7405e0ce33277553f870757e0848431">tail</a> () const noexcept</td></tr>
+<tr class="memdesc:af7405e0ce33277553f870757e0848431"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the last item in the list.  <br /></td></tr>
+<tr class="separator:af7405e0ce33277553f870757e0848431"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a392519faa2bfda7ac7d769f2a091fa78" id="r_a392519faa2bfda7ac7d769f2a091fa78"><td class="memItemLeft" align="right" valign="top">EXT_ITEM *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a392519faa2bfda7ac7d769f2a091fa78">top</a> () const noexcept</td></tr>
+<tr class="memdesc:a392519faa2bfda7ac7d769f2a091fa78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a pointer to the top EXT_ITEM item in the stack.  <br /></td></tr>
+<tr class="separator:a392519faa2bfda7ac7d769f2a091fa78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -203,24 +203,24 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a5197319b8cff0f1ea5daa64d535d189c inherit pro_attribs_class_kit_1_1_container_1_1_d_list_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;class ITEM&gt;<br />
-class Kit::Container::DList&lt; ITEM &gt;</div><p>This template class implements a singly linked list which maintains the ordering imposed on it by the application. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class EXT_ITEM&gt;<br />
+class Kit::Container::DList&lt; EXT_ITEM &gt;</div><p>This template class implements a double linked list which maintains the ordering imposed on it by the application. </p>
 <p>It is type-safe wrapper around the <a class="el" href="class_kit_1_1_container_1_1_d_list_base.html" title="This protected base class implements a NON-TYPE-SAFE a doubly linked list which maintains the orderin...">DListBase</a> class.</p>
-<p>NOTE: ITEM must be a subclass of Kit::Container::ExtendedItem. </p>
+<p>NOTE: EXT_ITEM must be a subclass of Kit::Container::ExtendedItem. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aebdde7f089cf2b9bf70f9d151bf9caa6" name="aebdde7f089cf2b9bf70f9d151bf9caa6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebdde7f089cf2b9bf70f9d151bf9caa6">&#9670;&#160;</a></span>DList() <span class="overload">[1/2]</span></h2>
+<a id="abe4b7338d1c8ee9a9f0e5eb2ad99ba2c" name="abe4b7338d1c8ee9a9f0e5eb2ad99ba2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe4b7338d1c8ee9a9f0e5eb2ad99ba2c">&#9670;&#160;</a></span>DList() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::DList </td>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::DList </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -237,19 +237,19 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a81a6c948332460aab0a53d1763ef797c" name="a81a6c948332460aab0a53d1763ef797c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81a6c948332460aab0a53d1763ef797c">&#9670;&#160;</a></span>DList() <span class="overload">[2/2]</span></h2>
+<a id="a90078b74f359e7c32682d98abe3f774b" name="a90078b74f359e7c32682d98abe3f774b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90078b74f359e7c32682d98abe3f774b">&#9670;&#160;</a></span>DList() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::DList </td>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::DList </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>ignoreThisParameter_usedToCreateAUniqueConstructor</em></span></td><td>)</td>
           <td></td>
@@ -268,19 +268,19 @@ template&lt;class ITEM &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1bfa5c9af0752448080c8f6192499532" name="a1bfa5c9af0752448080c8f6192499532"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1bfa5c9af0752448080c8f6192499532">&#9670;&#160;</a></span>clearTheList()</h2>
+<a id="a165b14f3e75bb9a2898cd69752917a9f" name="a165b14f3e75bb9a2898cd69752917a9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a165b14f3e75bb9a2898cd69752917a9f">&#9670;&#160;</a></span>clearTheList()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::clearTheList </td>
+          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::clearTheList </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -297,21 +297,21 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a7134c92d6d910270efd5262296f0a1e5" name="a7134c92d6d910270efd5262296f0a1e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7134c92d6d910270efd5262296f0a1e5">&#9670;&#160;</a></span>find()</h2>
+<a id="a044452221f2593d71b5659274696b07a" name="a044452221f2593d71b5659274696b07a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a044452221f2593d71b5659274696b07a">&#9670;&#160;</a></span>find()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::find </td>
+          <td class="memname">bool <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::find </td>
           <td>(</td>
-          <td class="paramtype">const ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">const EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -326,19 +326,19 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a1c70e7e614babecf5e79261fadef073c" name="a1c70e7e614babecf5e79261fadef073c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c70e7e614babecf5e79261fadef073c">&#9670;&#160;</a></span>first()</h2>
+<a id="a4cba7c938e5e6c78fe9e9ebea8e401b7" name="a4cba7c938e5e6c78fe9e9ebea8e401b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cba7c938e5e6c78fe9e9ebea8e401b7">&#9670;&#160;</a></span>first()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::first </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::first </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -356,19 +356,19 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="aef6d3b37bf28125bb80ad466e3c6e312" name="aef6d3b37bf28125bb80ad466e3c6e312"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef6d3b37bf28125bb80ad466e3c6e312">&#9670;&#160;</a></span>get()</h2>
+<a id="ac1df546261001bd106c92ee2c4d0851b" name="ac1df546261001bd106c92ee2c4d0851b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1df546261001bd106c92ee2c4d0851b">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::get </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::get </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -385,19 +385,19 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a75d044ec32a7e1bdb03e465814f16824" name="a75d044ec32a7e1bdb03e465814f16824"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75d044ec32a7e1bdb03e465814f16824">&#9670;&#160;</a></span>getFirst()</h2>
+<a id="ac61ef280769169e7184e9f7cb20417f4" name="ac61ef280769169e7184e9f7cb20417f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac61ef280769169e7184e9f7cb20417f4">&#9670;&#160;</a></span>getFirst()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::getFirst </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::getFirst </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -415,19 +415,19 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a1538970306a169376dfd70f9b9f86a7b" name="a1538970306a169376dfd70f9b9f86a7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1538970306a169376dfd70f9b9f86a7b">&#9670;&#160;</a></span>getLast()</h2>
+<a id="a5b1c5bce68ade432fa985209a3fe21b1" name="a5b1c5bce68ade432fa985209a3fe21b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b1c5bce68ade432fa985209a3fe21b1">&#9670;&#160;</a></span>getLast()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::getLast </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::getLast </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -445,19 +445,19 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="ac97dfdb65bf34c2ffc6b027be2f9784a" name="ac97dfdb65bf34c2ffc6b027be2f9784a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac97dfdb65bf34c2ffc6b027be2f9784a">&#9670;&#160;</a></span>head()</h2>
+<a id="a8c88f2b17adb003031632dfb8837755f" name="a8c88f2b17adb003031632dfb8837755f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c88f2b17adb003031632dfb8837755f">&#9670;&#160;</a></span>head()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::head </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::head </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -475,26 +475,26 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="ab97a2ed7e1fbd1118f6555961bbd3934" name="ab97a2ed7e1fbd1118f6555961bbd3934"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab97a2ed7e1fbd1118f6555961bbd3934">&#9670;&#160;</a></span>insertAfter()</h2>
+<a id="af39ec2f6d1468fd533cc0ab58c46c8a9" name="af39ec2f6d1468fd533cc0ab58c46c8a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af39ec2f6d1468fd533cc0ab58c46c8a9">&#9670;&#160;</a></span>insertAfter()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::insertAfter </td>
+          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::insertAfter </td>
           <td>(</td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>after</em>, </span></td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>after</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span>&#160;)</td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -504,31 +504,31 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Insert the "item" ITEM into the list behind the "after" ITEM element. </p>
+<p>Insert the "item" EXT_ITEM into the list behind the "after" EXT_ITEM element. </p>
 <p>If 'after' is nullptr, then 'item' is added to the head of the list. </p>
 
 </div>
 </div>
-<a id="a9f380f7f06383b81c93cc7aed5d13f30" name="a9f380f7f06383b81c93cc7aed5d13f30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f380f7f06383b81c93cc7aed5d13f30">&#9670;&#160;</a></span>insertBefore()</h2>
+<a id="abd2b899d2bb1cf757bcd7a18264359f3" name="abd2b899d2bb1cf757bcd7a18264359f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd2b899d2bb1cf757bcd7a18264359f3">&#9670;&#160;</a></span>insertBefore()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::insertBefore </td>
+          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::insertBefore </td>
           <td>(</td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>before</em>, </span></td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>before</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span>&#160;)</td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -538,25 +538,25 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Insert the "item" ITEM into the list ahead of the "before" ITEM element. </p>
+<p>Insert the "item" EXT_ITEM into the list ahead of the "before" EXT_ITEM element. </p>
 <p>If 'before' is nullptr, then 'item' is added to the tail of the list.</p>
-<p>Note: This insert operation is more expensive than <a class="el" href="#ab97a2ed7e1fbd1118f6555961bbd3934" title="Insert the &quot;item&quot; ITEM into the list behind the &quot;after&quot; ITEM element.">insertAfter()</a> because a traversal of the list is required to find the 'before' item </p>
+<p>Note: This insert operation is more expensive than <a class="el" href="#af39ec2f6d1468fd533cc0ab58c46c8a9" title="Insert the &quot;item&quot; EXT_ITEM into the list behind the &quot;after&quot; EXT_ITEM element.">insertAfter()</a> because a traversal of the list is required to find the 'before' item </p>
 
 </div>
 </div>
-<a id="ac43e61807e59841790bf0501f948dc7c" name="ac43e61807e59841790bf0501f948dc7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac43e61807e59841790bf0501f948dc7c">&#9670;&#160;</a></span>last()</h2>
+<a id="a2ac93039aecaf7f8ab307f778670789e" name="a2ac93039aecaf7f8ab307f778670789e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ac93039aecaf7f8ab307f778670789e">&#9670;&#160;</a></span>last()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::last </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::last </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -574,21 +574,21 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a0778772eb0d38f87aa8bab90794d9d02" name="a0778772eb0d38f87aa8bab90794d9d02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0778772eb0d38f87aa8bab90794d9d02">&#9670;&#160;</a></span>move()</h2>
+<a id="ae86115e361dff780d975543d48e85198" name="ae86115e361dff780d975543d48e85198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae86115e361dff780d975543d48e85198">&#9670;&#160;</a></span>move()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::move </td>
+          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::move </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_d_list.html">DList</a>&lt; ITEM &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>dst</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_d_list.html">DList</a>&lt; EXT_ITEM &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>dst</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -603,21 +603,21 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a74a569dc120d608e5cad771fb9df0940" name="a74a569dc120d608e5cad771fb9df0940"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74a569dc120d608e5cad771fb9df0940">&#9670;&#160;</a></span>next()</h2>
+<a id="a8e81e6fc155786055c0ca07677be3126" name="a8e81e6fc155786055c0ca07677be3126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e81e6fc155786055c0ca07677be3126">&#9670;&#160;</a></span>next()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::next </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::next </td>
           <td>(</td>
-          <td class="paramtype">const ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">const EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -633,19 +633,19 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="af54cc094063d148f47c9624c0d58ac78" name="af54cc094063d148f47c9624c0d58ac78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af54cc094063d148f47c9624c0d58ac78">&#9670;&#160;</a></span>pop()</h2>
+<a id="a9604679f594f6282b5ae6c299f65a9db" name="a9604679f594f6282b5ae6c299f65a9db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9604679f594f6282b5ae6c299f65a9db">&#9670;&#160;</a></span>pop()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::pop </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::pop </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -663,21 +663,21 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="add9d87b0146c9a5740e3a2ed0811fa03" name="add9d87b0146c9a5740e3a2ed0811fa03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add9d87b0146c9a5740e3a2ed0811fa03">&#9670;&#160;</a></span>previous()</h2>
+<a id="aa05f4625f3a69c8948e872ca56000a0c" name="aa05f4625f3a69c8948e872ca56000a0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa05f4625f3a69c8948e872ca56000a0c">&#9670;&#160;</a></span>previous()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::previous </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::previous </td>
           <td>(</td>
-          <td class="paramtype">const ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">const EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -693,21 +693,21 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="abc03fb867f6d7df5f7a01c8934eb1a17" name="abc03fb867f6d7df5f7a01c8934eb1a17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc03fb867f6d7df5f7a01c8934eb1a17">&#9670;&#160;</a></span>push()</h2>
+<a id="a036442b76f4eb9523a94970a9eb0c151" name="a036442b76f4eb9523a94970a9eb0c151"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a036442b76f4eb9523a94970a9eb0c151">&#9670;&#160;</a></span>push()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::push </td>
+          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::push </td>
           <td>(</td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -718,25 +718,25 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Adds the ITEM item to top of the stack. </p>
+<p>Adds the EXT_ITEM item to top of the stack. </p>
 
 </div>
 </div>
-<a id="a88dcb94b907ada466609c60cf38afdd3" name="a88dcb94b907ada466609c60cf38afdd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88dcb94b907ada466609c60cf38afdd3">&#9670;&#160;</a></span>put()</h2>
+<a id="a6ddb37433bcc10b8ea0d03dff2cf1d66" name="a6ddb37433bcc10b8ea0d03dff2cf1d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ddb37433bcc10b8ea0d03dff2cf1d66">&#9670;&#160;</a></span>put()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::put </td>
+          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::put </td>
           <td>(</td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -751,21 +751,21 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="ac5e93d457a681af80c8a6d2f4a32b291" name="ac5e93d457a681af80c8a6d2f4a32b291"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5e93d457a681af80c8a6d2f4a32b291">&#9670;&#160;</a></span>putFirst()</h2>
+<a id="a9a04a8cf89c7554413fc463f6a656ff4" name="a9a04a8cf89c7554413fc463f6a656ff4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a04a8cf89c7554413fc463f6a656ff4">&#9670;&#160;</a></span>putFirst()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::putFirst </td>
+          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::putFirst </td>
           <td>(</td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -780,21 +780,21 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a8f34c6888bcf78f28cd222a4732bbdab" name="a8f34c6888bcf78f28cd222a4732bbdab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f34c6888bcf78f28cd222a4732bbdab">&#9670;&#160;</a></span>putLast()</h2>
+<a id="a05d3121ba1852115d0d867e984d9f7c9" name="a05d3121ba1852115d0d867e984d9f7c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05d3121ba1852115d0d867e984d9f7c9">&#9670;&#160;</a></span>putLast()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::putLast </td>
+          <td class="memname">void <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::putLast </td>
           <td>(</td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -809,21 +809,21 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a415cedc69710ad5d8d27cab02330775b" name="a415cedc69710ad5d8d27cab02330775b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a415cedc69710ad5d8d27cab02330775b">&#9670;&#160;</a></span>remove()</h2>
+<a id="a1dd026aed3311cca12b66f5959468108" name="a1dd026aed3311cca12b66f5959468108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dd026aed3311cca12b66f5959468108">&#9670;&#160;</a></span>remove()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::remove </td>
+          <td class="memname">bool <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::remove </td>
           <td>(</td>
-          <td class="paramtype">ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
+          <td class="paramtype">EXT_ITEM &amp;</td>          <td class="paramname"><span class="paramname"><em>item</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -834,24 +834,24 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Remove specified ITEM element from the list. </p>
+<p>Remove specified EXT_ITEM element from the list. </p>
 <p>Returns true if the specified element was found and removed from the list, else false. </p>
 
 </div>
 </div>
-<a id="afbbb63ea8a539aa4aabead4f842eef7c" name="afbbb63ea8a539aa4aabead4f842eef7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbbb63ea8a539aa4aabead4f842eef7c">&#9670;&#160;</a></span>tail()</h2>
+<a id="af7405e0ce33277553f870757e0848431" name="af7405e0ce33277553f870757e0848431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7405e0ce33277553f870757e0848431">&#9670;&#160;</a></span>tail()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::tail </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::tail </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -869,19 +869,19 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
-<a id="a1faf2981d5615440f759e2a0f3da24d0" name="a1faf2981d5615440f759e2a0f3da24d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1faf2981d5615440f759e2a0f3da24d0">&#9670;&#160;</a></span>top()</h2>
+<a id="a392519faa2bfda7ac7d769f2a091fa78" name="a392519faa2bfda7ac7d769f2a091fa78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a392519faa2bfda7ac7d769f2a091fa78">&#9670;&#160;</a></span>top()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class ITEM &gt; </div>
+template&lt;class EXT_ITEM &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; ITEM &gt;::top </td>
+          <td class="memname">EXT_ITEM * <a class="el" href="class_kit_1_1_container_1_1_d_list.html">Kit::Container::DList</a>&lt; EXT_ITEM &gt;::top </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -894,7 +894,7 @@ template&lt;class ITEM &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Return a pointer to the top ITEM item in the stack. </p>
+<p>Return a pointer to the top EXT_ITEM item in the stack. </p>
 <p>The returned item remains in the queue. Returns nullptr if the stack is empty. </p>
 
 </div>
@@ -905,7 +905,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 28 2026 01:44:20 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun May 31 2026 13:04:46 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
