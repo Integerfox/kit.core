@@ -14,6 +14,7 @@
 #include "Kit/Text/FString.h"
 #include "Kit/Checksum/Fletcher16.h"
 #include "Kit/Checksum/Crc16CcittFast.h"
+#include "Kit/Checksum/Crc32Mpeg2.h"
 #include "Kit/Checksum/Crc32EthernetFast.h"
 #include "Kit/Checksum/Md5.h"
 #include "Kit/Checksum/Utils.h"
@@ -32,7 +33,8 @@ using namespace Kit::Checksum;
 #define MAX_CRCLEN_     4
 
 #define CRC_CCITT_xFFFF 0x29B1     // CRC value for the text string "123456789"   (see http://www.zorc.breitbandkatze.de/crc.html)
-#define CRC_ETHERNET    0x376E6E7  // CRC value for the text string "123456789"   (see http://www.zorc.breitbandkatze.de/crc.html, Final XOR val=0)
+#define CRC_MPEG2       0x0376E6E7 // CRC-32/MPEG-2 value for the text string "123456789"
+#define CRC_ETHERNET    0xCBF43926 // CRC-32/IEEE 802.3 value for the text string "123456789"
 #define FLETCHER16      0x1e03     // Fletcher checksum for the text "123456789"
 
 // clang-format off
@@ -119,12 +121,20 @@ TEST_CASE( "Checksums", "[chksum]" )
         REQUIRE( KIT_TYPE_HTOBE16( crc ) == CRC_CCITT_xFFFF );
     }
 
+    SECTION( "Crc32 - MPEG-2" )
+    {
+        Crc32Mpeg2 cksum;
+        uint32_t          crc;
+        REQUIRE( testEdc( "CRC MPEG-2", cksum, dataBuffer_, DATALEN_, &crc, sizeof( crc ) ) );
+        REQUIRE( KIT_TYPE_HTOBE32( crc ) == CRC_MPEG2 );
+    }
+
     SECTION( "Crc32 - Ethernet - Fast" )
     {
         Crc32EthernetFast cksum;
         uint32_t          crc;
         REQUIRE( testEdc( "CRC Ethernet-FAST", cksum, dataBuffer_, DATALEN_, &crc, sizeof( crc ) ) );
-        REQUIRE( KIT_TYPE_HTOBE32( crc ) == CRC_ETHERNET );
+        REQUIRE( KIT_TYPE_HTOLE32( crc ) == CRC_ETHERNET );
     }
 
     SECTION( "Md5" )
