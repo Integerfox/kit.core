@@ -2,7 +2,7 @@
 @brief namespace description for Kit::Dm::Persistence
 @namespace Kit::Dm::Persistence @brief
 
-The 'Persistent' namespace provides a persistent storage mechanism
+The 'Persistence' namespace provides a persistent storage mechanism
 for Model Points.  The KIT Persistence framework is used for base persistent
 storage.
 

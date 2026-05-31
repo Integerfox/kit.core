@@ -63,8 +63,8 @@ public:
 
 
         If the schema indexes does not match when reading data from persistent
-        storage, THEN the `schemaChanged()` method is called.  If the schemaChanged()
-        methods return false, then the record is defaulted.
+        storage, THEN the `schemaChange()` method is called.  If the `schemaChange()`
+        method returns false, then the record is defaulted.
 
         The 'writeDelayMs' and 'maxWriteDelayMs' arguments are used to impose
         a 'settling time' after an model point is updated before writing the
@@ -139,12 +139,10 @@ public:
     bool erase() noexcept;
 
 public:
-    /// See Kit::Dm::Persistence::IManage::FlushRequest
+    /// See Kit::Dm::Persistence::IManage
     void request( FlushMsg& msg ) noexcept override;
 
-    /// See Kit::Dm::Persistence::IManage::EraseRequest
-
-    /// See Kit::Dm::Persistence::IManage::EraseRequest
+    /// See Kit::Dm::Persistence::IManage
     void request( EraseMsg& msg ) noexcept override;
 
 protected:
