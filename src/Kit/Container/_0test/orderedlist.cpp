@@ -44,7 +44,6 @@ public:
     const char* getName() const noexcept { return m_stringKeyPtr; }
 
     ///
-    const char* m_name;
     unsigned    m_value;
 };
 
