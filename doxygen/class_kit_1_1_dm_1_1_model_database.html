@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 312-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -138,7 +138,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This concrete class implements a simple Model Database. </p>
-<p>Note: The model point instances are contained in SList. This is to reduce the RAM overhead on each Model Point instance (e.g. a MapItem has 32 bytes of overhead vs. 8 bytes for Item). This means that looking up a model point by name is not efficient. However, the typically use case for the look-up function is when reading/writing model point via the <a class="el" href="namespace_kit_1_1_dm_1_1_t_shell.html" title="The &#39;TShell&#39; namespace contains the implementation of TShell commands that access Model Points at run...">TShell</a> command shell the performance impact should not be noticeable.</p>
+<p>Note: The model point instances are contained in SList. This is to reduce the RAM overhead on each Model Point instance (e.g. a MapItem has 32 bytes of overhead vs. 8 bytes for Item). This means that looking up a model point by name is not efficient. However, the typically use case for the look-up function is when reading/writing model point via the <a class="el" href="namespace_kit_1_1_dm_1_1_t_shell.html">TShell</a> command shell the performance impact should not be noticeable.</p>
 <p>The SList is sorted alphabetically on the first call to <a class="el" href="#a234e20221f394e7ce000273ad05986cf" title="See Kit::Dm::IModelDatabase.">getFirstByName()</a>.</p>
 <p>Note: All of the methods are thread safe. However, since the Model Database instances are typically created statically and statically allocated Model point self-register there is race condition on when the Model Database instance's Mutex is created/initialize. As a result mutex is dynamically created/initialized on its first usage. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -519,7 +519,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 13:04:46 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

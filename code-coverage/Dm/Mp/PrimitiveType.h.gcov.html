@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 13:10:05</td>
+            <td class="headerValue">2026-05-31 21:24:17</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">58.3&nbsp;%</td>
@@ -169,12 +169,12 @@
 <span id="L107"><span class="lineNum">     107</span>                 :             : </span>
 <span id="L108"><span class="lineNum">     108</span>                 :             : public:</span>
 <span id="L109"><span class="lineNum">     109</span>                 :             :     /// Atomic increment</span>
-<span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC tlaBgGNC">          65 :     inline uint16_t increment( ELEMTYPE                            incSize              = 1,</span></span>
+<span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC tlaBgGNC">          85 :     inline uint16_t increment( ELEMTYPE                            incSize              = 1,</span></span>
 <span id="L111"><span class="lineNum">     111</span>                 :             :                                bool                                forceChgNotification = false,</span>
 <span id="L112"><span class="lineNum">     112</span>                 :             :                                Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept</span>
 <span id="L113"><span class="lineNum">     113</span>                 :             :     {</span>
-<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">          65 :         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );</span></span>
-<span id="L115"><span class="lineNum">     115</span>                 :<span class="tlaGNC">          65 :         return this-&gt;write( this-&gt;m_data + incSize, forceChgNotification, lockRequest );</span></span>
+<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">          85 :         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );</span></span>
+<span id="L115"><span class="lineNum">     115</span>                 :<span class="tlaGNC">          85 :         return this-&gt;write( this-&gt;m_data + incSize, forceChgNotification, lockRequest );</span></span>
 <span id="L116"><span class="lineNum">     116</span>                 :             :     }</span>
 <span id="L117"><span class="lineNum">     117</span>                 :             : </span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :     /// Atomic decrement</span>

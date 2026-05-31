@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 13:10:05</td>
+            <td class="headerValue">2026-05-31 21:24:17</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">77.3&nbsp;%</td>
@@ -93,11 +93,11 @@
 <span id="L31"><span class="lineNum">      31</span>                 :             : {</span>
 <span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">           1 : }</span></span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          22 : ModelDatabase::ModelDatabase( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          23 : ModelDatabase::ModelDatabase( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     : m_list( ignoreThisParameter_usedToCreateAUniqueConstructor )</span>
-<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          22 :     , m_listSorted( false )</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          23 :     , m_listSorted( false )</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : {</span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">          22 : }</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">          23 : }</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             : </span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : //////////////////////////////////////////////</span>
@@ -128,15 +128,15 @@
 <span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">           1 :     return result;</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : }</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : </span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">          48 : void ModelDatabase::insert_( IModelPoint&amp; mpToAdd ) noexcept</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">          52 : void ModelDatabase::insert_( IModelPoint&amp; mpToAdd ) noexcept</span></span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : {</span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          48 :     Kit::System::Mutex::ScopeLock criticalSection( m_lock );</span></span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          52 :     Kit::System::Mutex::ScopeLock criticalSection( m_lock );</span></span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :     m_list.putFirst( mpToAdd );</span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          48 : }</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          52 : }</span></span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : </span>
-<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">       66865 : Kit::System::Mutex&amp; ModelDatabase::getMutex_() noexcept</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">       67244 : Kit::System::Mutex&amp; ModelDatabase::getMutex_() noexcept</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : {</span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">       66865 :     return m_lock;</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">       67244 :     return m_lock;</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : }</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
 <span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">          62 : bool ModelDatabase::fromJSON( const char* src, Kit::Text::IString* errorMsg, IModelPoint** retMp, uint16_t* retSequenceNumber ) noexcept</span></span>

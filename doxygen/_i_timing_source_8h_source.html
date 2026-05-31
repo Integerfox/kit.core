@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 312-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -83,22 +83,31 @@ $(function() {
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"></span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">    /// This method converts the requested duration in milliseconds to counter ticks.</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_timing_source.html#a0026a138fd2db5e5c1d1b9c13ce09ee5">   35</a></span><span class="comment"></span>    <span class="keyword">virtual</span> uint32_t <a class="code hl_function" href="class_kit_1_1_system_1_1_i_timing_source.html#a0026a138fd2db5e5c1d1b9c13ce09ee5">msecToCounts</a>( uint32_t durationInMsecs ) <span class="keyword">const</span> <span class="keyword">noexcept</span> = 0;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">    /// Returns true if the specified timer is active/currently running; else false is returned.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_timing_source.html#a6a1b82dd3355b4047184501e5a796109">   38</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_timing_source.html#a6a1b82dd3355b4047184501e5a796109">isRunning</a>( <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_system_1_1_i_counter.html">ICounter</a>&amp; timerToInspect ) <span class="keyword">const</span> <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">    /// Virtual destructor</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_timing_source.html#aa6eea93fa4ccb7f2160c1419e00fe723">   42</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_timing_source.html#aa6eea93fa4ccb7f2160c1419e00fe723">~ITimingSource</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>};</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_counter_8h_html"><div class="ttname"><a href="_i_counter_8h.html">ICounter.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_counter_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_counter.html">Kit::System::ICounter</a></div><div class="ttdoc">This abstract class defines the call-back interface for a Counter object.</div><div class="ttdef"><b>Definition</b> ICounter.h:29</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_timing_source_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_timing_source.html">Kit::System::ITimingSource</a></div><div class="ttdoc">This abstract class defines the interface for a timing source.</div><div class="ttdef"><b>Definition</b> ITimingSource.h:24</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_timing_source_html_a0026a138fd2db5e5c1d1b9c13ce09ee5"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_timing_source.html#a0026a138fd2db5e5c1d1b9c13ce09ee5">Kit::System::ITimingSource::msecToCounts</a></div><div class="ttdeci">virtual uint32_t msecToCounts(uint32_t durationInMsecs) const noexcept=0</div><div class="ttdoc">This method converts the requested duration in milliseconds to counter ticks.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_timing_source_html_a4a10390a5dd4068f23bab5df5e75191f"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_timing_source.html#a4a10390a5dd4068f23bab5df5e75191f">Kit::System::ITimingSource::attach</a></div><div class="ttdeci">virtual void attach(ICounter &amp;clientToCallback) noexcept=0</div><div class="ttdoc">Register a software counter for notification.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_i_timing_source_html_a6a1b82dd3355b4047184501e5a796109"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_timing_source.html#a6a1b82dd3355b4047184501e5a796109">Kit::System::ITimingSource::isRunning</a></div><div class="ttdeci">virtual bool isRunning(const ICounter &amp;timerToInspect) const noexcept=0</div><div class="ttdoc">Returns true if the specified timer is active/currently running; else false is returned.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_timing_source_html_a77c5b395280a5ee861bf8e30a4d1acd4"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_timing_source.html#a77c5b395280a5ee861bf8e30a4d1acd4">Kit::System::ITimingSource::detach</a></div><div class="ttdeci">virtual bool detach(ICounter &amp;clientToCallback) noexcept=0</div><div class="ttdoc">Unregister for notification.</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_i_timing_source_html_aa6eea93fa4ccb7f2160c1419e00fe723"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_timing_source.html#aa6eea93fa4ccb7f2160c1419e00fe723">Kit::System::ITimingSource::~ITimingSource</a></div><div class="ttdeci">virtual ~ITimingSource()=default</div><div class="ttdoc">Virtual destructor.</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 13:04:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun May 31 2026 21:18:22 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

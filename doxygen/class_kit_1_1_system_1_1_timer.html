@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 312-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -81,6 +81,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a220df25dcf0d0cfc5ca1e10580776913" id="r_a220df25dcf0d0cfc5ca1e10580776913"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a220df25dcf0d0cfc5ca1e10580776913">Timer</a> (<a class="el" href="class_kit_1_1_system_1_1_i_timing_source.html">ITimingSource</a> *timingSource=nullptr) noexcept</td></tr>
 <tr class="memdesc:a220df25dcf0d0cfc5ca1e10580776913"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. Alternate constructor - that optionally defers the assignment of the timing source.  <br /></td></tr>
 <tr class="separator:a220df25dcf0d0cfc5ca1e10580776913"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a889b4582540926ec305d3dfe8ee14284" id="r_a889b4582540926ec305d3dfe8ee14284"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a889b4582540926ec305d3dfe8ee14284">isRunning</a> () const noexcept</td></tr>
+<tr class="memdesc:a889b4582540926ec305d3dfe8ee14284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the timer is currently running; else false is returned.  <br /></td></tr>
+<tr class="separator:a889b4582540926ec305d3dfe8ee14284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c57439fd1bcb99d43065874ea50fe29" id="r_a8c57439fd1bcb99d43065874ea50fe29"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c57439fd1bcb99d43065874ea50fe29">setTimingSource</a> (<a class="el" href="class_kit_1_1_system_1_1_i_timing_source.html">ITimingSource</a> &amp;timingSource) noexcept</td></tr>
 <tr class="memdesc:a8c57439fd1bcb99d43065874ea50fe29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the timing source.  <br /></td></tr>
 <tr class="separator:a8c57439fd1bcb99d43065874ea50fe29"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -318,6 +321,33 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a889b4582540926ec305d3dfe8ee14284" name="a889b4582540926ec305d3dfe8ee14284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a889b4582540926ec305d3dfe8ee14284">&#9670;&#160;</a></span>isRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Kit::System::Timer::isRunning </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the timer is currently running; else false is returned. </p>
+
+</div>
+</div>
 <a id="a8c57439fd1bcb99d43065874ea50fe29" name="a8c57439fd1bcb99d43065874ea50fe29"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8c57439fd1bcb99d43065874ea50fe29">&#9670;&#160;</a></span>setTimingSource()</h2>
 
@@ -400,7 +430,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Stops the timer. </p>
 <p>It is okay to call <a class="el" href="#afb734de97d20b79f3edaf8d1067256da" title="Stops the timer.">stop()</a> even after the timer has previously expired or explicitly stopped. </p>
 
-<p>Reimplemented in <a class="el" href="class_kit_1_1_dm_1_1_persistent_1_1_record.html#a3295e7397b70dd3a8f865e7791b09e92">Kit::Dm::Persistent::Record</a>.</p>
+<p>Reimplemented in <a class="el" href="class_kit_1_1_dm_1_1_persistence_1_1_record.html#a315ecb1296ed47f870e0d5fa0408b9a8">Kit::Dm::Persistence::Record</a>.</p>
 
 </div>
 </div>
@@ -459,7 +489,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 13:04:46 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

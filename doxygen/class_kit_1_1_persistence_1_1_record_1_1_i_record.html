@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 312-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -61,7 +61,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_persistence_1_1_record_1_1_i_record__inherit__graph.svg" width="859" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_persistence_1_1_record_1_1_i_record__inherit__graph.svg" width="859" height="147"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -137,7 +137,7 @@ Public Member Functions</h2></td></tr>
 <p>This method returns the total number of bytes of <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a> when stored in persistent storage. </p>
 <p>This includes both the payload and any metadata. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html#a631d3966da6d824ab9a255f6088aa410">Kit::Persistence::Record::Journal::EntryRecord</a>, and <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_head_record.html#a7cd684d8587e186da21e73c65bb3be00">Kit::Persistence::Record::Journal::HeadRecord</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_dm_1_1_persistence_1_1_record.html#af9857fbdc04fbea8678ec91677e2f83d">Kit::Dm::Persistence::Record</a>, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html#a631d3966da6d824ab9a255f6088aa410">Kit::Persistence::Record::Journal::EntryRecord</a>, and <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_head_record.html#a7cd684d8587e186da21e73c65bb3be00">Kit::Persistence::Record::Journal::HeadRecord</a>.</p>
 
 </div>
 </div>
@@ -170,7 +170,7 @@ Public Member Functions</h2></td></tr>
 <p>The 'myEventQueue' is a reference to the <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a> <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_server.html" title="This concrete class is responsible for starting and stopping a list of IRecords objects,...">Server</a>'s Event Queue, i.e. the event loop for the thread that the <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a> <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_server.html" title="This concrete class is responsible for starting and stopping a list of IRecords objects,...">Server</a> executes in. Example usage of 'myEventQueue' is if the <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_record.html" title="This abstract class defines the public interface for a Record instance.">IRecord</a> needs/uses a software timer</p>
 <p>The method returns true on success; else false is returned when an error occurred during the start. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html#a1e156ea3134aaa8b41d7eb0edb331a25">Kit::Persistence::Record::Journal::EntryRecord</a>, and <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_head_record.html#a29eab6ce5b5373c0a3366eaffcece875">Kit::Persistence::Record::Journal::HeadRecord</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_dm_1_1_persistence_1_1_record.html#a2ace5ccaae3827bda36bc75ad3435769">Kit::Dm::Persistence::Record</a>, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html#a1e156ea3134aaa8b41d7eb0edb331a25">Kit::Persistence::Record::Journal::EntryRecord</a>, and <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_head_record.html#a29eab6ce5b5373c0a3366eaffcece875">Kit::Persistence::Record::Journal::HeadRecord</a>.</p>
 
 </div>
 </div>
@@ -200,7 +200,7 @@ Public Member Functions</h2></td></tr>
 <p>This method is used to stop/shutdown the <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a>. </p>
 <p>It is typically only called once during an orderly shutdown of the application. However, <a class="el" href="#a9e834edea1723d70b1238052fecd913a" title="This method is used to start/initialize the Record.">start()</a> can be called after a previous call to the <a class="el" href="#a6109548b43fab48d335b2a5570abc68b" title="This method is used to stop/shutdown the Record.">stop()</a> method. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html#a1bd1fca0f6f130cfcec7e324ada38b76">Kit::Persistence::Record::Journal::EntryRecord</a>, and <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_head_record.html#a19e5d3e7390659b3f6302024df58d0ed">Kit::Persistence::Record::Journal::HeadRecord</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_dm_1_1_persistence_1_1_record.html#a315ecb1296ed47f870e0d5fa0408b9a8">Kit::Dm::Persistence::Record</a>, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html#a1bd1fca0f6f130cfcec7e324ada38b76">Kit::Persistence::Record::Journal::EntryRecord</a>, and <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_head_record.html#a19e5d3e7390659b3f6302024df58d0ed">Kit::Persistence::Record::Journal::HeadRecord</a>.</p>
 
 </div>
 </div>
@@ -210,7 +210,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 13:04:46 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

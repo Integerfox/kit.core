@@ -1,9 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$class_kit_1_1_persistence_1_1_record_1_1_i_chunk.html" title="This abstract class defines the interface for managing a &#39;chunk&#39;." alt="" coords="5,37,181,77"/>
-<area shape="rect" id="Node000001" href="$class_kit_1_1_persistence_1_1_record_1_1_chunk_1_1_common.html" title="This partial concrete class provides common implementations, utility methods, etc." alt="" coords="229,37,405,77"/>
-<area shape="poly" id="edge272_Node000000_Node000001" title=" " alt="" coords="195,55,229,55,229,60,195,60"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_persistence_1_1_record_1_1_chunk_1_1_crc.html" title="This concrete class implements the IChunk interface and provides error detection of corrupted persist..." alt="" coords="453,5,629,45"/>
-<area shape="poly" id="edge273_Node000001_Node000002" title=" " alt="" coords="418,40,453,35,453,41,419,45"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_persistence_1_1_record_1_1_chunk_1_1_mirrored.html" title="This concrete class implements the IChunk interface by storing two copies of the Record&#39;s data,..." alt="" coords="453,69,629,109"/>
-<area shape="poly" id="edge274_Node000001_Node000003" title=" " alt="" coords="419,69,453,74,453,79,418,74"/>
+<area shape="rect" id="Node000000" href="$class_kit_1_1_persistence_1_1_record_1_1_i_media.html" title="This abstract class defines the operations that can be performed on a persistent media." alt="" coords="5,69,181,109"/>
+<area shape="rect" id="Node000001" href="$class_kit_1_1_persistence_1_1_record_1_1_media_1_1_file_adapter.html" title="This concrete class implements the IMedia interface using the Kit::Io::File interfaces." alt="" coords="229,5,405,45"/>
+<area shape="poly" id="edge283_Node000000_Node000001" title=" " alt="" coords="177,63,246,43,248,48,178,68"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_persistence_1_1_record_1_1_media_1_1_n_v_adapter.html" title="This concrete class implements the IMedia interface using the NV driver API (aka EEPROM media)" alt="" coords="229,69,405,109"/>
+<area shape="poly" id="edge284_Node000000_Node000002" title=" " alt="" coords="195,87,229,87,229,92,195,92"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_persistence_1_1_record_1_1_media_1_1_null.html" title="This concrete class provides a &#39;null&#39; implementation of the IMedia interface." alt="" coords="229,133,405,173"/>
+<area shape="poly" id="edge285_Node000000_Node000003" title=" " alt="" coords="178,111,248,131,246,136,177,116"/>
 </map>
