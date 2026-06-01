@@ -17,6 +17,7 @@
 #include "Kit/Logging/Framework/Mocked4Test/KitOnly.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
+#include <string.h>
 
 
 using namespace Kit::Logging::Pkg;
@@ -89,6 +90,20 @@ TEST_CASE( "Formatter" )
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-?: Test log message3" );
+    }
+
+    SECTION( "max-info-text-length" )
+    {
+        logEntry.m_timestamp        = Kit::Time::constructBootTime( 5, 1672531199123 );  // 2022/12/31-23:59:59.123 UTC
+        logEntry.m_classificationId = ClassificationId::WARNING;
+        logEntry.m_packageId        = Package::PACKAGE_ID;
+        logEntry.m_subSystemId      = SubSystemId::SYSTEM;
+        logEntry.m_messageId        = SystemMsgId::SHUTDOWN;
+        memset( logEntry.m_infoText, 'X', OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN );
+        logEntry.m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN] = '\0';
+
+        bool result = Formatter::toString( logApp_, logEntry, formattedText );
+        REQUIRE( result == true );
     }
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );

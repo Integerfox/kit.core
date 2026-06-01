@@ -16,7 +16,9 @@
     See the Kit/Logging/Framework/Log.h file details for the public interface
     for generating log entries.
 
-    The interface IS thread safe.
+    The interface IS thread safe - with the ASSUMPTION that initialize() is 
+    called in "single-threaded" context.  Typically this means calling initialize()
+    before the application switches into "multi-threaded" mode.
 */
 
 #include "Kit/Logging/Framework/IApplication.h"
