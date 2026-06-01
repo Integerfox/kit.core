@@ -20,7 +20,7 @@ uint64_t Kit::Time::getAbsoluteTimeSeconds() noexcept
 
 uint64_t Kit::Time::getAbsoluteTimeMilliseconds() noexcept
 {
-    FILETIME ft;
+    FILETIME ft = {};
     GetSystemTimeAsFileTime( &ft );
     
     // Convert FILETIME to 64-bit value (100-nanosecond intervals since Jan 1, 1601)
