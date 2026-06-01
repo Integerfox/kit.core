@@ -127,7 +127,7 @@ void FStringBase::copyIn( const char* src, int len ) noexcept
     else
     {
         m_truncated = len <= m_internalMaxlen ? false : true;
-        len         = std::min( m_internalMaxlen, len );
+        len         = ( std::min )( m_internalMaxlen, len );
         strncpy( m_strPtr, src, len );
         m_strPtr[len] = '\0';
     }
@@ -140,7 +140,7 @@ void FStringBase::appendTo( const char* string, int len ) noexcept
     {
         int curlen  = strlen( m_strPtr );
         int avail   = m_internalMaxlen - curlen;
-        int copylen = std::min( len, avail );
+        int copylen = ( std::min )( len, avail );
         m_truncated = copylen == len ? false : true;
         strncat( m_strPtr, string, copylen );
         m_strPtr[curlen + copylen] = '\0';
@@ -167,10 +167,10 @@ void FStringBase::insertAt( int insertOffset, const char* stringToInsert ) noexc
 
     // Valid insertOffset
     int avail        = m_internalMaxlen - insertOffset;     // Amount left in the buffer starting with from insertOffset
-    int copylen      = std::min( insertlen, avail );        // Amount of stringToInsert that can be copied in
+    int copylen      = ( std::min )( insertlen, avail );        // Amount of stringToInsert that can be copied in
     int remainderlen = avail - copylen;                     // Amount of room left after stringToInsert has been copied in
     int shiftlen     = curlen - insertOffset;               // Amount of characters needing to be shifted
-    int movelen      = std::min( shiftlen, remainderlen );  // Amount of characters that can be SAFELY shifted
+    int movelen      = ( std::min )( shiftlen, remainderlen );  // Amount of characters that can be SAFELY shifted
     if ( movelen > 0 )
     {
         memmove( m_strPtr + insertOffset + copylen, m_strPtr + insertOffset, movelen );
