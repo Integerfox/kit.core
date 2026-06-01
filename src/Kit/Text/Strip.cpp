@@ -80,6 +80,12 @@ void Strip::removeTrailingSpace( char* s )
         return;
     }
 
+    // Nothing to trim when the string is empty.
+    if ( *s == '\0' )
+    {
+        return;
+    }
+
     char* ptr = (char*) trailingSpace( s );
     if ( isspace( (int) *ptr ) )
     {
@@ -165,6 +171,12 @@ const char* Strip::trailingChars( const char *s, const char* charsSet )
 void Strip::removeTrailingChars( char* s, const char* charsSet )
 {
     if ( s == nullptr || charsSet == nullptr )
+    {
+        return;
+    }
+
+    // Nothing to trim when the string is empty.
+    if ( *s == '\0' )
     {
         return;
     }

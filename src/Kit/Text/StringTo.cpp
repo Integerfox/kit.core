@@ -79,7 +79,10 @@ bool StringTo::a2ull( unsigned long long& convertedValue, const char* string, in
             // Negative numbers are not allowed for unsigned types
             return false;
         }
-        value = strtoull( strPtr, &endPtr, base );
+
+        // Parse from the original string pointer so endPtr semantics match
+        // conversionOk() and strtoull() behavior for "no conversion".
+        value = strtoull( string, &endPtr, base );
     }
     if ( end )
     {

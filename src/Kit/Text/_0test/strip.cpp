@@ -104,6 +104,10 @@ TEST_CASE( "Strip" )
         input2 = "";
         ptr    = Strip::trailingSpace( input2 );
         REQUIRE( ptr == input2 );
+
+        char empty1[] = "";
+        Strip::removeTrailingSpace( empty1 );
+        REQUIRE( strcmp( empty1, "" ) == 0 );
     }
 
     SECTION( "trailing-char" )
@@ -139,6 +143,10 @@ TEST_CASE( "Strip" )
         REQUIRE( *input == 'x' );
         Strip::removeTrailingChars( input, "zxy" );
         REQUIRE( *input == '\0' );
+
+        char empty2[] = "";
+        Strip::removeTrailingChars( empty2, "zxy" );
+        REQUIRE( strcmp( empty2, "" ) == 0 );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

@@ -10,6 +10,7 @@
 
 #include "DString.h"
 #include "FString.h"
+#include "Kit/System/Assert.h"
 #include <string.h>
 #include <algorithm>
 #include <new>
