@@ -59,5 +59,27 @@ TEST_CASE( "guid" )
     result = guidOut.fromString( 0 );
     REQUIRE( result == false );
 
+    // Malformed lengths / layout
+    result = guidOut.fromString( "{1" );
+    REQUIRE( result == false );
+    result = guidOut.fromString( "123e4567-e89b-12d3-a456-42661417400" );
+    REQUIRE( result == false );
+    result = guidOut.fromString( "123e4567-e89b-12d3-a456-4266141740000" );
+    REQUIRE( result == true );
+    REQUIRE( guid == guidOut );
+    result = guidOut.fromString( "{123e4567-e89b-12d3-a456-426614174000" );
+    REQUIRE( result == false );
+    result = guidOut.fromString( "123e4567-e89b-12d3-a456-426614174000}" );
+    REQUIRE( result == true );
+    REQUIRE( guid == guidOut );
+
+    // Trailing characters are tolerated by design
+    result = guidOut.fromString( "123e4567-e89b-12d3-a456-426614174000xyz" );
+    REQUIRE( result == true );
+    REQUIRE( guid == guidOut );
+    result = guidOut.fromString( "{123e4567-e89b-12d3-a456-426614174000}xyz" );
+    REQUIRE( result == true );
+    REQUIRE( guid == guidOut );
+
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
