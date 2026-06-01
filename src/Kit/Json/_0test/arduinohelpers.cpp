@@ -90,8 +90,8 @@ TEST_CASE( "ArduinoHelpers-dumpToTrace-prints-wide-integers-as-integers" )
     TraceRedirectGuard redirect( sink );
 
     DynamicJsonDocument doc( 256 );
-    doc["unsignedValue"] = std::numeric_limits<unsigned long long>::max();
-    doc["signedValue"]   = std::numeric_limits<long long>::max();
+    doc["unsignedValue"] = (std::numeric_limits<unsigned long long>::max)();
+    doc["signedValue"]   = (std::numeric_limits<long long>::max)();
 
     sink.clear();
     Kit::Json::dumpToTrace( "json-test", doc.as<JsonVariant>() );
