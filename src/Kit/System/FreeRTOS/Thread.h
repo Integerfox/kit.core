@@ -16,6 +16,7 @@
 #include "Kit/System/IRunnable.h"
 #include "Kit/Text/FString.h"
 #include "task.h"
+#include <new>
 
 
 /** Provides the default stack size (since FreeRTOS does not provide one)
@@ -118,7 +119,7 @@ public:
     MakeCurrentThreadAKitThread( const char* threadName = "main" ) noexcept
     {
         // Create a thread object for the native thread
-        m_parentThreadPtr_ = new Kit::System::FreeRTOS::Thread( threadName, *this );
+        m_parentThreadPtr_ = new ( std::nothrow ) Kit::System::FreeRTOS::Thread( threadName, *this );
     }
 };
 

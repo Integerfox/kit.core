@@ -38,7 +38,7 @@ bool CursorBase::errorOccurred() const noexcept
 
 bool CursorBase::setPosition( size_t newOffset ) noexcept
 {
-    if ( newOffset >= m_bufferSize )
+    if ( newOffset > m_bufferSize )
     {
         m_bytesRemaining = SIZE_MAX;  // Put the cursor in a error state
         return false;

@@ -21,7 +21,7 @@ namespace App {
 
 
 ////////////////////////////////////////////////
-Foo::Foo( Kit::Container::RingBuffer<Kit::Logging::Framework::EntryData_T>& logFifo ) noexcept
+Foo::Foo( Kit::Container::RingBufferMP<Kit::Logging::Framework::EntryData_T>& logFifo ) noexcept
 {
     Kit::Logging::Framework::initialize( *this, logFifo );
 }

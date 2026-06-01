@@ -14,6 +14,7 @@
 #include "Kit/Memory/Pool.h"
 #include "Kit/Memory/AlignedClass.h"
 #include "Kit/System/Assert.h"
+#include <new>
 
 ///
 namespace Kit {
@@ -70,11 +71,13 @@ public:
     /** Constructor.  When the 'fatalErrors' argument is set to true, memory errors
         (e.g. out-of-memory) will generate a Kit::System::FatalError call.
      */
-    HPool( size_t maxNumBlocks, bool fatalErrors = false )
-        : m_infoBlocks( new Pool::BlockInfo[maxNumBlocks]() )
-        , m_blocks( new AlignedClass<T>[maxNumBlocks] )
-        , m_poolPtr( new Pool( m_infoBlocks, sizeof( AlignedClass<T> ), maxNumBlocks, m_blocks, fatalErrors ) )
+    HPool( size_t maxNumBlocks, bool fatalErrors = false ) noexcept
+        : m_infoBlocks( new ( std::nothrow ) Pool::BlockInfo[maxNumBlocks]() )
+        , m_blocks( new ( std::nothrow ) AlignedClass<T>[maxNumBlocks] )
+        , m_poolPtr( new ( std::nothrow ) Pool( m_infoBlocks, sizeof( AlignedClass<T> ), maxNumBlocks, m_blocks, fatalErrors ) ) 
     {
+        KIT_SYSTEM_ASSERT( m_infoBlocks != nullptr );
+        KIT_SYSTEM_ASSERT( m_blocks != nullptr );
         KIT_SYSTEM_ASSERT( m_poolPtr != nullptr );
     }
 
@@ -91,13 +94,25 @@ public:
 
 public:
     /// See Kit::Memory::Allocator
-    void* allocate( size_t numbytes ) noexcept { return m_poolPtr->allocate( numbytes ); }
+    void* allocate( size_t numbytes ) noexcept
+    {
+        return m_poolPtr ? m_poolPtr->allocate( numbytes ) : nullptr;
+    }
 
     /// See Kit::Memory::Allocator
-    void release( void* ptr ) noexcept { m_poolPtr->release( ptr ); }
+    void release( void* ptr ) noexcept
+    {
+        if ( m_poolPtr )
+        {
+            m_poolPtr->release( ptr );
+        }
+    }
 
     /// See Kit::Memory::Allocator
-    size_t wordSize() const noexcept { return m_poolPtr->wordSize(); }
+    size_t wordSize() const noexcept
+    {
+        return m_poolPtr ? m_poolPtr->wordSize() : sizeof( AlignedClass<T> );
+    }
 
 private:
     /// Prevent access to the copy constructor -->HPools can not be copied!

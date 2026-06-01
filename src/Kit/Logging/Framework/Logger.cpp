@@ -35,7 +35,7 @@ namespace Framework {
          documented in Doxygen.
 */
 
-static Kit::Container::RingBuffer<EntryData_T>*                          logFifo_;  
+static Kit::Container::RingBufferMP<EntryData_T>*                        logFifo_;
 Kit::System::Mutex                                                       g_lock;
 static IApplication*                                                     app_;
 static KitLoggingClassificationMask_T                                    classificationFilterMask_;
@@ -72,9 +72,9 @@ void resetLoggerState() noexcept
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void initialize( IApplication&                            appInstance,
-                 Kit::Container::RingBuffer<EntryData_T>& logFifo,
-                 uint8_t                                  classificationLoggingError ) noexcept
+void initialize( IApplication&                              appInstance,
+                 Kit::Container::RingBufferMP<EntryData_T>& logFifo,
+                 uint8_t                                    classificationLoggingError ) noexcept
 {
     app_                        = &appInstance;
     logFifo_                    = &logFifo;
