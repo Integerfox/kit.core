@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">84.6&nbsp;%</td>
@@ -116,7 +116,7 @@
 <span id="L54"><span class="lineNum">      54</span>                 :             :                       size_t    srcIndex  = 0,</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :                       uint16_t* seqNumPtr = 0 ) const noexcept</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :     {</span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          17 :         return ArrayBase::readArrayElements( dstArrray, dstNumElements, srcIndex, seqNumPtr );</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          18 :         return ArrayBase::readArrayElements( dstArrray, dstNumElements, srcIndex, seqNumPtr );</span></span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :     }</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : </span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :     /// Type safe write. See Kit::Dm::IModelPoint</span>
@@ -196,7 +196,7 @@
 <span id="L134"><span class="lineNum">     134</span>                 :             : </span>
 <span id="L135"><span class="lineNum">     135</span>                 :             : public:</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :     /// See Kit::Dm::Point.</span>
-<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaGBC" title="Branch 0 was taken 9 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           9 :     bool fromJSON_( JsonVariant&amp; src, Kit::Dm::IModelPoint::LockRequest_T lockRequest, uint16_t&amp; retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override</span></span>
+<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          10 :     bool fromJSON_( JsonVariant&amp; src, Kit::Dm::IModelPoint::LockRequest_T lockRequest, uint16_t&amp; retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override</span></span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :     {</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             :         </span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :         // Check for object</span>
@@ -211,7 +211,7 @@
 <span id="L149"><span class="lineNum">     149</span>                 :             : </span>
 <span id="L150"><span class="lineNum">     150</span>                 :             :         // Check for embedded array</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :         JsonArray elems = src[&quot;elems&quot;];</span>
-<span id="L152"><span class="lineNum">     152</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">           7 :         if ( elems.isNull() )</span></span>
+<span id="L152"><span class="lineNum">     152</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span>]:<span class="tlaGNC">           8 :         if ( elems.isNull() )</span></span>
 <span id="L153"><span class="lineNum">     153</span>                 :             :         {</span>
 <span id="L154"><span class="lineNum">     154</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :             if ( errorMsg )</span></span>
 <span id="L155"><span class="lineNum">     155</span>                 :             :             {</span>
@@ -221,11 +221,11 @@
 <span id="L159"><span class="lineNum">     159</span>                 :             :         }</span>
 <span id="L160"><span class="lineNum">     160</span>                 :             : </span>
 <span id="L161"><span class="lineNum">     161</span>                 :             :         // Get starting index (note: if not present a default of '0' will be returned)</span>
-<span id="L162"><span class="lineNum">     162</span>                 :<span class="tlaGNC">           5 :         size_t startIdx = src[&quot;start&quot;] | 0;</span></span>
+<span id="L162"><span class="lineNum">     162</span>                 :<span class="tlaGNC">           6 :         size_t startIdx = src[&quot;start&quot;] | 0;</span></span>
 <span id="L163"><span class="lineNum">     163</span>                 :             : </span>
 <span id="L164"><span class="lineNum">     164</span>                 :             :         // Check for exceeding array limits</span>
 <span id="L165"><span class="lineNum">     165</span>                 :             :         size_t numElements = elems.size();</span>
-<span id="L166"><span class="lineNum">     166</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           5 :         if ( numElements + startIdx &gt; m_numElements )</span></span>
+<span id="L166"><span class="lineNum">     166</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">           6 :         if ( numElements + startIdx &gt; m_numElements )</span></span>
 <span id="L167"><span class="lineNum">     167</span>                 :             :         {</span>
 <span id="L168"><span class="lineNum">     168</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :             if ( errorMsg )</span></span>
 <span id="L169"><span class="lineNum">     169</span>                 :             :             {</span>
@@ -235,7 +235,7 @@
 <span id="L173"><span class="lineNum">     173</span>                 :             :         }</span>
 <span id="L174"><span class="lineNum">     174</span>                 :             : </span>
 <span id="L175"><span class="lineNum">     175</span>                 :             :         // Is the element syntactically correct?</span>
-<span id="L176"><span class="lineNum">     176</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           1 :         if ( elems[0].is&lt;ELEMTYPE&gt;() == false )</span></span>
+<span id="L176"><span class="lineNum">     176</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           2 :         if ( elems[0].is&lt;ELEMTYPE&gt;() == false )</span></span>
 <span id="L177"><span class="lineNum">     177</span>                 :             :         {</span>
 <span id="L178"><span class="lineNum">     178</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :             if ( errorMsg )</span></span>
 <span id="L179"><span class="lineNum">     179</span>                 :             :             {</span>
@@ -246,18 +246,18 @@
 <span id="L184"><span class="lineNum">     184</span>                 :             : </span>
 <span id="L185"><span class="lineNum">     185</span>                 :             :         // Update the Model Point in 'M' elements at a time (helps to reduce 'noise' on the MP's sequence number)</span>
 <span id="L186"><span class="lineNum">     186</span>                 :             :         size_t offset = 0;</span>
-<span id="L187"><span class="lineNum">     187</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :         while ( numElements )</span></span>
+<span id="L187"><span class="lineNum">     187</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           4 :         while ( numElements )</span></span>
 <span id="L188"><span class="lineNum">     188</span>                 :             :         {</span>
 <span id="L189"><span class="lineNum">     189</span>                 :             :             // Attempt to parse the value key/value pair (as a simple numeric)</span>
 <span id="L190"><span class="lineNum">     190</span>                 :             :             ELEMTYPE tempArray[OPTION_KIT_DM_MP_ARRAY_TEMP_ARRAY_NUM_ELEMENTS];</span>
 <span id="L191"><span class="lineNum">     191</span>                 :             :             size_t   idx;</span>
-<span id="L192"><span class="lineNum">     192</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           4 :             for ( idx = 0; idx &lt; numElements &amp;&amp; idx &lt; OPTION_KIT_DM_MP_ARRAY_TEMP_ARRAY_NUM_ELEMENTS; idx++ )</span></span>
+<span id="L192"><span class="lineNum">     192</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           8 :             for ( idx = 0; idx &lt; numElements &amp;&amp; idx &lt; OPTION_KIT_DM_MP_ARRAY_TEMP_ARRAY_NUM_ELEMENTS; idx++ )</span></span>
 <span id="L193"><span class="lineNum">     193</span>                 :             :             {</span>
-<span id="L194"><span class="lineNum">     194</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           6 :                 tempArray[idx] = elems[idx + offset].as&lt;ELEMTYPE&gt;();</span></span>
+<span id="L194"><span class="lineNum">     194</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          12 :                 tempArray[idx] = elems[idx + offset].as&lt;ELEMTYPE&gt;();</span></span>
 <span id="L195"><span class="lineNum">     195</span>                 :             :             }</span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">           1 :             retSequenceNumber  = ArrayBase::writeArrayElements( tempArray, idx, startIdx + offset, lockRequest );</span></span>
-<span id="L197"><span class="lineNum">     197</span>                 :<span class="tlaGNC">           1 :             offset            += idx;</span></span>
-<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC">           1 :             numElements       -= idx;</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">           2 :             retSequenceNumber  = ArrayBase::writeArrayElements( tempArray, idx, startIdx + offset, false, lockRequest );</span></span>
+<span id="L197"><span class="lineNum">     197</span>                 :<span class="tlaGNC">           2 :             offset            += idx;</span></span>
+<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC">           2 :             numElements       -= idx;</span></span>
 <span id="L199"><span class="lineNum">     199</span>                 :             :         }</span>
 <span id="L200"><span class="lineNum">     200</span>                 :             : </span>
 <span id="L201"><span class="lineNum">     201</span>                 :             :         return true;</span>

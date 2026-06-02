@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
@@ -83,62 +83,62 @@
 <span id="L21"><span class="lineNum">      21</span>                 :             : namespace Framework {</span>
 <span id="L22"><span class="lineNum">      22</span>                 :             : </span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : //////////////////////////////////////////////////////////////////////////////</span>
-<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC tlaBgGNC">          43 : void Formatter::appendFormattedTimestamp( uint64_t            timestamp,</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC tlaBgGNC">          44 : void Formatter::appendFormattedTimestamp( uint64_t            timestamp,</span></span>
 <span id="L25"><span class="lineNum">      25</span>                 :             :                                           Kit::Text::IString&amp; dstStringBuf ) noexcept</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : {</span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :     // Append the boot-counter portion of the entry's timestamp</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :     uint16_t bootCounter;</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     uint64_t elapsedTimeMs;</span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">          43 :     Kit::Time::parseBootTime( timestamp, bootCounter, elapsedTimeMs );</span></span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          43 :     dstStringBuf.formatAppend( &quot;(%u:&quot;, bootCounter );</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">          44 :     Kit::Time::parseBootTime( timestamp, bootCounter, elapsedTimeMs );</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          44 :     dstStringBuf.formatAppend( &quot;(%u:&quot;, bootCounter );</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : </span>
 <span id="L33"><span class="lineNum">      33</span>                 :             :     // Convert elapsed time (ms since epoch) to absolute UTC time format</span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          43 :     time_t     seconds      = elapsedTimeMs / 1000;</span></span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">          43 :     uint16_t   milliseconds = elapsedTimeMs % 1000;</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          44 :     time_t     seconds      = elapsedTimeMs / 1000;</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">          44 :     uint16_t   milliseconds = elapsedTimeMs % 1000;</span></span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     struct tm  utcTime;</span>
-<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">          43 :     struct tm* utcTimePtr = Kit::Time::gmtimeMT( &amp;seconds, &amp;utcTime );</span></span>
-<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 43 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          43 :     if ( utcTimePtr != nullptr )</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">          44 :     struct tm* utcTimePtr = Kit::Time::gmtimeMT( &amp;seconds, &amp;utcTime );</span></span>
+<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 44 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          44 :     if ( utcTimePtr != nullptr )</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     {</span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          43 :         dstStringBuf.formatAppend( &quot;%04d-%02d-%02d %02d:%02d:%02d.%03u) &quot;,</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          43 :                                    utcTimePtr-&gt;tm_year + 1900,</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">          43 :                                    utcTimePtr-&gt;tm_mon + 1,</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          44 :         dstStringBuf.formatAppend( &quot;%04d-%02d-%02d %02d:%02d:%02d.%03u) &quot;,</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          44 :                                    utcTimePtr-&gt;tm_year + 1900,</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">          44 :                                    utcTimePtr-&gt;tm_mon + 1,</span></span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :                                    utcTimePtr-&gt;tm_mday,</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :                                    utcTimePtr-&gt;tm_hour,</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :                                    utcTimePtr-&gt;tm_min,</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :                                    utcTimePtr-&gt;tm_sec,</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :                                    milliseconds );</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     }</span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          43 : }</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          44 : }</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">          41 : bool Formatter::toString( IApplication&amp;                               application,</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">          42 : bool Formatter::toString( IApplication&amp;                               application,</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :                           const Kit::Logging::Framework::EntryData_T&amp; srcEntryToFormat,</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :                           Kit::Text::IString&amp;                         dstStringBuf,</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :                           uint64_t                                    persistentStorageId ) noexcept</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : {</span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          41 :     dstStringBuf.clear();</span></span>
-<span id="L57"><span class="lineNum">      57</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 40 times"> + </span>]:<span class="tlaGNC">          41 :     if ( persistentStorageId != UINT64_MAX )</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          42 :     dstStringBuf.clear();</span></span>
+<span id="L57"><span class="lineNum">      57</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 41 times"> + </span>]:<span class="tlaGNC">          42 :     if ( persistentStorageId != UINT64_MAX )</span></span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :     {</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :         // Format the Persistent Storage ID</span>
 <span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">           1 :         dstStringBuf.formatAppend( &quot;[%&quot; PRIu64 &quot;] &quot;, persistentStorageId );</span></span>
 <span id="L61"><span class="lineNum">      61</span>                 :             :     }</span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :     // Append the boot-counter portion of the entry's timestamp</span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">          41 :     appendFormattedTimestamp( srcEntryToFormat.m_timestamp, dstStringBuf );</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">          42 :     appendFormattedTimestamp( srcEntryToFormat.m_timestamp, dstStringBuf );</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     // Append the identifiers and the info text to the log entry</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">          41 :     const char* classificationText = application.classificationIdToString( srcEntryToFormat.m_classificationId );</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">          42 :     const char* classificationText = application.classificationIdToString( srcEntryToFormat.m_classificationId );</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     const char* packageText        = IPackage::NULL_PKG_ID_TEXT;</span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">          41 :     const char* subSystemText      = IPackage::NULL_SUBSYS_ID_TEXT;</span></span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          41 :     const char* messageIdText      = IPackage::NULL_MSG_ID_TEXT;</span></span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          41 :     IPackage*   pkgPtr             = application.getPackage( srcEntryToFormat.m_packageId );</span></span>
-<span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 41 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          41 :     if ( pkgPtr != nullptr )</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">          42 :     const char* subSystemText      = IPackage::NULL_SUBSYS_ID_TEXT;</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          42 :     const char* messageIdText      = IPackage::NULL_MSG_ID_TEXT;</span></span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          42 :     IPackage*   pkgPtr             = application.getPackage( srcEntryToFormat.m_packageId );</span></span>
+<span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 42 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          42 :     if ( pkgPtr != nullptr )</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     {</span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">          41 :         packageText   = pkgPtr-&gt;packageIdString();</span></span>
-<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">          41 :         subSystemText = nullptr;</span></span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          41 :         messageIdText = nullptr;</span></span>
-<span id="L77"><span class="lineNum">      77</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 39 times"> + </span>]:<span class="tlaGNC">          41 :         if ( pkgPtr-&gt;subSystemAndMessageIdsToString( srcEntryToFormat.m_subSystemId,</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">          42 :         packageText   = pkgPtr-&gt;packageIdString();</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">          42 :         subSystemText = nullptr;</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          42 :         messageIdText = nullptr;</span></span>
+<span id="L77"><span class="lineNum">      77</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 40 times"> + </span>]:<span class="tlaGNC">          42 :         if ( pkgPtr-&gt;subSystemAndMessageIdsToString( srcEntryToFormat.m_subSystemId,</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :                                                      subSystemText,</span>
-<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">          41 :                                                      srcEntryToFormat.m_messageId,</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">          42 :                                                      srcEntryToFormat.m_messageId,</span></span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :                                                      messageIdText ) == false )</span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :         {</span>
 <span id="L82"><span class="lineNum">      82</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :             if ( subSystemText == nullptr )</span></span>
@@ -151,15 +151,15 @@
 <span id="L89"><span class="lineNum">      89</span>                 :             :             }</span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :         }</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :     }</span>
-<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">          41 :     dstStringBuf.formatAppend( &quot;%s-%s-%s-%s: %s&quot;,</span></span>
+<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">          42 :     dstStringBuf.formatAppend( &quot;%s-%s-%s-%s: %s&quot;,</span></span>
 <span id="L93"><span class="lineNum">      93</span>                 :             :                                classificationText,</span>
 <span id="L94"><span class="lineNum">      94</span>                 :             :                                packageText,</span>
 <span id="L95"><span class="lineNum">      95</span>                 :             :                                subSystemText,</span>
 <span id="L96"><span class="lineNum">      96</span>                 :             :                                messageIdText,</span>
-<span id="L97"><span class="lineNum">      97</span>                 :<span class="tlaGNC">          41 :                                srcEntryToFormat.m_infoText );</span></span>
+<span id="L97"><span class="lineNum">      97</span>                 :<span class="tlaGNC">          42 :                                srcEntryToFormat.m_infoText );</span></span>
 <span id="L98"><span class="lineNum">      98</span>                 :             : </span>
 <span id="L99"><span class="lineNum">      99</span>                 :             :     // All done!</span>
-<span id="L100"><span class="lineNum">     100</span>                 :<span class="tlaGNC">          41 :     return !dstStringBuf.truncated();</span></span>
+<span id="L100"><span class="lineNum">     100</span>                 :<span class="tlaGNC">          42 :     return !dstStringBuf.truncated();</span></span>
 <span id="L101"><span class="lineNum">     101</span>                 :             : }</span>
 <span id="L102"><span class="lineNum">     102</span>                 :             : </span>
 <span id="L103"><span class="lineNum">     103</span>                 :             : }  // end namespace</span>

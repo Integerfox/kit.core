@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">80.0&nbsp;%</td>
@@ -116,7 +116,7 @@
 <span id="L54"><span class="lineNum">      54</span>                 :             :     /// Type safe read. See Kit::Dm::IModelPoint</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     inline bool read( BETTERENUM_TYPE&amp; dstData, uint16_t* seqNumPtr = 0 ) const noexcept</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :     {</span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC tlaBgGNC">           5 :         return readData( &amp;dstData, sizeof( BETTERENUM_TYPE ), seqNumPtr );</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC tlaBgGNC">           6 :         return readData( &amp;dstData, sizeof( BETTERENUM_TYPE ), seqNumPtr );</span></span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :     }</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : </span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :     /// Type safe write. See Kit::Dm::IModelPoint</span>
@@ -124,7 +124,7 @@
 <span id="L62"><span class="lineNum">      62</span>                 :             :                            bool                                forceChangeNotification = false,</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :                            Kit::Dm::IModelPoint::LockRequest_T lockRequest             = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept</span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :     {</span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">           5 :         return writeData( &amp;newValue, sizeof( BETTERENUM_TYPE ), forceChangeNotification, lockRequest );</span></span>
+<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">           7 :         return writeData( &amp;newValue, sizeof( BETTERENUM_TYPE ), forceChangeNotification, lockRequest );</span></span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     }</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : </span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied</span>
@@ -170,14 +170,14 @@
 <span id="L108"><span class="lineNum">     108</span>                 :             : </span>
 <span id="L109"><span class="lineNum">     109</span>                 :             : public:</span>
 <span id="L110"><span class="lineNum">     110</span>                 :             :     /// See Kit::Dm::Point.</span>
-<span id="L111"><span class="lineNum">     111</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           5 :     bool fromJSON_( JsonVariant&amp;                        src,</span></span>
+<span id="L111"><span class="lineNum">     111</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           6 :     bool fromJSON_( JsonVariant&amp;                        src,</span></span>
 <span id="L112"><span class="lineNum">     112</span>                 :             :                     Kit::Dm::IModelPoint::LockRequest_T lockRequest,</span>
 <span id="L113"><span class="lineNum">     113</span>                 :             :                     uint16_t&amp;                           retSequenceNumber,</span>
 <span id="L114"><span class="lineNum">     114</span>                 :             :                     Kit::Text::IString*                 errorMsg ) noexcept</span>
 <span id="L115"><span class="lineNum">     115</span>                 :             :     {</span>
 <span id="L116"><span class="lineNum">     116</span>                 :             :         // Get the enum string</span>
 <span id="L117"><span class="lineNum">     117</span>                 :             :         const char* newValue = src;</span>
-<span id="L118"><span class="lineNum">     118</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           3 :         if ( newValue == nullptr )</span></span>
+<span id="L118"><span class="lineNum">     118</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">           4 :         if ( newValue == nullptr )</span></span>
 <span id="L119"><span class="lineNum">     119</span>                 :             :         {</span>
 <span id="L120"><span class="lineNum">     120</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :             if ( errorMsg )</span></span>
 <span id="L121"><span class="lineNum">     121</span>                 :             :             {</span>
@@ -187,8 +187,8 @@
 <span id="L125"><span class="lineNum">     125</span>                 :             :         }</span>
 <span id="L126"><span class="lineNum">     126</span>                 :             : </span>
 <span id="L127"><span class="lineNum">     127</span>                 :             :         // Convert the text to an enum value</span>
-<span id="L128"><span class="lineNum">     128</span>                 :<span class="tlaGNC">           3 :         auto maybeValue = BETTERENUM_TYPE::_from_string_nothrow( newValue );</span></span>
-<span id="L129"><span class="lineNum">     129</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           3 :         if ( !maybeValue )</span></span>
+<span id="L128"><span class="lineNum">     128</span>                 :<span class="tlaGNC">           4 :         auto maybeValue = BETTERENUM_TYPE::_from_string_nothrow( newValue );</span></span>
+<span id="L129"><span class="lineNum">     129</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           4 :         if ( !maybeValue )</span></span>
 <span id="L130"><span class="lineNum">     130</span>                 :             :         {</span>
 <span id="L131"><span class="lineNum">     131</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :             if ( errorMsg )</span></span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :             {</span>
@@ -197,8 +197,8 @@
 <span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">           2 :             return false;</span></span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :         }</span>
 <span id="L137"><span class="lineNum">     137</span>                 :             : </span>
-<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">           1 :         retSequenceNumber = write( *maybeValue, lockRequest );</span></span>
-<span id="L139"><span class="lineNum">     139</span>                 :<span class="tlaGNC">           1 :         return true;</span></span>
+<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">           2 :         retSequenceNumber = write( *maybeValue, false, lockRequest );</span></span>
+<span id="L139"><span class="lineNum">     139</span>                 :<span class="tlaGNC">           2 :         return true;</span></span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :     }</span>
 <span id="L141"><span class="lineNum">     141</span>                 :             : };</span>
 <span id="L142"><span class="lineNum">     142</span>                 :             : </span>

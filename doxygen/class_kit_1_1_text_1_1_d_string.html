@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -509,8 +509,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-<p>The amount of storage initially allocated for the string is the maximum of the size of the source string AND the value of initialSize. Whatever value is chosen, it is then rounded up to the nearest block size multiple. There are two main reasons to specify an initialSize. 1) To reduce the number of malloc/free that occur over the life of the <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a>. If you supply a large enough initialSize - no additional mallocs will be needed. <br  />
- 2) If you plan to use the format(..) methods. The <a class="el" href="class_kit_1_1_text_1_1_string_base.html#a78424fd68ce04916c5d7e1439967057a" title="See Kit::Text::IString.">format()</a> methods will NOT allocate additional storage. To prevent the <a class="el" href="class_kit_1_1_text_1_1_string_base.html#a78424fd68ce04916c5d7e1439967057a" title="See Kit::Text::IString.">format()</a> methods from truncating, you must start with a large enough 'buffer'.</p>
+<p>The amount of storage initially allocated for the string is the maximum of the size of the source string AND the value of initialSize. Whatever value is chosen, it is then rounded up to the nearest block size multiple. There are two main reasons to specify an initialSize. 1) To reduce the number of malloc/free that occur over the life of the <a class="el" href="class_kit_1_1_text_1_1_i_string.html" title="This abstract class defines the operations that can be before on a NULL terminated string.">IString</a>. If you supply a large enough initialSize - no additional mallocs will be needed. 2) If you plan to use the format(..) methods. The <a class="el" href="class_kit_1_1_text_1_1_string_base.html#a78424fd68ce04916c5d7e1439967057a" title="See Kit::Text::IString.">format()</a> methods will NOT allocate additional storage. To prevent the <a class="el" href="class_kit_1_1_text_1_1_string_base.html#a78424fd68ce04916c5d7e1439967057a" title="See Kit::Text::IString.">format()</a> methods from truncating, you must start with a large enough 'buffer'.</p>
 <p>The block size parameter can be used to control the size of the 'chunks' memory is allocated in. This 'blocking' paradigm helps to reduce fragmentation and number of internal malloc/free operations.</p>
 <p>NOTE: The space reserved for the trailing null terminator is part of the block calculation, i.e. if your initial size is 16, and your block size is 16, then number of bytes allocated is 32 to allow space for a 16 byte string and a one byte terminator and then rounded up to the next block size. </p>
 
@@ -1883,7 +1882,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -101,7 +101,7 @@
 <span id="L39"><span class="lineNum">      39</span>                 :             : </span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : //////////////////////////</span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         373 : bool Input::read( void* buffer, int numBytes, int&amp; bytesRead ) noexcept</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">         373 : bool Input::read( void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead ) noexcept</span></span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : {</span>
 <span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">         373 :     m_inEos = false;</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">         373 :     return Posix::Fdio::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );</span></span>

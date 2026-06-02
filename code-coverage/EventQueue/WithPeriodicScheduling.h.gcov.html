@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -83,8 +83,8 @@
 <span id="L21"><span class="lineNum">      21</span>                 :             : </span>
 <span id="L22"><span class="lineNum">      22</span>                 :             : /** This class extends the Kit::EventQueue::Server class to add periodic scheduling</span>
 <span id="L23"><span class="lineNum">      23</span>                 :             :     to an event based 'thread'.  The timing resolution of the periodic scheduling</span>
-<span id="L24"><span class="lineNum">      24</span>                 :             :     is a determined by the 'timingTickInMsec' argument value in the class's</span>
-<span id="L25"><span class="lineNum">      25</span>                 :             :     constructor.  For example if 'timingTickInMsec' is 10ms then no interval</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :     is a determined by the 'timeOutPeriodInMsec' argument value in the class's</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     constructor.  For example if 'timeOutPeriodInMsec' is 10ms then no interval</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             :     should have a interval duration less than 10ms.</span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : </span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :     The order of processing is:</span>
@@ -110,12 +110,12 @@
 <span id="L48"><span class="lineNum">      48</span>                 :             : {</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : public:</span>
-<span id="L51"><span class="lineNum">      51</span>                 :             :     /** Constructor.  The argument 'timingTickInMsec' specifies the timing</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :     /** Constructor.  The argument 'timeOutPeriodInMsec' specifies the timing</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :         resolution that will be used for Kit::Timer::Local Timers AND for the</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :         periodic scheduling.</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :      */</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     WithPeriodicScheduling( Interval_T                                      intervals[],</span>
-<span id="L56"><span class="lineNum">      56</span>                 :             :                             unsigned                                        numnumIntervals,</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :                             unsigned                                        numIntervals,</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :                             Hook_T                                          beginThreadProcessing = nullptr,</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :                             Hook_T                                          endThreadProcessing   = nullptr,</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :                             ReportSlippageFunc_T                            slippageFunc          = nullptr,</span>

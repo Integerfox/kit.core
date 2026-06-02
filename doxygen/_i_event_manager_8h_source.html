@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -94,12 +94,12 @@ $(function() {
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_event_manager.html#a489347252c4d2000f59907092204955f">   44</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_event_manager.html#a489347252c4d2000f59907092204955f">signalMultipleEvents</a>( uint32_t events ) <span class="keyword">noexcept</span> = 0;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    /** This operation is similar to signalEvents(), except that it sets one</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        event flags.  The &#39;eventNumber&#39; is the bit number (zero based) of the</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">        event flags.  The &#39;eventIndex&#39; is the bit number (zero based) of the</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">        Event Flag to set.</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment"></span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">        This method can ONLY be called from a thread context.</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_event_manager.html#aaaef0d8b8658c6aa3b055110e31a715e">   52</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_event_manager.html#aaaef0d8b8658c6aa3b055110e31a715e">signalEvent</a>( uint8_t eventNumber ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_event_manager.html#adc8b13c585554b916c1eb19d26637767">   52</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_event_manager.html#adc8b13c585554b916c1eb19d26637767">signalEvent</a>( uint8_t eventIndex ) <span class="keyword">noexcept</span> = 0;</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">public</span>:<span class="comment"></span></div>
@@ -111,7 +111,7 @@ $(function() {
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">    /** This method is same as signalEvent() EXCEPT this method can ONLY be</span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">        called from supervisor mode and/or ISR contexts.</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_event_manager.html#adb18155c78909037aaa0d5b4ba0318c9">   64</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_event_manager.html#adb18155c78909037aaa0d5b4ba0318c9">su_signalEvent</a>( uint8_t eventNumber ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_event_manager.html#abe3673387c30ad2f9f34a706b75b39ba">   64</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_event_manager.html#abe3673387c30ad2f9f34a706b75b39ba">su_signalEvent</a>( uint8_t eventIndex ) <span class="keyword">noexcept</span> = 0;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">    /// Virtual Destructor</span></div>
@@ -126,15 +126,15 @@ $(function() {
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_event_manager_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_event_manager.html">Kit::System::IEventManager</a></div><div class="ttdoc">This abstract class defines the interface to signal a 'Event Flag'.</div><div class="ttdef"><b>Definition</b> IEventManager.h:37</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_event_manager_html_a489347252c4d2000f59907092204955f"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_event_manager.html#a489347252c4d2000f59907092204955f">Kit::System::IEventManager::signalMultipleEvents</a></div><div class="ttdeci">virtual void signalMultipleEvents(uint32_t events) noexcept=0</div><div class="ttdoc">This operation is called by clients to signal one or more Event Flags.</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_i_event_manager_html_aaaef0d8b8658c6aa3b055110e31a715e"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_event_manager.html#aaaef0d8b8658c6aa3b055110e31a715e">Kit::System::IEventManager::signalEvent</a></div><div class="ttdeci">virtual void signalEvent(uint8_t eventNumber) noexcept=0</div><div class="ttdoc">This operation is similar to signalEvents(), except that it sets one event flags.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_event_manager_html_aba7ccac3e816fa8ed6f6d755364eed25"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_event_manager.html#aba7ccac3e816fa8ed6f6d755364eed25">Kit::System::IEventManager::~IEventManager</a></div><div class="ttdeci">virtual ~IEventManager()=default</div><div class="ttdoc">Virtual Destructor.</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_i_event_manager_html_adb18155c78909037aaa0d5b4ba0318c9"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_event_manager.html#adb18155c78909037aaa0d5b4ba0318c9">Kit::System::IEventManager::su_signalEvent</a></div><div class="ttdeci">virtual void su_signalEvent(uint8_t eventNumber) noexcept=0</div><div class="ttdoc">This method is same as signalEvent() EXCEPT this method can ONLY be called from supervisor mode and/o...</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_i_event_manager_html_abe3673387c30ad2f9f34a706b75b39ba"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_event_manager.html#abe3673387c30ad2f9f34a706b75b39ba">Kit::System::IEventManager::su_signalEvent</a></div><div class="ttdeci">virtual void su_signalEvent(uint8_t eventIndex) noexcept=0</div><div class="ttdoc">This method is same as signalEvent() EXCEPT this method can ONLY be called from supervisor mode and/o...</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_i_event_manager_html_adc8b13c585554b916c1eb19d26637767"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_event_manager.html#adc8b13c585554b916c1eb19d26637767">Kit::System::IEventManager::signalEvent</a></div><div class="ttdeci">virtual void signalEvent(uint8_t eventIndex) noexcept=0</div><div class="ttdoc">This operation is similar to signalEvents(), except that it sets one event flags.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_event_manager_html_ae18687658c65f499e764fa8c1b03f216"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_event_manager.html#ae18687658c65f499e764fa8c1b03f216">Kit::System::IEventManager::su_signalMultipleEvents</a></div><div class="ttdeci">virtual void su_signalMultipleEvents(uint32_t events) noexcept=0</div><div class="ttdoc">This method is same as signalMultipleEvents() EXCEPT this method can ONLY be called from supervisor m...</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:22 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

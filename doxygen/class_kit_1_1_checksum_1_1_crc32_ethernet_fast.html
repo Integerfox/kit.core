@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -53,7 +53,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This class provides an implementation for the 32 Bit "Ethernet" standard CRC.  
+<p>This class provides an implementation for the CRC-32/IEEE 802.3 (Ethernet) variant.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_crc32_ethernet_fast_8h_source.html">Crc32EthernetFast.h</a>&gt;</code></p>
@@ -81,7 +81,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad199dc6c2b46c18183d0b4234aa401a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_checksum_1_1_i_edc.html" title="This abstract class provides a generic interface for an Error-Detecting code (EDC) i....">Kit::Checksum::IEdc</a>.  <br /></td></tr>
 <tr class="separator:ad199dc6c2b46c18183d0b4234aa401a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb3b4dbafe12719afcca575ff6f87f21" id="r_acb3b4dbafe12719afcca575ff6f87f21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb3b4dbafe12719afcca575ff6f87f21">finalize</a> (void *destBuffer, unsigned destBufferSize) noexcept override</td></tr>
-<tr class="memdesc:acb3b4dbafe12719afcca575ff6f87f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_checksum_1_1_i_edc.html" title="This abstract class provides a generic interface for an Error-Detecting code (EDC) i....">Kit::Checksum::IEdc</a>. The checksum is Big Endian in the 'destBuffer'.  <br /></td></tr>
+<tr class="memdesc:acb3b4dbafe12719afcca575ff6f87f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_checksum_1_1_i_edc.html" title="This abstract class provides a generic interface for an Error-Detecting code (EDC) i....">Kit::Checksum::IEdc</a>. The checksum is Little Endian in the 'destBuffer'.  <br /></td></tr>
 <tr class="separator:acb3b4dbafe12719afcca575ff6f87f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee1a366f0c9e25e2d1e9c1017e3f58b7" id="r_aee1a366f0c9e25e2d1e9c1017e3f58b7"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee1a366f0c9e25e2d1e9c1017e3f58b7">getEdcSize</a> () const noexcept override</td></tr>
 <tr class="memdesc:aee1a366f0c9e25e2d1e9c1017e3f58b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_checksum_1_1_i_edc.html" title="This abstract class provides a generic interface for an Error-Detecting code (EDC) i....">Kit::Checksum::IEdc</a>.  <br /></td></tr>
@@ -104,8 +104,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:abd8701a452d03bd12db42c7d411fd707"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class provides an implementation for the 32 Bit "Ethernet" standard CRC. </p>
-<p>The CRC has following characteristics: o The polynomial is: x32 + x26 + x23 + x22 + x16 + x12 + x11 + x10 + x8 + x7 + x5 + x4 + x2 + x + 1 o The Data bytes are NOT reflected o The remainder is NOT reflected. o The final remainder is NOT XOR'd </p>
+<div class="textblock"><p>This class provides an implementation for the CRC-32/IEEE 802.3 (Ethernet) variant. </p>
+<p>The CRC has following characteristics: o The polynomial is: x32 + x26 + x23 + x22 + x16 + x12 + x11 + x10 + x8 + x7 + x5 + x4 + x2 + x + 1 o The initial remainder is 0xFFFFFFFF. o The Data bytes are reflected o The remainder is reflected. o The final remainder is XOR'd with 0xFFFFFFFF </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a06a6621415d0a1ffeb1d1ecae0be5882" name="a06a6621415d0a1ffeb1d1ecae0be5882"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a06a6621415d0a1ffeb1d1ecae0be5882">&#9670;&#160;</a></span>Crc32EthernetFast()</h2>
@@ -195,7 +195,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>See <a class="el" href="class_kit_1_1_checksum_1_1_i_edc.html" title="This abstract class provides a generic interface for an Error-Detecting code (EDC) i....">Kit::Checksum::IEdc</a>. The checksum is Big Endian in the 'destBuffer'. </p>
+<p>See <a class="el" href="class_kit_1_1_checksum_1_1_i_edc.html" title="This abstract class provides a generic interface for an Error-Detecting code (EDC) i....">Kit::Checksum::IEdc</a>. The checksum is Little Endian in the 'destBuffer'. </p>
 
 <p>Implements <a class="el" href="class_kit_1_1_checksum_1_1_i_edc.html#af56ccedc0f63afcd46b260a37b955626">Kit::Checksum::IEdc</a>.</p>
 
@@ -319,7 +319,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

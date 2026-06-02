@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -131,17 +131,20 @@ $(function() {
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">        If the 1st character of &#39;stringGuid&#39; is a leading &#39;{&#39;, there must be a</span></div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">        trailing &#39;}&#39;</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"></span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">        The &#39;stringGuid&#39; should never contain any whitespace.</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        Returns true if conversion was successful; else false is returned (e.g.</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">        incorrect/invalid formatting).</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="struct_kit_1_1_type_1_1_guid___t.html#a5314265ee90d152ef05ee6d97293524e">   89</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="struct_kit_1_1_type_1_1_guid___t.html#a5314265ee90d152ef05ee6d97293524e">fromString</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* stringGuid );</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>};</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>}</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">        Parsing consumes the leading GUID token only; trailing characters after</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">        the GUID token are tolerated.</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"></span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">        The &#39;stringGuid&#39; should never contain any whitespace.</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"></span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">        Returns true if conversion was successful; else false is returned (e.g.</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">        incorrect/invalid formatting).</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="struct_kit_1_1_type_1_1_guid___t.html#a5314265ee90d152ef05ee6d97293524e">   92</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="struct_kit_1_1_type_1_1_guid___t.html#a5314265ee90d152ef05ee6d97293524e">fromString</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* stringGuid );</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>};</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>}</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_f_string_8h_html"><div class="ttname"><a href="_f_string_8h.html">FString.h</a></div></div>
 <div class="ttc" id="a_guid_8h_html_afead7e528b4dbe027c32c8c6a07ffc47"><div class="ttname"><a href="_guid_8h.html#afead7e528b4dbe027c32c8c6a07ffc47">KIT_TYPE_GUID_BINARY_LENGTH</a></div><div class="ttdeci">#define KIT_TYPE_GUID_BINARY_LENGTH</div><div class="ttdoc">The number of binary bytes in a GUID.</div><div class="ttdef"><b>Definition</b> Guid.h:18</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_f_string_html"><div class="ttname"><a href="class_kit_1_1_text_1_1_f_string.html">Kit::Text::FString</a></div><div class="ttdoc">This template class represents a NULL terminated string of a specific length.</div><div class="ttdef"><b>Definition</b> FString.h:34</div></div>
@@ -155,7 +158,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:22 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

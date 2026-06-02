@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -100,10 +100,10 @@
 <span id="L38"><span class="lineNum">      38</span>                 :             : }</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             : </span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC tlaBgGNC">          24 : const char* ToString::convert_( KitTextToStringMaxUnsigned_T num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC tlaBgGNC">          26 : const char* ToString::convert_( KitTextToStringMaxUnsigned_T num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : {</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :     // Error check the base argument and null destination string</span>
-<span id="L44"><span class="lineNum">      44</span>   [<span class="tlaGBC" title="Branch 0 was taken 22 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 21 times"> + </span>]:<span class="tlaGNC">          24 :     if ( base &lt; 2 || base &gt; 36 || dstString == nullptr )</span></span>
+<span id="L44"><span class="lineNum">      44</span>   [<span class="tlaGBC" title="Branch 0 was taken 24 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 21 times"> + </span>]:<span class="tlaGNC">          26 :     if ( base &lt; 2 || base &gt; 36 || dstString == nullptr || maxChars == 0 )</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     {</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :         return nullptr;</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>

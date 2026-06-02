@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -243,7 +243,7 @@ $(function() {
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            {</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>                tempArray[idx] = elems[idx + offset].as&lt;ELEMTYPE&gt;();</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            }</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            retSequenceNumber  = <a class="code hl_function" href="class_kit_1_1_dm_1_1_mp_1_1_array_base.html#a0a7b7a0c72d12ce93c23529440def870">ArrayBase::writeArrayElements</a>( tempArray, idx, startIdx + offset, lockRequest );</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            retSequenceNumber  = <a class="code hl_function" href="class_kit_1_1_dm_1_1_mp_1_1_array_base.html#a0a7b7a0c72d12ce93c23529440def870">ArrayBase::writeArrayElements</a>( tempArray, idx, startIdx + offset, <span class="keyword">false</span>, lockRequest );</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            offset            += idx;</div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>            numElements       -= idx;</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        }</div>
@@ -465,7 +465,7 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_i_model_point_html_ac54eaa853e1be0516c41429f9d694d53"><div class="ttname"><a href="class_kit_1_1_dm_1_1_i_model_point.html#ac54eaa853e1be0516c41429f9d694d53">Kit::Dm::IModelPoint::SEQUENCE_NUMBER_UNKNOWN</a></div><div class="ttdeci">static constexpr uint16_t SEQUENCE_NUMBER_UNKNOWN</div><div class="ttdoc">Magic value to use when registering for a change notification and application does not 'know' the cur...</div><div class="ttdef"><b>Definition</b> IModelPoint.h:63</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_i_observer_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a></div><div class="ttdoc">This abstract class defines the Observer interface - for change notifications - to a Model Points dat...</div><div class="ttdef"><b>Definition</b> IObserver.h:35</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_a16bccf75d81b9336a456fcac4e345099"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#a16bccf75d81b9336a456fcac4e345099">Kit::Dm::ModelPointBase::detachObserver</a></div><div class="ttdeci">void detachObserver(IObserver &amp;observer) noexcept override</div><div class="ttdoc">See Kit::Dm::IModelPoint.</div></div>
-<div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_a2d6efa5e4880a0ddc82a4624ad33c1f8"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#a2d6efa5e4880a0ddc82a4624ad33c1f8">Kit::Dm::ModelPointBase::m_dataPtr</a></div><div class="ttdeci">void * m_dataPtr</div><div class="ttdoc">Reference to my Data.</div><div class="ttdef"><b>Definition</b> ModelPointBase.h:237</div></div>
+<div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_a2d6efa5e4880a0ddc82a4624ad33c1f8"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#a2d6efa5e4880a0ddc82a4624ad33c1f8">Kit::Dm::ModelPointBase::m_dataPtr</a></div><div class="ttdeci">void * m_dataPtr</div><div class="ttdoc">Reference to my Data.</div><div class="ttdef"><b>Definition</b> ModelPointBase.h:238</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_a4e34ca76fbd6c3f60d925d04cca7467c"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#a4e34ca76fbd6c3f60d925d04cca7467c">Kit::Dm::ModelPointBase::attachObserver</a></div><div class="ttdeci">void attachObserver(IObserver &amp;observer, uint16_t initialSeqNumber=SEQUENCE_NUMBER_UNKNOWN) noexcept override</div><div class="ttdoc">See Kit::Dm::IModelPoint.</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_array_base_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_array_base.html">Kit::Dm::Mp::ArrayBase</a></div><div class="ttdoc">This a mostly concrete class provides 'common' implementation for a Model Point who's data is a array...</div><div class="ttdef"><b>Definition</b> ArrayBase.h:61</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_array_base_html_a074efd2b4734cc26d7b26f41f48db8bd"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_array_base.html#a074efd2b4734cc26d7b26f41f48db8bd">Kit::Dm::Mp::ArrayBase::readArrayElements</a></div><div class="ttdeci">virtual bool readArrayElements(void *dstData, size_t dstNumElements, size_t srcIndex=0, uint16_t *seqNumPtr=0) const noexcept</div><div class="ttdoc">The caller can read a subset of array starting from the specified index in the Model Point's array.</div></div>
@@ -523,7 +523,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:22 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:32 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

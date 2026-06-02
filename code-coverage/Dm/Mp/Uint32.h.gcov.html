@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -108,13 +108,14 @@
 <span id="L46"><span class="lineNum">      46</span>                 :             :     NOTE: All methods in this class ARE thread Safe unless explicitly</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :           documented otherwise.</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :  */</span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC tlaBgGNC">           1 : class Uint32 : public UnsignedInteger&lt;uint32_t, Uint32&gt;</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC tlaBgGNC">           2 : class Uint32 : public UnsignedInteger&lt;uint32_t, Uint32&gt;</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : {</span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : public:</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     /** Constructor. Invalid MP.</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :      */</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     Uint32( Kit::Dm::IModelDatabase&amp; myModelBase, const char* symbolicName )</span>
-<span id="L55"><span class="lineNum">      55</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :         : UnsignedInteger&lt;uint32_t, Uint32&gt;( myModelBase, symbolicName )</span></span>
+<span id="L55"><span class="lineNum">      55</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">           3 :         : UnsignedInteger&lt;uint32_t, Uint32&gt;( myModelBase, symbolicName )</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
 <span id="L56"><span class="lineNum">      56</span>                 :             :     {</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     }</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : </span>

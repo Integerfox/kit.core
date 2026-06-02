@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -92,14 +92,14 @@
 <span id="L30"><span class="lineNum">      30</span>                 :             : </span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : // Helper method</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : template &lt;typename MSG_ENUM&gt;</span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC tlaBgGNC">          70 : static bool isValidMessage( uint8_t messageId, const char*&amp; dstMessageText ) noexcept</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC tlaBgGNC">          71 : static bool isValidMessage( uint8_t messageId, const char*&amp; dstMessageText ) noexcept</span></span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : {</span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">          70 :     auto maybe = MSG_ENUM::_from_integral_nothrow( messageId );</span></span>
-<span id="L36"><span class="lineNum">      36</span>         [<span class="tlaGBC" title="Branch 0 was taken 67 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          70 :     if ( maybe )</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">          71 :     auto maybe = MSG_ENUM::_from_integral_nothrow( messageId );</span></span>
+<span id="L36"><span class="lineNum">      36</span>         [<span class="tlaGBC" title="Branch 0 was taken 68 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          71 :     if ( maybe )</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :     {</span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">          67 :         dstMessageText = maybe-&gt;_to_string();</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">          68 :         dstMessageText = maybe-&gt;_to_string();</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     }</span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          70 :     return maybe;</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          71 :     return maybe;</span></span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : }</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : </span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : /////////////</span>
@@ -108,26 +108,26 @@
 <span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">           1 :     return PACKAGE_ID;</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : }</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : </span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          39 : const char* Package::packageIdString() noexcept</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          40 : const char* Package::packageIdString() noexcept</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : {</span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">          39 :     return PACKAGE_ID_TEXT;</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">          40 :     return PACKAGE_ID_TEXT;</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : }</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : </span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : </span>
-<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">          73 : bool Package::subSystemAndMessageIdsToString( uint8_t      subSystemId,</span></span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">          74 : bool Package::subSystemAndMessageIdsToString( uint8_t      subSystemId,</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :                                               const char*&amp; dstSubSystemText,</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :                                               uint8_t      messageId,</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :                                               const char*&amp; dstMessageText ) noexcept</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : {</span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">          73 :     dstSubSystemText = nullptr;</span></span>
-<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">          73 :     dstMessageText   = nullptr;</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">          74 :     dstSubSystemText = nullptr;</span></span>
+<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">          74 :     dstMessageText   = nullptr;</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :     bool found       = false;</span>
-<span id="L63"><span class="lineNum">      63</span>   [<span class="tlaGBC" title="Branch 0 was taken 7 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 55 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3 times"> + </span>]:<span class="tlaGNC">          73 :     switch ( subSystemId )</span></span>
+<span id="L63"><span class="lineNum">      63</span>   [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 55 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3 times"> + </span>]:<span class="tlaGNC">          74 :     switch ( subSystemId )</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :     {</span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">           7 :     case SubSystemId::SYSTEM:</span></span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">           7 :         dstSubSystemText = ( +SubSystemId::SYSTEM )._to_string();</span></span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">           7 :         found            = isValidMessage&lt;SystemMsgId&gt;( messageId, dstMessageText );</span></span>
-<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">           7 :         break;</span></span>
+<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">           8 :     case SubSystemId::SYSTEM:</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">           8 :         dstSubSystemText = ( +SubSystemId::SYSTEM )._to_string();</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">           8 :         found            = isValidMessage&lt;SystemMsgId&gt;( messageId, dstMessageText );</span></span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">           8 :         break;</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : </span>
 <span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">           8 :     case SubSystemId::DRIVER:</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">           8 :         dstSubSystemText = ( +SubSystemId::DRIVER )._to_string();</span></span>
@@ -143,7 +143,7 @@
 <span id="L81"><span class="lineNum">      81</span>                 :             :         break;</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :     }</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             : </span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">          73 :     return found;</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">          74 :     return found;</span></span>
 <span id="L85"><span class="lineNum">      85</span>                 :             : }</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : </span>
 <span id="L87"><span class="lineNum">      87</span>                 :             : }  // end namespace</span>

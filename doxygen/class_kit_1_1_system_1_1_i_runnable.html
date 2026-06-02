@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -259,6 +259,11 @@ Friends</h2></td></tr>
    by having the thread run itself to completion. Not all OSes
    support a polite way (i.e. reclaiming resource, memory, etc.) of
    killing threads.
+3) For EventQueue-based threads, calling pleaseStop() means all
+   application-level activity for the thread has already been
+   shut down (e.g. no outstanding synchronous ITC callers and no
+   new requests being posted).  The APPLICATION is RESPONSIBLE for
+   making sure this is the case before calling pleaseStop().
 </pre> 
 <p>Reimplemented in <a class="el" href="class_kit_1_1_event_queue_1_1_server.html#a736e5693125107db95c21dbf57107afb">Kit::EventQueue::Server</a>, <a class="el" href="class_kit_1_1_io_1_1_socket_1_1_listener_runnable.html#a1532a54800ad81eea4789727fd46d73f">Kit::Io::Socket::ListenerRunnable</a>, and <a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ac98e0900ddff9c917d784b3e9990ff14">Kit::System::EventLoop</a>.</p>
 
@@ -348,7 +353,7 @@ Friends</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

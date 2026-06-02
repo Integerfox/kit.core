@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -77,20 +77,20 @@
 <span id="L15"><span class="lineNum">      15</span>                 :             : namespace Container {</span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : </span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : </span>
-<span id="L18"><span class="lineNum">      18</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span>]:<span class="tlaGNC tlaBgGNC">          14 : void OrderedListBase::insert( KeyedItem&amp; item ) noexcept</span></span>
+<span id="L18"><span class="lineNum">      18</span>         [<span class="tlaGBC" title="Branch 0 was taken 38 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 33 times"> + </span>]:<span class="tlaGNC tlaBgGNC">          71 : void OrderedListBase::insert( KeyedItem&amp; item ) noexcept</span></span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : {</span>
-<span id="L20"><span class="lineNum">      20</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span>]:<span class="tlaGNC">          14 :     KeyedItem* current = static_cast&lt;KeyedItem*&gt;( first() );</span></span>
-<span id="L21"><span class="lineNum">      21</span>         [<span class="tlaGBC" title="Branch 0 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">          23 :     while ( current )</span></span>
+<span id="L20"><span class="lineNum">      20</span>         [<span class="tlaGBC" title="Branch 0 was taken 38 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 33 times"> + </span>]:<span class="tlaGNC">          71 :     KeyedItem* current = static_cast&lt;KeyedItem*&gt;( first() );</span></span>
+<span id="L21"><span class="lineNum">      21</span>         [<span class="tlaGBC" title="Branch 0 was taken 55 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 60 times"> + </span>]:<span class="tlaGNC">         115 :     while ( current )</span></span>
 <span id="L22"><span class="lineNum">      22</span>                 :             :     {</span>
-<span id="L23"><span class="lineNum">      23</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 9 times"> + </span>]:<span class="tlaGNC">          13 :         if ( current-&gt;getKey().compareKey( item.getKey() ) &gt; 0 )</span></span>
+<span id="L23"><span class="lineNum">      23</span>         [<span class="tlaGBC" title="Branch 0 was taken 11 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 44 times"> + </span>]:<span class="tlaGNC">          55 :         if ( current-&gt;getKey().compareKey( item.getKey() ) &gt; 0 )</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             :         {</span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">           4 :             insertBefore( *current, item );</span></span>
-<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">           4 :             return;</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">          11 :             insertBefore( *current, item );</span></span>
+<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">          11 :             return;</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :         }</span>
-<span id="L28"><span class="lineNum">      28</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">           9 :         current = static_cast&lt;KeyedItem*&gt;( next( *current ) );</span></span>
+<span id="L28"><span class="lineNum">      28</span>         [<span class="tlaGBC" title="Branch 0 was taken 17 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 27 times"> + </span>]:<span class="tlaGNC">          44 :         current = static_cast&lt;KeyedItem*&gt;( next( *current ) );</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     }</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : </span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          10 :     putLast( item );</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          60 :     putLast( item );</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : }</span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : </span>

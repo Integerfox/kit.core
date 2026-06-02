@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -136,7 +136,7 @@
 <span id="L74"><span class="lineNum">      74</span>                 :             :                IWatchedEventLoop*                 watchdog            = nullptr ) noexcept;</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             : </span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :     /// Virtual destructor</span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC tlaBgGNC">          86 :     virtual ~EventLoop() = default;</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC tlaBgGNC">          88 :     virtual ~EventLoop() = default;</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : </span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : protected:</span>
@@ -224,13 +224,13 @@
 <span id="L162"><span class="lineNum">     162</span>                 :             :     void signalMultipleEvents( uint32_t events ) noexcept override;</span>
 <span id="L163"><span class="lineNum">     163</span>                 :             : </span>
 <span id="L164"><span class="lineNum">     164</span>                 :             :     /// See Kit::System::IEventManager</span>
-<span id="L165"><span class="lineNum">     165</span>                 :             :     void signalEvent( uint8_t eventNumber ) noexcept override;</span>
+<span id="L165"><span class="lineNum">     165</span>                 :             :     void signalEvent( uint8_t eventIndex ) noexcept override;</span>
 <span id="L166"><span class="lineNum">     166</span>                 :             : </span>
 <span id="L167"><span class="lineNum">     167</span>                 :             :     /// See Kit::System::IEventManager</span>
 <span id="L168"><span class="lineNum">     168</span>                 :             :     void su_signalMultipleEvents( uint32_t events ) noexcept override;</span>
 <span id="L169"><span class="lineNum">     169</span>                 :             : </span>
 <span id="L170"><span class="lineNum">     170</span>                 :             :     /// See Kit::System::IEventManager</span>
-<span id="L171"><span class="lineNum">     171</span>                 :             :     void su_signalEvent( uint8_t eventNumber ) noexcept override;</span>
+<span id="L171"><span class="lineNum">     171</span>                 :             :     void su_signalEvent( uint8_t eventIndex ) noexcept override;</span>
 <span id="L172"><span class="lineNum">     172</span>                 :             : </span>
 <span id="L173"><span class="lineNum">     173</span>                 :             : protected:</span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :     /// Semaphore associated with the EventLoop (note: the Thread semaphore is NOT used)</span>

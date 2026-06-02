@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -92,7 +92,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a13adc37da67985b30748819b72afa4fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to read the specified number of bytes from the stream in the supplied buffer.  <br /></td></tr>
 <tr class="separator:a13adc37da67985b30748819b72afa4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b7b4767aaa1b977ac7dbe705a6d2cb9" id="r_a6b7b4767aaa1b977ac7dbe705a6d2cb9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b7b4767aaa1b977ac7dbe705a6d2cb9">read</a> (void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytesToRead) noexcept</td></tr>
-<tr class="memdesc:a6b7b4767aaa1b977ac7dbe705a6d2cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is similar to read( void* buffer, int numBytes, int&amp; bytesRead ), except that it will NOT return until 'numBytesToRead' have been read.  <br /></td></tr>
+<tr class="memdesc:a6b7b4767aaa1b977ac7dbe705a6d2cb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is similar to <a class="el" href="#a13adc37da67985b30748819b72afa4fd" title="Attempts to read the specified number of bytes from the stream in the supplied buffer.">read( void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead )</a>, except that it will NOT return until 'numBytesToRead' have been read.  <br /></td></tr>
 <tr class="separator:a6b7b4767aaa1b977ac7dbe705a6d2cb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_kit_1_1_io_1_1_i_close"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_kit_1_1_io_1_1_i_close')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_kit_1_1_io_1_1_i_close.html">Kit::Io::IClose</a></td></tr>
 <tr class="memitem:add2685594bd575eec0205376073121e3 inherit pub_methods_class_kit_1_1_io_1_1_i_close" id="r_add2685594bd575eec0205376073121e3"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_i_close.html#add2685594bd575eec0205376073121e3">~IClose</a> () noexcept=default</td></tr>
@@ -300,7 +300,7 @@ Public Member Functions</h2></td></tr>
 <p>If the method fails, the contents of the 'buffer' is undefined.</p>
 <p>The caller is responsible for providing a buffer that is large enough to hold the requested number of bytes. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_io_1_1_file_1_1_input.html#a55342c29aceb90011db958c174fbc948">Kit::Io::File::Input</a>, <a class="el" href="class_kit_1_1_io_1_1_file_1_1_input_output.html#a85dee7e0954ee0949ff8bd87c4d5a54f">Kit::Io::File::InputOutput</a>, <a class="el" href="class_kit_1_1_io_1_1_file_1_1_null.html#a864704faca4690b0c1ba1dc9db041bc4">Kit::Io::File::Null</a>, <a class="el" href="class_kit_1_1_io_1_1_null.html#ae7843605169c1fbab60834ebb20a1366">Kit::Io::Null</a>, <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_r_pi_1_1_r_p2xxx_1_1_stdio_1_1_input.html#aea189ee0c35b556b55d04c60a2d6e003">Kit::Io::Serial::RPi::RP2xxx::Stdio::Input</a>, <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_r_pi_1_1_r_p2xxx_1_1_uart_1_1_input_output.html#a3f570a233ecc673c34f863f4fade3b8c">Kit::Io::Serial::RPi::RP2xxx::Uart::InputOutput</a>, and <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html#a2ae65ed0aa2e5718756054d99fbb4e15">Kit::Io::Serial::ST::M32F4::InputOutput</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_io_1_1_file_1_1_input.html#a55342c29aceb90011db958c174fbc948">Kit::Io::File::Input</a>, <a class="el" href="class_kit_1_1_io_1_1_file_1_1_input_output.html#a85dee7e0954ee0949ff8bd87c4d5a54f">Kit::Io::File::InputOutput</a>, <a class="el" href="class_kit_1_1_io_1_1_file_1_1_null.html#a864704faca4690b0c1ba1dc9db041bc4">Kit::Io::File::Null</a>, <a class="el" href="class_kit_1_1_io_1_1_null.html#ae7843605169c1fbab60834ebb20a1366">Kit::Io::Null</a>, <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_r_pi_1_1_r_p2xxx_1_1_stdio_1_1_input.html#aea189ee0c35b556b55d04c60a2d6e003">Kit::Io::Serial::RPi::RP2xxx::Stdio::Input</a>, <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_r_pi_1_1_r_p2xxx_1_1_uart_1_1_input_output.html#a3f570a233ecc673c34f863f4fade3b8c">Kit::Io::Serial::RPi::RP2xxx::Uart::InputOutput</a>, <a class="el" href="class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html#a2ae65ed0aa2e5718756054d99fbb4e15">Kit::Io::Serial::ST::M32F4::InputOutput</a>, <a class="el" href="class_kit_1_1_io_1_1_socket_1_1_input_output.html#a93b22142fd8a452de4306162205856aa">Kit::Io::Socket::InputOutput</a>, and <a class="el" href="class_kit_1_1_io_1_1_stdio_1_1_input_delegate.html#a594a65d3d5854faf0db98e22d53e35cd">Kit::Io::Stdio::InputDelegate</a>.</p>
 
 </div>
 </div>
@@ -331,7 +331,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This method is similar to read( void* buffer, int numBytes, int&amp; bytesRead ), except that it will NOT return until 'numBytesToRead' have been read. </p>
+<p>This method is similar to <a class="el" href="#a13adc37da67985b30748819b72afa4fd" title="Attempts to read the specified number of bytes from the stream in the supplied buffer.">read( void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead )</a>, except that it will NOT return until 'numBytesToRead' have been read. </p>
 <p>If the method fails, the contents of the 'buffer' is undefined. </p>
 
 </div>
@@ -342,7 +342,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

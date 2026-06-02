@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">56.5&nbsp;%</td>
+            <td class="headerCovTableEntryLo">52.2&nbsp;%</td>
             <td class="headerCovTableEntry">23</td>
-            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">12</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -148,9 +148,9 @@
 <span id="L86"><span class="lineNum">      86</span>                 :             :     /** Adds new item to the ring buffer. Returns true on success. If the ring</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :         buffer is full, then false is returned (and ring buffer is not updated).</span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :      */</span>
-<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">          29 :     virtual bool add( const ITEM&amp; item ) noexcept</span></span>
+<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     virtual bool add( const ITEM&amp; item ) noexcept</span></span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     {</span>
-<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">         186 :         return RingBufferBaseType::add( &amp;item, sizeof( ITEM ), m_bufferMemory );</span></span>
+<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC tlaBgGNC">         186 :         return RingBufferBaseType::add( &amp;item, sizeof( ITEM ), m_bufferMemory );</span></span>
 <span id="L92"><span class="lineNum">      92</span>                 :             :     }</span>
 <span id="L93"><span class="lineNum">      93</span>                 :             : </span>
 <span id="L94"><span class="lineNum">      94</span>                 :             :     /** Removes an item from the ring buffer.  Returns true on success.  If the</span>
@@ -158,7 +158,7 @@
 <span id="L96"><span class="lineNum">      96</span>                 :             :         is not updated) */</span>
 <span id="L97"><span class="lineNum">      97</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     virtual bool remove( ITEM&amp; item ) noexcept</span></span>
 <span id="L98"><span class="lineNum">      98</span>                 :             :     {</span>
-<span id="L99"><span class="lineNum">      99</span>                 :<span class="tlaGNC tlaBgGNC">         118 :         return RingBufferBaseType::remove( &amp;item, sizeof( ITEM ), m_bufferMemory );</span></span>
+<span id="L99"><span class="lineNum">      99</span>                 :<span class="tlaGNC tlaBgGNC">         147 :         return RingBufferBaseType::remove( &amp;item, sizeof( ITEM ), m_bufferMemory );</span></span>
 <span id="L100"><span class="lineNum">     100</span>                 :             :     }</span>
 <span id="L101"><span class="lineNum">     101</span>                 :             : </span>
 <span id="L102"><span class="lineNum">     102</span>                 :             :     /** This method inspects the head of the ring buffer without removing it.</span>

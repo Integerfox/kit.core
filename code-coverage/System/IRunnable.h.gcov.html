@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">71.4&nbsp;%</td>
+            <td class="headerCovTableEntryHi">85.7&nbsp;%</td>
             <td class="headerCovTableEntry">7</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">6</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -110,53 +110,58 @@
 <span id="L48"><span class="lineNum">      48</span>                 :             :                by having the thread run itself to completion. Not all OSes</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :                support a polite way (i.e. reclaiming resource, memory, etc.) of</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :                killing threads.</span>
-<span id="L51"><span class="lineNum">      51</span>                 :             :      */</span>
-<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     virtual void pleaseStop() noexcept {}</span></span>
-<span id="L53"><span class="lineNum">      53</span>                 :             : </span>
-<span id="L54"><span class="lineNum">      54</span>                 :             :     /** This method returns a pointer to the Thread object that is executing </span>
-<span id="L55"><span class="lineNum">      55</span>                 :             :         the IRunnable instance.  The pointer will be nullptr if the thread has</span>
-<span id="L56"><span class="lineNum">      56</span>                 :             :         not started execution (i.e. before entry() is called) AND after the </span>
-<span id="L57"><span class="lineNum">      57</span>                 :             :         thread has terminated (i.e. after entry() returns)</span>
-<span id="L58"><span class="lineNum">      58</span>                 :             :      */</span>
-<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaUNC">           0 :     virtual Thread* getThread() noexcept</span></span>
-<span id="L60"><span class="lineNum">      60</span>                 :             :     {</span>
-<span id="L61"><span class="lineNum">      61</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">           3 :         return m_parentThreadPtr_;</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :             3) For EventQueue-based threads, calling pleaseStop() means all</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :                application-level activity for the thread has already been</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             :                shut down (e.g. no outstanding synchronous ITC callers and no</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :                new requests being posted).  The APPLICATION is RESPONSIBLE for</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :                making sure this is the case before calling pleaseStop().</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :      */</span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     virtual void pleaseStop() noexcept {}</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : </span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :     /** This method returns a pointer to the Thread object that is executing </span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :         the IRunnable instance.  The pointer will be nullptr if the thread has</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :         not started execution (i.e. before entry() is called) AND after the </span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :         thread has terminated (i.e. after entry() returns)</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :      */</span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC tlaBgGNC">         112 :     virtual Thread* getThread() noexcept</span></span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :     {</span>
+<span id="L66"><span class="lineNum">      66</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         115 :         return m_parentThreadPtr_;</span></span>
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
-<span id="L62"><span class="lineNum">      62</span>                 :             :     }</span>
-<span id="L63"><span class="lineNum">      63</span>                 :             : </span>
-<span id="L64"><span class="lineNum">      64</span>                 :             : public:</span>
-<span id="L65"><span class="lineNum">      65</span>                 :             :     /// Virtual destructor</span>
-<span id="L66"><span class="lineNum">      66</span>                 :             :     virtual ~IRunnable() noexcept = default;</span>
-<span id="L67"><span class="lineNum">      67</span>                 :             : </span>
-<span id="L68"><span class="lineNum">      68</span>                 :             : protected:</span>
-<span id="L69"><span class="lineNum">      69</span>                 :             :     /// Constructor</span>
-<span id="L70"><span class="lineNum">      70</span>                 :             :     IRunnable() noexcept</span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          98 :         : m_parentThreadPtr_( nullptr )</span></span>
-<span id="L72"><span class="lineNum">      72</span>                 :             :     {</span>
-<span id="L73"><span class="lineNum">      73</span>                 :             :     }</span>
-<span id="L74"><span class="lineNum">      74</span>                 :             : </span>
-<span id="L75"><span class="lineNum">      75</span>                 :             : protected:</span>
-<span id="L76"><span class="lineNum">      76</span>                 :             :     /// Allow the Thread access to the IRunnable object</span>
-<span id="L77"><span class="lineNum">      77</span>                 :             :     friend class Thread;</span>
-<span id="L78"><span class="lineNum">      78</span>                 :             : </span>
-<span id="L79"><span class="lineNum">      79</span>                 :             :     /** This method allows the Thread class to provide the IRunnable object a</span>
-<span id="L80"><span class="lineNum">      80</span>                 :             :         reference to the thread it is executing in.</span>
-<span id="L81"><span class="lineNum">      81</span>                 :             :         </span>
-<span id="L82"><span class="lineNum">      82</span>                 :             :         NOTE: This method is intended for internal use by the Thread class ONLY.</span>
-<span id="L83"><span class="lineNum">      83</span>                 :             :     */</span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">         144 :     virtual void setThread( Thread* thread ) noexcept</span></span>
-<span id="L85"><span class="lineNum">      85</span>                 :             :     {</span>
-<span id="L86"><span class="lineNum">      86</span>                 :<span class="tlaGNC">         148 :         m_parentThreadPtr_ = thread;</span></span>
-<span id="L87"><span class="lineNum">      87</span>                 :<span class="tlaGNC">         144 :     }</span></span>
-<span id="L88"><span class="lineNum">      88</span>                 :             : </span>
-<span id="L89"><span class="lineNum">      89</span>                 :             : protected:</span>
-<span id="L90"><span class="lineNum">      90</span>                 :             :     /// A back-reference to the thread that the runnable object is executing in</span>
-<span id="L91"><span class="lineNum">      91</span>                 :             :     Thread* m_parentThreadPtr_;</span>
-<span id="L92"><span class="lineNum">      92</span>                 :             : };</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :     }</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             : </span>
+<span id="L69"><span class="lineNum">      69</span>                 :             : public:</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :     /// Virtual destructor</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :     virtual ~IRunnable() noexcept = default;</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             : </span>
+<span id="L73"><span class="lineNum">      73</span>                 :             : protected:</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             :     /// Constructor</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :     IRunnable() noexcept</span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">         100 :         : m_parentThreadPtr_( nullptr )</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :     {</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :     }</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             : </span>
+<span id="L80"><span class="lineNum">      80</span>                 :             : protected:</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :     /// Allow the Thread access to the IRunnable object</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :     friend class Thread;</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             : </span>
+<span id="L84"><span class="lineNum">      84</span>                 :             :     /** This method allows the Thread class to provide the IRunnable object a</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             :         reference to the thread it is executing in.</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :         </span>
+<span id="L87"><span class="lineNum">      87</span>                 :             :         NOTE: This method is intended for internal use by the Thread class ONLY.</span>
+<span id="L88"><span class="lineNum">      88</span>                 :             :     */</span>
+<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">         146 :     virtual void setThread( Thread* thread ) noexcept</span></span>
+<span id="L90"><span class="lineNum">      90</span>                 :             :     {</span>
+<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">         150 :         m_parentThreadPtr_ = thread;</span></span>
+<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">         146 :     }</span></span>
 <span id="L93"><span class="lineNum">      93</span>                 :             : </span>
-<span id="L94"><span class="lineNum">      94</span>                 :             : }       // end namespaces</span>
-<span id="L95"><span class="lineNum">      95</span>                 :             : }</span>
-<span id="L96"><span class="lineNum">      96</span>                 :             : #endif  // end header latch</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             : protected:</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             :     /// A back-reference to the thread that the runnable object is executing in</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             :     Thread* m_parentThreadPtr_;</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             : };</span>
+<span id="L98"><span class="lineNum">      98</span>                 :             : </span>
+<span id="L99"><span class="lineNum">      99</span>                 :             : }       // end namespaces</span>
+<span id="L100"><span class="lineNum">     100</span>                 :             : }</span>
+<span id="L101"><span class="lineNum">     101</span>                 :             : #endif  // end header latch</span>
         </pre>
               </td>
             </tr>

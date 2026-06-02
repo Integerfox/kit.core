@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -123,7 +123,7 @@
 <span id="L61"><span class="lineNum">      61</span>                 :             :         // Static assertion to enforce that T is an signed integer type</span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :         static_assert( std::is_signed&lt;T&gt;::value, &quot;T must be an signed integer type&quot; );</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC tlaBgGNC">          11 :         return convert_( (KitTextToStringMaxUnsigned_T)num, dstString, maxChars, 10, padChar, num &lt; 0 );</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC tlaBgGNC">          12 :         return convert_( (KitTextToStringMaxUnsigned_T)num, dstString, maxChars, 10, padChar, num &lt; 0 );</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :     }</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : </span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : public:</span>
@@ -152,7 +152,7 @@
 <span id="L90"><span class="lineNum">      90</span>                 :             :         // Static assertion to enforce that T is an unsigned integer type</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :         static_assert( std::is_unsigned&lt;T&gt;::value, &quot;T must be an unsigned integer type&quot; );</span>
 <span id="L92"><span class="lineNum">      92</span>                 :             : </span>
-<span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">          13 :         return convert_( num, dstString, maxChars, base, padChar, false );</span></span>
+<span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">          14 :         return convert_( num, dstString, maxChars, base, padChar, false );</span></span>
 <span id="L94"><span class="lineNum">      94</span>                 :             :     }</span>
 <span id="L95"><span class="lineNum">      95</span>                 :             : </span>
 <span id="L96"><span class="lineNum">      96</span>                 :             : protected:</span>

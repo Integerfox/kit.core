@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">5</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -82,7 +82,7 @@
 <span id="L20"><span class="lineNum">      20</span>                 :             : </span>
 <span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">           1 : uint64_t Kit::Time::getAbsoluteTimeMilliseconds() noexcept</span></span>
 <span id="L22"><span class="lineNum">      22</span>                 :             : {</span>
-<span id="L23"><span class="lineNum">      23</span>                 :             :     struct timespec ts;</span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">           2 :     struct timespec ts = {};</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">           2 :     clock_gettime(CLOCK_REALTIME, &amp;ts);</span></span>
 <span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">           2 :     return (uint64_t)ts.tv_sec * 1000 + ts.tv_nsec / 1000000;</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : }</span>

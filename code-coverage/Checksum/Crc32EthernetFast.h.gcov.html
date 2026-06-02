@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -80,44 +80,45 @@
 <span id="L18"><span class="lineNum">      18</span>                 :             : ///</span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : namespace Checksum {</span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : </span>
-<span id="L21"><span class="lineNum">      21</span>                 :             : /** This class provides an implementation for the 32 Bit &quot;Ethernet&quot;</span>
-<span id="L22"><span class="lineNum">      22</span>                 :             :     standard CRC.  The CRC has following characteristics:</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : /** This class provides an implementation for the CRC-32/IEEE 802.3</span>
+<span id="L22"><span class="lineNum">      22</span>                 :             :     (Ethernet) variant. The CRC has following characteristics:</span>
 <span id="L23"><span class="lineNum">      23</span>                 :             :         o The polynomial is: x32 + x26 + x23 + x22 + x16 + x12 + x11 + x10 + x8 + x7 + x5 + x4 + x2 + x + 1</span>
-<span id="L24"><span class="lineNum">      24</span>                 :             :         o The Data bytes are NOT reflected</span>
-<span id="L25"><span class="lineNum">      25</span>                 :             :         o The remainder is NOT reflected.</span>
-<span id="L26"><span class="lineNum">      26</span>                 :             :         o The final remainder is NOT XOR'd</span>
-<span id="L27"><span class="lineNum">      27</span>                 :             :  */</span>
-<span id="L28"><span class="lineNum">      28</span>                 :             : class Crc32EthernetFast : public IEdc</span>
-<span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
-<span id="L30"><span class="lineNum">      30</span>                 :             : public:</span>
-<span id="L31"><span class="lineNum">      31</span>                 :             :     /// Constructor</span>
-<span id="L32"><span class="lineNum">      32</span>                 :             :     Crc32EthernetFast() noexcept;</span>
-<span id="L33"><span class="lineNum">      33</span>                 :             : </span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :         o The initial remainder is 0xFFFFFFFF.</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :         o The Data bytes are reflected</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :         o The remainder is reflected.</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             :         o The final remainder is XOR'd with 0xFFFFFFFF</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :  */</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             : class Crc32EthernetFast : public IEdc</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             : {</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             : public:</span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :     /// Constructor</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :     Crc32EthernetFast() noexcept;</span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : </span>
-<span id="L35"><span class="lineNum">      35</span>                 :             : public:</span>
-<span id="L36"><span class="lineNum">      36</span>                 :             :     /// See Kit::Checksum::IEdc</span>
-<span id="L37"><span class="lineNum">      37</span>                 :             :     void reset( void ) noexcept override;</span>
-<span id="L38"><span class="lineNum">      38</span>                 :             : </span>
-<span id="L39"><span class="lineNum">      39</span>                 :             :     /// See Kit::Checksum::IEdc</span>
-<span id="L40"><span class="lineNum">      40</span>                 :             :     void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept override;</span>
-<span id="L41"><span class="lineNum">      41</span>                 :             : </span>
-<span id="L42"><span class="lineNum">      42</span>                 :             :     /// See Kit::Checksum::IEdc. The checksum is Big Endian in the 'destBuffer'</span>
-<span id="L43"><span class="lineNum">      43</span>                 :             :     bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept override;</span>
-<span id="L44"><span class="lineNum">      44</span>                 :             : </span>
-<span id="L45"><span class="lineNum">      45</span>                 :             :     /// See Kit::Checksum::IEdc</span>
-<span id="L46"><span class="lineNum">      46</span>                 :             :     bool isOkay( void ) noexcept override;</span>
-<span id="L47"><span class="lineNum">      47</span>                 :             : </span>
-<span id="L48"><span class="lineNum">      48</span>                 :             :     /// See Kit::Checksum::IEdc</span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC tlaBgGNC">          22 :     unsigned getEdcSize() const noexcept override { return sizeof( m_crc ); }</span></span>
-<span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>                 :             : protected:</span>
-<span id="L52"><span class="lineNum">      52</span>                 :             :     /// Calculated CRC value</span>
-<span id="L53"><span class="lineNum">      53</span>                 :             :     uint32_t m_crc;</span>
-<span id="L54"><span class="lineNum">      54</span>                 :             : };</span>
-<span id="L55"><span class="lineNum">      55</span>                 :             : </span>
-<span id="L56"><span class="lineNum">      56</span>                 :             : }  // end namespaces</span>
-<span id="L57"><span class="lineNum">      57</span>                 :             : }</span>
-<span id="L58"><span class="lineNum">      58</span>                 :             : #endif  // end header latch</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             : </span>
+<span id="L36"><span class="lineNum">      36</span>                 :             : public:</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :     /// See Kit::Checksum::IEdc</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :     void reset( void ) noexcept override;</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             : </span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :     /// See Kit::Checksum::IEdc</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :     void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept override;</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             : </span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :     /// See Kit::Checksum::IEdc. The checksum is Little Endian in the 'destBuffer'</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :     bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept override;</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             : </span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :     /// See Kit::Checksum::IEdc</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :     bool isOkay( void ) noexcept override;</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             : </span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :     /// See Kit::Checksum::IEdc</span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC tlaBgGNC">          22 :     unsigned getEdcSize() const noexcept override { return sizeof( m_crc ); }</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :             : </span>
+<span id="L52"><span class="lineNum">      52</span>                 :             : protected:</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             :     /// Calculated CRC value</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :     uint32_t m_crc;</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             : };</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : </span>
+<span id="L57"><span class="lineNum">      57</span>                 :             : }  // end namespaces</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : }</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             : #endif  // end header latch</span>
         </pre>
               </td>
             </tr>

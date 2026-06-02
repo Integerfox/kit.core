@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -78,345 +78,134 @@
 <span id="L16"><span class="lineNum">      16</span>                 :             : namespace Checksum {</span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : </span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : /// clang-format off</span>
-<span id="L19"><span class="lineNum">      19</span>                 :             : /// Table driven, aka fast CRC calculation</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : /// Reflected table driven, aka fast CRC calculation</span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : static uint32_t const table_[256] = {</span>
-<span id="L21"><span class="lineNum">      21</span>                 :             :     0x00000000,</span>
-<span id="L22"><span class="lineNum">      22</span>                 :             :     0x04C11DB7,</span>
-<span id="L23"><span class="lineNum">      23</span>                 :             :     0x09823B6E,</span>
-<span id="L24"><span class="lineNum">      24</span>                 :             :     0x0D4326D9,</span>
-<span id="L25"><span class="lineNum">      25</span>                 :             :     0x130476DC,</span>
-<span id="L26"><span class="lineNum">      26</span>                 :             :     0x17C56B6B,</span>
-<span id="L27"><span class="lineNum">      27</span>                 :             :     0x1A864DB2,</span>
-<span id="L28"><span class="lineNum">      28</span>                 :             :     0x1E475005,</span>
-<span id="L29"><span class="lineNum">      29</span>                 :             :     0x2608EDB8,</span>
-<span id="L30"><span class="lineNum">      30</span>                 :             :     0x22C9F00F,</span>
-<span id="L31"><span class="lineNum">      31</span>                 :             :     0x2F8AD6D6,</span>
-<span id="L32"><span class="lineNum">      32</span>                 :             :     0x2B4BCB61,</span>
-<span id="L33"><span class="lineNum">      33</span>                 :             :     0x350C9B64,</span>
-<span id="L34"><span class="lineNum">      34</span>                 :             :     0x31CD86D3,</span>
-<span id="L35"><span class="lineNum">      35</span>                 :             :     0x3C8EA00A,</span>
-<span id="L36"><span class="lineNum">      36</span>                 :             :     0x384FBDBD,</span>
-<span id="L37"><span class="lineNum">      37</span>                 :             :     0x4C11DB70,</span>
-<span id="L38"><span class="lineNum">      38</span>                 :             :     0x48D0C6C7,</span>
-<span id="L39"><span class="lineNum">      39</span>                 :             :     0x4593E01E,</span>
-<span id="L40"><span class="lineNum">      40</span>                 :             :     0x4152FDA9,</span>
-<span id="L41"><span class="lineNum">      41</span>                 :             :     0x5F15ADAC,</span>
-<span id="L42"><span class="lineNum">      42</span>                 :             :     0x5BD4B01B,</span>
-<span id="L43"><span class="lineNum">      43</span>                 :             :     0x569796C2,</span>
-<span id="L44"><span class="lineNum">      44</span>                 :             :     0x52568B75,</span>
-<span id="L45"><span class="lineNum">      45</span>                 :             :     0x6A1936C8,</span>
-<span id="L46"><span class="lineNum">      46</span>                 :             :     0x6ED82B7F,</span>
-<span id="L47"><span class="lineNum">      47</span>                 :             :     0x639B0DA6,</span>
-<span id="L48"><span class="lineNum">      48</span>                 :             :     0x675A1011,</span>
-<span id="L49"><span class="lineNum">      49</span>                 :             :     0x791D4014,</span>
-<span id="L50"><span class="lineNum">      50</span>                 :             :     0x7DDC5DA3,</span>
-<span id="L51"><span class="lineNum">      51</span>                 :             :     0x709F7B7A,</span>
-<span id="L52"><span class="lineNum">      52</span>                 :             :     0x745E66CD,</span>
-<span id="L53"><span class="lineNum">      53</span>                 :             :     0x9823B6E0,</span>
-<span id="L54"><span class="lineNum">      54</span>                 :             :     0x9CE2AB57,</span>
-<span id="L55"><span class="lineNum">      55</span>                 :             :     0x91A18D8E,</span>
-<span id="L56"><span class="lineNum">      56</span>                 :             :     0x95609039,</span>
-<span id="L57"><span class="lineNum">      57</span>                 :             :     0x8B27C03C,</span>
-<span id="L58"><span class="lineNum">      58</span>                 :             :     0x8FE6DD8B,</span>
-<span id="L59"><span class="lineNum">      59</span>                 :             :     0x82A5FB52,</span>
-<span id="L60"><span class="lineNum">      60</span>                 :             :     0x8664E6E5,</span>
-<span id="L61"><span class="lineNum">      61</span>                 :             :     0xBE2B5B58,</span>
-<span id="L62"><span class="lineNum">      62</span>                 :             :     0xBAEA46EF,</span>
-<span id="L63"><span class="lineNum">      63</span>                 :             :     0xB7A96036,</span>
-<span id="L64"><span class="lineNum">      64</span>                 :             :     0xB3687D81,</span>
-<span id="L65"><span class="lineNum">      65</span>                 :             :     0xAD2F2D84,</span>
-<span id="L66"><span class="lineNum">      66</span>                 :             :     0xA9EE3033,</span>
-<span id="L67"><span class="lineNum">      67</span>                 :             :     0xA4AD16EA,</span>
-<span id="L68"><span class="lineNum">      68</span>                 :             :     0xA06C0B5D,</span>
-<span id="L69"><span class="lineNum">      69</span>                 :             :     0xD4326D90,</span>
-<span id="L70"><span class="lineNum">      70</span>                 :             :     0xD0F37027,</span>
-<span id="L71"><span class="lineNum">      71</span>                 :             :     0xDDB056FE,</span>
-<span id="L72"><span class="lineNum">      72</span>                 :             :     0xD9714B49,</span>
-<span id="L73"><span class="lineNum">      73</span>                 :             :     0xC7361B4C,</span>
-<span id="L74"><span class="lineNum">      74</span>                 :             :     0xC3F706FB,</span>
-<span id="L75"><span class="lineNum">      75</span>                 :             :     0xCEB42022,</span>
-<span id="L76"><span class="lineNum">      76</span>                 :             :     0xCA753D95,</span>
-<span id="L77"><span class="lineNum">      77</span>                 :             :     0xF23A8028,</span>
-<span id="L78"><span class="lineNum">      78</span>                 :             :     0xF6FB9D9F,</span>
-<span id="L79"><span class="lineNum">      79</span>                 :             :     0xFBB8BB46,</span>
-<span id="L80"><span class="lineNum">      80</span>                 :             :     0xFF79A6F1,</span>
-<span id="L81"><span class="lineNum">      81</span>                 :             :     0xE13EF6F4,</span>
-<span id="L82"><span class="lineNum">      82</span>                 :             :     0xE5FFEB43,</span>
-<span id="L83"><span class="lineNum">      83</span>                 :             :     0xE8BCCD9A,</span>
-<span id="L84"><span class="lineNum">      84</span>                 :             :     0xEC7DD02D,</span>
-<span id="L85"><span class="lineNum">      85</span>                 :             :     0x34867077,</span>
-<span id="L86"><span class="lineNum">      86</span>                 :             :     0x30476DC0,</span>
-<span id="L87"><span class="lineNum">      87</span>                 :             :     0x3D044B19,</span>
-<span id="L88"><span class="lineNum">      88</span>                 :             :     0x39C556AE,</span>
-<span id="L89"><span class="lineNum">      89</span>                 :             :     0x278206AB,</span>
-<span id="L90"><span class="lineNum">      90</span>                 :             :     0x23431B1C,</span>
-<span id="L91"><span class="lineNum">      91</span>                 :             :     0x2E003DC5,</span>
-<span id="L92"><span class="lineNum">      92</span>                 :             :     0x2AC12072,</span>
-<span id="L93"><span class="lineNum">      93</span>                 :             :     0x128E9DCF,</span>
-<span id="L94"><span class="lineNum">      94</span>                 :             :     0x164F8078,</span>
-<span id="L95"><span class="lineNum">      95</span>                 :             :     0x1B0CA6A1,</span>
-<span id="L96"><span class="lineNum">      96</span>                 :             :     0x1FCDBB16,</span>
-<span id="L97"><span class="lineNum">      97</span>                 :             :     0x018AEB13,</span>
-<span id="L98"><span class="lineNum">      98</span>                 :             :     0x054BF6A4,</span>
-<span id="L99"><span class="lineNum">      99</span>                 :             :     0x0808D07D,</span>
-<span id="L100"><span class="lineNum">     100</span>                 :             :     0x0CC9CDCA,</span>
-<span id="L101"><span class="lineNum">     101</span>                 :             :     0x7897AB07,</span>
-<span id="L102"><span class="lineNum">     102</span>                 :             :     0x7C56B6B0,</span>
-<span id="L103"><span class="lineNum">     103</span>                 :             :     0x71159069,</span>
-<span id="L104"><span class="lineNum">     104</span>                 :             :     0x75D48DDE,</span>
-<span id="L105"><span class="lineNum">     105</span>                 :             :     0x6B93DDDB,</span>
-<span id="L106"><span class="lineNum">     106</span>                 :             :     0x6F52C06C,</span>
-<span id="L107"><span class="lineNum">     107</span>                 :             :     0x6211E6B5,</span>
-<span id="L108"><span class="lineNum">     108</span>                 :             :     0x66D0FB02,</span>
-<span id="L109"><span class="lineNum">     109</span>                 :             :     0x5E9F46BF,</span>
-<span id="L110"><span class="lineNum">     110</span>                 :             :     0x5A5E5B08,</span>
-<span id="L111"><span class="lineNum">     111</span>                 :             :     0x571D7DD1,</span>
-<span id="L112"><span class="lineNum">     112</span>                 :             :     0x53DC6066,</span>
-<span id="L113"><span class="lineNum">     113</span>                 :             :     0x4D9B3063,</span>
-<span id="L114"><span class="lineNum">     114</span>                 :             :     0x495A2DD4,</span>
-<span id="L115"><span class="lineNum">     115</span>                 :             :     0x44190B0D,</span>
-<span id="L116"><span class="lineNum">     116</span>                 :             :     0x40D816BA,</span>
-<span id="L117"><span class="lineNum">     117</span>                 :             :     0xACA5C697,</span>
-<span id="L118"><span class="lineNum">     118</span>                 :             :     0xA864DB20,</span>
-<span id="L119"><span class="lineNum">     119</span>                 :             :     0xA527FDF9,</span>
-<span id="L120"><span class="lineNum">     120</span>                 :             :     0xA1E6E04E,</span>
-<span id="L121"><span class="lineNum">     121</span>                 :             :     0xBFA1B04B,</span>
-<span id="L122"><span class="lineNum">     122</span>                 :             :     0xBB60ADFC,</span>
-<span id="L123"><span class="lineNum">     123</span>                 :             :     0xB6238B25,</span>
-<span id="L124"><span class="lineNum">     124</span>                 :             :     0xB2E29692,</span>
-<span id="L125"><span class="lineNum">     125</span>                 :             :     0x8AAD2B2F,</span>
-<span id="L126"><span class="lineNum">     126</span>                 :             :     0x8E6C3698,</span>
-<span id="L127"><span class="lineNum">     127</span>                 :             :     0x832F1041,</span>
-<span id="L128"><span class="lineNum">     128</span>                 :             :     0x87EE0DF6,</span>
-<span id="L129"><span class="lineNum">     129</span>                 :             :     0x99A95DF3,</span>
-<span id="L130"><span class="lineNum">     130</span>                 :             :     0x9D684044,</span>
-<span id="L131"><span class="lineNum">     131</span>                 :             :     0x902B669D,</span>
-<span id="L132"><span class="lineNum">     132</span>                 :             :     0x94EA7B2A,</span>
-<span id="L133"><span class="lineNum">     133</span>                 :             :     0xE0B41DE7,</span>
-<span id="L134"><span class="lineNum">     134</span>                 :             :     0xE4750050,</span>
-<span id="L135"><span class="lineNum">     135</span>                 :             :     0xE9362689,</span>
-<span id="L136"><span class="lineNum">     136</span>                 :             :     0xEDF73B3E,</span>
-<span id="L137"><span class="lineNum">     137</span>                 :             :     0xF3B06B3B,</span>
-<span id="L138"><span class="lineNum">     138</span>                 :             :     0xF771768C,</span>
-<span id="L139"><span class="lineNum">     139</span>                 :             :     0xFA325055,</span>
-<span id="L140"><span class="lineNum">     140</span>                 :             :     0xFEF34DE2,</span>
-<span id="L141"><span class="lineNum">     141</span>                 :             :     0xC6BCF05F,</span>
-<span id="L142"><span class="lineNum">     142</span>                 :             :     0xC27DEDE8,</span>
-<span id="L143"><span class="lineNum">     143</span>                 :             :     0xCF3ECB31,</span>
-<span id="L144"><span class="lineNum">     144</span>                 :             :     0xCBFFD686,</span>
-<span id="L145"><span class="lineNum">     145</span>                 :             :     0xD5B88683,</span>
-<span id="L146"><span class="lineNum">     146</span>                 :             :     0xD1799B34,</span>
-<span id="L147"><span class="lineNum">     147</span>                 :             :     0xDC3ABDED,</span>
-<span id="L148"><span class="lineNum">     148</span>                 :             :     0xD8FBA05A,</span>
-<span id="L149"><span class="lineNum">     149</span>                 :             :     0x690CE0EE,</span>
-<span id="L150"><span class="lineNum">     150</span>                 :             :     0x6DCDFD59,</span>
-<span id="L151"><span class="lineNum">     151</span>                 :             :     0x608EDB80,</span>
-<span id="L152"><span class="lineNum">     152</span>                 :             :     0x644FC637,</span>
-<span id="L153"><span class="lineNum">     153</span>                 :             :     0x7A089632,</span>
-<span id="L154"><span class="lineNum">     154</span>                 :             :     0x7EC98B85,</span>
-<span id="L155"><span class="lineNum">     155</span>                 :             :     0x738AAD5C,</span>
-<span id="L156"><span class="lineNum">     156</span>                 :             :     0x774BB0EB,</span>
-<span id="L157"><span class="lineNum">     157</span>                 :             :     0x4F040D56,</span>
-<span id="L158"><span class="lineNum">     158</span>                 :             :     0x4BC510E1,</span>
-<span id="L159"><span class="lineNum">     159</span>                 :             :     0x46863638,</span>
-<span id="L160"><span class="lineNum">     160</span>                 :             :     0x42472B8F,</span>
-<span id="L161"><span class="lineNum">     161</span>                 :             :     0x5C007B8A,</span>
-<span id="L162"><span class="lineNum">     162</span>                 :             :     0x58C1663D,</span>
-<span id="L163"><span class="lineNum">     163</span>                 :             :     0x558240E4,</span>
-<span id="L164"><span class="lineNum">     164</span>                 :             :     0x51435D53,</span>
-<span id="L165"><span class="lineNum">     165</span>                 :             :     0x251D3B9E,</span>
-<span id="L166"><span class="lineNum">     166</span>                 :             :     0x21DC2629,</span>
-<span id="L167"><span class="lineNum">     167</span>                 :             :     0x2C9F00F0,</span>
-<span id="L168"><span class="lineNum">     168</span>                 :             :     0x285E1D47,</span>
-<span id="L169"><span class="lineNum">     169</span>                 :             :     0x36194D42,</span>
-<span id="L170"><span class="lineNum">     170</span>                 :             :     0x32D850F5,</span>
-<span id="L171"><span class="lineNum">     171</span>                 :             :     0x3F9B762C,</span>
-<span id="L172"><span class="lineNum">     172</span>                 :             :     0x3B5A6B9B,</span>
-<span id="L173"><span class="lineNum">     173</span>                 :             :     0x0315D626,</span>
-<span id="L174"><span class="lineNum">     174</span>                 :             :     0x07D4CB91,</span>
-<span id="L175"><span class="lineNum">     175</span>                 :             :     0x0A97ED48,</span>
-<span id="L176"><span class="lineNum">     176</span>                 :             :     0x0E56F0FF,</span>
-<span id="L177"><span class="lineNum">     177</span>                 :             :     0x1011A0FA,</span>
-<span id="L178"><span class="lineNum">     178</span>                 :             :     0x14D0BD4D,</span>
-<span id="L179"><span class="lineNum">     179</span>                 :             :     0x19939B94,</span>
-<span id="L180"><span class="lineNum">     180</span>                 :             :     0x1D528623,</span>
-<span id="L181"><span class="lineNum">     181</span>                 :             :     0xF12F560E,</span>
-<span id="L182"><span class="lineNum">     182</span>                 :             :     0xF5EE4BB9,</span>
-<span id="L183"><span class="lineNum">     183</span>                 :             :     0xF8AD6D60,</span>
-<span id="L184"><span class="lineNum">     184</span>                 :             :     0xFC6C70D7,</span>
-<span id="L185"><span class="lineNum">     185</span>                 :             :     0xE22B20D2,</span>
-<span id="L186"><span class="lineNum">     186</span>                 :             :     0xE6EA3D65,</span>
-<span id="L187"><span class="lineNum">     187</span>                 :             :     0xEBA91BBC,</span>
-<span id="L188"><span class="lineNum">     188</span>                 :             :     0xEF68060B,</span>
-<span id="L189"><span class="lineNum">     189</span>                 :             :     0xD727BBB6,</span>
-<span id="L190"><span class="lineNum">     190</span>                 :             :     0xD3E6A601,</span>
-<span id="L191"><span class="lineNum">     191</span>                 :             :     0xDEA580D8,</span>
-<span id="L192"><span class="lineNum">     192</span>                 :             :     0xDA649D6F,</span>
-<span id="L193"><span class="lineNum">     193</span>                 :             :     0xC423CD6A,</span>
-<span id="L194"><span class="lineNum">     194</span>                 :             :     0xC0E2D0DD,</span>
-<span id="L195"><span class="lineNum">     195</span>                 :             :     0xCDA1F604,</span>
-<span id="L196"><span class="lineNum">     196</span>                 :             :     0xC960EBB3,</span>
-<span id="L197"><span class="lineNum">     197</span>                 :             :     0xBD3E8D7E,</span>
-<span id="L198"><span class="lineNum">     198</span>                 :             :     0xB9FF90C9,</span>
-<span id="L199"><span class="lineNum">     199</span>                 :             :     0xB4BCB610,</span>
-<span id="L200"><span class="lineNum">     200</span>                 :             :     0xB07DABA7,</span>
-<span id="L201"><span class="lineNum">     201</span>                 :             :     0xAE3AFBA2,</span>
-<span id="L202"><span class="lineNum">     202</span>                 :             :     0xAAFBE615,</span>
-<span id="L203"><span class="lineNum">     203</span>                 :             :     0xA7B8C0CC,</span>
-<span id="L204"><span class="lineNum">     204</span>                 :             :     0xA379DD7B,</span>
-<span id="L205"><span class="lineNum">     205</span>                 :             :     0x9B3660C6,</span>
-<span id="L206"><span class="lineNum">     206</span>                 :             :     0x9FF77D71,</span>
-<span id="L207"><span class="lineNum">     207</span>                 :             :     0x92B45BA8,</span>
-<span id="L208"><span class="lineNum">     208</span>                 :             :     0x9675461F,</span>
-<span id="L209"><span class="lineNum">     209</span>                 :             :     0x8832161A,</span>
-<span id="L210"><span class="lineNum">     210</span>                 :             :     0x8CF30BAD,</span>
-<span id="L211"><span class="lineNum">     211</span>                 :             :     0x81B02D74,</span>
-<span id="L212"><span class="lineNum">     212</span>                 :             :     0x857130C3,</span>
-<span id="L213"><span class="lineNum">     213</span>                 :             :     0x5D8A9099,</span>
-<span id="L214"><span class="lineNum">     214</span>                 :             :     0x594B8D2E,</span>
-<span id="L215"><span class="lineNum">     215</span>                 :             :     0x5408ABF7,</span>
-<span id="L216"><span class="lineNum">     216</span>                 :             :     0x50C9B640,</span>
-<span id="L217"><span class="lineNum">     217</span>                 :             :     0x4E8EE645,</span>
-<span id="L218"><span class="lineNum">     218</span>                 :             :     0x4A4FFBF2,</span>
-<span id="L219"><span class="lineNum">     219</span>                 :             :     0x470CDD2B,</span>
-<span id="L220"><span class="lineNum">     220</span>                 :             :     0x43CDC09C,</span>
-<span id="L221"><span class="lineNum">     221</span>                 :             :     0x7B827D21,</span>
-<span id="L222"><span class="lineNum">     222</span>                 :             :     0x7F436096,</span>
-<span id="L223"><span class="lineNum">     223</span>                 :             :     0x7200464F,</span>
-<span id="L224"><span class="lineNum">     224</span>                 :             :     0x76C15BF8,</span>
-<span id="L225"><span class="lineNum">     225</span>                 :             :     0x68860BFD,</span>
-<span id="L226"><span class="lineNum">     226</span>                 :             :     0x6C47164A,</span>
-<span id="L227"><span class="lineNum">     227</span>                 :             :     0x61043093,</span>
-<span id="L228"><span class="lineNum">     228</span>                 :             :     0x65C52D24,</span>
-<span id="L229"><span class="lineNum">     229</span>                 :             :     0x119B4BE9,</span>
-<span id="L230"><span class="lineNum">     230</span>                 :             :     0x155A565E,</span>
-<span id="L231"><span class="lineNum">     231</span>                 :             :     0x18197087,</span>
-<span id="L232"><span class="lineNum">     232</span>                 :             :     0x1CD86D30,</span>
-<span id="L233"><span class="lineNum">     233</span>                 :             :     0x029F3D35,</span>
-<span id="L234"><span class="lineNum">     234</span>                 :             :     0x065E2082,</span>
-<span id="L235"><span class="lineNum">     235</span>                 :             :     0x0B1D065B,</span>
-<span id="L236"><span class="lineNum">     236</span>                 :             :     0x0FDC1BEC,</span>
-<span id="L237"><span class="lineNum">     237</span>                 :             :     0x3793A651,</span>
-<span id="L238"><span class="lineNum">     238</span>                 :             :     0x3352BBE6,</span>
-<span id="L239"><span class="lineNum">     239</span>                 :             :     0x3E119D3F,</span>
-<span id="L240"><span class="lineNum">     240</span>                 :             :     0x3AD08088,</span>
-<span id="L241"><span class="lineNum">     241</span>                 :             :     0x2497D08D,</span>
-<span id="L242"><span class="lineNum">     242</span>                 :             :     0x2056CD3A,</span>
-<span id="L243"><span class="lineNum">     243</span>                 :             :     0x2D15EBE3,</span>
-<span id="L244"><span class="lineNum">     244</span>                 :             :     0x29D4F654,</span>
-<span id="L245"><span class="lineNum">     245</span>                 :             :     0xC5A92679,</span>
-<span id="L246"><span class="lineNum">     246</span>                 :             :     0xC1683BCE,</span>
-<span id="L247"><span class="lineNum">     247</span>                 :             :     0xCC2B1D17,</span>
-<span id="L248"><span class="lineNum">     248</span>                 :             :     0xC8EA00A0,</span>
-<span id="L249"><span class="lineNum">     249</span>                 :             :     0xD6AD50A5,</span>
-<span id="L250"><span class="lineNum">     250</span>                 :             :     0xD26C4D12,</span>
-<span id="L251"><span class="lineNum">     251</span>                 :             :     0xDF2F6BCB,</span>
-<span id="L252"><span class="lineNum">     252</span>                 :             :     0xDBEE767C,</span>
-<span id="L253"><span class="lineNum">     253</span>                 :             :     0xE3A1CBC1,</span>
-<span id="L254"><span class="lineNum">     254</span>                 :             :     0xE760D676,</span>
-<span id="L255"><span class="lineNum">     255</span>                 :             :     0xEA23F0AF,</span>
-<span id="L256"><span class="lineNum">     256</span>                 :             :     0xEEE2ED18,</span>
-<span id="L257"><span class="lineNum">     257</span>                 :             :     0xF0A5BD1D,</span>
-<span id="L258"><span class="lineNum">     258</span>                 :             :     0xF464A0AA,</span>
-<span id="L259"><span class="lineNum">     259</span>                 :             :     0xF9278673,</span>
-<span id="L260"><span class="lineNum">     260</span>                 :             :     0xFDE69BC4,</span>
-<span id="L261"><span class="lineNum">     261</span>                 :             :     0x89B8FD09,</span>
-<span id="L262"><span class="lineNum">     262</span>                 :             :     0x8D79E0BE,</span>
-<span id="L263"><span class="lineNum">     263</span>                 :             :     0x803AC667,</span>
-<span id="L264"><span class="lineNum">     264</span>                 :             :     0x84FBDBD0,</span>
-<span id="L265"><span class="lineNum">     265</span>                 :             :     0x9ABC8BD5,</span>
-<span id="L266"><span class="lineNum">     266</span>                 :             :     0x9E7D9662,</span>
-<span id="L267"><span class="lineNum">     267</span>                 :             :     0x933EB0BB,</span>
-<span id="L268"><span class="lineNum">     268</span>                 :             :     0x97FFAD0C,</span>
-<span id="L269"><span class="lineNum">     269</span>                 :             :     0xAFB010B1,</span>
-<span id="L270"><span class="lineNum">     270</span>                 :             :     0xAB710D06,</span>
-<span id="L271"><span class="lineNum">     271</span>                 :             :     0xA6322BDF,</span>
-<span id="L272"><span class="lineNum">     272</span>                 :             :     0xA2F33668,</span>
-<span id="L273"><span class="lineNum">     273</span>                 :             :     0xBCB4666D,</span>
-<span id="L274"><span class="lineNum">     274</span>                 :             :     0xB8757BDA,</span>
-<span id="L275"><span class="lineNum">     275</span>                 :             :     0xB5365D03,</span>
-<span id="L276"><span class="lineNum">     276</span>                 :             :     0xB1F740B4</span>
-<span id="L277"><span class="lineNum">     277</span>                 :             : };</span>
-<span id="L278"><span class="lineNum">     278</span>                 :             : /// clang-format on</span>
-<span id="L279"><span class="lineNum">     279</span>                 :             : </span>
-<span id="L280"><span class="lineNum">     280</span>                 :             : #if 0</span>
-<span id="L281"><span class="lineNum">     281</span>                 :             : //  Helper method to reflect the bits around the mid-bit</span>
-<span id="L282"><span class="lineNum">     282</span>                 :             : static uint32_t reflect_( uint32_t data, uint8_t nBits )</span>
-<span id="L283"><span class="lineNum">     283</span>                 :             : {</span>
-<span id="L284"><span class="lineNum">     284</span>                 :             :     uint32_t reflection = 0x00000000;</span>
-<span id="L285"><span class="lineNum">     285</span>                 :             :     uint8_t  i;</span>
-<span id="L286"><span class="lineNum">     286</span>                 :             : </span>
-<span id="L287"><span class="lineNum">     287</span>                 :             :     for ( i = 0; i &lt; nBits; i++ )</span>
-<span id="L288"><span class="lineNum">     288</span>                 :             :     {</span>
-<span id="L289"><span class="lineNum">     289</span>                 :             :         if ( data &amp; 0x01 )</span>
-<span id="L290"><span class="lineNum">     290</span>                 :             :         {</span>
-<span id="L291"><span class="lineNum">     291</span>                 :             :             reflection |= 1 &lt;&lt; ( ( nBits - 1 ) - i );</span>
-<span id="L292"><span class="lineNum">     292</span>                 :             :         }</span>
-<span id="L293"><span class="lineNum">     293</span>                 :             : </span>
-<span id="L294"><span class="lineNum">     294</span>                 :             :         data = data &gt;&gt; 1;</span>
-<span id="L295"><span class="lineNum">     295</span>                 :             :     }</span>
-<span id="L296"><span class="lineNum">     296</span>                 :             : </span>
-<span id="L297"><span class="lineNum">     297</span>                 :             :     return reflection;</span>
-<span id="L298"><span class="lineNum">     298</span>                 :             : }</span>
-<span id="L299"><span class="lineNum">     299</span>                 :             : #endif</span>
-<span id="L300"><span class="lineNum">     300</span>                 :             : </span>
-<span id="L301"><span class="lineNum">     301</span>                 :             : </span>
-<span id="L302"><span class="lineNum">     302</span>                 :             : ///////////////////////////////////////</span>
-<span id="L303"><span class="lineNum">     303</span>                 :<span class="tlaGNC tlaBgGNC">           3 : Crc32EthernetFast::Crc32EthernetFast() noexcept</span></span>
-<span id="L304"><span class="lineNum">     304</span>                 :             : {</span>
-<span id="L305"><span class="lineNum">     305</span>                 :             :     reset();</span>
-<span id="L306"><span class="lineNum">     306</span>                 :<span class="tlaGNC">           3 : }</span></span>
-<span id="L307"><span class="lineNum">     307</span>                 :             : </span>
-<span id="L308"><span class="lineNum">     308</span>                 :<span class="tlaGNC">          18 : void Crc32EthernetFast::reset( void ) noexcept</span></span>
-<span id="L309"><span class="lineNum">     309</span>                 :             : {</span>
-<span id="L310"><span class="lineNum">     310</span>                 :<span class="tlaGNC">          21 :     m_crc = ~0;</span></span>
-<span id="L311"><span class="lineNum">     311</span>                 :<span class="tlaGNC">          18 : }</span></span>
-<span id="L312"><span class="lineNum">     312</span>                 :             : </span>
-<span id="L313"><span class="lineNum">     313</span>                 :             : </span>
-<span id="L314"><span class="lineNum">     314</span>                 :             : ///////////////////////////////////////</span>
-<span id="L315"><span class="lineNum">     315</span>                 :<span class="tlaGNC">          38 : void Crc32EthernetFast::accumulate( const void* bytes, unsigned numbytes ) noexcept</span></span>
-<span id="L316"><span class="lineNum">     316</span>                 :             : {</span>
-<span id="L317"><span class="lineNum">     317</span>                 :             :     // Skip if no data or bad pointer</span>
-<span id="L318"><span class="lineNum">     318</span>         [<span class="tlaGBC" title="Branch 0 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          38 :     if ( bytes == nullptr || numbytes == 0 )</span></span>
-<span id="L319"><span class="lineNum">     319</span>                 :             :     {</span>
-<span id="L320"><span class="lineNum">     320</span>                 :             :         return;</span>
-<span id="L321"><span class="lineNum">     321</span>                 :             :     }</span>
-<span id="L322"><span class="lineNum">     322</span>                 :             : </span>
-<span id="L323"><span class="lineNum">     323</span>                 :             :     auto* ptr = static_cast&lt;const uint8_t*&gt;( bytes );</span>
-<span id="L324"><span class="lineNum">     324</span>         [<span class="tlaGBC" title="Branch 0 was taken 231 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 36 times"> + </span>]:<span class="tlaGNC">         267 :     for ( unsigned i = 0; i &lt; numbytes; i++, ptr++ )</span></span>
-<span id="L325"><span class="lineNum">     325</span>                 :             :     {</span>
-<span id="L326"><span class="lineNum">     326</span>                 :<span class="tlaGNC">         231 :         uint8_t temp = *ptr ^ ( m_crc &gt;&gt; ( 24 ) );</span></span>
-<span id="L327"><span class="lineNum">     327</span>                 :<span class="tlaGNC">         231 :         m_crc        = table_[temp] ^ ( m_crc &lt;&lt; 8 );</span></span>
-<span id="L328"><span class="lineNum">     328</span>                 :             :     }</span>
-<span id="L329"><span class="lineNum">     329</span>                 :             : }</span>
-<span id="L330"><span class="lineNum">     330</span>                 :             : </span>
-<span id="L331"><span class="lineNum">     331</span>                 :<span class="tlaGNC">          10 : bool Crc32EthernetFast::finalize( void* destBuffer, unsigned destBufferSize ) noexcept</span></span>
-<span id="L332"><span class="lineNum">     332</span>                 :             : {</span>
-<span id="L333"><span class="lineNum">     333</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          10 :     if ( destBuffer == nullptr || destBufferSize &lt; sizeof( m_crc ) )</span></span>
-<span id="L334"><span class="lineNum">     334</span>                 :             :     {</span>
-<span id="L335"><span class="lineNum">     335</span>                 :             :         return false;</span>
-<span id="L336"><span class="lineNum">     336</span>                 :             :     }</span>
-<span id="L337"><span class="lineNum">     337</span>                 :             : </span>
-<span id="L338"><span class="lineNum">     338</span>                 :             :     auto* ptr = static_cast&lt;uint8_t*&gt;( destBuffer );</span>
-<span id="L339"><span class="lineNum">     339</span>                 :             :     if ( ptr )</span>
-<span id="L340"><span class="lineNum">     340</span>                 :             :     {</span>
-<span id="L341"><span class="lineNum">     341</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( m_crc &gt;&gt; 24 ) &amp; 0xFF;</span></span>
-<span id="L342"><span class="lineNum">     342</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( m_crc &gt;&gt; 16 ) &amp; 0xFF;</span></span>
-<span id="L343"><span class="lineNum">     343</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( m_crc &gt;&gt; 8 ) &amp; 0xFF;</span></span>
-<span id="L344"><span class="lineNum">     344</span>                 :<span class="tlaGNC">           8 :         *ptr   = m_crc &amp; 0xFF;</span></span>
-<span id="L345"><span class="lineNum">     345</span>                 :             :     }</span>
-<span id="L346"><span class="lineNum">     346</span>                 :             : </span>
-<span id="L347"><span class="lineNum">     347</span>                 :<span class="tlaGNC">           8 :     return true;</span></span>
-<span id="L348"><span class="lineNum">     348</span>                 :             : }</span>
-<span id="L349"><span class="lineNum">     349</span>                 :             : </span>
-<span id="L350"><span class="lineNum">     350</span>                 :<span class="tlaGNC">           7 : bool Crc32EthernetFast::isOkay( void ) noexcept</span></span>
-<span id="L351"><span class="lineNum">     351</span>                 :             : {</span>
-<span id="L352"><span class="lineNum">     352</span>                 :<span class="tlaGNC">           7 :     return m_crc == 0;</span></span>
-<span id="L353"><span class="lineNum">     353</span>                 :             : }</span>
-<span id="L354"><span class="lineNum">     354</span>                 :             : </span>
-<span id="L355"><span class="lineNum">     355</span>                 :             : }  // end namespace</span>
-<span id="L356"><span class="lineNum">     356</span>                 :             : }</span>
-<span id="L357"><span class="lineNum">     357</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             :     0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA,</span>
+<span id="L22"><span class="lineNum">      22</span>                 :             :     0x076DC419, 0x706AF48F, 0xE963A535, 0x9E6495A3,</span>
+<span id="L23"><span class="lineNum">      23</span>                 :             :     0x0EDB8832, 0x79DCB8A4, 0xE0D5E91E, 0x97D2D988,</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :     0x09B64C2B, 0x7EB17CBD, 0xE7B82D07, 0x90BF1D91,</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     0x1DB71064, 0x6AB020F2, 0xF3B97148, 0x84BE41DE,</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :     0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7,</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             :     0x136C9856, 0x646BA8C0, 0xFD62F97A, 0x8A65C9EC,</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :     0x14015C4F, 0x63066CD9, 0xFA0F3D63, 0x8D080DF5,</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             :     0x3B6E20C8, 0x4C69105E, 0xD56041E4, 0xA2677172,</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :     0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B,</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             :     0x35B5A8FA, 0x42B2986C, 0xDBBBC9D6, 0xACBCF940,</span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :     0x32D86CE3, 0x45DF5C75, 0xDCD60DCF, 0xABD13D59,</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :     0x26D930AC, 0x51DE003A, 0xC8D75180, 0xBFD06116,</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :     0x21B4F4B5, 0x56B3C423, 0xCFBA9599, 0xB8BDA50F,</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :     0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924,</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :     0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D,</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :     0x76DC4190, 0x01DB7106, 0x98D220BC, 0xEFD5102A,</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :     0x71B18589, 0x06B6B51F, 0x9FBFE4A5, 0xE8B8D433,</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :     0x7807C9A2, 0x0F00F934, 0x9609A88E, 0xE10E9818,</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :     0x7F6A0DBB, 0x086D3D2D, 0x91646C97, 0xE6635C01,</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :     0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E,</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :     0x6C0695ED, 0x1B01A57B, 0x8208F4C1, 0xF50FC457,</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :     0x65B0D9C6, 0x12B7E950, 0x8BBEB8EA, 0xFCB9887C,</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :     0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3, 0xFBD44C65,</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             :     0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2,</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :     0x4ADFA541, 0x3DD895D7, 0xA4D1C46D, 0xD3D6F4FB,</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :     0x4369E96A, 0x346ED9FC, 0xAD678846, 0xDA60B8D0,</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :     0x44042D73, 0x33031DE5, 0xAA0A4C5F, 0xDD0D7CC9,</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :     0x5005713C, 0x270241AA, 0xBE0B1010, 0xC90C2086,</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :     0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4,</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :     0x59B33D17, 0x2EB40D81, 0xB7BD5C3B, 0xC0BA6CAD,</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             :     0xEDB88320, 0x9ABFB3B6, 0x03B6E20C, 0x74B1D29A,</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :     0xEAD54739, 0x9DD277AF, 0x04DB2615, 0x73DC1683,</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :     0xE3630B12, 0x94643B84, 0x0D6D6A3E, 0x7A6A5AA8,</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :     0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1,</span>
+<span id="L57"><span class="lineNum">      57</span>                 :             :     0xF00F9344, 0x8708A3D2, 0x1E01F268, 0x6906C2FE,</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :     0xF762575D, 0x806567CB, 0x196C3671, 0x6E6B06E7,</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :     0xFED41B76, 0x89D32BE0, 0x10DA7A5A, 0x67DD4ACC,</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :     0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5,</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :     0xD6D6A3E8, 0xA1D1937E, 0x38D8C2C4, 0x4FDFF252,</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :     0xD1BB67F1, 0xA6BC5767, 0x3FB506DD, 0x48B2364B,</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :     0xD80D2BDA, 0xAF0A1B4C, 0x36034AF6, 0x41047A60,</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             :     0xDF60EFC3, 0xA867DF55, 0x316E8EEF, 0x4669BE79,</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :     0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236,</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             :     0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F,</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :     0xC5BA3BBE, 0xB2BD0B28, 0x2BB45A92, 0x5CB36A04,</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             :     0xC2D7FFA7, 0xB5D0CF31, 0x2CD99E8B, 0x5BDEAE1D,</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             :     0x9B64C2B0, 0xEC63F226, 0x756AA39C, 0x026D930A,</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :     0x9C0906A9, 0xEB0E363F, 0x72076785, 0x05005713,</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :     0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38,</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :     0x92D28E9B, 0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21,</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             :     0x86D3D2D4, 0xF1D4E242, 0x68DDB3F8, 0x1FDA836E,</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             :     0x81BE16CD, 0xF6B9265B, 0x6FB077E1, 0x18B74777,</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :     0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C,</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :     0x8F659EFF, 0xF862AE69, 0x616BFFD3, 0x166CCF45,</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :     0xA00AE278, 0xD70DD2EE, 0x4E048354, 0x3903B3C2,</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :     0xA7672661, 0xD06016F7, 0x4969474D, 0x3E6E77DB,</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :     0xAED16A4A, 0xD9D65ADC, 0x40DF0B66, 0x37D83BF0,</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :     0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :     0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6,</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :     0xBAD03605, 0xCDD70693, 0x54DE5729, 0x23D967BF,</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             :     0xB3667A2E, 0xC4614AB8, 0x5D681B02, 0x2A6F2B94,</span>
+<span id="L84"><span class="lineNum">      84</span>                 :             :     0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B, 0x2D02EF8D</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             : };</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             : /// clang-format on</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             : </span>
+<span id="L88"><span class="lineNum">      88</span>                 :             : static constexpr uint32_t RESIDUE_ = 0xDEBB20E3;</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             : </span>
+<span id="L90"><span class="lineNum">      90</span>                 :             : </span>
+<span id="L91"><span class="lineNum">      91</span>                 :             : ///////////////////////////////////////</span>
+<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC tlaBgGNC">           3 : Crc32EthernetFast::Crc32EthernetFast() noexcept</span></span>
+<span id="L93"><span class="lineNum">      93</span>                 :             : {</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             :     reset();</span>
+<span id="L95"><span class="lineNum">      95</span>                 :<span class="tlaGNC">           3 : }</span></span>
+<span id="L96"><span class="lineNum">      96</span>                 :             : </span>
+<span id="L97"><span class="lineNum">      97</span>                 :<span class="tlaGNC">          18 : void Crc32EthernetFast::reset( void ) noexcept</span></span>
+<span id="L98"><span class="lineNum">      98</span>                 :             : {</span>
+<span id="L99"><span class="lineNum">      99</span>                 :<span class="tlaGNC">          21 :     m_crc = ~0U;</span></span>
+<span id="L100"><span class="lineNum">     100</span>                 :<span class="tlaGNC">          18 : }</span></span>
+<span id="L101"><span class="lineNum">     101</span>                 :             : </span>
+<span id="L102"><span class="lineNum">     102</span>                 :             : </span>
+<span id="L103"><span class="lineNum">     103</span>                 :             : ///////////////////////////////////////</span>
+<span id="L104"><span class="lineNum">     104</span>                 :<span class="tlaGNC">          38 : void Crc32EthernetFast::accumulate( const void* bytes, unsigned numbytes ) noexcept</span></span>
+<span id="L105"><span class="lineNum">     105</span>                 :             : {</span>
+<span id="L106"><span class="lineNum">     106</span>                 :             :     // Skip if no data or bad pointer</span>
+<span id="L107"><span class="lineNum">     107</span>         [<span class="tlaGBC" title="Branch 0 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          38 :     if ( bytes == nullptr || numbytes == 0 )</span></span>
+<span id="L108"><span class="lineNum">     108</span>                 :             :     {</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             :         return;</span>
+<span id="L110"><span class="lineNum">     110</span>                 :             :     }</span>
+<span id="L111"><span class="lineNum">     111</span>                 :             : </span>
+<span id="L112"><span class="lineNum">     112</span>                 :             :     auto* ptr = static_cast&lt;const uint8_t*&gt;( bytes );</span>
+<span id="L113"><span class="lineNum">     113</span>         [<span class="tlaGBC" title="Branch 0 was taken 231 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 36 times"> + </span>]:<span class="tlaGNC">         267 :     for ( unsigned i = 0; i &lt; numbytes; i++, ptr++ )</span></span>
+<span id="L114"><span class="lineNum">     114</span>                 :             :     {</span>
+<span id="L115"><span class="lineNum">     115</span>                 :<span class="tlaGNC">         231 :         m_crc = table_[( m_crc ^ *ptr ) &amp; 0xFFU] ^ ( m_crc &gt;&gt; 8 );</span></span>
+<span id="L116"><span class="lineNum">     116</span>                 :             :     }</span>
+<span id="L117"><span class="lineNum">     117</span>                 :             : }</span>
+<span id="L118"><span class="lineNum">     118</span>                 :             : </span>
+<span id="L119"><span class="lineNum">     119</span>                 :<span class="tlaGNC">          10 : bool Crc32EthernetFast::finalize( void* destBuffer, unsigned destBufferSize ) noexcept</span></span>
+<span id="L120"><span class="lineNum">     120</span>                 :             : {</span>
+<span id="L121"><span class="lineNum">     121</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          10 :     if ( destBuffer == nullptr || destBufferSize &lt; sizeof( m_crc ) )</span></span>
+<span id="L122"><span class="lineNum">     122</span>                 :             :     {</span>
+<span id="L123"><span class="lineNum">     123</span>                 :             :         return false;</span>
+<span id="L124"><span class="lineNum">     124</span>                 :             :     }</span>
+<span id="L125"><span class="lineNum">     125</span>                 :             : </span>
+<span id="L126"><span class="lineNum">     126</span>                 :<span class="tlaGNC">           8 :     uint32_t crc  = m_crc ^ ~0U;</span></span>
+<span id="L127"><span class="lineNum">     127</span>                 :             :     auto*    ptr  = static_cast&lt;uint8_t*&gt;( destBuffer );</span>
+<span id="L128"><span class="lineNum">     128</span>                 :             :     if ( ptr )</span>
+<span id="L129"><span class="lineNum">     129</span>                 :             :     {</span>
+<span id="L130"><span class="lineNum">     130</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( crc ) &amp; 0xFF;</span></span>
+<span id="L131"><span class="lineNum">     131</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( crc &gt;&gt; 8 ) &amp; 0xFF;</span></span>
+<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">           8 :         *ptr++ = ( crc &gt;&gt; 16 ) &amp; 0xFF;</span></span>
+<span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">           8 :         *ptr   = ( crc &gt;&gt; 24 ) &amp; 0xFF;</span></span>
+<span id="L134"><span class="lineNum">     134</span>                 :             :     }</span>
+<span id="L135"><span class="lineNum">     135</span>                 :             : </span>
+<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">           8 :     return true;</span></span>
+<span id="L137"><span class="lineNum">     137</span>                 :             : }</span>
+<span id="L138"><span class="lineNum">     138</span>                 :             : </span>
+<span id="L139"><span class="lineNum">     139</span>                 :<span class="tlaGNC">           7 : bool Crc32EthernetFast::isOkay( void ) noexcept</span></span>
+<span id="L140"><span class="lineNum">     140</span>                 :             : {</span>
+<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">           7 :     return m_crc == RESIDUE_;</span></span>
+<span id="L142"><span class="lineNum">     142</span>                 :             : }</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             : </span>
+<span id="L144"><span class="lineNum">     144</span>                 :             : }  // end namespace</span>
+<span id="L145"><span class="lineNum">     145</span>                 :             : }</span>
+<span id="L146"><span class="lineNum">     146</span>                 :             : //------------------------------------------------------------------------------</span>
         </pre>
               </td>
             </tr>

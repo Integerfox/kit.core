@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -96,6 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a736e5693125107db95c21dbf57107afb" id="r_a736e5693125107db95c21dbf57107afb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a736e5693125107db95c21dbf57107afb">pleaseStop</a> () noexcept override</td></tr>
 <tr class="memdesc:a736e5693125107db95c21dbf57107afb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)  <br /></td></tr>
 <tr class="separator:a736e5693125107db95c21dbf57107afb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dc122df6bac6a8f190a1821a2086b85" id="r_a7dc122df6bac6a8f190a1821a2086b85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7dc122df6bac6a8f190a1821a2086b85">postSync</a> (<a class="el" href="class_kit_1_1_itc_1_1_i_message.html">Kit::Itc::IMessage</a> &amp;msg) noexcept override</td></tr>
+<tr class="memdesc:a7dc122df6bac6a8f190a1821a2086b85"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_event_queue_1_1_i_msg_notification.html" title="This abstract class represents the interface used to send ITC messages to a ITC mailbox.">Kit::EventQueue::IMsgNotification</a>.  <br /></td></tr>
+<tr class="separator:a7dc122df6bac6a8f190a1821a2086b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae70c6c1a0c5876fb4cfbd6a7d58ca5f9" id="r_ae70c6c1a0c5876fb4cfbd6a7d58ca5f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae70c6c1a0c5876fb4cfbd6a7d58ca5f9">removePendingChangingNotification</a> (<a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;observer) noexcept override</td></tr>
 <tr class="memdesc:ae70c6c1a0c5876fb4cfbd6a7d58ca5f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_event_queue_1_1_i_change_notification.html" title="This abstract class defines the interface to manage Data Model Change notification events that are pu...">Kit::EventQueue::IChangeNotification</a>.  <br /></td></tr>
 <tr class="separator:ae70c6c1a0c5876fb4cfbd6a7d58ca5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,18 +210,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2438029fd24f63baf634b69624a6868f inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_a2438029fd24f63baf634b69624a6868f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a2438029fd24f63baf634b69624a6868f">signal</a> () noexcept override</td></tr>
 <tr class="memdesc:a2438029fd24f63baf634b69624a6868f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting-on-a-...">Kit::System::ISignable</a>.  <br /></td></tr>
 <tr class="separator:a2438029fd24f63baf634b69624a6868f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae19bc0b4ee166c4714d70fdc86d0f314 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_ae19bc0b4ee166c4714d70fdc86d0f314"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ae19bc0b4ee166c4714d70fdc86d0f314">signalEvent</a> (uint8_t eventNumber) noexcept override</td></tr>
-<tr class="memdesc:ae19bc0b4ee166c4714d70fdc86d0f314 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
-<tr class="separator:ae19bc0b4ee166c4714d70fdc86d0f314 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07c9c5a77909b4e17c48be3936cda555 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_a07c9c5a77909b4e17c48be3936cda555"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a07c9c5a77909b4e17c48be3936cda555">signalEvent</a> (uint8_t eventIndex) noexcept override</td></tr>
+<tr class="memdesc:a07c9c5a77909b4e17c48be3936cda555 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
+<tr class="separator:a07c9c5a77909b4e17c48be3936cda555 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f587f7ef1a1484135bfe46dcf87352f inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_a4f587f7ef1a1484135bfe46dcf87352f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a4f587f7ef1a1484135bfe46dcf87352f">signalMultipleEvents</a> (uint32_t events) noexcept override</td></tr>
 <tr class="memdesc:a4f587f7ef1a1484135bfe46dcf87352f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
 <tr class="separator:a4f587f7ef1a1484135bfe46dcf87352f inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2cfc4c1fa7ccb74dab0124514555a72 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_af2cfc4c1fa7ccb74dab0124514555a72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#af2cfc4c1fa7ccb74dab0124514555a72">su_signal</a> () noexcept override</td></tr>
 <tr class="memdesc:af2cfc4c1fa7ccb74dab0124514555a72 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting-on-a-...">Kit::System::ISignable</a>.  <br /></td></tr>
 <tr class="separator:af2cfc4c1fa7ccb74dab0124514555a72 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d75aed5b80068f509299373351768c8 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_a5d75aed5b80068f509299373351768c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a5d75aed5b80068f509299373351768c8">su_signalEvent</a> (uint8_t eventNumber) noexcept override</td></tr>
-<tr class="memdesc:a5d75aed5b80068f509299373351768c8 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
-<tr class="separator:a5d75aed5b80068f509299373351768c8 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af97b4a64ab746f6a917f87dbfd6433cb inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_af97b4a64ab746f6a917f87dbfd6433cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#af97b4a64ab746f6a917f87dbfd6433cb">su_signalEvent</a> (uint8_t eventIndex) noexcept override</td></tr>
+<tr class="memdesc:af97b4a64ab746f6a917f87dbfd6433cb inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
+<tr class="separator:af97b4a64ab746f6a917f87dbfd6433cb inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7b6fcb81ecd1fa40e30b612dd4d2015 inherit pub_methods_class_kit_1_1_system_1_1_event_loop" id="r_aa7b6fcb81ecd1fa40e30b612dd4d2015"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_event_loop.html#aa7b6fcb81ecd1fa40e30b612dd4d2015">su_signalMultipleEvents</a> (uint32_t events) noexcept override</td></tr>
 <tr class="memdesc:aa7b6fcb81ecd1fa40e30b612dd4d2015 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;.">Kit::System::IEventManager</a>.  <br /></td></tr>
 <tr class="separator:aa7b6fcb81ecd1fa40e30b612dd4d2015 inherit pub_methods_class_kit_1_1_system_1_1_event_loop"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -658,7 +661,7 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -666,6 +669,33 @@ Protected Attributes</h2></td></tr>
 <p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
 
 <p>Reimplemented from <a class="el" href="class_kit_1_1_system_1_1_i_runnable.html#ae25b7e341117378695ffbcddabedb76b">Kit::System::IRunnable</a>.</p>
+
+</div>
+</div>
+<a id="a7dc122df6bac6a8f190a1821a2086b85" name="a7dc122df6bac6a8f190a1821a2086b85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dc122df6bac6a8f190a1821a2086b85">&#9670;&#160;</a></span>postSync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Kit::EventQueue::Server::postSync </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_itc_1_1_i_message.html">Kit::Itc::IMessage</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>msg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>See <a class="el" href="class_kit_1_1_event_queue_1_1_i_msg_notification.html" title="This abstract class represents the interface used to send ITC messages to a ITC mailbox.">Kit::EventQueue::IMsgNotification</a>. </p>
 
 </div>
 </div>
@@ -806,7 +836,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
 
-<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html#aaaef0d8b8658c6aa3b055110e31a715e">Kit::System::IEventManager</a>.</p>
+<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html#adc8b13c585554b916c1eb19d26637767">Kit::System::IEventManager</a>.</p>
 
 </div>
 </div>
@@ -893,7 +923,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop) </p>
 
-<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html#adb18155c78909037aaa0d5b4ba0318c9">Kit::System::IEventManager</a>.</p>
+<p>Implements <a class="el" href="class_kit_1_1_system_1_1_i_event_manager.html#abe3673387c30ad2f9f34a706b75b39ba">Kit::System::IEventManager</a>.</p>
 
 </div>
 </div>
@@ -957,7 +987,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

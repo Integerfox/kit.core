@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -48,8 +48,8 @@ $(function() {
   <div class="headertitle"><div class="title">RingBufferMP.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_ring_buffer_m_p_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef KIT_CONTAINER_RINGBUFFER_MT_H_</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define KIT_CONTAINER_RINGBUFFER_MT_H_</span></div>
+<a href="_ring_buffer_m_p_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef KIT_CONTAINER_RINGBUFFER_MP_H_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define KIT_CONTAINER_RINGBUFFER_MP_H_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">/*------------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright Integer Fox Authors</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *</span></div>
@@ -306,8 +306,8 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_m_p_html_ae8678e935642d8b79a23fd46bdbbcc67"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#ae8678e935642d8b79a23fd46bdbbcc67">Kit::Container::RingBufferMP::peekTail</a></div><div class="ttdeci">bool peekTail(ITEM &amp;item) noexcept override</div><div class="ttdoc">See Kit::RingBuffer.</div><div class="ttdef"><b>Definition</b> RingBufferMP.h:147</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_m_p_html_af0636860e7c798ce4debe156ee4d87aa"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#af0636860e7c798ce4debe156ee4d87aa">Kit::Container::RingBufferMP::addElements</a></div><div class="ttdeci">void addElements(unsigned numElementsAdded, uint16_t &amp;seqNum) noexcept</div><div class="ttdoc">Same as addElements() but also returns the sequence number after the increment operation.</div><div class="ttdef"><b>Definition</b> RingBufferMP.h:194</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_ring_buffer_m_p_html_affe734a1da5f9a73c2c224ed50a2fec4"><div class="ttname"><a href="class_kit_1_1_container_1_1_ring_buffer_m_p.html#affe734a1da5f9a73c2c224ed50a2fec4">Kit::Container::RingBufferMP::clearTheBuffer</a></div><div class="ttdeci">void clearTheBuffer() noexcept override</div><div class="ttdoc">See Kit::RingBuffer.</div><div class="ttdef"><b>Definition</b> RingBufferMP.h:77</div></div>
-<div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_numeric_base_html_a7390e63a64cf625cebe3e6ac8f3f1f16"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_numeric_base.html#a7390e63a64cf625cebe3e6ac8f3f1f16">Kit::Dm::Mp::NumericBase::increment</a></div><div class="ttdeci">uint16_t increment(ELEMTYPE incSize=1, bool forceChgNotification=false, Kit::Dm::IModelPoint::LockRequest_T lockRequest=Kit::Dm::IModelPoint::eNO_REQUEST) noexcept</div><div class="ttdoc">Atomic increment.</div><div class="ttdef"><b>Definition</b> PrimitiveType.h:110</div></div>
-<div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_numeric_base_html_ac222a79b6adbd214b8d579506e875769"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_numeric_base.html#ac222a79b6adbd214b8d579506e875769">Kit::Dm::Mp::NumericBase::decrement</a></div><div class="ttdeci">uint16_t decrement(ELEMTYPE decSize=1, bool forceChgNotification=false, Kit::Dm::IModelPoint::LockRequest_T lockRequest=Kit::Dm::IModelPoint::eNO_REQUEST) noexcept</div><div class="ttdoc">Atomic decrement.</div><div class="ttdef"><b>Definition</b> PrimitiveType.h:119</div></div>
+<div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_numeric_base_html_a7390e63a64cf625cebe3e6ac8f3f1f16"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_numeric_base.html#a7390e63a64cf625cebe3e6ac8f3f1f16">Kit::Dm::Mp::NumericBase::increment</a></div><div class="ttdeci">uint16_t increment(ELEMTYPE incSize=1, bool forceChgNotification=false, Kit::Dm::IModelPoint::LockRequest_T lockRequest=Kit::Dm::IModelPoint::eNO_REQUEST) noexcept</div><div class="ttdoc">Atomic increment.</div><div class="ttdef"><b>Definition</b> PrimitiveType.h:111</div></div>
+<div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_numeric_base_html_ac222a79b6adbd214b8d579506e875769"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_numeric_base.html#ac222a79b6adbd214b8d579506e875769">Kit::Dm::Mp::NumericBase::decrement</a></div><div class="ttdeci">uint16_t decrement(ELEMTYPE decSize=1, bool forceChgNotification=false, Kit::Dm::IModelPoint::LockRequest_T lockRequest=Kit::Dm::IModelPoint::eNO_REQUEST) noexcept</div><div class="ttdoc">Atomic decrement.</div><div class="ttdef"><b>Definition</b> PrimitiveType.h:120</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_scalar_html_aceec2587eda466128cf67a7b2c3e3571"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_scalar.html#aceec2587eda466128cf67a7b2c3e3571">Kit::Dm::Mp::Scalar::write</a></div><div class="ttdeci">uint16_t write(const ELEMTYPE &amp;newValue, bool forceChgNotification=false, Kit::Dm::IModelPoint::LockRequest_T lockRequest=Kit::Dm::IModelPoint::eNO_REQUEST) noexcept</div><div class="ttdoc">Type safe write. See Kit::Dm::IModelPoint.</div><div class="ttdef"><b>Definition</b> Scalar.h:60</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_uint32_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a></div><div class="ttdoc">This class provides a concrete implementation for a Point who's data is a uint32_t.</div><div class="ttdef"><b>Definition</b> Uint32.h:50</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_mutex_1_1_scope_lock_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_mutex_1_1_scope_lock.html">Kit::System::Mutex::ScopeLock</a></div><div class="ttdoc">This concrete class provides a simple mechanism for providing mutex protection for a &quot;scope block&quot;.</div><div class="ttdef"><b>Definition</b> Mutex.h:79</div></div>
@@ -316,7 +316,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:22 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:32 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">65.4&nbsp;%</td>
-            <td class="headerCovTableEntry">26</td>
-            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryMed">52.6&nbsp;%</td>
+            <td class="headerCovTableEntry">38</td>
+            <td class="headerCovTableEntry">20</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -150,18 +150,20 @@
 <span id="L88"><span class="lineNum">      88</span>                 :             :         static_assert( std::is_unsigned&lt;T&gt;::value, &quot;T must be an unsigned integer type&quot; );</span>
 <span id="L89"><span class="lineNum">      89</span>                 :             : </span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :         unsigned long long dstVal;</span>
-<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">          77 :         bool               result = a2ull( dstVal, string, base, validStopChars, endptr );</span></span>
+<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">          81 :         bool               result = a2ull( dstVal, string, base, validStopChars, endptr );</span></span>
 <span id="L92"><span class="lineNum">      92</span>                 :             : </span>
 <span id="L93"><span class="lineNum">      93</span>                 :             :         // Check if the value is within the range of type T</span>
 <span id="L94"><span class="lineNum">      94</span>                 :             :         // Note: parentheses around max prevent expansion of Windows max macro</span>
-<span id="L95"><span class="lineNum">      95</span>   [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 11 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          77 :         if ( result &amp;&amp; dstVal &lt;= (std::numeric_limits&lt;T&gt;::max)() )</span></span>
+<span id="L95"><span class="lineNum">      95</span>   [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 12 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          81 :         if ( result &amp;&amp; dstVal &lt;= (std::numeric_limits&lt;T&gt;::max)() )</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 16 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 14 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 13 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 9 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 10 was taken 13 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 14 times"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
-<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 14 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaGBC" title="Branch 16 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaGBC" title="Branch 18 was taken 9 times"> + </span> 
-<span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 19 was not taken"> - </span>]
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 14 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaGBC" title="Branch 16 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaGBC" title="Branch 18 was taken 10 times"> + </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 19 was not taken"> - </span><span class="tlaUNC" title="Branch 20 was not taken"> - </span><span class="tlaGBC" title="Branch 21 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 22 was not taken"> - </span><span class="tlaUNC" title="Branch 23 was not taken"> - </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 24 was not taken"> - </span><span class="tlaGBC" title="Branch 25 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 26 was not taken"> - </span><span class="tlaUNC" title="Branch 27 was not taken"> - </span><span class="tlaGBC" title="Branch 28 was taken 1 time"> + </span> 
+<span class="lineNum">        </span>       <span class="tlaUNC" title="Branch 29 was not taken"> - </span><span class="tlaUNC" title="Branch 30 was not taken"> - </span><span class="tlaUNC" title="Branch 31 was not taken"> - </span>]
 <span id="L96"><span class="lineNum">      96</span>                 :             :         {</span>
-<span id="L97"><span class="lineNum">      97</span>         [<span class="tlaGBC" title="Branch 0 was taken 9 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          14 :             convertedValue = static_cast&lt;T&gt;( dstVal );</span></span>
-<span id="L98"><span class="lineNum">      98</span>                 :<span class="tlaGNC">           2 :             return true;</span></span>
+<span id="L97"><span class="lineNum">      97</span>         [<span class="tlaGBC" title="Branch 0 was taken 9 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          15 :             convertedValue = static_cast&lt;T&gt;( dstVal );</span></span>
+<span id="L98"><span class="lineNum">      98</span>                 :<span class="tlaGNC">           3 :             return true;</span></span>
 <span id="L99"><span class="lineNum">      99</span>                 :             :         }</span>
 <span id="L100"><span class="lineNum">     100</span>                 :             :         return false;</span>
 <span id="L101"><span class="lineNum">     101</span>                 :             :     }</span>

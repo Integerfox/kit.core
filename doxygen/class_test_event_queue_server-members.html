@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -97,10 +97,10 @@ $(function() {
   <tr class="odd"><td class="entry"><a class="el" href="class_kit_1_1_event_queue_1_1_server.html#a87ef0cf3dd95f90724f621c1fb1ee501">msecToCounts</a>(uint32_t ms) const noexcept override</td><td class="entry"><a class="el" href="class_kit_1_1_event_queue_1_1_server.html">Kit::EventQueue::Server</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_kit_1_1_container_1_1_s_list.html#afbba9504ea1a110c12b775a2d4c1130f">next</a>(const IMessage &amp;item) const noexcept</td><td class="entry"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">Kit::Container::SList&lt; IMessage &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_kit_1_1_container_1_1_s_list_base.html#a0b4ee7b37e5b6f953efcafbb562a12fe">Kit::Container::SListBase::next</a>(const ListItem &amp;item) const noexcept</td><td class="entry"><a class="el" href="class_kit_1_1_container_1_1_s_list_base.html">Kit::Container::SListBase</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_kit_1_1_event_queue_1_1_server.html#a736e5693125107db95c21dbf57107afb">pleaseStop</a>() noexcept override</td><td class="entry"><a class="el" href="class_kit_1_1_event_queue_1_1_server.html">Kit::EventQueue::Server</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_kit_1_1_event_queue_1_1_server.html#a736e5693125107db95c21dbf57107afb">pleaseStop</a>() noexcept override</td><td class="entry"><a class="el" href="class_kit_1_1_event_queue_1_1_server.html">Kit::EventQueue::Server</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_kit_1_1_container_1_1_s_list.html#a545ee5c5fae111c19168b94cdcca262b">pop</a>() noexcept</td><td class="entry"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">Kit::Container::SList&lt; IMessage &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html#a7d9dfc1bed3d34aba9fef42bf6259782">post</a>(IMessage &amp;msg) noexcept override</td><td class="entry"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html">Kit::Itc::Mailbox</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html#a5f5dd696bb389befc044c820dd3cb1a3">postSync</a>(IMessage &amp;msg) noexcept override</td><td class="entry"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html">Kit::Itc::Mailbox</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="class_kit_1_1_event_queue_1_1_server.html#a7dc122df6bac6a8f190a1821a2086b85">postSync</a>(Kit::Itc::IMessage &amp;msg) noexcept override</td><td class="entry"><a class="el" href="class_kit_1_1_event_queue_1_1_server.html">Kit::EventQueue::Server</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html#a00e483d61ce8b950d1241bdda737b10b">processMessages</a>() noexcept</td><td class="entry"><a class="el" href="class_kit_1_1_itc_1_1_mailbox.html">Kit::Itc::Mailbox</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="class_kit_1_1_system_1_1_timer_manager.html#a7c434e30abb7ef7445a106dc540a730c">processTimers</a>() noexcept</td><td class="entry"><a class="el" href="class_kit_1_1_system_1_1_timer_manager.html">Kit::System::TimerManager</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_kit_1_1_container_1_1_s_list.html#a83ba79c1c7a5b01be8590858bd1f6b9f">push</a>(IMessage &amp;item) noexcept</td><td class="entry"><a class="el" href="class_kit_1_1_container_1_1_s_list.html">Kit::Container::SList&lt; IMessage &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
@@ -145,7 +145,7 @@ $(function() {
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

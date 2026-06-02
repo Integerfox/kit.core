@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntryHi">93.8&nbsp;%</td>
             <td class="headerCovTableEntry">16</td>
-            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">15</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -115,9 +115,9 @@
 <span id="L53"><span class="lineNum">      53</span>                 :             :     }</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : </span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     /// This method returns the maximum number of items that can be stored in the Ring buffer.</span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">           6 :     virtual unsigned getMaxItems() const noexcept</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     virtual unsigned getMaxItems() const noexcept</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     {</span>
-<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          89 :         return m_elements - 1;</span></span>
+<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC tlaBgGNC">          91 :         return m_elements - 1;</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 3 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaGBC" title="Branch 16 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaGBC" title="Branch 18 was taken 3 times"> + </span> 
@@ -148,11 +148,11 @@
 <span id="L70"><span class="lineNum">      70</span>                 :             :         the Ring Buffer is NOT in use. It is the application's responsibility</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :         for ensuring this condition is met.</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :      */</span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          15 :     virtual void clearTheBuffer() noexcept</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          16 :     virtual void clearTheBuffer() noexcept</span></span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :     {</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :         m_readIdx.store( 0, std::memory_order_relaxed );</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :         m_writeIdx.store( 0, std::memory_order_relaxed );</span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          15 :     }</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          16 :     }</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : </span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : protected:</span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :     /** Removes the first item in the Ring buffer. The contents of the</span>

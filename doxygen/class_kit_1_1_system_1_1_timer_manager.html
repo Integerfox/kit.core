@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -137,6 +137,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This concrete class implements manages a list of Software Timers. </p>
 <p>When an individual timer's Count object reaches zero, its callback method is invoked and it is remove from the Active List. The Active List is designed to be very efficient with respect to decrement counts when there are many Timers in the list, i.e. the amount of time to decrement the individual Timers is NOT a function of the number of active Timers.</p>
+<p>NOTE: Software timers are limited to a maximum duration of 49.7 days since the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager uses a 32bit counter to track elapsed time.</p>
 <p>The <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager requires that the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> Manager instances, all <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a> instances, and the <a class="el" href="class_kit_1_1_system_1_1_timer.html" title="This mostly concrete interface defines the operations that can be performed on a software timer.">Timer</a>'s Context (i.e. the code that executes the timer expired callbacks) all execute in the SAME thread. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad3a9e7e5c32d29d2a9454616f6eeef88" name="ad3a9e7e5c32d29d2a9454616f6eeef88"></a>
@@ -568,7 +569,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

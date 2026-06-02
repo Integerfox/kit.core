@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">71.8&nbsp;%</td>
-            <td class="headerCovTableEntry">78</td>
+            <td class="headerCovTableEntryLo">70.9&nbsp;%</td>
+            <td class="headerCovTableEntry">79</td>
             <td class="headerCovTableEntry">56</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">56.2&nbsp;%</td>
@@ -89,11 +89,11 @@
 <span id="L27"><span class="lineNum">      27</span>                 :             : </span>
 <span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC tlaBgGNC">          24 : void Fdio::close( int&amp; fd ) noexcept</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
-<span id="L30"><span class="lineNum">      30</span>         [<span class="tlaGBC" title="Branch 0 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          24 :     if ( fd != INVALID_FD )</span></span>
+<span id="L30"><span class="lineNum">      30</span>         [<span class="tlaGBC" title="Branch 0 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 12 times"> + </span>]:<span class="tlaGNC">          24 :     if ( fd != INVALID_FD )</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     {</span>
-<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          13 :         ::shutdown( fd, SHUT_RDWR );</span></span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          13 :         ::close( fd );</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          13 :         fd = INVALID_FD;</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          12 :         ::shutdown( fd, SHUT_RDWR );</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          12 :         ::close( fd );</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          12 :         fd = INVALID_FD;</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     }</span>
 <span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          24 : }</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : </span>
@@ -231,61 +231,62 @@
 <span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::sleep( delayBetweenRetriesMs );</span></span>
 <span id="L170"><span class="lineNum">     170</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         if ( --retry == 0 )</span></span>
 <span id="L171"><span class="lineNum">     171</span>                 :             :         {</span>
-<span id="L172"><span class="lineNum">     172</span>                 :<span class="tlaUNC">           0 :             return result;</span></span>
-<span id="L173"><span class="lineNum">     173</span>                 :             :         }</span>
-<span id="L174"><span class="lineNum">     174</span>                 :             :     }</span>
-<span id="L175"><span class="lineNum">     175</span>                 :             : </span>
-<span id="L176"><span class="lineNum">     176</span>                 :             :     // Create a queue to hold connection requests</span>
-<span id="L177"><span class="lineNum">     177</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">           1 :     if ( ( result = ::listen( fd, SOMAXCONN ) ) &lt; 0 )</span></span>
-<span id="L178"><span class="lineNum">     178</span>                 :             :     {</span>
-<span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         close( fd );</span></span>
-<span id="L180"><span class="lineNum">     180</span>                 :<span class="tlaUNC">           0 :         return result;</span></span>
-<span id="L181"><span class="lineNum">     181</span>                 :             :     }</span>
-<span id="L182"><span class="lineNum">     182</span>                 :             : </span>
-<span id="L183"><span class="lineNum">     183</span>                 :             :     // Success!</span>
-<span id="L184"><span class="lineNum">     184</span>                 :             :     return fd;</span>
-<span id="L185"><span class="lineNum">     185</span>                 :             : }</span>
-<span id="L186"><span class="lineNum">     186</span>                 :             : </span>
-<span id="L187"><span class="lineNum">     187</span>                 :<span class="tlaGNC tlaBgGNC">           4 : int Fdio::acceptConnection( int listeningFd, struct sockaddr_in&amp; client_addr ) noexcept</span></span>
-<span id="L188"><span class="lineNum">     188</span>                 :             : {</span>
-<span id="L189"><span class="lineNum">     189</span>                 :             :     // Wait on the 'accept'</span>
-<span id="L190"><span class="lineNum">     190</span>                 :<span class="tlaGNC">           4 :     socklen_t client_len = sizeof( client_addr );</span></span>
-<span id="L191"><span class="lineNum">     191</span>                 :<span class="tlaGNC">           4 :     return accept( listeningFd, (struct sockaddr*)&amp;client_addr, &amp;client_len );</span></span>
-<span id="L192"><span class="lineNum">     192</span>                 :             : }</span>
-<span id="L193"><span class="lineNum">     193</span>                 :             : </span>
-<span id="L194"><span class="lineNum">     194</span>                 :<span class="tlaGNC">           3 : int Fdio::enableKeepAlive( int fd ) noexcept</span></span>
-<span id="L195"><span class="lineNum">     195</span>                 :             : {</span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">           3 :     int bOptVal = 1;</span></span>
-<span id="L197"><span class="lineNum">     197</span>                 :             :     int bOptLen = sizeof( int );</span>
-<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC">           3 :     return setsockopt( fd, SOL_SOCKET, SO_KEEPALIVE, (char*)&amp;bOptVal, bOptLen );</span></span>
-<span id="L199"><span class="lineNum">     199</span>                 :             : }</span>
-<span id="L200"><span class="lineNum">     200</span>                 :             : </span>
-<span id="L201"><span class="lineNum">     201</span>                 :<span class="tlaGNC">           4 : bool Fdio::resolveAddress( const char* remoteHostName, int portNumToConnectTo, struct addrinfo*&amp; results ) noexcept</span></span>
-<span id="L202"><span class="lineNum">     202</span>                 :             : {</span>
-<span id="L203"><span class="lineNum">     203</span>                 :             :     Kit::Text::FString&lt;5&gt; port( portNumToConnectTo );</span>
-<span id="L204"><span class="lineNum">     204</span>                 :             :     struct addrinfo       hints;</span>
-<span id="L205"><span class="lineNum">     205</span>                 :             :     memset( &amp;hints, 0, sizeof( hints ) );</span>
-<span id="L206"><span class="lineNum">     206</span>                 :             :     hints.ai_family   = AF_UNSPEC;</span>
-<span id="L207"><span class="lineNum">     207</span>                 :<span class="tlaGNC">           4 :     hints.ai_socktype = SOCK_STREAM;</span></span>
-<span id="L208"><span class="lineNum">     208</span>                 :<span class="tlaGNC">           4 :     hints.ai_protocol = IPPROTO_TCP;</span></span>
-<span id="L209"><span class="lineNum">     209</span>                 :<span class="tlaGNC">           4 :     return getaddrinfo( remoteHostName, port, &amp;hints, &amp;results ) == 0;</span></span>
-<span id="L210"><span class="lineNum">     210</span>                 :             : }</span>
-<span id="L211"><span class="lineNum">     211</span>                 :             : </span>
-<span id="L212"><span class="lineNum">     212</span>                 :<span class="tlaGNC">           4 : void Fdio::freeAddresses( struct addrinfo* results ) noexcept</span></span>
-<span id="L213"><span class="lineNum">     213</span>                 :             : {</span>
-<span id="L214"><span class="lineNum">     214</span>                 :<span class="tlaGNC">           4 :     freeaddrinfo( results );</span></span>
-<span id="L215"><span class="lineNum">     215</span>                 :<span class="tlaGNC">           4 : }</span></span>
-<span id="L216"><span class="lineNum">     216</span>                 :             : </span>
-<span id="L217"><span class="lineNum">     217</span>                 :<span class="tlaGNC">           8 : int Fdio::createSocket( struct addrinfo* addr ) noexcept</span></span>
-<span id="L218"><span class="lineNum">     218</span>                 :             : {</span>
-<span id="L219"><span class="lineNum">     219</span>                 :<span class="tlaGNC">           8 :     return socket( addr-&gt;ai_family, addr-&gt;ai_socktype, addr-&gt;ai_protocol );</span></span>
-<span id="L220"><span class="lineNum">     220</span>                 :             : }</span>
-<span id="L221"><span class="lineNum">     221</span>                 :             : </span>
-<span id="L222"><span class="lineNum">     222</span>                 :             : }  // end namespace</span>
-<span id="L223"><span class="lineNum">     223</span>                 :             : }</span>
+<span id="L172"><span class="lineNum">     172</span>                 :<span class="tlaUNC">           0 :             close( fd );</span></span>
+<span id="L173"><span class="lineNum">     173</span>                 :<span class="tlaUNC">           0 :             return result;</span></span>
+<span id="L174"><span class="lineNum">     174</span>                 :             :         }</span>
+<span id="L175"><span class="lineNum">     175</span>                 :             :     }</span>
+<span id="L176"><span class="lineNum">     176</span>                 :             : </span>
+<span id="L177"><span class="lineNum">     177</span>                 :             :     // Create a queue to hold connection requests</span>
+<span id="L178"><span class="lineNum">     178</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">           1 :     if ( ( result = ::listen( fd, SOMAXCONN ) ) &lt; 0 )</span></span>
+<span id="L179"><span class="lineNum">     179</span>                 :             :     {</span>
+<span id="L180"><span class="lineNum">     180</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         close( fd );</span></span>
+<span id="L181"><span class="lineNum">     181</span>                 :<span class="tlaUNC">           0 :         return result;</span></span>
+<span id="L182"><span class="lineNum">     182</span>                 :             :     }</span>
+<span id="L183"><span class="lineNum">     183</span>                 :             : </span>
+<span id="L184"><span class="lineNum">     184</span>                 :             :     // Success!</span>
+<span id="L185"><span class="lineNum">     185</span>                 :             :     return fd;</span>
+<span id="L186"><span class="lineNum">     186</span>                 :             : }</span>
+<span id="L187"><span class="lineNum">     187</span>                 :             : </span>
+<span id="L188"><span class="lineNum">     188</span>                 :<span class="tlaGNC tlaBgGNC">           4 : int Fdio::acceptConnection( int listeningFd, struct sockaddr_in&amp; client_addr ) noexcept</span></span>
+<span id="L189"><span class="lineNum">     189</span>                 :             : {</span>
+<span id="L190"><span class="lineNum">     190</span>                 :             :     // Wait on the 'accept'</span>
+<span id="L191"><span class="lineNum">     191</span>                 :<span class="tlaGNC">           4 :     socklen_t client_len = sizeof( client_addr );</span></span>
+<span id="L192"><span class="lineNum">     192</span>                 :<span class="tlaGNC">           4 :     return accept( listeningFd, (struct sockaddr*)&amp;client_addr, &amp;client_len );</span></span>
+<span id="L193"><span class="lineNum">     193</span>                 :             : }</span>
+<span id="L194"><span class="lineNum">     194</span>                 :             : </span>
+<span id="L195"><span class="lineNum">     195</span>                 :<span class="tlaGNC">           3 : int Fdio::enableKeepAlive( int fd ) noexcept</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :             : {</span>
+<span id="L197"><span class="lineNum">     197</span>                 :<span class="tlaGNC">           3 :     int bOptVal = 1;</span></span>
+<span id="L198"><span class="lineNum">     198</span>                 :             :     int bOptLen = sizeof( int );</span>
+<span id="L199"><span class="lineNum">     199</span>                 :<span class="tlaGNC">           3 :     return setsockopt( fd, SOL_SOCKET, SO_KEEPALIVE, (char*)&amp;bOptVal, bOptLen );</span></span>
+<span id="L200"><span class="lineNum">     200</span>                 :             : }</span>
+<span id="L201"><span class="lineNum">     201</span>                 :             : </span>
+<span id="L202"><span class="lineNum">     202</span>                 :<span class="tlaGNC">           4 : bool Fdio::resolveAddress( const char* remoteHostName, int portNumToConnectTo, struct addrinfo*&amp; results ) noexcept</span></span>
+<span id="L203"><span class="lineNum">     203</span>                 :             : {</span>
+<span id="L204"><span class="lineNum">     204</span>                 :             :     Kit::Text::FString&lt;5&gt; port( portNumToConnectTo );</span>
+<span id="L205"><span class="lineNum">     205</span>                 :             :     struct addrinfo       hints;</span>
+<span id="L206"><span class="lineNum">     206</span>                 :             :     memset( &amp;hints, 0, sizeof( hints ) );</span>
+<span id="L207"><span class="lineNum">     207</span>                 :             :     hints.ai_family   = AF_UNSPEC;</span>
+<span id="L208"><span class="lineNum">     208</span>                 :<span class="tlaGNC">           4 :     hints.ai_socktype = SOCK_STREAM;</span></span>
+<span id="L209"><span class="lineNum">     209</span>                 :<span class="tlaGNC">           4 :     hints.ai_protocol = IPPROTO_TCP;</span></span>
+<span id="L210"><span class="lineNum">     210</span>                 :<span class="tlaGNC">           4 :     return getaddrinfo( remoteHostName, port, &amp;hints, &amp;results ) == 0;</span></span>
+<span id="L211"><span class="lineNum">     211</span>                 :             : }</span>
+<span id="L212"><span class="lineNum">     212</span>                 :             : </span>
+<span id="L213"><span class="lineNum">     213</span>                 :<span class="tlaGNC">           4 : void Fdio::freeAddresses( struct addrinfo* results ) noexcept</span></span>
+<span id="L214"><span class="lineNum">     214</span>                 :             : {</span>
+<span id="L215"><span class="lineNum">     215</span>                 :<span class="tlaGNC">           4 :     freeaddrinfo( results );</span></span>
+<span id="L216"><span class="lineNum">     216</span>                 :<span class="tlaGNC">           4 : }</span></span>
+<span id="L217"><span class="lineNum">     217</span>                 :             : </span>
+<span id="L218"><span class="lineNum">     218</span>                 :<span class="tlaGNC">           8 : int Fdio::createSocket( struct addrinfo* addr ) noexcept</span></span>
+<span id="L219"><span class="lineNum">     219</span>                 :             : {</span>
+<span id="L220"><span class="lineNum">     220</span>                 :<span class="tlaGNC">           8 :     return socket( addr-&gt;ai_family, addr-&gt;ai_socktype, addr-&gt;ai_protocol );</span></span>
+<span id="L221"><span class="lineNum">     221</span>                 :             : }</span>
+<span id="L222"><span class="lineNum">     222</span>                 :             : </span>
+<span id="L223"><span class="lineNum">     223</span>                 :             : }  // end namespace</span>
 <span id="L224"><span class="lineNum">     224</span>                 :             : }</span>
 <span id="L225"><span class="lineNum">     225</span>                 :             : }</span>
-<span id="L226"><span class="lineNum">     226</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L226"><span class="lineNum">     226</span>                 :             : }</span>
+<span id="L227"><span class="lineNum">     227</span>                 :             : //------------------------------------------------------------------------------</span>
         </pre>
               </td>
             </tr>

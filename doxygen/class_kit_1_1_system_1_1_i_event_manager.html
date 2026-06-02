@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 315-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 320-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -69,15 +69,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aba7ccac3e816fa8ed6f6d755364eed25" id="r_aba7ccac3e816fa8ed6f6d755364eed25"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba7ccac3e816fa8ed6f6d755364eed25">~IEventManager</a> ()=default</td></tr>
 <tr class="memdesc:aba7ccac3e816fa8ed6f6d755364eed25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual Destructor.  <br /></td></tr>
 <tr class="separator:aba7ccac3e816fa8ed6f6d755364eed25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaef0d8b8658c6aa3b055110e31a715e" id="r_aaaef0d8b8658c6aa3b055110e31a715e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaef0d8b8658c6aa3b055110e31a715e">signalEvent</a> (uint8_t eventNumber) noexcept=0</td></tr>
-<tr class="memdesc:aaaef0d8b8658c6aa3b055110e31a715e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is similar to signalEvents(), except that it sets one event flags.  <br /></td></tr>
-<tr class="separator:aaaef0d8b8658c6aa3b055110e31a715e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc8b13c585554b916c1eb19d26637767" id="r_adc8b13c585554b916c1eb19d26637767"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adc8b13c585554b916c1eb19d26637767">signalEvent</a> (uint8_t eventIndex) noexcept=0</td></tr>
+<tr class="memdesc:adc8b13c585554b916c1eb19d26637767"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is similar to signalEvents(), except that it sets one event flags.  <br /></td></tr>
+<tr class="separator:adc8b13c585554b916c1eb19d26637767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a489347252c4d2000f59907092204955f" id="r_a489347252c4d2000f59907092204955f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a489347252c4d2000f59907092204955f">signalMultipleEvents</a> (uint32_t events) noexcept=0</td></tr>
 <tr class="memdesc:a489347252c4d2000f59907092204955f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This operation is called by clients to signal one or more Event Flags.  <br /></td></tr>
 <tr class="separator:a489347252c4d2000f59907092204955f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb18155c78909037aaa0d5b4ba0318c9" id="r_adb18155c78909037aaa0d5b4ba0318c9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb18155c78909037aaa0d5b4ba0318c9">su_signalEvent</a> (uint8_t eventNumber) noexcept=0</td></tr>
-<tr class="memdesc:adb18155c78909037aaa0d5b4ba0318c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is same as <a class="el" href="#aaaef0d8b8658c6aa3b055110e31a715e" title="This operation is similar to signalEvents(), except that it sets one event flags.">signalEvent()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
-<tr class="separator:adb18155c78909037aaa0d5b4ba0318c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe3673387c30ad2f9f34a706b75b39ba" id="r_abe3673387c30ad2f9f34a706b75b39ba"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe3673387c30ad2f9f34a706b75b39ba">su_signalEvent</a> (uint8_t eventIndex) noexcept=0</td></tr>
+<tr class="memdesc:abe3673387c30ad2f9f34a706b75b39ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is same as <a class="el" href="#adc8b13c585554b916c1eb19d26637767" title="This operation is similar to signalEvents(), except that it sets one event flags.">signalEvent()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
+<tr class="separator:abe3673387c30ad2f9f34a706b75b39ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae18687658c65f499e764fa8c1b03f216" id="r_ae18687658c65f499e764fa8c1b03f216"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae18687658c65f499e764fa8c1b03f216">su_signalMultipleEvents</a> (uint32_t events) noexcept=0</td></tr>
 <tr class="memdesc:ae18687658c65f499e764fa8c1b03f216"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is same as <a class="el" href="#a489347252c4d2000f59907092204955f" title="This operation is called by clients to signal one or more Event Flags.">signalMultipleEvents()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts.  <br /></td></tr>
 <tr class="separator:ae18687658c65f499e764fa8c1b03f216"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,8 +119,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aaaef0d8b8658c6aa3b055110e31a715e" name="aaaef0d8b8658c6aa3b055110e31a715e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaaef0d8b8658c6aa3b055110e31a715e">&#9670;&#160;</a></span>signalEvent()</h2>
+<a id="adc8b13c585554b916c1eb19d26637767" name="adc8b13c585554b916c1eb19d26637767"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc8b13c585554b916c1eb19d26637767">&#9670;&#160;</a></span>signalEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -131,7 +131,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void Kit::System::IEventManager::signalEvent </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>eventNumber</em></span></td><td>)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>eventIndex</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -143,10 +143,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This operation is similar to signalEvents(), except that it sets one event flags. </p>
-<p>The 'eventNumber' is the bit number (zero based) of the Event Flag to set.</p>
+<p>The 'eventIndex' is the bit number (zero based) of the Event Flag to set.</p>
 <p>This method can ONLY be called from a thread context. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_event_queue_1_1_server.html#ab580686859e5b7456538d9c3fd23b0e7">Kit::EventQueue::Server</a>, and <a class="el" href="class_kit_1_1_system_1_1_event_loop.html#ae19bc0b4ee166c4714d70fdc86d0f314">Kit::System::EventLoop</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a07c9c5a77909b4e17c48be3936cda555">Kit::System::EventLoop</a>, and <a class="el" href="class_kit_1_1_event_queue_1_1_server.html#ab580686859e5b7456538d9c3fd23b0e7">Kit::EventQueue::Server</a>.</p>
 
 </div>
 </div>
@@ -181,8 +181,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="adb18155c78909037aaa0d5b4ba0318c9" name="adb18155c78909037aaa0d5b4ba0318c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb18155c78909037aaa0d5b4ba0318c9">&#9670;&#160;</a></span>su_signalEvent()</h2>
+<a id="abe3673387c30ad2f9f34a706b75b39ba" name="abe3673387c30ad2f9f34a706b75b39ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe3673387c30ad2f9f34a706b75b39ba">&#9670;&#160;</a></span>su_signalEvent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,7 +193,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void Kit::System::IEventManager::su_signalEvent </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>eventNumber</em></span></td><td>)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>eventIndex</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -204,9 +204,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This method is same as <a class="el" href="#aaaef0d8b8658c6aa3b055110e31a715e" title="This operation is similar to signalEvents(), except that it sets one event flags.">signalEvent()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts. </p>
+<p>This method is same as <a class="el" href="#adc8b13c585554b916c1eb19d26637767" title="This operation is similar to signalEvents(), except that it sets one event flags.">signalEvent()</a> EXCEPT this method can ONLY be called from supervisor mode and/or ISR contexts. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_event_queue_1_1_server.html#ad00afa3c6307e57a12f805c5ec4d7d17">Kit::EventQueue::Server</a>, and <a class="el" href="class_kit_1_1_system_1_1_event_loop.html#a5d75aed5b80068f509299373351768c8">Kit::System::EventLoop</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_system_1_1_event_loop.html#af97b4a64ab746f6a917f87dbfd6433cb">Kit::System::EventLoop</a>, and <a class="el" href="class_kit_1_1_event_queue_1_1_server.html#ad00afa3c6307e57a12f805c5ec4d7d17">Kit::EventQueue::Server</a>.</p>
 
 </div>
 </div>
@@ -245,7 +245,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 31 2026 21:18:23 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Jun 2 2026 01:13:33 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

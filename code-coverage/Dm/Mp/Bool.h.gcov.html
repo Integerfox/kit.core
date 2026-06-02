@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
@@ -135,12 +135,12 @@
 <span id="L73"><span class="lineNum">      73</span>                 :             : </span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : public:</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     /// See Kit::Dm::Point.</span>
-<span id="L76"><span class="lineNum">      76</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           3 :     bool fromJSON_( JsonVariant&amp; src, LockRequest_T lockRequest, uint16_t&amp; retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override</span></span>
+<span id="L76"><span class="lineNum">      76</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           4 :     bool fromJSON_( JsonVariant&amp; src, LockRequest_T lockRequest, uint16_t&amp; retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override</span></span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :     {</span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :         if ( src.is&lt;bool&gt;() )</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :         {</span>
-<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">           1 :             retSequenceNumber = write( src.as&lt;bool&gt;(), lockRequest );</span></span>
-<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">           1 :             return true;</span></span>
+<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">           2 :             retSequenceNumber = write( src.as&lt;bool&gt;(), false, lockRequest );</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">           2 :             return true;</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :         }</span>
 <span id="L83"><span class="lineNum">      83</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :         if ( errorMsg )</span></span>
 <span id="L84"><span class="lineNum">      84</span>                 :             :         {</span>

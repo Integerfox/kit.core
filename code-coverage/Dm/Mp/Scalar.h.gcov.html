@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -99,8 +99,10 @@
 <span id="L37"><span class="lineNum">      37</span>                 :             : </span>
 <span id="L38"><span class="lineNum">      38</span>                 :             : protected:</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     /// Constructor: Invalid MP</span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC tlaBgGNC">           2 :     Scalar( Kit::Dm::IModelDatabase&amp; myModelBase, const char* symbolicName )</span></span>
-<span id="L41"><span class="lineNum">      41</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           1 :         : Kit::Dm::ModelPointBase( myModelBase, symbolicName, &amp;m_data, sizeof( m_data ), false )</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC tlaBgGNC">           6 :     Scalar( Kit::Dm::IModelDatabase&amp; myModelBase, const char* symbolicName )</span></span>
+<span id="L41"><span class="lineNum">      41</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">           3 :         : Kit::Dm::ModelPointBase( myModelBase, symbolicName, &amp;m_data, sizeof( m_data ), false )</span></span>
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
+<span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 9 was not taken"> - </span>]
 <span id="L42"><span class="lineNum">      42</span>                 :             :     {</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :     }</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : </span>
@@ -115,7 +117,7 @@
 <span id="L53"><span class="lineNum">      53</span>                 :             :     /// Type safe read. See Kit::Dm::IModelPoint</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     inline bool read( ELEMTYPE&amp; dstData, uint16_t* seqNumPtr = nullptr ) const noexcept</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     {</span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">         151 :         return Kit::Dm::ModelPointBase::readData( &amp;dstData, sizeof( ELEMTYPE ), seqNumPtr );</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">         158 :         return Kit::Dm::ModelPointBase::readData( &amp;dstData, sizeof( ELEMTYPE ), seqNumPtr );</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     }</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : </span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     /// Type safe write. See Kit::Dm::IModelPoint</span>
@@ -123,7 +125,7 @@
 <span id="L61"><span class="lineNum">      61</span>                 :             :                            bool                                forceChgNotification = false,</span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :                            Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :     {</span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">          82 :         return Kit::Dm::ModelPointBase::writeData( &amp;newValue, sizeof( ELEMTYPE ), forceChgNotification, lockRequest );</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">         117 :         return Kit::Dm::ModelPointBase::writeData( &amp;newValue, sizeof( ELEMTYPE ), forceChgNotification, lockRequest );</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :     }</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : </span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied</span>

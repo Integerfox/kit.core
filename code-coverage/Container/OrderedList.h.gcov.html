@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
+            <td class="headerCovTableEntryMed">52.4&nbsp;%</td>
             <td class="headerCovTableEntry">126</td>
-            <td class="headerCovTableEntry">63</td>
+            <td class="headerCovTableEntry">66</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -127,7 +127,7 @@
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :     /** Insert the KEYED_ITEM &quot;item&quot; in 'order' into the list</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :      */</span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">           9 :     void insert( KEYED_ITEM&amp; item ) noexcept { OrderedListBase::insert( item ); }</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">          66 :     void insert( KEYED_ITEM&amp; item ) noexcept { OrderedListBase::insert( item ); }</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : </span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     /// Returns true if the specified item is already in the list, else false.</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     bool find( const KEYED_ITEM&amp; item ) const noexcept { return OrderedListBase::find( item ); }</span>
@@ -135,7 +135,7 @@
 <span id="L71"><span class="lineNum">      71</span>                 :             :     /** Return a pointer to the first item in the list. The returned item</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :         remains in the list.  Returns nullptr if the list is empty.</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :      */</span>
-<span id="L74"><span class="lineNum">      74</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          26 :     KEYED_ITEM* first() const noexcept { return static_cast&lt;KEYED_ITEM*&gt;(OrderedListBase::first()); }</span></span>
+<span id="L74"><span class="lineNum">      74</span>   [<span class="tlaGBC" title="Branch 0 was taken 76 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         104 :     KEYED_ITEM* first() const noexcept { return static_cast&lt;KEYED_ITEM*&gt;(OrderedListBase::first()); }</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaUNC" title="Branch 8 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 9 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaUNC" title="Branch 12 was not taken"> - </span><span class="tlaGBC" title="Branch 13 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 14 was not taken"> - </span><span class="tlaGBC" title="Branch 15 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 16 was not taken"> - </span><span class="tlaGBC" title="Branch 17 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 18 was taken 1 time"> + </span> 
@@ -164,7 +164,7 @@
 <span id="L81"><span class="lineNum">      81</span>                 :             :     /** Return a pointer to the item after the &quot;item&quot;. Both items remain in</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :         the list.  Returns nullptr when the end-of-list is reached.</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :      */</span>
-<span id="L84"><span class="lineNum">      84</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          10 :     KEYED_ITEM* next( const KEYED_ITEM&amp; item ) const noexcept { return static_cast&lt;KEYED_ITEM*&gt;(OrderedListBase::next( item )); }</span></span>
+<span id="L84"><span class="lineNum">      84</span>   [<span class="tlaGBC" title="Branch 0 was taken 29 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span> :<span class="tlaGNC">          50 :     KEYED_ITEM* next( const KEYED_ITEM&amp; item ) const noexcept { return static_cast&lt;KEYED_ITEM*&gt;(OrderedListBase::next( item )); }</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 14 was not taken"> - </span><span class="tlaGBC" title="Branch 15 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 16 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaUNC" title="Branch 18 was not taken"> - </span> 

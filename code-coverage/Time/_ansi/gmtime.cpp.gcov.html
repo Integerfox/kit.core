@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-31 21:24:17</td>
+            <td class="headerValue">2026-06-02 01:19:34</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -76,18 +76,18 @@
 <span id="L14"><span class="lineNum">      14</span>                 :             : </span>
 <span id="L15"><span class="lineNum">      15</span>                 :             : static Kit::System::Mutex gmtimeMutex_;</span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : </span>
-<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC tlaBgGNC">          43 : struct tm* Kit::Time::gmtimeMT(const time_t *timep, struct tm *result) noexcept</span></span>
+<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC tlaBgGNC">          44 : struct tm* Kit::Time::gmtimeMT(const time_t *timep, struct tm *result) noexcept</span></span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : {</span>
 <span id="L19"><span class="lineNum">      19</span>                 :             :     KIT_SYSTEM_ASSERT( timep != nullptr );</span>
 <span id="L20"><span class="lineNum">      20</span>                 :             :     KIT_SYSTEM_ASSERT( result != nullptr );</span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : </span>
 <span id="L22"><span class="lineNum">      22</span>                 :             :     Kit::System::Mutex::ScopeLock  criticalSection( gmtimeMutex_ );</span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          43 :     struct tm* tmp = gmtime( timep );</span></span>
-<span id="L24"><span class="lineNum">      24</span>         [<span class="tlaGBC" title="Branch 0 was taken 43 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          43 :     if ( tmp != nullptr )</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          44 :     struct tm* tmp = gmtime( timep );</span></span>
+<span id="L24"><span class="lineNum">      24</span>         [<span class="tlaGBC" title="Branch 0 was taken 44 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          44 :     if ( tmp != nullptr )</span></span>
 <span id="L25"><span class="lineNum">      25</span>                 :             :     {</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             :         // Copy the result to the user provided struct tm instance</span>
-<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">          43 :         *result = *tmp;</span></span>
-<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">          43 :         return result;</span></span>
+<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">          44 :         *result = *tmp;</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">          44 :         return result;</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     }</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             :     return nullptr;</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : }</span>
