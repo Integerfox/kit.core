@@ -85,7 +85,7 @@ uint16_t String::write( const char*   srcData,
     }
 
     Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-    uint16_t                      seqNum    = writeData( srcData, srcLen, lockRequest );
+    uint16_t                      seqNum    = writeData( srcData, srcLen, false, lockRequest );
     char*                         myDataPtr = static_cast<char*>( m_dataPtr );
     myDataPtr[srcLen]                       = '\0';  // Ensure my new value properly null terminated
     return seqNum;

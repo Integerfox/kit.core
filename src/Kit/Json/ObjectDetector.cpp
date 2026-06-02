@@ -35,6 +35,13 @@ bool ObjectDetector::scan( const void*	inputStream,
                            size_t&	    startOffset,
                            size_t&	    endOffset )
 {
+    if ( m_state == eFOUND )
+    {
+        startOffset = 0;
+        endOffset   = 0;
+        return true;
+    }
+
     const uint8_t* srcPtr = (const uint8_t*) inputStream;
     while ( numBytesToScan )
     {

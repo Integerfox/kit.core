@@ -84,6 +84,23 @@ TEST_CASE( "StringTo" )
         REQUIRE( value == 32 );
         REQUIRE( endPtr == strPtr + 2 );
 
+        strPtr = "   32";
+        result = StringTo::unsignedInt<uint8_t>( value, strPtr, 10, nullptr, &endPtr );
+        REQUIRE( result == true );
+        REQUIRE( value == 32 );
+        REQUIRE( endPtr == strPtr + 5 );
+
+        strPtr = "   ";
+        result = StringTo::unsignedInt<uint8_t>( value, strPtr, 10, nullptr, &endPtr );
+        REQUIRE( result == false );
+        REQUIRE( value == 32 );
+        REQUIRE( endPtr == strPtr );
+
+        strPtr = "   -13";
+        result = StringTo::unsignedInt<uint8_t>( value, strPtr, 10, nullptr, &endPtr );
+        REQUIRE( result == false );
+        REQUIRE( value == 32 );
+
         result = StringTo::unsignedInt<uint8_t>( value, nullptr );
         REQUIRE( result == false );
     }

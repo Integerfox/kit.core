@@ -21,8 +21,8 @@ namespace EventQueue {
 
 /** This class extends the Kit::EventQueue::Server class to add periodic scheduling
     to an event based 'thread'.  The timing resolution of the periodic scheduling
-    is a determined by the 'timingTickInMsec' argument value in the class's
-    constructor.  For example if 'timingTickInMsec' is 10ms then no interval
+    is a determined by the 'timeOutPeriodInMsec' argument value in the class's
+    constructor.  For example if 'timeOutPeriodInMsec' is 10ms then no interval
     should have a interval duration less than 10ms.
 
     The order of processing is:
@@ -48,12 +48,12 @@ class WithPeriodicScheduling : public Server, public Kit::System::PeriodicSchedu
 {
 
 public:
-    /** Constructor.  The argument 'timingTickInMsec' specifies the timing
+    /** Constructor.  The argument 'timeOutPeriodInMsec' specifies the timing
         resolution that will be used for Kit::Timer::Local Timers AND for the
         periodic scheduling.
      */
     WithPeriodicScheduling( Interval_T                                      intervals[],
-                            unsigned                                        numnumIntervals,
+                            unsigned                                        numIntervals,
                             Hook_T                                          beginThreadProcessing = nullptr,
                             Hook_T                                          endThreadProcessing   = nullptr,
                             ReportSlippageFunc_T                            slippageFunc          = nullptr,

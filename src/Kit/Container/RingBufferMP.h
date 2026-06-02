@@ -1,5 +1,5 @@
-#ifndef KIT_CONTAINER_RINGBUFFER_MT_H_
-#define KIT_CONTAINER_RINGBUFFER_MT_H_
+#ifndef KIT_CONTAINER_RINGBUFFER_MP_H_
+#define KIT_CONTAINER_RINGBUFFER_MP_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

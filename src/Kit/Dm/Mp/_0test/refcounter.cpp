@@ -62,7 +62,7 @@ TEST_CASE( "RefCounter" )
     bool                             truncated;
     bool                             valid;
     uint32_t                         value;
-    mp_apple_.setInvalid();
+    mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
 
     SECTION( "gets" )
     {
@@ -241,6 +241,17 @@ TEST_CASE( "RefCounter" )
         json   = "{name:\"APPLE\", val:\"-bob\"}";
         result = modelDb_.fromJSON( json );
         REQUIRE( result == false );
+
+        json   = "{name:\"APPLE\", val:\"+5\", locked:true}";
+        result = modelDb_.fromJSON( json );
+        REQUIRE( result == true );
+        valid = mp_apple_.read( value );
+        REQUIRE( valid == true );
+        REQUIRE( value == 7 );
+        REQUIRE( mp_apple_.isLocked() == true );
+
+        // Avoid leaking lock state across sections (static MP instance)
+        mp_apple_.removeLock();
     }
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );

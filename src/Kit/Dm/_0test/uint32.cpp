@@ -538,6 +538,44 @@ TEST_CASE( "Uint32" )
         REQUIRE( mp_apple_.isLocked() == false );
     }
 
+    SECTION( "lock fromJSON writes while locking" )
+    {
+        mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
+
+        const char* json   = R"({name:"APPLE", val:123, locked:true})";
+        bool        result = modelDb_.fromJSON( json, &errorMsg );
+        REQUIRE( result == true );
+        REQUIRE( errorMsg == "noerror" );
+        REQUIRE( mp_apple_.isLocked() == true );
+
+        uint32_t value = 0;
+        bool     valid = mp_apple_.read( value );
+        REQUIRE( valid == true );
+        REQUIRE( value == 123 );
+    }
+
+    SECTION( "export/import includeLockedState length checks" )
+    {
+        mp_apple_.write( 0x12345678, false, IModelPoint::eLOCK );
+
+        uint8_t streamBuffer[STREAM_BUFFER_SIZE];
+        size_t  shortLen = mp_apple_.getExternalSize( false );
+
+        // includeLockedState needs more space than non-locked export size
+        REQUIRE( shortLen < mp_apple_.getExternalSize( true ) );
+
+        size_t exported = mp_apple_.exportData( streamBuffer, shortLen, nullptr, true );
+        REQUIRE( exported == 0 );
+
+        // Prepare a valid stream that includes lock state
+        size_t fullLen = mp_apple_.exportData( streamBuffer, sizeof( streamBuffer ), nullptr, true );
+        REQUIRE( fullLen == mp_apple_.getExternalSize( true ) );
+
+        // Import with too-short length must fail
+        size_t imported = mp_apple_.importData( streamBuffer, shortLen, nullptr, true );
+        REQUIRE( imported == 0 );
+    }
+
     SECTION( "Increment/Decrement" )
     {
         // Start with MP in the invalid state

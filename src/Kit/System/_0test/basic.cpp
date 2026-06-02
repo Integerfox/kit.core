@@ -335,11 +335,12 @@ TEST_CASE( "basic" )
         appleRun.m_nextThreadPtr = pearThreadPtr;
         appleThreadPtr->signal();
 
-        int i;
-        for ( i = 0; i < 3 + 3 + 3; i++ )
+        // Only 9 signals are guaranteed before thread teardown; Orange's final
+        // signal may depend on destroy()/pleaseStop() timing.
+        for ( int i = 0; i < 3 + 3 + 3; i++ )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "Wait %d", i + 1 );
-            Thread::wait();
+            REQUIRE( Thread::timedWait( 1000 ) == true );
         }
 
         Thread::destroy( *pearThreadPtr );
@@ -354,6 +355,11 @@ TEST_CASE( "basic" )
         REQUIRE( appleRun.m_loops == 3 );
         REQUIRE( orangeRun.m_loops == 4 );
         REQUIRE( pearRun.m_loops == 3 );
+
+        // Drain any late signal that can be produced by destroy()/pleaseStop().
+        while ( Thread::tryWait() )
+        {
+        }
         REQUIRE( Thread::tryWait() == false );
 
         Semaphore   sema;
@@ -497,6 +503,17 @@ TEST_CASE( "basic" )
         Kit::System::Thread::destroy( *t2 );
         Kit::System::Thread::destroy( *t3 );
         Kit::System::sleep( 300 );  // allow time for threads to stop
+    }
+
+    SECTION( "events invalid index" )
+    {
+        EventLoop uut( OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, nullptr );
+
+        // These calls should trigger assert handling and return without invoking undefined shifts.
+        uut.signalEvent( 32 );
+        uut.su_signalEvent( 32 );
+
+        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 2u );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

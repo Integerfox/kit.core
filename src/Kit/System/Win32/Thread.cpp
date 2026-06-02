@@ -15,6 +15,7 @@
 #include "Kit/System/FatalError.h"
 #include "Kit/System/PrivateStartup.h"
 #include <process.h>
+#include <new>
 
 // Initialize static class variables
 DWORD dwTlsIndex_ = 0xFFFFFFFF;
@@ -48,7 +49,7 @@ protected:
     void notify( InitLevel initLevel ) noexcept override
     {
         // Create a thread object for the native thread
-        m_parentThreadPtr_ = new Kit::System::Win32::Thread( *this );
+        m_parentThreadPtr_ = new ( std::nothrow ) Kit::System::Win32::Thread( *this );
     }
 };
 }  // end namespace
@@ -215,7 +216,7 @@ Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
                                                   void*       stackPtr,
                                                   bool        allowSimTicks ) noexcept
 {
-    return new Kit::System::Win32::Thread( runnable, name, priority, stackSize, allowSimTicks );
+    return new ( std::nothrow ) Kit::System::Win32::Thread( runnable, name, priority, stackSize, allowSimTicks );
 }
 
 void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMsToWaitIfActive ) noexcept
@@ -224,7 +225,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
     if ( delayTimeMsToWaitIfActive > 0 && threadToDestroy.isActive() )
     {
         threadToDestroy.m_runnable->pleaseStop();
-        threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
+        sleep( delayTimeMsToWaitIfActive );
     }
 
     delete &threadToDestroy;

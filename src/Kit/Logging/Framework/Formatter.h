@@ -29,10 +29,10 @@
 #define OPTION_KIT_LOGGING_FORMATTER_TIMESTAMP_TEXT_LEN 31
 #endif
 
-/** The size, in bytes, needed to 'format' the message text with the 'textified'
-      log entry.  The size does NOT include the space reserved for the null
-      terminator
-   */
+/** The size, in bytes, needed to format the non-message portions of a
+    'textified' log entry plus the maximum message text.  The size does NOT
+    include the space reserved for the null terminator.
+ */
 #ifndef OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN
 #define OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN                       \
     ( OPTION_KIT_LOGGING_FORMATTER_PERSISTENT_STORAGE_ID_TEXT_LEN + 1 + \
@@ -40,7 +40,8 @@
       OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_CLASSIFICATION_ID_TEXT + 1 + \
       OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_PACKAGE_ID_TEXT + 1 +        \
       OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_SUBSYSTEM_ID_TEXT + 1 +      \
-      OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_MESSAGE_ID_TEXT + 2 )
+      OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_MESSAGE_ID_TEXT + 2 +        \
+      OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN )
 #endif
 
 ///
@@ -68,7 +69,7 @@ public:
         \code
 
         The format is:
-            [<storageIdInHex>] (<bootCnt>:YYYY-MM-DD HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
+            [<storageIdAsciiHex>] (<bootCnt>:YYYY-MM-DD HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
         OR
             (<bootCnt>:YYYY-MM-DD HH:MM:SS.mmm) <classification>-<packageId>-<subSystemId>-<msgId>: <messageText>
         \endcode

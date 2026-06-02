@@ -16,14 +16,16 @@
     See the Kit/Logging/Framework/Log.h file details for the public interface
     for generating log entries.
 
-    The interface IS thread safe.
+    The interface IS thread safe - with the ASSUMPTION that initialize() is
+    called in "single-threaded" context.  Typically this means calling initialize()
+    before the application switches into "multi-threaded" mode.
 */
 
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/types.h"
 #include "Kit/Logging/Framework/EntryData.h"
 #include "Kit/Logging/Pkg/ClassificationId.h"
-#include "Kit/Container/RingBuffer.h"  // TODO: Needs to be Kit::Container::RingBufferMP
+#include "Kit/Container/RingBufferMP.h"
 
 /** Minimum number of free entries that MUST be available in the log entry
     queue before logging is resumed after a 'queue full' condition.
@@ -43,12 +45,10 @@ namespace Framework {
 /*----------------------------------------------------------------------------*/
 /** This method is used to initialize the Logging framework. It must be called
     before ANY calls to Kit::Logging::Framework::vlogf() method.
-
-    TODO: logEntryFIFO needs to be a Kit::Container::RingBufferMP
  */
-void initialize( IApplication&                            appInstance,
-                 Kit::Container::RingBuffer<EntryData_T>& logEntryFIFO,
-                 uint8_t                                  classificationLoggingError = Kit::Logging::Pkg::ClassificationId::WARNING ) noexcept;
+void initialize( IApplication&                              appInstance,
+                 Kit::Container::RingBufferMP<EntryData_T>& logEntryFIFO,
+                 uint8_t                                    classificationLoggingError = Kit::Logging::Pkg::ClassificationId::WARNING ) noexcept;
 
 /*----------------------------------------------------------------------------*/
 /** This method is used to enable one or more log Classifications ID, i.e

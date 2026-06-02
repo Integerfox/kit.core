@@ -77,7 +77,7 @@ public:
     {
         if ( src.is<bool>() )
         {
-            retSequenceNumber = write( src.as<bool>(), lockRequest );
+            retSequenceNumber = write( src.as<bool>(), false, lockRequest );
             return true;
         }
         if ( errorMsg )

@@ -183,7 +183,7 @@ private:
     };
 
 
-    /// Exponentiation by squaring, x^n.
+    /// Exponentiation by squaring, x^n. Negative n is not supported (i.e. returns 1 if n < 0)
     static T pow( T x, T n )
     {
         T res = 1;

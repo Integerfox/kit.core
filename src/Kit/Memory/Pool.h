@@ -55,7 +55,7 @@ public:
           size_t    blockSize,
           size_t    numBlocks,
           void*     arrayOfMemoryBlocks,
-          bool      errorsAreFatal = OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL );
+          bool      errorsAreFatal = OPTION_KIT_MEMORY_POOL_ERRORS_ARE_FATAL ) noexcept;
 
 
     /// Destructor

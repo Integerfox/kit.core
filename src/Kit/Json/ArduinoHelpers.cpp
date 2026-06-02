@@ -17,6 +17,9 @@ using namespace Kit::Json;
 static void dump( Kit::Text::IString& dst, const JsonVariant& variant, int nesting );
 static void dump( Kit::Text::IString& dst, bool value, int nesting );
 static void dump( Kit::Text::IString& dst, long value, int nesting );
+static void dump( Kit::Text::IString& dst, unsigned long value, int nesting );
+static void dump( Kit::Text::IString& dst, long long value, int nesting );
+static void dump( Kit::Text::IString& dst, unsigned long long value, int nesting );
 static void dump( Kit::Text::IString& dst, double value, int nesting );
 static void dump( Kit::Text::IString& dst, const char* str, int nesting );
 static void dump( Kit::Text::IString& dst, const JsonObject& obj, int nesting );
@@ -41,6 +44,18 @@ void dump( Kit::Text::IString& dst, const JsonVariant& variant, int nesting )
     else if ( variant.is<long>() )
     {
         dump( dst, variant.as<long>(), nesting );
+    }
+    else if ( variant.is<unsigned long>() )
+    {
+        dump( dst, variant.as<unsigned long>(), nesting );
+    }
+    else if ( variant.is<long long>() )
+    {
+        dump( dst, variant.as<long long>(), nesting );
+    }
+    else if ( variant.is<unsigned long long>() )
+    {
+        dump( dst, variant.as<unsigned long long>(), nesting );
     }
     else if ( variant.is<double>() )
     {
@@ -78,6 +93,30 @@ void dump( Kit::Text::IString& dst, long value, int nesting )
     indent( dst, nesting );
     dst += "Integer: ";
     dst += value;
+    dst += "\n";
+}
+
+void dump( Kit::Text::IString& dst, unsigned long value, int nesting )
+{
+    indent( dst, nesting );
+    dst += "Integer: ";
+    dst += value;
+    dst += "\n";
+}
+
+void dump( Kit::Text::IString& dst, long long value, int nesting )
+{
+    indent( dst, nesting );
+    dst += "Integer: ";
+    dst.formatAppend( "%lld", value );
+    dst += "\n";
+}
+
+void dump( Kit::Text::IString& dst, unsigned long long value, int nesting )
+{
+    indent( dst, nesting );
+    dst += "Integer: ";
+    dst.formatAppend( "%llu", value );
     dst += "\n";
 }
 

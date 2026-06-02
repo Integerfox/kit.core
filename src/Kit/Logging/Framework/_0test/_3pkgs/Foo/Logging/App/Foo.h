@@ -12,7 +12,7 @@
 
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/EntryData.h"
-#include "Kit/Container/RingBuffer.h"  // TODO: Needs to be Kit::Container::RingBufferMP
+#include "Kit/Container/RingBufferMP.h"
 #include "Kit/Logging/Framework/_0test/_3pkgs/PkgZ/Logging/Pkg/Package.h"
 #include "Kit/Logging/Framework/_0test/_3pkgs/Foo/Logging/Pkg/Package.h"
 #include "Kit/Logging/Pkg/Package.h"
@@ -35,8 +35,8 @@ namespace App {
 class Foo : public Kit::Logging::Framework::IApplication
 {
 public:
-    /// Constructor. TODO: Needs to be Kit::Container::RingBufferMP
-    Foo( Kit::Container::RingBuffer<Kit::Logging::Framework::EntryData_T>& logFifo ) noexcept;
+    /// Constructor
+    Foo( Kit::Container::RingBufferMP<Kit::Logging::Framework::EntryData_T>& logFifo ) noexcept;
 
 public:
     /// See Kit::Logging::Framework::IApplication

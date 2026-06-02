@@ -14,7 +14,9 @@
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/EntryData.h"
 #include "Kit/Logging/Pkg/Package.h"
-#include "Kit/Container/RingBufferAllocate.h"  // TODO: Needs to be Kit::Container::RingBufferAllocateMP
+#include "Kit/Container/RingBufferMPAllocate.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Uint32.h"
 
 /// Define the maximum number of log entries in the FIFO used for unit testing.
 /// Note: The actually allocated FIFO size will be this value + 1 (to support
@@ -53,16 +55,19 @@ public:
     IPackage* getPackage( uint8_t packageId ) noexcept override;
 
 protected:
-    /// Internal Log entry FIFO storage
-    Kit::Logging::Framework::EntryData_T* m_logFifoStorage;
+    /// Model database used by the RingBufferMP element-count model point
+    Kit::Dm::ModelDatabase m_modelDb;
+
+    /// Model point that tracks the ring buffer element count
+    Kit::Dm::Mp::Uint32 m_logFifoCount;
 
 public:
     /// The KIT Package instance (is public to allow unit test access)
     Kit::Logging::Pkg::Package m_kitPackage;
 
 
-    /// The Log entry FIFO (is public to allow unit test access). TODO: Needs to be Kit::Container::RingBufferMP
-    Kit::Container::RingBufferAllocate<Kit::Logging::Framework::EntryData_T, OPTION_KIT_LOGGING_FRAMEWORK_MOCKED4TEST_MAX_LOG_ENTRIES + 1> m_logFifo;
+    /// The Log entry FIFO (is public to allow unit test access)
+    Kit::Container::RingBufferMPAllocate<Kit::Logging::Framework::EntryData_T, OPTION_KIT_LOGGING_FRAMEWORK_MOCKED4TEST_MAX_LOG_ENTRIES + 1> m_logFifo;
 
 
 public:

@@ -140,6 +140,11 @@ bool SListBase::remove( ListItem& item ) noexcept
 
 void SListBase::insertAfter( ListItem& after, ListItem& item ) noexcept
 {
+    if ( !after.isInContainer_( this ) )
+    {
+        return;
+    }
+
     if ( item.insert_( this ) )
     {
         item.m_nextPtr_ = after.m_nextPtr_;
@@ -153,14 +158,14 @@ void SListBase::insertAfter( ListItem& after, ListItem& item ) noexcept
 
 void SListBase::insertBefore( ListItem& before, ListItem& item ) noexcept
 {
-    if ( item.insert_( this ) )
+    ListItem* nxtPtr;
+    ListItem* prvPtr;
+    for ( nxtPtr = first(), prvPtr = nullptr; nxtPtr;
+          prvPtr = nxtPtr, nxtPtr = next( *nxtPtr ) )
     {
-        ListItem* nxtPtr;
-        ListItem* prvPtr;
-        for ( nxtPtr = first(), prvPtr = nullptr; nxtPtr;
-              prvPtr = nxtPtr, nxtPtr = next( *nxtPtr ) )
+        if ( nxtPtr == &before )
         {
-            if ( nxtPtr == &before )
+            if ( item.insert_( this ) )
             {
                 item.m_nextPtr_ = nxtPtr;
                 if ( prvPtr )
@@ -171,8 +176,8 @@ void SListBase::insertBefore( ListItem& before, ListItem& item ) noexcept
                 {
                     m_headPtr = &item;
                 }
-                break;
             }
+            return;
         }
     }
 }

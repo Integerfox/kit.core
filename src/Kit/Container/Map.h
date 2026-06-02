@@ -108,7 +108,7 @@ public:
      */
     bool isInMap( ITEM& node ) const noexcept
     {
-        return node.isInContainer_( this );
+        return node.isInContainer_( &m_tree );
     }
 
 

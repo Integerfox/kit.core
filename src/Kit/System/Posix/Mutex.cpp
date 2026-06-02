@@ -22,8 +22,6 @@ Kit::System::Mutex::Mutex() noexcept
 
 Kit::System::Mutex::~Mutex() noexcept
 {
-    // Guarantee that the mutex is unlocked before it is "destroyed"
-    pthread_mutex_unlock( &m_mutex );
     pthread_mutex_destroy( &m_mutex );
 }
 

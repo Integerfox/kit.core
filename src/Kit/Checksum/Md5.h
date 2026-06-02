@@ -22,6 +22,11 @@ namespace Checksum {
 /** This class provides an implementation for the MD5 Hash interface
     that is wrapper to the third party MD5 Library code developed
     by  L. Peter Deutsch, ghost@aladdin.com
+
+    NOTE: The MD5 algorithm is not considered to be a secure hash algorithm. It is
+          recommended to use a more secure hash algorithm (e.g. SHA-256)
+          for security related applications. The MD5 implementation is provided
+          for non-security related applications that require a 128-bit hash.
  */
 class Md5 : public IHash
 {

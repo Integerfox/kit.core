@@ -28,13 +28,17 @@ TEST_CASE( "ToString" )
     {
         char        buffer[32];
         uint8_t     i8     = 10;
-        const char* result = ToString::unsignedInt<uint8_t>( i8, buffer, 1 );
+        const char* result = ToString::unsignedInt<uint8_t>( i8, buffer, 0 );
+        REQUIRE( result == nullptr );
+        result = ToString::unsignedInt<uint8_t>( i8, buffer, 1 );
         REQUIRE( result == nullptr );
         result = ToString::unsignedInt<uint8_t>( i8, nullptr, 8 + 1 );
         REQUIRE( result == nullptr );
         result = ToString::unsignedInt<uint8_t>( i8, buffer, 8 + 1, 1 );
         REQUIRE( result == nullptr );
         result = ToString::unsignedInt<uint8_t>( i8, buffer, 37, 1 );
+        REQUIRE( result == nullptr );
+        result = ToString::signedInt<int64_t>( INT64_MIN, buffer, 0, 1 );
         REQUIRE( result == nullptr );
         result = ToString::signedInt<int64_t>( INT64_MIN, buffer, 8+1, 1 );
         REQUIRE( result == nullptr );

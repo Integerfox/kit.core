@@ -249,6 +249,9 @@ TEST_CASE( "CursorLE" )
         REQUIRE( cursor.setPosition( 0 ) );
         REQUIRE( cursor.errorOccurred() == false );
         REQUIRE( cursor.writeI8( dummy ) == true );
+        REQUIRE( cursor.setPosition( BUFFER_SIZE ) == true );
+        REQUIRE( cursor.errorOccurred() == false );
+        REQUIRE( cursor.getRemainingCount() == 0 );
         REQUIRE( cursor.setPosition( BUFFER_SIZE + 1 ) == false );
         REQUIRE( cursor.errorOccurred() == true );
 

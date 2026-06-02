@@ -10,6 +10,7 @@
 
 #include "DString.h"
 #include "FString.h"
+#include "Kit/System/Assert.h"
 #include <string.h>
 #include <algorithm>
 #include <new>
@@ -28,7 +29,7 @@ static char      noMemory_[1]     = { '\0' };
 DString::DString( const IString& string, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( string.length(), initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( string.length(), initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     validateAndCopy( string, string.length() );
@@ -37,7 +38,7 @@ DString::DString( const IString& string, int initialSize, int blocksize ) noexce
 DString::DString( const DString& string, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( string.length(), initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( string.length(), initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     validateAndCopy( string, string.length() );
@@ -46,7 +47,7 @@ DString::DString( const DString& string, int initialSize, int blocksize ) noexce
 DString::DString( const char* string, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( (int)( string ? strlen( string ) : 1 ), initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( (int)( string ? strlen( string ) : 1 ), initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     validateAndCopy( string, ( string ? strlen( string ) : 0 ) );
@@ -55,7 +56,7 @@ DString::DString( const char* string, int initialSize, int blocksize ) noexcept
 DString::DString( char c, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( (int)sizeof( c ), initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( (int)sizeof( c ), initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     validateAndCopy( &c, 1 );
@@ -64,7 +65,7 @@ DString::DString( char c, int initialSize, int blocksize ) noexcept
 DString::DString( int num, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( maxIntegerChars_, initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     FString<maxIntegerChars_> string( num );
@@ -74,7 +75,7 @@ DString::DString( int num, int initialSize, int blocksize ) noexcept
 DString::DString( unsigned num, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( maxIntegerChars_, initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     FString<maxIntegerChars_> string( num );
@@ -84,7 +85,7 @@ DString::DString( unsigned num, int initialSize, int blocksize ) noexcept
 DString::DString( long num, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( maxIntegerChars_, initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     FString<maxIntegerChars_> string( num );
@@ -94,7 +95,7 @@ DString::DString( long num, int initialSize, int blocksize ) noexcept
 DString::DString( long long num, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( maxIntegerChars_, initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     FString<maxIntegerChars_> string( num );
@@ -105,7 +106,7 @@ DString::DString( long long num, int initialSize, int blocksize ) noexcept
 DString::DString( unsigned long num, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( maxIntegerChars_, initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     FString<maxIntegerChars_> string( num );
@@ -115,7 +116,7 @@ DString::DString( unsigned long num, int initialSize, int blocksize ) noexcept
 DString::DString( unsigned long long num, int initialSize, int blocksize ) noexcept
     : StringBase( nullptr )
     , m_blockSize( blocksize )
-    , m_storageLen( calcMemSize( std::max( maxIntegerChars_, initialSize ) ) )
+    , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
     m_strPtr = new ( std::nothrow ) char[m_storageLen];
     FString<maxIntegerChars_> string( num );
@@ -265,10 +266,10 @@ void DString::insertAt( int insertOffset, const char* stringToInsert ) noexcept
             {
                 // Insert WITHOUT allocating extra memory
                 int avail        = maxStrLen() - insertOffset;          // Amount left in the buffer starting with from insertOffset
-                int copylen      = std::min( insertlen, avail );        // Amount of stringToInsert that can be copied in
+                int copylen      = ( std::min )( insertlen, avail );        // Amount of stringToInsert that can be copied in
                 int remainderlen = avail - copylen;                     // Amount of room left after stringToInsert has been copied in
                 int shiftlen     = curlen - insertOffset;               // Amount of characters needing to be shifted
-                int movelen      = std::min( shiftlen, remainderlen );  // Amount of characters that can be SAFELY shifted
+                int movelen      = ( std::min )( shiftlen, remainderlen );  // Amount of characters that can be SAFELY shifted
                 if ( movelen > 0 )
                 {
                     memmove( m_strPtr + insertOffset + copylen, m_strPtr + insertOffset, movelen );

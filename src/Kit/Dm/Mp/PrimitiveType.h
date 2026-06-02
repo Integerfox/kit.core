@@ -15,6 +15,7 @@
 #include "Kit/Text/FString.h"
 #include "Kit/Text/StringTo.h"
 #include <inttypes.h>
+#include <type_traits>
 
 /// The largest supported signed integer type for SignedInteger MP - as a intXX_t type
 #ifndef OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE
@@ -75,7 +76,7 @@ public:
     {
         if ( src.is<ELEMTYPE>() )
         {
-            retSequenceNumber = this->write( src.as<ELEMTYPE>(), lockRequest );
+            retSequenceNumber = this->write( src.as<ELEMTYPE>(), false, lockRequest );
             return true;
         }
         if ( errorMsg )
@@ -216,7 +217,16 @@ public:
                             Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( this->m_data | ( 1 << bitPosition ), forceChgNotification, lockRequest );
+        typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
+        const uint8_t bitWidth = sizeof( UnsignedElemType ) * 8;
+        if ( bitPosition >= bitWidth )
+        {
+            return this->m_seqNum;
+        }
+
+        UnsignedElemType data = static_cast<UnsignedElemType>( this->m_data );
+        UnsignedElemType mask = static_cast<UnsignedElemType>( 1u ) << bitPosition;
+        return this->write( static_cast<ELEMTYPE>( data | mask ), forceChgNotification, lockRequest );
     }
 
     /// Atomic operation to set the zero indexed bit to a 0.
@@ -225,7 +235,16 @@ public:
                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( this->m_data & ~( 1 << bitPosition ), forceChgNotification, lockRequest );
+        typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
+        const uint8_t bitWidth = sizeof( UnsignedElemType ) * 8;
+        if ( bitPosition >= bitWidth )
+        {
+            return this->m_seqNum;
+        }
+
+        UnsignedElemType data = static_cast<UnsignedElemType>( this->m_data );
+        UnsignedElemType mask = static_cast<UnsignedElemType>( 1u ) << bitPosition;
+        return this->write( static_cast<ELEMTYPE>( data & ~mask ), forceChgNotification, lockRequest );
     }
 
     /// Atomic operation to toggle the zero indexed bit.
@@ -234,7 +253,16 @@ public:
                              Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( this->m_data ^ ( 1 << bitPosition ), forceChgNotification, lockRequest );
+        typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
+        const uint8_t bitWidth = sizeof( UnsignedElemType ) * 8;
+        if ( bitPosition >= bitWidth )
+        {
+            return this->m_seqNum;
+        }
+
+        UnsignedElemType data = static_cast<UnsignedElemType>( this->m_data );
+        UnsignedElemType mask = static_cast<UnsignedElemType>( 1u ) << bitPosition;
+        return this->write( static_cast<ELEMTYPE>( data ^ mask ), forceChgNotification, lockRequest );
     }
 };
 

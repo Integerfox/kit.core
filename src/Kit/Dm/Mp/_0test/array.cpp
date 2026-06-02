@@ -65,7 +65,7 @@ TEST_CASE( "Array" )
     bool     truncated;
     uint16_t seqNum;
     uint16_t seqNum2;
-    mp_apple_.setInvalid();
+    mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
 
     SECTION( "gets" )
     {
@@ -167,6 +167,19 @@ TEST_CASE( "Array" )
 
         result = modelDb_.fromJSON( json );
         REQUIRE( result == false );
+
+        json   = "{name:\"APPLE\", val:{start:0,elems:[9,8,7]}, locked:true}";
+        result = modelDb_.fromJSON( json );
+        REQUIRE( result == true );
+        valid = mp_apple_.read( readValue, MY_ARRAY_SIZE );
+        REQUIRE( valid == true );
+        REQUIRE( readValue[0] == 9 );
+        REQUIRE( readValue[1] == 8 );
+        REQUIRE( readValue[2] == 7 );
+        REQUIRE( mp_apple_.isLocked() == true );
+
+        // Avoid leaking lock state across sections (static MP instance)
+        mp_apple_.removeLock();
     }
 
     SECTION( "fromJSON - error cases" )

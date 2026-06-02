@@ -92,7 +92,7 @@ TEST_CASE( "Enum" )
     bool                             truncated;
     bool                             valid;
     MyEnum                           value = MyEnum::eRED;
-    mp_apple_.setInvalid();
+    mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
 
     SECTION( "gets" )
     {
@@ -180,6 +180,17 @@ TEST_CASE( "Enum" )
 
         result = modelDb_.fromJSON( json );
         REQUIRE( result == false );
+
+        json   = "{name:\"APPLE\", val:\"eRED\", locked:true}";
+        result = modelDb_.fromJSON( json );
+        REQUIRE( result == true );
+        valid = mp_apple_.read( value );
+        REQUIRE( valid == true );
+        REQUIRE( value == +MyEnum::eRED );
+        REQUIRE( mp_apple_.isLocked() == true );
+
+        // Avoid leaking lock state across sections (static MP instance)
+        mp_apple_.removeLock();
     }
 
     SECTION( "observer" )

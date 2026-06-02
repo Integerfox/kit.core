@@ -192,6 +192,7 @@ public:
             Kit::System::sleep( delayBetweenRetriesMs );
             if ( --retry == 0 )
             {
+                close( fd );
                 return INVALID_SOCKET;
             }
         }
@@ -199,6 +200,7 @@ public:
         // Create a queue to hold connection requests
         if ( ::listen( fd, SOMAXCONN ) == SOCKET_ERROR )
         {
+            close( fd );
             return INVALID_SOCKET;
         }
 
