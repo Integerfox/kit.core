@@ -14,7 +14,7 @@
 #include "Kit/Text/FString.h"
 #include "Kit/Checksum/Fletcher16.h"
 #include "Kit/Checksum/Crc16CcittFast.h"
-#include "Kit/Checksum/Crc32Mpeg2.h"
+#include "Kit/Checksum/Crc32Mpeg2Fast.h"
 #include "Kit/Checksum/Crc32EthernetFast.h"
 #include "Kit/Checksum/Md5.h"
 #include "Kit/Checksum/Utils.h"
@@ -123,7 +123,7 @@ TEST_CASE( "Checksums", "[chksum]" )
 
     SECTION( "Crc32 - MPEG-2" )
     {
-        Crc32Mpeg2 cksum;
+        Crc32Mpeg2Fast cksum;
         uint32_t          crc;
         REQUIRE( testEdc( "CRC MPEG-2", cksum, dataBuffer_, DATALEN_, &crc, sizeof( crc ) ) );
         REQUIRE( KIT_TYPE_HTOBE32( crc ) == CRC_MPEG2 );

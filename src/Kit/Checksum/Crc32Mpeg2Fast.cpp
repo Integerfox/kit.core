@@ -8,7 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Crc32Mpeg2.h"
+#include "Crc32Mpeg2Fast.h"
 
 
 //------------------------------------------------------------------------------
@@ -87,19 +87,19 @@ static uint32_t const table_[256] = {
 
 
 ///////////////////////////////////////
-Crc32Mpeg2::Crc32Mpeg2() noexcept
+Crc32Mpeg2Fast::Crc32Mpeg2Fast() noexcept
 {
     reset();
 }
 
-void Crc32Mpeg2::reset( void ) noexcept
+void Crc32Mpeg2Fast::reset( void ) noexcept
 {
     m_crc = ~0;
 }
 
 
 ///////////////////////////////////////
-void Crc32Mpeg2::accumulate( const void* bytes, unsigned numbytes ) noexcept
+void Crc32Mpeg2Fast::accumulate( const void* bytes, unsigned numbytes ) noexcept
 {
     // Skip if no data or bad pointer
     if ( bytes == nullptr || numbytes == 0 )
@@ -115,7 +115,7 @@ void Crc32Mpeg2::accumulate( const void* bytes, unsigned numbytes ) noexcept
     }
 }
 
-bool Crc32Mpeg2::finalize( void* destBuffer, unsigned destBufferSize ) noexcept
+bool Crc32Mpeg2Fast::finalize( void* destBuffer, unsigned destBufferSize ) noexcept
 {
     if ( destBuffer == nullptr || destBufferSize < sizeof( m_crc ) )
     {
@@ -134,7 +134,7 @@ bool Crc32Mpeg2::finalize( void* destBuffer, unsigned destBufferSize ) noexcept
     return true;
 }
 
-bool Crc32Mpeg2::isOkay( void ) noexcept
+bool Crc32Mpeg2Fast::isOkay( void ) noexcept
 {
     return m_crc == 0;
 }

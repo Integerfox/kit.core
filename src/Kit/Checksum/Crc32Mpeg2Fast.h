@@ -1,5 +1,5 @@
-#ifndef KIT_CHECKSUM_CRC32MPEG2_H_
-#define KIT_CHECKSUM_CRC32MPEG2_H_
+#ifndef KIT_CHECKSUM_CRC32MPEG2FAST_H_
+#define KIT_CHECKSUM_CRC32MPEG2FAST_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -26,11 +26,11 @@ namespace Checksum {
         o The remainder is NOT reflected.
         o The final remainder is NOT XOR'd
  */
-class Crc32Mpeg2 : public IEdc
+class Crc32Mpeg2Fast : public IEdc
 {
 public:
     /// Constructor
-    Crc32Mpeg2() noexcept;
+    Crc32Mpeg2Fast() noexcept;
 
 
 public:
