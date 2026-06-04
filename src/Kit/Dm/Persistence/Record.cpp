@@ -47,7 +47,7 @@ bool Record::start( Kit::EventQueue::IQueue& myEventQueue ) noexcept
         // Housekeeping
         m_started         = true;
         m_myEventQueuePtr = &myEventQueue;
-        setTimingSource( myEventQueue );
+        m_timer.setTimingSource( myEventQueue );
 
         // Load the record's data from persistent storage
         bool subscribeForChanges = true;
@@ -99,7 +99,7 @@ void Record::stop() noexcept
     if ( m_started )
     {
         m_started = false;
-        Timer::stop();
+        m_timer.stop();
 
         // Cancel subscriptions
         for ( unsigned i = 0; i < m_numItems; i++ )
@@ -239,7 +239,7 @@ void Record::dataChanged( Kit::Dm::IModelPoint& point, Kit::Dm::IObserver& obser
     {
         // If the timer is not running -->then this is the 'first' change notification
         uint32_t now = Kit::System::ElapsedTime::milliseconds();
-        if ( !Timer::isRunning() )
+        if ( !m_timer.isRunning() )
         {
             m_timerMarker = now;
         }
@@ -247,19 +247,19 @@ void Record::dataChanged( Kit::Dm::IModelPoint& point, Kit::Dm::IObserver& obser
         // Update NVRAM if the maximum delay time has expired
         if ( Kit::System::ElapsedTime::expiredMilliseconds( m_timerMarker, m_maxDelayMs, now ) )
         {
-            Timer::stop();
+            m_timer.stop();
             updateNVRAM();
         }
 
         // Start my software timer to delay the update to NVRAM
         else
         {
-            Timer::start( m_delayMs );
+            m_timer.start( m_delayMs );
         }
     }
 }
 
-void Record::expired( void ) noexcept
+void Record::timerExpired( void ) noexcept
 {
     updateNVRAM();
 }
