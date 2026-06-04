@@ -59,31 +59,11 @@ namespace Tokenizer {
 </pre>*/
 class TextBlock
 {
-private:
-    /// Pointer to the first data field
-    char*       m_base;
-
-    /// Pointer to the current token
-    char*       m_ptr;
-
-    /// Indicates if the tokens are valid
-    bool        m_validTokens;
-
-    /// Indicates if the terminator character was encountered
-    bool        m_terminatorFound;
-
-    /// Number of data fields
-    unsigned    m_count;
-
-
-
 public:
     /** Constructor.  Requires a pointer to the 'raw' string to be tokenized.
-        Note: All of the parsing occurs in this method.
+        Note: ALL OF THE PARSING OCCURS IN THIS METHOD.
      */
-    TextBlock( char* string, char delimiter=',', char terminator=';', char quote='"', char escape='\\' );
-
-
+    TextBlock( char* string, char delimiter = ',', char terminator = ';', char quote = '"', char escape = '\\' );
 
 public:
     /** Returns true if the string was successfully tokenized.  The string
@@ -98,7 +78,7 @@ public:
 
 
     /// Returns the number of parameter fields in the Text block
-    inline unsigned numParameters() const noexcept { return m_count; }
+    inline unsigned numParameters() const noexcept { return m_validTokens ? m_count : 0; }
 
 
     /// Returns the Nth parameter (index starts with 0). Return a null pointer if index is out-of-range
@@ -106,24 +86,39 @@ public:
 
 
     /// Returns true if the parsing stopped because the terminator character was encounter (vs. end-of-string)
-    inline bool isTerminated() const noexcept { return m_terminatorFound; }
+    inline bool isTerminated() const noexcept { return m_validTokens ? m_terminatorFound : false; }
 
 
     /** Returns a pointer to the portion of the string that has not
         been tokenized, i.e. the first character AFTER the terminator
         character.
      */
-    inline const char* remaining() const noexcept { return m_ptr; }
+    inline const char* remaining() const noexcept { return m_validTokens ? m_ptr : nullptr; }
 
 
 protected:
-    /// Helpter method
+    /// Helper method
     void removeWhiteSpace( char* startOfTokenPtr, char* firstNonSpacePtr, char* lastNonSpacePtr ) noexcept;
 
+protected:
+    /// Pointer to the first data field
+    char* m_base;
+
+    /// Pointer to the current token
+    char* m_ptr;
+
+    /// Indicates if the tokens are valid
+    bool m_validTokens;
+
+    /// Indicates if the terminator character was encountered
+    bool m_terminatorFound;
+
+    /// Number of data fields
+    unsigned m_count;
 };
 
 
-};      // end namespaces
-};
-};
+}  // end namespaces
+}
+}
 #endif  // end header latch
