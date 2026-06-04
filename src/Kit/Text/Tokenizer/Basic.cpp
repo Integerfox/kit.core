@@ -35,7 +35,7 @@ const char* Basic::next() noexcept
     }
 
     // Have not yet reach end-of-string
-    if ( startptr != m_nullTerminator )
+    if ( *startptr != '\0' )
     {
         // Get next delimiter (and validate the returned pointer)
         m_ptr = const_cast<char*>( Strip::notChars( startptr, m_delimiters ) );
@@ -45,7 +45,7 @@ const char* Basic::next() noexcept
         }
 
         // Replace the delimiter with null terminator (when not already at the end of the string)
-        if ( m_ptr != m_nullTerminator )
+        if ( *m_ptr != '\0' )
         {
             *m_ptr++ = '\0';
         }
@@ -71,7 +71,7 @@ const char* Basic::getToken( unsigned n ) const noexcept
     const char* token = Strip::chars( m_base, m_delimiters ); // Note: will not return nullptr because m_base has already been verified to not be nullptr
     for ( unsigned i=0; i < n; i++ )
     {
-        while ( token != m_nullTerminator )
+        while ( *token != '\0' )
         {
             token++;
         }

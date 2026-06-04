@@ -32,22 +32,20 @@ private:
 
 public:
     /// Constructor. Uses whitespace for token delimiters
-    Basic( char* stringToParse, unsigned maxSrcLenWithoutNullTerm )
+    Basic( char* stringToParse )
         : m_ptr( 0 )
         , m_delimiters( whiteSpace() )
         , m_base( 0 )
-        , m_nullTerminator( stringToParse + maxSrcLenWithoutNullTerm )
         , m_count( 0 )
     {
         m_base = m_ptr = stringToParse;
     }
 
     /// Constructor. Uses the specified character set for token delimiters
-    Basic( char* stringToParse, const char* delimiterSet, unsigned maxSrcLenWithoutNullTerm )
+    Basic( char* stringToParse, const char* delimiterSet )
         : m_ptr( 0 )
         , m_delimiters( delimiterSet )
         , m_base( 0 )
-        , m_nullTerminator( stringToParse + maxSrcLenWithoutNullTerm )
         , m_count( 0 )
     {
         m_base = m_ptr = stringToParse;
@@ -87,9 +85,6 @@ protected:
 
     /// Pointer to the start of the original string
     char* m_base;
-
-    /// Pointer to the original string's null terminator
-    const char* m_nullTerminator;
 
     /// Number of tokens parsed to date
     unsigned m_count;
