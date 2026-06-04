@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-02 01:19:34</td>
+            <td class="headerValue">2026-06-04 11:59:14</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -108,7 +108,7 @@
 <span id="L46"><span class="lineNum">      46</span>                 :             :     // block the owner thread and deadlock request processing.</span>
 <span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">         112 :     auto* ownerThread   = getThread();</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         112 :     auto* currentThread = Kit::System::Thread::tryGetCurrent();</span></span>
-<span id="L49"><span class="lineNum">      49</span>   [<span class="tlaGBC" title="Branch 0 was taken 82 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 30 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 82 times"> + </span>]:<span class="tlaGNC">         112 :     if ( ownerThread &amp;&amp; currentThread &amp;&amp; ownerThread == currentThread )</span></span>
+<span id="L49"><span class="lineNum">      49</span>   [<span class="tlaGBC" title="Branch 0 was taken 81 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 31 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 81 times"> + </span>]:<span class="tlaGNC">         112 :     if ( ownerThread &amp;&amp; currentThread &amp;&amp; ownerThread == currentThread )</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     {</span>
 <span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::FatalError::logf( Kit::System::Shutdown::eITC,</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :                                        &quot;Deadlock contract violation: postSync() called from owning thread=%s&quot;,</span>
