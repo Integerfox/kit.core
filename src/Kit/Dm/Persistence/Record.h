@@ -40,8 +40,7 @@ namespace Persistence {
  */
 class Record : public Kit::Persistence::Record::IRecord,
                public Kit::Persistence::Record::IPayload,
-               public Kit::Dm::Persistence::IManageRequest,
-               public Kit::System::Timer
+               public Kit::Dm::Persistence::IManageRequest
 {
 public:
     /** This data structure associates a Data Model subscriber instance with a
@@ -79,7 +78,7 @@ public:
             uint8_t                           schemaMinorIndex,
             uint32_t                          writeDelayMs    = 0,
             uint32_t                          maxWriteDelayMs = 0 ) noexcept
-        : Kit::System::Timer( nullptr )
+        : m_timer( *this, &Record::timerExpired )
         , m_myEventQueuePtr( nullptr )
         , m_items( itemList )
         , m_chunkHandler( chunkHandler )
@@ -102,9 +101,6 @@ public:
     }
 
 public:
-    /// Re-expose Timer overload(s) to avoid hiding warnings with stricter compilers.
-    using Kit::System::Timer::start;
-
     /// See Kit::Persistence::Record::IRecord
     bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept override;
 
@@ -183,7 +179,7 @@ protected:
     virtual void hookProcessPostRecordLoaded() noexcept {};
 
     /// Settling timer expired callback
-    void expired( void ) noexcept override;
+    virtual void timerExpired( void ) noexcept;
 
 
 protected:
@@ -194,6 +190,9 @@ protected:
     virtual void updateNVRAM() noexcept;
 
 protected:
+    /// Software Timer
+    Kit::System::TimerComposer<Record> m_timer;
+
     /// The Event Queue that I am running in (used for my timer)
     Kit::EventQueue::IQueue* m_myEventQueuePtr;
 
