@@ -33,9 +33,9 @@ private:
 public:
     /// Constructor. Uses whitespace for token delimiters
     Basic( char* stringToParse )
-        : m_ptr( 0 )
+        : m_ptr( nullptr)
         , m_delimiters( whiteSpace() )
-        , m_base( 0 )
+        , m_base( nullptr )
         , m_count( 0 )
     {
         m_base = m_ptr = stringToParse;
@@ -43,9 +43,9 @@ public:
 
     /// Constructor. Uses the specified character set for token delimiters
     Basic( char* stringToParse, const char* delimiterSet )
-        : m_ptr( 0 )
+        : m_ptr( nullptr )
         , m_delimiters( delimiterSet )
-        , m_base( 0 )
+        , m_base( nullptr )
         , m_count( 0 )
     {
         m_base = m_ptr = stringToParse;

@@ -63,8 +63,11 @@ public:
     /** Constructor.  Requires a pointer to the 'raw' string to be tokenized.
         Note: ALL OF THE PARSING OCCURS IN THIS METHOD.
      */
-    TextBlock( char* string, char delimiter = ',', char terminator = ';', char quote = '"', char escape = '\\' );
-
+    TextBlock( char* string,
+               char  delimiter  = ',',
+               char  terminator = ';',
+               char  quote      = '"',
+               char  escape     = '\\' );
 public:
     /** Returns true if the string was successfully tokenized.  The string
         will fail to parse if it does not match the format/syntax described
@@ -107,14 +110,14 @@ protected:
     /// Pointer to the current token
     char* m_ptr;
 
+    /// Number of data fields
+    unsigned m_count;
+
     /// Indicates if the tokens are valid
     bool m_validTokens;
 
     /// Indicates if the terminator character was encountered
     bool m_terminatorFound;
-
-    /// Number of data fields
-    unsigned m_count;
 };
 
 

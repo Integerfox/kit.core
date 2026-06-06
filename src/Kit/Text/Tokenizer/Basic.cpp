@@ -22,7 +22,7 @@ namespace Tokenizer {
 const char* Basic::next() noexcept
 {
     // Trap error: null pointer for input string
-    if ( !m_base )
+    if ( m_base == nullptr )
     {
         return nullptr;
     }
@@ -62,14 +62,14 @@ const char* Basic::next() noexcept
 const char* Basic::getToken( unsigned n ) const noexcept
 {
     // Trap out-of-bounds index
-    if ( n >= m_count || !m_base )
+    if ( n >= m_count || m_base == nullptr )
     {
         return nullptr;
     }
 
     // Traverse string for the Nth token
     const char* token = Strip::chars( m_base, m_delimiters ); // Note: will not return nullptr because m_base has already been verified to not be nullptr
-    for ( unsigned i=0; i < n; i++ )
+    for ( unsigned i = 0; i < n; i++ )
     {
         while ( *token != '\0' )
         {
