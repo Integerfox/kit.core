@@ -14,7 +14,7 @@
 */
 
 
-#include "Kit/Driver/SPI/IApi.h"
+#include "Kit/Driver/SPI/IHalfDuplex.h"
 #include <stdint.h>
 
 
@@ -32,7 +32,7 @@ namespace TestSupport {
     When read() is called, it returns data from the rxBuffer
     previously configured via setRxData().
  */
-class Mock : public IApi
+class Mock : public IHalfDuplex
 {
 public:
     /// Maximum buffer size for tracking SPI traffic
@@ -45,29 +45,28 @@ public:
 
 public:
     /// See Kit::Driver::IStart
-    bool start( void* startArgs = nullptr ) noexcept override { m_started = true; return true; }
+    bool start( void* startArgs = nullptr ) noexcept override
+    {
+        m_started = true;
+        return true;
+    }
 
     /// See Kit::Driver::IStop
     void stop() noexcept override { m_started = false; }
 
 
 public:
-    /// See Kit::Driver::SPI::IApi
-    bool transfer( const void* txData,
-                   void*       rxData,
-                   size_t      numBytes ) noexcept override;
-
-    /// See Kit::Driver::SPI::IApi
+    /// See Kit::Driver::SPI::IHalfDuplex
     bool write( const void* txData,
                 size_t      numBytes ) noexcept override;
 
-    /// See Kit::Driver::SPI::IApi
+    /// See Kit::Driver::SPI::IHalfDuplex
     bool read( void*  rxData,
                size_t numBytes ) noexcept override;
 
 
 public:
-    /// Configures data to be returned on subsequent read/transfer calls
+    /// Configures data to be returned on subsequent read calls
     void setRxData( const void* data, size_t len ) noexcept;
 
     /// Causes the next SPI operation to fail
@@ -87,15 +86,14 @@ public:
 
 
 protected:
-    bool     m_started;                  //!< Whether the driver has been started
-    bool     m_failNext;                 //!< If true, the next operation will fail
-    uint8_t  m_txBuffer[MAX_BUFFER_SIZE]; //!< Buffer recording transmitted bytes
-    uint8_t  m_rxBuffer[MAX_BUFFER_SIZE]; //!< Buffer for received bytes from transfers
-    uint8_t  m_rxData[MAX_BUFFER_SIZE];  //!< Pre-configured data returned on reads
-    size_t   m_txCount;                  //!< Total bytes transmitted
-    size_t   m_rxCount;                  //!< Total bytes received
-    size_t   m_rxDataPos;                //!< Current read position in m_rxData
-    size_t   m_rxDataLen;                //!< Length of configured rx data
+    bool    m_started;                    //!< Whether the driver has been started
+    bool    m_failNext;                   //!< If true, the next operation will fail
+    uint8_t m_txBuffer[MAX_BUFFER_SIZE];  //!< Buffer recording transmitted bytes
+    uint8_t m_rxData[MAX_BUFFER_SIZE];    //!< Pre-configured data returned on reads
+    size_t  m_txCount;                    //!< Total bytes transmitted
+    size_t  m_rxCount;                    //!< Total bytes received
+    size_t  m_rxDataPos;                  //!< Current read position in m_rxData
+    size_t  m_rxDataLen;                  //!< Length of configured rx data
 };
 
 

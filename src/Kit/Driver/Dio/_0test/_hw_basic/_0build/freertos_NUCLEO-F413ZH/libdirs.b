@@ -1,24 +1,11 @@
-# Hardware test sources
-src/Kit/Driver/NV/Flash/_0test/_hw_flash
+# Unit test
+src/Kit/Driver/Dio/_0test/_hw_basic
 
 # Platform-specific main
-src/Kit/Driver/NV/Flash/_0test/_hw_flash/_0build/freertos_NUCLEO-F413ZH
+src/Kit/Driver/Dio/_0test/_hw_basic/_0build/freertos_NUCLEO-F413ZH
 
-# NV interface
-src/Kit/Driver/NV
-
-# NV Flash driver (template headers, no source files to compile)
-#  - Api.h / Api_.h are template headers included directly by the test
-
-# W25Q flash driver
-src/Kit/Driver/Flash/W25Q
-
-# SPI HAL driver
-src/Kit/Driver/SPI/ST/M32F4
-
-# DIO HAL driver
+# Driver under test
 src/Kit/Driver/Dio/ST/M32F4
-
 
 # Output stream for the KIT Console
 src/Kit/Io/Serial/ST/M32F4
@@ -27,8 +14,6 @@ src/Kit/Io/Serial/ST/M32F4
 src/Kit/Container
 src/Kit/Text
 src/Kit/Io
-src/Kit/EventQueue
-src/Kit/Itc
 
 # KIT OSAL
 src/Kit/System

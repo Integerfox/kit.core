@@ -50,10 +50,11 @@
 #include "Kit/System/FatalError.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/ElapsedTime.h"
-#include "Kit/Driver/SPI/ST/M32F4/Api.h"
+#include "Kit/Driver/SPI/ST/M32F4/Polled.h"
 #include "Kit/Driver/Dio/ST/M32F4/Output.h"
 #include "Kit/Driver/Flash/W25Q/Api.h"
 #include "Kit/Driver/NV/Flash/Api.h"
+#include "Kit/Checksum/Crc32EthernetFast.h"
 #include "spi.h"
 #include <cstring>
 
@@ -86,10 +87,10 @@ static const NV::Flash::Config_T NV_CONFIG = {
 };
 
 /** Expected sizing metrics from the design documentation */
-static constexpr size_t   EXPECTED_SECTORS            = 32;
-static constexpr size_t   EXPECTED_RECORDS_PER_SECTOR = 14;
-static constexpr size_t   EXPECTED_TOTAL_RECORD_SLOTS = EXPECTED_SECTORS * EXPECTED_RECORDS_PER_SECTOR; // 448
-static constexpr size_t   EXPECTED_PAGE_MAP_RAM_BYTES = MAX_LOGICAL_PAGES * sizeof( uint32_t );         // 64
+static constexpr size_t EXPECTED_SECTORS            = 32;
+static constexpr size_t EXPECTED_RECORDS_PER_SECTOR = 14;
+static constexpr size_t EXPECTED_TOTAL_RECORD_SLOTS = EXPECTED_SECTORS * EXPECTED_RECORDS_PER_SECTOR;  // 448
+static constexpr size_t EXPECTED_PAGE_MAP_RAM_BYTES = MAX_LOGICAL_PAGES * sizeof( uint32_t );          // 64
 
 /** Maximum acceptable startup scan time in milliseconds.
     Design doc estimates ~16-25 ms for 4KB config (448 headers at ~35us each).
@@ -107,9 +108,9 @@ static constexpr uint8_t WINBOND_MANUFACTURER_ID = 0xEF;
 /** LED blink period in milliseconds */
 static constexpr uint32_t LED_BLINK_PERIOD_MS = 500;
 
-static unsigned testCount_  = 0;
-static unsigned passCount_  = 0;
-static unsigned failCount_  = 0;
+static unsigned testCount_ = 0;
+static unsigned passCount_ = 0;
+static unsigned failCount_ = 0;
 
 static void check( bool condition, const char* description )
 {
@@ -145,8 +146,8 @@ public:
 
         // --- Initialize hardware drivers ---
         KIT_SYSTEM_TRACE_MSG( SECT_, "Initializing SPI and flash drivers..." );
-        SPI::ST::M32F4::Api    spiDriver( &hspi3 );
-        Dio::ST::M32F4::Output csPin( CS_SPI_Flash_GPIO_Port, CS_SPI_Flash_Pin );
+        SPI::ST::M32F4::Polled spiDriver( &hspi3 );
+        Dio::ST::M32F4::Output csPin( CS_SPI_Flash_GPIO_Port, CS_SPI_Flash_Pin, false );
         spiDriver.start();
 
         Flash::W25Q::Api flashDriver( spiDriver, csPin, Flash::W25Q::W25Q128 );
@@ -159,17 +160,21 @@ public:
             uint8_t mfgId    = 0;
             uint8_t memType  = 0;
             uint8_t capacity = 0;
-            bool ok = flashDriver.readJedecId( mfgId, memType, capacity );
+            bool    ok       = flashDriver.readJedecId( mfgId, memType, capacity );
             check( ok, "readJedecId succeeds" );
             check( mfgId == WINBOND_MANUFACTURER_ID, "Manufacturer ID is Winbond (0xEF)" );
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  JEDEC: mfg=0x%02X type=0x%02X cap=0x%02X",
-                mfgId, memType, capacity );
+                                  "  JEDEC: mfg=0x%02X type=0x%02X cap=0x%02X",
+                                  mfgId,
+                                  memType,
+                                  capacity );
         }
 
         // --- Test 2: Format and Initialize NV ---
         KIT_SYSTEM_TRACE_MSG( SECT_, "--- Test 2: Format and Init ---" );
-        NV::Flash::Api<MAX_LOGICAL_PAGES> nv( flashDriver, NV_CONFIG );
+        Kit::Checksum::Crc32EthernetFast  crcAlgo;
+        static uint8_t                    nvWorkBuffer[NV_PAGE_SIZE];
+        NV::Flash::Api<MAX_LOGICAL_PAGES> nv( flashDriver, crcAlgo, NV_CONFIG, nvWorkBuffer, sizeof( nvWorkBuffer ) );
         {
             check( nv.start() == true, "NV driver start succeeds" );
             check( nv.format() == true, "Format succeeds" );
@@ -188,11 +193,19 @@ public:
             check( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true, "Read 5 bytes succeeds" );
             check( memcmp( readData, writeData, sizeof( writeData ) ) == 0, "Read data matches written data" );
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  Written: [%02X %02X %02X %02X %02X]",
-                writeData[0], writeData[1], writeData[2], writeData[3], writeData[4] );
+                                  "  Written: [%02X %02X %02X %02X %02X]",
+                                  writeData[0],
+                                  writeData[1],
+                                  writeData[2],
+                                  writeData[3],
+                                  writeData[4] );
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  Read:    [%02X %02X %02X %02X %02X]",
-                readData[0], readData[1], readData[2], readData[3], readData[4] );
+                                  "  Read:    [%02X %02X %02X %02X %02X]",
+                                  readData[0],
+                                  readData[1],
+                                  readData[2],
+                                  readData[3],
+                                  readData[4] );
         }
 
         // --- Test 4: Read-Modify-Write ---
@@ -258,18 +271,20 @@ public:
             check( validPages > 0, "Has valid pages" );
             check( freePages > 0, "Has free pages" );
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  Stats: erases=%lu free=%u valid=%u",
-                (unsigned long) eraseCount, (unsigned) freePages, (unsigned) validPages );
+                                  "  Stats: erases=%lu free=%u valid=%u",
+                                  (unsigned long)eraseCount,
+                                  (unsigned)freePages,
+                                  (unsigned)validPages );
 
             // Validate sizing metrics from design documentation
             size_t totalSlots = freePages + validPages;
             // After format (32 erases) + test writes, total should be close to 448
             // Some slots may be INVALID (used by old records not yet reclaimed)
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  Sizing: total_slots=%u (expected ~%u), page_map_RAM=%u bytes",
-                (unsigned) totalSlots,
-                (unsigned) EXPECTED_TOTAL_RECORD_SLOTS,
-                (unsigned) EXPECTED_PAGE_MAP_RAM_BYTES );
+                                  "  Sizing: total_slots=%u (expected ~%u), page_map_RAM=%u bytes",
+                                  (unsigned)totalSlots,
+                                  (unsigned)EXPECTED_TOTAL_RECORD_SLOTS,
+                                  (unsigned)EXPECTED_PAGE_MAP_RAM_BYTES );
         }
 
         // --- Test 8: Wear Leveling ---
@@ -297,7 +312,7 @@ public:
             // Write to page 0 repeatedly — each write creates a new record
             // at a different physical location
             static constexpr size_t NUM_WEAR_WRITES = 50;
-            bool allWritesOk = true;
+            bool                    allWritesOk     = true;
             for ( size_t i = 0; i < NUM_WEAR_WRITES; i++ )
             {
                 uint8_t data[] = { static_cast<uint8_t>( i ),
@@ -321,9 +336,11 @@ public:
             size_t   validPages;
             check( nv.getStatistics( eraseCount, freePages, validPages ) == true, "Stats after wear-leveling writes" );
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  After %u writes: erases=%lu free=%u valid=%u",
-                (unsigned) NUM_WEAR_WRITES,
-                (unsigned long) eraseCount, (unsigned) freePages, (unsigned) validPages );
+                                  "  After %u writes: erases=%lu free=%u valid=%u",
+                                  (unsigned)NUM_WEAR_WRITES,
+                                  (unsigned long)eraseCount,
+                                  (unsigned)freePages,
+                                  (unsigned)validPages );
 
             // With 32 sectors (448 slots) and 50 writes to one page, we
             // should NOT have needed to erase any sectors beyond the
@@ -334,10 +351,10 @@ public:
             check( freePages > 0, "Free slots remain" );
 
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  Wear-leveling: %u writes consumed %u slots, %u free remain",
-                (unsigned) NUM_WEAR_WRITES,
-                (unsigned)( EXPECTED_TOTAL_RECORD_SLOTS - freePages - validPages ),
-                (unsigned) freePages );
+                                  "  Wear-leveling: %u writes consumed %u slots, %u free remain",
+                                  (unsigned)NUM_WEAR_WRITES,
+                                  (unsigned)( EXPECTED_TOTAL_RECORD_SLOTS - freePages - validPages ),
+                                  (unsigned)freePages );
         }
 
         // --- Test 9: Sector Reclamation ---
@@ -368,7 +385,7 @@ public:
                                    static_cast<uint8_t>( ( i >> 8 ) & 0xFF ) };
                 if ( !nv.write( 0, data, sizeof( data ) ) )
                 {
-                    KIT_SYSTEM_TRACE_MSG( SECT_, "  Write failed at iteration %u", (unsigned) i );
+                    KIT_SYSTEM_TRACE_MSG( SECT_, "  Write failed at iteration %u", (unsigned)i );
                     allWritesOk = false;
                     break;
                 }
@@ -391,12 +408,12 @@ public:
             // eraseCount includes 32 from format + reclamation erases
             uint32_t reclamationErases = eraseCount - EXPECTED_SECTORS;
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  Reclamation: erases=%lu (format=%u + reclaim=%lu) free=%u valid=%u",
-                (unsigned long) eraseCount,
-                (unsigned) EXPECTED_SECTORS,
-                (unsigned long) reclamationErases,
-                (unsigned) freePages,
-                (unsigned) validPages );
+                                  "  Reclamation: erases=%lu (format=%u + reclaim=%lu) free=%u valid=%u",
+                                  (unsigned long)eraseCount,
+                                  (unsigned)EXPECTED_SECTORS,
+                                  (unsigned long)reclamationErases,
+                                  (unsigned)freePages,
+                                  (unsigned)validPages );
 
             check( reclamationErases > 0, "Sector reclamation occurred" );
             check( validPages == 1, "Only 1 valid page after reclamation" );
@@ -432,9 +449,9 @@ public:
             uint32_t scanTime = ElapsedTime::deltaMilliseconds( startTime );
 
             KIT_SYSTEM_TRACE_MSG( SECT_,
-                "  Startup scan time: %lu ms (max allowed: %lu ms)",
-                (unsigned long) scanTime,
-                (unsigned long) MAX_STARTUP_SCAN_TIME_MS );
+                                  "  Startup scan time: %lu ms (max allowed: %lu ms)",
+                                  (unsigned long)scanTime,
+                                  (unsigned long)MAX_STARTUP_SCAN_TIME_MS );
             check( scanTime <= MAX_STARTUP_SCAN_TIME_MS, "Scan time within acceptable range" );
 
             // Verify data integrity after timed restart
@@ -445,8 +462,7 @@ public:
 
         // --- Summary ---
         KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "=== Results: %u/%u passed, %u failed ===",
-            passCount_, testCount_, failCount_ );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "=== Results: %u/%u passed, %u failed ===", passCount_, testCount_, failCount_ );
 
         if ( failCount_ == 0 )
         {

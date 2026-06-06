@@ -1,5 +1,5 @@
-#ifndef KIT_DRIVER_SPI_IAPI_H_
-#define KIT_DRIVER_SPI_IAPI_H_
+#ifndef KIT_DRIVER_SPI_IHALFDUPLEX_H_
+#define KIT_DRIVER_SPI_IHALFDUPLEX_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -23,28 +23,18 @@ namespace Driver {
 namespace SPI {
 
 
-/** This class defines the interface for a platform independent SPI driver.
-    The interface provides basic full-duplex transfer, write-only, and read-only
-    operations.
+/** This class defines the interface for a platform independent half-duplex
+    SPI driver.  The interface provides write-only and read-only operations.
+    Half-duplex mode requires only a single buffer per transaction and covers
+    the vast majority of SPI peripheral usage.
 
     The interface itself is NOT thread safe. It is the responsibility of
     the users/clients of the driver to handle any threading issues.
  */
-class IApi : public virtual IStart,
-             public virtual IStop
+class IHalfDuplex : public virtual IStart,
+                    public virtual IStop
 {
 public:
-    /** This method performs a full-duplex SPI transfer.  The 'txData' is
-        transmitted while simultaneously receiving into 'rxData'.  Both
-        buffers must be at least 'numBytes' in length.
-
-        The method returns true if the operation was successful; else false
-        is returned.
-     */
-    virtual bool transfer( const void* txData,
-                           void*       rxData,
-                           size_t      numBytes ) noexcept = 0;
-
     /** This method transmits 'numBytes' from 'txData' on the SPI bus.
         Any data received during transmission is discarded.
 
@@ -66,7 +56,7 @@ public:
 
 public:
     /// Virtual destructor
-    virtual ~IApi() noexcept = default;
+    virtual ~IHalfDuplex() noexcept = default;
 };
 
 

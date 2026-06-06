@@ -28,7 +28,7 @@ namespace NV {
     The Interface assumes byte-level erasing/writing semantics with respect to
     persistent storage. In addition, the interface provides the client with a
     page model, where an individual page represents the maximum amount of data
-    that can be written in a single physical update of the NV storage.  That 
+    that can be written in a single physical update of the NV storage.  That
     said - the client is NOT required to write in page sized chunks. The page
     information is provided to allow clients to optimize (if desired) their
     writes to the NV storage.
@@ -60,7 +60,7 @@ public:
                         size_t      numBytesToWrite ) noexcept = 0;
 
     /** This method reads N bytes starting at the storage offset of 'srcOffset'
-        and stores the bytes into 'dstData'. 
+        and stores the bytes into 'dstData'.
 
         The method returns true if operation was successful; else false is
         returned. Note: If 'sizeDstData' is less than 'numBytesToRead' then

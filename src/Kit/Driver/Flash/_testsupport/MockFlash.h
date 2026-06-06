@@ -200,9 +200,9 @@ public:
 
 
 public:
-    size_t getTotalSize() const noexcept override  { return TOTAL_SIZE; }
+    size_t getTotalSize() const noexcept override { return TOTAL_SIZE; }
     size_t getSectorSize() const noexcept override { return SECTOR_SIZE; }
-    size_t getPageSize() const noexcept override   { return PAGE_SIZE; }
+    size_t getPageSize() const noexcept override { return PAGE_SIZE; }
     size_t getNumSectors() const noexcept override { return TOTAL_SIZE / SECTOR_SIZE; }
 
 
@@ -223,10 +223,10 @@ public:
     /// Direct access to flash memory for test verification (const)
     const uint8_t* getFlashMemory() const noexcept { return m_flash; }
     /// Direct access to flash memory for test verification (mutable)
-    uint8_t*       getFlashMemory() noexcept { return m_flash; }
+    uint8_t* getFlashMemory() noexcept { return m_flash; }
 
     /// Returns the number of read operations performed
-    uint32_t getReadCount() const noexcept  { return m_readCount; }
+    uint32_t getReadCount() const noexcept { return m_readCount; }
     /// Returns the number of write operations performed
     uint32_t getWriteCount() const noexcept { return m_writeCount; }
     /// Returns the number of erase operations performed
@@ -234,12 +234,12 @@ public:
 
 
 protected:
-    uint8_t  m_flash[TOTAL_SIZE]; //!< Simulated flash memory
-    bool     m_started;           //!< Whether the driver has been started
-    bool     m_failNext;          //!< If true, the next operation will fail
-    uint32_t m_readCount;         //!< Number of read operations performed
-    uint32_t m_writeCount;        //!< Number of write operations performed
-    uint32_t m_eraseCount;        //!< Number of erase operations performed
+    uint8_t  m_flash[TOTAL_SIZE];  //!< Simulated flash memory
+    bool     m_started;            //!< Whether the driver has been started
+    bool     m_failNext;           //!< If true, the next operation will fail
+    uint32_t m_readCount;          //!< Number of read operations performed
+    uint32_t m_writeCount;         //!< Number of write operations performed
+    uint32_t m_eraseCount;         //!< Number of erase operations performed
 };
 
 

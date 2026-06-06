@@ -16,23 +16,39 @@ using namespace Kit::Driver::Dio::ST::M32F4;
 
 
 //////////////////////////////////////////////////////////////////////////////
-Output::Output( GPIO_TypeDef* port, uint16_t pin ) noexcept
+Output::Output( GPIO_TypeDef* port, uint16_t pin, bool activeHigh ) noexcept
     : m_port( port )
     , m_pin( pin )
+    , m_activeHigh( activeHigh )
+    , m_started( false )
 {
 }
 
 
 //////////////////////////////////////////////////////////////////////////////
-void Output::setHigh() noexcept
+bool Output::start( void* startArgs ) noexcept
 {
-    HAL_GPIO_WritePin( m_port, m_pin, GPIO_PIN_SET );
+    m_started = true;
+    return true;
 }
 
 
-void Output::setLow() noexcept
+void Output::stop() noexcept
 {
-    HAL_GPIO_WritePin( m_port, m_pin, GPIO_PIN_RESET );
+    m_started = false;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////
+void Output::assertPin() noexcept
+{
+    HAL_GPIO_WritePin( m_port, m_pin, m_activeHigh ? GPIO_PIN_SET : GPIO_PIN_RESET );
+}
+
+
+void Output::deassertPin() noexcept
+{
+    HAL_GPIO_WritePin( m_port, m_pin, m_activeHigh ? GPIO_PIN_RESET : GPIO_PIN_SET );
 }
 
 
@@ -42,13 +58,21 @@ void Output::toggle() noexcept
 }
 
 
-void Output::set( bool newState ) noexcept
+void Output::set( bool asserted ) noexcept
 {
-    HAL_GPIO_WritePin( m_port, m_pin, newState ? GPIO_PIN_SET : GPIO_PIN_RESET );
+    if ( asserted )
+    {
+        assertPin();
+    }
+    else
+    {
+        deassertPin();
+    }
 }
 
 
-bool Output::getState() const noexcept
+bool Output::isAsserted() const noexcept
 {
-    return ( HAL_GPIO_ReadPin( m_port, m_pin ) == GPIO_PIN_SET );
+    GPIO_PinState pinState = HAL_GPIO_ReadPin( m_port, m_pin );
+    return m_activeHigh ? ( pinState == GPIO_PIN_SET ) : ( pinState == GPIO_PIN_RESET );
 }
