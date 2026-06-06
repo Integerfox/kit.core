@@ -1,5 +1,5 @@
-#ifndef Cpl_Text_Tokenizer_TextBlock_h_
-#define Cpl_Text_Tokenizer_TextBlock_h_
+#ifndef KIT_TEXT_TOKENIZER_TEXTBLOCK_H_
+#define KIT_TEXT_TOKENIZER_TEXTBLOCK_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -36,9 +36,9 @@ namespace Tokenizer {
     text string.
 
     If the string being parsed has two DEL characters in row, then tokenized
-    results will return an 'empty parameter' (a parameter will a zero string
-    length) for this sequence.  The EXCEPTION to this rule is when the
-    delimiter is the space character, then the tokenizer will never generated
+    results will return an 'empty parameter' (a parameter will a have zero
+    string length) for this sequence.  The EXCEPTION to this rule is when the
+    delimiter is the space character, then the tokenizer will never generate
     and/or detect any 'empty parameters'.
 
     The original string is "corrupted" since the tokenizer changes characters.
