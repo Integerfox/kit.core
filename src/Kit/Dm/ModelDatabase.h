@@ -11,7 +11,7 @@
 /** @file */
 
 #include "Kit/Dm/IModelDatabase.h"
-#include "Kit/Container/SList.h"
+#include "Kit/Container/OrderedList.h"
 
 
 ///
@@ -22,15 +22,13 @@ namespace Dm {
 
 /** This concrete class implements a simple Model Database.
 
-    Note: The model point instances are contained in SList. This is to reduce
+    Note: The model point instances are contained in OrderedList. This is to reduce
           the RAM overhead on each Model Point instance (e.g. a MapItem has 32
           bytes of overhead vs. 8 bytes for Item).  This means that looking up
           a model point by name is not efficient.  However, the typically use
           case for the look-up function is when reading/writing model point
           via the TShell command shell the performance impact should not be
           noticeable.
-
-          The SList is sorted alphabetically on the first call to getFirstByName().
 
     Note: All of the methods are thread safe.  However, since the Model Database
           instances are typically created statically and statically allocated
@@ -79,21 +77,15 @@ public:
     Kit::System::Mutex& getMutex_() noexcept override;
 
 protected:
-    /// Helper method to sort the model point list alphabetical
-    virtual void sortList() noexcept;
-
     /// Helper method to find a point by name
     virtual IModelPoint* find( const char* name ) noexcept;
 
 protected:
     /// Map to the store the Model Points
-    Kit::Container::SList<IModelPoint> m_list;
+    Kit::Container::OrderedList<IModelPoint> m_list;
 
     /// Mutex for making the Database thread safe
     Kit::System::Mutex m_lock;
-
-    /// Keep track if the point list has been sorted
-    bool m_listSorted;
 
 private:
     /// Prevent access to the copy constructor -->Model Databases can not be copied!

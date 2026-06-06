@@ -79,6 +79,10 @@ public:
     /// See Kit::Dm::IModelPoint
     bool toJSON( char* dst, size_t dstSize, bool& truncated, bool verbose = true, bool pretty = false ) noexcept override;
 
+public:
+    /// See Kit::Container::KeyedItem
+    const Key& getKey() const noexcept override { return *this; }
+
 protected:
     /** This method is used to read the MP contents and synchronize
         the observer with the current MP contents.  This method should ONLY be
@@ -226,9 +230,6 @@ protected:
 protected:
     /// List of Active Subscribers
     Kit::Container::DList<IObserver> m_subscribers;
-
-    /// The model point's symbolic name
-    const char* m_name;
 
     /// Reference to the containing Model Base
     IModelDatabase& m_modelDatabase;

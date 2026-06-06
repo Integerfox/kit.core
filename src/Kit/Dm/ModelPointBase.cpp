@@ -37,7 +37,7 @@ ModelPointBase::ModelPointBase( IModelDatabase& myModelBase,
                                 void*           myDataPtr,
                                 size_t          dataSizeInBytes,
                                 bool            isValid )
-    : m_name( symbolicName )
+    : IModelPoint( symbolicName )
     , m_modelDatabase( myModelBase )
     , m_dataPtr( myDataPtr )
     , m_dataSize( dataSizeInBytes )
@@ -58,7 +58,7 @@ ModelPointBase::ModelPointBase( IModelDatabase& myModelBase,
 /////////////////
 const char* ModelPointBase::getName() const noexcept
 {
-    return m_name;
+    return m_stringKeyPtr;
 }
 
 size_t ModelPointBase::getSize() const noexcept
@@ -166,7 +166,7 @@ void ModelPointBase::copyDataTo_( void* dstData, size_t dstSize ) const noexcept
 void ModelPointBase::copyDataFrom_( const void* srcData, size_t srcSize ) noexcept
 {
     KIT_SYSTEM_ASSERT( srcSize <= m_dataSize );
-    memcpy( m_dataPtr, srcData, m_dataSize );
+    memcpy( m_dataPtr, srcData, srcSize );
 }
 
 bool ModelPointBase::isDataEqual_( const void* otherData ) const noexcept
@@ -237,7 +237,7 @@ size_t ModelPointBase::exportData( void* dstDataStream, size_t maxDstLength, uin
         Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
 
         // Do nothing if there is not enough space left in the destination stream
-        if ( maxDstLength >= getExternalSize() )
+        if ( maxDstLength >= getExternalSize( includeLockedState ) )
         {
             // Export metadata (if there is any)
             size_t bytesAdded = 0;
@@ -278,7 +278,7 @@ size_t ModelPointBase::importData( const void* srcDataStream, size_t srcLength, 
         Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
 
         // Fail the import when there is not enough data left in the input stream
-        if ( getExternalSize() <= srcLength )
+        if ( getExternalSize( includeLockedState ) <= srcLength )
         {
             // Consume incoming metadata (if there is any)
             size_t bytesConsumed = 0;
@@ -383,7 +383,7 @@ void ModelPointBase::processSubscriptionEvent_( IObserver& observer, Event_T eve
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
 
-    switch ( static_cast<State_T>(observer.getState_()) )
+    switch ( static_cast<State_T>( observer.getState_() ) )
     {
     case eSTATE_UNSUBSCRIBED:
         switch ( event )

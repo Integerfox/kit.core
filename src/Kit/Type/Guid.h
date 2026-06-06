@@ -81,6 +81,9 @@ public:
         If the 1st character of 'stringGuid' is a leading '{', there must be a
         trailing '}'
 
+        Parsing consumes the leading GUID token only; trailing characters after
+        the GUID token are tolerated.
+
         The 'stringGuid' should never contain any whitespace.
 
         Returns true if conversion was successful; else false is returned (e.g.

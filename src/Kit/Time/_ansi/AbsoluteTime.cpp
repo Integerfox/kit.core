@@ -13,7 +13,7 @@
 
 uint64_t Kit::Time::getAbsoluteTimeSeconds() noexcept
 {
-    time_t now;
+    time_t now = 0;
     time( &now );
     return static_cast<uint64_t>( now );
 }

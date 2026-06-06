@@ -41,7 +41,7 @@ constexpr const char* GetMinValueString()
 const char* ToString::convert_( KitTextToStringMaxUnsigned_T num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept
 {
     // Error check the base argument and null destination string
-    if ( base < 2 || base > 36 || dstString == nullptr )
+    if ( base < 2 || base > 36 || dstString == nullptr || maxChars == 0 )
     {
         return nullptr;
     }

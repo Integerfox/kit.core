@@ -139,6 +139,11 @@ bool DListBase::remove( ExtendedListItem& item ) noexcept
 
 void DListBase::insertAfter( ExtendedListItem& after, ExtendedListItem& item ) noexcept
 {
+    if ( !after.isInContainer_( this ) )
+    {
+        return;
+    }
+
     if ( item.insert_( this ) )
     {
         ExtendedListItem* nxtPtr = static_cast<ExtendedListItem*>( item.m_nextPtr_ = after.m_nextPtr_ );
@@ -157,6 +162,11 @@ void DListBase::insertAfter( ExtendedListItem& after, ExtendedListItem& item ) n
 
 void DListBase::insertBefore( ExtendedListItem& before, ExtendedListItem& item ) noexcept
 {
+    if ( !before.isInContainer_( this ) )
+    {
+        return;
+    }
+
     if ( item.insert_( this ) )
     {
         ExtendedListItem* prvPtr = static_cast<ExtendedListItem*>( item.m_prevPtr_ = before.m_prevPtr_ );

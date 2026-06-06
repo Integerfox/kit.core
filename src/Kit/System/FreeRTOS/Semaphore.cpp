@@ -31,7 +31,7 @@ Semaphore::Semaphore( unsigned initialCount ) noexcept
 
 Semaphore::~Semaphore() noexcept
 {
-    vSemaphoreDelete( &m_sema );
+    vSemaphoreDelete( m_sema );
 }
 
 
@@ -64,7 +64,7 @@ void Semaphore::wait() noexcept
 
 bool Semaphore::timedWait( uint32_t timeout ) noexcept
 {
-    return xSemaphoreTake( m_sema, timeout * portTICK_PERIOD_MS ) == pdTRUE;
+    return xSemaphoreTake( m_sema, pdMS_TO_TICKS(timeout) ) == pdTRUE;
 }
 
 
@@ -82,7 +82,7 @@ void Semaphore::waitInRealTime() noexcept
 
 bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
 {
-    return xSemaphoreTake( m_sema, timeout * portTICK_PERIOD_MS ) == pdTRUE;
+    return xSemaphoreTake( m_sema, pdMS_TO_TICKS(timeout) ) == pdTRUE;
 }
 
 } // end namespace

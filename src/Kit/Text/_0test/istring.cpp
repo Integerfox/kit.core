@@ -182,6 +182,10 @@ TEST_CASE( "IString" )
         REQUIRE( s1.isEqualSubstringIgnoreCase( -1, 40, "HELLO WORLD, THIS IS BOB" ) == true );
         REQUIRE( s1.isEqualSubstringIgnoreCase( -1, 40, "Hello World, this is bob" ) == true );
 
+        FString<8> empty;
+        REQUIRE( empty.isEqualSubstring( 0, 0, "HELLO" ) == false );
+        REQUIRE( empty.isEqualSubstringIgnoreCase( 0, 0, "hello" ) == false );
+
         REQUIRE( s1.startsWith( "HELLO " ) == true );
         REQUIRE( s1.startsWith( "HELLo " ) == false );
         REQUIRE( s1.startsWith( "HELLO WORLD, THIS IS BOB" ) == true );

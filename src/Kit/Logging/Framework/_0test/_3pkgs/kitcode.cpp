@@ -11,7 +11,7 @@
 #include "Kit/Logging/Pkg/Log.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/Container/RingBufferAllocate.h"  // Only needed for test access to log queue
+#include "Kit/Container/RingBufferMPAllocate.h"  // Only needed for test access to log queue
 #include "Kit/Logging/Framework/EntryData.h"   // Only needed for test access to log queue
 
 using namespace Kit::Logging::Pkg;
@@ -21,7 +21,7 @@ using namespace Kit::Logging::Framework;
 
 
 // Get access to the application's log queue to validate log entries
-extern Kit::Container::RingBufferAllocate<Kit::Logging::Framework::EntryData_T, 5> g_logFifo;
+extern Kit::Container::RingBufferMPAllocate<Kit::Logging::Framework::EntryData_T, 5> g_logFifo;
 
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "Kit" )

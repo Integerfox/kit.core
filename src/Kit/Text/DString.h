@@ -12,6 +12,7 @@
 
 #include "kit_config.h"
 #include "Kit/Text/StringBase.h"
+#include "Kit/System/Assert.h"
 
 ///
 namespace Kit {
@@ -45,12 +46,12 @@ public:
         Whatever value is chosen, it is then rounded up to the nearest block size
         multiple.  There are two main reasons to specify an initialSize.
         1) To reduce the number of malloc/free that occur over the life of the
-           IString. If you supply a large enough initialSize - no additional 
-           mallocs will be needed.  
+           IString. If you supply a large enough initialSize - no additional
+           mallocs will be needed.
         2) If you plan to use the format(..) methods.  The format() methods will
-           NOT allocate additional storage.  To prevent the format() methods from 
+           NOT allocate additional storage.  To prevent the format() methods from
            truncating, you must start with a large enough 'buffer'.
-           
+
         The block size parameter can be used to control the size of the 'chunks'
         memory is allocated in.  This 'blocking' paradigm helps to reduce
         fragmentation and number of internal malloc/free operations.
@@ -151,7 +152,11 @@ protected:  // Helper methods
     /** Returns the need memory size in "block units".  Note: The size calculation
         includes the memory for the trailing '\0' string terminator.
      */
-    int calcMemSize( int len ) noexcept { return ( ( len + m_blockSize ) / m_blockSize ) * m_blockSize; }
+    int calcMemSize( int len ) noexcept
+    {
+        KIT_SYSTEM_ASSERT( m_blockSize > 0 );
+        return ( ( len + m_blockSize ) / m_blockSize ) * m_blockSize;
+    }
 
     /// Frees the current string memory - IF it was previously allocated
     void freeCurrentString() noexcept;
@@ -171,6 +176,6 @@ protected:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

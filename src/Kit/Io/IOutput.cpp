@@ -21,7 +21,7 @@ namespace Io {
 //////////////////////
 bool IOutput::write( char c ) noexcept
 {
-    auto* ptr = static_cast<const void*>( &c );
+    auto*       ptr      = static_cast<const void*>( &c );
     ByteCount_T numBytes = sizeof( c );
     return write( ptr, numBytes );
 }
@@ -30,7 +30,7 @@ bool IOutput::write( char c ) noexcept
 bool IOutput::write( const char* string ) noexcept
 {
     KIT_SYSTEM_ASSERT( string != nullptr );
-    
+
     ByteCount_T numBytes = strlen( string );
     return write( string, numBytes );
 }
@@ -57,7 +57,7 @@ bool IOutput::write( Kit::Text::IString& formatBuffer, const char* format, ... )
 bool IOutput::vwrite( Kit::Text::IString& formatBuffer, const char* format, va_list ap ) noexcept
 {
     KIT_SYSTEM_ASSERT( format != nullptr );
-    
+
     formatBuffer.vformat( format, ap );
     ByteCount_T numBytes = formatBuffer.length();
     return write( formatBuffer(), numBytes );
@@ -66,7 +66,8 @@ bool IOutput::vwrite( Kit::Text::IString& formatBuffer, const char* format, va_l
 bool IOutput::write( const void* buffer, ByteCount_T numBytes ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
-
+    KIT_SYSTEM_ASSERT( numBytes >= 0 );
+    
     ByteCount_T written = 0;
     auto*       ptr     = static_cast<const uint8_t*>( buffer );
 

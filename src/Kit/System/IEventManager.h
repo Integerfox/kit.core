@@ -44,12 +44,12 @@ public:
     virtual void signalMultipleEvents( uint32_t events ) noexcept = 0;
 
     /** This operation is similar to signalEvents(), except that it sets one
-        event flags.  The 'eventNumber' is the bit number (zero based) of the
+        event flags.  The 'eventIndex' is the bit number (zero based) of the
         Event Flag to set.
 
         This method can ONLY be called from a thread context.
      */
-    virtual void signalEvent( uint8_t eventNumber ) noexcept = 0;
+    virtual void signalEvent( uint8_t eventIndex ) noexcept = 0;
 
 
 public:
@@ -61,7 +61,7 @@ public:
     /** This method is same as signalEvent() EXCEPT this method can ONLY be
         called from supervisor mode and/or ISR contexts.
      */
-    virtual void su_signalEvent( uint8_t eventNumber ) noexcept = 0;
+    virtual void su_signalEvent( uint8_t eventIndex ) noexcept = 0;
 
 public:
     /// Virtual Destructor

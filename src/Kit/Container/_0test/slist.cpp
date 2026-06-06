@@ -93,8 +93,8 @@ TEST_CASE( "SList" )
         REQUIRE( emptylist_.head() == nullptr );
         REQUIRE( emptylist_.tail() == nullptr );
 
-        REQUIRE( staticlist_.head() != 0 );
-        REQUIRE( staticlist_.tail() != 0 );
+        REQUIRE( staticlist_.head() != nullptr );
+        REQUIRE( staticlist_.tail() != nullptr );
         REQUIRE( STRING_EQ( staticlist_.get()->m_name, "staticItem" ) );
     }
 
@@ -135,43 +135,43 @@ TEST_CASE( "SList" )
 
         list.put( apple );
 
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
 
         list.put( orange );
 
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "orange" ) );
 
         list.put( cherry );
 
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "cherry" ) );
 
         ptr1 = list.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "apple" ) );
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "orange" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "cherry" ) );
 
         ptr1 = list.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "orange" ) );
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "cherry" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "cherry" ) );
 
         ptr1 = list.get();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "cherry" ) );
         REQUIRE( list.head() == nullptr );
         REQUIRE( list.tail() == nullptr );
@@ -185,13 +185,13 @@ TEST_CASE( "SList" )
     {
         // Note: pop() == get(), top() == head(), push() == putFirst()
         list.push( apple );
-        REQUIRE( list.top() != 0 );
+        REQUIRE( list.top() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
 
         ptr1 = list.pop();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "apple" ) );
         REQUIRE( list.top() == nullptr );
         REQUIRE( list.tail() == nullptr );
@@ -203,7 +203,7 @@ TEST_CASE( "SList" )
         ptr1 = list.pop();
         list.push( plum );
         list.push( pear );
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "cherry" ) );
         REQUIRE( STRING_EQ( list.top()->m_name, "pear" ) );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
@@ -226,20 +226,20 @@ TEST_CASE( "SList" )
         REQUIRE( STRING_EQ( list.tail()->m_name, "orange" ) );
 
         ptr1 = list.getFirst();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "apple" ) );
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "orange" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "orange" ) );
         list.putFirst( *ptr1 );
 
         ptr1 = list.getLast();
-        REQUIRE( ptr1 != 0 );
+        REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_name, "orange" ) );
-        REQUIRE( list.head() != 0 );
+        REQUIRE( list.head() != nullptr );
         REQUIRE( STRING_EQ( list.head()->m_name, "apple" ) );
-        REQUIRE( list.tail() != 0 );
+        REQUIRE( list.tail() != nullptr );
         REQUIRE( STRING_EQ( list.tail()->m_name, "apple" ) );
         list.putLast( *ptr1 );
 
@@ -290,6 +290,104 @@ TEST_CASE( "SList" )
         REQUIRE( list.remove( orange ) == true );
         REQUIRE( list.remove( apple ) == true );
         REQUIRE( list.remove( pear ) == true );
+    }
+
+    SECTION( "insertBefore: missing anchor does not consume item" )
+    {
+        SList<MyItem> foo;
+        MyItem        headItem( "head" );
+        MyItem        missingAnchor( "missing" );
+        MyItem        candidate( "candidate" );
+
+        foo.put( headItem );
+        REQUIRE( foo.find( candidate ) == false );
+
+        // Anchor is not in foo; candidate must remain unused
+        foo.insertBefore( missingAnchor, candidate );
+
+        REQUIRE( foo.find( candidate ) == false );
+        REQUIRE( STRING_EQ( foo.head()->m_name, "head" ) );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "head" ) );
+
+        // This should succeed and prove the item was not consumed by failed insertBefore
+        foo.put( candidate );
+        REQUIRE( foo.find( candidate ) == true );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "candidate" ) );
+    }
+
+    SECTION( "insertAfter: missing anchor does not consume item" )
+    {
+        SList<MyItem> foo;
+        MyItem        headItem( "head" );
+        MyItem        missingAnchor( "missing" );
+        MyItem        candidate( "candidate" );
+
+        foo.put( headItem );
+        REQUIRE( foo.find( candidate ) == false );
+
+        // Anchor is not in foo; candidate must remain unused
+        foo.insertAfter( missingAnchor, candidate );
+
+        REQUIRE( foo.find( candidate ) == false );
+        REQUIRE( STRING_EQ( foo.head()->m_name, "head" ) );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "head" ) );
+
+        // This should succeed and prove the item was not consumed by failed insertAfter
+        foo.put( candidate );
+        REQUIRE( foo.find( candidate ) == true );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "candidate" ) );
+    }
+
+    SECTION( "insertAfter: anchor from another live container does not consume item" )
+    {
+        SList<MyItem> foo;
+        SList<MyItem> bar;
+        MyItem        fooHead( "foo-head" );
+        MyItem        barHead( "bar-head" );
+        MyItem        candidate( "candidate" );
+
+        foo.put( fooHead );
+        bar.put( barHead );
+        REQUIRE( foo.find( candidate ) == false );
+
+        // Anchor is valid but belongs to another container
+        foo.insertAfter( barHead, candidate );
+
+        REQUIRE( foo.find( candidate ) == false );
+        REQUIRE( STRING_EQ( foo.head()->m_name, "foo-head" ) );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "foo-head" ) );
+        REQUIRE( STRING_EQ( bar.head()->m_name, "bar-head" ) );
+        REQUIRE( STRING_EQ( bar.tail()->m_name, "bar-head" ) );
+
+        foo.put( candidate );
+        REQUIRE( foo.find( candidate ) == true );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "candidate" ) );
+    }
+
+    SECTION( "insertBefore: anchor from another live container does not consume item" )
+    {
+        SList<MyItem> foo;
+        SList<MyItem> bar;
+        MyItem        fooHead( "foo-head" );
+        MyItem        barHead( "bar-head" );
+        MyItem        candidate( "candidate" );
+
+        foo.put( fooHead );
+        bar.put( barHead );
+        REQUIRE( foo.find( candidate ) == false );
+
+        // Anchor is valid but belongs to another container
+        foo.insertBefore( barHead, candidate );
+
+        REQUIRE( foo.find( candidate ) == false );
+        REQUIRE( STRING_EQ( foo.head()->m_name, "foo-head" ) );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "foo-head" ) );
+        REQUIRE( STRING_EQ( bar.head()->m_name, "bar-head" ) );
+        REQUIRE( STRING_EQ( bar.tail()->m_name, "bar-head" ) );
+
+        foo.put( candidate );
+        REQUIRE( foo.find( candidate ) == true );
+        REQUIRE( STRING_EQ( foo.tail()->m_name, "candidate" ) );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

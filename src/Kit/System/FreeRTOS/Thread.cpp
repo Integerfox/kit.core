@@ -195,7 +195,7 @@ bool Kit::System::Thread::tryWait() noexcept
 
 bool Kit::System::Thread::timedWait( uint32_t msecs ) noexcept
 {
-    return ulTaskNotifyTake( pdFALSE, msecs * portTICK_PERIOD_MS ) > 0;
+    return ulTaskNotifyTake( pdFALSE, pdMS_TO_TICKS(msecs) ) > 0;
 }
 
 
@@ -217,7 +217,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
     if ( delayTimeMsToWaitIfActive > 0 && threadToDestroy.isActive() )
     {
         threadToDestroy.m_runnable->pleaseStop();
-        threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
+        sleep( delayTimeMsToWaitIfActive );
     }
 
     delete &threadToDestroy;

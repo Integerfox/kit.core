@@ -162,9 +162,10 @@ void EventLoop::signalMultipleEvents( uint32_t events ) noexcept
     m_sema.signal();
 }
 
-void EventLoop::signalEvent( uint8_t eventNumber ) noexcept
+void EventLoop::signalEvent( uint8_t eventIndex ) noexcept
 {
-    signalMultipleEvents( 1 << eventNumber );
+    KIT_SYSTEM_ASSERT( eventIndex < 32 );
+    signalMultipleEvents( 1 << eventIndex );
 }
 
 void EventLoop::su_signalMultipleEvents( uint32_t events ) noexcept
@@ -173,9 +174,10 @@ void EventLoop::su_signalMultipleEvents( uint32_t events ) noexcept
     m_sema.su_signal();
 }
 
-void EventLoop::su_signalEvent( uint8_t eventNumber ) noexcept
+void EventLoop::su_signalEvent( uint8_t eventIndex ) noexcept
 {
-    su_signalMultipleEvents( 1 << eventNumber );
+    KIT_SYSTEM_ASSERT( eventIndex < 32 );
+    su_signalMultipleEvents( 1 << eventIndex );
 }
 
 }  // end namespace

@@ -40,7 +40,7 @@ public:
     using Kit::Io::IInput::read;
 
     /// See Kit::Io::IInput
-    bool read( void* buffer, int numBytes, int& bytesRead ) noexcept override;
+    bool read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept override;
 
     /// See Kit::Io::IInput
     bool available() noexcept override;

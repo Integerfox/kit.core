@@ -16,6 +16,7 @@
 #include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Dm/Mp/String.h"
 #include <string.h>
+#include <stdint.h>
 
 #define STRCMP( s1, s2 ) ( strcmp( s1, s2 ) == 0 )
 #define MAX_STR_LENG     1024
@@ -62,7 +63,7 @@ TEST_CASE( "String" )
     char                                 string[MAX_STR_LENG + 1];
     bool                                 truncated;
     bool                                 valid;
-    mp_apple_.setInvalid();
+    mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
 
     SECTION( "gets" )
     {
@@ -110,6 +111,19 @@ TEST_CASE( "String" )
         REQUIRE( seqNum == seqNum2 );
         mp_apple_.read( valStr );
         REQUIRE( valStr == "Very Lon" );
+
+        // Partial write should only copy srcLen bytes from source payload.
+        // Bytes beyond srcLen in MP storage should remain unchanged.
+        mp_apple_.write( "ZZZZZZZZ" );
+        const char srcPayload[] = { 'A', 'x', 'y', 'z', 'q' };
+        mp_apple_.write( srcPayload, static_cast<size_t>( 1 ), false, IModelPoint::eNO_REQUEST );
+
+        uint8_t stream[64];
+        size_t  bytes = mp_apple_.exportData( stream, sizeof( stream ) );
+        REQUIRE( bytes == mp_apple_.getExternalSize() );
+        REQUIRE( stream[0] == static_cast<uint8_t>( 'A' ) );
+        REQUIRE( stream[1] == 0 );
+        REQUIRE( stream[2] == static_cast<uint8_t>( 'Z' ) );
     }
 
     SECTION( "copy" )
@@ -156,6 +170,17 @@ TEST_CASE( "String" )
 
         result = modelDb_.fromJSON( json );
         REQUIRE( result == false );
+
+        json   = "{name:\"APPLE\", val:{text:\"lockme\"}, locked:true}";
+        result = modelDb_.fromJSON( json );
+        REQUIRE( result == true );
+        valid = mp_apple_.read( valStr );
+        REQUIRE( valid == true );
+        REQUIRE( valStr == "lockme" );
+        REQUIRE( mp_apple_.isLocked() == true );
+
+        // Avoid leaking lock state across sections (static MP instance)
+        mp_apple_.removeLock();
     }
 
     SECTION( "observer" )

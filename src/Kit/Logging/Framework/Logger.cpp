@@ -35,12 +35,12 @@ namespace Framework {
          documented in Doxygen.
 */
 
-static Kit::Container::RingBuffer<EntryData_T>*                          logFifo_;  
+static Kit::Container::RingBufferMP<EntryData_T>*                        logFifo_;
 Kit::System::Mutex                                                       g_lock;
 static IApplication*                                                     app_;
 static KitLoggingClassificationMask_T                                    classificationFilterMask_;
 static KitLoggingPackageMask_T                                           packageFilterMask_;
-uint16_t                                                                 g_overflowCount;
+uint32_t                                                                 g_overflowCount;
 static uint8_t                                                           classificationLoggingError_;
 static Kit::Text::FString<OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN + 1> workBuffer_;
 static uint64_t                                                          overflowedTimestamp_;
@@ -72,13 +72,18 @@ void resetLoggerState() noexcept
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void initialize( IApplication&                            appInstance,
-                 Kit::Container::RingBuffer<EntryData_T>& logFifo,
-                 uint8_t                                  classificationLoggingError ) noexcept
+void initialize( IApplication&                              appInstance,
+                 Kit::Container::RingBufferMP<EntryData_T>& logFifo,
+                 uint8_t                                    classificationLoggingError ) noexcept
 {
     app_                        = &appInstance;
     logFifo_                    = &logFifo;
     classificationLoggingError_ = classificationLoggingError;
+
+    // Hysteresis threshold must be reachable for the configured queue depth.
+    KIT_SYSTEM_ASSERT( OPTION_KIT_LOGGING_FRAMEWORK_MIN_QUEUE_SPACE > 0 );
+    KIT_SYSTEM_ASSERT( OPTION_KIT_LOGGING_FRAMEWORK_MIN_QUEUE_SPACE <= logFifo_->getMaxItems() );
+
     resetWithoutCriticalSection();
 }
 

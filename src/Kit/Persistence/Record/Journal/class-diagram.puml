@@ -1,0 +1,257 @@
+@startuml class-diagram_kitpersistencerecordjournal
+
+title Kit::Persistence::Record::Journal Namespace - Class Diagram
+
+namespace Kit.EventQueue {
+    interface IQueue <<external>> {
+    }
+}
+
+namespace Kit.Container {
+    class "RingBufferMP<ENTRY>" as RingBufferMP <<external>> {
+    }
+}
+
+namespace Kit.Persistence.Record {
+
+    interface IRecord {
+        Atomic-unit managed in
+        persistent storage
+        ==
+        +{abstract} start()
+        +{abstract} stop()
+        +{abstract} getSize()
+    }
+
+    interface IPayload {
+        Access to a Record's
+        data payload
+        ==
+        +{abstract} copyTo()
+        +{abstract} copyFrom()
+        +{abstract} getMaxPayloadSize()
+    }
+
+    interface IDataRecord {
+        Combines IRecord and IPayload;
+        read/write on demand
+        ==
+        +{abstract} writeToMedia()
+        +{abstract} readFromMedia()
+        +{abstract} processNoValidData()
+    }
+
+    interface IChunk {
+        Manages metadata (e.g. CRC)
+        and raw read/write for a
+        Record in persistent storage
+        ==
+        +{abstract} start()
+        +{abstract} stop()
+        +{abstract} loadData()
+        +{abstract} updateData()
+        +{abstract} getMetadataLength()
+    }
+
+    interface IMedia {
+        Abstracts the physical
+        persistent storage medium
+        ==
+        +{abstract} start()
+        +{abstract} stop()
+        +{abstract} write()
+        +{abstract} read()
+        +{abstract} getMaxSize()
+    }
+
+    IDataRecord --|> IRecord
+    IDataRecord --|> IPayload
+    IChunk --> IMedia : uses
+}
+
+namespace Kit.Persistence.Record.Journal {
+
+    interface IEntry {
+        Low-level (not thread-safe)
+        interface for managing journal
+        entries in persistence storage
+        ==
+        +{abstract} getLatest()
+        +{abstract} getNext()
+        +{abstract} getPrevious()
+        +{abstract} getByEntryIndex()
+        +{abstract} getMaxIndex()
+        +{abstract} addEntry()
+        +{abstract} resetHead()
+    }
+
+    interface IHead {
+        Low-level (not thread-safe)
+        interface for managing the
+        Ring Buffer head pointer
+        ==
+        +{abstract} getLatestOffset()
+        +{abstract} setLatestOffset()
+        +{abstract} getCurrentState()
+        +{abstract} restoreState()
+    }
+
+    interface IReader {
+        Thread-safe synchronous
+        interface for reading entries
+        ==
+        +{abstract} retrieveLatest()
+        +{abstract} retrieveNext()
+        +{abstract} retrievePrevious()
+        +{abstract} retrieveByEntryIndex()
+        +{abstract} maxIndex()
+    }
+
+    interface IReset {
+        Thread-safe synchronous
+        interface for resetting entries
+        ==
+        +{abstract} logicalReset()
+    }
+
+    interface RetrieveLatestRequest {
+        ITC async request interface
+        to retrieve the latest entry
+        ==
+        +{abstract} request()
+    }
+
+    interface RetrieveNextRequest {
+        ITC async request interface
+        to retrieve the next newer entry
+        ==
+        +{abstract} request()
+    }
+
+    interface RetrievePreviousRequest {
+        ITC async request interface
+        to retrieve the next older entry
+        ==
+        +{abstract} request()
+    }
+
+    interface RetrieveByEntryIndexRequest {
+        ITC async request interface
+        to retrieve an entry by index
+        ==
+        +{abstract} request()
+    }
+
+    interface LogicalResetRequest {
+        ITC async request interface
+        to logically erase all entries
+        ==
+        +{abstract} request()
+    }
+
+    class EntryRecord {
+        Concrete implementation of IEntry.
+        Manages the Ring Buffer of entries
+        in persistent storage.
+        ==
+        +EntryRecord()
+        +start()
+        +stop()
+        +getSize()
+        +copyTo()
+        +copyFrom()
+        +getMaxPayloadSize()
+        +getLatest()
+        +getNext()
+        +getPrevious()
+        +getByEntryIndex()
+        +getMaxIndex()
+        +addEntry()
+        +resetHead()
+        +writeToMedia()
+        +readFromMedia()
+        +processNoValidData()
+    }
+
+    class HeadRecord {
+        Concrete implementation of IHead.
+        Persists the Ring Buffer head
+        pointer to storage.
+        ==
+        +HeadRecord()
+        +start()
+        +stop()
+        +getSize()
+        +copyTo()
+        +copyFrom()
+        +getMaxPayloadSize()
+        +getLatestOffset()
+        +setLatestOffset()
+        +getCurrentState()
+        +restoreState()
+        +writeToMedia()
+        +readFromMedia()
+        +processNoValidData()
+    }
+
+    class ReaderSync {
+        Provides synchronous ITC
+        wrappers over the raw ITC
+        request messages for reading
+        ==
+        +retrieveLatest()
+        +retrieveNext()
+        +retrievePrevious()
+        +retrieveByEntryIndex()
+    }
+
+    class ResetSync {
+        Provides a synchronous ITC
+        wrapper over the raw ITC
+        request message for resetting
+        ==
+        +logicalReset()
+    }
+
+    class "Server<ENTRY>" as Server <<template>> {
+        Thread-safe Journal management.
+        Monitors a RingBufferMP to write
+        incoming entries and handles all
+        ITC read and reset requests.
+        ==
+        +Server()
+        +request()
+        +maxIndex()
+    }
+
+    EntryRecord --|> IEntry
+    HeadRecord --|> IHead
+
+    IEntry --|> Kit.Persistence.Record.IDataRecord
+    IHead --|> Kit.Persistence.Record.IDataRecord
+
+    ReaderSync --|> IReader
+    ReaderSync --|> RetrieveLatestRequest
+    ReaderSync --|> RetrieveNextRequest
+    ReaderSync --|> RetrievePreviousRequest
+    ReaderSync --|> RetrieveByEntryIndexRequest
+
+    ResetSync --|> IReset
+    ResetSync --|> LogicalResetRequest
+
+    Server --|> ReaderSync
+    Server --|> ResetSync
+
+    ' Constructor argument associations
+    EntryRecord --> Kit.Persistence.Record.IChunk : uses
+    EntryRecord --> Kit.Persistence.Record.IMedia : uses
+    EntryRecord --> IHead : uses
+    HeadRecord --> Kit.Persistence.Record.IChunk : uses
+    Server --> IEntry : uses
+    Server --> Kit.EventQueue.IQueue : uses
+    Server --> Kit.Container.RingBufferMP : uses
+    ReaderSync --> Kit.EventQueue.IQueue : uses
+    ResetSync --> Kit.EventQueue.IQueue : uses
+}
+
+@enduml

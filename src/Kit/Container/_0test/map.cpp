@@ -221,8 +221,13 @@ TEST_CASE( "Map" )
     {
         MyItemMap pear1( "pear1" );
 
+        REQUIRE( map.isInMap( orange ) == false );
+        REQUIRE( map.isInMap( pear1 ) == false );
+
         REQUIRE( map.insert( orange ) == true );
+        REQUIRE( map.isInMap( orange ) == true );
         REQUIRE( map.insert( pear1 ) == true );
+        REQUIRE( map.isInMap( pear1 ) == true );
         REQUIRE( map.insert( pear ) == true );
         REQUIRE( map.insert( cherry ) == true );
         REQUIRE( map.insert( apple ) == true );
@@ -272,12 +277,15 @@ TEST_CASE( "Map" )
 
         bool result = map.removeItem( orange );
         REQUIRE( result == true );
+        REQUIRE( map.isInMap( orange ) == false );
         REQUIRE( map.removeItem( orange ) == false );
         REQUIRE( map.remove( key2 ) == nullptr );
         map.insert( orange );
+        REQUIRE( map.isInMap( orange ) == true );
         ptr1 = map.remove( key2 );
         REQUIRE( ptr1 != nullptr );
         REQUIRE( STRING_EQ( ptr1->m_stringKeyPtr, "orange" ) );
+        REQUIRE( map.isInMap( orange ) == false );
 
         Map<MyItemMap> dst;
         REQUIRE( dst.first() == nullptr );

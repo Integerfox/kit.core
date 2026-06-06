@@ -91,12 +91,17 @@ bool StringBase::isEqualIgnoreCase( const char* string ) const noexcept
 
 bool StringBase::isEqualSubstring( int startpos, int endpos, const char* string ) const noexcept
 {
-    if ( !string )
+    if ( string == nullptr)
     {
         return false;
     }
 
     int len = strlen( m_strPtr );
+    if ( len == 0 )
+    {
+        return false;
+    }
+
     if ( startpos < 0 )
     {
         startpos = 0;
@@ -118,12 +123,17 @@ bool StringBase::isEqualSubstring( int startpos, int endpos, const char* string 
 
 bool StringBase::isEqualSubstringIgnoreCase( int startpos, int endpos, const char* string ) const noexcept
 {
-    if ( !string )
+    if ( string == nullptr)
     {
         return false;
     }
 
     int len = strlen( m_strPtr );
+    if ( len == 0 )
+    {
+        return false;
+    }
+
     if ( startpos < 0 )
     {
         startpos = 0;

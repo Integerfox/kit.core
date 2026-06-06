@@ -22,13 +22,16 @@ namespace Framework {
 // Access to Whitebox variable
 extern uint32_t g_vlogfCallCount;
 extern bool     g_queueOverflowed;
-extern uint16_t g_overflowCount;
+extern uint32_t g_overflowCount;
 extern void     resetLoggerState() noexcept;
 
 namespace Mocked4Test {
 
 ////////////////////////////////////////////////
 KitOnly::KitOnly() noexcept
+    : m_modelDb( "ignoreThisParameter_usedToInvokeTheStaticConstructor" )
+    , m_logFifoCount( m_modelDb, "kitlogfifo" )
+    , m_logFifo( m_logFifoCount, false )
 {
     Framework::initialize( *this, m_logFifo );
 }

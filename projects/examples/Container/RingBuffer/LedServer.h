@@ -34,11 +34,11 @@ class LedServer : public Kit::Itc::OpenCloseSync
 {
 public:
     /// Constructor
-    LedServer( Kit::EventQueue::IQueue&                   myMbox,
+    LedServer( Kit::EventQueue::IQueue&                   myEventQueue,
                Kit::Container::RingBufferMP<FlashCode_T>& flashCodeQueue )
-        : Kit::Itc::OpenCloseSync( myMbox )
+        : Kit::Itc::OpenCloseSync( myEventQueue )
         , m_flashCodeQueue( flashCodeQueue )
-        , m_obFlashCodeQueue( myMbox )
+        , m_obFlashCodeQueue( myEventQueue )
         , m_opened( false )
     {
         m_obFlashCodeQueue.setCallback<LedServer, &LedServer::queueElementCountChanged>( this );

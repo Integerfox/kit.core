@@ -93,7 +93,7 @@ def run( prj_dir, argv):
     # Generate and view HTML
     elif args['view'] :
         # Generate HTML report
-        generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir']] )
+        generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir'], "*/src/Kit/Json/Arduino.h"] )
         generate_html_report( LCOV_OFILE, args['--html-dir'], args )
 
         # View HTML report
@@ -103,7 +103,7 @@ def run( prj_dir, argv):
     # Generate for CI
     elif args['ci'] or args['ciview']:
         # Generate HTML report
-        generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir'], "xpkgs/", "_support/"] )
+        generate_unit_test_report( pkg, prj_dir, args, [args['--test-dir'], "xpkgs/", "_support/", "*/src/Kit/Json/Arduino.h"] )
         generate_html_report( LCOV_OFILE, args['--html-dir'], args )
 
         if args['ciview']:

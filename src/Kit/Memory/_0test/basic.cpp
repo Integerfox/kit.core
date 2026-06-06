@@ -59,7 +59,7 @@ static struct2_T* cache_s2[50];
 
 
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "basic", "[basic]" )
+TEST_CASE( "basic" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 

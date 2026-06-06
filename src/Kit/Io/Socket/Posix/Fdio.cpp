@@ -169,6 +169,7 @@ int Fdio::createListeningSocket( int      port,
         Kit::System::sleep( delayBetweenRetriesMs );
         if ( --retry == 0 )
         {
+            close( fd );
             return result;
         }
     }

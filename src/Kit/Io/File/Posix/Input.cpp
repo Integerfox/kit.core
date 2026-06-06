@@ -39,7 +39,7 @@ bool Input::isOpened() noexcept
 
 
 //////////////////////////
-bool Input::read( void* buffer, int numBytes, int& bytesRead ) noexcept
+bool Input::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
 {
     m_inEos = false;
     return Posix::Fdio::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );

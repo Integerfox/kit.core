@@ -33,11 +33,9 @@ class RingBufferMTAllocate : public RingBufferMT<ITEM>
 {
 public:
     /// Constructor
-    RingBufferMTAllocate()
-        : RingBufferMT<ITEM>( m_rawMemory, N, false )
+    RingBufferMTAllocate( bool initializeMemory = false ) noexcept
+        : RingBufferMT<ITEM>( m_rawMemory, N, initializeMemory )
     {
-        // Initialize the ring buffer memory - it helps with debugging
-        memset( static_cast<void*>(m_rawMemory), 0, sizeof( ITEM ) * N );
     }
 
 protected:

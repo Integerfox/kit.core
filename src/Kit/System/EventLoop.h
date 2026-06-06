@@ -162,13 +162,13 @@ public:
     void signalMultipleEvents( uint32_t events ) noexcept override;
 
     /// See Kit::System::IEventManager
-    void signalEvent( uint8_t eventNumber ) noexcept override;
+    void signalEvent( uint8_t eventIndex ) noexcept override;
 
     /// See Kit::System::IEventManager
     void su_signalMultipleEvents( uint32_t events ) noexcept override;
 
     /// See Kit::System::IEventManager
-    void su_signalEvent( uint8_t eventNumber ) noexcept override;
+    void su_signalEvent( uint8_t eventIndex ) noexcept override;
 
 protected:
     /// Semaphore associated with the EventLoop (note: the Thread semaphore is NOT used)

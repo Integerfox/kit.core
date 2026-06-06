@@ -26,11 +26,14 @@ namespace System {
     in the list, i.e. the amount of time to decrement the individual Timers is
     NOT a function of the number of active Timers.
 
+    NOTE: Software timers are limited to a maximum duration of 49.7 days since
+          the Timer Manager uses a 32bit counter to track elapsed time. 
+          
     The Timer Manager requires that the Timer Manager instances, all Timer
     instances, and the Timer's Context (i.e. the code that executes the
     timer expired callbacks) all execute in the SAME thread.
  */
-class TimerManager: virtual public ITimingSource
+class TimerManager : virtual public ITimingSource
 {
 public:
     /// Constructor
@@ -55,17 +58,17 @@ public:
 
 
 public:
-    /// Register for notification
-    virtual void attach( ICounter& clientToCallback ) noexcept;
+    /// See Kit::System::ITimingSource
+    void attach( ICounter& clientToCallback ) noexcept override;
 
-    /** Unregister for notification.  Returns true if the client was currently
-        attached/registered; else false is returned.
-     */
-    virtual bool detach( ICounter& clientToCallback ) noexcept;
+    /// See Kit::System::ITimingSource
+    bool detach( ICounter& clientToCallback ) noexcept override;
 
-    /// This method converts the requested duration in milliseconds to counter ticks.
-    virtual uint32_t msecToCounts( uint32_t durationInMsecs ) const noexcept;
+    /// See Kit::System::ITimingSource
+    uint32_t msecToCounts( uint32_t durationInMsecs ) const noexcept override;
 
+    /// See Kit::System::ITimingSource
+    bool isRunning( const ICounter& timerToInspect ) const noexcept override;
 
 protected:
     /// Helper method.

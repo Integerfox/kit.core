@@ -51,15 +51,23 @@ bool Guid_T::fromString( const char* stringGuid )
         return false;
     }
 
-
-    // Check for leading/trailing '{}'
+    // Require minimum length before fixed-width parsing to avoid out-of-bounds reads.
+    size_t len = strlen( stringGuid );
     if ( stringGuid[0] == '{' )
     {
+        if ( len < KIT_TYPE_GUID_MAX_FORMATTED_WITH_BRACES_LENGTH )
+        {
+            return false;
+        }
         if ( stringGuid[KIT_TYPE_GUID_MAX_FORMATTED_WITH_BRACES_LENGTH - 1] != '}' )
         {
             return false;
         }
         stringGuid++;
+    }
+    else if ( len < KIT_TYPE_GUID_MAX_FORMATTED_LENGTH )
+    {
+        return false;
     }
 
     // First block of 8 characters

@@ -91,7 +91,7 @@ bool RefCounter::fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_
     // Parse as a numeric -->i.e. 'set a explicit value'
     if ( src.is<uint32_t>() )
     {
-        retSequenceNumber = reset( src.as<uint32_t>(), lockRequest );
+        retSequenceNumber = reset( src.as<uint32_t>(), false, lockRequest );
         return true;
     }
 
@@ -118,7 +118,7 @@ bool RefCounter::fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_
             }
             return false;
         }
-        retSequenceNumber = increment( (uint32_t)numValue, lockRequest );
+        retSequenceNumber = increment( (uint32_t)numValue, false, lockRequest );
         return true;
     }
 
@@ -134,7 +134,7 @@ bool RefCounter::fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_
             }
             return false;
         }
-        retSequenceNumber = decrement( (uint32_t)numValue, lockRequest );
+        retSequenceNumber = decrement( (uint32_t)numValue, false, lockRequest );
         return true;
     }
 

@@ -261,7 +261,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
             if ( delayTimeMsToWaitIfActive > 0 )
             {
                 threadToDestroy.m_runnable->pleaseStop();
-                threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
+                sleep( delayTimeMsToWaitIfActive );
             }
 
             // NOTE: In general it is not a good thing to "kill" threads - but to

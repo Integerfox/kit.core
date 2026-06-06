@@ -44,6 +44,7 @@ public:
         watchdog monitoring for this event loop with periodic scheduling.
      */
     EventLoopWithPScheduling( Interval_T                         intervals[],
+                              unsigned                           numIntervals,
                               Hook_T                             beginThreadProcessing = nullptr,
                               Hook_T                             endThreadProcessing   = nullptr,
                               ReportSlippageFunc_T               slippageFunc          = nullptr,

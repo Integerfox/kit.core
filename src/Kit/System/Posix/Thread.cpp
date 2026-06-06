@@ -21,6 +21,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <algorithm>
+#include <new>
 
 
 // Initialize static class variables
@@ -57,7 +58,7 @@ protected:
     void notify( InitLevel initLevel ) noexcept override
     {
         // Create a thread object for the native thread
-        m_parentThreadPtr_ = new Thread( *this );
+        m_parentThreadPtr_ = new ( std::nothrow ) Thread( *this );
     }
 };
 }  // end namespace
@@ -238,7 +239,7 @@ Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
                                                   void*       stackPtr,
                                                   bool        allowSimTicks ) noexcept
 {
-    return new Kit::System::Posix::Thread( runnable, name, priority, stackSize, SCHED_OTHER, allowSimTicks );
+    return new ( std::nothrow ) Kit::System::Posix::Thread( runnable, name, priority, stackSize, SCHED_OTHER, allowSimTicks );
 }
 
 
@@ -248,7 +249,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
     if ( delayTimeMsToWaitIfActive > 0 && threadToDestroy.isActive() )
     {
         threadToDestroy.m_runnable->pleaseStop();
-        threadToDestroy.timedWait( delayTimeMsToWaitIfActive );
+        Kit::System::sleep( delayTimeMsToWaitIfActive );
     }
 
     delete &threadToDestroy;

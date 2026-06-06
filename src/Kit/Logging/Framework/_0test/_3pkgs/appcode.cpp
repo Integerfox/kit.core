@@ -13,7 +13,9 @@
 #include "Kit/Logging/Framework/_0test/_3pkgs/Foo/Logging/Pkg/Log.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/Container/RingBufferAllocate.h"
+#include "Kit/Container/RingBufferMPAllocate.h"
+#include "Kit/Dm/ModelDatabase.h"
+#include "Kit/Dm/Mp/Uint32.h"
 
 using namespace Foo::Logging::Pkg;
 using namespace Kit::Logging::Framework;
@@ -23,7 +25,9 @@ using namespace Kit::Logging::Framework;
 
 // Create the Application's Logging instance for the tests. 
 // Note: Not static so it can be shared with other tests
-Kit::Container::RingBufferAllocate<EntryData_T, 5> g_logFifo;
+static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static Kit::Dm::Mp::Uint32    mp_logFifoCount_( modelDb_, "logfifo3pkgs" );
+Kit::Container::RingBufferMPAllocate<EntryData_T, 5> g_logFifo( mp_logFifoCount_, false ); // IMPORTANT: Must set the initialize-memory flag to FALSE since the EntryData_T type has a non-trivial constructor
 Foo::Logging::App::Foo g_logApp( g_logFifo );
 
 ////////////////////////////////////////////////////////////////////////////////

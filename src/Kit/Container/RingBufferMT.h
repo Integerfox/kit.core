@@ -29,7 +29,7 @@ class RingBufferMT : public RingBuffer<ITEM>
 {
 public:
     /// Constructor
-    RingBufferMT( ITEM* memoryBuffer, unsigned N, bool initializeMemory = true )
+    RingBufferMT( ITEM* memoryBuffer, unsigned N, bool initializeMemory = false ) noexcept
         : RingBuffer<ITEM>( memoryBuffer, N, initializeMemory )
     {
     }

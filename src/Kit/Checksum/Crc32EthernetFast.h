@@ -18,12 +18,13 @@ namespace Kit {
 ///
 namespace Checksum {
 
-/** This class provides an implementation for the 32 Bit "Ethernet"
-    standard CRC.  The CRC has following characteristics:
+/** This class provides an implementation for the CRC-32/IEEE 802.3
+    (Ethernet) variant. The CRC has following characteristics:
         o The polynomial is: x32 + x26 + x23 + x22 + x16 + x12 + x11 + x10 + x8 + x7 + x5 + x4 + x2 + x + 1
-        o The Data bytes are NOT reflected
-        o The remainder is NOT reflected.
-        o The final remainder is NOT XOR'd
+        o The initial remainder is 0xFFFFFFFF.
+        o The Data bytes are reflected
+        o The remainder is reflected.
+        o The final remainder is XOR'd with 0xFFFFFFFF
  */
 class Crc32EthernetFast : public IEdc
 {
@@ -39,7 +40,7 @@ public:
     /// See Kit::Checksum::IEdc
     void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept override;
 
-    /// See Kit::Checksum::IEdc. The checksum is Big Endian in the 'destBuffer'
+    /// See Kit::Checksum::IEdc. The checksum is Little Endian in the 'destBuffer'
     bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept override;
 
     /// See Kit::Checksum::IEdc

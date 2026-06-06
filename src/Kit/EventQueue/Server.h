@@ -59,7 +59,10 @@ public:
 
 public:
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void pleaseStop() noexcept override                                 { EventLoop::pleaseStop(); }
+    void pleaseStop() noexcept override;
+
+    /// See Kit::EventQueue::IMsgNotification
+    void postSync( Kit::Itc::IMessage& msg ) noexcept override;
     
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
     int  signal() noexcept override                                     { return EventLoop::signal(); }
@@ -87,6 +90,9 @@ public:
     
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
     uint32_t msecToCounts( uint32_t ms ) const noexcept override        { return TimerManager::msecToCounts( ms ); }
+
+    /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
+    bool isRunning( const Kit::System::ICounter& timerToInspect ) const noexcept override { return TimerManager::isRunning( timerToInspect ); }
 
 protected:
     /// See Kit::System::IRunnable
@@ -130,7 +136,8 @@ public:
 
 public:
     // Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void pleaseStop() noexcept override                                 { EventLoop::pleaseStop(); }
+    void pleaseStop() noexcept override;
+    void postSync( Kit::Itc::IMessage& msg ) noexcept override;
     int  signal() noexcept override                                     { return EventLoop::signal(); }
     int  su_signal() noexcept override                                  { return EventLoop::su_signal(); }
     void signalMultipleEvents( uint32_t events ) noexcept override      { EventLoop::signalMultipleEvents( events ); }
@@ -140,6 +147,7 @@ public:
     void attach( Kit::System::ICounter& c ) noexcept override           { TimerManager::attach( c ); }
     bool detach( Kit::System::ICounter& c ) noexcept override           { return TimerManager::detach( c ); }
     uint32_t msecToCounts( uint32_t ms ) const noexcept override        { return TimerManager::msecToCounts( ms ); }
+    bool isRunning( const Kit::System::ICounter& timerToInspect ) const noexcept override { return TimerManager::isRunning( timerToInspect ); }
 
 protected:
     /// See Kit::System::IRunnable
