@@ -3,4 +3,4 @@
 @namespace Kit::Driver::Dio @brief
 
 The Dio namespace defines a platform independent interface for Digital I/O
-operations.  Currently only an output interface is defined.
+operations.

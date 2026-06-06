@@ -12,6 +12,17 @@ interface backed by SPI NOR flash storage.  The implementation features:
 - Global sequence numbering for write ordering
 - Two-phase sector reclamation (scan-then-erase)
 
-Supports configurable NV page sizes and total storage sizes.  See the
-design documentation in docs/manual/nvflash/ for detailed descriptions
-of the NV Record structure, sector layout, and wear leveling algorithms.
+Supports configurable NV page sizes and total storage sizes.
+
+## Class Diagrams
+
+![Kit::Driver::NV::Flash Class Diagram](class-diagram-nv-flash_kitdrivernvflash.png)
+
+![Kit::Driver::Flash Class Diagram](class-diagram-flash_kitdriverflash.png)
+
+![Kit::Driver::SPI Class Diagram](class-diagram-spi_kitdriverspi.png)
+
+## Design Documentation
+
+- [NV Flash Design - Terminology, Record Structure, and Sector Layout](nv-flash-illustration.md)
+- [NV Flash Design Review Response - Address Mapping and Performance](nv-design-review-response.md)
