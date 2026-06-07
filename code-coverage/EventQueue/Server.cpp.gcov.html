@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-04 11:59:14</td>
+            <td class="headerValue">2026-06-07 02:00:45</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -88,19 +88,19 @@
 <span id="L26"><span class="lineNum">      26</span>                 :             : {</span>
 <span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">          73 : }</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : </span>
-<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          64 : void Server::pleaseStop() noexcept</span></span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          65 : void Server::pleaseStop() noexcept</span></span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : {</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     // Contract: all ITC activity for this thread must already be shut down</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             :     // before pleaseStop() is requested.</span>
-<span id="L33"><span class="lineNum">      33</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 64 times"> + </span>]:<span class="tlaGNC">          64 :     if ( Mailbox::isPendingMessage() )</span></span>
+<span id="L33"><span class="lineNum">      33</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 65 times"> + </span>]:<span class="tlaGNC">          65 :     if ( Mailbox::isPendingMessage() )</span></span>
 <span id="L34"><span class="lineNum">      34</span>                 :             :     {</span>
 <span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         auto *ownerThread = getThread();</span></span>
 <span id="L36"><span class="lineNum">      36</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         Kit::System::FatalError::logf( Kit::System::Shutdown::eITC,</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :                                        &quot;There are pending ITC message(s) for thread=%s&quot;,</span>
 <span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaUNC">           0 :                                        ownerThread? ownerThread-&gt;getName() : &quot;&lt;unknown&gt;&quot;);</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     }</span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC tlaBgGNC">          64 :     EventLoop::pleaseStop();</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          64 : }</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC tlaBgGNC">          65 :     EventLoop::pleaseStop();</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          65 : }</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : </span>
 <span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         112 : void Server::postSync( Kit::Itc::IMessage&amp; msg ) noexcept</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : {</span>
@@ -108,7 +108,7 @@
 <span id="L46"><span class="lineNum">      46</span>                 :             :     // block the owner thread and deadlock request processing.</span>
 <span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">         112 :     auto* ownerThread   = getThread();</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         112 :     auto* currentThread = Kit::System::Thread::tryGetCurrent();</span></span>
-<span id="L49"><span class="lineNum">      49</span>   [<span class="tlaGBC" title="Branch 0 was taken 81 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 31 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 81 times"> + </span>]:<span class="tlaGNC">         112 :     if ( ownerThread &amp;&amp; currentThread &amp;&amp; ownerThread == currentThread )</span></span>
+<span id="L49"><span class="lineNum">      49</span>   [<span class="tlaGBC" title="Branch 0 was taken 83 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 29 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 83 times"> + </span>]:<span class="tlaGNC">         112 :     if ( ownerThread &amp;&amp; currentThread &amp;&amp; ownerThread == currentThread )</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     {</span>
 <span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         Kit::System::FatalError::logf( Kit::System::Shutdown::eITC,</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :                                        &quot;Deadlock contract violation: postSync() called from owning thread=%s&quot;,</span>
@@ -125,10 +125,10 @@
 <span id="L63"><span class="lineNum">      63</span>                 :             :     bool run = true;</span>
 <span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">          43 :     while ( run )</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :     {</span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">        2074 :         run = serverWaitAndProcessEvents();</span></span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">        2074 :         if ( run )</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">        2068 :         run = serverWaitAndProcessEvents();</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">        2068 :         if ( run )</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :         {</span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        2031 :             serverProcessEvents();</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        2025 :             serverProcessEvents();</span></span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :         }</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     }</span>
 <span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">          43 :     stopEventLoop();</span></span>

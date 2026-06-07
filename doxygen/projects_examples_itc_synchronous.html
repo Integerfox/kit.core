@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 324-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -48,11 +48,11 @@ $(function() {
 <p><a class="anchor" id="md__2home_2runner_2work_2kit_8core_2kit_8core_2projects_2examples_2_itc_2_synchronous_2_r_e_a_d_m_e"></a> </p>
 <p>The directory contains a example application on how to use KIT's synchronous ITC messaging. The example contains server widget. The server widget is responsible for flashing a LED a specific rate. The application's main thread uses a synchronous ITC message to set the flash rate.</p>
 <p><b>NOTE:</b> The server widget also uses the KIT open/close synchronous ITC messages for its software timer initialization and shutdown.</p>
-<h1><a class="anchor" id="autotoc_md152"></a>
+<h1><a class="anchor" id="autotoc_md153"></a>
 Use cases</h1>
 <p>The most common use is to use synchronous ITC messaging for doing in-thread initialization and shutdown of widgets (i.e. see the <a href="https://github.com/Integerfox/kit.core/blob/main/src/Kit/Itc/OpenCloseSync.h">OpenCloseSync.h</a>. In this use case the 'main application' thread is only used to start and shutdown the application's widget - so there is no/minimal danger of deadlock. In addition the synchronous nature of the messages allows the widgets to initialized/shutdown sequentially.</p>
 <p>Another common use case when there is dedicated thread that provides a single service. For example a single thread that is responsible for all reads and writes to persistent storage.</p>
-<h1><a class="anchor" id="autotoc_md153"></a>
+<h1><a class="anchor" id="autotoc_md154"></a>
 Details, Constraints, Requirements</h1>
 <ul>
 <li>When using synchronous ITC messages - the message client and server <b>must</b> be in different threads. Another constraint/concern is when (or if) a <em>server</em> issues a synchronous ITC message request when processing a received ITC message. This opens the possibility of dead-lock occurring. This is important because synchronous ITC messaging can be <em>wrapped</em> or <em>abstracted</em> as a simple function call. Or said another way while synchronous ITC message is simpler/easier than asynchronous ITC messaging, however it is <b>dangerous</b> and requires <em>guard rails</em>.<ul>
@@ -65,18 +65,18 @@ Details, Constraints, Requirements</h1>
 <li>It is recommended to have a single exit point from the message request function - that calls returnToSender() on the message - to ensure that the message transaction completes.</li>
 <li>The <em>server</em> has <b>no</b> knowledge of the synchronous/asynchronous semantics of the messaging. It is the <b>client's</b> usage that determine the semantics of the ITC message. This done by which concrete <a href="https://github.com/Integerfox/kit.core/blob/main/src/Kit/Itc/IReturnHandler.h">IReturnHandler</a> instance is used when the ITC message is created.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md154"></a>
+<h1><a class="anchor" id="autotoc_md155"></a>
 Class Diagram</h1>
 <div class="image">
 <img src="classDiagram_examplesitcsynchronous.png" alt=""/>
 <div class="caption">
 Transaction Example Class Diagram</div></div>
-    <h1><a class="anchor" id="autotoc_md155"></a>
+    <h1><a class="anchor" id="autotoc_md156"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="namespace_kit_1_1_itc.html">Kit::Itc namespace documentation</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md156"></a>
+<h1><a class="anchor" id="autotoc_md157"></a>
 Implementation</h1>
 <ul>
 <li>Root source directory: <a href="https://github.com/Integerfox/kit.core/blob/main/projects/examples/Itc/Synchronous">projects/examples/Itc/Synchronous</a></li>
@@ -91,7 +91,7 @@ Implementation</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jun 4 2026 11:53:02 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
