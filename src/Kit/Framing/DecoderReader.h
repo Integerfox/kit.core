@@ -26,18 +26,18 @@ namespace Framing {
 class DecoderReader : public IDecoder
 {
 protected:
-    /** Constructor. The size of the rawInputBuffer determines how big of
+    /** Constructor. The size of the workBuffer determines how big of
         'chunks' data is read from the "input source", i.e. it is a working
         buffer and does NOT have to be the size of the maximum possible input
         frame.
      */
-    DecoderReader( uint8_t* rawInputBuffer, Kit::Type::SSize_T sizeOfRawInputBuffer )
+    DecoderReader( uint8_t* workBuffer, Kit::Type::SSize_T sizeOfWorkBuffer )
     : m_dataPtr( nullptr )
-    , m_buffer( rawInputBuffer )
+    , m_buffer( workBuffer )
     , m_framePtr( nullptr )
     , m_dataLen( 0 )
     , m_frameSize( 0 )
-    , m_bufSize( sizeOfRawInputBuffer )
+    , m_bufSize( sizeOfWorkBuffer )
     , m_inFrame( false )
     , m_escaping( false )
     {
@@ -56,7 +56,7 @@ public:
                        bool&               isEof ) noexcept override;
 
     /// See Kit::Framing::IDecoder
-    virtual bool oobRead( uint8_t*            buffer,
+    virtual bool oobRead( uint8_t*            dstBuffer,
                           Kit::Type::SSize_T  numBytes,
                           Kit::Type::SSize_T& bytesRead ) noexcept override;
 
@@ -78,7 +78,7 @@ protected:
         'bytesRead'. Returns true if successful, or false if End-of-Input
         was encountered.
      */
-    virtual bool read( void*               buffer,
+    virtual bool read( void*               dstBuffer,
                        Kit::Type::SSize_T  numBytes,
                        Kit::Type::SSize_T& bytesRead ) = 0;
 
@@ -87,6 +87,7 @@ protected:
      */
     virtual uint8_t decodeEscapedByte( uint8_t escapedByte );
 
+protected:
     /// Helper method to initialize frame processing
     virtual void initializeScan() noexcept;
 
@@ -94,19 +95,19 @@ protected:
     /// Pointer to the next unprocessed character in my raw input buffer
     uint8_t* m_dataPtr;
 
-    /// Raw input buffer for reading characters in 'chunks' from my Input source (i.e. minimize the calls to read())
+    /// Work buffer for reading characters in 'chunks' from my Input source (i.e. minimize the calls to read())
     uint8_t* m_buffer;
 
     /// Pointer to the next decoded frame character
     uint8_t* m_framePtr;
 
-    /// Current number of characters remaining in my raw input buffer
+    /// Current number of characters remaining in my work buffer
     Kit::Type::SSize_T m_dataLen;
 
     /// Number of bytes current decoded for the frame
     Kit::Type::SSize_T m_frameSize;
 
-    /// Size of my raw input buffer
+    /// Size of my work buffer
     Kit::Type::SSize_T m_bufSize;
 
     /// Flag: I am currently in a Frame

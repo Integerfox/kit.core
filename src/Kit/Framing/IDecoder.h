@@ -64,7 +64,7 @@ public:
         Returns true if successful, or false if End-of-Stream was encountered or
         if the input source is in a frame.
      */
-    virtual bool oobRead( uint8_t*            buffer,
+    virtual bool oobRead( uint8_t*            dstBuffer,
                           Kit::Type::SSize_T  numBytes,
                           Kit::Type::SSize_T& bytesRead ) noexcept = 0;
 
