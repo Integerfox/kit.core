@@ -80,7 +80,7 @@ public:
         there is no guaranty/information-available with  respect to how many (if
         any) bytes where transmitted.
      */
-    bool write( const void* data, ByteCount_T numBytesToTx ) noexcept;
+    bool write( const void* data, Kit::Type::SSize_T numBytesToTx ) noexcept;
 
 
 public:
@@ -94,7 +94,7 @@ public:
               NOT put into the inbound buffer.  A free running counter is
               maintain of the number of framing errors encountered.
      */
-    bool read( void* data, ByteCount_T maxBytes, ByteCount_T& numBytesRx ) noexcept;
+    bool read( void* data, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& numBytesRx ) noexcept;
 
 
     /** This method returns true if at least one byte is available in the

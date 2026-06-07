@@ -50,7 +50,7 @@ bool FileAdapter::write( Size_T offset, const void* srcData, Size_T srcLen ) noe
     bool result = fd.setAbsolutePos( offset );
     if ( result )
     {
-        result = fd.write( srcData, static_cast<Io::ByteCount_T>( srcLen ) );
+        result = fd.write( srcData, static_cast<Io::Kit::Type::SSize_T>( srcLen ) );
     }
 
     fd.close();
@@ -78,7 +78,7 @@ Size_T FileAdapter::read( Size_T offset, void* dstBuffer, Size_T bytesToRead ) n
         return KIT_PERSISTENCE_SIZE_MAX;
     }
 
-    result = fd.read( dstBuffer, static_cast<Io::ByteCount_T>( bytesToRead ) );
+    result = fd.read( dstBuffer, static_cast<Io::Kit::Type::SSize_T>( bytesToRead ) );
 
     fd.close();
     return result ? bytesToRead : KIT_PERSISTENCE_SIZE_MAX;

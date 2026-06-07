@@ -117,12 +117,12 @@ TEST_CASE( "write/close")
     fd.flush();
     
     REQUIRE( fd.isEof() == true );
-    Kit::Io::ByteCount_T pos;
+    Kit::Type::SSize_T pos;
     REQUIRE( fd.currentPos( pos ) == false );
     REQUIRE( fd.setAbsolutePos( 1 ) == false );
     REQUIRE( fd.setRelativePos( 1 ) == false );
     REQUIRE( fd.setToEof() == false );
-    Kit::Io::ByteCount_T len = 22;
+    Kit::Type::SSize_T len = 22;
     REQUIRE( fd.length( len ) == false );
 
 

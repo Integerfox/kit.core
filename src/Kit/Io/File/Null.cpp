@@ -23,7 +23,7 @@ Null::Null()
 
 
 //////////////////////
-bool Null::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool Null::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     bytesRead = 0;
     return false;
@@ -36,7 +36,7 @@ bool Null::available() noexcept
 
 
 //////////////////////
-bool Null::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool Null::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     bytesWritten = maxBytes;
     return m_opened;
@@ -65,24 +65,24 @@ bool Null::isEof() noexcept
     return isEos();
 }
 
-bool Null::length( ByteCount_T& len ) noexcept
+bool Null::length( Kit::Type::SSize_T& len ) noexcept
 {
     len = 0;
     return m_opened;
 }
 
-bool Null::currentPos( ByteCount_T& curPos ) noexcept
+bool Null::currentPos( Kit::Type::SSize_T& curPos ) noexcept
 {
     curPos = 0;
     return m_opened;
 }
 
-bool Null::setRelativePos( ByteCount_T deltaOffset ) noexcept
+bool Null::setRelativePos( Kit::Type::SSize_T deltaOffset ) noexcept
 {
     return m_opened;
 }
 
-bool Null::setAbsolutePos( ByteCount_T newoffset ) noexcept
+bool Null::setAbsolutePos( Kit::Type::SSize_T newoffset ) noexcept
 {
     return m_opened;
 }

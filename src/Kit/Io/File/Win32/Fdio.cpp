@@ -52,7 +52,7 @@ KitIoFileHandle_T Fdio::open( const char* fileEntryName, bool readOnly, bool for
     return fd;
 }
 
-bool Fdio::length( KitIoFileHandle_T fd, ByteCount_T& length ) noexcept
+bool Fdio::length( KitIoFileHandle_T fd, Kit::Type::SSize_T& length ) noexcept
 {
     if ( fd == INVALID_HANDLE_VALUE )
     {
@@ -71,11 +71,11 @@ bool Fdio::length( KitIoFileHandle_T fd, ByteCount_T& length ) noexcept
         }
     }
 
-    length = static_cast<ByteCount_T>( len );
+    length = static_cast<Kit::Type::SSize_T>( len );
     return true;
 }
 
-bool Fdio::currentPos( KitIoFileHandle_T fd, ByteCount_T& currentPos ) noexcept
+bool Fdio::currentPos( KitIoFileHandle_T fd, Kit::Type::SSize_T& currentPos ) noexcept
 {
     if ( fd == INVALID_HANDLE_VALUE )
     {
@@ -94,11 +94,11 @@ bool Fdio::currentPos( KitIoFileHandle_T fd, ByteCount_T& currentPos ) noexcept
         }
     }
 
-    currentPos = static_cast<ByteCount_T>( pos );
+    currentPos = static_cast<Kit::Type::SSize_T>( pos );
     return true;
 }
 
-bool Fdio::setRelativePos( KitIoFileHandle_T fd, ByteCount_T deltaOffset ) noexcept
+bool Fdio::setRelativePos( KitIoFileHandle_T fd, Kit::Type::SSize_T deltaOffset ) noexcept
 {
     if ( fd == INVALID_HANDLE_VALUE )
     {
@@ -116,7 +116,7 @@ bool Fdio::setRelativePos( KitIoFileHandle_T fd, ByteCount_T deltaOffset ) noexc
     return true;
 }
 
-bool Fdio::setAbsolutePos( KitIoFileHandle_T fd, ByteCount_T newoffset ) noexcept
+bool Fdio::setAbsolutePos( KitIoFileHandle_T fd, Kit::Type::SSize_T newoffset ) noexcept
 {
     if ( fd == INVALID_HANDLE_VALUE )
     {

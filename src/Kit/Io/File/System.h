@@ -95,7 +95,7 @@ public:
     /** Returns the size, in bytes, of the file.  If the File Entry is not
         a file or an error occurs, then 0 is returned.
      */
-    static ByteCount_T size( const char* fsEntryName ) noexcept;
+    static Kit::Type::SSize_T size( const char* fsEntryName ) noexcept;
 
     /** Returns the time/date the file entry was last modified. If an error
         occurred, then  ((time_t)-1) is returned.
@@ -107,7 +107,7 @@ public:
     struct Info_T
     {
         /// Size, in bytes, of the file entry
-        ByteCount_T m_size;
+        Kit::Type::SSize_T m_size;
 
         /// Time the file entry was last modified/written
         time_t m_mtime;

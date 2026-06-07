@@ -141,7 +141,7 @@ void StreamDriver::stop( void ) noexcept
 
 
 ////////////////////////
-bool StreamDriver::write( const void* data, ByteCount_T numBytesToTx ) noexcept
+bool StreamDriver::write( const void* data, Kit::Type::SSize_T numBytesToTx ) noexcept
 {
     // Fail the write if the driver has not been started
     if ( m_uartHdl == nullptr )
@@ -277,7 +277,7 @@ size_t StreamDriver::getRXErrorsCounts( bool clearCount ) noexcept
 }
 
 
-bool StreamDriver::read( void* data, ByteCount_T maxBytes, ByteCount_T& numBytesRx ) noexcept
+bool StreamDriver::read( void* data, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& numBytesRx ) noexcept
 {
     numBytesRx = 0;
 

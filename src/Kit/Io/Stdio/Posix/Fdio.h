@@ -43,7 +43,7 @@ public:
 
         Returns true if successful; else false on error.
      */
-    static bool write( int fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept;
+    static bool write( int fd, bool& eosFlag, const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept;
 
     /// Flushes the file descriptor 'fd'
     static void flush( int fd ) noexcept;
@@ -68,7 +68,7 @@ public:
 
         Returns true if successful; else false on error.
      */
-    static bool read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept;
+    static bool read( int fd, bool& eosFlag, void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept;
 
     /** Returns true if there is data available to be read from the file descriptor
      */

@@ -41,7 +41,7 @@ TEST_CASE( "iposition output" )
 
     SECTION( "output: absolute" )
     {
-        Kit::Io::ByteCount_T pos;
+        Kit::Type::SSize_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
         REQUIRE( pos == 0 );
         REQUIRE( fd.write( OUTPUT_TXT ) );
@@ -51,7 +51,7 @@ TEST_CASE( "iposition output" )
         fd.setAbsolutePos( 0 );
         REQUIRE( fd.write( OUTPUT_TXT2 ) );
         fd.flush();
-        Kit::Io::ByteCount_T len;
+        Kit::Type::SSize_T len;
         REQUIRE( fd.length( len ) == true );
         REQUIRE( len == strlen( OUTPUT_TXT ) );
         REQUIRE( fd.currentPos( pos ) == true );
@@ -75,7 +75,7 @@ TEST_CASE( "iposition output" )
 
     SECTION( "output: relative" )
     {
-        Kit::Io::ByteCount_T pos;
+        Kit::Type::SSize_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
         REQUIRE( pos == 0 );
         REQUIRE( fd.write( OUTPUT_TXT ) );
@@ -90,7 +90,7 @@ TEST_CASE( "iposition output" )
 
         Input infd( FILE_NAME );
         REQUIRE( infd.isOpened() );
-        Kit::Io::ByteCount_T len;
+        Kit::Type::SSize_T len;
         REQUIRE( infd.length( len ) == true );
         REQUIRE( len == strlen( OUTPUT_TXT ) );
         REQUIRE( infd.read( buffer ) == true );
@@ -103,7 +103,7 @@ TEST_CASE( "iposition output" )
 
     SECTION( "in/out: absolute" )
     {
-        Kit::Io::ByteCount_T pos;
+        Kit::Type::SSize_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
         REQUIRE( pos == 0 );
         REQUIRE( fd.write( OUTPUT_TXT ) );
@@ -113,7 +113,7 @@ TEST_CASE( "iposition output" )
         fd.setAbsolutePos( 0 );
         REQUIRE( fd.write( OUTPUT_TXT2 ) );
         fd.flush();
-        Kit::Io::ByteCount_T len;
+        Kit::Type::SSize_T len;
         REQUIRE( fd.length( len ) == true );
         REQUIRE( len == strlen( OUTPUT_TXT ) );
         REQUIRE( fd.currentPos( pos ) == true );
@@ -137,7 +137,7 @@ TEST_CASE( "iposition output" )
 
     SECTION( "in/out: relative" )
     {
-        Kit::Io::ByteCount_T pos;
+        Kit::Type::SSize_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
         REQUIRE( pos == 0 );
         REQUIRE( fd.write( OUTPUT_TXT ) );
@@ -152,7 +152,7 @@ TEST_CASE( "iposition output" )
 
         Input infd( FILE_NAME );
         REQUIRE( infd.isOpened() );
-        Kit::Io::ByteCount_T len;
+        Kit::Type::SSize_T len;
         REQUIRE( infd.length( len ) == true );
         REQUIRE( len == strlen( OUTPUT_TXT ) );
         REQUIRE( infd.read( buffer ) == true );
@@ -165,7 +165,7 @@ TEST_CASE( "iposition output" )
 
     SECTION( "in: absolute" )
     {
-        Kit::Io::ByteCount_T pos;
+        Kit::Type::SSize_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
         REQUIRE( pos == 0 );
         REQUIRE( fd.write( OUTPUT_TXT ) );
@@ -175,7 +175,7 @@ TEST_CASE( "iposition output" )
 
         Input infd( FILE_NAME );
         REQUIRE( infd.setAbsolutePos( strlen( OUTPUT_TXT2 ) ) == true );
-        Kit::Io::ByteCount_T curpos;
+        Kit::Type::SSize_T curpos;
         REQUIRE( infd.currentPos( curpos ) == true );
         REQUIRE( curpos == strlen( OUTPUT_TXT2 ) );
         REQUIRE( infd.read( buffer ) == true );
@@ -188,7 +188,7 @@ TEST_CASE( "iposition output" )
 
     SECTION( "in: relative" )
     {
-        Kit::Io::ByteCount_T pos;
+        Kit::Type::SSize_T pos;
         REQUIRE( fd.currentPos( pos ) == true );
         REQUIRE( pos == 0 );
         REQUIRE( fd.write( OUTPUT_TXT ) );
@@ -199,7 +199,7 @@ TEST_CASE( "iposition output" )
         Input infd( FILE_NAME );
         REQUIRE( infd.setToEof() == true );
         REQUIRE( infd.setRelativePos( (long)( strlen( OUTPUT_TXT2 ) ) - (long)( strlen( OUTPUT_TXT ) ) ) == true );
-        Kit::Io::ByteCount_T curpos;
+        Kit::Type::SSize_T curpos;
         REQUIRE( infd.currentPos( curpos ) == true );
         REQUIRE( curpos == strlen( OUTPUT_TXT2 ) );
 

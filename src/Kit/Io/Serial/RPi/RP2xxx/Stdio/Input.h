@@ -50,7 +50,7 @@ public:
     using Kit::Io::IInput::read;
 
     /// See Kit::Io::IInput
-    bool read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept override;
+    bool read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept override;
 
     /// See Kit::Io::IInput
     bool available() noexcept override;
@@ -63,7 +63,7 @@ public:
 
 protected:
     /// Cached byte when 'peeking' into the input stream
-    ByteCount_T m_nextByte;
+    Kit::Type::SSize_T m_nextByte;
 };
 
 

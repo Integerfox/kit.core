@@ -61,7 +61,7 @@ TEST_CASE( "read" )
         line.removeTrailingSpaces();
         REQUIRE( line.isEmpty() );
 
-        Kit::Io::ByteCount_T len;
+        Kit::Type::SSize_T len;
         REQUIRE( fd.length( len ) == true );
         REQUIRE( ( len == WIN32_TESTINPUT_TXT_FILE_LENGTH || len == POSIX_TESTINPUT_TXT_FILE_LENGTH ) );
 
@@ -113,12 +113,12 @@ TEST_CASE( "read" )
         REQUIRE( fd.available() == false );
 
         REQUIRE( fd.isEof() == true );
-        Kit::Io::ByteCount_T pos;
+        Kit::Type::SSize_T pos;
         REQUIRE( fd.currentPos( pos ) == false );
         REQUIRE( fd.setAbsolutePos( 1 ) == false );
         REQUIRE( fd.setRelativePos( 1 ) == false );
         REQUIRE( fd.setToEof() == false );
-        Kit::Io::ByteCount_T len = 22;
+        Kit::Type::SSize_T len = 22;
         REQUIRE( fd.length( len ) == false );
     }
 

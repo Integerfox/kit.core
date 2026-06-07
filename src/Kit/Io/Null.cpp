@@ -22,7 +22,7 @@ namespace Io {
 }
 
 /////////////////////
-bool Null::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept 
+bool Null::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept 
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 
@@ -36,7 +36,7 @@ bool Null::available() noexcept
     return false;
 }
 
-bool Null::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept 
+bool Null::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept 
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 

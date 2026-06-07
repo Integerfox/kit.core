@@ -42,7 +42,7 @@ void test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
             Bsp_toggle_debug1();
         }
 
-        Kit::Io::ByteCount_T bytesRead  = 0;
+        Kit::Type::SSize_T bytesRead  = 0;
         if ( !infd.read( inbuffer, MAX_INPUT, bytesRead ) )
         {
             tmpString.format( "\n**** ERROR occurred while reading input stream (requested bytes=%d)\n", MAX_INPUT );
