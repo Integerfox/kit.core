@@ -52,8 +52,11 @@ namespace Tokenizer {
     string. To enter a literal QUOTE character within a text string, precede the
     QUOTE character with the ESC character (e.g., \").  To enter a literal ESC
     character within a text string, precede the character with ESC character
-    (e.g., \\). IMPORTANT NOTE: The QUOTE and ESC characters are REMOVED from
+    (e.g., \\). IMPORTANT: The QUOTE and ESC characters are REMOVED from
     the string when it is tokenized!
+
+    NOTE: A TEXT STRING can be empty (e.g. \"\").  When/if encountered, an 
+          empty TEXT STRING is treated as a parameter with zero string length.
 
 
 </pre>*/
@@ -61,7 +64,7 @@ class TextBlock
 {
 public:
     /** Constructor.  Requires a pointer to the 'raw' string to be tokenized.
-        Note: ALL OF THE PARSING OCCURS IN THIS METHOD.
+        NOTE: ALL OF THE PARSING OCCURS IN THIS METHOD.
      */
     TextBlock( char* string,
                char  delimiter  = ',',

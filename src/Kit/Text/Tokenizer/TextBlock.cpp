@@ -10,6 +10,7 @@
 
 #include "TextBlock.h"
 #include "Kit/Text/Strip.h"
+#include "Kit/System/Assert.h"
 #include <string.h>
 #include <ctype.h>
 
@@ -33,12 +34,20 @@ TextBlock::TextBlock( char* string,
     , m_validTokens( true )
     , m_terminatorFound( false )
 {
+    KIT_SYSTEM_ASSERT( delimiter != terminator );
+    KIT_SYSTEM_ASSERT( delimiter != quote );
+    KIT_SYSTEM_ASSERT( delimiter != escape );
+    KIT_SYSTEM_ASSERT( terminator != quote );
+    KIT_SYSTEM_ASSERT( terminator != escape );
+    KIT_SYSTEM_ASSERT( quote != escape );
+    
     // Flag an error if 'string' is null
     if ( string == nullptr )
     {
         m_validTokens = false;
         return;
     }
+
     // Do nothing (aka zero parameter count) if the string is empty AFTER removing whitespace
     if ( *m_ptr == '\0' )
     {
@@ -110,6 +119,7 @@ TextBlock::TextBlock( char* string,
             removeCharacter_( m_ptr );
             m_validTokens = false;
             bool escaping = false;
+            bool quotedTokenHasContent = false;
             if ( firstNonSpacePtr == nullptr )
             {
                 firstNonSpacePtr = m_ptr;
@@ -122,6 +132,7 @@ TextBlock::TextBlock( char* string,
                 if ( escaping )
                 {
                     escaping = false;
+                    quotedTokenHasContent = true;
                     m_ptr++;
                 }
 
@@ -130,7 +141,7 @@ TextBlock::TextBlock( char* string,
                 {
                     // Remove the ending quote character
                     removeCharacter_( m_ptr );
-                    lastNonSpacePtr = m_ptr - 1;
+                    lastNonSpacePtr = quotedTokenHasContent ? ( m_ptr - 1 ) : nullptr;
                     m_validTokens   = true;
                     break;
                 }
@@ -145,6 +156,7 @@ TextBlock::TextBlock( char* string,
                 // Normal character
                 else
                 {
+                    quotedTokenHasContent = true;
                     m_ptr++;
                 }
             }
