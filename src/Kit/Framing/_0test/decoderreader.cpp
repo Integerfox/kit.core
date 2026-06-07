@@ -10,224 +10,237 @@
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/Text/BString.h"
+#include "Kit/Framing/DecoderReader.h"
 #include <string.h>
 
 
 ///
-using namespace Kit::Text;
 using namespace Kit::System;
+using namespace Kit::Framing;
 
+namespace {
 
+class MyUtt : public DecoderReader
+{
+public:
+    static constexpr size_t WORK_BUFFER_SIZE = 2;
+    uint8_t                 m_workBuffer[WORK_BUFFER_SIZE];
+    uint8_t                 m_sof;
+    uint8_t                 m_eof;
+    uint8_t                 m_escape;
+    uint8_t                 m_illegalByte;
+    const char*             m_inputSource;
+    size_t                  m_inputSourceLength;
+    size_t                  m_inputSourceIndex;
+public:
+    MyUtt( const char* inputSource,
+           size_t      inputSourceLength,
+           char        startOfFrame = '.',
+           char        endOfFrame   = ';',
+           char        escape       = '~',
+           char        illegalByte  = '*' ) noexcept
+        : DecoderReader( m_workBuffer, WORK_BUFFER_SIZE )
+        , m_sof( startOfFrame )
+        , m_eof( endOfFrame )
+        , m_escape( escape )
+        , m_illegalByte( illegalByte )
+        , m_inputSource( inputSource )
+        , m_inputSourceLength( inputSourceLength )
+        , m_inputSourceIndex( 0 )
+    {
+    }
+
+public:
+    bool isStartOfFrame( uint8_t byte ) noexcept override
+    {
+        return byte == m_sof;
+    }
+
+    bool isEndOfFrame( uint8_t byte ) noexcept override
+    {
+        return byte == m_eof;
+    }
+    bool isEscapeByte( uint8_t byte ) noexcept override
+    {
+        return byte == m_escape;
+    }
+    bool isLegalByte( uint8_t byte ) noexcept override
+    {
+        return byte != m_illegalByte;
+    }
+    bool read( void*               dstBuffer,
+               Kit::Type::SSize_T  numBytes,
+               Kit::Type::SSize_T& bytesRead ) noexcept override
+    {
+        if ( m_inputSourceIndex >= m_inputSourceLength )
+        {
+            bytesRead = 0;
+            return false;
+        }
+
+        size_t bytesToRead = std::min( static_cast<size_t>( numBytes ), m_inputSourceLength - m_inputSourceIndex );
+        memcpy( dstBuffer, m_inputSource + m_inputSourceIndex, bytesToRead );
+        m_inputSourceIndex += bytesToRead;
+        bytesRead           = bytesToRead;
+        return true;
+    }
+};
+
+}  // end anonymous namespace
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "BString" )
+
+TEST_CASE( "DecoderReader" )
 {
     ShutdownUnitTesting::clearAndUseCounter();
-    char     rawMemory0[11];
-    char     rawMemory1[6];
-    BString  foo( rawMemory0, sizeof( rawMemory0 ), "Hello World, this is bob" );
-    BString  bar( rawMemory1, sizeof( rawMemory1 ), "Hello World, this is bob" );
-    IString& bref = bar;
+    static constexpr size_t MAX_FRAME_SIZE = 12;
+    uint8_t                 frameBuffer[MAX_FRAME_SIZE];
+    Kit::Type::SSize_T      frameSize;
 
-
-    SECTION( "Some basic operation" )
+    SECTION( "Decode1" )
     {
-        REQUIRE( foo != bar );
-        REQUIRE( bar == bref );
-
-        /* 0123456789 */
-        foo.insertAt( 0, "HI" );
-        REQUIRE( foo == "HIHello Wo" );
-        foo.insertAt( -1, "HI" );
-        REQUIRE( foo == "HIHIHello " );
-        foo.insertAt( 9, "HI" );
-        REQUIRE( foo == "HIHIHelloH" );
-        foo.insertAt( 10, "!!" );
-        REQUIRE( foo == "HIHIHelloH" );
-        foo.insertAt( 5, "<*>" );
-        REQUIRE( foo == "HIHIH<*>el" );
-        foo = "123";
-        foo.insertAt( 10, "Bob's here" );
-        REQUIRE( foo == "123Bob's h" );
-        foo = "456";
-        foo.insertAt( 1, "Uncle" );
-        REQUIRE( foo == "4Uncle56" );
+        MyUtt uut( ".abcde;", 7 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "abcde", frameSize ) == 0 );
     }
 
-    SECTION( "Constructors" )
+    SECTION( "Decode2" )
     {
-        const char* nullPtr = 0;
-        char        rawMemory2[4];
-        BString     s0( rawMemory2, sizeof( rawMemory2 ), nullPtr );
-        REQUIRE( s0 == "" );
-
-        char    rawMemory3[4];
-        BString s1( rawMemory3, sizeof( rawMemory3 ) );
-        REQUIRE( s1 == "" );
-
-        s1 = "uncle";
-        char    rawMemory4[4];
-        BString s2( rawMemory4, sizeof( rawMemory4 ), s1 );
-        REQUIRE( s2 == "unc" );
-
-        char    rawMemory5[4];
-        BString s3( rawMemory5, sizeof( rawMemory5 ), bref );
-        REQUIRE( s3 == "Hel" );
-
-        char    rawMemory6[4];
-        BString s4( rawMemory6, sizeof( rawMemory6 ), "abcdefghijklmnopqrstuvwxyz" );
-        REQUIRE( s4 == "abc" );
-
-        char    rawMemory7[4];
-        BString s5( rawMemory7, sizeof( rawMemory7 ), '@' );
-        REQUIRE( s5 == '@' );
-
-        char    rawMemory8[4];
-        BString s6( rawMemory8, sizeof( rawMemory8 ), -32 );
-        REQUIRE( s6 == "-32" );
-
-        char    rawMemory9[4];
-        BString s7( rawMemory9, sizeof( rawMemory9 ), (unsigned)42 );
-        REQUIRE( s7 == "42" );
-
-        char    rawMemory10[4];
-        BString s8( rawMemory10, sizeof( rawMemory10 ), (long)-10000000 );
-        REQUIRE( s8 == "-10" );
-
-
-        char    rawMemory11[4];
-        BString s9( rawMemory11, sizeof( rawMemory11 ), (unsigned long)81000000 );
-        REQUIRE( s9 == "810" );
-
-        char    rawMemory12[4];
-        BString s10( rawMemory12, sizeof( rawMemory12 ), (long long)-200000000000 );
-        REQUIRE( s10 == "-20" );
-
-
-        char    rawMemory13[4];
-        BString s11( rawMemory13, sizeof( rawMemory13 ), (unsigned long long)9100000000000 );
-        REQUIRE( s11 == "910" );
-
-        char    rawMemory14[2];
-        BString s12( rawMemory14, 0, "hello" );
-        REQUIRE( s12 == "" );
-
-        char    rawMemory15[6];
-        BString s13( rawMemory15, 1, "hello" );
-        REQUIRE( s13 == "" );
-
-        BString s14( nullptr, 2, "hello" );
-        REQUIRE( s14 == "" );
+        MyUtt uut( ".a;b.c;", 7 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "ac", frameSize ) == 0 );
+        result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "c", frameSize ) == 0 );
     }
 
-    SECTION( "Assignments" )
+    SECTION( "Decode3" )
     {
-        const char* nullPtr = 0;
-        char        rawMemory2[4];
-        BString     s0( rawMemory2, sizeof( rawMemory2 ), "****" );
-        s0 = nullPtr;
-        REQUIRE( s0 == "" );
-
-        char    rawMemory3[4];
-        BString s1( rawMemory3, sizeof( rawMemory3 ), "****" );
-        s1 = "";
-        REQUIRE( s1 == "" );
-
-        s1 = "uncle";
-        char    rawMemory4[4];
-        BString s2( rawMemory4, sizeof( rawMemory4 ), "****" );
-        s2 = s1;
-        REQUIRE( s2 == "unc" );
-
-        char    rawMemory5[4];
-        BString s3( rawMemory5, sizeof( rawMemory5 ), "****" );
-        s3 = bref;
-        REQUIRE( s3 == "Hel" );
-
-        char    rawMemory6[4];
-        BString s4( rawMemory6, sizeof( rawMemory6 ), "****" );
-        s4 = "abcdefghijklmnopqrstuvwxyz";
-        REQUIRE( s4 == "abc" );
-
-        char    rawMemory7[4];
-        BString s5( rawMemory7, sizeof( rawMemory7 ), "****" );
-        s5 = '@';
-        REQUIRE( s5 == '@' );
-
-        char    rawMemory8[4];
-        BString s6( rawMemory8, sizeof( rawMemory8 ), "****" );
-        s6 = -32;
-        REQUIRE( s6 == "-32" );
-
-        char    rawMemory9[4];
-        BString s7( rawMemory9, sizeof( rawMemory9 ), "****" );
-        s7 = (unsigned)42;
-        REQUIRE( s7 == "42" );
-
-        char    rawMemory10[4];
-        BString s8( rawMemory10, sizeof( rawMemory10 ), "****" );
-        s8 = (long)-10000000;
-        REQUIRE( s8 == "-10" );
-
-        char    rawMemory11[4];
-        BString s9( rawMemory11, sizeof( rawMemory11 ), "****" );
-        s9 = (unsigned long)81000000;
-        REQUIRE( s9 == "810" );
+        MyUtt uut( ".a~;bcd;", 8 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "a;bcd", frameSize ) == 0 );
     }
 
-    SECTION( "Append" )
+    SECTION( "Decode4" )
     {
-        const char* nullPtr = 0;
-        char        rawMemory2[9];
-        BString     s0( rawMemory2, sizeof( rawMemory2 ), "****" );
-        s0 += nullPtr;
-        REQUIRE( s0 == "****" );
+        MyUtt uut( ".~~;", 4 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "~", frameSize ) == 0 );
+    }
 
-        char    rawMemory3[9];
-        BString s1( rawMemory3, sizeof( rawMemory3 ), "****" );
-        s1 += "";
-        REQUIRE( s1 == "****" );
+    SECTION( "Decode5" )
+    {
+        MyUtt uut( ".a~.bcd;", 8 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "a.bcd", frameSize ) == 0 );
+    }
 
-        s1 = "uncle";
-        char    rawMemory4[9];
-        BString s2( rawMemory4, sizeof( rawMemory4 ), "****" );
-        s2 += s1;
-        REQUIRE( s2 == "****uncl" );
+    SECTION( "Decode6" )
+    {
+        MyUtt uut( "cd~.abx;", 8 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "abx", frameSize ) == 0 );
+        result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == false );
+    }
 
-        char    rawMemory5[9];
-        BString s3( rawMemory5, sizeof( rawMemory5 ), "****" );
-        s3 += bref;
-        REQUIRE( s3 == "****Hell" );
+    SECTION( "oobRead1" )
+    {
+        MyUtt              uut( "abcde", 5 );
+        uint8_t            readBuffer[10];
+        Kit::Type::SSize_T bytesRead;
+        bool               result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
+        REQUIRE( result == true );
+        REQUIRE( bytesRead == 2 );
+        REQUIRE( strncmp( (char*)readBuffer, "ab", bytesRead ) == 0 );
+        result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
+        REQUIRE( result == true );
+        REQUIRE( bytesRead == 2 );
+        REQUIRE( strncmp( (char*)readBuffer, "cd", bytesRead ) == 0 );
+        result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
+        REQUIRE( result == true );
+        REQUIRE( bytesRead == 1 );
+        REQUIRE( strncmp( (char*)readBuffer, "e", bytesRead ) == 0 );
+    }
 
-        char    rawMemory6[9];
-        BString s4( rawMemory6, sizeof( rawMemory6 ), "****" );
-        s4 += "abcdefghijklmnopqrstuvwxyz";
-        REQUIRE( s4 == "****abcd" );
+    SECTION( "oobRead2" )
+    {
+        MyUtt uut( "a.bcd;hi.bob;", 13 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "bcd", frameSize ) == 0 );
 
-        char    rawMemory7[9];
-        BString s5( rawMemory7, sizeof( rawMemory7 ), "****" );
-        s5 += '@';
-        REQUIRE( s5 == "****@" );
+        uint8_t            readBuffer[10];
+        Kit::Type::SSize_T bytesRead;
+        result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
+        REQUIRE( result == true );
+        REQUIRE( bytesRead == 2 );
+        REQUIRE( strncmp( (char*)readBuffer, "hi", bytesRead ) == 0 );
 
-        char    rawMemory8[9];
-        BString s6( rawMemory8, sizeof( rawMemory8 ), "****" );
-        s6 += -32;
-        REQUIRE( s6 == "****-32" );
+        result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "bob", frameSize ) == 0 );
+    }
 
-        char    rawMemory9[9];
-        BString s7( rawMemory9, sizeof( rawMemory9 ), "****" );
-        s7 += (unsigned)42;
-        REQUIRE( s7 == "****42" );
+    SECTION( "oobRead3" )
+    {
+        MyUtt              uut( "abc", 3 );
+        uint8_t            readBuffer[1];
+        Kit::Type::SSize_T bytesRead;
+        bool               result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
+        REQUIRE( result == true );
+        REQUIRE( bytesRead == 1 );
+        REQUIRE( strncmp( (char*)readBuffer, "a", bytesRead ) == 0 );
+        result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
+        REQUIRE( result == true );
+        REQUIRE( bytesRead == 1 );
+        REQUIRE( strncmp( (char*)readBuffer, "b", bytesRead ) == 0 );
+        result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
+        REQUIRE( result == true );
+        REQUIRE( bytesRead == 1 );
+        REQUIRE( strncmp( (char*)readBuffer, "c", bytesRead ) == 0 );
+        result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
+        REQUIRE( result == false );
+    }
 
-        char    rawMemory10[9];
-        BString s8( rawMemory10, sizeof( rawMemory10 ), "****" );
-        s8 += (long)-10000000;
-        REQUIRE( s8 == "****-100" );
+    SECTION( "IllegalByte" )
+    {
+        MyUtt uut( ".a*b;.good;", 11 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, "good", frameSize ) == 0 );
+    }
 
-        char    rawMemory11[9];
-        BString s9( rawMemory11, sizeof( rawMemory11 ), "****" );
-        s9 += (unsigned long)81000000;
-        REQUIRE( s9 == "****8100" );
+    SECTION( "error1" )
+    {
+        MyUtt uut( "aab;", 4 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == false );
+        result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == false );
+    }
+
+    SECTION( "error2" )
+    {
+        MyUtt uut( ".ab~;a", 6 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == false );
+        result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == false );
+    }
+
+    SECTION( "error3" )
+    {
+        MyUtt uut( ".very log string that exceeds the framebuffer;", 46 );
+        bool  result = uut.scan( MAX_FRAME_SIZE, nullptr, frameSize );
+        REQUIRE( result == false );
+        result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == false );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

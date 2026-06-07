@@ -41,6 +41,7 @@ protected:
     , m_inFrame( false )
     , m_escaping( false )
     {
+        initializeScan();
     }
 
 public:
@@ -62,16 +63,16 @@ public:
 
 protected:
     /// Returns true if at start-of-frame
-    virtual bool isStartOfFrame() noexcept = 0;
+    virtual bool isStartOfFrame( uint8_t byte ) noexcept = 0;
 
     /// Returns true if at end-of-frame
-    virtual bool isEndOfFrame() noexcept = 0;
+    virtual bool isEndOfFrame( uint8_t byte ) noexcept = 0;
 
     /// Returns true if the start of the start of a escape sequence has been detected
-    virtual bool isEscapeByte() noexcept = 0;
+    virtual bool isEscapeByte( uint8_t byte ) noexcept = 0;
 
     /// Returns true if the current byte is a legal/valid within a frame
-    virtual bool isLegalByte() noexcept = 0;
+    virtual bool isLegalByte( uint8_t byte ) noexcept = 0;
 
     /** Attempts to read the specified number of bytes from the "input source"
         into the supplied buffer.  The actual number of bytes read is returned via

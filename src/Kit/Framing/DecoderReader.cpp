@@ -92,7 +92,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
         // OUTSIDE of a frame
         if ( !m_inFrame )
         {
-            if ( isStartOfFrame() )
+            if ( isStartOfFrame( *m_dataPtr) )
             {
                 m_inFrame   = true;
                 m_escaping  = false;
@@ -105,7 +105,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
         else
         {
             // Trap illegal characters
-            if ( !isLegalByte() )
+            if ( !isLegalByte( *m_dataPtr) )
             {
                 m_inFrame = false;
             }
@@ -114,7 +114,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
             else if ( !m_escaping )
             {
                 // EOF Character
-                if ( isEndOfFrame() )
+                if ( isEndOfFrame( *m_dataPtr) )
                 {
                     // EXIT routine with a success return code
                     m_dataPtr++;  // Explicitly consume the EOF character (since we are brute force exiting the loop)
@@ -126,7 +126,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
                 }
 
                 // Regular character
-                else if ( !isEscapeByte() )
+                else if ( !isEscapeByte( *m_dataPtr ) )
                 {
                     // Store incoming character into the Client's buffer
                     if ( m_frameSize < maxSizeOfFrameBuffer )

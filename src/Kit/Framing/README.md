@@ -23,9 +23,8 @@ Below are some examples:
         ".abcde;"       "abcde"
         ".a;.b;.;"      "a", "b", ""
         ".a;b.c;"       "a", "c"
-        ".a~;bcd"       "a;bcd"
+        ".a~;bcd;"      "a;bcd"
         ".~~;"          "~"
-        ".a.bcd;"       "a.bcd"
         ".a~.bcd;"      "a.bcd"
 ```
 
@@ -33,9 +32,3 @@ Notes:
 
 - The quotes (") in the above example are NOT part of the frame and/or character
   sequences - the quotes are only used to illustrate sets of characters.
-
-- The SOF character does not need to be escaped within a frame because once a
-  SOF has been found - the SOF character is NOT looked/scanned for until after
-  an EOF character has been detected.  Escaping an SOF character within a frame
-  will behave as expected, i.e. same behavior/semantics as escaping the EOF
-  character.
