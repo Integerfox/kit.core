@@ -11,8 +11,6 @@
 /** @file */
 
 #include "Kit/Framing/IDecoder.h"
-#include "Kit/Type/SSize.h"
-#include <cstdint>
 
 
 ///
@@ -81,12 +79,12 @@ protected:
      */
     virtual bool read( void*               dstBuffer,
                        Kit::Type::SSize_T  numBytes,
-                       Kit::Type::SSize_T& bytesRead ) = 0;
+                       Kit::Type::SSize_T& bytesRead ) noexcept = 0;
 
     /** Returns the un-encoded value for the specified escaped byte.  The
         default implementation simply returns 'escapedByte'
      */
-    virtual uint8_t decodeEscapedByte( uint8_t escapedByte );
+    virtual uint8_t decodeEscapedByte( uint8_t escapedByte ) noexcept;
 
 protected:
     /// Helper method to initialize frame processing

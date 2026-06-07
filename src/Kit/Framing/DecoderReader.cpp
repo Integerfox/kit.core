@@ -24,7 +24,7 @@ void DecoderReader::initializeScan() noexcept
     m_escaping  = false;
 }
 
-uint8_t DecoderReader::decodeEscapedByte( uint8_t escapedByte )
+uint8_t DecoderReader::decodeEscapedByte( uint8_t escapedByte ) noexcept
 {
     return escapedByte;
 }
