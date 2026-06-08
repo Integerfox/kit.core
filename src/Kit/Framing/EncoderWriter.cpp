@@ -26,7 +26,7 @@ bool EncoderWriter::startFrame( void ) noexcept
         }
     }
 
-    if ( !startOutput() )
+    if ( !m_dst.startOutput() )
     {
         return false;  // Failed to start the new frame
     }
@@ -34,7 +34,7 @@ bool EncoderWriter::startFrame( void ) noexcept
     // NOT skipping the SOF byte
     if ( !m_skipSendingSof )
     {
-        if ( !appendOutput( m_sof ) )
+        if ( !m_dst.appendOutput( m_sof ) )
         {
             return false;  // Failed to output the SOF byte
         }
@@ -45,9 +45,9 @@ bool EncoderWriter::startFrame( void ) noexcept
 
 bool EncoderWriter::output( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept
 {
-    if ( !m_inFrame )
+    if ( !m_inFrame || srcBuffer == nullptr || numBytes < 0 )
     {
-        return false;  // Frame has not been started
+        return false;  // Frame has not been started or source buffer is null
     }
 
     const uint8_t* srcBytePtr = static_cast<const uint8_t*>( srcBuffer );
@@ -58,7 +58,7 @@ bool EncoderWriter::output( const void* srcBuffer, Kit::Type::SSize_T numBytes )
         // Escape the byte if it is a special character
         if ( srcByte == m_sof || srcByte == m_eof || srcByte == m_esc )
         {
-            if ( !appendOutput( m_esc ) )
+            if ( !m_dst.appendOutput( m_esc ) )
             {
                 m_inFrame = false;
                 return false;  // Failed to output the escape character
@@ -67,7 +67,7 @@ bool EncoderWriter::output( const void* srcBuffer, Kit::Type::SSize_T numBytes )
         }
 
         // Write the next byte
-        if ( !appendOutput( srcByte ) )
+        if ( !m_dst.appendOutput( srcByte ) )
         {
             m_inFrame = false;
             return false;  // Failed to output the byte
@@ -89,12 +89,12 @@ bool EncoderWriter::endFrame( void ) noexcept
     m_inFrame = false;
 
     // Output the End-of-Frame character
-    if ( !appendOutput( m_eof ) )
+    if ( !m_dst.appendOutput( m_eof ) )
     {
         return false;  // Failed to output the EOF byte
     }
 
-    if ( !endOutput() )
+    if ( !m_dst.endOutput() )
     {
         return false;  // Failed to end the frame
     }

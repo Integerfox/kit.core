@@ -22,7 +22,7 @@ using namespace Kit::Framing;
 
 namespace {
 
-class MyUtt : public EncoderWriter
+class MyDestination : public IDestination
 {
 public:
     char   m_outputBuffer[100];
@@ -32,20 +32,13 @@ public:
     bool   m_resultAppendOutput;
     bool   m_resultEndOutput;
 public:
-    MyUtt( char startOfFrame, char endOfFrame, char escapeByte, bool skipSendingSof = false ) noexcept
-        : EncoderWriter( startOfFrame, endOfFrame, escapeByte, skipSendingSof )
-        , m_bytesWritten( 0 )
+    MyDestination() noexcept
+        : m_bytesWritten( 0 )
         , m_nextByteIndex( 0 )
         , m_resultStartOutput( true )
         , m_resultAppendOutput( true )
         , m_resultEndOutput( true )
     {
-    }
-
-public:
-    bool outputString( const char* srcString )
-    {
-        return output( srcString, strlen( srcString ) );
     }
 
 protected:
@@ -55,12 +48,17 @@ protected:
         return m_resultStartOutput;
     }
 
-    bool appendOutput( uint8_t srcByte ) noexcept
+    bool appendOutput( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept
     {
-        m_outputBuffer[m_nextByteIndex] = srcByte;
-        m_nextByteIndex++;
+        const uint8_t* buffer = static_cast<const uint8_t*>(srcBuffer);
+        for ( Kit::Type::SSize_T i = 0; i < numBytes; ++i )
+        {
+            m_outputBuffer[m_nextByteIndex] = buffer[i];
+            m_nextByteIndex++;
+        }
         return m_resultAppendOutput;
     }
+
     bool endOutput() noexcept
     {
         m_outputBuffer[m_nextByteIndex] = '\0';
@@ -72,79 +70,90 @@ protected:
 }  // end anonymous namespace
 ////////////////////////////////////////////////////////////////////////////////
 
+#define OUTPUT_STRING( str ) uut.output( str , strlen( str ) )
+
 TEST_CASE( "EncoderWriter" )
 {
     ShutdownUnitTesting::clearAndUseCounter();
-    MyUtt uut( '.', ';', '~' );
+    MyDestination dst;
+    EncoderWriter uut( dst, '.', ';', '~' );
 
     SECTION( "Encode" )
     {
         uut.startFrame();
-        uut.outputString( "abcd" );
+        OUTPUT_STRING( "abcd" );
         uut.endFrame();
-        REQUIRE( strcmp( uut.m_outputBuffer, ".abcd;" ) == 0 );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".abcd;" ) == 0 );
 
         uut.startFrame();
-        uut.outputString( "a");
+        OUTPUT_STRING( "a");
         uut.endFrame();
-        REQUIRE( strcmp( uut.m_outputBuffer, ".a;" ) == 0 );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".a;" ) == 0 );
 
         uut.startFrame();
-        uut.outputString( "b");
+        OUTPUT_STRING( "b");
         uut.endFrame();
-        REQUIRE( strcmp( uut.m_outputBuffer, ".b;" ) == 0 );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".b;" ) == 0 );
 
         uut.startFrame();
         uut.endFrame();
-        REQUIRE( strcmp( uut.m_outputBuffer, ".;" ) == 0 );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".;" ) == 0 );
 
         uut.startFrame();
-        uut.outputString( "a;bcd");
+        OUTPUT_STRING( "a;bcd");
         uut.endFrame();
-        REQUIRE( strcmp( uut.m_outputBuffer, ".a~;bcd;" ) == 0 );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".a~;bcd;" ) == 0 );
 
         uut.startFrame();
-        uut.outputString( "~" );
+        OUTPUT_STRING( "~" );
         uut.endFrame();
-        REQUIRE( strcmp( uut.m_outputBuffer, ".~~;" ) == 0 );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".~~;" ) == 0 );
 
         uut.startFrame();
-        uut.outputString( "a.bcd" );
+        OUTPUT_STRING( "a.bcd" );
         uut.endFrame();
-        REQUIRE( strcmp( uut.m_outputBuffer, ".a~.bcd;" ) == 0 );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".a~.bcd;" ) == 0 );
     }
 
     SECTION( "errors")
     {
         uut.startFrame();
-        uut.outputString( "abc");
+        OUTPUT_STRING( "abc");
         uut.startFrame();
-        uut.outputString( "ZYX");
+        OUTPUT_STRING( "ZYX");
         uut.endFrame();
-        REQUIRE( strcmp( uut.m_outputBuffer, ".ZYX;" ) == 0 );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".ZYX;" ) == 0 );
 
         uut.startFrame();
-        REQUIRE( uut.outputString( "abc") == true );
-        uut.m_resultAppendOutput = false;
-        REQUIRE( uut.outputString( "def") == false );
+        REQUIRE( OUTPUT_STRING( "abc") == true );
+        dst.m_resultAppendOutput = false;
+        REQUIRE( OUTPUT_STRING( "def") == false );
         REQUIRE( uut.endFrame() == false );
 
-        uut.m_resultAppendOutput = true;
+        dst.m_resultAppendOutput = true;
         uut.startFrame();
-        REQUIRE( uut.outputString( "abc") == true );
-        uut.m_resultEndOutput = false;
+        REQUIRE( OUTPUT_STRING( "abc") == true );
+        dst.m_resultEndOutput = false;
         REQUIRE( uut.endFrame() == false );
 
-        uut.m_resultEndOutput = true;
+        dst.m_resultEndOutput = true;
         uut.startFrame();
-        uut.outputString( "a.bcd" );
-        uut.m_resultAppendOutput = false;
+        OUTPUT_STRING( "a.bcd" );
+        dst.m_resultAppendOutput = false;
         REQUIRE( uut.endFrame() == false );
 
-        uut.m_resultAppendOutput = true;
+        dst.m_resultAppendOutput = true;
         uut.startFrame();
-        uut.m_resultEndOutput = false;
+        dst.m_resultEndOutput = false;
         REQUIRE( uut.startFrame() == false );
+
+        dst.m_resultEndOutput = true;
+        REQUIRE( uut.startFrame() );
+        REQUIRE( uut.output( nullptr, 5 ) == false );
+        REQUIRE( uut.output( "abc", -1 ) == false );
+        REQUIRE( uut.output( "abc", 0 ) == true );
+        REQUIRE( uut.endFrame() == true );
+        REQUIRE( strcmp( dst.m_outputBuffer, ".;" ) == 0 );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

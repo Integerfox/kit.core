@@ -32,3 +32,8 @@ Notes:
 
 - The quotes (") in the above example are NOT part of the frame and/or character
   sequences - the quotes are only used to illustrate sets of characters.
+
+- If an unescaped start-of-frame byte is encounter within a frame, the current
+  in-progress frame is discarded, and a new frame is started.
+
+- The SOF, EOF, and ESC bytes **must** all be unique values.

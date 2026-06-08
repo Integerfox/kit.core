@@ -29,6 +29,11 @@ uint8_t DecoderReader::decodeEscapedByte( uint8_t escapedByte ) noexcept
     return escapedByte;
 }
 
+bool DecoderReader::isLegalByte( uint8_t byte ) noexcept
+{
+    return true;
+}
+
 ///////////////////
 bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
                           uint8_t*            frameBuffer,
@@ -73,7 +78,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
     // Get more input data once my local buffer/cache is empty
     if ( !m_dataLen )
     {
-        if ( !read( m_buffer, m_bufSize, m_dataLen ) )
+        if ( !m_src.read( m_buffer, m_bufSize, m_dataLen ) )
         {
             // Error reading data -->exit scan
             m_dataLen = 0;  // Reset my internal count so I start 'over' on the next call (if there is one)
@@ -92,7 +97,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
         // OUTSIDE of a frame
         if ( !m_inFrame )
         {
-            if ( isStartOfFrame( *m_dataPtr) )
+            if ( isStartOfFrame( *m_dataPtr ) )
             {
                 m_inFrame   = true;
                 m_escaping  = false;
@@ -105,7 +110,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
         else
         {
             // Trap illegal characters
-            if ( !isLegalByte( *m_dataPtr) )
+            if ( !isLegalByte( *m_dataPtr ) )
             {
                 m_inFrame = false;
             }
@@ -114,7 +119,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
             else if ( !m_escaping )
             {
                 // EOF Character
-                if ( isEndOfFrame( *m_dataPtr) )
+                if ( isEndOfFrame( *m_dataPtr ) )
                 {
                     // EXIT routine with a success return code
                     m_dataPtr++;  // Explicitly consume the EOF character (since we are brute force exiting the loop)
@@ -123,6 +128,13 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
                     isEof     = true;
                     initializeScan();  // Reset my internal frame state to be ready for the next frame
                     return true;
+                }
+
+                // SOF Character -->need to reset the frame
+                else if ( isStartOfFrame( *m_dataPtr ) )
+                {
+                    m_frameSize = 0;
+                    m_framePtr  = frameBuffer;
                 }
 
                 // Regular character
@@ -186,11 +198,11 @@ bool DecoderReader::oobRead( uint8_t*            buffer,
         return false;
     }
 
-    // No cached data 
+    // No cached data
     if ( !m_dataLen )
     {
         // Read data from the input source into the local cache
-        if ( !read( m_buffer, m_bufSize, m_dataLen ) )
+        if ( !m_src.read( m_buffer, m_bufSize, m_dataLen ) )
         {
             return false;
         }
@@ -211,7 +223,8 @@ bool DecoderReader::oobRead( uint8_t*            buffer,
     m_dataLen -= numBytes;
     m_dataPtr += numBytes;
     bytesRead  = numBytes;
-    return true;}
+    return true;
+}
 
 
 }  // end namespace

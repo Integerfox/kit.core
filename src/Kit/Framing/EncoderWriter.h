@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/Framing/IEncoder.h"
+#include "Kit/Framing/IDestination.h"
 #include "Kit/System/Assert.h"
 
 ///
@@ -18,22 +19,28 @@ namespace Kit {
 ///
 namespace Framing {
 
-/** This partially concrete class implements the basic framing/output logic
-    for an Encoder.  A child class is required to provide the "output
+/** This concrete class implements the basic framing/output logic
+    for an Encoder.  The provided IDestination instances determines the "output
     destination"
  */
 class EncoderWriter : public IEncoder
 {
-protected:
+public:
     /** Constructor. The size of the workBuffer determines how big of
         'chunks' data is read from the "input source", i.e. it is a working
         buffer and does NOT have to be the size of the maximum possible input
         frame.
      */
-    EncoderWriter( uint8_t startOfFrame, uint8_t endOfFrame, uint8_t escapeByte, bool skipSendingSof = false )
-        : m_sof( startOfFrame )
+    EncoderWriter( IDestination& destination,
+                   uint8_t       startOfFrame,
+                   uint8_t       endOfFrame,
+                   uint8_t       escapeByte,
+                   bool          skipSendingSof = false )
+        : m_dst( destination )
+        , m_sof( startOfFrame )
         , m_eof( endOfFrame )
         , m_esc( escapeByte )
+        , m_inFrame( false )
         , m_skipSendingSof( skipSendingSof )
     {
         KIT_SYSTEM_ASSERT( m_sof != m_eof );
@@ -52,31 +59,15 @@ public:
     bool endFrame( void ) noexcept override;
 
 protected:
-    /** Used to initialize the "frame output sequence". Returns true if
-        successful; else false is returned.
-    */
-    virtual bool startOutput() noexcept = 0;
-
-    /** Outputs a new/next byte to the destination.
-        Returns true if successful; else false is returned.
-    */
-    virtual bool appendOutput( uint8_t srcByte ) noexcept = 0;
-
-    /** Used to finalize the "frame output sequence". Returns true if
-        successful; else false is returned.
-
-        NOTE: There is NO guarantee that endOutput() will always be called
-              before starting a new frame.  What is guaranteed is that startOutput()
-              will be called with each new attempted frame output sequence.
-    */
-    virtual bool endOutput() noexcept = 0;
-
     /** Returns the encoded/escaped value for the specified special character.
         The default implementation simply returns 'byteToBeEscaped'
      */
     virtual uint8_t encodeEscapedByte( uint8_t byteToBeEscaped ) noexcept;
 
 protected:
+    /// Reference to the output destination
+    IDestination& m_dst;
+
     /// Start-of-Frame character
     uint8_t m_sof;
 

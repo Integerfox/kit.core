@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/Framing/IDecoder.h"
+#include "Kit/Framing/ISource.h"
 
 
 ///
@@ -18,28 +19,28 @@ namespace Kit {
 ///
 namespace Framing {
 
-/** This partially concrete class implements the basic scanning/reading logic
-    for a Decoder
+/** This concrete class implements the basic scanning/reading logic
+    for a Decoder. The provided ISource instance determines the "input source".
  */
 class DecoderReader : public IDecoder
 {
-protected:
+public:
     /** Constructor. The size of the workBuffer determines how big of
         'chunks' data is read from the "input source", i.e. it is a working
         buffer and does NOT have to be the size of the maximum possible input
         frame.
      */
-    DecoderReader( uint8_t* workBuffer, Kit::Type::SSize_T sizeOfWorkBuffer )
-    : m_dataPtr( nullptr )
-    , m_buffer( workBuffer )
-    , m_framePtr( nullptr )
-    , m_dataLen( 0 )
-    , m_frameSize( 0 )
-    , m_bufSize( sizeOfWorkBuffer )
-    , m_inFrame( false )
-    , m_escaping( false )
+    DecoderReader( ISource& source, uint8_t* workBuffer, Kit::Type::SSize_T sizeOfWorkBuffer )
+        : m_src( source )
+        , m_dataPtr( nullptr )
+        , m_buffer( workBuffer )
+        , m_framePtr( nullptr )
+        , m_dataLen( 0 )
+        , m_frameSize( 0 )
+        , m_bufSize( sizeOfWorkBuffer )
+        , m_inFrame( false )
+        , m_escaping( false )
     {
-        initializeScan();
     }
 
 public:
@@ -69,17 +70,11 @@ protected:
     /// Returns true if the start of the start of a escape sequence has been detected
     virtual bool isEscapeByte( uint8_t byte ) noexcept = 0;
 
-    /// Returns true if the current byte is a legal/valid within a frame
-    virtual bool isLegalByte( uint8_t byte ) noexcept = 0;
+    /** Returns true if the current byte is a legal/valid within a frame
+        The default implementation simply returns true for all bytes.
+    */
+    virtual bool isLegalByte( uint8_t byte ) noexcept;
 
-    /** Attempts to read the specified number of bytes from the "input source"
-        into the supplied buffer.  The actual number of bytes read is returned via
-        'bytesRead'. Returns true if successful, or false if End-of-Input
-        was encountered.
-     */
-    virtual bool read( void*               dstBuffer,
-                       Kit::Type::SSize_T  numBytes,
-                       Kit::Type::SSize_T& bytesRead ) noexcept = 0;
 
     /** Returns the un-encoded value for the specified escaped byte.  The
         default implementation simply returns 'escapedByte'
@@ -91,6 +86,9 @@ protected:
     virtual void initializeScan() noexcept;
 
 protected:
+    /// Reference to the input source
+    ISource& m_src;
+
     /// Pointer to the next unprocessed character in my raw input buffer
     uint8_t* m_dataPtr;
 

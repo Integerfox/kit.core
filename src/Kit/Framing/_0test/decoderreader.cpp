@@ -11,6 +11,7 @@
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/Framing/DecoderReader.h"
+#include "Kit/Framing/ISource.h"
 #include <string.h>
 
 
@@ -20,54 +21,25 @@ using namespace Kit::Framing;
 
 namespace {
 
-class MyUtt : public DecoderReader
+class MySrc : public ISource
 {
 public:
-    static constexpr size_t WORK_BUFFER_SIZE = 2;
-    uint8_t                 m_workBuffer[WORK_BUFFER_SIZE];
-    uint8_t                 m_sof;
-    uint8_t                 m_eof;
-    uint8_t                 m_escape;
-    uint8_t                 m_illegalByte;
-    const char*             m_inputSource;
-    size_t                  m_inputSourceLength;
-    size_t                  m_inputSourceIndex;
+    const char* m_inputSource;
+    size_t      m_inputSourceLength;
+    size_t      m_inputSourceIndex;
+    bool        m_resultRead;
+
 public:
-    MyUtt( const char* inputSource,
-           size_t      inputSourceLength,
-           char        startOfFrame = '.',
-           char        endOfFrame   = ';',
-           char        escape       = '~',
-           char        illegalByte  = '*' ) noexcept
-        : DecoderReader( m_workBuffer, WORK_BUFFER_SIZE )
-        , m_sof( startOfFrame )
-        , m_eof( endOfFrame )
-        , m_escape( escape )
-        , m_illegalByte( illegalByte )
-        , m_inputSource( inputSource )
+    MySrc( const char* inputSource,
+           size_t      inputSourceLength ) noexcept
+        : m_inputSource( inputSource )
         , m_inputSourceLength( inputSourceLength )
         , m_inputSourceIndex( 0 )
+        , m_resultRead( true )
     {
     }
 
 public:
-    bool isStartOfFrame( uint8_t byte ) noexcept override
-    {
-        return byte == m_sof;
-    }
-
-    bool isEndOfFrame( uint8_t byte ) noexcept override
-    {
-        return byte == m_eof;
-    }
-    bool isEscapeByte( uint8_t byte ) noexcept override
-    {
-        return byte == m_escape;
-    }
-    bool isLegalByte( uint8_t byte ) noexcept override
-    {
-        return byte != m_illegalByte;
-    }
     bool read( void*               dstBuffer,
                Kit::Type::SSize_T  numBytes,
                Kit::Type::SSize_T& bytesRead ) noexcept override
@@ -86,6 +58,46 @@ public:
     }
 };
 
+class MyUtt : public DecoderReader
+{
+public:
+    static constexpr size_t WORK_BUFFER_SIZE = 2;
+    uint8_t                 m_workBuffer[WORK_BUFFER_SIZE];
+    uint8_t                 m_sof;
+    uint8_t                 m_eof;
+    uint8_t                 m_escape;
+    uint8_t                 m_illegalByte;
+public:
+    MyUtt( ISource& inputSource, char startOfFrame, char endOfFrame, char escape, char illegalByte ) noexcept
+        : DecoderReader( inputSource, m_workBuffer, WORK_BUFFER_SIZE )
+        , m_sof( startOfFrame )
+        , m_eof( endOfFrame )
+        , m_escape( escape )
+        , m_illegalByte( illegalByte )
+    {
+    }
+
+    bool isStartOfFrame( uint8_t byte ) noexcept override
+    {
+        return byte == m_sof;
+    }
+
+    bool isEndOfFrame( uint8_t byte ) noexcept override
+    {
+        return byte == m_eof;
+    }
+
+    bool isEscapeByte( uint8_t byte ) noexcept override
+    {
+        return byte == m_escape;
+    }
+
+    bool isLegalByte( uint8_t byte ) noexcept override
+    {
+        return byte != m_illegalByte;
+    }
+};
+
 }  // end anonymous namespace
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -98,7 +110,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "Decode1" )
     {
-        MyUtt uut( ".abcde;", 7 );
+        MySrc src( ".abcde;", 7 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == true );
         REQUIRE( strncmp( (char*)frameBuffer, "abcde", frameSize ) == 0 );
@@ -106,7 +119,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "Decode2" )
     {
-        MyUtt uut( ".a;b.c;", 7 );
+        MySrc src( ".a;b.c;", 7 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == true );
         REQUIRE( strncmp( (char*)frameBuffer, "ac", frameSize ) == 0 );
@@ -117,7 +131,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "Decode3" )
     {
-        MyUtt uut( ".a~;bcd;", 8 );
+        MySrc src( ".a~;bcd;", 8 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == true );
         REQUIRE( strncmp( (char*)frameBuffer, "a;bcd", frameSize ) == 0 );
@@ -125,7 +140,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "Decode4" )
     {
-        MyUtt uut( ".~~;", 4 );
+        MySrc src( ".~~;", 4 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == true );
         REQUIRE( strncmp( (char*)frameBuffer, "~", frameSize ) == 0 );
@@ -133,7 +149,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "Decode5" )
     {
-        MyUtt uut( ".a~.bcd;", 8 );
+        MySrc src( ".a~.bcd;", 8 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == true );
         REQUIRE( strncmp( (char*)frameBuffer, "a.bcd", frameSize ) == 0 );
@@ -141,7 +158,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "Decode6" )
     {
-        MyUtt uut( "cd~.abx;", 8 );
+        MySrc src( "cd~.abx;", 8 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == true );
         REQUIRE( strncmp( (char*)frameBuffer, "abx", frameSize ) == 0 );
@@ -149,9 +167,19 @@ TEST_CASE( "DecoderReader" )
         REQUIRE( result == false );
     }
 
+    SECTION( "Decode7" )
+    {
+        MySrc src( ".a.~;bcd;", 9 );
+        MyUtt uut( src, '.', ';', '~', '*' );
+        bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
+        REQUIRE( result == true );
+        REQUIRE( strncmp( (char*)frameBuffer, ";bcd", frameSize ) == 0 );
+    }
+
     SECTION( "oobRead1" )
     {
-        MyUtt              uut( "abcde", 5 );
+        MySrc              src( "abcde", 5 );
+        MyUtt              uut( src, '.', ';', '~', '*' );
         uint8_t            readBuffer[10];
         Kit::Type::SSize_T bytesRead;
         bool               result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
@@ -170,7 +198,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "oobRead2" )
     {
-        MyUtt uut( "a.bcd;hi.bob;", 13 );
+        MySrc src( "a.bcd;hi.bob;", 13 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == true );
         REQUIRE( strncmp( (char*)frameBuffer, "bcd", frameSize ) == 0 );
@@ -189,7 +218,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "oobRead3" )
     {
-        MyUtt              uut( "abc", 3 );
+        MySrc              src( "abc", 3 );
+        MyUtt              uut( src, '.', ';', '~', '*' );
         uint8_t            readBuffer[1];
         Kit::Type::SSize_T bytesRead;
         bool               result = uut.oobRead( readBuffer, sizeof( readBuffer ), bytesRead );
@@ -210,7 +240,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "IllegalByte" )
     {
-        MyUtt uut( ".a*b;.good;", 11 );
+        MySrc src( ".a*b;.good;", 11 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == true );
         REQUIRE( strncmp( (char*)frameBuffer, "good", frameSize ) == 0 );
@@ -218,7 +249,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "error1" )
     {
-        MyUtt uut( "aab;", 4 );
+        MySrc src( "aab;", 4 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == false );
         result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
@@ -227,7 +259,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "error2" )
     {
-        MyUtt uut( ".ab~;a", 6 );
+        MySrc src( ".ab~;a", 6 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
         REQUIRE( result == false );
         result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
@@ -236,7 +269,8 @@ TEST_CASE( "DecoderReader" )
 
     SECTION( "error3" )
     {
-        MyUtt uut( ".very log string that exceeds the framebuffer;", 46 );
+        MySrc src( ".very log string that exceeds the framebuffer;", 46 );
+        MyUtt uut( src, '.', ';', '~', '*' );
         bool  result = uut.scan( MAX_FRAME_SIZE, nullptr, frameSize );
         REQUIRE( result == false );
         result = uut.scan( MAX_FRAME_SIZE, frameBuffer, frameSize );
