@@ -31,6 +31,7 @@ namespace Dio {
 class MockOutput : public IOutput
 {
 public:
+    /// Constructor. Sets the initial asserted/de-asserted state of the mock pin.
     MockOutput( bool initialState = false ) noexcept
         : m_asserted( initialState )
         , m_assertCount( 0 )

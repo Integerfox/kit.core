@@ -324,6 +324,7 @@ public:
 
 
 public:
+    /// Erases all sectors and resets the page map, effectively formatting the NV storage.
     bool format() noexcept
     {
         if ( !m_isStarted )
@@ -349,6 +350,7 @@ public:
         return true;
     }
 
+    /// Returns current statistics: cumulative erase count, free pages, and valid pages.
     bool getStatistics( uint32_t& eraseCount,
                         size_t&   freePages,
                         size_t&   validPages ) noexcept
@@ -392,6 +394,7 @@ public:
 
 
 protected:
+    /// Scans all physical pages and rebuilds the logical-to-physical page map.
     bool scanAndBuildPageMap() noexcept
     {
         size_t   sectorSize   = m_flashDriver.getSectorSize();
@@ -456,6 +459,7 @@ protected:
         return true;
     }
 
+    /// Finds a free physical page slot, reclaiming a sector if necessary.
     uint32_t findFreePageAddress( uint32_t aboutToInvalidate = INVALID_PAGE_ADDRESS ) noexcept
     {
         size_t sectorSize   = m_flashDriver.getSectorSize();
@@ -531,6 +535,7 @@ protected:
         return INVALID_PAGE_ADDRESS;
     }
 
+    /// Marks the page at the specified physical address as invalid.
     bool markPageInvalid( uint32_t pageAddress ) noexcept
     {
         uint32_t invalidStatus = PageStatus_T::INVALID;
@@ -538,6 +543,7 @@ protected:
         return m_flashDriver.write( statusOffset, &invalidStatus, sizeof( invalidStatus ) );
     }
 
+    /// Erases the sector if it contains no valid pages.
     bool eraseSectorIfNeeded( size_t sectorAddress ) noexcept
     {
         size_t sectorSize   = m_flashDriver.getSectorSize();
@@ -567,6 +573,7 @@ protected:
         return false;
     }
 
+    /// Reads the data payload of the current physical page for the given logical page index.
     bool readCurrentPageData( size_t pageIndex, uint8_t* buffer ) noexcept
     {
         if ( pageIndex >= m_numLogicalPages )
@@ -586,6 +593,7 @@ protected:
         }
     }
 
+    /// Computes a CRC-32 over the given data using the configured CRC algorithm.
     uint32_t calculateCrc( const void* data, size_t length ) noexcept
     {
         m_crcAlgo.reset();
@@ -595,7 +603,9 @@ protected:
         return result;
     }
 
+    /// Returns the physical page size (header + data payload).
     size_t getPhysicalPageSize() const noexcept { return HEADER_SIZE + m_config.nvPageSize; }
+    /// Converts a byte offset within the NV region to a logical page index.
     size_t offsetToPageIndex( size_t offset ) const noexcept { return offset / m_config.nvPageSize; }
 
 
