@@ -61,13 +61,19 @@ public:
     {
         doneFlag      = false;
         m_doneFlagPtr = &doneFlag;
-        m_parentThreadPtr_->signal();
+        if ( m_parentThreadPtr_ )
+        {
+            m_parentThreadPtr_->signal();
+        }
     }
     ///
     void terminate()
     {
         m_run = false;
-        m_parentThreadPtr_->signal();
+        if ( m_parentThreadPtr_ )
+        {
+            m_parentThreadPtr_->signal();
+        }
     }
 
 public:
@@ -121,13 +127,20 @@ public:
     {
         doneFlag      = false;
         m_doneFlagPtr = &doneFlag;
-        m_parentThreadPtr_->signal();
+        if ( m_parentThreadPtr_ )
+        {
+            m_parentThreadPtr_->signal();
+        }
     }
+
     ///
     void terminate()
     {
         m_run = false;
-        m_parentThreadPtr_->signal();
+        if ( m_parentThreadPtr_ )
+        {
+            m_parentThreadPtr_->signal();
+        }
     }
 public:
     ///
