@@ -46,7 +46,7 @@ public:
         return fd.write( "Hello" );
     }
 };
-}; // end namespace
+} // end namespace
 
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "null" )

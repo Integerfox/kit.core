@@ -38,7 +38,7 @@ namespace RP2xxx {
 namespace Uart {
 
 
-/** This concrete class implements a Input stream using Raspberry Pi UART
+/** This concrete class implements a Input/Output stream using Raspberry Pi UART
     interface/hardware. This implement provide a more robust stream interface
     than using 'stdio_uart' because it is interrupted driven and provides
     software TX/RX FIFOs

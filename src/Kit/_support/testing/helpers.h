@@ -14,6 +14,8 @@
  */
 
 #include "Kit/System/Api.h"
+#include "Kit/System/Thread.h"
+#include "Kit/System/ElapsedTime.h"
 #include "Kit/System/Mutex.h"
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/IEventFlag.h"
@@ -164,6 +166,28 @@ bool minWaitOnModelPointSeqNumChange( MPTYPE& src, uint16_t currentSeqNum, unsig
         *newSeqNum = seqNum;
     }
     return false;
+};
+
+/// This method busy waits till the specified thread is active/running. Returns false if TIMED-OUT  
+inline bool waitThreadActive( Kit::System::Thread* threadPtr, uint32_t maxWaitMs = 1000, uint32_t waitDelayMs = 10 )
+{
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
+    while ( !Kit::System::Thread::isActiveThread( threadPtr ) && !Kit::System::ElapsedTime::expiredMilliseconds( startTime, maxWaitMs ) )
+    {
+        Kit::System::sleep( waitDelayMs );
+    }
+    return Kit::System::Thread::isActiveThread( threadPtr );
+};
+
+/// This method busy waits till the specified thread is NOT active/running. Returns false if TIMED-OUT 
+inline bool waitThreadInactive( Kit::System::Thread* threadPtr, uint32_t maxWaitMs = 1000, uint32_t waitDelayMs = 10 )
+{
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
+    while ( Kit::System::Thread::isActiveThread( threadPtr ) && !Kit::System::ElapsedTime::expiredMilliseconds( startTime, maxWaitMs ) )
+    {
+        Kit::System::sleep( waitDelayMs );
+    }
+    return !Kit::System::Thread::isActiveThread( threadPtr );
 };
 
 /** This class is a EventQueue Server that signals the provided semaphore when
