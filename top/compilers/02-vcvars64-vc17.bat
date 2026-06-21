@@ -3,7 +3,7 @@
 
 :: Get the version from the compiler itself
 set _CC_VER=
-for /f "tokens=7 delims= " %%a in ('cl 2^>^&1 ^| findstr /R /C:"for x64$"') do set _CC_VER=%%a
+for /f "tokens=7 delims= " %%a in ('cl 2^>^&1 ^| findstr /R /C:"Version 19\..* for x64$"') do set _CC_VER=%%a
 
 :: Set the name for the toolchain. It includes the compiler version
 set NAME=Visual Studio VC17 x64
@@ -24,13 +24,26 @@ if "%1"=="isConfigured" (
 )
 
 :: Set/Configure the toolchain
-if "/%_CC_VER%"=="/" (
-    :: Run Visual Studio VC17 (64bit) environment setup
-    call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
-)
+call :resolve_vcvars
+if ERRORLEVEL 1 exit /b 1
+call "%_VCVARS_BAT%"
+
 :: Display the version info
 for /f "tokens=7 delims= " %%a in ('cl 2^>^&1 ^| findstr /R /C:"Version"') do set _CC_VER=%%a
 echo:Environment set: Visual Studio VC17 x64. Ver:%_CC_VER%
+exit /b 0
+
+:resolve_vcvars
+set _VCVARS_BAT=
+if exist "%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" (
+    for /f "usebackq delims=" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -find VC\Auxiliary\Build\vcvars64.bat 2^>nul`) do set _VCVARS_BAT=%%i
+)
+
+if not "%_VCVARS_BAT%"=="" goto :eof
+echo:ERROR: Unable to locate vcvars64.bat for Visual Studio 2022.
+exit /b 1
+
+goto :eof
 
 
 

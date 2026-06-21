@@ -77,6 +77,43 @@ TEST_CASE( "textblock" )
         REQUIRE( parser.getParameter( 0 ) == 0 );
     }
 
+    SECTION( "Defaults#2a..." )
+    {
+        int                    dummy;
+        Kit::Text::FString<64> token;
+        Kit::Text::FString<64> rawString = "\"\"";
+        KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
+        TextBlock parser( rawString.getBuffer( dummy ) );
+
+        REQUIRE( parser.isValidTokens() );
+        REQUIRE( parser.numParameters() == 1 );
+        REQUIRE( parser.isTerminated() == false );
+        REQUIRE( parser.getParameter( 1 ) == 0 );
+        token = parser.getParameter( 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, " token=[%s]", token.getString() );
+        REQUIRE( token.isEmpty() );
+    }
+
+    SECTION( "Defaults#2b..." )
+    {
+        int                    dummy;
+        Kit::Text::FString<64> token;
+        Kit::Text::FString<64> rawString = "a,\"\"";
+        KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
+        TextBlock parser( rawString.getBuffer( dummy ) );
+
+        REQUIRE( parser.isValidTokens() );
+        REQUIRE( parser.numParameters() == 2 );
+        REQUIRE( parser.isTerminated() == false );
+        REQUIRE( parser.getParameter( 2 ) == 0 );
+        token = parser.getParameter( 0 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, " token=[%s]", token.getString() );
+        REQUIRE( token == "a" );
+        token = parser.getParameter( 1 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, " token=[%s]", token.getString() );
+        REQUIRE( token.isEmpty() );
+    }
+
     SECTION( "Defaults#3..." )
     {
         int                    dummy;

@@ -34,7 +34,7 @@ public:
     using Kit::Io::IInputOutput::read;
 
     /// See Kit::Io::IInput
-    bool read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept override;
+    bool read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept override;
 
     /// See Kit::Io::IInput
     bool available() noexcept override;
@@ -45,7 +45,7 @@ public:
     using Kit::Io::IInputOutput::write;
 
     /// See Kit::Io::IOutput
-    bool write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept override;
+    bool write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept override;
 
     /// See Kit::Io::IOutput
     void flush() noexcept override;

@@ -52,7 +52,7 @@ public:
     using Kit::Io::IInput::read;
 
     /// See Kit::Io::IInput
-    bool read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept override;
+    bool read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept override;
 
     /// See Kit::Io::IInput
     bool available() noexcept override;
@@ -69,7 +69,7 @@ public:
     using Kit::Io::IOutput::write;
 
     /// See Kit::Io::IOutput
-    bool write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept override;
+    bool write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept override;
 
     /// See Kit::Io::IOutput
     void flush() noexcept override;
@@ -80,16 +80,16 @@ public:
     bool isEof() noexcept override;
 
     /// See Kit::Io::File::IPosition
-    bool length( ByteCount_T& len ) noexcept override;
+    bool length( Kit::Type::SSize_T& len ) noexcept override;
 
     /// See Kit::Io::File::IPosition
-    bool currentPos( ByteCount_T& curPos ) noexcept override;
+    bool currentPos( Kit::Type::SSize_T& curPos ) noexcept override;
 
     /// See Kit::Io::File::IPosition
-    bool setRelativePos( ByteCount_T deltaOffset ) noexcept override;
+    bool setRelativePos( Kit::Type::SSize_T deltaOffset ) noexcept override;
 
     /// See Kit::Io::File::IPosition
-    bool setAbsolutePos( ByteCount_T newoffset ) noexcept override;
+    bool setAbsolutePos( Kit::Type::SSize_T newoffset ) noexcept override;
 
     /// See Kit::Io::File::IPosition
     bool setToEof() noexcept override;

@@ -48,25 +48,25 @@ public:
         offset as the length. The file position indicator is restored to its
         original position before returning.
      */
-    static bool length( KitIoFileHandle_T fd, ByteCount_T& length ) noexcept;
+    static bool length( KitIoFileHandle_T fd, Kit::Type::SSize_T& length ) noexcept;
 
 public:
     /** Returns the current file pointer offset, in bytes, from the top of the
         file.  If there is an error than false is returned.
      */
-    static bool currentPos( KitIoFileHandle_T fd, ByteCount_T& currentPos ) noexcept;
+    static bool currentPos( KitIoFileHandle_T fd, Kit::Type::SSize_T& currentPos ) noexcept;
 
     /** Adjusts the current pointer offset by the specified delta (in bytes).
         Returns true if successful, else false (i.e. setting the pointer
         past/before the file boundaries).
      */
-    static bool setRelativePos( KitIoFileHandle_T fd, ByteCount_T deltaOffset ) noexcept;
+    static bool setRelativePos( KitIoFileHandle_T fd, Kit::Type::SSize_T deltaOffset ) noexcept;
 
     /** Sets the file pointer to the absolute specified offset (in bytes).
         Returns true if successful, else false (i.e. setting the
         pointer past the end of the file).
      */
-    static bool setAbsolutePos( KitIoFileHandle_T fd, ByteCount_T newoffset ) noexcept;
+    static bool setAbsolutePos( KitIoFileHandle_T fd, Kit::Type::SSize_T newoffset ) noexcept;
 
     /** Sets the file pointer to End-Of-File.  Returns true  if successful, else
         false if an error occurred.

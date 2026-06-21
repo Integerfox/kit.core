@@ -61,7 +61,7 @@ public:
 
         If the method fails, the contents of the 'destString' is undefined.
      */
-    virtual bool read( Kit::Text::IString& destString, ByteCount_T numBytesToRead ) noexcept;
+    virtual bool read( Kit::Text::IString& destString, Kit::Type::SSize_T numBytesToRead ) noexcept;
 
     /** Attempts to read the specified number of bytes from the stream in the
         supplied buffer.  The actual number of bytes read is returned via
@@ -73,14 +73,14 @@ public:
         The caller is responsible for providing a buffer that is large
         enough to hold the requested number of bytes.
      */
-    virtual bool read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept = 0;
+    virtual bool read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept = 0;
 
-    /** This method is similar to read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ),
+    /** This method is similar to read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ),
         except that it will NOT return until 'numBytesToRead' have been read.
         
         If the method fails, the contents of the 'buffer' is undefined.
      */
-    virtual bool read( void* buffer, ByteCount_T numBytesToRead ) noexcept;
+    virtual bool read( void* buffer, Kit::Type::SSize_T numBytesToRead ) noexcept;
 
     /** Returns true if there data available to be read from the stream.
 

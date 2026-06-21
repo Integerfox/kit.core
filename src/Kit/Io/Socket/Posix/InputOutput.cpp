@@ -51,7 +51,7 @@ void InputOutput::activate( KitIoSocketHandle_T fd ) noexcept
 }
 
 ///////////////////
-bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool InputOutput::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     return Posix::Fdio::read( m_fd, m_eos, buffer, numBytes, bytesRead );
 }
@@ -63,7 +63,7 @@ bool InputOutput::available() noexcept
 
 
 //////////////////////
-bool InputOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool InputOutput::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     return Posix::Fdio::write( m_fd, m_eos, buffer, maxBytes, bytesWritten );
 }

@@ -9,6 +9,7 @@
 #include "Kit/System/Trace.h"
 #include "Kit/Io/IOutput.h"
 #include "Kit/Text/FString.h"
+#include "Kit/Type/SSize.h"
 #include <limits>
 
 
@@ -17,7 +18,7 @@ namespace
 class OutputSink : public Kit::Io::IOutput
 {
 public:
-    bool write( const void* buffer, Kit::Io::ByteCount_T maxBytes, Kit::Io::ByteCount_T& bytesWritten ) noexcept override
+    bool write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept override
     {
         bytesWritten = maxBytes;
         if ( buffer == nullptr || maxBytes <= 0 )
@@ -26,7 +27,7 @@ public:
         }
 
         const char* src = static_cast<const char*>( buffer );
-        for ( Kit::Io::ByteCount_T i = 0; i < maxBytes; ++i )
+        for ( Kit::Type::SSize_T i = 0; i < maxBytes; ++i )
         {
             m_contents += src[i];
         }

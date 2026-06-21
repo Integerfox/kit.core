@@ -38,7 +38,7 @@ void InputOutput::start( IRQn_Type           uartIrqNum,
 
 
 ////////////////////////////////////
-bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead )
+bool InputOutput::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead )
 {
     return m_driver.read( buffer, numBytes, bytesRead );
 }
@@ -55,7 +55,7 @@ size_t InputOutput::getRxErrorsCounts( bool clearCount ) noexcept
 
 
 ////////////////////////////////////
-bool InputOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten )
+bool InputOutput::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten )
 {
     bytesWritten = maxBytes;
     return m_driver.write( buffer, (size_t) maxBytes );

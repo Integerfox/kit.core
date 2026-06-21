@@ -21,7 +21,7 @@ namespace Io {
 ///////////////////
 bool IInput::read( char& c ) noexcept
 {
-    ByteCount_T bytesRead = 0;
+    Kit::Type::SSize_T bytesRead = 0;
     bool        result    = true;
     do
     {
@@ -34,23 +34,23 @@ bool IInput::read( char& c ) noexcept
 
 bool IInput::read( Kit::Text::IString& destString ) noexcept
 {
-    ByteCount_T bytesRead = 0;
+    Kit::Type::SSize_T bytesRead = 0;
     int         maxlen    = 0;
     char*       buffer    = destString.getBuffer( maxlen );
-    ByteCount_T len       = static_cast<ByteCount_T>( maxlen );
+    Kit::Type::SSize_T len       = static_cast<Kit::Type::SSize_T>( maxlen );
     bool        result    = read( buffer, len, bytesRead );
     buffer[bytesRead]     = '\0';
     return result;
 }
 
-bool IInput::read( Kit::Text::IString& destString, ByteCount_T numBytesToRead ) noexcept
+bool IInput::read( Kit::Text::IString& destString, Kit::Type::SSize_T numBytesToRead ) noexcept
 {
     KIT_SYSTEM_ASSERT( numBytesToRead >= 0 );
 
     // Housekeeping
     int         maxlen = 0;
     char*       buffer = destString.getBuffer( maxlen );
-    ByteCount_T len    = static_cast<ByteCount_T>( maxlen );
+    Kit::Type::SSize_T len    = static_cast<Kit::Type::SSize_T>( maxlen );
     if ( numBytesToRead > len )
     {
         numBytesToRead = len;  // Limit numBytesToRead to max allowed length of the string
@@ -63,7 +63,7 @@ bool IInput::read( Kit::Text::IString& destString, ByteCount_T numBytesToRead ) 
     return result;
 }
 
-bool IInput::read( void* buffer, ByteCount_T numBytesToRead ) noexcept
+bool IInput::read( void* buffer, Kit::Type::SSize_T numBytesToRead ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
     KIT_SYSTEM_ASSERT( numBytesToRead >= 0 );
@@ -72,8 +72,8 @@ bool IInput::read( void* buffer, ByteCount_T numBytesToRead ) noexcept
     if ( numBytesToRead > 0 )
     {
         // Housekeeping
-        ByteCount_T bytesRead = 0;
-        ByteCount_T remaining = numBytesToRead;
+        Kit::Type::SSize_T bytesRead = 0;
+        Kit::Type::SSize_T remaining = numBytesToRead;
         auto*       ptr       = static_cast<uint8_t*>( buffer );
 
         // Keep reading until all requested bytes are read
