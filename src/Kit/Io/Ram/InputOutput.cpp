@@ -9,6 +9,7 @@
 /** @file */
 
 #include "InputOutput.h"
+#include <string.h>
 
 using namespace Kit::System;
 

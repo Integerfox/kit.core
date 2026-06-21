@@ -17,7 +17,7 @@ namespace Kit {
 ///
 namespace Framing {
 
-/** This concrete convience template class extends the LineDecoder to include
+/** This concrete convenience template class extends the LineDecoder to include
     allocating the work buffer for the LineDecoder.
  */
 template <int SIZE_OF_WORK_BUFFER>

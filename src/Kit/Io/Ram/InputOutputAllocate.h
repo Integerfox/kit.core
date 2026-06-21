@@ -20,7 +20,7 @@ namespace Io {
 ///
 namespace Ram {
 
-/** This concrete template convience class extends the RAM InputOutput class
+/** This concrete template convenience class extends the RAM InputOutput class
     to include allocating the Ring Buffer memory.  The template argument 
     'NUM_BYTES' is the number of 'useable' bytes.
  */

@@ -97,13 +97,13 @@ protected:
     /// Mutex to protect concurrent access to the RingBuffer
     Kit::System::Mutex m_lock;
 
-    /// Track if there is blocked reader (NOTE: Not Protected by m_lock)
+    /// Track if there is blocked reader (NOTE: Not Protected by m_lock - assumes reading/writing a bool is atomic on the target platform)
     volatile bool m_readerWaiting;
 
-    /// Track if there is blocked writer (NOTE: Not Protected by m_lock)
+    /// Track if there is blocked writer (NOTE: Not Protected by m_lock - assumes reading/writing a bool is atomic on the target platform)
     volatile bool m_writerWaiting;
 
-    /// My open/close state (NOTE: Not Protected by m_lock)
+    /// My open/close state (NOTE: Not Protected by m_lock - assumes reading/writing a bool is atomic on the target platform)
     volatile bool m_started;
 };
 

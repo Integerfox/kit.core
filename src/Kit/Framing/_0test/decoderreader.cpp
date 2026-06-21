@@ -13,7 +13,7 @@
 #include "Kit/Framing/DecoderReader.h"
 #include "Kit/Framing/ISource.h"
 #include <string.h>
-
+#include <algorithm>
 
 ///
 using namespace Kit::System;

@@ -1,5 +1,5 @@
-#ifndef KIT_FRAMING_STREAM_SOURCE_H_
-#define KIT_FRAMING_STREAM_SOURCE_H_
+#ifndef KIT_FRAMING_STRING_SOURCE_H_
+#define KIT_FRAMING_STRING_SOURCE_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -57,7 +57,7 @@ public:
                Kit::Type::SSize_T& bytesRead ) noexcept override
     {
         // Validate parameters AND trap end-of-string has already been reached.
-        if ( dstBuffer == nullptr || m_srcPtr == nullptr || m_currentIdx < 0 )
+        if ( dstBuffer == nullptr || m_srcPtr == nullptr || m_currentIdx < 0 || numBytes < 0 )
         {
             bytesRead = 0;
             return false;
