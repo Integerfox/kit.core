@@ -44,11 +44,11 @@ public:
               does NOT have to be the size of the maximum possible input frame.
 
             - If the 'convertTabs' argument is set to a value OTHER than a tab
-              character ('\t'), then any tab characters encounter will be
-              converted to the value of 'convertTabs'. If 'convertTabs' is set
-              to a tab character, then tabs are not converted - which means that
-              if tabs are encountered, they will be treated as a non-printable
-              character and cause the current frame to be aborted.
+              character, then any tab characters encounter will be converted to
+              the value of 'convertTabs'. If 'convertTabs' is set to a tab 
+              character, then tabs are not converted - which means that if tabs
+              are encountered, they will be treated as a non-printable character
+              and cause the current frame to be aborted.
      */
     LineDecoder( ISource&           source,
                  uint8_t*           workBuffer,
