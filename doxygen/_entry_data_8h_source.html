@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -140,7 +140,7 @@ $(function() {
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    {</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keywordflow">if</span> ( maxDstLen &gt;= <a class="code hl_variable" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#acfb89821650d80dce8b18040ba5dd6f9">entryLen</a> )</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <a class="code hl_define" href="_persistence_2_types_8h.html#a011cdc717d3b1a672adb9b29a43b9600">KIT_PERSISTENCE_MEDIA_CURSOR</a> cursor( (uint8_t*)dst, maxDstLen );</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <a class="code hl_define" href="_persistence_2types_8h.html#a011cdc717d3b1a672adb9b29a43b9600">KIT_PERSISTENCE_MEDIA_CURSOR</a> cursor( (uint8_t*)dst, maxDstLen );</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            cursor.writeU64( <a class="code hl_variable" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#a0a3f810b6910909fb866473b3c0f3ab9">m_timestamp</a> );</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>            cursor.writeU8( <a class="code hl_variable" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#a7136964ee9b6d8e68e6f1af4377ed094">m_classificationId</a> );</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            cursor.writeU8( <a class="code hl_variable" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#a2da4cca8c299dc686b029eca894c58ce">m_packageId</a> );</div>
@@ -157,7 +157,7 @@ $(function() {
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    {</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">if</span> ( srcLen &gt;= <a class="code hl_variable" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#acfb89821650d80dce8b18040ba5dd6f9">entryLen</a> )</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        {</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <a class="code hl_define" href="_persistence_2_types_8h.html#a011cdc717d3b1a672adb9b29a43b9600">KIT_PERSISTENCE_MEDIA_CURSOR</a> cursor( (uint8_t*)src, srcLen );</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <a class="code hl_define" href="_persistence_2types_8h.html#a011cdc717d3b1a672adb9b29a43b9600">KIT_PERSISTENCE_MEDIA_CURSOR</a> cursor( (uint8_t*)src, srcLen );</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            cursor.readU64( <a class="code hl_variable" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#a0a3f810b6910909fb866473b3c0f3ab9">m_timestamp</a> );</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            cursor.readU8( <a class="code hl_variable" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#a7136964ee9b6d8e68e6f1af4377ed094">m_classificationId</a> );</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            cursor.readU8( <a class="code hl_variable" href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html#a2da4cca8c299dc686b029eca894c58ce">m_packageId</a> );</div>
@@ -183,7 +183,7 @@ $(function() {
 <div class="ttc" id="a_cursor_b_e_8h_html"><div class="ttname"><a href="_cursor_b_e_8h.html">CursorBE.h</a></div></div>
 <div class="ttc" id="a_entry_data_8h_html_acd9729243120f443e354fc01d18ac69a"><div class="ttname"><a href="_entry_data_8h.html#acd9729243120f443e354fc01d18ac69a">OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN</a></div><div class="ttdeci">#define OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN</div><div class="ttdoc">The size, in bytes, reserved to store the text portion of the log entry.</div><div class="ttdef"><b>Definition</b> EntryData.h:25</div></div>
 <div class="ttc" id="a_i_payload_8h_html"><div class="ttname"><a href="_i_payload_8h.html">IPayload.h</a></div></div>
-<div class="ttc" id="a_persistence_2_types_8h_html_a011cdc717d3b1a672adb9b29a43b9600"><div class="ttname"><a href="_persistence_2_types_8h.html#a011cdc717d3b1a672adb9b29a43b9600">KIT_PERSISTENCE_MEDIA_CURSOR</a></div><div class="ttdeci">#define KIT_PERSISTENCE_MEDIA_CURSOR</div><div class="ttdoc">Kit::Memory::CursorXX class type for storage media using Little Endian byte ordering for multi-byte m...</div><div class="ttdef"><b>Definition</b> Types.h:58</div></div>
+<div class="ttc" id="a_persistence_2types_8h_html_a011cdc717d3b1a672adb9b29a43b9600"><div class="ttname"><a href="_persistence_2types_8h.html#a011cdc717d3b1a672adb9b29a43b9600">KIT_PERSISTENCE_MEDIA_CURSOR</a></div><div class="ttdeci">#define KIT_PERSISTENCE_MEDIA_CURSOR</div><div class="ttdoc">Kit::Memory::CursorXX class type for storage media using Little Endian byte ordering for multi-byte m...</div><div class="ttdef"><b>Definition</b> Types.h:58</div></div>
 <div class="ttc" id="a_string_8h_html"><div class="ttname"><a href="_string_8h.html">String.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_persistence_1_1_record_1_1_i_payload_html"><div class="ttname"><a href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">Kit::Persistence::Record::IPayload</a></div><div class="ttdoc">This abstract class defines the interface accessing the data payload of an individual Record instance...</div><div class="ttdef"><b>Definition</b> IPayload.h:31</div></div>
 <div class="ttc" id="anamespace_kit_1_1_persistence_html_a3bbc33243439a507641980f98f2d8a25"><div class="ttname"><a href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Kit::Persistence::Size_T</a></div><div class="ttdeci">uint32_t Size_T</div><div class="ttdoc">This is the type for all size, lengths, offsets, etc.</div><div class="ttdef"><b>Definition</b> Types.h:32</div></div>
@@ -203,7 +203,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

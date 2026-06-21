@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -123,7 +123,7 @@
 <span id="L61"><span class="lineNum">      61</span>                 :             : </span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :         If the method fails, the contents of the 'destString' is undefined.</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :      */</span>
-<span id="L64"><span class="lineNum">      64</span>                 :             :     virtual bool read( Kit::Text::IString&amp; destString, ByteCount_T numBytesToRead ) noexcept;</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             :     virtual bool read( Kit::Text::IString&amp; destString, Kit::Type::SSize_T numBytesToRead ) noexcept;</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     /** Attempts to read the specified number of bytes from the stream in the</span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :         supplied buffer.  The actual number of bytes read is returned via</span>
@@ -135,14 +135,14 @@
 <span id="L73"><span class="lineNum">      73</span>                 :             :         The caller is responsible for providing a buffer that is large</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :         enough to hold the requested number of bytes.</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :      */</span>
-<span id="L76"><span class="lineNum">      76</span>                 :             :     virtual bool read( void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead ) noexcept = 0;</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :     virtual bool read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T&amp; bytesRead ) noexcept = 0;</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
-<span id="L78"><span class="lineNum">      78</span>                 :             :     /** This method is similar to read( void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead ),</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :     /** This method is similar to read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T&amp; bytesRead ),</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :         except that it will NOT return until 'numBytesToRead' have been read.</span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :         </span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :         If the method fails, the contents of the 'buffer' is undefined.</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :      */</span>
-<span id="L83"><span class="lineNum">      83</span>                 :             :     virtual bool read( void* buffer, ByteCount_T numBytesToRead ) noexcept;</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             :     virtual bool read( void* buffer, Kit::Type::SSize_T numBytesToRead ) noexcept;</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             : </span>
 <span id="L85"><span class="lineNum">      85</span>                 :             :     /** Returns true if there data available to be read from the stream.</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : </span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">80.0&nbsp;%</td>
@@ -83,7 +83,7 @@
 <span id="L21"><span class="lineNum">      21</span>                 :             : ///////////////////</span>
 <span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC tlaBgGNC">         248 : bool IInput::read( char&amp; c ) noexcept</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : {</span>
-<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">         248 :     ByteCount_T bytesRead = 0;</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">         248 :     Kit::Type::SSize_T bytesRead = 0;</span></span>
 <span id="L25"><span class="lineNum">      25</span>                 :             :     bool        result    = true;</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             :     do</span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :     {</span>
@@ -94,25 +94,25 @@
 <span id="L32"><span class="lineNum">      32</span>                 :             : }</span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : </span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">          41 : bool IInput::read( Kit::Text::IString&amp; destString ) noexcept</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">          43 : bool IInput::read( Kit::Text::IString&amp; destString ) noexcept</span></span>
 <span id="L36"><span class="lineNum">      36</span>                 :             : {</span>
-<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">          41 :     ByteCount_T bytesRead = 0;</span></span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">          41 :     int         maxlen    = 0;</span></span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">          41 :     char*       buffer    = destString.getBuffer( maxlen );</span></span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          41 :     ByteCount_T len       = static_cast&lt;ByteCount_T&gt;( maxlen );</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          41 :     bool        result    = read( buffer, len, bytesRead );</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">          41 :     buffer[bytesRead]     = '\0';</span></span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">          41 :     return result;</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">          43 :     Kit::Type::SSize_T bytesRead = 0;</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">          43 :     int         maxlen    = 0;</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">          43 :     char*       buffer    = destString.getBuffer( maxlen );</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          43 :     Kit::Type::SSize_T len       = static_cast&lt;Kit::Type::SSize_T&gt;( maxlen );</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          43 :     bool        result    = read( buffer, len, bytesRead );</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">          43 :     buffer[bytesRead]     = '\0';</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">          43 :     return result;</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : }</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : </span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">           3 : bool IInput::read( Kit::Text::IString&amp; destString, ByteCount_T numBytesToRead ) noexcept</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">           3 : bool IInput::read( Kit::Text::IString&amp; destString, Kit::Type::SSize_T numBytesToRead ) noexcept</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : {</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     KIT_SYSTEM_ASSERT( numBytesToRead &gt;= 0 );</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     // Housekeeping</span>
 <span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">           3 :     int         maxlen = 0;</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">           3 :     char*       buffer = destString.getBuffer( maxlen );</span></span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">           3 :     ByteCount_T len    = static_cast&lt;ByteCount_T&gt;( maxlen );</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">           3 :     Kit::Type::SSize_T len    = static_cast&lt;Kit::Type::SSize_T&gt;( maxlen );</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">           3 :     if ( numBytesToRead &gt; len )</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     {</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :         numBytesToRead = len;  // Limit numBytesToRead to max allowed length of the string</span>
@@ -125,7 +125,7 @@
 <span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">           3 :     return result;</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : }</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">         230 : bool IInput::read( void* buffer, ByteCount_T numBytesToRead ) noexcept</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">         230 : bool IInput::read( void* buffer, Kit::Type::SSize_T numBytesToRead ) noexcept</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : {</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     KIT_SYSTEM_ASSERT( buffer != nullptr );</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     KIT_SYSTEM_ASSERT( numBytesToRead &gt;= 0 );</span>
@@ -134,8 +134,8 @@
 <span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 230 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         230 :     if ( numBytesToRead &gt; 0 )</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     {</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :         // Housekeeping</span>
-<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">         230 :         ByteCount_T bytesRead = 0;</span></span>
-<span id="L76"><span class="lineNum">      76</span>                 :             :         ByteCount_T remaining = numBytesToRead;</span>
+<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">         230 :         Kit::Type::SSize_T bytesRead = 0;</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :         Kit::Type::SSize_T remaining = numBytesToRead;</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :         auto*       ptr       = static_cast&lt;uint8_t*&gt;( buffer );</span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : </span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :         // Keep reading until all requested bytes are read</span>

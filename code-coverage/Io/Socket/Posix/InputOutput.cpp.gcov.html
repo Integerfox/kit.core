@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -113,7 +113,7 @@
 <span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">           3 : }</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : </span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : ///////////////////</span>
-<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">          20 : bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead ) noexcept</span></span>
+<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">          20 : bool InputOutput::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T&amp; bytesRead ) noexcept</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : {</span>
 <span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          20 :     return Posix::Fdio::read( m_fd, m_eos, buffer, numBytes, bytesRead );</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : }</span>
@@ -125,7 +125,7 @@
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : </span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : //////////////////////</span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">          16 : bool InputOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T&amp; bytesWritten ) noexcept</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">          16 : bool InputOutput::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T&amp; bytesWritten ) noexcept</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : {</span>
 <span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">          16 :     return Posix::Fdio::write( m_fd, m_eos, buffer, maxBytes, bytesWritten );</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : }</span>

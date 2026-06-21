@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -121,9 +121,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae3a68a7acb68b414a9cdc1c4767abc9d" id="r_ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3a68a7acb68b414a9cdc1c4767abc9d">renameInPlace</a> (const char *oldName, const char *newName) noexcept</td></tr>
 <tr class="memdesc:ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renames the file system entry name in the OS's file system.  <br /></td></tr>
 <tr class="separator:ae3a68a7acb68b414a9cdc1c4767abc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1c4e0ed6af4ed47cb177a4609fd73f3" id="r_af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1c4e0ed6af4ed47cb177a4609fd73f3">size</a> (const char *fsEntryName) noexcept</td></tr>
-<tr class="memdesc:af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size, in bytes, of the file.  <br /></td></tr>
-<tr class="separator:af1c4e0ed6af4ed47cb177a4609fd73f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdf93efda5ae4184e31869d9ee4016bc" id="r_abdf93efda5ae4184e31869d9ee4016bc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abdf93efda5ae4184e31869d9ee4016bc">size</a> (const char *fsEntryName) noexcept</td></tr>
+<tr class="memdesc:abdf93efda5ae4184e31869d9ee4016bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size, in bytes, of the file.  <br /></td></tr>
+<tr class="separator:abdf93efda5ae4184e31869d9ee4016bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1fac64728507e887faec0bbe5edcd53" id="r_ad1fac64728507e887faec0bbe5edcd53"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1fac64728507e887faec0bbe5edcd53">split</a> (const char *fsEntryName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *fullPath, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *drive, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *path, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *fullName, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *name, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> *extension, char dirSeparator=dirSep, char extensionSeparator='.', char driveSeparator=':') noexcept</td></tr>
 <tr class="memdesc:ad1fac64728507e887faec0bbe5edcd53"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method breaks the specified <a class="el" href="namespace_kit_1_1_io_1_1_file.html" title="The File namespace provides the base/common interfaces for reading and writing data from/to Files.">File</a> <a class="el" href="class_kit_1_1_io_1_1_file_1_1_system.html" title="This concrete class defines the interface for handling and manipulating entries in the System&#39;s File ...">System</a> Entry name into it's individual components.  <br /></td></tr>
 <tr class="separator:ad1fac64728507e887faec0bbe5edcd53"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,7 +201,7 @@ m_readable</td>
 <td class="fielddoc">
 True if the file entry is readable by the application. </td></tr>
 <tr><td class="fieldtype">
-<a id="aab063a3ff6334191c66c4bc415fd4983" name="aab063a3ff6334191c66c4bc415fd4983"></a><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a></td>
+<a id="a77cc912a505b1046819f473f8a1cee3a" name="a77cc912a505b1046819f473f8a1cee3a"></a>SSize_T</td>
 <td class="fieldname">
 m_size</td>
 <td class="fielddoc">
@@ -792,8 +792,8 @@ false if the 'oldName' does not exist or if the 'newName' already exists. </dd><
 
 </div>
 </div>
-<a id="af1c4e0ed6af4ed47cb177a4609fd73f3" name="af1c4e0ed6af4ed47cb177a4609fd73f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1c4e0ed6af4ed47cb177a4609fd73f3">&#9670;&#160;</a></span>size()</h2>
+<a id="abdf93efda5ae4184e31869d9ee4016bc" name="abdf93efda5ae4184e31869d9ee4016bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdf93efda5ae4184e31869d9ee4016bc">&#9670;&#160;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -802,7 +802,7 @@ false if the 'oldName' does not exist or if the 'newName' already exists. </dd><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> Kit::Io::File::System::size </td>
+          <td class="memname">static <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> Kit::Io::File::System::size </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>fsEntryName</em></span></td><td>)</td>
           <td></td>
@@ -1245,7 +1245,7 @@ false if the 'oldName' does not exist or if the 'newName' already exists. </dd><
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

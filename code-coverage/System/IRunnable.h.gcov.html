@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -136,7 +136,7 @@
 <span id="L73"><span class="lineNum">      73</span>                 :             : protected:</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :     /// Constructor</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     IRunnable() noexcept</span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">         100 :         : m_parentThreadPtr_( nullptr )</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">         105 :         : m_parentThreadPtr_( nullptr )</span></span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :     {</span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :     }</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
@@ -149,10 +149,10 @@
 <span id="L86"><span class="lineNum">      86</span>                 :             :         </span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :         NOTE: This method is intended for internal use by the Thread class ONLY.</span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :     */</span>
-<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">         146 :     virtual void setThread( Thread* thread ) noexcept</span></span>
+<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">         158 :     virtual void setThread( Thread* thread ) noexcept</span></span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     {</span>
-<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">         150 :         m_parentThreadPtr_ = thread;</span></span>
-<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">         146 :     }</span></span>
+<span id="L91"><span class="lineNum">      91</span>                 :<span class="tlaGNC">         162 :         m_parentThreadPtr_ = thread;</span></span>
+<span id="L92"><span class="lineNum">      92</span>                 :<span class="tlaGNC">         158 :     }</span></span>
 <span id="L93"><span class="lineNum">      93</span>                 :             : </span>
 <span id="L94"><span class="lineNum">      94</span>                 :             : protected:</span>
 <span id="L95"><span class="lineNum">      95</span>                 :             :     /// A back-reference to the thread that the runnable object is executing in</span>

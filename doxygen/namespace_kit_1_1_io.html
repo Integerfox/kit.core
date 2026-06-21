@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -47,8 +47,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle"><div class="title">Kit::Io Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -60,6 +59,9 @@ $(function() {
 Namespaces</h2></td></tr>
 <tr class="memitem:namespace_kit_1_1_io_1_1_file" id="r_namespace_kit_1_1_io_1_1_file"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_io_1_1_file.html">File</a></td></tr>
 <tr class="memdesc:namespace_kit_1_1_io_1_1_file"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="namespace_kit_1_1_io_1_1_file.html" title="The File namespace provides the base/common interfaces for reading and writing data from/to Files.">File</a> namespace provides the base/common interfaces for reading and writing data from/to Files. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespace_kit_1_1_io_1_1_ram" id="r_namespace_kit_1_1_io_1_1_ram"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_io_1_1_ram.html">Ram</a></td></tr>
+<tr class="memdesc:namespace_kit_1_1_io_1_1_ram"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="namespace_kit_1_1_io_1_1_ram.html" title="The Ram namespace implements the Kit::Io stream interfaces using RAM as the stream media.">Ram</a> namespace implements the <a class="el" href="namespace_kit_1_1_io.html" title="The Io namespace provides the base/common interfaces for reading and writing data from/to streams and...">Kit::Io</a> stream interfaces using RAM as the stream media. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_kit_1_1_io_1_1_serial" id="r_namespace_kit_1_1_io_1_1_serial"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_io_1_1_serial.html">Serial</a></td></tr>
 <tr class="memdesc:namespace_kit_1_1_io_1_1_serial"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="namespace_kit_1_1_io_1_1_serial.html" title="The Serial namespace provides interfaces for accessing Serial types of devices using the Kit::Io para...">Serial</a> namespace provides interfaces for accessing <a class="el" href="namespace_kit_1_1_io_1_1_serial.html" title="The Serial namespace provides interfaces for accessing Serial types of devices using the Kit::Io para...">Serial</a> types of devices using the <a class="el" href="namespace_kit_1_1_io.html" title="The Io namespace provides the base/common interfaces for reading and writing data from/to streams and...">Kit::Io</a> paradigm, aka file descriptors for <a class="el" href="namespace_kit_1_1_io_1_1_serial.html" title="The Serial namespace provides interfaces for accessing Serial types of devices using the Kit::Io para...">Serial</a> Ports. <br /></td></tr>
@@ -107,58 +109,14 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_io_1_1_tee_output.html">TeeOutput</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class implements a <a class="el" href="class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str...">IOutput</a> stream that outputs the data to multiple (up to 4) output streams .  <a href="class_kit_1_1_io_1_1_tee_output.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a6ef29048f8025506fcff4cb1e763277e" id="r_a6ef29048f8025506fcff4cb1e763277e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> = int32_t</td></tr>
-<tr class="memdesc:a6ef29048f8025506fcff4cb1e763277e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signed data type for arguments, variables, etc.  <br /></td></tr>
-<tr class="separator:a6ef29048f8025506fcff4cb1e763277e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00283c182d84dee9a942d1ef5198032f" id="r_a00283c182d84dee9a942d1ef5198032f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00283c182d84dee9a942d1ef5198032f">Offset_T</a> = int32_t</td></tr>
-<tr class="memdesc:a00283c182d84dee9a942d1ef5198032f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Alias for Offset type (used for seek operations)  <br /></td></tr>
-<tr class="separator:a00283c182d84dee9a942d1ef5198032f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_io.html" title="The Io namespace provides the base/common interfaces for reading and writing data from/to streams and...">Io</a> namespace provides the base/common interfaces for reading and writing data from/to streams and files. </p>
 <p>Essentially the <a class="el" href="namespace_kit_1_1_io.html" title="The Io namespace provides the base/common interfaces for reading and writing data from/to streams and...">Kit::Io</a>* namespaces provide platform independent interfaces for operations that would typically be done using Posix file descriptors or Windows file HANDLEs. </p>
-</div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="a6ef29048f8025506fcff4cb1e763277e" name="a6ef29048f8025506fcff4cb1e763277e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6ef29048f8025506fcff4cb1e763277e">&#9670;&#160;</a></span>ByteCount_T</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#a6ef29048f8025506fcff4cb1e763277e">Kit::Io::ByteCount_T</a> = int32_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Signed data type for arguments, variables, etc. </p>
-<p>with respect to how many bytes can be read/written from/to streams, files, etc. The default is for a signed 32 bit integer. A platform can override the default to make larger or smaller as needed.</p>
-<p>Note: This is my work-around for the fact that C++ does not have a standard 'ssize_t' type. ssize_t is defined in POSIX and is used when read/write operations using file descriptors. </p>
-
-</div>
-</div>
-<a id="a00283c182d84dee9a942d1ef5198032f" name="a00283c182d84dee9a942d1ef5198032f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00283c182d84dee9a942d1ef5198032f">&#9670;&#160;</a></span>Offset_T</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#a00283c182d84dee9a942d1ef5198032f">Kit::Io::Offset_T</a> = int32_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Alias for Offset type (used for seek operations) </p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

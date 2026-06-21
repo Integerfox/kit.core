@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
-            <td class="headerCovTableEntry">66</td>
-            <td class="headerCovTableEntry">33</td>
+            <td class="headerCovTableEntry">70</td>
+            <td class="headerCovTableEntry">35</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -92,7 +92,7 @@
 <span id="L30"><span class="lineNum">      30</span>                 :             :           the class's methods.</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :  */</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : template &lt;int S&gt;</span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC tlaBgGNC">          27 : class FString : public FStringBase</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC tlaBgGNC">          31 : class FString : public FStringBase</span></span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : {</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : public:</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     /// Constructor</span>
@@ -104,8 +104,8 @@
 <span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">           1 :         : FStringBase( string.getString(), m_strMem, S ) {}</span></span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     /// Constructor</span>
-<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">         386 :     FString( const char* string = &quot;&quot; ) noexcept</span></span>
-<span id="L46"><span class="lineNum">      46</span>   [<span class="tlaGBC" title="Branch 0 was taken 16 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 8 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         326 :         : FStringBase( string, m_strMem, S ) {}</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">         401 :     FString( const char* string = &quot;&quot; ) noexcept</span></span>
+<span id="L46"><span class="lineNum">      46</span>   [<span class="tlaGBC" title="Branch 0 was taken 16 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 8 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         339 :         : FStringBase( string, m_strMem, S ) {}</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 3 times"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 14 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span><span class="tlaGBC" title="Branch 16 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 17 was not taken"> - </span><span class="tlaGBC" title="Branch 18 was taken 2 times"> + </span> 
@@ -115,7 +115,8 @@
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 34 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 35 was not taken"> - </span><span class="tlaGBC" title="Branch 36 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 37 was not taken"> - </span><span class="tlaGBC" title="Branch 38 was taken 1 time"> + </span> 
 <span class="lineNum">        </span> <span class="tlaUNC" title="Branch 39 was not taken"> - </span><span class="tlaGBC" title="Branch 40 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 41 was not taken"> - </span><span class="tlaGBC" title="Branch 42 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 43 was not taken"> - </span> 
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 44 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 45 was not taken"> - </span><span class="tlaGBC" title="Branch 46 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 47 was not taken"> - </span><span class="tlaGBC" title="Branch 48 was taken 1 time"> + </span> 
-<span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 49 was not taken"> - </span>]
+<span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 49 was not taken"> - </span><span class="tlaGBC" title="Branch 50 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 51 was not taken"> - </span><span class="tlaGBC" title="Branch 52 was taken 1 time"> + </span> 
+<span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 53 was not taken"> - </span>]
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     /// Constructor</span>
 <span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">           2 :     FString( char c ) noexcept</span></span>

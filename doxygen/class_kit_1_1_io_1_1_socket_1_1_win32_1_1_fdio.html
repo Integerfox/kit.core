@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -86,15 +86,15 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aa283618953a56600ba19601d7162b069" id="r_aa283618953a56600ba19601d7162b069"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa283618953a56600ba19601d7162b069">isOpened</a> (SOCKET fd) noexcept</td></tr>
 <tr class="memdesc:aa283618953a56600ba19601d7162b069"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the file descriptor is in the open state.  <br /></td></tr>
 <tr class="separator:aa283618953a56600ba19601d7162b069"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bcfe30787c2a84dba4b01e96dad42db" id="r_a9bcfe30787c2a84dba4b01e96dad42db"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bcfe30787c2a84dba4b01e96dad42db">read</a> (SOCKET fd, bool &amp;eosFlag, void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesRead) noexcept</td></tr>
-<tr class="memdesc:a9bcfe30787c2a84dba4b01e96dad42db"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method attempts to read up to 'numBytes' from the file descriptor.  <br /></td></tr>
-<tr class="separator:a9bcfe30787c2a84dba4b01e96dad42db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c199595dc90f71d5b7bb2aca6c25277" id="r_a9c199595dc90f71d5b7bb2aca6c25277"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c199595dc90f71d5b7bb2aca6c25277">read</a> (SOCKET fd, bool &amp;eosFlag, void *buffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesRead) noexcept</td></tr>
+<tr class="memdesc:a9c199595dc90f71d5b7bb2aca6c25277"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method attempts to read up to 'numBytes' from the file descriptor.  <br /></td></tr>
+<tr class="separator:a9c199595dc90f71d5b7bb2aca6c25277"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10b3aeaf00d0e7dad6dc2156ffa63876" id="r_a10b3aeaf00d0e7dad6dc2156ffa63876"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10b3aeaf00d0e7dad6dc2156ffa63876">resolveAddress</a> (const char *remoteHostName, int portNumToConnectTo, struct addrinfo *&amp;results) noexcept</td></tr>
 <tr class="memdesc:a10b3aeaf00d0e7dad6dc2156ffa63876"><td class="mdescLeft">&#160;</td><td class="mdescRight">This resolved the specific network address string and port number (IPv4 or IPv6) to a socket address info structure.  <br /></td></tr>
 <tr class="separator:a10b3aeaf00d0e7dad6dc2156ffa63876"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7895e0b2f967e3611249daf406a8e6b" id="r_ae7895e0b2f967e3611249daf406a8e6b"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7895e0b2f967e3611249daf406a8e6b">write</a> (SOCKET fd, bool &amp;eosFlag, const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesWritten) noexcept</td></tr>
-<tr class="memdesc:ae7895e0b2f967e3611249daf406a8e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor 'fd'.  <br /></td></tr>
-<tr class="separator:ae7895e0b2f967e3611249daf406a8e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8306434fc2c9aaa993c2b1ce37e9cd79" id="r_a8306434fc2c9aaa993c2b1ce37e9cd79"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8306434fc2c9aaa993c2b1ce37e9cd79">write</a> (SOCKET fd, bool &amp;eosFlag, const void *buffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesWritten) noexcept</td></tr>
+<tr class="memdesc:a8306434fc2c9aaa993c2b1ce37e9cd79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor 'fd'.  <br /></td></tr>
+<tr class="separator:a8306434fc2c9aaa993c2b1ce37e9cd79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This static class provides a collection of functions for operating on <a class="el" href="namespace_kit_1_1_io_1_1_socket_1_1_win32.html" title="The Win32 namespace provides the Win32 specific implementation for its parent namespace.">Win32</a> file descriptors for BSD sockets. </p>
@@ -360,8 +360,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9bcfe30787c2a84dba4b01e96dad42db" name="a9bcfe30787c2a84dba4b01e96dad42db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bcfe30787c2a84dba4b01e96dad42db">&#9670;&#160;</a></span>read()</h2>
+<a id="a9c199595dc90f71d5b7bb2aca6c25277" name="a9c199595dc90f71d5b7bb2aca6c25277"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c199595dc90f71d5b7bb2aca6c25277">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -387,12 +387,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a></td>          <td class="paramname"><span class="paramname"><em>numBytes</em>, </span></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>numBytes</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -448,8 +448,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae7895e0b2f967e3611249daf406a8e6b" name="ae7895e0b2f967e3611249daf406a8e6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7895e0b2f967e3611249daf406a8e6b">&#9670;&#160;</a></span>write()</h2>
+<a id="a8306434fc2c9aaa993c2b1ce37e9cd79" name="a8306434fc2c9aaa993c2b1ce37e9cd79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8306434fc2c9aaa993c2b1ce37e9cd79">&#9670;&#160;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,12 +475,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a></td>          <td class="paramname"><span class="paramname"><em>maxBytes</em>, </span></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>maxBytes</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesWritten</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesWritten</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -504,7 +504,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

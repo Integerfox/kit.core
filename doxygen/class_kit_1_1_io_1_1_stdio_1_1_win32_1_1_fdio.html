@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -81,12 +81,12 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8df0efedec94b512ec5f5ff2f55f44da" id="r_a8df0efedec94b512ec5f5ff2f55f44da"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8df0efedec94b512ec5f5ff2f55f44da">isOpened</a> (HANDLE fd) noexcept</td></tr>
 <tr class="memdesc:a8df0efedec94b512ec5f5ff2f55f44da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the file descriptor is in the open state.  <br /></td></tr>
 <tr class="separator:a8df0efedec94b512ec5f5ff2f55f44da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace3793cbb74294c50b4ae98339ebba23" id="r_ace3793cbb74294c50b4ae98339ebba23"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace3793cbb74294c50b4ae98339ebba23">read</a> (HANDLE fd, bool &amp;eosFlag, void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> numBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesRead) noexcept</td></tr>
-<tr class="memdesc:ace3793cbb74294c50b4ae98339ebba23"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method attempts to read up to 'numBytes' from the file descriptor.  <br /></td></tr>
-<tr class="separator:ace3793cbb74294c50b4ae98339ebba23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade75f3b6edfb0ea38f4ff3514a67f600" id="r_ade75f3b6edfb0ea38f4ff3514a67f600"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade75f3b6edfb0ea38f4ff3514a67f600">write</a> (HANDLE fd, bool &amp;eosFlag, const void *buffer, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;bytesWritten) noexcept</td></tr>
-<tr class="memdesc:ade75f3b6edfb0ea38f4ff3514a67f600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor 'fd'.  <br /></td></tr>
-<tr class="separator:ade75f3b6edfb0ea38f4ff3514a67f600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a575c72e1488ce0e8d27c116bac504995" id="r_a575c72e1488ce0e8d27c116bac504995"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a575c72e1488ce0e8d27c116bac504995">read</a> (HANDLE fd, bool &amp;eosFlag, void *buffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesRead) noexcept</td></tr>
+<tr class="memdesc:a575c72e1488ce0e8d27c116bac504995"><td class="mdescLeft">&#160;</td><td class="mdescRight">The method attempts to read up to 'numBytes' from the file descriptor.  <br /></td></tr>
+<tr class="separator:a575c72e1488ce0e8d27c116bac504995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad385cbf6e63c238e51cc0f4885037c5c" id="r_ad385cbf6e63c238e51cc0f4885037c5c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad385cbf6e63c238e51cc0f4885037c5c">write</a> (HANDLE fd, bool &amp;eosFlag, const void *buffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesWritten) noexcept</td></tr>
+<tr class="memdesc:ad385cbf6e63c238e51cc0f4885037c5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to write up to 'maxBytes' from 'buffer' to the file descriptor 'fd'.  <br /></td></tr>
+<tr class="separator:ad385cbf6e63c238e51cc0f4885037c5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This static class provides a collection of functions for operating on <a class="el" href="namespace_kit_1_1_io_1_1_stdio_1_1_win32.html" title="The Win32 namespace provides the Windows specific implementation for its parent namespace.">Win32</a> handles. </p>
@@ -230,8 +230,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ace3793cbb74294c50b4ae98339ebba23" name="ace3793cbb74294c50b4ae98339ebba23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace3793cbb74294c50b4ae98339ebba23">&#9670;&#160;</a></span>read()</h2>
+<a id="a575c72e1488ce0e8d27c116bac504995" name="a575c72e1488ce0e8d27c116bac504995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a575c72e1488ce0e8d27c116bac504995">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,12 +257,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a></td>          <td class="paramname"><span class="paramname"><em>numBytes</em>, </span></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>numBytes</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -280,8 +280,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ade75f3b6edfb0ea38f4ff3514a67f600" name="ade75f3b6edfb0ea38f4ff3514a67f600"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade75f3b6edfb0ea38f4ff3514a67f600">&#9670;&#160;</a></span>write()</h2>
+<a id="ad385cbf6e63c238e51cc0f4885037c5c" name="ad385cbf6e63c238e51cc0f4885037c5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad385cbf6e63c238e51cc0f4885037c5c">&#9670;&#160;</a></span>write()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,12 +307,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a></td>          <td class="paramname"><span class="paramname"><em>maxBytes</em>, </span></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>maxBytes</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_io.html#a6ef29048f8025506fcff4cb1e763277e">ByteCount_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesWritten</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesWritten</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -336,7 +336,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

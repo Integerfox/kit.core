@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -103,9 +103,9 @@
 <span id="L41"><span class="lineNum">      41</span>                 :             : </span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : public:</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :     /// This method returns true if the Ring Buffer is empty</span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC tlaBgGNC">         106 :     virtual bool isEmpty() const noexcept</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC tlaBgGNC">         125 :     virtual bool isEmpty() const noexcept</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     {</span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">         106 :         return m_readIdx.load( std::memory_order_acquire ) == m_writeIdx.load( std::memory_order_acquire );</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">         125 :         return m_readIdx.load( std::memory_order_acquire ) == m_writeIdx.load( std::memory_order_acquire );</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : </span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     /// This method returns true if the Ring Buffer is full</span>
@@ -208,12 +208,12 @@
 <span id="L130"><span class="lineNum">     130</span>                 :             :                  DON'T USE IT.  If this method is used improperly, it WILL</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :                  CORRUPT the Ring Buffer!</span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :      */</span>
-<span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">          10 :     void removeElements( unsigned numElementsToRemove ) noexcept</span></span>
+<span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">          31 :     void removeElements( unsigned numElementsToRemove ) noexcept</span></span>
 <span id="L134"><span class="lineNum">     134</span>                 :             :     {</span>
 <span id="L135"><span class="lineNum">     135</span>                 :             :         // By definition/design - I simply have to update the read index</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :         unsigned localReadIdx = m_readIdx.load( std::memory_order_relaxed );</span>
-<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">          10 :         m_readIdx.store( ( localReadIdx + numElementsToRemove ) % m_elements, std::memory_order_release );</span></span>
-<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">          10 :     }</span></span>
+<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">          31 :         m_readIdx.store( ( localReadIdx + numElementsToRemove ) % m_elements, std::memory_order_release );</span></span>
+<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">          31 :     }</span></span>
 <span id="L139"><span class="lineNum">     139</span>                 :             : </span>
 <span id="L140"><span class="lineNum">     140</span>                 :             : protected:</span>
 <span id="L141"><span class="lineNum">     141</span>                 :             :     /** This method returns a pointer to the next item to be added. In addition</span>
@@ -236,12 +236,12 @@
 <span id="L158"><span class="lineNum">     158</span>                 :             :                  DON'T USE IT. If this method is used improperly, it WILL</span>
 <span id="L159"><span class="lineNum">     159</span>                 :             :                  CORRUPT the Ring Buffer!</span>
 <span id="L160"><span class="lineNum">     160</span>                 :             :      */</span>
-<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">          12 :     void addElements( unsigned numElementsAdded ) noexcept</span></span>
+<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">          29 :     void addElements( unsigned numElementsAdded ) noexcept</span></span>
 <span id="L162"><span class="lineNum">     162</span>                 :             :     {</span>
 <span id="L163"><span class="lineNum">     163</span>                 :             :         // By definition/design - I simply have to update the write index</span>
 <span id="L164"><span class="lineNum">     164</span>                 :             :         unsigned localWriteIdx = m_writeIdx.load( std::memory_order_relaxed );</span>
-<span id="L165"><span class="lineNum">     165</span>                 :<span class="tlaGNC">          12 :         m_writeIdx.store( ( localWriteIdx + numElementsAdded ) % m_elements, std::memory_order_release );</span></span>
-<span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">          12 :     }</span></span>
+<span id="L165"><span class="lineNum">     165</span>                 :<span class="tlaGNC">          29 :         m_writeIdx.store( ( localWriteIdx + numElementsAdded ) % m_elements, std::memory_order_release );</span></span>
+<span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">          29 :     }</span></span>
 <span id="L167"><span class="lineNum">     167</span>                 :             : </span>
 <span id="L168"><span class="lineNum">     168</span>                 :             : protected:</span>
 <span id="L169"><span class="lineNum">     169</span>                 :             :     /** Index of the next item to be read from the ring.  This variable is only</span>

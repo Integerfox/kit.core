@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -94,14 +94,14 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h1><a class="anchor" id="autotoc_md52"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md54"></a>
 Class Diagram</h1>
 <p>Here is a simplified class diagram for the <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a> namespace</p>
 <div class="image">
 <img src="class-diagram_kitpersistencerecordjournal.png" alt=""/>
 <div class="caption">
 Kit Persistence Record Journal Class Diagram</div></div>
-    <h1><a class="anchor" id="autotoc_md53"></a>
+    <h1><a class="anchor" id="autotoc_md55"></a>
 Details</h1>
 <p>The '<a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a>' namespace extends the basic Persistent::Record interface with the ability for a single <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a> to contain N entries in chronological order, where an entry content is defined by a Kit::Persistence::IPayload instance. An example usage for <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a> entries is to persistently store log entries.</p>
 <p><b>NOTE</b>: The core implementation is <b>not</b> thread safe. See the <em>Application Interfaces</em> section below for how clients/the-application safely read and write journal entries.</p>
@@ -133,7 +133,7 @@ Details</h1>
 </li>
 <li>On-startup - only the "head record" is loaded into the RAM</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md54"></a>
+<h1><a class="anchor" id="autotoc_md56"></a>
 Application Interfaces</h1>
 <ul>
 <li>For thread safety, the application interfaces with the <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a> records using ITC messaging and model points. This is so that the physical reading and writing of persistence storage can be done in separate or dedicated thread from the Application threads.</li>
@@ -147,7 +147,7 @@ Application Interfaces</h1>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -78,12 +78,12 @@
 <span id="L16"><span class="lineNum">      16</span>                 :             : namespace Kit { </span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : namespace Container { </span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : </span>
-<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC tlaBgGNC">          24 : RingBufferBaseAtomic::RingBufferBaseAtomic( unsigned numMaxElements ) noexcept</span></span>
+<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC tlaBgGNC">          33 : RingBufferBaseAtomic::RingBufferBaseAtomic( unsigned numMaxElements ) noexcept</span></span>
 <span id="L20"><span class="lineNum">      20</span>                 :             :     : m_readIdx( 0 )</span>
 <span id="L21"><span class="lineNum">      21</span>                 :             :     , m_writeIdx( 0 )</span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          24 :     , m_elements( numMaxElements )</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          33 :     , m_elements( numMaxElements )</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : {</span>
-<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          24 : }</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          33 : }</span></span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : </span>
 <span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">         131 : bool RingBufferBaseAtomic::remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : {</span>
@@ -184,7 +184,7 @@
 <span id="L122"><span class="lineNum">     122</span>                 :<span class="tlaGNC">          83 :     return true;</span></span>
 <span id="L123"><span class="lineNum">     123</span>                 :             : }</span>
 <span id="L124"><span class="lineNum">     124</span>                 :             : </span>
-<span id="L125"><span class="lineNum">     125</span>                 :<span class="tlaGNC">          13 : void* RingBufferBaseAtomic::peekNextRemoveItems( unsigned&amp; dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept</span></span>
+<span id="L125"><span class="lineNum">     125</span>                 :<span class="tlaGNC">          38 : void* RingBufferBaseAtomic::peekNextRemoveItems( unsigned&amp; dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept</span></span>
 <span id="L126"><span class="lineNum">     126</span>                 :             : {</span>
 <span id="L127"><span class="lineNum">     127</span>                 :             :     KIT_SYSTEM_ASSERT( srcRingBufMemory != nullptr );</span>
 <span id="L128"><span class="lineNum">     128</span>                 :             : </span>
@@ -193,49 +193,49 @@
 <span id="L131"><span class="lineNum">     131</span>                 :             :     const unsigned writeIdx = m_writeIdx.load( std::memory_order_acquire );</span>
 <span id="L132"><span class="lineNum">     132</span>                 :             : </span>
 <span id="L133"><span class="lineNum">     133</span>                 :             :     // Check for empty</span>
-<span id="L134"><span class="lineNum">     134</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">          13 :     if ( readIdx == writeIdx )</span></span>
+<span id="L134"><span class="lineNum">     134</span>         [<span class="tlaGBC" title="Branch 0 was taken 7 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 31 times"> + </span>]:<span class="tlaGNC">          38 :     if ( readIdx == writeIdx )</span></span>
 <span id="L135"><span class="lineNum">     135</span>                 :             :     {</span>
-<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">           3 :         dstNumFlatElements = 0;</span></span>
-<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">           3 :         return nullptr;</span></span>
+<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">           7 :         dstNumFlatElements = 0;</span></span>
+<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">           7 :         return nullptr;</span></span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :     }</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             : </span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :     // Number of elements that can be removed without wrapping around the memory buffer</span>
-<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">          10 :     unsigned currentElems = ( writeIdx - readIdx + m_elements ) % m_elements;</span></span>
-<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">          10 :     dstNumFlatElements    = m_elements - readIdx;</span></span>
-<span id="L143"><span class="lineNum">     143</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7 times"> + </span>]:<span class="tlaGNC">          10 :     if ( dstNumFlatElements &gt; currentElems )</span></span>
+<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">          31 :     unsigned currentElems = ( writeIdx - readIdx + m_elements ) % m_elements;</span></span>
+<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">          31 :     dstNumFlatElements    = m_elements - readIdx;</span></span>
+<span id="L143"><span class="lineNum">     143</span>         [<span class="tlaGBC" title="Branch 0 was taken 23 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 8 times"> + </span>]:<span class="tlaGNC">          31 :     if ( dstNumFlatElements &gt; currentElems )</span></span>
 <span id="L144"><span class="lineNum">     144</span>                 :             :     {</span>
-<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">           3 :         dstNumFlatElements = currentElems;</span></span>
+<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">          23 :         dstNumFlatElements = currentElems;</span></span>
 <span id="L146"><span class="lineNum">     146</span>                 :             :     }</span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : </span>
-<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          10 :     uint8_t* srcPtr = static_cast&lt;uint8_t*&gt;( const_cast&lt;void*&gt;( srcRingBufMemory ) ) + ( readIdx * elemSize );</span></span>
-<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">          10 :     return srcPtr;</span></span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          31 :     uint8_t* srcPtr = static_cast&lt;uint8_t*&gt;( const_cast&lt;void*&gt;( srcRingBufMemory ) ) + ( readIdx * elemSize );</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">          31 :     return srcPtr;</span></span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : }</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             : </span>
-<span id="L152"><span class="lineNum">     152</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span>]:<span class="tlaGNC">          18 : void* RingBufferBaseAtomic::peekNextAddItems( unsigned&amp; dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept</span></span>
+<span id="L152"><span class="lineNum">     152</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 32 times"> + </span>]:<span class="tlaGNC">          37 : void* RingBufferBaseAtomic::peekNextAddItems( unsigned&amp; dstNumFlatElements, size_t elemSize, const void* srcRingBufMemory ) const noexcept</span></span>
 <span id="L153"><span class="lineNum">     153</span>                 :             : {</span>
 <span id="L154"><span class="lineNum">     154</span>                 :             :     // Snapshot of ring buffer's indexes</span>
 <span id="L155"><span class="lineNum">     155</span>                 :             :     const unsigned readIdx  = m_readIdx.load( std::memory_order_acquire );</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             :     const unsigned writeIdx = m_writeIdx.load( std::memory_order_relaxed );</span>
 <span id="L157"><span class="lineNum">     157</span>                 :             : </span>
 <span id="L158"><span class="lineNum">     158</span>                 :             :     // Check for full</span>
-<span id="L159"><span class="lineNum">     159</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span>]:<span class="tlaGNC">          18 :     if ( ( ( writeIdx + 1 ) % m_elements ) == readIdx )</span></span>
+<span id="L159"><span class="lineNum">     159</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 32 times"> + </span>]:<span class="tlaGNC">          37 :     if ( ( ( writeIdx + 1 ) % m_elements ) == readIdx )</span></span>
 <span id="L160"><span class="lineNum">     160</span>                 :             :     {</span>
-<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">           3 :         dstNumFlatElements = 0;</span></span>
-<span id="L162"><span class="lineNum">     162</span>                 :<span class="tlaGNC">           3 :         return nullptr;</span></span>
+<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">           5 :         dstNumFlatElements = 0;</span></span>
+<span id="L162"><span class="lineNum">     162</span>                 :<span class="tlaGNC">           5 :         return nullptr;</span></span>
 <span id="L163"><span class="lineNum">     163</span>                 :             :     }</span>
 <span id="L164"><span class="lineNum">     164</span>                 :             : </span>
 <span id="L165"><span class="lineNum">     165</span>                 :             :     // Number of elements that can be added without wrapping around the memory buffer</span>
-<span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">          15 :     unsigned currentElems    = ( writeIdx - readIdx + m_elements ) % m_elements;</span></span>
-<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">          15 :     unsigned totalAvailElems = m_elements - 1 - currentElems;</span></span>
-<span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">          15 :     dstNumFlatElements       = m_elements - writeIdx;</span></span>
-<span id="L169"><span class="lineNum">     169</span>         [<span class="tlaGBC" title="Branch 0 was taken 12 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          15 :     if ( dstNumFlatElements &gt; totalAvailElems )</span></span>
+<span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">          32 :     unsigned currentElems    = ( writeIdx - readIdx + m_elements ) % m_elements;</span></span>
+<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">          32 :     unsigned totalAvailElems = m_elements - 1 - currentElems;</span></span>
+<span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">          32 :     dstNumFlatElements       = m_elements - writeIdx;</span></span>
+<span id="L169"><span class="lineNum">     169</span>         [<span class="tlaGBC" title="Branch 0 was taken 25 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7 times"> + </span>]:<span class="tlaGNC">          32 :     if ( dstNumFlatElements &gt; totalAvailElems )</span></span>
 <span id="L170"><span class="lineNum">     170</span>                 :             :     {</span>
-<span id="L171"><span class="lineNum">     171</span>                 :<span class="tlaGNC">          12 :         dstNumFlatElements = totalAvailElems;</span></span>
+<span id="L171"><span class="lineNum">     171</span>                 :<span class="tlaGNC">          25 :         dstNumFlatElements = totalAvailElems;</span></span>
 <span id="L172"><span class="lineNum">     172</span>                 :             :     }</span>
 <span id="L173"><span class="lineNum">     173</span>                 :             : </span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :     // Get a pointer to next 'available' address to add an element</span>
-<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">          15 :     uint8_t* srcPtr = static_cast&lt;uint8_t*&gt;( const_cast&lt;void*&gt;( srcRingBufMemory ) ) + ( writeIdx * elemSize );</span></span>
-<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">          15 :     return srcPtr;</span></span>
+<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">          32 :     uint8_t* srcPtr = static_cast&lt;uint8_t*&gt;( const_cast&lt;void*&gt;( srcRingBufMemory ) ) + ( writeIdx * elemSize );</span></span>
+<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">          32 :     return srcPtr;</span></span>
 <span id="L177"><span class="lineNum">     177</span>                 :             : }</span>
 <span id="L178"><span class="lineNum">     178</span>                 :             : </span>
 <span id="L179"><span class="lineNum">     179</span>                 :             : </span>

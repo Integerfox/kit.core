@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">70.2&nbsp;%</td>
@@ -182,7 +182,7 @@
 <span id="L114"><span class="lineNum">     114</span>                 :             : }</span>
 <span id="L115"><span class="lineNum">     115</span>                 :             : </span>
 <span id="L116"><span class="lineNum">     116</span>                 :             : ///////////////////////////////</span>
-<span id="L117"><span class="lineNum">     117</span>                 :<span class="tlaGNC">          18 : bool TeeOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T&amp; bytesWritten ) noexcept</span></span>
+<span id="L117"><span class="lineNum">     117</span>                 :<span class="tlaGNC">          18 : bool TeeOutput::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T&amp; bytesWritten ) noexcept</span></span>
 <span id="L118"><span class="lineNum">     118</span>                 :             : {</span>
 <span id="L119"><span class="lineNum">     119</span>                 :             :     bool     rc     = true;</span>
 <span id="L120"><span class="lineNum">     120</span>                 :<span class="tlaGNC">          18 :     IOutput* stream = first( m_streams );</span></span>
@@ -208,7 +208,7 @@
 <span id="L140"><span class="lineNum">     140</span>                 :             :         }</span>
 <span id="L141"><span class="lineNum">     141</span>                 :             : </span>
 <span id="L142"><span class="lineNum">     142</span>                 :             :         // IOutput to stream --&gt;and trap any error</span>
-<span id="L143"><span class="lineNum">     143</span>                 :             :         ByteCount_T tempWritten;</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             :         Kit::Type::SSize_T tempWritten;</span>
 <span id="L144"><span class="lineNum">     144</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">          27 :         if ( !stream-&gt;write( buffer, maxBytes, tempWritten ) )</span></span>
 <span id="L145"><span class="lineNum">     145</span>                 :             :         {</span>
 <span id="L146"><span class="lineNum">     146</span>                 :             :             // move the stream with an error to the failed list</span>

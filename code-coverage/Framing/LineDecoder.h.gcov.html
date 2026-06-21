@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Framing/LineDecoder.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Framing</a> - LineDecoder.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : #ifndef KIT_FRAMING_LINE_DECODER_H_</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : #define KIT_FRAMING_LINE_DECODER_H_</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  *</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : </span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : #include &quot;Kit/Framing/DecoderReader.h&quot;</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : #include &quot;Kit/System/Assert.h&quot;</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             : </span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : ///</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : namespace Kit {</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : ///</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : namespace Framing {</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : </span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : /** This concrete template class extends the DecoderReader where a frame</span>
+<span id="L22"><span class="lineNum">      22</span>                 :             :     consider one line of PRINTABLE ASCII text followed by a newline character.</span>
+<span id="L23"><span class="lineNum">      23</span>                 :             : </span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :     ANY printable ASCII character is accepted as start-of-frame. And end-of-frame</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     is a newline character (`\r` or `\n`).  There is NO escape sequence since the</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :     escape sequence is need to embedded EOF characters - but in this case EOF</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             :     (newline) is NOT a printable ASCII character --&gt;so an escape sequence is</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :     not meaningful.</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             : </span>
+<span id="L30"><span class="lineNum">      30</span>                 :             :     This class is NOT thread safe.</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             : </span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :     NOTE: If a non-printable ASCII character is encounter within a frame, the</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :           current frame is aborted AND a newline character is required before</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :           accepting/detecting a new SOF character(s).</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             : </span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :  */</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             : class LineDecoder : public DecoderReader</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             : {</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             : public:</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :     /** Constructor.</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :         NOTES:</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :             - The size of the workBuffer determines how big of 'chunks' data is</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :               read from the &quot;input source&quot;, i.e. it is a working buffer and</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :               does NOT have to be the size of the maximum possible input frame.</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             : </span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :             - If the 'convertTabs' argument is set to a value OTHER than a tab</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :               character, then any tab characters encounter will be converted to</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :               the value of 'convertTabs'. If 'convertTabs' is set to a tab </span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :               character, then tabs are not converted - which means that if tabs</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :               are encountered, they will be treated as a non-printable character</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :               and cause the current frame to be aborted.</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :      */</span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC tlaBgGNC">           3 :     LineDecoder( ISource&amp;           source,</span></span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :                  uint8_t*           workBuffer,</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :                  Kit::Type::SSize_T sizeOfWorkBuffer,</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :                  char               convertTabs = '\t' )</span>
+<span id="L57"><span class="lineNum">      57</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           3 :         : DecoderReader( source, workBuffer, sizeOfWorkBuffer )</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">           3 :         , m_frameDetected( false )</span></span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC">           3 :         , m_convertTabs( convertTabs )</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :     {</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :         KIT_SYSTEM_ASSERT( convertTabs == '\t' || ( convertTabs &gt;= ' ' &amp;&amp; convertTabs &lt;= '~' ) );</span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">           3 :     }</span></span>
+<span id="L63"><span class="lineNum">      63</span>                 :             : </span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : protected:</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :     /// See Kit::Framing::IDecoder</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             :     bool isStartOfFrame( uint8_t byte ) noexcept override;</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             : </span>
+<span id="L68"><span class="lineNum">      68</span>                 :             :     /// See Kit::Framing::IDecoder</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             :     bool isEndOfFrame( uint8_t byte ) noexcept override;</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             : </span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :     /// See Kit::Framing::IDecoder</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :     bool isEscapeByte( uint8_t byte ) noexcept override;</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             : </span>
+<span id="L74"><span class="lineNum">      74</span>                 :             :     /// See Kit::Framing::IDecoder</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :     bool isLegalByte( uint8_t byte ) noexcept override;</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             : </span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :     /// See Kit::Framing::DecoderReader</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :     void initializeScan() noexcept override;</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             : </span>
+<span id="L80"><span class="lineNum">      80</span>                 :             : protected:</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :     /// Helper method to convert tabs when requested</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :     void convertTabs( uint8_t&amp; incomingByte ) noexcept;</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             : </span>
+<span id="L84"><span class="lineNum">      84</span>                 :             : protected:</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             :     /// Track if I have encountered SOF character(s) without an EOF character</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :     bool m_frameDetected;</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             : </span>
+<span id="L88"><span class="lineNum">      88</span>                 :             :     /// Remember my tabs option</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             :     char m_convertTabs;</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             : };</span>
+<span id="L91"><span class="lineNum">      91</span>                 :             : </span>
+<span id="L92"><span class="lineNum">      92</span>                 :             : </span>
+<span id="L93"><span class="lineNum">      93</span>                 :             : }  // end namespaces</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             : }</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

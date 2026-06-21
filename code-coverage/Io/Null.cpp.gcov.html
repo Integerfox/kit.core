@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -84,7 +84,7 @@
 <span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          13 : }</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : </span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : /////////////////////</span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">           6 : bool Null::read( void* buffer, ByteCount_T numBytes, ByteCount_T&amp; bytesRead ) noexcept </span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">           6 : bool Null::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T&amp; bytesRead ) noexcept </span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : {</span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :     KIT_SYSTEM_ASSERT( buffer != nullptr );</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : </span>
@@ -98,7 +98,7 @@
 <span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">           1 :     return false;</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : }</span>
 <span id="L38"><span class="lineNum">      38</span>                 :             : </span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">          27 : bool Null::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T&amp; bytesWritten ) noexcept </span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">          27 : bool Null::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T&amp; bytesWritten ) noexcept </span></span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : {</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     KIT_SYSTEM_ASSERT( buffer != nullptr );</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : </span>

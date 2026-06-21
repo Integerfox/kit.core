@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -139,8 +139,11 @@ Protected Attributes</h2></td></tr>
     string. To enter a literal QUOTE character within a text string, precede the
     QUOTE character with the ESC character (e.g., ").  To enter a literal ESC
     character within a text string, precede the character with ESC character
-    (e.g., \). IMPORTANT NOTE: The QUOTE and ESC characters are REMOVED from
+    (e.g., \). IMPORTANT: The QUOTE and ESC characters are REMOVED from
     the string when it is tokenized!
+
+    NOTE: A TEXT STRING can be empty (e.g. "").  When/if encountered, an 
+          empty TEXT STRING is treated as a parameter with zero string length.
 
 
 </pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -179,7 +182,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-<p>Requires a pointer to the 'raw' string to be tokenized. Note: ALL OF THE PARSING OCCURS IN THIS METHOD. </p>
+<p>Requires a pointer to the 'raw' string to be tokenized. NOTE: ALL OF THE PARSING OCCURS IN THIS METHOD. </p>
 
 </div>
 </div>
@@ -485,7 +488,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 21 2026 20:22:29 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

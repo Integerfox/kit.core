@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 329-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -59,7 +59,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="helpers_8h__incl.svg" width="3083" height="872"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="helpers_8h__incl.svg" width="3307" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="helpers_8h_source.html">Go to the source code of this file.</a></p>
@@ -94,6 +94,13 @@ Functions</h2></td></tr>
 <tr class="memitem:a89ddbd887d81a50448bd39b762b9de16" id="r_a89ddbd887d81a50448bd39b762b9de16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89ddbd887d81a50448bd39b762b9de16">minWaitOnStreamData</a> (<a class="el" href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a> &amp;stream, unsigned long minWait=10, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</td></tr>
 <tr class="memdesc:a89ddbd887d81a50448bd39b762b9de16"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function performs a blocking wait by monitoring an input stream for available data.  <br /></td></tr>
 <tr class="separator:a89ddbd887d81a50448bd39b762b9de16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a087faea4131e8aa9783c7c00b51755d6" id="r_a087faea4131e8aa9783c7c00b51755d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a087faea4131e8aa9783c7c00b51755d6">waitThreadActive</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Kit::System::Thread</a> *threadPtr, uint32_t maxWaitMs=1000, uint32_t waitDelayMs=10)</td></tr>
+<tr class="memdesc:a087faea4131e8aa9783c7c00b51755d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method busy waits till the specified thread is active/running. Returns false if TIMED-OUT <br  />
+  <br /></td></tr>
+<tr class="separator:a087faea4131e8aa9783c7c00b51755d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae472befbc1f19642d56e118335cff20b" id="r_ae472befbc1f19642d56e118335cff20b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae472befbc1f19642d56e118335cff20b">waitThreadInactive</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Kit::System::Thread</a> *threadPtr, uint32_t maxWaitMs=1000, uint32_t waitDelayMs=10)</td></tr>
+<tr class="memdesc:ae472befbc1f19642d56e118335cff20b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method busy waits till the specified thread is NOT active/running. Returns false if TIMED-OUT.  <br /></td></tr>
+<tr class="separator:ae472befbc1f19642d56e118335cff20b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file defines helper functions/interface for writing unit tests. </p>
@@ -321,10 +328,83 @@ template&lt;class MPTYPE &gt; </div>
 
 </div>
 </div>
+<a id="a087faea4131e8aa9783c7c00b51755d6" name="a087faea4131e8aa9783c7c00b51755d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a087faea4131e8aa9783c7c00b51755d6">&#9670;&#160;</a></span>waitThreadActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool waitThreadActive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_system_1_1_thread.html">Kit::System::Thread</a> *</td>          <td class="paramname"><span class="paramname"><em>threadPtr</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>maxWaitMs</em><span class="paramdefsep"> = </span><span class="paramdefval">1000</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>waitDelayMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method busy waits till the specified thread is active/running. Returns false if TIMED-OUT <br  />
+ </p>
+
+</div>
+</div>
+<a id="ae472befbc1f19642d56e118335cff20b" name="ae472befbc1f19642d56e118335cff20b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae472befbc1f19642d56e118335cff20b">&#9670;&#160;</a></span>waitThreadInactive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool waitThreadInactive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_system_1_1_thread.html">Kit::System::Thread</a> *</td>          <td class="paramname"><span class="paramname"><em>threadPtr</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>maxWaitMs</em><span class="paramdefsep"> = </span><span class="paramdefval">1000</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>waitDelayMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method busy waits till the specified thread is NOT active/running. Returns false if TIMED-OUT. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 7 2026 01:54:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

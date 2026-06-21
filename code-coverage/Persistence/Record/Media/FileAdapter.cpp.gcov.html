@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-07 02:00:45</td>
+            <td class="headerValue">2026-06-21 20:29:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">72.7&nbsp;%</td>
@@ -113,7 +113,7 @@
 <span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">         276 :     bool result = fd.setAbsolutePos( offset );</span></span>
 <span id="L51"><span class="lineNum">      51</span>         [<span class="tlaGBC" title="Branch 0 was taken 276 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         276 :     if ( result )</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     {</span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">         276 :         result = fd.write( srcData, static_cast&lt;Io::ByteCount_T&gt;( srcLen ) );</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">         276 :         result = fd.write( srcData, static_cast&lt;Kit::Type::SSize_T&gt;( srcLen ) );</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     }</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
 <span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">         276 :     fd.close();</span></span>
@@ -142,7 +142,7 @@
 <span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaUNC">           0 :         return KIT_PERSISTENCE_SIZE_MAX;</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :     }</span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : </span>
-<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC tlaBgGNC">         227 :     result = fd.read( dstBuffer, static_cast&lt;Io::ByteCount_T&gt;( bytesToRead ) );</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC tlaBgGNC">         227 :     result = fd.read( dstBuffer, static_cast&lt;Kit::Type::SSize_T&gt;( bytesToRead ) );</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             : </span>
 <span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">         227 :     fd.close();</span></span>
 <span id="L84"><span class="lineNum">      84</span>         [<span class="tlaGBC" title="Branch 0 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 214 times"> + </span>]:<span class="tlaGNC">         227 :     return result ? bytesToRead : KIT_PERSISTENCE_SIZE_MAX;</span></span>
