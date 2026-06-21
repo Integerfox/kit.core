@@ -52,6 +52,12 @@ public:
     {
     }
 
+    /// Destructor
+    ~InputOutput() noexcept
+    {
+        close();
+    }
+    
 public:
     /// Pull in overloaded methods from base class
     using Kit::Io::IInputOutput::read;
