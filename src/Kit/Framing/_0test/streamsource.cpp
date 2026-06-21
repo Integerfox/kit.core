@@ -39,7 +39,7 @@ TEST_CASE( "StreamSource" )
     REQUIRE( bytesRead == 0 );
     REQUIRE( uut.read( buffer, sizeof( buffer ), bytesRead ) == true );
     REQUIRE( bytesRead == 7 );
-    REQUIRE( strcmp( buffer, " Kitty!" ) == 0 );
+    REQUIRE( strncmp( buffer, " Kitty!", 7 ) == 0 );
     REQUIRE( uut.read( buffer, sizeof( buffer ), bytesRead ) == false );
     REQUIRE( bytesRead == 0 );
 
@@ -55,7 +55,7 @@ TEST_CASE( "StreamSource" )
     memset( buffer, 0, sizeof( buffer ) );
     REQUIRE( uut2.read( buffer, sizeof( buffer ), bytesRead ) == true );
     REQUIRE( bytesRead == 7 );
-    REQUIRE( strcmp( buffer, " Kitty!" ) == 0 );
+    REQUIRE( strncmp( buffer, " Kitty!", 7 ) == 0 );
     REQUIRE( uut2.read( buffer, sizeof( buffer ), bytesRead ) == false );
     REQUIRE( bytesRead == 0 );
 

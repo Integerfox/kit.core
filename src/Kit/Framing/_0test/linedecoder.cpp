@@ -45,7 +45,7 @@ TEST_CASE( "LineDecoder" )
         src.write( testString );
         REQUIRE( uut.scan( MAX_FRAME_SIZE, frame, frameSize ) == true );
         REQUIRE( frameSize == (SSize_T)( strlen( TEST_FRAME ) ) );
-        REQUIRE( strcmp( (const char*)frame, TEST_FRAME ) == 0 );
+        REQUIRE( strncmp( (const char*)frame, TEST_FRAME, strlen(TEST_FRAME) ) == 0 );
     }
 
     SECTION( "Convert Tabs" )
@@ -55,7 +55,7 @@ TEST_CASE( "LineDecoder" )
         src.write( testString );
         REQUIRE( uut.scan( MAX_FRAME_SIZE, frame, frameSize ) == true );
         REQUIRE( frameSize == (SSize_T)( strlen( TEST_OUT_FRAME ) ) );
-        REQUIRE( strcmp( (const char*)frame, TEST_OUT_FRAME ) == 0 );
+        REQUIRE( strncmp( (const char*)frame, TEST_OUT_FRAME, strlen(TEST_OUT_FRAME) ) == 0 );
     }
 
     SECTION( "non-printable" )
@@ -65,7 +65,7 @@ TEST_CASE( "LineDecoder" )
         src.write( testString );
         REQUIRE( uut.scan( MAX_FRAME_SIZE, frame, frameSize ) == true );
         REQUIRE( frameSize == (SSize_T)( strlen( TEST_FRAME ) ) );
-        REQUIRE( strcmp( (const char*)frame, TEST_FRAME ) == 0 );
+        REQUIRE( strncmp( (const char*)frame, TEST_FRAME, strlen(TEST_FRAME) ) == 0 );
     }
 
     src.close();
