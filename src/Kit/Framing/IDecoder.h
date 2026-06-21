@@ -26,10 +26,10 @@ class IDecoder
 public:
     /** This method reads from an Input source (which is defined/provided by
         the concrete implementation) until a valid frame is found or an error
-        occurred.  If a valid frame was found, true will be returned and the
-        frame will be stored in 'frameBuffer'.  The length, in bytes, of the frame found
-        is returned via 'frameSize'.  False is returned if a error was
-        encountered while reading the Input source.
+        occurred (i.e. a blocking call).  If a valid frame was found, true will
+        be returned and the frame will be stored in 'frameBuffer'.  The length,
+        in bytes, of the frame found is returned via 'frameSize'.  False is
+        returned if a error was encountered while reading the Input source.
      */
     virtual bool scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
                        uint8_t*            frameBuffer,

@@ -26,10 +26,10 @@ namespace Framing {
 class EncoderWriter : public IEncoder
 {
 public:
-    /** Constructor. The size of the workBuffer determines how big of
-        'chunks' data is read from the "input source", i.e. it is a working
-        buffer and does NOT have to be the size of the maximum possible input
-        frame.
+    /** Constructor. When 'skipSendingSof' is set to true, the start-of-frame
+        character will NOT be sent when startFrame() is called. This should ONLY
+        be set to true when the framing protocol supports multiple SOF characters. 
+        See LineDecoder as example of such a protocol.
      */
     EncoderWriter( IDestination& destination,
                    uint8_t       startOfFrame,
@@ -80,10 +80,7 @@ protected:
     /// Flag: I am currently in a Frame
     bool m_inFrame;
 
-    /** Flag: Skip sending Start-of-Frame character. This flag should ONLY be
-        set when the child class's framing protocol supports multiple SOF characters.
-        See TBD as example of such a protocol.
-     */
+    /// Flag: Skip sending Start-of-Frame character
     bool m_skipSendingSof;
 };
 

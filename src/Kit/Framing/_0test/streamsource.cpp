@@ -26,12 +26,12 @@ using namespace Kit::Framing;
 TEST_CASE( "StreamSource" )
 {
     ShutdownUnitTesting::clearAndUseCounter();
-    Kit::Io::Ram::InputOutputAllocate<64> dst; // Must be large enough to hold the test string TWICE
-    StreamSource                          uut( dst );
+    Kit::Io::Ram::InputOutputAllocate<64> src; // Must be large enough to hold the test string TWICE
+    StreamSource                          uut( src );
     char                                  buffer[14];
     Kit::Type::SSize_T                    bytesRead;
 
-    dst.write( "Hello Kitty!" );
+    src.write( "Hello Kitty!" );
     REQUIRE( uut.read( buffer, 5, bytesRead ) == true );
     REQUIRE( bytesRead == 5 );
     REQUIRE( strncmp( buffer, "Hello", 5 ) == 0 );
@@ -47,8 +47,8 @@ TEST_CASE( "StreamSource" )
     memset( buffer, 0, sizeof( buffer ) );
     REQUIRE( uut2.read( buffer, 5, bytesRead ) == false );
     REQUIRE( bytesRead == 0 );
-    uut2.setInput( dst );
-    dst.write( "Hello Kitty!" );
+    uut2.setInput( src );
+    src.write( "Hello Kitty!" );
     REQUIRE( uut2.read( buffer, 5, bytesRead ) == true );
     REQUIRE( bytesRead == 5 );
     REQUIRE( strncmp( buffer, "Hello", 5 ) == 0 );
@@ -59,7 +59,7 @@ TEST_CASE( "StreamSource" )
     REQUIRE( uut2.read( buffer, sizeof( buffer ), bytesRead ) == false );
     REQUIRE( bytesRead == 0 );
 
-    dst.close();
+    src.close();
     REQUIRE( uut2.read( buffer, sizeof( buffer ), bytesRead ) == false );
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
