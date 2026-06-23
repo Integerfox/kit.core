@@ -61,7 +61,13 @@ public:
         return m_srcPtr->read( dstBuffer, numBytes, bytesRead );
     }
 
-protected:
+    /// Getter for the underlying input stream
+    inline Kit::Io::IInput* getStream() noexcept
+    {
+        return m_srcPtr;
+    }
+
+    protected:
     /// Underlying input stream
     Kit::Io::IInput* m_srcPtr;
 };

@@ -68,8 +68,14 @@ public:
         return m_dstPtr != nullptr;  // No special handling needed to 'end' the output sequence for a stream
     }
 
+    /// Getter for the underlying output stream
+    inline Kit::Io::IOutput* getStream() noexcept
+    {
+        return m_dstPtr;
+    }
+
 protected:
-    /// Underlying stream output stream
+    /// Underlying output stream
     Kit::Io::IOutput* m_dstPtr;
 };
 

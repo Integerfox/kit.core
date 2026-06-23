@@ -32,6 +32,7 @@ TEST_CASE( "StreamSource" )
     Kit::Type::SSize_T                    bytesRead;
 
     src.write( "Hello Kitty!" );
+    REQUIRE( uut.getStream() == &src );
     REQUIRE( uut.read( buffer, 5, bytesRead ) == true );
     REQUIRE( bytesRead == 5 );
     REQUIRE( strncmp( buffer, "Hello", 5 ) == 0 );
@@ -44,11 +45,14 @@ TEST_CASE( "StreamSource" )
     REQUIRE( bytesRead == 0 );
 
     StreamSource uut2;
+    REQUIRE( uut2.getStream() == nullptr );
+
     memset( buffer, 0, sizeof( buffer ) );
     REQUIRE( uut2.read( buffer, 5, bytesRead ) == false );
     REQUIRE( bytesRead == 0 );
     uut2.setInput( src );
     src.write( "Hello Kitty!" );
+    REQUIRE( uut2.getStream() == &src );
     REQUIRE( uut2.read( buffer, 5, bytesRead ) == true );
     REQUIRE( bytesRead == 5 );
     REQUIRE( strncmp( buffer, "Hello", 5 ) == 0 );

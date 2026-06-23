@@ -43,7 +43,10 @@ public:
         NOTE: An ENTIRE frame must be written with a single call to this method
               to avoid interleaving of output frames with console trace/logging.
     */
-    virtual bool writeFrame( const char* text ) noexcept = 0;
+    inline bool writeFrame( const char* text ) noexcept
+    {
+        return writeFrame( text, strlen( text ) );
+    }   
 
     /** Same as writeFrame(), but only outputs (at most) 'N' bytes as the content
         of the frame

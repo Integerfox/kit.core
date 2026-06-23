@@ -10,6 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/TShell/ICommand.h"
 #include "kit_config.h"
 #include "Kit/Container/OrderedList.h"
 #include "Kit/TShell/IProcessor.h"
@@ -53,6 +54,10 @@
 #define OPTION_KIT_TSHELL_PROCESSOR_PROMPT "$ "
 #endif
 
+/// Size, in bytes, of internal raw-read-buffer.  The buffer size does NOT limit the frame size
+#ifndef OPTION_KIT_TSHELL_PROCESSOR_RAW_READ_BUFFER_SIZE
+#define OPTION_KIT_TSHELL_PROCESSOR_RAW_READ_BUFFER_SIZE 16
+#endif
 
 ///
 namespace Kit {
@@ -140,8 +145,30 @@ class Processor : public IProcessor, public IContext
                char                                   argEscape     = '`',
                char                                   argDelimiter  = ' ',
                char                                   argQuote      = '"',
-               char                                   argTerminator = '\n' );
-               
+               char                                   argTerminator = '\n' )
+        : m_commands( commands )
+        , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )
+        , m_framer( outputDestination, argTerminator, argTerminator, argEscape )
+        , m_secPolicy( securityPolicy )
+        , m_outLock( outputLock )
+        , m_streamSource( commandSource )
+        , m_streamDestination( outputDestination )
+        , m_frameSize( 0 )
+        , m_comment( commentChar )
+        , m_esc( argEscape )
+        , m_del( argDelimiter )
+        , m_quote( argQuote )
+        , m_term( argTerminator )
+        , m_blocking( true )
+        , m_running( false )
+    {
+        KIT_SYSTEM_ASSERT( commentChar >= ' ' && commentChar <= '~' );
+        KIT_SYSTEM_ASSERT( argEscape >= ' ' && argEscape <= '~' );
+        KIT_SYSTEM_ASSERT( argDelimiter >= ' ' && argDelimiter <= '~' );
+        KIT_SYSTEM_ASSERT( argQuote >= ' ' && argQuote <= '~' );
+        KIT_SYSTEM_ASSERT( argTerminator >= ' ' && argTerminator <= '~' );
+    }
+
 public:
     /// See Kit::TShell::IProcessor
     bool start( Kit::Io::IInput&  infd,
@@ -160,9 +187,6 @@ public:
 
     /// See Kit::TShell::IContext
     ICommand* findCommand( const char* verb, unsigned verbLength ) noexcept override;
-
-    /// See Kit::TShell::IContext
-    bool writeFrame( const char* text ) noexcept override;
 
     /// See Kit::TShell::IContext
     bool writeFrame( const char* text, Kit::Type::SSize_T maxBytes ) noexcept override;
@@ -197,6 +221,31 @@ public:
     ISecurity& getSecurity() noexcept override;
 
 protected:
+    /** Helper method that attempts to execute the content of the de-framed/decoded
+        'inputString'.  The method returns the result code of the execute
+        command.  If 'inputString' is not a valid command, then the appropriate
+        error/result code is returned.
+     */
+    virtual Result_T processCommand( char* deframedInput ) noexcept;
+
+    /// Helper method
+    void outputCommandError( Result_T result, const char* deframedInput ) noexcept;
+
+    /** Helper method that performs a 'single' read cycle of the input stream.
+        Returns 0 if successful. Returns 1 if exiting. Returns -1 on error
+     */
+    int getAndProcessFrame() noexcept;
+
+    /** Helper method that executes the decoder, i.e. logic to parse the incoming
+        text.  Returns 1 if a full/valid frame was found. Returns 0 if input frame
+        is incomplete. Return -1 if an error occurred.
+     */
+    virtual int readInput( Kit::Type::SSize_T& frameSize ) noexcept;
+
+    /// Helper method.  Outputs text without any framing
+    void outputMessage( const char* textString ) noexcept;
+
+protected:
     /// List of supported commands
     Kit::Container::OrderedList<ICommand>& m_commands;
 
@@ -212,6 +261,12 @@ protected:
     /// Output lock
     Kit::System::Mutex& m_outLock;
 
+    /// Reference to the LineDecoder's input source
+    Kit::Framing::StreamSource& m_streamSource;
+
+    /// Reference to the EncoderWriter's output destination
+    Kit::Framing::StreamDestination& m_streamDestination;
+
     /// Current frame size
     Kit::Type::SSize_T m_frameSize;
 
@@ -224,8 +279,11 @@ protected:
     /// Shared work buffer
     Kit::Text::FString<OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE> m_workBuffer;
 
-    /// Input Frame buffer
-    char m_inputBuffer[OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE + 1];
+    /// Buffer for reading the raw input (does NOT limit the size of the input frame)
+    uint8_t m_rawInputBuffer[OPTION_KIT_TSHELL_PROCESSOR_RAW_READ_BUFFER_SIZE];
+
+    /// Input Frame buffer (used to store the deframed input command)
+    uint8_t m_frameBuffer[OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE + 1];
 
     /// Comment character
     char m_comment;
@@ -241,6 +299,9 @@ protected:
 
     /// Argument terminator character
     char m_term;
+
+    /// Blocking semantic flag.  When true the read operations are blocking until a complete frame is found
+    bool m_blocking;
 
     /// My run state
     bool m_running;
