@@ -39,7 +39,7 @@ bool InputOutput::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SS
         return true;
     }
 
-    if ( !m_started )
+    if ( !m_started || numBytes < 0 )
     {
         return false;
     }
@@ -100,7 +100,7 @@ bool InputOutput::write( const void* buffer, Kit::Type::SSize_T numBytesToTx, Ki
     }
 
     // Fail if not started
-    if ( !m_started )
+    if ( !m_started || numBytesToTx < 0 )
     {
         return false;
     }

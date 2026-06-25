@@ -65,8 +65,8 @@ public:
 
         The method returns 0 if the method executed without errors.  The method
         returns -1 if an error occurred (e.g. a Input/Output stream error was
-        encounter).  The method returns 1 if the command processor self terminated
-        or was requested to stop.
+        encounter).  The method returns 1 if the command processor self terminated,
+        not started, or was requested to stop.
      */
     virtual int poll() noexcept = 0;
 
