@@ -149,7 +149,7 @@ public:
                char                                   argTerminator = '\n' )
         : m_commands( commands )
         , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )
-        , m_framer( outputDestination, '\r', argTerminator, argEscape, true ) // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.
+        , m_framer( outputDestination, argTerminator+1, argTerminator, argEscape, true ) // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.
         , m_secPolicy( securityPolicy )
         , m_outLock( outputLock )
         , m_streamSource( commandSource )

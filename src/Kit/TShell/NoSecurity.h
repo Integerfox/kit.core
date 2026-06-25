@@ -24,9 +24,9 @@ class NoSecurity : public ISecurity
 {
 public:
     /// See Kit::TShell::ISecurity
-    bool isAuthorized( Permissions_T,
-                       const char*,
-                       bool = false ) noexcept override
+    bool isAuthorized( Permissions_T permission,
+                       const char*   entireCommandString,
+                       bool          queryOnly = false ) noexcept override
     {
         return true;
     }
