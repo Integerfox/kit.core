@@ -119,11 +119,11 @@ Result_T Processor::processCommand( char* deframedInput ) noexcept
     // Skip blank and comment lines
     if ( *firstToken == 0 || *firstToken == m_comment )
     {
-        return +Result_T::SUCCESS;
+        return +Result_T::CMD_SUCCESS;
     }
 
     // Lookup the command to be executed
-    Result_T    result        = +Result_T::ERROR_NOT_SUPPORTED;
+    Result_T    result        = Result_T::CMD_ERR_NOT_SUPPORTED;
     const char* endFirstToken = Kit::Text::Strip::notSpace( firstToken );
     size_t      tokenSize     = endFirstToken - firstToken;
     ICommand*   cmdPtr        = findCommand( firstToken, tokenSize );
@@ -132,7 +132,7 @@ Result_T Processor::processCommand( char* deframedInput ) noexcept
     if ( cmdPtr != nullptr )
     {
         // Authenticate the command and execute it if authorized.
-        result = +Result_T::ERROR_NOT_AUTHORIZED;
+        result = +Result_T::CMD_ERR_NOT_AUTHORIZED;
         if ( m_secPolicy.isAuthorized( cmdPtr->getRequiredPermissions(), deframedInput ) )
         {
             // Command is authorized --> execute the command
@@ -141,7 +141,7 @@ Result_T Processor::processCommand( char* deframedInput ) noexcept
     }
 
     // If the command failed, then output the error message
-    if ( result != +Result_T::SUCCESS )
+    if ( result != +Result_T::CMD_SUCCESS )
     {
         outputCommandError( result, deframedInput );
     }
@@ -195,7 +195,7 @@ int Processor::getAndProcessFrame() noexcept
 
         // Execute the command
         Result_T result = processCommand( reinterpret_cast<char*>( m_frameBuffer ) );
-        if ( result == +Result_T::ERROR_IO )
+        if ( result == +Result_T::CMD_ERR_IO )
         {
             // Output stream error
             return -1;

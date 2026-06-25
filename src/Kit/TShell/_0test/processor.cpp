@@ -34,7 +34,7 @@ class TestCommand : public ICommand
 {
 public:
     TestCommand( const char*   verb,
-                 Result_T      returnCode    = +Result_T::SUCCESS,
+                 Result_T      returnCode    = +Result_T::CMD_SUCCESS,
                  Permissions_T permissions   = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS,
                  SSize_T       oobReadLength = 0 ) noexcept
         : m_key( verb )
@@ -47,7 +47,7 @@ public:
         m_lastRaw[0] = '\0';
     }
 
-    Result_T execute( IContext& context, char* rawCmdString ) noexcept override
+    Result_T execute( Kit::TShell::IContext& context, char* rawCmdString ) noexcept override
     {
         ++m_executeCount;
         if ( rawCmdString == nullptr )
@@ -215,14 +215,14 @@ TEST_CASE( "Processor" )
         REQUIRE( uut.start( inFd, outFd, false ) == true );
 
         std::string output = drainOutput( outFd );
-        REQUIRE( output.find( "ERROR_NOT_SUPPORTED" ) != std::string::npos );
+        REQUIRE( output.find( "CMD_ERR_NOT_SUPPORTED" ) != std::string::npos );
         REQUIRE( output.find( "unknown" ) != std::string::npos );
     }
 
     SECTION( "Authorization failure blocks execution and reports error" )
     {
         Kit::Container::OrderedList<ICommand> commands;
-        TestCommand                           cmd( "secure", +Result_T::SUCCESS, 99u );
+        TestCommand                           cmd( "secure", +Result_T::CMD_SUCCESS, 99u );
         commands.insert( cmd );
 
         Kit::Io::Ram::InputOutputAllocate<256> inFd;
@@ -238,7 +238,7 @@ TEST_CASE( "Processor" )
         REQUIRE( cmd.getExecuteCount() == 0u );
 
         std::string output = drainOutput( outFd );
-        REQUIRE( output.find( "ERROR_NOT_AUTHORIZED" ) != std::string::npos );
+        REQUIRE( output.find( "CMD_ERR_NOT_AUTHORIZED" ) != std::string::npos );
         REQUIRE( output.find( "secure run" ) != std::string::npos );
     }
 
@@ -344,7 +344,7 @@ TEST_CASE( "Processor" )
     SECTION( "OOB Read" )
     {
         Kit::Container::OrderedList<ICommand> commands;
-        TestCommand                           cmd( "verb", +Result_T::SUCCESS, OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS, 4u );
+        TestCommand                           cmd( "verb", +Result_T::CMD_SUCCESS, OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS, 4u );
         commands.insert( cmd );
 
         Kit::Io::Ram::InputOutputAllocate<256> inFd;

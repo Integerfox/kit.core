@@ -22,21 +22,21 @@ namespace TShell {
 /** This enumeration defines the possible return codes when executing a TShell command.
 
 @param Result_T             Enum
-@param SUCCESS              Command executed successfully
-@param ERROR_NOT_SUPPORTED  Unrecognized command or command is not supported in the current context
-@param ERROR_NOT_AUTHORIZED Command is not authorized for the current user or context
-@param ERROR_BAD_SYNTAX     The syntax of the command is invalid, e.g. missing required arguments, invalid arguments, out-of-range values, etc.
-@param ERROR_IO             Command failed due to an error writing to the Output stream
-@param ERROR_CMD_FAILED     Command failed to complete one or more of actions.
+@param CMD_SUCCESS              Command executed successfully
+@param CMD_ERR_NOT_SUPPORTED  Unrecognized command or command is not supported in the current context
+@param CMD_ERR_NOT_AUTHORIZED Command is not authorized for the current user or context
+@param CMD_ERR_BAD_SYNTAX     The syntax of the command is invalid, e.g. missing required arguments, invalid arguments, out-of-range values, etc.
+@param CMD_ERR_IO             Command failed due to an error writing to the Output stream
+@param CMD_ERR_CMD_FAILED     Command failed to complete one or more of actions.
 */
 // clang-format off
 BETTER_ENUM( Result_T, uint8_t,
-             SUCCESS,
-             ERROR_NOT_SUPPORTED,
-             ERROR_NOT_AUTHORIZED,
-             ERROR_BAD_SYNTAX,
-             ERROR_IO,
-             ERROR_CMD_FAILED
+             CMD_SUCCESS,
+             CMD_ERR_NOT_SUPPORTED,
+             CMD_ERR_NOT_AUTHORIZED,
+             CMD_ERR_BAD_SYNTAX,
+             CMD_ERR_IO,
+             CMD_ERR_CMD_FAILED
 );
 // clang-format on
 
