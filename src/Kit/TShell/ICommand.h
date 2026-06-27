@@ -49,7 +49,7 @@ class IContext;
     The interface is NOT thread safe and assumes all commands are executed in
     the same thread the IProcessor instance.
 */
-class ICommand: public Kit::Container::KeyedItem
+class ICommand : public Kit::Container::KeyedItem, public Kit::Container::KeyLiteralString
 {
 public:
     /// This method executes the command.
@@ -71,7 +71,14 @@ public:
     /// Returns the required permissions needed to execute the command
     virtual Permissions_T getRequiredPermissions() const noexcept = 0;
 
-    public:
+protected:
+    /// Protected Constructor (needed because of the inheritance from KeyLiteralString)
+    ICommand( const char* name ) noexcept
+        : Kit::Container::KeyLiteralString( name )
+    {
+    }
+    
+public:
     /// Virtual destructor
     virtual ~ICommand() = default;
 };

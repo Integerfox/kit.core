@@ -10,8 +10,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/TShell/ICommand.h"
 #include "kit_config.h"
+#include "Kit/TShell/ICommand.h"
 #include "Kit/Container/OrderedList.h"
 #include "Kit/TShell/IProcessor.h"
 #include "Kit/TShell/IContext.h"
@@ -149,7 +149,7 @@ public:
                char                                   argTerminator = '\n' )
         : m_commands( commands )
         , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )
-        , m_framer( outputDestination, argTerminator+1, argTerminator, argEscape, true ) // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.
+        , m_framer( outputDestination, argTerminator + 1, argTerminator, argEscape, true )  // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.
         , m_secPolicy( securityPolicy )
         , m_outLock( outputLock )
         , m_streamSource( commandSource )
@@ -170,7 +170,7 @@ public:
         KIT_SYSTEM_ASSERT( argTerminator >= ' ' && argTerminator <= '~' );
     }
 
-  public:
+public:
     /// See Kit::TShell::IProcessor
     bool start( Kit::Io::IInput&  infd,
                 Kit::Io::IOutput& outfd,
@@ -220,6 +220,9 @@ public:
 
     /// See Kit::TShell::IContext
     ISecurity& getSecurity() noexcept override;
+
+    /// See Kit::TShell::IContext
+    void requestTShellExit() noexcept override;
 
 protected:
     /** Helper method that attempts to execute the content of the de-framed/decoded

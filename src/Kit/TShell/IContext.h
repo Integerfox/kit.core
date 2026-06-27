@@ -46,7 +46,7 @@ public:
     inline bool writeFrame( const char* text ) noexcept
     {
         return writeFrame( text, strlen( text ) );
-    }   
+    }
 
     /** Same as writeFrame(), but only outputs (at most) 'N' bytes as the content
         of the frame
@@ -105,6 +105,12 @@ public:
 public:
     /// Returns reference to the Processor's Security instance
     virtual ISecurity& getSecurity() noexcept = 0;
+
+public:
+    /** Request to terminated/exit the TShell.  When/if the TShell is exited
+        is application specific behavior.
+     */
+    virtual void requestTShellExit() noexcept = 0;
 
 public:
     /// Virtual destructor

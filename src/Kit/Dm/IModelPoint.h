@@ -538,7 +538,7 @@ protected:
 
 
 protected:
-    /// Protected Constructor (need because of the inheritance from KeyLiteralString)
+    /// Protected Constructor (needed because of the inheritance from KeyLiteralString)
     IModelPoint( const char* name ) noexcept
         : Kit::Container::KeyLiteralString( name )
     {

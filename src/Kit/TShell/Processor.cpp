@@ -262,6 +262,11 @@ ISecurity& Processor::getSecurity() noexcept
     return m_secPolicy;
 }
 
+void Processor::requestTShellExit() noexcept
+{
+    requestStop();
+}
+
 Kit::Text::IString& Processor::getOutputBuffer() noexcept
 {
     return m_workOutputBuffer;

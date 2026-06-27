@@ -37,8 +37,7 @@ public:
                  Result_T      returnCode    = +Result_T::CMD_SUCCESS,
                  Permissions_T permissions   = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS,
                  SSize_T       oobReadLength = 0 ) noexcept
-        : m_key( verb )
-        , m_verb( verb )
+        : ICommand( verb )
         , m_returnCode( returnCode )
         , m_permissions( permissions )
         , m_executeCount( 0 )
@@ -70,17 +69,15 @@ public:
         return m_returnCode;
     }
 
-    const char*                getVerb() const noexcept override { return m_verb; }
+    const char*                getVerb() const noexcept override { return m_stringKeyPtr; }
     const char*                getUsage() const noexcept override { return "test"; }
     const char*                getHelp() const noexcept override { return nullptr; }
     Permissions_T              getRequiredPermissions() const noexcept override { return m_permissions; }
-    const Kit::Container::Key& getKey() const noexcept override { return m_key; }
+    const Kit::Container::Key& getKey() const noexcept override { return *this; }
 
     unsigned    getExecuteCount() const noexcept { return m_executeCount; }
     const char* getLastRaw() const noexcept { return m_lastRaw; }
 
-    Kit::Container::KeyLiteralString m_key;
-    const char*                      m_verb;
     Result_T                         m_returnCode;
     Permissions_T                    m_permissions;
     unsigned                         m_executeCount;
