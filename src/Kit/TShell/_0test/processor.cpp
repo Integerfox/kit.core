@@ -336,6 +336,9 @@ TEST_CASE( "Processor" )
         REQUIRE( workBuf.availLength() == OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE );
 
         REQUIRE( &(uut.getSecurity()) == &security );
+
+        uut.requestTShellExit();
+        REQUIRE( uut.poll() == 1 );
     }
 
     SECTION( "OOB Read" )
