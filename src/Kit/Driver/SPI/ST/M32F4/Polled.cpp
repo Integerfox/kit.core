@@ -52,7 +52,7 @@ bool Polled::write( const void* txData,
 
     HAL_StatusTypeDef status = HAL_SPI_Transmit(
         m_spiHandle,
-        static_cast<uint8_t*>( const_cast<void*>( txData ) ),
+        static_cast<const uint8_t*>( txData ),
         static_cast<uint16_t>( numBytes ),
         m_timeoutMs );
 

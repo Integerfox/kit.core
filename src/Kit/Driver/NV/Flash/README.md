@@ -18,9 +18,9 @@ Supports configurable NV page sizes and total storage sizes.
 
 ![Kit::Driver::NV::Flash Class Diagram](class-diagram-nv-flash_kitdrivernvflash.png)
 
-![Kit::Driver::Flash Class Diagram](class-diagram-flash_kitdriverflash.png)
+![Kit::Driver::Flash Class Diagram](../../Flash/class-diagram-flash_kitdriverflash.png)
 
-![Kit::Driver::SPI Class Diagram](class-diagram-spi_kitdriverspi.png)
+![Kit::Driver::SPI Class Diagram](../../SPI/class-diagram-spi_kitdriverspi.png)
 
 ## Design Documentation
 

@@ -108,17 +108,19 @@ public:
         valid for the lifetime of this object.  The 'workBuffer' must be at
         least config.nvPageSize bytes and must remain valid for the lifetime
         of this object.
+
+        The 'crcAlgo' MUST be a 32-bit wide CRC algorithm.
      */
     Api( Kit::Driver::Flash::IApi& flashDriver,
          Kit::Checksum::IEdc&      crcAlgo,
          const Config_T&           config,
          uint8_t*                  workBuffer,
          size_t                    workBufferSize ) noexcept
-        : m_flashDriver( flashDriver )
+        : m_config( config )
+        , m_currentSequence( 0 )
+        , m_flashDriver( flashDriver )
         , m_crcAlgo( crcAlgo )
         , m_workBuffer( workBuffer )
-        , m_config( config )
-        , m_currentSequence( 0 )
         , m_workBufferSize( workBufferSize )
         , m_numSectors( 0 )
         , m_pagesPerSector( 0 )
@@ -132,6 +134,7 @@ public:
         KIT_SYSTEM_ASSERT( config.flashEndAddress > config.flashStartAddress );
         KIT_SYSTEM_ASSERT( workBuffer != nullptr );
         KIT_SYSTEM_ASSERT( workBufferSize >= config.nvPageSize );
+        KIT_SYSTEM_ASSERT( crcAlgo.getEdcSize() == sizeof( uint32_t ) );
 
         if ( config.nvPageSize > 0 )
         {
@@ -401,9 +404,6 @@ protected:
         size_t   physPageSize = getPhysicalPageSize();
         uint64_t maxSeq       = 0;
 
-        uint32_t pageSeqNums[MAX_LOGICAL_PAGES];
-        memset( pageSeqNums, 0, sizeof( pageSeqNums ) );
-
         for ( size_t i = 0; i < m_totalPages; i++ )
         {
             size_t sectorIndex = i / m_pagesPerSector;
@@ -438,20 +438,35 @@ protected:
                 maxSeq = header.sequenceNum;
             }
 
-            if ( m_pageMap[logicalIndex] == INVALID_PAGE_ADDRESS ||
-                 header.sequenceNum > pageSeqNums[logicalIndex] )
+            uint32_t currentPageAddress = m_pageMap[logicalIndex];
+            if ( currentPageAddress == INVALID_PAGE_ADDRESS )
             {
-                if ( m_pageMap[logicalIndex] != INVALID_PAGE_ADDRESS )
-                {
-                    markPageInvalid( static_cast<uint32_t>( m_pageMap[logicalIndex] ) );
-                }
-
-                m_pageMap[logicalIndex]   = static_cast<uint32_t>( address );
-                pageSeqNums[logicalIndex] = header.sequenceNum;
+                m_pageMap[logicalIndex] = static_cast<uint32_t>( address );
             }
             else
             {
-                markPageInvalid( static_cast<uint32_t>( address ) );
+                PageHeader_T currentHeader;
+                if ( !m_flashDriver.read( currentPageAddress, &currentHeader, HEADER_SIZE ) )
+                {
+                    return false;
+                }
+
+                if ( header.sequenceNum > currentHeader.sequenceNum )
+                {
+                    if ( !markPageInvalid( currentPageAddress ) )
+                    {
+                        return false;
+                    }
+
+                    m_pageMap[logicalIndex] = static_cast<uint32_t>( address );
+                }
+                else
+                {
+                    if ( !markPageInvalid( static_cast<uint32_t>( address ) ) )
+                    {
+                        return false;
+                    }
+                }
             }
         }
 
@@ -610,12 +625,12 @@ protected:
 
 
 protected:
+    Config_T                  m_config;                      //!< Storage configuration
+    uint64_t                  m_currentSequence;             //!< Highest sequence number seen
     Kit::Driver::Flash::IApi& m_flashDriver;                 //!< Reference to flash driver
     Kit::Checksum::IEdc&      m_crcAlgo;                     //!< Reference to CRC algorithm
     uint8_t*                  m_workBuffer;                  //!< Application-provided work buffer
     uint32_t                  m_pageMap[MAX_LOGICAL_PAGES];  //!< Logical page -> physical address map
-    Config_T                  m_config;                      //!< Storage configuration
-    uint64_t                  m_currentSequence;             //!< Highest sequence number seen
     size_t                    m_workBufferSize;              //!< Size of application-provided work buffer
     size_t                    m_numSectors;                  //!< Number of sectors in NV region
     size_t                    m_pagesPerSector;              //!< Physical NV Records per sector

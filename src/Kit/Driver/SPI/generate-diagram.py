@@ -65,7 +65,7 @@ def main():
     # Define the diagrams to generate (puml source -> png output)
     # NOTE: PNG filenames must be globally/repo unique (Doxygen constraint)
     diagrams = [
-        ( "class-diagram-nv-flash.puml", "class-diagram-nv-flash_kitdrivernvflash.png" ),
+        ( "class-diagram-spi.puml", "class-diagram-spi_kitdriverspi.png" ),
     ]
 
     success_count = 0

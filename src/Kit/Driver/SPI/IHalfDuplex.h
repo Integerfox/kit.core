@@ -28,6 +28,9 @@ namespace SPI {
     Half-duplex mode requires only a single buffer per transaction and covers
     the vast majority of SPI peripheral usage.
 
+    The client is responsible for asserting and de-asserting chip select (CS).
+    This driver only performs the SPI bus transactions.
+
     The interface itself is NOT thread safe. It is the responsibility of
     the users/clients of the driver to handle any threading issues.
  */
