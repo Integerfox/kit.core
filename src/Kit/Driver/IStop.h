@@ -16,26 +16,34 @@ namespace Kit {
 ///
 namespace Driver {
 
-/** This abstract class defines the method for stopping a driver. See the
-    IStart class definition for more details.
+/** This abstract class defines a stop operation that is intended to stop and/or
+    shutdown a driver.  Once a driver has been stopped, it can be restarted
+    by calling the its IStart interface.
+
+    Note: It is possible for a concrete driver class to implement more than one
+          abstract driver interfaces.  This use case introduces the classic C
+          'diamond' inheritance problem.  The diamond inheritance is resolved
+          by requiring each abstract driver interface to use 'virtual' inheritance
+          when inheriting from IStop.  This ensures that there is only one
+          stop() method in the concrete child classes
  */
 class IStop
 {
 public:
-    /** This method is used to stop the driver at run time.
-    
-        This method is NOT thread-safe.  It is the application's responsibility
-        to provide any thread safety that it needs with respect to stopping (and
-        starting) drivers.
+    /** This method stops the driver.  The stopped 'state' is platform specific.
+        Once a driver has been stopped it can be restarted by calling its IStart
+        interface.
+
+        Note: Calling stop() on an already stopped driver has no effect.
      */
     virtual void stop() noexcept = 0;
 
-public:
-    /// Lets the make the destructor virtual
-    virtual ~IStop() noexcept = default;
 
+public:
+    /// Virtual destructor
+    virtual ~IStop() noexcept = default;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

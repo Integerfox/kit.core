@@ -1,0 +1,70 @@
+@startuml class-diagram-nv-flash_kitdrivernvflash
+
+title Kit::Driver::NV::Flash Namespace - Class Diagram
+
+namespace Kit.Driver.NV.Flash {
+
+    class PageStatus_T <<struct>> {
+        +{static} ERASED : uint32_t
+        +{static} VALID : uint32_t
+        +{static} INVALID : uint32_t
+    }
+
+    class PageHeader_T <<struct>> {
+        +magic : uint32_t
+        +sequenceNum : uint32_t
+        +dataOffset : uint32_t
+        +dataLength : uint32_t
+        +crc32 : uint32_t
+        +status : uint32_t
+    }
+
+    class Config_T <<struct>> {
+        +flashStartAddress : uint32_t
+        +flashEndAddress : uint32_t
+        +nvPageSize : size_t
+        +nvTotalSize : size_t
+    }
+
+    class "Api<MAX_LOGICAL_PAGES>" as Api {
+        +Api( flashDriver, config )
+        +start( startArgs ) : bool
+        +stop() : void
+        +write( dstOffset, srcData, numBytesToWrite ) : bool
+        +read( srcOffset, dstData, sizeDstData, numBytesToRead ) : bool
+        +getTotalSize() : size_t
+        +getNumPages() : size_t
+        +getPageSize() : size_t
+        +format() : bool
+        +getStatistics( eraseCount, freePages, validPages ) : bool
+    }
+
+    Api .up.|> Kit.Driver.NV.IApi
+    Api --> Config_T : uses
+    Api --> PageHeader_T : reads/writes
+    Api --> PageStatus_T : uses
+}
+
+namespace Kit.Driver.NV {
+    interface IApi {
+        +{abstract} write( dstOffset, srcData, numBytesToWrite ) : bool
+        +{abstract} read( srcOffset, dstData, sizeDstData, numBytesToRead ) : bool
+        +{abstract} getNumPages() : size_t
+        +{abstract} getPageSize() : size_t
+        +{abstract} getTotalSize() : size_t
+    }
+}
+
+namespace Kit.Driver.Flash {
+    interface IApi {
+        +{abstract} read( srcOffset, dstBuffer, numBytes ) : bool
+        +{abstract} write( dstOffset, srcBuffer, numBytes ) : bool
+        +{abstract} eraseSector( sectorAddress ) : bool
+        +{abstract} getTotalSize() : size_t
+        +{abstract} getSectorSize() : size_t
+    }
+}
+
+Kit.Driver.NV.Flash.Api --> Kit.Driver.Flash.IApi : uses
+
+@enduml
