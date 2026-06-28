@@ -66,11 +66,8 @@ void EventLoop::stopEventLoop() noexcept
 
 bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
 {
-    // Trap my exit/please-stop condition
-    GlobalLock::begin();
-    bool stayRunning = m_run;
-    GlobalLock::end();
-    if ( !stayRunning )
+    // Trap my exit/please-stop condition. 
+    if ( !m_run ) // Note: m_run is atomic so it is safe to read without a lock
     {
         return false;
     }
@@ -90,10 +87,7 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
     }
 
     // Trap my exit/please-stop condition AGAIN since a lot could have happen while I was waiting....
-    GlobalLock::begin();
-    stayRunning = m_run;
-    GlobalLock::end();
-    if ( !stayRunning )
+    if ( !m_run )  // Note: m_run is atomic so it is safe to read without a lock
     {
         return false;
     }
@@ -145,9 +139,7 @@ void EventLoop::pleaseStop() noexcept
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
 
     // Set my flag/state to exit my top level thread loop
-    GlobalLock::begin();
     m_run = false;
-    GlobalLock::end();
 
     // Signal myself in case the thread is blocked waiting for the 'next event'
     m_sema.signal();

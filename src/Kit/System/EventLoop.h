@@ -18,6 +18,7 @@
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/TimerManager.h"
 #include "Kit/System/IWatchedEventLoop.h"
+#include <atomic>
 
 /** Specifies the default timeout period for waiting on a event.
  */
@@ -190,7 +191,7 @@ protected:
     uint32_t m_events;
 
     /// Flag used to help with the pleaseStop() request
-    volatile bool m_run;
+    std::atomic<bool> m_run;
 };
 
 }  // end namespaces

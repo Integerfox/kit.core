@@ -68,9 +68,7 @@ int Processor::poll() noexcept
 
 void Processor::requestStop() noexcept
 {
-    Kit::System::GlobalLock::begin();
     m_running = false;
-    Kit::System::GlobalLock::end();
 }
 
 ICommand* Processor::findCommand( const char* verb, unsigned verbLength ) noexcept
@@ -165,11 +163,7 @@ void Processor::outputCommandError( Result_T result, const char* deframedInput )
 int Processor::getAndProcessFrame() noexcept
 {
     // Check for stop request
-    Kit::System::GlobalLock::begin();
-    bool run = m_running;
-    Kit::System::GlobalLock::end();
-
-    if ( !run )
+    if ( !m_running )
     {
         outputMessage( OPTION_KIT_TSHELL_PROCESSOR_FAREWELL );
         Kit::System::sleep( 250 );  // Allow time for the farewell message to be outputted

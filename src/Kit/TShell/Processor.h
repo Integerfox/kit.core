@@ -21,6 +21,7 @@
 #include "Kit/Framing/StreamSource.h"
 #include "Kit/System/Mutex.h"
 #include "Kit/Text/FString.h"
+#include <atomic>
 
 /** This symbol defines the size, in bytes, of the maximum allowed input
     string/command.
@@ -308,7 +309,7 @@ protected:
     bool m_blocking;
 
     /// My run state
-    bool m_running;
+    std::atomic<bool> m_running;
 };
 
 

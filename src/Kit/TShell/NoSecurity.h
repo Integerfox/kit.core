@@ -23,6 +23,10 @@ namespace TShell {
 class NoSecurity : public ISecurity
 {
 public:
+    /// Constructor
+    NoSecurity() noexcept = default;
+
+public:
     /// See Kit::TShell::ISecurity
     bool isAuthorized( Permissions_T permission,
                        const char*   entireCommandString,
