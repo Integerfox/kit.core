@@ -26,7 +26,6 @@
 # get definition of the Options structure
 from nqbplib.base import BuildValues
 from nqbplib.my_globals import *
-from nqbplib.utils import config_catch2
 import os
 
 # Capture project/build directory
@@ -38,10 +37,7 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 #---------------------------------------------------
 
 # Set the name for the final output item
-FINAL_OUTPUT_NAME = 'a.out'
-
-# Using Catch2
-(catch2_inc, catch2_lib, unit_test_objects) = config_catch2( prjdir, 'linux/gcc-host', 'a' )
+FINAL_OUTPUT_NAME = 'b.out'
 
 
 # 
@@ -55,10 +51,8 @@ debug_posix64     = BuildValues()
 
 # Set project specific 'base' (i.e always used) options. Note: Catch2 requires C++17 or newer
 base_posix64.cflags    = '-m64 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage -fprofile-update=atomic'
-base_posix64.inc       = catch2_inc
-base_posix64.firstobjs = unit_test_objects
 base_posix64.linkflags = '-m64 -fprofile-arcs'
-base_posix64.linklibs  = f'-lgcov {catch2_lib}'
+base_posix64.linklibs  = '-lgcov'
 
 # Set project specific 'optimized' options
 optimized_posix64.cflags    = '-O3'
@@ -73,10 +67,8 @@ optimized_posix64.cflags    = '-O3'
 # Set project specific 'base' (i.e always used) options. Note: Catch2 requires C++17 or newer
 base_posix32           = BuildValues()        # Do NOT comment out this line
 base_posix32.cflags    = '-m32 -std=c++17 -Wall -Werror -x c++ -fprofile-arcs -ftest-coverage -fprofile-update=atomic'
-base_posix32.inc       = catch2_inc
-base_posix32.firstobjs = unit_test_objects
 base_posix32.linkflags = '-m32 -fprofile-arcs'
-base_posix32.linklibs  = f'-lgcov {catch2_lib}'
+base_posix32.linklibs  = '-lgcov'
 
 
 # Set project specific 'optimized' options

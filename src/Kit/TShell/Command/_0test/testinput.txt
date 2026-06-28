@@ -1,0 +1,19 @@
+echo - "*** TEST: help"
+help
+echo - "*** TEST: help *"
+help *
+echo - "*** TEST: help bob
+help bob
+echo - "*** TEST: help echo"
+help echo
+echo - "*** TEST: help bye"
+help bye
+echo - "*** TEST: help help"
+help help
+echo - "*** TEST: Restart TShell"
+bob restart 1000
+bye tshell
+echo - "*** TEST: Help after restart
+help
+echo "LAST CHECKED LINE"
+bye

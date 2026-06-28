@@ -39,7 +39,7 @@ public:
         "  the second argument is a command, then the detailed help for that command will\n"
         "  be displayed.";
 
-protected:
+public:
     /// Constructor
     Help( Kit::Container::OrderedList<ICommand>& commandList,
           Permissions_T                          permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept

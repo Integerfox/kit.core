@@ -21,11 +21,7 @@ namespace Command {
 
 Result_T Bye::execute( IContext& context, char* cmdString ) noexcept
 {
-    Kit::Text::Tokenizer::TextBlock tokens( cmdString,
-                                            context.getDelimiterChar(),
-                                            context.getTerminatorChar(),
-                                            context.getQuoteChar(),
-                                            context.getEscapeChar() );
+    Kit::Text::Tokenizer::TextBlock tokens( cmdString );
     Kit::Text::IString&             outtext = context.getOutputBuffer();
 
     // Basic Error Checking
@@ -56,6 +52,7 @@ Result_T Bye::execute( IContext& context, char* cmdString ) noexcept
         }
     }
 
+    
     Kit::System::Shutdown::failure( exitCode );
     return Result_T::CMD_SUCCESS;
 }

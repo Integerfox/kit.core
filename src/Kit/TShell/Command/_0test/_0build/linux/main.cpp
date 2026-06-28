@@ -1,6 +1,11 @@
 #include "Kit/System/Api.h"
 #include "Kit/System/Trace.h"
-#include "catch2/catch_session.hpp"
+#include "Kit/TShell/Command/_0test/test.h"
+#include "Kit/Io/Stdio/StdIn.h"
+#include "Kit/Io/Stdio/StdOut.h"
+
+static Kit::Io::Stdio::StdIn  stdin_;
+static Kit::Io::Stdio::StdOut stdout_;
 
 int main( int argc, char* argv[] )
 {
@@ -14,5 +19,6 @@ int main( int argc, char* argv[] )
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
 
     // Run the test(s)
-    return Catch::Session().run( argc, argv );
+    shell_test( stdin_, stdout_ );
+    return 0;
 }

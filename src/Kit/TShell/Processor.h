@@ -129,13 +129,6 @@ public:
     @param commentChar              The comment character used to indicate that the
                                     input string is a comment and should not be
                                     executed.
-    @param argEscape                Escape character to be used when escaping double
-                                    quote characters inside a quoted argument.
-    @param argDelimiter             The delimiter character used to separate the
-                                    command verb and arguments.
-    @param argQuote                 The quote character used to 'double quote' a
-                                    argument string.
-    @param argTerminator            The command terminator character.
  */
     Processor( Kit::Container::OrderedList<ICommand>& commands,
                Kit::Framing::StreamSource&            commandSource,
@@ -143,32 +136,20 @@ public:
                ISecurity&                             securityPolicy,
                Kit::System::Mutex&                    outputLock,
                char                                   convertTabs   = ' ',
-               char                                   commentChar   = '#',
-               char                                   argEscape     = '`',
-               char                                   argDelimiter  = ' ',
-               char                                   argQuote      = '"',
-               char                                   argTerminator = '\n' )
+               char                                   commentChar   = '#' )
         : m_commands( commands )
         , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )
-        , m_framer( outputDestination, argTerminator + 1, argTerminator, argEscape, true )  // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.
+        , m_framer( outputDestination, '\n' + 1, '\n', 0, true )  // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.
         , m_secPolicy( securityPolicy )
         , m_outLock( outputLock )
         , m_streamSource( commandSource )
         , m_streamDestination( outputDestination )
         , m_frameSize( 0 )
         , m_comment( commentChar )
-        , m_esc( argEscape )
-        , m_del( argDelimiter )
-        , m_quote( argQuote )
-        , m_term( argTerminator )
         , m_blocking( true )
         , m_running( false )
     {
         KIT_SYSTEM_ASSERT( commentChar >= ' ' && commentChar <= '~' );
-        KIT_SYSTEM_ASSERT( argEscape >= ' ' && argEscape <= '~' );
-        KIT_SYSTEM_ASSERT( argDelimiter >= ' ' && argDelimiter <= '~' );
-        KIT_SYSTEM_ASSERT( argQuote >= ' ' && argQuote <= '~' );
-        KIT_SYSTEM_ASSERT( argTerminator >= ' ' && argTerminator <= '~' );
     }
 
 public:
@@ -206,18 +187,6 @@ public:
     bool oobRead( void*               dstBuffer,
                   Kit::Type::SSize_T  numBytes,
                   Kit::Type::SSize_T& bytesRead ) noexcept override;
-
-    /// See Kit::TShell::IContext
-    char getEscapeChar() noexcept override;
-
-    /// See Kit::TShell::IContext
-    char getDelimiterChar() noexcept override;
-
-    /// See Kit::TShell::IContext
-    char getQuoteChar() noexcept override;
-
-    /// See Kit::TShell::IContext
-    char getTerminatorChar() noexcept override;
 
     /// See Kit::TShell::IContext
     ISecurity& getSecurity() noexcept override;
@@ -292,18 +261,6 @@ protected:
 
     /// Comment character
     char m_comment;
-
-    /// Argument Escape character
-    char m_esc;
-
-    /// Argument delimiter
-    char m_del;
-
-    /// Argument quote character
-    char m_quote;
-
-    /// Argument terminator character
-    char m_term;
 
     /// Blocking semantic flag.  When true the read operations are blocking until a complete frame is found
     bool m_blocking;

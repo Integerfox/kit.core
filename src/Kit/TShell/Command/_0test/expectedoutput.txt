@@ -1,0 +1,77 @@
+
+--- Your friendly neighborhood TShell. ---
+
+
+$ *** TEST: help
+$ bob on|off [delay]
+ bob restart <delay>
+bye [<exitcode>]
+bye tshell
+echo ["<text>"]
+echo - ["<text>"]
+help [* <cmd>]
+$ *** TEST: help *
+$ bob on|off [delay]
+ bob restart <delay>
+  Sets the test trace output to on/off and delay time between msgs
+  Restarts the TShell after the specified delay (msecs)
+ 
+bye [<exitcode>]
+bye tshell
+  Requests to exit the application. The default <exitcode> is '0'. Using the
+  the 'tshell' argument only exits the TShell.  NOTE: The <exitcode> and
+  what happens when the only the TShell is exited is application specific
+ 
+echo ["<text>"]
+echo - ["<text>"]
+  Outputs the optionally specified text with the current elapsed time
+  prepended to the text.  The '-' option is used to suppress the elapsed time
+  output (this is helpful when constructing unit tests)
+ 
+help [* <cmd>]
+  Displays list of all supported commands and optionally their detailed help. If
+  the second argument is a command, then the detailed help for that command will
+  be displayed.
+ 
+$ 
+$ bob on|off [delay]
+ bob restart <delay>
+  Sets the test trace output to on/off and delay time between msgs
+  Restarts the TShell after the specified delay (msecs)
+ 
+$ *** TEST: help echo
+$ echo ["<text>"]
+echo - ["<text>"]
+  Outputs the optionally specified text with the current elapsed time
+  prepended to the text.  The '-' option is used to suppress the elapsed time
+  output (this is helpful when constructing unit tests)
+ 
+$ *** TEST: help bye
+$ bye [<exitcode>]
+bye tshell
+  Requests to exit the application. The default <exitcode> is '0'. Using the
+  the 'tshell' argument only exits the TShell.  NOTE: The <exitcode> and
+  what happens when the only the TShell is exited is application specific
+ 
+$ *** TEST: help help
+$ help [* <cmd>]
+  Displays list of all supported commands and optionally their detailed help. If
+  the second argument is a command, then the detailed help for that command will
+  be displayed.
+ 
+$ *** TEST: Restart TShell
+$ $ $ 
+--- ...I am melting, am melting... ---
+
+
+--- Your friendly neighborhood TShell. ---
+
+
+$ 
+$ bob on|off [delay]
+ bob restart <delay>
+bye [<exitcode>]
+bye tshell
+echo ["<text>"]
+echo - ["<text>"]
+help [* <cmd>]

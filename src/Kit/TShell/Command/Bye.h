@@ -41,7 +41,7 @@ public:
         "  the 'tshell' argument only exits the TShell.  NOTE: The <exitcode> and\n"
         "  what happens when the only the TShell is exited is application specific";
 
-protected:
+public:
     /// Constructor
     Bye( Kit::Container::OrderedList<ICommand>& commandList,
          Permissions_T                          permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept

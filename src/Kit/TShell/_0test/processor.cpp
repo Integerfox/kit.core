@@ -148,7 +148,6 @@ static std::string drainOutput( Kit::Io::Ram::InputOutput& stream )
 TEST_CASE( "Processor" )
 {
     ShutdownUnitTesting::clearAndUseCounter();
-    constexpr char testTerminator = '~';
 
     SECTION( "Start executes command and emits prompt flow" )
     {
@@ -162,7 +161,7 @@ TEST_CASE( "Processor" )
         Kit::Framing::StreamDestination        dst;
         NoSecurity                             security;
         Kit::System::Mutex                     lock;
-        Processor                              uut( commands, src, dst, security, lock, ' ', '#', '`', ' ', '"', testTerminator );
+        Processor                              uut( commands, src, dst, security, lock );
 
         inFd.write( "echo hello\n" );
         REQUIRE( uut.start( inFd, outFd, false ) == true );
@@ -186,7 +185,7 @@ TEST_CASE( "Processor" )
         Kit::Framing::StreamDestination        dst;
         NoSecurity                             security;
         Kit::System::Mutex                     lock;
-        Processor                              uut( commands, src, dst, security, lock, ' ', '#', '`', ' ', '"', testTerminator );
+        Processor                              uut( commands, src, dst, security, lock );
 
         inFd.write( "\n# comment\n  # spaced\n" );
         REQUIRE( uut.start( inFd, outFd, false ) == true );
@@ -206,7 +205,7 @@ TEST_CASE( "Processor" )
         Kit::Framing::StreamDestination        dst;
         NoSecurity                             security;
         Kit::System::Mutex                     lock;
-        Processor                              uut( commands, src, dst, security, lock, ' ', '#', '`', ' ', '"', testTerminator );
+        Processor                              uut( commands, src, dst, security, lock );
 
         inFd.write( "unknown\n" );
         REQUIRE( uut.start( inFd, outFd, false ) == true );
@@ -228,7 +227,7 @@ TEST_CASE( "Processor" )
         Kit::Framing::StreamDestination        dst;
         DenySecurity                           security;
         Kit::System::Mutex                     lock;
-        Processor                              uut( commands, src, dst, security, lock, ' ', '#', '`', ' ', '"', testTerminator );
+        Processor                              uut( commands, src, dst, security, lock );
 
         inFd.write( "secure run\n" );
         REQUIRE( uut.start( inFd, outFd, false ) == true );
@@ -251,7 +250,7 @@ TEST_CASE( "Processor" )
         Kit::Framing::StreamDestination        dst;
         NoSecurity                             security;
         Kit::System::Mutex                     lock;
-        Processor                              uut( commands, src, dst, security, lock, ' ', '#', '`', ' ', '"', testTerminator );
+        Processor                              uut( commands, src, dst, security, lock );
 
         REQUIRE( uut.findCommand( "verb", 4 ) == &cmd );
         REQUIRE( uut.findCommand( "missing", 7 ) == nullptr );
@@ -280,7 +279,7 @@ TEST_CASE( "Processor" )
         Kit::Framing::StreamDestination        dst;
         NoSecurity                             security;
         Kit::System::Mutex                     lock;
-        Processor                              uut( commands, src, dst, security, lock, ' ', '#', '`', ' ', '"', testTerminator );
+        Processor                              uut( commands, src, dst, security, lock );
         MyShellThread                          uutThread( uut, inFd, outFd );
 
         auto* t1 = Kit::System::Thread::create( uutThread, "UTT" );
@@ -315,18 +314,13 @@ TEST_CASE( "Processor" )
         Kit::Framing::StreamDestination        dst;
         NoSecurity                             security;
         Kit::System::Mutex                     lock;
-        Processor                              uut( commands, src, dst, security, lock, ' ', '#', '`', ' ', '"', testTerminator );
+        Processor                              uut( commands, src, dst, security, lock );
 
         // Sorted commands
         auto& list = uut.getCommands();
         REQUIRE( list.first() == &cmd2 );
         REQUIRE( list.next( cmd2 ) == &cmd3 );
         REQUIRE( list.next( cmd3 ) == &cmd );
-
-        REQUIRE( uut.getDelimiterChar() == ' ' );
-        REQUIRE( uut.getQuoteChar() == '"' );
-        REQUIRE( uut.getTerminatorChar() == testTerminator );
-        REQUIRE( uut.getEscapeChar() == '`' );
 
         Kit::Text::IString& outBuf = uut.getOutputBuffer();
         REQUIRE( outBuf.availLength() == OPTION_KIT_TSHELL_PROCESSOR_OUTPUT_SIZE );
@@ -353,7 +347,7 @@ TEST_CASE( "Processor" )
         Kit::Framing::StreamDestination        dst;
         NoSecurity                             security;
         Kit::System::Mutex                     lock;
-        Processor                              uut( commands, src, dst, security, lock, ' ', '#', '`', ' ', '"', testTerminator );
+        Processor                              uut( commands, src, dst, security, lock );
 
         REQUIRE( uut.start( inFd, outFd, false ) == true );
         inFd.write( "verb\n1234" );

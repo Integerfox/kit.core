@@ -77,7 +77,7 @@ ICommand* Processor::findCommand( const char* verb, unsigned verbLength ) noexce
     while ( cmdPtr )
     {
         // Check if the command matches
-        if ( strncmp( verb, cmdPtr->getVerb(), verbLength ) == 0 )
+        if ( verbLength == strlen( cmdPtr->getVerb() ) && strncmp( verb, cmdPtr->getVerb(), verbLength ) == 0 )
         {
             return cmdPtr;
         }
@@ -274,26 +274,6 @@ Kit::Text::IString& Processor::getInputBuffer() noexcept
 Kit::Text::IString& Processor::getWorkBuffer() noexcept
 {
     return m_workBuffer;
-}
-
-char Processor::getEscapeChar() noexcept
-{
-    return m_esc;
-}
-
-char Processor::getDelimiterChar() noexcept
-{
-    return m_del;
-}
-
-char Processor::getQuoteChar() noexcept
-{
-    return m_quote;
-}
-
-char Processor::getTerminatorChar() noexcept
-{
-    return m_term;
 }
 
 

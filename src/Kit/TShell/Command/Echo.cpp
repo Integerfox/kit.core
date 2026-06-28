@@ -8,7 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "TPrint.h"
+#include "Echo.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/Text/Tokenizer/TextBlock.h"
 #include "Kit/Text/Format.h"
@@ -19,28 +19,35 @@ namespace TShell {
 namespace Command {
 
 
-Result_T TPrint::execute( IContext& context, char* cmdString ) noexcept
+Result_T Echo::execute( IContext& context, char* cmdString ) noexcept
 {
-    Kit::Text::Tokenizer::TextBlock tokens( cmdString,
-                                            context.getDelimiterChar(),
-                                            context.getTerminatorChar(),
-                                            context.getQuoteChar(),
-                                            context.getEscapeChar() );
+    Kit::Text::Tokenizer::TextBlock tokens( cmdString );
     Kit::Text::IString&             outtext = context.getOutputBuffer();
 
     // Error Checking
-    if ( tokens.numParameters() > 2 )
+    if ( tokens.numParameters() > 3 )
+    {
+        return +Result_T::CMD_ERR_BAD_SYNTAX;
+    }
+    else if ( tokens.numParameters() == 3 && tokens.getParameter( 1 )[0] != '-' )
     {
         return +Result_T::CMD_ERR_BAD_SYNTAX;
     }
 
     // Generate the output string
-    Kit::Text::Format::timestamp( outtext, Kit::System::ElapsedTime::milliseconds() );
-    if ( tokens.numParameters() == 2 )
+    if ( tokens.numParameters() == 1 || ( tokens.numParameters() == 2 && tokens.getParameter( 1 )[0] != '-' ) )
     {
-        outtext.formatAppend( " %s\n", tokens.getParameter( 1 ) );
+        Kit::Text::Format::timestamp( outtext, Kit::System::ElapsedTime::milliseconds() );
     }
- 
+    if ( tokens.numParameters() == 2 && tokens.getParameter( 1 )[0] != '-' )
+    {
+        outtext.formatAppend( " %s", tokens.getParameter( 1 ) );
+    }
+    else if ( tokens.numParameters() == 3 )
+    {
+        outtext.formatAppend( "%s", tokens.getParameter( 2 ) );
+    }
+
     // Output the final string
     return writeLastFrame( context, outtext );
 }

@@ -21,14 +21,15 @@ namespace TShell {
 namespace Command {
 
 /// This class implements a TShell command
-class TPrint : public Base
+class Echo : public Base
 {
 public:
     /// The command verb/identifier
-    static constexpr const char* verb = "tprint";
+    static constexpr const char* verb = "echo";
 
     /// The command usage string
-    static constexpr const char* usage = R"(tprint ["<text>"])";
+    static constexpr const char* usage = "echo [\"<text>\"]\n"
+                                         "echo - [\"<text>\"]";
 
     /** The command detailed help string (recommended that lines do not exceed 80 chars)
                   1         2         3         4         5         6         7         8
@@ -36,12 +37,13 @@ public:
      */
     static constexpr const char* detailedHelp =
         "  Outputs the optionally specified text with the current elapsed time\n"
-        "  prepended to the text.";
+        "  prepended to the text.  The '-' option is used to suppress the elapsed time\n"
+        "  output (this is helpful when constructing unit tests)";
 
-protected:
+public:
     /// Constructor
-    TPrint( Kit::Container::OrderedList<ICommand>& commandList,
-            Permissions_T                          permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
+    Echo( Kit::Container::OrderedList<ICommand>& commandList,
+          Permissions_T                          permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
         : Base( commandList, verb, permissions )
     {
     }

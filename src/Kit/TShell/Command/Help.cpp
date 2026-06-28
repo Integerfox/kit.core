@@ -25,11 +25,7 @@ static bool outputLongText( Kit::TShell::IContext& context, bool& io, const char
 ////////////////////////////////
 Result_T Help::execute( IContext& context, char* cmdString ) noexcept
 {
-    Kit::Text::Tokenizer::TextBlock tokens( cmdString,
-                                            context.getDelimiterChar(),
-                                            context.getTerminatorChar(),
-                                            context.getQuoteChar(),
-                                            context.getEscapeChar() );
+    Kit::Text::Tokenizer::TextBlock tokens( cmdString );
 
     // Error Checking
     if ( tokens.numParameters() > 2 )
@@ -93,9 +89,10 @@ bool outputCmdHelp( Kit::TShell::IContext& context, Kit::TShell::ICommand& cmd, 
 bool outputLongText( Kit::TShell::IContext& context, bool& io, const char* text )
 {
     Kit::Text::IString& singleLine = context.getOutputBuffer();
+    singleLine.clear();
 
     // Output the text one line at a time because newline is the EOF framing character
-    while ( *text )
+    for ( ; text && *text != '\0' && io == true; text++ )
     {
         if ( *text == '\n' )
         {
@@ -105,7 +102,6 @@ bool outputLongText( Kit::TShell::IContext& context, bool& io, const char* text 
         else
         {
             singleLine += *text;
-            text++;
         }
     }
 

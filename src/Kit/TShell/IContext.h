@@ -90,19 +90,6 @@ public:
                           Kit::Type::SSize_T& bytesRead ) noexcept = 0;
 
 public:
-    /// Getter for the escape character used for framing input commands/strings
-    virtual char getEscapeChar() noexcept = 0;
-
-    /// Getter for the delimiter character used for framing input commands/strings
-    virtual char getDelimiterChar() noexcept = 0;
-
-    /// Getter for the quote character used for framing input commands/strings
-    virtual char getQuoteChar() noexcept = 0;
-
-    /// Getter for the terminator character used for framing input commands/strings
-    virtual char getTerminatorChar() noexcept = 0;
-
-public:
     /// Returns reference to the Processor's Security instance
     virtual ISecurity& getSecurity() noexcept = 0;
 
