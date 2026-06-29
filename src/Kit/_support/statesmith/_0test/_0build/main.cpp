@@ -13,7 +13,7 @@ int main( int argc, char* argv[] )
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "*Foo::Bar" );
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eINFO );
 
     // Start my test widget, aka start the State Machine
     myWidget_.start();

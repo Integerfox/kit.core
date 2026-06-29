@@ -55,7 +55,7 @@ void PrivateTracePlatform::output( Kit::Text::IString& src ) noexcept
 
 */
 void PrivateTracePlatform::appendInfo( Kit::Text::IString& dst,
-                                       Trace::InfoLevel_T  info,
+                                       TraceLevel  info,
                                        const char*         section,
                                        const char*         filename,
                                        int                 linenum,
@@ -68,7 +68,7 @@ void PrivateTracePlatform::appendInfo( Kit::Text::IString& dst,
     }
 
     // Level: eBRIEF
-    if ( info > Trace::eNONE )
+    if ( info > +TraceLevel::eNONE )
     {
         dst.clear();
 
@@ -89,19 +89,19 @@ void PrivateTracePlatform::appendInfo( Kit::Text::IString& dst,
         dst += ' ';
 
         // LEVEL: eINFO
-        if ( info > Trace::eBRIEF )
+        if ( info > +TraceLevel::eBRIEF )
         {
             // Add section name
             dst.formatAppend( "(%s) ", section );
 
             // LEVEL: eVERBOSE
-            if ( info > Trace::eINFO )
+            if ( info > +TraceLevel::eINFO )
             {
                 // Add Thread name
                 dst.formatAppend( "[%s] ", threadName );
 
                 // LEVEL: eMAX
-                if ( info > Trace::eVERBOSE )
+                if ( info > +TraceLevel::eVERBOSE )
                 {
                     dst.formatAppend( "{%s,%d", filename, linenum );
 

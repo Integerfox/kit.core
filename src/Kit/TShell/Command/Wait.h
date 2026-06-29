@@ -1,5 +1,5 @@
-#ifndef KIT_TSHELL_COMMAND_ECHO_H_
-#define KIT_TSHELL_COMMAND_ECHO_H_
+#ifndef KIT_TSHELL_COMMAND_WAIT_H_
+#define KIT_TSHELL_COMMAND_WAIT_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -21,28 +21,27 @@ namespace TShell {
 namespace Command {
 
 /// This class implements a TShell command
-class Echo : public Base
+class Wait : public Base
 {
 public:
     /// The command verb/identifier
-    static constexpr const char* verb = "echo";
+    static constexpr const char* verb = "wait";
 
     /// The command usage string
-    static constexpr const char* usage = "echo [\"<text>\"]\n"
-                                         "echo - [\"<text>\"]";
+    static constexpr const char* usage = "wait <delay>";
 
     /** The command detailed help string (recommended that lines do not exceed 80 chars)
                   1         2         3         4         5         6         7         8
          12345678901234567890123456789012345678901234567890123456789012345678901234567890
      */
     static constexpr const char* detailedHelp =
-        "  Outputs the optionally specified text with the current elapsed time\n"
-        "  prepended to the text.  The '-' option is used to suppress the elapsed time\n"
-        "  output (this is helpful when constructing unit tests)";
+        "  Waits for 'delay' milliseconds before returning.  This is useful when issuing\n"
+        "  a batch of console commands and you need a delay between the execution of \n"
+        "  commands.";
 
 public:
     /// Constructor
-    Echo( Kit::Container::OrderedList<ICommand>& commandList,
+    Wait( Kit::Container::OrderedList<ICommand>& commandList,
           Permissions_T                          permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
         : Base( commandList, verb, permissions )
     {

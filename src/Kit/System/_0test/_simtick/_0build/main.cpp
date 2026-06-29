@@ -16,7 +16,7 @@ int main( int argc, char* argv[] )
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "*LOG_" );
     //KIT_SYSTEM_TRACE_ENABLE_SECTION( "TimerManager" );
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eVERBOSE );
     //KIT_SYSTEM_TRACE_SET_THREAD_FILTER( "FRUITS" );
 
     // Run the test(s)

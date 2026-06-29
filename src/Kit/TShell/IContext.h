@@ -14,7 +14,7 @@
 #include "Kit/Container/OrderedList.h"
 #include "Kit/Text/IString.h"
 #include "Kit/Type/SSize.h"
-
+#include "Kit/Io/IOutput.h"
 
 ///
 namespace Kit {
@@ -92,6 +92,12 @@ public:
 public:
     /// Returns reference to the Processor's Security instance
     virtual ISecurity& getSecurity() noexcept = 0;
+
+public:
+    /** Returns a pointer to the Processor's output stream.  If the TShell is
+        has not been started, then nullptr is returned. 
+     */
+    virtual Kit::Io::IOutput* getOutputStream() noexcept = 0;
 
 public:
     /** Request to terminated/exit the TShell.  When/if the TShell is exited

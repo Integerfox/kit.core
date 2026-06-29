@@ -30,7 +30,7 @@ int main( void )
 
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eVERBOSE );
 
     // Check if this is a watchdog reset (HAL-specific, kept in main.cpp)
     bool wasWatchdogReset = ( __HAL_RCC_GET_FLAG( RCC_FLAG_IWDGRST ) != RESET );

@@ -83,7 +83,7 @@
 #include "Kit/Text/IString.h"
 #include "Kit/System/printfchecker.h"
 #include "Kit/Io/IOutput.h"
-
+#include "Kit/Type/BetterEnum.h"
 
 //////////////////////////////////////////////////////////////////////////////
 #if defined( USE_KIT_SYSTEM_RESTRICTED_TRACE ) || defined( USE_KIT_SYSTEM_TRACE )
@@ -100,7 +100,7 @@
              to compile out the trace statements. If you are not sure if you
              should use this macro, you probably should NOT be using it!
  */
-#define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )                                                              \
+#define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )                                                          \
     do                                                                                                        \
     {                                                                                                         \
         if ( Kit::System::Trace::isSectionEnabled_( sect ) && Kit::System::Trace::passedThreadFilter_() )     \
@@ -148,7 +148,7 @@
         }                                                                                                     \
     }                                                                                                         \
     while ( 0 )
-#endif // end USE_KIT_SYSTEM_TRACE
+#endif  // end USE_KIT_SYSTEM_TRACE
 
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_ENABLE() Kit::System::Trace::enable_()
@@ -243,7 +243,7 @@
 #define KIT_SYSTEM_TRACE_SET_INFO_LEVEL( l )
 
 /// Macro Wrapper
-#define KIT_SYSTEM_TRACE_GET_INFO_LEVEL() ( (Kit::System::Trace::InfoLevel_T)0 )
+#define KIT_SYSTEM_TRACE_GET_INFO_LEVEL() ( (Kit::System::Trace::TraceLevel::_from_index(0) )
 
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_ENABLE_SECTION( sect )
@@ -325,7 +325,7 @@
 /** The compile time default setting for the info level
  */
 #ifndef OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL
-#define OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL Kit::System::Trace::eBRIEF
+#define OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL (+Kit::System::TraceLevel::eBRIEF)
 #endif
 
 /** The compile time default setting what enable/disable state the trace
@@ -341,6 +341,27 @@ namespace Kit {
 ///
 namespace System {
 
+/** This enum is used to globally control the amount of 'Prologue' information
+    that is prepended to the Trace log messages.  The specifics of what
+    information is added is platform specific.
+
+    @param TraceLevel     Enum
+
+    @param eNONE             Turns off ALL prologue info
+    @param eBRIEF            Default setting
+    @param eINFO             Additional prologue info
+    @param eVERBOSE          More prologue info
+    @param eMAX              Maximum prologue info
+ */
+// clang-format off
+BETTER_ENUM( TraceLevel, uint8_t,
+             eNONE = 0,
+             eBRIEF,
+             eINFO,
+             eVERBOSE,
+             eMAX
+);
+// clang-format off
 /// This concrete class provide a 'printf' tracing mechanism.
 class Trace
 {
@@ -355,19 +376,6 @@ public:
     /// Destructor
     ~Trace();
 
-public:
-    /** This enum is used to globally control the amount of 'Prologue' information
-        that is prepended to the Trace log messages.  The specifics of what
-        information is added is platform specific.
-     */
-    enum InfoLevel_T
-    {
-        eNONE = 0,  //!< Turns off ALL prologue info
-        eBRIEF,     //!< Default setting
-        eINFO,      //!< Additional prologue info
-        eVERBOSE,   //!< more prologue info
-        eMAX        //!< Maximum prologue info
-    };
 
 public:
     /** This function is used to trace the 'location' for general purpose trace
@@ -417,14 +425,14 @@ public:
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static InfoLevel_T setInfoLevel_( InfoLevel_T newLevel );
+    static TraceLevel setInfoLevel_( TraceLevel newLevel );
 
     /** This method returns the current information level setting
 
         NOTE: NEVER call this method directly -->use the KIT_SYSTEM_TRACE_xxx()
               macros.
      */
-    static InfoLevel_T getInfoLevel_() noexcept;
+    static TraceLevel getInfoLevel_() noexcept;
 
     /** This method enables the output/logging of trace message at run-time for
         the specified 'section'.  A 'section' name can NOT contain any white

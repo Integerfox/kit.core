@@ -4,15 +4,21 @@
 
 $ *** TEST: help
 $ bob on|off [delay]
- bob restart <delay>
+bob restart <delay>
 bye [<exitcode>]
 bye tshell
 echo ["<text>"]
 echo - ["<text>"]
 help [* <cmd>]
+trace [on|off]
+trace section (on|off) <sect1> [<sect2>]...
+trace threadfilters [<threadname1> [<threadname2>]]...
+trace level (eNONE|eBRIEF|eINFO|eVERBOSE|eMAX)
+trace here|revert
+wait <delay>
 $ *** TEST: help *
 $ bob on|off [delay]
- bob restart <delay>
+bob restart <delay>
   Sets the test trace output to on/off and delay time between msgs
   Restarts the TShell after the specified delay (msecs)
  
@@ -33,9 +39,23 @@ help [* <cmd>]
   the second argument is a command, then the detailed help for that command will
   be displayed.
  
+trace [on|off]
+trace section (on|off) <sect1> [<sect2>]...
+trace threadfilters [<threadname1> [<threadname2>]]...
+trace level (eNONE|eBRIEF|eINFO|eVERBOSE|eMAX)
+trace here|revert
+  Enables/Disables the Kit::System::Trace engine and manages the section',
+  information level, and thread filter options.  See the Kit::System::Trace
+  interface for details on how the trace engine works.
+ 
+wait <delay>
+  Waits for 'delay' milliseconds before returning.  This is useful when issuing
+  a batch of console commands and you need a delay between the execution of 
+  commands.
+ 
 $ 
 $ bob on|off [delay]
- bob restart <delay>
+bob restart <delay>
   Sets the test trace output to on/off and delay time between msgs
   Restarts the TShell after the specified delay (msecs)
  
@@ -59,6 +79,23 @@ $ help [* <cmd>]
   the second argument is a command, then the detailed help for that command will
   be displayed.
  
+$ *** TEST: help wait
+$ wait <delay>
+  Waits for 'delay' milliseconds before returning.  This is useful when issuing
+  a batch of console commands and you need a delay between the execution of 
+  commands.
+ 
+$ *** TEST: trace
+$  
+TRACE: Currently Enabled Sections:
+----------------------------------
+_0test
+*LOG_
+ 
+TRACE: Currently Enabled Thread Filters:
+----------------------------------------
+ 
+TRACE: Runtime state:= ENABLED, Info Level:= eINFO
 $ *** TEST: Restart TShell
 $ $ $ 
 --- ...I am melting, am melting... ---
@@ -69,9 +106,15 @@ $ $ $
 
 $ 
 $ bob on|off [delay]
- bob restart <delay>
+bob restart <delay>
 bye [<exitcode>]
 bye tshell
 echo ["<text>"]
 echo - ["<text>"]
 help [* <cmd>]
+trace [on|off]
+trace section (on|off) <sect1> [<sect2>]...
+trace threadfilters [<threadname1> [<threadname2>]]...
+trace level (eNONE|eBRIEF|eINFO|eVERBOSE|eMAX)
+trace here|revert
+wait <delay>

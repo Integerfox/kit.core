@@ -25,6 +25,8 @@
 #include "Kit/TShell/Command/Bye.h"
 #include "Kit/TShell/Command/Help.h"
 #include "Kit/TShell/Command/Echo.h"
+#include "Kit/TShell/Command/Trace.h"
+#include "Kit/TShell/Command/Wait.h"
 #include "Kit/TShell/StdioThread.h"
 #include "Kit/Text/Tokenizer/TextBlock.h"
 #include "Kit/Text/StringTo.h"
@@ -136,7 +138,7 @@ class Bob : public Kit::TShell::Command::Base
 {
 public:
     /// See Kit::TShell::Command
-    const char* getUsage() const noexcept { return "bob on|off [delay]\n bob restart <delay>"; }
+    const char* getUsage() const noexcept { return "bob on|off [delay]\nbob restart <delay>"; }
 
     /// See Kit::TShell::Command
     const char* getHelp() const noexcept { return "  Sets the test trace output to on/off and delay time between msgs\n  Restarts the TShell after the specified delay (msecs)"; }
@@ -209,12 +211,14 @@ static Kit::TShell::Processor tshell_( commandList_,
                                        securityPolicy_,
                                        Kit::System::PrivateLocks::tracingOutput() );
 
-static Kit::TShell::StdioThread   stdioThread_( tshell_ );
-static Kit::TShell::Command::Bye  byeCmd_( commandList_ );
-static Kit::TShell::Command::Help helpCmd_( commandList_ );
-static Kit::TShell::Command::Echo echoCmd_( commandList_ );
-static Apple                      app_( stdioThread_ );
-static Bob                        bobCmd_( commandList_, app_ );
+static Kit::TShell::StdioThread    stdioThread_( tshell_ );
+static Kit::TShell::Command::Bye   byeCmd_( commandList_ );
+static Kit::TShell::Command::Help  helpCmd_( commandList_ );
+static Kit::TShell::Command::Echo  echoCmd_( commandList_ );
+static Kit::TShell::Command::Trace traceCmd_( commandList_ );
+static Kit::TShell::Command::Wait  waitCmd_( commandList_ );
+static Apple                       app_( stdioThread_ );
+static Bob                         bobCmd_( commandList_, app_ );
 
 
 void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
@@ -227,3 +231,7 @@ void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
     // Wait forever - the 'bye' command is responsible for exiting
     Kit::System::sleep( 0xFFFFFFFF );
 }
+
+echo
+wait 1000
+echo

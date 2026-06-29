@@ -256,6 +256,11 @@ ISecurity& Processor::getSecurity() noexcept
     return m_secPolicy;
 }
 
+Kit::Io::IOutput* Processor::getOutputStream() noexcept
+{
+    return m_streamDestination.getStream();
+}       
+
 void Processor::requestTShellExit() noexcept
 {
     requestStop();
@@ -275,6 +280,7 @@ Kit::Text::IString& Processor::getWorkBuffer() noexcept
 {
     return m_workBuffer;
 }
+
 
 
 }  // end namespace

@@ -46,7 +46,7 @@ int runExample( unsigned numCycles ) noexcept
 {
     // Enable tracing
     KIT_SYSTEM_TRACE_ENABLE();
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eINFO );
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
 
     KIT_SYSTEM_TRACE_MSG( SECT_, "**** Starting Container Linked Lists Example... ****" );

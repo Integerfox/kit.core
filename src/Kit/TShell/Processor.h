@@ -135,8 +135,8 @@ public:
                Kit::Framing::StreamDestination&       outputDestination,
                ISecurity&                             securityPolicy,
                Kit::System::Mutex&                    outputLock,
-               char                                   convertTabs   = ' ',
-               char                                   commentChar   = '#' )
+               char                                   convertTabs = ' ',
+               char                                   commentChar = '#' )
         : m_commands( commands )
         , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )
         , m_framer( outputDestination, '\n' + 1, '\n', 0, true )  // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.
@@ -193,6 +193,9 @@ public:
 
     /// See Kit::TShell::IContext
     void requestTShellExit() noexcept override;
+
+    /// See Kit::TShell::IContext
+    Kit::Io::IOutput* getOutputStream() noexcept override;
 
 protected:
     /** Helper method that attempts to execute the content of the de-framed/decoded

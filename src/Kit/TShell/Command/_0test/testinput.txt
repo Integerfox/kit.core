@@ -10,6 +10,10 @@ echo - "*** TEST: help bye"
 help bye
 echo - "*** TEST: help help"
 help help
+echo - "*** TEST: help wait"
+help wait
+echo - "*** TEST: trace"
+trace
 echo - "*** TEST: Restart TShell"
 bob restart 1000
 bye tshell

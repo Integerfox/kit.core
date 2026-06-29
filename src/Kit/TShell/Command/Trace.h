@@ -1,5 +1,5 @@
-#ifndef KIT_TSHELL_COMMAND_ECHO_H_
-#define KIT_TSHELL_COMMAND_ECHO_H_
+#ifndef KIT_TSHELL_COMMAND_TRACE_H_
+#define KIT_TSHELL_COMMAND_TRACE_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -21,29 +21,33 @@ namespace TShell {
 namespace Command {
 
 /// This class implements a TShell command
-class Echo : public Base
+class Trace : public Base
 {
 public:
     /// The command verb/identifier
-    static constexpr const char* verb = "echo";
+    static constexpr const char* verb = "trace";
 
     /// The command usage string
-    static constexpr const char* usage = "echo [\"<text>\"]\n"
-                                         "echo - [\"<text>\"]";
+    static constexpr const char* usage =
+        "trace [on|off]\n"
+        "trace section (on|off) <sect1> [<sect2>]...\n"
+        "trace threadfilters [<threadname1> [<threadname2>]]...\n"
+        "trace level (eNONE|eBRIEF|eINFO|eVERBOSE|eMAX)\n"
+        "trace here|revert";
 
     /** The command detailed help string (recommended that lines do not exceed 80 chars)
                   1         2         3         4         5         6         7         8
          12345678901234567890123456789012345678901234567890123456789012345678901234567890
      */
     static constexpr const char* detailedHelp =
-        "  Outputs the optionally specified text with the current elapsed time\n"
-        "  prepended to the text.  The '-' option is used to suppress the elapsed time\n"
-        "  output (this is helpful when constructing unit tests)";
+        "  Enables/Disables the Kit::System::Trace engine and manages the section',\n"
+        "  information level, and thread filter options.  See the Kit::System::Trace\n"
+        "  interface for details on how the trace engine works.";
 
 public:
     /// Constructor
-    Echo( Kit::Container::OrderedList<ICommand>& commandList,
-          Permissions_T                          permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
+    Trace( Kit::Container::OrderedList<ICommand>& commandList,
+           Permissions_T                          permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
         : Base( commandList, verb, permissions )
     {
     }

@@ -15,7 +15,7 @@ int main( int argc, char* argv[] )
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "WARNING" );
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "EVENT" );
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "INFO" );
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eINFO );
 
     // Run the test(s)
     return Catch::Session().run( argc, argv );
