@@ -69,49 +69,49 @@ public:
 
 
 public:
-    bool read( size_t srcOffset,
-               void*  dstBuffer,
-               size_t numBytes ) noexcept override
+    Result_T read( size_t srcOffset,
+                   void*  dstBuffer,
+                   size_t numBytes ) noexcept override
     {
         if ( m_failNext )
         {
             m_failNext = false;
-            return false;
+            return ERR_FAILED;
         }
 
         if ( dstBuffer == nullptr || numBytes == 0 )
         {
-            return false;
+            return ERR_FAILED;
         }
 
         if ( srcOffset + numBytes > TOTAL_SIZE )
         {
-            return false;
+            return ERR_RANGE;
         }
 
         memcpy( dstBuffer, m_flash + srcOffset, numBytes );
         m_readCount++;
-        return true;
+        return SUCCESS;
     }
 
-    bool write( size_t      dstOffset,
-                const void* srcBuffer,
-                size_t      numBytes ) noexcept override
+    Result_T write( size_t      dstOffset,
+                    const void* srcBuffer,
+                    size_t      numBytes ) noexcept override
     {
         if ( m_failNext )
         {
             m_failNext = false;
-            return false;
+            return ERR_FAILED;
         }
 
         if ( srcBuffer == nullptr || numBytes == 0 )
         {
-            return false;
+            return ERR_FAILED;
         }
 
         if ( dstOffset + numBytes > TOTAL_SIZE )
         {
-            return false;
+            return ERR_RANGE;
         }
 
         // Simulate flash write semantics: can only clear bits (AND operation)
@@ -122,87 +122,47 @@ public:
         }
 
         m_writeCount++;
-        return true;
+        return SUCCESS;
     }
 
-    bool eraseSector( size_t sectorAddress ) noexcept override
+    Result_T eraseSector( size_t sectorAddress ) noexcept override
     {
         if ( m_failNext )
         {
             m_failNext = false;
-            return false;
+            return ERR_FAILED;
         }
 
         if ( sectorAddress + SECTOR_SIZE > TOTAL_SIZE )
         {
-            return false;
+            return ERR_RANGE;
         }
 
         // Align to sector boundary
         size_t aligned = sectorAddress - ( sectorAddress % SECTOR_SIZE );
         memset( m_flash + aligned, 0xFF, SECTOR_SIZE );
         m_eraseCount++;
-        return true;
+        return SUCCESS;
     }
 
-    bool eraseBlock32K( size_t blockAddress ) noexcept override
+    Result_T eraseChip() noexcept override
     {
         if ( m_failNext )
         {
             m_failNext = false;
-            return false;
-        }
-
-        static constexpr size_t BLOCK_32K = 32 * 1024;
-        if ( blockAddress + BLOCK_32K > TOTAL_SIZE )
-        {
-            return false;
-        }
-
-        size_t aligned = blockAddress - ( blockAddress % BLOCK_32K );
-        memset( m_flash + aligned, 0xFF, BLOCK_32K );
-        m_eraseCount++;
-        return true;
-    }
-
-    bool eraseBlock64K( size_t blockAddress ) noexcept override
-    {
-        if ( m_failNext )
-        {
-            m_failNext = false;
-            return false;
-        }
-
-        static constexpr size_t BLOCK_64K = 64 * 1024;
-        if ( blockAddress + BLOCK_64K > TOTAL_SIZE )
-        {
-            return false;
-        }
-
-        size_t aligned = blockAddress - ( blockAddress % BLOCK_64K );
-        memset( m_flash + aligned, 0xFF, BLOCK_64K );
-        m_eraseCount++;
-        return true;
-    }
-
-    bool eraseChip() noexcept override
-    {
-        if ( m_failNext )
-        {
-            m_failNext = false;
-            return false;
+            return ERR_FAILED;
         }
 
         memset( m_flash, 0xFF, TOTAL_SIZE );
         m_eraseCount++;
-        return true;
+        return SUCCESS;
     }
 
 
 public:
     size_t getTotalSize() const noexcept override { return TOTAL_SIZE; }
     size_t getSectorSize() const noexcept override { return SECTOR_SIZE; }
-    size_t getPageSize() const noexcept override { return PAGE_SIZE; }
+    size_t getWritePageSize() const noexcept override { return PAGE_SIZE; }
     size_t getNumSectors() const noexcept override { return TOTAL_SIZE / SECTOR_SIZE; }
 
 

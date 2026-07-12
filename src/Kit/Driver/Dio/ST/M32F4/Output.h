@@ -40,20 +40,46 @@ namespace M32F4 {
 class Output : public IOutput
 {
 public:
+    /** Optional start-up arguments for the start() method.  Provides the
+        initial logical state to drive the output signal to when the driver
+        is started.
+     */
+    struct StartArgs_T
+    {
+        bool istate;  //!< Initial logical state of the output (true=asserted, false=deasserted)
+
+        /// Constructor
+        StartArgs_T( bool initialState = false )
+            : istate( initialState )
+        {
+        }
+    };
+
+
+public:
     /** Constructor.
 
-        @param port       Pointer to the GPIO port (e.g., GPIOD).  Must remain
-                          valid for the lifetime of this object.
-        @param pin        GPIO pin mask (e.g., GPIO_PIN_14).
-        @param activeHigh If true, assert() drives pin HIGH.  If false,
-                          assert() drives pin LOW.
+        NOTE: The constructor can NOT set the initial state of the output pin.
+              If the driver is statically allocated, the constructor runs
+              before main() executes (i.e. the HAL/BSP/SDK/RTOS/etc. has not
+              been initialized yet).  The initial output state is set by
+              start(); the stopped-state is set by stop().
+
+        @param port              Pointer to the GPIO port (e.g., GPIOD).  Must
+                                 remain valid for the lifetime of this object.
+        @param pin               GPIO pin mask (e.g., GPIO_PIN_14).
+        @param activeHigh        If true, assert() drives pin HIGH.  If false,
+                                 assert() drives pin LOW.
+        @param stateOnStopCalled Logical state to drive the output signal to
+                                 when stop() is called (true=asserted,
+                                 false=deasserted).
      */
-    Output( GPIO_TypeDef* port, uint16_t pin, bool activeHigh = true ) noexcept;
+    Output( GPIO_TypeDef* port, uint16_t pin, bool activeHigh = true, bool stateOnStopCalled = false ) noexcept;
 
 
 public:
     /// See Kit::Driver::IStart
-    bool start( void* startArgs = nullptr ) noexcept override;
+    bool start( void* startArgs ) noexcept override;
 
     /// See Kit::Driver::IStop
     void stop() noexcept override;
@@ -77,10 +103,11 @@ public:
 
 
 protected:
-    GPIO_TypeDef* m_port;        //!< Pointer to the GPIO port
-    uint16_t      m_pin;         //!< GPIO pin mask
-    bool          m_activeHigh;  //!< True if assert=HIGH, false if assert=LOW
-    bool          m_started;     //!< Driver started flag
+    GPIO_TypeDef* m_port;               //!< Pointer to the GPIO port
+    uint16_t      m_pin;                //!< GPIO pin mask
+    bool          m_activeHigh;         //!< True if assert=HIGH, false if assert=LOW
+    bool          m_stateOnStopCalled;  //!< Logical state driven to the output when stop() is called
+    bool          m_started;            //!< Driver started flag
 };
 
 

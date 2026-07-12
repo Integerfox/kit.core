@@ -45,6 +45,8 @@ void Polled::stop() noexcept
 bool Polled::write( const void* txData,
                     size_t      numBytes ) noexcept
 {
+    KIT_SYSTEM_ASSERT( numBytes <= UINT16_MAX );
+
     if ( !m_started || txData == nullptr || numBytes == 0 )
     {
         return false;
@@ -64,6 +66,8 @@ bool Polled::write( const void* txData,
 bool Polled::read( void*  rxData,
                    size_t numBytes ) noexcept
 {
+    KIT_SYSTEM_ASSERT( numBytes <= UINT16_MAX );
+
     if ( !m_started || rxData == nullptr || numBytes == 0 )
     {
         return false;

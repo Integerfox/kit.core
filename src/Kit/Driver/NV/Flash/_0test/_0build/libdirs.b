@@ -17,4 +17,3 @@ src/Kit/System/_trace/_stdout
 
 # Test support
 src/Kit/System/_testsupport
-src/Kit/Driver/SPI/_testsupport

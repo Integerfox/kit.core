@@ -52,7 +52,7 @@
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/Driver/SPI/ST/M32F4/Polled.h"
 #include "Kit/Driver/Dio/ST/M32F4/Output.h"
-#include "Kit/Driver/Flash/W25Q/Api.h"
+#include "Kit/Driver/Flash/W25Q/StdSpi24.h"
 #include "Kit/Driver/NV/Flash/Api.h"
 #include "Kit/Checksum/Crc32EthernetFast.h"
 #include "spi.h"
@@ -150,7 +150,7 @@ public:
         Dio::ST::M32F4::Output csPin( CS_SPI_Flash_GPIO_Port, CS_SPI_Flash_Pin, false );
         spiDriver.start();
 
-        Flash::W25Q::Api flashDriver( spiDriver, csPin, Flash::W25Q::W25Q128 );
+        Flash::W25Q::StdSpi24 flashDriver( spiDriver, csPin, Flash::W25Q::W25Q128 );
         flashDriver.start();
         KIT_SYSTEM_TRACE_MSG( SECT_, "Drivers initialized" );
 

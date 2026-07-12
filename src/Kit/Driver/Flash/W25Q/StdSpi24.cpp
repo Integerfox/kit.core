@@ -9,7 +9,8 @@
 /** @file */
 
 
-#include "Kit/Driver/Flash/W25Q/Api.h"
+#include "Kit/Driver/Flash/W25Q/StdSpi24.h"
+#include "Kit/System/Api.h"
 #include <string.h>
 
 ///
@@ -17,20 +18,19 @@ using namespace Kit::Driver::Flash::W25Q;
 
 
 //////////////////////////////////////////////////////////////////////////////
-Api::Api( SPI::IHalfDuplex&   spi,
-          Dio::IOutput&       cs,
-          const DeviceInfo_T& info ) noexcept
+StdSpi24::StdSpi24( SPI::IHalfDuplex&   spi,
+                    Dio::IOutput&       cs,
+                    const DeviceInfo_T& info ) noexcept
     : m_spi( spi )
     , m_cs( cs )
     , m_deviceInfo( info )
-    , m_cmdBuffer{ 0 }
     , m_started( false )
 {
 }
 
 
 //////////////////////////////////////////////////////////////////////////////
-bool Api::start( void* startArgs ) noexcept
+bool StdSpi24::start( void* startArgs ) noexcept
 {
     if ( m_started )
     {
@@ -46,42 +46,37 @@ bool Api::start( void* startArgs ) noexcept
     // and Reset Device.  The Release Power-Down (0xAB) command is the only
     // command recognised in power-down mode.
     m_cs.assertPin();
-    sendCommand( Commands_T::RELEASE_POWER_DOWN );
+    sendCommand( RELEASE_POWER_DOWN );
     m_cs.deassertPin();
 
     // Wait for release from power-down to complete (tRES1 = 3us per W25Q
-    // datasheet).  Use a generous delay to cover all variants.
-    for ( volatile uint32_t i = 0; i < 1000; i++ )
-    {
-    }
+    // datasheet).  This only runs once at start-up, so a 1ms OSAL sleep is
+    // used instead of a clock-speed dependent busy-wait.
+    Kit::System::sleep( 1 );
 
     // Send software reset sequence to recover from any undefined state
     // that may result from spurious clock edges during MCU power-on.
     // The Enable Reset (66h) + Reset Device (99h) sequence resets the
     // internal state machine to its power-on default.
     m_cs.assertPin();
-    sendCommand( Commands_T::ENABLE_RESET );
+    sendCommand( ENABLE_RESET );
     m_cs.deassertPin();
 
     // Short delay between the two reset commands (>50ns per datasheet)
-    for ( volatile uint32_t i = 0; i < 10; i++ )
-    {
-    }
+    Kit::System::sleep( 1 );
 
     m_cs.assertPin();
-    sendCommand( Commands_T::RESET_DEVICE );
+    sendCommand( RESET_DEVICE );
     m_cs.deassertPin();
 
     // Wait for reset to complete (tRST = 30us max per W25Q datasheet)
-    for ( volatile uint32_t i = 0; i < 5000; i++ )
-    {
-    }
+    Kit::System::sleep( 1 );
 
     m_started = true;
     return true;
 }
 
-void Api::stop() noexcept
+void StdSpi24::stop() noexcept
 {
     if ( m_started )
     {
@@ -92,50 +87,50 @@ void Api::stop() noexcept
 
 
 //////////////////////////////////////////////////////////////////////////////
-bool Api::read( size_t srcOffset,
-                void*  dstBuffer,
-                size_t numBytes ) noexcept
+StdSpi24::Result_T StdSpi24::read( size_t srcOffset,
+                                   void*  dstBuffer,
+                                   size_t numBytes ) noexcept
 {
     if ( !m_started || dstBuffer == nullptr || numBytes == 0 )
     {
-        return false;
+        return ERR_FAILED;
     }
 
     if ( srcOffset + numBytes > m_deviceInfo.totalSize )
     {
-        return false;
+        return ERR_RANGE;
     }
 
     m_cs.assertPin();
 
     // Send READ_DATA command + 24-bit address
-    if ( !sendCommandWithAddress( Commands_T::READ_DATA, srcOffset ) )
+    if ( !sendCommandWithAddress( READ_DATA, srcOffset ) )
     {
         m_cs.deassertPin();
-        return false;
+        return ERR_FAILED;
     }
 
     // Read data
     bool result = m_spi.read( dstBuffer, numBytes );
 
     m_cs.deassertPin();
-    return result;
+    return result ? SUCCESS : ERR_FAILED;
 }
 
 
 //////////////////////////////////////////////////////////////////////////////
-bool Api::write( size_t      dstOffset,
-                 const void* srcBuffer,
-                 size_t      numBytes ) noexcept
+StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
+                                    const void* srcBuffer,
+                                    size_t      numBytes ) noexcept
 {
     if ( !m_started || srcBuffer == nullptr || numBytes == 0 )
     {
-        return false;
+        return ERR_FAILED;
     }
 
     if ( dstOffset + numBytes > m_deviceInfo.totalSize )
     {
-        return false;
+        return ERR_RANGE;
     }
 
     const uint8_t* src       = static_cast<const uint8_t*>( srcBuffer );
@@ -144,6 +139,15 @@ bool Api::write( size_t      dstOffset,
 
     while ( remaining > 0 )
     {
+        // Wait for any previous programming operation to complete before
+        // starting the next page.  Placing the wait at the top of the loop
+        // (instead of after the program command) means the caller is not
+        // blocked on the physical programming time of the final/only page.
+        if ( !waitUntilReady() )
+        {
+            return ERR_FAILED;
+        }
+
         // Calculate bytes remaining in current flash page
         size_t offsetInPage  = address % m_deviceInfo.pageSize;
         size_t bytesThisPage = m_deviceInfo.pageSize - offsetInPage;
@@ -155,30 +159,24 @@ bool Api::write( size_t      dstOffset,
         // Enable write latch
         if ( !writeEnable() )
         {
-            return false;
+            return ERR_FAILED;
         }
 
         // Send PAGE_PROGRAM command
         m_cs.assertPin();
-        if ( !sendCommandWithAddress( Commands_T::PAGE_PROGRAM, address ) )
+        if ( !sendCommandWithAddress( PAGE_PROGRAM, address ) )
         {
             m_cs.deassertPin();
-            return false;
+            return ERR_FAILED;
         }
 
         // Write data for this page chunk
         if ( !m_spi.write( src, bytesThisPage ) )
         {
             m_cs.deassertPin();
-            return false;
+            return ERR_FAILED;
         }
         m_cs.deassertPin();
-
-        // Wait for programming to complete
-        if ( !waitUntilReady() )
-        {
-            return false;
-        }
 
         // Advance to next page
         src       += bytesThisPage;
@@ -186,25 +184,25 @@ bool Api::write( size_t      dstOffset,
         remaining -= bytesThisPage;
     }
 
-    return true;
+    return SUCCESS;
 }
 
 
 //////////////////////////////////////////////////////////////////////////////
-bool Api::eraseSector( size_t sectorAddress ) noexcept
+StdSpi24::Result_T StdSpi24::eraseSector( size_t sectorAddress ) noexcept
 {
     if ( !m_started )
     {
-        return false;
+        return ERR_FAILED;
     }
 
     if ( !writeEnable() )
     {
-        return false;
+        return ERR_FAILED;
     }
 
     m_cs.assertPin();
-    bool result = sendCommandWithAddress( Commands_T::SECTOR_ERASE, sectorAddress );
+    bool result = sendCommandWithAddress( SECTOR_ERASE, sectorAddress );
     m_cs.deassertPin();
 
     if ( result )
@@ -212,74 +210,24 @@ bool Api::eraseSector( size_t sectorAddress ) noexcept
         result = waitUntilReady();
     }
 
-    return result;
+    return result ? SUCCESS : ERR_FAILED;
 }
 
 
-bool Api::eraseBlock32K( size_t blockAddress ) noexcept
+StdSpi24::Result_T StdSpi24::eraseChip() noexcept
 {
     if ( !m_started )
     {
-        return false;
+        return ERR_FAILED;
     }
 
     if ( !writeEnable() )
     {
-        return false;
+        return ERR_FAILED;
     }
 
     m_cs.assertPin();
-    bool result = sendCommandWithAddress( Commands_T::BLOCK_ERASE_32K, blockAddress );
-    m_cs.deassertPin();
-
-    if ( result )
-    {
-        result = waitUntilReady();
-    }
-
-    return result;
-}
-
-
-bool Api::eraseBlock64K( size_t blockAddress ) noexcept
-{
-    if ( !m_started )
-    {
-        return false;
-    }
-
-    if ( !writeEnable() )
-    {
-        return false;
-    }
-
-    m_cs.assertPin();
-    bool result = sendCommandWithAddress( Commands_T::BLOCK_ERASE_64K, blockAddress );
-    m_cs.deassertPin();
-
-    if ( result )
-    {
-        result = waitUntilReady();
-    }
-
-    return result;
-}
-
-
-bool Api::eraseChip() noexcept
-{
-    if ( !m_started )
-    {
-        return false;
-    }
-
-    if ( !writeEnable() )
-    {
-        return false;
-    }
-
-    m_cs.assertPin();
-    bool result = sendCommand( Commands_T::CHIP_ERASE );
+    bool result = sendCommand( CHIP_ERASE );
     m_cs.deassertPin();
 
     if ( result )
@@ -287,36 +235,36 @@ bool Api::eraseChip() noexcept
         result = waitUntilReady( CHIP_ERASE_TIMEOUT_MS );
     }
 
-    return result;
+    return result ? SUCCESS : ERR_FAILED;
 }
 
 
 //////////////////////////////////////////////////////////////////////////////
-size_t Api::getTotalSize() const noexcept
+size_t StdSpi24::getTotalSize() const noexcept
 {
     return m_deviceInfo.totalSize;
 }
 
-size_t Api::getSectorSize() const noexcept
+size_t StdSpi24::getSectorSize() const noexcept
 {
     return m_deviceInfo.sectorSize;
 }
 
-size_t Api::getPageSize() const noexcept
+size_t StdSpi24::getWritePageSize() const noexcept
 {
     return m_deviceInfo.pageSize;
 }
 
-size_t Api::getNumSectors() const noexcept
+size_t StdSpi24::getNumSectors() const noexcept
 {
     return m_deviceInfo.numSectors;
 }
 
 
 //////////////////////////////////////////////////////////////////////////////
-bool Api::readJedecId( uint8_t& mfgId,
-                       uint8_t& memType,
-                       uint8_t& capacity ) noexcept
+bool StdSpi24::readJedecId( uint8_t& mfgId,
+                            uint8_t& memType,
+                            uint8_t& capacity ) noexcept
 {
     if ( !m_started )
     {
@@ -325,8 +273,7 @@ bool Api::readJedecId( uint8_t& mfgId,
 
     m_cs.assertPin();
 
-    uint8_t cmd = Commands_T::JEDEC_ID;
-    if ( !m_spi.write( &cmd, 1 ) )
+    if ( !sendCommand( JEDEC_ID ) )
     {
         m_cs.deassertPin();
         return false;
@@ -349,22 +296,21 @@ bool Api::readJedecId( uint8_t& mfgId,
 
 
 //////////////////////////////////////////////////////////////////////////////
-bool Api::writeEnable() noexcept
+bool StdSpi24::writeEnable() noexcept
 {
     m_cs.assertPin();
-    bool result = sendCommand( Commands_T::WRITE_ENABLE );
+    bool result = sendCommand( WRITE_ENABLE );
     m_cs.deassertPin();
     return result;
 }
 
-bool Api::waitUntilReady( uint32_t timeoutMs ) noexcept
+bool StdSpi24::waitUntilReady( uint32_t timeoutMs ) noexcept
 {
     for ( uint32_t i = 0; i < timeoutMs; i++ )
     {
         m_cs.assertPin();
 
-        uint8_t cmd = Commands_T::READ_STATUS_REG1;
-        if ( !m_spi.write( &cmd, 1 ) )
+        if ( !sendCommand( READ_STATUS_REG1 ) )
         {
             m_cs.deassertPin();
             return false;
@@ -379,34 +325,25 @@ bool Api::waitUntilReady( uint32_t timeoutMs ) noexcept
 
         m_cs.deassertPin();
 
-        if ( ( status & StatusReg1_T::BUSY ) == 0 )
+        if ( ( status & BUSY ) == 0 )
         {
             return true;  // Ready
         }
 
-        // Busy-wait approximately 1ms per iteration so that
-        // 'timeoutMs' iterations correspond to a real-time
-        // timeout in milliseconds.  The constant assumes a CPU
-        // clock in the 48-200 MHz range (~8 cycles per volatile
-        // loop iteration on Cortex-M4).
-        for ( volatile uint32_t d = 0; d < BUSY_POLL_DELAY_LOOPS; d++ )
-        {
-        }
+        // Poll roughly once per millisecond so that 'timeoutMs' iterations
+        // correspond to a real-time timeout in milliseconds.
+        Kit::System::sleep( 1 );
     }
 
     return false;  // Timed out
 }
 
-bool Api::sendCommand( uint8_t cmd ) noexcept
+bool StdSpi24::sendCommandWithAddress( uint8_t cmd, size_t address ) noexcept
 {
-    return m_spi.write( &cmd, 1 );
-}
-
-bool Api::sendCommandWithAddress( uint8_t cmd, size_t address ) noexcept
-{
-    m_cmdBuffer[0] = cmd;
-    m_cmdBuffer[1] = static_cast<uint8_t>( ( address >> 16 ) & 0xFF );
-    m_cmdBuffer[2] = static_cast<uint8_t>( ( address >> 8 ) & 0xFF );
-    m_cmdBuffer[3] = static_cast<uint8_t>( address & 0xFF );
-    return m_spi.write( m_cmdBuffer, sizeof( m_cmdBuffer ) );
+    uint8_t cmdBuffer[CMD_24BIT_ADDR_SIZE];
+    cmdBuffer[0] = cmd;
+    cmdBuffer[1] = static_cast<uint8_t>( ( address >> 16 ) & 0xFF );
+    cmdBuffer[2] = static_cast<uint8_t>( ( address >> 8 ) & 0xFF );
+    cmdBuffer[3] = static_cast<uint8_t>( address & 0xFF );
+    return m_spi.write( cmdBuffer, sizeof( cmdBuffer ) );
 }

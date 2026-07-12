@@ -10,16 +10,20 @@
     Hardware test for Kit::Driver::Dio.  Exercises the digital output driver
     by toggling pins and verifying state transitions.  Visual pass indicator
     is a toggling debug LED.
+
+    This test is platform-independent: it operates solely on the
+    Kit::Driver::Dio::IOutput interface so that it can be re-used for all
+    concrete Dio drivers.  The caller (e.g. a platform-specific main()) is
+    responsible for creating/starting the concrete driver, creating the
+    thread this runs in, and starting the OSAL scheduler.
 */
 
-#include "Kit/Bsp/Api.h"
+#include "test.h"
 #include "Kit/System/Api.h"
 #include "Kit/System/Shutdown.h"
-#include "Kit/System/Thread.h"
 #include "Kit/System/FatalError.h"
-#include "Kit/System/ElapsedTime.h"
 #include "Kit/System/Trace.h"
-#include "Kit/Driver/Dio/ST/M32F4/Output.h"
+#include "Kit/Bsp/Api.h"
 #include <cstdint>
 
 
@@ -30,110 +34,63 @@ using namespace Kit::System;
 
 
 ////////////////////////////////////////////////////////////////////////////////
-namespace {
-
-
-class DioTestRunnable : public IRunnable
+void runtests( Kit::Driver::Dio::IOutput& output )
 {
-public:
-    Kit::Driver::Dio::IOutput& m_output;
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Starting DIO test..." );
 
-public:
-    DioTestRunnable( Kit::Driver::Dio::IOutput& output )
-        : m_output( output )
+    for ( ;; )
     {
-    }
-
-public:
-    void entry() noexcept override
-    {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Starting DIO test..." );
-
-        // Start the driver
-        if ( !m_output.start() )
+        // Test assert
+        output.assertPin();
+        sleep( 100 );
+        if ( !output.isAsserted() )
         {
-            FatalError::logf( Shutdown::eFAILURE, "DIO output start() failed" );
+            FatalError::logf( Shutdown::eFAILURE, "DIO: assertPin() did not set asserted state" );
         }
 
-        for ( ;; )
+        // Test deassert
+        output.deassertPin();
+        sleep( 100 );
+        if ( output.isAsserted() )
         {
-            // Test assert
-            m_output.assertPin();
-            sleep( 100 );
-            if ( !m_output.isAsserted() )
-            {
-                FatalError::logf( Shutdown::eFAILURE, "DIO: assertPin() did not set asserted state" );
-            }
-
-            // Test deassert
-            m_output.deassertPin();
-            sleep( 100 );
-            if ( m_output.isAsserted() )
-            {
-                FatalError::logf( Shutdown::eFAILURE, "DIO: deassertPin() did not clear asserted state" );
-            }
-
-            // Test set(true)
-            m_output.set( true );
-            sleep( 100 );
-            if ( !m_output.isAsserted() )
-            {
-                FatalError::logf( Shutdown::eFAILURE, "DIO: set(true) did not set asserted state" );
-            }
-
-            // Test set(false)
-            m_output.set( false );
-            sleep( 100 );
-            if ( m_output.isAsserted() )
-            {
-                FatalError::logf( Shutdown::eFAILURE, "DIO: set(false) did not clear asserted state" );
-            }
-
-            // Test toggle from deasserted
-            m_output.deassertPin();
-            m_output.toggle();
-            sleep( 100 );
-            if ( !m_output.isAsserted() )
-            {
-                FatalError::logf( Shutdown::eFAILURE, "DIO: toggle() from deasserted did not assert" );
-            }
-
-            // Test toggle from asserted
-            m_output.toggle();
-            sleep( 100 );
-            if ( m_output.isAsserted() )
-            {
-                FatalError::logf( Shutdown::eFAILURE, "DIO: toggle() from asserted did not deassert" );
-            }
-
-            // Visual heartbeat - toggles debug LED to indicate test is running
-            Bsp_toggle_debug1();
-            sleep( 500 );
+            FatalError::logf( Shutdown::eFAILURE, "DIO: deassertPin() did not clear asserted state" );
         }
+
+        // Test set(true)
+        output.set( true );
+        sleep( 100 );
+        if ( !output.isAsserted() )
+        {
+            FatalError::logf( Shutdown::eFAILURE, "DIO: set(true) did not set asserted state" );
+        }
+
+        // Test set(false)
+        output.set( false );
+        sleep( 100 );
+        if ( output.isAsserted() )
+        {
+            FatalError::logf( Shutdown::eFAILURE, "DIO: set(false) did not clear asserted state" );
+        }
+
+        // Test toggle from deasserted
+        output.deassertPin();
+        output.toggle();
+        sleep( 100 );
+        if ( !output.isAsserted() )
+        {
+            FatalError::logf( Shutdown::eFAILURE, "DIO: toggle() from deasserted did not assert" );
+        }
+
+        // Test toggle from asserted
+        output.toggle();
+        sleep( 100 );
+        if ( output.isAsserted() )
+        {
+            FatalError::logf( Shutdown::eFAILURE, "DIO: toggle() from asserted did not deassert" );
+        }
+
+        // Visual heartbeat - toggles debug LED to indicate test is running
+        Bsp_toggle_debug1();
+        sleep( 500 );
     }
-};
-
-};  // end namespace
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-// NOTE: I create the Runnable objects on the Heap - because depending on the
-//       platform - FreeRTOS will corrupt the raw 'main stack' when it starts
-//       the first thread.
-
-void runtests( void )
-{
-    // Create the DIO output driver for a test pin
-    // Uses LD2 LED pin (GPIOB, GPIO_PIN_7 on NUCLEO-F413ZH)
-    Kit::Driver::Dio::ST::M32F4::Output* testOutput =
-        new ( std::nothrow ) Kit::Driver::Dio::ST::M32F4::Output( LD2_GPIO_Port, LD2_Pin );
-
-    // Create and start the test thread
-    DioTestRunnable* testRunnable = new ( std::nothrow ) DioTestRunnable( *testOutput );
-    Thread::create( *testRunnable, "DioTest" );
-
-    // Start the scheduler
-    KIT_SYSTEM_TRACE_MSG( SECT_, "Starting scheduler..." );
-    enableScheduling();
 }

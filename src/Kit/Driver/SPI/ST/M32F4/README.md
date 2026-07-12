@@ -1,6 +1,7 @@
-/** @namespace Kit::Driver::SPI::ST::M32F4
+# Kit::Driver::SPI::ST::M32F4
+@brief namespace description for Kit::Driver::SPI::ST::M32F4
+@namespace Kit::Driver::SPI::ST::M32F4 @brief
 
 The M32F4 namespace contains the STM32F4 HAL-based SPI driver 
 implementations.  These drivers wrap the STM32 HAL SPI functions into the
-Kit::Driver::SPI::IApi interface.
-*/
+Kit::Driver::SPI interface(s).

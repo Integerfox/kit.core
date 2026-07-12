@@ -53,29 +53,29 @@ public:
         m_opCounter = 0;
     }
 
-    bool read( size_t srcOffset, void* dstBuffer, size_t numBytes ) noexcept override
+    Flash::IApi::Result_T read( size_t srcOffset, void* dstBuffer, size_t numBytes ) noexcept override
     {
         if ( m_failOnOp > 0 && ++m_opCounter == m_failOnOp )
         {
-            return false;
+            return Flash::IApi::ERR_FAILED;
         }
         return Flash::TestSupport::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::read( srcOffset, dstBuffer, numBytes );
     }
 
-    bool write( size_t dstOffset, const void* srcBuffer, size_t numBytes ) noexcept override
+    Flash::IApi::Result_T write( size_t dstOffset, const void* srcBuffer, size_t numBytes ) noexcept override
     {
         if ( m_failOnOp > 0 && ++m_opCounter == m_failOnOp )
         {
-            return false;
+            return Flash::IApi::ERR_FAILED;
         }
         return Flash::TestSupport::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::write( dstOffset, srcBuffer, numBytes );
     }
 
-    bool eraseSector( size_t sectorAddress ) noexcept override
+    Flash::IApi::Result_T eraseSector( size_t sectorAddress ) noexcept override
     {
         if ( m_failOnOp > 0 && ++m_opCounter == m_failOnOp )
         {
-            return false;
+            return Flash::IApi::ERR_FAILED;
         }
         return Flash::TestSupport::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::eraseSector( sectorAddress );
     }

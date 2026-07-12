@@ -16,10 +16,11 @@ using namespace Kit::Driver::Dio::ST::M32F4;
 
 
 //////////////////////////////////////////////////////////////////////////////
-Output::Output( GPIO_TypeDef* port, uint16_t pin, bool activeHigh ) noexcept
+Output::Output( GPIO_TypeDef* port, uint16_t pin, bool activeHigh, bool stateOnStopCalled ) noexcept
     : m_port( port )
     , m_pin( pin )
     , m_activeHigh( activeHigh )
+    , m_stateOnStopCalled( stateOnStopCalled )
     , m_started( false )
 {
 }
@@ -28,14 +29,29 @@ Output::Output( GPIO_TypeDef* port, uint16_t pin, bool activeHigh ) noexcept
 //////////////////////////////////////////////////////////////////////////////
 bool Output::start( void* startArgs ) noexcept
 {
-    m_started = true;
+    if ( startArgs == nullptr )
+    {
+        return false;
+    }
+
+    if ( !m_started )
+    {
+        StartArgs_T* args = static_cast<StartArgs_T*>( startArgs );
+        set( args->istate );
+        m_started = true;
+    }
     return true;
 }
 
 
 void Output::stop() noexcept
 {
-    m_started = false;
+    if ( m_started )
+    {
+        // Drive the output to its configured stopped-state
+        set( m_stateOnStopCalled );
+        m_started = false;
+    }
 }
 
 
