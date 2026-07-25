@@ -2,7 +2,6 @@ src/Kit/TShell/Command/_0test
 
 src/Kit/TShell
 src/Kit/TShell/Command
-src/Kit/TShell/Command/Posix
 src/Kit/Framing
 src/Kit/Container
 src/Kit/System

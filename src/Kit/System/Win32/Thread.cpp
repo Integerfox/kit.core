@@ -82,7 +82,7 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
     keyCreated_ = true;
 
     // Set the native thread handle to the current thread
-    m_nativeThreadHdl = GetCurrentThreadId();
+    m_nativeThreadHdl = GetCurrentThread();
 
     // Store a reference to the Kit thread object for the native thread
     TlsSetValue( dwTlsIndex_, this );

@@ -243,7 +243,7 @@
 #define KIT_SYSTEM_TRACE_SET_INFO_LEVEL( l )
 
 /// Macro Wrapper
-#define KIT_SYSTEM_TRACE_GET_INFO_LEVEL() ( (Kit::System::Trace::TraceLevel::_from_index(0) )
+#define KIT_SYSTEM_TRACE_GET_INFO_LEVEL() ( Kit::System::TraceLevel::_from_index( 0 ) )
 
 /// Macro Wrapper
 #define KIT_SYSTEM_TRACE_ENABLE_SECTION( sect )
