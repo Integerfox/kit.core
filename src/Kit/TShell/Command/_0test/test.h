@@ -12,7 +12,10 @@
 
 #include "Kit/Io/IInput.h"
 #include "Kit/Io/IOutput.h"
+#include "Kit/Container/OrderedList.h"
+#include "Kit/TShell/ICommand.h"
 
+extern Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList;
 extern void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd );
 
 #endif  // end header latch

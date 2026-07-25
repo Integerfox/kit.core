@@ -27,7 +27,7 @@ Result_T Bye::execute( IContext& context, char* cmdString ) noexcept
     // Basic Error Checking
     if ( tokens.numParameters() > 2 )
     {
-        return +Result_T::CMD_ERR_BAD_SYNTAX;
+        return Result_T::CMD_ERR_BAD_SYNTAX;
     }
 
     // Exit the TShell only

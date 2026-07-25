@@ -10,7 +10,6 @@
 
 #include "test.h"
 #include "Kit/Bsp/Api.h"
-#include "Kit/Container/OrderedList.h"
 #include "Kit/TShell/ISecurity.h"
 #include "Kit/TShell/Processor.h"
 #include "Kit/TShell/NoSecurity.h"
@@ -199,27 +198,26 @@ public:
 
 ////////////////////////////////////
 
-static Kit::Container::OrderedList<Kit::TShell::ICommand> commandList_;
-static Kit::TShell::NoSecurity                            securityPolicy_;
-static Kit::System::Mutex                                 lock_;
-static Kit::Framing::StreamSource                         streamSrc_;
-static Kit::Framing::StreamDestination                    streamDst_;
+Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList("ignore_static_constructor");
+static Kit::TShell::NoSecurity                     securityPolicy_;
+static Kit::System::Mutex                          lock_;
+static Kit::Framing::StreamSource                  streamSrc_;
+static Kit::Framing::StreamDestination             streamDst_;
 
-static Kit::TShell::Processor tshell_( commandList_,
+static Kit::TShell::Processor tshell_( g_commandList,
                                        streamSrc_,
                                        streamDst_,
                                        securityPolicy_,
                                        Kit::System::PrivateLocks::tracingOutput() );
 
 static Kit::TShell::StdioThread    stdioThread_( tshell_ );
-static Kit::TShell::Command::Bye   byeCmd_( commandList_ );
-static Kit::TShell::Command::Help  helpCmd_( commandList_ );
-static Kit::TShell::Command::Echo  echoCmd_( commandList_ );
-static Kit::TShell::Command::Trace traceCmd_( commandList_ );
-static Kit::TShell::Command::Wait  waitCmd_( commandList_ );
+static Kit::TShell::Command::Bye   byeCmd_( g_commandList );
+static Kit::TShell::Command::Help  helpCmd_( g_commandList );
+static Kit::TShell::Command::Echo  echoCmd_( g_commandList );
+static Kit::TShell::Command::Trace traceCmd_( g_commandList );
+static Kit::TShell::Command::Wait  waitCmd_( g_commandList );
 static Apple                       app_( stdioThread_ );
-static Bob                         bobCmd_( commandList_, app_ );
-
+static Bob                         bobCmd_( g_commandList, app_ );
 
 void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
 {
@@ -231,7 +229,3 @@ void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
     // Wait forever - the 'bye' command is responsible for exiting
     Kit::System::sleep( 0xFFFFFFFF );
 }
-
-echo
-wait 1000
-echo

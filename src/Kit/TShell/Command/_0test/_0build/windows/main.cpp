@@ -4,9 +4,9 @@
 #include "Kit/Io/Stdio/StdIn.h"
 #include "Kit/Io/Stdio/StdOut.h"
 
-#include "Kit/TShell/Command/Posix/Threads.h"
+#include "Kit/TShell/Command/Win32/Threads.h"
 
-static Kit::TShell::Command::Posix::Threads  threadsCmd_( g_commandList );
+static Kit::TShell::Command::Win32::Threads  threadsCmd_( g_commandList );
 
 static Kit::Io::Stdio::StdIn  stdin_;
 static Kit::Io::Stdio::StdOut stdout_;

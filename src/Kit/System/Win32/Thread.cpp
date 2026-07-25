@@ -81,6 +81,9 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
     // Set my Tls index/key 'created' status to good
     keyCreated_ = true;
 
+    // Set the native thread handle to the current thread
+    m_nativeThreadHdl = GetCurrentThreadId();
+
     // Store a reference to the Kit thread object for the native thread
     TlsSetValue( dwTlsIndex_, this );
 
@@ -89,7 +92,7 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
 
     // Mark the NATIVE/Main thread as 'real time' thread for the SimTick engine
     KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( false );
-    KIT_SYSTEM_SIM_TICK_THREAD_INIT_( false );  
+    KIT_SYSTEM_SIM_TICK_THREAD_INIT_( false );
 
     // Get a 'Real Handle' to this thread
     DuplicateHandle( GetCurrentProcess(), GetCurrentThread(), GetCurrentProcess(), &m_nativeThreadHdl, 0, FALSE, DUPLICATE_SAME_ACCESS );
