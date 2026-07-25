@@ -9,25 +9,46 @@
 /** @file */
 
 #include "Threads.h"
-#include <windows.h>
+#include "task.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace TShell {
 namespace Command {
-namespace Win32 {
+namespace FreeRTOS {
+
+static inline const char* stateToString( eTaskState state )
+{
+    switch ( state )
+    {
+    case eRunning:
+        return "RUN";
+    case eReady:
+        return "READY";
+    case eBlocked:
+        return "BLOCK";
+    case eSuspended:
+        return "SUSP";
+    case eDeleted:
+        return "DEL";
+    default:
+        return "UNK";
+    }
+}
 
 void Threads::hookHeaderTitle( Kit::Text::IString& text )
 {
-    text.formatAppend( "  %-3s", "Pri" );
+    text.formatAppend( "  %-4s  %-5s  %-5s", "Pri", "State", "HWM" );
 }
 
 void Threads::hookThreadEntry( Kit::Text::IString& text, Kit::System::Thread& currentThread )
 {
-    HANDLE threadHdl = currentThread.getId();
-    int    priority  = GetThreadPriority( threadHdl );
+    TaskHandle_t taskHdl        = currentThread.getId();
+    unsigned     priority       = static_cast<unsigned>( uxTaskPriorityGet( taskHdl ) );
+    const char*  stateStr       = stateToString( eTaskGetState( taskHdl ) );
+    unsigned     stackHighWater = static_cast<unsigned>( uxTaskGetStackHighWaterMark( taskHdl ) );
 
-    text.formatAppend( "  %-3d", priority );
+    text.formatAppend( "  %-4u  %-5s  %-5u", priority, stateStr, stackHighWater );
 }
 
 }  // end namespaces

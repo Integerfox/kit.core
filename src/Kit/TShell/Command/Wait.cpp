@@ -12,6 +12,7 @@
 #include "Kit/Text/Tokenizer/TextBlock.h"
 #include "Kit/Text/StringTo.h"
 #include "Kit/System/Api.h"
+#include <inttypes.h>
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -34,7 +35,7 @@ Result_T Wait::execute( IContext& context, char* cmdString ) noexcept
     uint32_t waitTime = 0;
     if ( Kit::Text::StringTo::unsignedInt( waitTime, tokens.getParameter( 1 ) ) )
     {
-        outtext.format( "Waiting for %u msec ...", waitTime );
+        outtext.format( "Waiting for %" PRIu32 " msec ...", waitTime );
         bool io = context.writeFrame( outtext );
         Kit::System::sleep( waitTime );
         return io ? Result_T::CMD_SUCCESS : Result_T::CMD_ERR_IO;

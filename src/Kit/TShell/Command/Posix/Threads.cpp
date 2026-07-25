@@ -27,7 +27,7 @@ void Threads::hookThreadEntry( Kit::Text::IString& text, Kit::System::Thread& cu
 {
     int                policy;
     struct sched_param param;
-    pthread_t          threadId = (pthread_t)currentThread.getId();
+    pthread_t          threadId = currentThread.getId();
 
     pthread_getschedparam( threadId, &policy, &param );
 
