@@ -124,7 +124,7 @@ StdioThread::~StdioThread()
     {
         if ( m_threadPtr )
         {
-            Kit::System::Thread::destroy( *m_threadPtr );
+            Kit::System::Thread::destroy( *m_threadPtr, OPTION_KIT_TSHELL_STDIO_THREAD_DESTROY_WAIT_MS );
         }
         delete m_runnablePtr;
     }

@@ -16,6 +16,11 @@
 #include "Kit/Io/IOutput.h"
 #include "Kit/System/Thread.h"
 
+/// Delay, in milliseconds, to wait when the Thread instance is being destroyed
+/// before deleting the associated Runnable instance
+#ifndef OPTION_KIT_TSHELL_STDIO_THREAD_DESTROY_WAIT_MS
+#define OPTION_KIT_TSHELL_STDIO_THREAD_DESTROY_WAIT_MS 100
+#endif
 
 ///
 namespace Kit {
