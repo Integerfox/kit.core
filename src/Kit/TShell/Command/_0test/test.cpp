@@ -29,6 +29,7 @@
 #include "Kit/TShell/StdioThread.h"
 #include "Kit/Text/Tokenizer/TextBlock.h"
 #include "Kit/Text/StringTo.h"
+#include <inttypes.h>
 
 #define SECT_ "_0test"
 
@@ -120,7 +121,7 @@ public:
                 {
                     bool shellRunning = m_stdioThread.isTShellRunning();
                     KIT_SYSTEM_TRACE_MSG( "bob", "TShell is running=%s", shellRunning ? "true" : "false" );
-                    KIT_SYSTEM_TRACE_MSG( "bob", "Restarting TShell after %u milliseconds", m_restartDelay );
+                    KIT_SYSTEM_TRACE_MSG( "bob", "Restarting TShell after %" PRIu32 " milliseconds", m_restartDelay );
                     m_stdioThread.restartTShell();
                     m_restartDelay = 0;
                     Kit::System::sleep( 200 );  // Allow time for the TShell to restart before continuing

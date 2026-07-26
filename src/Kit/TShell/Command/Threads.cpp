@@ -19,7 +19,7 @@ namespace Command {
 Result_T Threads::execute( IContext& context, char* cmdString ) noexcept
 {
     // NOTE: The command IGNORES any/all command arguments!
-    constexpr int ID_COLUMN_WIDTH = static_cast<int>( sizeof( void* ) * 2U );
+    constexpr int ID_COLUMN_WIDTH = static_cast<int>( sizeof( void* ) * 2U  + 2 );
     
     // House keeping
     Kit::Text::IString& outtext = context.getOutputBuffer();
@@ -46,7 +46,7 @@ Result_T Threads::execute( IContext& context, char* cmdString ) noexcept
 
 Kit::Type::TraverserStatus Threads::item( Kit::System::Thread& t ) noexcept
 {
-    constexpr int ID_COLUMN_WIDTH = static_cast<int>( sizeof( void* ) * 2U );
+    constexpr int ID_COLUMN_WIDTH = static_cast<int>( sizeof( void* ) * 2U + 2);
     Kit::Text::IString& outtext = m_contextPtr->getOutputBuffer();
 
     m_count++;
