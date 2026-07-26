@@ -46,7 +46,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
     frameSize = 0;
 
     // Error case: Treat a null frame buffer as an IO failure case
-    if ( !frameBuffer )
+    if ( frameBuffer == nullptr )
     {
         return false;
     }
@@ -56,7 +56,7 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
     {
         // Read N characters at time
         bool isEof;
-        if ( !scan( maxSizeOfFrameBuffer, frameBuffer, frameSize, isEof ) )
+        if ( !scan( maxSizeOfFrameBuffer, frameBuffer, frameSize, isEof, true ) )
         {
             return false;  // Read/IO error occurred
         }
@@ -72,13 +72,22 @@ bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
                           Kit::Type::SSize_T& frameSize,
                           bool&               isEof ) noexcept
 {
+    return scan( maxSizeOfFrameBuffer, frameBuffer, frameSize, isEof, false );
+}
+
+bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
+                          uint8_t*            frameBuffer,
+                          Kit::Type::SSize_T& frameSize,
+                          bool&               isEof,
+                          bool                blockIfUnavailable ) noexcept
+{
     // Default to in-progress
     isEof = false;
 
     // Get more input data once my local buffer/cache is empty
     if ( !m_dataLen )
     {
-        if ( !m_src.read( m_buffer, m_bufSize, m_dataLen ) )
+        if ( !m_src.read( m_buffer, m_bufSize, m_dataLen, blockIfUnavailable ) )
         {
             // Error reading data -->exit scan
             m_dataLen = 0;  // Reset my internal count so I start 'over' on the next call (if there is one)
