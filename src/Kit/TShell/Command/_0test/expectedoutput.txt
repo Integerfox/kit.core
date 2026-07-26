@@ -10,6 +10,7 @@ bye tshell
 echo ["<text>"]
 echo - ["<text>"]
 help [* <cmd>]
+threads
 trace [on|off]
 trace section (on|off) <sect1> [<sect2>]...
 trace threadfilters [<threadname1> [<threadname2>]]...
@@ -38,6 +39,9 @@ help [* <cmd>]
   Displays list of all supported commands and optionally their detailed help. If
   the second argument is a command, then the detailed help for that command will
   be displayed.
+ 
+threads
+  Displays the list of KIT threads.
  
 trace [on|off]
 trace section (on|off) <sect1> [<sect2>]...
@@ -112,6 +116,7 @@ bye tshell
 echo ["<text>"]
 echo - ["<text>"]
 help [* <cmd>]
+threads
 trace [on|off]
 trace section (on|off) <sect1> [<sect2>]...
 trace threadfilters [<threadname1> [<threadname2>]]...
