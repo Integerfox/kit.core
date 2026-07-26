@@ -14,10 +14,16 @@ echo - "*** TEST: help wait"
 help wait
 echo - "*** TEST: trace"
 trace
+trace section on bob
+wait 100
+trace section off bob
+trace threadfilters TEST
 echo - "*** TEST: Restart TShell"
 bob restart 1000
 bye tshell
 echo - "*** TEST: Help after restart
 help
+wait 1000
 echo "LAST CHECKED LINE"
+threads
 bye

@@ -100,7 +100,8 @@ TRACE: Currently Enabled Thread Filters:
 ----------------------------------------
  
 TRACE: Runtime state:= ENABLED, Info Level:= eINFO
-$ *** TEST: Restart TShell
+$ $ Waiting for 100 msec ...
+$ $ $ *** TEST: Restart TShell
 $ $ $ 
 --- ...I am melting, am melting... ---
 
@@ -123,3 +124,4 @@ trace threadfilters [<threadname1> [<threadname2>]]...
 trace level (eNONE|eBRIEF|eINFO|eVERBOSE|eMAX)
 trace here|revert
 wait <delay>
+$ Waiting for 1000 msec ...
