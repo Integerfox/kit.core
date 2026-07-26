@@ -38,7 +38,7 @@ static inline const char* stateToString( eTaskState state )
 
 void Threads::hookHeaderTitle( Kit::Text::IString& text )
 {
-    text.formatAppend( "  %-4s  %-5s  %-5s", "Pri", "State", "HWM" );
+    text.formatAppend( "  %-4s  %-5s  %-5s", "Pri", "State", "Stack" );
 }
 
 void Threads::hookThreadEntry( Kit::Text::IString& text, Kit::System::Thread& currentThread )

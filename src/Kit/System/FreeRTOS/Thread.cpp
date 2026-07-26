@@ -20,7 +20,7 @@
 
 
 ////////////////////////////////////
-// #ifdef USE_KIT_SYSTEM_FREERTOS_NATIVE_THREAD
+#ifdef USE_KIT_SYSTEM_FREERTOS_NATIVE_THREAD
 namespace {
 
 /// This class is used to turn the entry/native/main thread into a Kit::System::Thread (i.e. add the thread semaphore)
@@ -50,7 +50,7 @@ protected:
 static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 }  // end anonymous namespace
-// #endif
+#endif
 
 
 //------------------------------------------------------------------------------
