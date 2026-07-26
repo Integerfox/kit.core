@@ -46,7 +46,7 @@ Result_T Bye::execute( IContext& context, char* cmdString ) noexcept
     {
         if ( !Kit::Text::StringTo::signedInt( exitCode, tokens.getParameter( 1 ) ) )
         {
-            outtext.format( "Invalid exit code: '%s'\n", tokens.getParameter( 1 ) );
+            outtext.format( "Invalid exit code: '%s'", tokens.getParameter( 1 ) );
             context.writeFrame( outtext );
             return Result_T::CMD_ERR_BAD_SYNTAX;
         }

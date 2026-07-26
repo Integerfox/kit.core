@@ -42,7 +42,8 @@ public:
 public:
     bool read( void*               dstBuffer,
                Kit::Type::SSize_T  numBytes,
-               Kit::Type::SSize_T& bytesRead ) noexcept override
+               Kit::Type::SSize_T& bytesRead,
+               bool                blockIfUnavailable = false ) noexcept override
     {
         if ( m_inputSourceIndex >= m_inputSourceLength )
         {

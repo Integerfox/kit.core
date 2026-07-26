@@ -11,6 +11,7 @@
 #include "StdioThread.h"
 #include "Kit/System/Thread.h"
 #include <atomic>
+#include <new>
 
 /// Anonymous namespace
 namespace {

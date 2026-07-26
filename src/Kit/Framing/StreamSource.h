@@ -47,20 +47,21 @@ public:
 
 public:
     /// See Kit::Framing::ISource
-     bool read( void*               dstBuffer,
-                Kit::Type::SSize_T  numBytes,
-                Kit::Type::SSize_T& bytesRead ) noexcept override
+    bool read( void*               dstBuffer,
+               Kit::Type::SSize_T  numBytes,
+               Kit::Type::SSize_T& bytesRead,
+               bool                blockIfUnavailable = false ) noexcept override
     {
         bytesRead = 0;
 
-        // Validate parameters 
+        // Validate parameters
         if ( dstBuffer == nullptr || m_srcPtr == nullptr || numBytes < 0 )
         {
             return false;
         }
 
         // Do NOT allow the read call to block if no data is currently available
-        if ( !m_srcPtr->available() || numBytes == 0 )
+        if ( (blockIfUnavailable == false && !m_srcPtr->available()) || numBytes == 0 )
         {
             return true;
         }
@@ -74,7 +75,7 @@ public:
         return m_srcPtr;
     }
 
-    protected:
+protected:
     /// Underlying input stream
     Kit::Io::IInput* m_srcPtr;
 };

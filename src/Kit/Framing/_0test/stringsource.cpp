@@ -38,7 +38,7 @@ TEST_CASE( "StringSource" )
     REQUIRE( uut.read( buffer, sizeof( buffer ), bytesRead ) == true );
     REQUIRE( bytesRead == 7 );
     REQUIRE( strncmp( buffer, " Kitty!", 7 ) == 0 );
-    REQUIRE( uut.read( buffer, sizeof( buffer ), bytesRead ) == false );
+    REQUIRE( uut.read( buffer, sizeof( buffer ), bytesRead ) == true );
     REQUIRE( bytesRead == 0 );
 
     StringSource uut2;
@@ -53,14 +53,14 @@ TEST_CASE( "StringSource" )
     REQUIRE( uut2.read( buffer, sizeof( buffer ), bytesRead ) == true );
     REQUIRE( bytesRead == 7 );
     REQUIRE( strncmp( buffer, " Kitty!", 7 ) == 0 );
-    REQUIRE( uut2.read( buffer, sizeof( buffer ), bytesRead ) == false );
+    REQUIRE( uut2.read( buffer, sizeof( buffer ), bytesRead, true ) == false );
     REQUIRE( bytesRead == 0 );
 
     StringSource uut3( nullptr );
-    REQUIRE( uut2.read( buffer, 5, bytesRead ) == false );
+    REQUIRE( uut3.read( buffer, 5, bytesRead ) == false );
     REQUIRE( bytesRead == 0 );
     uut3.setInput( nullptr );
-    REQUIRE( uut2.read( buffer, 5, bytesRead ) == false );
+    REQUIRE( uut3.read( buffer, 5, bytesRead ) == false );
     REQUIRE( bytesRead == 0 );
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
