@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -112,6 +112,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a909a8575649bc772ad65976598370818" id="r_a909a8575649bc772ad65976598370818"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a909a8575649bc772ad65976598370818">isStartOfFrame</a> (uint8_t byte) noexcept=0</td></tr>
 <tr class="memdesc:a909a8575649bc772ad65976598370818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if at start-of-frame.  <br /></td></tr>
 <tr class="separator:a909a8575649bc772ad65976598370818"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe8171332eca8fc000dcc326a64f7b24" id="r_abe8171332eca8fc000dcc326a64f7b24"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abe8171332eca8fc000dcc326a64f7b24">scan</a> (<a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxSizeOfFrameBuffer, uint8_t *frameBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;frameSize, bool &amp;isEof, bool blockIfUnavailable) noexcept</td></tr>
+<tr class="memdesc:abe8171332eca8fc000dcc326a64f7b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal helper that does the actual scanning.  <br /></td></tr>
+<tr class="separator:abe8171332eca8fc000dcc326a64f7b24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -397,7 +400,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a41d33c215d8a139fb67a68dadac63012" name="a41d33c215d8a139fb67a68dadac63012"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41d33c215d8a139fb67a68dadac63012">&#9670;&#160;</a></span>scan() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a41d33c215d8a139fb67a68dadac63012">&#9670;&#160;</a></span>scan() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -435,7 +438,7 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a97d000d82d4f1571cb354b55babcb611" name="a97d000d82d4f1571cb354b55babcb611"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a97d000d82d4f1571cb354b55babcb611">&#9670;&#160;</a></span>scan() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a97d000d82d4f1571cb354b55babcb611">&#9670;&#160;</a></span>scan() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -474,6 +477,52 @@ Protected Attributes</h2></td></tr>
 <p>See <a class="el" href="class_kit_1_1_framing_1_1_i_decoder.html" title="This abstract class defines an interface for &#39;receiving&#39; (decoding) a frame.">Kit::Framing::IDecoder</a>. </p>
 
 <p>Implements <a class="el" href="class_kit_1_1_framing_1_1_i_decoder.html#afdb9022d5a785dd8296b093cecb797d1">Kit::Framing::IDecoder</a>.</p>
+
+</div>
+</div>
+<a id="abe8171332eca8fc000dcc326a64f7b24" name="abe8171332eca8fc000dcc326a64f7b24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe8171332eca8fc000dcc326a64f7b24">&#9670;&#160;</a></span>scan() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Kit::Framing::DecoderReader::scan </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>maxSizeOfFrameBuffer</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>frameBuffer</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>frameSize</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool &amp;</td>          <td class="paramname"><span class="paramname"><em>isEof</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>blockIfUnavailable</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Internal helper that does the actual scanning. </p>
 
 </div>
 </div>
@@ -700,7 +749,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

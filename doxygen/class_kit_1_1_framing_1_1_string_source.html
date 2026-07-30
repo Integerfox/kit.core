@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -80,9 +80,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae74e6e4bb2f66cc1c41207f18defaea0" id="r_ae74e6e4bb2f66cc1c41207f18defaea0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae74e6e4bb2f66cc1c41207f18defaea0">StringSource</a> (const char *inputString) noexcept</td></tr>
 <tr class="memdesc:ae74e6e4bb2f66cc1c41207f18defaea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:ae74e6e4bb2f66cc1c41207f18defaea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28dfd7a0d26b7ba19c9781edc2238538" id="r_a28dfd7a0d26b7ba19c9781edc2238538"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28dfd7a0d26b7ba19c9781edc2238538">read</a> (void *dstBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesRead) noexcept override</td></tr>
-<tr class="memdesc:a28dfd7a0d26b7ba19c9781edc2238538"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_framing_1_1_i_source.html" title="This abstract class defines an interface of the input source for a Decoder instance.">Kit::Framing::ISource</a>.  <br /></td></tr>
-<tr class="separator:a28dfd7a0d26b7ba19c9781edc2238538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f4c202523d996de98af2af0d593267b" id="r_a7f4c202523d996de98af2af0d593267b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f4c202523d996de98af2af0d593267b">read</a> (void *dstBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesRead, bool blockIfUnavailable=false) noexcept override</td></tr>
+<tr class="memdesc:a7f4c202523d996de98af2af0d593267b"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_framing_1_1_i_source.html" title="This abstract class defines an interface of the input source for a Decoder instance.">Kit::Framing::ISource</a>.  <br /></td></tr>
+<tr class="separator:a7f4c202523d996de98af2af0d593267b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67bd543b6223a45a923bb1399a5d8451" id="r_a67bd543b6223a45a923bb1399a5d8451"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a67bd543b6223a45a923bb1399a5d8451">setInput</a> (const char *inputString) noexcept</td></tr>
 <tr class="memdesc:a67bd543b6223a45a923bb1399a5d8451"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the consumer to change/set the Input string after construction.  <br /></td></tr>
 <tr class="separator:a67bd543b6223a45a923bb1399a5d8451"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,8 +163,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a28dfd7a0d26b7ba19c9781edc2238538" name="a28dfd7a0d26b7ba19c9781edc2238538"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28dfd7a0d26b7ba19c9781edc2238538">&#9670;&#160;</a></span>read()</h2>
+<a id="a7f4c202523d996de98af2af0d593267b" name="a7f4c202523d996de98af2af0d593267b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f4c202523d996de98af2af0d593267b">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -185,7 +185,12 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>blockIfUnavailable</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -197,7 +202,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See <a class="el" href="class_kit_1_1_framing_1_1_i_source.html" title="This abstract class defines an interface of the input source for a Decoder instance.">Kit::Framing::ISource</a>. </p>
 
-<p>Implements <a class="el" href="class_kit_1_1_framing_1_1_i_source.html#a1f7a294f59e58f19870a2f244e1752a8">Kit::Framing::ISource</a>.</p>
+<p>Implements <a class="el" href="class_kit_1_1_framing_1_1_i_source.html#a68cff154201e2eb5f0e51cd368a5b2b6">Kit::Framing::ISource</a>.</p>
 
 </div>
 </div>
@@ -307,7 +312,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

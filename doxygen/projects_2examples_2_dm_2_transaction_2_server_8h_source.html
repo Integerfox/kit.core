@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -64,7 +64,7 @@ $(function() {
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_observer_callback_8h.html">Kit/Dm/ObserverCallback.h</a>&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="_open_close_sync_8h.html">Kit/Itc/OpenCloseSync.h</a>&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="_i_queue_8h.html">Kit/EventQueue/IQueue.h</a>&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_system_2_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="_bsp_2_api_8h.html">Kit/Bsp/Api.h</a>&quot;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
@@ -140,7 +140,7 @@ $(function() {
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="comment">// TODO: Need a Random Number interface</span></div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>            data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#a645446bd7187339e2b5ebe02bbfff74d">randomNumber</a> = ( ( data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#afa63d5c1168a35f477706140cfa49d55">upperLimit</a> - data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#accebd71752f3588969adeff53c3f2102">lowerLimit</a> ) / 2 ) + data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#accebd71752f3588969adeff53c3f2102">lowerLimit</a>;</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#acb56bb670737a8164f47fcfb035fc927">isValid</a>      = <span class="keyword">true</span>;  <span class="comment">// For this example - the result is always valid (because I am lazy)</span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;main&quot;</span>,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;main&quot;</span>,</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                                  <span class="stringliteral">&quot;SERVER: request.  upper=%&quot;</span> PRId32 <span class="stringliteral">&quot;, lower=%&quot;</span> PRId32 <span class="stringliteral">&quot;, result=%&quot;</span> PRId32 <span class="stringliteral">&quot;, isValid=%s&quot;</span>,</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                                  data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#afa63d5c1168a35f477706140cfa49d55">upperLimit</a>,</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                                  data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#accebd71752f3588969adeff53c3f2102">lowerLimit</a>,</div>
@@ -180,8 +180,8 @@ $(function() {
 <div class="ttc" id="a_mp_foo_8h_html"><div class="ttname"><a href="_mp_foo_8h.html">MpFoo.h</a></div></div>
 <div class="ttc" id="a_observer_callback_8h_html"><div class="ttname"><a href="_observer_callback_8h.html">ObserverCallback.h</a></div></div>
 <div class="ttc" id="a_open_close_sync_8h_html"><div class="ttname"><a href="_open_close_sync_8h.html">OpenCloseSync.h</a></div></div>
-<div class="ttc" id="a_trace_8h_html"><div class="ttname"><a href="_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
-<div class="ttc" id="a_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
+<div class="ttc" id="a_system_2_trace_8h_html"><div class="ttname"><a href="_system_2_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
+<div class="ttc" id="a_system_2_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
 <div class="ttc" id="aclass_dm_1_1_transaction_1_1_mp_foo_html"><div class="ttname"><a href="class_dm_1_1_transaction_1_1_mp_foo.html">Dm::Transaction::MpFoo</a></div><div class="ttdoc">This concreate class implements a type safe MP for the data structure: Foo_T.</div><div class="ttdef"><b>Definition</b> MpFoo.h:54</div></div>
 <div class="ttc" id="aclass_dm_1_1_transaction_1_1_server_html"><div class="ttname"><a href="class_dm_1_1_transaction_1_1_server.html">Dm::Transaction::Server</a></div><div class="ttdoc">This concrete class is a 'server' that responds to requests from a 'client' to generate.</div><div class="ttdef"><b>Definition</b> Server.h:30</div></div>
 <div class="ttc" id="aclass_dm_1_1_transaction_1_1_server_html_a4a2465e43981e7d941fb3b8a1465a03a"><div class="ttname"><a href="class_dm_1_1_transaction_1_1_server.html#a4a2465e43981e7d941fb3b8a1465a03a">Dm::Transaction::Server::m_opened</a></div><div class="ttdeci">bool m_opened</div><div class="ttdoc">Track my open/closed.</div><div class="ttdef"><b>Definition</b> Server.h:121</div></div>
@@ -208,7 +208,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

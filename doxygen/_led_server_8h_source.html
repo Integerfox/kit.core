@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -65,7 +65,7 @@ $(function() {
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="_observer_callback_8h.html">Kit/Dm/ObserverCallback.h</a>&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="_open_close_sync_8h.html">Kit/Itc/OpenCloseSync.h</a>&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_i_queue_8h.html">Kit/EventQueue/IQueue.h</a>&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="_system_2_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="_system_2_api_8h.html">Kit/System/Api.h</a>&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="_bsp_2_api_8h.html">Kit/Bsp/Api.h</a>&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
@@ -161,7 +161,7 @@ $(function() {
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">    /// Helper method to execute a flash code</span></div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="class_container_1_1_ring_buffer_1_1_led_server.html#a6f657f16891a33011545e521ba515d71">  112</a></span><span class="comment"></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_container_1_1_ring_buffer_1_1_led_server.html#a6f657f16891a33011545e521ba515d71">executeFlashCode</a>( <span class="keyword">const</span> <a class="code hl_struct" href="struct_container_1_1_ring_buffer_1_1_flash_code___t.html">FlashCode_T</a>&amp; flashCode ) <span class="keyword">noexcept</span></div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    {</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;main&quot;</span>,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;main&quot;</span>,</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                              <span class="stringliteral">&quot;SERVER: Executing a flash code. on=%&quot;</span> PRIu32 <span class="stringliteral">&quot; ms, off=%&quot;</span> PRIu32 <span class="stringliteral">&quot; ms, numFlashes=%u, totalTime=%&quot;</span> PRIu32 <span class="stringliteral">&quot; ms&quot;</span>,</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                              flashCode.onPeriodMs,</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                              flashCode.offPeriodMs,</div>
@@ -200,8 +200,8 @@ $(function() {
 <div class="ttc" id="a_open_close_sync_8h_html"><div class="ttname"><a href="_open_close_sync_8h.html">OpenCloseSync.h</a></div></div>
 <div class="ttc" id="a_ring_buffer_m_p_8h_html"><div class="ttname"><a href="_ring_buffer_m_p_8h.html">RingBufferMP.h</a></div></div>
 <div class="ttc" id="a_system_2_api_8h_html"><div class="ttname"><a href="_system_2_api_8h.html">Api.h</a></div><div class="ttdoc">This file defines methods for initializing the KIT C++ class library and other startup/init actions.</div></div>
-<div class="ttc" id="a_trace_8h_html"><div class="ttname"><a href="_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
-<div class="ttc" id="a_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
+<div class="ttc" id="a_system_2_trace_8h_html"><div class="ttname"><a href="_system_2_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
+<div class="ttc" id="a_system_2_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
 <div class="ttc" id="aclass_container_1_1_ring_buffer_1_1_led_server_html"><div class="ttname"><a href="class_container_1_1_ring_buffer_1_1_led_server.html">Container::RingBuffer::LedServer</a></div><div class="ttdoc">This concrete class monitors the a Queue of LED Flash codes and the consumes-and-executes the Flash c...</div><div class="ttdef"><b>Definition</b> LedServer.h:34</div></div>
 <div class="ttc" id="aclass_container_1_1_ring_buffer_1_1_led_server_html_a14aa988679780770add5d8ee13882d98"><div class="ttname"><a href="class_container_1_1_ring_buffer_1_1_led_server.html#a14aa988679780770add5d8ee13882d98">Container::RingBuffer::LedServer::request</a></div><div class="ttdeci">void request(CloseMsg &amp;msg) noexcept override</div><div class="ttdoc">See Kit::Itc::OpenCloseSync.</div><div class="ttdef"><b>Definition</b> LedServer.h:66</div></div>
 <div class="ttc" id="aclass_container_1_1_ring_buffer_1_1_led_server_html_a18c26e83cd470af685c5ab9932606387"><div class="ttname"><a href="class_container_1_1_ring_buffer_1_1_led_server.html#a18c26e83cd470af685c5ab9932606387">Container::RingBuffer::LedServer::LedServer</a></div><div class="ttdeci">LedServer(Kit::EventQueue::IQueue &amp;myEventQueue, Kit::Container::RingBufferMP&lt; FlashCode_T &gt; &amp;flashCodeQueue)</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> LedServer.h:37</div></div>
@@ -226,7 +226,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

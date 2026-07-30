@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -97,7 +97,7 @@ $(function() {
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#include &quot;kit_config.h&quot;</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#include &quot;<a class="code" href="_stack_8h.html">Kit/Container/Stack.h</a>&quot;</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &quot;<a class="code" href="_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#include &quot;<a class="code" href="_system_2_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">/** Maximum depth of the operator stack used when evaluating an expression</span></div>
@@ -308,7 +308,7 @@ $(function() {
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            }</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            {</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Divide by zero at index %lu&quot;</span>, m_index );</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Divide by zero at index %lu&quot;</span>, m_index );</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                success = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            }</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            <span class="keywordflow">break</span>;</div>
@@ -320,13 +320,13 @@ $(function() {
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            }</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            {</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Modulo by zero at index %lu&quot;</span>, m_index );</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>                <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Modulo by zero at index %lu&quot;</span>, m_index );</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>                success = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            }</div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Unsupported Operator (%d)&quot;</span>, op.op );</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Unsupported Operator (%d)&quot;</span>, op.op );</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            success = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        }</div>
@@ -356,7 +356,7 @@ $(function() {
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="comment">    /// &#39;Record&#39; that an error occurred</span></div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment"></span>    <span class="keywordtype">void</span> unexpected()<span class="keyword"> const</span></div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="keyword">    </span>{</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Syntax error: unexpected token at index %lu [%s]&quot;</span>, m_index, m_expr );</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Syntax error: unexpected token at index %lu [%s]&quot;</span>, m_index, m_expr );</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    }</div>
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="comment"></span> </div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="comment">    /** Eat all white space characters at the</span></div>
@@ -572,7 +572,7 @@ $(function() {
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>            eatSpaces();</div>
 <div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>            <span class="keywordflow">if</span> ( getCharacter() != <span class="charliteral">&#39;)&#39;</span> )</div>
 <div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>            {</div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>                <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Syntax error: `)&#39; expected at end of expression (index=%lu)&quot;</span>, m_index );</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>                <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Syntax error: `)&#39; expected at end of expression (index=%lu)&quot;</span>, m_index );</div>
 <div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>            }</div>
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>            m_index++;</div>
@@ -674,7 +674,7 @@ $(function() {
 <div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>            <span class="comment">// store on m_stack and continue parsing (&quot;shift&quot;)</span></div>
 <div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span>            <span class="keywordflow">if</span> ( !m_stack.<a class="code hl_function" href="class_kit_1_1_container_1_1_stack.html#abe522b68fd541f72d61b092301b1a81e">push</a>( OperatorValue( op, value ) ) )</div>
 <div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>            {</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>                <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Operator Stack FULL at index=%lu&quot;</span>, m_index );</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>                <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;Kit::Math&quot;</span>, <span class="stringliteral">&quot;Operator Stack FULL at index=%lu&quot;</span>, m_index );</div>
 <div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>            }</div>
 <div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span> </div>
@@ -714,8 +714,8 @@ $(function() {
 <div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_integer_expression_parser_8h_html_a7b36e01b6afe81305318b71d31293e72"><div class="ttname"><a href="_integer_expression_parser_8h.html#a7b36e01b6afe81305318b71d31293e72">OPTION_KIT_MATH_INTEXPR_MAX_STACK_SIZE</a></div><div class="ttdeci">#define OPTION_KIT_MATH_INTEXPR_MAX_STACK_SIZE</div><div class="ttdoc">Maximum depth of the operator stack used when evaluating an expression.</div><div class="ttdef"><b>Definition</b> IntegerExpressionParser.h:56</div></div>
 <div class="ttc" id="a_stack_8h_html"><div class="ttname"><a href="_stack_8h.html">Stack.h</a></div></div>
-<div class="ttc" id="a_trace_8h_html"><div class="ttname"><a href="_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
-<div class="ttc" id="a_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
+<div class="ttc" id="a_system_2_trace_8h_html"><div class="ttname"><a href="_system_2_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
+<div class="ttc" id="a_system_2_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_stack_html"><div class="ttname"><a href="class_kit_1_1_container_1_1_stack.html">Kit::Container::Stack</a></div><div class="ttdoc">This template class implements a Stack that has a fixed depth and stores copies of the data items.</div><div class="ttdef"><b>Definition</b> Stack.h:30</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_stack_html_a31bd13b1f027a8ce2916fe2362ebf802"><div class="ttname"><a href="class_kit_1_1_container_1_1_stack.html#a31bd13b1f027a8ce2916fe2362ebf802">Kit::Container::Stack::clearTheStack</a></div><div class="ttdeci">void clearTheStack() noexcept</div><div class="ttdoc">Empties the Stack. All references to the item(s) in the stack are lost.</div><div class="ttdef"><b>Definition</b> Stack.h:150</div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_stack_html_a5e3e63b3ff233028546d9d2ddcf9aa83"><div class="ttname"><a href="class_kit_1_1_container_1_1_stack.html#a5e3e63b3ff233028546d9d2ddcf9aa83">Kit::Container::Stack::peekTop</a></div><div class="ttdeci">bool peekTop(ITEM &amp;dst) const noexcept</div><div class="ttdoc">Returns a copy of the item on the top of the Stack.</div><div class="ttdef"><b>Definition</b> Stack.h:95</div></div>
@@ -729,7 +729,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,7 +46,6 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -58,22 +57,8 @@ $(function() {
 <p>This concrete class provide a 'printf' tracing mechanism.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="_trace_8h_source.html">Trace.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="_system_2_trace_8h_source.html">Trace.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:add80da6b96634d485121bc2fe7113f7e" id="r_add80da6b96634d485121bc2fe7113f7e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a> { <br />
-&#160;&#160;<a class="el" href="#add80da6b96634d485121bc2fe7113f7ea829595477f41af022b3c20016dab1a21">eNONE</a> = 0
-, <a class="el" href="#add80da6b96634d485121bc2fe7113f7eaf1576010bcc261a990e66fafe63ab0bd">eBRIEF</a>
-, <a class="el" href="#add80da6b96634d485121bc2fe7113f7ea76e9126552eaff7f6074acb53477a374">eINFO</a>
-, <a class="el" href="#add80da6b96634d485121bc2fe7113f7ea40e51e8ad1d72a7806102f2a7eb67ae3">eVERBOSE</a>
-, <br />
-&#160;&#160;<a class="el" href="#add80da6b96634d485121bc2fe7113f7ea3a085f6bc501430e1169aea238e008a4">eMAX</a>
-<br />
- }</td></tr>
-<tr class="memdesc:add80da6b96634d485121bc2fe7113f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enum is used to globally control the amount of 'Prologue' information that is prepended to the <a class="el" href="class_kit_1_1_system_1_1_trace.html" title="This concrete class provide a &#39;printf&#39; tracing mechanism.">Trace</a> log messages.  <a href="#add80da6b96634d485121bc2fe7113f7e">More...</a><br /></td></tr>
-<tr class="separator:add80da6b96634d485121bc2fe7113f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac71c8123aafc1d0b32481fd500be2ee1" id="r_ac71c8123aafc1d0b32481fd500be2ee1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac71c8123aafc1d0b32481fd500be2ee1">Trace</a> (const char *filename, int linenum, const char *funcname, const char *section, const char *scope_name)</td></tr>
@@ -103,9 +88,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a8094bffd737f25c55cbe4662eb5ef195" id="r_a8094bffd737f25c55cbe4662eb5ef195"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8094bffd737f25c55cbe4662eb5ef195">getDefaultOutputStream_</a> () noexcept</td></tr>
 <tr class="memdesc:a8094bffd737f25c55cbe4662eb5ef195"><td class="mdescLeft">&#160;</td><td class="mdescRight">This COMPONENT Scoped method provides the Output stream to the <a class="el" href="class_kit_1_1_system_1_1_trace.html" title="This concrete class provide a &#39;printf&#39; tracing mechanism.">Trace</a> Engine.  <br /></td></tr>
 <tr class="separator:a8094bffd737f25c55cbe4662eb5ef195"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54c9c25bb482d54e39128b0b114c3e8a" id="r_a54c9c25bb482d54e39128b0b114c3e8a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54c9c25bb482d54e39128b0b114c3e8a">getInfoLevel_</a> () noexcept</td></tr>
-<tr class="memdesc:a54c9c25bb482d54e39128b0b114c3e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current information level setting.  <br /></td></tr>
-<tr class="separator:a54c9c25bb482d54e39128b0b114c3e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb43816952b88036237fbdfe7e37b408" id="r_adb43816952b88036237fbdfe7e37b408"><td class="memItemLeft" align="right" valign="top">static TraceLevel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb43816952b88036237fbdfe7e37b408">getInfoLevel_</a> () noexcept</td></tr>
+<tr class="memdesc:adb43816952b88036237fbdfe7e37b408"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the current information level setting.  <br /></td></tr>
+<tr class="separator:adb43816952b88036237fbdfe7e37b408"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad07946412886e40ea88f04a2b59f45b1" id="r_ad07946412886e40ea88f04a2b59f45b1"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad07946412886e40ea88f04a2b59f45b1">getSections_</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a> &amp;dst)</td></tr>
 <tr class="memdesc:ad07946412886e40ea88f04a2b59f45b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the number of enabled 'sections' and returns the actual section name(s) via the IString 'dst'.  <br /></td></tr>
 <tr class="separator:ad07946412886e40ea88f04a2b59f45b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,9 +112,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a2d6a4abdeeac273a6a5b1d31d45c4c98" id="r_a2d6a4abdeeac273a6a5b1d31d45c4c98"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d6a4abdeeac273a6a5b1d31d45c4c98">revert_</a> () noexcept</td></tr>
 <tr class="memdesc:a2d6a4abdeeac273a6a5b1d31d45c4c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to revert the trace output to its default output destination/stream/media.  <br /></td></tr>
 <tr class="separator:a2d6a4abdeeac273a6a5b1d31d45c4c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4c184cf1729985ba13e6e4b76fed0ef" id="r_ae4c184cf1729985ba13e6e4b76fed0ef"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4c184cf1729985ba13e6e4b76fed0ef">setInfoLevel_</a> (<a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a> newLevel)</td></tr>
-<tr class="memdesc:ae4c184cf1729985ba13e6e4b76fed0ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets the information level for the trace messages.  <br /></td></tr>
-<tr class="separator:ae4c184cf1729985ba13e6e4b76fed0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7487e6dd96c672139ea2560a57f7c2c1" id="r_a7487e6dd96c672139ea2560a57f7c2c1"><td class="memItemLeft" align="right" valign="top">static TraceLevel&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7487e6dd96c672139ea2560a57f7c2c1">setInfoLevel_</a> (TraceLevel newLevel)</td></tr>
+<tr class="memdesc:a7487e6dd96c672139ea2560a57f7c2c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method sets the information level for the trace messages.  <br /></td></tr>
+<tr class="separator:a7487e6dd96c672139ea2560a57f7c2c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54d930b9a0b012797c0cf9d621edf54b" id="r_a54d930b9a0b012797c0cf9d621edf54b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54d930b9a0b012797c0cf9d621edf54b">setThreadFilter_</a> (const char *threadName1, const char *threadName2=nullptr, const char *threadName3=nullptr, const char *threadName4=nullptr)</td></tr>
 <tr class="memdesc:a54d930b9a0b012797c0cf9d621edf54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method applies a filter by thread name when generating output, i.e.  <br /></td></tr>
 <tr class="separator:a54d930b9a0b012797c0cf9d621edf54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,37 +145,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This concrete class provide a 'printf' tracing mechanism. </p>
-</div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="add80da6b96634d485121bc2fe7113f7e" name="add80da6b96634d485121bc2fe7113f7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add80da6b96634d485121bc2fe7113f7e">&#9670;&#160;</a></span>InfoLevel_T</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">Kit::System::Trace::InfoLevel_T</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This enum is used to globally control the amount of 'Prologue' information that is prepended to the <a class="el" href="class_kit_1_1_system_1_1_trace.html" title="This concrete class provide a &#39;printf&#39; tracing mechanism.">Trace</a> log messages. </p>
-<p>The specifics of what information is added is platform specific. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="add80da6b96634d485121bc2fe7113f7ea829595477f41af022b3c20016dab1a21" name="add80da6b96634d485121bc2fe7113f7ea829595477f41af022b3c20016dab1a21"></a>eNONE&#160;</td><td class="fielddoc"><p>Turns off ALL prologue info. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="add80da6b96634d485121bc2fe7113f7eaf1576010bcc261a990e66fafe63ab0bd" name="add80da6b96634d485121bc2fe7113f7eaf1576010bcc261a990e66fafe63ab0bd"></a>eBRIEF&#160;</td><td class="fielddoc"><p>Default setting. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="add80da6b96634d485121bc2fe7113f7ea76e9126552eaff7f6074acb53477a374" name="add80da6b96634d485121bc2fe7113f7ea76e9126552eaff7f6074acb53477a374"></a>eINFO&#160;</td><td class="fielddoc"><p>Additional prologue info. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="add80da6b96634d485121bc2fe7113f7ea40e51e8ad1d72a7806102f2a7eb67ae3" name="add80da6b96634d485121bc2fe7113f7ea40e51e8ad1d72a7806102f2a7eb67ae3"></a>eVERBOSE&#160;</td><td class="fielddoc"><p>more prologue info </p>
-</td></tr>
-<tr><td class="fieldname"><a id="add80da6b96634d485121bc2fe7113f7ea3a085f6bc501430e1169aea238e008a4" name="add80da6b96634d485121bc2fe7113f7ea3a085f6bc501430e1169aea238e008a4"></a>eMAX&#160;</td><td class="fielddoc"><p>Maximum prologue info. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac71c8123aafc1d0b32481fd500be2ee1" name="ac71c8123aafc1d0b32481fd500be2ee1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac71c8123aafc1d0b32481fd500be2ee1">&#9670;&#160;</a></span>Trace()</h2>
 
@@ -423,8 +378,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a54c9c25bb482d54e39128b0b114c3e8a" name="a54c9c25bb482d54e39128b0b114c3e8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54c9c25bb482d54e39128b0b114c3e8a">&#9670;&#160;</a></span>getInfoLevel_()</h2>
+<a id="adb43816952b88036237fbdfe7e37b408" name="adb43816952b88036237fbdfe7e37b408"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb43816952b88036237fbdfe7e37b408">&#9670;&#160;</a></span>getInfoLevel_()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -433,7 +388,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a> Kit::System::Trace::getInfoLevel_ </td>
+          <td class="memname">static TraceLevel Kit::System::Trace::getInfoLevel_ </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -653,8 +608,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ae4c184cf1729985ba13e6e4b76fed0ef" name="ae4c184cf1729985ba13e6e4b76fed0ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4c184cf1729985ba13e6e4b76fed0ef">&#9670;&#160;</a></span>setInfoLevel_()</h2>
+<a id="a7487e6dd96c672139ea2560a57f7c2c1" name="a7487e6dd96c672139ea2560a57f7c2c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7487e6dd96c672139ea2560a57f7c2c1">&#9670;&#160;</a></span>setInfoLevel_()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -663,9 +618,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a> Kit::System::Trace::setInfoLevel_ </td>
+          <td class="memname">static TraceLevel Kit::System::Trace::setInfoLevel_ </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#add80da6b96634d485121bc2fe7113f7e">InfoLevel_T</a></td>          <td class="paramname"><span class="paramname"><em>newLevel</em></span></td><td>)</td>
+          <td class="paramtype">TraceLevel</td>          <td class="paramname"><span class="paramname"><em>newLevel</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -921,12 +876,12 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Kit/System/<a class="el" href="_trace_8h_source.html">Trace.h</a></li>
+<li>Kit/System/<a class="el" href="_system_2_trace_8h_source.html">Trace.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

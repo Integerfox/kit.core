@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -109,7 +109,7 @@ $(function() {
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">    /// See Kit::Framing::IDestination</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_string_destination.html#aa306458c617faf8e00d05a0abc92296b">   60</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_framing_1_1_string_destination.html#aa306458c617faf8e00d05a0abc92296b">appendOutput</a>( <span class="keyword">const</span> <span class="keywordtype">void</span>* srcBuffer, <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes ) <span class="keyword">noexcept</span> <span class="keyword">override</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">if</span> ( srcBuffer == <span class="keyword">nullptr</span> || <a class="code hl_variable" href="class_kit_1_1_framing_1_1_string_destination.html#a215959a1fc4a2ac6db2666fe51e96614">m_dstPtr</a> == <span class="keyword">nullptr</span> )</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">if</span> ( srcBuffer == <span class="keyword">nullptr</span> || <a class="code hl_variable" href="class_kit_1_1_framing_1_1_string_destination.html#a215959a1fc4a2ac6db2666fe51e96614">m_dstPtr</a> == <span class="keyword">nullptr</span> || numBytes &lt; 0 )</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        {</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
@@ -153,7 +153,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

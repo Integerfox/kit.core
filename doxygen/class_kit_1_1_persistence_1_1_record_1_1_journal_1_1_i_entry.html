@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -81,13 +81,13 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4239aee0d12b435fa3a75d229f802c3c" id="r_a4239aee0d12b435fa3a75d229f802c3c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4239aee0d12b435fa3a75d229f802c3c">addEntry</a> (const <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;src) noexcept=0</td></tr>
-<tr class="memdesc:a4239aee0d12b435fa3a75d229f802c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method appends an entry to the list of <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a> Entries.  <br /></td></tr>
+<tr class="memdesc:a4239aee0d12b435fa3a75d229f802c3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method appends an entry to the list of <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html" title="The &#39;Journal&#39; namespace extends the basic Persistent::Record interface with the ability for a single ...">Journal</a> Entries.  <br /></td></tr>
 <tr class="separator:a4239aee0d12b435fa3a75d229f802c3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeee573be2942a8a2d02ab972ab2f480c" id="r_aeee573be2942a8a2d02ab972ab2f480c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeee573be2942a8a2d02ab972ab2f480c">getByEntryIndex</a> (<a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> entryIndex, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;dst, <a class="el" href="struct_kit_1_1_persistence_1_1_record_1_1_journal_1_1_i_entry_1_1_marker___t.html">Marker_T</a> &amp;entryMarker) noexcept=0</td></tr>
 <tr class="memdesc:aeee573be2942a8a2d02ab972ab2f480c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method can be used to read an entry by its 'entry index'.  <br /></td></tr>
 <tr class="separator:aeee573be2942a8a2d02ab972ab2f480c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae67ab32c7b9d545b2baea8ad57eef617" id="r_ae67ab32c7b9d545b2baea8ad57eef617"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae67ab32c7b9d545b2baea8ad57eef617">getLatest</a> (<a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;dst, <a class="el" href="struct_kit_1_1_persistence_1_1_record_1_1_journal_1_1_i_entry_1_1_marker___t.html">Marker_T</a> &amp;entryMarker) noexcept=0</td></tr>
-<tr class="memdesc:ae67ab32c7b9d545b2baea8ad57eef617"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method reads/retrieves the latest entry (from the list of <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a> Entries) stored in the persistent media.  <br /></td></tr>
+<tr class="memdesc:ae67ab32c7b9d545b2baea8ad57eef617"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method reads/retrieves the latest entry (from the list of <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html" title="The &#39;Journal&#39; namespace extends the basic Persistent::Record interface with the ability for a single ...">Journal</a> Entries) stored in the persistent media.  <br /></td></tr>
 <tr class="separator:ae67ab32c7b9d545b2baea8ad57eef617"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad632cbe66858683e002cfd38317dfcaa" id="r_ad632cbe66858683e002cfd38317dfcaa"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad632cbe66858683e002cfd38317dfcaa">getMaxIndex</a> () const noexcept=0</td></tr>
 <tr class="memdesc:ad632cbe66858683e002cfd38317dfcaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the maximum allowed 'entryIndex' when calling <a class="el" href="#aeee573be2942a8a2d02ab972ab2f480c" title="This method can be used to read an entry by its &#39;entry index&#39;.">getByEntryIndex()</a>.  <br /></td></tr>
@@ -140,7 +140,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This abstract class defines interface for managing 'entries' from a a collection of entries (i.e. </p>
-<p>read an entry from a <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a> <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html" title="This concrete class implements the IRecord interface that manages a collection of Entries that are ti...">EntryRecord</a>).</p>
+<p>read an entry from a <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html" title="The &#39;Journal&#39; namespace extends the basic Persistent::Record interface with the ability for a single ...">Journal</a> <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html" title="This concrete class implements the IRecord interface that manages a collection of Entries that are ti...">EntryRecord</a>).</p>
 <p>See the README.md file for more details about "Journal Records".</p>
 <p>NOTE: This interface/class is NOT THREAD SAFE and should only be 'used' from the <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a> <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server.html" title="This concrete template class implements the ITC messaging and Model Point monitoring needed to provid...">Server</a>'s thread. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -167,7 +167,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This method appends an entry to the list of <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a> Entries. </p>
+<p>This method appends an entry to the list of <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html" title="The &#39;Journal&#39; namespace extends the basic Persistent::Record interface with the ability for a single ...">Journal</a> Entries. </p>
 <p>The method is synchronous in that the method does not return until the entry has been 'written' the persistent media.</p>
 <p>Returns true on success; else if an error occurred (e.g. IO error while writing) false is returned. </p>
 
@@ -243,7 +243,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>This method reads/retrieves the latest entry (from the list of <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html">Journal</a> Entries) stored in the persistent media. </p>
+<p>This method reads/retrieves the latest entry (from the list of <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_journal.html" title="The &#39;Journal&#39; namespace extends the basic Persistent::Record interface with the ability for a single ...">Journal</a> Entries) stored in the persistent media. </p>
 <p>The method is synchronous in that the method does not return until the entry has been 'read' from the persistent media.</p>
 <p>Returns true if the latest entry is valid and has been read into 'dst'; else false is returned.</p>
 <p>NOTE: When <a class="el" href="#ae67ab32c7b9d545b2baea8ad57eef617" title="This method reads/retrieves the latest entry (from the list of Journal Entries) stored in the persist...">getLatest()</a> returns false, this means there are NO entries stored.</p>
@@ -408,7 +408,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

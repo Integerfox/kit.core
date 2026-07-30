@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -117,16 +117,22 @@ $(function() {
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">    </span>{</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="class_kit_1_1_framing_1_1_stream_destination.html#accbee8a3ee96fd412acdd695d633f56f">m_dstPtr</a> != <span class="keyword">nullptr</span>;  <span class="comment">// No special handling needed to &#39;end&#39; the output sequence for a stream</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword">protected</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">    /// Underlying stream output stream</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_stream_destination.html#accbee8a3ee96fd412acdd695d633f56f">   73</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a>* <a class="code hl_variable" href="class_kit_1_1_framing_1_1_stream_destination.html#accbee8a3ee96fd412acdd695d633f56f">m_dstPtr</a>;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>};</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    /// Getter for the underlying output stream</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_stream_destination.html#acf890c39fed64bdac0cffd8e365bf8a4">   72</a></span><span class="comment"></span>    <span class="keyword">inline</span> <a class="code hl_class" href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a>* <a class="code hl_function" href="class_kit_1_1_framing_1_1_stream_destination.html#acf890c39fed64bdac0cffd8e365bf8a4">getStream</a>() noexcept</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        <span class="keywordflow">return</span> <a class="code hl_variable" href="class_kit_1_1_framing_1_1_stream_destination.html#accbee8a3ee96fd412acdd695d633f56f">m_dstPtr</a>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">protected</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">    /// Underlying output stream</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_stream_destination.html#accbee8a3ee96fd412acdd695d633f56f">   79</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a>* <a class="code hl_variable" href="class_kit_1_1_framing_1_1_stream_destination.html#accbee8a3ee96fd412acdd695d633f56f">m_dstPtr</a>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>};</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_destination_8h_html"><div class="ttname"><a href="_i_destination_8h.html">IDestination.h</a></div></div>
 <div class="ttc" id="a_i_output_8h_html"><div class="ttname"><a href="_i_output_8h.html">IOutput.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_i_destination_html"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_destination.html">Kit::Framing::IDestination</a></div><div class="ttdoc">This abstract class defines an interface of the output destination for an Encoder instance.</div><div class="ttdef"><b>Definition</b> IDestination.h:26</div></div>
@@ -135,7 +141,8 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_destination_html_a1d69a5aa23759fa6fcdb4cc6dca26a73"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_destination.html#a1d69a5aa23759fa6fcdb4cc6dca26a73">Kit::Framing::StreamDestination::startOutput</a></div><div class="ttdeci">bool startOutput() noexcept override</div><div class="ttdoc">See Kit::Framing::IDestination.</div><div class="ttdef"><b>Definition</b> StreamDestination.h:49</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_destination_html_a1d988c7442dbbb80f1cc9986b73589cb"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_destination.html#a1d988c7442dbbb80f1cc9986b73589cb">Kit::Framing::StreamDestination::appendOutput</a></div><div class="ttdeci">bool appendOutput(const void *srcBuffer, Kit::Type::SSize_T numBytes) noexcept override</div><div class="ttdoc">See Kit::Framing::IDestination.</div><div class="ttdef"><b>Definition</b> StreamDestination.h:55</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_destination_html_abb788d519dd89d9029d80ba0f3ed5065"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_destination.html#abb788d519dd89d9029d80ba0f3ed5065">Kit::Framing::StreamDestination::setOutput</a></div><div class="ttdeci">void setOutput(Kit::Io::IOutput &amp;outputStream) noexcept</div><div class="ttdoc">Allows the consumer to change/set the Output stream after construction.</div><div class="ttdef"><b>Definition</b> StreamDestination.h:42</div></div>
-<div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_destination_html_accbee8a3ee96fd412acdd695d633f56f"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_destination.html#accbee8a3ee96fd412acdd695d633f56f">Kit::Framing::StreamDestination::m_dstPtr</a></div><div class="ttdeci">Kit::Io::IOutput * m_dstPtr</div><div class="ttdoc">Underlying stream output stream.</div><div class="ttdef"><b>Definition</b> StreamDestination.h:73</div></div>
+<div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_destination_html_accbee8a3ee96fd412acdd695d633f56f"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_destination.html#accbee8a3ee96fd412acdd695d633f56f">Kit::Framing::StreamDestination::m_dstPtr</a></div><div class="ttdeci">Kit::Io::IOutput * m_dstPtr</div><div class="ttdoc">Underlying output stream.</div><div class="ttdef"><b>Definition</b> StreamDestination.h:79</div></div>
+<div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_destination_html_acf890c39fed64bdac0cffd8e365bf8a4"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_destination.html#acf890c39fed64bdac0cffd8e365bf8a4">Kit::Framing::StreamDestination::getStream</a></div><div class="ttdeci">Kit::Io::IOutput * getStream() noexcept</div><div class="ttdoc">Getter for the underlying output stream.</div><div class="ttdef"><b>Definition</b> StreamDestination.h:72</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_destination_html_aef14097425e34915bd970fe6362bae49"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_destination.html#aef14097425e34915bd970fe6362bae49">Kit::Framing::StreamDestination::StreamDestination</a></div><div class="ttdeci">StreamDestination() noexcept</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> StreamDestination.h:36</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_destination_html_afb1a16ef34317b78afe47144e3155a6a"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_destination.html#afb1a16ef34317b78afe47144e3155a6a">Kit::Framing::StreamDestination::endOutput</a></div><div class="ttdeci">bool endOutput() noexcept override</div><div class="ttdoc">See Kit::Framing::IDestination.</div><div class="ttdef"><b>Definition</b> StreamDestination.h:66</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_i_output_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a></div><div class="ttdoc">This partially abstract class defines a interface for operating on an output stream (example of a str...</div><div class="ttdef"><b>Definition</b> IOutput.h:37</div></div>
@@ -145,7 +152,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

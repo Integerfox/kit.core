@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -67,7 +67,7 @@ $(function() {
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_observer_callback_8h.html">Kit/Dm/ObserverCallback.h</a>&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="_i_queue_8h.html">Kit/EventQueue/IQueue.h</a>&quot;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="_timer_8h.html">Kit/System/Timer.h</a>&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="_system_2_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="_shutdown_8h.html">Kit/System/Shutdown.h</a>&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;inttypes.h&gt;</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
@@ -179,7 +179,7 @@ $(function() {
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <a class="code hl_struct" href="struct_dm_1_1_transaction_1_1_foo___t.html">Foo_T</a> data;</div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">if</span> ( mpThatChanged.readAndSync( data, observer ) )</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;main&quot;</span>,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;main&quot;</span>,</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                                  <span class="stringliteral">&quot;client: RESPONSE. upper=%&quot;</span> PRId32 <span class="stringliteral">&quot;, lower=%&quot;</span> PRId32 <span class="stringliteral">&quot;, result=%&quot;</span> PRId32 <span class="stringliteral">&quot;, isValid=%s&quot;</span>,</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                                  data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#afa63d5c1168a35f477706140cfa49d55">upperLimit</a>,</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                                  data.<a class="code hl_variable" href="struct_dm_1_1_transaction_1_1_foo___t.html#accebd71752f3588969adeff53c3f2102">lowerLimit</a>,</div>
@@ -228,9 +228,9 @@ $(function() {
 <div class="ttc" id="a_observer_callback_8h_html"><div class="ttname"><a href="_observer_callback_8h.html">ObserverCallback.h</a></div></div>
 <div class="ttc" id="a_open_close_sync_8h_html"><div class="ttname"><a href="_open_close_sync_8h.html">OpenCloseSync.h</a></div></div>
 <div class="ttc" id="a_shutdown_8h_html"><div class="ttname"><a href="_shutdown_8h.html">Shutdown.h</a></div></div>
+<div class="ttc" id="a_system_2_trace_8h_html"><div class="ttname"><a href="_system_2_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
+<div class="ttc" id="a_system_2_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
 <div class="ttc" id="a_timer_8h_html"><div class="ttname"><a href="_timer_8h.html">Timer.h</a></div></div>
-<div class="ttc" id="a_trace_8h_html"><div class="ttname"><a href="_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
-<div class="ttc" id="a_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
 <div class="ttc" id="aclass_dm_1_1_transaction_1_1_client_html_a1d926f454a80cceaa9f2aa48c1657f23"><div class="ttname"><a href="class_dm_1_1_transaction_1_1_client.html#a1d926f454a80cceaa9f2aa48c1657f23">Dm::Transaction::Client::request</a></div><div class="ttdeci">void request(CloseMsg &amp;msg) noexcept override</div><div class="ttdoc">See Kit::Itc::OpenCloseSync.</div><div class="ttdef"><b>Definition</b> Client.h:89</div></div>
 <div class="ttc" id="aclass_dm_1_1_transaction_1_1_client_html_a28d50deaec83b4cc4589b34c545f263d"><div class="ttname"><a href="class_dm_1_1_transaction_1_1_client.html#a28d50deaec83b4cc4589b34c545f263d">Dm::Transaction::Client::request</a></div><div class="ttdeci">void request(OpenMsg &amp;msg) noexcept override</div><div class="ttdoc">See Kit::Itc::OpenCloseSync.</div><div class="ttdef"><b>Definition</b> Client.h:70</div></div>
 <div class="ttc" id="aclass_dm_1_1_transaction_1_1_client_html_a3160dd7e07386e6ff994ee491d5a39dd"><div class="ttname"><a href="class_dm_1_1_transaction_1_1_client.html#a3160dd7e07386e6ff994ee491d5a39dd">Dm::Transaction::Client::m_opened</a></div><div class="ttdeci">bool m_opened</div><div class="ttdoc">Track my open/closed.</div><div class="ttdef"><b>Definition</b> Client.h:165</div></div>
@@ -264,7 +264,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

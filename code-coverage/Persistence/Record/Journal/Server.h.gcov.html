@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-21 20:29:00</td>
+            <td class="headerValue">2026-07-30 03:05:06</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">68.8&nbsp;%</td>
@@ -231,19 +231,19 @@
 <span id="L169"><span class="lineNum">     169</span>                 :             : </span>
 <span id="L170"><span class="lineNum">     170</span>                 :             : protected:</span>
 <span id="L171"><span class="lineNum">     171</span>                 :             :     /// Callback when the 'trigger' MP changes</span>
-<span id="L172"><span class="lineNum">     172</span>                 :<span class="tlaGNC">           5 :     void bufferElementCountChanged( Kit::Dm::Mp::Uint32&amp; mp, Kit::Dm::IObserver&amp; observer ) noexcept</span></span>
+<span id="L172"><span class="lineNum">     172</span>                 :<span class="tlaGNC">           9 :     void bufferElementCountChanged( Kit::Dm::Mp::Uint32&amp; mp, Kit::Dm::IObserver&amp; observer ) noexcept</span></span>
 <span id="L173"><span class="lineNum">     173</span>                 :             :     {</span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :         uint32_t count;</span>
-<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">           5 :         uint16_t seqNum = 0;</span></span>
-<span id="L176"><span class="lineNum">     176</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 3 times"> + </span>]:<span class="tlaGNC">           5 :         if ( mp.readAndSync( count, seqNum, observer ) &amp;&amp; count &gt; 0 )</span></span>
+<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">           9 :         uint16_t seqNum = 0;</span></span>
+<span id="L176"><span class="lineNum">     176</span>   [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 5 times"> + </span>]:<span class="tlaGNC">           9 :         if ( mp.readAndSync( count, seqNum, observer ) &amp;&amp; count &gt; 0 )</span></span>
 <span id="L177"><span class="lineNum">     177</span>                 :             :         {</span>
 <span id="L178"><span class="lineNum">     178</span>                 :             :             // Temporarily disable callbacks to avoid un-necessary callbacks</span>
 <span id="L179"><span class="lineNum">     179</span>                 :             :             mp.detach( m_obBuffer );</span>
 <span id="L180"><span class="lineNum">     180</span>                 :             : </span>
 <span id="L181"><span class="lineNum">     181</span>                 :             :             // Drain the buffer (but limit how many adds at one time) and write the entries to persistent storage</span>
 <span id="L182"><span class="lineNum">     182</span>                 :             :             unsigned iterations = 0;</span>
-<span id="L183"><span class="lineNum">     183</span>                 :<span class="tlaGNC">           1 :             ENTRY    entry;</span></span>
-<span id="L184"><span class="lineNum">     184</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 3 times"> + </span>]:<span class="tlaGNC">           4 :             while ( iterations &lt; OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE &amp;&amp; m_buffer.remove( entry ) )</span></span>
+<span id="L183"><span class="lineNum">     183</span>                 :<span class="tlaGNC">           3 :             ENTRY    entry;</span></span>
+<span id="L184"><span class="lineNum">     184</span>   [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 3 times"> + </span>]:<span class="tlaGNC">           6 :             while ( iterations &lt; OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE &amp;&amp; m_buffer.remove( entry ) )</span></span>
 <span id="L185"><span class="lineNum">     185</span>                 :             :             {</span>
 <span id="L186"><span class="lineNum">     186</span>                 :             :                 hookAddingEntry( entry );</span>
 <span id="L187"><span class="lineNum">     187</span>                 :<span class="tlaGNC">           3 :                 m_record.addEntry( entry );</span></span>
@@ -252,14 +252,14 @@
 <span id="L190"><span class="lineNum">     190</span>                 :             :             }</span>
 <span id="L191"><span class="lineNum">     191</span>                 :             : </span>
 <span id="L192"><span class="lineNum">     192</span>                 :             :             // Re-enable callbacks to be notified of new (or still pending) entries</span>
-<span id="L193"><span class="lineNum">     193</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           1 :             if ( count &gt; 0 )</span></span>
+<span id="L193"><span class="lineNum">     193</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           3 :             if ( count &gt; 0 )</span></span>
 <span id="L194"><span class="lineNum">     194</span>                 :             :             {</span>
 <span id="L195"><span class="lineNum">     195</span>                 :             :                 // If there are still pending entries, use SEQUENCE_NUMBER_UNKNOWN to get an immediate callback</span>
 <span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaUNC tlaBgUNC">           0 :                 seqNum = Kit::Dm::IModelPoint::SEQUENCE_NUMBER_UNKNOWN;</span></span>
 <span id="L197"><span class="lineNum">     197</span>                 :             :             }</span>
-<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC tlaBgGNC">           1 :             mp.attach( m_obBuffer, seqNum );</span></span>
+<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC tlaBgGNC">           3 :             mp.attach( m_obBuffer, seqNum );</span></span>
 <span id="L199"><span class="lineNum">     199</span>                 :             :         }</span>
-<span id="L200"><span class="lineNum">     200</span>                 :<span class="tlaGNC">           5 :     }</span></span>
+<span id="L200"><span class="lineNum">     200</span>                 :<span class="tlaGNC">           9 :     }</span></span>
 <span id="L201"><span class="lineNum">     201</span>                 :             : </span>
 <span id="L202"><span class="lineNum">     202</span>                 :             : protected:</span>
 <span id="L203"><span class="lineNum">     203</span>                 :             :     /// Hook function called for each entry BEFORE it is added to the record.</span>

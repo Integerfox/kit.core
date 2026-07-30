@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -63,7 +63,7 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="_rate_sync_8h.html">Itc/Synchronous/RateSync.h</a>&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_open_close_sync_8h.html">Kit/Itc/OpenCloseSync.h</a>&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="_i_queue_8h.html">Kit/EventQueue/IQueue.h</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="_system_2_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="_bsp_2_api_8h.html">Kit/Bsp/Api.h</a>&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="_timer_8h.html">Kit/System/Timer.h</a>&quot;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="_elapsed_time_8h.html">Kit/System/ElapsedTime.h</a>&quot;</span></div>
@@ -173,7 +173,7 @@ $(function() {
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="comment">// Toggle the LED</span></div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_define" href="_bsp_2_api_8h.html#aa1ca8c5b7ba75929a2823bc48107c994">Bsp_toggle_debug1</a>();</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        uint32_t now = <a class="code hl_function" href="class_kit_1_1_system_1_1_elapsed_time.html#a0d7a5594a8e92eb910ea1021f535e95b">Kit::System::ElapsedTime::milliseconds</a>();</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <a class="code hl_define" href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;LED Flash. delay=%&quot;</span> PRIu32 <span class="stringliteral">&quot; ms&quot;</span>, <a class="code hl_variable" href="class_itc_1_1_synchronous_1_1_server.html#a6610e52a38a3aa9c01ed2f16745e5980">m_flashRateMs</a> );</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <a class="code hl_define" href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a>( <span class="stringliteral">&quot;main&quot;</span>, <span class="stringliteral">&quot;LED Flash. delay=%&quot;</span> PRIu32 <span class="stringliteral">&quot; ms&quot;</span>, <a class="code hl_variable" href="class_itc_1_1_synchronous_1_1_server.html#a6610e52a38a3aa9c01ed2f16745e5980">m_flashRateMs</a> );</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="comment">// Restart the timer for the next flash cycle.  Account for the trace output latency</span></div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="comment">// by adjusting the next duration to the next m_flashRateMs boundary</span></div>
@@ -208,9 +208,9 @@ $(function() {
 <div class="ttc" id="a_i_queue_8h_html"><div class="ttname"><a href="_i_queue_8h.html">IQueue.h</a></div></div>
 <div class="ttc" id="a_open_close_sync_8h_html"><div class="ttname"><a href="_open_close_sync_8h.html">OpenCloseSync.h</a></div></div>
 <div class="ttc" id="a_rate_sync_8h_html"><div class="ttname"><a href="_rate_sync_8h.html">RateSync.h</a></div></div>
+<div class="ttc" id="a_system_2_trace_8h_html"><div class="ttname"><a href="_system_2_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
+<div class="ttc" id="a_system_2_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_system_2_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
 <div class="ttc" id="a_timer_8h_html"><div class="ttname"><a href="_timer_8h.html">Timer.h</a></div></div>
-<div class="ttc" id="a_trace_8h_html"><div class="ttname"><a href="_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
-<div class="ttc" id="a_trace_8h_html_a81d2cd2e1ab6d21d0288c42215c35bb0"><div class="ttname"><a href="_trace_8h.html#a81d2cd2e1ab6d21d0288c42215c35bb0">KIT_SYSTEM_TRACE_MSG</a></div><div class="ttdeci">#define KIT_SYSTEM_TRACE_MSG(sect,...)</div><div class="ttdoc">Macro Wrapper.</div><div class="ttdef"><b>Definition</b> Trace.h:141</div></div>
 <div class="ttc" id="aclass_itc_1_1_synchronous_1_1_rate_sync_html"><div class="ttname"><a href="class_itc_1_1_synchronous_1_1_rate_sync.html">Itc::Synchronous::RateSync</a></div><div class="ttdoc">This partially concrete class provides the synchronous semantics for ITC IRateRequest message,...</div><div class="ttdef"><b>Definition</b> RateSync.h:30</div></div>
 <div class="ttc" id="aclass_itc_1_1_synchronous_1_1_server_html"><div class="ttname"><a href="class_itc_1_1_synchronous_1_1_server.html">Itc::Synchronous::Server</a></div><div class="ttdoc">This concrete class is a 'server' that flashes the LED.</div><div class="ttdef"><b>Definition</b> Server.h:43</div></div>
 <div class="ttc" id="aclass_itc_1_1_synchronous_1_1_server_html_a1801f093ac56279e63ee5709157a5c98"><div class="ttname"><a href="class_itc_1_1_synchronous_1_1_server.html#a1801f093ac56279e63ee5709157a5c98">Itc::Synchronous::Server::request</a></div><div class="ttdeci">void request(CloseMsg &amp;msg) noexcept override</div><div class="ttdoc">See Kit::Itc::OpenCloseSync.</div><div class="ttdef"><b>Definition</b> Server.h:105</div></div>
@@ -235,7 +235,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

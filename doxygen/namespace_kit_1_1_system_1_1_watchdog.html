@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -82,11 +82,11 @@ Classes</h2></td></tr>
 <li>Individual application threads (both event and raw threads) can be monitored, with each thread having its own 'timeout period'. The application selects which thread(s) are or are not monitored.</li>
 <li>The Watched Event threads have a software timer that is used to perform a periodic health check themselves. If the health check fails, the <a class="el" href="namespace_kit_1_1_system_1_1_watchdog.html" title="This namespace provides the infrastructure for incorporating a hardware watchdog into an application ...">Watchdog</a> is immediately tripped. The health check interval time must be less than the threads' <a class="el" href="namespace_kit_1_1_system_1_1_watchdog.html" title="This namespace provides the infrastructure for incorporating a hardware watchdog into an application ...">Watchdog</a> timeout interval. The health check is customizable on a per thread basis.</li>
 </ul>
-<p>NOTE: <b>Not</b> all threads should or can be 'watched-dogged'. For example the TShell typically runs in a 'raw thread' that spends 99.9% of its time blocked on reading a serial stream. For this use case - the thread should <b>never</b> be registered with "entity" that is responsible for monitoring individual threads. </p>
+<p>NOTE: <b>Not</b> all threads should or can be 'watched-dogged'. For example the <a class="el" href="namespace_kit_1_1_t_shell.html" title="The TShell namespace provides a text based shell that can be used interact with an Application....">TShell</a> typically runs in a 'raw thread' that spends 99.9% of its time blocked on reading a serial stream. For this use case - the thread should <b>never</b> be registered with "entity" that is responsible for monitoring individual threads. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:29 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

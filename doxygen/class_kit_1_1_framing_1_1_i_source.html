@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -69,9 +69,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1c2c533c23bc0ecd76d6ced42da6dca6" id="r_a1c2c533c23bc0ecd76d6ced42da6dca6"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1c2c533c23bc0ecd76d6ced42da6dca6">~ISource</a> ()=default</td></tr>
 <tr class="memdesc:a1c2c533c23bc0ecd76d6ced42da6dca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual Destructor.  <br /></td></tr>
 <tr class="separator:a1c2c533c23bc0ecd76d6ced42da6dca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f7a294f59e58f19870a2f244e1752a8" id="r_a1f7a294f59e58f19870a2f244e1752a8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f7a294f59e58f19870a2f244e1752a8">read</a> (void *dstBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesRead) noexcept=0</td></tr>
-<tr class="memdesc:a1f7a294f59e58f19870a2f244e1752a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to read the specified number of bytes from the "input source" into the supplied buffer.  <br /></td></tr>
-<tr class="separator:a1f7a294f59e58f19870a2f244e1752a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68cff154201e2eb5f0e51cd368a5b2b6" id="r_a68cff154201e2eb5f0e51cd368a5b2b6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68cff154201e2eb5f0e51cd368a5b2b6">read</a> (void *dstBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesRead, bool blockIfUnavailable=false) noexcept=0</td></tr>
+<tr class="memdesc:a68cff154201e2eb5f0e51cd368a5b2b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to read the specified number of bytes from the "input source" into the supplied buffer.  <br /></td></tr>
+<tr class="separator:a68cff154201e2eb5f0e51cd368a5b2b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This abstract class defines an interface of the input source for a Decoder instance. </p>
@@ -105,8 +105,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1f7a294f59e58f19870a2f244e1752a8" name="a1f7a294f59e58f19870a2f244e1752a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f7a294f59e58f19870a2f244e1752a8">&#9670;&#160;</a></span>read()</h2>
+<a id="a68cff154201e2eb5f0e51cd368a5b2b6" name="a68cff154201e2eb5f0e51cd368a5b2b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68cff154201e2eb5f0e51cd368a5b2b6">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -127,7 +127,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>blockIfUnavailable</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -138,9 +143,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Attempts to read the specified number of bytes from the "input source" into the supplied buffer. </p>
-<p>The actual number of bytes read is returned via 'bytesRead'. Returns true if successful, false if no more data is currently available or an error was encountered. </p>
+<p>The actual number of bytes read is returned via 'bytesRead'. Returns true if successful, false if an error was encountered.</p>
+<p>NOTE: The 'blockIfUnavailable' argument controls the behavior of the read operation when no data is currently available. When set to true, the read operation will block until at least one byte is available. When set to false, the read operation will return immediately with bytesRead set to zero. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_framing_1_1_stream_source.html#ae7f9539bdf0ee8a37fe302ea229e81bf">Kit::Framing::StreamSource</a>, and <a class="el" href="class_kit_1_1_framing_1_1_string_source.html#a28dfd7a0d26b7ba19c9781edc2238538">Kit::Framing::StringSource</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_framing_1_1_stream_source.html#a3e2af4bab450e5e83a4e3586a1058890">Kit::Framing::StreamSource</a>, and <a class="el" href="class_kit_1_1_framing_1_1_string_source.html#a7f4c202523d996de98af2af0d593267b">Kit::Framing::StringSource</a>.</p>
 
 </div>
 </div>
@@ -150,7 +156,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

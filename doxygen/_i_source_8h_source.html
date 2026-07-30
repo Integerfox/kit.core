@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -79,32 +79,37 @@ $(function() {
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">    /** Attempts to read the specified number of bytes from the &quot;input source&quot;</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">        into the supplied buffer.  The actual number of bytes read is returned via</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">        &#39;bytesRead&#39;. Returns true if successful, false if no more data is currently</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">        available or an error was encountered.</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_i_source.html#a1f7a294f59e58f19870a2f244e1752a8">   35</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_framing_1_1_i_source.html#a1f7a294f59e58f19870a2f244e1752a8">read</a>( <span class="keywordtype">void</span>*               dstBuffer,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                       <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a>  numBytes,</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                       <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a>&amp; bytesRead ) <span class="keyword">noexcept</span> = 0;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">    /// Virtual Destructor</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_i_source.html#a1c2c533c23bc0ecd76d6ced42da6dca6">   41</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_kit_1_1_framing_1_1_i_source.html#a1c2c533c23bc0ecd76d6ced42da6dca6">~ISource</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>};</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">        &#39;bytesRead&#39;. Returns true if successful, false if an error was encountered.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"></span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">        NOTE: The &#39;blockIfUnavailable&#39; argument controls the behavior of the read</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">              operation when no data is currently available.  When set to true, </span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">              the read operation will block until at least one byte is available.</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">              When set to false, the read operation will return immediately with</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">              bytesRead set to zero.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_i_source.html#a68cff154201e2eb5f0e51cd368a5b2b6">   40</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_framing_1_1_i_source.html#a68cff154201e2eb5f0e51cd368a5b2b6">read</a>( <span class="keywordtype">void</span>*               dstBuffer,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                       <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a>  numBytes,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                       <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a>&amp; bytesRead,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>                       <span class="keywordtype">bool</span>                blockIfUnavailable = <span class="keyword">false</span> ) noexcept = 0;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    /// Virtual Destructor</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_i_source.html#a1c2c533c23bc0ecd76d6ced42da6dca6">   47</a></span><span class="comment"></span>    virtual ~<a class="code hl_class" href="class_kit_1_1_framing_1_1_i_source.html">ISource</a>() = default;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_s_size_8h_html"><div class="ttname"><a href="_s_size_8h.html">SSize.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_i_source_html"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_source.html">Kit::Framing::ISource</a></div><div class="ttdoc">This abstract class defines an interface of the input source for a Decoder instance.</div><div class="ttdef"><b>Definition</b> ISource.h:26</div></div>
-<div class="ttc" id="aclass_kit_1_1_framing_1_1_i_source_html_a1c2c533c23bc0ecd76d6ced42da6dca6"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_source.html#a1c2c533c23bc0ecd76d6ced42da6dca6">Kit::Framing::ISource::~ISource</a></div><div class="ttdeci">virtual ~ISource()=default</div><div class="ttdoc">Virtual Destructor.</div></div>
-<div class="ttc" id="aclass_kit_1_1_framing_1_1_i_source_html_a1f7a294f59e58f19870a2f244e1752a8"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_source.html#a1f7a294f59e58f19870a2f244e1752a8">Kit::Framing::ISource::read</a></div><div class="ttdeci">virtual bool read(void *dstBuffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T &amp;bytesRead) noexcept=0</div><div class="ttdoc">Attempts to read the specified number of bytes from the &quot;input source&quot; into the supplied buffer.</div></div>
+<div class="ttc" id="aclass_kit_1_1_framing_1_1_i_source_html_a68cff154201e2eb5f0e51cd368a5b2b6"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_source.html#a68cff154201e2eb5f0e51cd368a5b2b6">Kit::Framing::ISource::read</a></div><div class="ttdeci">virtual bool read(void *dstBuffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T &amp;bytesRead, bool blockIfUnavailable=false) noexcept=0</div><div class="ttdoc">Attempts to read the specified number of bytes from the &quot;input source&quot; into the supplied buffer.</div></div>
 <div class="ttc" id="anamespace_kit_1_1_type_html_aa244ac9e3a5479ac83b067897b68caf2"><div class="ttname"><a href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></div><div class="ttdeci">int32_t SSize_T</div><div class="ttdoc">This is my work-around for the fact that C++ does not have a standard 'ssize_t' type.</div><div class="ttdef"><b>Definition</b> SSize.h:33</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

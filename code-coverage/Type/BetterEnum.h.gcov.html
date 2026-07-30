@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-21 20:29:00</td>
+            <td class="headerValue">2026-07-30 03:05:06</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">80.4&nbsp;%</td>
@@ -445,7 +445,7 @@
 <span id="L383"><span class="lineNum">     383</span>                 :             :     BETTER_ENUMS_CONSTEXPR_ const T&amp; operator*() const { return _value; }</span>
 <span id="L384"><span class="lineNum">     384</span>                 :             :     BETTER_ENUMS_CONSTEXPR_ const T* operator-&gt;() const { return &amp;_value; }</span>
 <span id="L385"><span class="lineNum">     385</span>                 :             : </span>
-<span id="L386"><span class="lineNum">     386</span>   [<span class="tlaGBC" title="Branch 0 was taken 175 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 2 times"> + </span> :<span class="tlaGNC">         197 :     BETTER_ENUMS_CONSTEXPR_ operator bool() const { return _valid; }</span></span>
+<span id="L386"><span class="lineNum">     386</span>   [<span class="tlaGBC" title="Branch 0 was taken 175 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 2 times"> + </span> :<span class="tlaGNC">         200 :     BETTER_ENUMS_CONSTEXPR_ operator bool() const { return _valid; }</span></span>
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 1 time"> + </span>]
 <span id="L387"><span class="lineNum">     387</span>                 :             : </span>
 <span id="L388"><span class="lineNum">     388</span>                 :             :     BETTER_ENUMS_CONSTEXPR_ const T&amp; value() const { return _value; }</span>
@@ -459,7 +459,7 @@
 <span id="L396"><span class="lineNum">     396</span>                 :             : BETTER_ENUMS_CONSTEXPR_ static optional&lt;CastTo&gt;</span>
 <span id="L397"><span class="lineNum">     397</span>                 :             : _map_index( const Element* array, optional&lt;std::size_t&gt; index )</span>
 <span id="L398"><span class="lineNum">     398</span>                 :             : {</span>
-<span id="L399"><span class="lineNum">     399</span>   [<span class="tlaGBC" title="Branch 0 was taken 195 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 162 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span> :<span class="tlaGNC">         503 :     return index ? static_cast&lt;CastTo&gt;( array[*index] ) : optional&lt;CastTo&gt;();</span></span>
+<span id="L399"><span class="lineNum">     399</span>   [<span class="tlaGBC" title="Branch 0 was taken 198 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 163 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span> :<span class="tlaGNC">         507 :     return index ? static_cast&lt;CastTo&gt;( array[*index] ) : optional&lt;CastTo&gt;();</span></span>
 <span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 9 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 9 times"> + </span> 
 <span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 9 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 10 was taken 57 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 57 times"> + </span> 
 <span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 13 was not taken"> - </span>]
@@ -489,7 +489,7 @@
 <span id="L423"><span class="lineNum">     423</span>                 :             : template &lt;typename T&gt;</span>
 <span id="L424"><span class="lineNum">     424</span>                 :             : BETTER_ENUMS_CONSTEXPR_ static T* _or_null( optional&lt;T*&gt; maybe )</span>
 <span id="L425"><span class="lineNum">     425</span>                 :             : {</span>
-<span id="L426"><span class="lineNum">     426</span>   [<span class="tlaGBC" title="Branch 0 was taken 197 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 8 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         271 :     return maybe ? *maybe : BETTER_ENUMS_NULLPTR;</span></span>
+<span id="L426"><span class="lineNum">     426</span>   [<span class="tlaGBC" title="Branch 0 was taken 201 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 8 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         275 :     return maybe ? *maybe : BETTER_ENUMS_NULLPTR;</span></span>
 <span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 9 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 57 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span>]
 <span id="L427"><span class="lineNum">     427</span>                 :             : }</span>
 <span id="L428"><span class="lineNum">     428</span>                 :             : </span>
@@ -616,25 +616,25 @@
 <span id="L547"><span class="lineNum">     547</span>                 :             :                                                                                                                                                                   : _names_match_nocase( stringizedName, referenceName, index + 1 );</span>
 <span id="L548"><span class="lineNum">     548</span>                 :             : }</span>
 <span id="L549"><span class="lineNum">     549</span>                 :             : </span>
-<span id="L550"><span class="lineNum">     550</span>                 :<span class="tlaGNC">         181 : inline void _trim_names( const char* const* raw_names,</span></span>
+<span id="L550"><span class="lineNum">     550</span>                 :<span class="tlaGNC">         229 : inline void _trim_names( const char* const* raw_names,</span></span>
 <span id="L551"><span class="lineNum">     551</span>                 :             :                          const char**       trimmed_names,</span>
 <span id="L552"><span class="lineNum">     552</span>                 :             :                          char*              storage,</span>
 <span id="L553"><span class="lineNum">     553</span>                 :             :                          std::size_t        count )</span>
 <span id="L554"><span class="lineNum">     554</span>                 :             : {</span>
 <span id="L555"><span class="lineNum">     555</span>                 :             :     std::size_t offset = 0;</span>
 <span id="L556"><span class="lineNum">     556</span>                 :             : </span>
-<span id="L557"><span class="lineNum">     557</span>         [<span class="tlaGBC" title="Branch 0 was taken 617 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 181 times"> + </span>]:<span class="tlaGNC">         798 :     for ( std::size_t index = 0; index &lt; count; ++index )</span></span>
+<span id="L557"><span class="lineNum">     557</span>         [<span class="tlaGBC" title="Branch 0 was taken 843 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 229 times"> + </span>]:<span class="tlaGNC">        1072 :     for ( std::size_t index = 0; index &lt; count; ++index )</span></span>
 <span id="L558"><span class="lineNum">     558</span>                 :             :     {</span>
-<span id="L559"><span class="lineNum">     559</span>                 :<span class="tlaGNC">         617 :         trimmed_names[index] = storage + offset;</span></span>
+<span id="L559"><span class="lineNum">     559</span>                 :<span class="tlaGNC">         843 :         trimmed_names[index] = storage + offset;</span></span>
 <span id="L560"><span class="lineNum">     560</span>                 :             : </span>
 <span id="L561"><span class="lineNum">     561</span>                 :             :         std::size_t trimmed_length =</span>
-<span id="L562"><span class="lineNum">     562</span>                 :<span class="tlaGNC">         617 :             std::strcspn( raw_names[index], _name_enders );</span></span>
-<span id="L563"><span class="lineNum">     563</span>                 :<span class="tlaGNC">         617 :         storage[offset + trimmed_length] = '\0';</span></span>
+<span id="L562"><span class="lineNum">     562</span>                 :<span class="tlaGNC">         843 :             std::strcspn( raw_names[index], _name_enders );</span></span>
+<span id="L563"><span class="lineNum">     563</span>                 :<span class="tlaGNC">         843 :         storage[offset + trimmed_length] = '\0';</span></span>
 <span id="L564"><span class="lineNum">     564</span>                 :             : </span>
-<span id="L565"><span class="lineNum">     565</span>                 :<span class="tlaGNC">         617 :         std::size_t raw_length  = std::strlen( raw_names[index] );</span></span>
-<span id="L566"><span class="lineNum">     566</span>                 :<span class="tlaGNC">         617 :         offset                 += raw_length + 1;</span></span>
+<span id="L565"><span class="lineNum">     565</span>                 :<span class="tlaGNC">         843 :         std::size_t raw_length  = std::strlen( raw_names[index] );</span></span>
+<span id="L566"><span class="lineNum">     566</span>                 :<span class="tlaGNC">         843 :         offset                 += raw_length + 1;</span></span>
 <span id="L567"><span class="lineNum">     567</span>                 :             :     }</span>
-<span id="L568"><span class="lineNum">     568</span>                 :<span class="tlaGNC">         181 : }</span></span>
+<span id="L568"><span class="lineNum">     568</span>                 :<span class="tlaGNC">         229 : }</span></span>
 <span id="L569"><span class="lineNum">     569</span>                 :             : </span>
 <span id="L570"><span class="lineNum">     570</span>                 :             : </span>
 <span id="L571"><span class="lineNum">     571</span>                 :             : // Eager initialization.</span>

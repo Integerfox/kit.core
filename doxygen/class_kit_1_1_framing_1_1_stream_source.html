@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 337-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -80,9 +80,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2887adfbd9f89f895718c553ce2cc888" id="r_a2887adfbd9f89f895718c553ce2cc888"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2887adfbd9f89f895718c553ce2cc888">StreamSource</a> (<a class="el" href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a> &amp;inputStream) noexcept</td></tr>
 <tr class="memdesc:a2887adfbd9f89f895718c553ce2cc888"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a2887adfbd9f89f895718c553ce2cc888"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7f9539bdf0ee8a37fe302ea229e81bf" id="r_ae7f9539bdf0ee8a37fe302ea229e81bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7f9539bdf0ee8a37fe302ea229e81bf">read</a> (void *dstBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesRead) noexcept override</td></tr>
-<tr class="memdesc:ae7f9539bdf0ee8a37fe302ea229e81bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_framing_1_1_i_source.html" title="This abstract class defines an interface of the input source for a Decoder instance.">Kit::Framing::ISource</a>.  <br /></td></tr>
-<tr class="separator:ae7f9539bdf0ee8a37fe302ea229e81bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a042a5ca04f9b482b709c53bcd68e103f" id="r_a042a5ca04f9b482b709c53bcd68e103f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a042a5ca04f9b482b709c53bcd68e103f">getStream</a> () noexcept</td></tr>
+<tr class="memdesc:a042a5ca04f9b482b709c53bcd68e103f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the underlying input stream.  <br /></td></tr>
+<tr class="separator:a042a5ca04f9b482b709c53bcd68e103f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e2af4bab450e5e83a4e3586a1058890" id="r_a3e2af4bab450e5e83a4e3586a1058890"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e2af4bab450e5e83a4e3586a1058890">read</a> (void *dstBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesRead, bool blockIfUnavailable=false) noexcept override</td></tr>
+<tr class="memdesc:a3e2af4bab450e5e83a4e3586a1058890"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_framing_1_1_i_source.html" title="This abstract class defines an interface of the input source for a Decoder instance.">Kit::Framing::ISource</a>.  <br /></td></tr>
+<tr class="separator:a3e2af4bab450e5e83a4e3586a1058890"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9677184f559ae018bc56e6a476e9623c" id="r_a9677184f559ae018bc56e6a476e9623c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9677184f559ae018bc56e6a476e9623c">setInput</a> (<a class="el" href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a> &amp;inputStream) noexcept</td></tr>
 <tr class="memdesc:a9677184f559ae018bc56e6a476e9623c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allows the consumer to change/set the Input stream after construction.  <br /></td></tr>
 <tr class="separator:a9677184f559ae018bc56e6a476e9623c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,8 +159,35 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae7f9539bdf0ee8a37fe302ea229e81bf" name="ae7f9539bdf0ee8a37fe302ea229e81bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7f9539bdf0ee8a37fe302ea229e81bf">&#9670;&#160;</a></span>read()</h2>
+<a id="a042a5ca04f9b482b709c53bcd68e103f" name="a042a5ca04f9b482b709c53bcd68e103f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a042a5ca04f9b482b709c53bcd68e103f">&#9670;&#160;</a></span>getStream()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a> * Kit::Framing::StreamSource::getStream </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Getter for the underlying input stream. </p>
+
+</div>
+</div>
+<a id="a3e2af4bab450e5e83a4e3586a1058890" name="a3e2af4bab450e5e83a4e3586a1058890"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e2af4bab450e5e83a4e3586a1058890">&#9670;&#160;</a></span>read()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,7 +208,12 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>bytesRead</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>blockIfUnavailable</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -190,7 +225,7 @@ Protected Attributes</h2></td></tr>
 
 <p>See <a class="el" href="class_kit_1_1_framing_1_1_i_source.html" title="This abstract class defines an interface of the input source for a Decoder instance.">Kit::Framing::ISource</a>. </p>
 
-<p>Implements <a class="el" href="class_kit_1_1_framing_1_1_i_source.html#a1f7a294f59e58f19870a2f244e1752a8">Kit::Framing::ISource</a>.</p>
+<p>Implements <a class="el" href="class_kit_1_1_framing_1_1_i_source.html#a68cff154201e2eb5f0e51cd368a5b2b6">Kit::Framing::ISource</a>.</p>
 
 </div>
 </div>
@@ -252,7 +287,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 21 2026 20:22:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -1,0 +1,644 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - System/Trace.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">System</a> - Trace.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : #ifndef KIT_SYSTEM_TRACE_H_</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : #define KIT_SYSTEM_TRACE_H_</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  *</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : /** @file</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : </span>
+<span id="L13"><span class="lineNum">      13</span>                 :             :     This file provides an interface for a 'printf' tracing mechanism. The output</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             :     of tracing messages typically defaults (dependent on the target platform) to</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             :     stdout.  However, the output can be redirected to any Kit::Stream::Output</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             :     instance.</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : </span>
+<span id="L18"><span class="lineNum">      18</span>                 :             :     The trace engine is thread safe, i.e. it guarantees that outputting a single</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             :     trace message (info + user msg) is an Atomic operation within a multi-thread</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             :     environment.</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : </span>
+<span id="L22"><span class="lineNum">      22</span>                 :             :     All of the methods SHOULD be accessed via the preprocessor macros below to</span>
+<span id="L23"><span class="lineNum">      23</span>                 :             :     allow the 'trace code' to be compiled out of a 'release' build if desired.</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             :     In addition to a compile time decision to use/exclude tracing, there are</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     run-time switches to selective enable and/or control what is displayed.</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             : </span>
+<span id="L27"><span class="lineNum">      27</span>                 :             :     There are numerous application customizable (at compile time) options</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :     for how the internals of how the trace engine works (see OPTION_xxx</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             :     macros below).</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             : </span>
+<span id="L31"><span class="lineNum">      31</span>                 :             :     NOTE: The trace engine supports does NOT support tracing BEFORE the KIT</span>
+<span id="L32"><span class="lineNum">      32</span>                 :             :           library is initialized.  This means that constructors of objects that</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :           are created statically can NOT contain trace logging calls.</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             : </span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :     &lt;pre&gt;</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             : </span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :     For trace message to appear on the logging media the following</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :     must done:</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             : </span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :         1. Enable Trace at compile time by defining the USE_KIT_SYSTEM_TRACE</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :            preprocessor symbol.</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :         2. Enable the Trace engine at run time by calling KIT_SYSTEM_TRACE_ENABLE()</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :         3. Enable at least one 'section' by calling KIT_SYSTEM_TRACE_ENABLE_SECTION()</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             : </span>
+<span id="L45"><span class="lineNum">      45</span>                 :             : </span>
+<span id="L46"><span class="lineNum">      46</span>                 :             : </span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :     How to use the KIT_SYSTEM_TRACE_xxx macros</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :     ------------------------------------------</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :     The trace functionality is provided by the KIT_SYSTEM_TRACE and</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     KIT_SYSTEM_TRACEMSG macros.  The remaining macros are used to enable/disable</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :     and control the actual trace output.  If the symbol, USE_KIT_SYSTEM_TRACE,</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :     is NOT defined at compile time -- all of the trace macros are compiled</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             :     out.  If the symbol is defined, then the trace output can be enabled</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :     and disabled at run time.</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             : </span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :     KIT_SYSTEM_TRACE_FUNC() - This macro is used to trace the entry and exit of a</span>
+<span id="L57"><span class="lineNum">      57</span>                 :             :                               function.</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :                               For example:</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :                                   void foobar( int x )</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :                                   {</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :                                       // Traces the entry &amp; exit of foobar() when tracing is enabled for section &quot;bob&quot;</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :                                       KIT_SYSTEM_TRACE_FUNC(&quot;bob&quot;);</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :                                       int y = 2*x;</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             :                                       ...</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :                                   }</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             : </span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :     KIT_SYSTEM_TRACE_MSG() - This macro is for the programmer/application to</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             :                              generate formatted message that are outputted to the</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             :                              &quot;trace media.&quot; The macro has printf() semantics.</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             : </span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :                              For example:</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :                                  void foobar( int x )</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             :                                  {</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             :                                      ...</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :                                      // Trace message outputs when tracing is enabled for section &quot;bob&quot;</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             :                                      KIT_SYSTEM_TRACE_MSG( &quot;bob, &quot;This is an example Trace Msg. Y=%d, X=%d&quot;, y, x);</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :                                      ...</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :                                  }</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             : &lt;/pre&gt;</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             : */</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             : </span>
+<span id="L82"><span class="lineNum">      82</span>                 :             : #include &quot;kit_config.h&quot;</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             : #include &quot;Kit/Text/IString.h&quot;</span>
+<span id="L84"><span class="lineNum">      84</span>                 :             : #include &quot;Kit/System/printfchecker.h&quot;</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             : #include &quot;Kit/Io/IOutput.h&quot;</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             : #include &quot;Kit/Type/BetterEnum.h&quot;</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             : </span>
+<span id="L88"><span class="lineNum">      88</span>                 :             : //////////////////////////////////////////////////////////////////////////////</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             : #if defined( USE_KIT_SYSTEM_RESTRICTED_TRACE ) || defined( USE_KIT_SYSTEM_TRACE )</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             : </span>
+<span id="L91"><span class="lineNum">      91</span>                 :             : /** This is SPECIAL macro wrapper in that it NOT compiled out when USE_KIT_SYSTEM_TRACE</span>
+<span id="L92"><span class="lineNum">      92</span>                 :             :     is NOT defined.  The use case for this is when the Application needs to</span>
+<span id="L93"><span class="lineNum">      93</span>                 :             :     disable - at compile time - the trace statements because the memory footprint</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             :     of all of the trace strings is 'too expensive' for the target.  However,</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             :     there are situations where 'some' trace statements are needed (e.g. when the</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             :     logging engine echos log entries to the trace engine, or when error occurs</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             :     bring up the logging sub-system's persistent storage media).</span>
+<span id="L98"><span class="lineNum">      98</span>                 :             : </span>
+<span id="L99"><span class="lineNum">      99</span>                 :             :     WARNING: Use this macro sparingly as it negates the purpose of being able</span>
+<span id="L100"><span class="lineNum">     100</span>                 :             :              to compile out the trace statements. If you are not sure if you</span>
+<span id="L101"><span class="lineNum">     101</span>                 :             :              should use this macro, you probably should NOT be using it!</span>
+<span id="L102"><span class="lineNum">     102</span>                 :             :  */</span>
+<span id="L103"><span class="lineNum">     103</span>                 :             : #define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )                                                          \</span>
+<span id="L104"><span class="lineNum">     104</span>                 :             :     do                                                                                                        \</span>
+<span id="L105"><span class="lineNum">     105</span>                 :             :     {                                                                                                         \</span>
+<span id="L106"><span class="lineNum">     106</span>                 :             :         if ( Kit::System::Trace::isSectionEnabled_( sect ) &amp;&amp; Kit::System::Trace::passedThreadFilter_() )     \</span>
+<span id="L107"><span class="lineNum">     107</span>                 :             :         {                                                                                                     \</span>
+<span id="L108"><span class="lineNum">     108</span>                 :             :             Kit::System::Trace::traceLocation_( sect, __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME ); \</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             :             Kit::System::Trace::traceUserMsg_( __VA_ARGS__ );                                                 \</span>
+<span id="L110"><span class="lineNum">     110</span>                 :             :         }                                                                                                     \</span>
+<span id="L111"><span class="lineNum">     111</span>                 :             :     }                                                                                                         \</span>
+<span id="L112"><span class="lineNum">     112</span>                 :             :     while ( 0 )</span>
+<span id="L113"><span class="lineNum">     113</span>                 :             : </span>
+<span id="L114"><span class="lineNum">     114</span>                 :             : /// 'Restricted' version of the ALLOCATE macro.  Read the above comments before using!</span>
+<span id="L115"><span class="lineNum">     115</span>                 :             : #define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE( type, varname, initval ) type varname = initval</span>
+<span id="L116"><span class="lineNum">     116</span>                 :             : </span>
+<span id="L117"><span class="lineNum">     117</span>                 :             : </span>
+<span id="L118"><span class="lineNum">     118</span>                 :             : // PRETTY_FUNCTION macro is non-standard</span>
+<span id="L119"><span class="lineNum">     119</span>                 :             : #if defined( __GNUC__ )</span>
+<span id="L120"><span class="lineNum">     120</span>                 :             : /// Take advantage of GCC's pretty function symbol</span>
+<span id="L121"><span class="lineNum">     121</span>                 :             : #define KIT_SYSTEM_TRACE_PRETTY_FUNCNAME __PRETTY_FUNCTION__</span>
+<span id="L122"><span class="lineNum">     122</span>                 :             : </span>
+<span id="L123"><span class="lineNum">     123</span>                 :             : #elif defined( _MSC_VER )</span>
+<span id="L124"><span class="lineNum">     124</span>                 :             : /// Take advantage of Microsoft's pretty function symbol</span>
+<span id="L125"><span class="lineNum">     125</span>                 :             : #define KIT_SYSTEM_TRACE_PRETTY_FUNCNAME __FUNCSIG__</span>
+<span id="L126"><span class="lineNum">     126</span>                 :             : </span>
+<span id="L127"><span class="lineNum">     127</span>                 :             : #else</span>
+<span id="L128"><span class="lineNum">     128</span>                 :             : /// Use C++11 function name</span>
+<span id="L129"><span class="lineNum">     129</span>                 :             : #define KIT_SYSTEM_TRACE_PRETTY_FUNCNAME __func__</span>
+<span id="L130"><span class="lineNum">     130</span>                 :             : #endif  // end __PRETTY_FUNCTION__</span>
+<span id="L131"><span class="lineNum">     131</span>                 :             : </span>
+<span id="L132"><span class="lineNum">     132</span>                 :             : </span>
+<span id="L133"><span class="lineNum">     133</span>                 :             : #ifdef USE_KIT_SYSTEM_TRACE</span>
+<span id="L134"><span class="lineNum">     134</span>                 :             : /// Macro Wrapper</span>
+<span id="L135"><span class="lineNum">     135</span>                 :             : #define KIT_SYSTEM_TRACE_FUNC( sect ) Kit::System::Trace kitSystemTraceInstance_( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME )</span>
+<span id="L136"><span class="lineNum">     136</span>                 :             : </span>
+<span id="L137"><span class="lineNum">     137</span>                 :             : /// Macro Wrapper</span>
+<span id="L138"><span class="lineNum">     138</span>                 :             : #define KIT_SYSTEM_TRACE_SCOPE( sect, label ) Kit::System::Trace kitSystemTraceInstance_( __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME, sect, label )</span>
+<span id="L139"><span class="lineNum">     139</span>                 :             : </span>
+<span id="L140"><span class="lineNum">     140</span>                 :             : /// Macro Wrapper</span>
+<span id="L141"><span class="lineNum">     141</span>                 :             : #define KIT_SYSTEM_TRACE_MSG( sect, ... )                                                                     \</span>
+<span id="L142"><span class="lineNum">     142</span>                 :             :     do                                                                                                        \</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             :     {                                                                                                         \</span>
+<span id="L144"><span class="lineNum">     144</span>                 :             :         if ( Kit::System::Trace::isSectionEnabled_( sect ) &amp;&amp; Kit::System::Trace::passedThreadFilter_() )     \</span>
+<span id="L145"><span class="lineNum">     145</span>                 :             :         {                                                                                                     \</span>
+<span id="L146"><span class="lineNum">     146</span>                 :             :             Kit::System::Trace::traceLocation_( sect, __FILE__, __LINE__, KIT_SYSTEM_TRACE_PRETTY_FUNCNAME ); \</span>
+<span id="L147"><span class="lineNum">     147</span>                 :             :             Kit::System::Trace::traceUserMsg_( __VA_ARGS__ );                                                 \</span>
+<span id="L148"><span class="lineNum">     148</span>                 :             :         }                                                                                                     \</span>
+<span id="L149"><span class="lineNum">     149</span>                 :             :     }                                                                                                         \</span>
+<span id="L150"><span class="lineNum">     150</span>                 :             :     while ( 0 )</span>
+<span id="L151"><span class="lineNum">     151</span>                 :             : #endif  // end USE_KIT_SYSTEM_TRACE</span>
+<span id="L152"><span class="lineNum">     152</span>                 :             : </span>
+<span id="L153"><span class="lineNum">     153</span>                 :             : /// Macro Wrapper</span>
+<span id="L154"><span class="lineNum">     154</span>                 :             : #define KIT_SYSTEM_TRACE_ENABLE() Kit::System::Trace::enable_()</span>
+<span id="L155"><span class="lineNum">     155</span>                 :             : </span>
+<span id="L156"><span class="lineNum">     156</span>                 :             : /// Macro Wrapper</span>
+<span id="L157"><span class="lineNum">     157</span>                 :             : #define KIT_SYSTEM_TRACE_DISABLE() Kit::System::Trace::disable_()</span>
+<span id="L158"><span class="lineNum">     158</span>                 :             : </span>
+<span id="L159"><span class="lineNum">     159</span>                 :             : /// Macro Wrapper</span>
+<span id="L160"><span class="lineNum">     160</span>                 :             : #define KIT_SYSTEM_TRACE_IS_ENABLED() Kit::System::Trace::isEnabled_()</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             : </span>
+<span id="L162"><span class="lineNum">     162</span>                 :             : /// Macro Wrapper</span>
+<span id="L163"><span class="lineNum">     163</span>                 :             : #define KIT_SYSTEM_TRACE_IS_SECTION_ENABLED( sect ) Kit::System::Trace::isSectionEnabled_( sect )</span>
+<span id="L164"><span class="lineNum">     164</span>                 :             : </span>
+<span id="L165"><span class="lineNum">     165</span>                 :             : /// Macro Wrapper</span>
+<span id="L166"><span class="lineNum">     166</span>                 :             : #define KIT_SYSTEM_TRACE_SET_INFO_LEVEL( l ) Kit::System::Trace::setInfoLevel_( l )</span>
+<span id="L167"><span class="lineNum">     167</span>                 :             : </span>
+<span id="L168"><span class="lineNum">     168</span>                 :             : /// Macro Wrapper</span>
+<span id="L169"><span class="lineNum">     169</span>                 :             : #define KIT_SYSTEM_TRACE_GET_INFO_LEVEL() Kit::System::Trace::getInfoLevel_()</span>
+<span id="L170"><span class="lineNum">     170</span>                 :             : </span>
+<span id="L171"><span class="lineNum">     171</span>                 :             : /// Macro Wrapper</span>
+<span id="L172"><span class="lineNum">     172</span>                 :             : #define KIT_SYSTEM_TRACE_ENABLE_SECTION( sect ) Kit::System::Trace::enableSection_( sect )</span>
+<span id="L173"><span class="lineNum">     173</span>                 :             : </span>
+<span id="L174"><span class="lineNum">     174</span>                 :             : /// Macro Wrapper</span>
+<span id="L175"><span class="lineNum">     175</span>                 :             : #define KIT_SYSTEM_TRACE_DISABLE_SECTION( sect ) Kit::System::Trace::disableSection_( sect )</span>
+<span id="L176"><span class="lineNum">     176</span>                 :             : </span>
+<span id="L177"><span class="lineNum">     177</span>                 :             : /// Macro Wrapper</span>
+<span id="L178"><span class="lineNum">     178</span>                 :             : #define KIT_SYSTEM_TRACE_GET_SECTIONS( dst ) Kit::System::Trace::getSections_( dst )</span>
+<span id="L179"><span class="lineNum">     179</span>                 :             : </span>
+<span id="L180"><span class="lineNum">     180</span>                 :             : /// Macro Wrapper</span>
+<span id="L181"><span class="lineNum">     181</span>                 :             : #define KIT_SYSTEM_TRACE_SET_THREAD_FILTER( t1 ) Kit::System::Trace::setThreadFilter_( t1 )</span>
+<span id="L182"><span class="lineNum">     182</span>                 :             : </span>
+<span id="L183"><span class="lineNum">     183</span>                 :             : /// Macro Wrapper</span>
+<span id="L184"><span class="lineNum">     184</span>                 :             : #define KIT_SYSTEM_TRACE_SET_THREAD_2FILTERS( t1, t2 ) Kit::System::Trace::setThreadFilter_( t1, t2 )</span>
+<span id="L185"><span class="lineNum">     185</span>                 :             : </span>
+<span id="L186"><span class="lineNum">     186</span>                 :             : /// Macro Wrapper</span>
+<span id="L187"><span class="lineNum">     187</span>                 :             : #define KIT_SYSTEM_TRACE_SET_THREAD_3FILTERS( t1, t2, t3 ) Kit::System::Trace::setThreadFilter_( t1, t2, t3 )</span>
+<span id="L188"><span class="lineNum">     188</span>                 :             : </span>
+<span id="L189"><span class="lineNum">     189</span>                 :             : /// Macro Wrapper</span>
+<span id="L190"><span class="lineNum">     190</span>                 :             : #define KIT_SYSTEM_TRACE_SET_THREAD_4FILTERS( t1, t2, t3, t4 ) Kit::System::Trace::setThreadFilter_( t1, t2, t3, t4 )</span>
+<span id="L191"><span class="lineNum">     191</span>                 :             : </span>
+<span id="L192"><span class="lineNum">     192</span>                 :             : /// Macro Wrapper</span>
+<span id="L193"><span class="lineNum">     193</span>                 :             : #define KIT_SYSTEM_TRACE_GET_THREAD_FILTERS( dst ) Kit::System::Trace::getThreadFilters_( dst )</span>
+<span id="L194"><span class="lineNum">     194</span>                 :             : </span>
+<span id="L195"><span class="lineNum">     195</span>                 :             : /// Macro Wrapper</span>
+<span id="L196"><span class="lineNum">     196</span>                 :             : #define KIT_SYSTEM_TRACE_CLEAR_THREAD_FILTER() Kit::System::Trace::clearThreadFilter_()</span>
+<span id="L197"><span class="lineNum">     197</span>                 :             : </span>
+<span id="L198"><span class="lineNum">     198</span>                 :             : /// Macro Wrapper</span>
+<span id="L199"><span class="lineNum">     199</span>                 :             : #define KIT_SYSTEM_TRACE_DISABLE_SECTION( sect ) Kit::System::Trace::disableSection_( sect )</span>
+<span id="L200"><span class="lineNum">     200</span>                 :             : </span>
+<span id="L201"><span class="lineNum">     201</span>                 :             : /// Macro Wrapper</span>
+<span id="L202"><span class="lineNum">     202</span>                 :             : #define KIT_SYSTEM_TRACE_REDIRECT( newdst ) Kit::System::Trace::redirect_( newdst )</span>
+<span id="L203"><span class="lineNum">     203</span>                 :             : </span>
+<span id="L204"><span class="lineNum">     204</span>                 :             : /// Macro Wrapper</span>
+<span id="L205"><span class="lineNum">     205</span>                 :             : #define KIT_SYSTEM_TRACE_REVERT() Kit::System::Trace::revert_()</span>
+<span id="L206"><span class="lineNum">     206</span>                 :             : </span>
+<span id="L207"><span class="lineNum">     207</span>                 :             : /// Returns true if TRACE was activated/enabled at compile time</span>
+<span id="L208"><span class="lineNum">     208</span>                 :             : #define KIT_SYSTEM_TRACE_IS_COMPILED() true</span>
+<span id="L209"><span class="lineNum">     209</span>                 :             : </span>
+<span id="L210"><span class="lineNum">     210</span>                 :             : /// Allocate a variable that is only 'used' when tracing is enabled</span>
+<span id="L211"><span class="lineNum">     211</span>                 :             : #define KIT_SYSTEM_TRACE_ALLOCATE( type, varname, initval ) type varname = initval</span>
+<span id="L212"><span class="lineNum">     212</span>                 :             : </span>
+<span id="L213"><span class="lineNum">     213</span>                 :             : #else</span>
+<span id="L214"><span class="lineNum">     214</span>                 :             : </span>
+<span id="L215"><span class="lineNum">     215</span>                 :             : /// Macro Wrapper</span>
+<span id="L216"><span class="lineNum">     216</span>                 :             : #define KIT_SYSTEM_TRACE_RESTRICTED_MSG( sect, ... )</span>
+<span id="L217"><span class="lineNum">     217</span>                 :             : </span>
+<span id="L218"><span class="lineNum">     218</span>                 :             : /// Macro Wrapper</span>
+<span id="L219"><span class="lineNum">     219</span>                 :             : #define KIT_SYSTEM_TRACE_RESTRICTED_ALLOCATE( type, varname, initval )</span>
+<span id="L220"><span class="lineNum">     220</span>                 :             : </span>
+<span id="L221"><span class="lineNum">     221</span>                 :             : /// Macro Wrapper</span>
+<span id="L222"><span class="lineNum">     222</span>                 :             : #define KIT_SYSTEM_TRACE_FUNC( sect )</span>
+<span id="L223"><span class="lineNum">     223</span>                 :             : </span>
+<span id="L224"><span class="lineNum">     224</span>                 :             : /// Macro Wrapper</span>
+<span id="L225"><span class="lineNum">     225</span>                 :             : #define KIT_SYSTEM_TRACE_SCOPE( sect, label )</span>
+<span id="L226"><span class="lineNum">     226</span>                 :             : </span>
+<span id="L227"><span class="lineNum">     227</span>                 :             : /// Macro Wrapper</span>
+<span id="L228"><span class="lineNum">     228</span>                 :             : #define KIT_SYSTEM_TRACE_MSG( sect, ... )</span>
+<span id="L229"><span class="lineNum">     229</span>                 :             : </span>
+<span id="L230"><span class="lineNum">     230</span>                 :             : /// Macro Wrapper</span>
+<span id="L231"><span class="lineNum">     231</span>                 :             : #define KIT_SYSTEM_TRACE_ENABLE()</span>
+<span id="L232"><span class="lineNum">     232</span>                 :             : </span>
+<span id="L233"><span class="lineNum">     233</span>                 :             : /// Macro Wrapper</span>
+<span id="L234"><span class="lineNum">     234</span>                 :             : #define KIT_SYSTEM_TRACE_DISABLE()</span>
+<span id="L235"><span class="lineNum">     235</span>                 :             : </span>
+<span id="L236"><span class="lineNum">     236</span>                 :             : /// Macro Wrapper</span>
+<span id="L237"><span class="lineNum">     237</span>                 :             : #define KIT_SYSTEM_TRACE_IS_ENABLED()               false</span>
+<span id="L238"><span class="lineNum">     238</span>                 :             : </span>
+<span id="L239"><span class="lineNum">     239</span>                 :             : /// Macro Wrapper</span>
+<span id="L240"><span class="lineNum">     240</span>                 :             : #define KIT_SYSTEM_TRACE_IS_SECTION_ENABLED( sect ) false</span>
+<span id="L241"><span class="lineNum">     241</span>                 :             : </span>
+<span id="L242"><span class="lineNum">     242</span>                 :             : /// Macro Wrapper</span>
+<span id="L243"><span class="lineNum">     243</span>                 :             : #define KIT_SYSTEM_TRACE_SET_INFO_LEVEL( l )</span>
+<span id="L244"><span class="lineNum">     244</span>                 :             : </span>
+<span id="L245"><span class="lineNum">     245</span>                 :             : /// Macro Wrapper</span>
+<span id="L246"><span class="lineNum">     246</span>                 :             : #define KIT_SYSTEM_TRACE_GET_INFO_LEVEL() ( Kit::System::TraceLevel::_from_index( 0 ) )</span>
+<span id="L247"><span class="lineNum">     247</span>                 :             : </span>
+<span id="L248"><span class="lineNum">     248</span>                 :             : /// Macro Wrapper</span>
+<span id="L249"><span class="lineNum">     249</span>                 :             : #define KIT_SYSTEM_TRACE_ENABLE_SECTION( sect )</span>
+<span id="L250"><span class="lineNum">     250</span>                 :             : </span>
+<span id="L251"><span class="lineNum">     251</span>                 :             : /// Macro Wrapper</span>
+<span id="L252"><span class="lineNum">     252</span>                 :             : #define KIT_SYSTEM_TRACE_DISABLE_SECTION( sect )</span>
+<span id="L253"><span class="lineNum">     253</span>                 :             : </span>
+<span id="L254"><span class="lineNum">     254</span>                 :             : /// Macro Wrapper</span>
+<span id="L255"><span class="lineNum">     255</span>                 :             : #define KIT_SYSTEM_TRACE_SET_THREAD_FILTER( t1 )</span>
+<span id="L256"><span class="lineNum">     256</span>                 :             : </span>
+<span id="L257"><span class="lineNum">     257</span>                 :             : /// Macro Wrapper</span>
+<span id="L258"><span class="lineNum">     258</span>                 :             : #define KIT_SYSTEM_TRACE_SET_THREAD_2FILTERS( t1, t2 )</span>
+<span id="L259"><span class="lineNum">     259</span>                 :             : </span>
+<span id="L260"><span class="lineNum">     260</span>                 :             : /// Macro Wrapper</span>
+<span id="L261"><span class="lineNum">     261</span>                 :             : #define KIT_SYSTEM_TRACE_SET_THREAD_3FILTERS( t1, t2, t3 )</span>
+<span id="L262"><span class="lineNum">     262</span>                 :             : </span>
+<span id="L263"><span class="lineNum">     263</span>                 :             : /// Macro Wrapper</span>
+<span id="L264"><span class="lineNum">     264</span>                 :             : #define KIT_SYSTEM_TRACE_SET_THREAD_4FILTERS( t1, t2, t3, t4 )</span>
+<span id="L265"><span class="lineNum">     265</span>                 :             : </span>
+<span id="L266"><span class="lineNum">     266</span>                 :             : /// Macro Wrapper</span>
+<span id="L267"><span class="lineNum">     267</span>                 :             : #define KIT_SYSTEM_TRACE_GET_THREAD_FILTERS( dst ) 0</span>
+<span id="L268"><span class="lineNum">     268</span>                 :             : </span>
+<span id="L269"><span class="lineNum">     269</span>                 :             : /// Macro Wrapper</span>
+<span id="L270"><span class="lineNum">     270</span>                 :             : #define KIT_SYSTEM_TRACE_CLEAR_THREAD_FILTER()</span>
+<span id="L271"><span class="lineNum">     271</span>                 :             : </span>
+<span id="L272"><span class="lineNum">     272</span>                 :             : /// Macro Wrapper</span>
+<span id="L273"><span class="lineNum">     273</span>                 :             : #define KIT_SYSTEM_TRACE_GET_SECTIONS( dst ) 0</span>
+<span id="L274"><span class="lineNum">     274</span>                 :             : </span>
+<span id="L275"><span class="lineNum">     275</span>                 :             : /// Macro Wrapper</span>
+<span id="L276"><span class="lineNum">     276</span>                 :             : #define KIT_SYSTEM_TRACE_REDIRECT( newdst )</span>
+<span id="L277"><span class="lineNum">     277</span>                 :             : </span>
+<span id="L278"><span class="lineNum">     278</span>                 :             : /// Macro Wrapper</span>
+<span id="L279"><span class="lineNum">     279</span>                 :             : #define KIT_SYSTEM_TRACE_REVERT()</span>
+<span id="L280"><span class="lineNum">     280</span>                 :             : </span>
+<span id="L281"><span class="lineNum">     281</span>                 :             : /// Returns false if TRACE was NOT activated/enabled at compile time</span>
+<span id="L282"><span class="lineNum">     282</span>                 :             : #define KIT_SYSTEM_TRACE_IS_COMPILED() false</span>
+<span id="L283"><span class="lineNum">     283</span>                 :             : </span>
+<span id="L284"><span class="lineNum">     284</span>                 :             : /// Macro Wrapper</span>
+<span id="L285"><span class="lineNum">     285</span>                 :             : #define KIT_SYSTEM_TRACE_ALLOCATE( type, varname, initval )</span>
+<span id="L286"><span class="lineNum">     286</span>                 :             : </span>
+<span id="L287"><span class="lineNum">     287</span>                 :             : #endif  // end USE_KIT_SYSTEM_TRACE || USE_KIT_SYSTEM_RESTRICTED_TRACE</span>
+<span id="L288"><span class="lineNum">     288</span>                 :             : </span>
+<span id="L289"><span class="lineNum">     289</span>                 :             : </span>
+<span id="L290"><span class="lineNum">     290</span>                 :             : //////////////////////////////////////////////////////////////////////////////</span>
+<span id="L291"><span class="lineNum">     291</span>                 :             : /** The default maximum number of actively enabled 'sections' supported.</span>
+<span id="L292"><span class="lineNum">     292</span>                 :             :  */</span>
+<span id="L293"><span class="lineNum">     293</span>                 :             : #ifndef OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS</span>
+<span id="L294"><span class="lineNum">     294</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS 8</span>
+<span id="L295"><span class="lineNum">     295</span>                 :             : #endif</span>
+<span id="L296"><span class="lineNum">     296</span>                 :             : </span>
+<span id="L297"><span class="lineNum">     297</span>                 :             : /** The default maximum size, in bytes, for a section name (not including</span>
+<span id="L298"><span class="lineNum">     298</span>                 :             :     the null terminator).</span>
+<span id="L299"><span class="lineNum">     299</span>                 :             :  */</span>
+<span id="L300"><span class="lineNum">     300</span>                 :             : #ifndef OPTION_KIT_SYSTEM_TRACE_MAX_SECTION_NAME_LEN</span>
+<span id="L301"><span class="lineNum">     301</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_MAX_SECTION_NAME_LEN 63</span>
+<span id="L302"><span class="lineNum">     302</span>                 :             : #endif</span>
+<span id="L303"><span class="lineNum">     303</span>                 :             : </span>
+<span id="L304"><span class="lineNum">     304</span>                 :             : /** The size, in bytes (without the null terminator), of trace engine's internal</span>
+<span id="L305"><span class="lineNum">     305</span>                 :             :     String use to construct a complete (info + user msg) trace message.</span>
+<span id="L306"><span class="lineNum">     306</span>                 :             :  */</span>
+<span id="L307"><span class="lineNum">     307</span>                 :             : #ifndef OPTION_KIT_SYSTEM_TRACE_MAX_BUFFER</span>
+<span id="L308"><span class="lineNum">     308</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_MAX_BUFFER 511</span>
+<span id="L309"><span class="lineNum">     309</span>                 :             : #endif</span>
+<span id="L310"><span class="lineNum">     310</span>                 :             : </span>
+<span id="L311"><span class="lineNum">     311</span>                 :             : </span>
+<span id="L312"><span class="lineNum">     312</span>                 :             : /** String literal that is the prefix for all trace messages</span>
+<span id="L313"><span class="lineNum">     313</span>                 :             :  */</span>
+<span id="L314"><span class="lineNum">     314</span>                 :             : #ifndef OPTION_KIT_SYSTEM_TRACE_PREFIX_STRING</span>
+<span id="L315"><span class="lineNum">     315</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_PREFIX_STRING &quot;&gt;&gt; &quot;</span>
+<span id="L316"><span class="lineNum">     316</span>                 :             : #endif</span>
+<span id="L317"><span class="lineNum">     317</span>                 :             : </span>
+<span id="L318"><span class="lineNum">     318</span>                 :             : </span>
+<span id="L319"><span class="lineNum">     319</span>                 :             : /** String literal that is the final suffix for all trace messages</span>
+<span id="L320"><span class="lineNum">     320</span>                 :             :  */</span>
+<span id="L321"><span class="lineNum">     321</span>                 :             : #ifndef OPTION_KIT_SYSTEM_TRACE_SUFFIX_STRING</span>
+<span id="L322"><span class="lineNum">     322</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_SUFFIX_STRING &quot;\n&quot;</span>
+<span id="L323"><span class="lineNum">     323</span>                 :             : #endif</span>
+<span id="L324"><span class="lineNum">     324</span>                 :             : </span>
+<span id="L325"><span class="lineNum">     325</span>                 :             : /** The compile time default setting for the info level</span>
+<span id="L326"><span class="lineNum">     326</span>                 :             :  */</span>
+<span id="L327"><span class="lineNum">     327</span>                 :             : #ifndef OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL</span>
+<span id="L328"><span class="lineNum">     328</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL (+Kit::System::TraceLevel::eBRIEF)</span>
+<span id="L329"><span class="lineNum">     329</span>                 :             : #endif</span>
+<span id="L330"><span class="lineNum">     330</span>                 :             : </span>
+<span id="L331"><span class="lineNum">     331</span>                 :             : /** The compile time default setting what enable/disable state the trace</span>
+<span id="L332"><span class="lineNum">     332</span>                 :             :     starts in</span>
+<span id="L333"><span class="lineNum">     333</span>                 :             :  */</span>
+<span id="L334"><span class="lineNum">     334</span>                 :             : #ifndef OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE</span>
+<span id="L335"><span class="lineNum">     335</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE true</span>
+<span id="L336"><span class="lineNum">     336</span>                 :             : #endif</span>
+<span id="L337"><span class="lineNum">     337</span>                 :             : </span>
+<span id="L338"><span class="lineNum">     338</span>                 :             : </span>
+<span id="L339"><span class="lineNum">     339</span>                 :             : ///</span>
+<span id="L340"><span class="lineNum">     340</span>                 :             : namespace Kit {</span>
+<span id="L341"><span class="lineNum">     341</span>                 :             : ///</span>
+<span id="L342"><span class="lineNum">     342</span>                 :             : namespace System {</span>
+<span id="L343"><span class="lineNum">     343</span>                 :             : </span>
+<span id="L344"><span class="lineNum">     344</span>                 :             : /** This enum is used to globally control the amount of 'Prologue' information</span>
+<span id="L345"><span class="lineNum">     345</span>                 :             :     that is prepended to the Trace log messages.  The specifics of what</span>
+<span id="L346"><span class="lineNum">     346</span>                 :             :     information is added is platform specific.</span>
+<span id="L347"><span class="lineNum">     347</span>                 :             : </span>
+<span id="L348"><span class="lineNum">     348</span>                 :             :     @param TraceLevel     Enum</span>
+<span id="L349"><span class="lineNum">     349</span>                 :             : </span>
+<span id="L350"><span class="lineNum">     350</span>                 :             :     @param eNONE             Turns off ALL prologue info</span>
+<span id="L351"><span class="lineNum">     351</span>                 :             :     @param eBRIEF            Default setting</span>
+<span id="L352"><span class="lineNum">     352</span>                 :             :     @param eINFO             Additional prologue info</span>
+<span id="L353"><span class="lineNum">     353</span>                 :             :     @param eVERBOSE          More prologue info</span>
+<span id="L354"><span class="lineNum">     354</span>                 :             :     @param eMAX              Maximum prologue info</span>
+<span id="L355"><span class="lineNum">     355</span>                 :             :  */</span>
+<span id="L356"><span class="lineNum">     356</span>                 :             : // clang-format off</span>
+<span id="L357"><span class="lineNum">     357</span>   [<span class="tlaGBC" title="Branch 0 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 529 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 2 times"> + </span>]:<span class="tlaGNC tlaBgGNC">         601 : BETTER_ENUM( TraceLevel, uint8_t,</span></span>
+<span id="L358"><span class="lineNum">     358</span>                 :             :              eNONE = 0,</span>
+<span id="L359"><span class="lineNum">     359</span>                 :             :              eBRIEF,</span>
+<span id="L360"><span class="lineNum">     360</span>                 :             :              eINFO,</span>
+<span id="L361"><span class="lineNum">     361</span>                 :             :              eVERBOSE,</span>
+<span id="L362"><span class="lineNum">     362</span>                 :             :              eMAX</span>
+<span id="L363"><span class="lineNum">     363</span>                 :             : );</span>
+<span id="L364"><span class="lineNum">     364</span>                 :             : // clang-format off</span>
+<span id="L365"><span class="lineNum">     365</span>                 :             : /// This concrete class provide a 'printf' tracing mechanism.</span>
+<span id="L366"><span class="lineNum">     366</span>                 :             : class Trace</span>
+<span id="L367"><span class="lineNum">     367</span>                 :             : {</span>
+<span id="L368"><span class="lineNum">     368</span>                 :             : public:</span>
+<span id="L369"><span class="lineNum">     369</span>                 :             :     /// Constructor</span>
+<span id="L370"><span class="lineNum">     370</span>                 :             :     Trace( const char* filename,</span>
+<span id="L371"><span class="lineNum">     371</span>                 :             :            int         linenum,</span>
+<span id="L372"><span class="lineNum">     372</span>                 :             :            const char* funcname,</span>
+<span id="L373"><span class="lineNum">     373</span>                 :             :            const char* section,</span>
+<span id="L374"><span class="lineNum">     374</span>                 :             :            const char* scope_name );</span>
+<span id="L375"><span class="lineNum">     375</span>                 :             : </span>
+<span id="L376"><span class="lineNum">     376</span>                 :             :     /// Destructor</span>
+<span id="L377"><span class="lineNum">     377</span>                 :             :     ~Trace();</span>
+<span id="L378"><span class="lineNum">     378</span>                 :             : </span>
+<span id="L379"><span class="lineNum">     379</span>                 :             : </span>
+<span id="L380"><span class="lineNum">     380</span>                 :             : public:</span>
+<span id="L381"><span class="lineNum">     381</span>                 :             :     /** This function is used to trace the 'location' for general purpose trace</span>
+<span id="L382"><span class="lineNum">     382</span>                 :             :         messages.</span>
+<span id="L383"><span class="lineNum">     383</span>                 :             : </span>
+<span id="L384"><span class="lineNum">     384</span>                 :             :         NOTE: NEVER call this method directly</span>
+<span id="L385"><span class="lineNum">     385</span>                 :             :      */</span>
+<span id="L386"><span class="lineNum">     386</span>                 :             :     static void traceLocation_( const char* section,</span>
+<span id="L387"><span class="lineNum">     387</span>                 :             :                                 const char* filename,</span>
+<span id="L388"><span class="lineNum">     388</span>                 :             :                                 int         linenum,</span>
+<span id="L389"><span class="lineNum">     389</span>                 :             :                                 const char* funcname );</span>
+<span id="L390"><span class="lineNum">     390</span>                 :             : </span>
+<span id="L391"><span class="lineNum">     391</span>                 :             :     /** This function is used to generate general purpose trace messages.</span>
+<span id="L392"><span class="lineNum">     392</span>                 :             : </span>
+<span id="L393"><span class="lineNum">     393</span>                 :             :         NOTE: NEVER call this method directly</span>
+<span id="L394"><span class="lineNum">     394</span>                 :             :      */</span>
+<span id="L395"><span class="lineNum">     395</span>                 :             :     KIT_SYSTEM_PRINTF_CHECKER( 1, 2 )</span>
+<span id="L396"><span class="lineNum">     396</span>                 :             :     static void traceUserMsg_( const char* format, ... );</span>
+<span id="L397"><span class="lineNum">     397</span>                 :             : </span>
+<span id="L398"><span class="lineNum">     398</span>                 :             : public:</span>
+<span id="L399"><span class="lineNum">     399</span>                 :             :     /** This method enables the output/logging of trace message at run-time.</span>
+<span id="L400"><span class="lineNum">     400</span>                 :             :         The default is start with tracing enabled.</span>
+<span id="L401"><span class="lineNum">     401</span>                 :             : </span>
+<span id="L402"><span class="lineNum">     402</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L403"><span class="lineNum">     403</span>                 :             :               macros.</span>
+<span id="L404"><span class="lineNum">     404</span>                 :             :      */</span>
+<span id="L405"><span class="lineNum">     405</span>                 :             :     static void enable_();</span>
+<span id="L406"><span class="lineNum">     406</span>                 :             : </span>
+<span id="L407"><span class="lineNum">     407</span>                 :             :     /** This method disables the output/logging of trace message at run-time.</span>
+<span id="L408"><span class="lineNum">     408</span>                 :             :         The default is start with tracing enabled.</span>
+<span id="L409"><span class="lineNum">     409</span>                 :             : </span>
+<span id="L410"><span class="lineNum">     410</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L411"><span class="lineNum">     411</span>                 :             :               macros.</span>
+<span id="L412"><span class="lineNum">     412</span>                 :             :      */</span>
+<span id="L413"><span class="lineNum">     413</span>                 :             :     static void disable_();</span>
+<span id="L414"><span class="lineNum">     414</span>                 :             : </span>
+<span id="L415"><span class="lineNum">     415</span>                 :             :     /** Returns true if tracing is enabled, i.e. enable_() has been called.,</span>
+<span id="L416"><span class="lineNum">     416</span>                 :             : </span>
+<span id="L417"><span class="lineNum">     417</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L418"><span class="lineNum">     418</span>                 :             :               macros.</span>
+<span id="L419"><span class="lineNum">     419</span>                 :             :      */</span>
+<span id="L420"><span class="lineNum">     420</span>                 :             :     static bool isEnabled_();</span>
+<span id="L421"><span class="lineNum">     421</span>                 :             : </span>
+<span id="L422"><span class="lineNum">     422</span>                 :             :     /** This method sets the information level for the trace messages. The method</span>
+<span id="L423"><span class="lineNum">     423</span>                 :             :         returns the previous level setting.</span>
+<span id="L424"><span class="lineNum">     424</span>                 :             : </span>
+<span id="L425"><span class="lineNum">     425</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L426"><span class="lineNum">     426</span>                 :             :               macros.</span>
+<span id="L427"><span class="lineNum">     427</span>                 :             :      */</span>
+<span id="L428"><span class="lineNum">     428</span>                 :             :     static TraceLevel setInfoLevel_( TraceLevel newLevel );</span>
+<span id="L429"><span class="lineNum">     429</span>                 :             : </span>
+<span id="L430"><span class="lineNum">     430</span>                 :             :     /** This method returns the current information level setting</span>
+<span id="L431"><span class="lineNum">     431</span>                 :             : </span>
+<span id="L432"><span class="lineNum">     432</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L433"><span class="lineNum">     433</span>                 :             :               macros.</span>
+<span id="L434"><span class="lineNum">     434</span>                 :             :      */</span>
+<span id="L435"><span class="lineNum">     435</span>                 :             :     static TraceLevel getInfoLevel_() noexcept;</span>
+<span id="L436"><span class="lineNum">     436</span>                 :             : </span>
+<span id="L437"><span class="lineNum">     437</span>                 :             :     /** This method enables the output/logging of trace message at run-time for</span>
+<span id="L438"><span class="lineNum">     438</span>                 :             :         the specified 'section'.  A 'section' name can NOT contain any white</span>
+<span id="L439"><span class="lineNum">     439</span>                 :             :         space.  The method returns true if the section was enabled; else false</span>
+<span id="L440"><span class="lineNum">     440</span>                 :             :         is return, i.e. exceeded max active enabled sections.</span>
+<span id="L441"><span class="lineNum">     441</span>                 :             : </span>
+<span id="L442"><span class="lineNum">     442</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L443"><span class="lineNum">     443</span>                 :             :               macros.</span>
+<span id="L444"><span class="lineNum">     444</span>                 :             :      */</span>
+<span id="L445"><span class="lineNum">     445</span>                 :             :     static bool enableSection_( const char* sectionToEnable );</span>
+<span id="L446"><span class="lineNum">     446</span>                 :             : </span>
+<span id="L447"><span class="lineNum">     447</span>                 :             :     /** This method disables the output/logging of trace message at run-time for</span>
+<span id="L448"><span class="lineNum">     448</span>                 :             :         the specified 'section'.  Setting  'sectionToDisable' to 0 will disable</span>
+<span id="L449"><span class="lineNum">     449</span>                 :             :         all sections.</span>
+<span id="L450"><span class="lineNum">     450</span>                 :             : </span>
+<span id="L451"><span class="lineNum">     451</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L452"><span class="lineNum">     452</span>                 :             :               macros.</span>
+<span id="L453"><span class="lineNum">     453</span>                 :             :      */</span>
+<span id="L454"><span class="lineNum">     454</span>                 :             :     static void disableSection_( const char* sectionToDisable );</span>
+<span id="L455"><span class="lineNum">     455</span>                 :             : </span>
+<span id="L456"><span class="lineNum">     456</span>                 :             :     /** Returns true if tracing is enabled AND the specified 'section' has been</span>
+<span id="L457"><span class="lineNum">     457</span>                 :             :         enabled.</span>
+<span id="L458"><span class="lineNum">     458</span>                 :             : </span>
+<span id="L459"><span class="lineNum">     459</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L460"><span class="lineNum">     460</span>                 :             :               macros.</span>
+<span id="L461"><span class="lineNum">     461</span>                 :             :      */</span>
+<span id="L462"><span class="lineNum">     462</span>                 :             :     static bool isSectionEnabled_( const char* section );</span>
+<span id="L463"><span class="lineNum">     463</span>                 :             : </span>
+<span id="L464"><span class="lineNum">     464</span>                 :             :     /** This method returns the number of enabled 'sections' and returns the</span>
+<span id="L465"><span class="lineNum">     465</span>                 :             :         actual section name(s) via the IString 'dst'.  It is the caller</span>
+<span id="L466"><span class="lineNum">     466</span>                 :             :         responsibility to ensure that 'dst' is large enough to hold all of the</span>
+<span id="L467"><span class="lineNum">     467</span>                 :             :         enable sections.  If 'dst' is to short, the results will be truncated.</span>
+<span id="L468"><span class="lineNum">     468</span>                 :             : </span>
+<span id="L469"><span class="lineNum">     469</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L470"><span class="lineNum">     470</span>                 :             :               macros.</span>
+<span id="L471"><span class="lineNum">     471</span>                 :             :      */</span>
+<span id="L472"><span class="lineNum">     472</span>                 :             :     static unsigned getSections_( Kit::Text::IString&amp; dst );</span>
+<span id="L473"><span class="lineNum">     473</span>                 :             : </span>
+<span id="L474"><span class="lineNum">     474</span>                 :             :     /** This method applies a filter by thread name when generating output, i.e.</span>
+<span id="L475"><span class="lineNum">     475</span>                 :             :         for a message to be output, trace must be enabled, the message's section</span>
+<span id="L476"><span class="lineNum">     476</span>                 :             :         enabled, and must be running in the one of the threads specified</span>
+<span id="L477"><span class="lineNum">     477</span>                 :             :         by the thread filter.</span>
+<span id="L478"><span class="lineNum">     478</span>                 :             : </span>
+<span id="L479"><span class="lineNum">     479</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L480"><span class="lineNum">     480</span>                 :             :               macros.</span>
+<span id="L481"><span class="lineNum">     481</span>                 :             :      */</span>
+<span id="L482"><span class="lineNum">     482</span>                 :             :     static void setThreadFilter_( const char* threadName1,</span>
+<span id="L483"><span class="lineNum">     483</span>                 :             :                                   const char* threadName2 = nullptr,</span>
+<span id="L484"><span class="lineNum">     484</span>                 :             :                                   const char* threadName3 = nullptr,</span>
+<span id="L485"><span class="lineNum">     485</span>                 :             :                                   const char* threadName4 = nullptr );</span>
+<span id="L486"><span class="lineNum">     486</span>                 :             : </span>
+<span id="L487"><span class="lineNum">     487</span>                 :             :     /** This method returns the number of enabled 'thread filters' and returns</span>
+<span id="L488"><span class="lineNum">     488</span>                 :             :         the actual thread name(s) via the IString 'dst'.  It is the caller</span>
+<span id="L489"><span class="lineNum">     489</span>                 :             :         responsibility to ensure that 'dst' is large enough to hold all of the</span>
+<span id="L490"><span class="lineNum">     490</span>                 :             :         enable thread filters.  If 'dst' is to short, the results will be</span>
+<span id="L491"><span class="lineNum">     491</span>                 :             :         truncated.</span>
+<span id="L492"><span class="lineNum">     492</span>                 :             : </span>
+<span id="L493"><span class="lineNum">     493</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L494"><span class="lineNum">     494</span>                 :             :               macros.</span>
+<span id="L495"><span class="lineNum">     495</span>                 :             :      */</span>
+<span id="L496"><span class="lineNum">     496</span>                 :             :     static unsigned getThreadFilters_( Kit::Text::IString&amp; dst );</span>
+<span id="L497"><span class="lineNum">     497</span>                 :             : </span>
+<span id="L498"><span class="lineNum">     498</span>                 :             :     /** This method removes  that thread filter (if there is one present).  If</span>
+<span id="L499"><span class="lineNum">     499</span>                 :             :         no filter has been applied when this method is called, then this</span>
+<span id="L500"><span class="lineNum">     500</span>                 :             :         method does nothing.</span>
+<span id="L501"><span class="lineNum">     501</span>                 :             : </span>
+<span id="L502"><span class="lineNum">     502</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L503"><span class="lineNum">     503</span>                 :             :               macros.</span>
+<span id="L504"><span class="lineNum">     504</span>                 :             :      */</span>
+<span id="L505"><span class="lineNum">     505</span>                 :             :     static void clearThreadFilter_();</span>
+<span id="L506"><span class="lineNum">     506</span>                 :             : </span>
+<span id="L507"><span class="lineNum">     507</span>                 :             :     /** This method returns true if the thread filter has been set and the</span>
+<span id="L508"><span class="lineNum">     508</span>                 :             :         current thread's name 'passes' the thread filter check, i.e. the specified</span>
+<span id="L509"><span class="lineNum">     509</span>                 :             :         name match one of the names in the filter list.</span>
+<span id="L510"><span class="lineNum">     510</span>                 :             : </span>
+<span id="L511"><span class="lineNum">     511</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L512"><span class="lineNum">     512</span>                 :             :               macros.</span>
+<span id="L513"><span class="lineNum">     513</span>                 :             :      */</span>
+<span id="L514"><span class="lineNum">     514</span>                 :             :     static bool passedThreadFilter_();</span>
+<span id="L515"><span class="lineNum">     515</span>                 :             : </span>
+<span id="L516"><span class="lineNum">     516</span>                 :             : </span>
+<span id="L517"><span class="lineNum">     517</span>                 :             : public:</span>
+<span id="L518"><span class="lineNum">     518</span>                 :             :     /** This method is used to redirect the trace output to the provided Output</span>
+<span id="L519"><span class="lineNum">     519</span>                 :             :         stream. There is no guaranty on what happens to trace message(s) during</span>
+<span id="L520"><span class="lineNum">     520</span>                 :             :         the transition to the new output/media destination.</span>
+<span id="L521"><span class="lineNum">     521</span>                 :             : </span>
+<span id="L522"><span class="lineNum">     522</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L523"><span class="lineNum">     523</span>                 :             :               macros.</span>
+<span id="L524"><span class="lineNum">     524</span>                 :             :      */</span>
+<span id="L525"><span class="lineNum">     525</span>                 :             :     static void redirect_( Kit::Io::IOutput&amp; newMedia ) noexcept;</span>
+<span id="L526"><span class="lineNum">     526</span>                 :             : </span>
+<span id="L527"><span class="lineNum">     527</span>                 :             :     /** This method is used to revert the trace output to its default output</span>
+<span id="L528"><span class="lineNum">     528</span>                 :             :         destination/stream/media. There is no guaranty on what happens to trace</span>
+<span id="L529"><span class="lineNum">     529</span>                 :             :         message(s) during the transition to the default output/media</span>
+<span id="L530"><span class="lineNum">     530</span>                 :             :         destination.</span>
+<span id="L531"><span class="lineNum">     531</span>                 :             : </span>
+<span id="L532"><span class="lineNum">     532</span>                 :             :         NOTE: NEVER call this method directly --&gt;use the KIT_SYSTEM_TRACE_xxx()</span>
+<span id="L533"><span class="lineNum">     533</span>                 :             :               macros.</span>
+<span id="L534"><span class="lineNum">     534</span>                 :             :      */</span>
+<span id="L535"><span class="lineNum">     535</span>                 :             :     static void revert_() noexcept;</span>
+<span id="L536"><span class="lineNum">     536</span>                 :             : </span>
+<span id="L537"><span class="lineNum">     537</span>                 :             : public:</span>
+<span id="L538"><span class="lineNum">     538</span>                 :             :     /** This COMPONENT Scoped method provides the Output stream to the Trace</span>
+<span id="L539"><span class="lineNum">     539</span>                 :             :         Engine.  The Output stream instance MUST be created statically. However,</span>
+<span id="L540"><span class="lineNum">     540</span>                 :             :         the Output stream does not necessarily need to fully 'operational' when</span>
+<span id="L541"><span class="lineNum">     541</span>                 :             :         statically constructed - it just need to be  &quot;operationally&quot; by the time</span>
+<span id="L542"><span class="lineNum">     542</span>                 :             :         Kit::System::Api::initialize() is called.</span>
+<span id="L543"><span class="lineNum">     543</span>                 :             : </span>
+<span id="L544"><span class="lineNum">     544</span>                 :             :         NOTE: The Application is RESPONSIBLE for implementing this method!</span>
+<span id="L545"><span class="lineNum">     545</span>                 :             :      */</span>
+<span id="L546"><span class="lineNum">     546</span>                 :             :     static Kit::Io::IOutput* getDefaultOutputStream_() noexcept;</span>
+<span id="L547"><span class="lineNum">     547</span>                 :             : </span>
+<span id="L548"><span class="lineNum">     548</span>                 :             : </span>
+<span id="L549"><span class="lineNum">     549</span>                 :             : protected:</span>
+<span id="L550"><span class="lineNum">     550</span>                 :             :     /// Caches trace info for exit message</span>
+<span id="L551"><span class="lineNum">     551</span>                 :             :     const char* m_filename;</span>
+<span id="L552"><span class="lineNum">     552</span>                 :             : </span>
+<span id="L553"><span class="lineNum">     553</span>                 :             :     /// Caches trace info for exit message</span>
+<span id="L554"><span class="lineNum">     554</span>                 :             :     int m_linenum;</span>
+<span id="L555"><span class="lineNum">     555</span>                 :             : </span>
+<span id="L556"><span class="lineNum">     556</span>                 :             :     /// Caches trace info for exit message</span>
+<span id="L557"><span class="lineNum">     557</span>                 :             :     const char* m_funcname;</span>
+<span id="L558"><span class="lineNum">     558</span>                 :             : </span>
+<span id="L559"><span class="lineNum">     559</span>                 :             :     /// Caches trace info for exit message</span>
+<span id="L560"><span class="lineNum">     560</span>                 :             :     const char* m_section;</span>
+<span id="L561"><span class="lineNum">     561</span>                 :             : </span>
+<span id="L562"><span class="lineNum">     562</span>                 :             :     /// Caches trace info for exit message</span>
+<span id="L563"><span class="lineNum">     563</span>                 :             :     const char* m_scope;</span>
+<span id="L564"><span class="lineNum">     564</span>                 :             : };</span>
+<span id="L565"><span class="lineNum">     565</span>                 :             : </span>
+<span id="L566"><span class="lineNum">     566</span>                 :             : }</span>
+<span id="L567"><span class="lineNum">     567</span>                 :             : }  // end namespaces</span>
+<span id="L568"><span class="lineNum">     568</span>                 :             : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
