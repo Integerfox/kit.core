@@ -40,10 +40,10 @@ TEST_CASE( "StringTo" )
         result = StringTo::signedInt<int16_t>( value, " -1234(" );
         REQUIRE( result == false );
         REQUIRE( value == 123 );  // Conversion failed -->value should not be changed
-        result = StringTo::signedInt<int16_t>( value, "12.3", ":,." );
+        result = StringTo::signedInt<int16_t>( value, "12.3", 0, ":,." );
         REQUIRE( result == true );
         REQUIRE( value == 12 );
-        result = StringTo::signedInt<int16_t>( value, strPtr, ".,", &endPtr );
+        result = StringTo::signedInt<int16_t>( value, strPtr, 0, ".,", &endPtr );
         REQUIRE( result == true );
         REQUIRE( value == 12 );
         REQUIRE( endPtr == strPtr + 2 );
