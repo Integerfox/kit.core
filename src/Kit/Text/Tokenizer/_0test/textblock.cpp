@@ -36,7 +36,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = " arg1 ,arg2 , arg 3,, \"arg,5\\\\\\\"\" ";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 5 );
@@ -68,7 +68,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = "  ";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 0 );
@@ -83,7 +83,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = "\"\"";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 1 );
@@ -100,7 +100,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = "a,\"\"";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 2 );
@@ -120,7 +120,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = "  ; ";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 1 );
@@ -137,7 +137,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = " , , ";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 3 );
@@ -160,7 +160,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = "a,";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 2 );
@@ -180,7 +180,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = "  a  1  ,  a2,  a3,a  4 ,  a  5";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 5 );
@@ -210,7 +210,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = " ; ";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 1 );
@@ -227,7 +227,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = "a , ; ";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ','  );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 2 );
@@ -247,7 +247,7 @@ TEST_CASE( "textblock" )
         Kit::Text::FString<64> token;
         Kit::Text::FString<64> rawString = "a,b;bob's your uncle";
         KIT_SYSTEM_TRACE_MSG( SECT_, "original=[%s]", rawString.getString() );
-        TextBlock parser( rawString.getBuffer( dummy ) );
+        TextBlock parser( rawString.getBuffer( dummy ), ',' );
 
         REQUIRE( parser.isValidTokens() );
         REQUIRE( parser.numParameters() == 2 );

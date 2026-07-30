@@ -81,6 +81,13 @@ protected:
      */
     virtual uint8_t decodeEscapedByte( uint8_t escapedByte ) noexcept;
 
+    /// Internal helper that does the actual scanning
+    virtual bool scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,
+                       uint8_t*            frameBuffer,
+                       Kit::Type::SSize_T& frameSize,
+                       bool&               isEof,
+                       bool                blockIfUnavailable ) noexcept;
+
 protected:
     /// Helper method to initialize frame processing
     virtual void initializeScan() noexcept;

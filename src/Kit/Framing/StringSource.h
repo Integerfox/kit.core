@@ -54,13 +54,22 @@ public:
     /// See Kit::Framing::ISource
     bool read( void*               dstBuffer,
                Kit::Type::SSize_T  numBytes,
-               Kit::Type::SSize_T& bytesRead ) noexcept override
+               Kit::Type::SSize_T& bytesRead,
+               bool                blockIfUnavailable = false ) noexcept override
     {
-        // Validate parameters AND trap end-of-string has already been reached.
-        if ( dstBuffer == nullptr || m_srcPtr == nullptr || m_currentIdx < 0 || numBytes < 0 )
+        // Validate parameters (NOTE: does not support blocking reads beyond the end of the string)
+        if ( dstBuffer == nullptr || m_srcPtr == nullptr || numBytes < 0 ||
+             ( blockIfUnavailable && m_currentIdx < 0 ) )
         {
             bytesRead = 0;
             return false;
+        }
+
+        // Trap end-of-string has already been reached.
+        if ( m_currentIdx < 0 )
+        {
+            bytesRead = 0;
+            return true;
         }
 
         // Determine how many bytes can been read

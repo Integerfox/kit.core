@@ -83,6 +83,9 @@ Thread::Thread( Kit::System::IRunnable& dummyRunnable )
     // Set my Tls index/key 'created' status to good
     keyCreated_ = true;
 
+    // Set the native thread handle to the current thread
+    m_nativeThreadHdl = pthread_self();
+
     // Store a reference to the Kit thread object for the native thread
     pthread_setspecific( tsdKey_, this );
 

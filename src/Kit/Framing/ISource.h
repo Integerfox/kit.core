@@ -29,12 +29,18 @@ class ISource
 public:
     /** Attempts to read the specified number of bytes from the "input source"
         into the supplied buffer.  The actual number of bytes read is returned via
-        'bytesRead'. Returns true if successful, false if no more data is currently
-        available or an error was encountered.
+        'bytesRead'. Returns true if successful, false if an error was encountered.
+
+        NOTE: The 'blockIfUnavailable' argument controls the behavior of the read
+              operation when no data is currently available.  When set to true, 
+              the read operation will block until at least one byte is available.
+              When set to false, the read operation will return immediately with
+              bytesRead set to zero.
      */
     virtual bool read( void*               dstBuffer,
                        Kit::Type::SSize_T  numBytes,
-                       Kit::Type::SSize_T& bytesRead ) noexcept = 0;
+                       Kit::Type::SSize_T& bytesRead,
+                       bool                blockIfUnavailable = false ) noexcept = 0;
 
 public:
     /// Virtual Destructor

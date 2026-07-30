@@ -59,7 +59,7 @@ public:
     /// See Kit::Framing::IDestination
     bool appendOutput( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept override
     {
-        if ( srcBuffer == nullptr || m_dstPtr == nullptr )
+        if ( srcBuffer == nullptr || m_dstPtr == nullptr || numBytes < 0 )
         {
             return false;
         }

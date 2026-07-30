@@ -22,11 +22,11 @@ namespace System {
 
 typedef Kit::Text::FString<OPTION_KIT_SYSTEM_TRACE_MAX_SECTION_NAME_LEN> Section_T;
 
-static bool               threadFilterEnabled_ = false;
-static bool               enabled_             = OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE;
-static Trace::InfoLevel_T infoLevel_           = OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL;
-static Section_T          activeSections_[OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS];
-static const char*        threadFilters_[NUM_THREAD_FILTERS_];
+static bool        threadFilterEnabled_ = false;
+static bool        enabled_             = OPTION_KIT_SYSTEM_TRACE_DEFAULT_ENABLE_STATE;
+static TraceLevel  infoLevel_           = OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL;
+static Section_T   activeSections_[OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS];
+static const char* threadFilters_[NUM_THREAD_FILTERS_];
 
 static Kit::Text::FString<OPTION_KIT_SYSTEM_TRACE_MAX_BUFFER> buffer_;
 
@@ -68,7 +68,7 @@ void Trace::traceLocation_( const char* section, const char* filename, int linen
 {
     // Get the current tracing level parameter
     PrivateLocks::tracing().lock();
-    Trace::InfoLevel_T infoLevel = infoLevel_;
+    TraceLevel infoLevel = infoLevel_;
     PrivateLocks::tracing().unlock();
 
     // Serialize the output
@@ -122,21 +122,20 @@ bool Trace::isEnabled_()
 }
 
 
-Trace::InfoLevel_T Trace::setInfoLevel_( Trace::InfoLevel_T newLevel )
+TraceLevel Trace::setInfoLevel_( TraceLevel newLevel )
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
-    InfoLevel_T      previous = infoLevel_;
+    TraceLevel       previous = infoLevel_;
     infoLevel_                = newLevel;
     return previous;
 }
 
-Trace::InfoLevel_T Trace::getInfoLevel_() noexcept
+TraceLevel Trace::getInfoLevel_() noexcept
 {
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
-    InfoLevel_T      current = infoLevel_;
+    TraceLevel       current = infoLevel_;
     return current;
 }
-
 
 bool Trace::enableSection_( const char* sectionToEnable )
 {
@@ -159,7 +158,6 @@ bool Trace::enableSection_( const char* sectionToEnable )
 
     return result;
 }
-
 
 void Trace::disableSection_( const char* sectionToDisable )
 {
@@ -189,7 +187,6 @@ void Trace::disableSection_( const char* sectionToDisable )
         }
     }
 }
-
 
 bool Trace::isSectionEnabled_( const char* section )
 {

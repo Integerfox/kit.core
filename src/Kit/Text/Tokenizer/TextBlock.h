@@ -67,7 +67,7 @@ public:
         NOTE: ALL OF THE PARSING OCCURS IN THIS METHOD.
      */
     TextBlock( char* string,
-               char  delimiter  = ',',
+               char  delimiter  = ' ',
                char  terminator = ';',
                char  quote      = '"',
                char  escape     = '\\' );

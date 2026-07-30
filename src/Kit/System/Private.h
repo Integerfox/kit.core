@@ -59,7 +59,7 @@ public:
     /** This method append the 'info' information to the provide String for the
         specified infoLevel.
      */
-    static void appendInfo( Kit::Text::IString& dst, Trace::InfoLevel_T info, const char* section, const char* filename, int linenum, const char* funcname ) noexcept;
+    static void appendInfo( Kit::Text::IString& dst, TraceLevel info, const char* section, const char* filename, int linenum, const char* funcname ) noexcept;
 
     /** This method output the string to the logging destination/stream/media
      */

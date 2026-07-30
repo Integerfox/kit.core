@@ -31,6 +31,7 @@ TEST_CASE( "StreamDestination" )
     char                                  buffer[10];
     Kit::Type::SSize_T                    bytesRead;
 
+    REQUIRE( uut.getStream() == &dst );
     REQUIRE( uut.startOutput() == true );
     REQUIRE( uut.appendOutput( "Hello", 5 ) == true );
     REQUIRE( dst.available() == true );
@@ -54,12 +55,14 @@ TEST_CASE( "StreamDestination" )
     REQUIRE( uut.endOutput() == true );
 
     StreamDestination uut2;
+    REQUIRE( uut2.getStream() == nullptr );
     REQUIRE( uut2.startOutput() == false );
     REQUIRE( uut2.appendOutput( "Kitty!", 6 ) == false );
     REQUIRE( uut2.endOutput() == false );
 
     StreamDestination uut3;
     uut3.setOutput( dst );
+    REQUIRE( uut3.getStream() == &dst );
     REQUIRE( uut3.startOutput() == true );
     REQUIRE( uut3.appendOutput( "Kitty!", 6 ) == false );
     REQUIRE( uut3.endOutput() == true );
