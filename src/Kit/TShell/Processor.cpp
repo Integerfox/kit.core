@@ -30,7 +30,7 @@ bool Processor::start( Kit::Io::IInput&  infd,
 
     // Output the greeting message and initial prompt
     outputMessage( OPTION_KIT_TSHELL_PROCESSOR_GREETING );
-    outputMessage( OPTION_KIT_TSHELL_PROCESSOR_PROMPT);
+    outputMessage( OPTION_KIT_TSHELL_PROCESSOR_PROMPT );
 
     // Run until I am requested to stop (or run once if using non-blocking semantics)
     do
@@ -88,7 +88,8 @@ ICommand* Processor::findCommand( const char* verb, unsigned verbLength ) noexce
     return nullptr;
 }
 
-bool Processor::writeFrame( const char* text, Kit::Type::SSize_T maxBytes ) noexcept
+bool Processor::writeFrame( const char*        text,
+                            Kit::Type::SSize_T maxBytes ) noexcept
 {
     // Lock the output stream to avoid interleaving of output frames with console trace/logging
     Kit::System::Mutex::ScopeLock criticalSection( m_outLock );
@@ -101,6 +102,19 @@ bool Processor::writeFrame( const char* text, Kit::Type::SSize_T maxBytes ) noex
     return io;
 }
 
+bool Processor::writeFrameWithSpecialChars( const char*        text,
+                                            Kit::Type::SSize_T maxBytes ) noexcept
+{
+    // Lock the output stream to avoid interleaving of output frames with console trace/logging
+    Kit::System::Mutex::ScopeLock criticalSection( m_outLock );
+
+    // Start/end the frame and output the text with special characters
+    bool io  = true;
+    io      &= m_framer.startFrame();
+    io      &= m_framer.oobWrite( text, maxBytes );
+    io      &= m_framer.endFrame();
+    return io;
+}
 
 bool Processor::oobRead( void*               dstBuffer,
                          Kit::Type::SSize_T  numBytes,
@@ -237,7 +251,7 @@ void Processor::outputMessage( const char* textString ) noexcept
     {
         // Lock the output stream to avoid interleaving of output frames with console trace/logging
         Kit::System::Mutex::ScopeLock criticalSection( m_outLock );
-        auto outfd = m_streamDestination.getStream();
+        auto                          outfd = m_streamDestination.getStream();
         if ( outfd != nullptr )
         {
             outfd->write( textString );
@@ -259,7 +273,7 @@ ISecurity& Processor::getSecurity() noexcept
 Kit::Io::IOutput* Processor::getOutputStream() noexcept
 {
     return m_streamDestination.getStream();
-}       
+}
 
 void Processor::requestTShellExit() noexcept
 {
@@ -280,7 +294,6 @@ Kit::Text::IString& Processor::getWorkBuffer() noexcept
 {
     return m_workBuffer;
 }
-
 
 
 }  // end namespace

@@ -29,7 +29,7 @@ namespace Mp {
         \code
 
         { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
-          val:"<stringvalue>"
+          val:{maxLen:nn,text:"<stringvalue>"}
         }
 
         \endcode
@@ -37,7 +37,7 @@ namespace Mp {
     The "val" format for the fromJSON() format is:
         \code
 
-        val:"<stringvalue>"
+        val:{text:"<stringvalue>"}
 
         \endcode
     NOTE: All methods in this class ARE thread Safe unless explicitly

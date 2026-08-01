@@ -77,6 +77,16 @@ bool EncoderWriter::output( const void* srcBuffer, Kit::Type::SSize_T numBytes )
     return true;
 }
 
+bool EncoderWriter::oobWrite( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept
+{
+    if ( srcBuffer == nullptr || numBytes < 0 )
+    {
+        return false;  // Source buffer is null
+    }
+
+    return m_dst.appendOutput( srcBuffer, numBytes );
+}
+
 bool EncoderWriter::endFrame( void ) noexcept
 {
     // Frame has not been started

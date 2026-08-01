@@ -1,29 +1,34 @@
 echo - "*** TEST: help"
 help
-echo - "*** TEST: help *"
-help *
-echo - "*** TEST: help bob"
-help bob
-echo - "*** TEST: help echo"
-help echo
-echo - "*** TEST: help bye"
-help bye
-echo - "*** TEST: help help"
-help help
-echo - "*** TEST: help wait"
-help wait
-echo - "*** TEST: trace"
-trace
-trace section on bob
-wait 100
-trace section off bob
-trace threadfilters TEST
-echo - "*** TEST: Restart TShell"
-bob restart 1000
-bye tshell
-echo - "*** TEST: Help after restart
-help
-wait 1000
+echo - "*** TEST: help dmr"
+help dmr
+echo - "*** TEST: help dmw"
+help dmr
+dmr
+dmr - 1
+dmr - nt 
+dmt - notfound
+dmr int1
+dmr int2
+dmr bob
+dmw {name:"int1",val:"0x32"}
+dmr int1
+dmw {name:"int2",val:32}
+dmr int2
+dmr str1
+dmr str2
+dmw {name:"str1",val:{text:"BOB"}}
+dmw {name:"str2",val:{text:"Bob's your uncle!"}}
+dmr str1
+dmr str2
+dmw str2
+dmr str2
+dmw {name:"str2",valid:false}
+dmr str2
+dmw {name:int1:val:1}
+dmw {name:"doesNotExist",valid:false}
+dmw str2 2ndArg
+dmw doesNotExist
+dmr 1 2 3
 echo "LAST CHECKED LINE"
-threads
 bye

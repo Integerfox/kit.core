@@ -357,5 +357,39 @@ TEST_CASE( "Processor" )
         REQUIRE( strncmp( cmd.m_oobRaw, "1234", 4 ) == 0 );
         drainOutput( outFd );
     }
+
+    SECTION( "writeFrameWithSpecialChars" )
+    {
+        Kit::Container::OrderedList<ICommand> commands;
+
+        Kit::Io::Ram::InputOutputAllocate<256> inFd;
+        Kit::Io::Ram::InputOutputAllocate<512> outFd;
+        Kit::Framing::StreamSource             src;
+        Kit::Framing::StreamDestination        dst;
+        NoSecurity                             security;
+        Kit::System::Mutex                     lock;
+        Processor                              uut( commands, src, dst, security, lock );
+
+        REQUIRE( uut.start( inFd, outFd, false ) == true );
+        drainOutput( outFd );  // Remove greeting/prompt
+
+        const char* payload = "A\nB";
+        REQUIRE( uut.writeFrame( payload, 3 ) == true );
+        REQUIRE( uut.writeFrameWithSpecialChars( payload, 3 ) == true );
+
+        std::string output = drainOutput( outFd );
+        std::string expected;
+        expected.push_back( 'A' );
+        expected.push_back( '\0' );
+        expected.push_back( '\n' );
+        expected.push_back( 'B' );
+        expected.push_back( '\n' );
+        expected.push_back( 'A' );
+        expected.push_back( '\n' );
+        expected.push_back( 'B' );
+        expected.push_back( '\n' );
+
+        REQUIRE( output == expected );
+    }
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

@@ -74,9 +74,10 @@ Kit::TShell::Result_T Read::execute( Kit::TShell::IContext& context, char* cmdSt
             return Kit::TShell::Result_T::CMD_ERR_CMD_FAILED;
         }
 
-        // Output the JSON object
-        return context.writeFrame( outtext ) ? Kit::TShell::Result_T::CMD_SUCCESS : Kit::TShell::Result_T::CMD_ERR_IO;
+        // Output the JSON object: NOTE: The JSON object contains newlines -->use 'special' write frame method
+        return context.writeFrameWithSpecialChars( outtext ) ? Kit::TShell::Result_T::CMD_SUCCESS : Kit::TShell::Result_T::CMD_ERR_IO;
     }
+
     // If I get here the command syntax/arguments are bad
     return Kit::TShell::Result_T::CMD_ERR_BAD_SYNTAX;
 }

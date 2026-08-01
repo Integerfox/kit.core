@@ -42,17 +42,40 @@ public:
 
         NOTE: An ENTIRE frame must be written with a single call to this method
               to avoid interleaving of output frames with console trace/logging.
-    */
+
+        NOTE: When 'containsSpecialChars' is true, the encoding of the 'text'
+              is bypassed.  While not desirable this allows the 'text' argument
+              to contain special characters that would otherwise be escaped, e.g.
+              the newline character.
+     */
     inline bool writeFrame( const char* text ) noexcept
     {
         return writeFrame( text, strlen( text ) );
     }
 
+
     /** Same as writeFrame(), but only outputs (at most) 'N' bytes as the content
         of the frame
     */
-    virtual bool writeFrame( const char* text, Kit::Type::SSize_T maxBytes ) noexcept = 0;
+    virtual bool writeFrame( const char*        text,
+                             Kit::Type::SSize_T maxBytes ) noexcept = 0;
 
+public:
+    /** Same as writeFrame(), but the the encoding of the 'text'
+          is bypassed.  While not desirable this allows the 'text' argument
+          to contain special characters that would otherwise be escaped, e.g.
+          the newline character.
+    */
+    inline bool writeFrameWithSpecialChars( const char* text ) noexcept
+    {
+        return writeFrameWithSpecialChars( text, strlen( text ) );
+    }
+
+    /** Same as writeFrameWithSpecialChars(), but only outputs (at most) 'N' bytes
+        as the content of the frame
+    */
+    virtual bool writeFrameWithSpecialChars( const char*        text,
+                                             Kit::Type::SSize_T maxBytes ) noexcept = 0;
 public:
     /** This method returns a working buffer for a command to format its
         output prior to 'writing the frame'.  The buffer is only 'valid' for
@@ -95,7 +118,7 @@ public:
 
 public:
     /** Returns a pointer to the Processor's output stream.  If the TShell is
-        has not been started, then nullptr is returned. 
+        has not been started, then nullptr is returned.
      */
     virtual Kit::Io::IOutput* getOutputStream() noexcept = 0;
 

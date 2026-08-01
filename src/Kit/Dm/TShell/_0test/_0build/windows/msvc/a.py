@@ -13,7 +13,7 @@ import subprocess
 #------------------------------------------------------------------------------
 def run_test( subdir ):
     utils.push_dir( subdir )
-    basesrc = os.path.join( my_globals.NQBP_PKG_ROOT(), 'src', 'Kit', 'TShell', 'Command', '_0test' )
+    basesrc = os.path.join( my_globals.NQBP_PKG_ROOT(), 'src', 'Kit', 'Dm', 'TShell', '_0test' )
     src     = os.path.join( basesrc, 'testinput.txt' )
     golden  = os.path.join( basesrc, 'expectedoutput.txt' )
     shutil.copy( src, '.' ); 
