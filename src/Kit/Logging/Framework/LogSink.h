@@ -1,5 +1,5 @@
-#ifndef Cpl_Logging_LogSink_h_
-#define Cpl_Logging_LogSink_h_
+#ifndef KIT_LOGGING_FRAMEWORK_LOGSINK_H
+#define KIT_LOGGING_FRAMEWORK_LOGSINK_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

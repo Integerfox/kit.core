@@ -10,7 +10,6 @@
 
 #include "Read.h"
 #include "Kit/Dm/IModelPoint.h"
-#include "Kit/TShell/ICommand.h"
 #include "Kit/Text/Tokenizer/TextBlock.h"
 #include <string.h>
 

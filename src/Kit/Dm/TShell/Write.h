@@ -10,10 +10,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "kit_config.h"
 #include "Kit/TShell/Command/Base.h"
 #include "Kit/Dm/IModelDatabase.h"
-#include "Kit/Container/SList.h"
 
 ///
 namespace Kit {

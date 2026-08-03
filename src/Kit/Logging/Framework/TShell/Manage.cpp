@@ -1,3 +1,4 @@
+#if 0
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,6 +11,7 @@
 
 #include "Write.h"
 #include "Kit/Dm/IModelPoint.h"
+#include "Kit/TShell/ICommand.h"
 #include "Kit/Text/Strip.h"
 #include "Kit/Text/Tokenizer/TextBlock.h"
 
@@ -65,3 +67,4 @@ Kit::TShell::Result_T Write::execute( Kit::TShell::IContext& context, char* cmdS
 }
 }
 //------------------------------------------------------------------------------
+#endif

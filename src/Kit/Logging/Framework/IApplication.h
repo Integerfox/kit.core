@@ -34,6 +34,7 @@ public:
 
     /// Null/Invalid Classification ID Text
     static constexpr const char* NULL_CLASSIFICATION_ID_TEXT = "?";
+    
 public:
     /** This method returns true if specific Classification ID is supported by
         the application
