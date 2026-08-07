@@ -1,5 +1,5 @@
-#ifndef KIT_DM_TSHELL_WROTE_H
-#define KIT_DM_TSHELL_WROTE_H
+#ifndef KIT_LOGGING_FRAMEWORK_TSHELL_MANAGE_H
+#define KIT_LOGGING_FRAMEWORK_TSHELL_MANAGE_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,54 +10,50 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "kit_config.h"
 #include "Kit/TShell/Command/Base.h"
-#include "Kit/Dm/IModelDatabase.h"
-#include "Kit/Container/SList.h"
+#include "Kit/Persistence/Record/Journal/IReset.h"
+#include "Kit/Logging/Framework/IApplication.h"
 
 ///
 namespace Kit {
 ///
-namespace Dm {
+namespace Logging {
+///
+namespace Framework {
 ///
 namespace TShell {
 
 
-/** This class implements a TShell command for Write operations on the Data
-    Model. MANY instances of this command can be created, i.e. one instance per
-    Data Model Database instance.  Each instance must have a different 'verb'.
-    The default verb is 'dmw'.
+/** This class implements a TShell command for managing log entries stored in persistent
+    storage.
  */
-class Write : public Kit::TShell::Command::Base
+class Manage : public Kit::TShell::Command::Base
 {
 public:
     /// Default command verb
-    static constexpr const char* defaultVerb = "dmw";
+    static constexpr const char* verb = "logw";
 
     /// The command usage string
     static constexpr const char* usage =
-        "dmw {<mp-json-obj>}\n"
-        "dmw <mpname>";
+        "logw CLEAR\n"
+        "logw create <classId> <pkgid> <catid> <msgid> \"<text>\"";
 
     /** The command detailed help string (recommended that lines do not exceed 80 chars)
                   1         2         3         4         5         6         7         8
          12345678901234567890123456789012345678901234567890123456789012345678901234567890
      */
     static constexpr const char* detailedHelp =
-        "  Updates model points. A JSON object is used to specify the new value for a\n"
-        "  a model point. Valid Key words are 'valid', 'locked', and 'val'. When only\n"
-        "  specifying a model point name - only the model point's sequence number is\n"
-        "  updated, i.e. will trigger change notification(s) with the MP instance's\n"
-        "  current value (aka 'touch' semantics)";
+        "  Logically clears all log records and creates log entries.";
 
 public:
     /// Constructor
-    Write( Kit::Container::OrderedList<ICommand>& commandList,
-           Kit::Dm::IModelDatabase&               modelPointDatabaseInstance,
-           const char*                            verb        = defaultVerb,
-           Kit::TShell::Permissions_T             permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
+    Manage( Kit::Container::OrderedList<ICommand>&      commandList,
+            Kit::Logging::Framework::IApplication&      appLogInfo,
+            Kit::Persistence::Record::Journal::IReset& logReset,
+            Kit::TShell::Permissions_T                  permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
         : Base( commandList, verb, permissions )
-        , m_database( modelPointDatabaseInstance )
+        , m_appLogInfo( appLogInfo )
+        , m_logReset( logReset )
     {
     }
 
@@ -72,11 +68,15 @@ public:
     const char* getHelp() const noexcept override { return detailedHelp; }
 
 protected:
-    /// Model Point Database to access
-    Kit::Dm::IModelDatabase& m_database;
+    /// Application specific log information (used to get Package instances and Classification info)
+    Kit::Logging::Framework::IApplication& m_appLogInfo;
+
+    /// API to read log entries
+    Kit::Persistence::Record::Journal::IReset& m_logReset;
 };
 
 }  // end namespaces
+}
 }
 }
 #endif  // end header latch

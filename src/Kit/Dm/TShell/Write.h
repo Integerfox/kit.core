@@ -1,5 +1,5 @@
-#ifndef KIT_DM_TSHELL_WROTE_H
-#define KIT_DM_TSHELL_WROTE_H
+#ifndef KIT_DM_TSHELL_WRITE_H
+#define KIT_DM_TSHELL_WRITE_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

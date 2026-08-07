@@ -47,7 +47,7 @@ public:
         length of less or equal to OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_CLASSIFICATION_ID_TEXT.
 
         NOTE: This method never 'fails'.  If an unknown/unsupported Classification ID
-        is used - the methods returns: OPTION_KIT_LOGGING_UNKNOWN_CLASSIFICATION_ID_TEXT
+        is used - the methods returns: NULL_CLASSIFICATION_ID_TEXT
      */
     virtual const char* classificationIdToString( uint8_t classificationId ) noexcept = 0;
 

@@ -24,6 +24,7 @@
 #include "Kit/Dm/TShell/Write.h"
 #include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Logging/Framework/TShell/Viewer.h"
+#include "Kit/Logging/Framework/TShell/Manage.h"
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Logging/Framework/EntryData.h"
 #include "Kit/Persistence/Record/Journal/Server.h"
@@ -144,6 +145,7 @@ static Command::Wait                           waitCmd_( g_commandList );
 static Read                                    dmrCmd_( g_commandList, mpDatabase_ );
 static Write                                   dmwCmd_( g_commandList, mpDatabase_ );
 static Kit::Logging::Framework::TShell::Viewer viewerCmd_( g_commandList, appLogInfo_, journalServer_ );
+static Kit::Logging::Framework::TShell::Manage manageCmd_( g_commandList, appLogInfo_, journalServer_ );
 
 void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
 {
