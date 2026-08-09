@@ -43,7 +43,7 @@ public:
     using Kit::Io::IOutput::write;
 
     /// See Kit::Io::IOutput
-    bool write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept override;
+    bool write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept override;
 
     /// See Kit::Io::Output
     void flush() noexcept override;

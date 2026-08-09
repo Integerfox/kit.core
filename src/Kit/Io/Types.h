@@ -12,6 +12,7 @@
 
 #include "kit_config.h"
 #include "kit_map.h"
+#include "Kit/Type/SSize.h"
 #include <stdint.h>
 
 
@@ -53,25 +54,6 @@ static constexpr const char* const nativeNewline = KIT_IO_NEW_LINE_NATIVE;
  */
 #define KitIoSocketHandle_T KitIoSocketHandle_T_MAP
 
-/*----------------------------------------------------------------------------*/
-/** Signed data type for arguments, variables, etc. with respect to how many
-    bytes can be read/written from/to streams, files, etc.  The default is
-    for a signed 32 bit integer.  A platform can override the default to make
-    larger or smaller as needed.
-
-    Note: This is my work-around for the fact that C++ does not have a
-          standard 'ssize_t' type. ssize_t is defined in POSIX and is used when
-          read/write operations using file descriptors.
- */
-#ifndef OPTION_KIT_IO_LENGTH_TYPE
-using ByteCount_T = int32_t;
-
-/// Alias for Offset type (used for seek operations)
-using Offset_T    = int32_t;
-#else
-using ByteCount_T = OPTION_KIT_IO_LENGTH_TYPE;
-using Offset_T    = OPTION_KIT_IO_LENGTH_TYPE;
-#endif
 
 }  // end namespaces
 }

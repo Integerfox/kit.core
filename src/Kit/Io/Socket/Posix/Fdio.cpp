@@ -35,7 +35,7 @@ void Fdio::close( int& fd ) noexcept
     }
 }
 
-bool Fdio::write( int fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool Fdio::write( int fd, bool& eosFlag, const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 
@@ -53,7 +53,7 @@ bool Fdio::write( int fd, bool& eosFlag, const void* buffer, ByteCount_T maxByte
     }
 
     // perform the write
-    ByteCount_T result = send( fd, (char*)buffer, maxBytes, MSG_NOSIGNAL );
+    Kit::Type::SSize_T result = send( fd, (char*)buffer, maxBytes, MSG_NOSIGNAL );
     if ( result < 0 )
     {
         bytesWritten = 0;
@@ -81,7 +81,7 @@ bool Fdio::isOpened( int fd ) noexcept
     return fd != INVALID_FD;
 }
 
-bool Fdio::read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool Fdio::read( int fd, bool& eosFlag, void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 
@@ -99,7 +99,7 @@ bool Fdio::read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, Byte
     }
 
     // perform the read
-    ByteCount_T result = recv( fd, (char*)buffer, numBytes, 0 );
+    Kit::Type::SSize_T result = recv( fd, (char*)buffer, numBytes, 0 );
     if ( result < 0 )
     {
         bytesRead = 0;

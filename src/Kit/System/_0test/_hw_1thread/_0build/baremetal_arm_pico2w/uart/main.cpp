@@ -29,8 +29,8 @@ int main( void )
 
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
-    //    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eINFO );
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
+    //    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eINFO );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eVERBOSE );
     KIT_SYSTEM_TRACE_MSG( SECT_, "\n**** KIT-SYSTEM TEST APPLICATION STARTED ****" );  // May not print on all targets
 
     // Go run the test(s) (Note: This method should never return)

@@ -38,7 +38,7 @@ bool InputOutput::isOpened() noexcept
 
 
 //////////////////////////
-bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool InputOutput::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     m_eos = false;
     return Win32::Fdio::read( m_fd, m_eos, buffer, numBytes, bytesRead );
@@ -61,7 +61,7 @@ void InputOutput::close() noexcept
 
 
 //////////////////////////
-bool InputOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool InputOutput::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     m_eos = false;
     return Win32::Fdio::write( m_fd, m_eos, buffer, maxBytes, bytesWritten );
@@ -74,12 +74,12 @@ void InputOutput::flush() noexcept
 
 
 //////////////////////////
-bool InputOutput::currentPos( ByteCount_T& curPos ) noexcept
+bool InputOutput::currentPos( Kit::Type::SSize_T& curPos ) noexcept
 {
     return Win32::Fdio::currentPos( m_fd, curPos );
 }
 
-bool InputOutput::setRelativePos( ByteCount_T deltaOffset ) noexcept
+bool InputOutput::setRelativePos( Kit::Type::SSize_T deltaOffset ) noexcept
 {
     return Win32::Fdio::setRelativePos( m_fd, deltaOffset );
 }
@@ -89,7 +89,7 @@ bool InputOutput::setToEof() noexcept
     return Win32::Fdio::setToEof( m_fd );
 }
 
-bool InputOutput::setAbsolutePos( ByteCount_T newoffset ) noexcept
+bool InputOutput::setAbsolutePos( Kit::Type::SSize_T newoffset ) noexcept
 {
     return Win32::Fdio::setAbsolutePos( m_fd, newoffset );
 }
@@ -99,7 +99,7 @@ bool InputOutput::isEof() noexcept
     return isEos();
 }
 
-bool InputOutput::length( ByteCount_T& len ) noexcept
+bool InputOutput::length( Kit::Type::SSize_T& len ) noexcept
 {
     return Win32::Fdio::length( m_fd, len );
 }

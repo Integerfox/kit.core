@@ -39,7 +39,7 @@ bool Output::isOpened()
 
 
 //////////////////////////
-bool Output::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool Output::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     m_outEos = false;
     return Posix::Fdio::write( m_outFd, m_outEos, buffer, maxBytes, bytesWritten );
@@ -62,12 +62,12 @@ void Output::close() noexcept
 
 
 //////////////////////////
-bool Output::currentPos( ByteCount_T& curPos ) noexcept
+bool Output::currentPos( Kit::Type::SSize_T& curPos ) noexcept
 {
     return Posix::Fdio::currentPos( m_outFd, curPos );
 }
 
-bool Output::setRelativePos( ByteCount_T deltaOffset ) noexcept
+bool Output::setRelativePos( Kit::Type::SSize_T deltaOffset ) noexcept
 {
     return Posix::Fdio::setRelativePos( m_outFd, deltaOffset );
 }
@@ -77,7 +77,7 @@ bool Output::setToEof() noexcept
     return Posix::Fdio::setToEof( m_outFd );
 }
 
-bool Output::setAbsolutePos( ByteCount_T newoffset ) noexcept
+bool Output::setAbsolutePos( Kit::Type::SSize_T newoffset ) noexcept
 {
     return Posix::Fdio::setAbsolutePos( m_outFd, newoffset );
 }
@@ -87,7 +87,7 @@ bool Output::isEof() noexcept
     return isEos();
 }
 
-bool Output::length( ByteCount_T& len ) noexcept
+bool Output::length( Kit::Type::SSize_T& len ) noexcept
 {
     return Posix::Fdio::length( m_outFd, len );
 }

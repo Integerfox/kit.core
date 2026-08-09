@@ -114,7 +114,7 @@ IOutput* TeeOutput::next( IOutput** streamList, IOutput& currentStream ) const n
 }
 
 ///////////////////////////////
-bool TeeOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool TeeOutput::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     bool     rc     = true;
     IOutput* stream = first( m_streams );
@@ -140,7 +140,7 @@ bool TeeOutput::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& by
         }
 
         // IOutput to stream -->and trap any error
-        ByteCount_T tempWritten;
+        Kit::Type::SSize_T tempWritten;
         if ( !stream->write( buffer, maxBytes, tempWritten ) )
         {
             // move the stream with an error to the failed list

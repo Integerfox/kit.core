@@ -39,26 +39,26 @@ public:
     /** Returns the length, in bytes, of the file. If there is an error than
         false is returned.
      */
-    virtual bool length( ByteCount_T& length ) noexcept = 0;
+    virtual bool length( Kit::Type::SSize_T& length ) noexcept = 0;
 
 
 public:
     /** Returns the current file pointer offset, in bytes, from the top of the
         file.  If there is an error than false is returned.
      */
-    virtual bool currentPos( ByteCount_T& currentPos ) noexcept = 0;
+    virtual bool currentPos( Kit::Type::SSize_T& currentPos ) noexcept = 0;
 
     /** Adjusts the current pointer offset by the specified delta (in bytes).
         Returns true if successful, else false (i.e. setting the pointer
         past/before the file boundaries).
      */
-    virtual bool setRelativePos( ByteCount_T deltaOffset ) noexcept = 0;
+    virtual bool setRelativePos( Kit::Type::SSize_T deltaOffset ) noexcept = 0;
 
     /** Sets the file pointer to the absolute specified offset (in bytes).
         Returns true if successful, else false (i.e. setting the
         pointer past the end of the file).
      */
-    virtual bool setAbsolutePos( ByteCount_T newoffset ) noexcept = 0;
+    virtual bool setAbsolutePos( Kit::Type::SSize_T newoffset ) noexcept = 0;
 
     /** Sets the file pointer to End-Of-File.  Returns true  if successful, else
         false if an error occurred.

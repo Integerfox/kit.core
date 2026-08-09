@@ -34,7 +34,7 @@ namespace Stdio {
 namespace Win32 {
 
 
-bool Fdio::write( HANDLE fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool Fdio::write( HANDLE fd, bool& eosFlag, const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 
@@ -54,7 +54,7 @@ bool Fdio::write( HANDLE fd, bool& eosFlag, const void* buffer, ByteCount_T maxB
     // perform the write
     unsigned long work;
     BOOL          result = WriteFile( fd, buffer, maxBytes, &work, 0 );
-    bytesWritten         = static_cast<ByteCount_T>( work );
+    bytesWritten         = static_cast<Kit::Type::SSize_T>( work );
     DWORD lastError      = GetLastError();
     eosFlag              = ( result != 0 || bytesWritten > 0 )                                                    ? false
                            : lastError == ERROR_HANDLE_EOF || lastError == ERROR_BROKEN_PIPE || bytesWritten == 0 ? true
@@ -86,7 +86,7 @@ void Fdio::close( HANDLE& fd ) noexcept
 }
 
 
-bool Fdio::read( HANDLE fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool Fdio::read( HANDLE fd, bool& eosFlag, void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 
@@ -106,7 +106,7 @@ bool Fdio::read( HANDLE fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, B
     // perform the read
     unsigned long work;
     BOOL          result = ReadFile( fd, buffer, numBytes, &work, 0 );
-    bytesRead            = static_cast<ByteCount_T>( work );
+    bytesRead            = static_cast<Kit::Type::SSize_T>( work );
     DWORD lastError      = GetLastError();
     eosFlag              = ( result != 0 && bytesRead > 0 )                                                    ? false
                            : lastError == ERROR_HANDLE_EOF || lastError == ERROR_BROKEN_PIPE || bytesRead == 0 ? true

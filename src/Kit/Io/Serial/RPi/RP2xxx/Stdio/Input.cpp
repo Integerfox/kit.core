@@ -30,7 +30,7 @@ Input::Input() noexcept
 
 
 //////////////////////
-bool Input::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool Input::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     // Ignore read requests of ZERO bytes
     bytesRead = 0;

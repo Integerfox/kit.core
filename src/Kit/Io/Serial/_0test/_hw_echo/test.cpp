@@ -43,7 +43,7 @@ public:
     Kit::Io::IInputOutput&  m_fd;
     uint8_t                 m_rxMsg[RX_READ_BUFFER_SIZE];
     Kit::Text::FString<128> m_tmpBuf;
-    Kit::Io::ByteCount_T    m_numEchoBytes;
+    Kit::Type::SSize_T    m_numEchoBytes;
     uint8_t                 m_echoMemory[ECHO_BUFFER_SIZE + 1];
 
 public:
@@ -58,18 +58,18 @@ public:
         // Throw any trash bytes on startup
         while ( m_fd.available() )
         {
-            Kit::Io::ByteCount_T bytesRead;
+            Kit::Type::SSize_T bytesRead;
             m_fd.read( m_rxMsg, sizeof( m_rxMsg ), bytesRead );
         }
 
-        Kit::Io::ByteCount_T byteCount = 0;
+        Kit::Type::SSize_T byteCount = 0;
         uint8_t*             dstPtr    = m_echoMemory;
         m_numEchoBytes                 = 0;
 
         for ( ;; )
         {
 
-            Kit::Io::ByteCount_T bytesRead;
+            Kit::Type::SSize_T bytesRead;
             if ( m_fd.read( m_rxMsg, sizeof( m_rxMsg ), bytesRead ) )
             {
                 Bsp_toggle_debug1();
@@ -95,9 +95,9 @@ public:
         }
     }
 
-    void echoMemory( Kit::Io::ByteCount_T byteCount )
+    void echoMemory( Kit::Type::SSize_T byteCount )
     {
-        Kit::Io::ByteCount_T bytes = m_numEchoBytes;
+        Kit::Type::SSize_T bytes = m_numEchoBytes;
 
         uint8_t* srcData = m_echoMemory;
         while ( m_numEchoBytes )

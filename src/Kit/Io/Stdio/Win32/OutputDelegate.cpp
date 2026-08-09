@@ -25,7 +25,7 @@ OutputDelegate::OutputDelegate( KitIoStdioHandle_T fd ) noexcept
 }
 
 //////////////////////
-bool OutputDelegate::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool OutputDelegate::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     return Win32::Fdio::write( m_outFd, m_outEos, buffer, maxBytes, bytesWritten );
 }

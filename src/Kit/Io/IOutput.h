@@ -77,14 +77,14 @@ public:
         successful, or false if End-of-Stream as encountered. The method does
         not return until 'numBytes' have been written to the Output stream.
      */
-    virtual bool write( const void* buffer, ByteCount_T numBytes ) noexcept;
+    virtual bool write( const void* buffer, Kit::Type::SSize_T numBytes ) noexcept;
 
     /** Writes the content of the buffer to the stream. At most 'maxBytes'
         will be outputted.  The actual number of bytes written is returned
         via 'bytesWritten'. Returns true if successful, or false if End-of-Stream
         was encountered.
      */
-    virtual bool write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept = 0;
+    virtual bool write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept = 0;
 
     /** Forces all buffered data (if any) to be written to the stream media.
         The actual behavior of this method for how/when the data is flushed -

@@ -2,6 +2,11 @@
 @brief namespace description for Kit::Persistence::Record::Journal
 @namespace Kit::Persistence::Record::Journal @brief
 
+The 'Journal' namespace extends the basic Persistent::Record interface with the
+ability for a single Record to contain N entries in chronological order, where
+an entry content is defined by a Kit::Persistence::IPayload instance.  An example
+usage for Journal entries is to persistently store log entries.
+
 ## Class Diagram
 
 Here is a simplified class diagram for the Journal namespace
@@ -9,11 +14,6 @@ Here is a simplified class diagram for the Journal namespace
 ![Kit Persistence Record Journal Class Diagram](class-diagram_kitpersistencerecordjournal.png)
 
 ## Details
-
-The 'Journal' namespace extends the basic Persistent::Record interface with the
-ability for a single Record to contain N entries in chronological order, where
-an entry content is defined by a Kit::Persistence::IPayload instance.  An example
-usage for Journal entries is to persistently store log entries.
 
 **NOTE**: The core implementation is **not** thread safe.  See the *Application
           Interfaces* section below for how clients/the-application safely

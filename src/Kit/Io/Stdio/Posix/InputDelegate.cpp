@@ -25,7 +25,7 @@ InputDelegate::InputDelegate( KitIoStdioHandle_T fd )
 }
 
 //////////////////////
-bool InputDelegate::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool InputDelegate::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     return Posix::Fdio::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );
 }

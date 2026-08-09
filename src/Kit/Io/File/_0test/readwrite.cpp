@@ -102,7 +102,7 @@ TEST_CASE( "readwrite" )
     inbuffer.clear();
     REQUIRE( fd3.isOpened() );
     REQUIRE( fd3.setAbsolutePos( 15 ) );
-    Kit::Io::ByteCount_T pos;
+    Kit::Type::SSize_T pos;
     REQUIRE( fd3.currentPos(pos));
     REQUIRE( pos == 15 );
     REQUIRE( fd3.setRelativePos( -14 ) );
@@ -110,7 +110,7 @@ TEST_CASE( "readwrite" )
     REQUIRE( pos == 1 );
     REQUIRE( fd3.read( inbuffer, 3) );
     REQUIRE( inbuffer == "bob" );
-    Kit::Io::ByteCount_T len;
+    Kit::Type::SSize_T len;
     REQUIRE( fd3.length(len) );
     REQUIRE( len == sum.length());
     fd3.close();

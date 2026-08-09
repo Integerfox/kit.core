@@ -266,7 +266,7 @@ bool InputOutput::available() noexcept
     return avail;
 }
 
-bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool InputOutput::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     bytesRead       = 0;
     uint8_t* dstPtr = static_cast<uint8_t*>( buffer );
@@ -326,7 +326,7 @@ bool InputOutput::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRe
     return true;
 }
 
-bool InputOutput::write( const void* buffer, ByteCount_T numBytesToTx, ByteCount_T& bytesWritten ) noexcept
+bool InputOutput::write( const void* buffer, Kit::Type::SSize_T numBytesToTx, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     bytesWritten          = 0;
     const uint8_t* srcPtr = static_cast<const uint8_t*>( buffer );

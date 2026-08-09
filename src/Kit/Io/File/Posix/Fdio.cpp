@@ -47,7 +47,7 @@ KitIoFileHandle_T Fdio::open( const char* fileEntryName, bool readOnly, bool for
     return fd;
 }
 
-bool Fdio::length( KitIoFileHandle_T fd, ByteCount_T& length ) noexcept
+bool Fdio::length( KitIoFileHandle_T fd, Kit::Type::SSize_T& length ) noexcept
 {
     if ( fd == INVALID_FD )
     {
@@ -57,11 +57,11 @@ bool Fdio::length( KitIoFileHandle_T fd, ByteCount_T& length ) noexcept
     off_t cur     = lseek( fd, 0, SEEK_CUR );
     off_t eof     = lseek( fd, 0, SEEK_END );
     off_t restore = lseek( fd, cur, SEEK_SET );
-    length        = (ByteCount_T)eof;
+    length        = (Kit::Type::SSize_T)eof;
     return ( cur != (off_t)-1 ) && ( eof != (off_t)-1 ) && ( restore != (off_t)-1 );
 }
 
-bool Fdio::currentPos( KitIoFileHandle_T fd, ByteCount_T& currentPos ) noexcept
+bool Fdio::currentPos( KitIoFileHandle_T fd, Kit::Type::SSize_T& currentPos ) noexcept
 {
     if ( fd == INVALID_FD )
     {
@@ -69,11 +69,11 @@ bool Fdio::currentPos( KitIoFileHandle_T fd, ByteCount_T& currentPos ) noexcept
     }
 
     off_t pos  = lseek( fd, 0, SEEK_CUR );
-    currentPos = (ByteCount_T)pos;
+    currentPos = (Kit::Type::SSize_T)pos;
     return pos != (off_t)-1;
 }
 
-bool Fdio::setRelativePos( KitIoFileHandle_T fd, ByteCount_T deltaOffset ) noexcept
+bool Fdio::setRelativePos( KitIoFileHandle_T fd, Kit::Type::SSize_T deltaOffset ) noexcept
 {
     if ( fd == INVALID_FD )
     {
@@ -84,7 +84,7 @@ bool Fdio::setRelativePos( KitIoFileHandle_T fd, ByteCount_T deltaOffset ) noexc
     return pos != (off_t)-1;
 }
 
-bool Fdio::setAbsolutePos( KitIoFileHandle_T fd, ByteCount_T newoffset ) noexcept
+bool Fdio::setAbsolutePos( KitIoFileHandle_T fd, Kit::Type::SSize_T newoffset ) noexcept
 {
     if ( fd == INVALID_FD )
     {

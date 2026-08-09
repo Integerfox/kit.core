@@ -39,7 +39,7 @@ bool Input::isOpened() noexcept
 
 
 //////////////////////////
-bool Input::read( void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool Input::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     m_inEos = false;
     return Posix::Fdio::read( m_inFd, m_inEos, buffer, numBytes, bytesRead );
@@ -62,12 +62,12 @@ void Input::close() noexcept
 
 
 //////////////////////////
-bool Input::currentPos( ByteCount_T& curPos ) noexcept
+bool Input::currentPos( Kit::Type::SSize_T& curPos ) noexcept
 {
     return Posix::Fdio::currentPos( m_inFd, curPos );
 }
 
-bool Input::setRelativePos( ByteCount_T deltaOffset ) noexcept
+bool Input::setRelativePos( Kit::Type::SSize_T deltaOffset ) noexcept
 {
     return Posix::Fdio::setRelativePos( m_inFd, deltaOffset );
 }
@@ -77,7 +77,7 @@ bool Input::setToEof() noexcept
     return Posix::Fdio::setToEof( m_inFd );
 }
 
-bool Input::setAbsolutePos( ByteCount_T newoffset ) noexcept
+bool Input::setAbsolutePos( Kit::Type::SSize_T newoffset ) noexcept
 {
     return Posix::Fdio::setAbsolutePos( m_inFd, newoffset );
 }
@@ -87,7 +87,7 @@ bool Input::isEof() noexcept
     return isEos();
 }
 
-bool Input::length( ByteCount_T& len ) noexcept
+bool Input::length( Kit::Type::SSize_T& len ) noexcept
 {
     return Posix::Fdio::length( m_inFd, len );
 }

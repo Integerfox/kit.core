@@ -22,7 +22,7 @@ namespace Io {
 bool IOutput::write( char c ) noexcept
 {
     auto*       ptr      = static_cast<const void*>( &c );
-    ByteCount_T numBytes = sizeof( c );
+    Kit::Type::SSize_T numBytes = sizeof( c );
     return write( ptr, numBytes );
 }
 
@@ -31,14 +31,14 @@ bool IOutput::write( const char* string ) noexcept
 {
     KIT_SYSTEM_ASSERT( string != nullptr );
 
-    ByteCount_T numBytes = strlen( string );
+    Kit::Type::SSize_T numBytes = strlen( string );
     return write( string, numBytes );
 }
 
 
 bool IOutput::write( const Kit::Text::IString& string ) noexcept
 {
-    ByteCount_T numBytes = string.length();
+    Kit::Type::SSize_T numBytes = string.length();
     return write( string(), numBytes );
 }
 
@@ -59,16 +59,16 @@ bool IOutput::vwrite( Kit::Text::IString& formatBuffer, const char* format, va_l
     KIT_SYSTEM_ASSERT( format != nullptr );
 
     formatBuffer.vformat( format, ap );
-    ByteCount_T numBytes = formatBuffer.length();
+    Kit::Type::SSize_T numBytes = formatBuffer.length();
     return write( formatBuffer(), numBytes );
 }
 
-bool IOutput::write( const void* buffer, ByteCount_T numBytes ) noexcept
+bool IOutput::write( const void* buffer, Kit::Type::SSize_T numBytes ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
     KIT_SYSTEM_ASSERT( numBytes >= 0 );
     
-    ByteCount_T written = 0;
+    Kit::Type::SSize_T written = 0;
     auto*       ptr     = static_cast<const uint8_t*>( buffer );
 
     // Loop until all data is written

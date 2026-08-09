@@ -23,7 +23,7 @@ namespace Stdio {
 
 
 //////////////////////
-bool Output::write( const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool Output::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     // Ignore write requests of ZERO bytes
     bytesWritten = 0;

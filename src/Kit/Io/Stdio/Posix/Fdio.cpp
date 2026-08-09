@@ -20,7 +20,7 @@ namespace Io {
 namespace Stdio {
 namespace Posix {
 
-bool Fdio::write( int fd, bool& eosFlag, const void* buffer, ByteCount_T maxBytes, ByteCount_T& bytesWritten ) noexcept
+bool Fdio::write( int fd, bool& eosFlag, const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 
@@ -66,7 +66,7 @@ void Fdio::close( int& fd ) noexcept
     }
 }
 
-bool Fdio::read( int fd, bool& eosFlag, void* buffer, ByteCount_T numBytes, ByteCount_T& bytesRead ) noexcept
+bool Fdio::read( int fd, bool& eosFlag, void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 

@@ -135,7 +135,7 @@ bool System::isWriteable( const char* fsEntryName ) noexcept
     return false;
 }
 
-ByteCount_T System::size( const char* fsEntryName ) noexcept
+Kit::Type::SSize_T System::size( const char* fsEntryName ) noexcept
 {
     System::Info_T entryInfo;
     if ( System::getInfo( fsEntryName, entryInfo ) )
