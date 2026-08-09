@@ -60,7 +60,7 @@ int main( void )
 
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eVERBOSE );
     KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized" );
 
     // NOTE: The Runnable objects are created on the Heap - because depending on
@@ -70,7 +70,7 @@ int main( void )
     // Create the concrete drivers (caller responsibility).
     // Uses the SPI3 peripheral and the LD3 LED pin (GPIOB, GPIO_PIN_14 on
     // NUCLEO-F413ZH) as a chip-select substitute for loopback testing.
-    extern SPI_HandleTypeDef hspi3;
+    extern SPI_HandleTypeDef             hspi3;
     Kit::Driver::SPI::ST::M32F4::Polled* spiDriver =
         new ( std::nothrow ) Kit::Driver::SPI::ST::M32F4::Polled( &hspi3 );
     Kit::Driver::Dio::ST::M32F4::Output* csPin =
@@ -91,6 +91,7 @@ int main( void )
     enableScheduling();
 
     // I should never get here!
-    for ( ;; );
+    for ( ;; )
+        ;
     return 0;
 }

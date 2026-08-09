@@ -30,7 +30,7 @@ int main( void )
 
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eVERBOSE );
 
     // Run the platform-independent hardware test.
     // This creates a FreeRTOS thread and starts the scheduler.

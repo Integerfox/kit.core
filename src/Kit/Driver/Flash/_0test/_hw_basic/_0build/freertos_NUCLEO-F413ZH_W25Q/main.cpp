@@ -68,7 +68,7 @@ int main( void )
 
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
-    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::Trace::eVERBOSE );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eVERBOSE );
     KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized" );
 
     // NOTE: The driver/runnable objects are created on the Heap - because
@@ -98,6 +98,7 @@ int main( void )
     enableScheduling();
 
     // I should never get here!
-    for ( ;; );
+    for ( ;; )
+        ;
     return 0;
 }
