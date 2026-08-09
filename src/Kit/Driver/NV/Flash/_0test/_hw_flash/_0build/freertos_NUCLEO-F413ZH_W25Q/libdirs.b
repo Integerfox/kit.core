@@ -4,9 +4,6 @@ src/Kit/Driver/NV/Flash/_0test/_hw_flash
 # Platform-specific main
 src/Kit/Driver/NV/Flash/_0test/_hw_flash/_0build/freertos_NUCLEO-F413ZH_W25Q
 
-# NV interface
-src/Kit/Driver/NV
-
 # NV Flash driver (template headers, no source files to compile)
 #  - Api.h / Api_.h are template headers included directly by the test
 

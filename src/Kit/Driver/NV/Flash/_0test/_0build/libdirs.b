@@ -1,9 +1,6 @@
 # NV Flash driver test sources
 src/Kit/Driver/NV/Flash/_0test
 
-# NV interface
-src/Kit/Driver/NV
-
 # Checksum (CRC32 for NV flash)
 src/Kit/Checksum
 
