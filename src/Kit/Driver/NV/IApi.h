@@ -100,7 +100,7 @@ public:
 
 public:
     /// Virtual destructor
-    virtual ~IApi() noexcept;
+    virtual ~IApi() noexcept = default;
 };
 
 }  // end namespaces

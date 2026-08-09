@@ -27,8 +27,6 @@
 #include "Kit/System/FatalError.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Bsp/Api.h"
-#include <cstdint>
-#include <cstring>
 
 
 #define SECT_ "_0test"
@@ -74,7 +72,6 @@ void runtests( Kit::Driver::SPI::IHalfDuplex& spi,
         sleep( 10 );
 
         // Assert CS, read data, deassert CS
-        memset( rxBuf, 0, TEST_BUFFER_SIZE );
         cs.assertPin();
         bool readOk = spi.read( rxBuf, TEST_BUFFER_SIZE );
         cs.deassertPin();

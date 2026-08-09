@@ -47,7 +47,9 @@ struct PageStatus_T
 struct PageHeader_T
 {
     uint32_t magic;        //!< Magic number (0xA5A5A5A5) identifying a valid header
-    uint32_t sequenceNum;  //!< Monotonically increasing sequence number
+    uint32_t sequenceNum;  //!< Monotonically increasing sequence number.  Comparisons use
+                           //!< 32-bit serial-number arithmetic so that wrap-around is handled
+                           //!< (see Api::isSequenceNewer()).
     uint32_t dataOffset;   //!< Starting offset of this record within the logical NV space
     uint32_t dataLength;   //!< Length of the data payload (equals nvPageSize)
     uint32_t crc32;        //!< CRC32 over the preceding 16 bytes (magic through dataLength)
@@ -95,7 +97,12 @@ struct Config_T
 
     Sector reclamation uses a two-phase approach: first scan for already-erased
     slots, and only erase a sector when no erased slots remain and the sector
-    contains no VALID records.
+    contains no VALID records.  To guarantee that reclamation can never
+    deadlock (a state where every sector holds a VALID record and none can be
+    erased), the flash region MUST be over-provisioned such that the number of
+    physical sectors is at least the number of logical pages
+    (numLogicalPages <= numSectors).  start() enforces this invariant and fails
+    for any configuration that violates it.
 
     Template parameter MAX_LOGICAL_PAGES defines the maximum number of logical
     pages supported (determines size of the in-memory page map array).
@@ -159,6 +166,23 @@ public:
         m_numSectors        = nvRegionSize / sectorSize;
         m_pagesPerSector    = sectorSize / getPhysicalPageSize();
         m_totalPages        = m_numSectors * m_pagesPerSector;
+
+        // Over-provisioning invariant.  At most one record per logical page can
+        // be VALID at any one time, so when superseding logical page P there are
+        // at most (m_numLogicalPages - 1) VALID records belonging to *other*
+        // logical pages (P's current record is the one being invalidated).  To
+        // deadlock sector reclamation, every sector would have to hold at least
+        // one such "other-page" VALID record, which requires
+        // (m_numLogicalPages - 1) >= m_numSectors, i.e. m_numLogicalPages >
+        // m_numSectors.  Requiring m_numLogicalPages <= m_numSectors therefore
+        // guarantees findFreePageAddress() Phase 2 can always reclaim a sector.
+        // A configuration that violates this invariant is a design/configuration
+        // error, so refuse to start rather than risk a run-time write failure.
+        KIT_SYSTEM_ASSERT( m_numLogicalPages <= m_numSectors );
+        if ( m_numLogicalPages > m_numSectors )
+        {
+            return false;
+        }
 
         memset( m_pageMap, ERASED_BYTE_VALUE, sizeof( m_pageMap ) );
 
@@ -402,7 +426,8 @@ protected:
     {
         size_t   sectorSize   = m_flashDriver.getSectorSize();
         size_t   physPageSize = getPhysicalPageSize();
-        uint64_t maxSeq       = 0;
+        uint32_t maxSeq       = 0;
+        bool     haveMaxSeq   = false;
 
         for ( size_t i = 0; i < m_totalPages; i++ )
         {
@@ -433,9 +458,10 @@ protected:
                 continue;
             }
 
-            if ( header.sequenceNum > maxSeq )
+            if ( !haveMaxSeq || isSequenceNewer( header.sequenceNum, maxSeq ) )
             {
-                maxSeq = header.sequenceNum;
+                maxSeq     = header.sequenceNum;
+                haveMaxSeq = true;
             }
 
             uint32_t currentPageAddress = m_pageMap[logicalIndex];
@@ -451,7 +477,7 @@ protected:
                     return false;
                 }
 
-                if ( header.sequenceNum > currentHeader.sequenceNum )
+                if ( isSequenceNewer( header.sequenceNum, currentHeader.sequenceNum ) )
                 {
                     if ( !markPageInvalid( currentPageAddress ) )
                     {
@@ -622,6 +648,18 @@ protected:
     size_t getPhysicalPageSize() const noexcept { return HEADER_SIZE + m_config.nvPageSize; }
     /// Converts a byte offset within the NV region to a logical page index.
     size_t offsetToPageIndex( size_t offset ) const noexcept { return offset / m_config.nvPageSize; }
+
+    /** Returns true if sequence number 'a' is newer than sequence number 'b',
+        accounting for unsigned 32-bit wrap-around.  This uses serial-number
+        arithmetic (RFC 1982 style): the signed difference is positive when 'a'
+        is ahead of 'b' within a half-range window, so a freshly wrapped small
+        value (e.g. 1) is correctly treated as newer than a pre-wrap large value
+        (e.g. 0xFFFFFFFF).
+     */
+    static bool isSequenceNewer( uint32_t a, uint32_t b ) noexcept
+    {
+        return static_cast<int32_t>( a - b ) > 0;
+    }
 
 
 protected:

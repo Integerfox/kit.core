@@ -24,7 +24,6 @@
 #include "Kit/System/FatalError.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Bsp/Api.h"
-#include <cstdint>
 
 
 #define SECT_ "_0test"

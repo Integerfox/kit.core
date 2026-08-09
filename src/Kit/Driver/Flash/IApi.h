@@ -12,6 +12,7 @@
 
 
 #include <stdlib.h>
+#include <stdint.h>
 #include "Kit/Driver/IStart.h"
 #include "Kit/Driver/IStop.h"
 
@@ -24,8 +25,8 @@ namespace Flash {
 
 
 /** This class defines the interface for a platform independent Flash memory
-    driver.  The interface provides read, write, and erase operations at
-    various granularities (sector, 32KB block, 64KB block, full chip).
+    driver.  The interface provides read, write, and erase operations.  Erasing
+    is performed at sector granularity (one or more sectors) or the full chip.
 
     The interface assumes a flash device organized into sectors (smallest
     erasable unit) and pages (largest single-program unit).  Writes that
@@ -71,13 +72,18 @@ public:
                             const void* srcBuffer,
                             size_t      numBytes ) noexcept = 0;
 
-    /** This method erases one flash sector (typically 4KB) at the specified
-        sector-aligned address.
+    /** This method erases 'numberOfSectors' flash sectors (typically 4KB each)
+        starting at the specified sector-aligned address.
+
+        Passing a 'numberOfSectors' greater than one allows the concrete
+        implementation to optimize the request (e.g. converting eight 4KB
+        sector erases into a single 32KB block erase command).
 
         The method returns Result_T::SUCCESS if the operation was successful;
         else an error code is returned.
      */
-    virtual Result_T eraseSector( size_t sectorAddress ) noexcept = 0;
+    virtual Result_T eraseSector( size_t   sectorAddress,
+                                  unsigned numberOfSectors = 1 ) noexcept = 0;
 
     /** This method erases the entire flash chip.
 
@@ -85,6 +91,13 @@ public:
         else an error code is returned.
      */
     virtual Result_T eraseChip() noexcept = 0;
+
+    /** This method blocks until the Flash is 'ready' (i.e. not busy with a
+        physical write or erase operation).  The method returns true when the
+        flash is ready; else false is returned if the timeout period expired
+        before the flash was ready.
+     */
+    virtual bool waitUntilReady( uint32_t timeoutMs = 1000 ) noexcept = 0;
 
 
 public:

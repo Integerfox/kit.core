@@ -30,8 +30,6 @@ namespace Kit {
 namespace Driver {
 ///
 namespace Flash {
-///
-namespace TestSupport {
 
 
 /** Mock flash driver that simulates flash memory in RAM.
@@ -125,7 +123,8 @@ public:
         return SUCCESS;
     }
 
-    Result_T eraseSector( size_t sectorAddress ) noexcept override
+    Result_T eraseSector( size_t   sectorAddress,
+                          unsigned numberOfSectors = 1 ) noexcept override
     {
         if ( m_failNext )
         {
@@ -133,14 +132,14 @@ public:
             return ERR_FAILED;
         }
 
-        if ( sectorAddress + SECTOR_SIZE > TOTAL_SIZE )
+        if ( sectorAddress + ( numberOfSectors * SECTOR_SIZE ) > TOTAL_SIZE )
         {
             return ERR_RANGE;
         }
 
         // Align to sector boundary
         size_t aligned = sectorAddress - ( sectorAddress % SECTOR_SIZE );
-        memset( m_flash + aligned, 0xFF, SECTOR_SIZE );
+        memset( m_flash + aligned, 0xFF, numberOfSectors * SECTOR_SIZE );
         m_eraseCount++;
         return SUCCESS;
     }
@@ -156,6 +155,13 @@ public:
         memset( m_flash, 0xFF, TOTAL_SIZE );
         m_eraseCount++;
         return SUCCESS;
+    }
+
+    bool waitUntilReady( uint32_t timeoutMs = 1000 ) noexcept override
+    {
+        // RAM-backed mock: writes/erases complete synchronously, so the
+        // device is always ready.
+        return true;
     }
 
 
@@ -204,7 +210,6 @@ protected:
 
 
 }  // end namespaces
-}
 }
 }
 #endif  // end header latch

@@ -189,28 +189,41 @@ StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
 
 
 //////////////////////////////////////////////////////////////////////////////
-StdSpi24::Result_T StdSpi24::eraseSector( size_t sectorAddress ) noexcept
+StdSpi24::Result_T StdSpi24::eraseSector( size_t   sectorAddress,
+                                          unsigned numberOfSectors ) noexcept
 {
     if ( !m_started )
     {
         return ERR_FAILED;
     }
 
-    if ( !writeEnable() )
+    // Erase the requested run of sectors one 4KB sector at a time
+    size_t address = sectorAddress;
+    for ( unsigned i = 0; i < numberOfSectors; i++ )
     {
-        return ERR_FAILED;
+        if ( !writeEnable() )
+        {
+            return ERR_FAILED;
+        }
+
+        m_cs.assertPin();
+        bool result = sendCommandWithAddress( SECTOR_ERASE, address );
+        m_cs.deassertPin();
+
+        if ( result )
+        {
+            result = waitUntilReady();
+        }
+
+        if ( !result )
+        {
+            return ERR_FAILED;
+        }
+
+        address += m_deviceInfo.sectorSize;
     }
 
-    m_cs.assertPin();
-    bool result = sendCommandWithAddress( SECTOR_ERASE, sectorAddress );
-    m_cs.deassertPin();
-
-    if ( result )
-    {
-        result = waitUntilReady();
-    }
-
-    return result ? SUCCESS : ERR_FAILED;
+    return SUCCESS;
 }
 
 

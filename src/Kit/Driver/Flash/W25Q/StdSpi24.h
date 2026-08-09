@@ -81,10 +81,14 @@ public:
                     size_t      numBytes ) noexcept override;
 
     /// See Kit::Driver::Flash::IApi
-    Result_T eraseSector( size_t sectorAddress ) noexcept override;
+    Result_T eraseSector( size_t   sectorAddress,
+                          unsigned numberOfSectors = 1 ) noexcept override;
 
     /// See Kit::Driver::Flash::IApi
     Result_T eraseChip() noexcept override;
+
+    /// See Kit::Driver::Flash::IApi
+    bool waitUntilReady( uint32_t timeoutMs = 1000 ) noexcept override;
 
 
 public:
@@ -116,9 +120,6 @@ public:
 protected:
     /// Sends the WRITE_ENABLE command
     bool writeEnable() noexcept;
-
-    /// Polls the status register BUSY bit until ready or timeout
-    bool waitUntilReady( uint32_t timeoutMs = 1000 ) noexcept;
 
     /// Sends a single-byte SPI command
     inline bool sendCommand( uint8_t cmd ) noexcept

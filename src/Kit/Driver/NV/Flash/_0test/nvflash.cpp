@@ -42,7 +42,7 @@ static uint8_t workBuffer128K_[256];  // NV_PAGE_SIZE_128K
 /// Call setFailOnOp(N) to make the Nth flash operation (read/write/erase)
 /// return false.  Operations before N succeed normally.
 template <size_t TOTAL_SIZE, size_t SECTOR_SIZE = 4096, size_t PAGE_SIZE = 256>
-class MockFlashFailAt : public Flash::TestSupport::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>
+class MockFlashFailAt : public Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>
 {
 public:
     MockFlashFailAt() noexcept : m_failOnOp( 0 ), m_opCounter( 0 ) {}
@@ -59,7 +59,7 @@ public:
         {
             return Flash::IApi::ERR_FAILED;
         }
-        return Flash::TestSupport::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::read( srcOffset, dstBuffer, numBytes );
+        return Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::read( srcOffset, dstBuffer, numBytes );
     }
 
     Flash::IApi::Result_T write( size_t dstOffset, const void* srcBuffer, size_t numBytes ) noexcept override
@@ -68,16 +68,16 @@ public:
         {
             return Flash::IApi::ERR_FAILED;
         }
-        return Flash::TestSupport::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::write( dstOffset, srcBuffer, numBytes );
+        return Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::write( dstOffset, srcBuffer, numBytes );
     }
 
-    Flash::IApi::Result_T eraseSector( size_t sectorAddress ) noexcept override
+    Flash::IApi::Result_T eraseSector( size_t sectorAddress, unsigned numberOfSectors = 1 ) noexcept override
     {
         if ( m_failOnOp > 0 && ++m_opCounter == m_failOnOp )
         {
             return Flash::IApi::ERR_FAILED;
         }
-        return Flash::TestSupport::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::eraseSector( sectorAddress );
+        return Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::eraseSector( sectorAddress, numberOfSectors );
     }
 
 private:
@@ -136,7 +136,7 @@ static const NV::Flash::Config_T CONFIG_4K = {
     NV_TOTAL_SIZE_4K  // nvTotalSize
 };
 
-using MockFlash4K = Flash::TestSupport::MockFlash<FLASH_SIZE_4K>;
+using MockFlash4K = Flash::MockFlash<FLASH_SIZE_4K>;
 using NvFlash4K   = NV::Flash::Api<MAX_LOGICAL_PAGES_4K>;
 
 
@@ -160,7 +160,7 @@ static const NV::Flash::Config_T CONFIG_128K = {
     NV_TOTAL_SIZE_128K  // nvTotalSize
 };
 
-using MockFlash128K = Flash::TestSupport::MockFlash<FLASH_SIZE_128K>;
+using MockFlash128K = Flash::MockFlash<FLASH_SIZE_128K>;
 using NvFlash128K   = NV::Flash::Api<MAX_LOGICAL_PAGES_128K>;
 
 
@@ -181,14 +181,12 @@ TEST_CASE( "NV Flash 4K - Initialization" )
         REQUIRE( nv.getTotalSize() == NV_TOTAL_SIZE_4K );
         REQUIRE( nv.getNumPages() == MAX_LOGICAL_PAGES_4K );
         REQUIRE( nv.getPageSize() == NV_PAGE_SIZE_4K );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "start is idempotent" )
     {
         REQUIRE( nv.start() == true );
         REQUIRE( nv.start() == true );  // Second call succeeds without error
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "stop and restart" )
@@ -196,8 +194,9 @@ TEST_CASE( "NV Flash 4K - Initialization" )
         REQUIRE( nv.start() == true );
         nv.stop();
         REQUIRE( nv.start() == true );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -217,7 +216,6 @@ TEST_CASE( "NV Flash 4K - Basic Read/Write" )
         uint8_t readData[5] = { 0 };
         REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( memcmp( readData, writeData, sizeof( writeData ) ) == 0 );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "read unwritten area returns 0xFF" )
@@ -228,7 +226,6 @@ TEST_CASE( "NV Flash 4K - Basic Read/Write" )
         uint8_t expected[10];
         memset( expected, 0xFF, sizeof( expected ) );
         REQUIRE( memcmp( readData, expected, sizeof( expected ) ) == 0 );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "write full page" )
@@ -244,8 +241,9 @@ TEST_CASE( "NV Flash 4K - Basic Read/Write" )
         uint8_t readBack[NV_PAGE_SIZE_4K];
         REQUIRE( nv.read( 0, readBack, NV_PAGE_SIZE_4K, NV_PAGE_SIZE_4K ) == true );
         REQUIRE( memcmp( readBack, pageData, NV_PAGE_SIZE_4K ) == 0 );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -281,7 +279,6 @@ TEST_CASE( "NV Flash 4K - Read-Modify-Write Preservation" )
         REQUIRE( readData[7] == 0x08 );
         REQUIRE( readData[8] == 0x09 );
         REQUIRE( readData[9] == 0x0A );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "three sequential writes from design doc scenario" )
@@ -312,8 +309,9 @@ TEST_CASE( "NV Flash 4K - Read-Modify-Write Preservation" )
         REQUIRE( readData[7] == 0xFF );
         REQUIRE( readData[8] == 0x09 );
         REQUIRE( readData[9] == 0x0A );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -368,9 +366,9 @@ TEST_CASE( "NV Flash 4K - Scatter Write" )
         REQUIRE( nv.read( 512, read2, sizeof( read2 ), sizeof( read2 ) ) == true );
         REQUIRE( read2[0] == 0xEE );
         REQUIRE( read2[1] == 0xFF );
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -412,9 +410,9 @@ TEST_CASE( "NV Flash 4K - Cross-Page Write" )
         uint8_t readFull[20];
         REQUIRE( nv.read( 250, readFull, 20, 20 ) == true );
         REQUIRE( memcmp( readFull, writeData, 20 ) == 0 );
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -441,8 +439,6 @@ TEST_CASE( "NV Flash 4K - Format" )
         REQUIRE( readData[0] == 0xFF );
         REQUIRE( readData[1] == 0xFF );
         REQUIRE( readData[2] == 0xFF );
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "format allows new writes" )
@@ -459,9 +455,9 @@ TEST_CASE( "NV Flash 4K - Format" )
         REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( readData[0] == 0x30 );
         REQUIRE( readData[1] == 0x40 );
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -505,8 +501,6 @@ TEST_CASE( "NV Flash 4K - Startup Scan Rebuilds Page Map" )
 
             nv.stop();
         }
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "restart finds latest version after multiple writes" )
@@ -539,9 +533,9 @@ TEST_CASE( "NV Flash 4K - Startup Scan Rebuilds Page Map" )
 
             nv.stop();
         }
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -557,7 +551,7 @@ TEST_CASE( "NV Flash 4K - Sector Reclamation" )
         256                // nvTotalSize (1 logical page)
     };
 
-    Flash::TestSupport::MockFlash<SMALL_FLASH_SIZE> mockFlash;
+    Flash::MockFlash<SMALL_FLASH_SIZE> mockFlash;
     mockFlash.start();
     NV::Flash::Api<1> nv( mockFlash, crcAlgo_, SMALL_CONFIG, workBuffer4K_, sizeof( workBuffer4K_ ) );
     nv.start();
@@ -587,9 +581,9 @@ TEST_CASE( "NV Flash 4K - Sector Reclamation" )
 
         // At least one sector erase should have occurred
         REQUIRE( mockFlash.getEraseCount() > 0 );
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -607,7 +601,7 @@ TEST_CASE( "NV Flash 4K - Reclamation Restart and Scan" )
         256  // 1 logical page
     };
 
-    Flash::TestSupport::MockFlash<SMALL_FLASH_SIZE> mockFlash;
+    Flash::MockFlash<SMALL_FLASH_SIZE> mockFlash;
     mockFlash.start();
     ShutdownUnitTesting::clearAndUseCounter();
 
@@ -640,9 +634,9 @@ TEST_CASE( "NV Flash 4K - Reclamation Restart and Scan" )
             REQUIRE( readData[0] == 29 );
             nv.stop();
         }
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -666,8 +660,6 @@ TEST_CASE( "NV Flash 4K - FindFreePageAddress Failure Paths" )
         mockFA.setFailOnOp( 1 );
         uint8_t data[] = { 0x01 };
         REQUIRE( nv.write( 0, data, 1 ) == true );
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "phase-2 sector erase failure" )
@@ -730,9 +722,9 @@ TEST_CASE( "NV Flash 4K - FindFreePageAddress Failure Paths" )
         mockFA.setFailOnOp( 31 );
         data[0] = 0xFF;
         REQUIRE( nvFA.write( 0, data, 1 ) == false );
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -754,34 +746,29 @@ TEST_CASE( "NV Flash 4K - Boundary Conditions" )
         REQUIRE( nv.read( offset, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( readData[0] == 0xFE );
         REQUIRE( readData[1] == 0xFD );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "write beyond NV space fails" )
     {
         uint8_t data[] = { 0x01 };
         REQUIRE( nv.write( NV_TOTAL_SIZE_4K, data, 1 ) == false );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "read beyond NV space fails" )
     {
         uint8_t data[1];
         REQUIRE( nv.read( NV_TOTAL_SIZE_4K, data, 1, 1 ) == false );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "zero-length write fails" )
     {
         uint8_t data[] = { 0x01 };
         REQUIRE( nv.write( 0, data, 0 ) == false );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "null pointer write fails" )
     {
         REQUIRE( nv.write( 0, nullptr, 10 ) == false );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "operations on stopped driver fail" )
@@ -792,8 +779,9 @@ TEST_CASE( "NV Flash 4K - Boundary Conditions" )
         REQUIRE( nv2.write( 0, data, 1 ) == false );
         REQUIRE( nv2.read( 0, data, 1, 1 ) == false );
         REQUIRE( nv2.format() == false );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -814,7 +802,6 @@ TEST_CASE( "NV Flash 4K - Statistics" )
         REQUIRE( eraseCount == 0 );
         REQUIRE( validPages == 0 );
         REQUIRE( freePages > 0 );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "statistics update after writes" )
@@ -828,7 +815,6 @@ TEST_CASE( "NV Flash 4K - Statistics" )
         size_t   validPages;
         REQUIRE( nv.getStatistics( eraseCount, freePages, validPages ) == true );
         REQUIRE( validPages == 2 );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "statistics with INVALID records after page overwrite" )
@@ -846,8 +832,9 @@ TEST_CASE( "NV Flash 4K - Statistics" )
         size_t   validPages;
         REQUIRE( nv.getStatistics( eraseCount, freePages, validPages ) == true );
         REQUIRE( validPages == 1 );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -877,9 +864,9 @@ TEST_CASE( "NV Flash 4K - All Logical Pages" )
             REQUIRE( nv.read( offset, &data, 1, 1 ) == true );
             REQUIRE( data == static_cast<uint8_t>( page + 0x40 ) );
         }
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -933,6 +920,19 @@ TEST_CASE( "NV Flash 4K - Invalid Configuration" )
     {
         uint8_t   tinyBuf[10];
         NvFlash4K nv( mockFlash, crcAlgo_, CONFIG_4K, tinyBuf, sizeof( tinyBuf ) );
+        REQUIRE( ShutdownUnitTesting::getAndClearCounter() > 0u );
+    }
+
+    SECTION( "start() asserts and fails when the over-provisioning invariant is violated" )
+    {
+        // Sector size is 4096.  A region of 4 sectors (16384 bytes) yields
+        // numSectors == 4, while nvTotalSize 2048 / nvPageSize 256 yields
+        // numLogicalPages == 8.  With numLogicalPages (8) > numSectors (4) the
+        // sector-reclamation invariant is violated, so start() must assert and
+        // return false rather than risk a run-time reclamation deadlock.
+        NV::Flash::Config_T tightConfig = { 0, 4 * 4096, NV_PAGE_SIZE_4K, 8 * NV_PAGE_SIZE_4K };
+        NvFlash4K           nv( mockFlash, crcAlgo_, tightConfig, workBuffer4K_, sizeof( workBuffer4K_ ) );
+        REQUIRE( nv.start() == false );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() > 0u );
     }
 }
@@ -1086,36 +1086,27 @@ TEST_CASE( "NV Flash 4K - Write Error Paths" )
 {
     ShutdownUnitTesting::clearAndUseCounter();
 
-    SECTION( "write fails when no free pages available" )
+    SECTION( "over-committed config (numLogicalPages > numSectors) is rejected at start()" )
     {
-        // Use a tiny flash (1 sector, 14 physical slots) with 16 logical pages.
-        // After writing to 14 distinct pages all slots are full, and
-        // reclamation can't free anything (all records are valid for
-        // different pages). The 15th page write must fail.
+        // Use a tiny flash (1 sector, 14 physical slots) configured with 16
+        // logical pages.  Such a configuration could deadlock sector
+        // reclamation (all sectors holding a VALID record for a different
+        // logical page), so the over-provisioning guard in start() must reject
+        // it up-front rather than allow a later run-time write failure.
         static constexpr size_t          TINY_FLASH = 4096;  // 1 sector
         static const NV::Flash::Config_T tinyConfig = {
             0,
             TINY_FLASH,
             256,
-            NV_TOTAL_SIZE_4K  // 16 logical pages
+            NV_TOTAL_SIZE_4K  // 16 logical pages (> 1 sector)
         };
 
-        Flash::TestSupport::MockFlash<TINY_FLASH> mockTiny;
+        Flash::MockFlash<TINY_FLASH> mockTiny;
         mockTiny.start();
+        ShutdownUnitTesting::clearAndUseCounter();
         NV::Flash::Api<MAX_LOGICAL_PAGES_4K> nvTiny( mockTiny, crcAlgo_, tinyConfig, workBuffer4K_, sizeof( workBuffer4K_ ) );
-        nvTiny.start();
-
-        // Fill 14 slots with distinct pages (physPageSize=280, 4096/280=14)
-        uint8_t data[1];
-        for ( size_t i = 0; i < 14; i++ )
-        {
-            data[0] = static_cast<uint8_t>( i );
-            REQUIRE( nvTiny.write( i * 256, data, 1 ) == true );
-        }
-
-        // 15th distinct page: no free slot, reclamation impossible
-        data[0] = 0xFF;
-        REQUIRE( nvTiny.write( 14 * 256, data, 1 ) == false );
+        REQUIRE( nvTiny.start() == false );
+        REQUIRE( ShutdownUnitTesting::getAndClearCounter() > 0u );
     }
 
     SECTION( "constructor asserts when workBuffer too small for nvPageSize" )
@@ -1129,7 +1120,7 @@ TEST_CASE( "NV Flash 4K - Write Error Paths" )
             1024  // nvPageSize = 1024
         };
 
-        Flash::TestSupport::MockFlash<BIG_PAGE_FLASH> mockBig;
+        Flash::MockFlash<BIG_PAGE_FLASH> mockBig;
         mockBig.start();
         ShutdownUnitTesting::clearAndUseCounter();
         NV::Flash::Api<1> nvBig( mockBig, crcAlgo_, bigPageConfig, workBuffer4K_, sizeof( workBuffer4K_ ) );
@@ -1228,6 +1219,42 @@ TEST_CASE( "NV Flash 4K - Scan Edge Cases via Flash Corruption" )
         REQUIRE( nv2.read( 0, readData, 1, 1 ) == true );
         REQUIRE( readData[0] == 0xFF );  // no valid data found
     }
+
+    SECTION( "scan honors sequence-number wrap-around" )
+    {
+        MockFlash4K mockFlash;
+        mockFlash.start();
+
+        // Two VALID records for logical page 0.  The record at slot 0 has a
+        // pre-wrap (large) sequence number and the record at slot 1 has a
+        // post-wrap (small) sequence number, so slot 1 is actually the NEWER
+        // record.  A naive '>' comparison would incorrectly select slot 0.
+        writeRawRecord( mockFlash.getFlashMemory(),
+                        0 * PHYS_PAGE,  // slot 0
+                        0xFFFFFFF0,     // pre-wrap sequence (older)
+                        0,              // page 0
+                        256,
+                        NV::Flash::PageStatus_T::VALID );
+
+        writeRawRecord( mockFlash.getFlashMemory(),
+                        1 * PHYS_PAGE,  // slot 1
+                        0x00000003,     // post-wrap sequence (newer)
+                        0,              // same page 0
+                        256,
+                        NV::Flash::PageStatus_T::VALID );
+
+        // Distinct payload bytes so we can tell which record the scan selects
+        mockFlash.getFlashMemory()[0 * PHYS_PAGE + NV::Flash::HEADER_SIZE] = 0xA5;  // old
+        mockFlash.getFlashMemory()[1 * PHYS_PAGE + NV::Flash::HEADER_SIZE] = 0x5A;  // new
+
+        NvFlash4K nv( mockFlash, crcAlgo_, CONFIG_4K, workBuffer4K_, sizeof( workBuffer4K_ ) );
+        REQUIRE( nv.start() == true );
+
+        // The wrapped (slot 1) record must be treated as the newest
+        uint8_t readData[1];
+        REQUIRE( nv.read( 0, readData, 1, 1 ) == true );
+        REQUIRE( readData[0] == 0x5A );
+    }
 }
 
 
@@ -1237,52 +1264,49 @@ TEST_CASE( "NV Flash 4K - Phase-2 Reclamation Edge Cases" )
 
     SECTION( "findFreePageAddress phase-2 with aboutToInvalidate == INVALID_PAGE_ADDRESS" )
     {
-        // Scenario: 2-sector flash, fill both sectors with records for different
-        // pages.  Then write to a NEW page (no prior record, so
-        // aboutToInvalidate == INVALID_PAGE_ADDRESS).  Phase 2 finds sector
-        // with no VALID records and erases it.
+        // Scenario: 2-sector flash configured with 2 logical pages (satisfies
+        // the numLogicalPages <= numSectors invariant).  Fill every physical
+        // slot by repeatedly writing logical page 0, then write to the still
+        // unused logical page 1.  That final write targets a NEW page (no prior
+        // record) so aboutToInvalidate == INVALID_PAGE_ADDRESS, and Phase 2 must
+        // reclaim the sector that holds only INVALID records.
         static constexpr size_t          TWO_SECTOR_FLASH = 8192;  // 2 sectors
         static constexpr size_t          PHYS_PAGE_2S     = NV::Flash::HEADER_SIZE + NV_PAGE_SIZE_4K;
-        static constexpr size_t          SLOTS_PER_SECTOR = 4096 / PHYS_PAGE_2S;  // 14
+        static constexpr size_t          SLOTS_PER_SECTOR = 4096 / PHYS_PAGE_2S;   // 14
+        static constexpr size_t          TOTAL_SLOTS      = 2 * SLOTS_PER_SECTOR;  // 28
         static const NV::Flash::Config_T twoSectorConfig  = {
             0,
             TWO_SECTOR_FLASH,
             256,
-            NV_TOTAL_SIZE_4K  // 16 logical pages
+            2 * 256  // 2 logical pages
         };
 
-        Flash::TestSupport::MockFlash<TWO_SECTOR_FLASH> mockFlash;
+        Flash::MockFlash<TWO_SECTOR_FLASH> mockFlash;
         mockFlash.start();
         NV::Flash::Api<MAX_LOGICAL_PAGES_4K> nv( mockFlash, crcAlgo_, twoSectorConfig, workBuffer4K_, sizeof( workBuffer4K_ ) );
-        nv.start();
+        REQUIRE( nv.start() == true );
 
-        // Step 1: Write to 14 different pages (fills sector 0 with 14 VALID records)
+        // Step 1: Write logical page 0 enough times to consume every physical
+        // slot.  This leaves TOTAL_SLOTS-1 INVALID records and 1 VALID record.
         uint8_t data[1];
-        for ( size_t i = 0; i < SLOTS_PER_SECTOR; i++ )
+        for ( size_t i = 0; i < TOTAL_SLOTS; i++ )
         {
             data[0] = static_cast<uint8_t>( i );
-            REQUIRE( nv.write( i * 256, data, 1 ) == true );
+            REQUIRE( nv.write( 0, data, 1 ) == true );
         }
 
-        // Step 2: Overwrite all 14 pages → new records go to sector 1,
-        // old records in sector 0 marked INVALID
-        for ( size_t i = 0; i < SLOTS_PER_SECTOR; i++ )
-        {
-            data[0] = static_cast<uint8_t>( i + 0x80 );
-            REQUIRE( nv.write( i * 256, data, 1 ) == true );
-        }
-
-        // Now: sector 0 has 14 INVALID, sector 1 has 14 VALID.
-        // Step 3: Write to page 14 (new page, no prior record,
-        // aboutToInvalidate == INVALID_PAGE_ADDRESS)
-        // Phase 1: all 28 slots used. Phase 2: sector 0 has no VALID → erase it.
+        // Step 2: Write to the brand-new logical page 1.  Phase 1 finds no
+        // erased slot; Phase 2 (aboutToInvalidate == INVALID_PAGE_ADDRESS) finds
+        // the all-INVALID sector and erases it.
         data[0] = 0xFF;
-        REQUIRE( nv.write( 14 * 256, data, 1 ) == true );
+        REQUIRE( nv.write( 256, data, 1 ) == true );
 
-        // Verify the write succeeded
+        // Verify the new page 1 write succeeded and page 0 is still readable
         uint8_t readData[1];
-        REQUIRE( nv.read( 14 * 256, readData, 1, 1 ) == true );
+        REQUIRE( nv.read( 256, readData, 1, 1 ) == true );
         REQUIRE( readData[0] == 0xFF );
+        REQUIRE( nv.read( 0, readData, 1, 1 ) == true );
+        REQUIRE( readData[0] == static_cast<uint8_t>( TOTAL_SLOTS - 1 ) );
     }
 
     SECTION( "findFreePageAddress phase-2 read failure sets hasValid" )
@@ -1344,8 +1368,9 @@ TEST_CASE( "NV Flash 128K - Initialization" )
         REQUIRE( nv.getTotalSize() == NV_TOTAL_SIZE_128K );
         REQUIRE( nv.getNumPages() == MAX_LOGICAL_PAGES_128K );
         REQUIRE( nv.getPageSize() == NV_PAGE_SIZE_128K );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -1365,7 +1390,6 @@ TEST_CASE( "NV Flash 128K - Basic Read/Write" )
         uint8_t readData[3];
         REQUIRE( nv.read( 0, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( memcmp( readData, writeData, sizeof( writeData ) ) == 0 );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "write and read at end of NV space" )
@@ -1377,7 +1401,6 @@ TEST_CASE( "NV Flash 128K - Basic Read/Write" )
         uint8_t readData[2];
         REQUIRE( nv.read( offset, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( memcmp( readData, writeData, sizeof( writeData ) ) == 0 );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
 
     SECTION( "write to high-numbered page" )
@@ -1391,8 +1414,9 @@ TEST_CASE( "NV Flash 128K - Basic Read/Write" )
         REQUIRE( nv.read( offset, readData, sizeof( readData ), sizeof( readData ) ) == true );
         REQUIRE( readData[0] == 0xDE );
         REQUIRE( readData[1] == 0xAD );
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -1423,9 +1447,9 @@ TEST_CASE( "NV Flash 128K - Scatter Writes Across Wide Range" )
             REQUIRE( nv.read( offset, &data, 1, 1 ) == true );
             REQUIRE( data == static_cast<uint8_t>( pages[i] & 0xFF ) );
         }
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 
@@ -1460,7 +1484,7 @@ TEST_CASE( "NV Flash 128K - Restart Persistence" )
 
             nv.stop();
         }
-
-        REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
     }
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
