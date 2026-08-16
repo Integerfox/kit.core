@@ -17,8 +17,8 @@ echo ["<text>"]
 echo - ["<text>"]
 help [* <cmd>]
 log [*|<max>]
-log <nth> *
-log <nth> <max>
+log <skip> *
+log <skip> <max>
 log class
 log pkg
 logm class enable <classId ...>
@@ -36,18 +36,20 @@ trace here|revert
 wait <delay>
 $ *** TEST: help log
 $ log [*|<max>]
-log <nth> *
-log <nth> <max>
+log <skip> *
+log <skip> <max>
 log class
 log pkg
   Displays stored log records entries and Classification/Package Info. Records
   are always displayed newest entry first. The output format is:
   "[<entrykey>] (<entryTimestamp>) <PACKID>:<CATID>:<MSGID>. <text>"
   - 'log' with no arguments displays the newest entry.
-  - 'log *' displays all entries.
-  - 'log <max>'   displays at most <max> entries.
-  - 'log <nth> *' displays all log entries starting with the <nth> record.
-  - 'log <nth> <max>' displays up to <max> entries starting with <nth> record.
+  - 'log *'        displays all entries.
+  - 'log <max>'    displays at most <max> entries.
+  - 'log <skip> *'     skips the first <skip> entries, the displays all
+                       remaining log entries.
+  - 'log <skip> <max>' skips the first <skip> entries, then displays at most
+                       <max> log entries.
   - 'log class' displays classifications IDs and mask status.
   - 'log pkg'   displays packages IDs and mask status.
  
@@ -148,3 +150,21 @@ $ Invalid Package ID: '100'
 CMD_ERR_BAD_SYNTAX: [logm]
 $   1  KIT                   ENABLED
 Package Mask: 0x00000001
+$ [7] (0:1970-01-01 00:00:00.000) INFO-KIT-LOGGING-QUEUE_OVERFLOW: bob's your uncle - NOT FILTERED
+[6] (0:1970-01-01 00:00:00.000) FATAL-KIT-LOGGING-QUEUE_OVERFLOW: NOT-filtered package ID
+[5] (0:1970-01-01 00:00:00.000) INFO-KIT-LOGGING-QUEUE_OVERFLOW: bob's your uncle
+[4] (0:1970-01-01 00:00:00.000) WARNING-KIT-DRIVER-START_ERR: persisted entry FOUR
+[3] (0:1970-01-01 00:00:00.000) INFO-KIT-DRIVER-STOP_ERR: persisted entry THREE
+[2] (0:1970-01-01 00:00:00.000) EVENT-KIT-SYSTEM-SHUTDOWN: persisted entry TWO
+[1] (0:1970-01-01 00:00:00.000) WARNING-KIT-SYSTEM-SHUTDOWN: persisted entry ONE
+log entries found = 7.
+$ [7] (0:1970-01-01 00:00:00.000) INFO-KIT-LOGGING-QUEUE_OVERFLOW: bob's your uncle - NOT FILTERED
+[6] (0:1970-01-01 00:00:00.000) FATAL-KIT-LOGGING-QUEUE_OVERFLOW: NOT-filtered package ID
+log entries found = 2.
+$ [5] (0:1970-01-01 00:00:00.000) INFO-KIT-LOGGING-QUEUE_OVERFLOW: bob's your uncle
+[4] (0:1970-01-01 00:00:00.000) WARNING-KIT-DRIVER-START_ERR: persisted entry FOUR
+[3] (0:1970-01-01 00:00:00.000) INFO-KIT-DRIVER-STOP_ERR: persisted entry THREE
+[2] (0:1970-01-01 00:00:00.000) EVENT-KIT-SYSTEM-SHUTDOWN: persisted entry TWO
+log entries found = 4.
+$ [1] (0:1970-01-01 00:00:00.000) WARNING-KIT-SYSTEM-SHUTDOWN: persisted entry ONE
+log entries found = 1.

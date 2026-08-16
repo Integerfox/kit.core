@@ -36,8 +36,8 @@ public:
     /// The command usage string
     static constexpr const char* usage =
         "log [*|<max>]\n"
-        "log <nth> *\n"
-        "log <nth> <max>\n"
+        "log <skip> *\n"
+        "log <skip> <max>\n"
         "log class\n"
         "log pkg";
 
@@ -51,10 +51,12 @@ public:
         "  are always displayed newest entry first. The output format is:\n"
         "  \"[<entrykey>] (<entryTimestamp>) <PACKID>:<CATID>:<MSGID>. <text>\"\n"
         "  - 'log' with no arguments displays the newest entry.\n"
-        "  - 'log *' displays all entries.\n"
-        "  - 'log <max>'   displays at most <max> entries.\n"
-        "  - 'log <nth> *' displays all log entries starting with the <nth> record.\n"
-        "  - 'log <nth> <max>' displays up to <max> entries starting with <nth> record.\n"
+        "  - 'log *'        displays all entries.\n"
+        "  - 'log <max>'    displays at most <max> entries.\n"
+        "  - 'log <skip> *'     skips the first <skip> entries, the displays all\n"
+        "                       remaining log entries.\n"
+        "  - 'log <skip> <max>' skips the first <skip> entries, then displays at most\n"
+        "                       <max> log entries.\n"
         "  - 'log class' displays classifications IDs and mask status.\n"
         "  - 'log pkg'   displays packages IDs and mask status.";
 

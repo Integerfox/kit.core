@@ -39,5 +39,9 @@ logm pkg enable 1
 logm pkg enable 1 2
 logm pkg disable 100
 log pkg
+log 10
+log 0 2
+log 2 4
+log 6 *
 echo "LAST CHECKED LINE"
 bye
