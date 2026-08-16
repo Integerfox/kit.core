@@ -13,6 +13,7 @@
 #include "Kit/Text/Tokenizer/TextBlock.h"
 #include "Kit/Text/StringTo.h"
 #include "Kit/Logging/Framework/IApplication.h"
+#include "Kit/Logging/Framework/Logger.h"
 #include "Kit/Logging/Pkg/ClassificationId.h"
 #include "Kit/Logging/Pkg/Package.h"
 #include <inttypes.h>
@@ -27,7 +28,8 @@ namespace TShell {
 
 namespace {
 
-class KitOnlyApp : public Kit::Logging::Framework::IApplication
+#if 0
+    class KitOnlyApp : public Kit::Logging::Framework::IApplication
 {
 public:
     bool isClassificationIdValid( uint8_t classificationId ) noexcept override
@@ -53,7 +55,7 @@ public:
 private:
     Kit::Logging::Pkg::Package m_kitPackage;
 };
-
+#endif
 
 static bool parseUnsigned_( const char* src, size_t& dst ) noexcept
 {
@@ -67,7 +69,65 @@ static bool parseUnsigned_( const char* src, size_t& dst ) noexcept
     return true;
 }
 
+static Kit::TShell::Result_T displayClassificationInfo( IApplication&          appLogInfo,
+                                                        Kit::TShell::IContext& context,
+                                                        Kit::Text::IString&    outtext ) noexcept
+{
+    KitLoggingPackageMask_T enabledMask = getClassificationEnabledMask();
+    bool                    io          = true;
+    for ( uint16_t classificationId = 0; classificationId <= UINT8_MAX && io; ++classificationId )
+    {
+        if ( !appLogInfo.isClassificationIdValid( classificationId ) )
+        {
+            continue;
+        }
+        const char*             classificationText = appLogInfo.classificationIdToString( classificationId );
+        KitLoggingPackageMask_T classificationMask = classificationIdToMask( classificationId );
+        outtext.format( "%3u  %-20s  %s",
+                        classificationId,
+                        classificationText,
+                        ( enabledMask & classificationMask ) ? "ENABLED" : "" );
+        io &= context.writeFrame( outtext );
+    }
+
+    if ( io )
+    {
+        outtext.format( "Classification Mask: 0x%08" PRIX32, static_cast<uint32_t>( enabledMask ) );
+        io &= context.writeFrame( outtext );
+    }
+    return io ? Kit::TShell::Result_T::CMD_SUCCESS : Kit::TShell::Result_T::CMD_ERR_IO;
+}
+
+static Kit::TShell::Result_T displayPackageInfo( IApplication& appLogInfo, Kit::TShell::IContext& context, Kit::Text::IString& outtext ) noexcept
+{
+    KitLoggingPackageMask_T enabledMask = getPackageEnabledMask();
+    bool                    io          = true;
+    for ( uint16_t packageId = 0; packageId <= UINT8_MAX && io; ++packageId )
+    {
+        IPackage* pkgPtr = appLogInfo.getPackage( packageId );
+        if ( pkgPtr == nullptr )
+        {
+            continue;
+        }
+        const char*             packageText = pkgPtr->packageIdString();
+        KitLoggingPackageMask_T packageMask = packageIdToMask( packageId );
+        outtext.format( "%3u  %-20s  %s",
+                        packageId,
+                        packageText,
+                        ( enabledMask & packageMask ) ? "ENABLED" : "" );
+        io &= context.writeFrame( outtext );
+    }
+    if ( io )
+    {
+        outtext.format( "Package Mask: 0x%08" PRIX32, static_cast<uint32_t>( enabledMask ) );
+        io &= context.writeFrame( outtext );
+    }
+
+    return io ? Kit::TShell::Result_T::CMD_SUCCESS : Kit::TShell::Result_T::CMD_ERR_IO;
+}
+
 }  // end anonymous namespace
+// end anonymous namespace
 
 
 ///////////////////////////
@@ -81,9 +141,24 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
     size_t startNth = 0;
     size_t maxCount = 1;
 
-    // Parse: Display all/N Entries
     if ( numArgs == 2 )
     {
+        //
+        // Display Classification/Package Info
+        //
+        if ( tokens.getParameter( 1 )[0] == 'c' )
+        {
+            return displayClassificationInfo( m_appLogInfo, context, outtext );
+        }
+        else if ( tokens.getParameter( 1 )[0] == 'p' )
+        {
+            return displayPackageInfo( m_appLogInfo, context, outtext );
+        }
+
+        //
+        // Parse: Display all/N Entries
+        //
+
         // ALL
         const char* arg1 = tokens.getParameter( 1 );
         if ( arg1[0] == '*' )
@@ -157,7 +232,7 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
     }
 
     // Display the requested number of entries
-    bool io = true;
+    bool   io               = true;
     size_t entriesDisplayed = 0;
     for ( size_t i = 0; i < maxCount && io; ++i )
     {

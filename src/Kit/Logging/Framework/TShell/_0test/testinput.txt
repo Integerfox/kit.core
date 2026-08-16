@@ -1,0 +1,43 @@
+echo - "*** TEST: help"
+help
+echo - "*** TEST: help log"
+help log
+echo - "*** TEST: help logm"
+help logm
+log pkg
+log class
+logm class disable 2 3
+logm pkg disable 1
+log pkg
+log class
+logm class enable 2
+logm pkg enable 1
+log 
+log 2
+log *
+logm create 4 1 0 0 "bob's your uncle"
+logm class disable 4
+log class
+logm create 4 1 0 0 "bob's your uncle - filtered"
+log *
+logm pkg disable 1
+log pkg
+logm create 1 1 0 0 "filtered package ID"
+log *
+logm pkg enable 1
+logm create 1 1 0 0 "NOT-filtered package ID"
+logm class enable 4
+logm create 4 1 0 0 "bob's your uncle - NOT FILTERED"
+log *
+logm bob
+logm class bob
+logm class enable 1 2
+logm class disable 1 100 2
+log class
+logm pkg bob
+logm pkg enable 1
+logm pkg enable 1 2
+logm pkg disable 100
+log pkg
+echo "LAST CHECKED LINE"
+bye

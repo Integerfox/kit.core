@@ -39,6 +39,8 @@
 #include "Kit/Io/File/System.h"
 #include "Kit/Logging/Pkg/Log.h"
 #include "Kit/Logging/Framework/Logger.h"
+#include "Kit/Time/BootTime.h"
+#include "Kit/System/ElapsedTime.h"
 #include <inttypes.h>
 
 #define SECT_ "_0test"
@@ -146,6 +148,21 @@ static Read                                    dmrCmd_( g_commandList, mpDatabas
 static Write                                   dmwCmd_( g_commandList, mpDatabase_ );
 static Kit::Logging::Framework::TShell::Viewer viewerCmd_( g_commandList, appLogInfo_, journalServer_ );
 static Kit::Logging::Framework::TShell::Manage manageCmd_( g_commandList, appLogInfo_, journalServer_ );
+
+// All timestamps WILL BE ZERO.  This makes it possible to compare the actual output against a 'golden' expected output file for the test's Pass/Fail criteria.
+uint64_t Kit::Time::getBootTime() noexcept
+{
+    return 0;
+}
+uint64_t Kit::System::ElapsedTime::millisecondsEx() noexcept
+{
+    return 0;
+}
+uint32_t Kit::System::ElapsedTime::milliseconds() noexcept
+{
+    return 0;
+}
+
 
 void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
 {

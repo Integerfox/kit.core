@@ -37,21 +37,26 @@ public:
     static constexpr const char* usage =
         "log [*|<max>]\n"
         "log <nth> *\n"
-        "log <nth> <max>";
+        "log <nth> <max>\n"
+        "log class\n"
+        "log pkg";
+
 
     /** The command detailed help string (recommended that lines do not exceed 80 chars)
                   1         2         3         4         5         6         7         8
          12345678901234567890123456789012345678901234567890123456789012345678901234567890
      */
     static constexpr const char* detailedHelp =
-        "  Displays stored log records entries. Records are always displayed\n"
-        "  newest entry first.  The output format is:\n"
+        "  Displays stored log records entries and Classification/Package Info. Records\n"
+        "  are always displayed newest entry first. The output format is:\n"
         "  \"[<entrykey>] (<entryTimestamp>) <PACKID>:<CATID>:<MSGID>. <text>\"\n"
         "  - 'log' with no arguments displays the newest entry.\n"
         "  - 'log *' displays all entries.\n"
         "  - 'log <max>'   displays at most <max> entries.\n"
         "  - 'log <nth> *' displays all log entries starting with the <nth> record.\n"
-        "  - 'log <nth> <max>' displays up to <max> entries starting with <nth> record.";
+        "  - 'log <nth> <max>' displays up to <max> entries starting with <nth> record.\n"
+        "  - 'log class' displays classifications IDs and mask status.\n"
+        "  - 'log pkg'   displays packages IDs and mask status.";
 
 public:
     /// Constructor

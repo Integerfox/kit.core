@@ -31,19 +31,24 @@ class Manage : public Kit::TShell::Command::Base
 {
 public:
     /// Default command verb
-    static constexpr const char* verb = "logw";
+    static constexpr const char* verb = "logm";
 
     /// The command usage string
     static constexpr const char* usage =
-        "logw CLEAR\n"
-        "logw create <classId> <pkgid> <catid> <msgid> \"<text>\"";
+        "logm class enable <classId ...>\n"
+        "logm class disable <classId ...>\n"
+        "logm pkg enable <pkgId ...>\n"
+        "logm pkg disable <pkgId ...>\n"
+        "logm CLEAR\n"
+        "logm create <classId> <pkgid> <catid> <msgid> \"<text>\"";
 
     /** The command detailed help string (recommended that lines do not exceed 80 chars)
                   1         2         3         4         5         6         7         8
          12345678901234567890123456789012345678901234567890123456789012345678901234567890
      */
     static constexpr const char* detailedHelp =
-        "  Logically clears all log records and creates log entries.";
+        "  Manages the filters for classification and package identifiers, logically\n"
+        "  clears all log records, and creates log entries.";
 
 public:
     /// Constructor

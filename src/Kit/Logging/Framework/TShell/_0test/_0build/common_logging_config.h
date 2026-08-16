@@ -19,4 +19,7 @@
 // Set Host Endianess (actual endianess does not matter for the test)
 #define USE_KIT_TYPE_ENDIAN_LE_HOST
 
+// Use customer getBootTime() method to force all timestamps to be ZERO.
+#define USE_KIT_TIME_CUSTOM_GET_BOOT_TIME
+
 #endif

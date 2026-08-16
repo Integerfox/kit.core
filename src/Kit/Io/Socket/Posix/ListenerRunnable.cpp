@@ -34,7 +34,7 @@ void ListenerRunnable::stopListener() noexcept
 void ListenerRunnable::listen() noexcept
 {
     // Create the listening socket
-    m_listeningSocket = Posix::Fdio::createListeningSocket( m_port, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRIES, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS );
+    m_listeningSocket = Posix::Fdio::createListeningSocket( m_port, OPTION_KIT_IO_SOCKET_LISTENER_BIND_RETRIES, OPTION_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS );
     if ( m_listeningSocket == Posix::Fdio::INVALID_FD )
     {
         KIT_SYSTEM_TRACE_MSG( SECT_,

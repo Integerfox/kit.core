@@ -11,6 +11,7 @@
 #include "StringBase.h"
 #include "Strip.h"
 #include "strapi.h"
+#include "Kit/System/Assert.h"
 #include <string.h>
 #include <stdio.h>
 
@@ -24,6 +25,7 @@ StringBase::StringBase( char* internalString ) noexcept
     : m_strPtr( internalString )
     , m_truncated( false )
 {
+    KIT_SYSTEM_ASSERT( internalString != nullptr );
 }
 
 ///////////////////////////////
