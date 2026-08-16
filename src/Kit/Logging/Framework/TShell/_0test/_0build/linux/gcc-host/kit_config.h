@@ -10,15 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
-#define USE_KIT_SYSTEM_TRACE
-#define USE_KIT_SYSTEM_ASSERT
-#define KitTextToStringMaxUnsigned_T uint64_t
 
 #include "../../common_logging_config.h"
 
-// Configuration for Logging Identifiers
-#include "Kit/Logging/Framework/Mocked4Test/kitonly_mapcfg.h"
-
-// Set Host Endianess
-#define USE_KIT_TYPE_ENDIAN_LE_HOST
 #endif

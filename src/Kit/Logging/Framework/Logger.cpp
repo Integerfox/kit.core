@@ -57,9 +57,9 @@ static KitLoggingClassificationMask_T allClassificationsMask() noexcept
     KitLoggingClassificationMask_T mask = 0;
     for ( uint16_t i = 1; i < UINT8_MAX; ++i )
     {
-        if ( app_->isClassificationIdValid( i ) )
+        if ( app_->isClassificationIdValid( static_cast<uint8_t>( i ) ) )
         {
-            mask |= classificationIdToMask( i );
+            mask |= classificationIdToMask( static_cast<uint8_t>( i ) );
         }
     }
     return mask;
@@ -71,9 +71,9 @@ static KitLoggingPackageMask_T allPackagesMask() noexcept
     KitLoggingPackageMask_T mask = 0;
     for ( uint16_t i = 1; i < UINT8_MAX; ++i )
     {
-        if ( app_->getPackage( i ) != nullptr )
+        if ( app_->getPackage( static_cast<uint8_t>( i ) ) != nullptr )
         {
-            mask |= packageIdToMask( i );
+            mask |= packageIdToMask( static_cast<uint8_t>( i ) );
         }
     }
     return mask;

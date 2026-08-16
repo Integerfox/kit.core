@@ -28,35 +28,6 @@ namespace TShell {
 
 namespace {
 
-#if 0
-    class KitOnlyApp : public Kit::Logging::Framework::IApplication
-{
-public:
-    bool isClassificationIdValid( uint8_t classificationId ) noexcept override
-    {
-        return Kit::Logging::Pkg::ClassificationId::_from_integral_nothrow( classificationId );
-    }
-
-    const char* classificationIdToString( uint8_t classificationId ) noexcept override
-    {
-        return Kit::Type::betterEnumToString<Kit::Logging::Pkg::ClassificationId, uint8_t>( classificationId,
-                                                                                            NULL_CLASSIFICATION_ID_TEXT );
-    }
-
-    IPackage* getPackage( uint8_t packageId ) noexcept override
-    {
-        if ( packageId == m_kitPackage.PACKAGE_ID )
-        {
-            return &m_kitPackage;
-        }
-        return nullptr;
-    }
-
-private:
-    Kit::Logging::Pkg::Package m_kitPackage;
-};
-#endif
-
 static bool parseUnsigned_( const char* src, size_t& dst ) noexcept
 {
     unsigned value = 0;
@@ -77,12 +48,12 @@ static Kit::TShell::Result_T displayClassificationInfo( IApplication&          a
     bool                    io          = true;
     for ( uint16_t classificationId = 0; classificationId <= UINT8_MAX && io; ++classificationId )
     {
-        if ( !appLogInfo.isClassificationIdValid( classificationId ) )
+        if ( !appLogInfo.isClassificationIdValid( static_cast<uint8_t>( classificationId ) ) )
         {
             continue;
         }
-        const char*             classificationText = appLogInfo.classificationIdToString( classificationId );
-        KitLoggingPackageMask_T classificationMask = classificationIdToMask( classificationId );
+        const char*             classificationText = appLogInfo.classificationIdToString( static_cast<uint8_t>( classificationId ) );
+        KitLoggingPackageMask_T classificationMask = classificationIdToMask( static_cast<uint8_t>( classificationId ) );
         outtext.format( "%3u  %-20s  %s",
                         classificationId,
                         classificationText,
@@ -104,13 +75,13 @@ static Kit::TShell::Result_T displayPackageInfo( IApplication& appLogInfo, Kit::
     bool                    io          = true;
     for ( uint16_t packageId = 0; packageId <= UINT8_MAX && io; ++packageId )
     {
-        IPackage* pkgPtr = appLogInfo.getPackage( packageId );
+        IPackage* pkgPtr = appLogInfo.getPackage( static_cast<uint8_t>( packageId ) );
         if ( pkgPtr == nullptr )
         {
             continue;
         }
         const char*             packageText = pkgPtr->packageIdString();
-        KitLoggingPackageMask_T packageMask = packageIdToMask( packageId );
+        KitLoggingPackageMask_T packageMask = packageIdToMask( static_cast<uint8_t>( packageId ) );
         outtext.format( "%3u  %-20s  %s",
                         packageId,
                         packageText,

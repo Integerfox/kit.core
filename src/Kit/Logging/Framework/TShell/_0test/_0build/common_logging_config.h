@@ -10,6 +10,10 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
+#define USE_KIT_SYSTEM_TRACE
+#define USE_KIT_SYSTEM_ASSERT
+#define KitTextToStringMaxUnsigned_T uint64_t
+
 // Enable KIT namespace logging
 #define USE_KIT_LOGGING_PKG_LOG_API
 

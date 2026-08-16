@@ -10,8 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
-#define USE_KIT_SYSTEM_ASSERT
-#define USE_KIT_SYSTEM_TRACE
-#define KitTextToStringMaxUnsigned_T uint64_t
+
+#include "../../common_logging_config.h"
 
 #endif
