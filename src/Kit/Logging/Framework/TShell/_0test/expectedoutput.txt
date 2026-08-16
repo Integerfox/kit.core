@@ -46,7 +46,7 @@ log pkg
   - 'log' with no arguments displays the newest entry.
   - 'log *'        displays all entries.
   - 'log <max>'    displays at most <max> entries.
-  - 'log <skip> *'     skips the first <skip> entries, the displays all
+  - 'log <skip> *'     skips the first <skip> entries, then displays all
                        remaining log entries.
   - 'log <skip> <max>' skips the first <skip> entries, then displays at most
                        <max> log entries.

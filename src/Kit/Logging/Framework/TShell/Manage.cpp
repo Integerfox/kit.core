@@ -40,12 +40,11 @@ static inline Kit::Logging::Framework::LogResult_T logf_( uint8_t     classId,
 static bool parsePackageId_( uint8_t&               dstPkgId,
                              const char*            srcPkgString,
                              IApplication&          appLogInfo,
-                             IPackage*&             dstPkgPtr,
                              Kit::TShell::IContext& context,
                              Kit::Text::IString&    outtext ) noexcept
 {
     if ( !Kit::Text::StringTo::unsignedInt( dstPkgId, srcPkgString ) ||
-         ( dstPkgPtr = appLogInfo.getPackage( dstPkgId ) ) == nullptr )
+         appLogInfo.getPackage( dstPkgId ) == nullptr )
     {
         outtext.format( "Invalid Package ID: '%s'", srcPkgString );
         context.writeFrame( outtext );
@@ -91,7 +90,7 @@ Kit::TShell::Result_T Manage::execute( Kit::TShell::IContext& context, char* cmd
     Kit::Text::Tokenizer::TextBlock tokens( cmdString );
 
     // CREATE
-    if ( tokens.numParameters() == 7 && tokens.getParameter( 1 )[0] == 'c' )
+    if ( tokens.numParameters() == 7 && tokens.getParameter( 1 )[0] == 'c' && tokens.getParameter( 1 )[1] == 'r' )
     {
         // Parse the IDs
         uint8_t classId = 0;
@@ -132,7 +131,7 @@ Kit::TShell::Result_T Manage::execute( Kit::TShell::IContext& context, char* cmd
     if ( tokens.numParameters() >= 4 )
     {
         // CLASS
-        if ( tokens.getParameter( 1 )[0] == 'c' )
+        if ( tokens.getParameter( 1 )[0] == 'c' && tokens.getParameter( 1 )[1] == 'l' )
         {
             // CLASS ENABLE
             if ( tokens.getParameter( 2 )[0] == 'e' )
@@ -183,9 +182,8 @@ Kit::TShell::Result_T Manage::execute( Kit::TShell::IContext& context, char* cmd
                 KitLoggingPackageMask_T mask = 0;
                 for ( size_t i = 3; i < tokens.numParameters(); ++i )
                 {
-                    uint8_t   pkgId  = 0;
-                    IPackage* pkgPtr = nullptr;
-                    if ( parsePackageId_( pkgId, tokens.getParameter( i ), m_appLogInfo, pkgPtr, context, outtext ) == false )
+                    uint8_t pkgId = 0;
+                    if ( parsePackageId_( pkgId, tokens.getParameter( i ), m_appLogInfo, context, outtext ) == false )
                     {
                         return Kit::TShell::Result_T::CMD_ERR_BAD_SYNTAX;
                     }
@@ -203,8 +201,7 @@ Kit::TShell::Result_T Manage::execute( Kit::TShell::IContext& context, char* cmd
                 for ( size_t i = 3; i < tokens.numParameters(); ++i )
                 {
                     uint8_t   pkgId  = 0;
-                    IPackage* pkgPtr = nullptr;
-                    if ( parsePackageId_( pkgId, tokens.getParameter( i ), m_appLogInfo, pkgPtr, context, outtext ) == false )
+                    if ( parsePackageId_( pkgId, tokens.getParameter( i ), m_appLogInfo, context, outtext ) == false )
                     {
                         return Kit::TShell::Result_T::CMD_ERR_BAD_SYNTAX;
                     }

@@ -10,6 +10,7 @@
 
 #include "Viewer.h"
 #include "Kit/Logging/Framework/Formatter.h"
+#include "Kit/Logging/Framework/types.h"
 #include "Kit/Text/Tokenizer/TextBlock.h"
 #include "Kit/Text/StringTo.h"
 #include "Kit/Logging/Framework/IApplication.h"
@@ -44,16 +45,16 @@ static Kit::TShell::Result_T displayClassificationInfo( IApplication&          a
                                                         Kit::TShell::IContext& context,
                                                         Kit::Text::IString&    outtext ) noexcept
 {
-    KitLoggingPackageMask_T enabledMask = getClassificationEnabledMask();
-    bool                    io          = true;
+    KitLoggingClassificationMask_T enabledMask = getClassificationEnabledMask();
+    bool                           io          = true;
     for ( uint16_t classificationId = 0; classificationId <= UINT8_MAX && io; ++classificationId )
     {
         if ( !appLogInfo.isClassificationIdValid( static_cast<uint8_t>( classificationId ) ) )
         {
             continue;
         }
-        const char*             classificationText = appLogInfo.classificationIdToString( static_cast<uint8_t>( classificationId ) );
-        KitLoggingPackageMask_T classificationMask = classificationIdToMask( static_cast<uint8_t>( classificationId ) );
+        const char*                    classificationText = appLogInfo.classificationIdToString( static_cast<uint8_t>( classificationId ) );
+        KitLoggingClassificationMask_T classificationMask = classificationIdToMask( static_cast<uint8_t>( classificationId ) );
         outtext.format( "%3u  %-20s  %s",
                         classificationId,
                         classificationText,
@@ -187,8 +188,8 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
     IEntry::Marker_T marker;
     if ( !m_logReader.retrieveLatest( logEntry, marker ) )
     {
-        context.writeFrame( "No log entries found" );
-        return Kit::TShell::Result_T::CMD_ERR_CMD_FAILED;
+        bool io = context.writeFrame( "No log entries found" );
+        return io ? Kit::TShell::Result_T::CMD_SUCCESS : Kit::TShell::Result_T::CMD_ERR_IO;
     }
 
     // Skip over entries to display WHEN not starting with the latest

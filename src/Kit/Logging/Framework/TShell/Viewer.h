@@ -53,7 +53,7 @@ public:
         "  - 'log' with no arguments displays the newest entry.\n"
         "  - 'log *'        displays all entries.\n"
         "  - 'log <max>'    displays at most <max> entries.\n"
-        "  - 'log <skip> *'     skips the first <skip> entries, the displays all\n"
+        "  - 'log <skip> *'     skips the first <skip> entries, then displays all\n"
         "                       remaining log entries.\n"
         "  - 'log <skip> <max>' skips the first <skip> entries, then displays at most\n"
         "                       <max> log entries.\n"
