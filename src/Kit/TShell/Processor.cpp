@@ -77,8 +77,9 @@ ICommand* Processor::findCommand( const char* verb, unsigned verbLength ) noexce
     while ( cmdPtr )
     {
         // Check if the command matches
-        if ( verbLength == strlen( cmdPtr->getVerb() ) && strncmp( verb, cmdPtr->getVerb(), verbLength ) == 0 )
+        if ( strncmp( verb, cmdPtr->getVerb(), verbLength ) == 0 && cmdPtr->getVerb()[verbLength] == '\0' )
         {
+            // Command found
             return cmdPtr;
         }
         cmdPtr = m_commands.next( *cmdPtr );
