@@ -50,7 +50,7 @@ public:
     }
 
 public:
-    void entry() noexcept override { runtests( m_flash ); }
+    void entry() noexcept override { runHwTests( m_flash ); }
 };
 
 };  // end namespace

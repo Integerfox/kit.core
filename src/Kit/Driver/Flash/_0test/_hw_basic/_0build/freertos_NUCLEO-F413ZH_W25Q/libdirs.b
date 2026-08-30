@@ -1,4 +1,5 @@
 # Hardware test sources
+src/Kit/Driver/Flash/_0test
 src/Kit/Driver/Flash/_0test/_hw_basic
 
 # Platform-specific main

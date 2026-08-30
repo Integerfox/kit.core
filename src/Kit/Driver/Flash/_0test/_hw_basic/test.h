@@ -9,9 +9,9 @@
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
 /** @file
-    Platform-independent hardware test for the Kit::Driver::Flash driver.  A
-    single test that can be re-used for all concrete Flash drivers (e.g. the
-    W25Q SPI NOR family).
+    Hardware-in-loop runner for the Kit::Driver::Flash test suite.  Wraps the
+    platform-independent runtests() function and loops forever on completion
+    to provide a visual heartbeat via the debug LED.
 */
 
 
@@ -30,8 +30,11 @@
       - Creating and starting the concrete Flash driver
 
     @param flash  The (already started) Flash driver under test
- */
-void runtests( Kit::Driver::Flash::IApi& flash );
+
+    NOTE: If the test passes, the debug LED blinks slowly (500ms on/off).  If 
+          any check fails, the debug LED blinks quickly (100ms on/off).
+    */
+void runHwTests( Kit::Driver::Flash::IApi& flash );
 
 
 #endif  // end header latch
