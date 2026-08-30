@@ -42,11 +42,11 @@ class MockFlash : public IApi
 {
 public:
     MockFlash() noexcept
-        : m_started( false )
-        , m_failNext( false )
-        , m_readCount( 0 )
+        : m_readCount( 0 )
         , m_writeCount( 0 )
         , m_eraseCount( 0 )
+        , m_started( false )
+        , m_failNext( false )
     {
         // Initialize to erased state
         memset( m_flash, 0xFF, sizeof( m_flash ) );
@@ -200,12 +200,12 @@ public:
 
 
 protected:
-    uint8_t  m_flash[TOTAL_SIZE];  //!< Simulated flash memory
-    bool     m_started;            //!< Whether the driver has been started
-    bool     m_failNext;           //!< If true, the next operation will fail
     uint32_t m_readCount;          //!< Number of read operations performed
     uint32_t m_writeCount;         //!< Number of write operations performed
     uint32_t m_eraseCount;         //!< Number of erase operations performed
+    uint8_t  m_flash[TOTAL_SIZE];  //!< Simulated flash memory
+    bool     m_started;            //!< Whether the driver has been started
+    bool     m_failNext;           //!< If true, the next operation will fail
 };
 
 

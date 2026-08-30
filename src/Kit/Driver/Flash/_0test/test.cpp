@@ -25,6 +25,7 @@
 
 #include "test.h"
 #include "Kit/System/Trace.h"
+#include <stdio.h>
 #include <string.h>
 
 #define SECT_ "_0test"
@@ -176,6 +177,49 @@ bool runtests( IApi& flash )
         KIT_SYSTEM_TRACE_MSG( SECT_, "  SKIP: device has fewer than 2 sectors" );
     }
 
+    // --- Test 5: Chip erase ---
+    KIT_SYSTEM_TRACE_MSG( SECT_, "--- Test 5: Chip erase ---" );
+    if ( numSectors >= 5 )
+    {
+        // First, last, and 3 sectors straddling the midpoint
+        const size_t mid        = numSectors / 2;
+        const size_t targets[]  = { 0, mid - 1, mid, mid + 1, numSectors - 1 };
+        const size_t numTargets = sizeof( targets ) / sizeof( targets[0] );
+
+        uint8_t writeData[TEST_PATTERN_SIZE];
+        for ( size_t i = 0; i < TEST_PATTERN_SIZE; i++ )
+        {
+            writeData[i] = static_cast<uint8_t>( 0xC0 + i );
+        }
+
+        for ( size_t t = 0; t < numTargets; t++ )
+        {
+            flash.eraseSector( targets[t] * sectorSize, 1 );
+            flash.write( targets[t] * sectorSize, writeData, TEST_PATTERN_SIZE );
+        }
+
+        check( flash.eraseChip() == IApi::SUCCESS, "eraseChip() succeeds" );
+        check( flash.waitUntilReady() == true, "waitUntilReady after eraseChip" );
+
+        char desc[64];
+        for ( size_t t = 0; t < numTargets; t++ )
+        {
+            const size_t addr = targets[t] * sectorSize;
+            memset( readBuf, 0x00, readChunk );
+            snprintf( desc, sizeof( desc ), "read sector %lu after eraseChip", (unsigned long)targets[t] );
+            check( flash.read( addr, readBuf, readChunk ) == IApi::SUCCESS, desc );
+            snprintf( desc, sizeof( desc ), "sector %lu blank after eraseChip", (unsigned long)targets[t] );
+            check( allBytesAre( readBuf, readChunk, 0xFF ), desc );
+        }
+    }
+    else
+    {
+        KIT_SYSTEM_TRACE_MSG( SECT_, "  SKIP: device has fewer than 5 sectors" );
+    }
+
+    // Stop the driver
+    flash.stop();
+    
     // --- Summary ---
     KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
     KIT_SYSTEM_TRACE_MSG( SECT_, "  RESULTS: %u passed, %u failed (of %u)", passCount_, failCount_, testCount_ );
