@@ -198,7 +198,11 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
         Kit::Persistence::Record::Journal::IEntry::Marker_T previousMarker;
         if ( !m_logReader.retrievePrevious( marker.timestamp, marker, logEntry, previousMarker ) )
         {
-            return Kit::TShell::Result_T::CMD_SUCCESS;
+            outtext.format( "Unable to skip %" PRIu32 " log entries (only found %" PRIu32 " entries.).",
+                            static_cast<uint32_t>( startNth ),
+                            static_cast<uint32_t>( i ) );
+            context.writeFrame( outtext );
+            return Kit::TShell::Result_T::CMD_ERR_CMD_FAILED;
         }
         marker = previousMarker;
     }
