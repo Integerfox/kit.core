@@ -1,3 +1,13 @@
+/*------------------------------------------------------------------------------
+ * Copyright Integer Fox Authors
+ *
+ * Distributed under the BSD 3 Clause License. See the license agreement at:
+ * https://github.com/Integerfox/kit.core/blob/main/LICENSE
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
+/** @file */
+
 #include "Kit/System/Api.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Driver/Flash/_testsupport/MockFlash.h"
