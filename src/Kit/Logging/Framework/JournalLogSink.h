@@ -27,6 +27,7 @@ namespace Framework {
 class JournalLogSink : public LogSink
 {
 public:
+    /// Constructor
     JournalLogSink( Kit::EventQueue::IQueue&                                            myEventQueue,
                     Kit::Container::RingBufferMP<Kit::Logging::Framework::EntryData_T>& incomingEntriesBuffer,
                     Kit::Persistence::Record::Journal::IEntry&                          entryRecord ) noexcept
@@ -36,6 +37,7 @@ public:
     }
 
 protected:
+    /// See Kit::Logging::Framework::LogSink::dispatchLogEntry()
     void dispatchLogEntry( Kit::Logging::Framework::EntryData_T& src ) noexcept override
     {
         m_entryRecord.addEntry( src );

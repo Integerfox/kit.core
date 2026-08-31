@@ -36,8 +36,6 @@ public:
         If endptr is specified and the conversation was successful, a pointer
         to the first character 'after' the number is returned.
 
-        NOTE: Only base 10 conversions are supported.
-
         The template argument 'T' must be a signed integer type.
     */
     template <typename T>

@@ -110,10 +110,12 @@ bool Processor::writeFrameWithSpecialChars( const char*        text,
     Kit::System::Mutex::ScopeLock criticalSection( m_outLock );
 
     // Start/end the frame and output the text with special characters
-    bool io  = true;
-    io      &= m_framer.startFrame();
-    io      &= m_framer.oobWrite( text, maxBytes );
-    io      &= m_framer.endFrame();
+    bool io = m_framer.startFrame();
+    if ( io )
+    {
+        io  = m_framer.oobWrite( text, maxBytes );
+        io &= m_framer.endFrame();
+    }
     return io;
 }
 

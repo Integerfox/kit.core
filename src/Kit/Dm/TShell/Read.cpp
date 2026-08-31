@@ -66,7 +66,12 @@ Kit::TShell::Result_T Read::execute( Kit::TShell::IContext& context, char* cmdSt
         bool  truncated;
         int   outlen;
         char* outptr = outtext.getBuffer( outlen );
-        if ( point->toJSON( outptr, outlen, truncated, true, true ) == false )
+        if ( point->toJSON( outptr, outlen, truncated, true, true ) == false || truncated )
+        {
+            outtext.format( "Failed to generate JSON for model point: %s", point->getName() );
+            context.writeFrame( outtext );
+            return Kit::TShell::Result_T::CMD_ERR_CMD_FAILED;
+        }
         {
             outtext.format( "Failed to generate JSON for model point: %s", point->getName() );
             context.writeFrame( outtext );
