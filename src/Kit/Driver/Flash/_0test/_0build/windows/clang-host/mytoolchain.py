@@ -1,11 +1,31 @@
 #---------------------------------------------------------------------------
 # This python module is used to customize a supported toolchain for your 
 # project specific settings.
+#
+# Notes:
+#    - ONLY edit/add statements in the sections marked by BEGIN/END EDITS
+#      markers.
+#    - Maintain indentation level and use spaces (it's a python thing) 
+#    - The structure/class 'BuildValues' contains (at a minimum the
+#      following data members.  Any member not specifically set defaults
+#      to null/empty string
+#            .inc             # C/C++ search path include directories 
+#            .asminc          # Assembly search path include directories
+#            .c_only_flags    # C only compiler flags
+#            .cflags          # C and C++ compiler flags
+#            .cppflags        # C++ only compiler flags
+#            .asmflags        # Assembly compiler flags
+#            .linkflags       # Linker flags
+#            .linklibs        # Linker libraries
+#            .firstobjs       # Object files to be unconditionally linked first
+#            .lastobjs        # Object files to be unconditionally linked last
+#           
 #---------------------------------------------------------------------------
 
 # get definition of the Options structure
 from nqbplib.base import BuildValues
 from nqbplib.my_globals import *
+from nqbplib.utils import config_catch2
 import os
 
 # Capture project/build directory
@@ -19,6 +39,7 @@ prjdir = os.path.dirname(os.path.abspath(__file__))
 FINAL_OUTPUT_NAME = 'a.exe'
 
 
+
 #
 # For build config/variant: "win32"
 #
@@ -29,7 +50,7 @@ optimized_win32 = BuildValues()
 debug_win32     = BuildValues()
 
 # Set 'base' options
-base_win32.cflags     = '-m32 -std=c++11 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
+base_win32.cflags     = '-m32 -std=c++14 -Wall -Werror -x c++ -D_CRT_SECURE_NO_WARNINGS'
 base_win32.linkflags  = '-m32'
 
 # Set 'Optimized' options
@@ -43,11 +64,15 @@ optimized_win32.cflags    = '-O3'
 # ONE build configuration/variant 
 #-------------------------------------------------
 
+# Add new dictionary of for new build configuration options
 win32_opts = { 'user_base':base_win32,
                'user_optimized':optimized_win32,
                'user_debug':debug_win32
              }
                
+        
+# Add new variant option dictionary to # dictionary of 
+# build variants
 build_variants = { 'win32':win32_opts,
                  }    
 
