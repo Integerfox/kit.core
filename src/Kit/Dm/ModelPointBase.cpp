@@ -446,7 +446,7 @@ void ModelPointBase::processSubscriptionEvent_( IObserver& observer, Event_T eve
 
         case eDATA_CHANGED:
             Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,
-                                           "ModelPointBase::processSubscriptionEvent_(): Data changed received when in the eSTATE_NOTIFY_PENDING state!" );
+                                           "MPSubscriptionEvent: Data changed received when in the eSTATE_NOTIFY_PENDING state!" );
             break;
 
             // Ignore all other events
@@ -463,12 +463,21 @@ void ModelPointBase::processSubscriptionEvent_( IObserver& observer, Event_T eve
             break;
 
         case eNOTIFY_COMPLETE:
+            // Re-subscribing can only be down with the 'original' model point,
+            // 're-homing' an observer inside the callback is NOT ALLOWED
+            if ( observer.getModelPoint_() != this )
+            {
+                Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,
+                                               "MPSubscriptionEvent: Subscriber re-subscribed to a DIFFERENT model point during its change-notification callback!" );
+                break;
+            }
+
             transitionToSubscribed( observer );
             break;
 
         case eDATA_CHANGED:
             Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,
-                                           "ModelPointBase::processSubscriptionEvent_(): Data changed received when in the eSTATE_NOTIFY_NOTIFYING state!" );
+                                           "MPSubscriptionEvent: Data changed received when in the eSTATE_NOTIFY_NOTIFYING state!" );
             break;
 
             // Ignore all other events
@@ -490,7 +499,7 @@ void ModelPointBase::processSubscriptionEvent_( IObserver& observer, Event_T eve
 
         case eDATA_CHANGED:
             Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,
-                                           "ModelPointBase::processSubscriptionEvent_(): Data changed received when in the eSTATE_NOTIFY_PENDING_DETACH state!" );
+                                           "MPSubscriptionEvent: Data changed received when in the eSTATE_NOTIFY_PENDING_DETACH state!" );
             break;
 
             // Ignore all other events
