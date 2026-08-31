@@ -69,9 +69,10 @@ public:
         method unconditionally writes the provided output to the destination
 
         CAUTION: Most client/consumers of the encoder should never use this
-                 method.  This method only has meaning/usefulness when the
-                 application KNOWS when the input source is NOT in a frame AND
-                 that there is 'non-framed' data that can be consumed.
+                 method. This writes bytes directly to the destination without
+                 applying the encoder's escaping rules. e.g. when intentionally
+                 bypassing encoding for a specific frame payload OR outputting
+                 content in between frames.
 
         Outputs 'numBytes' of data (from 'srcBuffer') to the output destination.
         The  method will return false if there an error occurred while

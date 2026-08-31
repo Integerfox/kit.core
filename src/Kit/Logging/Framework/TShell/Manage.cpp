@@ -122,7 +122,7 @@ Kit::TShell::Result_T Manage::execute( Kit::TShell::IContext& context, char* cmd
                             ? "added"
                         : result == Kit::Logging::Framework::LogResult_T::FILTERED
                             ? "filtered"
-                            : "queFull" );
+                            : "queueFull" );
         bool io = context.writeFrame( outtext );
         return io ? Kit::TShell::Result_T::CMD_SUCCESS : Kit::TShell::Result_T::CMD_ERR_IO;
     }

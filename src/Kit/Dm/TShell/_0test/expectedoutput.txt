@@ -29,13 +29,13 @@ dmr <mpname>
   instance.
  
 $ *** TEST: help dmw
-$ dmr [- <filter>]
-dmr <mpname>
-  Lists and displays Model Points contained in the Model Database. When no
-  arguments are provided, the command lists all available model points.  The
-  <filter> argument will only list points that contain <filter>.  To display a
-  Model Point the <mpname> argument is the symbolic name of the Model Point
-  instance.
+$ dmw {<mp-json-obj>}
+dmw <mpname>
+  Updates model points. A JSON object is used to specify the new value for a
+  a model point. Valid Key words are 'valid', 'locked', and 'val'. When only
+  specifying a model point name - only the model point's sequence number is
+  updated, i.e. will trigger change notification(s) with the MP instance's
+  current value (aka 'touch' semantics)
  
 $ int1
 int2

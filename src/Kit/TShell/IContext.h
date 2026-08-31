@@ -43,10 +43,8 @@ public:
         NOTE: An ENTIRE frame must be written with a single call to this method
               to avoid interleaving of output frames with console trace/logging.
 
-        NOTE: When 'containsSpecialChars' is true, the encoding of the 'text'
-              is bypassed.  While not desirable this allows the 'text' argument
-              to contain special characters that would otherwise be escaped, e.g.
-              the newline character.
+        NOTE: If the 'text' contains characters that must not be escaped (e.g.
+              newline), use writeFrameWithSpecialChars() instead.
      */
     inline bool writeFrame( const char* text ) noexcept
     {
@@ -61,10 +59,9 @@ public:
                              Kit::Type::SSize_T maxBytes ) noexcept = 0;
 
 public:
-    /** Same as writeFrame(), but the the encoding of the 'text'
-          is bypassed.  While not desirable this allows the 'text' argument
-          to contain special characters that would otherwise be escaped, e.g.
-          the newline character.
+    /** Same as writeFrame(), but the the encoding of the 'text' is bypassed.
+        While not desirable this allows the 'text' argument to contain special
+        characters that would otherwise be escaped, e.g. the newline character.
     */
     inline bool writeFrameWithSpecialChars( const char* text ) noexcept
     {

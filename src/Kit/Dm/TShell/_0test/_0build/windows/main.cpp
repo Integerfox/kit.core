@@ -1,6 +1,6 @@
 #include "Kit/System/Api.h"
 #include "Kit/System/Trace.h"
-#include "Kit/TShell/Command/_0test/test.h"
+#include "Kit/Dm/TShell/_0test/test.h"
 #include "Kit/Io/Stdio/StdIn.h"
 #include "Kit/Io/Stdio/StdOut.h"
 
