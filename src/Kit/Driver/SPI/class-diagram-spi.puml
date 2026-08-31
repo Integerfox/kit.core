@@ -1,0 +1,40 @@
+@startuml class-diagram-spi_kitdriverspi
+
+title Kit::Driver::SPI Namespace - Class Diagram
+
+namespace Kit.Driver.SPI {
+
+    interface IApi {
+        +{abstract} transfer( txData, rxData, numBytes ) : bool
+        +{abstract} write( txData, numBytes ) : bool
+        +{abstract} read( rxData, numBytes ) : bool
+    }
+}
+
+namespace Kit.Driver.SPI.ST.M32F4 {
+
+    class Api {
+        +Api( spiHandle, timeoutMs )
+        +start( startArgs ) : bool
+        +stop() : void
+        +transfer( txData, rxData, numBytes ) : bool
+        +write( txData, numBytes ) : bool
+        +read( rxData, numBytes ) : bool
+    }
+
+    Api .up.|> Kit.Driver.SPI.IApi
+}
+
+namespace Kit.Driver {
+    interface IStart {
+        +{abstract} start( startArgs ) : bool
+    }
+    interface IStop {
+        +{abstract} stop() : void
+    }
+}
+
+Kit.Driver.SPI.IApi .up.|> Kit.Driver.IStart
+Kit.Driver.SPI.IApi .up.|> Kit.Driver.IStop
+
+@enduml

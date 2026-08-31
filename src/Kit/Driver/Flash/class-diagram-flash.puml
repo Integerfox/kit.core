@@ -1,0 +1,91 @@
+@startuml class-diagram-flash_kitdriverflash
+
+title Kit::Driver::Flash Namespace - Class Diagram
+
+namespace Kit.Driver.Flash {
+
+    interface IApi {
+        +{abstract} read( srcOffset, dstBuffer, numBytes ) : bool
+        +{abstract} write( dstOffset, srcBuffer, numBytes ) : bool
+        +{abstract} eraseSector( sectorAddress ) : bool
+        +{abstract} eraseBlock32K( blockAddress ) : bool
+        +{abstract} eraseBlock64K( blockAddress ) : bool
+        +{abstract} eraseChip() : bool
+        +{abstract} getTotalSize() : size_t
+        +{abstract} getSectorSize() : size_t
+        +{abstract} getPageSize() : size_t
+        +{abstract} getNumSectors() : size_t
+    }
+}
+
+namespace Kit.Driver.Flash.W25Q {
+
+    class Commands_T <<struct>> {
+        +{static} WRITE_ENABLE : uint8_t
+        +{static} READ_STATUS_REG1 : uint8_t
+        +{static} PAGE_PROGRAM : uint8_t
+        +{static} SECTOR_ERASE : uint8_t
+        +{static} BLOCK_ERASE_32K : uint8_t
+        +{static} BLOCK_ERASE_64K : uint8_t
+        +{static} CHIP_ERASE : uint8_t
+        +{static} READ_DATA : uint8_t
+        +{static} JEDEC_ID : uint8_t
+    }
+
+    class StatusReg1_T <<struct>> {
+        +{static} BUSY : uint8_t
+        +{static} WEL : uint8_t
+    }
+
+    class DeviceInfo_T <<struct>> {
+        +totalSize : size_t
+        +sectorSize : size_t
+        +pageSize : size_t
+        +numSectors : size_t
+    }
+
+    class Api {
+        +Api( spi, cs, info )
+        +start( startArgs ) : bool
+        +stop() : void
+        +read( srcOffset, dstBuffer, numBytes ) : bool
+        +write( dstOffset, srcBuffer, numBytes ) : bool
+        +eraseSector( sectorAddress ) : bool
+        +eraseBlock32K( blockAddress ) : bool
+        +eraseBlock64K( blockAddress ) : bool
+        +eraseChip() : bool
+        +getTotalSize() : size_t
+        +getSectorSize() : size_t
+        +getPageSize() : size_t
+        +getNumSectors() : size_t
+        +readJedecId( mfgId, memType, capacity ) : bool
+    }
+
+    Api .up.|> Kit.Driver.Flash.IApi
+    Api --> DeviceInfo_T : uses
+    Api --> Commands_T : uses
+    Api --> StatusReg1_T : uses
+}
+
+namespace Kit.Driver.SPI {
+    interface IApi {
+        +{abstract} transfer( txData, rxData, numBytes ) : bool
+        +{abstract} write( txData, numBytes ) : bool
+        +{abstract} read( rxData, numBytes ) : bool
+    }
+}
+
+namespace Kit.Driver.Dio {
+    interface IOutput {
+        +{abstract} setHigh() : void
+        +{abstract} setLow() : void
+        +{abstract} toggle() : void
+        +{abstract} set( newState ) : void
+        +{abstract} getState() : bool
+    }
+}
+
+Kit.Driver.Flash.W25Q.Api --> Kit.Driver.SPI.IApi : uses
+Kit.Driver.Flash.W25Q.Api --> Kit.Driver.Dio.IOutput : "uses (chip select)"
+
+@enduml
