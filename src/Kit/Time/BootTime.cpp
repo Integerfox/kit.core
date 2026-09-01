@@ -26,6 +26,7 @@ static KitTimeMpBootCount* mpBootCounterPtr_;
 #endif
 
 
+#ifndef USE_KIT_TIME_CUSTOM_GET_BOOT_TIME
 uint64_t Kit::Time::getBootTime() noexcept
 {
     uint64_t now  = GET_TIME();
@@ -39,6 +40,7 @@ uint64_t Kit::Time::getBootTime() noexcept
     }
     return now;
 }
+#endif
 
 void Kit::Time::parseBootTime( uint64_t srcBootTime, KitTimeBootCount_T& dstBootCounter, uint64_t& dstElapsedTimeMs ) noexcept
 {

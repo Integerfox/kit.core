@@ -119,3 +119,4 @@ TEST_CASE( "mvc" )
     Kit::System::sleep( 100 );  // allow time for threads to stop BEFORE the runnable object goes out of scope
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
+
