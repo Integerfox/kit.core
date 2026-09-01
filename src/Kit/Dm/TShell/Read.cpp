@@ -72,11 +72,6 @@ Kit::TShell::Result_T Read::execute( Kit::TShell::IContext& context, char* cmdSt
             context.writeFrame( outtext );
             return Kit::TShell::Result_T::CMD_ERR_CMD_FAILED;
         }
-        {
-            outtext.format( "Failed to generate JSON for model point: %s", point->getName() );
-            context.writeFrame( outtext );
-            return Kit::TShell::Result_T::CMD_ERR_CMD_FAILED;
-        }
 
         // Output the JSON object: NOTE: The JSON object contains newlines -->use 'special' write frame method
         return context.writeFrameWithSpecialChars( outtext ) ? Kit::TShell::Result_T::CMD_SUCCESS : Kit::TShell::Result_T::CMD_ERR_IO;
