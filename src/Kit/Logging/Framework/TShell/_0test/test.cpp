@@ -19,6 +19,7 @@
 #include "Kit/TShell/Command/Trace.h"
 #include "Kit/TShell/Command/Wait.h"
 #include "Kit/TShell/StdioThread.h"
+#include "Kit/System/Shutdown.h"
 #include "Kit/Dm/TShell/Read.h"
 #include "Kit/Dm/TShell/Write.h"
 #include "Kit/Dm/ModelDatabase.h"
@@ -123,6 +124,33 @@ static Kit::Persistence::Record::Journal::Server<Kit::Logging::Framework::EntryD
 static Kit::System::Thread*                                                            persistentThread_ = nullptr;
 
 static KitLoggingOnlyApp appLogInfo_( entryFifo_ );
+
+namespace {
+
+class PersistenceShutdownHandler : public Kit::System::Shutdown::IHandler
+{
+public:
+    PersistenceShutdownHandler() noexcept
+    {
+        Kit::System::Shutdown::registerHandler( *this );
+    }
+
+    int notify( int exitCode ) noexcept override
+    {
+        if ( persistentThread_ != nullptr )
+        {
+            journalServer_.close();
+            persistentEventQueue_.pleaseStop();
+            Kit::System::Thread::destroy( *persistentThread_, 100 );
+            persistentThread_ = nullptr;
+        }
+        return exitCode;
+    }
+};
+
+}  // end anonymous namespace
+
+static PersistenceShutdownHandler persistenceShutdownHandler_;
 
 
 Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList( "ignore_static_constructor" );

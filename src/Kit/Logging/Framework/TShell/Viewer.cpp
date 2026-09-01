@@ -29,18 +29,6 @@ namespace TShell {
 
 namespace {
 
-static bool parseUnsigned_( const char* src, size_t& dst ) noexcept
-{
-    unsigned value = 0;
-    if ( !Kit::Text::StringTo::unsignedInt( value, src ) )
-    {
-        return false;
-    }
-
-    dst = value;
-    return true;
-}
-
 static Kit::TShell::Result_T displayClassificationInfo( IApplication&          appLogInfo,
                                                         Kit::TShell::IContext& context,
                                                         Kit::Text::IString&    outtext ) noexcept
@@ -140,7 +128,7 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
         else
         {
             // N entries
-            if ( !parseUnsigned_( arg1, maxCount ) || maxCount == 0 )
+            if ( !Kit::Text::StringTo::unsignedInt( maxCount, arg1 ) || maxCount == 0 )
             {
                 outtext.format( "Invalid argument: '%s'", arg1 );
                 context.writeFrame( outtext );
@@ -155,7 +143,7 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
         const char* arg1 = tokens.getParameter( 1 );
         const char* arg2 = tokens.getParameter( 2 );
 
-        if ( !parseUnsigned_( arg1, startNth ) )
+        if ( !Kit::Text::StringTo::unsignedInt( startNth, arg1 ) )
         {
             outtext.format( "Invalid argument: '%s'", arg1 );
             context.writeFrame( outtext );
@@ -168,7 +156,7 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
         }
         else
         {
-            if ( !parseUnsigned_( arg2, maxCount ) || maxCount == 0 )
+            if ( !Kit::Text::StringTo::unsignedInt( maxCount, arg2 ) || maxCount == 0 )
             {
                 outtext.format( "Invalid argument: '%s'", arg2 );
                 context.writeFrame( outtext );
@@ -196,11 +184,11 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
     for ( size_t i = 0; i < startNth; ++i )
     {
         Kit::Persistence::Record::Journal::IEntry::Marker_T previousMarker;
-        if ( !m_logReader.retrievePrevious( marker.timestamp, marker, logEntry, previousMarker ) )
+        if ( !m_logReader.retrievePrevious( marker.timestamp, marker, logEntry, previousMarker ) && (i+1) < startNth )
         {
             outtext.format( "Unable to skip %" PRIu32 " log entries (only found %" PRIu32 " entries.).",
                             static_cast<uint32_t>( startNth ),
-                            static_cast<uint32_t>( i ) );
+                            static_cast<uint32_t>( i + 1 ) );
             context.writeFrame( outtext );
             return Kit::TShell::Result_T::CMD_ERR_CMD_FAILED;
         }
