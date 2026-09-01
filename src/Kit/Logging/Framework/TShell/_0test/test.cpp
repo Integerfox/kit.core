@@ -19,7 +19,6 @@
 #include "Kit/TShell/Command/Trace.h"
 #include "Kit/TShell/Command/Wait.h"
 #include "Kit/TShell/StdioThread.h"
-#include "Kit/Logging/Framework/JournalLogSink.h"
 #include "Kit/Dm/TShell/Read.h"
 #include "Kit/Dm/TShell/Write.h"
 #include "Kit/Dm/ModelDatabase.h"
@@ -124,7 +123,6 @@ static Kit::Persistence::Record::Journal::Server<Kit::Logging::Framework::EntryD
 static Kit::System::Thread*                                                            persistentThread_ = nullptr;
 
 static KitLoggingOnlyApp appLogInfo_( entryFifo_ );
-static Kit::Logging::Framework::JournalLogSink journalLogSink_( persistentEventQueue_, entryFifo_, entryRecord_ );
 
 
 Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList( "ignore_static_constructor" );
@@ -189,7 +187,6 @@ void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
     if ( persistentThread_ != nullptr )
     {
         journalServer_.open();
-        journalLogSink_.open();
     }
 
     stdioThread_.launchTShell( infd, outfd );
