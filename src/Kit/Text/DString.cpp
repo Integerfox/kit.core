@@ -27,7 +27,7 @@ static char      noMemory_[1]     = { '\0' };
 
 ///////////////////////////////
 DString::DString( const IString& string, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ ) // Purposely use noMemory_ here to avoid calling the StringBase constructor with a nullptr
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( string.length(), initialSize ) ) )
 {
@@ -36,7 +36,7 @@ DString::DString( const IString& string, int initialSize, int blocksize ) noexce
 }
 
 DString::DString( const DString& string, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( string.length(), initialSize ) ) )
 {
@@ -45,7 +45,7 @@ DString::DString( const DString& string, int initialSize, int blocksize ) noexce
 }
 
 DString::DString( const char* string, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( (int)( string ? strlen( string ) : 1 ), initialSize ) ) )
 {
@@ -54,7 +54,7 @@ DString::DString( const char* string, int initialSize, int blocksize ) noexcept
 }
 
 DString::DString( char c, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( (int)sizeof( c ), initialSize ) ) )
 {
@@ -63,7 +63,7 @@ DString::DString( char c, int initialSize, int blocksize ) noexcept
 }
 
 DString::DString( int num, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
@@ -73,7 +73,7 @@ DString::DString( int num, int initialSize, int blocksize ) noexcept
 }
 
 DString::DString( unsigned num, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
@@ -83,7 +83,7 @@ DString::DString( unsigned num, int initialSize, int blocksize ) noexcept
 }
 
 DString::DString( long num, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
@@ -93,7 +93,7 @@ DString::DString( long num, int initialSize, int blocksize ) noexcept
 }
 
 DString::DString( long long num, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
@@ -104,7 +104,7 @@ DString::DString( long long num, int initialSize, int blocksize ) noexcept
 
 
 DString::DString( unsigned long num, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {
@@ -114,7 +114,7 @@ DString::DString( unsigned long num, int initialSize, int blocksize ) noexcept
 }
 
 DString::DString( unsigned long long num, int initialSize, int blocksize ) noexcept
-    : StringBase( nullptr )
+    : StringBase( noMemory_ )
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( maxIntegerChars_, initialSize ) ) )
 {

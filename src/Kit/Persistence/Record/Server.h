@@ -81,7 +81,7 @@ public:
     }
 
 protected:
-    /// Variable length list of Records to manage.  T
+    /// Variable length list of Records to manage.
     IRecord** m_records;
 
     /// Number of elements in the record list

@@ -1,27 +1,34 @@
-help 
-help dm
-trace
-tprint
-threads
-dm ls too many args
-dm write invalid-json
-dm write too many args
-dm read bad-name
-dm read too many args
-dm bad-sub-command
-
-dm ls
-dm read APPLE
-dm read ORANGE
-dm read PLUM
-dm write { name:"APPLE", val:111 }
-dm write { name:"ORANGE", val:"0x100"}
-dm write { name:"PLUM", val:"Hello Mr. Plum", locked:true }
-dm read APPLE
-dm read ORANGE
-tprint "PLUM before being touched"
-dm read PLUM
-dm touch PLUM
-tprint "PLUM AFTER being touched"
-dm read PLUM
-tprint
+echo - "*** TEST: help"
+help
+echo - "*** TEST: help dmr"
+help dmr
+echo - "*** TEST: help dmw"
+help dmw
+dmr
+dmr - 1
+dmr - nt 
+dmt - notfound
+dmr int1
+dmr int2
+dmr bob
+dmw {name:"int1",val:"0x32"}
+dmr int1
+dmw {name:"int2",val:32}
+dmr int2
+dmr str1
+dmr str2
+dmw {name:"str1",val:{text:"BOB"}}
+dmw {name:"str2",val:{text:"Bob's your uncle!"}}
+dmr str1
+dmr str2
+dmw str2
+dmr str2
+dmw {name:"str2",valid:false}
+dmr str2
+dmw {name:int1:val:1}
+dmw {name:"doesNotExist",valid:false}
+dmw str2 2ndArg
+dmw doesNotExist
+dmr 1 2 3
+echo "LAST CHECKED LINE"
+bye

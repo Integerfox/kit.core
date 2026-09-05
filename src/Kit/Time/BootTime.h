@@ -56,6 +56,13 @@ namespace Time {
           changed/overridden by defining USE_KIT_TIME_BOOTTIME_WITH_ABSOLUTETIME
           in the kit_config.h file.  In this case, the AbsoluteTime interface is
           used for the elapsed time portion of the boot time.
+
+    NOTE: The application can override the entire implementation of this method
+          by defining USE_KIT_TIME_CUSTOM_GET_BOOT_TIME in the kit_config.h file.
+          In this case, the application must provide its own implementation of
+          the getBootTime() method.  Example usage for a custom getBootTime() 
+          method is unit testing, i.e. the test code has control of the returned
+          time values.
  */
 uint64_t getBootTime() noexcept;
 
