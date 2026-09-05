@@ -16,6 +16,7 @@
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/Api.h"
+#include "Kit/System/Timer.h"
 #include <inttypes.h>
 
 ///
@@ -26,7 +27,7 @@ namespace Asynchronous {
 /** This concrete class is a asynchronous ITC client that sets the server's
     widgets LED flash rate
  */
-class Client : public IRateResponse, public Kit::Itc::OpenCloseSync
+class Client : public IRateResponse, public Kit::Itc::OpenCloseSync, public Kit::System::Timer
 {
 public:
     /// Constructor
@@ -36,6 +37,7 @@ public:
             unsigned                             flashRatesCount,
             Kit::System::Semaphore&              shutdownSignal )
         : Kit::Itc::OpenCloseSync( clientsEventQueue )
+        , Kit::System::Timer( clientsEventQueue )
         , m_shutdownSignal( shutdownSignal )
         , m_serverSAP( serverSAP )
         , m_rateResponseMsg( *this, clientsEventQueue, serverSAP, m_ratePayload )
@@ -77,6 +79,7 @@ public:
         {
             // Housekeeping
             m_opened = false;
+            Timer::stop();
 
             // NOTE: A more robust shutdown would ensure that any pending requests
             //       have been returned.  See the 'Itc/Subscription' example for
@@ -92,17 +95,26 @@ public:
     /// Rate Response
     void response( RateMsg& msg ) noexcept override
     {
+        // Process the Response
         auto& payload = msg.getPayload();
         if ( payload.success )
         {
-            // Let the new flash rate run for a while
-            Kit::System::sleep( payload.flashRateMs * 2 * 10 );  // Run each flash rate for 10 full on/off cycles
+            // Run each flash rate for 10 full on/off cycles
+            Timer::start( payload.flashRateMs * 2 * 10 );
         }
+
+        // End the application on error
         else
         {
             KIT_SYSTEM_TRACE_MSG( "main", "Rate Request FAILED. (delay=%" PRIu32 " ms)", payload.flashRateMs );
+            m_shutdownSignal.signal();
         }
+    }
 
+protected:
+    /// Timer callback
+    void expired() noexcept override
+    {
         // Limit the number of requests
         if ( --m_maxNumberOfRequests > 0 )
         {
@@ -117,7 +129,6 @@ public:
         }
     }
 
-protected:
     /// Helper method: Send the rate request to the server
     void sendRequest() noexcept
     {
@@ -125,7 +136,7 @@ protected:
         auto& payload       = m_rateResponseMsg.getPayload();
         payload.flashRateMs = m_flashRatesMs[m_flashRateIndex];
         KIT_SYSTEM_TRACE_MSG( "main", "Sending Rate Request (flashRate=%" PRIu32 " ms, idx=%" PRIu32 ")", payload.flashRateMs, m_flashRateIndex );
-        
+
         // Increment the flash rate index for the next request
         incrementFlashRateIndex();
 
