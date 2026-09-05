@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -108,18 +108,18 @@
 <span id="L46"><span class="lineNum">      46</span>                 :             : </span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : public:</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     /// Constructor</span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC tlaBgGNC">           1 :     Trace( Kit::Container::OrderedList&lt;ICommand&gt;&amp; commandList,</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC tlaBgGNC">           3 :     Trace( Kit::Container::OrderedList&lt;ICommand&gt;&amp; commandList,</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :            Permissions_T                          permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept</span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">           1 :         : Base( commandList, verb, permissions )</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">           3 :         : Base( commandList, verb, permissions )</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     {</span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">           1 :     }</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">           3 :     }</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : </span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : public:</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :     /// See Kit::TShell::Command</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     Result_T execute( IContext&amp; context, char* cmdString ) noexcept override;</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : </span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     /// See Kit::TShell::ICommand</span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">           3 :     const char* getUsage() const noexcept override { return usage; }</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">           5 :     const char* getUsage() const noexcept override { return usage; }</span></span>
 <span id="L61"><span class="lineNum">      61</span>                 :             : </span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :     /// See Kit::TShell::ICommand</span>
 <span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">           1 :     const char* getHelp() const noexcept override { return detailedHelp; }</span></span>

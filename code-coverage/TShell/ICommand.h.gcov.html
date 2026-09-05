@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -92,7 +92,7 @@
 <span id="L30"><span class="lineNum">      30</span>                 :             : @param CMD_ERR_CMD_FAILED     Command failed to complete one or more of actions.</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : */</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : // clang-format off</span>
-<span id="L33"><span class="lineNum">      33</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 53 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span>]:<span class="tlaGNC tlaBgGNC">          55 : BETTER_ENUM( Result_T, uint8_t,</span></span>
+<span id="L33"><span class="lineNum">      33</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 213 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 17 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 46 times"> + </span>]:<span class="tlaGNC tlaBgGNC">         217 : BETTER_ENUM( Result_T, uint8_t,</span></span>
 <span id="L34"><span class="lineNum">      34</span>                 :             :              CMD_SUCCESS,</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :              CMD_ERR_NOT_SUPPORTED,</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :              CMD_ERR_NOT_AUTHORIZED,</span>
@@ -135,10 +135,10 @@
 <span id="L73"><span class="lineNum">      73</span>                 :             : </span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : protected:</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     /// Protected Constructor (needed because of the inheritance from KeyLiteralString)</span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          16 :     ICommand( const char* name ) noexcept</span></span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          16 :         : Kit::Container::KeyLiteralString( name )</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          34 :     ICommand( const char* name ) noexcept</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          34 :         : Kit::Container::KeyLiteralString( name )</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :     {</span>
-<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">          16 :     }</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">          34 :     }</span></span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :     </span>
 <span id="L81"><span class="lineNum">      81</span>                 :             : public:</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :     /// Virtual destructor</span>

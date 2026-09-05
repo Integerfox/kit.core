@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -115,14 +115,30 @@ $(function() {
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_i_encoder.html#a37da214231b49db15e4c918dbc65986c">   65</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_framing_1_1_i_encoder.html#a37da214231b49db15e4c918dbc65986c">endFrame</a>( <span class="keywordtype">void</span> ) <span class="keyword">noexcept</span> = 0;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    /// Virtual Destructor</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_i_encoder.html#a62dd5ffd426a1f03352c842d79e78760">   69</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_kit_1_1_framing_1_1_i_encoder.html#a62dd5ffd426a1f03352c842d79e78760">~IEncoder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>};</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    /** This method allows &#39;out-of-band&#39; writing to the output destination. This</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">        method unconditionally writes the provided output to the destination</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">        CAUTION: Most client/consumers of the encoder should never use this</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">                 method. This writes bytes directly to the destination without</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">                 applying the encoder&#39;s escaping rules. e.g. when intentionally</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">                 bypassing encoding for a specific frame payload OR outputting</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">                 content in between frames.</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">        Outputs &#39;numBytes&#39; of data (from &#39;srcBuffer&#39;) to the output destination.</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">        The  method will return false if there an error occurred while</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">        writing to the output destination; else true is returned.</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_i_encoder.html#ae18c27cad635535906ca72a24ba94c8e">   81</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_framing_1_1_i_encoder.html#ae18c27cad635535906ca72a24ba94c8e">oobWrite</a>( <span class="keyword">const</span> <span class="keywordtype">void</span>* srcBuffer, <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">    /// Virtual Destructor</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="class_kit_1_1_framing_1_1_i_encoder.html#a62dd5ffd426a1f03352c842d79e78760">   85</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <a class="code hl_function" href="class_kit_1_1_framing_1_1_i_encoder.html#a62dd5ffd426a1f03352c842d79e78760">~IEncoder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>};</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_s_size_8h_html"><div class="ttname"><a href="_s_size_8h.html">SSize.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_i_encoder_html"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_encoder.html">Kit::Framing::IEncoder</a></div><div class="ttdoc">This abstract class defines an interface for 'creating/ouput' (encoding) a frame.</div><div class="ttdef"><b>Definition</b> IEncoder.h:27</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_i_encoder_html_a37da214231b49db15e4c918dbc65986c"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_encoder.html#a37da214231b49db15e4c918dbc65986c">Kit::Framing::IEncoder::endFrame</a></div><div class="ttdeci">virtual bool endFrame(void) noexcept=0</div><div class="ttdoc">Ends the frame.</div></div>
@@ -130,12 +146,13 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_i_encoder_html_a736785703ee06be35321c7365c9a049f"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_encoder.html#a736785703ee06be35321c7365c9a049f">Kit::Framing::IEncoder::output</a></div><div class="ttdeci">bool output(uint8_t srcByte) noexcept</div><div class="ttdoc">Convenience/Alias method to output a single byte at a time.</div><div class="ttdef"><b>Definition</b> IEncoder.h:52</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_i_encoder_html_a7b1d3ccf8292fedd9514163b46e648e4"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_encoder.html#a7b1d3ccf8292fedd9514163b46e648e4">Kit::Framing::IEncoder::startFrame</a></div><div class="ttdeci">virtual bool startFrame(void) noexcept=0</div><div class="ttdoc">Begins the frame.</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_i_encoder_html_abb4a945f91608ad81c8b21728ae9b1b3"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_encoder.html#abb4a945f91608ad81c8b21728ae9b1b3">Kit::Framing::IEncoder::output</a></div><div class="ttdeci">virtual bool output(const void *srcBuffer, Kit::Type::SSize_T numBytes) noexcept=0</div><div class="ttdoc">Outputs 'numBytes' of data (from 'srcBuffer') to the output destination.</div></div>
+<div class="ttc" id="aclass_kit_1_1_framing_1_1_i_encoder_html_ae18c27cad635535906ca72a24ba94c8e"><div class="ttname"><a href="class_kit_1_1_framing_1_1_i_encoder.html#ae18c27cad635535906ca72a24ba94c8e">Kit::Framing::IEncoder::oobWrite</a></div><div class="ttdeci">virtual bool oobWrite(const void *srcBuffer, Kit::Type::SSize_T numBytes) noexcept=0</div><div class="ttdoc">This method allows 'out-of-band' writing to the output destination.</div></div>
 <div class="ttc" id="anamespace_kit_1_1_type_html_aa244ac9e3a5479ac83b067897b68caf2"><div class="ttname"><a href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></div><div class="ttdeci">int32_t SSize_T</div><div class="ttdoc">This is my work-around for the fact that C++ does not have a standard 'ssize_t' type.</div><div class="ttdef"><b>Definition</b> SSize.h:33</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

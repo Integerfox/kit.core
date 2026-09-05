@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryLo">30.6&nbsp;%</td>
@@ -99,12 +99,12 @@
 <span id="L37"><span class="lineNum">      37</span>                 :             :                    Kit::Io::IInput&amp;         infd,</span>
 <span id="L38"><span class="lineNum">      38</span>                 :             :                    Kit::Io::IOutput&amp;        outfd,</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :                    bool                     enabledOnLaunch )</span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC tlaBgGNC">           1 :         : m_shell( shell )</span></span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">           1 :         , m_infd( infd )</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">           1 :         , m_outfd( outfd )</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC tlaBgGNC">           3 :         : m_shell( shell )</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">           3 :         , m_infd( infd )</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">           3 :         , m_outfd( outfd )</span></span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :         , m_startEnabled( enabledOnLaunch )</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :         , m_endThread( false )</span>
-<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">           1 :         , m_shellRunning( false )</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">           3 :         , m_shellRunning( false )</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     {</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : </span>
@@ -144,15 +144,15 @@
 <span id="L82"><span class="lineNum">      82</span>                 :             :     }</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             : </span>
 <span id="L84"><span class="lineNum">      84</span>                 :             :     ///</span>
-<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">           1 :     void entry() noexcept override</span></span>
+<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">           3 :     void entry() noexcept override</span></span>
 <span id="L86"><span class="lineNum">      86</span>                 :             :     {</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :         for ( ;; )</span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :         {</span>
 <span id="L89"><span class="lineNum">      89</span>                 :             :             // Support starting in the disabled/wait state</span>
-<span id="L90"><span class="lineNum">      90</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           2 :             if ( m_startEnabled )</span></span>
+<span id="L90"><span class="lineNum">      90</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           4 :             if ( m_startEnabled )</span></span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :             {</span>
 <span id="L92"><span class="lineNum">      92</span>                 :             :                 m_shellRunning = true;</span>
-<span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">           2 :                 m_shell.start( m_infd, m_outfd );</span></span>
+<span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">           4 :                 m_shell.start( m_infd, m_outfd );</span></span>
 <span id="L94"><span class="lineNum">      94</span>                 :             :                 m_shellRunning = false;</span>
 <span id="L95"><span class="lineNum">      95</span>                 :             :             }</span>
 <span id="L96"><span class="lineNum">      96</span>                 :             :             m_startEnabled = true;</span>
@@ -181,9 +181,9 @@
 <span id="L119"><span class="lineNum">     119</span>                 :             : namespace Kit {</span>
 <span id="L120"><span class="lineNum">     120</span>                 :             : namespace TShell {</span>
 <span id="L121"><span class="lineNum">     121</span>                 :             : </span>
-<span id="L122"><span class="lineNum">     122</span>                 :<span class="tlaGNC tlaBgGNC">           1 : StdioThread::~StdioThread()</span></span>
+<span id="L122"><span class="lineNum">     122</span>                 :<span class="tlaGNC tlaBgGNC">           3 : StdioThread::~StdioThread()</span></span>
 <span id="L123"><span class="lineNum">     123</span>                 :             : {</span>
-<span id="L124"><span class="lineNum">     124</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           1 :     if ( !m_staticInstance )</span></span>
+<span id="L124"><span class="lineNum">     124</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           3 :     if ( !m_staticInstance )</span></span>
 <span id="L125"><span class="lineNum">     125</span>                 :             :     {</span>
 <span id="L126"><span class="lineNum">     126</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC tlaBgUNC">           0 :         if ( m_threadPtr )</span></span>
 <span id="L127"><span class="lineNum">     127</span>                 :             :         {</span>
@@ -191,21 +191,21 @@
 <span id="L129"><span class="lineNum">     129</span>                 :             :         }</span>
 <span id="L130"><span class="lineNum">     130</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC">           0 :         delete m_runnablePtr;</span></span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :     }</span>
-<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC tlaBgGNC">           1 : }</span></span>
+<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC tlaBgGNC">           3 : }</span></span>
 <span id="L133"><span class="lineNum">     133</span>                 :             : </span>
-<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">           1 : bool StdioThread::launchTShell( Kit::Io::IInput&amp; infd, Kit::Io::IOutput&amp; outfd, bool enabledOnLaunch ) noexcept</span></span>
+<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">           3 : bool StdioThread::launchTShell( Kit::Io::IInput&amp; infd, Kit::Io::IOutput&amp; outfd, bool enabledOnLaunch ) noexcept</span></span>
 <span id="L135"><span class="lineNum">     135</span>                 :             : {</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :     // Already launched?</span>
-<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           1 :     if ( m_threadPtr )</span></span>
+<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           3 :     if ( m_threadPtr )</span></span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :     {</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             :         return false;</span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :     }</span>
 <span id="L141"><span class="lineNum">     141</span>                 :             : </span>
-<span id="L142"><span class="lineNum">     142</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :     m_runnablePtr = new ( std::nothrow ) ShellRunnable( m_shell, infd, outfd, enabledOnLaunch );</span></span>
-<span id="L143"><span class="lineNum">     143</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :     if ( m_runnablePtr != nullptr )</span></span>
+<span id="L142"><span class="lineNum">     142</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           3 :     m_runnablePtr = new ( std::nothrow ) ShellRunnable( m_shell, infd, outfd, enabledOnLaunch );</span></span>
+<span id="L143"><span class="lineNum">     143</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           3 :     if ( m_runnablePtr != nullptr )</span></span>
 <span id="L144"><span class="lineNum">     144</span>                 :             :     {</span>
-<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">           1 :         m_threadPtr = Kit::System::Thread::create( *m_runnablePtr, m_name, m_priority );</span></span>
-<span id="L146"><span class="lineNum">     146</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           1 :         if ( m_threadPtr == nullptr )</span></span>
+<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">           3 :         m_threadPtr = Kit::System::Thread::create( *m_runnablePtr, m_name, m_priority );</span></span>
+<span id="L146"><span class="lineNum">     146</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           3 :         if ( m_threadPtr == nullptr )</span></span>
 <span id="L147"><span class="lineNum">     147</span>                 :             :         {</span>
 <span id="L148"><span class="lineNum">     148</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC tlaBgUNC">           0 :             delete m_runnablePtr;</span></span>
 <span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaUNC">           0 :             m_runnablePtr = nullptr;</span></span>
@@ -213,7 +213,7 @@
 <span id="L151"><span class="lineNum">     151</span>                 :             :         }</span>
 <span id="L152"><span class="lineNum">     152</span>                 :             :     }</span>
 <span id="L153"><span class="lineNum">     153</span>                 :             : </span>
-<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC tlaBgGNC">           1 :     return m_runnablePtr != nullptr;</span></span>
+<span id="L154"><span class="lineNum">     154</span>                 :<span class="tlaGNC tlaBgGNC">           3 :     return m_runnablePtr != nullptr;</span></span>
 <span id="L155"><span class="lineNum">     155</span>                 :             : }</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             : </span>
 <span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">           1 : bool StdioThread::restartTShell() noexcept</span></span>

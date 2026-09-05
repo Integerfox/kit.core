@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">92.9&nbsp;%</td>
@@ -109,10 +109,10 @@
 <span id="L47"><span class="lineNum">      47</span>                 :             :     msg.returnToSender();</span>
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">           4 : }</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">           7 : void LogSink::elementCountChanged( Kit::Dm::Mp::Uint32&amp; mp, Kit::Dm::IObserver&amp; clientObserver ) noexcept</span></span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">           6 : void LogSink::elementCountChanged( Kit::Dm::Mp::Uint32&amp; mp, Kit::Dm::IObserver&amp; clientObserver ) noexcept</span></span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : {</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     uint32_t count;</span>
-<span id="L53"><span class="lineNum">      53</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           7 :     if ( mp.readAndSync( count, clientObserver ) &amp;&amp; count &gt; 0 )</span></span>
+<span id="L53"><span class="lineNum">      53</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           6 :     if ( mp.readAndSync( count, clientObserver ) &amp;&amp; count &gt; 0 )</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     {</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :         // Temporarily cancel change notifications to avoid redundant notifications while draining the buffer</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :         mp.detach( m_obElementCount );</span>
@@ -137,7 +137,7 @@
 <span id="L75"><span class="lineNum">      75</span>                 :             :         }</span>
 <span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">           4 :         mp.attach( m_obElementCount, seqNum );</span></span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :     }</span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">           7 : }</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">           6 : }</span></span>
         </pre>
               </td>
             </tr>

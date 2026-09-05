@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -376,7 +376,7 @@ $(function() {
 <div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        {</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            <span class="comment">// Try to parse the string as a number</span></div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>            <a class="code hl_define" href="_primitive_type_8h.html#ad2ebe75d3bb2582879e33f2e90f91892">OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE</a> val;</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            <span class="keywordflow">if</span> ( <a class="code hl_function" href="class_kit_1_1_text_1_1_string_to.html#a5a46cc841f70facc6a7c44f313abad93">Kit::Text::StringTo::signedInt</a>( val, src.as&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>*&gt;(), 0 ) )</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            <span class="keywordflow">if</span> ( <a class="code hl_function" href="class_kit_1_1_text_1_1_string_to.html#a25b0e8acc620b47efe9c8c909a2d8854">Kit::Text::StringTo::signedInt</a>( val, src.as&lt;<span class="keyword">const</span> <span class="keywordtype">char</span>*&gt;(), 0 ) )</div>
 <div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            {</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                retSequenceNumber = this-&gt;<a class="code hl_function" href="class_kit_1_1_dm_1_1_mp_1_1_scalar.html#aceec2587eda466128cf67a7b2c3e3571">write</a>( <span class="keyword">static_cast&lt;</span>ELEMTYPE<span class="keyword">&gt;</span>( val ), <span class="keyword">false</span>, lockRequest );</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
@@ -519,13 +519,13 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a></div><div class="ttdoc">This abstract class defines the operations that can be before on a NULL terminated string.</div><div class="ttdef"><b>Definition</b> IString.h:38</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_string_base_html_a78424fd68ce04916c5d7e1439967057a"><div class="ttname"><a href="class_kit_1_1_text_1_1_string_base.html#a78424fd68ce04916c5d7e1439967057a">Kit::Text::StringBase::format</a></div><div class="ttdeci">void format(const char *format,...) noexcept override</div><div class="ttdoc">See Kit::Text::IString.</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_string_base_html_ad75153e2950ec0069bc6eb302a28f3ba"><div class="ttname"><a href="class_kit_1_1_text_1_1_string_base.html#ad75153e2950ec0069bc6eb302a28f3ba">Kit::Text::StringBase::getString</a></div><div class="ttdeci">const char * getString() const noexcept override</div><div class="ttdoc">See Kit::Text::IString.</div></div>
-<div class="ttc" id="aclass_kit_1_1_text_1_1_string_to_html_a5a46cc841f70facc6a7c44f313abad93"><div class="ttname"><a href="class_kit_1_1_text_1_1_string_to.html#a5a46cc841f70facc6a7c44f313abad93">Kit::Text::StringTo::signedInt</a></div><div class="ttdeci">static bool signedInt(T &amp;convertedValue, const char *string, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</div><div class="ttdoc">This template method converts the specified string to an signed integer.</div><div class="ttdef"><b>Definition</b> StringTo.h:44</div></div>
-<div class="ttc" id="aclass_kit_1_1_text_1_1_string_to_html_af73d958578d575ba2ae136a53d4dc035"><div class="ttname"><a href="class_kit_1_1_text_1_1_string_to.html#af73d958578d575ba2ae136a53d4dc035">Kit::Text::StringTo::unsignedInt</a></div><div class="ttdeci">static bool unsignedInt(T &amp;convertedValue, const char *string, int base=10, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</div><div class="ttdoc">This template method converts the specified string to an unsigned integer.</div><div class="ttdef"><b>Definition</b> StringTo.h:81</div></div>
+<div class="ttc" id="aclass_kit_1_1_text_1_1_string_to_html_a25b0e8acc620b47efe9c8c909a2d8854"><div class="ttname"><a href="class_kit_1_1_text_1_1_string_to.html#a25b0e8acc620b47efe9c8c909a2d8854">Kit::Text::StringTo::signedInt</a></div><div class="ttdeci">static bool signedInt(T &amp;convertedValue, const char *string, int base=10, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</div><div class="ttdoc">This template method converts the specified string to an signed integer.</div><div class="ttdef"><b>Definition</b> StringTo.h:42</div></div>
+<div class="ttc" id="aclass_kit_1_1_text_1_1_string_to_html_af73d958578d575ba2ae136a53d4dc035"><div class="ttname"><a href="class_kit_1_1_text_1_1_string_to.html#af73d958578d575ba2ae136a53d4dc035">Kit::Text::StringTo::unsignedInt</a></div><div class="ttdeci">static bool unsignedInt(T &amp;convertedValue, const char *string, int base=10, const char *validStopChars=nullptr, const char **endptr=nullptr) noexcept</div><div class="ttdoc">This template method converts the specified string to an unsigned integer.</div><div class="ttdef"><b>Definition</b> StringTo.h:80</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

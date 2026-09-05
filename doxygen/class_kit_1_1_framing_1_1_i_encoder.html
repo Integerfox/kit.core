@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -72,6 +72,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a37da214231b49db15e4c918dbc65986c" id="r_a37da214231b49db15e4c918dbc65986c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37da214231b49db15e4c918dbc65986c">endFrame</a> (void) noexcept=0</td></tr>
 <tr class="memdesc:a37da214231b49db15e4c918dbc65986c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the frame.  <br /></td></tr>
 <tr class="separator:a37da214231b49db15e4c918dbc65986c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae18c27cad635535906ca72a24ba94c8e" id="r_ae18c27cad635535906ca72a24ba94c8e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae18c27cad635535906ca72a24ba94c8e">oobWrite</a> (const void *srcBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes) noexcept=0</td></tr>
+<tr class="memdesc:ae18c27cad635535906ca72a24ba94c8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method allows 'out-of-band' writing to the output destination.  <br /></td></tr>
+<tr class="separator:ae18c27cad635535906ca72a24ba94c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb4a945f91608ad81c8b21728ae9b1b3" id="r_abb4a945f91608ad81c8b21728ae9b1b3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb4a945f91608ad81c8b21728ae9b1b3">output</a> (const void *srcBuffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes) noexcept=0</td></tr>
 <tr class="memdesc:abb4a945f91608ad81c8b21728ae9b1b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs 'numBytes' of data (from 'srcBuffer') to the output destination.  <br /></td></tr>
 <tr class="separator:abb4a945f91608ad81c8b21728ae9b1b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,6 +145,42 @@ Public Member Functions</h2></td></tr>
 <p>NOTE: On error, the framing sequence is left in an undefined state and should be re-started by calling <a class="el" href="#a7b1d3ccf8292fedd9514163b46e648e4" title="Begins the frame.">startFrame()</a> </p>
 
 <p>Implemented in <a class="el" href="class_kit_1_1_framing_1_1_encoder_writer.html#a3693f0e8ddcf8cb67d23cc87f7764992">Kit::Framing::EncoderWriter</a>.</p>
+
+</div>
+</div>
+<a id="ae18c27cad635535906ca72a24ba94c8e" name="ae18c27cad635535906ca72a24ba94c8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae18c27cad635535906ca72a24ba94c8e">&#9670;&#160;</a></span>oobWrite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Kit::Framing::IEncoder::oobWrite </td>
+          <td>(</td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>srcBuffer</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>numBytes</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method allows 'out-of-band' writing to the output destination. </p>
+<p>This method unconditionally writes the provided output to the destination</p>
+<p>CAUTION: Most client/consumers of the encoder should never use this method. This writes bytes directly to the destination without applying the encoder's escaping rules. e.g. when intentionally bypassing encoding for a specific frame payload OR outputting content in between frames.</p>
+<p>Outputs 'numBytes' of data (from 'srcBuffer') to the output destination. The method will return false if there an error occurred while writing to the output destination; else true is returned. </p>
+
+<p>Implemented in <a class="el" href="class_kit_1_1_framing_1_1_encoder_writer.html#a935802984bb3aed3f99100aa94ded240">Kit::Framing::EncoderWriter</a>.</p>
 
 </div>
 </div>
@@ -244,7 +283,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

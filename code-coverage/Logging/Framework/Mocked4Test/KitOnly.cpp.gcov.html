@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -98,9 +98,9 @@
 <span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">           1 :     Framework::initialize( *this, m_logFifo );</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">           1 : }</span></span>
 <span id="L38"><span class="lineNum">      38</span>                 :             : </span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">          30 : bool KitOnly::isClassificationIdValid( uint8_t classificationId ) noexcept</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">        3332 : bool KitOnly::isClassificationIdValid( uint8_t classificationId ) noexcept</span></span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : {</span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          30 :     return Kit::Logging::Pkg::ClassificationId::_from_integral_nothrow( classificationId );</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">        3332 :     return Kit::Logging::Pkg::ClassificationId::_from_integral_nothrow( classificationId );</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : }</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             : </span>
 <span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">         101 : const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexcept</span></span>
@@ -110,12 +110,12 @@
 <span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         101 :         NULL_CLASSIFICATION_ID_TEXT ); </span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : }</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">          67 : IPackage* KitOnly::getPackage( uint8_t packageId ) noexcept</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">        3369 : IPackage* KitOnly::getPackage( uint8_t packageId ) noexcept</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : {</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :     // Only supports the KIT Package</span>
-<span id="L54"><span class="lineNum">      54</span>         [<span class="tlaGBC" title="Branch 0 was taken 66 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          67 :     if ( packageId == m_kitPackage.PACKAGE_ID )</span></span>
+<span id="L54"><span class="lineNum">      54</span>         [<span class="tlaGBC" title="Branch 0 was taken 79 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3290 times"> + </span>]:<span class="tlaGNC">        3369 :     if ( packageId == m_kitPackage.PACKAGE_ID )</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     {</span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          66 :         return &amp;m_kitPackage;</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          79 :         return &amp;m_kitPackage;</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     }</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :     return nullptr;</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : }</span>

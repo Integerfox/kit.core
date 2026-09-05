@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -104,78 +104,98 @@
 <span id="L42"><span class="lineNum">      42</span>                 :             : </span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :         NOTE: An ENTIRE frame must be written with a single call to this method</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :               to avoid interleaving of output frames with console trace/logging.</span>
-<span id="L45"><span class="lineNum">      45</span>                 :             :     */</span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC tlaBgGNC">         125 :     inline bool writeFrame( const char* text ) noexcept</span></span>
-<span id="L47"><span class="lineNum">      47</span>                 :             :     {</span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         125 :         return writeFrame( text, strlen( text ) );</span></span>
-<span id="L49"><span class="lineNum">      49</span>                 :             :     }</span>
-<span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>                 :             :     /** Same as writeFrame(), but only outputs (at most) 'N' bytes as the content</span>
-<span id="L52"><span class="lineNum">      52</span>                 :             :         of the frame</span>
-<span id="L53"><span class="lineNum">      53</span>                 :             :     */</span>
-<span id="L54"><span class="lineNum">      54</span>                 :             :     virtual bool writeFrame( const char* text, Kit::Type::SSize_T maxBytes ) noexcept = 0;</span>
-<span id="L55"><span class="lineNum">      55</span>                 :             : </span>
-<span id="L56"><span class="lineNum">      56</span>                 :             : public:</span>
-<span id="L57"><span class="lineNum">      57</span>                 :             :     /** This method returns a working buffer for a command to format its</span>
-<span id="L58"><span class="lineNum">      58</span>                 :             :         output prior to 'writing the frame'.  The buffer is only 'valid' for</span>
-<span id="L59"><span class="lineNum">      59</span>                 :             :         duration of the command's execute() method. The string buffer is</span>
-<span id="L60"><span class="lineNum">      60</span>                 :             :         guaranteed to be at least size of the largest supported output frame.</span>
-<span id="L61"><span class="lineNum">      61</span>                 :             :      */</span>
-<span id="L62"><span class="lineNum">      62</span>                 :             :     virtual Kit::Text::IString&amp; getOutputBuffer() noexcept = 0;</span>
-<span id="L63"><span class="lineNum">      63</span>                 :             : </span>
-<span id="L64"><span class="lineNum">      64</span>                 :             :     /** This method returns a 'working' buffer for use by a command when</span>
-<span id="L65"><span class="lineNum">      65</span>                 :             :         parsing input arguments.  The buffer is only 'valid' for</span>
-<span id="L66"><span class="lineNum">      66</span>                 :             :         duration of the command's execute() method. The string buffer is</span>
-<span id="L67"><span class="lineNum">      67</span>                 :             :         guaranteed to be at least size of the largest supported input frame.</span>
-<span id="L68"><span class="lineNum">      68</span>                 :             :      */</span>
-<span id="L69"><span class="lineNum">      69</span>                 :             :     virtual Kit::Text::IString&amp; getInputBuffer() noexcept = 0;</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             : </span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :         NOTE: If the 'text' contains characters that must not be escaped (e.g.</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :               newline), use writeFrameWithSpecialChars() instead.</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             :      */</span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC tlaBgGNC">         340 :     inline bool writeFrame( const char* text ) noexcept</span></span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     {</span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">         340 :         return writeFrame( text, strlen( text ) );</span></span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :     }</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : </span>
+<span id="L54"><span class="lineNum">      54</span>                 :             : </span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :     /** Same as writeFrame(), but only outputs (at most) 'N' bytes as the content</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :         of the frame</span>
+<span id="L57"><span class="lineNum">      57</span>                 :             :     */</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :     virtual bool writeFrame( const char*        text,</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :                              Kit::Type::SSize_T maxBytes ) noexcept = 0;</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             : </span>
+<span id="L61"><span class="lineNum">      61</span>                 :             : public:</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :     /** Same as writeFrame(), but the the encoding of the 'text' is bypassed.</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :         While not desirable this allows the 'text' argument to contain special</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             :         characters that would otherwise be escaped, e.g. the newline character.</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :     */</span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">          10 :     inline bool writeFrameWithSpecialChars( const char* text ) noexcept</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :     {</span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">          10 :         return writeFrameWithSpecialChars( text, strlen( text ) );</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :             :     }</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : </span>
-<span id="L71"><span class="lineNum">      71</span>                 :             :     /** This method returns a 'working' buffer for use by a command.  The buffer</span>
-<span id="L72"><span class="lineNum">      72</span>                 :             :         is only 'valid' for duration of the command's execute() method. The</span>
-<span id="L73"><span class="lineNum">      73</span>                 :             :         buffer is guaranteed to be at least size the same size as the 'Input</span>
-<span id="L74"><span class="lineNum">      74</span>                 :             :         buffer'</span>
-<span id="L75"><span class="lineNum">      75</span>                 :             :     */</span>
-<span id="L76"><span class="lineNum">      76</span>                 :             :     virtual Kit::Text::IString&amp; getWorkBuffer() noexcept = 0;</span>
-<span id="L77"><span class="lineNum">      77</span>                 :             : </span>
-<span id="L78"><span class="lineNum">      78</span>                 :             : public:</span>
-<span id="L79"><span class="lineNum">      79</span>                 :             :     /** This method allows a command access to the input stream, i.e. consume</span>
-<span id="L80"><span class="lineNum">      80</span>                 :             :         additional input data that is 'out-of-band' of the nominal newline</span>
-<span id="L81"><span class="lineNum">      81</span>                 :             :         delineated command syntax.</span>
-<span id="L82"><span class="lineNum">      82</span>                 :             : </span>
-<span id="L83"><span class="lineNum">      83</span>                 :             :         Attempts to read the specified number of bytes from the stream into the</span>
-<span id="L84"><span class="lineNum">      84</span>                 :             :         supplied buffer.  The actual number of bytes read is returned via</span>
-<span id="L85"><span class="lineNum">      85</span>                 :             :         'bytesRead'. Returns true if successful, or false if End-of-Stream</span>
-<span id="L86"><span class="lineNum">      86</span>                 :             :         was encountered.</span>
-<span id="L87"><span class="lineNum">      87</span>                 :             :      */</span>
-<span id="L88"><span class="lineNum">      88</span>                 :             :     virtual bool oobRead( void*               dstBuffer,</span>
-<span id="L89"><span class="lineNum">      89</span>                 :             :                           Kit::Type::SSize_T  numBytes,</span>
-<span id="L90"><span class="lineNum">      90</span>                 :             :                           Kit::Type::SSize_T&amp; bytesRead ) noexcept = 0;</span>
-<span id="L91"><span class="lineNum">      91</span>                 :             : </span>
-<span id="L92"><span class="lineNum">      92</span>                 :             : public:</span>
-<span id="L93"><span class="lineNum">      93</span>                 :             :     /// Returns reference to the Processor's Security instance</span>
-<span id="L94"><span class="lineNum">      94</span>                 :             :     virtual ISecurity&amp; getSecurity() noexcept = 0;</span>
-<span id="L95"><span class="lineNum">      95</span>                 :             : </span>
-<span id="L96"><span class="lineNum">      96</span>                 :             : public:</span>
-<span id="L97"><span class="lineNum">      97</span>                 :             :     /** Returns a pointer to the Processor's output stream.  If the TShell is</span>
-<span id="L98"><span class="lineNum">      98</span>                 :             :         has not been started, then nullptr is returned. </span>
-<span id="L99"><span class="lineNum">      99</span>                 :             :      */</span>
-<span id="L100"><span class="lineNum">     100</span>                 :             :     virtual Kit::Io::IOutput* getOutputStream() noexcept = 0;</span>
-<span id="L101"><span class="lineNum">     101</span>                 :             : </span>
-<span id="L102"><span class="lineNum">     102</span>                 :             : public:</span>
-<span id="L103"><span class="lineNum">     103</span>                 :             :     /** Request to terminated/exit the TShell.  When/if the TShell is exited</span>
-<span id="L104"><span class="lineNum">     104</span>                 :             :         is application specific behavior.</span>
-<span id="L105"><span class="lineNum">     105</span>                 :             :      */</span>
-<span id="L106"><span class="lineNum">     106</span>                 :             :     virtual void requestTShellExit() noexcept = 0;</span>
-<span id="L107"><span class="lineNum">     107</span>                 :             : </span>
-<span id="L108"><span class="lineNum">     108</span>                 :             : public:</span>
-<span id="L109"><span class="lineNum">     109</span>                 :             :     /// Virtual destructor</span>
-<span id="L110"><span class="lineNum">     110</span>                 :             :     virtual ~IContext() = default;</span>
-<span id="L111"><span class="lineNum">     111</span>                 :             : };</span>
-<span id="L112"><span class="lineNum">     112</span>                 :             : </span>
-<span id="L113"><span class="lineNum">     113</span>                 :             : </span>
-<span id="L114"><span class="lineNum">     114</span>                 :             : }  // end namespaces</span>
-<span id="L115"><span class="lineNum">     115</span>                 :             : }</span>
-<span id="L116"><span class="lineNum">     116</span>                 :             : #endif  // end header latch</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :     /** Same as writeFrameWithSpecialChars(), but only outputs (at most) 'N' bytes</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :         as the content of the frame</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             :     */</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             :     virtual bool writeFrameWithSpecialChars( const char*        text,</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :                                              Kit::Type::SSize_T maxBytes ) noexcept = 0;</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             : public:</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :     /** This method returns a working buffer for a command to format its</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             :         output prior to 'writing the frame'.  The buffer is only 'valid' for</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :         duration of the command's execute() method. The string buffer is</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :         guaranteed to be at least size of the largest supported output frame.</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :      */</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :     virtual Kit::Text::IString&amp; getOutputBuffer() noexcept = 0;</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             : </span>
+<span id="L84"><span class="lineNum">      84</span>                 :             :     /** This method returns a 'working' buffer for use by a command when</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             :         parsing input arguments.  The buffer is only 'valid' for</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :         duration of the command's execute() method. The string buffer is</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             :         guaranteed to be at least size of the largest supported input frame.</span>
+<span id="L88"><span class="lineNum">      88</span>                 :             :      */</span>
+<span id="L89"><span class="lineNum">      89</span>                 :             :     virtual Kit::Text::IString&amp; getInputBuffer() noexcept = 0;</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             : </span>
+<span id="L91"><span class="lineNum">      91</span>                 :             :     /** This method returns a 'working' buffer for use by a command.  The buffer</span>
+<span id="L92"><span class="lineNum">      92</span>                 :             :         is only 'valid' for duration of the command's execute() method. The</span>
+<span id="L93"><span class="lineNum">      93</span>                 :             :         buffer is guaranteed to be at least size the same size as the 'Input</span>
+<span id="L94"><span class="lineNum">      94</span>                 :             :         buffer'</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             :     */</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             :     virtual Kit::Text::IString&amp; getWorkBuffer() noexcept = 0;</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             : </span>
+<span id="L98"><span class="lineNum">      98</span>                 :             : public:</span>
+<span id="L99"><span class="lineNum">      99</span>                 :             :     /** This method allows a command access to the input stream, i.e. consume</span>
+<span id="L100"><span class="lineNum">     100</span>                 :             :         additional input data that is 'out-of-band' of the nominal newline</span>
+<span id="L101"><span class="lineNum">     101</span>                 :             :         delineated command syntax.</span>
+<span id="L102"><span class="lineNum">     102</span>                 :             : </span>
+<span id="L103"><span class="lineNum">     103</span>                 :             :         Attempts to read the specified number of bytes from the stream into the</span>
+<span id="L104"><span class="lineNum">     104</span>                 :             :         supplied buffer.  The actual number of bytes read is returned via</span>
+<span id="L105"><span class="lineNum">     105</span>                 :             :         'bytesRead'. Returns true if successful, or false if End-of-Stream</span>
+<span id="L106"><span class="lineNum">     106</span>                 :             :         was encountered.</span>
+<span id="L107"><span class="lineNum">     107</span>                 :             :      */</span>
+<span id="L108"><span class="lineNum">     108</span>                 :             :     virtual bool oobRead( void*               dstBuffer,</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             :                           Kit::Type::SSize_T  numBytes,</span>
+<span id="L110"><span class="lineNum">     110</span>                 :             :                           Kit::Type::SSize_T&amp; bytesRead ) noexcept = 0;</span>
+<span id="L111"><span class="lineNum">     111</span>                 :             : </span>
+<span id="L112"><span class="lineNum">     112</span>                 :             : public:</span>
+<span id="L113"><span class="lineNum">     113</span>                 :             :     /// Returns reference to the Processor's Security instance</span>
+<span id="L114"><span class="lineNum">     114</span>                 :             :     virtual ISecurity&amp; getSecurity() noexcept = 0;</span>
+<span id="L115"><span class="lineNum">     115</span>                 :             : </span>
+<span id="L116"><span class="lineNum">     116</span>                 :             : public:</span>
+<span id="L117"><span class="lineNum">     117</span>                 :             :     /** Returns a pointer to the Processor's output stream.  If the TShell is</span>
+<span id="L118"><span class="lineNum">     118</span>                 :             :         has not been started, then nullptr is returned.</span>
+<span id="L119"><span class="lineNum">     119</span>                 :             :      */</span>
+<span id="L120"><span class="lineNum">     120</span>                 :             :     virtual Kit::Io::IOutput* getOutputStream() noexcept = 0;</span>
+<span id="L121"><span class="lineNum">     121</span>                 :             : </span>
+<span id="L122"><span class="lineNum">     122</span>                 :             : public:</span>
+<span id="L123"><span class="lineNum">     123</span>                 :             :     /** Request to terminated/exit the TShell.  When/if the TShell is exited</span>
+<span id="L124"><span class="lineNum">     124</span>                 :             :         is application specific behavior.</span>
+<span id="L125"><span class="lineNum">     125</span>                 :             :      */</span>
+<span id="L126"><span class="lineNum">     126</span>                 :             :     virtual void requestTShellExit() noexcept = 0;</span>
+<span id="L127"><span class="lineNum">     127</span>                 :             : </span>
+<span id="L128"><span class="lineNum">     128</span>                 :             : public:</span>
+<span id="L129"><span class="lineNum">     129</span>                 :             :     /// Virtual destructor</span>
+<span id="L130"><span class="lineNum">     130</span>                 :             :     virtual ~IContext() = default;</span>
+<span id="L131"><span class="lineNum">     131</span>                 :             : };</span>
+<span id="L132"><span class="lineNum">     132</span>                 :             : </span>
+<span id="L133"><span class="lineNum">     133</span>                 :             : </span>
+<span id="L134"><span class="lineNum">     134</span>                 :             : }  // end namespaces</span>
+<span id="L135"><span class="lineNum">     135</span>                 :             : }</span>
+<span id="L136"><span class="lineNum">     136</span>                 :             : #endif  // end header latch</span>
         </pre>
               </td>
             </tr>

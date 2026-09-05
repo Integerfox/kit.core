@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -376,12 +376,12 @@
 <span id="L314"><span class="lineNum">     314</span>                 :             :         attached the observer will receive a change notification (aka a</span>
 <span id="L315"><span class="lineNum">     315</span>                 :             :         callback) every time the Model Point's data/state changes. Once, a</span>
 <span id="L316"><span class="lineNum">     316</span>                 :             :         observer is attached - it will stay attached to the application</span>
-<span id="L317"><span class="lineNum">     317</span>                 :             :         calls detach().</span>
+<span id="L317"><span class="lineNum">     317</span>                 :             :         calls detachObserver().</span>
 <span id="L318"><span class="lineNum">     318</span>                 :             : </span>
 <span id="L319"><span class="lineNum">     319</span>                 :             :         There is no limit to the number of observers that can attach to</span>
 <span id="L320"><span class="lineNum">     320</span>                 :             :         a Model Point.</span>
 <span id="L321"><span class="lineNum">     321</span>                 :             : </span>
-<span id="L322"><span class="lineNum">     322</span>                 :             :         The attach() method can be called even if the observer is already</span>
+<span id="L322"><span class="lineNum">     322</span>                 :             :         The attachObserver() method can be called even if the observer is already</span>
 <span id="L323"><span class="lineNum">     323</span>                 :             :         attached.  When this happens, the attach process is 'restarted', i.e.</span>
 <span id="L324"><span class="lineNum">     324</span>                 :             :         the 'initialSeqNumber' is used for the observer's sequence number.</span>
 <span id="L325"><span class="lineNum">     325</span>                 :             : </span>
@@ -414,207 +414,216 @@
 <span id="L352"><span class="lineNum">     352</span>                 :             :                                  uint16_t   initialSeqNumber = SEQUENCE_NUMBER_UNKNOWN ) noexcept = 0;</span>
 <span id="L353"><span class="lineNum">     353</span>                 :             : </span>
 <span id="L354"><span class="lineNum">     354</span>                 :             :     /** This method is used to detach an observer from a Model Point.  See the</span>
-<span id="L355"><span class="lineNum">     355</span>                 :             :         attach() method for more details about the Subscription/Change</span>
+<span id="L355"><span class="lineNum">     355</span>                 :             :         attachObserver() method for more details about the Subscription/Change</span>
 <span id="L356"><span class="lineNum">     356</span>                 :             :         Notification mechanism.</span>
 <span id="L357"><span class="lineNum">     357</span>                 :             : </span>
-<span id="L358"><span class="lineNum">     358</span>                 :             :         The detach() method can be called even if the observer is NOT</span>
-<span id="L359"><span class="lineNum">     359</span>                 :             :         currently attached.  The detach() method can be called within the</span>
+<span id="L358"><span class="lineNum">     358</span>                 :             :         The detachObserver() method can be called even if the observer is NOT</span>
+<span id="L359"><span class="lineNum">     359</span>                 :             :         currently attached.  The detachObserver() method can be called within the</span>
 <span id="L360"><span class="lineNum">     360</span>                 :             :         Change Notification callback.</span>
-<span id="L361"><span class="lineNum">     361</span>                 :             :      */</span>
-<span id="L362"><span class="lineNum">     362</span>                 :             :     virtual void detachObserver( IObserver&amp; observer ) noexcept = 0;</span>
-<span id="L363"><span class="lineNum">     363</span>                 :             : </span>
-<span id="L364"><span class="lineNum">     364</span>                 :             : </span>
-<span id="L365"><span class="lineNum">     365</span>                 :             : public:</span>
-<span id="L366"><span class="lineNum">     366</span>                 :             :     /// Observer events</span>
-<span id="L367"><span class="lineNum">     367</span>                 :             :     enum Event_T</span>
-<span id="L368"><span class="lineNum">     368</span>                 :             :     {</span>
-<span id="L369"><span class="lineNum">     369</span>                 :             :         eATTACH,          //!&lt; The Application is requesting to subscribe to a model point</span>
-<span id="L370"><span class="lineNum">     370</span>                 :             :         eDETACH,          //!&lt; The Application is requesting to un-subscribe from the model point</span>
-<span id="L371"><span class="lineNum">     371</span>                 :             :         eDATA_CHANGED,    //!&lt; The model point's data/state has change a pending change notification is needed</span>
-<span id="L372"><span class="lineNum">     372</span>                 :             :         eNOTIFYING,       //!&lt; The observer's change notification callback is being called</span>
-<span id="L373"><span class="lineNum">     373</span>                 :             :         eNOTIFY_COMPLETE  //!&lt; The observer's change notification callback has been completed</span>
-<span id="L374"><span class="lineNum">     374</span>                 :             :     };</span>
-<span id="L375"><span class="lineNum">     375</span>                 :             : </span>
-<span id="L376"><span class="lineNum">     376</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L377"><span class="lineNum">     377</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L378"><span class="lineNum">     378</span>                 :             :         NEVER call this method.</span>
-<span id="L379"><span class="lineNum">     379</span>                 :             : </span>
-<span id="L380"><span class="lineNum">     380</span>                 :             :         This method is used by Model Point to process events related to the</span>
-<span id="L381"><span class="lineNum">     381</span>                 :             :         subscription/change-notification process</span>
-<span id="L382"><span class="lineNum">     382</span>                 :             : </span>
-<span id="L383"><span class="lineNum">     383</span>                 :             :         This method is Thread Safe</span>
-<span id="L384"><span class="lineNum">     384</span>                 :             :      */</span>
-<span id="L385"><span class="lineNum">     385</span>                 :             :     virtual void processSubscriptionEvent_( IObserver&amp; observer,</span>
-<span id="L386"><span class="lineNum">     386</span>                 :             :                                             Event_T    event ) noexcept = 0;</span>
-<span id="L387"><span class="lineNum">     387</span>                 :             : </span>
+<span id="L361"><span class="lineNum">     361</span>                 :             : </span>
+<span id="L362"><span class="lineNum">     362</span>                 :             :         NOTE: As stated above, clients can call detachObserver() within the Change</span>
+<span id="L363"><span class="lineNum">     363</span>                 :             :               Notification callback.  In most cases - it is also okay to call</span>
+<span id="L364"><span class="lineNum">     364</span>                 :             :               attachObserver() within the Change Notification callback (e.g. </span>
+<span id="L365"><span class="lineNum">     365</span>                 :             :               re-attaching after calling detach).  However, what is NOT allowed </span>
+<span id="L366"><span class="lineNum">     366</span>                 :             :               is to reuse/re-home an IObserver instance with a DIFFERENT Model</span>
+<span id="L367"><span class="lineNum">     367</span>                 :             :               Point - that was used for the original subscription/attachObserver</span>
+<span id="L368"><span class="lineNum">     368</span>                 :             :               call - within the Change Notification callback.  Doing so will</span>
+<span id="L369"><span class="lineNum">     369</span>                 :             :               result in a fatal error.</span>
+<span id="L370"><span class="lineNum">     370</span>                 :             :      */</span>
+<span id="L371"><span class="lineNum">     371</span>                 :             :     virtual void detachObserver( IObserver&amp; observer ) noexcept = 0;</span>
+<span id="L372"><span class="lineNum">     372</span>                 :             : </span>
+<span id="L373"><span class="lineNum">     373</span>                 :             : </span>
+<span id="L374"><span class="lineNum">     374</span>                 :             : public:</span>
+<span id="L375"><span class="lineNum">     375</span>                 :             :     /// Observer events</span>
+<span id="L376"><span class="lineNum">     376</span>                 :             :     enum Event_T</span>
+<span id="L377"><span class="lineNum">     377</span>                 :             :     {</span>
+<span id="L378"><span class="lineNum">     378</span>                 :             :         eATTACH,          //!&lt; The Application is requesting to subscribe to a model point</span>
+<span id="L379"><span class="lineNum">     379</span>                 :             :         eDETACH,          //!&lt; The Application is requesting to un-subscribe from the model point</span>
+<span id="L380"><span class="lineNum">     380</span>                 :             :         eDATA_CHANGED,    //!&lt; The model point's data/state has change a pending change notification is needed</span>
+<span id="L381"><span class="lineNum">     381</span>                 :             :         eNOTIFYING,       //!&lt; The observer's change notification callback is being called</span>
+<span id="L382"><span class="lineNum">     382</span>                 :             :         eNOTIFY_COMPLETE  //!&lt; The observer's change notification callback has been completed</span>
+<span id="L383"><span class="lineNum">     383</span>                 :             :     };</span>
+<span id="L384"><span class="lineNum">     384</span>                 :             : </span>
+<span id="L385"><span class="lineNum">     385</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L386"><span class="lineNum">     386</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L387"><span class="lineNum">     387</span>                 :             :         NEVER call this method.</span>
 <span id="L388"><span class="lineNum">     388</span>                 :             : </span>
-<span id="L389"><span class="lineNum">     389</span>                 :             : public:</span>
-<span id="L390"><span class="lineNum">     390</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L391"><span class="lineNum">     391</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L392"><span class="lineNum">     392</span>                 :             :         NEVER call this method.</span>
-<span id="L393"><span class="lineNum">     393</span>                 :             : </span>
-<span id="L394"><span class="lineNum">     394</span>                 :             :         This method is used to unconditionally update the Model Point's data.</span>
-<span id="L395"><span class="lineNum">     395</span>                 :             : </span>
-<span id="L396"><span class="lineNum">     396</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L389"><span class="lineNum">     389</span>                 :             :         This method is used by Model Point to process events related to the</span>
+<span id="L390"><span class="lineNum">     390</span>                 :             :         subscription/change-notification process</span>
+<span id="L391"><span class="lineNum">     391</span>                 :             : </span>
+<span id="L392"><span class="lineNum">     392</span>                 :             :         This method is Thread Safe</span>
+<span id="L393"><span class="lineNum">     393</span>                 :             :      */</span>
+<span id="L394"><span class="lineNum">     394</span>                 :             :     virtual void processSubscriptionEvent_( IObserver&amp; observer,</span>
+<span id="L395"><span class="lineNum">     395</span>                 :             :                                             Event_T    event ) noexcept = 0;</span>
+<span id="L396"><span class="lineNum">     396</span>                 :             : </span>
 <span id="L397"><span class="lineNum">     397</span>                 :             : </span>
-<span id="L398"><span class="lineNum">     398</span>                 :             :         Notes:</span>
-<span id="L399"><span class="lineNum">     399</span>                 :             :         1) The assumption is that Model Point Data instance and 'src' are the</span>
-<span id="L400"><span class="lineNum">     400</span>                 :             :            of the same type.</span>
-<span id="L401"><span class="lineNum">     401</span>                 :             :         2) The internal data size of the Model Point instance is ALWAYS honored</span>
-<span id="L402"><span class="lineNum">     402</span>                 :             :            when coping the data from 'src'</span>
-<span id="L403"><span class="lineNum">     403</span>                 :             :         3) The Model Point's sequence number is not changed.</span>
-<span id="L404"><span class="lineNum">     404</span>                 :             :         4) The Model Point's valid and locked states are not changed</span>
-<span id="L405"><span class="lineNum">     405</span>                 :             :     */</span>
-<span id="L406"><span class="lineNum">     406</span>                 :             :     virtual void copyDataFrom_( const void* srcData, size_t srcSize ) noexcept = 0;</span>
-<span id="L407"><span class="lineNum">     407</span>                 :             : </span>
-<span id="L408"><span class="lineNum">     408</span>                 :             : </span>
-<span id="L409"><span class="lineNum">     409</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L410"><span class="lineNum">     410</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L411"><span class="lineNum">     411</span>                 :             :         NEVER call this method.</span>
-<span id="L412"><span class="lineNum">     412</span>                 :             : </span>
-<span id="L413"><span class="lineNum">     413</span>                 :             :         This method is used update's the caller's 'Point Data' with the Model</span>
-<span id="L414"><span class="lineNum">     414</span>                 :             :         Point's data.</span>
-<span id="L415"><span class="lineNum">     415</span>                 :             : </span>
-<span id="L416"><span class="lineNum">     416</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L398"><span class="lineNum">     398</span>                 :             : public:</span>
+<span id="L399"><span class="lineNum">     399</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L400"><span class="lineNum">     400</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L401"><span class="lineNum">     401</span>                 :             :         NEVER call this method.</span>
+<span id="L402"><span class="lineNum">     402</span>                 :             : </span>
+<span id="L403"><span class="lineNum">     403</span>                 :             :         This method is used to unconditionally update the Model Point's data.</span>
+<span id="L404"><span class="lineNum">     404</span>                 :             : </span>
+<span id="L405"><span class="lineNum">     405</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L406"><span class="lineNum">     406</span>                 :             : </span>
+<span id="L407"><span class="lineNum">     407</span>                 :             :         Notes:</span>
+<span id="L408"><span class="lineNum">     408</span>                 :             :         1) The assumption is that Model Point Data instance and 'src' are the</span>
+<span id="L409"><span class="lineNum">     409</span>                 :             :            of the same type.</span>
+<span id="L410"><span class="lineNum">     410</span>                 :             :         2) The internal data size of the Model Point instance is ALWAYS honored</span>
+<span id="L411"><span class="lineNum">     411</span>                 :             :            when coping the data from 'src'</span>
+<span id="L412"><span class="lineNum">     412</span>                 :             :         3) The Model Point's sequence number is not changed.</span>
+<span id="L413"><span class="lineNum">     413</span>                 :             :         4) The Model Point's valid and locked states are not changed</span>
+<span id="L414"><span class="lineNum">     414</span>                 :             :     */</span>
+<span id="L415"><span class="lineNum">     415</span>                 :             :     virtual void copyDataFrom_( const void* srcData, size_t srcSize ) noexcept = 0;</span>
+<span id="L416"><span class="lineNum">     416</span>                 :             : </span>
 <span id="L417"><span class="lineNum">     417</span>                 :             : </span>
-<span id="L418"><span class="lineNum">     418</span>                 :             :         Notes:</span>
-<span id="L419"><span class="lineNum">     419</span>                 :             :         1) The assumption is that Model Point Data instance and 'dst' are the</span>
-<span id="L420"><span class="lineNum">     420</span>                 :             :            of the same type.</span>
-<span id="L421"><span class="lineNum">     421</span>                 :             :         2) The 'dstSize' of the destination ALWAYS honored when coping the</span>
-<span id="L422"><span class="lineNum">     422</span>                 :             :            Model Point's data to 'dst'</span>
-<span id="L423"><span class="lineNum">     423</span>                 :             :         3) The Model Point's sequence number is not changed.</span>
-<span id="L424"><span class="lineNum">     424</span>                 :             :         4) The Model Point's valid and locked states are not changed</span>
-<span id="L425"><span class="lineNum">     425</span>                 :             :     */</span>
-<span id="L426"><span class="lineNum">     426</span>                 :             :     virtual void copyDataTo_( void* dstData, size_t dstSize ) const noexcept = 0;</span>
-<span id="L427"><span class="lineNum">     427</span>                 :             : </span>
-<span id="L428"><span class="lineNum">     428</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L429"><span class="lineNum">     429</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L430"><span class="lineNum">     430</span>                 :             :         NEVER call this method.</span>
-<span id="L431"><span class="lineNum">     431</span>                 :             : </span>
-<span id="L432"><span class="lineNum">     432</span>                 :             :         This method is NOT Thread Safe.</span>
-<span id="L433"><span class="lineNum">     433</span>                 :             : </span>
-<span id="L434"><span class="lineNum">     434</span>                 :             :         This method compares the Model Point's data to the data of 'other' Model</span>
-<span id="L435"><span class="lineNum">     435</span>                 :             :         Point and returns true if the data of both points are the same. It is</span>
-<span id="L436"><span class="lineNum">     436</span>                 :             :         assumed that Model Point instance and 'other' are the of the same leaf</span>
-<span id="L437"><span class="lineNum">     437</span>                 :             :         class type.</span>
-<span id="L438"><span class="lineNum">     438</span>                 :             :      */</span>
-<span id="L439"><span class="lineNum">     439</span>                 :             :     virtual bool isDataEqual_( const void* otherData ) const noexcept = 0;</span>
+<span id="L418"><span class="lineNum">     418</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L419"><span class="lineNum">     419</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L420"><span class="lineNum">     420</span>                 :             :         NEVER call this method.</span>
+<span id="L421"><span class="lineNum">     421</span>                 :             : </span>
+<span id="L422"><span class="lineNum">     422</span>                 :             :         This method is used update's the caller's 'Point Data' with the Model</span>
+<span id="L423"><span class="lineNum">     423</span>                 :             :         Point's data.</span>
+<span id="L424"><span class="lineNum">     424</span>                 :             : </span>
+<span id="L425"><span class="lineNum">     425</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L426"><span class="lineNum">     426</span>                 :             : </span>
+<span id="L427"><span class="lineNum">     427</span>                 :             :         Notes:</span>
+<span id="L428"><span class="lineNum">     428</span>                 :             :         1) The assumption is that Model Point Data instance and 'dst' are the</span>
+<span id="L429"><span class="lineNum">     429</span>                 :             :            of the same type.</span>
+<span id="L430"><span class="lineNum">     430</span>                 :             :         2) The 'dstSize' of the destination ALWAYS honored when coping the</span>
+<span id="L431"><span class="lineNum">     431</span>                 :             :            Model Point's data to 'dst'</span>
+<span id="L432"><span class="lineNum">     432</span>                 :             :         3) The Model Point's sequence number is not changed.</span>
+<span id="L433"><span class="lineNum">     433</span>                 :             :         4) The Model Point's valid and locked states are not changed</span>
+<span id="L434"><span class="lineNum">     434</span>                 :             :     */</span>
+<span id="L435"><span class="lineNum">     435</span>                 :             :     virtual void copyDataTo_( void* dstData, size_t dstSize ) const noexcept = 0;</span>
+<span id="L436"><span class="lineNum">     436</span>                 :             : </span>
+<span id="L437"><span class="lineNum">     437</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L438"><span class="lineNum">     438</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L439"><span class="lineNum">     439</span>                 :             :         NEVER call this method.</span>
 <span id="L440"><span class="lineNum">     440</span>                 :             : </span>
-<span id="L441"><span class="lineNum">     441</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L442"><span class="lineNum">     442</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L443"><span class="lineNum">     443</span>                 :             :         NEVER call this method.</span>
-<span id="L444"><span class="lineNum">     444</span>                 :             : </span>
-<span id="L445"><span class="lineNum">     445</span>                 :             :         This method is NOT Thread Safe.</span>
-<span id="L446"><span class="lineNum">     446</span>                 :             : </span>
-<span id="L447"><span class="lineNum">     447</span>                 :             :         This method returns a pointer to the Model Point's data for Import/Export</span>
-<span id="L448"><span class="lineNum">     448</span>                 :             :         operations.  BE VERY CAREFULL on how the pointer is used!</span>
-<span id="L449"><span class="lineNum">     449</span>                 :             :      */</span>
-<span id="L450"><span class="lineNum">     450</span>                 :             :     virtual void* getImportExportDataPointer_() noexcept = 0;</span>
-<span id="L451"><span class="lineNum">     451</span>                 :             : </span>
-<span id="L452"><span class="lineNum">     452</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L453"><span class="lineNum">     453</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L454"><span class="lineNum">     454</span>                 :             :         NEVER call this method.</span>
+<span id="L441"><span class="lineNum">     441</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L442"><span class="lineNum">     442</span>                 :             : </span>
+<span id="L443"><span class="lineNum">     443</span>                 :             :         This method compares the Model Point's data to the data of 'other' Model</span>
+<span id="L444"><span class="lineNum">     444</span>                 :             :         Point and returns true if the data of both points are the same. It is</span>
+<span id="L445"><span class="lineNum">     445</span>                 :             :         assumed that Model Point instance and 'other' are the of the same leaf</span>
+<span id="L446"><span class="lineNum">     446</span>                 :             :         class type.</span>
+<span id="L447"><span class="lineNum">     447</span>                 :             :      */</span>
+<span id="L448"><span class="lineNum">     448</span>                 :             :     virtual bool isDataEqual_( const void* otherData ) const noexcept = 0;</span>
+<span id="L449"><span class="lineNum">     449</span>                 :             : </span>
+<span id="L450"><span class="lineNum">     450</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L451"><span class="lineNum">     451</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L452"><span class="lineNum">     452</span>                 :             :         NEVER call this method.</span>
+<span id="L453"><span class="lineNum">     453</span>                 :             : </span>
+<span id="L454"><span class="lineNum">     454</span>                 :             :         This method is NOT Thread Safe.</span>
 <span id="L455"><span class="lineNum">     455</span>                 :             : </span>
-<span id="L456"><span class="lineNum">     456</span>                 :             :         This method is NOT Thread Safe.</span>
-<span id="L457"><span class="lineNum">     457</span>                 :             : </span>
-<span id="L458"><span class="lineNum">     458</span>                 :             :         This method returns the &quot;internal size&quot; of the Model Point's data point.</span>
-<span id="L459"><span class="lineNum">     459</span>                 :             :         This length (when applicable) INCLUDES ANY 'META/EXTRA' DATA that is</span>
-<span id="L460"><span class="lineNum">     460</span>                 :             :         NOT the valid/locked meta-data - but is used with the internal</span>
-<span id="L461"><span class="lineNum">     461</span>                 :             :         import()/export() methods.  Or said another way - this is the 'external'</span>
-<span id="L462"><span class="lineNum">     462</span>                 :             :         data size of MP's data minus the meta data size of the MP's valid and</span>
-<span id="L463"><span class="lineNum">     463</span>                 :             :         locked states.</span>
-<span id="L464"><span class="lineNum">     464</span>                 :             :    */</span>
-<span id="L465"><span class="lineNum">     465</span>                 :             :     virtual size_t getInternalDataSize_() const noexcept = 0;</span>
+<span id="L456"><span class="lineNum">     456</span>                 :             :         This method returns a pointer to the Model Point's data for Import/Export</span>
+<span id="L457"><span class="lineNum">     457</span>                 :             :         operations.  BE VERY CAREFULL on how the pointer is used!</span>
+<span id="L458"><span class="lineNum">     458</span>                 :             :      */</span>
+<span id="L459"><span class="lineNum">     459</span>                 :             :     virtual void* getImportExportDataPointer_() noexcept = 0;</span>
+<span id="L460"><span class="lineNum">     460</span>                 :             : </span>
+<span id="L461"><span class="lineNum">     461</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L462"><span class="lineNum">     462</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L463"><span class="lineNum">     463</span>                 :             :         NEVER call this method.</span>
+<span id="L464"><span class="lineNum">     464</span>                 :             : </span>
+<span id="L465"><span class="lineNum">     465</span>                 :             :         This method is NOT Thread Safe.</span>
 <span id="L466"><span class="lineNum">     466</span>                 :             : </span>
-<span id="L467"><span class="lineNum">     467</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L468"><span class="lineNum">     468</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L469"><span class="lineNum">     469</span>                 :             :         NEVER call this method.</span>
-<span id="L470"><span class="lineNum">     470</span>                 :             : </span>
-<span id="L471"><span class="lineNum">     471</span>                 :             :         This method is NOT Thread Safe.</span>
-<span id="L472"><span class="lineNum">     472</span>                 :             : </span>
-<span id="L473"><span class="lineNum">     473</span>                 :             :         This method is used to export meta data when exporting a model</span>
-<span id="L474"><span class="lineNum">     474</span>                 :             :         point.  If there is error in exporting the metadata false is returned;</span>
-<span id="L475"><span class="lineNum">     475</span>                 :             :         else true is returned.</span>
-<span id="L476"><span class="lineNum">     476</span>                 :             : </span>
-<span id="L477"><span class="lineNum">     477</span>                 :             :         A default implementation is provided that always returns true, i.e. for</span>
-<span id="L478"><span class="lineNum">     478</span>                 :             :         model points that do not have metadata (above and beyond the valid and</span>
-<span id="L479"><span class="lineNum">     479</span>                 :             :         locked states).</span>
-<span id="L480"><span class="lineNum">     480</span>                 :             : </span>
-<span id="L481"><span class="lineNum">     481</span>                 :             :         NOTE: The overall size of the destination has been validated with respect</span>
-<span id="L482"><span class="lineNum">     482</span>                 :             :               holding both the Model Point's metadata and the data - so the</span>
-<span id="L483"><span class="lineNum">     483</span>                 :             :               no 'dstLength' argument is passed/provided.</span>
-<span id="L484"><span class="lineNum">     484</span>                 :             :     */</span>
-<span id="L485"><span class="lineNum">     485</span>                 :<span class="tlaGNC">          48 :     virtual bool exportMetadata_( void* dstDataStream, size_t&amp; bytesAdded ) const noexcept</span></span>
-<span id="L486"><span class="lineNum">     486</span>                 :             :     {</span>
-<span id="L487"><span class="lineNum">     487</span>                 :<span class="tlaGNC">          48 :         bytesAdded = 0;</span></span>
-<span id="L488"><span class="lineNum">     488</span>                 :<span class="tlaGNC">          48 :         return true;</span></span>
-<span id="L489"><span class="lineNum">     489</span>                 :             :     }</span>
-<span id="L490"><span class="lineNum">     490</span>                 :             : </span>
-<span id="L491"><span class="lineNum">     491</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L492"><span class="lineNum">     492</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L493"><span class="lineNum">     493</span>                 :             :         NEVER call this method.</span>
-<span id="L494"><span class="lineNum">     494</span>                 :             : </span>
-<span id="L495"><span class="lineNum">     495</span>                 :             :         This method is NOT Thread Safe.</span>
-<span id="L496"><span class="lineNum">     496</span>                 :             : </span>
-<span id="L497"><span class="lineNum">     497</span>                 :             :         This method is used to import meta data when importing a model</span>
-<span id="L498"><span class="lineNum">     498</span>                 :             :         point.  If the incoming meta data is 'not-valid/not-compatible' then</span>
-<span id="L499"><span class="lineNum">     499</span>                 :             :         false is returned and the import operation will fail; else true is</span>
-<span id="L500"><span class="lineNum">     500</span>                 :             :         returned.</span>
-<span id="L501"><span class="lineNum">     501</span>                 :             : </span>
-<span id="L502"><span class="lineNum">     502</span>                 :             :         A default implementation is provided that always returns true, i.e. for</span>
-<span id="L503"><span class="lineNum">     503</span>                 :             :         model points that do not have metadata (above and beyond the valid and</span>
-<span id="L504"><span class="lineNum">     504</span>                 :             :         locked states).</span>
+<span id="L467"><span class="lineNum">     467</span>                 :             :         This method returns the &quot;internal size&quot; of the Model Point's data point.</span>
+<span id="L468"><span class="lineNum">     468</span>                 :             :         This length (when applicable) INCLUDES ANY 'META/EXTRA' DATA that is</span>
+<span id="L469"><span class="lineNum">     469</span>                 :             :         NOT the valid/locked meta-data - but is used with the internal</span>
+<span id="L470"><span class="lineNum">     470</span>                 :             :         import()/export() methods.  Or said another way - this is the 'external'</span>
+<span id="L471"><span class="lineNum">     471</span>                 :             :         data size of MP's data minus the meta data size of the MP's valid and</span>
+<span id="L472"><span class="lineNum">     472</span>                 :             :         locked states.</span>
+<span id="L473"><span class="lineNum">     473</span>                 :             :    */</span>
+<span id="L474"><span class="lineNum">     474</span>                 :             :     virtual size_t getInternalDataSize_() const noexcept = 0;</span>
+<span id="L475"><span class="lineNum">     475</span>                 :             : </span>
+<span id="L476"><span class="lineNum">     476</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L477"><span class="lineNum">     477</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L478"><span class="lineNum">     478</span>                 :             :         NEVER call this method.</span>
+<span id="L479"><span class="lineNum">     479</span>                 :             : </span>
+<span id="L480"><span class="lineNum">     480</span>                 :             :         This method is NOT Thread Safe.</span>
+<span id="L481"><span class="lineNum">     481</span>                 :             : </span>
+<span id="L482"><span class="lineNum">     482</span>                 :             :         This method is used to export meta data when exporting a model</span>
+<span id="L483"><span class="lineNum">     483</span>                 :             :         point.  If there is error in exporting the metadata false is returned;</span>
+<span id="L484"><span class="lineNum">     484</span>                 :             :         else true is returned.</span>
+<span id="L485"><span class="lineNum">     485</span>                 :             : </span>
+<span id="L486"><span class="lineNum">     486</span>                 :             :         A default implementation is provided that always returns true, i.e. for</span>
+<span id="L487"><span class="lineNum">     487</span>                 :             :         model points that do not have metadata (above and beyond the valid and</span>
+<span id="L488"><span class="lineNum">     488</span>                 :             :         locked states).</span>
+<span id="L489"><span class="lineNum">     489</span>                 :             : </span>
+<span id="L490"><span class="lineNum">     490</span>                 :             :         NOTE: The overall size of the destination has been validated with respect</span>
+<span id="L491"><span class="lineNum">     491</span>                 :             :               holding both the Model Point's metadata and the data - so the</span>
+<span id="L492"><span class="lineNum">     492</span>                 :             :               no 'dstLength' argument is passed/provided.</span>
+<span id="L493"><span class="lineNum">     493</span>                 :             :     */</span>
+<span id="L494"><span class="lineNum">     494</span>                 :<span class="tlaGNC">          48 :     virtual bool exportMetadata_( void* dstDataStream, size_t&amp; bytesAdded ) const noexcept</span></span>
+<span id="L495"><span class="lineNum">     495</span>                 :             :     {</span>
+<span id="L496"><span class="lineNum">     496</span>                 :<span class="tlaGNC">          48 :         bytesAdded = 0;</span></span>
+<span id="L497"><span class="lineNum">     497</span>                 :<span class="tlaGNC">          48 :         return true;</span></span>
+<span id="L498"><span class="lineNum">     498</span>                 :             :     }</span>
+<span id="L499"><span class="lineNum">     499</span>                 :             : </span>
+<span id="L500"><span class="lineNum">     500</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L501"><span class="lineNum">     501</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L502"><span class="lineNum">     502</span>                 :             :         NEVER call this method.</span>
+<span id="L503"><span class="lineNum">     503</span>                 :             : </span>
+<span id="L504"><span class="lineNum">     504</span>                 :             :         This method is NOT Thread Safe.</span>
 <span id="L505"><span class="lineNum">     505</span>                 :             : </span>
-<span id="L506"><span class="lineNum">     506</span>                 :             :         NOTE: The overall size of the source has been validated with respect</span>
-<span id="L507"><span class="lineNum">     507</span>                 :             :               containing both the Model Point's metadata and the data - so the</span>
-<span id="L508"><span class="lineNum">     508</span>                 :             :               no 'srcLength' argument is passed/provided.</span>
-<span id="L509"><span class="lineNum">     509</span>                 :             :    */</span>
-<span id="L510"><span class="lineNum">     510</span>                 :<span class="tlaGNC">          22 :     virtual bool importMetadata_( const void* srcDataStream, size_t&amp; bytesConsumed ) noexcept</span></span>
-<span id="L511"><span class="lineNum">     511</span>                 :             :     {</span>
-<span id="L512"><span class="lineNum">     512</span>                 :<span class="tlaGNC">          22 :         bytesConsumed = 0;</span></span>
-<span id="L513"><span class="lineNum">     513</span>                 :<span class="tlaGNC">          22 :         return true;</span></span>
-<span id="L514"><span class="lineNum">     514</span>                 :             :     }</span>
-<span id="L515"><span class="lineNum">     515</span>                 :             : </span>
-<span id="L516"><span class="lineNum">     516</span>                 :             : </span>
-<span id="L517"><span class="lineNum">     517</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
-<span id="L518"><span class="lineNum">     518</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
-<span id="L519"><span class="lineNum">     519</span>                 :             :         NEVER call this method.</span>
-<span id="L520"><span class="lineNum">     520</span>                 :             : </span>
-<span id="L521"><span class="lineNum">     521</span>                 :             :         This method attempts to convert JSON object 'src' to its binary format</span>
-<span id="L522"><span class="lineNum">     522</span>                 :             :         and copies the result to the Model Point's internal data. The expected</span>
-<span id="L523"><span class="lineNum">     523</span>                 :             :         format of the JSON string is specific to the concrete leaf class.</span>
+<span id="L506"><span class="lineNum">     506</span>                 :             :         This method is used to import meta data when importing a model</span>
+<span id="L507"><span class="lineNum">     507</span>                 :             :         point.  If the incoming meta data is 'not-valid/not-compatible' then</span>
+<span id="L508"><span class="lineNum">     508</span>                 :             :         false is returned and the import operation will fail; else true is</span>
+<span id="L509"><span class="lineNum">     509</span>                 :             :         returned.</span>
+<span id="L510"><span class="lineNum">     510</span>                 :             : </span>
+<span id="L511"><span class="lineNum">     511</span>                 :             :         A default implementation is provided that always returns true, i.e. for</span>
+<span id="L512"><span class="lineNum">     512</span>                 :             :         model points that do not have metadata (above and beyond the valid and</span>
+<span id="L513"><span class="lineNum">     513</span>                 :             :         locked states).</span>
+<span id="L514"><span class="lineNum">     514</span>                 :             : </span>
+<span id="L515"><span class="lineNum">     515</span>                 :             :         NOTE: The overall size of the source has been validated with respect</span>
+<span id="L516"><span class="lineNum">     516</span>                 :             :               containing both the Model Point's metadata and the data - so the</span>
+<span id="L517"><span class="lineNum">     517</span>                 :             :               no 'srcLength' argument is passed/provided.</span>
+<span id="L518"><span class="lineNum">     518</span>                 :             :    */</span>
+<span id="L519"><span class="lineNum">     519</span>                 :<span class="tlaGNC">          22 :     virtual bool importMetadata_( const void* srcDataStream, size_t&amp; bytesConsumed ) noexcept</span></span>
+<span id="L520"><span class="lineNum">     520</span>                 :             :     {</span>
+<span id="L521"><span class="lineNum">     521</span>                 :<span class="tlaGNC">          22 :         bytesConsumed = 0;</span></span>
+<span id="L522"><span class="lineNum">     522</span>                 :<span class="tlaGNC">          22 :         return true;</span></span>
+<span id="L523"><span class="lineNum">     523</span>                 :             :     }</span>
 <span id="L524"><span class="lineNum">     524</span>                 :             : </span>
-<span id="L525"><span class="lineNum">     525</span>                 :             :         See Kit::Dm::ModelDatabaseApi::fromJSON() method for JSON format.</span>
-<span id="L526"><span class="lineNum">     526</span>                 :             :      */</span>
-<span id="L527"><span class="lineNum">     527</span>                 :             :     virtual bool fromJSON_( JsonVariant&amp;        src,</span>
-<span id="L528"><span class="lineNum">     528</span>                 :             :                             LockRequest_T       lockRequest,</span>
-<span id="L529"><span class="lineNum">     529</span>                 :             :                             uint16_t&amp;           retSequenceNumber,</span>
-<span id="L530"><span class="lineNum">     530</span>                 :             :                             Kit::Text::IString* errorMsg ) noexcept = 0;</span>
-<span id="L531"><span class="lineNum">     531</span>                 :             : </span>
-<span id="L532"><span class="lineNum">     532</span>                 :             : </span>
-<span id="L533"><span class="lineNum">     533</span>                 :             : protected:</span>
-<span id="L534"><span class="lineNum">     534</span>                 :             :     /** This method converts the MP data to a JSON key/value pair.  The key</span>
-<span id="L535"><span class="lineNum">     535</span>                 :             :         must be 'val' This method is only called when the MP data is valid</span>
-<span id="L536"><span class="lineNum">     536</span>                 :             :      */</span>
-<span id="L537"><span class="lineNum">     537</span>                 :             :     virtual bool setJSONVal( JsonDocument&amp; doc ) noexcept = 0;</span>
-<span id="L538"><span class="lineNum">     538</span>                 :             : </span>
-<span id="L539"><span class="lineNum">     539</span>                 :             : </span>
-<span id="L540"><span class="lineNum">     540</span>                 :             : protected:</span>
-<span id="L541"><span class="lineNum">     541</span>                 :             :     /// Protected Constructor (needed because of the inheritance from KeyLiteralString)</span>
-<span id="L542"><span class="lineNum">     542</span>                 :<span class="tlaGNC">          57 :     IModelPoint( const char* name ) noexcept</span></span>
-<span id="L543"><span class="lineNum">     543</span>                 :<span class="tlaGNC">          57 :         : Kit::Container::KeyLiteralString( name )</span></span>
-<span id="L544"><span class="lineNum">     544</span>                 :             :     {</span>
-<span id="L545"><span class="lineNum">     545</span>                 :<span class="tlaGNC">          57 :     }</span></span>
-<span id="L546"><span class="lineNum">     546</span>                 :             : </span>
-<span id="L547"><span class="lineNum">     547</span>                 :             : public:</span>
-<span id="L548"><span class="lineNum">     548</span>                 :             :     /// Virtual destructor to make the compiler happy</span>
-<span id="L549"><span class="lineNum">     549</span>                 :             :     virtual ~IModelPoint() {}</span>
-<span id="L550"><span class="lineNum">     550</span>                 :             : };</span>
-<span id="L551"><span class="lineNum">     551</span>                 :             : </span>
-<span id="L552"><span class="lineNum">     552</span>                 :             : </span>
-<span id="L553"><span class="lineNum">     553</span>                 :             : };  // end namespaces</span>
-<span id="L554"><span class="lineNum">     554</span>                 :             : };</span>
-<span id="L555"><span class="lineNum">     555</span>                 :             : #endif  // end header latch</span>
+<span id="L525"><span class="lineNum">     525</span>                 :             : </span>
+<span id="L526"><span class="lineNum">     526</span>                 :             :     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible</span>
+<span id="L527"><span class="lineNum">     527</span>                 :             :         by other classes in the Kit::Dm namespace.  The Application should</span>
+<span id="L528"><span class="lineNum">     528</span>                 :             :         NEVER call this method.</span>
+<span id="L529"><span class="lineNum">     529</span>                 :             : </span>
+<span id="L530"><span class="lineNum">     530</span>                 :             :         This method attempts to convert JSON object 'src' to its binary format</span>
+<span id="L531"><span class="lineNum">     531</span>                 :             :         and copies the result to the Model Point's internal data. The expected</span>
+<span id="L532"><span class="lineNum">     532</span>                 :             :         format of the JSON string is specific to the concrete leaf class.</span>
+<span id="L533"><span class="lineNum">     533</span>                 :             : </span>
+<span id="L534"><span class="lineNum">     534</span>                 :             :         See Kit::Dm::ModelDatabaseApi::fromJSON() method for JSON format.</span>
+<span id="L535"><span class="lineNum">     535</span>                 :             :      */</span>
+<span id="L536"><span class="lineNum">     536</span>                 :             :     virtual bool fromJSON_( JsonVariant&amp;        src,</span>
+<span id="L537"><span class="lineNum">     537</span>                 :             :                             LockRequest_T       lockRequest,</span>
+<span id="L538"><span class="lineNum">     538</span>                 :             :                             uint16_t&amp;           retSequenceNumber,</span>
+<span id="L539"><span class="lineNum">     539</span>                 :             :                             Kit::Text::IString* errorMsg ) noexcept = 0;</span>
+<span id="L540"><span class="lineNum">     540</span>                 :             : </span>
+<span id="L541"><span class="lineNum">     541</span>                 :             : </span>
+<span id="L542"><span class="lineNum">     542</span>                 :             : protected:</span>
+<span id="L543"><span class="lineNum">     543</span>                 :             :     /** This method converts the MP data to a JSON key/value pair.  The key</span>
+<span id="L544"><span class="lineNum">     544</span>                 :             :         must be 'val' This method is only called when the MP data is valid</span>
+<span id="L545"><span class="lineNum">     545</span>                 :             :      */</span>
+<span id="L546"><span class="lineNum">     546</span>                 :             :     virtual bool setJSONVal( JsonDocument&amp; doc ) noexcept = 0;</span>
+<span id="L547"><span class="lineNum">     547</span>                 :             : </span>
+<span id="L548"><span class="lineNum">     548</span>                 :             : </span>
+<span id="L549"><span class="lineNum">     549</span>                 :             : protected:</span>
+<span id="L550"><span class="lineNum">     550</span>                 :             :     /// Protected Constructor (needed because of the inheritance from KeyLiteralString)</span>
+<span id="L551"><span class="lineNum">     551</span>                 :<span class="tlaGNC">          64 :     IModelPoint( const char* name ) noexcept</span></span>
+<span id="L552"><span class="lineNum">     552</span>                 :<span class="tlaGNC">          64 :         : Kit::Container::KeyLiteralString( name )</span></span>
+<span id="L553"><span class="lineNum">     553</span>                 :             :     {</span>
+<span id="L554"><span class="lineNum">     554</span>                 :<span class="tlaGNC">          64 :     }</span></span>
+<span id="L555"><span class="lineNum">     555</span>                 :             : </span>
+<span id="L556"><span class="lineNum">     556</span>                 :             : public:</span>
+<span id="L557"><span class="lineNum">     557</span>                 :             :     /// Virtual destructor to make the compiler happy</span>
+<span id="L558"><span class="lineNum">     558</span>                 :             :     virtual ~IModelPoint() {}</span>
+<span id="L559"><span class="lineNum">     559</span>                 :             : };</span>
+<span id="L560"><span class="lineNum">     560</span>                 :             : </span>
+<span id="L561"><span class="lineNum">     561</span>                 :             : </span>
+<span id="L562"><span class="lineNum">     562</span>                 :             : };  // end namespaces</span>
+<span id="L563"><span class="lineNum">     563</span>                 :             : };</span>
+<span id="L564"><span class="lineNum">     564</span>                 :             : #endif  // end header latch</span>
         </pre>
               </td>
             </tr>

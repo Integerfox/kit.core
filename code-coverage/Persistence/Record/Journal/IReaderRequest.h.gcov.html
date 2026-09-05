@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -122,7 +122,7 @@
 <span id="L60"><span class="lineNum">      60</span>                 :             :     public:</span>
 <span id="L61"><span class="lineNum">      61</span>                 :             :         /// Constructor. Use for getLatest() message</span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :         LatestPayload( Kit::Persistence::Record::IPayload&amp; entryDst )</span>
-<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC tlaBgGNC">           3 :             : m_entryDst( entryDst ), m_success( false )</span></span>
+<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC tlaBgGNC">          14 :             : m_entryDst( entryDst ), m_success( false )</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :         {</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :         }</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     };</span>
@@ -196,7 +196,7 @@
 <span id="L134"><span class="lineNum">     134</span>                 :             :     public:</span>
 <span id="L135"><span class="lineNum">     135</span>                 :             :         /// Constructor. Use for retrievePrevious() message</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :         PreviousPayload( Kit::Persistence::Record::IPayload&amp; entryDst, IEntry::Marker_T&amp; beginHere, uint64_t olderThan )</span>
-<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">           1 :             : m_olderThan( olderThan ), m_beginHereMarker( beginHere ), m_entryDst( entryDst ), m_success( false )</span></span>
+<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">          54 :             : m_olderThan( olderThan ), m_beginHereMarker( beginHere ), m_entryDst( entryDst ), m_success( false )</span></span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :         {</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             :         }</span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :     };</span>

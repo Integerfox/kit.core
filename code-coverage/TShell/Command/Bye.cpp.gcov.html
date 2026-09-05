@@ -31,18 +31,18 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">64.7&nbsp;%</td>
-            <td class="headerCovTableEntry">17</td>
-            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntryLo">62.5&nbsp;%</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">10</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -81,19 +81,19 @@
 <span id="L19"><span class="lineNum">      19</span>                 :             : namespace Command {</span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : </span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : </span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC tlaBgGNC">           2 : Result_T Bye::execute( IContext&amp; context, char* cmdString ) noexcept</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC tlaBgGNC">           4 : Result_T Bye::execute( IContext&amp; context, char* cmdString ) noexcept</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : {</span>
-<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">           2 :     Kit::Text::Tokenizer::TextBlock tokens( cmdString );</span></span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">           2 :     Kit::Text::IString&amp;             outtext = context.getOutputBuffer();</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">           4 :     Kit::Text::Tokenizer::TextBlock tokens( cmdString );</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">           4 :     Kit::Text::IString&amp;             outtext = context.getOutputBuffer();</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :     // Basic Error Checking</span>
-<span id="L28"><span class="lineNum">      28</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           2 :     if ( tokens.numParameters() &gt; 2 )</span></span>
+<span id="L28"><span class="lineNum">      28</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">           4 :     if ( tokens.numParameters() &gt; 2 )</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     {</span>
 <span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         return Result_T::CMD_ERR_BAD_SYNTAX;</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     }</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : </span>
 <span id="L33"><span class="lineNum">      33</span>                 :             :     // Exit the TShell only</span>
-<span id="L34"><span class="lineNum">      34</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC tlaBgGNC">           2 :     if ( tokens.numParameters() == 2 )</span></span>
+<span id="L34"><span class="lineNum">      34</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC tlaBgGNC">           4 :     if ( tokens.numParameters() == 2 )</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     {</span>
 <span id="L36"><span class="lineNum">      36</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :         if ( tokens.getParameter( 1 )[0] == 't' )</span></span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :         {</span>
@@ -103,8 +103,8 @@
 <span id="L41"><span class="lineNum">      41</span>                 :             :     }</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : </span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :     // Exit the application</span>
-<span id="L44"><span class="lineNum">      44</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :     int exitCode = Kit::System::Shutdown::eSUCCESS;</span></span>
-<span id="L45"><span class="lineNum">      45</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           1 :     if ( tokens.numParameters() == 2 )</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :     int exitCode = Kit::System::Shutdown::eSUCCESS;</span>
+<span id="L45"><span class="lineNum">      45</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           3 :     if ( tokens.numParameters() == 2 )</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     {</span>
 <span id="L47"><span class="lineNum">      47</span>         [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span>]:<span class="tlaUNC tlaBgUNC">           0 :         if ( !Kit::Text::StringTo::signedInt( exitCode, tokens.getParameter( 1 ) ) )</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :         {</span>
@@ -115,7 +115,7 @@
 <span id="L53"><span class="lineNum">      53</span>                 :             :     }</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : </span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     </span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC tlaBgGNC">           1 :     Kit::System::Shutdown::failure( exitCode );</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC tlaBgGNC">           3 :     Kit::System::Shutdown::failure( exitCode );</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     return Result_T::CMD_SUCCESS;</span></span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : }</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : </span>

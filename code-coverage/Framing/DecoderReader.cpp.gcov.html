@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">94.7&nbsp;%</td>
@@ -78,13 +78,13 @@
 <span id="L16"><span class="lineNum">      16</span>                 :             : namespace Framing {</span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : </span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : ///////////////////</span>
-<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC tlaBgGNC">         110 : void DecoderReader::initializeScan() noexcept</span></span>
+<span id="L19"><span class="lineNum">      19</span>                 :<span class="tlaGNC tlaBgGNC">         274 : void DecoderReader::initializeScan() noexcept</span></span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : {</span>
-<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">         110 :     m_framePtr  = nullptr;</span></span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">         110 :     m_frameSize = 0;</span></span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">         110 :     m_inFrame   = false;</span></span>
-<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">         110 :     m_escaping  = false;</span></span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">         110 : }</span></span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">         274 :     m_framePtr  = nullptr;</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">         274 :     m_frameSize = 0;</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">         274 :     m_inFrame   = false;</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">         274 :     m_escaping  = false;</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">         274 : }</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
 <span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">           5 : uint8_t DecoderReader::decodeEscapedByte( uint8_t escapedByte ) noexcept</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : {</span>
@@ -97,18 +97,18 @@
 <span id="L35"><span class="lineNum">      35</span>                 :             : }</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             : </span>
 <span id="L37"><span class="lineNum">      37</span>                 :             : ///////////////////</span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC tlaBgGNC">          52 : bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC tlaBgGNC">         134 : bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :                           uint8_t*            frameBuffer,</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :                           Kit::Type::SSize_T&amp; frameSize ) noexcept</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : {</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     // Housekeeping</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">          52 :     initializeScan();</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         134 :     initializeScan();</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : </span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     // Zero out size of the found frame</span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">          52 :     frameSize = 0;</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">         134 :     frameSize = 0;</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     // Error case: Treat a null frame buffer as an IO failure case</span>
-<span id="L49"><span class="lineNum">      49</span>         [<span class="tlaGBC" title="Branch 0 was taken 51 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          52 :     if ( frameBuffer == nullptr )</span></span>
+<span id="L49"><span class="lineNum">      49</span>         [<span class="tlaGBC" title="Branch 0 was taken 133 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">         134 :     if ( frameBuffer == nullptr )</span></span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     {</span>
 <span id="L51"><span class="lineNum">      51</span>                 :             :         return false;</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     }</span>
@@ -118,38 +118,38 @@
 <span id="L56"><span class="lineNum">      56</span>                 :             :     {</span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :         // Read N characters at time</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :         bool isEof;</span>
-<span id="L59"><span class="lineNum">      59</span>         [<span class="tlaGBC" title="Branch 0 was taken 138 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span>]:<span class="tlaGNC">         144 :         if ( !scan( maxSizeOfFrameBuffer, frameBuffer, frameSize, isEof, true ) )</span></span>
+<span id="L59"><span class="lineNum">      59</span>         [<span class="tlaGBC" title="Branch 0 was taken 301 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span>]:<span class="tlaGNC">         307 :         if ( !scan( maxSizeOfFrameBuffer, frameBuffer, frameSize, isEof, true ) )</span></span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :         {</span>
-<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">          51 :             return false;  // Read/IO error occurred</span></span>
+<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">         133 :             return false;  // Read/IO error occurred</span></span>
 <span id="L62"><span class="lineNum">      62</span>                 :             :         }</span>
-<span id="L63"><span class="lineNum">      63</span>         [<span class="tlaGBC" title="Branch 0 was taken 93 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 45 times"> + </span>]:<span class="tlaGNC">         138 :         else if ( isEof )</span></span>
+<span id="L63"><span class="lineNum">      63</span>         [<span class="tlaGBC" title="Branch 0 was taken 174 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 127 times"> + </span>]:<span class="tlaGNC">         301 :         else if ( isEof )</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :         {</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :             return true;  // Frame Found!</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :         }</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">          93 :     }</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">         174 :     }</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : }</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : </span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">           8 : bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">           9 : bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :                           uint8_t*            frameBuffer,</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :                           Kit::Type::SSize_T&amp; frameSize,</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :                           bool&amp;               isEof ) noexcept</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : {</span>
-<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">           8 :     return scan( maxSizeOfFrameBuffer, frameBuffer, frameSize, isEof, false );</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">           9 :     return scan( maxSizeOfFrameBuffer, frameBuffer, frameSize, isEof, false );</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : }</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">         152 : bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">         316 : bool DecoderReader::scan( Kit::Type::SSize_T  maxSizeOfFrameBuffer,</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :                           uint8_t*            frameBuffer,</span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :                           Kit::Type::SSize_T&amp; frameSize,</span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :                           bool&amp;               isEof,</span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :                           bool                blockIfUnavailable ) noexcept</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             : {</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             :     // Default to in-progress</span>
-<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">         152 :     isEof = false;</span></span>
+<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">         316 :     isEof = false;</span></span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : </span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :     // Get more input data once my local buffer/cache is empty</span>
-<span id="L88"><span class="lineNum">      88</span>         [<span class="tlaGBC" title="Branch 0 was taken 125 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 27 times"> + </span>]:<span class="tlaGNC">         152 :     if ( !m_dataLen )</span></span>
+<span id="L88"><span class="lineNum">      88</span>         [<span class="tlaGBC" title="Branch 0 was taken 212 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 104 times"> + </span>]:<span class="tlaGNC">         316 :     if ( !m_dataLen )</span></span>
 <span id="L89"><span class="lineNum">      89</span>                 :             :     {</span>
-<span id="L90"><span class="lineNum">      90</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 119 times"> + </span>]:<span class="tlaGNC">         125 :         if ( !m_src.read( m_buffer, m_bufSize, m_dataLen, blockIfUnavailable ) )</span></span>
+<span id="L90"><span class="lineNum">      90</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 206 times"> + </span>]:<span class="tlaGNC">         212 :         if ( !m_src.read( m_buffer, m_bufSize, m_dataLen, blockIfUnavailable ) )</span></span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :         {</span>
 <span id="L92"><span class="lineNum">      92</span>                 :             :             // Error reading data --&gt;exit scan</span>
 <span id="L93"><span class="lineNum">      93</span>                 :<span class="tlaGNC">           6 :             m_dataLen = 0;  // Reset my internal count so I start 'over' on the next call (if there is one)</span></span>
@@ -159,21 +159,21 @@
 <span id="L97"><span class="lineNum">      97</span>                 :             :         }</span>
 <span id="L98"><span class="lineNum">      98</span>                 :             : </span>
 <span id="L99"><span class="lineNum">      99</span>                 :             :         // Reset my data pointer</span>
-<span id="L100"><span class="lineNum">     100</span>                 :<span class="tlaGNC">         119 :         m_dataPtr = m_buffer;</span></span>
+<span id="L100"><span class="lineNum">     100</span>                 :<span class="tlaGNC">         206 :         m_dataPtr = m_buffer;</span></span>
 <span id="L101"><span class="lineNum">     101</span>                 :             :     }</span>
 <span id="L102"><span class="lineNum">     102</span>                 :             : </span>
 <span id="L103"><span class="lineNum">     103</span>                 :             :     // Process my input buffer one character at a time</span>
-<span id="L104"><span class="lineNum">     104</span>         [<span class="tlaGBC" title="Branch 0 was taken 816 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 95 times"> + </span>]:<span class="tlaGNC">         911 :     for ( ; m_dataLen; m_dataLen--, m_dataPtr++ )</span></span>
+<span id="L104"><span class="lineNum">     104</span>         [<span class="tlaGBC" title="Branch 0 was taken 2260 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 177 times"> + </span>]:<span class="tlaGNC">        2437 :     for ( ; m_dataLen; m_dataLen--, m_dataPtr++ )</span></span>
 <span id="L105"><span class="lineNum">     105</span>                 :             :     {</span>
 <span id="L106"><span class="lineNum">     106</span>                 :             :         // OUTSIDE of a frame</span>
-<span id="L107"><span class="lineNum">     107</span>         [<span class="tlaGBC" title="Branch 0 was taken 107 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 709 times"> + </span>]:<span class="tlaGNC">         816 :         if ( !m_inFrame )</span></span>
+<span id="L107"><span class="lineNum">     107</span>         [<span class="tlaGBC" title="Branch 0 was taken 189 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2071 times"> + </span>]:<span class="tlaGNC">        2260 :         if ( !m_inFrame )</span></span>
 <span id="L108"><span class="lineNum">     108</span>                 :             :         {</span>
-<span id="L109"><span class="lineNum">     109</span>         [<span class="tlaGBC" title="Branch 0 was taken 55 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">         107 :             if ( isStartOfFrame( *m_dataPtr ) )</span></span>
+<span id="L109"><span class="lineNum">     109</span>         [<span class="tlaGBC" title="Branch 0 was taken 137 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">         189 :             if ( isStartOfFrame( *m_dataPtr ) )</span></span>
 <span id="L110"><span class="lineNum">     110</span>                 :             :             {</span>
-<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC">          55 :                 m_inFrame   = true;</span></span>
-<span id="L112"><span class="lineNum">     112</span>                 :<span class="tlaGNC">          55 :                 m_escaping  = false;</span></span>
-<span id="L113"><span class="lineNum">     113</span>                 :<span class="tlaGNC">          55 :                 m_frameSize = 0;</span></span>
-<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">          55 :                 m_framePtr  = frameBuffer;</span></span>
+<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC">         137 :                 m_inFrame   = true;</span></span>
+<span id="L112"><span class="lineNum">     112</span>                 :<span class="tlaGNC">         137 :                 m_escaping  = false;</span></span>
+<span id="L113"><span class="lineNum">     113</span>                 :<span class="tlaGNC">         137 :                 m_frameSize = 0;</span></span>
+<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">         137 :                 m_framePtr  = frameBuffer;</span></span>
 <span id="L115"><span class="lineNum">     115</span>                 :             :             }</span>
 <span id="L116"><span class="lineNum">     116</span>                 :             :         }</span>
 <span id="L117"><span class="lineNum">     117</span>                 :             : </span>
@@ -181,41 +181,41 @@
 <span id="L119"><span class="lineNum">     119</span>                 :             :         else</span>
 <span id="L120"><span class="lineNum">     120</span>                 :             :         {</span>
 <span id="L121"><span class="lineNum">     121</span>                 :             :             // Trap illegal characters</span>
-<span id="L122"><span class="lineNum">     122</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 707 times"> + </span>]:<span class="tlaGNC">         709 :             if ( !isLegalByte( *m_dataPtr ) )</span></span>
+<span id="L122"><span class="lineNum">     122</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2069 times"> + </span>]:<span class="tlaGNC">        2071 :             if ( !isLegalByte( *m_dataPtr ) )</span></span>
 <span id="L123"><span class="lineNum">     123</span>                 :             :             {</span>
 <span id="L124"><span class="lineNum">     124</span>                 :<span class="tlaGNC">           2 :                 m_inFrame = false;</span></span>
 <span id="L125"><span class="lineNum">     125</span>                 :             :             }</span>
 <span id="L126"><span class="lineNum">     126</span>                 :             : </span>
 <span id="L127"><span class="lineNum">     127</span>                 :             :             // No escape sequence in progress</span>
-<span id="L128"><span class="lineNum">     128</span>         [<span class="tlaGBC" title="Branch 0 was taken 702 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">         707 :             else if ( !m_escaping )</span></span>
+<span id="L128"><span class="lineNum">     128</span>         [<span class="tlaGBC" title="Branch 0 was taken 2064 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">        2069 :             else if ( !m_escaping )</span></span>
 <span id="L129"><span class="lineNum">     129</span>                 :             :             {</span>
 <span id="L130"><span class="lineNum">     130</span>                 :             :                 // EOF Character</span>
-<span id="L131"><span class="lineNum">     131</span>         [<span class="tlaGBC" title="Branch 0 was taken 51 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 651 times"> + </span>]:<span class="tlaGNC">         702 :                 if ( isEndOfFrame( *m_dataPtr ) )</span></span>
+<span id="L131"><span class="lineNum">     131</span>         [<span class="tlaGBC" title="Branch 0 was taken 133 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1931 times"> + </span>]:<span class="tlaGNC">        2064 :                 if ( isEndOfFrame( *m_dataPtr ) )</span></span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :                 {</span>
 <span id="L133"><span class="lineNum">     133</span>                 :             :                     // EXIT routine with a success return code</span>
-<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">          51 :                     m_dataPtr++;  // Explicitly consume the EOF character (since we are brute force exiting the loop)</span></span>
-<span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">          51 :                     m_dataLen--;</span></span>
-<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">          51 :                     frameSize = m_frameSize;</span></span>
-<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">          51 :                     isEof     = true;</span></span>
-<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">          51 :                     initializeScan();  // Reset my internal frame state to be ready for the next frame</span></span>
-<span id="L139"><span class="lineNum">     139</span>                 :<span class="tlaGNC">          51 :                     return true;</span></span>
+<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">         133 :                     m_dataPtr++;  // Explicitly consume the EOF character (since we are brute force exiting the loop)</span></span>
+<span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">         133 :                     m_dataLen--;</span></span>
+<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">         133 :                     frameSize = m_frameSize;</span></span>
+<span id="L137"><span class="lineNum">     137</span>                 :<span class="tlaGNC">         133 :                     isEof     = true;</span></span>
+<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">         133 :                     initializeScan();  // Reset my internal frame state to be ready for the next frame</span></span>
+<span id="L139"><span class="lineNum">     139</span>                 :<span class="tlaGNC">         133 :                     return true;</span></span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :                 }</span>
 <span id="L141"><span class="lineNum">     141</span>                 :             : </span>
 <span id="L142"><span class="lineNum">     142</span>                 :             :                 // SOF Character --&gt;need to reset the frame</span>
-<span id="L143"><span class="lineNum">     143</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 650 times"> + </span>]:<span class="tlaGNC">         651 :                 else if ( isStartOfFrame( *m_dataPtr ) )</span></span>
+<span id="L143"><span class="lineNum">     143</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1930 times"> + </span>]:<span class="tlaGNC">        1931 :                 else if ( isStartOfFrame( *m_dataPtr ) )</span></span>
 <span id="L144"><span class="lineNum">     144</span>                 :             :                 {</span>
 <span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">           1 :                     m_frameSize = 0;</span></span>
 <span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">           1 :                     m_framePtr  = frameBuffer;</span></span>
 <span id="L147"><span class="lineNum">     147</span>                 :             :                 }</span>
 <span id="L148"><span class="lineNum">     148</span>                 :             : </span>
 <span id="L149"><span class="lineNum">     149</span>                 :             :                 // Regular character</span>
-<span id="L150"><span class="lineNum">     150</span>         [<span class="tlaGBC" title="Branch 0 was taken 645 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">         650 :                 else if ( !isEscapeByte( *m_dataPtr ) )</span></span>
+<span id="L150"><span class="lineNum">     150</span>         [<span class="tlaGBC" title="Branch 0 was taken 1925 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">        1930 :                 else if ( !isEscapeByte( *m_dataPtr ) )</span></span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :                 {</span>
 <span id="L152"><span class="lineNum">     152</span>                 :             :                     // Store incoming character into the Client's buffer</span>
-<span id="L153"><span class="lineNum">     153</span>         [<span class="tlaGBC" title="Branch 0 was taken 644 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">         645 :                     if ( m_frameSize &lt; maxSizeOfFrameBuffer )</span></span>
+<span id="L153"><span class="lineNum">     153</span>         [<span class="tlaGBC" title="Branch 0 was taken 1924 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">        1925 :                     if ( m_frameSize &lt; maxSizeOfFrameBuffer )</span></span>
 <span id="L154"><span class="lineNum">     154</span>                 :             :                     {</span>
-<span id="L155"><span class="lineNum">     155</span>                 :<span class="tlaGNC">         644 :                         *m_framePtr++ = *m_dataPtr;</span></span>
-<span id="L156"><span class="lineNum">     156</span>                 :<span class="tlaGNC">         644 :                         m_frameSize++;</span></span>
+<span id="L155"><span class="lineNum">     155</span>                 :<span class="tlaGNC">        1924 :                         *m_framePtr++ = *m_dataPtr;</span></span>
+<span id="L156"><span class="lineNum">     156</span>                 :<span class="tlaGNC">        1924 :                         m_frameSize++;</span></span>
 <span id="L157"><span class="lineNum">     157</span>                 :             :                     }</span>
 <span id="L158"><span class="lineNum">     158</span>                 :             : </span>
 <span id="L159"><span class="lineNum">     159</span>                 :             :                     // Exceeded the Client's buffer space --&gt;internal error --&gt;reset my Frame state</span>
@@ -254,8 +254,8 @@
 <span id="L192"><span class="lineNum">     192</span>                 :             :     }</span>
 <span id="L193"><span class="lineNum">     193</span>                 :             : </span>
 <span id="L194"><span class="lineNum">     194</span>                 :             :     // If I get here there was no IO error - but still no End-of-Frame</span>
-<span id="L195"><span class="lineNum">     195</span>                 :<span class="tlaGNC tlaBgGNC">          95 :     frameSize = m_frameSize;</span></span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">          95 :     return true;</span></span>
+<span id="L195"><span class="lineNum">     195</span>                 :<span class="tlaGNC tlaBgGNC">         177 :     frameSize = m_frameSize;</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">         177 :     return true;</span></span>
 <span id="L197"><span class="lineNum">     197</span>                 :             : }</span>
 <span id="L198"><span class="lineNum">     198</span>                 :             : </span>
 <span id="L199"><span class="lineNum">     199</span>                 :             : </span>

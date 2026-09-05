@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -112,16 +112,16 @@
 <span id="L50"><span class="lineNum">      50</span>                 :             :               are encountered, they will be treated as a non-printable character</span>
 <span id="L51"><span class="lineNum">      51</span>                 :             :               and cause the current frame to be aborted.</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :      */</span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC tlaBgGNC">          12 :     LineDecoder( ISource&amp;           source,</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC tlaBgGNC">          15 :     LineDecoder( ISource&amp;           source,</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :                  uint8_t*           workBuffer,</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :                  Kit::Type::SSize_T sizeOfWorkBuffer,</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :                  char               convertTabs = '\t' )</span>
-<span id="L57"><span class="lineNum">      57</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 12 times"> + </span>]:<span class="tlaGNC">          12 :         : DecoderReader( source, workBuffer, sizeOfWorkBuffer )</span></span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">          12 :         , m_frameDetected( false )</span></span>
-<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC">          12 :         , m_convertTabs( convertTabs )</span></span>
+<span id="L57"><span class="lineNum">      57</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span>]:<span class="tlaGNC">          15 :         : DecoderReader( source, workBuffer, sizeOfWorkBuffer )</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">          15 :         , m_frameDetected( false )</span></span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC">          15 :         , m_convertTabs( convertTabs )</span></span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :     {</span>
 <span id="L61"><span class="lineNum">      61</span>                 :             :         KIT_SYSTEM_ASSERT( convertTabs == '\t' || ( convertTabs &gt;= ' ' &amp;&amp; convertTabs &lt;= '~' ) );</span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">          12 :     }</span></span>
+<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">          15 :     }</span></span>
 <span id="L63"><span class="lineNum">      63</span>                 :             : </span>
 <span id="L64"><span class="lineNum">      64</span>                 :             : protected:</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :     /// See Kit::Framing::IDecoder</span>

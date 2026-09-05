@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -92,78 +92,98 @@ $(function() {
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">        NOTE: An ENTIRE frame must be written with a single call to this method</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">              to avoid interleaving of output frames with console trace/logging.</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">    */</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a99b714bfa42d19a70e81704aca4001bd">   46</a></span>    inline <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a99b714bfa42d19a70e81704aca4001bd">writeFrame</a>( const <span class="keywordtype">char</span>* text ) noexcept</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a99b714bfa42d19a70e81704aca4001bd">writeFrame</a>( text, strlen( text ) );</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"></span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">    /** Same as writeFrame(), but only outputs (at most) &#39;N&#39; bytes as the content</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">        of the frame</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">    */</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ad3becba1b9f73916848968c8fd837e4e">   54</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ad3becba1b9f73916848968c8fd837e4e">writeFrame</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* text, <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxBytes ) <span class="keyword">noexcept</span> = 0;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    /** This method returns a working buffer for a command to format its</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">        output prior to &#39;writing the frame&#39;.  The buffer is only &#39;valid&#39; for</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">        duration of the command&#39;s execute() method. The string buffer is</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">        guaranteed to be at least size of the largest supported output frame.</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a2a25f8b5bca85ea99bbabcfe3b7dbff7">   62</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a2a25f8b5bca85ea99bbabcfe3b7dbff7">getOutputBuffer</a>() noexcept = 0;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">    /** This method returns a &#39;working&#39; buffer for use by a command when</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">        parsing input arguments.  The buffer is only &#39;valid&#39; for</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">        duration of the command&#39;s execute() method. The string buffer is</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">        guaranteed to be at least size of the largest supported input frame.</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ad3f2bd84644dde90e8ab1072093dfe9c">   69</a></span>    virtual <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Text::IString&amp; <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ad3f2bd84644dde90e8ab1072093dfe9c">getInputBuffer</a>() noexcept = 0;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">        NOTE: If the &#39;text&#39; contains characters that must not be escaped (e.g.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">              newline), use writeFrameWithSpecialChars() instead.</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a99b714bfa42d19a70e81704aca4001bd">   49</a></span>    inline <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a99b714bfa42d19a70e81704aca4001bd">writeFrame</a>( const <span class="keywordtype">char</span>* text ) noexcept</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    {</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a99b714bfa42d19a70e81704aca4001bd">writeFrame</a>( text, strlen( text ) );</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"></span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    /** Same as writeFrame(), but only outputs (at most) &#39;N&#39; bytes as the content</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">        of the frame</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ad3becba1b9f73916848968c8fd837e4e">   58</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ad3becba1b9f73916848968c8fd837e4e">writeFrame</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>*        text,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                             <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxBytes ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">    /** Same as writeFrame(), but the the encoding of the &#39;text&#39; is bypassed.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">        While not desirable this allows the &#39;text&#39; argument to contain special</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">        characters that would otherwise be escaped, e.g. the newline character.</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ac760f992fc9561fea690a0e15e712c2e">   66</a></span>    <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ac760f992fc9561fea690a0e15e712c2e">writeFrameWithSpecialChars</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* text ) <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ac760f992fc9561fea690a0e15e712c2e">writeFrameWithSpecialChars</a>( text, strlen( text ) );</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    /** This method returns a &#39;working&#39; buffer for use by a command.  The buffer</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">        is only &#39;valid&#39; for duration of the command&#39;s execute() method. The</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">        buffer is guaranteed to be at least size the same size as the &#39;Input</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">        buffer&#39;</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">    */</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ab4b8c58d080c9388e3e93605e6a4ef68">   76</a></span>    virtual <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Text::IString&amp; <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ab4b8c58d080c9388e3e93605e6a4ef68">getWorkBuffer</a>() noexcept = 0;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>public:<span class="comment"></span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">    /** This method allows a command access to the input stream, i.e. consume</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">        additional input data that is &#39;out-of-band&#39; of the nominal newline</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">        delineated command syntax.</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"></span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">        Attempts to read the specified number of bytes from the stream into the</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">        supplied buffer.  The actual number of bytes read is returned via</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">        &#39;bytesRead&#39;. Returns true if successful, or false if End-of-Stream</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        was encountered.</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a1ca96cde41deda4358a10c7286f46b0e">   88</a></span>    virtual <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a1ca96cde41deda4358a10c7286f46b0e">oobRead</a>( <span class="keywordtype">void</span>*               dstBuffer,</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                          <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Type::SSize_T  numBytes,</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                          <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Type::SSize_T&amp; bytesRead ) noexcept = 0;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>public:<span class="comment"></span></div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">    /// Returns reference to the Processor&#39;s Security instance</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a3d5ef591de36d042a6acb4bf21591a04">   94</a></span><span class="comment"></span>    virtual <a class="code hl_class" href="class_kit_1_1_t_shell_1_1_i_security.html">ISecurity</a>&amp; <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a3d5ef591de36d042a6acb4bf21591a04">getSecurity</a>() noexcept = 0;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>public:<span class="comment"></span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">    /** Returns a pointer to the Processor&#39;s output stream.  If the TShell is</span></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">        has not been started, then nullptr is returned. </span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a20e939168eb035697828e564e2172b35">  100</a></span>    virtual <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Io::IOutput* <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a20e939168eb035697828e564e2172b35">getOutputStream</a>() noexcept = 0;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>public:<span class="comment"></span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">    /** Request to terminated/exit the TShell.  When/if the TShell is exited</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">        is application specific behavior.</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ac0f7adbd935c46377fb8568ab85940e1">  106</a></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ac0f7adbd935c46377fb8568ab85940e1">requestTShellExit</a>() noexcept = 0;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>public:<span class="comment"></span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">    /// Virtual destructor</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#aee4fdc6242e14ce5d674c36f22f9e9d9">  110</a></span><span class="comment"></span>    virtual ~<a class="code hl_class" href="class_kit_1_1_t_shell_1_1_i_context.html">IContext</a>() = default;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>};</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>}</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    /** Same as writeFrameWithSpecialChars(), but only outputs (at most) &#39;N&#39; bytes</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">        as the content of the frame</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#afa72f887d127b64521c51ed65069c360">   74</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#afa72f887d127b64521c51ed65069c360">writeFrameWithSpecialChars</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>*        text,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                                             <a class="code hl_typedef" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxBytes ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">    /** This method returns a working buffer for a command to format its</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">        output prior to &#39;writing the frame&#39;.  The buffer is only &#39;valid&#39; for</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">        duration of the command&#39;s execute() method. The string buffer is</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">        guaranteed to be at least size of the largest supported output frame.</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a2a25f8b5bca85ea99bbabcfe3b7dbff7">   82</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a2a25f8b5bca85ea99bbabcfe3b7dbff7">getOutputBuffer</a>() noexcept = 0;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"></span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">    /** This method returns a &#39;working&#39; buffer for use by a command when</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">        parsing input arguments.  The buffer is only &#39;valid&#39; for</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        duration of the command&#39;s execute() method. The string buffer is</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">        guaranteed to be at least size of the largest supported input frame.</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ad3f2bd84644dde90e8ab1072093dfe9c">   89</a></span>    virtual <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Text::IString&amp; <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ad3f2bd84644dde90e8ab1072093dfe9c">getInputBuffer</a>() noexcept = 0;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">    /** This method returns a &#39;working&#39; buffer for use by a command.  The buffer</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">        is only &#39;valid&#39; for duration of the command&#39;s execute() method. The</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">        buffer is guaranteed to be at least size the same size as the &#39;Input</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">        buffer&#39;</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ab4b8c58d080c9388e3e93605e6a4ef68">   96</a></span>    virtual <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Text::IString&amp; <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ab4b8c58d080c9388e3e93605e6a4ef68">getWorkBuffer</a>() noexcept = 0;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">    /** This method allows a command access to the input stream, i.e. consume</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">        additional input data that is &#39;out-of-band&#39; of the nominal newline</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">        delineated command syntax.</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"></span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">        Attempts to read the specified number of bytes from the stream into the</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">        supplied buffer.  The actual number of bytes read is returned via</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">        &#39;bytesRead&#39;. Returns true if successful, or false if End-of-Stream</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">        was encountered.</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a1ca96cde41deda4358a10c7286f46b0e">  108</a></span>    virtual <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a1ca96cde41deda4358a10c7286f46b0e">oobRead</a>( <span class="keywordtype">void</span>*               dstBuffer,</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                          <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Type::SSize_T  numBytes,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                          <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Type::SSize_T&amp; bytesRead ) noexcept = 0;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">    /// Returns reference to the Processor&#39;s Security instance</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a3d5ef591de36d042a6acb4bf21591a04">  114</a></span><span class="comment"></span>    virtual <a class="code hl_class" href="class_kit_1_1_t_shell_1_1_i_security.html">ISecurity</a>&amp; <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a3d5ef591de36d042a6acb4bf21591a04">getSecurity</a>() noexcept = 0;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">    /** Returns a pointer to the Processor&#39;s output stream.  If the TShell is</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment">        has not been started, then nullptr is returned.</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#a20e939168eb035697828e564e2172b35">  120</a></span>    virtual <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Io::IOutput* <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#a20e939168eb035697828e564e2172b35">getOutputStream</a>() noexcept = 0;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">    /** Request to terminated/exit the TShell.  When/if the TShell is exited</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">        is application specific behavior.</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#ac0f7adbd935c46377fb8568ab85940e1">  126</a></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_i_context.html#ac0f7adbd935c46377fb8568ab85940e1">requestTShellExit</a>() noexcept = 0;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>public:<span class="comment"></span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">    /// Virtual destructor</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_i_context.html#aee4fdc6242e14ce5d674c36f22f9e9d9">  130</a></span><span class="comment"></span>    virtual ~<a class="code hl_class" href="class_kit_1_1_t_shell_1_1_i_context.html">IContext</a>() = default;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>};</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>}</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_command_8h_html"><div class="ttname"><a href="_i_command_8h.html">ICommand.h</a></div></div>
 <div class="ttc" id="a_i_output_8h_html"><div class="ttname"><a href="_i_output_8h.html">IOutput.h</a></div></div>
 <div class="ttc" id="a_i_string_8h_html"><div class="ttname"><a href="_i_string_8h.html">IString.h</a></div></div>
@@ -177,12 +197,14 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_a2a25f8b5bca85ea99bbabcfe3b7dbff7"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#a2a25f8b5bca85ea99bbabcfe3b7dbff7">Kit::TShell::IContext::getOutputBuffer</a></div><div class="ttdeci">virtual Kit::Text::IString &amp; getOutputBuffer() noexcept=0</div><div class="ttdoc">This method returns a working buffer for a command to format its output prior to 'writing the frame'.</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_a3d5ef591de36d042a6acb4bf21591a04"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#a3d5ef591de36d042a6acb4bf21591a04">Kit::TShell::IContext::getSecurity</a></div><div class="ttdeci">virtual ISecurity &amp; getSecurity() noexcept=0</div><div class="ttdoc">Returns reference to the Processor's Security instance.</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_a98b122bb0f581c91b39047a9b8c34216"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#a98b122bb0f581c91b39047a9b8c34216">Kit::TShell::IContext::getCommands</a></div><div class="ttdeci">virtual Kit::Container::OrderedList&lt; ICommand &gt; &amp; getCommands() noexcept=0</div><div class="ttdoc">This method returns the list of implemented commands.</div></div>
-<div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_a99b714bfa42d19a70e81704aca4001bd"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#a99b714bfa42d19a70e81704aca4001bd">Kit::TShell::IContext::writeFrame</a></div><div class="ttdeci">bool writeFrame(const char *text) noexcept</div><div class="ttdoc">This method encodes and outputs the specified message/text.</div><div class="ttdef"><b>Definition</b> IContext.h:46</div></div>
+<div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_a99b714bfa42d19a70e81704aca4001bd"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#a99b714bfa42d19a70e81704aca4001bd">Kit::TShell::IContext::writeFrame</a></div><div class="ttdeci">bool writeFrame(const char *text) noexcept</div><div class="ttdoc">This method encodes and outputs the specified message/text.</div><div class="ttdef"><b>Definition</b> IContext.h:49</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_ab4b8c58d080c9388e3e93605e6a4ef68"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#ab4b8c58d080c9388e3e93605e6a4ef68">Kit::TShell::IContext::getWorkBuffer</a></div><div class="ttdeci">virtual Kit::Text::IString &amp; getWorkBuffer() noexcept=0</div><div class="ttdoc">This method returns a 'working' buffer for use by a command.</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_ac0f7adbd935c46377fb8568ab85940e1"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#ac0f7adbd935c46377fb8568ab85940e1">Kit::TShell::IContext::requestTShellExit</a></div><div class="ttdeci">virtual void requestTShellExit() noexcept=0</div><div class="ttdoc">Request to terminated/exit the TShell.</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_ac1291c04b97afaaa8bc8392d9b572205"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#ac1291c04b97afaaa8bc8392d9b572205">Kit::TShell::IContext::findCommand</a></div><div class="ttdeci">virtual ICommand * findCommand(const char *verb, unsigned verbLength) noexcept=0</div><div class="ttdoc">Lookup a command by its verb. Returns a nullptr if the command is not found.</div></div>
+<div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_ac760f992fc9561fea690a0e15e712c2e"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#ac760f992fc9561fea690a0e15e712c2e">Kit::TShell::IContext::writeFrameWithSpecialChars</a></div><div class="ttdeci">bool writeFrameWithSpecialChars(const char *text) noexcept</div><div class="ttdoc">Same as writeFrame(), but the the encoding of the 'text' is bypassed.</div><div class="ttdef"><b>Definition</b> IContext.h:66</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_ad3becba1b9f73916848968c8fd837e4e"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#ad3becba1b9f73916848968c8fd837e4e">Kit::TShell::IContext::writeFrame</a></div><div class="ttdeci">virtual bool writeFrame(const char *text, Kit::Type::SSize_T maxBytes) noexcept=0</div><div class="ttdoc">Same as writeFrame(), but only outputs (at most) 'N' bytes as the content of the frame.</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_ad3f2bd84644dde90e8ab1072093dfe9c"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#ad3f2bd84644dde90e8ab1072093dfe9c">Kit::TShell::IContext::getInputBuffer</a></div><div class="ttdeci">virtual Kit::Text::IString &amp; getInputBuffer() noexcept=0</div><div class="ttdoc">This method returns a 'working' buffer for use by a command when parsing input arguments.</div></div>
+<div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_context_html_afa72f887d127b64521c51ed65069c360"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_context.html#afa72f887d127b64521c51ed65069c360">Kit::TShell::IContext::writeFrameWithSpecialChars</a></div><div class="ttdeci">virtual bool writeFrameWithSpecialChars(const char *text, Kit::Type::SSize_T maxBytes) noexcept=0</div><div class="ttdoc">Same as writeFrameWithSpecialChars(), but only outputs (at most) 'N' bytes as the content of the fram...</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_security_html"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_security.html">Kit::TShell::ISecurity</a></div><div class="ttdoc">This abstract class defines the interface validating that is okay to execute a TShell command.</div><div class="ttdef"><b>Definition</b> ISecurity.h:43</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a></div><div class="ttdoc">This abstract class defines the operations that can be before on a NULL terminated string.</div><div class="ttdef"><b>Definition</b> IString.h:38</div></div>
 <div class="ttc" id="anamespace_kit_1_1_type_html_aa244ac9e3a5479ac83b067897b68caf2"><div class="ttname"><a href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></div><div class="ttdeci">int32_t SSize_T</div><div class="ttdoc">This is my work-around for the fact that C++ does not have a standard 'ssize_t' type.</div><div class="ttdef"><b>Definition</b> SSize.h:33</div></div>
@@ -190,7 +212,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

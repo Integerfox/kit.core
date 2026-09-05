@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -195,7 +195,8 @@ Functions</h2></td></tr>
 
 <p>This method returns 'Boot <a class="el" href="namespace_kit_1_1_time.html" title="The Time namespace provides time sources (other than the Kit::System::ElapsedTime interface),...">Time</a>' which include the current boot counter and elapsed time - in milliseconds - since the MCU was reset. </p>
 <p>The method retuns boot time as 'flatten' uint64_t integer where the upper N bytes are the boot counter, the lower M bytes are elapsed MCU time since reset.</p>
-<p>NOTE: The default implementation uses the <a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html" title="This class defines the interface for accessing the elapsed time since power up and/or reset of the pl...">Kit::System::ElapsedTime</a> interface as the source for elapsed milliseconds. The implementation can be changed/overridden by defining USE_KIT_TIME_BOOTTIME_WITH_ABSOLUTETIME in the kit_config.h file. In this case, the AbsoluteTime interface is used for the elapsed time portion of the boot time. </p>
+<p>NOTE: The default implementation uses the <a class="el" href="class_kit_1_1_system_1_1_elapsed_time.html" title="This class defines the interface for accessing the elapsed time since power up and/or reset of the pl...">Kit::System::ElapsedTime</a> interface as the source for elapsed milliseconds. The implementation can be changed/overridden by defining USE_KIT_TIME_BOOTTIME_WITH_ABSOLUTETIME in the kit_config.h file. In this case, the AbsoluteTime interface is used for the elapsed time portion of the boot time.</p>
+<p>NOTE: The application can override the entire implementation of this method by defining USE_KIT_TIME_CUSTOM_GET_BOOT_TIME in the kit_config.h file. In this case, the application must provide its own implementation of the <a class="el" href="#a7ed042091ef6a4055a48c77ec5d83c3d" title="This method returns &#39;Boot Time&#39; which include the current boot counter and elapsed time - in millisec...">getBootTime()</a> method. Example usage for a custom <a class="el" href="#a7ed042091ef6a4055a48c77ec5d83c3d" title="This method returns &#39;Boot Time&#39; which include the current boot counter and elapsed time - in millisec...">getBootTime()</a> method is unit testing, i.e. the test code has control of the returned time values. </p>
 
 </div>
 </div>
@@ -329,7 +330,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

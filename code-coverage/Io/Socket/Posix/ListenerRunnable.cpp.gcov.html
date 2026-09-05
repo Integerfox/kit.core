@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">62.5&nbsp;%</td>
@@ -96,7 +96,7 @@
 <span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">           1 : void ListenerRunnable::listen() noexcept</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : {</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     // Create the listening socket</span>
-<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">           1 :     m_listeningSocket = Posix::Fdio::createListeningSocket( m_port, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRIES, USE_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS );</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">           1 :     m_listeningSocket = Posix::Fdio::createListeningSocket( m_port, OPTION_KIT_IO_SOCKET_LISTENER_BIND_RETRIES, OPTION_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS );</span></span>
 <span id="L38"><span class="lineNum">      38</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           1 :     if ( m_listeningSocket == Posix::Fdio::INVALID_FD )</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     {</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :         KIT_SYSTEM_TRACE_MSG( SECT_,</span>

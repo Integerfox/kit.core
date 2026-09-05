@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">68.8&nbsp;%</td>
@@ -86,7 +86,7 @@
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
 <span id="L25"><span class="lineNum">      25</span>                 :             :     This class is NOT thread-safe.</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             :  */</span>
-<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC tlaBgGNC">          12 : class StreamSource : public ISource</span></span>
+<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC tlaBgGNC">          13 : class StreamSource : public ISource</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : {</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : public:</span>
 <span id="L30"><span class="lineNum">      30</span>                 :             :     /// Constructor</span>
@@ -97,40 +97,40 @@
 <span id="L35"><span class="lineNum">      35</span>                 :             : </span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     /// Constructor</span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :     StreamSource() noexcept</span>
-<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           9 :         : m_srcPtr( nullptr )</span></span>
+<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          10 :         : m_srcPtr( nullptr )</span></span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :     {</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :     }</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : </span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     /// Allows the consumer to change/set the Input stream after construction</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :     void setInput( Kit::Io::IInput&amp; inputStream ) noexcept</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     {</span>
-<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">          10 :         m_srcPtr = &amp;inputStream;</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">          13 :         m_srcPtr = &amp;inputStream;</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     }</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : public:</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     /// See Kit::Framing::ISource</span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">          60 :     bool read( void*               dstBuffer,</span></span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">         147 :     bool read( void*               dstBuffer,</span></span>
 <span id="L51"><span class="lineNum">      51</span>                 :             :                Kit::Type::SSize_T  numBytes,</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :                Kit::Type::SSize_T&amp; bytesRead,</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :                bool                blockIfUnavailable = false ) noexcept override</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     {</span>
-<span id="L55"><span class="lineNum">      55</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          53 :         bytesRead = 0;</span></span>
+<span id="L55"><span class="lineNum">      55</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         131 :         bytesRead = 0;</span></span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :         // Validate parameters</span>
-<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 60 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 59 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span> :<span class="tlaGNC">          60 :         if ( dstBuffer == nullptr || m_srcPtr == nullptr || numBytes &lt; 0 )</span></span>
-<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 59 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
+<span id="L58"><span class="lineNum">      58</span>   [<span class="tlaGBC" title="Branch 0 was taken 147 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 146 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span> :<span class="tlaGNC">         147 :         if ( dstBuffer == nullptr || m_srcPtr == nullptr || numBytes &lt; 0 )</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 146 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
 <span id="L59"><span class="lineNum">      59</span>                 :             :         {</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :             return false;</span>
 <span id="L61"><span class="lineNum">      61</span>                 :             :         }</span>
 <span id="L62"><span class="lineNum">      62</span>                 :             : </span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :         // Do NOT allow the read call to block if no data is currently available</span>
-<span id="L64"><span class="lineNum">      64</span>   [<span class="tlaGBC" title="Branch 0 was taken 15 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 44 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 5 times"> + </span> :<span class="tlaGNC">          59 :         if ( (blockIfUnavailable == false &amp;&amp; !m_srcPtr-&gt;available()) || numBytes == 0 )</span></span>
-<span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaGBC" title="Branch 5 was taken 54 times"> + </span>]
+<span id="L64"><span class="lineNum">      64</span>   [<span class="tlaGBC" title="Branch 0 was taken 16 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 130 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 6 times"> + </span> :<span class="tlaGNC">         146 :         if ( (blockIfUnavailable == false &amp;&amp; !m_srcPtr-&gt;available()) || numBytes == 0 )</span></span>
+<span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaGBC" title="Branch 5 was taken 140 times"> + </span>]
 <span id="L65"><span class="lineNum">      65</span>                 :             :         {</span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">           5 :             return true;</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">           6 :             return true;</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :         }</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : </span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">          54 :         return m_srcPtr-&gt;read( dstBuffer, numBytes, bytesRead );</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">         140 :         return m_srcPtr-&gt;read( dstBuffer, numBytes, bytesRead );</span></span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :     }</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : </span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :     /// Getter for the underlying input stream</span>

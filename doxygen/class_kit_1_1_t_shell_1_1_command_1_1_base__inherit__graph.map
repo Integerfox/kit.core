@@ -1,37 +1,45 @@
 <map id="Kit::TShell::Command::Base" name="Kit::TShell::Command::Base">
-<area shape="rect" id="Node000001" title="This partially concrete class implements infrastructure and/or common functionality for a TShell comm..." alt="" coords="1104,151,1267,191"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_t_shell_1_1_command_1_1_bye.html" title="This class implements a TShell command." alt="" coords="1315,5,1511,31"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1208,139,1253,88,1282,63,1313,41,1343,28,1345,33,1316,46,1285,67,1257,92,1212,142"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_t_shell_1_1_command_1_1_echo.html" title="This class implements a TShell command." alt="" coords="1331,55,1494,95"/>
-<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1235,142,1314,105,1345,93,1347,98,1316,110,1237,147"/>
-<area shape="rect" id="Node000012" href="$class_kit_1_1_t_shell_1_1_command_1_1_help.html" title="This class implements a TShell command." alt="" coords="1331,119,1494,159"/>
-<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1280,155,1331,148,1331,153,1281,161"/>
-<area shape="rect" id="Node000013" href="$class_kit_1_1_t_shell_1_1_command_1_1_threads.html" title="This class implements a TShell command." alt="" coords="1331,183,1494,223"/>
-<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1281,182,1331,189,1331,195,1280,187"/>
-<area shape="rect" id="Node000017" href="$class_kit_1_1_t_shell_1_1_command_1_1_trace.html" title="This class implements a TShell command." alt="" coords="1331,247,1494,287"/>
-<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1237,196,1316,233,1347,245,1345,250,1314,238,1235,200"/>
-<area shape="rect" id="Node000018" href="$class_kit_1_1_t_shell_1_1_command_1_1_wait.html" title="This class implements a TShell command." alt="" coords="1331,311,1494,351"/>
-<area shape="poly" id="edge17_Node000001_Node000018" title=" " alt="" coords="1212,200,1257,250,1286,275,1316,297,1340,309,1337,314,1313,302,1282,279,1254,254,1208,204"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_t_shell_1_1_i_command.html" title="This abstract class defines the interface for a TShell Command." alt="" coords="889,159,1056,184"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1070,169,1104,169,1104,174,1070,174"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_container_1_1_keyed_item.html" title="This abstract class represents a item that can be used with containers that have a concept of Key&#45;Val..." alt="" coords="652,128,841,153"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="854,153,890,157,889,163,854,158"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_container_1_1_extended_list_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers." alt="" coords="423,118,603,158"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="617,137,652,137,652,142,617,142"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="203,125,375,151"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="389,135,423,135,423,141,389,141"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="5,125,155,151"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="169,135,202,135,202,141,169,141"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_key_literal_string.html" title="This class provides a &#39;Key&#39; wrapper for a C string literal." alt="" coords="655,179,839,219"/>
-<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="852,184,889,179,890,184,853,189"/>
-<area shape="rect" id="Node000008" href="$class_kit_1_1_container_1_1_key_string_buffer.html" title="This class provides a &#39;Key&#39; wrapper for a array of Character of length N, i.e." alt="" coords="423,182,604,222"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="618,198,655,198,655,203,618,203"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k..." alt="" coords="217,189,360,215"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="374,199,423,199,423,205,374,205"/>
-<area shape="rect" id="Node000014" href="$class_kit_1_1_t_shell_1_1_command_1_1_free_r_t_o_s_1_1_threads.html" title="This class implements a FreeRTOS specific TShell command for threads." alt="" coords="1559,119,1721,159"/>
-<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="1497,177,1568,157,1569,162,1499,182"/>
-<area shape="rect" id="Node000015" href="$class_kit_1_1_t_shell_1_1_command_1_1_posix_1_1_threads.html" title="This class implements a Posix specific TShell command for threads." alt="" coords="1559,183,1721,223"/>
-<area shape="poly" id="edge14_Node000013_Node000015" title=" " alt="" coords="1508,201,1558,201,1558,206,1508,206"/>
-<area shape="rect" id="Node000016" href="$class_kit_1_1_t_shell_1_1_command_1_1_win32_1_1_threads.html" title="This class implements a Win32 specific TShell command for threads." alt="" coords="1559,247,1721,287"/>
-<area shape="poly" id="edge15_Node000013_Node000016" title=" " alt="" coords="1499,225,1569,245,1568,250,1497,230"/>
+<area shape="rect" id="Node000001" title="This partially concrete class implements infrastructure and/or common functionality for a TShell comm..." alt="" coords="1104,255,1267,295"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_dm_1_1_t_shell_1_1_read.html" title="This class implements a TShell command for Read operations on the Data Model." alt="" coords="1333,5,1493,31"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="1193,241,1209,196,1233,141,1268,86,1289,61,1313,40,1333,28,1335,33,1316,44,1293,65,1272,89,1238,143,1214,197,1198,243"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_dm_1_1_t_shell_1_1_write.html" title="This class implements a TShell command for Write operations on the Data Model." alt="" coords="1331,55,1494,80"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="1199,241,1217,206,1242,165,1274,125,1313,90,1338,78,1340,83,1316,95,1278,128,1247,168,1221,208,1203,244"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_logging_1_1_framework_1_1_t_shell_1_1_manage.html" title="This class implements a TShell command for managing log entries stored in persistent storage." alt="" coords="1323,105,1503,145"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="1211,243,1256,198,1313,154,1338,142,1340,147,1316,159,1259,202,1214,247"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_logging_1_1_framework_1_1_t_shell_1_1_viewer.html" title="This class implements a TShell command for View log entries stored in persistent storage." alt="" coords="1323,169,1503,209"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="1243,247,1314,218,1347,206,1349,211,1316,223,1245,252"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_t_shell_1_1_command_1_1_bye.html" title="This class implements a TShell command." alt="" coords="1315,233,1511,259"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="1280,260,1314,256,1315,261,1281,266"/>
+<area shape="rect" id="Node000015" href="$class_kit_1_1_t_shell_1_1_command_1_1_echo.html" title="This class implements a TShell command." alt="" coords="1331,283,1494,323"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="1281,284,1331,291,1331,296,1280,290"/>
+<area shape="rect" id="Node000016" href="$class_kit_1_1_t_shell_1_1_command_1_1_help.html" title="This class implements a TShell command." alt="" coords="1331,347,1494,387"/>
+<area shape="poly" id="edge15_Node000001_Node000016" title=" " alt="" coords="1240,299,1316,333,1348,345,1346,350,1314,338,1238,304"/>
+<area shape="rect" id="Node000017" href="$class_kit_1_1_t_shell_1_1_command_1_1_threads.html" title="This class implements a TShell command." alt="" coords="1331,411,1494,451"/>
+<area shape="poly" id="edge16_Node000001_Node000017" title=" " alt="" coords="1213,304,1258,352,1286,376,1316,397,1340,409,1337,414,1313,402,1283,380,1254,356,1209,308"/>
+<area shape="rect" id="Node000021" href="$class_kit_1_1_t_shell_1_1_command_1_1_trace.html" title="This class implements a TShell command." alt="" coords="1331,475,1494,515"/>
+<area shape="poly" id="edge20_Node000001_Node000021" title=" " alt="" coords="1203,307,1221,343,1247,384,1278,426,1316,461,1336,473,1333,478,1313,465,1274,429,1242,387,1217,345,1198,309"/>
+<area shape="rect" id="Node000022" href="$class_kit_1_1_t_shell_1_1_command_1_1_wait.html" title="This class implements a TShell command." alt="" coords="1331,539,1494,579"/>
+<area shape="poly" id="edge21_Node000001_Node000022" title=" " alt="" coords="1197,308,1213,356,1237,415,1271,474,1292,501,1316,525,1334,537,1331,541,1313,529,1288,505,1267,477,1232,417,1207,358,1192,309"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_t_shell_1_1_i_command.html" title="This abstract class defines the interface for a TShell Command." alt="" coords="889,263,1056,288"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1070,273,1104,273,1104,278,1070,278"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_container_1_1_keyed_item.html" title="This abstract class represents a item that can be used with containers that have a concept of Key&#45;Val..." alt="" coords="652,232,841,257"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="854,257,890,261,889,267,854,262"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_container_1_1_extended_list_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers." alt="" coords="423,222,603,262"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="617,241,652,241,652,246,617,246"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="203,229,375,255"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="389,239,423,239,423,245,389,245"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="5,229,155,255"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="169,239,202,239,202,245,169,245"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_key_literal_string.html" title="This class provides a &#39;Key&#39; wrapper for a C string literal." alt="" coords="655,283,839,323"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="852,288,889,283,890,288,853,293"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_container_1_1_key_string_buffer.html" title="This class provides a &#39;Key&#39; wrapper for a array of Character of length N, i.e." alt="" coords="423,286,604,326"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="618,302,655,302,655,307,618,307"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k..." alt="" coords="217,293,360,319"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="374,303,423,303,423,309,374,309"/>
+<area shape="rect" id="Node000018" href="$class_kit_1_1_t_shell_1_1_command_1_1_free_r_t_o_s_1_1_threads.html" title="This class implements a FreeRTOS specific TShell command for threads." alt="" coords="1559,347,1721,387"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="1497,405,1568,385,1569,390,1499,410"/>
+<area shape="rect" id="Node000019" href="$class_kit_1_1_t_shell_1_1_command_1_1_posix_1_1_threads.html" title="This class implements a Posix specific TShell command for threads." alt="" coords="1559,411,1721,451"/>
+<area shape="poly" id="edge18_Node000017_Node000019" title=" " alt="" coords="1508,429,1558,429,1558,434,1508,434"/>
+<area shape="rect" id="Node000020" href="$class_kit_1_1_t_shell_1_1_command_1_1_win32_1_1_threads.html" title="This class implements a Win32 specific TShell command for threads." alt="" coords="1559,475,1721,515"/>
+<area shape="poly" id="edge19_Node000017_Node000020" title=" " alt="" coords="1499,453,1569,473,1568,478,1497,458"/>
 </map>

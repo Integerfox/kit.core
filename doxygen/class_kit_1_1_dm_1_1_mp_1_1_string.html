@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -411,9 +411,9 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>This mostly concrete class provides the base implementation for a Point who's data is a null terminated string. </p>
 <p>The concrete child class is responsible for providing the string storage</p>
 <p>The <a class="el" href="class_kit_1_1_dm_1_1_model_point_base.html#ab95a270432795e02a4bee5bd7decf030" title="See Kit::Dm::IModelPoint.">toJSON()</a> format is: </p><div class="fragment"><div class="line">{ name:<span class="stringliteral">&quot;&lt;mpname&gt;&quot;</span>, type:<span class="stringliteral">&quot;&lt;mptypestring&gt;&quot;</span>, valid:<span class="keyword">true</span>|<span class="keyword">false</span>, seqnum:nnnn, locked:<span class="keyword">true</span>|<span class="keyword">false</span>,</div>
-<div class="line">  val:<span class="stringliteral">&quot;&lt;stringvalue&gt;&quot;</span></div>
+<div class="line">  val:{maxLen:nn,text:<span class="stringliteral">&quot;&lt;stringvalue&gt;&quot;</span>}</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>The "val" format for the fromJSON() format is: </p><div class="fragment"><div class="line">val:<span class="stringliteral">&quot;&lt;stringvalue&gt;&quot;</span></div>
+</div><!-- fragment --><p>The "val" format for the fromJSON() format is: </p><div class="fragment"><div class="line">val:{text:<span class="stringliteral">&quot;&lt;stringvalue&gt;&quot;</span>}</div>
 </div><!-- fragment --><p> NOTE: All methods in this class ARE thread Safe unless explicitly documented otherwise.</p>
 <p>NOTE: The MP's null terminator for the string storage IS imported/exported. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -1046,7 +1046,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

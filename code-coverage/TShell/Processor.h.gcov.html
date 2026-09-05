@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -170,7 +170,7 @@
 <span id="L108"><span class="lineNum">     108</span>                 :             :         - Provide an implementation (other than `NoSecurity`) of the ISecurity</span>
 <span id="L109"><span class="lineNum">     109</span>                 :             :           interface that meets the application's security requirements.</span>
 <span id="L110"><span class="lineNum">     110</span>                 :             : */</span>
-<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC tlaBgGNC">           8 : class Processor : public IProcessor, public IContext</span></span>
+<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC tlaBgGNC">           9 : class Processor : public IProcessor, public IContext</span></span>
 <span id="L112"><span class="lineNum">     112</span>                 :             : {</span>
 <span id="L113"><span class="lineNum">     113</span>                 :             : public:</span>
 <span id="L114"><span class="lineNum">     114</span>                 :             :     /** Constructor.</span>
@@ -192,27 +192,27 @@
 <span id="L130"><span class="lineNum">     130</span>                 :             :                                     input string is a comment and should not be</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :                                     executed.</span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :  */</span>
-<span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">           9 :     Processor( Kit::Container::OrderedList&lt;ICommand&gt;&amp; commands,</span></span>
+<span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">          12 :     Processor( Kit::Container::OrderedList&lt;ICommand&gt;&amp; commands,</span></span>
 <span id="L134"><span class="lineNum">     134</span>                 :             :                Kit::Framing::StreamSource&amp;            commandSource,</span>
 <span id="L135"><span class="lineNum">     135</span>                 :             :                Kit::Framing::StreamDestination&amp;       outputDestination,</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :                ISecurity&amp;                             securityPolicy,</span>
 <span id="L137"><span class="lineNum">     137</span>                 :             :                Kit::System::Mutex&amp;                    outputLock,</span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :                char                                   convertTabs = ' ',</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             :                char                                   commentChar = '#' )</span>
-<span id="L140"><span class="lineNum">     140</span>                 :<span class="tlaGNC">           9 :         : m_commands( commands )</span></span>
-<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">           9 :         , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )</span></span>
-<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">           9 :         , m_framer( outputDestination, '\n' + 1, '\n', 0, true )  // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.</span></span>
-<span id="L143"><span class="lineNum">     143</span>                 :<span class="tlaGNC">           9 :         , m_secPolicy( securityPolicy )</span></span>
-<span id="L144"><span class="lineNum">     144</span>                 :<span class="tlaGNC">           9 :         , m_outLock( outputLock )</span></span>
-<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">           9 :         , m_streamSource( commandSource )</span></span>
-<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">           9 :         , m_streamDestination( outputDestination )</span></span>
-<span id="L147"><span class="lineNum">     147</span>                 :<span class="tlaGNC">           9 :         , m_frameSize( 0 )</span></span>
-<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">           9 :         , m_comment( commentChar )</span></span>
-<span id="L149"><span class="lineNum">     149</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 9 times"> + </span>]:<span class="tlaGNC">           9 :         , m_blocking( true )</span></span>
-<span id="L150"><span class="lineNum">     150</span>                 :<span class="tlaGNC">           9 :         , m_running( false )</span></span>
+<span id="L140"><span class="lineNum">     140</span>                 :<span class="tlaGNC">          12 :         : m_commands( commands )</span></span>
+<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">          12 :         , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )</span></span>
+<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">          12 :         , m_framer( outputDestination, '\n' + 1, '\n', 0, true )  // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.</span></span>
+<span id="L143"><span class="lineNum">     143</span>                 :<span class="tlaGNC">          12 :         , m_secPolicy( securityPolicy )</span></span>
+<span id="L144"><span class="lineNum">     144</span>                 :<span class="tlaGNC">          12 :         , m_outLock( outputLock )</span></span>
+<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">          12 :         , m_streamSource( commandSource )</span></span>
+<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">          12 :         , m_streamDestination( outputDestination )</span></span>
+<span id="L147"><span class="lineNum">     147</span>                 :<span class="tlaGNC">          12 :         , m_frameSize( 0 )</span></span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          12 :         , m_comment( commentChar )</span></span>
+<span id="L149"><span class="lineNum">     149</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 12 times"> + </span>]:<span class="tlaGNC">          12 :         , m_blocking( true )</span></span>
+<span id="L150"><span class="lineNum">     150</span>                 :<span class="tlaGNC">          12 :         , m_running( false )</span></span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :     {</span>
 <span id="L152"><span class="lineNum">     152</span>                 :             :         KIT_SYSTEM_ASSERT( commentChar &gt;= ' ' &amp;&amp; commentChar &lt;= '~' );</span>
-<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">           9 :     }</span></span>
+<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">          12 :     }</span></span>
 <span id="L154"><span class="lineNum">     154</span>                 :             : </span>
 <span id="L155"><span class="lineNum">     155</span>                 :             : public:</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             :     /// See Kit::TShell::IProcessor</span>
@@ -234,110 +234,115 @@
 <span id="L172"><span class="lineNum">     172</span>                 :             :     ICommand* findCommand( const char* verb, unsigned verbLength ) noexcept override;</span>
 <span id="L173"><span class="lineNum">     173</span>                 :             : </span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :     /// See Kit::TShell::IContext</span>
-<span id="L175"><span class="lineNum">     175</span>                 :             :     bool writeFrame( const char* text, Kit::Type::SSize_T maxBytes ) noexcept override;</span>
-<span id="L176"><span class="lineNum">     176</span>                 :             : </span>
-<span id="L177"><span class="lineNum">     177</span>                 :             :     /// See Kit::TShell::IContext</span>
-<span id="L178"><span class="lineNum">     178</span>                 :             :     Kit::Text::IString&amp; getOutputBuffer() noexcept override;</span>
-<span id="L179"><span class="lineNum">     179</span>                 :             : </span>
-<span id="L180"><span class="lineNum">     180</span>                 :             :     /// See Kit::TShell::IContext</span>
-<span id="L181"><span class="lineNum">     181</span>                 :             :     Kit::Text::IString&amp; getInputBuffer() noexcept override;</span>
-<span id="L182"><span class="lineNum">     182</span>                 :             : </span>
-<span id="L183"><span class="lineNum">     183</span>                 :             :     /// See Kit::TShell::IContext</span>
-<span id="L184"><span class="lineNum">     184</span>                 :             :     Kit::Text::IString&amp; getWorkBuffer() noexcept override;</span>
-<span id="L185"><span class="lineNum">     185</span>                 :             : </span>
-<span id="L186"><span class="lineNum">     186</span>                 :             :     /// See Kit::TShell::IContext</span>
-<span id="L187"><span class="lineNum">     187</span>                 :             :     bool oobRead( void*               dstBuffer,</span>
-<span id="L188"><span class="lineNum">     188</span>                 :             :                   Kit::Type::SSize_T  numBytes,</span>
-<span id="L189"><span class="lineNum">     189</span>                 :             :                   Kit::Type::SSize_T&amp; bytesRead ) noexcept override;</span>
+<span id="L175"><span class="lineNum">     175</span>                 :             :     bool writeFrame( const char*        text,</span>
+<span id="L176"><span class="lineNum">     176</span>                 :             :                      Kit::Type::SSize_T maxBytes ) noexcept override;</span>
+<span id="L177"><span class="lineNum">     177</span>                 :             : </span>
+<span id="L178"><span class="lineNum">     178</span>                 :             :     /// See Kit::TShell::IContext</span>
+<span id="L179"><span class="lineNum">     179</span>                 :             :     bool writeFrameWithSpecialChars( const char*        text,</span>
+<span id="L180"><span class="lineNum">     180</span>                 :             :                                      Kit::Type::SSize_T maxBytes ) noexcept override;</span>
+<span id="L181"><span class="lineNum">     181</span>                 :             : </span>
+<span id="L182"><span class="lineNum">     182</span>                 :             :     /// See Kit::TShell::IContext</span>
+<span id="L183"><span class="lineNum">     183</span>                 :             :     Kit::Text::IString&amp; getOutputBuffer() noexcept override;</span>
+<span id="L184"><span class="lineNum">     184</span>                 :             : </span>
+<span id="L185"><span class="lineNum">     185</span>                 :             :     /// See Kit::TShell::IContext</span>
+<span id="L186"><span class="lineNum">     186</span>                 :             :     Kit::Text::IString&amp; getInputBuffer() noexcept override;</span>
+<span id="L187"><span class="lineNum">     187</span>                 :             : </span>
+<span id="L188"><span class="lineNum">     188</span>                 :             :     /// See Kit::TShell::IContext</span>
+<span id="L189"><span class="lineNum">     189</span>                 :             :     Kit::Text::IString&amp; getWorkBuffer() noexcept override;</span>
 <span id="L190"><span class="lineNum">     190</span>                 :             : </span>
 <span id="L191"><span class="lineNum">     191</span>                 :             :     /// See Kit::TShell::IContext</span>
-<span id="L192"><span class="lineNum">     192</span>                 :             :     ISecurity&amp; getSecurity() noexcept override;</span>
-<span id="L193"><span class="lineNum">     193</span>                 :             : </span>
-<span id="L194"><span class="lineNum">     194</span>                 :             :     /// See Kit::TShell::IContext</span>
-<span id="L195"><span class="lineNum">     195</span>                 :             :     void requestTShellExit() noexcept override;</span>
-<span id="L196"><span class="lineNum">     196</span>                 :             : </span>
-<span id="L197"><span class="lineNum">     197</span>                 :             :     /// See Kit::TShell::IContext</span>
-<span id="L198"><span class="lineNum">     198</span>                 :             :     Kit::Io::IOutput* getOutputStream() noexcept override;</span>
-<span id="L199"><span class="lineNum">     199</span>                 :             : </span>
-<span id="L200"><span class="lineNum">     200</span>                 :             : protected:</span>
-<span id="L201"><span class="lineNum">     201</span>                 :             :     /** Helper method that attempts to execute the content of the de-framed/decoded</span>
-<span id="L202"><span class="lineNum">     202</span>                 :             :         'inputString'.  The method returns the result code of the execute</span>
-<span id="L203"><span class="lineNum">     203</span>                 :             :         command.  If 'inputString' is not a valid command, then the appropriate</span>
-<span id="L204"><span class="lineNum">     204</span>                 :             :         error/result code is returned.</span>
-<span id="L205"><span class="lineNum">     205</span>                 :             :      */</span>
-<span id="L206"><span class="lineNum">     206</span>                 :             :     virtual Result_T processCommand( char* deframedInput ) noexcept;</span>
-<span id="L207"><span class="lineNum">     207</span>                 :             : </span>
-<span id="L208"><span class="lineNum">     208</span>                 :             :     /// Helper method</span>
-<span id="L209"><span class="lineNum">     209</span>                 :             :     void outputCommandError( Result_T result, const char* deframedInput ) noexcept;</span>
-<span id="L210"><span class="lineNum">     210</span>                 :             : </span>
-<span id="L211"><span class="lineNum">     211</span>                 :             :     /** Helper method that performs a 'single' read cycle of the input stream.</span>
-<span id="L212"><span class="lineNum">     212</span>                 :             :         Returns 0 if successful. Returns 1 if exiting. Returns -1 on error</span>
-<span id="L213"><span class="lineNum">     213</span>                 :             :      */</span>
-<span id="L214"><span class="lineNum">     214</span>                 :             :     int getAndProcessFrame() noexcept;</span>
+<span id="L192"><span class="lineNum">     192</span>                 :             :     bool oobRead( void*               dstBuffer,</span>
+<span id="L193"><span class="lineNum">     193</span>                 :             :                   Kit::Type::SSize_T  numBytes,</span>
+<span id="L194"><span class="lineNum">     194</span>                 :             :                   Kit::Type::SSize_T&amp; bytesRead ) noexcept override;</span>
+<span id="L195"><span class="lineNum">     195</span>                 :             : </span>
+<span id="L196"><span class="lineNum">     196</span>                 :             :     /// See Kit::TShell::IContext</span>
+<span id="L197"><span class="lineNum">     197</span>                 :             :     ISecurity&amp; getSecurity() noexcept override;</span>
+<span id="L198"><span class="lineNum">     198</span>                 :             : </span>
+<span id="L199"><span class="lineNum">     199</span>                 :             :     /// See Kit::TShell::IContext</span>
+<span id="L200"><span class="lineNum">     200</span>                 :             :     void requestTShellExit() noexcept override;</span>
+<span id="L201"><span class="lineNum">     201</span>                 :             : </span>
+<span id="L202"><span class="lineNum">     202</span>                 :             :     /// See Kit::TShell::IContext</span>
+<span id="L203"><span class="lineNum">     203</span>                 :             :     Kit::Io::IOutput* getOutputStream() noexcept override;</span>
+<span id="L204"><span class="lineNum">     204</span>                 :             : </span>
+<span id="L205"><span class="lineNum">     205</span>                 :             : protected:</span>
+<span id="L206"><span class="lineNum">     206</span>                 :             :     /** Helper method that attempts to execute the content of the de-framed/decoded</span>
+<span id="L207"><span class="lineNum">     207</span>                 :             :         'inputString'.  The method returns the result code of the execute</span>
+<span id="L208"><span class="lineNum">     208</span>                 :             :         command.  If 'inputString' is not a valid command, then the appropriate</span>
+<span id="L209"><span class="lineNum">     209</span>                 :             :         error/result code is returned.</span>
+<span id="L210"><span class="lineNum">     210</span>                 :             :      */</span>
+<span id="L211"><span class="lineNum">     211</span>                 :             :     virtual Result_T processCommand( char* deframedInput ) noexcept;</span>
+<span id="L212"><span class="lineNum">     212</span>                 :             : </span>
+<span id="L213"><span class="lineNum">     213</span>                 :             :     /// Helper method</span>
+<span id="L214"><span class="lineNum">     214</span>                 :             :     void outputCommandError( Result_T result, const char* deframedInput ) noexcept;</span>
 <span id="L215"><span class="lineNum">     215</span>                 :             : </span>
-<span id="L216"><span class="lineNum">     216</span>                 :             :     /** Helper method that executes the decoder, i.e. logic to parse the incoming</span>
-<span id="L217"><span class="lineNum">     217</span>                 :             :         text.  Returns 1 if a full/valid frame was found. Returns 0 if input frame</span>
-<span id="L218"><span class="lineNum">     218</span>                 :             :         is incomplete. Return -1 if an error occurred.</span>
-<span id="L219"><span class="lineNum">     219</span>                 :             :      */</span>
-<span id="L220"><span class="lineNum">     220</span>                 :             :     virtual int readInput( Kit::Type::SSize_T&amp; frameSize ) noexcept;</span>
-<span id="L221"><span class="lineNum">     221</span>                 :             : </span>
-<span id="L222"><span class="lineNum">     222</span>                 :             :     /// Helper method.  Outputs text without any framing</span>
-<span id="L223"><span class="lineNum">     223</span>                 :             :     void outputMessage( const char* textString ) noexcept;</span>
-<span id="L224"><span class="lineNum">     224</span>                 :             : </span>
-<span id="L225"><span class="lineNum">     225</span>                 :             : protected:</span>
-<span id="L226"><span class="lineNum">     226</span>                 :             :     /// List of supported commands</span>
-<span id="L227"><span class="lineNum">     227</span>                 :             :     Kit::Container::OrderedList&lt;ICommand&gt;&amp; m_commands;</span>
-<span id="L228"><span class="lineNum">     228</span>                 :             : </span>
-<span id="L229"><span class="lineNum">     229</span>                 :             :     /// Decoder to identify individual command strings within the raw Input stream</span>
-<span id="L230"><span class="lineNum">     230</span>                 :             :     Kit::Framing::LineDecoder m_deframer;</span>
-<span id="L231"><span class="lineNum">     231</span>                 :             : </span>
-<span id="L232"><span class="lineNum">     232</span>                 :             :     /// Encoder to encapsulate the output of command in the Output stream</span>
-<span id="L233"><span class="lineNum">     233</span>                 :             :     Kit::Framing::EncoderWriter m_framer;</span>
-<span id="L234"><span class="lineNum">     234</span>                 :             : </span>
-<span id="L235"><span class="lineNum">     235</span>                 :             :     /// Security policy for the shell commands</span>
-<span id="L236"><span class="lineNum">     236</span>                 :             :     ISecurity&amp; m_secPolicy;</span>
-<span id="L237"><span class="lineNum">     237</span>                 :             : </span>
-<span id="L238"><span class="lineNum">     238</span>                 :             :     /// Output lock</span>
-<span id="L239"><span class="lineNum">     239</span>                 :             :     Kit::System::Mutex&amp; m_outLock;</span>
-<span id="L240"><span class="lineNum">     240</span>                 :             : </span>
-<span id="L241"><span class="lineNum">     241</span>                 :             :     /// Reference to the LineDecoder's input source</span>
-<span id="L242"><span class="lineNum">     242</span>                 :             :     Kit::Framing::StreamSource&amp; m_streamSource;</span>
-<span id="L243"><span class="lineNum">     243</span>                 :             : </span>
-<span id="L244"><span class="lineNum">     244</span>                 :             :     /// Reference to the EncoderWriter's output destination</span>
-<span id="L245"><span class="lineNum">     245</span>                 :             :     Kit::Framing::StreamDestination&amp; m_streamDestination;</span>
-<span id="L246"><span class="lineNum">     246</span>                 :             : </span>
-<span id="L247"><span class="lineNum">     247</span>                 :             :     /// Current frame size</span>
-<span id="L248"><span class="lineNum">     248</span>                 :             :     Kit::Type::SSize_T m_frameSize;</span>
-<span id="L249"><span class="lineNum">     249</span>                 :             : </span>
-<span id="L250"><span class="lineNum">     250</span>                 :             :     /// Shared work buffer</span>
-<span id="L251"><span class="lineNum">     251</span>                 :             :     Kit::Text::FString&lt;OPTION_KIT_TSHELL_PROCESSOR_OUTPUT_SIZE&gt; m_workOutputBuffer;</span>
-<span id="L252"><span class="lineNum">     252</span>                 :             : </span>
-<span id="L253"><span class="lineNum">     253</span>                 :             :     /// Shared work buffer</span>
-<span id="L254"><span class="lineNum">     254</span>                 :             :     Kit::Text::FString&lt;OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE&gt; m_workInputBuffer;</span>
-<span id="L255"><span class="lineNum">     255</span>                 :             : </span>
-<span id="L256"><span class="lineNum">     256</span>                 :             :     /// Shared work buffer</span>
-<span id="L257"><span class="lineNum">     257</span>                 :             :     Kit::Text::FString&lt;OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE&gt; m_workBuffer;</span>
-<span id="L258"><span class="lineNum">     258</span>                 :             : </span>
-<span id="L259"><span class="lineNum">     259</span>                 :             :     /// Buffer for reading the raw input (does NOT limit the size of the input frame)</span>
-<span id="L260"><span class="lineNum">     260</span>                 :             :     uint8_t m_rawInputBuffer[OPTION_KIT_TSHELL_PROCESSOR_RAW_READ_BUFFER_SIZE];</span>
-<span id="L261"><span class="lineNum">     261</span>                 :             : </span>
-<span id="L262"><span class="lineNum">     262</span>                 :             :     /// Input Frame buffer (used to store the deframed input command)</span>
-<span id="L263"><span class="lineNum">     263</span>                 :             :     uint8_t m_frameBuffer[OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE + 1];</span>
-<span id="L264"><span class="lineNum">     264</span>                 :             : </span>
-<span id="L265"><span class="lineNum">     265</span>                 :             :     /// Comment character</span>
-<span id="L266"><span class="lineNum">     266</span>                 :             :     char m_comment;</span>
-<span id="L267"><span class="lineNum">     267</span>                 :             : </span>
-<span id="L268"><span class="lineNum">     268</span>                 :             :     /// Blocking semantic flag.  When true the read operations are blocking until a complete frame is found</span>
-<span id="L269"><span class="lineNum">     269</span>                 :             :     bool m_blocking;</span>
-<span id="L270"><span class="lineNum">     270</span>                 :             : </span>
-<span id="L271"><span class="lineNum">     271</span>                 :             :     /// My run state</span>
-<span id="L272"><span class="lineNum">     272</span>                 :             :     std::atomic&lt;bool&gt; m_running;</span>
-<span id="L273"><span class="lineNum">     273</span>                 :             : };</span>
-<span id="L274"><span class="lineNum">     274</span>                 :             : </span>
+<span id="L216"><span class="lineNum">     216</span>                 :             :     /** Helper method that performs a 'single' read cycle of the input stream.</span>
+<span id="L217"><span class="lineNum">     217</span>                 :             :         Returns 0 if successful. Returns 1 if exiting. Returns -1 on error</span>
+<span id="L218"><span class="lineNum">     218</span>                 :             :      */</span>
+<span id="L219"><span class="lineNum">     219</span>                 :             :     int getAndProcessFrame() noexcept;</span>
+<span id="L220"><span class="lineNum">     220</span>                 :             : </span>
+<span id="L221"><span class="lineNum">     221</span>                 :             :     /** Helper method that executes the decoder, i.e. logic to parse the incoming</span>
+<span id="L222"><span class="lineNum">     222</span>                 :             :         text.  Returns 1 if a full/valid frame was found. Returns 0 if input frame</span>
+<span id="L223"><span class="lineNum">     223</span>                 :             :         is incomplete. Return -1 if an error occurred.</span>
+<span id="L224"><span class="lineNum">     224</span>                 :             :      */</span>
+<span id="L225"><span class="lineNum">     225</span>                 :             :     virtual int readInput( Kit::Type::SSize_T&amp; frameSize ) noexcept;</span>
+<span id="L226"><span class="lineNum">     226</span>                 :             : </span>
+<span id="L227"><span class="lineNum">     227</span>                 :             :     /// Helper method.  Outputs text without any framing</span>
+<span id="L228"><span class="lineNum">     228</span>                 :             :     void outputMessage( const char* textString ) noexcept;</span>
+<span id="L229"><span class="lineNum">     229</span>                 :             : </span>
+<span id="L230"><span class="lineNum">     230</span>                 :             : protected:</span>
+<span id="L231"><span class="lineNum">     231</span>                 :             :     /// List of supported commands</span>
+<span id="L232"><span class="lineNum">     232</span>                 :             :     Kit::Container::OrderedList&lt;ICommand&gt;&amp; m_commands;</span>
+<span id="L233"><span class="lineNum">     233</span>                 :             : </span>
+<span id="L234"><span class="lineNum">     234</span>                 :             :     /// Decoder to identify individual command strings within the raw Input stream</span>
+<span id="L235"><span class="lineNum">     235</span>                 :             :     Kit::Framing::LineDecoder m_deframer;</span>
+<span id="L236"><span class="lineNum">     236</span>                 :             : </span>
+<span id="L237"><span class="lineNum">     237</span>                 :             :     /// Encoder to encapsulate the output of command in the Output stream</span>
+<span id="L238"><span class="lineNum">     238</span>                 :             :     Kit::Framing::EncoderWriter m_framer;</span>
+<span id="L239"><span class="lineNum">     239</span>                 :             : </span>
+<span id="L240"><span class="lineNum">     240</span>                 :             :     /// Security policy for the shell commands</span>
+<span id="L241"><span class="lineNum">     241</span>                 :             :     ISecurity&amp; m_secPolicy;</span>
+<span id="L242"><span class="lineNum">     242</span>                 :             : </span>
+<span id="L243"><span class="lineNum">     243</span>                 :             :     /// Output lock</span>
+<span id="L244"><span class="lineNum">     244</span>                 :             :     Kit::System::Mutex&amp; m_outLock;</span>
+<span id="L245"><span class="lineNum">     245</span>                 :             : </span>
+<span id="L246"><span class="lineNum">     246</span>                 :             :     /// Reference to the LineDecoder's input source</span>
+<span id="L247"><span class="lineNum">     247</span>                 :             :     Kit::Framing::StreamSource&amp; m_streamSource;</span>
+<span id="L248"><span class="lineNum">     248</span>                 :             : </span>
+<span id="L249"><span class="lineNum">     249</span>                 :             :     /// Reference to the EncoderWriter's output destination</span>
+<span id="L250"><span class="lineNum">     250</span>                 :             :     Kit::Framing::StreamDestination&amp; m_streamDestination;</span>
+<span id="L251"><span class="lineNum">     251</span>                 :             : </span>
+<span id="L252"><span class="lineNum">     252</span>                 :             :     /// Current frame size</span>
+<span id="L253"><span class="lineNum">     253</span>                 :             :     Kit::Type::SSize_T m_frameSize;</span>
+<span id="L254"><span class="lineNum">     254</span>                 :             : </span>
+<span id="L255"><span class="lineNum">     255</span>                 :             :     /// Shared work buffer</span>
+<span id="L256"><span class="lineNum">     256</span>                 :             :     Kit::Text::FString&lt;OPTION_KIT_TSHELL_PROCESSOR_OUTPUT_SIZE&gt; m_workOutputBuffer;</span>
+<span id="L257"><span class="lineNum">     257</span>                 :             : </span>
+<span id="L258"><span class="lineNum">     258</span>                 :             :     /// Shared work buffer</span>
+<span id="L259"><span class="lineNum">     259</span>                 :             :     Kit::Text::FString&lt;OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE&gt; m_workInputBuffer;</span>
+<span id="L260"><span class="lineNum">     260</span>                 :             : </span>
+<span id="L261"><span class="lineNum">     261</span>                 :             :     /// Shared work buffer</span>
+<span id="L262"><span class="lineNum">     262</span>                 :             :     Kit::Text::FString&lt;OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE&gt; m_workBuffer;</span>
+<span id="L263"><span class="lineNum">     263</span>                 :             : </span>
+<span id="L264"><span class="lineNum">     264</span>                 :             :     /// Buffer for reading the raw input (does NOT limit the size of the input frame)</span>
+<span id="L265"><span class="lineNum">     265</span>                 :             :     uint8_t m_rawInputBuffer[OPTION_KIT_TSHELL_PROCESSOR_RAW_READ_BUFFER_SIZE];</span>
+<span id="L266"><span class="lineNum">     266</span>                 :             : </span>
+<span id="L267"><span class="lineNum">     267</span>                 :             :     /// Input Frame buffer (used to store the deframed input command)</span>
+<span id="L268"><span class="lineNum">     268</span>                 :             :     uint8_t m_frameBuffer[OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE + 1];</span>
+<span id="L269"><span class="lineNum">     269</span>                 :             : </span>
+<span id="L270"><span class="lineNum">     270</span>                 :             :     /// Comment character</span>
+<span id="L271"><span class="lineNum">     271</span>                 :             :     char m_comment;</span>
+<span id="L272"><span class="lineNum">     272</span>                 :             : </span>
+<span id="L273"><span class="lineNum">     273</span>                 :             :     /// Blocking semantic flag.  When true the read operations are blocking until a complete frame is found</span>
+<span id="L274"><span class="lineNum">     274</span>                 :             :     bool m_blocking;</span>
 <span id="L275"><span class="lineNum">     275</span>                 :             : </span>
-<span id="L276"><span class="lineNum">     276</span>                 :             : }  // end namespaces</span>
-<span id="L277"><span class="lineNum">     277</span>                 :             : }</span>
-<span id="L278"><span class="lineNum">     278</span>                 :             : #endif  // end header latch</span>
+<span id="L276"><span class="lineNum">     276</span>                 :             :     /// My run state</span>
+<span id="L277"><span class="lineNum">     277</span>                 :             :     std::atomic&lt;bool&gt; m_running;</span>
+<span id="L278"><span class="lineNum">     278</span>                 :             : };</span>
+<span id="L279"><span class="lineNum">     279</span>                 :             : </span>
+<span id="L280"><span class="lineNum">     280</span>                 :             : </span>
+<span id="L281"><span class="lineNum">     281</span>                 :             : }  // end namespaces</span>
+<span id="L282"><span class="lineNum">     282</span>                 :             : }</span>
+<span id="L283"><span class="lineNum">     283</span>                 :             : #endif  // end header latch</span>
         </pre>
               </td>
             </tr>

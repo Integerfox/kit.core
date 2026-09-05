@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 345-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -102,6 +102,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad3becba1b9f73916848968c8fd837e4e" id="r_ad3becba1b9f73916848968c8fd837e4e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3becba1b9f73916848968c8fd837e4e">writeFrame</a> (const char *text, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxBytes) noexcept=0</td></tr>
 <tr class="memdesc:ad3becba1b9f73916848968c8fd837e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a99b714bfa42d19a70e81704aca4001bd" title="This method encodes and outputs the specified message/text.">writeFrame()</a>, but only outputs (at most) 'N' bytes as the content of the frame.  <br /></td></tr>
 <tr class="separator:ad3becba1b9f73916848968c8fd837e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac760f992fc9561fea690a0e15e712c2e" id="r_ac760f992fc9561fea690a0e15e712c2e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac760f992fc9561fea690a0e15e712c2e">writeFrameWithSpecialChars</a> (const char *text) noexcept</td></tr>
+<tr class="memdesc:ac760f992fc9561fea690a0e15e712c2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#a99b714bfa42d19a70e81704aca4001bd" title="This method encodes and outputs the specified message/text.">writeFrame()</a>, but the the encoding of the 'text' is bypassed.  <br /></td></tr>
+<tr class="separator:ac760f992fc9561fea690a0e15e712c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa72f887d127b64521c51ed65069c360" id="r_afa72f887d127b64521c51ed65069c360"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa72f887d127b64521c51ed65069c360">writeFrameWithSpecialChars</a> (const char *text, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxBytes) noexcept=0</td></tr>
+<tr class="memdesc:afa72f887d127b64521c51ed65069c360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#ac760f992fc9561fea690a0e15e712c2e" title="Same as writeFrame(), but the the encoding of the &#39;text&#39; is bypassed.">writeFrameWithSpecialChars()</a>, but only outputs (at most) 'N' bytes as the content of the frame.  <br /></td></tr>
+<tr class="separator:afa72f887d127b64521c51ed65069c360"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This Private Namespace abstract class defines a "Context" for a <a class="el" href="namespace_kit_1_1_t_shell.html" title="The TShell namespace provides a text based shell that can be used interact with an Application....">TShell</a> command. </p>
@@ -441,7 +447,8 @@ Public Member Functions</h2></td></tr>
 
 <p>This method encodes and outputs the specified message/text. </p>
 <p>The method returns false if there was Output Stream error.</p>
-<p>NOTE: An ENTIRE frame must be written with a single call to this method to avoid interleaving of output frames with console trace/logging. </p>
+<p>NOTE: An ENTIRE frame must be written with a single call to this method to avoid interleaving of output frames with console trace/logging.</p>
+<p>NOTE: If the 'text' contains characters that must not be escaped (e.g. newline), use <a class="el" href="#ac760f992fc9561fea690a0e15e712c2e" title="Same as writeFrame(), but the the encoding of the &#39;text&#39; is bypassed.">writeFrameWithSpecialChars()</a> instead. </p>
 
 </div>
 </div>
@@ -478,13 +485,74 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ac760f992fc9561fea690a0e15e712c2e" name="ac760f992fc9561fea690a0e15e712c2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac760f992fc9561fea690a0e15e712c2e">&#9670;&#160;</a></span>writeFrameWithSpecialChars() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kit::TShell::IContext::writeFrameWithSpecialChars </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Same as <a class="el" href="#a99b714bfa42d19a70e81704aca4001bd" title="This method encodes and outputs the specified message/text.">writeFrame()</a>, but the the encoding of the 'text' is bypassed. </p>
+<p>While not desirable this allows the 'text' argument to contain special characters that would otherwise be escaped, e.g. the newline character. </p>
+
+</div>
+</div>
+<a id="afa72f887d127b64521c51ed65069c360" name="afa72f887d127b64521c51ed65069c360"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa72f887d127b64521c51ed65069c360">&#9670;&#160;</a></span>writeFrameWithSpecialChars() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Kit::TShell::IContext::writeFrameWithSpecialChars </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>text</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>maxBytes</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Same as <a class="el" href="#ac760f992fc9561fea690a0e15e712c2e" title="Same as writeFrame(), but the the encoding of the &#39;text&#39; is bypassed.">writeFrameWithSpecialChars()</a>, but only outputs (at most) 'N' bytes as the content of the frame. </p>
+
+<p>Implemented in <a class="el" href="class_kit_1_1_t_shell_1_1_processor.html#ad21c35f211674fe2d088ff7d61506d17">Kit::TShell::Processor</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Kit/TShell/<a class="el" href="_i_context_8h_source.html">IContext.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 30 2026 02:58:42 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

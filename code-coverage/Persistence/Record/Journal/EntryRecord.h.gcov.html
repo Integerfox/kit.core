@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-30 03:05:06</td>
+            <td class="headerValue">2026-09-05 20:52:46</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -129,25 +129,25 @@
 <span id="L67"><span class="lineNum">      67</span>                 :             : </span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :         NOTE: The Application MUST allocate storage for at least 2 entries </span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     */</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          15 :     EntryRecord( IChunk&amp; entryChunkHandler,</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          16 :     EntryRecord( IChunk&amp; entryChunkHandler,</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :                  Size_T  singleEntrySizeInBytes,</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :                  IMedia&amp; entryMedia,</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :                  IHead&amp;  headRecord,</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :                  Size_T  maxCorruptScan            = OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN,</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :                  Size_T  maxConsecutiveCorruptSkip = OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CONSECUTIVE_CORRUPT_SKIP ) noexcept</span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          15 :         : m_chunk( entryChunkHandler )</span></span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          15 :         , m_headRecord( headRecord )</span></span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">          15 :         , m_entryMedia( entryMedia )</span></span>
-<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">          15 :         , m_entryPayloadHandlerPtr( nullptr )</span></span>
-<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">          30 :         , m_entrySize( singleEntrySizeInBytes + getEntryMetadataSize() + entryChunkHandler.getMetadataLength() )</span></span>
-<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">          15 :         , m_maxEntries( entryMedia.getMaxSize() / ( m_entrySize ) )</span></span>
-<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">          15 :         , m_maxOffset( ( m_maxEntries - 1 ) * m_entrySize )</span></span>
-<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">          15 :         , m_maxCorruptScan( maxCorruptScan )</span></span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">          15 :         , m_maxConsecutiveCorruptSkip( maxConsecutiveCorruptSkip )</span></span>
-<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">          15 :         , m_started( false )</span></span>
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          16 :         : m_chunk( entryChunkHandler )</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          16 :         , m_headRecord( headRecord )</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">          16 :         , m_entryMedia( entryMedia )</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">          16 :         , m_entryPayloadHandlerPtr( nullptr )</span></span>
+<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">          32 :         , m_entrySize( singleEntrySizeInBytes + getEntryMetadataSize() + entryChunkHandler.getMetadataLength() )</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">          16 :         , m_maxEntries( entryMedia.getMaxSize() / ( m_entrySize ) )</span></span>
+<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">          16 :         , m_maxOffset( ( m_maxEntries - 1 ) * m_entrySize )</span></span>
+<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">          16 :         , m_maxCorruptScan( maxCorruptScan )</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">          16 :         , m_maxConsecutiveCorruptSkip( maxConsecutiveCorruptSkip )</span></span>
+<span id="L85"><span class="lineNum">      85</span>                 :<span class="tlaGNC">          16 :         , m_started( false )</span></span>
 <span id="L86"><span class="lineNum">      86</span>                 :             :     {</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :         KIT_SYSTEM_ASSERT( m_maxEntries &gt; 1 );</span>
-<span id="L88"><span class="lineNum">      88</span>                 :<span class="tlaGNC">          15 :     }</span></span>
+<span id="L88"><span class="lineNum">      88</span>                 :<span class="tlaGNC">          16 :     }</span></span>
 <span id="L89"><span class="lineNum">      89</span>                 :             : </span>
 <span id="L90"><span class="lineNum">      90</span>                 :             : public:</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             :     /// See Kit::Persistence::Record::IRecord</span>
@@ -211,7 +211,7 @@
 <span id="L149"><span class="lineNum">     149</span>                 :             : </span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : protected:</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :     /// Hook for a derived classes to add processing when m_latestTimestamp is updated.</span>
-<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">          38 :     virtual void hookOnLatestTimestampUpdated( uint64_t newTimestampValue ) noexcept { /* Default does nothing */ }</span></span>
+<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">          46 :     virtual void hookOnLatestTimestampUpdated( uint64_t newTimestampValue ) noexcept { /* Default does nothing */ }</span></span>
 <span id="L153"><span class="lineNum">     153</span>                 :             : </span>
 <span id="L154"><span class="lineNum">     154</span>                 :             :     /// Helper method: Verifies the 'correctness' of the index/head pointer and 'fixes' the head pointer if it is 'bad'</span>
 <span id="L155"><span class="lineNum">     155</span>                 :             :     void verifyIndex() noexcept;</span>
