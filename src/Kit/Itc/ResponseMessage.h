@@ -63,7 +63,7 @@ public:
         transactions to complete before its destructor is called. However, in the
         real world, this is not always possible. Therefore, this method provides
         a way for the client to 'opt out' of receiving the response callback.
-    
+
         This method CAN ONLY be called from the CLIENT thread context.
      */
     void abandon() noexcept
@@ -72,7 +72,7 @@ public:
     }
 
 
-    public:
+public:
     /// See Kit::Itc::Message.  This call executes in the Client's thread context.
     void process() noexcept override
     {
