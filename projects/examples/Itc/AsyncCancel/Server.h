@@ -84,6 +84,7 @@ public:
             // Return the current flash message to the sender if it exists
             if ( m_currentFlashMsg != nullptr )
             {
+                m_currentFlashMsg->getPayload().success = false;
                 m_currentFlashMsg->returnToSender();
             }
 
@@ -91,6 +92,7 @@ public:
             auto* msg = m_flashRequestList.get();
             while ( msg != nullptr )
             {
+                msg->getPayload().success = false;
                 msg->returnToSender();
                 msg = m_flashRequestList.get();
             }
@@ -119,8 +121,7 @@ public:
              ( payload.flashPattern.repeatCount == 0 ) )
         {
             // Invalid flash rate request.  Set the response value to false to indicate failure and return
-            m_currentFlashMsg = nullptr;
-            payload.success   = false;
+            payload.success = false;
             msg.returnToSender();  // Respond to the client immediately
             return;
         }

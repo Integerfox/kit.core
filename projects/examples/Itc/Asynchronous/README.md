@@ -8,7 +8,7 @@ responsible for flashing a LED a specific rate.  The Client widget use asynchron
 ITC message to set the flash rate.
 
 **NOTE:** The example is built on-top of the ITC Synchronous example it that
-          re-uses the example's [IRateRequest](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Itc/Asynchronous/IRateRequest.h)
+          re-uses the example's [IRateRequest](https://github.com/Integerfox/kit.core/blob/main/projects/examples/Itc/Synchronous/IRateRequest.h)
           class
 
 ## Use cases
