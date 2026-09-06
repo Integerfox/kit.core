@@ -41,9 +41,15 @@ This section provides practical code examples demonstrating how to use various K
 
 ### Responses
 
+- @ref projects_examples_itc_asynchronous "Basic Asynchronous ITC" - Basic Asynchronous Inter-Thread-Communication messaging
+- @ref projects_examples_itc_asynccancel "Advanced Asynchronous ITC" - Advanced Asynchronous Inter-Thread-Communication messaging
+
 ### Open/Close Messages
 
 - @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
+- @ref projects_examples_itc_asynchronous "Basic Asynchronous ITC" - Basic Asynchronous Inter-Thread-Communication messaging
+- @ref projects_examples_itc_asynccancel "Advanced Asynchronous ITC" - Advanced Asynchronous Inter-Thread-Communication messaging
+
 
 ## Streams and Files
 
