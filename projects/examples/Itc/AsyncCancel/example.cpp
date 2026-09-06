@@ -37,7 +37,8 @@ namespace AsyncCancel {
 static FlashPattern_T flashRatesMs[] = { { OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 1, OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS, 10 },
                                          { OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 2, OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS, 10 },
                                          { OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 4, OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 2, 10 },
-                                         { OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 8, OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 4, 10 } };
+                                         { OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 8, OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 4, 10 },
+                                         { OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 20, OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 10, 10 } };
 
 static int                     exitCode_;
 static Kit::EventQueue::Server mbox_;  // Note: The client and the server CAN NOT execute in the same thread
