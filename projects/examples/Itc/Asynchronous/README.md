@@ -31,10 +31,6 @@ the client cannot block executing while waiting on event X to happen.
   - The Request and Response messages _share_ the same payload which is defined
     in the Request message class.
 
-- It is recommended to have a single exit point from the message request
-  function - that calls returnToSender() on the message - to ensure that the
-  message transaction completes.
-  
 - The _server_ has **no** knowledge of the synchronous/asynchronous semantics
   of the messaging.  It is the **client's** usage that determine the semantics
   of the ITC message.  This done by which concrete [IReturnHandler](https://github.com/Integerfox/kit.core/blob/main/src/Kit/Itc/IReturnHandler.h)

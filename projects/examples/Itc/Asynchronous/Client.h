@@ -10,12 +10,11 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "IRateResponse.h"
+#include "Itc/Asynchronous/IRateResponse.h"
 #include "Kit/Itc/OpenCloseSync.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/Trace.h"
-#include "Kit/System/Api.h"
 #include "Kit/System/Timer.h"
 #include <inttypes.h>
 

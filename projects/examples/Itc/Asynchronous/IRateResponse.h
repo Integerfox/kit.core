@@ -20,7 +20,7 @@ namespace Itc {
 namespace Asynchronous {
 
 /** This abstract class define message types and payloads for a set of ITC
-    services. The request() method(s) are to be implemented by a 'service'
+    services. The response() method(s) are to be implemented by a 'client'
  */
 class IRateResponse
 {

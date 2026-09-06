@@ -12,30 +12,18 @@ package "Itc::Asynchronous" {
 
     class "example.cpp" as exampleApp <<application>>
 
-    class IRate <<interface>> {
-        + set(flashRateMs : uint32_t) : bool
+    class IRateResponse <<abstract>> {
+        + response(msg : RateMsg&) : void
     }
 
-    class IRateRequest <<abstract>> {
-        + request(msg : RateMsg&) : void
-    }
-
-    class RateSync {
-        + RateSync(myEventQueue : IQueue&)
-        + set(flashRateMs : uint32_t) : bool
-    }
-
-    class Server {
-        + Server(myEventQueue : IQueue&, initialFlashRateMs : uint32_t)
-        + request(msg : RateMsg&) : void
+    class Client {
+        + Client(clientsEventQueue : IQueue&, serverSAP : IRateRequest::SAP&, flashRatesMs : uint32_t[], flashRatesCount : unsigned, shutdownSignal : Semaphore&)
         + request(msg : OpenMsg&) : void
         + request(msg : CloseMsg&) : void
-        + expired() : void
+        + response(msg : RateMsg&) : void
     }
 
-    IRate        -[hidden]down- IRateRequest
-    IRateRequest -[hidden]down- RateSync
-    RateSync     -[hidden]down- Server
+    IRateResponse -[hidden]down- Client
 }
 
 ' ============================================================================
@@ -46,17 +34,27 @@ package "Kit::EventQueue" {
     class "Server" as EqServer
 }
 
+package "Itc::Synchronous" {
+    class "Server" as SyncServer
+    class "IRateRequest" as IRateRequest
+}
+
 package "Kit::Itc" {
     class OpenCloseSync
+    class ResponseMessage
+
+    OpenCloseSync -[hidden]down- ResponseMessage
 }
 
 package "Kit::System" {
     class Timer
     class Thread
     class Shutdown
+    class Semaphore
 
     Timer  -[hidden]down- Thread
     Thread -[hidden]down- Shutdown
+    Shutdown -[hidden]down- Semaphore
 }
 
 ' ============================================================================
@@ -64,25 +62,29 @@ package "Kit::System" {
 ' ============================================================================
 
 EqServer      -[hidden]down-  OpenCloseSync
-OpenCloseSync -[hidden]down-  Timer
+ResponseMessage -[hidden]down- Timer
 
 ' ============================================================================
 ' Inheritance
 ' ============================================================================
 
-RateSync --|> IRate
-RateSync --|> IRateRequest
-Server   --|> RateSync
-Server   --|> OpenCloseSync
-Server   --|> Timer
+Client --|> IRateResponse
+Client --|> OpenCloseSync
+Client --|> Timer
 
 ' ============================================================================
 ' example.cpp usage / composition relationships
 ' ============================================================================
 
-exampleApp *--  Server   : myServer_
-exampleApp o--  EqServer : mbox_
-exampleApp ..>  Thread   : create / destroy
-exampleApp ..>  Shutdown : notifyShutdownHandlers()
+exampleApp *--  Client          : client_
+exampleApp *--  SyncServer      : myServer_
+exampleApp *--  EqServer        : mbox_
+exampleApp *--  Semaphore       : shutdownSignal_
+exampleApp ..>  Thread          : create / destroy
+exampleApp ..>  Shutdown        : notifyShutdownHandlers()
+Client ..>      SyncServer      : Rate Server
+Client ..>      ResponseMessage : m_rateResponseMsg
+Client ..>      Semaphore : signals
+IRateResponse ..> IRateRequest  : RateMsg
 
 @enduml

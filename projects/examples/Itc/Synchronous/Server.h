@@ -54,34 +54,6 @@ public:
     }
 
 public:
-    /// See Itc::Synchronous::IRateRequest
-    void request( RateMsg& msg ) noexcept override
-    {
-        // NOTE: Make sure to have a *reference* to the payload (instead of a copy)
-        //       since we need to update the 'success' field in the payload to
-        //       indicate pass/fail of the request
-        auto& payload = msg.getPayload();
-
-        // Validate the flash rate request
-        if ( ( payload.flashRateMs < OPTION_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_MS ) ||
-             ( payload.flashRateMs > OPTION_ITC_SYNCHRONOUS_SERVER_MAX_FLASH_RATE_MS ) )
-        {
-            // Invalid flash rate request.  Set the response value to false to indicate failure and return
-            payload.success = false;
-        }
-
-        // Update the Flash rate
-        {
-            payload.success = true;
-            m_flashRateMs   = payload.flashRateMs;
-            expired();  // Expire the timer immediately to update the flash rate without waiting for the current flash cycle to complete
-        }
-
-        // Return the message to the sender since we are done processing the request
-        msg.returnToSender();
-    }
-
-public:
     /// See Kit::Itc::OpenCloseSync
     void request( OpenMsg& msg ) noexcept override
     {
@@ -117,6 +89,35 @@ public:
     }
 
 public:
+    /// See Itc::Synchronous::IRateRequest
+    void request( RateMsg& msg ) noexcept override
+    {
+        // NOTE: Make sure to have a *reference* to the payload (instead of a copy)
+        //       since we need to update the 'success' field in the payload to
+        //       indicate pass/fail of the request
+        auto& payload = msg.getPayload();
+
+        // Validate the flash rate request
+        if ( ( payload.flashRateMs < OPTION_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_MS ) ||
+             ( payload.flashRateMs > OPTION_ITC_SYNCHRONOUS_SERVER_MAX_FLASH_RATE_MS ) )
+        {
+            // Invalid flash rate request.  Set the response value to false to indicate failure and return
+            payload.success = false;
+        }
+
+        // Update the Flash rate
+        {
+            payload.success = true;
+            m_flashRateMs   = payload.flashRateMs;
+            expired();  // Expire the timer immediately to update the flash rate without waiting for the current flash cycle to complete
+        }
+
+        // Return the message to the sender since we are done processing the request
+        msg.returnToSender();
+    }
+
+
+protected:
     /// See Kit::System::ICounter, i.e. software timer expired callback
     void expired() noexcept override
     {
