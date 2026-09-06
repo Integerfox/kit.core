@@ -10,12 +10,24 @@ This section provides practical code examples demonstrating how to use various K
 
 ## Containers
 
+### Articles
+
+- [Limitless Containers](https://patternsinthemachine.net/2022/09/limitless-containers-without-dynamic-memory-allocation-in-c-c/)
+
+### Lists, Ring Buffers, etc.
+
 - @ref projects_examples_container_list "Lists" - Singly and Doubly Linked Lists
 - @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
 
 ## Data Model
 
-### Introduction
+### Articles
+
+- [Introduction](https://patternsinthemachine.net/2022/12/data-model-introduction-to-the-data-model-architecture/)
+- [Example Application](https://patternsinthemachine.net/2022/12/data-model-example-application/)
+- [Change Notifcation](https://patternsinthemachine.net/2022/12/data-mode-change-notifications/)
+- [Aren't Global Variables Bad](https://patternsinthemachine.net/2022/12/data-mode-change-notifications/)
+- [EOC 2024](https://patternsinthemachine.net/2024/09/embedded-online-conference-2024-introduction-to-the-data-model-pattern/)
 
 ### Change Notifications
 
@@ -29,7 +41,7 @@ This section provides practical code examples demonstrating how to use various K
 
 ### Persistent Storage
 
-### Unit Testing new Model Point type
+### Asynchronous ITC
 
 - @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
