@@ -80,9 +80,12 @@ public:
             m_opened = false;
             Timer::stop();
 
-            // NOTE: A more robust shutdown would ensure that any pending requests
-            //       have been returned.  See the 'Itc/Subscription' example for
-            //       how to properly handle this scenario.
+            // NOTE: The implementation is assuming that the Class is opened and
+            //       closed ONLY once with respect to ITC message - but nothing
+            //       prevents the application abusing these semantics. A more
+            //       robust shutdown would ensure that any pending requests have
+            //       been returned.  See the 'Itc/AsyncCancel' example for how to
+            //       properly handle this scenario.
             m_rateResponseMsg.abandon();
         }
 

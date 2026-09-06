@@ -48,7 +48,7 @@ the client cannot block executing while waiting on event X to happen.
 
 ## Class Diagram
 
-![Transaction Example Class Diagram](classDiagram_examplesitcsynchronous.png)
+![Transaction Example Class Diagram](classDiagram_examplesitcasynchronous.png)
 
 ## See Also
 

@@ -105,6 +105,26 @@ public:
     /// See IFlashRequest
     void request( FlashMsg& msg ) noexcept override
     {
+        // NOTE: Make sure to have a *reference* to the payload (instead of a copy)
+        //       since we need to update the 'success' field in the payload to
+        //       indicate pass/fail of the request
+        auto& payload = msg.getPayload();
+
+        // Validate the flash rate request
+        if ( ( payload.flashPattern.onTimeMs < OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS ) ||
+             ( payload.flashPattern.onTimeMs > OPTION_ITC_ASYNCCANCEL_SERVER_MAX_FLASH_RATE_MS ) ||
+             ( payload.flashPattern.offTimeMs < OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS ) ||
+             ( payload.flashPattern.offTimeMs > OPTION_ITC_ASYNCCANCEL_SERVER_MAX_FLASH_RATE_MS ) ||
+             ( payload.flashPattern.onTimeMs == 0 && payload.flashPattern.offTimeMs == 0 ) ||
+             ( payload.flashPattern.repeatCount == 0 ) )
+        {
+            // Invalid flash rate request.  Set the response value to false to indicate failure and return
+            m_currentFlashMsg = nullptr;
+            payload.success   = false;
+            msg.returnToSender();  // Respond to the client immediately
+            return;
+        }
+
         // Queue the request if currently processing another flash request
         if ( m_currentFlashMsg != nullptr )
         {
@@ -112,23 +132,6 @@ public:
             return;
         }
         m_currentFlashMsg = &msg;
-
-        // NOTE: Make sure to have a *reference* to the payload (instead of a copy)
-        //       since we need to update the 'success' field in the payload to
-        //       indicate pass/fail of the request
-        auto& payload = m_currentFlashMsg->getPayload();
-
-        // Validate the flash rate request
-        if ( ( payload.flashPattern.onTimeMs < OPTION_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS ) ||
-             ( payload.flashPattern.offTimeMs > OPTION_ITC_ASYNCCANCEL_SERVER_MAX_FLASH_RATE_MS ) ||
-             ( payload.flashPattern.onTimeMs == 0 && payload.flashPattern.offTimeMs == 0 ) ||
-             ( payload.flashPattern.repeatCount == 0 ) )
-        {
-            // Invalid flash rate request.  Set the response value to false to indicate failure and return
-            payload.success = false;
-            msg.returnToSender();  // Respond to the client immediately
-            return;
-        }
 
         // Begin the duty cycle(s)
         // NOTE: The client's message is returned AFTER the duty cycle(s) have completed
@@ -148,7 +151,10 @@ public:
         if ( m_currentFlashMsg != nullptr && m_currentFlashMsg == payload.flashMsgToCancel )
         {
             KIT_SYSTEM_TRACE_MSG( "main", "Cancelling current request..." );
-            payload.canceled = true;
+            Timer::stop();
+            Bsp_turn_off_debug1();
+            payload.canceled                        = true;
+            m_currentFlashMsg->getPayload().success = false;  // Mark the transaction as failed due to cancellation
             m_currentFlashMsg->returnToSender();
             startNextRequest();
         }
@@ -163,7 +169,8 @@ public:
                 {
                     KIT_SYSTEM_TRACE_MSG( "main", "Cancelling queued request..." );
                     m_flashRequestList.remove( *queuedMsgPtr );
-                    payload.canceled = true;
+                    payload.canceled                   = true;
+                    queuedMsgPtr->getPayload().success = false;  // Mark the queued transaction as failed due to cancellation
                     queuedMsgPtr->returnToSender();
                     break;  // Exit the loop once the Requestmessage is found and removed
                 }

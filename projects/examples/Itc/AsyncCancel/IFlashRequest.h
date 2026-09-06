@@ -22,9 +22,9 @@ namespace AsyncCancel {
 /// Defines a 'flash pattern'
 struct FlashPattern_T
 {
-    uint32_t onTimeMs;
-    uint32_t offTimeMs;
-    uint32_t repeatCount;
+    uint32_t onTimeMs;     //!< On time in milliseconds
+    uint32_t offTimeMs;    //!< Off time in milliseconds
+    uint32_t repeatCount;  //!< Number of times to repeat the on/off cycle
 };
 
 
@@ -55,7 +55,7 @@ public:
         bool success;
 
         /// Constructor
-        FlashPayload_T( FlashPattern_T flashPattern = {500, 500, 1} )
+        FlashPayload_T( FlashPattern_T flashPattern = { 500, 500, 1 } )
             : flashPattern( flashPattern )
             , success( false )
         {

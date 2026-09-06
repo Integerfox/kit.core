@@ -18,7 +18,6 @@ the client cannot block executing while waiting on event X to happen.
 
 - When using asynchronous ITC messages - the message client and server **can**
   be the same thread.  
-  - NOTE: In this example the client and server are in **separate** threads.
 
 - Both the client and server **must** executing in event-loop based thread(s)
 
@@ -51,7 +50,7 @@ the client cannot block executing while waiting on event X to happen.
 
 ## Class Diagram
 
-![Transaction Example Class Diagram](classDiagram_examplesitcsynchronous.png)
+![Transaction Example Class Diagram](classDiagram_examplesitcasynccancel.png)
 
 ## See Also
 

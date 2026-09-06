@@ -52,7 +52,7 @@ int runExample( unsigned numCycles ) noexcept
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
 
-    KIT_SYSTEM_TRACE_MSG( SECT_, "**** Starting ITC Asynchronous Example... ****" );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "**** Starting ITC AsyncCancel Example... ****" );
 
     // Create the thread
     auto* t1 = Kit::System::Thread::create( mbox_, "APP" );

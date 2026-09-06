@@ -106,6 +106,7 @@ public:
         }
 
         // Update the Flash rate
+        else
         {
             payload.success = true;
             m_flashRateMs   = payload.flashRateMs;
@@ -127,12 +128,16 @@ protected:
         KIT_SYSTEM_TRACE_MSG( "main", "LED Flash. delay=%" PRIu32 " ms", m_flashRateMs );
 
         // Restart the timer for the next flash cycle.  Account for the trace output latency
-        // by adjusting the next duration to the next m_flashRateMs boundary
+        // by adjusting the next duration to the next m_flashRateMs boundary.  Only apply the
+        // adjustment when the overshoot is less than one full period -- a rate-change request
+        // can force an early expiration whose overshoot (measured against the OLD rate) exceeds
+        // the NEW rate, which would otherwise underflow 'nextDuration' (it is unsigned).
         uint32_t nextDuration = m_flashRateMs;
         uint32_t elapsed      = Kit::System::ElapsedTime::deltaMilliseconds( m_timeMarker, now );
-        if ( elapsed >= m_flashRateMs )
+        uint32_t overshoot    = elapsed > m_flashRateMs ? elapsed - m_flashRateMs : 0;
+        if ( overshoot > 0 && overshoot < m_flashRateMs )
         {
-            nextDuration = m_flashRateMs - ( elapsed - m_flashRateMs );
+            nextDuration = m_flashRateMs - overshoot;
         }
         Timer::start( nextDuration );
         m_timeMarker = now;
