@@ -41,7 +41,7 @@ static FlashPattern_T flashRatesMs[] = { { OPTION_EXAMPLES_ITC_ASYNCCANCEL_SERVE
                                          { OPTION_EXAMPLES_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 20, OPTION_EXAMPLES_ITC_ASYNCCANCEL_SERVER_MIN_FLASH_RATE_MS * 10, 10 } };
 
 static int                     exitCode_;
-static Kit::EventQueue::Server mbox_;  // Note: The client and the server CAN NOT execute in the same thread
+static Kit::EventQueue::Server mbox_;
 static Server                  myServer_( mbox_ );
 static IFlashRequest::SAP      serverSAP_( myServer_, mbox_ );
 static Kit::System::Semaphore  shutdownSignal_;

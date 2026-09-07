@@ -88,6 +88,7 @@ public:
             {
                 m_currentFlashMsg->getPayload().success = false;
                 m_currentFlashMsg->returnToSender();
+                m_currentFlashMsg = nullptr;
             }
 
             // Drain the request queue

@@ -83,7 +83,7 @@ public:
             // Housekeeping
             m_opened = false;
 
-            // Cancel any pending flash request before closing
+            // Unconditionally cancel any pending flash request before closing
             KIT_SYSTEM_TRACE_MSG( "main", "Cancelling any pending flash request before closing." );
             m_closedMsg                           = &msg;
             m_flashCancelPayload.flashMsgToCancel = &m_flashResponseMsg.getRequestMsg();

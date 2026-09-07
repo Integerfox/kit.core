@@ -40,7 +40,7 @@ static uint32_t flashRatesMs[] = { OPTION_EXAMPLES_ITC_SYNCHRONOUS_SERVER_MIN_FL
                                    OPTION_EXAMPLES_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_MS * 8 };
 
 static int                                 exitCode_;
-static Kit::EventQueue::Server             mbox_;  // Note: The client and the server CAN NOT execute in the same thread
+static Kit::EventQueue::Server             mbox_;
 static Examples::Itc::Synchronous::Server            myServer_( mbox_ );
 static Examples::Itc::Synchronous::IRateRequest::SAP serverSAP_( myServer_, mbox_ );
 static Kit::System::Semaphore              shutdownSignal_;
