@@ -1,4 +1,4 @@
-# Projects.Examples.Itc.Asynchronous {#projects_examples_itc_asynchronous}
+# Projects.Examples.Itc.Asynchronous
 @namespace Examples::Itc::Asynchronous
 
 \brief Asynchronous message based Inter-Thread-Communication (ITC).
@@ -54,7 +54,7 @@ the client cannot block executing while waiting on event X to happen.
 ## See Also
 
 - @ref Kit::Itc "Kit::Itc namespace documentation"
-- @ref projects_examples_itc_synchronous "Synchronous ITC example"
+- @ref Examples::Itc::Synchronous "Synchronous ITC example"
 
 ## Implementation
 

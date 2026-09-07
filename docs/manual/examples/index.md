@@ -16,8 +16,8 @@ This section provides practical code examples demonstrating how to use various K
 
 ### Lists, Ring Buffers, etc.
 
-- @ref projects_examples_container_list "Lists" - Singly and Doubly Linked Lists
-- @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
+- @ref Examples::Container::Lists "Lists" - Singly and Doubly Linked Lists
+- @ref Examples::Container::RingBuffer "RingBuffer" - Ring Buffer with change notifications
 
 ## Data Model
 
@@ -31,36 +31,36 @@ This section provides practical code examples demonstrating how to use various K
 
 ### Change Notifications
 
-- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+- @ref Examples::Dm::Transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
-- @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
+- @ref Examples::Container::RingBuffer "RingBuffer" - Ring Buffer with change notifications
 
 ### Create new Model Point type
 
-- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+- @ref Examples::Dm::Transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
 ### Persistent Storage
 
 ### Asynchronous ITC
 
-- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+- @ref Examples::Dm::Transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
 ## Inter-thread Messaging
 
 ### Requests
 
-- @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
+- @ref Examples::Itc::Synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
 
 ### Responses
 
-- @ref projects_examples_itc_asynchronous "Basic Asynchronous ITC" - Basic Asynchronous Inter-Thread-Communication messaging
-- @ref projects_examples_itc_asynccancel "Advanced Asynchronous ITC" - Advanced Asynchronous Inter-Thread-Communication messaging
+- @ref Examples::Itc::Asynchronous "Basic Asynchronous ITC" - Basic Asynchronous Inter-Thread-Communication messaging
+- @ref Examples::Itc::AsyncCancel "Advanced Asynchronous ITC" - Advanced Asynchronous Inter-Thread-Communication messaging
 
 ### Open/Close Messages
 
-- @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
-- @ref projects_examples_itc_asynchronous "Basic Asynchronous ITC" - Basic Asynchronous Inter-Thread-Communication messaging
-- @ref projects_examples_itc_asynccancel "Advanced Asynchronous ITC" - Advanced Asynchronous Inter-Thread-Communication messaging
+- @ref Examples::Itc::Synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
+- @ref Examples::Itc::Asynchronous "Basic Asynchronous ITC" - Basic Asynchronous Inter-Thread-Communication messaging
+- @ref Examples::Itc::AsyncCancel "Advanced Asynchronous ITC" - Advanced Asynchronous Inter-Thread-Communication messaging
 
 
 ## Streams and Files

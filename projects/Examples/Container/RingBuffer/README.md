@@ -1,4 +1,4 @@
-# Projects.Examples.Container.RingBuffer {#projects_examples_container_ringbuffer}
+# Projects.Examples.Container.RingBuffer
 @namespace Examples::Container::RingBuffer
 
 \brief Ring Buffer with change notifications when items are added-to and

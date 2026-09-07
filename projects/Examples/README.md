@@ -1,4 +1,4 @@
-# Projects.Examples {#projects_examples}
+# Projects.Examples
 @namespace Examples
 
 \brief Root directory for the example applications.

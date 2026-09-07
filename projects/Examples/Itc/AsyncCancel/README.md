@@ -1,4 +1,4 @@
-# Projects.Examples.Itc.AsyncCancel {#projects_examples_itc_asynccancel}
+# Projects.Examples.Itc.AsyncCancel
 @namespace Examples::Itc::AsyncCancel
 
 \brief Asynchronous message - with cancel semanatics - based Inter-Thread-Communication (ITC).
@@ -56,7 +56,7 @@ the client cannot block executing while waiting on event X to happen.
 ## See Also
 
 - @ref Kit::Itc "Kit::Itc namespace documentation"
-- @ref projects_examples_itc_asynchronous "Asynchronous ITC example"
+- @ref Examples::Itc::Asynchronous "Asynchronous ITC example"
 
 ## Implementation
 

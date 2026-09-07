@@ -1,4 +1,4 @@
-# Projects.Examples.Dm {#projects_examples_dm}
+# Projects.Examples.Dm
 @namespace Examples::Dm
 
 \brief Root directory for the Data Model examples.

@@ -1,4 +1,4 @@
-# Projects.Examples.Dm.Transaction {#projects_examples_dm_transaction}
+# Projects.Examples.Dm.Transaction
 @namespace Examples::Dm::Transaction
 
 \brief Using Data Model Change notification for Inter-Thread-Communication (ITC).
@@ -58,4 +58,3 @@ on the specific use case/requirements.
 - Build Targets:
   - Host: Linux, Windows
   - NUCLEO-F413ZH w/FreeRTOS
-

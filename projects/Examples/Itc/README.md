@@ -1,4 +1,4 @@
-# Projects.Examples.Itc {#projects_examples_itc}
+# Projects.Examples.Itc
 @namespace Examples::Itc
 
 \brief Root directory for the Inter-Thread-Communication (ITC) examples.

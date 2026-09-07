@@ -1,4 +1,4 @@
-# Projects.Examples.Container {#projects_examples_container}
+# Projects.Examples.Container
 @namespace Examples::Container
 
 \brief Root directory for the KIT Container examples.

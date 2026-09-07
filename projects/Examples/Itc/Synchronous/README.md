@@ -1,4 +1,4 @@
-# Projects.Examples.Itc.Synchronous {#projects_examples_itc_synchronous}
+# Projects.Examples.Itc.Synchronous
 @namespace Examples::Itc::Synchronous
 
 \brief Synchronous message based Inter-Thread-Communication (ITC).

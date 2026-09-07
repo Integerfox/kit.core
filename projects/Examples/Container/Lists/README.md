@@ -1,4 +1,4 @@
-# Projects.Examples.Container.List {#projects_examples_container_list}
+# Projects.Examples.Container.List
 @namespace Examples::Container::Lists
 
 \brief Singly and Doubly linked lists that contain unlimited number of items and
