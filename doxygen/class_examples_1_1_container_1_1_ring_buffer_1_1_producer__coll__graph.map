@@ -1,0 +1,102 @@
+<map id="Examples::Container::RingBuffer::Producer" name="Examples::Container::RingBuffer::Producer">
+<area shape="rect" id="Node000001" title="This concrete class is responsible for generating flash codes (i.e." alt="" coords="979,1653,1141,1693"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close..." alt="" coords="419,1551,592,1576"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="578,1576,979,1654,978,1659,577,1581"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_itc_1_1_open_sync.html" title="This partially concrete class implements the synchronous ITC open call for the OpenApi." alt="" coords="179,1426,317,1451"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="286,1455,483,1548,480,1553,283,1460"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_itc_1_1_i_open_request.html" title="This abstract class define message types and payloads for a set of ITC services." alt="" coords="5,1298,168,1323"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="114,1330,235,1424,232,1428,111,1334"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_itc_1_1_i_open.html" title="This abstract class defines an open interface." alt="" coords="193,1298,303,1323"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="251,1337,251,1426,245,1426,245,1337"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_event_queue_1_1_i_queue.html" title="This abstract class represents an Event Queue where events can be delivered to." alt="" coords="328,1298,509,1323"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="393,1334,265,1428,262,1424,390,1330"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="303,1201,534,1241"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="421,1255,421,1298,416,1298,416,1255"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_itc_1_1_i_close_request.html" title="This abstract class defines message types and payloads for a set of ITC services." alt="" coords="341,1426,507,1451"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="442,1462,500,1549,495,1552,437,1465"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_itc_1_1_i_close.html" title="This abstract class defines an close interface." alt="" coords="531,1426,643,1451"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="573,1465,515,1552,511,1549,569,1462"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_container_1_1_ring_buffer_m_p.html" title=" " alt="" coords="798,1536,1002,1591"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="946,1597,988,1627,1027,1651,1025,1656,985,1632,942,1601"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="535,1355,721,1395"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="650,1405,693,1469,724,1510,760,1530,799,1543,797,1548,758,1535,721,1514,688,1472,645,1408"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="699,1209,851,1234"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="728,1242,689,1263,655,1292,639,1324,632,1355,627,1354,634,1322,651,1289,686,1258,726,1237"/>
+<area shape="rect" id="Node000036" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="836,1291,1023,1331"/>
+<area shape="poly" id="edge41_Node000036_Node000012" title=" " alt="" coords="809,1239,897,1288,895,1293,806,1243"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_dm_1_1_mp_1_1_uint32.html" title="This class provides a concrete implementation for a Point who&#39;s data is a uint32_t." alt="" coords="1047,1298,1198,1323"/>
+<area shape="poly" id="edge12_Node000010_Node000013" title=" " alt="" coords="1124,1337,1113,1434,1102,1482,1086,1514,1068,1529,1048,1542,1003,1557,1001,1552,1045,1537,1065,1525,1082,1510,1097,1480,1107,1433,1118,1337"/>
+<area shape="rect" id="Node000035" href="$class_kit_1_1_container_1_1_ring_buffer_m_p.html" title="This template class extends the RingBuffer class to be thread safe AND has Uint32 Model Point that tr..." alt="" coords="832,1419,1019,1459"/>
+<area shape="poly" id="edge42_Node000035_Node000013" title=" " alt="" coords="1057,1329,986,1346,948,1357,939,1370,932,1387,928,1419,922,1418,927,1385,934,1368,945,1352,984,1340,1056,1324"/>
+<area shape="rect" id="Node000037" href="$class_kit_1_1_dm_1_1_observer_callback.html" title=" " alt="" coords="1264,1419,1459,1459"/>
+<area shape="poly" id="edge51_Node000037_Node000013" title=" " alt="" coords="1151,1329,1199,1360,1255,1392,1309,1416,1307,1421,1252,1397,1196,1365,1148,1333"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_dm_1_1_mp_1_1_unsigned_integer.html" title=" " alt="" coords="1015,1201,1230,1241"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="1125,1255,1125,1298,1120,1298,1120,1255"/>
+<area shape="rect" id="Node000015" href="$class_kit_1_1_dm_1_1_mp_1_1_integer.html" title="This template class provides a mostly concrete implementation for a Model Point who&#39;s data is a C int..." alt="" coords="1028,1035,1207,1075"/>
+<area shape="poly" id="edge14_Node000014_Node000015" title=" " alt="" coords="1121,1088,1125,1201,1119,1201,1116,1089"/>
+<area shape="rect" id="Node000016" href="$class_kit_1_1_dm_1_1_mp_1_1_numeric_base.html" title="This template class extends the PrimitiveType class to provide numeric operations." alt="" coords="913,881,1108,921"/>
+<area shape="poly" id="edge15_Node000015_Node000016" title=" " alt="" coords="1044,929,1078,969,1098,1002,1112,1033,1107,1035,1093,1005,1074,972,1040,933"/>
+<area shape="rect" id="Node000033" href="$class_kit_1_1_dm_1_1_mp_1_1_integer.html" title="This template class provides a mostly concrete implementation for a Model Point who&#39;s data is a C int..." alt="" coords="885,971,1064,1011"/>
+<area shape="poly" id="edge37_Node000033_Node000016" title=" " alt="" coords="1000,935,985,972,980,970,995,933"/>
+<area shape="rect" id="Node000017" href="$class_kit_1_1_dm_1_1_mp_1_1_primitive_type.html" title="This template class extends the Scalar base class to data that is a C primitive type of type: &#39;ELEMTY..." alt="" coords="913,792,1109,832"/>
+<area shape="poly" id="edge16_Node000016_Node000017" title=" " alt="" coords="1013,846,1013,881,1008,881,1008,846"/>
+<area shape="rect" id="Node000018" href="$class_kit_1_1_dm_1_1_mp_1_1_scalar.html" title="This template class is partial concrete class that provides a basic implementation for a Model Point ..." alt="" coords="921,679,1100,719"/>
+<area shape="poly" id="edge17_Node000017_Node000018" title=" " alt="" coords="1013,732,1013,792,1008,792,1008,732"/>
+<area shape="rect" id="Node000019" href="$class_kit_1_1_dm_1_1_model_point_base.html" title="This concrete class provide common infrastructure for a Model Point." alt="" coords="919,591,1103,616"/>
+<area shape="poly" id="edge18_Node000018_Node000019" title=" " alt="" coords="1013,630,1013,678,1008,678,1008,630"/>
+<area shape="rect" id="Node000020" href="$class_kit_1_1_dm_1_1_i_model_point.html" title="This mostly abstract class defines the interface for a Model Point." alt="" coords="1121,495,1277,521"/>
+<area shape="poly" id="edge19_Node000019_Node000020" title=" " alt="" coords="1175,531,1116,569,1054,593,1052,588,1113,564,1172,527"/>
+<area shape="rect" id="Node000039" href="$class_kit_1_1_dm_1_1_observer_base.html" title="This mostly concrete class defines the Observer interface &#45; for change notifications &#45; to a Model Poi..." alt="" coords="1333,591,1504,616"/>
+<area shape="poly" id="edge49_Node000039_Node000020" title=" " alt="" coords="1238,524,1332,564,1391,588,1389,593,1330,569,1236,529"/>
+<area shape="rect" id="Node000021" href="$class_kit_1_1_container_1_1_keyed_item.html" title="This abstract class represents a item that can be used with containers that have a concept of Key&#45;Val..." alt="" coords="1104,336,1293,361"/>
+<area shape="poly" id="edge20_Node000020_Node000021" title=" " alt="" coords="1201,375,1201,495,1196,495,1196,375"/>
+<area shape="rect" id="Node000022" href="$class_kit_1_1_container_1_1_extended_list_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers." alt="" coords="1106,155,1286,195"/>
+<area shape="poly" id="edge21_Node000021_Node000022" title=" " alt="" coords="1199,209,1201,336,1196,336,1194,209"/>
+<area shape="poly" id="edge25_Node000022_Node000022" title=" " alt="" coords="1301,167,1313,175,1304,182,1287,185,1286,179,1302,177,1307,175,1299,171"/>
+<area shape="rect" id="Node000029" href="$class_kit_1_1_container_1_1_d_list_base.html" title="This protected base class implements a NON&#45;TYPE&#45;SAFE a doubly linked list which maintains the orderin..." alt="" coords="977,279,1161,305"/>
+<area shape="poly" id="edge31_Node000029_Node000022" title=" " alt="" coords="1131,203,1107,221,1086,251,1075,280,1070,278,1082,248,1103,217,1127,199"/>
+<area shape="rect" id="Node000040" href="$class_kit_1_1_dm_1_1_i_observer.html" title="This abstract class defines the Observer interface &#45; for change notifications &#45; to a Model Points dat..." alt="" coords="1301,495,1443,521"/>
+<area shape="poly" id="edge48_Node000040_Node000022" title=" " alt="" coords="1222,204,1264,263,1308,335,1347,425,1371,494,1366,496,1342,427,1303,337,1260,266,1217,207"/>
+<area shape="rect" id="Node000023" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="1110,80,1282,105"/>
+<area shape="poly" id="edge22_Node000022_Node000023" title=" " alt="" coords="1199,119,1199,155,1193,155,1193,119"/>
+<area shape="poly" id="edge24_Node000023_Node000023" title=" " alt="" coords="1297,85,1309,93,1300,99,1283,102,1282,97,1298,94,1303,93,1295,90"/>
+<area shape="rect" id="Node000024" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="1121,5,1271,31"/>
+<area shape="poly" id="edge23_Node000023_Node000024" title=" " alt="" coords="1199,45,1199,80,1193,80,1193,45"/>
+<area shape="rect" id="Node000025" href="$class_kit_1_1_container_1_1_key_literal_string.html" title="This class provides a &#39;Key&#39; wrapper for a C string literal." alt="" coords="1383,385,1567,425"/>
+<area shape="poly" id="edge26_Node000020_Node000025" title=" " alt="" coords="1411,433,1231,498,1229,493,1409,428"/>
+<area shape="rect" id="Node000026" href="$class_kit_1_1_container_1_1_key_string_buffer.html" title="This class provides a &#39;Key&#39; wrapper for a array of Character of length N, i.e." alt="" coords="1392,272,1573,312"/>
+<area shape="poly" id="edge27_Node000025_Node000026" title=" " alt="" coords="1483,326,1479,385,1473,385,1478,326"/>
+<area shape="rect" id="Node000027" href="$class_kit_1_1_container_1_1_key.html" title="This abstract class defines the interface that a contained object must support if it has comparable k..." alt="" coords="1413,162,1555,187"/>
+<area shape="poly" id="edge28_Node000026_Node000027" title=" " alt="" coords="1486,201,1486,272,1480,272,1481,201"/>
+<area shape="rect" id="Node000028" href="$class_kit_1_1_container_1_1_d_list.html" title=" " alt="" coords="925,488,1097,528"/>
+<area shape="poly" id="edge29_Node000019_Node000028" title=" " alt="" coords="1013,542,1013,590,1008,590,1008,542"/>
+<area shape="poly" id="edge30_Node000028_Node000029" title=" " alt="" coords="1076,318,1078,386,1073,427,1060,465,1040,489,1036,486,1055,463,1067,425,1073,386,1070,318"/>
+<area shape="rect" id="Node000030" href="$class_kit_1_1_container_1_1_d_list.html" title="This template class implements a double linked list which maintains the ordering imposed on it by the..." alt="" coords="856,385,1008,425"/>
+<area shape="poly" id="edge33_Node000030_Node000029" title=" " alt="" coords="1046,315,957,387,954,383,1043,311"/>
+<area shape="poly" id="edge32_Node000028_Node000030" title=" " alt="" coords="907,437,902,451,905,463,917,475,932,486,929,490,913,480,900,465,897,450,902,436"/>
+<area shape="rect" id="Node000031" href="$class_kit_1_1_dm_1_1_i_model_database.html" title="This class defines the basic operations that can be performed on a Model Base." alt="" coords="715,495,901,521"/>
+<area shape="poly" id="edge34_Node000019_Node000031" title=" " alt="" coords="830,528,852,547,879,564,912,578,946,588,945,593,910,583,876,569,849,552,827,532"/>
+<area shape="rect" id="Node000032" href="$class_kit_1_1_dm_1_1_mp_1_1_unsigned_integer.html" title="This template class provides the to/from JSON methods for Unsigned Integers." alt="" coords="859,1099,1074,1139"/>
+<area shape="poly" id="edge35_Node000014_Node000032" title=" " alt="" coords="962,1152,964,1165,969,1176,987,1188,1018,1199,1016,1204,985,1193,965,1179,959,1166,957,1153"/>
+<area shape="poly" id="edge36_Node000032_Node000033" title=" " alt="" coords="975,1025,971,1099,965,1098,970,1024"/>
+<area shape="rect" id="Node000034" href="$class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics." alt="" coords="665,1298,812,1323"/>
+<area shape="poly" id="edge38_Node000010_Node000034" title=" " alt="" coords="738,1337,737,1395,743,1427,756,1457,773,1481,795,1502,843,1534,840,1538,791,1506,769,1485,751,1460,738,1429,732,1396,732,1337"/>
+<area shape="poly" id="edge43_Node000035_Node000034" title=" " alt="" coords="765,1330,849,1392,890,1416,888,1421,847,1397,762,1334"/>
+<area shape="poly" id="edge39_Node000010_Node000035" title=" " alt="" coords="908,1472,904,1483,900,1510,900,1536,895,1536,895,1510,899,1482,903,1470"/>
+<area shape="poly" id="edge40_Node000035_Node000036" title=" " alt="" coords="924,1345,923,1355,922,1388,925,1418,920,1419,917,1388,917,1354,919,1344"/>
+<area shape="poly" id="edge44_Node000001_Node000037" title=" " alt="" coords="1270,1465,1206,1494,1176,1514,1150,1538,1137,1560,1134,1582,1131,1605,1120,1631,1094,1655,1090,1651,1115,1628,1126,1604,1129,1581,1132,1558,1146,1534,1173,1510,1203,1489,1268,1461"/>
+<area shape="rect" id="Node000038" href="$class_kit_1_1_dm_1_1_observer.html" title="This template class defines a type safe Observer." alt="" coords="1457,743,1645,768"/>
+<area shape="poly" id="edge45_Node000037_Node000038" title=" " alt="" coords="1553,782,1553,856,1553,1312,1551,1333,1543,1351,1516,1382,1480,1405,1440,1421,1438,1416,1478,1400,1513,1378,1538,1349,1545,1331,1548,1312,1548,856,1548,782"/>
+<area shape="poly" id="edge46_Node000038_Node000039" title=" " alt="" coords="1457,620,1494,644,1527,677,1544,711,1552,742,1546,743,1539,713,1523,680,1491,648,1454,625"/>
+<area shape="rect" id="Node000043" href="$class_kit_1_1_dm_1_1_observer.html" title="This template class defines a type safe Observer." alt="" coords="1325,686,1513,711"/>
+<area shape="poly" id="edge54_Node000043_Node000039" title=" " alt="" coords="1421,630,1421,686,1416,686,1416,630"/>
+<area shape="poly" id="edge47_Node000039_Node000040" title=" " alt="" coords="1386,532,1415,589,1411,592,1381,534"/>
+<area shape="rect" id="Node000042" href="$class_kit_1_1_dm_1_1_observer_callback.html" title="This template class implements a Observer that uses a callback function (or similar callable) for cha..." alt="" coords="1253,792,1448,832"/>
+<area shape="poly" id="edge55_Node000042_Node000040" title=" " alt="" coords="1356,533,1338,560,1324,592,1313,626,1309,654,1310,682,1316,718,1328,758,1343,791,1338,793,1323,759,1311,719,1305,683,1304,654,1308,625,1319,590,1334,558,1352,530"/>
+<area shape="rect" id="Node000041" href="$class_kit_1_1_event_queue_1_1_i_change_notification.html" title="This abstract class defines the interface to manage Data Model Change notification events that are pu..." alt="" coords="1467,488,1655,528"/>
+<area shape="poly" id="edge50_Node000039_Node000041" title=" " alt="" coords="1522,538,1438,593,1435,588,1520,533"/>
+<area shape="poly" id="edge52_Node000037_Node000042" title=" " alt="" coords="1353,846,1353,900,1353,1312,1356,1370,1361,1418,1356,1419,1351,1370,1348,1312,1348,900,1348,846"/>
+<area shape="poly" id="edge53_Node000042_Node000043" title=" " alt="" coords="1407,725,1365,793,1360,790,1402,722"/>
+<area shape="rect" id="Node000044" href="$namespace_examples_1_1_container_1_1_ring_buffer.html#struct_examples_1_1_container_1_1_ring_buffer_1_1_flash_code___t" title="This struct defines a Flash code." alt="" coords="1311,1543,1500,1583"/>
+<area shape="poly" id="edge56_Node000001_Node000044" title=" " alt="" coords="1333,1590,1121,1656,1120,1651,1331,1585"/>
+</map>

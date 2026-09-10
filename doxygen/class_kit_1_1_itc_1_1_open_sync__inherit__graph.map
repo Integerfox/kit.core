@@ -1,26 +1,31 @@
 <map id="Kit::Itc::OpenSync" name="Kit::Itc::OpenSync">
-<area shape="rect" id="Node000001" title="This partially concrete class implements the synchronous ITC open call for the OpenApi." alt="" coords="216,183,353,209"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close..." alt="" coords="401,183,575,209"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="367,193,401,193,401,199,367,199"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_itc_1_1_i_open_request.html" title="This abstract class define message types and payloads for a set of ITC services." alt="" coords="5,158,168,183"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,180,216,185,215,190,181,185"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_itc_1_1_i_open.html" title="This abstract class defines an open interface." alt="" coords="31,207,142,233"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,209,216,202,216,207,156,214"/>
-<area shape="rect" id="Node000005" href="$class_container_1_1_ring_buffer_1_1_led_server.html" title="This concrete class monitors the a Queue of LED Flash codes and the consumes&#45;and&#45;executes the Flash c..." alt="" coords="641,5,802,45"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="504,171,553,113,585,82,621,55,645,43,647,48,624,60,589,86,556,117,508,174"/>
-<area shape="rect" id="Node000006" href="$class_container_1_1_ring_buffer_1_1_producer.html" title="This concrete class is responsible for generating flash codes (i.e." alt="" coords="641,69,802,109"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="520,174,567,146,622,119,652,107,654,112,624,124,570,151,522,178"/>
-<area shape="rect" id="Node000007" href="$class_dm_1_1_transaction_1_1_client.html" title="This concrete class is a &#39;client&#39; to request/trigger the &#39;server&#39; to generate a random number." alt="" coords="635,134,808,159"/>
-<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="588,181,689,157,690,162,589,186"/>
-<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="532,177,634,154,635,159,533,182"/>
-<area shape="rect" id="Node000008" href="$class_dm_1_1_transaction_1_1_server.html" title="This concrete class is a &#39;server&#39; that responds to requests from a &#39;client&#39; to generate." alt="" coords="633,183,810,209"/>
-<area shape="poly" id="edge8_Node000004_Node000008" title=" " alt="" coords="589,193,632,193,632,199,589,199"/>
-<area shape="rect" id="Node000009" href="$class_itc_1_1_synchronous_1_1_server.html" title="This concrete class is a &#39;server&#39; that flashes the LED." alt="" coords="632,233,811,258"/>
-<area shape="poly" id="edge9_Node000004_Node000009" title=" " alt="" coords="563,209,661,230,660,235,561,214"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_logging_1_1_framework_1_1_log_sink.html" title="This class is responsible for consuming the application&#39;s Log buffer and &#39;dispatching&#39; log entries." alt="" coords="631,283,811,323"/>
-<area shape="poly" id="edge10_Node000004_Node000010" title=" " alt="" coords="522,214,570,241,624,268,654,280,652,285,622,273,567,246,520,218"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server.html" title="This concrete template class implements the ITC messaging and Model Point monitoring needed to provid..." alt="" coords="623,347,820,387"/>
-<area shape="poly" id="edge11_Node000004_Node000011" title=" " alt="" coords="508,218,556,275,589,306,624,332,647,344,645,349,621,337,585,310,553,279,504,221"/>
-<area shape="rect" id="Node000012" href="$class_kit_1_1_persistence_1_1_record_1_1_server.html" title="This concrete class is responsible for starting and stopping a list of IRecords objects,..." alt="" coords="633,411,809,451"/>
-<area shape="poly" id="edge12_Node000004_Node000012" title=" " alt="" coords="502,221,520,260,547,307,582,355,624,397,643,408,641,413,621,401,578,359,542,310,515,262,497,223"/>
+<area shape="rect" id="Node000001" title="This partially concrete class implements the synchronous ITC open call for the OpenApi." alt="" coords="216,333,353,358"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_itc_1_1_open_close_sync.html" title="This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close..." alt="" coords="401,333,575,358"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="367,343,401,343,401,348,367,348"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_itc_1_1_i_open_request.html" title="This abstract class define message types and payloads for a set of ITC services." alt="" coords="5,307,168,333"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,329,216,334,215,339,181,335"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_itc_1_1_i_open.html" title="This abstract class defines an open interface." alt="" coords="31,357,142,382"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="156,358,216,351,216,356,156,364"/>
+<area shape="rect" id="Node000005" href="$class_examples_1_1_container_1_1_ring_buffer_1_1_led_server.html" title="This concrete class monitors the a Queue of LED Flash codes and the consumes&#45;and&#45;executes the Flash c..." alt="" coords="642,5,813,45"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="491,318,505,264,529,193,567,119,592,85,621,55,640,42,643,47,624,59,596,89,572,122,534,195,510,265,497,320"/>
+<area shape="rect" id="Node000006" href="$class_examples_1_1_container_1_1_ring_buffer_1_1_producer.html" title="This concrete class is responsible for generating flash codes (i.e." alt="" coords="646,69,809,109"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="495,319,512,276,538,222,575,167,597,141,621,119,644,105,647,110,624,123,600,145,579,170,543,225,517,278,500,321"/>
+<area shape="rect" id="Node000007" href="$class_examples_1_1_dm_1_1_transaction_1_1_client.html" title="This concrete class is a &#39;client&#39; to request/trigger the &#39;server&#39; to generate a random number." alt="" coords="628,133,827,173"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="501,319,549,252,582,215,621,183,644,171,646,176,624,188,586,219,553,255,506,322"/>
+<area shape="rect" id="Node000008" href="$class_examples_1_1_dm_1_1_transaction_1_1_server.html" title="This concrete class is a &#39;server&#39; that responds to requests from a &#39;client&#39; to generate." alt="" coords="628,197,827,237"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="513,322,561,284,621,247,650,235,652,240,624,252,564,288,516,326"/>
+<area shape="rect" id="Node000009" href="$class_examples_1_1_itc_1_1_async_cancel_1_1_client.html" title="This concrete class is a asynchronous ITC client that cycles through sending different flash duty cyc..." alt="" coords="627,261,828,301"/>
+<area shape="poly" id="edge8_Node000004_Node000009" title=" " alt="" coords="549,326,651,299,652,304,551,332"/>
+<area shape="rect" id="Node000010" href="$class_examples_1_1_itc_1_1_async_cancel_1_1_server.html" title="This concrete class is a &#39;server&#39; that produces the LED flash patterns." alt="" coords="627,325,828,365"/>
+<area shape="poly" id="edge9_Node000004_Node000010" title=" " alt="" coords="588,343,627,343,627,348,588,348"/>
+<area shape="rect" id="Node000011" href="$class_examples_1_1_itc_1_1_asynchronous_1_1_client.html" title="This concrete class is a asynchronous ITC client that sets the server&#39;s widgets LED flash rate." alt="" coords="623,389,832,429"/>
+<area shape="poly" id="edge10_Node000004_Node000011" title=" " alt="" coords="551,359,652,387,651,392,549,364"/>
+<area shape="rect" id="Node000012" href="$class_examples_1_1_itc_1_1_synchronous_1_1_server.html" title="This concrete class is a &#39;server&#39; that flashes the LED." alt="" coords="627,453,828,493"/>
+<area shape="poly" id="edge11_Node000004_Node000012" title=" " alt="" coords="516,365,564,402,624,439,652,451,650,456,621,444,561,407,513,369"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_logging_1_1_framework_1_1_log_sink.html" title="This class is responsible for consuming the application&#39;s Log buffer and &#39;dispatching&#39; log entries." alt="" coords="637,517,817,557"/>
+<area shape="poly" id="edge12_Node000004_Node000013" title=" " alt="" coords="506,368,553,436,586,472,624,503,646,515,644,520,621,508,582,476,549,439,501,371"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server.html" title="This concrete template class implements the ITC messaging and Model Point monitoring needed to provid..." alt="" coords="629,581,826,621"/>
+<area shape="poly" id="edge13_Node000004_Node000014" title=" " alt="" coords="500,370,517,413,543,466,579,521,600,545,624,567,643,579,640,583,621,571,597,549,575,524,538,469,512,415,495,372"/>
+<area shape="rect" id="Node000015" href="$class_kit_1_1_persistence_1_1_record_1_1_server.html" title="This concrete class is responsible for starting and stopping a list of IRecords objects,..." alt="" coords="639,645,815,685"/>
+<area shape="poly" id="edge14_Node000004_Node000015" title=" " alt="" coords="497,371,510,426,534,496,572,569,596,602,624,631,642,643,638,647,621,635,592,605,567,571,529,498,505,427,491,372"/>
 </map>

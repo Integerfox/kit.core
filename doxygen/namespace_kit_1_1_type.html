@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 370-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -87,10 +87,6 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa86e7b3ecf0a40c0bc6bce612c33187d" id="r_aa86e7b3ecf0a40c0bc6bce612c33187d"><td class="memTemplParams" colspan="2">template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </td></tr>
-<tr class="memitem:aa86e7b3ecf0a40c0bc6bce612c33187d"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aa86e7b3ecf0a40c0bc6bce612c33187d">betterEnumToString</a> (NUMERIC_TYPE numericValue, const char *unknownText) noexcept</td></tr>
-<tr class="memdesc:aa86e7b3ecf0a40c0bc6bce612c33187d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handy method to convert numeric value to its BETTER ENUM string.The caller provides the 'unknown' text if numericValue does not map to a valid ENUM symbol.  <br /></td></tr>
-<tr class="separator:aa86e7b3ecf0a40c0bc6bce612c33187d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27f84d41bbaab9d4a1c1bb4b108ae3e0" id="r_a27f84d41bbaab9d4a1c1bb4b108ae3e0"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27f84d41bbaab9d4a1c1bb4b108ae3e0">endianBswap16</a> (uint16_t x)</td></tr>
 <tr class="memdesc:a27f84d41bbaab9d4a1c1bb4b108ae3e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method. Do not call directly - always use the macros above.  <br /></td></tr>
 <tr class="separator:a27f84d41bbaab9d4a1c1bb4b108ae3e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,6 +102,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a01ddd6bda36beb88626fd13d1d8e4661" id="r_a01ddd6bda36beb88626fd13d1d8e4661"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01ddd6bda36beb88626fd13d1d8e4661">endianBswapF64</a> (double x)</td></tr>
 <tr class="memdesc:a01ddd6bda36beb88626fd13d1d8e4661"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method. Do not call directly - always use the macros above.  <br /></td></tr>
 <tr class="separator:a01ddd6bda36beb88626fd13d1d8e4661"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad859d267437ef1fb753498641579447d" id="r_ad859d267437ef1fb753498641579447d"><td class="memTemplParams" colspan="2">template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </td></tr>
+<tr class="memitem:ad859d267437ef1fb753498641579447d"><td class="memTemplItemLeft" align="right" valign="top">ENUM&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad859d267437ef1fb753498641579447d">numToBE</a> (NUMERIC_TYPE numericValue, ENUM unknownValue) noexcept</td></tr>
+<tr class="memdesc:ad859d267437ef1fb753498641579447d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Similar to <a class="el" href="#ab8a91f2eeb17fc344b40231ce96e5abd" title="Handy method to convert &#39;numericValue&#39; to a BETTER ENUM string.">numToBEString()</a>, except returns a BETTER_ENUM value.  <br /></td></tr>
+<tr class="separator:ad859d267437ef1fb753498641579447d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8a91f2eeb17fc344b40231ce96e5abd" id="r_ab8a91f2eeb17fc344b40231ce96e5abd"><td class="memTemplParams" colspan="2">template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </td></tr>
+<tr class="memitem:ab8a91f2eeb17fc344b40231ce96e5abd"><td class="memTemplItemLeft" align="right" valign="top">const char *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab8a91f2eeb17fc344b40231ce96e5abd">numToBEString</a> (NUMERIC_TYPE numericValue, const char *unknownText) noexcept</td></tr>
+<tr class="memdesc:ab8a91f2eeb17fc344b40231ce96e5abd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handy method to convert 'numericValue' to a BETTER ENUM string.  <br /></td></tr>
+<tr class="separator:ab8a91f2eeb17fc344b40231ce96e5abd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="namespace_kit_1_1_type.html" title="The Type namespace provides various types that are not unique to a single namespace.">Type</a> namespace provides various types that are not unique to a single namespace. </p>
@@ -254,39 +258,6 @@ Middle 16 bits of the time. </td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="aa86e7b3ecf0a40c0bc6bce612c33187d" name="aa86e7b3ecf0a40c0bc6bce612c33187d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa86e7b3ecf0a40c0bc6bce612c33187d">&#9670;&#160;</a></span>betterEnumToString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char * Kit::Type::betterEnumToString </td>
-          <td>(</td>
-          <td class="paramtype">NUMERIC_TYPE</td>          <td class="paramname"><span class="paramname"><em>numericValue</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>unknownText</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Handy method to convert numeric value to its BETTER ENUM string.The caller provides the 'unknown' text if numericValue does not map to a valid ENUM symbol. </p>
-
-</div>
-</div>
 <a id="a27f84d41bbaab9d4a1c1bb4b108ae3e0" name="a27f84d41bbaab9d4a1c1bb4b108ae3e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a27f84d41bbaab9d4a1c1bb4b108ae3e0">&#9670;&#160;</a></span>endianBswap16()</h2>
 
@@ -422,10 +393,78 @@ template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </div>
 
 </div>
 </div>
+<a id="ad859d267437ef1fb753498641579447d" name="ad859d267437ef1fb753498641579447d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad859d267437ef1fb753498641579447d">&#9670;&#160;</a></span>numToBE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ENUM Kit::Type::numToBE </td>
+          <td>(</td>
+          <td class="paramtype">NUMERIC_TYPE</td>          <td class="paramname"><span class="paramname"><em>numericValue</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ENUM</td>          <td class="paramname"><span class="paramname"><em>unknownValue</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Similar to <a class="el" href="#ab8a91f2eeb17fc344b40231ce96e5abd" title="Handy method to convert &#39;numericValue&#39; to a BETTER ENUM string.">numToBEString()</a>, except returns a BETTER_ENUM value. </p>
+<p>The caller provides the 'unknown' ENUM value if 'numericValue' does not map to a valid ENUM symbol. </p>
+
+</div>
+</div>
+<a id="ab8a91f2eeb17fc344b40231ce96e5abd" name="ab8a91f2eeb17fc344b40231ce96e5abd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8a91f2eeb17fc344b40231ce96e5abd">&#9670;&#160;</a></span>numToBEString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ENUM , typename NUMERIC_TYPE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * Kit::Type::numToBEString </td>
+          <td>(</td>
+          <td class="paramtype">NUMERIC_TYPE</td>          <td class="paramname"><span class="paramname"><em>numericValue</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>unknownText</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handy method to convert 'numericValue' to a BETTER ENUM string. </p>
+<p>The caller provides the 'unknown' text if 'numericValue' does not map to a valid ENUM symbol. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Sep 10 2026 13:41:02 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

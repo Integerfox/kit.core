@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 370-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -144,7 +144,7 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_i_observer_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a></div><div class="ttdoc">This abstract class defines the Observer interface - for change notifications - to a Model Points dat...</div><div class="ttdef"><b>Definition</b> IObserver.h:35</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_uint32_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a></div><div class="ttdoc">This class provides a concrete implementation for a Point who's data is a uint32_t.</div><div class="ttdef"><b>Definition</b> Uint32.h:50</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_observer_callback_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_observer_callback.html">Kit::Dm::ObserverCallback</a></div><div class="ttdoc">This template class implements a Observer that uses a callback function (or similar callable) for cha...</div><div class="ttdef"><b>Definition</b> ObserverCallback.h:44</div></div>
-<div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_queue_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a></div><div class="ttdoc">This abstract class represents an Event Queue where events can be delivered to.</div><div class="ttdef"><b>Definition</b> IQueue.h:52</div></div>
+<div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_queue_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a></div><div class="ttdoc">This abstract class represents an Event Queue where events can be delivered to.</div><div class="ttdef"><b>Definition</b> IQueue.h:51</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_open_close_sync_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_open_close_sync.html">Kit::Itc::OpenCloseSync</a></div><div class="ttdoc">This partially concrete class extends the ITC OpenSync class and implements the synchronous ITC close...</div><div class="ttdef"><b>Definition</b> OpenCloseSync.h:30</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_request_message_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_request_message.html">Kit::Itc::RequestMessage</a></div><div class="ttdoc">This concrete template class represents a service request message to a particular server.</div><div class="ttdef"><b>Definition</b> RequestMessage.h:33</div></div>
 <div class="ttc" id="aclass_kit_1_1_logging_1_1_framework_1_1_log_sink_html"><div class="ttname"><a href="class_kit_1_1_logging_1_1_framework_1_1_log_sink.html">Kit::Logging::Framework::LogSink</a></div><div class="ttdoc">This class is responsible for consuming the application's Log buffer and 'dispatching' log entries.</div><div class="ttdef"><b>Definition</b> LogSink.h:47</div></div>
@@ -156,12 +156,12 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_logging_1_1_framework_1_1_log_sink_html_aeb9026f863759d569f289e0bbf3d371d"><div class="ttname"><a href="class_kit_1_1_logging_1_1_framework_1_1_log_sink.html#aeb9026f863759d569f289e0bbf3d371d">Kit::Logging::Framework::LogSink::elementCountChanged</a></div><div class="ttdeci">void elementCountChanged(Kit::Dm::Mp::Uint32 &amp;mp, Kit::Dm::IObserver &amp;clientObserver) noexcept</div><div class="ttdoc">Element Count Change notification.</div></div>
 <div class="ttc" id="aclass_kit_1_1_logging_1_1_framework_1_1_log_sink_html_af83c11d4ebea640fe7c94bc2c83e0c31"><div class="ttname"><a href="class_kit_1_1_logging_1_1_framework_1_1_log_sink.html#af83c11d4ebea640fe7c94bc2c83e0c31">Kit::Logging::Framework::LogSink::dispatchLogEntry</a></div><div class="ttdeci">virtual void dispatchLogEntry(Kit::Logging::Framework::EntryData_T &amp;src) noexcept</div><div class="ttdoc">Platform specific method to save the entry.</div><div class="ttdef"><b>Definition</b> LogSink.h:66</div></div>
 <div class="ttc" id="aclass_kit_1_1_logging_1_1_framework_1_1_log_sink_html_af9412829e3a0c8e25f8f580d3673c552"><div class="ttname"><a href="class_kit_1_1_logging_1_1_framework_1_1_log_sink.html#af9412829e3a0c8e25f8f580d3673c552">Kit::Logging::Framework::LogSink::m_obElementCount</a></div><div class="ttdeci">Kit::Dm::ObserverCallback&lt; Kit::Dm::Mp::Uint32 &gt; m_obElementCount</div><div class="ttdoc">Observer for change notification (to the RingBuffer)</div><div class="ttdef"><b>Definition</b> LogSink.h:73</div></div>
-<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">Forward reference to the Event Queue server --&gt;used to avoid circular dependencies.</div></div>
+<div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">The Kit namespace is the root name space for the KIT C++ class library that is specifically target fo...</div></div>
 <div class="ttc" id="astruct_kit_1_1_logging_1_1_framework_1_1_entry_data___t_html"><div class="ttname"><a href="struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html">Kit::Logging::Framework::EntryData_T</a></div><div class="ttdoc">Defines the content of the Log entry.</div><div class="ttdef"><b>Definition</b> EntryData.h:62</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Sep 10 2026 13:41:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

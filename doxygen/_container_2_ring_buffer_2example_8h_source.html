@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kit: /home/runner/work/kit.core/kit.core/projects/examples/Container/RingBuffer/example.h Source File</title>
+<title>Kit: /home/runner/work/kit.core/kit.core/projects/Examples/Container/RingBuffer/example.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 361-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 370-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -41,15 +41,15 @@ $(function() {
 <div id="main-nav"></div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_a9ec1ef424966475f993eb98877e3088.html">projects</a></li><li class="navelem"><a class="el" href="dir_7da7e98eb4cd4d0d448ad5e0f2276ef8.html">examples</a></li><li class="navelem"><a class="el" href="dir_825fd920fa347848932fe4efee74a05e.html">Container</a></li><li class="navelem"><a class="el" href="dir_acc726fad283d29f35fef9e2af2c1a43.html">RingBuffer</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_a9ec1ef424966475f993eb98877e3088.html">projects</a></li><li class="navelem"><a class="el" href="dir_ecf35d7a191d07aa08583ae2cf4a7fcd.html">Examples</a></li><li class="navelem"><a class="el" href="dir_fac87a406e8c59bf0ae9c90113eabf5d.html">Container</a></li><li class="navelem"><a class="el" href="dir_aba1b298434c5c522239ebbc08c4754e.html">RingBuffer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">example.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="_container_2_ring_buffer_2example_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef CONTAINER_RINGBUFFER_EXAMPLE_H_</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define CONTAINER_RINGBUFFER_EXAMPLE_H_</span></div>
+<a href="_container_2_ring_buffer_2example_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef EXAMPLES_CONTAINER_RINGBUFFER_EXAMPLE_H_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define EXAMPLES_CONTAINER_RINGBUFFER_EXAMPLE_H_</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">/*------------------------------------------------------------------------------</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright Integer Fox Authors</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *</span></div>
@@ -61,22 +61,27 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/** @file */</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">///</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span><span class="keyword">namespace </span>Container {<span class="comment"></span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_examples.html">Examples</a> {<span class="comment"></span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">///</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span><span class="keyword">namespace </span>RingBuffer {</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/** Entry point for the Container RingBuffer example. Assumes that the KIT library</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">    has been initialized and the OSAL&#39;s scheduler is &#39;running&#39;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="_container_2_ring_buffer_2example_8h.html#a82bb9aa7d98b67d1b7cb942b4ed37550">   21</a></span><span class="keywordtype">int</span> runExample() noexcept;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}  <span class="comment">// end namespace(s)</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span><span class="keyword">namespace </span>Container {<span class="comment"></span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">///</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespace_examples_1_1_container_1_1_ring_buffer.html">   18</a></span><span class="comment"></span><span class="keyword">namespace </span>RingBuffer {</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">/** Entry point for the Container RingBuffer example. Assumes that the KIT library</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">    has been initialized and the OSAL&#39;s scheduler is &#39;running&#39;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="namespace_examples_1_1_container_1_1_ring_buffer.html#a1255d69e01903c98d4273bf97adf4f75">   23</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="namespace_examples_1_1_container_1_1_ring_buffer.html#a1255d69e01903c98d4273bf97adf4f75">runExample</a>() noexcept;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}  <span class="comment">// end namespace(s)</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="ttc" id="anamespace_examples_1_1_container_1_1_ring_buffer_html_a1255d69e01903c98d4273bf97adf4f75"><div class="ttname"><a href="namespace_examples_1_1_container_1_1_ring_buffer.html#a1255d69e01903c98d4273bf97adf4f75">Examples::Container::RingBuffer::runExample</a></div><div class="ttdeci">int runExample() noexcept</div><div class="ttdoc">Entry point for the Container RingBuffer example.</div></div>
+<div class="ttc" id="anamespace_examples_html"><div class="ttname"><a href="namespace_examples.html">Examples</a></div><div class="ttdoc">Root directory for the example applications.</div><div class="ttdef"><b>Definition</b> example.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Sep 5 2026 20:45:49 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Sep 10 2026 13:41:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
