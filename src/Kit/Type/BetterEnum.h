@@ -14,16 +14,16 @@
 #define BETTER_ENUMS_MACRO_FILE <Kit/Type/BetterEnum_macros_128_32_.h>
 #endif
 
-/** Reduces the memory footprint (both RAM and FLASH) in exchange for slower
+/** Default to: Reduced memory footprint (both RAM and FLASH) in exchange for slower
     compile times.  Note: There is SIGNIFICANT saving for an application that
     makes extensive use of BETTER_ENUMS (e.g. one application there was ~5K RAM
     and ~127K FLASH savings)
  */
-#ifdef USE_KIT_TYPE_BETTERENUM_MIN_FOOTPRINT
+#ifdef USE_KIT_TYPE_BETTERENUM_DISABLE_MIN_FOOTPRINT
 #ifndef BETTER_ENUMS_CONSTEXPR_TO_STRING
 #define BETTER_ENUMS_CONSTEXPR_TO_STRING
 #endif
-#endif  // end USE_KIT_TYPE_BETTERENUM_MIN_FOOTPRINT
+#endif  // end USE_KIT_TYPE_BETTERENUM_DISABLE_MIN_FOOTPRINT
 
 /// Disable the default constructor (when enable it simplifies usage of class members and local variables)
 #ifndef USE_KIT_TYPE_BETTERENUM_DISABLE_DEFAULT_CONSTRUCTOR
@@ -31,7 +31,7 @@
 public:                                          \
     Enum() = default;
 
-#endif  // end USE_KIT_TYPE_BETTERENUM_ENABLE_DEFAULT_CONSTRUCTOR
+#endif  // end USE_KIT_TYPE_BETTERENUM_DISABLE_DEFAULT_CONSTRUCTOR
 
 //
 // Handy methods when using BETTER ENUMs.
@@ -41,11 +41,12 @@ public:                                          \
 namespace Kit {
 namespace Type {
 
-/** Handy method to convert numeric value to its BETTER ENUM string.The caller provides the 
-    'unknown' text if numericValue does not map to a valid ENUM symbol.
+/** Handy method to convert 'numericValue' to a BETTER ENUM string. The caller
+    provides the 'unknown' text if 'numericValue' does not map to a valid ENUM
+    symbol.
  */
 template <typename ENUM, typename NUMERIC_TYPE>
-const char* betterEnumToString( NUMERIC_TYPE numericValue, const char* unknownText ) noexcept
+const char* numToBEString( NUMERIC_TYPE numericValue, const char* unknownText ) noexcept
 {
     auto maybe = ENUM::_from_integral_nothrow( numericValue );
     if ( !maybe )
@@ -55,8 +56,23 @@ const char* betterEnumToString( NUMERIC_TYPE numericValue, const char* unknownTe
     return maybe->_to_string();
 }
 
+/** Similar to numToBEString(), except returns a BETTER_ENUM value.
+    The caller provides the 'unknown' ENUM value if 'numericValue' does not map
+    to a valid ENUM symbol.
+ */
+template <typename ENUM, typename NUMERIC_TYPE>
+ENUM numToBE( NUMERIC_TYPE numericValue, ENUM unknownValue ) noexcept
+{
+    auto maybe = ENUM::_from_integral_nothrow( numericValue );
+    if ( !maybe )
+    {
+        return unknownValue;
+    }
+    return *maybe;
 }
+
 }  // end namespaces
+}
 
 #ifndef DOXYGEN_WILL_SKIP_THIS
 /// END KIT EDITS -------------------------------------------------------------

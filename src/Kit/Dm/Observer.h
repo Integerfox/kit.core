@@ -15,9 +15,9 @@
 #include "Kit/Dm/IModelPoint.h"
 #include <stdint.h>
 
-// Forward reference to break dependency on the Event Queue namespace
 namespace Kit {
 namespace EventQueue {
+/// Forward reference to break dependency on the Event Queue namespace
 class IChangeNotification;
 }
 }

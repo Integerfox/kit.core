@@ -72,7 +72,7 @@ public:
 
     const char* classificationIdToString( uint8_t classificationId ) noexcept override
     {
-        return Kit::Type::betterEnumToString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
+        return Kit::Type::numToBEString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
             classificationId,
             NULL_CLASSIFICATION_ID_TEXT );
     }

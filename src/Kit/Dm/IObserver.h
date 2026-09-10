@@ -13,9 +13,9 @@
 #include "Kit/Container/ListItem.h"
 #include <stdint.h>
 
-/// Forward reference to the Event Queue server -->used to avoid circular dependencies
 namespace Kit {
 namespace EventQueue {
+/// Forward reference to the Event Queue server -->used to avoid circular dependencies
 class IChangeNotification;
 }
 }
@@ -112,6 +112,6 @@ public:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

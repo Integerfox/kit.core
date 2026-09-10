@@ -11,9 +11,9 @@
 /** @file */
 
 
-/// Forward reference to break dependency on the Itc namespace
 namespace Kit {
 namespace Itc {
+/// Forward reference to break dependency on the Itc namespace
 class IMessage;
 }
 }

@@ -43,7 +43,7 @@ bool KitOnly::isClassificationIdValid( uint8_t classificationId ) noexcept
 
 const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexcept
 {
-    return Kit::Type::betterEnumToString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
+    return Kit::Type::numToBEString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
         classificationId,
         NULL_CLASSIFICATION_ID_TEXT ); 
 }
