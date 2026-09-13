@@ -33,7 +33,7 @@ bool Foo::isClassificationIdValid( uint8_t classificationId ) noexcept
 
 const char* Foo::classificationIdToString( uint8_t classificationId ) noexcept
 {
-    return Kit::Type::betterEnumToString<::Foo::Logging::Pkg::ClassificationId, uint8_t>(
+    return Kit::Type::numToBEString<::Foo::Logging::Pkg::ClassificationId, uint8_t>(
         classificationId,
         NULL_CLASSIFICATION_ID_TEXT );
 }

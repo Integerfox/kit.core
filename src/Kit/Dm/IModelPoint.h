@@ -314,12 +314,12 @@ protected:
         attached the observer will receive a change notification (aka a
         callback) every time the Model Point's data/state changes. Once, a
         observer is attached - it will stay attached to the application
-        calls detach().
+        calls detachObserver().
 
         There is no limit to the number of observers that can attach to
         a Model Point.
 
-        The attach() method can be called even if the observer is already
+        The attachObserver() method can be called even if the observer is already
         attached.  When this happens, the attach process is 'restarted', i.e.
         the 'initialSeqNumber' is used for the observer's sequence number.
 
@@ -352,12 +352,21 @@ protected:
                                  uint16_t   initialSeqNumber = SEQUENCE_NUMBER_UNKNOWN ) noexcept = 0;
 
     /** This method is used to detach an observer from a Model Point.  See the
-        attach() method for more details about the Subscription/Change
+        attachObserver() method for more details about the Subscription/Change
         Notification mechanism.
 
-        The detach() method can be called even if the observer is NOT
-        currently attached.  The detach() method can be called within the
+        The detachObserver() method can be called even if the observer is NOT
+        currently attached.  The detachObserver() method can be called within the
         Change Notification callback.
+
+        NOTE: As stated above, clients can call detachObserver() within the Change
+              Notification callback.  In most cases - it is also okay to call
+              attachObserver() within the Change Notification callback (e.g. 
+              re-attaching after calling detach).  However, what is NOT allowed 
+              is to reuse/re-home an IObserver instance with a DIFFERENT Model
+              Point - that was used for the original subscription/attachObserver
+              call - within the Change Notification callback.  Doing so will
+              result in a fatal error.
      */
     virtual void detachObserver( IObserver& observer ) noexcept = 0;
 

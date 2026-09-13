@@ -172,7 +172,12 @@ public:
     ICommand* findCommand( const char* verb, unsigned verbLength ) noexcept override;
 
     /// See Kit::TShell::IContext
-    bool writeFrame( const char* text, Kit::Type::SSize_T maxBytes ) noexcept override;
+    bool writeFrame( const char*        text,
+                     Kit::Type::SSize_T maxBytes ) noexcept override;
+
+    /// See Kit::TShell::IContext
+    bool writeFrameWithSpecialChars( const char*        text,
+                                     Kit::Type::SSize_T maxBytes ) noexcept override;
 
     /// See Kit::TShell::IContext
     Kit::Text::IString& getOutputBuffer() noexcept override;

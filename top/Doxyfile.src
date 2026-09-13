@@ -945,7 +945,7 @@ WARN_LOGFILE           =
 
 INPUT                  = ../src/Kit  \
                          ../docs/manual \
-                         ../projects/examples
+                         ../projects/Examples
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1058,7 +1058,7 @@ EXAMPLE_RECURSIVE      = NO
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = ../projects/examples \
+IMAGE_PATH             = ../projects/Examples \
                          ../src/Kit
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should

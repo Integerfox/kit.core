@@ -11,9 +11,9 @@
 /** @file */
 
 
-/// Forward reference to break dependency on the Dm namespace
 namespace Kit {
 namespace Dm {
+/// Forward reference to break dependency on the Dm namespace
 class IObserver;
 }
 }

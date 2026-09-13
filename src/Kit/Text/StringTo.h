@@ -36,13 +36,12 @@ public:
         If endptr is specified and the conversation was successful, a pointer
         to the first character 'after' the number is returned.
 
-        NOTE: Only base 10 conversions are supported.
-
         The template argument 'T' must be a signed integer type.
     */
     template <typename T>
     static bool signedInt( T&           convertedValue,
                            const char*  string,
+                           int          base           = 10,
                            const char*  validStopChars = nullptr,
                            const char** endptr         = nullptr ) noexcept
     {
@@ -50,11 +49,11 @@ public:
         static_assert( std::is_signed<T>::value, "T must be a signed integer type" );
 
         long long dstVal;
-        bool      result = a2ll( dstVal, string, 10, validStopChars, endptr );
+        bool      result = a2ll( dstVal, string, base, validStopChars, endptr );
 
         // Check if the value is within the range of type T
         // Note: parentheses around min/max prevent expansion of Windows min/max macros
-        if ( result && ( dstVal >= (std::numeric_limits<T>::min)() && dstVal <= (std::numeric_limits<T>::max)() ) )
+        if ( result && ( dstVal >= ( std::numeric_limits<T>::min )() && dstVal <= ( std::numeric_limits<T>::max )() ) )
         {
             convertedValue = static_cast<T>( dstVal );
             return true;
@@ -92,7 +91,7 @@ public:
 
         // Check if the value is within the range of type T
         // Note: parentheses around max prevent expansion of Windows max macro
-        if ( result && dstVal <= (std::numeric_limits<T>::max)() )
+        if ( result && dstVal <= ( std::numeric_limits<T>::max )() )
         {
             convertedValue = static_cast<T>( dstVal );
             return true;
@@ -113,7 +112,7 @@ public:
                           const char*  validStopChars = nullptr,
                           const char** endptr         = nullptr ) noexcept;
 
-                          
+
     /** This method is the same as floating() above, except that it converts
         the string to double precision floating point.
      */

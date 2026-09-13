@@ -156,5 +156,22 @@ TEST_CASE( "EncoderWriter" )
         REQUIRE( strcmp( dst.m_outputBuffer, ".;" ) == 0 );
     }
 
+    SECTION( "oobWrite" )
+    {
+        const char* raw = "a;~.";
+        REQUIRE( uut.oobWrite( raw, 4 ) == true );
+        REQUIRE( dst.m_nextByteIndex == 4 );
+        REQUIRE( memcmp( dst.m_outputBuffer, raw, 4 ) == 0 );
+
+        REQUIRE( uut.oobWrite( nullptr, 2 ) == false );
+        REQUIRE( uut.oobWrite( "ab", -1 ) == false );
+
+        dst.m_resultAppendOutput = false;
+        REQUIRE( uut.oobWrite( "ab", 2 ) == false );
+
+        dst.m_resultAppendOutput = true;
+        REQUIRE( uut.oobWrite( "", 0 ) == true );
+    }
+
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

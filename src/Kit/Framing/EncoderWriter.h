@@ -28,7 +28,7 @@ class EncoderWriter : public IEncoder
 public:
     /** Constructor. When 'skipSendingSof' is set to true, the start-of-frame
         character will NOT be sent when startFrame() is called. This should ONLY
-        be set to true when the framing protocol supports multiple SOF characters. 
+        be set to true when the framing protocol supports multiple SOF characters.
         See LineDecoder as example of such a protocol.
      */
     EncoderWriter( IDestination& destination,
@@ -57,6 +57,9 @@ public:
 
     /// See Kit::Framing::IEncoder
     bool endFrame( void ) noexcept override;
+
+    /// See Kit::Framing::IEncoder
+    bool oobWrite( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept override;
 
 protected:
     /** Returns the encoded/escaped value for the specified special character.

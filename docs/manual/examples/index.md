@@ -10,40 +10,58 @@ This section provides practical code examples demonstrating how to use various K
 
 ## Containers
 
-- @ref projects_examples_container_list "Lists" - Singly and Doubly Linked Lists
-- @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
+### Articles
+
+- [Limitless Containers](https://patternsinthemachine.net/2022/09/limitless-containers-without-dynamic-memory-allocation-in-c-c/)
+
+### Lists, Ring Buffers, etc.
+
+- @ref Examples::Container::Lists "Lists" - Singly and Doubly Linked Lists
+- @ref Examples::Container::RingBuffer "RingBuffer" - Ring Buffer with change notifications
 
 ## Data Model
 
-### Introduction
+### Articles
+
+- [Introduction](https://patternsinthemachine.net/2022/12/data-model-introduction-to-the-data-model-architecture/)
+- [Example Application](https://patternsinthemachine.net/2022/12/data-model-example-application/)
+- [Change Notifcation](https://patternsinthemachine.net/2022/12/data-mode-change-notifications/)
+- [Aren't Global Variables Bad](https://patternsinthemachine.net/2022/12/data-mode-change-notifications/)
+- [EOC 2024](https://patternsinthemachine.net/2024/09/embedded-online-conference-2024-introduction-to-the-data-model-pattern/)
 
 ### Change Notifications
 
-- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+- @ref Examples::Dm::Transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
-- @ref projects_examples_container_ringbuffer "RingBuffer" - Ring Buffer with change notifications
+- @ref Examples::Container::RingBuffer "RingBuffer" - Ring Buffer with change notifications
 
 ### Create new Model Point type
 
-- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+- @ref Examples::Dm::Transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
 ### Persistent Storage
 
-### Unit Testing new Model Point type
+### Asynchronous ITC
 
-- @ref projects_examples_dm_transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
+- @ref Examples::Dm::Transaction "DM Notifications for ITC" - Uses DM change notifications for asynchronous Inter-Thread-Communications
 
 ## Inter-thread Messaging
 
 ### Requests
 
-- @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
+- @ref Examples::Itc::Synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
 
 ### Responses
 
+- @ref Examples::Itc::Asynchronous "Basic Asynchronous ITC" - Basic Asynchronous Inter-Thread-Communication messaging
+- @ref Examples::Itc::AsyncCancel "Advanced Asynchronous ITC" - Advanced Asynchronous Inter-Thread-Communication messaging
+
 ### Open/Close Messages
 
-- @ref projects_examples_itc_synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
+- @ref Examples::Itc::Synchronous "Synchronous ITC" - Uses message based Synchronous Inter-Thread-Communications
+- @ref Examples::Itc::Asynchronous "Basic Asynchronous ITC" - Basic Asynchronous Inter-Thread-Communication messaging
+- @ref Examples::Itc::AsyncCancel "Advanced Asynchronous ITC" - Advanced Asynchronous Inter-Thread-Communication messaging
+
 
 ## Streams and Files
 

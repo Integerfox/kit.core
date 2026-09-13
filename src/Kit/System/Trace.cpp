@@ -190,6 +190,11 @@ void Trace::disableSection_( const char* sectionToDisable )
 
 bool Trace::isSectionEnabled_( const char* section )
 {
+    if ( section == nullptr )
+    {
+        return false;
+    }
+
     Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
 
     bool result = false;
@@ -198,7 +203,13 @@ bool Trace::isSectionEnabled_( const char* section )
         int i;
         for ( i = 0; i < OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS; i++ )
         {
-            if ( activeSections_[i][0] != '*' )
+            const char* activeSection = activeSections_[i].getString();
+            if ( activeSection[0] == '\0' )
+            {
+                continue;
+            }
+
+            if ( activeSection[0] != '*' )
             {
                 if ( activeSections_[i] == section )
                 {

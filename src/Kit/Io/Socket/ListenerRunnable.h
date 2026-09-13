@@ -20,22 +20,15 @@
 /** This value is number of retries that is performed when attempting
     to bind to the listening port.
  */
-#ifndef USE_KIT_IO_SOCKET_LISTENER_BIND_RETRIES
-#define USE_KIT_IO_SOCKET_LISTENER_BIND_RETRIES 5
+#ifndef OPTION_KIT_IO_SOCKET_LISTENER_BIND_RETRIES
+#define OPTION_KIT_IO_SOCKET_LISTENER_BIND_RETRIES 5
 #endif
 
 /** This value is time, in milliseconds between retries during the binding
     process.
  */
-#ifndef USE_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS
-#define USE_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS ( 10 * 1000 )  // 10 seconds
-#endif
-
-/** Delay time, in milliseconds, to wait for the Object's thread to exit
-    after terminate() is called in the class's destructor.
- */
-#ifndef USE_KIT_IO_SOCKET_LISTENER_TERMINATE_WAIT_MS
-#define USE_KIT_IO_SOCKET_LISTENER_TERMINATE_WAIT_MS 100
+#ifndef OPTION_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS
+#define OPTION_KIT_IO_SOCKET_LISTENER_BIND_RETRY_WAIT_MS ( 10 * 1000 )  // 10 seconds
 #endif
 
 

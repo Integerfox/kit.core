@@ -65,6 +65,22 @@ public:
     virtual bool endFrame( void ) noexcept = 0;
 
 public:
+    /** This method allows 'out-of-band' writing to the output destination. This
+        method unconditionally writes the provided output to the destination
+
+        CAUTION: Most client/consumers of the encoder should never use this
+                 method. This writes bytes directly to the destination without
+                 applying the encoder's escaping rules. e.g. when intentionally
+                 bypassing encoding for a specific frame payload OR outputting
+                 content in between frames.
+
+        Outputs 'numBytes' of data (from 'srcBuffer') to the output destination.
+        The  method will return false if there an error occurred while
+        writing to the output destination; else true is returned.
+     */
+    virtual bool oobWrite( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept = 0;
+
+public:
     /// Virtual Destructor
     virtual ~IEncoder() = default;
 };

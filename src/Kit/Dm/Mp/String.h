@@ -29,7 +29,7 @@ namespace Mp {
         \code
 
         { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
-          val:"<stringvalue>"
+          val:{maxLen:nn,text:"<stringvalue>"}
         }
 
         \endcode
@@ -37,7 +37,7 @@ namespace Mp {
     The "val" format for the fromJSON() format is:
         \code
 
-        val:"<stringvalue>"
+        val:{text:"<stringvalue>"}
 
         \endcode
     NOTE: All methods in this class ARE thread Safe unless explicitly
@@ -51,16 +51,16 @@ protected:
     /** Constructor. Invalid MP.
      */
     String( Kit::Dm::IModelDatabase& myModelBase,
-                const char*              symbolicName,
-                char*                    myDataPtr,
-                size_t                   dataSizeInBytesIncludingNullTerminator );
+            const char*              symbolicName,
+            char*                    myDataPtr,
+            size_t                   dataSizeInBytesIncludingNullTerminator );
 
     /// Constructor. Valid MP.  Requires an initial value
     String( Kit::Dm::IModelDatabase& myModelBase,
-                const char*              symbolicName,
-                char*                    myDataPtr,
-                size_t                   dataSizeInBytesIncludingNullTerminator,
-                const char*              initialValue );
+            const char*              symbolicName,
+            char*                    myDataPtr,
+            size_t                   dataSizeInBytesIncludingNullTerminator,
+            const char*              initialValue );
 
 
 public:
@@ -107,7 +107,7 @@ public:
 public:
     /// Type safe register observer
     inline void attach( Kit::Dm::Observer<String>& observer,
-                        uint16_t                       initialSeqNumber = SEQUENCE_NUMBER_UNKNOWN ) noexcept
+                        uint16_t                   initialSeqNumber = SEQUENCE_NUMBER_UNKNOWN ) noexcept
     {
         attachObserver( observer, initialSeqNumber );
     }
@@ -196,7 +196,7 @@ protected:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

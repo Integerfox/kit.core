@@ -1,5 +1,5 @@
-#ifndef Cpl_Logging_LogSink_h_
-#define Cpl_Logging_LogSink_h_
+#ifndef KIT_LOGGING_FRAMEWORK_LOGSINK_H
+#define KIT_LOGGING_FRAMEWORK_LOGSINK_H
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -10,8 +10,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Dm/IObserver.h"
 #include "kit_config.h"
+#include "Kit/Dm/IObserver.h"
 #include "Kit/Container/RingBufferMP.h"
 #include "Kit/EventQueue/IQueue.h"
 #include "Kit/Itc/OpenCloseSync.h"
@@ -39,9 +39,9 @@ namespace Framework {
     log buffer and discards the entries.  A child class is required to provide
     a meaningful implementation of the dispatchLogEntry() method.
 
-    FYI: The Kit::Persistence framework provides an alternate 'log sink' that
-         writes log entries to Non-volatile storage along with an a API to
-         retrieve the log entries.
+    FYI: The Kit::Persistence::Journal::Server class provides an alternate 'log
+         sink' that writes log entries to Non-volatile storage along with an
+         API to retrieve the log entries.
  */
 class LogSink : public Kit::Itc::OpenCloseSync
 {

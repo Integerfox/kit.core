@@ -51,13 +51,41 @@ unsigned                                                                 g_vlogf
 static bool isQueueOverflowed( uint64_t timestamp ) noexcept;
 static void createAndAddOverflowEntry() noexcept;
 
+static KitLoggingClassificationMask_T allClassificationsMask() noexcept
+{
+    // Walk the list of possible classification IDs and enable all of them
+    KitLoggingClassificationMask_T mask = 0;
+    for ( uint16_t i = 1; i < UINT8_MAX; ++i )
+    {
+        if ( app_->isClassificationIdValid( static_cast<uint8_t>( i ) ) )
+        {
+            mask |= classificationIdToMask( static_cast<uint8_t>( i ) );
+        }
+    }
+    return mask;
+}
+
+static KitLoggingPackageMask_T allPackagesMask() noexcept
+{
+    // Walk the list of possible package IDs and enable all of them
+    KitLoggingPackageMask_T mask = 0;
+    for ( uint16_t i = 1; i < UINT8_MAX; ++i )
+    {
+        if ( app_->getPackage( static_cast<uint8_t>( i ) ) != nullptr )
+        {
+            mask |= packageIdToMask( static_cast<uint8_t>( i ) );
+        }
+    }
+    return mask;
+}
+
 // Note: Need a function that can be called from the initialize() method, i.e. to avoid the use case of initialize() be called BEFORE the mutex object has been created
 static void resetWithoutCriticalSection() noexcept
 {
     g_overflowCount           = 0;
     g_queueOverflowed         = false;
-    classificationFilterMask_ = 0xFFFFFFFF;
-    packageFilterMask_        = 0xFFFFFFFF;
+    classificationFilterMask_ = allClassificationsMask();
+    packageFilterMask_        = allPackagesMask();
     g_vlogfCallCount          = 0;
 }
 
