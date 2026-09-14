@@ -14,10 +14,14 @@
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/EventQueue/Server.h"
 #include "Kit/System/Thread.h"
-#include "Kit/Container/SList.h"
+#include "Kit/Container/OrderedList.h"
+#include "Kit/System/Timer.h"
+#include "Kit/System/Api.h"
 
 ///
 using namespace Kit::Job;
+
+#define TIMER_MS 250
 
 ////////////////////////////////////////////////////////////////////////////////
 // Anonymous namespace
@@ -27,7 +31,7 @@ namespace {
 class TestJob : public JobBase
 {
 public:
-    TestJob( Kit::Container::SList<IJob>& jobList, const char* name ) noexcept
+    TestJob( Kit::Container::OrderedList<IJob>& jobList, const char* name ) noexcept
         : JobBase( jobList, name, "test job description", "test job usage" )
     {
     }
@@ -54,25 +58,21 @@ public:
         startCount++;
         lastContext = &context;
         lastArgs    = optionalArgs;
-        return startResult;
+        return setRunningState( startResult );
     }
 
     /// See Kit::Job::IJob
-    void stop_() noexcept override { stopCount++; }
+    void stop_() noexcept override { stopCount++; setStoppedState();}
 };
 
-// Test Job that self-terminates (i.e. calls IContext::completed()) from within its start_() method
-class SelfCompletingJob : public JobBase
+// Test Job that self-terminates 
+class SelfCompletingJob : public JobBase, public Kit::System::Timer
 {
 public:
-    SelfCompletingJob( Kit::Container::SList<IJob>& jobList, const char* name ) noexcept
+    SelfCompletingJob( Kit::Container::OrderedList<IJob>& jobList, const char* name ) noexcept
         : JobBase( jobList, name )
     {
     }
-
-public:
-    bool completedResultFirstCall  = false;
-    bool completedResultSecondCall = true;
 
 public:
     /// See Kit::Job::IJob
@@ -84,18 +84,22 @@ public:
     /// See Kit::Job::IJob
     bool start_( IContext& context, char* optionalArgs ) noexcept override
     {
-        ( void )optionalArgs;
+        // Set the timing source for the SW timer        
+        setTimingSource( context.getEventQueue() );
 
-        // First call: I am still in the Manager's 'started' list -> succeeds
-        completedResultFirstCall = context.completed( *this );
+        // Set timer to expire in N milliseconds
+        Timer::start( TIMER_MS );  // Set timer to expire in N milliseconds
+        return setRunningState( true );
+    }
 
-        // Second call: I have already been removed from the 'started' list -> fails
-        completedResultSecondCall = context.completed( *this );
-        return true;
+    /// See Kit::System::Timer
+    void expired() noexcept override
+    {
+        setStoppedState();
     }
 
     /// See Kit::Job::IJob
-    void stop_() noexcept override {}
+    void stop_() noexcept override { setStoppedState(); }
 };
 
 }  // end anonymous namespace
@@ -106,9 +110,9 @@ TEST_CASE( "Manager" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    Kit::Container::SList<IJob> jobList;
-    TestJob                     job1( jobList, "job1" );
-    TestJob                     job2( jobList, "job2" );
+    Kit::Container::OrderedList<IJob> jobList;
+    TestJob                           job1( jobList, "job1" );
+    TestJob                           job2( jobList, "job2" );
 
     Kit::EventQueue::Server uutEventLoop;
     Manager                 uut( uutEventLoop, jobList );
@@ -137,12 +141,13 @@ TEST_CASE( "Manager" )
         REQUIRE( job2.shutdownCount == 1 );
     }
 
-    SECTION( "close - stops and shuts down started jobs, restoring them to the inactive list" )
+    SECTION( "close - stops and shuts down started jobs" )
     {
         uut.open();
 
         char args[] = "";
         REQUIRE( uut.startJob( "job1", args ) == true );
+        REQUIRE( job1.startCount == 1 );
 
         uut.close();
         REQUIRE( job1.stopCount == 1 );
@@ -200,7 +205,7 @@ TEST_CASE( "Manager" )
         uut.close();
     }
 
-    SECTION( "startJob() - Job's start_() fails and restores the job to the inactive list" )
+    SECTION( "startJob() - Job's start_() fails" )
     {
         uut.open();
         job1.startResult = false;
@@ -280,7 +285,7 @@ TEST_CASE( "Manager" )
         uut.close();
     }
 
-    SECTION( "getAvailableJobs() - truncated (inactive list alone overflows the client's buffer)" )
+    SECTION( "getAvailableJobs() - truncated" )
     {
         uut.open();
 
@@ -293,23 +298,7 @@ TEST_CASE( "Manager" )
         uut.close();
     }
 
-    SECTION( "getAvailableJobs() - truncated while walking the started list" )
-    {
-        uut.open();
-
-        char args[] = "";
-        REQUIRE( uut.startJob( "job1", args ) == true );
-
-        unsigned        numFound = 0;
-        Kit::Job::IJob* avail[1];
-        bool            result = uut.getAvailableJobs( avail, 1, numFound );
-        REQUIRE( result == false );
-        REQUIRE( numFound == 1 );
-
-        uut.close();
-    }
-
-    SECTION( "getAvailableJobs() - success across both the inactive and started lists" )
+    SECTION( "getAvailableJobs() - success" )
     {
         uut.open();
 
@@ -359,7 +348,7 @@ TEST_CASE( "Manager" )
         uut.close();
     }
 
-    SECTION( "lookUpJob() - found in the inactive list, found in the started list, and not found" )
+    SECTION( "lookUpJob()" )
     {
         uut.open();
 
@@ -395,17 +384,25 @@ TEST_CASE( "Manager" )
 
         char args[] = "";
         REQUIRE( uut.startJob( "self-job", args ) == true );
-        REQUIRE( selfJob.completedResultFirstCall == true );
-        REQUIRE( selfJob.completedResultSecondCall == false );
+        bool running = uut.isJobRunning( "self-job");
+        REQUIRE( running == true );
 
+        // Wait for the job to complete itself
+        Kit::System::sleep( TIMER_MS * 1.5 );
+
+        running = uut.isJobRunning( "self-job");
+        REQUIRE( running == false );
+
+        // Verify that no jobs are running
         unsigned        numFound = 0;
-        Kit::Job::IJob* running[4];
-        REQUIRE( uut.getRunningJobs( running, 4, numFound ) == true );
+        Kit::Job::IJob* runningJobs[4];
+        REQUIRE( uut.getRunningJobs( runningJobs, 4, numFound ) == true );
         REQUIRE( numFound == 0 );
         REQUIRE( uut.lookUpJob( "self-job" ) == &selfJob );
 
         uut.close();
     }
+
 
     // Shutdown threads
     uutEventLoop.pleaseStop();

@@ -179,7 +179,29 @@ public:
     virtual void request( GetRunningJobsMsg& msg ) = 0;
 
 public:
-    /// Payload for Message:
+    /// Payload for Message: Job Running
+    class JobRunningPayload
+    {
+    public:
+        /// INPUT: Name of the Job instance to check
+        const char* jobName;
+
+        /// OUTPUT: true if the job is running, else false
+        bool running;
+
+        /// Constructor.
+        JobRunningPayload( const char* jobName )
+            : jobName( jobName ), running( false ) {}
+    };
+
+    /// Message Type: JobRunning
+    typedef Kit::Itc::RequestMessage<IManagerRequest, JobRunningPayload> JobRunningMsg;
+
+    /// Request: JobRunning message
+    virtual void request( JobRunningMsg& msg ) = 0;
+
+public:
+    /// Payload for Message: Lookup Job
     class LookupJobPayload
     {
     public:
@@ -194,10 +216,10 @@ public:
             : name( nameToLookup ), foundInstance( nullptr ) {}
     };
 
-    /// Message Type: Lookup
+    /// Message Type: Lookup Job
     typedef Kit::Itc::RequestMessage<IManagerRequest, LookupJobPayload> LookupJobMsg;
 
-    /// Request: Lookup message
+    /// Request: Lookup Job message
     virtual void request( LookupJobMsg& msg ) = 0;
 
 
@@ -265,13 +287,23 @@ public:
     virtual void response( GetRunningJobsMsg& msg ) noexcept = 0;
 
 public:
-    /// Response Message Type: Lookup
+    /// Response Message Type: Job Running
+    typedef Kit::Itc::ResponseMessage<IManagerResponse,
+                                      IManagerRequest,
+                                      IManagerRequest::JobRunningPayload>
+        JobRunningMsg;
+
+    /// Response: JobRunningMsg
+    virtual void response( JobRunningMsg& msg ) noexcept = 0;
+
+public:
+    /// Response Message Type: Lookup Job
     typedef Kit::Itc::ResponseMessage<IManagerResponse,
                                       IManagerRequest,
                                       IManagerRequest::LookupJobPayload>
         LookupJobMsg;
 
-    /// Response: LookupJobMsg
+    /// Response: Lookup Job message
     virtual void response( LookupJobMsg& msg ) noexcept = 0;
 
 public:

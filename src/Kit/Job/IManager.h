@@ -46,6 +46,11 @@ public:
     virtual void stopAllJobs() noexcept = 0;
 
 public:
+    /** This method returns true if the specified Job is currently running; 
+        else false is returned.
+     */
+    virtual bool isJobRunning( const char* jobName ) noexcept = 0;
+    
     /** This method returns a list of all Registered Job instances.  If the number
         of registered Job instances exceeded the provided buffer space then false
         is returned; else true is returned.  The number of instances found is

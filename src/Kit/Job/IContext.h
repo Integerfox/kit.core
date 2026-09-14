@@ -10,11 +10,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Job/IJob.h"
-#include "Kit/Container/OrderedList.h"
+#include "Kit/EventQueue/IQueue.h"
 #include "Kit/Text/IString.h"
-#include "Kit/Type/SSize.h"
-#include "Kit/Io/IOutput.h"
 
 ///
 namespace Kit {
@@ -32,6 +29,12 @@ namespace Job {
 */
 class IContext
 {
+    public:
+    /** This method returns a reference to the IQueue associated with the thread
+        that the IJob instance executes in.
+     */
+    virtual Kit::EventQueue::IQueue& getEventQueue() noexcept = 0;
+
 public:
     /** This method returns a 'working' buffer for use by a command.  The buffer
         is only 'valid' for a single event loop processing, i.e. while the
@@ -44,15 +47,6 @@ public:
         NOTE: The buffer is the same size as getWorkBuffer0().
     */
     virtual Kit::Text::IString& getWorkBuffer1() noexcept = 0;
-
-public:
-    /** This method allows a IJob instance to self terminate its execution, i.e.
-        it place 'jobThatCompleted' into the Manager's inactive Job list.
-
-        Returns false if the specified 'jobThatCompleted' is/was NOT in the 
-        Manager's active job list; else true is returned
-     */
-    virtual bool completed( IJob& jobThatCompleted) noexcept = 0;
 
 public:
     /// Virtual destructor

@@ -12,7 +12,7 @@
 #include "Kit/Job/IManagerRequest.h"
 #include "Kit/Itc/OpenCloseSync.h"
 #include "Kit/EventQueue/IQueue.h"
-#include "Kit/Container/SList.h"
+#include "Kit/Container/OrderedList.h"
 #include "Kit/Text/FString.h"
 
 
@@ -43,10 +43,10 @@ class Manager : public IManager, public IContext, public IManagerRequest, public
 {
 public:
     /// Constructor
-    Manager( Kit::EventQueue::IQueue&     myEventQueue,
-             Kit::Container::SList<IJob>& listOfMApps )
+    Manager( Kit::EventQueue::IQueue&           myEventQueue,
+             Kit::Container::OrderedList<IJob>& listOfJobs )
         : Kit::Itc::OpenCloseSync( myEventQueue )
-        , m_inactiveJobs( listOfMApps )
+        , m_jobs( listOfJobs )
         , m_opened( false )
     {
     }
@@ -69,6 +69,9 @@ public:
     void stopAllJobs() noexcept override;
 
     /// See Kit::Job::IManager
+    bool isJobRunning( const char* jobName ) noexcept override;
+
+    /// See Kit::Job::IManager
     bool getAvailableJobs( Kit::Job::IJob* dstList[], unsigned dstMaxElements, unsigned& numElemsFound ) noexcept override;
 
     /// See Kit::Job::IManager
@@ -79,13 +82,13 @@ public:
 
 public:
     /// See Kit::Job::IContext
+    Kit::EventQueue::IQueue& getEventQueue() noexcept override;
+
+    /// See Kit::Job::IContext
     Kit::Text::IString& getWorkBuffer0() noexcept override;
 
     /// See Kit::Job::IContext
     Kit::Text::IString& getWorkBuffer1() noexcept override;
-
-    ///  See Kit::Job::IContext
-    bool completed( IJob& jobThatCompleted ) noexcept override;
 
 public:
     /// See Kit::Job::IManagerRequest
@@ -98,6 +101,8 @@ public:
     void request( IManagerRequest::StopAllJobsMsg& msg ) noexcept override;
 
     /// See Kit::Job::IManagerRequest
+    void request( IManagerRequest::JobRunningMsg& msg ) noexcept override;
+    /// See Kit::Job::IManagerRequest
     void request( IManagerRequest::GetAvailableJobsMsg& msg ) noexcept override;
 
     /// See Kit::Job::IManagerRequest
@@ -107,11 +112,8 @@ public:
     void request( IManagerRequest::LookupJobMsg& msg ) noexcept override;
 
 protected:
-    /// List of started MApps
-    Kit::Container::SList<IJob> m_startedJobs;
-
-    /// List of inactive MApps
-    Kit::Container::SList<IJob>& m_inactiveJobs;
+    /// List of IJobs
+    Kit::Container::OrderedList<IJob>& m_jobs;
 
     /// Work buffer 0
     Kit::Text::FString<OPTION_KIT_JOB_MANAGER_WORK_BUFFER_SIZE> m_workBuffer0;

@@ -12,10 +12,11 @@
 
 #include "kit_config.h"
 #include "Kit/Container/KeyedItem.h"
+#include "Kit/Job/IContext.h"
 
 /// KIT Trace Section identifier for a common trace output section
 #ifndef OPTION_KIT_JOB_TRACE_SECTION
-#define OPTION_KIT_JOB_TRACE_SECTION   "Job"
+#define OPTION_KIT_JOB_TRACE_SECTION "Job"
 #endif
 
 
@@ -23,9 +24,6 @@
 namespace Kit {
 ///
 namespace Job {
-
-/// Forward class reference to avoid circular header includes
-class IContext;
 
 /** This abstract class defines the interface for a Job. An Job is essentially a
     'mini-application' that performs a series of steps and typically reports its
@@ -98,7 +96,9 @@ public:
         provide an empty/blank null terminated string, i.e can NOT pass a nullptr.
 
         This method is used to start a IJob. If the IJob is unable to start then
-        false is returned; else true is returned.
+        false is returned; else true is returned.  NOTE: The IJob is responsible
+        for setting its 'running state' to true when the start_() method returns
+        true.
 
         This method MUST be called in the thread that the IJob executes in.
 
@@ -112,9 +112,20 @@ public:
         NEVER call this method, instead the Application must call the Manager
         to stop a IJob.
 
-        This method is used to stop a IJob.
+        This method is used to stop a IJob. NOTE: The IJob is responsible for
+        setting its 'running state' to false when the stop_() method returns.
      */
     virtual void stop_() noexcept = 0;
+
+public:
+    /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible
+         by other classes in the Kit::IJob namespace.  The Application should
+         NEVER call this method, instead the Application must call the Manager
+         to stop a IJob.
+
+         The method returns true if the IJob is currently running; else false.
+     */
+    virtual bool isRunning_() const noexcept = 0;
 
 protected:
     /// Protected Constructor (needed because of the inheritance from KeyLiteralString)
