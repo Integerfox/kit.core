@@ -31,9 +31,6 @@ class Server : public Kit::Itc::OpenCloseSync
 public:
     /** Constructor.  The argument 'timingTickInMsec' specifies the timing
         resolution that will be used for Cpl::Timer::Local Timers.
-
-        NOTE: 'recordList' is variable length array where the last entry in the
-              array MUST BE a nullptr.
      */
     Server( Kit::EventQueue::IQueue& myEventQueue,
             IRecord*                 recordList[],
@@ -59,8 +56,19 @@ public:
             {
                 m_opened &= m_records[i]->start( m_eventQueue );
             }
+
+            // If any record failed to start, stop all previously started records
+            if ( !m_opened )
+            {
+                for ( unsigned i = 0; i < m_numRecords; i++ )
+                {
+                    m_records[i]->stop();
+                }
+            }
         }
 
+        // Success reflects whether all Records started successfully
+        msg.getPayload().success = m_opened;
         msg.returnToSender();
     }
 
@@ -77,6 +85,9 @@ public:
                 m_records[i]->stop();
             }
         }
+
+        // The close request never fails
+        msg.getPayload().success = true;
         msg.returnToSender();
     }
 

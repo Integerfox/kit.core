@@ -64,7 +64,8 @@ public:
                         Size_T      srcLen ) noexcept = 0;
 
     /** This method reads 'bytesToRead' bytes from the media at the specified
-        offset.  The method does not return until:
+        offset. The 'dstBuffer' is REQUIRED to be at least 'bytesToRead' bytes
+        in size. The method does not return until:
 
         1) All requested bytes have been read,
         2) OR all available bytes have been read (i.e. end of media reached),

@@ -69,6 +69,9 @@ public:
             m_repeatCount     = UINT32_MAX;
         }
 
+        // This request never fails
+        msg.getPayload().success = true;
+
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
     }
@@ -100,6 +103,9 @@ public:
                 msg = m_flashRequestList.get();
             }
         }
+
+        // This request never fails
+        msg.getPayload().success = true;
 
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();

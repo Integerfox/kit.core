@@ -33,6 +33,8 @@ void LogSink::request( OpenMsg& msg ) noexcept
         m_logBuffer.m_mpElementCount.attach( m_obElementCount );
     }
 
+    // The open request never fails
+    msg.getPayload().success = true;
     msg.returnToSender();
 }
 
@@ -44,6 +46,8 @@ void LogSink::request( CloseMsg& msg ) noexcept
         m_logBuffer.m_mpElementCount.detach( m_obElementCount );
     }
 
+    // The close request never fails
+    msg.getPayload().success = true;
     msg.returnToSender();
 }
 

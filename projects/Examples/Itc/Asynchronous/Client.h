@@ -68,6 +68,9 @@ public:
             sendRequest();
         }
 
+        // This request never fails
+        msg.getPayload().success = true;
+
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
     }
@@ -90,6 +93,9 @@ public:
             //       properly handle this scenario.
             m_rateResponseMsg.abandon();
         }
+
+        // This request never fails
+        msg.getPayload().success = true;
 
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
