@@ -1,7 +1,6 @@
 #include "Examples/Job/Temperature/example.h"
 #include "Kit/System/Api.h"
 #include "Kit/Io/Stdio/StdIn.h"
-#include "Kit/Io/Stdio/StdIn.h"
 #include "Kit/Io/Stdio/StdOut.h"
 
 #include "Kit/TShell/Command/Win32/Threads.h"

@@ -159,11 +159,9 @@ Kit::TShell::Result_T Cmd::execute( Kit::TShell::IContext& context, char* cmdStr
             return Kit::TShell::Result_T::CMD_ERR_BAD_SYNTAX;
         }
 
-        io &= context.writeFrame( "" );
         io &= context.writeFrame( jobName );
         io &= context.writeFrame( job->getDescription() );
         io &= context.writeFrame( job->getUsage() );
-        io &= context.writeFrame( "" );
         return io ? Kit::TShell::Result_T::CMD_SUCCESS : Kit::TShell::Result_T::CMD_ERR_IO;
     }
 
