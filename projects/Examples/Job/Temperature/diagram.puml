@@ -8,27 +8,31 @@ left to right direction
 ' example.cpp - leftmost element
 ' ============================================================================
 
-class "example.cpp" as exampleApp <<application>>
 
 ' ============================================================================
 ' Application Classes  (middle column)
 ' ============================================================================
 
-package "Examples::Dm::Transaction" {
-    class Foo_T <<struct>>
-    class MpFoo
-    class Client
-    class Server
+package "Examples::Job::Temperature" {
+    class Temperature
+    class "example.cpp" as exampleApp <<application>>
 }
 
 package "mp" {
-    object "trigger : MpFoo" as mpTrigger
+    object "tempSensor1 : Mp::Float" as mpTempSensor1
+    object "tempSensor2 : Mp::Float" as mpTempSensor2
     object "g_modelDatabase : ModelDatabase" as mpDB
 }
 
 ' ============================================================================
 ' Kit Classes  (right column, stacked vertically)
 ' ============================================================================
+
+package "Kit::Job" {
+    class JobBase
+    class Manager
+    class "TShell::Cmd" as JobShellCmd
+}
 
 package "Kit::EventQueue" {
     class "Server" as EqServer
@@ -46,55 +50,87 @@ package "Kit::System" {
 }
 
 package "Kit::Dm" {
-    class "Mp::Scalar<Foo_T, MpFoo>" as ScalarBase
-    class "ObserverCallback<MpFoo>" as ObsCallback
+    class "Mp::Float" as MpFloat
+    class "TShell::Write" as DmWrite
+    class "TShell::Read" as DmRead
+}
+
+package "Kit::Container" {
+    class "OrderedList<IJob>" as JobList
+}
+
+package "Kit::TShell" {
+    class Processor
+    class StdioThread
+    class NoSecurity
+    class "Command::Bye" as Bye
+    class "Command::Help" as Help
+    class "Command::Echo" as Echo
+    class "Command::Trace" as Trace
+    class "Command::Wait" as Wait
 }
 
 ' ============================================================================
 ' Layout hints
 ' ============================================================================
 
-' Pin exampleApp to the left of the Dm::Transaction classes
-exampleApp  -[hidden]right- Client
+' Pin exampleApp to the left of the Application classes
+exampleApp  -[hidden]right- Temperature
 
-' Stack Dm::Transaction above mp (vertically)
-Server      -[hidden]down-  mpTrigger
+' Stack Application classes above mp (vertically)
+Temperature -[hidden]down- mpTempSensor1
 
 ' Stack Kit packages vertically (right column)
-EqServer    -[hidden]down-  OpenCloseSync
+JobBase       -[hidden]down- EqServer
+EqServer      -[hidden]down- OpenCloseSync
 OpenCloseSync -[hidden]down- Semaphore
-Semaphore   -[hidden]down-  ScalarBase
+Semaphore     -[hidden]down- MpFloat
+MpFloat       -[hidden]down- JobList
+JobList       -[hidden]down- Processor
+Processor     -[hidden]down- StdioThread
 
 ' ============================================================================
 ' Inheritance
 ' ============================================================================
 
-Client  --|>  OpenCloseSync
-Client  --|>  Timer
-Server  --|>  OpenCloseSync
-MpFoo   --|>  ScalarBase
+Temperature --|>  JobBase
+Temperature --|>  Timer
+Manager     --|>  OpenCloseSync
 
 ' ============================================================================
 ' Composition / Aggregation
 ' ============================================================================
 
-Client  o--  MpFoo       : m_mpFoo
-Client  *--  ObsCallback : m_obFoo
-Server  o--  MpFoo       : m_mpFoo
-Server  *--  ObsCallback : m_obFoo
-MpFoo   ..>  Foo_T       : data type
-mpTrigger --> mpDB       : registered in
+Temperature   o--  MpFloat  : m_mpTemperature
+Manager       o--  JobList  : m_jobs
+Processor     o--  CommandList : m_commands
+StdioThread   o--  Processor : m_shell
+mpTempSensor1 -->  mpDB     : registered in
+mpTempSensor2 -->  mpDB     : registered in
 
 ' ============================================================================
 ' example.cpp usage relationships
 ' ============================================================================
 
-exampleApp ..> EqServer  : mbox_
-exampleApp ..> Semaphore : waitForShutdown_
-exampleApp ..> Thread    : t1
-exampleApp ..> Server    : myServer_
-exampleApp ..> Client    : myClient_
-exampleApp ..> Shutdown  : success() / failure()
-exampleApp ..> mpTrigger : mp::trigger
+exampleApp ..> EqServer       : jobEventQueue_
+exampleApp ..> Semaphore      : waitForShutdown_
+exampleApp ..> Thread         : t1
+exampleApp ..> Manager        : jobManager_
+exampleApp ..> Temperature    : temperature_ / temperature2_
+exampleApp ..> JobList        : jobList_
+exampleApp ..> Shutdown       : success() / failure()
+exampleApp ..> CommandList   : g_commandList
+exampleApp ..> Processor     : tshell_
+exampleApp ..> StdioThread   : stdioThread_
+exampleApp ..> NoSecurity    : securityPolicy_
+exampleApp ..> Bye           : byeCmd_
+exampleApp ..> Help          : helpCmd_
+exampleApp ..> Echo          : echoCmd_
+exampleApp ..> Trace         : traceCmd_
+exampleApp ..> Wait          : waitCmd_
+exampleApp ..> DmWrite       : dmWriteCmd_
+exampleApp ..> DmRead        : dmReadCmd
+exampleApp ..> JobShellCmd   : jobCmd_
 
 @enduml
+

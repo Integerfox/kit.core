@@ -11,11 +11,11 @@ Celsius.
 **NOTE**: The analog value is 'mocked', i.e. the MP for the value exists - but
           there is no underlying driver that samples an analog input.  However,
           the developer can manipulate the MP's value via the `dmw` console
-          command.
+          command. For example: `dmw {name:"tempSensor1",val:22.42}`
 
 ## Class Diagram
 
-![Transaction Example Class Diagram](classDiagram_examplesdmtransaction.png)
+![Transaction Example Class Diagram](classDiagram_examplesjobtemperature.png)
 
 ## See Also
 
