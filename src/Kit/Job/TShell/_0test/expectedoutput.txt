@@ -1,0 +1,156 @@
+
+--- Your friendly neighborhood TShell. ---
+
+
+$ *** TEST: help
+$ bye [<exitcode>]
+bye tshell
+dmr [- <filter>]
+dmr <mpname>
+dmw {<mp-json-obj>}
+dmw <mpname>
+echo ["<text>"]
+echo - ["<text>"]
+help [* <cmd>]
+threads
+trace [on|off]
+trace section (on|off) <sect1> [<sect2>]...
+trace threadfilters [<threadname1> [<threadname2>]]...
+trace level (eNONE|eBRIEF|eINFO|eVERBOSE|eMAX)
+trace here|revert
+wait <delay>
+$ *** TEST: help dmr
+$ dmr [- <filter>]
+dmr <mpname>
+  Lists and displays Model Points contained in the Model Database. When no
+  arguments are provided, the command lists all available model points.  The
+  <filter> argument will only list points that contain <filter>.  To display a
+  Model Point the <mpname> argument is the symbolic name of the Model Point
+  instance.
+ 
+$ *** TEST: help dmw
+$ dmw {<mp-json-obj>}
+dmw <mpname>
+  Updates model points. A JSON object is used to specify the new value for a
+  a model point. Valid Key words are 'valid', 'locked', and 'val'. When only
+  specifying a model point name - only the model point's sequence number is
+  updated, i.e. will trigger change notification(s) with the MP instance's
+  current value (aka 'touch' semantics)
+ 
+$ int1
+int2
+str1
+str2
+$ int1
+str1
+$ int1
+int2
+$ CMD_ERR_NOT_SUPPORTED: [dmt - notfound]
+$ {
+  "name": "int1",
+  "valid": true,
+  "type": "Kit::Dm::Mp::Int32",
+  "seqnum": 1,
+  "locked": false,
+  "val": {
+    "dec": 42,
+    "hex": "0x2A"
+  }
+}
+$ {
+  "name": "int2",
+  "valid": false,
+  "type": "Kit::Dm::Mp::Int32",
+  "seqnum": 1,
+  "locked": false
+}
+$ Model point not found: 'bob'
+CMD_ERR_BAD_SYNTAX: [dmr]
+$ $ {
+  "name": "int1",
+  "valid": true,
+  "type": "Kit::Dm::Mp::Int32",
+  "seqnum": 2,
+  "locked": false,
+  "val": {
+    "dec": 50,
+    "hex": "0x32"
+  }
+}
+$ $ {
+  "name": "int2",
+  "valid": true,
+  "type": "Kit::Dm::Mp::Int32",
+  "seqnum": 2,
+  "locked": false,
+  "val": {
+    "dec": 32,
+    "hex": "0x20"
+  }
+}
+$ {
+  "name": "str1",
+  "valid": false,
+  "type": "Kit::Dm::Mp::String",
+  "seqnum": 1,
+  "locked": false
+}
+$ {
+  "name": "str2",
+  "valid": true,
+  "type": "Kit::Dm::Mp::String",
+  "seqnum": 1,
+  "locked": false,
+  "val": {
+    "maxLen": 8,
+    "text": "bob"
+  }
+}
+$ $ $ {
+  "name": "str1",
+  "valid": true,
+  "type": "Kit::Dm::Mp::String",
+  "seqnum": 2,
+  "locked": false,
+  "val": {
+    "maxLen": 16,
+    "text": "BOB"
+  }
+}
+$ {
+  "name": "str2",
+  "valid": true,
+  "type": "Kit::Dm::Mp::String",
+  "seqnum": 2,
+  "locked": false,
+  "val": {
+    "maxLen": 8,
+    "text": "Bob's yo"
+  }
+}
+$ $ {
+  "name": "str2",
+  "valid": true,
+  "type": "Kit::Dm::Mp::String",
+  "seqnum": 3,
+  "locked": false,
+  "val": {
+    "maxLen": 8,
+    "text": "Bob's yo"
+  }
+}
+$ $ {
+  "name": "str2",
+  "valid": false,
+  "type": "Kit::Dm::Mp::String",
+  "seqnum": 4,
+  "locked": false
+}
+$ InvalidInput
+CMD_ERR_BAD_SYNTAX: [dmw {name:int1:val:1}]
+$ Model Point name (doesNotExist) NOT found.
+CMD_ERR_BAD_SYNTAX: [dmw {name:"doesNotExist",valid:false}]
+$ CMD_ERR_BAD_SYNTAX: [dmw]
+$ Model point not found: 'doesNotExist'
+CMD_ERR_BAD_SYNTAX: [dmw]
+$ CMD_ERR_BAD_SYNTAX: [dmr]
