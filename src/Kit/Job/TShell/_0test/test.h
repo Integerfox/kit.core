@@ -1,5 +1,5 @@
-#ifndef KIT_TSHELL_COMMAND_0TEST_TEST_H_
-#define KIT_TSHELL_COMMAND_0TEST_TEST_H_
+#ifndef KIT_JOB_TSHELL_0TEST_TEST_H_
+#define KIT_JOB_TSHELL_0TEST_TEST_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -14,8 +14,10 @@
 #include "Kit/Io/IOutput.h"
 #include "Kit/Container/OrderedList.h"
 #include "Kit/TShell/ICommand.h"
+#include "Kit/Job/IJob.h"
 
 extern Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList;
+extern Kit::Container::OrderedList<Kit::Job::IJob>         g_jobList;
 extern void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd );
 
 #endif  // end header latch

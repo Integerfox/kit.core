@@ -1,8 +1,8 @@
-src/Kit/Dm/TShell/_0test
-src/Kit/Dm/TShell
-
-src/Kit/Dm
-src/Kit/Dm/Mp
+src/Kit/Job/TShell/_0test
+src/Kit/Job/TShell
+src/Kit/Job
+src/Kit/EventQueue
+src/Kit/Itc
 src/Kit/TShell
 src/Kit/TShell/Command
 src/Kit/Framing

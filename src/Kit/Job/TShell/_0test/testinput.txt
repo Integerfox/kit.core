@@ -1,34 +1,32 @@
-echo - "*** TEST: help"
-help
-echo - "*** TEST: help dmr"
-help dmr
-echo - "*** TEST: help dmw"
-help dmw
-dmr
-dmr - 1
-dmr - nt 
-dmt - notfound
-dmr int1
-dmr int2
-dmr bob
-dmw {name:"int1",val:"0x32"}
-dmr int1
-dmw {name:"int2",val:32}
-dmr int2
-dmr str1
-dmr str2
-dmw {name:"str1",val:{text:"BOB"}}
-dmw {name:"str2",val:{text:"Bob's your uncle!"}}
-dmr str1
-dmr str2
-dmw str2
-dmr str2
-dmw {name:"str2",valid:false}
-dmr str2
-dmw {name:int1:val:1}
-dmw {name:"doesNotExist",valid:false}
-dmw str2 2ndArg
-dmw doesNotExist
-dmr 1 2 3
+echo - "*** TEST: help jobs"
+help jobs
+echo - "*** TEST: list available jobs"
+jobs ls
+echo - "*** TEST: no jobs running"
+jobs
+echo - "*** TEST: start alpha"
+jobs start alpha hello
+echo - "*** TEST: list running jobs"
+jobs
+echo - "*** TEST: job help"
+jobs help alpha
+echo - "*** TEST: stop alpha"
+jobs stop alpha
+echo - "*** TEST: stop already stopped job"
+jobs stop alpha
+echo - "*** TEST: unknown job"
+jobs start missing
+echo - "*** TEST: stop all"
+jobs start beta
+jobs stop ALL
+jobs
+echo - "*** TEST: Error cases"
+jobs start bob-your-uncle
+jobs start   
+jobs stop are-your-sure 
+jobs stop  
+jobs help okay-maybe-not
+jobs help 
+jobs xyz
 echo "LAST CHECKED LINE"
 bye
