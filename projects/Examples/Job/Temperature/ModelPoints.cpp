@@ -19,5 +19,6 @@
 Kit::Dm::ModelDatabase mp::g_modelDatabase( "ignoreThisParameter_usedToCreateAUniqueConstructor" );
 
 /*----------------------------------------------------------------------------*/
-ALLOC_INVALID( Examples::Dm::Transaction::MpFoo, trigger );
-ALLOC_INVALID( Kit::Dm::Mp::Bool, shutdownRequest );
+
+ALLOC_INVALID( Kit::Dm::Mp::Float, tempSensor1 );
+ALLOC_INVALID( Kit::Dm::Mp::Float, tempSensor2 );

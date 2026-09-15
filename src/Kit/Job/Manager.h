@@ -66,7 +66,7 @@ public:
     bool stopJob( const char* jobName ) noexcept override;
 
     /// See Kit::Job::IManager
-    void stopAllJobs() noexcept override;
+    bool stopAllJobs() noexcept override;
 
     /// See Kit::Job::IManager
     bool isJobRunning( const char* jobName ) noexcept override;

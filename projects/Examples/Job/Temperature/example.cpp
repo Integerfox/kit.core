@@ -8,17 +8,31 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "Kit/Job/IJob.h"
 #include "kit_config.h"
 #include "Kit/System/Semaphore.h"
 #include "example.h"
-#include "Client.h"
-#include "Server.h"
+#include "Temperature.h"
 #include "ModelPoints.h"
 #include "Kit/EventQueue/Server.h"
 #include "Kit/System/Thread.h"
 #include "Kit/System/Trace.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/Shutdown.h"
+#include "Kit/System/Private.h"
+#include "Kit/TShell/Processor.h"
+#include "Kit/TShell/StdioThread.h"
+#include "Kit/TShell/NoSecurity.h"
+#include "Kit/TShell/Command/Bye.h"
+#include "Kit/TShell/Command/Help.h"
+#include "Kit/TShell/Command/Echo.h"
+#include "Kit/TShell/Command/Trace.h"
+#include "Kit/TShell/Command/Wait.h"
+#include "Kit/Dm/TShell/Read.h"
+#include "Kit/Dm/TShell/Write.h"
+#include "Kit/Job/Manager.h"
+#include "Kit/Job/TShell/Cmd.h"
+
 
 /// Time, in milliseconds, to wait for runnable object to stop.
 //  NOTE: the `destroy()` method calls `pleaseStop()` on the runnable
@@ -33,40 +47,72 @@
 
 //------------------------------------------------------------------------------
 namespace Examples {
-namespace Dm {
-namespace Transaction {
-
-static Kit::EventQueue::Server mbox_;  // Note: The client and the server are NOT required to execute in same thread
+namespace Job {
+namespace Temperature {
 
 // Semaphore used to wait for the shutdown request
 static Kit::System::Semaphore waitForShutdown_;
 static int                    exitCode_;
 
-static Server myServer_( mbox_, mp::trigger );
-static Client myClient_( mbox_, mp::trigger );
+/// Event queue/loop for executing Jobs
+static Kit::EventQueue::Server jobEventQueue_;
+
+/// Jobs
+static Kit::Container::OrderedList<Kit::Job::IJob> jobList_;
+static Kit::Job::Manager                           jobManager_( jobEventQueue_, jobList_ );
+static Temperature                                 temperature_( jobList_, mp::tempSensor1, "inletTemp" );
+static Temperature                                 temperature2_( jobList_, mp::tempSensor2, "outletTemp" );
+static Kit::Job::TShell::Cmd                       jobCmd_( g_commandList, jobManager_ );
+
+/// TShell command infrastructure
+Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList( "ignore_static_constructor" );
+static Kit::TShell::NoSecurity                     securityPolicy_;
+static Kit::Framing::StreamSource                  streamSrc_;
+static Kit::Framing::StreamDestination             streamDst_;
+//
+static Kit::TShell::Processor tshell_( g_commandList,
+                                       streamSrc_,
+                                       streamDst_,
+                                       securityPolicy_,
+                                       Kit::System::PrivateLocks::tracingOutput() );
+//
+static Kit::TShell::StdioThread    stdioThread_( tshell_ );
+static Kit::TShell::Command::Bye   byeCmd_( g_commandList );
+static Kit::TShell::Command::Help  helpCmd_( g_commandList );
+static Kit::TShell::Command::Echo  echoCmd_( g_commandList );
+static Kit::TShell::Command::Trace traceCmd_( g_commandList );
+static Kit::TShell::Command::Wait  waitCmd_( g_commandList );
+static Kit::Dm::TShell::Write      dmWriteCmd_( g_commandList, mp::g_modelDatabase );
+static Kit::Dm::TShell::Read       dmReadCmd_( g_commandList, mp::g_modelDatabase );
 
 //
-int runExample() noexcept
+int runExample( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd ) noexcept
 {
     // Enable tracing
     KIT_SYSTEM_TRACE_ENABLE();
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( OPTION_KIT_JOB_TRACE_SECTION );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "**** Starting Job Temperature Example... ****" );
 
-    KIT_SYSTEM_TRACE_MSG( SECT_, "**** Starting Dm Transaction Example... ****" );
-    
     // Create the threads
-    auto* t1 = Kit::System::Thread::create( mbox_, "APP" );
+    auto* t1 = Kit::System::Thread::create( jobEventQueue_, "JOBS" );
     KIT_SYSTEM_ASSERT( t1 != nullptr );
 
-    // Open/start the server and client
-    myServer_.open();
-    myClient_.open();
+    // Some initial values for the temperature
+    mp::tempSensor1.write( 25.0 );
+    mp::tempSensor2.write( 30.0 );
+
+    // Start the Job Manager
+    jobManager_.open();
+
+    // Start the Command console
+    stdioThread_.launchTShell( infd, outfd );
 
     // Wait for shutdown request
     waitForShutdown_.wait();
 
-    myClient_.close();
-    myServer_.close();
+    // Stop the Job Manager
+    jobManager_.close();
 
     // Shutdown the KIT library
     Kit::System::Shutdown::notifyShutdownHandlers( exitCode_ );
@@ -86,15 +132,15 @@ int runExample() noexcept
 
 int Kit::System::Shutdown::success() noexcept
 {
-    Examples::Dm::Transaction::exitCode_ = Kit::System::Shutdown::eSUCCESS;
-    Examples::Dm::Transaction::waitForShutdown_.signal();
-    return Examples::Dm::Transaction::exitCode_;
+    Examples::Job::Temperature::exitCode_ = Kit::System::Shutdown::eSUCCESS;
+    Examples::Job::Temperature::waitForShutdown_.signal();
+    return Examples::Job::Temperature::exitCode_;
 }
 
 int Kit::System::Shutdown::failure( int exitCode ) noexcept
 {
-    Examples::Dm::Transaction::exitCode_ = exitCode;
-    Examples::Dm::Transaction::waitForShutdown_.signal();
-    return Examples::Dm::Transaction::exitCode_;
+    Examples::Job::Temperature::exitCode_ = exitCode;
+    Examples::Job::Temperature::waitForShutdown_.signal();
+    return Examples::Job::Temperature::exitCode_;
 }
 //------------------------------------------------------------------------------

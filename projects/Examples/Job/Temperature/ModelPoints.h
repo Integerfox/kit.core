@@ -1,5 +1,5 @@
-#ifndef EXAMPLES_DM_TRANSACTION_MODEL_POINTS_H_
-#define EXAMPLES_DM_TRANSACTION_MODEL_POINTS_H_
+#ifndef EXAMPLES_JOB_TEMPERATURE_MODEL_POINTS_H_
+#define EXAMPLES_JOB_TEMPERATURE_MODEL_POINTS_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -20,40 +20,33 @@
  */
 
 #include "Kit/Dm/ModelDatabase.h"
-#include "Kit/Dm/Mp/Bool.h"
-#include "Examples/Dm/Transaction/MpFoo.h"
+#include "Kit/Dm/Mp/Float.h"
 
 ///
 namespace mp {
 
 /*---------------------------------------------------------------------------*/
-/** This model point is used to trigger a client/server transaction.
+/** This model point contains a "published" (from a hypothetical) driver
+    layer that is sampling an analog temperature sensor.
 
-    \b Units: struct
+    \b Units: Degrees Celsius
 
-    \b Range: invalid             --> "idle"
-              transition to valid -->Notifies the Server (of the request)
-              updated while valid -->Notifies the Client (of the response)
-
-
-    \b Notes:
-        The application is responsible for ensuring that there is only at most
-        one transaction 'in-flight'at any given time.
-*/
-extern Examples::Dm::Transaction::MpFoo trigger;
-
-/** This model point is used to terminate the application
-
-    \b Units: bool
-
-    \b Range: invalid --> "running"
-              true    --> "terminate" the application
-              false   --> ignored/not-used
+    \b Range: -40.0 to 125.0
 
     \b Notes:
 */
-extern Kit::Dm::Mp::Bool shutdownRequest;
+extern Kit::Dm::Mp::Float tempSensor1;
 
+/** This model point contains a "published" (from a hypothetical) driver
+    layer that is sampling an analog temperature sensor.
+
+    \b Units: Degrees Celsius
+
+    \b Range: -40.0 to 125.0
+
+    \b Notes:
+*/
+extern Kit::Dm::Mp::Float tempSensor2;
 
 /*---------------------------------------------------------------------------*/
 /// The Application's Model Point Database

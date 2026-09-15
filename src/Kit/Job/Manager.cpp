@@ -275,12 +275,14 @@ bool Manager::stopJob( const char* jobName ) noexcept
     return payload.success;
 }
 
-void Manager::stopAllJobs() noexcept
+bool Manager::stopAllJobs() noexcept
 {
     IManagerRequest::StopAllJobsPayload payload;
     Kit::Itc::SyncReturnHandler         srh;
     IManagerRequest::StopAllJobsMsg     msg( *this, payload, srh );
     m_eventQueue.postSync( msg );
+
+    return payload.success;
 }
 
 bool Manager::isJobRunning( const char* jobName ) noexcept
