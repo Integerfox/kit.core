@@ -1,0 +1,46 @@
+
+--- Your friendly neighborhood TShell. ---
+
+
+$ *** TEST: help jobs
+$ jobs
+jobs start <jobname> [<args...]
+jobs stop <jobname>|ALL
+jobs ls
+jobs help <jobname>
+  Asynchronously starts/stops individual Jobs (micro applications). Issuing
+  the command without arguments displays the list of running Jobs. The
+  'ls' subcommand lists all available Jobs.
+ 
+$ *** TEST: list available jobs
+$ AVAILABLE Jobs:
+alpha
+beta
+$ *** TEST: no jobs running
+$ NO Jobs are running.
+$ *** TEST: start alpha
+$ $ *** TEST: list running jobs
+$ RUNNING Jobs:
+alpha
+$ *** TEST: job help
+$ alpha
+Alpha test job
+alpha [args]
+$ *** TEST: stop alpha
+$ $ *** TEST: stop already stopped job
+$ CMD_ERR_BAD_SYNTAX: [jobs stop alpha]
+$ *** TEST: unknown job
+$ CMD_ERR_BAD_SYNTAX: [jobs start missing]
+$ *** TEST: stop all
+$ $ $ NO Jobs are running.
+$ *** TEST: Error cases
+$ CMD_ERR_BAD_SYNTAX: [jobs start bob-your-uncle]
+$ ERROR: missing one or more arguments. [jobs start   ]
+CMD_ERR_BAD_SYNTAX: [jobs start   ]
+$ CMD_ERR_BAD_SYNTAX: [jobs stop are-your-sure]
+$ ERROR: missing one or more arguments. [jobs stop  ]
+CMD_ERR_BAD_SYNTAX: [jobs stop  ]
+$ CMD_ERR_BAD_SYNTAX: [jobs help okay-maybe-not]
+$ ERROR: Job name missing. [jobs help ]
+CMD_ERR_BAD_SYNTAX: [jobs help ]
+$ CMD_ERR_BAD_SYNTAX: [jobs xyz]

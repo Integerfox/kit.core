@@ -66,6 +66,9 @@ public:
             fillFlashCodeQueue();
         }
 
+        // This request never fails
+        msg.getPayload().success = true;
+
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
     }
@@ -82,6 +85,9 @@ public:
             // Make sure the all of the potential callbacks get cancelled
             m_flashCodeQueue.m_mpElementCount.detach( m_obFlashCodeQueue );
         }
+
+        // This request never fails
+        msg.getPayload().success = true;
 
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();

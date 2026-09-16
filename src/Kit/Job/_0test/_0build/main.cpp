@@ -1,0 +1,20 @@
+#include "Kit/System/Api.h"
+#include "Kit/System/Trace.h"
+#include "catch2/catch_session.hpp"
+#include "Kit/Job/IJob.h"
+
+int main( int argc, char* argv[] )
+{
+    // Initialize KIT Library
+    Kit::System::initialize();
+
+    // Enable trace
+    KIT_SYSTEM_TRACE_ENABLE();
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( "*LOG_" );
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( OPTION_KIT_JOB_TRACE_SECTION );
+    KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eINFO );
+
+    // Run the test(s)
+    return Catch::Session().run( argc, argv );
+}

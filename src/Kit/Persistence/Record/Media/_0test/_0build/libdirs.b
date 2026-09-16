@@ -1,5 +1,6 @@
 src/Kit/Persistence/Record/Media
 src/Kit/Persistence/Record/Media/_0test
+src/Kit/Driver/NV
 
 src/Kit/System
 src/Kit/EventQueue

@@ -89,6 +89,8 @@ public:
             }
         }
 
+        // Success reflects whether the Record started successfully
+        msg.getPayload().success = m_opened;
         msg.returnToSender();
     }
 
@@ -102,6 +104,8 @@ public:
             m_record.stop();
         }
 
+        // The close request never fails
+        msg.getPayload().success = true;
         msg.returnToSender();
     }
 
