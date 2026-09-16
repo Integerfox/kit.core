@@ -12,7 +12,12 @@
 #include "Kit/System/Api.h"
 #include "Kit/System/IRunnable.h"
 #include "Kit/System/Thread.h"
-#include "Examples/Dm/Transaction/example.h"
+#include "Examples/Job/Temperature/example.h"
+#include "Kit/Io/IInputOutput.h"
+#include "Kit/TShell/Command/FreeRTOS/Threads.h"
+
+static Kit::TShell::Command::FreeRTOS::Threads threadsCmd_( Examples::Job::Temperature::g_commandList );
+extern Kit::Io::IInputOutput&                  g_bspConsoleStream;
 
 namespace {  // Anonymous namespace
 
@@ -22,7 +27,7 @@ class MyMainThread : public Kit::System::IRunnable
 public:
     void entry() noexcept override
     {
-        Examples::Dm::Transaction::runExample();
+        Examples::Job::Temperature::runExample( g_bspConsoleStream, g_bspConsoleStream );
 
         // Don't let the thread end if/when the application returns, just loop forever waiting for a reset/power-cycle
         for ( ;; )

@@ -1,3 +1,6 @@
+# Middleware
+src/Kit/TShell/Command/FreeRTOS
+
 # Output stream for the KIT Console
 src/Kit/Io/Serial/ST/M32F4
 

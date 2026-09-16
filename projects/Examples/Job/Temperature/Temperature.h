@@ -20,6 +20,7 @@
 #include "Kit/Text/StringTo.h"
 #include "Kit/Text/Tokenizer/TextBlock.h"
 #include "Kit/Bsp/Api.h"
+#include <inttypes.h>
 
 /// Default interval time (in milliseconds) for sampling temperature
 #ifndef OPTION_EXAMPLE_JOB_TEMPERATURE_SAMPLE_INTERVAL_MS
@@ -103,7 +104,7 @@ protected:
         if ( parse( args ) )
         {
             KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION,
-                                  "%s: Configuration: sampleMs=%u ms, displayMs=%u ms, units=%s",
+                                  "%s: Configuration: sampleMs=%" PRIu32 " ms, displayMs=%" PRIu32 " ms, units=%s",
                                   m_name,
                                   m_sampleMs,
                                   m_displayMs,
