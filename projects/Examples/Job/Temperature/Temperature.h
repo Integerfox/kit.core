@@ -167,8 +167,14 @@ protected:
             return false;
         }
 
+        // ONLY sample time is provided
+        if ( args.numParameters() == 1 )
+        {
+            return true;
+        }
+
         // Display time
-        if ( args.numParameters() > 1 )
+        else
         {
             if ( !Kit::Text::StringTo::unsignedInt( m_displayMs, args.getParameter( 1 ) ) )
             {
@@ -176,19 +182,27 @@ protected:
             }
         }
 
-        // Fahrenheit/Celsius
-        if ( args.numParameters() > 2 )
+        /// ONLY sample time & display time provided
+        if ( args.numParameters() == 2 )
         {
-            const char* arg3 = args.getParameter( 2 );
-            if ( *arg3 == 'F' || *arg3 == 'f' )
+            return true;
+        }
+        else
+        {
+            // Fahrenheit/Celsius
+            if ( args.numParameters() == 3 )
             {
-                m_fahrenheit = true;
-                return true;
-            }
-            else if ( *arg3 == 'C' || *arg3 == 'c' )
-            {
-                m_fahrenheit = false;
-                return true;
+                const char* arg3 = args.getParameter( 2 );
+                if ( *arg3 == 'F' || *arg3 == 'f' )
+                {
+                    m_fahrenheit = true;
+                    return true;
+                }
+                else if ( *arg3 == 'C' || *arg3 == 'c' )
+                {
+                    m_fahrenheit = false;
+                    return true;
+                }
             }
         }
 
