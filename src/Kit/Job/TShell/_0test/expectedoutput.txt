@@ -19,28 +19,26 @@ beta
 $ *** TEST: no jobs running
 $ NO Jobs are running.
 $ *** TEST: start alpha
-$ $ *** TEST: list running jobs
-$ RUNNING Jobs:
-alpha
+$ CMD_ERR_BAD_SYNTAX: [jobs start alpha hello]
+$ *** TEST: list running jobs
+$ NO Jobs are running.
 $ *** TEST: job help
-$ alpha
-Alpha test job
-alpha [args]
+$ CMD_ERR_BAD_SYNTAX: [jobs help alpha]
 $ *** TEST: stop alpha
-$ $ *** TEST: stop already stopped job
+$ CMD_ERR_BAD_SYNTAX: [jobs stop alpha]
+$ *** TEST: stop already stopped job
 $ CMD_ERR_BAD_SYNTAX: [jobs stop alpha]
 $ *** TEST: unknown job
 $ CMD_ERR_BAD_SYNTAX: [jobs start missing]
 $ *** TEST: stop all
-$ $ $ NO Jobs are running.
+$ CMD_ERR_BAD_SYNTAX: [jobs start beta]
+$ CMD_ERR_BAD_SYNTAX: [jobs stop ALL]
+$ NO Jobs are running.
 $ *** TEST: Error cases
 $ CMD_ERR_BAD_SYNTAX: [jobs start bob-your-uncle]
-$ ERROR: missing one or more arguments. [jobs start   ]
-CMD_ERR_BAD_SYNTAX: [jobs start   ]
-$ CMD_ERR_BAD_SYNTAX: [jobs stop are-your-sure]
-$ ERROR: missing one or more arguments. [jobs stop  ]
-CMD_ERR_BAD_SYNTAX: [jobs stop  ]
+$ CMD_ERR_BAD_SYNTAX: [jobs start   ]
+$ CMD_ERR_BAD_SYNTAX: [jobs stop are-your-sure ]
+$ CMD_ERR_BAD_SYNTAX: [jobs stop  ]
 $ CMD_ERR_BAD_SYNTAX: [jobs help okay-maybe-not]
-$ ERROR: Job name missing. [jobs help ]
-CMD_ERR_BAD_SYNTAX: [jobs help ]
+$ CMD_ERR_BAD_SYNTAX: [jobs help ]
 $ CMD_ERR_BAD_SYNTAX: [jobs xyz]
