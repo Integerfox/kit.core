@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 370-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 378-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -76,7 +76,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Ring Buffer with change notifications when items are added-to and removed-from the buffer. </p>
 <p>The example application contains a data producer (<code><a class="el" href="class_examples_1_1_container_1_1_ring_buffer_1_1_producer.html" title="This concrete class is responsible for generating flash codes (i.e.">Producer</a></code>) that adds elements (i.e LED Flash codes) to the <code>RingBufferMP</code> instance. A consumer class (<code><a class="el" href="class_examples_1_1_container_1_1_ring_buffer_1_1_led_server.html" title="This concrete class monitors the a Queue of LED Flash codes and the consumes-and-executes the Flash c...">LedServer</a></code>) drains all elements when it receives change notification that the data has been added to the Ring Buffer. The drain elements/flash-codes are used to drive the board's debug LED.</p>
-<h1><a class="anchor" id="autotoc_md154"></a>
+<h1><a class="anchor" id="autotoc_md156"></a>
 Details, Constraints, Requirements</h1>
 <ul>
 <li>The Ring Buffer classes are type safe they can contain <b>any</b> data type, i.e. primitive C/C++ types and structs/classes.</li>
@@ -85,19 +85,19 @@ Details, Constraints, Requirements</h1>
 <li>The Ring Buffer holds copies of the data items, i.e. items a copied into/from the buffer.</li>
 <li>The 'basic' Ring Buffer is not thread safe. However there exists two thread safe version of the Ring Buffer. One - <code>RingBufferMT</code> is wrapper to basic <a class="el" href="namespace_examples_1_1_container_1_1_ring_buffer.html" title="Ring Buffer with change notifications when items are added-to and removed-from the buffer.">RingBuffer</a> class that uses mutexes for enforcing critical sections. The <code>RingBufferMP</code> class is very similar to <code>RingBufferMT</code> in that uses a mutex, however the <code>RingBufferMT</code> class adds thread-safe Model Point that maintains the contained items count. This MP is used to generate change notification when the buffer' items count changes.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md155"></a>
+<h1><a class="anchor" id="autotoc_md157"></a>
 Class Diagram</h1>
 <div class="image">
 <img src="classDiagram_examplescontainerringbuffer.png" alt=""/>
 <div class="caption">
 Transaction Example Class Diagram</div></div>
-    <h1><a class="anchor" id="autotoc_md156"></a>
+    <h1><a class="anchor" id="autotoc_md158"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="namespace_kit_1_1_container.html">Kit::Container namespace documentation</a></li>
 <li><a class="el" href="namespace_kit_1_1_dm.html">Kit::Dm namespace documentation</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md157"></a>
+<h1><a class="anchor" id="autotoc_md159"></a>
 Implementation</h1>
 <ul>
 <li>Root source directory: <a href="https://github.com/Integerfox/kit.core/blob/main/projects/Examples/Container/RingBuffer">projects/Examples/Container/RingBuffer</a></li>
@@ -178,7 +178,7 @@ The time - in milliseconds - of ON period of the flash code. </td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 10 2026 13:41:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 20 2026 19:12:27 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

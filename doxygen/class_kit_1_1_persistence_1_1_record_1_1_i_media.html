@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 370-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 378-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -180,7 +180,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This method reads 'bytesToRead' bytes from the media at the specified offset. </p>
-<p>The method does not return until:</p>
+<p>The 'dstBuffer' is REQUIRED to be at least 'bytesToRead' bytes in size. The method does not return until:</p>
 <p>1) All requested bytes have been read, 2) OR all available bytes have been read (i.e. end of media reached), 3) OR an error occurs.</p>
 <p>The method returns the number of bytes read. A return value of KIT_PERSISTENCE_SIZE_MAX indicates that an error occurred. </p>
 
@@ -296,7 +296,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 10 2026 13:41:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 20 2026 19:12:27 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

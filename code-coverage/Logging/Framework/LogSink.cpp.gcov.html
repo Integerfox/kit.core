@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">27</td>
-            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">29</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-10 13:48:26</td>
+            <td class="headerValue">2026-09-20 19:17:19</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">92.9&nbsp;%</td>
@@ -95,49 +95,53 @@
 <span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">           3 :         m_logBuffer.m_mpElementCount.attach( m_obElementCount );</span></span>
 <span id="L34"><span class="lineNum">      34</span>                 :             :     }</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : </span>
-<span id="L36"><span class="lineNum">      36</span>                 :             :     msg.returnToSender();</span>
-<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">           4 : }</span></span>
-<span id="L38"><span class="lineNum">      38</span>                 :             : </span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">           4 : void LogSink::request( CloseMsg&amp; msg ) noexcept</span></span>
-<span id="L40"><span class="lineNum">      40</span>                 :             : {</span>
-<span id="L41"><span class="lineNum">      41</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           4 :     if ( m_opened )</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :             :     {</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">           3 :         m_opened = false;</span></span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">           3 :         m_logBuffer.m_mpElementCount.detach( m_obElementCount );</span></span>
-<span id="L45"><span class="lineNum">      45</span>                 :             :     }</span>
-<span id="L46"><span class="lineNum">      46</span>                 :             : </span>
-<span id="L47"><span class="lineNum">      47</span>                 :             :     msg.returnToSender();</span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">           4 : }</span></span>
-<span id="L49"><span class="lineNum">      49</span>                 :             : </span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">           7 : void LogSink::elementCountChanged( Kit::Dm::Mp::Uint32&amp; mp, Kit::Dm::IObserver&amp; clientObserver ) noexcept</span></span>
-<span id="L51"><span class="lineNum">      51</span>                 :             : {</span>
-<span id="L52"><span class="lineNum">      52</span>                 :             :     uint32_t count;</span>
-<span id="L53"><span class="lineNum">      53</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           7 :     if ( mp.readAndSync( count, clientObserver ) &amp;&amp; count &gt; 0 )</span></span>
-<span id="L54"><span class="lineNum">      54</span>                 :             :     {</span>
-<span id="L55"><span class="lineNum">      55</span>                 :             :         // Temporarily cancel change notifications to avoid redundant notifications while draining the buffer</span>
-<span id="L56"><span class="lineNum">      56</span>                 :             :         mp.detach( m_obElementCount );</span>
-<span id="L57"><span class="lineNum">      57</span>                 :             : </span>
-<span id="L58"><span class="lineNum">      58</span>                 :             :         // Drain the buffer (but limit how many adds at one time) and write the entries to persistent storage</span>
-<span id="L59"><span class="lineNum">      59</span>                 :             :         unsigned                             iterations = 0;</span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">           4 :         Kit::Logging::Framework::EntryData_T entry;</span></span>
-<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">           4 :         uint16_t                             seqNum = mp.getSequenceNumber();</span></span>
-<span id="L62"><span class="lineNum">      62</span>   [<span class="tlaGBC" title="Branch 0 was taken 15 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 13 times"> + </span>]:<span class="tlaGNC">          17 :         while ( iterations &lt; OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE &amp;&amp; m_logBuffer.remove( entry, seqNum ) )</span></span>
-<span id="L63"><span class="lineNum">      63</span>                 :             :         {</span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">          13 :             dispatchLogEntry( entry );</span></span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">          13 :             iterations++;</span></span>
-<span id="L66"><span class="lineNum">      66</span>                 :             :         }</span>
-<span id="L67"><span class="lineNum">      67</span>                 :             : </span>
-<span id="L68"><span class="lineNum">      68</span>                 :             :         // Reattach the observer after draining the buffer</span>
-<span id="L69"><span class="lineNum">      69</span>                 :             :         // Note: Force an immediate notification if there are still entries in the</span>
-<span id="L70"><span class="lineNum">      70</span>                 :             :         //       buffer (i.e. if I exited the loop because I reached the batch write</span>
-<span id="L71"><span class="lineNum">      71</span>                 :             :         //       limit instead of draining the buffer)</span>
-<span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           4 :         if ( m_logBuffer.isEmpty() == false )</span></span>
-<span id="L73"><span class="lineNum">      73</span>                 :             :         {</span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">           2 :             seqNum = Kit::Dm::IModelPoint::SEQUENCE_NUMBER_UNKNOWN;</span></span>
-<span id="L75"><span class="lineNum">      75</span>                 :             :         }</span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">           4 :         mp.attach( m_obElementCount, seqNum );</span></span>
-<span id="L77"><span class="lineNum">      77</span>                 :             :     }</span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">           7 : }</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :     // The open request never fails</span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">           4 :     msg.getPayload().success = true;</span></span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :     msg.returnToSender();</span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">           4 : }</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :             : </span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">           4 : void LogSink::request( CloseMsg&amp; msg ) noexcept</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :             : {</span>
+<span id="L43"><span class="lineNum">      43</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           4 :     if ( m_opened )</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :     {</span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">           3 :         m_opened = false;</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">           3 :         m_logBuffer.m_mpElementCount.detach( m_obElementCount );</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             : </span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :     // The close request never fails</span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">           4 :     msg.getPayload().success = true;</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :     msg.returnToSender();</span>
+<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">           4 : }</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : </span>
+<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">           7 : void LogSink::elementCountChanged( Kit::Dm::Mp::Uint32&amp; mp, Kit::Dm::IObserver&amp; clientObserver ) noexcept</span></span>
+<span id="L55"><span class="lineNum">      55</span>                 :             : {</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :     uint32_t count;</span>
+<span id="L57"><span class="lineNum">      57</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           7 :     if ( mp.readAndSync( count, clientObserver ) &amp;&amp; count &gt; 0 )</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :     {</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :         // Temporarily cancel change notifications to avoid redundant notifications while draining the buffer</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :         mp.detach( m_obElementCount );</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             : </span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :         // Drain the buffer (but limit how many adds at one time) and write the entries to persistent storage</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :         unsigned                             iterations = 0;</span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">           4 :         Kit::Logging::Framework::EntryData_T entry;</span></span>
+<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">           4 :         uint16_t                             seqNum = mp.getSequenceNumber();</span></span>
+<span id="L66"><span class="lineNum">      66</span>   [<span class="tlaGBC" title="Branch 0 was taken 15 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 13 times"> + </span>]:<span class="tlaGNC">          17 :         while ( iterations &lt; OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE &amp;&amp; m_logBuffer.remove( entry, seqNum ) )</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :             :         {</span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">          13 :             dispatchLogEntry( entry );</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">          13 :             iterations++;</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :             :         }</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             : </span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :         // Reattach the observer after draining the buffer</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             :         // Note: Force an immediate notification if there are still entries in the</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             :         //       buffer (i.e. if I exited the loop because I reached the batch write</span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :         //       limit instead of draining the buffer)</span>
+<span id="L76"><span class="lineNum">      76</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           4 :         if ( m_logBuffer.isEmpty() == false )</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :             :         {</span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">           2 :             seqNum = Kit::Dm::IModelPoint::SEQUENCE_NUMBER_UNKNOWN;</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :         }</span>
+<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">           4 :         mp.attach( m_obElementCount, seqNum );</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :     }</span>
+<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">           7 : }</span></span>
         </pre>
               </td>
             </tr>

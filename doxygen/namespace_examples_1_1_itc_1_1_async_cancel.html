@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 370-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 378-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -82,10 +82,10 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="namespace_examples_1_1_itc_1_1_asynchronous.html" title="Asynchronous message based Inter-Thread-Communication (ITC).">Asynchronous</a> message - with cancel semanatics - based Inter-Thread-Communication (ITC). </p>
 <p>The directory contains a example application on how to use KIT's asynchronous ITC messaging AND how to cancel an outstanding asynchronous message. The example contains server widget. The server widget is responsible for generating N duty cycles of LED flash pattern. The <a class="el" href="class_examples_1_1_itc_1_1_async_cancel_1_1_client.html" title="This concrete class is a asynchronous ITC client that cycles through sending different flash duty cyc...">Client</a> widget use asynchronous ITC message set the number of duty cycles and the flash pattern</p>
-<h1><a class="anchor" id="autotoc_md167"></a>
+<h1><a class="anchor" id="autotoc_md169"></a>
 Use cases</h1>
 <p>The most common use is to use asynchronous ITC messaging is when the client has asynchronous behavior (i.e. its behavior is inherently a state machine) or when the client cannot block executing while waiting on event X to happen.</p>
-<h1><a class="anchor" id="autotoc_md168"></a>
+<h1><a class="anchor" id="autotoc_md170"></a>
 Details, Constraints, Requirements</h1>
 <ul>
 <li>When using asynchronous ITC messages - the message client and server <b>can</b> be the same thread. <br  />
@@ -103,19 +103,19 @@ Details, Constraints, Requirements</h1>
 <li>Both the <a class="el" href="class_examples_1_1_itc_1_1_async_cancel_1_1_client.html" title="This concrete class is a asynchronous ITC client that cycles through sending different flash duty cyc...">Client</a> and <a class="el" href="class_examples_1_1_itc_1_1_async_cancel_1_1_server.html" title="This concrete class is a &#39;server&#39; that produces the LED flash patterns.">Server</a> widgets use synchronous ITC for initialization and shutdown.</li>
 </ul>
 <p><b>NOTE</b>: The example also utilizes sending an argument/data via the synchronous ITC open message.</p>
-<h1><a class="anchor" id="autotoc_md169"></a>
+<h1><a class="anchor" id="autotoc_md171"></a>
 Class Diagram</h1>
 <div class="image">
 <img src="classDiagram_examplesitcasynccancel.png" alt=""/>
 <div class="caption">
 Transaction Example Class Diagram</div></div>
-    <h1><a class="anchor" id="autotoc_md170"></a>
+    <h1><a class="anchor" id="autotoc_md172"></a>
 See Also</h1>
 <ul>
 <li><a class="el" href="namespace_kit_1_1_itc.html">Kit::Itc namespace documentation</a></li>
 <li><a class="el" href="namespace_examples_1_1_itc_1_1_asynchronous.html">Asynchronous ITC example</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md171"></a>
+<h1><a class="anchor" id="autotoc_md173"></a>
 Implementation</h1>
 <ul>
 <li>Root source directory: <a href="https://github.com/Integerfox/kit.core/blob/main/projects/Examples/Itc/AsyncCancel">projects/Examples/Itc/AsyncCancel</a></li>
@@ -195,7 +195,7 @@ Number of times to repeat the on/off cycle. </td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 10 2026 13:41:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Sun Sep 20 2026 19:12:27 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

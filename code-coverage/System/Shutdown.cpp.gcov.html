@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-10 13:48:26</td>
+            <td class="headerValue">2026-09-20 19:17:19</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -86,21 +86,21 @@
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : </span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : ///////////////////////</span>
-<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC tlaBgGNC">          15 : void Shutdown::registerHandler( Shutdown::IHandler&amp; instanceToRegister ) noexcept</span></span>
+<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC tlaBgGNC">          17 : void Shutdown::registerHandler( Shutdown::IHandler&amp; instanceToRegister ) noexcept</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : {</span>
-<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          15 :     Mutex::ScopeLock lock( PrivateLocks::system() );</span></span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          17 :     Mutex::ScopeLock lock( PrivateLocks::system() );</span></span>
 <span id="L30"><span class="lineNum">      30</span>                 :             :     callbacks_.push( instanceToRegister );</span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          15 : }</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          17 : }</span></span>
 <span id="L32"><span class="lineNum">      32</span>                 :             : </span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : </span>
 <span id="L34"><span class="lineNum">      34</span>                 :             : //////////////////////</span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">           3 : int Shutdown::notifyShutdownHandlers( int exitCode ) noexcept</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">           4 : int Shutdown::notifyShutdownHandlers( int exitCode ) noexcept</span></span>
 <span id="L36"><span class="lineNum">      36</span>                 :             : {</span>
-<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">           3 :     PrivateLocks::system().lock();</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">           4 :     PrivateLocks::system().lock();</span></span>
 <span id="L38"><span class="lineNum">      38</span>                 :             :     Shutdown::IHandler* ptr = callbacks_.get();</span>
-<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">           3 :     PrivateLocks::system().unlock();</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaGNC">           4 :     PrivateLocks::system().unlock();</span></span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
-<span id="L41"><span class="lineNum">      41</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           4 :     while ( ptr )</span></span>
+<span id="L41"><span class="lineNum">      41</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">           5 :     while ( ptr )</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     {</span>
 <span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">           1 :         exitCode = ptr-&gt;notify( exitCode );</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : </span>
@@ -109,7 +109,7 @@
 <span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">           1 :         PrivateLocks::system().unlock();</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     }</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">           3 :     return exitCode;</span></span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">           4 :     return exitCode;</span></span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : }</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : </span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : }  // end namespaces</span>
