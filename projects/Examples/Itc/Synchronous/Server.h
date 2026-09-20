@@ -71,6 +71,9 @@ public:
             expired();
         }
 
+        // This request never fails
+        msg.getPayload().success = true;
+
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
     }
@@ -85,6 +88,9 @@ public:
             m_opened = false;
             Timer::stop();
         }
+
+        // This request never fails
+        msg.getPayload().success = true;
 
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();

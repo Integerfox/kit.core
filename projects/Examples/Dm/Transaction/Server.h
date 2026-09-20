@@ -56,6 +56,9 @@ public:
             m_mpFoo.attach( m_obFoo );
         }
 
+        // This request never fails
+        msg.getPayload().success = true;
+
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
     }
@@ -72,6 +75,9 @@ public:
             // Make sure the all of the potential callbacks get cancelled
             m_mpFoo.detach( m_obFoo );
         }
+
+        // This request never fails
+        msg.getPayload().success = true;
 
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
