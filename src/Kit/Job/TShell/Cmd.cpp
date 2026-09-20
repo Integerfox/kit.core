@@ -58,7 +58,7 @@ Kit::TShell::Result_T Cmd::execute( Kit::TShell::IContext& context, char* cmdStr
     }
 
     // START command
-    if ( strcmp( subCmd, SUBCMD_START, strlen( SUBCMD_START ) ) == 0 )
+    if ( strcmp( subCmd, SUBCMD_START ) == 0 )
     {
         // Get Job name
         const char* jobName = Kit::Text::Strip::space( Kit::Text::Strip::notSpace( subCmd ) );
@@ -84,7 +84,7 @@ Kit::TShell::Result_T Cmd::execute( Kit::TShell::IContext& context, char* cmdStr
     }
 
     // STOP command
-    if ( strcmp( subCmd, SUBCMD_STOP, strlen( SUBCMD_STOP ) ) == 0 )
+    if ( strcmp( subCmd, SUBCMD_STOP ) == 0 )
     {
         // Get Job name
         const char* jobName = Kit::Text::Strip::space( Kit::Text::Strip::notSpace( subCmd ) );
@@ -96,7 +96,7 @@ Kit::TShell::Result_T Cmd::execute( Kit::TShell::IContext& context, char* cmdStr
         }
 
         // check for STOP ALL
-        if ( strncmp( jobName, "ALL", 3 ) == 0 )
+        if ( strcmp( jobName, "ALL" ) == 0 )
         {
             m_jobManager.stopAllJobs();
         }
@@ -116,7 +116,7 @@ Kit::TShell::Result_T Cmd::execute( Kit::TShell::IContext& context, char* cmdStr
     }
 
     // LIST command
-    if ( strncmp( subCmd, SUBCMD_LIST, strlen( SUBCMD_LIST ) ) == 0 )
+    if ( strcmp( subCmd, SUBCMD_LIST ) == 0 )
     {
         unsigned numFound = 0;
         bool     success  = m_jobManager.getAvailableJobs( m_jobList, OPTION_KIT_JOB_TSHELL_MAX_INSTANCES, numFound );
@@ -141,7 +141,7 @@ Kit::TShell::Result_T Cmd::execute( Kit::TShell::IContext& context, char* cmdStr
     }
 
     // HELP command
-    if ( strncmp( subCmd, SUBCMD_HELP, strlen( SUBCMD_HELP ) ) == 0 )
+    if ( strcmp( subCmd, SUBCMD_HELP ) == 0 )
     {
         // Get Job name
         const char* jobName = Kit::Text::Strip::space( Kit::Text::Strip::notSpace( subCmd ) );
