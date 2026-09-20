@@ -145,6 +145,20 @@ TEST_CASE( "Manager" )
         REQUIRE( job2.shutdownCount == 1 );
     }
 
+    SECTION( "startJob() - fails while the Manager is closed" )
+    {
+        char args[] = "";
+        REQUIRE( uut.startJob( "job1", args ) == false );
+        REQUIRE( job1.startCount == 0 );
+
+        uut.open();
+        uut.close();
+
+        REQUIRE( uut.startJob( "job1", args ) == false );
+        REQUIRE( job1.startCount == 0 );
+        REQUIRE( job1.shutdownCount == 1 );
+    }
+
     SECTION( "close - stops and shuts down started jobs" )
     {
         uut.open();
@@ -193,6 +207,17 @@ TEST_CASE( "Manager" )
         char args[] = "";
         bool result = uut.startJob( "no-such-job", args );
         REQUIRE( result == false );
+
+        uut.close();
+    }
+
+    SECTION( "startJob() - nullptr job name is rejected" )
+    {
+        uut.open();
+
+        char args[] = "";
+        REQUIRE( uut.startJob( nullptr, args ) == false );
+        REQUIRE( job1.startCount == 0 );
 
         uut.close();
     }

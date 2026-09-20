@@ -13,6 +13,7 @@
 #include "kit_config.h"
 #include "Kit/Container/KeyedItem.h"
 #include "Kit/Job/IContext.h"
+#include "Kit/System/Assert.h"
 
 /// KIT Trace Section identifier for a common trace output section
 #ifndef OPTION_KIT_JOB_TRACE_SECTION
@@ -132,6 +133,7 @@ protected:
     IJob( const char* name ) noexcept
         : Kit::Container::KeyLiteralString( name )
     {
+        KIT_SYSTEM_ASSERT( name == nullptr || *name != '\0' );
     }
 
 public:

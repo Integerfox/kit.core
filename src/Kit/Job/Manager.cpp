@@ -83,38 +83,45 @@ void Manager::request( IManagerRequest::StartJobMsg& msg ) noexcept
     IManagerRequest::StartJobPayload& payload = msg.getPayload();
     payload.success                           = false;
 
-    // Look-up the Job by name
-    IJob* job = searchList( m_jobs, payload.jobName );
-    if ( job != nullptr )
+    if ( payload.jobName == nullptr || *payload.jobName == '\0' )
     {
-        // Stop the Job if it is already running
-        if ( job->isRunning_() )
-        {
-            job->stop_();
-        }
-
-        // Start the Job
-        char* args = payload.jobArgs;
-        if ( args == nullptr )
-        {
-            KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: %s due to nullptr for 'args'", job->getName() );
-        }
-        else
-        {
-            KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "Starting: %s", job->getName() );
-            if ( job->start_( *this, args ) )
-            {
-                payload.success = true;
-            }
-            else
-            {
-                KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: %s %s", job->getName(), args );
-            }
-        }
+        KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: Job name is empty" );
     }
     else
     {
-        KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "Job not found: %s", payload.jobName );
+        // Look-up the Job by name
+        IJob* job = searchList( m_jobs, payload.jobName );
+        if ( job != nullptr )
+        {
+            // Stop the Job if it is already running
+            if ( job->isRunning_() )
+            {
+                job->stop_();
+            }
+
+            // Start the Job
+            char* args = payload.jobArgs;
+            if ( args == nullptr )
+            {
+                KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: %s due to nullptr for 'args'", job->getName() );
+            }
+            else
+            {
+                KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "Starting: %s", job->getName() );
+                if ( job->start_( *this, args ) )
+                {
+                    payload.success = true;
+                }
+                else
+                {
+                    KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: %s %s", job->getName(), args );
+                }
+            }
+        }
+        else
+        {
+            KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "Job not found: %s", payload.jobName );
+        }
     }
 
     msg.returnToSender();
@@ -265,6 +272,11 @@ void Manager::request( IManagerRequest::LookupJobMsg& msg ) noexcept
 ////////////////
 bool Manager::startJob( const char* jobName, char* optionalArgs ) noexcept
 {
+    if ( jobName == nullptr || *jobName == '\0' || !m_opened )
+    {
+        return false;
+    }
+
     IManagerRequest::StartJobPayload payload( jobName, optionalArgs );
     Kit::Itc::SyncReturnHandler      srh;
     IManagerRequest::StartJobMsg     msg( *this, payload, srh );

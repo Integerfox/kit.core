@@ -36,64 +36,81 @@ protected:
         , m_usage( usage )
         , m_running( false )
     {
+        KIT_SYSTEM_ASSERT( description != nullptr );
+        KIT_SYSTEM_ASSERT( usage != nullptr );
         jobList.insert( *this );  // Self register with the Job Manager
     }
 
-public:
-    /// See Kit::Container::KeyedItem
-    const Kit::Container::Key& getKey() const noexcept override { return *this; }
+    public:
+        /// See Kit::Container::KeyedItem
+        const Kit::Container::Key& getKey() const noexcept override
+        {
+            return *this;
+        }
 
-public:
-    /// See Kit::Job::IJob
-    const char* getName() const noexcept override { return m_name; }
+    public:
+        /// See Kit::Job::IJob
+        const char* getName() const noexcept override
+        {
+            return m_name;
+        }
 
-    /// See Kit::Job::IJob
-    const char* getDescription() const noexcept override { return m_description; }
+        /// See Kit::Job::IJob
+        const char* getDescription() const noexcept override
+        {
+            return m_description;
+        }
 
-    /// See Kit::Job::IJob
-    const char* getUsage() const noexcept override { return m_usage; }
+        /// See Kit::Job::IJob
+        const char* getUsage() const noexcept override
+        {
+            return m_usage;
+        }
 
-protected:
-    /// See Kit::Job::IJob
-    bool isRunning_() const noexcept override { return m_running; }
+    protected:
+        /// See Kit::Job::IJob
+        bool isRunning_() const noexcept override
+        {
+            return m_running;
+        }
 
-protected:
-    /** Helper method.  The concrete child class should call this method ON EXIT
-        of it start_(...) method.  It marks the Job as running/idle based on the
-        provide 'startResult' parameter to indicate success or failure.
-    */
-    inline bool setRunningState( bool startResult ) noexcept
-    {
-        m_running = startResult;
-        return m_running;
-    }
+    protected:
+        /** Helper method.  The concrete child class should call this method ON EXIT
+            of it start_(...) method.  It marks the Job as running/idle based on the
+            provide 'startResult' parameter to indicate success or failure.
+        */
+        inline bool setRunningState( bool startResult ) noexcept
+        {
+            m_running = startResult;
+            return m_running;
+        }
 
-    /** Helper method.  The concrete child class should call this method ON EXIT
-        of it stop_() method.  It marks the Job as stopped/idle.  The 'stopResult'
-        parameter indicates success or failure of the 'stopping action', i.e.
-        set to 'true' if the stop action was successful, else 'false'.
+        /** Helper method.  The concrete child class should call this method ON EXIT
+            of it stop_() method.  It marks the Job as stopped/idle.  The 'stopResult'
+            parameter indicates success or failure of the 'stopping action', i.e.
+            set to 'true' if the stop action was successful, else 'false'.
 
-        NOTE: This method should CAN be called by the Job at any time to
-              indicate it has stopped.
-    */
-    inline void setStoppedState() noexcept
-    {
-        m_running = false;
-    }
+            NOTE: This method should CAN be called by the Job at any time to
+                  indicate it has stopped.
+        */
+        inline void setStoppedState() noexcept
+        {
+            m_running = false;
+        }
 
-protected:
-    /// Job name
-    const char* m_name;
+    protected:
+        /// Job name
+        const char* m_name;
 
-    /// Job description
-    const char* m_description;
+        /// Job description
+        const char* m_description;
 
-    /// Job usage information
-    const char* m_usage;
+        /// Job usage information
+        const char* m_usage;
 
-    /// Used to track the job's running/idle state
-    bool m_running;
-};
+        /// Used to track the job's running/idle state
+        bool m_running;
+    };
 
 
 }  // end namespaces
