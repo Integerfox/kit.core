@@ -112,7 +112,7 @@ protected:
 
             // Housekeeping
             startResult    = true;
-            m_maxTemp      = FLT_MIN;
+            m_maxTemp      = -FLT_MAX;
             m_minTemp      = FLT_MAX;
             m_sumTemp      = 0.0F;
             m_numSamples   = 0;
@@ -227,7 +227,7 @@ protected:
             {
                 m_minTemp = t;
             }
-            else if ( t > m_maxTemp )
+            if ( t > m_maxTemp )
             {
                 m_maxTemp = t;
             }

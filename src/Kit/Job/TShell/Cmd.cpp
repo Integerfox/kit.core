@@ -58,7 +58,7 @@ Kit::TShell::Result_T Cmd::execute( Kit::TShell::IContext& context, char* cmdStr
     }
 
     // START command
-    if ( strncmp( subCmd, SUBCMD_START, strlen( SUBCMD_START ) ) == 0 )
+    if ( strcmp( subCmd, SUBCMD_START, strlen( SUBCMD_START ) ) == 0 )
     {
         // Get Job name
         const char* jobName = Kit::Text::Strip::space( Kit::Text::Strip::notSpace( subCmd ) );
@@ -84,7 +84,7 @@ Kit::TShell::Result_T Cmd::execute( Kit::TShell::IContext& context, char* cmdStr
     }
 
     // STOP command
-    if ( strncmp( subCmd, SUBCMD_STOP, strlen( SUBCMD_STOP ) ) == 0 )
+    if ( strcmp( subCmd, SUBCMD_STOP, strlen( SUBCMD_STOP ) ) == 0 )
     {
         // Get Job name
         const char* jobName = Kit::Text::Strip::space( Kit::Text::Strip::notSpace( subCmd ) );

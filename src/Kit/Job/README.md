@@ -1,6 +1,6 @@
 # Kit::Job
 @brief Namespace description for Kit::Job
-@namespace Job::Logging @brief
+@namespace Kit::Job @brief
 
 The 'Job' namespace is provides a framework for asynchronously running a Job. A
 Job can be anything - as long as it honors the semantics (e.g. start|stop)

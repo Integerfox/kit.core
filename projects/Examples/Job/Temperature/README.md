@@ -1,7 +1,7 @@
 # Projects.Examples.Job.Temperature
 @namespace Examples::Job::Temperature
 
-\brief Implements a simple example of a Kit::IJob that samples and displays temperature
+\brief Implements a simple example of a Kit::Job::IJob that samples and displays temperature
 
 The concrete IJob instance polls a model point for a temperature value and
 periodically writes the value to the trace output. The IJob also collects some

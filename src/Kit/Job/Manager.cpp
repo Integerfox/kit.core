@@ -6,6 +6,7 @@
 #include "Manager.h"
 #include "Kit/Itc/SyncReturnHandler.h"
 #include "Kit/System/Trace.h"
+#include <string.h>
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -86,30 +87,29 @@ void Manager::request( IManagerRequest::StartJobMsg& msg ) noexcept
     IJob* job = searchList( m_jobs, payload.jobName );
     if ( job != nullptr )
     {
-        if ( !job->isRunning_() )
+        // Stop the Job if it is already running
+        if ( job->isRunning_() )
         {
-            // Start the Job
-            char* args = payload.jobArgs;
-            if ( args == nullptr )
-            {
-                KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: %s due to nullptr for 'args'", job->getName() );
-            }
-            else
-            {
-                KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "Starting: %s", job->getName() );
-                if ( job->start_( *this, args ) )
-                {
-                    payload.success = true;
-                }
-                else
-                {
-                    KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: %s %s", job->getName(), args );
-                }
-            }
+            job->stop_();
+        }
+
+        // Start the Job
+        char* args = payload.jobArgs;
+        if ( args == nullptr )
+        {
+            KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: %s due to nullptr for 'args'", job->getName() );
         }
         else
         {
-            KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "Job is ALREADY running: %s", job->getName() );
+            KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "Starting: %s", job->getName() );
+            if ( job->start_( *this, args ) )
+            {
+                payload.success = true;
+            }
+            else
+            {
+                KIT_SYSTEM_TRACE_MSG( OPTION_KIT_JOB_TRACE_SECTION, "FAILED to start: %s %s", job->getName(), args );
+            }
         }
     }
     else
@@ -193,8 +193,12 @@ void Manager::request( IManagerRequest::GetAvailableJobsMsg& msg ) noexcept
 
     // Walk the inactive list
     IJob* item = m_jobs.first();
-    while ( item && maxElems )
+    while ( item )
     {
+        if ( maxElems == 0 )
+        {
+            break;
+        }
         payload.dstList[idx] = item;
         idx++;
         maxElems--;
@@ -221,10 +225,14 @@ void Manager::request( IManagerRequest::GetRunningJobsMsg& msg ) noexcept
 
     // Walk the running list
     IJob* item = m_jobs.first();
-    while ( item && maxElems )
+    while ( item )
     {
         if ( item->isRunning_() )
         {
+            if ( maxElems == 0 )
+            {
+                break;
+            }
             payload.dstList[idx] = item;
             idx++;
             maxElems--;

@@ -38,6 +38,7 @@ public:
         , m_startingOffset( startingOffset )
         , m_allocatedLen( allocatedLen )
     {
+        KIT_SYSTEM_ASSERT( allocatedLen <= KIT_PERSISTENCE_SIZE_MAX - startingOffset );
     }
 
 public:

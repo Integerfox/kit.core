@@ -64,7 +64,7 @@ public:
 
 public:
     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible
-        by other classes in the Kit::IJob namespace.  The Application should
+        by other classes in the Kit::Job::IJob namespace.  The Application should
         NEVER call this method.
 
         This method is used to perform any needed initialization on start-up of
@@ -75,7 +75,7 @@ public:
     virtual void initialize_() noexcept = 0;
 
     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible
-        by other classes in the Kit::IJob namespace.  The Application should
+        by other classes in the Kit::Job::IJob namespace.  The Application should
         NEVER call this method.
 
         This method is used to perform any needed shutdown when the application
@@ -88,7 +88,7 @@ public:
 
 public:
     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible
-        by other classes in the Kit::IJob namespace.  The Application should
+        by other classes in the Kit::Job::IJob namespace.  The Application should
         NEVER call this method, instead the Application must call the Manager
         to start a IJob.
 
@@ -108,7 +108,7 @@ public:
     virtual bool start_( IContext& context, char* optionalArgs ) noexcept = 0;
 
     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible
-        by other classes in the Kit::IJob namespace.  The Application should
+        by other classes in the Kit::Job::IJob namespace.  The Application should
         NEVER call this method, instead the Application must call the Manager
         to stop a IJob.
 
@@ -119,7 +119,7 @@ public:
 
 public:
     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible
-         by other classes in the Kit::IJob namespace.  The Application should
+         by other classes in the Kit::Job::IJob namespace.  The Application should
          NEVER call this method, instead the Application must call the Manager
          to stop a IJob.
 

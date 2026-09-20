@@ -352,6 +352,23 @@ TEST_CASE( "Manager" )
         uut.close();
     }
 
+    SECTION( "getRunningJobs() - idle jobs after a full result buffer do not truncate" )
+    {
+        uut.open();
+
+        char args[] = "";
+        REQUIRE( uut.startJob( "job1", args ) == true );
+
+        unsigned        numFound = 0;
+        Kit::Job::IJob* running[1];
+        bool            result = uut.getRunningJobs( running, 1, numFound );
+        REQUIRE( result == true );
+        REQUIRE( numFound == 1 );
+        REQUIRE( running[0] == &job1 );
+
+        uut.close();
+    }
+
     SECTION( "lookUpJob()" )
     {
         uut.open();
