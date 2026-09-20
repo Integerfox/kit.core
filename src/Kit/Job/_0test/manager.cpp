@@ -37,13 +37,13 @@ public:
     }
 
 public:
-    unsigned  initializeCount = 0;
-    unsigned  shutdownCount   = 0;
-    unsigned  startCount      = 0;
-    unsigned  stopCount       = 0;
-    bool      startResult     = true;
-    IContext* lastContext     = nullptr;
-    char*     lastArgs        = nullptr;
+    unsigned            initializeCount = 0;
+    unsigned            shutdownCount   = 0;
+    unsigned            startCount      = 0;
+    unsigned            stopCount       = 0;
+    bool                startResult     = true;
+    Kit::Job::IContext* lastContext     = nullptr;
+    char*               lastArgs        = nullptr;
 
 public:
     /// See Kit::Job::IJob
@@ -53,7 +53,7 @@ public:
     void shutdown_() noexcept override { shutdownCount++; }
 
     /// See Kit::Job::IJob
-    bool start_( IContext& context, char* optionalArgs ) noexcept override
+    bool start_( Kit::Job::IContext& context, char* optionalArgs ) noexcept override
     {
         startCount++;
         lastContext = &context;
@@ -62,10 +62,14 @@ public:
     }
 
     /// See Kit::Job::IJob
-    void stop_() noexcept override { stopCount++; setStoppedState();}
+    void stop_() noexcept override
+    {
+        stopCount++;
+        setStoppedState();
+    }
 };
 
-// Test Job that self-terminates 
+// Test Job that self-terminates
 class SelfCompletingJob : public JobBase, public Kit::System::Timer
 {
 public:
@@ -82,9 +86,9 @@ public:
     void shutdown_() noexcept override {}
 
     /// See Kit::Job::IJob
-    bool start_( IContext& context, char* optionalArgs ) noexcept override
+    bool start_( Kit::Job::IContext& context, char* optionalArgs ) noexcept override
     {
-        // Set the timing source for the SW timer        
+        // Set the timing source for the SW timer
         setTimingSource( context.getEventQueue() );
 
         // Set timer to expire in N milliseconds
@@ -384,13 +388,13 @@ TEST_CASE( "Manager" )
 
         char args[] = "";
         REQUIRE( uut.startJob( "self-job", args ) == true );
-        bool running = uut.isJobRunning( "self-job");
+        bool running = uut.isJobRunning( "self-job" );
         REQUIRE( running == true );
 
         // Wait for the job to complete itself
-        Kit::System::sleep( TIMER_MS * 1.5 );
+        Kit::System::sleep( static_cast<uint32_t>( TIMER_MS * 1.5 ) );
 
-        running = uut.isJobRunning( "self-job");
+        running = uut.isJobRunning( "self-job" );
         REQUIRE( running == false );
 
         // Verify that no jobs are running
