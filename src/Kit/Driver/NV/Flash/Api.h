@@ -251,7 +251,7 @@ public:
 
             PageHeader_T header;
             header.magic       = MAGIC_NUMBER;
-            header.sequenceNum = static_cast<uint32_t>( ++m_currentSequence );
+            header.sequenceNum = ++m_currentSequence;
             header.dataOffset  = static_cast<uint32_t>( pageIndex * m_config.nvPageSize );
             header.dataLength  = static_cast<uint32_t>( m_config.nvPageSize );
             header.crc32       = calculateCrc( &header, CRC_HEADER_FIELD_SIZE );
@@ -584,36 +584,6 @@ protected:
         return m_flashDriver.write( statusOffset, &invalidStatus, sizeof( invalidStatus ) ) == Kit::Driver::Flash::IApi::SUCCESS;
     }
 
-    /// Erases the sector if it contains no valid pages.
-    bool eraseSectorIfNeeded( size_t sectorAddress ) noexcept
-    {
-        size_t sectorSize   = m_flashDriver.getSectorSize();
-        size_t physPageSize = getPhysicalPageSize();
-
-        for ( size_t slot = 0; slot < m_pagesPerSector; slot++ )
-        {
-            size_t       slotAddr = sectorAddress + ( slot * physPageSize );
-            PageHeader_T header;
-            if ( m_flashDriver.read( slotAddr, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )
-            {
-                return false;
-            }
-
-            if ( header.magic == MAGIC_NUMBER && header.status == PageStatus_T::VALID )
-            {
-                return false;
-            }
-        }
-
-        if ( m_flashDriver.eraseSector( sectorAddress ) == Kit::Driver::Flash::IApi::SUCCESS )
-        {
-            m_eraseCount++;
-            return true;
-        }
-
-        return false;
-    }
-
     /// Reads the data payload of the current physical page for the given logical page index.
     bool readCurrentPageData( size_t pageIndex, uint8_t* buffer ) noexcept
     {
@@ -664,7 +634,7 @@ protected:
 
 protected:
     Config_T                  m_config;                      //!< Storage configuration
-    uint64_t                  m_currentSequence;             //!< Highest sequence number seen
+    uint32_t                  m_currentSequence;             //!< Highest sequence number seen
     Kit::Driver::Flash::IApi& m_flashDriver;                 //!< Reference to flash driver
     Kit::Checksum::IEdc&      m_crcAlgo;                     //!< Reference to CRC algorithm
     uint8_t*                  m_workBuffer;                  //!< Application-provided work buffer

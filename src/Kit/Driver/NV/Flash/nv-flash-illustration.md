@@ -48,7 +48,7 @@ Byte Offset    Field          Size     Description
 A record's status field transitions in one direction only. This ordering is chosen so that each transition only requires clearing bits (1 -> 0), which flash hardware allows without an erase cycle.
 
 ```
-ERASED (0xFFFFFFFF)  -->  VALID (0x00000000)  -->  INVALID (0x55555555)
+ERASED (0xFFFFFFFF)  -->  VALID (0xFFFF0000)  -->  INVALID (0x00000000)
 
   ERASED:   Record slot is empty and available for writing.
             All bytes in the slot are 0xFF (factory/erased state).
@@ -301,7 +301,7 @@ Step 4: Write NV Record to flash
         Address 0x000130: Data Payload (256 bytes from merged buffer)
 
 Step 5: Mark old record at 0x000000 as INVALID
-        Write 0x55555555 to status field at 0x000014
+        Write 0x00000000 to status field at 0x000014
 
 Step 6: Update page map
         m_pageMap[0] = 0x000118
