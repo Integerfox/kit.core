@@ -83,6 +83,9 @@ public:
             expired();
         }
 
+        // This request never fails
+        msg.getPayload().success = true;
+
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
     }

@@ -70,6 +70,9 @@ public:
             sendRequest();
         }
 
+        // This request never fails
+        msg.getPayload().success = true;
+
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
     }
@@ -90,6 +93,9 @@ public:
             m_serverSAP.post( m_flashCancelResponseMsg.getRequestMsg() );
             return;  // The Close message will be returned once the cancel response is received
         }
+
+        // This request never fails
+        msg.getPayload().success = true;
 
         // Return the message to the sender since we are done processing the request
         msg.returnToSender();
@@ -150,6 +156,9 @@ public:
         if ( m_closedMsg )
         {
             KIT_SYSTEM_TRACE_MSG( "main", "Flash Client Closed." );
+
+            // The Client's CloseMsg never fails
+            m_closedMsg->getPayload().success = true;
             m_closedMsg->returnToSender();
         }
     }
