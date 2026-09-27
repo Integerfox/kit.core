@@ -33,23 +33,24 @@ namespace W25Q {
 /** W25Q SPI command opcodes */
 enum Command_T
 {
-    WRITE_ENABLE       = 0x06,  //!< Enable write latch
-    WRITE_DISABLE      = 0x04,  //!< Disable write latch
-    READ_STATUS_REG1   = 0x05,  //!< Read status register 1
-    READ_STATUS_REG2   = 0x35,  //!< Read status register 2
-    WRITE_STATUS_REG   = 0x01,  //!< Write status register
-    PAGE_PROGRAM       = 0x02,  //!< Program up to 256 bytes
-    SECTOR_ERASE       = 0x20,  //!< Erase 4KB sector
-    BLOCK_ERASE_32K    = 0x52,  //!< Erase 32KB block
-    BLOCK_ERASE_64K    = 0xD8,  //!< Erase 64KB block
-    CHIP_ERASE         = 0xC7,  //!< Erase entire chip
-    READ_DATA          = 0x03,  //!< Read at up to 50MHz
-    FAST_READ          = 0x0B,  //!< Read at up to 133MHz
-    JEDEC_ID           = 0x9F,  //!< Read JEDEC manufacturer ID
-    POWER_DOWN         = 0xB9,  //!< Enter low power mode
-    RELEASE_POWER_DOWN = 0xAB,  //!< Exit low power mode
-    ENABLE_RESET       = 0x66,  //!< Enable software reset
-    RESET_DEVICE       = 0x99   //!< Reset device
+    WRITE_ENABLE        = 0x06,  //!< Enable write latch
+    WRITE_DISABLE       = 0x04,  //!< Disable write latch
+    WRITE_ENABLE_VOL_SR = 0x50,  //!< Enable write latch for a volatile Status Register write
+    READ_STATUS_REG1    = 0x05,  //!< Read status register 1
+    READ_STATUS_REG2    = 0x35,  //!< Read status register 2
+    WRITE_STATUS_REG    = 0x01,  //!< Write status register
+    PAGE_PROGRAM        = 0x02,  //!< Program up to 256 bytes
+    SECTOR_ERASE        = 0x20,  //!< Erase 4KB sector
+    BLOCK_ERASE_32K     = 0x52,  //!< Erase 32KB block
+    BLOCK_ERASE_64K     = 0xD8,  //!< Erase 64KB block
+    CHIP_ERASE          = 0xC7,  //!< Erase entire chip
+    READ_DATA           = 0x03,  //!< Read at up to 50MHz
+    FAST_READ           = 0x0B,  //!< Read at up to 133MHz
+    JEDEC_ID            = 0x9F,  //!< Read JEDEC manufacturer ID
+    POWER_DOWN          = 0xB9,  //!< Enter low power mode
+    RELEASE_POWER_DOWN  = 0xAB,  //!< Exit low power mode
+    ENABLE_RESET        = 0x66,  //!< Enable software reset
+    RESET_DEVICE        = 0x99   //!< Reset device
 };
 
 /** Status Register 1 bit definitions */

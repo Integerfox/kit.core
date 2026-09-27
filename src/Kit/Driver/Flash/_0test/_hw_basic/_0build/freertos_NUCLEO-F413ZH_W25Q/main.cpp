@@ -18,6 +18,8 @@
 
 #include "Kit/Bsp/Api.h"
 #include "Kit/System/Api.h"
+#include "Kit/System/FatalError.h"
+#include "Kit/System/Shutdown.h"
 #include "Kit/System/Thread.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Driver/SPI/ST/M32F4/Polled.h"
@@ -41,16 +43,27 @@ namespace {
 class TestRunnable : public IRunnable
 {
 public:
-    Flash::IApi& m_flash;
+    SPI::ST::M32F4::Polled& m_spi;
+    Flash::W25Q::StdSpi24&  m_flash;
 
 public:
-    explicit TestRunnable( Flash::IApi& flash )
-        : m_flash( flash )
+    TestRunnable( SPI::ST::M32F4::Polled& spi, Flash::W25Q::StdSpi24& flash )
+        : m_spi( spi )
+        , m_flash( flash )
     {
     }
 
 public:
-    void entry() noexcept override { runHwTests( m_flash ); }
+    void entry() noexcept override
+    {
+        // The drivers are started here - i.e. once the scheduler is running -
+        // because StdSpi24::start() calls Kit::System::sleep(), which maps to
+        // vTaskDelay() and must not be used before the scheduler starts.
+        m_spi.start();
+        m_flash.start();
+
+        runHwTests( m_flash );
+    }
 };
 
 };  // end namespace
@@ -61,13 +74,15 @@ int main( void )
 {
     // Initialize the board (HAL, clocks, GPIOs, UART, SPI)
     Bsp_initialize();
-    printf( "\n**** KIT-DRIVER-FLASH TEST APPLICATION STARTED ****\n\n" );  // May not print on all targets
+
+    // Small delay to let the UART stabilize
+    HAL_Delay( 200 );
 
     // Initialize KIT
     Kit::System::initialize();
 
     KIT_SYSTEM_TRACE_ENABLE();
-    KIT_SYSTEM_TRACE_ENABLE_SECTION( "_0test" );
+    KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eVERBOSE );
     KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized" );
 
@@ -77,23 +92,33 @@ int main( void )
 
     // Create the concrete drivers (caller responsibility).  Uses the SPI3
     // peripheral and the CS_SPI_Flash chip-select pin from the board's MX
-    // configuration.
+    // configuration.  NOTE: the drivers are STARTED by the test thread, not
+    // here, because StdSpi24::start() requires a running scheduler.
     SPI::ST::M32F4::Polled* spiDriver =
         new ( std::nothrow ) SPI::ST::M32F4::Polled( &hspi3 );
     Dio::ST::M32F4::Output* csPin =
         new ( std::nothrow ) Dio::ST::M32F4::Output( CS_SPI_Flash_GPIO_Port, CS_SPI_Flash_Pin, false );
+    if ( spiDriver == nullptr || csPin == nullptr )
+    {
+        FatalError::logf( Shutdown::eFAILURE, "Out of memory: SPI/CS driver" );
+    }
+
     Flash::W25Q::StdSpi24* flashDriver =
         new ( std::nothrow ) Flash::W25Q::StdSpi24( *spiDriver, *csPin, Flash::W25Q::W25Q128 );
-
-    // Start the drivers (caller responsibility)
-    spiDriver->start();
-    flashDriver->start();
+    TestRunnable* testRunnable =
+        new ( std::nothrow ) TestRunnable( *spiDriver, *flashDriver );
+    if ( flashDriver == nullptr || testRunnable == nullptr )
+    {
+        FatalError::logf( Shutdown::eFAILURE, "Out of memory: Flash driver/test runnable" );
+    }
 
     // Create the test thread (caller responsibility)
-    TestRunnable* testRunnable = new ( std::nothrow ) TestRunnable( *flashDriver );
-    Thread::create( *testRunnable, "FlashTest" );
+    if ( Thread::create( *testRunnable, "FlashTest" ) == nullptr )
+    {
+        FatalError::logf( Shutdown::eFAILURE, "Failed to create test thread" );
+    }
 
-    // Start the scheduler (caller responsibility)
+    // Start the scheduler - control transfers to testRunnable->entry()
     KIT_SYSTEM_TRACE_MSG( SECT_, "Starting scheduler..." );
     enableScheduling();
 

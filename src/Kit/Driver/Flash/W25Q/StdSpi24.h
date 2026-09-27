@@ -118,8 +118,19 @@ public:
 
 
 protected:
-    /// Sends the WRITE_ENABLE command
+    /// Sends the WRITE_ENABLE command.  Returns false if the write-enable latch did not set.
     bool writeEnable() noexcept;
+
+    /// Reads Status Register 1.  Returns false if the SPI transaction failed.
+    bool readStatusReg1( uint8_t& status ) noexcept;
+
+    /** Clears the Status Register 1 block-protection bits (BP0..BP2, TB, SEC,
+        SRP0).  A W25Q device rejects the Chip Erase command outright while any
+        region remains protected, so this must be done before erasing.  A
+        volatile Status Register write is used so that the device's non-volatile
+        write-endurance is not consumed on every start-up.
+     */
+    bool clearBlockProtection() noexcept;
 
     /// Sends a single-byte SPI command
     inline bool sendCommand( uint8_t cmd ) noexcept

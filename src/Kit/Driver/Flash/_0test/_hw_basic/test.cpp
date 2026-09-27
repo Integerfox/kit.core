@@ -30,7 +30,7 @@ void runHwTests( Kit::Driver::Flash::IApi& flash )
         Bsp_toggle_debug1();
         if ( result )
         {
-        sleep( 500 );
+            sleep( 500 );
         }
         else
         {
