@@ -240,6 +240,19 @@ TEST_CASE( "loopback" )
 
     clientStream.close();
 
+    // Wait for the reader servicing 'clientStream' to detect the close and free
+    // up its loopback slot before connecting client3 (avoids a race where the
+    // new connection is rejected because both reader slots still appear busy).
+    {
+        unsigned long maxWaitMs = 1000;
+        while ( maxWaitMs && !myClient.m_loop1Free && !myClient.m_loop2Free )
+        {
+            Kit::System::sleep( 10 );
+            maxWaitMs -= 10;
+        }
+        REQUIRE( ( myClient.m_loop1Free || myClient.m_loop2Free ) );
+    }
+
     KitIoSocketHandle_T client3Fd;
     REQUIRE( Connector::establish( "localhost", PORT_NUM_, client3Fd ) == Connector::eSUCCESS );
     InputOutput client3Stream( client3Fd );
