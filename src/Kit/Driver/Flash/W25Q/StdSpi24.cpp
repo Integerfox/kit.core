@@ -73,11 +73,6 @@ bool StdSpi24::start( void* startArgs ) noexcept
     Kit::System::sleep( 1 );
 
     m_started = true;
-
-    // Clear any block protection left over from a previous session (a protected
-    // region causes the device to silently reject Chip Erase)
-    clearBlockProtection();
-
     return true;
 }
 
@@ -104,6 +99,13 @@ StdSpi24::Result_T StdSpi24::read( size_t srcOffset,
     if ( srcOffset + numBytes > m_deviceInfo.totalSize )
     {
         return ERR_RANGE;
+    }
+
+    // The device ignores commands while a program/erase is in flight, and
+    // write() deliberately returns before the final page program completes.
+    if ( !waitUntilReady() )
+    {
+        return ERR_FAILED;
     }
 
     m_cs.assertPin();
@@ -239,11 +241,9 @@ StdSpi24::Result_T StdSpi24::eraseChip() noexcept
         return ERR_FAILED;
     }
 
-    // The device rejects Chip Erase outright while any region remains
-    // protected.  Re-clear the protection here because clearBlockProtection()
-    // uses a volatile Status Register write, which does not survive a power
-    // cycle of the flash device.
-    if ( !clearBlockProtection() )
+    // The device rejects Chip Erase while any previous program/erase is still
+    // in flight; write() deliberately returns before the final page completes.
+    if ( !waitUntilReady() )
     {
         return ERR_FAILED;
     }
@@ -325,6 +325,13 @@ bool StdSpi24::readJedecId( uint8_t& mfgId,
 //////////////////////////////////////////////////////////////////////////////
 bool StdSpi24::writeEnable() noexcept
 {
+    // The device ignores commands while a program/erase is in flight, and
+    // write() deliberately returns before the final page program completes.
+    if ( !waitUntilReady() )
+    {
+        return false;
+    }
+
     m_cs.assertPin();
     bool result = sendCommand( WRITE_ENABLE );
     m_cs.deassertPin();
@@ -333,9 +340,9 @@ bool StdSpi24::writeEnable() noexcept
         return false;
     }
 
-    // Confirm the latch actually set.  It stays clear when the addressed region
-    // is protected, in which case the follow-on erase/program is silently
-    // ignored by the device.
+    // Confirm the latch actually set.  It stays clear when the device ignored
+    // the command, in which case the follow-on erase/program is silently
+    // discarded.
     uint8_t status = 0;
     if ( !readStatusReg1( status ) )
     {
@@ -358,47 +365,6 @@ bool StdSpi24::readStatusReg1( uint8_t& status ) noexcept
     bool result = m_spi.read( &status, 1 );
     m_cs.deassertPin();
     return result;
-}
-
-bool StdSpi24::clearBlockProtection() noexcept
-{
-    uint8_t status = 0;
-    if ( !readStatusReg1( status ) )
-    {
-        return false;
-    }
-
-    // Nothing to do when no protection bits are set
-    constexpr uint8_t PROTECTION_BITS = BP0 | BP1 | BP2 | TB | SEC | SRP0;
-    if ( ( status & PROTECTION_BITS ) == 0 )
-    {
-        return true;
-    }
-
-    // Volatile Status Register write: 50h enables the latch, then 01h writes the
-    // new Status Register 1 value with all protection bits cleared.
-    m_cs.assertPin();
-    bool result = sendCommand( WRITE_ENABLE_VOL_SR );
-    m_cs.deassertPin();
-    if ( !result )
-    {
-        return false;
-    }
-
-    uint8_t cmdBuffer[2];
-    cmdBuffer[0] = WRITE_STATUS_REG;
-    cmdBuffer[1] = static_cast<uint8_t>( status & ~PROTECTION_BITS );
-
-    m_cs.assertPin();
-    result = m_spi.write( cmdBuffer, sizeof( cmdBuffer ) );
-    m_cs.deassertPin();
-
-    if ( !result )
-    {
-        return false;
-    }
-
-    return waitUntilReady();
 }
 
 bool StdSpi24::waitUntilReady( uint32_t timeoutMs ) noexcept
