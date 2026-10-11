@@ -489,11 +489,12 @@ TEST_CASE( "simbasic" )
             orangeThreadPtr->isActive() ||
             pearThreadPtr->isActive() )
     {
-        if ( !SimTick::advance( 1 ) )
+        if ( !SimTick::advance( OPTION_KIT_SYSTEM_SIM_TICK_MIN_TICKS_FOR_ADVANCE ) )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "EXITED tick loop early (waiting on apple, orange, & pear)" );
             break;
         }
+        sleepInRealTime( 10 );  // 1ms is ineffectual - Windows/Linux scheduler/timer granularity is ~10-15ms
     }
 
 
@@ -507,11 +508,12 @@ TEST_CASE( "simbasic" )
     while ( cherryThreadPtr->isActive() ||
             masterThreadPtr->isActive() )
     {
-        if ( !SimTick::advance( 1 ) )
+        if ( !SimTick::advance( OPTION_KIT_SYSTEM_SIM_TICK_MIN_TICKS_FOR_ADVANCE ) )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "EXITED tick loop early (waiting on cherry & master)" );
             break;
         }
+        sleepInRealTime( 10 );  // 1ms is ineffectual - Windows/Linux scheduler/timer granularity is ~10-15ms
     }
 
     // Shutdown timer thread
@@ -519,11 +521,12 @@ TEST_CASE( "simbasic" )
     timerRun.pleaseStop();
     while ( timerThreadPtr->isActive() )
     {
-        if ( !SimTick::advance( 1 ) )
+        if ( !SimTick::advance( OPTION_KIT_SYSTEM_SIM_TICK_MIN_TICKS_FOR_ADVANCE ) )
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "EXITED tick loop early (waiting on timer)" );
             break;
         }
+        sleepInRealTime( 10 );  // 1ms is ineffectual - Windows/Linux scheduler/timer granularity is ~10-15ms
     }
 
     // Clean-up
