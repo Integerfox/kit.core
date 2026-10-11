@@ -137,6 +137,12 @@ namespace Itc {
 template <class CONTEXT>
 class SelfPostMessage : public IMessage
 {
+    /// Deleted copy/move constructors and assignment operators
+    SelfPostMessage( const SelfPostMessage& ) = delete;
+    SelfPostMessage& operator=( const SelfPostMessage& ) = delete;
+    SelfPostMessage( SelfPostMessage&& ) = delete;
+    SelfPostMessage& operator=( SelfPostMessage&& ) = delete;
+
 public:
     /// Definition of the call-back method that resumes the component after the yield
     typedef void ( CONTEXT::*ResumeFunction_T )();

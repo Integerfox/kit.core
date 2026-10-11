@@ -95,8 +95,9 @@ protected:
         in a loop (typically a forever loop).
 
         If the 'skipWait' argument is set to true then the method does not
-        wait for event - it simply processing the current event flags and
-        timers. The use scenario for skipping the wait is for child classes
+        block waiting for an event; it consumes one pending semaphore signal,
+        if available, and processes the current event flags and timers. The use
+        scenario for skipping the wait is for child classes
         to execute the event loop multiple times to drain their message/notifications
         queues one message/notification at a time (i.e. give equal time/priority
         to all types of events)

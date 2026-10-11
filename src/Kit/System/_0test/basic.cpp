@@ -268,6 +268,30 @@ public:
     }
 };
 
+class TestEventLoop : public EventLoop
+{
+public:
+    void startForTest() noexcept
+    {
+        startEventLoop();
+    }
+
+    bool processWithoutWaiting() noexcept
+    {
+        return waitAndProcessEvents( true );
+    }
+
+    bool consumeWakeup() noexcept
+    {
+        return m_sema.tryWait();
+    }
+
+    void stopForTest() noexcept
+    {
+        stopEventLoop();
+    }
+};
+
 }  // end anonymous namespace
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -517,4 +541,19 @@ TEST_CASE( "basic" )
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
+}
+
+TEST_CASE( "EventLoop consumes semaphore wakeup when skipping wait" )
+{
+    TestEventLoop uut;
+    uut.startForTest();
+
+    for ( unsigned pass = 0; pass < 128; ++pass )
+    {
+        REQUIRE( uut.signal() == 0 );
+        REQUIRE( uut.processWithoutWaiting() );
+        REQUIRE_FALSE( uut.consumeWakeup() );
+    }
+
+    uut.stopForTest();
 }
