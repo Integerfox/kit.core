@@ -146,15 +146,6 @@ StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
 
     while ( remaining > 0 )
     {
-        // Wait for any previous programming operation to complete before
-        // starting the next page.  Placing the wait at the top of the loop
-        // (instead of after the program command) means the caller is not
-        // blocked on the physical programming time of the final/only page.
-        if ( !waitUntilReady() )
-        {
-            return ERR_FAILED;
-        }
-
         // Calculate bytes remaining in current flash page
         size_t offsetInPage  = address % m_deviceInfo.pageSize;
         size_t bytesThisPage = m_deviceInfo.pageSize - offsetInPage;
@@ -241,13 +232,6 @@ StdSpi24::Result_T StdSpi24::eraseChip() noexcept
         return ERR_FAILED;
     }
 
-    // The device rejects Chip Erase while any previous program/erase is still
-    // in flight; write() deliberately returns before the final page completes.
-    if ( !waitUntilReady() )
-    {
-        return ERR_FAILED;
-    }
-
     if ( !writeEnable() )
     {
         return ERR_FAILED;
@@ -257,6 +241,8 @@ StdSpi24::Result_T StdSpi24::eraseChip() noexcept
     bool result = sendCommand( CHIP_ERASE );
     m_cs.deassertPin();
 
+    // Purposely block until the chip erase completes: it takes tens of
+    // seconds, so the caller must not be left to issue commands mid-erase.
     if ( result )
     {
         result = waitUntilReady( CHIP_ERASE_TIMEOUT_MS );

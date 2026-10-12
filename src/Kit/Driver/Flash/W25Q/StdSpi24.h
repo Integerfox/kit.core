@@ -45,6 +45,10 @@ static constexpr uint32_t CHIP_ERASE_TIMEOUT_MS = 200000;
     polls the BUSY status after each write/erase, and supports W25Q16
     through W25Q128 devices.
 
+    NOTE: The driver does NOT clear the Block Protect (BP) bits.  The caller
+          must ensure the device is unprotected; otherwise program/erase
+          operations are silently ignored by the device.
+
     NOTE: This driver is intentionally scoped to Standard SPI operation and
           3-byte addressing.  QSPI and/or 4-byte addressing variants can be
           added as separate drivers that co-exist in this directory.
