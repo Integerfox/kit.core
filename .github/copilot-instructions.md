@@ -56,7 +56,7 @@ Navigate to `src/Kit/<Module>/_0test/_0build/<platform>/<compiler>/` and run `nq
 
 ### Header Structure & LHeader/LConfig Patterns
 ```cpp
-#include "kit_config.h"  // Always first (so all subsequent headers see this) - LConfig pattern
+#include "kit_config.h"  // Must be first ONLY when this file uses the LConfig pattern (i.e. it references OPTION_KIT_* or USE_KIT_* macros)
 #include "kit_map.h"     // LHeader pattern  
 
 
@@ -133,7 +133,8 @@ Managed via **Outcast** package manager (see `pkg.info/package.json`):
 
 ## Common Gotchas
 
-- **Include order matters**: `kit_config.h` must be first, followed by `kit_map.h`
+- **Include order matters**: `kit_config.h` must be the first include **only** in files that actually use the LConfig pattern (reference `OPTION_KIT_*` or `USE_KIT_*` macros); files that don't use it should omit it. 
+  - When LConfig and LHeader patterns are both used, `kit_config.h` comes before `kit_map.h`
 - **LHeader pattern**: `kit_map.h` has **no header latch** (prevents cyclic dependencies)
 - **Build-specific mappings**: Each `_0build/<platform>/<compiler>/` directory has its own `kit_map.h`
 - **Environment not set**: Run `. env.sh <compiler>` before building
