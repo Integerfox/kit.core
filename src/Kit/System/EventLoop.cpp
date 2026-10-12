@@ -85,6 +85,12 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
     {
         m_sema.timedWait( m_timeout );  // Note: For Tick Simulation: the timedWait() calls topLevelWait() if the semaphore has not been signaled
     }
+    else
+    {
+        // Balance one wakeup for work being processed without blocking. This
+        // prevents queued-message chains from leaving stale semaphore counts.
+        m_sema.tryWait();
+    }
 
     // Trap my exit/please-stop condition AGAIN since a lot could have happen while I was waiting....
     if ( !m_run )  // Note: m_run is atomic so it is safe to read without a lock
