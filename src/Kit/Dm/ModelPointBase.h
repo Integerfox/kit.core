@@ -50,7 +50,8 @@ public:
     uint16_t touch() noexcept override;
 
     /// See Kit::Dm::IModelPoint
-    uint16_t setInvalid( bool forceChgNotification = false, LockRequest_T lockRequest = eNO_REQUEST ) noexcept override;
+    uint16_t setInvalid( ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                         LockRequest_T  lockRequest = eNO_REQUEST ) noexcept override;
 
     /// See Kit::Dm::IModelPoint
     bool isNotValid( uint16_t* seqNumPtr = 0 ) const noexcept override;
@@ -124,10 +125,10 @@ protected:
                    uint16_t* seqNumPtr = 0 ) const noexcept override;
 
     /// See Kit::Dm::IModelPoint
-    uint16_t writeData( const void*   srcData,
-                        size_t        srcSize,
-                        bool          forceChgNotification = false,
-                        LockRequest_T lockRequest          = eNO_REQUEST ) noexcept override;
+    uint16_t writeData( const void*    srcData,
+                        size_t         srcSize,
+                        ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                        LockRequest_T  lockRequest = eNO_REQUEST ) noexcept override;
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
     virtual uint16_t copyDataAndStateFrom( const ModelPointBase& src, LockRequest_T lockRequest ) noexcept;

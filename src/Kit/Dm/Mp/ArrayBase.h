@@ -110,11 +110,11 @@ protected:
         only partially initialized AND then MP is now in the valid
         state!
     */
-    virtual uint16_t writeArrayElements( const void*                         srcData,
-                                         size_t                              srcNumElements,
-                                         size_t                              dstIndex                = 0,
-                                         bool                                forceChangeNotification = false,
-                                         Kit::Dm::IModelPoint::LockRequest_T lockRequest             = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept;
+    virtual uint16_t writeArrayElements( const void*                          srcData,
+                                         size_t                               srcNumElements,
+                                         size_t                               dstIndex    = 0,
+                                         Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                                         Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept;
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
     virtual uint16_t copyArrayFrom( const ArrayBase& src, Kit::Dm::IModelPoint::LockRequest_T lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept;

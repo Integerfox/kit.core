@@ -63,7 +63,7 @@ TEST_CASE( "String" )
     char                                 string[MAX_STR_LENG + 1];
     bool                                 truncated;
     bool                                 valid;
-    mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
+    mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
 
     SECTION( "gets" )
     {
@@ -107,7 +107,7 @@ TEST_CASE( "String" )
         REQUIRE( STRCMP( string, "Ver" ) );
 
         uint16_t seqNum  = mp_apple_.getSequenceNumber();
-        uint16_t seqNum2 = mp_apple_.write( nullptr, 10, false );
+        uint16_t seqNum2 = mp_apple_.write( nullptr, 10, IModelPoint::ChangeNotice_T::eNORMAL );
         REQUIRE( seqNum == seqNum2 );
         mp_apple_.read( valStr );
         REQUIRE( valStr == "Very Lon" );
@@ -116,7 +116,7 @@ TEST_CASE( "String" )
         // Bytes beyond srcLen in MP storage should remain unchanged.
         mp_apple_.write( "ZZZZZZZZ" );
         const char srcPayload[] = { 'A', 'x', 'y', 'z', 'q' };
-        mp_apple_.write( srcPayload, static_cast<size_t>( 1 ), false, IModelPoint::eNO_REQUEST );
+        mp_apple_.write( srcPayload, static_cast<size_t>( 1 ), IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eNO_REQUEST );
 
         uint8_t stream[64];
         size_t  bytes = mp_apple_.exportData( stream, sizeof( stream ) );

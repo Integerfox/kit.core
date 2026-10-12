@@ -67,14 +67,14 @@ bool ArrayBase::readArrayElements( void*     dstData,
     return readData( &dst, sizeof( dst ), seqNumPtr );
 }
 
-uint16_t ArrayBase::writeArrayElements( const void*                         srcData,
-                                        size_t                              srcNumElements,
-                                        size_t                              dstIndex,
-                                        bool                                forceChangeNotification,
-                                        Kit::Dm::IModelPoint::LockRequest_T lockRequest ) noexcept
+uint16_t ArrayBase::writeArrayElements( const void*                          srcData,
+                                        size_t                               srcNumElements,
+                                        size_t                               dstIndex,
+                                        Kit::Dm::IModelPoint::ChangeNotice_T chgNotice,
+                                        Kit::Dm::IModelPoint::LockRequest_T  lockRequest ) noexcept
 {
     MetaData_T src = { (uint8_t*)srcData, srcNumElements, dstIndex };
-    return writeData( &src, sizeof( src ), forceChangeNotification, lockRequest );
+    return writeData( &src, sizeof( src ), chgNotice, lockRequest );
 }
 
 uint16_t ArrayBase::copyArrayFrom( const ArrayBase& src, LockRequest_T lockRequest ) noexcept
@@ -85,7 +85,7 @@ uint16_t ArrayBase::copyArrayFrom( const ArrayBase& src, LockRequest_T lockReque
         return setInvalid();
     }
 
-    return ArrayBase::writeArrayElements( src.m_dataPtr, src.m_numElements, 0, false, lockRequest );
+    return ArrayBase::writeArrayElements( src.m_dataPtr, src.m_numElements, 0, ChangeNotice_T::eNORMAL, lockRequest );
 }
 
 /////////////////////////////////////////////////////

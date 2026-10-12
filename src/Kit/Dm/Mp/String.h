@@ -73,18 +73,18 @@ public:
                uint16_t* seqNumPtr = 0 ) const noexcept;
 
     /// Type safe write of a null terminated string. See Kit::Dm::ModelPoint
-    inline uint16_t write( const char*   srcNullTerminatedString,
-                           bool          forceChangeNotification = false,
-                           LockRequest_T lockRequest             = eNO_REQUEST ) noexcept
+    inline uint16_t write( const char*    srcNullTerminatedString,
+                           ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                           LockRequest_T  lockRequest = eNO_REQUEST ) noexcept
     {
-        return write( srcNullTerminatedString, strlen( srcNullTerminatedString ), forceChangeNotification, lockRequest );
+        return write( srcNullTerminatedString, strlen( srcNullTerminatedString ), chgNotice, lockRequest );
     }
 
     /// Same as write(), except only writes at most 'srcLen' bytes, 'srcLen' should NOT include the null terminator.
-    uint16_t write( const char*   srcData,
-                    size_t        srcLen,
-                    bool          forceChangeNotification = false,
-                    LockRequest_T lockRequest             = eNO_REQUEST ) noexcept;
+    uint16_t write( const char*    srcData,
+                    size_t         srcLen,
+                    ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                    LockRequest_T  lockRequest = eNO_REQUEST ) noexcept;
 
     /// Returns the maximum size WITHOUT the null terminator of the string storage
     inline size_t getMaxLength() const noexcept

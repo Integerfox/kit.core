@@ -65,7 +65,7 @@ TEST_CASE( "Array" )
     bool     truncated;
     uint16_t seqNum;
     uint16_t seqNum2;
-    mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
+    mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
 
     SECTION( "gets" )
     {

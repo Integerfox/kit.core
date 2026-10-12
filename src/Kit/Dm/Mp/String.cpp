@@ -67,10 +67,10 @@ bool String::read( char* dstData, size_t dataSizeInBytesIncludingNullTerminator,
     return valid;
 }
 
-uint16_t String::write( const char*   srcData,
-                        size_t        srcLen,
-                        bool          forceChangeNotification,
-                        LockRequest_T lockRequest ) noexcept
+uint16_t String::write( const char*    srcData,
+                        size_t         srcLen,
+                        ChangeNotice_T chgNotice,
+                        LockRequest_T  lockRequest ) noexcept
 {
     // Trap the null pointer case -->Do NOTHING
     if ( srcData == 0 )
@@ -85,7 +85,7 @@ uint16_t String::write( const char*   srcData,
     }
 
     Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-    uint16_t                      seqNum    = writeData( srcData, srcLen, false, lockRequest );
+    uint16_t                      seqNum    = writeData( srcData, srcLen, chgNotice, lockRequest );
     char*                         myDataPtr = static_cast<char*>( m_dataPtr );
     myDataPtr[srcLen]                       = '\0';  // Ensure my new value properly null terminated
     return seqNum;
@@ -129,7 +129,7 @@ bool String::fromJSON_( JsonVariant&        src,
     }
 
     // Note: if the incoming string is longer than the MP storage, it will be truncated
-    retSequenceNumber = write( newValue, false, lockRequest );
+    retSequenceNumber = write( newValue, ChangeNotice_T::eNORMAL, lockRequest );
     return true;
 }
 

@@ -76,7 +76,7 @@ public:
     {
         if ( src.is<ELEMTYPE>() )
         {
-            retSequenceNumber = this->write( src.as<ELEMTYPE>(), false, lockRequest );
+            retSequenceNumber = this->write( src.as<ELEMTYPE>(), Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL, lockRequest );
             return true;
         }
         if ( errorMsg )
@@ -108,21 +108,21 @@ protected:
 
 public:
     /// Atomic increment
-    inline uint16_t increment( ELEMTYPE                            incSize              = 1,
-                               bool                                forceChgNotification = false,
-                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t increment( ELEMTYPE                             incSize     = 1,
+                               Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                               Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( this->m_data + incSize, forceChgNotification, lockRequest );
+        return this->write( this->m_data + incSize, chgNotice, lockRequest );
     }
 
     /// Atomic decrement
-    inline uint16_t decrement( ELEMTYPE                            decSize              = 1,
-                               bool                                forceChgNotification = false,
-                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t decrement( ELEMTYPE                             decSize     = 1,
+                               Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                               Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( this->m_data - decSize, forceChgNotification, lockRequest );
+        return this->write( this->m_data - decSize, chgNotice, lockRequest );
     }
 };
 
@@ -154,67 +154,67 @@ public:
                state AND 'dstData' is set to zero.
             3. The returned sequence number is the AFTER the clear operation.
      */
-    inline uint16_t readThenClearBits( ELEMTYPE&                           dstData,
-                                       ELEMTYPE                            maskToClear,
-                                       bool                                forceChgNotification = false,
-                                       Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t readThenClearBits( ELEMTYPE&                            dstData,
+                                       ELEMTYPE                             maskToClear,
+                                       Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                                       Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
         dstData          = this->m_data;
         ELEMTYPE newData = dstData & ~maskToClear;
-        return Kit::Dm::ModelPointBase::writeData( &newData, sizeof( ELEMTYPE ), forceChgNotification, lockRequest );
+        return Kit::Dm::ModelPointBase::writeData( &newData, sizeof( ELEMTYPE ), chgNotice, lockRequest );
     }
 
     /// Atomic Read and then clear (i.e. set to 0) operation.
-    inline uint16_t readThenClear( ELEMTYPE&                           dstData,
-                                   bool                                forceChgNotification = false,
-                                   Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t readThenClear( ELEMTYPE&                            dstData,
+                                   Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                                   Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
-        return readThenClearBits( dstData, (ELEMTYPE)-1, forceChgNotification, lockRequest );
+        return readThenClearBits( dstData, (ELEMTYPE)-1, chgNotice, lockRequest );
     }
 
     /// Atomic bitwise OR operation
-    inline uint16_t bitwiseOR( ELEMTYPE                            maskToOR,
-                               bool                                forceChgNotification = false,
-                               Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t bitwiseOR( ELEMTYPE                             maskToOR,
+                               Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                               Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( this->m_data | maskToOR, forceChgNotification, lockRequest );
+        return this->write( this->m_data | maskToOR, chgNotice, lockRequest );
     }
 
     /// Atomic bitwise XOR operation
-    inline uint16_t bitwiseXOR( ELEMTYPE                            maskToXOR,
-                                bool                                forceChgNotification = false,
-                                Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t bitwiseXOR( ELEMTYPE                             maskToXOR,
+                                Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                                Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( this->m_data ^ maskToXOR, forceChgNotification, lockRequest );
+        return this->write( this->m_data ^ maskToXOR, chgNotice, lockRequest );
     }
 
     /// Atomic bitwise AND operation
-    inline uint16_t bitwiseAND( ELEMTYPE                            maskToAND,
-                                bool                                forceChgNotification = false,
-                                Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t bitwiseAND( ELEMTYPE                             maskToAND,
+                                Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                                Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( this->m_data & maskToAND, forceChgNotification, lockRequest );
+        return this->write( this->m_data & maskToAND, chgNotice, lockRequest );
     }
 
     /// Atomic bitwise AND operation
-    inline uint16_t bitwiseClearAndSet( ELEMTYPE                            maskToClear,
-                                        ELEMTYPE                            maskToSet,
-                                        bool                                forceChgNotification = false,
-                                        Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t bitwiseClearAndSet( ELEMTYPE                             maskToClear,
+                                        ELEMTYPE                             maskToSet,
+                                        Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                                        Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-        return this->write( ( this->m_data & ~maskToClear ) | maskToSet, forceChgNotification, lockRequest );
+        return this->write( ( this->m_data & ~maskToClear ) | maskToSet, chgNotice, lockRequest );
     }
 
 public:
     /// Atomic operation to set the zero indexed bit to a 1.
-    inline uint16_t setBit( uint8_t                             bitPosition,
-                            bool                                forceChgNotification = false,
-                            Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t setBit( uint8_t                              bitPosition,
+                            Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                            Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
         typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
@@ -226,13 +226,13 @@ public:
 
         UnsignedElemType data = static_cast<UnsignedElemType>( this->m_data );
         UnsignedElemType mask = static_cast<UnsignedElemType>( 1u ) << bitPosition;
-        return this->write( static_cast<ELEMTYPE>( data | mask ), forceChgNotification, lockRequest );
+        return this->write( static_cast<ELEMTYPE>( data | mask ), chgNotice, lockRequest );
     }
 
     /// Atomic operation to set the zero indexed bit to a 0.
-    inline uint16_t clearBit( uint8_t                             bitPosition,
-                              bool                                forceChgNotification = false,
-                              Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t clearBit( uint8_t                              bitPosition,
+                              Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                              Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
         typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
@@ -244,13 +244,13 @@ public:
 
         UnsignedElemType data = static_cast<UnsignedElemType>( this->m_data );
         UnsignedElemType mask = static_cast<UnsignedElemType>( 1u ) << bitPosition;
-        return this->write( static_cast<ELEMTYPE>( data & ~mask ), forceChgNotification, lockRequest );
+        return this->write( static_cast<ELEMTYPE>( data & ~mask ), chgNotice, lockRequest );
     }
 
     /// Atomic operation to toggle the zero indexed bit.
-    inline uint16_t flipBit( uint8_t                             bitPosition,
-                             bool                                forceChgNotification = false,
-                             Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t flipBit( uint8_t                              bitPosition,
+                             Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                             Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
         typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
@@ -262,7 +262,7 @@ public:
 
         UnsignedElemType data = static_cast<UnsignedElemType>( this->m_data );
         UnsignedElemType mask = static_cast<UnsignedElemType>( 1u ) << bitPosition;
-        return this->write( static_cast<ELEMTYPE>( data ^ mask ), forceChgNotification, lockRequest );
+        return this->write( static_cast<ELEMTYPE>( data ^ mask ), chgNotice, lockRequest );
     }
 };
 
@@ -317,7 +317,7 @@ public:
         // Parse a number
         if ( src.is<ELEMTYPE>() )
         {
-            retSequenceNumber = this->write( src.as<ELEMTYPE>(), false, lockRequest );
+            retSequenceNumber = this->write( src.as<ELEMTYPE>(), Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL, lockRequest );
             return true;
         }
 
@@ -328,7 +328,7 @@ public:
             OPTION_KIT_DM_MP_MAX_SIGNED_INT_TYPE val;
             if ( Kit::Text::StringTo::signedInt( val, src.as<const char*>(), 0 ) )
             {
-                retSequenceNumber = this->write( static_cast<ELEMTYPE>( val ), false, lockRequest );
+                retSequenceNumber = this->write( static_cast<ELEMTYPE>( val ), Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL, lockRequest );
                 return true;
             }
         }
@@ -389,7 +389,7 @@ public:
         // Parse a number
         if ( src.is<ELEMTYPE>() )
         {
-            retSequenceNumber = this->write( src.as<ELEMTYPE>(), false, lockRequest );
+            retSequenceNumber = this->write( src.as<ELEMTYPE>(), Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL, lockRequest );
             return true;
         }
 
@@ -400,7 +400,7 @@ public:
             OPTION_KIT_DM_MP_MAX_UNSIGNED_INT_TYPE val;
             if ( Kit::Text::StringTo::unsignedInt( val, src.as<const char*>(), 0 ) )
             {
-                retSequenceNumber = this->write( static_cast<ELEMTYPE>( val ), false, lockRequest );
+                retSequenceNumber = this->write( static_cast<ELEMTYPE>( val ), Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL, lockRequest );
                 return true;
             }
         }

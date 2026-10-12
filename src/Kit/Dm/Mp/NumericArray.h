@@ -58,13 +58,13 @@ public:
     }
 
     /// Type safe write. See Kit::Dm::IModelPoint
-    inline uint16_t write( const ELEMTYPE*                     srcArray,
-                           size_t                              srcNumElements,
-                           size_t                              dstIndex                = 0,
-                           bool                                forceChangeNotification = false,
-                           Kit::Dm::IModelPoint::LockRequest_T lockRequest             = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t write( const ELEMTYPE*                      srcArray,
+                           size_t                               srcNumElements,
+                           size_t                               dstIndex    = 0,
+                           Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                           Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
-        return ArrayBase::writeArrayElements( srcArray, srcNumElements, dstIndex, forceChangeNotification, lockRequest );
+        return ArrayBase::writeArrayElements( srcArray, srcNumElements, dstIndex, chgNotice, lockRequest );
     }
 
 public:
@@ -193,7 +193,7 @@ public:
             {
                 tempArray[idx] = elems[idx + offset].as<ELEMTYPE>();
             }
-            retSequenceNumber  = ArrayBase::writeArrayElements( tempArray, idx, startIdx + offset, false, lockRequest );
+            retSequenceNumber  = ArrayBase::writeArrayElements( tempArray, idx, startIdx + offset, ChangeNotice_T::eNORMAL, lockRequest );
             offset            += idx;
             numElements       -= idx;
         }

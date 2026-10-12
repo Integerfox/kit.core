@@ -69,13 +69,13 @@ public:
 
 public:
     /// Convenience method to trigger a Server request
-    inline uint16_t triggerRequest( int32_t                             upperLimit,
-                                    int32_t                             lowerLimit,
-                                    bool                                forceChangeNotification = false,
-                                    Kit::Dm::IModelPoint::LockRequest_T lockRequest             = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t triggerRequest( int32_t                              upperLimit,
+                                    int32_t                              lowerLimit,
+                                    Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                                    Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
         Foo_T newData = { upperLimit, lowerLimit, 0, false };
-        return write( newData, forceChangeNotification, lockRequest );
+        return write( newData, chgNotice, lockRequest );
     }
 
 public:
@@ -124,7 +124,7 @@ public:
             newData.isValid = src["isValid"].as<bool>();
         }
 
-        retSequenceNumber = write( newData, lockRequest );
+        retSequenceNumber = write( newData, ChangeNotice_T::eNORMAL, lockRequest );
         return true;
     }
 };

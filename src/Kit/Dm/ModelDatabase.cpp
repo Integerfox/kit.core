@@ -125,7 +125,7 @@ bool ModelDatabase::fromJSON( const char* src, Kit::Text::IString* errorMsg, IMo
     // Request to invalidate the MP
     if ( !validElem.isNull() && validElem.as<bool>() == false )
     {
-        seqnum = mp->setInvalid( lockAction );
+        seqnum = mp->setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, lockAction );
         parsed = true;
     }
 

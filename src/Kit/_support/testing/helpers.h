@@ -24,6 +24,46 @@
 #include "Kit/Itc/OpenCloseSync.h"
 #include "Kit/Io/IInput.h"
 
+/*----------------------------------------------------------------------------*/
+/** This function performs a blocking wait by polling a caller-supplied
+    predicate, i.e,. generic wait-for-condition method. The method returns true
+    as soon as the predicate returns true;
+    else it polls every 'waitDelayMs' until the predicate is true or 'maxWaitMs'
+    elapses, in which case it returns false.
+
+    Example usage (C++11 lambda):
+    \code
+
+    // Wait (up to 2 seconds) for the driver to consume the outbound buffer.
+    // The initial 50msec delay gives the driver's thread time to start
+    REQUIRE( waitForCondition( [&driver] { return driver.getTxCount() >= 10; }, 50, 2000 ) );
+
+    // Capture-by-value works as well, e.g. polling a free function
+    bool result = waitForCondition( [] { return isSystemReady(); }, 0 );
+    REQUIRE( result );
+
+    \endcode
+ */
+template <typename PREDICATE>
+inline bool waitForCondition( PREDICATE predicate, unsigned long minWait, unsigned long maxWaitMs = 10000, unsigned long waitDelayMs = 10 )
+{
+    Kit::System::sleep( minWait );
+    for ( ;; )
+    {
+        if ( predicate() )
+        {
+            return true;
+        }
+        if ( maxWaitMs == 0 )
+        {
+            break;
+        }
+
+        Kit::System::sleep( waitDelayMs );
+        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
+    }
+    return false;
+}
 
 /*----------------------------------------------------------------------------*/
 /** This function performs a blocking wait by monitoring a Model Point for
@@ -39,7 +79,7 @@ bool minWaitOnModelPoint( MPTYPE& src, VALTYPE expectedVal, unsigned long minWai
 
     VALTYPE val;
     bool    valid = src.read( val );
-    while ( maxWaitMs )
+    for ( ;; )
     {
         if ( valid && val == expectedVal )
         {
@@ -50,10 +90,14 @@ bool minWaitOnModelPoint( MPTYPE& src, VALTYPE expectedVal, unsigned long minWai
             }
             return true;
         }
+        if ( maxWaitMs == 0 )
+        {
+            break;
+        }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs -= waitDelayMs;
-        valid      = src.read( val );
+        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
+        valid     = src.read( val );
     }
 
     // Return the last read value
@@ -74,7 +118,7 @@ bool minWaitOnEnumModelPoint( MPTYPE& src, VALTYPE expectedVal, unsigned long mi
 
     VALTYPE val   = VALTYPE::_from_integral_unchecked( 0 );
     bool    valid = src.read( val );
-    while ( maxWaitMs )
+    for ( ;; )
     {
         if ( valid && val == expectedVal )
         {
@@ -85,10 +129,14 @@ bool minWaitOnEnumModelPoint( MPTYPE& src, VALTYPE expectedVal, unsigned long mi
             }
             return true;
         }
+        if ( maxWaitMs == 0 )
+        {
+            break;
+        }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs -= waitDelayMs;
-        valid      = src.read( val );
+        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
+        valid     = src.read( val );
     }
 
     // Return the last read value
@@ -108,7 +156,7 @@ bool minWaitOnModelPointValidState( MPTYPE& src, bool expectedValidState, unsign
     Kit::System::sleep( minWait );
 
     bool state = !src.isNotValid();
-    while ( maxWaitMs )
+    for ( ;; )
     {
         if ( state == expectedValidState )
         {
@@ -119,10 +167,14 @@ bool minWaitOnModelPointValidState( MPTYPE& src, bool expectedValidState, unsign
             }
             return true;
         }
+        if ( maxWaitMs == 0 )
+        {
+            break;
+        }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs -= waitDelayMs;
-        state      = !src.isNotValid();
+        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
+        state     = !src.isNotValid();
     }
 
     // Return the last read value
@@ -142,7 +194,7 @@ bool minWaitOnModelPointSeqNumChange( MPTYPE& src, uint16_t currentSeqNum, unsig
     Kit::System::sleep( minWait );
 
     uint16_t seqNum = src.getSequenceNumber();
-    while ( maxWaitMs )
+    for ( ;; )
     {
         if ( seqNum != currentSeqNum )
         {
@@ -153,11 +205,14 @@ bool minWaitOnModelPointSeqNumChange( MPTYPE& src, uint16_t currentSeqNum, unsig
             }
             return true;
         }
+        if ( maxWaitMs == 0 )
+        {
+            break;
+        }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs -= waitDelayMs;
-        seqNum     = src.getSequenceNumber();
-        ;
+        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
+        seqNum    = src.getSequenceNumber();
     }
 
     // Return the last read value
@@ -371,12 +426,12 @@ inline bool minWaitOnStreamData( Kit::Io::IInput& stream, unsigned long minWait 
 {
     Kit::System::sleep( minWait );
 
-    bool avail = false;
-    while ( maxWaitMs && !avail )
+    bool avail = stream.available();
+    while ( !avail && maxWaitMs )
     {
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs -= waitDelayMs;
-        avail      = stream.available();
+        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
+        avail     = stream.available();
     }
     return avail;
 };

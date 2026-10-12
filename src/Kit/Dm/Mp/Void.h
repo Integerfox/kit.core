@@ -82,11 +82,11 @@ public:
     /** Type safe write. See Kit::Dm::IModelPoint. Note: the underlying data is
         a uintptr_t, but the read/write methods use void* for type safety.
      */
-    inline uint16_t write( void*                               newValue,
-                           bool                                forceChgNotification = false,
-                           Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t write( void*                                newValue,
+                           Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                           Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
-        return Kit::Dm::ModelPointBase::writeData( &newValue, sizeof( uintptr_t ), forceChgNotification, lockRequest );
+        return Kit::Dm::ModelPointBase::writeData( &newValue, sizeof( uintptr_t ), chgNotice, lockRequest );
     }
 
 public:
@@ -125,7 +125,7 @@ public:
             uintptr_t val;
             if ( Kit::Text::StringTo::unsignedInt( val, src.as<const char*>(), 16 ) )
             {
-                retSequenceNumber = PrimitiveType<uintptr_t, Void>::write( val, false, lockRequest );
+                retSequenceNumber = PrimitiveType<uintptr_t, Void>::write( val, ChangeNotice_T::eNORMAL, lockRequest );
                 return true;
             }
         }

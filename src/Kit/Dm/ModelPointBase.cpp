@@ -84,12 +84,12 @@ bool ModelPointBase::isNotValid( uint16_t* seqNumPtr ) const noexcept
     return !result;
 }
 
-uint16_t ModelPointBase::setInvalid( bool forceChgNotification, LockRequest_T lockRequest ) noexcept
+uint16_t ModelPointBase::setInvalid( ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
     if ( testAndUpdateLock( lockRequest ) )
     {
-        if ( m_valid || forceChgNotification )
+        if ( m_valid || chgNotice == ChangeNotice_T::eFORCE )
         {
             m_valid = false;
             hookSetInvalid();
@@ -124,12 +124,12 @@ bool ModelPointBase::readData( void* dstData, size_t dstSize, uint16_t* seqNumPt
     return valid;
 }
 
-uint16_t ModelPointBase::writeData( const void* srcData, size_t srcSize, bool forceChgNotification, LockRequest_T lockRequest ) noexcept
+uint16_t ModelPointBase::writeData( const void* srcData, size_t srcSize, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
     if ( srcData && testAndUpdateLock( lockRequest ) )
     {
-        if ( !m_valid || forceChgNotification || isDataEqual_( srcData ) == false )
+        if ( !m_valid || chgNotice == ChangeNotice_T::eFORCE || isDataEqual_( srcData ) == false )
         {
             copyDataFrom_( srcData, srcSize );
             processDataUpdated();
@@ -147,7 +147,7 @@ uint16_t ModelPointBase::copyDataAndStateFrom( const ModelPointBase& src, LockRe
     }
 
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
-    return writeData( src.m_dataPtr, src.m_dataSize, false, lockRequest );
+    return writeData( src.m_dataPtr, src.m_dataSize, ChangeNotice_T::eNORMAL, lockRequest );
 }
 
 uint16_t ModelPointBase::touch() noexcept

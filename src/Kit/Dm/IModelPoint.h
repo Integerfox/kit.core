@@ -54,6 +54,13 @@ public:
         eUNLOCK,      //!< Request to unlock the MP.  If the MP is already unlocked - the request is ignored and the update operation is completed
     };
 
+    /// Options related to triggering the Model Point's change notification(s)
+    enum class ChangeNotice_T
+    {
+        eNORMAL,  //!< Change notification(s) are ONLY triggered when the MP's data/valid-state actually changes
+        eFORCE    //!< Change notification(s) are ALWAYS triggered, i.e. even when the MP's data/valid-state is unchanged
+    };
+
 
 public:
     /** Magic value to use when registering for a change notification and
@@ -103,7 +110,7 @@ public:
         Notes:
         1) Any write operation will set the Model Point's state to valid.
         2) Change Notification(s) will ONLY be triggered when:
-           a) forceChgNotification is true, OR
+           a) chgNotice == ChangeNotice_T::eFORCE, OR
            b) there is valid to invalid state transition (i.e. if the Model
               Point is already in the invalid state - no change notification will
               be triggered), OR
@@ -113,7 +120,8 @@ public:
            b) If lockRequest != eNO_REQUEST, the operation is performed and the
               the new lock state is applied
      */
-    virtual uint16_t setInvalid( bool forceChgNotification = false, LockRequest_T lockRequest = eNO_REQUEST ) noexcept = 0;
+    virtual uint16_t setInvalid( ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                                 LockRequest_T  lockRequest = eNO_REQUEST ) noexcept = 0;
 
 public:
     /** This method converts the Model Point's data to JSON string and
@@ -303,10 +311,10 @@ protected:
         2) The data size of the Model Points data instance is ALWAYS honored
            when coping the data from 'srcData'
      */
-    virtual uint16_t writeData( const void*   srcData,
-                                size_t        srcSize,
-                                bool          forceChgNotification = false,
-                                LockRequest_T lockRequest          = eNO_REQUEST ) noexcept = 0;
+    virtual uint16_t writeData( const void*    srcData,
+                                size_t         srcSize,
+                                ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                                LockRequest_T  lockRequest = eNO_REQUEST ) noexcept = 0;
 
 
 protected:

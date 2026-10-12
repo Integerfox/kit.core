@@ -58,11 +58,11 @@ public:
     }
 
     /// Type safe write. See Kit::Dm::IModelPoint
-    inline uint16_t write( BETTERENUM_TYPE                     newValue,
-                           bool                                forceChangeNotification = false,
-                           Kit::Dm::IModelPoint::LockRequest_T lockRequest             = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t write( BETTERENUM_TYPE                      newValue,
+                           Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
+                           Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
     {
-        return writeData( &newValue, sizeof( BETTERENUM_TYPE ), forceChangeNotification, lockRequest );
+        return writeData( &newValue, sizeof( BETTERENUM_TYPE ), chgNotice, lockRequest );
     }
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
@@ -135,7 +135,7 @@ public:
             return false;
         }
 
-        retSequenceNumber = write( *maybeValue, false, lockRequest );
+        retSequenceNumber = write( *maybeValue, ChangeNotice_T::eNORMAL, lockRequest );
         return true;
     }
 };

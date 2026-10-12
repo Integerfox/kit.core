@@ -117,12 +117,12 @@ TEST_CASE( "common" )
         REQUIRE( locked == false );
         REQUIRE( mp_apple_.isNotValid() == true );
 
-        mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
+        mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
         REQUIRE( mp_apple_.isNotValid() == true );
         locked = mp_apple_.isLocked();
         REQUIRE( locked == false );
 
-        mp_apple_.setInvalid( false, IModelPoint::eLOCK );
+        mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eLOCK );
         REQUIRE( mp_apple_.isNotValid() == true );
         locked = mp_apple_.isLocked();
         REQUIRE( locked == true );
@@ -136,7 +136,7 @@ TEST_CASE( "common" )
         locked = mp_apple_.isLocked();
         REQUIRE( locked == true );
 
-        mp_apple_.write( 12, false, IModelPoint::eUNLOCK );
+        mp_apple_.write( 12, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
         valid = mp_apple_.read( value );
         REQUIRE( mp_apple_.isNotValid() == false );
         REQUIRE( valid == true );
