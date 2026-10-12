@@ -1,0 +1,738 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Driver/NV/Flash/Api.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">Driver/NV/Flash</a> - Api.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">96.6&nbsp;%</td>
+            <td class="headerCovTableEntry">178</td>
+            <td class="headerCovTableEntry">172</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-10-12 13:55:39</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">78.5&nbsp;%</td>
+            <td class="headerCovTableEntry">158</td>
+            <td class="headerCovTableEntry">124</td>
+          </tr>
+                  <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : #ifndef KIT_DRIVER_NV_FLASH_API_H_</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             : #define KIT_DRIVER_NV_FLASH_API_H_</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  *</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : </span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : </span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : #include &quot;Kit/Driver/NV/IApi.h&quot;</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             : #include &quot;Kit/Driver/Flash/IApi.h&quot;</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : #include &quot;Kit/Checksum/IEdc.h&quot;</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : #include &quot;Kit/System/Assert.h&quot;</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : #include &lt;stdint.h&gt;</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : #include &lt;stddef.h&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : #include &lt;string.h&gt;</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : </span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : ///</span>
+<span id="L23"><span class="lineNum">      23</span>                 :             : namespace Kit {</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             : ///</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             : namespace Driver {</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             : ///</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : namespace NV {</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             : ///</span>
+<span id="L29"><span class="lineNum">      29</span>                 :             : namespace Flash {</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             : </span>
+<span id="L31"><span class="lineNum">      31</span>                 :             : </span>
+<span id="L32"><span class="lineNum">      32</span>                 :             : /** NV Record status values.  Transitions are one-directional:</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             :     ERASED -&gt; VALID -&gt; INVALID.  Each transition only requires clearing</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :     bits (1-&gt;0), which flash hardware allows without an erase cycle.</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             :  */</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             : struct PageStatus_T</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             : {</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :     static constexpr uint32_t ERASED  = 0xFFFFFFFF;  //!&lt; Record slot is empty</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :     static constexpr uint32_t VALID   = 0xFFFF0000;  //!&lt; Record contains current data</span>
+<span id="L40"><span class="lineNum">      40</span>                 :             :     static constexpr uint32_t INVALID = 0x00000000;  //!&lt; Record is obsolete</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             : };</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             : </span>
+<span id="L43"><span class="lineNum">      43</span>                 :             : </span>
+<span id="L44"><span class="lineNum">      44</span>                 :             : /** NV Record header structure (24 bytes).  Stored at the beginning of each</span>
+<span id="L45"><span class="lineNum">      45</span>                 :             :     NV Record in flash.</span>
+<span id="L46"><span class="lineNum">      46</span>                 :             :  */</span>
+<span id="L47"><span class="lineNum">      47</span>                 :             : struct PageHeader_T</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             : {</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             :     uint32_t magic;        //!&lt; Magic number (0xA5A5A5A5) identifying a valid header</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             :     uint32_t sequenceNum;  //!&lt; Monotonically increasing sequence number.  Comparisons use</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             :                            //!&lt; 32-bit serial-number arithmetic so that wrap-around is handled</span>
+<span id="L52"><span class="lineNum">      52</span>                 :             :                            //!&lt; (see Api::isSequenceNewer()).</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             :     uint32_t dataOffset;   //!&lt; Starting offset of this record within the logical NV space</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             :     uint32_t dataLength;   //!&lt; Length of the data payload (equals nvPageSize)</span>
+<span id="L55"><span class="lineNum">      55</span>                 :             :     uint32_t crc32;        //!&lt; CRC32 over the preceding 16 bytes (magic through dataLength)</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             :     uint32_t status;       //!&lt; Record lifecycle state (ERASED, VALID, or INVALID)</span>
+<span id="L57"><span class="lineNum">      57</span>                 :             : };</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : </span>
+<span id="L59"><span class="lineNum">      59</span>                 :             : </span>
+<span id="L60"><span class="lineNum">      60</span>                 :             : /** Magic number used to identify valid NV Record headers */</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             : static constexpr uint32_t MAGIC_NUMBER = 0xA5A5A5A5;</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             : </span>
+<span id="L63"><span class="lineNum">      63</span>                 :             : /** Size of the NV Record header in bytes */</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : static constexpr size_t HEADER_SIZE = sizeof( PageHeader_T );</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             : </span>
+<span id="L66"><span class="lineNum">      66</span>                 :             : /** Number of header bytes covered by the CRC calculation (magic through dataLength) */</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             : static constexpr size_t CRC_HEADER_FIELD_SIZE = 16;</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             : </span>
+<span id="L69"><span class="lineNum">      69</span>                 :             : /** Value used in the page map to indicate no valid physical page exists */</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             : static constexpr uint32_t INVALID_PAGE_ADDRESS = 0xFFFFFFFF;</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             : </span>
+<span id="L72"><span class="lineNum">      72</span>                 :             : /** Byte value representing the erased state of flash memory */</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             : static constexpr uint8_t ERASED_BYTE_VALUE = 0xFF;</span>
+<span id="L74"><span class="lineNum">      74</span>                 :             : </span>
+<span id="L75"><span class="lineNum">      75</span>                 :             : </span>
+<span id="L76"><span class="lineNum">      76</span>                 :             : /** Configuration structure for the NV flash driver */</span>
+<span id="L77"><span class="lineNum">      77</span>                 :             : struct Config_T</span>
+<span id="L78"><span class="lineNum">      78</span>                 :             : {</span>
+<span id="L79"><span class="lineNum">      79</span>                 :             :     uint32_t flashStartAddress;  //!&lt; Base address of the NV region in flash</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             :     uint32_t flashEndAddress;    //!&lt; End address (exclusive) of the NV region in flash</span>
+<span id="L81"><span class="lineNum">      81</span>                 :             :     size_t   nvPageSize;         //!&lt; Logical NV page size (data portion only, e.g. 256 bytes)</span>
+<span id="L82"><span class="lineNum">      82</span>                 :             :     size_t   nvTotalSize;        //!&lt; Total NV storage size presented to the application</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             : };</span>
+<span id="L84"><span class="lineNum">      84</span>                 :             : </span>
+<span id="L85"><span class="lineNum">      85</span>                 :             : </span>
+<span id="L86"><span class="lineNum">      86</span>                 :             : /** This class implements the NV::IApi interface using a flash device (via</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             :     Flash::IApi) for persistent storage with wear leveling.</span>
+<span id="L88"><span class="lineNum">      88</span>                 :             : </span>
+<span id="L89"><span class="lineNum">      89</span>                 :             :     The implementation uses a log-structured approach where each write creates</span>
+<span id="L90"><span class="lineNum">      90</span>                 :             :     a new NV Record containing a record header and a full page of data.  A</span>
+<span id="L91"><span class="lineNum">      91</span>                 :             :     read-modify-write pattern ensures that unmodified bytes within a page are</span>
+<span id="L92"><span class="lineNum">      92</span>                 :             :     preserved.</span>
+<span id="L93"><span class="lineNum">      93</span>                 :             : </span>
+<span id="L94"><span class="lineNum">      94</span>                 :             :     An in-memory page map provides O(1) lookup from logical page index to</span>
+<span id="L95"><span class="lineNum">      95</span>                 :             :     physical flash address.  On startup, the page map is rebuilt by scanning</span>
+<span id="L96"><span class="lineNum">      96</span>                 :             :     all NV Records in the flash region.</span>
+<span id="L97"><span class="lineNum">      97</span>                 :             : </span>
+<span id="L98"><span class="lineNum">      98</span>                 :             :     Sector reclamation uses a two-phase approach: first scan for already-erased</span>
+<span id="L99"><span class="lineNum">      99</span>                 :             :     slots, and only erase a sector when no erased slots remain and the sector</span>
+<span id="L100"><span class="lineNum">     100</span>                 :             :     contains no VALID records.  To guarantee that reclamation can never</span>
+<span id="L101"><span class="lineNum">     101</span>                 :             :     deadlock (a state where every sector holds a VALID record and none can be</span>
+<span id="L102"><span class="lineNum">     102</span>                 :             :     erased), the flash region MUST be over-provisioned such that the number of</span>
+<span id="L103"><span class="lineNum">     103</span>                 :             :     physical sectors is at least the number of logical pages</span>
+<span id="L104"><span class="lineNum">     104</span>                 :             :     (numLogicalPages &lt;= numSectors).  start() enforces this invariant and fails</span>
+<span id="L105"><span class="lineNum">     105</span>                 :             :     for any configuration that violates it.</span>
+<span id="L106"><span class="lineNum">     106</span>                 :             : </span>
+<span id="L107"><span class="lineNum">     107</span>                 :             :     Template parameter MAX_LOGICAL_PAGES defines the maximum number of logical</span>
+<span id="L108"><span class="lineNum">     108</span>                 :             :     pages supported (determines size of the in-memory page map array).</span>
+<span id="L109"><span class="lineNum">     109</span>                 :             :  */</span>
+<span id="L110"><span class="lineNum">     110</span>                 :             : template &lt;size_t MAX_LOGICAL_PAGES&gt;</span>
+<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC tlaBgGNC">          71 : class Api : public NV::IApi</span></span>
+<span id="L112"><span class="lineNum">     112</span>                 :             : {</span>
+<span id="L113"><span class="lineNum">     113</span>                 :             : public:</span>
+<span id="L114"><span class="lineNum">     114</span>                 :             :     /** Constructor.  The 'flashDriver' and 'crcAlgo' references must remain</span>
+<span id="L115"><span class="lineNum">     115</span>                 :             :         valid for the lifetime of this object.  The 'workBuffer' must be at</span>
+<span id="L116"><span class="lineNum">     116</span>                 :             :         least config.nvPageSize bytes and must remain valid for the lifetime</span>
+<span id="L117"><span class="lineNum">     117</span>                 :             :         of this object.</span>
+<span id="L118"><span class="lineNum">     118</span>                 :             : </span>
+<span id="L119"><span class="lineNum">     119</span>                 :             :         The 'crcAlgo' MUST be a 32-bit wide CRC algorithm.</span>
+<span id="L120"><span class="lineNum">     120</span>                 :             :      */</span>
+<span id="L121"><span class="lineNum">     121</span>                 :<span class="tlaGNC">          74 :     Api( Kit::Driver::Flash::IApi&amp; flashDriver,</span></span>
+<span id="L122"><span class="lineNum">     122</span>                 :             :          Kit::Checksum::IEdc&amp;      crcAlgo,</span>
+<span id="L123"><span class="lineNum">     123</span>                 :             :          const Config_T&amp;           config,</span>
+<span id="L124"><span class="lineNum">     124</span>                 :             :          uint8_t*                  workBuffer,</span>
+<span id="L125"><span class="lineNum">     125</span>                 :             :          size_t                    workBufferSize ) noexcept</span>
+<span id="L126"><span class="lineNum">     126</span>                 :<span class="tlaGNC">          74 :         : m_config( config )</span></span>
+<span id="L127"><span class="lineNum">     127</span>                 :<span class="tlaGNC">          74 :         , m_currentSequence( 0 )</span></span>
+<span id="L128"><span class="lineNum">     128</span>                 :<span class="tlaGNC">          74 :         , m_flashDriver( flashDriver )</span></span>
+<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">          74 :         , m_crcAlgo( crcAlgo )</span></span>
+<span id="L130"><span class="lineNum">     130</span>                 :<span class="tlaGNC">          74 :         , m_workBuffer( workBuffer )</span></span>
+<span id="L131"><span class="lineNum">     131</span>                 :<span class="tlaGNC">          74 :         , m_workBufferSize( workBufferSize )</span></span>
+<span id="L132"><span class="lineNum">     132</span>                 :<span class="tlaGNC">          74 :         , m_numSectors( 0 )</span></span>
+<span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">          74 :         , m_pagesPerSector( 0 )</span></span>
+<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">          74 :         , m_totalPages( 0 )</span></span>
+<span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">          74 :         , m_numLogicalPages( 0 )</span></span>
+<span id="L136"><span class="lineNum">     136</span>                 :<span class="tlaGNC">          74 :         , m_eraseCount( 0 )</span></span>
+<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 73 times"> + </span>]:<span class="tlaGNC">          74 :         , m_isStarted( false )</span></span>
+<span id="L138"><span class="lineNum">     138</span>                 :             :     {</span>
+<span id="L139"><span class="lineNum">     139</span>                 :             :         KIT_SYSTEM_ASSERT( config.nvPageSize &gt; 0 );</span>
+<span id="L140"><span class="lineNum">     140</span>                 :             :         KIT_SYSTEM_ASSERT( config.nvTotalSize &gt; 0 );</span>
+<span id="L141"><span class="lineNum">     141</span>                 :             :         KIT_SYSTEM_ASSERT( config.flashEndAddress &gt; config.flashStartAddress );</span>
+<span id="L142"><span class="lineNum">     142</span>                 :             :         KIT_SYSTEM_ASSERT( workBuffer != nullptr );</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             :         KIT_SYSTEM_ASSERT( workBufferSize &gt;= config.nvPageSize );</span>
+<span id="L144"><span class="lineNum">     144</span>                 :             :         KIT_SYSTEM_ASSERT( crcAlgo.getEdcSize() == sizeof( uint32_t ) );</span>
+<span id="L145"><span class="lineNum">     145</span>                 :             : </span>
+<span id="L146"><span class="lineNum">     146</span>         [<span class="tlaGBC" title="Branch 0 was taken 73 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          74 :         if ( config.nvPageSize &gt; 0 )</span></span>
+<span id="L147"><span class="lineNum">     147</span>                 :             :         {</span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          73 :             m_numLogicalPages = config.nvTotalSize / config.nvPageSize;</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :             :             KIT_SYSTEM_ASSERT( m_numLogicalPages &lt;= MAX_LOGICAL_PAGES );</span>
+<span id="L150"><span class="lineNum">     150</span>                 :             :         }</span>
+<span id="L151"><span class="lineNum">     151</span>                 :             : </span>
+<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">          74 :         memset( m_pageMap, ERASED_BYTE_VALUE, sizeof( m_pageMap ) );</span></span>
+<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">          74 :     }</span></span>
+<span id="L154"><span class="lineNum">     154</span>                 :             : </span>
+<span id="L155"><span class="lineNum">     155</span>                 :             : </span>
+<span id="L156"><span class="lineNum">     156</span>                 :             : public:</span>
+<span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">          67 :     bool start( void* startArgs = nullptr ) noexcept override</span></span>
+<span id="L158"><span class="lineNum">     158</span>                 :             :     {</span>
+<span id="L159"><span class="lineNum">     159</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 66 times"> + </span>]:<span class="tlaGNC">          67 :         if ( m_isStarted )</span></span>
+<span id="L160"><span class="lineNum">     160</span>                 :             :         {</span>
+<span id="L161"><span class="lineNum">     161</span>                 :             :             return true;</span>
+<span id="L162"><span class="lineNum">     162</span>                 :             :         }</span>
+<span id="L163"><span class="lineNum">     163</span>                 :             : </span>
+<span id="L164"><span class="lineNum">     164</span>                 :<span class="tlaGNC">          66 :         size_t sectorSize   = m_flashDriver.getSectorSize();</span></span>
+<span id="L165"><span class="lineNum">     165</span>                 :<span class="tlaGNC">          66 :         size_t nvRegionSize = m_config.flashEndAddress - m_config.flashStartAddress;</span></span>
+<span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">          66 :         m_numSectors        = nvRegionSize / sectorSize;</span></span>
+<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">          66 :         m_pagesPerSector    = sectorSize / getPhysicalPageSize();</span></span>
+<span id="L168"><span class="lineNum">     168</span>                 :<span class="tlaGNC">          66 :         m_totalPages        = m_numSectors * m_pagesPerSector;</span></span>
+<span id="L169"><span class="lineNum">     169</span>                 :             : </span>
+<span id="L170"><span class="lineNum">     170</span>                 :             :         // Over-provisioning invariant.  At most one record per logical page can</span>
+<span id="L171"><span class="lineNum">     171</span>                 :             :         // be VALID at any one time, so when superseding logical page P there are</span>
+<span id="L172"><span class="lineNum">     172</span>                 :             :         // at most (m_numLogicalPages - 1) VALID records belonging to *other*</span>
+<span id="L173"><span class="lineNum">     173</span>                 :             :         // logical pages (P's current record is the one being invalidated).  To</span>
+<span id="L174"><span class="lineNum">     174</span>                 :             :         // deadlock sector reclamation, every sector would have to hold at least</span>
+<span id="L175"><span class="lineNum">     175</span>                 :             :         // one such &quot;other-page&quot; VALID record, which requires</span>
+<span id="L176"><span class="lineNum">     176</span>                 :             :         // (m_numLogicalPages - 1) &gt;= m_numSectors, i.e. m_numLogicalPages &gt;</span>
+<span id="L177"><span class="lineNum">     177</span>                 :             :         // m_numSectors.  Requiring m_numLogicalPages &lt;= m_numSectors therefore</span>
+<span id="L178"><span class="lineNum">     178</span>                 :             :         // guarantees findFreePageAddress() Phase 2 can always reclaim a sector.</span>
+<span id="L179"><span class="lineNum">     179</span>                 :             :         // A configuration that violates this invariant is a design/configuration</span>
+<span id="L180"><span class="lineNum">     180</span>                 :             :         // error, so refuse to start rather than risk a run-time write failure.</span>
+<span id="L181"><span class="lineNum">     181</span>                 :             :         KIT_SYSTEM_ASSERT( m_numLogicalPages &lt;= m_numSectors );</span>
+<span id="L182"><span class="lineNum">     182</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 64 times"> + </span>]:<span class="tlaGNC">          66 :         if ( m_numLogicalPages &gt; m_numSectors )</span></span>
+<span id="L183"><span class="lineNum">     183</span>                 :             :         {</span>
+<span id="L184"><span class="lineNum">     184</span>                 :             :             return false;</span>
+<span id="L185"><span class="lineNum">     185</span>                 :             :         }</span>
+<span id="L186"><span class="lineNum">     186</span>                 :             : </span>
+<span id="L187"><span class="lineNum">     187</span>                 :<span class="tlaGNC">          64 :         memset( m_pageMap, ERASED_BYTE_VALUE, sizeof( m_pageMap ) );</span></span>
+<span id="L188"><span class="lineNum">     188</span>                 :             : </span>
+<span id="L189"><span class="lineNum">     189</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 63 times"> + </span>]:<span class="tlaGNC">          64 :         if ( !scanAndBuildPageMap() )</span></span>
+<span id="L190"><span class="lineNum">     190</span>                 :             :         {</span>
+<span id="L191"><span class="lineNum">     191</span>                 :             :             return false;</span>
+<span id="L192"><span class="lineNum">     192</span>                 :             :         }</span>
+<span id="L193"><span class="lineNum">     193</span>                 :             : </span>
+<span id="L194"><span class="lineNum">     194</span>                 :<span class="tlaGNC">          63 :         m_isStarted = true;</span></span>
+<span id="L195"><span class="lineNum">     195</span>                 :<span class="tlaGNC">          63 :         return true;</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :             :     }</span>
+<span id="L197"><span class="lineNum">     197</span>                 :             : </span>
+<span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     void stop() noexcept override</span></span>
+<span id="L199"><span class="lineNum">     199</span>                 :             :     {</span>
+<span id="L200"><span class="lineNum">     200</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">           4 :         m_isStarted = false;</span></span>
+<span id="L201"><span class="lineNum">     201</span>                 :<span class="tlaUNC tlaBgUNC">           0 :     }</span></span>
+<span id="L202"><span class="lineNum">     202</span>                 :             : </span>
+<span id="L203"><span class="lineNum">     203</span>                 :             : </span>
+<span id="L204"><span class="lineNum">     204</span>                 :             : public:</span>
+<span id="L205"><span class="lineNum">     205</span>                 :<span class="tlaGNC tlaBgGNC">         210 :     bool write( size_t      dstOffset,</span></span>
+<span id="L206"><span class="lineNum">     206</span>                 :             :                 const void* srcData,</span>
+<span id="L207"><span class="lineNum">     207</span>                 :             :                 size_t      numBytesToWrite ) noexcept override</span>
+<span id="L208"><span class="lineNum">     208</span>                 :             :     {</span>
+<span id="L209"><span class="lineNum">     209</span>   [<span class="tlaGBC" title="Branch 0 was taken 209 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 207 times"> + </span>]:<span class="tlaGNC">         210 :         if ( !m_isStarted || srcData == nullptr || numBytesToWrite == 0 )</span></span>
+<span id="L210"><span class="lineNum">     210</span>                 :             :         {</span>
+<span id="L211"><span class="lineNum">     211</span>                 :             :             return false;</span>
+<span id="L212"><span class="lineNum">     212</span>                 :             :         }</span>
+<span id="L213"><span class="lineNum">     213</span>                 :             : </span>
+<span id="L214"><span class="lineNum">     214</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 206 times"> + </span>]:<span class="tlaGNC">         207 :         if ( dstOffset + numBytesToWrite &gt; m_config.nvTotalSize )</span></span>
+<span id="L215"><span class="lineNum">     215</span>                 :             :         {</span>
+<span id="L216"><span class="lineNum">     216</span>                 :             :             return false;</span>
+<span id="L217"><span class="lineNum">     217</span>                 :             :         }</span>
+<span id="L218"><span class="lineNum">     218</span>                 :             : </span>
+<span id="L219"><span class="lineNum">     219</span>                 :             :         const uint8_t* src       = static_cast&lt;const uint8_t*&gt;( srcData );</span>
+<span id="L220"><span class="lineNum">     220</span>                 :             :         size_t         remaining = numBytesToWrite;</span>
+<span id="L221"><span class="lineNum">     221</span>                 :             :         size_t         offset    = dstOffset;</span>
+<span id="L222"><span class="lineNum">     222</span>                 :             : </span>
+<span id="L223"><span class="lineNum">     223</span>         [<span class="tlaGBC" title="Branch 0 was taken 207 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 201 times"> + </span>]:<span class="tlaGNC">         408 :         while ( remaining &gt; 0 )</span></span>
+<span id="L224"><span class="lineNum">     224</span>                 :             :         {</span>
+<span id="L225"><span class="lineNum">     225</span>                 :             :             size_t pageIndex = offsetToPageIndex( offset );</span>
+<span id="L226"><span class="lineNum">     226</span>                 :<span class="tlaGNC">         207 :             if ( pageIndex &gt;= m_numLogicalPages )</span></span>
+<span id="L227"><span class="lineNum">     227</span>                 :             :             {</span>
+<span id="L228"><span class="lineNum">     228</span>                 :<span class="tlaGNC">           5 :                 return false;</span></span>
+<span id="L229"><span class="lineNum">     229</span>                 :             :             }</span>
+<span id="L230"><span class="lineNum">     230</span>                 :             : </span>
+<span id="L231"><span class="lineNum">     231</span>                 :<span class="tlaGNC">         207 :             size_t offsetInPage  = offset % m_config.nvPageSize;</span></span>
+<span id="L232"><span class="lineNum">     232</span>                 :<span class="tlaGNC">         207 :             size_t bytesThisPage = m_config.nvPageSize - offsetInPage;</span></span>
+<span id="L233"><span class="lineNum">     233</span>                 :<span class="tlaGNC">         207 :             if ( bytesThisPage &gt; remaining )</span></span>
+<span id="L234"><span class="lineNum">     234</span>                 :             :             {</span>
+<span id="L235"><span class="lineNum">     235</span>                 :             :                 bytesThisPage = remaining;</span>
+<span id="L236"><span class="lineNum">     236</span>                 :             :             }</span>
+<span id="L237"><span class="lineNum">     237</span>                 :             : </span>
+<span id="L238"><span class="lineNum">     238</span>         [<span class="tlaGBC" title="Branch 0 was taken 206 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">         207 :             if ( !readCurrentPageData( pageIndex, m_workBuffer ) )</span></span>
+<span id="L239"><span class="lineNum">     239</span>                 :             :             {</span>
+<span id="L240"><span class="lineNum">     240</span>                 :             :                 return false;</span>
+<span id="L241"><span class="lineNum">     241</span>                 :             :             }</span>
+<span id="L242"><span class="lineNum">     242</span>                 :             : </span>
+<span id="L243"><span class="lineNum">     243</span>                 :<span class="tlaGNC">         206 :             memcpy( m_workBuffer + offsetInPage, src, bytesThisPage );</span></span>
+<span id="L244"><span class="lineNum">     244</span>                 :             : </span>
+<span id="L245"><span class="lineNum">     245</span>                 :<span class="tlaGNC">         206 :             uint32_t oldPageAddr = m_pageMap[pageIndex];</span></span>
+<span id="L246"><span class="lineNum">     246</span>                 :<span class="tlaGNC">         206 :             uint32_t freeAddr    = findFreePageAddress( oldPageAddr );</span></span>
+<span id="L247"><span class="lineNum">     247</span>         [<span class="tlaGBC" title="Branch 0 was taken 206 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         206 :             if ( freeAddr == INVALID_PAGE_ADDRESS )</span></span>
+<span id="L248"><span class="lineNum">     248</span>                 :             :             {</span>
+<span id="L249"><span class="lineNum">     249</span>                 :             :                 return false;</span>
+<span id="L250"><span class="lineNum">     250</span>                 :             :             }</span>
+<span id="L251"><span class="lineNum">     251</span>                 :             : </span>
+<span id="L252"><span class="lineNum">     252</span>                 :             :             PageHeader_T header;</span>
+<span id="L253"><span class="lineNum">     253</span>                 :<span class="tlaGNC">         206 :             header.magic       = MAGIC_NUMBER;</span></span>
+<span id="L254"><span class="lineNum">     254</span>                 :<span class="tlaGNC">         206 :             header.sequenceNum = ++m_currentSequence;</span></span>
+<span id="L255"><span class="lineNum">     255</span>                 :<span class="tlaGNC">         206 :             header.dataOffset  = static_cast&lt;uint32_t&gt;( pageIndex * m_config.nvPageSize );</span></span>
+<span id="L256"><span class="lineNum">     256</span>                 :<span class="tlaGNC">         206 :             header.dataLength  = static_cast&lt;uint32_t&gt;( m_config.nvPageSize );</span></span>
+<span id="L257"><span class="lineNum">     257</span>                 :<span class="tlaGNC">         206 :             header.crc32       = calculateCrc( &amp;header, CRC_HEADER_FIELD_SIZE );</span></span>
+<span id="L258"><span class="lineNum">     258</span>                 :<span class="tlaGNC">         206 :             header.status      = PageStatus_T::VALID;</span></span>
+<span id="L259"><span class="lineNum">     259</span>                 :             : </span>
+<span id="L260"><span class="lineNum">     260</span>         [<span class="tlaGBC" title="Branch 0 was taken 204 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">         206 :             if ( m_flashDriver.write( freeAddr, &amp;header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L261"><span class="lineNum">     261</span>                 :             :             {</span>
+<span id="L262"><span class="lineNum">     262</span>                 :             :                 return false;</span>
+<span id="L263"><span class="lineNum">     263</span>                 :             :             }</span>
+<span id="L264"><span class="lineNum">     264</span>                 :             : </span>
+<span id="L265"><span class="lineNum">     265</span>         [<span class="tlaGBC" title="Branch 0 was taken 203 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">         204 :             if ( m_flashDriver.write( freeAddr + HEADER_SIZE, m_workBuffer, m_config.nvPageSize ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L266"><span class="lineNum">     266</span>                 :             :             {</span>
+<span id="L267"><span class="lineNum">     267</span>                 :             :                 return false;</span>
+<span id="L268"><span class="lineNum">     268</span>                 :             :             }</span>
+<span id="L269"><span class="lineNum">     269</span>                 :             : </span>
+<span id="L270"><span class="lineNum">     270</span>         [<span class="tlaGBC" title="Branch 0 was taken 145 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 58 times"> + </span>]:<span class="tlaGNC">         203 :             if ( m_pageMap[pageIndex] != INVALID_PAGE_ADDRESS )</span></span>
+<span id="L271"><span class="lineNum">     271</span>                 :             :             {</span>
+<span id="L272"><span class="lineNum">     272</span>         [<span class="tlaGBC" title="Branch 0 was taken 144 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">         145 :                 if ( !markPageInvalid( m_pageMap[pageIndex] ) )</span></span>
+<span id="L273"><span class="lineNum">     273</span>                 :             :                 {</span>
+<span id="L274"><span class="lineNum">     274</span>                 :             :                     return false;</span>
+<span id="L275"><span class="lineNum">     275</span>                 :             :                 }</span>
+<span id="L276"><span class="lineNum">     276</span>                 :             :             }</span>
+<span id="L277"><span class="lineNum">     277</span>                 :             : </span>
+<span id="L278"><span class="lineNum">     278</span>                 :<span class="tlaGNC">         202 :             m_pageMap[pageIndex] = freeAddr;</span></span>
+<span id="L279"><span class="lineNum">     279</span>                 :             : </span>
+<span id="L280"><span class="lineNum">     280</span>                 :<span class="tlaGNC">         202 :             src       += bytesThisPage;</span></span>
+<span id="L281"><span class="lineNum">     281</span>                 :<span class="tlaGNC">         202 :             offset    += bytesThisPage;</span></span>
+<span id="L282"><span class="lineNum">     282</span>                 :<span class="tlaGNC">         202 :             remaining -= bytesThisPage;</span></span>
+<span id="L283"><span class="lineNum">     283</span>                 :             :         }</span>
+<span id="L284"><span class="lineNum">     284</span>                 :             : </span>
+<span id="L285"><span class="lineNum">     285</span>                 :             :         return true;</span>
+<span id="L286"><span class="lineNum">     286</span>                 :             :     }</span>
+<span id="L287"><span class="lineNum">     287</span>                 :             : </span>
+<span id="L288"><span class="lineNum">     288</span>                 :<span class="tlaGNC">          56 :     bool read( size_t srcOffset,</span></span>
+<span id="L289"><span class="lineNum">     289</span>                 :             :                void*  dstData,</span>
+<span id="L290"><span class="lineNum">     290</span>                 :             :                size_t sizeDstData,</span>
+<span id="L291"><span class="lineNum">     291</span>                 :             :                size_t numBytesToRead ) noexcept override</span>
+<span id="L292"><span class="lineNum">     292</span>                 :             :     {</span>
+<span id="L293"><span class="lineNum">     293</span>   [<span class="tlaGBC" title="Branch 0 was taken 55 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 53 times"> + </span>]:<span class="tlaGNC">          56 :         if ( !m_isStarted || dstData == nullptr || numBytesToRead == 0 )</span></span>
+<span id="L294"><span class="lineNum">     294</span>                 :             :         {</span>
+<span id="L295"><span class="lineNum">     295</span>                 :             :             return false;</span>
+<span id="L296"><span class="lineNum">     296</span>                 :             :         }</span>
+<span id="L297"><span class="lineNum">     297</span>                 :             : </span>
+<span id="L298"><span class="lineNum">     298</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 52 times"> + </span>]:<span class="tlaGNC">          53 :         if ( sizeDstData &lt; numBytesToRead )</span></span>
+<span id="L299"><span class="lineNum">     299</span>                 :             :         {</span>
+<span id="L300"><span class="lineNum">     300</span>                 :             :             return false;</span>
+<span id="L301"><span class="lineNum">     301</span>                 :             :         }</span>
+<span id="L302"><span class="lineNum">     302</span>                 :             : </span>
+<span id="L303"><span class="lineNum">     303</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 51 times"> + </span>]:<span class="tlaGNC">          52 :         if ( srcOffset + numBytesToRead &gt; m_config.nvTotalSize )</span></span>
+<span id="L304"><span class="lineNum">     304</span>                 :             :         {</span>
+<span id="L305"><span class="lineNum">     305</span>                 :             :             return false;</span>
+<span id="L306"><span class="lineNum">     306</span>                 :             :         }</span>
+<span id="L307"><span class="lineNum">     307</span>                 :             : </span>
+<span id="L308"><span class="lineNum">     308</span>                 :             :         uint8_t* dst       = static_cast&lt;uint8_t*&gt;( dstData );</span>
+<span id="L309"><span class="lineNum">     309</span>                 :             :         size_t   remaining = numBytesToRead;</span>
+<span id="L310"><span class="lineNum">     310</span>                 :             :         size_t   offset    = srcOffset;</span>
+<span id="L311"><span class="lineNum">     311</span>                 :             : </span>
+<span id="L312"><span class="lineNum">     312</span>         [<span class="tlaGBC" title="Branch 0 was taken 52 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 50 times"> + </span>]:<span class="tlaGNC">         102 :         while ( remaining &gt; 0 )</span></span>
+<span id="L313"><span class="lineNum">     313</span>                 :             :         {</span>
+<span id="L314"><span class="lineNum">     314</span>                 :             :             size_t pageIndex = offsetToPageIndex( offset );</span>
+<span id="L315"><span class="lineNum">     315</span>                 :<span class="tlaGNC">          52 :             if ( pageIndex &gt;= m_numLogicalPages )</span></span>
+<span id="L316"><span class="lineNum">     316</span>                 :             :             {</span>
+<span id="L317"><span class="lineNum">     317</span>                 :             :                 return false;</span>
+<span id="L318"><span class="lineNum">     318</span>                 :             :             }</span>
+<span id="L319"><span class="lineNum">     319</span>                 :             : </span>
+<span id="L320"><span class="lineNum">     320</span>                 :<span class="tlaGNC">          52 :             size_t offsetInPage  = offset % m_config.nvPageSize;</span></span>
+<span id="L321"><span class="lineNum">     321</span>                 :<span class="tlaGNC">          52 :             size_t bytesThisPage = m_config.nvPageSize - offsetInPage;</span></span>
+<span id="L322"><span class="lineNum">     322</span>                 :<span class="tlaGNC">          52 :             if ( bytesThisPage &gt; remaining )</span></span>
+<span id="L323"><span class="lineNum">     323</span>                 :             :             {</span>
+<span id="L324"><span class="lineNum">     324</span>                 :             :                 bytesThisPage = remaining;</span>
+<span id="L325"><span class="lineNum">     325</span>                 :             :             }</span>
+<span id="L326"><span class="lineNum">     326</span>                 :             : </span>
+<span id="L327"><span class="lineNum">     327</span>         [<span class="tlaGBC" title="Branch 0 was taken 49 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          52 :             if ( m_pageMap[pageIndex] != INVALID_PAGE_ADDRESS )</span></span>
+<span id="L328"><span class="lineNum">     328</span>                 :             :             {</span>
+<span id="L329"><span class="lineNum">     329</span>                 :<span class="tlaGNC">          49 :                 size_t dataAddr = m_pageMap[pageIndex] + HEADER_SIZE + offsetInPage;</span></span>
+<span id="L330"><span class="lineNum">     330</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 48 times"> + </span>]:<span class="tlaGNC">          49 :                 if ( m_flashDriver.read( dataAddr, dst, bytesThisPage ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L331"><span class="lineNum">     331</span>                 :             :                 {</span>
+<span id="L332"><span class="lineNum">     332</span>                 :             :                     return false;</span>
+<span id="L333"><span class="lineNum">     333</span>                 :             :                 }</span>
+<span id="L334"><span class="lineNum">     334</span>                 :             :             }</span>
+<span id="L335"><span class="lineNum">     335</span>                 :             :             else</span>
+<span id="L336"><span class="lineNum">     336</span>                 :             :             {</span>
+<span id="L337"><span class="lineNum">     337</span>                 :             :                 memset( dst, ERASED_BYTE_VALUE, bytesThisPage );</span>
+<span id="L338"><span class="lineNum">     338</span>                 :             :             }</span>
+<span id="L339"><span class="lineNum">     339</span>                 :             : </span>
+<span id="L340"><span class="lineNum">     340</span>                 :<span class="tlaGNC">          51 :             dst       += bytesThisPage;</span></span>
+<span id="L341"><span class="lineNum">     341</span>                 :<span class="tlaGNC">          51 :             offset    += bytesThisPage;</span></span>
+<span id="L342"><span class="lineNum">     342</span>                 :<span class="tlaGNC">          51 :             remaining -= bytesThisPage;</span></span>
+<span id="L343"><span class="lineNum">     343</span>                 :             :         }</span>
+<span id="L344"><span class="lineNum">     344</span>                 :             : </span>
+<span id="L345"><span class="lineNum">     345</span>                 :             :         return true;</span>
+<span id="L346"><span class="lineNum">     346</span>                 :             :     }</span>
+<span id="L347"><span class="lineNum">     347</span>                 :             : </span>
+<span id="L348"><span class="lineNum">     348</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           2 :     size_t getTotalSize() const noexcept override { return m_config.nvTotalSize; }</span></span>
+<span id="L349"><span class="lineNum">     349</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           2 :     size_t getNumPages() const noexcept override { return m_numLogicalPages; }</span></span>
+<span id="L350"><span class="lineNum">     350</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           2 :     size_t getPageSize() const noexcept override { return m_config.nvPageSize; }</span></span>
+<span id="L351"><span class="lineNum">     351</span>                 :             : </span>
+<span id="L352"><span class="lineNum">     352</span>                 :             : </span>
+<span id="L353"><span class="lineNum">     353</span>                 :             : public:</span>
+<span id="L354"><span class="lineNum">     354</span>                 :             :     /// Erases all sectors and resets the page map, effectively formatting the NV storage.</span>
+<span id="L355"><span class="lineNum">     355</span>                 :<span class="tlaGNC">           4 :     bool format() noexcept</span></span>
+<span id="L356"><span class="lineNum">     356</span>                 :             :     {</span>
+<span id="L357"><span class="lineNum">     357</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">           4 :         if ( !m_isStarted )</span></span>
+<span id="L358"><span class="lineNum">     358</span>                 :             :         {</span>
+<span id="L359"><span class="lineNum">     359</span>                 :             :             return false;</span>
+<span id="L360"><span class="lineNum">     360</span>                 :             :         }</span>
+<span id="L361"><span class="lineNum">     361</span>                 :             : </span>
+<span id="L362"><span class="lineNum">     362</span>                 :<span class="tlaGNC">           3 :         size_t sectorSize = m_flashDriver.getSectorSize();</span></span>
+<span id="L363"><span class="lineNum">     363</span>                 :             : </span>
+<span id="L364"><span class="lineNum">     364</span>         [<span class="tlaGBC" title="Branch 0 was taken 65 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          67 :         for ( size_t i = 0; i &lt; m_numSectors; i++ )</span></span>
+<span id="L365"><span class="lineNum">     365</span>                 :             :         {</span>
+<span id="L366"><span class="lineNum">     366</span>                 :<span class="tlaGNC">          65 :             size_t sectorAddr = m_config.flashStartAddress + ( i * sectorSize );</span></span>
+<span id="L367"><span class="lineNum">     367</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 64 times"> + </span>]:<span class="tlaGNC">          65 :             if ( m_flashDriver.eraseSector( sectorAddr ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L368"><span class="lineNum">     368</span>                 :             :             {</span>
+<span id="L369"><span class="lineNum">     369</span>                 :             :                 return false;</span>
+<span id="L370"><span class="lineNum">     370</span>                 :             :             }</span>
+<span id="L371"><span class="lineNum">     371</span>                 :<span class="tlaGNC">          64 :             m_eraseCount++;</span></span>
+<span id="L372"><span class="lineNum">     372</span>                 :             :         }</span>
+<span id="L373"><span class="lineNum">     373</span>                 :             : </span>
+<span id="L374"><span class="lineNum">     374</span>                 :<span class="tlaGNC">           2 :         m_currentSequence = 0;</span></span>
+<span id="L375"><span class="lineNum">     375</span>                 :<span class="tlaGNC">           2 :         memset( m_pageMap, ERASED_BYTE_VALUE, sizeof( m_pageMap ) );</span></span>
+<span id="L376"><span class="lineNum">     376</span>                 :             : </span>
+<span id="L377"><span class="lineNum">     377</span>                 :<span class="tlaGNC">           2 :         return true;</span></span>
+<span id="L378"><span class="lineNum">     378</span>                 :             :     }</span>
+<span id="L379"><span class="lineNum">     379</span>                 :             : </span>
+<span id="L380"><span class="lineNum">     380</span>                 :             :     /// Returns current statistics: cumulative erase count, free pages, and valid pages.</span>
+<span id="L381"><span class="lineNum">     381</span>                 :<span class="tlaGNC">           5 :     bool getStatistics( uint32_t&amp; eraseCount,</span></span>
+<span id="L382"><span class="lineNum">     382</span>                 :             :                         size_t&amp;   freePages,</span>
+<span id="L383"><span class="lineNum">     383</span>                 :             :                         size_t&amp;   validPages ) noexcept</span>
+<span id="L384"><span class="lineNum">     384</span>                 :             :     {</span>
+<span id="L385"><span class="lineNum">     385</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span>]:<span class="tlaGNC">           5 :         if ( !m_isStarted )</span></span>
+<span id="L386"><span class="lineNum">     386</span>                 :             :         {</span>
+<span id="L387"><span class="lineNum">     387</span>                 :             :             return false;</span>
+<span id="L388"><span class="lineNum">     388</span>                 :             :         }</span>
+<span id="L389"><span class="lineNum">     389</span>                 :             : </span>
+<span id="L390"><span class="lineNum">     390</span>                 :<span class="tlaGNC">           4 :         eraseCount = m_eraseCount;</span></span>
+<span id="L391"><span class="lineNum">     391</span>                 :<span class="tlaGNC">           4 :         freePages  = 0;</span></span>
+<span id="L392"><span class="lineNum">     392</span>                 :<span class="tlaGNC">           4 :         validPages = 0;</span></span>
+<span id="L393"><span class="lineNum">     393</span>                 :             : </span>
+<span id="L394"><span class="lineNum">     394</span>                 :<span class="tlaGNC">           4 :         size_t sectorSize   = m_flashDriver.getSectorSize();</span></span>
+<span id="L395"><span class="lineNum">     395</span>                 :             :         size_t physPageSize = getPhysicalPageSize();</span>
+<span id="L396"><span class="lineNum">     396</span>                 :             : </span>
+<span id="L397"><span class="lineNum">     397</span>         [<span class="tlaGBC" title="Branch 0 was taken 1345 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">        1348 :         for ( size_t i = 0; i &lt; m_totalPages; i++ )</span></span>
+<span id="L398"><span class="lineNum">     398</span>                 :             :         {</span>
+<span id="L399"><span class="lineNum">     399</span>                 :<span class="tlaGNC">        1345 :             size_t sectorIndex = i / m_pagesPerSector;</span></span>
+<span id="L400"><span class="lineNum">     400</span>                 :<span class="tlaGNC">        1345 :             size_t slotIndex   = i % m_pagesPerSector;</span></span>
+<span id="L401"><span class="lineNum">     401</span>                 :<span class="tlaGNC">        1345 :             size_t address     = m_config.flashStartAddress + ( sectorIndex * sectorSize ) + ( slotIndex * physPageSize );</span></span>
+<span id="L402"><span class="lineNum">     402</span>                 :             : </span>
+<span id="L403"><span class="lineNum">     403</span>                 :             :             PageHeader_T header;</span>
+<span id="L404"><span class="lineNum">     404</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1344 times"> + </span>]:<span class="tlaGNC">        1345 :             if ( m_flashDriver.read( address, &amp;header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L405"><span class="lineNum">     405</span>                 :             :             {</span>
+<span id="L406"><span class="lineNum">     406</span>                 :<span class="tlaGNC">           1 :                 return false;</span></span>
+<span id="L407"><span class="lineNum">     407</span>                 :             :             }</span>
+<span id="L408"><span class="lineNum">     408</span>                 :             : </span>
+<span id="L409"><span class="lineNum">     409</span>   [<span class="tlaGBC" title="Branch 0 was taken 1340 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1340 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">        1344 :             if ( header.magic == 0xFFFFFFFF &amp;&amp; header.status == PageStatus_T::ERASED )</span></span>
+<span id="L410"><span class="lineNum">     410</span>                 :             :             {</span>
+<span id="L411"><span class="lineNum">     411</span>                 :<span class="tlaGNC">        1340 :                 freePages++;</span></span>
+<span id="L412"><span class="lineNum">     412</span>                 :             :             }</span>
+<span id="L413"><span class="lineNum">     413</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">           4 :             else if ( header.magic == MAGIC_NUMBER &amp;&amp; header.status == PageStatus_T::VALID )</span></span>
+<span id="L414"><span class="lineNum">     414</span>                 :             :             {</span>
+<span id="L415"><span class="lineNum">     415</span>                 :<span class="tlaGNC">           3 :                 validPages++;</span></span>
+<span id="L416"><span class="lineNum">     416</span>                 :             :             }</span>
+<span id="L417"><span class="lineNum">     417</span>                 :             :         }</span>
+<span id="L418"><span class="lineNum">     418</span>                 :             : </span>
+<span id="L419"><span class="lineNum">     419</span>                 :             :         return true;</span>
+<span id="L420"><span class="lineNum">     420</span>                 :             :     }</span>
+<span id="L421"><span class="lineNum">     421</span>                 :             : </span>
+<span id="L422"><span class="lineNum">     422</span>                 :             : </span>
+<span id="L423"><span class="lineNum">     423</span>                 :             : protected:</span>
+<span id="L424"><span class="lineNum">     424</span>                 :             :     /// Scans all physical pages and rebuilds the logical-to-physical page map.</span>
+<span id="L425"><span class="lineNum">     425</span>                 :<span class="tlaGNC">          64 :     bool scanAndBuildPageMap() noexcept</span></span>
+<span id="L426"><span class="lineNum">     426</span>                 :             :     {</span>
+<span id="L427"><span class="lineNum">     427</span>                 :<span class="tlaGNC">          64 :         size_t   sectorSize   = m_flashDriver.getSectorSize();</span></span>
+<span id="L428"><span class="lineNum">     428</span>                 :             :         size_t   physPageSize = getPhysicalPageSize();</span>
+<span id="L429"><span class="lineNum">     429</span>                 :             :         uint32_t maxSeq       = 0;</span>
+<span id="L430"><span class="lineNum">     430</span>                 :             :         bool     haveMaxSeq   = false;</span>
+<span id="L431"><span class="lineNum">     431</span>                 :             : </span>
+<span id="L432"><span class="lineNum">     432</span>         [<span class="tlaGBC" title="Branch 0 was taken 122907 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 63 times"> + </span>]:<span class="tlaGNC">      122970 :         for ( size_t i = 0; i &lt; m_totalPages; i++ )</span></span>
+<span id="L433"><span class="lineNum">     433</span>                 :             :         {</span>
+<span id="L434"><span class="lineNum">     434</span>                 :<span class="tlaGNC">      122907 :             size_t sectorIndex = i / m_pagesPerSector;</span></span>
+<span id="L435"><span class="lineNum">     435</span>                 :<span class="tlaGNC">      122907 :             size_t slotIndex   = i % m_pagesPerSector;</span></span>
+<span id="L436"><span class="lineNum">     436</span>                 :<span class="tlaGNC">      122907 :             size_t address     = m_config.flashStartAddress + ( sectorIndex * sectorSize ) + ( slotIndex * physPageSize );</span></span>
+<span id="L437"><span class="lineNum">     437</span>                 :             : </span>
+<span id="L438"><span class="lineNum">     438</span>                 :             :             PageHeader_T header;</span>
+<span id="L439"><span class="lineNum">     439</span>         [<span class="tlaGBC" title="Branch 0 was taken 122906 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">      122907 :             if ( m_flashDriver.read( address, &amp;header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L440"><span class="lineNum">     440</span>                 :             :             {</span>
+<span id="L441"><span class="lineNum">     441</span>                 :<span class="tlaGNC">           1 :                 return false;</span></span>
+<span id="L442"><span class="lineNum">     442</span>                 :             :             }</span>
+<span id="L443"><span class="lineNum">     443</span>                 :             : </span>
+<span id="L444"><span class="lineNum">     444</span>   [<span class="tlaGBC" title="Branch 0 was taken 29 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 122877 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 17 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 12 times"> + </span>]:<span class="tlaGNC">      122906 :             if ( header.magic != MAGIC_NUMBER || header.status != PageStatus_T::VALID )</span></span>
+<span id="L445"><span class="lineNum">     445</span>                 :             :             {</span>
+<span id="L446"><span class="lineNum">     446</span>                 :<span class="tlaGNC">      122896 :                 continue;</span></span>
+<span id="L447"><span class="lineNum">     447</span>                 :             :             }</span>
+<span id="L448"><span class="lineNum">     448</span>                 :             : </span>
+<span id="L449"><span class="lineNum">     449</span>                 :<span class="tlaGNC">          12 :             uint32_t expectedCrc = calculateCrc( &amp;header, CRC_HEADER_FIELD_SIZE );</span></span>
+<span id="L450"><span class="lineNum">     450</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 11 times"> + </span>]:<span class="tlaGNC">          12 :             if ( header.crc32 != expectedCrc )</span></span>
+<span id="L451"><span class="lineNum">     451</span>                 :             :             {</span>
+<span id="L452"><span class="lineNum">     452</span>                 :<span class="tlaGNC">           1 :                 continue;</span></span>
+<span id="L453"><span class="lineNum">     453</span>                 :             :             }</span>
+<span id="L454"><span class="lineNum">     454</span>                 :             : </span>
+<span id="L455"><span class="lineNum">     455</span>                 :<span class="tlaGNC">          11 :             size_t logicalIndex = header.dataOffset / m_config.nvPageSize;</span></span>
+<span id="L456"><span class="lineNum">     456</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span>]:<span class="tlaGNC">          11 :             if ( logicalIndex &gt;= m_numLogicalPages )</span></span>
+<span id="L457"><span class="lineNum">     457</span>                 :             :             {</span>
+<span id="L458"><span class="lineNum">     458</span>                 :<span class="tlaGNC">           1 :                 continue;</span></span>
+<span id="L459"><span class="lineNum">     459</span>                 :             :             }</span>
+<span id="L460"><span class="lineNum">     460</span>                 :             : </span>
+<span id="L461"><span class="lineNum">     461</span>         [<span class="tlaGBC" title="Branch 0 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 7 times"> + </span>]:<span class="tlaGNC">          10 :             if ( !haveMaxSeq || isSequenceNewer( header.sequenceNum, maxSeq ) )</span></span>
+<span id="L462"><span class="lineNum">     462</span>                 :             :             {</span>
+<span id="L463"><span class="lineNum">     463</span>                 :<span class="tlaGNC">           9 :                 maxSeq     = header.sequenceNum;</span></span>
+<span id="L464"><span class="lineNum">     464</span>                 :             :                 haveMaxSeq = true;</span>
+<span id="L465"><span class="lineNum">     465</span>                 :             :             }</span>
+<span id="L466"><span class="lineNum">     466</span>                 :             : </span>
+<span id="L467"><span class="lineNum">     467</span>                 :<span class="tlaGNC">          10 :             uint32_t currentPageAddress = m_pageMap[logicalIndex];</span></span>
+<span id="L468"><span class="lineNum">     468</span>         [<span class="tlaGBC" title="Branch 0 was taken 8 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">          10 :             if ( currentPageAddress == INVALID_PAGE_ADDRESS )</span></span>
+<span id="L469"><span class="lineNum">     469</span>                 :             :             {</span>
+<span id="L470"><span class="lineNum">     470</span>                 :<span class="tlaGNC">           8 :                 m_pageMap[logicalIndex] = static_cast&lt;uint32_t&gt;( address );</span></span>
+<span id="L471"><span class="lineNum">     471</span>                 :             :             }</span>
+<span id="L472"><span class="lineNum">     472</span>                 :             :             else</span>
+<span id="L473"><span class="lineNum">     473</span>                 :             :             {</span>
+<span id="L474"><span class="lineNum">     474</span>                 :             :                 PageHeader_T currentHeader;</span>
+<span id="L475"><span class="lineNum">     475</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           2 :                 if ( m_flashDriver.read( currentPageAddress, &amp;currentHeader, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L476"><span class="lineNum">     476</span>                 :             :                 {</span>
+<span id="L477"><span class="lineNum">     477</span>                 :<span class="tlaUNC tlaBgUNC">           0 :                     return false;</span></span>
+<span id="L478"><span class="lineNum">     478</span>                 :             :                 }</span>
+<span id="L479"><span class="lineNum">     479</span>                 :             : </span>
+<span id="L480"><span class="lineNum">     480</span>                 :<span class="tlaGNC tlaBgGNC">           2 :                 if ( isSequenceNewer( header.sequenceNum, currentHeader.sequenceNum ) )</span></span>
+<span id="L481"><span class="lineNum">     481</span>                 :             :                 {</span>
+<span id="L482"><span class="lineNum">     482</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :                     if ( !markPageInvalid( currentPageAddress ) )</span></span>
+<span id="L483"><span class="lineNum">     483</span>                 :             :                     {</span>
+<span id="L484"><span class="lineNum">     484</span>                 :             :                         return false;</span>
+<span id="L485"><span class="lineNum">     485</span>                 :             :                     }</span>
+<span id="L486"><span class="lineNum">     486</span>                 :             : </span>
+<span id="L487"><span class="lineNum">     487</span>                 :<span class="tlaGNC">           1 :                     m_pageMap[logicalIndex] = static_cast&lt;uint32_t&gt;( address );</span></span>
+<span id="L488"><span class="lineNum">     488</span>                 :             :                 }</span>
+<span id="L489"><span class="lineNum">     489</span>                 :             :                 else</span>
+<span id="L490"><span class="lineNum">     490</span>                 :             :                 {</span>
+<span id="L491"><span class="lineNum">     491</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :                     if ( !markPageInvalid( static_cast&lt;uint32_t&gt;( address ) ) )</span></span>
+<span id="L492"><span class="lineNum">     492</span>                 :             :                     {</span>
+<span id="L493"><span class="lineNum">     493</span>                 :             :                         return false;</span>
+<span id="L494"><span class="lineNum">     494</span>                 :             :                     }</span>
+<span id="L495"><span class="lineNum">     495</span>                 :             :                 }</span>
+<span id="L496"><span class="lineNum">     496</span>                 :             :             }</span>
+<span id="L497"><span class="lineNum">     497</span>                 :             :         }</span>
+<span id="L498"><span class="lineNum">     498</span>                 :             : </span>
+<span id="L499"><span class="lineNum">     499</span>                 :<span class="tlaGNC">          63 :         m_currentSequence = maxSeq;</span></span>
+<span id="L500"><span class="lineNum">     500</span>                 :<span class="tlaGNC">          63 :         return true;</span></span>
+<span id="L501"><span class="lineNum">     501</span>                 :             :     }</span>
+<span id="L502"><span class="lineNum">     502</span>                 :             : </span>
+<span id="L503"><span class="lineNum">     503</span>                 :             :     /// Finds a free physical page slot, reclaiming a sector if necessary.</span>
+<span id="L504"><span class="lineNum">     504</span>                 :<span class="tlaGNC">         206 :     uint32_t findFreePageAddress( uint32_t aboutToInvalidate = INVALID_PAGE_ADDRESS ) noexcept</span></span>
+<span id="L505"><span class="lineNum">     505</span>                 :             :     {</span>
+<span id="L506"><span class="lineNum">     506</span>                 :<span class="tlaGNC">         206 :         size_t sectorSize   = m_flashDriver.getSectorSize();</span></span>
+<span id="L507"><span class="lineNum">     507</span>                 :             :         size_t physPageSize = getPhysicalPageSize();</span>
+<span id="L508"><span class="lineNum">     508</span>                 :             : </span>
+<span id="L509"><span class="lineNum">     509</span>                 :             :         // Phase 1: Scan for an already-erased record slot</span>
+<span id="L510"><span class="lineNum">     510</span>         [<span class="tlaGBC" title="Branch 0 was taken 2155 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">        2160 :         for ( size_t i = 0; i &lt; m_totalPages; i++ )</span></span>
+<span id="L511"><span class="lineNum">     511</span>                 :             :         {</span>
+<span id="L512"><span class="lineNum">     512</span>                 :<span class="tlaGNC">        2155 :             size_t sectorIndex = i / m_pagesPerSector;</span></span>
+<span id="L513"><span class="lineNum">     513</span>                 :<span class="tlaGNC">        2155 :             size_t slotIndex   = i % m_pagesPerSector;</span></span>
+<span id="L514"><span class="lineNum">     514</span>                 :<span class="tlaGNC">        2155 :             size_t address     = m_config.flashStartAddress + ( sectorIndex * sectorSize ) + ( slotIndex * physPageSize );</span></span>
+<span id="L515"><span class="lineNum">     515</span>                 :             : </span>
+<span id="L516"><span class="lineNum">     516</span>                 :             :             PageHeader_T header;</span>
+<span id="L517"><span class="lineNum">     517</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 2154 times"> + </span>]:<span class="tlaGNC">        2155 :             if ( m_flashDriver.read( address, &amp;header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L518"><span class="lineNum">     518</span>                 :             :             {</span>
+<span id="L519"><span class="lineNum">     519</span>                 :<span class="tlaGNC">           1 :                 continue;</span></span>
+<span id="L520"><span class="lineNum">     520</span>                 :             :             }</span>
+<span id="L521"><span class="lineNum">     521</span>                 :             : </span>
+<span id="L522"><span class="lineNum">     522</span>         [<span class="tlaGBC" title="Branch 0 was taken 201 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1953 times"> + </span>]:<span class="tlaGNC">        2154 :             if ( header.magic == PageStatus_T::ERASED )</span></span>
+<span id="L523"><span class="lineNum">     523</span>                 :             :             {</span>
+<span id="L524"><span class="lineNum">     524</span>                 :<span class="tlaGNC">         201 :                 return static_cast&lt;uint32_t&gt;( address );</span></span>
+<span id="L525"><span class="lineNum">     525</span>                 :             :             }</span>
+<span id="L526"><span class="lineNum">     526</span>                 :             :         }</span>
+<span id="L527"><span class="lineNum">     527</span>                 :             : </span>
+<span id="L528"><span class="lineNum">     528</span>                 :             :         // Phase 2: Try to reclaim a sector with no VALID records</span>
+<span id="L529"><span class="lineNum">     529</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           6 :         for ( size_t s = 0; s &lt; m_numSectors; s++ )</span></span>
+<span id="L530"><span class="lineNum">     530</span>                 :             :         {</span>
+<span id="L531"><span class="lineNum">     531</span>                 :<span class="tlaGNC">           6 :             size_t sectorAddr = m_config.flashStartAddress + ( s * sectorSize );</span></span>
+<span id="L532"><span class="lineNum">     532</span>                 :             :             bool   hasValid   = false;</span>
+<span id="L533"><span class="lineNum">     533</span>                 :             : </span>
+<span id="L534"><span class="lineNum">     534</span>         [<span class="tlaGBC" title="Branch 0 was taken 72 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">          77 :             for ( size_t slot = 0; slot &lt; m_pagesPerSector; slot++ )</span></span>
+<span id="L535"><span class="lineNum">     535</span>                 :             :             {</span>
+<span id="L536"><span class="lineNum">     536</span>                 :<span class="tlaGNC">          72 :                 size_t slotAddr = sectorAddr + ( slot * physPageSize );</span></span>
+<span id="L537"><span class="lineNum">     537</span>                 :             : </span>
+<span id="L538"><span class="lineNum">     538</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 70 times"> + </span>]:<span class="tlaGNC">          72 :                 if ( static_cast&lt;uint32_t&gt;( slotAddr ) == aboutToInvalidate )</span></span>
+<span id="L539"><span class="lineNum">     539</span>                 :             :                 {</span>
+<span id="L540"><span class="lineNum">     540</span>                 :<span class="tlaGNC">           2 :                     continue;</span></span>
+<span id="L541"><span class="lineNum">     541</span>                 :             :                 }</span>
+<span id="L542"><span class="lineNum">     542</span>                 :             : </span>
+<span id="L543"><span class="lineNum">     543</span>                 :             :                 PageHeader_T header;</span>
+<span id="L544"><span class="lineNum">     544</span>         [<span class="tlaGBC" title="Branch 0 was taken 69 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          70 :                 if ( m_flashDriver.read( slotAddr, &amp;header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L545"><span class="lineNum">     545</span>                 :             :                 {</span>
+<span id="L546"><span class="lineNum">     546</span>                 :             :                     hasValid = true;</span>
+<span id="L547"><span class="lineNum">     547</span>                 :<span class="tlaGNC">           1 :                     break;</span></span>
+<span id="L548"><span class="lineNum">     548</span>                 :             :                 }</span>
+<span id="L549"><span class="lineNum">     549</span>                 :             : </span>
+<span id="L550"><span class="lineNum">     550</span>   [<span class="tlaGBC" title="Branch 0 was taken 69 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 69 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">          69 :                 if ( header.magic == MAGIC_NUMBER &amp;&amp; header.status == PageStatus_T::VALID )</span></span>
+<span id="L551"><span class="lineNum">     551</span>                 :             :                 {</span>
+<span id="L552"><span class="lineNum">     552</span>                 :             :                     hasValid = true;</span>
+<span id="L553"><span class="lineNum">     553</span>                 :             :                     break;</span>
+<span id="L554"><span class="lineNum">     554</span>                 :             :                 }</span>
+<span id="L555"><span class="lineNum">     555</span>                 :             :             }</span>
+<span id="L556"><span class="lineNum">     556</span>                 :             : </span>
+<span id="L557"><span class="lineNum">     557</span>                 :             :             if ( !hasValid )</span>
+<span id="L558"><span class="lineNum">     558</span>                 :             :             {</span>
+<span id="L559"><span class="lineNum">     559</span>         [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           5 :                 if ( aboutToInvalidate != INVALID_PAGE_ADDRESS )</span></span>
+<span id="L560"><span class="lineNum">     560</span>                 :             :                 {</span>
+<span id="L561"><span class="lineNum">     561</span>                 :<span class="tlaGNC">           4 :                     size_t aboutToInvalidateSector = aboutToInvalidate - ( aboutToInvalidate % sectorSize );</span></span>
+<span id="L562"><span class="lineNum">     562</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           4 :                     if ( aboutToInvalidateSector == sectorAddr )</span></span>
+<span id="L563"><span class="lineNum">     563</span>                 :             :                     {</span>
+<span id="L564"><span class="lineNum">     564</span>                 :             :                         markPageInvalid( aboutToInvalidate );</span>
+<span id="L565"><span class="lineNum">     565</span>                 :             :                     }</span>
+<span id="L566"><span class="lineNum">     566</span>                 :             :                 }</span>
+<span id="L567"><span class="lineNum">     567</span>                 :             : </span>
+<span id="L568"><span class="lineNum">     568</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           5 :                 if ( m_flashDriver.eraseSector( sectorAddr ) == Kit::Driver::Flash::IApi::SUCCESS )</span></span>
+<span id="L569"><span class="lineNum">     569</span>                 :             :                 {</span>
+<span id="L570"><span class="lineNum">     570</span>                 :<span class="tlaGNC">           5 :                     m_eraseCount++;</span></span>
+<span id="L571"><span class="lineNum">     571</span>                 :<span class="tlaGNC">           5 :                     return static_cast&lt;uint32_t&gt;( sectorAddr );</span></span>
+<span id="L572"><span class="lineNum">     572</span>                 :             :                 }</span>
+<span id="L573"><span class="lineNum">     573</span>                 :             :             }</span>
+<span id="L574"><span class="lineNum">     574</span>                 :             :         }</span>
+<span id="L575"><span class="lineNum">     575</span>                 :             : </span>
+<span id="L576"><span class="lineNum">     576</span>                 :             :         return INVALID_PAGE_ADDRESS;</span>
+<span id="L577"><span class="lineNum">     577</span>                 :             :     }</span>
+<span id="L578"><span class="lineNum">     578</span>                 :             : </span>
+<span id="L579"><span class="lineNum">     579</span>                 :             :     /// Marks the page at the specified physical address as invalid.</span>
+<span id="L580"><span class="lineNum">     580</span>                 :             :     bool markPageInvalid( uint32_t pageAddress ) noexcept</span>
+<span id="L581"><span class="lineNum">     581</span>                 :             :     {</span>
+<span id="L582"><span class="lineNum">     582</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         uint32_t invalidStatus = PageStatus_T::INVALID;</span></span>
+<span id="L583"><span class="lineNum">     583</span>                 :<span class="tlaUNC">           0 :         size_t   statusOffset  = pageAddress + offsetof( PageHeader_T, status );</span></span>
+<span id="L584"><span class="lineNum">     584</span>                 :<span class="tlaUNC">           0 :         return m_flashDriver.write( statusOffset, &amp;invalidStatus, sizeof( invalidStatus ) ) == Kit::Driver::Flash::IApi::SUCCESS;</span></span>
+<span id="L585"><span class="lineNum">     585</span>                 :             :     }</span>
+<span id="L586"><span class="lineNum">     586</span>                 :             : </span>
+<span id="L587"><span class="lineNum">     587</span>                 :             :     /// Reads the data payload of the current physical page for the given logical page index.</span>
+<span id="L588"><span class="lineNum">     588</span>                 :<span class="tlaGNC tlaBgGNC">         207 :     bool readCurrentPageData( size_t pageIndex, uint8_t* buffer ) noexcept</span></span>
+<span id="L589"><span class="lineNum">     589</span>                 :             :     {</span>
+<span id="L590"><span class="lineNum">     590</span>         [<span class="tlaGBC" title="Branch 0 was taken 207 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">         207 :         if ( pageIndex &gt;= m_numLogicalPages )</span></span>
+<span id="L591"><span class="lineNum">     591</span>                 :             :         {</span>
+<span id="L592"><span class="lineNum">     592</span>                 :             :             return false;</span>
+<span id="L593"><span class="lineNum">     593</span>                 :             :         }</span>
+<span id="L594"><span class="lineNum">     594</span>                 :             : </span>
+<span id="L595"><span class="lineNum">     595</span>         [<span class="tlaGBC" title="Branch 0 was taken 147 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 60 times"> + </span>]:<span class="tlaGNC">         207 :         if ( m_pageMap[pageIndex] != INVALID_PAGE_ADDRESS )</span></span>
+<span id="L596"><span class="lineNum">     596</span>                 :             :         {</span>
+<span id="L597"><span class="lineNum">     597</span>                 :<span class="tlaGNC">         147 :             size_t dataAddr = m_pageMap[pageIndex] + HEADER_SIZE;</span></span>
+<span id="L598"><span class="lineNum">     598</span>                 :<span class="tlaGNC">         147 :             return m_flashDriver.read( dataAddr, buffer, m_config.nvPageSize ) == Kit::Driver::Flash::IApi::SUCCESS;</span></span>
+<span id="L599"><span class="lineNum">     599</span>                 :             :         }</span>
+<span id="L600"><span class="lineNum">     600</span>                 :             :         else</span>
+<span id="L601"><span class="lineNum">     601</span>                 :             :         {</span>
+<span id="L602"><span class="lineNum">     602</span>                 :<span class="tlaGNC">          60 :             memset( buffer, ERASED_BYTE_VALUE, m_config.nvPageSize );</span></span>
+<span id="L603"><span class="lineNum">     603</span>                 :<span class="tlaGNC">          60 :             return true;</span></span>
+<span id="L604"><span class="lineNum">     604</span>                 :             :         }</span>
+<span id="L605"><span class="lineNum">     605</span>                 :             :     }</span>
+<span id="L606"><span class="lineNum">     606</span>                 :             : </span>
+<span id="L607"><span class="lineNum">     607</span>                 :             :     /// Computes a CRC-32 over the given data using the configured CRC algorithm.</span>
+<span id="L608"><span class="lineNum">     608</span>                 :<span class="tlaGNC">         218 :     uint32_t calculateCrc( const void* data, size_t length ) noexcept</span></span>
+<span id="L609"><span class="lineNum">     609</span>                 :             :     {</span>
+<span id="L610"><span class="lineNum">     610</span>                 :<span class="tlaGNC">         218 :         m_crcAlgo.reset();</span></span>
+<span id="L611"><span class="lineNum">     611</span>                 :<span class="tlaGNC">         218 :         m_crcAlgo.accumulate( data, static_cast&lt;unsigned&gt;( length ) );</span></span>
+<span id="L612"><span class="lineNum">     612</span>                 :<span class="tlaGNC">         218 :         uint32_t result = 0;</span></span>
+<span id="L613"><span class="lineNum">     613</span>                 :<span class="tlaGNC">         218 :         m_crcAlgo.finalize( &amp;result, sizeof( result ) );</span></span>
+<span id="L614"><span class="lineNum">     614</span>                 :<span class="tlaGNC">         218 :         return result;</span></span>
+<span id="L615"><span class="lineNum">     615</span>                 :             :     }</span>
+<span id="L616"><span class="lineNum">     616</span>                 :             : </span>
+<span id="L617"><span class="lineNum">     617</span>                 :             :     /// Returns the physical page size (header + data payload).</span>
+<span id="L618"><span class="lineNum">     618</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 7 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 3 times"> + </span> :<span class="tlaGNC">         340 :     size_t getPhysicalPageSize() const noexcept { return HEADER_SIZE + m_config.nvPageSize; }</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 54 times"> + </span>]
+<span id="L619"><span class="lineNum">     619</span>                 :             :     /// Converts a byte offset within the NV region to a logical page index.</span>
+<span id="L620"><span class="lineNum">     620</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         259 :     size_t offsetToPageIndex( size_t offset ) const noexcept { return offset / m_config.nvPageSize; }</span></span>
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaGBC" title="Branch 5 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 70 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaUNC" title="Branch 8 was not taken"> - </span> 
+<span class="lineNum">        </span>       <span class="tlaGBC" title="Branch 9 was taken 40 times"> + </span><span class="tlaGBC" title="Branch 10 was taken 127 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span>]
+<span id="L621"><span class="lineNum">     621</span>                 :             : </span>
+<span id="L622"><span class="lineNum">     622</span>                 :             :     /** Returns true if sequence number 'a' is newer than sequence number 'b',</span>
+<span id="L623"><span class="lineNum">     623</span>                 :             :         accounting for unsigned 32-bit wrap-around.  This uses serial-number</span>
+<span id="L624"><span class="lineNum">     624</span>                 :             :         arithmetic (RFC 1982 style): the signed difference is positive when 'a'</span>
+<span id="L625"><span class="lineNum">     625</span>                 :             :         is ahead of 'b' within a half-range window, so a freshly wrapped small</span>
+<span id="L626"><span class="lineNum">     626</span>                 :             :         value (e.g. 1) is correctly treated as newer than a pre-wrap large value</span>
+<span id="L627"><span class="lineNum">     627</span>                 :             :         (e.g. 0xFFFFFFFF).</span>
+<span id="L628"><span class="lineNum">     628</span>                 :             :      */</span>
+<span id="L629"><span class="lineNum">     629</span>                 :             :     static bool isSequenceNewer( uint32_t a, uint32_t b ) noexcept</span>
+<span id="L630"><span class="lineNum">     630</span>                 :             :     {</span>
+<span id="L631"><span class="lineNum">     631</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">           5 :         return static_cast&lt;int32_t&gt;( a - b ) &gt; 0;</span></span>
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaUNC" title="Branch 6 was not taken"> - </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 2 times"> + </span> 
+<span class="lineNum">        </span>       <span class="tlaGBC" title="Branch 9 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 11 was taken 1 time"> + </span>]
+<span id="L632"><span class="lineNum">     632</span>                 :             :     }</span>
+<span id="L633"><span class="lineNum">     633</span>                 :             : </span>
+<span id="L634"><span class="lineNum">     634</span>                 :             : </span>
+<span id="L635"><span class="lineNum">     635</span>                 :             : protected:</span>
+<span id="L636"><span class="lineNum">     636</span>                 :             :     Config_T                  m_config;                      //!&lt; Storage configuration</span>
+<span id="L637"><span class="lineNum">     637</span>                 :             :     uint32_t                  m_currentSequence;             //!&lt; Highest sequence number seen</span>
+<span id="L638"><span class="lineNum">     638</span>                 :             :     Kit::Driver::Flash::IApi&amp; m_flashDriver;                 //!&lt; Reference to flash driver</span>
+<span id="L639"><span class="lineNum">     639</span>                 :             :     Kit::Checksum::IEdc&amp;      m_crcAlgo;                     //!&lt; Reference to CRC algorithm</span>
+<span id="L640"><span class="lineNum">     640</span>                 :             :     uint8_t*                  m_workBuffer;                  //!&lt; Application-provided work buffer</span>
+<span id="L641"><span class="lineNum">     641</span>                 :             :     uint32_t                  m_pageMap[MAX_LOGICAL_PAGES];  //!&lt; Logical page -&gt; physical address map</span>
+<span id="L642"><span class="lineNum">     642</span>                 :             :     size_t                    m_workBufferSize;              //!&lt; Size of application-provided work buffer</span>
+<span id="L643"><span class="lineNum">     643</span>                 :             :     size_t                    m_numSectors;                  //!&lt; Number of sectors in NV region</span>
+<span id="L644"><span class="lineNum">     644</span>                 :             :     size_t                    m_pagesPerSector;              //!&lt; Physical NV Records per sector</span>
+<span id="L645"><span class="lineNum">     645</span>                 :             :     size_t                    m_totalPages;                  //!&lt; Total physical NV Record slots</span>
+<span id="L646"><span class="lineNum">     646</span>                 :             :     size_t                    m_numLogicalPages;             //!&lt; Number of logical pages</span>
+<span id="L647"><span class="lineNum">     647</span>                 :             :     uint32_t                  m_eraseCount;                  //!&lt; Total erase count</span>
+<span id="L648"><span class="lineNum">     648</span>                 :             :     bool                      m_isStarted;                   //!&lt; Driver state flag</span>
+<span id="L649"><span class="lineNum">     649</span>                 :             : };</span>
+<span id="L650"><span class="lineNum">     650</span>                 :             : </span>
+<span id="L651"><span class="lineNum">     651</span>                 :             : </span>
+<span id="L652"><span class="lineNum">     652</span>                 :             : }  // end namespaces</span>
+<span id="L653"><span class="lineNum">     653</span>                 :             : }</span>
+<span id="L654"><span class="lineNum">     654</span>                 :             : }</span>
+<span id="L655"><span class="lineNum">     655</span>                 :             : }</span>
+<span id="L656"><span class="lineNum">     656</span>                 :             : </span>
+<span id="L657"><span class="lineNum">     657</span>                 :             : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

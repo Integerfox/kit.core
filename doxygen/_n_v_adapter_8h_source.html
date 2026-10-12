@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 378-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 388-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -61,7 +61,7 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/** @file */</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="_i_media_8h.html">Kit/Persistence/Record/IMedia.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_i_api_8h.html">Kit/Driver/NV/IApi.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_n_v_2_i_api_8h.html">Kit/Driver/NV/IApi.h</a>&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="_assert_8h.html">Kit/System/Assert.h</a>&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">///</span></div>
@@ -163,10 +163,10 @@ $(function() {
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_assert_8h_html"><div class="ttname"><a href="_assert_8h.html">Assert.h</a></div></div>
 <div class="ttc" id="a_assert_8h_html_a01b4941fc3ef648efdb3ff3f4b7dcd54"><div class="ttname"><a href="_assert_8h.html#a01b4941fc3ef648efdb3ff3f4b7dcd54">KIT_SYSTEM_ASSERT</a></div><div class="ttdeci">#define KIT_SYSTEM_ASSERT(e)</div><div class="ttdoc">Empty macro.</div><div class="ttdef"><b>Definition</b> Assert.h:34</div></div>
-<div class="ttc" id="a_i_api_8h_html"><div class="ttname"><a href="_i_api_8h.html">IApi.h</a></div></div>
 <div class="ttc" id="a_i_media_8h_html"><div class="ttname"><a href="_i_media_8h.html">IMedia.h</a></div></div>
+<div class="ttc" id="a_n_v_2_i_api_8h_html"><div class="ttname"><a href="_n_v_2_i_api_8h.html">IApi.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_driver_1_1_i_start_html_a4e3eb3bc0942c440726f1f1eab23463e"><div class="ttname"><a href="class_kit_1_1_driver_1_1_i_start.html#a4e3eb3bc0942c440726f1f1eab23463e">Kit::Driver::IStart::start</a></div><div class="ttdeci">virtual bool start(void *startArgs=nullptr) noexcept=0</div><div class="ttdoc">This method is used to start/initialize the driver at run time.</div></div>
-<div class="ttc" id="aclass_kit_1_1_driver_1_1_i_stop_html_a720783ac077bfb33e94fd23d9af615f0"><div class="ttname"><a href="class_kit_1_1_driver_1_1_i_stop.html#a720783ac077bfb33e94fd23d9af615f0">Kit::Driver::IStop::stop</a></div><div class="ttdeci">virtual void stop() noexcept=0</div><div class="ttdoc">This method is used to stop the driver at run time.</div></div>
+<div class="ttc" id="aclass_kit_1_1_driver_1_1_i_stop_html_a720783ac077bfb33e94fd23d9af615f0"><div class="ttname"><a href="class_kit_1_1_driver_1_1_i_stop.html#a720783ac077bfb33e94fd23d9af615f0">Kit::Driver::IStop::stop</a></div><div class="ttdeci">virtual void stop() noexcept=0</div><div class="ttdoc">This method stops the driver.</div></div>
 <div class="ttc" id="aclass_kit_1_1_driver_1_1_n_v_1_1_i_api_html"><div class="ttname"><a href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html">Kit::Driver::NV::IApi</a></div><div class="ttdoc">This class defines the interface for a platform independent Non-volatile storage driver.</div><div class="ttdef"><b>Definition</b> IApi.h:40</div></div>
 <div class="ttc" id="aclass_kit_1_1_driver_1_1_n_v_1_1_i_api_html_a15ce37a1c0c77dc892348ce00edea365"><div class="ttname"><a href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html#a15ce37a1c0c77dc892348ce00edea365">Kit::Driver::NV::IApi::read</a></div><div class="ttdeci">virtual bool read(size_t srcOffset, void *dstData, size_t sizeDstData, size_t numBytesToRead) noexcept=0</div><div class="ttdoc">This method reads N bytes starting at the storage offset of 'srcOffset' and stores the bytes into 'ds...</div></div>
 <div class="ttc" id="aclass_kit_1_1_driver_1_1_n_v_1_1_i_api_html_afeb5a8f95b11674bd5756cda1733e3a2"><div class="ttname"><a href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html#afeb5a8f95b11674bd5756cda1733e3a2">Kit::Driver::NV::IApi::write</a></div><div class="ttdeci">virtual bool write(size_t dstOffset, const void *srcData, size_t numBytesToWrite) noexcept=0</div><div class="ttdoc">This method writes N bytes from 'srcData' starting at the storage offset of 'dstOffset'.</div></div>
@@ -188,7 +188,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 20 2026 19:12:27 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Oct 12 2026 13:49:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

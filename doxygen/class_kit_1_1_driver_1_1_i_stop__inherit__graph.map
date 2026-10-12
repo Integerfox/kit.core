@@ -1,7 +1,23 @@
 <map id="Kit::Driver::IStop" name="Kit::Driver::IStop">
-<area shape="rect" id="Node000001" title="This abstract class defines the method for stopping a driver." alt="" coords="15,5,144,31"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_driver_1_1_n_v_1_1_i_api.html" title="This class defines the interface for a platform independent Non&#45;volatile storage driver." alt="" coords="6,79,153,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,44,82,79,77,79,77,44"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_driver_1_1_n_v_1_1_null.html" title="This concrete class provides a &#39;null&#39; implementation of the NV::IApi interface." alt="" coords="5,152,153,177"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="82,118,82,152,77,152,77,118"/>
+<area shape="rect" id="Node000001" title="This abstract class defines a stop operation that is intended to stop and/or shutdown a driver." alt="" coords="5,189,135,214"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_driver_1_1_dio_1_1_i_output.html" title="This class defines the interface for a digital output pin." alt="" coords="196,57,371,82"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,179,260,80,263,84,105,184"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_driver_1_1_flash_1_1_i_api.html" title="This class defines the interface for a platform independent Flash memory driver." alt="" coords="218,149,349,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="149,187,217,176,218,182,149,192"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_driver_1_1_n_v_1_1_i_api.html" title="This class defines the interface for a platform independent Non&#45;volatile storage driver." alt="" coords="210,221,357,246"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="149,210,210,220,210,225,148,216"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_driver_1_1_s_p_i_1_1_i_half_duplex.html" title="This class defines the interface for a platform independent half&#45;duplex SPI driver." alt="" coords="183,302,384,327"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="108,218,259,299,257,304,106,223"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_driver_1_1_dio_1_1_s_t_1_1_m32_f4_1_1_output.html" title="Concrete digital output driver for the STM32F4 HAL." alt="" coords="472,5,615,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="372,52,472,35,472,40,372,57"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_driver_1_1_flash_1_1_mock_flash.html" title="Mock flash driver that simulates flash memory in RAM." alt="" coords="440,70,647,125"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="361,145,443,122,445,127,363,150"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_driver_1_1_flash_1_1_w25_q_1_1_std_spi24.html" title="This class implements the Flash::IApi interface for the Winbond W25Q series SPI NOR flash devices usi..." alt="" coords="476,149,611,189"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="362,167,476,167,476,172,362,172"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html" title="This class implements the NV::IApi interface using a flash device (via Flash::IApi) for persistent st..." alt="" coords="432,213,655,253"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="370,231,432,231,432,236,370,236"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_driver_1_1_n_v_1_1_null.html" title="This concrete class provides a &#39;null&#39; implementation of the NV::IApi interface." alt="" coords="469,278,617,303"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="356,246,486,275,484,281,355,252"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_driver_1_1_s_p_i_1_1_s_t_1_1_m32_f4_1_1_polled.html" title="Concrete half&#45;duplex SPI driver for the STM32F4 HAL using polling mode." alt="" coords="473,328,613,368"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="397,326,473,336,473,342,396,332"/>
 </map>
