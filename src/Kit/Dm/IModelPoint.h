@@ -329,19 +329,10 @@ protected:
            Note: eFORCE does NOT bypass the MP's locked state, i.e. a write that
            silently fails never triggers a change notification.
      */
-    uint16_t writeData( const void*    srcData,
-                        size_t         srcSize,
-                        ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
-                        LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
-    {
-        return writeData_( srcData, srcSize, chgNotice, lockRequest );
-    }
-
-    /// Implementation of writeData(). See setInvalid_() for why there are no default arguments.
-    virtual uint16_t writeData_( const void*    srcData,
-                                 size_t         srcSize,
-                                 ChangeNotice_T chgNotice,
-                                 LockRequest_T  lockRequest ) noexcept = 0;
+    virtual uint16_t writeData( const void*    srcData,
+                                size_t         srcSize,
+                                ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                                LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept = 0;
 
 
 protected:
