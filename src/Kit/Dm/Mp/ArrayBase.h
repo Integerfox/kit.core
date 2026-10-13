@@ -109,15 +109,17 @@ protected:
         state and a partial write is done - then the MP's data/array is
         only partially initialized AND then MP is now in the valid
         state!
+
+        See Kit::Dm::IModelPoint::writeData() for the 'chgNotice' semantics.
     */
-    virtual uint16_t writeArrayElements( const void*                          srcData,
-                                         size_t                               srcNumElements,
-                                         size_t                               dstIndex    = 0,
-                                         Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
-                                         Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept;
+    virtual uint16_t writeArrayElements( const void*    srcData,
+                                         size_t         srcNumElements,
+                                         size_t         dstIndex    = 0,
+                                         ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                                         LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept;
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
-    virtual uint16_t copyArrayFrom( const ArrayBase& src, Kit::Dm::IModelPoint::LockRequest_T lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept;
+    virtual uint16_t copyArrayFrom( const ArrayBase& src, LockRequest_T lockRequest = LockRequest_T::eNO_REQUEST ) noexcept;
 
 public:
     /// Returns the number of element in the array. This method IS thread safe.
@@ -134,7 +136,7 @@ public:
     void copyDataFrom_( const void* srcData, size_t srcSize ) noexcept override;
 
     /// See Kit::Dm::ModelPoint.
-    bool isDataEqual_( const void* otherData ) const noexcept override;
+    bool isDataEqual_( const void* otherData, size_t otherSize ) const noexcept override;
 
     /// See Kit::Dm::Point.
     size_t getInternalDataSize_() const noexcept override;

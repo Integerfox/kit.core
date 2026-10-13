@@ -85,18 +85,40 @@ uint16_t String::write( const char*    srcData,
     }
 
     Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-    uint16_t                      seqNum    = writeData( srcData, srcLen, chgNotice, lockRequest );
-    char*                         myDataPtr = static_cast<char*>( m_dataPtr );
-    myDataPtr[srcLen]                       = '\0';  // Ensure my new value properly null terminated
+    uint16_t                      originalSeqNum = m_seqNum;
+    uint16_t                      seqNum         = writeData( srcData, srcLen, chgNotice, lockRequest );
+    char*                         myDataPtr      = static_cast<char*>( m_dataPtr );
+
+    // Ensure my new value properly null terminated BUT only if the write actually occurred (i.e. no update if the MP was (and still is) in the locked state)
+    if ( originalSeqNum != seqNum )
+    {
+        myDataPtr[srcLen] = '\0';
+    }
     return seqNum;
 }
 
-bool String::isDataEqual_( const void* otherData ) const noexcept
+bool String::isDataEqual_( const void* otherData, size_t otherSize ) const noexcept
 {
-    const char* otherStringPtr = static_cast<const char*>( otherData );
-    size_t      otherLen       = strlen( otherStringPtr );
-    size_t      myLen          = strlen( static_cast<const char*>( m_dataPtr ) );
-    return otherLen == myLen && strncmp( otherStringPtr, static_cast<const char*>( m_dataPtr ), myLen ) == 0;
+    // 'otherData' is NOT guaranteed to be null terminated -->never read past 'otherSize' bytes
+    const char* myStringPtr = static_cast<const char*>( m_dataPtr );
+    size_t      myLen       = strlen( myStringPtr );
+    return otherSize == myLen && memcmp( otherData, myStringPtr, myLen ) == 0;
+}
+
+uint16_t String::copyDataAndStateFrom( const ModelPointBase& src, LockRequest_T lockRequest ) noexcept
+{
+    Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
+
+    // Handle the src.invalid case
+    if ( src.isNotValid() )
+    {
+        return setInvalid();
+    }
+
+    // Route through write() so that 'src' is truncated (instead of asserting) when its storage is larger than mine
+    const String* srcString    = static_cast<const String*>( &src );
+    const char*   srcStringPtr = static_cast<const char*>( srcString->m_dataPtr );
+    return write( srcStringPtr, strlen( srcStringPtr ), ChangeNotice_T::eNORMAL, lockRequest );
 }
 
 bool String::setJSONVal( JsonDocument& doc ) noexcept

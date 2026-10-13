@@ -48,19 +48,20 @@ template <typename PREDICATE>
 inline bool waitForCondition( PREDICATE predicate, unsigned long minWait, unsigned long maxWaitMs = 10000, unsigned long waitDelayMs = 10 )
 {
     Kit::System::sleep( minWait );
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
+
     for ( ;; )
     {
         if ( predicate() )
         {
             return true;
         }
-        if ( maxWaitMs == 0 )
+        if ( Kit::System::ElapsedTime::expiredMilliseconds( startTime, static_cast<uint32_t>( maxWaitMs ) ) )
         {
             break;
         }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
     }
     return false;
 }
@@ -76,6 +77,7 @@ template <class MPTYPE, class VALTYPE>
 bool minWaitOnModelPoint( MPTYPE& src, VALTYPE expectedVal, unsigned long minWait, VALTYPE* lastVal = nullptr, unsigned long maxWaitMs = 10000, unsigned long waitDelayMs = 10 )
 {
     Kit::System::sleep( minWait );
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
 
     VALTYPE val;
     bool    valid = src.read( val );
@@ -90,14 +92,13 @@ bool minWaitOnModelPoint( MPTYPE& src, VALTYPE expectedVal, unsigned long minWai
             }
             return true;
         }
-        if ( maxWaitMs == 0 )
+        if ( Kit::System::ElapsedTime::expiredMilliseconds( startTime, static_cast<uint32_t>( maxWaitMs ) ) )
         {
             break;
         }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
-        valid     = src.read( val );
+        valid = src.read( val );
     }
 
     // Return the last read value
@@ -115,6 +116,7 @@ template <class MPTYPE, class VALTYPE>
 bool minWaitOnEnumModelPoint( MPTYPE& src, VALTYPE expectedVal, unsigned long minWait, VALTYPE* lastVal = nullptr, unsigned long maxWaitMs = 10000, unsigned long waitDelayMs = 10 )
 {
     Kit::System::sleep( minWait );
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
 
     VALTYPE val   = VALTYPE::_from_integral_unchecked( 0 );
     bool    valid = src.read( val );
@@ -129,14 +131,13 @@ bool minWaitOnEnumModelPoint( MPTYPE& src, VALTYPE expectedVal, unsigned long mi
             }
             return true;
         }
-        if ( maxWaitMs == 0 )
+        if ( Kit::System::ElapsedTime::expiredMilliseconds( startTime, static_cast<uint32_t>( maxWaitMs ) ) )
         {
             break;
         }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
-        valid     = src.read( val );
+        valid = src.read( val );
     }
 
     // Return the last read value
@@ -154,6 +155,7 @@ template <class MPTYPE>
 bool minWaitOnModelPointValidState( MPTYPE& src, bool expectedValidState, unsigned long minWait, int8_t* lastVal = nullptr, unsigned long maxWaitMs = 10000, unsigned long waitDelayMs = 10 )
 {
     Kit::System::sleep( minWait );
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
 
     bool state = !src.isNotValid();
     for ( ;; )
@@ -167,14 +169,13 @@ bool minWaitOnModelPointValidState( MPTYPE& src, bool expectedValidState, unsign
             }
             return true;
         }
-        if ( maxWaitMs == 0 )
+        if ( Kit::System::ElapsedTime::expiredMilliseconds( startTime, static_cast<uint32_t>( maxWaitMs ) ) )
         {
             break;
         }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
-        state     = !src.isNotValid();
+        state = !src.isNotValid();
     }
 
     // Return the last read value
@@ -192,6 +193,7 @@ template <class MPTYPE>
 bool minWaitOnModelPointSeqNumChange( MPTYPE& src, uint16_t currentSeqNum, unsigned long minWait, uint16_t* newSeqNum = nullptr, unsigned long maxWaitMs = 10000, unsigned long waitDelayMs = 10 )
 {
     Kit::System::sleep( minWait );
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
 
     uint16_t seqNum = src.getSequenceNumber();
     for ( ;; )
@@ -205,14 +207,13 @@ bool minWaitOnModelPointSeqNumChange( MPTYPE& src, uint16_t currentSeqNum, unsig
             }
             return true;
         }
-        if ( maxWaitMs == 0 )
+        if ( Kit::System::ElapsedTime::expiredMilliseconds( startTime, static_cast<uint32_t>( maxWaitMs ) ) )
         {
             break;
         }
 
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
-        seqNum    = src.getSequenceNumber();
+        seqNum = src.getSequenceNumber();
     }
 
     // Return the last read value
@@ -425,13 +426,13 @@ protected:
 inline bool minWaitOnStreamData( Kit::Io::IInput& stream, unsigned long minWait = 10, unsigned long maxWaitMs = 10000, unsigned long waitDelayMs = 10 )
 {
     Kit::System::sleep( minWait );
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
 
     bool avail = stream.available();
-    while ( !avail && maxWaitMs )
+    while ( !avail && !Kit::System::ElapsedTime::expiredMilliseconds( startTime, static_cast<uint32_t>( maxWaitMs ) ) )
     {
         Kit::System::sleep( waitDelayMs );
-        maxWaitMs = ( maxWaitMs > waitDelayMs ) ? ( maxWaitMs - waitDelayMs ) : 0;
-        avail     = stream.available();
+        avail = stream.available();
     }
     return avail;
 };

@@ -13,6 +13,7 @@
 
 #include "Kit/Dm/Mp/PrimitiveType.h"
 #include "Kit/Math/real.h"
+#include "Kit/System/FatalError.h"
 
 ///
 namespace Kit {
@@ -68,8 +69,13 @@ public:
 
 protected:
     /// Override parent implementation for 'correct' floating point comparison
-    bool isDataEqual_( const void* otherData ) const noexcept
+    bool isDataEqual_( const void* otherData, size_t otherSize ) const noexcept override
     {
+        if ( otherSize != sizeof( float ) )
+        {
+            Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL, "Size mismatch in Float::isDataEqual_ (other=%u)", (unsigned) otherSize );
+            return false; // Not needed since FatalError will terminate the program, but is useful for unit testing
+        }
         const float* other = static_cast<const float*>(otherData);
         return Kit::Math::areFloatsEqual( m_data, *other );
     }

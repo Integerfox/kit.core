@@ -53,7 +53,7 @@ TEST_CASE( "Bool" )
     bool truncated;
     bool valid;
     bool value;
-    mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
+    mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
 
     SECTION( "gets" )
     {

@@ -75,16 +75,16 @@ public:
     /// Type safe write of a null terminated string. See Kit::Dm::ModelPoint
     inline uint16_t write( const char*    srcNullTerminatedString,
                            ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
-                           LockRequest_T  lockRequest = eNO_REQUEST ) noexcept
+                           LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
         return write( srcNullTerminatedString, strlen( srcNullTerminatedString ), chgNotice, lockRequest );
     }
 
-    /// Same as write(), except only writes at most 'srcLen' bytes, 'srcLen' should NOT include the null terminator.
+    /// Same as write(), except only writes at most 'srcLen' bytes, 'srcLen' should NOT include the null terminator. See Kit::Dm::IModelPoint::writeData() for the 'chgNotice' semantics.
     uint16_t write( const char*    srcData,
                     size_t         srcLen,
                     ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
-                    LockRequest_T  lockRequest = eNO_REQUEST ) noexcept;
+                    LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept;
 
     /// Returns the maximum size WITHOUT the null terminator of the string storage
     inline size_t getMaxLength() const noexcept
@@ -93,7 +93,7 @@ public:
     }
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
-    inline uint16_t copyFrom( const String& src, LockRequest_T lockRequest = eNO_REQUEST ) noexcept
+    inline uint16_t copyFrom( const String& src, LockRequest_T lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
         return copyDataAndStateFrom( src, lockRequest );
     }
@@ -159,9 +159,12 @@ public:
     bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override;
 
     /// See Kit::Dm::Point.
-    bool isDataEqual_( const void* otherData ) const noexcept override;
+    bool isDataEqual_( const void* otherData, size_t otherSize ) const noexcept override;
 
 protected:
+    /// See Kit::Dm::ModelPointBase. Routes through write() so that the copy is driven by the string length - NOT by the raw storage size
+    uint16_t copyDataAndStateFrom( const ModelPointBase& src, LockRequest_T lockRequest ) noexcept override;
+
     /// See Kit::Dm::Point.
     bool setJSONVal( JsonDocument& doc ) noexcept override;
 };

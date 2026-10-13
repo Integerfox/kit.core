@@ -51,7 +51,7 @@ public:
 
     /// See Kit::Dm::IModelPoint
     uint16_t setInvalid( ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
-                         LockRequest_T  lockRequest = eNO_REQUEST ) noexcept override;
+                         LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept override;
 
     /// See Kit::Dm::IModelPoint
     bool isNotValid( uint16_t* seqNumPtr = 0 ) const noexcept override;
@@ -125,10 +125,10 @@ protected:
                    uint16_t* seqNumPtr = 0 ) const noexcept override;
 
     /// See Kit::Dm::IModelPoint
-    uint16_t writeData( const void*    srcData,
-                        size_t         srcSize,
-                        ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
-                        LockRequest_T  lockRequest = eNO_REQUEST ) noexcept override;
+    uint16_t writeData_( const void*    srcData,
+                         size_t         srcSize,
+                         ChangeNotice_T chgNotice,
+                         LockRequest_T  lockRequest ) noexcept override;
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
     virtual uint16_t copyDataAndStateFrom( const ModelPointBase& src, LockRequest_T lockRequest ) noexcept;
@@ -146,7 +146,7 @@ protected:
     void copyDataFrom_( const void* srcData, size_t srcSize ) noexcept override;
 
     /// See Kit::Dm::IModelPoint. Note: This implementation does NOT work if the any of the data content are floats/double data types
-    bool isDataEqual_( const void* otherData ) const noexcept override;
+    bool isDataEqual_( const void* otherData, size_t otherSize ) const noexcept override;
 
     /// See Kit::Dm::IModelPoint.
     void* getImportExportDataPointer_() noexcept override;

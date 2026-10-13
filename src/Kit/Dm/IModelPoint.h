@@ -25,6 +25,28 @@ namespace Kit {
 namespace Dm {
 
 
+/** Options related to the Model Point's locked state.
+
+    Note: Declared at namespace scope (instead of nested inside IModelPoint) so
+          that the enumerators can be referenced without a class qualifier from
+          anywhere in the Kit::Dm namespace - including class templates whose
+          base class is dependent.
+ */
+enum class LockRequest_T : uint8_t
+{
+    eNO_REQUEST,  //!< No change in the MP's lock state is requested
+    eLOCK,        //!< Request to lock the MP.  If the MP is already lock - the request is ignored and the update operation silent fails
+    eUNLOCK,      //!< Request to unlock the MP.  If the MP is already unlocked - the request is ignored and the update operation is completed
+};
+
+/// Options related to triggering the Model Point's change notification(s). See LockRequest_T for why this is declared at namespace scope.
+enum class ChangeNotice_T : uint8_t
+{
+    eNORMAL,  //!< Change notification(s) are ONLY triggered when the MP's data/valid-state actually changes
+    eFORCE    //!< Change notification(s) are ALWAYS triggered, i.e. even when the MP's data/valid-state is unchanged
+};
+
+
 /** This mostly abstract class defines the interface for a Model Point.  A
     Model Point contains an instance of a Point's data and is responsible for
     managing thread safe access to the 'Point'.  The intent of a Model point is
@@ -46,21 +68,11 @@ namespace Dm {
 class IModelPoint : public Kit::Container::KeyedItem, public Kit::Container::KeyLiteralString
 {
 public:
-    /// Options related to the Model Point's locked state
-    enum LockRequest_T
-    {
-        eNO_REQUEST,  //!< No change in the MP's lock state is requested
-        eLOCK,        //!< Request to lock the MP.  If the MP is already lock - the request is ignored and the update operation silent fails
-        eUNLOCK,      //!< Request to unlock the MP.  If the MP is already unlocked - the request is ignored and the update operation is completed
-    };
+    /// Alias so that sub-classes outside of the Kit::Dm namespace can use the unqualified name
+    using LockRequest_T = Kit::Dm::LockRequest_T;
 
-    /// Options related to triggering the Model Point's change notification(s)
-    enum class ChangeNotice_T
-    {
-        eNORMAL,  //!< Change notification(s) are ONLY triggered when the MP's data/valid-state actually changes
-        eFORCE    //!< Change notification(s) are ALWAYS triggered, i.e. even when the MP's data/valid-state is unchanged
-    };
-
+    /// Alias so that sub-classes outside of the Kit::Dm namespace can use the unqualified name
+    using ChangeNotice_T = Kit::Dm::ChangeNotice_T;
 
 public:
     /** Magic value to use when registering for a change notification and
@@ -121,7 +133,7 @@ public:
               the new lock state is applied
      */
     virtual uint16_t setInvalid( ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
-                                 LockRequest_T  lockRequest = eNO_REQUEST ) noexcept = 0;
+                                 LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept = 0;
 
 public:
     /** This method converts the Model Point's data to JSON string and
@@ -192,10 +204,10 @@ public:
     virtual uint16_t setLockState( LockRequest_T lockRequest ) noexcept = 0;
 
     /// Short hand for unconditionally removing the lock from the MP
-    inline uint16_t removeLock() noexcept { return setLockState( eUNLOCK ); }
+    inline uint16_t removeLock() noexcept { return setLockState( LockRequest_T::eUNLOCK ); }
 
     /// Short hand for putting the MP into the locked state
-    inline uint16_t applyLock() noexcept { return setLockState( eLOCK ); }
+    inline uint16_t applyLock() noexcept { return setLockState( LockRequest_T::eLOCK ); }
 
 
 public:
@@ -310,11 +322,26 @@ protected:
            of the same type.
         2) The data size of the Model Points data instance is ALWAYS honored
            when coping the data from 'srcData'
+        3) Change Notification(s) will ONLY be triggered when:
+           a) chgNotice == ChangeNotice_T::eFORCE, OR
+           b) there is a invalid to valid state transition, OR
+           c) the MP's data actually changes value
+           Note: eFORCE does NOT bypass the MP's locked state, i.e. a write that
+           silently fails never triggers a change notification.
      */
-    virtual uint16_t writeData( const void*    srcData,
-                                size_t         srcSize,
-                                ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
-                                LockRequest_T  lockRequest = eNO_REQUEST ) noexcept = 0;
+    uint16_t writeData( const void*    srcData,
+                        size_t         srcSize,
+                        ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                        LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
+    {
+        return writeData_( srcData, srcSize, chgNotice, lockRequest );
+    }
+
+    /// Implementation of writeData(). See setInvalid_() for why there are no default arguments.
+    virtual uint16_t writeData_( const void*    srcData,
+                                 size_t         srcSize,
+                                 ChangeNotice_T chgNotice,
+                                 LockRequest_T  lockRequest ) noexcept = 0;
 
 
 protected:
@@ -369,8 +396,8 @@ protected:
 
         NOTE: As stated above, clients can call detachObserver() within the Change
               Notification callback.  In most cases - it is also okay to call
-              attachObserver() within the Change Notification callback (e.g. 
-              re-attaching after calling detach).  However, what is NOT allowed 
+              attachObserver() within the Change Notification callback (e.g.
+              re-attaching after calling detach).  However, what is NOT allowed
               is to reuse/re-home an IObserver instance with a DIFFERENT Model
               Point - that was used for the original subscription/attachObserver
               call - within the Change Notification callback.  Doing so will
@@ -452,8 +479,12 @@ public:
         Point and returns true if the data of both points are the same. It is
         assumed that Model Point instance and 'other' are the of the same leaf
         class type.
+
+        'otherSize' is the number of readable bytes at 'otherData'.  Sub-classes
+        MUST NOT read past 'otherSize' bytes, i.e. 'otherData' is NOT guaranteed
+        to be null terminated or to be the same size as the MP's data.
      */
-    virtual bool isDataEqual_( const void* otherData ) const noexcept = 0;
+    virtual bool isDataEqual_( const void* otherData, size_t otherSize ) const noexcept = 0;
 
     /** This method has PACKAGE Scope, i.e. it is intended to be ONLY accessible
         by other classes in the Kit::Dm namespace.  The Application should

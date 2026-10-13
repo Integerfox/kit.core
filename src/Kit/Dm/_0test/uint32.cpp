@@ -185,7 +185,7 @@ TEST_CASE( "Uint32" )
         REQUIRE( seqNum == seqNum2 );
 
         // Update the MP
-        seqNum = mp_apple_.write( 42, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eLOCK );
+        seqNum = mp_apple_.write( 42, ChangeNotice_T::eNORMAL, LockRequest_T::eLOCK );
         REQUIRE( seqNum == seqNum2 + 1 );
         uint32_t value;
         bool     valid;
@@ -208,7 +208,7 @@ TEST_CASE( "Uint32" )
         REQUIRE( valid == false );
 
         // Update the MP
-        seqNum = mp_apple_.write( 13, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eLOCK );
+        seqNum = mp_apple_.write( 13, ChangeNotice_T::eNORMAL, LockRequest_T::eLOCK );
         REQUIRE( seqNum == seqNum2 + 1 );
         valid = mp_apple_.read( value );
         REQUIRE( valid == true );
@@ -224,8 +224,8 @@ TEST_CASE( "Uint32" )
         REQUIRE( seqNum == seqNum2 );
 
         // set a new value AND invalidate the MP
-        mp_apple_.write( 666, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eLOCK );
-        seqNum = mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
+        mp_apple_.write( 666, ChangeNotice_T::eNORMAL, LockRequest_T::eLOCK );
+        seqNum = mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
         REQUIRE( seqNum == seqNum2 + 2 );
         REQUIRE( mp_apple_.isNotValid() == true );
         REQUIRE( mp_apple_.isLocked() == false );
@@ -296,7 +296,7 @@ TEST_CASE( "Uint32" )
 
     SECTION( "toJSON-Value" )
     {
-        uint16_t seqnum = mp_apple_.write( 127, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
+        uint16_t seqnum = mp_apple_.write( 127, ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
         mp_apple_.toJSON( string, MAX_STR_LENG, truncated );
         KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
@@ -313,7 +313,7 @@ TEST_CASE( "Uint32" )
 
     SECTION( "toJSON-pretty" )
     {
-        uint16_t seqnum = mp_apple_.write( 127, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
+        uint16_t seqnum = mp_apple_.write( 127, ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
         mp_apple_.toJSON( string, MAX_STR_LENG, truncated, true, true );
         KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
         REQUIRE( strcmp( string, EXPECTED_PRETTY ) == 0 );
@@ -486,6 +486,47 @@ TEST_CASE( "Uint32" )
         REQUIRE( mp == &mp_apple_ );
     }
 
+    SECTION( "Set Invalid - force" )
+    {
+        mp_apple_.setInvalid();
+        REQUIRE( mp_apple_.isNotValid() );
+
+        // Already invalid -->eNORMAL is a no-op
+        seqNum  = mp_apple_.getSequenceNumber();
+        seqNum2 = mp_apple_.setInvalid();
+        REQUIRE( seqNum2 == seqNum );
+
+        // ...but eFORCE notifies even though nothing changed
+        seqNum2 = mp_apple_.setInvalid( ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum + 1 );
+        REQUIRE( mp_apple_.isNotValid() );
+
+        // eFORCE does NOT override the locked state
+        mp_apple_.applyLock();
+        seqNum  = mp_apple_.getSequenceNumber();
+        seqNum2 = mp_apple_.setInvalid( ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum );
+        mp_apple_.removeLock();
+    }
+
+    SECTION( "Set Invalid - lock via fromJSON" )
+    {
+        // Start with a valid, unlocked MP
+        mp_apple_.write( 55 );
+        REQUIRE( mp_apple_.isNotValid() == false );
+        REQUIRE( mp_apple_.isLocked() == false );
+
+        // Invalidate AND lock in a single request
+        const char* json   = R"({name:"APPLE", valid:false, locked:true})";
+        bool        result = modelDb_.fromJSON( json, &errorMsg );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "fromJSON errorMsg=[%s]", errorMsg.getString() );
+        REQUIRE( result == true );
+        REQUIRE( errorMsg == "noerror" );
+        REQUIRE( mp_apple_.isNotValid() == true );
+        REQUIRE( mp_apple_.isLocked() == true );
+        mp_apple_.removeLock();
+    }
+
     SECTION( "lock..." )
     {
         // Start with MP in the invalid state
@@ -540,7 +581,7 @@ TEST_CASE( "Uint32" )
 
     SECTION( "lock fromJSON writes while locking" )
     {
-        mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
+        mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
 
         const char* json   = R"({name:"APPLE", val:123, locked:true})";
         bool        result = modelDb_.fromJSON( json, &errorMsg );
@@ -556,7 +597,7 @@ TEST_CASE( "Uint32" )
 
     SECTION( "export/import includeLockedState length checks" )
     {
-        mp_apple_.write( 0x12345678, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eLOCK );
+        mp_apple_.write( 0x12345678, ChangeNotice_T::eNORMAL, LockRequest_T::eLOCK );
 
         uint8_t streamBuffer[STREAM_BUFFER_SIZE];
         size_t  shortLen = mp_apple_.getExternalSize( false );
@@ -594,7 +635,7 @@ TEST_CASE( "Uint32" )
         REQUIRE( valid );
         REQUIRE( value == 1 );
 
-        mp_apple_.increment( 5, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eLOCK );
+        mp_apple_.increment( 5, ChangeNotice_T::eNORMAL, LockRequest_T::eLOCK );
         mp_apple_.write( 10 );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
@@ -605,7 +646,7 @@ TEST_CASE( "Uint32" )
         REQUIRE( valid );
         REQUIRE( value == 1 + 5 );
 
-        mp_apple_.decrement( 2, IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
+        mp_apple_.decrement( 2, ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
         REQUIRE( value == 1 + 5 - 2 );
@@ -616,7 +657,7 @@ TEST_CASE( "Uint32" )
         uint16_t seqNum  = mp_apple_.write( 12 );
         uint16_t seqNum2 = mp_apple_.write( 12 );
         REQUIRE( seqNum2 == seqNum );
-        seqNum2 = mp_apple_.write( 12, IModelPoint::ChangeNotice_T::eFORCE );
+        seqNum2 = mp_apple_.write( 12, ChangeNotice_T::eFORCE );
         REQUIRE( seqNum2 == ( seqNum + 1 ) );
     }
 

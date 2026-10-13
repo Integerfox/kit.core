@@ -82,9 +82,9 @@ public:
     /** Type safe write. See Kit::Dm::IModelPoint. Note: the underlying data is
         a uintptr_t, but the read/write methods use void* for type safety.
      */
-    inline uint16_t write( void*                                newValue,
-                           Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
-                           Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t write( void*          newValue,
+                           ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                           LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
         return Kit::Dm::ModelPointBase::writeData( &newValue, sizeof( uintptr_t ), chgNotice, lockRequest );
     }

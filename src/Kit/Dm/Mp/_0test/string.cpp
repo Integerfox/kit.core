@@ -39,6 +39,9 @@ static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstru
 static StringAllocate<MY_UUT_DATA_SIZE> mp_apple_( modelDb_, "APPLE" );
 static StringAllocate<MY_UUT_DATA_SIZE> mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 
+// Larger storage than apple/orange -->used to test copyFrom() truncation
+static StringAllocate<MY_UUT_DATA_SIZE * 2> mp_melon_( modelDb_, "MELON" );
+
 // Don't let the Runnable object go out of scope before its thread has actually terminated!
 static Kit::EventQueue::Server t1Mbox_;
 
@@ -63,7 +66,7 @@ TEST_CASE( "String" )
     char                                 string[MAX_STR_LENG + 1];
     bool                                 truncated;
     bool                                 valid;
-    mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
+    mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
 
     SECTION( "gets" )
     {
@@ -107,7 +110,7 @@ TEST_CASE( "String" )
         REQUIRE( STRCMP( string, "Ver" ) );
 
         uint16_t seqNum  = mp_apple_.getSequenceNumber();
-        uint16_t seqNum2 = mp_apple_.write( nullptr, 10, IModelPoint::ChangeNotice_T::eNORMAL );
+        uint16_t seqNum2 = mp_apple_.write( nullptr, 10, ChangeNotice_T::eNORMAL );
         REQUIRE( seqNum == seqNum2 );
         mp_apple_.read( valStr );
         REQUIRE( valStr == "Very Lon" );
@@ -116,7 +119,7 @@ TEST_CASE( "String" )
         // Bytes beyond srcLen in MP storage should remain unchanged.
         mp_apple_.write( "ZZZZZZZZ" );
         const char srcPayload[] = { 'A', 'x', 'y', 'z', 'q' };
-        mp_apple_.write( srcPayload, static_cast<size_t>( 1 ), IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eNO_REQUEST );
+        mp_apple_.write( srcPayload, static_cast<size_t>( 1 ), ChangeNotice_T::eNORMAL, LockRequest_T::eNO_REQUEST );
 
         uint8_t stream[64];
         size_t  bytes = mp_apple_.exportData( stream, sizeof( stream ) );
@@ -124,6 +127,47 @@ TEST_CASE( "String" )
         REQUIRE( stream[0] == static_cast<uint8_t>( 'A' ) );
         REQUIRE( stream[1] == 0 );
         REQUIRE( stream[2] == static_cast<uint8_t>( 'Z' ) );
+
+        // The change-detection compare must honor 'srcLen' and never read past
+        // it, i.e. 'srcData' is not required to be null terminated
+        mp_apple_.write( "AB" );
+        seqNum                     = mp_apple_.getSequenceNumber();
+        const char srcNoTerm[]     = { 'A', 'B', 'C' };
+        seqNum2                    = mp_apple_.write( srcNoTerm, sizeof( srcNoTerm ) - 1 );
+        REQUIRE( seqNum2 == seqNum );  // "AB" == "AB" -->no change notification
+        const char srcNoTermDiff[] = { 'A', 'X', 'C' };
+        seqNum2                    = mp_apple_.write( srcNoTermDiff, sizeof( srcNoTermDiff ) - 1 );
+        REQUIRE( seqNum2 == seqNum + 1 );
+        mp_apple_.read( valStr );
+        REQUIRE( valStr == "AX" );
+    }
+
+    SECTION( "forceNotification" )
+    {
+        mp_apple_.write( "Hello" );
+        uint16_t seqNum = mp_apple_.getSequenceNumber();
+
+        // Re-writing the same value is 'silent' by default
+        uint16_t seqNum2 = mp_apple_.write( "Hello" );
+        REQUIRE( seqNum2 == seqNum );
+
+        // ...but eFORCE always triggers a change notification
+        seqNum2 = mp_apple_.write( "Hello", ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum + 1 );
+        valid = mp_apple_.read( valStr );
+        REQUIRE( valid );
+        REQUIRE( valStr == "Hello" );
+
+        // eFORCE does NOT override the locked state -->the stored value must be
+        // left untouched, including its null terminator
+        mp_apple_.applyLock();
+        seqNum  = mp_apple_.getSequenceNumber();
+        seqNum2 = mp_apple_.write( "Bye", ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum );
+        valid = mp_apple_.read( valStr );
+        REQUIRE( valid );
+        REQUIRE( valStr == "Hello" );
+        mp_apple_.removeLock();
     }
 
     SECTION( "copy" )
@@ -133,6 +177,18 @@ TEST_CASE( "String" )
         valid = mp_orange_.read( valStr );
         REQUIRE( valid );
         REQUIRE( valStr == "charlie" );
+
+        // A repeated, identical copyFrom() must NOT generate a change notification
+        uint16_t copySeqNum = mp_orange_.getSequenceNumber();
+        mp_orange_.copyFrom( mp_apple_ );
+        REQUIRE( mp_orange_.getSequenceNumber() == copySeqNum );
+
+        // Copying from a MP with larger storage truncates
+        mp_melon_.write( "0123456789ABCDEF" );
+        mp_apple_.copyFrom( mp_melon_ );
+        valid = mp_apple_.read( valStr );
+        REQUIRE( valid );
+        REQUIRE( valStr == "01234567" );
 
         mp_apple_.setInvalid();
         mp_orange_.copyFrom( mp_apple_ );

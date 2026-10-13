@@ -69,10 +69,10 @@ public:
 
 public:
     /// Convenience method to trigger a Server request
-    inline uint16_t triggerRequest( int32_t                              upperLimit,
-                                    int32_t                              lowerLimit,
-                                    Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
-                                    Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t triggerRequest( int32_t        upperLimit,
+                                    int32_t        lowerLimit,
+                                    ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                                    LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
         Foo_T newData = { upperLimit, lowerLimit, 0, false };
         return write( newData, chgNotice, lockRequest );

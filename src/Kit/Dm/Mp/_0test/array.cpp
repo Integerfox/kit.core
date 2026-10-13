@@ -65,7 +65,7 @@ TEST_CASE( "Array" )
     bool     truncated;
     uint16_t seqNum;
     uint16_t seqNum2;
-    mp_apple_.setInvalid( IModelPoint::ChangeNotice_T::eNORMAL, IModelPoint::eUNLOCK );
+    mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
 
     SECTION( "gets" )
     {
@@ -119,6 +119,29 @@ TEST_CASE( "Array" )
         REQUIRE( valid );
         uint8_t expectedVal2[] = { 1, 2, 12, 11, 10, 6, 7, 8, 9, 12 };
         REQUIRE( memcmp( expectedVal2, readValue, sizeof( expectedVal2 ) ) == 0 );
+    }
+
+    SECTION( "forceNotification" )
+    {
+        uint8_t arrayVal[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        mp_apple_.write( arrayVal, MY_ARRAY_SIZE );
+        seqNum = mp_apple_.getSequenceNumber();
+
+        // Re-writing the same value is 'silent' by default
+        seqNum2 = mp_apple_.write( arrayVal, MY_ARRAY_SIZE );
+        REQUIRE( seqNum2 == seqNum );
+
+        // ...but eFORCE always triggers a change notification
+        seqNum2 = mp_apple_.write( arrayVal, MY_ARRAY_SIZE, 0, ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum + 1 );
+
+        // eFORCE skips isDataEqual_() -->the element count must still get clamped to the array size
+        uint8_t tooMany[] = { 100, 101, 102, 103, 104 };
+        mp_apple_.write( tooMany, 5, MY_ARRAY_SIZE - 2, ChangeNotice_T::eFORCE );
+        valid = mp_apple_.read( readValue, MY_ARRAY_SIZE );
+        REQUIRE( valid );
+        uint8_t expectedClamped[] = { 1, 2, 3, 4, 5, 6, 7, 8, 100, 101 };
+        REQUIRE( memcmp( expectedClamped, readValue, sizeof( expectedClamped ) ) == 0 );
     }
 
     SECTION( "copy" )

@@ -24,7 +24,7 @@ namespace Mp {
 void RefCounter::updateAndCheckForChangeNotification( uint32_t newValue, ChangeNotice_T chgNotice )
 {
     // Generate change notices on transition to valid OR zero-to-not-zero OR not-zero-to-zero
-    if ( chgNotice == ChangeNotice_T::eFORCE || !m_valid || ( m_data == 0 && newValue != 0 ) || ( newValue == 0 && m_data != 0 ) )
+    if ( !m_valid || ( m_data == 0 && newValue != 0 ) || ( newValue == 0 && m_data != 0 ) || chgNotice == ChangeNotice_T::eFORCE )
     {
         processDataUpdated();
     }

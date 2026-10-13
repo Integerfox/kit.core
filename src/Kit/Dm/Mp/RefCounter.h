@@ -84,18 +84,18 @@ public:
     /// Increments the counter.  Note: The counter is protected from overflowing
     uint16_t increment( uint32_t       incrementAmount = 1,
                         ChangeNotice_T chgNotice       = ChangeNotice_T::eNORMAL,
-                        LockRequest_T  lockRequest     = eNO_REQUEST ) noexcept;
+                        LockRequest_T  lockRequest     = LockRequest_T::eNO_REQUEST ) noexcept;
 
     /// Decrements the counter. Note: the counter is protected from underflowing
     uint16_t decrement( uint32_t       decrementAmount = 1,
                         ChangeNotice_T chgNotice       = ChangeNotice_T::eNORMAL,
-                        LockRequest_T  lockRequest     = eNO_REQUEST ) noexcept;
+                        LockRequest_T  lockRequest     = LockRequest_T::eNO_REQUEST ) noexcept;
 
 
     /// Resets the counter to zero (or to a specific value). Alias for write()
     uint16_t reset( uint32_t       newValue    = 0,
                     ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
-                    LockRequest_T  lockRequest = eNO_REQUEST ) noexcept;
+                    LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept;
 
     ///  See Kit::Dm::ModelPoint.
     const char* getTypeAsText() const noexcept override

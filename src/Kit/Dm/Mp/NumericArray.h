@@ -58,18 +58,18 @@ public:
     }
 
     /// Type safe write. See Kit::Dm::IModelPoint
-    inline uint16_t write( const ELEMTYPE*                      srcArray,
-                           size_t                               srcNumElements,
-                           size_t                               dstIndex    = 0,
-                           Kit::Dm::IModelPoint::ChangeNotice_T chgNotice   = Kit::Dm::IModelPoint::ChangeNotice_T::eNORMAL,
-                           Kit::Dm::IModelPoint::LockRequest_T  lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t write( const ELEMTYPE* srcArray,
+                           size_t          srcNumElements,
+                           size_t          dstIndex    = 0,
+                           ChangeNotice_T  chgNotice   = ChangeNotice_T::eNORMAL,
+                           LockRequest_T   lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
         return ArrayBase::writeArrayElements( srcArray, srcNumElements, dstIndex, chgNotice, lockRequest );
     }
 
 public:
     /// Updates the MP's data/valid-state from 'src'.
-    inline uint16_t copyFrom( const MPTYPE& src, Kit::Dm::IModelPoint::LockRequest_T lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t copyFrom( const MPTYPE& src, LockRequest_T lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
         return ArrayBase::copyArrayFrom( src, lockRequest );
     }
@@ -134,7 +134,7 @@ protected:
 
 public:
     /// See Kit::Dm::Point.
-    bool fromJSON_( JsonVariant& src, Kit::Dm::IModelPoint::LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override
+    bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override
     {
         
         // Check for object
