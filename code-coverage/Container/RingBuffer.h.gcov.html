@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-13 18:22:00</td>
+            <td class="headerValue">2026-10-13 20:52:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -130,19 +130,19 @@
 <span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : public:</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :     /// Constructor</span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC tlaBgGNC">          58 :     RingBuffer( ITEM* memoryBuffer, unsigned N, bool initializeMemory = false ) noexcept</span></span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC tlaBgGNC">          59 :     RingBuffer( ITEM* memoryBuffer, unsigned N, bool initializeMemory = false ) noexcept</span></span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :         : RingBufferBaseType( N )</span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          58 :         , m_bufferMemory( memoryBuffer )</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          59 :         , m_bufferMemory( memoryBuffer )</span></span>
 <span id="L74"><span class="lineNum">      74</span>                 :             :     {</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :         KIT_SYSTEM_ASSERT( memoryBuffer != nullptr );</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             :         KIT_SYSTEM_ASSERT( N &gt; 1 );</span>
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :         // Start with a clean buffer (helps with debugging)</span>
-<span id="L79"><span class="lineNum">      79</span>         [<span class="tlaGBC" title="Branch 0 was taken 27 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 31 times"> + </span>]:<span class="tlaGNC">          58 :         if ( initializeMemory )</span></span>
+<span id="L79"><span class="lineNum">      79</span>         [<span class="tlaGBC" title="Branch 0 was taken 28 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 31 times"> + </span>]:<span class="tlaGNC">          59 :         if ( initializeMemory )</span></span>
 <span id="L80"><span class="lineNum">      80</span>                 :             :         {</span>
-<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">          27 :             memset( static_cast&lt;void*&gt;( memoryBuffer ), 0, sizeof( ITEM ) * N );</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">          28 :             memset( static_cast&lt;void*&gt;( memoryBuffer ), 0, sizeof( ITEM ) * N );</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :         }</span>
-<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">          58 :     }</span></span>
+<span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaGNC">          59 :     }</span></span>
 <span id="L84"><span class="lineNum">      84</span>                 :             : </span>
 <span id="L85"><span class="lineNum">      85</span>                 :             : public:</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             :     /** Adds new item to the ring buffer. Returns true on success. If the ring</span>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 398-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 401-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -106,6 +106,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2ee42f21a1e712a2ea4697e52a483b22" id="r_a2ee42f21a1e712a2ea4697e52a483b22"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ee42f21a1e712a2ea4697e52a483b22">remove</a> (<a class="el" href="class_kit_1_1_io_1_1_i_output.html">IOutput</a> &amp;stream) noexcept</td></tr>
 <tr class="memdesc:a2ee42f21a1e712a2ea4697e52a483b22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a stream.  <br /></td></tr>
 <tr class="separator:a2ee42f21a1e712a2ea4697e52a483b22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad83e8a2d1b2608d18a9acaadd59330ec" id="r_ad83e8a2d1b2608d18a9acaadd59330ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad83e8a2d1b2608d18a9acaadd59330ec">waitForWriteSpace</a> (<a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, uint32_t timeoutMs) noexcept override</td></tr>
+<tr class="memdesc:ad83e8a2d1b2608d18a9acaadd59330ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str...">Kit::Io::IOutput</a>.  <br /></td></tr>
+<tr class="separator:ad83e8a2d1b2608d18a9acaadd59330ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b8cfb0bfe0e415b5f77944f249ded62" id="r_a0b8cfb0bfe0e415b5f77944f249ded62"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b8cfb0bfe0e415b5f77944f249ded62">write</a> (const void *buffer, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> maxBytes, <a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> &amp;bytesWritten) noexcept override</td></tr>
 <tr class="memdesc:a0b8cfb0bfe0e415b5f77944f249ded62"><td class="mdescLeft">&#160;</td><td class="mdescRight">See <a class="el" href="class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str...">Kit::Io::IOutput</a>.  <br /></td></tr>
 <tr class="separator:a0b8cfb0bfe0e415b5f77944f249ded62"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -584,6 +587,41 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ad83e8a2d1b2608d18a9acaadd59330ec" name="ad83e8a2d1b2608d18a9acaadd59330ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad83e8a2d1b2608d18a9acaadd59330ec">&#9670;&#160;</a></span>waitForWriteSpace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kit::Io::TeeOutput::waitForWriteSpace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>numBytes</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>timeoutMs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>See <a class="el" href="class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str...">Kit::Io::IOutput</a>. </p>
+<p>Returns true only when ALL of the active streams have the requested space available. The method fails fast, i.e. it returns false as soon as one stream reports no space.</p>
+<p>NOTE: 'timeoutMs' is the total block time for all of the streams, i.e. each stream is only given the time remaining from 'timeoutMs'. </p>
+
+<p>Reimplemented from <a class="el" href="class_kit_1_1_io_1_1_i_output.html#ac1c4504b853768a93559723ed9233651">Kit::Io::IOutput</a>.</p>
+
+</div>
+</div>
 <a id="a0b8cfb0bfe0e415b5f77944f249ded62" name="a0b8cfb0bfe0e415b5f77944f249ded62"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0b8cfb0bfe0e415b5f77944f249ded62">&#9670;&#160;</a></span>write()</h2>
 
@@ -725,7 +763,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 18:14:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Oct 13 2026 20:44:41 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

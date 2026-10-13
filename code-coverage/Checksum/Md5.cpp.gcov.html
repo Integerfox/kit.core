@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-13 18:22:00</td>
+            <td class="headerValue">2026-10-13 20:52:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">83.3&nbsp;%</td>
@@ -79,10 +79,10 @@
 <span id="L17"><span class="lineNum">      17</span>                 :             : namespace Checksum {</span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : </span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : ///////////////////////////////////////</span>
-<span id="L20"><span class="lineNum">      20</span>                 :<span class="tlaGNC tlaBgGNC">           1 : Md5::Md5() noexcept</span></span>
+<span id="L20"><span class="lineNum">      20</span>                 :<span class="tlaGNC tlaBgGNC">           6 : Md5::Md5() noexcept</span></span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : {</span>
 <span id="L22"><span class="lineNum">      22</span>                 :             :     reset();</span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">           1 : }</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">           6 : }</span></span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
 <span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">           8 : void Md5::reset( void ) noexcept</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : {</span>
@@ -91,28 +91,28 @@
 <span id="L29"><span class="lineNum">      29</span>                 :             : </span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : </span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : ///////////////////////////////////////</span>
-<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">           8 : void Md5::accumulate( const void* bytes, unsigned numbytes ) noexcept</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          12 : void Md5::accumulate( const void* bytes, unsigned numbytes ) noexcept</span></span>
 <span id="L33"><span class="lineNum">      33</span>                 :             : {</span>
 <span id="L34"><span class="lineNum">      34</span>                 :             :     // Skip if no data or bad pointer</span>
-<span id="L35"><span class="lineNum">      35</span>   [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           8 :     if ( bytes == nullptr || numbytes == 0 || numbytes &gt; INT_MAX )</span></span>
+<span id="L35"><span class="lineNum">      35</span>   [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">          12 :     if ( bytes == nullptr || numbytes == 0 || numbytes &gt; INT_MAX )</span></span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     {</span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :         return;</span>
 <span id="L38"><span class="lineNum">      38</span>                 :             :     }</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             : </span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">           6 :     md5_append( &amp;m_state, (const md5_byte_t*)bytes, numbytes );</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          10 :     md5_append( &amp;m_state, (const md5_byte_t*)bytes, numbytes );</span></span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : }</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : </span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">           9 : bool Md5::finalize( void* destBuffer, unsigned destBufferSize  ) noexcept</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">          13 : bool Md5::finalize( void* destBuffer, unsigned destBufferSize  ) noexcept</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             : {</span>
-<span id="L45"><span class="lineNum">      45</span>         [<span class="tlaGBC" title="Branch 0 was taken 7 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           9 :     if ( destBufferSize &lt; eDIGEST_LEN || destBuffer == nullptr )</span></span>
+<span id="L45"><span class="lineNum">      45</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span>]:<span class="tlaGNC">          13 :     if ( destBufferSize &lt; eDIGEST_LEN || destBuffer == nullptr )</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     {</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :         return false;</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     }</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :     Digest_T result;</span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">           7 :     md5_finish( &amp;m_state, result );</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">          10 :     md5_finish( &amp;m_state, result );</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     memcpy( destBuffer, result, eDIGEST_LEN );</span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">           7 :     return true;</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">          10 :     return true;</span></span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : }</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : } // end namespace</span>

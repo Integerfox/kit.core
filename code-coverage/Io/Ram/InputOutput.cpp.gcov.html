@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-13 18:22:00</td>
+            <td class="headerValue">2026-10-13 20:52:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">93.8&nbsp;%</td>
@@ -226,26 +226,26 @@
 <span id="L164"><span class="lineNum">     164</span>                 :<span class="tlaGNC">           2 :     return m_started == false;</span></span>
 <span id="L165"><span class="lineNum">     165</span>                 :             : }</span>
 <span id="L166"><span class="lineNum">     166</span>                 :             : </span>
-<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">          40 : void InputOutput::close() noexcept</span></span>
+<span id="L167"><span class="lineNum">     167</span>                 :<span class="tlaGNC">          41 : void InputOutput::close() noexcept</span></span>
 <span id="L168"><span class="lineNum">     168</span>                 :             : {</span>
 <span id="L169"><span class="lineNum">     169</span>                 :             :     // By design, no explicit critical section is used.  Instead leveraging the</span>
 <span id="L170"><span class="lineNum">     170</span>                 :             :     // the 'atomic' nature of volatile bool variables to avoid potential deadlock</span>
 <span id="L171"><span class="lineNum">     171</span>                 :             :     // scenarios with the m_lock mutex</span>
 <span id="L172"><span class="lineNum">     172</span>                 :             : </span>
 <span id="L173"><span class="lineNum">     173</span>                 :             :     // Only take action if I am not already closed.</span>
-<span id="L174"><span class="lineNum">     174</span>         [<span class="tlaGBC" title="Branch 0 was taken 27 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 13 times"> + </span>]:<span class="tlaGNC">          40 :     if ( m_started )</span></span>
+<span id="L174"><span class="lineNum">     174</span>         [<span class="tlaGBC" title="Branch 0 was taken 28 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 13 times"> + </span>]:<span class="tlaGNC">          41 :     if ( m_started )</span></span>
 <span id="L175"><span class="lineNum">     175</span>                 :             :     {</span>
-<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">          27 :         m_started = false;</span></span>
-<span id="L177"><span class="lineNum">     177</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 26 times"> + </span>]:<span class="tlaGNC">          27 :         if ( m_readerWaiting )</span></span>
+<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">          28 :         m_started = false;</span></span>
+<span id="L177"><span class="lineNum">     177</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 27 times"> + </span>]:<span class="tlaGNC">          28 :         if ( m_readerWaiting )</span></span>
 <span id="L178"><span class="lineNum">     178</span>                 :             :         {</span>
 <span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaGNC">           1 :             m_semaReader.signal();</span></span>
 <span id="L180"><span class="lineNum">     180</span>                 :             :         }</span>
-<span id="L181"><span class="lineNum">     181</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 26 times"> + </span>]:<span class="tlaGNC">          27 :         if ( m_writerWaiting )</span></span>
+<span id="L181"><span class="lineNum">     181</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 27 times"> + </span>]:<span class="tlaGNC">          28 :         if ( m_writerWaiting )</span></span>
 <span id="L182"><span class="lineNum">     182</span>                 :             :         {</span>
 <span id="L183"><span class="lineNum">     183</span>                 :<span class="tlaGNC">           1 :             m_semaWriter.signal();</span></span>
 <span id="L184"><span class="lineNum">     184</span>                 :             :         }</span>
 <span id="L185"><span class="lineNum">     185</span>                 :             :     }</span>
-<span id="L186"><span class="lineNum">     186</span>                 :<span class="tlaGNC">          40 : }</span></span>
+<span id="L186"><span class="lineNum">     186</span>                 :<span class="tlaGNC">          41 : }</span></span>
 <span id="L187"><span class="lineNum">     187</span>                 :             : </span>
 <span id="L188"><span class="lineNum">     188</span>                 :             : }  // end namespace</span>
 <span id="L189"><span class="lineNum">     189</span>                 :             : }</span>

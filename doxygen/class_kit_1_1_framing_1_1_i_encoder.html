@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 398-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 401-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -84,6 +84,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7b1d3ccf8292fedd9514163b46e648e4" id="r_a7b1d3ccf8292fedd9514163b46e648e4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b1d3ccf8292fedd9514163b46e648e4">startFrame</a> (void) noexcept=0</td></tr>
 <tr class="memdesc:a7b1d3ccf8292fedd9514163b46e648e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begins the frame.  <br /></td></tr>
 <tr class="separator:a7b1d3ccf8292fedd9514163b46e648e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3802bfa843afaefb5c4cb40ad1d12003" id="r_a3802bfa843afaefb5c4cb40ad1d12003"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3802bfa843afaefb5c4cb40ad1d12003">waitForOutputSpace</a> (<a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a> numBytes, uint32_t timeoutMs) noexcept</td></tr>
+<tr class="memdesc:a3802bfa843afaefb5c4cb40ad1d12003"><td class="mdescLeft">&#160;</td><td class="mdescRight">Blocks for at most 'timeoutMs' until the output destination can accept 'numBytes'.  <br /></td></tr>
+<tr class="separator:a3802bfa843afaefb5c4cb40ad1d12003"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This abstract class defines an interface for 'creating/ouput' (encoding) a frame. </p>
@@ -277,13 +280,50 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a3802bfa843afaefb5c4cb40ad1d12003" name="a3802bfa843afaefb5c4cb40ad1d12003"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3802bfa843afaefb5c4cb40ad1d12003">&#9670;&#160;</a></span>waitForOutputSpace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool Kit::Framing::IEncoder::waitForOutputSpace </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></td>          <td class="paramname"><span class="paramname"><em>numBytes</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>timeoutMs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Blocks for at most 'timeoutMs' until the output destination can accept 'numBytes'. </p>
+<p>Default implementation returns true.</p>
+<p>NOTE: This method SHOULD always be called before <a class="el" href="#a7b1d3ccf8292fedd9514163b46e648e4" title="Begins the frame.">startFrame()</a> is called, i.e. the intent of the method is to guarantee that there is enough space for the upcoming frame data.</p>
+<p>NOTE: 'numBytes' is a raw, non-encoded byte count. The caller is responsible for accounting for extra encoding bytes when building a frame.</p>
+<p>NOTE: Defaults to returning true, i.e., streams that cannot report their outbound space behave exactly as they always have. </p>
+
+<p>Reimplemented in <a class="el" href="class_kit_1_1_framing_1_1_encoder_writer.html#a8a740e1b1df4e07cc0d30a7988d63d9d">Kit::Framing::EncoderWriter</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Kit/Framing/<a class="el" href="_i_encoder_8h_source.html">IEncoder.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 18:14:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Oct 13 2026 20:44:41 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
