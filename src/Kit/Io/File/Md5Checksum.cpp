@@ -66,7 +66,7 @@ bool calcMd5Checksum( const char*                  fullPathName,
     }
 }
 
-}  // end namespace
+}  // end namespaces
 }
 }
 //------------------------------------------------------------------------------

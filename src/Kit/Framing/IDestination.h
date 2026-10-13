@@ -47,14 +47,18 @@ public:
         can accept 'numBytes' without blocking.  Used to avoid starting a frame
         that cannot be completed.  See Kit::Io::IOutput::waitForWriteSpace().
 
+        NOTE: 'numBytes' is a raw, non-encoded byte count.  The caller is 
+              responsible for accounting for extra encoding bytes when building
+              a frame.
+
         NOTE: Defaults to returning true, i.e., destinations that cannot report
               their total available outbound space behave exactly as they always have.
      */
     virtual bool waitForOutputSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept
     {
         return true;
-    }   
-    
+    }
+
     /** Used to finalize the "frame output sequence".
         Returns true if successful, false if 'no space' is available
         in the destination, or an error was encountered.

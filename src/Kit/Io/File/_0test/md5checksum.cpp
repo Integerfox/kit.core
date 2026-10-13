@@ -83,5 +83,25 @@ TEST_CASE( "md5checksum" )
         REQUIRE( filelen == 1 );
     }
 
+    SECTION( "read error that is NOT end-of-file" )
+    {
+        // A directory opens successfully on POSIX, but read()'ing it fails with an
+        // error instead of EOF. On Win32 the open() itself fails -->either way the
+        // checksum calculation must fail.
+        size_t filelen = 1;
+        REQUIRE( calcMd5Checksum( ".", digest, nullptr, &filelen ) == false );
+        REQUIRE( filelen == 1 );
+    }
+
+    SECTION( "no digest buffer" )
+    {
+        size_t                                                 filelen = 1;
+        Kit::Text::FString<Kit::Checksum::Md5::eDIGEST_LEN * 2> dstString( "bob" );
+
+        REQUIRE( calcMd5Checksum( "testinput.txt", nullptr, &dstString, &filelen ) == false );
+        REQUIRE( dstString == "bob" );
+        REQUIRE( filelen == 1 );
+    }
+
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

@@ -57,7 +57,7 @@ public:
 
     /// See Kit::Framing::IEncoder
     bool waitForOutputSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept override;
-    
+
     /// See Kit::Framing::IEncoder
     bool endFrame( void ) noexcept override;
 

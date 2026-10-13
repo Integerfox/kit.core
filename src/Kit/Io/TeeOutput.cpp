@@ -177,6 +177,12 @@ void TeeOutput::flush() noexcept
 
 bool TeeOutput::waitForWriteSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept
 {
+    // Fail immediately if the TeeOutput is not opened
+    if ( !m_opened )
+    {
+        return false;
+    }
+
     uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
 
     for ( unsigned i = 0; i < MAX_STREAMS; ++i )

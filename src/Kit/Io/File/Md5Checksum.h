@@ -20,7 +20,7 @@
              too large
  */
 #ifndef OPTION_KIT_IO_FILE_MD5_WORK_BUFFER_SIZE
-#define OPTION_KIT_IO_FILE_MD5_WORK_BUFFER_SIZE 32
+#define OPTION_KIT_IO_FILE_MD5_WORK_BUFFER_SIZE 128
 #endif
 
 ///

@@ -71,6 +71,7 @@ public:
         return m_dstPtr == nullptr ? true
                                    : m_dstPtr->waitForWriteSpace( numBytes, timeoutMs );
     }
+    
     /// See Kit::Framing::IDestination
     bool endOutput() noexcept override
     {

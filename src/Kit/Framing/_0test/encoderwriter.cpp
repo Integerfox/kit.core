@@ -50,13 +50,13 @@ public:
     }
 
 protected:
-    bool startOutput() noexcept
+    bool startOutput() noexcept override
     {
         m_nextByteIndex = 0;
         return m_resultStartOutput;
     }
 
-    bool appendOutput( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept
+    bool appendOutput( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept override 
     {
         const uint8_t* buffer = static_cast<const uint8_t*>(srcBuffer);
         for ( Kit::Type::SSize_T i = 0; i < numBytes; ++i )
@@ -67,7 +67,7 @@ protected:
         return m_resultAppendOutput;
     }
 
-    bool waitForOutputSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept
+    bool waitForOutputSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept override
     {
         m_waitNumBytes  = numBytes;
         m_waitTimeoutMs = timeoutMs;
@@ -75,7 +75,7 @@ protected:
         return m_resultWaitForOutputSpace;
     }
 
-    bool endOutput() noexcept
+    bool endOutput() noexcept override
     {
         m_outputBuffer[m_nextByteIndex] = '\0';
         KIT_SYSTEM_TRACE_MSG( SECT_, "FRAME: [%s]", m_outputBuffer );
