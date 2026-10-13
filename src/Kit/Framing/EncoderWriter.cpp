@@ -76,6 +76,10 @@ bool EncoderWriter::output( const void* srcBuffer, Kit::Type::SSize_T numBytes )
 
     return true;
 }
+bool EncoderWriter::waitForOutputSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept
+{
+    return m_dst.waitForOutputSpace( numBytes, timeoutMs );
+}
 
 bool EncoderWriter::oobWrite( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept
 {

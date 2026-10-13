@@ -25,12 +25,16 @@ namespace {
 class MyDestination : public IDestination
 {
 public:
-    char   m_outputBuffer[100];
-    size_t m_bytesWritten;
-    size_t m_nextByteIndex;
-    bool   m_resultStartOutput;
-    bool   m_resultAppendOutput;
-    bool   m_resultEndOutput;
+    char               m_outputBuffer[100];
+    size_t             m_bytesWritten;
+    size_t             m_nextByteIndex;
+    bool               m_resultStartOutput;
+    bool               m_resultAppendOutput;
+    bool               m_resultEndOutput;
+    bool               m_resultWaitForOutputSpace;
+    Kit::Type::SSize_T m_waitNumBytes;
+    uint32_t           m_waitTimeoutMs;
+    unsigned           m_waitCallCount;
 public:
     MyDestination() noexcept
         : m_bytesWritten( 0 )
@@ -38,6 +42,10 @@ public:
         , m_resultStartOutput( true )
         , m_resultAppendOutput( true )
         , m_resultEndOutput( true )
+        , m_resultWaitForOutputSpace( true )
+        , m_waitNumBytes( 0 )
+        , m_waitTimeoutMs( 0 )
+        , m_waitCallCount( 0 )
     {
     }
 
@@ -57,6 +65,14 @@ protected:
             m_nextByteIndex++;
         }
         return m_resultAppendOutput;
+    }
+
+    bool waitForOutputSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept
+    {
+        m_waitNumBytes  = numBytes;
+        m_waitTimeoutMs = timeoutMs;
+        m_waitCallCount++;
+        return m_resultWaitForOutputSpace;
     }
 
     bool endOutput() noexcept
@@ -171,6 +187,20 @@ TEST_CASE( "EncoderWriter" )
 
         dst.m_resultAppendOutput = true;
         REQUIRE( uut.oobWrite( "", 0 ) == true );
+    }
+
+    SECTION( "waitForOutputSpace" )
+    {
+        REQUIRE( uut.waitForOutputSpace( 42, 250 ) == true );
+        REQUIRE( dst.m_waitCallCount == 1 );
+        REQUIRE( dst.m_waitNumBytes == 42 );
+        REQUIRE( dst.m_waitTimeoutMs == 250 );
+
+        dst.m_resultWaitForOutputSpace = false;
+        REQUIRE( uut.waitForOutputSpace( 0, 0 ) == false );
+        REQUIRE( dst.m_waitCallCount == 2 );
+        REQUIRE( dst.m_waitNumBytes == 0 );
+        REQUIRE( dst.m_waitTimeoutMs == 0 );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

@@ -65,7 +65,7 @@ public:
         (after the contents have been 'formatted') is written to the Output
         stream.
      */
-    KIT_SYSTEM_PRINTF_CHECKER(3, 4)
+    KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
     virtual bool write( Kit::Text::IString& formatBuffer, const char* format, ... ) noexcept;
 
     /** Same as write( String& formatBuffer, const char* format,...), except that
@@ -92,13 +92,26 @@ public:
      */
     virtual void flush() noexcept = 0;
 
+    /** Blocks - for at most 'timeoutMs' milliseconds - until the stream can accept
+        'numBytes' without blocking.  Returns true when the space is available;
+        false on timeout, or when 'numBytes' exceeds the stream's total outbound
+        capacity.
+
+        The default implementation returns true, i.e. streams that cannot report
+        their outbound space behave exactly as they always have.  Clients writing
+        framed/atomic payloads use this method to avoid starting a write they
+        cannot finish.
+     */
+    virtual bool waitForWriteSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept
+    {
+        return true;
+    }
 
 public:
     /// Lets the make the destructor virtual
     virtual ~IOutput() noexcept = default;
-
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

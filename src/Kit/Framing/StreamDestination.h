@@ -62,6 +62,15 @@ public:
         return m_dstPtr->write( srcBuffer, numBytes );
     }
 
+    /** See Kit::Framing::IDestination.
+        NOTE: Returns true when no output stream has been set -->the subsequent
+              startFrame() reports that error.
+     */
+    bool waitForOutputSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept override
+    {
+        return m_dstPtr == nullptr ? true
+                                   : m_dstPtr->waitForWriteSpace( numBytes, timeoutMs );
+    }
     /// See Kit::Framing::IDestination
     bool endOutput() noexcept override
     {
