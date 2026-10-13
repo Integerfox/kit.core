@@ -12,6 +12,7 @@
 #include "ArrayBase.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/Mutex.h"
+#include "Kit/System/FatalError.h"
 #include <string.h>
 
 //------------------------------------------------------------------------------

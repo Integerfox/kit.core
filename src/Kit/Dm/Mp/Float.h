@@ -62,7 +62,7 @@ public:
 
 public:
     ///  See Kit::Dm::ModelPoint.
-    const char* getTypeAsText() const noexcept
+    const char* getTypeAsText() const noexcept override
     {
         return "Kit::Dm::Mp::Float";
     }
