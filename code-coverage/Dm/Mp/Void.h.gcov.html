@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">91.7&nbsp;%</td>
+            <td class="headerCovTableEntryHi">92.3&nbsp;%</td>
+            <td class="headerCovTableEntry">13</td>
             <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">11</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-13 17:33:08</td>
+            <td class="headerValue">2026-10-13 18:22:00</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -148,7 +148,7 @@
 <span id="L86"><span class="lineNum">      86</span>                 :             :                            ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,</span>
 <span id="L87"><span class="lineNum">      87</span>                 :             :                            LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept</span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :     {</span>
-<span id="L89"><span class="lineNum">      89</span>                 :             :         return Kit::Dm::ModelPointBase::writeData( &amp;newValue, sizeof( uintptr_t ), chgNotice, lockRequest );</span>
+<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">           3 :         return Kit::Dm::ModelPointBase::writeData( &amp;newValue, sizeof( uintptr_t ), chgNotice, lockRequest );</span></span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     }</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             : </span>
 <span id="L92"><span class="lineNum">      92</span>                 :             : public:</span>

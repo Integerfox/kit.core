@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 396-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 398-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -136,7 +136,7 @@ $(function() {
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                           <a class="code hl_enumeration" href="namespace_kit_1_1_dm.html#a760f8adf5e44f6edd3bacbbcc5d71490">ChangeNotice_T</a> chgNotice   = <a class="code hl_enumvalue" href="namespace_kit_1_1_dm.html#a760f8adf5e44f6edd3bacbbcc5d71490a449f7aaa83696692ea01b47dde78d155">ChangeNotice_T::eNORMAL</a>,</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                           <a class="code hl_enumeration" href="namespace_kit_1_1_dm.html#ab023cccb0af50aeab063d9d1637445b0">LockRequest_T</a>  lockRequest = <a class="code hl_enumvalue" href="namespace_kit_1_1_dm.html#ab023cccb0af50aeab063d9d1637445b0ad77b03e68ed3589c8ec368996b9f4e10">LockRequest_T::eNO_REQUEST</a> ) <span class="keyword">noexcept</span></div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="class_kit_1_1_dm_1_1_i_model_point.html#a5e88c157cbdd717cd1a1e88ec506a1d2">Kit::Dm::ModelPointBase::writeData</a>( &amp;newValue, <span class="keyword">sizeof</span>( uintptr_t ), chgNotice, lockRequest );</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="class_kit_1_1_dm_1_1_model_point_base.html#a8bc41d1ee1b868f5812651ad4c8534ce">Kit::Dm::ModelPointBase::writeData</a>( &amp;newValue, <span class="keyword">sizeof</span>( uintptr_t ), chgNotice, lockRequest );</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">public</span>:<span class="comment"></span></div>
@@ -194,7 +194,7 @@ $(function() {
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_primitive_type_8h_html"><div class="ttname"><a href="_primitive_type_8h.html">PrimitiveType.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_i_model_database_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_i_model_database.html">Kit::Dm::IModelDatabase</a></div><div class="ttdoc">This class defines the basic operations that can be performed on a Model Base.</div><div class="ttdef"><b>Definition</b> IModelDatabase.h:42</div></div>
-<div class="ttc" id="aclass_kit_1_1_dm_1_1_i_model_point_html_a5e88c157cbdd717cd1a1e88ec506a1d2"><div class="ttname"><a href="class_kit_1_1_dm_1_1_i_model_point.html#a5e88c157cbdd717cd1a1e88ec506a1d2">Kit::Dm::IModelPoint::writeData</a></div><div class="ttdeci">uint16_t writeData(const void *srcData, size_t srcSize, ChangeNotice_T chgNotice=ChangeNotice_T::eNORMAL, LockRequest_T lockRequest=LockRequest_T::eNO_REQUEST) noexcept</div><div class="ttdoc">This method writes the caller Point instance to the Model Point's internal data.</div><div class="ttdef"><b>Definition</b> IModelPoint.h:332</div></div>
+<div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_a8bc41d1ee1b868f5812651ad4c8534ce"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#a8bc41d1ee1b868f5812651ad4c8534ce">Kit::Dm::ModelPointBase::writeData</a></div><div class="ttdeci">uint16_t writeData(const void *srcData, size_t srcSize, ChangeNotice_T chgNotice=ChangeNotice_T::eNORMAL, LockRequest_T lockRequest=LockRequest_T::eNO_REQUEST) noexcept override</div><div class="ttdoc">See Kit::Dm::IModelPoint.</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_af21f6116f13ac3366fa5ec8b70a4a5fb"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#af21f6116f13ac3366fa5ec8b70a4a5fb">Kit::Dm::ModelPointBase::readData</a></div><div class="ttdeci">bool readData(void *dstData, size_t dstSize, uint16_t *seqNumPtr=0) const noexcept override</div><div class="ttdoc">See Kit::Dm::IModelPoint.</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_primitive_type_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_primitive_type.html">Kit::Dm::Mp::PrimitiveType</a></div><div class="ttdoc">This template class extends the Scalar base class to data that is a C primitive type of type: 'ELEMTY...</div><div class="ttdef"><b>Definition</b> PrimitiveType.h:48</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_scalar_html_aa0bf7347efc5663b3604760dd97c5122"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_scalar.html#aa0bf7347efc5663b3604760dd97c5122">Kit::Dm::Mp::Scalar::write</a></div><div class="ttdeci">uint16_t write(const ELEMTYPE &amp;newValue, ChangeNotice_T chgNotice=ChangeNotice_T::eNORMAL, LockRequest_T lockRequest=LockRequest_T::eNO_REQUEST) noexcept</div><div class="ttdoc">Type safe write. See Kit::Dm::IModelPoint.</div><div class="ttdef"><b>Definition</b> Scalar.h:60</div></div>
@@ -220,7 +220,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 17:27:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Oct 13 2026 18:14:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

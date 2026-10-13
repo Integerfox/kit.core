@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 396-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 398-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -218,7 +218,7 @@ $(function() {
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex_1_1_scope_lock.html">Kit::System::Mutex::ScopeLock</a> criticalSection( <a class="code hl_variable" href="class_kit_1_1_dm_1_1_model_point_base.html#a9cc058eb63d33c4381495c3db5963e55">Kit::Dm::ModelPointBase::m_modelDatabase</a>.getMutex_() );</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        dstData          = this-&gt;<a class="code hl_variable" href="class_kit_1_1_dm_1_1_mp_1_1_scalar.html#aa7080585377f1cda58fbeda2207b7e6a">m_data</a>;</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        ELEMTYPE newData = dstData &amp; ~maskToClear;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="class_kit_1_1_dm_1_1_i_model_point.html#a5e88c157cbdd717cd1a1e88ec506a1d2">Kit::Dm::ModelPointBase::writeData</a>( &amp;newData, <span class="keyword">sizeof</span>( ELEMTYPE ), chgNotice, lockRequest );</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="class_kit_1_1_dm_1_1_model_point_base.html#a8bc41d1ee1b868f5812651ad4c8534ce">Kit::Dm::ModelPointBase::writeData</a>( &amp;newData, <span class="keyword">sizeof</span>( ELEMTYPE ), chgNotice, lockRequest );</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    }</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment"></span> </div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment">    /// Atomic Read and then clear (i.e. set to 0) operation.</span></div>
@@ -480,8 +480,8 @@ $(function() {
 <div class="ttc" id="a_scalar_8h_html"><div class="ttname"><a href="_scalar_8h.html">Scalar.h</a></div></div>
 <div class="ttc" id="a_string_to_8h_html"><div class="ttname"><a href="_string_to_8h.html">StringTo.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_i_model_database_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_i_model_database.html">Kit::Dm::IModelDatabase</a></div><div class="ttdoc">This class defines the basic operations that can be performed on a Model Base.</div><div class="ttdef"><b>Definition</b> IModelDatabase.h:42</div></div>
-<div class="ttc" id="aclass_kit_1_1_dm_1_1_i_model_point_html_a5e88c157cbdd717cd1a1e88ec506a1d2"><div class="ttname"><a href="class_kit_1_1_dm_1_1_i_model_point.html#a5e88c157cbdd717cd1a1e88ec506a1d2">Kit::Dm::IModelPoint::writeData</a></div><div class="ttdeci">uint16_t writeData(const void *srcData, size_t srcSize, ChangeNotice_T chgNotice=ChangeNotice_T::eNORMAL, LockRequest_T lockRequest=LockRequest_T::eNO_REQUEST) noexcept</div><div class="ttdoc">This method writes the caller Point instance to the Model Point's internal data.</div><div class="ttdef"><b>Definition</b> IModelPoint.h:332</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_a30c18e784a155132cd98dfc2bbe06b64"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#a30c18e784a155132cd98dfc2bbe06b64">Kit::Dm::ModelPointBase::m_seqNum</a></div><div class="ttdeci">uint16_t m_seqNum</div><div class="ttdoc">Sequence number used for tracking changes in the Point data.</div><div class="ttdef"><b>Definition</b> ModelPointBase.h:245</div></div>
+<div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_a8bc41d1ee1b868f5812651ad4c8534ce"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#a8bc41d1ee1b868f5812651ad4c8534ce">Kit::Dm::ModelPointBase::writeData</a></div><div class="ttdeci">uint16_t writeData(const void *srcData, size_t srcSize, ChangeNotice_T chgNotice=ChangeNotice_T::eNORMAL, LockRequest_T lockRequest=LockRequest_T::eNO_REQUEST) noexcept override</div><div class="ttdoc">See Kit::Dm::IModelPoint.</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_model_point_base_html_a9cc058eb63d33c4381495c3db5963e55"><div class="ttname"><a href="class_kit_1_1_dm_1_1_model_point_base.html#a9cc058eb63d33c4381495c3db5963e55">Kit::Dm::ModelPointBase::m_modelDatabase</a></div><div class="ttdeci">IModelDatabase &amp; m_modelDatabase</div><div class="ttdoc">Reference to the containing Model Base.</div><div class="ttdef"><b>Definition</b> ModelPointBase.h:236</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_integer_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_integer.html">Kit::Dm::Mp::Integer</a></div><div class="ttdoc">This template class provides a mostly concrete implementation for a Model Point who's data is a C int...</div><div class="ttdef"><b>Definition</b> PrimitiveType.h:140</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_mp_1_1_integer_html_a16319671ce2f2adf334e25ee5f265bc0"><div class="ttname"><a href="class_kit_1_1_dm_1_1_mp_1_1_integer.html#a16319671ce2f2adf334e25ee5f265bc0">Kit::Dm::Mp::Integer::flipBit</a></div><div class="ttdeci">uint16_t flipBit(uint8_t bitPosition, ChangeNotice_T chgNotice=ChangeNotice_T::eNORMAL, LockRequest_T lockRequest=LockRequest_T::eNO_REQUEST) noexcept</div><div class="ttdoc">Atomic operation to toggle the zero indexed bit.</div><div class="ttdef"><b>Definition</b> PrimitiveType.h:257</div></div>
@@ -533,7 +533,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 17:27:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Oct 13 2026 18:14:28 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
