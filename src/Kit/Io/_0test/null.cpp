@@ -12,6 +12,8 @@
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/Trace.h"
+#include "Kit/System/Api.h"
+#include "Kit/System/ElapsedTime.h"
 #include "Kit/Io/LineWriter.h"
 #include "Kit/Io/LineReader.h"
 #include "Kit/Text/FString.h"
@@ -44,6 +46,36 @@ public:
     {
         m_count++;
         return fd.write( "Hello" );
+    }
+};
+
+/// Null stream that reports its outbound space
+class MySpaceStream : public Null
+{
+public:
+    Kit::Type::SSize_T m_lastNumBytes;
+    uint32_t           m_lastTimeoutMs;
+    unsigned           m_callCount;
+    bool               m_resultWaitForWriteSpace;
+    uint32_t           m_blockTimeMs;
+
+public:
+    MySpaceStream( bool hasSpace = true ) noexcept
+        : m_lastNumBytes( 0 )
+        , m_lastTimeoutMs( 0 )
+        , m_callCount( 0 )
+        , m_resultWaitForWriteSpace( hasSpace )
+        , m_blockTimeMs( 0 )
+    {
+    }
+
+    bool waitForWriteSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept override
+    {
+        m_lastNumBytes  = numBytes;
+        m_lastTimeoutMs = timeoutMs;
+        m_callCount++;
+        Kit::System::sleep( m_blockTimeMs );
+        return m_resultWaitForWriteSpace;
     }
 };
 } // end namespace
@@ -81,9 +113,15 @@ TEST_CASE( "null" )
     REQUIRE( fd.write( myBuffer, sizeof( myBuffer ) ) );
     REQUIRE( fd.write( myBuffer, sizeof( myBuffer ), bytesWritten ) );
     REQUIRE( (size_t) bytesWritten == sizeof( myBuffer ) );
+
+    // waitForWriteSpace() is not overridden -->always succeeds
+    REQUIRE( fd.waitForWriteSpace( 0, 0 ) == true );
+    REQUIRE( fd.waitForWriteSpace( 1000, 100 ) == true );
+
     fd.flush();
     fd.close();
     REQUIRE( fd.write( buffer ) == false ); // Fails because close() was called!
+    REQUIRE( fd.waitForWriteSpace( 1000, 100 ) == true );  // Default implementation is not close() aware
 
 
     // Ensure the diamond inheritance/Container Item stuff works
@@ -192,6 +230,65 @@ TEST_CASE( "TeeOutput" )
         many.flush();
         many.close();
         REQUIRE( many.write( "[Should fail!]" ) == false );
+    }
+
+    SECTION( "waitForWriteSpace" )
+    {
+        // No streams -->acts like the Null stream
+        TeeOutput none;
+        REQUIRE( none.waitForWriteSpace( 100, 50 ) == true );
+
+        MySpaceStream apple;
+        MySpaceStream cherry;
+        TeeOutput     many( apple, cherry );
+
+        REQUIRE( many.waitForWriteSpace( 32, 250 ) == true );
+        REQUIRE( apple.m_callCount == 1 );
+        REQUIRE( apple.m_lastNumBytes == 32 );
+        REQUIRE( apple.m_lastTimeoutMs <= 250 );
+        REQUIRE( cherry.m_callCount == 1 );
+        REQUIRE( cherry.m_lastNumBytes == 32 );
+        REQUIRE( cherry.m_lastTimeoutMs <= 250 );
+
+        // One stream with no space -->fails fast, i.e. the remaining streams are not called
+        apple.m_resultWaitForWriteSpace = false;
+        REQUIRE( many.waitForWriteSpace( 10, 0 ) == false );
+        REQUIRE( apple.m_callCount == 2 );
+        REQUIRE( cherry.m_callCount == 1 );
+
+        // A 'no space' result is not an error -->the stream stays in the active list
+        REQUIRE( many.firstFailed() == nullptr );
+        REQUIRE( many.remove( apple ) );
+        REQUIRE( many.waitForWriteSpace( 10, 0 ) == true );
+        REQUIRE( apple.m_callCount == 2 );
+        REQUIRE( cherry.m_callCount == 2 );
+
+        // A stream that does not override waitForWriteSpace() always has space
+        Null orange;
+        REQUIRE( many.add( orange ) );
+        REQUIRE( many.waitForWriteSpace( 10000, 0 ) == true );
+    }
+
+    SECTION( "waitForWriteSpace timeout is the total block time" )
+    {
+        MySpaceStream apple;
+        MySpaceStream cherry;
+        TeeOutput     many( apple, cherry );
+
+        // The first stream consumes most of the timeout -->the 2nd stream only gets what is left
+        apple.m_blockTimeMs = 100;
+        uint32_t startTime  = Kit::System::ElapsedTime::milliseconds();
+        REQUIRE( many.waitForWriteSpace( 8, 150 ) == true );
+        uint32_t elapsedMs = Kit::System::ElapsedTime::deltaMilliseconds( startTime );
+
+        REQUIRE( apple.m_lastTimeoutMs <= 150 );
+        REQUIRE( cherry.m_lastTimeoutMs <= 50 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "elapsed=%" PRIu32 ", appleTimeout=%" PRIu32 ", cherryTimeout=%" PRIu32, elapsedMs, apple.m_lastTimeoutMs, cherry.m_lastTimeoutMs );
+
+        // The first stream consumes ALL of the timeout -->the 2nd stream gets zero
+        apple.m_blockTimeMs = 200;
+        REQUIRE( many.waitForWriteSpace( 8, 150 ) == true );
+        REQUIRE( cherry.m_lastTimeoutMs == 0 );
     }
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );

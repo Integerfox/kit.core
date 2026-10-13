@@ -56,6 +56,9 @@ public:
     bool output( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept override;
 
     /// See Kit::Framing::IEncoder
+    bool waitForOutputSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept override;
+
+    /// See Kit::Framing::IEncoder
     bool endFrame( void ) noexcept override;
 
     /// See Kit::Framing::IEncoder

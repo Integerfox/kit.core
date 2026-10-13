@@ -87,6 +87,15 @@ public:
     /// See Kit::Io::IOutput
     void flush() noexcept override;
 
+    /** See Kit::Io::IOutput.  Returns true only when ALL of the active streams
+        have the requested space available.  The method fails fast, i.e. it
+        returns false as soon as one stream reports no space.
+
+        NOTE: 'timeoutMs' is the total block time for all of the streams, i.e.
+              each stream is only given the time remaining from 'timeoutMs'.
+     */
+    bool waitForWriteSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept override;
+
     /// See Kit::Io::IEos
     bool isEos() noexcept override;
 

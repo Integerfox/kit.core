@@ -54,6 +54,26 @@ public:
         return output( &srcByte, 1 );
     }
 
+    /** Blocks for at most 'timeoutMs' until the output destination can accept
+        'numBytes'. Default implementation returns true. 
+
+        NOTE: This method SHOULD always be called before startFrame() is called,
+              i.e. the intent of the method is to guarantee that there is enough
+              space for the upcoming frame data.
+
+        NOTE: 'numBytes' is a raw, non-encoded byte count.  The caller is 
+              responsible for accounting for extra encoding bytes when building
+              a frame.
+
+        NOTE: Defaults to returning true, i.e., streams that cannot report their 
+              outbound space behave exactly as they always have.
+     */
+    virtual bool waitForOutputSpace( Kit::Type::SSize_T numBytes,
+                                     uint32_t           timeoutMs ) noexcept
+    {
+        return true;
+    }
+
     /** Ends the frame.  The method will return false if there an error
         occurred while writing to the output destination; else true is
         returned.  If this method is called twice - without an intervening

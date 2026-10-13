@@ -9,6 +9,7 @@
 /** @file */
 
 #include "TeeOutput.h"
+#include "Kit/System/ElapsedTime.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -172,6 +173,37 @@ void TeeOutput::flush() noexcept
             m_streams[i]->flush();
         }
     }
+}
+
+bool TeeOutput::waitForWriteSpace( Kit::Type::SSize_T numBytes, uint32_t timeoutMs ) noexcept
+{
+    // Fail immediately if the TeeOutput is not opened
+    if ( !m_opened )
+    {
+        return false;
+    }
+
+    uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
+
+    for ( unsigned i = 0; i < MAX_STREAMS; ++i )
+    {
+        IOutput* stream = m_streams[i];
+        if ( stream == nullptr )
+        {
+            continue;
+        }
+
+        // Each stream only gets what is left of 'timeoutMs' -->the total block time is bounded
+        uint32_t elapsedMs   = Kit::System::ElapsedTime::deltaMilliseconds( startTime );
+        uint32_t remainingMs = elapsedMs >= timeoutMs ? 0 : timeoutMs - elapsedMs;
+        if ( !stream->waitForWriteSpace( numBytes, remainingMs ) )
+        {
+            // Note: A 'no space' result is NOT a stream error -->the stream is NOT moved to the failed list
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool TeeOutput::isEos()  noexcept

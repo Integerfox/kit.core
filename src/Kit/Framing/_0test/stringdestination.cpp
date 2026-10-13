@@ -66,5 +66,9 @@ TEST_CASE( "StringDestination" )
     REQUIRE( uut2.endOutput() == true );
     REQUIRE( strcmp( dst.getString(), "Meow" ) == 0 );
 
+    // waitForOutputSpace() is not overridden -->always succeeds
+    REQUIRE( uut.waitForOutputSpace( 1000, 100 ) == true );
+    REQUIRE( uut2.waitForOutputSpace( 0, 0 ) == true );
+
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
