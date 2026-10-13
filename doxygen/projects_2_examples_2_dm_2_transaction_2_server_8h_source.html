@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 391-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 396-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -156,14 +156,14 @@ $(function() {
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                                  data.<a class="code hl_variable" href="struct_examples_1_1_dm_1_1_transaction_1_1_foo___t.html#a57fb0ab3282ade8adfb924caf63195b6">isValid</a> ? <span class="stringliteral">&quot;true&quot;</span> : <span class="stringliteral">&quot;false&quot;</span> );</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="comment">// Update the MP with response AND make sure that a change notification</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="comment">// gets generated (i.e. the &#39;true&#39; argument).  Why is the &#39;force&#39;</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="comment">// gets generated (i.e. the &#39;eFORCE&#39; argument).  Why is the &#39;force&#39;</span></div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="comment">// required? It&#39;s because change notifications are only generated when</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            <span class="comment">// the MP value is changed.  It is theoretically possible that the</span></div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            <span class="comment">// server&#39;s random-number/valid-invalid state values do NOT change</span></div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <span class="comment">// the MP actual value.  Hence, the &#39;force&#39; argument is used to</span></div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="comment">// make sure that the Client gets notified of the response.</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            mpThatChanged.detach( <a class="code hl_variable" href="class_examples_1_1_dm_1_1_transaction_1_1_server.html#a181af0204bf94a14a513f1797eb84a02">m_obFoo</a> );  <span class="comment">// Detach so we don&#39;t get callback for WRITE</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            uint16_t seqNum = mpThatChanged.write( data, <span class="keyword">true</span> );</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            uint16_t seqNum = mpThatChanged.write( data, <a class="code hl_enumvalue" href="namespace_kit_1_1_dm.html#a760f8adf5e44f6edd3bacbbcc5d71490acfc1a05f158a0c0e219a7905bc0394a3">Kit::Dm::ChangeNotice_T::eFORCE</a> );</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            mpThatChanged.attach( <a class="code hl_variable" href="class_examples_1_1_dm_1_1_transaction_1_1_server.html#a181af0204bf94a14a513f1797eb84a02">m_obFoo</a>, seqNum );  <span class="comment">// Re-attach for the next request</span></div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        }</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    }</div>
@@ -209,6 +209,7 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_open_close_sync_html_a822101da15ec729a3baa905e4c04fa92"><div class="ttname"><a href="class_kit_1_1_itc_1_1_open_close_sync.html#a822101da15ec729a3baa905e4c04fa92">Kit::Itc::OpenCloseSync::OpenCloseSync</a></div><div class="ttdeci">OpenCloseSync(Kit::EventQueue::IQueue &amp;myEventQueue) noexcept</div><div class="ttdoc">Constructor.</div></div>
 <div class="ttc" id="aclass_kit_1_1_itc_1_1_request_message_html"><div class="ttname"><a href="class_kit_1_1_itc_1_1_request_message.html">Kit::Itc::RequestMessage</a></div><div class="ttdoc">This concrete template class represents a service request message to a particular server.</div><div class="ttdef"><b>Definition</b> RequestMessage.h:33</div></div>
 <div class="ttc" id="anamespace_examples_html"><div class="ttname"><a href="namespace_examples.html">Examples</a></div><div class="ttdoc">Root directory for the example applications.</div><div class="ttdef"><b>Definition</b> example.h:14</div></div>
+<div class="ttc" id="anamespace_kit_1_1_dm_html_a760f8adf5e44f6edd3bacbbcc5d71490acfc1a05f158a0c0e219a7905bc0394a3"><div class="ttname"><a href="namespace_kit_1_1_dm.html#a760f8adf5e44f6edd3bacbbcc5d71490acfc1a05f158a0c0e219a7905bc0394a3">Kit::Dm::ChangeNotice_T::eFORCE</a></div><div class="ttdeci">@ eFORCE</div><div class="ttdoc">Change notification(s) are ALWAYS triggered, i.e.</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">The Kit namespace is the root name space for the KIT C++ class library that is specifically target fo...</div></div>
 <div class="ttc" id="astruct_examples_1_1_dm_1_1_transaction_1_1_foo___t_html"><div class="ttname"><a href="struct_examples_1_1_dm_1_1_transaction_1_1_foo___t.html">Examples::Dm::Transaction::Foo_T</a></div><div class="ttdoc">Data structure used to exchange data between a Client and Server for the 'Foo' transaction.</div><div class="ttdef"><b>Definition</b> FooT.h:37</div></div>
 <div class="ttc" id="astruct_examples_1_1_dm_1_1_transaction_1_1_foo___t_html_a57fb0ab3282ade8adfb924caf63195b6"><div class="ttname"><a href="struct_examples_1_1_dm_1_1_transaction_1_1_foo___t.html#a57fb0ab3282ade8adfb924caf63195b6">Examples::Dm::Transaction::Foo_T::isValid</a></div><div class="ttdeci">bool isValid</div><div class="ttdoc">OUT: Indicates whether the 'randomNumber' value is valid (true) or not (false)</div><div class="ttdef"><b>Definition</b> FooT.h:41</div></div>
@@ -218,7 +219,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 12 2026 18:41:07 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Oct 13 2026 17:27:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

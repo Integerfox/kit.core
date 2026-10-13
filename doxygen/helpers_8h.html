@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 391-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 396-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -94,6 +94,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a89ddbd887d81a50448bd39b762b9de16" id="r_a89ddbd887d81a50448bd39b762b9de16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89ddbd887d81a50448bd39b762b9de16">minWaitOnStreamData</a> (<a class="el" href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a> &amp;stream, unsigned long minWait=10, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</td></tr>
 <tr class="memdesc:a89ddbd887d81a50448bd39b762b9de16"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function performs a blocking wait by monitoring an input stream for available data.  <br /></td></tr>
 <tr class="separator:a89ddbd887d81a50448bd39b762b9de16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e8d23790923e9570afda1bc3e43a882" id="r_a1e8d23790923e9570afda1bc3e43a882"><td class="memTemplParams" colspan="2">template&lt;typename PREDICATE &gt; </td></tr>
+<tr class="memitem:a1e8d23790923e9570afda1bc3e43a882"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1e8d23790923e9570afda1bc3e43a882">waitForCondition</a> (PREDICATE predicate, unsigned long minWait, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</td></tr>
+<tr class="memdesc:a1e8d23790923e9570afda1bc3e43a882"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function performs a blocking wait by polling a caller-supplied predicate, i.e,.  <br /></td></tr>
+<tr class="separator:a1e8d23790923e9570afda1bc3e43a882"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a087faea4131e8aa9783c7c00b51755d6" id="r_a087faea4131e8aa9783c7c00b51755d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a087faea4131e8aa9783c7c00b51755d6">waitThreadActive</a> (<a class="el" href="class_kit_1_1_system_1_1_thread.html">Kit::System::Thread</a> *threadPtr, uint32_t maxWaitMs=1000, uint32_t waitDelayMs=10)</td></tr>
 <tr class="memdesc:a087faea4131e8aa9783c7c00b51755d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method busy waits till the specified thread is active/running. Returns false if TIMED-OUT <br  />
   <br /></td></tr>
@@ -328,6 +332,58 @@ template&lt;class MPTYPE &gt; </div>
 
 </div>
 </div>
+<a id="a1e8d23790923e9570afda1bc3e43a882" name="a1e8d23790923e9570afda1bc3e43a882"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e8d23790923e9570afda1bc3e43a882">&#9670;&#160;</a></span>waitForCondition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename PREDICATE &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool waitForCondition </td>
+          <td>(</td>
+          <td class="paramtype">PREDICATE</td>          <td class="paramname"><span class="paramname"><em>predicate</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>minWait</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>maxWaitMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10000</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long</td>          <td class="paramname"><span class="paramname"><em>waitDelayMs</em><span class="paramdefsep"> = </span><span class="paramdefval">10</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function performs a blocking wait by polling a caller-supplied predicate, i.e,. </p>
+<p>generic wait-for-condition method. The method returns true as soon as the predicate returns true; else it polls every 'waitDelayMs' until the predicate is true or 'maxWaitMs' elapses, in which case it returns false.</p>
+<p>Example usage (C++11 lambda): </p><div class="fragment"><div class="line"><span class="comment">// Wait (up to 2 seconds) for the driver to consume the outbound buffer.</span></div>
+<div class="line"><span class="comment">// The initial 50msec delay gives the driver&#39;s thread time to start</span></div>
+<div class="line">REQUIRE( <a class="code hl_function" href="#a1e8d23790923e9570afda1bc3e43a882">waitForCondition</a>( [&amp;driver] { <span class="keywordflow">return</span> driver.getTxCount() &gt;= 10; }, 50, 2000 ) );</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Capture-by-value works as well, e.g. polling a free function</span></div>
+<div class="line"><span class="keywordtype">bool</span> result = <a class="code hl_function" href="#a1e8d23790923e9570afda1bc3e43a882">waitForCondition</a>( [] { <span class="keywordflow">return</span> isSystemReady(); }, 0 );</div>
+<div class="line">REQUIRE( result );</div>
+<div class="ttc" id="ahelpers_8h_html_a1e8d23790923e9570afda1bc3e43a882"><div class="ttname"><a href="#a1e8d23790923e9570afda1bc3e43a882">waitForCondition</a></div><div class="ttdeci">bool waitForCondition(PREDICATE predicate, unsigned long minWait, unsigned long maxWaitMs=10000, unsigned long waitDelayMs=10)</div><div class="ttdoc">This function performs a blocking wait by polling a caller-supplied predicate, i.e,...</div><div class="ttdef"><b>Definition</b> helpers.h:48</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
 <a id="a087faea4131e8aa9783c7c00b51755d6" name="a087faea4131e8aa9783c7c00b51755d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a087faea4131e8aa9783c7c00b51755d6">&#9670;&#160;</a></span>waitThreadActive()</h2>
 
@@ -404,7 +460,7 @@ template&lt;class MPTYPE &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 12 2026 18:41:07 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Oct 13 2026 17:27:01 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

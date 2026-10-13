@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-12 18:48:58</td>
+            <td class="headerValue">2026-10-13 17:33:08</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">84.6&nbsp;%</td>
@@ -116,22 +116,22 @@
 <span id="L54"><span class="lineNum">      54</span>                 :             :                       size_t    srcIndex  = 0,</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :                       uint16_t* seqNumPtr = 0 ) const noexcept</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             :     {</span>
-<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          18 :         return ArrayBase::readArrayElements( dstArrray, dstNumElements, srcIndex, seqNumPtr );</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          19 :         return ArrayBase::readArrayElements( dstArrray, dstNumElements, srcIndex, seqNumPtr );</span></span>
 <span id="L58"><span class="lineNum">      58</span>                 :             :     }</span>
 <span id="L59"><span class="lineNum">      59</span>                 :             : </span>
 <span id="L60"><span class="lineNum">      60</span>                 :             :     /// Type safe write. See Kit::Dm::IModelPoint</span>
-<span id="L61"><span class="lineNum">      61</span>                 :             :     inline uint16_t write( const ELEMTYPE*                     srcArray,</span>
-<span id="L62"><span class="lineNum">      62</span>                 :             :                            size_t                              srcNumElements,</span>
-<span id="L63"><span class="lineNum">      63</span>                 :             :                            size_t                              dstIndex                = 0,</span>
-<span id="L64"><span class="lineNum">      64</span>                 :             :                            bool                                forceChangeNotification = false,</span>
-<span id="L65"><span class="lineNum">      65</span>                 :             :                            Kit::Dm::IModelPoint::LockRequest_T lockRequest             = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :     inline uint16_t write( const ELEMTYPE* srcArray,</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :                            size_t          srcNumElements,</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :                            size_t          dstIndex    = 0,</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             :                            ChangeNotice_T  chgNotice   = ChangeNotice_T::eNORMAL,</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :                            LockRequest_T   lockRequest = LockRequest_T::eNO_REQUEST ) noexcept</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     {</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">           9 :         return ArrayBase::writeArrayElements( srcArray, srcNumElements, dstIndex, forceChangeNotification, lockRequest );</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">          13 :         return ArrayBase::writeArrayElements( srcArray, srcNumElements, dstIndex, chgNotice, lockRequest );</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     }</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : </span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : public:</span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     /// Updates the MP's data/valid-state from 'src'.</span>
-<span id="L72"><span class="lineNum">      72</span>                 :             :     inline uint16_t copyFrom( const MPTYPE&amp; src, Kit::Dm::IModelPoint::LockRequest_T lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :     inline uint16_t copyFrom( const MPTYPE&amp; src, LockRequest_T lockRequest = LockRequest_T::eNO_REQUEST ) noexcept</span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :     {</span>
 <span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">           2 :         return ArrayBase::copyArrayFrom( src, lockRequest );</span></span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     }</span>
@@ -196,7 +196,7 @@
 <span id="L134"><span class="lineNum">     134</span>                 :             : </span>
 <span id="L135"><span class="lineNum">     135</span>                 :             : public:</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :     /// See Kit::Dm::Point.</span>
-<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          10 :     bool fromJSON_( JsonVariant&amp; src, Kit::Dm::IModelPoint::LockRequest_T lockRequest, uint16_t&amp; retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override</span></span>
+<span id="L137"><span class="lineNum">     137</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          10 :     bool fromJSON_( JsonVariant&amp; src, LockRequest_T lockRequest, uint16_t&amp; retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override</span></span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :     {</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             :         </span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :         // Check for object</span>
@@ -255,7 +255,7 @@
 <span id="L193"><span class="lineNum">     193</span>                 :             :             {</span>
 <span id="L194"><span class="lineNum">     194</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          12 :                 tempArray[idx] = elems[idx + offset].as&lt;ELEMTYPE&gt;();</span></span>
 <span id="L195"><span class="lineNum">     195</span>                 :             :             }</span>
-<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">           2 :             retSequenceNumber  = ArrayBase::writeArrayElements( tempArray, idx, startIdx + offset, false, lockRequest );</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">           2 :             retSequenceNumber  = ArrayBase::writeArrayElements( tempArray, idx, startIdx + offset, ChangeNotice_T::eNORMAL, lockRequest );</span></span>
 <span id="L197"><span class="lineNum">     197</span>                 :<span class="tlaGNC">           2 :             offset            += idx;</span></span>
 <span id="L198"><span class="lineNum">     198</span>                 :<span class="tlaGNC">           2 :             numElements       -= idx;</span></span>
 <span id="L199"><span class="lineNum">     199</span>                 :             :         }</span>

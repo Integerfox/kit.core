@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-12 18:48:58</td>
+            <td class="headerValue">2026-10-13 17:33:08</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -117,20 +117,20 @@
 <span id="L53"><span class="lineNum">      53</span>                 :             :     /// Type safe read. See Kit::Dm::IModelPoint</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     inline bool read( ELEMTYPE&amp; dstData, uint16_t* seqNumPtr = nullptr ) const noexcept</span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     {</span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">         158 :         return Kit::Dm::ModelPointBase::readData( &amp;dstData, sizeof( ELEMTYPE ), seqNumPtr );</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">         160 :         return Kit::Dm::ModelPointBase::readData( &amp;dstData, sizeof( ELEMTYPE ), seqNumPtr );</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     }</span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : </span>
 <span id="L59"><span class="lineNum">      59</span>                 :             :     /// Type safe write. See Kit::Dm::IModelPoint</span>
-<span id="L60"><span class="lineNum">      60</span>                 :             :     inline uint16_t write( const ELEMTYPE&amp;                     newValue,</span>
-<span id="L61"><span class="lineNum">      61</span>                 :             :                            bool                                forceChgNotification = false,</span>
-<span id="L62"><span class="lineNum">      62</span>                 :             :                            Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :     inline uint16_t write( const ELEMTYPE&amp; newValue,</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :                            ChangeNotice_T  chgNotice   = ChangeNotice_T::eNORMAL,</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :                            LockRequest_T   lockRequest = LockRequest_T::eNO_REQUEST ) noexcept</span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :     {</span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">         126 :         return Kit::Dm::ModelPointBase::writeData( &amp;newValue, sizeof( ELEMTYPE ), forceChgNotification, lockRequest );</span></span>
+<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">         113 :         return Kit::Dm::ModelPointBase::writeData( &amp;newValue, sizeof( ELEMTYPE ), chgNotice, lockRequest );</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :     }</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : </span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied</span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     inline uint16_t copyFrom( const MPTYPE&amp; src,</span>
-<span id="L69"><span class="lineNum">      69</span>                 :             :                               LockRequest_T lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             :                               LockRequest_T lockRequest = LockRequest_T::eNO_REQUEST ) noexcept</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :     {</span>
 <span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">           6 :         return copyDataAndStateFrom( src, lockRequest );</span></span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :     }</span>

@@ -31,13 +31,13 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">92.3&nbsp;%</td>
-            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryHi">91.7&nbsp;%</td>
             <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">11</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-12 18:48:58</td>
+            <td class="headerValue">2026-10-13 17:33:08</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
@@ -144,11 +144,11 @@
 <span id="L82"><span class="lineNum">      82</span>                 :             :     /** Type safe write. See Kit::Dm::IModelPoint. Note: the underlying data is</span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :         a uintptr_t, but the read/write methods use void* for type safety.</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             :      */</span>
-<span id="L85"><span class="lineNum">      85</span>                 :             :     inline uint16_t write( void*                               newValue,</span>
-<span id="L86"><span class="lineNum">      86</span>                 :             :                            bool                                forceChgNotification = false,</span>
-<span id="L87"><span class="lineNum">      87</span>                 :             :                            Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept</span>
+<span id="L85"><span class="lineNum">      85</span>                 :             :     inline uint16_t write( void*          newValue,</span>
+<span id="L86"><span class="lineNum">      86</span>                 :             :                            ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,</span>
+<span id="L87"><span class="lineNum">      87</span>                 :             :                            LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept</span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :     {</span>
-<span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">           3 :         return Kit::Dm::ModelPointBase::writeData( &amp;newValue, sizeof( uintptr_t ), forceChgNotification, lockRequest );</span></span>
+<span id="L89"><span class="lineNum">      89</span>                 :             :         return Kit::Dm::ModelPointBase::writeData( &amp;newValue, sizeof( uintptr_t ), chgNotice, lockRequest );</span>
 <span id="L90"><span class="lineNum">      90</span>                 :             :     }</span>
 <span id="L91"><span class="lineNum">      91</span>                 :             : </span>
 <span id="L92"><span class="lineNum">      92</span>                 :             : public:</span>
@@ -187,7 +187,7 @@
 <span id="L125"><span class="lineNum">     125</span>                 :             :             uintptr_t val;</span>
 <span id="L126"><span class="lineNum">     126</span>                 :             :             if ( Kit::Text::StringTo::unsignedInt( val, src.as&lt;const char*&gt;(), 16 ) )</span>
 <span id="L127"><span class="lineNum">     127</span>                 :             :             {</span>
-<span id="L128"><span class="lineNum">     128</span>                 :<span class="tlaGNC">           1 :                 retSequenceNumber = PrimitiveType&lt;uintptr_t, Void&gt;::write( val, false, lockRequest );</span></span>
+<span id="L128"><span class="lineNum">     128</span>                 :<span class="tlaGNC">           1 :                 retSequenceNumber = PrimitiveType&lt;uintptr_t, Void&gt;::write( val, ChangeNotice_T::eNORMAL, lockRequest );</span></span>
 <span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">           1 :                 return true;</span></span>
 <span id="L130"><span class="lineNum">     130</span>                 :             :             }</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :         }</span>

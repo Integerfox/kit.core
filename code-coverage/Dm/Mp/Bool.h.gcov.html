@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-12 18:48:58</td>
+            <td class="headerValue">2026-10-13 17:33:08</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
@@ -139,7 +139,7 @@
 <span id="L77"><span class="lineNum">      77</span>                 :             :     {</span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :         if ( src.is&lt;bool&gt;() )</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             :         {</span>
-<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">           2 :             retSequenceNumber = write( src.as&lt;bool&gt;(), false, lockRequest );</span></span>
+<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">           2 :             retSequenceNumber = write( src.as&lt;bool&gt;(), ChangeNotice_T::eNORMAL, lockRequest );</span></span>
 <span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">           2 :             return true;</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             :         }</span>
 <span id="L83"><span class="lineNum">      83</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :         if ( errorMsg )</span></span>
