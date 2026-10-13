@@ -62,7 +62,7 @@ TEST_CASE( "RefCounter" )
     bool                             truncated;
     bool                             valid;
     uint32_t                         value;
-    mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
+    mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
 
     SECTION( "gets" )
     {
@@ -143,6 +143,48 @@ TEST_CASE( "RefCounter" )
         mp_apple_.setInvalid();
         mp_orange_.copyFrom( mp_apple_ );
         REQUIRE( mp_orange_.isNotValid() );
+    }
+
+    SECTION( "forceNotification" )
+    {
+        // Reset/increment/decrement that do NOT cross a zero boundary are 'silent' by default
+        uint16_t seqNum  = mp_apple_.reset( 10 );
+        uint16_t seqNum2 = mp_apple_.reset( 20 );
+        REQUIRE( seqNum2 == seqNum );
+        seqNum2 = mp_apple_.increment( 1 );
+        REQUIRE( seqNum2 == seqNum );
+        seqNum2 = mp_apple_.decrement( 1 );
+        REQUIRE( seqNum2 == seqNum );
+
+        // ...but eFORCE always triggers a change notification
+        seqNum2 = mp_apple_.reset( 20, ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum + 1 );
+        seqNum = mp_apple_.increment( 1, ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum == seqNum2 + 1 );
+        seqNum2 = mp_apple_.decrement( 1, ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum + 1 );
+
+        // eFORCE does NOT override the locked state
+        mp_apple_.applyLock();
+        seqNum  = mp_apple_.getSequenceNumber();
+        seqNum2 = mp_apple_.reset( 99, ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum );
+        seqNum2 = mp_apple_.increment( 99, ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum );
+        seqNum2 = mp_apple_.decrement( 99, ChangeNotice_T::eFORCE );
+        REQUIRE( seqNum2 == seqNum );
+        valid = mp_apple_.read( value );
+        REQUIRE( valid );
+        REQUIRE( value == 20 );
+
+        // ...but an explicit lock request still writes through (and notifies)
+        seqNum2 = mp_apple_.reset( 99, ChangeNotice_T::eFORCE, LockRequest_T::eLOCK );
+        REQUIRE( seqNum2 == seqNum + 1 );
+        valid = mp_apple_.read( value );
+        REQUIRE( valid );
+        REQUIRE( value == 99 );
+        REQUIRE( mp_apple_.isLocked() );
+        mp_apple_.removeLock();
     }
 
     SECTION( "observer" )

@@ -21,10 +21,10 @@ namespace Dm {
 namespace Mp {
 
 ///////////////////////////////////////////////////////////////////////////////
-void RefCounter::updateAndCheckForChangeNotification( uint32_t newValue )
+void RefCounter::updateAndCheckForChangeNotification( uint32_t newValue, ChangeNotice_T chgNotice )
 {
     // Generate change notices on transition to valid OR zero-to-not-zero OR not-zero-to-zero
-    if ( !m_valid || ( m_data == 0 && newValue != 0 ) || ( newValue == 0 && m_data != 0 ) )
+    if ( !m_valid || ( m_data == 0 && newValue != 0 ) || ( newValue == 0 && m_data != 0 ) || chgNotice == ChangeNotice_T::eFORCE )
     {
         processDataUpdated();
     }
@@ -32,7 +32,7 @@ void RefCounter::updateAndCheckForChangeNotification( uint32_t newValue )
 }
 
 
-uint16_t RefCounter::increment( uint32_t incrementAmount, bool forceChangeNotification, LockRequest_T lockRequest ) noexcept
+uint16_t RefCounter::increment( uint32_t incrementAmount, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
     if ( testAndUpdateLock( lockRequest ) )
@@ -45,12 +45,12 @@ uint16_t RefCounter::increment( uint32_t incrementAmount, bool forceChangeNotifi
         }
 
         // Generate change notices on transition to valid OR zero-to-not-zero
-        updateAndCheckForChangeNotification( newValue );
+        updateAndCheckForChangeNotification( newValue, chgNotice );
     }
     return m_seqNum;
 }
 
-uint16_t RefCounter::decrement( uint32_t decrementAmount, bool forceChangeNotification, LockRequest_T lockRequest ) noexcept
+uint16_t RefCounter::decrement( uint32_t decrementAmount, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
     if ( testAndUpdateLock( lockRequest ) )
@@ -63,18 +63,18 @@ uint16_t RefCounter::decrement( uint32_t decrementAmount, bool forceChangeNotifi
         }
 
         // Generate change notices on transition to valid OR zero-to-not-zero
-        updateAndCheckForChangeNotification( newValue );
+        updateAndCheckForChangeNotification( newValue, chgNotice );
     }
     return m_seqNum;
 }
 
-uint16_t RefCounter::reset( uint32_t newValue, bool forceChangeNotification, LockRequest_T lockRequest ) noexcept
+uint16_t RefCounter::reset( uint32_t newValue, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
-    if ( forceChangeNotification || testAndUpdateLock( lockRequest ) )
+    if ( testAndUpdateLock( lockRequest ) )
     {
         // Generate change notices on transition to valid OR zero-to-not-zero
-        updateAndCheckForChangeNotification( newValue );
+        updateAndCheckForChangeNotification( newValue, chgNotice );
     }
     return m_seqNum;
 }
@@ -91,7 +91,7 @@ bool RefCounter::fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_
     // Parse as a numeric -->i.e. 'set a explicit value'
     if ( src.is<uint32_t>() )
     {
-        retSequenceNumber = reset( src.as<uint32_t>(), false, lockRequest );
+        retSequenceNumber = reset( src.as<uint32_t>(), ChangeNotice_T::eNORMAL, lockRequest );
         return true;
     }
 
@@ -118,7 +118,7 @@ bool RefCounter::fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_
             }
             return false;
         }
-        retSequenceNumber = increment( (uint32_t)numValue, false, lockRequest );
+        retSequenceNumber = increment( (uint32_t)numValue, ChangeNotice_T::eNORMAL, lockRequest );
         return true;
     }
 
@@ -134,7 +134,7 @@ bool RefCounter::fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_
             }
             return false;
         }
-        retSequenceNumber = decrement( (uint32_t)numValue, false, lockRequest );
+        retSequenceNumber = decrement( (uint32_t)numValue, ChangeNotice_T::eNORMAL, lockRequest );
         return true;
     }
 

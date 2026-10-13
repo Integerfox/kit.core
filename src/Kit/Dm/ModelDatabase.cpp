@@ -107,17 +107,17 @@ bool ModelDatabase::fromJSON( const char* src, Kit::Text::IString* errorMsg, IMo
     }
 
     // Attempt to parse the key/value pairs of interest
-    JsonVariant                validElem  = ModelDatabase::g_doc_["valid"];
-    JsonVariant                lockedElem = ModelDatabase::g_doc_["locked"];
-    JsonVariant                valElem    = ModelDatabase::g_doc_["val"];
-    uint16_t                   seqnum     = 0;
-    IModelPoint::LockRequest_T lockAction = IModelPoint::eNO_REQUEST;
-    bool                       parsed     = false;
+    JsonVariant   validElem  = ModelDatabase::g_doc_["valid"];
+    JsonVariant   lockedElem = ModelDatabase::g_doc_["locked"];
+    JsonVariant   valElem    = ModelDatabase::g_doc_["val"];
+    uint16_t      seqnum     = 0;
+    LockRequest_T lockAction = LockRequest_T::eNO_REQUEST;
+    bool          parsed     = false;
 
     // Lock/Unlock the MP
     if ( !lockedElem.isNull() )
     {
-        lockAction = lockedElem.as<bool>() ? IModelPoint::eLOCK : IModelPoint::eUNLOCK;
+        lockAction = lockedElem.as<bool>() ? LockRequest_T::eLOCK : LockRequest_T::eUNLOCK;
         seqnum     = mp->setLockState( lockAction );  // Note: This handles the use case of locking/unlock when the 'val' key/pair was not specified
         parsed     = true;
     }
@@ -125,7 +125,7 @@ bool ModelDatabase::fromJSON( const char* src, Kit::Text::IString* errorMsg, IMo
     // Request to invalidate the MP
     if ( !validElem.isNull() && validElem.as<bool>() == false )
     {
-        seqnum = mp->setInvalid( lockAction );
+        seqnum = mp->setInvalid( ChangeNotice_T::eNORMAL, lockAction );
         parsed = true;
     }
 

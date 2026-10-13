@@ -57,16 +57,16 @@ public:
     }
 
     /// Type safe write. See Kit::Dm::IModelPoint
-    inline uint16_t write( const ELEMTYPE&                     newValue,
-                           bool                                forceChgNotification = false,
-                           Kit::Dm::IModelPoint::LockRequest_T lockRequest          = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+    inline uint16_t write( const ELEMTYPE& newValue,
+                           ChangeNotice_T  chgNotice   = ChangeNotice_T::eNORMAL,
+                           LockRequest_T   lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
-        return Kit::Dm::ModelPointBase::writeData( &newValue, sizeof( ELEMTYPE ), forceChgNotification, lockRequest );
+        return Kit::Dm::ModelPointBase::writeData( &newValue, sizeof( ELEMTYPE ), chgNotice, lockRequest );
     }
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
     inline uint16_t copyFrom( const MPTYPE& src,
-                              LockRequest_T lockRequest = Kit::Dm::IModelPoint::eNO_REQUEST ) noexcept
+                              LockRequest_T lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
         return copyDataAndStateFrom( src, lockRequest );
     }

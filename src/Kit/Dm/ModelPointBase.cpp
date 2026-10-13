@@ -84,12 +84,12 @@ bool ModelPointBase::isNotValid( uint16_t* seqNumPtr ) const noexcept
     return !result;
 }
 
-uint16_t ModelPointBase::setInvalid( bool forceChgNotification, LockRequest_T lockRequest ) noexcept
+uint16_t ModelPointBase::setInvalid( ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
     if ( testAndUpdateLock( lockRequest ) )
     {
-        if ( m_valid || forceChgNotification )
+        if ( m_valid || chgNotice == ChangeNotice_T::eFORCE )
         {
             m_valid = false;
             hookSetInvalid();
@@ -124,12 +124,12 @@ bool ModelPointBase::readData( void* dstData, size_t dstSize, uint16_t* seqNumPt
     return valid;
 }
 
-uint16_t ModelPointBase::writeData( const void* srcData, size_t srcSize, bool forceChgNotification, LockRequest_T lockRequest ) noexcept
+uint16_t ModelPointBase::writeData_( const void* srcData, size_t srcSize, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
     if ( srcData && testAndUpdateLock( lockRequest ) )
     {
-        if ( !m_valid || forceChgNotification || isDataEqual_( srcData ) == false )
+        if ( !m_valid || chgNotice == ChangeNotice_T::eFORCE || isDataEqual_( srcData, srcSize ) == false )
         {
             copyDataFrom_( srcData, srcSize );
             processDataUpdated();
@@ -140,14 +140,14 @@ uint16_t ModelPointBase::writeData( const void* srcData, size_t srcSize, bool fo
 
 uint16_t ModelPointBase::copyDataAndStateFrom( const ModelPointBase& src, LockRequest_T lockRequest ) noexcept
 {
+    Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
+
     // Handle the src.invalid case
     if ( src.isNotValid() )
     {
         return setInvalid();
     }
-
-    Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
-    return writeData( src.m_dataPtr, src.m_dataSize, false, lockRequest );
+    return writeData( src.m_dataPtr, src.m_dataSize, ChangeNotice_T::eNORMAL, lockRequest );
 }
 
 uint16_t ModelPointBase::touch() noexcept
@@ -169,9 +169,11 @@ void ModelPointBase::copyDataFrom_( const void* srcData, size_t srcSize ) noexce
     memcpy( m_dataPtr, srcData, srcSize );
 }
 
-bool ModelPointBase::isDataEqual_( const void* otherData ) const noexcept
+bool ModelPointBase::isDataEqual_( const void* otherData, size_t otherSize ) const noexcept
 {
-    return memcmp( m_dataPtr, otherData, m_dataSize ) == 0;
+    // Only compare what will actually be copied by copyDataFrom_()
+    size_t len = otherSize < m_dataSize ? otherSize : m_dataSize;
+    return memcmp( m_dataPtr, otherData, len ) == 0;
 }
 
 void* ModelPointBase::getImportExportDataPointer_() noexcept
@@ -210,11 +212,11 @@ bool ModelPointBase::toJSON( char* dst, size_t dstSize, bool& truncated, bool ve
 uint16_t ModelPointBase::setLockState( LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
-    if ( lockRequest == eLOCK )
+    if ( lockRequest == LockRequest_T::eLOCK )
     {
         m_locked = true;
     }
-    else if ( lockRequest == eUNLOCK )
+    else if ( lockRequest == LockRequest_T::eUNLOCK )
     {
         m_locked = false;
     }
@@ -538,12 +540,12 @@ void ModelPointBase::transitionToNotifyPending( IObserver& observer ) noexcept
 bool ModelPointBase::testAndUpdateLock( LockRequest_T lockRequest ) noexcept
 {
     bool result = false;
-    if ( lockRequest == eUNLOCK )
+    if ( lockRequest == LockRequest_T::eUNLOCK )
     {
         m_locked = false;
         result   = true;
     }
-    else if ( lockRequest == eLOCK )
+    else if ( lockRequest == LockRequest_T::eLOCK )
     {
         m_locked = true;
         result   = true;

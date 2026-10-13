@@ -11,6 +11,8 @@
 
 #include "ArrayBase.h"
 #include "Kit/System/Assert.h"
+#include "Kit/System/Mutex.h"
+#include "Kit/System/FatalError.h"
 #include <string.h>
 
 //------------------------------------------------------------------------------
@@ -67,25 +69,27 @@ bool ArrayBase::readArrayElements( void*     dstData,
     return readData( &dst, sizeof( dst ), seqNumPtr );
 }
 
-uint16_t ArrayBase::writeArrayElements( const void*                         srcData,
-                                        size_t                              srcNumElements,
-                                        size_t                              dstIndex,
-                                        bool                                forceChangeNotification,
-                                        Kit::Dm::IModelPoint::LockRequest_T lockRequest ) noexcept
+uint16_t ArrayBase::writeArrayElements( const void*    srcData,
+                                        size_t         srcNumElements,
+                                        size_t         dstIndex,
+                                        ChangeNotice_T chgNotice,
+                                        LockRequest_T  lockRequest ) noexcept
 {
     MetaData_T src = { (uint8_t*)srcData, srcNumElements, dstIndex };
-    return writeData( &src, sizeof( src ), forceChangeNotification, lockRequest );
+    return writeData( &src, sizeof( src ), chgNotice, lockRequest );
 }
 
 uint16_t ArrayBase::copyArrayFrom( const ArrayBase& src, LockRequest_T lockRequest ) noexcept
 {
+    Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
+
     // Handle the src.invalid case
     if ( src.isNotValid() )
     {
         return setInvalid();
     }
 
-    return ArrayBase::writeArrayElements( src.m_dataPtr, src.m_numElements, 0, false, lockRequest );
+    return ArrayBase::writeArrayElements( src.m_dataPtr, src.m_numElements, 0, ChangeNotice_T::eNORMAL, lockRequest );
 }
 
 /////////////////////////////////////////////////////
@@ -121,9 +125,19 @@ void ArrayBase::copyDataFrom_( const void* srcData, size_t srcSize ) noexcept
     memcpy( &( arrayStartPtr[srcInfo->elemIndex * m_elementSize] ), srcInfo->elemPtr, srcInfo->numElements * m_elementSize );
 }
 
-bool ArrayBase::isDataEqual_( const void* otherData ) const noexcept
+bool ArrayBase::isDataEqual_( const void* otherData, size_t otherSize ) const noexcept
 {
+    KIT_SYSTEM_ASSERT( otherSize == sizeof( MetaData_T ) );
     MetaData_T* otherInfo = (MetaData_T*)otherData;
+
+    if ( otherSize != sizeof( MetaData_T ) )
+    {
+        Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,
+                                       "Size mismatch in ArrayBase::isDataEqual_ (this=%u, other=%u)",
+                                       (unsigned)sizeof( MetaData_T ),
+                                       (unsigned)otherSize );
+        return false;  // Not needed since FatalError will terminate the program, but is useful for unit testing
+    }
 
     // Make sure we don't compare past the m_data storage
     if ( otherInfo->elemIndex + otherInfo->numElements > m_numElements )

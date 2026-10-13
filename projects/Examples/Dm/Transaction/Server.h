@@ -106,14 +106,14 @@ protected:
                                   data.isValid ? "true" : "false" );
 
             // Update the MP with response AND make sure that a change notification
-            // gets generated (i.e. the 'true' argument).  Why is the 'force'
+            // gets generated (i.e. the 'eFORCE' argument).  Why is the 'force'
             // required? It's because change notifications are only generated when
             // the MP value is changed.  It is theoretically possible that the
             // server's random-number/valid-invalid state values do NOT change
             // the MP actual value.  Hence, the 'force' argument is used to
             // make sure that the Client gets notified of the response.
             mpThatChanged.detach( m_obFoo );  // Detach so we don't get callback for WRITE
-            uint16_t seqNum = mpThatChanged.write( data, true );
+            uint16_t seqNum = mpThatChanged.write( data, Kit::Dm::ChangeNotice_T::eFORCE );
             mpThatChanged.attach( m_obFoo, seqNum );  // Re-attach for the next request
         }
     }

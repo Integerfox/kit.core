@@ -92,7 +92,7 @@ TEST_CASE( "Enum" )
     bool                             truncated;
     bool                             valid;
     MyEnum                           value = MyEnum::eRED;
-    mp_apple_.setInvalid( false, IModelPoint::eUNLOCK );
+    mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
 
     SECTION( "gets" )
     {
