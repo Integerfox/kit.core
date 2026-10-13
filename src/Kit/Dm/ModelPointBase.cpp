@@ -124,7 +124,7 @@ bool ModelPointBase::readData( void* dstData, size_t dstSize, uint16_t* seqNumPt
     return valid;
 }
 
-uint16_t ModelPointBase::writeData_( const void* srcData, size_t srcSize, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
+uint16_t ModelPointBase::writeData( const void* srcData, size_t srcSize, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept
 {
     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );
     if ( srcData && testAndUpdateLock( lockRequest ) )

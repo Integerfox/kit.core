@@ -125,10 +125,10 @@ protected:
                    uint16_t* seqNumPtr = 0 ) const noexcept override;
 
     /// See Kit::Dm::IModelPoint
-    uint16_t writeData_( const void*    srcData,
-                         size_t         srcSize,
-                         ChangeNotice_T chgNotice,
-                         LockRequest_T  lockRequest ) noexcept override;
+    uint16_t writeData( const void*    srcData,
+                        size_t         srcSize,
+                        ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
+                        LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept override;
 
     /// Updates the MP with the valid-state/data from 'src'. Note: the src.lock state is NOT copied
     virtual uint16_t copyDataAndStateFrom( const ModelPointBase& src, LockRequest_T lockRequest ) noexcept;
