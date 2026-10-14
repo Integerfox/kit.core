@@ -37,6 +37,7 @@ doskey ratt=%NQBP_XPKGS_ROOT%\ratt\bin\ratt.py $*
 doskey fixx=%NQBP_BIN%\other\fixx.py $*
 doskey map=%NQBP_PKG_ROOT%\scripts\kit\map.py $*
 doskey genfsm2=%NQBP_BIN%\other\genfsm2.py $*
+doskey genfsm2-diagrams=%NQBP_BIN%\other\genfsm2_diagrams.py $*
 doskey bmsvc=%NQBP_BIN%\other\bob.py -v --p2 windows msvc $*
 doskey bclang=%NQBP_BIN%\other\bob.py -v --p2 windows clang-host $*
 doskey tnat=%NQBP_BIN%\other\chuck.py -v --dir windows --match a.exe --m2 a.py --m3 aa.exe --m4 aa.py $*

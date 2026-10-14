@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """PlantUML -> SVG generator for StateSmith FSM diagrams.
 
-Converts every `.puml`/`.plantuml` file in a directory to an SVG that keeps the
-source file's name (e.g. `Fsm.puml` -> `Fsm.svg`), so StateSmith FSM diagrams
-keep their filename. A white background is injected so the diagram stays readable
-on dark GitHub / VS Code themes. Only sources whose `.svg` is missing or older
-than the source are rebuilt unless `--force` is given.
+Converts every `.puml`/`.plantuml` file in a directory to an SVG. PlantUML names
+each SVG after the diagram's `@startuml <name>` directive, falling back to the
+source file's stem when the directive has no name - so `@startuml Fsm` inside
+`Fsm.puml` yields `Fsm.svg`. A white background is injected so the diagram stays
+readable on dark GitHub / VS Code themes. Only sources whose SVG(s) are missing
+or older than the source are rebuilt unless `--force` is given.
 
 `genfsm2.py` invokes this (via `generate(<dir>)`) after generating FSM code so
 the diagram's SVG is kept in sync; it can also be run directly on one or more
@@ -25,6 +26,10 @@ import tempfile
 from pathlib import Path
 
 WHITE = "#ffffff"
+
+# `@startuml`, optionally followed by the diagram name that PlantUML uses to name
+# its output file
+STARTUML = re.compile(r"^\s*@startuml(?:[ \t]+(\S+))?", re.MULTILINE)
 
 
 def find_plantuml():
@@ -70,17 +75,39 @@ def add_white_background(svg: Path) -> None:
     svg.write_text(text[:at] + rect + text[at:], encoding="utf-8")
 
 
-def _stale(src: Path, target: Path, force: bool) -> bool:
-    """True when `target` must be (re)generated: forced, missing, or older than src."""
-    return force or not target.exists() or src.stat().st_mtime > target.stat().st_mtime
+def _svg_targets(src: Path) -> list:
+    """The SVG file(s) PlantUML will emit for `src`. Must match PlantUML's naming
+    rule, otherwise the staleness check below never finds them and the source is
+    needlessly re-rendered on every run."""
+    names = STARTUML.findall(src.read_text(encoding="utf-8", errors="replace"))
+    if not names:
+        return [src.with_suffix(".svg")]
+    targets = []
+    for index, name in enumerate(names):
+        if name:
+            targets.append(src.with_name(name + ".svg"))
+        elif index == 0:
+            targets.append(src.with_suffix(".svg"))
+        else:
+            targets.append(src.with_name(f"{src.stem}_{index:03d}.svg"))
+    return targets
+
+
+def _stale(src: Path, force: bool) -> bool:
+    """True when `src` must be (re)rendered: forced, or any target SVG is missing
+    or older than the source."""
+    if force:
+        return True
+    mtime = src.stat().st_mtime
+    return any(not t.exists() or mtime > t.stat().st_mtime for t in _svg_targets(src))
 
 
 def generate(directory, force: bool = False) -> int:
-    """Convert stale .puml/.plantuml sources in `directory` to SVG (same stem)."""
+    """Render the stale .puml/.plantuml sources in `directory` to SVG."""
     directory = Path(directory).resolve()
     sources = [
         s for s in sorted(set(directory.glob("*.puml")) | set(directory.glob("*.plantuml")))
-        if _stale(s, directory / (s.stem + ".svg"), force)
+        if _stale(s, force)
     ]
     if not sources:
         return 0
@@ -106,33 +133,27 @@ def generate(directory, force: bool = False) -> int:
     return 0
 
 
-def cli(argv, directory=None) -> int:
-    """Command-line entry. Parses --force/--help (and, when `directory` is None,
-    one or more DIR arguments). Per-directory wrappers pass their own directory."""
+def main(argv) -> int:
     parser = argparse.ArgumentParser(
-        description=("Convert PlantUML (.puml/.plantuml) sources to SVG, keeping the "
-                     "source filename. Only sources whose .svg is missing or older "
-                     "than the source are rebuilt unless --force is given."),
+        description=("Convert PlantUML (.puml/.plantuml) sources to SVG. Each SVG is "
+                     "named after the diagram's '@startuml <name>' directive, or the "
+                     "source file's stem when the directive has no name. Only sources "
+                     "whose SVG is missing or older than the source are rebuilt unless "
+                     "--force is given."),
     )
     parser.add_argument(
         "-f", "--force", action="store_true",
         help="regenerate every SVG, even if it is already up to date",
     )
-    if directory is None:
-        parser.add_argument(
-            "dirs", nargs="+", metavar="DIR",
-            help="directory containing .puml/.plantuml sources to convert",
-        )
+    parser.add_argument(
+        "dirs", nargs="+", metavar="DIR",
+        help="directory containing .puml/.plantuml sources to convert",
+    )
     args = parser.parse_args(argv[1:])
-    directories = [Path(directory)] if directory is not None else [Path(d) for d in args.dirs]
     rc = 0
-    for d in directories:
-        rc |= generate(d, args.force)
+    for d in args.dirs:
+        rc |= generate(Path(d), args.force)
     return rc
-
-
-def main(argv) -> int:
-    return cli(argv)
 
 
 if __name__ == "__main__":
