@@ -42,7 +42,7 @@ namespace Container {
 
 class AvlTree_
 {
-private:
+protected:
     /// Helper class so that the root node can behave like all the other nodes
     class AvlRoot : public MapItem, public Key
     {
@@ -117,7 +117,7 @@ public:
     MapItem* previous( MapItem& current ) const;
 
 
-private: // Helpers
+protected: // Helpers
     ///
     static bool grewLeft( MapItem* nodePtr );
     ///

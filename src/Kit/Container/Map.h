@@ -34,7 +34,7 @@ namespace Container {
 template <class ITEM>
 class Map
 {
-private:
+protected:
     /// Delegate operations to the generic tree implementation
     AvlTree_ m_tree;
 

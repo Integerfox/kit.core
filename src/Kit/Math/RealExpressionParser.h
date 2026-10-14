@@ -187,6 +187,7 @@ protected:
         return std::is_same<T, float>::value ? (T)KIT_MATH_REAL_FLOAT_EPSILON : (T)KIT_MATH_REAL_DOUBLE_EPSILON;
     }
 
+    /// Applies 'op' to 'v1' and 'v2' and stores the answer in 'result'. Returns false if the operation is not valid (e.g. divide by zero)
     bool calculate( T& result, T v1, T v2, const Operator& op ) const
     {
         bool success = true;
@@ -328,6 +329,7 @@ protected:
         return success;
     }
 
+    /// Parses the real number at the current expression index and advances the index past it
     T parseReal()
     {
         char* endPtr = 0;
@@ -476,7 +478,7 @@ protected:
         return false;
     }
 
-private:
+protected:
     /** The current operator and its left value
         are pushed onto the stack if the operator on
         top of the stack has lower precedence.

@@ -77,7 +77,7 @@ public:
      */
     class ScopeLock
     {
-    private:
+    protected:
         /// Reference to the mutex to be used for synchronization
         Mutex& m_mutex;
 
