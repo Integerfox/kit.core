@@ -40,6 +40,10 @@ Options:
                          with the --dir option when restricting the directory
                          search.                    
     --loop N             Repeat the test 'N' times.  [default: 1] 
+    --timeout SEC        Maximum time, in seconds, that an individual test is 
+                         allowed to run.  A test that exceeds 'SEC' is killed 
+                         and chuck fails with a TIMEOUT error.  Specify 0 to 
+                         wait forever.  [Default: 300]
     -t,--turbo           Runs the tests in parallel
     --script-prefix PRE  Prefix for all script calls (typically only needed in a
                          a CI environment, e.g. --scrip-prefix python.exe)
@@ -79,12 +83,14 @@ CHUCK_VERSION = "1.0"
 #
 def execute_test( target, ppath, args, arg_string, script_prefix ):
     utils.push_dir( os.path.split(target)[0] )
-    reldir = target.replace(ppath,'')[1:]
-    exe    = os.path.basename(target)
-    cmd    = f"{script_prefix} .{os.path.sep}{exe} {arg_string}"
+    reldir  = target.replace(ppath,'')[1:]
+    exe     = os.path.basename(target)
+    cmd     = f"{script_prefix} .{os.path.sep}{exe} {arg_string}"
+    timeout = int(args['--timeout'])
+    timeout = timeout if timeout > 0 else None   # 0 --> wait forever
     for n in range( int(args['--loop']) ):
         print( "= EXECUTING (#{}): {} {}".format( n+1, reldir, arg_string ) )
-        result = utils.run_shell2( cmd, args['-v'], "** ERROR: Test failed (#{} {} {} )**".format(n+1, reldir, arg_string) )
+        result = utils.run_shell2( cmd, args['-v'], "** ERROR: Test failed (#{} {} {} )**".format(n+1, reldir, arg_string), timeout )
     utils.pop_dir
 
 #------------------------------------------------------------------------------
