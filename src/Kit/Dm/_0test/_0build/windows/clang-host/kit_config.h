@@ -10,7 +10,6 @@
  *----------------------------------------------------------------------------*/
 /** @file Project/build specific 'Options' (see LConfig Pattern) */
 
-#define USE_KIT_SYSTEM_TRACE
 #define USE_KIT_SYSTEM_ASSERT
 
 #endif
