@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="582px" preserveAspectRatio="none" style="width:581px;height:582px;" version="1.1" viewBox="0 0 581 582" width="581px" zoomAndPan="magnify"><rect x="0" y="0" width="581" height="582" fill="#ffffff"/><defs><filter height="300%" id="fwvu5zbwdxyrv" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="152.5" cy="28" fill="#000000" filter="url(#fwvu5zbwdxyrv)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" filter="url(#fwvu5zbwdxyrv)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="55" x="125" y="151"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="130" y="175.8467">State1</text><polygon fill="#FEFECE" filter="url(#fwvu5zbwdxyrv)" points="272.5,159,284.5,171,272.5,183,260.5,171,272.5,159" style="stroke: #A80036; stroke-width: 1.5;"/><polygon fill="#FEFECE" filter="url(#fwvu5zbwdxyrv)" points="320.5,309,332.5,321,320.5,333,308.5,321,320.5,309" style="stroke: #A80036; stroke-width: 1.5;"/><rect fill="#FEFECE" filter="url(#fwvu5zbwdxyrv)" height="92.1719" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="108" x="461.5" y="125"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="461.5" x2="569.5" y1="151.2969" y2="151.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="493" y="142.9951">State2</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="54" x="466.5" y="167.4355">enter / {</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="62" x="466.5" y="181.4043">ActionH();</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="69" x="466.5" y="195.373">ActionB();}</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="88" x="466.5" y="209.3418">do / ActionF();</text><rect fill="#FEFECE" filter="url(#fwvu5zbwdxyrv)" height="40" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="79" x="476" y="8"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="69" x="481" y="32.8467">TERMINAL</text><rect fill="#FEFECE" filter="url(#fwvu5zbwdxyrv)" height="161.2969" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="351" x="6" y="410"/><rect fill="#FFFFFF" height="129" rx="12.5" ry="12.5" style="stroke: #FFFFFF; stroke-width: 1.0;" width="345" x="9" y="439.2969"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="6" x2="357" y1="436.2969" y2="436.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="45" x="159" y="427.9951">State3</text><ellipse cx="81" cy="546.2969" fill="#000000" filter="url(#fwvu5zbwdxyrv)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" filter="url(#fwvu5zbwdxyrv)" height="50.2656" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="128" x="17" y="449.2969"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="17" x2="145" y1="475.5938" y2="475.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="54" x="54" y="467.292">State3A</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="108" x="22" y="491.7324">enter / ActionD();</text><rect fill="#FEFECE" filter="url(#fwvu5zbwdxyrv)" height="50.2656" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="115" x="208.5" y="449.2969"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="208.5" x2="323.5" y1="475.5938" y2="475.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="55" x="238.5" y="467.292">State3B</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="95" x="213.5" y="491.7324">exit / ActionE();</text><!--MD5=[ece6d3c66d78a5cfe3fbf3ff77c41bee]
+reverse link State3A to *start*State3--><path d="M81,504.5269 C81,515.8669 81,528.0469 81,536.1069 " fill="none" id="State3A&lt;-*start*State3" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="81,499.3869,77,508.3869,81,504.3869,85,508.3869,81,499.3869" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[7a1c6b6120ca9c54db20febd9c275906]
+link State3A to State3B--><path d="M145.18,474.2969 C163.98,474.2969 184.49,474.2969 203.2,474.2969 " fill="none" id="State3A-&gt;State3B" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="208.42,474.2969,199.42,470.2969,203.42,474.2969,199.42,478.2969,208.42,474.2969" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="44" x="154.75" y="467.3638">Event1</text><!--MD5=[97906d4707a5e431f6818284cb4170f6]
+reverse link State3A to State3B--><path d="M150.25,493.7869 C151.42,493.9669 152.59,494.1369 153.75,494.2969 C174.01,497.0269 179.52,497.2869 199.75,494.2969 C202.6,493.8769 205.5,493.3569 208.42,492.7669 " fill="none" id="State3A&lt;-State3B" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="145.07,492.9169,153.2849,498.3497,150.0012,493.7435,154.6074,490.4598,145.07,492.9169" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="44" x="154.75" y="490.3638">Event2</text><!--MD5=[60533a5dc91355c93bf187ba4549d745]
+link *start to State1--><path d="M152.5,38.25 C152.5,59.8 152.5,113.9 152.5,145.67 " fill="none" id="*start-&gt;State1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="152.5,150.95,156.5,141.95,152.5,145.95,148.5,141.95,152.5,150.95" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="71" x="153.5" y="91.0669">/ ActionA();</text><!--MD5=[50db573f7338cb298a58dc3d28c3475b]
+link State1 to c1--><path d="M180.03,171 C203.18,171 235.56,171 255.22,171 " fill="none" id="State1-&gt;c1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="260.41,171,251.41,167,255.41,171,251.41,175,260.41,171" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="44" x="198.25" y="164.0669">Event1</text><!--MD5=[0cbf7091ad7d86ba6d13ac0b2f24ae3d]
+link c1 to State2--><path d="M284.55,171 C315.37,171 398.67,171 456.32,171 " fill="none" id="c1-&gt;State2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="461.46,171,452.46,167,456.46,171,452.46,175,461.46,171" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="140" x="303" y="164.0669">[guard1()] / ActionB();</text><!--MD5=[83cd4110dd645bcdb5e19d99cbc43be9]
+link c1 to j1--><path d="M275.22,180.38 C283.17,204.89 306.42,276.59 316.15,306.57 " fill="none" id="c1-&gt;j1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="317.69,311.34,318.7183,301.545,316.1475,306.5839,311.1086,304.013,317.69,311.34" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="46" x="319" y="260.0669">else / {</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="71" x="306.5" y="275.1997">ActionC();}</text><!--MD5=[3738085cfb6d22bb946f62581be2b85e]
+link j1 to State3--><path d="M315.22,328.36 C304.21,341.63 277.62,373.68 251.01,405.73 " fill="none" id="j1-&gt;State3" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="247.77,409.64,256.603,405.2835,250.9695,405.7977,250.4553,400.1643,247.77,409.64" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="72" x="283.5" y="376.0669">/ ActionG();</text><!--MD5=[adf096d984584de6995a19d0f617e347]
+reverse link TERMINAL to State2--><path d="M515.5,53.07 C515.5,72.74 515.5,101.08 515.5,124.94 " fill="none" id="TERMINAL&lt;-State2" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="515.5,48.02,511.5,57.02,515.5,53.02,519.5,57.02,515.5,48.02" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="44" x="516.5" y="91.0669">Event3</text><!--MD5=[0b736f546fb7e66f75d0e637c80ce7e7]
+link State2 to j1--><path d="M464.38,217.14 C441.19,236.89 413.06,259.87 386.5,279 C368.17,292.2 345.59,305.67 332.15,313.41 " fill="none" id="State2-&gt;j1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="327.64,316,337.438,315.0008,331.9795,313.5162,333.464,308.0577,327.64,316" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="44" x="427.5" y="267.5669">Event2</text><!--MD5=[d310cb9e9002807204f0ee3bca9d2495]
+reverse link State1 to State3--><path d="M154.75,196.63 C158.88,241.8 167.82,339.71 174.23,409.9 " fill="none" id="State1&lt;-State3" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="154.27,191.38,151.1085,200.7076,154.7265,196.3591,159.0751,199.9772,154.27,191.38" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="119" x="168.5" y="325.5669">Event3 / ActionA();</text><!--MD5=[218912f8adbc61be047236756231e5d2]
+@startuml MyFsm
+
+hide empty description
+
+
+[*] -down-> State1  : / ActionA();
+
+state c1 <<choice>>
+
+state j1 <<choice>>
+
+state State1
+State1 -> c1 : Event1
+c1 -> State2 : [guard1()] / ActionB();
+c1 - -> j1 : else / {\nActionC();}
+
+j1 -down-> State3 :  / ActionG();
+state State2
+State2 -up-> TERMINAL : Event3
+State2 - -> j1 : Event2
+State2 : enter / {\nActionH();\nActionB();}
+State2 : do / ActionF();
+
+state State3 {
+    [*] -up-> State3A
+    state State3A
+    state State3B
+}
+
+State3A -> State3B : Event1
+State3B -left-> State3A : Event2
+State3 -up-> State1 : Event3 / ActionA();
+
+State3A : enter / ActionD();
+State3B : exit / ActionE();
+
+state TERMINAL <<terminate>>
+
+
+
+
+
+
+
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 03:22:07 MST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.12.1+1-1-24.04.4-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

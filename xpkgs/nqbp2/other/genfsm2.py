@@ -144,6 +144,33 @@ trace_msg_suffix = {
 }
 
 #------------------------------------------------------------------------------
+# PlantUML parsing expressions used by prescan_puml_file()
+PUML_ARROW = re.compile( r'-[-a-zA-Z]*>' )                      # ->  -->  -up->  -right->
+PUML_STATE = re.compile( r'^state\s+([A-Za-z_][A-Za-z0-9_]*)' )
+PUML_IDENT = re.compile( r'^([A-Za-z_][A-Za-z0-9_]*)$' )
+
+def _generate_fsm_svg( puml_dir, verbose ):
+    """Render the FSM's PlantUML to SVG using the sibling `genfsm2-diagrams.py`
+    generator. Never fails the build: a missing generator or PlantUML only prints
+    a note."""
+    import importlib.util
+
+    gen = os.path.join( os.path.dirname( os.path.abspath( __file__ ) ), "genfsm2-diagrams.py" )
+    if not os.path.isfile( gen ):
+        if verbose:
+            print( "Note: genfsm2-diagrams.py not found; skipping SVG generation." )
+        return
+    try:
+        spec = importlib.util.spec_from_file_location( "genfsm2_diagrams", gen )
+        mod  = importlib.util.module_from_spec( spec )
+        spec.loader.exec_module( mod )
+        mod.generate( puml_dir )
+    except SystemExit as e:
+        print( f"Note: SVG generation skipped: {e}" )
+    except Exception as e:
+        print( f"Note: SVG generation failed: {e}" )
+
+#------------------------------------------------------------------------------
 # Parse command line
 def run( argv, copyright=None ):
     global symbols, osal
@@ -190,11 +217,17 @@ def run( argv, copyright=None ):
     if p.returncode != 0:
         exit("ERROR: StateSmith encountered an error or failed to run." )
 
+    # (Re)generate the FSM diagram's SVG from the PlantUML source.
+    _generate_fsm_svg( os.path.dirname( os.path.abspath( fsmdiag ) ), symbols["verbose"] )
+
     # Set copyright header (either explicit or based on OSAL). NOTE: This is a work-in-progress, i.e. how is explicit header provided?
     if copyright != None:
         symbols["copyright_header"] = copyright
     else:
         symbols["copyright_header"] = copyright_headers[osal]
+
+    # Parse the puml file for the original state/event names (StateSmith uppercases them in the enums)
+    prescan_puml_file()
 
     # Prescan the generated files for 'magic values' (e.g. the namespace)
     # Returns a dictionary with the found symbols/values
@@ -211,6 +244,50 @@ def run( argv, copyright=None ):
     update_generated_cpp()
 
 #------------------------------------------------------------------------------
+# Prescan the PlantUML source for the designer's original state/event name casing
+def prescan_puml_file():
+    global symbols
+    state_names = []
+    event_names = []
+    seen_states = set()
+    seen_events = set()
+    with open( symbols["fsm_diagram"] ) as inf:
+        for line in inf:
+            stripped = line.strip()
+
+            # Skip PlantUML line comments
+            if stripped.startswith( "'" ):
+                continue
+
+            # A literal "\n" is PlantUML's label line-break, not part of any
+            # identifier. Replace with a space so tokens never fuse or split on it.
+            stripped = stripped.replace( "\\n", " " )
+
+            # Match `state <name>` but skip pseudo-states (<<choice>>, <<fork>>, etc.)
+            m = PUML_STATE.match( stripped )
+            if m and '<<' not in stripped:
+                name = m.group(1)
+                if name.upper() not in seen_states:
+                    seen_states.add( name.upper() )
+                    state_names.append( name )
+
+            # Extract the event name from a transition label, i.e. the token after
+            # the FIRST ':' and before any guard '[...]' or action '/...'
+            if PUML_ARROW.search( stripped ):
+                _, sep, label = stripped.partition( ':' )
+                if sep:
+                    token = re.split( r'[\[/]', label, 1 )[0].strip()
+                    m = PUML_IDENT.match( token )
+                    if m and m.group(1).lower() != 'else' and m.group(1).upper() not in seen_events:
+                        seen_events.add( m.group(1).upper() )
+                        event_names.append( m.group(1) )
+
+    symbols['state_names'] = state_names
+    symbols['event_names'] = event_names
+    if symbols.get('verbose'):
+        print( f"Found states: {state_names}" )
+        print( f"Found events: {event_names}" )
+
 # Prescan the generated header file for 'magic values' (e.g. the namespace)
 # Returns a dictionary with the found symbols/values
 def prescan_generated_header():
@@ -248,7 +325,12 @@ def prescan_generated_cpp():
     
     with open( symbols["fsm_cpp"] ) as inf:
         lines = inf.readlines()
-        
+
+    # Non-leaf (composite) states are exactly the StateIds returned by the
+    # generated getParentId() function (excluding the synthetic ROOT state).
+    composite_states = set( re.findall( r'return\s+StateId::([A-Za-z0-9_]+)\s*;', ''.join( lines ) ) )
+    composite_states.discard( 'ROOT' )
+
     i = 0
     while i < len(lines):
         line = lines[i]
@@ -299,10 +381,12 @@ def prescan_generated_cpp():
     # Add to symbols dictionary
     symbols['action_methods'] = action_methods
     symbols['guard_methods'] = guard_methods
-    
+    symbols['composite_states'] = composite_states
+
     if args['-v']:
         print(f"Found action methods: {action_methods}")
         print(f"Found guard methods: {guard_methods}")
+        print(f"Found composite states: {sorted(composite_states)}")
 
 
 def derive_symbols():
@@ -316,6 +400,10 @@ def derive_symbols():
 
     # Derive Header guard - consists of the all upper case with the namespace(s) concatenated with the FSM name and then trailing _H_
     symbols['include_guard_label'] = "_".join( [ n.upper() for n in namespaces ] + [ symbols['fsm_name'].upper(), "H" ] ) + "_"
+
+    # Build uppercase->original name maps used to restore the diagram's casing
+    symbols['state_name_map'] = { n.upper(): n for n in symbols.get('state_names', []) }
+    symbols['event_name_map'] = { n.upper(): n for n in symbols.get('event_names', []) }
 
     # Determine if there is parent event queue class. Note: the dictionary is initialized with default KVP for que_depth(0) and has_event_queue (false)
     if symbols["que_depth"] == '0':
@@ -495,6 +583,15 @@ def update_generated_cpp():
                 if stripped_line.startswith( f"void {symbols['fsm_name']}::start()" ):
                     line = line.replace( "start()", "startFsm()" )
 
+                # Restore the diagram's original casing in stateIdToString()/eventIdToString().
+                # Note: only the returned string changes - the enum symbol is untouched.
+                m = re.match( r'(\s*case\s+)(StateId|EventId)(::\w+:\s+return\s+)"(\w+)"(;)', line )
+                if m:
+                    prefix, id_type, mid, name_upper, suffix = m.groups()
+                    mapping = symbols['state_name_map'] if id_type == 'StateId' else symbols['event_name_map']
+                    if name_upper in mapping:
+                        line = f'{prefix}{id_type}{mid}"{mapping[name_upper]}"{suffix}\n'
+
                 # Patch the end-namespace
                 if line.rstrip() == "}":
                     # add event queue
@@ -542,6 +639,9 @@ def update_header_other_block( outf ):
     outf.write( f"    /// The State Machine name\n" )
     outf.write( f'    static constexpr const char* fsmName = "{symbols["fsm_name"]}";\n' )
     outf.write( f"\n" )
+
+    update_header_isin_block( outf )
+
     outf.write( f"protected:\n" )
     
     # Add the event queue members  (when needed)
@@ -563,6 +663,56 @@ def update_header_other_block( outf ):
         outf.write( f"    void fsmDispatchEvent(EventId eventId);\n" )
         outf.write( f"\n" )
     
+def update_header_isin_block( outf ):
+    # Emit isIn<State>() query methods using the original casing from the puml file.
+    # Leaf states use a direct compare; composite (non-leaf) states walk the parent
+    # chain so they also report true for any descendant (StateSmith only tracks the
+    # active leaf state).
+    state_names = symbols.get( 'state_names', [] )
+    if len( state_names ) == 0:
+        return
+
+    # With two or more composite states, factor the parent-chain walk into a single
+    # shared helper; with only one, emit the walk inline.
+    composite_states  = symbols.get( 'composite_states', set() )
+    use_shared_helper = len( composite_states ) >= 2
+    if use_shared_helper:
+        outf.write( f"    /// Returns true if the FSM is in the specified state or any of its sub-states\n" )
+        outf.write( f"    inline bool isInHierarchicalState( StateId state ) const noexcept\n" )
+        outf.write( f"    {{\n" )
+        outf.write( f"        for ( StateId id = stateId; id != StateId::ROOT; id = getParentId( id ) )\n" )
+        outf.write( f"        {{\n" )
+        outf.write( f"            if ( id == state )\n" )
+        outf.write( f"            {{\n" )
+        outf.write( f"                return true;\n" )
+        outf.write( f"            }}\n" )
+        outf.write( f"        }}\n" )
+        outf.write( f"        return false;\n" )
+        outf.write( f"    }}\n" )
+        outf.write( f"\n" )
+
+    for name in state_names:
+        if name.upper() in composite_states:
+            outf.write( f"    /// Returns true if the FSM is in state {name} or any of its sub-states\n" )
+            if use_shared_helper:
+                outf.write( f"    inline bool isIn{name}() const noexcept {{ return isInHierarchicalState( StateId::{name.upper()} ); }}\n" )
+            else:
+                outf.write( f"    inline bool isIn{name}() const noexcept\n" )
+                outf.write( f"    {{\n" )
+                outf.write( f"        for ( StateId id = stateId; id != StateId::ROOT; id = getParentId( id ) )\n" )
+                outf.write( f"        {{\n" )
+                outf.write( f"            if ( id == StateId::{name.upper()} )\n" )
+                outf.write( f"            {{\n" )
+                outf.write( f"                return true;\n" )
+                outf.write( f"            }}\n" )
+                outf.write( f"        }}\n" )
+                outf.write( f"        return false;\n" )
+                outf.write( f"    }}\n" )
+        else:
+            outf.write( f"    /// Returns true if the FSM is in state {name}\n" )
+            outf.write( f"    inline bool isIn{name}() const noexcept {{ return stateId == StateId::{name.upper()}; }}\n" )
+        outf.write( f"\n" )
+
 def update_header_action_block( outf ):
     action_methods = symbols.get('action_methods', [])
     if len( action_methods ) == 0:

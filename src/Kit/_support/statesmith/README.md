@@ -19,11 +19,27 @@ output of the StateSmith tool to be specific to the KIT library design model.
 
 - Adds the KIT library copyright info to the files
 - Auto-generates virtual methods for all action and guard methods
+- Auto-generates an `isIn<State>()` query method for each state in the diagram
+  - For a composite (non-leaf) state the method walks the parent chain, so it
+    also returns true when any of the state's sub-states is active.
+- Preserves the diagram's original name casing in the generated
+  `stateIdToString()`/`eventIdToString()` methods and in the `isIn<State>()`
+  method names (StateSmith uppercases the `StateId`/`EventId` enum symbols)
 - Properly supports nested namespaces (for C++11)
 - Renames the `start()` method to `startFsm()` so as to not conflict with KIT's
   usage of `start()` naming conventions for drivers.
 - Optionally adds an event queue that provides run-to-completion semantics
   - Adds KIT trace statements when processing events from the queue.
+- (Re)generates an SVG render of the State Machine diagram alongside the
+  `.puml` file so the committed image never drifts from its source.
+  - Requires [PlantUML](https://plantuml.com/) (and Java and Graphviz) to be
+    installed, e.g. `sudo apt-get install -y plantuml`. Alternately set the
+    `PLANTUML_JAR` environment variable to a `plantuml.jar`.
+  - If PlantUML is not installed, a note is printed and code generation
+    continues normally.
+  - The `genfsm2-diagrams.py` script can also be run standalone to refresh
+    diagrams without running code generation:
+    `genfsm2-diagrams.py [-f|--force] DIR [DIR ...]`
 
 **Usage:**
 

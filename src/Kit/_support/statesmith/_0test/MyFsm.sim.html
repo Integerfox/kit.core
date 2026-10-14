@@ -6,17 +6,35 @@
 <html>
   <head>
     <link rel='icon' type='image/png' href='https://statesmith.github.io/favicon.png'>
+
+      <!-- The below css makes the titlebar-icon functionality work. See https://fonts.google.com/icons -->
     <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined'>
+
+
     <style>
       body {
         display: flex;
         flex-direction: row;
         margin: 0px;
+        color: #cacad1;
+        font-family: 'Arial';
+        font-size: 13px;
+      }
+
+      .identifier {
+        color: #9bc2e4;
+        color: #ededed;
+        font-weight: bold;
       }
 
       /* Fix for mermaid content requiring scroll bars https://github.com/StateSmith/StateSmith/issues/288 */
       pre.mermaid {
         margin: 0px;
+      }
+
+      #event-logs a {
+        text-decoration: none;
+        color: inherit;
       }
 
       .wrapper {
@@ -33,7 +51,7 @@
       .titlebar-icon {
         font-family: 'Material Symbols Outlined', sans-serif;
         font-size: 16px;
-        color: #777;
+        color: #b4b4b4;
         border-radius: 5px;
       }
 
@@ -51,17 +69,107 @@
         flex: 1;
         overflow: auto;
         padding: 10px;
+        background-color: #1E222A; /* Dark theme */
       }
 
       .sidebar {
         width: 300px;
         padding-top: 0px;
         position: relative;
-        background-color: #f0f0f0;
+        background-color: #30394b;
         border-left: 1px solid #ccc;
         display: flex;
         flex-direction: column;
       }
+
+
+
+      /* -------------------------------------- STATE INFO -------------------------------- */
+      /* https://github.com/StateSmith/StateSmith/issues/523 */
+
+      #state-info {
+        display: none;
+        border-top: 2px solid #ccc;
+        border-bottom: 2px solid #ccc;
+        /* padding-top: 5px; */
+        /* padding-bottom: 5px; */
+        border-collapse: collapse;
+        overflow: auto;
+        font-family: monospace;
+      }
+
+      #state-info h3 {
+        margin: 0;
+      }
+
+      #state-info tr {
+        border-bottom: 1px solid black;
+      }
+
+      #state-info td {
+        margin: 0;
+        white-space: nowrap;
+
+        padding-bottom: 5px;
+        padding-left: 5px;
+        padding-top: 5px;
+      }
+      
+      #state-info tr:nth-child(even) {
+        background-color: #252933;
+      }
+
+
+
+
+      /* -------------------------------------- StateSmith Grammar Syntax -------------------------------- */
+
+      .syntax-vertex-name,
+      .syntax-vertex-id {
+        color: #ffffff;
+        font-weight: bold;
+      }
+
+      .syntax-order {
+        color: var(--savedSetting_syntaxOrder, #e9a1eb);
+      }
+
+      /* for characters `(,)` in `(EV1, EV2)` */
+      .syntax-trigger-punctuation {
+        color: var(--savedSetting_syntaxTriggerPunctuation, #eeb765);
+      }
+
+      .syntax-trigger-name {
+        color: var(--savedSetting_syntaxTriggerName, #f1b862);
+      }
+
+      .syntax-guard-bracket
+      {
+        color: var(--savedSetting_syntaxGuardBracket, #00bd2b);
+      }
+      .syntax-guard-code {
+        color: var(--savedSetting_syntaxGuardCode, #a6e19f);
+      }
+
+      .syntax-action-start-end {
+        color: var(--savedSetting_syntaxActionStartEnd, #e18d33);
+      }
+      .syntax-action-code {
+        color: var(--savedSetting_syntaxActionCode, #cbac8b);
+      }
+
+      .syntax-via-exit-entry {
+        color: #E06C75;
+      }
+
+      .syntax-transition-arrow {
+        color: #E06C75;
+      }
+      .syntax-transition-to {
+        color: #d77e86;
+      }
+
+      /* --------------------------------------------------------------- */
 
       #buttons {
         display: flex;
@@ -69,11 +177,12 @@
       }
 
       .titlebar {
-        background-color: #ddd;
-        border-bottom: 1px solid #ccc;
+        background-color: #1d222e;
+        border-bottom: 1px solid #454f64;
         font-weight: bold;
         padding: 5px;
         display: flex;
+        align-items: center;
       }
 
       .console {
@@ -91,12 +200,12 @@
       }
 
       table.console td {
-          color: rgba(0, 0, 0, 0.7);
+          color: inherit;
       }
 
       table.console td .dispatched {
           font-weight: bold;
-          color: rgba(0, 0, 0, 1);
+          color: #dbdbdb;
       }
 
       table.console tr:has(+tr td .dispatched) {
@@ -107,20 +216,12 @@
           padding-bottom: 25px;
       }
 
-      .console th {
-        background-color: #f0f0f0;
-        border-bottom: 1px solid #ccc;
-        font-weight: normal;
-        padding: 5px;
-        text-align: left;
-      }
-
       .console tbody {
         font-family: monospace;
       }
 
       .console tr {
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #596275;
       }
 
       .console td {
@@ -131,8 +232,7 @@
         font-size: small;
       }
 
-      .history {
-        margin-top: 30px;       
+      #event-logs {
         display: flex;
         overflow: auto;    
         flex-direction: column-reverse;
@@ -146,11 +246,16 @@
         font-weight: bold;
       }
 
-      .dispatched > .trigger {
+      .dispatched .forced-state {
         border: 1px solid #000;
+        /* color: white; */
+        color: #252541;
+        background-color: #E06C75;
         border-radius: 4px;
-        padding: 2px 10px 2px 10px;
+        padding: 2px 4px;
       }
+
+      /* ------------------------- event buttons --------------------------- */
 
       button {
         margin: 5px;
@@ -159,20 +264,18 @@
       button.event-button {
         transition: opacity 0.3s ease, background-color 0.3s ease;
         opacity: 1;
-        background-color: #007bff;
-        color: white;
         cursor: pointer;
       }
 
-      button.event-button:disabled {
+      button.event-button.hasNoEventHandler {
         opacity: 0.4;
         background-color: #f0f0f0;
-        color: #999;
+        color: #2b2b30;
         cursor: not-allowed;
       }
 
-      button.event-button:not(:disabled):hover {
-        background-color: #0056b3;
+      button.event-button:not(.hasNoEventHandler):hover {
+        background-color: aquamarine;
       }
 
       /* Style for hiding irrelevant events */
@@ -180,17 +283,17 @@
         display: none;
       }
 
-
-
       /* ----------------------------- Dropdown related start ----------------------------- */
       
       .dropdown-button {
         border: none;
         cursor: pointer;
+        user-select: none;
       }
       
       .dropdown-button:hover, .dropdown-button:focus {
-        background-color: #f1f1f1;
+        background-color: aquamarine;
+        color: #000;
       }
       
       .dropdown {
@@ -203,7 +306,7 @@
         display: none;
         position: absolute;
         right: 0;
-        background-color: #f1f1f1;
+        background-color: #24253c;
         min-width: 250px;
         overflow: auto;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -212,12 +315,12 @@
       
       .dropdown-content .dropdown-item {
         display: block;
-        padding: 12px 16px;
+        padding: 8px 16px;
         font-weight: normal;
       }
 
       .dropdown-content .dropdown-item:hover {
-        background-color: #ddd;
+        background-color: #333786;
         cursor: pointer;
       }
 
@@ -225,28 +328,92 @@
         display: block;
       }
 
+
       /* ----------------------------- Dropdown related end ----------------------------- */
 
+      .dropdown div.themes button {
+        margin-left: 0;
+        margin-right: 0;
+      }
 
+      .transition {
+        stroke: var(--savedSetting_transitionPath, #999) !important;
+        stroke-width: 2px !important;
+      }
 
-      .transition.active {
-        stroke: #fff5ad !important;
-        stroke-width: 5px !important;
+      .transition.pathJustTaken {
+        stroke: var(--savedSetting_transitionPathJustTakenColor, #e0aa6c) !important;
+        stroke-width: 4px !important;
+        stroke-dasharray: 3 6;
+        stroke-dashoffset: var(--transition-animation-offset, 0);
         filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
       }
 
+      /* give priority over pathJustTaken. If it is available and pathJustTaken, then it will still have dash. */
+      .transition.available {
+        stroke: var(--savedSetting_transitionPathAvailableColor, #7e70cf) !important;
+        stroke-width: 4px !important;
+        stroke-dasharray: 6 6;
+        stroke-dashoffset: var(--transition-animation-offset, 0); 
+        filter: drop-shadow( 2px 2px 1px rgba(0, 0, 0, .7));
+      }
+
+      .statediagram-state span.nodeLabel span.syntax-vertex-name {
+        color: var(--savedSetting_stateTitleTextColor,#eeeeee);
+      }
+      .statediagram-state.active span.nodeLabel span.syntax-vertex-name {
+        color: var(--savedSetting_stateActiveTitleTextColor,#fdffb0) !important;
+      }
+
+      .statediagram-state > * {
+        fill-opacity: 0.8;
+        fill:   var(--savedSetting_stateFillColor, #1f2020) !important;
+        stroke: var(--savedSetting_stateStrokeColor, #999999) !important;
+      }
       .statediagram-state.active > * {
-        fill: #fff5ad !important;
+        fill:   var(--savedSetting_stateActiveFillColor, #3c3224) !important;
+        stroke: var(--savedSetting_stateActiveStrokeColor, #d16f3b) !important;
         stroke-width: 2px !important;
+      }
+
+      .statediagram-state rect.inner {
+        fill: var(--savedSetting_stateNestedFillColor, #333) !important;
+      }
+      .statediagram-state.active rect.inner {
+        fill: var(--savedSetting_stateActiveNestedFillColor, #444) !important;
+        stroke-width: 2px !important;
+      }
+
+      .clickable:hover {
+        cursor: pointer;
+        color:  var(--savedSetting_clickableColor, #7fffd4) !important;
+      }
+
+      div.dropdown-item input[type='color'] {
+        width: 25px;
       }
 
     </style>
   </head>
-
+  
   <body>
-    <div class="wrapper">
-    <div class="pane main">
-        <pre class="mermaid">
+    <div class='wrapper'>
+    <div class='pane main'>
+        <!-- mermaid themes: default, dark, forest, neutral, base https://mermaid.ai/open-source/config/theming.html -->
+        <pre class='mermaid'>
+---
+
+config:
+    theme: 'base'
+    themeVariables:
+        primaryColor: '#1f2020'
+        primaryTextColor: '#f0f0f0'
+        background: '#333'
+        primaryBorderColor: '#888888'
+        lineColor: '#999'
+
+---
+
 stateDiagram
 
 %% Initial state name as "." so that it fits in black circle shape.
@@ -255,7 +422,7 @@ state "." as ROOT.(InitialState)
 
 State1
 
-State1 : State1
+State1 : <span class='syntax-vertex-name'>State1</span>
 
 state ROOT.(ChoicePoint)(c1) <<choice>>
 
@@ -263,13 +430,13 @@ state ROOT.(ChoicePoint)(j1) <<choice>>
 
 State2
 
-State2 : State2
+State2 : <span class='syntax-vertex-name'>State2</span>
 
-State2 : enter / #123; ActionH()#59;\nActionB()#59; #125;
+State2 : <span class='syntax-trigger-name'>enter</span> <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionH();<br>ActionB();</span><span class='syntax-action-start-end'> }</span>
 
-State2 : do / #123; ActionF()#59; #125;
+State2 : <span class='syntax-trigger-name'>do</span> <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionF();</span><span class='syntax-action-start-end'> }</span>
 
-state State3 {
+state "<span class='syntax-vertex-name'>State3</span>" as State3 {
 
         %% Initial state name as "." so that it fits in black circle shape.
         %% See https://github.com/StateSmith/StateSmith/issues/404
@@ -277,83 +444,180 @@ state State3 {
 
         State3A
 
-        State3A : State3A
+        State3A : <span class='syntax-vertex-name'>State3A</span>
 
-        State3A : enter / #123; ActionD()#59; #125;
+        State3A : <span class='syntax-trigger-name'>enter</span> <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionD();</span><span class='syntax-action-start-end'> }</span>
 
         State3B
 
-        State3B : State3B
+        State3B : <span class='syntax-vertex-name'>State3B</span>
 
-        State3B : exit / #123; ActionE()#59; #125;
+        State3B : <span class='syntax-trigger-name'>exit</span> <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionE();</span><span class='syntax-action-start-end'> }</span>
 
 }
 
 TERMINAL
 
-TERMINAL : TERMINAL
+TERMINAL : <span class='syntax-vertex-name'>TERMINAL</span>
 
-ROOT.(InitialState) --> State1 : / #123; ActionA()#59; #125;
+ROOT.(InitialState) --> State1 :  <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionA();</span><span class='syntax-action-start-end'> }</span>
 
-State1 --> ROOT.(ChoicePoint)(c1) : Event1
+State1 --> ROOT.(ChoicePoint)(c1) : <span class='syntax-trigger-name'>Event1</span>
 
-ROOT.(ChoicePoint)(c1) --> State2 : [guard1()] / #123; ActionB()#59; #125;
+ROOT.(ChoicePoint)(c1) --> State2 :  <span class='syntax-guard-bracket'>[</span><span class='syntax-guard-code'>guard1()</span><span class='syntax-guard-bracket'>]</span> <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionB();</span><span class='syntax-action-start-end'> }</span>
 
-ROOT.(ChoicePoint)(c1) --> ROOT.(ChoicePoint)(j1) : else / #123; ActionC()#59; #125;
+ROOT.(ChoicePoint)(c1) --> ROOT.(ChoicePoint)(j1) : <span class='syntax-trigger-name'>else</span> <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionC();</span><span class='syntax-action-start-end'> }</span>
 
-ROOT.(ChoicePoint)(j1) --> State3 : / #123; ActionG()#59; #125;
+ROOT.(ChoicePoint)(j1) --> State3 :  <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionG();</span><span class='syntax-action-start-end'> }</span>
 
-State2 --> TERMINAL : Event3
+State2 --> TERMINAL : <span class='syntax-trigger-name'>Event3</span>
 
-State2 --> ROOT.(ChoicePoint)(j1) : Event2
+State2 --> ROOT.(ChoicePoint)(j1) : <span class='syntax-trigger-name'>Event2</span>
 
-State3 --> State1 : Event3 / #123; ActionA()#59; #125;
+State3 --> State1 : <span class='syntax-trigger-name'>Event3</span> <span class='syntax-action-start-end'>/ { </span><span class='syntax-action-code'>ActionA();</span><span class='syntax-action-start-end'> }</span>
 
 State3.(InitialState) --> State3A
 
-State3A --> State3B : Event1
+State3A --> State3B : <span class='syntax-trigger-name'>Event1</span>
 
-State3B --> State3A : Event2
+State3B --> State3A : <span class='syntax-trigger-name'>Event2</span>
 
 
 
         </pre>
     </div>
 
-    <div class="pane sidebar">
-      <div id="buttons">
-        <div class="titlebar">Events
+    <div class='pane sidebar'>
+      <div id='buttons'> <!-- TODO - rename/rework this div -->
+        <div class='titlebar'>
+          StateSmith Simulator
           <div class='dropdown'>
-            <span id='dropdown-button' class='titlebar-icon dropdown-button'>settings</span>
+            <span id='settings-dropdown-button' class='titlebar-icon dropdown-button' title='Settings'>settings</span>
+            <span id='clear-button' class='titlebar-icon dropdown-button' title='Clear event log'>delete</span>
+            <a href='https://github.com/StateSmith/StateSmith/wiki/Simulator' id='help-button' class='titlebar-icon dropdown-button' target='_blank' title='CHECK THIS!&#10;The simulator has a number of quirks and limitations&#10;that you should be aware of.'>help</a>
             <div id='myDropdown' class='dropdown-content'>
-              <label class='dropdown-item' for='hideIrrelevantEvents'
+
+              <!-- 
+                NOTE! Try not to change the ids of input checkboxes below as that will reset user preferences stored in localStorage.
+                NOTE! New settings will be automatically picked up if they start with 'savedSetting_' and are checkboxes.
+               -->
+              <label class='dropdown-item' for='savedSetting_showEventButtons'
+                title='When disabled, event dispatching buttons will be hidden, but you can still click on diagram or state info panel to send events.'>
+                <input type='checkbox' id='savedSetting_showEventButtons' name='savedSetting_showEventButtons' checked>
+                Show event buttons
+              </label>
+              <label class='dropdown-item' for='savedSetting_hideIrrelevantEvents'
                 title='When enabled, event dispatching buttons will be hidden if the current active state(s) ignore the event.'>
-                <input type='checkbox' id='hideIrrelevantEvents' name='hideIrrelevantEvents'>
+                <input type='checkbox' id='savedSetting_hideIrrelevantEvents' name='savedSetting_hideIrrelevantEvents'>
                 Hide ignored event buttons
               </label>
-              <label class='dropdown-item' for='timestamps'
+              <!--- https://github.com/StateSmith/StateSmith/issues/523 -->
+              <label class='dropdown-item' for='savedSetting_showStateInfo'
+                title='The state info panel is updated every time a state is entered. This setting controls whether it is visible or not.'>
+                <input type='checkbox' id='savedSetting_showStateInfo' name='savedSetting_showStateInfo' checked>
+                Show state info panel
+              </label>
+              <label class='dropdown-item' for='savedSetting_verboseEnter'
+                title='Every time a state is entered, it will be logged below in the event log.'>
+                <input type='checkbox' id='savedSetting_verboseEnter' name='savedSetting_verboseEnter' checked>
+                Log State Entry
+              </label>
+              <label class='dropdown-item' for='savedSetting_verboseExit'
+                title='Every time a state is exited, it will be logged below in the event log.'>
+                <input type='checkbox' id='savedSetting_verboseExit' name='savedSetting_verboseExit' checked>
+                Log State Exit
+              </label>
+              <label class='dropdown-item' for='savedSetting_verboseHistory'
+                title='Log history pseudo state variable updates'>
+                <input type='checkbox' id='savedSetting_verboseHistory' name='savedSetting_verboseHistory' checked>
+                Log History Variables
+              </label>
+              <label class='dropdown-item' for='savedSetting_showEventButtonTooltips'
+                 title='Event dispatching buttons will have tooltips with additional info.&#10;📢 NOTE! Changes to this setting take effect on state change or page reload.'>
+                <input type='checkbox' id='savedSetting_showEventButtonTooltips' name='savedSetting_showEventButtonTooltips' checked>
+                Show event button tooltips
+              </label>
+              <label class='dropdown-item' for='savedSetting_transitionOffsetAnimation'
+                 title=''>
+                <input type='checkbox' id='savedSetting_transitionOffsetAnimation' name='savedSetting_transitionOffsetAnimation' checked>
+                Animate transition arrows.
+              </label>
+              
+              <div class='dropdown-item' style='cursor: default;' >
+                <div class='themes'>
+                  <select id='theme-select'>
+                    <option value=''>Select theme...</option>
+                    <option value='dark-pro-1'>Dark Pro 1</option>
+                    <option value='dark-pro-2'>Dark Pro 2</option>
+                    <option value='original'>Original</option>
+                    <option value='tokyo'>Tokyo Night</option>
+                    <option value='arctic-void'>Arctic Void</option>
+                    <option value='dracula'>Dracula</option>
+                    <option value='github-dark'>Github Dark</option>
+                    <option value='night-owl'>Night Owl</option>
+                    <option value='sepia'>Sepia</option>
+                    <option value='monochrome'>Monochrome</option>
+                    <option value='white'>White</option>
+                  </select>
+                </div>
+                <input type='color' id='savedSetting_stateTitleTextColor' value='#ababab' title='Inactive state title text color.'>
+                <input type='color' id='savedSetting_stateStrokeColor' value='#999999' title='Inactive state stroke color.'>
+                <input type='color' id='savedSetting_stateFillColor' value='#1f2020' title='Inactive state fill color.'>
+                <input type='color' id='savedSetting_stateNestedFillColor' value='#333' title='Inactive state nested fill color.'>
+                <input type='color' id='savedSetting_stateActiveTitleTextColor' value='#ffffff' title='Active state title text color.'>
+                <input type='color' id='savedSetting_stateActiveStrokeColor' value='#e06c75' title='Active state stroke color.'>
+                <input type='color' id='savedSetting_stateActiveFillColor' value='#3c3224' title='Active state fill color.'>
+                <input type='color' id='savedSetting_stateActiveNestedFillColor' value='#444' title='Active state nested fill color.'>
+                <input type='color' id='savedSetting_syntaxOrder' value='#c678dd' title='Text color for behavior order like `1.` in `1. EV`.'>
+                <input type='color' id='savedSetting_syntaxTriggerName' value='#cccccc' title='Trigger text color.'>
+                <input type='color' id='savedSetting_syntaxTriggerPunctuation' value='#d19a66' title='Text color for characters `(,)` in `(EV1, EV2)`.'>
+                <input type='color' id='savedSetting_syntaxGuardBracket' value='#98c379' title='Text color for guard brackets `[]`.'>
+                <input type='color' id='savedSetting_syntaxGuardCode' value='#b5d9a0' title='Text color for guard code.'>
+                <input type='color' id='savedSetting_syntaxActionStartEnd' value='#d19a66' title='Text color for action code start and end characters `/{}`.'>
+                <input type='color' id='savedSetting_syntaxActionCode' value='#abb2bf' title='Text color for action code.'>
+                <input type='color' id='savedSetting_transitionPath' value='#999999' title='Color of transition/edge path.'>
+                <input type='color' id='savedSetting_transitionPathJustTakenColor' value='#c2c2c2' title='Color of transition/edge path that was just traversed.'>
+                <input type='color' id='savedSetting_transitionPathAvailableColor' value='#ffca38' title='Color of transition/edge paths that are ready/available.'>
+                <input type='color' id='savedSetting_clickableColor' value='#7fffd4' title='Color of text that is clickable.'>
+              </div>
+
+              <div class='dropdown-item' style='cursor: default;' >
+                 <button id='resetSettingsButton'>Reset Settings</button>
+              </div>
+
+              <!-- todo-low remove timestamps -->
+              <label style='display: none;' class='dropdown-item' for='savedSetting_timestamps'
                 title='Controls whether timestamps are shown along side event dispatches.'>
-                <input type='checkbox' id='timestamps' name='timestamps'>
+                <input type='checkbox' id='savedSetting_timestamps' name='savedSetting_timestamps'>
                 Timestamps
               </label>
+
             </div>
           </div>
         </div>
+        <div id='event-buttons'>
+        </div>        
       </div>
     
-      <div class="history">
-        <table class="console">
+      <div> <!-- needed to prevent event-logs div from squishing state-info vertically -->
+        <!-- https://github.com/StateSmith/StateSmith/issues/523 -->
+        <table id='state-info'>
+        </table>
+      </div>
+
+      <div id='event-logs'>
+        <table class='console'>
           <tbody>
           </tbody>
         </table>
       </div>
     
-      <div class="gutter"></div>
+      <div class='gutter'></div>
     </div>
     </div>
 
 <script>
-// Autogenerated with StateSmith 0.19.0+b5719011215d41a81572ed347c02b22db5d1a48f.
+// Autogenerated with StateSmith 0.22.2+0c32be37bf4d4fee5499780a5ef37a7996c192f9.
 // Algorithm: Balanced2. See https://github.com/StateSmith/StateSmith/wiki/Algorithms
 
 // Generated state machine
@@ -389,13 +653,30 @@ evaluateGuard = null;
     static StateIdCount = 7;
     static { Object.freeze(this.StateIdCount); }
     
+    // Subtree meta data generation can be disabled in settings.
+    // Details: https://github.com/StateSmith/StateSmith/issues/538
+    static ROOT_SubtreeEndId = 6;  // State 'MyFsm' subtree extends from itself (id: 0) to state 'TERMINAL' (id: 6)
+    static { Object.freeze(this.ROOT_SubtreeEndId); }
+    static STATE1_SubtreeEndId = 1;  // State 'State1' subtree extends from itself (id: 1) to state 'State1' (id: 1)
+    static { Object.freeze(this.STATE1_SubtreeEndId); }
+    static STATE2_SubtreeEndId = 2;  // State 'State2' subtree extends from itself (id: 2) to state 'State2' (id: 2)
+    static { Object.freeze(this.STATE2_SubtreeEndId); }
+    static STATE3_SubtreeEndId = 5;  // State 'State3' subtree extends from itself (id: 3) to state 'State3B' (id: 5)
+    static { Object.freeze(this.STATE3_SubtreeEndId); }
+    static STATE3A_SubtreeEndId = 4;  // State 'State3A' subtree extends from itself (id: 4) to state 'State3A' (id: 4)
+    static { Object.freeze(this.STATE3A_SubtreeEndId); }
+    static STATE3B_SubtreeEndId = 5;  // State 'State3B' subtree extends from itself (id: 5) to state 'State3B' (id: 5)
+    static { Object.freeze(this.STATE3B_SubtreeEndId); }
+    static TERMINAL_SubtreeEndId = 6;  // State 'TERMINAL' subtree extends from itself (id: 6) to state 'TERMINAL' (id: 6)
+    static { Object.freeze(this.TERMINAL_SubtreeEndId); }
+    
     // Used internally by state machine. Feel free to inspect, but don't modify.
     stateId;
     
     // Starts the state machine. Must be called before dispatching events. Not thread safe.
     start()
     {
-        this.#ROOT_enter();
+        this._ROOT_enter();
         // ROOT behavior
         // uml: TransitionTo(ROOT.<InitialState>)
         {
@@ -407,15 +688,15 @@ evaluateGuard = null;
             // ROOT.<InitialState> is a pseudo state and cannot have an `enter` trigger.
             
             // ROOT.<InitialState> behavior
-            // uml: / { this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge0"); } TransitionTo(State1)
+            // uml: / { this.tracer?.logActionCode("ActionA();");this.tracer?.edgeTransition('edge0'); } TransitionTo(State1)
             {
                 // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition). Already at LCA, no exiting required.
                 
-                // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge0");`.
-                this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge0");
+                // Step 2: Transition action: `this.tracer?.logActionCode("ActionA();");this.tracer?.edgeTransition('edge0');`.
+                this.tracer?.logActionCode("ActionA();");this.tracer?.edgeTransition('edge0');
                 
                 // Step 3: Enter/move towards transition target `State1`.
-                this.#STATE1_enter();
+                this._STATE1_enter();
                 
                 // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
                 return;
@@ -438,7 +719,7 @@ evaluateGuard = null;
             case MyFsm.StateId.STATE1:
                 switch (eventId)
                 {
-                    case MyFsm.EventId.EVENT1: this.#STATE1_event1(); break;
+                    case MyFsm.EventId.EVENT1: this._STATE1_event1(); break;
                 }
                 break;
             
@@ -446,9 +727,9 @@ evaluateGuard = null;
             case MyFsm.StateId.STATE2:
                 switch (eventId)
                 {
-                    case MyFsm.EventId.DO: this.#STATE2_do(); break;
-                    case MyFsm.EventId.EVENT3: this.#STATE2_event3(); break;
-                    case MyFsm.EventId.EVENT2: this.#STATE2_event2(); break;
+                    case MyFsm.EventId.DO: this._STATE2_do(); break;
+                    case MyFsm.EventId.EVENT3: this._STATE2_event3(); break;
+                    case MyFsm.EventId.EVENT2: this._STATE2_event2(); break;
                 }
                 break;
             
@@ -456,7 +737,7 @@ evaluateGuard = null;
             case MyFsm.StateId.STATE3:
                 switch (eventId)
                 {
-                    case MyFsm.EventId.EVENT3: this.#STATE3_event3(); break;
+                    case MyFsm.EventId.EVENT3: this._STATE3_event3(); break;
                 }
                 break;
             
@@ -464,8 +745,8 @@ evaluateGuard = null;
             case MyFsm.StateId.STATE3A:
                 switch (eventId)
                 {
-                    case MyFsm.EventId.EVENT1: this.#STATE3A_event1(); break;
-                    case MyFsm.EventId.EVENT3: this.#STATE3_event3(); break; // First ancestor handler for this event
+                    case MyFsm.EventId.EVENT1: this._STATE3A_event1(); break;
+                    case MyFsm.EventId.EVENT3: this._STATE3_event3(); break; // First ancestor handler for this event
                 }
                 break;
             
@@ -473,8 +754,8 @@ evaluateGuard = null;
             case MyFsm.StateId.STATE3B:
                 switch (eventId)
                 {
-                    case MyFsm.EventId.EVENT2: this.#STATE3B_event2(); break;
-                    case MyFsm.EventId.EVENT3: this.#STATE3_event3(); break; // First ancestor handler for this event
+                    case MyFsm.EventId.EVENT2: this._STATE3B_event2(); break;
+                    case MyFsm.EventId.EVENT3: this._STATE3_event3(); break; // First ancestor handler for this event
                 }
                 break;
             
@@ -488,23 +769,23 @@ evaluateGuard = null;
     
     // This function is used when StateSmith doesn't know what the active leaf state is at
     // compile time due to sub states or when multiple states need to be exited.
-    #exitUpToStateHandler(desiredState)
+    _exitUpToStateHandler(desiredState)
     {
         while (this.stateId != desiredState)
         {
             switch (this.stateId)
             {
-                case MyFsm.StateId.STATE1: this.#STATE1_exit(); break;
+                case MyFsm.StateId.STATE1: this._STATE1_exit(); break;
                 
-                case MyFsm.StateId.STATE2: this.#STATE2_exit(); break;
+                case MyFsm.StateId.STATE2: this._STATE2_exit(); break;
                 
-                case MyFsm.StateId.STATE3: this.#STATE3_exit(); break;
+                case MyFsm.StateId.STATE3: this._STATE3_exit(); break;
                 
-                case MyFsm.StateId.STATE3A: this.#STATE3A_exit(); break;
+                case MyFsm.StateId.STATE3A: this._STATE3A_exit(); break;
                 
-                case MyFsm.StateId.STATE3B: this.#STATE3B_exit(); break;
+                case MyFsm.StateId.STATE3B: this._STATE3B_exit(); break;
                 
-                case MyFsm.StateId.TERMINAL: this.#TERMINAL_exit(); break;
+                case MyFsm.StateId.TERMINAL: this._TERMINAL_exit(); break;
                 
                 default: return;  // Just to be safe. Prevents infinite loop if state ID memory is somehow corrupted.
             }
@@ -516,34 +797,34 @@ evaluateGuard = null;
     // event handlers for state ROOT
     ////////////////////////////////////////////////////////////////////////////////
     
-    #ROOT_enter()
+    _ROOT_enter()
     {
         this.stateId = MyFsm.StateId.ROOT;
     }
     
-    #ROOT_ChoicePoint_j1__transition()
+    _ROOT_ChoicePoint_j1__transition()
     {
         // ROOT.<ChoicePoint>(j1) behavior
-        // uml: / { this.tracer?.log("⚡ FSM would execute action: " + "ActionG();");this.tracer?.edgeTransition("edge4"); } TransitionTo(State3)
+        // uml: / { this.tracer?.logActionCode("ActionG();");this.tracer?.edgeTransition('edge4'); } TransitionTo(State3)
         {
             // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition). Already at LCA, no exiting required.
             
-            // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionG();");this.tracer?.edgeTransition("edge4");`.
-            this.tracer?.log("⚡ FSM would execute action: " + "ActionG();");this.tracer?.edgeTransition("edge4");
+            // Step 2: Transition action: `this.tracer?.logActionCode("ActionG();");this.tracer?.edgeTransition('edge4');`.
+            this.tracer?.logActionCode("ActionG();");this.tracer?.edgeTransition('edge4');
             
             // Step 3: Enter/move towards transition target `State3`.
-            this.#STATE3_enter();
+            this._STATE3_enter();
             
             // State3.<InitialState> behavior
-            // uml: / { this.tracer?.edgeTransition("edge8"); } TransitionTo(State3A)
+            // uml: / { this.tracer?.edgeTransition('edge8'); } TransitionTo(State3A)
             {
                 // Step 1: Exit states until we reach `State3` state (Least Common Ancestor for transition). Already at LCA, no exiting required.
                 
-                // Step 2: Transition action: `this.tracer?.edgeTransition("edge8");`.
-                this.tracer?.edgeTransition("edge8");
+                // Step 2: Transition action: `this.tracer?.edgeTransition('edge8');`.
+                this.tracer?.edgeTransition('edge8');
                 
                 // Step 3: Enter/move towards transition target `State3A`.
-                this.#STATE3A_enter();
+                this._STATE3A_enter();
                 
                 // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
                 return;
@@ -556,7 +837,7 @@ evaluateGuard = null;
     // event handlers for state STATE1
     ////////////////////////////////////////////////////////////////////////////////
     
-    #STATE1_enter()
+    _STATE1_enter()
     {
         this.stateId = MyFsm.StateId.STATE1;
         
@@ -568,7 +849,7 @@ evaluateGuard = null;
         } // end of behavior for State1
     }
     
-    #STATE1_exit()
+    _STATE1_exit()
     {
         // State1 behavior
         // uml: exit / { this.tracer?.exitState('State1'); }
@@ -580,49 +861,49 @@ evaluateGuard = null;
         this.stateId = MyFsm.StateId.ROOT;
     }
     
-    #STATE1_event1()
+    _STATE1_event1()
     {
         // State1 behavior
-        // uml: Event1 / { this.tracer?.edgeTransition("edge1"); } TransitionTo(ROOT.<ChoicePoint>(c1))
+        // uml: Event1 / { this.tracer?.edgeTransition('edge1'); } TransitionTo(ROOT.<ChoicePoint>(c1))
         {
             // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition).
-            this.#STATE1_exit();
+            this._STATE1_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge1");`.
-            this.tracer?.edgeTransition("edge1");
+            // Step 2: Transition action: `this.tracer?.edgeTransition('edge1');`.
+            this.tracer?.edgeTransition('edge1');
             
             // Step 3: Enter/move towards transition target `ROOT.<ChoicePoint>(c1)`.
             // ROOT.<ChoicePoint>(c1) is a pseudo state and cannot have an `enter` trigger.
             
             // ROOT.<ChoicePoint>(c1) behavior
-            // uml: [this.tracer?.log("🛡️ User evaluating guard: " + "guard1()") || this.evaluateGuard("ROOT.<ChoicePoint>(c1)","[guard1()] / { ActionB(); } TransitionTo(State2)")] / { this.tracer?.log("⚡ FSM would execute action: " + "ActionB();");this.tracer?.edgeTransition("edge2"); } TransitionTo(State2)
-            if (this.tracer?.log("🛡️ User evaluating guard: " + "guard1()") || this.evaluateGuard("ROOT.<ChoicePoint>(c1)","[guard1()] / { ActionB(); } TransitionTo(State2)"))
+            // uml: [this.tracer?.logGuardCodeEvaluation("guard1()") || this.evaluateGuard('ROOT.<ChoicePoint>(c1)', "[guard1()] / { ActionB(); } TransitionTo(State2)")] / { this.tracer?.logActionCode("ActionB();");this.tracer?.edgeTransition('edge2'); } TransitionTo(State2)
+            if (this.tracer?.logGuardCodeEvaluation("guard1()") || this.evaluateGuard('ROOT.<ChoicePoint>(c1)', "[guard1()] / { ActionB(); } TransitionTo(State2)"))
             {
                 // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition). Already at LCA, no exiting required.
                 
-                // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionB();");this.tracer?.edgeTransition("edge2");`.
-                this.tracer?.log("⚡ FSM would execute action: " + "ActionB();");this.tracer?.edgeTransition("edge2");
+                // Step 2: Transition action: `this.tracer?.logActionCode("ActionB();");this.tracer?.edgeTransition('edge2');`.
+                this.tracer?.logActionCode("ActionB();");this.tracer?.edgeTransition('edge2');
                 
                 // Step 3: Enter/move towards transition target `State2`.
-                this.#STATE2_enter();
+                this._STATE2_enter();
                 
                 // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
                 return;
             } // end of behavior for ROOT.<ChoicePoint>(c1)
             
             // ROOT.<ChoicePoint>(c1) behavior
-            // uml: else / { this.tracer?.log("⚡ FSM would execute action: " + "ActionC();");this.tracer?.edgeTransition("edge3"); } TransitionTo(ROOT.<ChoicePoint>(j1))
+            // uml: else / { this.tracer?.logActionCode("ActionC();");this.tracer?.edgeTransition('edge3'); } TransitionTo(ROOT.<ChoicePoint>(j1))
             {
                 // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition). Already at LCA, no exiting required.
                 
-                // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionC();");this.tracer?.edgeTransition("edge3");`.
-                this.tracer?.log("⚡ FSM would execute action: " + "ActionC();");this.tracer?.edgeTransition("edge3");
+                // Step 2: Transition action: `this.tracer?.logActionCode("ActionC();");this.tracer?.edgeTransition('edge3');`.
+                this.tracer?.logActionCode("ActionC();");this.tracer?.edgeTransition('edge3');
                 
                 // Step 3: Enter/move towards transition target `ROOT.<ChoicePoint>(j1)`.
                 // ROOT.<ChoicePoint>(j1) is a pseudo state and cannot have an `enter` trigger.
                 
                 // Finish transition by calling pseudo state transition function.
-                this.#ROOT_ChoicePoint_j1__transition();
+                this._ROOT_ChoicePoint_j1__transition();
                 return; // event processing immediately stops when a transition finishes. No other behaviors for this state are checked.
             } // end of behavior for ROOT.<ChoicePoint>(c1)
         } // end of behavior for State1
@@ -635,7 +916,7 @@ evaluateGuard = null;
     // event handlers for state STATE2
     ////////////////////////////////////////////////////////////////////////////////
     
-    #STATE2_enter()
+    _STATE2_enter()
     {
         this.stateId = MyFsm.StateId.STATE2;
         
@@ -647,14 +928,14 @@ evaluateGuard = null;
         } // end of behavior for State2
         
         // State2 behavior
-        // uml: enter / { this.tracer?.log("⚡ FSM would execute action: " + "ActionH();\nActionB();"); }
+        // uml: enter / { this.tracer?.logActionCode("ActionH();\nActionB();"); }
         {
-            // Step 1: execute action `this.tracer?.log("⚡ FSM would execute action: " + "ActionH();\nActionB();");`
-            this.tracer?.log("⚡ FSM would execute action: " + "ActionH();\nActionB();");
+            // Step 1: execute action `this.tracer?.logActionCode("ActionH();\nActionB();");`
+            this.tracer?.logActionCode("ActionH();\nActionB();");
         } // end of behavior for State2
     }
     
-    #STATE2_exit()
+    _STATE2_exit()
     {
         // State2 behavior
         // uml: exit / { this.tracer?.exitState('State2'); }
@@ -666,53 +947,53 @@ evaluateGuard = null;
         this.stateId = MyFsm.StateId.ROOT;
     }
     
-    #STATE2_do()
+    _STATE2_do()
     {
         // State2 behavior
-        // uml: do / { this.tracer?.log("⚡ FSM would execute action: " + "ActionF();"); }
+        // uml: do / { this.tracer?.logActionCode("ActionF();"); }
         {
-            // Step 1: execute action `this.tracer?.log("⚡ FSM would execute action: " + "ActionF();");`
-            this.tracer?.log("⚡ FSM would execute action: " + "ActionF();");
+            // Step 1: execute action `this.tracer?.logActionCode("ActionF();");`
+            this.tracer?.logActionCode("ActionF();");
         } // end of behavior for State2
         
         // No ancestor handles this event.
     }
     
-    #STATE2_event2()
+    _STATE2_event2()
     {
         // State2 behavior
-        // uml: Event2 / { this.tracer?.edgeTransition("edge6"); } TransitionTo(ROOT.<ChoicePoint>(j1))
+        // uml: Event2 / { this.tracer?.edgeTransition('edge6'); } TransitionTo(ROOT.<ChoicePoint>(j1))
         {
             // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition).
-            this.#STATE2_exit();
+            this._STATE2_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge6");`.
-            this.tracer?.edgeTransition("edge6");
+            // Step 2: Transition action: `this.tracer?.edgeTransition('edge6');`.
+            this.tracer?.edgeTransition('edge6');
             
             // Step 3: Enter/move towards transition target `ROOT.<ChoicePoint>(j1)`.
             // ROOT.<ChoicePoint>(j1) is a pseudo state and cannot have an `enter` trigger.
             
             // Finish transition by calling pseudo state transition function.
-            this.#ROOT_ChoicePoint_j1__transition();
+            this._ROOT_ChoicePoint_j1__transition();
             return; // event processing immediately stops when a transition finishes. No other behaviors for this state are checked.
         } // end of behavior for State2
         
         // No ancestor handles this event.
     }
     
-    #STATE2_event3()
+    _STATE2_event3()
     {
         // State2 behavior
-        // uml: Event3 / { this.tracer?.edgeTransition("edge5"); } TransitionTo(TERMINAL)
+        // uml: Event3 / { this.tracer?.edgeTransition('edge5'); } TransitionTo(TERMINAL)
         {
             // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition).
-            this.#STATE2_exit();
+            this._STATE2_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge5");`.
-            this.tracer?.edgeTransition("edge5");
+            // Step 2: Transition action: `this.tracer?.edgeTransition('edge5');`.
+            this.tracer?.edgeTransition('edge5');
             
             // Step 3: Enter/move towards transition target `TERMINAL`.
-            this.#TERMINAL_enter();
+            this._TERMINAL_enter();
             
             // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
             return;
@@ -726,7 +1007,7 @@ evaluateGuard = null;
     // event handlers for state STATE3
     ////////////////////////////////////////////////////////////////////////////////
     
-    #STATE3_enter()
+    _STATE3_enter()
     {
         this.stateId = MyFsm.StateId.STATE3;
         
@@ -738,7 +1019,7 @@ evaluateGuard = null;
         } // end of behavior for State3
     }
     
-    #STATE3_exit()
+    _STATE3_exit()
     {
         // State3 behavior
         // uml: exit / { this.tracer?.exitState('State3'); }
@@ -750,19 +1031,19 @@ evaluateGuard = null;
         this.stateId = MyFsm.StateId.ROOT;
     }
     
-    #STATE3_event3()
+    _STATE3_event3()
     {
         // State3 behavior
-        // uml: Event3 / { this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge7"); } TransitionTo(State1)
+        // uml: Event3 / { this.tracer?.logActionCode("ActionA();");this.tracer?.edgeTransition('edge7'); } TransitionTo(State1)
         {
             // Step 1: Exit states until we reach `ROOT` state (Least Common Ancestor for transition).
-            this.#exitUpToStateHandler(MyFsm.StateId.ROOT);
+            this._exitUpToStateHandler(MyFsm.StateId.ROOT);
             
-            // Step 2: Transition action: `this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge7");`.
-            this.tracer?.log("⚡ FSM would execute action: " + "ActionA();");this.tracer?.edgeTransition("edge7");
+            // Step 2: Transition action: `this.tracer?.logActionCode("ActionA();");this.tracer?.edgeTransition('edge7');`.
+            this.tracer?.logActionCode("ActionA();");this.tracer?.edgeTransition('edge7');
             
             // Step 3: Enter/move towards transition target `State1`.
-            this.#STATE1_enter();
+            this._STATE1_enter();
             
             // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
             return;
@@ -776,7 +1057,7 @@ evaluateGuard = null;
     // event handlers for state STATE3A
     ////////////////////////////////////////////////////////////////////////////////
     
-    #STATE3A_enter()
+    _STATE3A_enter()
     {
         this.stateId = MyFsm.StateId.STATE3A;
         
@@ -788,14 +1069,14 @@ evaluateGuard = null;
         } // end of behavior for State3A
         
         // State3A behavior
-        // uml: enter / { this.tracer?.log("⚡ FSM would execute action: " + "ActionD();"); }
+        // uml: enter / { this.tracer?.logActionCode("ActionD();"); }
         {
-            // Step 1: execute action `this.tracer?.log("⚡ FSM would execute action: " + "ActionD();");`
-            this.tracer?.log("⚡ FSM would execute action: " + "ActionD();");
+            // Step 1: execute action `this.tracer?.logActionCode("ActionD();");`
+            this.tracer?.logActionCode("ActionD();");
         } // end of behavior for State3A
     }
     
-    #STATE3A_exit()
+    _STATE3A_exit()
     {
         // State3A behavior
         // uml: exit / { this.tracer?.exitState('State3A'); }
@@ -807,19 +1088,19 @@ evaluateGuard = null;
         this.stateId = MyFsm.StateId.STATE3;
     }
     
-    #STATE3A_event1()
+    _STATE3A_event1()
     {
         // State3A behavior
-        // uml: Event1 / { this.tracer?.edgeTransition("edge9"); } TransitionTo(State3B)
+        // uml: Event1 / { this.tracer?.edgeTransition('edge9'); } TransitionTo(State3B)
         {
             // Step 1: Exit states until we reach `State3` state (Least Common Ancestor for transition).
-            this.#STATE3A_exit();
+            this._STATE3A_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge9");`.
-            this.tracer?.edgeTransition("edge9");
+            // Step 2: Transition action: `this.tracer?.edgeTransition('edge9');`.
+            this.tracer?.edgeTransition('edge9');
             
             // Step 3: Enter/move towards transition target `State3B`.
-            this.#STATE3B_enter();
+            this._STATE3B_enter();
             
             // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
             return;
@@ -833,7 +1114,7 @@ evaluateGuard = null;
     // event handlers for state STATE3B
     ////////////////////////////////////////////////////////////////////////////////
     
-    #STATE3B_enter()
+    _STATE3B_enter()
     {
         this.stateId = MyFsm.StateId.STATE3B;
         
@@ -845,13 +1126,13 @@ evaluateGuard = null;
         } // end of behavior for State3B
     }
     
-    #STATE3B_exit()
+    _STATE3B_exit()
     {
         // State3B behavior
-        // uml: exit / { this.tracer?.log("⚡ FSM would execute action: " + "ActionE();"); }
+        // uml: exit / { this.tracer?.logActionCode("ActionE();"); }
         {
-            // Step 1: execute action `this.tracer?.log("⚡ FSM would execute action: " + "ActionE();");`
-            this.tracer?.log("⚡ FSM would execute action: " + "ActionE();");
+            // Step 1: execute action `this.tracer?.logActionCode("ActionE();");`
+            this.tracer?.logActionCode("ActionE();");
         } // end of behavior for State3B
         
         // State3B behavior
@@ -864,19 +1145,19 @@ evaluateGuard = null;
         this.stateId = MyFsm.StateId.STATE3;
     }
     
-    #STATE3B_event2()
+    _STATE3B_event2()
     {
         // State3B behavior
-        // uml: Event2 / { this.tracer?.edgeTransition("edge10"); } TransitionTo(State3A)
+        // uml: Event2 / { this.tracer?.edgeTransition('edge10'); } TransitionTo(State3A)
         {
             // Step 1: Exit states until we reach `State3` state (Least Common Ancestor for transition).
-            this.#STATE3B_exit();
+            this._STATE3B_exit();
             
-            // Step 2: Transition action: `this.tracer?.edgeTransition("edge10");`.
-            this.tracer?.edgeTransition("edge10");
+            // Step 2: Transition action: `this.tracer?.edgeTransition('edge10');`.
+            this.tracer?.edgeTransition('edge10');
             
             // Step 3: Enter/move towards transition target `State3A`.
-            this.#STATE3A_enter();
+            this._STATE3A_enter();
             
             // Step 4: complete transition. Ends event dispatch. No other behaviors are checked.
             return;
@@ -890,7 +1171,7 @@ evaluateGuard = null;
     // event handlers for state TERMINAL
     ////////////////////////////////////////////////////////////////////////////////
     
-    #TERMINAL_enter()
+    _TERMINAL_enter()
     {
         this.stateId = MyFsm.StateId.TERMINAL;
         
@@ -902,7 +1183,7 @@ evaluateGuard = null;
         } // end of behavior for TERMINAL
     }
     
-    #TERMINAL_exit()
+    _TERMINAL_exit()
     {
         // TERMINAL behavior
         // uml: exit / { this.tracer?.exitState('TERMINAL'); }
@@ -914,7 +1195,7 @@ evaluateGuard = null;
         this.stateId = MyFsm.StateId.ROOT;
     }
     
-    // Thread safe.
+    // Thread safe. This function can be disabled with `outputStateIdToStringFunction` setting.
     static stateIdToString(id)
     {
         switch (id)
@@ -930,7 +1211,7 @@ evaluateGuard = null;
         }
     }
     
-    // Thread safe.
+    // Thread safe. This function can be disabled with `outputEventIdToStringFunction` setting.
     static eventIdToString(id)
     {
         switch (id)
@@ -942,11 +1223,28 @@ evaluateGuard = null;
             default: return "?";
         }
     }
+    
+    // Returns the parent state for a given state. Returns ROOT if input has no parent.
+    // Thread safe. This function can be disabled with `outputGetParentIdFunction` setting.
+    static getParentId(id)
+    {
+        switch (id)
+        {
+            case MyFsm.StateId.ROOT: return MyFsm.StateId.ROOT;
+            case MyFsm.StateId.STATE1: return MyFsm.StateId.ROOT;
+            case MyFsm.StateId.STATE2: return MyFsm.StateId.ROOT;
+            case MyFsm.StateId.STATE3: return MyFsm.StateId.ROOT;
+            case MyFsm.StateId.STATE3A: return MyFsm.StateId.STATE3;
+            case MyFsm.StateId.STATE3B: return MyFsm.StateId.STATE3;
+            case MyFsm.StateId.TERMINAL: return MyFsm.StateId.ROOT;
+            default: return MyFsm.StateId.ROOT;
+        }
+    }
 }
 
 </script>
 
-    <script type="module">
+    <script type='module'>
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         import svgPanZoom from 'https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/+esm' ;
         mermaid.initialize({ startOnLoad: false });
@@ -956,7 +1254,18 @@ evaluateGuard = null;
         document.querySelector('svg').removeAttribute('viewBox');
         document.querySelector('svg').setAttribute('width', '100%');
         document.querySelector('svg').setAttribute('height', '100%');
-        document.querySelector('svg').style["max-width"] = '';
+        document.querySelector('svg').style['max-width'] = '';
+
+        function escapeHtml(str) {
+          // Create a new, detached DOM node
+          var div = document.createElement('div');
+
+          // Set the textContent to the raw string. The browser automatically escapes special characters.
+          div.textContent = str;
+
+          // Return the escaped HTML string
+          return div.innerHTML;
+        }
 
         // don't scale the arrow when we scale the transition edge
         document.querySelectorAll('g defs marker[id$=barbEnd]').forEach(marker => {
@@ -966,12 +1275,13 @@ evaluateGuard = null;
         // https://github.com/StateSmith/StateSmith/issues/404
         // https://github.com/StateSmith/StateSmith/issues/294
         // rewrite $initial_state to a black circle
-        document.querySelectorAll('g[data-id*="(InitialState)"]').forEach(g=> {
-          g.innerHTML = '<circle transform="translate(0,3)" height="14" width="14" r="14" class="state - start"></circle>';
+        document.querySelectorAll(`g[data-id*='(InitialState)']`).forEach(g=> {
+          g.innerHTML = `<circle transform='translate(0,3)' height='14' width='14' r='14' class='state - start'></circle>`;
         })
 
         var panZoom = window.panZoom = svgPanZoom(document.querySelector('svg'), {
             zoomEnabled: true,
+            dblClickZoomEnabled: false, // double click zoom gets in the way of quickly clicking on edge events
             controlIconsEnabled: true,
             fit: true,
             center: true
@@ -1003,10 +1313,44 @@ evaluateGuard = null;
   "TERMINAL": []
 };
 
+        // https://github.com/StateSmith/StateSmith/issues/522
+        const stateEdgeMapping = {
+  "State1": [
+    1
+  ],
+  "State2": [
+    5,
+    6
+  ],
+  "State3": [
+    7
+  ],
+  "State3A": [
+    7,
+    9
+  ],
+  "State3B": [
+    7,
+    10
+  ],
+  "TERMINAL": []
+};
+
+        // https://github.com/StateSmith/StateSmith/issues/523
+        const stateDescriptionMapping = {
+  "MyFsm": "\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003EVertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EMyFsm\u003C/span\u003E\u003C/h3\u003E\u003Cspan class=\u0027vertex-meta\u0027\u003EChildren: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT.\u0026lt;InitialState\u0026gt;\u003C/span\u003E, \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState1\u003C/span\u003E, \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT.\u0026lt;ChoicePoint\u0026gt;(c1)\u003C/span\u003E, \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT.\u0026lt;ChoicePoint\u0026gt;(j1)\u003C/span\u003E, \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState2\u003C/span\u003E, \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3\u003C/span\u003E, \u003Cspan class=\u0027syntax-vertex-name\u0027\u003ETERMINAL\u003C/span\u003E\u003Cbr\u003E\u003C/span\u003E\u003C/td\u003E\u003C/tr\u003E",
+  "State1": "\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003EVertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState1\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EState1\u003C/span\u003E\u003C/h3\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003EEvent1\u003C/span\u003E \u003Cspan class=\u0027syntax-transition-arrow\u0027\u003E--\u003E \u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003ETransitionTo(\u003C/span\u003E\u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT.\u0026lt;ChoicePoint\u0026gt;(c1)\u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003E)\u003C/span\u003E\u003Cbr\u003E\u003C/td\u003E\u003C/tr\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003E\u21E1 Parent Vertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EMyFsm\u003C/span\u003E\u003C/h3\u003E\u003C/td\u003E\u003C/tr\u003E",
+  "State2": "\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003EVertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState2\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EState2\u003C/span\u003E\u003C/h3\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003Eenter\u003C/span\u003E \u003Cspan class=\u0027syntax-action-start-end\u0027\u003E/ { \u003C/span\u003E\u003Cspan class=\u0027syntax-action-code\u0027\u003EActionH();\u003Cbr\u003EActionB();\u003C/span\u003E\u003Cspan class=\u0027syntax-action-start-end\u0027\u003E }\u003C/span\u003E\u003Cbr\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003Edo\u003C/span\u003E \u003Cspan class=\u0027syntax-action-start-end\u0027\u003E/ { \u003C/span\u003E\u003Cspan class=\u0027syntax-action-code\u0027\u003EActionF();\u003C/span\u003E\u003Cspan class=\u0027syntax-action-start-end\u0027\u003E }\u003C/span\u003E\u003Cbr\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003EEvent3\u003C/span\u003E \u003Cspan class=\u0027syntax-transition-arrow\u0027\u003E--\u003E \u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003ETransitionTo(\u003C/span\u003E\u003Cspan class=\u0027syntax-vertex-name\u0027\u003ETERMINAL\u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003E)\u003C/span\u003E\u003Cbr\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003EEvent2\u003C/span\u003E \u003Cspan class=\u0027syntax-transition-arrow\u0027\u003E--\u003E \u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003ETransitionTo(\u003C/span\u003E\u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT.\u0026lt;ChoicePoint\u0026gt;(j1)\u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003E)\u003C/span\u003E\u003Cbr\u003E\u003C/td\u003E\u003C/tr\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003E\u21E1 Parent Vertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EMyFsm\u003C/span\u003E\u003C/h3\u003E\u003C/td\u003E\u003C/tr\u003E",
+  "State3": "\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003EVertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EState3\u003C/span\u003E\u003C/h3\u003E\u003Cspan class=\u0027vertex-meta\u0027\u003EChildren: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3.\u0026lt;InitialState\u0026gt;\u003C/span\u003E, \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3A\u003C/span\u003E, \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3B\u003C/span\u003E\u003Cbr\u003E\u003C/span\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003EEvent3\u003C/span\u003E \u003Cspan class=\u0027syntax-action-start-end\u0027\u003E/ { \u003C/span\u003E\u003Cspan class=\u0027syntax-action-code\u0027\u003EActionA();\u003C/span\u003E\u003Cspan class=\u0027syntax-action-start-end\u0027\u003E }\u003C/span\u003E \u003Cspan class=\u0027syntax-transition-arrow\u0027\u003E--\u003E \u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003ETransitionTo(\u003C/span\u003E\u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState1\u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003E)\u003C/span\u003E\u003Cbr\u003E\u003C/td\u003E\u003C/tr\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003E\u21E1 Parent Vertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EMyFsm\u003C/span\u003E\u003C/h3\u003E\u003C/td\u003E\u003C/tr\u003E",
+  "State3A": "\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003EVertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3A\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EState3A\u003C/span\u003E\u003C/h3\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003Eenter\u003C/span\u003E \u003Cspan class=\u0027syntax-action-start-end\u0027\u003E/ { \u003C/span\u003E\u003Cspan class=\u0027syntax-action-code\u0027\u003EActionD();\u003C/span\u003E\u003Cspan class=\u0027syntax-action-start-end\u0027\u003E }\u003C/span\u003E\u003Cbr\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003EEvent1\u003C/span\u003E \u003Cspan class=\u0027syntax-transition-arrow\u0027\u003E--\u003E \u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003ETransitionTo(\u003C/span\u003E\u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3B\u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003E)\u003C/span\u003E\u003Cbr\u003E\u003C/td\u003E\u003C/tr\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003E\u21E1 Parent Vertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EState3\u003C/span\u003E\u003C/h3\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003EEvent3\u003C/span\u003E \u003Cspan class=\u0027syntax-action-start-end\u0027\u003E/ { \u003C/span\u003E\u003Cspan class=\u0027syntax-action-code\u0027\u003EActionA();\u003C/span\u003E\u003Cspan class=\u0027syntax-action-start-end\u0027\u003E }\u003C/span\u003E \u003Cspan class=\u0027syntax-transition-arrow\u0027\u003E--\u003E \u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003ETransitionTo(\u003C/span\u003E\u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState1\u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003E)\u003C/span\u003E\u003Cbr\u003E\u003C/td\u003E\u003C/tr\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003E\u21E1 Parent Vertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EMyFsm\u003C/span\u003E\u003C/h3\u003E\u003C/td\u003E\u003C/tr\u003E",
+  "State3B": "\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003EVertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3B\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EState3B\u003C/span\u003E\u003C/h3\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003Eexit\u003C/span\u003E \u003Cspan class=\u0027syntax-action-start-end\u0027\u003E/ { \u003C/span\u003E\u003Cspan class=\u0027syntax-action-code\u0027\u003EActionE();\u003C/span\u003E\u003Cspan class=\u0027syntax-action-start-end\u0027\u003E }\u003C/span\u003E\u003Cbr\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003EEvent2\u003C/span\u003E \u003Cspan class=\u0027syntax-transition-arrow\u0027\u003E--\u003E \u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003ETransitionTo(\u003C/span\u003E\u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3A\u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003E)\u003C/span\u003E\u003Cbr\u003E\u003C/td\u003E\u003C/tr\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003E\u21E1 Parent Vertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState3\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EState3\u003C/span\u003E\u003C/h3\u003E\u003Cspan class=\u0027syntax-trigger-name\u0027\u003EEvent3\u003C/span\u003E \u003Cspan class=\u0027syntax-action-start-end\u0027\u003E/ { \u003C/span\u003E\u003Cspan class=\u0027syntax-action-code\u0027\u003EActionA();\u003C/span\u003E\u003Cspan class=\u0027syntax-action-start-end\u0027\u003E }\u003C/span\u003E \u003Cspan class=\u0027syntax-transition-arrow\u0027\u003E--\u003E \u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003ETransitionTo(\u003C/span\u003E\u003Cspan class=\u0027syntax-vertex-name\u0027\u003EState1\u003C/span\u003E\u003Cspan class=\u0027syntax-transition-to\u0027\u003E)\u003C/span\u003E\u003Cbr\u003E\u003C/td\u003E\u003C/tr\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003E\u21E1 Parent Vertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EMyFsm\u003C/span\u003E\u003C/h3\u003E\u003C/td\u003E\u003C/tr\u003E",
+  "TERMINAL": "\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003EVertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003ETERMINAL\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003ETERMINAL\u003C/span\u003E\u003C/h3\u003E\u003C/td\u003E\u003C/tr\u003E\u003Ctr\u003E\u003Ctd\u003E\u003Ch3\u003E\u21E1 Parent Vertex: \u003Cspan class=\u0027syntax-vertex-name\u0027\u003EROOT\u003C/span\u003E, \u003Cb\u003EDiagram Id:\u003C/b\u003E \u003Cspan class=\u0027syntax-vertex-id\u0027\u003EMyFsm\u003C/span\u003E\u003C/h3\u003E\u003C/td\u003E\u003C/tr\u003E"
+};
+
         // Get page element references
-        const leftPane = document.querySelector(".main");
-        const rightPane = document.querySelector(".sidebar");
-        const gutter = document.querySelector(".gutter");
+        const leftPane = document.querySelector('.main');
+        const rightPane = document.querySelector('.sidebar');
+        const gutter = document.querySelector('.gutter');
 
         // Function to resize panes
         function resizer(e) {          
@@ -1035,10 +1379,31 @@ evaluateGuard = null;
 
 
         //------------------- drop down functionality start -------------------
-        const dropdownButton = document.getElementById('dropdown-button');
+        const dropdownButton = document.getElementById('settings-dropdown-button');
         const dropdownDiv = document.getElementById('myDropdown');
 
         dropdownButton.addEventListener('click', toggleDropdown);
+
+        document.getElementById('clear-button').addEventListener('click', function() {
+          const tbody = document.querySelector('#event-logs tbody');
+          tbody.innerHTML = '';
+        });
+
+        // listener for resetSettingsButton
+        document.getElementById('resetSettingsButton').addEventListener('click', function() {
+          if (window.confirm('Are you sure you want to reset all settings to their default values? This will clear all saved settings from localStorage.')) {
+            localStorage.clear();
+            window.location.reload();
+          }
+        });
+
+        // this setting needs a page reload anyway so just make it happen for users to avoid confusion
+        document.getElementById('savedSetting_showEventButtonTooltips').addEventListener('click', function() {
+          window.setTimeout(() => {
+            window.alert('Changing this setting causes a page reload.');
+            window.location.reload();
+          }, 100);
+        });
 
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
@@ -1064,8 +1429,7 @@ evaluateGuard = null;
         });
 
         // Set the state of the timestamp checkbox
-        document.getElementById('timestamps').checked = document.querySelector('table.console').classList.contains('timestamps');
-        document.getElementById('timestamps').addEventListener('change', function() {
+        document.getElementById('savedSetting_timestamps').addEventListener('change', function() {
           if(this.checked) {
             document.querySelector('table.console').classList.add('timestamps');
           } else {
@@ -1074,10 +1438,374 @@ evaluateGuard = null;
         });
 
         // Set up hide irrelevant events checkbox state and event listener
-        document.getElementById('hideIrrelevantEvents').addEventListener('change', function() {
+        document.getElementById('savedSetting_hideIrrelevantEvents').addEventListener('change', function() {
           // When checkbox state changes, only update button visibility, not availability
           updateButtonVisibility();
         });
+
+        document.getElementById('savedSetting_showEventButtons').addEventListener('change', function() {
+          // When checkbox state changes, show or hide the event buttons container
+          const eventButtonsContainer = document.getElementById('event-buttons');
+          if(this.checked) {
+            eventButtonsContainer.style.display = 'block';
+          } else {
+            eventButtonsContainer.style.display = 'none';
+          }
+        });
+
+        // state info
+        // https://github.com/StateSmith/StateSmith/issues/523
+        {
+          const checkBox = document.getElementById('savedSetting_showStateInfo');
+          checkBox.addEventListener('change', function() {
+            // hide #state-info div if unchecked
+            const stateInfoDiv = document.getElementById('state-info');
+            if(this.checked) {
+              stateInfoDiv.style.display = 'block';
+            } else {
+              stateInfoDiv.style.display = 'none';
+            }
+          });
+
+          // trigger a change event on page load to set the initial visibility of the state info div based on the checkbox state (which may be restored from localStorage)
+          checkBox.dispatchEvent(new Event('change'));
+        }
+
+        // store and restore checkbox states using localStorage.
+        // DO AFTER event listeners are set up, so that restored state will trigger the change event and apply the setting.
+        {
+          const dropdownCheckboxes = document.querySelectorAll(`.dropdown-content input[type='checkbox']`);
+          dropdownCheckboxes.forEach(checkbox => {
+
+            if (checkbox.id.startsWith('savedSetting_') === false)
+            {
+              console.log(`Skipping checkbox with id '${checkbox.id}' for localStorage state saving/restoring because it does not start with 'savedSetting_'.`, checkbox);
+              return;
+            }
+
+            // append a note to the checkbox title that the state is saved in localStorage
+            checkbox.parentElement.title += '\nThis setting is saved in localStorage and will persist across page reloads.';
+
+            // Restore state from localStorage
+            const savedState = localStorage.getItem(checkbox.id);
+            if (savedState !== null) {
+              checkbox.checked = (savedState === 'true');
+              checkbox.dispatchEvent(new Event('change')); // Trigger change event to apply the setting
+              console.log(`Restored checkbox value for '${checkbox.id}' to '${checkbox.checked}'`, checkbox);
+            }
+
+            // Save state to localStorage on change
+            checkbox.addEventListener('change', function() {
+              localStorage.setItem(checkbox.id, this.checked);
+              console.log(`Saved checkbox value for '${checkbox.id}' to '${this.checked}'`, checkbox);
+            });
+          });
+        }
+
+        function updateCssColorVar(id, color, save=false) {
+            document.getElementById(id).value = color;
+            document.documentElement.style.setProperty(`--${id}`, color); // custom css vars start with '--'
+            if (save)
+            {
+              localStorage.setItem(id, color);
+              console.log(`Saved color input value for '${id}' to '${color}'`);
+            }
+        }
+
+        // setup color themes
+        {
+          const defaults = {
+            stateTitleTextColor: '#ababab',
+            stateStrokeColor: '#999999',
+            stateFillColor: '#1f2020',
+            stateNestedFillColor: '#333',
+            stateActiveTitleTextColor: '#ffffff',
+            stateActiveStrokeColor: '#e06c75',
+            stateActiveFillColor: '#3c3224',
+            stateActiveNestedFillColor: '#444',
+            syntaxOrder: '#c678dd',
+            syntaxTriggerName: '#cccccc',
+            syntaxTriggerPunctuation: '#d19a66',
+            syntaxGuardBracket: '#98c379',
+            syntaxGuardCode: '#b5d9a0',
+            syntaxActionStartEnd: '#d19a66',
+            syntaxActionCode: '#abb2bf',
+            transitionPath: '#999999',
+            transitionPathJustTakenColor: '#c2c2c2',
+            transitionPathAvailableColor: '#ffca38',
+            clickableColor: '#24f0ff',
+          };
+
+          const themes = {
+            'dark-pro-1': {
+              stateTitleTextColor:          '#ababab',
+              stateStrokeColor:             '#999999',
+              stateFillColor:               '#3d3d3d',
+              stateNestedFillColor:         '#303030',
+              stateActiveTitleTextColor:    '#fff',
+              stateActiveStrokeColor:       '#ffffff',
+              stateActiveFillColor:         '#181e20',
+              stateActiveNestedFillColor:   '#4c4e52',
+              syntaxOrder:                  '#c678dd',
+              syntaxTriggerName:            '#cccccc',
+              syntaxTriggerPunctuation:     '#d19a66',
+              syntaxGuardBracket:           '#98c379',
+              syntaxGuardCode:              '#b5d9a0',
+              syntaxActionStartEnd:         '#d19a66',
+              syntaxActionCode:             '#d2d2b6',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#c7c7c7',
+              transitionPathAvailableColor: '#ddd840',
+              clickableColor:               '#f09800',
+            },
+            'dark-pro-2': {
+              stateTitleTextColor:          '#eeeeee',
+              stateStrokeColor:             '#999999',
+              stateActiveTitleTextColor:    '#fffacd',
+              stateActiveStrokeColor:       '#e06c75',
+              syntaxOrder:                  '#c678dd',
+              syntaxTriggerName:            '#e5c07b',
+              syntaxTriggerPunctuation:     '#d19a66',
+              syntaxGuardBracket:           '#98c379',
+              syntaxGuardCode:              '#b5d9a0',
+              syntaxActionStartEnd:         '#d19a66',
+              syntaxActionCode:             '#abb2bf',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#c2c2c2',
+              transitionPathAvailableColor: '#e5c07b',
+              clickableColor:               '#7fffd4',
+            },
+            'original': {
+              stateTitleTextColor:          '#e1e0bc',
+              stateStrokeColor:             '#999999',
+              stateFillColor:               '#1f2020',
+              stateNestedFillColor:         '#333',
+              stateActiveTitleTextColor:    '#fdffb0',
+              stateActiveStrokeColor:       '#d16f3b',
+              stateActiveFillColor:         '#3c3224',
+              stateActiveNestedFillColor:   '#444',
+              syntaxOrder:                  '#e9a1eb',
+              syntaxTriggerName:            '#f1b862',
+              syntaxTriggerPunctuation:     '#eeb765',
+              syntaxGuardBracket:           '#00bd2b',
+              syntaxGuardCode:              '#a6e19f',
+              syntaxActionStartEnd:         '#e18d33',
+              syntaxActionCode:             '#cbac8b',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#a3a3a3',
+              transitionPathAvailableColor: '#fff82e',
+              clickableColor:               '#7fffd4',
+            },
+            'arctic-void': {
+              stateTitleTextColor:          '#eeeeee',
+              stateStrokeColor:             '#999999',
+              stateFillColor:               '#333333',
+              stateNestedFillColor:         '#303030',
+              stateActiveTitleTextColor:    '#d4f0ff',
+              stateActiveStrokeColor:       '#3888e0',
+              stateActiveFillColor:         '#262f40',
+              stateActiveNestedFillColor:   '#383b47',
+              syntaxOrder:                  '#c080f0',
+              syntaxTriggerName:            '#60c8f8',
+              syntaxTriggerPunctuation:     '#70b8e8',
+              syntaxGuardBracket:           '#00d8a0',
+              syntaxGuardCode:              '#80e8cc',
+              syntaxActionStartEnd:         '#4898e8',
+              syntaxActionCode:             '#8ab8d0',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#7090a8',
+              transitionPathAvailableColor: '#00e8ff',
+              clickableColor:               '#7fffd4',
+            },
+            'dracula': {
+              stateTitleTextColor:          '#b5b5b5',
+              stateStrokeColor:             '#999999',
+              stateActiveTitleTextColor:    '#f8f8f2',
+              stateActiveStrokeColor:       '#ff5555',
+              syntaxOrder:                  '#ff79c6',
+              syntaxTriggerName:            '#d1d1d1',
+              syntaxTriggerPunctuation:     '#ffb86c',
+              syntaxGuardBracket:           '#50fa7b',
+              syntaxGuardCode:              '#8af5a4',
+              syntaxActionStartEnd:         '#bd93f9',
+              syntaxActionCode:             '#8be9fd',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#6272a4',
+              transitionPathAvailableColor: '#38ff4f',
+              clickableColor:               '#7fffd4',
+            },
+            'tokyo': {
+              stateTitleTextColor:          '#eeeeee',
+              stateStrokeColor:             '#999999',
+              stateActiveTitleTextColor:    '#cdd6f4',
+              stateActiveStrokeColor:       '#f7768e',
+              syntaxOrder:                  '#bb9af7',
+              syntaxTriggerName:            '#e0af68',
+              syntaxTriggerPunctuation:     '#ff9e64',
+              syntaxGuardBracket:           '#73daca',
+              syntaxGuardCode:              '#9eddcc',
+              syntaxActionStartEnd:         '#ff9e64',
+              syntaxActionCode:             '#7dcfff',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#565f89',
+              transitionPathAvailableColor: '#e0af68',
+              clickableColor:               '#7fffd4',
+            },
+            'github-dark': {
+              stateTitleTextColor:          '#eeeeee',
+              stateStrokeColor:             '#999999',
+              stateActiveTitleTextColor:    '#e6edf3',
+              stateActiveStrokeColor:       '#f85149',
+              syntaxOrder:                  '#d2a8ff',
+              syntaxTriggerName:            '#ffa657',
+              syntaxTriggerPunctuation:     '#ffa657',
+              syntaxGuardBracket:           '#3fb950',
+              syntaxGuardCode:              '#7ee787',
+              syntaxActionStartEnd:         '#79c0ff',
+              syntaxActionCode:             '#a5d6ff',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#6e7681',
+              transitionPathAvailableColor: '#e3b341',
+              clickableColor:               '#7fffd4',
+            },
+            'night-owl': {
+              stateTitleTextColor:          '#eeeeee',
+              stateStrokeColor:             '#999999',
+              stateActiveTitleTextColor:    '#d6deeb',
+              stateActiveStrokeColor:       '#ef5350',
+              syntaxOrder:                  '#c792ea',
+              syntaxTriggerName:            '#ffcb8b',
+              syntaxTriggerPunctuation:     '#f78c6c',
+              syntaxGuardBracket:           '#addb67',
+              syntaxGuardCode:              '#c5e99b',
+              syntaxActionStartEnd:         '#f78c6c',
+              syntaxActionCode:             '#7fdbca',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#637777',
+              transitionPathAvailableColor: '#ffcb8b',
+              clickableColor:               '#7fffd4',
+            },
+            'monochrome': {
+              stateTitleTextColor:          '#eeeeee',
+              stateStrokeColor:             '#999999',
+              stateActiveTitleTextColor:    '#f0f0f0',
+              stateActiveStrokeColor:       '#aaaaaa',
+              syntaxOrder:                  '#999999',
+              syntaxTriggerName:            '#dddddd',
+              syntaxTriggerPunctuation:     '#cccccc',
+              syntaxGuardBracket:           '#eeeeee',
+              syntaxGuardCode:              '#bbbbbb',
+              syntaxActionStartEnd:         '#cccccc',
+              syntaxActionCode:             '#888888',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#b0b0b0',
+              transitionPathAvailableColor: '#ffffff',
+              clickableColor:               '#7fffd4',
+            },
+            'white': {
+              stateTitleTextColor:          '#ffffff',
+              stateStrokeColor:             '#ffffff',
+              stateActiveTitleTextColor:    '#ffffff',
+              stateActiveStrokeColor:       '#ffffff',
+              syntaxOrder:                  '#ffffff',
+              syntaxTriggerName:            '#ffffff',
+              syntaxTriggerPunctuation:     '#ffffff',
+              syntaxGuardBracket:           '#ffffff',
+              syntaxGuardCode:              '#ffffff',
+              syntaxActionStartEnd:         '#ffffff',
+              syntaxActionCode:             '#ffffff',
+              transitionPath:               '#ffffff',
+              transitionPathJustTakenColor: '#ffffff',
+              transitionPathAvailableColor: '#ffffff',
+              clickableColor:               '#7fffd4',
+            },
+            'sepia': {
+              stateTitleTextColor:          '#c4b49a',
+              stateStrokeColor:             '#999999',
+              stateActiveTitleTextColor:    '#e8dbb0',
+              stateActiveStrokeColor:       '#a0622a',
+              syntaxOrder:                  '#b08878',
+              syntaxTriggerName:            '#c49a52',
+              syntaxTriggerPunctuation:     '#b8903e',
+              syntaxGuardBracket:           '#a87840',
+              syntaxGuardCode:              '#a89070',
+              syntaxActionStartEnd:         '#a87840',
+              syntaxActionCode:             '#a89070',
+              transitionPath:               '#999999',
+              transitionPathJustTakenColor: '#8c7e6a',
+              transitionPathAvailableColor: '#c9a84c',
+              clickableColor:               '#7fffd4',
+            },
+          }
+
+          function setDefaults(save=false)
+          {
+            for (const [key, value] of Object.entries(defaults)) {
+              updateCssColorVar('savedSetting_' + key, value, save);
+            }
+          }
+
+          function setTheme(themeId, save=false)
+          {
+            setDefaults(save);
+
+            const theme = themes[themeId];
+            for (const [key, value] of Object.entries(theme)) {
+              updateCssColorVar('savedSetting_' + key, value, save);
+            }
+          }
+
+          document.getElementById('theme-select').addEventListener('change', () => {
+              const themeId = document.getElementById('theme-select').value;
+              if (!themeId) return;
+              const save=true;
+              setTheme(themeId, save);
+          });
+
+          setTheme('dark-pro-1');
+        }
+
+        // setup custom color storage.
+        // MUST come after above so that stored settings applied after default theme.
+        {
+          const colorInputs = document.querySelectorAll(`.dropdown-content input[type='color']`);
+          colorInputs.forEach(inputWidget => {
+            // append a note to the input title that the value is saved in localStorage
+            inputWidget.title += '\nThis custom color value is saved in localStorage and will persist across page reloads.';
+
+            // Restore state from localStorage
+            const savedColor = localStorage.getItem(inputWidget.id);
+            if (savedColor !== null) {
+              inputWidget.value = savedColor;
+              updateCssColorVar(inputWidget.id, savedColor);
+              console.log(`Restored color input value for '${inputWidget.id}' to '${inputWidget.value}'`, inputWidget);
+            }
+
+            // Save state to localStorage on change
+            inputWidget.addEventListener('input', function() {
+              const save=true;
+              updateCssColorVar(inputWidget.id, this.value, save);
+            });
+
+            // update current css style
+            updateCssColorVar(inputWidget.id, inputWidget.value);
+          });
+        }
+
+        // animate transition edges
+        {
+          setInterval(()=>{
+            // only do if animation is enabled
+            if (document.getElementById('savedSetting_transitionOffsetAnimation').checked === false) {
+              return;
+            }
+
+            let offset = document.documentElement.style.getPropertyValue('--transition-animation-offset');
+            offset -= 1;
+            document.documentElement.style.setProperty('--transition-animation-offset', offset);
+          }, 50);
+        }
+
 
         //------------------- drop down functionality end -------------------
 
@@ -1092,7 +1820,7 @@ evaluateGuard = null;
         }
 
         // Add a row to the history table.
-        function addHistoryRow(time, event, html = false) {
+        function addEventLogRow(time, event, html = false) {
             var row = document.createElement('tr');
             var timeCell = document.createElement('td');
             timeCell.innerText = formatTime(time);
@@ -1107,10 +1835,11 @@ evaluateGuard = null;
 
             row.appendChild(timeCell);
             row.appendChild(eventCell);
-            document.querySelector('tbody').appendChild(row);
+            document.querySelector('#event-logs tbody').appendChild(row);
         }
 
         var sm = new MyFsm();
+        window.StateSmith_sm = sm; // expose to global scope so people can interact with it from the console if they want to.
 
         // prompt the user to evaluate guards manually
         sm.evaluateGuard = (vertexName, behaviorUml) => {
@@ -1121,14 +1850,14 @@ evaluateGuard = null;
         function highlightEdge(edgeId) {
             var edge = document.getElementById(edgeId);
             if (edge) {
-              edge.classList.add('active');
+              edge.classList.add('pathJustTaken');
               highlightedEdges.add(edge);
             }
         }
 
         function clearHighlightedEdges() {
             for (const edge of highlightedEdges) {
-              edge.classList.remove('active');
+              edge.classList.remove('pathJustTaken');
               const showOldTraversal = false;
               if (showOldTraversal) {
                   // shows that the edge was traversed. Optional, but kinda nice.
@@ -1138,17 +1867,36 @@ evaluateGuard = null;
             highlightedEdges.clear();
         }
 
+        function clearHighlightedStates() {
+            document.querySelectorAll('g[id].active').forEach(e => e.classList.remove('active'));
+        }
+
         // Function to update event button states (availability and visibility)
-        function updateEventButtonStates(currentStateName) {
-            const availableEvents = stateEventsMapping[currentStateName] || [];
-            
+        function updateEventButtonStates(currentStateDiagramName) {
+            const availableEvents = stateEventsMapping[currentStateDiagramName] || [];
+
             diagramEventNamesArray.forEach(eventName => {
                 const button = document.getElementById('button_' + eventName);
                 if (button) {
-                    const isAvailable = availableEvents.includes(eventName);
-                    
-                    // Only set disabled property, CSS :disabled pseudo-class handles styling
-                    button.disabled = !isAvailable;
+                    const hasEventHandler = availableEvents.includes(eventName);
+
+                    let title = `Dispatch event '${eventName}' to the state machine.`;
+
+                    if (hasEventHandler) {
+                        button.classList.remove('hasNoEventHandler');
+                    } else {
+                        button.classList.add('hasNoEventHandler');
+                        title += '\nThere is no handler for this event in the current state.\nDispatching is valid, but will have no effect on the state machine.';
+                    }
+
+                    title += '\nThere is a ⚙️ setting to disable these tooltips.';
+
+                    const showTooltips = document.getElementById('savedSetting_showEventButtonTooltips').checked
+                    if (showTooltips) {
+                        button.title = title;
+                    } else {
+                        button.removeAttribute('title');
+                    }
                 }
             });
             
@@ -1158,43 +1906,211 @@ evaluateGuard = null;
 
         // Function to update button visibility based on Hide Unused checkbox
         function updateButtonVisibility() {
-            const hideIrrelevantEvents = document.getElementById('hideIrrelevantEvents').checked;
+            const hideIrrelevantEvents = document.getElementById('savedSetting_hideIrrelevantEvents').checked;
             
             diagramEventNamesArray.forEach(eventName => {
                 const button = document.getElementById('button_' + eventName);
                 if (button) {
-                    // Toggle hidden class based on checkbox state and button disabled state
-                    button.classList.toggle('hidden', hideIrrelevantEvents && button.disabled);
+                    // Toggle hidden class based on checkbox state and button has no event handler
+                    button.classList.toggle('hidden', hideIrrelevantEvents && button.classList.contains('hasNoEventHandler'));
                 }
             });
         }
 
+        // https://github.com/StateSmith/StateSmith/issues/522
+        function updateEdgeAvailability(currentStateDiagramName) {
+            const availableEdges = stateEdgeMapping[currentStateDiagramName] || [];
+
+            document.querySelectorAll('.transition.available').forEach(element => {
+              element.classList.remove('available');
+            });
+
+            availableEdges.forEach(edgeId => {
+                var domId = `edge${edgeId}`;
+                var edge = document.getElementById(domId);
+                if (edge) {
+                  edge.classList.add('available');
+                }
+            });
+        }
+
+        function updateClickableVertexNames()
+        {
+          document.querySelectorAll('.syntax-vertex-name').forEach(element => {
+            const stateName = element.innerText;
+            const isState = stateDescriptionMapping[stateName] !== undefined;
+            
+            if (!isState || element.classList.contains('clickable'))
+            {
+              return;
+            }
+
+            element.classList.add('clickable');
+            element.addEventListener('click', (event) => {
+              forceStateChange(stateName);
+            });
+          });
+        }
+
+        function updateClickableEvents()
+        {
+          document.querySelectorAll('.syntax-trigger-name').forEach(element => {
+            const eventName = element.innerText;
+
+            const button = document.getElementById('button_' + eventName);
+            if (!button || element.classList.contains('clickable'))
+            {
+              return;
+            }
+
+            element.classList.add('clickable');
+            element.addEventListener('click', (event) => {
+              button.click();
+            });
+          });
+        }
+
+        // https://github.com/StateSmith/StateSmith/issues/523
+        function updateStateInfoPanel(diagramStateName)
+        {
+          const description = stateDescriptionMapping[diagramStateName];
+          if (description) {
+            document.querySelector('#state-info').innerHTML = description;
+          } else {
+            console.warn(`Failed finding description for ${diagramStateName}`);
+          }
+        }
+
         // The simulator uses a tracer callback to perform operations such as 
-        // state highlighting and logging. You do not need this functionality
-        // when using MyFsm.js in your own applications, although you may
-        // choose to implement a tracer for debugging purposes.
+        // state highlighting and logging.
         sm.tracer = {
             enterState: (mermaidName) => {
-                var e = document.querySelector('g[data-id=' + mermaidName + ']');
+                var e = document.querySelector('g[data-id=' + mermaidName + ']') || document.querySelector('g[id=' + mermaidName + ']');
+
                 if(e) {
                   e.classList.add('active');
                   panOnScreen(e);
+                } else {
+                  console.warn(`Could not find mermaid element to highlight for state '${mermaidName}'.`);
                 }
-                sm.tracer.log('➡️ Entered ' + mermaidName);
+
+                if (document.getElementById('savedSetting_verboseEnter').checked) {
+                    sm.tracer.log(`➡️ Entered <span class='syntax-vertex-name'>${mermaidName}</span>`, true);
+                }
                 
-                // Update event button states
                 updateEventButtonStates(mermaidName);
+                updateEdgeAvailability(mermaidName);
+                updateStateInfoPanel(mermaidName);
+
+                // must be done after state info panel is updated above so that we can modify it
+                updateClickableVertexNames();
+                updateClickableEvents();
             },
             exitState: (mermaidName) => {
                 document.querySelector('g[data-id=' + mermaidName + ']')?.classList.remove('active');
+                document.querySelector('g[id=' + mermaidName + ']')?.classList.remove('active');
+
+                if (document.getElementById('savedSetting_verboseExit').checked) {
+                    sm.tracer.log(`↩️ Exited <span class='syntax-vertex-name'>${mermaidName}</span>`, true);
+                }
             },
             edgeTransition: (edgeId) => {
                 highlightEdge(edgeId);
             },
+            logHistoryVarUpdate: (varName, newValue) => {
+                if (document.getElementById('savedSetting_verboseHistory').checked) {
+                    sm.tracer.log(`🕑 HistoryVar(<span class='identifier'>${varName}</span>) = <span class='identifier'>${newValue}</span>`, true);
+                }
+            },
+            logHistoryTransition: (description) => {
+                sm.tracer.log(`🕑 History: ${description}.`);
+            },
+            logGuardCodeEvaluation: (guardCode) => {
+                sm.tracer.log(`<span title='Guard code manually evaluated by user for simulation.'>🛡️ Guard: <span class='syntax-guard-bracket'>[</span><span class='syntax-guard-code'>${escapeHtml(guardCode)}</span><span class='syntax-guard-bracket'>]</span></span>`, true);
+            },
+            logActionCode: (actionCode) => {
+                sm.tracer.log(`<span title='Your actual state machine will run this action code.'>⚡ Action: <span class='syntax-action-code'>${escapeHtml(actionCode)}</span></span>`, true);
+            },
             log: (message, html=false) => {
-                addHistoryRow(new Date(), message, html);
+                addEventLogRow(new Date(), message, html);
             }
         };
+
+        // https://github.com/StateSmith/StateSmith/issues/519
+        function forceStateChange(stateNameAnyCase)
+        {
+          const stateName = stateNameAnyCase.toUpperCase();
+
+          // get ID from stateName
+          const stateId = MyFsm.StateId[stateName];
+          if (stateId === undefined) {
+            console.error(`Invalid state name '${stateNameAnyCase}' passed to forceStateChange.`);
+            console.log('Valid state names are (in any case):', Object.keys(MyFsm.StateId).slice(1)); // slice(1) to remove ROOT from the list of valid states since it cannot be forced to.
+            return;
+          }
+
+          // note! This and other ROOT code assumes that it is the first state. This is a fairly safe assumption, but if that ever changes this code will need to be updated.
+          if (Object.keys(MyFsm.StateId)[0] !== 'ROOT') {
+            console.warn(`ROOT not found. This should happen. Please open a bug:`, 'https://github.com/StateSmith/StateSmith/issues/new');
+          }
+
+          if (stateId === 0) {
+            console.error(`Cannot force state to state machine ROOT.`,);
+            return;
+          }
+
+          let mermaidElement = null;
+
+          // we now need the mermaid state element for the state of interest
+          document.querySelectorAll('g[data-id],g[id]').forEach(e => {
+            const lowerName = stateNameAnyCase.toLowerCase();
+            const matchesLeafState = e.getAttribute('data-id') && e.getAttribute('data-id').toLowerCase() === lowerName;
+            const matchesCompoundState = e.getAttribute('id').toLowerCase() === lowerName;
+
+            if (matchesCompoundState || matchesLeafState) {
+              mermaidElement = e;
+            }
+          });
+
+          if (!mermaidElement) {
+            console.error(`Could not find mermaid element for state name '${stateNameAnyCase}'. This is unexpected as we already found matching state id. Please open a bug:`, 'https://github.com/StateSmith/StateSmith/issues/new');
+            return;
+          }
+
+          // force the state change. NOTE! This will only work with Algorithm Balanced2. See https://github.com/StateSmith/StateSmith/wiki/Algorithms.
+          sm.stateId = stateId;
+          
+          // remove the active class from all states, then add it to the forced state.
+          clearHighlightedStates();
+          // mermaidElement.classList.add('active'); // done by state enter below
+
+          sm.tracer.log(`<span class='dispatched'><a href='https://github.com/StateSmith/StateSmith/issues/519' target='_blank' title='May have impacts! Click for details.'><span class='forced-state'>FORCED STATE</span></a> to <span class='syntax-vertex-name'>${stateNameAnyCase}</span></span>`, true);
+
+          // execute state's enter function
+          const enterFunction = sm['_' + stateName + '_enter'];
+          if (enterFunction) {
+            enterFunction.call(sm); // need to call with sm as 'this' context so that it can update the state machine state and do other things that require access to 'this'.
+          } else {
+            console.warn(`No enter function found for state '${stateName}'. This is unexpected. Please open a bug:`, 'https://github.com/StateSmith/StateSmith/issues/new');
+          }            
+
+          panOnScreen(mermaidElement);
+          
+          let mermaidStateName;
+          
+          if (mermaidElement.getAttribute('data-id')) {
+            mermaidStateName = mermaidElement.getAttribute('data-id');
+          } else {
+             mermaidStateName = mermaidElement.getAttribute('id');
+          }
+          updateEventButtonStates(mermaidStateName);
+          clearHighlightedEdges();
+
+          console.log(`Forced state to ${stateNameAnyCase}. See https://github.com/StateSmith/StateSmith/issues/519`);
+        }
+
+        // export forceStateChange to global scope so it can be called from the console for testing purposes.
+        window.StateSmith_forceStateChange = forceStateChange;
 
         // Wire up the buttons that dispatch events for the state machine.
         diagramEventNamesArray.forEach(diagramEventName => {
@@ -1203,35 +2119,54 @@ evaluateGuard = null;
             button.className = 'event-button';
             button.innerText = diagramEventName;
             button.addEventListener('click', () => {
-                // Only handle click events when button is enabled
-                if (!button.disabled) {
+
+                // allow dispatching events even if they have no handler in current state to aid in learning
+                // https://github.com/StateSmith/StateSmith/issues/497
+                const alwaysAllowEventDispatch = true;
+
+                if (alwaysAllowEventDispatch || !button.classList.contains('hasNoEventHandler')) {
                     clearHighlightedEdges();
-                    sm.tracer?.log('<span class="dispatched"><span class="trigger">' + diagramEventName + '</span> DISPATCHED</span>', true);
+                    sm.tracer?.log(`<span class='dispatched'>Event <span class='syntax-trigger-name'>${diagramEventName}</span> dispatched</span>`, true);
                     const fsmEventName = diagramEventName.toUpperCase();
-                    sm.dispatchEvent(MyFsm.EventId[fsmEventName]); 
+                    sm.dispatchEvent(MyFsm.EventId[fsmEventName]);
+                    updateClickableEvents();
                 }
             });
-            document.getElementById('buttons').appendChild(button);
+            document.getElementById(`event-buttons`).appendChild(button);
         });
 
-        sm.tracer?.log('<span class="dispatched">START</span>', true);
+        sm.tracer?.log(`<span class='dispatched'>State machine start</span>`, true);
         sm.start(); // This will cause `updateEventButtonStates()` to be called.
 
         function panOnScreen(element) {
-          if(!element) return;
+            if (!element) return;
 
-          var bounds = element.getBoundingClientRect();
-          if(bounds.x<0 || bounds.y<0) {
-              var x = Math.max(0, -bounds.x + 20);
-              var y = Math.max(0, -bounds.y + 20);
-              window.panZoom.panBy({x: x, y: y});
-          }
-          var panebounds = document.querySelector('svg').getBoundingClientRect();
-          if(bounds.x>panebounds.width || bounds.y>panebounds.height) {
-              var x = Math.min(0, panebounds.width - bounds.x - bounds.width - 20);
-              var y = Math.min(0, panebounds.height - bounds.y - bounds.height - 20);
-              window.panZoom.panBy({x: x, y: y});
-          }
+            // NOTE! There's some hacks here to prevent multiple rapid calls to panOnScreen.
+            // If one transition causes 3 state enters, and each state entry calls panOnScreen, the screen often goes blank.
+            // I would guess caused by window.panZoom.panBy()
+            // So we put in a little delay hack in here and cancel any pending panning action.
+
+            window.ss_lastPanActionHandle = window.ss_lastPanActionHandle || null;
+
+            if (window.ss_lastPanActionHandle) {
+                clearTimeout(window.ss_lastPanActionHandle);
+                window.ss_lastPanActionHandle = null;
+            }
+
+            window.ss_lastPanActionHandle = setTimeout(() => {
+                var bounds = element.getBoundingClientRect();
+                if (bounds.x < 0 || bounds.y < 0) {
+                    var x = Math.max(0, -bounds.x + 20);
+                    var y = Math.max(0, -bounds.y + 20);
+                    window.panZoom.panBy({ x: x, y: y });
+                }
+                var panebounds = document.querySelector('svg').getBoundingClientRect();
+                if (bounds.x > panebounds.width || bounds.y > panebounds.height) {
+                    var x = Math.min(0, panebounds.width - bounds.x - bounds.width - 20);
+                    var y = Math.min(0, panebounds.height - bounds.y - bounds.height - 20);
+                    window.panZoom.panBy({ x: x, y: y });
+                }
+            }, 1);
         }
     </script>
 
