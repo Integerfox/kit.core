@@ -11,8 +11,8 @@
 /** @file */
 
 
+#include "kit_config.h"
 #include "Kit/Logging/Framework/types.h"
-#include "Kit/Memory/CursorBE.h"
 
 #include "Kit/Persistence/Record/IPayload.h"
 #include <cstdint>
@@ -48,12 +48,6 @@
  */
 #ifndef OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_MESSAGE_ID_TEXT
 #define OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_MESSAGE_ID_TEXT 32
-#endif
-
-/** Maximum number of characters used to render the application state, e.g. "*"
- */
-#ifndef OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_APPLICATION_STATE_TEXT
-#define OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_APPLICATION_STATE_TEXT 1
 #endif
 
 
@@ -105,6 +99,7 @@ public:
             cursor.writeU8( m_packageId );
             cursor.writeU8( m_subSystemId );
             cursor.writeU8( m_messageId );
+            // Generic write<>() - instead of writeU8() - so the field stays correct if KitLoggingApplicationState_T is widened
             cursor.write( m_applicationState );
             cursor.write( m_infoText, sizeof( m_infoText ) );
             return cursor.errorOccurred() ? 0 : entryLen;
@@ -123,6 +118,7 @@ public:
             cursor.readU8( m_packageId );
             cursor.readU8( m_subSystemId );
             cursor.readU8( m_messageId );
+            // Generic read<>() - instead of readU8() - so the field stays correct if KitLoggingApplicationState_T is widened
             cursor.read( m_applicationState );
             cursor.read( m_infoText, sizeof( m_infoText ) );
             return !cursor.errorOccurred();

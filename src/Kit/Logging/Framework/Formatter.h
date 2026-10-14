@@ -10,6 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
+#include "kit_config.h"
 #include "Kit/Logging/Framework/EntryData.h"
 #include "Kit/Logging/Framework/IApplication.h"
 #include "Kit/Text/IString.h"
@@ -29,6 +30,14 @@
 #define OPTION_KIT_LOGGING_FORMATTER_TIMESTAMP_TEXT_LEN 31
 #endif
 
+/** The size, in bytes, needed to render the Application state, e.g. "*".  The
+    size does not include the space reserved for the null terminator.  Renderings
+    longer than this are truncated by toString().
+ */
+#ifndef OPTION_KIT_LOGGING_FORMATTER_APPLICATION_STATE_TEXT_LEN
+#define OPTION_KIT_LOGGING_FORMATTER_APPLICATION_STATE_TEXT_LEN 1
+#endif
+
 /** The size, in bytes, needed to format the non-message portions of a
     'textified' log entry plus the maximum message text.  The size does NOT
     include the space reserved for the null terminator.
@@ -37,7 +46,7 @@
 #define OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN                        \
     ( OPTION_KIT_LOGGING_FORMATTER_PERSISTENT_STORAGE_ID_TEXT_LEN + 1 +  \
       OPTION_KIT_LOGGING_FORMATTER_TIMESTAMP_TEXT_LEN + 1 +              \
-      OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_APPLICATION_STATE_TEXT +      \
+      OPTION_KIT_LOGGING_FORMATTER_APPLICATION_STATE_TEXT_LEN +          \
       OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_CLASSIFICATION_ID_TEXT + 1 +  \
       OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_PACKAGE_ID_TEXT + 1 +         \
       OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_SUBSYSTEM_ID_TEXT + 1 +       \
@@ -76,7 +85,8 @@ public:
 
         Where <appState> is the Application's rendering of the entry's application
         state (see IApplication::applicationStateToString()).  By default this is
-        an empty string.
+        an empty string.  The rendering is truncated to
+        OPTION_KIT_LOGGING_FORMATTER_APPLICATION_STATE_TEXT_LEN characters.
         \endcode
     */
     static bool toString( IApplication&                               application,
