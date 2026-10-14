@@ -5,6 +5,7 @@ import os
 import logging
 import sys
 import subprocess
+import signal
 import pathlib
 import platform
 import collections
@@ -78,19 +79,53 @@ def run_shell( printer, cmd, capture_output=True ):
     return p.returncode
 
 #
-def run_shell2( cmd, stdout=False, on_err_msg=None ):
+def _kill_process_tree( p ):
+    """ Kills 'p' AND its descendants.  Required because shell=True means that
+        'p' is the shell - not the command we actually want to kill.
+    """
+
+    if ( platform.system() == 'Windows' ):
+        subprocess.run( f'taskkill /F /T /PID {p.pid}', shell=True, capture_output=True )
+    else:
+        try:
+            os.killpg( os.getpgid( p.pid ), signal.SIGKILL )
+        except (ProcessLookupError, PermissionError):
+            pass
+    p.kill()
+
+#
+def run_shell2( cmd, stdout=False, on_err_msg=None, timeout=None ):
     """ Alternate semantics use internal 'verbose' flag instead of a printer
+
+        'timeout' is in seconds.  When None (the default) the call blocks
+        forever.  NOTE: Do NOT default this to a value - the build/compile
+        call sites legitimately run for many minutes.
     """
 
     print_verbose( cmd )
-    if ( stdout ):
-        p = subprocess.Popen( cmd, shell=True )
-    else:
-        p = subprocess.Popen( cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE )
 
-    r  = p.communicate()
+    # Only detach into our own process group when a timeout is in play (this
+    # preserves Ctrl-C forwarding for the typical/interactive case)
+    new_session = timeout != None and platform.system() != 'Windows'
+    if ( stdout ):
+        p = subprocess.Popen( cmd, shell=True, start_new_session=new_session )
+    else:
+        p = subprocess.Popen( cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=new_session )
+
+    timed_out = False
+    try:
+        r = p.communicate( timeout=timeout )
+    except subprocess.TimeoutExpired:
+        timed_out = True
+        _kill_process_tree( p )
+        r = p.communicate()   # 2nd call is needed to drain the pipes/reap the child
+
     r0 = '' if r[0] == None else r[0].decode()
     r1 = '' if r[1] == None else r[1].decode()
+
+    if ( timed_out ):
+        print_verbose( "{} {}".format(r0,r1) )
+        sys.exit( "** ERROR: TIMEOUT after {} seconds. Command: {} (in {}) **".format(timeout, cmd, os.getcwd()) )
 
     if ( p.returncode != 0 and on_err_msg != None ):
         print_verbose( "{} {}".format(r0,r1) )

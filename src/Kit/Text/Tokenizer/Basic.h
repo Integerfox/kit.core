@@ -26,7 +26,7 @@ namespace Tokenizer {
  */
 class Basic
 {
-private:
+public:
     /// Definition of whitespace
     static constexpr const char* whiteSpace() { return " \t\n\r"; };
 

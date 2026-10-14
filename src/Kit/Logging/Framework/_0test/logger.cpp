@@ -13,6 +13,7 @@
 #include "Kit/Logging/Framework/IPackage.h"
 #include "Kit/Logging/Framework/Log.h"
 #include "Kit/Logging/Framework/Mocked4Test/KitOnly.h"
+#include "Kit/Logging/Framework/_0test/StatefulApp.h"
 #include "Kit/Logging/Framework/types.h"
 #include "Kit/Logging/Pkg/MsgId.h"
 #include "Kit/Logging/Pkg/SubSystemId.h"
@@ -42,6 +43,25 @@ using namespace Kit::Logging::Pkg;
 // Create a Log-Application instance for the tests. Also provide whitebox testing support
 // Note: Not static so it can be shared with formatter.cpp test
 Kit::Logging::Framework::Mocked4Test::KitOnly logApp_;
+
+namespace {
+
+/// Re-points the framework at 'app' and restores logApp_ on scope exit - including when an assertion aborts the section
+class AppScope
+{
+public:
+    AppScope( Kit::Logging::Framework::IApplication& app ) noexcept
+    {
+        Kit::Logging::Framework::initialize( app, logApp_.m_logFifo );
+    }
+
+    ~AppScope() noexcept
+    {
+        Kit::Logging::Framework::initialize( logApp_, logApp_.m_logFifo );
+    }
+};
+
+}  // end anonymous namespace
 
 /// helper method to call vlogf
 KIT_SYSTEM_PRINTF_CHECKER( 5, 6 )
@@ -114,6 +134,30 @@ TEST_CASE( "Logger" )
         REQUIRE( entry.m_messageId == Kit::Logging::Pkg::SystemMsgId::SHUTDOWN );
         REQUIRE( strcmp( entry.m_infoText, "My message = 44" ) == 0 );
         REQUIRE( entry.m_timestamp >= now );
+    }
+
+    SECTION( "application-state" )
+    {
+        // Default (i.e. an application that does not opt-in) is 'no state'
+        REQUIRE( logf( MY_EVENT, MY_PACKAGE_ID, SubSystemId::SYSTEM, SystemMsgId::SHUTDOWN, "no state" ) == LogResult_T::ADDED );
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_applicationState == 0 );
+
+        // Re-point the framework at an application that reports state (re-uses logApp_'s FIFO)
+        StatefulApp4Test stateApp( logApp_ );
+        AppScope         scopedApp( stateApp );
+
+        // State is snapshot-ed at log time
+        stateApp.setApplicationState( StatefulApp4Test::STATE_TAINTED );
+        REQUIRE( logf( MY_EVENT, MY_PACKAGE_ID, SubSystemId::SYSTEM, SystemMsgId::SHUTDOWN, "tainted" ) == LogResult_T::ADDED );
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_applicationState == StatefulApp4Test::STATE_TAINTED );
+
+        // Clearing the state is reflected in subsequent entries
+        stateApp.setApplicationState( 0 );
+        REQUIRE( logf( MY_EVENT, MY_PACKAGE_ID, SubSystemId::SYSTEM, SystemMsgId::SHUTDOWN, "not tainted" ) == LogResult_T::ADDED );
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_applicationState == 0 );
     }
 
     SECTION( "classification-filter" )
@@ -306,6 +350,33 @@ TEST_CASE( "Logger" )
         REQUIRE( strcmp( entry.m_infoText, "Post-overflow message = 10000" ) == 0 );
         REQUIRE( entry.m_timestamp >= now );
         REQUIRE( logApp_.getLogQueueCount() == 0 );
+    }
+
+    SECTION( "overflow-application-state" )
+    {
+        // The framework-generated QUEUE_OVERFLOW entry captures the state like any other entry
+        StatefulApp4Test stateApp( logApp_ );
+        AppScope         scopedApp( stateApp );
+        stateApp.setApplicationState( StatefulApp4Test::STATE_TAINTED );
+
+        // Fill the log queue
+        for ( unsigned i = 0; i < OPTION_KIT_LOGGING_FRAMEWORK_MOCKED4TEST_MAX_LOG_ENTRIES; ++i )
+        {
+            REQUIRE( logf( MY_INFO, MY_PACKAGE_ID, 0, 0, "Filling log queue message = %u", i ) == LogResult_T::ADDED );
+        }
+        REQUIRE( logf( MY_INFO, MY_PACKAGE_ID, 0, 0, "This message should cause overflow" ) == LogResult_T::QUEUE_FULL );
+        REQUIRE( logApp_.isLogQueOverflowed() == true );
+
+        // Drain the queue so the next entry re-opens it and emits the overflow entry
+        while ( logApp_.m_logFifo.remove( entry ) )
+        {
+        }
+        REQUIRE( logf( MY_INFO, MY_PACKAGE_ID, 0, 0, "Post-overflow message" ) == LogResult_T::ADDED );
+        REQUIRE( logApp_.isLogQueOverflowed() == false );
+
+        REQUIRE( logApp_.m_logFifo.remove( entry ) );
+        REQUIRE( entry.m_messageId == OVERFLOW_MESSAGE_ID );
+        REQUIRE( entry.m_applicationState == StatefulApp4Test::STATE_TAINTED );
     }
 
     SECTION( "overflow-hysteresis" )

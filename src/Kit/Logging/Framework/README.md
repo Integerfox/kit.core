@@ -54,7 +54,27 @@ different in purpose.
     - Package ID
     - SubSystem ID
     - Message ID
+  - Application State.  An optional, Application defined value/state - see below.
   - Free formatted Information Text.  Has printf semantics.
+
+- Each entry optionally records the **Application state that was in effect when
+  the entry was logged**.  This is for recording that the system was in a
+  degraded or non-representative state (e.g. fault injection had been performed)
+  at the moment the entry was produced.  The mechanism is generic; the meaning is
+  Application defined.
+  - The field's width is set by the `KitLoggingApplicationState_T` LConfig type
+    (defaults to `uint8_t`).
+  - The framework calls `IApplication::captureApplicationState()` once per log
+    entry and snapshots the returned value into the entry.
+  - `IApplication::applicationStateToString()` converts the snapshotted value
+    into a short marker (e.g. `"*"`) that is emitted immediately before the
+    Classification field in the formatted output.
+  - Both methods are non-pure with defaults that report zero and render an
+    empty string, i.e. the feature is opt-in and formatted output is unchanged
+    for applications that do not use it.
+  - The framework has no knowledge of where the state comes from.  For example,
+    sourcing the state from a Data Model point is entirely the Application's
+    concern.
 
 - The application is responsible defining the set of Classification IDs as well
   as providing the application specific mappings for Package IDs.

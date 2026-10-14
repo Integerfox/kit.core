@@ -42,7 +42,7 @@ namespace Container {
 
 class AvlTree_
 {
-private:
+protected:
     /// Helper class so that the root node can behave like all the other nodes
     class AvlRoot : public MapItem, public Key
     {
@@ -117,20 +117,26 @@ public:
     MapItem* previous( MapItem& current ) const;
 
 
-private: // Helpers
-    ///
+protected: // Helpers
+    /// Rebalances 'nodePtr' after its left subtree grew. Returns true when the subtree is now taller, i.e. the caller must keep rebalancing upwards
     static bool grewLeft( MapItem* nodePtr );
-    ///
+
+    /// Rebalances 'nodePtr' after its right subtree grew. Returns true when the subtree is now taller, i.e. the caller must keep rebalancing upwards
     static bool grewRight( MapItem* nodePtr );
-    ///
+
+    /// Rebalances 'nodePtr' after its right subtree shrank. Returns true when the subtree is now shorter, i.e. the caller must keep rebalancing upwards
     static bool rightShorter( MapItem* nodePtr );
-    ///
+
+    /// Rebalances 'nodePtr' after its left subtree shrank. Returns true when the subtree is now shorter, i.e. the caller must keep rebalancing upwards
     static bool leftShorter( MapItem* nodePtr );
-    ///
+
+    /// Rotates the subtree left about 'nodePtr'.  Returns the subtree's new root
     static MapItem* rotateLeft( MapItem* nodePtr );
-    ///
+
+    /// Rotates the subtree right about 'nodePtr'.  Returns the subtree's new root
     static MapItem* rotateRight( MapItem* nodePtr );
-    ///
+
+    /// Swaps 'nodePtr' with its in-order predecessor.  Used when removing a node that has two children
     static void exchangeWithPrev( MapItem* nodePtr );
 
 };

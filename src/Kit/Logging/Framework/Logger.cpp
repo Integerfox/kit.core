@@ -125,6 +125,7 @@ void createAndAddOverflowEntry() noexcept
     logEntry.m_packageId        = Pkg::Package::PACKAGE_ID;
     logEntry.m_subSystemId      = Pkg::SubSystemId::LOGGING;
     logEntry.m_messageId        = Pkg::LoggingMsgId::QUEUE_OVERFLOW;
+    logEntry.m_applicationState = app_->captureApplicationState();
 
     // Create the info text
     workBuffer_.format( "QUEUE_OVERFLOW! Num entries lost=%u ", g_overflowCount );
@@ -221,6 +222,9 @@ LogResult_T vlogf( uint8_t     classificationId,
     logEntry.m_subSystemId      = subSystemId;
     logEntry.m_messageId        = messageId;
     logEntry.m_timestamp        = Kit::Time::getBootTime();
+
+    // Captured before the filter checks because the entry is echoed to the Trace engine even when filtered
+    logEntry.m_applicationState = app_->captureApplicationState();
     Kit::Text::BString formattingBuffer( logEntry.m_infoText, sizeof( logEntry.m_infoText ) );
     if ( errMsgId == IPackage::NULL_MSG_ID )
     {

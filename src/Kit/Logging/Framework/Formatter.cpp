@@ -57,13 +57,14 @@ bool Formatter::toString( IApplication&                               applicatio
     if ( persistentStorageId != UINT64_MAX )
     {
         // Format the Persistent Storage ID
-        dstStringBuf.formatAppend( "[%" PRIu64 "] ", persistentStorageId );
+        dstStringBuf.formatAppend( "[%" PRIX64 "] ", persistentStorageId );
     }
 
     // Append the boot-counter portion of the entry's timestamp
     appendFormattedTimestamp( srcEntryToFormat.m_timestamp, dstStringBuf );
 
     // Append the identifiers and the info text to the log entry
+    const char* appStateText       = application.applicationStateToString( srcEntryToFormat.m_applicationState );
     const char* classificationText = application.classificationIdToString( srcEntryToFormat.m_classificationId );
     const char* packageText        = IPackage::NULL_PKG_ID_TEXT;
     const char* subSystemText      = IPackage::NULL_SUBSYS_ID_TEXT;
@@ -89,7 +90,12 @@ bool Formatter::toString( IApplication&                               applicatio
             }
         }
     }
-    dstStringBuf.formatAppend( "%s-%s-%s-%s: %s",
+
+    // The '%.*s' precision enforces the Application state's text budget, i.e. a non-conforming
+    // IApplication cannot push the formatted entry past OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN
+    dstStringBuf.formatAppend( "%.*s%s-%s-%s-%s: %s",
+                               static_cast<int>( OPTION_KIT_LOGGING_FORMATTER_APPLICATION_STATE_TEXT_LEN ),
+                               appStateText,
                                classificationText,
                                packageText,
                                subSystemText,

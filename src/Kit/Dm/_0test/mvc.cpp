@@ -64,7 +64,7 @@ TEST_CASE( "mvc" )
     Viewer viewer_plum1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_plum_, VIEWER_PLUM1_END_VALUE );
     Writer writer_plum1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_plum_, 100, 1, VIEWER_PLUM1_END_VALUE, 1 );
 
-    GenericViewer generic_viewer( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, mp_orange_, mp_cherry_, GENERIC_VIEWER_END_COUNT );
+    GenericViewer generic_viewer( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, mp_orange_, mp_cherry_, VIEWER_APPLE1_END_VALUE, VIEWER_ORANGE1_END_VALUE, VIEWER_CHERRY1_END_VALUE );
 
 
     // Open my viewers, writers
@@ -78,17 +78,21 @@ TEST_CASE( "mvc" )
     writer_cherry1.open();
     writer_plum1.open();
 
-    // Wait for everything to finish
+    // Wait for everything to finish.  NOTE: timedWait() is used so that a
+    // missed signal fails the test instead of hanging the CI job forever
     for ( int i = 0; i < NUM_INSTANCES; i++ )
     {
-        Kit::System::Thread::wait();
+        CAPTURE( i );
+        REQUIRE( Kit::System::Thread::timedWait( 20000 ) );
     }
 
     REQUIRE( viewer_apple1.m_lastValue == VIEWER_APPLE1_END_VALUE );
     REQUIRE( viewer_orange1.m_lastValue == VIEWER_ORANGE1_END_VALUE );
     REQUIRE( viewer_cherry1.m_lastValue == VIEWER_CHERRY1_END_VALUE );
     REQUIRE( viewer_plum1.m_lastValue >= VIEWER_PLUM1_END_VALUE );
-    REQUIRE( generic_viewer.m_mpNotificationCount >= ( GENERIC_VIEWER_END_COUNT / 2 ) );
+    REQUIRE( generic_viewer.m_mp1AtEnd );
+    REQUIRE( generic_viewer.m_mp2AtEnd );
+    REQUIRE( generic_viewer.m_mp3AtEnd );
 
     KIT_SYSTEM_TRACE_MSG( SECT_, "viewer_apple1(%p). m_lastValue=%" PRIu32 " (expected == %" PRIu32 ")", &viewer_apple1, viewer_apple1.m_lastValue, VIEWER_APPLE1_END_VALUE );
     KIT_SYSTEM_TRACE_MSG( SECT_, "viewer_orange1(%p). m_lastValue=%" PRIu32 " (expected == %" PRIu32 ")", &viewer_orange1, viewer_orange1.m_lastValue, VIEWER_ORANGE1_END_VALUE );

@@ -98,7 +98,7 @@ public:
         return true;
     }
 
-private:
+protected:
     /// List of operations
     enum
     {
@@ -206,6 +206,7 @@ private:
         return res;
     }
 
+    /// Applies 'op' to 'v1' and 'v2' and stores the answer in 'result'. Returns false if the operation is not valid (e.g. divide by zero)
     bool calculate( T& result, T v1, T v2, const Operator& op ) const
     {
         bool success = true;
@@ -424,6 +425,7 @@ private:
         return success;
     }
 
+    /// Converts a decimal/hex ASCII digit to its numeric value. Returns a value greater than 0xF when 'c' is not a digit
     static T toInteger( char c )
     {
         if ( c >= '0' && c <= '9' )
@@ -442,11 +444,13 @@ private:
         return 0xf + 1;
     }
 
+    /// Returns the numeric value of the digit at the current expression index (see toInteger())
     T getInteger() const
     {
         return toInteger( getCharacter() );
     }
 
+    /// Parses the decimal number at the current expression index and advances the index past it
     T parseDecimal()
     {
         T value = 0;
@@ -457,6 +461,7 @@ private:
         return value;
     }
 
+    /// Parses the '0x' prefixed hex number at the current expression index and advances the index past it
     T parseHex()
     {
         m_index = m_index + 2;
@@ -468,7 +473,7 @@ private:
         return value;
     }
 
-    // Check for a Hex digit
+    /// Returns true when the current expression index is the start of a '0x' prefixed hex number
     bool isHex() const
     {
         if ( m_index + 2 < m_exprLen )
@@ -638,7 +643,7 @@ private:
         return false;
     }
 
-private:
+protected:
     /** The current operator and its left value
         are pushed onto the stack if the operator on
         top of the stack has lower precedence.

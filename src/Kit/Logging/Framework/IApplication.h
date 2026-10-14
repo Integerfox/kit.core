@@ -11,6 +11,7 @@
 /** @file */
 
 #include "Kit/Logging/Framework/IPackage.h"
+#include "Kit/Logging/Framework/types.h"
 #include <stdint.h>
 
 
@@ -55,6 +56,36 @@ public:
         If the packageId is not recognized, then a nullptr is returned.
      */
     virtual IPackage* getPackage( uint8_t packageId ) noexcept = 0;
+
+public:
+    /** This method returns the Application state that is in effect at the moment
+        of the call.  The framework calls this method once per log entry and
+        snapshots the result into the entry.
+
+        The meaning of the individual bits is entirely Application defined.  The
+        default implementation returns zero.
+
+        CAUTION: This method is called with the Logging framework's internal
+                 mutex held, and on the thread that generated the log entry.
+                 The implementation MUST NOT block and MUST NOT call back into
+                 the Logging framework (e.g. logf()).
+     */
+    virtual KitLoggingApplicationState_T captureApplicationState() noexcept { return 0; }
+
+    /** This method converts the Application state into a short marker string for
+        formatted output, e.g. "*".  The returned string must be a null-terminated
+        string with a length of less or equal to
+        OPTION_KIT_LOGGING_FORMATTER_APPLICATION_STATE_TEXT_LEN.  Longer
+        strings are silently truncated to that length by the Formatter.
+
+        CAUTION: The returned pointer must reference storage that remains valid
+                 for the duration of the caller's formatting operation - i.e.
+                 return a string literal or other statically allocated storage,
+                 NOT a stack buffer.
+
+        The default implementation renders nothing.
+     */
+    virtual const char* applicationStateToString( KitLoggingApplicationState_T state ) noexcept { /* Default renders nothing */ return ""; }
 
 public:
     /// Virtual destructor

@@ -34,6 +34,13 @@
 #define KitLoggingPackageMask_T uint32_t
 #endif
 
+/** This data type determines how many application state bits are carried per
+    log entry.  The meaning of the individual bits is Application defined.
+ */
+#ifndef KitLoggingApplicationState_T
+#define KitLoggingApplicationState_T uint8_t
+#endif
+
 ///
 namespace Kit {
 ///

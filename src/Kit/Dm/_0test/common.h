@@ -273,13 +273,23 @@ public:
     ///
     Kit::Itc::IOpenRequest::OpenMsg* m_pendingOpenMsgPtr;
     ///
-    IModelPoint& m_mp1;
+    Mp::Uint32& m_mp1;
     ///
-    IModelPoint& m_mp2;
+    Mp::Uint32& m_mp2;
     ///
-    IModelPoint& m_mp3;
+    Mp::Uint32& m_mp3;
     ///
-    unsigned m_maxNotifyCounts;
+    uint32_t m_mp1EndValue;
+    ///
+    uint32_t m_mp2EndValue;
+    ///
+    uint32_t m_mp3EndValue;
+    ///
+    bool m_mp1AtEnd;
+    ///
+    bool m_mp2AtEnd;
+    ///
+    bool m_mp3AtEnd;
     ///
     uint32_t m_mpNotificationCount;
     ///
@@ -298,10 +308,12 @@ public:
     /// Constructor
     GenericViewer( Kit::EventQueue::Server& myMbox,
                    Kit::System::Thread&     masterThread,
-                   IModelPoint&             mp1,
-                   IModelPoint&             mp2,
-                   IModelPoint&             mp3,
-                   unsigned                 maxNotifyCounts )
+                   Mp::Uint32&              mp1,
+                   Mp::Uint32&              mp2,
+                   Mp::Uint32&              mp3,
+                   uint32_t                 mp1EndValue,
+                   uint32_t                 mp2EndValue,
+                   uint32_t                 mp3EndValue )
         : Kit::Itc::OpenCloseSync( myMbox )
         , m_opened( false )
         , m_masterThread( masterThread )
@@ -309,7 +321,12 @@ public:
         , m_mp1( mp1 )
         , m_mp2( mp2 )
         , m_mp3( mp3 )
-        , m_maxNotifyCounts( maxNotifyCounts )
+        , m_mp1EndValue( mp1EndValue )
+        , m_mp2EndValue( mp2EndValue )
+        , m_mp3EndValue( mp3EndValue )
+        , m_mp1AtEnd( false )
+        , m_mp2AtEnd( false )
+        , m_mp3AtEnd( false )
         , m_mpNotificationCount( 0 )
         , m_observerMp1( myMbox )
         , m_observerMp2( myMbox )
@@ -379,27 +396,39 @@ public:
             m_mpNotificationCount = 0;
         }
 
-        if ( m_lastValid && m_mpNotificationCount >= m_maxNotifyCounts / 2 )  // Assume at least half the change notifications
-        {
-            if ( m_mpNotificationCount > m_maxNotifyCounts )
-            {
-                KIT_SYSTEM_TRACE_MSG( SECT_, "Generic View: Received TOO many change notification (%d, max=%d)", m_mpNotificationCount, m_maxNotifyCounts );
-                FAIL( "Generic View: Received TOO many change notification" );
-            }
+        // Latch each MP's arrival at its end value.  NOTE: the rendezvous is
+        // value based - NOT notification-count based - because change
+        // notifications coalesce whenever this thread is slow to be scheduled
+        latchAtEndValue( m_mp1, m_mp1EndValue, m_mp1AtEnd );
+        latchAtEndValue( m_mp2, m_mp2EndValue, m_mp2AtEnd );
+        latchAtEndValue( m_mp3, m_mp3EndValue, m_mp3AtEnd );
 
+        if ( m_mp1AtEnd && m_mp2AtEnd && m_mp3AtEnd )
+        {
             if ( m_done )
             {
                 KIT_SYSTEM_TRACE_MSG( SECT_, "Generic Viewer::mpChanged(%p): Received Change notification after signaling the master thread, may or may not be an error.", this );
             }
             else
             {
-                KIT_SYSTEM_TRACE_MSG( SECT_, "GenericViewer::mp1Changed(%p): Signaling master thread", this );
+                KIT_SYSTEM_TRACE_MSG( SECT_, "GenericViewer::mp1Changed(%p): Signaling master thread (notifyCount=%" PRIu32 ")", this, m_mpNotificationCount );
                 m_mp1.genericDetach( m_observerMp1 );
                 m_mp2.genericDetach( m_observerMp2 );
                 m_mp3.genericDetach( m_observerMp3 );
                 m_masterThread.signal();
                 m_done = true;
             }
+        }
+    }
+
+private:
+    /// Sets 'atEndFlag' once 'mp' has reached (or passed) 'endValue'
+    static void latchAtEndValue( Mp::Uint32& mp, uint32_t endValue, bool& atEndFlag ) noexcept
+    {
+        uint32_t value;
+        if ( !atEndFlag && mp.read( value ) && value >= endValue )
+        {
+            atEndFlag = true;
         }
     }
 };
