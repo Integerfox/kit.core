@@ -98,7 +98,7 @@ public:
         return true;
     }
 
-private:
+protected:
     /// List of operations
     enum
     {

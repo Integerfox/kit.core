@@ -131,6 +131,28 @@ TEST_CASE( "realexpressionparser" )
         REQUIRE( success == false );
     }
 
+    SECTION( "DivideAndModuloByZero" )
+    {
+        RealExpressionParser<double> parserD;
+        RealExpressionParser<float>  parserF;
+        double                       resultD;
+        float                        resultF;
+
+        REQUIRE( parserD.eval( "1 / 0", resultD ) == false );
+        REQUIRE( parserD.eval( "1 % 0", resultD ) == false );
+        REQUIRE( parserF.eval( "1 / 0", resultF ) == false );
+        REQUIRE( parserF.eval( "1 % 0", resultF ) == false );
+
+        // Divisors are rejected using almostEquals(), i.e. a non-zero but
+        // indistinguishable-from-zero divisor is also an error
+        REQUIRE( parserD.eval( "1 / 1e-300", resultD ) == false );
+        REQUIRE( parserD.eval( "1 % 1e-300", resultD ) == false );
+
+        // ...but a divisor above the threshold still divides
+        REQUIRE( parserD.eval( "1 / 0.5", resultD ) == true );
+        REQUIRE( almostEquals<double>( resultD, 2.0, KIT_MATH_REAL_DOUBLE_EPSILON ) );
+    }
+
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 

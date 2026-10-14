@@ -1,5 +1,5 @@
-#ifndef Cpl_Math_integer_h_
-#define Cpl_Math_integer_h_
+#ifndef KIT_MATH_INTEGER_H_
+#define KIT_MATH_INTEGER_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *

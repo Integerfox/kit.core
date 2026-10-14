@@ -132,6 +132,27 @@ TEST_CASE( "integerexpressionparser" )
         REQUIRE( success == false );
     }
 
+    SECTION( "DivideAndModuloByZero" )
+    {
+        KIT_SYSTEM_TRACE_MSG( SECT_, ( "DivideAndModuloByZero" ) );
+        IntegerExpressionParser<int>      parser;
+        IntegerExpressionParser<uint32_t> parserU;
+
+        int      result;
+        uint32_t resultU;
+
+        REQUIRE( parser.eval( "1 / 0", result ) == false );
+        REQUIRE( parser.eval( "1 % 0", result ) == false );
+        REQUIRE( parserU.eval( "1 / 0", resultU ) == false );
+        REQUIRE( parserU.eval( "1 % 0", resultU ) == false );
+
+        // Zero divisor arrived at by evaluation - not just a literal
+        REQUIRE( parser.eval( "8 / (4 - 4)", result ) == false );
+
+        REQUIRE( parser.eval( "8 / 4", result ) == true );
+        REQUIRE( result == 2 );
+    }
+
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
