@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 412-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 415-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -62,17 +62,31 @@ $(function() {
 <ul>
 <li>Adds the KIT library copyright info to the files</li>
 <li>Auto-generates virtual methods for all action and guard methods</li>
+<li>Auto-generates an <code>isIn&lt;State&gt;()</code> query method for each state in the generated <code>StateId</code> enum<ul>
+<li>For a composite (non-leaf) state the method walks the parent chain, so it also returns true when any of the state's sub-states is active.</li>
+<li><b>These methods are for UNIT TESTING ONLY.</b> They are not thread safe, and the FSM's active state is transiently <code>ROOT</code> while a transition is in progress - so calling them from an action or guard method returns false for every state. Application logic that branches on the FSM's current state belongs in the diagram, not in the application code.</li>
+<li>Composite states require StateSmith's <code>getParentId()</code> function, i.e. StateSmith &gt;= 0.22 with <code>SmRunnerSettings.algoBalanced1.outputGetParentIdFunction</code> enabled (the generated Plant UML template sets this). Code generation fails with an explicit error if the diagram has composite states and the function is missing.</li>
+</ul>
+</li>
+<li>Preserves the diagram's original name casing in the generated <code>stateIdToString()</code>/<code>eventIdToString()</code> methods and in the <code>isIn&lt;State&gt;()</code> method names (StateSmith uppercases the <code>StateId</code>/<code>EventId</code> enum symbols)</li>
 <li>Properly supports nested namespaces (for C++11)</li>
 <li>Renames the <code>start()</code> method to <code>startFsm()</code> so as to not conflict with KIT's usage of <code>start()</code> naming conventions for drivers.</li>
 <li>Optionally adds an event queue that provides run-to-completion semantics<ul>
 <li>Adds KIT trace statements when processing events from the queue.</li>
 </ul>
 </li>
+<li>(Re)generates an SVG render of the State Machine diagram alongside the <code>.puml</code> file.<ul>
+<li>Requires <a href="https://plantuml.com/">PlantUML</a> (and Java and Graphviz) to be installed, e.g. <code>sudo apt-get install -y plantuml</code> on Linux, or <code>choco install plantuml</code> on Windows. Alternately set the <code>PLANTUML_JAR</code> environment variable to a <code>plantuml.jar</code>.</li>
+<li>If PlantUML is not installed, a note is printed and code generation continues normally. <b>This means the committed SVG can drift from its <code>.puml</code> source</b> - re-run the generator on a host that has PlantUML to refresh it.</li>
+<li>Each SVG is named after the diagram's <code>@startuml &lt;name&gt;</code> directive (falling back to the source file's stem when the directive has no name).</li>
+<li>The <code>genfsm2-diagrams</code> alias runs the SVG generator standalone, i.e. to refresh diagrams without running code generation: <code>genfsm2-diagrams [-f|--force] DIR [DIR ...]</code></li>
+</ul>
+</li>
 </ul>
 <p><b>Usage:</b></p>
 <ul>
 <li>The StateSmith tool must be installed on the host system and the <code>ss.cli</code> executable is in the command path.</li>
-<li>The repo's <code>env.sh</code>/<code>env.bat</code> script defines the <code>genfsm2</code> alias to simplify running the <code>genfsm2.py</code> script.</li>
+<li>The repo's <code>env.sh</code>/<code>env.bat</code> script defines the <code>genfsm2</code> alias to simplify running the <code>genfsm2.py</code> script. The <code>genfsm2-diagrams</code> alias is also defined for running the SVG generator by itself.</li>
 <li>For help on running the script, type: <code>genfsm2 -h</code></li>
 <li>When starting a new State Machine, use <code>genfsm new MyFsm</code> to generate the Plant UML file (<code>MyFsm.puml</code>).<ul>
 <li>The generated Plant UML contains the required KIT configuration and instructions on how to modify the configuration.</li>
@@ -84,8 +98,7 @@ $(function() {
 </li>
 <li>The <a href="https://github.com/Integerfox/kit.core/blob/main/src/Kit/_support/statesmith/_0test/ContextMyFsm.h">ContextMyFsm.h</a> provides an example of how an application provides the 'context' for the State Machine diagram, i.e implements the Action and Guard methods.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md5"></a>
-Known limitations of StateSmith (as Nov 2025)</h1>
+<p>## Known limitations of StateSmith (as Nov 2025)</p>
 <ul>
 <li>StateSmith does not support UML Junction pseudo states. However a Choice pseudo state can be used where the Choice state has a single outbound transition and no guard, or else clause is used on the outbound transition</li>
 <li>There are limitations for StateSmith generated HTML files that simulate the State Machine behavior. See this <a href="https://github.com/StateSmith/StateSmith/wiki/Simulator">wiki page</a> for details </li>
@@ -94,7 +107,7 @@ Known limitations of StateSmith (as Nov 2025)</h1>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 14 2026 21:27:11 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Oct 14 2026 22:59:46 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
