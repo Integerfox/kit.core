@@ -11,6 +11,7 @@
 /** @file */
 
 
+#include "Kit/Logging/Framework/types.h"
 #include "Kit/Memory/CursorBE.h"
 
 #include "Kit/Persistence/Record/IPayload.h"
@@ -49,6 +50,12 @@
 #define OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_MESSAGE_ID_TEXT 32
 #endif
 
+/** Maximum number of characters used to render the application state, e.g. "*"
+ */
+#ifndef OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_APPLICATION_STATE_TEXT
+#define OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_APPLICATION_STATE_TEXT 1
+#endif
+
 
 ///
 namespace Kit {
@@ -61,16 +68,17 @@ namespace Framework {
 struct EntryData_T : public Kit::Persistence::Record::IPayload
 {
 public:
-    uint64_t m_timestamp;                                                    //!< Time-stamp - as Kit::Time::BootTime - for the entry.
-    uint8_t  m_classificationId;                                             //!< Classification identifier.  Valid Range is [1 to the number of bits in KitLoggingClassificationMask_T]
-    uint8_t  m_packageId;                                                    //!< Package identifier. Valid Range is [1 to the number of bits in KitLoggingPackageMask_T]
-    uint8_t  m_subSystemId;                                                  //!< SubSystem identifier. Valid Range is [0-254]. SubSystem values are ONLY unique WITHIN a Package.
-    uint8_t  m_messageId;                                                    //!< Message type enumeration identifier.  Valid Range is [0-254]. Message IDs are ONLY unique WITHIN a SubSystem.
-    char     m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN + 1];  //!< The information text associated with log entry.
+    uint64_t                     m_timestamp;                                                    //!< Time-stamp - as Kit::Time::BootTime - for the entry.
+    uint8_t                      m_classificationId;                                             //!< Classification identifier.  Valid Range is [1 to the number of bits in KitLoggingClassificationMask_T]
+    uint8_t                      m_packageId;                                                    //!< Package identifier. Valid Range is [1 to the number of bits in KitLoggingPackageMask_T]
+    uint8_t                      m_subSystemId;                                                  //!< SubSystem identifier. Valid Range is [0-254]. SubSystem values are ONLY unique WITHIN a Package.
+    uint8_t                      m_messageId;                                                    //!< Message type enumeration identifier.  Valid Range is [0-254]. Message IDs are ONLY unique WITHIN a SubSystem.
+    KitLoggingApplicationState_T m_applicationState;                                             //!< Application defined state that was in effect when the entry was logged. A value of 0 is 'no state'
+    char                         m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN + 1];  //!< The information text associated with log entry.
 
 public:
     /// Total 'packed' length
-    static constexpr unsigned entryLen = sizeof( m_timestamp ) + sizeof( m_classificationId ) + sizeof( m_packageId ) + sizeof( m_subSystemId ) + sizeof( m_messageId ) + sizeof( m_infoText );
+    static constexpr unsigned entryLen = sizeof( m_timestamp ) + sizeof( m_classificationId ) + sizeof( m_packageId ) + sizeof( m_subSystemId ) + sizeof( m_messageId ) + sizeof( m_applicationState ) + sizeof( m_infoText );
 
 public:
     /// Constructor
@@ -80,6 +88,7 @@ public:
         , m_packageId( 0 )
         , m_subSystemId( 0 )
         , m_messageId( 0 )
+        , m_applicationState( 0 )
     {
         memset( m_infoText, 0, sizeof( m_infoText ) );
     }
@@ -96,6 +105,7 @@ public:
             cursor.writeU8( m_packageId );
             cursor.writeU8( m_subSystemId );
             cursor.writeU8( m_messageId );
+            cursor.write( m_applicationState );
             cursor.write( m_infoText, sizeof( m_infoText ) );
             return cursor.errorOccurred() ? 0 : entryLen;
         }
@@ -113,6 +123,7 @@ public:
             cursor.readU8( m_packageId );
             cursor.readU8( m_subSystemId );
             cursor.readU8( m_messageId );
+            cursor.read( m_applicationState );
             cursor.read( m_infoText, sizeof( m_infoText ) );
             return !cursor.errorOccurred();
         }

@@ -221,6 +221,7 @@ LogResult_T vlogf( uint8_t     classificationId,
     logEntry.m_subSystemId      = subSystemId;
     logEntry.m_messageId        = messageId;
     logEntry.m_timestamp        = Kit::Time::getBootTime();
+    logEntry.m_applicationState = app_->captureApplicationState();
     Kit::Text::BString formattingBuffer( logEntry.m_infoText, sizeof( logEntry.m_infoText ) );
     if ( errMsgId == IPackage::NULL_MSG_ID )
     {

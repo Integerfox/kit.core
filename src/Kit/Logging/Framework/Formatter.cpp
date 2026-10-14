@@ -64,6 +64,7 @@ bool Formatter::toString( IApplication&                               applicatio
     appendFormattedTimestamp( srcEntryToFormat.m_timestamp, dstStringBuf );
 
     // Append the identifiers and the info text to the log entry
+    const char* appStateText       = application.applicationStateToString( srcEntryToFormat.m_applicationState );
     const char* classificationText = application.classificationIdToString( srcEntryToFormat.m_classificationId );
     const char* packageText        = IPackage::NULL_PKG_ID_TEXT;
     const char* subSystemText      = IPackage::NULL_SUBSYS_ID_TEXT;
@@ -89,7 +90,8 @@ bool Formatter::toString( IApplication&                               applicatio
             }
         }
     }
-    dstStringBuf.formatAppend( "%s-%s-%s-%s: %s",
+    dstStringBuf.formatAppend( "%s%s-%s-%s-%s: %s",
+                               appStateText,
                                classificationText,
                                packageText,
                                subSystemText,
