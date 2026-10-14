@@ -104,11 +104,11 @@ bool runtests( IApi& flash )
     // --- Test 1: Erase sector 0 and verify blank ---
     KIT_SYSTEM_TRACE_MSG( SECT_, "--- Test 1: Erase + blank check (sector 0) ---" );
     {
-        check( flash.eraseSector( 0, 1 ) == IApi::SUCCESS, "eraseSector(0,1) succeeds" );
+        check( flash.eraseSector( 0, 1 ) == IApi::Result_T::SUCCESS, "eraseSector(0,1) succeeds" );
         check( flash.waitUntilReady() == true, "waitUntilReady after erase" );
 
         memset( readBuf, 0x00, readChunk );
-        check( flash.read( 0, readBuf, readChunk ) == IApi::SUCCESS, "read after erase succeeds" );
+        check( flash.read( 0, readBuf, readChunk ) == IApi::Result_T::SUCCESS, "read after erase succeeds" );
         check( allBytesAre( readBuf, readChunk, 0xFF ), "erased sector reads as 0xFF" );
     }
 
@@ -120,11 +120,11 @@ bool runtests( IApi& flash )
         {
             writeData[i] = static_cast<uint8_t>( 0xA0 + i );
         }
-        check( flash.write( 0, writeData, TEST_PATTERN_SIZE ) == IApi::SUCCESS, "write pattern succeeds" );
+        check( flash.write( 0, writeData, TEST_PATTERN_SIZE ) == IApi::Result_T::SUCCESS, "write pattern succeeds" );
         check( flash.waitUntilReady() == true, "waitUntilReady after write" );
 
         memset( readBuf, 0x00, TEST_PATTERN_SIZE );
-        check( flash.read( 0, readBuf, TEST_PATTERN_SIZE ) == IApi::SUCCESS, "read-back succeeds" );
+        check( flash.read( 0, readBuf, TEST_PATTERN_SIZE ) == IApi::Result_T::SUCCESS, "read-back succeeds" );
         check( memcmp( readBuf, writeData, TEST_PATTERN_SIZE ) == 0, "read-back matches written data" );
     }
 
@@ -134,7 +134,7 @@ bool runtests( IApi& flash )
     {
         // Erase a fresh sector (sector 1) so the region is blank first
         const size_t sector1Addr = sectorSize;
-        check( flash.eraseSector( sector1Addr, 1 ) == IApi::SUCCESS, "eraseSector(sector 1) succeeds" );
+        check( flash.eraseSector( sector1Addr, 1 ) == IApi::Result_T::SUCCESS, "eraseSector(sector 1) succeeds" );
         check( flash.waitUntilReady() == true, "waitUntilReady after erase (sector 1)" );
 
         // Straddle the boundary between write page 0 and write page 1
@@ -144,12 +144,12 @@ bool runtests( IApi& flash )
         {
             crossData[i] = static_cast<uint8_t>( 0x50 + i );
         }
-        check( flash.write( crossOffset, crossData, sizeof( crossData ) ) == IApi::SUCCESS, "page-crossing write succeeds" );
+        check( flash.write( crossOffset, crossData, sizeof( crossData ) ) == IApi::Result_T::SUCCESS, "page-crossing write succeeds" );
         check( flash.waitUntilReady() == true, "waitUntilReady after page-crossing write" );
 
         uint8_t crossRead[8];
         memset( crossRead, 0x00, sizeof( crossRead ) );
-        check( flash.read( crossOffset, crossRead, sizeof( crossRead ) ) == IApi::SUCCESS, "page-crossing read-back succeeds" );
+        check( flash.read( crossOffset, crossRead, sizeof( crossRead ) ) == IApi::Result_T::SUCCESS, "page-crossing read-back succeeds" );
         check( memcmp( crossRead, crossData, sizeof( crossData ) ) == 0, "page-crossing data intact across boundary" );
     }
     else
@@ -161,15 +161,15 @@ bool runtests( IApi& flash )
     KIT_SYSTEM_TRACE_MSG( SECT_, "--- Test 4: Multi-sector erase ---" );
     if ( numSectors >= 2 )
     {
-        check( flash.eraseSector( 0, 2 ) == IApi::SUCCESS, "eraseSector(0,2) succeeds" );
+        check( flash.eraseSector( 0, 2 ) == IApi::Result_T::SUCCESS, "eraseSector(0,2) succeeds" );
         check( flash.waitUntilReady() == true, "waitUntilReady after multi-sector erase" );
 
         memset( readBuf, 0x00, readChunk );
-        check( flash.read( 0, readBuf, readChunk ) == IApi::SUCCESS, "read sector 0 after multi-erase" );
+        check( flash.read( 0, readBuf, readChunk ) == IApi::Result_T::SUCCESS, "read sector 0 after multi-erase" );
         check( allBytesAre( readBuf, readChunk, 0xFF ), "sector 0 blank after multi-erase" );
 
         memset( readBuf, 0x00, readChunk );
-        check( flash.read( sectorSize, readBuf, readChunk ) == IApi::SUCCESS, "read sector 1 after multi-erase" );
+        check( flash.read( sectorSize, readBuf, readChunk ) == IApi::Result_T::SUCCESS, "read sector 1 after multi-erase" );
         check( allBytesAre( readBuf, readChunk, 0xFF ), "sector 1 blank after multi-erase" );
     }
     else
@@ -198,7 +198,7 @@ bool runtests( IApi& flash )
             flash.write( targets[t] * sectorSize, writeData, TEST_PATTERN_SIZE );
         }
 
-        check( flash.eraseChip() == IApi::SUCCESS, "eraseChip() succeeds" );
+        check( flash.eraseChip() == IApi::Result_T::SUCCESS, "eraseChip() succeeds" );
         check( flash.waitUntilReady() == true, "waitUntilReady after eraseChip" );
 
         char desc[64];
@@ -207,7 +207,7 @@ bool runtests( IApi& flash )
             const size_t addr = targets[t] * sectorSize;
             memset( readBuf, 0x00, readChunk );
             snprintf( desc, sizeof( desc ), "read sector %lu after eraseChip", (unsigned long)targets[t] );
-            check( flash.read( addr, readBuf, readChunk ) == IApi::SUCCESS, desc );
+            check( flash.read( addr, readBuf, readChunk ) == IApi::Result_T::SUCCESS, desc );
             snprintf( desc, sizeof( desc ), "sector %lu blank after eraseChip", (unsigned long)targets[t] );
             check( allBytesAre( readBuf, readChunk, 0xFF ), desc );
         }

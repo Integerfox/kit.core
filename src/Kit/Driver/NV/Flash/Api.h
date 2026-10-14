@@ -257,12 +257,12 @@ public:
             header.crc32       = calculateCrc( &header, CRC_HEADER_FIELD_SIZE );
             header.status      = PageStatus_T::VALID;
 
-            if ( m_flashDriver.write( freeAddr, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )
+            if ( m_flashDriver.write( freeAddr, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
             {
                 return false;
             }
 
-            if ( m_flashDriver.write( freeAddr + HEADER_SIZE, m_workBuffer, m_config.nvPageSize ) != Kit::Driver::Flash::IApi::SUCCESS )
+            if ( m_flashDriver.write( freeAddr + HEADER_SIZE, m_workBuffer, m_config.nvPageSize ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
             {
                 return false;
             }
@@ -327,7 +327,7 @@ public:
             if ( m_pageMap[pageIndex] != INVALID_PAGE_ADDRESS )
             {
                 size_t dataAddr = m_pageMap[pageIndex] + HEADER_SIZE + offsetInPage;
-                if ( m_flashDriver.read( dataAddr, dst, bytesThisPage ) != Kit::Driver::Flash::IApi::SUCCESS )
+                if ( m_flashDriver.read( dataAddr, dst, bytesThisPage ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
                 {
                     return false;
                 }
@@ -364,7 +364,7 @@ public:
         for ( size_t i = 0; i < m_numSectors; i++ )
         {
             size_t sectorAddr = m_config.flashStartAddress + ( i * sectorSize );
-            if ( m_flashDriver.eraseSector( sectorAddr ) != Kit::Driver::Flash::IApi::SUCCESS )
+            if ( m_flashDriver.eraseSector( sectorAddr ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
             {
                 return false;
             }
@@ -401,7 +401,7 @@ public:
             size_t address     = m_config.flashStartAddress + ( sectorIndex * sectorSize ) + ( slotIndex * physPageSize );
 
             PageHeader_T header;
-            if ( m_flashDriver.read( address, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )
+            if ( m_flashDriver.read( address, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
             {
                 return false;
             }
@@ -436,7 +436,7 @@ protected:
             size_t address     = m_config.flashStartAddress + ( sectorIndex * sectorSize ) + ( slotIndex * physPageSize );
 
             PageHeader_T header;
-            if ( m_flashDriver.read( address, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )
+            if ( m_flashDriver.read( address, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
             {
                 return false;
             }
@@ -472,7 +472,7 @@ protected:
             else
             {
                 PageHeader_T currentHeader;
-                if ( m_flashDriver.read( currentPageAddress, &currentHeader, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )
+                if ( m_flashDriver.read( currentPageAddress, &currentHeader, HEADER_SIZE ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
                 {
                     return false;
                 }
@@ -514,7 +514,7 @@ protected:
             size_t address     = m_config.flashStartAddress + ( sectorIndex * sectorSize ) + ( slotIndex * physPageSize );
 
             PageHeader_T header;
-            if ( m_flashDriver.read( address, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )
+            if ( m_flashDriver.read( address, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
             {
                 continue;
             }
@@ -541,7 +541,7 @@ protected:
                 }
 
                 PageHeader_T header;
-                if ( m_flashDriver.read( slotAddr, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::SUCCESS )
+                if ( m_flashDriver.read( slotAddr, &header, HEADER_SIZE ) != Kit::Driver::Flash::IApi::Result_T::SUCCESS )
                 {
                     hasValid = true;
                     break;
@@ -565,7 +565,7 @@ protected:
                     }
                 }
 
-                if ( m_flashDriver.eraseSector( sectorAddr ) == Kit::Driver::Flash::IApi::SUCCESS )
+                if ( m_flashDriver.eraseSector( sectorAddr ) == Kit::Driver::Flash::IApi::Result_T::SUCCESS )
                 {
                     m_eraseCount++;
                     return static_cast<uint32_t>( sectorAddr );
@@ -581,7 +581,7 @@ protected:
     {
         uint32_t invalidStatus = PageStatus_T::INVALID;
         size_t   statusOffset  = pageAddress + offsetof( PageHeader_T, status );
-        return m_flashDriver.write( statusOffset, &invalidStatus, sizeof( invalidStatus ) ) == Kit::Driver::Flash::IApi::SUCCESS;
+        return m_flashDriver.write( statusOffset, &invalidStatus, sizeof( invalidStatus ) ) == Kit::Driver::Flash::IApi::Result_T::SUCCESS;
     }
 
     /// Reads the data payload of the current physical page for the given logical page index.
@@ -595,7 +595,7 @@ protected:
         if ( m_pageMap[pageIndex] != INVALID_PAGE_ADDRESS )
         {
             size_t dataAddr = m_pageMap[pageIndex] + HEADER_SIZE;
-            return m_flashDriver.read( dataAddr, buffer, m_config.nvPageSize ) == Kit::Driver::Flash::IApi::SUCCESS;
+            return m_flashDriver.read( dataAddr, buffer, m_config.nvPageSize ) == Kit::Driver::Flash::IApi::Result_T::SUCCESS;
         }
         else
         {
