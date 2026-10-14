@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 401-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 412-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -47,6 +47,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_kit_1_1_container_1_1_map-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::Map&lt; ITEM &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -56,6 +57,13 @@ $(function() {
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_map_8h_source.html">Map.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::Map&lt; ITEM &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_map__coll__graph.svg" width="362" height="630"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -104,6 +112,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad3828893954f82f677a91e78029e3d0a" id="r_ad3828893954f82f677a91e78029e3d0a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3828893954f82f677a91e78029e3d0a">removeItem</a> (ITEM &amp;node) noexcept</td></tr>
 <tr class="memdesc:ad3828893954f82f677a91e78029e3d0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the specified item from the tree.  <br /></td></tr>
 <tr class="separator:ad3828893954f82f677a91e78029e3d0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a00a070fb79b6ebbfb23b9cd7169d94eb" id="r_a00a070fb79b6ebbfb23b9cd7169d94eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_avl_tree__.html">AvlTree_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a00a070fb79b6ebbfb23b9cd7169d94eb">m_tree</a></td></tr>
+<tr class="memdesc:a00a070fb79b6ebbfb23b9cd7169d94eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delegate operations to the generic tree implementation.  <br /></td></tr>
+<tr class="separator:a00a070fb79b6ebbfb23b9cd7169d94eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class ITEM&gt;<br />
@@ -555,13 +569,40 @@ template&lt;class ITEM &gt; </div>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a00a070fb79b6ebbfb23b9cd7169d94eb" name="a00a070fb79b6ebbfb23b9cd7169d94eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00a070fb79b6ebbfb23b9cd7169d94eb">&#9670;&#160;</a></span>m_tree</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ITEM &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_avl_tree__.html">AvlTree_</a> <a class="el" href="class_kit_1_1_container_1_1_map.html">Kit::Container::Map</a>&lt; ITEM &gt;::m_tree</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delegate operations to the generic tree implementation. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Kit/Container/<a class="el" href="_map_8h_source.html">Map.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 20:44:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Oct 14 2026 21:27:11 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

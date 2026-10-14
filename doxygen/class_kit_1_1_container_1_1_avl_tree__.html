@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 401-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 412-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,7 +46,10 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_kit_1_1_container_1_1_avl_tree__-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::AvlTree_ Class Reference</div></div>
 </div><!--header-->
@@ -56,7 +59,20 @@ $(function() {
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_avl_tree___8h_source.html">AvlTree_.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::AvlTree_:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_avl_tree____coll__graph.svg" width="362" height="527"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_avl_tree___1_1_avl_root.html">AvlRoot</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper class so that the root node can behave like all the other nodes.  <a href="class_kit_1_1_container_1_1_avl_tree___1_1_avl_root.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7cb1848341dcd187ff03fd7593e14d5" id="r_ab7cb1848341dcd187ff03fd7593e14d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7cb1848341dcd187ff03fd7593e14d5">AvlTree_</a> ()</td></tr>
@@ -86,6 +102,36 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5c8b86094c670beb4b808cb46705506c" id="r_a5c8b86094c670beb4b808cb46705506c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c8b86094c670beb4b808cb46705506c">removeItem</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> &amp;node)</td></tr>
 <tr class="memdesc:a5c8b86094c670beb4b808cb46705506c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the specified item from the tree.  <br /></td></tr>
 <tr class="separator:a5c8b86094c670beb4b808cb46705506c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a80e71175fa8c50eef6964ccce1251ca9" id="r_a80e71175fa8c50eef6964ccce1251ca9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80e71175fa8c50eef6964ccce1251ca9">exchangeWithPrev</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *nodePtr)</td></tr>
+<tr class="memdesc:a80e71175fa8c50eef6964ccce1251ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps 'nodePtr' with its in-order predecessor. Used when removing a node that has two children.  <br /></td></tr>
+<tr class="separator:a80e71175fa8c50eef6964ccce1251ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9038561d1b98721e1f1e91f5e153f8e8" id="r_a9038561d1b98721e1f1e91f5e153f8e8"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9038561d1b98721e1f1e91f5e153f8e8">grewLeft</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *nodePtr)</td></tr>
+<tr class="memdesc:a9038561d1b98721e1f1e91f5e153f8e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebalances 'nodePtr' after its left subtree grew. Returns true when the subtree is now taller, i.e. the caller must keep rebalancing upwards.  <br /></td></tr>
+<tr class="separator:a9038561d1b98721e1f1e91f5e153f8e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1309d6e0ae4217018514cb54df8f1e98" id="r_a1309d6e0ae4217018514cb54df8f1e98"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1309d6e0ae4217018514cb54df8f1e98">grewRight</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *nodePtr)</td></tr>
+<tr class="memdesc:a1309d6e0ae4217018514cb54df8f1e98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebalances 'nodePtr' after its right subtree grew. Returns true when the subtree is now taller, i.e. the caller must keep rebalancing upwards.  <br /></td></tr>
+<tr class="separator:a1309d6e0ae4217018514cb54df8f1e98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b446806ecfd30007d7158340b22674c" id="r_a3b446806ecfd30007d7158340b22674c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b446806ecfd30007d7158340b22674c">leftShorter</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *nodePtr)</td></tr>
+<tr class="memdesc:a3b446806ecfd30007d7158340b22674c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebalances 'nodePtr' after its left subtree shrank. Returns true when the subtree is now shorter, i.e. the caller must keep rebalancing upwards.  <br /></td></tr>
+<tr class="separator:a3b446806ecfd30007d7158340b22674c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0394a3b572806cfca18ba775acf8ff17" id="r_a0394a3b572806cfca18ba775acf8ff17"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0394a3b572806cfca18ba775acf8ff17">rightShorter</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *nodePtr)</td></tr>
+<tr class="memdesc:a0394a3b572806cfca18ba775acf8ff17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rebalances 'nodePtr' after its right subtree shrank. Returns true when the subtree is now shorter, i.e. the caller must keep rebalancing upwards.  <br /></td></tr>
+<tr class="separator:a0394a3b572806cfca18ba775acf8ff17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a62e8f2192b2fd28af119c3d8e850b6" id="r_a9a62e8f2192b2fd28af119c3d8e850b6"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a62e8f2192b2fd28af119c3d8e850b6">rotateLeft</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *nodePtr)</td></tr>
+<tr class="memdesc:a9a62e8f2192b2fd28af119c3d8e850b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates the subtree left about 'nodePtr'. Returns the subtree's new root.  <br /></td></tr>
+<tr class="separator:a9a62e8f2192b2fd28af119c3d8e850b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa929fbc62812b737c18002d982dfa00d" id="r_aa929fbc62812b737c18002d982dfa00d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa929fbc62812b737c18002d982dfa00d">rotateRight</a> (<a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *nodePtr)</td></tr>
+<tr class="memdesc:aa929fbc62812b737c18002d982dfa00d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotates the subtree right about 'nodePtr'. Returns the subtree's new root.  <br /></td></tr>
+<tr class="separator:aa929fbc62812b737c18002d982dfa00d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:aaa6e3d9d557ab478cfa83d6451808627" id="r_aaa6e3d9d557ab478cfa83d6451808627"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_avl_tree___1_1_avl_root.html">AvlRoot</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa6e3d9d557ab478cfa83d6451808627">m_root</a></td></tr>
+<tr class="memdesc:aaa6e3d9d557ab478cfa83d6451808627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Root Node.  <br /></td></tr>
+<tr class="separator:aaa6e3d9d557ab478cfa83d6451808627"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This concrete class implements the core functionality of for AVL Binary tree (i.e. </p>
@@ -133,6 +179,33 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a80e71175fa8c50eef6964ccce1251ca9" name="a80e71175fa8c50eef6964ccce1251ca9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80e71175fa8c50eef6964ccce1251ca9">&#9670;&#160;</a></span>exchangeWithPrev()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Kit::Container::AvlTree_::exchangeWithPrev </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *</td>          <td class="paramname"><span class="paramname"><em>nodePtr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Swaps 'nodePtr' with its in-order predecessor. Used when removing a node that has two children. </p>
+
+</div>
+</div>
 <a id="a922ab9df703767c5ca1af74cfffec17f" name="a922ab9df703767c5ca1af74cfffec17f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a922ab9df703767c5ca1af74cfffec17f">&#9670;&#160;</a></span>find()</h2>
 
@@ -168,6 +241,60 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the first item in the tree. Returns nullptr if tree is empty. </p>
+
+</div>
+</div>
+<a id="a9038561d1b98721e1f1e91f5e153f8e8" name="a9038561d1b98721e1f1e91f5e153f8e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9038561d1b98721e1f1e91f5e153f8e8">&#9670;&#160;</a></span>grewLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Kit::Container::AvlTree_::grewLeft </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *</td>          <td class="paramname"><span class="paramname"><em>nodePtr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rebalances 'nodePtr' after its left subtree grew. Returns true when the subtree is now taller, i.e. the caller must keep rebalancing upwards. </p>
+
+</div>
+</div>
+<a id="a1309d6e0ae4217018514cb54df8f1e98" name="a1309d6e0ae4217018514cb54df8f1e98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1309d6e0ae4217018514cb54df8f1e98">&#9670;&#160;</a></span>grewRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Kit::Container::AvlTree_::grewRight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *</td>          <td class="paramname"><span class="paramname"><em>nodePtr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rebalances 'nodePtr' after its right subtree grew. Returns true when the subtree is now taller, i.e. the caller must keep rebalancing upwards. </p>
 
 </div>
 </div>
@@ -207,6 +334,33 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the last item in the tree. Returns nullptr if tree is empty. </p>
+
+</div>
+</div>
+<a id="a3b446806ecfd30007d7158340b22674c" name="a3b446806ecfd30007d7158340b22674c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b446806ecfd30007d7158340b22674c">&#9670;&#160;</a></span>leftShorter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Kit::Container::AvlTree_::leftShorter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *</td>          <td class="paramname"><span class="paramname"><em>nodePtr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rebalances 'nodePtr' after its left subtree shrank. Returns true when the subtree is now shorter, i.e. the caller must keep rebalancing upwards. </p>
 
 </div>
 </div>
@@ -269,13 +423,119 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a0394a3b572806cfca18ba775acf8ff17" name="a0394a3b572806cfca18ba775acf8ff17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0394a3b572806cfca18ba775acf8ff17">&#9670;&#160;</a></span>rightShorter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Kit::Container::AvlTree_::rightShorter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *</td>          <td class="paramname"><span class="paramname"><em>nodePtr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rebalances 'nodePtr' after its right subtree shrank. Returns true when the subtree is now shorter, i.e. the caller must keep rebalancing upwards. </p>
+
+</div>
+</div>
+<a id="a9a62e8f2192b2fd28af119c3d8e850b6" name="a9a62e8f2192b2fd28af119c3d8e850b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a62e8f2192b2fd28af119c3d8e850b6">&#9670;&#160;</a></span>rotateLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> * Kit::Container::AvlTree_::rotateLeft </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *</td>          <td class="paramname"><span class="paramname"><em>nodePtr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rotates the subtree left about 'nodePtr'. Returns the subtree's new root. </p>
+
+</div>
+</div>
+<a id="aa929fbc62812b737c18002d982dfa00d" name="aa929fbc62812b737c18002d982dfa00d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa929fbc62812b737c18002d982dfa00d">&#9670;&#160;</a></span>rotateRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> * Kit::Container::AvlTree_::rotateRight </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_map_item.html">MapItem</a> *</td>          <td class="paramname"><span class="paramname"><em>nodePtr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rotates the subtree right about 'nodePtr'. Returns the subtree's new root. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aaa6e3d9d557ab478cfa83d6451808627" name="aaa6e3d9d557ab478cfa83d6451808627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6e3d9d557ab478cfa83d6451808627">&#9670;&#160;</a></span>m_root</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_avl_tree___1_1_avl_root.html">AvlRoot</a> Kit::Container::AvlTree_::m_root</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Root Node. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Kit/Container/<a class="el" href="_avl_tree___8h_source.html">AvlTree_.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 20:44:40 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Oct 14 2026 21:27:11 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

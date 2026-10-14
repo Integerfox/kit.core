@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-13 20:52:42</td>
+            <td class="headerValue">2026-10-14 21:32:52</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -139,9 +139,9 @@
 <span id="L77"><span class="lineNum">      77</span>                 :             : </span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :     auto* ptr = static_cast&lt;const uint8_t*&gt;( bytes );</span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
-<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 11926 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 370 times"> + </span>]:<span class="tlaGNC">       12296 :     for ( unsigned i = 0; i &lt; numbytes; i++, ptr++ )</span></span>
+<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 11990 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 370 times"> + </span>]:<span class="tlaGNC">       12360 :     for ( unsigned i = 0; i &lt; numbytes; i++, ptr++ )</span></span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :     {</span>
-<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">       11926 :         m_crc = table_[( m_crc &gt;&gt; 8 ^ *ptr ) &amp; 0xffU] ^ ( m_crc &lt;&lt; 8 );</span></span>
+<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">       11990 :         m_crc = table_[( m_crc &gt;&gt; 8 ^ *ptr ) &amp; 0xffU] ^ ( m_crc &lt;&lt; 8 );</span></span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :     }</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             : }</span>
 <span id="L85"><span class="lineNum">      85</span>                 :             : </span>

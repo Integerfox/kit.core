@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 401-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 412-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,7 +46,12 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_kit_1_1_math_1_1_real_expression_parser-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Math::RealExpressionParser&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -56,7 +61,23 @@ $(function() {
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_real_expression_parser_8h_source.html">RealExpressionParser.h</a>&gt;</code></p>
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Math::RealExpressionParser&lt; T &gt;:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_math_1_1_real_expression_parser__coll__graph.svg" width="1207" height="130"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html">Operator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html" title="Operator struct.">Operator</a> struct.  <a href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator_value.html">OperatorValue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html" title="Operator struct.">Operator</a> value struct.  <a href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator_value.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a688a0738f0f58f2c8acd228e21328ef4" id="r_a688a0738f0f58f2c8acd228e21328ef4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a688a0738f0f58f2c8acd228e21328ef4">RealExpressionParser</a> ()</td></tr>
@@ -65,12 +86,129 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab2f88d1f5e9916127fa35eec8784af6d" id="r_ab2f88d1f5e9916127fa35eec8784af6d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2f88d1f5e9916127fa35eec8784af6d">eval</a> (const char *expressionAsText, T &amp;result)</td></tr>
 <tr class="memdesc:ab2f88d1f5e9916127fa35eec8784af6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates a real-number arithmetic expression and returns true if the expression was successfully evaluated.  <br /></td></tr>
 <tr class="separator:ab2f88d1f5e9916127fa35eec8784af6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:a63e801abf72ca96de438cb5f13f651e9" id="r_a63e801abf72ca96de438cb5f13f651e9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <br />
+&#160;&#160;<b>OPERATOR_NULL</b>
+, <a class="el" href="#a63e801abf72ca96de438cb5f13f651e9a169b3d646a0703dbfdb9df3563fd8988">OPERATOR_ADDITION</a>
+, <a class="el" href="#a63e801abf72ca96de438cb5f13f651e9af5ce1afc937ff3a035af49728337ec09">OPERATOR_SUBTRACTION</a>
+, <a class="el" href="#a63e801abf72ca96de438cb5f13f651e9afd939113c8b6a122172622a5e855d024">OPERATOR_MULTIPLICATION</a>
+, <br />
+&#160;&#160;<a class="el" href="#a63e801abf72ca96de438cb5f13f651e9a45d905f3d3d8fb1bc1aefd7ec4daaa01">OPERATOR_DIVISION</a>
+, <a class="el" href="#a63e801abf72ca96de438cb5f13f651e9a39ce58b97cd547547e6a3c5051166f90">OPERATOR_MODULO</a>
+, <a class="el" href="#a63e801abf72ca96de438cb5f13f651e9a6ff604c2018ec99e9aac1c565b5f3cec">OPERATOR_POWER</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a63e801abf72ca96de438cb5f13f651e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of operations.  <a href="#a63e801abf72ca96de438cb5f13f651e9">More...</a><br /></td></tr>
+<tr class="separator:a63e801abf72ca96de438cb5f13f651e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:abc093f0280ae359ad509278232f7b583" id="r_abc093f0280ae359ad509278232f7b583"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc093f0280ae359ad509278232f7b583">calculate</a> (T &amp;result, T v1, T v2, const <a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html">Operator</a> &amp;op) const</td></tr>
+<tr class="memdesc:abc093f0280ae359ad509278232f7b583"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies 'op' to 'v1' and 'v2' and stores the answer in 'result'. Returns false if the operation is not valid (e.g. divide by zero)  <br /></td></tr>
+<tr class="separator:abc093f0280ae359ad509278232f7b583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c7073e4345907eac44fe14dce3aa0c1" id="r_a8c7073e4345907eac44fe14dce3aa0c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c7073e4345907eac44fe14dce3aa0c1">eatSpaces</a> ()</td></tr>
+<tr class="memdesc:a8c7073e4345907eac44fe14dce3aa0c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eat all white space characters at the current expression index.  <br /></td></tr>
+<tr class="separator:a8c7073e4345907eac44fe14dce3aa0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb01aaf420738b4257b02c3555903c4a" id="r_adb01aaf420738b4257b02c3555903c4a"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb01aaf420738b4257b02c3555903c4a">getCharacter</a> () const</td></tr>
+<tr class="memdesc:adb01aaf420738b4257b02c3555903c4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the character at the current expression index or 0 if the end of the expression is reached.  <br /></td></tr>
+<tr class="separator:adb01aaf420738b4257b02c3555903c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f978eb297d2ac4808d4e993c233c438" id="r_a7f978eb297d2ac4808d4e993c233c438"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f978eb297d2ac4808d4e993c233c438">isEnd</a> () const</td></tr>
+<tr class="memdesc:a7f978eb297d2ac4808d4e993c233c438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the end of the expression has been reached.  <br /></td></tr>
+<tr class="separator:a7f978eb297d2ac4808d4e993c233c438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9ae7386062224c6b9460efdf7b3175c" id="r_ae9ae7386062224c6b9460efdf7b3175c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9ae7386062224c6b9460efdf7b3175c">parseExpr</a> (T &amp;finalValue)</td></tr>
+<tr class="memdesc:ae9ae7386062224c6b9460efdf7b3175c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse all operations of the current parenthesis level and the levels above, when done return the result (value).  <br /></td></tr>
+<tr class="separator:ae9ae7386062224c6b9460efdf7b3175c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa127a5d8708e0506ae7209e67751818a" id="r_aa127a5d8708e0506ae7209e67751818a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa127a5d8708e0506ae7209e67751818a">parseOp</a> (<a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html">Operator</a> &amp;result)</td></tr>
+<tr class="memdesc:aa127a5d8708e0506ae7209e67751818a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse a binary operator at the current expression index.  <br /></td></tr>
+<tr class="separator:aa127a5d8708e0506ae7209e67751818a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e114b31012e64a4b5ac6ba6415876ef" id="r_a6e114b31012e64a4b5ac6ba6415876ef"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e114b31012e64a4b5ac6ba6415876ef">parseReal</a> ()</td></tr>
+<tr class="memdesc:a6e114b31012e64a4b5ac6ba6415876ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the real number at the current expression index and advances the index past it.  <br /></td></tr>
+<tr class="separator:a6e114b31012e64a4b5ac6ba6415876ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a655e273367d49ebfbd0f164b1c8af00a" id="r_a655e273367d49ebfbd0f164b1c8af00a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a655e273367d49ebfbd0f164b1c8af00a">parseValue</a> (T &amp;valFinal)</td></tr>
+<tr class="memdesc:a655e273367d49ebfbd0f164b1c8af00a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse an integer value at the current expression index.  <br /></td></tr>
+<tr class="separator:a655e273367d49ebfbd0f164b1c8af00a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb9ad5710be4a3f72618971c979b8f9a" id="r_aeb9ad5710be4a3f72618971c979b8f9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeb9ad5710be4a3f72618971c979b8f9a">unexpected</a> () const</td></tr>
+<tr class="memdesc:aeb9ad5710be4a3f72618971c979b8f9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">'Record' that an error occurred  <br /></td></tr>
+<tr class="separator:aeb9ad5710be4a3f72618971c979b8f9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:aacdadf7d04357d253dd34174ce654fa5" id="r_aacdadf7d04357d253dd34174ce654fa5"><td class="memItemLeft" align="right" valign="top">static constexpr T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aacdadf7d04357d253dd34174ce654fa5">epsilon</a> ()</td></tr>
+<tr class="memdesc:aacdadf7d04357d253dd34174ce654fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The KIT 'almost equals' epsilon for T - the KIT settings are per concrete type.  <br /></td></tr>
+<tr class="separator:aacdadf7d04357d253dd34174ce654fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a5bd5458481ca953d9def870f2c1ccc15" id="r_a5bd5458481ca953d9def870f2c1ccc15"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bd5458481ca953d9def870f2c1ccc15">m_expr</a></td></tr>
+<tr class="memdesc:a5bd5458481ca953d9def870f2c1ccc15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expression string.  <br /></td></tr>
+<tr class="separator:a5bd5458481ca953d9def870f2c1ccc15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ee1c7c9eae8078ae2c62fdedc55b6de" id="r_a4ee1c7c9eae8078ae2c62fdedc55b6de"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4ee1c7c9eae8078ae2c62fdedc55b6de">m_exprLen</a></td></tr>
+<tr class="memdesc:a4ee1c7c9eae8078ae2c62fdedc55b6de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of the expression.  <br /></td></tr>
+<tr class="separator:a4ee1c7c9eae8078ae2c62fdedc55b6de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c10e6eabdde52ad07d31b2fa591f246" id="r_a0c10e6eabdde52ad07d31b2fa591f246"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c10e6eabdde52ad07d31b2fa591f246">m_index</a></td></tr>
+<tr class="memdesc:a0c10e6eabdde52ad07d31b2fa591f246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current expression index, incremented whilst parsing.  <br /></td></tr>
+<tr class="separator:a0c10e6eabdde52ad07d31b2fa591f246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ae7718da79ffaaef2b2e9b9c6ba479c" id="r_a5ae7718da79ffaaef2b2e9b9c6ba479c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_stack.html">Kit::Container::Stack</a>&lt; <a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator_value.html">OperatorValue</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5ae7718da79ffaaef2b2e9b9c6ba479c">m_stack</a></td></tr>
+<tr class="memdesc:a5ae7718da79ffaaef2b2e9b9c6ba479c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The current operator and its left value are pushed onto the stack if the operator on top of the stack has lower precedence.  <br /></td></tr>
+<tr class="separator:a5ae7718da79ffaaef2b2e9b9c6ba479c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba5c5bbe446fe4a5455e36d90707a6f8" id="r_aba5c5bbe446fe4a5455e36d90707a6f8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator_value.html">OperatorValue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba5c5bbe446fe4a5455e36d90707a6f8">m_stackMemory</a> [<a class="el" href="_real_expression_parser_8h.html#a300cc44192dd44b64a72a8d2ca1f6200">OPTION_KIT_MATH_REALEXPR_MAX_STACK_SIZE</a>]</td></tr>
+<tr class="memdesc:aba5c5bbe446fe4a5455e36d90707a6f8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> for the stack.  <br /></td></tr>
+<tr class="separator:aba5c5bbe446fe4a5455e36d90707a6f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
 class Kit::Math::RealExpressionParser&lt; T &gt;</div><p>This template class evaluates an null terminate string that represents an real-number arithmetic expression. </p>
 <p>Template Arg(s): T Double/float type to use for the numeric expression/calculations </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a63e801abf72ca96de438cb5f13f651e9" name="a63e801abf72ca96de438cb5f13f651e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63e801abf72ca96de438cb5f13f651e9">&#9670;&#160;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>List of operations. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a63e801abf72ca96de438cb5f13f651e9a169b3d646a0703dbfdb9df3563fd8988" name="a63e801abf72ca96de438cb5f13f651e9a169b3d646a0703dbfdb9df3563fd8988"></a>OPERATOR_ADDITION&#160;</td><td class="fielddoc"><ul>
+<li></li>
+</ul>
+</td></tr>
+<tr><td class="fieldname"><a id="a63e801abf72ca96de438cb5f13f651e9af5ce1afc937ff3a035af49728337ec09" name="a63e801abf72ca96de438cb5f13f651e9af5ce1afc937ff3a035af49728337ec09"></a>OPERATOR_SUBTRACTION&#160;</td><td class="fielddoc"><ul>
+<li></li>
+</ul>
+</td></tr>
+<tr><td class="fieldname"><a id="a63e801abf72ca96de438cb5f13f651e9afd939113c8b6a122172622a5e855d024" name="a63e801abf72ca96de438cb5f13f651e9afd939113c8b6a122172622a5e855d024"></a>OPERATOR_MULTIPLICATION&#160;</td><td class="fielddoc"><ul>
+<li></li>
+</ul>
+</td></tr>
+<tr><td class="fieldname"><a id="a63e801abf72ca96de438cb5f13f651e9a45d905f3d3d8fb1bc1aefd7ec4daaa01" name="a63e801abf72ca96de438cb5f13f651e9a45d905f3d3d8fb1bc1aefd7ec4daaa01"></a>OPERATOR_DIVISION&#160;</td><td class="fielddoc"><p>/ </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a63e801abf72ca96de438cb5f13f651e9a39ce58b97cd547547e6a3c5051166f90" name="a63e801abf72ca96de438cb5f13f651e9a39ce58b97cd547547e6a3c5051166f90"></a>OPERATOR_MODULO&#160;</td><td class="fielddoc"><p>% </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a63e801abf72ca96de438cb5f13f651e9a6ff604c2018ec99e9aac1c565b5f3cec" name="a63e801abf72ca96de438cb5f13f651e9a6ff604c2018ec99e9aac1c565b5f3cec"></a>OPERATOR_POWER&#160;</td><td class="fielddoc"><p>** </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a688a0738f0f58f2c8acd228e21328ef4" name="a688a0738f0f58f2c8acd228e21328ef4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a688a0738f0f58f2c8acd228e21328ef4">&#9670;&#160;</a></span>RealExpressionParser()</h2>
 
@@ -101,6 +239,107 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="abc093f0280ae359ad509278232f7b583" name="abc093f0280ae359ad509278232f7b583"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc093f0280ae359ad509278232f7b583">&#9670;&#160;</a></span>calculate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::calculate </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>v1</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>v2</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html">Operator</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>op</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Applies 'op' to 'v1' and 'v2' and stores the answer in 'result'. Returns false if the operation is not valid (e.g. divide by zero) </p>
+
+</div>
+</div>
+<a id="a8c7073e4345907eac44fe14dce3aa0c1" name="a8c7073e4345907eac44fe14dce3aa0c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c7073e4345907eac44fe14dce3aa0c1">&#9670;&#160;</a></span>eatSpaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::eatSpaces </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Eat all white space characters at the current expression index. </p>
+
+</div>
+</div>
+<a id="aacdadf7d04357d253dd34174ce654fa5" name="aacdadf7d04357d253dd34174ce654fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacdadf7d04357d253dd34174ce654fa5">&#9670;&#160;</a></span>epsilon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static constexpr T <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::epsilon </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The KIT 'almost equals' epsilon for T - the KIT settings are per concrete type. </p>
+
+</div>
+</div>
 <a id="ab2f88d1f5e9916127fa35eec8784af6d" name="ab2f88d1f5e9916127fa35eec8784af6d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab2f88d1f5e9916127fa35eec8784af6d">&#9670;&#160;</a></span>eval()</h2>
 
@@ -135,13 +374,349 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a id="adb01aaf420738b4257b02c3555903c4a" name="adb01aaf420738b4257b02c3555903c4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb01aaf420738b4257b02c3555903c4a">&#9670;&#160;</a></span>getCharacter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::getCharacter </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the character at the current expression index or 0 if the end of the expression is reached. </p>
+
+</div>
+</div>
+<a id="a7f978eb297d2ac4808d4e993c233c438" name="a7f978eb297d2ac4808d4e993c233c438"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f978eb297d2ac4808d4e993c233c438">&#9670;&#160;</a></span>isEnd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::isEnd </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the end of the expression has been reached. </p>
+
+</div>
+</div>
+<a id="ae9ae7386062224c6b9460efdf7b3175c" name="ae9ae7386062224c6b9460efdf7b3175c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9ae7386062224c6b9460efdf7b3175c">&#9670;&#160;</a></span>parseExpr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::parseExpr </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>finalValue</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parse all operations of the current parenthesis level and the levels above, when done return the result (value). </p>
+
+</div>
+</div>
+<a id="aa127a5d8708e0506ae7209e67751818a" name="aa127a5d8708e0506ae7209e67751818a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa127a5d8708e0506ae7209e67751818a">&#9670;&#160;</a></span>parseOp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::parseOp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html">Operator</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>result</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parse a binary operator at the current expression index. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator.html" title="Operator struct.">Operator</a> with precedence and associativity. </dd></dl>
+
+</div>
+</div>
+<a id="a6e114b31012e64a4b5ac6ba6415876ef" name="a6e114b31012e64a4b5ac6ba6415876ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e114b31012e64a4b5ac6ba6415876ef">&#9670;&#160;</a></span>parseReal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::parseReal </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parses the real number at the current expression index and advances the index past it. </p>
+
+</div>
+</div>
+<a id="a655e273367d49ebfbd0f164b1c8af00a" name="a655e273367d49ebfbd0f164b1c8af00a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a655e273367d49ebfbd0f164b1c8af00a">&#9670;&#160;</a></span>parseValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::parseValue </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;</td>          <td class="paramname"><span class="paramname"><em>valFinal</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Parse an integer value at the current expression index. </p>
+<p>The unary &lsquo;+&rsquo;, &lsquo;-&rsquo; and &lsquo;~&rsquo; operators and opening parentheses &lsquo;(&rsquo; cause recursion. </p>
+
+</div>
+</div>
+<a id="aeb9ad5710be4a3f72618971c979b8f9a" name="aeb9ad5710be4a3f72618971c979b8f9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb9ad5710be4a3f72618971c979b8f9a">&#9670;&#160;</a></span>unexpected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::unexpected </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>'Record' that an error occurred </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5bd5458481ca953d9def870f2c1ccc15" name="a5bd5458481ca953d9def870f2c1ccc15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bd5458481ca953d9def870f2c1ccc15">&#9670;&#160;</a></span>m_expr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char* <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::m_expr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Expression string. </p>
+
+</div>
+</div>
+<a id="a4ee1c7c9eae8078ae2c62fdedc55b6de" name="a4ee1c7c9eae8078ae2c62fdedc55b6de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ee1c7c9eae8078ae2c62fdedc55b6de">&#9670;&#160;</a></span>m_exprLen</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::m_exprLen</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Length of the expression. </p>
+
+</div>
+</div>
+<a id="a0c10e6eabdde52ad07d31b2fa591f246" name="a0c10e6eabdde52ad07d31b2fa591f246"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c10e6eabdde52ad07d31b2fa591f246">&#9670;&#160;</a></span>m_index</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::m_index</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Current expression index, incremented whilst parsing. </p>
+
+</div>
+</div>
+<a id="a5ae7718da79ffaaef2b2e9b9c6ba479c" name="a5ae7718da79ffaaef2b2e9b9c6ba479c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ae7718da79ffaaef2b2e9b9c6ba479c">&#9670;&#160;</a></span>m_stack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_stack.html">Kit::Container::Stack</a>&lt;<a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator_value.html">OperatorValue</a>&gt; <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::m_stack</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The current operator and its left value are pushed onto the stack if the operator on top of the stack has lower precedence. </p>
+
+</div>
+</div>
+<a id="aba5c5bbe446fe4a5455e36d90707a6f8" name="aba5c5bbe446fe4a5455e36d90707a6f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba5c5bbe446fe4a5455e36d90707a6f8">&#9670;&#160;</a></span>m_stackMemory</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_kit_1_1_math_1_1_real_expression_parser_1_1_operator_value.html">OperatorValue</a> <a class="el" href="class_kit_1_1_math_1_1_real_expression_parser.html">Kit::Math::RealExpressionParser</a>&lt; T &gt;::m_stackMemory[<a class="el" href="_real_expression_parser_8h.html#a300cc44192dd44b64a72a8d2ca1f6200">OPTION_KIT_MATH_REALEXPR_MAX_STACK_SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="namespace_kit_1_1_memory.html" title="The Memory namespace provides a collection interfaces that deal with memory specific/related behavior...">Memory</a> for the stack. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Kit/Math/<a class="el" href="_real_expression_parser_8h_source.html">RealExpressionParser.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 20:44:41 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Oct 14 2026 21:27:11 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

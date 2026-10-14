@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 401-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 412-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -94,6 +94,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a0aa0fd24977be7aef4d4818b503ab5fd" id="r_a0aa0fd24977be7aef4d4818b503ab5fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_logging_2_framework_2_types_8h.html#ac643d9f6bb3b8b9376451d53f3ef9d90">KitLoggingApplicationState_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0aa0fd24977be7aef4d4818b503ab5fd">m_applicationState</a></td></tr>
+<tr class="memdesc:a0aa0fd24977be7aef4d4818b503ab5fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application defined state that was in effect when the entry was logged.  <br /></td></tr>
+<tr class="separator:a0aa0fd24977be7aef4d4818b503ab5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7136964ee9b6d8e68e6f1af4377ed094" id="r_a7136964ee9b6d8e68e6f1af4377ed094"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7136964ee9b6d8e68e6f1af4377ed094">m_classificationId</a></td></tr>
 <tr class="memdesc:a7136964ee9b6d8e68e6f1af4377ed094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Classification identifier.  <br /></td></tr>
 <tr class="separator:a7136964ee9b6d8e68e6f1af4377ed094"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,7 +118,7 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:acfb89821650d80dce8b18040ba5dd6f9" id="r_acfb89821650d80dce8b18040ba5dd6f9"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfb89821650d80dce8b18040ba5dd6f9">entryLen</a> = sizeof( <a class="el" href="#a0a3f810b6910909fb866473b3c0f3ab9">m_timestamp</a> ) + sizeof( <a class="el" href="#a7136964ee9b6d8e68e6f1af4377ed094">m_classificationId</a> ) + sizeof( <a class="el" href="#a2da4cca8c299dc686b029eca894c58ce">m_packageId</a> ) + sizeof( <a class="el" href="#a8c8684efa1e6b8652fa696ade7dd5325">m_subSystemId</a> ) + sizeof( <a class="el" href="#af2de3533e4c5ce9b71aefc3864395c04">m_messageId</a> ) + sizeof( <a class="el" href="#ab2a738557c3b7b62a4578d9dc6679392">m_infoText</a> )</td></tr>
+<tr class="memitem:acfb89821650d80dce8b18040ba5dd6f9" id="r_acfb89821650d80dce8b18040ba5dd6f9"><td class="memItemLeft" align="right" valign="top">static constexpr unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acfb89821650d80dce8b18040ba5dd6f9">entryLen</a> = sizeof( <a class="el" href="#a0a3f810b6910909fb866473b3c0f3ab9">m_timestamp</a> ) + sizeof( <a class="el" href="#a7136964ee9b6d8e68e6f1af4377ed094">m_classificationId</a> ) + sizeof( <a class="el" href="#a2da4cca8c299dc686b029eca894c58ce">m_packageId</a> ) + sizeof( <a class="el" href="#a8c8684efa1e6b8652fa696ade7dd5325">m_subSystemId</a> ) + sizeof( <a class="el" href="#af2de3533e4c5ce9b71aefc3864395c04">m_messageId</a> ) + sizeof( <a class="el" href="#a0aa0fd24977be7aef4d4818b503ab5fd">m_applicationState</a> ) + sizeof( <a class="el" href="#ab2a738557c3b7b62a4578d9dc6679392">m_infoText</a> )</td></tr>
 <tr class="memdesc:acfb89821650d80dce8b18040ba5dd6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total 'packed' length.  <br /></td></tr>
 <tr class="separator:acfb89821650d80dce8b18040ba5dd6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -257,7 +260,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr unsigned Kit::Logging::Framework::EntryData_T::entryLen = sizeof( <a class="el" href="#a0a3f810b6910909fb866473b3c0f3ab9">m_timestamp</a> ) + sizeof( <a class="el" href="#a7136964ee9b6d8e68e6f1af4377ed094">m_classificationId</a> ) + sizeof( <a class="el" href="#a2da4cca8c299dc686b029eca894c58ce">m_packageId</a> ) + sizeof( <a class="el" href="#a8c8684efa1e6b8652fa696ade7dd5325">m_subSystemId</a> ) + sizeof( <a class="el" href="#af2de3533e4c5ce9b71aefc3864395c04">m_messageId</a> ) + sizeof( <a class="el" href="#ab2a738557c3b7b62a4578d9dc6679392">m_infoText</a> )</td>
+          <td class="memname">constexpr unsigned Kit::Logging::Framework::EntryData_T::entryLen = sizeof( <a class="el" href="#a0a3f810b6910909fb866473b3c0f3ab9">m_timestamp</a> ) + sizeof( <a class="el" href="#a7136964ee9b6d8e68e6f1af4377ed094">m_classificationId</a> ) + sizeof( <a class="el" href="#a2da4cca8c299dc686b029eca894c58ce">m_packageId</a> ) + sizeof( <a class="el" href="#a8c8684efa1e6b8652fa696ade7dd5325">m_subSystemId</a> ) + sizeof( <a class="el" href="#af2de3533e4c5ce9b71aefc3864395c04">m_messageId</a> ) + sizeof( <a class="el" href="#a0aa0fd24977be7aef4d4818b503ab5fd">m_applicationState</a> ) + sizeof( <a class="el" href="#ab2a738557c3b7b62a4578d9dc6679392">m_infoText</a> )</td>
         </tr>
       </table>
   </td>
@@ -268,6 +271,23 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Total 'packed' length. </p>
+
+</div>
+</div>
+<a id="a0aa0fd24977be7aef4d4818b503ab5fd" name="a0aa0fd24977be7aef4d4818b503ab5fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aa0fd24977be7aef4d4818b503ab5fd">&#9670;&#160;</a></span>m_applicationState</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_logging_2_framework_2_types_8h.html#ac643d9f6bb3b8b9376451d53f3ef9d90">KitLoggingApplicationState_T</a> Kit::Logging::Framework::EntryData_T::m_applicationState</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Application defined state that was in effect when the entry was logged. </p>
+<p>A value of 0 is 'no state' </p>
 
 </div>
 </div>
@@ -377,7 +397,7 @@ Static Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 20:44:41 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Oct 14 2026 21:27:11 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 401-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 412-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -70,6 +70,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5884e90391bfe1711ca984cd2694f50b" id="r_a5884e90391bfe1711ca984cd2694f50b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5884e90391bfe1711ca984cd2694f50b">~IApplication</a> () noexcept</td></tr>
 <tr class="memdesc:a5884e90391bfe1711ca984cd2694f50b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:a5884e90391bfe1711ca984cd2694f50b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68313ae68b908cea1301bbf346e6ee72" id="r_a68313ae68b908cea1301bbf346e6ee72"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68313ae68b908cea1301bbf346e6ee72">applicationStateToString</a> (<a class="el" href="_logging_2_framework_2_types_8h.html#ac643d9f6bb3b8b9376451d53f3ef9d90">KitLoggingApplicationState_T</a> state) noexcept</td></tr>
+<tr class="memdesc:a68313ae68b908cea1301bbf346e6ee72"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the Application state into a short marker string for formatted output, e.g.  <br /></td></tr>
+<tr class="separator:a68313ae68b908cea1301bbf346e6ee72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71e461817993c06630a6ef91b6954fa3" id="r_a71e461817993c06630a6ef91b6954fa3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_logging_2_framework_2_types_8h.html#ac643d9f6bb3b8b9376451d53f3ef9d90">KitLoggingApplicationState_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a71e461817993c06630a6ef91b6954fa3">captureApplicationState</a> () noexcept</td></tr>
+<tr class="memdesc:a71e461817993c06630a6ef91b6954fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method returns the Application state that is in effect at the moment of the call.  <br /></td></tr>
+<tr class="separator:a71e461817993c06630a6ef91b6954fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a665a432a27bddebd1458defe5d22c7d1" id="r_a665a432a27bddebd1458defe5d22c7d1"><td class="memItemLeft" align="right" valign="top">virtual const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a665a432a27bddebd1458defe5d22c7d1">classificationIdToString</a> (uint8_t classificationId) noexcept=0</td></tr>
 <tr class="memdesc:a665a432a27bddebd1458defe5d22c7d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to convert a numeric Classification ID into a text string.  <br /></td></tr>
 <tr class="separator:a665a432a27bddebd1458defe5d22c7d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,6 +127,66 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a68313ae68b908cea1301bbf346e6ee72" name="a68313ae68b908cea1301bbf346e6ee72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68313ae68b908cea1301bbf346e6ee72">&#9670;&#160;</a></span>applicationStateToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const char * Kit::Logging::Framework::IApplication::applicationStateToString </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_logging_2_framework_2_types_8h.html#ac643d9f6bb3b8b9376451d53f3ef9d90">KitLoggingApplicationState_T</a></td>          <td class="paramname"><span class="paramname"><em>state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method converts the Application state into a short marker string for formatted output, e.g. </p>
+<p>"*". The returned string must be a null-terminated string with a length of less or equal to OPTION_KIT_LOGGING_FORMATTER_APPLICATION_STATE_TEXT_LEN. Longer strings are silently truncated to that length by the <a class="el" href="class_kit_1_1_logging_1_1_framework_1_1_formatter.html" title="This class provides a collection of formatting method(s) for log entries.">Formatter</a>.</p>
+<p>CAUTION: The returned pointer must reference storage that remains valid for the duration of the caller's formatting operation - i.e. return a string literal or other statically allocated storage, NOT a stack buffer.</p>
+<p>The default implementation renders nothing. </p>
+
+</div>
+</div>
+<a id="a71e461817993c06630a6ef91b6954fa3" name="a71e461817993c06630a6ef91b6954fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71e461817993c06630a6ef91b6954fa3">&#9670;&#160;</a></span>captureApplicationState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="_logging_2_framework_2_types_8h.html#ac643d9f6bb3b8b9376451d53f3ef9d90">KitLoggingApplicationState_T</a> Kit::Logging::Framework::IApplication::captureApplicationState </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method returns the Application state that is in effect at the moment of the call. </p>
+<p>The framework calls this method once per log entry and snapshots the result into the entry.</p>
+<p>The meaning of the individual bits is entirely Application defined. The default implementation returns zero.</p>
+<p>CAUTION: This method is called with the <a class="el" href="namespace_kit_1_1_logging.html" title="The Logging namespace contains a logging framework as well as the Kit namespace specific logging iden...">Logging</a> framework's internal mutex held, and on the thread that generated the log entry. The implementation MUST NOT block and MUST NOT call back into the <a class="el" href="namespace_kit_1_1_logging.html" title="The Logging namespace contains a logging framework as well as the Kit namespace specific logging iden...">Logging</a> framework (e.g. logf()). </p>
+
+</div>
+</div>
 <a id="a665a432a27bddebd1458defe5d22c7d1" name="a665a432a27bddebd1458defe5d22c7d1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a665a432a27bddebd1458defe5d22c7d1">&#9670;&#160;</a></span>classificationIdToString()</h2>
 
@@ -266,7 +332,7 @@ Static Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 13 2026 20:44:41 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Wed Oct 14 2026 21:27:11 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

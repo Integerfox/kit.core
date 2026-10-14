@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-13 20:52:42</td>
+            <td class="headerValue">2026-10-14 21:32:52</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">82.7&nbsp;%</td>
@@ -134,16 +134,16 @@
 <span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">          60 :     return m_seqNum;</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             : }</span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : </span>
-<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">         107 : bool ModelPointBase::isNotValid( uint16_t* seqNumPtr ) const noexcept</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :<span class="tlaGNC">         110 : bool ModelPointBase::isNotValid( uint16_t* seqNumPtr ) const noexcept</span></span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : {</span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">         107 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">         110 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             :     //</span>
-<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">         107 :     bool result = m_valid;</span></span>
-<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 9 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 98 times"> + </span>]:<span class="tlaGNC">         107 :     if ( seqNumPtr )</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">         110 :     bool result = m_valid;</span></span>
+<span id="L80"><span class="lineNum">      80</span>         [<span class="tlaGBC" title="Branch 0 was taken 11 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 99 times"> + </span>]:<span class="tlaGNC">         110 :     if ( seqNumPtr )</span></span>
 <span id="L81"><span class="lineNum">      81</span>                 :             :     {</span>
-<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">           9 :         *seqNumPtr = m_seqNum;</span></span>
+<span id="L82"><span class="lineNum">      82</span>                 :<span class="tlaGNC">          11 :         *seqNumPtr = m_seqNum;</span></span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :     }</span>
-<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">         107 :     return !result;</span></span>
+<span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaGNC">         110 :     return !result;</span></span>
 <span id="L85"><span class="lineNum">      85</span>                 :             : }</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             : </span>
 <span id="L87"><span class="lineNum">      87</span>                 :<span class="tlaGNC">         183 : uint16_t ModelPointBase::setInvalid( ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept</span></span>
@@ -169,36 +169,36 @@
 <span id="L107"><span class="lineNum">     107</span>                 :<span class="tlaGNC">         159 :     memset( m_dataPtr, 0, m_dataSize );</span></span>
 <span id="L108"><span class="lineNum">     108</span>                 :<span class="tlaGNC">         159 : }</span></span>
 <span id="L109"><span class="lineNum">     109</span>                 :             : </span>
-<span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC">         257 : bool ModelPointBase::readData( void* dstData, size_t dstSize, uint16_t* seqNumPtr ) const noexcept</span></span>
+<span id="L110"><span class="lineNum">     110</span>                 :<span class="tlaGNC">         290 : bool ModelPointBase::readData( void* dstData, size_t dstSize, uint16_t* seqNumPtr ) const noexcept</span></span>
 <span id="L111"><span class="lineNum">     111</span>                 :             : {</span>
-<span id="L112"><span class="lineNum">     112</span>                 :<span class="tlaGNC">         257 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
+<span id="L112"><span class="lineNum">     112</span>                 :<span class="tlaGNC">         290 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
 <span id="L113"><span class="lineNum">     113</span>                 :             :     //</span>
-<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">         257 :     bool valid = m_valid;</span></span>
-<span id="L115"><span class="lineNum">     115</span>         [<span class="tlaGBC" title="Branch 0 was taken 241 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 16 times"> + </span>]:<span class="tlaGNC">         257 :     if ( dstData &amp;&amp; valid )</span></span>
+<span id="L114"><span class="lineNum">     114</span>                 :<span class="tlaGNC">         290 :     bool valid = m_valid;</span></span>
+<span id="L115"><span class="lineNum">     115</span>         [<span class="tlaGBC" title="Branch 0 was taken 264 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 26 times"> + </span>]:<span class="tlaGNC">         290 :     if ( dstData &amp;&amp; valid )</span></span>
 <span id="L116"><span class="lineNum">     116</span>                 :             :     {</span>
-<span id="L117"><span class="lineNum">     117</span>                 :<span class="tlaGNC">         241 :         copyDataTo_( dstData, dstSize );</span></span>
+<span id="L117"><span class="lineNum">     117</span>                 :<span class="tlaGNC">         264 :         copyDataTo_( dstData, dstSize );</span></span>
 <span id="L118"><span class="lineNum">     118</span>                 :             :     }</span>
-<span id="L119"><span class="lineNum">     119</span>         [<span class="tlaGBC" title="Branch 0 was taken 68 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 189 times"> + </span>]:<span class="tlaGNC">         257 :     if ( seqNumPtr )</span></span>
+<span id="L119"><span class="lineNum">     119</span>         [<span class="tlaGBC" title="Branch 0 was taken 68 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 222 times"> + </span>]:<span class="tlaGNC">         290 :     if ( seqNumPtr )</span></span>
 <span id="L120"><span class="lineNum">     120</span>                 :             :     {</span>
 <span id="L121"><span class="lineNum">     121</span>                 :<span class="tlaGNC">          68 :         *seqNumPtr = m_seqNum;</span></span>
 <span id="L122"><span class="lineNum">     122</span>                 :             :     }</span>
 <span id="L123"><span class="lineNum">     123</span>                 :             : </span>
-<span id="L124"><span class="lineNum">     124</span>                 :<span class="tlaGNC">         257 :     return valid;</span></span>
+<span id="L124"><span class="lineNum">     124</span>                 :<span class="tlaGNC">         290 :     return valid;</span></span>
 <span id="L125"><span class="lineNum">     125</span>                 :             : }</span>
 <span id="L126"><span class="lineNum">     126</span>                 :             : </span>
-<span id="L127"><span class="lineNum">     127</span>                 :<span class="tlaGNC">         407 : uint16_t ModelPointBase::writeData( const void* srcData, size_t srcSize, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept</span></span>
+<span id="L127"><span class="lineNum">     127</span>                 :<span class="tlaGNC">         430 : uint16_t ModelPointBase::writeData( const void* srcData, size_t srcSize, ChangeNotice_T chgNotice, LockRequest_T lockRequest ) noexcept</span></span>
 <span id="L128"><span class="lineNum">     128</span>                 :             : {</span>
-<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">         407 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
-<span id="L130"><span class="lineNum">     130</span>   [<span class="tlaGBC" title="Branch 0 was taken 407 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 402 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 5 times"> + </span>]:<span class="tlaGNC">         407 :     if ( srcData &amp;&amp; testAndUpdateLock( lockRequest ) )</span></span>
+<span id="L129"><span class="lineNum">     129</span>                 :<span class="tlaGNC">         430 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
+<span id="L130"><span class="lineNum">     130</span>   [<span class="tlaGBC" title="Branch 0 was taken 430 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 425 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 5 times"> + </span>]:<span class="tlaGNC">         430 :     if ( srcData &amp;&amp; testAndUpdateLock( lockRequest ) )</span></span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :     {</span>
-<span id="L132"><span class="lineNum">     132</span>   [<span class="tlaGBC" title="Branch 0 was taken 287 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 115 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 283 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span> :<span class="tlaGNC">         402 :         if ( !m_valid || chgNotice == ChangeNotice_T::eFORCE || isDataEqual_( srcData, srcSize ) == false )</span></span>
-<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 263 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 20 times"> + </span>]
+<span id="L132"><span class="lineNum">     132</span>   [<span class="tlaGBC" title="Branch 0 was taken 310 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 115 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 306 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span> :<span class="tlaGNC">         425 :         if ( !m_valid || chgNotice == ChangeNotice_T::eFORCE || isDataEqual_( srcData, srcSize ) == false )</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 283 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 23 times"> + </span>]
 <span id="L133"><span class="lineNum">     133</span>                 :             :         {</span>
-<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">         382 :             copyDataFrom_( srcData, srcSize );</span></span>
-<span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">         382 :             processDataUpdated();</span></span>
+<span id="L134"><span class="lineNum">     134</span>                 :<span class="tlaGNC">         402 :             copyDataFrom_( srcData, srcSize );</span></span>
+<span id="L135"><span class="lineNum">     135</span>                 :<span class="tlaGNC">         402 :             processDataUpdated();</span></span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :         }</span>
 <span id="L137"><span class="lineNum">     137</span>                 :             :     }</span>
-<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">         407 :     return m_seqNum;</span></span>
+<span id="L138"><span class="lineNum">     138</span>                 :<span class="tlaGNC">         430 :     return m_seqNum;</span></span>
 <span id="L139"><span class="lineNum">     139</span>                 :             : }</span>
 <span id="L140"><span class="lineNum">     140</span>                 :             : </span>
 <span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">           8 : uint16_t ModelPointBase::copyDataAndStateFrom( const ModelPointBase&amp; src, LockRequest_T lockRequest ) noexcept</span></span>
@@ -220,23 +220,23 @@
 <span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">       65532 :     return m_seqNum;</span></span>
 <span id="L158"><span class="lineNum">     158</span>                 :             : }</span>
 <span id="L159"><span class="lineNum">     159</span>                 :             : </span>
-<span id="L160"><span class="lineNum">     160</span>                 :<span class="tlaGNC">         221 : void ModelPointBase::copyDataTo_( void* dstData, size_t dstSize ) const noexcept</span></span>
+<span id="L160"><span class="lineNum">     160</span>                 :<span class="tlaGNC">         244 : void ModelPointBase::copyDataTo_( void* dstData, size_t dstSize ) const noexcept</span></span>
 <span id="L161"><span class="lineNum">     161</span>                 :             : {</span>
 <span id="L162"><span class="lineNum">     162</span>                 :             :     KIT_SYSTEM_ASSERT( dstSize &lt;= m_dataSize );</span>
-<span id="L163"><span class="lineNum">     163</span>                 :<span class="tlaGNC">         221 :     memcpy( dstData, m_dataPtr, dstSize );</span></span>
-<span id="L164"><span class="lineNum">     164</span>                 :<span class="tlaGNC">         221 : }</span></span>
+<span id="L163"><span class="lineNum">     163</span>                 :<span class="tlaGNC">         244 :     memcpy( dstData, m_dataPtr, dstSize );</span></span>
+<span id="L164"><span class="lineNum">     164</span>                 :<span class="tlaGNC">         244 : }</span></span>
 <span id="L165"><span class="lineNum">     165</span>                 :             : </span>
-<span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">         368 : void ModelPointBase::copyDataFrom_( const void* srcData, size_t srcSize ) noexcept</span></span>
+<span id="L166"><span class="lineNum">     166</span>                 :<span class="tlaGNC">         388 : void ModelPointBase::copyDataFrom_( const void* srcData, size_t srcSize ) noexcept</span></span>
 <span id="L167"><span class="lineNum">     167</span>                 :             : {</span>
 <span id="L168"><span class="lineNum">     168</span>                 :             :     KIT_SYSTEM_ASSERT( srcSize &lt;= m_dataSize );</span>
-<span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaGNC">         368 :     memcpy( m_dataPtr, srcData, srcSize );</span></span>
-<span id="L170"><span class="lineNum">     170</span>                 :<span class="tlaGNC">         368 : }</span></span>
+<span id="L169"><span class="lineNum">     169</span>                 :<span class="tlaGNC">         388 :     memcpy( m_dataPtr, srcData, srcSize );</span></span>
+<span id="L170"><span class="lineNum">     170</span>                 :<span class="tlaGNC">         388 : }</span></span>
 <span id="L171"><span class="lineNum">     171</span>                 :             : </span>
-<span id="L172"><span class="lineNum">     172</span>                 :<span class="tlaGNC">         259 : bool ModelPointBase::isDataEqual_( const void* otherData, size_t otherSize ) const noexcept</span></span>
+<span id="L172"><span class="lineNum">     172</span>                 :<span class="tlaGNC">         282 : bool ModelPointBase::isDataEqual_( const void* otherData, size_t otherSize ) const noexcept</span></span>
 <span id="L173"><span class="lineNum">     173</span>                 :             : {</span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :     // Only compare what will actually be copied by copyDataFrom_()</span>
-<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">         259 :     size_t len = otherSize &lt; m_dataSize ? otherSize : m_dataSize;</span></span>
-<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">         259 :     return memcmp( m_dataPtr, otherData, len ) == 0;</span></span>
+<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">         282 :     size_t len = otherSize &lt; m_dataSize ? otherSize : m_dataSize;</span></span>
+<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">         282 :     return memcmp( m_dataPtr, otherData, len ) == 0;</span></span>
 <span id="L177"><span class="lineNum">     177</span>                 :             : }</span>
 <span id="L178"><span class="lineNum">     178</span>                 :             : </span>
 <span id="L179"><span class="lineNum">     179</span>                 :<span class="tlaGNC">          74 : void* ModelPointBase::getImportExportDataPointer_() noexcept</span></span>
@@ -385,45 +385,45 @@
 <span id="L322"><span class="lineNum">     322</span>                 :             : </span>
 <span id="L323"><span class="lineNum">     323</span>                 :             : </span>
 <span id="L324"><span class="lineNum">     324</span>                 :             : /////////////////////////////////////</span>
-<span id="L325"><span class="lineNum">     325</span>                 :<span class="tlaGNC">         396 : void ModelPointBase::processDataUpdated() noexcept</span></span>
+<span id="L325"><span class="lineNum">     325</span>                 :<span class="tlaGNC">         416 : void ModelPointBase::processDataUpdated() noexcept</span></span>
 <span id="L326"><span class="lineNum">     326</span>                 :             : {</span>
 <span id="L327"><span class="lineNum">     327</span>                 :             :     // By definition - Point now has valid date</span>
-<span id="L328"><span class="lineNum">     328</span>                 :<span class="tlaGNC">         396 :     m_valid = true;</span></span>
-<span id="L329"><span class="lineNum">     329</span>                 :<span class="tlaGNC">         396 :     processChangeNotifications();</span></span>
-<span id="L330"><span class="lineNum">     330</span>                 :<span class="tlaGNC">         396 : }</span></span>
+<span id="L328"><span class="lineNum">     328</span>                 :<span class="tlaGNC">         416 :     m_valid = true;</span></span>
+<span id="L329"><span class="lineNum">     329</span>                 :<span class="tlaGNC">         416 :     processChangeNotifications();</span></span>
+<span id="L330"><span class="lineNum">     330</span>                 :<span class="tlaGNC">         416 : }</span></span>
 <span id="L331"><span class="lineNum">     331</span>                 :             : </span>
-<span id="L332"><span class="lineNum">     332</span>                 :<span class="tlaGNC">       66066 : void ModelPointBase::advanceSequenceNumber() noexcept</span></span>
+<span id="L332"><span class="lineNum">     332</span>                 :<span class="tlaGNC">       66086 : void ModelPointBase::advanceSequenceNumber() noexcept</span></span>
 <span id="L333"><span class="lineNum">     333</span>                 :             : {</span>
 <span id="L334"><span class="lineNum">     334</span>                 :             :     // Increment my sequence number (when rolling over --&gt;do not allow the 'unknown' value)</span>
-<span id="L335"><span class="lineNum">     335</span>                 :<span class="tlaGNC">       66066 :     m_seqNum++;</span></span>
-<span id="L336"><span class="lineNum">     336</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 66065 times"> + </span>]:<span class="tlaGNC">       66066 :     if ( m_seqNum == SEQUENCE_NUMBER_UNKNOWN )</span></span>
+<span id="L335"><span class="lineNum">     335</span>                 :<span class="tlaGNC">       66086 :     m_seqNum++;</span></span>
+<span id="L336"><span class="lineNum">     336</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 66085 times"> + </span>]:<span class="tlaGNC">       66086 :     if ( m_seqNum == SEQUENCE_NUMBER_UNKNOWN )</span></span>
 <span id="L337"><span class="lineNum">     337</span>                 :             :     {</span>
 <span id="L338"><span class="lineNum">     338</span>                 :<span class="tlaGNC">           1 :         m_seqNum = SEQUENCE_NUMBER_UNKNOWN + 1;</span></span>
 <span id="L339"><span class="lineNum">     339</span>                 :             :     }</span>
-<span id="L340"><span class="lineNum">     340</span>                 :<span class="tlaGNC">       66066 : }</span></span>
+<span id="L340"><span class="lineNum">     340</span>                 :<span class="tlaGNC">       66086 : }</span></span>
 <span id="L341"><span class="lineNum">     341</span>                 :             : </span>
-<span id="L342"><span class="lineNum">     342</span>                 :<span class="tlaGNC">       66066 : void ModelPointBase::processChangeNotifications() noexcept</span></span>
+<span id="L342"><span class="lineNum">     342</span>                 :<span class="tlaGNC">       66086 : void ModelPointBase::processChangeNotifications() noexcept</span></span>
 <span id="L343"><span class="lineNum">     343</span>                 :             : {</span>
 <span id="L344"><span class="lineNum">     344</span>                 :             :     // Increment the sequence number</span>
-<span id="L345"><span class="lineNum">     345</span>                 :<span class="tlaGNC">       66066 :     advanceSequenceNumber();</span></span>
+<span id="L345"><span class="lineNum">     345</span>                 :<span class="tlaGNC">       66086 :     advanceSequenceNumber();</span></span>
 <span id="L346"><span class="lineNum">     346</span>                 :             : </span>
 <span id="L347"><span class="lineNum">     347</span>                 :             :     // Generate change notifications</span>
 <span id="L348"><span class="lineNum">     348</span>                 :             :     IObserver* item = m_subscribers.get();</span>
-<span id="L349"><span class="lineNum">     349</span>         [<span class="tlaGBC" title="Branch 0 was taken 59 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 66066 times"> + </span>]:<span class="tlaGNC">       66125 :     while ( item )</span></span>
+<span id="L349"><span class="lineNum">     349</span>         [<span class="tlaGBC" title="Branch 0 was taken 62 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 66086 times"> + </span>]:<span class="tlaGNC">       66148 :     while ( item )</span></span>
 <span id="L350"><span class="lineNum">     350</span>                 :             :     {</span>
-<span id="L351"><span class="lineNum">     351</span>                 :<span class="tlaGNC">          59 :         processSubscriptionEvent_( *item, eDATA_CHANGED );</span></span>
+<span id="L351"><span class="lineNum">     351</span>                 :<span class="tlaGNC">          62 :         processSubscriptionEvent_( *item, eDATA_CHANGED );</span></span>
 <span id="L352"><span class="lineNum">     352</span>                 :             :         item = m_subscribers.get();</span>
 <span id="L353"><span class="lineNum">     353</span>                 :             :     }</span>
-<span id="L354"><span class="lineNum">     354</span>                 :<span class="tlaGNC">       66066 : }</span></span>
+<span id="L354"><span class="lineNum">     354</span>                 :<span class="tlaGNC">       66086 : }</span></span>
 <span id="L355"><span class="lineNum">     355</span>                 :             : </span>
 <span id="L356"><span class="lineNum">     356</span>                 :             : /////////////////</span>
-<span id="L357"><span class="lineNum">     357</span>                 :<span class="tlaGNC">         125 : void ModelPointBase::attachObserver( IObserver&amp; observer, uint16_t initialSeqNumber ) noexcept</span></span>
+<span id="L357"><span class="lineNum">     357</span>                 :<span class="tlaGNC">         127 : void ModelPointBase::attachObserver( IObserver&amp; observer, uint16_t initialSeqNumber ) noexcept</span></span>
 <span id="L358"><span class="lineNum">     358</span>                 :             : {</span>
-<span id="L359"><span class="lineNum">     359</span>                 :<span class="tlaGNC">         125 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
-<span id="L360"><span class="lineNum">     360</span>                 :<span class="tlaGNC">         125 :     observer.setSequenceNumber_( initialSeqNumber );</span></span>
-<span id="L361"><span class="lineNum">     361</span>                 :<span class="tlaGNC">         125 :     observer.setModelPoint_( this );</span></span>
-<span id="L362"><span class="lineNum">     362</span>                 :<span class="tlaGNC">         125 :     processSubscriptionEvent_( observer, eATTACH );</span></span>
-<span id="L363"><span class="lineNum">     363</span>                 :<span class="tlaGNC">         125 : }</span></span>
+<span id="L359"><span class="lineNum">     359</span>                 :<span class="tlaGNC">         127 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
+<span id="L360"><span class="lineNum">     360</span>                 :<span class="tlaGNC">         127 :     observer.setSequenceNumber_( initialSeqNumber );</span></span>
+<span id="L361"><span class="lineNum">     361</span>                 :<span class="tlaGNC">         127 :     observer.setModelPoint_( this );</span></span>
+<span id="L362"><span class="lineNum">     362</span>                 :<span class="tlaGNC">         127 :     processSubscriptionEvent_( observer, eATTACH );</span></span>
+<span id="L363"><span class="lineNum">     363</span>                 :<span class="tlaGNC">         127 : }</span></span>
 <span id="L364"><span class="lineNum">     364</span>                 :             : </span>
 <span id="L365"><span class="lineNum">     365</span>                 :<span class="tlaGNC">          59 : void ModelPointBase::detachObserver( IObserver&amp; observer ) noexcept</span></span>
 <span id="L366"><span class="lineNum">     366</span>                 :             : {</span>
@@ -444,11 +444,11 @@
 <span id="L381"><span class="lineNum">     381</span>                 :             : </span>
 <span id="L382"><span class="lineNum">     382</span>                 :             : </span>
 <span id="L383"><span class="lineNum">     383</span>                 :             : /////////////////</span>
-<span id="L384"><span class="lineNum">     384</span>                 :<span class="tlaGNC">         415 : void ModelPointBase::processSubscriptionEvent_( IObserver&amp; observer, Event_T event ) noexcept</span></span>
+<span id="L384"><span class="lineNum">     384</span>                 :<span class="tlaGNC">         426 : void ModelPointBase::processSubscriptionEvent_( IObserver&amp; observer, Event_T event ) noexcept</span></span>
 <span id="L385"><span class="lineNum">     385</span>                 :             : {</span>
-<span id="L386"><span class="lineNum">     386</span>                 :<span class="tlaGNC">         415 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
+<span id="L386"><span class="lineNum">     386</span>                 :<span class="tlaGNC">         426 :     Kit::System::Mutex::ScopeLock criticalSection( m_modelDatabase.getMutex_() );</span></span>
 <span id="L387"><span class="lineNum">     387</span>                 :             : </span>
-<span id="L388"><span class="lineNum">     388</span>   [<span class="tlaGBC" title="Branch 0 was taken 51 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 95 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 86 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 169 times"> + </span> :<span class="tlaGNC">         415 :     switch ( static_cast&lt;State_T&gt;( observer.getState_() ) )</span></span>
+<span id="L388"><span class="lineNum">     388</span>   [<span class="tlaGBC" title="Branch 0 was taken 51 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 98 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 89 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 174 times"> + </span> :<span class="tlaGNC">         426 :     switch ( static_cast&lt;State_T&gt;( observer.getState_() ) )</span></span>
 <span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 14 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
 <span id="L389"><span class="lineNum">     389</span>                 :             :     {</span>
 <span id="L390"><span class="lineNum">     390</span>                 :<span class="tlaGNC">          51 :     case eSTATE_UNSUBSCRIBED:</span></span>
@@ -469,8 +469,8 @@
 <span id="L405"><span class="lineNum">     405</span>                 :             :         }</span>
 <span id="L406"><span class="lineNum">     406</span>                 :             :         break;</span>
 <span id="L407"><span class="lineNum">     407</span>                 :             : </span>
-<span id="L408"><span class="lineNum">     408</span>                 :<span class="tlaGNC tlaBgGNC">          95 :     case eSTATE_IDLE:</span></span>
-<span id="L409"><span class="lineNum">     409</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 59 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">          95 :         switch ( event )</span></span>
+<span id="L408"><span class="lineNum">     408</span>                 :<span class="tlaGNC tlaBgGNC">          98 :     case eSTATE_IDLE:</span></span>
+<span id="L409"><span class="lineNum">     409</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 36 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 62 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">          98 :         switch ( event )</span></span>
 <span id="L410"><span class="lineNum">     410</span>                 :             :         {</span>
 <span id="L411"><span class="lineNum">     411</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         case eATTACH:</span></span>
 <span id="L412"><span class="lineNum">     412</span>                 :<span class="tlaUNC">           0 :             transitionToSubscribed( observer );</span></span>
@@ -481,10 +481,10 @@
 <span id="L417"><span class="lineNum">     417</span>                 :<span class="tlaGNC">          36 :             observer.setState_( eSTATE_UNSUBSCRIBED );</span></span>
 <span id="L418"><span class="lineNum">     418</span>                 :<span class="tlaGNC">          36 :             break;</span></span>
 <span id="L419"><span class="lineNum">     419</span>                 :             : </span>
-<span id="L420"><span class="lineNum">     420</span>                 :<span class="tlaGNC">          59 :         case eDATA_CHANGED:</span></span>
+<span id="L420"><span class="lineNum">     420</span>                 :<span class="tlaGNC">          62 :         case eDATA_CHANGED:</span></span>
 <span id="L421"><span class="lineNum">     421</span>                 :             :             // NOTE: By definition if the eDATA_CHANGED event was generated - the observer is NOT in the MP's subscribers list</span>
-<span id="L422"><span class="lineNum">     422</span>                 :<span class="tlaGNC">          59 :             transitionToNotifyPending( observer );</span></span>
-<span id="L423"><span class="lineNum">     423</span>                 :<span class="tlaGNC">          59 :             break;</span></span>
+<span id="L422"><span class="lineNum">     422</span>                 :<span class="tlaGNC">          62 :             transitionToNotifyPending( observer );</span></span>
+<span id="L423"><span class="lineNum">     423</span>                 :<span class="tlaGNC">          62 :             break;</span></span>
 <span id="L424"><span class="lineNum">     424</span>                 :             : </span>
 <span id="L425"><span class="lineNum">     425</span>                 :             :             // Ignore all other events</span>
 <span id="L426"><span class="lineNum">     426</span>                 :             :         default:</span>
@@ -492,8 +492,8 @@
 <span id="L428"><span class="lineNum">     428</span>                 :             :         }</span>
 <span id="L429"><span class="lineNum">     429</span>                 :             :         break;</span>
 <span id="L430"><span class="lineNum">     430</span>                 :             : </span>
-<span id="L431"><span class="lineNum">     431</span>                 :<span class="tlaGNC">          86 :     case eSTATE_NOTIFY_PENDING:</span></span>
-<span id="L432"><span class="lineNum">     432</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 86 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          86 :         switch ( event )</span></span>
+<span id="L431"><span class="lineNum">     431</span>                 :<span class="tlaGNC">          89 :     case eSTATE_NOTIFY_PENDING:</span></span>
+<span id="L432"><span class="lineNum">     432</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 89 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          89 :         switch ( event )</span></span>
 <span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 4 was not taken"> - </span>]
 <span id="L433"><span class="lineNum">     433</span>                 :             :         {</span>
 <span id="L434"><span class="lineNum">     434</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         case eATTACH:</span></span>
@@ -506,10 +506,10 @@
 <span id="L441"><span class="lineNum">     441</span>                 :<span class="tlaUNC">           0 :             observer.setState_( eSTATE_UNSUBSCRIBED );</span></span>
 <span id="L442"><span class="lineNum">     442</span>                 :<span class="tlaUNC">           0 :             break;</span></span>
 <span id="L443"><span class="lineNum">     443</span>                 :             : </span>
-<span id="L444"><span class="lineNum">     444</span>                 :<span class="tlaGNC tlaBgGNC">          86 :         case eNOTIFYING:</span></span>
-<span id="L445"><span class="lineNum">     445</span>                 :<span class="tlaGNC">          86 :             observer.setSequenceNumber_( m_seqNum );</span></span>
-<span id="L446"><span class="lineNum">     446</span>                 :<span class="tlaGNC">          86 :             observer.setState_( eSTATE_NOTIFY_NOTIFYING );</span></span>
-<span id="L447"><span class="lineNum">     447</span>                 :<span class="tlaGNC">          86 :             break;</span></span>
+<span id="L444"><span class="lineNum">     444</span>                 :<span class="tlaGNC tlaBgGNC">          89 :         case eNOTIFYING:</span></span>
+<span id="L445"><span class="lineNum">     445</span>                 :<span class="tlaGNC">          89 :             observer.setSequenceNumber_( m_seqNum );</span></span>
+<span id="L446"><span class="lineNum">     446</span>                 :<span class="tlaGNC">          89 :             observer.setState_( eSTATE_NOTIFY_NOTIFYING );</span></span>
+<span id="L447"><span class="lineNum">     447</span>                 :<span class="tlaGNC">          89 :             break;</span></span>
 <span id="L448"><span class="lineNum">     448</span>                 :             : </span>
 <span id="L449"><span class="lineNum">     449</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         case eDATA_CHANGED:</span></span>
 <span id="L450"><span class="lineNum">     450</span>                 :<span class="tlaUNC">           0 :             Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,</span></span>
@@ -522,26 +522,26 @@
 <span id="L457"><span class="lineNum">     457</span>                 :             :         }</span>
 <span id="L458"><span class="lineNum">     458</span>                 :             :         break;</span>
 <span id="L459"><span class="lineNum">     459</span>                 :             : </span>
-<span id="L460"><span class="lineNum">     460</span>                 :<span class="tlaGNC tlaBgGNC">         169 :     case eSTATE_NOTIFY_NOTIFYING:</span></span>
-<span id="L461"><span class="lineNum">     461</span>   [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 81 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 74 times"> + </span>]:<span class="tlaGNC">         169 :         switch ( event )</span></span>
+<span id="L460"><span class="lineNum">     460</span>                 :<span class="tlaGNC tlaBgGNC">         174 :     case eSTATE_NOTIFY_NOTIFYING:</span></span>
+<span id="L461"><span class="lineNum">     461</span>   [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 84 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 76 times"> + </span>]:<span class="tlaGNC">         174 :         switch ( event )</span></span>
 <span id="L462"><span class="lineNum">     462</span>                 :             :         {</span>
 <span id="L463"><span class="lineNum">     463</span>                 :<span class="tlaGNC">          14 :         case eDETACH:</span></span>
 <span id="L464"><span class="lineNum">     464</span>                 :<span class="tlaGNC">          14 :             observer.setState_( eSTATE_NOTIFY_PENDING_DETACH );</span></span>
 <span id="L465"><span class="lineNum">     465</span>                 :<span class="tlaGNC">          14 :             break;</span></span>
 <span id="L466"><span class="lineNum">     466</span>                 :             : </span>
-<span id="L467"><span class="lineNum">     467</span>                 :<span class="tlaGNC">          81 :         case eNOTIFY_COMPLETE:</span></span>
+<span id="L467"><span class="lineNum">     467</span>                 :<span class="tlaGNC">          84 :         case eNOTIFY_COMPLETE:</span></span>
 <span id="L468"><span class="lineNum">     468</span>                 :             :             // Re-subscribing to an observer instance can only be down with the </span>
 <span id="L469"><span class="lineNum">     469</span>                 :             :             // 'original' model point, i.e. 're-homing' an observer inside the</span>
 <span id="L470"><span class="lineNum">     470</span>                 :             :             // callback is NOT ALLOWED</span>
-<span id="L471"><span class="lineNum">     471</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 80 times"> + </span>]:<span class="tlaGNC">          81 :             if ( observer.getModelPoint_() != this )</span></span>
+<span id="L471"><span class="lineNum">     471</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 83 times"> + </span>]:<span class="tlaGNC">          84 :             if ( observer.getModelPoint_() != this )</span></span>
 <span id="L472"><span class="lineNum">     472</span>                 :             :             {</span>
 <span id="L473"><span class="lineNum">     473</span>                 :<span class="tlaGNC">           1 :                 Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,</span></span>
 <span id="L474"><span class="lineNum">     474</span>                 :             :                                                &quot;MPSubscriptionEvent: Subscriber re-subscribed to a DIFFERENT model point during its change-notification callback!&quot; );</span>
 <span id="L475"><span class="lineNum">     475</span>                 :<span class="tlaGNC">           1 :                 break;</span></span>
 <span id="L476"><span class="lineNum">     476</span>                 :             :             }</span>
 <span id="L477"><span class="lineNum">     477</span>                 :             : </span>
-<span id="L478"><span class="lineNum">     478</span>                 :<span class="tlaGNC">          80 :             transitionToSubscribed( observer );</span></span>
-<span id="L479"><span class="lineNum">     479</span>                 :<span class="tlaGNC">          80 :             break;</span></span>
+<span id="L478"><span class="lineNum">     478</span>                 :<span class="tlaGNC">          83 :             transitionToSubscribed( observer );</span></span>
+<span id="L479"><span class="lineNum">     479</span>                 :<span class="tlaGNC">          83 :             break;</span></span>
 <span id="L480"><span class="lineNum">     480</span>                 :             : </span>
 <span id="L481"><span class="lineNum">     481</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         case eDATA_CHANGED:</span></span>
 <span id="L482"><span class="lineNum">     482</span>                 :<span class="tlaUNC">           0 :             Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,</span></span>
@@ -576,16 +576,16 @@
 <span id="L511"><span class="lineNum">     511</span>                 :             :         }</span>
 <span id="L512"><span class="lineNum">     512</span>                 :             :         break;</span>
 <span id="L513"><span class="lineNum">     513</span>                 :             :     }</span>
-<span id="L514"><span class="lineNum">     514</span>                 :<span class="tlaGNC tlaBgGNC">         415 : }</span></span>
+<span id="L514"><span class="lineNum">     514</span>                 :<span class="tlaGNC tlaBgGNC">         426 : }</span></span>
 <span id="L515"><span class="lineNum">     515</span>                 :             : </span>
-<span id="L516"><span class="lineNum">     516</span>                 :<span class="tlaGNC">         122 : void ModelPointBase::transitionToSubscribed( IObserver&amp; observer ) noexcept</span></span>
+<span id="L516"><span class="lineNum">     516</span>                 :<span class="tlaGNC">         125 : void ModelPointBase::transitionToSubscribed( IObserver&amp; observer ) noexcept</span></span>
 <span id="L517"><span class="lineNum">     517</span>                 :             : {</span>
 <span id="L518"><span class="lineNum">     518</span>                 :             :     // Ensure that I am not already in the Model Point's list of subscribers (this can happen if subscribing when I am already subscribed)</span>
 <span id="L519"><span class="lineNum">     519</span>                 :             :     m_subscribers.remove( observer );</span>
 <span id="L520"><span class="lineNum">     520</span>                 :             : </span>
-<span id="L521"><span class="lineNum">     521</span>         [<span class="tlaGBC" title="Branch 0 was taken 95 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 27 times"> + </span>]:<span class="tlaGNC">         122 :     if ( m_seqNum == observer.getSequenceNumber_() )</span></span>
+<span id="L521"><span class="lineNum">     521</span>         [<span class="tlaGBC" title="Branch 0 was taken 98 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 27 times"> + </span>]:<span class="tlaGNC">         125 :     if ( m_seqNum == observer.getSequenceNumber_() )</span></span>
 <span id="L522"><span class="lineNum">     522</span>                 :             :     {</span>
-<span id="L523"><span class="lineNum">     523</span>                 :<span class="tlaGNC">          95 :         observer.setState_( eSTATE_IDLE );</span></span>
+<span id="L523"><span class="lineNum">     523</span>                 :<span class="tlaGNC">          98 :         observer.setState_( eSTATE_IDLE );</span></span>
 <span id="L524"><span class="lineNum">     524</span>                 :             :         m_subscribers.put( observer );</span>
 <span id="L525"><span class="lineNum">     525</span>                 :             :     }</span>
 <span id="L526"><span class="lineNum">     526</span>                 :             :     else</span>
@@ -594,36 +594,36 @@
 <span id="L529"><span class="lineNum">     529</span>                 :             :     }</span>
 <span id="L530"><span class="lineNum">     530</span>                 :             : }</span>
 <span id="L531"><span class="lineNum">     531</span>                 :             : </span>
-<span id="L532"><span class="lineNum">     532</span>                 :<span class="tlaGNC">          86 : void ModelPointBase::transitionToNotifyPending( IObserver&amp; observer ) noexcept</span></span>
+<span id="L532"><span class="lineNum">     532</span>                 :<span class="tlaGNC">          89 : void ModelPointBase::transitionToNotifyPending( IObserver&amp; observer ) noexcept</span></span>
 <span id="L533"><span class="lineNum">     533</span>                 :             : {</span>
-<span id="L534"><span class="lineNum">     534</span>                 :<span class="tlaGNC">          86 :     observer.getIChangeNotification_()-&gt;addPendingChangingNotification( observer );</span></span>
-<span id="L535"><span class="lineNum">     535</span>                 :<span class="tlaGNC">          86 :     observer.setState_( eSTATE_NOTIFY_PENDING );</span></span>
-<span id="L536"><span class="lineNum">     536</span>                 :<span class="tlaGNC">          86 : }</span></span>
+<span id="L534"><span class="lineNum">     534</span>                 :<span class="tlaGNC">          89 :     observer.getIChangeNotification_()-&gt;addPendingChangingNotification( observer );</span></span>
+<span id="L535"><span class="lineNum">     535</span>                 :<span class="tlaGNC">          89 :     observer.setState_( eSTATE_NOTIFY_PENDING );</span></span>
+<span id="L536"><span class="lineNum">     536</span>                 :<span class="tlaGNC">          89 : }</span></span>
 <span id="L537"><span class="lineNum">     537</span>                 :             : </span>
 <span id="L538"><span class="lineNum">     538</span>                 :             : </span>
 <span id="L539"><span class="lineNum">     539</span>                 :             : /////////////////</span>
-<span id="L540"><span class="lineNum">     540</span>                 :<span class="tlaGNC">         616 : bool ModelPointBase::testAndUpdateLock( LockRequest_T lockRequest ) noexcept</span></span>
+<span id="L540"><span class="lineNum">     540</span>                 :<span class="tlaGNC">         639 : bool ModelPointBase::testAndUpdateLock( LockRequest_T lockRequest ) noexcept</span></span>
 <span id="L541"><span class="lineNum">     541</span>                 :             : {</span>
 <span id="L542"><span class="lineNum">     542</span>                 :             :     bool result = false;</span>
-<span id="L543"><span class="lineNum">     543</span>         [<span class="tlaGBC" title="Branch 0 was taken 45 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 571 times"> + </span>]:<span class="tlaGNC">         616 :     if ( lockRequest == LockRequest_T::eUNLOCK )</span></span>
+<span id="L543"><span class="lineNum">     543</span>         [<span class="tlaGBC" title="Branch 0 was taken 45 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 594 times"> + </span>]:<span class="tlaGNC">         639 :     if ( lockRequest == LockRequest_T::eUNLOCK )</span></span>
 <span id="L544"><span class="lineNum">     544</span>                 :             :     {</span>
 <span id="L545"><span class="lineNum">     545</span>                 :<span class="tlaGNC">          45 :         m_locked = false;</span></span>
 <span id="L546"><span class="lineNum">     546</span>                 :             :         result   = true;</span>
 <span id="L547"><span class="lineNum">     547</span>                 :             :     }</span>
-<span id="L548"><span class="lineNum">     548</span>         [<span class="tlaGBC" title="Branch 0 was taken 16 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 555 times"> + </span>]:<span class="tlaGNC">         571 :     else if ( lockRequest == LockRequest_T::eLOCK )</span></span>
+<span id="L548"><span class="lineNum">     548</span>         [<span class="tlaGBC" title="Branch 0 was taken 16 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 578 times"> + </span>]:<span class="tlaGNC">         594 :     else if ( lockRequest == LockRequest_T::eLOCK )</span></span>
 <span id="L549"><span class="lineNum">     549</span>                 :             :     {</span>
 <span id="L550"><span class="lineNum">     550</span>                 :<span class="tlaGNC">          16 :         m_locked = true;</span></span>
 <span id="L551"><span class="lineNum">     551</span>                 :             :         result   = true;</span>
 <span id="L552"><span class="lineNum">     552</span>                 :             :     }</span>
 <span id="L553"><span class="lineNum">     553</span>                 :             :     else</span>
 <span id="L554"><span class="lineNum">     554</span>                 :             :     {</span>
-<span id="L555"><span class="lineNum">     555</span>         [<span class="tlaGBC" title="Branch 0 was taken 546 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 9 times"> + </span>]:<span class="tlaGNC">         555 :         if ( m_locked == false )</span></span>
+<span id="L555"><span class="lineNum">     555</span>         [<span class="tlaGBC" title="Branch 0 was taken 569 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 9 times"> + </span>]:<span class="tlaGNC">         578 :         if ( m_locked == false )</span></span>
 <span id="L556"><span class="lineNum">     556</span>                 :             :         {</span>
 <span id="L557"><span class="lineNum">     557</span>                 :             :             result = true;</span>
 <span id="L558"><span class="lineNum">     558</span>                 :             :         }</span>
 <span id="L559"><span class="lineNum">     559</span>                 :             :     }</span>
 <span id="L560"><span class="lineNum">     560</span>                 :             : </span>
-<span id="L561"><span class="lineNum">     561</span>                 :<span class="tlaGNC">         616 :     return result;</span></span>
+<span id="L561"><span class="lineNum">     561</span>                 :<span class="tlaGNC">         639 :     return result;</span></span>
 <span id="L562"><span class="lineNum">     562</span>                 :             : }</span>
 <span id="L563"><span class="lineNum">     563</span>                 :             : </span>
 <span id="L564"><span class="lineNum">     564</span>                 :             : /////////////////</span>

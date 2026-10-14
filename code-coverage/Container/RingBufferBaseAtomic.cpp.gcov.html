@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-13 20:52:42</td>
+            <td class="headerValue">2026-10-14 21:32:52</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -85,7 +85,7 @@
 <span id="L23"><span class="lineNum">      23</span>                 :             : {</span>
 <span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          53 : }</span></span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : </span>
-<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">         141 : bool RingBufferBaseAtomic::remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept</span></span>
+<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">         151 : bool RingBufferBaseAtomic::remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : {</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :     KIT_SYSTEM_ASSERT( elemPtr != nullptr );</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     KIT_SYSTEM_ASSERT( elemSize &gt; 0 );</span>
@@ -96,21 +96,21 @@
 <span id="L34"><span class="lineNum">      34</span>                 :             :     const unsigned writeIdx = m_writeIdx.load( std::memory_order_acquire );</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : </span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     // Trap - the Ring buffer is empty</span>
-<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 112 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 29 times"> + </span>]:<span class="tlaGNC">         141 :     if ( readIdx == writeIdx )</span></span>
+<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 121 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 30 times"> + </span>]:<span class="tlaGNC">         151 :     if ( readIdx == writeIdx )</span></span>
 <span id="L38"><span class="lineNum">      38</span>                 :             :     {</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :         return false;</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :     }</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : </span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     // Copy the element data from the ring buffer to the provided pointer</span>
-<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         112 :     uint8_t* srcPtr = static_cast&lt;uint8_t*&gt;( const_cast&lt;void*&gt;( srcRingBufMemory ) ) + ( readIdx * elemSize );</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :<span class="tlaGNC">         121 :     uint8_t* srcPtr = static_cast&lt;uint8_t*&gt;( const_cast&lt;void*&gt;( srcRingBufMemory ) ) + ( readIdx * elemSize );</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     memcpy( elemPtr, srcPtr, elemSize );</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : </span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     // Update the read index</span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">         112 :     m_readIdx.store( ( readIdx + 1 ) % m_elements, std::memory_order_release );</span></span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         112 :     return true;</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">         121 :     m_readIdx.store( ( readIdx + 1 ) % m_elements, std::memory_order_release );</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">         121 :     return true;</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             : }</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">         170 : bool RingBufferBaseAtomic::add( const void* elemPtr, size_t elemSize, void* dstRingBufMemory ) noexcept</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">         180 : bool RingBufferBaseAtomic::add( const void* elemPtr, size_t elemSize, void* dstRingBufMemory ) noexcept</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             : {</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :     KIT_SYSTEM_ASSERT( elemPtr != nullptr );</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     KIT_SYSTEM_ASSERT( elemSize &gt; 0 );</span>
@@ -121,18 +121,18 @@
 <span id="L59"><span class="lineNum">      59</span>                 :             :     const unsigned writeIdx = m_writeIdx.load( std::memory_order_relaxed );</span>
 <span id="L60"><span class="lineNum">      60</span>                 :             : </span>
 <span id="L61"><span class="lineNum">      61</span>                 :             :     // Trap - the Ring buffer is full</span>
-<span id="L62"><span class="lineNum">      62</span>         [<span class="tlaGBC" title="Branch 0 was taken 156 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14 times"> + </span>]:<span class="tlaGNC">         170 :     if ( ( writeIdx + 1 ) % m_elements == readIdx )</span></span>
+<span id="L62"><span class="lineNum">      62</span>         [<span class="tlaGBC" title="Branch 0 was taken 166 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14 times"> + </span>]:<span class="tlaGNC">         180 :     if ( ( writeIdx + 1 ) % m_elements == readIdx )</span></span>
 <span id="L63"><span class="lineNum">      63</span>                 :             :     {</span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :         return false;</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :     }</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : </span>
 <span id="L67"><span class="lineNum">      67</span>                 :             :     // Copy the element data to the provided pointer to the ring buffer</span>
-<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">         156 :     uint8_t* dstPtr = static_cast&lt;uint8_t*&gt;( dstRingBufMemory ) + ( writeIdx * elemSize );</span></span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">         166 :     uint8_t* dstPtr = static_cast&lt;uint8_t*&gt;( dstRingBufMemory ) + ( writeIdx * elemSize );</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     memcpy( dstPtr, elemPtr, elemSize );</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : </span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     // Update the write index</span>
-<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">         156 :     m_writeIdx.store( ( writeIdx + 1 ) % m_elements, std::memory_order_release );</span></span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         156 :     return true;</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">         166 :     m_writeIdx.store( ( writeIdx + 1 ) % m_elements, std::memory_order_release );</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         166 :     return true;</span></span>
 <span id="L74"><span class="lineNum">      74</span>                 :             : }</span>
 <span id="L75"><span class="lineNum">      75</span>                 :             : </span>
 <span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">         122 : bool RingBufferBaseAtomic::peekHead( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept</span></span>
