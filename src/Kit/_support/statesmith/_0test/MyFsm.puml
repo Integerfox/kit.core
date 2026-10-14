@@ -110,5 +110,9 @@ RenderConfig.Cpp.ClassCode = """
 [SmRunnerSettings]
 outputCodeGenTimestamp = true
 
+# Required by genfsm2: the isIn<state>() methods for composite states need getParentId()
+[SmRunnerSettings.algoBalanced1]
+outputGetParentIdFunction = true
+
 '/
 @enduml
