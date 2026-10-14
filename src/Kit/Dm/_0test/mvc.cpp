@@ -78,10 +78,12 @@ TEST_CASE( "mvc" )
     writer_cherry1.open();
     writer_plum1.open();
 
-    // Wait for everything to finish
+    // Wait for everything to finish.  NOTE: timedWait() is used so that a
+    // missed signal fails the test instead of hanging the CI job forever
     for ( int i = 0; i < NUM_INSTANCES; i++ )
     {
-        Kit::System::Thread::wait();
+        CAPTURE( i );
+        REQUIRE( Kit::System::Thread::timedWait( 20000 ) );
     }
 
     REQUIRE( viewer_apple1.m_lastValue == VIEWER_APPLE1_END_VALUE );
