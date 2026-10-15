@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-14 23:06:31</td>
+            <td class="headerValue">2026-10-15 15:39:15</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -102,7 +102,7 @@
 <span id="L40"><span class="lineNum">      40</span>                 :             : {</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             : public:</span>
 <span id="L42"><span class="lineNum">      42</span>                 :             :     /// Return codes for flash operations</span>
-<span id="L43"><span class="lineNum">      43</span>                 :             :     enum Result_T</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :     enum class Result_T : uint8_t</span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     {</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :         SUCCESS = 0,    //!&lt; Operation completed successfully</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :         ERR_RANGE,      //!&lt; Operation failed due to out-of-range access, e.g. address + numBytes &gt; getTotalSize()</span>

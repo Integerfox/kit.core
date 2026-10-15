@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 415-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 418-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -47,6 +47,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -118,6 +119,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adf9f13dde3d0ecf9f7daa75c51fda8f5 inherit pub_methods_class_kit_1_1_driver_1_1_i_stop" id="r_adf9f13dde3d0ecf9f7daa75c51fda8f5"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_driver_1_1_i_stop.html#adf9f13dde3d0ecf9f7daa75c51fda8f5">~IStop</a> () noexcept=default</td></tr>
 <tr class="memdesc:adf9f13dde3d0ecf9f7daa75c51fda8f5 inherit pub_methods_class_kit_1_1_driver_1_1_i_stop"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual destructor.  <br /></td></tr>
 <tr class="separator:adf9f13dde3d0ecf9f7daa75c51fda8f5 inherit pub_methods_class_kit_1_1_driver_1_1_i_stop"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-types" name="pro-types"></a>
+Protected Types</h2></td></tr>
+<tr class="memitem:afce3609be8df8c83c5de4ab10f805e78" id="r_afce3609be8df8c83c5de4ab10f805e78"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afce3609be8df8c83c5de4ab10f805e78">FlashResult_T</a> = <a class="el" href="class_kit_1_1_driver_1_1_flash_1_1_i_api.html#a6894f06e92d70c5f9090122f3de8f805">Kit::Driver::Flash::IApi::Result_T</a></td></tr>
+<tr class="memdesc:afce3609be8df8c83c5de4ab10f805e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shorthand for the <a class="el" href="namespace_kit_1_1_driver_1_1_n_v_1_1_flash.html" title="The Flash namespace provides a concrete implementation of the NV::IApi interface backed by SPI NOR fl...">Flash</a> driver's result type.  <br /></td></tr>
+<tr class="separator:afce3609be8df8c83c5de4ab10f805e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -198,7 +205,34 @@ class Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</div><p>This class 
 <p>An in-memory page map provides O(1) lookup from logical page index to physical flash address. On startup, the page map is rebuilt by scanning all <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> Records in the flash region.</p>
 <p>Sector reclamation uses a two-phase approach: first scan for already-erased slots, and only erase a sector when no erased slots remain and the sector contains no VALID records. To guarantee that reclamation can never deadlock (a state where every sector holds a VALID record and none can be erased), the flash region MUST be over-provisioned such that the number of physical sectors is at least the number of logical pages (numLogicalPages &lt;= numSectors). <a class="el" href="#ae61f498f7cf58b428c3d15051078c170" title="This method is used to start/initialize the driver at run time.">start()</a> enforces this invariant and fails for any configuration that violates it.</p>
 <p>Template parameter MAX_LOGICAL_PAGES defines the maximum number of logical pages supported (determines size of the in-memory page map array). </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="afce3609be8df8c83c5de4ab10f805e78" name="afce3609be8df8c83c5de4ab10f805e78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afce3609be8df8c83c5de4ab10f805e78">&#9670;&#160;</a></span>FlashResult_T</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;size_t MAX_LOGICAL_PAGES&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html">Kit::Driver::NV::Flash::Api</a>&lt; MAX_LOGICAL_PAGES &gt;::FlashResult_T = <a class="el" href="class_kit_1_1_driver_1_1_flash_1_1_i_api.html#a6894f06e92d70c5f9090122f3de8f805">Kit::Driver::Flash::IApi::Result_T</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Shorthand for the <a class="el" href="namespace_kit_1_1_driver_1_1_n_v_1_1_flash.html" title="The Flash namespace provides a concrete implementation of the NV::IApi interface backed by SPI NOR fl...">Flash</a> driver's result type. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0606853d022f13740d67fb77b4e75671" name="a0606853d022f13740d67fb77b4e75671"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0606853d022f13740d67fb77b4e75671">&#9670;&#160;</a></span>Api()</h2>
 
@@ -1161,7 +1195,7 @@ template&lt;size_t MAX_LOGICAL_PAGES&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Oct 14 2026 22:59:46 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Thu Oct 15 2026 15:31:19 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

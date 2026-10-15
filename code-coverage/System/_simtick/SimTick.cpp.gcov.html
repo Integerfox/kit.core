@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-14 23:06:31</td>
+            <td class="headerValue">2026-10-15 15:39:15</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">70.4&nbsp;%</td>
@@ -380,34 +380,34 @@
 <span id="L318"><span class="lineNum">     318</span>                 :             : </span>
 <span id="L319"><span class="lineNum">     319</span>                 :             : </span>
 <span id="L320"><span class="lineNum">     320</span>                 :             : ///////////////////////////////////////////////////////////////</span>
-<span id="L321"><span class="lineNum">     321</span>                 :<span class="tlaGNC">       14464 : uint32_t ElapsedTime::milliseconds() noexcept</span></span>
+<span id="L321"><span class="lineNum">     321</span>                 :<span class="tlaGNC">       14458 : uint32_t ElapsedTime::milliseconds() noexcept</span></span>
 <span id="L322"><span class="lineNum">     322</span>                 :             : {</span>
-<span id="L323"><span class="lineNum">     323</span>                 :<span class="tlaGNC">       14464 :     return static_cast&lt;uint32_t&gt;( millisecondsEx() );</span></span>
+<span id="L323"><span class="lineNum">     323</span>                 :<span class="tlaGNC">       14458 :     return static_cast&lt;uint32_t&gt;( millisecondsEx() );</span></span>
 <span id="L324"><span class="lineNum">     324</span>                 :             : }</span>
 <span id="L325"><span class="lineNum">     325</span>                 :             : </span>
-<span id="L326"><span class="lineNum">     326</span>                 :<span class="tlaGNC">       16442 : uint64_t ElapsedTime::millisecondsEx() noexcept</span></span>
+<span id="L326"><span class="lineNum">     326</span>                 :<span class="tlaGNC">       16436 : uint64_t ElapsedTime::millisecondsEx() noexcept</span></span>
 <span id="L327"><span class="lineNum">     327</span>                 :             : {</span>
 <span id="L328"><span class="lineNum">     328</span>                 :             :     // If I have not yet created the TLS key/index --&gt;then NO threads are using simulated time</span>
-<span id="L329"><span class="lineNum">     329</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 16442 times"> + </span>]:<span class="tlaGNC">       16442 :     if ( simTlsPtr_ == nullptr )</span></span>
+<span id="L329"><span class="lineNum">     329</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 16436 times"> + </span>]:<span class="tlaGNC">       16436 :     if ( simTlsPtr_ == nullptr )</span></span>
 <span id="L330"><span class="lineNum">     330</span>                 :             :     {</span>
 <span id="L331"><span class="lineNum">     331</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         return ElapsedTime::millisecondsInRealTimeEx();;</span></span>
 <span id="L332"><span class="lineNum">     332</span>                 :             :     }</span>
 <span id="L333"><span class="lineNum">     333</span>                 :             : </span>
 <span id="L334"><span class="lineNum">     334</span>                 :             :     // Get my thread's SimInfo</span>
-<span id="L335"><span class="lineNum">     335</span>                 :<span class="tlaGNC tlaBgGNC">       16442 :     auto* simInfoPtr = static_cast&lt;SimTick*&gt;( simTlsPtr_-&gt;get() );</span></span>
+<span id="L335"><span class="lineNum">     335</span>                 :<span class="tlaGNC tlaBgGNC">       16436 :     auto* simInfoPtr = static_cast&lt;SimTick*&gt;( simTlsPtr_-&gt;get() );</span></span>
 <span id="L336"><span class="lineNum">     336</span>                 :             : </span>
 <span id="L337"><span class="lineNum">     337</span>                 :             :     // ALWAYS use the 'real' elapsed time when I am a non-simulated-tick thread</span>
-<span id="L338"><span class="lineNum">     338</span>         [<span class="tlaGBC" title="Branch 0 was taken 92 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 16350 times"> + </span>]:<span class="tlaGNC">       16442 :     if ( !simInfoPtr )</span></span>
+<span id="L338"><span class="lineNum">     338</span>         [<span class="tlaGBC" title="Branch 0 was taken 92 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 16344 times"> + </span>]:<span class="tlaGNC">       16436 :     if ( !simInfoPtr )</span></span>
 <span id="L339"><span class="lineNum">     339</span>                 :             :     {</span>
 <span id="L340"><span class="lineNum">     340</span>                 :<span class="tlaGNC">          92 :         return ElapsedTime::millisecondsInRealTimeEx();</span></span>
 <span id="L341"><span class="lineNum">     341</span>                 :             :     }</span>
 <span id="L342"><span class="lineNum">     342</span>                 :             : </span>
 <span id="L343"><span class="lineNum">     343</span>                 :             : </span>
 <span id="L344"><span class="lineNum">     344</span>                 :             :     // Thread is using simulated time --&gt;return the simulate time</span>
-<span id="L345"><span class="lineNum">     345</span>                 :<span class="tlaGNC">       16350 :     myLock_.lock();</span></span>
-<span id="L346"><span class="lineNum">     346</span>                 :<span class="tlaGNC">       16350 :     uint64_t msec = milliseconds_;</span></span>
-<span id="L347"><span class="lineNum">     347</span>                 :<span class="tlaGNC">       16350 :     myLock_.unlock();</span></span>
-<span id="L348"><span class="lineNum">     348</span>                 :<span class="tlaGNC">       16350 :     return msec;</span></span>
+<span id="L345"><span class="lineNum">     345</span>                 :<span class="tlaGNC">       16344 :     myLock_.lock();</span></span>
+<span id="L346"><span class="lineNum">     346</span>                 :<span class="tlaGNC">       16344 :     uint64_t msec = milliseconds_;</span></span>
+<span id="L347"><span class="lineNum">     347</span>                 :<span class="tlaGNC">       16344 :     myLock_.unlock();</span></span>
+<span id="L348"><span class="lineNum">     348</span>                 :<span class="tlaGNC">       16344 :     return msec;</span></span>
 <span id="L349"><span class="lineNum">     349</span>                 :             : }</span>
 <span id="L350"><span class="lineNum">     350</span>                 :             : </span>
 <span id="L351"><span class="lineNum">     351</span>                 :             : </span>
