@@ -132,14 +132,24 @@ public:
             return Result_T::ERR_FAILED;
         }
 
-        if ( sectorAddress + ( numberOfSectors * SECTOR_SIZE ) > TOTAL_SIZE )
+        if ( numberOfSectors == 0 )
+        {
+            return Result_T::ERR_FAILED;
+        }
+
+        if ( sectorAddress % SECTOR_SIZE != 0 )
+        {
+            return Result_T::ERR_ALIGNMENT;
+        }
+
+        // Expressed as a division so that the sector run cannot overflow size_t
+        if ( sectorAddress >= TOTAL_SIZE ||
+             ( TOTAL_SIZE - sectorAddress ) / SECTOR_SIZE < numberOfSectors )
         {
             return Result_T::ERR_RANGE;
         }
 
-        // Align to sector boundary
-        size_t aligned = sectorAddress - ( sectorAddress % SECTOR_SIZE );
-        memset( m_flash + aligned, 0xFF, numberOfSectors * SECTOR_SIZE );
+        memset( m_flash + sectorAddress, 0xFF, numberOfSectors * SECTOR_SIZE );
         m_eraseCount++;
         return Result_T::SUCCESS;
     }

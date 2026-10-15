@@ -40,7 +40,7 @@ class IApi : public virtual IStart,
 {
 public:
     /// Return codes for flash operations
-    enum class Result_T
+    enum class Result_T : uint8_t
     {
         SUCCESS = 0,    //!< Operation completed successfully
         ERR_RANGE,      //!< Operation failed due to out-of-range access, e.g. address + numBytes > getTotalSize()

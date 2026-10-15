@@ -217,6 +217,41 @@ bool runtests( IApi& flash )
         KIT_SYSTEM_TRACE_MSG( SECT_, "  SKIP: device has fewer than 5 sectors" );
     }
 
+    // --- Test 6: Parameter validation (non-destructive) ---
+    KIT_SYSTEM_TRACE_MSG( SECT_, "--- Test 6: Parameter validation ---" );
+    {
+        uint8_t scratch[4] = { 0, 0, 0, 0 };
+
+        // Snapshot sector 0 so that the rejected writes below can be shown to
+        // have left the device untouched
+        static uint8_t snapshot[sizeof( readBuf )];
+        check( flash.read( 0, snapshot, readChunk ) == IApi::Result_T::SUCCESS, "snapshot of sector 0 succeeds" );
+
+        // Out-of-range accesses
+        check( flash.read( totalSize, readBuf, 1 ) == IApi::Result_T::ERR_RANGE, "read() past end of device returns ERR_RANGE" );
+        check( flash.read( totalSize - 1, readBuf, 2 ) == IApi::Result_T::ERR_RANGE, "read() straddling end of device returns ERR_RANGE" );
+        check( flash.write( totalSize, scratch, 1 ) == IApi::Result_T::ERR_RANGE, "write() past end of device returns ERR_RANGE" );
+        check( flash.write( totalSize - 1, scratch, 2 ) == IApi::Result_T::ERR_RANGE, "write() straddling end of device returns ERR_RANGE" );
+
+        // Bad arguments
+        check( flash.read( 0, nullptr, 1 ) == IApi::Result_T::ERR_FAILED, "read() with a null buffer returns ERR_FAILED" );
+        check( flash.read( 0, readBuf, 0 ) == IApi::Result_T::ERR_FAILED, "read() of zero bytes returns ERR_FAILED" );
+        check( flash.write( 0, nullptr, 1 ) == IApi::Result_T::ERR_FAILED, "write() with a null buffer returns ERR_FAILED" );
+        check( flash.write( 0, scratch, 0 ) == IApi::Result_T::ERR_FAILED, "write() of zero bytes returns ERR_FAILED" );
+
+        // eraseSector() argument validation.  These must be rejected before
+        // any erase is issued, otherwise the checks below would be destructive.
+        check( flash.eraseSector( 1, 1 ) == IApi::Result_T::ERR_ALIGNMENT, "eraseSector() with a misaligned address returns ERR_ALIGNMENT" );
+        check( flash.eraseSector( sectorSize - 1, 1 ) == IApi::Result_T::ERR_ALIGNMENT, "eraseSector() just below a sector boundary returns ERR_ALIGNMENT" );
+        check( flash.eraseSector( totalSize, 1 ) == IApi::Result_T::ERR_RANGE, "eraseSector() past end of device returns ERR_RANGE" );
+        check( flash.eraseSector( 0, numSectors + 1 ) == IApi::Result_T::ERR_RANGE, "eraseSector() of too many sectors returns ERR_RANGE" );
+        check( flash.eraseSector( 0, 0 ) == IApi::Result_T::ERR_FAILED, "eraseSector() of zero sectors returns ERR_FAILED" );
+
+        memset( readBuf, 0x00, readChunk );
+        check( flash.read( 0, readBuf, readChunk ) == IApi::Result_T::SUCCESS, "read sector 0 after rejected operations" );
+        check( memcmp( readBuf, snapshot, readChunk ) == 0, "sector 0 unchanged by rejected operations" );
+    }
+
     // Stop the driver
     flash.stop();
     

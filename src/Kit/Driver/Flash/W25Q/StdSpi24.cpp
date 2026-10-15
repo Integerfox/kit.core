@@ -190,9 +190,22 @@ StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
 StdSpi24::Result_T StdSpi24::eraseSector( size_t   sectorAddress,
                                           unsigned numberOfSectors ) noexcept
 {
-    if ( !m_started )
+    if ( !m_started || numberOfSectors == 0 )
     {
         return Result_T::ERR_FAILED;
+    }
+
+    const size_t sectorSize = m_deviceInfo.sectorSize;
+    if ( sectorAddress % sectorSize != 0 )
+    {
+        return Result_T::ERR_ALIGNMENT;
+    }
+
+    // Expressed as a division so that the sector run cannot overflow size_t
+    if ( sectorAddress >= m_deviceInfo.totalSize ||
+         ( m_deviceInfo.totalSize - sectorAddress ) / sectorSize < numberOfSectors )
+    {
+        return Result_T::ERR_RANGE;
     }
 
     // Erase the requested run of sectors one 4KB sector at a time
@@ -218,7 +231,7 @@ StdSpi24::Result_T StdSpi24::eraseSector( size_t   sectorAddress,
             return Result_T::ERR_FAILED;
         }
 
-        address += m_deviceInfo.sectorSize;
+        address += sectorSize;
     }
 
     return Result_T::SUCCESS;
