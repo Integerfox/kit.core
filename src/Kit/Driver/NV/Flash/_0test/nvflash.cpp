@@ -57,7 +57,7 @@ public:
     {
         if ( m_failOnOp > 0 && ++m_opCounter == m_failOnOp )
         {
-            return Flash::IApi::ERR_FAILED;
+            return Flash::IApi::Result_T::ERR_FAILED;
         }
         return Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::read( srcOffset, dstBuffer, numBytes );
     }
@@ -66,7 +66,7 @@ public:
     {
         if ( m_failOnOp > 0 && ++m_opCounter == m_failOnOp )
         {
-            return Flash::IApi::ERR_FAILED;
+            return Flash::IApi::Result_T::ERR_FAILED;
         }
         return Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::write( dstOffset, srcBuffer, numBytes );
     }
@@ -75,7 +75,7 @@ public:
     {
         if ( m_failOnOp > 0 && ++m_opCounter == m_failOnOp )
         {
-            return Flash::IApi::ERR_FAILED;
+            return Flash::IApi::Result_T::ERR_FAILED;
         }
         return Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::eraseSector( sectorAddress, numberOfSectors );
     }

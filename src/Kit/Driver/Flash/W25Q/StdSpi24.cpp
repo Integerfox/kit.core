@@ -93,19 +93,19 @@ StdSpi24::Result_T StdSpi24::read( size_t srcOffset,
 {
     if ( !m_started || dstBuffer == nullptr || numBytes == 0 )
     {
-        return ERR_FAILED;
+        return Result_T::ERR_FAILED;
     }
 
     if ( srcOffset + numBytes > m_deviceInfo.totalSize )
     {
-        return ERR_RANGE;
+        return Result_T::ERR_RANGE;
     }
 
     // The device ignores commands while a program/erase is in flight, and
     // write() deliberately returns before the final page program completes.
     if ( !waitUntilReady() )
     {
-        return ERR_FAILED;
+        return Result_T::ERR_FAILED;
     }
 
     m_cs.assertPin();
@@ -114,14 +114,14 @@ StdSpi24::Result_T StdSpi24::read( size_t srcOffset,
     if ( !sendCommandWithAddress( READ_DATA, srcOffset ) )
     {
         m_cs.deassertPin();
-        return ERR_FAILED;
+        return Result_T::ERR_FAILED;
     }
 
     // Read data
     bool result = m_spi.read( dstBuffer, numBytes );
 
     m_cs.deassertPin();
-    return result ? SUCCESS : ERR_FAILED;
+    return result ? Result_T::SUCCESS : Result_T::ERR_FAILED;
 }
 
 
@@ -132,12 +132,12 @@ StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
 {
     if ( !m_started || srcBuffer == nullptr || numBytes == 0 )
     {
-        return ERR_FAILED;
+        return Result_T::ERR_FAILED;
     }
 
     if ( dstOffset + numBytes > m_deviceInfo.totalSize )
     {
-        return ERR_RANGE;
+        return Result_T::ERR_RANGE;
     }
 
     const uint8_t* src       = static_cast<const uint8_t*>( srcBuffer );
@@ -157,7 +157,7 @@ StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
         // Enable write latch
         if ( !writeEnable() )
         {
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
         // Send PAGE_PROGRAM command
@@ -165,14 +165,14 @@ StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
         if ( !sendCommandWithAddress( PAGE_PROGRAM, address ) )
         {
             m_cs.deassertPin();
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
         // Write data for this page chunk
         if ( !m_spi.write( src, bytesThisPage ) )
         {
             m_cs.deassertPin();
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
         m_cs.deassertPin();
 
@@ -182,7 +182,7 @@ StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
         remaining -= bytesThisPage;
     }
 
-    return SUCCESS;
+    return Result_T::SUCCESS;
 }
 
 
@@ -190,9 +190,22 @@ StdSpi24::Result_T StdSpi24::write( size_t      dstOffset,
 StdSpi24::Result_T StdSpi24::eraseSector( size_t   sectorAddress,
                                           unsigned numberOfSectors ) noexcept
 {
-    if ( !m_started )
+    if ( !m_started || numberOfSectors == 0 )
     {
-        return ERR_FAILED;
+        return Result_T::ERR_FAILED;
+    }
+
+    const size_t sectorSize = m_deviceInfo.sectorSize;
+    if ( sectorAddress % sectorSize != 0 )
+    {
+        return Result_T::ERR_ALIGNMENT;
+    }
+
+    // Expressed as a division so that the sector run cannot overflow size_t
+    if ( sectorAddress >= m_deviceInfo.totalSize ||
+         ( m_deviceInfo.totalSize - sectorAddress ) / sectorSize < numberOfSectors )
+    {
+        return Result_T::ERR_RANGE;
     }
 
     // Erase the requested run of sectors one 4KB sector at a time
@@ -201,7 +214,7 @@ StdSpi24::Result_T StdSpi24::eraseSector( size_t   sectorAddress,
     {
         if ( !writeEnable() )
         {
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
         m_cs.assertPin();
@@ -215,13 +228,13 @@ StdSpi24::Result_T StdSpi24::eraseSector( size_t   sectorAddress,
 
         if ( !result )
         {
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
-        address += m_deviceInfo.sectorSize;
+        address += sectorSize;
     }
 
-    return SUCCESS;
+    return Result_T::SUCCESS;
 }
 
 
@@ -229,12 +242,12 @@ StdSpi24::Result_T StdSpi24::eraseChip() noexcept
 {
     if ( !m_started )
     {
-        return ERR_FAILED;
+        return Result_T::ERR_FAILED;
     }
 
     if ( !writeEnable() )
     {
-        return ERR_FAILED;
+        return Result_T::ERR_FAILED;
     }
 
     m_cs.assertPin();
@@ -248,7 +261,7 @@ StdSpi24::Result_T StdSpi24::eraseChip() noexcept
         result = waitUntilReady( CHIP_ERASE_TIMEOUT_MS );
     }
 
-    return result ? SUCCESS : ERR_FAILED;
+    return result ? Result_T::SUCCESS : Result_T::ERR_FAILED;
 }
 
 

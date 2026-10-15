@@ -74,22 +74,22 @@ public:
         if ( m_failNext )
         {
             m_failNext = false;
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
         if ( dstBuffer == nullptr || numBytes == 0 )
         {
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
         if ( srcOffset + numBytes > TOTAL_SIZE )
         {
-            return ERR_RANGE;
+            return Result_T::ERR_RANGE;
         }
 
         memcpy( dstBuffer, m_flash + srcOffset, numBytes );
         m_readCount++;
-        return SUCCESS;
+        return Result_T::SUCCESS;
     }
 
     Result_T write( size_t      dstOffset,
@@ -99,17 +99,17 @@ public:
         if ( m_failNext )
         {
             m_failNext = false;
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
         if ( srcBuffer == nullptr || numBytes == 0 )
         {
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
         if ( dstOffset + numBytes > TOTAL_SIZE )
         {
-            return ERR_RANGE;
+            return Result_T::ERR_RANGE;
         }
 
         // Simulate flash write semantics: can only clear bits (AND operation)
@@ -120,7 +120,7 @@ public:
         }
 
         m_writeCount++;
-        return SUCCESS;
+        return Result_T::SUCCESS;
     }
 
     Result_T eraseSector( size_t   sectorAddress,
@@ -129,19 +129,29 @@ public:
         if ( m_failNext )
         {
             m_failNext = false;
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
-        if ( sectorAddress + ( numberOfSectors * SECTOR_SIZE ) > TOTAL_SIZE )
+        if ( numberOfSectors == 0 )
         {
-            return ERR_RANGE;
+            return Result_T::ERR_FAILED;
         }
 
-        // Align to sector boundary
-        size_t aligned = sectorAddress - ( sectorAddress % SECTOR_SIZE );
-        memset( m_flash + aligned, 0xFF, numberOfSectors * SECTOR_SIZE );
+        if ( sectorAddress % SECTOR_SIZE != 0 )
+        {
+            return Result_T::ERR_ALIGNMENT;
+        }
+
+        // Expressed as a division so that the sector run cannot overflow size_t
+        if ( sectorAddress >= TOTAL_SIZE ||
+             ( TOTAL_SIZE - sectorAddress ) / SECTOR_SIZE < numberOfSectors )
+        {
+            return Result_T::ERR_RANGE;
+        }
+
+        memset( m_flash + sectorAddress, 0xFF, numberOfSectors * SECTOR_SIZE );
         m_eraseCount++;
-        return SUCCESS;
+        return Result_T::SUCCESS;
     }
 
     Result_T eraseChip() noexcept override
@@ -149,12 +159,12 @@ public:
         if ( m_failNext )
         {
             m_failNext = false;
-            return ERR_FAILED;
+            return Result_T::ERR_FAILED;
         }
 
         memset( m_flash, 0xFF, TOTAL_SIZE );
         m_eraseCount++;
-        return SUCCESS;
+        return Result_T::SUCCESS;
     }
 
     bool waitUntilReady( uint32_t timeoutMs = 1000 ) noexcept override
