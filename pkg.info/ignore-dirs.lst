@@ -1,0 +1,22 @@
+# Don't own the root src/ directory 
+src/
+!src/Kit
+!src/Kit/**
+
+# Ignore the final output directories from the builds.
+# ORDER is important - must be after the `src/Kit/**` entry.
+# NOTE: anchored under `_0build/` so that LHeader source dirs with the same
+#       names (e.g. src/Kit/Time/_posix) are NOT excluded.
+__pycache__/
+src/**/_0build/**/_win32/
+src/**/_0build/**/_win32/**
+src/**/_0build/**/_win64/
+src/**/_0build/**/_win64/**
+src/**/_0build/**/_posix/
+src/**/_0build/**/_posix/**
+src/**/_0build/**/_posix64/
+src/**/_0build/**/_posix64/**
+src/**/_0build/**/_stm32/
+src/**/_0build/**/_stm32/**
+src/**/_0build/**/_pico/
+src/**/_0build/**/_pico/**

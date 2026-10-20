@@ -107,23 +107,36 @@
     ]
   },
   "directories": {
-    "primary": null,
-    "adoptedExtras": null
+    "primary": [
+      "scripts",
+      "src"
+    ],
+    "adoptedExtras": [
+      "docs/manual",
+      "projects",
+      "top"
+    ]
   },
   "info": {
-    "pkgname": null,
-    "desc": null,
-    "owner": null,
-    "email": null,
-    "url": null,
+    "pkgname": "kit.core",
+    "desc": "A platform independent C++ Library middleware specifically designed for developing microcontroller applications",
+    "owner": "Integer Fox Organization",
+    "email": "john.t.taylor@gmail.com",
+    "url": "https://github.com/Integerfox",
     "repo": {
-      "name": null,
-      "type": null,
-      "origin": null
+      "name": "kit.core",
+      "type": "git",
+      "origin": "https://github.com/Integerfox/kit.core"
     }
   },
   "publish": {
-    "current": null,
+    "current": {
+      "comment": "Initial Outcast2 publish",
+      "version": "0.1.0",
+      "date": "Tue Oct 20 20:07:21 2026",
+      "timestamp": 1792526841,
+      "changes": null
+    },
     "history": []
   }
 }
