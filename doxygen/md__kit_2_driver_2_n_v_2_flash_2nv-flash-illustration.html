@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 418-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 422-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -45,7 +45,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md47"></a> </p>
-<h1><a class="anchor" id="autotoc_md51"></a>
+<h1><a class="anchor" id="autotoc_md48"></a>
 1. Terminology</h1>
 <p>Before presenting diagrams and scenarios, we want to establish clear, unambiguous terms that we propose to use consistently throughout the design and its documentation.</p>
 <table class="markdownTable">
@@ -58,7 +58,7 @@ $(function() {
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Flash Page</b>   </td><td class="markdownTableBodyNone">The largest flash "programming" size &ndash; the maximum number of bytes that can be written to the flash device in a single program (write) operation. For the W25Q series this is 256 bytes. Note: A Flash Page is a property of the flash hardware and is intentionally a separate concept from an NV Record &mdash; there is no requirement that they be the same size.   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md52"></a>
+<h2><a class="anchor" id="autotoc_md50"></a>
 Relationship Between Terms</h2>
 <div class="fragment"><div class="line">Flash Hardware Layer:</div>
 <div class="line">  Flash Sector (4KB)  = smallest erasable unit</div>
@@ -69,10 +69,10 @@ Relationship Between Terms</h2>
 <div class="line">                        This is the atomic unit of NV storage management.</div>
 </div><!-- fragment --><p>The KIT NV driver operates on NV Records. The underlying flash driver handles splitting writes that cross Flash Page boundaries internally. The NV driver does not need to be aware of the Flash Page size.</p>
 <hr  />
-<h1><a class="anchor" id="autotoc_md54"></a>
+<h1><a class="anchor" id="autotoc_md52"></a>
 2. NV Record Structure</h1>
 <p>Each NV Record stored in flash consists of a fixed-size header followed by a data payload.</p>
-<h2><a class="anchor" id="autotoc_md55"></a>
+<h2><a class="anchor" id="autotoc_md53"></a>
 Record Header Layout (24 bytes)</h2>
 <div class="fragment"><div class="line">Byte Offset    Field          Size     Description</div>
 <div class="line">-----------    -----          ----     -----------</div>
@@ -82,7 +82,7 @@ Record Header Layout (24 bytes)</h2>
 <div class="line">0x0C           dataLength     4B       Length of the data payload (equals nvPageSize)</div>
 <div class="line">0x10           crc32          4B       CRC32 over the preceding 16 bytes (magic through dataLength)</div>
 <div class="line">0x14           status         4B       Record lifecycle state (see below)</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md56"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md54"></a>
 Record Status Lifecycle</h2>
 <p>A record's status field transitions in one direction only. This ordering is chosen so that each transition only requires clearing bits (1 -&gt; 0), which flash hardware allows without an erase cycle.</p>
 <div class="fragment"><div class="line">ERASED (0xFFFFFFFF)  --&gt;  VALID (0xFFFF0000)  --&gt;  INVALID (0x00000000)</div>
@@ -663,7 +663,7 @@ Observations</h2>
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 15 2026 15:31:19 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Oct 20 2026 23:06:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
