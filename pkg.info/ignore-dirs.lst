@@ -1,0 +1,20 @@
+# Don't own the root src/ directory 
+src/
+!src/Kit
+!src/Kit/**
+
+# Ignore the final output directories from the builds
+# ORDER is important - must after the `src/Kit/**` entry
+__pycache__/
+src/**/_win32/
+src/**/_win32/**
+src/**/_win64/
+src/**/_win64/**
+src/**/_posix/
+src/**/_posix/**
+src/**/_posix64/
+src/**/_posix64/**
+src/**/_stm32/
+src/**/_stm32/**
+src/**/_pico/
+src/**/_pico/**
