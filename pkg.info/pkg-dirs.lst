@@ -26,7 +26,9 @@ src/Kit/TShell/_0test/_0build/windows
 src/Kit/TShell/_0test/_0build/windows/clang-host
 src/Kit/TShell/_0test/_0build/windows/msvc
 src/Kit/Time
+src/Kit/Time/_win32
 src/Kit/Time/_ansi
+src/Kit/Time/_posix
 src/Kit/Time/_0test
 src/Kit/Time/_0test/_0build
 src/Kit/Time/_0test/_0build/linux
@@ -153,6 +155,7 @@ src/Kit/Text/_mappings/_mingw
 src/Kit/Text/_mappings/_arm_gcc_rp2xxx
 src/Kit/Text/_mappings/_arm_gcc_stm32
 src/Kit/Text/_mappings/_clang-msvc
+src/Kit/Text/_mappings/_posix
 src/Kit/Text/_mappings/_msvc
 src/Kit/Text/_0test
 src/Kit/Text/_0test/_0build
@@ -349,7 +352,9 @@ src/Kit/Io/Socket/_0test/_loopback/_0build/linux/gcc-host
 src/Kit/Io/Socket/_0test/_loopback/_0build/windows
 src/Kit/Io/Socket/_0test/_loopback/_0build/windows/clang-host
 src/Kit/Io/Socket/_0test/_loopback/_0build/windows/msvc
+src/Kit/Io/_mappings/_win32
 src/Kit/Io/_mappings/_nofs
+src/Kit/Io/_mappings/_posix
 src/Kit/Io/Ram
 src/Kit/Io/Ram/_0test
 src/Kit/Io/Ram/_0test/_0build
