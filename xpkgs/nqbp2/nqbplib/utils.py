@@ -31,7 +31,6 @@ verbose_mode = False
 #-----------------------------------------------------------------------------
 def dir_list_filter_by_ext(dir, exts, derivedDir=False): 
     """Returns a list of files filter by the passed file extensions
-    
     Accepts one or more file extensions (with no '.') 
     """
 
@@ -274,9 +273,11 @@ def create_working_libdirs( printer, inf, arguments, libdirs, libnames, local_ex
         libdirs.append( ((line, srctype, srclist), entry) )
         libnames.append( line )
 
-    # Sort so that the build order is deterministic/reproducible
-    libdirs.sort( key=lambda x: x[0][0] )
-    libnames.sort()
+    # NOTE: Do NOT sort 'libdirs'. The order is significant - it is the link
+    #       order of the generated libraries, and libdirs.b files rely on it
+    #       (e.g. _testsupport overrides must precede the platform defaults).
+    #       Sorting here would also interleave nested libdirs.b entries with
+    #       the parent's entries.
 
     # Check for duplicates (Note: Duplicates can/will fail a build when performing parallel builds)
     duplicates = False
