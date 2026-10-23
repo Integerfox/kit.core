@@ -31,7 +31,6 @@ verbose_mode = False
 #-----------------------------------------------------------------------------
 def dir_list_filter_by_ext(dir, exts, derivedDir=False): 
     """Returns a list of files filter by the passed file extensions
-    
     Accepts one or more file extensions (with no '.') 
     """
 
@@ -274,6 +273,11 @@ def create_working_libdirs( printer, inf, arguments, libdirs, libnames, local_ex
         libdirs.append( ((line, srctype, srclist), entry) )
         libnames.append( line )
 
+    # NOTE: Do NOT sort 'libdirs'. The order is significant - it is the link
+    #       order of the generated libraries, and libdirs.b files rely on it
+    #       (e.g. _testsupport overrides must precede the platform defaults).
+    #       Sorting here would also interleave nested libdirs.b entries with
+    #       the parent's entries.
 
     # Check for duplicates (Note: Duplicates can/will fail a build when performing parallel builds)
     duplicates = False
@@ -522,6 +526,9 @@ def get_files_to_build( printer, toolchain, dir, sources_b ):
        
         inf.close()
              
+    # Sort so that the build order is deterministic/reproducible
+    files.sort()
+
     # return the file list
     printer.debug( "# Default file list to build for dir: {}. {}".format( dir, files )  )
     return files                
@@ -553,7 +560,7 @@ def get_and_filter_files_to_build( printer, toolchain, dir, srcpath, sources_b )
     if ( dir[1] != None and dir[2] != None ):
         files = filter_files( printer, srcpath, files, dir[1], dir[2] )
 
-    return files
+    return sorted( files )
 
 #-----------------------------------------------------------------------------
 def replace_build_dir_symbols( toolchain, objects_string, builtlibs, new_root ):
