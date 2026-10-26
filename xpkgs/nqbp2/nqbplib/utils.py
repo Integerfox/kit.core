@@ -273,12 +273,6 @@ def create_working_libdirs( printer, inf, arguments, libdirs, libnames, local_ex
         libdirs.append( ((line, srctype, srclist), entry) )
         libnames.append( line )
 
-    # NOTE: Do NOT sort 'libdirs'. The order is significant - it is the link
-    #       order of the generated libraries, and libdirs.b files rely on it
-    #       (e.g. _testsupport overrides must precede the platform defaults).
-    #       Sorting here would also interleave nested libdirs.b entries with
-    #       the parent's entries.
-
     # Check for duplicates (Note: Duplicates can/will fail a build when performing parallel builds)
     duplicates = False
     d          = collections.Counter(libnames)
@@ -302,6 +296,16 @@ def find_libdir_entry( libdirs, dir_path, entry_type=None ):
                 return (True, (dir_path, srctype, srclist), e )
 
     return (False, (dir_path, None, None), entry_type)
+
+#
+def sorted_libdirs( libdirs ):
+    """Returns a sorted COPY of a 'libdirs' list.
+
+    This is the ONE definition of the libdirs ordering. It is applied once, to
+    the fully expanded list, so that the build/link order and every display of
+    that order are identical and host independent.
+    """
+    return sorted( libdirs, key=lambda e: (e[0][0].lower(), e[0][0]) )
 
 #-----------------------------------------------------------------------------
 def run_pre_processing_script( printer, current_dir, work_root, pkg_root, prj_dirname, preprocess_script, preprocess_args, variant, debug_opt, build_clean="build", verbose=False ):

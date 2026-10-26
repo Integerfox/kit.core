@@ -79,8 +79,8 @@ Arguments:
                    operation.
   --qry-blds       Displays the build 'variants' supported by the toolchain 
                    (no build is performed).
-  --qry-dirs       Displays the list of directories (in order, for the selected
-                   build variant) referenced in the libdirs.b file.
+  --qry-dirs       Displays the list of directories (in build order, for the
+                   selected build variant) referenced in the libdirs.b file.
   --qry-dirs2      Same as --qry-dirs with the addition of the any source file
                    include/exclude info
   --qry-opts       Displays all of the toolchain options (no build is performed) 

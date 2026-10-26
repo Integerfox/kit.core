@@ -396,6 +396,9 @@ class ToolChain:
             utils.create_working_libdirs( self._printer, inf, arguments, self.libdirs, self.libnames, 'local', bld_var )  
             inf.close()
 
+            # Canonical order for everything downstream (build, link, displays)
+            self.libdirs = utils.sorted_libdirs( self.libdirs )
+
             # Start the Ninja file
             self._start_ninja_file( bld_var, arguments );
 
