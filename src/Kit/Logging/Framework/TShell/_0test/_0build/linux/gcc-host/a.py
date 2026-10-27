@@ -4,6 +4,7 @@ Script to run unittests (leverages NQBP python code base)
 
 """
 
+import difflib
 import filecmp
 import os
 import sys
@@ -40,9 +41,23 @@ def post_process_output( golden ):
                     break
                 outf.write( line.rstrip('\r\n') + '\n' )
 
-    if ( not filecmp.cmp(golden,'temp.out.txt') ):
+    if ( not filecmp.cmp(golden,'temp.out.txt', shallow=False) ):
+        report_diff( golden )
         utils.pop_dir()
         exit( "FAILED test - output does NOT match the expected values" )
+
+
+def report_diff( golden ):
+    """Dumps the golden-vs-actual delta so that a CI failure is diagnosable"""
+    with open( golden, 'r', newline='' ) as f:
+        expected = f.readlines()
+    with open( 'temp.out.txt', 'r', newline='' ) as f:
+        actual = f.readlines()
+
+    print( "vvvvvvvvvvvvvvvv DIFF (expected vs actual) vvvvvvvvvvvvvvvv" )
+    for line in difflib.unified_diff( expected, actual, 'expectedoutput.txt', 'out.txt', n=3 ):
+        print( line.rstrip('\r\n') )
+    print( "^^^^^^^^^^^^^^^^ DIFF (expected vs actual) ^^^^^^^^^^^^^^^^" )
 
 
 #------------------------------------------------------------------------------
