@@ -31,7 +31,6 @@ verbose_mode = False
 #-----------------------------------------------------------------------------
 def dir_list_filter_by_ext(dir, exts, derivedDir=False): 
     """Returns a list of files filter by the passed file extensions
-    
     Accepts one or more file extensions (with no '.') 
     """
 
@@ -274,7 +273,6 @@ def create_working_libdirs( printer, inf, arguments, libdirs, libnames, local_ex
         libdirs.append( ((line, srctype, srclist), entry) )
         libnames.append( line )
 
-
     # Check for duplicates (Note: Duplicates can/will fail a build when performing parallel builds)
     duplicates = False
     d          = collections.Counter(libnames)
@@ -298,6 +296,16 @@ def find_libdir_entry( libdirs, dir_path, entry_type=None ):
                 return (True, (dir_path, srctype, srclist), e )
 
     return (False, (dir_path, None, None), entry_type)
+
+#
+def sorted_libdirs( libdirs ):
+    """Returns a sorted COPY of a 'libdirs' list.
+
+    This is the ONE definition of the libdirs ordering. It is applied once, to
+    the fully expanded list, so that the build/link order and every display of
+    that order are identical and host independent.
+    """
+    return sorted( libdirs, key=lambda e: (e[0][0].lower(), e[0][0]) )
 
 #-----------------------------------------------------------------------------
 def run_pre_processing_script( printer, current_dir, work_root, pkg_root, prj_dirname, preprocess_script, preprocess_args, variant, debug_opt, build_clean="build", verbose=False ):
@@ -522,6 +530,9 @@ def get_files_to_build( printer, toolchain, dir, sources_b ):
        
         inf.close()
              
+    # Sort so that the build order is deterministic/reproducible
+    files.sort()
+
     # return the file list
     printer.debug( "# Default file list to build for dir: {}. {}".format( dir, files )  )
     return files                
@@ -553,7 +564,7 @@ def get_and_filter_files_to_build( printer, toolchain, dir, srcpath, sources_b )
     if ( dir[1] != None and dir[2] != None ):
         files = filter_files( printer, srcpath, files, dir[1], dir[2] )
 
-    return files
+    return sorted( files )
 
 #-----------------------------------------------------------------------------
 def replace_build_dir_symbols( toolchain, objects_string, builtlibs, new_root ):

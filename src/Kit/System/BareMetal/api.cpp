@@ -21,9 +21,6 @@ namespace Kit {
 namespace System {
 
 ///
-///
-static Mutex theNullMutex_;
-
 static bool schedulerStarted_ = false;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +34,7 @@ void initialize() noexcept
 // This method returns when the Application's IRunnable instance completes
 void enableScheduling() noexcept
 {
-    schedulerStarted_ = true; 
+    schedulerStarted_ = true;
     Kit::System::BareMetal::Thread::entryPoint_();
 }
 
@@ -69,23 +66,26 @@ void resumeScheduling() noexcept
 ////////////////////////////////////////////////////////////////////////////////
 Mutex& PrivateLocks::system() noexcept
 {
-    return theNullMutex_;
+    static NeverDestroyed<Mutex> theNullMutex_;
+    return theNullMutex_.get();
 }
-
 
 Mutex& PrivateLocks::tracing() noexcept
 {
-    return theNullMutex_;
+    static NeverDestroyed<Mutex> theNullMutex_;
+    return theNullMutex_.get();
 }
 
 Mutex& PrivateLocks::sysLists() noexcept
 {
-    return theNullMutex_;
+    static NeverDestroyed<Mutex> theNullMutex_;
+    return theNullMutex_.get();
 }
 
 Mutex& PrivateLocks::tracingOutput() noexcept
 {
-    return theNullMutex_;
+    static NeverDestroyed<Mutex> theNullMutex_;
+    return theNullMutex_.get();
 }
 
 }  // end namespace

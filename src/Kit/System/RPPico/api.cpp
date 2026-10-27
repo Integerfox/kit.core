@@ -20,12 +20,6 @@
 namespace Kit {
 namespace System {
 
-///
-static Mutex systemMutex_;
-static Mutex tracingMutex_;
-static Mutex tracingOutputMutex_;
-static Mutex sysListMutex_;
-
 // Global flag indicating if the Kit C++ library has been initialized
 bool g_kitInitialized;
 void initialize( void ) noexcept
@@ -74,22 +68,26 @@ void resumeScheduling( void ) noexcept
 
 Mutex& PrivateLocks::system( void ) noexcept
 {
-    return systemMutex_;
+    static NeverDestroyed<Mutex> systemMutex_;
+    return systemMutex_.get();
 }
 
 Mutex& PrivateLocks::sysLists( void ) noexcept
 {
-    return sysListMutex_;
+    static NeverDestroyed<Mutex> sysListMutex_;
+    return sysListMutex_.get();
 }
 
 Mutex& PrivateLocks::tracing( void ) noexcept
 {
-    return tracingMutex_;
+    static NeverDestroyed<Mutex> tracingMutex_;
+    return tracingMutex_.get();
 }
 
 Mutex& PrivateLocks::tracingOutput( void ) noexcept
 {
-    return tracingOutputMutex_;
+    static NeverDestroyed<Mutex> tracingOutputMutex_;
+    return tracingOutputMutex_.get();
 }
 
 }  // end namespace

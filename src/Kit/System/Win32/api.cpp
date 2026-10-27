@@ -17,11 +17,6 @@
 namespace Kit {
 namespace System {
 
-static Mutex systemMutex_;
-static Mutex tracingMutex_;
-static Mutex tracingOutputMutex_;
-static Mutex sysList_;
-
 ////////////////////
 void initialize() noexcept
 {
@@ -58,23 +53,27 @@ void resumeScheduling() noexcept
 ////////////////////////////////////////////////////////////////////////////////
 Mutex& PrivateLocks::system() noexcept
 {
-    return systemMutex_;
+    static NeverDestroyed<Mutex> systemMutex_;
+    return systemMutex_.get();
 }
 
 
 Mutex& PrivateLocks::tracing() noexcept
 {
-    return tracingMutex_;
+    static NeverDestroyed<Mutex> tracingMutex_;
+    return tracingMutex_.get();
 }
 
 Mutex& PrivateLocks::sysLists() noexcept
 {
-    return sysList_;
+    static NeverDestroyed<Mutex> sysList_;
+    return sysList_.get();
 }
 
 Mutex& PrivateLocks::tracingOutput() noexcept
 {
-    return tracingOutputMutex_;
+    static NeverDestroyed<Mutex> tracingOutputMutex_;
+    return tracingOutputMutex_.get();
 }
 
 

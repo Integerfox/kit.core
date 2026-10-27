@@ -4,6 +4,7 @@ Script to run unittests (leverages NQBP python code base)
 
 """
 
+import difflib
 import filecmp
 import os
 import sys
@@ -21,11 +22,25 @@ def run_test( subdir ):
     p = subprocess.Popen( f'cat {src}| b.out > out.txt', shell=True )
     p.communicate()
     if ( p.returncode != 0 ):
+        report_exit_code( p.returncode )
         utils.pop_dir()
         exit( "FAILED test" )
     post_process_output( golden )
     print( "ALL Tests passed." )
     utils.pop_dir()
+
+
+def report_exit_code( returncode ):
+    """A non-zero code is either a Kit::System::Shutdown enum or a crash status"""
+    print( f"EXIT CODE: {returncode} (0x{returncode & 0xFFFFFFFF:08X})" )
+    print( "vvvvvvvvvvvvvvvv tail of out.txt vvvvvvvvvvvvvvvv" )
+    try:
+        with open( 'out.txt', 'r', newline='', errors='replace' ) as f:
+            for line in f.readlines()[-40:]:
+                print( line.rstrip('\r\n') )
+    except OSError as ex:
+        print( f"<could not read out.txt: {ex}>" )
+    print( "^^^^^^^^^^^^^^^^ tail of out.txt ^^^^^^^^^^^^^^^^" )
         
 
 def post_process_output( golden ):
@@ -40,9 +55,23 @@ def post_process_output( golden ):
                     break
                 outf.write( line.rstrip('\r\n') + '\n' )
 
-    if ( not filecmp.cmp(golden,'temp.out.txt') ):
+    if ( not filecmp.cmp(golden,'temp.out.txt', shallow=False) ):
+        report_diff( golden )
         utils.pop_dir()
         exit( "FAILED test - output does NOT match the expected values" )
+
+
+def report_diff( golden ):
+    """Dumps the golden-vs-actual delta so that a CI failure is diagnosable"""
+    with open( golden, 'r', newline='' ) as f:
+        expected = f.readlines()
+    with open( 'temp.out.txt', 'r', newline='' ) as f:
+        actual = f.readlines()
+
+    print( "vvvvvvvvvvvvvvvv DIFF (expected vs actual) vvvvvvvvvvvvvvvv" )
+    for line in difflib.unified_diff( expected, actual, 'expectedoutput.txt', 'out.txt', n=3 ):
+        print( line.rstrip('\r\n') )
+    print( "^^^^^^^^^^^^^^^^ DIFF (expected vs actual) ^^^^^^^^^^^^^^^^" )
 
 
 #------------------------------------------------------------------------------
