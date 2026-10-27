@@ -18,12 +18,45 @@
 #include "Kit/Text/IString.h"
 #include "Kit/System/Mutex.h"
 #include "Kit/System/Trace.h"
+#include <new>
+#include <type_traits>
 
 
 /// 
 namespace Kit {
 /// 
 namespace System {
+
+
+/** Holds a lazily constructed, never destroyed instance of T.
+
+    Declare instances as function-local statics. Construction-on-first-use
+    removes the static initialization order dependency for globals that are
+    used from other translation units' static constructors.
+
+    This class MUST remain trivially destructible (see the static_assert
+    below) - a non-trivial destructor on a function-local static is registered
+    via atexit()/__cxa_atexit(), which pulls newlib's exit machinery (and the
+    undefined '_fini') into the bare-metal targets.
+ */
+template <class T>
+class NeverDestroyed
+{
+public:
+    ///
+    NeverDestroyed() noexcept
+    {
+        static_assert( std::is_trivially_destructible<NeverDestroyed>::value,
+                       "NeverDestroyed<T> must stay trivially destructible - do NOT add a destructor" );
+        ::new ( m_storage ) T();
+    }
+
+    /// Returns the wrapped instance
+    T& get() noexcept { return *reinterpret_cast<T*>( m_storage ); }
+
+private:
+    alignas( T ) unsigned char m_storage[sizeof( T )];
+};
 
 
 /** This class provide access to KIT Library's internal global mutexes.

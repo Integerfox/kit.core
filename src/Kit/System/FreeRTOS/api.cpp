@@ -75,27 +75,27 @@ void resumeScheduling() noexcept
 ////////////////////////////////////////////////////////////////////////////////
 Mutex& PrivateLocks::system() noexcept
 {
-    static Mutex systemMutex_;
-    return systemMutex_;
+    static NeverDestroyed<Mutex> systemMutex_;
+    return systemMutex_.get();
 }
 
 
 Mutex& PrivateLocks::tracing() noexcept
 {
-    static Mutex tracingMutex_;
-    return tracingMutex_;
+    static NeverDestroyed<Mutex> tracingMutex_;
+    return tracingMutex_.get();
 }
 
 Mutex& PrivateLocks::sysLists() noexcept
 {
-    static Mutex sysList_;
-    return sysList_;
+    static NeverDestroyed<Mutex> sysList_;
+    return sysList_.get();
 }
 
 Mutex& PrivateLocks::tracingOutput() noexcept
 {
-    static Mutex tracingOutputMutex_;
-    return tracingOutputMutex_;
+    static NeverDestroyed<Mutex> tracingOutputMutex_;
+    return tracingOutputMutex_.get();
 }
 
 }  // end namespace
