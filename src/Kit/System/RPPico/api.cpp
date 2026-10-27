@@ -20,12 +20,6 @@
 namespace Kit {
 namespace System {
 
-///
-static Mutex systemMutex_;
-static Mutex tracingMutex_;
-static Mutex tracingOutputMutex_;
-static Mutex sysListMutex_;
-
 // Global flag indicating if the Kit C++ library has been initialized
 bool g_kitInitialized;
 void initialize( void ) noexcept
@@ -74,21 +68,25 @@ void resumeScheduling( void ) noexcept
 
 Mutex& PrivateLocks::system( void ) noexcept
 {
+    static Mutex systemMutex_;
     return systemMutex_;
 }
 
 Mutex& PrivateLocks::sysLists( void ) noexcept
 {
+    static Mutex sysListMutex_;
     return sysListMutex_;
 }
 
 Mutex& PrivateLocks::tracing( void ) noexcept
 {
+    static Mutex tracingMutex_;
     return tracingMutex_;
 }
 
 Mutex& PrivateLocks::tracingOutput( void ) noexcept
 {
+    static Mutex tracingOutputMutex_;
     return tracingOutputMutex_;
 }
 

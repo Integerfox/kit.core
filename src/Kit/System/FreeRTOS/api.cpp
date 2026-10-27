@@ -22,12 +22,6 @@ namespace Kit {
 namespace System {
 
 ///
-///
-static Mutex systemMutex_;
-static Mutex tracingMutex_;
-static Mutex tracingOutputMutex_;
-static Mutex sysList_;
-
 static bool schedulerStarted_ = false;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,13 +53,12 @@ bool isSchedulingEnabled() noexcept
 
 void sleep( uint32_t milliseconds ) noexcept
 {
-    vTaskDelay( pdMS_TO_TICKS(milliseconds));
+    vTaskDelay( pdMS_TO_TICKS( milliseconds ) );
 }
 
 void sleepInRealTime( uint32_t milliseconds ) noexcept
 {
-    vTaskDelay( pdMS_TO_TICKS(milliseconds));
-
+    vTaskDelay( pdMS_TO_TICKS( milliseconds ) );
 }
 
 
@@ -82,22 +75,26 @@ void resumeScheduling() noexcept
 ////////////////////////////////////////////////////////////////////////////////
 Mutex& PrivateLocks::system() noexcept
 {
+    static Mutex systemMutex_;
     return systemMutex_;
 }
 
 
 Mutex& PrivateLocks::tracing() noexcept
 {
+    static Mutex tracingMutex_;
     return tracingMutex_;
 }
 
 Mutex& PrivateLocks::sysLists() noexcept
 {
+    static Mutex sysList_;
     return sysList_;
 }
 
 Mutex& PrivateLocks::tracingOutput() noexcept
 {
+    static Mutex tracingOutputMutex_;
     return tracingOutputMutex_;
 }
 
