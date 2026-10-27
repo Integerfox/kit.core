@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 422-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 430-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -68,69 +68,104 @@ $(function() {
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="_i_string_8h.html">Kit/Text/IString.h</a>&quot;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="_mutex_8h.html">Kit/System/Mutex.h</a>&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="_system_2_trace_8h.html">Kit/System/Trace.h</a>&quot;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"></span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">/// </span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_kit.html">Kit</a> {<span class="comment"></span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;new&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">/// </span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"></span><span class="keyword">namespace </span>System {</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"></span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">/** This class provide access to KIT Library&#39;s internal global mutexes.</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html">   31</a></span><span class="keyword">class </span><a class="code hl_class" href="class_kit_1_1_system_1_1_private_locks.html">PrivateLocks</a></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">    /// Global mutex for use for interfaces/class in the Kit::System namespace</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html#a5499fbb18674279baf2bb5704ea3709b">   35</a></span><span class="comment"></span>    <span class="keyword">static</span> <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_private_locks.html#a5499fbb18674279baf2bb5704ea3709b">system</a>() noexcept;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_kit.html">Kit</a> {<span class="comment"></span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">/// </span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"></span><span class="keyword">namespace </span>System {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"></span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">/** Holds a lazily constructed, never destroyed instance of T.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">    Declare instances as function-local statics. Construction-on-first-use</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">    removes the static initialization order dependency for globals that are</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">    used from other translation units&#39; static constructors.</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">    /// Same as &#39;system&#39;, except usage is for &#39;long&#39; critical sections (i.e. walking lists, printing, etc.)</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html#a6e51c1322e9790b3eddff9259a3d885d">   38</a></span><span class="comment"></span>    static <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_private_locks.html#a6e51c1322e9790b3eddff9259a3d885d">sysLists</a>() noexcept;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">    /** Global mutex for use for tracing sub-system.  This mutex is to protect </span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">        the Trace engine&#39;s internal/meta data.  This mutex is NOT used to guard</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">        the Trace output.  The Trace engine uses two mutex so that its output</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">        can be &#39;serialized&#39; with the TShell&#39;s output (or other sub-systems) BUT</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">        not cause high priority threads to block on the trace output when their</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">        trace statements are not enabled at run time.</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html#a08ef9577ba8c8b327d0b16e3be053e1b">   47</a></span>    static <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_private_locks.html#a08ef9577ba8c8b327d0b16e3be053e1b">tracing</a>() noexcept;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">    /// Global mutex for use for the tracing sub-system OUTPUT (see above for more details)</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html#aabf5cc1aa267c3c03e5afa1c1c1e3dd7">   50</a></span><span class="comment"></span>    static <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_private_locks.html#aabf5cc1aa267c3c03e5afa1c1c1e3dd7">tracingOutput</a>() noexcept;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">/** This class defines the interface to the platform specific implementation of the</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">    Kit::System::Trace interface</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_trace_platform.html">   56</a></span>class <a class="code hl_class" href="class_kit_1_1_system_1_1_private_trace_platform.html">PrivateTracePlatform</a></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>{</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">    /** This method append the &#39;info&#39; information to the provide String for the</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">        specified infoLevel.</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_trace_platform.html#a6ba0408e13622151c9454459d3a8af2b">   62</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_private_trace_platform.html#a6ba0408e13622151c9454459d3a8af2b">appendInfo</a>( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; dst, TraceLevel info, <span class="keyword">const</span> <span class="keywordtype">char</span>* section, <span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <span class="keywordtype">int</span> linenum, <span class="keyword">const</span> <span class="keywordtype">char</span>* funcname ) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">    /** This method output the string to the logging destination/stream/media</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_trace_platform.html#a88471fcca6ec13da74686002d0d08116">   66</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_private_trace_platform.html#a88471fcca6ec13da74686002d0d08116">output</a>( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; src ) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}       <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">    This class MUST remain trivially destructible (see the static_assert</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">    below) - a non-trivial destructor on a function-local static is registered</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">    via atexit()/__cxa_atexit(), which pulls newlib&#39;s exit machinery (and the</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">    undefined &#39;_fini&#39;) into the bare-metal targets.</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_never_destroyed.html">   43</a></span><span class="keyword">class </span><a class="code hl_class" href="class_kit_1_1_system_1_1_never_destroyed.html">NeverDestroyed</a></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    ///</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_never_destroyed.html">NeverDestroyed</a>() <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">static_assert</span>( std::is_trivially_destructible&lt;NeverDestroyed&gt;::value,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                       <span class="stringliteral">&quot;NeverDestroyed&lt;T&gt; must stay trivially destructible - do NOT add a destructor&quot;</span> );</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        ::new ( m_storage ) T();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment"></span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">    /// Returns the wrapped instance</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_never_destroyed.html#a9cf85140380b76141e7fcd8ada37c716">   55</a></span><span class="comment"></span>    T&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_never_destroyed.html#a9cf85140380b76141e7fcd8ada37c716">get</a>() noexcept { <span class="keywordflow">return</span> *<span class="keyword">reinterpret_cast&lt;</span>T*<span class="keyword">&gt;</span>( m_storage ); }</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keyword">alignas</span>( T ) <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> m_storage[<span class="keyword">sizeof</span>( T )];</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>};</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"></span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">/** This class provide access to KIT Library&#39;s internal global mutexes.</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html">   64</a></span><span class="keyword">class </span><a class="code hl_class" href="class_kit_1_1_system_1_1_private_locks.html">PrivateLocks</a></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>{</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">    /// Global mutex for use for interfaces/class in the Kit::System namespace</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html#a5499fbb18674279baf2bb5704ea3709b">   68</a></span><span class="comment"></span>    <span class="keyword">static</span> <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_private_locks.html#a5499fbb18674279baf2bb5704ea3709b">system</a>() noexcept;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">    /// Same as &#39;system&#39;, except usage is for &#39;long&#39; critical sections (i.e. walking lists, printing, etc.)</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html#a6e51c1322e9790b3eddff9259a3d885d">   71</a></span><span class="comment"></span>    static <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_private_locks.html#a6e51c1322e9790b3eddff9259a3d885d">sysLists</a>() noexcept;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"></span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">    /** Global mutex for use for tracing sub-system.  This mutex is to protect </span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">        the Trace engine&#39;s internal/meta data.  This mutex is NOT used to guard</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">        the Trace output.  The Trace engine uses two mutex so that its output</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">        can be &#39;serialized&#39; with the TShell&#39;s output (or other sub-systems) BUT</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">        not cause high priority threads to block on the trace output when their</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">        trace statements are not enabled at run time.</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html#a08ef9577ba8c8b327d0b16e3be053e1b">   80</a></span>    static <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_private_locks.html#a08ef9577ba8c8b327d0b16e3be053e1b">tracing</a>() noexcept;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">    /// Global mutex for use for the tracing sub-system OUTPUT (see above for more details)</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_locks.html#aabf5cc1aa267c3c03e5afa1c1c1e3dd7">   83</a></span><span class="comment"></span>    static <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; <a class="code hl_function" href="class_kit_1_1_system_1_1_private_locks.html#aabf5cc1aa267c3c03e5afa1c1c1e3dd7">tracingOutput</a>() noexcept;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>};</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"></span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">/** This class defines the interface to the platform specific implementation of the</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">    Kit::System::Trace interface</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_trace_platform.html">   89</a></span>class <a class="code hl_class" href="class_kit_1_1_system_1_1_private_trace_platform.html">PrivateTracePlatform</a></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>{</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">    /** This method append the &#39;info&#39; information to the provide String for the</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">        specified infoLevel.</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_trace_platform.html#a6ba0408e13622151c9454459d3a8af2b">   95</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_private_trace_platform.html#a6ba0408e13622151c9454459d3a8af2b">appendInfo</a>( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; dst, TraceLevel info, <span class="keyword">const</span> <span class="keywordtype">char</span>* section, <span class="keyword">const</span> <span class="keywordtype">char</span>* filename, <span class="keywordtype">int</span> linenum, <span class="keyword">const</span> <span class="keywordtype">char</span>* funcname ) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"></span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">    /** This method output the string to the logging destination/stream/media</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_private_trace_platform.html#a88471fcca6ec13da74686002d0d08116">   99</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_private_trace_platform.html#a88471fcca6ec13da74686002d0d08116">output</a>( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a>&amp; src ) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>};</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}       <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
 <div class="ttc" id="a_i_string_8h_html"><div class="ttname"><a href="_i_string_8h.html">IString.h</a></div></div>
 <div class="ttc" id="a_mutex_8h_html"><div class="ttname"><a href="_mutex_8h.html">Mutex.h</a></div></div>
 <div class="ttc" id="a_system_2_trace_8h_html"><div class="ttname"><a href="_system_2_trace_8h.html">Trace.h</a></div><div class="ttdoc">This file provides an interface for a 'printf' tracing mechanism.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_mutex_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_mutex.html">Kit::System::Mutex</a></div><div class="ttdoc">This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics.</div><div class="ttdef"><b>Definition</b> Mutex.h:32</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_private_locks_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_locks.html">Kit::System::PrivateLocks</a></div><div class="ttdoc">This class provide access to KIT Library's internal global mutexes.</div><div class="ttdef"><b>Definition</b> Private.h:32</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_never_destroyed_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_never_destroyed.html">Kit::System::NeverDestroyed</a></div><div class="ttdoc">Holds a lazily constructed, never destroyed instance of T.</div><div class="ttdef"><b>Definition</b> Private.h:44</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_never_destroyed_html_a9cf85140380b76141e7fcd8ada37c716"><div class="ttname"><a href="class_kit_1_1_system_1_1_never_destroyed.html#a9cf85140380b76141e7fcd8ada37c716">Kit::System::NeverDestroyed::get</a></div><div class="ttdeci">T &amp; get() noexcept</div><div class="ttdoc">Returns the wrapped instance.</div><div class="ttdef"><b>Definition</b> Private.h:55</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_private_locks_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_locks.html">Kit::System::PrivateLocks</a></div><div class="ttdoc">This class provide access to KIT Library's internal global mutexes.</div><div class="ttdef"><b>Definition</b> Private.h:65</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_private_locks_html_a08ef9577ba8c8b327d0b16e3be053e1b"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_locks.html#a08ef9577ba8c8b327d0b16e3be053e1b">Kit::System::PrivateLocks::tracing</a></div><div class="ttdeci">static Mutex &amp; tracing() noexcept</div><div class="ttdoc">Global mutex for use for tracing sub-system.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_private_locks_html_a5499fbb18674279baf2bb5704ea3709b"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_locks.html#a5499fbb18674279baf2bb5704ea3709b">Kit::System::PrivateLocks::system</a></div><div class="ttdeci">static Mutex &amp; system() noexcept</div><div class="ttdoc">Global mutex for use for interfaces/class in the Kit::System namespace.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_private_locks_html_a6e51c1322e9790b3eddff9259a3d885d"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_locks.html#a6e51c1322e9790b3eddff9259a3d885d">Kit::System::PrivateLocks::sysLists</a></div><div class="ttdeci">static Mutex &amp; sysLists() noexcept</div><div class="ttdoc">Same as 'system', except usage is for 'long' critical sections (i.e. walking lists,...</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_private_locks_html_aabf5cc1aa267c3c03e5afa1c1c1e3dd7"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_locks.html#aabf5cc1aa267c3c03e5afa1c1c1e3dd7">Kit::System::PrivateLocks::tracingOutput</a></div><div class="ttdeci">static Mutex &amp; tracingOutput() noexcept</div><div class="ttdoc">Global mutex for use for the tracing sub-system OUTPUT (see above for more details)</div></div>
-<div class="ttc" id="aclass_kit_1_1_system_1_1_private_trace_platform_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_trace_platform.html">Kit::System::PrivateTracePlatform</a></div><div class="ttdoc">This class defines the interface to the platform specific implementation of the Kit::System::Trace in...</div><div class="ttdef"><b>Definition</b> Private.h:57</div></div>
+<div class="ttc" id="aclass_kit_1_1_system_1_1_private_trace_platform_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_trace_platform.html">Kit::System::PrivateTracePlatform</a></div><div class="ttdoc">This class defines the interface to the platform specific implementation of the Kit::System::Trace in...</div><div class="ttdef"><b>Definition</b> Private.h:90</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_private_trace_platform_html_a6ba0408e13622151c9454459d3a8af2b"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_trace_platform.html#a6ba0408e13622151c9454459d3a8af2b">Kit::System::PrivateTracePlatform::appendInfo</a></div><div class="ttdeci">static void appendInfo(Kit::Text::IString &amp;dst, TraceLevel info, const char *section, const char *filename, int linenum, const char *funcname) noexcept</div><div class="ttdoc">This method append the 'info' information to the provide String for the specified infoLevel.</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_private_trace_platform_html_a88471fcca6ec13da74686002d0d08116"><div class="ttname"><a href="class_kit_1_1_system_1_1_private_trace_platform.html#a88471fcca6ec13da74686002d0d08116">Kit::System::PrivateTracePlatform::output</a></div><div class="ttdeci">static void output(Kit::Text::IString &amp;src) noexcept</div><div class="ttdoc">This method output the string to the logging destination/stream/media.</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_i_string_html"><div class="ttname"><a href="class_kit_1_1_text_1_1_i_string.html">Kit::Text::IString</a></div><div class="ttdoc">This abstract class defines the operations that can be before on a NULL terminated string.</div><div class="ttdef"><b>Definition</b> IString.h:38</div></div>
@@ -138,7 +173,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 20 2026 23:06:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Tue Oct 27 2026 17:48:37 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
