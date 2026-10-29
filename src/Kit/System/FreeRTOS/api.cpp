@@ -73,23 +73,23 @@ void resumeScheduling() noexcept
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Mutex& PrivateLocks::system() noexcept
+BSemaMutex& PrivateLocks::system() noexcept
 {
-    static NeverDestroyed<Mutex> systemMutex_;
+    static NeverDestroyed<BSemaMutex> systemMutex_;
     return systemMutex_.get();
 }
 
 
-Mutex& PrivateLocks::tracing() noexcept
+BSemaMutex& PrivateLocks::tracing() noexcept
 {
-    static NeverDestroyed<Mutex> tracingMutex_;
+    static NeverDestroyed<BSemaMutex> tracingMutex_;
     return tracingMutex_.get();
 }
 
-Mutex& PrivateLocks::sysLists() noexcept
+Mutex& PrivateLocks::systemRecursive() noexcept
 {
-    static NeverDestroyed<Mutex> sysList_;
-    return sysList_.get();
+    static NeverDestroyed<Mutex> systemRecursiveMutex_;
+    return systemRecursiveMutex_.get();
 }
 
 Mutex& PrivateLocks::tracingOutput() noexcept

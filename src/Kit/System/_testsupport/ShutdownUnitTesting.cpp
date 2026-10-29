@@ -30,7 +30,7 @@ namespace System {
 ////////////////////////////////////////////////////////////////////////////////
 void ShutdownUnitTesting::clearAndUseCounter() noexcept
 {
-    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
     counter_  = 0;
     counting_ = true;
     testing_  = true;
@@ -38,7 +38,7 @@ void ShutdownUnitTesting::clearAndUseCounter() noexcept
 
 size_t ShutdownUnitTesting::getAndClearCounter() noexcept
 {
-    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
     size_t           temp = counter_;
     counter_              = 0;
     return temp;
@@ -47,7 +47,7 @@ size_t ShutdownUnitTesting::getAndClearCounter() noexcept
 
 void ShutdownUnitTesting::setExitCode( int newExitCode ) noexcept
 {
-    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
     exitCode_ = newExitCode;
     counting_ = false;
     testing_  = true;
@@ -56,7 +56,7 @@ void ShutdownUnitTesting::setExitCode( int newExitCode ) noexcept
 
 void ShutdownUnitTesting::restore() noexcept
 {
-    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
     testing_ = false;
 }
 
@@ -64,7 +64,7 @@ void ShutdownUnitTesting::restore() noexcept
 ////////////////////////////////////////////////////////////////////////////////
 static int preprocess_shutdown_( int exitCode, bool& trueExit ) noexcept
 {
-    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
 
     if ( !testing_ )
     {

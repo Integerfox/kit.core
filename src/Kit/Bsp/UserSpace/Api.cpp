@@ -20,22 +20,22 @@ void Bsp_initialize()
 
 void Bsp_disable_irqs_MAP()
 {
-    Kit::System::PrivateLocks::system().lock();
+    Kit::System::PrivateLocks::systemRecursive().lock();
 }
 
 void Bsp_enable_irqs_MAP()
 {
-    Kit::System::PrivateLocks::system().unlock();
+    Kit::System::PrivateLocks::systemRecursive().unlock();
 }
 
 void Bsp_push_and_disable_irqs_MAP()
 {
-    Kit::System::PrivateLocks::system().lock();
+    Kit::System::PrivateLocks::systemRecursive().lock();
 }
 
 void Bsp_pop_irqs_MAP()
 {
-    Kit::System::PrivateLocks::system().unlock();
+    Kit::System::PrivateLocks::systemRecursive().unlock();
 }
 
 void Bsp_nop_MAP()

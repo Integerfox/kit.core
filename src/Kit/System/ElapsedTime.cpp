@@ -57,7 +57,7 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 ///////////////////////////////////////////////////////////////
 uint32_t ElapsedTime::millisecondsInRealTime() noexcept
 {
-    Kit::System::Mutex::ScopeLock lock( Kit::System::PrivateLocks::system() );
+    Kit::System::BSemaMutex::ScopeLock lock( Kit::System::PrivateLocks::system() );
 
     uint32_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();
     uint32_t delta    = newTime - lastMsec_;

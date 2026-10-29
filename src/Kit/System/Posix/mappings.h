@@ -51,6 +51,20 @@
 /// Mapping
 #define KitSystemSema_T_MAP                     sem_t
 
+/// No native Binary Semaphore in POSIX -->so build one out of a mutex and condition variable
+typedef struct KitSystemPosixBSemaTag
+{
+    ///
+    pthread_mutex_t m_mutex;
+    ///
+    pthread_cond_t  m_cond;
+    ///
+    bool            m_signaled;
+} KitSystemPosixBSema_T;
+
+/// Mapping
+#define KitSystemBSema_T_MAP                    KitSystemPosixBSema_T
+
 
 /// Mapping
 inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()

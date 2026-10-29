@@ -16,6 +16,7 @@
 */
 
 #include "Kit/Text/IString.h"
+#include "Kit/System/BSemaMutex.h"
 #include "Kit/System/Mutex.h"
 #include "Kit/System/Trace.h"
 #include <new>
@@ -65,10 +66,13 @@ class PrivateLocks
 {
 public:
     /// Global mutex for use for interfaces/class in the Kit::System namespace
-    static Mutex& system() noexcept;
+    static BSemaMutex& system() noexcept;
 
-    /// Same as 'system', except usage is for 'long' critical sections (i.e. walking lists, printing, etc.)
-    static Mutex& sysLists() noexcept;
+    /** Same as 'system', except this mutex is REQUIRED to have recursive
+        semantics, i.e. it is for critical sections that can nest and/or that
+        call out to client/application code while holding the lock.
+     */
+    static Mutex& systemRecursive() noexcept;
 
     /** Global mutex for use for tracing sub-system.  This mutex is to protect 
         the Trace engine's internal/meta data.  This mutex is NOT used to guard
@@ -77,7 +81,7 @@ public:
         not cause high priority threads to block on the trace output when their
         trace statements are not enabled at run time.
      */
-    static Mutex& tracing() noexcept;
+    static BSemaMutex& tracing() noexcept;
 
     /// Global mutex for use for the tracing sub-system OUTPUT (see above for more details)
     static Mutex& tracingOutput() noexcept;

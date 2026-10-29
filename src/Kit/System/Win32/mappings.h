@@ -59,6 +59,9 @@
 /// Win32 Mapping
 #define KitSystemSema_T_MAP HANDLE
 
+/// Win32 Mapping. Uses an auto-reset Event because signaling an already-signaled Event is a no-op (i.e. binary semantics)
+#define KitSystemBSema_T_MAP HANDLE
+
 
 /// Win32 Mapping
 inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()

@@ -17,6 +17,7 @@
 
 
 #include <stdint.h>
+#include "Kit/System/RPPico/bsemaphore_t_.h"
 #include "Kit/System/RPPico/mutex_t_.h"
 #include "Kit/System/RPPico/semaphore_t_.h"
 #include "Kit/System/_assert/c_assert.h"
@@ -51,6 +52,9 @@
 
 /// Mapping
 #define KitSystemSema_T_MAP                         Kit::System::RPPico::Semaphore_T
+
+/// Mapping
+#define KitSystemBSema_T_MAP                        Kit::System::RPPico::BSemaphore_T
 
 
 

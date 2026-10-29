@@ -48,12 +48,15 @@
 /// Mapping
 #define KitSystemSema_T_MAP                     SemaphoreHandle_t
 
+/// Mapping
+#define KitSystemBSema_T_MAP                    SemaphoreHandle_t
+
 
 
 /// Mapping
 inline unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
-    return xTaskGetTickCount() / portTICK_PERIOD_MS;
+    return (unsigned long)xTaskGetTickCount() * portTICK_PERIOD_MS;
 }
 
 

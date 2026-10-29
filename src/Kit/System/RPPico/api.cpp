@@ -48,7 +48,7 @@ extern volatile bool g_kitCore1IsRunning;
 void suspendScheduling( void ) noexcept
 {
     // NOTE: The multicore_lockout_xxx() method assume/require that BOTH cores are executing
-    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
     if ( g_kitCore1IsRunning )
     {
         multicore_lockout_start_blocking();
@@ -58,7 +58,7 @@ void suspendScheduling( void ) noexcept
 void resumeScheduling( void ) noexcept
 {
     // NOTE: The multicore_lockout_xxx() method assume/require that BOTH cores are executing
-    Mutex::ScopeLock criticalSection( PrivateLocks::system() );
+    BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
     if ( g_kitCore1IsRunning )
     {
         multicore_lockout_end_blocking();
@@ -66,21 +66,21 @@ void resumeScheduling( void ) noexcept
 }
 
 
-Mutex& PrivateLocks::system( void ) noexcept
+BSemaMutex& PrivateLocks::system( void ) noexcept
 {
-    static NeverDestroyed<Mutex> systemMutex_;
+    static NeverDestroyed<BSemaMutex> systemMutex_;
     return systemMutex_.get();
 }
 
-Mutex& PrivateLocks::sysLists( void ) noexcept
+Mutex& PrivateLocks::systemRecursive( void ) noexcept
 {
-    static NeverDestroyed<Mutex> sysListMutex_;
-    return sysListMutex_.get();
+    static NeverDestroyed<Mutex> systemRecursiveMutex_;
+    return systemRecursiveMutex_.get();
 }
 
-Mutex& PrivateLocks::tracing( void ) noexcept
+BSemaMutex& PrivateLocks::tracing( void ) noexcept
 {
-    static NeverDestroyed<Mutex> tracingMutex_;
+    static NeverDestroyed<BSemaMutex> tracingMutex_;
     return tracingMutex_.get();
 }
 
