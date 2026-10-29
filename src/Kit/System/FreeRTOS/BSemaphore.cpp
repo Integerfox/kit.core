@@ -68,7 +68,7 @@ void BSemaphore::wait() noexcept
 
 bool BSemaphore::timedWait( uint32_t timeoutMs ) noexcept
 {
-    return xSemaphoreTake( m_sema, pdMS_TO_TICKS( timeoutMs ) ) == pdTRUE;
+    return xSemaphoreTake( m_sema, KitSystemFreeRTOS_msecToTicks( timeoutMs ) ) == pdTRUE;
 }
 
 
@@ -86,7 +86,7 @@ void BSemaphore::waitInRealTime() noexcept
 
 bool BSemaphore::timedWaitInRealTime( uint32_t timeoutMs ) noexcept
 {
-    return xSemaphoreTake( m_sema, pdMS_TO_TICKS( timeoutMs ) ) == pdTRUE;
+    return xSemaphoreTake( m_sema, KitSystemFreeRTOS_msecToTicks( timeoutMs ) ) == pdTRUE;
 }
 
 }  // end namespaces

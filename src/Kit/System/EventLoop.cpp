@@ -87,8 +87,9 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
     }
     else
     {
-        // Balance one wakeup for work being processed without blocking. This
-        // prevents queued-message chains from leaving stale semaphore counts.
+        // Consume the pending wake-up: the work it refers to is being processed
+        // by this pass, so leaving it set would make the next blocking wait
+        // return immediately for work that is already done.
         m_sema.tryWait();
     }
 

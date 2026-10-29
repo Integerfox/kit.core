@@ -20,6 +20,7 @@
 #include "semphr.h"
 #include "task.h"
 #include "Kit/System/_assert/c_assert.h"
+#include <stdint.h>
 
 // PRETTY_FUNCTION macro is non-standard
 #if defined(__GNUC__)
@@ -53,10 +54,35 @@
 
 
 
-/// Mapping
-inline unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()
+/** Converts RTOS ticks to milliseconds.
+
+    NOTE: Deliberately does NOT use portTICK_PERIOD_MS.  That macro is an integer
+          division (1000/configTICK_RATE_HZ) and is therefore lossy - or zero -
+          for any tick rate that does not divide evenly into 1000.
+ */
+inline uint32_t KitSystemFreeRTOS_ticksToMsec( TickType_t ticks )
 {
-    return (unsigned long)xTaskGetTickCount() * portTICK_PERIOD_MS;
+    return (uint32_t)( ( (uint64_t)ticks * 1000U ) / configTICK_RATE_HZ );
+}
+
+/** Converts milliseconds to RTOS ticks.
+
+    Replaces pdMS_TO_TICKS() because that macro:
+      o Truncates toward zero, so any delay shorter than one tick becomes
+        vTaskDelay(0) - which neither blocks NOR yields.  Rounding UP guarantees
+        a non-zero delay always yields for at least one tick.
+      o Does its multiply in TickType_t, so it wraps for large millisecond values.
+ */
+inline TickType_t KitSystemFreeRTOS_msecToTicks( uint32_t msec )
+{
+    return (TickType_t)( ( ( (uint64_t)msec * configTICK_RATE_HZ ) + 999U ) / 1000U );
+}
+
+/// Mapping
+inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
+{
+    // The 32 bit roll-over is by design -->ElapsedTime::deltaMilliseconds() relies on it
+    return KitSystemFreeRTOS_ticksToMsec( xTaskGetTickCount() );
 }
 
 

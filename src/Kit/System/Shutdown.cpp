@@ -26,7 +26,7 @@ static Kit::Container::SList<Shutdown::IHandler> callbacks_( "invoke_special_sta
 ///////////////////////
 void Shutdown::registerHandler( Shutdown::IHandler& instanceToRegister ) noexcept
 {
-    BSemaMutex::ScopeLock lock( PrivateLocks::system() );
+    Mutex::ScopeLock lock( PrivateLocks::system() );
     callbacks_.push( instanceToRegister );
 }
 

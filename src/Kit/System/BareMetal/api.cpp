@@ -64,19 +64,19 @@ void resumeScheduling() noexcept
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-BSemaMutex& PrivateLocks::system() noexcept
+Mutex& PrivateLocks::system() noexcept
 {
-    static NeverDestroyed<BSemaMutex> systemMutex_;
-    return systemMutex_.get();
+    static NeverDestroyed<Mutex> theNullMutex_;
+    return theNullMutex_.get();
 }
 
-BSemaMutex& PrivateLocks::tracing() noexcept
+Mutex& PrivateLocks::tracing() noexcept
 {
-    static NeverDestroyed<BSemaMutex> tracingMutex_;
-    return tracingMutex_.get();
+    static NeverDestroyed<Mutex> theNullMutex_;
+    return theNullMutex_.get();
 }
 
-Mutex& PrivateLocks::systemRecursive() noexcept
+Mutex& PrivateLocks::sysLists() noexcept
 {
     static NeverDestroyed<Mutex> theNullMutex_;
     return theNullMutex_.get();

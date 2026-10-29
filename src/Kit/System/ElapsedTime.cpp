@@ -16,7 +16,6 @@
 
 #include "PrivateElapsedTime.h"
 #include "ElapsedTime.h"
-#include "Private.h"
 #include "PrivateStartup.h"
 #include <stdlib.h>
 
@@ -25,8 +24,18 @@
 namespace Kit {
 namespace System {
 
-static uint32_t elapsedMsec_;
-static uint32_t lastMsec_;
+/* NO LOCK. This method is called on every pass of every event loop, including
+   by threads that already hold an application mutex.  Nesting the KIT system
+   mutex inside an application mutex chains the two priority-inheritance scopes
+   together, which boosts/holds priorities far longer than the application
+   intended.
+
+   No lock is needed because 'startMsec_' is written once, during start-up,
+   before any other thread exists -->the method below is a read plus an unsigned
+   subtraction.  The 32 bit roll-over is by design: deltaMilliseconds() relies
+   on it.
+ */
+static uint32_t startMsec_;
 
 // an anonymous namespace for internal linkage
 namespace {
@@ -44,8 +53,7 @@ protected:
     ///
     void notify( InitLevel init_level ) noexcept override
     {
-        elapsedMsec_ = 0;
-        lastMsec_    = KitSystemElapsedTime_getTimeInMilliseconds();
+        startMsec_ = KitSystemElapsedTime_getTimeInMilliseconds();
     }
 };
 }  // end anonymous namespace
@@ -57,13 +65,7 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 ///////////////////////////////////////////////////////////////
 uint32_t ElapsedTime::millisecondsInRealTime() noexcept
 {
-    Kit::System::BSemaMutex::ScopeLock lock( Kit::System::PrivateLocks::system() );
-
-    uint32_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();
-    uint32_t delta    = newTime - lastMsec_;
-    lastMsec_         = newTime;
-    elapsedMsec_     += delta;
-    return elapsedMsec_;
+    return KitSystemElapsedTime_getTimeInMilliseconds() - startMsec_;
 }
 
 } // end namespaces

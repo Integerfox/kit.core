@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Kit/System/_0test/timercommon.h"
+#include "Kit/System/BSemaphore.h"
 #include "Kit/System/SimTick.h"
 
 
@@ -265,9 +266,100 @@ public:
     }
 };
 
-class Lister : public Thread::ITraverser
+/// Exercises the simulated-tick BSemaphore wait paths
+class BSemaWaiter : public IRunnable
 {
 public:
+    ///
+    BSemaphore& m_sema;
+    /// Result of a timedWait() that is expected to expire
+    bool m_timedOutResult;
+    /// Elapsed (simulated) time of the expired timedWait()
+    uint32_t m_delta1;
+    /// Result of a timedWait() on an already signaled semaphore
+    bool m_preSignaledResult;
+    /// Elapsed (simulated) time of the already-signaled timedWait()
+    uint32_t m_delta2;
+    /// Result of the 2nd tryWait() after three signals (binary semantics)
+    bool m_saturated;
+    /// Set once the blocking wait() has been satisfied
+    bool m_waitCompleted;
+
+public:
+    ///
+    BSemaWaiter( BSemaphore& sema )
+        : m_sema( sema )
+        , m_timedOutResult( true )
+        , m_delta1( 0 )
+        , m_preSignaledResult( false )
+        , m_delta2( 0 )
+        , m_saturated( true )
+        , m_waitCompleted( false )
+    {
+    }
+
+public:
+    ///
+    void entry() noexcept override
+    {
+        KIT_SYSTEM_TRACE_SCOPE( SECT_, Thread::getCurrent().getName() );
+
+        // Drives the simulated-tick count down loop in BSemaphore::timedWait()
+        KIT_SYSTEM_TRACE_MSG( SECT_, "BSemaphore timed wait test1 (timeout occurs)..." );
+        uint32_t start   = ElapsedTime::milliseconds();
+        m_timedOutResult = m_sema.timedWait( 333 );  // Should be false
+        m_delta1         = ElapsedTime::deltaMilliseconds( start );
+
+        KIT_SYSTEM_TRACE_MSG( SECT_, "BSemaphore timed wait test2 (no timeout)..." );
+        m_sema.signal();
+        start               = ElapsedTime::milliseconds();
+        m_preSignaledResult = m_sema.timedWait( 1000 );  // Should be true
+        m_delta2            = ElapsedTime::deltaMilliseconds( start );
+
+        // Binary semantics must still hold when using simulated time
+        m_sema.signal();
+        m_sema.signal();
+        m_sema.signal();
+        m_sema.tryWait();
+        m_saturated = m_sema.tryWait();  // Should be false
+
+        // Exercises SimTick::applicationWait() via BSemaphore::wait()
+        KIT_SYSTEM_TRACE_MSG( SECT_, "BSemaphore blocking wait (waiting to be signaled)..." );
+        m_sema.wait();
+        m_waitCompleted = true;
+        KIT_SYSTEM_TRACE_MSG( SECT_, "BSemaphore blocking wait DONE" );
+    }
+};
+
+/// Signals a BSemaphore after a simulated delay
+class BSemaSignaler : public IRunnable
+{
+public:
+    ///
+    BSemaphore& m_sema;
+    ///
+    uint32_t m_delayMs;
+
+public:
+    ///
+    BSemaSignaler( BSemaphore& sema, uint32_t delayMs )
+        : m_sema( sema )
+        , m_delayMs( delayMs )
+    {
+    }
+
+public:
+    ///
+    void entry() noexcept override
+    {
+        KIT_SYSTEM_TRACE_SCOPE( SECT_, Thread::getCurrent().getName() );
+        sleep( m_delayMs );
+        m_sema.signal();
+    }
+};
+
+class Lister : public Thread::ITraverser
+{public:
     ///
     bool m_foundApple;
     bool m_foundOrange;
@@ -547,6 +639,60 @@ TEST_CASE( "simbasic" )
     REQUIRE( cherryRun.m_delta3 >= 40 );
     REQUIRE( cherryRun.m_delta4 >= 333 );
     REQUIRE( cherryRun.m_delta5 < 200 );
+
+    REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+TEST_CASE( "simbsemaphore" )
+{
+    KIT_SYSTEM_TRACE_FUNC( SECT_ );
+    ShutdownUnitTesting::clearAndUseCounter();
+
+    // This thread is NOT a simulated-tick thread -->exercises the 'real time' branches
+    BSemaphore realTimeSema;
+    REQUIRE( realTimeSema.timedWait( 1 ) == false );
+    realTimeSema.signal();
+    realTimeSema.wait();
+    REQUIRE( realTimeSema.tryWait() == false );
+
+    BSemaphore  sema;
+    BSemaWaiter waiterRun( sema );
+    Thread*     waiterThreadPtr = Thread::create( waiterRun, "BSemaWaiter", KIT_SYSTEM_THREAD_PRIORITY_NORMAL );
+    REQUIRE( waiterThreadPtr != nullptr );
+
+    // The delay MUST be longer than the waiter's 333ms timeout test so that the
+    // signal cannot be consumed by the binary-semantics checks that precede wait()
+    BSemaSignaler signalerRun( sema, 600 );
+    Thread*       signalerThreadPtr = Thread::create( signalerRun, "BSemaSignaler", KIT_SYSTEM_THREAD_PRIORITY_NORMAL );
+    REQUIRE( signalerThreadPtr != nullptr );
+
+    sleepInRealTime( 500 );  // Give time to ensure both threads are active
+
+    // Advance simulated time until both threads self terminate
+    while ( waiterThreadPtr->isActive() || signalerThreadPtr->isActive() )
+    {
+        if ( !SimTick::advance( OPTION_KIT_SYSTEM_SIM_TICK_MIN_TICKS_FOR_ADVANCE ) )
+        {
+            KIT_SYSTEM_TRACE_MSG( SECT_, "EXITED tick loop early (waiting on BSemaphore threads)" );
+            break;
+        }
+        sleepInRealTime( 10 );  // 1ms is ineffectual - Windows/Linux scheduler/timer granularity is ~10-15ms
+    }
+
+    KIT_SYSTEM_TRACE_MSG( SECT_, "ALL simulated ticks completed.  [SimTime=%" PRIu64 "]", SimTick::current() );
+    REQUIRE( waiterThreadPtr->isActive() == false );
+    REQUIRE( signalerThreadPtr->isActive() == false );
+
+    Thread::destroy( *waiterThreadPtr );
+    Thread::destroy( *signalerThreadPtr );
+
+    REQUIRE( waiterRun.m_timedOutResult == false );
+    REQUIRE( waiterRun.m_delta1 >= 333 );
+    REQUIRE( waiterRun.m_preSignaledResult == true );
+    REQUIRE( waiterRun.m_delta2 < 50 );
+    REQUIRE( waiterRun.m_saturated == false );
+    REQUIRE( waiterRun.m_waitCompleted == true );
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

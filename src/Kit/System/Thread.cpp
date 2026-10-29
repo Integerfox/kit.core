@@ -61,7 +61,7 @@ Thread& Thread::getCurrent() noexcept
 bool Thread::isActiveThread( Thread* threadPtr ) noexcept
 {
     // NOTE: I have to walk the list of active threads because 'threadPtr' may or may not be valid Thread pointer
-    Mutex::ScopeLock lock( PrivateLocks::systemRecursive() );
+    Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     Thread*          ptr = threadList_.first();
     while ( ptr )
     {
@@ -76,13 +76,13 @@ bool Thread::isActiveThread( Thread* threadPtr ) noexcept
 
 void Thread::addThreadToActiveList( Thread& thread ) noexcept
 {
-    Mutex::ScopeLock lock( PrivateLocks::systemRecursive() );
+    Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     threadList_.put( thread );
 }
 
 void Thread::removeThreadFromActiveList( Thread& thread ) noexcept
 {
-    Mutex::ScopeLock lock( PrivateLocks::systemRecursive() );
+    Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     threadList_.remove( thread );
 }
 
@@ -104,7 +104,7 @@ void Thread::launchRunnable( Thread& threadHdl ) noexcept
 
 void Thread::traverse( Thread::ITraverser& client ) noexcept
 {
-    Mutex::ScopeLock lock( PrivateLocks::systemRecursive() );
+    Mutex::ScopeLock lock( PrivateLocks::sysLists() );
     Thread*          t = threadList_.first();
     while ( t )
     {

@@ -110,9 +110,6 @@ private:
 
     /// Friends(s)
     friend class SimTick;
-
-    /// Friend so that a mutex acquisition is not treated as a simulated-tick 'application wait'
-    friend class BSemaMutex;
 };
 
 

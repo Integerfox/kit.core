@@ -195,7 +195,7 @@ bool Kit::System::Thread::tryWait() noexcept
 
 bool Kit::System::Thread::timedWait( uint32_t msecs ) noexcept
 {
-    return ulTaskNotifyTake( pdFALSE, pdMS_TO_TICKS(msecs) ) > 0;
+    return ulTaskNotifyTake( pdFALSE, KitSystemFreeRTOS_msecToTicks( msecs ) ) > 0;
 }
 
 

@@ -11,11 +11,11 @@
 /** @file */
 
 #include "kit_config.h"
+#include "Kit/System/BSemaphore.h"
 #include "Kit/System/IEventFlag.h"
 #include "Kit/System/IRunnable.h"
 #include "Kit/System/ISignable.h"
 #include "Kit/System/IEventManager.h"
-#include "Kit/System/Semaphore.h"
 #include "Kit/System/TimerManager.h"
 #include "Kit/System/IWatchedEventLoop.h"
 #include <atomic>
@@ -45,7 +45,13 @@ namespace System {
     Child classes can be used to extend the 'event processing' to include other
     types of events, e.g. Inter-Thread-Communication messaging.
 
-    NOTE: The EventLoop does NOT use/consume the Thread Semaphore.
+    NOTES:
+        o The EventLoop does NOT use/consume the Thread Semaphore.
+        o The EventLoop Semaphore is a BINARY semaphore, i.e. it is a "there is
+          work to do" flag, NOT a work counter.  Child classes that extend the
+          event processing MUST report their outstanding work via the 'skipWait'
+          argument to waitAndProcessEvents() - they can NOT rely on one wake-up
+          per signal() call.
  */
 class EventLoop : virtual public IRunnable, virtual public IEventManager, virtual public ISignable, public TimerManager
 {
@@ -174,7 +180,7 @@ public:
 
 protected:
     /// Semaphore associated with the EventLoop (note: the Thread semaphore is NOT used)
-    Semaphore m_sema;
+    BSemaphore m_sema;
 
     /// List of Event Flags that the Event Loop monitors (can be null)
     Kit::Container::SList<IEventFlag>* m_eventList;

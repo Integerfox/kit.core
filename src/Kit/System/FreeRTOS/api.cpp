@@ -53,12 +53,12 @@ bool isSchedulingEnabled() noexcept
 
 void sleep( uint32_t milliseconds ) noexcept
 {
-    vTaskDelay( pdMS_TO_TICKS( milliseconds ) );
+    vTaskDelay( KitSystemFreeRTOS_msecToTicks( milliseconds ) );
 }
 
 void sleepInRealTime( uint32_t milliseconds ) noexcept
 {
-    vTaskDelay( pdMS_TO_TICKS( milliseconds ) );
+    vTaskDelay( KitSystemFreeRTOS_msecToTicks( milliseconds ) );
 }
 
 
@@ -73,23 +73,23 @@ void resumeScheduling() noexcept
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-BSemaMutex& PrivateLocks::system() noexcept
+Mutex& PrivateLocks::system() noexcept
 {
-    static NeverDestroyed<BSemaMutex> systemMutex_;
+    static NeverDestroyed<Mutex> systemMutex_;
     return systemMutex_.get();
 }
 
 
-BSemaMutex& PrivateLocks::tracing() noexcept
+Mutex& PrivateLocks::tracing() noexcept
 {
-    static NeverDestroyed<BSemaMutex> tracingMutex_;
+    static NeverDestroyed<Mutex> tracingMutex_;
     return tracingMutex_.get();
 }
 
-Mutex& PrivateLocks::systemRecursive() noexcept
+Mutex& PrivateLocks::sysLists() noexcept
 {
-    static NeverDestroyed<Mutex> systemRecursiveMutex_;
-    return systemRecursiveMutex_.get();
+    static NeverDestroyed<Mutex> sysList_;
+    return sysList_.get();
 }
 
 Mutex& PrivateLocks::tracingOutput() noexcept

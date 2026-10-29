@@ -237,7 +237,7 @@ Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
         threads_[1]->m_runnable = &runnable;
         if ( schedulingEnabled_ )
         {
-            BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
+            Mutex::ScopeLock criticalSection( PrivateLocks::system() );
             g_kitCore1IsRunning = true;
             launchCore1();
         }
@@ -271,7 +271,7 @@ void Kit::System::Thread::destroy( Thread& threadToDestroy, uint32_t delayTimeMs
             //       that it is ok to die - i.e. it has released all of its acquired
             //       resources: mutexes, semaphores, file handles, etc.
             {
-                BSemaMutex::ScopeLock criticalSection( PrivateLocks::system() );
+                Mutex::ScopeLock criticalSection( PrivateLocks::system() );
                 g_kitCore1IsRunning = false;
                 multicore_reset_core1();
             }

@@ -25,6 +25,9 @@ using namespace Kit::System;
 /// semaphore timeout are not guaranteed to share the same timing source
 #define TIMING_TOLERANCE_MS_ 2
 
+/// Upper bound (in msec) for a wait that is expected to return immediately
+#define NO_WAIT_MAX_MS_ 50
+
 
 ////////////////////////////////////////////////////////////////////////////////
 namespace {
@@ -147,7 +150,7 @@ TEST_CASE( "bsemaphore" )
         BSemaphore sema( true );
         uint32_t   start = ElapsedTime::milliseconds();
         REQUIRE( sema.timedWait( 1000 ) == true );
-        REQUIRE( ElapsedTime::deltaMilliseconds( start ) < 100 );
+        REQUIRE( ElapsedTime::deltaMilliseconds( start ) < NO_WAIT_MAX_MS_ );
 
         // The signal was consumed -->the next wait must time out
         REQUIRE( sema.timedWait( 50 ) == false );
@@ -164,7 +167,9 @@ TEST_CASE( "bsemaphore" )
         REQUIRE( sema.timedWait( 5000 ) == true );
         REQUIRE( ElapsedTime::deltaMilliseconds( start ) >= 100 - TIMING_TOLERANCE_MS_ );
 
-        Thread::destroy( *signalerPtr, 100 );  // Allow time for the Signaler thread to self terminate
+        sleep( 300 );  // Allow time for the Signaler thread to self terminate
+        REQUIRE( signalerPtr->isActive() == false );
+        Thread::destroy( *signalerPtr );
     }
 
     SECTION( "wait - signaled by another thread" )
@@ -184,7 +189,9 @@ TEST_CASE( "bsemaphore" )
             REQUIRE( waiterRun.m_loops == i );
         }
 
-        Thread::destroy( *waiterPtr, 100 );  // Allow time for the Waiter thread to self terminate
+        sleep( 300 );  // Allow time for the Waiter thread to self terminate
+        REQUIRE( waiterPtr->isActive() == false );
+        Thread::destroy( *waiterPtr );
     }
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

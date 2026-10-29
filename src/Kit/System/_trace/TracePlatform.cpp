@@ -26,14 +26,14 @@ static Kit::Io::IOutput* activePtr_ = Trace::getDefaultOutputStream_();
 
 void Trace::redirect_( Kit::Io::IOutput& newMedia ) noexcept
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     activePtr_ = &newMedia;
 }
 
 
 void Trace::revert_() noexcept
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     activePtr_ = getDefaultOutputStream_();
 }
 

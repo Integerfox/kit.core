@@ -102,21 +102,21 @@ void Trace::traceUserMsg_( const char* format, ... )
 ////////////////////////////////////////////////////////////////////////
 void Trace::enable_()
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     enabled_ = true;
 }
 
 
 void Trace::disable_()
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     enabled_ = false;
 }
 
 
 bool Trace::isEnabled_()
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     bool             result = enabled_;
     return result;
 }
@@ -124,7 +124,7 @@ bool Trace::isEnabled_()
 
 TraceLevel Trace::setInfoLevel_( TraceLevel newLevel )
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     TraceLevel       previous = infoLevel_;
     infoLevel_                = newLevel;
     return previous;
@@ -132,7 +132,7 @@ TraceLevel Trace::setInfoLevel_( TraceLevel newLevel )
 
 TraceLevel Trace::getInfoLevel_() noexcept
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     TraceLevel       current = infoLevel_;
     return current;
 }
@@ -142,7 +142,7 @@ bool Trace::enableSection_( const char* sectionToEnable )
     bool result = false;
     if ( sectionToEnable )
     {
-        BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+        Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
 
         int i;
         for ( i = 0; i < OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS; i++ )
@@ -161,7 +161,7 @@ bool Trace::enableSection_( const char* sectionToEnable )
 
 void Trace::disableSection_( const char* sectionToDisable )
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
 
     // Disable all sections
     if ( sectionToDisable == 0 )
@@ -195,7 +195,7 @@ bool Trace::isSectionEnabled_( const char* section )
         return false;
     }
 
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
 
     bool result = false;
     if ( enabled_ )
@@ -237,7 +237,7 @@ unsigned Trace::getSections_( Kit::Text::IString& dst )
     unsigned count = 0;
     dst.clear();
 
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     int              i;
     for ( i = 0; i < OPTION_KIT_SYSTEM_TRACE_MAX_SECTIONS; i++ )
     {
@@ -262,7 +262,7 @@ void Trace::setThreadFilter_( const char* threadName1,
                               const char* threadName3,
                               const char* threadName4 )
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
 
     // Set filter to: ACTIVE
     threadFilterEnabled_ = true;
@@ -276,7 +276,7 @@ void Trace::setThreadFilter_( const char* threadName1,
 
 void Trace::clearThreadFilter_()
 {
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     threadFilterEnabled_ = false;
 
     // Clear  filter table
@@ -293,7 +293,7 @@ unsigned Trace::getThreadFilters_( Kit::Text::IString& dst )
     unsigned count = 0;
     dst.clear();
 
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     int              i;
     for ( i = 0; i < NUM_THREAD_FILTERS_; i++ )
     {
@@ -324,7 +324,7 @@ bool Trace::passedThreadFilter_()
     }
 
     bool             result = true;
-    BSemaMutex::ScopeLock criticalSection( PrivateLocks::tracing() );
+    Mutex::ScopeLock criticalSection( PrivateLocks::tracing() );
     if ( threadFilterEnabled_ && threadNameToTest )
     {
         int i;
