@@ -20,6 +20,7 @@
 #include "semphr.h"
 #include "task.h"
 #include "Kit/System/_assert/c_assert.h"
+#include <stdint.h>
 
 // PRETTY_FUNCTION macro is non-standard
 #if defined(__GNUC__)
@@ -48,12 +49,54 @@
 /// Mapping
 #define KitSystemSema_T_MAP                     SemaphoreHandle_t
 
+/// Mapping
+#define KitSystemBSema_T_MAP                    SemaphoreHandle_t
 
+
+
+/* Kit/System/PrivateElapsedTime.h requires a millisecond counter that rolls over
+   modulo 2^32.  Deriving that counter from the FreeRTOS tick counter only preserves
+   the property when the tick period is a whole number of milliseconds: the derived
+   value is then ticks*(1000/configTICK_RATE_HZ), whose 32 bit truncation rolls over
+   cleanly.  For any other tick rate the tick counter's own 2^32 roll-over lands
+   mid-range in the millisecond counter and ElapsedTime::deltaMilliseconds() reports
+   a bogus multi-day delta once every tick-counter wrap.
+ */
+static_assert( ( 1000U % configTICK_RATE_HZ ) == 0U,
+               "configTICK_RATE_HZ must divide 1000 evenly (e.g. 1000, 500, 250, 200, 125, 100)" );
+
+/** Converts RTOS ticks to milliseconds.
+
+    NOTE: Deliberately does NOT use portTICK_PERIOD_MS.  That macro is an integer
+          division (1000/configTICK_RATE_HZ) and is therefore lossy - or zero -
+          for any tick rate that does not divide evenly into 1000.
+
+    NOTE: The 32 bit truncation is intentional - see the static_assert above.
+ */
+inline uint32_t KitSystemFreeRTOS_ticksToMsec( TickType_t ticks )
+{
+    return (uint32_t)( ( (uint64_t)ticks * 1000U ) / configTICK_RATE_HZ );
+}
+
+/** Converts milliseconds to RTOS ticks.
+
+    Replaces pdMS_TO_TICKS() because that macro:
+      o Truncates toward zero, so any delay shorter than one tick becomes
+        vTaskDelay(0) - which neither blocks NOR yields.  Rounding UP guarantees
+        a non-zero delay always yields for at least one tick.
+      o Does its multiply in TickType_t, so it wraps for large millisecond values.
+ */
+inline TickType_t KitSystemFreeRTOS_msecToTicks( uint32_t msec )
+{
+    return (TickType_t)( ( ( (uint64_t)msec * configTICK_RATE_HZ ) + 999U ) / 1000U );
+}
 
 /// Mapping
-inline unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()
+inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
-    return xTaskGetTickCount() / portTICK_PERIOD_MS;
+    // The 32 bit roll-over is by design -->ElapsedTime::deltaMilliseconds() relies on it
+    // (guaranteed by the configTICK_RATE_HZ static_assert above)
+    return KitSystemFreeRTOS_ticksToMsec( xTaskGetTickCount() );
 }
 
 

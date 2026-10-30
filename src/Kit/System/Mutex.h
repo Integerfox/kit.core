@@ -27,6 +27,9 @@ namespace System {
     mutex to acquire ownership multiple times by calling lock() multiple times.
     There must be a corresponding number of unlock() calls made before the
     ownership of the mutex is released.
+
+    NOTE: With respect to Priority Inheritance, the behavior is platform specific
+          and may not be supported on all platforms.
  */
 class Mutex
 {

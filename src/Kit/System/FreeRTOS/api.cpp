@@ -53,12 +53,12 @@ bool isSchedulingEnabled() noexcept
 
 void sleep( uint32_t milliseconds ) noexcept
 {
-    vTaskDelay( pdMS_TO_TICKS( milliseconds ) );
+    vTaskDelay( KitSystemFreeRTOS_msecToTicks( milliseconds ) );
 }
 
 void sleepInRealTime( uint32_t milliseconds ) noexcept
 {
-    vTaskDelay( pdMS_TO_TICKS( milliseconds ) );
+    vTaskDelay( KitSystemFreeRTOS_msecToTicks( milliseconds ) );
 }
 
 

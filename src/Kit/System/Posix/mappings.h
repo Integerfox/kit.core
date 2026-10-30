@@ -51,6 +51,14 @@
 /// Mapping
 #define KitSystemSema_T_MAP                     sem_t
 
+/** Mapping.  POSIX has no native Binary Semaphore.  A counting sem_t is used -
+    instead of a mutex/condition-variable pair - because sem_post() is the only
+    semaphore operation that POSIX requires to be async-signal-safe (see
+    su_signal()).  The binary (saturate at one) semantics are provided by draining
+    the count when it is consumed.
+ */
+#define KitSystemBSema_T_MAP                    sem_t
+
 
 /// Mapping
 inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()

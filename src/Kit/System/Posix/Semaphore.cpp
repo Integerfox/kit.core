@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Kit/System/Semaphore.h"
+#include "Kit/System/Posix/semwait_.h"
 #include <errno.h>
 
 
@@ -55,24 +56,7 @@ void Semaphore::waitInRealTime() noexcept
 
 bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
 {
-    // Convert milliseconds to the nanosleep time spec
-    static const long nsec2msec = 1000000;
-    static const long msec2sec  = 1000;
-    time_t            sec       = timeout / msec2sec;
-    long              nsec      = (timeout % msec2sec)*nsec2msec;
-
-    struct timespec ts;
-    clock_gettime( CLOCK_REALTIME, &ts );
-    ts.tv_sec  += sec;
-    ts.tv_nsec += nsec;
-    if ( ts.tv_nsec > 999999999 )
-    {
-        ts.tv_nsec -= 1000000000;
-        ts.tv_sec++;
-    }
-
-    int result = sem_timedwait( &m_sema, &ts );
-    return result == -1 && errno == ETIMEDOUT ? false : true;
+    return Posix::semTimedWait_( m_sema, timeout );
 }
 
 } // end namespaces

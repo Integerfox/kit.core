@@ -12,7 +12,9 @@
 
 #include "kit_map.h"
 
-/** Platform specific function returns the elapsed time in milliseconds
+/** Platform specific function returns the elapsed time in milliseconds.  The
+    operation MUST be an atomic capture of the elapsed time.
+
    
     \b Prototype:
         uint32_t KitSystemElapsedTime_getTimeInMilliseconds();

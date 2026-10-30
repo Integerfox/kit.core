@@ -15,7 +15,7 @@
 
 #include "PrivateElapsedTime.h"
 #include "ElapsedTime.h"
-#include "Private.h"
+#include "GlobalLock.h"
 #include "PrivateStartup.h"
 #include <stdlib.h>
 
@@ -25,7 +25,7 @@ namespace Kit {
 namespace System {
 
 static uint64_t elapsedMsec_;
-static uint64_t lastMsec_;
+static uint32_t lastMsec_;
 
 // an anonymous namespace for internal linkage
 namespace {
@@ -55,15 +55,27 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 
 ///////////////////////////////////////////////////////////////
+/* A GlobalLock - instead of the KIT system mutex - is used to guard the 32-to-64
+   bit extension.  On an RTOS/bare-metal target a GlobalLock is a critical section:
+   a handful of instructions that never block and never alter thread priorities.
+   The system mutex here would nest inside whatever application mutex the caller
+   already holds, chaining their priority-inheritance scopes together.  On a Host
+   platform a GlobalLock is a recursive Mutex -->this method is re-entrant there.
+
+   See Kit/System/ElapsedTime.h for the full set of caller constraints.
+ */
 uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept
 {
-    Kit::System::Mutex::ScopeLock lock( Kit::System::PrivateLocks::system() );
+    GlobalLock::begin();
 
-    uint64_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();
-    uint64_t delta    = newTime - lastMsec_;
+    // The delta is computed in 32 bits so that the unsigned roll-over yields the true delta
+    uint32_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();
+    elapsedMsec_     += newTime - lastMsec_;
     lastMsec_         = newTime;
-    elapsedMsec_     += delta;
-    return elapsedMsec_;
+    uint64_t result   = elapsedMsec_;
+
+    GlobalLock::end();
+    return result;
 }
 
 
