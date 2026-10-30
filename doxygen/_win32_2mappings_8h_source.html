@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 430-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -108,38 +108,41 @@ $(function() {
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment"></span> </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">/// Win32 Mapping</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#a2996c19bfe4f8126d7b03791b66e1814">   60</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemSema_T_MAP HANDLE</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"></span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">/// Win32 Mapping</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#ae24fc1f424dfd48b51a1951b19ee93d4">   64</a></span><span class="comment"></span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="_bare_metal_2mappings_8h.html#a03b3792a5ae4e8f98f7adc2fc85c8104">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a>()</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>{</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordflow">return</span> (uint32_t)clock();</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">/// Thread Priorities</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#aa9cca7c78fe6160f6743bf8ef3f3ba06">   71</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP 15</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"></span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">/// Win32 Mapping. Uses an auto-reset Event because signaling an already-signaled Event is a no-op (i.e. binary semantics)</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#a94f29c1e34c9fac6a59bc8f6e71596af">   63</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemBSema_T_MAP HANDLE</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"></span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">/// Win32 Mapping</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#ae24fc1f424dfd48b51a1951b19ee93d4">   67</a></span><span class="comment"></span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="_bare_metal_2mappings_8h.html#ae24fc1f424dfd48b51a1951b19ee93d4">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a>()</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> (uint32_t)clock();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"></span> </div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">/// Thread Priorities</span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#ab1d710fbdf092dc6f541c35f7001faa1">   74</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP 0</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#aa9cca7c78fe6160f6743bf8ef3f3ba06">   74</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP 15</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"></span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">/// Thread Priorities</span></div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#a7429a04147a6025a29cf917352d3c906">   77</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP -15</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#ab1d710fbdf092dc6f541c35f7001faa1">   77</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP 0</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"></span> </div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">/// Thread Priorities</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#aa3821460130f63639c1c9d1295746d36">   80</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP ( +1 )</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#a7429a04147a6025a29cf917352d3c906">   80</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP -15</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">/// Thread Priorities</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#ab6febf1f6032519ac645efde0172a539">   83</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP ( -1 )</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
-<div class="ttc" id="a_bare_metal_2mappings_8h_html_a03b3792a5ae4e8f98f7adc2fc85c8104"><div class="ttname"><a href="_bare_metal_2mappings_8h.html#a03b3792a5ae4e8f98f7adc2fc85c8104">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a></div><div class="ttdeci">unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()</div><div class="ttdoc">Mapping.</div><div class="ttdef"><b>Definition</b> mappings.h:50</div></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#aa3821460130f63639c1c9d1295746d36">   83</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP ( +1 )</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">/// Thread Priorities</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="_win32_2mappings_8h.html#ab6febf1f6032519ac645efde0172a539">   86</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP ( -1 )</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="ttc" id="a_bare_metal_2mappings_8h_html_ae24fc1f424dfd48b51a1951b19ee93d4"><div class="ttname"><a href="_bare_metal_2mappings_8h.html#ae24fc1f424dfd48b51a1951b19ee93d4">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a></div><div class="ttdeci">uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()</div><div class="ttdoc">Mapping.</div><div class="ttdef"><b>Definition</b> mappings.h:53</div></div>
 <div class="ttc" id="a_fatal_error_8h_html"><div class="ttname"><a href="_fatal_error_8h.html">FatalError.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 17:48:37 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Oct 30 2026 14:11:16 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

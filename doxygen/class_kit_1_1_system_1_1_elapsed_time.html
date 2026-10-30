@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 430-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -115,8 +115,22 @@ Static Public Member Functions</h2></td></tr>
 <li>The default 'API' that uses uint32_t to represent elapsed time. The 32bit counter rolls over after 49.7 days.</li>
 <li>Extended 'API' that uses a 64bit data type to represent elapsed time. The 64bit counter rolls over after 584 million years.</li>
 </ol>
-<p>NOTE: The two APIs share the same underlying timing source, i.e. the returned values are 'in-sync' </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p>NOTES: </p><pre class="fragment">o The two APIs share the same underlying timing source, i.e. the
+  returned values are 'in-sync'
+o The ENTIRE interface can ONLY be called from a thread context.  It is
+  NOT safe to call from an ISR or supervisor context.
+o The 32bit methods are lock free.
+o The 64bit (i.e. 'Ex') methods take a GlobalLock to guard the 32-to-64
+  bit extension.  On an RTOS/bare-metal target a GlobalLock is a
+  non-nestable critical section (it unconditionally re-enables
+  interrupts on exit) --&gt;the 'Ex' methods MUST NOT be called from
+  inside another GlobalLock critical section.
+o On a Host platform a GlobalLock is a recursive Mutex --&gt;ALL of the
+  methods are re-entrant.
+o The 64bit methods MUST be called at least once per roll-over of the
+  32bit counter (i.e. at least once every 49.7 days) or elapsed time is
+  silently lost.
+</pre> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a375f4152af213b18187d2a4bf4d5edaa" name="a375f4152af213b18187d2a4bf4d5edaa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a375f4152af213b18187d2a4bf4d5edaa">&#9670;&#160;</a></span>deltaMilliseconds()</h2>
 
@@ -623,7 +637,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 17:48:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Oct 30 2026 14:11:17 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -31,18 +31,18 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">27</td>
-            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntryHi">88.9&nbsp;%</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">16</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-27 17:56:23</td>
+            <td class="headerValue">2026-10-30 14:19:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">80.0&nbsp;%</td>
-            <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -71,75 +71,59 @@
 <span id="L9"><span class="lineNum">       9</span>                 :             : /** @file */</span>
 <span id="L10"><span class="lineNum">      10</span>                 :             : </span>
 <span id="L11"><span class="lineNum">      11</span>                 :             : #include &quot;Kit/System/Semaphore.h&quot;</span>
-<span id="L12"><span class="lineNum">      12</span>                 :             : #include &lt;errno.h&gt;</span>
-<span id="L13"><span class="lineNum">      13</span>                 :             : </span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : #include &quot;Kit/System/Posix/semwait_.h&quot;</span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : #include &lt;errno.h&gt;</span>
 <span id="L14"><span class="lineNum">      14</span>                 :             : </span>
-<span id="L15"><span class="lineNum">      15</span>                 :             : //------------------------------------------------------------------------------</span>
-<span id="L16"><span class="lineNum">      16</span>                 :             : namespace Kit {</span>
-<span id="L17"><span class="lineNum">      17</span>                 :             : namespace System {</span>
-<span id="L18"><span class="lineNum">      18</span>                 :             : </span>
+<span id="L15"><span class="lineNum">      15</span>                 :             : </span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L17"><span class="lineNum">      17</span>                 :             : namespace Kit {</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : namespace System {</span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : </span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : </span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : </span>
-<span id="L22"><span class="lineNum">      22</span>                 :             : //////////////////////////////////////////////////</span>
-<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC tlaBgGNC">         351 : Semaphore::Semaphore( unsigned initialCount ) noexcept</span></span>
-<span id="L24"><span class="lineNum">      24</span>                 :             : {</span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">         351 :     sem_init( &amp;m_sema, 0, initialCount );</span></span>
-<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">         351 : }</span></span>
-<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
-<span id="L28"><span class="lineNum">      28</span>                 :<span class="tlaGNC">         302 : Semaphore::~Semaphore() noexcept</span></span>
-<span id="L29"><span class="lineNum">      29</span>                 :             : {</span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">         302 :     sem_destroy( &amp;m_sema );</span></span>
-<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">         302 : }</span></span>
-<span id="L32"><span class="lineNum">      32</span>                 :             : </span>
-<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">        6859 : int Semaphore::signal() noexcept</span></span>
-<span id="L34"><span class="lineNum">      34</span>                 :             : {</span>
-<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">        6859 :     return sem_post( &amp;m_sema );</span></span>
-<span id="L36"><span class="lineNum">      36</span>                 :             : }</span>
-<span id="L37"><span class="lineNum">      37</span>                 :             : </span>
-<span id="L38"><span class="lineNum">      38</span>                 :<span class="tlaGNC">           1 : int Semaphore::su_signal() noexcept</span></span>
-<span id="L39"><span class="lineNum">      39</span>                 :             : {</span>
-<span id="L40"><span class="lineNum">      40</span>                 :             :     // TODO: Add log unexpected error/event since this isn't really supported</span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">           1 :     return sem_post( &amp;m_sema );</span></span>
-<span id="L42"><span class="lineNum">      42</span>                 :             : }</span>
-<span id="L43"><span class="lineNum">      43</span>                 :             : </span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">        7910 : bool Semaphore::tryWait() noexcept</span></span>
-<span id="L45"><span class="lineNum">      45</span>                 :             : {</span>
-<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">        7910 :     int result = sem_trywait( &amp;m_sema );</span></span>
-<span id="L47"><span class="lineNum">      47</span>   [<span class="tlaGBC" title="Branch 0 was taken 7630 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 280 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 7630 times"> + </span>]:<span class="tlaGNC">        7910 :     return result == -1 &amp;&amp; errno == EAGAIN ? false : true;</span></span>
-<span id="L48"><span class="lineNum">      48</span>                 :             : }</span>
-<span id="L49"><span class="lineNum">      49</span>                 :             : </span>
-<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">        5754 : void Semaphore::waitInRealTime() noexcept</span></span>
-<span id="L51"><span class="lineNum">      51</span>                 :             : {</span>
-<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">        5754 :     sem_wait( &amp;m_sema );</span></span>
-<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">        5754 : }</span></span>
-<span id="L54"><span class="lineNum">      54</span>                 :             : </span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : </span>
+<span id="L23"><span class="lineNum">      23</span>                 :             : //////////////////////////////////////////////////</span>
+<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC tlaBgGNC">         230 : Semaphore::Semaphore( unsigned initialCount ) noexcept</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :             : {</span>
+<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">         230 :     sem_init( &amp;m_sema, 0, initialCount );</span></span>
+<span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">         230 : }</span></span>
+<span id="L28"><span class="lineNum">      28</span>                 :             : </span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">         181 : Semaphore::~Semaphore() noexcept</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :             : {</span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">         181 :     sem_destroy( &amp;m_sema );</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">         181 : }</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :             : </span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">        6327 : int Semaphore::signal() noexcept</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :             : {</span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">        6327 :     return sem_post( &amp;m_sema );</span></span>
+<span id="L37"><span class="lineNum">      37</span>                 :             : }</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             : </span>
+<span id="L39"><span class="lineNum">      39</span>                 :<span class="tlaUNC tlaBgUNC">           0 : int Semaphore::su_signal() noexcept</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :             : {</span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :     // TODO: Add log unexpected error/event since this isn't really supported</span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaUNC">           0 :     return sem_post( &amp;m_sema );</span></span>
+<span id="L43"><span class="lineNum">      43</span>                 :             : }</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             : </span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC tlaBgGNC">        1600 : bool Semaphore::tryWait() noexcept</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :             : {</span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">        1600 :     int result = sem_trywait( &amp;m_sema );</span></span>
+<span id="L48"><span class="lineNum">      48</span>   [<span class="tlaGBC" title="Branch 0 was taken 1583 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 17 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 1583 times"> + </span>]:<span class="tlaGNC">        1600 :     return result == -1 &amp;&amp; errno == EAGAIN ? false : true;</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :             : }</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             : </span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">        5942 : void Semaphore::waitInRealTime() noexcept</span></span>
+<span id="L52"><span class="lineNum">      52</span>                 :             : {</span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">        5942 :     sem_wait( &amp;m_sema );</span></span>
+<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">        5942 : }</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
-<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">       20337 : bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept</span></span>
-<span id="L57"><span class="lineNum">      57</span>                 :             : {</span>
-<span id="L58"><span class="lineNum">      58</span>                 :             :     // Convert milliseconds to the nanosleep time spec</span>
-<span id="L59"><span class="lineNum">      59</span>                 :             :     static const long nsec2msec = 1000000;</span>
-<span id="L60"><span class="lineNum">      60</span>                 :             :     static const long msec2sec  = 1000;</span>
-<span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaGNC">       20337 :     time_t            sec       = timeout / msec2sec;</span></span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">       20337 :     long              nsec      = (timeout % msec2sec)*nsec2msec;</span></span>
-<span id="L63"><span class="lineNum">      63</span>                 :             : </span>
-<span id="L64"><span class="lineNum">      64</span>                 :             :     struct timespec ts;</span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">       20337 :     clock_gettime( CLOCK_REALTIME, &amp;ts );</span></span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">       20337 :     ts.tv_sec  += sec;</span></span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">       20337 :     ts.tv_nsec += nsec;</span></span>
-<span id="L68"><span class="lineNum">      68</span>         [<span class="tlaGBC" title="Branch 0 was taken 56 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 20281 times"> + </span>]:<span class="tlaGNC">       20337 :     if ( ts.tv_nsec &gt; 999999999 )</span></span>
-<span id="L69"><span class="lineNum">      69</span>                 :             :     {</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          56 :         ts.tv_nsec -= 1000000000;</span></span>
-<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">          56 :         ts.tv_sec++;</span></span>
-<span id="L72"><span class="lineNum">      72</span>                 :             :     }</span>
-<span id="L73"><span class="lineNum">      73</span>                 :             : </span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">       20337 :     int result = sem_timedwait( &amp;m_sema, &amp;ts );</span></span>
-<span id="L75"><span class="lineNum">      75</span>   [<span class="tlaGBC" title="Branch 0 was taken 19915 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 421 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 19915 times"> + </span>]:<span class="tlaGNC">       20336 :     return result == -1 &amp;&amp; errno == ETIMEDOUT ? false : true;</span></span>
-<span id="L76"><span class="lineNum">      76</span>                 :             : }</span>
-<span id="L77"><span class="lineNum">      77</span>                 :             : </span>
-<span id="L78"><span class="lineNum">      78</span>                 :             : } // end namespaces</span>
-<span id="L79"><span class="lineNum">      79</span>                 :             : }</span>
-<span id="L80"><span class="lineNum">      80</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : </span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          27 : bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : {</span>
+<span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaGNC">          27 :     return Posix::semTimedWait_( m_sema, timeout );</span></span>
+<span id="L60"><span class="lineNum">      60</span>                 :             : }</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             : </span>
+<span id="L62"><span class="lineNum">      62</span>                 :             : } // end namespaces</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             : }</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : //------------------------------------------------------------------------------</span>
         </pre>
               </td>
             </tr>

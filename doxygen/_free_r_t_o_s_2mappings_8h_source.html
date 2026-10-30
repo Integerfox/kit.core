@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 430-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -70,71 +70,116 @@ $(function() {
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;semphr.h&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;task.h&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="c__assert_8h.html">Kit/System/_assert/c_assert.h</a>&quot;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// PRETTY_FUNCTION macro is non-standard</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#if defined(__GNUC__)</span><span class="comment"></span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">/// Take advantage of GCC&#39;s pretty function symbol</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __PRETTY_FUNCTION__</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#elif defined(_MSC_VER)</span><span class="comment"></span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">/// Take advantage of Microsoft&#39;s pretty function symbol</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __FUNCSIG__</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#else</span><span class="comment"></span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">/// Use C++11 function name</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#aa6cfaefa5fcd4e06a68266e7ad8b21de">   35</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __func__</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif  </span><span class="comment">// end __PRETTY_FUNCTION__</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a1001ed31a73eab414a8b1caf55062b74">   40</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_ASSERT_MAP(e)                Kit_System_assert_c_wrapper( e, __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME )</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"></span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#afe9727bffcc3a3ef6a419df8608200d8">   43</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemThreadID_T_MAP                 TaskHandle_t  </span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"></span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a42877529a669f11670b7400cad64c7e1">   46</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemMutex_T_MAP                    SemaphoreHandle_t</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment"></span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a2996c19bfe4f8126d7b03791b66e1814">   49</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemSema_T_MAP                     SemaphoreHandle_t</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a03b3792a5ae4e8f98f7adc2fc85c8104">   54</a></span><span class="comment"></span><span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code hl_function" href="_bare_metal_2mappings_8h.html#a03b3792a5ae4e8f98f7adc2fc85c8104">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a>()</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>{</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">return</span> xTaskGetTickCount() / portTICK_PERIOD_MS;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">//</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">// Thread Priorities</span></div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">//    The maximum number of priority levels is defined FreeRTOSConfig.h</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">//    The highest priority is &#39;configMAX_PRIORITIES - 1&#39;, the lowest</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">//    priority is 1.</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">//</span><span class="comment"></span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#aa9cca7c78fe6160f6743bf8ef3f3ba06">   67</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP      (configMAX_PRIORITIES - 1)</span><span class="comment"></span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#ab1d710fbdf092dc6f541c35f7001faa1">   69</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP       (configMAX_PRIORITIES/2)</span><span class="comment"></span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a7429a04147a6025a29cf917352d3c906">   71</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP       1</span><span class="comment"></span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#aa3821460130f63639c1c9d1295746d36">   73</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP        (1)</span><span class="comment"></span></div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">/// Mapping</span></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#ab6febf1f6032519ac645efde0172a539">   75</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP        (-1)</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="ttc" id="a_bare_metal_2mappings_8h_html_a03b3792a5ae4e8f98f7adc2fc85c8104"><div class="ttname"><a href="_bare_metal_2mappings_8h.html#a03b3792a5ae4e8f98f7adc2fc85c8104">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a></div><div class="ttdeci">unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()</div><div class="ttdoc">Mapping.</div><div class="ttdef"><b>Definition</b> mappings.h:50</div></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// PRETTY_FUNCTION macro is non-standard</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#if defined(__GNUC__)</span><span class="comment"></span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">/// Take advantage of GCC&#39;s pretty function symbol</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __PRETTY_FUNCTION__</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#elif defined(_MSC_VER)</span><span class="comment"></span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">/// Take advantage of Microsoft&#39;s pretty function symbol</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __FUNCSIG__</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#else</span><span class="comment"></span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">/// Use C++11 function name</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#aa6cfaefa5fcd4e06a68266e7ad8b21de">   36</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __func__</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#endif  </span><span class="comment">// end __PRETTY_FUNCTION__</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a1001ed31a73eab414a8b1caf55062b74">   41</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_ASSERT_MAP(e)                Kit_System_assert_c_wrapper( e, __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME )</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"></span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#afe9727bffcc3a3ef6a419df8608200d8">   44</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemThreadID_T_MAP                 TaskHandle_t  </span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"></span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a42877529a669f11670b7400cad64c7e1">   47</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemMutex_T_MAP                    SemaphoreHandle_t</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment"></span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a2996c19bfe4f8126d7b03791b66e1814">   50</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemSema_T_MAP                     SemaphoreHandle_t</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a94f29c1e34c9fac6a59bc8f6e71596af">   53</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemBSema_T_MAP                    SemaphoreHandle_t</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">/* Kit/System/PrivateElapsedTime.h requires a millisecond counter that rolls over</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">   modulo 2^32.  Deriving that counter from the FreeRTOS tick counter only preserves</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">   the property when the tick period is a whole number of milliseconds: the derived</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">   value is then ticks*(1000/configTICK_RATE_HZ), whose 32 bit truncation rolls over</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">   cleanly.  For any other tick rate the tick counter&#39;s own 2^32 roll-over lands</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">   mid-range in the millisecond counter and ElapsedTime::deltaMilliseconds() reports</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">   a bogus multi-day delta once every tick-counter wrap.</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">static_assert</span>( ( 1000U % configTICK_RATE_HZ ) == 0U,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>               <span class="stringliteral">&quot;configTICK_RATE_HZ must divide 1000 evenly (e.g. 1000, 500, 250, 200, 125, 100)&quot;</span> );</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">/** Converts RTOS ticks to milliseconds.</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">    NOTE: Deliberately does NOT use portTICK_PERIOD_MS.  That macro is an integer</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">          division (1000/configTICK_RATE_HZ) and is therefore lossy - or zero -</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">          for any tick rate that does not divide evenly into 1000.</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment"></span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">    NOTE: The 32 bit truncation is intentional - see the static_assert above.</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#ad95d87b48c386cd0a7bb1f8c3feed250">   76</a></span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="_free_r_t_o_s_2mappings_8h.html#ad95d87b48c386cd0a7bb1f8c3feed250">KitSystemFreeRTOS_ticksToMsec</a>( TickType_t ticks )</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>{</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">return</span> (uint32_t)( ( (uint64_t)ticks * 1000U ) / configTICK_RATE_HZ );</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"></span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">/** Converts milliseconds to RTOS ticks.</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"></span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">    Replaces pdMS_TO_TICKS() because that macro:</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">      o Truncates toward zero, so any delay shorter than one tick becomes</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">        vTaskDelay(0) - which neither blocks NOR yields.  Rounding UP guarantees</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">        a non-zero delay always yields for at least one tick.</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">      o Does its multiply in TickType_t, so it wraps for large millisecond values.</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a9125070c4c47987d6f3d4f807024daa4">   89</a></span><span class="keyword">inline</span> TickType_t <a class="code hl_function" href="_free_r_t_o_s_2mappings_8h.html#a9125070c4c47987d6f3d4f807024daa4">KitSystemFreeRTOS_msecToTicks</a>( uint32_t msec )</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>{</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> (TickType_t)( ( ( (uint64_t)msec * configTICK_RATE_HZ ) + 999U ) / 1000U );</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>}</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"></span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#ae24fc1f424dfd48b51a1951b19ee93d4">   95</a></span><span class="comment"></span><span class="keyword">inline</span> uint32_t <a class="code hl_function" href="_bare_metal_2mappings_8h.html#ae24fc1f424dfd48b51a1951b19ee93d4">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a>()</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>{</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="comment">// The 32 bit roll-over is by design --&gt;ElapsedTime::deltaMilliseconds() relies on it</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="comment">// (guaranteed by the configTICK_RATE_HZ static_assert above)</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="_free_r_t_o_s_2mappings_8h.html#ad95d87b48c386cd0a7bb1f8c3feed250">KitSystemFreeRTOS_ticksToMsec</a>( xTaskGetTickCount() );</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">//</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">// Thread Priorities</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">//    The maximum number of priority levels is defined FreeRTOSConfig.h</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">//    The highest priority is &#39;configMAX_PRIORITIES - 1&#39;, the lowest</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">//    priority is 1.</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">//</span><span class="comment"></span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#aa9cca7c78fe6160f6743bf8ef3f3ba06">  110</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP      (configMAX_PRIORITIES - 1)</span><span class="comment"></span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#ab1d710fbdf092dc6f541c35f7001faa1">  112</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP       (configMAX_PRIORITIES/2)</span><span class="comment"></span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#a7429a04147a6025a29cf917352d3c906">  114</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP       1</span><span class="comment"></span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#aa3821460130f63639c1c9d1295746d36">  116</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP        (1)</span><span class="comment"></span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">/// Mapping</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="_free_r_t_o_s_2mappings_8h.html#ab6febf1f6032519ac645efde0172a539">  118</a></span><span class="comment"></span><span class="preprocessor">#define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP        (-1)</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="ttc" id="a_bare_metal_2mappings_8h_html_ae24fc1f424dfd48b51a1951b19ee93d4"><div class="ttname"><a href="_bare_metal_2mappings_8h.html#ae24fc1f424dfd48b51a1951b19ee93d4">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a></div><div class="ttdeci">uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()</div><div class="ttdoc">Mapping.</div><div class="ttdef"><b>Definition</b> mappings.h:53</div></div>
+<div class="ttc" id="a_free_r_t_o_s_2mappings_8h_html_a9125070c4c47987d6f3d4f807024daa4"><div class="ttname"><a href="_free_r_t_o_s_2mappings_8h.html#a9125070c4c47987d6f3d4f807024daa4">KitSystemFreeRTOS_msecToTicks</a></div><div class="ttdeci">TickType_t KitSystemFreeRTOS_msecToTicks(uint32_t msec)</div><div class="ttdoc">Converts milliseconds to RTOS ticks.</div><div class="ttdef"><b>Definition</b> mappings.h:89</div></div>
+<div class="ttc" id="a_free_r_t_o_s_2mappings_8h_html_ad95d87b48c386cd0a7bb1f8c3feed250"><div class="ttname"><a href="_free_r_t_o_s_2mappings_8h.html#ad95d87b48c386cd0a7bb1f8c3feed250">KitSystemFreeRTOS_ticksToMsec</a></div><div class="ttdeci">uint32_t KitSystemFreeRTOS_ticksToMsec(TickType_t ticks)</div><div class="ttdoc">Converts RTOS ticks to milliseconds.</div><div class="ttdef"><b>Definition</b> mappings.h:76</div></div>
 <div class="ttc" id="ac__assert_8h_html"><div class="ttname"><a href="c__assert_8h.html">c_assert.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 17:48:37 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Oct 30 2026 14:11:16 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

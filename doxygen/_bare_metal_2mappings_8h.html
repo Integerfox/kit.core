@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 430-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -87,6 +87,9 @@ Macros</h2></td></tr>
 <tr class="memitem:aa3821460130f63639c1c9d1295746d36" id="r_aa3821460130f63639c1c9d1295746d36"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3821460130f63639c1c9d1295746d36">KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP</a>&#160;&#160;&#160;0</td></tr>
 <tr class="memdesc:aa3821460130f63639c1c9d1295746d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
 <tr class="separator:aa3821460130f63639c1c9d1295746d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94f29c1e34c9fac6a59bc8f6e71596af" id="r_a94f29c1e34c9fac6a59bc8f6e71596af"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94f29c1e34c9fac6a59bc8f6e71596af">KitSystemBSema_T_MAP</a>&#160;&#160;&#160;volatile bool</td></tr>
+<tr class="memdesc:a94f29c1e34c9fac6a59bc8f6e71596af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
+<tr class="separator:a94f29c1e34c9fac6a59bc8f6e71596af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42877529a669f11670b7400cad64c7e1" id="r_a42877529a669f11670b7400cad64c7e1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42877529a669f11670b7400cad64c7e1">KitSystemMutex_T_MAP</a>&#160;&#160;&#160;unsigned</td></tr>
 <tr class="memdesc:a42877529a669f11670b7400cad64c7e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
 <tr class="separator:a42877529a669f11670b7400cad64c7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,9 +102,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a03b3792a5ae4e8f98f7adc2fc85c8104" id="r_a03b3792a5ae4e8f98f7adc2fc85c8104"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a03b3792a5ae4e8f98f7adc2fc85c8104">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a> ()</td></tr>
-<tr class="memdesc:a03b3792a5ae4e8f98f7adc2fc85c8104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
-<tr class="separator:a03b3792a5ae4e8f98f7adc2fc85c8104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae24fc1f424dfd48b51a1951b19ee93d4" id="r_ae24fc1f424dfd48b51a1951b19ee93d4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae24fc1f424dfd48b51a1951b19ee93d4">KitSystemElapsedTime_getTimeInMilliseconds_MAP</a> ()</td></tr>
+<tr class="memdesc:ae24fc1f424dfd48b51a1951b19ee93d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapping.  <br /></td></tr>
+<tr class="separator:ae24fc1f424dfd48b51a1951b19ee93d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This file provides the mappings for Platform specific types, etc. </p>
@@ -222,6 +225,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a94f29c1e34c9fac6a59bc8f6e71596af" name="a94f29c1e34c9fac6a59bc8f6e71596af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94f29c1e34c9fac6a59bc8f6e71596af">&#9670;&#160;</a></span>KitSystemBSema_T_MAP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define KitSystemBSema_T_MAP&#160;&#160;&#160;volatile bool</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mapping. </p>
+
+</div>
+</div>
 <a id="a42877529a669f11670b7400cad64c7e1" name="a42877529a669f11670b7400cad64c7e1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a42877529a669f11670b7400cad64c7e1">&#9670;&#160;</a></span>KitSystemMutex_T_MAP</h2>
 
@@ -271,8 +290,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a03b3792a5ae4e8f98f7adc2fc85c8104" name="a03b3792a5ae4e8f98f7adc2fc85c8104"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03b3792a5ae4e8f98f7adc2fc85c8104">&#9670;&#160;</a></span>KitSystemElapsedTime_getTimeInMilliseconds_MAP()</h2>
+<a id="ae24fc1f424dfd48b51a1951b19ee93d4" name="ae24fc1f424dfd48b51a1951b19ee93d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae24fc1f424dfd48b51a1951b19ee93d4">&#9670;&#160;</a></span>KitSystemElapsedTime_getTimeInMilliseconds_MAP()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -281,7 +300,7 @@ Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP </td>
+          <td class="memname">uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -301,7 +320,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 17:48:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Oct 30 2026 14:11:16 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-27 17:56:23</td>
+            <td class="headerValue">2026-10-30 14:19:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
@@ -126,10 +126,10 @@
 <span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">           1 : }</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : ////////////////////////////////////////////////////////////////////////////////</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">     4791311 : Mutex&amp; PrivateLocks::system() noexcept</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">     3135975 : Mutex&amp; PrivateLocks::system() noexcept</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
-<span id="L69"><span class="lineNum">      69</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 4791310 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">     4791312 :     static NeverDestroyed&lt;Mutex&gt; theNullMutex_;</span></span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">     4791311 :     return theNullMutex_.get();</span></span>
+<span id="L69"><span class="lineNum">      69</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 3135974 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">     3135976 :     static NeverDestroyed&lt;Mutex&gt; theNullMutex_;</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">     3135975 :     return theNullMutex_.get();</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : }</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             : </span>
 <span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">         399 : Mutex&amp; PrivateLocks::tracing() noexcept</span></span>

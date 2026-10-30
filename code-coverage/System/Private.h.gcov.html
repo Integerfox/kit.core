@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-27 17:56:23</td>
+            <td class="headerValue">2026-10-30 14:19:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -106,11 +106,11 @@
 <span id="L44"><span class="lineNum">      44</span>                 :             : {</span>
 <span id="L45"><span class="lineNum">      45</span>                 :             : public:</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     ///</span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC tlaBgGNC">         156 :     NeverDestroyed() noexcept</span></span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC tlaBgGNC">         148 :     NeverDestroyed() noexcept</span></span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     {</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :         static_assert( std::is_trivially_destructible&lt;NeverDestroyed&gt;::value,</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             :                        &quot;NeverDestroyed&lt;T&gt; must stay trivially destructible - do NOT add a destructor&quot; );</span>
-<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">         156 :         ::new ( m_storage ) T();</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">         148 :         ::new ( m_storage ) T();</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     }</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : </span>
 <span id="L54"><span class="lineNum">      54</span>                 :             :     /// Returns the wrapped instance</span>

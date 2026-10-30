@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">10</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-27 17:56:23</td>
+            <td class="headerValue">2026-10-30 14:19:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -77,7 +77,7 @@
 <span id="L15"><span class="lineNum">      15</span>                 :             : </span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : #include &quot;PrivateElapsedTime.h&quot;</span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : #include &quot;ElapsedTime.h&quot;</span>
-<span id="L18"><span class="lineNum">      18</span>                 :             : #include &quot;Private.h&quot;</span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : #include &quot;GlobalLock.h&quot;</span>
 <span id="L19"><span class="lineNum">      19</span>                 :             : #include &quot;PrivateStartup.h&quot;</span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : #include &lt;stdlib.h&gt;</span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : </span>
@@ -87,7 +87,7 @@
 <span id="L25"><span class="lineNum">      25</span>                 :             : namespace System {</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : static uint64_t elapsedMsec_;</span>
-<span id="L28"><span class="lineNum">      28</span>                 :             : static uint64_t lastMsec_;</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             : static uint32_t lastMsec_;</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : </span>
 <span id="L30"><span class="lineNum">      30</span>                 :             : // an anonymous namespace for internal linkage</span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : namespace {</span>
@@ -117,21 +117,33 @@
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :             : ///////////////////////////////////////////////////////////////</span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">        5596 : uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept</span></span>
-<span id="L59"><span class="lineNum">      59</span>                 :             : {</span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">        5596 :     Kit::System::Mutex::ScopeLock lock( Kit::System::PrivateLocks::system() );</span></span>
-<span id="L61"><span class="lineNum">      61</span>                 :             : </span>
-<span id="L62"><span class="lineNum">      62</span>                 :<span class="tlaGNC">        5582 :     uint64_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();</span></span>
-<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">        5596 :     uint64_t delta    = newTime - lastMsec_;</span></span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">        5596 :     lastMsec_         = newTime;</span></span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">        5596 :     elapsedMsec_     += delta;</span></span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">        5596 :     return elapsedMsec_;</span></span>
-<span id="L67"><span class="lineNum">      67</span>                 :             : }</span>
-<span id="L68"><span class="lineNum">      68</span>                 :             : </span>
-<span id="L69"><span class="lineNum">      69</span>                 :             : </span>
-<span id="L70"><span class="lineNum">      70</span>                 :             : } // end namespaces</span>
-<span id="L71"><span class="lineNum">      71</span>                 :             : }</span>
-<span id="L72"><span class="lineNum">      72</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : /* A GlobalLock - instead of the KIT system mutex - is used to guard the 32-to-64</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :    bit extension.  On an RTOS/bare-metal target a GlobalLock is a critical section:</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :    a handful of instructions that never block and never alter thread priorities.</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :    The system mutex here would nest inside whatever application mutex the caller</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             :    already holds, chaining their priority-inheritance scopes together.  On a Host</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :    platform a GlobalLock is a recursive Mutex --&gt;this method is re-entrant there.</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : </span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :    See Kit/System/ElapsedTime.h for the full set of caller constraints.</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             :  */</span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">        5610 : uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept</span></span>
+<span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        5610 :     GlobalLock::begin();</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :             : </span>
+<span id="L71"><span class="lineNum">      71</span>                 :             :     // The delta is computed in 32 bits so that the unsigned roll-over yields the true delta</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             :     uint32_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();</span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">        5610 :     elapsedMsec_     += newTime - lastMsec_;</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">        5610 :     lastMsec_         = newTime;</span></span>
+<span id="L75"><span class="lineNum">      75</span>                 :             :     uint64_t result   = elapsedMsec_;</span>
+<span id="L76"><span class="lineNum">      76</span>                 :             : </span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">        5610 :     GlobalLock::end();</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">        5610 :     return result;</span></span>
+<span id="L79"><span class="lineNum">      79</span>                 :             : }</span>
+<span id="L80"><span class="lineNum">      80</span>                 :             : </span>
+<span id="L81"><span class="lineNum">      81</span>                 :             : </span>
+<span id="L82"><span class="lineNum">      82</span>                 :             : } // end namespaces</span>
+<span id="L83"><span class="lineNum">      83</span>                 :             : }</span>
+<span id="L84"><span class="lineNum">      84</span>                 :             : //------------------------------------------------------------------------------</span>
         </pre>
               </td>
             </tr>

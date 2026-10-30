@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-27 17:56:23</td>
+            <td class="headerValue">2026-10-30 14:19:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -85,7 +85,7 @@
 <span id="L23"><span class="lineNum">      23</span>                 :             : {</span>
 <span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          53 : }</span></span>
 <span id="L25"><span class="lineNum">      25</span>                 :             : </span>
-<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">         151 : bool RingBufferBaseAtomic::remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept</span></span>
+<span id="L26"><span class="lineNum">      26</span>                 :<span class="tlaGNC">         150 : bool RingBufferBaseAtomic::remove( void* elemPtr, size_t elemSize, const void* srcRingBufMemory ) noexcept</span></span>
 <span id="L27"><span class="lineNum">      27</span>                 :             : {</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :     KIT_SYSTEM_ASSERT( elemPtr != nullptr );</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     KIT_SYSTEM_ASSERT( elemSize &gt; 0 );</span>
@@ -96,7 +96,7 @@
 <span id="L34"><span class="lineNum">      34</span>                 :             :     const unsigned writeIdx = m_writeIdx.load( std::memory_order_acquire );</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             : </span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :     // Trap - the Ring buffer is empty</span>
-<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 121 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 30 times"> + </span>]:<span class="tlaGNC">         151 :     if ( readIdx == writeIdx )</span></span>
+<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 121 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 29 times"> + </span>]:<span class="tlaGNC">         150 :     if ( readIdx == writeIdx )</span></span>
 <span id="L38"><span class="lineNum">      38</span>                 :             :     {</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             :         return false;</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             :     }</span>

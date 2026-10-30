@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 430-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -88,7 +88,8 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This concrete mutex class defines the interface for a mutex that has "recursive" semantics. </p>
-<p>Recursive semantic allows the thread that owns the mutex to acquire ownership multiple times by calling <a class="el" href="#a3523eae62451ee2b5e802582e3834ca9" title="This method is invoked prior to entering a critical section.">lock()</a> multiple times. There must be a corresponding number of <a class="el" href="#ac662a58f33fae43000b6a09200a1fcc2" title="This method is invoke at the end of a critical section.">unlock()</a> calls made before the ownership of the mutex is released. </p>
+<p>Recursive semantic allows the thread that owns the mutex to acquire ownership multiple times by calling <a class="el" href="#a3523eae62451ee2b5e802582e3834ca9" title="This method is invoked prior to entering a critical section.">lock()</a> multiple times. There must be a corresponding number of <a class="el" href="#ac662a58f33fae43000b6a09200a1fcc2" title="This method is invoke at the end of a critical section.">unlock()</a> calls made before the ownership of the mutex is released.</p>
+<p>NOTE: With respect to Priority Inheritance, the behavior is platform specific and may not be supported on all platforms. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0c5486b25c85abf5801d7e52a99c014b" name="a0c5486b25c85abf5801d7e52a99c014b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0c5486b25c85abf5801d7e52a99c014b">&#9670;&#160;</a></span>Mutex()</h2>
@@ -232,7 +233,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 17:48:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Oct 30 2026 14:11:17 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

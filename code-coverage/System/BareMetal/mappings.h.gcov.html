@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-27 17:56:23</td>
+            <td class="headerValue">2026-10-30 14:19:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -107,30 +107,33 @@
 <span id="L45"><span class="lineNum">      45</span>                 :             : /// Mapping</span>
 <span id="L46"><span class="lineNum">      46</span>                 :             : #define KitSystemSema_T_MAP unsigned</span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : </span>
-<span id="L48"><span class="lineNum">      48</span>                 :             : </span>
-<span id="L49"><span class="lineNum">      49</span>                 :             : /// Mapping</span>
-<span id="L50"><span class="lineNum">      50</span>                 :             : inline unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()</span>
-<span id="L51"><span class="lineNum">      51</span>                 :             : {</span>
-<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC tlaBgGNC">     1597260 :     return Kit::System::BareMetal::getElapsedTimeMs();</span></span>
-<span id="L53"><span class="lineNum">      53</span>                 :             : }</span>
-<span id="L54"><span class="lineNum">      54</span>                 :             : </span>
-<span id="L55"><span class="lineNum">      55</span>                 :             : </span>
-<span id="L56"><span class="lineNum">      56</span>                 :             : //</span>
-<span id="L57"><span class="lineNum">      57</span>                 :             : // Thread Priorities --&gt;have no meaning on BareMetal</span>
-<span id="L58"><span class="lineNum">      58</span>                 :             : //</span>
-<span id="L59"><span class="lineNum">      59</span>                 :             : /// Mapping</span>
-<span id="L60"><span class="lineNum">      60</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP 0</span>
-<span id="L61"><span class="lineNum">      61</span>                 :             : /// Mapping</span>
-<span id="L62"><span class="lineNum">      62</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP 0</span>
-<span id="L63"><span class="lineNum">      63</span>                 :             : /// Mapping</span>
-<span id="L64"><span class="lineNum">      64</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP 0</span>
-<span id="L65"><span class="lineNum">      65</span>                 :             : /// Mapping</span>
-<span id="L66"><span class="lineNum">      66</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP 0</span>
-<span id="L67"><span class="lineNum">      67</span>                 :             : /// Mapping</span>
-<span id="L68"><span class="lineNum">      68</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP 0</span>
-<span id="L69"><span class="lineNum">      69</span>                 :             : </span>
-<span id="L70"><span class="lineNum">      70</span>                 :             : </span>
-<span id="L71"><span class="lineNum">      71</span>                 :             : #endif  // end header latch</span>
+<span id="L48"><span class="lineNum">      48</span>                 :             : /// Mapping</span>
+<span id="L49"><span class="lineNum">      49</span>                 :             : #define KitSystemBSema_T_MAP volatile bool</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             : </span>
+<span id="L51"><span class="lineNum">      51</span>                 :             : </span>
+<span id="L52"><span class="lineNum">      52</span>                 :             : /// Mapping</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             : {</span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC tlaBgGNC">     1568207 :     return Kit::System::BareMetal::getElapsedTimeMs();</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : }</span>
+<span id="L57"><span class="lineNum">      57</span>                 :             : </span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : </span>
+<span id="L59"><span class="lineNum">      59</span>                 :             : //</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             : // Thread Priorities --&gt;have no meaning on BareMetal</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             : //</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             : /// Mapping</span>
+<span id="L63"><span class="lineNum">      63</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP 0</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             : /// Mapping</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP 0</span>
+<span id="L66"><span class="lineNum">      66</span>                 :             : /// Mapping</span>
+<span id="L67"><span class="lineNum">      67</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP 0</span>
+<span id="L68"><span class="lineNum">      68</span>                 :             : /// Mapping</span>
+<span id="L69"><span class="lineNum">      69</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP 0</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             : /// Mapping</span>
+<span id="L71"><span class="lineNum">      71</span>                 :             : #define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP 0</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             : </span>
+<span id="L73"><span class="lineNum">      73</span>                 :             : </span>
+<span id="L74"><span class="lineNum">      74</span>                 :             : #endif  // end header latch</span>
         </pre>
               </td>
             </tr>

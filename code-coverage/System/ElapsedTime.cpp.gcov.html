@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-27 17:56:23</td>
+            <td class="headerValue">2026-10-30 14:19:38</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -78,59 +78,61 @@
 <span id="L16"><span class="lineNum">      16</span>                 :             : </span>
 <span id="L17"><span class="lineNum">      17</span>                 :             : #include &quot;PrivateElapsedTime.h&quot;</span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : #include &quot;ElapsedTime.h&quot;</span>
-<span id="L19"><span class="lineNum">      19</span>                 :             : #include &quot;Private.h&quot;</span>
-<span id="L20"><span class="lineNum">      20</span>                 :             : #include &quot;PrivateStartup.h&quot;</span>
-<span id="L21"><span class="lineNum">      21</span>                 :             : #include &lt;stdlib.h&gt;</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             : #include &quot;PrivateStartup.h&quot;</span>
+<span id="L20"><span class="lineNum">      20</span>                 :             : #include &lt;stdlib.h&gt;</span>
+<span id="L21"><span class="lineNum">      21</span>                 :             : </span>
 <span id="L22"><span class="lineNum">      22</span>                 :             : </span>
-<span id="L23"><span class="lineNum">      23</span>                 :             : </span>
-<span id="L24"><span class="lineNum">      24</span>                 :             : //------------------------------------------------------------------------------</span>
-<span id="L25"><span class="lineNum">      25</span>                 :             : namespace Kit {</span>
-<span id="L26"><span class="lineNum">      26</span>                 :             : namespace System {</span>
-<span id="L27"><span class="lineNum">      27</span>                 :             : </span>
-<span id="L28"><span class="lineNum">      28</span>                 :             : static uint32_t elapsedMsec_;</span>
-<span id="L29"><span class="lineNum">      29</span>                 :             : static uint32_t lastMsec_;</span>
-<span id="L30"><span class="lineNum">      30</span>                 :             : </span>
-<span id="L31"><span class="lineNum">      31</span>                 :             : // an anonymous namespace for internal linkage</span>
-<span id="L32"><span class="lineNum">      32</span>                 :             : namespace {</span>
-<span id="L33"><span class="lineNum">      33</span>                 :             : </span>
-<span id="L34"><span class="lineNum">      34</span>                 :             : /// This class is to 'zero' the elapsed to the start of the application</span>
-<span id="L35"><span class="lineNum">      35</span>                 :             : class RegisterInitHandler_ : public Kit::System::IStartupHook</span>
-<span id="L36"><span class="lineNum">      36</span>                 :             : {</span>
-<span id="L37"><span class="lineNum">      37</span>                 :             : public:</span>
-<span id="L38"><span class="lineNum">      38</span>                 :             :     ///</span>
-<span id="L39"><span class="lineNum">      39</span>                 :             :     RegisterInitHandler_() noexcept</span>
-<span id="L40"><span class="lineNum">      40</span>                 :             :         : IStartupHook( IStartupHook::SYSTEM ) {}</span>
-<span id="L41"><span class="lineNum">      41</span>                 :             : </span>
-<span id="L42"><span class="lineNum">      42</span>                 :             : </span>
-<span id="L43"><span class="lineNum">      43</span>                 :             : protected:</span>
-<span id="L44"><span class="lineNum">      44</span>                 :             :     ///</span>
+<span id="L23"><span class="lineNum">      23</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L24"><span class="lineNum">      24</span>                 :             : namespace Kit {</span>
+<span id="L25"><span class="lineNum">      25</span>                 :             : namespace System {</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             : </span>
+<span id="L27"><span class="lineNum">      27</span>                 :             : static uint32_t startMsec_;</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             : </span>
+<span id="L29"><span class="lineNum">      29</span>                 :             : // an anonymous namespace for internal linkage</span>
+<span id="L30"><span class="lineNum">      30</span>                 :             : namespace {</span>
+<span id="L31"><span class="lineNum">      31</span>                 :             : </span>
+<span id="L32"><span class="lineNum">      32</span>                 :             : /// This class is to 'zero' the elapsed to the start of the application</span>
+<span id="L33"><span class="lineNum">      33</span>                 :             : class RegisterInitHandler_ : public Kit::System::IStartupHook</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             : {</span>
+<span id="L35"><span class="lineNum">      35</span>                 :             : public:</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :     ///</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :     RegisterInitHandler_() noexcept</span>
+<span id="L38"><span class="lineNum">      38</span>                 :             :         : IStartupHook( IStartupHook::SYSTEM ) {}</span>
+<span id="L39"><span class="lineNum">      39</span>                 :             : </span>
+<span id="L40"><span class="lineNum">      40</span>                 :             : </span>
+<span id="L41"><span class="lineNum">      41</span>                 :             : protected:</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             :     /** No lock is needed because 'startMsec_' is written once, during start-up,</span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :         before any other thread exists</span>
+<span id="L44"><span class="lineNum">      44</span>                 :             :      */</span>
 <span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC tlaBgGNC">          42 :     void notify( InitLevel init_level ) noexcept override</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             :     {</span>
-<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">          42 :         elapsedMsec_ = 0;</span></span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          42 :         lastMsec_    = KitSystemElapsedTime_getTimeInMilliseconds();</span></span>
-<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          42 :     }</span></span>
-<span id="L50"><span class="lineNum">      50</span>                 :             : };</span>
-<span id="L51"><span class="lineNum">      51</span>                 :             : }  // end anonymous namespace</span>
-<span id="L52"><span class="lineNum">      52</span>                 :             : </span>
-<span id="L53"><span class="lineNum">      53</span>                 :             : ///</span>
-<span id="L54"><span class="lineNum">      54</span>                 :             : static RegisterInitHandler_ autoRegister_systemInit_hook_;</span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">          42 :         startMsec_ = KitSystemElapsedTime_getTimeInMilliseconds();</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          42 :     }</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :             : };</span>
+<span id="L50"><span class="lineNum">      50</span>                 :             : }  // end anonymous namespace</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             : </span>
+<span id="L52"><span class="lineNum">      52</span>                 :             : ///</span>
+<span id="L53"><span class="lineNum">      53</span>                 :             : static RegisterInitHandler_ autoRegister_systemInit_hook_;</span>
+<span id="L54"><span class="lineNum">      54</span>                 :             : </span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : </span>
-<span id="L56"><span class="lineNum">      56</span>                 :             : </span>
-<span id="L57"><span class="lineNum">      57</span>                 :             : ///////////////////////////////////////////////////////////////</span>
-<span id="L58"><span class="lineNum">      58</span>                 :<span class="tlaGNC">     1650309 : uint32_t ElapsedTime::millisecondsInRealTime() noexcept</span></span>
-<span id="L59"><span class="lineNum">      59</span>                 :             : {</span>
-<span id="L60"><span class="lineNum">      60</span>                 :<span class="tlaGNC">     1650309 :     Kit::System::Mutex::ScopeLock lock( Kit::System::PrivateLocks::system() );</span></span>
-<span id="L61"><span class="lineNum">      61</span>                 :             : </span>
-<span id="L62"><span class="lineNum">      62</span>                 :             :     uint32_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();</span>
-<span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaGNC">     1650309 :     uint32_t delta    = newTime - lastMsec_;</span></span>
-<span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaGNC">     1650309 :     lastMsec_         = newTime;</span></span>
-<span id="L65"><span class="lineNum">      65</span>                 :<span class="tlaGNC">     1650309 :     elapsedMsec_     += delta;</span></span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">     1650309 :     return elapsedMsec_;</span></span>
-<span id="L67"><span class="lineNum">      67</span>                 :             : }</span>
-<span id="L68"><span class="lineNum">      68</span>                 :             : </span>
-<span id="L69"><span class="lineNum">      69</span>                 :             : } // end namespaces</span>
-<span id="L70"><span class="lineNum">      70</span>                 :             : }</span>
-<span id="L71"><span class="lineNum">      71</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L56"><span class="lineNum">      56</span>                 :             : ///////////////////////////////////////////////////////////////</span>
+<span id="L57"><span class="lineNum">      57</span>                 :             : /* NO LOCK. This method is called on every pass of every event loop, including</span>
+<span id="L58"><span class="lineNum">      58</span>                 :             :    by threads that already hold an application mutex.  Nesting the KIT system</span>
+<span id="L59"><span class="lineNum">      59</span>                 :             :    mutex inside an application mutex chains the two priority-inheritance scopes</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             :    together, which boosts/holds priorities far longer than the application</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             :    intended.</span>
+<span id="L62"><span class="lineNum">      62</span>                 :             : </span>
+<span id="L63"><span class="lineNum">      63</span>                 :             :     The method is a read plus an unsigned subtraction.  The 32 bit roll-over is</span>
+<span id="L64"><span class="lineNum">      64</span>                 :             :     by design: deltaMilliseconds() relies on it.</span>
+<span id="L65"><span class="lineNum">      65</span>                 :             :  */</span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">     1621225 : uint32_t ElapsedTime::millisecondsInRealTime() noexcept</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :             : {</span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">     1568191 :     return KitSystemElapsedTime_getTimeInMilliseconds() - startMsec_;</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :             : }</span>
+<span id="L70"><span class="lineNum">      70</span>                 :             : </span>
+<span id="L71"><span class="lineNum">      71</span>                 :             : } // end namespaces</span>
+<span id="L72"><span class="lineNum">      72</span>                 :             : }</span>
+<span id="L73"><span class="lineNum">      73</span>                 :             : //------------------------------------------------------------------------------</span>
         </pre>
               </td>
             </tr>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 430-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,7 +46,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::Posix Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -59,13 +61,198 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_system_1_1_posix_1_1_thread.html">Thread</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class implements a <a class="el" href="class_kit_1_1_system_1_1_posix_1_1_thread.html" title="This concrete class implements a Thread object using Posix threads.">Thread</a> object using <a class="el" href="namespace_kit_1_1_system_1_1_posix.html" title="Concrete implementation of the platform specific classes/features of the Kit::System namespace interf...">Posix</a> threads.  <a href="class_kit_1_1_system_1_1_posix_1_1_thread.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a124fed18221f8209a8711af015d90a78" id="r_a124fed18221f8209a8711af015d90a78"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a124fed18221f8209a8711af015d90a78">semTimedWait_</a> (sem_t &amp;sema, uint32_t timeoutMs) noexcept</td></tr>
+<tr class="memdesc:a124fed18221f8209a8711af015d90a78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits up to 'timeoutMs' for the semaphore.  <br /></td></tr>
+<tr class="separator:a124fed18221f8209a8711af015d90a78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8a66db4d184967c02da8e6d3cd599ce" id="r_ab8a66db4d184967c02da8e6d3cd599ce"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8a66db4d184967c02da8e6d3cd599ce">semWaitUntil_</a> (sem_t &amp;sema, const struct timespec &amp;deadline) noexcept</td></tr>
+<tr class="memdesc:ab8a66db4d184967c02da8e6d3cd599ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the semaphore, or until the absolute 'deadline' expires.  <br /></td></tr>
+<tr class="separator:ab8a66db4d184967c02da8e6d3cd599ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a2acbd21fb410b2b73c2ce7dbf2a767c6" id="r_a2acbd21fb410b2b73c2ce7dbf2a767c6"><td class="memItemLeft" align="right" valign="top">constexpr long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2acbd21fb410b2b73c2ce7dbf2a767c6">msecPerSec_</a> = 1000L</td></tr>
+<tr class="memdesc:a2acbd21fb410b2b73c2ce7dbf2a767c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Milliseconds per second.  <br /></td></tr>
+<tr class="separator:a2acbd21fb410b2b73c2ce7dbf2a767c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27bb5f82b3add9f94b89253d04b15593" id="r_a27bb5f82b3add9f94b89253d04b15593"><td class="memItemLeft" align="right" valign="top">constexpr long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27bb5f82b3add9f94b89253d04b15593">nsecPerMsec_</a> = 1000000L</td></tr>
+<tr class="memdesc:a27bb5f82b3add9f94b89253d04b15593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nanoseconds per millisecond.  <br /></td></tr>
+<tr class="separator:a27bb5f82b3add9f94b89253d04b15593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf36bbd717ff5ac9c4c6531df47d613" id="r_aaaf36bbd717ff5ac9c4c6531df47d613"><td class="memItemLeft" align="right" valign="top">constexpr long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaf36bbd717ff5ac9c4c6531df47d613">nsecPerSec_</a> = 1000000000L</td></tr>
+<tr class="memdesc:aaaf36bbd717ff5ac9c4c6531df47d613"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nanoseconds per second.  <br /></td></tr>
+<tr class="separator:aaaf36bbd717ff5ac9c4c6531df47d613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d75e7da3557dceb83c635f488e5d8c7" id="r_a7d75e7da3557dceb83c635f488e5d8c7"><td class="memItemLeft" align="right" valign="top">constexpr clockid_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d75e7da3557dceb83c635f488e5d8c7">timedWaitClock_</a> = CLOCK_REALTIME</td></tr>
+<tr class="memdesc:a7d75e7da3557dceb83c635f488e5d8c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clock used for the timed-wait deadline.  <br /></td></tr>
+<tr class="separator:a7d75e7da3557dceb83c635f488e5d8c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concrete implementation of the platform specific classes/features of the <a class="el" href="namespace_kit_1_1_system.html" title="The System namespace contains platform independent foundation abstractions and classes related to pro...">Kit::System</a> namespace interfaces using POSIX threading functions. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a124fed18221f8209a8711af015d90a78" name="a124fed18221f8209a8711af015d90a78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a124fed18221f8209a8711af015d90a78">&#9670;&#160;</a></span>semTimedWait_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Kit::System::Posix::semTimedWait_ </td>
+          <td>(</td>
+          <td class="paramtype">sem_t &amp;</td>          <td class="paramname"><span class="paramname"><em>sema</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>timeoutMs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Waits up to 'timeoutMs' for the semaphore. </p>
+<p>Returns true when the semaphore was acquired; false when the timeout expired. </p>
+
+</div>
+</div>
+<a id="ab8a66db4d184967c02da8e6d3cd599ce" name="ab8a66db4d184967c02da8e6d3cd599ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8a66db4d184967c02da8e6d3cd599ce">&#9670;&#160;</a></span>semWaitUntil_()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Kit::System::Posix::semWaitUntil_ </td>
+          <td>(</td>
+          <td class="paramtype">sem_t &amp;</td>          <td class="paramname"><span class="paramname"><em>sema</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct timespec &amp;</td>          <td class="paramname"><span class="paramname"><em>deadline</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Waits for the semaphore, or until the absolute 'deadline' expires. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a2acbd21fb410b2b73c2ce7dbf2a767c6" name="a2acbd21fb410b2b73c2ce7dbf2a767c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2acbd21fb410b2b73c2ce7dbf2a767c6">&#9670;&#160;</a></span>msecPerSec_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr long Kit::System::Posix::msecPerSec_ = 1000L</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Milliseconds per second. </p>
+
+</div>
+</div>
+<a id="a27bb5f82b3add9f94b89253d04b15593" name="a27bb5f82b3add9f94b89253d04b15593"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27bb5f82b3add9f94b89253d04b15593">&#9670;&#160;</a></span>nsecPerMsec_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr long Kit::System::Posix::nsecPerMsec_ = 1000000L</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Nanoseconds per millisecond. </p>
+
+</div>
+</div>
+<a id="aaaf36bbd717ff5ac9c4c6531df47d613" name="aaaf36bbd717ff5ac9c4c6531df47d613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaf36bbd717ff5ac9c4c6531df47d613">&#9670;&#160;</a></span>nsecPerSec_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr long Kit::System::Posix::nsecPerSec_ = 1000000000L</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Nanoseconds per second. </p>
+
+</div>
+</div>
+<a id="a7d75e7da3557dceb83c635f488e5d8c7" name="a7d75e7da3557dceb83c635f488e5d8c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d75e7da3557dceb83c635f488e5d8c7">&#9670;&#160;</a></span>timedWaitClock_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr clockid_t Kit::System::Posix::timedWaitClock_ = CLOCK_REALTIME</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Clock used for the timed-wait deadline. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Oct 27 2026 17:48:38 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Fri Oct 30 2026 14:11:17 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

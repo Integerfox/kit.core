@@ -94,9 +94,9 @@
 <!-- Node14 -->
 <g id="Node000014" class="node">
 <title>Node14</title>
-<g id="a_Node000014"><a xlink:href="class_kit_1_1_system_1_1_semaphore.html" target="_top" xlink:title="This semaphore concrete class defines the interface for a Counting Semaphore.">
-<polygon fill="white" stroke="#666666" points="1674.5,-80.37 1540.5,-80.37 1540.5,-61.37 1674.5,-61.37 1674.5,-80.37"/>
-<text text-anchor="middle" x="1607.5" y="-68.37" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::System::Semaphore</text>
+<g id="a_Node000014"><a xlink:href="class_kit_1_1_system_1_1_b_semaphore.html" target="_top" xlink:title="This concrete class defines the interface for a Binary Semaphore with non&#45;Priority Inheritance semant...">
+<polygon fill="white" stroke="#666666" points="1678,-80.37 1537,-80.37 1537,-61.37 1678,-61.37 1678,-80.37"/>
+<text text-anchor="middle" x="1607.5" y="-68.37" font-family="Helvetica,sans-Serif" font-size="10.00">Kit::System::BSemaphore</text>
 </a>
 </g>
 </g>
@@ -104,7 +104,7 @@
 <g id="edge20_Node000014_Node000004" class="edge">
 <title>Node4&#45;&gt;Node14</title>
 <g id="a_edge20_Node000014_Node000004"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M1379.37,-86.87C1386,-86.15 1392.62,-85.47 1399,-84.87 1446.09,-80.45 1499.32,-76.89 1540.08,-74.46"/>
+<path fill="none" stroke="#63b8ff" d="M1379.37,-86.87C1386,-86.15 1392.62,-85.47 1399,-84.87 1444.83,-80.57 1496.48,-77.08 1536.79,-74.66"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="1378.53,-83.44 1368.98,-88.03 1379.3,-90.4 1378.53,-83.44"/>
 </a>
 </g>
@@ -341,8 +341,8 @@
 <g id="edge19_Node000001_Node000014" class="edge">
 <title>Node14&#45;&gt;Node1</title>
 <g id="a_edge19_Node000001_Node000014"><a xlink:title=" ">
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1684.8,-73.1C1714.4,-74.9 1748.47,-78.12 1779,-83.87 1798.01,-87.45 1818.86,-93.84 1834.78,-99.26"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1684.7,-69.59 1674.52,-72.52 1684.31,-76.58 1684.7,-69.59"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1688.23,-73.32C1717.02,-75.15 1749.64,-78.34 1779,-83.87 1798.01,-87.45 1818.86,-93.84 1834.78,-99.26"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1688.41,-69.82 1678.22,-72.72 1688,-76.81 1688.41,-69.82"/>
 </a>
 </g>
 <text text-anchor="middle" x="1746" y="-86.87" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey"> m_sema</text>
