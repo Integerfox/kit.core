@@ -106,10 +106,6 @@ private:
 
     /// Prevent access to the move assignment operator -->semaphores can not be implicitly moved!
     BSemaphore& operator=( BSemaphore&& m ) = delete;
-
-
-    /// Friends(s)
-    friend class SimTick;
 };
 
 

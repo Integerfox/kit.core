@@ -54,11 +54,24 @@
 
 
 
+/* Kit/System/PrivateElapsedTime.h requires a millisecond counter that rolls over
+   modulo 2^32.  Deriving that counter from the FreeRTOS tick counter only preserves
+   the property when the tick period is a whole number of milliseconds: the derived
+   value is then ticks*(1000/configTICK_RATE_HZ), whose 32 bit truncation rolls over
+   cleanly.  For any other tick rate the tick counter's own 2^32 roll-over lands
+   mid-range in the millisecond counter and ElapsedTime::deltaMilliseconds() reports
+   a bogus multi-day delta once every tick-counter wrap.
+ */
+static_assert( ( 1000U % configTICK_RATE_HZ ) == 0U,
+               "configTICK_RATE_HZ must divide 1000 evenly (e.g. 1000, 500, 250, 200, 125, 100)" );
+
 /** Converts RTOS ticks to milliseconds.
 
     NOTE: Deliberately does NOT use portTICK_PERIOD_MS.  That macro is an integer
           division (1000/configTICK_RATE_HZ) and is therefore lossy - or zero -
           for any tick rate that does not divide evenly into 1000.
+
+    NOTE: The 32 bit truncation is intentional - see the static_assert above.
  */
 inline uint32_t KitSystemFreeRTOS_ticksToMsec( TickType_t ticks )
 {
@@ -82,6 +95,7 @@ inline TickType_t KitSystemFreeRTOS_msecToTicks( uint32_t msec )
 inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
     // The 32 bit roll-over is by design -->ElapsedTime::deltaMilliseconds() relies on it
+    // (guaranteed by the configTICK_RATE_HZ static_assert above)
     return KitSystemFreeRTOS_ticksToMsec( xTaskGetTickCount() );
 }
 

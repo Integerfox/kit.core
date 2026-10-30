@@ -59,7 +59,7 @@
 
 
 /// Mapping
-inline unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()
+inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
     return to_ms_since_boot( get_absolute_time() );
 }

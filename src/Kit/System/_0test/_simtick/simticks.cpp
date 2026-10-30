@@ -359,7 +359,8 @@ public:
 };
 
 class Lister : public Thread::ITraverser
-{public:
+{
+public:
     ///
     bool m_foundApple;
     bool m_foundOrange;
@@ -441,7 +442,7 @@ TEST_CASE( "simtimer" )
         while ( ticks )
         {
             uint64_t numTicks = ticks > DELAY_ / 8 ? DELAY_ / 8 : ticks;
-            KIT_SYSTEM_TRACE_MSG( SECT_,  "Timer: advancing %" PRIu64 " ticks", numTicks );
+            KIT_SYSTEM_TRACE_MSG( SECT_, "Timer: advancing %" PRIu64 " ticks", numTicks );
             SimTick::advance( numTicks );
             sleepInRealTime( 100 );
             ticks -= numTicks;
@@ -535,7 +536,7 @@ TEST_CASE( "simbasic" )
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     ShutdownUnitTesting::clearAndUseCounter();
 
-    KIT_SYSTEM_TRACE_MSG( SECT_,  "Creating Test Threads.  Real Elapsed time=%" PRIu32, ElapsedTime::millisecondsInRealTime() );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Creating Test Threads.  Real Elapsed time=%" PRIu32, ElapsedTime::millisecondsInRealTime() );
 
     Semaphore sema;
     Master2   masterRun( sema );
@@ -596,7 +597,7 @@ TEST_CASE( "simbasic" )
     Thread::destroy( *appleThreadPtr );
 
     // Advance simulated time for the SECOND test (and to finish the terminate of the orange thread)
-    KIT_SYSTEM_TRACE_MSG( SECT_,  "Waiting for timed Semaphore test to complete" );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Waiting for timed Semaphore test to complete" );
     while ( cherryThreadPtr->isActive() ||
             masterThreadPtr->isActive() )
     {
@@ -609,7 +610,7 @@ TEST_CASE( "simbasic" )
     }
 
     // Shutdown timer thread
-    KIT_SYSTEM_TRACE_MSG( SECT_,  "Shutting down timer thread..." ) ;
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Shutting down timer thread..." );
     timerRun.pleaseStop();
     while ( timerThreadPtr->isActive() )
     {

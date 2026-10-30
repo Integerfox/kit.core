@@ -55,14 +55,14 @@ static RegisterInitHandler_ autoRegister_systemInit_hook_;
 
 
 ///////////////////////////////////////////////////////////////
-/* A GlobalLock - NOT a mutex - is used to guard the 32-to-64 bit extension.
-   On an RTOS a GlobalLock is a critical section: a handful of instructions that
-   never block and never alter thread priorities.  A mutex here would nest the
-   KIT system mutex inside whatever application mutex the caller already holds,
-   chaining their priority-inheritance scopes together.
+/* A GlobalLock - instead of the KIT system mutex - is used to guard the 32-to-64
+   bit extension.  On an RTOS/bare-metal target a GlobalLock is a critical section:
+   a handful of instructions that never block and never alter thread priorities.
+   The system mutex here would nest inside whatever application mutex the caller
+   already holds, chaining their priority-inheritance scopes together.  On a Host
+   platform a GlobalLock is a recursive Mutex -->this method is re-entrant there.
 
-   MUST be called at least once per roll-over of the 32 bit millisecond counter
-   (i.e. at least once every 49.7 days) or elapsed time is silently lost.
+   See Kit/System/ElapsedTime.h for the full set of caller constraints.
  */
 uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept
 {
@@ -70,7 +70,7 @@ uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept
 
     // The delta is computed in 32 bits so that the unsigned roll-over yields the true delta
     uint32_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();
-    elapsedMsec_     += static_cast<uint32_t>( newTime - lastMsec_ );
+    elapsedMsec_     += newTime - lastMsec_;
     lastMsec_         = newTime;
     uint64_t result   = elapsedMsec_;
 

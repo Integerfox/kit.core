@@ -29,8 +29,23 @@ namespace System {
     2. Extended 'API' that uses a 64bit data type to represent elapsed time.
        The 64bit counter rolls over after 584 million years.
 
-    NOTE: The two APIs share the same underlying timing source, i.e. the returned
-          values are 'in-sync'
+    NOTES:
+
+        o The two APIs share the same underlying timing source, i.e. the
+          returned values are 'in-sync'
+        o The ENTIRE interface can ONLY be called from a thread context.  It is
+          NOT safe to call from an ISR or supervisor context.
+        o The 32bit methods are lock free.
+        o The 64bit (i.e. 'Ex') methods take a GlobalLock to guard the 32-to-64
+          bit extension.  On an RTOS/bare-metal target a GlobalLock is a
+          non-nestable critical section (it unconditionally re-enables
+          interrupts on exit) -->the 'Ex' methods MUST NOT be called from
+          inside another GlobalLock critical section.
+        o On a Host platform a GlobalLock is a recursive Mutex -->ALL of the
+          methods are re-entrant.
+        o The 64bit methods MUST be called at least once per roll-over of the
+          32bit counter (i.e. at least once every 49.7 days) or elapsed time is
+          silently lost.
  */
 class ElapsedTime
 {

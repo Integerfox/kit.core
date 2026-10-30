@@ -9,105 +9,74 @@
 /** @file */
 
 #include "Kit/System/BSemaphore.h"
+#include "Kit/System/Posix/semwait_.h"
 #include <errno.h>
-
-/// Nanoseconds per second
-#define NSEC_PER_SEC_ 1000000000L
 
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace System {
 
+/// Collapses any accumulated counts -->this is what provides the binary semantics
+static void drain_( sem_t& sema ) noexcept
+{
+    while ( sem_trywait( &sema ) == 0 )
+    {
+    }
+}
+
 
 //////////////////////////////////////////////////
 BSemaphore::BSemaphore( bool initialStateIsOne ) noexcept
 {
-    pthread_mutex_init( &m_sema.m_mutex, 0 );
-
-    // Use a monotonic clock so that timedWait() is immune to wall-clock changes
-    pthread_condattr_t condAttr;
-    pthread_condattr_init( &condAttr );
-    pthread_condattr_setclock( &condAttr, CLOCK_MONOTONIC );
-    pthread_cond_init( &m_sema.m_cond, &condAttr );
-    pthread_condattr_destroy( &condAttr );
-
-    m_sema.m_signaled = initialStateIsOne;
+    sem_init( &m_sema, 0, initialStateIsOne ? 1 : 0 );
 }
 
 BSemaphore::~BSemaphore() noexcept
 {
-    pthread_cond_destroy( &m_sema.m_cond );
-    pthread_mutex_destroy( &m_sema.m_mutex );
+    sem_destroy( &m_sema );
 }
 
 int BSemaphore::signal() noexcept
 {
-    pthread_mutex_lock( &m_sema.m_mutex );
-
-    // Binary semantics -->the signaled state saturates at 'one'
-    m_sema.m_signaled = true;
-    pthread_cond_signal( &m_sema.m_cond );
-    pthread_mutex_unlock( &m_sema.m_mutex );
+    // Note: the count is collapsed when it is CONSUMED, not here -->see su_signal()
+    sem_post( &m_sema );
     return 0;
 }
 
 int BSemaphore::su_signal() noexcept
 {
-    // TODO: Add log unexpected error/event since this isn't really supported
-    return signal();
+    // sem_post() is the ONLY semaphore operation that POSIX requires to be
+    // async-signal-safe, so this method must do nothing else
+    sem_post( &m_sema );
+    return 0;
 }
 
 bool BSemaphore::tryWait() noexcept
 {
-    pthread_mutex_lock( &m_sema.m_mutex );
-    bool signaled     = m_sema.m_signaled;
-    m_sema.m_signaled = false;
-    pthread_mutex_unlock( &m_sema.m_mutex );
-    return signaled;
+    if ( sem_trywait( &m_sema ) != 0 )
+    {
+        return false;
+    }
+    drain_( m_sema );
+    return true;
 }
 
 void BSemaphore::waitInRealTime() noexcept
 {
-    pthread_mutex_lock( &m_sema.m_mutex );
-
-    // Loop to protect against spurious wake-ups
-    while ( !m_sema.m_signaled )
+    while ( sem_wait( &m_sema ) != 0 && errno == EINTR )
     {
-        pthread_cond_wait( &m_sema.m_cond, &m_sema.m_mutex );
     }
-    m_sema.m_signaled = false;
-    pthread_mutex_unlock( &m_sema.m_mutex );
+    drain_( m_sema );
 }
 
 bool BSemaphore::timedWaitInRealTime( uint32_t timeoutMs ) noexcept
 {
-    // Convert the relative timeout to the absolute deadline required by pthreads
-    static const long msec2sec  = 1000;
-    static const long nsec2msec = 1000000;
-
-    struct timespec deadline;
-    clock_gettime( CLOCK_MONOTONIC, &deadline );
-    deadline.tv_sec  += (time_t)( timeoutMs / msec2sec );
-    deadline.tv_nsec += (long)( ( timeoutMs % msec2sec ) * nsec2msec );
-    if ( deadline.tv_nsec >= NSEC_PER_SEC_ )
+    if ( !Posix::semTimedWait_( m_sema, timeoutMs ) )
     {
-        deadline.tv_nsec -= NSEC_PER_SEC_;
-        deadline.tv_sec++;
+        return false;
     }
-
-    pthread_mutex_lock( &m_sema.m_mutex );
-    while ( !m_sema.m_signaled )
-    {
-        if ( pthread_cond_timedwait( &m_sema.m_cond, &m_sema.m_mutex, &deadline ) == ETIMEDOUT )
-        {
-            break;
-        }
-    }
-
-    bool signaled     = m_sema.m_signaled;
-    m_sema.m_signaled = false;
-    pthread_mutex_unlock( &m_sema.m_mutex );
-    return signaled;
+    drain_( m_sema );
+    return true;
 }
 
 }  // end namespaces

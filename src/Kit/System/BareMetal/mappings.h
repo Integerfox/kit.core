@@ -50,7 +50,7 @@
 
 
 /// Mapping
-inline unsigned long KitSystemElapsedTime_getTimeInMilliseconds_MAP()
+inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
     return Kit::System::BareMetal::getElapsedTimeMs();
 }
