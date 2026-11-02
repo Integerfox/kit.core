@@ -10,6 +10,7 @@
 
 #include "Mirrored.h"
 #include "Kit/Persistence/Types.h"
+#include "Kit/System/Assert.h"
 #include <cstdint>
 #include <string.h>
 
@@ -26,6 +27,10 @@ namespace Chunk {
 #define META_CRC            m_crc.getEdcSize()
 #define HEADER_LEN          ( META_TRANSACTION_ID + META_LEN )
 #define TOTAL_META          ( HEADER_LEN + META_CRC )
+
+// Per update: media A gets the larger transaction ID, media B the smaller
+#define TRANS_ID_INCREMENT_A 2
+#define TRANS_ID_INCREMENT_B 1
 
 /////////////////////
 
@@ -99,6 +104,9 @@ bool Mirrored::loadData( IPayload& dstHandler, Size_T index ) noexcept
 
 bool Mirrored::updateData( IPayload& srcHandler, Size_T index, bool invalidate ) noexcept
 {
+    // Enforce the IChunk precondition that loadData() is called first
+    KIT_SYSTEM_ASSERT( m_currentMedia != nullptr );
+
     if ( m_workBufferSize < TOTAL_META )
     {
         return false;
@@ -126,7 +134,7 @@ bool Mirrored::updateData( IPayload& srcHandler, Size_T index, bool invalidate )
     uint64_t baseId       = m_transId;
     for ( IMedia* media : writeOrder )
     {
-        uint64_t transId = media == &m_media ? baseId + 2 : baseId + 1;
+        uint64_t transId = baseId + ( media == &m_media ? TRANS_ID_INCREMENT_A : TRANS_ID_INCREMENT_B );
 
         // Prepend the header: Transaction ID + data length (length of the application data WITHOUT any of the chunk's meta data)
         KIT_PERSISTENCE_MEDIA_CURSOR cursor( m_workBuffer, HEADER_LEN );

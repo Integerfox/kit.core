@@ -14,6 +14,7 @@
 #include "Kit/Persistence/Record/IChunk.h"
 #include "Kit/Persistence/Record/IMedia.h"
 #include "Kit/Checksum/IEdc.h"
+#include "Kit/System/Assert.h"
 
 ///
 namespace Kit {
@@ -54,6 +55,7 @@ protected:
         , m_workBuffer( workBuffer )
         , m_workBufferSize( workBufferSize )
     {
+        KIT_SYSTEM_ASSERT( m_workBuffer != nullptr && m_workBufferSize > 0 );
     }
 
 protected:
@@ -71,7 +73,8 @@ protected:
         fails (e.g. the media is shorter than the expected chunk length).
 
         Returns true and sets 'dataLen' if the chunk is valid; else false is
-        returned.
+        returned.  NOTE: m_workBuffer is overwritten, i.e. any previous chunk
+        (or pointers into it) are invalidated.
      */
     bool readChunk( IMedia& media, Size_T index, Size_T headerLen, Size_T expectedDataLen, Size_T& dataLen ) noexcept;
 
@@ -80,17 +83,24 @@ protected:
         buffer, and then writes the entire chunk to 'media' at 'index' with a
         SINGLE IMedia::write() call. When 'invalidate' is true, the EDC is
         corrupted.  The caller is required to ensure that 'len' plus the EDC
-        size does not exceed m_workBufferSize.
+        size does not exceed m_workBufferSize.  NOTE: The EDC bytes are written
+        into m_workBuffer immediately after the first 'len' bytes.
 
         Returns true if the write was successful, else false is returned.
      */
     bool writeChunk( IMedia& media, Size_T index, Size_T len, bool invalidate ) noexcept;
 
 protected:
-    /// Helper method. Encapsulates pushing data to the record
+    /** Helper method. Encapsulates pushing 'sizeDataToPush' bytes of record
+        data, starting at 'srcData' (typically inside m_workBuffer), to the
+        record. Returns the result of IPayload::copyFrom().
+     */
     virtual bool pushToRecord( IPayload& dstHandler, const uint8_t* srcData, Size_T sizeDataToPush );
 
-    /// Helper method. Encapsulates retrieving data from the record.  Returns the length of the data
+    /** Helper method. Encapsulates retrieving up to 'maxDstLen' bytes of record
+        data into 'dstBuffer' (typically inside m_workBuffer).  Returns the
+        length of the data, or KIT_PERSISTENCE_SIZE_MAX on error.
+     */
     virtual Size_T pullFromRecord( IPayload& srcHandler, uint8_t* dstBuffer, Size_T maxDstLen );
 
     /// Helper method. Encapsulates actions that occur when there is NO VALID data

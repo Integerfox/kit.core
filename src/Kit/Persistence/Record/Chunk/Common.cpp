@@ -11,7 +11,6 @@
 #include "Common.h"
 #include "Kit/Persistence/Record/IMedia.h"
 #include "Kit/Persistence/Types.h"
-#include <string.h>
 
 #define SECT_ "Kit::Persistence::Record::Chunk::Common"
 

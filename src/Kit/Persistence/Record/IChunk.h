@@ -85,6 +85,10 @@ public:
         The method returns true if successful; else false is returned.  It is
         the responsibility of the Record/Application to decided what to do when
         there is error (e.g. ignored, a log entry generated, etc.)
+
+        PRECONDITION: loadData() MUST be called (after start()) before the first
+        call to updateData(), i.e. concrete chunks may rely on state captured
+        by loadData().
     */
     virtual bool updateData( IPayload& srcHandler,
                              Size_T    index      = 0,
