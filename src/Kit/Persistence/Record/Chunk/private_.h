@@ -15,6 +15,13 @@
 
 /** Size, in bytes, of the 'work buffer' that is default work buffer for concrete
     chunk classes.
+
+    The ENTIRE chunk (the chunk's meta data plus the Record's data) is assembled
+    in the work buffer, i.e. the buffer MUST be at least as large as the largest
+    Record's payload plus its Chunk's meta data.  Use IChunk::getMetadataLength()
+    for the meta data size (e.g. Crc: data length field + EDC; Mirrored:
+    transaction ID + data length field + EDC). A Record that does not fit will
+    fail to be written AND fail to be loaded (i.e. it will be reset to defaults).
  */
 #ifndef OPTION_KIT_PERSISTENCE_RECORD_CHUNK_WORK_BUFFER_SIZE
 #define OPTION_KIT_PERSISTENCE_RECORD_CHUNK_WORK_BUFFER_SIZE     1024

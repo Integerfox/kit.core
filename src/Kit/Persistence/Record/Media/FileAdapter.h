@@ -25,6 +25,10 @@ namespace Media {
     Kit::Io::File interfaces. Each instance of this class uses a single file
     as the storage media.  It is the responsibility of the application to ensure
     that each instance has a unique file name
+
+    The file emulates fixed size media, i.e. all 'allocatedLen' bytes are
+    always readable.  Bytes that have never been written (including when the
+    file does not exist) read as 0xFF (i.e. erased).
  */
 class FileAdapter : public Kit::Persistence::Record::IMedia
 {

@@ -10,19 +10,11 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "kit_config.h"
 #include "Kit/Persistence/Record/IPayload.h"
 #include "Kit/Persistence/Record/IChunk.h"
 #include "Kit/Persistence/Record/IMedia.h"
 #include "Kit/Checksum/IEdc.h"
-
-/** The supported maximum size, in bytes, of the EDC/CRC bytes in a chunk. This
-    value is used to allocate a work buffer on ths STACK - so do NOT arbitrarily
-    make it large.
- */
-#ifndef OPTION_KIT_PERSISTENCE_RECORD_CHUNK_MAX_EDC_SIZE 
-#define OPTION_KIT_PERSISTENCE_RECORD_CHUNK_MAX_EDC_SIZE 4
-#endif
+#include "Kit/System/Assert.h"
 
 ///
 namespace Kit {
@@ -40,7 +32,8 @@ namespace Chunk {
     - All child classes will use a checksum to detect corrupted data.
 
     - There is sufficiently large temporary buffer to hold a Record's data plus
-      the additional meta data persistent stored. Note: The private_.h header
+      ALL of the chunk's meta data (i.e. the entire chunk is assembled in the
+      buffer so it can be transferred with a single IMedia call). Note: The private_.h header
       file provides a default buffer. See private_.h for additional details
       about the default buffer.
 
@@ -62,80 +55,53 @@ protected:
         , m_workBuffer( workBuffer )
         , m_workBufferSize( workBufferSize )
     {
+        KIT_SYSTEM_ASSERT( m_workBuffer != nullptr && m_workBufferSize > 0 );
     }
 
 protected:
-    /** Helper method to read a Size_T value from the persistence storage. It
-        has the following behavior/side-effects:
+    /** Helper method that reads an entire chunk (header + record data + EDC)
+        from 'media' at 'index' into m_workBuffer and validates its EDC.  The
+        chunk layout in m_workBuffer is:
 
-        - The 'value' is accumulated into the CRC calculation (i.e. m_crc.accumulate()
-          is called)
+            [header: 'headerLen' bytes][record data: 'dataLen' bytes][EDC]
 
-        - The 'offset' is updated to point to the next byte after the Size_T
-          value that was read
+        The LAST field of the header MUST be the Size_T record data length.
 
-        - The default behavior is to use m_workBuffer as the buffer to read the
-          Size_T value into RAM.  However, a different buffer can be provided via
-          the workBuffer parameter.
+        The 'expectedDataLen' is used to read the entire chunk with a SINGLE
+        IMedia::read() call.  Additional reads are only issued when the stored
+        data length is larger than 'expectedDataLen', or when the single read
+        fails (e.g. the media is shorter than the expected chunk length).
 
-        Returns true if the read was successful, else false is returned.
+        Returns true and sets 'dataLen' if the chunk is valid; else false is
+        returned.  NOTE: m_workBuffer is overwritten, i.e. any previous chunk
+        (or pointers into it) are invalidated.
      */
-    bool readSizeT( Size_T& value, Size_T& offset, IMedia& media ) noexcept;
+    bool readChunk( IMedia& media, Size_T index, Size_T headerLen, Size_T expectedDataLen, Size_T& dataLen ) noexcept;
 
-    /// Same as readSizeT() but reads a uint64_t value
-    bool readUint64( uint64_t& value, Size_T& offset, IMedia& media ) noexcept;
-
-    /** Helper method to read the application record data into m_workBuffer. It
-        has the following behavior/side-effects:
-
-        - The method advances the 'offset' to point to the next byte after the
-          'datalen'
-
-        - The method also accumulates the data into the CRC calculation.
-
-        Returns true if the read was successful, else false is returned.
-     */
-    bool readRecordData( Size_T dataLen, Size_T& offset, IMedia& media ) noexcept;
-
-protected:
-    /** Helper method to write a Size_T value to persistent storage.  It has the
-        following behavior/side-effects:
-
-        - Converts the 'value' from the Host/MCU Endianess to the media's Endianess
-          before writing to persistent storage
-
-        - The 'value' is accumulated into the CRC calculation (i.e. m_crc.accumulate()
-          is called).  The accumulation is done AFTER any endianess conversion
-          is done.
-
-        - The 'offset' is updated to point to the next byte after the Size_T
-          value that was written
+    /** Helper method that computes the EDC over the first 'len' bytes of
+        m_workBuffer (i.e. header + record data), appends the EDC to the
+        buffer, and then writes the entire chunk to 'media' at 'index' with a
+        SINGLE IMedia::write() call. When 'invalidate' is true, the EDC is
+        corrupted.  The caller is required to ensure that 'len' plus the EDC
+        size does not exceed m_workBufferSize.  NOTE: The EDC bytes are written
+        into m_workBuffer immediately after the first 'len' bytes.
 
         Returns true if the write was successful, else false is returned.
      */
-    bool writeSizeT( Size_T value, Size_T& offset, IMedia& media ) noexcept;
-
-    /// Same as writeSizeT() but writes a uint64_t value
-    bool writeUint64( uint64_t value, Size_T& offset, IMedia& media ) noexcept;
-
-    /** Helper method to write the application record data stored in m_workBuffer.
-        It has the following behavior/side-effects:
-
-        - The method advances the 'offset' to point to the next byte after the
-          'datalen'
-
-        - The method also accumulates the data into the CRC calculation.
-
-        Returns true if the write was successful, else false is returned.
-     */
-    bool writeRecordData( Size_T dataLen, Size_T& offset, IMedia& media ) noexcept;
+    bool writeChunk( IMedia& media, Size_T index, Size_T len, bool invalidate ) noexcept;
 
 protected:
-    /// Helper method. Encapsulates pushing data to the record
-    virtual bool pushToRecord( IPayload& dstHandler, Size_T sizeDataToPush );
+    /** Helper method. Encapsulates pushing 'sizeDataToPush' bytes of record
+        data, starting at 'srcData' (typically inside m_workBuffer), to the
+        record. Returns the result of IPayload::copyFrom().
+     */
+    virtual bool pushToRecord( IPayload& dstHandler, const uint8_t* srcData, Size_T sizeDataToPush );
 
-    /// Helper method. Encapsulates retrieving data from the record.  Returns the length of the data
-    virtual Size_T pullFromRecord( IPayload& srcHandler );
+    /** Helper method. Encapsulates retrieving up to 'maxDstLen' bytes of record
+        data into 'dstBuffer' (typically inside m_workBuffer).  Returns the
+        length of the data, or KIT_PERSISTENCE_SIZE_MAX on error.
+     */
+    virtual Size_T pullFromRecord( IPayload& srcHandler, uint8_t* dstBuffer, Size_T maxDstLen );
 
     /// Helper method. Encapsulates actions that occur when there is NO VALID data
     virtual void resetChunkOnBadData();

@@ -65,14 +65,11 @@ public:
 
     /** This method reads 'bytesToRead' bytes from the media at the specified
         offset. The 'dstBuffer' is REQUIRED to be at least 'bytesToRead' bytes
-        in size. The method does not return until:
+        in size.
 
-        1) All requested bytes have been read,
-        2) OR all available bytes have been read (i.e. end of media reached),
-        3) OR an error occurs.
-
-        The method returns the number of bytes read.  A return value of KIT_PERSISTENCE_SIZE_MAX
-        indicates that an error occurred.
+        The method returns 'bytesToRead' on success. KIT_PERSISTENCE_SIZE_MAX
+        is returned when an error occurred, which INCLUDES a request that
+        extends past getMaxSize() (i.e. there are no partial reads).
      */
     virtual Size_T read( Size_T offset,
                          void*  dstBuffer,
