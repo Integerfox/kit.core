@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-30 14:19:38</td>
+            <td class="headerValue">2026-11-02 22:55:05</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -126,18 +126,18 @@
 <span id="L64"><span class="lineNum">      64</span>                 :             : </span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :    See Kit/System/ElapsedTime.h for the full set of caller constraints.</span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :  */</span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">        5610 : uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">        5617 : uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
-<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        5610 :     GlobalLock::begin();</span></span>
+<span id="L69"><span class="lineNum">      69</span>                 :<span class="tlaGNC">        5617 :     GlobalLock::begin();</span></span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : </span>
 <span id="L71"><span class="lineNum">      71</span>                 :             :     // The delta is computed in 32 bits so that the unsigned roll-over yields the true delta</span>
 <span id="L72"><span class="lineNum">      72</span>                 :             :     uint32_t newTime  = KitSystemElapsedTime_getTimeInMilliseconds();</span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">        5610 :     elapsedMsec_     += newTime - lastMsec_;</span></span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">        5610 :     lastMsec_         = newTime;</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">        5617 :     elapsedMsec_     += newTime - lastMsec_;</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">        5617 :     lastMsec_         = newTime;</span></span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :     uint64_t result   = elapsedMsec_;</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : </span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">        5610 :     GlobalLock::end();</span></span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">        5610 :     return result;</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">        5617 :     GlobalLock::end();</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">        5617 :     return result;</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : }</span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : </span>
 <span id="L81"><span class="lineNum">      81</span>                 :             : </span>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -281,7 +281,8 @@ Public Member Functions</h2></td></tr>
 <p>The entire record is written/updated when this call is made. The method does not return until the write operation has completed.</p>
 <p>If the 'invalidate' argument is true, the instead of writing the new data to persistent storage, all binary zero's are written AND all of the chunk's metadata is invalidated. This effectively erases the <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a>, i.e. the next time the record is loaded, it will fail because the chunk data is NOT valid.</p>
 <p>The 'index' offset can be used by the <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_chunk.html" title="The &#39;Chunk&#39; namespace is responsible for reading, writing, and framing the Record data in persistent ...">Chunk</a> client to 'index into' the <a class="el" href="namespace_kit_1_1_persistence_1_1_record_1_1_chunk.html" title="The &#39;Chunk&#39; namespace is responsible for reading, writing, and framing the Record data in persistent ...">Chunk</a>'s <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html" title="This abstract class defines the operations that can be performed on a persistent media.">IMedia</a> instead of starting at offset zero. This argument should only be used when multiple 'entries' are being stored in a single <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html" title="This abstract class defines the operations that can be performed on a persistent media.">IMedia</a> storage.</p>
-<p>The method returns true if successful; else false is returned. It is the responsibility of the Record/Application to decided what to do when there is error (e.g. ignored, a log entry generated, etc.) </p>
+<p>The method returns true if successful; else false is returned. It is the responsibility of the Record/Application to decided what to do when there is error (e.g. ignored, a log entry generated, etc.)</p>
+<p>PRECONDITION: <a class="el" href="#aaa07ced972c2e3946dd8f30252796432" title="This method is used to initiate the sequence to retrieve a Record&#39;s data from persistent storage.">loadData()</a> MUST be called (after <a class="el" href="#a183e9cc34b3b63524e69fe59a728445b" title="This method is to start/initialize the chunk.">start()</a>) before the first call to <a class="el" href="#a90f6df7e64ddece78fd54b2be67a8b82" title="This method is used to update persistent storage with new data for the Record.">updateData()</a>, i.e. concrete chunks may rely on state captured by <a class="el" href="#aaa07ced972c2e3946dd8f30252796432" title="This method is used to initiate the sequence to retrieve a Record&#39;s data from persistent storage.">loadData()</a>. </p>
 
 <p>Implemented in <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_chunk_1_1_crc.html#a8a3c817b4691f6e60dbb113a612ca539">Kit::Persistence::Record::Chunk::Crc</a>, and <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_chunk_1_1_mirrored.html#afa4db1be23f0e7a74d260460303496d2">Kit::Persistence::Record::Chunk::Mirrored</a>.</p>
 
@@ -293,7 +294,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 30 2026 14:11:17 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

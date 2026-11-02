@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -77,33 +77,21 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a4be0127cbe37f1fc9172bab5e181ed5d" id="r_a4be0127cbe37f1fc9172bab5e181ed5d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4be0127cbe37f1fc9172bab5e181ed5d">Common</a> (<a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media, <a class="el" href="class_kit_1_1_checksum_1_1_i_edc.html">Kit::Checksum::IEdc</a> &amp;edc, uint8_t *workBuffer, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> workBufferSize) noexcept</td></tr>
 <tr class="memdesc:a4be0127cbe37f1fc9172bab5e181ed5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a4be0127cbe37f1fc9172bab5e181ed5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8013ab39907c6ebc5c9ad69ca4cd618c" id="r_a8013ab39907c6ebc5c9ad69ca4cd618c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8013ab39907c6ebc5c9ad69ca4cd618c">pullFromRecord</a> (<a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;srcHandler)</td></tr>
-<tr class="memdesc:a8013ab39907c6ebc5c9ad69ca4cd618c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method. Encapsulates retrieving data from the record. Returns the length of the data.  <br /></td></tr>
-<tr class="separator:a8013ab39907c6ebc5c9ad69ca4cd618c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae95edb5d54f26641558f12e49f32ce9d" id="r_ae95edb5d54f26641558f12e49f32ce9d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae95edb5d54f26641558f12e49f32ce9d">pushToRecord</a> (<a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;dstHandler, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> sizeDataToPush)</td></tr>
-<tr class="memdesc:ae95edb5d54f26641558f12e49f32ce9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method. Encapsulates pushing data to the record.  <br /></td></tr>
-<tr class="separator:ae95edb5d54f26641558f12e49f32ce9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcf7dc681ed5c46d0a8aef0b15000a95" id="r_adcf7dc681ed5c46d0a8aef0b15000a95"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adcf7dc681ed5c46d0a8aef0b15000a95">readRecordData</a> (<a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> dataLen, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;offset, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media) noexcept</td></tr>
-<tr class="memdesc:adcf7dc681ed5c46d0a8aef0b15000a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to read the application record data into m_workBuffer.  <br /></td></tr>
-<tr class="separator:adcf7dc681ed5c46d0a8aef0b15000a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2ea7803c557f3bf24c58abe9e9c7eb9" id="r_ad2ea7803c557f3bf24c58abe9e9c7eb9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad2ea7803c557f3bf24c58abe9e9c7eb9">readSizeT</a> (<a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;value, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;offset, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media) noexcept</td></tr>
-<tr class="memdesc:ad2ea7803c557f3bf24c58abe9e9c7eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to read a Size_T value from the persistence storage.  <br /></td></tr>
-<tr class="separator:ad2ea7803c557f3bf24c58abe9e9c7eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87c318974f1f99e6a6d7956544ff890b" id="r_a87c318974f1f99e6a6d7956544ff890b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87c318974f1f99e6a6d7956544ff890b">readUint64</a> (uint64_t &amp;value, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;offset, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media) noexcept</td></tr>
-<tr class="memdesc:a87c318974f1f99e6a6d7956544ff890b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#ad2ea7803c557f3bf24c58abe9e9c7eb9" title="Helper method to read a Size_T value from the persistence storage.">readSizeT()</a> but reads a uint64_t value.  <br /></td></tr>
-<tr class="separator:a87c318974f1f99e6a6d7956544ff890b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3db5de7509bdfa69dc60bccce19003a5" id="r_a3db5de7509bdfa69dc60bccce19003a5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3db5de7509bdfa69dc60bccce19003a5">pullFromRecord</a> (<a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;srcHandler, uint8_t *dstBuffer, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> maxDstLen)</td></tr>
+<tr class="memdesc:a3db5de7509bdfa69dc60bccce19003a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method.  <br /></td></tr>
+<tr class="separator:a3db5de7509bdfa69dc60bccce19003a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b2bd4554ca3716d6f79515fe1574f66" id="r_a5b2bd4554ca3716d6f79515fe1574f66"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b2bd4554ca3716d6f79515fe1574f66">pushToRecord</a> (<a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;dstHandler, const uint8_t *srcData, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> sizeDataToPush)</td></tr>
+<tr class="memdesc:a5b2bd4554ca3716d6f79515fe1574f66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method.  <br /></td></tr>
+<tr class="separator:a5b2bd4554ca3716d6f79515fe1574f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af591d66a7bfd8ba2ab47abef92fc0dda" id="r_af591d66a7bfd8ba2ab47abef92fc0dda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af591d66a7bfd8ba2ab47abef92fc0dda">readChunk</a> (<a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> index, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> headerLen, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> expectedDataLen, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;dataLen) noexcept</td></tr>
+<tr class="memdesc:af591d66a7bfd8ba2ab47abef92fc0dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method that reads an entire chunk (header + record data + EDC) from 'media' at 'index' into m_workBuffer and validates its EDC.  <br /></td></tr>
+<tr class="separator:af591d66a7bfd8ba2ab47abef92fc0dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e0d0a8f7704415d43768812e34947cc" id="r_a8e0d0a8f7704415d43768812e34947cc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e0d0a8f7704415d43768812e34947cc">resetChunkOnBadData</a> ()</td></tr>
 <tr class="memdesc:a8e0d0a8f7704415d43768812e34947cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method. Encapsulates actions that occur when there is NO VALID data.  <br /></td></tr>
 <tr class="separator:a8e0d0a8f7704415d43768812e34947cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f163ed53337cec1d993572d15e87842" id="r_a3f163ed53337cec1d993572d15e87842"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f163ed53337cec1d993572d15e87842">writeRecordData</a> (<a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> dataLen, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;offset, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media) noexcept</td></tr>
-<tr class="memdesc:a3f163ed53337cec1d993572d15e87842"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to write the application record data stored in m_workBuffer.  <br /></td></tr>
-<tr class="separator:a3f163ed53337cec1d993572d15e87842"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf39fb90091b0ac3436b97e44fd96d4d" id="r_abf39fb90091b0ac3436b97e44fd96d4d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf39fb90091b0ac3436b97e44fd96d4d">writeSizeT</a> (<a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> value, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;offset, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media) noexcept</td></tr>
-<tr class="memdesc:abf39fb90091b0ac3436b97e44fd96d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to write a Size_T value to persistent storage.  <br /></td></tr>
-<tr class="separator:abf39fb90091b0ac3436b97e44fd96d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c5733af94a9153811d692c90f54d0c6" id="r_a0c5733af94a9153811d692c90f54d0c6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c5733af94a9153811d692c90f54d0c6">writeUint64</a> (uint64_t value, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;offset, <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media) noexcept</td></tr>
-<tr class="memdesc:a0c5733af94a9153811d692c90f54d0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="#abf39fb90091b0ac3436b97e44fd96d4d" title="Helper method to write a Size_T value to persistent storage.">writeSizeT()</a> but writes a uint64_t value.  <br /></td></tr>
-<tr class="separator:a0c5733af94a9153811d692c90f54d0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25a921bf9df5af7814e04046935d279e" id="r_a25a921bf9df5af7814e04046935d279e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25a921bf9df5af7814e04046935d279e">writeChunk</a> (<a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;media, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> index, <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> len, bool invalidate) noexcept</td></tr>
+<tr class="memdesc:a25a921bf9df5af7814e04046935d279e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method that computes the EDC over the first 'len' bytes of m_workBuffer (i.e.  <br /></td></tr>
+<tr class="separator:a25a921bf9df5af7814e04046935d279e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -147,8 +135,8 @@ Additional Inherited Members</h2></td></tr>
 <p>for concrete child classes that implement the <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_chunk.html" title="This abstract class defines the interface for managing a &#39;chunk&#39;.">IChunk</a> interface. The class ASSUMES the following:</p>
 <ul>
 <li>All child classes will use a checksum to detect corrupted data.</li>
-<li>There is sufficiently large temporary buffer to hold a <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a>'s data plus the additional meta data persistent stored. Note: The <a class="el" href="private___8h.html">private_.h</a> header file provides a default buffer. See <a class="el" href="private___8h.html">private_.h</a> for additional details about the default buffer.</li>
-<li>Some of helper methods (e.g. <a class="el" href="#ae95edb5d54f26641558f12e49f32ce9d" title="Helper method. Encapsulates pushing data to the record.">pushToRecord()</a> and <a class="el" href="#a8013ab39907c6ebc5c9ad69ca4cd618c" title="Helper method. Encapsulates retrieving data from the record. Returns the length of the data.">pullFromRecord()</a>) are virtual wrapper methods. By having a virtual wrapper - pushing/pulling to/from the data record facilitates future child classes to extend existing chunk classes with the ability to decrypt/encrypt the record data </li>
+<li>There is sufficiently large temporary buffer to hold a <a class="el" href="namespace_kit_1_1_persistence_1_1_record.html" title="The &#39;Record&#39; namespace provides a basic records based paradigm for storing non-volatile data....">Record</a>'s data plus ALL of the chunk's meta data (i.e. the entire chunk is assembled in the buffer so it can be transferred with a single <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html" title="This abstract class defines the operations that can be performed on a persistent media.">IMedia</a> call). Note: The <a class="el" href="private___8h.html">private_.h</a> header file provides a default buffer. See <a class="el" href="private___8h.html">private_.h</a> for additional details about the default buffer.</li>
+<li>Some of helper methods (e.g. <a class="el" href="#a5b2bd4554ca3716d6f79515fe1574f66" title="Helper method.">pushToRecord()</a> and <a class="el" href="#a3db5de7509bdfa69dc60bccce19003a5" title="Helper method.">pullFromRecord()</a>) are virtual wrapper methods. By having a virtual wrapper - pushing/pulling to/from the data record facilitates future child classes to extend existing chunk classes with the ability to decrypt/encrypt the record data </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4be0127cbe37f1fc9172bab5e181ed5d" name="a4be0127cbe37f1fc9172bab5e181ed5d"></a>
@@ -193,8 +181,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a8013ab39907c6ebc5c9ad69ca4cd618c" name="a8013ab39907c6ebc5c9ad69ca4cd618c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8013ab39907c6ebc5c9ad69ca4cd618c">&#9670;&#160;</a></span>pullFromRecord()</h2>
+<a id="a3db5de7509bdfa69dc60bccce19003a5" name="a3db5de7509bdfa69dc60bccce19003a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3db5de7509bdfa69dc60bccce19003a5">&#9670;&#160;</a></span>pullFromRecord()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,8 +193,17 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">virtual <a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> Kit::Persistence::Record::Chunk::Common::pullFromRecord </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>srcHandler</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html">IPayload</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>srcHandler</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>dstBuffer</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>maxDstLen</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -216,12 +213,13 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Helper method. Encapsulates retrieving data from the record. Returns the length of the data. </p>
+<p>Helper method. </p>
+<p>Encapsulates retrieving up to 'maxDstLen' bytes of record data into 'dstBuffer' (typically inside m_workBuffer). Returns the length of the data, or KIT_PERSISTENCE_SIZE_MAX on error. </p>
 
 </div>
 </div>
-<a id="ae95edb5d54f26641558f12e49f32ce9d" name="ae95edb5d54f26641558f12e49f32ce9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae95edb5d54f26641558f12e49f32ce9d">&#9670;&#160;</a></span>pushToRecord()</h2>
+<a id="a5b2bd4554ca3716d6f79515fe1574f66" name="a5b2bd4554ca3716d6f79515fe1574f66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b2bd4554ca3716d6f79515fe1574f66">&#9670;&#160;</a></span>pushToRecord()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,6 +235,11 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>srcData</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>sizeDataToPush</em></span>&#160;)</td>
         </tr>
       </table>
@@ -247,12 +250,13 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Helper method. Encapsulates pushing data to the record. </p>
+<p>Helper method. </p>
+<p>Encapsulates pushing 'sizeDataToPush' bytes of record data, starting at 'srcData' (typically inside m_workBuffer), to the record. Returns the result of <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_payload.html#a6021ef42ad5fd33cd097e245f687ce2e" title="This method updates the Record&#39;s data payload contents.">IPayload::copyFrom()</a>. </p>
 
 </div>
 </div>
-<a id="adcf7dc681ed5c46d0a8aef0b15000a95" name="adcf7dc681ed5c46d0a8aef0b15000a95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adcf7dc681ed5c46d0a8aef0b15000a95">&#9670;&#160;</a></span>readRecordData()</h2>
+<a id="af591d66a7bfd8ba2ab47abef92fc0dda" name="af591d66a7bfd8ba2ab47abef92fc0dda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af591d66a7bfd8ba2ab47abef92fc0dda">&#9670;&#160;</a></span>readChunk()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,19 +265,29 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Kit::Persistence::Record::Chunk::Common::readRecordData </td>
+          <td class="memname">bool Kit::Persistence::Record::Chunk::Common::readChunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>dataLen</em>, </span></td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>media</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>index</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>media</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>headerLen</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>expectedDataLen</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>dataLen</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -283,92 +297,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Helper method to read the application record data into m_workBuffer. </p>
-<p>It has the following behavior/side-effects:</p>
-<ul>
-<li>The method advances the 'offset' to point to the next byte after the 'datalen'</li>
-<li>The method also accumulates the data into the CRC calculation.</li>
-</ul>
-<p>Returns true if the read was successful, else false is returned. </p>
-
-</div>
-</div>
-<a id="ad2ea7803c557f3bf24c58abe9e9c7eb9" name="ad2ea7803c557f3bf24c58abe9e9c7eb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2ea7803c557f3bf24c58abe9e9c7eb9">&#9670;&#160;</a></span>readSizeT()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Kit::Persistence::Record::Chunk::Common::readSizeT </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>media</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper method to read a Size_T value from the persistence storage. </p>
-<p>It has the following behavior/side-effects:</p>
-<ul>
-<li>The 'value' is accumulated into the CRC calculation (i.e. m_crc.accumulate() is called)</li>
-<li>The 'offset' is updated to point to the next byte after the Size_T value that was read</li>
-<li>The default behavior is to use m_workBuffer as the buffer to read the Size_T value into RAM. However, a different buffer can be provided via the workBuffer parameter.</li>
-</ul>
-<p>Returns true if the read was successful, else false is returned. </p>
-
-</div>
-</div>
-<a id="a87c318974f1f99e6a6d7956544ff890b" name="a87c318974f1f99e6a6d7956544ff890b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87c318974f1f99e6a6d7956544ff890b">&#9670;&#160;</a></span>readUint64()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Kit::Persistence::Record::Chunk::Common::readUint64 </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>media</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Same as <a class="el" href="#ad2ea7803c557f3bf24c58abe9e9c7eb9" title="Helper method to read a Size_T value from the persistence storage.">readSizeT()</a> but reads a uint64_t value. </p>
+<p>Helper method that reads an entire chunk (header + record data + EDC) from 'media' at 'index' into m_workBuffer and validates its EDC. </p>
+<p>The chunk layout in m_workBuffer is: </p><pre class="fragment">[header: 'headerLen' bytes][record data: 'dataLen' bytes][EDC]
+</pre><p> The LAST field of the header MUST be the Size_T record data length.</p>
+<p>The 'expectedDataLen' is used to read the entire chunk with a SINGLE <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html#a1ee5066be93933f19725c0e3f9a0269a" title="This method reads &#39;bytesToRead&#39; bytes from the media at the specified offset.">IMedia::read()</a> call. Additional reads are only issued when the stored data length is larger than 'expectedDataLen', or when the single read fails (e.g. the media is shorter than the expected chunk length).</p>
+<p>Returns true and sets 'dataLen' if the chunk is valid; else false is returned. NOTE: m_workBuffer is overwritten, i.e. any previous chunk (or pointers into it) are invalidated. </p>
 
 </div>
 </div>
@@ -399,8 +332,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a3f163ed53337cec1d993572d15e87842" name="a3f163ed53337cec1d993572d15e87842"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f163ed53337cec1d993572d15e87842">&#9670;&#160;</a></span>writeRecordData()</h2>
+<a id="a25a921bf9df5af7814e04046935d279e" name="a25a921bf9df5af7814e04046935d279e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25a921bf9df5af7814e04046935d279e">&#9670;&#160;</a></span>writeChunk()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -409,19 +342,24 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Kit::Persistence::Record::Chunk::Common::writeRecordData </td>
+          <td class="memname">bool Kit::Persistence::Record::Chunk::Common::writeChunk </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>dataLen</em>, </span></td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>media</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>index</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>media</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>len</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>invalidate</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -431,92 +369,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Helper method to write the application record data stored in m_workBuffer. </p>
-<p>It has the following behavior/side-effects:</p>
-<ul>
-<li>The method advances the 'offset' to point to the next byte after the 'datalen'</li>
-<li>The method also accumulates the data into the CRC calculation.</li>
-</ul>
+<p>Helper method that computes the EDC over the first 'len' bytes of m_workBuffer (i.e. </p>
+<p>header + record data), appends the EDC to the buffer, and then writes the entire chunk to 'media' at 'index' with a SINGLE <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html#ab9979f41fea9c948c26c858b49333228" title="This method writes &#39;srcLen&#39; bytes to the media at the specified offset.">IMedia::write()</a> call. When 'invalidate' is true, the EDC is corrupted. The caller is required to ensure that 'len' plus the EDC size does not exceed m_workBufferSize. NOTE: The EDC bytes are written into m_workBuffer immediately after the first 'len' bytes.</p>
 <p>Returns true if the write was successful, else false is returned. </p>
-
-</div>
-</div>
-<a id="abf39fb90091b0ac3436b97e44fd96d4d" name="abf39fb90091b0ac3436b97e44fd96d4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf39fb90091b0ac3436b97e44fd96d4d">&#9670;&#160;</a></span>writeSizeT()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Kit::Persistence::Record::Chunk::Common::writeSizeT </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a></td>          <td class="paramname"><span class="paramname"><em>value</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>media</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Helper method to write a Size_T value to persistent storage. </p>
-<p>It has the following behavior/side-effects:</p>
-<ul>
-<li>Converts the 'value' from the Host/MCU Endianess to the media's Endianess before writing to persistent storage</li>
-<li>The 'value' is accumulated into the CRC calculation (i.e. m_crc.accumulate() is called). The accumulation is done AFTER any endianess conversion is done.</li>
-<li>The 'offset' is updated to point to the next byte after the Size_T value that was written</li>
-</ul>
-<p>Returns true if the write was successful, else false is returned. </p>
-
-</div>
-</div>
-<a id="a0c5733af94a9153811d692c90f54d0c6" name="a0c5733af94a9153811d692c90f54d0c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c5733af94a9153811d692c90f54d0c6">&#9670;&#160;</a></span>writeUint64()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Kit::Persistence::Record::Chunk::Common::writeUint64 </td>
-          <td>(</td>
-          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>value</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>offset</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html">IMedia</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>media</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Same as <a class="el" href="#abf39fb90091b0ac3436b97e44fd96d4d" title="Helper method to write a Size_T value to persistent storage.">writeSizeT()</a> but writes a uint64_t value. </p>
 
 </div>
 </div>
@@ -623,7 +478,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 30 2026 14:11:17 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

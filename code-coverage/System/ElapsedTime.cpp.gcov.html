@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-30 14:19:38</td>
+            <td class="headerValue">2026-11-02 22:55:05</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -125,9 +125,9 @@
 <span id="L63"><span class="lineNum">      63</span>                 :             :     The method is a read plus an unsigned subtraction.  The 32 bit roll-over is</span>
 <span id="L64"><span class="lineNum">      64</span>                 :             :     by design: deltaMilliseconds() relies on it.</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             :  */</span>
-<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">     1621225 : uint32_t ElapsedTime::millisecondsInRealTime() noexcept</span></span>
+<span id="L66"><span class="lineNum">      66</span>                 :<span class="tlaGNC">     2794683 : uint32_t ElapsedTime::millisecondsInRealTime() noexcept</span></span>
 <span id="L67"><span class="lineNum">      67</span>                 :             : {</span>
-<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">     1568191 :     return KitSystemElapsedTime_getTimeInMilliseconds() - startMsec_;</span></span>
+<span id="L68"><span class="lineNum">      68</span>                 :<span class="tlaGNC">     2741750 :     return KitSystemElapsedTime_getTimeInMilliseconds() - startMsec_;</span></span>
 <span id="L69"><span class="lineNum">      69</span>                 :             : }</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             : </span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : } // end namespaces</span>

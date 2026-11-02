@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 433-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -108,7 +108,8 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This concrete class implements the <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_i_media.html" title="This abstract class defines the operations that can be performed on a persistent media.">IMedia</a> interface using the <a class="el" href="namespace_kit_1_1_io_1_1_file.html" title="The File namespace provides the base/common interfaces for reading and writing data from/to Files.">Kit::Io::File</a> interfaces. </p>
-<p>Each instance of this class uses a single file as the storage media. It is the responsibility of the application to ensure that each instance has a unique file name </p>
+<p>Each instance of this class uses a single file as the storage media. It is the responsibility of the application to ensure that each instance has a unique file name</p>
+<p>The file emulates fixed size media, i.e. all 'allocatedLen' bytes are always readable. Bytes that have never been written (including when the file does not exist) read as 0xFF (i.e. erased). </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a466c08c72ba2ca32e858c2d03fe29f75" name="a466c08c72ba2ca32e858c2d03fe29f75"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a466c08c72ba2ca32e858c2d03fe29f75">&#9670;&#160;</a></span>FileAdapter()</h2>
@@ -360,7 +361,7 @@ Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 30 2026 14:11:17 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
