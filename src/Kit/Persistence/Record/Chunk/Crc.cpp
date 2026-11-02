@@ -44,32 +44,12 @@ Size_T Crc::getMetadataLength() const noexcept
 /////////////////////
 bool Crc::loadData( IPayload& dstHandler, Size_T index ) noexcept
 {
-    m_crc.reset();
-    Size_T offset = index;
-
-    // Read the data length. This is the length of the application data WITHOUT
-    // any of the chunk's meta data
-    Size_T datalen;
-    if ( readSizeT( datalen, offset, m_media ) )
+    // Chunk layout: [data length][application data][CRC]
+    Size_T dataLen;
+    if ( readChunk( m_media, index, META_LEN, dstHandler.getMaxPayloadSize(), dataLen ) )
     {
-        // Make sure we have enough buffer space (account of possible integer overflow of 'datalen + META_CRC')
-        Size_T dataRemaining = datalen + META_CRC;
-        if ( dataRemaining > m_workBufferSize || dataRemaining < datalen )
-        {
-            resetChunkOnBadData();
-            return false;
-        }
-
-        // Read the data AND CRC bytes
-        if ( readRecordData( datalen + META_CRC, offset, m_media ) )
-        {
-            // Check the CRC
-            if ( m_crc.isOkay() )
-            {
-                // Pass the data to the client
-                return pushToRecord( dstHandler, datalen );
-            }
-        }
+        // Pass the data to the client
+        return pushToRecord( dstHandler, m_workBuffer + META_LEN, dataLen );
     }
 
     // If I get here that was an error OR a BAD CRC
@@ -79,9 +59,14 @@ bool Crc::loadData( IPayload& dstHandler, Size_T index ) noexcept
 
 bool Crc::updateData( IPayload& srcHandler, Size_T index, bool invalidate ) noexcept
 {
-    // Get the IPayload data
+    if ( m_workBufferSize < TOTAL_META )
+    {
+        return false;
+    }
+
+    // Get the IPayload data (placed after the data length field)
     memset( m_workBuffer, 0, m_workBufferSize );  // zero out all of the data - to ensure known values for the 'extra-space' (if there is any)
-    Size_T dataLen = pullFromRecord( srcHandler );
+    Size_T dataLen = pullFromRecord( srcHandler, m_workBuffer + META_LEN, m_workBufferSize - TOTAL_META );
     if ( dataLen == KIT_PERSISTENCE_SIZE_MAX )
     {
         return false;
@@ -93,33 +78,12 @@ bool Crc::updateData( IPayload& srcHandler, Size_T index, bool invalidate ) noex
         memset( m_workBuffer, 0, m_workBufferSize );
     }
 
-    // Housekeeping
-    Size_T offset = index;
-    bool   result = true;
-    m_crc.reset();
+    // Prepend the data length. This is the length of the application data WITHOUT any of the chunk's meta data
+    KIT_PERSISTENCE_MEDIA_CURSOR cursor( m_workBuffer, META_LEN );
+    cursor.write( dataLen );
 
-    // Write the data length to persistent storage. This is the length of the application data WITHOUT any of the chunk's meta data
-    result &= writeSizeT( dataLen, offset, m_media );
-
-    // Write Application's data
-    result &= writeRecordData( dataLen, offset, m_media );
-
-    // Finalize the CRC and write it to persistent storage.
-    // NOTE: The endianess of the CRC in the payload is determined by the concrete
-    //       IEdc implementation, i.e. no endian conversion is required by the
-    //       Chunk when writing the CRC bytes.
-    result &= m_crc.finalize( m_workBuffer, m_workBufferSize );
-    if ( result )
-    {
-        if ( invalidate )
-        {
-            // Corrupt the CRC when erasing the data
-            m_workBuffer[0] ^= 0xA5;
-        }
-        result &= m_media.write( offset, m_workBuffer, META_CRC );
-    }
-
-    return result;
+    // Append the CRC and write the entire chunk with a single media write
+    return writeChunk( m_media, index, META_LEN + dataLen, invalidate );
 }
 
 

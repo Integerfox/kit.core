@@ -69,8 +69,8 @@ public:
     Size_T getMetadataLength() const noexcept override;
 
 protected:
-    /// Helper method.  If the region is 'corrupt' a transaction ID of zero is returned
-    virtual uint64_t getTransactionId( IMedia& media, Size_T& dataLen, Size_T index = 0 );
+    /// Helper method.  Reads (and validates) the chunk from 'media'. If the region is 'corrupt' a transaction ID of zero is returned
+    virtual uint64_t getTransactionId( IMedia& media, Size_T index, Size_T expectedDataLen, Size_T& dataLen );
 
 protected:
     /// Current Transaction ID (the larger the value - the newer the data)

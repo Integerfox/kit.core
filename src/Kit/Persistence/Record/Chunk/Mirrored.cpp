@@ -24,7 +24,8 @@ namespace Chunk {
 #define META_TRANSACTION_ID sizeof( uint64_t )
 #define META_LEN            sizeof( Size_T )
 #define META_CRC            m_crc.getEdcSize()
-#define TOTAL_META          ( META_TRANSACTION_ID + META_LEN + META_CRC )
+#define HEADER_LEN          ( META_TRANSACTION_ID + META_LEN )
+#define TOTAL_META          ( HEADER_LEN + META_CRC )
 
 /////////////////////
 
@@ -52,11 +53,14 @@ Size_T Mirrored::getMetadataLength() const noexcept
 /////////////////////
 bool Mirrored::loadData( IPayload& dstHandler, Size_T index ) noexcept
 {
-    // Determine which Media (if any is the latest copy)
+    // Determine which Media (if any is the latest copy). NOTE: Each read loads
+    // the payload into 'm_workBuffer'.  Media B is read FIRST because media A
+    // holds the newest copy in steady state, i.e. A's payload is left in the buffer.
+    Size_T   expectedLen = dstHandler.getMaxPayloadSize();
     Size_T   dataLenA;
     Size_T   dataLenB;
-    uint64_t transA = getTransactionId( m_media, dataLenA, index );  // NOTE: This also loads the payload into 'm_workBuffer'
-    uint64_t transB = getTransactionId( m_mediaB, dataLenB, index );
+    uint64_t transB = getTransactionId( m_mediaB, index, expectedLen, dataLenB );
+    uint64_t transA = getTransactionId( m_media, index, expectedLen, dataLenA );
     bool     result = false;
 
     // No valid data!
@@ -71,15 +75,18 @@ bool Mirrored::loadData( IPayload& dstHandler, Size_T index ) noexcept
     {
         m_currentMedia = &m_media;
         m_transId      = transA;
-        result         = pushToRecord( dstHandler, dataLenA );
+        result         = pushToRecord( dstHandler, m_workBuffer + HEADER_LEN, dataLenA );
     }
 
-    // Media B is newest/valid
+    // Media B is newest/valid (re-read B since reading A overwrote 'm_workBuffer')
     else
     {
         m_currentMedia = &m_mediaB;
         m_transId      = transB;
-        result         = pushToRecord( dstHandler, dataLenB );
+        if ( getTransactionId( m_mediaB, index, expectedLen, dataLenB ) == transB )
+        {
+            result = pushToRecord( dstHandler, m_workBuffer + HEADER_LEN, dataLenB );
+        }
     }
 
     // Reset the chunk if/when an error occurred
@@ -92,9 +99,14 @@ bool Mirrored::loadData( IPayload& dstHandler, Size_T index ) noexcept
 
 bool Mirrored::updateData( IPayload& srcHandler, Size_T index, bool invalidate ) noexcept
 {
-    // Get the IPayload data
+    if ( m_workBufferSize < TOTAL_META )
+    {
+        return false;
+    }
+
+    // Get the IPayload data (placed after the chunk's header)
     memset( m_workBuffer, 0, m_workBufferSize );  // zero out all of the data - to ensure known values for the 'extra-space' (if there is any)
-    Size_T len = pullFromRecord( srcHandler );
+    Size_T len = pullFromRecord( srcHandler, m_workBuffer + HEADER_LEN, m_workBufferSize - TOTAL_META );
     if ( len == KIT_PERSISTENCE_SIZE_MAX )
     {
         return false;
@@ -106,46 +118,32 @@ bool Mirrored::updateData( IPayload& srcHandler, Size_T index, bool invalidate )
         memset( m_workBuffer, 0, m_workBufferSize );
     }
 
-    // Write the data twice
-    for ( unsigned i = 0; i < 2; i++ )
+    // Write the data twice, always writing to the 'other/oldest' media first.
+    // Media A always gets the larger transaction ID (both copies hold the same
+    // data) so that loadData() finds the newest copy with its LAST read.
+    bool     currentIsA   = m_currentMedia == &m_media;
+    IMedia*  writeOrder[] = { currentIsA ? &m_mediaB : &m_media, currentIsA ? &m_media : &m_mediaB };
+    uint64_t baseId       = m_transId;
+    for ( IMedia* media : writeOrder )
     {
-        // Select which media to write to first (always write to the 'other/oldest' media first)
-        m_currentMedia = m_currentMedia == &m_media ? &m_mediaB : &m_media;
+        uint64_t transId = media == &m_media ? baseId + 2 : baseId + 1;
 
-        // Housekeeping
-        Size_T offset = index;
-        bool   result = true;
-        m_transId++;
-        m_crc.reset();
+        // Prepend the header: Transaction ID + data length (length of the application data WITHOUT any of the chunk's meta data)
+        KIT_PERSISTENCE_MEDIA_CURSOR cursor( m_workBuffer, HEADER_LEN );
+        cursor.write( transId );
+        cursor.write( len );
 
-        // Write the Transaction ID.
-        result &= writeUint64( m_transId, offset, *m_currentMedia );
-
-        // Write the data length to persistent storage. This is the length of the application data WITHOUT any of the chunk's meta data
-        result &= writeSizeT( len, offset, *m_currentMedia );
-
-        // Write Application's data
-        result &= writeRecordData( len, offset, *m_currentMedia );
-
-        // Finalize the CRC and write it to persistent storage.
-        // NOTE: The endianess of the CRC in the payload is determined by the concrete
-        //       IEdc implementation, i.e. no endian conversion is required by the
-        //       Chunk when writing the CRC bytes.
-        uint8_t crcBuffer[OPTION_KIT_PERSISTENCE_RECORD_CHUNK_MAX_EDC_SIZE];
-        result &= m_crc.finalize( crcBuffer, sizeof( crcBuffer ) );
-        if ( result )
-        {
-            if ( invalidate )
-            {
-                // Corrupt the CRC when erasing the data
-                crcBuffer[0] ^= 0xA5;
-            }
-            result &= m_currentMedia->write( offset, crcBuffer, META_CRC );
-        }
-
-        if ( !result )
+        // Append the CRC and write the entire chunk with a single media write
+        if ( !writeChunk( *media, index, HEADER_LEN + len, invalidate ) )
         {
             return false;
+        }
+
+        // Track the newest successfully written copy
+        if ( transId > m_transId )
+        {
+            m_transId      = transId;
+            m_currentMedia = media;
         }
     }
 
@@ -153,40 +151,18 @@ bool Mirrored::updateData( IPayload& srcHandler, Size_T index, bool invalidate )
     return true;
 }
 
-uint64_t Mirrored::getTransactionId( IMedia& media, Size_T& dataLen, Size_T index )
+uint64_t Mirrored::getTransactionId( IMedia& media, Size_T index, Size_T expectedDataLen, Size_T& dataLen )
 {
-    m_crc.reset();
+    // Chunk layout: [Transaction ID][data length][application data][CRC]
     uint64_t transId = 0;
-    Size_T   offset  = index;
-
-    // Read the Transaction ID
-    if ( readUint64( transId, offset, media ) )
+    if ( readChunk( media, index, HEADER_LEN, expectedDataLen, dataLen ) )
     {
-        // Read the data length
-        if ( readSizeT( dataLen, offset, media ) )
-        {
-            // Make sure we have enough buffer space (account of possible integer overflow of 'datalen + META_CRC')
-            Size_T dataRemaining = dataLen + META_CRC;
-            if ( dataRemaining > m_workBufferSize || dataRemaining < dataLen )
-            {
-                return 0;  // return 'error'
-            }
-
-            // Read the data AND CRC bytes
-            if ( readRecordData( dataLen + META_CRC, offset, media ) )
-            {
-                // Check the CRC
-                if ( m_crc.isOkay() )
-                {
-                    // Valid record -->return its Transaction ID
-                    return transId;
-                }
-            }
-        }
+        KIT_PERSISTENCE_MEDIA_CURSOR cursor( m_workBuffer, META_TRANSACTION_ID );
+        cursor.read( transId );
     }
 
-    // If I get here, the record is invalid (return 'error')
-    return 0;
+    // NOTE: A transaction ID of zero indicates an invalid record
+    return transId;
 }
 
 }  // end namespace
