@@ -13,9 +13,9 @@
 #include "Kit/Container/ListItem.h"
 #include <stdint.h>
 
-/// 
+///
 namespace Kit {
-/// 
+///
 namespace System {
 
 
@@ -23,7 +23,7 @@ namespace System {
     A Counter object is used to maintain a counter down mechanism for tracking
     the time remaining for an individual timer.
 
-    The Counter interface is NOT inherently thread safe.  
+    The Counter interface is NOT inherently thread safe.
  */
 class ICounter : public Kit::Container::ExtendedListItem
 {
@@ -32,7 +32,7 @@ public:
     virtual void expired() noexcept = 0;
 
     /// Decrements the counter
-    virtual void decrement( uint32_t milliseconds=1 ) noexcept = 0;
+    virtual void decrement( uint32_t milliseconds = 1 ) noexcept = 0;
 
     /// Increments the counter
     virtual void increment( uint32_t milliseconds ) noexcept = 0;
@@ -43,11 +43,9 @@ public:
 public:
     /// Virtual Destructor
     virtual ~ICounter() = default;
-
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch
-

@@ -29,7 +29,7 @@ namespace Mp {
     The toJSON() format is:
         \code
 
-        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, 
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
           val:<floatvalue>}
 
         \endcode
@@ -73,17 +73,16 @@ protected:
     {
         if ( otherSize != sizeof( float ) )
         {
-            Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL, "Size mismatch in Float::isDataEqual_ (other=%u)", (unsigned) otherSize );
-            return false; // Not needed since FatalError will terminate the program, but is useful for unit testing
+            Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL, "Size mismatch in Float::isDataEqual_ (other=%u)", (unsigned)otherSize );
+            return false;  // Not needed since FatalError will terminate the program, but is useful for unit testing
         }
-        const float* other = static_cast<const float*>(otherData);
+        const float* other = static_cast<const float*>( otherData );
         return Kit::Math::areFloatsEqual( m_data, *other );
     }
 };
 
 
-
-}       // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

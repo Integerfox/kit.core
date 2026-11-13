@@ -81,8 +81,13 @@ static int preprocess_shutdown_( int exitCode, bool& trueExit ) noexcept
             }
             else
             {
+                // Runaway error condition -->exit with a failure code (i.e. never
+                // the 'success' code) so that the test is reported as failed
                 trueExit = true;
-                exitCode = exitCode_;
+                if ( exitCode == Shutdown::eSUCCESS )
+                {
+                    exitCode = Shutdown::eFAILURE;
+                }
             }
         }
         else

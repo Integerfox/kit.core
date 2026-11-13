@@ -281,7 +281,7 @@ void sleep( uint32_t milliseconds ) noexcept
         sleepInRealTime( milliseconds );
         return;
     }
-    
+
     // Get my thread's SimInfo
     auto* simInfoPtr = static_cast<SimTick*>( simTlsPtr_->get() );
 
@@ -328,7 +328,8 @@ uint64_t ElapsedTime::millisecondsEx() noexcept
     // If I have not yet created the TLS key/index -->then NO threads are using simulated time
     if ( simTlsPtr_ == nullptr )
     {
-        return ElapsedTime::millisecondsInRealTimeEx();;
+        return ElapsedTime::millisecondsInRealTimeEx();
+        ;
     }
 
     // Get my thread's SimInfo

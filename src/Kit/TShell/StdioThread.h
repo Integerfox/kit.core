@@ -35,7 +35,7 @@ namespace TShell {
     The TShell can be started, stopped, and then restarted multiple times.
 
     NOTE: This class dynamically allocates memory and dynamically creates a
-          Thread.  However, the memory and thread are allocated/created ONCE, 
+          Thread.  However, the memory and thread are allocated/created ONCE,
           i.e. stopping and restarting the TShell does NOT free/re-allocate the
           dynamic memory or destroy/re-create the thread.
 */
@@ -79,7 +79,7 @@ public:
 
         The stream parameters (infd, outfd) are required to be valid for the
         lifetime of the StdioThread instance.
-        
+
         The method returns true if successful, else false is returned.
         NOTE: If launchTShell is called more than once it will always return
               false.
@@ -91,7 +91,7 @@ public:
     /** This method is used to restart the tshell. This method can ONLY be
         called AFTER launch has been called.
 
-        The method returns true if the tshell was successfully restarted, 
+        The method returns true if the tshell was successfully restarted,
         else false is returned (e.g. launchTShell() was never called)
      */
     bool restartTShell() noexcept;

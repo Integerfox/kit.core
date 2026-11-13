@@ -222,7 +222,9 @@ TEST_CASE( "watchdog" )
             sleep( 10 );
             Supervisor::monitorThreads();
             if ( tripCount_ > tripCountBefore )
+            {
                 break;
+            }
         }
 
         REQUIRE( tripCount_ > tripCountBefore );

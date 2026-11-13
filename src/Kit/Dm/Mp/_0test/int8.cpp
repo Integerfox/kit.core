@@ -40,9 +40,9 @@ TEST_CASE( "Int8" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    char    string[MAX_STR_LENG + 1];
-    bool    truncated;
-    bool    valid;
+    char   string[MAX_STR_LENG + 1];
+    bool   truncated;
+    bool   valid;
     int8_t value;
     mp_apple_.setInvalid();
 

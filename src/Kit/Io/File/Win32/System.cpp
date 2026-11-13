@@ -75,7 +75,7 @@ bool System::getFirstDirEntry( KitIoFileDirectory_T& hdl,
 {
     // Append the wildcard to the directory name
     dirNameToList += '*';
-    bool result = Win32::Fdio::findFirstDirEntry( hdl, getNative( dirNameToList() ), firstEntryName );
+    bool result    = Win32::Fdio::findFirstDirEntry( hdl, getNative( dirNameToList() ), firstEntryName );
     dirNameToList.trimRight( 1 );
     return result;
 }

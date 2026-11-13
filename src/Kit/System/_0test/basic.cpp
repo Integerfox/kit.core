@@ -351,9 +351,9 @@ TEST_CASE( "basic" )
         REQUIRE( myThreadList.m_foundApple );
         REQUIRE( myThreadList.m_foundOrange );
         REQUIRE( myThreadList.m_foundPear );
-        REQUIRE( appleRun.getThread() == appleThreadPtr);
-        REQUIRE( orangeRun.getThread() == orangeThreadPtr);
-        REQUIRE( pearRun.getThread() == pearThreadPtr);
+        REQUIRE( appleRun.getThread() == appleThreadPtr );
+        REQUIRE( orangeRun.getThread() == orangeThreadPtr );
+        REQUIRE( pearRun.getThread() == pearThreadPtr );
 
         KIT_SYSTEM_TRACE_MSG( SECT_, "Signaling: %s", appleThreadPtr->getName() );
         appleRun.m_nextThreadPtr = pearThreadPtr;
@@ -509,7 +509,7 @@ TEST_CASE( "basic" )
 
             REQUIRE( counter01Trees_.counter == j );
             REQUIRE( counter02Trees_.counter == j * ( EVENT_FLAGS_COUNTER_02_ADDER * 2 ) );
-            REQUIRE( counter03Fruits_.counter == j * EVENT_FLAGS_COUNTER_03_ADDER * EVENT_FLAGS);
+            REQUIRE( counter03Fruits_.counter == j * EVENT_FLAGS_COUNTER_03_ADDER * EVENT_FLAGS );
             REQUIRE( counter04Flowers_.counter == j * ( EVENT_FLAGS_COUNTER_04_ADDER * 3 ) );
         }
 

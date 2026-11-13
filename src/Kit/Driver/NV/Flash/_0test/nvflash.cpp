@@ -45,7 +45,8 @@ template <size_t TOTAL_SIZE, size_t SECTOR_SIZE = 4096, size_t PAGE_SIZE = 256>
 class MockFlashFailAt : public Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>
 {
 public:
-    MockFlashFailAt() noexcept : m_failOnOp( 0 ), m_opCounter( 0 ) {}
+    MockFlashFailAt() noexcept
+        : m_failOnOp( 0 ), m_opCounter( 0 ) {}
 
     void setFailOnOp( uint32_t n ) noexcept
     {
@@ -80,7 +81,7 @@ public:
         return Flash::MockFlash<TOTAL_SIZE, SECTOR_SIZE, PAGE_SIZE>::eraseSector( sectorAddress, numberOfSectors );
     }
 
-private:
+protected:
     uint32_t m_failOnOp;
     uint32_t m_opCounter;
 };

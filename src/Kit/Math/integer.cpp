@@ -26,18 +26,17 @@ void Kit::Math::incrementLargeInteger( uint8_t* integerToBeIncrement, int intege
         idx       = integerSizeInBytes - 1;
         direction = -1;
         endIdx    = 0;
-
     }
 
     // Loop through all of the bytes in the 'integer'
-    for( ; idx != (endIdx+direction); idx += direction )
+    for ( ; idx != ( endIdx + direction ); idx += direction )
     {
-        uint16_t result = (uint16_t) integerToBeIncrement[idx] + incValue;
-        integerToBeIncrement[idx] = (uint8_t) result;
+        uint16_t result           = (uint16_t)integerToBeIncrement[idx] + incValue;
+        integerToBeIncrement[idx] = (uint8_t)result;
         if ( ( result >> 8 ) == 0 )
         {
             break;
         }
-        incValue = (uint8_t) ( result >> 8 );
+        incValue = (uint8_t)( result >> 8 );
     }
 }

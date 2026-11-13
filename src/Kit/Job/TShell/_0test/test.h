@@ -17,7 +17,7 @@
 #include "Kit/Job/IJob.h"
 
 extern Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList;
-extern Kit::Container::OrderedList<Kit::Job::IJob>         g_jobList;
-extern void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd );
+extern Kit::Container::OrderedList<Kit::Job::IJob>        g_jobList;
+extern void                                               shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd );
 
 #endif  // end header latch

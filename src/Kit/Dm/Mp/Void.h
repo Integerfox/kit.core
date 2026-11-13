@@ -106,7 +106,7 @@ protected:
     {
         Kit::Text::FString<20> hexString;
         hexString.format( "0x%" PRIXPTR, this->m_data );
-        doc["val"] = (char*) hexString.getString();
+        doc["val"] = (char*)hexString.getString();
         return true;
     }
 

@@ -21,7 +21,7 @@ namespace File {
 
 //////////////////////////
 Output::Output( const char* fileName, bool forceCreate, bool forceEmptyFile )
-    : m_outFd( Posix::Fdio::open( System::getNative(fileName), false, forceCreate, forceEmptyFile ) )
+    : m_outFd( Posix::Fdio::open( System::getNative( fileName ), false, forceCreate, forceEmptyFile ) )
     , m_outEos( false )
 {
 }

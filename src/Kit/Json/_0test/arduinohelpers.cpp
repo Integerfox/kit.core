@@ -9,8 +9,8 @@
 /** @file */
 
 /*-----------------------------------------------------------------------------
-* COPYRIGHT_HEADER_TO_BE_FILLED_LATER
-*----------------------------------------------------------------------------*/
+ * COPYRIGHT_HEADER_TO_BE_FILLED_LATER
+ *----------------------------------------------------------------------------*/
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
@@ -23,8 +23,7 @@
 #include <limits>
 
 
-namespace
-{
+namespace {
 class OutputSink : public Kit::Io::IOutput
 {
 public:
@@ -68,7 +67,7 @@ public:
         return m_contents;
     }
 
-private:
+protected:
     Kit::Text::FString<1024> m_contents;
 };
 
@@ -97,12 +96,12 @@ TEST_CASE( "ArduinoHelpers-dumpToTrace-prints-wide-integers-as-integers" )
     KIT_SYSTEM_TRACE_ENABLE_SECTION( "json-test" );
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eINFO );
 
-    OutputSink sink;
+    OutputSink         sink;
     TraceRedirectGuard redirect( sink );
 
     DynamicJsonDocument doc( 256 );
-    doc["unsignedValue"] = (std::numeric_limits<unsigned long long>::max)();
-    doc["signedValue"]   = (std::numeric_limits<long long>::max)();
+    doc["unsignedValue"] = ( std::numeric_limits<unsigned long long>::max )();
+    doc["signedValue"]   = ( std::numeric_limits<long long>::max )();
 
     sink.clear();
     Kit::Json::dumpToTrace( "json-test", doc.as<JsonVariant>() );

@@ -15,14 +15,13 @@
 #include "Kit/Text/FString.h"
 
 
-
 ////////////////////////////////////////////////////////////////////////////////
 
 #ifndef MAX_INPUT
-#define MAX_INPUT       1024
+#define MAX_INPUT 1024
 #endif
 
-static char  inbuffer[MAX_INPUT + 1];
+static char                    inbuffer[MAX_INPUT + 1];
 static Kit::Text::FString<128> tmpString;
 
 void test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
@@ -42,7 +41,7 @@ void test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
             Bsp_toggle_debug1();
         }
 
-        Kit::Type::SSize_T bytesRead  = 0;
+        Kit::Type::SSize_T bytesRead = 0;
         if ( !infd.read( inbuffer, MAX_INPUT, bytesRead ) )
         {
             tmpString.format( "\n**** ERROR occurred while reading input stream (requested bytes=%d)\n", MAX_INPUT );
@@ -54,7 +53,7 @@ void test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
             {
                 // Ensure the input data is null terminated
                 inbuffer[bytesRead] = '\0';
-                tmpString.format( "\nECHO: len=%d [", (int) bytesRead );
+                tmpString.format( "\nECHO: len=%d [", (int)bytesRead );
                 outfd.write( tmpString );
                 outfd.write( inbuffer );
                 outfd.write( "]\n" );

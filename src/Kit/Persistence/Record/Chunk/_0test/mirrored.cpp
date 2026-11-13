@@ -95,11 +95,10 @@ public:
         return m_putResult;
     };
 
-     Size_T getMaxPayloadSize() const noexcept override
-     {
-         return sizeof( m_buffer );
-     }
-
+    Size_T getMaxPayloadSize() const noexcept override
+    {
+        return sizeof( m_buffer );
+    }
 };
 
 
@@ -142,7 +141,7 @@ TEST_CASE( "Mirrored" )
         REQUIRE( uut.m_startCount == 1 );
         REQUIRE( uut.m_stopCount == 1 );
 
-        REQUIRE( uut.getMetadataLength() == ( sizeof(uint64_t) + sizeof( Size_T ) + crc.getEdcSize() ) );  // Expected: TransID + Data Len Field size + CRC size
+        REQUIRE( uut.getMetadataLength() == ( sizeof( uint64_t ) + sizeof( Size_T ) + crc.getEdcSize() ) );  // Expected: TransID + Data Len Field size + CRC size
     }
 
     SECTION( "Load/update" )
@@ -286,7 +285,7 @@ TEST_CASE( "Mirrored" )
         Media::FileAdapter               fd2( MEDIA_A_FILE_NAME2, MEDIA_MAX_SIZE );
         Media::FileAdapter               fd3( MEDIA_B_FILE_NAME2, MEDIA_MAX_SIZE );
         MyUut                            uut2( fd2, fd3, crc2 );
-        REQUIRE( uut2.getMetadataLength() == ( sizeof(uint64_t) + sizeof( Size_T ) + crc2.getEdcSize() ) );  // Expected: TransID + Data Len Field size + CRC size
+        REQUIRE( uut2.getMetadataLength() == ( sizeof( uint64_t ) + sizeof( Size_T ) + crc2.getEdcSize() ) );  // Expected: TransID + Data Len Field size + CRC size
 
         uut2.start( mockEventQueue );
 

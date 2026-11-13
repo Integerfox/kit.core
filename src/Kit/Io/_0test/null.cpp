@@ -23,9 +23,9 @@
 #include <inttypes.h>
 
 
-#define SECT_     "_0test"
+#define SECT_ "_0test"
 
-/// 
+///
 using namespace Kit::Io;
 
 
@@ -39,7 +39,8 @@ public:
     int m_count;
 
 public:
-    MyContext():m_count( 0 ) {}
+    MyContext()
+        : m_count( 0 ) {}
 
 public:
     bool testOutputs( IOutput& fd )
@@ -78,7 +79,7 @@ public:
         return m_resultWaitForWriteSpace;
     }
 };
-} // end namespace
+}  // end namespace
 
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "null" )
@@ -86,7 +87,7 @@ TEST_CASE( "null" )
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    //     
+    //
     Null fd;
     char dummyChar = 29;
 
@@ -112,7 +113,7 @@ TEST_CASE( "null" )
     REQUIRE( buffer == "Hello Worl" );
     REQUIRE( fd.write( myBuffer, sizeof( myBuffer ) ) );
     REQUIRE( fd.write( myBuffer, sizeof( myBuffer ), bytesWritten ) );
-    REQUIRE( (size_t) bytesWritten == sizeof( myBuffer ) );
+    REQUIRE( (size_t)bytesWritten == sizeof( myBuffer ) );
 
     // waitForWriteSpace() is not overridden -->always succeeds
     REQUIRE( fd.waitForWriteSpace( 0, 0 ) == true );
@@ -120,7 +121,7 @@ TEST_CASE( "null" )
 
     fd.flush();
     fd.close();
-    REQUIRE( fd.write( buffer ) == false ); // Fails because close() was called!
+    REQUIRE( fd.write( buffer ) == false );                // Fails because close() was called!
     REQUIRE( fd.waitForWriteSpace( 1000, 100 ) == true );  // Default implementation is not close() aware
 
 
@@ -129,13 +130,13 @@ TEST_CASE( "null" )
     Null orange;
     Null cherry;
 
-    KIT_SYSTEM_TRACE_MSG( SECT_, "apple=%p,  inPtr=%p, outPtr=%p, inOutPtr=%p", &apple, (IInput*) &apple, (IOutput*) &apple, (IInputOutput*) &apple) ;
-    KIT_SYSTEM_TRACE_MSG( SECT_, "orange=%p, inPtr=%p, outPtr=%p, inOutPtr=%p", &orange, (IInput*) &orange, (IOutput*) &orange, (IInputOutput*) &orange) ;
-    KIT_SYSTEM_TRACE_MSG( SECT_, "cherry=%p, inPtr=%p, outPtr=%p, inOutPtr=%p", &cherry, (IInput*) &cherry, (IOutput*) &cherry, (IInputOutput*) &cherry) ;
+    KIT_SYSTEM_TRACE_MSG( SECT_, "apple=%p,  inPtr=%p, outPtr=%p, inOutPtr=%p", &apple, (IInput*)&apple, (IOutput*)&apple, (IInputOutput*)&apple );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "orange=%p, inPtr=%p, outPtr=%p, inOutPtr=%p", &orange, (IInput*)&orange, (IOutput*)&orange, (IInputOutput*)&orange );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "cherry=%p, inPtr=%p, outPtr=%p, inOutPtr=%p", &cherry, (IInput*)&cherry, (IOutput*)&cherry, (IInputOutput*)&cherry );
 
 
     // I don't have a useful concrete streams to test the following -->but I can at least make sure they compile & link
-    Null fd2;
+    Null       fd2;
     LineWriter writer( fd2 );
     REQUIRE( writer.println( "Hello World" ) );
     LineReader reader( fd2 );
@@ -165,7 +166,7 @@ TEST_CASE( "close" )
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    //     
+    //
     Null fd;
     char dummyChar = 29;
 
@@ -181,7 +182,7 @@ TEST_CASE( "close" )
     fd2.close();
     LineWriter writer( fd2 );
     REQUIRE( writer.println( "Hello World" ) == false );
-    LineReader reader( fd2 );
+    LineReader             reader( fd2 );
     Kit::Text::FString<10> buffer( "bob" );
     REQUIRE( reader.readln( buffer ) == false );
 

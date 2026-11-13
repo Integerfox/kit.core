@@ -14,7 +14,7 @@
 #define USE_KIT_SYSTEM_ASSERT
 #define KitTextToStringMaxUnsigned_T uint64_t
 
-// Windows is ALWAYS little-endian regardless of CPU architecture. 
+// Windows is ALWAYS little-endian regardless of CPU architecture.
 #define USE_KIT_TYPE_ENDIAN_LE_HOST
 
 #endif

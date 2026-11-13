@@ -17,16 +17,16 @@ namespace Kit {
 namespace Container {
 
 
-/** This class is used by the Intrusive Container classes to enforce the 
+/** This class is used by the Intrusive Container classes to enforce the
     semantic and item/element can be in at most ONE container at any given
     time.  Intrusive containers are 'limitless' containers in that can
     hold any number of elements because each element contains the 'container-
     linkage' fields, i.e. no dynamic memory required to added an element to
     the container.
 
-    NOTE: Enforcing the above semantics adds RAM overhead to a Item class.  
+    NOTE: Enforcing the above semantics adds RAM overhead to a Item class.
           However, debugging a logic error where a single item is inserted into
-          multiple containers at the same time IS EXTREMELY DIFFICULT to debug, 
+          multiple containers at the same time IS EXTREMELY DIFFICULT to debug,
           i.e. the extra overhead is worth it.
 
     NOTE: Client code, i.e. application code that needs to define a

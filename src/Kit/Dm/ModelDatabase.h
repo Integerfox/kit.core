@@ -87,7 +87,7 @@ protected:
     /// Mutex for making the Database thread safe
     Kit::System::Mutex m_lock;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Model Databases can not be copied!
     ModelDatabase( const ModelDatabase& m );
 
@@ -96,6 +96,6 @@ private:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

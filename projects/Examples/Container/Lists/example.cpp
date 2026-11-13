@@ -41,7 +41,7 @@ static OffPeriod off500msA_( 500 );
 static OffPeriod off500msB_( 500 );
 static OffPeriod off50ms_( 50 );
 
-static Flasher myFlasher_;        
+static Flasher myFlasher_;
 
 int runExample( unsigned numCycles ) noexcept
 {
@@ -61,9 +61,9 @@ int runExample( unsigned numCycles ) noexcept
 
         // Create 1st flash pattern: 1 sec on, 1 sec off
         Kit::Container::DList<Period> pattern;
-        pattern.put( on1SecondA_ ); // Insert at the tail of the list
+        pattern.put( on1SecondA_ );  // Insert at the tail of the list
         pattern.put( off1Second_ );
-        myFlasher_.runPattern( pattern ); // Note: the list is empty after this call
+        myFlasher_.runPattern( pattern );  // Note: the list is empty after this call
 
 
         // Create 2nd flash pattern: 2 sec on, 1.5 sec off, 50 ms on, 50 ms off
@@ -73,7 +73,7 @@ int runExample( unsigned numCycles ) noexcept
         pattern.put( off500msA_ );
         pattern.put( on50ms_ );
         pattern.put( off50ms_ );
-        myFlasher_.runPattern( pattern ); 
+        myFlasher_.runPattern( pattern );
 
         // Create 3rd flash pattern: 50 ms on, 50 ms off
         pattern.put( on50ms_ );

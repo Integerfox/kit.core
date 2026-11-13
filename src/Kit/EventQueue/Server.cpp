@@ -32,10 +32,10 @@ void Server::pleaseStop() noexcept
     // before pleaseStop() is requested.
     if ( Mailbox::isPendingMessage() )
     {
-        auto *ownerThread = getThread();
+        auto* ownerThread = getThread();
         Kit::System::FatalError::logf( Kit::System::Shutdown::eITC,
                                        "There are pending ITC message(s) for thread=%s",
-                                       ownerThread? ownerThread->getName() : "<unknown>");
+                                       ownerThread ? ownerThread->getName() : "<unknown>" );
     }
     EventLoop::pleaseStop();
 }

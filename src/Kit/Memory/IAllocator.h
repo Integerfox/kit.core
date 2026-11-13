@@ -97,7 +97,7 @@ public:
                object is not necessarily the same pointer value when the pointer
                is up-cast to one of its abstract base classes!
      */
-    virtual void release( void *ptr ) noexcept = 0;
+    virtual void release( void* ptr ) noexcept = 0;
 
 public:
     /** Returns the 'word' size of the allocator, i.e. chunks of memory are
@@ -113,7 +113,7 @@ public:
     inline size_t allocatedSizeForNBytes( size_t nbytes ) const noexcept
     {
         size_t ws = wordSize();
-        return ((nbytes + ws - 1) / ws) * ws;
+        return ( ( nbytes + ws - 1 ) / ws ) * ws;
     }
 
 public:
@@ -122,6 +122,6 @@ public:
 };
 
 
-}      // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

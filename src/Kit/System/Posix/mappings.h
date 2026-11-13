@@ -8,7 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     This file provides the mappings for Platform specific types, etc. needed
     by Kit::System
@@ -24,32 +24,38 @@
 #include "Kit/System/FatalError.h"
 
 /// PRETTY_FUNCTION macro is non-standard
-#if defined(__GNUC__)
+#if defined( __GNUC__ )
 /// Take advantage of GCC's pretty function symbol
-#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __PRETTY_FUNCTION__
+#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME __PRETTY_FUNCTION__
 
-#elif defined(_MSC_VER)
+#elif defined( _MSC_VER )
 /// Take advantage of Microsoft's pretty function symbol
-#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __FUNCSIG__
+#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME __FUNCSIG__
 
 #else
 /// Use C++11 function name
-#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __func__
+#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME __func__
 #endif  // end __PRETTY_FUNCTION__
 
 
 /// Mapping
-#define KIT_SYSTEM_ASSERT_MAP(e)                do { if ( !(e) ) Kit::System::FatalError::logf( Kit::System::Shutdown::eASSERT, "ASSERT Failed at: file=%s, line=%d, func=%s\n", __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME ); } while(0)
+#define KIT_SYSTEM_ASSERT_MAP( e )                                                                                                                                                   \
+    do                                                                                                                                                                               \
+    {                                                                                                                                                                                \
+        if ( !( e ) )                                                                                                                                                                \
+            Kit::System::FatalError::logf( Kit::System::Shutdown::eASSERT, "ASSERT Failed at: file=%s, line=%d, func=%s\n", __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME ); \
+    }                                                                                                                                                                                \
+    while ( 0 )
 
 
 /// Mapping
-#define KitSystemThreadID_T_MAP                 pthread_t
+#define KitSystemThreadID_T_MAP pthread_t
 
 /// Mapping
-#define KitSystemMutex_T_MAP                    pthread_mutex_t
+#define KitSystemMutex_T_MAP pthread_mutex_t
 
 /// Mapping
-#define KitSystemSema_T_MAP                     sem_t
+#define KitSystemSema_T_MAP sem_t
 
 /** Mapping.  POSIX has no native Binary Semaphore.  A counting sem_t is used -
     instead of a mutex/condition-variable pair - because sem_post() is the only
@@ -57,7 +63,7 @@
     su_signal()).  The binary (saturate at one) semantics are provided by draining
     the count when it is consumed.
  */
-#define KitSystemBSema_T_MAP                    sem_t
+#define KitSystemBSema_T_MAP sem_t
 
 
 /// Mapping
@@ -65,7 +71,7 @@ inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 {
     struct timespec tm;
     clock_gettime( CLOCK_MONOTONIC, &tm );
-    return (uint32_t)(tm.tv_sec * 1000 + tm.tv_nsec / 1000000);
+    return (uint32_t)( tm.tv_sec * 1000 + tm.tv_nsec / 1000000 );
 }
 
 //
@@ -79,18 +85,15 @@ inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 //            sched_get_priority_max(), sched_get_priority_min()
 //
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP      31
+#define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP 31
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP       15
+#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP 15
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP       0
+#define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP 0
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP        (1)
+#define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP ( 1 )
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP        (-1)
-
-
+#define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP ( -1 )
 
 
 #endif  // end header latch
-

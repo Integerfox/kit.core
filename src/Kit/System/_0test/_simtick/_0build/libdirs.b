@@ -4,6 +4,7 @@ src/Kit/System/_simtick
 
 src/Kit/Container
 src/Kit/Text
+src/Kit/Time
 src/Kit/Io
 src/Kit/System/_trace
 src/Kit/System/_trace/_stdout

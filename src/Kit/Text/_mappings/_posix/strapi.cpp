@@ -14,7 +14,7 @@
 
 
 //////////////
-char* strupr_MAP( char *string )
+char* strupr_MAP( char* string )
 {
     if ( string )
     {
@@ -27,7 +27,7 @@ char* strupr_MAP( char *string )
     return string;
 }
 
-char* strlwr_MAP( char *string )
+char* strlwr_MAP( char* string )
 {
     if ( string )
     {

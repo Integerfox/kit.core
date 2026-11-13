@@ -63,33 +63,33 @@ public:
 
     /// See Kit::EventQueue::IMsgNotification
     void postSync( Kit::Itc::IMessage& msg ) noexcept override;
-    
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    int  signal() noexcept override                                     { return EventLoop::signal(); }
-    
+    int signal() noexcept override { return EventLoop::signal(); }
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    int  su_signal() noexcept override                                  { return EventLoop::su_signal(); }
-    
+    int su_signal() noexcept override { return EventLoop::su_signal(); }
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void signalMultipleEvents( uint32_t events ) noexcept override      { EventLoop::signalMultipleEvents( events ); }
-    
+    void signalMultipleEvents( uint32_t events ) noexcept override { EventLoop::signalMultipleEvents( events ); }
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void signalEvent( uint8_t eventNumber ) noexcept override           { EventLoop::signalEvent( eventNumber ); }
-    
+    void signalEvent( uint8_t eventNumber ) noexcept override { EventLoop::signalEvent( eventNumber ); }
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void su_signalMultipleEvents( uint32_t events ) noexcept override   { EventLoop::su_signalMultipleEvents( events ); }
-    
+    void su_signalMultipleEvents( uint32_t events ) noexcept override { EventLoop::su_signalMultipleEvents( events ); }
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void su_signalEvent( uint8_t eventNumber ) noexcept override        { EventLoop::su_signalEvent( eventNumber ); }
-    
+    void su_signalEvent( uint8_t eventNumber ) noexcept override { EventLoop::su_signalEvent( eventNumber ); }
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void attach( Kit::System::ICounter& c ) noexcept override           { TimerManager::attach( c ); }
-    
+    void attach( Kit::System::ICounter& c ) noexcept override { TimerManager::attach( c ); }
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    bool detach( Kit::System::ICounter& c ) noexcept override           { return TimerManager::detach( c ); }
-    
+    bool detach( Kit::System::ICounter& c ) noexcept override { return TimerManager::detach( c ); }
+
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    uint32_t msecToCounts( uint32_t ms ) const noexcept override        { return TimerManager::msecToCounts( ms ); }
+    uint32_t msecToCounts( uint32_t ms ) const noexcept override { return TimerManager::msecToCounts( ms ); }
 
     /// Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
     bool isRunning( const Kit::System::ICounter& timerToInspect ) const noexcept override { return TimerManager::isRunning( timerToInspect ); }
@@ -136,18 +136,18 @@ public:
 
 public:
     // Explicit overrides to resolve MSVC C4250 dominance warnings (diamond inheritance via IQueue/EventLoop)
-    void pleaseStop() noexcept override;
-    void postSync( Kit::Itc::IMessage& msg ) noexcept override;
-    int  signal() noexcept override                                     { return EventLoop::signal(); }
-    int  su_signal() noexcept override                                  { return EventLoop::su_signal(); }
-    void signalMultipleEvents( uint32_t events ) noexcept override      { EventLoop::signalMultipleEvents( events ); }
-    void signalEvent( uint8_t eventNumber ) noexcept override           { EventLoop::signalEvent( eventNumber ); }
-    void su_signalMultipleEvents( uint32_t events ) noexcept override   { EventLoop::su_signalMultipleEvents( events ); }
-    void su_signalEvent( uint8_t eventNumber ) noexcept override        { EventLoop::su_signalEvent( eventNumber ); }
-    void attach( Kit::System::ICounter& c ) noexcept override           { TimerManager::attach( c ); }
-    bool detach( Kit::System::ICounter& c ) noexcept override           { return TimerManager::detach( c ); }
-    uint32_t msecToCounts( uint32_t ms ) const noexcept override        { return TimerManager::msecToCounts( ms ); }
-    bool isRunning( const Kit::System::ICounter& timerToInspect ) const noexcept override { return TimerManager::isRunning( timerToInspect ); }
+    void     pleaseStop() noexcept override;
+    void     postSync( Kit::Itc::IMessage& msg ) noexcept override;
+    int      signal() noexcept override { return EventLoop::signal(); }
+    int      su_signal() noexcept override { return EventLoop::su_signal(); }
+    void     signalMultipleEvents( uint32_t events ) noexcept override { EventLoop::signalMultipleEvents( events ); }
+    void     signalEvent( uint8_t eventNumber ) noexcept override { EventLoop::signalEvent( eventNumber ); }
+    void     su_signalMultipleEvents( uint32_t events ) noexcept override { EventLoop::su_signalMultipleEvents( events ); }
+    void     su_signalEvent( uint8_t eventNumber ) noexcept override { EventLoop::su_signalEvent( eventNumber ); }
+    void     attach( Kit::System::ICounter& c ) noexcept override { TimerManager::attach( c ); }
+    bool     detach( Kit::System::ICounter& c ) noexcept override { return TimerManager::detach( c ); }
+    uint32_t msecToCounts( uint32_t ms ) const noexcept override { return TimerManager::msecToCounts( ms ); }
+    bool     isRunning( const Kit::System::ICounter& timerToInspect ) const noexcept override { return TimerManager::isRunning( timerToInspect ); }
 
 protected:
     /// See Kit::System::IRunnable

@@ -61,7 +61,7 @@ public:
 
     /// Returns true if the timer is currently running; else false is returned.
     virtual bool isRunning() const noexcept;
-    
+
 public:
     /** Sets the timing source.  This method CAN ONLY BE CALLED when the timer
         has never been started or it has been stopped
@@ -107,7 +107,7 @@ public:
     /// Constructor
     TimerComposer( CONTEXT&               timerContextInstance,
                    TimerExpiredFunction_T expiredCallbackFunc,
-                   ITimingSource&          timingSource ) noexcept
+                   ITimingSource&         timingSource ) noexcept
         : Timer( timingSource )
         , m_context( timerContextInstance )
         , m_expiredFuncPtr( expiredCallbackFunc )
@@ -121,7 +121,7 @@ public:
      */
     TimerComposer( CONTEXT&               timerContextInstance,
                    TimerExpiredFunction_T expiredCallbackFunc,
-                   ITimingSource*          timingSourcePtr = nullptr ) noexcept
+                   ITimingSource*         timingSourcePtr = nullptr ) noexcept
         : Timer( timingSourcePtr )
         , m_context( timerContextInstance )
         , m_expiredFuncPtr( expiredCallbackFunc )

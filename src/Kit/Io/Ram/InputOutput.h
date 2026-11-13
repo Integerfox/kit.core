@@ -44,7 +44,7 @@ public:
     /** Constructor. 'N' is the number of bytes in 'memoryBuffer'. The actual
         number of bytes that can be stored in the Ring Buffer is N-1.
      */
-    InputOutput( uint8_t* memoryBuffer, unsigned N, bool initializeMemory = true  ) noexcept
+    InputOutput( uint8_t* memoryBuffer, unsigned N, bool initializeMemory = true ) noexcept
         : m_ringBuffer( memoryBuffer, N, initializeMemory )
         , m_readerWaiting( false )
         , m_writerWaiting( false )
@@ -57,7 +57,7 @@ public:
     {
         close();
     }
-    
+
 public:
     /// Pull in overloaded methods from base class
     using Kit::Io::IInputOutput::read;

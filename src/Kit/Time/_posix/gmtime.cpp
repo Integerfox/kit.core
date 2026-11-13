@@ -8,10 +8,10 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Time/gmtime.h"
+#include "Kit/Time/calendar.h"
 #include "Kit/System/Assert.h"
 
-struct tm* Kit::Time::gmtimeMT(const time_t *timep, struct tm *result) noexcept
+struct tm* Kit::Time::gmtimeMT( const time_t* timep, struct tm* result ) noexcept
 {
     KIT_SYSTEM_ASSERT( timep != nullptr );
     KIT_SYSTEM_ASSERT( result != nullptr );

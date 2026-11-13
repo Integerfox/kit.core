@@ -45,7 +45,7 @@ public:
 
             - If the 'convertTabs' argument is set to a value OTHER than a tab
               character, then any tab characters encounter will be converted to
-              the value of 'convertTabs'. If 'convertTabs' is set to a tab 
+              the value of 'convertTabs'. If 'convertTabs' is set to a tab
               character, then tabs are not converted - which means that if tabs
               are encountered, they will be treated as a non-printable character
               and cause the current frame to be aborted.

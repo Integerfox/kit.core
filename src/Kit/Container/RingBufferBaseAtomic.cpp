@@ -13,8 +13,8 @@
 #include <string.h>
 
 //------------------------------------------------------------------------------
-namespace Kit { 
-namespace Container { 
+namespace Kit {
+namespace Container {
 
 RingBufferBaseAtomic::RingBufferBaseAtomic( unsigned numMaxElements ) noexcept
     : m_readIdx( 0 )
@@ -177,6 +177,6 @@ void* RingBufferBaseAtomic::peekNextAddItems( unsigned& dstNumFlatElements, size
 }
 
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

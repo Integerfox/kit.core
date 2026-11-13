@@ -5,7 +5,7 @@
 
 #include "Kit/TShell/Command/Posix/Threads.h"
 
-static Kit::TShell::Command::Posix::Threads  threadsCmd_( Examples::Job::Temperature::g_commandList );
+static Kit::TShell::Command::Posix::Threads threadsCmd_( Examples::Job::Temperature::g_commandList );
 
 static Kit::Io::Stdio::StdIn  stdin_;
 static Kit::Io::Stdio::StdOut stdout_;

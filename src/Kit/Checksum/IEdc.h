@@ -46,7 +46,7 @@ public:
     virtual void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept = 0;
 
     /** Call this method to finalize the EDC.  The calculated EDC
-        value is returned via the 'destBuffer' argument. The byte ordering of 
+        value is returned via the 'destBuffer' argument. The byte ordering of
         the copied EDC value is defined by the concrete child class, i.e. the
         finalize() method can be used to copy the final EDC into the 'outbound
         buffer'
@@ -68,7 +68,7 @@ public:
     virtual bool isOkay( void ) noexcept = 0;
 
 public:
-    /// Retuns the size of the EDC value in bytes. 
+    /// Retuns the size of the EDC value in bytes.
     virtual unsigned getEdcSize() const noexcept = 0;
 
 public:

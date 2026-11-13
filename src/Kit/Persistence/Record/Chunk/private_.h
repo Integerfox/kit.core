@@ -24,7 +24,7 @@
     fail to be written AND fail to be loaded (i.e. it will be reset to defaults).
  */
 #ifndef OPTION_KIT_PERSISTENCE_RECORD_CHUNK_WORK_BUFFER_SIZE
-#define OPTION_KIT_PERSISTENCE_RECORD_CHUNK_WORK_BUFFER_SIZE     1024
+#define OPTION_KIT_PERSISTENCE_RECORD_CHUNK_WORK_BUFFER_SIZE 1024
 #endif
 ///
 namespace Kit {
@@ -39,7 +39,7 @@ namespace Chunk {
     for Chunk and Record instance to use WHEN executing in the RecordServer's
     thread.
 
-    NOTE: The buffer is NOT thread safe.  It assume only a single RecordServer 
+    NOTE: The buffer is NOT thread safe.  It assume only a single RecordServer
           thread is executing at any given time. If the application has multiple
           RecordServers (aka multiple threads for persistent storage) - then
           this buffer SHOULD NOT BE USED and the application is responsible for

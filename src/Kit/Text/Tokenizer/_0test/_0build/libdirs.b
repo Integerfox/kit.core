@@ -2,6 +2,7 @@ src/Kit/Text/Tokenizer
 src/Kit/Text/Tokenizer/_0test
 
 src/Kit/Text
+src/Kit/Time
 src/Kit/Container
 src/Kit/System
 src/Kit/System/_trace

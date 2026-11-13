@@ -29,23 +29,23 @@ public:
     ContextMyFsm() = default;
 
 public:
-    void start() noexcept override 
+    void start() noexcept override
     {
         startFsm();
     }
-    void tick() noexcept override 
+    void tick() noexcept override
     {
         dispatchEvent( EventId::DO );
     }
-    void notifyAbcChanged() noexcept override 
+    void notifyAbcChanged() noexcept override
     {
         dispatchEvent( EventId::EVENT1 );
     }
-    void notifyXyzStarted() noexcept override 
+    void notifyXyzStarted() noexcept override
     {
         dispatchEvent( EventId::EVENT2 );
     }
-    void notifyXyzCompleted() noexcept override 
+    void notifyXyzCompleted() noexcept override
     {
         dispatchEvent( EventId::EVENT3 );
     }

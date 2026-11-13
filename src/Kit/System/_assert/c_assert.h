@@ -13,21 +13,21 @@
 #include <stdbool.h>
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 
-/** These method is 'C wrapper' that calls Kit::System::FatalError handler when
-    the assert fails.  The C Wrapper is need to as not to pollute the Platform
-    mapping header files with C++ headers that cause compile issues when the
-    underlying Platform is C based RTOS (e.g. FreeRTOS)
- 
- */
-void Kit_System_assert_c_wrapper( bool true_expression, const char* file, unsigned line, const char* func );
+    /** These method is 'C wrapper' that calls Kit::System::FatalError handler when
+        the assert fails.  The C Wrapper is need to as not to pollute the Platform
+        mapping header files with C++ headers that cause compile issues when the
+        underlying Platform is C based RTOS (e.g. FreeRTOS)
+
+     */
+    void Kit_System_assert_c_wrapper( bool true_expression, const char* file, unsigned line, const char* func );
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif  // end header latch
-

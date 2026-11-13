@@ -52,10 +52,10 @@ public:
 
 public:
     /// Constructor
-    Manage( Kit::Container::OrderedList<ICommand>&      commandList,
-            Kit::Logging::Framework::IApplication&      appLogInfo,
+    Manage( Kit::Container::OrderedList<ICommand>&     commandList,
+            Kit::Logging::Framework::IApplication&     appLogInfo,
             Kit::Persistence::Record::Journal::IReset& logReset,
-            Kit::TShell::Permissions_T                  permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
+            Kit::TShell::Permissions_T                 permissions = OPTION_KIT_TSHELL_SECURITY_DEFAULT_PERMISSIONS ) noexcept
         : Base( commandList, verb, permissions )
         , m_appLogInfo( appLogInfo )
         , m_logReset( logReset )

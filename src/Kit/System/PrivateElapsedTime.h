@@ -15,12 +15,11 @@
 /** Platform specific function returns the elapsed time in milliseconds.  The
     operation MUST be an atomic capture of the elapsed time.
 
-   
+
     \b Prototype:
         uint32_t KitSystemElapsedTime_getTimeInMilliseconds();
  */
-#define KitSystemElapsedTime_getTimeInMilliseconds          KitSystemElapsedTime_getTimeInMilliseconds_MAP
+#define KitSystemElapsedTime_getTimeInMilliseconds KitSystemElapsedTime_getTimeInMilliseconds_MAP
 
 
 #endif  // end header latch
-

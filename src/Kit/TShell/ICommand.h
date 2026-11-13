@@ -77,7 +77,7 @@ protected:
         : Kit::Container::KeyLiteralString( name )
     {
     }
-    
+
 public:
     /// Virtual destructor
     virtual ~ICommand() = default;

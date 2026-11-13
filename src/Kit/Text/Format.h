@@ -125,6 +125,20 @@ public:
         return formatMsec( buffer, static_cast<long long>( timeStampInMsecs ), encodeMsec, encodeDay, appendToString );
     }
 
+    /** This method converts 'msecSinceEpoch' - UTC time as milliseconds since
+        the Epoch (1970-01-01 00:00:00) - to a string with the following format:
+        "YYYY-MM-DD HH:MM:SS[.SSS]".  The converted result is returned via
+        'buffer'.  If the results where truncated due to insufficient memory in
+        'buffer' then false is returned; else true is returned.
+
+        NOTE: The conversion uses Kit::Time::msecToCalendar(), i.e. it does not
+              use the C library's gmtime() and is thread safe without a mutex.
+     */
+    static bool utcTimestamp( IString& buffer,
+                              uint64_t msecSinceEpoch,
+                              bool     encodeMsec     = true,
+                              bool     appendToString = false ) noexcept;
+
 protected:
     /// Helper method
     static bool formatMsec( IString&  buffer,

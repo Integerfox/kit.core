@@ -45,7 +45,7 @@ const char* KitOnly::classificationIdToString( uint8_t classificationId ) noexce
 {
     return Kit::Type::numToBEString<Kit::Logging::Pkg::ClassificationId, uint8_t>(
         classificationId,
-        NULL_CLASSIFICATION_ID_TEXT ); 
+        NULL_CLASSIFICATION_ID_TEXT );
 }
 
 IPackage* KitOnly::getPackage( uint8_t packageId ) noexcept

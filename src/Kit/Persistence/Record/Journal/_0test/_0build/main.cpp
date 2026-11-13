@@ -31,11 +31,11 @@ int main( int argc, char* argv[] )
     return Catch::Session().run( argc, argv );
 }
 
-// Native timestamp - since KIT's elapsed time uses the IStartupHook interface.  
+// Native timestamp - since KIT's elapsed time uses the IStartupHook interface.
 // Must support a duration of at least 10s, with at least 1ms resolution
 uint32_t getNativeTimestamp()
 {
     auto now = std::chrono::system_clock::now();
-    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
-    return static_cast<uint32_t>(ms);
+    auto ms  = std::chrono::duration_cast<std::chrono::milliseconds>( now.time_since_epoch() ).count();
+    return static_cast<uint32_t>( ms );
 }

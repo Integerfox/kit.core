@@ -18,13 +18,13 @@
     default value unless you REALLY know what you are doing.
  */
 #ifndef OPTION_KIT_CONTAINER_AVLTREE_MAX_TREE_DEPTH
-#define OPTION_KIT_CONTAINER_AVLTREE_MAX_TREE_DEPTH      32
+#define OPTION_KIT_CONTAINER_AVLTREE_MAX_TREE_DEPTH 32
 #endif
 
 
-/// 
+///
 namespace Kit {
-/// 
+///
 namespace Container {
 
 /** This concrete class implements the core functionality of for
@@ -47,11 +47,11 @@ protected:
     class AvlRoot : public MapItem, public Key
     {
     public:
-        /// 
+        ///
         const Key& getKey() const noexcept;
-        /// 
+        ///
         int compareKey( const Key& key ) const noexcept;
-        /// 
+        ///
         const void* getRawKey( unsigned* returnRawKeyLenPtr = 0 ) const noexcept;
 
     public:
@@ -60,11 +60,10 @@ protected:
 
         /// Special constructor
         AvlRoot( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept;
-
     };
 
     /// Root Node
-    AvlRoot  m_root;
+    AvlRoot m_root;
 
 
 public:
@@ -95,7 +94,7 @@ public:
      */
     bool insert( MapItem& node );
 
-    /** Deletes the specified item from the tree.  Returns the node deleted.  
+    /** Deletes the specified item from the tree.  Returns the node deleted.
         If the delete fails (i.e. node does not exist in the tree), then nullptr
         is returned.
      */
@@ -117,7 +116,7 @@ public:
     MapItem* previous( MapItem& current ) const;
 
 
-protected: // Helpers
+protected:  // Helpers
     /// Rebalances 'nodePtr' after its left subtree grew. Returns true when the subtree is now taller, i.e. the caller must keep rebalancing upwards
     static bool grewLeft( MapItem* nodePtr );
 
@@ -138,9 +137,8 @@ protected: // Helpers
 
     /// Swaps 'nodePtr' with its in-order predecessor.  Used when removing a node that has two children
     static void exchangeWithPrev( MapItem* nodePtr );
-
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

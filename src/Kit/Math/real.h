@@ -93,6 +93,6 @@ inline bool areDoublesEqual( double a, double b, double epsilon = KIT_MATH_REAL_
 }
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

@@ -36,7 +36,10 @@ using namespace Kit::Logging::Pkg;  // Helps with Log Enums
 #if defined( USE_KIT_SYSTEM_TRACE ) || defined( USE_KIT_SYSTEM_TRACE_RESTRICTED )
 #define OUTPUT( text ) KIT_LOGGING_LOG_SYSTEM( ClassificationId::FATAL, SystemMsgId::FATAL_ERROR, "%s", text );
 #else
-#define OUTPUT( text ) Kit::System::Trace::getDefaultOutputStream_()->write( "\n" ); Kit::System::Trace::getDefaultOutputStream_()->write( text ); Kit::System::Trace::getDefaultOutputStream_()->write( "\n" );
+#define OUTPUT( text )                                            \
+    Kit::System::Trace::getDefaultOutputStream_()->write( "\n" ); \
+    Kit::System::Trace::getDefaultOutputStream_()->write( text ); \
+    Kit::System::Trace::getDefaultOutputStream_()->write( "\n" );
 #endif
 
 

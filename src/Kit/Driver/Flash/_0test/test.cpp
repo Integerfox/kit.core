@@ -254,7 +254,7 @@ bool runtests( IApi& flash )
 
     // Stop the driver
     flash.stop();
-    
+
     // --- Summary ---
     KIT_SYSTEM_TRACE_MSG( SECT_, "========================================" );
     KIT_SYSTEM_TRACE_MSG( SECT_, "  RESULTS: %u passed, %u failed (of %u)", passCount_, failCount_, testCount_ );

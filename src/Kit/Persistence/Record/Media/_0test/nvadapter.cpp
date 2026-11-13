@@ -30,13 +30,13 @@ namespace {
 class MockNVApi : public Kit::Driver::NV::IApi
 {
 public:
-    bool     startResult = true;
-    bool     writeResult = true;
-    bool     readResult  = true;
-    unsigned startCount  = 0;
-    unsigned stopCount   = 0;
-    size_t   lastOffset  = 0;
-    size_t   lastLen     = 0;
+    bool     startResult  = true;
+    bool     writeResult  = true;
+    bool     readResult   = true;
+    unsigned startCount   = 0;
+    unsigned stopCount    = 0;
+    size_t   lastOffset   = 0;
+    size_t   lastLen      = 0;
     uint8_t  storage[128] = { 0 };
 
 public:
@@ -93,7 +93,7 @@ public:
 
 
 ////////////////////////////////////////////////////////////////////////////////
-#define ALLOCATED_LEN 32
+#define ALLOCATED_LEN   32
 #define STARTING_OFFSET 8
 
 TEST_CASE( "NVAdapter" )
@@ -102,9 +102,9 @@ TEST_CASE( "NVAdapter" )
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     Kit::EventQueue::Server mockEventQueue;
-    MockNVApi                driver;
-    NVAdapter                uut( driver, STARTING_OFFSET, ALLOCATED_LEN );
-    char                     buffer[ALLOCATED_LEN];
+    MockNVApi               driver;
+    NVAdapter               uut( driver, STARTING_OFFSET, ALLOCATED_LEN );
+    char                    buffer[ALLOCATED_LEN];
 
     SECTION( "start/stop delegate to the low level driver" )
     {

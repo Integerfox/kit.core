@@ -90,11 +90,11 @@ inline void tracef_buildSection_( char* buf, size_t bufSize, uint8_t classificat
           i.e. the assignment absolute values for classification and package IDs.
  */
 #define KitLoggingFramework_logTracef( classificationId, packageId, subSystemId, messageId, ... )                                               \
-    ( [&]() -> ::Kit::Logging::Framework::LogResult_T {                                                                                                                    \
+    ( [&]() -> ::Kit::Logging::Framework::LogResult_T {                                                                                         \
         char sectionBuf[32];                                                                                                                    \
         Kit::Logging::Framework::tracef_buildSection_( sectionBuf, sizeof( sectionBuf ), classificationId, packageId, subSystemId, messageId ); \
         KIT_SYSTEM_TRACE_RESTRICTED_MSG( sectionBuf, __VA_ARGS__ );                                                                             \
-        return ::Kit::Logging::Framework::LogResult_T::ADDED;                                                                                                              \
+        return ::Kit::Logging::Framework::LogResult_T::ADDED;                                                                                   \
     }() )
 
 }  // end namespaces

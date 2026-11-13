@@ -12,9 +12,9 @@
 
 #include <stdint.h>
 
-/// 
+///
 namespace Kit {
-/// 
+///
 namespace System {
 
 
@@ -31,7 +31,7 @@ namespace System {
     is waiting on event(s) and it is then signaled - all of the Events that were
     in the signaled state when the EventLoop was unblocked are cleared.
 
-    The IEventManager interface is inherently thread safe.  
+    The IEventManager interface is inherently thread safe.
  */
 class IEventManager
 {
@@ -66,11 +66,9 @@ public:
 public:
     /// Virtual Destructor
     virtual ~IEventManager() = default;
-
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch
-

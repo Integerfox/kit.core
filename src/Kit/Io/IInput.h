@@ -16,7 +16,6 @@
 #include "Kit/Io/IEos.h"
 
 
-
 ///
 namespace Kit {
 ///
@@ -77,7 +76,7 @@ public:
 
     /** This method is similar to read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ),
         except that it will NOT return until 'numBytesToRead' have been read.
-        
+
         If the method fails, the contents of the 'buffer' is undefined.
      */
     virtual bool read( void* buffer, Kit::Type::SSize_T numBytesToRead ) noexcept;
@@ -95,10 +94,9 @@ public:
 public:
     /// Lets the make the destructor virtual
     virtual ~IInput() noexcept = default;
-
 };
 
 
-};      // end namespaces
+};  // end namespaces
 };
 #endif  // end header latch

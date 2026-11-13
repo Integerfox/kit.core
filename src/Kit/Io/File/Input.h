@@ -21,7 +21,7 @@ namespace Io {
 namespace File {
 
 
-/** This concrete class provides a platform independent implementation of a 
+/** This concrete class provides a platform independent implementation of a
     Kit::Io::File::Input object.
  */
 class Input : public IInput
@@ -63,7 +63,7 @@ public:
     bool isEof() noexcept override;
 
     /// See Kit::Io::File::IPosition
-    bool length( Kit::Type::SSize_T& len) noexcept override;
+    bool length( Kit::Type::SSize_T& len ) noexcept override;
 
     /// See Kit::Io::File::IPosition
     bool currentPos( Kit::Type::SSize_T& curPos ) noexcept override;
@@ -85,8 +85,7 @@ protected:
     bool m_inEos;
 };
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch
-

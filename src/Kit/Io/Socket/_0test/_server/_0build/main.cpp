@@ -25,5 +25,5 @@ int main( int argc, char* argv[] )
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eVERBOSE );
 
     // Run the test(s)
-    echoServer( 5002, "bobs-your-uncle");
+    echoServer( 5002, "bobs-your-uncle" );
 }

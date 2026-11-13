@@ -62,7 +62,7 @@ public:
     virtual MemoryInfo_T& getMemoryStart( MemoryInfo_T& dstInfo ) noexcept = 0;
 
 
-private:
+protected:
     /** Hide/disable the individual release method (it does not fit the
         contiguous semantics).  If it gets called via the parent 'Allocator'
         interface - it does NOTHING
@@ -71,6 +71,6 @@ private:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

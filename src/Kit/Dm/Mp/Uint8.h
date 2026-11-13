@@ -28,7 +28,7 @@ namespace Mp {
     The toJSON() format is:
         \code
 
-        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false, 
+        { name:"<mpname>", type:"<mptypestring>", valid:true|false, seqnum:nnnn, locked:true|false,
           val:{ "dec":<numvalue>,
                 "hex":<hexvalue>
               }
@@ -71,7 +71,7 @@ public:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

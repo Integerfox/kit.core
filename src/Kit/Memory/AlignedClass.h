@@ -10,14 +10,14 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include <stdint.h>    // for uint8_t
+#include <stdint.h>  // for uint8_t
 
 ///
 namespace Kit {
 ///
 namespace Memory {
 
-/** This is a convenience type used to create a memory block that is large 
+/** This is a convenience type used to create a memory block that is large
     enough to hold the memory footprint of ONE instance of 'class T' with proper
     alignment.
  */
@@ -26,10 +26,10 @@ struct AlignedClass
 {
     /** This member defines the memory as a properly aligned character array.
      */
-    alignas(alignof(T)) uint8_t m_byteMem[sizeof(T)];
+    alignas( alignof( T ) ) uint8_t m_byteMem[sizeof( T )];
 };
 
 
-}      // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

@@ -55,7 +55,7 @@ namespace Tokenizer {
     (e.g., \\). IMPORTANT: The QUOTE and ESC characters are REMOVED from
     the string when it is tokenized!
 
-    NOTE: A TEXT STRING can be empty (e.g. \"\").  When/if encountered, an 
+    NOTE: A TEXT STRING can be empty (e.g. \"\").  When/if encountered, an
           empty TEXT STRING is treated as a parameter with zero string length.
 
 

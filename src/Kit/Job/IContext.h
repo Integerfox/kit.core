@@ -29,7 +29,7 @@ namespace Job {
 */
 class IContext
 {
-    public:
+public:
     /** This method returns a reference to the IQueue associated with the thread
         that the IJob instance executes in.
      */

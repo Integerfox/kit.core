@@ -8,7 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
 This file tests the Kit::Io Serial stream implementation that does not rely on
 the KIT threading model.  It uses the platform's standard I/O library - typically

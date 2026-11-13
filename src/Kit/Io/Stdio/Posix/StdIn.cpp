@@ -15,6 +15,6 @@
 using namespace Kit::Io::Stdio;
 
 StdIn::StdIn()
-    :InputDelegate( STDIN_FILENO )
+    : InputDelegate( STDIN_FILENO )
 {
 }

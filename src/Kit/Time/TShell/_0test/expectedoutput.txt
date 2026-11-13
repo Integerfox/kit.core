@@ -1,0 +1,19 @@
+
+--- Your friendly neighborhood TShell. ---
+
+
+$ *** TEST: help
+$ bye [<exitcode>]
+bye tshell
+echo ["<text>"]
+echo - ["<text>"]
+help [* <cmd>]
+threads
+time
+$ *** TEST: help time
+$ time
+  Displays elapsed time (ms), wall clock time (UTC formatted),
+  and boot time breakdown (boot counter and elapsed ms since boot).
+ 
+$ *** TEST: time (bad syntax)
+$ CMD_ERR_BAD_SYNTAX: [time]

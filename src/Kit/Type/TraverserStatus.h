@@ -25,6 +25,6 @@ enum class TraverserStatus
     eCONTINUE  //!< Indicates the client wants to continue the traversal
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

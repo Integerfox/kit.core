@@ -36,7 +36,7 @@
 */
 
 #include "kit_config.h"
-#ifdef USE_BSP_KIT_IO_STREAM    // Only has meaning when USE_BSP_KIT_IO_STREAM is defined
+#ifdef USE_BSP_KIT_IO_STREAM  // Only has meaning when USE_BSP_KIT_IO_STREAM is defined
 
 #include "hardware/uart.h"
 
@@ -61,7 +61,7 @@ void Bsp_startConsoleStream( unsigned long baudRate = 115200,                   
                              unsigned      stopBits = 1,                         //!< Number of stop bits.  Range is [1..2]
                              uart_parity_t parity   = UART_PARITY_NONE           //!< Parity setting.  See hardware/uart.h for enumeration
                              ) noexcept;
-                             
+
 /*----------------------------------------------------------------------------*/
 #endif  // USE_BSP_KIT_IO_STREAM
 #endif  // end header latch

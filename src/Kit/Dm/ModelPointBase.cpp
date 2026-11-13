@@ -465,7 +465,7 @@ void ModelPointBase::processSubscriptionEvent_( IObserver& observer, Event_T eve
             break;
 
         case eNOTIFY_COMPLETE:
-            // Re-subscribing to an observer instance can only be down with the 
+            // Re-subscribing to an observer instance can only be down with the
             // 'original' model point, i.e. 're-homing' an observer inside the
             // callback is NOT ALLOWED
             if ( observer.getModelPoint_() != this )

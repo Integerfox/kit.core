@@ -71,7 +71,7 @@ public:
 
     /// See Period
     uint32_t getDurationMs() const noexcept override { return m_durationMs; }
-    
+
 protected:
     /// Duration of this period in milliseconds
     uint32_t m_durationMs;

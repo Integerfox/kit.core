@@ -66,7 +66,7 @@ protected:
 
     /// Adds the item as the last item in the list
     void putFirst( ListItem& item ) noexcept;
-    
+
     /// Adds the item as the last item in the list
     void putLast( ListItem& item ) noexcept;
 
@@ -96,13 +96,13 @@ protected:
      */
     bool remove( ListItem& item ) noexcept;
 
-    /** Insert the "item" ListItem into the list behind the "after" ListItem element.  
+    /** Insert the "item" ListItem into the list behind the "after" ListItem element.
         If 'after' is nullptr, then 'item' is added to the head of the list.
      */
     void insertAfter( ListItem& after, ListItem& item ) noexcept;
 
-    /** Insert the "item" ListItem into the list ahead of the "before" ListItem element. 
-        If 'before' is nullptr, then 'item' is added to the tail of the list.  
+    /** Insert the "item" ListItem into the list ahead of the "before" ListItem element.
+        If 'before' is nullptr, then 'item' is added to the tail of the list.
         Note: This insert operation is more expensive than insertAfter() because
         a traversal of the list is required to find the 'before' item
      */
@@ -128,7 +128,7 @@ protected:
     /// Points to the last item in the list.
     ListItem* m_tailPtr;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
     SListBase( const SListBase& m ) = delete;
 

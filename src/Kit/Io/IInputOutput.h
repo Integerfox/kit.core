@@ -1,5 +1,5 @@
-#ifndef KIT_IO_IINPUTOUTPUT_H_ 
-#define KIT_IO_IINPUTOUTPUT_H_ 
+#ifndef KIT_IO_IINPUTOUTPUT_H_
+#define KIT_IO_IINPUTOUTPUT_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
@@ -23,11 +23,11 @@ namespace Io {
     stream. Example of input-output streams: socket connection, UART.
  */
 class IInputOutput : public IInput,
-    public IOutput
+                     public IOutput
 {
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

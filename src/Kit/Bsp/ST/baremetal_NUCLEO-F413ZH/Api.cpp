@@ -15,7 +15,7 @@
 
 
 #ifndef USE_BSP_USE_PRINTF
-#define INIT_KIT_CONSOLE()    Bsp_startConsoleStream( USART3_IRQn, &huart3 )
+#define INIT_KIT_CONSOLE() Bsp_startConsoleStream( USART3_IRQn, &huart3 )
 #else
 #define INIT_KIT_CONSOLE()
 #endif
@@ -39,4 +39,3 @@ void Bsp_initialize( void )
     // Start the Console/Trace UART
     INIT_KIT_CONSOLE();
 }
-

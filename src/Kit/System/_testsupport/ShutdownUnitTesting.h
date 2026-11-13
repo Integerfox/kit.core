@@ -15,7 +15,10 @@
 
 /** Maximum number of allowed fatal errors before the application is
     forced to exit.  This is a safety mechanism to prevent the unit test
-    from getting into a 'runaway' error condition.
+    from getting into a 'runaway' error condition.  The application exits with
+    the exit code of the fatal error that exceeded the limit - or with
+    Shutdown::eFAILURE if that exit code is Shutdown::eSUCCESS - i.e. the
+    test is always reported as failed.
 
     Note: The fatal error count is reset everytime getAndClearCounter()
           is called.

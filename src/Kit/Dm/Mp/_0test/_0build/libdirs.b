@@ -6,6 +6,7 @@ src/Kit/EventQueue
 src/Kit/Itc
 src/Kit/Container
 src/Kit/Text
+src/Kit/Time
 src/Kit/Math
 src/Kit/System
 src/Kit/System/_trace

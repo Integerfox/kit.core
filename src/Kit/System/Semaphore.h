@@ -15,7 +15,7 @@
 
 
 /// Defer the definition of the a raw semaphore type to the application's 'platform'
-#define KitSystemSema_T          KitSystemSema_T_MAP
+#define KitSystemSema_T KitSystemSema_T_MAP
 
 
 ///
@@ -37,7 +37,7 @@ public:
     /** Constructor.  The semaphore is created with the specified 'initialCount'.
         A count of zero, will cause an immediate call to 'wait()' to block.
      */
-    Semaphore( unsigned initialCount=0 ) noexcept;
+    Semaphore( unsigned initialCount = 0 ) noexcept;
 
     /// Destructor
     ~Semaphore() noexcept;
@@ -77,7 +77,7 @@ public:
 
 protected:
     /// Raw Semaphore handle/instance/pointer
-    KitSystemSema_T  m_sema;
+    KitSystemSema_T m_sema;
 
 
 protected:
@@ -87,7 +87,7 @@ protected:
     /// Helper method for supporting SimTicks and 'real' tick in the same build
     bool timedWaitInRealTime( uint32_t timeoutMs ) noexcept;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->semaphores can not be copied!
     Semaphore( const Semaphore& m );
 
@@ -101,6 +101,6 @@ private:
 };
 
 
-}      // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

@@ -3,8 +3,8 @@
 @namespace Kit::Logging::Framework @brief
 
 The Framework namespace provides the non-domain specific framework for Logging
-events.  Note: This namespace does NOT include, NOT responsible for persistently
-storing log entries.
+events.  Note: The core framework is NOT responsible for persistently storing
+log entries; the optional `JournalLogSink` class provides one way to do so.
 
 ## Logging vs Tracing
 
@@ -104,6 +104,15 @@ different in purpose.
     on the Kit::Persistence namespace - the Payload interface definition has no
     other dependencies, i.e. the application is NOT required to use the
     Kit::Persistence namespace for storing the log entry to persistent media.
+  - Two ready-made consumers are provided:
+    - `LogSink` drains the FIFO and dispatches each entry to a child class's
+      `dispatchLogEntry()` method.
+    - `JournalLogSink` writes the entries to a `Kit::Persistence::Record::Journal`
+      record (and provides the reader API).  It optionally pauses updates
+      (entries are held in the FIFO while an application `std::atomic<bool>`
+      flag is set; pausing is timely, not immediate), and
+      stamps the current boot counter on entries that were logged before the
+      boot counter was loaded (or while it was loading).
 
 - The log entry FIFO can overflow if the application is not storing log entries
   faster than the application is generating entries. When this happens, the

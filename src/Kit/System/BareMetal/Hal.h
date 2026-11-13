@@ -11,14 +11,14 @@
 /** @file
 
     This file defines the HAL services a platform is required to provided when
-    running KIT on a bare-metal platform. 
+    running KIT on a bare-metal platform.
  */
 
 #include <stdint.h>
 
-/// 
+///
 namespace Kit {
-/// 
+///
 namespace System {
 ///
 namespace BareMetal {
@@ -38,9 +38,8 @@ void busyWait( uint32_t waitTimeMs ) noexcept;
  */
 uint32_t getElapsedTimeMs( void ) noexcept;
 
-}       // end namespaces
+}  // end namespaces
 }
 }
 
 #endif  // end header latch
-

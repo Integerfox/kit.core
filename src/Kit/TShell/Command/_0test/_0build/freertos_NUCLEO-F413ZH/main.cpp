@@ -56,7 +56,7 @@ int main( int argc, char* argv[] )
     KIT_SYSTEM_TRACE_SET_INFO_LEVEL( Kit::System::TraceLevel::eINFO );
 
     // Create a thread
-    auto*        testThreadHandle = Kit::System::Thread::create( testRunnable_, "TEST" );
+    auto* testThreadHandle = Kit::System::Thread::create( testRunnable_, "TEST" );
     if ( testThreadHandle == nullptr )
     {
         KIT_SYSTEM_TRACE_MSG( SECT_, "FAILED to create test thread" );

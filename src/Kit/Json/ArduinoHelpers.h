@@ -23,13 +23,12 @@ namespace Kit {
 namespace Json {
 
 /** This method dumps the contents of the JSON object/array to the trace output.
-    
+
     Note: This method uses the heap to temporarily allocate memory
  */
 void dumpToTrace( const char* traceSection, const JsonVariant& srcObjToDump ) noexcept;
 
 
-
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

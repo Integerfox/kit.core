@@ -10,3 +10,4 @@ src/Kit/System/_trace/_stdout
 src/Kit/Io
 src/Kit/Text
 src/Kit/Text/Tokenizer
+src/Kit/Time < calendar.cpp

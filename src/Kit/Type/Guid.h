@@ -25,7 +25,7 @@
 /** Maximum string length (not including the null terminator) for a formatted
     GUI string WITH leading/trailing brackets
  */
-#define KIT_TYPE_GUID_MAX_FORMATTED_WITH_BRACES_LENGTH (KIT_TYPE_GUID_MAX_FORMATTED_LENGTH+2)
+#define KIT_TYPE_GUID_MAX_FORMATTED_WITH_BRACES_LENGTH ( KIT_TYPE_GUID_MAX_FORMATTED_LENGTH + 2 )
 
 
 ///

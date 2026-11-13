@@ -58,7 +58,7 @@ protected:
     KitSystemMutex_T m_mutex;
 
 
-private:
+protected:
     /// Prevent access to the copy constructor -->mutexes can not be copied!
     Mutex( const Mutex& m ) = delete;
 
@@ -93,7 +93,7 @@ public:
         ~ScopeLock() { m_mutex.unlock(); }
 
 
-    private:
+    protected:
         /** This method PREVENTS this object from being created on the Heap.
             This class can only/should only be instantiated as a local variable to
             a critical section scope block!

@@ -108,6 +108,6 @@ protected:
     State_T m_state;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

@@ -44,8 +44,8 @@ public:
     }
 
     Kit::Itc::SelfPostMessage<ContinuationProbe> m_resume;
-    unsigned                                   callbacks;
-    bool                                       rescheduleOnResume;
+    unsigned                                     callbacks;
+    bool                                         rescheduleOnResume;
 };
 
 }  // end anonymous namespace
@@ -54,7 +54,7 @@ TEST_CASE( "SelfPostMessage" )
 {
     SECTION( "coalesces repeated schedules" )
     {
-        TestEventQueue  queue;
+        TestEventQueue    queue;
         ContinuationProbe probe( queue );
 
         probe.m_resume.schedule();
@@ -68,7 +68,7 @@ TEST_CASE( "SelfPostMessage" )
 
     SECTION( "cancels a queued callback" )
     {
-        TestEventQueue  queue;
+        TestEventQueue    queue;
         ContinuationProbe probe( queue );
 
         probe.m_resume.schedule();
@@ -82,7 +82,7 @@ TEST_CASE( "SelfPostMessage" )
 
     SECTION( "schedule rearms a cancelled queued callback" )
     {
-        TestEventQueue  queue;
+        TestEventQueue    queue;
         ContinuationProbe probe( queue );
 
         probe.m_resume.schedule();
@@ -96,7 +96,7 @@ TEST_CASE( "SelfPostMessage" )
 
     SECTION( "callback can schedule a continuation" )
     {
-        TestEventQueue  queue;
+        TestEventQueue    queue;
         ContinuationProbe probe( queue );
         probe.rescheduleOnResume = true;
 

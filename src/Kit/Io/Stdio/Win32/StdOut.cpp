@@ -14,6 +14,6 @@
 using namespace Kit::Io::Stdio;
 
 StdOut::StdOut()
-    :OutputDelegate( GetStdHandle( STD_OUTPUT_HANDLE ) )
+    : OutputDelegate( GetStdHandle( STD_OUTPUT_HANDLE ) )
 {
 }

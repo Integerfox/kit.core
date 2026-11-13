@@ -8,6 +8,7 @@ src/Kit/Io/Serial/ST/M32F4
 # KIT Middle-ware
 src/Kit/Container
 src/Kit/Text
+src/Kit/Time < calendar.cpp
 src/Kit/Io
 
 # KIT OSAL

@@ -184,5 +184,7 @@ void dump( Kit::Text::IString& dst, const JsonArray& arr, int nesting )
 void indent( Kit::Text::IString& dst, int nesting )
 {
     for ( int i = 0; i < nesting; i++ )
+    {
         dst += "  ";
+    }
 }

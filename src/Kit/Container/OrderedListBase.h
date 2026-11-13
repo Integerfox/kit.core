@@ -21,7 +21,7 @@ namespace Container {
 /** This protected base class implements a NON-TYPE-SAFE an ordered doubly
     linked list.  The order is determined by the compare of function of the
     'Keyed Item' being stored in the list.  It is intended to be the base class
-    for a type-safe template class. Having a non-templatized base class reduces 
+    for a type-safe template class. Having a non-templatized base class reduces
     the memory footprint when an application has more than one type specific
     OrderedListBase class.
 
@@ -39,7 +39,7 @@ protected:
     {
     }
 
-    /** See DListBase::DListBase(const char*) for details. 
+    /** See DListBase::DListBase(const char*) for details.
      */
     OrderedListBase( const char* ignoreThisParameter_usedToCreateAUniqueConstructor ) noexcept
         : DListBase( ignoreThisParameter_usedToCreateAUniqueConstructor )
@@ -52,7 +52,7 @@ protected:
      */
     void insert( KeyedItem& item ) noexcept;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
     OrderedListBase( const OrderedListBase& m ) = delete;
 

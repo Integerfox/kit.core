@@ -667,20 +667,20 @@ TEST_CASE( "Uint32" )
         seqNum = mp_apple_.setInvalid();
         uint32_t value;
 
-        seqNum = mp_apple_.bitwiseOR( 0x0F0F0F0F );
-        bool valid  = mp_apple_.read( value );
+        seqNum     = mp_apple_.bitwiseOR( 0x0F0F0F0F );
+        bool valid = mp_apple_.read( value );
         REQUIRE( valid == true );
         REQUIRE( value == 0x0F0F0F0F );
 
         seqNum = mp_apple_.bitwiseXOR( 0xFFFF0000 );
         valid  = mp_apple_.read( value );
         REQUIRE( valid == true );
-        REQUIRE( value == 0xF0F00F0F  );
+        REQUIRE( value == 0xF0F00F0F );
 
         seqNum = mp_apple_.bitwiseAND( 0xFF00FF00 );
         valid  = mp_apple_.read( value );
         REQUIRE( valid == true );
-        REQUIRE( value == 0xF0000F00);
+        REQUIRE( value == 0xF0000F00 );
 
         seqNum = mp_apple_.bitwiseClearAndSet( 0xE0000700, 0x00001000 );
         valid  = mp_apple_.read( value );
@@ -691,7 +691,7 @@ TEST_CASE( "Uint32" )
         seqNum = mp_apple_.setBit( 31 );
         valid  = mp_apple_.read( value );
         REQUIRE( valid == true );
-        REQUIRE( value == (( 1U << 31 ) | 0x00000F00) );
+        REQUIRE( value == ( ( 1U << 31 ) | 0x00000F00 ) );
 
         seqNum = mp_apple_.clearBit( 31 );
         valid  = mp_apple_.read( value );

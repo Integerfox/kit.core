@@ -20,15 +20,15 @@ namespace Kit {
 namespace Container {
 
 
-/** This template class extends the RingBuffer class by statically allocating 
+/** This template class extends the RingBuffer class by statically allocating
     memory for the ring buffer.
 
-    NOTE: The default behavior of the RingBuffer is to initialize the memory 
+    NOTE: The default behavior of the RingBuffer is to initialize the memory
           buffer to all zeros. When the 'ITEM' type is a class type (i.e. not
           struct or primitive type) then the 'initializeMemory' constructor flag
           MUST be set to false - so as to not overwrite the vtable pointer of
           the class instance.
-    
+
     Template Args:
         ITEM:=      Type of the data stored in the Ring Buffer
         N:=         Size of the array that is allocated to hold the Ring Buffer
@@ -49,7 +49,7 @@ protected:
     /// Memory for the Ring buffer
     ITEM m_rawMemory[N];
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBufferAllocate( const RingBufferAllocate& m ) = delete;
 

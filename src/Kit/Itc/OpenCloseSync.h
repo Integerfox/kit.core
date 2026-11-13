@@ -20,7 +20,7 @@ namespace Kit {
 namespace Itc {
 
 /** This partially concrete class extends the ITC OpenSync class and implements
-    the synchronous ITC close call for the CloseApi.  The subclass is still 
+    the synchronous ITC close call for the CloseApi.  The subclass is still
     required to implement the ITC request() method.
 
     NOTE: This class is derived from OpenSync -->if you support a close(),
@@ -41,8 +41,6 @@ public:
 };
 
 
-
-
-}      // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

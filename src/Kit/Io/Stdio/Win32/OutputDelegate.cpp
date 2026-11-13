@@ -35,7 +35,7 @@ void OutputDelegate::flush() noexcept
     Win32::Fdio::flush( m_outFd );
 }
 
-bool OutputDelegate::isEos()  noexcept
+bool OutputDelegate::isEos() noexcept
 {
     return m_outEos;
 }
@@ -46,7 +46,7 @@ void OutputDelegate::close() noexcept
     m_outFd = INVALID_HANDLE_VALUE;
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

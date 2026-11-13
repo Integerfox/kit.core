@@ -20,7 +20,7 @@ namespace File {
 
 //////////////////////////
 Input::Input( const char* fileName ) noexcept
-    : m_inFd( Posix::Fdio::open( System::getNative(fileName) ) )
+    : m_inFd( Posix::Fdio::open( System::getNative( fileName ) ) )
     , m_inEos( false )
 {
 }

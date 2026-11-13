@@ -40,7 +40,7 @@ void ObserverBase::setEventQueue( Kit::EventQueue::IChangeNotification& myEventQ
 
 Kit::EventQueue::IChangeNotification* ObserverBase::getIChangeNotification_() const noexcept
 {
-     if ( m_eventQueueHdl == nullptr )
+    if ( m_eventQueueHdl == nullptr )
     {
         Kit::System::FatalError::logf( Kit::System::Shutdown::eDATA_MODEL,
                                        "Kit::Dm::Observer().  Protocol Error.  getIChangeNotification_() was called before setEventQueue()" );

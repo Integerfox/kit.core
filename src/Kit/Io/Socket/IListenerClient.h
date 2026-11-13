@@ -29,7 +29,7 @@ namespace Socket {
     In-thread Client:
         It is okay for the client to be running in the same thread as the
         listener.  However, the client should NOT return from the newConnection()
-        method until the client is 'done' with the socket.  
+        method until the client is 'done' with the socket.
 
     Out-of-thread Client:
         For this use case, the client should NOT inherit/implement this class

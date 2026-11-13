@@ -47,7 +47,7 @@ void InputDelegate::close() noexcept
     m_inFd = INVALID_HANDLE_VALUE;
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

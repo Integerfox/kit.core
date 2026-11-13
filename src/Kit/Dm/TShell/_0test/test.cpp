@@ -36,7 +36,7 @@ using namespace Kit::Dm;
 using namespace Kit::Dm::TShell;
 
 
-static ModelDatabase          mpDatabase_( "ignore_static_constructor" );
+static ModelDatabase mpDatabase_( "ignore_static_constructor" );
 //
 static Mp::StringAllocate<16> mpS1_( mpDatabase_,
                                      "str1" );

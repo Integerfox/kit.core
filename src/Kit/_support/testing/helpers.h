@@ -224,7 +224,7 @@ bool minWaitOnModelPointSeqNumChange( MPTYPE& src, uint16_t currentSeqNum, unsig
     return false;
 };
 
-/// This method busy waits till the specified thread is active/running. Returns false if TIMED-OUT  
+/// This method busy waits till the specified thread is active/running. Returns false if TIMED-OUT
 inline bool waitThreadActive( Kit::System::Thread* threadPtr, uint32_t maxWaitMs = 1000, uint32_t waitDelayMs = 10 )
 {
     uint32_t startTime = Kit::System::ElapsedTime::milliseconds();
@@ -235,7 +235,7 @@ inline bool waitThreadActive( Kit::System::Thread* threadPtr, uint32_t maxWaitMs
     return Kit::System::Thread::isActiveThread( threadPtr );
 };
 
-/// This method busy waits till the specified thread is NOT active/running. Returns false if TIMED-OUT 
+/// This method busy waits till the specified thread is NOT active/running. Returns false if TIMED-OUT
 inline bool waitThreadInactive( Kit::System::Thread* threadPtr, uint32_t maxWaitMs = 1000, uint32_t waitDelayMs = 10 )
 {
     uint32_t startTime = Kit::System::ElapsedTime::milliseconds();

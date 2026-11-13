@@ -13,7 +13,7 @@
 #include <string.h>
 
 using namespace Kit::Type;
-bool Guid_T::operator ==( const Guid_T other ) const
+bool Guid_T::operator==( const Guid_T other ) const
 {
     return memcmp( block, other.block, sizeof( block ) ) == 0;
 }
@@ -80,7 +80,7 @@ bool Guid_T::fromString( const char* stringGuid )
     binaryOutput += 4;
 
     // The 3 blocks of 4 characters
-    for ( int i=0; i < 3; i++ )
+    for ( int i = 0; i < 3; i++ )
     {
         // Check for '-'
         if ( *stringGuid != '-' )

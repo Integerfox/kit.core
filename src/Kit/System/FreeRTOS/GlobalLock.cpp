@@ -9,7 +9,7 @@
 /** @file */
 
 
-#include "kit_map.h"    // For FreeRTOS includes
+#include "kit_map.h"  // For FreeRTOS includes
 #include "Kit/System/GlobalLock.h"
 
 //------------------------------------------------------------------------------
@@ -27,6 +27,6 @@ void GlobalLock::end()
     taskENABLE_INTERRUPTS();
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

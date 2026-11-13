@@ -27,8 +27,8 @@
 #define HAVE_KIT_TEXT_SNPRINTF
 #define HAVE_KIT_TEXT_VSNPRINTF
 
-extern int strcasecmp_MAP( const char* s1, const char* s2 );
-extern int strncasecmp_MAP( const char* s1, const char* s2, size_t n );
+extern int   strcasecmp_MAP( const char* s1, const char* s2 );
+extern int   strncasecmp_MAP( const char* s1, const char* s2, size_t n );
 extern char* strupr_MAP( char* s1 );
 extern char* strlwr_MAP( char* s1 );
 

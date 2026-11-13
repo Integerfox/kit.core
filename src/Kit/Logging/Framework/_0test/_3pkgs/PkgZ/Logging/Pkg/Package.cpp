@@ -19,7 +19,7 @@ namespace Logging {
 namespace Pkg {
 
 // Compile-time validation of PACKAGE_ID
-static_assert( Package::PACKAGE_ID > 0 && Package::PACKAGE_ID <=  sizeof(KitLoggingPackageMask_T) * 8, "PACKAGE_ID cannot be zero or exceeds the number of bits in KitLoggingPackageMask_T" );
+static_assert( Package::PACKAGE_ID > 0 && Package::PACKAGE_ID <= sizeof( KitLoggingPackageMask_T ) * 8, "PACKAGE_ID cannot be zero or exceeds the number of bits in KitLoggingPackageMask_T" );
 
 // Compile-time validation that SubSystemId/MessageId does not contain a symbol with value 255
 // Note: Using _size_constant to make this scalable - validates the max underlying value is < 255

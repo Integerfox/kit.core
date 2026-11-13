@@ -33,9 +33,10 @@ int main( void )
     KIT_SYSTEM_TRACE_MSG( SECT_, "KIT System initialized" );
 
     // Go run the test(s) (Note: This method should never return)
-    runtests( 1000);    // 1000 Loop * 0.5sec = 500 seconds max
+    runtests( 1000 );  // 1000 Loop * 0.5sec = 500 seconds max
 
     // I should never get here!
-    for ( ;; );
+    for ( ;; )
+        ;
     return 0;
 }

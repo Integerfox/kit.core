@@ -27,14 +27,15 @@ static int shutdown_application_( int exit_code )
     // Check if the scheduler has even started (or is still running)
     if ( xTaskGetSchedulerState() == taskSCHEDULER_RUNNING )
     {
-        vTaskEndScheduler(); // Note: This only works a very few platforms (at this time only x86 Real Mode PC)!
+        vTaskEndScheduler();  // Note: This only works a very few platforms (at this time only x86 Real Mode PC)!
     }
 
     // If the scheduler is not running (typical case is it hasn't been started) -->then lock up in forever loop
     else
     {
         Bsp_disable_irqs();
-        for ( ;;);
+        for ( ;; )
+            ;
     }
 
     return exit_code;
@@ -42,7 +43,7 @@ static int shutdown_application_( int exit_code )
 
 int Shutdown::success() noexcept
 {
-    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN , "Orderly shutdown initiated..." );
+    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN, "Orderly shutdown initiated..." );
     return shutdown_application_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }
 
@@ -51,6 +52,6 @@ int Shutdown::failure( int exit_code ) noexcept
     return shutdown_application_( notifyShutdownHandlers( exit_code ) );
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------
