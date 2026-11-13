@@ -45,7 +45,7 @@ bool Api::start( void* ) noexcept
     }
 
     // The file offsets/lengths are SSize_T -->the storage must fit
-    if ( m_totalSize > static_cast<size_t>( std::numeric_limits<Kit::Type::SSize_T>::max() ) )
+    if ( m_totalSize > static_cast<size_t>( ( std::numeric_limits<Kit::Type::SSize_T>::max )() ) )
     {
         return false;
     }

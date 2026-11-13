@@ -142,7 +142,7 @@ TEST_CASE( "File" )
         REQUIRE( !uut.write( 0, "a", 1 ) );
 
         // Storage does not fit in SSize_T
-        size_t tooBig = static_cast<size_t>( std::numeric_limits<Kit::Type::SSize_T>::max() ) + 1u;
+        size_t tooBig = static_cast<size_t>( ( std::numeric_limits<Kit::Type::SSize_T>::max )() ) + 1u;
         Api    big( tooBig, 1, FILE_NAME2_ );
         REQUIRE( !big.start() );
         REQUIRE( !System::exists( FILE_NAME2_ ) );
