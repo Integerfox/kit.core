@@ -8,8 +8,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/EventQueue/Server.h"
 #include "common.h"
+#include "Kit/_support/testing/ManualEventQueue.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/Text/FString.h"
@@ -33,10 +33,6 @@ static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstru
 // Allocate my Model Points
 static Mp::Bool mp_apple_( modelDb_, "APPLE" );
 static Mp::Bool mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
-
-
-// Don't let the Runnable object go out of scope before its thread has actually terminated!
-static Kit::EventQueue::Server t1Mbox_;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -147,20 +143,54 @@ TEST_CASE( "Bool" )
     SECTION( "observer" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        bool                   expectedVal = true;
-        Viewer<Mp::Bool, bool> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
-        Kit::System::Thread*   t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
+        ManualEventQueue       eventQueue;  // No thread: the test thread runs the queue
+        Viewer<Mp::Bool, bool> viewer( eventQueue, mp_apple_ );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
-        viewer_apple1.open();
-        mp_apple_.write( true );
-        Kit::System::Thread::wait();
-        viewer_apple1.close();
+        // Attaching (with an unknown sequence number) generates a notification of the current state
+        REQUIRE( eventQueue.requestOpen( viewer ) );
+        REQUIRE( viewer.m_notificationCount == 1 );
+        REQUIRE( viewer.m_lastValid == false );
 
-        // Shutdown threads
-        t1Mbox_.pleaseStop();
-        WAIT_FOR_THREAD_TO_STOP( t1 );
-        Kit::System::Thread::destroy( *t1 );
+        mp_apple_.write( true );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.m_lastValue == true );
+
+        // Same value -->no change notification
+        mp_apple_.write( true );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+
+        mp_apple_.write( false );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 3 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.m_lastValue == false );
+
+        // Multiple changes before the queue runs -->ONE notification with the latest value
+        mp_apple_.write( true );
+        mp_apple_.write( false );
+        mp_apple_.write( true );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 4 );
+        REQUIRE( viewer.m_lastValue == true );
+
+        // Valid -->invalid is a change, invalid -->invalid is not
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
+        REQUIRE( viewer.m_lastValid == false );
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
+
+        // Detached -->no change notification
+        REQUIRE( eventQueue.requestClose( viewer ) );
+        mp_apple_.write( true );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
     }
 
 

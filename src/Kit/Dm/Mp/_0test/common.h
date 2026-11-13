@@ -11,58 +11,64 @@
 /** @file */
 
 #include "Kit/Dm/IObserver.h"
-#include "Kit/EventQueue/Server.h"
+#include "Kit/EventQueue/IQueue.h"
 #include "Kit/Dm/ObserverCallback.h"
 #include "Kit/Itc/OpenCloseSync.h"
-#include "Kit/System/Thread.h"
-#include "Kit/System/Api.h"
 #include "Kit/System/Trace.h"
 #include "catch2/catch_test_macros.hpp"
-
-/// Macro to help shutdown the observer thread
-#define WAIT_FOR_THREAD_TO_STOP( t )  \
-    for ( int i = 0; i < 200; i++ )   \
-    {                                 \
-        Kit::System::sleep( 50 );     \
-        if ( t->isActive() == false ) \
-        {                             \
-            break;                    \
-        }                             \
-    }
+#include <string.h>
 
 
+/** This class records the change notifications of a single Model Point.  It is
+    intended to be run by a ManualEventQueue (see
+    Kit/_support/testing/ManualEventQueue.h), i.e. the test thread checks the
+    recorded results after ManualEventQueue::runUntilIdle() - which makes
+    'nothing happened' checks (e.g. no notification when the same value is
+    written) deterministic.
+
+    Every notification is counted, and the MP's valid state and value at the
+    time of the notification are captured.  Use ManualEventQueue::requestOpen()
+    and requestClose() to attach/detach the observer.
+ */
 template <class MPTYPE, class ELEMTYPE>
 class Viewer : public Kit::Itc::OpenCloseSync
 {
 public:
     ///
-    Kit::System::Thread& m_masterThread;
-    ///
     Kit::Dm::ObserverCallback<MPTYPE> m_observerMp1;
     ///
     MPTYPE& m_mp;
-    ///
-    ELEMTYPE& m_elemValue;
-    ///
-    bool m_firstTime;
+    /// Number of change notifications received
+    unsigned m_notificationCount;
+    /// Valid state of the MP at the last change notification
+    bool m_lastValid;
+    /// Value of the MP at the last change notification (only meaningful when m_lastValid is true)
+    ELEMTYPE m_lastValue;
 
     /// Constructor
-    Viewer( Kit::EventQueue::IQueue& myMbox, Kit::System::Thread& masterThread, MPTYPE& mpToMonitor, ELEMTYPE& elemValue )
+    Viewer( Kit::EventQueue::IQueue& myMbox, MPTYPE& mpToMonitor )
         : Kit::Itc::OpenCloseSync( myMbox )
-        , m_masterThread( masterThread )
         , m_observerMp1( myMbox )
         , m_mp( mpToMonitor )
-        , m_elemValue( elemValue )
-        , m_firstTime( true )
+        , m_notificationCount( 0 )
+        , m_lastValid( false )
+        , m_lastValue()
     {
         m_observerMp1.template setCallback<Viewer<MPTYPE, ELEMTYPE>, &Viewer<MPTYPE, ELEMTYPE>::mp1_changed>( this );
     }
 
+    /// Destructor.  Ensures the observer is detached from the (typically static) MP
+    ~Viewer()
+    {
+        m_mp.detach( m_observerMp1 );
+    }
+
 public:
     ///
     void request( Kit::Itc::IOpenRequest::OpenMsg& msg ) noexcept override
     {
         m_mp.attach( m_observerMp1 );
+        msg.getPayload().success = true;
         msg.returnToSender();
     }
 
@@ -70,66 +76,51 @@ public:
     void request( Kit::Itc::ICloseRequest::CloseMsg& msg ) noexcept override
     {
         m_mp.detach( m_observerMp1 );
+        msg.getPayload().success = true;
         msg.returnToSender();
     }
 
-
 public:
+    ///
     void mp1_changed( MPTYPE& modelPointThatChanged, Kit::Dm::IObserver& clientObserver ) noexcept
     {
-        if ( m_firstTime && modelPointThatChanged.isNotValidAndSync( clientObserver ) == false )
-        {
-            m_firstTime = false;
-            ELEMTYPE elem;
-            REQUIRE( modelPointThatChanged.readAndSync( elem, clientObserver ) );
-            displayElement( "new", elem );
-            displayElement( "exp", m_elemValue );
-
-            m_masterThread.signal();
-        }
-    }
-
-    /** Note: Template specialization can be used to properly display the MP value
-        for the Observer test.  For example - MP Type is BETTER_ENUM
-        \code
-            template <>
-            void Viewer<MyUut, MyEnum>::displayElement( const char* label, MyEnum& elem )
-            {
-                KIT_SYSTEM_TRACE_MSG( SECT_, "%s:%s", label, elem._to_string() );
-            }
-        \endcode
-    */
-    void displayElement( const char* label, ELEMTYPE& elem )
-    {
-        KIT_SYSTEM_TRACE_MSG( "_0test", "%s:%d", label, elem );
+        m_notificationCount++;
+        m_lastValid = modelPointThatChanged.readAndSync( m_lastValue, clientObserver );
     }
 };
 
-// Need a different viewer for arrays because the readAndSync() method are different for arrays vs non-arrays
+/// Same as Viewer, but for Model Points that contain an array of N elements
 template <class MPTYPE, class ELEMTYPE, int N>
 class ViewerArray : public Kit::Itc::OpenCloseSync
 {
-    static_assert( N >= 5, "ViewerArray: N must be at least 5" );
-
 public:
-    ///
-    Kit::System::Thread& m_masterThread;
     ///
     Kit::Dm::ObserverCallback<MPTYPE> m_observerMp1;
     ///
     MPTYPE& m_mp;
-    ///
-    ELEMTYPE m_val[N];
+    /// Number of change notifications received
+    unsigned m_notificationCount;
+    /// Valid state of the MP at the last change notification
+    bool m_lastValid;
+    /// Value of the MP at the last change notification (only meaningful when m_lastValid is true)
+    ELEMTYPE m_lastValue[N];
 
     /// Constructor
-    ViewerArray( Kit::EventQueue::Server& myMbox, Kit::System::Thread& masterThread, MPTYPE& mpToMonitor, ELEMTYPE* array )
+    ViewerArray( Kit::EventQueue::IQueue& myMbox, MPTYPE& mpToMonitor )
         : Kit::Itc::OpenCloseSync( myMbox )
-        , m_masterThread( masterThread )
         , m_observerMp1( myMbox )
         , m_mp( mpToMonitor )
+        , m_notificationCount( 0 )
+        , m_lastValid( false )
+        , m_lastValue{}
     {
         m_observerMp1.template setCallback<ViewerArray<MPTYPE, ELEMTYPE, N>, &ViewerArray<MPTYPE, ELEMTYPE, N>::mp1_changed>( this );
-        memcpy( m_val, array, N );
+    }
+
+    /// Destructor.  Ensures the observer is detached from the (typically static) MP
+    ~ViewerArray()
+    {
+        m_mp.detach( m_observerMp1 );
     }
 
 public:
@@ -137,6 +128,7 @@ public:
     void request( Kit::Itc::IOpenRequest::OpenMsg& msg ) noexcept override
     {
         m_mp.attach( m_observerMp1 );
+        msg.getPayload().success = true;
         msg.returnToSender();
     }
 
@@ -144,30 +136,22 @@ public:
     void request( Kit::Itc::ICloseRequest::CloseMsg& msg ) noexcept override
     {
         m_mp.detach( m_observerMp1 );
+        msg.getPayload().success = true;
         msg.returnToSender();
     }
 
-
 public:
+    ///
     void mp1_changed( MPTYPE& modelPointThatChanged, Kit::Dm::IObserver& clientObserver ) noexcept
     {
-        if ( modelPointThatChanged.isNotValidAndSync( clientObserver ) == false )
-        {
-            uint8_t val[N] = {
-                0,
-            };
-            REQUIRE( modelPointThatChanged.readAndSync( val, N, clientObserver ) );
-            REQUIRE( memcmp( val, m_val, N ) == 0 );
-            displayElement( "new", val );
-            displayElement( "exp", m_val );
-
-            m_masterThread.signal();
-        }
+        m_notificationCount++;
+        m_lastValid = modelPointThatChanged.readAndSync( m_lastValue, N, clientObserver );
     }
 
-    void displayElement( const char* label, ELEMTYPE* array )
+    /// Returns true if the last notified value matches 'expected' (N elements)
+    bool lastValueEquals( const ELEMTYPE* expected ) const noexcept
     {
-        KIT_SYSTEM_TRACE_MSG( "_0test", "%s:%X %X %X ... %X %X", label, array[0], array[1], array[2], array[N - 2], array[N - 1] );
+        return memcmp( m_lastValue, expected, sizeof( m_lastValue ) ) == 0;
     }
 };
 

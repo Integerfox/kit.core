@@ -8,10 +8,10 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/EventQueue/Server.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "common.h"
+#include "Kit/_support/testing/ManualEventQueue.h"
 #include "Kit/Text/FString.h"
 #include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Dm/Mp/String.h"
@@ -42,15 +42,6 @@ static StringAllocate<MY_UUT_DATA_SIZE> mp_orange_( modelDb_, "ORANGE", INITIAL_
 // Larger storage than apple/orange -->used to test copyFrom() truncation
 static StringAllocate<MY_UUT_DATA_SIZE * 2> mp_melon_( modelDb_, "MELON" );
 
-// Don't let the Runnable object go out of scope before its thread has actually terminated!
-static Kit::EventQueue::Server t1Mbox_;
-
-
-template <>
-void Viewer<String, Kit::Text::FString<MY_UUT_DATA_SIZE>>::displayElement( const char* label, Kit::Text::FString<MY_UUT_DATA_SIZE>& elem )
-{
-    KIT_SYSTEM_TRACE_MSG( SECT_, "%s:%s", label, elem.getString() );
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -242,21 +233,46 @@ TEST_CASE( "String" )
     SECTION( "observer" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        Kit::Text::FString<MY_UUT_DATA_SIZE>                 expectedVal = "bob";
-        Viewer<String, Kit::Text::FString<MY_UUT_DATA_SIZE>> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
-        Kit::System::Thread*                                 t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
+        ManualEventQueue                                     eventQueue;  // No thread: the test thread runs the queue
+        Viewer<String, Kit::Text::FString<MY_UUT_DATA_SIZE>> viewer( eventQueue, mp_apple_ );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
-        viewer_apple1.open();
-        mp_apple_.write( expectedVal );
-        Kit::System::Thread::wait();
-        viewer_apple1.close();
+        // Attaching (with an unknown sequence number) generates a notification of the current state
+        REQUIRE( eventQueue.requestOpen( viewer ) );
+        REQUIRE( viewer.m_notificationCount == 1 );
+        REQUIRE( viewer.m_lastValid == false );
 
-        // Shutdown threads
-        t1Mbox_.pleaseStop();
-        Kit::System::sleep( 100 );  // allow time for threads to stop
-        REQUIRE( t1->isActive() == false );
-        WAIT_FOR_THREAD_TO_STOP( t1 );
+        mp_apple_.write( "bob" );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.m_lastValue == "bob" );
+
+        // Same value -->no change notification
+        mp_apple_.write( "bob" );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+
+        mp_apple_.write( "uncle" );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 3 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.m_lastValue == "uncle" );
+
+        // Valid -->invalid is a change, invalid -->invalid is not
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 4 );
+        REQUIRE( viewer.m_lastValid == false );
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 4 );
+
+        // Detached -->no change notification
+        REQUIRE( eventQueue.requestClose( viewer ) );
+        mp_apple_.write( "bob" );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 4 );
     }
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );

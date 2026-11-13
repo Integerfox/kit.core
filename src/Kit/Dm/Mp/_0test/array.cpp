@@ -8,13 +8,13 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/EventQueue/Server.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/Text/FString.h"
 #include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Dm/Mp/NumericArray.h"
 #include "common.h"
+#include "Kit/_support/testing/ManualEventQueue.h"
 #include <string.h>
 #include <sys/types.h>
 
@@ -30,12 +30,11 @@
 #define STREAM_BUFFER_SIZE 1024
 
 static uint8_t initValuArray_[MY_ARRAY_SIZE] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+static uint8_t otherValue_[MY_ARRAY_SIZE]    = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
 using namespace Kit::Dm;
 using namespace Kit::Dm::Mp;
 
-// Don't let the Runnable object go out of scope before its thread has actually terminated!
-static Kit::EventQueue::Server t1Mbox_;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -268,20 +267,59 @@ TEST_CASE( "Array" )
     SECTION( "observer" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        uint8_t                                                            expectedVal[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-        ViewerArray<Mp::ArrayUint8<MY_ARRAY_SIZE>, uint8_t, MY_ARRAY_SIZE> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
-        Kit::System::Thread*                                               t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
+        ManualEventQueue                                                   eventQueue;  // No thread: the test thread runs the queue
+        ViewerArray<Mp::ArrayUint8<MY_ARRAY_SIZE>, uint8_t, MY_ARRAY_SIZE> viewer( eventQueue, mp_apple_ );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
-        viewer_apple1.open();
-        mp_apple_.write( INITIAL_VALUE, MY_ARRAY_SIZE );
-        Kit::System::Thread::wait();
-        viewer_apple1.close();
+        // Attaching (with an unknown sequence number) generates a notification of the current state
+        REQUIRE( eventQueue.requestOpen( viewer ) );
+        REQUIRE( viewer.m_notificationCount == 1 );
+        REQUIRE( viewer.m_lastValid == false );
 
-        // Shutdown threads
-        t1Mbox_.pleaseStop();
-        WAIT_FOR_THREAD_TO_STOP( t1 );
-        Kit::System::Thread::destroy( *t1 );
+        mp_apple_.write( INITIAL_VALUE, MY_ARRAY_SIZE );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.lastValueEquals( INITIAL_VALUE ) );
+
+        // Same value -->no change notification
+        mp_apple_.write( INITIAL_VALUE, MY_ARRAY_SIZE );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+
+        mp_apple_.write( otherValue_, MY_ARRAY_SIZE );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 3 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.lastValueEquals( otherValue_ ) );
+
+        // Writing a single element with its current value -->no change notification
+        uint8_t sameElem = viewer.m_lastValue[3];
+        mp_apple_.write( &sameElem, 1, 3 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 3 );
+
+        // Changing a single element -->change notification
+        uint8_t newElem = sameElem + 1;
+        mp_apple_.write( &newElem, 1, 3 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 4 );
+        REQUIRE( viewer.m_lastValue[3] == newElem );
+
+        // Valid -->invalid is a change, invalid -->invalid is not
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
+        REQUIRE( viewer.m_lastValid == false );
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
+
+        // Detached -->no change notification
+        REQUIRE( eventQueue.requestClose( viewer ) );
+        mp_apple_.write( INITIAL_VALUE, MY_ARRAY_SIZE );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
     }
 
     SECTION( "export" )
