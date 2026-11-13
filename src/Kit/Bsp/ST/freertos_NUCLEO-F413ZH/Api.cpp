@@ -13,14 +13,14 @@
 #include "Kit/Bsp/ST/freertos_NUCLEO-F413ZH/MX/Core/Inc/gpio.h"
 #include "console.h"
 
-#ifdef ENABLE_BSP_SEGGER_SYSVIEW   
-#define INIT_SEGGER_SYSVIEW()   SEGGER_SYSVIEW_Conf()
+#ifdef ENABLE_BSP_SEGGER_SYSVIEW
+#define INIT_SEGGER_SYSVIEW() SEGGER_SYSVIEW_Conf()
 #else
-#define INIT_SEGGER_SYSVIEW()   
+#define INIT_SEGGER_SYSVIEW()
 #endif
 
 #ifndef USE_BSP_USE_PRINTF
-#define INIT_KIT_CONSOLE()    Bsp_startConsoleStream( USART3_IRQn, &huart3 )
+#define INIT_KIT_CONSOLE() Bsp_startConsoleStream( USART3_IRQn, &huart3 )
 #else
 #define INIT_KIT_CONSOLE()
 #endif
@@ -48,4 +48,3 @@ void Bsp_initialize( void )
     // Start the Console/Trace UART
     INIT_KIT_CONSOLE();
 }
-

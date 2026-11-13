@@ -9,8 +9,8 @@
 /** @file */
 
 /*-----------------------------------------------------------------------------
-* COPYRIGHT_HEADER_TO_BE_FILLED_LATER
-*----------------------------------------------------------------------------*/
+ * COPYRIGHT_HEADER_TO_BE_FILLED_LATER
+ *----------------------------------------------------------------------------*/
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"

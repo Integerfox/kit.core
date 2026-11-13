@@ -27,11 +27,11 @@ namespace {
 class MockService : public OpenCloseSync
 {
 public:
-    bool     isOpened       = false;
-    bool     resultOpenMsg  = true;
-    void*    argsOpenMsg    = nullptr;
-    bool     resultCloseMsg = true;
-    void*    argsCloseMsg   = nullptr;
+    bool  isOpened       = false;
+    bool  resultOpenMsg  = true;
+    void* argsOpenMsg    = nullptr;
+    bool  resultCloseMsg = true;
+    void* argsCloseMsg   = nullptr;
 
     MockService( Kit::EventQueue::IQueue& myEventQueue ) noexcept
         : OpenCloseSync( myEventQueue )
@@ -92,7 +92,7 @@ TEST_CASE( "OpenClose" )
     {
         uut.resultOpenMsg  = false;
         uut.resultCloseMsg = false;
-        bool result = uut.open();
+        bool result        = uut.open();
         REQUIRE( result == false );
 
         result = uut.close();

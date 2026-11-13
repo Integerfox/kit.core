@@ -68,7 +68,7 @@ const char* Basic::getToken( unsigned n ) const noexcept
     }
 
     // Traverse string for the Nth token
-    const char* token = Strip::chars( m_base, m_delimiters ); // Note: will not return nullptr because m_base has already been verified to not be nullptr
+    const char* token = Strip::chars( m_base, m_delimiters );  // Note: will not return nullptr because m_base has already been verified to not be nullptr
     for ( unsigned i = 0; i < n; i++ )
     {
         while ( *token != '\0' )
@@ -81,7 +81,7 @@ const char* Basic::getToken( unsigned n ) const noexcept
     return token;
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

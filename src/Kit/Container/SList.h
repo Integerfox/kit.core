@@ -129,7 +129,7 @@ public:
      */
     LIST_ITEM* next( const LIST_ITEM& item ) const noexcept { return static_cast<LIST_ITEM*>( SListBase::next( item ) ); }
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
     SList( const SList<LIST_ITEM>& m ) = delete;
 

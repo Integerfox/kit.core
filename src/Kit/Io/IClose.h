@@ -35,10 +35,9 @@ public:
 
 public:
     /// Lets the make the destructor virtual
-    virtual ~IClose() noexcept= default;
-
+    virtual ~IClose() noexcept = default;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

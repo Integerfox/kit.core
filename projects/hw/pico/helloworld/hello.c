@@ -28,9 +28,9 @@ int main()
     {
         uint32_t now = (uint32_t)( to_ms_since_boot( get_absolute_time() ) );
         printf( "Hello, world! Again. now=%" PRIu32 "\n", now );
-        gpio_xor_mask(1U << PICO_DEFAULT_LED_PIN);
+        gpio_xor_mask( 1U << PICO_DEFAULT_LED_PIN );
         sleep_ms( 500 );
-        gpio_xor_mask(1U << PICO_DEFAULT_LED_PIN);
+        gpio_xor_mask( 1U << PICO_DEFAULT_LED_PIN );
         sleep_ms( 500 );
     }
 }

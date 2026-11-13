@@ -9,6 +9,7 @@ src/Kit/System/_trace
 src/Kit/System/_trace/_stdout
 src/Kit/Io
 src/Kit/Text
+src/Kit/Time
 
 src/Kit/System/_testsupport
 src/Kit/Memory/_testsupport

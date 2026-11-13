@@ -41,7 +41,7 @@ public:
         'myEventQueue' is if the IChunk needs/uses a software timer.
 
         The method returns true on success; else false is returned when an error
-        occurred during the start. 
+        occurred during the start.
      */
     virtual bool start( Kit::EventQueue::IQueue& myEventQueue ) noexcept = 0;
 

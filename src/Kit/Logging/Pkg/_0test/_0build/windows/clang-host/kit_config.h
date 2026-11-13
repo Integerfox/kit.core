@@ -18,5 +18,4 @@
 #include "../../common_logging_config.h"
 
 
-
 #endif

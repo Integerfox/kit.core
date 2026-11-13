@@ -9,7 +9,6 @@
 /** @file */
 
 
-
 #include "Kit/System/Semaphore.h"
 #include "Kit/System/FatalError.h"
 #include "Kit/System/Shutdown.h"
@@ -85,7 +84,6 @@ bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
     return xSemaphoreTake( m_sema, KitSystemFreeRTOS_msecToTicks( timeout ) ) == pdTRUE;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------
-

@@ -21,15 +21,14 @@
 #define SECT_ "_0test"
 
 
-#define SECT_     "_0test"
+#define SECT_ "_0test"
 
-/// 
+///
 using namespace Kit::Io::File;
 
 
-
 ////////////////////////////////////////////////////////////////////////////////
-TEST_CASE( "write")
+TEST_CASE( "write" )
 {
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
@@ -51,10 +50,16 @@ TEST_CASE( "write")
     REQUIRE( buffer == "Hello Worl" );
     sum += buffer;
     REQUIRE( fd.write( myBuffer, sizeof( myBuffer ) ) );
-    for ( size_t i=0; i < sizeof( myBuffer ); i++ ) { sum += myBuffer[i]; }
+    for ( size_t i = 0; i < sizeof( myBuffer ); i++ )
+    {
+        sum += myBuffer[i];
+    }
     REQUIRE( fd.write( myBuffer, sizeof( myBuffer ), bytesWritten ) );
-    REQUIRE( (size_t) bytesWritten == sizeof( myBuffer ) );
-    for ( int i=0; i < bytesWritten; i++ ) { sum += myBuffer[i]; }
+    REQUIRE( (size_t)bytesWritten == sizeof( myBuffer ) );
+    for ( int i = 0; i < bytesWritten; i++ )
+    {
+        sum += myBuffer[i];
+    }
 
     fd.flush();
     fd.close();
@@ -66,14 +71,14 @@ TEST_CASE( "write")
     Kit::Text::FString<256> inbuffer;
     infd.read( inbuffer );
     REQUIRE( inbuffer == sum );
-    REQUIRE( infd.read( inbuffer ) == false ); // Ensure EOF is hit
+    REQUIRE( infd.read( inbuffer ) == false );  // Ensure EOF is hit
     REQUIRE( infd.isEof() );
     infd.close();
     REQUIRE( infd.isOpened() == false );
 
 
     //
-    Output fd2( "output2.txt", true, true );
+    Output              fd2( "output2.txt", true, true );
     Kit::Io::LineWriter writer( fd2 );
     REQUIRE( writer.println() );
     REQUIRE( writer.println( "Hello World" ) );
@@ -86,7 +91,7 @@ TEST_CASE( "write")
     REQUIRE( fd.write( 'a' ) == false );
 
     Kit::Text::FString<256> buffer2;
-    Input infd2( "output2.txt" );
+    Input                   infd2( "output2.txt" );
     REQUIRE( infd2.isOpened() );
     Kit::Io::LineReader reader( infd2 );
     REQUIRE( reader.readln( buffer2 ) );
@@ -103,7 +108,7 @@ TEST_CASE( "write")
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
-TEST_CASE( "write/close")
+TEST_CASE( "write/close" )
 {
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
@@ -115,7 +120,7 @@ TEST_CASE( "write/close")
     REQUIRE( fd.write( dummyChar ) == false );
     REQUIRE( dummyChar == 29 );
     fd.flush();
-    
+
     REQUIRE( fd.isEof() == true );
     Kit::Type::SSize_T pos;
     REQUIRE( fd.currentPos( pos ) == false );

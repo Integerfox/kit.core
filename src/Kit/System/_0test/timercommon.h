@@ -189,7 +189,6 @@ public:
         REQUIRE( m_timer1.isRunning() == false );
         m_timer1.start( m_timer1Duration );
         REQUIRE( m_timer1.isRunning() == true );
-
     }
 
     void timer2Expired() noexcept
@@ -337,4 +336,3 @@ public:
 };
 
 }  // end anonymous namespace
-

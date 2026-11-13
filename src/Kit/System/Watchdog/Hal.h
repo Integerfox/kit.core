@@ -8,7 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     Hardware Abstraction Layer (HAL) for watchdog functionality
 

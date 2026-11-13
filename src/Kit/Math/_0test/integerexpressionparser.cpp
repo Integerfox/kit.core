@@ -9,8 +9,8 @@
 /** @file */
 
 /*-----------------------------------------------------------------------------
-* COPYRIGHT_HEADER_TO_BE_FILLED_LATER
-*----------------------------------------------------------------------------*/
+ * COPYRIGHT_HEADER_TO_BE_FILLED_LATER
+ *----------------------------------------------------------------------------*/
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
@@ -19,16 +19,17 @@
 #include <stdint.h>
 
 
-#define SECT_     "_0test"
+#define SECT_ "_0test"
 
-/// 
+///
 using namespace Kit::Math;
 
 
-#define STR1(s) #s
-#define TOSTRING(s) STR1(s)
+#define STR1( s )     #s
+#define TOSTRING( s ) STR1( s )
 
 /// Test expressions
+// clang-format off: the expressions are stringified as parser input, i.e. their exact text is test data
 #define EXPR1       45345 + 0 + 0xdf234 - 1000 % 7
 #define EXPR2       (0 + 0xdf234 - 1000) * 3 / 2 % 999
 #define EXPR3       1 << 16
@@ -49,17 +50,15 @@ using namespace Kit::Math;
 #define EXP_ERR2    2 * * 3
 #define EXP_ERR3    2 + two
 #define EXP_ERR4    2 + 3.14
+// clang-format on
 
 
 template <typename T>
 static void compare( IntegerExpressionParser<T>& parser, T expectedResult, const char* str )
 {
-    T result;
+    T    result;
     bool success = parser.eval( str, result );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "expr=%s, expected=%ld, result=%ld",
-                                   str,
-                                   (long) expectedResult,
-                                   (long) result) ;
+    KIT_SYSTEM_TRACE_MSG( SECT_, "expr=%s, expected=%ld, result=%ld", str, (long)expectedResult, (long)result );
     REQUIRE( success == true );
     REQUIRE( expectedResult == result );
 }
@@ -67,12 +66,9 @@ static void compare( IntegerExpressionParser<T>& parser, T expectedResult, const
 template <typename T>
 static void compareUnsigned( IntegerExpressionParser<T>& parser, T expectedResult, const char* str )
 {
-    T result;
+    T    result;
     bool success = parser.eval( str, result );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "expr=%s, expected=%lu, result=%lu",
-                                   str,
-                                   (unsigned long) expectedResult,
-                                   (unsigned long) result) ;
+    KIT_SYSTEM_TRACE_MSG( SECT_, "expr=%s, expected=%lu, result=%lu", str, (unsigned long)expectedResult, (unsigned long)result );
     REQUIRE( success == true );
     REQUIRE( expectedResult == result );
 }
@@ -84,7 +80,7 @@ TEST_CASE( "integerexpressionparser" )
 
     SECTION( "Integer" )
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, ("integerexpressionparser" ) );
+        KIT_SYSTEM_TRACE_MSG( SECT_, ( "integerexpressionparser" ) );
         IntegerExpressionParser<int> parser;
 
         compare<int>( parser, EXPR1, TOSTRING( EXPR1 ) );
@@ -103,7 +99,7 @@ TEST_CASE( "integerexpressionparser" )
 
     SECTION( "uint32_t" )
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, ("uint32_t" ) );
+        KIT_SYSTEM_TRACE_MSG( SECT_, ( "uint32_t" ) );
         IntegerExpressionParser<uint32_t> parser;
 
         compareUnsigned<uint32_t>( parser, EXPR1, TOSTRING( EXPR1 ) );
@@ -120,10 +116,10 @@ TEST_CASE( "integerexpressionparser" )
 
     SECTION( "Errors" )
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, ("Errors") );
+        KIT_SYSTEM_TRACE_MSG( SECT_, ( "Errors" ) );
         IntegerExpressionParser<int> parser;
 
-        int result;
+        int  result;
         bool success = parser.eval( TOSTRING( EXP_ERR1 ), result );
         REQUIRE( success == false );
         success = parser.eval( TOSTRING( EXP_ERR2 ), result );
@@ -155,4 +151,3 @@ TEST_CASE( "integerexpressionparser" )
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
-

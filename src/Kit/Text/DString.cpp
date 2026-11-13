@@ -27,7 +27,7 @@ static char      noMemory_[1]     = { '\0' };
 
 ///////////////////////////////
 DString::DString( const IString& string, int initialSize, int blocksize ) noexcept
-    : StringBase( noMemory_ ) // Purposely use noMemory_ here to avoid calling the StringBase constructor with a nullptr
+    : StringBase( noMemory_ )  // Purposely use noMemory_ here to avoid calling the StringBase constructor with a nullptr
     , m_blockSize( blocksize )
     , m_storageLen( calcMemSize( ( std::max )( string.length(), initialSize ) ) )
 {
@@ -265,10 +265,10 @@ void DString::insertAt( int insertOffset, const char* stringToInsert ) noexcept
             if ( !ptr || newsize <= 0 )
             {
                 // Insert WITHOUT allocating extra memory
-                int avail        = maxStrLen() - insertOffset;          // Amount left in the buffer starting with from insertOffset
+                int avail        = maxStrLen() - insertOffset;              // Amount left in the buffer starting with from insertOffset
                 int copylen      = ( std::min )( insertlen, avail );        // Amount of stringToInsert that can be copied in
-                int remainderlen = avail - copylen;                     // Amount of room left after stringToInsert has been copied in
-                int shiftlen     = curlen - insertOffset;               // Amount of characters needing to be shifted
+                int remainderlen = avail - copylen;                         // Amount of room left after stringToInsert has been copied in
+                int shiftlen     = curlen - insertOffset;                   // Amount of characters needing to be shifted
                 int movelen      = ( std::min )( shiftlen, remainderlen );  // Amount of characters that can be SAFELY shifted
                 if ( movelen > 0 )
                 {

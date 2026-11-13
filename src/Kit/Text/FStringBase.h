@@ -100,19 +100,19 @@ public:
     using IString::operator+=;
 
     /// Append
-    IString& operator +=( int num ) noexcept override;
+    IString& operator+=( int num ) noexcept override;
 
     /// Append
-    IString& operator +=( unsigned num ) noexcept override;
+    IString& operator+=( unsigned num ) noexcept override;
 
     /// Append
-    IString& operator +=( long num ) noexcept override;
+    IString& operator+=( long num ) noexcept override;
 
     /// Append
-    IString& operator +=( unsigned long num ) noexcept override;
+    IString& operator+=( unsigned long num ) noexcept override;
 };
 
 
-};      // end namespaces
+};  // end namespaces
 };
 #endif  // end header latch

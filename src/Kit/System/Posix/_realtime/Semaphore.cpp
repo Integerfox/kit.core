@@ -28,6 +28,6 @@ bool Semaphore::timedWait( uint32_t timeout ) noexcept
     return timedWaitInRealTime( timeout );
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

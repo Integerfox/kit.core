@@ -155,7 +155,7 @@ protected:
     size_t m_elementSize;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

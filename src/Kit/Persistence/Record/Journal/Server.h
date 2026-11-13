@@ -185,18 +185,22 @@ protected:
             // Drain the buffer (but limit how many adds at one time) and write the entries to persistent storage
             unsigned iterations = 0;
             ENTRY    entry;
-            while ( iterations < OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE && m_buffer.remove( entry ) )
+            while ( iterations < OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE && hookRemovingEntry( entry ) )
             {
-                hookAddingEntry( entry );
-                m_record.addEntry( entry );
+                if ( hookAddingEntry( entry ) )
+                {
+                    m_record.addEntry( entry );
+                }
                 iterations++;
                 count--;
             }
 
             // Re-enable callbacks to be notified of new (or still pending) entries
-            if ( count > 0 )
+            if ( iterations >= OPTION_KIT_PERSISTENCE_JOURNAL_SERVER_MAX_BATCH_WRITE && count > 0 )
             {
-                // If there are still pending entries, use SEQUENCE_NUMBER_UNKNOWN to get an immediate callback
+                // The batch limit was reached with entries still pending: use SEQUENCE_NUMBER_UNKNOWN to get an immediate
+                // callback.  When hookRemovingEntry() stopped the drain, the still pending entries are NOT forced (which
+                // would spin) - they are processed on the next change notification
                 seqNum = Kit::Dm::IModelPoint::SEQUENCE_NUMBER_UNKNOWN;
             }
             mp.attach( m_obBuffer, seqNum );
@@ -204,10 +208,37 @@ protected:
     }
 
 protected:
-    /// Hook function called for each entry BEFORE it is added to the record.
-    virtual void hookAddingEntry( const ENTRY& entry ) noexcept
+    /** Hook function called to remove the next entry from the incoming
+        buffer.  Draining the buffer stops when the method returns false.
+
+        A child class can return false - WITHOUT removing an entry - to defer
+        writing entries, e.g. to pause updates to persistent storage.  The
+        deferred entries stay in the incoming buffer and are processed on the
+        next change notification of the buffer, i.e. when the next entry is
+        added to the buffer.
+
+        @param entry Destination for the removed entry
+        @return true when an entry was removed into 'entry'; else false (the
+                buffer is empty or draining is deferred)
+     */
+    virtual bool hookRemovingEntry( ENTRY& entry ) noexcept
     {
-        // Default does nothing, but child class can override to add functionality
+        return m_buffer.remove( entry );
+    }
+
+    /** Hook function called for each entry BEFORE it is added to the record.
+        A child class can modify the entry before it is written, or filter it
+        out.  A filtered entry has already been removed from the incoming
+        buffer, i.e. it is discarded (use hookRemovingEntry() to defer writing
+        entries without discarding them).
+
+        @param entry The entry that is about to be added
+        @return true to add the entry to the record, false to filter it out
+     */
+    virtual bool hookAddingEntry( ENTRY& entry ) noexcept
+    {
+        // Default adds every entry unchanged
+        return true;
     }
 
 protected:

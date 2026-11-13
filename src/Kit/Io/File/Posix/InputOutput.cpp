@@ -19,7 +19,7 @@ namespace Io {
 namespace File {
 
 InputOutput::InputOutput( const char* fileName, bool forceCreate, bool forceEmptyFile ) noexcept
-    : m_fd( Posix::Fdio::open( System::getNative(fileName), false, forceCreate, forceEmptyFile ) )
+    : m_fd( Posix::Fdio::open( System::getNative( fileName ), false, forceCreate, forceEmptyFile ) )
     , m_eos( false )
 {
 }

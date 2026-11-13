@@ -40,9 +40,9 @@ TEST_CASE( "Uint64" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    char    string[MAX_STR_LENG + 1];
-    bool    truncated;
-    bool    valid;
+    char     string[MAX_STR_LENG + 1];
+    bool     truncated;
+    bool     valid;
     uint64_t value;
     mp_apple_.setInvalid();
 

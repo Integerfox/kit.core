@@ -65,12 +65,12 @@ TEST_CASE( "common" )
         REQUIRE( mp_apple_.isNotValid() == true );
         REQUIRE( seqNum + 1 == seqNum2 );
 
-        uint16_t i = 0;
+        uint16_t i         = 0;
         uint16_t loopCount = UINT16_MAX - seqNum2;
         for ( ; i < loopCount; i++ )
         {
             seqNum = mp_apple_.touch();
-            REQUIRE( seqNum == (seqNum2+1) );
+            REQUIRE( seqNum == ( seqNum2 + 1 ) );
             REQUIRE( seqNum != 1 );
             seqNum2 = seqNum;
         }

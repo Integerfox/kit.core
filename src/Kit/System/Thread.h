@@ -53,10 +53,10 @@
 #define KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG()
 
 /// Set the 'allow simulated tick' flag
-#define KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG(v)
+#define KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( v )
 #else
-#define KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG() bool m_allowSimTicks
-#define KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG(v) m_allowSimTicks = (v)
+#define KIT_SYSTEM_THREAD_ALLOC_SIM_TICK_FLAG()  bool m_allowSimTicks
+#define KIT_SYSTEM_THREAD_SET_SIM_TICK_FLAG( v ) m_allowSimTicks = ( v )
 #endif
 
 ///
@@ -245,7 +245,7 @@ public:
                               thread.  See Kit::System::SimTicks for more details about
                               simulated time.
      */
-    static Thread* create( IRunnable&   runnable,
+    static Thread* create( IRunnable&  runnable,
                            const char* name,
                            int         priority      = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
                            int         stackSize     = 0,
@@ -287,7 +287,7 @@ protected:
     {
         memset( m_tlsArray, 0, sizeof( m_tlsArray ) );
     }
-    
+
 
     /** Helper method that should be called from the native's entry function.
         This method is responsible for various action such as maintaining

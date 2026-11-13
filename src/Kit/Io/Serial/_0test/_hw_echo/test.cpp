@@ -43,7 +43,7 @@ public:
     Kit::Io::IInputOutput&  m_fd;
     uint8_t                 m_rxMsg[RX_READ_BUFFER_SIZE];
     Kit::Text::FString<128> m_tmpBuf;
-    Kit::Type::SSize_T    m_numEchoBytes;
+    Kit::Type::SSize_T      m_numEchoBytes;
     uint8_t                 m_echoMemory[ECHO_BUFFER_SIZE + 1];
 
 public:
@@ -63,8 +63,8 @@ public:
         }
 
         Kit::Type::SSize_T byteCount = 0;
-        uint8_t*             dstPtr    = m_echoMemory;
-        m_numEchoBytes                 = 0;
+        uint8_t*           dstPtr    = m_echoMemory;
+        m_numEchoBytes               = 0;
 
         for ( ;; )
         {

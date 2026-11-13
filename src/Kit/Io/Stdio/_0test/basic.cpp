@@ -39,11 +39,11 @@ TEST_CASE( "basic" )
     Kit::Text::FString<6> line;
     REQUIRE( in2fd.read( partialLine, 6 ) );
     REQUIRE( partialLine == "lin" );
-    REQUIRE( in2fd.read( line, 2) );
+    REQUIRE( in2fd.read( line, 2 ) );
     REQUIRE( line == "e " );
 
     KIT_SYSTEM_TRACE_MSG( SECT_, "Reading Lines..." );
-    Kit::Io::LineReader   reader( in2fd );
+    Kit::Io::LineReader reader( in2fd );
     REQUIRE( reader.available() == true );
     reader.readln( line );
     KIT_SYSTEM_TRACE_MSG( SECT_, "line=[%s]", line.getString() );
@@ -113,7 +113,7 @@ TEST_CASE( "basic" )
 
     //
     Kit::Text::FString<20> myBuffer2;
-    StdOut out2fd;
+    StdOut                 out2fd;
     REQUIRE( out2fd.write( myBuffer, 0, bytesWritten ) == true );
     REQUIRE( bytesWritten == 0 );
     Kit::Io::LineWriter writer( out2fd );
@@ -122,7 +122,7 @@ TEST_CASE( "basic" )
     REQUIRE( writer.print( "Hello", 3 ) );
     REQUIRE( writer.print( "lo ", 3 ) );
     REQUIRE( writer.print( myBuffer2, "%s %s", "World", "again" ) );
-    REQUIRE( writer.println( myBuffer2, "%s","!" ) );
+    REQUIRE( writer.println( myBuffer2, "%s", "!" ) );
     REQUIRE( writer.println( "Hello World", 5 ) );
 
     writer.flush();

@@ -13,9 +13,9 @@
 #include "Kit/Container/ListItem.h"
 
 
-/// 
+///
 namespace Kit {
-/// 
+///
 namespace System {
 
 
@@ -41,11 +41,11 @@ public:
      */
     enum InitLevel
     {
-        TEST_INFRA=0,    /// Initialized first
+        TEST_INFRA = 0,  /// Initialized first
         SYSTEM,
         MIDDLE_WARE,
         APPLICATION
-    }; /// Initialized last
+    };  /// Initialized last
 
 
 public:
@@ -80,11 +80,10 @@ public:
     /** This method is intended to be USED ONLY by the Kit::System::Api::init()
         method to trigger all of the registered init callbacks.
      */
-    static void notifyStartupClients()  noexcept;
+    static void notifyStartupClients() noexcept;
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch
-

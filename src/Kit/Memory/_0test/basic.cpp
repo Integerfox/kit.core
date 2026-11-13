@@ -36,17 +36,17 @@ struct struct2_T
 };
 
 
-#define NUM_POOL1 5
-#define NUM_POOL2 3
-#define NUM_POOL3 6
-#define NUM_POOL4 4
-#define NUM_POOL5 5
-#define NUM_POOL6 3
-#define NUM_POOL7 6
-#define NUM_POOL8 4
+#define NUM_POOL1  5
+#define NUM_POOL2  3
+#define NUM_POOL3  6
+#define NUM_POOL4  4
+#define NUM_POOL5  5
+#define NUM_POOL6  3
+#define NUM_POOL7  6
+#define NUM_POOL8  4
 
-#define ALIGNMENT1  alignof( struct1_T )
-#define ALIGNMENT2  alignof( struct2_T )
+#define ALIGNMENT1 alignof( struct1_T )
+#define ALIGNMENT2 alignof( struct2_T )
 
 
 static SPool<struct2_T, NUM_POOL5> pool5_s2;
@@ -67,7 +67,7 @@ TEST_CASE( "basic" )
     HPool<struct1_T>            pool2_s1( NUM_POOL2, true );
     SPool<struct2_T, NUM_POOL3> pool3_s2;
     HPool<struct2_T>            pool4_s2( NUM_POOL4 );
-    
+
     // Word size
     REQUIRE( pool1_s1.wordSize() == sizeof( AlignedClass<struct1_T> ) );
     REQUIRE( pool2_s1.wordSize() == sizeof( AlignedClass<struct1_T> ) );

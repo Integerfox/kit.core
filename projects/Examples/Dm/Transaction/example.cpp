@@ -53,7 +53,7 @@ int runExample() noexcept
     KIT_SYSTEM_TRACE_ENABLE_SECTION( SECT_ );
 
     KIT_SYSTEM_TRACE_MSG( SECT_, "**** Starting Dm Transaction Example... ****" );
-    
+
     // Create the threads
     auto* t1 = Kit::System::Thread::create( mbox_, "APP" );
     KIT_SYSTEM_ASSERT( t1 != nullptr );

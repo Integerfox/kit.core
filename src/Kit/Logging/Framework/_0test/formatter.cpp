@@ -32,6 +32,9 @@ extern KitOnly logApp_;
 
 namespace {
 
+/// The tests below use absolute (ms since the Epoch) timestamps
+constexpr Formatter::TimestampFormat_T absolute_ = Formatter::TimestampFormat_T::eABSOLUTE;
+
 /// Renders every field at its configured maximum length - i.e. the worst case for OPTION_KIT_LOGGING_FORMATTER_MAX_TEXT_LEN
 class MaxLenApp : public Kit::Logging::Framework::IApplication,
                   public Kit::Logging::Framework::IPackage
@@ -47,15 +50,15 @@ public:
     }
 
 public:
-    bool isClassificationIdValid( uint8_t ) noexcept override { return true; }
-    const char* classificationIdToString( uint8_t ) noexcept override { return m_classText; }
+    bool                               isClassificationIdValid( uint8_t ) noexcept override { return true; }
+    const char*                        classificationIdToString( uint8_t ) noexcept override { return m_classText; }
     Kit::Logging::Framework::IPackage* getPackage( uint8_t ) noexcept override { return this; }
-    const char* applicationStateToString( KitLoggingApplicationState_T ) noexcept override { return m_stateText; }
+    const char*                        applicationStateToString( KitLoggingApplicationState_T ) noexcept override { return m_stateText; }
 
 public:
-    uint8_t packageId() noexcept override { return Package::PACKAGE_ID; }
+    uint8_t     packageId() noexcept override { return Package::PACKAGE_ID; }
     const char* packageIdString() noexcept override { return m_pkgText; }
-    bool subSystemAndMessageIdsToString( uint8_t, const char*& dstSubSystemText, uint8_t, const char*& dstMessageText ) noexcept override
+    bool        subSystemAndMessageIdsToString( uint8_t, const char*& dstSubSystemText, uint8_t, const char*& dstMessageText ) noexcept override
     {
         dstSubSystemText = m_subSysText;
         dstMessageText   = m_msgText;
@@ -93,7 +96,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "Formatter" )
 {
-    KIT_SYSTEM_TRACE_SCOPE( SECT_ , "Formatter" );
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "Formatter" );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
     logApp_.reset();
     EntryData_T                                                   logEntry;
@@ -108,7 +111,7 @@ TEST_CASE( "Formatter" )
         logEntry.m_messageId        = SystemMsgId::SHUTDOWN;
         strcpy( logEntry.m_infoText, "Test log message" );
 
-        bool result = Formatter::toString( logApp_, logEntry, formattedText );
+        bool result = Formatter::toString( logApp_, logEntry, formattedText, UINT64_MAX, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
@@ -120,10 +123,52 @@ TEST_CASE( "Formatter" )
         logEntry.m_messageId        = DriverMsgId::STOP_ERR;
         strcpy( logEntry.m_infoText, "With Persistent Storage ID log message" );
 
-        result = Formatter::toString( logApp_, logEntry, formattedText, 0x1C );
+        result = Formatter::toString( logApp_, logEntry, formattedText, 0x1C, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "[1C] (60000:2022-12-31 23:59:59.123) INFO-KIT-DRIVER-STOP_ERR: With Persistent Storage ID log message" );
+    }
+
+    SECTION( "elapsed-time" )
+    {
+        logEntry.m_timestamp        = Kit::Time::constructBootTime( 5, 93723004 );  // 1 day, 02:02:03.004
+        logEntry.m_classificationId = ClassificationId::WARNING;
+        logEntry.m_packageId        = Package::PACKAGE_ID;
+        logEntry.m_subSystemId      = SubSystemId::SYSTEM;
+        logEntry.m_messageId        = SystemMsgId::SHUTDOWN;
+        strcpy( logEntry.m_infoText, "Test log message" );
+
+        bool result = Formatter::toString( logApp_, logEntry, formattedText, UINT64_MAX, Formatter::TimestampFormat_T::eELAPSED );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
+        REQUIRE( result == true );
+        REQUIRE( formattedText == "(5:01 02:02:03.004) WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
+
+        result = Formatter::toString( logApp_, logEntry, formattedText, 0x1C, Formatter::TimestampFormat_T::eELAPSED );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
+        REQUIRE( result == true );
+        REQUIRE( formattedText == "[1C] (5:01 02:02:03.004) WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
+
+        formattedText = "pre ";
+        Formatter::appendFormattedTimestamp( logEntry.m_timestamp, formattedText, Formatter::TimestampFormat_T::eELAPSED );
+        REQUIRE( formattedText == "pre (5:01 02:02:03.004) " );
+    }
+
+    // This build does NOT define USE_KIT_TIME_BOOTTIME_WITH_ABSOLUTETIME -->the default format is elapsed time
+    SECTION( "default timestamp format" )
+    {
+        logEntry.m_timestamp        = Kit::Time::constructBootTime( 5, 93723004 );  // 1 day, 02:02:03.004
+        logEntry.m_classificationId = ClassificationId::WARNING;
+        logEntry.m_packageId        = Package::PACKAGE_ID;
+        logEntry.m_subSystemId      = SubSystemId::SYSTEM;
+        logEntry.m_messageId        = SystemMsgId::SHUTDOWN;
+        strcpy( logEntry.m_infoText, "Test log message" );
+
+        REQUIRE( Formatter::toString( logApp_, logEntry, formattedText ) );
+        REQUIRE( formattedText == "(5:01 02:02:03.004) WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
+
+        formattedText = "pre ";
+        Formatter::appendFormattedTimestamp( logEntry.m_timestamp, formattedText );
+        REQUIRE( formattedText == "pre (5:01 02:02:03.004) " );
     }
 
     SECTION( "errors" )
@@ -135,7 +180,7 @@ TEST_CASE( "Formatter" )
         logEntry.m_messageId        = SystemMsgId::SHUTDOWN;
         strcpy( logEntry.m_infoText, "Test log message2" );
 
-        bool result = Formatter::toString( logApp_, logEntry, formattedText );
+        bool result = Formatter::toString( logApp_, logEntry, formattedText, UINT64_MAX, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-?-?: Test log message2" );
@@ -147,7 +192,7 @@ TEST_CASE( "Formatter" )
         logEntry.m_messageId        = IPackage::NULL_MSG_ID;
         strcpy( logEntry.m_infoText, "Test log message3" );
 
-        result = Formatter::toString( logApp_, logEntry, formattedText );
+        result = Formatter::toString( logApp_, logEntry, formattedText, UINT64_MAX, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-?: Test log message3" );
@@ -165,21 +210,21 @@ TEST_CASE( "Formatter" )
         logEntry.m_applicationState = StatefulApp4Test::STATE_TAINTED;
         strcpy( logEntry.m_infoText, "Test log message" );
 
-        bool result = Formatter::toString( stateApp, logEntry, formattedText );
+        bool result = Formatter::toString( stateApp, logEntry, formattedText, UINT64_MAX, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) *WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
 
         // No state -->no marker
         logEntry.m_applicationState = 0;
-        result                      = Formatter::toString( stateApp, logEntry, formattedText );
+        result                      = Formatter::toString( stateApp, logEntry, formattedText, UINT64_MAX, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
 
         // An application that does not opt-in never renders a marker
         logEntry.m_applicationState = StatefulApp4Test::STATE_TAINTED;
-        result                      = Formatter::toString( logApp_, logEntry, formattedText );
+        result                      = Formatter::toString( logApp_, logEntry, formattedText, UINT64_MAX, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
@@ -198,7 +243,7 @@ TEST_CASE( "Formatter" )
         logEntry.m_applicationState = StatefulApp4Test::STATE_TAINTED;
         strcpy( logEntry.m_infoText, "Test log message" );
 
-        bool result = Formatter::toString( longApp, logEntry, formattedText );
+        bool result = Formatter::toString( longApp, logEntry, formattedText, UINT64_MAX, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
         REQUIRE( formattedText == "(5:2022-12-31 23:59:59.123) 0WARNING-KIT-SYSTEM-SHUTDOWN: Test log message" );
@@ -219,7 +264,7 @@ TEST_CASE( "Formatter" )
         logEntry.m_infoText[OPTION_KIT_LOGGING_FRAMEWORK_MAX_MSG_TEXT_LEN] = '\0';
 
         // 16 hex digits -->the widest a uint64_t storage ID can render
-        bool result = Formatter::toString( maxApp, logEntry, formattedText, 0xFEDCBA9876543210ULL );
+        bool result = Formatter::toString( maxApp, logEntry, formattedText, 0xFEDCBA9876543210ULL, absolute_ );
         KIT_SYSTEM_TRACE_MSG( SECT_, "%s", formattedText.getString() );
         REQUIRE( result == true );
 

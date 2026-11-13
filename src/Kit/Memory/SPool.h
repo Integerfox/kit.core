@@ -26,7 +26,7 @@ namespace Memory {
 
     The class uses composition (instead of inheritance) of the Pool class to
     manage the actual pool. Composition was chosen because the constructors
-    for elements in the m_infoBlocks[] must execute BEFORE the constructor of 
+    for elements in the m_infoBlocks[] must execute BEFORE the constructor of
     the Pool class.
 
     NOTES:
@@ -82,7 +82,7 @@ public:
     /// See Kit::Memory::IAllocator
     size_t wordSize() const noexcept { return m_pool.wordSize(); }
 
-private:
+protected:
     /// Prevent access to the copy constructor -->SPools can not be copied!
     SPool( const SPool& m );
 

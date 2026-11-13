@@ -110,9 +110,9 @@ TEST_CASE( "MpFoo" )
 
     SECTION( "fromJSON" )
     {
-        Foo_T expected = { 12, 34, 56, true };
-        const char* json   = "{name:\"APPLE\", val:{upper:12, lower:34, result:56, isValid:true}}";
-        bool        result = modelDb_.fromJSON( json );
+        Foo_T       expected = { 12, 34, 56, true };
+        const char* json     = "{name:\"APPLE\", val:{upper:12, lower:34, result:56, isValid:true}}";
+        bool        result   = modelDb_.fromJSON( json );
         REQUIRE( result == true );
         valid = mp_apple_.read( value );
         REQUIRE( valid );

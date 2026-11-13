@@ -23,35 +23,34 @@
 #include <stdint.h>
 
 // PRETTY_FUNCTION macro is non-standard
-#if defined(__GNUC__)
+#if defined( __GNUC__ )
 /// Take advantage of GCC's pretty function symbol
-#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __PRETTY_FUNCTION__
+#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME __PRETTY_FUNCTION__
 
-#elif defined(_MSC_VER)
+#elif defined( _MSC_VER )
 /// Take advantage of Microsoft's pretty function symbol
-#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __FUNCSIG__
+#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME __FUNCSIG__
 
 #else
 /// Use C++11 function name
-#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME    __func__
+#define KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME __func__
 #endif  // end __PRETTY_FUNCTION__
 
 
 /// Mapping
-#define KIT_SYSTEM_ASSERT_MAP(e)                Kit_System_assert_c_wrapper( e, __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME )
+#define KIT_SYSTEM_ASSERT_MAP( e ) Kit_System_assert_c_wrapper( e, __FILE__, __LINE__, KIT_SYSTEM_ASSERT_PRETTY_FUNCNAME )
 
 /// Mapping
-#define KitSystemThreadID_T_MAP                 TaskHandle_t  
+#define KitSystemThreadID_T_MAP TaskHandle_t
 
 /// Mapping
-#define KitSystemMutex_T_MAP                    SemaphoreHandle_t
+#define KitSystemMutex_T_MAP SemaphoreHandle_t
 
 /// Mapping
-#define KitSystemSema_T_MAP                     SemaphoreHandle_t
+#define KitSystemSema_T_MAP SemaphoreHandle_t
 
 /// Mapping
-#define KitSystemBSema_T_MAP                    SemaphoreHandle_t
-
+#define KitSystemBSema_T_MAP SemaphoreHandle_t
 
 
 /* Kit/System/PrivateElapsedTime.h requires a millisecond counter that rolls over
@@ -107,18 +106,15 @@ inline uint32_t KitSystemElapsedTime_getTimeInMilliseconds_MAP()
 //    priority is 1.
 //
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP      (configMAX_PRIORITIES - 1)
+#define KIT_SYSTEM_THREAD_PRIORITY_HIGHEST_MAP ( configMAX_PRIORITIES - 1 )
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP       (configMAX_PRIORITIES/2)
+#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL_MAP ( configMAX_PRIORITIES / 2 )
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP       1
+#define KIT_SYSTEM_THREAD_PRIORITY_LOWEST_MAP 1
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP        (1)
+#define KIT_SYSTEM_THREAD_PRIORITY_RAISE_MAP ( 1 )
 /// Mapping
-#define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP        (-1)
-
-
+#define KIT_SYSTEM_THREAD_PRIORITY_LOWER_MAP ( -1 )
 
 
 #endif  // end header latch
-

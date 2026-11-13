@@ -108,7 +108,7 @@ TEST_CASE( "Uint8" )
         REQUIRE( value == 134 );
     }
 
-        SECTION( "fromJSON2" )
+    SECTION( "fromJSON2" )
     {
         // Start with MP in the invalid state
         mp_apple_.setInvalid();
@@ -120,6 +120,6 @@ TEST_CASE( "Uint8" )
         REQUIRE( valid );
         REQUIRE( value == 134 );
     }
-    
+
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

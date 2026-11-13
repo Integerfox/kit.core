@@ -104,7 +104,7 @@ static Kit::Persistence::Record::Chunk::Crc         entriesChunk( entriesFd, ent
 
 #define MAX_BUFFER_SIZE 10
 static AppEntryPayload                               memoryEntryBuffer_[MAX_BUFFER_SIZE];
-static Kit::Container::RingBufferMP<AppEntryPayload> entriesBuffer_( mp_elemCount_, memoryEntryBuffer_, MAX_BUFFER_SIZE, false ); // NOTE: Very important to set 'initializeMemory' to false since AppEntryPayload is a class type with vtable pointer
+static Kit::Container::RingBufferMP<AppEntryPayload> entriesBuffer_( mp_elemCount_, memoryEntryBuffer_, MAX_BUFFER_SIZE, false );  // NOTE: Very important to set 'initializeMemory' to false since AppEntryPayload is a class type with vtable pointer
 
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "Server" )
@@ -144,7 +144,7 @@ TEST_CASE( "Server" )
 
         appPayload.appSet( "" );
         IEntry::Marker_T marker;
-        bool result = uut.retrieveLatest( appPayload, marker );
+        bool             result = uut.retrieveLatest( appPayload, marker );
         REQUIRE( result == true );
         REQUIRE( marker.mediaOffset == actualEntrySize * 3 );
         REQUIRE( marker.timestamp == 3 );
@@ -160,7 +160,7 @@ TEST_CASE( "Server" )
 
         appPayload.appSet( "" );
         IEntry::Marker_T marker;
-        bool result = uut.retrieveLatest( appPayload, marker );
+        bool             result = uut.retrieveLatest( appPayload, marker );
         REQUIRE( result == true );
         REQUIRE( marker.mediaOffset == actualEntrySize * 3 );
         REQUIRE( marker.timestamp == 3 );
@@ -199,7 +199,7 @@ TEST_CASE( "Server" )
         REQUIRE( uut.logicalReset() == true );
 
         IEntry::Marker_T marker;
-        bool result = uut.retrieveLatest( appPayload, marker );
+        bool             result = uut.retrieveLatest( appPayload, marker );
         REQUIRE( result == false );
 
         uut.close();

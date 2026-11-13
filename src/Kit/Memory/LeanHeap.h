@@ -32,7 +32,7 @@ namespace Memory {
 
     NOTE: In C++ it is possible that sizeof(T) does NOT equal alignof(T). For
           example on my Ubuntu x86_64 system, sizeof(std::max_align_t) is 32 bytes
-          but alignof(std::max_align_t) is 16 bytes.  Why do I care? Because 
+          but alignof(std::max_align_t) is 16 bytes.  Why do I care? Because
           memory is allocated in 'words' of sizeof(T) bytes, not alignof(T) bytes.
 
     Template args:
@@ -58,7 +58,7 @@ public:
         , m_unitsRemaining( MAXWORDS )
     {
         // Zero out all of memory
-        std::memset( m_heapStorage, 0, sizeof(m_heapStorage) );
+        std::memset( m_heapStorage, 0, sizeof( m_heapStorage ) );
     }
 
 public:
@@ -101,7 +101,7 @@ public:
         return dstInfo;
     }
 
-private:
+protected:
     /// Prevent access to the copy constructor -->LeanHeap can not be copied!
     LeanHeap( const LeanHeap& m ) = delete;
 

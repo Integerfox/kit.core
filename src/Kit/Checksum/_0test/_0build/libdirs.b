@@ -3,6 +3,7 @@ src/Kit/Checksum/_0test
 
 src/Kit/Container
 src/Kit/Text
+src/Kit/Time
 src/Kit/System
 src/Kit/System/_trace
 src/Kit/System/_trace/_stdout

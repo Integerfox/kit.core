@@ -16,11 +16,9 @@
  */
 
 
+///////////////////////////////////////////////////////////////////////////////
 
-
- ///////////////////////////////////////////////////////////////////////////////
-
-#include <stdio.h> // For sprintf
+#include <stdio.h>  // For sprintf
 
 #define HAVE_KIT_TEXT_STRCASECMP
 #define HAVE_KIT_TEXT_STRNCASECMP
@@ -33,4 +31,3 @@ extern char* strlwr_MAP( char* s1 );
 
 
 #endif  // end header latch
-

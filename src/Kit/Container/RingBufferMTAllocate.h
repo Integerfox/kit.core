@@ -19,7 +19,7 @@ namespace Kit {
 namespace Container {
 
 
-/** This template class extends the RingBuffer class by statically allocating 
+/** This template class extends the RingBuffer class by statically allocating
     memory for the ring buffer.
 
     Template Args:
@@ -42,7 +42,7 @@ protected:
     /// Memory for the Ring buffer
     ITEM m_rawMemory[N];
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBufferMTAllocate( const RingBufferMTAllocate& m ) = delete;
 

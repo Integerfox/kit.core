@@ -61,7 +61,7 @@ Kit::TShell::Result_T Write::execute( Kit::TShell::IContext& context, char* cmdS
     }
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

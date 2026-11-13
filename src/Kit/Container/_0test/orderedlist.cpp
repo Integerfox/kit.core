@@ -40,11 +40,11 @@ public:
     {
     }
 
-    const Key& getKey() const noexcept override { return *this; }
+    const Key&  getKey() const noexcept override { return *this; }
     const char* getName() const noexcept { return m_stringKeyPtr; }
 
     ///
-    unsigned    m_value;
+    unsigned m_value;
 };
 
 class ItemAutoAdd : public KeyedItem, public KeyLiteralString
@@ -58,7 +58,7 @@ public:
         list.insert( *this );
     }
 
-    const Key& getKey() const noexcept override { return *this; }
+    const Key&  getKey() const noexcept override { return *this; }
     const char* getName() const noexcept { return m_stringKeyPtr; }
 
     ///

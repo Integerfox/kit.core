@@ -12,7 +12,7 @@
 #include "Kit/System/Api.h"
 #include "Kit/Io/IInputOutput.h"
 
-extern void echo_test( Kit::Io::IInputOutput& fd );
+extern void   echo_test( Kit::Io::IInputOutput& fd );
 extern size_t getErrorCounts( bool clearCounts = false );
 
 // Get access to the BSP's console stream
@@ -31,7 +31,8 @@ int main( void )
     echo_test( g_bspConsoleStream );
 
     // I should never get here!
-    for ( ;; );
+    for ( ;; )
+        ;
     return 0;
 }
 
@@ -41,4 +42,3 @@ size_t getErrorCounts( bool clearCounts )
 {
     return 0;
 }
-

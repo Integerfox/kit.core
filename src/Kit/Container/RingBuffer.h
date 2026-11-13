@@ -20,7 +20,7 @@
     native hardware instructions to support full lock-free atomics, which means
     the compiler can generate enable/disable interrupt calls for honoring the
     C++11 atomics semantics (which is what the whole 'thread/ISR safe' ring
-    buffer implementation was trying to avoid). So for older hardware, the 
+    buffer implementation was trying to avoid). So for older hardware, the
     volatile implementation is the better solution.
  */
 #if defined( USE_KIT_CONTAINER_RINGBUFFER_VOLATILE )
@@ -54,12 +54,12 @@ namespace Container {
         peekNextAddItems()
         addElements()
 
-    NOTE: The default behavior of the RingBuffer is to initialize the memory 
+    NOTE: The default behavior of the RingBuffer is to initialize the memory
           buffer to all zeros. When the 'ITEM' type is a class type (i.e. not
           struct or primitive type) then the 'initializeMemory' constructor flag
           MUST be set to false - so as to not overwrite the vtable pointer of
           the class instance.
-    
+
     Template Args:
         ITEM:=      Type of the data stored in the Ring Buffer
  */
@@ -181,7 +181,7 @@ protected:
     /// Memory for the Ring buffer
     ITEM* m_bufferMemory;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBuffer( const RingBuffer<ITEM>& m ) = delete;
 

@@ -13,7 +13,7 @@
 #define USE_KIT_SYSTEM_ASSERT
 #define USE_KIT_SYSTEM_TRACE
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined( _WIN32 ) || defined( _WIN64 )
 #define USE_KIT_TYPE_ENDIAN_LE_HOST
 #endif
 

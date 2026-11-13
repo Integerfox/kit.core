@@ -50,7 +50,7 @@ void Supervisor::monitorThreads() noexcept
     // Not enabled -->do nothing
     if ( !m_isEnabled )
     {
-        return;  
+        return;
     }
 
     // Use tick divider to reduce monitoring frequency

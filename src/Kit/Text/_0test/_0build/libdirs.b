@@ -1,4 +1,5 @@
 src/Kit/Text
+src/Kit/Time
 src/Kit/Text/_0test
 
 src/Kit/Container

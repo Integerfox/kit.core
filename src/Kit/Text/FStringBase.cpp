@@ -166,10 +166,10 @@ void FStringBase::insertAt( int insertOffset, const char* stringToInsert ) noexc
     }
 
     // Valid insertOffset
-    int avail        = m_internalMaxlen - insertOffset;     // Amount left in the buffer starting with from insertOffset
+    int avail        = m_internalMaxlen - insertOffset;         // Amount left in the buffer starting with from insertOffset
     int copylen      = ( std::min )( insertlen, avail );        // Amount of stringToInsert that can be copied in
-    int remainderlen = avail - copylen;                     // Amount of room left after stringToInsert has been copied in
-    int shiftlen     = curlen - insertOffset;               // Amount of characters needing to be shifted
+    int remainderlen = avail - copylen;                         // Amount of room left after stringToInsert has been copied in
+    int shiftlen     = curlen - insertOffset;                   // Amount of characters needing to be shifted
     int movelen      = ( std::min )( shiftlen, remainderlen );  // Amount of characters that can be SAFELY shifted
     if ( movelen > 0 )
     {

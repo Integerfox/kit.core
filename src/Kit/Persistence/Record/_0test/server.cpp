@@ -109,7 +109,7 @@ TEST_CASE( "Server" )
 
     SECTION( "a failed start rolls back (stops) every record and open() reports failure" )
     {
-        rec1.startResult = false;  // middle record fails to start
+        rec1.startResult   = false;  // middle record fails to start
         IRecord* records[] = { &rec0, &rec1, &rec2 };
         Server   uut( uutEventLoop, records, sizeof( records ) / sizeof( records[0] ) );
 
@@ -126,7 +126,7 @@ TEST_CASE( "Server" )
 
         // A subsequent open() attempt can succeed once the failing record is fixed
         rec1.startResult = true;
-        result            = uut.open();
+        result           = uut.open();
         REQUIRE( result == true );
         REQUIRE( rec0.startCount == 2 );
         REQUIRE( rec1.startCount == 2 );

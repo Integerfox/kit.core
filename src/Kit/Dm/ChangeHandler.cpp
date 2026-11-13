@@ -33,7 +33,7 @@ void ChangeHandler::processChangeNotifications() noexcept
     {
         // Get the model point that changed
         IModelPoint* mpPtr = observerPtr->getModelPoint_();
-        KIT_SYSTEM_ASSERT( mpPtr != nullptr );   // NOTE: getModelPoint_() is guaranteed to return a valid pointer, but just in case...
+        KIT_SYSTEM_ASSERT( mpPtr != nullptr );  // NOTE: getModelPoint_() is guaranteed to return a valid pointer, but just in case...
         IModelPoint& modelPoint = *mpPtr;
 
         // Update the subscriber's state
@@ -54,7 +54,7 @@ void ChangeHandler::addPendingChangingNotification( IObserver& observer, Kit::Sy
     m_pendingMpNotifications.put( observer );
     Kit::System::GlobalLock::end();
     myEventLoop.signal();
-}   
+}
 
 void ChangeHandler::removePendingChangingNotification( IObserver& observer ) noexcept
 {
@@ -72,6 +72,6 @@ bool ChangeHandler::isPendingChangingNotifications() noexcept
     return pending;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

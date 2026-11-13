@@ -31,10 +31,10 @@ constexpr const char* GetMinValueString()
 {
     return sizeof( KitTextToStringMaxUnsigned_T ) == 8 ? "9223372036854775808" :  // 64-bit
                sizeof( KitTextToStringMaxUnsigned_T ) == 4 ? "2147483648"
-                                                             :  // 32-bit
+                                                           :  // 32-bit
                sizeof( KitTextToStringMaxUnsigned_T ) == 2 ? "32768"
-                                                             :  // 16-bit
-               "128";                                           // 8-bit
+                                                           :  // 16-bit
+               "128";                                         // 8-bit
 }
 
 
@@ -75,7 +75,7 @@ const char* ToString::convert_( KitTextToStringMaxUnsigned_T num, char* dstStrin
         }
 
         // Copy the string so it is right justified within the destination buffer
-        size_t offset = (maxChars + sign) - len - 1;
+        size_t offset = ( maxChars + sign ) - len - 1;
         memcpy( dstString + offset, minStr, len );
         maxChars = offset;
     }

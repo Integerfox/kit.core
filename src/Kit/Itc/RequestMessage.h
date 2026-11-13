@@ -55,7 +55,7 @@ public:
 
 public:
     /// Returns the payload associated with this request
-    PAYLOAD& getPayload() noexcept 
+    PAYLOAD& getPayload() noexcept
     {
         return m_payload;
     }

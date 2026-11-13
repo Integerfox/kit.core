@@ -20,15 +20,15 @@ namespace System {
 class Thread;
 
 
-/** This mostly an abstract class defines the interface for an object that is 
+/** This mostly an abstract class defines the interface for an object that is
     "executed" when a Thread object is created.
  */
 class IRunnable
 {
 public:
-    /** This method is called when the Thread is started.  If this function 
+    /** This method is called when the Thread is started.  If this function
         returns, the Thread will be terminated. A child class is responsible for
-        implementing the entry() method. 
+        implementing the entry() method.
      */
     virtual void entry() noexcept = 0;
 
@@ -56,9 +56,9 @@ public:
      */
     virtual void pleaseStop() noexcept {}
 
-    /** This method returns a pointer to the Thread object that is executing 
+    /** This method returns a pointer to the Thread object that is executing
         the IRunnable instance.  The pointer will be nullptr if the thread has
-        not started execution (i.e. before entry() is called) AND after the 
+        not started execution (i.e. before entry() is called) AND after the
         thread has terminated (i.e. after entry() returns)
      */
     virtual Thread* getThread() noexcept
@@ -83,7 +83,7 @@ protected:
 
     /** This method allows the Thread class to provide the IRunnable object a
         reference to the thread it is executing in.
-        
+
         NOTE: This method is intended for internal use by the Thread class ONLY.
     */
     virtual void setThread( Thread* thread ) noexcept
@@ -96,6 +96,6 @@ protected:
     Thread* m_parentThreadPtr_;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

@@ -56,9 +56,9 @@ protected:
         return m_resultStartOutput;
     }
 
-    bool appendOutput( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept override 
+    bool appendOutput( const void* srcBuffer, Kit::Type::SSize_T numBytes ) noexcept override
     {
-        const uint8_t* buffer = static_cast<const uint8_t*>(srcBuffer);
+        const uint8_t* buffer = static_cast<const uint8_t*>( srcBuffer );
         for ( Kit::Type::SSize_T i = 0; i < numBytes; ++i )
         {
             m_outputBuffer[m_nextByteIndex] = buffer[i];
@@ -86,7 +86,7 @@ protected:
 }  // end anonymous namespace
 ////////////////////////////////////////////////////////////////////////////////
 
-#define OUTPUT_STRING( str ) uut.output( str , strlen( str ) )
+#define OUTPUT_STRING( str ) uut.output( str, strlen( str ) )
 
 TEST_CASE( "EncoderWriter" )
 {
@@ -102,12 +102,12 @@ TEST_CASE( "EncoderWriter" )
         REQUIRE( strcmp( dst.m_outputBuffer, ".abcd;" ) == 0 );
 
         uut.startFrame();
-        OUTPUT_STRING( "a");
+        OUTPUT_STRING( "a" );
         uut.endFrame();
         REQUIRE( strcmp( dst.m_outputBuffer, ".a;" ) == 0 );
 
         uut.startFrame();
-        OUTPUT_STRING( "b");
+        OUTPUT_STRING( "b" );
         uut.endFrame();
         REQUIRE( strcmp( dst.m_outputBuffer, ".b;" ) == 0 );
 
@@ -116,7 +116,7 @@ TEST_CASE( "EncoderWriter" )
         REQUIRE( strcmp( dst.m_outputBuffer, ".;" ) == 0 );
 
         uut.startFrame();
-        OUTPUT_STRING( "a;bcd");
+        OUTPUT_STRING( "a;bcd" );
         uut.endFrame();
         REQUIRE( strcmp( dst.m_outputBuffer, ".a~;bcd;" ) == 0 );
 
@@ -131,24 +131,24 @@ TEST_CASE( "EncoderWriter" )
         REQUIRE( strcmp( dst.m_outputBuffer, ".a~.bcd;" ) == 0 );
     }
 
-    SECTION( "errors")
+    SECTION( "errors" )
     {
         uut.startFrame();
-        OUTPUT_STRING( "abc");
+        OUTPUT_STRING( "abc" );
         uut.startFrame();
-        OUTPUT_STRING( "ZYX");
+        OUTPUT_STRING( "ZYX" );
         uut.endFrame();
         REQUIRE( strcmp( dst.m_outputBuffer, ".ZYX;" ) == 0 );
 
         uut.startFrame();
-        REQUIRE( OUTPUT_STRING( "abc") == true );
+        REQUIRE( OUTPUT_STRING( "abc" ) == true );
         dst.m_resultAppendOutput = false;
-        REQUIRE( OUTPUT_STRING( "def") == false );
+        REQUIRE( OUTPUT_STRING( "def" ) == false );
         REQUIRE( uut.endFrame() == false );
 
         dst.m_resultAppendOutput = true;
         uut.startFrame();
-        REQUIRE( OUTPUT_STRING( "abc") == true );
+        REQUIRE( OUTPUT_STRING( "abc" ) == true );
         dst.m_resultEndOutput = false;
         REQUIRE( uut.endFrame() == false );
 

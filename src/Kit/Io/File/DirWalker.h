@@ -38,7 +38,7 @@ namespace File {
 
     NOTE: For an embedded system, this class can have a 'large' memory footprint.
           The recommendation is to NOT allocate this class on the stack.  For
-          truly constrained systems use the System::getFirstDirEntry(), 
+          truly constrained systems use the System::getFirstDirEntry(),
           getFirstDirEntry, and closeDirectory() methods directly
  */
 class DirWalker

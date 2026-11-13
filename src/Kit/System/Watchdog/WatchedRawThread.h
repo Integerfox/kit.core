@@ -37,21 +37,21 @@ namespace Watchdog {
 
     @param instance The RawThread instance
  */
-#define KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( instance )  instance.startWatching()
+#define KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( instance ) instance.startWatching()
 
 /** Macro to stop watchdog monitoring for a raw thread.
     Usage: KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD(instance)
 
     @param instance The RawThread instance
  */
-#define KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( instance )   instance.stopWatching()
+#define KIT_SYSTEM_WATCHDOG_STOP_RAWTHREAD( instance ) instance.stopWatching()
 
 /** Macro to kick/reload watchdog for a raw thread.
     Usage: KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD(instance)
 
     @param instance The RawThread instance
  */
-#define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( instance )   instance.reload()
+#define KIT_SYSTEM_WATCHDOG_KICK_RAWTHREAD( instance ) instance.reload()
 
 #else
 

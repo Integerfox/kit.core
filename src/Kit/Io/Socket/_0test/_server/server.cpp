@@ -79,7 +79,7 @@ public:
     }
 };
 
-}   // end anonymous namespace
+}  // end anonymous namespace
 
 
 ///////////////////
@@ -97,7 +97,7 @@ void echoServer( int portToListenOn, const char* exitString ) noexcept
     listener.startListening( uut, portToListenOn );
 
     // Don't let main exit
-    for( ;; )
+    for ( ;; )
     {
         Kit::System::sleep( 100000 );
     }

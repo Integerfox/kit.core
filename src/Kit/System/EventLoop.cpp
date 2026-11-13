@@ -66,8 +66,8 @@ void EventLoop::stopEventLoop() noexcept
 
 bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
 {
-    // Trap my exit/please-stop condition. 
-    if ( !m_run ) // Note: m_run is atomic so it is safe to read without a lock
+    // Trap my exit/please-stop condition.
+    if ( !m_run )  // Note: m_run is atomic so it is safe to read without a lock
     {
         return false;
     }

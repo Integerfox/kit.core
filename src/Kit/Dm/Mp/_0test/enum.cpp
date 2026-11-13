@@ -146,7 +146,7 @@ TEST_CASE( "Enum" )
     {
         mp_apple_.write( MyEnum::eBLUE );
         mp_apple_.toJSON( string, MAX_STR_LENG, truncated, true, true );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string ) ;
+        KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
         StaticJsonDocument<1024> doc;
         DeserializationError     err = deserializeJson( doc, string );
@@ -196,7 +196,7 @@ TEST_CASE( "Enum" )
     SECTION( "observer" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        MyEnum expectedVal = MyEnum::eRED;
+        MyEnum                expectedVal = MyEnum::eRED;
         Viewer<MyUut, MyEnum> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
         Kit::System::Thread*  t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
 

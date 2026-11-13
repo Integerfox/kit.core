@@ -90,7 +90,7 @@ TEST_CASE( "read" )
 
         Kit::Text::FString<10> buffer( "bob" );
         REQUIRE( fd2.read( buffer ) == true );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "buff=%s", buffer.getString() );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "buff=%s", buffer.getString() );
         REQUIRE( ( buffer == "Hello Worl" || buffer == " World." ) );
 
         fd2.close();

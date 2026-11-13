@@ -58,7 +58,7 @@ public:
 
         o Does NOT support the application supplying the stack memory.
      */
-    Thread( IRunnable&   runnable,
+    Thread( IRunnable&  runnable,
             const char* name,
             int         priority      = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
             unsigned    stackSize     = 0,

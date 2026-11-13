@@ -27,11 +27,11 @@ protected:
     void entry() noexcept override
     {
         Kit::System::Thread& t1 = Kit::System::Thread::getCurrent();
-        printf(  "Thread Running: %s, %p\n", t1.getName(), t1.getId() );
- 
+        printf( "Thread Running: %s, %p\n", t1.getName(), t1.getId() );
+
         uint32_t timeMark1 = Kit::System::ElapsedTime::milliseconds();
         uint32_t timeMark2 = timeMark1;
-        for ( ;;)
+        for ( ;; )
         {
             uint32_t now = Kit::System::ElapsedTime::milliseconds();
             if ( now - timeMark1 >= 100 )
@@ -43,7 +43,7 @@ protected:
             {
                 Bsp_toggle_debug2();
                 timeMark2 = now;
-                printf(  "now=%" PRIu32 "\n", now );
+                printf( "now=%" PRIu32 "\n", now );
             }
 
             uint32_t now2 = Kit::System::ElapsedTime::milliseconds();
@@ -62,7 +62,7 @@ int main( void )
 {
     // Initialize the board
     Bsp_initialize();
-    printf(  "**** BSP TEST APPLICATION STARTED ****\n" );
+    printf( "**** BSP TEST APPLICATION STARTED ****\n" );
 
     //// Initialize KIT
     Kit::System::initialize();
@@ -71,27 +71,27 @@ int main( void )
     Kit::System::Thread* t1 = Kit::System::FreeRTOS::Thread::create( runnable_, "TEST", KIT_SYSTEM_THREAD_PRIORITY_NORMAL );
     if ( t1 == nullptr )
     {
-        printf(  "Failed to created thread!!\n" );
-        while ( 1 );
+        printf( "Failed to created thread!!\n" );
+        while ( 1 )
+            ;
     }
     else
     {
-        printf(  "Thread created %s thread\n", t1->getName() );
+        printf( "Thread created %s thread\n", t1->getName() );
     }
 
     //// Start the scheduler
     Kit::System::enableScheduling();
-    while ( 1 );    // Enable scheduling should NEVER return!
+    while ( 1 )
+        ;  // Enable scheduling should NEVER return!
 }
-
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Tracing is NOT used -->but still have to satisfy the interface contract
 
 static Kit::Io::Null nullOutput_;
-Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_() noexcept
+Kit::Io::IOutput*    Kit::System::Trace::getDefaultOutputStream_() noexcept
 {
     return &nullOutput_;
 }

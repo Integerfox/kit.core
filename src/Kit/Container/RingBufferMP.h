@@ -25,7 +25,7 @@ namespace Container {
     give the RingBuffer change notification semantics with elements are added
     or removed.
 
-    NOTE: The default behavior of the RingBuffer is to initialize the memory 
+    NOTE: The default behavior of the RingBuffer is to initialize the memory
           buffer to all zeros. When the 'ITEM' type is a class type (i.e. not
           struct or primitive type) then the 'initializeMemory' constructor flag
           MUST be set to false - so as to not overwrite the vtable pointer of
@@ -97,7 +97,7 @@ public:
     }
 
     /// Same as add() but also returns the sequence number after the increment operation
-    bool add( const ITEM& item, uint16_t& seqNum ) noexcept 
+    bool add( const ITEM& item, uint16_t& seqNum ) noexcept
     {
         Kit::System::Mutex::ScopeLock criticalSection( m_mutex );
         //
@@ -197,7 +197,7 @@ public:
         seqNum = m_mpElementCount.increment( numElementsAdded );
         RingBuffer<ITEM>::addElements( numElementsAdded );
     }
-    
+
 public:
     /// Model Point that tracks the number of elements in the buffer. Make public to allow attach/detach of observers.
     Kit::Dm::Mp::Uint32& m_mpElementCount;
@@ -206,7 +206,7 @@ protected:
     /// Mutex to protect the ring buffer's integrity
     mutable Kit::System::Mutex m_mutex;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBufferMP( const RingBufferMP& m ) = delete;
 

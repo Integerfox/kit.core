@@ -45,28 +45,28 @@ TEST_CASE( "endian" )
         REQUIRE( qwOut == 0xF0DEBC9A78563412LL );
 
         Kit::Text::FString<128> tmp;
-        float fin = 3.14F;
-        Kit::Text::Format::asciiHex( &fin, sizeof(fin), tmp );
+        float                   fin = 3.14F;
+        Kit::Text::Format::asciiHex( &fin, sizeof( fin ), tmp );
         printf( "fin =%s\n", tmp.getString() );
-		float fout = Kit::Type::endianBswapF32(fin);
-        Kit::Text::Format::asciiHex( &fout, sizeof(fout), tmp );
+        float fout = Kit::Type::endianBswapF32( fin );
+        Kit::Text::Format::asciiHex( &fout, sizeof( fout ), tmp );
         printf( "fout=%s\n", tmp.getString() );
         REQUIRE( fout != fin );
-        fout = Kit::Type::endianBswapF32(fout);
+        fout = Kit::Type::endianBswapF32( fout );
         REQUIRE( fout == 3.14F );
-        Kit::Text::Format::asciiHex( &fout, sizeof(fout), tmp );
+        Kit::Text::Format::asciiHex( &fout, sizeof( fout ), tmp );
         printf( "fout=%s\n", tmp.getString() );
 
         double dfin = 3.14;
-        Kit::Text::Format::asciiHex( &dfin, sizeof(dfin), tmp );
+        Kit::Text::Format::asciiHex( &dfin, sizeof( dfin ), tmp );
         printf( "dfin =%s\n", tmp.getString() );
-		double dfout = Kit::Type::endianBswapF64(dfin);
-        Kit::Text::Format::asciiHex( &dfout, sizeof(dfout), tmp );
+        double dfout = Kit::Type::endianBswapF64( dfin );
+        Kit::Text::Format::asciiHex( &dfout, sizeof( dfout ), tmp );
         printf( "dfout=%s\n", tmp.getString() );
         REQUIRE( dfout != dfin );
-        dfout = Kit::Type::endianBswapF64(dfout);
+        dfout = Kit::Type::endianBswapF64( dfout );
         REQUIRE( dfout == 3.14 );
-        Kit::Text::Format::asciiHex( &dfout, sizeof(dfout), tmp );
+        Kit::Text::Format::asciiHex( &dfout, sizeof( dfout ), tmp );
         printf( "dfout=%s\n", tmp.getString() );
     }
 
@@ -82,7 +82,7 @@ TEST_CASE( "endian" )
 
         int64_t qwIn  = 0x123456789ABCDEF0LL;
         int64_t qwOut = Kit::Type::endianBswap64( qwIn );
-        REQUIRE( qwOut == -1090226688147180526LL ); // aka 0xF0DEBC9A78563412
+        REQUIRE( qwOut == -1090226688147180526LL );  // aka 0xF0DEBC9A78563412
     }
 
     SECTION( "roundtrip" )

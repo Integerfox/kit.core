@@ -134,13 +134,13 @@ public:
             }
         }
 
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "%s%s Parent=%s, item=%s.  (depth=%d, content=%d)", entryInfo.m_isFile ? "f" : "-", entryInfo.m_isDir ? "d" : "-", currentParent, fsEntryName, m_depth, m_contentCheck );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "%s%s Parent=%s, item=%s.  (depth=%d, content=%d)", entryInfo.m_isFile ? "f" : "-", entryInfo.m_isDir ? "d" : "-", currentParent, fsEntryName, m_depth, m_contentCheck );
         return Kit::Type::TraverserStatus::eCONTINUE;
     }
 };
 
 
-}   // end anonymous namespace
+}  // end anonymous namespace
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ TEST_CASE( "system" )
     NameString name2;
 
     ///
-    KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk directories..." );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Walk directories..." );
     DirWalker uutDirWalker;
     System::remove( "output1.txt" );  // Clean up any previous test
     System::remove( "output2.txt" );
@@ -183,57 +183,57 @@ TEST_CASE( "system" )
 
     {
         Walker iterator( 3 );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 3, true, false );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH, true, false ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 3, false, true );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH, false, true ) );
         REQUIRE( iterator.m_contentCheck );
     }
 
     {
         Walker iterator( 2 );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 2" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', 2" );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, 2 ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 2, true, false );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 2" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', 2" );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, 2, true, false ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 2, false, true );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 2" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', 2" );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, 2, false, true ) );
         REQUIRE( iterator.m_contentCheck );
     }
 
     {
         Walker iterator( 1 );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 1" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', 1" );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, 1 ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 1, true, false );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 1" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', 1" );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, 1, true, false ) );
         REQUIRE( iterator.m_contentCheck );
     }
     {
         Walker iterator( 1, false, true );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', 1" );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', 1" );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, 1, false, true ) );
         REQUIRE( iterator.m_contentCheck );
     }
@@ -242,13 +242,13 @@ TEST_CASE( "system" )
     REQUIRE( System::createFile( "d1/d2/d3/d3a.txt" ) );
     {
         Walker iterator( 3, true, false );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH, true, false ) );
         REQUIRE( iterator.m_contentCheck == false );
     }
     {
         Walker iterator( 3, false, true );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', %d", OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, OPTION_KIT_IO_FILE_DIRWALKER_MAX_DEPTH, false, true ) );
         REQUIRE( iterator.m_contentCheck == false );
     }
@@ -257,7 +257,7 @@ TEST_CASE( "system" )
     REQUIRE( System::createFile( "d1/d2/d3/d4/d5/d5a.txt" ) );
     {
         Walker iterator( 4 );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "Walk 'd1', %d", 4 );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Walk 'd1', %d", 4 );
         REQUIRE( uutDirWalker.traverse( "d1", iterator, 4 ) );
     }
 

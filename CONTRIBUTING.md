@@ -39,6 +39,13 @@ being merged to the `main` branch. All PRs must adhere the project's [Software D
 ## Coding style
 Please ensure that your code complies to the KIT's [coding standard](https://github.com/integerfox/kit.core/wiki/Coding-Standards).
 
+All C/C++ files touched by a PR must be formatted with the repo-root `.clang-format` file (enforced by the `clang-format` job of the CI/CD pipeline).  To check (or fix) your changes locally:
+```
+pip install -r top/gha-requirements.txt
+python3 top/check_clang_format.py          # Check files changed vs origin/main
+python3 top/check_clang_format.py --fix    # Reformat files changed vs origin/main
+```
+
 
 ## Licensing
 The KIT Library is released under the BSD 3 Clause open source license, the text of which can be found [here](https://github.com/Integerfox/kit.core/blob/main/LICENSE)

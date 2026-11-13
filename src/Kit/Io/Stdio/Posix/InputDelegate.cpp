@@ -47,7 +47,7 @@ void InputDelegate::close() noexcept
     m_inFd = Posix::Fdio::INVALID_FD;
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

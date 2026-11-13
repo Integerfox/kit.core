@@ -126,7 +126,7 @@ protected:
     /// Mutex to protect the ring buffer's integrity
     mutable Kit::System::Mutex m_mutex;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBufferMT( const RingBufferMT& m ) = delete;
 

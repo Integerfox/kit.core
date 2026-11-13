@@ -109,7 +109,7 @@ TEST_CASE( "StringTo" )
     {
         const char* strPtr = "-123.32";
         const char* endPtr = 0;
-        float value;
+        float       value;
 
         bool result = StringTo::floating( value, "123.32" );
         REQUIRE( result == true );
@@ -137,7 +137,7 @@ TEST_CASE( "StringTo" )
     {
         const char* strPtr = "false";
         const char* endPtr = 0;
-        bool value;
+        bool        value;
 
         bool result = StringTo::boolean( value, "T" );
         REQUIRE( value == true );

@@ -58,7 +58,7 @@ int main( int argc, char* argv[] )
 
     // This should generate a fatal error because there the one-and-only  thread has already been created
     NullRunnable t1;
-    auto threadPtr = Kit::System::Thread::create( t1, "Apple2" );
+    auto         threadPtr = Kit::System::Thread::create( t1, "Apple2" );
     if ( threadPtr == nullptr )
     {
         printf( "*** ERROR: TESTS FAILED! (Thread creation should unexpectedly failed)\n" );

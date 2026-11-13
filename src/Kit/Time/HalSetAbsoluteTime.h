@@ -16,9 +16,9 @@
 namespace Kit {
 ///
 namespace Time {
-    
+
 /** This platform independent method is used to set the target's current
-    absolute time.  The new time format is: UTC time as milliseconds since the 
+    absolute time.  The new time format is: UTC time as milliseconds since the
     EPOCH (Jan 1, 1970).
 
     NOTE: Whether or not the new time stays in effect or is lost on the next boot

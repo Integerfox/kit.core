@@ -17,26 +17,26 @@
 #include "Kit/Dm/Mp/Bool.h"
 #include <string.h>
 
-#define STRCMP(s1,s2)       (strcmp(s1,s2)==0)
-#define MAX_STR_LENG        1024
-#define SECT_               "_0test"
+#define STRCMP( s1, s2 ) ( strcmp( s1, s2 ) == 0 )
+#define MAX_STR_LENG     1024
+#define SECT_            "_0test"
 
-#define INITIAL_VALUE       true
+#define INITIAL_VALUE    true
 
 
 ////////////////////////////////////////////////////////////////////////////////
 using namespace Kit::Dm;
 
 // Allocate/create my Model Database
-static ModelDatabase    modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
 // Allocate my Model Points
-static Mp::Bool       mp_apple_( modelDb_, "APPLE" );
-static Mp::Bool       mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
+static Mp::Bool mp_apple_( modelDb_, "APPLE" );
+static Mp::Bool mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 
 
 // Don't let the Runnable object go out of scope before its thread has actually terminated!
-static Kit::EventQueue::Server  t1Mbox_;
+static Kit::EventQueue::Server t1Mbox_;
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,10 +49,10 @@ TEST_CASE( "Bool" )
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     Kit::Text::FString<MAX_STR_LENG> errorMsg = "noerror";
-    char string[MAX_STR_LENG + 1];
-    bool truncated;
-    bool valid;
-    bool value;
+    char                             string[MAX_STR_LENG + 1];
+    bool                             truncated;
+    bool                             valid;
+    bool                             value;
     mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
 
     SECTION( "gets" )
@@ -68,7 +68,7 @@ TEST_CASE( "Bool" )
         REQUIRE( s == sizeof( value ) + sizeof( bool ) );
 
         const char* mpType = mp_apple_.getTypeAsText();
-        KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType) ;
+        KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType );
         REQUIRE( strcmp( mpType, "Kit::Dm::Mp::Bool" ) == 0 );
     }
 
@@ -108,7 +108,7 @@ TEST_CASE( "Bool" )
         KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
         StaticJsonDocument<1024> doc;
-        DeserializationError err = deserializeJson( doc, string );
+        DeserializationError     err = deserializeJson( doc, string );
         REQUIRE( err == DeserializationError::Ok );
         REQUIRE( doc["locked"] == false );
         REQUIRE( doc["valid"] == true );
@@ -117,14 +117,14 @@ TEST_CASE( "Bool" )
 
     SECTION( "fromJSON" )
     {
-        const char* json = "{name:\"APPLE\", val:false}";
-        bool result = modelDb_.fromJSON( json );
+        const char* json   = "{name:\"APPLE\", val:false}";
+        bool        result = modelDb_.fromJSON( json );
         REQUIRE( result == true );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
         REQUIRE( value == false );
 
-        json = "{name:\"APPLE\", val:\"true\"}";
+        json   = "{name:\"APPLE\", val:\"true\"}";
         result = modelDb_.fromJSON( json, &errorMsg );
         REQUIRE( result == false );
         REQUIRE( errorMsg != "noerror" );
@@ -147,9 +147,9 @@ TEST_CASE( "Bool" )
     SECTION( "observer" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        bool expectedVal = true;
-        Viewer<Mp::Bool,bool>     viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
-        Kit::System::Thread* t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
+        bool                   expectedVal = true;
+        Viewer<Mp::Bool, bool> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
+        Kit::System::Thread*   t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
         viewer_apple1.open();

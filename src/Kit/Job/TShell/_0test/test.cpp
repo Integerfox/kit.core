@@ -31,7 +31,7 @@
 using namespace Kit::System;
 using namespace Kit::TShell;
 Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList( "ignore_static_constructor" );
-Kit::Container::OrderedList<Kit::Job::IJob>         g_jobList( "ignore_static_constructor" );
+Kit::Container::OrderedList<Kit::Job::IJob>        g_jobList( "ignore_static_constructor" );
 
 namespace {
 
@@ -39,9 +39,9 @@ class TestJob : public Kit::Job::JobBase
 {
 public:
     TestJob( Kit::Container::OrderedList<Kit::Job::IJob>& jobList,
-             const char*                                 name,
-             const char*                                 description,
-             const char*                                 usage ) noexcept
+             const char*                                  name,
+             const char*                                  description,
+             const char*                                  usage ) noexcept
         : JobBase( jobList, name, description, usage )
     {
     }
@@ -69,21 +69,21 @@ static Kit::Job::Manager       jobManager_( jobEventQueue_, g_jobList );
 static TestJob                 alphaJob_( g_jobList, "alpha", "Alpha test job", "alpha [args]" );
 static TestJob                 betaJob_( g_jobList, "beta", "Beta test job", "beta [args]" );
 
-static NoSecurity                                securityPolicy_;
-static Kit::Framing::StreamSource                streamSrc_;
-static Kit::Framing::StreamDestination           streamDst_;
-static Processor                                 tshell_( g_commandList,
-                                                         streamSrc_,
-                                                         streamDst_,
-                                                         securityPolicy_,
-                                                         Kit::System::PrivateLocks::tracingOutput() );
-static StdioThread                               stdioThread_( tshell_ );
-static Command::Bye                              byeCmd_( g_commandList );
-static Command::Help                             helpCmd_( g_commandList );
-static Command::Echo                             echoCmd_( g_commandList );
-static Command::Trace                            traceCmd_( g_commandList );
-static Command::Wait                             waitCmd_( g_commandList );
-static Kit::Job::TShell::Cmd                      jobsCmd_( g_commandList, jobManager_ );
+static NoSecurity                      securityPolicy_;
+static Kit::Framing::StreamSource      streamSrc_;
+static Kit::Framing::StreamDestination streamDst_;
+static Processor                       tshell_( g_commandList,
+                          streamSrc_,
+                          streamDst_,
+                          securityPolicy_,
+                          Kit::System::PrivateLocks::tracingOutput() );
+static StdioThread                     stdioThread_( tshell_ );
+static Command::Bye                    byeCmd_( g_commandList );
+static Command::Help                   helpCmd_( g_commandList );
+static Command::Echo                   echoCmd_( g_commandList );
+static Command::Trace                  traceCmd_( g_commandList );
+static Command::Wait                   waitCmd_( g_commandList );
+static Kit::Job::TShell::Cmd           jobsCmd_( g_commandList, jobManager_ );
 
 void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd )
 {

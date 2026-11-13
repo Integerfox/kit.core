@@ -27,7 +27,7 @@ namespace BareMetal {
  */
 class Thread : public Kit::System::Thread
 {
-private:
+protected:
     /// The application can not directly create thread objects.
     Thread() = delete;
 

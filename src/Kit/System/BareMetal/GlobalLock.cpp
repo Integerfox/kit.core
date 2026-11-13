@@ -27,6 +27,6 @@ void GlobalLock::end()
     Bsp_enable_irqs();
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

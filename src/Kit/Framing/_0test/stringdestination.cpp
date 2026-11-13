@@ -48,7 +48,7 @@ TEST_CASE( "StringDestination" )
 
     // Truncation (buffer too small) is reported as a failed append
     Kit::Text::FString<4> tiny;
-    StringDestination      uutTrunc( tiny );
+    StringDestination     uutTrunc( tiny );
     REQUIRE( uutTrunc.startOutput() == true );
     REQUIRE( uutTrunc.appendOutput( "TooLongForTheBuffer", 19 ) == false );
     REQUIRE( uutTrunc.endOutput() == true );

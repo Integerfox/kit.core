@@ -6,10 +6,10 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     This file provides the implementation for the "extended/64bit" elapsed
-    time interface.  It use the 32bit interface/counter to derive the 64 bit 
+    time interface.  It use the 32bit interface/counter to derive the 64 bit
     counter
 */
 
@@ -79,6 +79,6 @@ uint64_t ElapsedTime::millisecondsInRealTimeEx() noexcept
 }
 
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

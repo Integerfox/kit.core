@@ -1,13 +1,13 @@
 /*-----------------------------------------------------------------------------
-* This file is part of the Colony.Core Project.  The Colony.Core Project is an
-* open source project with a BSD type of licensing agreement.  See the license
-* agreement (license.txt) in the top/ directory or on the Internet at
-* http://integerfox.com/colony.core/license.txt
-*
-* Copyright (c) 2014-2025  John T. Taylor
-*
-* Redistributions of the source code must retain the above copyright notice.
-*----------------------------------------------------------------------------*/
+ * This file is part of the Colony.Core Project.  The Colony.Core Project is an
+ * open source project with a BSD type of licensing agreement.  See the license
+ * agreement (license.txt) in the top/ directory or on the Internet at
+ * http://integerfox.com/colony.core/license.txt
+ *
+ * Copyright (c) 2014-2025  John T. Taylor
+ *
+ * Redistributions of the source code must retain the above copyright notice.
+ *----------------------------------------------------------------------------*/
 /** @file */
 
 #include "ObjectDetector.h"
@@ -30,10 +30,10 @@ void ObjectDetector::reset()
     m_state       = eNOT_STARTED;
 }
 
-bool ObjectDetector::scan( const void*	inputStream,
-                           size_t	    numBytesToScan,
-                           size_t&	    startOffset,
-                           size_t&	    endOffset )
+bool ObjectDetector::scan( const void* inputStream,
+                           size_t      numBytesToScan,
+                           size_t&     startOffset,
+                           size_t&     endOffset )
 {
     if ( m_state == eFOUND )
     {
@@ -42,7 +42,7 @@ bool ObjectDetector::scan( const void*	inputStream,
         return true;
     }
 
-    const uint8_t* srcPtr = (const uint8_t*) inputStream;
+    const uint8_t* srcPtr = (const uint8_t*)inputStream;
     while ( numBytesToScan )
     {
         switch ( m_state )
@@ -66,9 +66,9 @@ bool ObjectDetector::scan( const void*	inputStream,
                 m_braceCount--;
                 if ( m_braceCount == 0 )
                 {
-                    m_state = eFOUND;
+                    m_state     = eFOUND;
                     startOffset = m_startOffset;
-                    endOffset = m_offset;
+                    endOffset   = m_offset;
                     return true;
                 }
             }
@@ -93,7 +93,7 @@ bool ObjectDetector::scan( const void*	inputStream,
             m_state = eQUOTED;
             break;
 
-        case eFOUND:    // Intentional fall through
+        case eFOUND:  // Intentional fall through
         default:
             // Generate 'null' match
             startOffset = 0;

@@ -199,7 +199,7 @@ public:
 
 ////////////////////////////////////
 
-Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList("ignore_static_constructor");
+Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList( "ignore_static_constructor" );
 static Kit::TShell::NoSecurity                     securityPolicy_;
 static Kit::System::Mutex                          lock_;
 static Kit::Framing::StreamSource                  streamSrc_;

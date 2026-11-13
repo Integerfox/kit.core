@@ -131,9 +131,9 @@ TEST_CASE( "String" )
         // The change-detection compare must honor 'srcLen' and never read past
         // it, i.e. 'srcData' is not required to be null terminated
         mp_apple_.write( "AB" );
-        seqNum                     = mp_apple_.getSequenceNumber();
-        const char srcNoTerm[]     = { 'A', 'B', 'C' };
-        seqNum2                    = mp_apple_.write( srcNoTerm, sizeof( srcNoTerm ) - 1 );
+        seqNum                 = mp_apple_.getSequenceNumber();
+        const char srcNoTerm[] = { 'A', 'B', 'C' };
+        seqNum2                = mp_apple_.write( srcNoTerm, sizeof( srcNoTerm ) - 1 );
         REQUIRE( seqNum2 == seqNum );  // "AB" == "AB" -->no change notification
         const char srcNoTermDiff[] = { 'A', 'X', 'C' };
         seqNum2                    = mp_apple_.write( srcNoTermDiff, sizeof( srcNoTermDiff ) - 1 );

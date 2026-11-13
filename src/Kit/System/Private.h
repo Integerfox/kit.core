@@ -22,9 +22,9 @@
 #include <type_traits>
 
 
-/// 
+///
 namespace Kit {
-/// 
+///
 namespace System {
 
 
@@ -54,7 +54,7 @@ public:
     /// Returns the wrapped instance
     T& get() noexcept { return *reinterpret_cast<T*>( m_storage ); }
 
-private:
+protected:
     alignas( T ) unsigned char m_storage[sizeof( T )];
 };
 
@@ -70,7 +70,7 @@ public:
     /// Same as 'system', except usage is for 'long' critical sections (i.e. walking lists, printing, etc.)
     static Mutex& sysLists() noexcept;
 
-    /** Global mutex for use for tracing sub-system.  This mutex is to protect 
+    /** Global mutex for use for tracing sub-system.  This mutex is to protect
         the Trace engine's internal/meta data.  This mutex is NOT used to guard
         the Trace output.  The Trace engine uses two mutex so that its output
         can be 'serialized' with the TShell's output (or other sub-systems) BUT
@@ -100,7 +100,6 @@ public:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch
-

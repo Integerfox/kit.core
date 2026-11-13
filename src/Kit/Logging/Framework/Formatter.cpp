@@ -11,7 +11,7 @@
 #include "Formatter.h"
 #include "Kit/Logging/Framework/IPackage.h"
 #include "Kit/Time/BootTime.h"
-#include "Kit/Time/gmtime.h"
+#include "Kit/Text/Format.h"
 #include <inttypes.h>
 
 
@@ -22,36 +22,32 @@ namespace Framework {
 
 //////////////////////////////////////////////////////////////////////////////
 void Formatter::appendFormattedTimestamp( uint64_t            timestamp,
-                                          Kit::Text::IString& dstStringBuf ) noexcept
+                                          Kit::Text::IString& dstStringBuf,
+                                          TimestampFormat_T   timestampFormat ) noexcept
 {
     // Append the boot-counter portion of the entry's timestamp
-    uint16_t bootCounter;
-    uint64_t elapsedTimeMs;
+    KitTimeBootCount_T bootCounter;
+    uint64_t           elapsedTimeMs;
     Kit::Time::parseBootTime( timestamp, bootCounter, elapsedTimeMs );
-    dstStringBuf.formatAppend( "(%u:", bootCounter );
+    dstStringBuf.formatAppend( "(%" PRIu64 ":", static_cast<uint64_t>( bootCounter ) );
 
-    // Convert elapsed time (ms since epoch) to absolute UTC time format
-    time_t     seconds      = elapsedTimeMs / 1000;
-    uint16_t   milliseconds = elapsedTimeMs % 1000;
-    struct tm  utcTime;
-    struct tm* utcTimePtr = Kit::Time::gmtimeMT( &seconds, &utcTime );
-    if ( utcTimePtr != nullptr )
+    // Elapsed time (ms since power-up) OR absolute UTC time (ms since the Epoch)
+    if ( timestampFormat == TimestampFormat_T::eELAPSED )
     {
-        dstStringBuf.formatAppend( "%04d-%02d-%02d %02d:%02d:%02d.%03u) ",
-                                   utcTimePtr->tm_year + 1900,
-                                   utcTimePtr->tm_mon + 1,
-                                   utcTimePtr->tm_mday,
-                                   utcTimePtr->tm_hour,
-                                   utcTimePtr->tm_min,
-                                   utcTimePtr->tm_sec,
-                                   milliseconds );
+        Kit::Text::Format::timestamp( dstStringBuf, elapsedTimeMs, true, true, true );
     }
+    else
+    {
+        Kit::Text::Format::utcTimestamp( dstStringBuf, elapsedTimeMs, true, true );
+    }
+    dstStringBuf += ") ";
 }
 
 bool Formatter::toString( IApplication&                               application,
                           const Kit::Logging::Framework::EntryData_T& srcEntryToFormat,
                           Kit::Text::IString&                         dstStringBuf,
-                          uint64_t                                    persistentStorageId ) noexcept
+                          uint64_t                                    persistentStorageId,
+                          TimestampFormat_T                           timestampFormat ) noexcept
 {
     dstStringBuf.clear();
     if ( persistentStorageId != UINT64_MAX )
@@ -61,7 +57,7 @@ bool Formatter::toString( IApplication&                               applicatio
     }
 
     // Append the boot-counter portion of the entry's timestamp
-    appendFormattedTimestamp( srcEntryToFormat.m_timestamp, dstStringBuf );
+    appendFormattedTimestamp( srcEntryToFormat.m_timestamp, dstStringBuf, timestampFormat );
 
     // Append the identifiers and the info text to the log entry
     const char* appStateText       = application.applicationStateToString( srcEntryToFormat.m_applicationState );

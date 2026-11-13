@@ -20,11 +20,11 @@ namespace Itc {
 namespace Synchronous {
 
 /** This abstract class defines the interface for setting the application's
-    LED flash rate. 
+    LED flash rate.
 
     Note: The intended implementation of this interface is to use Synchronous ITC.
           This means that the caller needs to be a different thread that the
-          thread that physically flashes the LED. 
+          thread that physically flashes the LED.
 
  */
 class IRate
@@ -34,7 +34,7 @@ public:
         successful.  See IRateRequest::RatePayload_T for details on the valid
         flash rate range.
      */
-    virtual bool set( uint32_t flashRateMs = 500) noexcept = 0;
+    virtual bool set( uint32_t flashRateMs = 500 ) noexcept = 0;
 
 
 public:
@@ -43,7 +43,7 @@ public:
 };
 
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

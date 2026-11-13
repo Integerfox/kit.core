@@ -33,7 +33,7 @@ public:
 public:
     /// Constructor. Uses whitespace for token delimiters
     Basic( char* stringToParse )
-        : m_ptr( nullptr)
+        : m_ptr( nullptr )
         , m_delimiters( whiteSpace() )
         , m_base( nullptr )
         , m_count( 0 )

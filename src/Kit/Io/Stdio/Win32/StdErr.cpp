@@ -14,6 +14,6 @@
 using namespace Kit::Io::Stdio;
 
 StdErr::StdErr()
-    :OutputDelegate( GetStdHandle( STD_ERROR_HANDLE ) )
+    : OutputDelegate( GetStdHandle( STD_ERROR_HANDLE ) )
 {
 }

@@ -33,9 +33,9 @@
 #define KIT_SYSTEM_WATCHDOG_START_EVENTLOOP( thisPtr, timingSource ) \
     do                                                               \
     {                                                                \
-        if ( (thisPtr) )                                               \
+        if ( ( thisPtr ) )                                           \
         {                                                            \
-            (thisPtr)->startWatcher( timingSource );                   \
+            ( thisPtr )->startWatcher( timingSource );               \
         }                                                            \
     }                                                                \
     while ( 0 )
@@ -48,9 +48,9 @@
 #define KIT_SYSTEM_WATCHDOG_STOP_EVENTLOOP( thisPtr ) \
     do                                                \
     {                                                 \
-        if ( (thisPtr) )                                \
+        if ( ( thisPtr ) )                            \
         {                                             \
-            (thisPtr)->stopWatcher();                   \
+            ( thisPtr )->stopWatcher();               \
         }                                             \
     }                                                 \
     while ( 0 )
@@ -60,14 +60,14 @@
 
     @param thisPtr The IWatchedEventLoop instance pointer
  */
-#define KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( thisPtr ) \
-    do                                                   \
-    {                                                    \
-        if ( (thisPtr) && (thisPtr)->isSupervisorThread() )  \
-        {                                                \
-            (thisPtr)->monitorWdog();                      \
-        }                                                \
-    }                                                    \
+#define KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( thisPtr )        \
+    do                                                          \
+    {                                                           \
+        if ( ( thisPtr ) && ( thisPtr )->isSupervisorThread() ) \
+        {                                                       \
+            ( thisPtr )->monitorWdog();                         \
+        }                                                       \
+    }                                                           \
     while ( 0 )
 
 #else

@@ -28,7 +28,7 @@ TextBlock::TextBlock( char* string,
                       char  terminator,
                       char  quote,
                       char  escape )
-    : m_base( (char*) Strip::space( string ) )
+    : m_base( (char*)Strip::space( string ) )
     , m_ptr( m_base )
     , m_count( 0 )
     , m_validTokens( true )
@@ -40,7 +40,7 @@ TextBlock::TextBlock( char* string,
     KIT_SYSTEM_ASSERT( terminator != quote );
     KIT_SYSTEM_ASSERT( terminator != escape );
     KIT_SYSTEM_ASSERT( quote != escape );
-    
+
     // Flag an error if 'string' is null
     if ( string == nullptr )
     {
@@ -117,8 +117,8 @@ TextBlock::TextBlock( char* string,
         {
             // Remove the starting quote character
             removeCharacter_( m_ptr );
-            m_validTokens = false;
-            bool escaping = false;
+            m_validTokens              = false;
+            bool escaping              = false;
             bool quotedTokenHasContent = false;
             if ( firstNonSpacePtr == nullptr )
             {
@@ -131,7 +131,7 @@ TextBlock::TextBlock( char* string,
                 // process the escaped character
                 if ( escaping )
                 {
-                    escaping = false;
+                    escaping              = false;
                     quotedTokenHasContent = true;
                     m_ptr++;
                 }

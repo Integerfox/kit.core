@@ -23,7 +23,7 @@
 class Thread1 : public Kit::System::IRunnable
 {
 public:
-    Thread1(){};
+    Thread1() {};
 
 protected:
     void entry() noexcept override
@@ -87,4 +87,3 @@ int main( void )
     while ( 1 )
         ;  // Enable scheduling should NEVER return!
 }
-

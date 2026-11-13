@@ -5,9 +5,9 @@
 
 #include "Kit/TShell/Command/Win32/Threads.h"
 
-static Kit::TShell::Command::Win32::Threads  threadsCmd_( Examples::Job::Temperature::g_commandList );
-static Kit::Io::Stdio::StdIn  stdin_;
-static Kit::Io::Stdio::StdOut stdout_;
+static Kit::TShell::Command::Win32::Threads threadsCmd_( Examples::Job::Temperature::g_commandList );
+static Kit::Io::Stdio::StdIn                stdin_;
+static Kit::Io::Stdio::StdOut               stdout_;
 
 
 int main( int argc, char* argv[] )

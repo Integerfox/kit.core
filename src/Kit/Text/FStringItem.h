@@ -20,7 +20,6 @@ namespace Kit {
 namespace Text {
 
 
-
 /** This template class implements the StringItem class for a 'String' using
     a 'FString' as the internal storage for String instance.
 
@@ -36,13 +35,15 @@ protected:
 
 public:
     /// Constructor
-    FStringItem( const IString& string ) noexcept :StringItem( m_internalString ), m_internalString( string ) {}
+    FStringItem( const IString& string ) noexcept
+        : StringItem( m_internalString ), m_internalString( string ) {}
 
     /// Constructor
-    FStringItem( const char* string="" ) noexcept :StringItem( m_internalString ), m_internalString( string ) {}
+    FStringItem( const char* string = "" ) noexcept
+        : StringItem( m_internalString ), m_internalString( string ) {}
 
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Container Items should not be copied!
     FStringItem( const FStringItem& m ) noexcept;
 
@@ -57,6 +58,6 @@ private:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

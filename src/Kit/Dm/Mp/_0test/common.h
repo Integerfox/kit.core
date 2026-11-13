@@ -167,7 +167,7 @@ public:
 
     void displayElement( const char* label, ELEMTYPE* array )
     {
-        KIT_SYSTEM_TRACE_MSG( "_0test", "%s:%X %X %X ... %X %X", label, array[0], array[1], array[2], array[N-2], array[N-1] );
+        KIT_SYSTEM_TRACE_MSG( "_0test", "%s:%X %X %X ... %X %X", label, array[0], array[1], array[2], array[N - 2], array[N - 1] );
     }
 };
 

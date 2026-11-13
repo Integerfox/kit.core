@@ -16,10 +16,9 @@
 #include "Kit/Text/FString.h"
 
 
-
 /// Size, in bytes (not including the null terminator), of a thread name
-#ifndef OPTION_KIT_SYSTEM_RPPICOTHREAD_NAME_LEN        
-#define OPTION_KIT_SYSTEM_RPPICOTHREAD_NAME_LEN        16
+#ifndef OPTION_KIT_SYSTEM_RPPICOTHREAD_NAME_LEN
+#define OPTION_KIT_SYSTEM_RPPICOTHREAD_NAME_LEN 16
 #endif
 
 
@@ -54,8 +53,8 @@ namespace RPPico {
         - Thread priority has NO meaning since both threads/cores execute concurrently.
         - The thread(s) begin executing after enableScheduling() is called.
 
-    NOTES: 
-        1. The threads do NOT 'execute' (i.e. call their Runnable object's run() 
+    NOTES:
+        1. The threads do NOT 'execute' (i.e. call their Runnable object's run()
            method till enableScheduling() is called.  In addition the enableScheduling()
            method NEVER returns.
         2. The suspendScheduling() semantics suspends ALL processing on the 'other'
@@ -88,17 +87,17 @@ public:
     /** COMPONENT SCOPED METHOD.  The application should NEVER call this
         this method.
 
-        Helper method to internally allocate a thread. 
+        Helper method to internally allocate a thread.
      */
     static void createThreadInstance( unsigned coreId, Kit::System::IRunnable& runnable ) noexcept;
 
 
 protected:
     /// The thread synchronized message semaphore.
-    Kit::System::Semaphore  m_syncSema;
+    Kit::System::Semaphore m_syncSema;
 
     /// internal handle
-    unsigned                m_coreId;
+    unsigned m_coreId;
 
 public:
     /// Housekeeping
@@ -106,7 +105,7 @@ public:
 };
 
 
-};      // end namespaces
+};  // end namespaces
 };
 };
 #endif  // end header latch

@@ -61,7 +61,7 @@ public:
         }
 
         // Do NOT allow the read call to block if no data is currently available
-        if ( (blockIfUnavailable == false && !m_srcPtr->available()) || numBytes == 0 )
+        if ( ( blockIfUnavailable == false && !m_srcPtr->available() ) || numBytes == 0 )
         {
             return true;
         }
