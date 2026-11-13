@@ -18,6 +18,8 @@
 #include "Kit/Itc/IOpenRequest.h"
 #include "Kit/Itc/ICloseRequest.h"
 #include "Kit/Itc/NullReturnHandler.h"
+#include "Kit/System/GlobalLock.h"
+#include "Kit/System/IEventFlag.h"
 
 
 /** The default upper bound on the number of event-queue iterations that
@@ -34,9 +36,9 @@
     evaluated inside a ManualEventQueue member function.
  */
 #ifndef USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
-#define KIT_TESTING_MANUAL_EVENT_QUEUE_HAS_PENDING_WORK_() ( isPendingMessage() || m_changeHandler.isPendingChangingNotifications() )
+#define KIT_TESTING_MANUAL_EVENT_QUEUE_HAS_PENDING_WORK_() ( isPendingEventFlags() || isPendingMessage() || m_changeHandler.isPendingChangingNotifications() )
 #else
-#define KIT_TESTING_MANUAL_EVENT_QUEUE_HAS_PENDING_WORK_() ( isPendingMessage() )
+#define KIT_TESTING_MANUAL_EVENT_QUEUE_HAS_PENDING_WORK_() ( isPendingEventFlags() || isPendingMessage() )
 #endif
 
 
@@ -44,12 +46,12 @@
     a thread.  Instead, the unit test runs it - on the test's own thread - by
     calling runUntilIdle().  The test therefore controls exactly when the code
     that executes in the Event Queue's context (ITC requests, Model Point
-    change notifications, software timer callbacks) runs - and, for software
-    timers, how much time has passed (see advanceTime()).  This makes tests
-    deterministic: once runUntilIdle() returns true, the queue's servers have
-    processed everything they are going to process, i.e. 'nothing happened'
-    checks need no sleeps, and 'something happened' checks need no
-    polling/timeouts.
+    change notifications, event flag handlers, software timer callbacks) runs -
+    and, for software timers, how much time has passed (see advanceTime()).
+    This makes tests deterministic: once runUntilIdle() returns true, the
+    queue's servers have processed everything they are going to process, i.e.
+    'nothing happened' checks need no sleeps, and 'something happened' checks
+    need no polling/timeouts.
 
     How to use:
         1. Construct a ManualEventQueue instead of a Kit::EventQueue::Server,
@@ -114,6 +116,20 @@
 
         \endcode
 
+    Example (event flags - the handlers are notified by runUntilIdle()):
+        \code
+
+        Kit::Container::SList<Kit::System::IEventFlag> eventList;
+        MyEventFlagHandler                             handler( eventList, 1u << 3 );   // A Kit::System::EventFlagBase child
+        ManualEventQueue                               eventQueue( &eventList );
+
+        eventQueue.signalEvent( 3 );                    // Stimulus (e.g. from the code under test)...
+        REQUIRE( handler.m_count == 0 );                // ...nothing happens until the queue runs
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( handler.m_count == 1 );                // Notified exactly once
+
+        \endcode
+
     Limitations:
         - Synchronous ITC calls (e.g. Kit::Itc::OpenCloseSync::open()/close(),
           or any other xxxSync API) block until a server thread processes the
@@ -127,8 +143,6 @@
           clock, which starts at zero and ONLY advances with advanceTime().
           Code that reads the system clock directly (e.g.
           Kit::System::ElapsedTime) still sees real time.
-        - Event flags of the underlying Kit::System::EventLoop are NOT
-          serviced.
         - The queue must only be run by ONE thread (the test thread).  Code
           under test that creates its own threads is not made deterministic.
 
@@ -137,16 +151,21 @@
 class ManualEventQueue : public Kit::EventQueue::Server
 {
 public:
-    /// Constructor.  See Kit::EventQueue::Server
-    ManualEventQueue() noexcept
-        : Kit::EventQueue::Server()
+    /** Constructor.  The optional 'eventFlagsList' is the list of event flag
+        handlers that are notified (by runUntilIdle()) when an event flag is
+        signaled.  See Kit::EventQueue::Server
+     */
+    explicit ManualEventQueue( Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList = nullptr ) noexcept
+        : Kit::EventQueue::Server( OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, eventFlagsList )
         , m_elapsedMs( 0 )
     {
     }
 
 public:
-    /** Processes the pending ITC messages and change notifications until there
-        is no pending work, or 'maxIterations' iterations have been performed.
+    /** Processes the signaled event flags, pending ITC messages, and change
+        notifications until there is no pending work, or 'maxIterations'
+        iterations have been performed.  Each iteration notifies the event
+        flag handlers first (the same order as a running Event Queue).
         Returns true when the queue is idle, i.e. false means the server(s)
         never stopped generating work (e.g. busy-looping).  The number of
         iterations performed is optionally returned via 'retIterations'.
@@ -157,6 +176,7 @@ public:
         unsigned iterations = 0;
         while ( iterations < maxIterations && hasPendingWork() )
         {
+            processEventFlags();
             serverProcessEvents();
             iterations++;
         }
@@ -167,7 +187,16 @@ public:
         return !hasPendingWork();
     }
 
-    /// Returns true if there are ITC messages and/or change notifications waiting to be processed
+    /// Returns true if there are signaled event flags that have not been processed
+    bool isPendingEventFlags() noexcept
+    {
+        Kit::System::GlobalLock::begin();
+        bool pending = m_events != 0;
+        Kit::System::GlobalLock::end();
+        return pending;
+    }
+
+    /// Returns true if there are signaled event flags, ITC messages and/or change notifications waiting to be processed
     bool hasPendingWork() noexcept
     {
         return KIT_TESTING_MANUAL_EVENT_QUEUE_HAS_PENDING_WORK_();
