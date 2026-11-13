@@ -14,6 +14,7 @@
     thread, i.e. without an event-queue thread.  See ManualEventQueue.
  */
 
+#include "kit_config.h"
 #include "Kit/EventQueue/Server.h"
 #include "Kit/Itc/IOpenRequest.h"
 #include "Kit/Itc/ICloseRequest.h"

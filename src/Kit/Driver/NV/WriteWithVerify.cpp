@@ -54,8 +54,15 @@ bool WriteWithVerify::postWrite( bool writeResult ) noexcept
 bool WriteWithVerify::write( size_t dstOffset, const void* srcData, size_t numBytesToWrite ) noexcept
 {
     // Basic error checking
-    if ( srcData == nullptr || !preWrite( dstOffset, srcData, numBytesToWrite ) )
+    if ( srcData == nullptr )
     {
+        return false;
+    }
+
+    // Close the preWrite()/postWrite() bracket even when the pre-write hook fails
+    if ( !preWrite( dstOffset, srcData, numBytesToWrite ) )
+    {
+        postWrite( false );
         return false;
     }
 

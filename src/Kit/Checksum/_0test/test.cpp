@@ -40,15 +40,13 @@ using namespace Kit::Checksum;
 #define CRC_MPEG2                  0x0376E6E7  // CRC-32/MPEG-2 value for the text string "123456789"
 #define CRC_ETHERNET               0xCBF43926  // CRC-32/IEEE 802.3 value for the text string "123456789"
 #define CRC_PLDM                   0xCBF43926  // CRC-32 PLDM value for the text string "123456789"
-#define CRC8_SMBUS                 0xF4        // CRC-8 SMBus value for the text string "123456789"
+#define CRC8_SMBUS                 0xF4        // CRC-8/SMBUS value for the text string "123456789" (see https://reveng.sourceforge.io/crc-catalogue/1-15.htm)
 #define FLETCHER16                 0x1e03      // Fletcher checksum for the text "123456789"
 
 // clang-format off
 uint8_t dataBuffer_[DATALEN_ + MAX_CRCLEN_] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', 0, };
 static Kit::Text::FString<128> outbuf_;
 // clang-format on
-
-static uint8_t crc8Block( uint8_t crc, const uint8_t* data, uint8_t len );
 
 /////////////////////////////
 static void printBuf( void* buf, int len, const char* msg )
@@ -119,11 +117,6 @@ TEST_CASE( "Checksums", "[chksum]" )
         uint8_t       crc;
         REQUIRE( testEdc( "CRC SMBus Fast", cksum, dataBuffer_, DATALEN_, &crc, sizeof( crc ) ) );
         REQUIRE( crc == CRC8_SMBUS );
-    }
-
-    SECTION( "Verify CRC8 Golden value" )
-    {
-        REQUIRE( crc8Block( 0, dataBuffer_, DATALEN_ ) == CRC8_SMBUS );
     }
 
     SECTION( "Checksum - Fletcher16" )
@@ -217,35 +210,4 @@ TEST_CASE( "Checksums", "[chksum]" )
     }
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
-}
-
-
-//////////////////////////////////////////
-// The following is existing (RM3) AMD code that perform CRC8 algorithm.
-// It is included in the test to verify that the "golden" CRC8 test value is correct
-
-#define POLYNOMIAL ( 0x1070U << 3 )
-static uint8_t crc8( uint8_t inCrc, uint8_t inData )
-{
-    uint16_t data   = inCrc ^ inData;
-    data          <<= 8;
-    for ( uint8_t i = 0; i < 8; i++ )
-    {
-        if ( ( data & 0x8000 ) != 0 )
-        {
-            data = data ^ POLYNOMIAL;
-        }
-        data = data << 1;
-    }
-    return static_cast<uint8_t>( data >> 8 );
-}
-
-static uint8_t crc8Block( uint8_t crc, const uint8_t* data, uint8_t len )
-{
-    while ( len > 0 )
-    {
-        crc = crc8( crc, *data++ );
-        len--;
-    }
-    return crc;
 }

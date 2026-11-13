@@ -74,10 +74,21 @@ protected:
     /// Helper method
     bool readBack( size_t numBytesWritten, const void* srcData, size_t offset ) noexcept;
 
-    /// Helper method: Provides child classes hooks into the write operation. Default is NOP/return true
+    /** Hook that is called before the write operation (i.e. before any
+        write/retry attempts).  Returning false fails the write operation
+        without writing any data.  Every call to preWrite() is paired with a
+        call to postWrite() - even when preWrite() returns false - so that a
+        child class can use the hooks to bracket the write operation (e.g.
+        disable/enable write protection).  Default is NOP/return true.
+     */
     virtual bool preWrite( size_t dstOffset, const void* srcData, size_t numBytesToWrite ) noexcept;
 
-    /// Helper method: Provides child classes hooks into the write operation. Default is NOP/return true
+    /** Hook that is called after the write operation.  'writeResult' is the
+        result of the write (and read-back verification) attempts, and is false
+        when preWrite() returned false.  The return value is the result of the
+        write() call - except when preWrite() returned false, in which case the
+        write() call always fails.  Default is NOP/return 'writeResult'.
+     */
     virtual bool postWrite( bool writeResult ) noexcept;
 
 protected:

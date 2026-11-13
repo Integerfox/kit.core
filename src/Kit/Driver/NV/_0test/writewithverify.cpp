@@ -104,6 +104,40 @@ public:
     unsigned m_readCount;
 };
 
+/// Records the pre/post write hook calls
+class HookedWriteWithVerify : public Kit::Driver::NV::WriteWithVerify
+{
+public:
+    HookedWriteWithVerify( Kit::Driver::NV::IApi& nvDriver ) noexcept
+        : Kit::Driver::NV::WriteWithVerify( nvDriver )
+        , m_preWriteResult( true )
+        , m_postWriteResult( true )
+        , m_preWriteCount( 0 )
+        , m_postWriteCount( 0 )
+        , m_lastWriteResult( false )
+    {
+    }
+
+    bool preWrite( size_t, const void*, size_t ) noexcept override
+    {
+        m_preWriteCount++;
+        return m_preWriteResult;
+    }
+
+    bool postWrite( bool writeResult ) noexcept override
+    {
+        m_postWriteCount++;
+        m_lastWriteResult = writeResult;
+        return m_postWriteResult;
+    }
+
+    bool     m_preWriteResult;
+    bool     m_postWriteResult;
+    unsigned m_preWriteCount;
+    unsigned m_postWriteCount;
+    bool     m_lastWriteResult;
+};
+
 }  // end anonymous namespace
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -245,5 +279,52 @@ TEST_CASE( "WriteVerifyRead" )
         uut.stop();
     }
 
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
+}
+
+TEST_CASE( "WriteVerifyRead - pre/post write hooks" )
+{
+    KIT_SYSTEM_TRACE_FUNC( SECT_ );
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
+
+    MockNvDriver          nvDriver( NUM_PAGES, PAGE_SIZE );
+    HookedWriteWithVerify uut( nvDriver );
+    uint8_t               writeData[DATA_LEN] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xA1, 0xB1, 0xC1, 0x1D };
+    REQUIRE( uut.start() );
+
+    SECTION( "the hooks bracket a write" )
+    {
+        REQUIRE( uut.write( 0, writeData, sizeof( writeData ) ) == true );
+        REQUIRE( uut.m_preWriteCount == 1 );
+        REQUIRE( uut.m_postWriteCount == 1 );
+        REQUIRE( uut.m_lastWriteResult == true );
+        REQUIRE( nvDriver.m_writeCount == 1 );
+    }
+
+    SECTION( "postWrite() determines the write result" )
+    {
+        uut.m_postWriteResult = false;
+        REQUIRE( uut.write( 0, writeData, sizeof( writeData ) ) == false );
+        REQUIRE( uut.m_lastWriteResult == true );
+    }
+
+    SECTION( "a failed preWrite() is still paired with postWrite() - and the write fails without writing" )
+    {
+        uut.m_preWriteResult = false;
+        REQUIRE( uut.write( 0, writeData, sizeof( writeData ) ) == false );
+        REQUIRE( uut.m_preWriteCount == 1 );
+        REQUIRE( uut.m_postWriteCount == 1 );
+        REQUIRE( uut.m_lastWriteResult == false );
+        REQUIRE( nvDriver.m_writeCount == 0 );
+    }
+
+    SECTION( "a null source pointer fails before the hooks are called" )
+    {
+        REQUIRE( uut.write( 0, nullptr, sizeof( writeData ) ) == false );
+        REQUIRE( uut.m_preWriteCount == 0 );
+        REQUIRE( uut.m_postWriteCount == 0 );
+    }
+
+    uut.stop();
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

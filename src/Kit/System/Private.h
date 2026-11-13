@@ -55,6 +55,7 @@ public:
     T& get() noexcept { return *reinterpret_cast<T*>( m_storage ); }
 
 protected:
+    /// Raw memory for the class
     alignas( T ) unsigned char m_storage[sizeof( T )];
 };
 

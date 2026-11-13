@@ -1,5 +1,5 @@
-#ifndef KIT_LOGGING_FRAMEWORK_JOURNALLOGSINK_H
-#define KIT_LOGGING_FRAMEWORK_JOURNALLOGSINK_H
+#ifndef KIT_LOGGING_FRAMEWORK_JOURNALLOGSINK_H_
+#define KIT_LOGGING_FRAMEWORK_JOURNALLOGSINK_H_
 /*------------------------------------------------------------------------------
  * Copyright Integer Fox Authors
  *
