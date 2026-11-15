@@ -263,7 +263,7 @@ public:
                           uint32_t                                        timeOutPeriodInMsec = OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
                           Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList      = nullptr,
                           Kit::System::IWatchedEventLoop*                 watchdog            = nullptr )
-        : Server( timeOutPeriodInMsec, eventFlagsList, watchdog )
+        : Kit::EventQueue::Server( timeOutPeriodInMsec, eventFlagsList, watchdog )
         , m_sema( signalToNotify )
     {
     }
