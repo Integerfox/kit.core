@@ -21,7 +21,7 @@ namespace Io {
 namespace Socket {
 
 
-/** This static class defines a platform independent interface for 
+/** This static class defines a platform independent interface for
     establishing/requesting a SIMPLE socket connection, i.e. makes a "client
     connection" to a remote Host.
 
@@ -31,10 +31,11 @@ class Connector
 {
 public:
     /// Possible return codes when attempting to establish a connection
-    enum Result_T {
-        eSUCCESS=0,     /// Connection was successful
-        eERROR,         /// Error occurred
-        eREFUSED,       /// Connection request was refused by the remote Host
+    enum Result_T
+    {
+        eSUCCESS = 0,  /// Connection was successful
+        eERROR,        /// Error occurred
+        eREFUSED,      /// Connection request was refused by the remote Host
     };
 
 
@@ -47,7 +48,7 @@ public:
 };
 
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

@@ -21,7 +21,7 @@ namespace System {
 /** This class defines the interface for accessing the elapsed time since power
     up and/or reset of the platform.  Elapsed time has millisecond precision.
     Elapsed time is kept in a free running counter - which will roll
-    over after its data type has been exceeded 
+    over after its data type has been exceeded
 
     There are two set of methods for accessing elapsed time:
     1. The default 'API' that uses uint32_t to represent elapsed time.  The
@@ -71,8 +71,8 @@ public:
         of when the has been 'roll over' between the 'timeMarker' and NOW.
      */
     static bool expiredMilliseconds( uint32_t timeMarker,
-                                            uint32_t duration,
-                                            uint32_t currentTime = milliseconds() ) noexcept
+                                     uint32_t duration,
+                                     uint32_t currentTime = milliseconds() ) noexcept
     {
         return deltaMilliseconds( timeMarker, currentTime ) >= duration;
     }
@@ -101,9 +101,9 @@ public:
         since the 'timeMarker'.  The calculation properly handles the scenario
         of when the has been 'roll over' between the 'timeMarker' and NOW.
      */
-     static bool expiredSeconds( uint32_t timeMarker,
-                                       uint32_t duration,
-                                       uint32_t currentTime = seconds() ) noexcept
+    static bool expiredSeconds( uint32_t timeMarker,
+                                uint32_t duration,
+                                uint32_t currentTime = seconds() ) noexcept
     {
         return deltaSeconds( timeMarker, currentTime ) >= duration;
     }
@@ -142,7 +142,7 @@ public:
         (i.e. a call to milliseconds(). The calculation properly handles the
         scenario of when the has been 'roll over' between the two times.
      */
-     static uint64_t deltaMillisecondsEx( uint64_t startTime, uint64_t endTime = millisecondsEx() ) noexcept
+    static uint64_t deltaMillisecondsEx( uint64_t startTime, uint64_t endTime = millisecondsEx() ) noexcept
     {
         return endTime - startTime;
     }
@@ -151,9 +151,9 @@ public:
         since the 'timeMarker'.  The calculation properly handles the scenario
         of when the has been 'roll over' between the 'timeMarker' and NOW.
      */
-     static bool expiredMillisecondsEx( uint64_t timeMarker,
-                                              uint64_t duration,
-                                              uint64_t currentTime = millisecondsEx() ) noexcept
+    static bool expiredMillisecondsEx( uint64_t timeMarker,
+                                       uint64_t duration,
+                                       uint64_t currentTime = millisecondsEx() ) noexcept
     {
         return deltaMillisecondsEx( timeMarker, currentTime ) >= duration;
     }
@@ -173,7 +173,7 @@ public:
         a call to seconds(). The calculation properly handles the scenario of
         when the has been 'roll over' between the two times.
      */
-     static uint64_t deltaSecondsEx( uint64_t startTime, uint64_t endTime = secondsEx() ) noexcept
+    static uint64_t deltaSecondsEx( uint64_t startTime, uint64_t endTime = secondsEx() ) noexcept
     {
         return endTime - startTime;
     }
@@ -182,9 +182,9 @@ public:
         since the 'timeMarker'.  The calculation properly handles the scenario
         of when the has been 'roll over' between the 'timeMarker' and NOW.
      */
-     static bool expiredSecondsEx( uint64_t timeMarker,
-                                         uint64_t duration,
-                                         uint64_t currentTime = secondsEx() ) noexcept
+    static bool expiredSecondsEx( uint64_t timeMarker,
+                                  uint64_t duration,
+                                  uint64_t currentTime = secondsEx() ) noexcept
     {
         return deltaSecondsEx( timeMarker, currentTime ) >= duration;
     }
@@ -209,10 +209,9 @@ public:
     {
         return millisecondsInRealTimeEx() / 1000L;
     }
-
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

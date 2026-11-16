@@ -184,7 +184,7 @@ Kit::TShell::Result_T Viewer::execute( Kit::TShell::IContext& context, char* cmd
     for ( size_t i = 0; i < startNth; ++i )
     {
         Kit::Persistence::Record::Journal::IEntry::Marker_T previousMarker;
-        if ( !m_logReader.retrievePrevious( marker.timestamp, marker, logEntry, previousMarker ) && (i+1) < startNth )
+        if ( !m_logReader.retrievePrevious( marker.timestamp, marker, logEntry, previousMarker ) && ( i + 1 ) < startNth )
         {
             outtext.format( "Unable to skip %" PRIu32 " log entries (only found %" PRIu32 " entries.).",
                             static_cast<uint32_t>( startNth ),

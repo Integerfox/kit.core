@@ -13,4 +13,7 @@
 #define USE_KIT_SYSTEM_TRACE
 #define USE_KIT_SYSTEM_ASSERT
 #define KitTextToStringMaxUnsigned_T uint64_t
+
+// Small read-back buffer so the unit test exercises chunked verification
+#define OPTION_KIT_DRIVER_NV_WRITE_WITH_VERIFY_TEMP_BUF_SIZE 2
 #endif

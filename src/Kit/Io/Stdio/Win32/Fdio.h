@@ -78,7 +78,7 @@ public:
         stdin is piped from a file the hack DOES NOT WORK! Not a very good
         solution :(, but it solved my immediate needs.
 
-        To enable the work-around define the following in kit_config.h: 
+        To enable the work-around define the following in kit_config.h:
         USE_KIT_IO_STDIO_WIN32_STDIN_CONSOLE_HACK
      */
     static bool availableStdin( HANDLE fd ) noexcept;

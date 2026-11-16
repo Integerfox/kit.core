@@ -30,10 +30,10 @@ Connector::Result_T Connector::establish( const char* remoteHostName, int portNu
 
     // Walk the list of addresses until a connection succeeds
     struct addrinfo* ptr;
-    bool             createdSocket      = false;
-    bool             sawRefused         = false;
-    bool             sawConnectError    = false;
-    fdOut                               = Posix::Fdio::INVALID_FD;
+    bool             createdSocket   = false;
+    bool             sawRefused      = false;
+    bool             sawConnectError = false;
+    fdOut                            = Posix::Fdio::INVALID_FD;
     for ( ptr = adapters; ptr != nullptr; ptr = ptr->ai_next )
     {
         // Create a SOCKET for connecting to server

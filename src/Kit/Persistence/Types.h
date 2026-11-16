@@ -22,7 +22,7 @@ namespace Persistence {
 /*----------------------------------------------------------------------------*/
 /** This is the type for all size, lengths, offsets, etc. for the Persistence
     namespace. NOTE: Is important that this type be a 'uintXX_t' type (must be
-    an unsigned integer type).  This is because other types like - size_t, 
+    an unsigned integer type).  This is because other types like - size_t,
     unsigned, etc. - have different number of bits depending on the MCU/OS
     platform, Having target dependent sizes (e.g. think HW vs simulator) causes
     problems when the type (e.g. sizeof(size_t)) is used for the length of fields
@@ -35,7 +35,7 @@ using Size_T = OPTION_KIT_PERSISTENCE_SIZE_TYPE;
 #endif
 
 /// Maximum value for KitPersistenceSize_T.  This is useful for error return values, etc.
-constexpr Size_T KIT_PERSISTENCE_SIZE_MAX = static_cast<Size_T>(-1);
+constexpr Size_T KIT_PERSISTENCE_SIZE_MAX = static_cast<Size_T>( -1 );
 
 /** Endianess for meta data that is persistently stored.  The default is Little
     Endian.  To change to Big endian set the macro to 0.
@@ -44,7 +44,7 @@ constexpr Size_T KIT_PERSISTENCE_SIZE_MAX = static_cast<Size_T>(-1);
           The application is responsible for managing the Endianess of its data.
  */
 #ifndef OPTION_KIT_PERSISTENCE_MEDIA_LITTLE_ENDIAN
-#define OPTION_KIT_PERSISTENCE_MEDIA_LITTLE_ENDIAN  1
+#define OPTION_KIT_PERSISTENCE_MEDIA_LITTLE_ENDIAN 1
 #endif
 
 }  // end namespaces

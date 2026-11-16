@@ -78,12 +78,12 @@ public:
     unsigned    getExecuteCount() const noexcept { return m_executeCount; }
     const char* getLastRaw() const noexcept { return m_lastRaw; }
 
-    Result_T                         m_returnCode;
-    Permissions_T                    m_permissions;
-    unsigned                         m_executeCount;
-    char                             m_lastRaw[64];
-    SSize_T                          m_oobReadLength;
-    char                             m_oobRaw[64];
+    Result_T      m_returnCode;
+    Permissions_T m_permissions;
+    unsigned      m_executeCount;
+    char          m_lastRaw[64];
+    SSize_T       m_oobReadLength;
+    char          m_oobRaw[64];
 };
 
 class DenySecurity : public ISecurity
@@ -329,7 +329,7 @@ TEST_CASE( "Processor" )
         Kit::Text::IString& workBuf = uut.getWorkBuffer();
         REQUIRE( workBuf.availLength() == OPTION_KIT_TSHELL_PROCESSOR_INPUT_SIZE );
 
-        REQUIRE( &(uut.getSecurity()) == &security );
+        REQUIRE( &( uut.getSecurity() ) == &security );
 
         uut.requestTShellExit();
         REQUIRE( uut.poll() == 1 );

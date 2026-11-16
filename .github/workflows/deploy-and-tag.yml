@@ -61,11 +61,19 @@ jobs:
       run_number: ${{ github.run_number }}
       ref_name: ${{ github.ref_name }}
 
+  clang-format:
+    name: Check clang-format
+    uses: ./.github/workflows/clang-format.yml
+    with:
+      event_name: ${{ github.event_name }}
+      run_number: ${{ github.run_number }}
+      ref_name: ${{ github.ref_name }}
+
   # Deploy only after all builds succeed and only for main branch pushes (not PRs)
   deploy:
     name: Deploy and Tag
     runs-on: ubuntu-latest
-    needs: [build-linux-gcc, build-linux-arm-cortex, build-windows-msvc, build-windows-clang, build-windows-arm-cortex]
+    needs: [build-linux-gcc, build-linux-arm-cortex, build-windows-msvc, build-windows-clang, build-windows-arm-cortex, clang-format]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     
     steps:
@@ -80,6 +88,7 @@ jobs:
           echo "✅ Build Windows MSVC: Success" 
           echo "✅ Build Windows Clang: Success"
           echo "✅ Build Windows ARM Cortex M/R: Success"
+          echo "✅ Check clang-format: Success"
       - name: Create Tag
         run: |
           git config --local user.name "GitHub Actions"

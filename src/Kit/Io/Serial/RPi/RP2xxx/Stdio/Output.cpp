@@ -11,7 +11,7 @@
 
 #include "Output.h"
 #include <stdint.h>
-//#include "pico/stdlib.h"
+// #include "pico/stdlib.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -42,7 +42,7 @@ bool Output::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::
         maxBytes--;
         bytesWritten++;
     }
-    
+
     // Flush output since the putchar() semantics do NOT flush the output (stdout waits for a newline to flush the output)
     stdio_flush();
 
@@ -58,7 +58,7 @@ void Output::flush() noexcept
 
 bool Output::isEos( void ) noexcept
 {
-    return false;   // End-of-Stream has no meaning for the SDK's stdout
+    return false;  // End-of-Stream has no meaning for the SDK's stdout
 }
 
 void Output::close() noexcept
@@ -66,7 +66,7 @@ void Output::close() noexcept
     // Ignore - stdout can never be closed
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 }

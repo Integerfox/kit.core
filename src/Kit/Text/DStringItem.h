@@ -39,7 +39,7 @@ public:
         : StringItem( m_internalString ), m_internalString( string, initialSize, blocksize ) {}
 
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Container Items should not be copied!
     DStringItem( const DStringItem& m );
 

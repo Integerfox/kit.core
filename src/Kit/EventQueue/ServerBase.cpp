@@ -8,7 +8,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/EventQueue/Server.h"
+#include "Kit/EventQueue/ServerBase.h"
 #include "Kit/System/FatalError.h"
 #include "Kit/System/Thread.h"
 
@@ -18,29 +18,29 @@ namespace Kit {
 namespace EventQueue {
 
 /////////////////////
-Server::Server( uint32_t                                        timeOutPeriodInMsec,
-                Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList,
-                Kit::System::IWatchedEventLoop*                 watchdog ) noexcept
+ServerBase::ServerBase( uint32_t                                        timeOutPeriodInMsec,
+                        Kit::Container::SList<Kit::System::IEventFlag>* eventFlagsList,
+                        Kit::System::IWatchedEventLoop*                 watchdog ) noexcept
     : Kit::Itc::Mailbox( *( static_cast<Kit::System::ISignable*>( this ) ) )
     , EventLoop( timeOutPeriodInMsec, eventFlagsList, watchdog )
 {
 }
 
-void Server::pleaseStop() noexcept
+void ServerBase::pleaseStop() noexcept
 {
     // Contract: all ITC activity for this thread must already be shut down
     // before pleaseStop() is requested.
     if ( Mailbox::isPendingMessage() )
     {
-        auto *ownerThread = getThread();
+        auto* ownerThread = getThread();
         Kit::System::FatalError::logf( Kit::System::Shutdown::eITC,
                                        "There are pending ITC message(s) for thread=%s",
-                                       ownerThread? ownerThread->getName() : "<unknown>");
+                                       ownerThread ? ownerThread->getName() : "<unknown>" );
     }
     EventLoop::pleaseStop();
 }
 
-void Server::postSync( Kit::Itc::IMessage& msg ) noexcept
+void ServerBase::postSync( Kit::Itc::IMessage& msg ) noexcept
 {
     // Contract: a server cannot synchronously post to itself because it would
     // block the owner thread and deadlock request processing.
@@ -57,7 +57,7 @@ void Server::postSync( Kit::Itc::IMessage& msg ) noexcept
     Mailbox::postSync( msg );
 }
 
-void Server::entry() noexcept
+void ServerBase::entry() noexcept
 {
     startEventLoop();
     bool run = true;

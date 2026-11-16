@@ -8,6 +8,7 @@ src/Kit/Io/Serial/RPi/RP2xxx/Uart
 # KIT Middle-ware
 src/Kit/Container
 src/Kit/Text
+src/Kit/Time < calendar.cpp
 src/Kit/Text/_mappings/_arm_gcc_rp2xxx
 src/Kit/Io
 

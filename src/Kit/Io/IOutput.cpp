@@ -21,7 +21,7 @@ namespace Io {
 //////////////////////
 bool IOutput::write( char c ) noexcept
 {
-    auto*       ptr      = static_cast<const void*>( &c );
+    auto*              ptr      = static_cast<const void*>( &c );
     Kit::Type::SSize_T numBytes = sizeof( c );
     return write( ptr, numBytes );
 }
@@ -67,9 +67,9 @@ bool IOutput::write( const void* buffer, Kit::Type::SSize_T numBytes ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
     KIT_SYSTEM_ASSERT( numBytes >= 0 );
-    
+
     Kit::Type::SSize_T written = 0;
-    auto*       ptr     = static_cast<const uint8_t*>( buffer );
+    auto*              ptr     = static_cast<const uint8_t*>( buffer );
 
     // Loop until all data is written
     while ( numBytes > 0 )

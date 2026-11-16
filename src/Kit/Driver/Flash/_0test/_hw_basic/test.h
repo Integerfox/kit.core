@@ -31,7 +31,7 @@
 
     @param flash  The (already started) Flash driver under test
 
-    NOTE: If the test passes, the debug LED blinks slowly (500ms on/off).  If 
+    NOTE: If the test passes, the debug LED blinks slowly (500ms on/off).  If
           any check fails, the debug LED blinks quickly (100ms on/off).
     */
 void runHwTests( Kit::Driver::Flash::IApi& flash );

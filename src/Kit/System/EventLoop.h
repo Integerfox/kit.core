@@ -148,6 +148,15 @@ protected:
      */
     virtual void stopEventLoop() noexcept;
 
+    /** This method notifies the Event Flag handlers of the event flags that
+        have been signaled since the last call, and then clears the signaled
+        event flags.  It is called by waitAndProcessEvents().
+
+        This method is intended to be used by child classes that run the
+        Event Loop without a thread (e.g. unit test support).
+     */
+    void processEventFlags() noexcept;
+
 public:
     /// See Kit::System::ISignable
     int signal() noexcept override;

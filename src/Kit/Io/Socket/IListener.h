@@ -28,13 +28,13 @@ namespace Socket {
     is also responsible for reclaiming the memory once the socket connection has
     been terminated.
  */
-class IListener 
+class IListener
 {
 public:
     /// Starts the Listener listening.
     virtual void startListening( IListenerClient& client, int portNumToListenOn ) noexcept = 0;
 
-    /// Shuts down the Listener.  
+    /// Shuts down the Listener.
     virtual void terminate() noexcept = 0;
 
 public:
@@ -43,7 +43,7 @@ public:
 };
 
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

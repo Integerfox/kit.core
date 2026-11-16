@@ -26,15 +26,14 @@
     Note: This assert macro must be "turned on" at compile time by defining
           the USE_KIT_SYSTEM_ASSERT_MACROS symbol.
  */
-#define KIT_SYSTEM_ASSERT                   KIT_SYSTEM_ASSERT_MAP
+#define KIT_SYSTEM_ASSERT KIT_SYSTEM_ASSERT_MAP
 
 #else
-    
+
 /// Empty macro
-#define KIT_SYSTEM_ASSERT(e)
+#define KIT_SYSTEM_ASSERT( e )
 
 #endif  // end USE_KIT_SYSTEM_ASSERT_MACROS
 
 
 #endif  // end header latch
-

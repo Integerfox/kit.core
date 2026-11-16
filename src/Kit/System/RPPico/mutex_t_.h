@@ -24,8 +24,8 @@ namespace RPPico {
 /** This class implements a brute force approach to initializing a 'pico
     mutex' when the Kit C++ library is initialized.  This is to support
     statically allocated/created Kit::System::Mutex instances. The issue here
-    is that 'pico mutex' need to be initialized AFTER main() is called.  The 
-    Pico-SDK solution for statically allocating mutex instances is C solution 
+    is that 'pico mutex' need to be initialized AFTER main() is called.  The
+    Pico-SDK solution for statically allocating mutex instances is C solution
     that does not work inside the Kit::System::Mutex object.
  */
 class Mutex_T : public Kit::System::IStartupHook
@@ -35,9 +35,10 @@ public:
         Note: The registration is assumed to be done from a static allocated
               instance (i.e. before main() and Kit::System::Api::initialize() is
               called).  However, registering AFTER wards is a don't care because
-              the 'start-up list' is only used during the call to Kit::System::Api::initialize() 
+              the 'start-up list' is only used during the call to Kit::System::Api::initialize()
      */
-    Mutex_T() :IStartupHook( SYSTEM ) {}
+    Mutex_T()
+        : IStartupHook( SYSTEM ) {}
 
 
 protected:
@@ -49,11 +50,11 @@ protected:
 
 public:
     /// Platform Mutex instance. Note: Made public to simply access from the Kit::System::Mutex class
-    recursive_mutex_t   m_sdkMutex;
+    recursive_mutex_t m_sdkMutex;
 };
 
 
-}   // End namespace(s)
+}  // End namespace(s)
 }
 }
 #endif  // end header latch

@@ -24,10 +24,10 @@ namespace Container {
     The Ring buffer is ISR/Thread safe as long as following constraints are met:
     - There is SINGLE producer (add) and a SINGLE consumer (remove)
 
-    NOTE: This class uses the C++ std::atomic type to ensure thread safety of 
-          the read/write indexes. This class should ONLY be used on hardware 
-          targets that support std::atomic with full lock-free semantics.  For 
-          example - the Arm Cortex-M3/M4/M7 have hardware instructions to 
+    NOTE: This class uses the C++ std::atomic type to ensure thread safety of
+          the read/write indexes. This class should ONLY be used on hardware
+          targets that support std::atomic with full lock-free semantics.  For
+          example - the Arm Cortex-M3/M4/M7 have hardware instructions to
           support full lock-free atomics.
 
     NOTE: This class is not intended to be used directly. A child class is
@@ -181,7 +181,7 @@ protected:
     /// Maximum number of element in the 'ring memory
     const unsigned m_elements;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Ring Buffers can not be copied!
     RingBufferBaseAtomic( const RingBufferBaseAtomic& m ) = delete;
 

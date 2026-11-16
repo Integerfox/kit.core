@@ -27,7 +27,7 @@
     minimum
  */
 #ifndef OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES
-#define OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES       8
+#define OPTION_KIT_SYSTEM_TLS_DESIRED_MIN_INDEXES 8
 #endif
 
 
@@ -41,8 +41,8 @@ namespace System {
     global variable.  A canonical example of TLS is the C error code variable
     'errno'.
 
-    The implementation assumes no OS support for TLS.  However, that said, it 
-    can be used on platform where TLS is natively supported, i.e. one less 
+    The implementation assumes no OS support for TLS.  However, that said, it
+    can be used on platform where TLS is natively supported, i.e. one less
     interface to port for a new OS/RTOS.
 
     NOTES:
@@ -81,7 +81,7 @@ protected:
     /// Raw TLS key/handle/index
     KitSystemTlsIndex_T m_keyIdx;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->TLS instances can not be copied!
     Tls( const Tls& m ) = delete;
 
@@ -96,7 +96,6 @@ private:
 };
 
 
-
-}      // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

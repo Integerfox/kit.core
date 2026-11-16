@@ -60,7 +60,7 @@ public:
     }
 
 
-    /** Removes the top item of the stack.  If the stack is empty then the 
+    /** Removes the top item of the stack.  If the stack is empty then the
         method returns false and no value is returned.
      */
     bool pop( ITEM& dst ) noexcept
@@ -112,13 +112,13 @@ public:
      */
     ITEM* peekTop() noexcept
     {
-    if ( isEmpty() )
-    {
-        return nullptr;
-    }
+        if ( isEmpty() )
+        {
+            return nullptr;
+        }
 
-    return &( m_elements[m_count - 1] );
-}
+        return &( m_elements[m_count - 1] );
+    }
 
 public:
     /// This method returns true if the Stack is empty
@@ -164,7 +164,7 @@ protected:
     unsigned m_maxItems;
 
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
     Stack( const Stack& m ) = delete;
 
@@ -178,6 +178,6 @@ private:
     Stack<ITEM>& operator=( Stack<ITEM>&& m ) = delete;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

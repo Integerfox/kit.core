@@ -62,7 +62,7 @@ protected:
 
     /// Removes the last item in the list.  Returns nullptr if the list is empty.
     ExtendedListItem* getLast() noexcept;
-    
+
     /// Adds the 'item' as the last item in the list
     void putFirst( ExtendedListItem& item ) noexcept;
 
@@ -70,7 +70,7 @@ protected:
     void putLast( ExtendedListItem& item ) noexcept;
 
 protected:
-    /** Return a pointer to the first item in the list. The returned item 
+    /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
     ExtendedListItem* first() const noexcept
@@ -87,7 +87,7 @@ protected:
     }
 
 protected:
-    /** Remove the specified 'item' element from the list. Returns true if the 
+    /** Remove the specified 'item' element from the list. Returns true if the
         specified element was found and removed from the list, else false.
      */
     bool remove( ExtendedListItem& item ) noexcept;
@@ -115,7 +115,7 @@ protected:
      */
     ExtendedListItem* next( const ExtendedListItem& item ) const noexcept;
 
-    /** Return a pointer to the item before the item "current". Both items 
+    /** Return a pointer to the item before the item "current". Both items
         remain in the list.  Returns nullptr when the front-of-list is reached.
      */
     ExtendedListItem* previous( const ExtendedListItem& current ) const noexcept
@@ -130,7 +130,7 @@ protected:
     /// Points to the last item in the list.
     ExtendedListItem* m_tailPtr;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
     DListBase( const DListBase& m ) = delete;
 

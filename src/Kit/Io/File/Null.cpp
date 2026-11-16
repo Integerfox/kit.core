@@ -17,7 +17,7 @@ namespace File {
 
 //////////////////////
 Null::Null()
-    :m_opened( true )
+    : m_opened( true )
 {
 }
 
@@ -92,7 +92,7 @@ bool Null::setToEof() noexcept
     return m_opened;
 }
 
-} // end namespace
+}  // end namespace
 }
 }
 //------------------------------------------------------------------------------

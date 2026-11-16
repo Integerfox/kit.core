@@ -55,7 +55,7 @@ public:
 
     /// See Kit::Io::IsEos (is equivalent to isEof())
     bool isEos() noexcept override;
-    
+
     /// See Kit::Io::Close. Note: Once closed() has been called, all of the IOutput and IPosition methods will return false
     void close() noexcept override;
 
@@ -84,7 +84,7 @@ protected:
     bool m_opened;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

@@ -49,12 +49,12 @@ public:
     /** Removes the first item in the list.  Returns nullptr if the list
         is empty.
      */
-    KEYED_ITEM* getFirst() noexcept { return static_cast<KEYED_ITEM*>(OrderedListBase::getFirst()); }
+    KEYED_ITEM* getFirst() noexcept { return static_cast<KEYED_ITEM*>( OrderedListBase::getFirst() ); }
 
     /** Removes the last item in the list.  Returns nullptr if the list
         is empty.
      */
-    KEYED_ITEM* getLast() noexcept { return static_cast<KEYED_ITEM*>(OrderedListBase::getLast()); }
+    KEYED_ITEM* getLast() noexcept { return static_cast<KEYED_ITEM*>( OrderedListBase::getLast() ); }
 
     /** Remove specified KEYED_ITEM element from the list. Returns true if the
         specified element was found and removed from the list, else false.
@@ -71,24 +71,24 @@ public:
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    KEYED_ITEM* first() const noexcept { return static_cast<KEYED_ITEM*>(OrderedListBase::first()); }
+    KEYED_ITEM* first() const noexcept { return static_cast<KEYED_ITEM*>( OrderedListBase::first() ); }
 
     /** Return a pointer to the last item in the list. The returned item remains
         in the list.  Returns nullptr if the list is empty.
      */
-    KEYED_ITEM* last() const noexcept { return static_cast<KEYED_ITEM*>(OrderedListBase::last()); }
+    KEYED_ITEM* last() const noexcept { return static_cast<KEYED_ITEM*>( OrderedListBase::last() ); }
 
     /** Return a pointer to the item after the "item". Both items remain in
         the list.  Returns nullptr when the end-of-list is reached.
      */
-    KEYED_ITEM* next( const KEYED_ITEM& item ) const noexcept { return static_cast<KEYED_ITEM*>(OrderedListBase::next( item )); }
+    KEYED_ITEM* next( const KEYED_ITEM& item ) const noexcept { return static_cast<KEYED_ITEM*>( OrderedListBase::next( item ) ); }
 
     /** Return a pointer to the item before the "item". Both items remain in
         the list.  Returns nullptr when the front-of-list is reached.
      */
-    KEYED_ITEM* previous( const KEYED_ITEM& item ) const noexcept { return static_cast<KEYED_ITEM*>(OrderedListBase::previous( item )); }
+    KEYED_ITEM* previous( const KEYED_ITEM& item ) const noexcept { return static_cast<KEYED_ITEM*>( OrderedListBase::previous( item ) ); }
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
     OrderedList( const OrderedList<KEYED_ITEM>& m ) = delete;
 

@@ -3,6 +3,7 @@ src/Kit/Logging/Pkg/_0test
 
 src/Kit/Time/_ansi
 src/Kit/Text
+src/Kit/Time
 src/Kit/Text/_0test
 
 src/Kit/Container

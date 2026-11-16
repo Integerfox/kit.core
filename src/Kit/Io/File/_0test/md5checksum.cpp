@@ -51,7 +51,7 @@ TEST_CASE( "md5checksum" )
 
     SECTION( "digest, string, and file length" )
     {
-        size_t                                                 filelen = 0;
+        size_t                                                  filelen = 0;
         Kit::Text::FString<Kit::Checksum::Md5::eDIGEST_LEN * 2> dstString;
 
         REQUIRE( calcMd5Checksum( "testinput.txt", digest, &dstString, &filelen ) );
@@ -95,7 +95,7 @@ TEST_CASE( "md5checksum" )
 
     SECTION( "no digest buffer" )
     {
-        size_t                                                 filelen = 1;
+        size_t                                                  filelen = 1;
         Kit::Text::FString<Kit::Checksum::Md5::eDIGEST_LEN * 2> dstString( "bob" );
 
         REQUIRE( calcMd5Checksum( "testinput.txt", nullptr, &dstString, &filelen ) == false );

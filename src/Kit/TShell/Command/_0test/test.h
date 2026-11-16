@@ -16,6 +16,6 @@
 #include "Kit/TShell/ICommand.h"
 
 extern Kit::Container::OrderedList<Kit::TShell::ICommand> g_commandList;
-extern void shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd );
+extern void                                               shell_test( Kit::Io::IInput& infd, Kit::Io::IOutput& outfd );
 
 #endif  // end header latch

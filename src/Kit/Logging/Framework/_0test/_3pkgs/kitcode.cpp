@@ -12,7 +12,7 @@
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/Container/RingBufferMPAllocate.h"  // Only needed for test access to log queue
-#include "Kit/Logging/Framework/EntryData.h"   // Only needed for test access to log queue
+#include "Kit/Logging/Framework/EntryData.h"     // Only needed for test access to log queue
 
 using namespace Kit::Logging::Pkg;
 using namespace Kit::Logging::Framework;
@@ -42,7 +42,7 @@ TEST_CASE( "Kit" )
         REQUIRE( entry.m_messageId == SystemMsgId::SHUTDOWN );
 
         float pi = 3.14159f;
-        result = KIT_LOGGING_LOG_DRIVER( ClassificationId::EVENT, DriverMsgId::START_ERR, "EVENT 1-1 classification mapping --> mapped to EVENT. pi=%f", pi );
+        result   = KIT_LOGGING_LOG_DRIVER( ClassificationId::EVENT, DriverMsgId::START_ERR, "EVENT 1-1 classification mapping --> mapped to EVENT. pi=%f", pi );
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( g_logFifo.getNumItems() == 1u );
         REQUIRE( g_logFifo.remove( entry ) );

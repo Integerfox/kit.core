@@ -25,10 +25,10 @@ using namespace Kit::Framing;
 TEST_CASE( "StringSource" )
 {
     ShutdownUnitTesting::clearAndUseCounter();
-    const char*                           testString = "Hello Kitty!";
-    StringSource                          uut( testString);
-    char                                  buffer[14];
-    Kit::Type::SSize_T                    bytesRead;
+    const char*        testString = "Hello Kitty!";
+    StringSource       uut( testString );
+    char               buffer[14];
+    Kit::Type::SSize_T bytesRead;
 
     REQUIRE( uut.read( buffer, 5, bytesRead ) == true );
     REQUIRE( bytesRead == 5 );

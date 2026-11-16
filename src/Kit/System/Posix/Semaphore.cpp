@@ -18,8 +18,6 @@ namespace Kit {
 namespace System {
 
 
-
-
 //////////////////////////////////////////////////
 Semaphore::Semaphore( unsigned initialCount ) noexcept
 {
@@ -59,6 +57,6 @@ bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
     return Posix::semTimedWait_( m_sema, timeout );
 }
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

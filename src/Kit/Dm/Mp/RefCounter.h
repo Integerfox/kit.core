@@ -115,7 +115,7 @@ protected:
     /// Helper method for only generating change notification on certain transitions
     void updateAndCheckForChangeNotification( uint32_t newValue, ChangeNotice_T chgNotice );
 
-private:
+protected:
     /// write() is not accessible - use reset(), increment(), or decrement() instead
     using PrimitiveType<uint32_t, RefCounter>::write;
 };

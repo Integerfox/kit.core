@@ -32,7 +32,7 @@ void busyWait( uint32_t waitTimeMs ) noexcept
 
 uint32_t getElapsedTimeMs( void ) noexcept
 {
-    return  (uint32_t)( to_ms_since_boot( get_absolute_time() ) );
+    return (uint32_t)( to_ms_since_boot( get_absolute_time() ) );
 }
 
 }  // end namespaces

@@ -13,6 +13,7 @@
 #include "catch2/catch_test_macros.hpp"
 #include "common.h"
 #include "Kit/Dm/ModelDatabase.h"
+#include "Kit/_support/testing/helpers.h"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -114,13 +115,10 @@ TEST_CASE( "mvc" )
     // Shutdown threads
     t1Mbox_.pleaseStop();
     t2Mbox_.pleaseStop();
-    Kit::System::sleep( 100 );  // allow time for threads to stop
-    REQUIRE( t1->isActive() == false );
-    REQUIRE( t2->isActive() == false );
+    REQUIRE( waitThreadInactive( t1, 5000 ) );
+    REQUIRE( waitThreadInactive( t2, 5000 ) );
 
     Kit::System::Thread::destroy( *t1 );
     Kit::System::Thread::destroy( *t2 );
-    Kit::System::sleep( 100 );  // allow time for threads to stop BEFORE the runnable object goes out of scope
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
-

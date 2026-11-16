@@ -79,6 +79,9 @@ public:
 
         NOTE: ALWAYS use the getTotalSize() method for querying/determining the
               total available storage size.
+
+        NOTE: The returned number of pages is only valid while the instance is
+              started.
      */
     virtual size_t getNumPages() const noexcept = 0;
 
@@ -87,14 +90,18 @@ public:
 
         NOTE: ALWAYS use the getTotalSize() method for querying/determining the
               total available storage size.
+
+        NOTE: The returned page size is only valid while the instance is started.
      */
     virtual size_t getPageSize() const noexcept = 0;
 
     /** The method that returns the total storage size in bytes.
 
-        Note: This is canonical source of truth for the total available storage,
+        NOTE: This is canonical source of truth for the total available storage,
               i.e, if the driver instance is a 'Gang' driver instance then
               the method CAN return a different result from: getNumPages() * getPageSize()
+
+        NOTE: The returned total size is only valid while the instance is started.
      */
     virtual size_t getTotalSize() const noexcept = 0;
 

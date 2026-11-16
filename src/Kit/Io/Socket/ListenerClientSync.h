@@ -29,7 +29,7 @@ namespace Socket {
     request() method.
  */
 class ListenerClientSync : public IListenerClient,
-    public IListenerClientRequest
+                           public IListenerClientRequest
 {
 protected:
     /// Mailbox (of the server implementing the ITC request() method)
@@ -44,12 +44,10 @@ public:
 public:
     /// See Kit::Io::Socket::Listener::Client
     bool newConnection( KitIoSocketHandle_T newFd, const char* rawConnectionInfo ) noexcept override;
-
 };
 
 
-
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

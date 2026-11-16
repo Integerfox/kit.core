@@ -6,6 +6,7 @@ src/Kit/Io/Serial/_0test/_hw_echo
 # KIT Middle-ware
 src/Kit/Container
 src/Kit/Text
+src/Kit/Time < calendar.cpp
 src/Kit/Text/_mappings/_arm_gcc_rp2xxx
 src/Kit/Io
 

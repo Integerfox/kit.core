@@ -18,7 +18,7 @@ This file declares the Logging functions available to the KIT Logging Domain.
 #include "Kit/Logging/Framework/types.h"
 #include "Kit/System/printfchecker.h"
 
-// Support Conditionally compiling the Logging calls to Trace calls. 
+// Support Conditionally compiling the Logging calls to Trace calls.
 #ifndef USE_PKGZ_LOGGING_PKG_LOG_API
 // Provide default mapping configuration values if not provided by the application
 #ifndef PKGZ_LOGGING_PKG_PACKAGE_ID_MAPCFG

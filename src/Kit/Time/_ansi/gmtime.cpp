@@ -8,19 +8,19 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/Time/gmtime.h"
+#include "Kit/Time/calendar.h"
 #include "Kit/System/Assert.h"
 #include "Kit/System/Mutex.h"
 
 static Kit::System::Mutex gmtimeMutex_;
 
-struct tm* Kit::Time::gmtimeMT(const time_t *timep, struct tm *result) noexcept
+struct tm* Kit::Time::gmtimeMT( const time_t* timep, struct tm* result ) noexcept
 {
     KIT_SYSTEM_ASSERT( timep != nullptr );
     KIT_SYSTEM_ASSERT( result != nullptr );
 
-    Kit::System::Mutex::ScopeLock  criticalSection( gmtimeMutex_ );
-    struct tm* tmp = gmtime( timep );
+    Kit::System::Mutex::ScopeLock criticalSection( gmtimeMutex_ );
+    struct tm*                    tmp = gmtime( timep );
     if ( tmp != nullptr )
     {
         // Copy the result to the user provided struct tm instance

@@ -26,7 +26,7 @@ using namespace Kit::Framing;
 TEST_CASE( "StreamSource" )
 {
     ShutdownUnitTesting::clearAndUseCounter();
-    Kit::Io::Ram::InputOutputAllocate<64> src; // Must be large enough to hold the test string TWICE
+    Kit::Io::Ram::InputOutputAllocate<64> src;  // Must be large enough to hold the test string TWICE
     StreamSource                          uut( src );
     char                                  buffer[14];
     Kit::Type::SSize_T                    bytesRead;

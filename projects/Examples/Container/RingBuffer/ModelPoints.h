@@ -33,13 +33,12 @@ namespace mp {
     \b Units: count of elements
 
     \b Range: invalid  -->No items have ever been added to the Ring Buffer
-              valid    -->number of current elements in the Ring Buffer. 
+              valid    -->number of current elements in the Ring Buffer.
 
     \b Notes:
         n/a
 */
 extern Kit::Dm::Mp::Uint32 flashCodeQueueElementCount;
-
 
 
 /*---------------------------------------------------------------------------*/

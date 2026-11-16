@@ -243,7 +243,7 @@ TEST_CASE( "RingBufferMP" )
     SECTION( "Block Operations#2" )
     {
         MyRingBuffer uut( mpElemCount_ );
-        
+
         // Buffer empty
         uint64_t items[NUM_ELEMENTS] = { 10, 20, 30, 40, 50 };
         uint64_t item                = 0;
@@ -282,7 +282,7 @@ TEST_CASE( "RingBufferMP" )
         REQUIRE( dstPtr != nullptr );
         REQUIRE( numFlatItems == NUM_ITEMS_XFER );
         memcpy( dstPtr, newItems, NUM_ITEMS_XFER * sizeof( uint64_t ) );
-        uint16_t seqNum = 0;
+        uint16_t seqNum     = 0;
         uint16_t readSeqNum = 0;
         uut.addElements( NUM_ITEMS_XFER, seqNum );
         REQUIRE( uut.peekHead( peekItem ) );
@@ -293,7 +293,6 @@ TEST_CASE( "RingBufferMP" )
         REQUIRE( mpElemCount_.read( elemCount, &readSeqNum ) == true );
         REQUIRE( elemCount == 5 );
         REQUIRE( seqNum == readSeqNum );
-
     }
 
     SECTION( "Block Operations#1" )

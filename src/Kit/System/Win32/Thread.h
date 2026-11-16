@@ -45,12 +45,11 @@ public:
         NOTE: Does NOT support the application supplying the stack
               memory.
      */
-    Thread( IRunnable&   runnable,
+    Thread( IRunnable&  runnable,
             const char* name,
             int         priority      = KIT_SYSTEM_THREAD_PRIORITY_NORMAL,
             unsigned    stackSize     = 0,
-            bool        allowSimTicks = true
-    );
+            bool        allowSimTicks = true );
 
     /// Destructor
     ~Thread();
@@ -68,13 +67,13 @@ public:
 
 
 
-private:
+protected:
     /// Entry point for all newly created threads
     static void __stdcall entryPoint( void* data );
 
 
 public:
-    /** COMPONENT Scoped constructor to convert the native Win32 thread to a 
+    /** COMPONENT Scoped constructor to convert the native Win32 thread to a
         Kit Thread. THIS CONSTRUCTOR SHOULD NEVER BE USED BY THE APPLICATION!
      */
     Thread( Kit::System::IRunnable& dummyRunnable );
@@ -86,17 +85,17 @@ public:
 
 protected:
     /// The thread synchronized message semaphore.
-    Kit::System::Semaphore  m_syncSema;
+    Kit::System::Semaphore m_syncSema;
 
     /// ASCII name of the task
-    Kit::Text::FString<64>  m_name;
+    Kit::Text::FString<64> m_name;
 
     /// Priority
-    int                     m_priority;
+    int m_priority;
 };
 
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

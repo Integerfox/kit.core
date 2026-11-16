@@ -28,7 +28,7 @@ namespace PkgZ {
 namespace Logging {
 ///
 namespace Pkg {
-    
+
 /** This concrete class implements the Logging Package interface for the PkgZ test
     Package
 */

@@ -39,12 +39,12 @@ static uint32_t flashRatesMs[] = { OPTION_EXAMPLES_ITC_SYNCHRONOUS_SERVER_MIN_FL
                                    OPTION_EXAMPLES_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_MS * 4,
                                    OPTION_EXAMPLES_ITC_SYNCHRONOUS_SERVER_MIN_FLASH_RATE_MS * 8 };
 
-static int                                 exitCode_;
-static Kit::EventQueue::Server             mbox_;
+static int                                           exitCode_;
+static Kit::EventQueue::Server                       mbox_;
 static Examples::Itc::Synchronous::Server            myServer_( mbox_ );
 static Examples::Itc::Synchronous::IRateRequest::SAP serverSAP_( myServer_, mbox_ );
-static Kit::System::Semaphore              shutdownSignal_;
-static Client                              client_( mbox_, serverSAP_, flashRatesMs, sizeof( flashRatesMs ) / sizeof( flashRatesMs[0] ), shutdownSignal_ );
+static Kit::System::Semaphore                        shutdownSignal_;
+static Client                                        client_( mbox_, serverSAP_, flashRatesMs, sizeof( flashRatesMs ) / sizeof( flashRatesMs[0] ), shutdownSignal_ );
 
 //
 int runExample( unsigned numCycles ) noexcept
@@ -68,7 +68,7 @@ int runExample( unsigned numCycles ) noexcept
     KIT_SYSTEM_TRACE_MSG( SECT_, "Finished flash rate cycling" );
 
     // Close in the inverse order of the open() calls
-    client_.close();    
+    client_.close();
     myServer_.close();
 
     // Shutdown the KIT library

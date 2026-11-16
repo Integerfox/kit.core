@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include "Kit/Dm/Mp/Uint16.h"
 
-// The following are NOT used directly - but are present in case the application changes KitTimeBootCount_T type 
+// The following are NOT used directly - but are present in case the application changes KitTimeBootCount_T type
 #include "Kit/Dm/Mp/Uint8.h"
 #include "Kit/Dm/Mp/Uint32.h"
 
@@ -32,7 +32,7 @@
 #define KitTimeBootCount_T uint16_t
 #endif
 
-/** The model point type large enough to hold the boot counter type.  See 
+/** The model point type large enough to hold the boot counter type.  See
     comments for `KitTimeBootCount_T` for additional details
  */
 #ifndef KitTimeMpBootCount
@@ -60,7 +60,7 @@ namespace Time {
     NOTE: The application can override the entire implementation of this method
           by defining USE_KIT_TIME_CUSTOM_GET_BOOT_TIME in the kit_config.h file.
           In this case, the application must provide its own implementation of
-          the getBootTime() method.  Example usage for a custom getBootTime() 
+          the getBootTime() method.  Example usage for a custom getBootTime()
           method is unit testing, i.e. the test code has control of the returned
           time values.
  */

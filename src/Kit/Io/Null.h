@@ -52,7 +52,7 @@ public:
 
 public:
     /// See Kit::Io::IEos
-    bool isEos()  noexcept override;
+    bool isEos() noexcept override;
 
     /// See Kit::Io::IClose
     void close() noexcept override;

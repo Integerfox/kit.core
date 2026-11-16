@@ -14,8 +14,8 @@
 #include "Kit/Text/FString.h"
 #include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Dm/Mp/RefCounter.h"
-#include "Kit/EventQueue/Server.h"
 #include "common.h"
+#include "Kit/_support/testing/ManualEventQueue.h"
 #include <cstdint>
 #include <string.h>
 
@@ -38,14 +38,6 @@ static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstru
 static RefCounter mp_apple_( modelDb_, "APPLE" );
 static RefCounter mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 
-// Don't let the Runnable object go out of scope before its thread has actually terminated!
-static Kit::EventQueue::Server t1Mbox_;
-
-template <>
-void Viewer<RefCounter, uint32_t>::displayElement( const char* label, uint32_t& elem )
-{
-    KIT_SYSTEM_TRACE_MSG( SECT_, "%s:%" PRIu32, label, elem );
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -190,22 +182,72 @@ TEST_CASE( "RefCounter" )
     SECTION( "observer" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        uint32_t                         expectedValue = 11;
-        Viewer<Mp::RefCounter, uint32_t> viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedValue );
-        Kit::System::Thread*             t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Created Viewer thread (%p)", t1 );
+        ManualEventQueue                 eventQueue;  // No thread: the test thread runs the queue
+        Viewer<Mp::RefCounter, uint32_t> viewer( eventQueue, mp_apple_ );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
-        viewer_apple1.open();
-        mp_apple_.reset( 11 );
-        Kit::System::Thread::wait();
-        viewer_apple1.close();
+        // Attaching (with an unknown sequence number) generates a notification of the current state
+        REQUIRE( eventQueue.requestOpen( viewer ) );
+        REQUIRE( viewer.m_notificationCount == 1 );
+        REQUIRE( viewer.m_lastValid == false );
 
-        // Shutdown threads
-        t1Mbox_.pleaseStop();
-        WAIT_FOR_THREAD_TO_STOP( t1 );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Destroying Viewer thread (%p)...", t1 );
-        Kit::System::Thread::destroy( *t1 );
+        // Invalid -->valid
+        mp_apple_.reset( 11 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.m_lastValue == 11 );
+
+        // Non-zero -->non-zero transitions do NOT generate change notifications
+        mp_apple_.reset( 11 );
+        mp_apple_.increment();
+        mp_apple_.decrement( 5 );
+        mp_apple_.reset( UINT32_MAX );
+        mp_apple_.increment();  // Clamped
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+        uint32_t value = 0;
+        REQUIRE( mp_apple_.read( value ) );
+        REQUIRE( value == UINT32_MAX );
+
+        // ...unless forced
+        mp_apple_.increment( 1, Kit::Dm::ChangeNotice_T::eFORCE );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 3 );
+        REQUIRE( viewer.m_lastValue == UINT32_MAX );
+
+        // Transition to zero
+        mp_apple_.decrement( UINT32_MAX );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 4 );
+        REQUIRE( viewer.m_lastValue == 0 );
+
+        // Zero -->zero (clamped) is not a transition
+        mp_apple_.decrement();
+        mp_apple_.reset( 0 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 4 );
+
+        // Transition from zero
+        mp_apple_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
+        REQUIRE( viewer.m_lastValue == 1 );
+
+        // Valid -->invalid is a change, invalid -->invalid is not
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 6 );
+        REQUIRE( viewer.m_lastValid == false );
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 6 );
+
+        // Detached -->no change notification
+        REQUIRE( eventQueue.requestClose( viewer ) );
+        mp_apple_.reset( 11 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 6 );
     }
 
     SECTION( "toJSON-pretty" )

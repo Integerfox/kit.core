@@ -40,7 +40,7 @@ TEST_CASE( "ToString" )
         REQUIRE( result == nullptr );
         result = ToString::signedInt<int64_t>( INT64_MIN, buffer, 0, 1 );
         REQUIRE( result == nullptr );
-        result = ToString::signedInt<int64_t>( INT64_MIN, buffer, 8+1, 1 );
+        result = ToString::signedInt<int64_t>( INT64_MIN, buffer, 8 + 1, 1 );
         REQUIRE( result == nullptr );
     }
 

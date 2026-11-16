@@ -10,18 +10,18 @@
  *----------------------------------------------------------------------------*/
 /** @file
 
-    This file defines a common/generic Board Support Package (BSP) Interface that 
+    This file defines a common/generic Board Support Package (BSP) Interface that
     provides an indirect reference to a concrete BSP (See the LHeader Pattern).
 
-    Note: Many of the common interfaces are defined as C preprocessor macros - 
-    this provides the maximum flexibility in implementation for a concrete BSP.  
-    Only functions that 'should be' or need to be true function calls are 
+    Note: Many of the common interfaces are defined as C preprocessor macros -
+    this provides the maximum flexibility in implementation for a concrete BSP.
+    Only functions that 'should be' or need to be true function calls are
     defined in this class.
  */
 
 
 #include "kit_config.h"
-#include "kit_map.h"        // Provides the concrete BSP instance/header files/interface mappings
+#include "kit_map.h"  // Provides the concrete BSP instance/header files/interface mappings
 
 // clang-format off
 

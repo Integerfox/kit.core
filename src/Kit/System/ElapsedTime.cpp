@@ -6,7 +6,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     This file provides the implementation for the "realTime" elapsed time
     interface.  Typically only "simulator platforms" (e.g. Linux) implement
@@ -68,6 +68,6 @@ uint32_t ElapsedTime::millisecondsInRealTime() noexcept
     return KitSystemElapsedTime_getTimeInMilliseconds() - startMsec_;
 }
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

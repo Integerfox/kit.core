@@ -188,6 +188,6 @@ TEST_CASE( "FString" )
         s9 += (unsigned long)81000000;
         REQUIRE( s9 == "****8100" );
     }
-    
+
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

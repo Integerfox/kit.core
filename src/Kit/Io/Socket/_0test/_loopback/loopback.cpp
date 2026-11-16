@@ -194,8 +194,8 @@ TEST_CASE( "loopback" )
     KIT_SYSTEM_TRACE_MSG( SECT_, "Listening on port %d ...", PORT_NUM_ );
     Kit::System::sleep( 100 );
 
-    // Connect.  
-    // NOTE: Depending on the Host machine - Connector::establish() may take several 
+    // Connect.
+    // NOTE: Depending on the Host machine - Connector::establish() may take several
     //       seconds as it iterates through all of the network adapters/IPv4/IPv6/etc.
     KitIoSocketHandle_T clientFd;
     REQUIRE( Connector::establish( "localhost", PORT_NUM_ + 1, clientFd ) != Connector::eSUCCESS );

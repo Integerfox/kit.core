@@ -13,7 +13,7 @@
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 
 
-/// 
+///
 using namespace Kit::Type;
 using namespace Kit::Text;
 using namespace Kit::System;
@@ -28,8 +28,8 @@ TEST_CASE( "guid" )
     ShutdownUnitTesting::clearAndUseCounter();
 
     Kit::Text::FString<KIT_TYPE_GUID_MAX_FORMATTED_WITH_BRACES_LENGTH> stringBuffer;
-    Guid_T guid ={{{ 0x12, 0x3e, 0x45, 0x67, 0xe8, 0x9b, 0x12, 0xd3, 0xa4, 0x56, 0x42, 0x66, 0x14, 0x17, 0x40, 0x00 }}};
-    bool result = guid.toString( stringBuffer );
+    Guid_T                                                             guid   = { { { 0x12, 0x3e, 0x45, 0x67, 0xe8, 0x9b, 0x12, 0xd3, 0xa4, 0x56, 0x42, 0x66, 0x14, 0x17, 0x40, 0x00 } } };
+    bool                                                               result = guid.toString( stringBuffer );
     REQUIRE( result == true );
     REQUIRE( stringBuffer == "123e4567-e89b-12d3-a456-426614174000" );
     result = guid.toString( stringBuffer, true );

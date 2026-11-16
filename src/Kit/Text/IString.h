@@ -392,7 +392,7 @@ public:
     /** Returns a "writable" pointer to the string's internal storage.
         The caller is RESPONSIBLE for insuring that the string is
         left in a valid state - that is the string is NULL terminated
-        and has NOT exceeded the 'maxAllowedLength'. The 'maxAllowedLength' 
+        and has NOT exceeded the 'maxAllowedLength'. The 'maxAllowedLength'
         value is same value that is returned by the maxLength() method.
 
         The pointer and length have a VERY LIMITED life span - the values become
@@ -411,12 +411,12 @@ public:
 public:
     /// Default constructor
     IString() noexcept = default;
-    
+
     /// Delete move constructor to prevent moving
-    IString(IString&&) = delete;
-    
+    IString( IString&& ) = delete;
+
     /// Delete move assignment operator
-    IString& operator=(IString&&) = delete;
+    IString& operator=( IString&& ) = delete;
 };
 
 }  // end namespaces

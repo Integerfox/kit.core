@@ -23,14 +23,14 @@ namespace Dm {
     Model Points.
 
     Usage:
-        class MyClass 
+        class MyClass
         {
             ObserverCallback<Kit::Dm::Mp::Uint32> m_sub1;
 
             void onM1(Kit::Dm::Mp::Uint32& mp, Kit::Dm::IObserver& sub) { ... }
 
             MyClass(Kit::EventQueue::IChangeNotification& eventQueServer)
-            : m_sub1(eventQueServer) 
+            : m_sub1(eventQueServer)
             {
                 m_sub1.setCallback<MyClass, &MyClass::onM1>(this);
             }
@@ -112,6 +112,6 @@ protected:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

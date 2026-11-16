@@ -47,7 +47,7 @@ public:
 
 public:
     /// Removes the first item in the list.  Returns nullptr if the list is empty.
-    EXT_ITEM* get() noexcept { return static_cast<EXT_ITEM*>(DListBase::getFirst()); }
+    EXT_ITEM* get() noexcept { return static_cast<EXT_ITEM*>( DListBase::getFirst() ); }
 
     /// Adds the item as the last item in the list
     void put( EXT_ITEM& item ) noexcept { DListBase::putLast( item ); }
@@ -55,18 +55,18 @@ public:
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    EXT_ITEM* head() const noexcept { return static_cast<EXT_ITEM*>(DListBase::first()); }
+    EXT_ITEM* head() const noexcept { return static_cast<EXT_ITEM*>( DListBase::first() ); }
 
     /** Return a pointer to the last item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    EXT_ITEM* tail() const noexcept { return static_cast<EXT_ITEM*>(DListBase::last()); }
+    EXT_ITEM* tail() const noexcept { return static_cast<EXT_ITEM*>( DListBase::last() ); }
 
 public:
     /** Removes the top element from stack and return a pointer to it as a
         result. Returns nullptr, if the stack is empty
      */
-    EXT_ITEM* pop() noexcept { return static_cast<EXT_ITEM*>(DListBase::getFirst()); }
+    EXT_ITEM* pop() noexcept { return static_cast<EXT_ITEM*>( DListBase::getFirst() ); }
 
     /// Adds the EXT_ITEM item to top of the stack.
     void push( EXT_ITEM& item ) noexcept { DListBase::putFirst( item ); }
@@ -74,18 +74,18 @@ public:
     /** Return a pointer to the top EXT_ITEM item in the stack. The returned item
         remains in the queue.  Returns nullptr if the stack is empty.
      */
-    EXT_ITEM* top() const noexcept { return static_cast<EXT_ITEM*>(DListBase::first()); }
+    EXT_ITEM* top() const noexcept { return static_cast<EXT_ITEM*>( DListBase::first() ); }
 
 public:
     /** Removes the first item in the list.  Returns nullptr if the list
         is empty.
      */
-    EXT_ITEM* getFirst() noexcept { return static_cast<EXT_ITEM*>(DListBase::getFirst()); }
+    EXT_ITEM* getFirst() noexcept { return static_cast<EXT_ITEM*>( DListBase::getFirst() ); }
 
     /** Removes the last item in the list.  Returns nullptr if the list
         is empty.
      */
-    EXT_ITEM* getLast() noexcept { return static_cast<EXT_ITEM*>(DListBase::getLast()); }
+    EXT_ITEM* getLast() noexcept { return static_cast<EXT_ITEM*>( DListBase::getLast() ); }
 
     /// Adds the item as the first item in the list.
     void putFirst( EXT_ITEM& item ) noexcept { DListBase::putFirst( item ); }
@@ -117,24 +117,24 @@ public:
     /** Return a pointer to the first item in the list. The returned item
         remains in the list.  Returns nullptr if the list is empty.
      */
-    EXT_ITEM* first() const noexcept { return static_cast<EXT_ITEM*>(DListBase::first()); }
+    EXT_ITEM* first() const noexcept { return static_cast<EXT_ITEM*>( DListBase::first() ); }
 
     /** Return a pointer to the last item in the list. The returned item remains
         in the list.  Returns nullptr if the list is empty.
      */
-    EXT_ITEM* last() const noexcept { return static_cast<EXT_ITEM*>(DListBase::last()); }
+    EXT_ITEM* last() const noexcept { return static_cast<EXT_ITEM*>( DListBase::last() ); }
 
     /** Return a pointer to the item after the "item". Both items remain in
         the list.  Returns nullptr when the end-of-list is reached.
      */
-    EXT_ITEM* next( const EXT_ITEM& item ) const noexcept { return static_cast<EXT_ITEM*>(DListBase::next( item )); }
+    EXT_ITEM* next( const EXT_ITEM& item ) const noexcept { return static_cast<EXT_ITEM*>( DListBase::next( item ) ); }
 
     /** Return a pointer to the item before the "item". Both items remain in
         the list.  Returns nullptr when the front-of-list is reached.
      */
-    EXT_ITEM* previous( const EXT_ITEM& item ) const noexcept { return static_cast<EXT_ITEM*>(DListBase::previous( item )); }
+    EXT_ITEM* previous( const EXT_ITEM& item ) const noexcept { return static_cast<EXT_ITEM*>( DListBase::previous( item ) ); }
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Containers can not be copied!
     DList( const DList<EXT_ITEM>& m ) = delete;
 

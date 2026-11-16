@@ -18,7 +18,7 @@ namespace System {
 //////////////////////////////////////////////////
 bool Semaphore::timedWait( uint32_t timeout ) noexcept
 {
-    DWORD result = WaitForSingleObject( m_sema, (DWORD) timeout );
+    DWORD result = WaitForSingleObject( m_sema, (DWORD)timeout );
     return result == WAIT_OBJECT_0 ? true : false;
 }
 
@@ -27,6 +27,6 @@ void Semaphore::wait() noexcept
     WaitForSingleObject( m_sema, INFINITE );
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

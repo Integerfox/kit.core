@@ -33,7 +33,7 @@
 
 /// Number of 'fill cycles' to perform
 #ifndef OPTION_NUM_FILL_CYCLES
-#define OPTION_NUM_FILL_CYCLES UINT_MAX // No limit on the number of fill cycles
+#define OPTION_NUM_FILL_CYCLES UINT_MAX  // No limit on the number of fill cycles
 #endif
 
 #define SECT_ "main"
@@ -54,7 +54,7 @@ static Kit::System::Semaphore waitForShutdown_;
 static int                    exitCode_;
 
 // Ring buffer (add '1' to the raw element count to account for the Ring Buffer 'empty' vs 'full' state ambiguity)
-static Kit::Container::RingBufferMPAllocate<FlashCode_T, OPTION_FLASHCODE_QUEUE_MAX_ITEMS+1> flashCodeQueue( mp::flashCodeQueueElementCount );
+static Kit::Container::RingBufferMPAllocate<FlashCode_T, OPTION_FLASHCODE_QUEUE_MAX_ITEMS + 1> flashCodeQueue( mp::flashCodeQueueElementCount );
 
 //
 static LedServer ledServer_( mboxLedServer_, flashCodeQueue );

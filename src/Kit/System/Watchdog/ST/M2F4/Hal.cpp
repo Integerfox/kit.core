@@ -6,7 +6,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     Hardware Abstraction Layer (HAL) implementation for STM32F4 Independent
     Watchdog (IWDG) functionality.
@@ -29,7 +29,7 @@
     This defines the maximum time the watchdog can go without being refreshed
     before triggering a system reset. The supervisor must kick the watchdog
     more frequently than this timeout.
-    
+
     Calculation:
     - LSI frequency: ~32 kHz (typically 32000 Hz)
     - Prescaler: 32
@@ -88,7 +88,7 @@ bool Kit_System_Watchdog_hal_enable_wdog( void )
     }
 
     // Configure IWDG
-    iwdgHandle_.Instance  = IWDG;
+    iwdgHandle_.Instance       = IWDG;
     iwdgHandle_.Init.Prescaler = WATCHDOG_PRESCALER;
     iwdgHandle_.Init.Reload    = WATCHDOG_RELOAD_VALUE;
 
@@ -116,7 +116,7 @@ void Kit_System_Watchdog_hal_trip_wdog( void )
     // To trip the watchdog, we simply stop refreshing it.
     // The IWDG will timeout and reset the MCU.
     // We enter an infinite loop to ensure we don't accidentally refresh it.
-    
+
     // Disable interrupts to prevent any other code from running
     __disable_irq();
 

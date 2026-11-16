@@ -27,6 +27,6 @@ int Shell::execute( const char* cmdstring, bool noEchoStdOut, bool noEchoStdErr 
     return -1;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

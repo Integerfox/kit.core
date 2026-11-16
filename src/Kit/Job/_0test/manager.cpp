@@ -17,6 +17,7 @@
 #include "Kit/Container/OrderedList.h"
 #include "Kit/System/Timer.h"
 #include "Kit/System/Api.h"
+#include "Kit/_support/testing/ManualEventQueue.h"
 
 ///
 using namespace Kit::Job;
@@ -423,36 +424,68 @@ TEST_CASE( "Manager" )
         uut.close();
     }
 
-    SECTION( "IContext - completed() self-terminates a running job" )
-    {
-        SelfCompletingJob selfJob( jobList, "self-job" );
-        uut.open();
-
-        char args[] = "";
-        REQUIRE( uut.startJob( "self-job", args ) == true );
-        bool running = uut.isJobRunning( "self-job" );
-        REQUIRE( running == true );
-
-        // Wait for the job to complete itself
-        Kit::System::sleep( static_cast<uint32_t>( TIMER_MS * 1.5 ) );
-
-        running = uut.isJobRunning( "self-job" );
-        REQUIRE( running == false );
-
-        // Verify that no jobs are running
-        unsigned        numFound = 0;
-        Kit::Job::IJob* runningJobs[4];
-        REQUIRE( uut.getRunningJobs( runningJobs, 4, numFound ) == true );
-        REQUIRE( numFound == 0 );
-        REQUIRE( uut.lookUpJob( "self-job" ) == &selfJob );
-
-        uut.close();
-    }
-
-
     // Shutdown threads
     uutEventLoop.pleaseStop();
     Kit::System::Thread::destroy( *testThread );
 
+    REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// The Manager's event queue is run by the test thread (no event-queue thread),
+// i.e. the Job's software timer runs on the queue's virtual clock.  Note: the
+// Manager's synchronous IManager methods can NOT be used (there is no thread to
+// process the messages) - the IManagerRequest messages are posted instead.
+static bool isJobRunning( ManualEventQueue& eventQueue, Manager& uut, const char* jobName )
+{
+    IManagerRequest::JobRunningPayload payload( jobName );
+    IManagerRequest::JobRunningMsg     msg( uut, payload, eventQueue.nullReturnHandler() );
+    REQUIRE( eventQueue.postAndRun( msg ) );
+    return payload.running;
+}
+
+TEST_CASE( "Manager - IContext completed() self-terminates a running job" )
+{
+    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
+
+    Kit::Container::OrderedList<IJob> jobList;
+    SelfCompletingJob                 selfJob( jobList, "self-job" );
+    ManualEventQueue                  eventQueue;
+    Manager                           uut( eventQueue, jobList );
+    REQUIRE( eventQueue.requestOpen( uut ) );
+
+    char                             args[] = "";
+    IManagerRequest::StartJobPayload startPayload( "self-job", args );
+    IManagerRequest::StartJobMsg     startMsg( uut, startPayload, eventQueue.nullReturnHandler() );
+    REQUIRE( eventQueue.postAndRun( startMsg ) );
+    REQUIRE( startPayload.success );
+    REQUIRE( isJobRunning( eventQueue, uut, "self-job" ) );
+
+    // The job's timer has NOT expired -->the job is still running
+    REQUIRE( eventQueue.advanceTime( TIMER_MS - 1 ) );
+    REQUIRE( isJobRunning( eventQueue, uut, "self-job" ) );
+
+    // The job's timer expires -->the job stops itself
+    REQUIRE( eventQueue.advanceTime( 1 ) );
+    REQUIRE( isJobRunning( eventQueue, uut, "self-job" ) == false );
+
+    // Verify that no jobs are running
+    Kit::Job::IJob*                     runningJobs[4];
+    IManagerRequest::RunningJobsPayload runningPayload( runningJobs, 4 );
+    IManagerRequest::GetRunningJobsMsg  runningMsg( uut, runningPayload, eventQueue.nullReturnHandler() );
+    REQUIRE( eventQueue.postAndRun( runningMsg ) );
+    REQUIRE( runningPayload.success );
+    REQUIRE( runningPayload.numElements == 0 );
+
+    IManagerRequest::LookupJobPayload lookupPayload( "self-job" );
+    IManagerRequest::LookupJobMsg     lookupMsg( uut, lookupPayload, eventQueue.nullReturnHandler() );
+    REQUIRE( eventQueue.postAndRun( lookupMsg ) );
+    REQUIRE( lookupPayload.foundInstance == &selfJob );
+
+    // Nothing else happens, e.g. the stopped job's timer does not fire again
+    REQUIRE( eventQueue.advanceTime( 2 * TIMER_MS ) );
+    REQUIRE( isJobRunning( eventQueue, uut, "self-job" ) == false );
+
+    REQUIRE( eventQueue.requestClose( uut ) );
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

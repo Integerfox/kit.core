@@ -92,6 +92,6 @@ void IStartupHook::notifyStartupClients() noexcept
     }
 }
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

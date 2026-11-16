@@ -8,7 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
 This file declares the Logging functions available to the FOO Logging Domain.
 
@@ -25,7 +25,7 @@ This file declares the Logging functions available to the FOO Logging Domain.
 // NOTE: Since this an "application" -->the use of logging is or is not a requirement, i.e. its not an optional thingy
 
 /// This method generates a UI Sub-system log entry. See logfUi() for details
-#define FOO_LOGGING_LOG_UI( classificationId, messageId, ... )       ::Foo::Logging::Pkg::logfUi( classificationId, messageId, __VA_ARGS__ )
+#define FOO_LOGGING_LOG_UI( classificationId, messageId, ... ) ::Foo::Logging::Pkg::logfUi( classificationId, messageId, __VA_ARGS__ )
 
 /// This method generates a DATABASE Sub-system log entry. See logfDatabase() for details
 #define FOO_LOGGING_LOG_DATABASE( classificationId, messageId, ... ) ::Foo::Logging::Pkg::logfDatabase( classificationId, messageId, __VA_ARGS__ )
@@ -43,7 +43,7 @@ namespace Pkg {
 
 /*---------------------------------------------------------------------------*/
 /// This method generates a UI Sub-system log entry
-KIT_SYSTEM_PRINTF_CHECKER(3, 4)
+KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
 inline Kit::Logging::Framework::LogResult_T logfUi( ClassificationId catId, UiMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
     va_list ap;
@@ -54,7 +54,7 @@ inline Kit::Logging::Framework::LogResult_T logfUi( ClassificationId catId, UiMs
 }
 
 /// This method generates a DATABASE Sub-system log entry
-KIT_SYSTEM_PRINTF_CHECKER(3, 4)
+KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
 inline Kit::Logging::Framework::LogResult_T logfDatabase( ClassificationId catId, DatabaseMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
     va_list ap;
@@ -65,7 +65,7 @@ inline Kit::Logging::Framework::LogResult_T logfDatabase( ClassificationId catId
 }
 
 /// This method generates a API Sub-system log entry
-KIT_SYSTEM_PRINTF_CHECKER(3, 4)
+KIT_SYSTEM_PRINTF_CHECKER( 3, 4 )
 inline Kit::Logging::Framework::LogResult_T logfApi( ClassificationId catId, ApiMsgId msgId, const char* msgTextFormat, ... ) noexcept
 {
     va_list ap;
@@ -75,7 +75,7 @@ inline Kit::Logging::Framework::LogResult_T logfApi( ClassificationId catId, Api
     return result;
 }
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

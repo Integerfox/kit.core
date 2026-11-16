@@ -5,6 +5,7 @@ src/Kit/System/_assert
 
 src/Kit/Container
 src/Kit/Text
+src/Kit/Time < calendar.cpp
 src/Kit/System/_trace
 src/Kit/System/_trace/_stdout
 src/Kit/Io

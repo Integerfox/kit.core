@@ -136,7 +136,7 @@ public:
     /// See Kit::Dm::Point.
     bool fromJSON_( JsonVariant& src, LockRequest_T lockRequest, uint16_t& retSequenceNumber, Kit::Text::IString* errorMsg ) noexcept override
     {
-        
+
         // Check for object
         if ( src.is<JsonObject>() == false )
         {

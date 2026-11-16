@@ -16,13 +16,13 @@ namespace Kit {
 namespace Io {
 
 /////////////////////
-    Null::Null() noexcept
+Null::Null() noexcept
     : m_opened( true )
 {
 }
 
 /////////////////////
-bool Null::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept 
+bool Null::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& bytesRead ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 
@@ -31,12 +31,12 @@ bool Null::read( void* buffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T& 
 }
 
 /// See Kit::Io::IInput
-bool Null::available() noexcept 
+bool Null::available() noexcept
 {
     return false;
 }
 
-bool Null::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept 
+bool Null::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten ) noexcept
 {
     KIT_SYSTEM_ASSERT( buffer != nullptr );
 
@@ -44,20 +44,20 @@ bool Null::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SS
     return m_opened;
 }
 
-void Null::flush() noexcept 
+void Null::flush() noexcept
 {
 }
 
-bool Null::isEos() noexcept 
+bool Null::isEos() noexcept
 {
     return !m_opened;
 }
 
-void Null::close() noexcept 
+void Null::close() noexcept
 {
     m_opened = false;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

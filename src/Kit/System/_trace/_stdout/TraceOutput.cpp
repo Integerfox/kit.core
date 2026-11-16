@@ -11,7 +11,7 @@
 #include "Kit/Io/Stdio/StdOut.h"
 
 
-/// 
+///
 using namespace Kit::System;
 
 ///

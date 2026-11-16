@@ -74,7 +74,7 @@ protected:
     IString& m_myString;
 
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Container Items should not be copied!
     StringItem( const StringItem& m ) noexcept = delete;
 

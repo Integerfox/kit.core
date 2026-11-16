@@ -91,7 +91,7 @@ bool System::exists( const char* fsEntryName ) noexcept
     return false;
 }
 
- bool System::isFile( const char* fsEntryName ) noexcept
+bool System::isFile( const char* fsEntryName ) noexcept
 {
     System::Info_T entryInfo;
     if ( System::getInfo( fsEntryName, entryInfo ) )

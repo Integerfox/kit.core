@@ -32,7 +32,7 @@ public:
         'bytesRead'. Returns true if successful, false if an error was encountered.
 
         NOTE: The 'blockIfUnavailable' argument controls the behavior of the read
-              operation when no data is currently available.  When set to true, 
+              operation when no data is currently available.  When set to true,
               the read operation will block until at least one byte is available.
               When set to false, the read operation will return immediately with
               bytesRead set to zero.

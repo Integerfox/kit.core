@@ -40,7 +40,7 @@ void Md5::accumulate( const void* bytes, unsigned numbytes ) noexcept
     md5_append( &m_state, (const md5_byte_t*)bytes, numbytes );
 }
 
-bool Md5::finalize( void* destBuffer, unsigned destBufferSize  ) noexcept
+bool Md5::finalize( void* destBuffer, unsigned destBufferSize ) noexcept
 {
     if ( destBufferSize < eDIGEST_LEN || destBuffer == nullptr )
     {
@@ -53,6 +53,6 @@ bool Md5::finalize( void* destBuffer, unsigned destBufferSize  ) noexcept
     return true;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

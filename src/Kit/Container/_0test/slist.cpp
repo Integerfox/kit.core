@@ -8,20 +8,20 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "catch2/catch_test_macros.hpp"   
-#include "Kit/Container/Item.h"    
-#include "Kit/Container/SList.h"    
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/Container/Item.h"
+#include "Kit/Container/SList.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include <string.h>
 
 
-/// 
+///
 using namespace Kit::Container;
 using namespace Kit::System;
 
 
 /// Short hand for brute forcing string compares when not using std::string
-#define STRING_EQ(a,b)  strcmp(a,b) == 0
+#define STRING_EQ( a, b ) strcmp( a, b ) == 0
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +33,8 @@ class MyItem : public ListItem
 {
 public:
     ///
-    MyItem( const char* name ) : m_name( name ) {};
+    MyItem( const char* name )
+        : m_name( name ) {};
     ///
     const char* m_name;
 };
@@ -43,7 +44,7 @@ class ItemAutoAdd : public ListItem
 public:
     ///
     ItemAutoAdd( const char* name, SList<ItemAutoAdd>& list )
-        :m_name( name )
+        : m_name( name )
     {
         list.put( *this );
     }
@@ -52,14 +53,13 @@ public:
     const char* m_name;
 };
 
-}; // end namespace
+};  // end namespace
 
 
 ////////////////////////////////////////////////////////////////////////////////
 static SList<ItemAutoAdd> emptylist_( "static constructor" );
 static SList<ItemAutoAdd> staticlist_( "static constructor" );
 static ItemAutoAdd        staticItem_( "staticItem", staticlist_ );
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -123,7 +123,7 @@ TEST_CASE( "SList" )
         bar.clearTheList();
         REQUIRE( bar.head() == nullptr );
         REQUIRE( bar.tail() == nullptr );
-        REQUIRE( foo.next( bob) == nullptr );
+        REQUIRE( foo.next( bob ) == nullptr );
         REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 1u );
     }
 

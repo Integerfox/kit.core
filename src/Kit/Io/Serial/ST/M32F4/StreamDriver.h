@@ -141,7 +141,7 @@ protected:
      */
     static void su_rxErrorCompleteCallback( UART_HandleTypeDef* huart ) noexcept;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->Driver can not be copied!
     StreamDriver( const StreamDriver& m ) = delete;
 

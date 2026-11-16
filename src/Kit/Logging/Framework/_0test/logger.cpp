@@ -339,7 +339,7 @@ TEST_CASE( "Logger" )
         REQUIRE( entry.m_packageId == OVERFLOW_PACKAGE_ID );
         REQUIRE( entry.m_subSystemId == OVERFLOW_SUBSYSTEM_ID );
         REQUIRE( entry.m_messageId == OVERFLOW_MESSAGE_ID );
-#define OVERFLOW_TEXT_PREFIX "QUEUE_OVERFLOW! Num entries lost=1 (0:1970-01-01 00:00:0"
+#define OVERFLOW_TEXT_PREFIX "QUEUE_OVERFLOW! Num entries lost=1 (0:00 00:00:0"  // Elapsed time: the default timestamp format of this build
         REQUIRE( strncmp( entry.m_infoText, OVERFLOW_TEXT_PREFIX, strlen( OVERFLOW_TEXT_PREFIX ) ) == 0 );
         REQUIRE( entry.m_timestamp >= now );
         REQUIRE( logApp_.m_logFifo.remove( entry ) );

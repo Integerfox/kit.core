@@ -24,13 +24,14 @@ namespace System {
 static int shutdown_application_( int exit_code )
 {
     watchdog_enable( 1, 1 );
-    while ( 1 );
-    return exit_code;   // make compiler happy
+    while ( 1 )
+        ;
+    return exit_code;  // make compiler happy
 }
 
 int Shutdown::success() noexcept
 {
-    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN , "Orderly shutdown initiated..." );
+    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN, "Orderly shutdown initiated..." );
     return shutdown_application_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }
 
@@ -39,6 +40,6 @@ int Shutdown::failure( int exit_code ) noexcept
     return shutdown_application_( notifyShutdownHandlers( exit_code ) );
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

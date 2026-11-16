@@ -23,12 +23,12 @@ using namespace Kit::Logging::Framework;
 #define SECT_ "_0test"
 
 
-// Create the Application's Logging instance for the tests. 
+// Create the Application's Logging instance for the tests.
 // Note: Not static so it can be shared with other tests
-static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
-static Kit::Dm::Mp::Uint32    mp_logFifoCount_( modelDb_, "logfifo3pkgs" );
-Kit::Container::RingBufferMPAllocate<EntryData_T, 5> g_logFifo( mp_logFifoCount_, false ); // IMPORTANT: Must set the initialize-memory flag to FALSE since the EntryData_T type has a non-trivial constructor
-Foo::Logging::App::Foo g_logApp( g_logFifo );
+static Kit::Dm::ModelDatabase                        modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static Kit::Dm::Mp::Uint32                           mp_logFifoCount_( modelDb_, "logfifo3pkgs" );
+Kit::Container::RingBufferMPAllocate<EntryData_T, 5> g_logFifo( mp_logFifoCount_, false );  // IMPORTANT: Must set the initialize-memory flag to FALSE since the EntryData_T type has a non-trivial constructor
+Foo::Logging::App::Foo                               g_logApp( g_logFifo );
 
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "App" )
@@ -46,7 +46,7 @@ TEST_CASE( "App" )
         REQUIRE( g_logFifo.remove( entry ) );
         REQUIRE( entry.m_classificationId == ClassificationId::WARNING );
         REQUIRE( entry.m_packageId == Foo::Logging::Pkg::Package::PACKAGE_ID );
-        REQUIRE( entry.m_subSystemId ==SubSystemId::API );
+        REQUIRE( entry.m_subSystemId == SubSystemId::API );
         REQUIRE( entry.m_messageId == ApiMsgId::AUTH_FAILED );
     }
 

@@ -14,7 +14,7 @@
 #include "Kit/Io/IInputOutput.h"
 
 // Use Blocking UART stream for the KIT console/trace output
-#ifdef USE_BSP_KIT_IO_STREAM    
+#ifdef USE_BSP_KIT_IO_STREAM
 
 #include "Kit/Io/Serial/RPi/RP2xxx/Uart/InputOutput.h"
 #include "Kit/Container/RingBufferAllocate.h"
@@ -26,7 +26,7 @@ static Kit::Io::Serial::RPi::RP2xxx::Uart::InputOutput consolefd_( txFifo_, rxFi
 
 // Global console stream object
 Kit::Io::IInputOutput& g_bspConsoleStream = consolefd_;
-    
+
 void Bsp_startConsoleStream( unsigned long baudRate,
                              unsigned      txPin,
                              unsigned      rxPin,
@@ -51,7 +51,7 @@ Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_( void ) noexcept
 static Kit::Io::Serial::RPi::RP2xxx::Stdio::Output stdioOutput_;
 
 // Global console stream object
-//Kit::Io::IInputOutput& g_bspConsoleStream = &stdioOutput_;
+// Kit::Io::IInputOutput& g_bspConsoleStream = &stdioOutput_;
 
 Kit::Io::IOutput* Kit::System::Trace::getDefaultOutputStream_( void ) noexcept
 {

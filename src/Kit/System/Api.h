@@ -8,7 +8,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     This file defines methods for initializing the KIT C++ class library
     and other startup/init actions.
@@ -62,14 +62,14 @@ bool isSchedulingEnabled() noexcept;
 /** This method causes the current thread to be suspended for
     n milliseconds.
  */
- void sleep( uint32_t milliseconds ) noexcept;
+void sleep( uint32_t milliseconds ) noexcept;
 
 /** This method is the same as sleep(), EXCEPT that is guaranteed to
     suspend in 'real time'.  Typically an application NEVER needs
     to call this method.  See the SimTick interface for additional
     details about Simulated Time.
  */
- void sleepInRealTime( uint32_t milliseconds ) noexcept;
+void sleepInRealTime( uint32_t milliseconds ) noexcept;
 
 /*----------------------------------------------------------------------------*/
 /** This method is used to temporarily suspend thread scheduling, i.e. no
@@ -98,7 +98,6 @@ void suspendScheduling() noexcept;
 void resumeScheduling() noexcept;
 
 
-
-}       // end namespaces
-}       // end namespace
+}  // end namespaces
+}  // end namespace
 #endif  // end header latch

@@ -19,7 +19,7 @@
 #define MAX_STR_LENG     1024
 #define SECT_            "_0test"
 
-#define INITIAL_VALUE    ((void*)42)
+#define INITIAL_VALUE    ( (void*)42 )
 
 ////////////////////////////////////////////////////////////////////////////////
 using namespace Kit::Dm;
@@ -40,10 +40,10 @@ TEST_CASE( "Void" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    char    string[MAX_STR_LENG + 1];
-    bool    truncated;
-    bool    valid;
-    void*   value;
+    char  string[MAX_STR_LENG + 1];
+    bool  truncated;
+    bool  valid;
+    void* value;
     mp_apple_.setInvalid();
 
     SECTION( "gets" )
@@ -69,7 +69,7 @@ TEST_CASE( "Void" )
         mp_apple_.write( (void*)2 );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
-        REQUIRE( value == (void*)2 ); 
+        REQUIRE( value == (void*)2 );
         mp_apple_.write( (void*)1 );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
@@ -107,7 +107,7 @@ TEST_CASE( "Void" )
         REQUIRE( value == (void*)0xA234 );
     }
 
-        SECTION( "fromJSON2" )
+    SECTION( "fromJSON2" )
     {
         // Start with MP in the invalid state
         mp_apple_.setInvalid();

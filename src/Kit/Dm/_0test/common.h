@@ -335,9 +335,9 @@ public:
         , m_lastValid( false )
         , m_done( false )
     {
-        m_observerMp1.setCallback<GenericViewer,&GenericViewer::mpChanged>(this);
-        m_observerMp2.setCallback<GenericViewer,&GenericViewer::mpChanged>(this);
-        m_observerMp3.setCallback<GenericViewer,&GenericViewer::mpChanged>(this);
+        m_observerMp1.setCallback<GenericViewer, &GenericViewer::mpChanged>( this );
+        m_observerMp2.setCallback<GenericViewer, &GenericViewer::mpChanged>( this );
+        m_observerMp3.setCallback<GenericViewer, &GenericViewer::mpChanged>( this );
         KIT_SYSTEM_TRACE_MSG( SECT_, "GENERIC VIEWER(%p). mp1=%s", this, mp1.getName() );
     }
 
@@ -421,7 +421,7 @@ public:
         }
     }
 
-private:
+protected:
     /// Sets 'atEndFlag' once 'mp' has reached (or passed) 'endValue'
     static void latchAtEndValue( Mp::Uint32& mp, uint32_t endValue, bool& atEndFlag ) noexcept
     {

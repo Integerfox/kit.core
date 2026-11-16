@@ -28,8 +28,9 @@ public:
     static constexpr const char* verb = "echo";
 
     /// The command usage string
-    static constexpr const char* usage = "echo [\"<text>\"]\n"
-                                         "echo - [\"<text>\"]";
+    static constexpr const char* usage =
+        "echo [\"<text>\"]\n"
+        "echo - [\"<text>\"]";
 
     /** The command detailed help string (recommended that lines do not exceed 80 chars)
                   1         2         3         4         5         6         7         8

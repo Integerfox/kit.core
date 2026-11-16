@@ -10,7 +10,7 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
- #include <string.h>
+#include <string.h>
 
 ///
 namespace Kit {
@@ -115,7 +115,7 @@ public:
     static void removeTrailingChars( char* s, const char* charsSet );
 
 
-    /** This method returns true if the character 'c' is one of character(s) 
+    /** This method returns true if the character 'c' is one of character(s)
         contained in 'charsSet'; else false is returned.
      */
     static inline bool isCharInString( const char* charsSet, const char c )
@@ -125,6 +125,6 @@ public:
 };
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

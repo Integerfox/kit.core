@@ -19,7 +19,6 @@ class IObserver;
 }
 
 
-
 ///
 namespace Kit {
 ///

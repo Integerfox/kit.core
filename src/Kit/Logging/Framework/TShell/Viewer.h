@@ -26,6 +26,12 @@ namespace TShell {
 
 /** This class implements a TShell command for View log entries stored in persistent
     storage.
+
+    An entry's timestamp is displayed using Formatter's default timestamp
+    format (see Formatter::defaultTimestampFormat), i.e. as a UTC date/time
+    ("(<bootCnt>:YYYY-MM-DD HH:MM:SS.mmm)") when
+    USE_KIT_TIME_BOOTTIME_WITH_ABSOLUTETIME is defined in kit_config.h, else
+    as elapsed time since power-up ("(<bootCnt>:DD HH:MM:SS.mmm)").
  */
 class Viewer : public Kit::TShell::Command::Base
 {

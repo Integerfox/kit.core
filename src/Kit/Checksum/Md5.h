@@ -50,7 +50,7 @@ public:
     void accumulate( const void* bytes, unsigned numbytes = 1 ) noexcept override;
 
     /// See Kit::Checksum::IHash
-     bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept override;
+    bool finalize( void* destBuffer, unsigned destBufferSize ) noexcept override;
 
     /// See Kit::Checksum::IHash
     unsigned getDigestSize() const noexcept override { return eDIGEST_LEN; }
@@ -60,6 +60,6 @@ protected:
     md5_state_t m_state;
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

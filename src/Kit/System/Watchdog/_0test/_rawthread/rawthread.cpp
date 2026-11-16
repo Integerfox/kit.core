@@ -6,14 +6,14 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     Hardware test to demonstrate raw thread failure detection.
-    
+
     This test verifies that when a raw thread gets stuck in a busy loop
     and exceeds its thread-specific watchdog timeout, the supervisor
     detects this failure and trips the MCU watchdog, causing a system reset.
-    
+
     Expected behavior:
     - First run: System starts normally, raw thread gets stuck after delay
     - Supervisor detects raw thread timeout and trips the watchdog
@@ -48,8 +48,8 @@ using namespace Kit::EventQueue;
 //------------------------------------------------------------------------------
 
 /** Hardware watchdog timeout is 1000ms (from HAL implementation).
-*/
-#define HW_WATCHDOG_TIMEOUT_MS     1000
+ */
+#define HW_WATCHDOG_TIMEOUT_MS 1000
 
 /** Supervisor thread watchdog timeout.
     Must be less than HW watchdog timeout.
@@ -70,12 +70,12 @@ using namespace Kit::EventQueue;
 /** Time to run normally before triggering the stuck condition.
     This gives the watchdog time to initialize and start running properly.
 */
-#define NORMAL_RUN_DELAY_MS        2000
+#define NORMAL_RUN_DELAY_MS 2000
 
 /** How long the raw thread will be stuck.
     This must exceed RAW_THREAD_WDOG_TIMEOUT_MS to trigger watchdog trip.
 */
-#define STUCK_DURATION_MS          ( RAW_THREAD_WDOG_TIMEOUT_MS + 500 )
+#define STUCK_DURATION_MS ( RAW_THREAD_WDOG_TIMEOUT_MS + 500 )
 
 //------------------------------------------------------------------------------
 // Raw Thread Implementation
@@ -103,8 +103,7 @@ public:
     /// Thread entry point
     void entry() noexcept override
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread starting (wdog timeout: %u ms)",
-                              (unsigned)RAW_THREAD_WDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Raw thread starting (wdog timeout: %u ms)", (unsigned)RAW_THREAD_WDOG_TIMEOUT_MS );
 
         // Start watchdog monitoring for this thread
         KIT_SYSTEM_WATCHDOG_START_RAWTHREAD( m_wdog );
@@ -124,8 +123,7 @@ public:
 
         // Now get stuck in a busy loop WITHOUT kicking the watchdog
         KIT_SYSTEM_TRACE_MSG( SECT_, "*** RAW THREAD STUCK - Entering busy loop ***" );
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Busy loop will last %u ms (thread timeout is %u ms)",
-                              STUCK_DURATION_MS, RAW_THREAD_WDOG_TIMEOUT_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Busy loop will last %u ms (thread timeout is %u ms)", STUCK_DURATION_MS, RAW_THREAD_WDOG_TIMEOUT_MS );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Supervisor should detect timeout and trip watchdog" );
 
         uint32_t startTime = ElapsedTime::milliseconds();
@@ -159,15 +157,15 @@ public:
 static RawThreadRunnable rawThreadRunnable_;
 
 /// Supervisor watchdog configuration
-static WatchedEventThread supervisorThreadWDogConfig_( 
-    SUPERVISOR_WDOG_TIMEOUT_MS, 
-    SUPERVISOR_HEALTH_CHECK_MS, 
+static WatchedEventThread supervisorThreadWDogConfig_(
+    SUPERVISOR_WDOG_TIMEOUT_MS,
+    SUPERVISOR_HEALTH_CHECK_MS,
     true );
 
 /// Supervisor event loop
-static Server supervisorEventLoop_( 
-    OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, 
-    nullptr, 
+static Server supervisorEventLoop_(
+    OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
+    nullptr,
     &supervisorThreadWDogConfig_ );
 
 //------------------------------------------------------------------------------
@@ -180,7 +178,7 @@ static Server supervisorEventLoop_(
  */
 class MainTestRunnable : public IRunnable
 {
-private:
+protected:
     bool m_wasWatchdogReset;
 
 public:
@@ -247,8 +245,7 @@ public:
             FatalError::logf( Shutdown::eFAILURE, "Failed to enable hardware watchdog" );
         }
         // Wait a bit before triggering the stuck condition
-        KIT_SYSTEM_TRACE_MSG( SECT_, "Main thread sleeping %u ms before triggering stuck condition...",
-                              NORMAL_RUN_DELAY_MS );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "Main thread sleeping %u ms before triggering stuck condition...", NORMAL_RUN_DELAY_MS );
         sleep( NORMAL_RUN_DELAY_MS );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Main thread triggering raw thread stuck condition" );
         triggerRawThreadStuck_ = true;
@@ -284,11 +281,11 @@ public:
 /** Run the raw thread stuck test.
     This function is platform independent and can be called from platform-specific
     main() implementations.
-    
+
     This creates an initial raw main thread that is NOT watched by the supervisor.
     This allows trace output to work before the scheduler starts, without requiring
     busy-wait serial driver logic.
-    
+
     @param wasWatchdogReset Flag indicating if the system was reset by watchdog
     @return True if test setup succeeded, false otherwise
  */

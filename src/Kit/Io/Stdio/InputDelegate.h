@@ -13,7 +13,6 @@
 #include "Kit/Io/IInput.h"
 
 
-
 ///
 namespace Kit {
 ///
@@ -46,7 +45,7 @@ public:
     bool available() noexcept override;
 
     /// See Kit::Io::IEos
-    bool isEos()  noexcept override;
+    bool isEos() noexcept override;
 
     /// See Kit::Io::IClose
     void close() noexcept override;
@@ -60,7 +59,7 @@ protected:
 };
 
 
-};      // end namespaces
+};  // end namespaces
 };
 };
 #endif  // end header latch

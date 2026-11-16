@@ -39,21 +39,21 @@ TEST_CASE( "Null" )
         uut.stop();
     }
 
-    SECTION( "read/write")
+    SECTION( "read/write" )
     {
         constexpr size_t numBytes = 10;
-        uint8_t srcData[numBytes];
-        uint8_t dstData[numBytes];
-        uint8_t expectedData[numBytes]; // The read() method always returns all zeros
+        uint8_t          srcData[numBytes];
+        uint8_t          dstData[numBytes];
+        uint8_t          expectedData[numBytes];  // The read() method always returns all zeros
         memset( srcData, 0xA5, numBytes );
         memset( dstData, 0xFF, numBytes );
         memset( expectedData, 0x00, numBytes );
 
         REQUIRE( uut.write( 0, srcData, numBytes ) == true );
-        REQUIRE( uut.read( 0, dstData, sizeof(dstData), numBytes ) == true );
+        REQUIRE( uut.read( 0, dstData, sizeof( dstData ), numBytes ) == true );
         REQUIRE( memcmp( expectedData, dstData, numBytes ) == 0 );
 
-        REQUIRE( uut.read( 0, dstData, sizeof(dstData), sizeof(dstData) + 1 ) == false ); 
+        REQUIRE( uut.read( 0, dstData, sizeof( dstData ), sizeof( dstData ) + 1 ) == false );
     }
 
     SECTION( "page info" )

@@ -76,9 +76,9 @@ public:
             eosFlag      = true;
             return false;
         }
-        
+
         // Success!
-        bytesWritten = static_cast<Kit::Type::SSize_T>(result);
+        bytesWritten = static_cast<Kit::Type::SSize_T>( result );
         eosFlag      = false;
         return true;
     }
@@ -138,7 +138,7 @@ public:
         }
 
         // Success!
-        bytesRead = static_cast<Kit::Type::SSize_T>(result);
+        bytesRead = static_cast<Kit::Type::SSize_T>( result );
         eosFlag   = false;
         return true;
     }

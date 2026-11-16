@@ -29,7 +29,7 @@ Pool::Pool( BlockInfo infoBlocks[],
             void*     arrayOfMemoryBlocks,
             bool      errorsAreFatal ) noexcept
     : m_blockSize( blockSize )
-    , m_fatalErrors( errorsAreFatal ) 
+    , m_fatalErrors( errorsAreFatal )
 {
     KIT_SYSTEM_ASSERT( infoBlocks != nullptr );
     KIT_SYSTEM_ASSERT( arrayOfMemoryBlocks != nullptr );

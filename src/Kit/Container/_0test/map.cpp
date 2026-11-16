@@ -8,11 +8,11 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "catch2/catch_test_macros.hpp"   
-#include "Kit/Container/MapItem.h"    
-#include "Kit/Container/SList.h"    
-#include "Kit/Container/DList.h"    
-#include "Kit/Container/Map.h"    
+#include "catch2/catch_test_macros.hpp"
+#include "Kit/Container/MapItem.h"
+#include "Kit/Container/SList.h"
+#include "Kit/Container/DList.h"
+#include "Kit/Container/Map.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "Kit/System/Trace.h"
 #include <string.h>
@@ -20,13 +20,13 @@
 
 #define SECT_ "_0test"
 
-/// 
+///
 using namespace Kit::Container;
 using namespace Kit::System;
 
 
 /// Short hand for brute forcing string compares when not using std::string
-#define STRING_EQ(a,b)  strcmp(a,b) == 0
+#define STRING_EQ( a, b ) strcmp( a, b ) == 0
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -36,40 +36,38 @@ namespace {
 
 
 class MyItemMap : public MapItem,
-    public KeyLiteralString
+                  public KeyLiteralString
 {
 public:
     ///
     MyItemMap( const char* name )
-        :KeyLiteralString( name )
+        : KeyLiteralString( name )
     {
     }
 
 public:
     ///  API from SortedItem
     const Key& getKey() const noexcept { return *this; }
-
 };
 
 void printMap( Map<MyItemMap>& map )
 {
-    KIT_SYSTEM_TRACE_MSG( SECT_,  "Map (%p)", &map );
+    KIT_SYSTEM_TRACE_MSG( SECT_, "Map (%p)", &map );
     MyItemMap* ptr = map.first();
     while ( ptr )
     {
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "  [%s]", ptr->getKeyValue() );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "  [%s]", ptr->getKeyValue() );
         ptr = map.next( *ptr );
     }
 }
 
 class ItemAutoAdd : public MapItem,
-    public KeyInteger16_T
+                    public KeyInteger16_T
 {
 public:
     ///
-    ItemAutoAdd( Map<ItemAutoAdd>& list, const char* name, int16_t keyValue=0 )
-        :KeyInteger16_T( keyValue ),
-        m_name( name )
+    ItemAutoAdd( Map<ItemAutoAdd>& list, const char* name, int16_t keyValue = 0 )
+        : KeyInteger16_T( keyValue ), m_name( name )
     {
         list.insert( *this );
     }
@@ -83,8 +81,7 @@ public:
 };
 
 
-
-}; // end namespace
+};  // end namespace
 
 ////////////////////////////////////////////////////////////////////////////////
 static Map<ItemAutoAdd> emptymap_( "static constructor" );
@@ -92,8 +89,6 @@ static Map<ItemAutoAdd> staticmap_( "static constructor" );
 static ItemAutoAdd      static1Item_A( staticmap_, "staticItemA (-2)", -2 );
 static ItemAutoAdd      static1Item_B( staticmap_, "staticItemB (6)", 6 );
 static ItemAutoAdd      static1Item_C( staticmap_, "staticItemV (-3)", -3 );
-
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -106,7 +101,7 @@ TEST_CASE( "Map" )
     MyItemMap      pear( "pear" );
     MyItemMap      plum( "plum" );
     MyItemMap*     ptr1;
-        
+
     ShutdownUnitTesting::clearAndUseCounter();
 
     SECTION( "Validate that an 'item' can be only in one Container" )
@@ -236,7 +231,7 @@ TEST_CASE( "Map" )
         printMap( map );
 
         KeyLiteralString key1( "Hello" );
-        MyItemMap* ptr1 = map.find( key1 );
+        MyItemMap*       ptr1 = map.find( key1 );
         REQUIRE( ptr1 == nullptr );
 
         KeyLiteralString key2( "orange" );
@@ -301,8 +296,7 @@ TEST_CASE( "Map" )
     }
 
 
-
-    // 
+    //
     // Verify MapItem works in a DList
     //
     SECTION( "DLIST: FIFO with MapItem" )
@@ -361,7 +355,7 @@ TEST_CASE( "Map" )
         REQUIRE( dlist.tail() == nullptr );
     }
 
-    // 
+    //
     // Verify MapItem works in a DList
     //
     SECTION( "SLIST: FIFO with MapItem" )

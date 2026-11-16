@@ -18,12 +18,12 @@
     memory - THEN define this symbol
  */
 #ifdef USE_FULL_FEATURED_HEAP
-#define rtosFree    vPortFree
+#define rtosFree vPortFree
 
 #else
 /** The default is to using a heap that does NOT support freeing memory
  */
-#define rtosFree(p)     // Ignore the delete/free call
+#define rtosFree( p )  // Ignore the delete/free call
 #endif
 
 
@@ -32,20 +32,35 @@
 ///// from libstdc++.a)
 //
 //
-void *operator new( size_t size, std::nothrow_t const& ) throw() { return pvPortMalloc(size); }
-void *operator new[]( size_t size, std::nothrow_t const& ) throw() { return pvPortMalloc(size); }
+void* operator new( size_t size, std::nothrow_t const& ) throw()
+{
+    return pvPortMalloc( size );
+}
+void* operator new[]( size_t size, std::nothrow_t const& ) throw()
+{
+    return pvPortMalloc( size );
+}
 
-void operator delete(void* p) throw() { rtosFree( p ); }
-void operator delete[]( void* p ) throw() { rtosFree( p ); }
+void operator delete( void* p ) throw()
+{
+    rtosFree( p );
+}
+void operator delete[]( void* p ) throw()
+{
+    rtosFree( p );
+}
 
 const std::nothrow_t std::nothrow;
 //
 //
-///* The function __cxa_atexit() handles the static destructors. In a bare-metal 
-//   system this function can be empty because application has no operating system 
+///* The function __cxa_atexit() handles the static destructors. In a bare-metal
+//   system this function can be empty because application has no operating system
 //   to return to, and consequently the static destructors are never called.
 //*/
-extern "C" int __cxa_atexit( void ) { return 0; }
+extern "C" int __cxa_atexit( void )
+{
+    return 0;
+}
 //
 ////extern "C" int __cxa_atexit( void* object,
 ////                             void (*destructor)(void*),
@@ -55,7 +70,11 @@ extern "C" int __cxa_atexit( void ) { return 0; }
 ////    return 0;
 ////    }
 //
-extern "C" void __cxa_pure_virtual() { while ( 1 ); }
+extern "C" void __cxa_pure_virtual()
+{
+    while ( 1 )
+        ;
+}
 
 /*
 ** Method stubs to satisfy the linker -->NOTE: C++ Streams are NOT supported by this BSP

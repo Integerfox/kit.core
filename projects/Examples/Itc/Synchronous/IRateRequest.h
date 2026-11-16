@@ -36,7 +36,7 @@ public:
      */
     struct RatePayload_T
     {
-        /** IN: The flash rate in milliseconds.  For 1Hz flash rate, this value 
+        /** IN: The flash rate in milliseconds.  For 1Hz flash rate, this value
                 would be 500ms (i.e. 500ms on, 500ms off).  The valid flash
                 rate range is [50ms, 5000ms].  Values outside of this range
                 will cause the request to fail.
@@ -49,7 +49,7 @@ public:
         bool success;
 
         /// Constructor
-        RatePayload_T( uint32_t flashRateMs = 500 ) // Default to 1Hz
+        RatePayload_T( uint32_t flashRateMs = 500 )  // Default to 1Hz
             : flashRateMs( flashRateMs )
             , success( false )
         {
@@ -68,7 +68,6 @@ public:
     ///
     virtual ~IRateRequest() = default;
 };
-
 
 
 }  // end namespaces

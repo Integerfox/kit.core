@@ -184,7 +184,7 @@ public:
         {
             KIT_SYSTEM_TRACE_MSG( SECT_, "Top of MyRunnable2::entry(%zu)", m_tlsCounter );
             m_tlsKey.set( (void*)m_tlsCounter );
-            
+
             testMutex();
             testGlobalLock();
             sleep( m_onTime_ms );

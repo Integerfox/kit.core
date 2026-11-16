@@ -13,25 +13,39 @@
 #include <ios>
 
 
-
 ///// Provide a non-exception-throwing new/delete so exception code does NOT get
 ///// linked in (i.e. -fno-exception is NOT enough to get rid of exception code
 ///// from libstdc++.a)
 //
 //
-void *operator new( size_t size, std::nothrow_t const& ) throw() { return malloc(size); }
-void *operator new[]( size_t size, std::nothrow_t const& ) throw() { return malloc(size); }
+void* operator new( size_t size, std::nothrow_t const& ) throw()
+{
+    return malloc( size );
+}
+void* operator new[]( size_t size, std::nothrow_t const& ) throw()
+{
+    return malloc( size );
+}
 
-void operator delete(void* p) throw() { free( p ); }
-void operator delete[]( void* p ) throw() { free( p ); }
+void operator delete( void* p ) throw()
+{
+    free( p );
+}
+void operator delete[]( void* p ) throw()
+{
+    free( p );
+}
 const std::nothrow_t std::nothrow;
 //
 //
-///* The function __cxa_atexit() handles the static destructors. In a bare-metal 
-//   system this function can be empty because application has no operating system 
+///* The function __cxa_atexit() handles the static destructors. In a bare-metal
+//   system this function can be empty because application has no operating system
 //   to return to, and consequently the static destructors are never called.
 //*/
-extern "C" int __cxa_atexit( void ) { return 0; }
+extern "C" int __cxa_atexit( void )
+{
+    return 0;
+}
 //
 ////extern "C" int __cxa_atexit( void* object,
 ////                             void (*destructor)(void*),
@@ -41,7 +55,11 @@ extern "C" int __cxa_atexit( void ) { return 0; }
 ////    return 0;
 ////    }
 //
-extern "C" void __cxa_pure_virtual() { while ( 1 ); }
+extern "C" void __cxa_pure_virtual()
+{
+    while ( 1 )
+        ;
+}
 
 /*
 ** Method stubs to satisfy the linker -->NOTE: C++ Streams are NOT supported by this BSP

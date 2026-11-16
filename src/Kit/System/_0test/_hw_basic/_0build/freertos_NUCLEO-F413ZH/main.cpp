@@ -36,6 +36,7 @@ int main( void )
     runtests();
 
     // I should never get here!
-    for ( ;; );
+    for ( ;; )
+        ;
     return 0;
 }

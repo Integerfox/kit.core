@@ -13,7 +13,7 @@
 #include "Kit/Io/IInputOutput.h"
 
 extern Kit::Io::IInputOutput& g_bspConsoleStream;
-extern void loopback_test( Kit::Io::IInputOutput& fd );
+extern void                   loopback_test( Kit::Io::IInputOutput& fd );
 
 /*-----------------------------------------------------------*/
 int main( void )

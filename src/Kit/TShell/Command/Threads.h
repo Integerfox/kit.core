@@ -65,7 +65,7 @@ public:
     Kit::Type::TraverserStatus item( Kit::System::Thread& nextThread ) noexcept override;
 
 protected:
-    /// Hook to allow derived classes to add additional columns to the header 
+    /// Hook to allow derived classes to add additional columns to the header
     virtual void hookHeaderTitle( Kit::Text::IString& text );
 
     /// Hook to allow derived classes to add additional columns to the thread entry

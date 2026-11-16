@@ -103,7 +103,7 @@ Kit::System::Thread* Kit::System::Thread::create( IRunnable&  runnable,
                                                   bool        allowSimTicks ) noexcept
 {
     if ( theOneAndOnlyThreadPtr_ != nullptr )
-    {   
+    {
         FatalError::logf( Shutdown::eOSAL, "Kit::System::Thread::create().  Only one BareMetal thread is allowed." );
         return nullptr;
     }

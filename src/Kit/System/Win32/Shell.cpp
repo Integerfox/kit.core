@@ -11,13 +11,13 @@
 #include "Kit/System/Shell.h"
 #include "Kit/System/Trace.h"
 #include "Kit/Text/DString.h"
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <string.h>
 
 #define MY_STDOUT_NULL_ " 1> nul"
 #define MY_STDERR_NULL_ " 2> nul"
 
-#define SECT_ "Shell"
+#define SECT_           "Shell"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -25,7 +25,7 @@ namespace System {
 
 bool Shell::isAvailable() noexcept
 {
-    return system( 0 ) != 0; // The system() method returns non-zero when a valid command interpreter/shell is found/available
+    return system( 0 ) != 0;  // The system() method returns non-zero when a valid command interpreter/shell is found/available
 }
 
 
@@ -59,6 +59,6 @@ int Shell::execute( const char* cmdstring, bool noEchoStdOut, bool noEchoStdErr 
     return system( cmd() );
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

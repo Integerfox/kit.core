@@ -34,7 +34,7 @@ class MyItem : public ExtendedListItem
 public:
     ///
     MyItem( const char* name )
-        : m_name( name ){};
+        : m_name( name ) {};
     ///
     const char* m_name;
 };

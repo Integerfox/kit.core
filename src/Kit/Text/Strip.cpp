@@ -17,16 +17,15 @@ namespace Kit {
 namespace Text {
 
 
-
 ////////////////
-const char* Strip::space( const char *s )
+const char* Strip::space( const char* s )
 {
     if ( s == nullptr )
     {
         return nullptr;
     }
 
-    while ( *s && isspace( (int) *s ) )
+    while ( *s && isspace( (int)*s ) )
     {
         s++;
     }
@@ -34,14 +33,14 @@ const char* Strip::space( const char *s )
 }
 
 
-const char* Strip::notSpace( const char *s )
+const char* Strip::notSpace( const char* s )
 {
     if ( s == nullptr )
     {
         return nullptr;
     }
 
-    while ( *s && !( isspace( (int) *s ) ) )
+    while ( *s && !( isspace( (int)*s ) ) )
     {
         s++;
     }
@@ -49,7 +48,7 @@ const char* Strip::notSpace( const char *s )
 }
 
 
-const char* Strip::trailingSpace( const char *s )
+const char* Strip::trailingSpace( const char* s )
 {
     if ( s == nullptr )
     {
@@ -65,7 +64,7 @@ const char* Strip::trailingSpace( const char *s )
 
     // Walk the string right to left
     const char* p = s + len - 1;
-    while ( p != s && isspace( (int) *p ) )
+    while ( p != s && isspace( (int)*p ) )
     {
         p--;
     }
@@ -86,8 +85,8 @@ void Strip::removeTrailingSpace( char* s )
         return;
     }
 
-    char* ptr = (char*) trailingSpace( s );
-    if ( isspace( (int) *ptr ) )
+    char* ptr = (char*)trailingSpace( s );
+    if ( isspace( (int)*ptr ) )
     {
         *ptr = '\0';
     }
@@ -98,8 +97,8 @@ void Strip::removeTrailingSpace( char* s )
 }
 
 
-//////////////////////	
-const char* Strip::chars( const char *s, const char* charsSet )
+//////////////////////
+const char* Strip::chars( const char* s, const char* charsSet )
 {
     if ( s == nullptr )
     {
@@ -139,7 +138,7 @@ const char* Strip::notChars( const char* s, const char* charsSet )
 }
 
 
-const char* Strip::trailingChars( const char *s, const char* charsSet )
+const char* Strip::trailingChars( const char* s, const char* charsSet )
 {
     if ( s == nullptr )
     {
@@ -181,10 +180,10 @@ void Strip::removeTrailingChars( char* s, const char* charsSet )
         return;
     }
 
-    char* ptr = (char*) trailingChars( (const char*) s, charsSet );
+    char* ptr = (char*)trailingChars( (const char*)s, charsSet );
     if ( isCharInString( charsSet, *ptr ) )
     {
-        *ptr = '\0';        // trap the case of string is ALL spaces
+        *ptr = '\0';  // trap the case of string is ALL spaces
     }
     else
     {
@@ -192,6 +191,6 @@ void Strip::removeTrailingChars( char* s, const char* charsSet )
     }
 }
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

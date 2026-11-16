@@ -16,7 +16,7 @@
 
 
 /// Defer the definition of the a raw binary semaphore type to the application's 'platform'
-#define KitSystemBSema_T          KitSystemBSema_T_MAP
+#define KitSystemBSema_T KitSystemBSema_T_MAP
 
 
 ///
@@ -94,7 +94,7 @@ protected:
     /// Helper method for supporting SimTicks and 'real' tick in the same build
     bool timedWaitInRealTime( uint32_t timeoutMs ) noexcept;
 
-private:
+protected:
     /// Prevent access to the copy constructor -->semaphores can not be copied!
     BSemaphore( const BSemaphore& m ) = delete;
 

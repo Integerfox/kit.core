@@ -10,10 +10,9 @@
 
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
-#include "Kit/Dm/Mp/_0test/common.h"
-#include "Kit/EventQueue/Server.h"
+#include "Kit/_support/testing/ManualEventQueue.h"
 #include "Kit/Dm/ModelDatabase.h"
-#include "Kit/Text/FString.h"
+#include "Kit/Dm/Mp/Uint32.h"
 #include "Kit/Logging/Framework/LogSink.h"
 #include "Kit/Container/RingBufferMPAllocate.h"
 #include <string.h>
@@ -30,16 +29,23 @@ class MyUtt : public LogSink
 {
 public:
     unsigned numProcessed;
+    uint64_t timestamps[NUM_LOG_ENTRIES];
 
 public:
     MyUtt( Kit::EventQueue::IQueue& myEventQueue, Kit::Container::RingBufferMPAllocate<EntryData_T, NUM_LOG_ENTRIES + 1>& logFifo )
         : LogSink( myEventQueue, logFifo )
         , numProcessed( 0 )
+        , timestamps{}
     {
     }
+
 public:
     void dispatchLogEntry( Kit::Logging::Framework::EntryData_T& src ) noexcept override
     {
+        if ( numProcessed < NUM_LOG_ENTRIES )
+        {
+            timestamps[numProcessed] = src.m_timestamp;
+        }
         numProcessed++;
     }
 };
@@ -47,89 +53,135 @@ public:
 }  // end anonymous namespace
 ////////////////////////////////////////////////////////////////////////////////
 
-// Allocate/create my Model Database
-static Kit::Dm::ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
-
-// Allocate my Model Points
-static Kit::Dm::Mp::Uint32 mp_logFifoCount_( modelDb_, "logFIFO" );
-
-
-// Don't let the Runnable object go out of scope before its thread has actually terminated!
-static Kit::EventQueue::Server t1Mbox_;
+static void addEntries( Kit::Container::RingBufferMP<EntryData_T>& logFifo, unsigned numEntries, unsigned firstTimestamp = 0 )
+{
+    EntryData_T entry;
+    for ( unsigned i = 0; i < numEntries; i++ )
+    {
+        entry.m_timestamp        = firstTimestamp + i;
+        entry.m_classificationId = i;
+        entry.m_packageId        = i;
+        entry.m_subSystemId      = i;
+        entry.m_messageId        = i;
+        strcpy( entry.m_infoText, "Test log message" );
+        REQUIRE( logFifo.add( entry ) == true );
+    }
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 //
-// Note: The bare minimum I need to test code that is 'new' to concrete MP type
+// Note: The event queue is run by the test thread (no event-queue thread), i.e.
+//       once runUntilIdle() returns true, the sink has processed everything it
+//       is going to process.
 //
 TEST_CASE( "LogSink" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-    Kit::Container::RingBufferMPAllocate<EntryData_T, ( NUM_LOG_ENTRIES + 1 )> logFifo( mp_logFifoCount_, false ); // IMPORTANT: Must set the initialize-memory flag to FALSE since the EntryData_T type has a non-trivial constructor 
-    MyUtt                                                                      uut( t1Mbox_, logFifo );
+
+    // NOTE: The Model Point is local (and constructed before the sink) so that
+    //       a failed REQUIRE can not leave the sink attached to a (static) MP
+    Kit::Dm::ModelDatabase                                                     modelDb;
+    Kit::Dm::Mp::Uint32                                                        mp_logFifoCount_( modelDb, "logFIFO" );
+    Kit::Container::RingBufferMPAllocate<EntryData_T, ( NUM_LOG_ENTRIES + 1 )> logFifo( mp_logFifoCount_, false );  // IMPORTANT: Must set the initialize-memory flag to FALSE since the EntryData_T type has a non-trivial constructor
+    ManualEventQueue                                                           eventQueue;
+    MyUtt                                                                      uut( eventQueue, logFifo );
     mp_logFifoCount_.setInvalid();
 
-    Kit::System::Thread* t1 = Kit::System::Thread::create( t1Mbox_, "UUT" );
-    REQUIRE( t1 != nullptr );
-
-    SECTION( "open/close" )
+    SECTION( "open/close - redundant calls succeed" )
     {
-        uut.open();
-        uut.open();
-        uut.close();
-        uut.close();
+        REQUIRE( eventQueue.requestOpen( uut ) );
+        REQUIRE( eventQueue.requestOpen( uut ) );
+        REQUIRE( eventQueue.requestClose( uut ) );
+        REQUIRE( eventQueue.requestClose( uut ) );
+        REQUIRE( uut.numProcessed == 0 );
     }
 
-    SECTION( "nominal" )
+    SECTION( "nothing is dispatched before open" )
     {
-        uut.open();
+        addEntries( logFifo, 3 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.numProcessed == 0 );
+        REQUIRE( logFifo.getNumItems() == 3 );
+    }
 
-        EntryData_T entry;
+    SECTION( "open drains the existing entries" )
+    {
+        addEntries( logFifo, 3 );
+        REQUIRE( eventQueue.requestOpen( uut ) );
+        REQUIRE( uut.numProcessed == 3 );
+        REQUIRE( logFifo.isEmpty() );
+    }
+
+    SECTION( "entries are dispatched in order, at most MAX_BATCH_WRITE per change notification" )
+    {
+        REQUIRE( eventQueue.requestOpen( uut ) );
+        addEntries( logFifo, NUM_LOG_ENTRIES );
+
+        // One change notification is processed per event-queue iteration
+        REQUIRE( eventQueue.runUntilIdle( 1 ) == false );
+        REQUIRE( uut.numProcessed == OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE );
+
+        unsigned iterations = 0;
+        REQUIRE( eventQueue.runUntilIdle( OPTION_KIT_TESTING_MANUAL_EVENT_QUEUE_MAX_ITERATIONS, &iterations ) );
+        REQUIRE( iterations == ( NUM_LOG_ENTRIES - 1 ) / OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE );
+        REQUIRE( uut.numProcessed == NUM_LOG_ENTRIES );
+        REQUIRE( logFifo.isEmpty() );
         for ( unsigned i = 0; i < NUM_LOG_ENTRIES; i++ )
         {
-            entry.m_timestamp        = i;
-            entry.m_classificationId = i;
-            entry.m_packageId        = i;
-            entry.m_subSystemId      = i;
-            entry.m_messageId        = i;
-            strcpy( entry.m_infoText, "Test log message" );
-            REQUIRE( logFifo.add( entry ) == true );
+            CAPTURE( i );
+            REQUIRE( uut.timestamps[i] == i );
         }
-
-        // Allow time for the LogSink to process the entries
-        Kit::System::sleep( 300 );
-        REQUIRE( uut.numProcessed == NUM_LOG_ENTRIES );
-
-        uut.close();
     }
 
-    SECTION( "nominal" )
+    SECTION( "less than a full batch is dispatched by a single change notification" )
     {
-        uut.open();
+        REQUIRE( eventQueue.requestOpen( uut ) );
+        addEntries( logFifo, OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE - 1 );
 
-        EntryData_T entry;
-        for ( unsigned i = 0; i < OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE - 1; i++ )
-        {
-            entry.m_timestamp        = i;
-            entry.m_classificationId = i;
-            entry.m_packageId        = i;
-            entry.m_subSystemId      = i;
-            entry.m_messageId        = i;
-            strcpy( entry.m_infoText, "Test log message" );
-            REQUIRE( logFifo.add( entry ) == true );
-        }
-
-        // Allow time for the LogSink to process the entries
-        Kit::System::sleep( 300 );
+        unsigned iterations = 0;
+        REQUIRE( eventQueue.runUntilIdle( OPTION_KIT_TESTING_MANUAL_EVENT_QUEUE_MAX_ITERATIONS, &iterations ) );
+        REQUIRE( iterations == 1 );
         REQUIRE( uut.numProcessed == OPTION_KIT_LOGGING_FRAMEWORK_MAX_BATCH_WRITE - 1 );
-
-        uut.close();
+        REQUIRE( logFifo.isEmpty() );
     }
 
-    // Shutdown thread(s)
-    t1Mbox_.pleaseStop();
-    WAIT_FOR_THREAD_TO_STOP( t1 );
-    Kit::System::Thread::destroy( *t1 );
+    SECTION( "nothing is dispatched after close, and the backlog is drained on re-open" )
+    {
+        REQUIRE( eventQueue.requestOpen( uut ) );
+        addEntries( logFifo, 2 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.numProcessed == 2 );
 
+        REQUIRE( eventQueue.requestClose( uut ) );
+        addEntries( logFifo, 3, 2 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.numProcessed == 2 );
+        REQUIRE( logFifo.getNumItems() == 3 );
+
+        REQUIRE( eventQueue.requestOpen( uut ) );
+        REQUIRE( uut.numProcessed == 5 );
+        REQUIRE( logFifo.isEmpty() );
+        for ( unsigned i = 0; i < 5; i++ )
+        {
+            CAPTURE( i );
+            REQUIRE( uut.timestamps[i] == i );
+        }
+    }
+
+    SECTION( "draining the buffer does not trigger additional dispatches" )
+    {
+        REQUIRE( eventQueue.requestOpen( uut ) );
+        addEntries( logFifo, 1 );
+
+        // NOTE: Removing the entry changes the element count (to zero), i.e.
+        //       the sink is notified again - and must dispatch nothing
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( eventQueue.hasPendingWork() == false );
+        REQUIRE( uut.numProcessed == 1 );
+        REQUIRE( logFifo.isEmpty() );
+    }
+
+    REQUIRE( eventQueue.requestClose( uut ) );
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

@@ -1,0 +1,9 @@
+echo - "*** TEST: help"
+help
+echo - "*** TEST: help time"
+help time
+echo - "*** TEST: time (bad syntax)"
+time foo
+echo "LAST CHECKED LINE"
+time
+bye

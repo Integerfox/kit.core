@@ -107,7 +107,7 @@ TEST_CASE( "Int32" )
         REQUIRE( valid );
         REQUIRE( value == 1234 );
     }
-    
+
     SECTION( "fromJSON2" )
     {
         // Start with MP in the invalid state
@@ -120,6 +120,6 @@ TEST_CASE( "Int32" )
         REQUIRE( valid );
         REQUIRE( value == 1234 );
     }
-    
+
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }

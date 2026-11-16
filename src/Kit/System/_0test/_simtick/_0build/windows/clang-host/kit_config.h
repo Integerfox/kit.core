@@ -12,9 +12,9 @@
 
 #define USE_KIT_SYSTEM_TRACE
 #define USE_KIT_SYSTEM_ASSERT
-#define KitTextToStringMaxUnsigned_T uint64_t
+#define KitTextToStringMaxUnsigned_T                 uint64_t
 
-#define OPTION_KIT_SYSTEM_SIM_TICK_NO_ACTIVITY_LIMIT	500 // .5sec wait
+#define OPTION_KIT_SYSTEM_SIM_TICK_NO_ACTIVITY_LIMIT 500  // .5sec wait
 #define USE_KIT_SYSTEM_SIM_TICK
 
 #endif

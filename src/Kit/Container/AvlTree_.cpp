@@ -90,7 +90,8 @@ bool AvlTree_::insert( MapItem& newNode )
             // Key is not compatible with the node's key type
             return false;
         }
-        comparison = result < 0 ? -1 : result > 0 ? 1 : 0;
+        comparison           = result < 0 ? -1 : result > 0 ? 1
+                                                            : 0;
         comparisons[depth++] = comparison;
 
         if ( comparison > 0 )

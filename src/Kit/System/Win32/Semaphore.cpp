@@ -18,7 +18,7 @@ namespace System {
 //////////////////////////////////////////////////
 Semaphore::Semaphore( unsigned initialCount ) noexcept
 {
-    m_sema = CreateSemaphore( 0, initialCount, 0x7FFF, 0 ); // Create in the "EMPTY" state
+    m_sema = CreateSemaphore( 0, initialCount, 0x7FFF, 0 );  // Create in the "EMPTY" state
 }
 
 Semaphore::~Semaphore() noexcept
@@ -49,10 +49,10 @@ void Semaphore::waitInRealTime() noexcept
 
 bool Semaphore::timedWaitInRealTime( uint32_t timeout ) noexcept
 {
-    DWORD result = WaitForSingleObject( m_sema, (DWORD) timeout );
+    DWORD result = WaitForSingleObject( m_sema, (DWORD)timeout );
     return result == WAIT_OBJECT_0 ? true : false;
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

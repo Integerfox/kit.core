@@ -30,15 +30,15 @@ namespace File {
           client must call isEof().
 
     NOTE: A File::IInputOutput object does not inherit from Kit::Io::IInputOutput,
-          i.e. a File::IInputOutput object can be substituted for a 
-          Kit::Io::IInputOutput object. 
+          i.e. a File::IInputOutput object can be substituted for a
+          Kit::Io::IInputOutput object.
  */
 class IInputOutput : public IInput, public IOutput
 {
 };
 
 
-}      // end namespaces
+}  // end namespaces
 }
 }
 #endif  // end header latch

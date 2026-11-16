@@ -102,7 +102,7 @@ protected:
     /// See Kit::Dm::Point.
     bool setJSONVal( JsonDocument& doc ) noexcept
     {
-        doc["val"] = (char*) m_data._to_string();
+        doc["val"] = (char*)m_data._to_string();
         return true;
     }
 

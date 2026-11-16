@@ -13,7 +13,7 @@
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/Container/RingBufferMPAllocate.h"  // Only needed for test access to log queue
-#include "Kit/Logging/Framework/EntryData.h"   // Only needed for test access to log queue
+#include "Kit/Logging/Framework/EntryData.h"     // Only needed for test access to log queue
 
 using namespace PkgZ::Logging::Pkg;
 using namespace Kit::Logging::Framework;
@@ -33,7 +33,7 @@ TEST_CASE( "PkgZ" )
 
     SECTION( "basic" )
     {
-        result = PKGZ_LOGGING_LOG_CORE(ClassificationId::METRICS, CoreMsgId::CONFIG_ERROR, "Metrics Classification --> mapped to EVENT" );
+        result = PKGZ_LOGGING_LOG_CORE( ClassificationId::METRICS, CoreMsgId::CONFIG_ERROR, "Metrics Classification --> mapped to EVENT" );
         REQUIRE( result == LogResult_T::ADDED );
         REQUIRE( g_logFifo.getNumItems() == 1u );
         REQUIRE( g_logFifo.remove( entry ) );

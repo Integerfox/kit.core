@@ -51,9 +51,9 @@ TEST_CASE( "Format" )
 
     SECTION( "ASCIIHex" )
     {
-        uint8_t      buffer[5] = { 0, 0xAA, 0x55, 0xF0, 0x31 };
+        uint8_t     buffer[5] = { 0, 0xAA, 0x55, 0xF0, 0x31 };
         FString<64> s1;
-        FString<3>   s2;
+        FString<3>  s2;
 
         bool result = Format::asciiHex( buffer, sizeof( buffer ), s1 );
         REQUIRE( s1 == "00AA55F031" );
@@ -107,16 +107,16 @@ TEST_CASE( "Format" )
 
     SECTION( "Viewer" )
     {
-        uint8_t      buffer[5] = { 0, 0xAA, 0x55, 0xF0, 0x31 };
+        uint8_t     buffer[5] = { 0, 0xAA, 0x55, 0xF0, 0x31 };
         FString<64> s1;
-        FString<3>   s2;
-        bool result = Format::viewer( buffer, sizeof( buffer ), s1, sizeof( buffer ) );
+        FString<3>  s2;
+        bool        result = Format::viewer( buffer, sizeof( buffer ), s1, sizeof( buffer ) );
         REQUIRE( s1 == "00AA55F031    ..U.1" );
         REQUIRE( result == true );
         result = Format::viewer( buffer, sizeof( buffer ), s1, sizeof( buffer ), "    ", false );
         REQUIRE( result == true );
         REQUIRE( s1 == "00aa55f031    ..U.1" );
-        result = Format::viewer( buffer, sizeof( buffer ), s1, sizeof( buffer ), "============================================================");
+        result = Format::viewer( buffer, sizeof( buffer ), s1, sizeof( buffer ), "============================================================" );
         REQUIRE( result == false );
 
 
@@ -125,7 +125,7 @@ TEST_CASE( "Format" )
         REQUIRE( s1 == "buffer=00AA55F031 -- ..U.1" );
 
         result = Format::viewer( buffer, 4, s1, 5 );
-        KIT_SYSTEM_TRACE_MSG( SECT_,  "act=[%s], exp=[A55F0      ..U.]", s1.getString() );
+        KIT_SYSTEM_TRACE_MSG( SECT_, "act=[%s], exp=[A55F0      ..U.]", s1.getString() );
         REQUIRE( s1 == "00AA55F0      ..U." );
         REQUIRE( result == true );
 
@@ -137,6 +137,50 @@ TEST_CASE( "Format" )
         REQUIRE( s1 == "no change" );
         result = Format::viewer( buffer, sizeof( buffer ), s2 );
         REQUIRE( result == false );
+    }
+
+    SECTION( "utcTimestamp" )
+    {
+        FString<128> s1;
+        FString<10>  s2;
+
+        bool result = Format::utcTimestamp( s1, 0 );
+        REQUIRE( result == true );
+        REQUIRE( s1 == "1970-01-01 00:00:00.000" );
+        result = Format::utcTimestamp( s1, 1672531199123ULL );
+        REQUIRE( result == true );
+        REQUIRE( s1 == "2022-12-31 23:59:59.123" );
+        result = Format::utcTimestamp( s1, 951825600001ULL );  // Leap day in a leap century
+        REQUIRE( result == true );
+        REQUIRE( s1 == "2000-02-29 12:00:00.001" );
+        result = Format::utcTimestamp( s1, 1709210096789ULL );  // Leap day
+        REQUIRE( result == true );
+        REQUIRE( s1 == "2024-02-29 12:34:56.789" );
+        result = Format::utcTimestamp( s1, 4107542399999ULL );  // Non-leap century
+        REQUIRE( result == true );
+        REQUIRE( s1 == "2100-02-28 23:59:59.999" );
+        result = Format::utcTimestamp( s1, 4107542400000ULL );
+        REQUIRE( result == true );
+        REQUIRE( s1 == "2100-03-01 00:00:00.000" );
+        result = Format::utcTimestamp( s1, 253402300799999ULL );
+        REQUIRE( result == true );
+        REQUIRE( s1 == "9999-12-31 23:59:59.999" );
+
+        result = Format::utcTimestamp( s1, 1709210096789ULL, false );
+        REQUIRE( result == true );
+        REQUIRE( s1 == "2024-02-29 12:34:56" );
+        s1     = "T:";
+        result = Format::utcTimestamp( s1, 1709210096789ULL, true, true );
+        REQUIRE( result == true );
+        REQUIRE( s1 == "T:2024-02-29 12:34:56.789" );
+        s1     = "t:";
+        result = Format::utcTimestamp( s1, 1709210096789ULL, false, true );
+        REQUIRE( result == true );
+        REQUIRE( s1 == "t:2024-02-29 12:34:56" );
+
+        result = Format::utcTimestamp( s2, 1709210096789ULL );
+        REQUIRE( result == false );
+        REQUIRE( s2 == "2024-02-29" );
     }
 
     SECTION( "timestamp-32" )
@@ -184,7 +228,7 @@ TEST_CASE( "Format" )
         REQUIRE( result == true );
         REQUIRE( s1 == "::75:03:03.003" );
 
-        s2 = "hi";
+        s2     = "hi";
         result = Format::timestamp( s2, t2, true, false, true );
         REQUIRE( result == false );
         REQUIRE( s2 == "hi75:" );

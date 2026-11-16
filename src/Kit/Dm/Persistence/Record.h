@@ -111,7 +111,7 @@ public:
     Kit::Persistence::Size_T getSize() const noexcept override;
 
 public:
-   /// See Kit::Persistence::Record::IPayload
+    /// See Kit::Persistence::Record::IPayload
     Kit::Persistence::Size_T copyTo( void* dst, Kit::Persistence::Size_T maxDstLen ) noexcept override;
 
     /// See Kit::Persistence::Record::IPayload

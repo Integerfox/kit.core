@@ -11,9 +11,9 @@
 /** @file */
 
 
-/// 
+///
 namespace Kit {
-/// 
+///
 namespace System {
 
 
@@ -47,10 +47,8 @@ public:
         release the ownership of the lock.
      */
     void static end();
-
 };
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch
-

@@ -39,9 +39,10 @@ namespace Framework {
     log buffer and discards the entries.  A child class is required to provide
     a meaningful implementation of the dispatchLogEntry() method.
 
-    FYI: The Kit::Persistence::Journal::Server class provides an alternate 'log
-         sink' that writes log entries to Non-volatile storage along with an
-         API to retrieve the log entries.
+    FYI: The Kit::Logging::Framework::JournalLogSink class provides an
+         alternate 'log sink' (built on Kit::Persistence::Record::Journal::Server)
+         that writes log entries to Non-volatile storage along with an API to
+         retrieve the log entries.
  */
 class LogSink : public Kit::Itc::OpenCloseSync
 {

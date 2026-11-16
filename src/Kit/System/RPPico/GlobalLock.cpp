@@ -22,7 +22,8 @@ class RegisterInitHandler_ : public Kit::System::IStartupHook
 {
 public:
     ///
-    RegisterInitHandler_() :IStartupHook( SYSTEM ) {}
+    RegisterInitHandler_()
+        : IStartupHook( SYSTEM ) {}
 
 
 protected:
@@ -33,7 +34,7 @@ protected:
     }
 };
 
-} // end namespace
+}  // end namespace
 
 ///
 static RegisterInitHandler_ autoRegister_systemInit_hook_;
@@ -48,6 +49,3 @@ void Kit::System::GlobalLock::end( void )
 {
     critical_section_exit( &globalCritSec_ );
 }
-
-
-

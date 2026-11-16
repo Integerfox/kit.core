@@ -71,8 +71,8 @@ class EventFlagBase : public IEventFlag
 protected:
     /// Constructor
     EventFlagBase( Kit::Container::SList<IEventFlag>& eventList,
-                   uint32_t eventFlagsMask ) noexcept
-        : m_eventFlagsMask( eventFlagsMask )    
+                   uint32_t                           eventFlagsMask ) noexcept
+        : m_eventFlagsMask( eventFlagsMask )
     {
         eventList.put( *this );
     }
@@ -82,7 +82,7 @@ protected:
     {
         return m_eventFlagsMask;
     }
-    
+
 protected:
     /// Event Flags mask for this instance
     uint32_t m_eventFlagsMask;

@@ -12,7 +12,7 @@
 
 #define USE_KIT_SYSTEM_TRACE
 #define USE_KIT_SYSTEM_ASSERT
-#define KitTextToStringMaxUnsigned_T uint64_t
+#define KitTextToStringMaxUnsigned_T  uint64_t
 
 #define OPTION_TEST_LED_DELAY_TIME_MS 100
 #endif

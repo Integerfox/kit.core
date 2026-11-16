@@ -23,7 +23,7 @@ namespace Record {
     individual Record instance.
 
     NOTE: The IPayload interface does not define any semantics regarding fixed
-          length vs. variable length records.  However, the overall payload size 
+          length vs. variable length records.  However, the overall payload size
           plus the concrete IRecord's overhead plus its the IChunk's overhead can
           NOT exceed the size of its IMedia's storage capacity.
  */
@@ -45,7 +45,7 @@ public:
 
     /** This method returns maximum number of bytes that can be copied to/from
         the payload.  NOTE: Is is possible the value returned by the copyTo()
-        method to be less than the value returned by this method. 
+        method to be less than the value returned by this method.
      */
     virtual Size_T getMaxPayloadSize() const noexcept = 0;
 

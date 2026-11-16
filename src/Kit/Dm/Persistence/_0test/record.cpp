@@ -11,12 +11,11 @@
 #include "Kit/Checksum/Fletcher16.h"
 #include "Kit/Dm/IObserver.h"
 #include "Kit/Dm/ObserverCallback.h"
-#include "Kit/EventQueue/Server.h"
+#include "Kit/_support/testing/ManualEventQueue.h"
 #include "Kit/System/ElapsedTime.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/System/Trace.h"
-#include "Kit/System/Thread.h"
 #include "Kit/System/Api.h"
 #include "Kit/Dm/ModelDatabase.h"
 #include "Kit/Dm/Persistence/Record.h"
@@ -163,6 +162,22 @@ static Kit::Persistence::Record::Media::FileAdapter fd1( FILE_NAME_REGION1, 128 
 static Kit::Checksum::Fletcher16                    crc;
 static Kit::Persistence::Record::Chunk::Crc         chunk_( fd1, crc );
 
+// Note: Record::flush()/erase() are synchronous ITC calls, i.e. they can NOT
+//       be used with a ManualEventQueue (no thread to process the request)
+static bool flushRecord( ManualEventQueue& eventQueue, Record& record )
+{
+    IManageRequest::FlushPayload payload;
+    IManageRequest::FlushMsg     msg( record, payload, eventQueue.nullReturnHandler() );
+    return eventQueue.postAndRun( msg ) && payload.m_success;
+}
+
+static bool eraseRecord( ManualEventQueue& eventQueue, Record& record )
+{
+    IManageRequest::ErasePayload payload;
+    IManageRequest::EraseMsg     msg( record, payload, eventQueue.nullReturnHandler() );
+    return eventQueue.postAndRun( msg ) && payload.m_success;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 TEST_CASE( "Record" )
 {
@@ -171,10 +186,8 @@ TEST_CASE( "Record" )
 
     MyRecord                           uut( chunk_, 0, 0 );
     Kit::Persistence::Record::IRecord* records[1] = { &uut };
-    Kit::EventQueue::Server            eventQueue;
+    ManualEventQueue                   eventQueue;  // No thread: the test thread runs the queue
     Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
-    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT" );
-    REQUIRE( t1 );
 
     mp_apple_.setInvalid();
     mp_orange_.setInvalid();
@@ -190,7 +203,7 @@ TEST_CASE( "Record" )
 
         // No persistent data - and force NO-UPDATE
         uut.m_resetDataResult = false;
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 0 );
         uint32_t value;
         bool     valid;
@@ -204,22 +217,24 @@ TEST_CASE( "Record" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM );
 
-        // Update my data (will not be written to the file)
+        REQUIRE( uut.m_resetDataCount == 1 );
+        REQUIRE( uut.m_updateNVRAMCount == 0 );
+
+        // Update my data (will not be written to the file, i.e. the Record did NOT subscribe for changes)
         mp_apple_.write( 11 );
         mp_orange_.write( 12 );
         mp_plum_.write( 13 );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_dataChangedCount == 0 );
+        REQUIRE( uut.m_updateNVRAMCount == 0 );
 
-
-        // Allow time for the changes to propagate and the data to be saved
-        Kit::System::sleep( 1000 );
-
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
     SECTION( "no persistent data - update with reset/default values" )
     {
         // No persistent data (note: the file contents should still be 'bad')
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 0 );
         uint32_t value;
         bool     valid;
@@ -233,21 +248,24 @@ TEST_CASE( "Record" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM );
 
-        // Update my data
+        REQUIRE( uut.m_resetDataCount == 1 );
+        REQUIRE( uut.m_updateNVRAMCount == 1 );  // The defaults are written
+
+        // Update my data -->one NVRAM update per subscribed MP (plum has no subscriber)
         mp_apple_.increment();
         mp_orange_.increment();
         mp_plum_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_dataChangedCount == 2 );
+        REQUIRE( uut.m_updateNVRAMCount == 3 );
 
-        // Allow time for the changes to propagate and the data to be saved
-        Kit::System::sleep( 1000 );
-
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
     SECTION( "Read" )
     {
         // Previous data
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 0 );
         uint32_t value;
         bool     valid;
@@ -261,19 +279,22 @@ TEST_CASE( "Record" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM + 1 );
 
+        REQUIRE( uut.m_resetDataCount == 0 );
+        REQUIRE( uut.m_updateNVRAMCount == 0 );
+
         // Update Plum -->but persistent storage should NOT be update (i.e. no subscription to plum)
         mp_plum_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_dataChangedCount == 0 );
+        REQUIRE( uut.m_updateNVRAMCount == 0 );
 
-        // Allow time for the changes to propagate and the data to be saved - WHICH won't happen beaus plum does not trigger a change notification
-        Kit::System::sleep( 1000 );
-
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
     SECTION( "Verify No update" )
     {
         // Previous data
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 0 );
         uint32_t value;
         bool     valid;
@@ -287,13 +308,13 @@ TEST_CASE( "Record" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM + 1 );
 
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
     SECTION( "Flush" )
     {
         // Previous data
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 0 );
         uint32_t value;
         bool     valid;
@@ -309,20 +330,20 @@ TEST_CASE( "Record" )
 
         // Update Plum -->but persistent storage should NOT be update (i.e. no subscription to plum)
         mp_plum_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_dataChangedCount == 0 );
+        REQUIRE( uut.m_updateNVRAMCount == 0 );
 
-        // Flush the record
-        REQUIRE( uut.flush() );
+        // Flush the record -->writes the current values (including plum)
+        REQUIRE( flushRecord( eventQueue, uut ) );
 
-        // Allow time for the changes to propagate and the data to be saved
-        Kit::System::sleep( 1000 );
-
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
     SECTION( "Verify Flush update" )
     {
         // Previous data
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 0 );
         uint32_t value;
         bool     valid;
@@ -336,14 +357,14 @@ TEST_CASE( "Record" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM + 2 );
 
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
     SECTION( "Erase" )
     {
         // Previous data
         uut.m_resetDataCount = 0;
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_resetDataCount == 0 );
         REQUIRE( uut.m_schemaChangeCount == 0 );
         uint32_t value;
@@ -359,16 +380,16 @@ TEST_CASE( "Record" )
         REQUIRE( value == DEFAULT_PLUM + 2 );
 
         // Flush the record
-        REQUIRE( uut.erase() );
+        REQUIRE( eraseRecord( eventQueue, uut ) );
 
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
     SECTION( "Verify Erase" )
     {
         // Previous data
         uut.m_resetDataCount = 0;
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_resetDataCount == 1 );
         uint32_t value;
         bool     valid;
@@ -382,11 +403,9 @@ TEST_CASE( "Record" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM );
 
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
-    Kit::System::Thread::destroy( *t1 );
-    Kit::System::sleep( 100 );
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
@@ -397,10 +416,8 @@ TEST_CASE( "Record-badmajor" )
 
     MyRecord                           uut( chunk_, 2, 2 );
     Kit::Persistence::Record::IRecord* records[1] = { &uut };
-    Kit::EventQueue::Server            eventQueue;
+    ManualEventQueue                   eventQueue;  // No thread: the test thread runs the queue
     Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
-    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT2" );
-    REQUIRE( t1 );
 
     mp_apple_.setInvalid();
     mp_orange_.setInvalid();
@@ -409,7 +426,7 @@ TEST_CASE( "Record-badmajor" )
     SECTION( "Read" )
     {
         // Previous data
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 1 );
         REQUIRE( uut.m_resetDataCount == 1 );
         uint32_t value;
@@ -424,19 +441,19 @@ TEST_CASE( "Record-badmajor" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM );
 
-        // Update Apple -->but persistent storage should NOT be update (i.e. no subscription to plum)
+        REQUIRE( uut.m_updateNVRAMCount == 1 );  // The defaults are written
+
+        // Update my data -->one NVRAM update per subscribed MP (plum has no subscriber)
         mp_apple_.increment();
         mp_orange_.increment();
         mp_plum_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_dataChangedCount == 2 );
+        REQUIRE( uut.m_updateNVRAMCount == 3 );
 
-        // Allow time for the changes to propagate and the data to be saved
-        Kit::System::sleep( 1000 );
-
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
-    Kit::System::Thread::destroy( *t1 );
-    Kit::System::sleep( 100 );
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
@@ -447,10 +464,8 @@ TEST_CASE( "Record-badminor" )
 
     MyRecord                           uut( chunk_, 2, 1 );
     Kit::Persistence::Record::IRecord* records[1] = { &uut };
-    Kit::EventQueue::Server            eventQueue;
+    ManualEventQueue                   eventQueue;  // No thread: the test thread runs the queue
     Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
-    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT2" );
-    REQUIRE( t1 );
 
     mp_apple_.setInvalid();
     mp_orange_.setInvalid();
@@ -459,7 +474,7 @@ TEST_CASE( "Record-badminor" )
     SECTION( "Read" )
     {
         // Previous data
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 1 );
         REQUIRE( uut.m_resetDataCount == 1 );
         uint32_t value;
@@ -474,19 +489,19 @@ TEST_CASE( "Record-badminor" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM );
 
-        // Update Apple -->but persistent storage should NOT be update (i.e. no subscription to plum)
+        REQUIRE( uut.m_updateNVRAMCount == 1 );  // The defaults are written
+
+        // Update my data -->one NVRAM update per subscribed MP (plum has no subscriber)
         mp_apple_.increment();
         mp_orange_.increment();
         mp_plum_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_dataChangedCount == 2 );
+        REQUIRE( uut.m_updateNVRAMCount == 3 );
 
-        // Allow time for the changes to propagate and the data to be saved
-        Kit::System::sleep( 1000 );
-
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
-    Kit::System::Thread::destroy( *t1 );
-    Kit::System::sleep( 100 );
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
@@ -498,10 +513,8 @@ TEST_CASE( "Record-verify" )
 
     MyRecord                           uut( chunk_, 2, 1 );
     Kit::Persistence::Record::IRecord* records[1] = { &uut };
-    Kit::EventQueue::Server            eventQueue;
+    ManualEventQueue                   eventQueue;  // No thread: the test thread runs the queue
     Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
-    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT2" );
-    REQUIRE( t1 );
 
     mp_apple_.setInvalid();
     mp_orange_.setInvalid();
@@ -510,7 +523,7 @@ TEST_CASE( "Record-verify" )
     SECTION( "Read" )
     {
         // Previous data
-        recordServer.open();
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_schemaChangeCount == 0 );
         REQUIRE( uut.m_resetDataCount == 0 );
         uint32_t value;
@@ -525,99 +538,91 @@ TEST_CASE( "Record-verify" )
         REQUIRE( valid );
         REQUIRE( value == DEFAULT_PLUM + 1 );
 
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
 
-    Kit::System::Thread::destroy( *t1 );
-    Kit::System::sleep( 100 );
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
 }
 
 TEST_CASE( "NVRAM update delayed" )
 {
-    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD Test" );
+    KIT_SYSTEM_TRACE_SCOPE( SECT_, "RECORD - delayed NVRAM update Test" );
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     // Delete files
     Kit::Io::File::System::remove( FILE_NAME_REGION1 );
 
-    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-
-    MyRecord                           uut( chunk_, 0, 0, 700, 1000 );
-    Kit::Persistence::Record::IRecord* records[1] = { &uut };
-    Kit::EventQueue::Server            eventQueue;
-    Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
-    Kit::System::Thread*               t1 = Kit::System::Thread::create( eventQueue, "UUT2" );
-    REQUIRE( t1 );
-
     mp_apple_.setInvalid();
     mp_orange_.setInvalid();
     mp_plum_.setInvalid();
 
-
-    SECTION( "update with reset/default values" )
+    // NOTE: The write delay timer runs on the queue's virtual clock (i.e. it is
+    //       deterministic), whereas the maximum delay is measured with the
+    //       (real) system clock.
+    SECTION( "each change restarts the write delay" )
     {
-        // Start the record
-        recordServer.open();
+        MyRecord                           uut( chunk_, 0, 0, 700, 60 * 60 * 1000 );  // The max delay never expires
+        Kit::Persistence::Record::IRecord* records[1] = { &uut };
+        ManualEventQueue                   eventQueue;  // No thread: the test thread runs the queue
+        Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
+
+        // Start the record (no persistent data -->the defaults are written immediately)
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
         REQUIRE( uut.m_updateNVRAMCount == 1 );
-        uint32_t value;
-        bool     valid;
-        valid = mp_apple_.read( value );
-        REQUIRE( valid );
-        REQUIRE( value == DEFAULT_APPLE );
-        valid = mp_orange_.read( value );
-        REQUIRE( valid );
-        REQUIRE( value == DEFAULT_ORANGE );
-        valid = mp_plum_.read( value );
-        REQUIRE( valid );
-        REQUIRE( value == DEFAULT_PLUM );
 
-        // Update my data - with delays between the updates
         mp_apple_.increment();
-        mp_orange_.increment();
-        mp_plum_.increment();
-        Kit::System::sleep( 100 );
-        mp_apple_.increment();
-        Kit::System::sleep( 100 );
-        mp_plum_.increment();
-        Kit::System::sleep( 100 );
-        mp_orange_.increment();
-        Kit::System::sleep( 100 );
-        mp_apple_.increment();
-        Kit::System::sleep( 100 );
-        mp_plum_.increment();
-        Kit::System::sleep( 100 );
-        mp_orange_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_dataChangedCount == 1 );
+        REQUIRE( eventQueue.advanceTime( 699 ) );
+        REQUIRE( uut.m_updateNVRAMCount == 1 );  // Not yet
 
-        // Allow time for the changes to propagate and the data to be saved
-        Kit::System::sleep( 1000 + 300 );
-        REQUIRE( uut.m_dataChangedCount >= 3 );
+        // A change restarts the delay
+        mp_orange_.increment();
+        REQUIRE( eventQueue.advanceTime( 699 ) );
+        REQUIRE( uut.m_dataChangedCount == 2 );
+        REQUIRE( uut.m_updateNVRAMCount == 1 );  // Not yet
+
+        // Plum has no subscriber -->does NOT restart the delay
+        mp_plum_.increment();
+        REQUIRE( eventQueue.advanceTime( 1 ) );
+        REQUIRE( uut.m_dataChangedCount == 2 );
+        REQUIRE( uut.m_updateNVRAMCount == 2 );  // ONE update for both changes
+
+        // Nothing else happens
+        REQUIRE( eventQueue.advanceTime( 5000 ) );
         REQUIRE( uut.m_updateNVRAMCount == 2 );
-        REQUIRE( uut.m_deltaMs > 700 );
 
-        recordServer.close();
+        REQUIRE( eventQueue.requestClose( recordServer ) );
     }
-    Kit::System::Thread::destroy( *t1 );
-    Kit::System::sleep( 100 );  // allow time for thread(s) to stop BEFORE the runnable object goes out of scope
+
+    SECTION( "the maximum delay forces an immediate update" )
+    {
+        MyRecord                           uut( chunk_, 0, 0, 700, 50 );
+        Kit::Persistence::Record::IRecord* records[1] = { &uut };
+        ManualEventQueue                   eventQueue;  // No thread: the test thread runs the queue
+        Kit::Persistence::Record::Server   recordServer( eventQueue, records, sizeof( records ) / sizeof( records[0] ) );
+
+        REQUIRE( eventQueue.requestOpen( recordServer ) );
+        REQUIRE( uut.m_updateNVRAMCount == 1 );
+
+        // First change -->starts the delay (the max delay starts 'now')
+        mp_apple_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_updateNVRAMCount == 1 );
+
+        // Let (at least) the maximum delay elapse - but NOT the write delay
+        Kit::System::sleep( 60 );
+        mp_orange_.increment();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( uut.m_dataChangedCount == 2 );
+        REQUIRE( uut.m_updateNVRAMCount == 2 );
+
+        // The pending (delayed) update was cancelled -->no additional update
+        REQUIRE( eventQueue.advanceTime( 5000 ) );
+        REQUIRE( uut.m_updateNVRAMCount == 2 );
+
+        REQUIRE( eventQueue.requestClose( recordServer ) );
+    }
+
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
-}
-
-TEST_CASE( "Errors" )
-{
-    KIT_SYSTEM_TRACE_SCOPE( SECT_, "Errors" );
-    Kit::System::ShutdownUnitTesting::clearAndUseCounter();
-
-    SECTION( "bad list pointer" )
-    {
-        MyRecordBadList uut( chunk_, 2, 1 );
-        REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 1u );
-    }
-
-    SECTION( "bad MP pointer" )
-    {
-        MyRecordBadList2        uut( chunk_, 2, 1 );
-        Kit::EventQueue::Server eventQueue;
-        uut.start( eventQueue );
-        REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 1u );
-    }
 }

@@ -14,7 +14,7 @@
     Kit::Io namespace
 
  */
-#include <winsock2.h>   // Must be included before windows.h
+#include <winsock2.h>  // Must be included before windows.h
 #include <ws2tcpip.h>
 #include <Windows.h>
 

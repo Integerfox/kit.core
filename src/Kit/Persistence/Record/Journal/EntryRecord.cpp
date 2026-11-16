@@ -230,7 +230,7 @@ bool EntryRecord::addEntry( const IPayload& src ) noexcept
     if ( !writeToMedia( latestOffset ) )
     {
         // Clear the application payload handler since the entry was not successfully written to persistent storage
-        m_entryPayloadHandlerPtr = nullptr;  
+        m_entryPayloadHandlerPtr = nullptr;
         return false;
     }
 

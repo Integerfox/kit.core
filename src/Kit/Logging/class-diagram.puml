@@ -45,6 +45,16 @@ namespace Kit.Logging.Framework {
         #{abstract} dispatchLogEntry()
     }
     
+    class JournalLogSink {
+        Writes log entries to a Journal
+        Record, with pause/resume and
+        boot-counter correction
+        ==
+        +JournalLogSink()
+        #hookRemovingEntry()
+        #hookAddingEntry()
+    }
+    
     class "Logger (functions)" as Logger <<namespace>> {
         Collection of Application-level
         functions for managing the
@@ -76,6 +86,8 @@ namespace Kit.Logging.Framework {
     Formatter --> IApplication : uses
     Formatter --> EntryData_T : formats
     LogSink --> EntryData_T : consumes
+    JournalLogSink --> EntryData_T : consumes
+    JournalLogSink --|> Kit.Persistence.Record.Journal.Server
     Log --> LogResult_T : returns
     Logger --> IApplication : uses
 }

@@ -14,6 +14,6 @@
 using namespace Kit::Io::Stdio;
 
 StdIn::StdIn()
-    :InputDelegate( GetStdHandle( STD_INPUT_HANDLE )  )
+    : InputDelegate( GetStdHandle( STD_INPUT_HANDLE ) )
 {
 }

@@ -71,17 +71,17 @@ public:
             Kit::System::Thread::wait();
             Bsp_turn_off_debug1();
             m_fd.write( m_msg1 );
-            
+
             Bsp_turn_on_debug1();
             Kit::System::Thread::wait();
             Bsp_turn_off_debug1();
             m_fd.write( m_msg2 );
-            
+
             Bsp_turn_on_debug1();
             Kit::System::Thread::wait();
             Bsp_turn_off_debug1();
             m_fd.write( m_msg3 );
-            
+
             m_loopCount++;
         }
     }

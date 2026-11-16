@@ -208,7 +208,7 @@ TEST_CASE( "inputoutput" )
 
         result = uut.write( TEST_STRING1 );
         REQUIRE( result == true );
-        uut.flush(); // Flush should do nothing
+        uut.flush();  // Flush should do nothing
         result = uut.available();
         REQUIRE( result == true );
         result = uut.read( tmpString );
@@ -216,11 +216,11 @@ TEST_CASE( "inputoutput" )
 
         // Zero byte read/write should succeed but do nothing
         SSize_T bytesResult = -1;
-        result = uut.write( (void*)TEST_STRING1, 0, bytesResult );
+        result              = uut.write( (void*)TEST_STRING1, 0, bytesResult );
         REQUIRE( bytesResult == 0 );
         REQUIRE( result == true );
         bytesResult = -1;
-        result = uut.read( (void*)TEST_STRING1, 0, bytesResult );
+        result      = uut.read( (void*)TEST_STRING1, 0, bytesResult );
         REQUIRE( bytesResult == 0 );
         REQUIRE( result == true );
 
@@ -377,7 +377,7 @@ TEST_CASE( "inputoutput" )
         REQUIRE( writerDone == false );
         uut.close();  // This will unblock all clients
 
-        // Allow time for threads to stop. 
+        // Allow time for threads to stop.
         writer.terminate();
         reader1.terminate();
         REQUIRE( waitThreadInactive( w1 ) == true );

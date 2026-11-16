@@ -53,7 +53,7 @@ void PeriodicScheduler::endLoop() noexcept
 /////////////////////
 bool PeriodicScheduler::executeScheduler() noexcept
 {
-    bool        atLeastOne = false;
+    bool atLeastOne = false;
 
     // Scan all intervals
     for ( unsigned i = 0; i < m_numIntervals; i++ )
@@ -70,7 +70,7 @@ bool PeriodicScheduler::executeScheduler() noexcept
         // Has the interval expired?
         if ( ElapsedTime::expiredMillisecondsEx( m_intervals[i].timeMarker, m_intervals[i].duration, currentTick ) )
         {
-            atLeastOne            = true;
+            atLeastOne                 = true;
             m_intervals[i].timeMarker += m_intervals[i].duration;
             ( m_intervals[i].callbackFunc )( currentTick, m_intervals[i].timeMarker, m_intervals[i].context );
 

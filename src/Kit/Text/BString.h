@@ -36,39 +36,39 @@ class BString : public FStringBase
 public:
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, const BString& initialValue ) noexcept
-        : FStringBase( initialValue.getString(), rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( initialValue.getString(), rawMemory, totalRawMemorySize - 1 ) {}
 
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, const IString& string ) noexcept
-        : FStringBase( string.getString(), rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( string.getString(), rawMemory, totalRawMemorySize - 1 ) {}
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, const char* string = "" ) noexcept
-        : FStringBase( string, rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( string, rawMemory, totalRawMemorySize - 1 ) {}
 
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, char c ) noexcept
-        : FStringBase( c, rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( c, rawMemory, totalRawMemorySize - 1 ) {}
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, int num ) noexcept
-        : FStringBase( num, rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( num, rawMemory, totalRawMemorySize - 1 ) {}
 
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, unsigned num ) noexcept
-        : FStringBase( num, rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( num, rawMemory, totalRawMemorySize - 1 ) {}
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, long num ) noexcept
-        : FStringBase( num, rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( num, rawMemory, totalRawMemorySize - 1 ) {}
 
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, long long num ) noexcept
-        : FStringBase( num, rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( num, rawMemory, totalRawMemorySize - 1 ) {}
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, unsigned long num ) noexcept
-        : FStringBase( num, rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( num, rawMemory, totalRawMemorySize - 1 ) {}
 
     /// Constructor
     BString( char* rawMemory, int totalRawMemorySize, unsigned long long num ) noexcept
-        : FStringBase( num, rawMemory, totalRawMemorySize-1 ) {}
+        : FStringBase( num, rawMemory, totalRawMemorySize - 1 ) {}
 public:
     // Add this using declaration to make base class operators visible
     using FStringBase::operator=;

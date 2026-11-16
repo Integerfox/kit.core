@@ -35,19 +35,19 @@ TEST_CASE( "Package" )
 
         const char* subSystemText = nullptr;
         const char* messageText   = nullptr;
-        REQUIRE( uut.subSystemAndMessageIdsToString(SubSystemId::SYSTEM , subSystemText, SystemMsgId::SHUTDOWN, messageText));
+        REQUIRE( uut.subSystemAndMessageIdsToString( SubSystemId::SYSTEM, subSystemText, SystemMsgId::SHUTDOWN, messageText ) );
         REQUIRE( strcmp( subSystemText, "SYSTEM" ) == 0 );
         REQUIRE( strcmp( messageText, "SHUTDOWN" ) == 0 );
 
-        REQUIRE( uut.subSystemAndMessageIdsToString(100, subSystemText, DriverMsgId::STOP_ERR, messageText) == false );
+        REQUIRE( uut.subSystemAndMessageIdsToString( 100, subSystemText, DriverMsgId::STOP_ERR, messageText ) == false );
         REQUIRE( subSystemText == nullptr );
-        REQUIRE( messageText == nullptr );      
+        REQUIRE( messageText == nullptr );
 
-        REQUIRE( uut.subSystemAndMessageIdsToString(SubSystemId::DRIVER , subSystemText, 200, messageText) == false );
+        REQUIRE( uut.subSystemAndMessageIdsToString( SubSystemId::DRIVER, subSystemText, 200, messageText ) == false );
         REQUIRE( strcmp( subSystemText, "DRIVER" ) == 0 );
         REQUIRE( messageText == nullptr );
 
-        REQUIRE( uut.subSystemAndMessageIdsToString(SubSystemId::LOGGING , subSystemText, LoggingMsgId::UNKNOWN_MESSAGE_ID, messageText));
+        REQUIRE( uut.subSystemAndMessageIdsToString( SubSystemId::LOGGING, subSystemText, LoggingMsgId::UNKNOWN_MESSAGE_ID, messageText ) );
         REQUIRE( strcmp( subSystemText, "LOGGING" ) == 0 );
         REQUIRE( strcmp( messageText, "UNKNOWN_MESSAGE_ID" ) == 0 );
     }

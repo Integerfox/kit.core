@@ -15,7 +15,7 @@ AllowShortFunctionsOnASingleLine: InlineOnly
 AlwaysBreakBeforeMultilineStrings: true
 BinPackArguments: false
 BinPackParameters: false
-BraceWrapping: 
+BraceWrapping:
   AfterControlStatement: true
   AfterNamespace: false
   AfterUnion: true
@@ -28,7 +28,9 @@ Cpp11BracedListStyle: false
 EmptyLineBeforeAccessModifier: Leave
 FixNamespaceComments: false
 IncludeBlocks: Regroup
-LineEnding: DeriveLF 
+# KIT coding standard: flow-control statements always take a braced block
+InsertBraces: true
+LineEnding: DeriveLF
 MaxEmptyLinesToKeep: 2
 DerivePointerAlignment: false
 PointerAlignment: Left
@@ -37,4 +39,3 @@ SpacesBeforeTrailingComments: 2
 SpacesInConditionalStatement: true
 SpacesInParentheses: true
 ...
-

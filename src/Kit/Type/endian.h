@@ -63,22 +63,22 @@
 
 
 /// Swaps (if need) the Host/MCU byte order of a 16-bit integer to Little-Endian
-#define KIT_TYPE_HTOLE16( x ) ( uint16_t )( x )
+#define KIT_TYPE_HTOLE16( x ) (uint16_t)( x )
 
 /// Swaps (if need) Little-Endian byte order of a 16-bit integer to the Host/MCU byte order
-#define KIT_TYPE_LE16TOH( x ) ( uint16_t )( x )
+#define KIT_TYPE_LE16TOH( x ) (uint16_t)( x )
 
 /// Swaps (if need) the Host/MCU byte order of a 32-bit integer to Little-Endian
-#define KIT_TYPE_HTOLE32( x ) ( uint32_t )( x )
+#define KIT_TYPE_HTOLE32( x ) (uint32_t)( x )
 
 /// Swaps (if need) Little-Endian byte order of a 32-bit integer to the Host/MCU byte order
-#define KIT_TYPE_LE32TOH( x ) ( uint32_t )( x )
+#define KIT_TYPE_LE32TOH( x ) (uint32_t)( x )
 
 /// Swaps (if need) the Host/MCU byte order of a 64-bit integer to Little-Endian
-#define KIT_TYPE_HTOLE64( x ) ( uint64_t )( x )
+#define KIT_TYPE_HTOLE64( x ) (uint64_t)( x )
 
 /// Swaps (if need) Little-Endian byte order of a 64-bit integer to the Host/MCU byte order
-#define KIT_TYPE_LE64TOH( x ) ( uint64_t )( x )
+#define KIT_TYPE_LE64TOH( x ) (uint64_t)( x )
 
 /// Swaps (if need) the Host/MCU byte order of a float to Little-Endian
 #define KIT_TYPE_HTOLEF32( x ) (float)( x )
@@ -94,12 +94,12 @@
 
 
 #elif defined( USE_KIT_TYPE_ENDIAN_BE_HOST )
-#define KIT_TYPE_HTOBE16( x )  ( uint16_t )( x )
-#define KIT_TYPE_BE16TOH( x )  ( uint16_t )( x )
-#define KIT_TYPE_HTOBE32( x )  ( uint32_t )( x )
-#define KIT_TYPE_BE32TOH( x )  ( uint32_t )( x )
-#define KIT_TYPE_HTOBE64( x )  ( uint64_t )( x )
-#define KIT_TYPE_BE64TOH( x )  ( uint64_t )( x )
+#define KIT_TYPE_HTOBE16( x )  (uint16_t)( x )
+#define KIT_TYPE_BE16TOH( x )  (uint16_t)( x )
+#define KIT_TYPE_HTOBE32( x )  (uint32_t)( x )
+#define KIT_TYPE_BE32TOH( x )  (uint32_t)( x )
+#define KIT_TYPE_HTOBE64( x )  (uint64_t)( x )
+#define KIT_TYPE_BE64TOH( x )  (uint64_t)( x )
 #define KIT_TYPE_HTOBEF32( x ) (float)( x )
 #define KIT_TYPE_BEF32TOH( x ) (float)( x )
 #define KIT_TYPE_HTOBEF64( x ) (double)( x )

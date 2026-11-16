@@ -61,8 +61,8 @@ TEST_CASE( "elapsedtime" )
 
     // Get current time
     msecEx = ElapsedTime::millisecondsEx();
-    msecs     = ElapsedTime::milliseconds();
-    secs      = ElapsedTime::seconds();
+    msecs  = ElapsedTime::milliseconds();
+    secs   = ElapsedTime::seconds();
 
     // Sleep at least 3.7 second
     sleep( 3710 );
@@ -72,15 +72,15 @@ TEST_CASE( "elapsedtime" )
     REQUIRE( ElapsedTime::expiredMilliseconds( msecs, 3700 ) == true );
     REQUIRE( ElapsedTime::expiredMillisecondsEx( msecEx, 3700 ) == true );
     KIT_SYSTEM_TRACE_MSG( SECT_, "Post verify: sleep = 3.7" );
-    KIT_SYSTEM_TRACE_MSG( SECT_, "msec=%" PRIu32 ", msecEx=%" PRIu64 ", secs=%" PRIu32, msecs, msecEx, secs ); 
+    KIT_SYSTEM_TRACE_MSG( SECT_, "msec=%" PRIu32 ", msecEx=%" PRIu64 ", secs=%" PRIu32, msecs, msecEx, secs );
 
     int i;
     for ( i = 0; i < 50; i++ )
     {
         sleep( 21 );
-        msecs     = ElapsedTime::milliseconds();
-        msecEx    = ElapsedTime::millisecondsEx();
-        secs      = ElapsedTime::seconds();
+        msecs  = ElapsedTime::milliseconds();
+        msecEx = ElapsedTime::millisecondsEx();
+        secs   = ElapsedTime::seconds();
 
         REQUIRE( msecs <= msecEx );
         REQUIRE( secs <= msecs / 1000 );

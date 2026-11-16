@@ -1,0 +1,48 @@
+# Enforces the KIT coding standard: every C/C++ file a PR touches must be
+# formatted with the repo-root .clang-format (third-party and auto-generated
+# files are excluded).  For non-PR events (i.e. pushes to main) all KIT-owned
+# C/C++ files are checked.  The check logic lives in top/check_clang_format.py
+# so developers can run the identical check locally.
+
+name: "clang-format"
+on:
+  workflow_call:
+    inputs:
+      event_name:
+        required: true
+        type: string
+      run_number:
+        required: true
+        type: string
+      ref_name:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  clang-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Pins the clang-format version (see top/gha-requirements.txt)
+      - name: Install tools
+        run: pip install -r top/gha-requirements.txt
+
+      - name: Check formatting of touched files (PR)
+        if: ${{ inputs.event_name == 'pull_request' }}
+        run: python3 top/check_clang_format.py --base "origin/${{ github.base_ref }}"
+
+      - name: Check formatting of all files
+        if: ${{ inputs.event_name != 'pull_request' }}
+        run: python3 top/check_clang_format.py --all

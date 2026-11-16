@@ -28,6 +28,6 @@ uint64_t ElapsedTime::millisecondsEx() noexcept
     return millisecondsInRealTimeEx();
 }
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

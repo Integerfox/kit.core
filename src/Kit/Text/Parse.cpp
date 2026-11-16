@@ -24,7 +24,7 @@ size_t Parse::asciiHex( void* dstBinary, const char* srcP, size_t dstMaxLen ) no
         return SIZE_MAX;
     }
 
-    uint8_t* dstP = static_cast<uint8_t*>(dstBinary);
+    uint8_t* dstP = static_cast<uint8_t*>( dstBinary );
     size_t   len  = strlen( srcP );
 
     // Length must be even
@@ -222,7 +222,7 @@ bool Parse::timestamp( const char* timestampToParse, uint32_t& convertedValue ) 
         convertedValue = static_cast<uint32_t>( temp );
         return true;
     }
-    
+
     return false;
 }
 

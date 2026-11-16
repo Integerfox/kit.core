@@ -200,7 +200,7 @@ Kit::TShell::Result_T Manage::execute( Kit::TShell::IContext& context, char* cmd
                 KitLoggingPackageMask_T mask = 0;
                 for ( size_t i = 3; i < tokens.numParameters(); ++i )
                 {
-                    uint8_t   pkgId  = 0;
+                    uint8_t pkgId = 0;
                     if ( parsePackageId_( pkgId, tokens.getParameter( i ), m_appLogInfo, context, outtext ) == false )
                     {
                         return Kit::TShell::Result_T::CMD_ERR_BAD_SYNTAX;

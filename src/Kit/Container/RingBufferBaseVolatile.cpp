@@ -13,13 +13,13 @@
 #include <string.h>
 
 //------------------------------------------------------------------------------
-namespace Kit { 
-namespace Container { 
+namespace Kit {
+namespace Container {
 
 RingBufferBaseVolatile::RingBufferBaseVolatile( unsigned numMaxElements ) noexcept
     : m_readIdx( 0 )
     , m_writeIdx( 0 )
-    , m_elements( numMaxElements ) 
+    , m_elements( numMaxElements )
 {
 }
 
@@ -177,6 +177,6 @@ void* RingBufferBaseVolatile::peekNextAddItems( unsigned& dstNumFlatElements, si
 }
 
 
-} // end namespace
+}  // end namespace
 }
 //------------------------------------------------------------------------------

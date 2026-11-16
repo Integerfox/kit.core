@@ -6,7 +6,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file Project/build specific 'Mappings'  
+/** @file Project/build specific 'Mappings'
 
           Note: Intentionally there is NO Header latch (see LHeader Pattern)
                 for why.
@@ -18,7 +18,7 @@
 // strapi mapping
 #include "Kit/Text/_mappings/_arm_gcc_stm32/strapi.h"
 
-// IO mapping.  
+// IO mapping.
 #include "Kit/Io/_mappings/_nofs/mappings.h"
 
 // BSP

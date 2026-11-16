@@ -21,7 +21,7 @@ namespace Io {
 namespace Ram {
 
 /** This concrete template convenience class extends the RAM InputOutput class
-    to include allocating the Ring Buffer memory.  The template argument 
+    to include allocating the Ring Buffer memory.  The template argument
     'NUM_BYTES' is the number of 'useable' bytes.
  */
 template <int NUM_BYTES>
@@ -30,13 +30,13 @@ class InputOutputAllocate : public InputOutput
 public:
     /// Constructor.
     InputOutputAllocate() noexcept
-        : InputOutput( m_memory, sizeof(m_memory) )
+        : InputOutput( m_memory, sizeof( m_memory ) )
     {
     }
 
 protected:
     /// Memory for the Ring buffer (+1 because the Ring Buffer can only store N-1 bytes when the buffer size is N)
-    uint8_t m_memory[NUM_BYTES+1];   
+    uint8_t m_memory[NUM_BYTES + 1];
 };
 
 }  // end namespaces

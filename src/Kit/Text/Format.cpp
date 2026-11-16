@@ -9,6 +9,7 @@
 /** @file */
 
 #include "Format.h"
+#include "Kit/Time/calendar.h"
 
 //------------------------------------------------------------------------------
 namespace Kit {
@@ -215,6 +216,43 @@ bool Format::formatMsec( IString&  buffer,
                               static_cast<unsigned>( mm ),
                               static_cast<unsigned>( ss ) );
         }
+    }
+
+    return !buffer.truncated();
+}
+
+////////////////////////////
+bool Format::utcTimestamp( IString& buffer,
+                           uint64_t msecSinceEpoch,
+                           bool     encodeMsec,
+                           bool     appendToString ) noexcept
+{
+    struct tm cal;
+    uint16_t  msec;
+    Kit::Time::msecToCalendar( msecSinceEpoch, cal, msec );
+
+    if ( encodeMsec )
+    {
+        buffer.formatOpt( appendToString,
+                          "%04d-%02d-%02d %02d:%02d:%02d.%03u",
+                          cal.tm_year + 1900,
+                          cal.tm_mon + 1,
+                          cal.tm_mday,
+                          cal.tm_hour,
+                          cal.tm_min,
+                          cal.tm_sec,
+                          static_cast<unsigned>( msec ) );
+    }
+    else
+    {
+        buffer.formatOpt( appendToString,
+                          "%04d-%02d-%02d %02d:%02d:%02d",
+                          cal.tm_year + 1900,
+                          cal.tm_mon + 1,
+                          cal.tm_mday,
+                          cal.tm_hour,
+                          cal.tm_min,
+                          cal.tm_sec );
     }
 
     return !buffer.truncated();

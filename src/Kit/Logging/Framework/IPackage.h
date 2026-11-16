@@ -57,7 +57,7 @@ public:
 
     /// Null/Invalid Message ID
     static constexpr uint8_t NULL_MSG_ID = 0xFF;
-    
+
     /// Null/Invalid Message Text
     static constexpr const char* NULL_MSG_ID_TEXT = "?";
 
@@ -81,7 +81,7 @@ public:
         length of less or equal to OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_MESSAGE_ID_TEXT.
 
         The method returns true if the Sub-system and Message IDs are valid for this
-        Package; otherwise false is returned.  When false is returned the return 
+        Package; otherwise false is returned.  When false is returned the return
         text pointer is set to nullptr if its ID is invalid.
      */
     virtual bool subSystemAndMessageIdsToString( uint8_t      subSystemId,

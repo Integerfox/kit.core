@@ -47,7 +47,7 @@ public:
         can accept 'numBytes' without blocking.  Used to avoid starting a frame
         that cannot be completed.  See Kit::Io::IOutput::waitForWriteSpace().
 
-        NOTE: 'numBytes' is a raw, non-encoded byte count.  The caller is 
+        NOTE: 'numBytes' is a raw, non-encoded byte count.  The caller is
               responsible for accounting for extra encoding bytes when building
               a frame.
 

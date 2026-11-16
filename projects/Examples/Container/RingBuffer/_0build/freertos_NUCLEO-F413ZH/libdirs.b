@@ -8,6 +8,7 @@ src/Kit/EventQueue
 src/Kit/Itc
 src/Kit/Container
 src/Kit/Text
+src/Kit/Time < calendar.cpp
 src/Kit/Io
 
 # Output stream for the KIT Console

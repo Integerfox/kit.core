@@ -6,7 +6,7 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file Project/build specific 'Mappings'  
+/** @file Project/build specific 'Mappings'
 
           Note: Intentionally there is NO Header latch (see LHeader Pattern)
                 for why.

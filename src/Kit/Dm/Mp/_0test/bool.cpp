@@ -8,8 +8,8 @@
  *----------------------------------------------------------------------------*/
 /** @file */
 
-#include "Kit/EventQueue/Server.h"
 #include "common.h"
+#include "Kit/_support/testing/ManualEventQueue.h"
 #include "Kit/System/_testsupport/ShutdownUnitTesting.h"
 #include "catch2/catch_test_macros.hpp"
 #include "Kit/Text/FString.h"
@@ -17,26 +17,22 @@
 #include "Kit/Dm/Mp/Bool.h"
 #include <string.h>
 
-#define STRCMP(s1,s2)       (strcmp(s1,s2)==0)
-#define MAX_STR_LENG        1024
-#define SECT_               "_0test"
+#define STRCMP( s1, s2 ) ( strcmp( s1, s2 ) == 0 )
+#define MAX_STR_LENG     1024
+#define SECT_            "_0test"
 
-#define INITIAL_VALUE       true
+#define INITIAL_VALUE    true
 
 
 ////////////////////////////////////////////////////////////////////////////////
 using namespace Kit::Dm;
 
 // Allocate/create my Model Database
-static ModelDatabase    modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
 // Allocate my Model Points
-static Mp::Bool       mp_apple_( modelDb_, "APPLE" );
-static Mp::Bool       mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
-
-
-// Don't let the Runnable object go out of scope before its thread has actually terminated!
-static Kit::EventQueue::Server  t1Mbox_;
+static Mp::Bool mp_apple_( modelDb_, "APPLE" );
+static Mp::Bool mp_orange_( modelDb_, "ORANGE", INITIAL_VALUE );
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,10 +45,10 @@ TEST_CASE( "Bool" )
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
     Kit::Text::FString<MAX_STR_LENG> errorMsg = "noerror";
-    char string[MAX_STR_LENG + 1];
-    bool truncated;
-    bool valid;
-    bool value;
+    char                             string[MAX_STR_LENG + 1];
+    bool                             truncated;
+    bool                             valid;
+    bool                             value;
     mp_apple_.setInvalid( ChangeNotice_T::eNORMAL, LockRequest_T::eUNLOCK );
 
     SECTION( "gets" )
@@ -68,7 +64,7 @@ TEST_CASE( "Bool" )
         REQUIRE( s == sizeof( value ) + sizeof( bool ) );
 
         const char* mpType = mp_apple_.getTypeAsText();
-        KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType) ;
+        KIT_SYSTEM_TRACE_MSG( SECT_, "typeText: [%s]", mpType );
         REQUIRE( strcmp( mpType, "Kit::Dm::Mp::Bool" ) == 0 );
     }
 
@@ -108,7 +104,7 @@ TEST_CASE( "Bool" )
         KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
         StaticJsonDocument<1024> doc;
-        DeserializationError err = deserializeJson( doc, string );
+        DeserializationError     err = deserializeJson( doc, string );
         REQUIRE( err == DeserializationError::Ok );
         REQUIRE( doc["locked"] == false );
         REQUIRE( doc["valid"] == true );
@@ -117,14 +113,14 @@ TEST_CASE( "Bool" )
 
     SECTION( "fromJSON" )
     {
-        const char* json = "{name:\"APPLE\", val:false}";
-        bool result = modelDb_.fromJSON( json );
+        const char* json   = "{name:\"APPLE\", val:false}";
+        bool        result = modelDb_.fromJSON( json );
         REQUIRE( result == true );
         valid = mp_apple_.read( value );
         REQUIRE( valid );
         REQUIRE( value == false );
 
-        json = "{name:\"APPLE\", val:\"true\"}";
+        json   = "{name:\"APPLE\", val:\"true\"}";
         result = modelDb_.fromJSON( json, &errorMsg );
         REQUIRE( result == false );
         REQUIRE( errorMsg != "noerror" );
@@ -147,20 +143,54 @@ TEST_CASE( "Bool" )
     SECTION( "observer" )
     {
         KIT_SYSTEM_TRACE_SCOPE( SECT_, "observer test" );
-        bool expectedVal = true;
-        Viewer<Mp::Bool,bool>     viewer_apple1( t1Mbox_, Kit::System::Thread::getCurrent(), mp_apple_, expectedVal );
-        Kit::System::Thread* t1 = Kit::System::Thread::create( t1Mbox_, "T1" );
+        ManualEventQueue       eventQueue;  // No thread: the test thread runs the queue
+        Viewer<Mp::Bool, bool> viewer( eventQueue, mp_apple_ );
 
         // NOTE: The MP MUST be in the INVALID state at the start of this test
-        viewer_apple1.open();
-        mp_apple_.write( true );
-        Kit::System::Thread::wait();
-        viewer_apple1.close();
+        // Attaching (with an unknown sequence number) generates a notification of the current state
+        REQUIRE( eventQueue.requestOpen( viewer ) );
+        REQUIRE( viewer.m_notificationCount == 1 );
+        REQUIRE( viewer.m_lastValid == false );
 
-        // Shutdown threads
-        t1Mbox_.pleaseStop();
-        WAIT_FOR_THREAD_TO_STOP( t1 );
-        Kit::System::Thread::destroy( *t1 );
+        mp_apple_.write( true );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.m_lastValue == true );
+
+        // Same value -->no change notification
+        mp_apple_.write( true );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 2 );
+
+        mp_apple_.write( false );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 3 );
+        REQUIRE( viewer.m_lastValid );
+        REQUIRE( viewer.m_lastValue == false );
+
+        // Multiple changes before the queue runs -->ONE notification with the latest value
+        mp_apple_.write( true );
+        mp_apple_.write( false );
+        mp_apple_.write( true );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 4 );
+        REQUIRE( viewer.m_lastValue == true );
+
+        // Valid -->invalid is a change, invalid -->invalid is not
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
+        REQUIRE( viewer.m_lastValid == false );
+        mp_apple_.setInvalid();
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
+
+        // Detached -->no change notification
+        REQUIRE( eventQueue.requestClose( viewer ) );
+        mp_apple_.write( true );
+        REQUIRE( eventQueue.runUntilIdle() );
+        REQUIRE( viewer.m_notificationCount == 5 );
     }
 
 

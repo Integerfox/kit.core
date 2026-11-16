@@ -24,7 +24,7 @@ InputOutput::InputOutput() noexcept
 {
 }
 
-InputOutput::InputOutput( KitIoSocketHandle_T fd) noexcept
+InputOutput::InputOutput( KitIoSocketHandle_T fd ) noexcept
     : m_fd( fd )
     , m_eos( false )
 {

@@ -66,8 +66,8 @@ void EventLoop::stopEventLoop() noexcept
 
 bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
 {
-    // Trap my exit/please-stop condition. 
-    if ( !m_run ) // Note: m_run is atomic so it is safe to read without a lock
+    // Trap my exit/please-stop condition.
+    if ( !m_run )  // Note: m_run is atomic so it is safe to read without a lock
     {
         return false;
     }
@@ -99,13 +99,26 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
         return false;
     }
 
+    // Process Event Flags
+    processEventFlags();
+
+    // Timer Check
+    processTimers();
+
+    // Watchdog monitoring (if enabled)
+    KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( m_watchdog );
+
+    return true;
+}
+
+void EventLoop::processEventFlags() noexcept
+{
     // Capture the current state of the event flags
     GlobalLock::begin();
     uint32_t events = m_events;
     m_events        = 0;
     GlobalLock::end();
 
-    // Process Event Flags
     if ( events && m_eventList )
     {
         // Walk my list of event flag handlers and notify the ones that are interested in the active event(s)
@@ -120,14 +133,6 @@ bool EventLoop::waitAndProcessEvents( bool skipWait ) noexcept
             eventPtr = m_eventList->next( *eventPtr );
         }
     }
-
-    // Timer Check
-    processTimers();
-
-    // Watchdog monitoring (if enabled)
-    KIT_SYSTEM_WATCHDOG_EVENTLOOP_MONITOR( m_watchdog );
-
-    return true;
 }
 
 //////////////////////////////////////

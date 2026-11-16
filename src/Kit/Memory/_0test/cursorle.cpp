@@ -77,7 +77,7 @@ TEST_CASE( "CursorLE" )
         REQUIRE( cursor.getRemainingCount() == ( BUFFER_SIZE - 1 - 2 - 4 - 8 - sizeof( array ) - sizeof( array3 ) ) );
         REQUIRE( cursor.readF32( real32 ) );
         REQUIRE( cursor.getRemainingCount() == ( BUFFER_SIZE - 1 - 2 - 4 - 8 - sizeof( array ) - sizeof( array3 ) - 4 ) );
-        REQUIRE( cursor.readF64( real64 )) ;
+        REQUIRE( cursor.readF64( real64 ) );
         REQUIRE( cursor.getRemainingCount() == ( BUFFER_SIZE - 1 - 2 - 4 - 8 - sizeof( array ) - sizeof( array3 ) - 4 - 8 ) );
         REQUIRE( byte == 0x11 );
         REQUIRE( word == 0x2122 );
@@ -102,9 +102,9 @@ TEST_CASE( "CursorLE" )
         REQUIRE( cursor.write( array, sizeof( array ) ) );
         REQUIRE( cursor.writeF32( (float)3.14 ) );
         REQUIRE( cursor.writeF64( (double)3.14159 ) );
-        
 
-        uint8_t  expectedVal[] = { 0xF1, 0xE2, 0xE1, 0xD4, 0xD3, 0xD2, 0xD1, 0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0xAA };
+
+        uint8_t expectedVal[] = { 0xF1, 0xE2, 0xE1, 0xD4, 0xD3, 0xD2, 0xD1, 0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01, 0xAA };
         REQUIRE( memcmp( bufferMemory_, expectedVal, sizeof( expectedVal ) ) == 0 );
 
         cursor.setPosition( 0 );
@@ -217,7 +217,7 @@ TEST_CASE( "CursorLE" )
         REQUIRE( sdword == 305450464 );
         REQUIRE( sqword == 811183134362 );
     }
-    
+
     SECTION( "skip" )
     {
         CursorLE cursor( bufferMemory_, sizeof( bufferMemory_ ) );
@@ -231,7 +231,7 @@ TEST_CASE( "CursorLE" )
     SECTION( "error-cases" )
     {
         CursorLE cursor( bufferMemory_, sizeof( bufferMemory_ ) );
-        REQUIRE( cursor.errorOccurred() == false);
+        REQUIRE( cursor.errorOccurred() == false );
 
         REQUIRE( cursor.setPosition( 0 ) );
         REQUIRE( cursor.errorOccurred() == false );
@@ -262,7 +262,7 @@ TEST_CASE( "CursorLE" )
 
         REQUIRE( cursor.setPosition( 0 ) );
         REQUIRE( cursor.errorOccurred() == false );
-        REQUIRE( cursor.write( nullptr, 0 ) == false);
+        REQUIRE( cursor.write( nullptr, 0 ) == false );
         REQUIRE( cursor.errorOccurred() );
 
         REQUIRE( cursor.setPosition( 0 ) );

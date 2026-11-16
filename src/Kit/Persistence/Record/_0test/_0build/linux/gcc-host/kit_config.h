@@ -16,9 +16,9 @@
 
 #define USE_KIT_EVENT_QUEUE_ITC_MSG_ONLY
 
-#if defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined( __BYTE_ORDER__ ) && ( __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ )
 #define USE_KIT_TYPE_ENDIAN_LE_HOST
-#elif defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
+#elif defined( __BYTE_ORDER__ ) && ( __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__ )
 #define USE_KIT_TYPE_ENDIAN_BE_HOST
 #else
 #error "Unable to detect host endianness. Please define USE_KIT_TYPE_ENDIAN_LE_HOST or USE_KIT_TYPE_ENDIAN_BE_HOST manually."

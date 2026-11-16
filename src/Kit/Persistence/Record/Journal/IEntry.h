@@ -40,7 +40,7 @@ public:
         uint64_t timestamp;    //!< The timestamp value for the entry (Note: this is free-running counter, i.e. is NOT elapsed based)
         Size_T   mediaOffset;  //!< Offset, within the IMedia storage to the start of the Entry
 
-        /// Constructor 
+        /// Constructor
         Marker_T()
             : timestamp( 0 )
             , mediaOffset( 0 )

@@ -132,7 +132,7 @@ bool TeeOutput::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Typ
     bytesWritten = 0;
 
     // Loop through all active streams
-    for( unsigned i=0; i<MAX_STREAMS; ++i )
+    for ( unsigned i = 0; i < MAX_STREAMS; ++i )
     {
         IOutput* stream = m_streams[i];
         if ( stream == nullptr )
@@ -206,7 +206,7 @@ bool TeeOutput::waitForWriteSpace( Kit::Type::SSize_T numBytes, uint32_t timeout
     return true;
 }
 
-bool TeeOutput::isEos()  noexcept
+bool TeeOutput::isEos() noexcept
 {
     bool rc = false;
     for ( unsigned i = 0; i < MAX_STREAMS; ++i )
@@ -232,7 +232,7 @@ void TeeOutput::close() noexcept
         m_opened = false;
 
         // Close all the streams (both good and failed)
-        for(unsigned i=0; i<MAX_STREAMS; ++i)
+        for ( unsigned i = 0; i < MAX_STREAMS; ++i )
         {
             if ( m_streams[i] != nullptr )
             {

@@ -39,7 +39,7 @@ Kit::Logging::Framework::LogResult_T Kit::Logging::Framework::vlogf( uint8_t    
     lastSubSystemId_      = subSystemId;
     lastMessageId_        = messageId;
     lastInfoText_.vformat( formatInfoText, ap );
-    
+
     return result_;
 }
 

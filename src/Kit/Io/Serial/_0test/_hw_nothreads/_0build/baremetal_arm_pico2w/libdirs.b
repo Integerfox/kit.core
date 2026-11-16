@@ -5,6 +5,7 @@ src/Kit/Io/Serial/_0test/_hw_nothreads
 # infrastructure
 src/Kit/Io
 src/Kit/Text
+src/Kit/Time < calendar.cpp
 src/Kit/Text/_mappings/_arm_gcc_rp2xxx
 src/Kit/Container
 

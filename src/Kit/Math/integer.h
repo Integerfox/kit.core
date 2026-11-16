@@ -28,13 +28,13 @@ namespace Math {
 /** This method treats the binary array a single 'large integer' and increments
     the array/large-integer by N.  N is limited to [0,255].
 
-    If the 'littleEndian' flag is set to the true, then the increment starts 
-    with the first byte in the array; else the increment starts with the last 
+    If the 'littleEndian' flag is set to the true, then the increment starts
+    with the first byte in the array; else the increment starts with the last
     byte in the array.
  */
-void incrementLargeInteger( uint8_t* integerToBeIncrement, int integerSizeInBytes, uint8_t incValue=1, bool littleEndian=true ) noexcept;
+void incrementLargeInteger( uint8_t* integerToBeIncrement, int integerSizeInBytes, uint8_t incValue = 1, bool littleEndian = true ) noexcept;
 
 
-}       // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

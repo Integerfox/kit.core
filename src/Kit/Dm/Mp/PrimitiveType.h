@@ -40,7 +40,7 @@ namespace Dm {
 namespace Mp {
 
 
-/** This template class extends the Scalar base class to data that is a C 
+/** This template class extends the Scalar base class to data that is a C
     primitive type of type: 'ELEMTYPE'.
  */
 template <class ELEMTYPE, class MPTYPE>
@@ -222,9 +222,9 @@ public:
                             ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
                             LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
-        Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
+        Kit::System::Mutex::ScopeLock                       criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
         typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
-        const uint8_t bitWidth = sizeof( UnsignedElemType ) * 8;
+        const uint8_t                                       bitWidth = sizeof( UnsignedElemType ) * 8;
         if ( bitPosition >= bitWidth )
         {
             return this->m_seqNum;
@@ -240,9 +240,9 @@ public:
                               ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
                               LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
-        Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
+        Kit::System::Mutex::ScopeLock                       criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
         typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
-        const uint8_t bitWidth = sizeof( UnsignedElemType ) * 8;
+        const uint8_t                                       bitWidth = sizeof( UnsignedElemType ) * 8;
         if ( bitPosition >= bitWidth )
         {
             return this->m_seqNum;
@@ -258,9 +258,9 @@ public:
                              ChangeNotice_T chgNotice   = ChangeNotice_T::eNORMAL,
                              LockRequest_T  lockRequest = LockRequest_T::eNO_REQUEST ) noexcept
     {
-        Kit::System::Mutex::ScopeLock criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
+        Kit::System::Mutex::ScopeLock                       criticalSection( Kit::Dm::ModelPointBase::m_modelDatabase.getMutex_() );
         typedef typename std::make_unsigned<ELEMTYPE>::type UnsignedElemType;
-        const uint8_t bitWidth = sizeof( UnsignedElemType ) * 8;
+        const uint8_t                                       bitWidth = sizeof( UnsignedElemType ) * 8;
         if ( bitPosition >= bitWidth )
         {
             return this->m_seqNum;

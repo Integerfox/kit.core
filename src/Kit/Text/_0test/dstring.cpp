@@ -22,8 +22,8 @@ using namespace Kit::System;
 TEST_CASE( "DString" )
 {
     ShutdownUnitTesting::clearAndUseCounter();
-    DString foo( "Hello World, this is bob" );
-    DString bar( "Hello World, this is bob" );
+    DString  foo( "Hello World, this is bob" );
+    DString  bar( "Hello World, this is bob" );
     IString& bref = bar;
 
 
@@ -57,7 +57,7 @@ TEST_CASE( "DString" )
     SECTION( "Constructors" )
     {
         const char* nullPtr = 0;
-        DString s0( nullPtr );
+        DString     s0( nullPtr );
         REQUIRE( s0 == "" );
 
         DString s1;
@@ -79,26 +79,26 @@ TEST_CASE( "DString" )
         DString s6( -32 );
         REQUIRE( s6 == "-32" );
 
-        DString s7( (unsigned) 42 );
+        DString s7( (unsigned)42 );
         REQUIRE( s7 == "42" );
 
-        DString s8( (long) -10000000 );
+        DString s8( (long)-10000000 );
         REQUIRE( s8 == "-10000000" );
 
-        DString s9( (unsigned long) 81000000 );
+        DString s9( (unsigned long)81000000 );
         REQUIRE( s9 == "81000000" );
 
-        DString s10( (long long) -200000000000 );
+        DString s10( (long long)-200000000000 );
         REQUIRE( s10 == "-200000000000" );
 
-        DString s11( ( unsigned long long )9100000000000 );
+        DString s11( (unsigned long long)9100000000000 );
         REQUIRE( s11 == "9100000000000" );
     }
 
     SECTION( "Assignments" )
     {
         const char* nullPtr = 0;
-        DString s0( "****" );
+        DString     s0( "****" );
         s0 = nullPtr;
         REQUIRE( s0 == "" );
 
@@ -128,22 +128,22 @@ TEST_CASE( "DString" )
         REQUIRE( s6 == "-32" );
 
         DString s7( "****" );
-        s7 = (unsigned) 42;
+        s7 = (unsigned)42;
         REQUIRE( s7 == "42" );
 
         DString s8( "****" );
-        s8 = (long) -10000000;
+        s8 = (long)-10000000;
         REQUIRE( s8 == "-10000000" );
 
         DString s9( "****" );
-        s9 = (unsigned long) 81000000;
+        s9 = (unsigned long)81000000;
         REQUIRE( s9 == "81000000" );
     }
 
     SECTION( "Append" )
     {
         const char* nullPtr = 0;
-        DString s0( "****" );
+        DString     s0( "****" );
         s0 += nullPtr;
         REQUIRE( s0 == "****" );
 
@@ -173,15 +173,15 @@ TEST_CASE( "DString" )
         REQUIRE( s6 == "****-32" );
 
         DString s7( "****" );
-        s7 += (unsigned) 42;
+        s7 += (unsigned)42;
         REQUIRE( s7 == "****42" );
 
         DString s8( "****" );
-        s8 += (long) -10000000;
+        s8 += (long)-10000000;
         REQUIRE( s8 == "****-10000000" );
 
         DString s9( "****" );
-        s9 += (unsigned long) 81000000;
+        s9 += (unsigned long)81000000;
         REQUIRE( s9 == "****81000000" );
     }
 
@@ -194,13 +194,13 @@ TEST_CASE( "DString" )
         DString s4( "abcdefghijklmnopqrstuvwxyz" );
         DString s5( '%' );
         DString s6( -32 );
-        DString s7( (unsigned) 42 );
-        DString s8( (long) -10000000 );
-        DString s9( (unsigned long) 81000000 );
-        DString s10( (long long) -81000000 );
-        DString s11( ( unsigned long long )9100000000000 );
+        DString s7( (unsigned)42 );
+        DString s8( (long)-10000000 );
+        DString s9( (unsigned long)81000000 );
+        DString s10( (long long)-81000000 );
+        DString s11( (unsigned long long)9100000000000 );
         Kit::Memory::NewUnitTesting::enable();
-        REQUIRE( s1 == ( const char* )"unclexx" );
+        REQUIRE( s1 == (const char*)"unclexx" );
         REQUIRE( s2 == "" );
         REQUIRE( s2.length() == 0 );
         REQUIRE( s3 == "" );
@@ -226,7 +226,7 @@ TEST_CASE( "DString" )
         DString s12( "Hi" );
         Kit::Memory::NewUnitTesting::disable();
         s12 += " World";
-        s12+= "overflow the block size on the append operation!!!!!! add a few more characters just to max sure";
+        s12 += "overflow the block size on the append operation!!!!!! add a few more characters just to max sure";
         Kit::Memory::NewUnitTesting::enable();
         REQUIRE( s12.length() == 15 );
         REQUIRE( s12 == "Hi Worldoverflo" );

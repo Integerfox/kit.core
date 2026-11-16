@@ -22,9 +22,12 @@ pushd projects/xpkgs/catch2
 $NQBP_BIN/other/bob.py -v4 --p2 linux gcc-host -c --try posix64 
 popd
 
-# Build all test linux projects 
+# Build all test linux projects.  NOTE: The unit tests are built with debug
+# options (-g, i.e. no optimization) because the code coverage metrics are
+# only accurate - and consistent (lcov) - for unoptimized code, e.g. inlined
+# functions are reported as 'not hit' when their (inlined) lines are hit.
 pushd src
-$NQBP_BIN/other/bob.py -v4 --p2 linux gcc-host -c --try posix64 --bldtime --bldnum $1
+$NQBP_BIN/other/bob.py -v4 --p2 linux gcc-host -c -g --try posix64 --bldtime --bldnum $1
 
 # Run unit tests
 $NQBP_BIN/other/chuck.py -vt --match a.out --d2 linux --dir gcc-host

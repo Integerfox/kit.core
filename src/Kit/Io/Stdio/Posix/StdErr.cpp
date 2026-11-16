@@ -15,6 +15,6 @@
 using namespace Kit::Io::Stdio;
 
 StdErr::StdErr()
-    :OutputDelegate( STDERR_FILENO )
+    : OutputDelegate( STDERR_FILENO )
 {
 }

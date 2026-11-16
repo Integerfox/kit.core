@@ -21,8 +21,8 @@ namespace Journal {
 
 bool ResetSync::logicalReset() noexcept
 {
-    LogicalResetRequest::Payload       msgPayload;
-    Kit::Itc::SyncReturnHandler        srh;
+    LogicalResetRequest::Payload         msgPayload;
+    Kit::Itc::SyncReturnHandler          srh;
     LogicalResetRequest::LogicalResetMsg msg( *this, msgPayload, srh );
     m_myEventQueue.postSync( msg );
     return msgPayload.m_success;

@@ -28,7 +28,7 @@ static int shutdownApplication_( int exitCode ) noexcept
 
 int Shutdown::success() noexcept
 {
-    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN , "Orderly shutdown initiated..." );
+    KIT_LOGGING_LOG_SYSTEM( ClassificationId::WARNING, SystemMsgId::SHUTDOWN, "Orderly shutdown initiated..." );
     return shutdownApplication_( notifyShutdownHandlers( Shutdown::eSUCCESS ) );
 }
 
@@ -38,6 +38,6 @@ int Shutdown::failure( int exitCode ) noexcept
 }
 
 
-} // end namespaces
+}  // end namespaces
 }
 //------------------------------------------------------------------------------

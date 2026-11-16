@@ -14,12 +14,10 @@
 using namespace Kit::Io::Serial::ST::M32F4;
 
 
-
 ////////////////////////////////////
 InputOutput::InputOutput( Kit::Container::RingBuffer<uint8_t>& txBuffer,
-                          Kit::Container::RingBuffer<uint8_t>& rxBuffer
-)
-    :m_driver( txBuffer, rxBuffer )
+                          Kit::Container::RingBuffer<uint8_t>& rxBuffer )
+    : m_driver( txBuffer, rxBuffer )
 {
 }
 
@@ -58,7 +56,7 @@ size_t InputOutput::getRxErrorsCounts( bool clearCount ) noexcept
 bool InputOutput::write( const void* buffer, Kit::Type::SSize_T maxBytes, Kit::Type::SSize_T& bytesWritten )
 {
     bytesWritten = maxBytes;
-    return m_driver.write( buffer, (size_t) maxBytes );
+    return m_driver.write( buffer, (size_t)maxBytes );
 }
 
 

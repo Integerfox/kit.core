@@ -24,7 +24,7 @@ namespace Io {
     line writer allows the client to write lines to a stream.  The interface
     also handles the output of the 'new line' character(s).
  */
-class ILineWriter 
+class ILineWriter
 {
 public:
     /** Outputs the specified string to the stream.  No newline character(s)

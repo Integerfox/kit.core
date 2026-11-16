@@ -14,8 +14,11 @@
 #include "Kit/Text/FString.h"
 #include "Kit/Checksum/Fletcher16.h"
 #include "Kit/Checksum/Crc16CcittFast.h"
+#include "Kit/Checksum/Crc16CcittReflectFast.h"
 #include "Kit/Checksum/Crc32Mpeg2Fast.h"
 #include "Kit/Checksum/Crc32EthernetFast.h"
+#include "Kit/Checksum/Crc32PldmFast.h"
+#include "Kit/Checksum/Crc8SMBusFast.h"
 #include "Kit/Checksum/Md5.h"
 #include "Kit/Checksum/Utils.h"
 #include "Kit/Type/endian.h"
@@ -27,15 +30,18 @@ using namespace Kit::Checksum;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#define SECT_           "_0test"
+#define SECT_                      "_0test"
 
-#define DATALEN_        9
-#define MAX_CRCLEN_     4
+#define DATALEN_                   9
+#define MAX_CRCLEN_                4
 
-#define CRC_CCITT_xFFFF 0x29B1     // CRC value for the text string "123456789"   (see http://www.zorc.breitbandkatze.de/crc.html)
-#define CRC_MPEG2       0x0376E6E7 // CRC-32/MPEG-2 value for the text string "123456789"
-#define CRC_ETHERNET    0xCBF43926 // CRC-32/IEEE 802.3 value for the text string "123456789"
-#define FLETCHER16      0x1e03     // Fletcher checksum for the text "123456789"
+#define CRC_CCITT_xFFFF            0x29B1      // CRC value for the text string "123456789"   (see http://www.zorc.breitbandkatze.de/crc.html)
+#define CRC_CCITT_xFFFF_REFLECT_ON 0x6F91      // CRC value for the text string "123456789" (see http://www.zorc.breitbandkatze.de/crc.html)
+#define CRC_MPEG2                  0x0376E6E7  // CRC-32/MPEG-2 value for the text string "123456789"
+#define CRC_ETHERNET               0xCBF43926  // CRC-32/IEEE 802.3 value for the text string "123456789"
+#define CRC_PLDM                   0xCBF43926  // CRC-32 PLDM value for the text string "123456789"
+#define CRC8_SMBUS                 0xF4        // CRC-8/SMBUS value for the text string "123456789" (see https://reveng.sourceforge.io/crc-catalogue/1-15.htm)
+#define FLETCHER16                 0x1e03      // Fletcher checksum for the text "123456789"
 
 // clang-format off
 uint8_t dataBuffer_[DATALEN_ + MAX_CRCLEN_] = { '1', '2', '3', '4', '5', '6', '7', '8', '9', 0, };
@@ -56,15 +62,15 @@ bool testEdc( const char* testName, IEdc& cksum, uint8_t* inBuffer, int inLen, v
     // Test error cases
     cksum.reset();
     cksum.accumulate( inBuffer, inLen );
-    REQUIRE( cksum.finalize( nullptr, inLen ) == false ); // Should be false since no buffer provided
-    REQUIRE( cksum.finalize( resultBuffer, 0 ) == false ); // Should be false since no buffer provided
+    REQUIRE( cksum.finalize( nullptr, inLen ) == false );   // Should be false since no buffer provided
+    REQUIRE( cksum.finalize( resultBuffer, 0 ) == false );  // Should be false since no buffer provided
     REQUIRE( cksum.finalize( resultBuffer, bufferSize ) );
 
     KIT_SYSTEM_TRACE_MSG( SECT_, "Test for: %s", testName );
     printBuf( inBuffer, inLen, "Input buffer" );
     cksum.reset();
-    cksum.accumulate( nullptr, inLen ); // Should be nop
-    cksum.accumulate( inBuffer, 0 ); // Should be nop
+    cksum.accumulate( nullptr, inLen );  // Should be nop
+    cksum.accumulate( inBuffer, 0 );     // Should be nop
     cksum.accumulate( inBuffer, inLen );
     bool isFinalized = cksum.finalize( resultBuffer, bufferSize );
     printBuf( resultBuffer, cksum.getEdcSize(), "EDC" );
@@ -105,6 +111,14 @@ TEST_CASE( "Checksums", "[chksum]" )
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
 
+    SECTION( "Crc8 - SMBus - Fast" )
+    {
+        Crc8SMBusFast cksum;
+        uint8_t       crc;
+        REQUIRE( testEdc( "CRC SMBus Fast", cksum, dataBuffer_, DATALEN_, &crc, sizeof( crc ) ) );
+        REQUIRE( crc == CRC8_SMBUS );
+    }
+
     SECTION( "Checksum - Fletcher16" )
     {
         Fletcher16 cksum;
@@ -121,10 +135,18 @@ TEST_CASE( "Checksums", "[chksum]" )
         REQUIRE( KIT_TYPE_HTOBE16( crc ) == CRC_CCITT_xFFFF );
     }
 
+    SECTION( "Crc16 - CCITT with reflection - Fast" )
+    {
+        Crc16CcittReflectFast cksum;
+        uint16_t              crc;
+        REQUIRE( testEdc( "CRC CCITT-REFLECT-FAST", cksum, dataBuffer_, DATALEN_, &crc, sizeof( crc ) ) );
+        REQUIRE( KIT_TYPE_HTOLE16( crc ) == CRC_CCITT_xFFFF_REFLECT_ON );
+    }
+
     SECTION( "Crc32 - MPEG-2" )
     {
         Crc32Mpeg2Fast cksum;
-        uint32_t          crc;
+        uint32_t       crc;
         REQUIRE( testEdc( "CRC MPEG-2", cksum, dataBuffer_, DATALEN_, &crc, sizeof( crc ) ) );
         REQUIRE( KIT_TYPE_HTOBE32( crc ) == CRC_MPEG2 );
     }
@@ -137,20 +159,38 @@ TEST_CASE( "Checksums", "[chksum]" )
         REQUIRE( KIT_TYPE_HTOLE32( crc ) == CRC_ETHERNET );
     }
 
+    SECTION( "Crc32 - PLDM - Fast" )
+    {
+        Crc32PldmFast cksum;
+        uint32_t      crc;
+        REQUIRE( testEdc( "CRC PLDM-FAST", cksum, dataBuffer_, DATALEN_, &crc, sizeof( crc ) ) );
+        REQUIRE( KIT_TYPE_HTOLE32( crc ) == CRC_PLDM );
+
+        // A corrupted buffer must fail the check
+        cksum.reset();
+        cksum.accumulate( dataBuffer_, DATALEN_ );
+        cksum.accumulate( &crc, sizeof( crc ) );
+        REQUIRE( cksum.isOkay() );
+        cksum.reset();
+        cksum.accumulate( dataBuffer_, DATALEN_ - 1 );
+        cksum.accumulate( &crc, sizeof( crc ) );
+        REQUIRE( !cksum.isOkay() );
+    }
+
     SECTION( "Md5" )
     {
         Md5                    hash;
         Kit::Text::FString<32> resultAsString;
         Kit::Text::FString<32> expectedResult;
         int                    i;
-        
+
         // Error cases
         hash.reset();
         hash.accumulate( md5_test_data_[0], strlen( md5_test_data_[0] ) );
-        REQUIRE( hash.finalize( nullptr, sizeof( Md5::Digest_T ) ) == false ); // Should be false since no buffer provided
-        REQUIRE( hash.finalize( &resultAsString, 0 ) == false ); // Should be false since no buffer provided
+        REQUIRE( hash.finalize( nullptr, sizeof( Md5::Digest_T ) ) == false );  // Should be false since no buffer provided
+        REQUIRE( hash.finalize( &resultAsString, 0 ) == false );                // Should be false since no buffer provided
 
-        // Run against test vectors 
+        // Run against test vectors
         REQUIRE( hash.getDigestSize() == sizeof( Md5::Digest_T ) );
         Md5::Digest_T result;
         for ( i = 0; i < MD5_ITEMS_ * 2; i += 2 )

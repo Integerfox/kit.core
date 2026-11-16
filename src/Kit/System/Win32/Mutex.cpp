@@ -32,5 +32,3 @@ void Kit::System::Mutex::unlock() noexcept
 {
     LeaveCriticalSection( &m_mutex );
 }
-
-

@@ -13,9 +13,9 @@
 #define USE_KIT_SYSTEM_TRACE
 #define USE_KIT_SYSTEM_ASSERT
 
-#if defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
+#if defined( __BYTE_ORDER__ ) && ( __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__ )
 #define USE_KIT_TYPE_ENDIAN_LE_HOST
-#elif defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
+#elif defined( __BYTE_ORDER__ ) && ( __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__ )
 #define USE_KIT_TYPE_ENDIAN_BE_HOST
 #endif
 

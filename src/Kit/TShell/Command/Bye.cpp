@@ -52,7 +52,7 @@ Result_T Bye::execute( IContext& context, char* cmdString ) noexcept
         }
     }
 
-    
+
     Kit::System::Shutdown::failure( exitCode );
     return Result_T::CMD_SUCCESS;
 }

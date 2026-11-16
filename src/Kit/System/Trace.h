@@ -325,7 +325,7 @@
 /** The compile time default setting for the info level
  */
 #ifndef OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL
-#define OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL (+Kit::System::TraceLevel::eBRIEF)
+#define OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL ( +Kit::System::TraceLevel::eBRIEF )
 #endif
 
 /** The compile time default setting what enable/disable state the trace

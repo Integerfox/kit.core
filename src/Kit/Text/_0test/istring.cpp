@@ -293,7 +293,7 @@ TEST_CASE( "IString" )
         bar.formatAppend( "overflow the originally allocated block(s)" );
         REQUIRE( bar == "Bob=FFFFFFFF, was here. 12overf" );
 
-        bar.format( nullPtr, 2 );   // the second arg is to get past the KIT_SYSTEM_PRINTF_CHECKER()
+        bar.format( nullPtr, 2 );  // the second arg is to get past the KIT_SYSTEM_PRINTF_CHECKER()
         REQUIRE( bar == "Bob=FFFFFFFF, was here. 12overf" );
         bar.format( "bob" );
         REQUIRE( bar == "bob" );
@@ -415,9 +415,9 @@ TEST_CASE( "IString" )
         REQUIRE( s1 == "hello world" );
         int idx = s1.indexOf( 'l' );
         REQUIRE( idx == 2 );
-        idx = s1.indexOf( 'l', idx+1 );
+        idx = s1.indexOf( 'l', idx + 1 );
         REQUIRE( idx == 3 );
-        idx = s1.indexOf( 'l', idx+1 );
+        idx = s1.indexOf( 'l', idx + 1 );
         REQUIRE( idx == 9 );
         idx = s1.indexOf( 'l', 100 );
         REQUIRE( idx == -1 );

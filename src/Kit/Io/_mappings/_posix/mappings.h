@@ -15,7 +15,7 @@
 
  */
 #include <limits.h>  // For PATH_MAX
-#include <dirent.h> // For DIR*
+#include <dirent.h>  // For DIR*
 
 #define KitIoStdioHandle_T_MAP                int       //!< Mapping
 #define KitIoSocketHandle_T_MAP               int       //!< Mapping

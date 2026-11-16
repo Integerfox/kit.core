@@ -24,7 +24,7 @@ namespace RPPico {
 /** This class implements a brute force approach to initializing a 'pico
     semaphore' when the Kit C++ library is initialized.  This is to support
     statically allocated/created Kit::System::Semaphore instances. The issue here
-    is that 'pico semaphore' need to be initialized AFTER main() is called.  
+    is that 'pico semaphore' need to be initialized AFTER main() is called.
  */
 class Semaphore_T : public Kit::System::IStartupHook
 {
@@ -35,9 +35,9 @@ public:
               called).  However, registering AFTER wards is a don't care because
               the 'start-up list' is only used during the call to Kit::System::Api::initialize()
      */
-    Semaphore_T( unsigned initialCount ) 
+    Semaphore_T( unsigned initialCount )
         : IStartupHook( SYSTEM )
-        , m_initialCount( initialCount ) 
+        , m_initialCount( initialCount )
     {
     }
 
@@ -51,15 +51,15 @@ protected:
 
 public:
     /// Platform Semaphore instance. Note: Made public to simply access from the Kit::System::Semaphore class
-    semaphore_t    m_sdkSema;
+    semaphore_t m_sdkSema;
 
 protected:
     /// Initial count
-    unsigned        m_initialCount;
+    unsigned m_initialCount;
 };
 
 
-}   // End namespace(s)
+}  // End namespace(s)
 }
 }
 #endif  // end header latch

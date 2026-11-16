@@ -22,7 +22,7 @@ namespace Io {
 bool IInput::read( char& c ) noexcept
 {
     Kit::Type::SSize_T bytesRead = 0;
-    bool        result    = true;
+    bool               result    = true;
     do
     {
         result = read( &c, sizeof( c ), bytesRead );
@@ -35,11 +35,11 @@ bool IInput::read( char& c ) noexcept
 bool IInput::read( Kit::Text::IString& destString ) noexcept
 {
     Kit::Type::SSize_T bytesRead = 0;
-    int         maxlen    = 0;
-    char*       buffer    = destString.getBuffer( maxlen );
+    int                maxlen    = 0;
+    char*              buffer    = destString.getBuffer( maxlen );
     Kit::Type::SSize_T len       = static_cast<Kit::Type::SSize_T>( maxlen );
-    bool        result    = read( buffer, len, bytesRead );
-    buffer[bytesRead]     = '\0';
+    bool               result    = read( buffer, len, bytesRead );
+    buffer[bytesRead]            = '\0';
     return result;
 }
 
@@ -48,8 +48,8 @@ bool IInput::read( Kit::Text::IString& destString, Kit::Type::SSize_T numBytesTo
     KIT_SYSTEM_ASSERT( numBytesToRead >= 0 );
 
     // Housekeeping
-    int         maxlen = 0;
-    char*       buffer = destString.getBuffer( maxlen );
+    int                maxlen = 0;
+    char*              buffer = destString.getBuffer( maxlen );
     Kit::Type::SSize_T len    = static_cast<Kit::Type::SSize_T>( maxlen );
     if ( numBytesToRead > len )
     {
@@ -74,7 +74,7 @@ bool IInput::read( void* buffer, Kit::Type::SSize_T numBytesToRead ) noexcept
         // Housekeeping
         Kit::Type::SSize_T bytesRead = 0;
         Kit::Type::SSize_T remaining = numBytesToRead;
-        auto*       ptr       = static_cast<uint8_t*>( buffer );
+        auto*              ptr       = static_cast<uint8_t*>( buffer );
 
         // Keep reading until all requested bytes are read
         while ( remaining )

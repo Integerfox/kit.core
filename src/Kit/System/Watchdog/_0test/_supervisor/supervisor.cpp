@@ -6,14 +6,14 @@
  *
  * Redistributions of the source code must retain the above copyright notice.
  *----------------------------------------------------------------------------*/
-/** @file 
+/** @file
 
     Hardware test to demonstrate supervisor thread failure detection.
-    
+
     This test verifies that when the supervisor (event thread) gets stuck
     in a busy loop and exceeds the hardware watchdog timeout period, the
     MCU watchdog will reset the system.
-    
+
     Expected behavior:
     - First run: System starts normally, then supervisor gets stuck after delay
     - Watchdog expires and resets the MCU
@@ -48,7 +48,7 @@ using namespace Kit::EventQueue;
 /** Hardware watchdog timeout is 1000ms (from HAL implementation).
     The supervisor will get stuck for longer than this period.
 */
-#define HW_WATCHDOG_TIMEOUT_MS     1000
+#define HW_WATCHDOG_TIMEOUT_MS 1000
 
 /** Supervisor thread watchdog timeout.
     Must be less than HW watchdog timeout.
@@ -63,12 +63,12 @@ using namespace Kit::EventQueue;
 /** Time to run normally before triggering the stuck condition.
     This gives the watchdog time to initialize and start running properly.
 */
-#define NORMAL_RUN_DELAY_MS        2000
+#define NORMAL_RUN_DELAY_MS 2000
 
 /** How long the supervisor will be stuck.
     This must exceed the HW watchdog timeout to trigger a reset.
 */
-#define STUCK_DURATION_MS          ( HW_WATCHDOG_TIMEOUT_MS + 500 )
+#define STUCK_DURATION_MS ( HW_WATCHDOG_TIMEOUT_MS + 500 )
 
 //------------------------------------------------------------------------------
 // Test State
@@ -120,14 +120,14 @@ protected:
 //------------------------------------------------------------------------------
 
 /// Supervisor watchdog configuration (custom watcher)
-static TestWatcher supervisorThreadWDogConfig_( 
-    SUPERVISOR_WDOG_TIMEOUT_MS, 
-    SUPERVISOR_HEALTH_CHECK_MS, 
+static TestWatcher supervisorThreadWDogConfig_(
+    SUPERVISOR_WDOG_TIMEOUT_MS,
+    SUPERVISOR_HEALTH_CHECK_MS,
     true );
 
 /// Supervisor event loop (standard EventQueue::Server)
-static Server supervisorEventLoop_( 
-    OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD, 
+static Server supervisorEventLoop_(
+    OPTION_KIT_SYSTEM_EVENT_LOOP_TIMEOUT_PERIOD,
     nullptr,
     &supervisorThreadWDogConfig_ );
 
@@ -141,7 +141,7 @@ static Server supervisorEventLoop_(
  */
 class MainTestRunnable : public IRunnable
 {
-private:
+protected:
     bool m_wasWatchdogReset;
 
 public:
@@ -202,7 +202,7 @@ public:
 
         KIT_SYSTEM_TRACE_MSG( SECT_, "Hardware watchdog enabled successfully" );
         KIT_SYSTEM_TRACE_MSG( SECT_, "Running normally for %u ms...", NORMAL_RUN_DELAY_MS );
-        
+
         // Run normally for a bit to establish that watchdog is working
         while ( runCounter_ < NORMAL_RUN_DELAY_MS )
         {
@@ -246,11 +246,11 @@ public:
 /** Run the supervisor stuck test.
     This function is platform independent and can be called from platform-specific
     main() implementations.
-    
+
     This creates an initial raw main thread that is NOT watched by the supervisor.
     This allows trace output to work before the scheduler starts, without requiring
     busy-wait serial driver logic.
-    
+
     @param wasWatchdogReset Flag indicating if the system was reset by watchdog
     @return True if test setup succeeded, false otherwise
  */

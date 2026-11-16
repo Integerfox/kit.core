@@ -37,7 +37,7 @@ namespace Chunk {
       file provides a default buffer. See private_.h for additional details
       about the default buffer.
 
-    - Some of helper methods (e.g. pushToRecord() and pullFromRecord()) are 
+    - Some of helper methods (e.g. pushToRecord() and pullFromRecord()) are
       virtual wrapper methods.  By having a virtual wrapper - pushing/pulling
       to/from the data record facilitates future child classes to extend existing
       chunk classes with the ability to decrypt/encrypt the record data

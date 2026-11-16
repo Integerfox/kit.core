@@ -18,12 +18,12 @@
 #include "Kit/Dm/Mp/Float.h"
 #include <string.h>
 
-#define STRCMP(s1,s2)       (strcmp(s1,s2)==0)
-#define MAX_STR_LENG        1024
-#define SECT_               "_0test"
+#define STRCMP( s1, s2 ) ( strcmp( s1, s2 ) == 0 )
+#define MAX_STR_LENG     1024
+#define SECT_            "_0test"
 
-#define MAGIC_VALUE         3.14F
-#define MAGIC_INC           0.0001F
+#define MAGIC_VALUE      3.14F
+#define MAGIC_INC        0.0001F
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,11 +31,11 @@ using namespace Kit::Dm;
 using namespace Kit::Dm::Mp;
 
 // Allocate/create my Model Database
-static ModelDatabase    modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
+static ModelDatabase modelDb_( "ignoreThisParameter_usedToInvokeTheStaticConstructor" );
 
 // Allocate my Model Points
-static Float       mp_apple_( modelDb_, "APPLE" );
-static Float       mp_orange_( modelDb_, "ORANGE", MAGIC_VALUE );
+static Float mp_apple_( modelDb_, "APPLE" );
+static Float mp_orange_( modelDb_, "ORANGE", MAGIC_VALUE );
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,9 +46,9 @@ TEST_CASE( "Float" )
 {
     Kit::System::ShutdownUnitTesting::clearAndUseCounter();
 
-    char    string[MAX_STR_LENG + 1];
-    bool    truncated;
-    bool    valid;
+    char  string[MAX_STR_LENG + 1];
+    bool  truncated;
+    bool  valid;
     float value;
 
     SECTION( "gets" )
@@ -79,12 +79,12 @@ TEST_CASE( "Float" )
         REQUIRE( valid );
         REQUIRE( value == 2 );  // By design the invalid MP has a 'data value' of zero
         uint16_t seqNum = mp_apple_.write( MAGIC_VALUE );
-        valid = mp_apple_.read( value );
+        valid           = mp_apple_.read( value );
         REQUIRE( valid );
-        REQUIRE( Kit::Math::areFloatsEqual( value, MAGIC_VALUE) );
+        REQUIRE( Kit::Math::areFloatsEqual( value, MAGIC_VALUE ) );
         uint16_t seqNum2 = mp_apple_.increment( MAGIC_INC );
         mp_apple_.read( value );
-        REQUIRE( Kit::Math::areFloatsEqual( value, MAGIC_VALUE+ MAGIC_INC ) );
+        REQUIRE( Kit::Math::areFloatsEqual( value, MAGIC_VALUE + MAGIC_INC ) );
         REQUIRE( seqNum + 1 == seqNum2 );
 
         valid = mp_orange_.read( value );
@@ -99,7 +99,7 @@ TEST_CASE( "Float" )
         KIT_SYSTEM_TRACE_MSG( SECT_, "toJSON: [%s]", string );
 
         StaticJsonDocument<1024> doc;
-        DeserializationError err = deserializeJson( doc, string );
+        DeserializationError     err = deserializeJson( doc, string );
         REQUIRE( err == DeserializationError::Ok );
         REQUIRE( doc["locked"] == false );
         REQUIRE( doc["valid"] == true );
@@ -111,8 +111,8 @@ TEST_CASE( "Float" )
         // Start with MP in the invalid state
         mp_apple_.setInvalid();
 
-        const char* json = "{name:\"APPLE\", val:1234.042}";
-        bool result = modelDb_.fromJSON( json );
+        const char* json   = "{name:\"APPLE\", val:1234.042}";
+        bool        result = modelDb_.fromJSON( json );
         REQUIRE( result == true );
         valid = mp_apple_.read( value );
         REQUIRE( valid );

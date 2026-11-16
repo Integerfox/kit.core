@@ -27,8 +27,8 @@ namespace System {
     NOT a function of the number of active Timers.
 
     NOTE: Software timers are limited to a maximum duration of 49.7 days since
-          the Timer Manager uses a 32bit counter to track elapsed time. 
-          
+          the Timer Manager uses a 32bit counter to track elapsed time.
+
     The Timer Manager requires that the Timer Manager instances, all Timer
     instances, and the Timer's Context (i.e. the code that executes the
     timer expired callbacks) all execute in the SAME thread.

@@ -14,7 +14,7 @@
 //------------------------------------------------------------------------------
 namespace Kit {
 namespace Framing {
-    
+
 void LineDecoder::initializeScan() noexcept
 {
     DecoderReader::initializeScan();

@@ -72,15 +72,14 @@ public:
         (e.g. out-of-memory) will generate a Kit::System::FatalError call.
      */
     HPool( size_t maxNumBlocks, bool fatalErrors = false ) noexcept
-        : m_infoBlocks( new ( std::nothrow ) Pool::BlockInfo[maxNumBlocks]() )
-        , m_blocks( new ( std::nothrow ) AlignedClass<T>[maxNumBlocks] )
-        , m_poolPtr( new ( std::nothrow ) Pool( m_infoBlocks, sizeof( AlignedClass<T> ), maxNumBlocks, m_blocks, fatalErrors ) ) 
+        : m_infoBlocks( new( std::nothrow ) Pool::BlockInfo[maxNumBlocks]() )
+        , m_blocks( new( std::nothrow ) AlignedClass<T>[maxNumBlocks] )
+        , m_poolPtr( new( std::nothrow ) Pool( m_infoBlocks, sizeof( AlignedClass<T> ), maxNumBlocks, m_blocks, fatalErrors ) )
     {
         KIT_SYSTEM_ASSERT( m_infoBlocks != nullptr );
         KIT_SYSTEM_ASSERT( m_blocks != nullptr );
         KIT_SYSTEM_ASSERT( m_poolPtr != nullptr );
     }
-
 
 
     /// Destructor.
@@ -114,7 +113,7 @@ public:
         return m_poolPtr ? m_poolPtr->wordSize() : sizeof( AlignedClass<T> );
     }
 
-private:
+protected:
     /// Prevent access to the copy constructor -->HPools can not be copied!
     HPool( const HPool& m );
 
@@ -123,6 +122,6 @@ private:
 };
 
 
-}   // end namespaces
+}  // end namespaces
 }
 #endif  // end header latch

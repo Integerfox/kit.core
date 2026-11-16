@@ -17,7 +17,7 @@
 #include "Kit/Persistence/Record/IChunk.h"
 #include "Kit/System/Assert.h"
 
-/** The maximum number of consecutive corrupt entries to scan during recovery 
+/** The maximum number of consecutive corrupt entries to scan during recovery
     of the Record.  The larger this number, the more resilient the recovery
     process is to consecutive corrupt entries, but it may increase the recovery
     time - this includes the initial 'virgin' boot of the persistent storage.
@@ -26,7 +26,7 @@
 #define OPTION_KIT_PERSISTENCE_JOURNAL_ENTRY_RECORD_MAX_CORRUPT_SCAN 8
 #endif
 
-/** Number of consecutive corrupt entries skip over when using getNext/getPrevious 
+/** Number of consecutive corrupt entries skip over when using getNext/getPrevious
     to traverse the entries before declaring an error.  This provides fault tolerance
     against entries that may have been corrupted when a power-loss occurs while writing
     the entry to persistent storage.
@@ -65,7 +65,7 @@ public:
                                           over when traversing entries via getNext()/getPrevious()
                                           before declaring a failure.
 
-        NOTE: The Application MUST allocate storage for at least 2 entries 
+        NOTE: The Application MUST allocate storage for at least 2 entries
     */
     EntryRecord( IChunk& entryChunkHandler,
                  Size_T  singleEntrySizeInBytes,

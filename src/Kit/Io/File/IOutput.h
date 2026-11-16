@@ -33,9 +33,7 @@ class IOutput : public Kit::Io::IOutput, virtual public IPosition
 };
 
 
-};      // end namespaces
+};  // end namespaces
 };
 };
 #endif  // end header latch
-
-

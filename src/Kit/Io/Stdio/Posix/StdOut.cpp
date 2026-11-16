@@ -15,6 +15,6 @@
 using namespace Kit::Io::Stdio;
 
 StdOut::StdOut()
-    :OutputDelegate( STDOUT_FILENO )
+    : OutputDelegate( STDOUT_FILENO )
 {
 }

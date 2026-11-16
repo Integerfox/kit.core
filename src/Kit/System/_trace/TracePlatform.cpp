@@ -55,7 +55,7 @@ void PrivateTracePlatform::output( Kit::Text::IString& src ) noexcept
 
 */
 void PrivateTracePlatform::appendInfo( Kit::Text::IString& dst,
-                                       TraceLevel  info,
+                                       TraceLevel          info,
                                        const char*         section,
                                        const char*         filename,
                                        int                 linenum,

@@ -41,13 +41,13 @@ protected:
     void notify( InitLevel init_level ) noexcept override
     {
         timestamp = getNativeTimestamp();
-        sleep(10);  // ensure that timestamps are different
+        sleep( 10 );  // ensure that timestamps are different
     }
 };
 
 }  // end anonymous namespace
 
-static RegisterInitHandler uutApplication_( IStartupHook::APPLICATION );  
+static RegisterInitHandler uutApplication_( IStartupHook::APPLICATION );
 static RegisterInitHandler uutSystem_( IStartupHook::SYSTEM );
 static RegisterInitHandler uutMiddleWare_( IStartupHook::MIDDLE_WARE );
 static RegisterInitHandler uutTestInfra_( IStartupHook::TEST_INFRA );
@@ -58,9 +58,9 @@ TEST_CASE( "startup" )
     KIT_SYSTEM_TRACE_FUNC( SECT_ );
     ShutdownUnitTesting::clearAndUseCounter();
 
-    REQUIRE( uutTestInfra_.timestamp != 0u );   
-    REQUIRE( uutSystem_.timestamp > uutTestInfra_.timestamp );   
-    REQUIRE( uutMiddleWare_.timestamp > uutSystem_.timestamp );   
+    REQUIRE( uutTestInfra_.timestamp != 0u );
+    REQUIRE( uutSystem_.timestamp > uutTestInfra_.timestamp );
+    REQUIRE( uutMiddleWare_.timestamp > uutSystem_.timestamp );
     REQUIRE( uutApplication_.timestamp > uutMiddleWare_.timestamp );
 
     REQUIRE( ShutdownUnitTesting::getAndClearCounter() == 0u );

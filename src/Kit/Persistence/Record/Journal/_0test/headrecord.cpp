@@ -197,7 +197,7 @@ TEST_CASE( "HeadRecord" )
         uut.stop();
     }
 
-    SECTION("error cases")
+    SECTION( "error cases" )
     {
         // Start the UUT
         REQUIRE( uut.start( mockEventQueue ) );
@@ -205,10 +205,10 @@ TEST_CASE( "HeadRecord" )
         REQUIRE( uut.m_copyToCount == 0 );
         REQUIRE( uut.m_copyFromCount == 1 );
         REQUIRE( uut.m_noValidDataCount == 0 );
-     
+
         // Invalid copyTo() case
         constexpr Size_T expectedPayloadSize = sizeof( uut.m_lastLatest ) + sizeof( uut.m_lastLatestIndex );
-        uint8_t dummy[expectedPayloadSize];
+        uint8_t          dummy[expectedPayloadSize];
         REQUIRE( uut.copyTo( dummy, sizeof( dummy ) - 1 ) == KIT_PERSISTENCE_SIZE_MAX );
         REQUIRE( uut.copyTo( dummy, sizeof( dummy ) ) == sizeof( dummy ) );
 

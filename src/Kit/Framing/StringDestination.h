@@ -64,7 +64,7 @@ public:
             return false;
         }
 
-        m_dstPtr->appendTo( static_cast<const char*>(srcBuffer), numBytes );
+        m_dstPtr->appendTo( static_cast<const char*>( srcBuffer ), numBytes );
         return m_dstPtr->truncated() == false;  // If truncated, then the entire buffer was not appended
     }
 

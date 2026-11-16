@@ -19,7 +19,7 @@ namespace Dm {
 // global lock
 static Kit::System::Mutex                                              globalMutex_;
 StaticJsonDocument<OPTION_KIT_DM_MODEL_DATABASE_MAX_CAPACITY_JSON_DOC> IModelDatabase::g_doc_;
-Kit::System::Mutex& IModelDatabase::getGlobalMutex_() noexcept
+Kit::System::Mutex&                                                    IModelDatabase::getGlobalMutex_() noexcept
 {
     return globalMutex_;
 }

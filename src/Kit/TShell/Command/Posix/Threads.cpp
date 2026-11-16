@@ -34,9 +34,15 @@ void Threads::hookThreadEntry( Kit::Text::IString& text, Kit::System::Thread& cu
     const char* policyStr = "UNK";
     switch ( policy )
     {
-    case SCHED_OTHER: policyStr = "OTHER"; break;
-    case SCHED_FIFO: policyStr = "FIFO"; break;
-    case SCHED_RR: policyStr = "RR"; break;
+    case SCHED_OTHER:
+        policyStr = "OTHER";
+        break;
+    case SCHED_FIFO:
+        policyStr = "FIFO";
+        break;
+    case SCHED_RR:
+        policyStr = "RR";
+        break;
     }
 
     clockid_t       threadCpuClock;
@@ -44,8 +50,8 @@ void Threads::hookThreadEntry( Kit::Text::IString& text, Kit::System::Thread& cu
     pthread_getcpuclockid( threadId, &threadCpuClock );
     clock_gettime( threadCpuClock, &cpuTime );
 
-    double cpuTimeSec = static_cast<double>( cpuTime.tv_sec );
-    cpuTimeSec += static_cast<double>( cpuTime.tv_nsec ) / 1000000000.0;
+    double cpuTimeSec  = static_cast<double>( cpuTime.tv_sec );
+    cpuTimeSec        += static_cast<double>( cpuTime.tv_nsec ) / 1000000000.0;
 
     text.formatAppend( "%-6s  %-3d  %-10.4f", policyStr, param.sched_priority, cpuTimeSec );
 }

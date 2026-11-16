@@ -18,12 +18,10 @@
 #include "Kit/Text/FString.h"
 
 
+#define SECT_ "_0test"
 
-#define SECT_     "_0test"
-
-/// 
+///
 using namespace Kit::Io::File;
-
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,10 +47,16 @@ TEST_CASE( "readwrite" )
     REQUIRE( buffer == "Hello Worl" );
     sum += buffer;
     REQUIRE( fd.write( myBuffer, sizeof( myBuffer ) ) );
-    for ( size_t i=0; i < sizeof( myBuffer ); i++ ) { sum += myBuffer[i]; }
+    for ( size_t i = 0; i < sizeof( myBuffer ); i++ )
+    {
+        sum += myBuffer[i];
+    }
     REQUIRE( fd.write( myBuffer, sizeof( myBuffer ), bytesWritten ) );
-    REQUIRE( (size_t) bytesWritten == sizeof( myBuffer ) );
-    for ( int i=0; i < bytesWritten; i++ ) { sum += myBuffer[i]; }
+    REQUIRE( (size_t)bytesWritten == sizeof( myBuffer ) );
+    for ( int i = 0; i < bytesWritten; i++ )
+    {
+        sum += myBuffer[i];
+    }
     fd.flush();
 
     REQUIRE( fd.isOpened() );
@@ -60,7 +64,7 @@ TEST_CASE( "readwrite" )
     REQUIRE( fd.setAbsolutePos( 0 ) );
     fd.read( inbuffer );
     REQUIRE( inbuffer == sum );
-    REQUIRE( fd.read( inbuffer ) == false ); // Ensure EOF is hit
+    REQUIRE( fd.read( inbuffer ) == false );  // Ensure EOF is hit
     REQUIRE( fd.isEof() );
     fd.close();
     REQUIRE( fd.isOpened() == false );
@@ -71,7 +75,7 @@ TEST_CASE( "readwrite" )
     REQUIRE( fd.isOpened() == false );
 
     //
-    InputOutput fd2( "output4.txt", true, true );
+    InputOutput         fd2( "output4.txt", true, true );
     Kit::Io::LineWriter writer( fd2 );
     REQUIRE( writer.println() );
     REQUIRE( writer.println( "Hello World" ) );
@@ -103,16 +107,16 @@ TEST_CASE( "readwrite" )
     REQUIRE( fd3.isOpened() );
     REQUIRE( fd3.setAbsolutePos( 15 ) );
     Kit::Type::SSize_T pos;
-    REQUIRE( fd3.currentPos(pos));
+    REQUIRE( fd3.currentPos( pos ) );
     REQUIRE( pos == 15 );
     REQUIRE( fd3.setRelativePos( -14 ) );
-    REQUIRE( fd3.currentPos(pos));
+    REQUIRE( fd3.currentPos( pos ) );
     REQUIRE( pos == 1 );
-    REQUIRE( fd3.read( inbuffer, 3) );
+    REQUIRE( fd3.read( inbuffer, 3 ) );
     REQUIRE( inbuffer == "bob" );
     Kit::Type::SSize_T len;
-    REQUIRE( fd3.length(len) );
-    REQUIRE( len == sum.length());
+    REQUIRE( fd3.length( len ) );
+    REQUIRE( len == sum.length() );
     fd3.close();
 
     REQUIRE( Kit::System::ShutdownUnitTesting::getAndClearCounter() == 0u );
