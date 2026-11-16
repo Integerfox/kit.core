@@ -131,12 +131,20 @@
   },
   "publish": {
     "current": {
-      "comment": "Initial Outcast2 publish",
-      "version": "0.1.0",
-      "date": "Tue Oct 20 20:07:21 2026",
-      "timestamp": 1792526841,
-      "changes": null
+      "comment": "Upstream of the ged KIT changes, clang-format enforcement, and unit test robustness improvements",
+      "version": "0.2.0",
+      "date": "Mon Nov 16 22:31:56 2026",
+      "timestamp": 1794868316,
+      "changes": "\"Changes since 0.1.0:\\n\\nNew functionality\\n- Kit::Checksum: Crc16CcittReflectFast, Crc32PldmFast, and Crc8SMBusFast\\n- Kit::Dm::Mp: RunControl, RunManager, and RunRequestor Model Points (closed-loop run request/response for 'runnable' widgets), and the PseudoMpBase class\\n- Kit::Driver::NV: File (file based NV storage), Gang (multiple NV drivers as a single address space), and WriteWithVerify (write with read-back verification/retries) drivers\\n- Kit::Logging::Framework: JournalLogSink (persistent log sink with pause support and boot-counter correction), and selectable (elapsed vs. absolute UTC) timestamp formats in the Formatter\\n- Kit::Persistence::Record::Journal::Server: hookRemovingEntry() to defer writing entries; hookAddingEntry() can modify or filter entries\\n- Kit::System: binary semaphore (BSemaphore) and non-recursive mutex\\n- Kit::Time: msecToCalendar() (thread safe, no mutex, not limited by time_t; calendar.h replaces gmtime.h), and the 'time' TShell command\\n- Kit::Text::Format: utcTimestamp()\\n- Unit test support: ManualEventQueue (deterministic event queue that is run by the test thread, includes a virtual clock for software timers and event flag support)\\n\\nChanges/Fixes\\n- Kit::EventQueue::Server: split into ServerBase (ITC messages) and Server (adds Data Model change notifications) so that the code coverage metrics from different configurations can be merged\\n- Kit::Persistence::Record::Chunk: reduced the number of IMedia reads/writes when loading/writing records\\n- Kit::System::ShutdownUnitTesting: exceeding the maximum number of fatal errors now exits with a failure code (previously the test could be reported as passing)\\n- Kit::System: fixed the static initialization/destruction order of the OSAL's internal mutexes (PrivateLocks)\\n- Build (xpkgs/nqbp2): deterministic (sorted) directory/file lists, and fixed duplicate implementation entries for Windows builds\\n- Unit tests: replaced sleep/poll based tests with ManualEventQueue based tests (deterministic), and fixed an intermittent crash on exit in the Job/TShell test\\n- clang-format: InsertBraces is enabled, all KIT-owned files are formatted, and formatting is enforced by the CI/CD pipeline (top/check_clang_format.py)\\n- CI: code coverage fixes for gcc 15 / lcov 2.0 (unit tests built with -g, third-party code excluded when capturing coverage data)\\n\""
     },
-    "history": []
+    "history": [
+      {
+        "comment": "Initial Outcast2 publish",
+        "version": "0.1.0",
+        "date": "Tue Oct 20 20:07:21 2026",
+        "timestamp": 1792526841,
+        "changes": null
+      }
+    ]
   }
 }
