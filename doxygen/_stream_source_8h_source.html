@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -111,7 +111,7 @@ $(function() {
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        }</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="comment">// Do NOT allow the read call to block if no data is currently available</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">if</span> ( (blockIfUnavailable == <span class="keyword">false</span> &amp;&amp; !<a class="code hl_variable" href="class_kit_1_1_framing_1_1_stream_source.html#a25cf636285bcb22c37d0831f78bbc930">m_srcPtr</a>-&gt;<a class="code hl_function" href="class_kit_1_1_io_1_1_i_input.html#a5bc9845aaa86779310912a44b4833ca6">available</a>()) || numBytes == 0 )</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">if</span> ( ( blockIfUnavailable == <span class="keyword">false</span> &amp;&amp; !<a class="code hl_variable" href="class_kit_1_1_framing_1_1_stream_source.html#a25cf636285bcb22c37d0831f78bbc930">m_srcPtr</a>-&gt;<a class="code hl_function" href="class_kit_1_1_io_1_1_i_input.html#a5bc9845aaa86779310912a44b4833ca6">available</a>() ) || numBytes == 0 )</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        {</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        }</div>
@@ -144,7 +144,7 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_source_html_a3e2af4bab450e5e83a4e3586a1058890"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_source.html#a3e2af4bab450e5e83a4e3586a1058890">Kit::Framing::StreamSource::read</a></div><div class="ttdeci">bool read(void *dstBuffer, Kit::Type::SSize_T numBytes, Kit::Type::SSize_T &amp;bytesRead, bool blockIfUnavailable=false) noexcept override</div><div class="ttdoc">See Kit::Framing::ISource.</div><div class="ttdef"><b>Definition</b> StreamSource.h:50</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_source_html_a9677184f559ae018bc56e6a476e9623c"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_source.html#a9677184f559ae018bc56e6a476e9623c">Kit::Framing::StreamSource::setInput</a></div><div class="ttdeci">void setInput(Kit::Io::IInput &amp;inputStream) noexcept</div><div class="ttdoc">Allows the consumer to change/set the Input stream after construction.</div><div class="ttdef"><b>Definition</b> StreamSource.h:43</div></div>
 <div class="ttc" id="aclass_kit_1_1_framing_1_1_stream_source_html_ac374e88f160ff5a19eab4611e468adc3"><div class="ttname"><a href="class_kit_1_1_framing_1_1_stream_source.html#ac374e88f160ff5a19eab4611e468adc3">Kit::Framing::StreamSource::StreamSource</a></div><div class="ttdeci">StreamSource() noexcept</div><div class="ttdoc">Constructor.</div><div class="ttdef"><b>Definition</b> StreamSource.h:37</div></div>
-<div class="ttc" id="aclass_kit_1_1_io_1_1_i_input_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a></div><div class="ttdoc">This partially abstract class defines a interface for operating on an input stream (example of a stre...</div><div class="ttdef"><b>Definition</b> IInput.h:36</div></div>
+<div class="ttc" id="aclass_kit_1_1_io_1_1_i_input_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a></div><div class="ttdoc">This partially abstract class defines a interface for operating on an input stream (example of a stre...</div><div class="ttdef"><b>Definition</b> IInput.h:35</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_i_input_html_a5bc9845aaa86779310912a44b4833ca6"><div class="ttname"><a href="class_kit_1_1_io_1_1_i_input.html#a5bc9845aaa86779310912a44b4833ca6">Kit::Io::IInput::available</a></div><div class="ttdeci">virtual bool available() noexcept=0</div><div class="ttdoc">Returns true if there data available to be read from the stream.</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_i_input_html_aa23da02212c7f2267452b83e061e4e57"><div class="ttname"><a href="class_kit_1_1_io_1_1_i_input.html#aa23da02212c7f2267452b83e061e4e57">Kit::Io::IInput::read</a></div><div class="ttdeci">virtual bool read(char &amp;c) noexcept</div><div class="ttdoc">Reads a single byte from the stream.</div></div>
 <div class="ttc" id="anamespace_kit_1_1_type_html_aa244ac9e3a5479ac83b067897b68caf2"><div class="ttname"><a href="namespace_kit_1_1_type.html#aa244ac9e3a5479ac83b067897b68caf2">Kit::Type::SSize_T</a></div><div class="ttdeci">int32_t SSize_T</div><div class="ttdoc">This is my work-around for the fact that C++ does not have a standard 'ssize_t' type.</div><div class="ttdef"><b>Definition</b> SSize.h:33</div></div>
@@ -152,7 +152,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

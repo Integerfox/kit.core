@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -61,14 +61,14 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_driver_1_1_n_v_1_1_i_api__inherit__graph.svg" width="406" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_driver_1_1_n_v_1_1_i_api__inherit__graph.svg" width="606" height="279"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Driver::NV::IApi:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_driver_1_1_n_v_1_1_i_api__coll__graph.svg" width="296" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_driver_1_1_n_v_1_1_i_api__coll__graph.svg" width="294" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -165,9 +165,10 @@ Public Member Functions</h2></td></tr>
 
 <p>This method returns the total number of <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> storage pages. </p>
 <p>A Page is defined as the boundary/maximum amount of data that can be written in a single physical update of the <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> storage</p>
-<p>NOTE: ALWAYS use the <a class="el" href="#a2b136a443a1e900f945aef39fbbe6067" title="The method that returns the total storage size in bytes.">getTotalSize()</a> method for querying/determining the total available storage size. </p>
+<p>NOTE: ALWAYS use the <a class="el" href="#a2b136a443a1e900f945aef39fbbe6067" title="The method that returns the total storage size in bytes.">getTotalSize()</a> method for querying/determining the total available storage size.</p>
+<p>NOTE: The returned number of pages is only valid while the instance is started. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#aa95187b4a224329e1c78960534cf7c96">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a167bdfef88bba7a10f778636a263a1f1">Kit::Driver::NV::Null</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_file_1_1_api.html#adcd437804dd4a60f4eefadaea687fced">Kit::Driver::NV::File::Api</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#aa95187b4a224329e1c78960534cf7c96">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html#aaac497ef86ddff58c2393664e2a5ed56">Kit::Driver::NV::Gang</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a167bdfef88bba7a10f778636a263a1f1">Kit::Driver::NV::Null</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html#a495f08307a8d635e1523a711483fcc0a">Kit::Driver::NV::WriteWithVerify</a>.</p>
 
 </div>
 </div>
@@ -196,9 +197,10 @@ Public Member Functions</h2></td></tr>
 
 <p>This method returns the <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> storage page size. </p>
 <p>See <a class="el" href="#a419f14e3945a244d63a5a8ef7e8c8d67" title="This method returns the total number of NV storage pages.">getNumPages()</a> for more details about the definition of a page.</p>
-<p>NOTE: ALWAYS use the <a class="el" href="#a2b136a443a1e900f945aef39fbbe6067" title="The method that returns the total storage size in bytes.">getTotalSize()</a> method for querying/determining the total available storage size. </p>
+<p>NOTE: ALWAYS use the <a class="el" href="#a2b136a443a1e900f945aef39fbbe6067" title="The method that returns the total storage size in bytes.">getTotalSize()</a> method for querying/determining the total available storage size.</p>
+<p>NOTE: The returned page size is only valid while the instance is started. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#a78082092761f006375755baeb7025303">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a195d717c3ac1b782afb3d87404e4b54f">Kit::Driver::NV::Null</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_file_1_1_api.html#a7fdc038a971b9f49b2278ddcdf90ed4f">Kit::Driver::NV::File::Api</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#a78082092761f006375755baeb7025303">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html#a08f6af2165c805e60d847745aefd799c">Kit::Driver::NV::Gang</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a195d717c3ac1b782afb3d87404e4b54f">Kit::Driver::NV::Null</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html#a4cdb4cd8a94985f4137c9ba6126ced6d">Kit::Driver::NV::WriteWithVerify</a>.</p>
 
 </div>
 </div>
@@ -226,9 +228,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The method that returns the total storage size in bytes. </p>
-<p>Note: This is canonical source of truth for the total available storage, i.e, if the driver instance is a 'Gang' driver instance then the method CAN return a different result from: <a class="el" href="#a419f14e3945a244d63a5a8ef7e8c8d67" title="This method returns the total number of NV storage pages.">getNumPages()</a> * <a class="el" href="#a22cf56c26284735c8732b966ca202441" title="This method returns the NV storage page size.">getPageSize()</a> </p>
+<p>NOTE: This is canonical source of truth for the total available storage, i.e, if the driver instance is a '<a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html" title="This class implements the Non-volatile storage driver using a collection of NV drivers to provide a &#39;...">Gang</a>' driver instance then the method CAN return a different result from: <a class="el" href="#a419f14e3945a244d63a5a8ef7e8c8d67" title="This method returns the total number of NV storage pages.">getNumPages()</a> * <a class="el" href="#a22cf56c26284735c8732b966ca202441" title="This method returns the NV storage page size.">getPageSize()</a></p>
+<p>NOTE: The returned total size is only valid while the instance is started. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#a8d1f6fbb797a9737de4fb15654fb046d">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a8849e1d1aa925d7ba3511de7b0c2aa75">Kit::Driver::NV::Null</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_file_1_1_api.html#a14cbbe1a31e8df4e027200d2aa1d7f37">Kit::Driver::NV::File::Api</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#a8d1f6fbb797a9737de4fb15654fb046d">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html#ad59fe4fc7436364e722bc23e56e44ca9">Kit::Driver::NV::Gang</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a8849e1d1aa925d7ba3511de7b0c2aa75">Kit::Driver::NV::Null</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html#aadc80c0475774ce40de58939f20dcdfe">Kit::Driver::NV::WriteWithVerify</a>.</p>
 
 </div>
 </div>
@@ -272,7 +275,7 @@ Public Member Functions</h2></td></tr>
 <p>This method reads N bytes starting at the storage offset of 'srcOffset' and stores the bytes into 'dstData'. </p>
 <p>The method returns true if operation was successful; else false is returned. Note: If 'sizeDstData' is less than 'numBytesToRead' then the method fails immediately. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#a500aac7d7a3c0c0bf821fd117a909b3b">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a9d4f83a0b74a7e6eb94e191b03e4fac6">Kit::Driver::NV::Null</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_file_1_1_api.html#a9b6e922f5644ac8cf836b5500507fa9e">Kit::Driver::NV::File::Api</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#a500aac7d7a3c0c0bf821fd117a909b3b">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html#a8b7c27a52b4fbee845a1877f5972e3ae">Kit::Driver::NV::Gang</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html#a4d9ad3f2363565ae40018071b8821aab">Kit::Driver::NV::WriteWithVerify</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a9d4f83a0b74a7e6eb94e191b03e4fac6">Kit::Driver::NV::Null</a>.</p>
 
 </div>
 </div>
@@ -313,7 +316,7 @@ Public Member Functions</h2></td></tr>
 <p>This <a class="el" href="#afeb5a8f95b11674bd5756cda1733e3a2" title="This method writes N bytes from &#39;srcData&#39; starting at the storage offset of &#39;dstOffset&#39;.">write()</a> method itself is synchronous, but the physically writing of the data to the <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> storage is not guaranteed to synchronous, i.e. the physical write operation can completed AFTER the <a class="el" href="#afeb5a8f95b11674bd5756cda1733e3a2" title="This method writes N bytes from &#39;srcData&#39; starting at the storage offset of &#39;dstOffset&#39;.">write()</a> method returns. If a second <a class="el" href="#afeb5a8f95b11674bd5756cda1733e3a2" title="This method writes N bytes from &#39;srcData&#39; starting at the storage offset of &#39;dstOffset&#39;.">write()</a> call is made and the physical storage is still being updated from the first <a class="el" href="#afeb5a8f95b11674bd5756cda1733e3a2" title="This method writes N bytes from &#39;srcData&#39; starting at the storage offset of &#39;dstOffset&#39;.">write()</a> call, the second call will wait until the first physical write operation completes. There is no defined semantics for the waiting (i.e. it could be a blocking wait or a busy wait)</p>
 <p>The method returns true if operation was successful; else false is returned. </p>
 
-<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#a8f1ad88cea3c23062033111aec0182b1">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a8e85b0d024586ca8246546fb3c28cc15">Kit::Driver::NV::Null</a>.</p>
+<p>Implemented in <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_file_1_1_api.html#ad79340abfb02212f715124d898ba34c0">Kit::Driver::NV::File::Api</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html#a8f1ad88cea3c23062033111aec0182b1">Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html#a03d14e21db7e80566845a6931f61c093">Kit::Driver::NV::Gang</a>, <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html#aa604421ec4f33c53a20b2dd20d57561e">Kit::Driver::NV::WriteWithVerify</a>, and <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#a8e85b0d024586ca8246546fb3c28cc15">Kit::Driver::NV::Null</a>.</p>
 
 </div>
 </div>
@@ -323,7 +326,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

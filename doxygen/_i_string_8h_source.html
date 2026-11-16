@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -442,7 +442,7 @@ $(function() {
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span><span class="comment">    /** Returns a &quot;writable&quot; pointer to the string&#39;s internal storage.</span></div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span><span class="comment">        The caller is RESPONSIBLE for insuring that the string is</span></div>
 <div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="comment">        left in a valid state - that is the string is NULL terminated</span></div>
-<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="comment">        and has NOT exceeded the &#39;maxAllowedLength&#39;. The &#39;maxAllowedLength&#39; </span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="comment">        and has NOT exceeded the &#39;maxAllowedLength&#39;. The &#39;maxAllowedLength&#39;</span></div>
 <div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="comment">        value is same value that is returned by the maxLength() method.</span></div>
 <div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="comment"></span> </div>
 <div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="comment">        The pointer and length have a VERY LIMITED life span - the values become</span></div>
@@ -461,12 +461,12 @@ $(function() {
 <div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="comment">    /// Default constructor</span></div>
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#adaf4515b8b6df2d60d27fba61846c223">  413</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_text_1_1_i_string.html#adaf4515b8b6df2d60d27fba61846c223">IString</a>() noexcept = default;</div>
-<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="comment"></span></div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span><span class="comment"></span> </div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span><span class="comment">    /// Delete move constructor to prevent moving</span></div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#a0dff328ed8288962ea0cdb7727f1c099">  416</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>(<a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;&amp;) = delete;</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>    <span class="comment"></span></div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#a0dff328ed8288962ea0cdb7727f1c099">  416</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;&amp; ) = delete;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span><span class="comment"></span> </div>
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span><span class="comment">    /// Delete move assignment operator</span></div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#ae62782fb77a3f2ab87e20c9f5e05a40f">  419</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp; operator=(<a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;&amp;) = delete;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_i_string.html#ae62782fb77a3f2ab87e20c9f5e05a40f">  419</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp; operator=( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;&amp; ) = delete;</div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>};</div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span> </div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>}  <span class="comment">// end namespaces</span></div>
@@ -549,7 +549,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

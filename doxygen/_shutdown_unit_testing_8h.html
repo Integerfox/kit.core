@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -57,7 +57,7 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="_shutdown_unit_testing_8h__incl.svg" width="203" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="_shutdown_unit_testing_8h__incl.svg" width="202" height="131"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_shutdown_unit_testing_8h_source.html">Go to the source code of this file.</a></p>
@@ -97,7 +97,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Maximum number of allowed fatal errors before the application is forced to exit. </p>
-<p>This is a safety mechanism to prevent the unit test from getting into a 'runaway' error condition.</p>
+<p>This is a safety mechanism to prevent the unit test from getting into a 'runaway' error condition. The application exits with the exit code of the fatal error that exceeded the limit - or with Shutdown::eFAILURE if that exit code is Shutdown::eSUCCESS - i.e. the test is always reported as failed.</p>
 <p>Note: The fatal error count is reset everytime getAndClearCounter() is called. </p>
 
 </div>
@@ -105,7 +105,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

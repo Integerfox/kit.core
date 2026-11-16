@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -46,12 +46,20 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>Unit testing specific infrastructure.</p>
 <p><a class="anchor" id="md__kit_2__support_2testing_2_r_e_a_d_m_e"></a> </p>
-<p>This directory (<code>src/Kit/_support/_testing</code>) contains helper classes, KIT library specific reusable 'mocks', and other functionality useful for developing and running unit tests. </p>
+<p>This directory (<code>src/Kit/_support/_testing</code>) contains helper classes, KIT library specific reusable 'mocks', and other functionality useful for developing and running unit tests.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">File   </th><th class="markdownTableHeadNone">Contents    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code><a class="el" href="helpers_8h.html" title="This file defines helper functions/interface for writing unit tests.">helpers.h</a></code>   </td><td class="markdownTableBodyNone">Generic helpers, e.g. <code><a class="el" href="helpers_8h.html#a1e8d23790923e9570afda1bc3e43a882" title="This function performs a blocking wait by polling a caller-supplied predicate, i.e,...">waitForCondition()</a></code>, Model Point observer mocks, <code><a class="el" href="class_test_event_queue_server.html" title="This class is a EventQueue Server that signals the provided semaphore when it begins execution.">TestEventQueueServer</a></code> (an event-queue <em>thread</em> that can be frozen/thawed), and <code><a class="el" href="class_async_open_close.html" title="This class is used to &#39;convert&#39; the synchronous ITC semantics of open/close requests to asynchronous.">AsyncOpenClose</a></code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code><a class="el" href="_manual_event_queue_8h.html" title="This file defines an Event Queue that is run &#39;manually&#39; by the unit test&#39;s thread,...">ManualEventQueue.h</a></code>   </td><td class="markdownTableBodyNone"><code><a class="el" href="class_manual_event_queue.html" title="This class is an Event Queue (Kit::EventQueue::Server) that is NOT run by a thread.">ManualEventQueue</a></code> - an Event Queue that is run by the test thread (no event-queue thread), so tests of event-queue servers are deterministic: no sleeps, no polling. Includes <code>requestOpen()</code>/<code>requestClose()</code>/<code>postAndRun()</code> replacements for synchronous ITC calls, event flag support (the handlers are notified by <code>runUntilIdle()</code>), and a virtual clock for software timers (<code>advanceTime()</code>). See the header for usage and examples.   </td></tr>
+</table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

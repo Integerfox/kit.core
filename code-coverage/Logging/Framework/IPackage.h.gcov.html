@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Logging/Framework/IPackage.h</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Logging/Framework">Logging/Framework</a> - IPackage.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #ifndef KIT_LOGGING_FRAMEWORK_IPACKAGE_H_</span>
+<span id="L2"><span class="lineNum">       2</span>              : #define KIT_LOGGING_FRAMEWORK_IPACKAGE_H_</span>
+<span id="L3"><span class="lineNum">       3</span>              : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>              :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>              :  *</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>              :  *</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>              :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>              : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>              : </span>
+<span id="L13"><span class="lineNum">      13</span>              : #include &quot;kit_config.h&quot;</span>
+<span id="L14"><span class="lineNum">      14</span>              : #include &lt;stdint.h&gt;</span>
+<span id="L15"><span class="lineNum">      15</span>              : </span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span>              : /// The text string for the 'unknown' Package ID</span>
+<span id="L18"><span class="lineNum">      18</span>              : #ifndef OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT</span>
+<span id="L19"><span class="lineNum">      19</span>              : #define OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_PACKAGE_ID_TEXT &quot;UNKNOWN&quot;</span>
+<span id="L20"><span class="lineNum">      20</span>              : #endif</span>
+<span id="L21"><span class="lineNum">      21</span>              : </span>
+<span id="L22"><span class="lineNum">      22</span>              : /// The text string for the 'unknown' SubSystem ID</span>
+<span id="L23"><span class="lineNum">      23</span>              : #ifndef OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT</span>
+<span id="L24"><span class="lineNum">      24</span>              : #define OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_SUBSYSTEM_ID_TEXT &quot;UNKNOWN&quot;</span>
+<span id="L25"><span class="lineNum">      25</span>              : #endif</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : /// The text string for the 'unknown' Message ID</span>
+<span id="L28"><span class="lineNum">      28</span>              : #ifndef OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT</span>
+<span id="L29"><span class="lineNum">      29</span>              : #define OPTION_KIT_LOGGING_FRAMEWORK_UNKNOWN_MESSAGE_ID_TEXT &quot;UNKNOWN&quot;</span>
+<span id="L30"><span class="lineNum">      30</span>              : #endif</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : </span>
+<span id="L33"><span class="lineNum">      33</span>              : ///</span>
+<span id="L34"><span class="lineNum">      34</span>              : namespace Kit {</span>
+<span id="L35"><span class="lineNum">      35</span>              : ///</span>
+<span id="L36"><span class="lineNum">      36</span>              : namespace Logging {</span>
+<span id="L37"><span class="lineNum">      37</span>              : ///</span>
+<span id="L38"><span class="lineNum">      38</span>              : namespace Framework {</span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span>              : /** This abstract class defines a set of functionality that a Package</span>
+<span id="L41"><span class="lineNum">      41</span>              :     is responsible for providing.</span>
+<span id="L42"><span class="lineNum">      42</span>              : */</span>
+<span id="L43"><span class="lineNum">      43</span>              : class IPackage</span>
+<span id="L44"><span class="lineNum">      44</span>              : {</span>
+<span id="L45"><span class="lineNum">      45</span>              : public:</span>
+<span id="L46"><span class="lineNum">      46</span>              :     /// Null/Invalid Package ID</span>
+<span id="L47"><span class="lineNum">      47</span>              :     static constexpr uint8_t NULL_PKG_ID = 0;</span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span>              :     /// Null/Invalid Package ID</span>
+<span id="L50"><span class="lineNum">      50</span>              :     static constexpr const char* NULL_PKG_ID_TEXT = &quot;?&quot;;</span>
+<span id="L51"><span class="lineNum">      51</span>              : </span>
+<span id="L52"><span class="lineNum">      52</span>              :     /// Null/Invalid SubSystem ID</span>
+<span id="L53"><span class="lineNum">      53</span>              :     static constexpr uint8_t NULL_SUBSYS_ID = 0xFF;</span>
+<span id="L54"><span class="lineNum">      54</span>              : </span>
+<span id="L55"><span class="lineNum">      55</span>              :     /// Null/Invalid SubSystem Text</span>
+<span id="L56"><span class="lineNum">      56</span>              :     static constexpr const char* NULL_SUBSYS_ID_TEXT = &quot;?&quot;;</span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span>              :     /// Null/Invalid Message ID</span>
+<span id="L59"><span class="lineNum">      59</span>              :     static constexpr uint8_t NULL_MSG_ID = 0xFF;</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span>              :     /// Null/Invalid Message Text</span>
+<span id="L62"><span class="lineNum">      62</span>              :     static constexpr const char* NULL_MSG_ID_TEXT = &quot;?&quot;;</span>
+<span id="L63"><span class="lineNum">      63</span>              : </span>
+<span id="L64"><span class="lineNum">      64</span>              : public:</span>
+<span id="L65"><span class="lineNum">      65</span>              :     /// This method returns the Package's ID as a numeric value</span>
+<span id="L66"><span class="lineNum">      66</span>              :     virtual uint8_t packageId() noexcept = 0;</span>
+<span id="L67"><span class="lineNum">      67</span>              : </span>
+<span id="L68"><span class="lineNum">      68</span>              :     /** This method returns the Package's ID as text string.  The returned</span>
+<span id="L69"><span class="lineNum">      69</span>              :         string must be a null-terminated string and a string length of less or</span>
+<span id="L70"><span class="lineNum">      70</span>              :         equal to OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_PACKAGE_ID_TEXT.</span>
+<span id="L71"><span class="lineNum">      71</span>              :      */</span>
+<span id="L72"><span class="lineNum">      72</span>              :     virtual const char* packageIdString() noexcept = 0;</span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span>              :     /** This method is used to convert a numeric Sub-system and Message IDs into</span>
+<span id="L75"><span class="lineNum">      75</span>              :         a text strings.</span>
+<span id="L76"><span class="lineNum">      76</span>              : </span>
+<span id="L77"><span class="lineNum">      77</span>              :         The returned Sub-System text will be a null-terminated string and a string</span>
+<span id="L78"><span class="lineNum">      78</span>              :         length of less or equal to OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_SUBSYSTEM_ID_TEXT.</span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span>              :         The returned Message text  must be a null-terminated string and a string</span>
+<span id="L81"><span class="lineNum">      81</span>              :         length of less or equal to OPTION_KIT_LOGGING_FRAMEWORK_MAX_LEN_MESSAGE_ID_TEXT.</span>
+<span id="L82"><span class="lineNum">      82</span>              : </span>
+<span id="L83"><span class="lineNum">      83</span>              :         The method returns true if the Sub-system and Message IDs are valid for this</span>
+<span id="L84"><span class="lineNum">      84</span>              :         Package; otherwise false is returned.  When false is returned the return</span>
+<span id="L85"><span class="lineNum">      85</span>              :         text pointer is set to nullptr if its ID is invalid.</span>
+<span id="L86"><span class="lineNum">      86</span>              :      */</span>
+<span id="L87"><span class="lineNum">      87</span>              :     virtual bool subSystemAndMessageIdsToString( uint8_t      subSystemId,</span>
+<span id="L88"><span class="lineNum">      88</span>              :                                                  const char*&amp; dstSubSystemText,</span>
+<span id="L89"><span class="lineNum">      89</span>              :                                                  uint8_t      messageId,</span>
+<span id="L90"><span class="lineNum">      90</span>              :                                                  const char*&amp; dstMessageText ) noexcept = 0;</span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span>              : public:</span>
+<span id="L93"><span class="lineNum">      93</span>              :     /// Virtual destructor</span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">           9 :     virtual ~IPackage() noexcept {}</span></span>
+<span id="L95"><span class="lineNum">      95</span>              : };</span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              : }  // end namespaces</span>
+<span id="L98"><span class="lineNum">      98</span>              : }</span>
+<span id="L99"><span class="lineNum">      99</span>              : }</span>
+<span id="L100"><span class="lineNum">     100</span>              : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

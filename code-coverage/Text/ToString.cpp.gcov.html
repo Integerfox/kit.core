@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Text</a> - ToString.cpp</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Text">Text</a> - ToString.cpp</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">23</td>
-            <td class="headerCovTableEntry">23</td>
+            <td class="headerCovTableEntry">31</td>
+            <td class="headerCovTableEntry">31</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">22</td>
-            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntryHi">96.7&nbsp;%</td>
+            <td class="headerCovTableEntry">30</td>
+            <td class="headerCovTableEntry">29</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -93,27 +93,28 @@
 <span id="L31"><span class="lineNum">      31</span>                 :             : {</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             :     return sizeof( KitTextToStringMaxUnsigned_T ) == 8 ? &quot;9223372036854775808&quot; :  // 64-bit</span>
 <span id="L33"><span class="lineNum">      33</span>                 :             :                sizeof( KitTextToStringMaxUnsigned_T ) == 4 ? &quot;2147483648&quot;</span>
-<span id="L34"><span class="lineNum">      34</span>                 :             :                                                              :  // 32-bit</span>
+<span id="L34"><span class="lineNum">      34</span>                 :             :                                                            :  // 32-bit</span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :                sizeof( KitTextToStringMaxUnsigned_T ) == 2 ? &quot;32768&quot;</span>
-<span id="L36"><span class="lineNum">      36</span>                 :             :                                                              :  // 16-bit</span>
-<span id="L37"><span class="lineNum">      37</span>                 :             :                &quot;128&quot;;                                           // 8-bit</span>
+<span id="L36"><span class="lineNum">      36</span>                 :             :                                                            :  // 16-bit</span>
+<span id="L37"><span class="lineNum">      37</span>                 :             :                &quot;128&quot;;                                         // 8-bit</span>
 <span id="L38"><span class="lineNum">      38</span>                 :             : }</span>
 <span id="L39"><span class="lineNum">      39</span>                 :             : </span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : </span>
-<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC tlaBgGNC">          26 : const char* ToString::convert_( KitTextToStringMaxUnsigned_T num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :<span class="tlaGNC">          26 : const char* ToString::convert_( KitTextToStringMaxUnsigned_T num, char* dstString, size_t maxChars, unsigned base, char padChar, bool isNegative ) noexcept</span></span>
 <span id="L42"><span class="lineNum">      42</span>                 :             : {</span>
 <span id="L43"><span class="lineNum">      43</span>                 :             :     // Error check the base argument and null destination string</span>
-<span id="L44"><span class="lineNum">      44</span>   [<span class="tlaGBC" title="Branch 0 was taken 24 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 21 times"> + </span>]:<span class="tlaGNC">          26 :     if ( base &lt; 2 || base &gt; 36 || dstString == nullptr || maxChars == 0 )</span></span>
+<span id="L44"><span class="lineNum">      44</span>   [<span class="tlaGBC" title="Branch 0 was taken 24 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 24 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          26 :     if ( base &lt; 2 || base &gt; 36 || dstString == nullptr || maxChars == 0 )</span></span>
+<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 23 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 6 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 21 times"> + </span>]
 <span id="L45"><span class="lineNum">      45</span>                 :             :     {</span>
-<span id="L46"><span class="lineNum">      46</span>                 :             :         return nullptr;</span>
+<span id="L46"><span class="lineNum">      46</span>                 :<span class="tlaGNC">           5 :         return nullptr;</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     }</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             : </span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     // When convert a negative value, I need to leave room for the minus sign</span>
-<span id="L50"><span class="lineNum">      50</span>                 :             :     size_t sign = 0;</span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">          21 :     size_t sign = 0;</span></span>
 <span id="L51"><span class="lineNum">      51</span>         [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span>]:<span class="tlaGNC">          21 :     if ( isNegative )</span></span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     {</span>
 <span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">           6 :         num  = ~num + 1;  // Convert to positive</span></span>
-<span id="L54"><span class="lineNum">      54</span>                 :             :         sign = 1;</span>
+<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">           6 :         sign = 1;</span></span>
 <span id="L55"><span class="lineNum">      55</span>                 :             :     }</span>
 <span id="L56"><span class="lineNum">      56</span>                 :             : </span>
 <span id="L57"><span class="lineNum">      57</span>                 :             :     // Null terminate the string</span>
@@ -126,27 +127,27 @@
 <span id="L64"><span class="lineNum">      64</span>                 :             :     }</span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             :     // Handle special case: original number is MIN_INT_VALUE</span>
-<span id="L67"><span class="lineNum">      67</span>         [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">          21 :     if ( isNegative &amp;&amp; num == (KitTextToStringMaxUnsigned_T)MIN_INT_VALUE )</span></span>
+<span id="L67"><span class="lineNum">      67</span>   [<span class="tlaGBC" title="Branch 0 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span>]:<span class="tlaGNC">          21 :     if ( isNegative &amp;&amp; num == (KitTextToStringMaxUnsigned_T)MIN_INT_VALUE )</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             :     {</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :         // Note: The negative sign is added later</span>
 <span id="L70"><span class="lineNum">      70</span>                 :             :         static constexpr const char* minStr = GetMinValueString();</span>
-<span id="L71"><span class="lineNum">      71</span>                 :             :         size_t                       len    = strlen( minStr );</span>
+<span id="L71"><span class="lineNum">      71</span>                 :<span class="tlaGNC">           2 :         size_t                       len    = strlen( minStr );</span></span>
 <span id="L72"><span class="lineNum">      72</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">           2 :         if ( len &gt; ( maxChars + sign ) )</span></span>
 <span id="L73"><span class="lineNum">      73</span>                 :             :         {</span>
-<span id="L74"><span class="lineNum">      74</span>                 :             :             return nullptr;</span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">           1 :             return nullptr;</span></span>
 <span id="L75"><span class="lineNum">      75</span>                 :             :         }</span>
 <span id="L76"><span class="lineNum">      76</span>                 :             : </span>
 <span id="L77"><span class="lineNum">      77</span>                 :             :         // Copy the string so it is right justified within the destination buffer</span>
-<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">           1 :         size_t offset = (maxChars + sign) - len - 1;</span></span>
+<span id="L78"><span class="lineNum">      78</span>                 :<span class="tlaGNC">           1 :         size_t offset = ( maxChars + sign ) - len - 1;</span></span>
 <span id="L79"><span class="lineNum">      79</span>                 :<span class="tlaGNC">           1 :         memcpy( dstString + offset, minStr, len );</span></span>
-<span id="L80"><span class="lineNum">      80</span>                 :             :         maxChars = offset;</span>
-<span id="L81"><span class="lineNum">      81</span>                 :             :     }</span>
+<span id="L80"><span class="lineNum">      80</span>                 :<span class="tlaGNC">           1 :         maxChars = offset;</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaGNC">           1 :     }</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             : </span>
 <span id="L83"><span class="lineNum">      83</span>                 :             :     // Convert the number</span>
 <span id="L84"><span class="lineNum">      84</span>                 :             :     else</span>
 <span id="L85"><span class="lineNum">      85</span>                 :             :     {</span>
 <span id="L86"><span class="lineNum">      86</span>                 :             :         // Conversion is done LSB first</span>
-<span id="L87"><span class="lineNum">      87</span>         [<span class="tlaGBC" title="Branch 0 was taken 119 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 19 times"> + </span>]:<span class="tlaGNC">         138 :         while ( num != 0 &amp;&amp; maxChars &gt; sign )</span></span>
+<span id="L87"><span class="lineNum">      87</span>   [<span class="tlaGBC" title="Branch 0 was taken 120 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 18 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 119 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">         138 :         while ( num != 0 &amp;&amp; maxChars &gt; sign )</span></span>
 <span id="L88"><span class="lineNum">      88</span>                 :             :         {</span>
 <span id="L89"><span class="lineNum">      89</span>                 :<span class="tlaGNC">         119 :             char remainder = (char)( num % base );</span></span>
 <span id="L90"><span class="lineNum">      90</span>         [<span class="tlaGBC" title="Branch 0 was taken 118 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">         119 :             if ( remainder &lt;= 9 )</span></span>
@@ -164,7 +165,7 @@
 <span id="L102"><span class="lineNum">     102</span>                 :             :         // Not enough space in the destination string</span>
 <span id="L103"><span class="lineNum">     103</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 1 was taken 18 times"> + </span>]:<span class="tlaGNC">          19 :         if ( num != 0 )</span></span>
 <span id="L104"><span class="lineNum">     104</span>                 :             :         {</span>
-<span id="L105"><span class="lineNum">     105</span>                 :             :             return nullptr;</span>
+<span id="L105"><span class="lineNum">     105</span>                 :<span class="tlaGNC">           1 :             return nullptr;</span></span>
 <span id="L106"><span class="lineNum">     106</span>                 :             :         }</span>
 <span id="L107"><span class="lineNum">     107</span>                 :             :     }</span>
 <span id="L108"><span class="lineNum">     108</span>                 :             : </span>

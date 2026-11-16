@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -73,14 +73,14 @@ $(function() {
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">    Model Points.</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">    Usage:</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">        class MyClass </span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">        class MyClass</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">        {</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">            ObserverCallback&lt;Kit::Dm::Mp::Uint32&gt; m_sub1;</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"></span> </div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">            void onM1(Kit::Dm::Mp::Uint32&amp; mp, Kit::Dm::IObserver&amp; sub) { ... }</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">            MyClass(Kit::EventQueue::IChangeNotification&amp; eventQueServer)</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">            : m_sub1(eventQueServer) </span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">            : m_sub1(eventQueServer)</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">            {</span></div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">                m_sub1.setCallback&lt;MyClass, &amp;MyClass::onM1&gt;(this);</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">            }</span></div>
@@ -162,7 +162,7 @@ $(function() {
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>};</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>}       <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>}  <span class="comment">// end namespaces</span></div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>}</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_observer_8h_html"><div class="ttname"><a href="_observer_8h.html">Observer.h</a></div></div>
@@ -178,12 +178,12 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_observer_callback_html_ac9d7df162aff1efbc1f48b9e30f2aaaa"><div class="ttname"><a href="class_kit_1_1_dm_1_1_observer_callback.html#ac9d7df162aff1efbc1f48b9e30f2aaaa">Kit::Dm::ObserverCallback::modelPointChanged</a></div><div class="ttdeci">void modelPointChanged(MP &amp;modelPointThatChanged, IObserver &amp;clientObserver) noexcept override</div><div class="ttdoc">Type safe change notification. See Kit::Dm::IObserver.</div><div class="ttdef"><b>Definition</b> ObserverCallback.h:76</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_observer_callback_html_af07b0f82ddea5558a2d3bed4f577daa5"><div class="ttname"><a href="class_kit_1_1_dm_1_1_observer_callback.html#af07b0f82ddea5558a2d3bed4f577daa5">Kit::Dm::ObserverCallback::CallbackFunc_T</a></div><div class="ttdeci">void(* CallbackFunc_T)(void *context, MP &amp;modelPointThatChanged, IObserver &amp;clientObserver)</div><div class="ttdoc">Define the Callback function signature.</div><div class="ttdef"><b>Definition</b> ObserverCallback.h:48</div></div>
 <div class="ttc" id="aclass_kit_1_1_dm_1_1_observer_html"><div class="ttname"><a href="class_kit_1_1_dm_1_1_observer.html">Kit::Dm::Observer</a></div><div class="ttdoc">This template class defines a type safe Observer.</div><div class="ttdef"><b>Definition</b> Observer.h:90</div></div>
-<div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_change_notification_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_change_notification.html">Kit::EventQueue::IChangeNotification</a></div><div class="ttdoc">This abstract class defines the interface to manage Data Model Change notification events that are pu...</div><div class="ttdef"><b>Definition</b> IChangeNotification.h:42</div></div>
+<div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_change_notification_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_change_notification.html">Kit::EventQueue::IChangeNotification</a></div><div class="ttdoc">This abstract class defines the interface to manage Data Model Change notification events that are pu...</div><div class="ttdef"><b>Definition</b> IChangeNotification.h:41</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">The Kit namespace is the root name space for the KIT C++ class library that is specifically target fo...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

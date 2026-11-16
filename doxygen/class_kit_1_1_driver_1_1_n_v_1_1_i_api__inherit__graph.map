@@ -1,11 +1,17 @@
 <map id="Kit::Driver::NV::IApi" name="Kit::Driver::NV::IApi">
-<area shape="rect" id="Node000001" title="This class defines the interface for a platform independent Non&#45;volatile storage driver." alt="" coords="147,79,294,104"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html" title="This class implements the NV::IApi interface using a flash device (via Flash::IApi) for persistent st..." alt="" coords="5,152,228,192"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="196,114,143,154,140,150,193,110"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_driver_1_1_n_v_1_1_null.html" title="This concrete class provides a &#39;null&#39; implementation of the NV::IApi interface." alt="" coords="252,159,400,185"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="249,110,312,157,309,161,245,114"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_driver_1_1_i_start.html" title="This abstract class defines the method for starting a driver." alt="" coords="78,5,209,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,38,210,76,206,80,164,42"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_driver_1_1_i_stop.html" title="This abstract class defines a stop operation that is intended to stop and/or shutdown a driver." alt="" coords="233,5,363,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="277,42,235,80,232,76,274,38"/>
+<area shape="rect" id="Node000001" title="This class defines the interface for a platform independent Non&#45;volatile storage driver." alt="" coords="184,125,330,153"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_driver_1_1_n_v_1_1_file_1_1_api.html" title="This class implements the Non&#45;volatile storage driver using the Kit::Io::File interfaces." alt="" coords="402,5,576,33"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="281,112,323,76,377,42,409,32,404,35,379,47,327,80,284,117"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html" title="This class implements the NV::IApi interface using a flash device (via Flash::IApi) for persistent st..." alt="" coords="378,57,600,102"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="327,118,403,101,398,103,329,124"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_driver_1_1_n_v_1_1_gang.html" title="This class implements the Non&#45;volatile storage driver using a collection of NV drivers to provide a &#39;..." alt="" coords="412,125,567,153"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="345,137,413,139,408,140,345,142"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_driver_1_1_n_v_1_1_null.html" title="This concrete class provides a &#39;null&#39; implementation of the NV::IApi interface." alt="" coords="416,177,563,205"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="337,154,426,176,421,177,337,160"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html" title="This class extends IApi interface so that all write operations are verified by reading back the data ..." alt="" coords="396,229,582,274"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="289,160,331,188,379,214,409,228,404,228,377,219,329,192,288,165"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_driver_1_1_i_start.html" title="This abstract class defines the method for starting a driver." alt="" coords="5,99,136,126"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,121,186,128,181,130,152,127"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_driver_1_1_i_stop.html" title="This abstract class defines a stop operation that is intended to stop and/or shutdown a driver." alt="" coords="6,151,135,178"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="149,151,186,148,181,150,151,156"/>
 </map>

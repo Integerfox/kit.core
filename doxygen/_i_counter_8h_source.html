@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -63,9 +63,9 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="_list_item_8h.html">Kit/Container/ListItem.h</a>&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">/// </span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">///</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_kit.html">Kit</a> {<span class="comment"></span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/// </span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">///</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span><span class="keyword">namespace </span>System {</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
@@ -73,7 +73,7 @@ $(function() {
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">    A Counter object is used to maintain a counter down mechanism for tracking</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">    the time remaining for an individual timer.</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"></span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">    The Counter interface is NOT inherently thread safe.  </span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">    The Counter interface is NOT inherently thread safe.</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_counter.html">   28</a></span><span class="keyword">class </span><a class="code hl_class" href="class_kit_1_1_system_1_1_i_counter.html">ICounter</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_kit_1_1_container_1_1_extended_list_item.html">Kit::Container::ExtendedListItem</a></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
@@ -82,7 +82,7 @@ $(function() {
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_counter.html#ac0ee5a860a2884c665749c821b602ece">   32</a></span><span class="comment"></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_counter.html#ac0ee5a860a2884c665749c821b602ece">expired</a>() noexcept = 0;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"></span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">    /// Decrements the counter</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_counter.html#af55827fc799aef49e492983adee554ad">   35</a></span><span class="comment"></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_counter.html#af55827fc799aef49e492983adee554ad">decrement</a>( uint32_t milliseconds=1 ) noexcept = 0;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_counter.html#af55827fc799aef49e492983adee554ad">   35</a></span><span class="comment"></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_counter.html#af55827fc799aef49e492983adee554ad">decrement</a>( uint32_t milliseconds = 1 ) noexcept = 0;</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">    /// Increments the counter</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_counter.html#a33309b4162812538e31e9c21eb12e166">   38</a></span><span class="comment"></span>    virtual <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_i_counter.html#a33309b4162812538e31e9c21eb12e166">increment</a>( uint32_t milliseconds ) noexcept = 0;</div>
@@ -93,14 +93,12 @@ $(function() {
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>public:<span class="comment"></span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">    /// Virtual Destructor</span></div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_i_counter.html#a49c76f354c81239e6a7f9ddb6094ebf7">   45</a></span><span class="comment"></span>    virtual ~<a class="code hl_class" href="class_kit_1_1_system_1_1_i_counter.html">ICounter</a>() = default;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}       <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_list_item_8h_html"><div class="ttname"><a href="_list_item_8h.html">ListItem.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_container_1_1_extended_list_item_html"><div class="ttname"><a href="class_kit_1_1_container_1_1_extended_list_item.html">Kit::Container::ExtendedListItem</a></div><div class="ttdoc">This class is used by the Container classes to implement a various types of DOUBLY linked containers.</div><div class="ttdef"><b>Definition</b> ListItem.h:49</div></div>
 <div class="ttc" id="aclass_kit_1_1_system_1_1_i_counter_html"><div class="ttname"><a href="class_kit_1_1_system_1_1_i_counter.html">Kit::System::ICounter</a></div><div class="ttdoc">This abstract class defines the call-back interface for a Counter object.</div><div class="ttdef"><b>Definition</b> ICounter.h:29</div></div>
@@ -112,7 +110,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

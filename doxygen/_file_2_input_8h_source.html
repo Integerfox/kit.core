@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -71,7 +71,7 @@ $(function() {
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span><span class="keyword">namespace </span>File {</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/** This concrete class provides a platform independent implementation of a </span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/** This concrete class provides a platform independent implementation of a</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">    Kit::Io::File::Input object.</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_file_1_1_input.html">   27</a></span><span class="keyword">class </span><a class="code hl_class" href="class_kit_1_1_io_1_1_file_1_1_input.html">Input</a> : <span class="keyword">public</span> <a class="code hl_class" href="class_kit_1_1_io_1_1_file_1_1_i_input.html">IInput</a></div>
@@ -113,7 +113,7 @@ $(function() {
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_file_1_1_input.html#a8cabb827488a9240f47485a00ba51404">   63</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_io_1_1_file_1_1_input.html#a8cabb827488a9240f47485a00ba51404">isEof</a>() noexcept override;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">    /// See Kit::Io::File::IPosition</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_file_1_1_input.html#a91ae2a78f0e8b967c5ac4f66039a889a">   66</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_io_1_1_file_1_1_input.html#a91ae2a78f0e8b967c5ac4f66039a889a">length</a>( <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Type::SSize_T&amp; len) noexcept override;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_file_1_1_input.html#a91ae2a78f0e8b967c5ac4f66039a889a">   66</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_io_1_1_file_1_1_input.html#a91ae2a78f0e8b967c5ac4f66039a889a">length</a>( <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Type::SSize_T&amp; len ) noexcept override;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    /// See Kit::Io::File::IPosition</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_file_1_1_input.html#a8b1cc7b4501e72bf8c4bf3dd2fb8a978">   69</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_io_1_1_file_1_1_input.html#a8b1cc7b4501e72bf8c4bf3dd2fb8a978">currentPos</a>( <a class="code hl_namespace" href="namespace_kit.html">Kit</a>::Type::SSize_T&amp; curPos ) noexcept override;</div>
@@ -129,19 +129,18 @@ $(function() {
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>protected:<span class="comment"></span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">    /// File Handle</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_file_1_1_input.html#acd237a2bd60a2d4477878cb9fd3a28c9">   82</a></span><span class="comment"></span>    <a class="code hl_define" href="_io_2_types_8h.html#a4df3975d3f764dfbc18fad393159671b">KitIoFileHandle_T</a> <a class="code hl_variable" href="class_kit_1_1_io_1_1_file_1_1_input.html#acd237a2bd60a2d4477878cb9fd3a28c9">m_inFd</a>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_file_1_1_input.html#acd237a2bd60a2d4477878cb9fd3a28c9">   82</a></span><span class="comment"></span>    <a class="code hl_define" href="_io_2types_8h.html#a4df3975d3f764dfbc18fad393159671b">KitIoFileHandle_T</a> <a class="code hl_variable" href="class_kit_1_1_io_1_1_file_1_1_input.html#acd237a2bd60a2d4477878cb9fd3a28c9">m_inFd</a>;</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"></span> </div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">    /// Cache end-of-stream status</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_file_1_1_input.html#a11e9c0678fb276bca4031c5a53b5165c">   85</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_kit_1_1_io_1_1_file_1_1_input.html#a11e9c0678fb276bca4031c5a53b5165c">m_inEos</a>;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>};</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}      <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}  <span class="comment">// end namespaces</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>}</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
 <div class="ttc" id="a_file_2_i_input_8h_html"><div class="ttname"><a href="_file_2_i_input_8h.html">IInput.h</a></div></div>
-<div class="ttc" id="a_io_2_types_8h_html_a4df3975d3f764dfbc18fad393159671b"><div class="ttname"><a href="_io_2_types_8h.html#a4df3975d3f764dfbc18fad393159671b">KitIoFileHandle_T</a></div><div class="ttdeci">#define KitIoFileHandle_T</div><div class="ttdoc">Defers the &quot;file descriptor&quot; for a file handle type to the target platform.</div><div class="ttdef"><b>Definition</b> Types.h:49</div></div>
+<div class="ttc" id="a_io_2types_8h_html_a4df3975d3f764dfbc18fad393159671b"><div class="ttname"><a href="_io_2types_8h.html#a4df3975d3f764dfbc18fad393159671b">KitIoFileHandle_T</a></div><div class="ttdeci">#define KitIoFileHandle_T</div><div class="ttdoc">Defers the &quot;file descriptor&quot; for a file handle type to the target platform.</div><div class="ttdef"><b>Definition</b> Types.h:49</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_file_1_1_i_input_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_file_1_1_i_input.html">Kit::Io::File::IInput</a></div><div class="ttdoc">This abstract class defines the interface for a Random Access Input File.</div><div class="ttdef"><b>Definition</b> IInput.h:32</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_file_1_1_input_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_file_1_1_input.html">Kit::Io::File::Input</a></div><div class="ttdoc">This concrete class provides a platform independent implementation of a Kit::Io::File::Input object.</div><div class="ttdef"><b>Definition</b> Input.h:28</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_file_1_1_input_html_a11e9c0678fb276bca4031c5a53b5165c"><div class="ttname"><a href="class_kit_1_1_io_1_1_file_1_1_input.html#a11e9c0678fb276bca4031c5a53b5165c">Kit::Io::File::Input::m_inEos</a></div><div class="ttdeci">bool m_inEos</div><div class="ttdoc">Cache end-of-stream status.</div><div class="ttdef"><b>Definition</b> Input.h:85</div></div>
@@ -163,7 +162,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

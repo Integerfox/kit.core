@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - System/Shutdown.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory System">System</a> - Shutdown.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #ifndef KIT_SYSTEM_SHUTDOWN_H_</span>
+<span id="L2"><span class="lineNum">       2</span>              : #define KIT_SYSTEM_SHUTDOWN_H_</span>
+<span id="L3"><span class="lineNum">       3</span>              : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>              :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>              :  *</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>              :  *</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>              :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>              : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>              : </span>
+<span id="L13"><span class="lineNum">      13</span>              : </span>
+<span id="L14"><span class="lineNum">      14</span>              : #include &quot;kit_config.h&quot;</span>
+<span id="L15"><span class="lineNum">      15</span>              : #include &quot;Kit/Container/ListItem.h&quot;</span>
+<span id="L16"><span class="lineNum">      16</span>              : </span>
+<span id="L17"><span class="lineNum">      17</span>              : </span>
+<span id="L18"><span class="lineNum">      18</span>              : /** Starting value for KIT Library's exit codes.  It is strongly recommended that</span>
+<span id="L19"><span class="lineNum">      19</span>              :     applications do NOT override this value.</span>
+<span id="L20"><span class="lineNum">      20</span>              :  */</span>
+<span id="L21"><span class="lineNum">      21</span>              : #ifndef OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES</span>
+<span id="L22"><span class="lineNum">      22</span>              : #define OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES 0</span>
+<span id="L23"><span class="lineNum">      23</span>              : #endif</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : /** Total number of reserved exit codes for the KIT Library.  The application</span>
+<span id="L26"><span class="lineNum">      26</span>              :     can define its own exit codes starting at:</span>
+<span id="L27"><span class="lineNum">      27</span>              :     OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES + KIT_SYSTEM_SHUTDOWN_NUM_RESERVED_EXIT_CODES</span>
+<span id="L28"><span class="lineNum">      28</span>              : */</span>
+<span id="L29"><span class="lineNum">      29</span>              : constexpr int KIT_SYSTEM_SHUTDOWN_NUM_RESERVED_EXIT_CODES = 100;</span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : namespace Kit {</span>
+<span id="L33"><span class="lineNum">      33</span>              : ///</span>
+<span id="L34"><span class="lineNum">      34</span>              : namespace System {</span>
+<span id="L35"><span class="lineNum">      35</span>              : </span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              : /** This class defines methods for forcibly terminating the application.</span>
+<span id="L38"><span class="lineNum">      38</span>              :     How gracefully (or not) the shutdown is dependent on the actual platform</span>
+<span id="L39"><span class="lineNum">      39</span>              :     implementation. In addition, what 'shutdown' means is also platform</span>
+<span id="L40"><span class="lineNum">      40</span>              :     dependent, e.g. on an embedded platform it may invoke a reboot and/or</span>
+<span id="L41"><span class="lineNum">      41</span>              :     restart of the application.</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span>              :     Since this is a forcibly shutdown there are no guaranties with respect to</span>
+<span id="L44"><span class="lineNum">      44</span>              :     releasing resources.</span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span>              :     The interface does provide for callback method(s) to be called on shutdown.</span>
+<span id="L47"><span class="lineNum">      47</span>              :     These methods are guaranteed to be called (or at least attempted to be</span>
+<span id="L48"><span class="lineNum">      48</span>              :     called in the case of true code failure).</span>
+<span id="L49"><span class="lineNum">      49</span>              :  */</span>
+<span id="L50"><span class="lineNum">      50</span>              : class Shutdown</span>
+<span id="L51"><span class="lineNum">      51</span>              : {</span>
+<span id="L52"><span class="lineNum">      52</span>              : public:</span>
+<span id="L53"><span class="lineNum">      53</span>              :     /** Reserved exit codes for the KIT Library */</span>
+<span id="L54"><span class="lineNum">      54</span>              :     enum : int</span>
+<span id="L55"><span class="lineNum">      55</span>              :     {</span>
+<span id="L56"><span class="lineNum">      56</span>              :         eSUCCESS = OPTION_KIT_SYSTEM_SHUTDOWN_BEGIN_EXIT_CODES,  //!&lt; Application terminated successfully</span>
+<span id="L57"><span class="lineNum">      57</span>              :         eFAILURE,                                                //!&lt; Application terminated due to a failure.  This is a generic failure</span>
+<span id="L58"><span class="lineNum">      58</span>              :         eFATAL_ERROR,                                            //!&lt; Application detected a fatal error and self terminated.  This is a generic failure</span>
+<span id="L59"><span class="lineNum">      59</span>              :         eASSERT,                                                 //!&lt; Application terminated due to an assertion failure</span>
+<span id="L60"><span class="lineNum">      60</span>              :         eOSAL,                                                   //!&lt; Application terminated due to an OSAL failure (e.g. error detected by a module in the Kit::System namespace)</span>
+<span id="L61"><span class="lineNum">      61</span>              :         eDATA_MODEL,                                             //!&lt; Application terminated due to a Data Model failure</span>
+<span id="L62"><span class="lineNum">      62</span>              :         eCONTAINER,                                              //!&lt; Application terminated due to a Container failure (e.g. crossed linked intrusive containers)</span>
+<span id="L63"><span class="lineNum">      63</span>              :         eSTREAMIO,                                               //!&lt; Application terminated due to a stream I/O failure.  This includes errors in File IO, Sockets, Serial ports, etc.</span>
+<span id="L64"><span class="lineNum">      64</span>              :         eMEMORY,                                                 //!&lt; Application terminated due to a memory failure (e.g. failed memory allocation)</span>
+<span id="L65"><span class="lineNum">      65</span>              :         eDRIVER,                                                 //!&lt; Application terminated due to a driver failure.  This is a generic failure</span>
+<span id="L66"><span class="lineNum">      66</span>              :         eITC,                                                    //!&lt; Application terminated due to an inter-thread communication failure.  This is a generic failure</span>
+<span id="L67"><span class="lineNum">      67</span>              :         eFSM_EVENT_OVERFLOW,                                     //!&lt; Application terminated due to a finite state machine event overflow condition (i.e. a FSM event was-dropped/not-processed)</span>
+<span id="L68"><span class="lineNum">      68</span>              :         eWATCHDOG                                                //!&lt; Application terminated due to a watchdog timeout (e.g. watchdog configuration errors, intentional WDOG trips)</span>
+<span id="L69"><span class="lineNum">      69</span>              :     };</span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span>              : public:</span>
+<span id="L72"><span class="lineNum">      72</span>              :     /** This call defines the callback interface that is used when the</span>
+<span id="L73"><span class="lineNum">      73</span>              :         application is shutdown</span>
+<span id="L74"><span class="lineNum">      74</span>              :      */</span>
+<span id="L75"><span class="lineNum">      75</span>              :     class IHandler : public Kit::Container::ListItem</span>
+<span id="L76"><span class="lineNum">      76</span>              :     {</span>
+<span id="L77"><span class="lineNum">      77</span>              :     public:</span>
+<span id="L78"><span class="lineNum">      78</span>              :         /** This method is called when the application is shutting down. The</span>
+<span id="L79"><span class="lineNum">      79</span>              :             method is passed 'exit_code' which is the exit code provided by the</span>
+<span id="L80"><span class="lineNum">      80</span>              :             application when called the Shutdown interface.  The return value</span>
+<span id="L81"><span class="lineNum">      81</span>              :             from the handler will be used as the application shutdown exit code.</span>
+<span id="L82"><span class="lineNum">      82</span>              :             To leave the exit code unaltered - return the passed in 'exit_code'.</span>
+<span id="L83"><span class="lineNum">      83</span>              : </span>
+<span id="L84"><span class="lineNum">      84</span>              :             Notes:</span>
+<span id="L85"><span class="lineNum">      85</span>              :                 o The final exit code is the serialized 'sum' of the all of the</span>
+<span id="L86"><span class="lineNum">      86</span>              :                   shutdown handlers.</span>
+<span id="L87"><span class="lineNum">      87</span>              :                 o The notify() method is called in the thread context that</span>
+<span id="L88"><span class="lineNum">      88</span>              :                   initiated the shutdown.</span>
+<span id="L89"><span class="lineNum">      89</span>              :          */</span>
+<span id="L90"><span class="lineNum">      90</span>              :         virtual int notify( int exitCode ) noexcept = 0;</span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span>              :     public:</span>
+<span id="L93"><span class="lineNum">      93</span>              :         /// Ensure the destructor is virtual</span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          18 :         virtual ~IHandler() {}</span></span>
+<span id="L95"><span class="lineNum">      95</span>              :     };</span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span>              : public:</span>
+<span id="L99"><span class="lineNum">      99</span>              :     /** This function will force a shutdown of the application with a</span>
+<span id="L100"><span class="lineNum">     100</span>              :         'success' exit code.  What 'forced' means is dependent on the</span>
+<span id="L101"><span class="lineNum">     101</span>              :         actual platform.  All registered callback methods will be called</span>
+<span id="L102"><span class="lineNum">     102</span>              :         before exiting the application.</span>
+<span id="L103"><span class="lineNum">     103</span>              :      */</span>
+<span id="L104"><span class="lineNum">     104</span>              :     static int success() noexcept;</span>
+<span id="L105"><span class="lineNum">     105</span>              : </span>
+<span id="L106"><span class="lineNum">     106</span>              :     /** This function will force a shutdown of the application with a 'failure'</span>
+<span id="L107"><span class="lineNum">     107</span>              :         exit code.  The caller can optional specify an exit code. What 'forced'</span>
+<span id="L108"><span class="lineNum">     108</span>              :         means is dependent on the actual platform.  All registered callback</span>
+<span id="L109"><span class="lineNum">     109</span>              :         methods will be called before exiting the application. The returned</span>
+<span id="L110"><span class="lineNum">     110</span>              :         value - assuming the method actually returns - will be the exit code</span>
+<span id="L111"><span class="lineNum">     111</span>              :         returned by the last shutdown handler.</span>
+<span id="L112"><span class="lineNum">     112</span>              : </span>
+<span id="L113"><span class="lineNum">     113</span>              :         Note: The recommended approach for exiting the application due to an</span>
+<span id="L114"><span class="lineNum">     114</span>              :               error is to use the Kit::System::FatalError interface so that</span>
+<span id="L115"><span class="lineNum">     115</span>              :               the 'why' of the failure has the potential for being captured.</span>
+<span id="L116"><span class="lineNum">     116</span>              :      */</span>
+<span id="L117"><span class="lineNum">     117</span>              :     static int failure( int exitCode = eFAILURE ) noexcept;</span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span>              : </span>
+<span id="L120"><span class="lineNum">     120</span>              : public:</span>
+<span id="L121"><span class="lineNum">     121</span>              :     /** This method is used to register a callback method that will be called</span>
+<span id="L122"><span class="lineNum">     122</span>              :         when success() or failure() is called and before the application exits.</span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              :         A LIFO is used when registering handlers.  This means that the first</span>
+<span id="L125"><span class="lineNum">     125</span>              :         handler registered, is the last handler run.</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              :         During shutdown, the 'notify()' method of 'instanceToRegister'</span>
+<span id="L128"><span class="lineNum">     128</span>              :         is called.</span>
+<span id="L129"><span class="lineNum">     129</span>              :      */</span>
+<span id="L130"><span class="lineNum">     130</span>              :     static void registerHandler( Shutdown::IHandler&amp; instanceToRegister ) noexcept;</span>
+<span id="L131"><span class="lineNum">     131</span>              : </span>
+<span id="L132"><span class="lineNum">     132</span>              : </span>
+<span id="L133"><span class="lineNum">     133</span>              : public:</span>
+<span id="L134"><span class="lineNum">     134</span>              :     /** This COMPONENT Scoped method.  The application SHOULD not directly</span>
+<span id="L135"><span class="lineNum">     135</span>              :         access this method (unless you are REALLY REALLY REALLY sure you</span>
+<span id="L136"><span class="lineNum">     136</span>              :         know what you are doing).</span>
+<span id="L137"><span class="lineNum">     137</span>              : </span>
+<span id="L138"><span class="lineNum">     138</span>              :         Helper method used to notify registered shutdown handlers</span>
+<span id="L139"><span class="lineNum">     139</span>              :      */</span>
+<span id="L140"><span class="lineNum">     140</span>              :     static int notifyShutdownHandlers( int exitCode ) noexcept;</span>
+<span id="L141"><span class="lineNum">     141</span>              : };</span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span>              : }  // end namespaces</span>
+<span id="L145"><span class="lineNum">     145</span>              : }</span>
+<span id="L146"><span class="lineNum">     146</span>              : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

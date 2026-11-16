@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">TShell/Command</a> - Echo.cpp</td>
+            <td width="10%" class="headerValue"><a href="../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory TShell/Command">TShell/Command</a> - Echo.cpp</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -31,18 +31,18 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">84.6&nbsp;%</td>
-            <td class="headerCovTableEntry">13</td>
-            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntryHi">85.7&nbsp;%</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">12</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">66.7&nbsp;%</td>
+            <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
+            <td class="headerCovTableEntry">24</td>
             <td class="headerCovTableEntry">18</td>
-            <td class="headerCovTableEntry">12</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -81,38 +81,40 @@
 <span id="L19"><span class="lineNum">      19</span>                 :             : namespace Command {</span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : </span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : </span>
-<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC tlaBgGNC">          31 : Result_T Echo::execute( IContext&amp; context, char* cmdString ) noexcept</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          35 : Result_T Echo::execute( IContext&amp; context, char* cmdString ) noexcept</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :             : {</span>
-<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          31 :     Kit::Text::Tokenizer::TextBlock tokens( cmdString );</span></span>
-<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">          31 :     Kit::Text::IString&amp;             outtext = context.getOutputBuffer();</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          35 :     Kit::Text::Tokenizer::TextBlock tokens( cmdString );</span></span>
+<span id="L25"><span class="lineNum">      25</span>                 :<span class="tlaGNC">          35 :     Kit::Text::IString&amp;             outtext = context.getOutputBuffer();</span></span>
 <span id="L26"><span class="lineNum">      26</span>                 :             : </span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :     // Error Checking</span>
-<span id="L28"><span class="lineNum">      28</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 30 times"> + </span>]:<span class="tlaGNC">          30 :     if ( tokens.numParameters() &gt; 3 )</span></span>
+<span id="L28"><span class="lineNum">      28</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 35 times"> + </span>]:<span class="tlaGNC">          35 :     if ( tokens.numParameters() &gt; 3 )</span></span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :     {</span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         return +Result_T::CMD_ERR_BAD_SYNTAX;</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaUNC">           0 :         return +Result_T::CMD_ERR_BAD_SYNTAX;</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     }</span>
-<span id="L32"><span class="lineNum">      32</span>   [<span class="tlaGBC" title="Branch 0 was taken 26 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 26 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC tlaBgGNC">          30 :     else if ( tokens.numParameters() == 3 &amp;&amp; tokens.getParameter( 1 )[0] != '-' )</span></span>
+<span id="L32"><span class="lineNum">      32</span>   [<span class="tlaGBC" title="Branch 0 was taken 29 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 6 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 29 times"> + </span> :<span class="tlaGNC">          35 :     else if ( tokens.numParameters() == 3 &amp;&amp; tokens.getParameter( 1 )[0] != '-' )</span></span>
+<span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 4 was not taken"> - </span><span class="tlaGBC" title="Branch 5 was taken 35 times"> + </span>]
 <span id="L33"><span class="lineNum">      33</span>                 :             :     {</span>
-<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaUNC tlaBgUNC">           0 :         return +Result_T::CMD_ERR_BAD_SYNTAX;</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaUNC">           0 :         return +Result_T::CMD_ERR_BAD_SYNTAX;</span></span>
 <span id="L35"><span class="lineNum">      35</span>                 :             :     }</span>
 <span id="L36"><span class="lineNum">      36</span>                 :             : </span>
 <span id="L37"><span class="lineNum">      37</span>                 :             :     // Generate the output string</span>
-<span id="L38"><span class="lineNum">      38</span>   [<span class="tlaGBC" title="Branch 0 was taken 30 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 26 times"> + </span> :<span class="tlaGNC tlaBgGNC">          60 :     if ( tokens.numParameters() == 1 || ( tokens.numParameters() == 2 &amp;&amp; tokens.getParameter( 1 )[0] != '-' ) )</span></span>
-<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 4 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
+<span id="L38"><span class="lineNum">      38</span>   [<span class="tlaGBC" title="Branch 0 was taken 35 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 30 times"> + </span> :<span class="tlaGNC">          35 :     if ( tokens.numParameters() == 1 || ( tokens.numParameters() == 2 &amp;&amp; tokens.getParameter( 1 )[0] != '-' ) )</span></span>
+<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 30 times"> + </span>]
 <span id="L39"><span class="lineNum">      39</span>                 :             :     {</span>
-<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">           4 :         Kit::Text::Format::timestamp( outtext, Kit::System::ElapsedTime::milliseconds() );</span></span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">           5 :         Kit::Text::Format::timestamp( outtext, Kit::System::ElapsedTime::milliseconds() );</span></span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     }</span>
-<span id="L42"><span class="lineNum">      42</span>   [<span class="tlaGBC" title="Branch 0 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 26 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 4 times"> + </span>]:<span class="tlaGNC">          30 :     if ( tokens.numParameters() == 2 &amp;&amp; tokens.getParameter( 1 )[0] != '-' )</span></span>
+<span id="L42"><span class="lineNum">      42</span>   [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 30 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 5 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">          35 :     if ( tokens.numParameters() == 2 &amp;&amp; tokens.getParameter( 1 )[0] != '-' )</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 30 times"> + </span>]
 <span id="L43"><span class="lineNum">      43</span>                 :             :     {</span>
-<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">           4 :         outtext.formatAppend( &quot; %s&quot;, tokens.getParameter( 1 ) );</span></span>
+<span id="L44"><span class="lineNum">      44</span>                 :<span class="tlaGNC">           5 :         outtext.formatAppend( &quot; %s&quot;, tokens.getParameter( 1 ) );</span></span>
 <span id="L45"><span class="lineNum">      45</span>                 :             :     }</span>
-<span id="L46"><span class="lineNum">      46</span>         [<span class="tlaGBC" title="Branch 0 was taken 26 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          26 :     else if ( tokens.numParameters() == 3 )</span></span>
+<span id="L46"><span class="lineNum">      46</span>         [<span class="tlaGBC" title="Branch 0 was taken 29 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          30 :     else if ( tokens.numParameters() == 3 )</span></span>
 <span id="L47"><span class="lineNum">      47</span>                 :             :     {</span>
-<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          26 :         outtext.formatAppend( &quot;%s&quot;, tokens.getParameter( 2 ) );</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          29 :         outtext.formatAppend( &quot;%s&quot;, tokens.getParameter( 2 ) );</span></span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     }</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
 <span id="L51"><span class="lineNum">      51</span>                 :             :     // Output the final string</span>
-<span id="L52"><span class="lineNum">      52</span>                 :             :     return writeLastFrame( context, outtext );</span>
+<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">          35 :     return writeLastFrame( context, outtext );</span></span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : }</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : </span>
 <span id="L55"><span class="lineNum">      55</span>                 :             : }  // end namespace</span>

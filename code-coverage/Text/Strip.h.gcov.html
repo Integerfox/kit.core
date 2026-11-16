@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Text</a> - Strip.h</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Text">Text</a> - Strip.h</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">8</td>
-            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -72,7 +72,7 @@
 <span id="L10"><span class="lineNum">      10</span>                 :             :  *----------------------------------------------------------------------------*/</span>
 <span id="L11"><span class="lineNum">      11</span>                 :             : /** @file */</span>
 <span id="L12"><span class="lineNum">      12</span>                 :             : </span>
-<span id="L13"><span class="lineNum">      13</span>                 :             :  #include &lt;string.h&gt;</span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : #include &lt;string.h&gt;</span>
 <span id="L14"><span class="lineNum">      14</span>                 :             : </span>
 <span id="L15"><span class="lineNum">      15</span>                 :             : ///</span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : namespace Kit {</span>
@@ -177,18 +177,17 @@
 <span id="L115"><span class="lineNum">     115</span>                 :             :     static void removeTrailingChars( char* s, const char* charsSet );</span>
 <span id="L116"><span class="lineNum">     116</span>                 :             : </span>
 <span id="L117"><span class="lineNum">     117</span>                 :             : </span>
-<span id="L118"><span class="lineNum">     118</span>                 :             :     /** This method returns true if the character 'c' is one of character(s) </span>
+<span id="L118"><span class="lineNum">     118</span>                 :             :     /** This method returns true if the character 'c' is one of character(s)</span>
 <span id="L119"><span class="lineNum">     119</span>                 :             :         contained in 'charsSet'; else false is returned.</span>
 <span id="L120"><span class="lineNum">     120</span>                 :             :      */</span>
-<span id="L121"><span class="lineNum">     121</span>                 :             :     static inline bool isCharInString( const char* charsSet, const char c )</span>
+<span id="L121"><span class="lineNum">     121</span>                 :<span class="tlaGNC">         404 :     static inline bool isCharInString( const char* charsSet, const char c )</span></span>
 <span id="L122"><span class="lineNum">     122</span>                 :             :     {</span>
-<span id="L123"><span class="lineNum">     123</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 4 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 23 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 6 times"> + </span> :<span class="tlaGNC tlaBgGNC">         404 :         return charsSet &amp;&amp; strchr( charsSet, c ) != nullptr;</span></span>
-<span class="lineNum">        </span>    <span class="tlaGBC" title="Branch 4 was taken 69 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 15 times"> + </span><span class="tlaGBC" title="Branch 6 was taken 167 times"> + </span><span class="tlaGBC" title="Branch 7 was taken 118 times"> + </span>]
+<span id="L123"><span class="lineNum">     123</span>   [<span class="tlaGBC" title="Branch 0 was taken 404 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 207 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 197 times"> + </span>]:<span class="tlaGNC">         404 :         return charsSet &amp;&amp; strchr( charsSet, c ) != nullptr;</span></span>
 <span id="L124"><span class="lineNum">     124</span>                 :             :     }</span>
 <span id="L125"><span class="lineNum">     125</span>                 :             : };</span>
 <span id="L126"><span class="lineNum">     126</span>                 :             : </span>
 <span id="L127"><span class="lineNum">     127</span>                 :             : </span>
-<span id="L128"><span class="lineNum">     128</span>                 :             : }       // end namespaces</span>
+<span id="L128"><span class="lineNum">     128</span>                 :             : }  // end namespaces</span>
 <span id="L129"><span class="lineNum">     129</span>                 :             : }</span>
 <span id="L130"><span class="lineNum">     130</span>                 :             : #endif  // end header latch</span>
         </pre>

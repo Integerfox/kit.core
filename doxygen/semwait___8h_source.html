@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -67,7 +67,7 @@ $(function() {
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;errno.h&gt;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &lt;<a class="code" href="_semaphore_8h.html">semaphore.h</a>&gt;</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;<a class="code" href="_time_8h.html">time.h</a>&gt;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">/* sem_clockwait() is a glibc(&gt;=2.30) extension that accepts a CLOCK_MONOTONIC</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">   deadline, i.e. a timed wait that is immune to wall-clock changes.  Plain</span></div>
@@ -154,6 +154,7 @@ $(function() {
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>}</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_semaphore_8h_html"><div class="ttname"><a href="_semaphore_8h.html">Semaphore.h</a></div></div>
+<div class="ttc" id="a_time_8h_html"><div class="ttname"><a href="_time_8h.html">Time.h</a></div></div>
 <div class="ttc" id="anamespace_kit_1_1_system_1_1_posix_html_a124fed18221f8209a8711af015d90a78"><div class="ttname"><a href="namespace_kit_1_1_system_1_1_posix.html#a124fed18221f8209a8711af015d90a78">Kit::System::Posix::semTimedWait_</a></div><div class="ttdeci">bool semTimedWait_(sem_t &amp;sema, uint32_t timeoutMs) noexcept</div><div class="ttdoc">Waits up to 'timeoutMs' for the semaphore.</div><div class="ttdef"><b>Definition</b> semwait_.h:77</div></div>
 <div class="ttc" id="anamespace_kit_1_1_system_1_1_posix_html_a27bb5f82b3add9f94b89253d04b15593"><div class="ttname"><a href="namespace_kit_1_1_system_1_1_posix.html#a27bb5f82b3add9f94b89253d04b15593">Kit::System::Posix::nsecPerMsec_</a></div><div class="ttdeci">constexpr long nsecPerMsec_</div><div class="ttdoc">Nanoseconds per millisecond.</div><div class="ttdef"><b>Definition</b> semwait_.h:49</div></div>
 <div class="ttc" id="anamespace_kit_1_1_system_1_1_posix_html_a2acbd21fb410b2b73c2ce7dbf2a767c6"><div class="ttname"><a href="namespace_kit_1_1_system_1_1_posix.html#a2acbd21fb410b2b73c2ce7dbf2a767c6">Kit::System::Posix::msecPerSec_</a></div><div class="ttdeci">constexpr long msecPerSec_</div><div class="ttdoc">Milliseconds per second.</div><div class="ttdef"><b>Definition</b> semwait_.h:46</div></div>
@@ -164,7 +165,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

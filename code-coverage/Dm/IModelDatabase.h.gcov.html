@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Dm/IModelDatabase.h</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Dm">Dm</a> - IModelDatabase.h</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : #ifndef KIT_DM_IMODELDATABASE_H_</span>
+<span id="L2"><span class="lineNum">       2</span>              : #define KIT_DM_IMODELDATABASE_H_</span>
+<span id="L3"><span class="lineNum">       3</span>              : /*------------------------------------------------------------------------------</span>
+<span id="L4"><span class="lineNum">       4</span>              :  * Copyright Integer Fox Authors</span>
+<span id="L5"><span class="lineNum">       5</span>              :  *</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L8"><span class="lineNum">       8</span>              :  *</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L10"><span class="lineNum">      10</span>              :  *----------------------------------------------------------------------------*/</span>
+<span id="L11"><span class="lineNum">      11</span>              : /** @file */</span>
+<span id="L12"><span class="lineNum">      12</span>              : </span>
+<span id="L13"><span class="lineNum">      13</span>              : #include &quot;kit_config.h&quot;</span>
+<span id="L14"><span class="lineNum">      14</span>              : #include &quot;Kit/Text/IString.h&quot;</span>
+<span id="L15"><span class="lineNum">      15</span>              : #include &quot;Kit/System/Mutex.h&quot;</span>
+<span id="L16"><span class="lineNum">      16</span>              : #include &quot;Kit/Json/Arduino.h&quot;</span>
+<span id="L17"><span class="lineNum">      17</span>              : </span>
+<span id="L18"><span class="lineNum">      18</span>              : /** This symbol defines the size, in bytes, of a single/global JSON document</span>
+<span id="L19"><span class="lineNum">      19</span>              :     buffer that is used for the toJSON() and fromJSON() operations. Only one</span>
+<span id="L20"><span class="lineNum">      20</span>              :     instance of this buffer is allocated.</span>
+<span id="L21"><span class="lineNum">      21</span>              : */</span>
+<span id="L22"><span class="lineNum">      22</span>              : #ifndef OPTION_KIT_DM_MODEL_DATABASE_MAX_CAPACITY_JSON_DOC</span>
+<span id="L23"><span class="lineNum">      23</span>              : #define OPTION_KIT_DM_MODEL_DATABASE_MAX_CAPACITY_JSON_DOC ( 1024 * 2 )</span>
+<span id="L24"><span class="lineNum">      24</span>              : #endif</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : ///</span>
+<span id="L28"><span class="lineNum">      28</span>              : namespace Kit {</span>
+<span id="L29"><span class="lineNum">      29</span>              : ///</span>
+<span id="L30"><span class="lineNum">      30</span>              : namespace Dm {</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : /// Forward reference to a Model point --&gt;used to avoid circular dependencies</span>
+<span id="L33"><span class="lineNum">      33</span>              : class IModelPoint;</span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span>              : /** This class defines the basic operations that can be performed on a Model</span>
+<span id="L36"><span class="lineNum">      36</span>              :     Base.  A Model Database is a collection of instantiated Model Points.</span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              :     All methods in this class are thread Safe unless explicitly documented</span>
+<span id="L39"><span class="lineNum">      39</span>              :     otherwise.</span>
+<span id="L40"><span class="lineNum">      40</span>              :  */</span>
+<span id="L41"><span class="lineNum">      41</span>              : class IModelDatabase</span>
+<span id="L42"><span class="lineNum">      42</span>              : {</span>
+<span id="L43"><span class="lineNum">      43</span>              : public:</span>
+<span id="L44"><span class="lineNum">      44</span>              :     /** This method looks-up the model point instance by name and returns a</span>
+<span id="L45"><span class="lineNum">      45</span>              :         pointer to the instance.  If the model point name cannot be found, the</span>
+<span id="L46"><span class="lineNum">      46</span>              :         method returns nullptr.</span>
+<span id="L47"><span class="lineNum">      47</span>              : </span>
+<span id="L48"><span class="lineNum">      48</span>              :         NOTE: The Model Point returned is a generic Model Point in that any</span>
+<span id="L49"><span class="lineNum">      49</span>              :               operations that require the concrete data type of the Model</span>
+<span id="L50"><span class="lineNum">      50</span>              :               Point ARE NOT available.  It is 'okay' for the caller (IF AND ONLY</span>
+<span id="L51"><span class="lineNum">      51</span>              :               IF the caller 'knows' what the concrete type is) to down cast the</span>
+<span id="L52"><span class="lineNum">      52</span>              :               returned pointer to a type specific child class instance of the</span>
+<span id="L53"><span class="lineNum">      53</span>              :               Model Point.</span>
+<span id="L54"><span class="lineNum">      54</span>              : </span>
+<span id="L55"><span class="lineNum">      55</span>              :         NOTE: There is no 'add' method.  This is because Model Points self</span>
+<span id="L56"><span class="lineNum">      56</span>              :               register with their assigned Model Database when the Model Points</span>
+<span id="L57"><span class="lineNum">      57</span>              :               are created.</span>
+<span id="L58"><span class="lineNum">      58</span>              :      */</span>
+<span id="L59"><span class="lineNum">      59</span>              :     virtual IModelPoint* lookupModelPoint( const char* modelPointName ) noexcept = 0;</span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              : public:</span>
+<span id="L63"><span class="lineNum">      63</span>              :     /** This method returns a pointer to the first Model Point in the Database.</span>
+<span id="L64"><span class="lineNum">      64</span>              :         The model points are traversed in order by model point name.  If there</span>
+<span id="L65"><span class="lineNum">      65</span>              :         are no Model Points in the Database, the method returns nullptr.</span>
+<span id="L66"><span class="lineNum">      66</span>              :      */</span>
+<span id="L67"><span class="lineNum">      67</span>              :     virtual IModelPoint* getFirstByName() noexcept = 0;</span>
+<span id="L68"><span class="lineNum">      68</span>              : </span>
+<span id="L69"><span class="lineNum">      69</span>              :     /** This method returns the next (in sorted order) Model Point in the</span>
+<span id="L70"><span class="lineNum">      70</span>              :         Database. If the current model point is the last Model Point in the</span>
+<span id="L71"><span class="lineNum">      71</span>              :         Database the method returns nullptr.</span>
+<span id="L72"><span class="lineNum">      72</span>              :      */</span>
+<span id="L73"><span class="lineNum">      73</span>              :     virtual IModelPoint* getNextByName( IModelPoint&amp; currentModelPoint ) noexcept = 0;</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              : public:</span>
+<span id="L77"><span class="lineNum">      77</span>              :     /** This method attempts to convert the null terminated JSON formatted 'src'</span>
+<span id="L78"><span class="lineNum">      78</span>              :         string to its binary format and copies the result to the Model Point's</span>
+<span id="L79"><span class="lineNum">      79</span>              :         internal data. The expected format of the JSON string is specific to</span>
+<span id="L80"><span class="lineNum">      80</span>              :         the concrete leaf class.</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              :         The method optional returns - via 'retMp' - a pointer to the Model Point</span>
+<span id="L83"><span class="lineNum">      83</span>              :         identified by 'mpname'.  If the method false return, then 'retMp' has</span>
+<span id="L84"><span class="lineNum">      84</span>              :         no meaning.</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span>              :         The method optional returns - via 'retSequenceNumber' - the Model Point's</span>
+<span id="L87"><span class="lineNum">      87</span>              :         sequence number after the conversion. If the method false return, then</span>
+<span id="L88"><span class="lineNum">      88</span>              :         'retSequenceNumber' has no meaning.</span>
+<span id="L89"><span class="lineNum">      89</span>              : </span>
+<span id="L90"><span class="lineNum">      90</span>              :         If the conversion is successful true is returned. If the contents of</span>
+<span id="L91"><span class="lineNum">      91</span>              :         the 'src' is not a valid JSON object and/or not parse-able, OR the Point</span>
+<span id="L92"><span class="lineNum">      92</span>              :         does not support a full/complete conversion from Text to binary, OR</span>
+<span id="L93"><span class="lineNum">      93</span>              :         the conversion fails, OR the specified model point name does not exist</span>
+<span id="L94"><span class="lineNum">      94</span>              :         then the method returns false.  When the conversion fails, the optional</span>
+<span id="L95"><span class="lineNum">      95</span>              :         'errorMsg' argument is updated with a plain text error message.</span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              : </span>
+<span id="L98"><span class="lineNum">      98</span>              :         The general input format:</span>
+<span id="L99"><span class="lineNum">      99</span>              :         \code</span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span>              :         { name=&quot;&lt;mpname&gt;&quot;, locked:true|false }              // Locks/unlocks the MP</span>
+<span id="L102"><span class="lineNum">     102</span>              :         { name=&quot;&lt;mpname&gt;&quot;, valid:false }                    // Invalidates the MP</span>
+<span id="L103"><span class="lineNum">     103</span>              :         { name=&quot;&lt;mpname&gt;&quot;, valid:false, locked=true }       // Invalidates the MP and locks the MP</span>
+<span id="L104"><span class="lineNum">     104</span>              :         { name=&quot;&lt;mpname&gt;&quot;, val:&lt;value&gt; }                    // Writes a new (valid) value to the MP</span>
+<span id="L105"><span class="lineNum">     105</span>              :         { name=&quot;&lt;mpname&gt;&quot;, val:&lt;value&gt;, locked=true }       // Writes a new (valid) value to the MP and locks the MP</span>
+<span id="L106"><span class="lineNum">     106</span>              : </span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span>              :         \endcode</span>
+<span id="L109"><span class="lineNum">     109</span>              :      */</span>
+<span id="L110"><span class="lineNum">     110</span>              :     virtual bool fromJSON( const char*         src,</span>
+<span id="L111"><span class="lineNum">     111</span>              :                            Kit::Text::IString* errorMsg          = nullptr,</span>
+<span id="L112"><span class="lineNum">     112</span>              :                            IModelPoint**       retMp             = nullptr,</span>
+<span id="L113"><span class="lineNum">     113</span>              :                            uint16_t*           retSequenceNumber = nullptr ) noexcept = 0;</span>
+<span id="L114"><span class="lineNum">     114</span>              : </span>
+<span id="L115"><span class="lineNum">     115</span>              : public:</span>
+<span id="L116"><span class="lineNum">     116</span>              :     /** This method has 'PACKAGE Scope' in that is should only be called by</span>
+<span id="L117"><span class="lineNum">     117</span>              :         other classes in the Kit::Dm namespace.  It is ONLY public to avoid</span>
+<span id="L118"><span class="lineNum">     118</span>              :         the tight coupling of C++ friend mechanism.</span>
+<span id="L119"><span class="lineNum">     119</span>              : </span>
+<span id="L120"><span class="lineNum">     120</span>              :         This method inserts a new Model Point into the Model Database.</span>
+<span id="L121"><span class="lineNum">     121</span>              :      */</span>
+<span id="L122"><span class="lineNum">     122</span>              :     virtual void insert_( IModelPoint&amp; mpToAdd ) noexcept = 0;</span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              :     /** This method has 'PACKAGE Scope' in that is should only be called by</span>
+<span id="L125"><span class="lineNum">     125</span>              :         other classes in the Kit::Dm namespace.  It is ONLY public to avoid</span>
+<span id="L126"><span class="lineNum">     126</span>              :         the tight coupling of C++ friend mechanism.</span>
+<span id="L127"><span class="lineNum">     127</span>              : </span>
+<span id="L128"><span class="lineNum">     128</span>              :         This method returns the database's mutex.  This mutex is used for ALL</span>
+<span id="L129"><span class="lineNum">     129</span>              :         critical sections with respect to Model Point operations.  Note: Each</span>
+<span id="L130"><span class="lineNum">     130</span>              :         MP database can have it own mutex</span>
+<span id="L131"><span class="lineNum">     131</span>              :      */</span>
+<span id="L132"><span class="lineNum">     132</span>              :     virtual Kit::System::Mutex&amp; getMutex_() noexcept = 0;</span>
+<span id="L133"><span class="lineNum">     133</span>              : </span>
+<span id="L134"><span class="lineNum">     134</span>              : public:</span>
+<span id="L135"><span class="lineNum">     135</span>              :     /** This method has 'PACKAGE Scope' in that is should only be called by</span>
+<span id="L136"><span class="lineNum">     136</span>              :         other classes in the Kit::Dm namespace.  It is ONLY public to avoid</span>
+<span id="L137"><span class="lineNum">     137</span>              :         the tight coupling of C++ friend mechanism.</span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span>              :         This method provides a single global mutex for critical sections across</span>
+<span id="L140"><span class="lineNum">     140</span>              :         ALL Model Database instances. The method is used to protect global Model</span>
+<span id="L141"><span class="lineNum">     141</span>              :         Database data (e.g.the global parse buffer).</span>
+<span id="L142"><span class="lineNum">     142</span>              :      */</span>
+<span id="L143"><span class="lineNum">     143</span>              :     static Kit::System::Mutex&amp; getGlobalMutex_() noexcept;</span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              :     /** This variable has 'PACKAGE Scope' in that is should only be called by</span>
+<span id="L146"><span class="lineNum">     146</span>              :         other classes in the Kit::Dm namespace.  It is ONLY public to avoid</span>
+<span id="L147"><span class="lineNum">     147</span>              :         the tight coupling of C++ friend mechanism.</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span>              :         Global/single instance of a JSON document. Model Point's need to have</span>
+<span id="L150"><span class="lineNum">     150</span>              :         acquired the global lock before using this buffer</span>
+<span id="L151"><span class="lineNum">     151</span>              :      */</span>
+<span id="L152"><span class="lineNum">     152</span>              :     static StaticJsonDocument&lt;OPTION_KIT_DM_MODEL_DATABASE_MAX_CAPACITY_JSON_DOC&gt; g_doc_;</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              : public:</span>
+<span id="L155"><span class="lineNum">     155</span>              :     /// Virtual destructor to make the compiler happy</span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">          41 :     virtual ~IModelDatabase() {}</span></span>
+<span id="L157"><span class="lineNum">     157</span>              : };</span>
+<span id="L158"><span class="lineNum">     158</span>              : </span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              : }  // end namespaces</span>
+<span id="L161"><span class="lineNum">     161</span>              : }</span>
+<span id="L162"><span class="lineNum">     162</span>              : #endif  // end header latch</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

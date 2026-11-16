@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -71,7 +71,7 @@ $(function() {
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span><span class="keyword">namespace </span>Ram {</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"></span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">/** This concrete template convenience class extends the RAM InputOutput class</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">    to include allocating the Ring Buffer memory.  The template argument </span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">    to include allocating the Ring Buffer memory.  The template argument</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">    &#39;NUM_BYTES&#39; is the number of &#39;useable&#39; bytes.</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> NUM_BYTES&gt;</div>
@@ -80,13 +80,13 @@ $(function() {
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">    /// Constructor.</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a3dca1c6e98cbd847269302d72b5a6d8e">   32</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a3dca1c6e98cbd847269302d72b5a6d8e">InputOutputAllocate</a>() noexcept</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        : <a class="code hl_class" href="class_kit_1_1_io_1_1_ram_1_1_input_output.html">InputOutput</a>( <a class="code hl_variable" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a7e78a233ae451cbdc24e9bdda63e175f">m_memory</a>, sizeof(<a class="code hl_variable" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a7e78a233ae451cbdc24e9bdda63e175f">m_memory</a>) )</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        : <a class="code hl_class" href="class_kit_1_1_io_1_1_ram_1_1_input_output.html">InputOutput</a>( <a class="code hl_variable" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a7e78a233ae451cbdc24e9bdda63e175f">m_memory</a>, sizeof( <a class="code hl_variable" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a7e78a233ae451cbdc24e9bdda63e175f">m_memory</a> ) )</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    {</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">protected</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">    /// Memory for the Ring buffer (+1 because the Ring Buffer can only store N-1 bytes when the buffer size is N)</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a7e78a233ae451cbdc24e9bdda63e175f">   39</a></span><span class="comment"></span>    uint8_t <a class="code hl_variable" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a7e78a233ae451cbdc24e9bdda63e175f">m_memory</a>[NUM_BYTES+1];   </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a7e78a233ae451cbdc24e9bdda63e175f">   39</a></span><span class="comment"></span>    uint8_t <a class="code hl_variable" href="class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html#a7e78a233ae451cbdc24e9bdda63e175f">m_memory</a>[NUM_BYTES + 1];</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>};</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}  <span class="comment">// end namespaces</span></div>
@@ -103,7 +103,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

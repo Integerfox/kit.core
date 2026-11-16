@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Text</a> - IString.h</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Text">Text</a> - IString.h</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">5</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryMed">55.6&nbsp;%</td>
-            <td class="headerCovTableEntry">18</td>
-            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -208,15 +208,13 @@
 <span id="L146"><span class="lineNum">     146</span>                 :             :     virtual const char* getString() const noexcept = 0;</span>
 <span id="L147"><span class="lineNum">     147</span>                 :             : </span>
 <span id="L148"><span class="lineNum">     148</span>                 :             :     /// Cast to read-only character string pointer.</span>
-<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC tlaBgGNC">       14037 :     inline operator const char*() const noexcept { return getString(); }</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">       15231 :     inline operator const char*() const noexcept { return getString(); }</span></span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : </span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :     /// Returns a Read-only pointer to the &quot;raw&quot; (short-hand for getString())</span>
-<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">          35 :     inline const char* operator()() const noexcept { return getString(); }</span></span>
+<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">         124 :     inline const char* operator()() const noexcept { return getString(); }</span></span>
 <span id="L153"><span class="lineNum">     153</span>                 :             : </span>
 <span id="L154"><span class="lineNum">     154</span>                 :             :     /// Returns the specified character. If n is out-bounds, then '\0' is returned</span>
-<span id="L155"><span class="lineNum">     155</span>   [<span class="tlaGBC" title="Branch 0 was taken 40 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 39 times"> + </span> :<span class="tlaGNC">          45 :     inline char operator[]( int i ) const noexcept { return i &lt; 0 || i &gt; length() ? '\0' : getString()[i]; }</span></span>
-<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
-<span class="lineNum">        </span>       <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaUNC" title="Branch 10 was not taken"> - </span><span class="tlaGBC" title="Branch 11 was taken 1 time"> + </span>]
+<span id="L155"><span class="lineNum">     155</span>   [<span class="tlaGBC" title="Branch 0 was taken 45 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 44 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC">          46 :     inline char operator[]( int i ) const noexcept { return i &lt; 0 || i &gt; length() ? '\0' : getString()[i]; }</span></span>
 <span id="L156"><span class="lineNum">     156</span>                 :             : </span>
 <span id="L157"><span class="lineNum">     157</span>                 :             : </span>
 <span id="L158"><span class="lineNum">     158</span>                 :             : public:</span>
@@ -236,8 +234,7 @@
 <span id="L172"><span class="lineNum">     172</span>                 :             :         returned does NOT include NULL terminator (i.e. if the returned size</span>
 <span id="L173"><span class="lineNum">     173</span>                 :             :         is 15, my internal storage must be at least 15+1).</span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :      */</span>
-<span id="L175"><span class="lineNum">     175</span>   [<span class="tlaGBC" title="Branch 0 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 2 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">           5 :     inline int availLength() noexcept { return maxLength() - length(); }</span></span>
-<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span>]
+<span id="L175"><span class="lineNum">     175</span>                 :<span class="tlaGNC">           5 :     inline int availLength() noexcept { return maxLength() - length(); }</span></span>
 <span id="L176"><span class="lineNum">     176</span>                 :             : </span>
 <span id="L177"><span class="lineNum">     177</span>                 :             :     /// Returns true if the string is empty (i.e. string[0] == '\0')</span>
 <span id="L178"><span class="lineNum">     178</span>                 :             :     virtual bool isEmpty() const noexcept = 0;</span>
@@ -457,7 +454,7 @@
 <span id="L392"><span class="lineNum">     392</span>                 :             :     /** Returns a &quot;writable&quot; pointer to the string's internal storage.</span>
 <span id="L393"><span class="lineNum">     393</span>                 :             :         The caller is RESPONSIBLE for insuring that the string is</span>
 <span id="L394"><span class="lineNum">     394</span>                 :             :         left in a valid state - that is the string is NULL terminated</span>
-<span id="L395"><span class="lineNum">     395</span>                 :             :         and has NOT exceeded the 'maxAllowedLength'. The 'maxAllowedLength' </span>
+<span id="L395"><span class="lineNum">     395</span>                 :             :         and has NOT exceeded the 'maxAllowedLength'. The 'maxAllowedLength'</span>
 <span id="L396"><span class="lineNum">     396</span>                 :             :         value is same value that is returned by the maxLength() method.</span>
 <span id="L397"><span class="lineNum">     397</span>                 :             : </span>
 <span id="L398"><span class="lineNum">     398</span>                 :             :         The pointer and length have a VERY LIMITED life span - the values become</span>
@@ -471,17 +468,17 @@
 <span id="L406"><span class="lineNum">     406</span>                 :             : </span>
 <span id="L407"><span class="lineNum">     407</span>                 :             : public:</span>
 <span id="L408"><span class="lineNum">     408</span>                 :             :     /// Virtual destructor!</span>
-<span id="L409"><span class="lineNum">     409</span>                 :             :     virtual ~IString() noexcept {}</span>
+<span id="L409"><span class="lineNum">     409</span>                 :<span class="tlaGNC">        1272 :     virtual ~IString() noexcept {}</span></span>
 <span id="L410"><span class="lineNum">     410</span>                 :             : </span>
 <span id="L411"><span class="lineNum">     411</span>                 :             : public:</span>
 <span id="L412"><span class="lineNum">     412</span>                 :             :     /// Default constructor</span>
-<span id="L413"><span class="lineNum">     413</span>                 :             :     IString() noexcept = default;</span>
-<span id="L414"><span class="lineNum">     414</span>                 :             :     </span>
+<span id="L413"><span class="lineNum">     413</span>                 :<span class="tlaGNC">        1336 :     IString() noexcept = default;</span></span>
+<span id="L414"><span class="lineNum">     414</span>                 :             : </span>
 <span id="L415"><span class="lineNum">     415</span>                 :             :     /// Delete move constructor to prevent moving</span>
-<span id="L416"><span class="lineNum">     416</span>                 :             :     IString(IString&amp;&amp;) = delete;</span>
-<span id="L417"><span class="lineNum">     417</span>                 :             :     </span>
+<span id="L416"><span class="lineNum">     416</span>                 :             :     IString( IString&amp;&amp; ) = delete;</span>
+<span id="L417"><span class="lineNum">     417</span>                 :             : </span>
 <span id="L418"><span class="lineNum">     418</span>                 :             :     /// Delete move assignment operator</span>
-<span id="L419"><span class="lineNum">     419</span>                 :             :     IString&amp; operator=(IString&amp;&amp;) = delete;</span>
+<span id="L419"><span class="lineNum">     419</span>                 :             :     IString&amp; operator=( IString&amp;&amp; ) = delete;</span>
 <span id="L420"><span class="lineNum">     420</span>                 :             : };</span>
 <span id="L421"><span class="lineNum">     421</span>                 :             : </span>
 <span id="L422"><span class="lineNum">     422</span>                 :             : }  // end namespaces</span>

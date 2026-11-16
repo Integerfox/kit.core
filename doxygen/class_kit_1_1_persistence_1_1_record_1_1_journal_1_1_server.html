@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -63,14 +63,14 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server__inherit__graph.svg" width="910" height="416"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server__inherit__graph.svg" width="1536" height="444"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Persistence::Record::Journal::Server&lt; ENTRY &gt;:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server__coll__graph.svg" width="4843" height="911"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server__coll__graph.svg" width="4826" height="960"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -159,9 +159,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a005d3703ca8d8782ec234ff27c720542" id="r_a005d3703ca8d8782ec234ff27c720542"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a005d3703ca8d8782ec234ff27c720542">bufferElementCountChanged</a> (<a class="el" href="class_kit_1_1_dm_1_1_mp_1_1_uint32.html">Kit::Dm::Mp::Uint32</a> &amp;mp, <a class="el" href="class_kit_1_1_dm_1_1_i_observer.html">Kit::Dm::IObserver</a> &amp;observer) noexcept</td></tr>
 <tr class="memdesc:a005d3703ca8d8782ec234ff27c720542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback when the 'trigger' MP changes.  <br /></td></tr>
 <tr class="separator:a005d3703ca8d8782ec234ff27c720542"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9156480071b9280c3dcc17be9d74c98" id="r_ac9156480071b9280c3dcc17be9d74c98"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9156480071b9280c3dcc17be9d74c98">hookAddingEntry</a> (const ENTRY &amp;entry) noexcept</td></tr>
-<tr class="memdesc:ac9156480071b9280c3dcc17be9d74c98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hook function called for each entry BEFORE it is added to the record.  <br /></td></tr>
-<tr class="separator:ac9156480071b9280c3dcc17be9d74c98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d193bc69287f42520e57c2a91f8d48a" id="r_a4d193bc69287f42520e57c2a91f8d48a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d193bc69287f42520e57c2a91f8d48a">hookAddingEntry</a> (ENTRY &amp;entry) noexcept</td></tr>
+<tr class="memdesc:a4d193bc69287f42520e57c2a91f8d48a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hook function called for each entry BEFORE it is added to the record.  <br /></td></tr>
+<tr class="separator:a4d193bc69287f42520e57c2a91f8d48a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06a091e32d503f01bbb5cd8b55ad08e5" id="r_a06a091e32d503f01bbb5cd8b55ad08e5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a06a091e32d503f01bbb5cd8b55ad08e5">hookRemovingEntry</a> (ENTRY &amp;entry) noexcept</td></tr>
+<tr class="memdesc:a06a091e32d503f01bbb5cd8b55ad08e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hook function called to remove the next entry from the incoming buffer.  <br /></td></tr>
+<tr class="separator:a06a091e32d503f01bbb5cd8b55ad08e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_reader_sync"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_reader_sync')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_reader_sync.html">Kit::Persistence::Record::Journal::ReaderSync</a></td></tr>
 <tr class="memitem:a0983f38ad9c1fa9882ab73601f1c76df inherit pro_methods_class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_reader_sync" id="r_a0983f38ad9c1fa9882ab73601f1c76df"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_reader_sync.html#a0983f38ad9c1fa9882ab73601f1c76df">ReaderSync</a> (<a class="el" href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a> &amp;eventQueue) noexcept</td></tr>
 <tr class="memdesc:a0983f38ad9c1fa9882ab73601f1c76df inherit pro_methods_class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_reader_sync"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
@@ -319,8 +322,8 @@ template&lt;class ENTRY &gt; </div>
 
 </div>
 </div>
-<a id="ac9156480071b9280c3dcc17be9d74c98" name="ac9156480071b9280c3dcc17be9d74c98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9156480071b9280c3dcc17be9d74c98">&#9670;&#160;</a></span>hookAddingEntry()</h2>
+<a id="a4d193bc69287f42520e57c2a91f8d48a" name="a4d193bc69287f42520e57c2a91f8d48a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d193bc69287f42520e57c2a91f8d48a">&#9670;&#160;</a></span>hookAddingEntry()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -331,9 +334,9 @@ template&lt;class ENTRY &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server.html">Kit::Persistence::Record::Journal::Server</a>&lt; ENTRY &gt;::hookAddingEntry </td>
+          <td class="memname">virtual bool <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server.html">Kit::Persistence::Record::Journal::Server</a>&lt; ENTRY &gt;::hookAddingEntry </td>
           <td>(</td>
-          <td class="paramtype">const ENTRY &amp;</td>          <td class="paramname"><span class="paramname"><em>entry</em></span></td><td>)</td>
+          <td class="paramtype">ENTRY &amp;</td>          <td class="paramname"><span class="paramname"><em>entry</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -345,6 +348,52 @@ template&lt;class ENTRY &gt; </div>
 </div><div class="memdoc">
 
 <p>Hook function called for each entry BEFORE it is added to the record. </p>
+<p>A child class can modify the entry before it is written, or filter it out. A filtered entry has already been removed from the incoming buffer, i.e. it is discarded (use <a class="el" href="#a06a091e32d503f01bbb5cd8b55ad08e5" title="Hook function called to remove the next entry from the incoming buffer.">hookRemovingEntry()</a> to defer writing entries without discarding them).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entry</td><td>The entry that is about to be added </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true to add the entry to the record, false to filter it out </dd></dl>
+
+</div>
+</div>
+<a id="a06a091e32d503f01bbb5cd8b55ad08e5" name="a06a091e32d503f01bbb5cd8b55ad08e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06a091e32d503f01bbb5cd8b55ad08e5">&#9670;&#160;</a></span>hookRemovingEntry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ENTRY &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool <a class="el" href="class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_server.html">Kit::Persistence::Record::Journal::Server</a>&lt; ENTRY &gt;::hookRemovingEntry </td>
+          <td>(</td>
+          <td class="paramtype">ENTRY &amp;</td>          <td class="paramname"><span class="paramname"><em>entry</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hook function called to remove the next entry from the incoming buffer. </p>
+<p>Draining the buffer stops when the method returns false.</p>
+<p>A child class can return false - WITHOUT removing an entry - to defer writing entries, e.g. to pause updates to persistent storage. The deferred entries stay in the incoming buffer and are processed on the next change notification of the buffer, i.e. when the next entry is added to the buffer.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entry</td><td>Destination for the removed entry </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true when an entry was removed into 'entry'; else false (the buffer is empty or draining is deferred) </dd></dl>
 
 </div>
 </div>
@@ -707,7 +756,7 @@ template&lt;class ENTRY &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

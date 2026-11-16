@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -112,16 +112,16 @@ $(function() {
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#aae738819b635f6f28906042b3bf43111">   62</a></span>    virtual <a class="code hl_struct" href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#struct_kit_1_1_memory_1_1_i_contiguous_allocator_1_1_memory_info___t">MemoryInfo_T</a>&amp; <a class="code hl_function" href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#aae738819b635f6f28906042b3bf43111">getMemoryStart</a>( <a class="code hl_struct" href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#struct_kit_1_1_memory_1_1_i_contiguous_allocator_1_1_memory_info___t">MemoryInfo_T</a>&amp; dstInfo ) noexcept = 0;</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>private:<span class="comment"></span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>protected:<span class="comment"></span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">    /** Hide/disable the individual release method (it does not fit the</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">        contiguous semantics).  If it gets called via the parent &#39;Allocator&#39;</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">        interface - it does NOTHING</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">void</span> release( <span class="keywordtype">void</span>* ptr ) noexcept {};</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#aea1de4d14b639af6c8b5a66df21cbc59">   70</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#aea1de4d14b639af6c8b5a66df21cbc59">release</a>( <span class="keywordtype">void</span>* ptr ) noexcept {};</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}       <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}  <span class="comment">// end namespaces</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_allocator_8h_html"><div class="ttname"><a href="_i_allocator_8h.html">IAllocator.h</a></div></div>
@@ -132,13 +132,14 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_i_contiguous_allocator_html_a82ea955bf229dd99701d1213de31c12d"><div class="ttname"><a href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#a82ea955bf229dd99701d1213de31c12d">Kit::Memory::IContiguousAllocator::MemoryInfo_T::m_maxWords</a></div><div class="ttdeci">size_t m_maxWords</div><div class="ttdoc">Maximum number of 'words' in the block of memory. Note: Unit is 'words' NOT bytes (i....</div><div class="ttdef"><b>Definition</b> IContiguousAllocator.h:41</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_i_contiguous_allocator_html_a9ab9ce6b800c3ff65cfc7dccdc9c2048"><div class="ttname"><a href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#a9ab9ce6b800c3ff65cfc7dccdc9c2048">Kit::Memory::IContiguousAllocator::MemoryInfo_T::m_totalLenInBytes</a></div><div class="ttdeci">size_t m_totalLenInBytes</div><div class="ttdoc">Total size of the contiguous block memory used by allocator in bytes.</div><div class="ttdef"><b>Definition</b> IContiguousAllocator.h:38</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_i_contiguous_allocator_html_aae738819b635f6f28906042b3bf43111"><div class="ttname"><a href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#aae738819b635f6f28906042b3bf43111">Kit::Memory::IContiguousAllocator::getMemoryStart</a></div><div class="ttdeci">virtual MemoryInfo_T &amp; getMemoryStart(MemoryInfo_T &amp;dstInfo) noexcept=0</div><div class="ttdoc">This method returns information about Allocator's contiguous memory and allocate/free status.</div></div>
+<div class="ttc" id="aclass_kit_1_1_memory_1_1_i_contiguous_allocator_html_aea1de4d14b639af6c8b5a66df21cbc59"><div class="ttname"><a href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#aea1de4d14b639af6c8b5a66df21cbc59">Kit::Memory::IContiguousAllocator::release</a></div><div class="ttdeci">void release(void *ptr) noexcept</div><div class="ttdoc">Hide/disable the individual release method (it does not fit the contiguous semantics).</div><div class="ttdef"><b>Definition</b> IContiguousAllocator.h:70</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_i_contiguous_allocator_html_af7319536c31ada28f919d3493edfd774"><div class="ttname"><a href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#af7319536c31ada28f919d3493edfd774">Kit::Memory::IContiguousAllocator::reset</a></div><div class="ttdeci">virtual void reset() noexcept=0</div><div class="ttdoc">Resets the allocator, i.e.</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_i_contiguous_allocator_html_struct_kit_1_1_memory_1_1_i_contiguous_allocator_1_1_memory_info___t"><div class="ttname"><a href="class_kit_1_1_memory_1_1_i_contiguous_allocator.html#struct_kit_1_1_memory_1_1_i_contiguous_allocator_1_1_memory_info___t">Kit::Memory::IContiguousAllocator::MemoryInfo_T</a></div><div class="ttdoc">Structure for memory info/status.</div><div class="ttdef"><b>Definition</b> IContiguousAllocator.h:33</div></div>
 <div class="ttc" id="anamespace_kit_html"><div class="ttname"><a href="namespace_kit.html">Kit</a></div><div class="ttdoc">The Kit namespace is the root name space for the KIT C++ class library that is specifically target fo...</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -1,3 +1,34 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$namespace_kit_1_1_driver_1_1_n_v_1_1_flash.html#struct_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_config___t" title="Configuration structure for the NV flash driver." alt="" coords="5,5,163,45"/>
+<area shape="rect" id="Node000000" href="$class_kit_1_1_driver_1_1_i_start.html" title="This abstract class defines the method for starting a driver." alt="" coords="5,232,136,260"/>
+<area shape="rect" id="Node000001" href="$class_kit_1_1_driver_1_1_dio_1_1_i_output.html" title="This class defines the interface for a digital output pin." alt="" coords="197,170,370,198"/>
+<area shape="poly" id="edge304_Node000000_Node000001" title=" " alt="" coords="125,225,183,206,225,196,221,200,184,212,129,229"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_driver_1_1_flash_1_1_i_api.html" title="This class defines the interface for a platform independent Flash memory driver." alt="" coords="219,221,349,266"/>
+<area shape="poly" id="edge306_Node000000_Node000004" title=" " alt="" coords="150,243,220,243,216,246,152,248"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_driver_1_1_n_v_1_1_i_api.html" title="This class defines the interface for a platform independent Non&#45;volatile storage driver." alt="" coords="211,290,357,318"/>
+<area shape="poly" id="edge309_Node000000_Node000007" title=" " alt="" coords="135,262,184,276,227,288,223,290,183,281,137,268"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_driver_1_1_s_p_i_1_1_i_half_duplex.html" title="This class defines the interface for a platform independent half&#45;duplex SPI driver." alt="" coords="184,342,384,370"/>
+<area shape="poly" id="edge315_Node000000_Node000013" title=" " alt="" coords="125,265,137,272,152,287,161,301,170,314,185,327,212,341,207,342,182,331,166,318,157,304,148,290,134,276,126,270"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_driver_1_1_dio_1_1_s_t_1_1_m32_f4_1_1_output.html" title="Concrete digital output driver for the STM32F4 HAL." alt="" coords="472,5,614,50"/>
+<area shape="poly" id="edge305_Node000001_Node000002" title=" " alt="" coords="307,157,361,108,395,82,431,60,474,44,470,47,433,65,398,87,365,112,311,160"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_driver_1_1_flash_1_1_mock_flash.html" title="Mock flash driver that simulates flash memory in RAM." alt="" coords="440,144,646,205"/>
+<area shape="poly" id="edge307_Node000004_Node000005" title=" " alt="" coords="363,220,442,201,437,203,365,225"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_driver_1_1_flash_1_1_w25_q_1_1_std_spi24.html" title="This class implements the Flash::IApi interface for the Winbond W25Q series SPI NOR flash devices usi..." alt="" coords="476,75,610,119"/>
+<area shape="poly" id="edge308_Node000004_Node000006" title=" " alt="" coords="362,220,382,207,398,188,405,169,413,149,430,130,452,116,478,108,474,111,454,121,434,134,418,152,410,171,403,191,386,211,365,224"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_driver_1_1_n_v_1_1_file_1_1_api.html" title="This class implements the Non&#45;volatile storage driver using the Kit::Io::File interfaces." alt="" coords="456,350,630,378"/>
+<area shape="poly" id="edge310_Node000007_Node000008" title=" " alt="" coords="361,319,433,336,482,349,476,350,431,341,361,324"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html" title="This class implements the NV::IApi interface using a flash device (via Flash::IApi) for persistent st..." alt="" coords="432,401,654,446"/>
+<area shape="poly" id="edge311_Node000007_Node000009" title=" " alt="" coords="372,321,386,328,402,343,410,358,419,373,434,387,456,401,451,401,430,391,415,376,406,361,397,346,382,332,372,326"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_driver_1_1_n_v_1_1_gang.html" title="This class implements the Non&#45;volatile storage driver using a collection of NV drivers to provide a &#39;..." alt="" coords="466,470,621,498"/>
+<area shape="poly" id="edge312_Node000007_Node000010" title=" " alt="" coords="371,318,386,328,399,345,407,361,410,394,414,426,421,442,434,456,449,467,468,476,462,476,446,471,430,460,416,444,409,428,405,395,401,363,395,347,382,332,371,324"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_driver_1_1_n_v_1_1_null.html" title="This concrete class provides a &#39;null&#39; implementation of the NV::IApi interface." alt="" coords="470,230,617,258"/>
+<area shape="poly" id="edge313_Node000007_Node000011" title=" " alt="" coords="360,283,431,266,482,257,477,259,433,272,362,288"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html" title="This class extends IApi interface so that all write operations are verified by reading back the data ..." alt="" coords="450,281,636,326"/>
+<area shape="poly" id="edge314_Node000007_Node000012" title=" " alt="" coords="372,301,452,303,447,305,373,306"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_driver_1_1_s_p_i_1_1_s_t_1_1_m32_f4_1_1_polled.html" title="Concrete half&#45;duplex SPI driver for the STM32F4 HAL using polling mode." alt="" coords="474,521,613,566"/>
+<area shape="poly" id="edge316_Node000013_Node000014" title=" " alt="" coords="305,379,359,444,394,478,433,507,476,528,471,528,431,511,391,482,355,447,303,384"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_driver_1_1_i_stop.html" title="This abstract class defines a stop operation that is intended to stop and/or shutdown a driver." alt="" coords="6,286,135,314"/>
+<area shape="poly" id="edge317_Node000003_Node000001" title=" " alt="" coords="125,276,134,270,149,254,157,238,166,222,182,207,207,196,203,200,185,211,170,226,161,241,153,257,137,274,129,280"/>
+<area shape="poly" id="edge318_Node000003_Node000004" title=" " alt="" coords="139,279,220,259,216,263,142,284"/>
+<area shape="poly" id="edge319_Node000003_Node000007" title=" " alt="" coords="149,299,212,301,208,304,151,304"/>
+<area shape="poly" id="edge320_Node000003_Node000013" title=" " alt="" coords="140,315,230,340,226,343,141,321"/>
 </map>

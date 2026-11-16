@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -174,21 +174,36 @@ $(function() {
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    {</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="class_kit_1_1_text_1_1_format.html#a6c7b72ba1ebef2ac4cbef28abb5f2ccd">formatMsec</a>( buffer, <span class="keyword">static_cast&lt;</span><span class="keywordtype">long</span> <span class="keywordtype">long</span><span class="keyword">&gt;</span>( timeStampInMsecs ), encodeMsec, encodeDay, appendToString );</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="keyword">protected</span>:<span class="comment"></span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">    /// Helper method</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_format.html#a6c7b72ba1ebef2ac4cbef28abb5f2ccd">  130</a></span><span class="comment"></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_text_1_1_format.html#a6c7b72ba1ebef2ac4cbef28abb5f2ccd">formatMsec</a>( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;  buffer,</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>                            <span class="keywordtype">long</span> <span class="keywordtype">long</span> elapsedMsec,</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                            <span class="keywordtype">bool</span>      encodeMsec,</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>                            <span class="keywordtype">bool</span>      encodeDay,</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                            <span class="keywordtype">bool</span>      appendToString ) <span class="keyword">noexcept</span>;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>};</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>}  <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"></span> </div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">    /** This method converts &#39;msecSinceEpoch&#39; - UTC time as milliseconds since</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">        the Epoch (1970-01-01 00:00:00) - to a string with the following format:</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">        &quot;YYYY-MM-DD HH:MM:SS[.SSS]&quot;.  The converted result is returned via</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">        &#39;buffer&#39;.  If the results where truncated due to insufficient memory in</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">        &#39;buffer&#39; then false is returned; else true is returned.</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment"></span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment">        NOTE: The conversion uses Kit::Time::msecToCalendar(), i.e. it does not</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment">              use the C library&#39;s gmtime() and is thread safe without a mutex.</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment">     */</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_format.html#a10357e7bad8d0ff453dbb5897ee52357">  137</a></span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_text_1_1_format.html#a10357e7bad8d0ff453dbb5897ee52357">utcTimestamp</a>( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp; buffer,</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                              uint64_t msecSinceEpoch,</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                              <span class="keywordtype">bool</span>     encodeMsec     = <span class="keyword">true</span>,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                              <span class="keywordtype">bool</span>     appendToString = <span class="keyword">false</span> ) noexcept;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>protected:<span class="comment"></span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">    /// Helper method</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="class_kit_1_1_text_1_1_format.html#a6c7b72ba1ebef2ac4cbef28abb5f2ccd">  144</a></span><span class="comment"></span>    static <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_text_1_1_format.html#a6c7b72ba1ebef2ac4cbef28abb5f2ccd">formatMsec</a>( <a class="code hl_class" href="class_kit_1_1_text_1_1_i_string.html">IString</a>&amp;  buffer,</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>                            <span class="keywordtype">long</span> <span class="keywordtype">long</span> elapsedMsec,</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                            <span class="keywordtype">bool</span>      encodeMsec,</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                            <span class="keywordtype">bool</span>      encodeDay,</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>                            <span class="keywordtype">bool</span>      appendToString ) noexcept;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>};</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>}</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_string_8h_html"><div class="ttname"><a href="_i_string_8h.html">IString.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_format_html"><div class="ttname"><a href="class_kit_1_1_text_1_1_format.html">Kit::Text::Format</a></div><div class="ttdoc">This static class contains some general purpose string formatting functions.</div><div class="ttdef"><b>Definition</b> Format.h:25</div></div>
+<div class="ttc" id="aclass_kit_1_1_text_1_1_format_html_a10357e7bad8d0ff453dbb5897ee52357"><div class="ttname"><a href="class_kit_1_1_text_1_1_format.html#a10357e7bad8d0ff453dbb5897ee52357">Kit::Text::Format::utcTimestamp</a></div><div class="ttdeci">static bool utcTimestamp(IString &amp;buffer, uint64_t msecSinceEpoch, bool encodeMsec=true, bool appendToString=false) noexcept</div><div class="ttdoc">This method converts 'msecSinceEpoch' - UTC time as milliseconds since the Epoch (1970-01-01 00:00:00...</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_format_html_a1cfafbe31ac2154d525a0fded66b44a9"><div class="ttname"><a href="class_kit_1_1_text_1_1_format.html#a1cfafbe31ac2154d525a0fded66b44a9">Kit::Text::Format::timestamp</a></div><div class="ttdeci">static bool timestamp(IString &amp;buffer, uint32_t timeStampInMsecs, bool encodeMsec=true, bool encodeDay=true, bool appendToString=false) noexcept</div><div class="ttdoc">This method converts the binary 32 bit millisecond count of 'timeStampInMsecs' to a string with the f...</div><div class="ttdef"><b>Definition</b> Format.h:107</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_format_html_a4a09bc6cfb722cfc6dbd33cb07cc0611"><div class="ttname"><a href="class_kit_1_1_text_1_1_format.html#a4a09bc6cfb722cfc6dbd33cb07cc0611">Kit::Text::Format::asciiBinary</a></div><div class="ttdeci">static bool asciiBinary(const void *binaryData, int len, IString &amp;destString, bool appendToString=false, bool reverse=false) noexcept</div><div class="ttdoc">This method converts the binary buffer to a single string that is ASCII BINARY.</div></div>
 <div class="ttc" id="aclass_kit_1_1_text_1_1_format_html_a57da64616c04eb995b0199fe8b7c136a"><div class="ttname"><a href="class_kit_1_1_text_1_1_format.html#a57da64616c04eb995b0199fe8b7c136a">Kit::Text::Format::string</a></div><div class="ttdeci">static bool string(const void *buffer, int len, IString &amp;destString, bool appendToString=false) noexcept</div><div class="ttdoc">This method will take a raw data buffer and convert it to an 'viewable' string.</div></div>
@@ -201,7 +216,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

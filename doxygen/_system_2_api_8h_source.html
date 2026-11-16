@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -58,7 +58,7 @@ $(function() {
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> * Redistributions of the source code must retain the above copyright notice.</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *----------------------------------------------------------------------------*/</span><span class="comment"></span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/** @file </span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/** @file</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">    This file defines methods for initializing the KIT C++ class library</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">    and other startup/init actions.</span></div>
@@ -112,14 +112,14 @@ $(function() {
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">/** This method causes the current thread to be suspended for</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">    n milliseconds.</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_system.html#a9ce80b51370ac7c69e2887f653d519a3">   65</a></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespace_kit_1_1_system.html#a9ce80b51370ac7c69e2887f653d519a3">sleep</a>( uint32_t milliseconds ) noexcept;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_system.html#a9ce80b51370ac7c69e2887f653d519a3">   65</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespace_kit_1_1_system.html#a9ce80b51370ac7c69e2887f653d519a3">sleep</a>( uint32_t milliseconds ) noexcept;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">/** This method is the same as sleep(), EXCEPT that is guaranteed to</span></div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    suspend in &#39;real time&#39;.  Typically an application NEVER needs</span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">    to call this method.  See the SimTick interface for additional</span></div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">    details about Simulated Time.</span></div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_system.html#a91fb1fdea5c5d23b691126373ab21b87">   72</a></span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespace_kit_1_1_system.html#a91fb1fdea5c5d23b691126373ab21b87">sleepInRealTime</a>( uint32_t milliseconds ) noexcept;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_system.html#a91fb1fdea5c5d23b691126373ab21b87">   72</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespace_kit_1_1_system.html#a91fb1fdea5c5d23b691126373ab21b87">sleepInRealTime</a>( uint32_t milliseconds ) noexcept;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">/*----------------------------------------------------------------------------*/</span><span class="comment"></span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">/** This method is used to temporarily suspend thread scheduling, i.e. no</span></div>
@@ -148,10 +148,9 @@ $(function() {
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="namespace_kit_1_1_system.html#afbe19a17e287546b44bdd4b0842f621f">   98</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="namespace_kit_1_1_system.html#afbe19a17e287546b44bdd4b0842f621f">resumeScheduling</a>() noexcept;</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}       <span class="comment">// end namespaces</span></div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}       <span class="comment">// end namespace</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}  <span class="comment">// end namespace</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="anamespace_kit_1_1_system_html_a09af4e2eba5e8a0b986cebe0d2bbe9cb"><div class="ttname"><a href="namespace_kit_1_1_system.html#a09af4e2eba5e8a0b986cebe0d2bbe9cb">Kit::System::initialize</a></div><div class="ttdeci">void initialize() noexcept</div><div class="ttdoc">This function initializes the KIT C++ class library.</div></div>
 <div class="ttc" id="anamespace_kit_1_1_system_html_a91fb1fdea5c5d23b691126373ab21b87"><div class="ttname"><a href="namespace_kit_1_1_system.html#a91fb1fdea5c5d23b691126373ab21b87">Kit::System::sleepInRealTime</a></div><div class="ttdeci">void sleepInRealTime(uint32_t milliseconds) noexcept</div><div class="ttdoc">This method is the same as sleep(), EXCEPT that is guaranteed to suspend in 'real time'.</div></div>
 <div class="ttc" id="anamespace_kit_1_1_system_html_a9aa4f2aa7d6133fc710a14cfc1a56f2f"><div class="ttname"><a href="namespace_kit_1_1_system.html#a9aa4f2aa7d6133fc710a14cfc1a56f2f">Kit::System::isSchedulingEnabled</a></div><div class="ttdeci">bool isSchedulingEnabled() noexcept</div><div class="ttdoc">This function returns true if scheduling has enabled using the enableScheduling() functions.</div></div>
@@ -163,7 +162,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">Text/_mappings/_posix</a> - strapi.cpp</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Text/_mappings/_posix">Text/_mappings/_posix</a> - strapi.cpp</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">10</td>
-            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">75.0&nbsp;%</td>
@@ -76,11 +76,11 @@
 <span id="L14"><span class="lineNum">      14</span>                 :             : </span>
 <span id="L15"><span class="lineNum">      15</span>                 :             : </span>
 <span id="L16"><span class="lineNum">      16</span>                 :             : //////////////</span>
-<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC tlaBgGNC">           1 : char* strupr_MAP( char *string )</span></span>
+<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC">           1 : char* strupr_MAP( char* string )</span></span>
 <span id="L18"><span class="lineNum">      18</span>                 :             : {</span>
 <span id="L19"><span class="lineNum">      19</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :     if ( string )</span></span>
 <span id="L20"><span class="lineNum">      20</span>                 :             :     {</span>
-<span id="L21"><span class="lineNum">      21</span>                 :             :         char* ptr = string;</span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">           1 :         char* ptr = string;</span></span>
 <span id="L22"><span class="lineNum">      22</span>         [<span class="tlaGBC" title="Branch 0 was taken 24 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          25 :         for ( ; *ptr; ptr++ )</span></span>
 <span id="L23"><span class="lineNum">      23</span>                 :             :         {</span>
 <span id="L24"><span class="lineNum">      24</span>                 :<span class="tlaGNC">          24 :             *ptr = toupper( *ptr );</span></span>
@@ -89,11 +89,11 @@
 <span id="L27"><span class="lineNum">      27</span>                 :<span class="tlaGNC">           1 :     return string;</span></span>
 <span id="L28"><span class="lineNum">      28</span>                 :             : }</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             : </span>
-<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">           1 : char* strlwr_MAP( char *string )</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">           1 : char* strlwr_MAP( char* string )</span></span>
 <span id="L31"><span class="lineNum">      31</span>                 :             : {</span>
 <span id="L32"><span class="lineNum">      32</span>         [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">           1 :     if ( string )</span></span>
 <span id="L33"><span class="lineNum">      33</span>                 :             :     {</span>
-<span id="L34"><span class="lineNum">      34</span>                 :             :         char* ptr = string;</span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">           1 :         char* ptr = string;</span></span>
 <span id="L35"><span class="lineNum">      35</span>         [<span class="tlaGBC" title="Branch 0 was taken 10 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span>]:<span class="tlaGNC">          11 :         for ( ; *ptr; ptr++ )</span></span>
 <span id="L36"><span class="lineNum">      36</span>                 :             :         {</span>
 <span id="L37"><span class="lineNum">      37</span>                 :<span class="tlaGNC">          10 :             *ptr = tolower( *ptr );</span></span>

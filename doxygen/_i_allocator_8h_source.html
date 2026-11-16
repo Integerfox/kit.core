@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -147,7 +147,7 @@ $(function() {
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">               object is not necessarily the same pointer value when the pointer</span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">               is up-cast to one of its abstract base classes!</span></div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">     */</span></div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="class_kit_1_1_memory_1_1_i_allocator.html#aff2729be3bd77f28cbb2b6d5fc9ef14b">  100</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_memory_1_1_i_allocator.html#aff2729be3bd77f28cbb2b6d5fc9ef14b">release</a>( <span class="keywordtype">void</span> *ptr ) <span class="keyword">noexcept</span> = 0;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="class_kit_1_1_memory_1_1_i_allocator.html#aff2729be3bd77f28cbb2b6d5fc9ef14b">  100</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_memory_1_1_i_allocator.html#aff2729be3bd77f28cbb2b6d5fc9ef14b">release</a>( <span class="keywordtype">void</span>* ptr ) <span class="keyword">noexcept</span> = 0;</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="keyword">public</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">    /** Returns the &#39;word&#39; size of the allocator, i.e. chunks of memory are</span></div>
@@ -163,7 +163,7 @@ $(function() {
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="class_kit_1_1_memory_1_1_i_allocator.html#ab85d490368f27580ae13ad4cf20c1b00">  113</a></span>    inline <span class="keywordtype">size_t</span> <a class="code hl_function" href="class_kit_1_1_memory_1_1_i_allocator.html#ab85d490368f27580ae13ad4cf20c1b00">allocatedSizeForNBytes</a>( <span class="keywordtype">size_t</span> nbytes ) const noexcept</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    {</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordtype">size_t</span> ws = <a class="code hl_function" href="class_kit_1_1_memory_1_1_i_allocator.html#a73f81f292797b9d19a2f9b7bf4f1c7b2">wordSize</a>();</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">return</span> ((nbytes + ws - 1) / ws) * ws;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">return</span> ( ( nbytes + ws - 1 ) / ws ) * ws;</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    }</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">public</span>:<span class="comment"></span></div>
@@ -172,7 +172,7 @@ $(function() {
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>};</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}      <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>}  <span class="comment">// end namespaces</span></div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_list_item_8h_html"><div class="ttname"><a href="_list_item_8h.html">ListItem.h</a></div></div>
@@ -187,7 +187,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

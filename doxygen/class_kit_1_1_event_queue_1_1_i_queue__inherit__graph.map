@@ -1,13 +1,17 @@
 <map id="Kit::EventQueue::IQueue" name="Kit::EventQueue::IQueue">
-<area shape="rect" id="Node000001" title="This abstract class represents an Event Queue where events can be delivered to." alt="" coords="131,93,313,119"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_itc_1_1_mailbox.html" title="This mailbox class implements an Inter Thread Communications message queue." alt="" coords="160,167,284,192"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,132,225,167,219,167,219,132"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="107,5,337,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="225,59,225,93,219,93,219,59"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_event_queue_1_1_server.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing events from Ev..." alt="" coords="133,240,311,265"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="225,206,225,240,219,240,219,206"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html" title="This class extends the Kit::EventQueue::Server class to add periodic scheduling to an event based &#39;th..." alt="" coords="5,313,223,353"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="196,276,142,315,138,311,193,271"/>
-<area shape="rect" id="Node000006" href="$class_test_event_queue_server.html" title="This class is a EventQueue Server that signals the provided semaphore when it begins execution." alt="" coords="247,321,416,346"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="251,271,317,318,314,323,248,276"/>
+<area shape="rect" id="Node000001" title="This abstract class represents an Event Queue where events can be delivered to." alt="" coords="230,98,410,126"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_itc_1_1_mailbox.html" title="This mailbox class implements an Inter Thread Communications message queue." alt="" coords="258,174,382,201"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="321,139,323,174,318,172,319,144"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="205,5,435,50"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="321,63,323,98,318,97,319,68"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_event_queue_1_1_server_base.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing ITC messages f..." alt="" coords="216,249,424,277"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="322,215,323,250,318,248,319,219"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_event_queue_1_1_server.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing events from Ev..." alt="" coords="232,325,408,353"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="322,291,322,326,318,323,319,295"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_event_queue_1_1_with_periodic_scheduling.html" title="This class extends the Kit::EventQueue::Server class to add periodic scheduling to an event based &#39;th..." alt="" coords="5,401,222,445"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="276,358,169,403,167,398,270,359"/>
+<area shape="rect" id="Node000007" href="$class_manual_event_queue.html" title="This class is an Event Queue (Kit::EventQueue::Server) that is NOT run by a thread." alt="" coords="246,409,394,437"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="322,367,322,410,318,407,318,370"/>
+<area shape="rect" id="Node000008" href="$class_test_event_queue_server.html" title="This class is a EventQueue Server that signals the provided semaphore when it begins execution." alt="" coords="419,409,587,437"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="364,357,476,408,471,409,363,362"/>
 </map>

@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -47,6 +47,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_kit_1_1_system_1_1_never_destroyed-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::System::NeverDestroyed&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -62,6 +63,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9cf85140380b76141e7fcd8ada37c716" id="r_a9cf85140380b76141e7fcd8ada37c716"><td class="memItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9cf85140380b76141e7fcd8ada37c716">get</a> () noexcept</td></tr>
 <tr class="memdesc:a9cf85140380b76141e7fcd8ada37c716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the wrapped instance.  <br /></td></tr>
 <tr class="separator:a9cf85140380b76141e7fcd8ada37c716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:afd2acc69ea99351f67f9fab0cc3bf567" id="r_afd2acc69ea99351f67f9fab0cc3bf567"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd2acc69ea99351f67f9fab0cc3bf567">m_storage</a> [sizeof(T)]</td></tr>
+<tr class="memdesc:afd2acc69ea99351f67f9fab0cc3bf567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raw memory for the class.  <br /></td></tr>
+<tr class="separator:afd2acc69ea99351f67f9fab0cc3bf567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
@@ -98,13 +105,40 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="afd2acc69ea99351f67f9fab0cc3bf567" name="afd2acc69ea99351f67f9fab0cc3bf567"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2acc69ea99351f67f9fab0cc3bf567">&#9670;&#160;</a></span>m_storage</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char <a class="el" href="class_kit_1_1_system_1_1_never_destroyed.html">Kit::System::NeverDestroyed</a>&lt; T &gt;::m_storage[sizeof(T)]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Raw memory for the class. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>Kit/System/<a class="el" href="_private_8h_source.html">Private.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">TShell</a> - Processor.h</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory TShell">TShell</a> - Processor.h</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">14</td>
-            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">13</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryMed">50.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
             <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">1</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -170,7 +170,7 @@
 <span id="L108"><span class="lineNum">     108</span>                 :             :         - Provide an implementation (other than `NoSecurity`) of the ISecurity</span>
 <span id="L109"><span class="lineNum">     109</span>                 :             :           interface that meets the application's security requirements.</span>
 <span id="L110"><span class="lineNum">     110</span>                 :             : */</span>
-<span id="L111"><span class="lineNum">     111</span>                 :<span class="tlaGNC tlaBgGNC">           9 : class Processor : public IProcessor, public IContext</span></span>
+<span id="L111"><span class="lineNum">     111</span>                 :             : class Processor : public IProcessor, public IContext</span>
 <span id="L112"><span class="lineNum">     112</span>                 :             : {</span>
 <span id="L113"><span class="lineNum">     113</span>                 :             : public:</span>
 <span id="L114"><span class="lineNum">     114</span>                 :             :     /** Constructor.</span>
@@ -192,27 +192,27 @@
 <span id="L130"><span class="lineNum">     130</span>                 :             :                                     input string is a comment and should not be</span>
 <span id="L131"><span class="lineNum">     131</span>                 :             :                                     executed.</span>
 <span id="L132"><span class="lineNum">     132</span>                 :             :  */</span>
-<span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">          13 :     Processor( Kit::Container::OrderedList&lt;ICommand&gt;&amp; commands,</span></span>
+<span id="L133"><span class="lineNum">     133</span>                 :<span class="tlaGNC">          14 :     Processor( Kit::Container::OrderedList&lt;ICommand&gt;&amp; commands,</span></span>
 <span id="L134"><span class="lineNum">     134</span>                 :             :                Kit::Framing::StreamSource&amp;            commandSource,</span>
 <span id="L135"><span class="lineNum">     135</span>                 :             :                Kit::Framing::StreamDestination&amp;       outputDestination,</span>
 <span id="L136"><span class="lineNum">     136</span>                 :             :                ISecurity&amp;                             securityPolicy,</span>
 <span id="L137"><span class="lineNum">     137</span>                 :             :                Kit::System::Mutex&amp;                    outputLock,</span>
 <span id="L138"><span class="lineNum">     138</span>                 :             :                char                                   convertTabs = ' ',</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             :                char                                   commentChar = '#' )</span>
-<span id="L140"><span class="lineNum">     140</span>                 :<span class="tlaGNC">          13 :         : m_commands( commands )</span></span>
-<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">          13 :         , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )</span></span>
-<span id="L142"><span class="lineNum">     142</span>                 :<span class="tlaGNC">          13 :         , m_framer( outputDestination, '\n' + 1, '\n', 0, true )  // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.</span></span>
-<span id="L143"><span class="lineNum">     143</span>                 :<span class="tlaGNC">          13 :         , m_secPolicy( securityPolicy )</span></span>
-<span id="L144"><span class="lineNum">     144</span>                 :<span class="tlaGNC">          13 :         , m_outLock( outputLock )</span></span>
-<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">          13 :         , m_streamSource( commandSource )</span></span>
-<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">          13 :         , m_streamDestination( outputDestination )</span></span>
-<span id="L147"><span class="lineNum">     147</span>                 :<span class="tlaGNC">          13 :         , m_frameSize( 0 )</span></span>
-<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          13 :         , m_comment( commentChar )</span></span>
-<span id="L149"><span class="lineNum">     149</span>         [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 13 times"> + </span>]:<span class="tlaGNC">          13 :         , m_blocking( true )</span></span>
-<span id="L150"><span class="lineNum">     150</span>                 :<span class="tlaGNC">          13 :         , m_running( false )</span></span>
+<span id="L140"><span class="lineNum">     140</span>                 :<span class="tlaGNC">          28 :         : m_commands( commands )</span></span>
+<span id="L141"><span class="lineNum">     141</span>                 :<span class="tlaGNC">          14 :         , m_deframer( commandSource, m_rawInputBuffer, sizeof( m_rawInputBuffer ), convertTabs )</span></span>
+<span id="L142"><span class="lineNum">     142</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          14 :         , m_framer( outputDestination, '\n' + 1, '\n', 0, true )  // Line-based output does not require an SOF marker; use an arbitrary distinct SOF and skip transmitting it.</span></span>
+<span id="L143"><span class="lineNum">     143</span>                 :<span class="tlaGNC">          14 :         , m_secPolicy( securityPolicy )</span></span>
+<span id="L144"><span class="lineNum">     144</span>                 :<span class="tlaGNC">          14 :         , m_outLock( outputLock )</span></span>
+<span id="L145"><span class="lineNum">     145</span>                 :<span class="tlaGNC">          14 :         , m_streamSource( commandSource )</span></span>
+<span id="L146"><span class="lineNum">     146</span>                 :<span class="tlaGNC">          14 :         , m_streamDestination( outputDestination )</span></span>
+<span id="L147"><span class="lineNum">     147</span>                 :<span class="tlaGNC">          14 :         , m_frameSize( 0 )</span></span>
+<span id="L148"><span class="lineNum">     148</span>                 :<span class="tlaGNC">          14 :         , m_comment( commentChar )</span></span>
+<span id="L149"><span class="lineNum">     149</span>                 :<span class="tlaGNC">          14 :         , m_blocking( true )</span></span>
+<span id="L150"><span class="lineNum">     150</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span>]:<span class="tlaGNC">          28 :         , m_running( false )</span></span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :     {</span>
 <span id="L152"><span class="lineNum">     152</span>                 :             :         KIT_SYSTEM_ASSERT( commentChar &gt;= ' ' &amp;&amp; commentChar &lt;= '~' );</span>
-<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">          13 :     }</span></span>
+<span id="L153"><span class="lineNum">     153</span>                 :<span class="tlaGNC">          14 :     }</span></span>
 <span id="L154"><span class="lineNum">     154</span>                 :             : </span>
 <span id="L155"><span class="lineNum">     155</span>                 :             : public:</span>
 <span id="L156"><span class="lineNum">     156</span>                 :             :     /// See Kit::TShell::IProcessor</span>

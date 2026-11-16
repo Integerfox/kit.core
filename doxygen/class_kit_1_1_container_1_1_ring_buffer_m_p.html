@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -48,6 +48,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_kit_1_1_container_1_1_ring_buffer_m_p-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Kit::Container::RingBufferMP&lt; ITEM &gt; Class Template Reference</div></div>
@@ -63,14 +64,14 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer_m_p__inherit__graph.svg" width="1691" height="324"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer_m_p__inherit__graph.svg" width="1687" height="420"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Container::RingBufferMP&lt; ITEM &gt;:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer_m_p__coll__graph.svg" width="635" height="1378"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_container_1_1_ring_buffer_m_p__coll__graph.svg" width="632" height="1459"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -140,6 +141,34 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a171b16c567b160f329a852edee47d9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Model Point that tracks the number of elements in the buffer. Make public to allow attach/detach of observers.  <br /></td></tr>
 <tr class="separator:a171b16c567b160f329a852edee47d9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a5383b4106819bc7104e4c1829a17f713" id="r_a5383b4106819bc7104e4c1829a17f713"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5383b4106819bc7104e4c1829a17f713">RingBufferMP</a> (const <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a> &amp;m)=delete</td></tr>
+<tr class="memdesc:a5383b4106819bc7104e4c1829a17f713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the copy constructor --&gt;Ring Buffers can not be copied!  <br /></td></tr>
+<tr class="separator:a5383b4106819bc7104e4c1829a17f713"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcbc507cb31f13a9d4976f5d59bed746" id="r_afcbc507cb31f13a9d4976f5d59bed746"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afcbc507cb31f13a9d4976f5d59bed746">RingBufferMP</a> (<a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a> &amp;&amp;m)=delete</td></tr>
+<tr class="memdesc:afcbc507cb31f13a9d4976f5d59bed746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the move constructor --&gt;Ring Buffers can not be implicitly moved!  <br /></td></tr>
+<tr class="separator:afcbc507cb31f13a9d4976f5d59bed746"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff0daa0e7422d0a7d986f24f66fd376f" id="r_aff0daa0e7422d0a7d986f24f66fd376f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff0daa0e7422d0a7d986f24f66fd376f">operator=</a> (const <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a> &amp;m)=delete</td></tr>
+<tr class="memdesc:aff0daa0e7422d0a7d986f24f66fd376f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the assignment operator --&gt;Ring Buffers can not be copied!  <br /></td></tr>
+<tr class="separator:aff0daa0e7422d0a7d986f24f66fd376f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a226d8fa7d22f0092b263256ebbb3544f" id="r_a226d8fa7d22f0092b263256ebbb3544f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a226d8fa7d22f0092b263256ebbb3544f">operator=</a> (<a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a> &amp;&amp;m)=delete</td></tr>
+<tr class="memdesc:a226d8fa7d22f0092b263256ebbb3544f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the move assignment operator --&gt;Ring Buffers can not be implicitly moved!  <br /></td></tr>
+<tr class="separator:a226d8fa7d22f0092b263256ebbb3544f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_methods_class_kit_1_1_container_1_1_ring_buffer')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">Kit::Container::RingBuffer&lt; ITEM &gt;</a></td></tr>
+<tr class="memitem:ab215527766fdba3c45d690d04a4182f5 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_ab215527766fdba3c45d690d04a4182f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#ab215527766fdba3c45d690d04a4182f5">RingBuffer</a> (const <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">RingBuffer</a>&lt; ITEM &gt; &amp;m)=delete</td></tr>
+<tr class="memdesc:ab215527766fdba3c45d690d04a4182f5 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the copy constructor --&gt;Ring Buffers can not be copied!  <br /></td></tr>
+<tr class="separator:ab215527766fdba3c45d690d04a4182f5 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa6baf6d3335caba7f8114d42a2d49e6 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_aaa6baf6d3335caba7f8114d42a2d49e6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#aaa6baf6d3335caba7f8114d42a2d49e6">RingBuffer</a> (<a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">RingBuffer</a>&lt; ITEM &gt; &amp;&amp;m)=delete</td></tr>
+<tr class="memdesc:aaa6baf6d3335caba7f8114d42a2d49e6 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the move constructor --&gt;Ring Buffers can not be implicitly moved!  <br /></td></tr>
+<tr class="separator:aaa6baf6d3335caba7f8114d42a2d49e6 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51dc0fec2bdf54339fe0717157ac2751 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_a51dc0fec2bdf54339fe0717157ac2751"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">RingBuffer</a>&lt; ITEM &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a51dc0fec2bdf54339fe0717157ac2751">operator=</a> (const <a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">RingBuffer</a>&lt; ITEM &gt; &amp;m)=delete</td></tr>
+<tr class="memdesc:a51dc0fec2bdf54339fe0717157ac2751 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the assignment operator --&gt;Ring Buffers can not be copied!  <br /></td></tr>
+<tr class="separator:a51dc0fec2bdf54339fe0717157ac2751 inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dfa429124b3a992814cd3059ce5799a inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer" id="r_a8dfa429124b3a992814cd3059ce5799a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">RingBuffer</a>&lt; ITEM &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html#a8dfa429124b3a992814cd3059ce5799a">operator=</a> (<a class="el" href="class_kit_1_1_container_1_1_ring_buffer.html">RingBuffer</a>&lt; ITEM &gt; &amp;&amp;m)=delete</td></tr>
+<tr class="memdesc:a8dfa429124b3a992814cd3059ce5799a inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the move assignment operator --&gt;Ring Buffers can not be implicitly moved!  <br /></td></tr>
+<tr class="separator:a8dfa429124b3a992814cd3059ce5799a inherit pro_methods_class_kit_1_1_container_1_1_ring_buffer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ae5186524c8dd9ffb0a6c028762007ddd" id="r_ae5186524c8dd9ffb0a6c028762007ddd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_kit_1_1_system_1_1_mutex.html">Kit::System::Mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5186524c8dd9ffb0a6c028762007ddd">m_mutex</a></td></tr>
@@ -158,7 +187,7 @@ class Kit::Container::RingBufferMP&lt; ITEM &gt;</div><p>This template class ext
 <p>Template Args: ITEM:= <a class="el" href="namespace_kit_1_1_type.html" title="The Type namespace provides various types that are not unique to a single namespace.">Type</a> of the data stored in the Ring Buffer </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac419fec9318558c553a526df9d080b7f" name="ac419fec9318558c553a526df9d080b7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac419fec9318558c553a526df9d080b7f">&#9670;&#160;</a></span>RingBufferMP()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac419fec9318558c553a526df9d080b7f">&#9670;&#160;</a></span>RingBufferMP() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,6 +226,64 @@ template&lt;class ITEM &gt; </div>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
+
+</div>
+</div>
+<a id="a5383b4106819bc7104e4c1829a17f713" name="a5383b4106819bc7104e4c1829a17f713"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5383b4106819bc7104e4c1829a17f713">&#9670;&#160;</a></span>RingBufferMP() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ITEM &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; ITEM &gt;::RingBufferMP </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a>&lt; ITEM &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>m</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prevent access to the copy constructor --&gt;Ring Buffers can not be copied! </p>
+
+</div>
+</div>
+<a id="afcbc507cb31f13a9d4976f5d59bed746" name="afcbc507cb31f13a9d4976f5d59bed746"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcbc507cb31f13a9d4976f5d59bed746">&#9670;&#160;</a></span>RingBufferMP() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ITEM &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; ITEM &gt;::RingBufferMP </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a>&lt; ITEM &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>m</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prevent access to the move constructor --&gt;Ring Buffers can not be implicitly moved! </p>
 
 </div>
 </div>
@@ -471,6 +558,64 @@ template&lt;class ITEM &gt; </div>
 </div><div class="memdoc">
 
 <p>See Kit::RingBuffer. </p>
+
+</div>
+</div>
+<a id="aff0daa0e7422d0a7d986f24f66fd376f" name="aff0daa0e7422d0a7d986f24f66fd376f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff0daa0e7422d0a7d986f24f66fd376f">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ITEM &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a> &amp; <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; ITEM &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a>&lt; ITEM &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>m</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prevent access to the assignment operator --&gt;Ring Buffers can not be copied! </p>
+
+</div>
+</div>
+<a id="a226d8fa7d22f0092b263256ebbb3544f" name="a226d8fa7d22f0092b263256ebbb3544f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a226d8fa7d22f0092b263256ebbb3544f">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ITEM &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a> &amp; <a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">Kit::Container::RingBufferMP</a>&lt; ITEM &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_container_1_1_ring_buffer_m_p.html">RingBufferMP</a>&lt; ITEM &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>m</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prevent access to the move assignment operator --&gt;Ring Buffers can not be implicitly moved! </p>
 
 </div>
 </div>
@@ -777,7 +922,7 @@ template&lt;class ITEM &gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Container</a> - RingBufferMPAllocate.h</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Container">Container</a> - RingBufferMPAllocate.h</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -81,15 +81,15 @@
 <span id="L19"><span class="lineNum">      19</span>                 :             : namespace Container {</span>
 <span id="L20"><span class="lineNum">      20</span>                 :             : </span>
 <span id="L21"><span class="lineNum">      21</span>                 :             : </span>
-<span id="L22"><span class="lineNum">      22</span>                 :             : /** This template class extends the RingBufferMP class by statically allocating </span>
+<span id="L22"><span class="lineNum">      22</span>                 :             : /** This template class extends the RingBufferMP class by statically allocating</span>
 <span id="L23"><span class="lineNum">      23</span>                 :             :     memory for the ring buffer.</span>
 <span id="L24"><span class="lineNum">      24</span>                 :             : </span>
-<span id="L25"><span class="lineNum">      25</span>                 :             :     NOTE: The default behavior of the RingBuffer is to initialize the memory </span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     NOTE: The default behavior of the RingBuffer is to initialize the memory</span>
 <span id="L26"><span class="lineNum">      26</span>                 :             :           buffer to all zeros. When the 'ITEM' type is a class type (i.e. not</span>
 <span id="L27"><span class="lineNum">      27</span>                 :             :           struct or primitive type) then the 'initializeMemory' constructor flag</span>
 <span id="L28"><span class="lineNum">      28</span>                 :             :           MUST be set to false - so as to not overwrite the vtable pointer of</span>
 <span id="L29"><span class="lineNum">      29</span>                 :             :           the class instance.</span>
-<span id="L30"><span class="lineNum">      30</span>                 :             :     </span>
+<span id="L30"><span class="lineNum">      30</span>                 :             : </span>
 <span id="L31"><span class="lineNum">      31</span>                 :             :     Template Args:</span>
 <span id="L32"><span class="lineNum">      32</span>                 :             :         ITEM:=      Type of the data stored in the Ring Buffer</span>
 <span id="L33"><span class="lineNum">      33</span>                 :             :         N:=         Size of the array that is allocated to hold the Ring Buffer</span>
@@ -101,16 +101,16 @@
 <span id="L39"><span class="lineNum">      39</span>                 :             : {</span>
 <span id="L40"><span class="lineNum">      40</span>                 :             : public:</span>
 <span id="L41"><span class="lineNum">      41</span>                 :             :     /// Constructor</span>
-<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC tlaBgGNC">          11 :     RingBufferMPAllocate( Kit::Dm::Mp::Uint32&amp; mpElementCount, bool initializeMemory = false ) noexcept</span></span>
-<span id="L43"><span class="lineNum">      43</span>         [<span class="tlaGBC" title="Branch 0 was taken 44 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 5 times"> + </span>]:<span class="tlaGNC">          60 :         : RingBufferMP&lt;ITEM&gt;( mpElementCount, m_rawMemory, N, initializeMemory )</span></span>
+<span id="L42"><span class="lineNum">      42</span>                 :<span class="tlaGNC">          20 :     RingBufferMPAllocate( Kit::Dm::Mp::Uint32&amp; mpElementCount, bool initializeMemory = false ) noexcept</span></span>
+<span id="L43"><span class="lineNum">      43</span>         [<span class="tlaGBC" title="Branch 0 was taken 143 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14 times"> + </span>]:<span class="tlaGNC">         163 :         : RingBufferMP&lt;ITEM&gt;( mpElementCount, m_rawMemory, N, initializeMemory )</span></span>
 <span id="L44"><span class="lineNum">      44</span>                 :             :     {</span>
-<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">          11 :     }</span></span>
+<span id="L45"><span class="lineNum">      45</span>                 :<span class="tlaGNC">          20 :     }</span></span>
 <span id="L46"><span class="lineNum">      46</span>                 :             : </span>
 <span id="L47"><span class="lineNum">      47</span>                 :             : protected:</span>
 <span id="L48"><span class="lineNum">      48</span>                 :             :     /// Memory for the Ring buffer</span>
 <span id="L49"><span class="lineNum">      49</span>                 :             :     ITEM m_rawMemory[N];</span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
-<span id="L51"><span class="lineNum">      51</span>                 :             : private:</span>
+<span id="L51"><span class="lineNum">      51</span>                 :             : protected:</span>
 <span id="L52"><span class="lineNum">      52</span>                 :             :     /// Prevent access to the copy constructor --&gt;Ring Buffers can not be copied!</span>
 <span id="L53"><span class="lineNum">      53</span>                 :             :     RingBufferMPAllocate( const RingBufferMPAllocate&amp; m ) = delete;</span>
 <span id="L54"><span class="lineNum">      54</span>                 :             : </span>

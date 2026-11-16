@@ -1,5 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$class_kit_1_1_framing_1_1_i_encoder.html" title="This abstract class defines an interface for &#39;creating/ouput&#39; (encoding) a frame." alt="" coords="5,5,171,31"/>
-<area shape="rect" id="Node000001" href="$class_kit_1_1_framing_1_1_encoder_writer.html" title="This concrete class implements the basic framing/output logic for an Encoder." alt="" coords="219,5,420,31"/>
-<area shape="poly" id="edge308_Node000000_Node000001" title=" " alt="" coords="185,15,218,15,218,21,185,21"/>
+<area shape="rect" id="Node000000" href="$class_kit_1_1_framing_1_1_i_destination.html" title="This abstract class defines an interface of the output destination for an Encoder instance." alt="" coords="5,32,193,60"/>
+<area shape="rect" id="Node000001" href="$class_kit_1_1_framing_1_1_stream_destination.html" title="This concrete class implements the IDestination interface using a Kit::Io::Output instance." alt="" coords="241,5,471,33"/>
+<area shape="poly" id="edge325_Node000000_Node000001" title=" " alt="" coords="208,32,243,31,238,32,208,37"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_framing_1_1_string_destination.html" title="This concrete class implements the IDestination interface using a Kit::Text::IString instance." alt="" coords="245,57,466,85"/>
+<area shape="poly" id="edge326_Node000000_Node000002" title=" " alt="" coords="208,54,247,60,242,60,208,59"/>
 </map>

@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">System</a> - Trace.h</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory System">System</a> - Trace.h</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">83.3&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -387,7 +387,7 @@
 <span id="L325"><span class="lineNum">     325</span>                 :             : /** The compile time default setting for the info level</span>
 <span id="L326"><span class="lineNum">     326</span>                 :             :  */</span>
 <span id="L327"><span class="lineNum">     327</span>                 :             : #ifndef OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL</span>
-<span id="L328"><span class="lineNum">     328</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL (+Kit::System::TraceLevel::eBRIEF)</span>
+<span id="L328"><span class="lineNum">     328</span>                 :             : #define OPTION_KIT_SYSTEM_TRACE_DEFAULT_INFO_LEVEL ( +Kit::System::TraceLevel::eBRIEF )</span>
 <span id="L329"><span class="lineNum">     329</span>                 :             : #endif</span>
 <span id="L330"><span class="lineNum">     330</span>                 :             : </span>
 <span id="L331"><span class="lineNum">     331</span>                 :             : /** The compile time default setting what enable/disable state the trace</span>
@@ -416,7 +416,8 @@
 <span id="L354"><span class="lineNum">     354</span>                 :             :     @param eMAX              Maximum prologue info</span>
 <span id="L355"><span class="lineNum">     355</span>                 :             :  */</span>
 <span id="L356"><span class="lineNum">     356</span>                 :             : // clang-format off</span>
-<span id="L357"><span class="lineNum">     357</span>   [<span class="tlaGBC" title="Branch 0 was taken 43 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 547 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 2 times"> + </span>]:<span class="tlaGNC tlaBgGNC">         633 : BETTER_ENUM( TraceLevel, uint8_t,</span></span>
+<span id="L357"><span class="lineNum">     357</span>         [<span class="tlaGBC" title="Branch 0 was taken 591 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 48 times"> + </span>]:<span class="tlaGNC">      130036 : BETTER_ENUM( TraceLevel, uint8_t,</span></span>
+<span class="lineNum">        </span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 3 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 3 was taken 2 times"> + </span>]
 <span id="L358"><span class="lineNum">     358</span>                 :             :              eNONE = 0,</span>
 <span id="L359"><span class="lineNum">     359</span>                 :             :              eBRIEF,</span>
 <span id="L360"><span class="lineNum">     360</span>                 :             :              eINFO,</span>

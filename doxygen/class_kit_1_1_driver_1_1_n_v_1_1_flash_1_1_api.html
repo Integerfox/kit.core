@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -65,14 +65,14 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api__inherit__graph.svg" width="296" height="198"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api__inherit__graph.svg" width="294" height="207"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Driver::NV::Flash::Api&lt; MAX_LOGICAL_PAGES &gt;:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api__coll__graph.svg" width="715" height="215"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api__coll__graph.svg" width="712" height="228"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -402,7 +402,8 @@ template&lt;size_t MAX_LOGICAL_PAGES&gt; </div>
 
 <p>This method returns the total number of <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> storage pages. </p>
 <p>A Page is defined as the boundary/maximum amount of data that can be written in a single physical update of the <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> storage</p>
-<p>NOTE: ALWAYS use the <a class="el" href="#a8d1f6fbb797a9737de4fb15654fb046d" title="The method that returns the total storage size in bytes.">getTotalSize()</a> method for querying/determining the total available storage size. </p>
+<p>NOTE: ALWAYS use the <a class="el" href="#a8d1f6fbb797a9737de4fb15654fb046d" title="The method that returns the total storage size in bytes.">getTotalSize()</a> method for querying/determining the total available storage size.</p>
+<p>NOTE: The returned number of pages is only valid while the instance is started. </p>
 
 <p>Implements <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html#a419f14e3945a244d63a5a8ef7e8c8d67">Kit::Driver::NV::IApi</a>.</p>
 
@@ -435,7 +436,8 @@ template&lt;size_t MAX_LOGICAL_PAGES&gt; </div>
 
 <p>This method returns the <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> storage page size. </p>
 <p>See <a class="el" href="#aa95187b4a224329e1c78960534cf7c96" title="This method returns the total number of NV storage pages.">getNumPages()</a> for more details about the definition of a page.</p>
-<p>NOTE: ALWAYS use the <a class="el" href="#a8d1f6fbb797a9737de4fb15654fb046d" title="The method that returns the total storage size in bytes.">getTotalSize()</a> method for querying/determining the total available storage size. </p>
+<p>NOTE: ALWAYS use the <a class="el" href="#a8d1f6fbb797a9737de4fb15654fb046d" title="The method that returns the total storage size in bytes.">getTotalSize()</a> method for querying/determining the total available storage size.</p>
+<p>NOTE: The returned page size is only valid while the instance is started. </p>
 
 <p>Implements <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html#a22cf56c26284735c8732b966ca202441">Kit::Driver::NV::IApi</a>.</p>
 
@@ -534,7 +536,8 @@ template&lt;size_t MAX_LOGICAL_PAGES&gt; </div>
 </div><div class="memdoc">
 
 <p>The method that returns the total storage size in bytes. </p>
-<p>Note: This is canonical source of truth for the total available storage, i.e, if the driver instance is a 'Gang' driver instance then the method CAN return a different result from: <a class="el" href="#aa95187b4a224329e1c78960534cf7c96" title="This method returns the total number of NV storage pages.">getNumPages()</a> * <a class="el" href="#a78082092761f006375755baeb7025303" title="This method returns the NV storage page size.">getPageSize()</a> </p>
+<p>NOTE: This is canonical source of truth for the total available storage, i.e, if the driver instance is a '<a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html" title="This class implements the Non-volatile storage driver using a collection of NV drivers to provide a &#39;...">Gang</a>' driver instance then the method CAN return a different result from: <a class="el" href="#aa95187b4a224329e1c78960534cf7c96" title="This method returns the total number of NV storage pages.">getNumPages()</a> * <a class="el" href="#a78082092761f006375755baeb7025303" title="This method returns the NV storage page size.">getPageSize()</a></p>
+<p>NOTE: The returned total size is only valid while the instance is started. </p>
 
 <p>Implements <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html#a2b136a443a1e900f945aef39fbbe6067">Kit::Driver::NV::IApi</a>.</p>
 
@@ -1195,7 +1198,7 @@ template&lt;size_t MAX_LOGICAL_PAGES&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

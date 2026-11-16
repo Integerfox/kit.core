@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -75,6 +75,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a7140e7653cb02541e9b1730d06f576ad" id="r_a7140e7653cb02541e9b1730d06f576ad"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7140e7653cb02541e9b1730d06f576ad">timestamp</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;buffer, uint64_t timeStampInMsecs, bool encodeMsec=true, bool encodeDay=true, bool appendToString=false) noexcept</td></tr>
 <tr class="memdesc:a7140e7653cb02541e9b1730d06f576ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is the same as timeStamp() but converts a 64bit millisecond counter.  <br /></td></tr>
 <tr class="separator:a7140e7653cb02541e9b1730d06f576ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10357e7bad8d0ff453dbb5897ee52357" id="r_a10357e7bad8d0ff453dbb5897ee52357"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10357e7bad8d0ff453dbb5897ee52357">utcTimestamp</a> (<a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;buffer, uint64_t msecSinceEpoch, bool encodeMsec=true, bool appendToString=false) noexcept</td></tr>
+<tr class="memdesc:a10357e7bad8d0ff453dbb5897ee52357"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts 'msecSinceEpoch' - UTC time as milliseconds since the Epoch (1970-01-01 00:00:00) - to a string with the following format: "YYYY-MM-DD HH:MM:SS[.SSS]".  <br /></td></tr>
+<tr class="separator:a10357e7bad8d0ff453dbb5897ee52357"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8403602e9003fa4b5f0fa3d34e4c67a" id="r_ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8403602e9003fa4b5f0fa3d34e4c67a">viewer</a> (const void *binaryData, int len, <a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;destString, int bytesPerLine=16, const char *separator=&quot;    &quot;, bool upperCase=true, bool appendToString=false) noexcept</td></tr>
 <tr class="memdesc:ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method converts the binary buffer to a single string that is the ASCII HEX followed by 'separator', then by the binary data as 'viewable' text.  <br /></td></tr>
 <tr class="separator:ab8403602e9003fa4b5f0fa3d34e4c67a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -375,6 +378,49 @@ Static Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a10357e7bad8d0ff453dbb5897ee52357" name="a10357e7bad8d0ff453dbb5897ee52357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10357e7bad8d0ff453dbb5897ee52357">&#9670;&#160;</a></span>utcTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Kit::Text::Format::utcTimestamp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_kit_1_1_text_1_1_i_string.html">IString</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>buffer</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>msecSinceEpoch</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>encodeMsec</em><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>appendToString</em><span class="paramdefsep"> = </span><span class="paramdefval">false</span></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This method converts 'msecSinceEpoch' - UTC time as milliseconds since the Epoch (1970-01-01 00:00:00) - to a string with the following format: "YYYY-MM-DD HH:MM:SS[.SSS]". </p>
+<p>The converted result is returned via 'buffer'. If the results where truncated due to insufficient memory in 'buffer' then false is returned; else true is returned.</p>
+<p>NOTE: The conversion uses <a class="el" href="namespace_kit_1_1_time.html#a6744ea13d9a2d327461cf56bd400e4d1" title="This method converts &#39;utcEpochMilliseconds&#39; - UTC time as milliseconds since the Epoch (1970-01-01 00...">Kit::Time::msecToCalendar()</a>, i.e. it does not use the C library's gmtime() and is thread safe without a mutex. </p>
+
+</div>
+</div>
 <a id="ab8403602e9003fa4b5f0fa3d34e4c67a" name="ab8403602e9003fa4b5f0fa3d34e4c67a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab8403602e9003fa4b5f0fa3d34e4c67a">&#9670;&#160;</a></span>viewer()</h2>
 
@@ -438,7 +484,7 @@ Static Protected Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

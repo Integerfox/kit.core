@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -57,17 +57,26 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
+<tr class="memitem:namespace_kit_1_1_driver_1_1_n_v_1_1_file" id="r_namespace_kit_1_1_driver_1_1_n_v_1_1_file"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_driver_1_1_n_v_1_1_file.html">File</a></td></tr>
+<tr class="memdesc:namespace_kit_1_1_driver_1_1_n_v_1_1_file"><td class="mdescLeft">&#160;</td><td class="mdescRight">The '<a class="el" href="namespace_kit_1_1_driver_1_1_n_v_1_1_file.html" title="The &#39;File&#39; namespace contains the non-volatile storage driver that uses a file, accessed through the ...">File</a>' namespace contains the non-volatile storage driver that uses a file, accessed through the platform independent <code><a class="el" href="namespace_kit_1_1_io_1_1_file.html" title="The File namespace provides the base/common interfaces for reading and writing data from/to Files.">Kit::Io::File</a></code> interfaces, as the storage media. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespace_kit_1_1_driver_1_1_n_v_1_1_flash" id="r_namespace_kit_1_1_driver_1_1_n_v_1_1_flash"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_kit_1_1_driver_1_1_n_v_1_1_flash.html">Flash</a></td></tr>
 <tr class="memdesc:namespace_kit_1_1_driver_1_1_n_v_1_1_flash"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="namespace_kit_1_1_driver_1_1_n_v_1_1_flash.html" title="The Flash namespace provides a concrete implementation of the NV::IApi interface backed by SPI NOR fl...">Flash</a> namespace provides a concrete implementation of the <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html" title="This class defines the interface for a platform independent Non-volatile storage driver.">NV::IApi</a> interface backed by <a class="el" href="namespace_kit_1_1_driver_1_1_s_p_i.html" title="The SPI namespace defines a platform independent interface for SPI (Serial Peripheral Interface) comm...">SPI</a> NOR flash storage. The implementation features: <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html">Gang</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class implements the Non-volatile storage driver using a collection of <a class="el" href="namespace_kit_1_1_driver_1_1_n_v.html" title="The NV namespace defines a platform independent interface for reading and writing from/to non-volatil...">NV</a> drivers to provide a 'flat address' space that spans multiple discrete storage chips/media.  <a href="class_kit_1_1_driver_1_1_n_v_1_1_gang.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html">IApi</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class defines the interface for a platform independent Non-volatile storage driver.  <a href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_null.html">Null</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This concrete class provides a 'null' implementation of the <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html" title="This class defines the interface for a platform independent Non-volatile storage driver.">NV::IApi</a> interface.  <a href="class_kit_1_1_driver_1_1_n_v_1_1_null.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html">WriteWithVerify</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class extends <a class="el" href="class_kit_1_1_driver_1_1_n_v_1_1_i_api.html" title="This class defines the interface for a platform independent Non-volatile storage driver.">IApi</a> interface so that all write operations are verified by reading back the data after the write.  <a href="class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -75,7 +84,7 @@ Classes</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

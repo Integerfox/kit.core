@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -86,7 +86,7 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">     */</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html">   37</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html">RatePayload_T</a></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    {<span class="comment"></span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">        /** IN: The flash rate in milliseconds.  For 1Hz flash rate, this value </span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">        /** IN: The flash rate in milliseconds.  For 1Hz flash rate, this value</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">                would be 500ms (i.e. 500ms on, 500ms off).  The valid flash</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">                rate range is [50ms, 5000ms].  Values outside of this range</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">                will cause the request to fail.</span></div>
@@ -99,7 +99,7 @@ $(function() {
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#a2fdb69014cf5cb2acaf8f9eaeaa67f65">   49</a></span>        <span class="keywordtype">bool</span> <a class="code hl_variable" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#a2fdb69014cf5cb2acaf8f9eaeaa67f65">success</a>;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment"></span> </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">        /// Constructor</span></div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#abb4758fd7494bd4b59abdb42c4293b87">   52</a></span><span class="comment"></span>        <a class="code hl_function" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#abb4758fd7494bd4b59abdb42c4293b87">RatePayload_T</a>( uint32_t <a class="code hl_variable" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#a89578821a113120d9a54956182495ec7">flashRateMs</a> = 500 ) <span class="comment">// Default to 1Hz</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#abb4758fd7494bd4b59abdb42c4293b87">   52</a></span><span class="comment"></span>        <a class="code hl_function" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#abb4758fd7494bd4b59abdb42c4293b87">RatePayload_T</a>( uint32_t <a class="code hl_variable" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#a89578821a113120d9a54956182495ec7">flashRateMs</a> = 500 )  <span class="comment">// Default to 1Hz</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            : <a class="code hl_variable" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#a89578821a113120d9a54956182495ec7">flashRateMs</a>( <a class="code hl_variable" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#a89578821a113120d9a54956182495ec7">flashRateMs</a> )</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>            , <a class="code hl_variable" href="struct_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_1_1_rate_payload___t.html#a2fdb69014cf5cb2acaf8f9eaeaa67f65">success</a>( false )</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        {</div>
@@ -120,11 +120,10 @@ $(function() {
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>};</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}  <span class="comment">// end namespaces</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>}</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>}</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>}</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_request_message_8h_html"><div class="ttname"><a href="_request_message_8h.html">RequestMessage.h</a></div></div>
 <div class="ttc" id="a_s_a_p_8h_html"><div class="ttname"><a href="_s_a_p_8h.html">SAP.h</a></div></div>
 <div class="ttc" id="aclass_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request_html"><div class="ttname"><a href="class_examples_1_1_itc_1_1_synchronous_1_1_i_rate_request.html">Examples::Itc::Synchronous::IRateRequest</a></div><div class="ttdoc">This abstract class define message types and payloads for a set of ITC services.</div><div class="ttdef"><b>Definition</b> IRateRequest.h:27</div></div>
@@ -141,7 +140,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">Itc</a> - SelfPostMessage.h</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Itc">Itc</a> - SelfPostMessage.h</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -31,18 +31,18 @@
             <td class="headerValue">.coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">88.2&nbsp;%</td>
-            <td class="headerCovTableEntry">17</td>
-            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntry">24</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
-            <td class="headerCovTableEntryMed">53.8&nbsp;%</td>
-            <td class="headerCovTableEntry">26</td>
-            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntryHi">83.3&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -200,10 +200,10 @@
 <span id="L138"><span class="lineNum">     138</span>                 :             : class SelfPostMessage : public IMessage</span>
 <span id="L139"><span class="lineNum">     139</span>                 :             : {</span>
 <span id="L140"><span class="lineNum">     140</span>                 :             :     /// Deleted copy/move constructors and assignment operators</span>
-<span id="L141"><span class="lineNum">     141</span>                 :             :     SelfPostMessage( const SelfPostMessage&amp; ) = delete;</span>
+<span id="L141"><span class="lineNum">     141</span>                 :             :     SelfPostMessage( const SelfPostMessage&amp; )            = delete;</span>
 <span id="L142"><span class="lineNum">     142</span>                 :             :     SelfPostMessage&amp; operator=( const SelfPostMessage&amp; ) = delete;</span>
-<span id="L143"><span class="lineNum">     143</span>                 :             :     SelfPostMessage( SelfPostMessage&amp;&amp; ) = delete;</span>
-<span id="L144"><span class="lineNum">     144</span>                 :             :     SelfPostMessage&amp; operator=( SelfPostMessage&amp;&amp; ) = delete;</span>
+<span id="L143"><span class="lineNum">     143</span>                 :             :     SelfPostMessage( SelfPostMessage&amp;&amp; )                 = delete;</span>
+<span id="L144"><span class="lineNum">     144</span>                 :             :     SelfPostMessage&amp; operator=( SelfPostMessage&amp;&amp; )      = delete;</span>
 <span id="L145"><span class="lineNum">     145</span>                 :             : </span>
 <span id="L146"><span class="lineNum">     146</span>                 :             : public:</span>
 <span id="L147"><span class="lineNum">     147</span>                 :             :     /// Definition of the call-back method that resumes the component after the yield</span>
@@ -211,16 +211,16 @@
 <span id="L149"><span class="lineNum">     149</span>                 :             : </span>
 <span id="L150"><span class="lineNum">     150</span>                 :             : public:</span>
 <span id="L151"><span class="lineNum">     151</span>                 :             :     /// Constructor.  'myQueue' MUST be the event queue of the owning thread</span>
-<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC tlaBgGNC">           4 :     SelfPostMessage( Kit::EventQueue::IQueue&amp; myQueue,</span></span>
+<span id="L152"><span class="lineNum">     152</span>                 :<span class="tlaGNC">           4 :     SelfPostMessage( Kit::EventQueue::IQueue&amp; myQueue,</span></span>
 <span id="L153"><span class="lineNum">     153</span>                 :             :                      CONTEXT&amp;                 context,</span>
 <span id="L154"><span class="lineNum">     154</span>                 :             :                      ResumeFunction_T         resumeCallbackFunc ) noexcept</span>
 <span id="L155"><span class="lineNum">     155</span>                 :<span class="tlaGNC">           4 :         : m_queue( myQueue )</span></span>
 <span id="L156"><span class="lineNum">     156</span>                 :<span class="tlaGNC">           4 :         , m_context( context )</span></span>
 <span id="L157"><span class="lineNum">     157</span>                 :<span class="tlaGNC">           4 :         , m_callbackFuncPtr( resumeCallbackFunc )</span></span>
-<span id="L158"><span class="lineNum">     158</span>                 :             :         , m_pending( false )</span>
+<span id="L158"><span class="lineNum">     158</span>                 :<span class="tlaGNC">           4 :         , m_pending( false )</span></span>
 <span id="L159"><span class="lineNum">     159</span>                 :<span class="tlaGNC">           4 :         , m_cancelled( false )</span></span>
 <span id="L160"><span class="lineNum">     160</span>                 :             :     {</span>
-<span id="L161"><span class="lineNum">     161</span>                 :             :     }</span>
+<span id="L161"><span class="lineNum">     161</span>                 :<span class="tlaGNC">           4 :     }</span></span>
 <span id="L162"><span class="lineNum">     162</span>                 :             : </span>
 <span id="L163"><span class="lineNum">     163</span>                 :             : public:</span>
 <span id="L164"><span class="lineNum">     164</span>                 :             :     /** Yields the processor back to the event loop and guarantees that the</span>
@@ -235,15 +235,15 @@
 <span id="L173"><span class="lineNum">     173</span>                 :             :         Calling schedule() after cancel() - but before the cancelled message</span>
 <span id="L174"><span class="lineNum">     174</span>                 :             :         has drained - re-arms the already-queued message.</span>
 <span id="L175"><span class="lineNum">     175</span>                 :             :      */</span>
-<span id="L176"><span class="lineNum">     176</span>                 :             :     void schedule() noexcept</span>
+<span id="L176"><span class="lineNum">     176</span>                 :<span class="tlaGNC">           7 :     void schedule() noexcept</span></span>
 <span id="L177"><span class="lineNum">     177</span>                 :             :     {</span>
-<span id="L178"><span class="lineNum">     178</span>                 :<span class="tlaGNC">           3 :         m_cancelled = false;</span></span>
-<span id="L179"><span class="lineNum">     179</span>   [<span class="tlaUNC" title="Branch 0 was not taken"> - </span><span class="tlaGBC" title="Branch 1 was taken 1 time"> + </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">           2 :         if ( !m_pending )</span></span>
+<span id="L178"><span class="lineNum">     178</span>                 :<span class="tlaGNC">           7 :         m_cancelled = false;</span></span>
+<span id="L179"><span class="lineNum">     179</span>         [<span class="tlaGBC" title="Branch 0 was taken 5 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 2 times"> + </span>]:<span class="tlaGNC">           7 :         if ( !m_pending )</span></span>
 <span id="L180"><span class="lineNum">     180</span>                 :             :         {</span>
-<span id="L181"><span class="lineNum">     181</span>                 :<span class="tlaUNC tlaBgUNC">           0 :             m_pending = true;</span></span>
-<span id="L182"><span class="lineNum">     182</span>                 :<span class="tlaUNC">           0 :             m_queue.post( *this );</span></span>
+<span id="L181"><span class="lineNum">     181</span>                 :<span class="tlaGNC">           5 :             m_pending = true;</span></span>
+<span id="L182"><span class="lineNum">     182</span>                 :<span class="tlaGNC">           5 :             m_queue.post( *this );</span></span>
 <span id="L183"><span class="lineNum">     183</span>                 :             :         }</span>
-<span id="L184"><span class="lineNum">     184</span>                 :             :     }</span>
+<span id="L184"><span class="lineNum">     184</span>                 :<span class="tlaGNC">           7 :     }</span></span>
 <span id="L185"><span class="lineNum">     185</span>                 :             : </span>
 <span id="L186"><span class="lineNum">     186</span>                 :             :     /** Cancels a pending callback, i.e. the callback method will NOT be</span>
 <span id="L187"><span class="lineNum">     187</span>                 :             :         called.  It is okay to call cancel() when nothing is scheduled.</span>
@@ -252,18 +252,15 @@
 <span id="L190"><span class="lineNum">     190</span>                 :             :               so the message is still dispatched - it simply does nothing.</span>
 <span id="L191"><span class="lineNum">     191</span>                 :             :               isPending() therefore stays true until the event loop drains it.</span>
 <span id="L192"><span class="lineNum">     192</span>                 :             :      */</span>
-<span id="L193"><span class="lineNum">     193</span>                 :             :     void cancel() noexcept</span>
+<span id="L193"><span class="lineNum">     193</span>                 :<span class="tlaGNC">           2 :     void cancel() noexcept</span></span>
 <span id="L194"><span class="lineNum">     194</span>                 :             :     {</span>
-<span id="L195"><span class="lineNum">     195</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 1 time"> + </span>]:<span class="tlaGNC tlaBgGNC">           2 :         m_cancelled = m_pending;</span></span>
-<span id="L196"><span class="lineNum">     196</span>                 :             :     }</span>
+<span id="L195"><span class="lineNum">     195</span>                 :<span class="tlaGNC">           2 :         m_cancelled = m_pending;</span></span>
+<span id="L196"><span class="lineNum">     196</span>                 :<span class="tlaGNC">           2 :     }</span></span>
 <span id="L197"><span class="lineNum">     197</span>                 :             : </span>
 <span id="L198"><span class="lineNum">     198</span>                 :             :     /// Returns true when the message is in the mailbox FIFO, i.e. not yet dispatched</span>
-<span id="L199"><span class="lineNum">     199</span>                 :             :     bool isPending() const noexcept</span>
+<span id="L199"><span class="lineNum">     199</span>                 :<span class="tlaGNC">           7 :     bool isPending() const noexcept</span></span>
 <span id="L200"><span class="lineNum">     200</span>                 :             :     {</span>
-<span id="L201"><span class="lineNum">     201</span>   [<span class="tlaGBC" title="Branch 0 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">           7 :         return m_pending;</span></span>
-<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 1 time"> + </span> 
-<span class="lineNum">        </span>    <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 1 time"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 1 time"> + </span> 
-<span class="lineNum">        </span>             <span class="tlaUNC" title="Branch 13 was not taken"> - </span>]
+<span id="L201"><span class="lineNum">     201</span>                 :<span class="tlaGNC">           7 :         return m_pending;</span></span>
 <span id="L202"><span class="lineNum">     202</span>                 :             :     }</span>
 <span id="L203"><span class="lineNum">     203</span>                 :             : </span>
 <span id="L204"><span class="lineNum">     204</span>                 :             : public:</span>

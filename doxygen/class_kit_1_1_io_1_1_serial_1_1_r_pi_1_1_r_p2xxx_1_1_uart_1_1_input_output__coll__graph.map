@@ -1,35 +1,35 @@
 <map id="Kit::Io::Serial::RPi::RP2xxx::Uart::InputOutput" name="Kit::Io::Serial::RPi::RP2xxx::Uart::InputOutput">
-<area shape="rect" id="Node000001" title="This concrete class implements a Input/Output stream using Raspberry Pi UART interface/hardware." alt="" coords="893,119,1093,159"/>
-<area shape="poly" id="edge12_Node000001_Node000001" title=" " alt="" coords="958,102,971,95,993,92,1013,94,1026,100,1032,109,1030,119,1024,118,1027,110,1023,104,1012,99,993,97,972,100,961,107"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_io_1_1_i_input_output.html" title="This abstract class defines a interface for operating on an input&#45;output stream." alt="" coords="540,127,689,153"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="703,137,893,136,893,142,703,142"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_io_1_1_i_input.html" title="This partially abstract class defines a interface for operating on an input stream (example of a stre..." alt="" coords="247,121,353,146"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="367,132,540,136,539,141,366,137"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_io_1_1_i_close.html" title="This abstract class defines a close operation that is intended to be used Input and Output streams/fi..." alt="" coords="27,133,135,158"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="149,139,247,134,247,139,149,144"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str..." alt="" coords="242,170,358,195"/>
-<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="149,154,242,170,241,175,148,159"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_io_1_1_i_eos.html" title="This abstract class defines a isEos() operation that is intended to be used Input and Output streams." alt="" coords="34,190,129,215"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="127,182,206,155,247,143,248,148,207,160,129,187"/>
-<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="142,202,181,203,219,200,255,193,256,198,220,205,181,208,142,207"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="371,170,539,147,540,153,372,176"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_ring_buffer.html" title=" " alt="" coords="521,63,708,103"/>
-<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="722,96,894,121,893,127,721,101"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="5,47,157,73"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="172,61,521,76,521,81,171,66"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="207,5,393,45"/>
-<area shape="poly" id="edge11_Node000009_Node000008" title=" " alt="" coords="171,43,206,38,207,43,172,48"/>
-<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="408,42,522,63,521,68,407,47"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="539,221,690,246"/>
-<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="688,215,869,172,925,156,927,161,870,177,689,220"/>
-<area shape="rect" id="Node000014" href="$class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob..." alt="" coords="908,243,1079,269"/>
-<area shape="poly" id="edge19_Node000014_Node000010" title=" " alt="" coords="661,248,732,267,777,271,823,272,909,266,909,271,823,277,777,276,732,272,660,253"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="217,219,383,245"/>
-<area shape="poly" id="edge14_Node000010_Node000011" title=" " alt="" coords="397,230,539,230,539,236,397,235"/>
-<area shape="rect" id="Node000012" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="214,307,386,333"/>
-<area shape="poly" id="edge15_Node000010_Node000012" title=" " alt="" coords="360,301,567,243,568,249,361,306"/>
-<area shape="poly" id="edge17_Node000012_Node000012" title=" " alt="" coords="276,292,284,284,300,281,314,283,322,290,325,299,321,308,316,306,319,298,318,292,312,288,300,286,286,289,280,296"/>
-<area shape="rect" id="Node000013" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="7,307,156,333"/>
-<area shape="poly" id="edge16_Node000012_Node000013" title=" " alt="" coords="170,317,214,317,214,323,170,323"/>
-<area shape="poly" id="edge18_Node000010_Node000014" title=" " alt="" coords="894,253,690,240,690,235,895,247"/>
+<area shape="rect" id="Node000001" title="This concrete class implements a Input/Output stream using Raspberry Pi UART interface/hardware." alt="" coords="890,124,1089,169"/>
+<area shape="poly" id="edge12_Node000001_Node000001" title=" " alt="" coords="957,106,969,100,989,97,1008,99,1021,105,1028,114,1026,125,1022,122,1022,115,1018,109,1007,105,989,103,970,105,959,111"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_io_1_1_i_input_output.html" title="This abstract class defines a interface for operating on an input&#45;output stream." alt="" coords="538,134,687,162"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="702,145,892,146,887,147,703,150"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_io_1_1_i_input.html" title="This partially abstract class defines a interface for operating on an input stream (example of a stre..." alt="" coords="247,126,351,154"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="366,139,540,145,535,147,367,144"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_io_1_1_i_close.html" title="This abstract class defines a close operation that is intended to be used Input and Output streams/fi..." alt="" coords="27,124,135,152"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="150,136,248,138,244,141,151,141"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str..." alt="" coords="242,178,357,206"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="150,152,243,176,239,179,150,158"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_io_1_1_i_eos.html" title="This abstract class defines a isEos() operation that is intended to be used Input and Output streams." alt="" coords="34,191,128,219"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="141,184,205,164,250,153,245,156,207,169,143,189"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="143,207,181,209,243,205,239,207,181,214,145,212"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="372,179,541,157,536,159,373,184"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_ring_buffer.html" title=" " alt="" coords="519,65,706,110"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="721,102,892,130,887,131,721,107"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="5,66,157,94"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="172,78,520,84,517,89,172,84"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="206,5,392,50"/>
+<area shape="poly" id="edge11_Node000009_Node000008" title=" " alt="" coords="156,59,207,48,203,52,158,64"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="407,46,522,69,517,71,408,51"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="538,235,687,263"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="693,229,865,184,920,170,925,169,866,190,694,234"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob..." alt="" coords="905,259,1074,287"/>
+<area shape="poly" id="edge19_Node000014_Node000010" title=" " alt="" coords="662,266,730,285,774,289,820,290,907,286,902,287,820,295,774,295,729,290,661,271"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="217,231,381,259"/>
+<area shape="poly" id="edge14_Node000010_Node000011" title=" " alt="" coords="397,244,540,248,535,249,397,249"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="214,324,385,352"/>
+<area shape="poly" id="edge15_Node000010_Node000012" title=" " alt="" coords="365,317,558,264,564,263,366,322"/>
+<area shape="poly" id="edge17_Node000012_Node000012" title=" " alt="" coords="278,306,285,300,299,298,313,300,321,306,324,316,320,326,316,322,319,315,317,309,311,305,299,303,287,305,280,311"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="7,324,155,352"/>
+<area shape="poly" id="edge16_Node000012_Node000013" title=" " alt="" coords="170,336,216,338,210,338,170,341"/>
+<area shape="poly" id="edge18_Node000010_Node000014" title=" " alt="" coords="887,267,688,256,688,251,892,266"/>
 </map>

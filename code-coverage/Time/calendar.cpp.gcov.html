@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - .coverage.info - Time/calendar.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory Time">Time</a> - calendar.cpp</td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">.coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">29</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
+            <td></td>
+            <td class="headerItem">Branches:</td>
+            <td class="headerCovTableEntryHi">92.9&nbsp;%</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">13</td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">             Branch data     Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>                 :             : /*------------------------------------------------------------------------------</span>
+<span id="L2"><span class="lineNum">       2</span>                 :             :  * Copyright Integer Fox Authors</span>
+<span id="L3"><span class="lineNum">       3</span>                 :             :  *</span>
+<span id="L4"><span class="lineNum">       4</span>                 :             :  * Distributed under the BSD 3 Clause License. See the license agreement at:</span>
+<span id="L5"><span class="lineNum">       5</span>                 :             :  * https://github.com/Integerfox/kit.core/blob/main/LICENSE</span>
+<span id="L6"><span class="lineNum">       6</span>                 :             :  *</span>
+<span id="L7"><span class="lineNum">       7</span>                 :             :  * Redistributions of the source code must retain the above copyright notice.</span>
+<span id="L8"><span class="lineNum">       8</span>                 :             :  *----------------------------------------------------------------------------*/</span>
+<span id="L9"><span class="lineNum">       9</span>                 :             : /** @file */</span>
+<span id="L10"><span class="lineNum">      10</span>                 :             : </span>
+<span id="L11"><span class="lineNum">      11</span>                 :             : #include &quot;Kit/Time/calendar.h&quot;</span>
+<span id="L12"><span class="lineNum">      12</span>                 :             : </span>
+<span id="L13"><span class="lineNum">      13</span>                 :             : //------------------------------------------------------------------------------</span>
+<span id="L14"><span class="lineNum">      14</span>                 :             : namespace Kit {</span>
+<span id="L15"><span class="lineNum">      15</span>                 :             : namespace Time {</span>
+<span id="L16"><span class="lineNum">      16</span>                 :             : </span>
+<span id="L17"><span class="lineNum">      17</span>                 :<span class="tlaGNC">          29 : void msecToCalendar( uint64_t utcEpochMilliseconds, struct tm&amp; result, uint16_t&amp; dstMilliseconds ) noexcept</span></span>
+<span id="L18"><span class="lineNum">      18</span>                 :             : {</span>
+<span id="L19"><span class="lineNum">      19</span>                 :             :     // Split into days since the Epoch and the time of day</span>
+<span id="L20"><span class="lineNum">      20</span>                 :<span class="tlaGNC">          29 :     uint64_t secs      = utcEpochMilliseconds / 1000U;</span></span>
+<span id="L21"><span class="lineNum">      21</span>                 :<span class="tlaGNC">          29 :     uint64_t days      = secs / 86400U;</span></span>
+<span id="L22"><span class="lineNum">      22</span>                 :<span class="tlaGNC">          29 :     unsigned secsOfDay = static_cast&lt;unsigned&gt;( secs % 86400U );</span></span>
+<span id="L23"><span class="lineNum">      23</span>                 :<span class="tlaGNC">          29 :     dstMilliseconds    = static_cast&lt;uint16_t&gt;( utcEpochMilliseconds % 1000U );</span></span>
+<span id="L24"><span class="lineNum">      24</span>                 :             : </span>
+<span id="L25"><span class="lineNum">      25</span>                 :             :     // Convert days to a calendar date. Uses Howard Hinnant's (public domain)</span>
+<span id="L26"><span class="lineNum">      26</span>                 :             :     // 'civil_from_days' algorithm: http://howardhinnant.github.io/date_algorithms.html</span>
+<span id="L27"><span class="lineNum">      27</span>                 :             :     // The year is shifted to start on March 1st so that the leap day is the last</span>
+<span id="L28"><span class="lineNum">      28</span>                 :             :     // day of the shifted year.</span>
+<span id="L29"><span class="lineNum">      29</span>                 :<span class="tlaGNC">          29 :     uint64_t z    = days + 719468U;                                               // days since 0000-03-01</span></span>
+<span id="L30"><span class="lineNum">      30</span>                 :<span class="tlaGNC">          29 :     uint64_t era  = z / 146097U;                                                  // 400 year eras</span></span>
+<span id="L31"><span class="lineNum">      31</span>                 :<span class="tlaGNC">          29 :     unsigned doe  = static_cast&lt;unsigned&gt;( z - era * 146097U );                   // day of era   [0, 146096]</span></span>
+<span id="L32"><span class="lineNum">      32</span>                 :<span class="tlaGNC">          29 :     unsigned yoe  = ( doe - doe / 1460U + doe / 36524U - doe / 146096U ) / 365U;  // year of era  [0, 399]</span></span>
+<span id="L33"><span class="lineNum">      33</span>                 :<span class="tlaGNC">          29 :     uint64_t year = yoe + era * 400U;</span></span>
+<span id="L34"><span class="lineNum">      34</span>                 :<span class="tlaGNC">          29 :     unsigned doy  = doe - ( 365U * yoe + yoe / 4U - yoe / 100U );  // March based day of year  [0, 365]</span></span>
+<span id="L35"><span class="lineNum">      35</span>                 :<span class="tlaGNC">          29 :     unsigned mp   = ( 5U * doy + 2U ) / 153U;                      // March based month [0, 11]</span></span>
+<span id="L36"><span class="lineNum">      36</span>                 :<span class="tlaGNC">          29 :     unsigned day  = doy - ( 153U * mp + 2U ) / 5U + 1U;            // [1, 31]</span></span>
+<span id="L37"><span class="lineNum">      37</span>         [<span class="tlaGBC" title="Branch 0 was taken 15 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 14 times"> + </span>]:<span class="tlaGNC">          29 :     unsigned mon  = mp &lt; 10U ? mp + 3U : mp - 9U;                  // [1, 12]</span></span>
+<span id="L38"><span class="lineNum">      38</span>         [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span>]:<span class="tlaGNC">          29 :     if ( mon &lt;= 2U )</span></span>
+<span id="L39"><span class="lineNum">      39</span>                 :             :     {</span>
+<span id="L40"><span class="lineNum">      40</span>                 :<span class="tlaGNC">          14 :         year++;</span></span>
+<span id="L41"><span class="lineNum">      41</span>                 :             :     }</span>
+<span id="L42"><span class="lineNum">      42</span>                 :             : </span>
+<span id="L43"><span class="lineNum">      43</span>                 :             :     // Day of the (January based) year: Jan/Feb are the last two months of the March based year</span>
+<span id="L44"><span class="lineNum">      44</span>   [<span class="tlaGBC" title="Branch 0 was taken 13 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 16 times"> + </span><span class="tlaGBC" title="Branch 2 was taken 6 times"> + </span><span class="tlaGBC" title="Branch 3 was taken 7 times"> + </span> :<span class="tlaGNC">          29 :     bool     isLeap = ( year % 4U == 0U ) &amp;&amp; ( year % 100U != 0U || year % 400U == 0U );</span></span>
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 4 was taken 2 times"> + </span><span class="tlaGBC" title="Branch 5 was taken 4 times"> + </span>]
+<span id="L45"><span class="lineNum">      45</span>   [<span class="tlaGBC" title="Branch 0 was taken 14 times"> + </span><span class="tlaGBC" title="Branch 1 was taken 15 times"> + </span><span class="tlaUNC" title="Branch 2 was not taken"> - </span><span class="tlaGBC" title="Branch 3 was taken 15 times"> + </span>]:<span class="tlaGNC">          29 :     unsigned yday   = mp &gt;= 10U ? doy - 306U : doy + 59U + ( isLeap ? 1U : 0U );</span></span>
+<span id="L46"><span class="lineNum">      46</span>                 :             : </span>
+<span id="L47"><span class="lineNum">      47</span>                 :<span class="tlaGNC">          29 :     result          = tm();</span></span>
+<span id="L48"><span class="lineNum">      48</span>                 :<span class="tlaGNC">          29 :     result.tm_sec   = static_cast&lt;int&gt;( secsOfDay % 60U );</span></span>
+<span id="L49"><span class="lineNum">      49</span>                 :<span class="tlaGNC">          29 :     result.tm_min   = static_cast&lt;int&gt;( ( secsOfDay / 60U ) % 60U );</span></span>
+<span id="L50"><span class="lineNum">      50</span>                 :<span class="tlaGNC">          29 :     result.tm_hour  = static_cast&lt;int&gt;( secsOfDay / 3600U );</span></span>
+<span id="L51"><span class="lineNum">      51</span>                 :<span class="tlaGNC">          29 :     result.tm_mday  = static_cast&lt;int&gt;( day );</span></span>
+<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaGNC">          29 :     result.tm_mon   = static_cast&lt;int&gt;( mon - 1U );</span></span>
+<span id="L53"><span class="lineNum">      53</span>                 :<span class="tlaGNC">          29 :     result.tm_year  = static_cast&lt;int&gt;( year - 1900U );</span></span>
+<span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaGNC">          29 :     result.tm_wday  = static_cast&lt;int&gt;( ( days + 4U ) % 7U );  // 1970-01-01 was a Thursday</span></span>
+<span id="L55"><span class="lineNum">      55</span>                 :<span class="tlaGNC">          29 :     result.tm_yday  = static_cast&lt;int&gt;( yday );</span></span>
+<span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaGNC">          29 :     result.tm_isdst = 0;</span></span>
+<span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaGNC">          29 : }</span></span>
+<span id="L58"><span class="lineNum">      58</span>                 :             : </span>
+<span id="L59"><span class="lineNum">      59</span>                 :             : }  // end namespaces</span>
+<span id="L60"><span class="lineNum">      60</span>                 :             : }</span>
+<span id="L61"><span class="lineNum">      61</span>                 :             : //------------------------------------------------------------------------------</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

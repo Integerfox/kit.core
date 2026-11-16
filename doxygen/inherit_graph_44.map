@@ -1,3 +1,61 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$class_kit_1_1_io_1_1_file_1_1_system.html" title="This concrete class defines the interface for handling and manipulating entries in the System&#39;s File ..." alt="" coords="5,5,153,31"/>
+<area shape="rect" id="Node000000" href="$class_kit_1_1_io_1_1_file_1_1_i_position.html" title="This abstract class defines random&#45;access semantics for file&#45;like objects." alt="" coords="161,113,315,141"/>
+<area shape="rect" id="Node000001" href="$class_kit_1_1_io_1_1_file_1_1_i_input.html" title="This abstract class defines the interface for a Random Access Input File." alt="" coords="401,53,536,81"/>
+<area shape="poly" id="edge330_Node000000_Node000001" title=" " alt="" coords="302,107,362,90,409,80,404,83,364,95,305,111"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_io_1_1_file_1_1_i_output.html" title="This abstract class defines the interface for a Random Access Input File." alt="" coords="396,173,542,201"/>
+<area shape="poly" id="edge335_Node000000_Node000005" title=" " alt="" coords="303,143,364,159,409,172,404,174,362,164,304,148"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_io_1_1_file_1_1_i_input_output.html" title="This abstract class defines the interface for a Random Access Input Output File." alt="" coords="632,57,812,85"/>
+<area shape="poly" id="edge331_Node000001_Node000002" title=" " alt="" coords="551,66,635,69,630,71,553,71"/>
+<area shape="rect" id="Node000027" href="$class_kit_1_1_io_1_1_file_1_1_input.html" title="This concrete class provides a platform independent implementation of a Kit::Io::File::Input object." alt="" coords="656,5,788,33"/>
+<area shape="poly" id="edge334_Node000001_Node000027" title=" " alt="" coords="550,49,658,30,654,33,552,54"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_io_1_1_file_1_1_input_output.html" title="This concrete class provides a platform independent implementation of an Kit::Io::File::IInputOutput ..." alt="" coords="880,32,1055,60"/>
+<area shape="poly" id="edge332_Node000002_Node000003" title=" " alt="" coords="826,58,882,54,877,56,828,63"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_io_1_1_file_1_1_null.html" title="This concrete class implements a NULL IInputOutput File that all of its input operations return &#39;End&#45;..." alt="" coords="905,84,1030,112"/>
+<area shape="poly" id="edge333_Node000002_Node000004" title=" " alt="" coords="827,80,907,90,902,92,828,85"/>
+<area shape="poly" id="edge336_Node000005_Node000002" title=" " alt="" coords="555,169,573,160,588,145,596,129,604,112,621,96,649,84,644,87,624,100,609,115,601,131,592,148,576,164,558,174"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_io_1_1_file_1_1_output.html" title="This concrete class provides a platform independent implementation of a Kit::Io::File::Output object." alt="" coords="651,109,793,137"/>
+<area shape="poly" id="edge337_Node000005_Node000006" title=" " alt="" coords="544,167,574,159,669,136,665,139,575,164,546,172"/>
+<area shape="rect" id="Node000020" href="$class_kit_1_1_io_1_1_i_close.html" title="This abstract class defines a close operation that is intended to be used Input and Output streams/fi..." alt="" coords="5,277,113,305"/>
+<area shape="rect" id="Node000016" href="$class_kit_1_1_io_1_1_i_input.html" title="This partially abstract class defines a interface for operating on an input stream (example of a stre..." alt="" coords="186,225,290,253"/>
+<area shape="poly" id="edge338_Node000020_Node000016" title=" " alt="" coords="122,270,189,252,186,256,125,275"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str..." alt="" coords="180,277,296,305"/>
+<area shape="poly" id="edge351_Node000020_Node000007" title=" " alt="" coords="127,289,182,290,178,293,130,294"/>
+<area shape="poly" id="edge339_Node000016_Node000001" title=" " alt="" coords="260,212,313,151,334,118,345,104,362,90,403,75,399,78,364,95,348,108,339,121,317,154,264,216"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_io_1_1_i_input_output.html" title="This abstract class defines a interface for operating on an input&#45;output stream." alt="" coords="394,277,543,305"/>
+<area shape="poly" id="edge340_Node000016_Node000008" title=" " alt="" coords="305,252,407,276,402,278,306,257"/>
+<area shape="rect" id="Node000017" href="$class_kit_1_1_io_1_1_serial_1_1_r_pi_1_1_r_p2xxx_1_1_stdio_1_1_input.html" title="This concrete class implements a Input stream using Raspberry Pi RP2xxx&#39;s SDK." alt="" coords="388,105,549,150"/>
+<area shape="poly" id="edge348_Node000016_Node000017" title=" " alt="" coords="270,214,313,186,362,159,393,148,389,152,364,164,315,191,273,218"/>
+<area shape="rect" id="Node000018" href="$class_kit_1_1_io_1_1_stdio_1_1_input_delegate.html" title="This concrete class implements a Input stream using the underlying platform&#39;s native OS interface for..." alt="" coords="368,225,569,253"/>
+<area shape="poly" id="edge349_Node000016_Node000018" title=" " alt="" coords="305,237,371,238,366,240,306,242"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_io_1_1_null.html" title="This concrete class implements a NULL InputOutput stream &#45; that all of its input operations return &#39;E..." alt="" coords="675,455,769,482"/>
+<area shape="poly" id="edge341_Node000008_Node000009" title=" " alt="" coords="558,304,576,316,590,331,597,347,601,379,605,411,612,425,624,440,648,454,677,465,672,465,646,459,621,444,607,428,600,412,596,380,592,349,585,334,573,320,557,309"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_io_1_1_ram_1_1_input_output.html" title="This concrete class implements an InputOutput stream using a Ring Buffer." alt="" coords="631,213,813,241"/>
+<area shape="poly" id="edge342_Node000008_Node000010" title=" " alt="" coords="540,271,667,240,662,243,542,276"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_io_1_1_serial_1_1_r_pi_1_1_r_p2xxx_1_1_uart_1_1_input_output.html" title="This concrete class implements a Input/Output stream using Raspberry Pi UART interface/hardware." alt="" coords="622,265,822,310"/>
+<area shape="poly" id="edge344_Node000008_Node000012" title=" " alt="" coords="558,287,624,288,619,289,559,292"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_io_1_1_serial_1_1_s_t_1_1_m32_f4_1_1_input_output.html" title="This concrete class implements the InputOutput stream interface built on top of ST HAL Layer/SDK." alt="" coords="643,334,801,379"/>
+<area shape="poly" id="edge345_Node000008_Node000013" title=" " alt="" coords="541,307,575,315,645,335,640,336,574,320,542,312"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_io_1_1_socket_1_1_i_input_output.html" title="This abstract class defines the interface for a BSD socket." alt="" coords="622,403,822,430"/>
+<area shape="poly" id="edge346_Node000008_Node000014" title=" " alt="" coords="558,305,576,316,593,334,601,353,608,372,624,389,645,402,639,402,621,393,604,375,596,355,588,337,573,320,557,311"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_io_1_1_ram_1_1_input_output_allocate.html" title="This concrete template convenience class extends the RAM InputOutput class to include allocating the ..." alt="" coords="876,205,1059,250"/>
+<area shape="poly" id="edge343_Node000010_Node000011" title=" " alt="" coords="828,225,878,227,873,228,829,230"/>
+<area shape="rect" id="Node000015" href="$class_kit_1_1_io_1_1_socket_1_1_input_output.html" title="This concrete class provides a platform independent &#39;standard&#39; implementation of an InputOutput strea..." alt="" coords="870,403,1065,430"/>
+<area shape="poly" id="edge347_Node000014_Node000015" title=" " alt="" coords="837,414,872,416,867,417,837,419"/>
+<area shape="rect" id="Node000019" href="$class_kit_1_1_io_1_1_stdio_1_1_std_in.html" title="This concrete class represents the C&#45;library &#39;stdin&#39; stream." alt="" coords="651,161,793,189"/>
+<area shape="poly" id="edge350_Node000018_Node000019" title=" " alt="" coords="540,219,667,188,662,191,542,224"/>
+<area shape="poly" id="edge352_Node000007_Node000005" title=" " alt="" coords="303,268,313,262,328,250,337,237,346,224,362,212,397,198,393,202,364,216,350,228,341,240,332,253,317,267,306,272"/>
+<area shape="poly" id="edge353_Node000007_Node000008" title=" " alt="" coords="310,289,396,290,391,292,312,294"/>
+<area shape="rect" id="Node000022" href="$class_kit_1_1_io_1_1_serial_1_1_r_pi_1_1_r_p2xxx_1_1_stdio_1_1_output.html" title="This concrete class implements a Output stream using Raspberry Pi RP2xxx&#39;s SDK." alt="" coords="383,433,554,478"/>
+<area shape="poly" id="edge354_Node000007_Node000022" title=" " alt="" coords="259,315,304,368,333,395,364,418,388,432,383,432,362,423,330,399,300,371,257,320"/>
+<area shape="rect" id="Node000023" href="$class_kit_1_1_io_1_1_stdio_1_1_output_delegate.html" title="This concrete class implements a Output stream using the underlying platform&#39;s native OS interface&#39;s ..." alt="" coords="363,329,574,357"/>
+<area shape="poly" id="edge355_Node000007_Node000023" title=" " alt="" coords="311,305,406,328,401,330,311,310"/>
+<area shape="rect" id="Node000026" href="$class_kit_1_1_io_1_1_tee_output.html" title="This concrete class implements a IOutput stream that outputs the data to multiple (up to 4) output st..." alt="" coords="402,381,535,409"/>
+<area shape="poly" id="edge358_Node000007_Node000026" title=" " alt="" coords="270,312,314,340,364,366,404,381,399,382,362,371,312,345,270,317"/>
+<area shape="rect" id="Node000024" href="$class_kit_1_1_io_1_1_stdio_1_1_std_err.html" title="This concrete class represents the C&#45;library &#39;stderr&#39; stream." alt="" coords="648,507,796,534"/>
+<area shape="poly" id="edge356_Node000023_Node000024" title=" " alt="" coords="569,362,576,368,590,383,597,399,601,431,605,463,612,477,624,492,650,510,645,509,621,496,607,480,600,464,596,432,592,401,585,386,572,372,568,368"/>
+<area shape="rect" id="Node000025" href="$class_kit_1_1_io_1_1_stdio_1_1_std_out.html" title="This concrete class represents the C&#45;library &#39;stdout&#39; stream." alt="" coords="646,559,798,586"/>
+<area shape="poly" id="edge357_Node000023_Node000025" title=" " alt="" coords="570,363,576,368,593,390,601,413,601,458,601,502,609,523,624,544,648,562,643,560,620,548,604,525,596,503,596,458,596,414,588,393,572,372,569,368"/>
+<area shape="rect" id="Node000021" href="$class_kit_1_1_io_1_1_i_eos.html" title="This abstract class defines a isEos() operation that is intended to be used Input and Output streams." alt="" coords="12,225,106,253"/>
+<area shape="poly" id="edge359_Node000021_Node000016" title=" " alt="" coords="120,237,188,237,184,241,123,242"/>
+<area shape="poly" id="edge360_Node000021_Node000007" title=" " alt="" coords="120,255,190,275,185,278,122,260"/>
 </map>

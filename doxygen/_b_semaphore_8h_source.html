@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -66,7 +66,7 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">/// Defer the definition of the a raw binary semaphore type to the application&#39;s &#39;platform&#39;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="_b_semaphore_8h.html#ac8c03c0b2555977cccd9c695d56b3c8c">   19</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemBSema_T          KitSystemBSema_T_MAP</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="_b_semaphore_8h.html#ac8c03c0b2555977cccd9c695d56b3c8c">   19</a></span><span class="comment"></span><span class="preprocessor">#define KitSystemBSema_T KitSystemBSema_T_MAP</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">///</span></div>
@@ -144,18 +144,18 @@ $(function() {
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">    /// Helper method for supporting SimTicks and &#39;real&#39; tick in the same build</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_b_semaphore.html#aab29bff4084bfff4b088bc651eabc671">   95</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_b_semaphore.html#aab29bff4084bfff4b088bc651eabc671">timedWaitInRealTime</a>( uint32_t timeoutMs ) noexcept;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>private:<span class="comment"></span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>protected:<span class="comment"></span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">    /// Prevent access to the copy constructor --&gt;semaphores can not be copied!</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>( const <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp; m ) = delete;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_b_semaphore.html#a9d10d7c04daa57e8e01c4d2ea72504e0">   99</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>( const <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp; m ) = delete;</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"></span> </div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">    /// Prevent access to the assignment operator --&gt;semaphores can not be copied!</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"></span>    const <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp; operator=( const <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp; m ) = delete;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_b_semaphore.html#aafe761539f9111ead62b0dc3e4e9a2f7">  102</a></span><span class="comment"></span>    const <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp; operator=( const <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp; m ) = delete;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment"></span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">    /// Prevent access to the move constructor --&gt;semaphores can not be implicitly moved!</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp;&amp; m ) = delete;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_b_semaphore.html#a6790f01dccf1be94c270b368468c207d">  105</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp;&amp; m ) = delete;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"></span> </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">    /// Prevent access to the move assignment operator --&gt;semaphores can not be implicitly moved!</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp; operator=( <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp;&amp; m ) = delete;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_b_semaphore.html#aa9c7d3e9573bf5e0f79c48344cec4b7f">  108</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp; operator=( <a class="code hl_class" href="class_kit_1_1_system_1_1_b_semaphore.html">BSemaphore</a>&amp;&amp; m ) = delete;</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>};</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
@@ -179,7 +179,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

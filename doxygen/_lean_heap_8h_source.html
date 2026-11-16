@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -82,7 +82,7 @@ $(function() {
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"></span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">    NOTE: In C++ it is possible that sizeof(T) does NOT equal alignof(T). For</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">          example on my Ubuntu x86_64 system, sizeof(std::max_align_t) is 32 bytes</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">          but alignof(std::max_align_t) is 16 bytes.  Why do I care? Because </span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">          but alignof(std::max_align_t) is 16 bytes.  Why do I care? Because</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">          memory is allocated in &#39;words&#39; of sizeof(T) bytes, not alignof(T) bytes.</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"></span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">    Template args:</span></div>
@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        , <a class="code hl_variable" href="class_kit_1_1_memory_1_1_lean_heap.html#a349a56b916ceda477dc1c9a9586db896">m_unitsRemaining</a>( MAXWORDS )</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    {</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="comment">// Zero out all of memory</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        std::memset( <a class="code hl_variable" href="class_kit_1_1_memory_1_1_lean_heap.html#a021a2c0ed405318848ef5d8c2305eb59">m_heapStorage</a>, 0, <span class="keyword">sizeof</span>(<a class="code hl_variable" href="class_kit_1_1_memory_1_1_lean_heap.html#a021a2c0ed405318848ef5d8c2305eb59">m_heapStorage</a>) );</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        std::memset( <a class="code hl_variable" href="class_kit_1_1_memory_1_1_lean_heap.html#a021a2c0ed405318848ef5d8c2305eb59">m_heapStorage</a>, 0, <span class="keyword">sizeof</span>( <a class="code hl_variable" href="class_kit_1_1_memory_1_1_lean_heap.html#a021a2c0ed405318848ef5d8c2305eb59">m_heapStorage</a> ) );</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    }</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">public</span>:<span class="comment"></span></div>
@@ -151,12 +151,12 @@ $(function() {
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">return</span> dstInfo;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    }</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">protected</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">    /// Prevent access to the copy constructor --&gt;LeanHeap can not be copied!</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_memory_1_1_lean_heap.html#a28b872f522acd61c5a5618ada89bd8cc">LeanHeap</a>( <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_memory_1_1_lean_heap.html">LeanHeap</a>&amp; m ) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="class_kit_1_1_memory_1_1_lean_heap.html#a47c02a2de7111507cd1ad23c1d48baad">  106</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_memory_1_1_lean_heap.html#a47c02a2de7111507cd1ad23c1d48baad">LeanHeap</a>( <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_memory_1_1_lean_heap.html">LeanHeap</a>&amp; m ) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"></span> </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">    /// Prevent access to the assignment operator --&gt;LeanHeap can not be copied!</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"></span>    <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_memory_1_1_lean_heap.html">LeanHeap</a>&amp; operator=( <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_memory_1_1_lean_heap.html">LeanHeap</a>&amp; m ) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="class_kit_1_1_memory_1_1_lean_heap.html#a41096c5908f8df0f4d17ffe1b39b4205">  109</a></span><span class="comment"></span>    <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_memory_1_1_lean_heap.html">LeanHeap</a>&amp; <a class="code hl_function" href="class_kit_1_1_memory_1_1_lean_heap.html#a41096c5908f8df0f4d17ffe1b39b4205">operator=</a>( <span class="keyword">const</span> <a class="code hl_class" href="class_kit_1_1_memory_1_1_lean_heap.html">LeanHeap</a>&amp; m ) = <span class="keyword">delete</span>;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">protected</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment">    /// Pointer to the base of the original heap memory</span></div>
@@ -187,6 +187,8 @@ $(function() {
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_lean_heap_html_a17eca18097648594da1730ba27cab700"><div class="ttname"><a href="class_kit_1_1_memory_1_1_lean_heap.html#a17eca18097648594da1730ba27cab700">Kit::Memory::LeanHeap::allocate</a></div><div class="ttdeci">void * allocate(size_t numbytes) noexcept override</div><div class="ttdoc">See Kit::Memory::Allocator.</div><div class="ttdef"><b>Definition</b> LeanHeap.h:66</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_lean_heap_html_a28b872f522acd61c5a5618ada89bd8cc"><div class="ttname"><a href="class_kit_1_1_memory_1_1_lean_heap.html#a28b872f522acd61c5a5618ada89bd8cc">Kit::Memory::LeanHeap::LeanHeap</a></div><div class="ttdeci">LeanHeap() noexcept</div><div class="ttdoc">Constructor for statically-allocated heap memory.</div><div class="ttdef"><b>Definition</b> LeanHeap.h:55</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_lean_heap_html_a349a56b916ceda477dc1c9a9586db896"><div class="ttname"><a href="class_kit_1_1_memory_1_1_lean_heap.html#a349a56b916ceda477dc1c9a9586db896">Kit::Memory::LeanHeap::m_unitsRemaining</a></div><div class="ttdeci">size_t m_unitsRemaining</div><div class="ttdoc">The amount of remaining free memory in alignment units.</div><div class="ttdef"><b>Definition</b> LeanHeap.h:119</div></div>
+<div class="ttc" id="aclass_kit_1_1_memory_1_1_lean_heap_html_a41096c5908f8df0f4d17ffe1b39b4205"><div class="ttname"><a href="class_kit_1_1_memory_1_1_lean_heap.html#a41096c5908f8df0f4d17ffe1b39b4205">Kit::Memory::LeanHeap::operator=</a></div><div class="ttdeci">const LeanHeap &amp; operator=(const LeanHeap &amp;m)=delete</div><div class="ttdoc">Prevent access to the assignment operator --&gt;LeanHeap can not be copied!</div></div>
+<div class="ttc" id="aclass_kit_1_1_memory_1_1_lean_heap_html_a47c02a2de7111507cd1ad23c1d48baad"><div class="ttname"><a href="class_kit_1_1_memory_1_1_lean_heap.html#a47c02a2de7111507cd1ad23c1d48baad">Kit::Memory::LeanHeap::LeanHeap</a></div><div class="ttdeci">LeanHeap(const LeanHeap &amp;m)=delete</div><div class="ttdoc">Prevent access to the copy constructor --&gt;LeanHeap can not be copied!</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_lean_heap_html_a53aaaefbc409797bda3576fceba34575"><div class="ttname"><a href="class_kit_1_1_memory_1_1_lean_heap.html#a53aaaefbc409797bda3576fceba34575">Kit::Memory::LeanHeap::wordSize</a></div><div class="ttdeci">size_t wordSize() const noexcept override</div><div class="ttdoc">See Kit::Memory::Allocator.</div><div class="ttdef"><b>Definition</b> LeanHeap.h:84</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_lean_heap_html_a7c6cd62b5f9b93e98d421b7d3386a07f"><div class="ttname"><a href="class_kit_1_1_memory_1_1_lean_heap.html#a7c6cd62b5f9b93e98d421b7d3386a07f">Kit::Memory::LeanHeap::getMemoryStart</a></div><div class="ttdeci">MemoryInfo_T &amp; getMemoryStart(MemoryInfo_T &amp;dstInfo) noexcept override</div><div class="ttdoc">See Kit::Memory::ContiguousAllocator.</div><div class="ttdef"><b>Definition</b> LeanHeap.h:95</div></div>
 <div class="ttc" id="aclass_kit_1_1_memory_1_1_lean_heap_html_af992d66553860fab5bea2931712afb8f"><div class="ttname"><a href="class_kit_1_1_memory_1_1_lean_heap.html#af992d66553860fab5bea2931712afb8f">Kit::Memory::LeanHeap::reset</a></div><div class="ttdeci">void reset() noexcept override</div><div class="ttdoc">See Kit::Memory::ContiguousAllocator.</div><div class="ttdef"><b>Definition</b> LeanHeap.h:87</div></div>
@@ -194,7 +196,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

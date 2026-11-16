@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -111,7 +111,7 @@ $(function() {
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment"></span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">    /// Returns true if the timer is currently running; else false is returned.</span></div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_timer.html#a889b4582540926ec305d3dfe8ee14284">   63</a></span><span class="comment"></span>    virtual <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_system_1_1_timer.html#a889b4582540926ec305d3dfe8ee14284">isRunning</a>() const noexcept;</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>public:<span class="comment"></span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">    /** Sets the timing source.  This method CAN ONLY BE CALLED when the timer</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">        has never been started or it has been stopped</span></div>
@@ -157,7 +157,7 @@ $(function() {
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">    /// Constructor</span></div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_timer_composer.html#aaefcd9671c3f751c86df55fd0013cf9c">  108</a></span><span class="comment"></span>    <a class="code hl_function" href="class_kit_1_1_system_1_1_timer_composer.html#aaefcd9671c3f751c86df55fd0013cf9c">TimerComposer</a>( CONTEXT&amp;               timerContextInstance,</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                   TimerExpiredFunction_T expiredCallbackFunc,</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                   <a class="code hl_class" href="class_kit_1_1_system_1_1_i_timing_source.html">ITimingSource</a>&amp;          timingSource ) noexcept</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                   <a class="code hl_class" href="class_kit_1_1_system_1_1_i_timing_source.html">ITimingSource</a>&amp;         timingSource ) noexcept</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        : <a class="code hl_function" href="class_kit_1_1_system_1_1_timer.html#ac03b0fcc8abcde9328e6c82f6d9238f2">Timer</a>( timingSource )</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        , m_context( timerContextInstance )</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        , m_expiredFuncPtr( expiredCallbackFunc )</div>
@@ -171,7 +171,7 @@ $(function() {
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">     */</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_timer_composer.html#a1d1642d51b2dae258cc0e361f69c6313">  122</a></span>    <a class="code hl_function" href="class_kit_1_1_system_1_1_timer_composer.html#a1d1642d51b2dae258cc0e361f69c6313">TimerComposer</a>( CONTEXT&amp;               timerContextInstance,</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                   TimerExpiredFunction_T expiredCallbackFunc,</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                   <a class="code hl_class" href="class_kit_1_1_system_1_1_i_timing_source.html">ITimingSource</a>*          timingSourcePtr = <span class="keyword">nullptr</span> ) noexcept</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                   <a class="code hl_class" href="class_kit_1_1_system_1_1_i_timing_source.html">ITimingSource</a>*         timingSourcePtr = <span class="keyword">nullptr</span> ) noexcept</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        : <a class="code hl_class" href="class_kit_1_1_system_1_1_timer.html">Timer</a>( timingSourcePtr )</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        , m_context( timerContextInstance )</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        , m_expiredFuncPtr( expiredCallbackFunc )</div>
@@ -221,7 +221,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

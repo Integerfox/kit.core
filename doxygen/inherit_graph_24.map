@@ -1,3 +1,22 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$class_kit_1_1_dm_1_1_persistence_1_1_i_manage_request_1_1_erase_payload.html" title="Payload for Message: Erase." alt="" coords="5,5,240,45"/>
+<area shape="rect" id="Node000000" href="$class_kit_1_1_dm_1_1_persistence_1_1_i_manage_request.html" title="This abstract class define ITC messages for additional management operations on a Persistent DM Recor..." alt="" coords="16,5,170,50"/>
+<area shape="rect" id="Node000001" href="$class_kit_1_1_dm_1_1_persistence_1_1_record.html" title="This mostly concrete class implements the Kit::Persistence::Record::IRecord interface where a Record ..." alt="" coords="242,40,395,85"/>
+<area shape="poly" id="edge294_Node000000_Node000001" title=" " alt="" coords="184,39,244,49,239,52,185,44"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_persistence_1_1_record_1_1_i_payload.html" title="This abstract class defines the interface accessing the data payload of an individual Record instance..." alt="" coords="5,144,181,189"/>
+<area shape="poly" id="edge295_Node000002_Node000001" title=" " alt="" coords="169,135,179,129,203,112,227,95,255,84,251,87,230,99,206,116,182,134,172,139"/>
+<area shape="rect" id="Node000003" href="$struct_kit_1_1_logging_1_1_framework_1_1_entry_data___t.html" title="Defines the content of the Log entry." alt="" coords="229,179,408,223"/>
+<area shape="poly" id="edge296_Node000002_Node000003" title=" " alt="" coords="196,180,231,187,226,187,196,185"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_persistence_1_1_record_1_1_i_data_record.html" title="This abstract extends the IRecord interface to include semantics for an unmanaged &#39;data store&#39;,..." alt="" coords="231,109,406,154"/>
+<area shape="poly" id="edge297_Node000002_Node000004" title=" " alt="" coords="195,148,233,144,228,146,197,153"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_i_entry.html" title="This abstract class defines interface for managing &#39;entries&#39; from a a collection of entries (i...." alt="" coords="456,75,631,119"/>
+<area shape="poly" id="edge298_Node000004_Node000005" title=" " alt="" coords="421,113,458,110,453,111,422,118"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_i_head.html" title="This abstract class defines the interface to manage the newest entry in an IEntry record." alt="" coords="456,144,631,189"/>
+<area shape="poly" id="edge300_Node000004_Node000007" title=" " alt="" coords="421,145,458,153,453,153,421,150"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_entry_record.html" title="This concrete class implements the IRecord interface that manages a collection of Entries that are ti..." alt="" coords="679,75,855,119"/>
+<area shape="poly" id="edge299_Node000005_Node000006" title=" " alt="" coords="646,94,682,97,676,97,647,100"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_persistence_1_1_record_1_1_journal_1_1_head_record.html" title="This concrete class is responsible for storing and retrieving the &quot;head pointer&quot; for the logical Ring..." alt="" coords="679,144,855,189"/>
+<area shape="poly" id="edge301_Node000007_Node000008" title=" " alt="" coords="647,164,682,166,676,166,647,169"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_persistence_1_1_record_1_1_i_record.html" title="This abstract class defines the public interface for a Record instance." alt="" coords="5,75,181,119"/>
+<area shape="poly" id="edge302_Node000009_Node000001" title=" " alt="" coords="195,79,243,73,239,75,197,84"/>
+<area shape="poly" id="edge303_Node000009_Node000004" title=" " alt="" coords="196,110,233,118,228,119,196,115"/>
 </map>

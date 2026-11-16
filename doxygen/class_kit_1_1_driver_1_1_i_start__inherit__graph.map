@@ -1,23 +1,29 @@
 <map id="Kit::Driver::IStart" name="Kit::Driver::IStart">
-<area shape="rect" id="Node000001" title="This abstract class defines the method for starting a driver." alt="" coords="5,189,136,214"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_driver_1_1_dio_1_1_i_output.html" title="This class defines the interface for a digital output pin." alt="" coords="197,57,372,82"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,179,261,80,264,84,106,184"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_driver_1_1_flash_1_1_i_api.html" title="This class defines the interface for a platform independent Flash memory driver." alt="" coords="219,149,350,189"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="149,187,219,176,220,182,150,192"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_driver_1_1_n_v_1_1_i_api.html" title="This class defines the interface for a platform independent Non&#45;volatile storage driver." alt="" coords="211,221,358,246"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="151,211,211,220,211,225,150,216"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_driver_1_1_s_p_i_1_1_i_half_duplex.html" title="This class defines the interface for a platform independent half&#45;duplex SPI driver." alt="" coords="184,302,385,327"/>
-<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="109,218,261,299,258,304,106,223"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_driver_1_1_dio_1_1_s_t_1_1_m32_f4_1_1_output.html" title="Concrete digital output driver for the STM32F4 HAL." alt="" coords="473,5,616,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="373,52,473,35,474,40,374,57"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_driver_1_1_flash_1_1_mock_flash.html" title="Mock flash driver that simulates flash memory in RAM." alt="" coords="441,70,648,125"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="363,145,445,122,446,127,364,150"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_driver_1_1_flash_1_1_w25_q_1_1_std_spi24.html" title="This class implements the Flash::IApi interface for the Winbond W25Q series SPI NOR flash devices usi..." alt="" coords="477,149,612,189"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="364,167,477,167,477,172,364,172"/>
-<area shape="rect" id="Node000008" href="$class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html" title="This class implements the NV::IApi interface using a flash device (via Flash::IApi) for persistent st..." alt="" coords="433,213,656,253"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="371,231,433,231,433,236,371,236"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_driver_1_1_n_v_1_1_null.html" title="This concrete class provides a &#39;null&#39; implementation of the NV::IApi interface." alt="" coords="471,278,619,303"/>
-<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="357,246,487,275,486,281,356,252"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_driver_1_1_s_p_i_1_1_s_t_1_1_m32_f4_1_1_polled.html" title="Concrete half&#45;duplex SPI driver for the STM32F4 HAL using polling mode." alt="" coords="475,328,615,368"/>
-<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="398,326,475,336,474,342,397,332"/>
+<area shape="rect" id="Node000001" title="This abstract class defines the method for starting a driver." alt="" coords="5,230,136,258"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_driver_1_1_dio_1_1_i_output.html" title="This class defines the interface for a digital output pin." alt="" coords="197,62,370,90"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,218,182,146,263,88,260,92,185,150,101,221"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_driver_1_1_flash_1_1_i_api.html" title="This class defines the interface for a platform independent Flash memory driver." alt="" coords="219,160,349,205"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="134,223,220,199,216,203,137,227"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_driver_1_1_n_v_1_1_i_api.html" title="This class defines the interface for a platform independent Non&#45;volatile storage driver." alt="" coords="211,319,357,347"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="119,261,251,317,246,320,119,266"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_driver_1_1_s_p_i_1_1_i_half_duplex.html" title="This class defines the interface for a platform independent half&#45;duplex SPI driver." alt="" coords="184,435,384,463"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="96,267,186,356,269,434,264,435,182,360,95,272"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_driver_1_1_dio_1_1_s_t_1_1_m32_f4_1_1_output.html" title="Concrete digital output driver for the STM32F4 HAL." alt="" coords="472,5,614,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="376,56,474,39,470,42,379,61"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_driver_1_1_flash_1_1_mock_flash.html" title="Mock flash driver that simulates flash memory in RAM." alt="" coords="440,74,646,136"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="362,156,442,134,437,137,365,161"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_driver_1_1_flash_1_1_w25_q_1_1_std_spi24.html" title="This class implements the Flash::IApi interface for the Winbond W25Q series SPI NOR flash devices usi..." alt="" coords="476,160,610,205"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="363,180,478,181,474,184,365,185"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_driver_1_1_n_v_1_1_file_1_1_api.html" title="This class implements the Non&#45;volatile storage driver using the Kit::Io::File interfaces." alt="" coords="456,228,630,256"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="326,310,376,287,431,265,473,256,468,258,433,270,378,292,328,314"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_driver_1_1_n_v_1_1_flash_1_1_api.html" title="This class implements the NV::IApi interface using a flash device (via Flash::IApi) for persistent st..." alt="" coords="432,280,654,325"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="371,320,434,315,429,317,373,325"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_driver_1_1_n_v_1_1_gang.html" title="This class implements the Non&#45;volatile storage driver using a collection of NV drivers to provide a &#39;..." alt="" coords="466,348,621,376"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="372,340,468,353,463,354,373,346"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_driver_1_1_n_v_1_1_null.html" title="This concrete class provides a &#39;null&#39; implementation of the NV::IApi interface." alt="" coords="470,400,617,428"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="334,350,433,385,480,400,474,400,431,390,334,356"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_driver_1_1_n_v_1_1_write_with_verify.html" title="This class extends IApi interface so that all write operations are verified by reading back the data ..." alt="" coords="450,452,636,497"/>
+<area shape="poly" id="edge11_Node000007_Node000012" title=" " alt="" coords="313,354,367,397,433,437,462,452,456,451,431,442,364,401,312,360"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_driver_1_1_s_p_i_1_1_s_t_1_1_m32_f4_1_1_polled.html" title="Concrete half&#45;duplex SPI driver for the STM32F4 HAL using polling mode." alt="" coords="474,521,613,566"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="333,467,433,506,476,523,470,523,431,512,332,472"/>
 </map>

@@ -19,7 +19,7 @@
                 <table cellpadding=1 border=0 width="100%">
           <tr>
             <td width="10%" class="headerItem">Current view:</td>
-            <td width="10%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">System/Posix/_fatalerror</a> - FatalError.cpp</td>
+            <td width="10%" class="headerValue"><a href="../../../index.html" title="Click to go to top-level">top level</a> - <a href="index.html" title="Click to go to directory System/Posix/_fatalerror">System/Posix/_fatalerror</a> - FatalError.cpp</td>
             <td width="5%"></td>
             <td width="5%"></td>
             <td width="5%" class="headerCovTableHead">Coverage</td>
@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-11-02 22:55:05</td>
+            <td class="headerValue">2026-11-16 22:55:42</td>
             <td></td>
             <td class="headerItem">Branches:</td>
             <td class="headerCovTableEntryLo">16.7&nbsp;%</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">48</td>
+            <td class="headerCovTableEntry">8</td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -111,36 +111,45 @@
 <span id="L49"><span class="lineNum">      49</span>                 :             : </span>
 <span id="L50"><span class="lineNum">      50</span>                 :             : </span>
 <span id="L51"><span class="lineNum">      51</span>                 :             : //////////////////////////////</span>
-<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaUNC tlaBgUNC">           0 : void FatalError::log( int exitCode, const char* message )</span></span>
+<span id="L52"><span class="lineNum">      52</span>                 :<span class="tlaUNC">           0 : void FatalError::log( int exitCode, const char* message )</span></span>
 <span id="L53"><span class="lineNum">      53</span>                 :             : {</span>
 <span id="L54"><span class="lineNum">      54</span>                 :<span class="tlaUNC">           0 :     buffer_.format( &quot;%s [%d]: %s&quot;, EXTRA_INFO, exitCode, message );</span></span>
-<span id="L55"><span class="lineNum">      55</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :     OUTPUT( buffer_.getString() );</span></span>
+<span id="L55"><span class="lineNum">      55</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :     OUTPUT( buffer_.getString() );</span></span>
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span><span class="tlaUNC" title="Branch 7 was not executed"> # </span><span class="tlaUNC" title="Branch 8 was not executed"> # </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not executed"> # </span><span class="tlaUNC" title="Branch 10 was not executed"> # </span><span class="tlaUNC" title="Branch 11 was not executed"> # </span><span class="tlaUNC" title="Branch 12 was not executed"> # </span><span class="tlaUNC" title="Branch 13 was not executed"> # </span> 
+<span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 14 was not executed"> # </span><span class="tlaUNC" title="Branch 15 was not executed"> # </span>]
 <span id="L56"><span class="lineNum">      56</span>                 :<span class="tlaUNC">           0 :     Shutdown::failure( exitCode );</span></span>
 <span id="L57"><span class="lineNum">      57</span>                 :<span class="tlaUNC">           0 : }</span></span>
 <span id="L58"><span class="lineNum">      58</span>                 :             : </span>
 <span id="L59"><span class="lineNum">      59</span>                 :<span class="tlaUNC">           0 : void FatalError::log( int exitCode, const char* message, size_t value )</span></span>
 <span id="L60"><span class="lineNum">      60</span>                 :             : {</span>
 <span id="L61"><span class="lineNum">      61</span>                 :<span class="tlaUNC">           0 :     buffer_.format( &quot;%s [%d]: %s [%zu]&quot;, EXTRA_INFO, exitCode, message, value );</span></span>
-<span id="L62"><span class="lineNum">      62</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span>]:<span class="tlaUNC">           0 :     OUTPUT( buffer_.getString() );</span></span>
+<span id="L62"><span class="lineNum">      62</span>   [<span class="tlaUNC" title="Branch 0 was not executed"> # </span><span class="tlaUNC" title="Branch 1 was not executed"> # </span><span class="tlaUNC" title="Branch 2 was not executed"> # </span><span class="tlaUNC" title="Branch 3 was not executed"> # </span> :<span class="tlaUNC">           0 :     OUTPUT( buffer_.getString() );</span></span>
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 4 was not executed"> # </span><span class="tlaUNC" title="Branch 5 was not executed"> # </span><span class="tlaUNC" title="Branch 6 was not executed"> # </span><span class="tlaUNC" title="Branch 7 was not executed"> # </span><span class="tlaUNC" title="Branch 8 was not executed"> # </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not executed"> # </span><span class="tlaUNC" title="Branch 10 was not executed"> # </span><span class="tlaUNC" title="Branch 11 was not executed"> # </span><span class="tlaUNC" title="Branch 12 was not executed"> # </span><span class="tlaUNC" title="Branch 13 was not executed"> # </span> 
+<span class="lineNum">        </span>          <span class="tlaUNC" title="Branch 14 was not executed"> # </span><span class="tlaUNC" title="Branch 15 was not executed"> # </span>]
 <span id="L63"><span class="lineNum">      63</span>                 :<span class="tlaUNC">           0 :     Shutdown::failure( exitCode );</span></span>
 <span id="L64"><span class="lineNum">      64</span>                 :<span class="tlaUNC">           0 : }</span></span>
 <span id="L65"><span class="lineNum">      65</span>                 :             : </span>
 <span id="L66"><span class="lineNum">      66</span>                 :             : </span>
-<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC tlaBgGNC">          34 : void FatalError::logf( int exitCode, const char* format, ... )</span></span>
+<span id="L67"><span class="lineNum">      67</span>                 :<span class="tlaGNC">          41 : void FatalError::logf( int exitCode, const char* format, ... )</span></span>
 <span id="L68"><span class="lineNum">      68</span>                 :             : {</span>
 <span id="L69"><span class="lineNum">      69</span>                 :             :     va_list ap;</span>
-<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          34 :     va_start( ap, format );</span></span>
+<span id="L70"><span class="lineNum">      70</span>                 :<span class="tlaGNC">          41 :     va_start( ap, format );</span></span>
 <span id="L71"><span class="lineNum">      71</span>                 :             : </span>
-<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">          34 :     buffer_.format( &quot;%s [%d]: &quot;, EXTRA_INFO, exitCode );</span></span>
-<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          34 :     buffer_.vformatAppend( format, ap );</span></span>
-<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">          34 :     va_end( ap );</span></span>
-<span id="L75"><span class="lineNum">      75</span>   [<span class="tlaGBC" title="Branch 0 was taken 34 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 34 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span>]:<span class="tlaGNC">          68 :     OUTPUT( buffer_.getString() );</span></span>
-<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          34 :     Shutdown::failure( exitCode );</span></span>
-<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          34 : }</span></span>
+<span id="L72"><span class="lineNum">      72</span>                 :<span class="tlaGNC">          41 :     buffer_.format( &quot;%s [%d]: &quot;, EXTRA_INFO, exitCode );</span></span>
+<span id="L73"><span class="lineNum">      73</span>                 :<span class="tlaGNC">          41 :     buffer_.vformatAppend( format, ap );</span></span>
+<span id="L74"><span class="lineNum">      74</span>                 :<span class="tlaGNC">          41 :     va_end( ap );</span></span>
+<span id="L75"><span class="lineNum">      75</span>   [<span class="tlaGBC" title="Branch 0 was taken 41 times"> + </span><span class="tlaUNC" title="Branch 1 was not taken"> - </span><span class="tlaGBC" title="Branch 2 was taken 41 times"> + </span><span class="tlaUNC" title="Branch 3 was not taken"> - </span> :<span class="tlaGNC">         123 :     OUTPUT( buffer_.getString() );</span></span>
+<span class="lineNum">        </span> <span class="tlaGBC" title="Branch 4 was taken 41 times"> + </span><span class="tlaUNC" title="Branch 5 was not taken"> - </span><span class="tlaGBC" title="Branch 6 was taken 41 times"> + </span><span class="tlaUNC" title="Branch 7 was not taken"> - </span><span class="tlaGBC" title="Branch 8 was taken 41 times"> + </span> 
+<span class="lineNum">        </span> <span class="tlaUNC" title="Branch 9 was not taken"> - </span><span class="tlaGBC" title="Branch 10 was taken 41 times"> + </span><span class="tlaUNC" title="Branch 11 was not taken"> - </span><span class="tlaGBC" title="Branch 12 was taken 41 times"> + </span><span class="tlaUNC" title="Branch 13 was not taken"> - </span> 
+<span class="lineNum">        </span>          <span class="tlaGBC" title="Branch 14 was taken 41 times"> + </span><span class="tlaUNC" title="Branch 15 was not taken"> - </span>]
+<span id="L76"><span class="lineNum">      76</span>                 :<span class="tlaGNC">          41 :     Shutdown::failure( exitCode );</span></span>
+<span id="L77"><span class="lineNum">      77</span>                 :<span class="tlaGNC">          41 : }</span></span>
 <span id="L78"><span class="lineNum">      78</span>                 :             : </span>
 <span id="L79"><span class="lineNum">      79</span>                 :             : </span>
 <span id="L80"><span class="lineNum">      80</span>                 :             : //////////////////////////////</span>
-<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaUNC tlaBgUNC">           0 : void FatalError::logRaw( int exitCode, const char* message )</span></span>
+<span id="L81"><span class="lineNum">      81</span>                 :<span class="tlaUNC">           0 : void FatalError::logRaw( int exitCode, const char* message )</span></span>
 <span id="L82"><span class="lineNum">      82</span>                 :             : {</span>
 <span id="L83"><span class="lineNum">      83</span>                 :<span class="tlaUNC">           0 :     log( exitCode, message );</span></span>
 <span id="L84"><span class="lineNum">      84</span>                 :<span class="tlaUNC">           0 : }</span></span>

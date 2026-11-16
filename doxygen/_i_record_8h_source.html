@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -61,7 +61,7 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">/** @file */</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="_i_queue_8h.html">Kit/EventQueue/IQueue.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_persistence_2_types_8h.html">Kit/Persistence/Types.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="_persistence_2types_8h.html">Kit/Persistence/Types.h</a>&quot;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">///</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_kit.html">Kit</a> {<span class="comment"></span></div>
@@ -83,7 +83,7 @@ $(function() {
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">        This method is called when the Record Server is &#39;opened&#39;.</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"></span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">        The &#39;myEventQueue&#39; is a reference to the Record Server&#39;s Event Queue, i.e.</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">        the event loop for the thread that the Record Server executes in. Example </span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">        the event loop for the thread that the Record Server executes in. Example</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">        usage of &#39;myEventQueue&#39; is if the IRecord needs/uses a software timer</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"></span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">        The method returns true on success; else false is returned when an error</span></div>
@@ -98,7 +98,7 @@ $(function() {
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="class_kit_1_1_persistence_1_1_record_1_1_i_record.html#a6109548b43fab48d335b2a5570abc68b">   48</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_kit_1_1_persistence_1_1_record_1_1_i_record.html#a6109548b43fab48d335b2a5570abc68b">stop</a>() noexcept = 0;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>public:<span class="comment"></span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">    /** This method returns the total number of bytes of Record when stored in </span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">    /** This method returns the total number of bytes of Record when stored in</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">        persistent storage. This includes both the payload and any metadata.</span></div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">     */</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="class_kit_1_1_persistence_1_1_record_1_1_i_record.html#a2790919ae96a5ed9854f6de17dc11e7c">   54</a></span>    virtual <a class="code hl_typedef" href="namespace_kit_1_1_persistence.html#a3bbc33243439a507641980f98f2d8a25">Size_T</a> <a class="code hl_function" href="class_kit_1_1_persistence_1_1_record_1_1_i_record.html#a2790919ae96a5ed9854f6de17dc11e7c">getSize</a>() const noexcept = 0;</div>
@@ -113,7 +113,7 @@ $(function() {
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#endif  </span><span class="comment">// end header latch</span></div>
 <div class="ttc" id="a_i_queue_8h_html"><div class="ttname"><a href="_i_queue_8h.html">IQueue.h</a></div></div>
-<div class="ttc" id="a_persistence_2_types_8h_html"><div class="ttname"><a href="_persistence_2_types_8h.html">Types.h</a></div></div>
+<div class="ttc" id="a_persistence_2types_8h_html"><div class="ttname"><a href="_persistence_2types_8h.html">Types.h</a></div></div>
 <div class="ttc" id="aclass_kit_1_1_event_queue_1_1_i_queue_html"><div class="ttname"><a href="class_kit_1_1_event_queue_1_1_i_queue.html">Kit::EventQueue::IQueue</a></div><div class="ttdoc">This abstract class represents an Event Queue where events can be delivered to.</div><div class="ttdef"><b>Definition</b> IQueue.h:51</div></div>
 <div class="ttc" id="aclass_kit_1_1_persistence_1_1_record_1_1_i_record_html"><div class="ttname"><a href="class_kit_1_1_persistence_1_1_record_1_1_i_record.html">Kit::Persistence::Record::IRecord</a></div><div class="ttdoc">This abstract class defines the public interface for a Record instance.</div><div class="ttdef"><b>Definition</b> IRecord.h:27</div></div>
 <div class="ttc" id="aclass_kit_1_1_persistence_1_1_record_1_1_i_record_html_a2790919ae96a5ed9854f6de17dc11e7c"><div class="ttname"><a href="class_kit_1_1_persistence_1_1_record_1_1_i_record.html#a2790919ae96a5ed9854f6de17dc11e7c">Kit::Persistence::Record::IRecord::getSize</a></div><div class="ttdeci">virtual Size_T getSize() const noexcept=0</div><div class="ttdoc">This method returns the total number of bytes of Record when stored in persistent storage.</div></div>
@@ -124,7 +124,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

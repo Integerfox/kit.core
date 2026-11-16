@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -108,18 +108,18 @@ $(function() {
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_mutex.html#a6d2107792c6d57e825a04cf9fd2a0959">   58</a></span><span class="comment"></span>    <a class="code hl_define" href="_mutex_8h.html#aa127e603ac70d7353959a815c7efea5a">KitSystemMutex_T</a> <a class="code hl_variable" href="class_kit_1_1_system_1_1_mutex.html#a6d2107792c6d57e825a04cf9fd2a0959">m_mutex</a>;</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>private:<span class="comment"></span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>protected:<span class="comment"></span></div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">    /// Prevent access to the copy constructor --&gt;mutexes can not be copied!</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>( const <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; m ) = delete;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_mutex.html#a2c2ce3e3c8d2287cc0c61e3aebaf4628">   63</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>( const <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; m ) = delete;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"></span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">    /// Prevent access to the assignment operator --&gt;mutexes can not be copied!</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span>    const <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; operator=( const <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; m ) = delete;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_mutex.html#a64ec1cb9af558c7efaee3fd8f8c32263">   66</a></span><span class="comment"></span>    const <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; operator=( const <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; m ) = delete;</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment"></span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    /// Prevent access to the move constructor --&gt;Containers can not be implicitly moved!</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp;&amp; m ) = delete;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_mutex.html#ae020cc63133933dc35e57073aa1ade0e">   69</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>( <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp;&amp; m ) = delete;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment"></span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">    /// Prevent access to the move assignment operator --&gt;Containers can not be implicitly moved!</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; operator=( <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp;&amp; m ) = delete;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_mutex.html#a64bc6f81075eaa48bfa79fd2a7a758c4">   72</a></span><span class="comment"></span>    <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp; operator=( <a class="code hl_class" href="class_kit_1_1_system_1_1_mutex.html">Mutex</a>&amp;&amp; m ) = delete;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>public:<span class="comment"></span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">    /** This concrete class provides a simple mechanism for providing mutex</span></div>
@@ -143,12 +143,12 @@ $(function() {
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_mutex_1_1_scope_lock.html#a65d3f9fea08d1cfc330f6ef1e3159912">   93</a></span><span class="comment"></span>        <a class="code hl_function" href="class_kit_1_1_system_1_1_mutex_1_1_scope_lock.html#a65d3f9fea08d1cfc330f6ef1e3159912">~ScopeLock</a>() { <a class="code hl_variable" href="class_kit_1_1_system_1_1_mutex.html#a6d2107792c6d57e825a04cf9fd2a0959">m_mutex</a>.unlock(); }</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keyword">protected</span>:<span class="comment"></span></div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">        /** This method PREVENTS this object from being created on the Heap.</span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">            This class can only/should only be instantiated as a local variable to</span></div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">            a critical section scope block!</span></div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">         */</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordtype">void</span>* <span class="keyword">operator</span> <span class="keyword">new</span>( size_t );</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="class_kit_1_1_system_1_1_mutex_1_1_scope_lock.html#a891f19bc8b0fc75166124eff1e839ad9">  101</a></span>        <span class="keywordtype">void</span>* <span class="keyword">operator</span> <span class="keyword">new</span>( size_t );</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    };</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>};</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
@@ -170,7 +170,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

@@ -1,70 +1,72 @@
 <map id="TestEventQueueServer" name="TestEventQueueServer">
-<area shape="rect" id="Node000001" title="This class is a EventQueue Server that signals the provided semaphore when it begins execution." alt="" coords="3167,325,3336,350"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_event_queue_1_1_server.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing events from Ev..." alt="" coords="2940,210,3117,235"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3067,239,3227,322,3224,327,3065,244"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_itc_1_1_mailbox.html" title="This mailbox class implements an Inter Thread Communications message queue." alt="" coords="1732,162,1856,187"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="1870,158,1917,152,2011,148,2105,152,2342,164,2577,180,2940,211,2940,217,2576,185,2342,169,2105,157,2011,154,1918,157,1870,163"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_event_queue_1_1_i_queue.html" title="This abstract class represents an Event Queue where events can be delivered to." alt="" coords="1281,217,1462,242"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1476,213,1731,180,1732,185,1476,219"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="804,249,1035,289"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1049,255,1280,235,1281,240,1049,261"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_container_1_1_s_list.html" title=" " alt="" coords="1296,152,1447,192"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="1461,170,1732,172,1732,177,1460,175"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_s_list_base.html" title="This protected base class implements a NON&#45;TYPE&#45;SAFE a singly linked list which maintains the orderin..." alt="" coords="499,193,681,218"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="673,188,804,171,928,162,1024,160,1245,164,1296,166,1295,171,1245,169,1024,165,928,168,804,176,673,193"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_container_1_1_s_list.html" title="This template class implements a singly linked list which maintains the ordering imposed on it by the..." alt="" coords="844,185,995,225"/>
-<area shape="poly" id="edge11_Node000010_Node000007" title=" " alt="" coords="695,203,844,203,844,208,695,208"/>
-<area shape="rect" id="Node000023" href="$class_kit_1_1_container_1_1_s_list.html" title=" " alt="" coords="1269,267,1473,307"/>
-<area shape="poly" id="edge33_Node000023_Node000007" title=" " alt="" coords="625,223,705,264,754,284,805,299,866,309,928,316,1054,319,1170,312,1269,301,1269,306,1171,317,1054,324,928,321,865,315,803,304,752,289,702,269,622,227"/>
-<area shape="rect" id="Node000008" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="204,193,376,218"/>
-<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="390,203,499,203,499,208,390,208"/>
-<area shape="poly" id="edge9_Node000008_Node000008" title=" " alt="" coords="268,178,275,169,290,166,303,168,311,175,313,184,309,194,304,192,308,184,307,178,301,173,290,171,277,174,272,181"/>
-<area shape="rect" id="Node000014" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="1719,465,1869,490"/>
-<area shape="poly" id="edge17_Node000014_Node000008" title=" " alt="" coords="306,229,344,296,372,336,406,377,445,415,489,446,537,467,562,473,589,475,1373,475,1718,475,1718,480,1373,480,589,480,561,478,535,472,486,451,442,419,402,381,368,340,340,299,301,232"/>
-<area shape="rect" id="Node000020" href="$class_kit_1_1_container_1_1_extended_list_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers." alt="" coords="500,97,680,137"/>
-<area shape="poly" id="edge26_Node000020_Node000008" title=" " alt="" coords="342,186,399,168,515,135,516,140,401,173,344,191"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="5,193,155,218"/>
-<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="169,203,204,203,204,208,169,208"/>
-<area shape="poly" id="edge10_Node000006_Node000010" title=" " alt="" coords="1008,196,1245,179,1295,175,1296,180,1246,184,1009,202"/>
-<area shape="poly" id="edge34_Node000023_Node000010" title=" " alt="" coords="1009,219,1270,266,1269,271,1008,224"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="1289,398,1454,423"/>
-<area shape="poly" id="edge12_Node000003_Node000011" title=" " alt="" coords="1407,389,1547,309,1619,265,1669,230,1680,216,1693,202,1731,185,1733,189,1696,206,1684,219,1673,234,1622,270,1550,314,1409,394"/>
-<area shape="rect" id="Node000012" href="$class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread." alt="" coords="2589,322,2763,347"/>
-<area shape="poly" id="edge20_Node000012_Node000011" title=" " alt="" coords="1463,393,1497,389,1812,364,2123,347,2589,333,2589,339,2123,353,1813,369,1498,395,1463,399"/>
-<area shape="poly" id="edge16_Node000014_Node000011" title=" " alt="" coords="1466,423,1719,463,1718,468,1466,428"/>
-<area shape="rect" id="Node000022" href="$class_kit_1_1_system_1_1_b_semaphore.html" title="This concrete class defines the interface for a Binary Semaphore with non&#45;Priority Inheritance semant..." alt="" coords="1917,399,2105,425"/>
-<area shape="poly" id="edge31_Node000022_Node000011" title=" " alt="" coords="1468,408,1917,409,1917,414,1468,414"/>
-<area shape="rect" id="Node000027" href="$class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore." alt="" coords="2387,551,2565,577"/>
-<area shape="poly" id="edge41_Node000027_Node000011" title=" " alt="" coords="1412,427,1498,460,1596,484,1695,500,1806,522,1918,537,2045,548,2173,555,2387,561,2387,566,2173,560,2045,553,1917,543,1805,527,1694,505,1595,489,1497,465,1410,431"/>
-<area shape="poly" id="edge13_Node000002_Node000012" title=" " alt="" coords="2729,315,2987,233,2988,238,2731,320"/>
-<area shape="rect" id="Node000013" href="$class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob..." alt="" coords="2161,510,2331,535"/>
-<area shape="poly" id="edge14_Node000012_Node000013" title=" " alt="" coords="2345,525,2409,526,2473,522,2528,513,2549,506,2564,497,2575,482,2580,467,2577,435,2573,401,2577,383,2587,365,2600,353,2615,345,2618,350,2603,358,2591,368,2582,385,2578,401,2582,435,2585,468,2580,485,2567,501,2551,511,2530,518,2474,527,2409,531,2345,531"/>
-<area shape="poly" id="edge18_Node000014_Node000013" title=" " alt="" coords="2147,535,2036,538,1976,535,1917,527,1864,511,1820,493,1822,488,1866,506,1918,521,1976,529,2036,532,2147,530"/>
-<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="1883,483,2106,504,2161,510,2160,515,2105,509,1883,488"/>
-<area shape="rect" id="Node000015" href="$class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;." alt="" coords="2145,297,2347,322"/>
-<area shape="poly" id="edge19_Node000012_Node000015" title=" " alt="" coords="2361,313,2589,327,2589,332,2361,319"/>
-<area shape="rect" id="Node000016" href="$class_kit_1_1_system_1_1_timer_manager.html" title="This concrete class implements manages a list of Software Timers." alt="" coords="2146,195,2346,221"/>
-<area shape="poly" id="edge21_Node000012_Node000016" title=" " alt="" coords="2360,200,2409,203,2462,209,2516,220,2566,238,2598,255,2626,278,2666,320,2663,324,2623,282,2595,260,2564,242,2514,225,2461,214,2409,208,2360,206"/>
-<area shape="rect" id="Node000017" href="$class_kit_1_1_system_1_1_i_timing_source.html" title="This abstract class defines the interface for a timing source." alt="" coords="1695,217,1893,242"/>
-<area shape="poly" id="edge22_Node000016_Node000017" title=" " alt="" coords="1907,221,2146,210,2146,215,1907,227"/>
-<area shape="rect" id="Node000018" href="$class_kit_1_1_container_1_1_d_list.html" title=" " alt="" coords="1699,95,1889,135"/>
-<area shape="poly" id="edge23_Node000016_Node000018" title=" " alt="" coords="1903,134,2184,193,2183,198,1902,140"/>
-<area shape="rect" id="Node000019" href="$class_kit_1_1_container_1_1_d_list_base.html" title="This protected base class implements a NON&#45;TYPE&#45;SAFE a doubly linked list which maintains the orderin..." alt="" coords="827,65,1011,90"/>
-<area shape="poly" id="edge24_Node000018_Node000019" title=" " alt="" coords="1025,79,1698,108,1698,113,1025,84"/>
-<area shape="rect" id="Node000021" href="$class_kit_1_1_container_1_1_d_list.html" title="This template class implements a double linked list which maintains the ordering imposed on it by the..." alt="" coords="1295,37,1447,77"/>
-<area shape="poly" id="edge29_Node000021_Node000019" title=" " alt="" coords="1025,70,1295,58,1295,63,1025,75"/>
-<area shape="rect" id="Node000026" href="$class_kit_1_1_container_1_1_d_list.html" title=" " alt="" coords="1708,5,1880,45"/>
-<area shape="poly" id="edge38_Node000026_Node000019" title=" " alt="" coords="990,59,1058,47,1229,22,1363,10,1498,8,1671,13,1708,15,1707,21,1671,19,1498,14,1364,15,1230,27,1059,52,991,65"/>
-<area shape="poly" id="edge25_Node000019_Node000020" title=" " alt="" coords="693,102,827,86,827,91,694,107"/>
-<area shape="poly" id="edge27_Node000020_Node000020" title=" " alt="" coords="562,81,572,74,590,71,606,73,616,79,621,88,619,97,614,96,616,89,613,82,604,78,590,76,574,79,565,85"/>
-<area shape="poly" id="edge28_Node000018_Node000021" title=" " alt="" coords="1462,67,1699,99,1698,104,1461,72"/>
-<area shape="poly" id="edge39_Node000026_Node000021" title=" " alt="" coords="1461,48,1708,29,1708,34,1462,53"/>
-<area shape="poly" id="edge30_Node000012_Node000022" title=" " alt="" coords="2119,416,2215,417,2328,413,2447,400,2564,376,2588,364,2637,345,2639,350,2590,369,2566,381,2448,406,2328,418,2215,422,2119,421"/>
-<area shape="poly" id="edge32_Node000012_Node000023" title=" " alt="" coords="1487,280,1875,272,2118,273,2363,281,2465,288,2566,303,2634,319,2633,325,2565,308,2464,293,2363,287,2118,279,1875,277,1487,285"/>
-<area shape="rect" id="Node000024" href="$class_kit_1_1_system_1_1_i_watched_event_loop.html" title="This abstract interface defines the API for watching/monitoring an EventLoop for watchdog purposes." alt="" coords="2129,461,2363,486"/>
-<area shape="poly" id="edge35_Node000012_Node000024" title=" " alt="" coords="2320,485,2378,491,2443,489,2475,483,2507,474,2537,461,2564,443,2571,435,2575,426,2576,407,2576,386,2587,365,2617,345,2620,350,2591,368,2582,388,2581,407,2580,428,2576,438,2567,447,2539,466,2509,479,2477,489,2444,494,2378,496,2319,491"/>
-<area shape="rect" id="Node000025" href="$class_kit_1_1_dm_1_1_change_handler.html" title="This concrete class provides the implementation for processing change notifications as well as managi..." alt="" coords="2387,43,2565,69"/>
-<area shape="poly" id="edge36_Node000002_Node000025" title=" " alt="" coords="2579,50,2656,54,2743,64,2832,83,2876,97,2917,115,2950,136,2980,161,3020,208,3016,211,2976,165,2947,140,2915,120,2874,102,2831,88,2742,69,2656,59,2579,56"/>
-<area shape="poly" id="edge37_Node000025_Node000026" title=" " alt="" coords="1894,27,2386,49,2386,55,1894,32"/>
-<area shape="poly" id="edge40_Node000001_Node000027" title=" " alt="" coords="2533,545,3206,347,3207,353,2534,550"/>
+<area shape="rect" id="Node000001" title="This class is a EventQueue Server that signals the provided semaphore when it begins execution." alt="" coords="3461,154,3629,182"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_event_queue_1_1_server.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing events from Ev..." alt="" coords="3235,187,3411,215"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="3426,183,3458,181,3463,180,3427,188"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_event_queue_1_1_server_base.html" title="This concrete class extends the Kit::System::EventLoop interface to include processing ITC messages f..." alt="" coords="2977,344,3186,372"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="3116,334,3298,216,3303,214,3118,338"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_itc_1_1_mailbox.html" title="This mailbox class implements an Inter Thread Communications message queue." alt="" coords="1724,570,1848,598"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="1863,587,1995,593,2168,593,2361,583,2459,572,2554,556,2629,538,2705,515,2849,462,2969,410,3050,373,3055,372,2972,415,2851,467,2707,520,2631,543,2555,561,2460,577,2361,588,2168,599,1995,598,1863,592"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_event_queue_1_1_i_queue.html" title="This abstract class represents an Event Queue where events can be delivered to." alt="" coords="1276,628,1456,656"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="1471,625,1721,592,1727,592,1471,630"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="800,620,1030,665"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="1045,640,1278,642,1272,642,1045,645"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_s_list.html" title=" " alt="" coords="1291,560,1440,605"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="1456,580,1727,583,1721,584,1456,585"/>
+<area shape="rect" id="Node000008" href="$class_kit_1_1_container_1_1_s_list_base.html" title="This protected base class implements a NON&#45;TYPE&#45;SAFE a singly linked list which maintains the orderin..." alt="" coords="496,464,678,492"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="637,496,714,522,800,545,935,565,1070,576,1192,581,1293,584,1288,584,1192,586,1069,581,934,570,799,550,712,528,637,501"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_container_1_1_s_list.html" title="This template class implements a singly linked list which maintains the ordering imposed on it by the..." alt="" coords="840,491,990,535"/>
+<area shape="poly" id="edge12_Node000011_Node000008" title=" " alt="" coords="693,487,843,505,837,505,693,492"/>
+<area shape="rect" id="Node000024" href="$class_kit_1_1_container_1_1_s_list.html" title=" " alt="" coords="1264,461,1467,506"/>
+<area shape="poly" id="edge34_Node000024_Node000008" title=" " alt="" coords="693,471,943,465,1091,465,1240,469,1266,473,1261,473,1240,474,1091,470,943,470,693,476"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_list_item.html" title="This class is used by the Container classes to implement a various types of linked lists containers." alt="" coords="203,388,374,416"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="327,421,362,438,399,452,447,464,498,473,493,474,447,469,398,458,360,443,327,427"/>
+<area shape="poly" id="edge10_Node000009_Node000009" title=" " alt="" coords="268,371,275,364,289,362,302,364,310,370,312,380,309,389,304,387,307,379,305,373,299,369,289,367,277,369,271,375"/>
+<area shape="rect" id="Node000015" href="$class_kit_1_1_system_1_1_thread.html" title="This mostly abstract class defines the operations that can be performed on a thread." alt="" coords="1711,388,1861,416"/>
+<area shape="poly" id="edge18_Node000015_Node000009" title=" " alt="" coords="390,400,586,400,1367,400,1713,402,1708,403,1367,405,586,405,391,405"/>
+<area shape="rect" id="Node000021" href="$class_kit_1_1_container_1_1_extended_list_item.html" title="This class is used by the Container classes to implement a various types of DOUBLY linked containers." alt="" coords="497,255,677,299"/>
+<area shape="poly" id="edge27_Node000021_Node000009" title=" " alt="" coords="337,380,534,298,530,302,339,384"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_container_1_1_item.html" title="This class is used by the Intrusive Container classes to enforce the semantic and item/element can be..." alt="" coords="5,388,154,416"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="168,400,205,401,200,404,171,405"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="1005,524,1293,571,1288,571,1005,529"/>
+<area shape="poly" id="edge35_Node000024_Node000011" title=" " alt="" coords="1004,505,1266,490,1261,491,1005,510"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="1284,322,1448,350"/>
+<area shape="poly" id="edge13_Node000004_Node000012" title=" " alt="" coords="1405,355,1763,569,1758,569,1403,360"/>
+<area shape="rect" id="Node000013" href="$class_kit_1_1_system_1_1_event_loop.html" title="This concrete class is a IRunnable object that provides a event driven execution model for a thread." alt="" coords="2579,344,2751,372"/>
+<area shape="poly" id="edge21_Node000013_Node000012" title=" " alt="" coords="1463,322,1491,320,1577,318,1663,320,2008,320,2352,326,2454,327,2555,334,2601,344,2596,344,2554,340,2454,333,2352,332,2008,326,1663,325,1577,323,1491,325,1464,327"/>
+<area shape="poly" id="edge17_Node000015_Node000012" title=" " alt="" coords="1463,348,1714,390,1708,391,1463,354"/>
+<area shape="rect" id="Node000023" href="$class_kit_1_1_system_1_1_b_semaphore.html" title="This concrete class defines the interface for a Binary Semaphore with non&#45;Priority Inheritance semant..." alt="" coords="1909,336,2096,364"/>
+<area shape="poly" id="edge32_Node000023_Node000012" title=" " alt="" coords="1463,335,1911,348,1906,349,1463,341"/>
+<area shape="rect" id="Node000028" href="$class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore." alt="" coords="2376,136,2555,164"/>
+<area shape="poly" id="edge42_Node000028_Node000012" title=" " alt="" coords="1411,313,1490,280,1588,248,1687,221,1796,189,1845,177,1908,166,2035,153,2163,146,2379,147,2373,148,2163,152,2036,158,1909,172,1846,182,1798,194,1688,226,1589,253,1492,285,1412,318"/>
+<area shape="poly" id="edge14_Node000003_Node000013" title=" " alt="" coords="2767,356,2979,358,2974,358,2767,361"/>
+<area shape="rect" id="Node000014" href="$class_kit_1_1_system_1_1_i_runnable.html" title="This mostly an abstract class defines the interface for an object that is &quot;executed&quot; when a Thread ob..." alt="" coords="2152,406,2321,434"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="2336,405,2554,374,2578,373,2584,372,2555,380,2337,410"/>
+<area shape="poly" id="edge19_Node000015_Node000014" title=" " alt="" coords="2133,435,2026,445,1967,444,1908,439,1866,431,1828,419,1828,414,1867,426,1909,434,1967,439,2026,440,2138,434"/>
+<area shape="poly" id="edge16_Node000014_Node000015" title=" " alt="" coords="1876,403,2154,416,2148,417,1876,408"/>
+<area shape="rect" id="Node000016" href="$class_kit_1_1_system_1_1_i_event_manager.html" title="This abstract class defines the interface to signal a &#39;Event Flag&#39;." alt="" coords="2135,239,2337,267"/>
+<area shape="poly" id="edge20_Node000013_Node000016" title=" " alt="" coords="2353,249,2453,258,2505,268,2556,283,2583,295,2609,311,2651,345,2645,343,2606,315,2581,300,2554,287,2504,273,2452,263,2353,254"/>
+<area shape="rect" id="Node000017" href="$class_kit_1_1_system_1_1_timer_manager.html" title="This concrete class implements manages a list of Software Timers." alt="" coords="2136,187,2336,215"/>
+<area shape="poly" id="edge22_Node000013_Node000017" title=" " alt="" coords="2351,199,2401,204,2454,213,2506,228,2556,248,2588,269,2616,295,2656,345,2651,343,2613,298,2585,273,2553,253,2504,233,2453,218,2401,209,2352,204"/>
+<area shape="rect" id="Node000018" href="$class_kit_1_1_system_1_1_i_timing_source.html" title="This abstract class defines the interface for a timing source." alt="" coords="1687,235,1885,263"/>
+<area shape="poly" id="edge23_Node000017_Node000018" title=" " alt="" coords="1900,244,1996,238,2096,228,2179,215,2173,216,2096,233,1996,243,1900,249"/>
+<area shape="rect" id="Node000019" href="$class_kit_1_1_container_1_1_d_list.html" title=" " alt="" coords="1691,75,1881,119"/>
+<area shape="poly" id="edge24_Node000017_Node000019" title=" " alt="" coords="1896,120,2175,186,2170,187,1896,125"/>
+<area shape="rect" id="Node000020" href="$class_kit_1_1_container_1_1_d_list_base.html" title="This protected base class implements a NON&#45;TYPE&#45;SAFE a doubly linked list which maintains the orderin..." alt="" coords="823,86,1006,114"/>
+<area shape="poly" id="edge25_Node000019_Node000020" title=" " alt="" coords="1022,97,1467,96,1694,97,1688,98,1467,101,1022,102"/>
+<area shape="rect" id="Node000022" href="$class_kit_1_1_container_1_1_d_list.html" title="This template class implements a double linked list which maintains the ordering imposed on it by the..." alt="" coords="1290,41,1441,86"/>
+<area shape="poly" id="edge30_Node000022_Node000020" title=" " alt="" coords="1021,89,1292,69,1287,71,1022,94"/>
+<area shape="rect" id="Node000027" href="$class_kit_1_1_container_1_1_d_list.html" title=" " alt="" coords="1700,5,1872,50"/>
+<area shape="poly" id="edge39_Node000027_Node000020" title=" " alt="" coords="978,79,1053,60,1223,27,1356,10,1491,7,1663,13,1703,18,1697,19,1663,18,1491,12,1357,15,1224,32,1055,65,980,84"/>
+<area shape="poly" id="edge26_Node000020_Node000021" title=" " alt="" coords="642,245,889,113,885,116,645,249"/>
+<area shape="poly" id="edge28_Node000021_Node000021" title=" " alt="" coords="560,237,570,230,587,228,602,230,613,236,618,245,617,255,612,253,613,246,609,240,601,235,587,233,572,235,563,241"/>
+<area shape="poly" id="edge29_Node000019_Node000022" title=" " alt="" coords="1457,72,1492,75,1693,92,1688,93,1491,81,1457,77"/>
+<area shape="poly" id="edge40_Node000027_Node000022" title=" " alt="" coords="1456,53,1702,34,1697,36,1457,59"/>
+<area shape="poly" id="edge31_Node000013_Node000023" title=" " alt="" coords="2111,349,2581,357,2575,358,2112,354"/>
+<area shape="poly" id="edge33_Node000013_Node000024" title=" " alt="" coords="1483,483,1653,484,1870,479,2111,467,2352,442,2454,429,2554,404,2597,388,2633,373,2638,372,2599,393,2555,409,2455,434,2353,448,2111,472,1870,485,1653,489,1483,489"/>
+<area shape="rect" id="Node000025" href="$class_kit_1_1_system_1_1_i_watched_event_loop.html" title="This abstract interface defines the API for watching/monitoring an EventLoop for watchdog purposes." alt="" coords="2120,519,2352,547"/>
+<area shape="poly" id="edge36_Node000013_Node000025" title=" " alt="" coords="2328,547,2382,550,2440,548,2499,538,2553,516,2574,502,2592,484,2622,444,2643,403,2657,374,2661,371,2648,406,2627,447,2596,488,2577,506,2556,520,2500,543,2441,553,2382,556,2328,552"/>
+<area shape="rect" id="Node000026" href="$class_kit_1_1_dm_1_1_change_handler.html" title="This concrete class provides the implementation for processing change notifications as well as managi..." alt="" coords="2775,48,2953,76"/>
+<area shape="poly" id="edge37_Node000002_Node000026" title=" " alt="" coords="2969,64,3076,78,3132,90,3187,108,3222,125,3256,145,3308,187,3303,186,3253,150,3220,129,3185,113,3131,95,3075,83,2969,69"/>
+<area shape="poly" id="edge38_Node000026_Node000027" title=" " alt="" coords="1887,28,2777,59,2772,60,1888,34"/>
+<area shape="poly" id="edge41_Node000001_Node000028" title=" " alt="" coords="2570,148,2863,148,3325,148,3463,158,3458,158,3324,153,2863,153,2571,153"/>
 </map>

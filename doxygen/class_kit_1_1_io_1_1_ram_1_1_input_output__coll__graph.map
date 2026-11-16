@@ -1,28 +1,28 @@
 <map id="Kit::Io::Ram::InputOutput" name="Kit::Io::Ram::InputOutput">
-<area shape="rect" id="Node000001" title="This concrete class implements an InputOutput stream using a Ring Buffer." alt="" coords="863,175,1045,200"/>
-<area shape="rect" id="Node000002" href="$class_kit_1_1_io_1_1_i_input_output.html" title="This abstract class defines a interface for operating on an input&#45;output stream." alt="" coords="540,60,689,85"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="667,87,916,172,914,177,665,92"/>
-<area shape="rect" id="Node000003" href="$class_kit_1_1_io_1_1_i_input.html" title="This partially abstract class defines a interface for operating on an input stream (example of a stre..." alt="" coords="247,11,353,36"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="367,31,498,51,540,58,539,63,497,57,366,36"/>
-<area shape="rect" id="Node000004" href="$class_kit_1_1_io_1_1_i_close.html" title="This abstract class defines a close operation that is intended to be used Input and Output streams/fi..." alt="" coords="27,5,135,31"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="149,16,183,17,247,19,247,24,183,22,149,21"/>
-<area shape="rect" id="Node000006" href="$class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str..." alt="" coords="242,60,358,85"/>
-<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="147,31,249,57,248,63,145,37"/>
-<area shape="rect" id="Node000005" href="$class_kit_1_1_io_1_1_i_eos.html" title="This abstract class defines a isEos() operation that is intended to be used Input and Output streams." alt="" coords="34,75,129,100"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="133,68,206,45,247,33,249,39,207,50,135,73"/>
-<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="142,82,182,79,241,75,242,80,183,85,143,87"/>
-<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="372,70,540,70,540,75,372,75"/>
-<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_ring_buffer.html" title=" " alt="" coords="521,137,708,177"/>
-<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="722,164,862,176,862,182,722,169"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="5,143,157,168"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="171,158,207,159,374,160,521,157,521,163,374,166,207,165,171,163"/>
-<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="207,110,393,150"/>
-<area shape="poly" id="edge11_Node000009_Node000008" title=" " alt="" coords="171,142,206,138,207,143,171,148"/>
-<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="407,136,521,146,521,151,407,142"/>
-<area shape="rect" id="Node000010" href="$class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore." alt="" coords="525,204,704,229"/>
-<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="718,218,778,217,838,213,910,197,911,203,839,218,778,223,718,224"/>
-<area shape="rect" id="Node000011" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="217,225,383,251"/>
-<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="396,229,525,220,525,225,397,234"/>
-<area shape="rect" id="Node000012" href="$class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics." alt="" coords="541,253,688,279"/>
-<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="702,261,769,254,838,239,889,220,930,198,933,202,891,225,839,245,770,259,702,266"/>
+<area shape="rect" id="Node000001" title="This concrete class implements an InputOutput stream using a Ring Buffer." alt="" coords="860,177,1042,205"/>
+<area shape="rect" id="Node000002" href="$class_kit_1_1_io_1_1_i_input_output.html" title="This abstract class defines a interface for operating on an input&#45;output stream." alt="" coords="538,57,687,85"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="673,88,837,145,916,177,911,177,835,150,672,93"/>
+<area shape="rect" id="Node000003" href="$class_kit_1_1_io_1_1_i_input.html" title="This partially abstract class defines a interface for operating on an input stream (example of a stre..." alt="" coords="247,5,351,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="367,28,540,58,535,60,367,33"/>
+<area shape="rect" id="Node000004" href="$class_kit_1_1_io_1_1_i_close.html" title="This abstract class defines a close operation that is intended to be used Input and Output streams/fi..." alt="" coords="27,11,135,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="149,20,248,19,244,22,151,25"/>
+<area shape="rect" id="Node000006" href="$class_kit_1_1_io_1_1_i_output.html" title="This partially abstract class defines a interface for operating on an output stream (example of a str..." alt="" coords="242,57,357,85"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="149,37,243,57,239,60,150,42"/>
+<area shape="rect" id="Node000005" href="$class_kit_1_1_io_1_1_i_eos.html" title="This abstract class defines a isEos() operation that is intended to be used Input and Output streams." alt="" coords="34,81,128,109"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="128,73,205,43,249,32,244,35,207,48,131,77"/>
+<area shape="poly" id="edge7_Node000006_Node000005" title=" " alt="" coords="143,89,182,86,244,79,239,82,182,91,145,94"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="372,69,541,70,536,72,373,74"/>
+<area shape="rect" id="Node000007" href="$class_kit_1_1_container_1_1_ring_buffer.html" title=" " alt="" coords="519,136,706,180"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="721,166,862,182,857,182,721,171"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="5,143,157,170"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="171,161,206,163,372,164,522,162,516,163,372,170,206,168,172,167"/>
+<area shape="rect" id="Node000009" href="$class_kit_1_1_container_1_1_ring_buffer.html" title="This template class implements a Ring Buffer." alt="" coords="206,109,392,154"/>
+<area shape="poly" id="edge11_Node000009_Node000008" title=" " alt="" coords="171,143,208,141,203,143,173,148"/>
+<area shape="poly" id="edge10_Node000007_Node000009" title=" " alt="" coords="408,138,522,149,517,150,408,143"/>
+<area shape="rect" id="Node000010" href="$class_kit_1_1_system_1_1_semaphore.html" title="This semaphore concrete class defines the interface for a Counting Semaphore." alt="" coords="523,209,702,237"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="717,225,776,224,835,219,903,206,908,205,836,224,776,229,717,230"/>
+<area shape="rect" id="Node000011" href="$class_kit_1_1_system_1_1_i_signable.html" title="This abstract class defines the interface by which a client can cause an object that is waiting&#45;on&#45;a&#45;..." alt="" coords="217,228,381,256"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="397,233,525,228,520,229,397,239"/>
+<area shape="rect" id="Node000012" href="$class_kit_1_1_system_1_1_mutex.html" title="This concrete mutex class defines the interface for a mutex that has &quot;recursive&quot; semantics." alt="" coords="540,261,685,289"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="700,270,767,262,835,247,885,226,925,206,930,205,887,231,836,252,768,267,701,275"/>
 </map>

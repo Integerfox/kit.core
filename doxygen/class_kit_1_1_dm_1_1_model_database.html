@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -63,14 +63,14 @@ $(function() {
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_dm_1_1_model_database__inherit__graph.svg" width="196" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_dm_1_1_model_database__inherit__graph.svg" width="195" height="115"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Kit::Dm::ModelDatabase:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_dm_1_1_model_database__coll__graph.svg" width="2131" height="151"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_kit_1_1_dm_1_1_model_database__coll__graph.svg" width="2120" height="159"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -106,9 +106,15 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:abbae6bf14d9f8a0e78455fb5108db918" id="r_abbae6bf14d9f8a0e78455fb5108db918"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbae6bf14d9f8a0e78455fb5108db918">ModelDatabase</a> (const <a class="el" href="class_kit_1_1_dm_1_1_model_database.html">ModelDatabase</a> &amp;m)</td></tr>
+<tr class="memdesc:abbae6bf14d9f8a0e78455fb5108db918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the copy constructor --&gt;Model Databases can not be copied!  <br /></td></tr>
+<tr class="separator:abbae6bf14d9f8a0e78455fb5108db918"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2117716c465946a0b50f6869ed3c65c7" id="r_a2117716c465946a0b50f6869ed3c65c7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_kit_1_1_dm_1_1_i_model_point.html">IModelPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2117716c465946a0b50f6869ed3c65c7">find</a> (const char *name) noexcept</td></tr>
 <tr class="memdesc:a2117716c465946a0b50f6869ed3c65c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper method to find a point by name.  <br /></td></tr>
 <tr class="separator:a2117716c465946a0b50f6869ed3c65c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89769d287d12f6a5702dd0e750cee994" id="r_a89769d287d12f6a5702dd0e750cee994"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_kit_1_1_dm_1_1_model_database.html">ModelDatabase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89769d287d12f6a5702dd0e750cee994">operator=</a> (const <a class="el" href="class_kit_1_1_dm_1_1_model_database.html">ModelDatabase</a> &amp;m)</td></tr>
+<tr class="memdesc:a89769d287d12f6a5702dd0e750cee994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prevent access to the assignment operator --&gt;Model Databases can not be copied!  <br /></td></tr>
+<tr class="separator:a89769d287d12f6a5702dd0e750cee994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -136,7 +142,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Note: All of the methods are thread safe. However, since the Model Database instances are typically created statically and statically allocated Model point self-register there is race condition on when the Model Database instance's Mutex is created/initialize. As a result mutex is dynamically created/initialized on its first usage. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a04572074a6168bbdda6fcc76e9c36ce3" name="a04572074a6168bbdda6fcc76e9c36ce3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a04572074a6168bbdda6fcc76e9c36ce3">&#9670;&#160;</a></span>ModelDatabase() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a04572074a6168bbdda6fcc76e9c36ce3">&#9670;&#160;</a></span>ModelDatabase() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,7 +169,7 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <a id="af3fb3c6b9d4c81621837a4132edbedeb" name="af3fb3c6b9d4c81621837a4132edbedeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3fb3c6b9d4c81621837a4132edbedeb">&#9670;&#160;</a></span>ModelDatabase() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af3fb3c6b9d4c81621837a4132edbedeb">&#9670;&#160;</a></span>ModelDatabase() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,6 +193,33 @@ Additional Inherited Members</h2></td></tr>
 
 <p>This is a special constructor for when the Model Database is statically declared (i.e. </p>
 <p>it is initialized as part of C++ startup BEFORE main() is executed. C/C++ does NOT guarantee the order of static initializers. Since the Model Database contains a list of model points - and one or more of those model points can be statically created/initialized - we need to do something to ensure my internal list is properly initialized for this scenario - hence this constructor. </p>
+
+</div>
+</div>
+<a id="abbae6bf14d9f8a0e78455fb5108db918" name="abbae6bf14d9f8a0e78455fb5108db918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbae6bf14d9f8a0e78455fb5108db918">&#9670;&#160;</a></span>ModelDatabase() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Kit::Dm::ModelDatabase::ModelDatabase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_kit_1_1_dm_1_1_model_database.html">ModelDatabase</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>m</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prevent access to the copy constructor --&gt;Model Databases can not be copied! </p>
 
 </div>
 </div>
@@ -406,6 +439,33 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a89769d287d12f6a5702dd0e750cee994" name="a89769d287d12f6a5702dd0e750cee994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89769d287d12f6a5702dd0e750cee994">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_kit_1_1_dm_1_1_model_database.html">ModelDatabase</a> &amp; Kit::Dm::ModelDatabase::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_kit_1_1_dm_1_1_model_database.html">ModelDatabase</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>m</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prevent access to the assignment operator --&gt;Model Databases can not be copied! </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ac068b825eeb73aa76fcc9a1b7de88c59" name="ac068b825eeb73aa76fcc9a1b7de88c59"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac068b825eeb73aa76fcc9a1b7de88c59">&#9670;&#160;</a></span>m_list</h2>
@@ -461,7 +521,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:57 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>

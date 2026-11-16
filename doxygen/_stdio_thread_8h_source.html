@@ -19,7 +19,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="logo.gif"/></td>
   <td id="projectalign">
-   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 436-main</span>
+   <div id="projectname">Kit<span id="projectnumber">&#160;Build: 444-main</span>
    </div>
    <div id="projectbrief">KIT Embedded C++ Class Library</div>
   </td>
@@ -85,7 +85,7 @@ $(function() {
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">    The TShell can be started, stopped, and then restarted multiple times.</span></div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"></span> </div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">    NOTE: This class dynamically allocates memory and dynamically creates a</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">          Thread.  However, the memory and thread are allocated/created ONCE, </span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">          Thread.  However, the memory and thread are allocated/created ONCE,</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">          i.e. stopping and restarting the TShell does NOT free/re-allocate the</span></div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">          dynamic memory or destroy/re-create the thread.</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">*/</span></div>
@@ -129,7 +129,7 @@ $(function() {
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment"></span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">        The stream parameters (infd, outfd) are required to be valid for the</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">        lifetime of the StdioThread instance.</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">        </span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"></span> </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">        The method returns true if successful, else false is returned.</span></div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">        NOTE: If launchTShell is called more than once it will always return</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">              false.</span></div>
@@ -141,7 +141,7 @@ $(function() {
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">    /** This method is used to restart the tshell. This method can ONLY be</span></div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">        called AFTER launch has been called.</span></div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"></span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">        The method returns true if the tshell was successfully restarted, </span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">        The method returns true if the tshell was successfully restarted,</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">        else false is returned (e.g. launchTShell() was never called)</span></div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">     */</span></div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="class_kit_1_1_t_shell_1_1_stdio_thread.html#ae8d948cd43efaa512f0e9f6d6c08578c">   97</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_kit_1_1_t_shell_1_1_stdio_thread.html#ae8d948cd43efaa512f0e9f6d6c08578c">restartTShell</a>() noexcept;</div>
@@ -189,7 +189,7 @@ $(function() {
 <div class="ttc" id="a_thread_8h_html"><div class="ttname"><a href="_thread_8h.html">Thread.h</a></div></div>
 <div class="ttc" id="a_thread_8h_html_a86f2284df7cf3223a0f7dbd025c66d7e"><div class="ttname"><a href="_thread_8h.html#a86f2284df7cf3223a0f7dbd025c66d7e">KIT_SYSTEM_THREAD_PRIORITY_LOWER</a></div><div class="ttdeci">#define KIT_SYSTEM_THREAD_PRIORITY_LOWER</div><div class="ttdoc">This value can be 'added' to one of the above Priorities to decrease (i.e.</div><div class="ttdef"><b>Definition</b> Thread.h:46</div></div>
 <div class="ttc" id="a_thread_8h_html_ac880fe51a701f3ea6b1c2085ee78cdb6"><div class="ttname"><a href="_thread_8h.html#ac880fe51a701f3ea6b1c2085ee78cdb6">KIT_SYSTEM_THREAD_PRIORITY_NORMAL</a></div><div class="ttdeci">#define KIT_SYSTEM_THREAD_PRIORITY_NORMAL</div><div class="ttdoc">The recommended/default priority for a thread.</div><div class="ttdef"><b>Definition</b> Thread.h:31</div></div>
-<div class="ttc" id="aclass_kit_1_1_io_1_1_i_input_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a></div><div class="ttdoc">This partially abstract class defines a interface for operating on an input stream (example of a stre...</div><div class="ttdef"><b>Definition</b> IInput.h:36</div></div>
+<div class="ttc" id="aclass_kit_1_1_io_1_1_i_input_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_i_input.html">Kit::Io::IInput</a></div><div class="ttdoc">This partially abstract class defines a interface for operating on an input stream (example of a stre...</div><div class="ttdef"><b>Definition</b> IInput.h:35</div></div>
 <div class="ttc" id="aclass_kit_1_1_io_1_1_i_output_html"><div class="ttname"><a href="class_kit_1_1_io_1_1_i_output.html">Kit::Io::IOutput</a></div><div class="ttdoc">This partially abstract class defines a interface for operating on an output stream (example of a str...</div><div class="ttdef"><b>Definition</b> IOutput.h:37</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_i_processor_html"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_i_processor.html">Kit::TShell::IProcessor</a></div><div class="ttdoc">This abstract class defines the interface a TShell Command Processor.</div><div class="ttdef"><b>Definition</b> IProcessor.h:31</div></div>
 <div class="ttc" id="aclass_kit_1_1_t_shell_1_1_stdio_thread_html"><div class="ttname"><a href="class_kit_1_1_t_shell_1_1_stdio_thread.html">Kit::TShell::StdioThread</a></div><div class="ttdoc">This concrete class provides the 'threading wrapper' for running a TShell Command Processor.</div><div class="ttdef"><b>Definition</b> StdioThread.h:43</div></div>
@@ -209,7 +209,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 2 2026 22:47:56 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
+Generated on Mon Nov 16 2026 22:49:45 for Kit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0
 </small></address>
 </body>
 </html>
